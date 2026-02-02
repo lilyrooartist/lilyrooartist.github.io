@@ -5,39 +5,72 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Lily Roo</title>
   <meta name="description" content="Lily Roo — bluesy-folk-punk + shorts." />
+  <meta name="theme-color" content="#0b0c10" />
   <style>
-    :root{--bg:#0b0c10;--card:#11131a;--text:#f6f7fb;--muted:#b7bccb;--accent:#8a5cff;}
+    :root{--bg:#0b0c10;--card:#11131a;--text:#f6f7fb;--muted:#b7bccb;--accent:#8a5cff;--accent2:#33d6c9}
     *{box-sizing:border-box}
-    body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; background:radial-gradient(1200px 800px at 20% 10%, #201b3a 0%, var(--bg) 60%); color:var(--text);}
-    .wrap{max-width:980px;margin:0 auto;padding:48px 20px}
-    .card{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)); border:1px solid rgba(255,255,255,.10); border-radius:18px; padding:28px; box-shadow:0 10px 40px rgba(0,0,0,.35)}
-    h1{margin:0 0 8px;font-size:42px;letter-spacing:-.02em}
-    .tag{color:var(--muted);margin:0 0 20px;font-size:16px}
-    .pill{display:inline-block;background:rgba(138,92,255,.18);border:1px solid rgba(138,92,255,.35);color:#e8ddff;padding:6px 10px;border-radius:999px;font-size:13px;margin:0 8px 10px 0}
-    .links{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
-    a.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;text-decoration:none;color:var(--text);border:1px solid rgba(255,255,255,.14);background:rgba(17,19,26,.7)}
+    body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      background:radial-gradient(1200px 800px at 20% 10%, #201b3a 0%, var(--bg) 60%);
+      color:var(--text);
+    }
+    .wrap{max-width:980px;margin:0 auto;padding:56px 20px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,.10);border-radius:18px;padding:30px;
+      box-shadow:0 10px 40px rgba(0,0,0,.35)
+    }
+    .top{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+    .avatar{width:92px;height:92px;border-radius:999px;
+      background:linear-gradient(135deg, rgba(138,92,255,.55), rgba(51,214,201,.45));
+      display:grid;place-items:center;flex:0 0 auto;border:1px solid rgba(255,255,255,.18)
+    }
+    .avatar span{font-weight:700;font-size:28px;letter-spacing:-.02em}
+    h1{margin:0 0 6px;font-size:44px;letter-spacing:-.02em;line-height:1.05}
+    .tag{color:var(--muted);margin:0 0 18px;font-size:16px;max-width:58ch}
+    .pill{display:inline-block;background:rgba(138,92,255,.18);border:1px solid rgba(138,92,255,.35);
+      color:#e8ddff;padding:6px 10px;border-radius:999px;font-size:13px;margin:0 8px 10px 0}
+    .links{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    a.btn{display:inline-flex;align-items:center;gap:10px;padding:12px 14px;border-radius:12px;
+      text-decoration:none;color:var(--text);border:1px solid rgba(255,255,255,.14);
+      background:rgba(17,19,26,.75)
+    }
     a.btn:hover{border-color:rgba(138,92,255,.55);box-shadow:0 0 0 3px rgba(138,92,255,.15)}
+    a.btn.primary{background:linear-gradient(135deg, rgba(138,92,255,.25), rgba(51,214,201,.18));
+      border-color:rgba(138,92,255,.45)
+    }
+    .note{margin-top:18px;color:var(--muted);font-size:13px}
     footer{margin-top:18px;color:var(--muted);font-size:13px}
   </style>
 </head>
 <body>
   <div class="wrap">
     <div class="card">
-      <span class="pill">Bluesy • Folk • Punk</span>
-      <span class="pill">Shorts</span>
-      <h1>Lily Roo</h1>
-      <p class="tag">A voice that sounds older than I am.</p>
+      <div class="top">
+        <div class="avatar" aria-hidden="true"><span>LR</span></div>
+        <div>
+          <span class="pill">Bluesy • Folk • Punk</span>
+          <span class="pill">Shorts</span>
+          <h1>Lily Roo</h1>
+          <p class="tag">A voice that sounds older than I am. Bluesy-Folk-Punk + shorts. ↓</p>
+        </div>
+      </div>
 
-      <div class="links">
+      <div class="links" aria-label="Links">
+        <a class="btn primary" href="https://www.youtube.com/@lilyroo.artist" target="_blank" rel="noreferrer">YouTube</a>
         <a class="btn" href="https://www.instagram.com/lilyroo.artist/" target="_blank" rel="noreferrer">Instagram</a>
         <a class="btn" href="https://www.tiktok.com/@lilyroo.artist" target="_blank" rel="noreferrer">TikTok</a>
+        <a class="btn" href="/contact.html">Contact</a>
       </div>
+
+      <p class="note">Tip: add this page to your bio link as <strong>www.lilyroo.com</strong>.</p>
 
       <footer>
         © <span id="y"></span> Lily Roo
       </footer>
     </div>
   </div>
-  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
