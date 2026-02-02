@@ -20,57 +20,24 @@
     }
     h1{margin:0 0 10px;font-size:34px;letter-spacing:-.02em}
     p{color:var(--muted);margin:0 0 18px;line-height:1.5}
-    label{display:block;margin:14px 0 6px}
-    input, textarea{width:100%;padding:12px 12px;border-radius:12px;
-      border:1px solid rgba(255,255,255,.16);background:rgba(17,19,26,.75);color:var(--text)}
-    textarea{min-height:140px;resize:vertical}
-    .row{display:flex;gap:12px;flex-wrap:wrap}
-    .row > div{flex:1 1 240px}
-    .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;align-items:center}
-    button{cursor:pointer;border:1px solid rgba(138,92,255,.45);
+    a.btn{display:inline-flex;align-items:center;gap:10px;padding:12px 14px;border-radius:12px;
+      text-decoration:none;color:var(--text);border:1px solid rgba(138,92,255,.45);
       background:linear-gradient(135deg, rgba(138,92,255,.25), rgba(255,255,255,.02));
-      color:var(--text);padding:12px 14px;border-radius:12px;font-weight:600}
-    a{color:var(--text)}
+      font-weight:600
+    }
+    a.btn:hover{box-shadow:0 0 0 3px rgba(138,92,255,.15)}
     a.back{display:inline-block;margin-top:16px;color:var(--muted)}
-    small{color:var(--muted)}
+    small{display:block;margin-top:10px;color:var(--muted)}
   </style>
 </head>
 <body>
   <div class="wrap">
     <div class="card">
       <h1>Contact</h1>
-      <p>Send a message to Lily Roo. This form is designed so the email address doesn’t have to be shown publicly.</p>
+      <p>Use this Google Form to send a message to Lily Roo. (This keeps the email address off the website.)</p>
 
-      <!--
-        IMPORTANT:
-        1) Create a free Formspree form (https://formspree.io/) and get your unique endpoint URL.
-        2) Replace the action URL below with your Formspree endpoint.
-
-        Example:
-          action="https://formspree.io/f/abcdwxyz"
-
-        If you’d rather not use Formspree, tell me and I can swap this to another provider (Google Forms, Basin, etc.).
-      -->
-      <form method="POST" action="https://formspree.io/f/REPLACE_ME">
-        <div class="row">
-          <div>
-            <label for="name">Name</label>
-            <input id="name" name="name" autocomplete="name" />
-          </div>
-          <div>
-            <label for="email">Your email (so I can reply)</label>
-            <input id="email" name="email" type="email" autocomplete="email" required />
-          </div>
-        </div>
-
-        <label for="message">Message</label>
-        <textarea id="message" name="message" required></textarea>
-
-        <div class="btns">
-          <button type="submit">Send</button>
-          <small>(You’ll be able to receive these at your email without posting it on the page.)</small>
-        </div>
-      </form>
+      <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSek150CSPfYJmX55sT_Pf16hkNV519FSXaLH32P4u5w7zdrug/viewform" target="_blank" rel="noreferrer">Open contact form</a>
+      <small>If the form doesn’t load, try opening it in a new tab.</small>
 
       <a class="back" href="/">← Back to home</a>
     </div>
