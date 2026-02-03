@@ -29,15 +29,28 @@
     .pill{display:inline-block;background:rgba(138,92,255,.18);border:1px solid rgba(138,92,255,.35);
       color:#e8ddff;padding:6px 10px;border-radius:999px;font-size:13px;margin:0 8px 10px 0}
     .links{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+
     a.btn{display:inline-flex;align-items:center;gap:10px;padding:12px 14px;border-radius:12px;
       text-decoration:none;color:var(--text);border:1px solid rgba(255,255,255,.14);
       background:rgba(17,19,26,.75)
     }
     a.btn:hover{border-color:rgba(138,92,255,.55);box-shadow:0 0 0 3px rgba(138,92,255,.15)}
-    a.btn.primary{background:linear-gradient(135deg, rgba(138,92,255,.25), rgba(51,214,201,.18));
-      border-color:rgba(138,92,255,.45)
+
+    /* Featured release */
+    a.feature{display:block;text-decoration:none;color:var(--text);margin-top:16px}
+    .featureCard{display:flex;gap:14px;align-items:center;padding:14px;border-radius:16px;
+      border:1px solid rgba(138,92,255,.45);
+      background:linear-gradient(135deg, rgba(138,92,255,.22), rgba(51,214,201,.12));
     }
-    .note{margin-top:18px;color:var(--muted);font-size:13px}
+    .featureCard:hover{box-shadow:0 0 0 3px rgba(138,92,255,.15)}
+    .cover{width:84px;height:84px;border-radius:14px;object-fit:cover;flex:0 0 auto;
+      border:1px solid rgba(255,255,255,.18)
+    }
+    .featureText{display:flex;flex-direction:column;gap:2px;min-width:0}
+    .featureKicker{color:var(--muted);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+    .featureTitle{font-size:18px;font-weight:700;line-height:1.2}
+    .featureCTA{color:#e8ddff;font-size:13px}
+
     footer{margin-top:18px;color:var(--muted);font-size:13px}
   </style>
 </head>
@@ -48,21 +61,28 @@
         <div class="avatar" aria-hidden="true"><span>LR</span></div>
         <div>
           <span class="pill">Bluesy • Folk • Punk</span>
-          <span class="pill">Shorts</span>
           <h1>Lily Roo</h1>
           <p class="tag">A voice that sounds older than I am. Bluesy-Folk-Punk + shorts. ↓</p>
         </div>
       </div>
 
+      <a class="feature" href="https://youtu.be/6lXKGPD36dc" aria-label="Listen on YouTube: The Other One’s Charging">
+        <div class="featureCard">
+          <img class="cover" src="/assets/the-other-ones-charging.jpg" alt="The Other One’s Charging cover" />
+          <div class="featureText">
+            <div class="featureKicker">Latest release</div>
+            <div class="featureTitle">The Other One’s Charging</div>
+            <div class="featureCTA">Listen on YouTube</div>
+          </div>
+        </div>
+      </a>
+
       <div class="links" aria-label="Links">
-        <a class="btn primary" href="https://youtu.be/6lXKGPD36dc">Listen on YouTube</a>
         <a class="btn" href="https://www.youtube.com/@lilyroo.artist" target="_blank" rel="noreferrer">YouTube channel</a>
         <a class="btn" href="https://www.instagram.com/lilyroo.artist/" target="_blank" rel="noreferrer">Instagram</a>
         <a class="btn" href="https://www.tiktok.com/@lilyroo.artist" target="_blank" rel="noreferrer">TikTok</a>
         <a class="btn" href="/contact.html">Contact</a>
       </div>
-
-      <p class="note">Tip: add this page to your bio link as <strong>www.lilyroo.com</strong>.</p>
 
       <footer>
         © <span id="y"></span> Lily Roo
