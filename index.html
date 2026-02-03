@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Lily Roo</title>
-  <meta name="description" content="Lily Roo — bluesy-folk-punk + shorts." />
+  <meta name="description" content="Lily Roo — bluesy-folk-punk." />
   <meta name="theme-color" content="#0b0c10" />
   <style>
     :root{--bg:#0b0c10;--card:#11131a;--text:#f6f7fb;--muted:#b7bccb;--accent:#8a5cff;--accent2:#33d6c9}
@@ -19,11 +19,10 @@
       box-shadow:0 10px 40px rgba(0,0,0,.35)
     }
     .top{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
-    .avatar{width:92px;height:92px;border-radius:999px;
-      background:linear-gradient(135deg, rgba(138,92,255,.55), rgba(51,214,201,.45));
-      display:grid;place-items:center;flex:0 0 auto;border:1px solid rgba(255,255,255,.18)
+    .avatar{width:92px;height:92px;border-radius:999px;flex:0 0 auto;
+      border:1px solid rgba(255,255,255,.18);object-fit:cover;
+      box-shadow:0 10px 40px rgba(0,0,0,.25)
     }
-    .avatar span{font-weight:700;font-size:28px;letter-spacing:-.02em}
     h1{margin:0 0 6px;font-size:44px;letter-spacing:-.02em;line-height:1.05}
     .tag{color:var(--muted);margin:0 0 18px;font-size:16px;max-width:58ch}
     .pill{display:inline-block;background:rgba(138,92,255,.18);border:1px solid rgba(138,92,255,.35);
@@ -58,11 +57,11 @@
   <div class="wrap">
     <div class="card">
       <div class="top">
-        <div class="avatar" aria-hidden="true"><span>LR</span></div>
+        <img class="avatar" src="/assets/avatar.png" alt="Lily Roo" />
         <div>
           <span class="pill">Bluesy • Folk • Punk</span>
           <h1>Lily Roo</h1>
-          <p class="tag">A voice that sounds older than I am. Bluesy-Folk-Punk + shorts. ↓</p>
+          <p class="tag">A voice that sounds older than I am. Bluesy-Folk-Punk. ↓</p>
         </div>
       </div>
 
