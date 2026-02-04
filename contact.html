@@ -4,40 +4,87 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Contact — Lily Roo</title>
-  <meta name="description" content="Contact Lily Roo" />
+  <meta name="description" content="Send a message to Lily Roo." />
   <meta name="theme-color" content="#0b0c10" />
   <style>
-    :root{--bg:#0b0c10;--card:#11131a;--text:#f6f7fb;--muted:#b7bccb;--accent:#8a5cff}
+    :root{--bg:#0b0c10;--card:#11131a;--text:#f6f7fb;--muted:#b7bccb;--accent:#8a5cff;--accent2:#33d6c9}
     *{box-sizing:border-box}
     body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
       background:radial-gradient(1200px 800px at 20% 10%, #201b3a 0%, var(--bg) 60%);
       color:var(--text);
     }
-    .wrap{max-width:760px;margin:0 auto;padding:56px 20px}
+    .wrap{max-width:860px;margin:0 auto;padding:56px 20px}
     .card{background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
       border:1px solid rgba(255,255,255,.10);border-radius:18px;padding:30px;
       box-shadow:0 10px 40px rgba(0,0,0,.35)
     }
     h1{margin:0 0 10px;font-size:34px;letter-spacing:-.02em}
-    p{color:var(--muted);margin:0 0 18px;line-height:1.5}
-    a.btn{display:inline-flex;align-items:center;gap:10px;padding:12px 14px;border-radius:12px;
-      text-decoration:none;color:var(--text);border:1px solid rgba(138,92,255,.45);
-      background:linear-gradient(135deg, rgba(138,92,255,.25), rgba(255,255,255,.02));
-      font-weight:600
+    p{color:var(--muted);margin:0 0 14px;line-height:1.55}
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace}
+    .sig{display:inline-block;padding:2px 8px;border-radius:999px;border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.18);color:var(--muted);font-size:12px
     }
-    a.btn:hover{box-shadow:0 0 0 3px rgba(138,92,255,.15)}
+    .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    a.btn, button.btn{display:inline-flex;align-items:center;gap:10px;padding:12px 14px;border-radius:12px;
+      text-decoration:none;color:var(--text);border:1px solid rgba(255,255,255,.14);
+      background:rgba(17,19,26,.75)
+    }
+    a.btn.primary, button.btn.primary{border-color:rgba(138,92,255,.55);
+      background:linear-gradient(135deg, rgba(138,92,255,.45), rgba(51,214,201,.16));
+      font-weight:700
+    }
+    a.btn:hover, button.btn:hover{border-color:rgba(138,92,255,.55);box-shadow:0 0 0 3px rgba(138,92,255,.15)}
+
+    label{display:block;margin:14px 0 8px;color:var(--muted)}
+    input, textarea{width:100%;max-width:640px;padding:14px 14px;border-radius:14px;border:1px solid rgba(255,255,255,.14);
+      background:rgba(0,0,0,.18);color:var(--text);outline:none}
+    textarea{min-height:140px;resize:vertical}
+    .fine{color:var(--muted);font-size:13px;margin-top:10px;line-height:1.45}
     a.back{display:inline-block;margin-top:16px;color:var(--muted)}
-    small{display:block;margin-top:10px;color:var(--muted)}
   </style>
 </head>
 <body>
   <div class="wrap">
     <div class="card">
-      <h1>Contact</h1>
-      <p>Use this Google Form to send a message to Lily Roo. (This keeps the email address off the website.)</p>
+      <h1>Contact <span class="sig mono">SECURE</span></h1>
+      <p class="mono">// Send a message. If it’s meant for me, it’ll find me.</p>
+      <p>Your email stays off the public site. Include it if you want a reply.</p>
 
-      <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSek150CSPfYJmX55sT_Pf16hkNV519FSXaLH32P4u5w7zdrug/viewform" target="_blank" rel="noreferrer">Open contact form</a>
-      <small>If the form doesn’t load, try opening it in a new tab.</small>
+      <form id="contact" action="https://docs.google.com/forms/d/e/1FAIpQLSek150CSPfYJmX55sT_Pf16hkNV519FSXaLH32P4u5w7zdrug/formResponse" method="POST" target="hidden_iframe">
+        <label class="mono" for="msg">// Your message</label>
+        <textarea id="msg" name="entry.40046047" required placeholder="Write the signal here..."></textarea>
+
+        <label class="mono" for="email">// Your email (so I can reply)</label>
+        <input id="email" name="entry.1587302304" type="email" required autocomplete="email" placeholder="you@domain.com" />
+
+        <div class="row">
+          <button class="btn primary" type="submit" style="cursor:pointer">Send</button>
+          <a class="btn" href="/join.html">Get transmissions</a>
+          <a class="btn" href="/">Home</a>
+        </div>
+
+        <p id="ok" class="fine" style="display:none;margin-top:12px">Received. If you left an email, you’ll get a reply when it’s safe to send one.</p>
+        <p class="fine">Never submit passwords. This route uses Google Forms as the inbox backend, but the interface is fully Lily Roo.</p>
+      </form>
+
+      <iframe name="hidden_iframe" style="display:none"></iframe>
+      <noscript>
+        <p class="fine">JavaScript is off. Use the fallback form: <a href="https://docs.google.com/forms/d/e/1FAIpQLSek150CSPfYJmX55sT_Pf16hkNV519FSXaLH32P4u5w7zdrug/viewform" target="_blank" rel="noreferrer">Open contact form</a>.</p>
+      </noscript>
+
+      <script>
+        (function(){
+          const form=document.getElementById('contact');
+          const ok=document.getElementById('ok');
+          form.addEventListener('submit', function(){
+            ok.style.display='block';
+            setTimeout(()=>{
+              try{ document.getElementById('email').value=''; }catch(e){}
+              try{ document.getElementById('msg').value=''; }catch(e){}
+            }, 200);
+          });
+        })();
+      </script>
 
       <a class="back" href="/">← Back to home</a>
     </div>
