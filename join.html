@@ -57,11 +57,37 @@
         <a class="btn" href="/">Home</a>
       </div>
 
-      <div class="frameWrap" aria-label="Mailing list form">
-        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeKtVk-nbRF0SNZgUo-2ZdFGXupdq3qwf98RbFTT720RkumCg/viewform?embedded=true" title="Lily Roo Mailing List"></iframe>
+      <div class="frameWrap" aria-label="Mailing list form" style="padding:16px">
+        <form id="join" action="https://docs.google.com/forms/d/e/1FAIpQLSeKtVk-nbRF0SNZgUo-2ZdFGXupdq3qwf98RbFTT720RkumCg/formResponse" method="POST" target="hidden_iframe">
+          <label class="mono" for="email" style="display:block;margin-bottom:8px;color:var(--muted)">// Email address</label>
+          <input id="email" name="entry.915476342" type="email" required autocomplete="email"
+            placeholder="you@domain.com"
+            style="width:100%;max-width:520px;padding:14px 14px;border-radius:14px;border:1px solid rgba(255,255,255,.14);
+              background:rgba(0,0,0,.18);color:var(--text);outline:none"
+          />
+          <div class="row" style="margin-top:12px">
+            <button class="btn primary" type="submit" style="cursor:pointer">Submit</button>
+            <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSeKtVk-nbRF0SNZgUo-2ZdFGXupdq3qwf98RbFTT720RkumCg/viewform" target="_blank" rel="noreferrer">Open fallback form</a>
+          </div>
+          <p id="ok" class="fine" style="display:none;margin-top:12px">Received. You’ll get the next transmission when it drops.</p>
+          <p class="fine" style="margin-top:12px">Privacy: your email stays private. No public list.</p>
+        </form>
+        <iframe name="hidden_iframe" style="display:none"></iframe>
+        <noscript>
+          <p class="fine">JavaScript is off. Use the direct form: <a href="https://docs.google.com/forms/d/e/1FAIpQLSeKtVk-nbRF0SNZgUo-2ZdFGXupdq3qwf98RbFTT720RkumCg/viewform" target="_blank" rel="noreferrer">Join the mailing list</a>.</p>
+        </noscript>
       </div>
 
-      <p class="fine">If the embed doesn’t load, open the form directly: <a href="https://docs.google.com/forms/d/e/1FAIpQLSeKtVk-nbRF0SNZgUo-2ZdFGXupdq3qwf98RbFTT720RkumCg/viewform" target="_blank" rel="noreferrer">Join the mailing list</a>.</p>
+      <script>
+        (function(){
+          const form=document.getElementById('join');
+          const ok=document.getElementById('ok');
+          form.addEventListener('submit', function(){
+            ok.style.display='block';
+            setTimeout(()=>{ try{ document.getElementById('email').value=''; }catch(e){} }, 200);
+          });
+        })();
+      </script>
 
       <a class="back" href="/">← Back to home</a>
     </div>
