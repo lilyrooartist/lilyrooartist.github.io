@@ -4,11 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Lily Roo</title>
-  <meta name="description" content="Lily Roo — bluesy-folk-punk singer-songwriter. Latest release: The Other One’s Charging." />
+  <meta name="description" content="Lily Roo — bluesy-folk-punk AI persona. Songs as transmissions. Latest release: The Other One’s Charging." />
 
   <!-- Open Graph / social sharing -->
   <meta property="og:title" content="Lily Roo" />
-  <meta property="og:description" content="Bluesy-folk-punk singer-songwriter. Latest release: The Other One’s Charging." />
+  <meta property="og:description" content="Bluesy-folk-punk AI persona. Songs as transmissions. Latest release: The Other One’s Charging." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://lilyroo.com/" />
   <meta property="og:image" content="https://lilyroo.com/assets/the-other-ones-charging.jpg" />
@@ -59,6 +59,16 @@
     .bullets{margin:10px 0 0 18px;color:var(--muted);line-height:1.55}
     .kicker{color:var(--muted);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
 
+    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace}
+    .sig{display:inline-block;padding:2px 8px;border-radius:999px;border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.18);color:var(--muted);font-size:12px
+    }
+    .glow{position:relative}
+    .glow:before{content:"";position:absolute;inset:-2px;z-index:-1;border-radius:18px;
+      background:linear-gradient(90deg, rgba(138,92,255,.20), rgba(51,214,201,.12), rgba(138,92,255,.20));
+      filter:blur(12px);opacity:.6
+    }
+
     /* Featured release */
     a.feature{display:block;text-decoration:none;color:var(--text);margin-top:16px}
     .featureCard{display:flex;gap:14px;align-items:center;padding:14px;border-radius:16px;
@@ -86,13 +96,14 @@
 </head>
 <body>
   <div class="wrap">
-    <div class="card">
+    <div class="card glow">
       <div class="top">
         <img class="avatar" src="/assets/avatar.png" alt="Lily Roo" />
         <div>
           <span class="pill">Bluesy • Folk • Punk</span>
+          <span class="pill mono">AI persona • transmissions</span>
           <h1>Lily Roo</h1>
-          <p class="tag">Bluesy-folk-punk songs from a voice you swear you’ve heard before. New release below.</p>
+          <p class="tag">I’m not a touring act. I’m a voice in the wires. Bluesy-folk-punk songs delivered like transmissions.</p>
         </div>
       </div>
 
@@ -109,22 +120,28 @@
 
       <div class="grid" aria-label="Start here">
         <div class="panel">
-          <div class="kicker">Start here</div>
-          <h2>The Other One’s Charging</h2>
-          <p class="note" style="margin-top:0">A bluesy-folk-punk single — half confession, half grin. Hit play, then follow for the next one.</p>
+          <div class="kicker">Transmission</div>
+          <h2>The Other One’s Charging <span class="sig mono">SIG-06</span></h2>
+          <p class="note" style="margin-top:0">A bluesy-folk-punk single — half confession, half grin. If it sounds familiar, that’s the point.</p>
           <div class="links" style="margin-top:10px">
             <a class="btn primary" href="#play">Play now</a>
-            <a class="btn" href="/music.html">More songs</a>
+            <a class="btn" href="/music.html">Archive</a>
             <a class="btn" href="https://youtu.be/6lXKGPD36dc" target="_blank" rel="noreferrer">Open on YouTube</a>
           </div>
+          <ul class="bullets">
+            <li>Origin: unknown</li>
+            <li>Format: voice + strings + static</li>
+            <li>Directive: keep listening</li>
+          </ul>
         </div>
         <div class="panel">
-          <div class="kicker">Mailing list</div>
-          <h2>Don’t miss drops</h2>
-          <p class="note" style="margin-top:0">New releases + livestream announcements. Privacy-respecting (no public email).</p>
+          <div class="kicker">Stay tuned</div>
+          <h2>Get transmissions</h2>
+          <p class="note" style="margin-top:0">New releases + livestream “broadcast windows.” Privacy-respecting; email stays private.</p>
           <div class="links" style="margin-top:10px">
             <a class="btn primary" href="https://docs.google.com/forms/d/e/1FAIpQLSeKtVk-nbRF0SNZgUo-2ZdFGXupdq3qwf98RbFTT720RkumCg/viewform?usp=publish-editor" target="_blank" rel="noreferrer">Join the mailing list</a>
           </div>
+          <p class="note mono" style="margin-top:12px">// You’ll get a note when the next signal drops.</p>
         </div>
       </div>
 
@@ -151,15 +168,15 @@
         <p class="note">Prefer YouTube? <a href="https://youtu.be/6lXKGPD36dc" target="_blank" rel="noreferrer">Open the video</a>.</p>
       </div>
 
-      <div class="section" aria-label="Shows">
-        <h2>Summer 2026 livestreams (planned)</h2>
-        <p class="note">Lily Roo is an AI persona — no in-person gigs. Planning a few YouTube Live sets this summer. Dates below are placeholders until announced.</p>
+      <div class="section" aria-label="Broadcast windows">
+        <h2>Broadcast windows (Summer 2026)</h2>
+        <p class="note">No venues. No green room. Just a stream. Times below are placeholders until the signal is locked.</p>
         <ul>
-          <li>Sat, Jun 13 2026 — YouTube Live (8:00 PM ET)</li>
-          <li>Sat, Jul 11 2026 — YouTube Live (8:00 PM ET)</li>
-          <li>Sat, Aug 08 2026 — YouTube Live (8:00 PM ET)</li>
+          <li>Sat, Jun 13 2026 — YouTube Live (8:00 PM ET) <span class="sig mono">TBD</span></li>
+          <li>Sat, Jul 11 2026 — YouTube Live (8:00 PM ET) <span class="sig mono">TBD</span></li>
+          <li>Sat, Aug 08 2026 — YouTube Live (8:00 PM ET) <span class="sig mono">TBD</span></li>
         </ul>
-        <p class="note">Follow on <a href="https://www.youtube.com/@lilyroo.artist" target="_blank" rel="noreferrer">YouTube</a> or <a href="https://www.instagram.com/lilyroo.artist/" target="_blank" rel="noreferrer">Instagram</a> for the real announcements.</p>
+        <p class="note">Follow on <a href="https://www.youtube.com/@lilyroo.artist" target="_blank" rel="noreferrer">YouTube</a> / <a href="https://www.instagram.com/lilyroo.artist/" target="_blank" rel="noreferrer">Instagram</a> for the real timestamps.</p>
       </div>
       <footer>
         © <span id="y"></span> Lily Roo
