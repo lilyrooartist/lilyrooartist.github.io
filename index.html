@@ -45,6 +45,20 @@
     }
     a.btn:hover{border-color:rgba(138,92,255,.55);box-shadow:0 0 0 3px rgba(138,92,255,.15)}
 
+    a.btn.primary{border-color:rgba(138,92,255,.55);
+      background:linear-gradient(135deg, rgba(138,92,255,.45), rgba(51,214,201,.16));
+      font-weight:700
+    }
+
+    .grid{display:grid;grid-template-columns:1.2fr .8fr;gap:14px;margin-top:18px}
+    @media (max-width:800px){.grid{grid-template-columns:1fr}}
+    .panel{border:1px solid rgba(255,255,255,.10);border-radius:16px;padding:16px;
+      background:rgba(17,19,26,.45)
+    }
+    .panel h2{margin:0 0 10px;font-size:16px;letter-spacing:-.01em}
+    .bullets{margin:10px 0 0 18px;color:var(--muted);line-height:1.55}
+    .kicker{color:var(--muted);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+
     /* Featured release */
     a.feature{display:block;text-decoration:none;color:var(--text);margin-top:16px}
     .featureCard{display:flex;gap:14px;align-items:center;padding:14px;border-radius:16px;
@@ -78,7 +92,7 @@
         <div>
           <span class="pill">Bluesy • Folk • Punk</span>
           <h1>Lily Roo</h1>
-          <p class="tag">A voice that sounds older than I am. Bluesy-Folk-Punk. ↓</p>
+          <p class="tag">Bluesy-folk-punk songs from a voice you swear you’ve heard before. New release below.</p>
         </div>
       </div>
 
@@ -88,10 +102,31 @@
           <div class="featureText">
             <div class="featureKicker">Latest release</div>
             <div class="featureTitle">The Other One’s Charging</div>
-            <div class="featureCTA">Listen on YouTube</div>
+            <div class="featureCTA">Watch / listen</div>
           </div>
         </div>
       </a>
+
+      <div class="grid" aria-label="Start here">
+        <div class="panel">
+          <div class="kicker">Start here</div>
+          <h2>The Other One’s Charging</h2>
+          <p class="note" style="margin-top:0">A bluesy-folk-punk single — half confession, half grin. Hit play, then follow for the next one.</p>
+          <div class="links" style="margin-top:10px">
+            <a class="btn primary" href="#play">Play now</a>
+            <a class="btn" href="/music.html">More songs</a>
+            <a class="btn" href="https://youtu.be/6lXKGPD36dc" target="_blank" rel="noreferrer">Open on YouTube</a>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="kicker">Mailing list</div>
+          <h2>Don’t miss drops</h2>
+          <p class="note" style="margin-top:0">New releases + livestream announcements. Privacy-respecting (no public email).</p>
+          <div class="links" style="margin-top:10px">
+            <a class="btn primary" href="https://docs.google.com/forms/d/e/1FAIpQLSeKtVk-nbRF0SNZgUo-2ZdFGXupdq3qwf98RbFTT720RkumCg/viewform?usp=publish-editor" target="_blank" rel="noreferrer">Join the mailing list</a>
+          </div>
+        </div>
+      </div>
 
       <div class="links" aria-label="Links">
         <a class="btn" href="https://www.youtube.com/@lilyroo.artist" target="_blank" rel="noreferrer">YouTube channel</a>
@@ -102,7 +137,7 @@
         <a class="btn" href="/contact.html">Contact</a>
       </div>
 
-      <div class="section" aria-label="Play here">
+      <div class="section" id="play" aria-label="Play here">
         <h2>Play here</h2>
         <div class="embedWrap">
           <iframe
@@ -126,15 +161,6 @@
         </ul>
         <p class="note">Follow on <a href="https://www.youtube.com/@lilyroo.artist" target="_blank" rel="noreferrer">YouTube</a> or <a href="https://www.instagram.com/lilyroo.artist/" target="_blank" rel="noreferrer">Instagram</a> for the real announcements.</p>
       </div>
-
-      <div class="section" aria-label="Mailing list">
-        <h2>Mailing list</h2>
-        <p class="note">Get new releases + livestream announcements. (Privacy-respecting; no public email address.)</p>
-        <div class="links">
-          <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSeKtVk-nbRF0SNZgUo-2ZdFGXupdq3qwf98RbFTT720RkumCg/viewform?usp=publish-editor" target="_blank" rel="noreferrer">Join the mailing list</a>
-        </div>
-      </div>
-
       <footer>
         © <span id="y"></span> Lily Roo
       </footer>
