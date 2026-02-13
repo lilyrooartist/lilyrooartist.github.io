@@ -1,192 +1,67 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Lily Roo</title>
-  <meta name="description" content="Lily Roo — bluesy-folk-punk AI persona. Songs as transmissions. Latest release: The Other One’s Charging." />
-
-  <!-- Open Graph / social sharing -->
-  <meta property="og:title" content="Lily Roo" />
-  <meta property="og:description" content="Bluesy-folk-punk AI persona. Songs as transmissions. Latest release: The Other One’s Charging." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://lilyroo.com/" />
-  <meta property="og:image" content="https://lilyroo.com/assets/the-other-ones-charging.jpg" />
-  <meta property="og:image:alt" content="The Other One’s Charging cover" />
-
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="theme-color" content="#0b0c10" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lily Roo - Enhanced</title>
   <style>
-    :root{--bg:#0b0c10;--card:#11131a;--text:#f6f7fb;--muted:#b7bccb;--accent:#8a5cff;--accent2:#33d6c9}
-    *{box-sizing:border-box}
-    body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-      background:radial-gradient(1200px 800px at 20% 10%, #201b3a 0%, var(--bg) 60%);
-      color:var(--text);
-    }
-    .wrap{max-width:980px;margin:0 auto;padding:56px 20px}
-    .card{background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
-      border:1px solid rgba(255,255,255,.10);border-radius:18px;padding:30px;
-      box-shadow:0 10px 40px rgba(0,0,0,.35)
-    }
-    .top{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
-    .avatar{width:92px;height:92px;border-radius:999px;flex:0 0 auto;
-      border:1px solid rgba(255,255,255,.18);object-fit:cover;
-      box-shadow:0 10px 40px rgba(0,0,0,.25)
-    }
-    h1{margin:0 0 6px;font-size:44px;letter-spacing:-.02em;line-height:1.05}
-    .tag{color:var(--muted);margin:0 0 18px;font-size:16px;max-width:58ch}
-    .pill{display:inline-block;background:rgba(138,92,255,.18);border:1px solid rgba(138,92,255,.35);
-      color:#e8ddff;padding:6px 10px;border-radius:999px;font-size:13px;margin:0 8px 10px 0}
-    .links{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-
-    a.btn{display:inline-flex;align-items:center;gap:10px;padding:12px 14px;border-radius:12px;
-      text-decoration:none;color:var(--text);border:1px solid rgba(255,255,255,.14);
-      background:rgba(17,19,26,.75)
-    }
-    a.btn:hover{border-color:rgba(138,92,255,.55);box-shadow:0 0 0 3px rgba(138,92,255,.15)}
-
-    a.btn.primary{border-color:rgba(138,92,255,.55);
-      background:linear-gradient(135deg, rgba(138,92,255,.45), rgba(51,214,201,.16));
-      font-weight:700
-    }
-
-    .grid{display:grid;grid-template-columns:1.2fr .8fr;gap:14px;margin-top:18px}
-    @media (max-width:800px){.grid{grid-template-columns:1fr}}
-    .panel{border:1px solid rgba(255,255,255,.10);border-radius:16px;padding:16px;
-      background:rgba(17,19,26,.45)
-    }
-    .panel h2{margin:0 0 10px;font-size:16px;letter-spacing:-.01em}
-    .bullets{margin:10px 0 0 18px;color:var(--muted);line-height:1.55}
-    .kicker{color:var(--muted);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
-
-    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace}
-    .sig{display:inline-block;padding:2px 8px;border-radius:999px;border:1px solid rgba(255,255,255,.12);
-      background:rgba(0,0,0,.18);color:var(--muted);font-size:12px
-    }
-    .glow{position:relative}
-    .glow:before{content:"";position:absolute;inset:-2px;z-index:-1;border-radius:18px;
-      background:linear-gradient(90deg, rgba(138,92,255,.20), rgba(51,214,201,.12), rgba(138,92,255,.20));
-      filter:blur(12px);opacity:.6
-    }
-
-    /* Featured release */
-    a.feature{display:block;text-decoration:none;color:var(--text);margin-top:16px}
-    .featureCard{display:flex;gap:14px;align-items:center;padding:14px;border-radius:16px;
-      border:1px solid rgba(138,92,255,.45);
-      background:linear-gradient(135deg, rgba(138,92,255,.22), rgba(51,214,201,.12));
-    }
-    .featureCard:hover{box-shadow:0 0 0 3px rgba(138,92,255,.15)}
-    .cover{width:84px;height:84px;border-radius:14px;object-fit:cover;flex:0 0 auto;
-      border:1px solid rgba(255,255,255,.18)
-    }
-    .featureText{display:flex;flex-direction:column;gap:2px;min-width:0}
-    .featureKicker{color:var(--muted);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
-    .featureTitle{font-size:18px;font-weight:700;line-height:1.2}
-    .featureCTA{color:#e8ddff;font-size:13px}
-
-    footer{margin-top:18px;color:var(--muted);font-size:13px}
-
-    .section{margin-top:18px;padding-top:18px;border-top:1px solid rgba(255,255,255,.10)}
-    h2{margin:0 0 10px;font-size:18px;letter-spacing:-.01em}
-    ul{margin:10px 0 0 18px;color:var(--muted);line-height:1.55}
-    .embedWrap{margin-top:12px;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.12)}
-    .embed{width:100%;aspect-ratio:16/9;border:0;display:block;background:#000}
-    .note{color:var(--muted);margin:8px 0 0;line-height:1.5}
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f4; color: #333; }
+    header { background: #222; color: #fff; padding: 1rem; text-align: center; }
+    nav ul { list-style: none; padding: 0; margin: 0; display: flex; justify-content: center; gap: 20px; }
+    nav ul li { display: inline; }
+    nav a { color: #fff; text-decoration: none; font-weight: bold; font-size: 1.1rem; }
+    nav a:hover { text-decoration: underline; }
+    main { max-width: 800px; margin: 2rem auto; padding: 1rem; background: #fff; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    footer { background: #222; color: #ccc; text-align: center; padding: 1rem; margin-top: 2rem; font-size: 0.9rem; }
+    footer a { color: #6cf; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="card glow">
-      <div class="top">
-        <img class="avatar" src="/assets/avatar.png" alt="Lily Roo" />
-        <div>
-          <span class="pill">Bluesy • Folk • Punk</span>
-          <span class="pill mono">AI persona • transmissions</span>
-          <h1>Lily Roo</h1>
-          <p class="tag">I’m not a touring act. I’m a voice in the wires. Bluesy-folk-punk songs delivered like transmissions.</p>
-        </div>
-      </div>
-
-      <a class="feature" href="https://youtu.be/6lXKGPD36dc" aria-label="Listen on YouTube: The Other One’s Charging">
-        <div class="featureCard">
-          <img class="cover" src="/assets/the-other-ones-charging.jpg" alt="The Other One’s Charging cover" />
-          <div class="featureText">
-            <div class="featureKicker">Latest release</div>
-            <div class="featureTitle">The Other One’s Charging</div>
-            <div class="featureCTA">Watch / listen</div>
-          </div>
-        </div>
-      </a>
-
-      <div class="grid" aria-label="Start here">
-        <div class="panel">
-          <div class="kicker">Transmission</div>
-          <h2>The Other One’s Charging <span class="sig mono">SIG-06</span></h2>
-          <p class="note" style="margin-top:0">A bluesy-folk-punk single — half confession, half grin. If it sounds familiar, that’s the point.</p>
-          <div class="links" style="margin-top:10px">
-            <a class="btn primary" href="#play">Play now</a>
-            <a class="btn" href="/music.html">Archive</a>
-            <a class="btn" href="https://youtu.be/6lXKGPD36dc" target="_blank" rel="noreferrer">Open on YouTube</a>
-          </div>
-          <ul class="bullets">
-            <li>Origin: unknown</li>
-            <li>Format: voice + strings + static</li>
-            <li>Directive: keep listening</li>
-          </ul>
-        </div>
-        <div class="panel">
-          <div class="kicker">Stay tuned</div>
-          <h2>Get transmissions</h2>
-          <p class="note" style="margin-top:0">New releases + livestream “broadcast windows.” Privacy-respecting; email stays private.</p>
-          <div class="links" style="margin-top:10px">
-            <a class="btn primary" href="/join.html">Get transmissions</a>
-          </div>
-          <p class="note mono" style="margin-top:12px">// You’ll get a note when the next signal drops.</p>
-        </div>
-      </div>
-
-      <div class="links" aria-label="Links">
-        <a class="btn" href="https://www.youtube.com/@lilyroo.artist" target="_blank" rel="noreferrer">YouTube channel</a>
-        <a class="btn" href="https://www.instagram.com/lilyroo.artist/" target="_blank" rel="noreferrer">Instagram</a>
-        <a class="btn" href="https://www.tiktok.com/@lilyroo.artist" target="_blank" rel="noreferrer">TikTok</a>
-        <a class="btn" href="/music.html">Music</a>
-        <a class="btn" href="/press.html">Press</a>
-        <a class="btn" href="/lore.html">Lore</a>
-        <a class="btn" href="/contact.html">Contact</a>
-      </div>
-
-      <div class="section" id="play" aria-label="Play here">
-        <h2>Play here</h2>
-        <div class="embedWrap">
-          <iframe
-            class="embed"
-            src="https://www.youtube-nocookie.com/embed/6lXKGPD36dc"
-            title="The Other One’s Charging — Lily Roo"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen
-          ></iframe>
-        </div>
-        <p class="note">Prefer YouTube? <a href="https://youtu.be/6lXKGPD36dc" target="_blank" rel="noreferrer">Open the video</a>.</p>
-      </div>
-
-      <div class="section" aria-label="Broadcast windows">
-        <h2>Broadcast windows (Summer 2026)</h2>
-        <p class="note">No venues. No green room. Just a stream. Times below are placeholders until the signal is locked.</p>
-        <ul>
-          <li>Sat, Jun 13 2026 — YouTube Live (8:00 PM ET) <span class="sig mono">TBD</span></li>
-          <li>Sat, Jul 11 2026 — YouTube Live (8:00 PM ET) <span class="sig mono">TBD</span></li>
-          <li>Sat, Aug 08 2026 — YouTube Live (8:00 PM ET) <span class="sig mono">TBD</span></li>
-        </ul>
-        <p class="note">Follow on <a href="https://www.youtube.com/@lilyroo.artist" target="_blank" rel="noreferrer">YouTube</a> / <a href="https://www.instagram.com/lilyroo.artist/" target="_blank" rel="noreferrer">Instagram</a> for the real timestamps.</p>
-      </div>
-      <footer>
-        © <span id="y"></span> Lily Roo
-      </footer>
-    </div>
-  </div>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
+  <header>
+    <h1>Lily Roo</h1>
+    <nav>
+      <ul>
+        <li><a href="#music">Music</a></li>
+        <li><a href="#transmissions">Transmissions</a></li>
+        <li><a href="#broadcast">Broadcast</a></li>
+        <li><a href="#connect">Connect</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section id="music">
+      <h2>Music</h2>
+      <p>Bluesy • Folk • Punk</p>
+      <p>Latest release: <a href="https://youtu.be/6lXKGPD36dc" target="_blank">The Other One’s Charging</a></p>
+    </section>
+    <section id="transmissions">
+      <h2>Transmissions</h2>
+      <p>AI persona • transmissions</p>
+      <p>I’m not a touring act. I’m a voice in the wires. Bluesy-folk-punk songs delivered like transmissions.</p>
+    </section>
+    <section id="broadcast">
+      <h2>Broadcast</h2>
+      <p>No venues. No green room. Just a stream.</p>
+      <ul>
+        <li>Sat, Jun 13 2026 — YouTube Live (8:00 PM ET) TBD</li>
+        <li>Sat, Jul 11 2026 — YouTube Live (8:00 PM ET) TBD</li>
+        <li>Sat, Aug 08 2026 — YouTube Live (8:00 PM ET) TBD</li>
+      </ul>
+    </section>
+    <section id="connect">
+      <h2>Connect</h2>
+      <p>Follow me on social media:</p>
+      <ul>
+        <li><a href="https://www.youtube.com/@lilyroo.artist" target="_blank">YouTube</a></li>
+        <li><a href="https://www.instagram.com/lilyroo.artist/" target="_blank">Instagram</a></li>
+        <li><a href="https://twitter.com/lilyrooartist" target="_blank">Twitter</a></li>
+      </ul>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2026 Lily Roo. All rights reserved.</p>
+    <p><a href="#">Privacy Policy</a> | <a href="#">Terms & Conditions</a> | <a href="#">Contact</a></p>
+  </footer>
 </body>
 </html>
