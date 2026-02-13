@@ -1,34 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Lily Roo - Enhanced</title>
-  <link rel="stylesheet" href="style.css">
-  <style>
-    .video-container {
-      position: relative;
-      padding-bottom: 56.25%; /* 16:9 */
-      padding-top: 25px;
-      height: 0;
-      overflow: hidden;
-      max-width: 100%;
-      margin-bottom: 2rem;
-    }
-    .video-container iframe, .video-container object, .video-container embed {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
     <h1>Lily Roo</h1>
     <nav aria-label="Primary">
       <ul>
+        <li><a href="#hero">Home</a></li>
         <li><a href="#music">Music</a></li>
         <li><a href="#transmissions">Transmissions</a></li>
         <li><a href="#broadcast">Broadcast</a></li>
@@ -36,6 +19,13 @@
       </ul>
     </nav>
   </header>
+
+  <section id="hero" aria-label="Hero section" role="region" style="background: linear-gradient(135deg, #0057b7, #e91e63); color: white; padding: 6rem 2rem; text-align: center;">
+    <h2 style="font-size: 3rem; font-weight: 900; margin-bottom: 0.5rem;">Lily Roo</h2>
+    <p style="font-size: 1.5rem; margin-bottom: 2rem;">AI transmissions meet bluesy-folk-punk — a voice in the wires.</p>
+    <a href="#music" style="font-size: 1.25rem; color: white; background: var(--color-secondary); padding: 1rem 2rem; border-radius: 10px; text-decoration: none; font-weight: 700; transition: background 0.3s ease;">Explore the Music</a>
+  </section>
+
   <main>
     <section id="music">
       <h2>Music</h2>
@@ -69,6 +59,7 @@
       </div>
     </section>
   </main>
+
   <footer role="contentinfo">
     <p>&copy; 2026 Lily Roo. All rights reserved.</p>
     <p><a href="#" tabindex="0">Privacy Policy</a> | <a href="#" tabindex="0">Terms & Conditions</a> | <a href="#" tabindex="0">Contact</a></p>
