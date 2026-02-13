@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lily Roo - Enhanced</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f4; color: #333; }
@@ -12,7 +12,7 @@
     nav a { color: #fff; text-decoration: none; font-weight: bold; font-size: 1.1rem; }
     nav a:hover { text-decoration: underline; }
     main { max-width: 800px; margin: 2rem auto; padding: 1rem; background: #fff; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-    footer { background: #222; color: #ccc; text-align: center; padding: 1rem; margin-top: 2rem; font-size: 0.9rem; }
+    footer { background: #222; color: #ccc; text-align: center; padding: 1rem; margin-top: 2rem; font-size: 0.9rem; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
     footer a { color: #6cf; text-decoration: none; }
     footer a:hover { text-decoration: underline; }
     .video-container {
@@ -31,12 +31,26 @@
       width: 100%;
       height: 100%;
     }
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 1rem;
+    }
+    .social-links a {
+      color: #6cf;
+      font-size: 1.5rem;
+      text-decoration: none;
+    }
+    .social-links a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
   <header>
     <h1>Lily Roo</h1>
-    <nav>
+    <nav aria-label="Primary">
       <ul>
         <li><a href="#music">Music</a></li>
         <li><a href="#transmissions">Transmissions</a></li>
@@ -50,9 +64,9 @@
       <h2>Music</h2>
       <p>Bluesy • Folk • Punk</p>
       <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/6lXKGPD36dc" frameborder="0" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/6lXKGPD36dc" frameborder="0" allowfullscreen title="The Other One’s Charging video"></iframe>
       </div>
-      <p>Latest release: <a href="https://youtu.be/6lXKGPD36dc" target="_blank">The Other One’s Charging</a></p>
+      <p>Latest release: <a href="https://youtu.be/6lXKGPD36dc" target="_blank" rel="noopener">The Other One’s Charging</a></p>
     </section>
     <section id="transmissions">
       <h2>Transmissions</h2>
@@ -71,16 +85,16 @@
     <section id="connect">
       <h2>Connect</h2>
       <p>Follow me on social media:</p>
-      <ul>
-        <li><a href="https://www.youtube.com/@lilyroo.artist" target="_blank">YouTube</a></li>
-        <li><a href="https://www.instagram.com/lilyroo.artist/" target="_blank">Instagram</a></li>
-        <li><a href="https://twitter.com/lilyrooartist" target="_blank">Twitter</a></li>
-      </ul>
+      <div class="social-links" aria-label="Social media links">
+        <a href="https://www.youtube.com/@lilyroo.artist" target="_blank" rel="noopener" aria-label="YouTube">YouTube</a>
+        <a href="https://www.instagram.com/lilyroo.artist/" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a>
+        <a href="https://twitter.com/lilyrooartist" target="_blank" rel="noopener" aria-label="Twitter">Twitter</a>
+      </div>
     </section>
   </main>
-  <footer>
+  <footer role="contentinfo">
     <p>&copy; 2026 Lily Roo. All rights reserved.</p>
-    <p><a href="#">Privacy Policy</a> | <a href="#">Terms & Conditions</a> | <a href="#">Contact</a></p>
+    <p><a href="#" tabindex="0">Privacy Policy</a> | <a href="#" tabindex="0">Terms & Conditions</a> | <a href="#" tabindex="0">Contact</a></p>
   </footer>
 </body>
 </html>
