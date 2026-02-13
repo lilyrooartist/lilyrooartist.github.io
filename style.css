@@ -1,124 +1,39 @@
-/* Header visual upgrade */
-header {
-  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
-  color: #fff;
-  padding: 1rem 2rem;
-  text-align: center;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-  backdrop-filter: saturate(180%) blur(20px);
+/* Spinning vinyl record effect */
+.vinyl-record {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  overflow: hidden;
+  margin: 1rem auto;
+  animation: spin 8s linear infinite;
+  background: radial-gradient(circle at center, black 70%, #333 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.vinyl-record img {
+  border-radius: 50%;
+  width: 80%;
+  height: 80%;
 }
 
-nav ul {
-  gap: 40px;
+@keyframes spin {
+  from {transform: rotate(0deg);}
+  to {transform: rotate(360deg);}
 }
 
-nav a {
-  transition: color 0.4s ease, text-shadow 0.4s ease;
-}
-
-nav a:hover, nav a:focus {
-  color: #fff;
-  text-shadow: 0 0 10px var(--color-accent);
-}
-
-/* Keep other styles unchanged */
+/* Append to existing body and layout styles for harmony */
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0;
-  padding: 0;
-  background: var(--color-bg);
-  color: var(--color-text);
-  scroll-behavior: smooth;
+  background: linear-gradient(45deg, #f5f7fa, #c3cfe2);
+  color: #222;
 }
 
 main {
   max-width: 900px;
   margin: 3rem auto;
-  padding: 2rem;
+  padding: 3rem;
   background: #fff;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  border-radius: 12px;
-}
-
-footer {
-  background: var(--color-footer-bg);
-  color: #bbb;
-  text-align: center;
-  padding: 1rem 0;
-  margin-top: 3rem;
-  font-size: 0.9rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-footer a {
-  color: var(--color-secondary);
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-footer a:hover, footer a:focus {
-  color: var(--color-accent);
-}
-
-.social-links {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 1.5rem;
-}
-
-.social-links a {
-  color: var(--color-secondary);
-  font-size: 1.7rem;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.social-links a:hover, .social-links a:focus {
-  color: var(--color-accent);
-}
-
-.video-container {
-  position: relative;
-  padding-bottom: 56.25%; /* 16:9 */
-  padding-top: 25px;
-  height: 0;
-  overflow: hidden;
-  max-width: 100%;
-  margin-bottom: 2.5rem;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-}
-
-.video-container iframe, .video-container object, .video-container embed {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 12px;
-}
-
-button {
-  padding: 0.75rem 1.5rem;
-  background-color: var(--color-primary);
-  border: none;
-  border-radius: 8px;
-  color: #fff;
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  box-shadow: 0 5px 12px rgba(0,87,183,0.3);
-}
-
-button:hover, button:focus {
-  background-color: var(--color-accent);
-  outline: none;
+  box-shadow: 0 7px 25px rgba(0,0,0,0.15);
+  border-radius: 15px;
 }
