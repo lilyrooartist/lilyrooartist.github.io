@@ -266,6 +266,10 @@ main {
   grid-template-columns: 1fr;
 }
 
+.panel-support {
+  grid-template-columns: 1.1fr 1fr;
+}
+
 .social-links {
   display: flex;
   flex-wrap: wrap;
@@ -282,6 +286,49 @@ main {
   font-family: "Space Mono", monospace;
   letter-spacing: 0.08em;
   font-size: 0.75rem;
+}
+
+.support-card {
+  border: 1px solid rgba(203, 168, 111, 0.45);
+  background:
+    linear-gradient(165deg, rgba(203, 168, 111, 0.12), rgba(255, 255, 255, 0.02)),
+    rgba(6, 6, 8, 0.72);
+  padding: 1rem;
+  position: relative;
+}
+
+.support-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border: 1px solid rgba(246, 244, 240, 0.12);
+}
+
+.support-note,
+.support-fallback {
+  margin: 0;
+  font-family: "Space Mono", monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.support-note {
+  margin-bottom: 0.8rem;
+}
+
+.support-fallback {
+  margin-top: 0.8rem;
+}
+
+.support-fallback a {
+  color: var(--gold);
+}
+
+#paypal-container-AB64ULBQNS4JS {
+  min-height: 48px;
 }
 
 .site-footer {
@@ -314,7 +361,8 @@ main {
   }
 
   .panel,
-  .panel-video {
+  .panel-video,
+  .panel-support {
     grid-template-columns: 1fr;
   }
 

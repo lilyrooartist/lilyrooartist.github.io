@@ -19,6 +19,7 @@
       <a href="#video">Video</a>
       <a href="#shows">Broadcast</a>
       <a href="#connect">Connect</a>
+      <a href="#support">Donate</a>
       <a href="/join.html">Join</a>
     </nav>
   </header>
@@ -27,7 +28,7 @@
     <section class="hero" id="top">
       <p class="kicker">Official Transmission</p>
       <h1>Lily Roo</h1>
-      <p class="lede">Bluesy folk punk delivered like late-night signal noise.</p>
+      <p class="lede">folk punk delivered like late-night signal noise.</p>
       <div class="hero-actions">
         <a class="btn btn-solid" href="https://www.youtube.com/@lilyroo.artist" target="_blank" rel="noopener">Watch Channel</a>
         <a class="btn btn-ghost" href="/music.html">Open Archive</a>
@@ -52,13 +53,13 @@
         </div>
       </div>
       <div class="panel-media">
-        <img src="assets/img/Lily Roo, album cover.png" alt="Lily Roo album cover art" />
+        <img src="assets/img/4fd0b156-3d6f-44b7-8e0b-8ae6e5eae912.jpeg" alt="Red amplifier with earbuds" />
       </div>
     </section>
 
     <section class="panel panel-video reveal" id="video">
       <div class="panel-media frame">
-        <iframe src="https://www.youtube.com/embed/6lXKGPD36dc" title="The Other One's Charging by Lily Roo" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/mJVDj-RJtlg" title="Every Pearl in Carmel by Lily Roo" allowfullscreen></iframe>
       </div>
       <div class="panel-copy">
         <p class="section-label">Featured Video</p>
@@ -102,12 +103,39 @@
         <a class="btn btn-ghost" href="/contact.html">Contact</a>
       </div>
     </section>
+
+    <section class="panel panel-support reveal" id="support">
+      <div class="panel-copy">
+        <p class="section-label">Support The Signal</p>
+        <h2>Keep the broadcasts alive</h2>
+        <p>
+          If you want to back future releases and live windows, you can send a
+          direct donation here.
+        </p>
+      </div>
+      <div class="panel-media support-card">
+        <p class="support-note">One-time support via PayPal</p>
+        <div id="paypal-container-AB64ULBQNS4JS"></div>
+        <p class="support-fallback">
+          If the button does not load, use
+          <a href="https://www.paypal.com/donate/?hosted_button_id=AB64ULBQNS4JS" target="_blank" rel="noopener">this direct donate link</a>.
+        </p>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
     <p>&copy; 2026 Lily Roo</p>
   </footer>
 
+  <script src="https://www.paypal.com/sdk/js?components=hosted-buttons&currency=USD"></script>
+  <script>
+    if (window.paypal && paypal.HostedButtons) {
+      paypal.HostedButtons({
+        hostedButtonId: "AB64ULBQNS4JS",
+      }).render("#paypal-container-AB64ULBQNS4JS");
+    }
+  </script>
   <script src="script.js"></script>
 </body>
 </html>

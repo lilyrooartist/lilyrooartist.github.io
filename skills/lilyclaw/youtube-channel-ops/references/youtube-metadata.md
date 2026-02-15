@@ -5,7 +5,7 @@
 
 Watch/listen: {LINK}
 
-Lily Roo is a bluesy-folk-punk AI persona — songs delivered like transmissions.
+Lily Roo is a folk punk AI persona — songs delivered like transmissions.
 
 Follow:
 - YouTube: https://www.youtube.com/@lilyroo.artist
