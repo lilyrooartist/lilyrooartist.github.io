@@ -1,39 +1,71 @@
-/* Spinning vinyl record effect */
-.vinyl-record {
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  box-shadow: 0 0 15px rgba(0,0,0,0.3);
-  overflow: hidden;
-  margin: 1rem auto;
-  animation: spin 8s linear infinite;
-  background: radial-gradient(circle at center, black 70%, #333 100%);
+/* Navigation bar as horizontal styled menu */
+.main-nav {
+  background-color: var(--color-primary);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+  position: sticky;
+  top: 0;
+  z-index: 1001;
+  border-radius: 0 0 15px 15px;
+}
+.main-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem 1.5rem;
   display: flex;
-  align-items: center;
   justify-content: center;
+  gap: 35px;
 }
-.vinyl-record img {
-  border-radius: 50%;
-  width: 80%;
-  height: 80%;
+.main-nav ul li a {
+  display: block;
+  padding: 1rem 1.1rem;
+  color: white;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  font-size: 1rem;
+  transition: color 0.3s ease, background-color 0.3s ease;
+  border-radius: 8px;
+}
+.main-nav ul li a:hover,
+.main-nav ul li a:focus {
+  background-color: var(--color-accent);
+  color: var(--color-primary);
+  outline: none;
 }
 
-@keyframes spin {
-  from {transform: rotate(0deg);}
-  to {transform: rotate(360deg);}
+/* Make all images full bleed with no box shadows or margin */
+main section img, main section .vinyl-record {
+  width: 100%;
+  border-radius: 0;
+  box-shadow: none;
+  margin: 0;
+  display: block;
 }
 
-/* Append to existing body and layout styles for harmony */
-body {
-  background: linear-gradient(45deg, #f5f7fa, #c3cfe2);
-  color: #222;
-}
-
+/* Remove boxed main backgrounds to allow full bleed images */
 main {
-  max-width: 900px;
-  margin: 3rem auto;
-  padding: 3rem;
-  background: #fff;
-  box-shadow: 0 7px 25px rgba(0,0,0,0.15);
-  border-radius: 15px;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+section {
+  padding: 2rem;
+  background-color: var(--color-bg);
+  margin-bottom: 1rem;
+}
+
+/* Hero remains full bleed image with text overlay */
+#hero {
+  padding: 6rem 2rem;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-align: center;
+  box-shadow: inset 0 0 90px 40px rgba(0,0,0,0.5);
+  margin-bottom: 2rem;
 }
