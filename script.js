@@ -1,22 +1,17 @@
-// Carousel interaction placeholder for future enhancement
+const revealItems = document.querySelectorAll(".reveal");
 
-// Scroll parallax effect
-window.addEventListener('scroll', () => {
-  const hero = document.getElementById('hero');
-  if(hero) {
-    const scrollAmount = window.pageYOffset * 0.5;
-    hero.style.backgroundPosition = `center ${scrollAmount}px`;
-  }
-});
+if (revealItems.length > 0) {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.2 }
+  );
 
-// Enhanced scroll animations
-window.addEventListener('scroll', function() {
-  const elements = document.querySelectorAll('[data-scroll]');
-  const windowHeight = window.innerHeight;
-  elements.forEach(el => {
-    let elementTop = el.getBoundingClientRect().top;
-    if (elementTop < windowHeight * 0.85) {
-      el.classList.add('visible');
-    }
-  });
-});
+  revealItems.forEach((item) => observer.observe(item));
+}

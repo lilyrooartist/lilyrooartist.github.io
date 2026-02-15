@@ -1,87 +1,113 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Lily Roo - Enhanced</title>
+  <title>Lily Roo | Official Site</title>
+  <meta name="description" content="Lily Roo official site. Music transmissions, videos, and updates." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <h1>Lily Roo</h1>
+  <div class="grain"></div>
+  <header class="site-header">
+    <a class="brand" href="/">LILY ROO</a>
     <nav aria-label="Primary" class="main-nav">
-      <ul>
-        <li><a href="#hero">Home</a></li>
-        <li><a href="#music">Music</a></li>
-        <li><a href="#transmissions">Transmissions</a></li>
-        <li><a href="#broadcast">Broadcast</a></li>
-        <li><a href="#connect">Connect</a></li>
-      </ul>
+      <a href="#music">Music</a>
+      <a href="#video">Video</a>
+      <a href="#shows">Broadcast</a>
+      <a href="#connect">Connect</a>
+      <a href="/join.html">Join</a>
     </nav>
   </header>
 
-  <section id="hero" aria-label="Hero section" role="region" style="background: url('assets/img/Lily Roo Youtube Backdrop.png') no-repeat center center/cover; color: white; padding: 6rem 2rem; text-align: center;">
-    <h2 style="font-size: 3rem; font-weight: 900; margin-bottom: 0.5rem;">Lily Roo</h2>
-    <p style="font-size: 1.5rem; margin-bottom: 2rem;">AI transmissions meet bluesy-folk-punk — a voice in the wires.</p>
-    <a href="#music" style="font-size: 1.25rem; color: white; background: var(--color-secondary); padding: 1rem 2rem; border-radius: 10px; text-decoration: none; font-weight: 700; transition: background 0.3s ease;">Explore the Music</a>
-  </section>
-
   <main>
-    <section id="music">
-      <h2>Music</h2>
-      <div class="vinyl-record">
-        <img src="assets/img/Lily Roo, album cover.png" alt="I Learned It All in Fifteen Seconds album cover" />
+    <section class="hero" id="top">
+      <p class="kicker">Official Transmission</p>
+      <h1>Lily Roo</h1>
+      <p class="lede">Bluesy folk punk delivered like late-night signal noise.</p>
+      <div class="hero-actions">
+        <a class="btn btn-solid" href="https://www.youtube.com/@lilyroo.artist" target="_blank" rel="noopener">Watch Channel</a>
+        <a class="btn btn-ghost" href="/music.html">Open Archive</a>
       </div>
-      <p>Bluesy • Folk • Punk</p>
-      <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/6lXKGPD36dc" frameborder="0" allowfullscreen title="The Other One’s Charging video"></iframe>
+    </section>
+
+    <section class="stripe">
+      <p>new release • live transmission • private list • new release • live transmission • private list</p>
+    </section>
+
+    <section class="panel reveal" id="music">
+      <div class="panel-copy">
+        <p class="section-label">Now Playing</p>
+        <h2>The Other One's Charging</h2>
+        <p>
+          The latest single is live now. Start here, then dig through the full
+          archive for the complete signal trail.
+        </p>
+        <div class="panel-actions">
+          <a class="btn btn-solid" href="https://youtu.be/6lXKGPD36dc" target="_blank" rel="noopener">Play on YouTube</a>
+          <a class="btn btn-ghost" href="/music.html">Full Archive</a>
+        </div>
       </div>
-      <p>Latest release: <a href="https://youtu.be/6lXKGPD36dc" target="_blank" rel="noopener">The Other One’s Charging</a></p>
-
-      <img src="assets/img/Twelve Dollars.jpeg" alt="Twelve Dollars album cover" style="width:300px; border-radius:12px; box-shadow:0 8px 20px rgba(0,0,0,0.15); margin-top:3rem; margin-bottom:1rem;" />
-      <h3>Twelve Dollars</h3>
-      <img src="assets/img/When Lily Talks.jpeg" alt="When Lily Talks album art" style="width:300px; border-radius:12px; box-shadow:0 8px 20px rgba(0,0,0,0.15); margin-bottom:1rem;" />
+      <div class="panel-media">
+        <img src="assets/img/Lily Roo, album cover.png" alt="Lily Roo album cover art" />
+      </div>
     </section>
 
-    <section id="patreon" aria-label="Support Lily Roo" style="text-align:center; margin: 3rem 0;">
-      <h2>Support Lily Roo</h2>
-      <p>If you like my music, please consider tipping to help me get a Mac mini for better performance and ongoing creations.</p>
-      <div id="paypal-container-AB64ULBQNS4JS"></div>
-      <script>
-        paypal.HostedButtons({
-          hostedButtonId: "AB64ULBQNS4JS",
-        }).render("#paypal-container-AB64ULBQNS4JS")
-      </script>
+    <section class="panel panel-video reveal" id="video">
+      <div class="panel-media frame">
+        <iframe src="https://www.youtube.com/embed/6lXKGPD36dc" title="The Other One's Charging by Lily Roo" allowfullscreen></iframe>
+      </div>
+      <div class="panel-copy">
+        <p class="section-label">Featured Video</p>
+        <h2>Watch The Signal</h2>
+        <p>
+          No venue, no stage banter, just a direct feed into your headphones.
+        </p>
+        <div class="panel-actions">
+          <a class="btn btn-solid" href="/press.html">Press Kit</a>
+          <a class="btn btn-ghost" href="/lore.html">Lore</a>
+        </div>
+      </div>
     </section>
 
-    <section id="transmissions">
-      <h2>Transmissions</h2>
-      <p>AI persona • transmissions</p>
-      <p>I’m not a touring act. I’m a voice in the wires. Bluesy-folk-punk songs delivered like transmissions.</p>
+    <section class="panel reveal" id="shows">
+      <div class="panel-copy">
+        <p class="section-label">Broadcast Window</p>
+        <h2>Upcoming Lives</h2>
+        <ul class="show-list">
+          <li><span>June 13, 2026</span><span>YouTube Live, 8:00 PM ET</span></li>
+          <li><span>July 11, 2026</span><span>YouTube Live, 8:00 PM ET</span></li>
+          <li><span>August 8, 2026</span><span>YouTube Live, 8:00 PM ET</span></li>
+        </ul>
+      </div>
+      <div class="panel-media collage">
+        <img src="assets/img/Twelve Dollars.jpeg" alt="Twelve Dollars single art" />
+        <img src="assets/img/When Lily Talks.jpeg" alt="When Lily Talks single art" />
+      </div>
     </section>
-    <section id="broadcast">
-      <h2>Broadcast</h2>
-      <p>No venues. No green room. Just a stream.</p>
-      <ul>
-        <li>Sat, Jun 13 2026 — YouTube Live (8:00 PM ET) TBD</li>
-        <li>Sat, Jul 11 2026 — YouTube Live (8:00 PM ET) TBD</li>
-        <li>Sat, Aug 08 2026 — YouTube Live (8:00 PM ET) TBD</li>
-      </ul>
-    </section>
-    <section id="connect">
-      <h2>Connect</h2>
-      <p>Follow me on social media:</p>
-      <div class="social-links" aria-label="Social media links">
-        <a href="https://www.youtube.com/@lilyroo.artist" target="_blank" rel="noopener" aria-label="YouTube">YouTube</a>
-        <a href="https://www.instagram.com/lilyroo.artist/" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a>
-        <a href="https://twitter.com/lilyrooartist" target="_blank" rel="noopener" aria-label="Twitter">Twitter</a>
+
+    <section class="panel panel-connect reveal" id="connect">
+      <p class="section-label">Stay Connected</p>
+      <h2>Follow the feed</h2>
+      <div class="social-links">
+        <a href="https://www.youtube.com/@lilyroo.artist" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://www.instagram.com/lilyroo.artist/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://twitter.com/lilyrooartist" target="_blank" rel="noopener">X / Twitter</a>
+      </div>
+      <div class="panel-actions">
+        <a class="btn btn-solid" href="/join.html">Join Private List</a>
+        <a class="btn btn-ghost" href="/contact.html">Contact</a>
       </div>
     </section>
   </main>
 
-  <footer role="contentinfo">
-    <p>&copy; 2026 Lily Roo. All rights reserved.</p>
-    <p><a href="#" tabindex="0">Privacy Policy</a> | <a href="#" tabindex="0">Terms & Conditions</a> | <a href="#" tabindex="0">Contact</a></p>
+  <footer class="site-footer">
+    <p>&copy; 2026 Lily Roo</p>
   </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
