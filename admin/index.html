@@ -156,13 +156,20 @@
   const formatDate=(iso)=>new Date(iso).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});
   const now=new Date(), in7=new Date(now.getTime()+7*24*60*60*1000);
 
-  function renderPreview(el,p){
+  function renderImagePreview(el,p){
     const src=(p.imagery_url||'').trim();
     if(!src){el.innerHTML='';return;}
     const lower=src.toLowerCase();
-    if(/\.(png|jpg|jpeg|gif|webp)(\?|$)/.test(lower)) el.innerHTML=`<img src="${src}" alt="preview" loading="lazy"/>`;
-    else if(/\.(mp4|webm|mov)(\?|$)/.test(lower)) el.innerHTML=`<video src="${src}" controls muted playsinline></video>`;
-    else el.innerHTML=`<a href="${src}" target="_blank" rel="noopener">Open imagery link ↗</a>`;
+    if(/\.(png|jpg|jpeg|gif|webp)(\?|$)/.test(lower)) el.innerHTML=`<div class="label"><b>Image</b></div><img src="${src}" alt="image preview" loading="lazy"/>`;
+    else el.innerHTML=`<div class="label"><b>Image</b>: <a href="${src}" target="_blank" rel="noopener">Open ↗</a></div>`;
+  }
+
+  function renderClipPreview(el,p){
+    const src=(p.clip_url||'').trim();
+    if(!src){el.innerHTML='';return;}
+    const lower=src.toLowerCase();
+    if(/\.(mp4|webm|mov)(\?|$)/.test(lower)) el.innerHTML=`<div class="label"><b>Clip</b></div><video src="${src}" controls muted playsinline preload="metadata"></video>`;
+    else el.innerHTML=`<div class="label"><b>Clip</b>: <a href="${src}" target="_blank" rel="noopener">Open ↗</a></div>`;
   }
 
 
@@ -213,9 +220,11 @@
       <div class="label"><b>Status</b>: <span data-role="status">${statusVal}</span></div>
       <div><b>Text</b>: <span data-role="text">${text}</span></div>
       <div class="label"><b>Imagery</b>: ${p.imagery||''}</div>
-      <div class="preview" data-role="preview"></div>
+      <div class="preview" data-role="preview-image"></div>
+      <div class="preview" data-role="preview-clip"></div>
       <div class="label" style="margin-top:10px"><button class="btn" data-role="redo">Redo</button> <button class="btn" data-role="exec">Execute now</button></div>`;
-      renderPreview(d.querySelector('[data-role="preview"]'),p);
+      renderImagePreview(d.querySelector('[data-role="preview-image"]'),p);
+      renderClipPreview(d.querySelector('[data-role="preview-clip"]'),p);
       d.querySelector('[data-role="redo"]').addEventListener('click',()=>{
         if(!p.drafts||!p.drafts.length) return;
         const n=(Number(localStorage.getItem(key)||0)+1)%p.drafts.length;

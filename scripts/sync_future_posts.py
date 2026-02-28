@@ -25,6 +25,7 @@ with SOURCE.open(newline='', encoding='utf-8') as f:
             'platform': (r.get('platform') or '').strip(),
             'imagery': (r.get('imagery') or '').strip(),
             'imagery_url': (r.get('imagery_url') or '').strip(),
+            'clip_url': (r.get('clip_url') or '').strip(),
             'text': text,
             'drafts': drafts,
         })
