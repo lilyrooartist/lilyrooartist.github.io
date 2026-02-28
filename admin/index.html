@@ -70,6 +70,7 @@
         <div class="card">
           <h2>Upcoming 7-Day Posts</h2>
           <p class="muted">Time-sorted future post log. Use <b>Redo</b> to regenerate copy draft variants.</p>
+          <p class="muted" id="future-sync" style="font-size:12px">Last synced: —</p>
           <div id="future-posts" class="empty">Loading upcoming posts…</div>
         </div>
       </aside>
@@ -93,7 +94,7 @@
       }
       container.className = '';
       container.innerHTML = '';
-      posts.forEach((p, idx) => {
+      posts.forEach((p) => {
         const div = document.createElement('div');
         div.className = 'post';
 
@@ -131,13 +132,18 @@
 
     fetch('/admin/future-posts.json')
       .then(r => r.json())
-      .then(list => list
-        .filter(p => {
-          const t = new Date(p.scheduled_at);
-          return t >= now && t <= in7;
-        })
-        .sort((a,b) => new Date(a.scheduled_at) - new Date(b.scheduled_at))
-      )
+      .then(payload => {
+        const sync = document.getElementById('future-sync');
+        if (sync && payload.last_synced) sync.textContent = `Last synced: ${formatDate(payload.last_synced)}`;
+
+        const list = Array.isArray(payload) ? payload : (payload.posts || []);
+        return list
+          .filter(p => {
+            const t = new Date(p.scheduled_at);
+            return t >= now && t <= in7;
+          })
+          .sort((a,b) => new Date(a.scheduled_at) - new Date(b.scheduled_at));
+      })
       .then(renderPosts)
       .catch(() => {
         const c = document.getElementById('future-posts');
