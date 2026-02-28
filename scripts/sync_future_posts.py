@@ -24,6 +24,7 @@ with SOURCE.open(newline='', encoding='utf-8') as f:
             'scheduled_at': (r.get('scheduled_at') or '').strip(),
             'platform': (r.get('platform') or '').strip(),
             'imagery': (r.get('imagery') or '').strip(),
+            'imagery_url': (r.get('imagery_url') or '').strip(),
             'text': text,
             'drafts': drafts,
         })
