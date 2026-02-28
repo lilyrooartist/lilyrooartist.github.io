@@ -85,6 +85,7 @@
           <li><a href="/admin/content/11_LYRIC_BACKSTORY_INDEX.csv" target="_blank">11_LYRIC_BACKSTORY_INDEX.csv</a></li>
           <li><a href="/admin/content/12_SONG_BACKSTORY_CARDS.md" target="_blank">12_SONG_BACKSTORY_CARDS.md</a></li>
           <li><a href="/admin/content/15_BRAINROT_CAPTION_PACKS.md" target="_blank">Brain Rot Caption Packs</a></li>
+          <li><a href="/admin/content/17_TOP10_CANON_PACKS.md" target="_blank">Top 10 Canon Packs</a></li>
         </ul>
       </div>
 
@@ -158,16 +159,36 @@
       const key=`redo_${p.id}`; const idx=Number(localStorage.getItem(key)||0)%(p.drafts?.length||1);
       const text=(p.drafts&&p.drafts.length)?p.drafts[idx]:p.text;
       const d=document.createElement('div'); d.className='post';
+      const statusKey=`status_${p.id}`;
+      const statusVal=localStorage.getItem(statusKey)||'queued';
       d.innerHTML=`<div class="meta"><span class="platform">${p.platform}</span><span class="time">${formatDate(p.scheduled_at)}</span></div>
+      <div class="label"><b>Status</b>: <span data-role="status">${statusVal}</span></div>
       <div><b>Text</b>: <span data-role="text">${text}</span></div>
       <div class="label"><b>Imagery</b>: ${p.imagery||''}</div>
       <div class="preview" data-role="preview"></div>
-      <div class="label" style="margin-top:10px"><button class="btn" data-role="redo">Redo</button></div>`;
+      <div class="label" style="margin-top:10px"><button class="btn" data-role="redo">Redo</button> <button class="btn" data-role="exec">Execute now</button></div>`;
       renderPreview(d.querySelector('[data-role="preview"]'),p);
       d.querySelector('[data-role="redo"]').addEventListener('click',()=>{
         if(!p.drafts||!p.drafts.length) return;
         const n=(Number(localStorage.getItem(key)||0)+1)%p.drafts.length;
         localStorage.setItem(key,String(n)); d.querySelector('[data-role="text"]').textContent=p.drafts[n];
+      });
+      d.querySelector('[data-role="exec"]').addEventListener('click',()=>{
+        const txt=encodeURIComponent(d.querySelector('[data-role="text"]').textContent);
+        let url='';
+        const platform=(p.platform||'').toLowerCase();
+        if(platform.includes('x')) url=`https://x.com/intent/post?text=${txt}`;
+        else if(platform.includes('facebook')) url=`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://lilyroo.com')}&quote=${txt}`;
+        else if(platform.includes('instagram')) url='https://www.instagram.com/';
+        else if(platform.includes('tiktok')) url='https://www.tiktok.com/upload';
+        else if(platform.includes('youtube')) url='https://studio.youtube.com/';
+        if(url) window.open(url,'_blank');
+        const posted=prompt('Paste published URL (or leave blank to keep queued):');
+        if(posted){
+          localStorage.setItem(statusKey,'posted');
+          localStorage.setItem(`posted_url_${p.id}`,posted);
+          d.querySelector('[data-role="status"]').textContent='posted';
+        }
       });
       container.appendChild(d);
     });
