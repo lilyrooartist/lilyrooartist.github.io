@@ -8,50 +8,142 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32.png" />
   <style>
     body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:#0c0d12;color:#eef0f7}
-    .wrap{max-width:980px;margin:0 auto;padding:28px}
-    .card{background:#141722;border:1px solid #2a2f44;border-radius:14px;padding:18px;margin:12px 0}
+    .wrap{max-width:1240px;margin:0 auto;padding:24px}
+    .layout{display:grid;grid-template-columns:minmax(0,1fr) 390px;gap:18px;align-items:start}
+    .card{background:#141722;border:1px solid #2a2f44;border-radius:14px;padding:16px;margin:12px 0}
     a{color:#9ecbff}
     .muted{color:#9ba3bf}
     code{background:#1b1f2c;padding:2px 6px;border-radius:6px}
+    .sticky{position:sticky;top:14px}
+    .post{border:1px solid #303856;border-radius:12px;padding:12px;margin:10px 0;background:#101523}
+    .meta{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:6px}
+    .platform{font-size:12px;padding:4px 8px;border-radius:999px;background:#24304f;color:#b8d8ff}
+    .time{font-size:12px;color:#9ba3bf}
+    .label{font-size:12px;color:#9ba3bf;margin-top:8px}
+    .btn{background:#2f62ff;color:white;border:0;border-radius:8px;padding:7px 10px;font-size:12px;cursor:pointer}
+    .btn:hover{filter:brightness(1.08)}
+    .empty{color:#9ba3bf;font-style:italic}
+    @media (max-width: 1020px){.layout{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
   <div class="wrap">
-    <h1>Lily Roo Admin</h1>
-    <p class="muted">Protected by Cloudflare Access. Authorized account only.</p>
+    <div class="layout">
+      <main>
+        <h1>Lily Roo Admin</h1>
+        <p class="muted">Protected by Cloudflare Access. Authorized account only.</p>
 
-    <div class="card">
-      <h2>Backstory Canon</h2>
-      <ul>
-        <li><a href="/admin/content/00_CANON.md" target="_blank">00_CANON.md</a></li>
-        <li><a href="/admin/content/10_ANECDOTE_BANK.md" target="_blank">10_ANECDOTE_BANK.md</a></li>
-        <li><a href="/admin/content/20_QUIPS_BANK.csv" target="_blank">20_QUIPS_BANK.csv</a></li>
-      </ul>
-    </div>
+        <div class="card">
+          <h2>Backstory Canon</h2>
+          <ul>
+            <li><a href="/admin/content/00_CANON.md" target="_blank">00_CANON.md</a></li>
+            <li><a href="/admin/content/10_ANECDOTE_BANK.md" target="_blank">10_ANECDOTE_BANK.md</a></li>
+            <li><a href="/admin/content/20_QUIPS_BANK.csv" target="_blank">20_QUIPS_BANK.csv</a></li>
+          </ul>
+        </div>
 
-    <div class="card">
-      <h2>Promo System</h2>
-      <ul>
-        <li><a href="/admin/content/30_PROMO_SYSTEM.md" target="_blank">30_PROMO_SYSTEM.md</a></li>
-        <li><a href="/admin/content/40_RANDOM_RHYTHM_PLAYBOOK.md" target="_blank">40_RANDOM_RHYTHM_PLAYBOOK.md</a></li>
-        <li><a href="/admin/content/Published_Log.csv" target="_blank">Published_Log.csv</a></li>
-      </ul>
-    </div>
+        <div class="card">
+          <h2>Promo System</h2>
+          <ul>
+            <li><a href="/admin/content/30_PROMO_SYSTEM.md" target="_blank">30_PROMO_SYSTEM.md</a></li>
+            <li><a href="/admin/content/40_RANDOM_RHYTHM_PLAYBOOK.md" target="_blank">40_RANDOM_RHYTHM_PLAYBOOK.md</a></li>
+            <li><a href="/admin/content/Published_Log.csv" target="_blank">Published_Log.csv</a></li>
+          </ul>
+        </div>
 
+        <div class="card">
+          <h2>Reports</h2>
+          <ul>
+            <li><a href="/admin/reports/" target="_blank">Weekly Reports Index</a></li>
+            <li><a href="/admin/reports/weekly-social-report.md" target="_blank">Weekly Social Report</a></li>
+          </ul>
+        </div>
 
-    <div class="card">
-      <h2>Reports</h2>
-      <ul>
-        <li><a href="/admin/reports/" target="_blank">Weekly Reports Index</a></li>
-        <li><a href="/admin/reports/weekly-social-report.md" target="_blank">Weekly Social Report</a></li>
-      </ul>
-    </div>
+        <div class="card">
+          <h2>Notes</h2>
+          <p>Path: <code>lilyroo.com/admin</code></p>
+          <p>If this page is visible without login, Access policy is not applied correctly.</p>
+        </div>
+      </main>
 
-    <div class="card">
-      <h2>Notes</h2>
-      <p>Path: <code>lilyroo.com/admin</code></p>
-      <p>If this page is visible without login, Access policy is not applied correctly.</p>
+      <aside class="sticky">
+        <div class="card">
+          <h2>Upcoming 7-Day Posts</h2>
+          <p class="muted">Time-sorted future post log. Use <b>Redo</b> to regenerate copy draft variants.</p>
+          <div id="future-posts" class="empty">Loading upcoming posts…</div>
+        </div>
+      </aside>
     </div>
   </div>
+
+  <script>
+    const formatDate = (iso) => new Date(iso).toLocaleString('en-US', {
+      month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit'
+    });
+
+    const now = new Date();
+    const in7 = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
+
+    function renderPosts(posts){
+      const container = document.getElementById('future-posts');
+      if(!posts.length){
+        container.className = 'empty';
+        container.textContent = 'No future posts in next 7 days.';
+        return;
+      }
+      container.className = '';
+      container.innerHTML = '';
+      posts.forEach((p, idx) => {
+        const div = document.createElement('div');
+        div.className = 'post';
+
+        const key = `redo_${p.id}`;
+        const saved = Number(localStorage.getItem(key) || 0);
+        const draftIndex = (saved >= 0 && saved < (p.drafts?.length || 1)) ? saved : 0;
+
+        const text = (p.drafts && p.drafts.length) ? p.drafts[draftIndex] : p.text;
+
+        div.innerHTML = `
+          <div class="meta">
+            <span class="platform">${p.platform}</span>
+            <span class="time">${formatDate(p.scheduled_at)}</span>
+          </div>
+          <div><b>Text</b>: <span data-role="text">${text}</span></div>
+          <div class="label"><b>Imagery</b>: ${p.imagery}</div>
+          <div class="label" style="margin-top:10px">
+            <button class="btn" data-role="redo">Redo</button>
+          </div>
+        `;
+
+        const btn = div.querySelector('[data-role="redo"]');
+        const textSpan = div.querySelector('[data-role="text"]');
+        btn.addEventListener('click', () => {
+          if(!p.drafts || !p.drafts.length) return;
+          const current = Number(localStorage.getItem(key) || 0);
+          const next = (current + 1) % p.drafts.length;
+          localStorage.setItem(key, String(next));
+          textSpan.textContent = p.drafts[next];
+        });
+
+        container.appendChild(div);
+      });
+    }
+
+    fetch('/admin/future-posts.json')
+      .then(r => r.json())
+      .then(list => list
+        .filter(p => {
+          const t = new Date(p.scheduled_at);
+          return t >= now && t <= in7;
+        })
+        .sort((a,b) => new Date(a.scheduled_at) - new Date(b.scheduled_at))
+      )
+      .then(renderPosts)
+      .catch(() => {
+        const c = document.getElementById('future-posts');
+        c.className = 'empty';
+        c.textContent = 'Could not load future post log.';
+      });
+  </script>
 </body>
 </html>
