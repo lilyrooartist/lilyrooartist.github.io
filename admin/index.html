@@ -8,12 +8,18 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32.png" />
   <style>
     body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:#0c0d12;color:#eef0f7}
-    .wrap{max-width:1240px;margin:0 auto;padding:24px}
-    .layout{display:grid;grid-template-columns:minmax(0,1fr) 390px;gap:18px;align-items:start}
-    .card{background:#141722;border:1px solid #2a2f44;border-radius:14px;padding:16px;margin:12px 0}
-    a{color:#9ecbff}
+    .layout{display:grid;grid-template-columns:220px 1fr;min-height:100vh}
+    .nav{border-right:1px solid #2a2f44;background:#0f1320;padding:16px;position:sticky;top:0;height:100vh}
+    .brand{font-weight:800;margin-bottom:14px}
+    .tab{display:block;width:100%;text-align:left;background:#151b2d;color:#d9def1;border:1px solid #2d3655;border-radius:10px;padding:10px 12px;margin:8px 0;cursor:pointer}
+    .tab.active{background:#29406f;color:#fff;border-color:#4f79c6}
+    .content{padding:22px;max-width:1300px}
+    .panel{display:none}
+    .panel.active{display:block}
+    .main-grid{display:grid;grid-template-columns:minmax(0,1fr) 390px;gap:16px;align-items:start}
+    .card{background:#141722;border:1px solid #2a2f44;border-radius:14px;padding:14px;margin:10px 0}
     .muted{color:#9ba3bf}
-    code{background:#1b1f2c;padding:2px 6px;border-radius:6px}
+    a{color:#9ecbff}
     .sticky{position:sticky;top:14px}
     .post{border:1px solid #303856;border-radius:12px;padding:12px;margin:10px 0;background:#101523}
     .meta{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:6px}
@@ -21,164 +27,156 @@
     .time{font-size:12px;color:#9ba3bf}
     .label{font-size:12px;color:#9ba3bf;margin-top:8px}
     .btn{background:#2f62ff;color:white;border:0;border-radius:8px;padding:7px 10px;font-size:12px;cursor:pointer}
-    .btn:hover{filter:brightness(1.08)}
-    .empty{color:#9ba3bf;font-style:italic}
     .preview{margin-top:8px}
     .preview img,.preview video{width:100%;max-height:170px;object-fit:cover;border-radius:10px;border:1px solid #2d3550;background:#0b101c}
-    .preview a{font-size:12px}
-    @media (max-width: 1020px){.layout{grid-template-columns:1fr}}
+    .song-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    .song img{width:100%;height:120px;object-fit:cover;border-radius:8px;border:1px solid #2d3550}
+    .pill{display:inline-block;font-size:12px;background:#24304f;color:#b8d8ff;padding:3px 8px;border-radius:999px}
+    @media(max-width:1080px){.main-grid{grid-template-columns:1fr}.layout{grid-template-columns:1fr}.nav{position:static;height:auto;border-right:0;border-bottom:1px solid #2a2f44}}
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="layout">
-      <main>
-        <h1>Lily Roo Admin</h1>
-        <p class="muted">Protected by Cloudflare Access. Authorized account only.</p>
+<div class="layout">
+  <aside class="nav">
+    <div class="brand">Lily Roo Admin</div>
+    <button class="tab active" data-tab="promo">Promo</button>
+    <button class="tab" data-tab="backstory">Backstory</button>
+    <button class="tab" data-tab="reports">Reports</button>
+    <p class="muted" style="margin-top:14px;font-size:12px">Protected by Cloudflare Access</p>
+  </aside>
 
-        <div class="card">
-          <h2>Backstory Canon</h2>
-          <ul>
-            <li><a href="/admin/content/00_CANON.md" target="_blank">00_CANON.md</a></li>
-            <li><a href="/admin/content/10_ANECDOTE_BANK.md" target="_blank">10_ANECDOTE_BANK.md</a></li>
-            <li><a href="/admin/content/20_QUIPS_BANK.csv" target="_blank">20_QUIPS_BANK.csv</a></li>
-          </ul>
+  <main class="content">
+    <section class="panel active" id="panel-promo">
+      <div class="main-grid">
+        <div>
+          <h1>Promo System</h1>
+          <p class="muted">Overall strategy, execution docs, and growth focus (YouTube → 1,000 subscribers).</p>
+
+          <div class="card">
+            <h2>System Overview</h2>
+            <ul>
+              <li>Backstory-driven content engine across X / Instagram / Facebook / TikTok / YouTube</li>
+              <li>Randomized “real artist” cadence with recurring conversion CTAs</li>
+              <li>Archive all published + upcoming posts for iterative improvement</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h2>Strategy Links</h2>
+            <ul>
+              <li><a href="/admin/content/30_PROMO_SYSTEM.md" target="_blank">30_PROMO_SYSTEM.md</a></li>
+              <li><a href="/admin/content/40_RANDOM_RHYTHM_PLAYBOOK.md" target="_blank">40_RANDOM_RHYTHM_PLAYBOOK.md</a></li>
+              <li><a href="/admin/content/Published_Log.csv" target="_blank">Published_Log.csv</a></li>
+              <li><a href="/admin/content/20_QUIPS_BANK.csv" target="_blank">20_QUIPS_BANK.csv</a></li>
+            </ul>
+          </div>
         </div>
 
-        <div class="card">
-          <h2>Promo System</h2>
-          <ul>
-            <li><a href="/admin/content/30_PROMO_SYSTEM.md" target="_blank">30_PROMO_SYSTEM.md</a></li>
-            <li><a href="/admin/content/40_RANDOM_RHYTHM_PLAYBOOK.md" target="_blank">40_RANDOM_RHYTHM_PLAYBOOK.md</a></li>
-            <li><a href="/admin/content/Published_Log.csv" target="_blank">Published_Log.csv</a></li>
-          </ul>
-        </div>
+        <aside class="sticky">
+          <div class="card">
+            <h2>Upcoming 7-Day Posts</h2>
+            <p class="muted" id="future-sync" style="font-size:12px">Last synced: —</p>
+            <div id="future-posts" class="muted">Loading…</div>
+          </div>
+        </aside>
+      </div>
+    </section>
 
+    <section class="panel" id="panel-backstory">
+      <h1>Backstory</h1>
+      <p class="muted">Organized canon, lyric mappings, caption packs, and visual packs for all songs in the archive.</p>
 
-        <div class="card">
-          <h2>Backstory Hub</h2>
-          <ul>
-            <li><a href="/admin/backstory/" target="_blank">Structured Backstory View</a></li>
-            <li><a href="/admin/content/11_LYRIC_BACKSTORY_INDEX.csv" target="_blank">Lyric → Backstory Index</a></li>
-            <li><a href="/admin/content/15_BRAINROT_CAPTION_PACKS.md" target="_blank">Brain Rot Caption Packs</a></li>
-          </ul>
-        </div>
+      <div class="card">
+        <h2>Core Backstory Files</h2>
+        <ul>
+          <li><a href="/admin/content/00_CANON.md" target="_blank">00_CANON.md</a></li>
+          <li><a href="/admin/content/10_ANECDOTE_BANK.md" target="_blank">10_ANECDOTE_BANK.md</a></li>
+          <li><a href="/admin/content/11_LYRIC_BACKSTORY_INDEX.csv" target="_blank">11_LYRIC_BACKSTORY_INDEX.csv</a></li>
+          <li><a href="/admin/content/12_SONG_BACKSTORY_CARDS.md" target="_blank">12_SONG_BACKSTORY_CARDS.md</a></li>
+          <li><a href="/admin/content/15_BRAINROT_CAPTION_PACKS.md" target="_blank">Brain Rot Caption Packs</a></li>
+        </ul>
+      </div>
 
-        <div class="card">
-          <h2>Reports</h2>
-          <ul>
-            <li><a href="/admin/reports/" target="_blank">Weekly Reports Index</a></li>
-            <li><a href="/admin/reports/weekly-social-report.md" target="_blank">Weekly Social Report</a></li>
-          </ul>
-        </div>
+      <div class="card">
+        <h2>Archive Song Packs</h2>
+        <div id="song-catalog" class="song-grid"></div>
+      </div>
+    </section>
 
-        <div class="card">
-          <h2>Notes</h2>
-          <p>Path: <code>lilyroo.com/admin</code></p>
-          <p>If this page is visible without login, Access policy is not applied correctly.</p>
-        </div>
-      </main>
+    <section class="panel" id="panel-reports">
+      <h1>Reports</h1>
+      <p class="muted">Weekly social metrics and activity snapshots.</p>
+      <div class="card">
+        <ul>
+          <li><a href="/admin/reports/" target="_blank">Weekly Reports Index</a></li>
+          <li><a href="/admin/reports/weekly-social-report.md" target="_blank">Weekly Social Report</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+</div>
 
-      <aside class="sticky">
-        <div class="card">
-          <h2>Upcoming 7-Day Posts</h2>
-          <p class="muted">Time-sorted future post log. Use <b>Redo</b> to regenerate copy draft variants.</p>
-          <p class="muted" id="future-sync" style="font-size:12px">Last synced: —</p>
-          <div id="future-posts" class="empty">Loading upcoming posts…</div>
-        </div>
-      </aside>
-    </div>
-  </div>
+<script>
+  // left tabs
+  document.querySelectorAll('.tab').forEach(btn=>btn.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const tab=btn.dataset.tab;
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+    document.getElementById('panel-'+tab).classList.add('active');
+  }));
 
-  <script>
-    const formatDate = (iso) => new Date(iso).toLocaleString('en-US', {
-      month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit'
+  const formatDate=(iso)=>new Date(iso).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});
+  const now=new Date();
+  const in7=new Date(now.getTime()+7*24*60*60*1000);
+
+  function renderPreview(el,p){
+    const src=(p.imagery_url||'').trim();
+    if(!src){el.innerHTML='';return;}
+    const lower=src.toLowerCase();
+    if(/\.(png|jpg|jpeg|gif|webp)(\?|$)/.test(lower)) el.innerHTML=`<img src="${src}" alt="preview" loading="lazy"/>`;
+    else if(/\.(mp4|webm|mov)(\?|$)/.test(lower)) el.innerHTML=`<video src="${src}" controls muted playsinline></video>`;
+    else el.innerHTML=`<a href="${src}" target="_blank" rel="noopener">Open imagery link ↗</a>`;
+  }
+
+  fetch('/admin/future-posts.json').then(r=>r.json()).then(payload=>{
+    const list=Array.isArray(payload)?payload:(payload.posts||[]);
+    if(payload.last_synced) document.getElementById('future-sync').textContent='Last synced: '+formatDate(payload.last_synced);
+    const posts=list.filter(p=>{const t=new Date(p.scheduled_at); return t>=now && t<=in7;}).sort((a,b)=>new Date(a.scheduled_at)-new Date(b.scheduled_at));
+    const container=document.getElementById('future-posts');
+    if(!posts.length){container.textContent='No upcoming posts.';return;}
+    container.innerHTML='';
+    posts.forEach(p=>{
+      const key=`redo_${p.id}`;
+      const idx=Number(localStorage.getItem(key)||0)%(p.drafts?.length||1);
+      const text=(p.drafts&&p.drafts.length)?p.drafts[idx]:p.text;
+      const d=document.createElement('div'); d.className='post';
+      d.innerHTML=`<div class="meta"><span class="platform">${p.platform}</span><span class="time">${formatDate(p.scheduled_at)}</span></div>
+      <div><b>Text</b>: <span data-role="text">${text}</span></div>
+      <div class="label"><b>Imagery</b>: ${p.imagery||''}</div>
+      <div class="preview" data-role="preview"></div>
+      <div class="label" style="margin-top:10px"><button class="btn" data-role="redo">Redo</button></div>`;
+      renderPreview(d.querySelector('[data-role="preview"]'),p);
+      d.querySelector('[data-role="redo"]').addEventListener('click',()=>{
+        if(!p.drafts||!p.drafts.length) return;
+        const n=(Number(localStorage.getItem(key)||0)+1)%p.drafts.length;
+        localStorage.setItem(key,String(n));
+        d.querySelector('[data-role="text"]').textContent=p.drafts[n];
+      });
+      container.appendChild(d);
     });
+  });
 
-    const now = new Date();
-    const in7 = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
-
-    function renderPosts(posts){
-      const container = document.getElementById('future-posts');
-      if(!posts.length){
-        container.className = 'empty';
-        container.textContent = 'No future posts in next 7 days.';
-        return;
-      }
-      container.className = '';
-      container.innerHTML = '';
-      posts.forEach((p) => {
-        const div = document.createElement('div');
-        div.className = 'post';
-
-        const key = `redo_${p.id}`;
-        const saved = Number(localStorage.getItem(key) || 0);
-        const draftIndex = (saved >= 0 && saved < (p.drafts?.length || 1)) ? saved : 0;
-
-        const text = (p.drafts && p.drafts.length) ? p.drafts[draftIndex] : p.text;
-
-        div.innerHTML = `
-          <div class="meta">
-            <span class="platform">${p.platform}</span>
-            <span class="time">${formatDate(p.scheduled_at)}</span>
-          </div>
-          <div><b>Text</b>: <span data-role="text">${text}</span></div>
-          <div class="label"><b>Imagery</b>: ${p.imagery}</div>
-          <div class="preview" data-role="preview"></div>
-          <div class="label" style="margin-top:10px">
-            <button class="btn" data-role="redo">Redo</button>
-          </div>
-        `;
-
-        const btn = div.querySelector('[data-role=\"redo\"]');
-        const textSpan = div.querySelector('[data-role=\"text\"]');
-        const preview = div.querySelector('[data-role=\"preview\"]');
-        renderPreview(preview, p);
-        btn.addEventListener('click', () => {
-          if(!p.drafts || !p.drafts.length) return;
-          const current = Number(localStorage.getItem(key) || 0);
-          const next = (current + 1) % p.drafts.length;
-          localStorage.setItem(key, String(next));
-          textSpan.textContent = p.drafts[next];
-        });
-
-        container.appendChild(div);
-      });
-    }
-
-    function renderPreview(el, p){
-      const src = (p.imagery_url || '').trim();
-      if(!src){ el.innerHTML=''; return; }
-      const lower = src.toLowerCase();
-      if(/\.(png|jpg|jpeg|gif|webp)(\?|$)/.test(lower)){
-        el.innerHTML = `<img src="${src}" alt="${p.platform} imagery preview" loading="lazy"/>`;
-      } else if(/\.(mp4|webm|mov)(\?|$)/.test(lower)){
-        el.innerHTML = `<video src="${src}" controls muted playsinline></video>`;
-      } else {
-        el.innerHTML = `<a href="${src}" target="_blank" rel="noopener">Open imagery link ↗</a>`;
-      }
-    }
-
-    fetch('/admin/future-posts.json')
-      .then(r => r.json())
-      .then(payload => {
-        const sync = document.getElementById('future-sync');
-        if (sync && payload.last_synced) sync.textContent = `Last synced: ${formatDate(payload.last_synced)}`;
-
-        const list = Array.isArray(payload) ? payload : (payload.posts || []);
-        return list
-          .filter(p => {
-            const t = new Date(p.scheduled_at);
-            return t >= now && t <= in7;
-          })
-          .sort((a,b) => new Date(a.scheduled_at) - new Date(b.scheduled_at));
-      })
-      .then(renderPosts)
-      .catch(() => {
-        const c = document.getElementById('future-posts');
-        c.className = 'empty';
-        c.textContent = 'Could not load future post log.';
-      });
-  </script>
+  fetch('/admin/backstory/catalog.json').then(r=>r.json()).then(data=>{
+    const root=document.getElementById('song-catalog');
+    (data.songs||[]).forEach(s=>{
+      const d=document.createElement('div'); d.className='card song';
+      d.innerHTML=`<div class="pill">${s.id}</div><h3>${s.title}</h3>
+      ${s.thumb?`<a href="${s.url}" target="_blank"><img src="${s.thumb}" alt="${s.title}"></a>`:''}
+      <p><a href="${s.backstory_file}" target="_blank">Backstory Pack</a> · <a href="${s.visual_file}" target="_blank">Visual Pack</a> · <a href="${s.url}" target="_blank">YouTube</a></p>`;
+      root.appendChild(d);
+    });
+  });
+</script>
 </body>
 </html>
