@@ -14,12 +14,10 @@
     .tab{display:block;width:100%;text-align:left;background:#151b2d;color:#d9def1;border:1px solid #2d3655;border-radius:10px;padding:10px 12px;margin:8px 0;cursor:pointer}
     .tab.active{background:#29406f;color:#fff;border-color:#4f79c6}
     .content{padding:22px;max-width:1300px}
-    .panel{display:none}
-    .panel.active{display:block}
+    .panel{display:none}.panel.active{display:block}
     .main-grid{display:grid;grid-template-columns:minmax(0,1fr) 390px;gap:16px;align-items:start}
     .card{background:#141722;border:1px solid #2a2f44;border-radius:14px;padding:14px;margin:10px 0}
-    .muted{color:#9ba3bf}
-    a{color:#9ecbff}
+    .muted{color:#9ba3bf} a{color:#9ecbff}
     .sticky{position:sticky;top:14px}
     .post{border:1px solid #303856;border-radius:12px;padding:12px;margin:10px 0;background:#101523}
     .meta{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:6px}
@@ -32,6 +30,10 @@
     .song-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
     .song img{width:100%;height:120px;object-fit:cover;border-radius:8px;border:1px solid #2d3550}
     .pill{display:inline-block;font-size:12px;background:#24304f;color:#b8d8ff;padding:3px 8px;border-radius:999px}
+    .preset-row{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+    .preset{background:#1e2a45;border:1px solid #3a4b75;color:#dbe7ff;border-radius:999px;padding:6px 10px;font-size:12px;cursor:pointer}
+    .filter-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .filter-row select{background:#0f1320;color:#eef0f7;border:1px solid #334062;border-radius:8px;padding:6px}
     @media(max-width:1080px){.main-grid{grid-template-columns:1fr}.layout{grid-template-columns:1fr}.nav{position:static;height:auto;border-right:0;border-bottom:1px solid #2a2f44}}
   </style>
 </head>
@@ -51,16 +53,6 @@
         <div>
           <h1>Promo System</h1>
           <p class="muted">Overall strategy, execution docs, and growth focus (YouTube → 1,000 subscribers).</p>
-
-          <div class="card">
-            <h2>System Overview</h2>
-            <ul>
-              <li>Backstory-driven content engine across X / Instagram / Facebook / TikTok / YouTube</li>
-              <li>Randomized “real artist” cadence with recurring conversion CTAs</li>
-              <li>Archive all published + upcoming posts for iterative improvement</li>
-            </ul>
-          </div>
-
           <div class="card">
             <h2>Strategy Links</h2>
             <ul>
@@ -71,7 +63,6 @@
             </ul>
           </div>
         </div>
-
         <aside class="sticky">
           <div class="card">
             <h2>Upcoming 7-Day Posts</h2>
@@ -84,7 +75,7 @@
 
     <section class="panel" id="panel-backstory">
       <h1>Backstory</h1>
-      <p class="muted">Organized canon, lyric mappings, caption packs, and visual packs for all songs in the archive.</p>
+      <p class="muted">Organized canon + full catalog packs (backstory + visuals).</p>
 
       <div class="card">
         <h2>Core Backstory Files</h2>
@@ -99,19 +90,25 @@
 
       <div class="card">
         <h2>Archive Song Packs</h2>
-        <div class="card">
-        <h2>Filters</h2>
-        <label>Era <select id="f-era"><option value="">All</option></select></label>
-        <label style="margin-left:10px">Type <select id="f-type"><option value="">All</option></select></label>
-        <label style="margin-left:10px">Status <select id="f-status"><option value="">All</option></select></label>
-      </div>
-      <div id="song-catalog" class="song-grid"></div>
+        <div class="preset-row">
+          <button class="preset" data-preset="needs-backstory">Needs backstory</button>
+          <button class="preset" data-preset="ready-week">Ready to post this week</button>
+          <button class="preset" data-preset="analog-cluster">Analog Myth cluster</button>
+          <button class="preset" data-preset="brain-rot">Brain Rot callbacks</button>
+          <button class="preset" data-preset="clear">Clear</button>
+          <button class="preset" id="copy-view">Copy view URL</button>
+        </div>
+        <div class="filter-row">
+          <label>Era <select id="f-era"><option value="">All</option></select></label>
+          <label>Type <select id="f-type"><option value="">All</option></select></label>
+          <label>Status <select id="f-status"><option value="">All</option></select></label>
+        </div>
+        <div id="song-catalog" class="song-grid"></div>
       </div>
     </section>
 
     <section class="panel" id="panel-reports">
       <h1>Reports</h1>
-      <p class="muted">Weekly social metrics and activity snapshots.</p>
       <div class="card">
         <ul>
           <li><a href="/admin/reports/" target="_blank">Weekly Reports Index</a></li>
@@ -123,18 +120,23 @@
 </div>
 
 <script>
-  // left tabs
+  const params = new URLSearchParams(window.location.search);
+  const setParam = (k,v)=>{ if(v) params.set(k,v); else params.delete(k); history.replaceState({},'',`${location.pathname}?${params.toString()}`); };
+
   document.querySelectorAll('.tab').forEach(btn=>btn.addEventListener('click',()=>{
     document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
     const tab=btn.dataset.tab;
     document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
     document.getElementById('panel-'+tab).classList.add('active');
+    setParam('tab',tab);
   }));
 
+  const initialTab=params.get('tab');
+  if(initialTab && document.querySelector(`.tab[data-tab="${initialTab}"]`)) document.querySelector(`.tab[data-tab="${initialTab}"]`).click();
+
   const formatDate=(iso)=>new Date(iso).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});
-  const now=new Date();
-  const in7=new Date(now.getTime()+7*24*60*60*1000);
+  const now=new Date(), in7=new Date(now.getTime()+7*24*60*60*1000);
 
   function renderPreview(el,p){
     const src=(p.imagery_url||'').trim();
@@ -153,8 +155,7 @@
     if(!posts.length){container.textContent='No upcoming posts.';return;}
     container.innerHTML='';
     posts.forEach(p=>{
-      const key=`redo_${p.id}`;
-      const idx=Number(localStorage.getItem(key)||0)%(p.drafts?.length||1);
+      const key=`redo_${p.id}`; const idx=Number(localStorage.getItem(key)||0)%(p.drafts?.length||1);
       const text=(p.drafts&&p.drafts.length)?p.drafts[idx]:p.text;
       const d=document.createElement('div'); d.className='post';
       d.innerHTML=`<div class="meta"><span class="platform">${p.platform}</span><span class="time">${formatDate(p.scheduled_at)}</span></div>
@@ -166,8 +167,7 @@
       d.querySelector('[data-role="redo"]').addEventListener('click',()=>{
         if(!p.drafts||!p.drafts.length) return;
         const n=(Number(localStorage.getItem(key)||0)+1)%p.drafts.length;
-        localStorage.setItem(key,String(n));
-        d.querySelector('[data-role="text"]').textContent=p.drafts[n];
+        localStorage.setItem(key,String(n)); d.querySelector('[data-role="text"]').textContent=p.drafts[n];
       });
       container.appendChild(d);
     });
@@ -175,17 +175,26 @@
 
   fetch('/admin/backstory/catalog.json').then(r=>r.json()).then(data=>{
     const all=data.songs||[];
-    const eraSel=document.getElementById('f-era');
-    const typeSel=document.getElementById('f-type');
-    const statusSel=document.getElementById('f-status');
+    const eraSel=document.getElementById('f-era'), typeSel=document.getElementById('f-type'), statusSel=document.getElementById('f-status');
     const uniq=(arr,key)=>[...new Set(arr.map(x=>x[key]).filter(Boolean))].sort();
     uniq(all,'era').forEach(v=>eraSel.insertAdjacentHTML('beforeend',`<option>${v}</option>`));
     uniq(all,'song_type').forEach(v=>typeSel.insertAdjacentHTML('beforeend',`<option>${v}</option>`));
     uniq(all,'status').forEach(v=>statusSel.insertAdjacentHTML('beforeend',`<option>${v}</option>`));
 
     const root=document.getElementById('song-catalog');
+    function applyPreset(name){
+      if(name==='needs-backstory'){ eraSel.value='Archive'; statusSel.value='Draft'; typeSel.value='Song'; }
+      else if(name==='ready-week'){ statusSel.value='In Progress'; eraSel.value='Current'; typeSel.value='Song'; }
+      else if(name==='analog-cluster'){ eraSel.value='Current'; typeSel.value='Song'; statusSel.value='In Progress'; }
+      else if(name==='brain-rot'){ eraSel.value='Archive'; typeSel.value='Song'; statusSel.value='Draft'; }
+      else { eraSel.value=''; typeSel.value=''; statusSel.value=''; }
+      setParam('preset', name==='clear' ? '' : name);
+      render();
+    }
+
     function render(){
       const era=eraSel.value, typ=typeSel.value, st=statusSel.value;
+      setParam('era',era); setParam('type',typ); setParam('status',st);
       const list=all.filter(s=>(!era||s.era===era)&&(!typ||s.song_type===typ)&&(!st||s.status===st));
       root.innerHTML='';
       list.forEach(s=>{
@@ -196,9 +205,22 @@
         root.appendChild(d);
       });
     }
-    [eraSel,typeSel,statusSel].forEach(el=>el.addEventListener('change',render));
-    render();
-  });
+
+    document.querySelectorAll('[data-preset]').forEach(b=>b.addEventListener('click',()=>applyPreset(b.dataset.preset)));
+    document.getElementById('copy-view').addEventListener('click',async()=>{
+      await navigator.clipboard.writeText(location.href);
+      document.getElementById('copy-view').textContent='Copied!';
+      setTimeout(()=>document.getElementById('copy-view').textContent='Copy view URL',1000);
+    });
+
+    // hydrate from URL state
+    if(params.get('era')) eraSel.value=params.get('era');
+    if(params.get('type')) typeSel.value=params.get('type');
+    if(params.get('status')) statusSel.value=params.get('status');
+    const preset=params.get('preset');
+    if(preset && !params.get('era') && !params.get('type') && !params.get('status')) applyPreset(preset); else render();
+
+    [eraSel,typeSel,statusSel].forEach(el=>el.addEventListener('change',()=>{ setParam('preset',''); render(); }));
   });
 </script>
 </body>
