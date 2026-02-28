@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Lily Roo Admin — Backstory</title>
+  <meta name="robots" content="noindex,nofollow"/>
+  <style>
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:#0c0d12;color:#eef0f7}
+    .wrap{max-width:1200px;margin:0 auto;padding:24px}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .card{background:#141722;border:1px solid #2a2f44;border-radius:14px;padding:14px}
+    .muted{color:#9ba3bf}.pill{display:inline-block;font-size:12px;background:#24304f;color:#b8d8ff;padding:3px 8px;border-radius:999px}
+    a{color:#9ecbff}
+    .vis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:8px}
+    .vis img{width:100%;height:130px;object-fit:cover;border:1px solid #2f3650;border-radius:10px}
+    @media(max-width:900px){.grid{grid-template-columns:1fr}.vis{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Backstory Hub</h1>
+  <p class="muted">Structured canon, lyric backstories, caption packs, and visual lore elements.</p>
+
+  <div class="card">
+    <h2>Backstory Source Files</h2>
+    <ul>
+      <li><a href="/admin/content/00_CANON.md" target="_blank">00_CANON.md</a></li>
+      <li><a href="/admin/content/10_ANECDOTE_BANK.md" target="_blank">10_ANECDOTE_BANK.md</a></li>
+      <li><a href="/admin/content/11_LYRIC_BACKSTORY_INDEX.csv" target="_blank">11_LYRIC_BACKSTORY_INDEX.csv</a></li>
+      <li><a href="/admin/content/12_SONG_BACKSTORY_CARDS.md" target="_blank">12_SONG_BACKSTORY_CARDS.md</a></li>
+      <li><a href="/admin/content/15_BRAINROT_CAPTION_PACKS.md" target="_blank">15_BRAINROT_CAPTION_PACKS.md</a></li>
+    </ul>
+  </div>
+
+  <h2>Song Backstory Cards</h2>
+  <div id="songs" class="grid"></div>
+
+  <p><a href="/admin">← Back to Admin</a></p>
+</div>
+<script>
+fetch('/admin/backstory/backstory.json').then(r=>r.json()).then(data=>{
+  const root=document.getElementById('songs');
+  data.songs.forEach(s=>{
+    const d=document.createElement('div'); d.className='card';
+    const visuals=(s.visuals||[]).map(v=>{
+      if((v.url||'').match(/\.(png|jpg|jpeg|webp|gif)$/i)) return `<a href="${v.url}" target="_blank"><img src="${v.url}" alt="${s.song} visual"></a>`;
+      return `<div><a href="${v.url}" target="_blank">${v.label}</a></div>`;
+    }).join('');
+    d.innerHTML=`<div class="pill">${s.era}</div><h3>${s.song}</h3><p><b>Core hook:</b> ${s.core_hook}</p><p class="muted"><b>Anecdotes:</b> ${(s.anecdotes||[]).join(', ')}</p><div class="vis">${visuals || '<span class="muted">No visual refs yet</span>'}</div>`;
+    root.appendChild(d);
+  });
+});
+</script>
+</body>
+</html>

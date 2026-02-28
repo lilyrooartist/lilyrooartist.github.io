@@ -25,6 +25,11 @@ Use these as seeds for captions, spoken intros, shorts hooks, pinned comments, a
 - **LR-ANEC-014**: More Difference came from trying to explain a tiny hurt that changed everything.
 - **LR-ANEC-015**: Repetition isn't failure; it's how some truths become audible.
 
+## B-series: Brain Rot / Older Song Callbacks
+- **LR-ANEC-019**: Brain Rot came from realizing my attention span had become a group chat with no moderator.
+- **LR-ANEC-020**: I wrote Brain Rot as a joke first, then noticed it was a diary entry.
+- **LR-ANEC-021**: The chorus is me trying to laugh while tabs are crashing in my head.
+
 ## P-series: Place / Persona
 - **LR-ANEC-016**: The room got smaller when the songs got bigger.
 - **LR-ANEC-017**: Folk punk for me is kindness with cracked knuckles.
