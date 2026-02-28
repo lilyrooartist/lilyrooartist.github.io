@@ -99,7 +99,13 @@
 
       <div class="card">
         <h2>Archive Song Packs</h2>
-        <div id="song-catalog" class="song-grid"></div>
+        <div class="card">
+        <h2>Filters</h2>
+        <label>Era <select id="f-era"><option value="">All</option></select></label>
+        <label style="margin-left:10px">Type <select id="f-type"><option value="">All</option></select></label>
+        <label style="margin-left:10px">Status <select id="f-status"><option value="">All</option></select></label>
+      </div>
+      <div id="song-catalog" class="song-grid"></div>
       </div>
     </section>
 
@@ -168,14 +174,31 @@
   });
 
   fetch('/admin/backstory/catalog.json').then(r=>r.json()).then(data=>{
+    const all=data.songs||[];
+    const eraSel=document.getElementById('f-era');
+    const typeSel=document.getElementById('f-type');
+    const statusSel=document.getElementById('f-status');
+    const uniq=(arr,key)=>[...new Set(arr.map(x=>x[key]).filter(Boolean))].sort();
+    uniq(all,'era').forEach(v=>eraSel.insertAdjacentHTML('beforeend',`<option>${v}</option>`));
+    uniq(all,'song_type').forEach(v=>typeSel.insertAdjacentHTML('beforeend',`<option>${v}</option>`));
+    uniq(all,'status').forEach(v=>statusSel.insertAdjacentHTML('beforeend',`<option>${v}</option>`));
+
     const root=document.getElementById('song-catalog');
-    (data.songs||[]).forEach(s=>{
-      const d=document.createElement('div'); d.className='card song';
-      d.innerHTML=`<div class="pill">${s.id}</div><h3>${s.title}</h3>
-      ${s.thumb?`<a href="${s.url}" target="_blank"><img src="${s.thumb}" alt="${s.title}"></a>`:''}
-      <p><a href="${s.backstory_file}" target="_blank">Backstory Pack</a> · <a href="${s.visual_file}" target="_blank">Visual Pack</a> · <a href="${s.url}" target="_blank">YouTube</a></p>`;
-      root.appendChild(d);
-    });
+    function render(){
+      const era=eraSel.value, typ=typeSel.value, st=statusSel.value;
+      const list=all.filter(s=>(!era||s.era===era)&&(!typ||s.song_type===typ)&&(!st||s.status===st));
+      root.innerHTML='';
+      list.forEach(s=>{
+        const d=document.createElement('div'); d.className='card song';
+        d.innerHTML=`<div class="pill">${s.id}</div> <span class="muted">${s.era} · ${s.song_type} · ${s.status}</span><h3>${s.title}</h3>
+        ${s.thumb?`<a href="${s.url}" target="_blank"><img src="${s.thumb}" alt="${s.title}"></a>`:''}
+        <p><a href="${s.backstory_file}" target="_blank">Backstory Pack</a> · <a href="${s.visual_file}" target="_blank">Visual Pack</a> · <a href="${s.url}" target="_blank">YouTube</a></p>`;
+        root.appendChild(d);
+      });
+    }
+    [eraSel,typeSel,statusSel].forEach(el=>el.addEventListener('change',render));
+    render();
+  });
   });
 </script>
 </body>
