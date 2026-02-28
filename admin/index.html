@@ -53,7 +53,23 @@
         <div>
           <h1>Promo System</h1>
           <p class="muted">Overall strategy, execution docs, and growth focus (YouTube → 1,000 subscribers).</p>
-          <div class="card">
+          
+          <div class="card" id="quickstart-card">
+            <h2>Runbook Quick Start</h2>
+            <div class="muted" id="last-report-ts">Last report: checking…</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px">
+              <div>
+                <h3 style="margin:4px 0">Today’s 3 actions</h3>
+                <ol id="qs-today" class="muted" style="padding-left:18px"></ol>
+              </div>
+              <div>
+                <h3 style="margin:4px 0">This week’s 2 priorities</h3>
+                <ol id="qs-week" class="muted" style="padding-left:18px"></ol>
+              </div>
+            </div>
+          </div>
+
+<div class="card">
             <h2>Strategy Links</h2>
             <ul>
               <li><a href="/admin/content/30_PROMO_SYSTEM.md" target="_blank">30_PROMO_SYSTEM.md</a></li>
@@ -148,6 +164,37 @@
     else if(/\.(mp4|webm|mov)(\?|$)/.test(lower)) el.innerHTML=`<video src="${src}" controls muted playsinline></video>`;
     else el.innerHTML=`<a href="${src}" target="_blank" rel="noopener">Open imagery link ↗</a>`;
   }
+
+
+  async function loadQuickStart(){
+    const todayEl=document.getElementById('qs-today');
+    const weekEl=document.getElementById('qs-week');
+    const tsEl=document.getElementById('last-report-ts');
+    if(!todayEl||!weekEl||!tsEl) return;
+
+    // Source today/week from one JSON
+    try{
+      const q=await fetch('/admin/content/runbook_quickstart.json').then(r=>r.json());
+      (q.today_actions||[]).forEach(x=>{ const li=document.createElement('li'); li.textContent=x; todayEl.appendChild(li); });
+      (q.week_priorities||[]).forEach(x=>{ const li=document.createElement('li'); li.textContent=x; weekEl.appendChild(li); });
+      if(!(q.today_actions||[]).length){ todayEl.innerHTML='<li>Not configured yet</li>'; }
+      if(!(q.week_priorities||[]).length){ weekEl.innerHTML='<li>Not configured yet</li>'; }
+    }catch(e){
+      todayEl.innerHTML='<li>Quick-start config unavailable</li>';
+      weekEl.innerHTML='<li>Quick-start config unavailable</li>';
+    }
+
+    // Auto-read report timestamp from report Last updated line; fallback if missing
+    try{
+      const md=await fetch('/admin/reports/weekly-social-report.md').then(r=>r.ok?r.text():'');
+      const m=md.match(/\*\*Last updated:\*\*\s*(.+)/i);
+      if(m && m[1]) tsEl.textContent='Last report: '+m[1].trim();
+      else tsEl.textContent='Last report: not yet generated';
+    }catch(e){
+      tsEl.textContent='Last report: not yet generated';
+    }
+  }
+  loadQuickStart();
 
   fetch('/admin/future-posts.json').then(r=>r.json()).then(payload=>{
     const list=Array.isArray(payload)?payload:(payload.posts||[]);
