@@ -3,7 +3,7 @@
 ## Account
 - Address: `LilyRoo@aol.com`
 - DOB used: `December 9, 1972`
-- Recovery method: **[to be filled]**
+- Recovery method: **phone ending in 8340**
 
 ## Primary Usage (Ops)
 - Platform account + business communications backup
@@ -26,7 +26,7 @@
 - [x] Account created
 - [x] Address documented
 - [x] DOB documented
-- [ ] Recovery method documented (**pending**)
+- [x] Recovery method documented (phone ending in 8340)
 - [ ] 2FA verified
 - [ ] Password manager entry confirmed
 
