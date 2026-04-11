@@ -3,7 +3,7 @@ from pathlib import Path
 from datetime import datetime, timedelta
 import json, csv
 
-ROOT = Path('/Users/lilyroo/Library/Mobile Documents/com~apple~CloudDocs/Lily Roo/lilyrooartist.github.io')
+ROOT = Path(__file__).resolve().parent.parent
 REPORT = ROOT / 'admin' / 'reports' / 'weekly-social-report.md'
 MANUAL = ROOT / 'data' / 'manual_social_stats.json'
 PUBLISHED = ROOT / 'admin' / 'content' / 'Published_Log.csv'
@@ -26,7 +26,7 @@ if PUBLISHED.exists():
 
 manual = json.loads(MANUAL.read_text(encoding='utf-8')) if MANUAL.exists() else {}
 
-today = datetime.now()
+today = datetime.now().astimezone()
 start = (today - timedelta(days=6)).date()
 end = today.date()
 
