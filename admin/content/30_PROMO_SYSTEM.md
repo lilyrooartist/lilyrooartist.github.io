@@ -41,6 +41,18 @@ Primary KPI: **reach 1,000 YouTube subscribers**.
 Every 2-3 posts, include one explicit subscribe ask:
 "If you're into this signal, subscribe on YouTube — we're building to 1,000."
 
+## New song introduction pattern
+For fresh song launches, use this three-post sequence by default:
+
+1. **Post 1 — Teaser**
+   - short mysterious clip
+2. **Post 2 — Full Video (Release Day)**
+   - upload full video to YouTube, X, and Facebook
+3. **Post 3 — Alternate Teaser**
+   - second short clip with a different emotional angle or visual moment
+
+Use this as the default release arc unless the user asks for a different rollout.
+
 ## Asset storage policy
 All new assets/drafts/logs live in:
 `/Users/lilyroo/Library/Mobile Documents/com~apple~CloudDocs/Lily Roo`
