@@ -26,8 +26,14 @@
       background:rgba(0,0,0,.18);color:var(--muted);font-size:12px
     }
 
-    .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:14px}
     @media (max-width:860px){.grid{grid-template-columns:1fr}}
+
+    .album{display:flex;flex-direction:column;gap:12px}
+    .album-head{display:flex;flex-direction:column;gap:4px;padding:4px 2px}
+    .album-title{margin:0;font-size:22px;letter-spacing:-.02em}
+    .album-sub{margin:0;color:var(--muted);font-size:13px}
+    .album-list{display:flex;flex-direction:column;gap:12px}
 
     a.item{display:flex;gap:14px;align-items:center;padding:14px;border-radius:16px;
       border:1px solid rgba(255,255,255,.10);background:rgba(17,19,26,.55);text-decoration:none;color:var(--text)
@@ -52,123 +58,115 @@
         <h1 style="margin:0">Archive</h1>
         <span class="sig mono">TRANSMISSIONS</span>
       </div>
-      <p>Every upload, in one place. Songs, fragments, interviews — the signal log.</p>
+      <p>Every upload, grouped by album so the signal log feels like a discography.</p>
 
-      <div class="grid" aria-label="Archive list">
-        <a class="item" href="https://youtu.be/M8RF-v1P4QY" target="_blank" rel="noreferrer">
-          <img class="thumb" src="https://i.ytimg.com/vi/M8RF-v1P4QY/hqdefault.jpg" alt="Guards Down thumbnail" />
-          <div class="meta">
-            <div class="title">Guards Down</div>
+      <div class="grid" aria-label="Archive list by album">
+        <section class="album" aria-labelledby="album-fifteen-seconds">
+          <div class="album-head">
+            <h2 class="album-title" id="album-fifteen-seconds">I Learned It All in Fifteen Seconds</h2>
+            <p class="album-sub">Foundational album transmissions</p>
           </div>
-        </a>
-        <a class="item" href="https://youtu.be/wM6JE2yaDcg" target="_blank" rel="noreferrer">
-          <img class="thumb" src="https://i.ytimg.com/vi/wM6JE2yaDcg/hqdefault.jpg" alt="When Lily Talks thumbnail" />
-          <div class="meta">
-            <div class="title">When Lily Talks</div>
+          <div class="album-list">
+            <a class="item" href="https://youtu.be/Hve5drBlN58" target="_blank" rel="noreferrer">
+              <img class="thumb" src="https://i.ytimg.com/vi/Hve5drBlN58/hqdefault.jpg" alt="I Learned it all in Fifteen Seconds thumbnail" />
+              <div class="meta"><div class="title">I Learned it all in Fifteen Seconds</div></div>
+            </a>
+            <a class="item" href="https://youtu.be/_nxa0D-gqns" target="_blank" rel="noreferrer">
+              <img class="thumb" src="https://i.ytimg.com/vi/_nxa0D-gqns/hqdefault.jpg" alt="Second Serve thumbnail" />
+              <div class="meta"><div class="title">Second Serve</div></div>
+            </a>
+            <a class="item" href="https://youtu.be/uOo30diDXOs" target="_blank" rel="noreferrer">
+              <img class="thumb" src="https://i.ytimg.com/vi/uOo30diDXOs/hqdefault.jpg" alt="More Difference (Reprise) thumbnail" />
+              <div class="meta"><div class="title">More Difference (Reprise)</div></div>
+            </a>
+            <a class="item" href="https://youtu.be/_A1vEHSYuyY" target="_blank" rel="noreferrer">
+              <img class="thumb" src="https://i.ytimg.com/vi/_A1vEHSYuyY/hqdefault.jpg" alt="Sliding Out of Bed thumbnail" />
+              <div class="meta"><div class="title">Sliding Out of Bed</div></div>
+            </a>
+            <a class="item" href="https://youtu.be/n6-vpeop_wc" target="_blank" rel="noreferrer">
+              <img class="thumb" src="https://i.ytimg.com/vi/n6-vpeop_wc/hqdefault.jpg" alt="Dinner Table Tilt thumbnail" />
+              <div class="meta"><div class="title">Dinner Table Tilt</div></div>
+            </a>
+            <a class="item" href="https://youtu.be/k3VdR2FE0EI" target="_blank" rel="noreferrer">
+              <img class="thumb" src="https://i.ytimg.com/vi/k3VdR2FE0EI/hqdefault.jpg" alt="My Second Room Has No Lightswitch thumbnail" />
+              <div class="meta"><div class="title">My Second Room Has No Lightswitch</div></div>
+            </a>
+            <a class="item" href="https://youtu.be/cVuK20aaJb8" target="_blank" rel="noreferrer">
+              <img class="thumb" src="https://i.ytimg.com/vi/cVuK20aaJb8/hqdefault.jpg" alt="The Importance of Bearing Witness thumbnail" />
+              <div class="meta"><div class="title">The Importance of Bearing Witness</div></div>
+            </a>
+            <a class="item" href="https://youtu.be/6TG-96QM_n0" target="_blank" rel="noreferrer">
+              <img class="thumb" src="https://i.ytimg.com/vi/6TG-96QM_n0/hqdefault.jpg" alt="Yeah, I Play the Violin thumbnail" />
+              <div class="meta"><div class="title">Yeah, I Play the Violin</div></div>
+            </a>
           </div>
-        </a>
-        <a class="item" href="https://youtu.be/km_PCPLP5U4" target="_blank" rel="noreferrer">
-          <img class="thumb" src="https://i.ytimg.com/vi/km_PCPLP5U4/hqdefault.jpg" alt="Jasper Field Twelve Dollars thumbnail" />
-          <div class="meta">
-            <div class="title">Jasper Field Twelve Dollars</div>
+        </section>
+
+        <section class="album" aria-labelledby="album-twelve-dollars">
+          <div class="album-head">
+            <h2 class="album-title" id="album-twelve-dollars">12 Dollars</h2>
+            <p class="album-sub">Middle album transmissions</p>
           </div>
-        </a>
-        <a class="item" href="https://youtu.be/5czT_TIS1rQ" target="_blank" rel="noreferrer">
-          <img class="thumb" src="https://i.ytimg.com/vi/5czT_TIS1rQ/hqdefault.jpg" alt="Just Don't Talk About It thumbnail" />
-          <div class="meta">
-            <div class="title">Just Don't Talk About It</div>
+          <div class="album-list">
+            <a class="item" href="https://youtu.be/8DsCkwBPdhI" target="_blank" rel="noreferrer">
+              <img class="thumb" src="https://i.ytimg.com/vi/8DsCkwBPdhI/hqdefault.jpg" alt="Twelve Dollars thumbnail" />
+              <div class="meta"><div class="title">Twelve Dollars</div></div>
+            </a>
+            <a class="item" href="https://youtu.be/km_PCPLP5U4" target="_blank" rel="noreferrer">
+              <img class="thumb" src="https://i.ytimg.com/vi/km_PCPLP5U4/hqdefault.jpg" alt="Jasper Field Twelve Dollars thumbnail" />
+              <div class="meta"><div class="title">Jasper Field Twelve Dollars</div></div>
+            </a>
+            <a class="item" href="https://youtu.be/wM6JE2yaDcg" target="_blank" rel="noreferrer">
+              <img class="thumb" src="https://i.ytimg.com/vi/wM6JE2yaDcg/hqdefault.jpg" alt="When Lily Talks thumbnail" />
+              <div class="meta"><div class="title">When Lily Talks</div></div>
+            </a>
+            <a class="item" href="https://youtu.be/6lXKGPD36dc" target="_blank" rel="noreferrer">
+              <img class="thumb" src="https://i.ytimg.com/vi/6lXKGPD36dc/hqdefault.jpg" alt="The Other One's Charging thumbnail" />
+              <div class="meta"><div class="title">The Other One's Charging</div></div>
+            </a>
+            <a class="item" href="https://youtu.be/iI5wRXLmTM8" target="_blank" rel="noreferrer">
+              <img class="thumb" src="https://i.ytimg.com/vi/iI5wRXLmTM8/hqdefault.jpg" alt="Brain Rot thumbnail" />
+              <div class="meta"><div class="title">Brain Rot</div></div>
+            </a>
+            <a class="item" href="https://youtu.be/tdcQ2mG1j6A" target="_blank" rel="noreferrer">
+              <img class="thumb" src="https://i.ytimg.com/vi/tdcQ2mG1j6A/hqdefault.jpg" alt="Gluten Free Bread thumbnail" />
+              <div class="meta"><div class="title">Gluten Free Bread</div></div>
+            </a>
+            <a class="item" href="https://youtu.be/5czT_TIS1rQ" target="_blank" rel="noreferrer">
+              <img class="thumb" src="https://i.ytimg.com/vi/5czT_TIS1rQ/hqdefault.jpg" alt="Just Don't Talk About It thumbnail" />
+              <div class="meta"><div class="title">Just Don't Talk About It</div></div>
+            </a>
+            <a class="item" href="https://youtu.be/CA7T9sFvRYk" target="_blank" rel="noreferrer">
+              <img class="thumb" src="https://i.ytimg.com/vi/CA7T9sFvRYk/hqdefault.jpg" alt="William and Dander thumbnail" />
+              <div class="meta"><div class="title">William and Dander</div></div>
+            </a>
+            <a class="item" href="https://youtu.be/mJVDj-RJtlg" target="_blank" rel="noreferrer">
+              <img class="thumb" src="https://i.ytimg.com/vi/mJVDj-RJtlg/hqdefault.jpg" alt="Every Pearl in Carmel thumbnail" />
+              <div class="meta"><div class="title">Every Pearl in Carmel</div></div>
+            </a>
+            <a class="item" href="https://youtu.be/f6Vf0YJLzyo" target="_blank" rel="noreferrer">
+              <img class="thumb" src="https://i.ytimg.com/vi/f6Vf0YJLzyo/hqdefault.jpg" alt="Lily Roo interview with Jasper Fields thumbnail" />
+              <div class="meta"><div class="title">Lily Roo interview with Jasper Fields</div></div>
+            </a>
           </div>
-        </a>
-        <a class="item" href="https://youtu.be/tdcQ2mG1j6A" target="_blank" rel="noreferrer">
-          <img class="thumb" src="https://i.ytimg.com/vi/tdcQ2mG1j6A/hqdefault.jpg" alt="Gluten Free Bread thumbnail" />
-          <div class="meta">
-            <div class="title">Gluten Free Bread</div>
+        </section>
+
+        <section class="album" aria-labelledby="album-analog-myth">
+          <div class="album-head">
+            <h2 class="album-title" id="album-analog-myth">Analog Myth</h2>
+            <p class="album-sub">Current album transmissions</p>
           </div>
-        </a>
-        <a class="item" href="https://youtu.be/CA7T9sFvRYk" target="_blank" rel="noreferrer">
-          <img class="thumb" src="https://i.ytimg.com/vi/CA7T9sFvRYk/hqdefault.jpg" alt="William and Dander thumbnail" />
-          <div class="meta">
-            <div class="title">William and Dander</div>
+          <div class="album-list">
+            <a class="item" href="https://youtu.be/M8RF-v1P4QY" target="_blank" rel="noreferrer">
+              <img class="thumb" src="https://i.ytimg.com/vi/M8RF-v1P4QY/hqdefault.jpg" alt="Guards Down thumbnail" />
+              <div class="meta"><div class="title">Guards Down</div></div>
+            </a>
+            <a class="item" href="https://youtu.be/wGFgXcTD1YE" target="_blank" rel="noreferrer">
+              <img class="thumb" src="https://i.ytimg.com/vi/wGFgXcTD1YE/hqdefault.jpg" alt="Analog Myth thumbnail" />
+              <div class="meta"><div class="title">Analog Myth</div></div>
+            </a>
           </div>
-        </a>
-        <a class="item" href="https://youtu.be/iI5wRXLmTM8" target="_blank" rel="noreferrer">
-          <img class="thumb" src="https://i.ytimg.com/vi/iI5wRXLmTM8/hqdefault.jpg" alt="Brain Rot thumbnail" />
-          <div class="meta">
-            <div class="title">Brain Rot</div>
-          </div>
-        </a>
-        <a class="item" href="https://youtu.be/8DsCkwBPdhI" target="_blank" rel="noreferrer">
-          <img class="thumb" src="https://i.ytimg.com/vi/8DsCkwBPdhI/hqdefault.jpg" alt="Twelve Dollars thumbnail" />
-          <div class="meta">
-            <div class="title">Twelve Dollars</div>
-          </div>
-        </a>
-        <a class="item" href="https://youtu.be/mJVDj-RJtlg" target="_blank" rel="noreferrer">
-          <img class="thumb" src="https://i.ytimg.com/vi/mJVDj-RJtlg/hqdefault.jpg" alt="Every Pearl in Carmel thumbnail" />
-          <div class="meta">
-            <div class="title">Every Pearl in Carmel</div>
-          </div>
-        </a>
-        <a class="item" href="https://youtu.be/6lXKGPD36dc" target="_blank" rel="noreferrer">
-          <img class="thumb" src="https://i.ytimg.com/vi/6lXKGPD36dc/hqdefault.jpg" alt="The Other One's Charging thumbnail" />
-          <div class="meta">
-            <div class="title">The Other One's Charging</div>
-          </div>
-        </a>
-        <a class="item" href="https://youtu.be/f6Vf0YJLzyo" target="_blank" rel="noreferrer">
-          <img class="thumb" src="https://i.ytimg.com/vi/f6Vf0YJLzyo/hqdefault.jpg" alt="Lily Roo interview with Jasper Fields thumbnail" />
-          <div class="meta">
-            <div class="title">Lily Roo interview with Jasper Fields</div>
-          </div>
-        </a>
-        <a class="item" href="https://youtu.be/uOo30diDXOs" target="_blank" rel="noreferrer">
-          <img class="thumb" src="https://i.ytimg.com/vi/uOo30diDXOs/hqdefault.jpg" alt="More Difference (Reprise) thumbnail" />
-          <div class="meta">
-            <div class="title">More Difference (Reprise)</div>
-          </div>
-        </a>
-        <a class="item" href="https://youtu.be/Hve5drBlN58" target="_blank" rel="noreferrer">
-          <img class="thumb" src="https://i.ytimg.com/vi/Hve5drBlN58/hqdefault.jpg" alt="I Learned it all in Fifteen Seconds thumbnail" />
-          <div class="meta">
-            <div class="title">I Learned it all in Fifteen Seconds</div>
-          </div>
-        </a>
-        <a class="item" href="https://youtu.be/_nxa0D-gqns" target="_blank" rel="noreferrer">
-          <img class="thumb" src="https://i.ytimg.com/vi/_nxa0D-gqns/hqdefault.jpg" alt="Second Serve thumbnail" />
-          <div class="meta">
-            <div class="title">Second Serve</div>
-          </div>
-        </a>
-        <a class="item" href="https://youtu.be/_A1vEHSYuyY" target="_blank" rel="noreferrer">
-          <img class="thumb" src="https://i.ytimg.com/vi/_A1vEHSYuyY/hqdefault.jpg" alt="Sliding Out of Bed thumbnail" />
-          <div class="meta">
-            <div class="title">Sliding Out of Bed</div>
-          </div>
-        </a>
-        <a class="item" href="https://youtu.be/n6-vpeop_wc" target="_blank" rel="noreferrer">
-          <img class="thumb" src="https://i.ytimg.com/vi/n6-vpeop_wc/hqdefault.jpg" alt="Dinner Table Tilt thumbnail" />
-          <div class="meta">
-            <div class="title">Dinner Table Tilt</div>
-          </div>
-        </a>
-        <a class="item" href="https://youtu.be/k3VdR2FE0EI" target="_blank" rel="noreferrer">
-          <img class="thumb" src="https://i.ytimg.com/vi/k3VdR2FE0EI/hqdefault.jpg" alt="My Second Room Has No Lightswitch thumbnail" />
-          <div class="meta">
-            <div class="title">My Second Room Has No Lightswitch</div>
-          </div>
-        </a>
-        <a class="item" href="https://youtu.be/cVuK20aaJb8" target="_blank" rel="noreferrer">
-          <img class="thumb" src="https://i.ytimg.com/vi/cVuK20aaJb8/hqdefault.jpg" alt="The Importance of Bearing Witness thumbnail" />
-          <div class="meta">
-            <div class="title">The Importance of Bearing Witness</div>
-          </div>
-        </a>
-        <a class="item" href="https://youtu.be/6TG-96QM_n0" target="_blank" rel="noreferrer">
-          <img class="thumb" src="https://i.ytimg.com/vi/6TG-96QM_n0/hqdefault.jpg" alt="Yeah, I Play the Violin thumbnail" />
-          <div class="meta">
-            <div class="title">Yeah, I Play the Violin</div>
-          </div>
-        </a>
+        </section>
       </div>
 
       <p style="margin-top:18px">Full channel: <a href="https://www.youtube.com/@lilyroo.artist" target="_blank" rel="noreferrer">@lilyroo.artist</a></p>
