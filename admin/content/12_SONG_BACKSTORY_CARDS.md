@@ -16,6 +16,12 @@
 - **Narrative angle:** "Clocks measure numbers, not grief"
 - **Linked anecdotes:** LR-ANEC-001..004
 
+## Guards Down
+- **Card ID:** LR-SONG-GUARDSDOWN-01
+- **Theme tags:** decision pressure, screen truth, courage, no-undo stakes
+- **Narrative angle:** "No soft version of brave"
+- **Linked anecdotes:** LR-ANEC-022..025
+
 ## I Learned It All in Fifteen Seconds
 - **Card ID:** LR-SONG-15SEC-01
 - **Theme tags:** empathy overload, digital intimacy, fragmented witnessing

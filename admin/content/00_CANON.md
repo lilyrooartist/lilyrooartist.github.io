@@ -40,6 +40,7 @@ What began as fragments turned into a body of transmissions: stories from people
 - **I Learned It All in Fifteen Seconds** era: attention economy + empathy fatigue + absurd intimacy.
 - **Second Serve / More Difference** era: repetition, reinvention, reframing.
 - **Analog Myth** era: time slippage, nonlinear self, anti-clock philosophy.
+- **Guards Down** within Analog Myth: screen-truth anxiety, decision pressure, and no-undo bravery.
 
 ## What this canon is for
 - Keep captions, videos, and lore pages coherent.

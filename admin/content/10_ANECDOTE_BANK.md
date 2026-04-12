@@ -8,6 +8,12 @@ Use these as seeds for captions, spoken intros, shorts hooks, pinned comments, a
 - **LR-ANEC-003**: The first lyric was written after staring at a microwave clock blinking 12:00 like it was an apology.
 - **LR-ANEC-004**: If time is linear, why do old hurts show up with better lighting at 2am?
 
+## G-series: Guards Down / Analog Myth
+- **LR-ANEC-022**: Guards Down came from the feeling that every choice turns permanent the second a screen reflects it back at you.
+- **LR-ANEC-023**: "We check the screen like it's truth" is the line for mistaking high resolution for honesty.
+- **LR-ANEC-024**: "No soft version of brave" is what the song says when courage shows up before certainty does.
+- **LR-ANEC-025**: Guards Down lives in the moment after the plan disappears and you still have to pick a side anyway.
+
 ## F-series: Fifteen Seconds / Feed Life
 - **LR-ANEC-005**: I wrote "I Learned It All in Fifteen Seconds" after realizing I knew a stranger's grief before I knew my neighbor's name.
 - **LR-ANEC-006**: The line about the charger by my bed is true. It's the modern candle.
