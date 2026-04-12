@@ -6,13 +6,17 @@
 - **Album context:** Analog Myth (work in progress)
 
 ## Core narrative seed
-Guards Down lives inside the Analog Myth world, but it shifts the lens from broken time to forced choice. The song is about what happens when the screen looks authoritative, the safety rails disappear, and you still have to decide who you are in public.
+Guards Down came from bowling with Da. As a kid, Lily Roo bowled with the bumper guards up, but this time she tried it with the guards down. At the same time, she was still caught between hands: naturally left-handed, but used to doing some things right-handed, and bowling was one of the ones she had not figured out yet.
+
+Every frame became a choice. Left felt natural. Right felt possible. Neither felt settled. With the bumpers up, it barely mattered because the ball would always find its way back down the lane. With the guards down, every throw was exposed. No correction. No soft edges. Just whatever happened.
+
+That is where the song lives. Not in being good, but in the moment when the protection falls away and you realize you do not even fully know how you want to play yet. Left or right. Hit or miss. Dropping the guards did not make her better. It just made it real.
 
 ## Anecdote hooks (canonical starters)
-1. Every choice feels heavier once a screen turns it into evidence.
-2. "We check the screen like it's truth" is about mistaking clarity for honesty.
-3. "No soft version of brave" is the emotional center of the song.
-4. The song stays with the moment after certainty fails and action still matters.
+1. Guards Down started with a bowling game with Da, the first time the bumper guards were not there to save the throw.
+2. Lily Roo kept switching hands, with left feeling natural and right feeling possible, but neither fully chosen.
+3. The emotional center is the exposed throw: no correction, no soft edges, just whatever happens.
+4. Dropping the guards did not make the game easier or prettier. It made it real.
 
 ## Lyric backstory anchors
 - `LR-LYRIC-005` — "We check the screen like it's truth."

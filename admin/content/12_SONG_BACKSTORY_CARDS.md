@@ -18,8 +18,8 @@
 
 ## Guards Down
 - **Card ID:** LR-SONG-GUARDSDOWN-01
-- **Theme tags:** decision pressure, screen truth, courage, no-undo stakes
-- **Narrative angle:** "No soft version of brave"
+- **Theme tags:** exposed choice, handedness, courage, no-soft-edges stakes
+- **Narrative angle:** "Dropping the guards didn't make it better. It made it real."
 - **Linked anecdotes:** LR-ANEC-022..025
 
 ## I Learned It All in Fifteen Seconds
