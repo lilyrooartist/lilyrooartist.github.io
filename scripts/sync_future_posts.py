@@ -32,6 +32,7 @@ def load_posts(path: Path):
                 'drafts': drafts,
                 'reply_text': (r.get('reply_text') or '').strip(),
                 'x_media_key': (r.get('x_media_key') or '').strip(),
+                'media_key': (r.get('media_key') or '').strip(),
             })
     return items
 

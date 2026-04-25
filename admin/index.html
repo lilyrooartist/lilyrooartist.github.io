@@ -204,14 +204,19 @@
   }
   loadQuickStart();
 
-  async function executeLocalXPost(postId, text, replyText, mediaKey){
-    const res = await fetch('http://127.0.0.1:8765/execute', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({ postId, text, replyText, mediaKey })
-    });
-    const data = await res.json().catch(()=>({ok:false,error:'Invalid JSON from local X executor'}));
-    if(!res.ok || !data.ok) throw new Error(data.error || `X executor failed (${res.status})`);
+  async function executeLocalPost(postId, text, replyText, mediaKey){
+    let res;
+    try{
+      res = await fetch('http://127.0.0.1:8765/execute', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ postId, text, replyText, mediaKey })
+      });
+    }catch(err){
+      throw new Error('Local social executor is not reachable. Start it with: python3 scripts/social_execute_bridge.py');
+    }
+    const data = await res.json().catch(()=>({ok:false,error:'Invalid JSON from local social executor'}));
+    if(!res.ok || !data.ok) throw new Error(data.error || `Social executor failed (${res.status})`);
     return data;
   }
 
@@ -229,9 +234,9 @@
       const statusKey=`status_${p.id}`;
       const statusVal=localStorage.getItem(statusKey)||'queued';
       const platform=(p.platform||'').toLowerCase();
-      const directExecute=platform.includes('x');
-      const execLabel=directExecute ? 'Execute now' : 'Open composer';
-      const execHint=directExecute ? 'Direct post is wired for X.' : 'Direct execute is not wired for this platform yet.';
+      const mediaKey=(p.media_key||p.x_media_key||'').trim();
+      const execLabel='Execute now';
+      const execHint=mediaKey ? `Uses local executor bridge · media key: ${mediaKey}` : 'Uses local executor bridge';
       d.innerHTML=`<div class="meta"><span class="platform">${p.platform}</span><span class="time">${formatDate(p.scheduled_at)}</span></div>
       <div class="label"><b>Status</b>: <span data-role="status">${statusVal}</span></div>
       <div><b>Text</b>: <span data-role="text">${text}</span></div>
@@ -248,33 +253,19 @@
         localStorage.setItem(key,String(n)); d.querySelector('[data-role="text"]').textContent=p.drafts[n];
       });
       d.querySelector('[data-role="exec"]').addEventListener('click',async()=>{
-        const txt=encodeURIComponent(d.querySelector('[data-role="text"]').textContent);
-        let url='';
-        if(platform.includes('x')){
-          try{
-            d.querySelector('[data-role="status"]').textContent='posting';
-            const result = await executeLocalXPost(p.id, d.querySelector('[data-role="text"]').textContent, p.reply_text||'', p.x_media_key||'');
-            localStorage.setItem(statusKey,'posted');
-            if(result.tweet_url) localStorage.setItem(`posted_url_${p.id}`,result.tweet_url);
-            d.querySelector('[data-role="status"]').textContent='posted';
-            alert(`Posted to X: ${result.tweet_url || 'success'}`);
-            return;
-          }catch(err){
-            d.querySelector('[data-role="status"]').textContent=statusVal;
-            alert(`Local X executor failed: ${err.message}`);
-            return;
-          }
-        }
-        else if(platform.includes('facebook')) url=`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://lilyroo.com')}&quote=${txt}`;
-        else if(platform.includes('instagram')) url='https://www.instagram.com/';
-        else if(platform.includes('tiktok')) url='https://www.tiktok.com/upload';
-        else if(platform.includes('youtube')) url='https://studio.youtube.com/';
-        if(url) window.open(url,'_blank');
-        const posted=prompt('Paste published URL (or leave blank to keep queued):');
-        if(posted){
+        try{
+          d.querySelector('[data-role="status"]').textContent='posting';
+          const result = await executeLocalPost(p.id, d.querySelector('[data-role="text"]').textContent, p.reply_text||'', mediaKey);
           localStorage.setItem(statusKey,'posted');
-          localStorage.setItem(`posted_url_${p.id}`,posted);
+          const postedUrl=result.tweet_url||result.video_url||result.post_url||result.media_id||result.publish_id||'';
+          if(postedUrl) localStorage.setItem(`posted_url_${p.id}`,postedUrl);
           d.querySelector('[data-role="status"]').textContent='posted';
+          alert(`Posted: ${postedUrl || result.platform || 'success'}`);
+          return;
+        }catch(err){
+          d.querySelector('[data-role="status"]').textContent=statusVal;
+          alert(`Local social executor failed: ${err.message}`);
+          return;
         }
       });
       container.appendChild(d);
