@@ -204,6 +204,17 @@
   }
   loadQuickStart();
 
+  async function executeLocalXPost(postId, text, replyText, mediaKey){
+    const res = await fetch('http://127.0.0.1:8765/execute', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ postId, text, replyText, mediaKey })
+    });
+    const data = await res.json().catch(()=>({ok:false,error:'Invalid JSON from local X executor'}));
+    if(!res.ok || !data.ok) throw new Error(data.error || `X executor failed (${res.status})`);
+    return data;
+  }
+
   fetch('/admin/future-posts.json').then(r=>r.json()).then(payload=>{
     const list=Array.isArray(payload)?payload:(payload.posts||[]);
     if(payload.last_synced) document.getElementById('future-sync').textContent='Last synced: '+formatDate(payload.last_synced);
@@ -217,13 +228,18 @@
       const d=document.createElement('div'); d.className='post';
       const statusKey=`status_${p.id}`;
       const statusVal=localStorage.getItem(statusKey)||'queued';
+      const platform=(p.platform||'').toLowerCase();
+      const directExecute=platform.includes('x');
+      const execLabel=directExecute ? 'Execute now' : 'Open composer';
+      const execHint=directExecute ? 'Direct post is wired for X.' : 'Direct execute is not wired for this platform yet.';
       d.innerHTML=`<div class="meta"><span class="platform">${p.platform}</span><span class="time">${formatDate(p.scheduled_at)}</span></div>
       <div class="label"><b>Status</b>: <span data-role="status">${statusVal}</span></div>
       <div><b>Text</b>: <span data-role="text">${text}</span></div>
       <div class="label"><b>Imagery</b>: ${p.imagery||''}</div>
       <div class="preview" data-role="preview-image"></div>
       <div class="preview" data-role="preview-clip"></div>
-      <div class="label" style="margin-top:10px"><button class="btn" data-role="redo">Redo</button> <button class="btn" data-role="exec">Execute now</button></div>`;
+      <div class="label" style="margin-top:10px"><button class="btn" data-role="redo">Redo</button> <button class="btn" data-role="exec">${execLabel}</button></div>
+      <div class="label muted" data-role="exec-hint">${execHint}</div>`;
       renderImagePreview(d.querySelector('[data-role="preview-image"]'),p);
       renderClipPreview(d.querySelector('[data-role="preview-clip"]'),p);
       d.querySelector('[data-role="redo"]').addEventListener('click',()=>{
@@ -231,11 +247,24 @@
         const n=(Number(localStorage.getItem(key)||0)+1)%p.drafts.length;
         localStorage.setItem(key,String(n)); d.querySelector('[data-role="text"]').textContent=p.drafts[n];
       });
-      d.querySelector('[data-role="exec"]').addEventListener('click',()=>{
+      d.querySelector('[data-role="exec"]').addEventListener('click',async()=>{
         const txt=encodeURIComponent(d.querySelector('[data-role="text"]').textContent);
         let url='';
-        const platform=(p.platform||'').toLowerCase();
-        if(platform.includes('x')) url=`https://x.com/intent/post?text=${txt}`;
+        if(platform.includes('x')){
+          try{
+            d.querySelector('[data-role="status"]').textContent='posting';
+            const result = await executeLocalXPost(p.id, d.querySelector('[data-role="text"]').textContent, p.reply_text||'', p.x_media_key||'');
+            localStorage.setItem(statusKey,'posted');
+            if(result.tweet_url) localStorage.setItem(`posted_url_${p.id}`,result.tweet_url);
+            d.querySelector('[data-role="status"]').textContent='posted';
+            alert(`Posted to X: ${result.tweet_url || 'success'}`);
+            return;
+          }catch(err){
+            d.querySelector('[data-role="status"]').textContent=statusVal;
+            alert(`Local X executor failed: ${err.message}`);
+            return;
+          }
+        }
         else if(platform.includes('facebook')) url=`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://lilyroo.com')}&quote=${txt}`;
         else if(platform.includes('instagram')) url='https://www.instagram.com/';
         else if(platform.includes('tiktok')) url='https://www.tiktok.com/upload';
