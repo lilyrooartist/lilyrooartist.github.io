@@ -4,31 +4,42 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 BASE = Path('/Users/lilyroo/Library/Mobile Documents/com~apple~CloudDocs/Lily Roo')
-SOURCE = BASE / 'Backstory' / 'Scheduled_Posts.csv'
-FALLBACK_SOURCE = BASE / 'lilyrooartist.github.io' / 'data' / 'scheduled_posts.csv'
+REPO_ROOT = Path(__file__).resolve().parents[1]
+SOURCE = REPO_ROOT / 'data' / 'scheduled_posts.csv'
+FALLBACK_SOURCE = BASE / 'Backstory' / 'Scheduled_Posts.csv'
 if not SOURCE.exists():
     SOURCE = FALLBACK_SOURCE
-OUT = BASE / 'lilyrooartist.github.io' / 'admin' / 'future-posts.json'
+OUT = REPO_ROOT / 'admin' / 'future-posts.json'
 
-posts = []
-with SOURCE.open(newline='', encoding='utf-8') as f:
-    reader = csv.DictReader(f)
-    for r in reader:
-        drafts_raw = (r.get('drafts') or '').strip()
-        drafts = [d.strip() for d in drafts_raw.split('||') if d.strip()] if drafts_raw else []
-        text = (r.get('text') or '').strip()
-        if not drafts and text:
-            drafts = [text]
-        posts.append({
-            'id': (r.get('id') or '').strip(),
-            'scheduled_at': (r.get('scheduled_at') or '').strip(),
-            'platform': (r.get('platform') or '').strip(),
-            'imagery': (r.get('imagery') or '').strip(),
-            'imagery_url': (r.get('imagery_url') or '').strip(),
-            'clip_url': (r.get('clip_url') or '').strip(),
-            'text': text,
-            'drafts': drafts,
-        })
+def load_posts(path: Path):
+    items = []
+    with path.open(newline='', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        for r in reader:
+            drafts_raw = (r.get('drafts') or '').strip()
+            drafts = [d.strip() for d in drafts_raw.split('||') if d.strip()] if drafts_raw else []
+            text = (r.get('text') or '').strip()
+            if not drafts and text:
+                drafts = [text]
+            items.append({
+                'id': (r.get('id') or '').strip(),
+                'scheduled_at': (r.get('scheduled_at') or '').strip(),
+                'platform': (r.get('platform') or '').strip(),
+                'imagery': (r.get('imagery') or '').strip(),
+                'imagery_url': (r.get('imagery_url') or '').strip(),
+                'clip_url': (r.get('clip_url') or '').strip(),
+                'text': text,
+                'drafts': drafts,
+                'reply_text': (r.get('reply_text') or '').strip(),
+                'x_media_key': (r.get('x_media_key') or '').strip(),
+            })
+    return items
+
+try:
+    posts = load_posts(SOURCE)
+except OSError:
+    SOURCE = FALLBACK_SOURCE
+    posts = load_posts(SOURCE)
 
 posts.sort(key=lambda p: p.get('scheduled_at', ''))
 payload = {
