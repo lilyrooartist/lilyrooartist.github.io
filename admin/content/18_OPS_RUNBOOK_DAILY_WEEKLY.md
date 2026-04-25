@@ -140,6 +140,21 @@ Actions:
 
 ## Quick Commands
 
+Check website posting executor health:
+```bash
+curl https://www.lilyroo.com/api/social/health
+```
+
+Local development fallback only:
+```bash
+python3 scripts/social_execute_bridge.py
+```
+
+Local fallback health check:
+```bash
+curl http://127.0.0.1:8765/health
+```
+
 Regenerate weekly report:
 ```bash
 python3 scripts/update_weekly_report.py
@@ -149,6 +164,81 @@ python3 scripts/update_weekly_report.py
 ```bash
 python3 scripts/sync_future_posts.py
 ```
+
+## Execute Now Setup
+
+The live `/admin` Execute now button calls the website API route:
+
+`https://www.lilyroo.com/api/social/execute`
+
+That route is served by the Cloudflare Worker in `workers/social-executor`. It exists because GitHub Pages is static and cannot safely hold social API credentials in browser JavaScript.
+
+Deploy/update the Worker:
+
+```bash
+npx wrangler deploy --config workers/social-executor/wrangler.jsonc
+```
+
+Set Worker secrets:
+
+```bash
+npx wrangler secret put META_LONG_LIVED_TOKEN --config workers/social-executor/wrangler.jsonc
+npx wrangler secret put FB_PAGE_ID --config workers/social-executor/wrangler.jsonc
+npx wrangler secret put IG_BUSINESS_ACCOUNT_ID --config workers/social-executor/wrangler.jsonc
+npx wrangler secret put TIKTOK_ACCESS_TOKEN --config workers/social-executor/wrangler.jsonc
+npx wrangler secret put GOOGLE_CLIENT_ID --config workers/social-executor/wrangler.jsonc
+npx wrangler secret put GOOGLE_CLIENT_SECRET --config workers/social-executor/wrangler.jsonc
+npx wrangler secret put YOUTUBE_REFRESH_TOKEN --config workers/social-executor/wrangler.jsonc
+npx wrangler secret put X_USER_ACCESS_TOKEN --config workers/social-executor/wrangler.jsonc
+npx wrangler secret put SOCIAL_MEDIA_MAP_JSON --config workers/social-executor/wrangler.jsonc
+```
+
+For X image upload fallback, also set OAuth 1.0a credentials:
+
+```bash
+npx wrangler secret put X_API_KEY --config workers/social-executor/wrangler.jsonc
+npx wrangler secret put X_API_SECRET --config workers/social-executor/wrangler.jsonc
+npx wrangler secret put X_ACCESS_TOKEN --config workers/social-executor/wrangler.jsonc
+npx wrangler secret put X_ACCESS_TOKEN_SECRET --config workers/social-executor/wrangler.jsonc
+```
+
+Optional X pre-uploaded media mapping:
+
+```bash
+npx wrangler secret put X_MEDIA_MAP_JSON --config workers/social-executor/wrangler.jsonc
+```
+
+Example value:
+
+```json
+{"slow-walk-cover":"1234567890123456789"}
+```
+
+Example `SOCIAL_MEDIA_MAP_JSON` value for website-hosted media:
+
+```json
+{"slow-walk-video":"https://www.lilyroo.com/admin/media/slow-walk-22s.mp4","slow-walk-cover":"https://i.ytimg.com/vi/R7evPASi8vM/maxresdefault.jpg"}
+```
+
+TikTok and YouTube need a public direct video URL, either in the queue `clip_url` column or in `SOCIAL_MEDIA_MAP_JSON`.
+
+Security rule: protect both `/admin/*` and `/api/social/*` with Cloudflare Access. `EXECUTOR_BEARER_TOKEN` is an optional second layer, not a replacement for Access. Only set it if the admin page also defines `window.LILYROO_EXECUTOR_TOKEN` at runtime.
+
+Local-only Python bridge files are still useful for testing from a laptop. They are not used by the live website button.
+
+Required local files are gitignored and live under the workspace-level `secrets/` directory:
+
+- `secrets/social_api.env`
+  - X: `X_USER_ACCESS_TOKEN` for OAuth 2 user context, or `X_API_KEY`, `X_API_SECRET`, `X_ACCESS_TOKEN`, `X_ACCESS_TOKEN_SECRET` for OAuth 1.0a
+  - Meta: `META_LONG_LIVED_TOKEN`, `FB_PAGE_ID`, `IG_BUSINESS_ACCOUNT_ID`
+  - TikTok: `TIKTOK_ACCESS_TOKEN`, optional `TIKTOK_IS_AIGC=true|false`
+- `secrets/youtube-api.env`
+  - `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `YOUTUBE_REFRESH_TOKEN`
+- `secrets/social-media-map.json`
+  - maps queue `media_key` values like `slow-walk-video` to local video files for TikTok/YouTube
+  - maps image keys like `slow-walk-cover` to local image files when a platform needs uploadable local media
+- `secrets/x-media-map.json`
+  - optional: maps X `x_media_key` values to pre-uploaded numeric media IDs, or local image files for simple image upload
 
 ---
 

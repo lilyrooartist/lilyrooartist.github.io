@@ -9,10 +9,9 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
-from social_exec_common import YOUTUBE_ENV, append_published_log, get_row, load_env, resolve_media_path
+from social_exec_common import YOUTUBE_ENV, append_published_log, get_row, load_env, resolve_media_path, song_from_row
 
 TOKEN_URL = 'https://oauth2.googleapis.com/token'
-CHANNELS_URL = 'https://www.googleapis.com/youtube/v3/channels?part=snippet&mine=true'
 UPLOAD_INIT_URL = 'https://www.googleapis.com/upload/youtube/v3/videos?uploadType=resumable&part=snippet,status'
 
 
@@ -38,12 +37,6 @@ def refresh_access_token(env: dict[str, str]) -> str:
     if not token:
         raise RuntimeError(f'Unable to refresh YouTube access token: {data}')
     return token
-
-
-def authed_json(url: str, token: str) -> dict:
-    req = urllib.request.Request(url, headers={'Authorization': f'Bearer {token}'})
-    with urllib.request.urlopen(req) as resp:
-        return json.loads(resp.read().decode('utf-8'))
 
 
 def upload_video(token: str, media_path: str, title: str, description: str, privacy_status: str) -> dict:
@@ -108,33 +101,33 @@ def main() -> int:
         raise RuntimeError(f'Queue row is not a YouTube post: {row.get("platform") or ""}')
     media_key = (args.media_key or row.get('media_key') or '').strip()
     media_path = resolve_media_path(media_key, row.get('clip_url', ''))
-    if not media_path:
-        raise RuntimeError('YouTube post needs media_key mapped in secrets/social-media-map.json or a local clip_url path')
     text = (args.text or row.get('text') or '').strip()
     title = (args.title or text or row.get('id') or 'Lily Roo upload').strip()
     description = (args.description or row.get('reply_text') or text).strip()
-    env = load_env(YOUTUBE_ENV)
-    token = refresh_access_token(env)
-    channel = authed_json(CHANNELS_URL, token)
-    channel_title = ((channel.get('items') or [{}])[0].get('snippet') or {}).get('title', '')
     if args.dry_run:
         print(json.dumps({
             'ok': True,
             'platform': 'YouTube',
             'dry_run': True,
-            'channel_title': channel_title,
-            'media_path': str(media_path),
+            'media_key': media_key,
+            'media_ready': bool(media_path),
+            'media_path': str(media_path) if media_path else '',
             'title': title[:100],
             'description': description[:200],
             'privacy_status': args.privacy_status,
         }, ensure_ascii=False))
         return 0
+
+    if not media_path:
+        raise RuntimeError('YouTube post needs media_key mapped in secrets/social-media-map.json or a local clip_url path')
+    env = load_env(YOUTUBE_ENV)
+    token = refresh_access_token(env)
     data = upload_video(token, str(media_path), title, description, args.privacy_status)
     video_id = (data.get('id') or '').strip()
     if not video_id:
         raise RuntimeError(f'YouTube upload did not return a video id: {data}')
     video_url = f'https://youtu.be/{video_id}'
-    append_published_log('YouTube', video_url, 'Slow Walk', text, 'posted via YouTube Data API')
+    append_published_log('YouTube', video_url, song_from_row(row), text, 'posted via YouTube Data API')
     print(json.dumps({'ok': True, 'platform': 'YouTube', 'video_id': video_id, 'video_url': video_url}, ensure_ascii=False))
     return 0
 

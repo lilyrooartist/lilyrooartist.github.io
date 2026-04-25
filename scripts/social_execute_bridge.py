@@ -9,7 +9,7 @@ from pathlib import Path
 from social_exec_common import REPO_ROOT, get_row
 
 WORKSPACE = REPO_ROOT.parent
-X_SCRIPT = WORKSPACE / 'skills' / 'x-api-publisher' / 'scripts' / 'post_x_from_queue.py'
+X_SCRIPT = REPO_ROOT / 'scripts' / 'post_x_from_queue.py'
 YT_SCRIPT = REPO_ROOT / 'scripts' / 'post_youtube_from_queue.py'
 META_SCRIPT = REPO_ROOT / 'scripts' / 'post_meta_from_queue.py'
 TIKTOK_SCRIPT = REPO_ROOT / 'scripts' / 'post_tiktok_from_queue.py'
@@ -43,6 +43,16 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_OPTIONS(self):
         self._send(200, {'ok': True})
+
+    def do_GET(self):
+        if self.path != '/health':
+            self._send(404, {'ok': False, 'error': 'Not found'})
+            return
+        self._send(200, {
+            'ok': True,
+            'service': 'lilyroo-social-executor',
+            'supported_platforms': ['X', 'Instagram', 'Facebook', 'TikTok', 'YouTube Shorts'],
+        })
 
     def do_POST(self):
         if self.path != '/execute':

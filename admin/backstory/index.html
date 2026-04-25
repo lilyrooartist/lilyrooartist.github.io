@@ -39,15 +39,33 @@
   <p><a href="/admin">← Back to Admin</a></p>
 </div>
 <script>
+const escapeHtml=(value)=>String(value ?? '').replace(/[&<>"']/g,(ch)=>({
+  '&':'&amp;',
+  '<':'&lt;',
+  '>':'&gt;',
+  '"':'&quot;',
+  "'":'&#39;'
+}[ch]));
+const safeUrl=(value)=>{
+  const raw=String(value ?? '').trim();
+  if(!raw) return '';
+  try{
+    const url=new URL(raw, window.location.origin);
+    if(url.protocol==='http:' || url.protocol==='https:') return url.href;
+  }catch(e){}
+  return '';
+};
 fetch('/admin/backstory/backstory.json').then(r=>r.json()).then(data=>{
   const root=document.getElementById('songs');
   data.songs.forEach(s=>{
     const d=document.createElement('div'); d.className='card';
     const visuals=(s.visuals||[]).map(v=>{
-      if((v.url||'').match(/\.(png|jpg|jpeg|webp|gif)$/i)) return `<a href="${v.url}" target="_blank"><img src="${v.url}" alt="${s.song} visual"></a>`;
-      return `<div><a href="${v.url}" target="_blank">${v.label}</a></div>`;
+      const url=safeUrl(v.url);
+      if(!url) return '';
+      if(url.match(/\.(png|jpg|jpeg|webp|gif)(\?|$)/i)) return `<a href="${escapeHtml(url)}" target="_blank" rel="noopener"><img src="${escapeHtml(url)}" alt="${escapeHtml(s.song)} visual"></a>`;
+      return `<div><a href="${escapeHtml(url)}" target="_blank" rel="noopener">${escapeHtml(v.label)}</a></div>`;
     }).join('');
-    d.innerHTML=`<div class="pill">${s.era}</div><h3>${s.song}</h3><p><b>Core hook:</b> ${s.core_hook}</p><p class="muted"><b>Anecdotes:</b> ${(s.anecdotes||[]).join(', ')}</p><div class="vis">${visuals || '<span class="muted">No visual refs yet</span>'}</div>`;
+    d.innerHTML=`<div class="pill">${escapeHtml(s.era)}</div><h3>${escapeHtml(s.song)}</h3><p><b>Core hook:</b> ${escapeHtml(s.core_hook)}</p><p class="muted"><b>Anecdotes:</b> ${escapeHtml((s.anecdotes||[]).join(', '))}</p><div class="vis">${visuals || '<span class="muted">No visual refs yet</span>'}</div>`;
     root.appendChild(d);
   });
 });

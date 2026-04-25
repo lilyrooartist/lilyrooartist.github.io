@@ -43,6 +43,13 @@ def load_media_map() -> dict[str, str]:
     return merged
 
 
+def media_map_value(media_key: str = '') -> str:
+    media_key = (media_key or '').strip()
+    if not media_key:
+        return ''
+    return load_media_map().get(media_key, '').strip()
+
+
 def load_queue_rows() -> list[dict[str, str]]:
     with QUEUE_PATH.open(newline='', encoding='utf-8') as f:
         return list(csv.DictReader(f))
@@ -59,8 +66,7 @@ def get_row(post_id: str) -> dict[str, str]:
 def resolve_media_path(media_key: str = '', fallback_path: str = '') -> Path | None:
     media_key = (media_key or '').strip()
     fallback_path = (fallback_path or '').strip()
-    media_map = load_media_map()
-    candidate = media_map.get(media_key) if media_key else None
+    candidate = media_map_value(media_key)
     if candidate:
         path = Path(candidate).expanduser()
         if path.exists():
@@ -76,6 +82,22 @@ def public_media_url(row: dict[str, str]) -> str:
     clip = (row.get('clip_url') or '').strip()
     image = (row.get('imagery_url') or '').strip()
     return clip or image
+
+
+def song_from_row(row: dict[str, str]) -> str:
+    explicit = (row.get('song') or row.get('title') or '').strip()
+    if explicit:
+        return explicit
+
+    imagery = (row.get('imagery') or '').strip()
+    markers = [' thumbnail', ' cover', ' performance', ' lyric', ' still']
+    lower = imagery.lower()
+    for marker in markers:
+        idx = lower.find(marker)
+        if idx > 0:
+            return imagery[:idx].strip(' -:+')
+
+    return ''
 
 
 def append_published_log(platform: str, posted_url: str, song: str, text: str, notes: str = '') -> None:

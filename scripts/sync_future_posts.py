@@ -25,6 +25,7 @@ def load_posts(path: Path):
                 'id': (r.get('id') or '').strip(),
                 'scheduled_at': (r.get('scheduled_at') or '').strip(),
                 'platform': (r.get('platform') or '').strip(),
+                'song': (r.get('song') or '').strip(),
                 'imagery': (r.get('imagery') or '').strip(),
                 'imagery_url': (r.get('imagery_url') or '').strip(),
                 'clip_url': (r.get('clip_url') or '').strip(),

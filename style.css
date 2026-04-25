@@ -355,6 +355,100 @@ main {
   text-transform: uppercase;
   letter-spacing: 0.07em;
   font-size: 0.7rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-links a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.footer-links a:hover,
+.footer-links a:focus-visible {
+  color: var(--gold);
+}
+
+.legal-hero {
+  padding: clamp(3rem, 8vw, 6rem) 0 1.5rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.legal-hero h1 {
+  margin: 0.45rem 0 0.75rem;
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 0.08em;
+  font-size: clamp(3rem, 10vw, 6rem);
+  line-height: 0.92;
+}
+
+.legal-hero p {
+  width: min(720px, 100%);
+  margin: 0;
+  color: var(--muted);
+  font-size: 1.25rem;
+}
+
+.legal-content {
+  width: min(860px, 100%);
+  margin: 2.5rem 0 4rem;
+  padding: clamp(1.2rem, 2.2vw, 2rem);
+  border: 1px solid var(--line);
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+}
+
+.legal-content section + section {
+  margin-top: 1.7rem;
+  padding-top: 1.7rem;
+  border-top: 1px solid var(--line);
+}
+
+.legal-content h2 {
+  margin: 0 0 0.65rem;
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 0.06em;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  line-height: 0.95;
+}
+
+.legal-content p,
+.legal-content li {
+  color: var(--muted);
+  font-size: 1.08rem;
+  line-height: 1.55;
+}
+
+.legal-content p {
+  margin: 0.65rem 0 0;
+}
+
+.legal-content ul {
+  margin: 0.75rem 0 0;
+  padding-left: 1.2rem;
+}
+
+.legal-content a {
+  color: var(--gold);
+}
+
+.legal-meta {
+  font-family: "Space Mono", monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+  color: var(--muted);
 }
 
 .reveal {

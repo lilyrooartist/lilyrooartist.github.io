@@ -8,7 +8,7 @@ description: "Maintain and ship updates to a simple static website hosted on Git
 ## Working repo (Lily Roo)
 - Repo directory (local): `~/ .openclaw/workspace/lilyrooartist.github.io`
 - Branch: `main`
-- Pages hostname: `lilyroo.com` (via CNAME)
+- Pages hostname: `www.lilyroo.com` (via CNAME)
 
 ## Ship loop
 1) `cd lilyrooartist.github.io && git pull`

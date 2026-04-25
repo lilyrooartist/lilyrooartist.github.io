@@ -9,7 +9,7 @@
 ## Conventions
 - Root-relative links (`/music.html`).
 - Privacy: YouTube embeds via `youtube-nocookie.com`.
-- OG image should be absolute URL under `https://lilyroo.com/assets/...`.
+- OG image should be absolute URL under `https://www.lilyroo.com/assets/...`.
 
 ## TODO ideas (optional)
 - Add `/lore.html` (case file / transmission log)

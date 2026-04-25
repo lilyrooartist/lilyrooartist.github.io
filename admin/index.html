@@ -155,22 +155,38 @@
   if(initialTab && document.querySelector(`.tab[data-tab="${initialTab}"]`)) document.querySelector(`.tab[data-tab="${initialTab}"]`).click();
 
   const formatDate=(iso)=>new Date(iso).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});
+  const escapeHtml=(value)=>String(value ?? '').replace(/[&<>"']/g,(ch)=>({
+    '&':'&amp;',
+    '<':'&lt;',
+    '>':'&gt;',
+    '"':'&quot;',
+    "'":'&#39;'
+  }[ch]));
+  const safeUrl=(value)=>{
+    const raw=String(value ?? '').trim();
+    if(!raw) return '';
+    try{
+      const url=new URL(raw, window.location.origin);
+      if(url.protocol==='http:' || url.protocol==='https:') return url.href;
+    }catch(e){}
+    return '';
+  };
   const now=new Date(), in7=new Date(now.getTime()+7*24*60*60*1000);
 
   function renderImagePreview(el,p){
-    const src=(p.imagery_url||'').trim();
+    const src=safeUrl(p.imagery_url);
     if(!src){el.innerHTML='';return;}
     const lower=src.toLowerCase();
-    if(/\.(png|jpg|jpeg|gif|webp)(\?|$)/.test(lower)) el.innerHTML=`<div class="label"><b>Image</b></div><img src="${src}" alt="image preview" loading="lazy"/>`;
-    else el.innerHTML=`<div class="label"><b>Image</b>: <a href="${src}" target="_blank" rel="noopener">Open ↗</a></div>`;
+    if(/\.(png|jpg|jpeg|gif|webp)(\?|$)/.test(lower)) el.innerHTML=`<div class="label"><b>Image</b></div><img src="${escapeHtml(src)}" alt="image preview" loading="lazy"/>`;
+    else el.innerHTML=`<div class="label"><b>Image</b>: <a href="${escapeHtml(src)}" target="_blank" rel="noopener">Open ↗</a></div>`;
   }
 
   function renderClipPreview(el,p){
-    const src=(p.clip_url||'').trim();
+    const src=safeUrl(p.clip_url);
     if(!src){el.innerHTML='';return;}
     const lower=src.toLowerCase();
-    if(/\.(mp4|webm|mov)(\?|$)/.test(lower)) el.innerHTML=`<div class="label"><b>Clip</b></div><video src="${src}" controls muted playsinline preload="metadata"></video>`;
-    else el.innerHTML=`<div class="label"><b>Clip</b>: <a href="${src}" target="_blank" rel="noopener">Open ↗</a></div>`;
+    if(/\.(mp4|webm|mov)(\?|$)/.test(lower)) el.innerHTML=`<div class="label"><b>Clip</b></div><video src="${escapeHtml(src)}" controls muted playsinline preload="metadata"></video>`;
+    else el.innerHTML=`<div class="label"><b>Clip</b>: <a href="${escapeHtml(src)}" target="_blank" rel="noopener">Open ↗</a></div>`;
   }
 
 
@@ -204,18 +220,47 @@
   }
   loadQuickStart();
 
-  async function executeLocalPost(postId, text, replyText, mediaKey){
+  const executorUrl=window.LILYROO_SOCIAL_EXECUTOR_URL || '/api/social/execute';
+
+  function executorToken(){
+    const storageKey='lilyroo_executor_token';
+    let token=window.LILYROO_EXECUTOR_TOKEN || sessionStorage.getItem(storageKey) || '';
+    if(!token){
+      token=window.prompt('Executor access token') || '';
+      if(token) sessionStorage.setItem(storageKey, token);
+    }
+    return token;
+  }
+
+  async function executeWebPost(post, text, replyText, mediaKey){
     let res;
+    const token=executorToken();
     try{
-      res = await fetch('http://127.0.0.1:8765/execute', {
+      res = await fetch(executorUrl, {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({ postId, text, replyText, mediaKey })
+        headers: {
+          'Content-Type': 'application/json',
+          ...(token ? {'Authorization': `Bearer ${token}`} : {})
+        },
+        body: JSON.stringify({
+          postId: post.id,
+          platform: post.platform,
+          song: post.song || '',
+          text,
+          replyText,
+          mediaKey,
+          imageryUrl: post.imagery_url || '',
+          clipUrl: post.clip_url || '',
+          mediaUrl: post.clip_url || post.imagery_url || ''
+        })
       });
     }catch(err){
-      throw new Error('Local social executor is not reachable. Start it with: python3 scripts/social_execute_bridge.py');
+      throw new Error(`Social executor is not reachable at ${executorUrl}. Confirm the website API route is deployed.`);
     }
     const data = await res.json().catch(()=>({ok:false,error:'Invalid JSON from local social executor'}));
+    if(res.status===401){
+      sessionStorage.removeItem('lilyroo_executor_token');
+    }
     if(!res.ok || !data.ok) throw new Error(data.error || `Social executor failed (${res.status})`);
     return data;
   }
@@ -233,18 +278,17 @@
       const d=document.createElement('div'); d.className='post';
       const statusKey=`status_${p.id}`;
       const statusVal=localStorage.getItem(statusKey)||'queued';
-      const platform=(p.platform||'').toLowerCase();
       const mediaKey=(p.media_key||p.x_media_key||'').trim();
       const execLabel='Execute now';
-      const execHint=mediaKey ? `Uses local executor bridge · media key: ${mediaKey}` : 'Uses local executor bridge';
-      d.innerHTML=`<div class="meta"><span class="platform">${p.platform}</span><span class="time">${formatDate(p.scheduled_at)}</span></div>
-      <div class="label"><b>Status</b>: <span data-role="status">${statusVal}</span></div>
-      <div><b>Text</b>: <span data-role="text">${text}</span></div>
-      <div class="label"><b>Imagery</b>: ${p.imagery||''}</div>
+      d.innerHTML=`<div class="meta"><span class="platform">${escapeHtml(p.platform)}</span><span class="time">${escapeHtml(formatDate(p.scheduled_at))}</span></div>
+      <div class="label"><b>Status</b>: <span data-role="status">${escapeHtml(statusVal)}</span></div>
+      ${p.song?`<div class="label"><b>Song</b>: ${escapeHtml(p.song)}</div>`:''}
+      <div><b>Text</b>: <span data-role="text">${escapeHtml(text)}</span></div>
+      <div class="label"><b>Imagery</b>: ${escapeHtml(p.imagery||'')}</div>
       <div class="preview" data-role="preview-image"></div>
       <div class="preview" data-role="preview-clip"></div>
-      <div class="label" style="margin-top:10px"><button class="btn" data-role="redo">Redo</button> <button class="btn" data-role="exec">${execLabel}</button></div>
-      <div class="label muted" data-role="exec-hint">${execHint}</div>`;
+      <div class="label" style="margin-top:10px"><button class="btn" data-role="redo">Redo</button> <button class="btn" data-role="exec">${escapeHtml(execLabel)}</button></div>
+      <div class="label muted" data-role="exec-hint">Uses website executor: ${escapeHtml(executorUrl)}${mediaKey?` · media key: ${escapeHtml(mediaKey)}`:''}</div>`;
       renderImagePreview(d.querySelector('[data-role="preview-image"]'),p);
       renderClipPreview(d.querySelector('[data-role="preview-clip"]'),p);
       d.querySelector('[data-role="redo"]').addEventListener('click',()=>{
@@ -255,7 +299,7 @@
       d.querySelector('[data-role="exec"]').addEventListener('click',async()=>{
         try{
           d.querySelector('[data-role="status"]').textContent='posting';
-          const result = await executeLocalPost(p.id, d.querySelector('[data-role="text"]').textContent, p.reply_text||'', mediaKey);
+          const result = await executeWebPost(p, d.querySelector('[data-role="text"]').textContent, p.reply_text||'', mediaKey);
           localStorage.setItem(statusKey,'posted');
           const postedUrl=result.tweet_url||result.video_url||result.post_url||result.media_id||result.publish_id||'';
           if(postedUrl) localStorage.setItem(`posted_url_${p.id}`,postedUrl);
@@ -264,7 +308,7 @@
           return;
         }catch(err){
           d.querySelector('[data-role="status"]').textContent=statusVal;
-          alert(`Local social executor failed: ${err.message}`);
+          alert(`Social executor failed: ${err.message}`);
           return;
         }
       });
@@ -298,9 +342,13 @@
       root.innerHTML='';
       list.forEach(s=>{
         const d=document.createElement('div'); d.className='card song';
-        d.innerHTML=`<div class="pill">${s.id}</div> <span class="muted">${s.era} · ${s.song_type} · ${s.status}</span><h3>${s.title}</h3>
-        ${s.thumb?`<a href="${s.url}" target="_blank"><img src="${s.thumb}" alt="${s.title}"></a>`:''}
-        <p><a href="${s.backstory_file}" target="_blank">Backstory Pack</a> · <a href="${s.visual_file}" target="_blank">Visual Pack</a> · <a href="${s.url}" target="_blank">YouTube</a></p>`;
+        const thumb=safeUrl(s.thumb);
+        const url=safeUrl(s.url);
+        const backstory=safeUrl(s.backstory_file);
+        const visual=safeUrl(s.visual_file);
+        d.innerHTML=`<div class="pill">${escapeHtml(s.id)}</div> <span class="muted">${escapeHtml(s.era)} · ${escapeHtml(s.song_type)} · ${escapeHtml(s.status)}</span><h3>${escapeHtml(s.title)}</h3>
+        ${thumb?`<a href="${escapeHtml(url)}" target="_blank" rel="noopener"><img src="${escapeHtml(thumb)}" alt="${escapeHtml(s.title)}"></a>`:''}
+        <p><a href="${escapeHtml(backstory)}" target="_blank" rel="noopener">Backstory Pack</a> · <a href="${escapeHtml(visual)}" target="_blank" rel="noopener">Visual Pack</a> · <a href="${escapeHtml(url)}" target="_blank" rel="noopener">YouTube</a></p>`;
         root.appendChild(d);
       });
     }

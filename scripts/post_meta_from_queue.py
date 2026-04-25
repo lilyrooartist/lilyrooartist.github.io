@@ -3,11 +3,10 @@ from __future__ import annotations
 
 import argparse
 import json
-import sys
 import urllib.parse
 import urllib.request
 
-from social_exec_common import SOCIAL_ENV, append_published_log, get_row, load_env, public_media_url
+from social_exec_common import SOCIAL_ENV, append_published_log, get_row, load_env, public_media_url, song_from_row
 
 GRAPH_VERSION = 'v23.0'
 BASE = f'https://graph.facebook.com/{GRAPH_VERSION}'
@@ -21,10 +20,6 @@ def api_post(url: str, data: dict[str, str]) -> dict:
 
 
 def facebook_post(row: dict[str, str], text: str, env: dict[str, str], dry_run: bool) -> dict:
-    token = env.get('META_LONG_LIVED_TOKEN', '')
-    page_id = env.get('FB_PAGE_ID', '')
-    if not token or not page_id:
-        raise RuntimeError('Facebook posting needs META_LONG_LIVED_TOKEN and FB_PAGE_ID in secrets/social_api.env')
     media_url = public_media_url(row)
     link = row.get('reply_text', '')
     if dry_run:
@@ -37,6 +32,10 @@ def facebook_post(row: dict[str, str], text: str, env: dict[str, str], dry_run: 
             'link': link,
             'text': text,
         }
+    token = env.get('META_LONG_LIVED_TOKEN', '')
+    page_id = env.get('FB_PAGE_ID', '')
+    if not token or not page_id:
+        raise RuntimeError('Facebook posting needs META_LONG_LIVED_TOKEN and FB_PAGE_ID in secrets/social_api.env')
     if media_url:
         data = api_post(f'{BASE}/{page_id}/photos', {
             'url': media_url,
@@ -51,15 +50,11 @@ def facebook_post(row: dict[str, str], text: str, env: dict[str, str], dry_run: 
         data = api_post(f'{BASE}/{page_id}/feed', payload)
     post_id = data.get('post_id') or data.get('id') or ''
     post_url = f'https://www.facebook.com/{post_id}' if post_id else 'posted'
-    append_published_log('Facebook', post_url, 'Slow Walk', text, 'posted via Meta Graph API')
+    append_published_log('Facebook', post_url, song_from_row(row), text, 'posted via Meta Graph API')
     return {'ok': True, 'platform': 'Facebook', 'post_id': post_id, 'post_url': post_url, 'raw': data}
 
 
 def instagram_post(row: dict[str, str], text: str, env: dict[str, str], dry_run: bool) -> dict:
-    token = env.get('META_LONG_LIVED_TOKEN', '')
-    ig_id = env.get('IG_BUSINESS_ACCOUNT_ID', '')
-    if not token or not ig_id:
-        raise RuntimeError('Instagram posting needs META_LONG_LIVED_TOKEN and IG_BUSINESS_ACCOUNT_ID in secrets/social_api.env')
     media_url = public_media_url(row)
     if not media_url:
         raise RuntimeError('Instagram posting needs a public imagery_url or clip_url in the queue row')
@@ -74,6 +69,10 @@ def instagram_post(row: dict[str, str], text: str, env: dict[str, str], dry_run:
             'media_url': media_url,
             'text': text,
         }
+    token = env.get('META_LONG_LIVED_TOKEN', '')
+    ig_id = env.get('IG_BUSINESS_ACCOUNT_ID', '')
+    if not token or not ig_id:
+        raise RuntimeError('Instagram posting needs META_LONG_LIVED_TOKEN and IG_BUSINESS_ACCOUNT_ID in secrets/social_api.env')
     create_payload = {'caption': text, 'access_token': token}
     if is_video:
         create_payload.update({'media_type': 'REELS', 'video_url': media_url})
@@ -88,7 +87,7 @@ def instagram_post(row: dict[str, str], text: str, env: dict[str, str], dry_run:
         'access_token': token,
     })
     media_id = publish.get('id') or ''
-    append_published_log('Instagram', media_id or 'posted', 'Slow Walk', text, 'posted via Instagram Graph API')
+    append_published_log('Instagram', media_id or 'posted', song_from_row(row), text, 'posted via Instagram Graph API')
     return {'ok': True, 'platform': 'Instagram', 'creation_id': creation_id, 'media_id': media_id, 'raw': publish}
 
 

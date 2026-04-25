@@ -7,7 +7,7 @@ import mimetypes
 import os
 import urllib.request
 
-from social_exec_common import SOCIAL_ENV, get_row, load_env, public_media_url, resolve_media_path
+from social_exec_common import SOCIAL_ENV, append_published_log, get_row, load_env, resolve_media_path, song_from_row
 
 CREATOR_INFO_URL = 'https://open.tiktokapis.com/v2/post/publish/creator_info/query/'
 INIT_URL = 'https://open.tiktokapis.com/v2/post/publish/video/init/'
@@ -53,31 +53,32 @@ def main() -> int:
     row = get_row(args.post_id)
     if 'tiktok' not in (row.get('platform') or '').lower():
         raise RuntimeError(f'Queue row is not a TikTok post: {row.get("platform") or ""}')
-    env = load_env(SOCIAL_ENV)
-    token = env.get('TIKTOK_ACCESS_TOKEN', '')
-    if not token:
-        raise RuntimeError('TikTok posting needs TIKTOK_ACCESS_TOKEN in secrets/social_api.env')
     media_key = (args.media_key or row.get('media_key') or '').strip()
     media_path = resolve_media_path(media_key, row.get('clip_url', ''))
-    if not media_path:
-        raise RuntimeError('TikTok post needs media_key mapped in secrets/social-media-map.json or a local clip_url path')
     title = (args.text or row.get('text') or '').strip()
     if not title:
         raise RuntimeError('TikTok post text/title is required')
-    info = post_json(CREATOR_INFO_URL, token, {})
-    options = ((info.get('data') or {}).get('privacy_level_options') or [])
-    privacy = 'SELF_ONLY' if 'SELF_ONLY' in options else (options[0] if options else 'SELF_ONLY')
     if args.dry_run:
         print(json.dumps({
             'ok': True,
             'platform': 'TikTok',
             'dry_run': True,
-            'creator_info': info.get('data') or {},
-            'media_path': str(media_path),
+            'media_key': media_key,
+            'media_ready': bool(media_path),
+            'media_path': str(media_path) if media_path else '',
             'title': title,
-            'privacy_level': privacy,
         }, ensure_ascii=False))
         return 0
+
+    env = load_env(SOCIAL_ENV)
+    token = env.get('TIKTOK_ACCESS_TOKEN', '')
+    if not token:
+        raise RuntimeError('TikTok posting needs TIKTOK_ACCESS_TOKEN in secrets/social_api.env')
+    if not media_path:
+        raise RuntimeError('TikTok post needs media_key mapped in secrets/social-media-map.json or a local clip_url path')
+    info = post_json(CREATOR_INFO_URL, token, {})
+    options = ((info.get('data') or {}).get('privacy_level_options') or [])
+    privacy = 'SELF_ONLY' if 'SELF_ONLY' in options else (options[0] if options else 'SELF_ONLY')
     size = os.path.getsize(media_path)
     init = post_json(INIT_URL, token, {
         'post_info': {
@@ -86,6 +87,7 @@ def main() -> int:
             'disable_comment': False,
             'disable_duet': False,
             'disable_stitch': False,
+            'is_aigc': env.get('TIKTOK_IS_AIGC', 'true').strip().lower() not in {'0', 'false', 'no'},
         },
         'source_info': {
             'source': 'FILE_UPLOAD',
@@ -102,6 +104,7 @@ def main() -> int:
     mime = mimetypes.guess_type(str(media_path))[0] or 'video/mp4'
     with open(media_path, 'rb') as f:
         put_bytes(upload_url, f.read(), mime)
+    append_published_log('TikTok', publish_id, song_from_row(row), title, 'uploaded via TikTok Content Posting API')
     print(json.dumps({'ok': True, 'platform': 'TikTok', 'publish_id': publish_id, 'status': 'uploaded_for_posting'}, ensure_ascii=False))
     return 0
 

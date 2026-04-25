@@ -1,0 +1,21 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "lilyroo-social-executor",
+  "main": "src/index.js",
+  "compatibility_date": "2026-04-25",
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  },
+  "vars": {
+    "ALLOWED_ORIGIN": "https://www.lilyroo.com",
+    "TIKTOK_IS_AIGC": "true",
+    "YOUTUBE_PRIVACY_STATUS": "public"
+  },
+  "routes": [
+    {
+      "pattern": "www.lilyroo.com/api/social/*",
+      "zone_name": "lilyroo.com"
+    }
+  ]
+}
