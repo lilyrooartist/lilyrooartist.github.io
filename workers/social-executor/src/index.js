@@ -5,9 +5,6 @@ const TIKTOK_CREATOR_INFO_URL = "https://open.tiktokapis.com/v2/post/publish/cre
 const TIKTOK_INIT_URL = "https://open.tiktokapis.com/v2/post/publish/video/init/";
 const GOOGLE_TOKEN_URL = "https://oauth2.googleapis.com/token";
 const YOUTUBE_UPLOAD_INIT_URL = "https://www.googleapis.com/upload/youtube/v3/videos?uploadType=resumable&part=snippet,status";
-const ACCESS_JWKS_CACHE_MS = 60 * 60 * 1000;
-
-let accessJwksCache = { teamDomain: "", expiresAt: 0, keys: [] };
 
 export default {
   async fetch(request, env, ctx) {
@@ -118,14 +115,19 @@ async function postFacebook(payload, env) {
 }
 
 async function postInstagram(payload, env) {
-  requireEnv(env, ["META_LONG_LIVED_TOKEN"], "Instagram posting");
-  const igBusinessAccountId = await instagramBusinessAccountId(env);
+  const accessToken = instagramAccessToken(env);
+  if (!accessToken) throw new Error("Instagram posting needs Worker secrets/vars: IG_ACCESS_TOKEN or META_LONG_LIVED_TOKEN");
+  const useInstagramLogin = isInstagramLoginToken(accessToken);
+  const igBusinessAccountId = useInstagramLogin
+    ? text(env.IG_BUSINESS_ACCOUNT_ID) || "me"
+    : await instagramBusinessAccountId(env, accessToken);
   const url = mediaUrl(payload, env);
   if (!url) throw new Error("Instagram posting needs imageryUrl or clipUrl");
+  const base = useInstagramLogin ? instagramBase(env) : metaBase(env);
 
   const isVideo = isVideoUrl(url);
   const createParams = {
-    access_token: env.META_LONG_LIVED_TOKEN,
+    access_token: accessToken,
     caption: text(payload.text),
   };
   if (isVideo) {
@@ -135,14 +137,11 @@ async function postInstagram(payload, env) {
     createParams.image_url = url;
   }
 
-  const creation = await formPost(`${metaBase(env)}/${igBusinessAccountId}/media`, createParams);
+  const creation = await formPost(`${base}/${igBusinessAccountId}/media`, createParams);
   const creationId = creation.id;
   if (!creationId) throw new Error(`Instagram media creation failed: ${JSON.stringify(creation)}`);
 
-  const publish = await formPost(`${metaBase(env)}/${igBusinessAccountId}/media_publish`, {
-    access_token: env.META_LONG_LIVED_TOKEN,
-    creation_id: creationId,
-  });
+  const publish = await publishInstagramMedia(base, igBusinessAccountId, accessToken, creationId);
 
   return {
     ok: true,
@@ -153,7 +152,42 @@ async function postInstagram(payload, env) {
   };
 }
 
-async function instagramBusinessAccountId(env) {
+async function publishInstagramMedia(base, igBusinessAccountId, accessToken, creationId) {
+  const delays = [0, 5000, 10000, 15000, 30000];
+  let lastError;
+  for (const delay of delays) {
+    if (delay) await sleep(delay);
+    try {
+      return await formPost(`${base}/${igBusinessAccountId}/media_publish`, {
+        access_token: accessToken,
+        creation_id: creationId,
+      });
+    } catch (error) {
+      lastError = error;
+      if (!isInstagramMediaNotReady(error)) throw error;
+    }
+  }
+  throw lastError;
+}
+
+function isInstagramMediaNotReady(error) {
+  const data = error?.data?.error || {};
+  return data.code === 9007 || data.error_subcode === 2207027 || /media (id )?is not (available|ready)/i.test(error?.message || "");
+}
+
+function instagramAccessToken(env) {
+  return text(env.IG_ACCESS_TOKEN) || text(env.META_LONG_LIVED_TOKEN);
+}
+
+function isInstagramLoginToken(token) {
+  return text(token).startsWith("IG");
+}
+
+function instagramBase(env) {
+  return `https://graph.instagram.com/${env.INSTAGRAM_GRAPH_VERSION || DEFAULT_GRAPH_VERSION}`;
+}
+
+async function instagramBusinessAccountId(env, accessToken) {
   if (env.IG_BUSINESS_ACCOUNT_ID) return env.IG_BUSINESS_ACCOUNT_ID;
   if (!env.FB_PAGE_ID) {
     throw new Error("Instagram posting needs Worker secrets/vars: IG_BUSINESS_ACCOUNT_ID or FB_PAGE_ID");
@@ -161,7 +195,7 @@ async function instagramBusinessAccountId(env) {
 
   const page = await jsonGet(`${metaBase(env)}/${env.FB_PAGE_ID}`, {
     fields: "instagram_business_account",
-    access_token: env.META_LONG_LIVED_TOKEN,
+    access_token: accessToken,
   });
   const id = text(page?.instagram_business_account?.id);
   if (!id) {
@@ -206,18 +240,20 @@ async function postTikTok(payload, env) {
 }
 
 async function postYouTube(payload, env) {
-  requireEnv(env, ["GOOGLE_CLIENT_ID", "GOOGLE_CLIENT_SECRET", "YOUTUBE_REFRESH_TOKEN"], "YouTube posting");
+  requireEnv(env, ["GOOGLE_CLIENT_ID", "YOUTUBE_REFRESH_TOKEN"], "YouTube posting");
   const url = videoUrl(payload, env);
   if (!url || !isHttpUrl(url)) {
     throw new Error("YouTube posting from the website needs a public clipUrl video URL");
   }
 
-  const tokenData = await formPost(GOOGLE_TOKEN_URL, {
+  const refreshParams = {
     client_id: env.GOOGLE_CLIENT_ID,
-    client_secret: env.GOOGLE_CLIENT_SECRET,
     refresh_token: env.YOUTUBE_REFRESH_TOKEN,
     grant_type: "refresh_token",
-  });
+  };
+  if (text(env.GOOGLE_CLIENT_SECRET)) refreshParams.client_secret = env.GOOGLE_CLIENT_SECRET;
+
+  const tokenData = await formPost(GOOGLE_TOKEN_URL, refreshParams);
   const token = tokenData.access_token;
   if (!token) throw new Error(`Unable to refresh YouTube access token: ${JSON.stringify(tokenData)}`);
 
@@ -374,7 +410,12 @@ async function formPost(url, params) {
     body: new URLSearchParams(params),
   });
   const data = await response.json().catch(async () => ({ error: await safeText(response) }));
-  if (!response.ok) throw new Error(`API request failed (${response.status}): ${JSON.stringify(data)}`);
+  if (!response.ok) {
+    const error = new Error(`API request failed (${response.status}): ${JSON.stringify(data)}`);
+    error.status = response.status;
+    error.data = data;
+    throw error;
+  }
   return data;
 }
 
@@ -385,7 +426,12 @@ async function jsonPost(url, payload, headers = {}) {
     body: JSON.stringify(payload),
   });
   const data = await response.json().catch(async () => ({ error: await safeText(response) }));
-  if (!response.ok) throw new Error(`API request failed (${response.status}): ${JSON.stringify(data)}`);
+  if (!response.ok) {
+    const error = new Error(`API request failed (${response.status}): ${JSON.stringify(data)}`);
+    error.status = response.status;
+    error.data = data;
+    throw error;
+  }
   return data;
 }
 
@@ -396,8 +442,17 @@ async function jsonGet(url, params = {}) {
   }
   const response = await fetch(endpoint.toString());
   const data = await response.json().catch(async () => ({ error: await safeText(response) }));
-  if (!response.ok) throw new Error(`API request failed (${response.status}): ${JSON.stringify(data)}`);
+  if (!response.ok) {
+    const error = new Error(`API request failed (${response.status}): ${JSON.stringify(data)}`);
+    error.status = response.status;
+    error.data = data;
+    throw error;
+  }
   return data;
+}
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 function corsHeaders(request, env) {
@@ -406,7 +461,7 @@ function corsHeaders(request, env) {
   return {
     "Access-Control-Allow-Origin": allowed,
     "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Lilyroo-Admin-Password",
     "Vary": "Origin",
   };
 }
@@ -418,15 +473,26 @@ function isAllowedOrigin(request, env) {
 }
 
 async function authorizationError(request, env) {
-  if (await isCloudflareAccessAuthorized(request, env)) return null;
+  if (await adminPasswordMatches(request, env)) return null;
 
   const header = request.headers.get("Authorization") || "";
   if (env.EXECUTOR_BEARER_TOKEN && await bearerMatches(header, env.EXECUTOR_BEARER_TOKEN)) return null;
 
-  if (!env.EXECUTOR_BEARER_TOKEN && !accessAuthConfigured(env)) {
-    return { status: 500, message: "Social executor is missing EXECUTOR_BEARER_TOKEN or Cloudflare Access config" };
+  if (!env.ADMIN_PASSWORD && !env.EXECUTOR_BEARER_TOKEN) {
+    return { status: 500, message: "Social executor is missing ADMIN_PASSWORD or EXECUTOR_BEARER_TOKEN" };
   }
   return { status: 401, message: "Unauthorized" };
+}
+
+async function adminPasswordMatches(request, env) {
+  const expected = text(env.ADMIN_PASSWORD);
+  if (!expected) return false;
+  const actual = text(request.headers.get("X-Lilyroo-Admin-Password"));
+  if (!actual) return false;
+  const actualBytes = utf8(actual);
+  const expectedBytes = utf8(expected);
+  if (actualBytes.byteLength !== expectedBytes.byteLength) return false;
+  return timingSafeEqual(actualBytes, expectedBytes);
 }
 
 async function bearerMatches(header, expected) {
@@ -436,87 +502,6 @@ async function bearerMatches(header, expected) {
   const expectedBytes = utf8(expected);
   if (actualBytes.byteLength !== expectedBytes.byteLength) return false;
   return timingSafeEqual(actualBytes, expectedBytes);
-}
-
-async function isCloudflareAccessAuthorized(request, env) {
-  if (!accessAuthConfigured(env)) return false;
-
-  const token = accessJwt(request);
-  if (!token) return false;
-
-  try {
-    return await verifyAccessJwt(token, env);
-  } catch (error) {
-    console.warn(JSON.stringify({ level: "warn", message: "Cloudflare Access JWT validation failed", error: error.message }));
-    return false;
-  }
-}
-
-function accessAuthConfigured(env) {
-  return Boolean(text(env.CF_ACCESS_TEAM_DOMAIN) && text(env.CF_ACCESS_AUD));
-}
-
-function accessJwt(request) {
-  return text(request.headers.get("Cf-Access-Jwt-Assertion")) || cookieValue(request, "CF_Authorization");
-}
-
-async function verifyAccessJwt(token, env) {
-  const parts = token.split(".");
-  if (parts.length !== 3) return false;
-
-  const [encodedHeader, encodedPayload, encodedSignature] = parts;
-  const header = base64UrlJson(encodedHeader);
-  const payload = base64UrlJson(encodedPayload);
-  if (header.alg !== "RS256" || !header.kid) return false;
-
-  const teamDomain = normalizedTeamDomain(env.CF_ACCESS_TEAM_DOMAIN);
-  if (payload.iss !== teamDomain) return false;
-
-  const expectedAud = text(env.CF_ACCESS_AUD);
-  const tokenAud = Array.isArray(payload.aud) ? payload.aud.map(String) : [String(payload.aud || "")];
-  if (!tokenAud.includes(expectedAud)) return false;
-
-  const now = Math.floor(Date.now() / 1000);
-  if (typeof payload.exp === "number" && payload.exp <= now) return false;
-  if (typeof payload.nbf === "number" && payload.nbf > now + 60) return false;
-
-  const jwk = await accessJwk(teamDomain, header.kid);
-  if (!jwk) return false;
-
-  const key = await crypto.subtle.importKey(
-    "jwk",
-    jwk,
-    { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" },
-    false,
-    ["verify"],
-  );
-
-  return crypto.subtle.verify(
-    { name: "RSASSA-PKCS1-v1_5" },
-    key,
-    base64UrlBytes(encodedSignature),
-    utf8(`${encodedHeader}.${encodedPayload}`),
-  );
-}
-
-async function accessJwk(teamDomain, kid) {
-  const now = Date.now();
-  if (accessJwksCache.teamDomain !== teamDomain || accessJwksCache.expiresAt <= now) {
-    const response = await fetch(`${teamDomain}/cdn-cgi/access/certs`);
-    if (!response.ok) throw new Error(`Unable to fetch Cloudflare Access certs (${response.status})`);
-    const data = await response.json();
-    accessJwksCache = {
-      teamDomain,
-      expiresAt: now + ACCESS_JWKS_CACHE_MS,
-      keys: Array.isArray(data.keys) ? data.keys : [],
-    };
-  }
-
-  return accessJwksCache.keys.find((key) => key.kid === kid) || null;
-}
-
-function normalizedTeamDomain(value) {
-  return text(value).replace(/\/+$/, "");
 }
 
 function jsonResponse(payload, status, request, env) {
@@ -542,13 +527,15 @@ function readiness(env) {
   const xOAuth1 = ["X_API_KEY", "X_API_SECRET", "X_ACCESS_TOKEN", "X_ACCESS_TOKEN_SECRET"];
   const xOAuth1Present = xOAuth1.every((name) => Boolean(env[name]));
   const xTextPostingReady = Boolean(env.X_USER_ACCESS_TOKEN) || xOAuth1Present;
-  const youtubeRequired = ["GOOGLE_CLIENT_ID", "GOOGLE_CLIENT_SECRET", "YOUTUBE_REFRESH_TOKEN"];
+  const youtubeRequired = ["GOOGLE_CLIENT_ID", "YOUTUBE_REFRESH_TOKEN"];
   const youtubeMissing = youtubeRequired.filter((name) => !env[name]);
+  const igToken = instagramAccessToken(env);
+  const instagramUsesLoginApi = isInstagramLoginToken(igToken);
 
   return {
     ok: true,
+    admin_password_auth: Boolean(env.ADMIN_PASSWORD),
     execute_auth: Boolean(env.EXECUTOR_BEARER_TOKEN),
-    access_auth_configured: accessAuthConfigured(env),
     platforms: {
       x: {
         text_posting_ready: xTextPostingReady,
@@ -560,8 +547,9 @@ function readiness(env) {
         ready: Boolean(env.META_LONG_LIVED_TOKEN && env.FB_PAGE_ID),
       },
       instagram: {
-        ready: Boolean(env.META_LONG_LIVED_TOKEN && (env.IG_BUSINESS_ACCOUNT_ID || env.FB_PAGE_ID)),
-        account_id_source: env.IG_BUSINESS_ACCOUNT_ID ? "IG_BUSINESS_ACCOUNT_ID" : (env.FB_PAGE_ID ? "FB_PAGE_ID" : ""),
+        ready: Boolean(igToken && (instagramUsesLoginApi || env.IG_BUSINESS_ACCOUNT_ID || env.FB_PAGE_ID)),
+        api: instagramUsesLoginApi ? "instagram-login" : "facebook-login",
+        account_id_source: env.IG_BUSINESS_ACCOUNT_ID ? "IG_BUSINESS_ACCOUNT_ID" : (instagramUsesLoginApi ? "me" : (env.FB_PAGE_ID ? "FB_PAGE_ID" : "")),
       },
       tiktok: {
         ready: Boolean(env.TIKTOK_ACCESS_TOKEN),
@@ -569,6 +557,7 @@ function readiness(env) {
       youtube: {
         ready: youtubeMissing.length === 0,
         missing_secrets: youtubeMissing,
+        client_secret_present: Boolean(env.GOOGLE_CLIENT_SECRET),
         media_map_present: Boolean(env.SOCIAL_MEDIA_MAP_JSON),
         privacy_status: text(env.YOUTUBE_PRIVACY_STATUS) || "public",
       },
@@ -663,29 +652,6 @@ function youtubeTags(payload) {
 function looksLikeGitLfsPointer(bytes) {
   const sample = new TextDecoder().decode(bytes.slice(0, Math.min(bytes.byteLength, 256)));
   return sample.startsWith("version https://git-lfs.github.com/spec/v1");
-}
-
-function cookieValue(request, name) {
-  const cookie = request.headers.get("Cookie") || "";
-  const prefix = `${name}=`;
-  for (const part of cookie.split(";")) {
-    const value = part.trim();
-    if (value.startsWith(prefix)) return decodeURIComponent(value.slice(prefix.length));
-  }
-  return "";
-}
-
-function base64UrlJson(value) {
-  return JSON.parse(new TextDecoder().decode(base64UrlBytes(value)));
-}
-
-function base64UrlBytes(value) {
-  const normalized = value.replace(/-/g, "+").replace(/_/g, "/");
-  const padded = normalized + "=".repeat((4 - normalized.length % 4) % 4);
-  const binary = atob(padded);
-  const bytes = new Uint8Array(binary.length);
-  for (let i = 0; i < binary.length; i += 1) bytes[i] = binary.charCodeAt(i);
-  return bytes;
 }
 
 function timingSafeEqual(left, right) {

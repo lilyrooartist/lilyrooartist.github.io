@@ -25,6 +25,7 @@
     .time{font-size:12px;color:#9ba3bf}
     .label{font-size:12px;color:#9ba3bf;margin-top:8px}
     .btn{background:#2f62ff;color:white;border:0;border-radius:8px;padding:7px 10px;font-size:12px;cursor:pointer}
+    .btn:disabled{background:#3a4055;color:#9ba3bf;cursor:not-allowed}
     .preview{margin-top:8px}
     .preview img,.preview video{width:100%;max-height:170px;object-fit:cover;border-radius:10px;border:1px solid #2d3550;background:#0b101c}
     .song-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
@@ -34,17 +35,34 @@
     .preset{background:#1e2a45;border:1px solid #3a4b75;color:#dbe7ff;border-radius:999px;padding:6px 10px;font-size:12px;cursor:pointer}
     .filter-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
     .filter-row select{background:#0f1320;color:#eef0f7;border:1px solid #334062;border-radius:8px;padding:6px}
+    body.auth-pending .layout{display:none}
+    body.authenticated #auth-screen{display:none}
+    #auth-screen{min-height:100vh;display:grid;place-items:center;padding:20px;background:#0c0d12}
+    .auth-card{width:min(100%,390px);background:#141722;border:1px solid #2a2f44;border-radius:14px;padding:18px}
+    .auth-card h1{margin:0 0 8px;font-size:24px}
+    .auth-card input{box-sizing:border-box;width:100%;background:#0f1320;color:#eef0f7;border:1px solid #334062;border-radius:8px;padding:10px;margin:10px 0}
+    .auth-error{min-height:18px;color:#ff9fa8;font-size:12px;margin:4px 0 10px}
     @media(max-width:1080px){.main-grid{grid-template-columns:1fr}.layout{grid-template-columns:1fr}.nav{position:static;height:auto;border-right:0;border-bottom:1px solid #2a2f44}}
   </style>
 </head>
-<body>
+<body class="auth-pending">
+<div id="auth-screen">
+  <form class="auth-card" id="auth-form">
+    <h1>Lily Roo Admin</h1>
+    <p class="muted">Enter the admin password. This computer will stay signed in until you lock it.</p>
+    <input id="admin-password" type="password" autocomplete="current-password" placeholder="Password" autofocus />
+    <div class="auth-error" id="auth-error"></div>
+    <button class="btn" type="submit">Sign in</button>
+  </form>
+</div>
 <div class="layout">
   <aside class="nav">
     <div class="brand">Lily Roo Admin</div>
     <button class="tab active" data-tab="promo">Promo</button>
     <button class="tab" data-tab="backstory">Backstory</button>
     <button class="tab" data-tab="reports">Reports</button>
-    <p class="muted" style="margin-top:14px;font-size:12px">Protected by Cloudflare Access</p>
+    <button class="tab" id="lock-admin" type="button">Lock admin</button>
+    <p class="muted" style="margin-top:14px;font-size:12px">Password remembered on this computer</p>
   </aside>
 
   <main class="content">
@@ -139,11 +157,60 @@
 </div>
 
 <script>
+  const ADMIN_AUTH_KEY='lilyroo_admin_password_v1';
+  const ADMIN_PASSWORD_DIGEST='24b26ab1e602268c369f95fc3612fd80417c9d0fcb90b965ce8f4b227943c8df';
+  const ADMIN_PASSWORD_HEADER='X-Lilyroo-Admin-Password';
+
+  async function sha256(value){
+    const bytes=await crypto.subtle.digest('SHA-256', new TextEncoder().encode(value));
+    return [...new Uint8Array(bytes)].map(b=>b.toString(16).padStart(2,'0')).join('');
+  }
+
+  async function passwordIsValid(value){
+    return (await sha256(value))===ADMIN_PASSWORD_DIGEST;
+  }
+
+  function adminPassword(){
+    return localStorage.getItem(ADMIN_AUTH_KEY)||'';
+  }
+
+  function setAdminAuthenticated(){
+    document.body.classList.remove('auth-pending');
+    document.body.classList.add('authenticated');
+  }
+
+  async function requireAdminAuth(){
+    const saved=adminPassword();
+    if(saved && await passwordIsValid(saved)){
+      setAdminAuthenticated();
+      return true;
+    }
+    localStorage.removeItem(ADMIN_AUTH_KEY);
+    const form=document.getElementById('auth-form');
+    const input=document.getElementById('admin-password');
+    const error=document.getElementById('auth-error');
+    form.addEventListener('submit',async(event)=>{
+      event.preventDefault();
+      const value=input.value;
+      if(await passwordIsValid(value)){
+        localStorage.setItem(ADMIN_AUTH_KEY,value);
+        error.textContent='';
+        setAdminAuthenticated();
+        initAdmin();
+        return;
+      }
+      error.textContent='Incorrect password.';
+      input.select();
+    });
+    return false;
+  }
+
+  function initAdmin(){
   const params = new URLSearchParams(window.location.search);
   const setParam = (k,v)=>{ if(v) params.set(k,v); else params.delete(k); history.replaceState({},'',`${location.pathname}?${params.toString()}`); };
 
-  document.querySelectorAll('.tab').forEach(btn=>btn.addEventListener('click',()=>{
-    document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.tab[data-tab]').forEach(btn=>btn.addEventListener('click',()=>{
+    document.querySelectorAll('.tab[data-tab]').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
     const tab=btn.dataset.tab;
     document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
@@ -153,6 +220,10 @@
 
   const initialTab=params.get('tab');
   if(initialTab && document.querySelector(`.tab[data-tab="${initialTab}"]`)) document.querySelector(`.tab[data-tab="${initialTab}"]`).click();
+  document.getElementById('lock-admin').addEventListener('click',()=>{
+    localStorage.removeItem(ADMIN_AUTH_KEY);
+    location.reload();
+  });
 
   const formatDate=(iso)=>new Date(iso).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});
   const escapeHtml=(value)=>String(value ?? '').replace(/[&<>"']/g,(ch)=>({
@@ -221,6 +292,37 @@
   loadQuickStart();
 
   const executorUrl=window.LILYROO_SOCIAL_EXECUTOR_URL || '/api/social/execute';
+  const readinessUrl=executorUrl.replace(/\/execute$/,'/readiness');
+  let executorReadiness=null;
+  const readinessPromise=fetch(readinessUrl,{
+    headers: {[ADMIN_PASSWORD_HEADER]: adminPassword()}
+  }).then(r=>r.ok?r.json():null).catch(()=>null);
+
+  function platformReadiness(platform){
+    const p=(executorReadiness&&executorReadiness.platforms)||{};
+    const name=String(platform||'').toLowerCase();
+    if(name==='x'||name.startsWith('x')){
+      const ready=Boolean(p.x&&p.x.text_posting_ready);
+      return {ready,message:ready?'':'X posting credentials are not ready.'};
+    }
+    if(name.includes('instagram')){
+      const ready=Boolean(p.instagram&&p.instagram.ready);
+      return {ready,message:ready?'':'Instagram posting credentials are not ready.'};
+    }
+    if(name.includes('facebook')){
+      const ready=Boolean(p.facebook&&p.facebook.ready);
+      return {ready,message:ready?'':'Facebook posting credentials are not ready.'};
+    }
+    if(name.includes('tiktok')){
+      const ready=Boolean(p.tiktok&&p.tiktok.ready);
+      return {ready,message:ready?'':'TikTok posting credentials are not ready.'};
+    }
+    if(name.includes('youtube')){
+      const ready=Boolean(p.youtube&&p.youtube.ready);
+      return {ready,message:ready?'':'YouTube posting credentials are not ready.'};
+    }
+    return {ready:true,message:''};
+  }
 
   async function executeWebPost(post, text, replyText, mediaKey){
     let res;
@@ -228,7 +330,8 @@
       res = await fetch(executorUrl, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          [ADMIN_PASSWORD_HEADER]: adminPassword()
         },
         body: JSON.stringify({
           postId: post.id,
@@ -261,7 +364,11 @@
     return `status_${postFingerprint(post,text)}`;
   }
 
-  fetch(`/admin/future-posts.json?v=${Date.now()}`, {cache:'no-store'}).then(r=>r.json()).then(payload=>{
+  Promise.all([
+    fetch(`/admin/future-posts.json?v=${Date.now()}`, {cache:'no-store'}).then(r=>r.json()),
+    readinessPromise,
+  ]).then(([payload,readiness])=>{
+    executorReadiness=readiness;
     const list=Array.isArray(payload)?payload:(payload.posts||[]);
     if(payload.last_synced) document.getElementById('future-sync').textContent='Last synced: '+formatDate(payload.last_synced);
     const posts=list.filter(p=>{const t=new Date(p.scheduled_at); return t>=now && t<=in7;}).sort((a,b)=>new Date(a.scheduled_at)-new Date(b.scheduled_at));
@@ -275,6 +382,8 @@
       const getStatus=(currentText)=>localStorage.getItem(postStatusKey(p,currentText))||'queued';
       const statusVal=getStatus(text);
       const mediaKey=(p.media_key||p.x_media_key||'').trim();
+      const readyState=executorReadiness?platformReadiness(p.platform):{ready:true,message:''};
+      const disabled=readyState.ready===false;
       const execLabel='Execute now';
       d.innerHTML=`<div class="meta"><span class="platform">${escapeHtml(p.platform)}</span><span class="time">${escapeHtml(formatDate(p.scheduled_at))}</span></div>
       <div class="label"><b>Status</b>: <span data-role="status">${escapeHtml(statusVal)}</span></div>
@@ -283,8 +392,8 @@
       <div class="label"><b>Imagery</b>: ${escapeHtml(p.imagery||'')}</div>
       <div class="preview" data-role="preview-image"></div>
       <div class="preview" data-role="preview-clip"></div>
-      <div class="label" style="margin-top:10px"><button class="btn" data-role="redo">Redo</button> <button class="btn" data-role="exec">${escapeHtml(execLabel)}</button></div>
-      <div class="label muted" data-role="exec-hint">Uses website executor: ${escapeHtml(executorUrl)}${mediaKey?` · media key: ${escapeHtml(mediaKey)}`:''}</div>`;
+      <div class="label" style="margin-top:10px"><button class="btn" data-role="redo">Redo</button> <button class="btn" data-role="exec"${disabled?' disabled':''}>${escapeHtml(execLabel)}</button></div>
+      <div class="label muted" data-role="exec-hint">Uses website executor: ${escapeHtml(executorUrl)}${mediaKey?` · media key: ${escapeHtml(mediaKey)}`:''}${disabled?` · ${escapeHtml(readyState.message)}`:''}</div>`;
       renderImagePreview(d.querySelector('[data-role="preview-image"]'),p);
       renderClipPreview(d.querySelector('[data-role="preview-clip"]'),p);
       d.querySelector('[data-role="redo"]').addEventListener('click',()=>{
@@ -299,6 +408,8 @@
         const statusKey=postStatusKey(p,currentText);
         const previousStatus=getStatus(currentText);
         try{
+          const readyNow=platformReadiness(p.platform);
+          if(readyNow.ready===false) throw new Error(readyNow.message);
           d.querySelector('[data-role="status"]').textContent='posting';
           const result = await executeWebPost(p, currentText, p.reply_text||'', mediaKey);
           localStorage.setItem(statusKey,'posted');
@@ -348,8 +459,8 @@
         const backstory=safeUrl(s.backstory_file);
         const visual=safeUrl(s.visual_file);
         d.innerHTML=`<div class="pill">${escapeHtml(s.id)}</div> <span class="muted">${escapeHtml(s.era)} · ${escapeHtml(s.song_type)} · ${escapeHtml(s.status)}</span><h3>${escapeHtml(s.title)}</h3>
-        ${thumb?`<a href="${escapeHtml(url)}" target="_blank" rel="noopener"><img src="${escapeHtml(thumb)}" alt="${escapeHtml(s.title)}"></a>`:''}
-        <p><a href="${escapeHtml(backstory)}" target="_blank" rel="noopener">Backstory Pack</a> · <a href="${escapeHtml(visual)}" target="_blank" rel="noopener">Visual Pack</a> · <a href="${escapeHtml(url)}" target="_blank" rel="noopener">YouTube</a></p>`;
+        ${thumb?(url?`<a href="${escapeHtml(url)}" target="_blank" rel="noopener"><img src="${escapeHtml(thumb)}" alt="${escapeHtml(s.title)}"></a>`:`<img src="${escapeHtml(thumb)}" alt="${escapeHtml(s.title)}">`):''}
+        <p><a href="${escapeHtml(backstory)}" target="_blank" rel="noopener">Backstory Pack</a> · <a href="${escapeHtml(visual)}" target="_blank" rel="noopener">Visual Pack</a>${url?` · <a href="${escapeHtml(url)}" target="_blank" rel="noopener">YouTube</a>`:' · <span class="muted">YouTube pending</span>'}</p>`;
         root.appendChild(d);
       });
     }
@@ -370,6 +481,9 @@
 
     [eraSel,typeSel,statusSel].forEach(el=>el.addEventListener('change',()=>{ setParam('preset',''); render(); }));
   });
+  }
+
+  requireAdminAuth().then((ok)=>{ if(ok) initAdmin(); });
 </script>
 </body>
 </html>

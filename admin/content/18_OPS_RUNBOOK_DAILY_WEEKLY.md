@@ -99,11 +99,11 @@ Then review:
 ## “If Blocked” Playbook
 
 ### 1) Login/Auth block
-Symptoms: sign-in wall, invalid session, OTP/captcha loop.
+Symptoms: sign-in wall, invalid saved password, or a stale browser session.
 Actions:
 1. Pause automation attempts
-2. Manual login in browser session
-3. Resume from current step
+2. Open `/admin`, click **Lock admin** if needed, then sign in again with the fixed admin password
+3. Resume from current step after the admin page loads
 4. Note blocker in report/log if persistent
 
 **Done when:** account session restored and flow can continue.
@@ -183,7 +183,7 @@ The live `/admin` Execute now button calls the website API route:
 
 That route is served by the Cloudflare Worker in `workers/social-executor`. It exists because GitHub Pages is static and cannot safely hold social API credentials in browser JavaScript.
 
-The health endpoint is public. The execute endpoint accepts either the logged-in Cloudflare Access session from `/admin` or `EXECUTOR_BEARER_TOKEN` for command-line checks. The browser admin page should not ask for or store the executor token.
+The health endpoint is public. The execute endpoint accepts the fixed admin password from the signed-in browser page or `EXECUTOR_BEARER_TOKEN` for command-line checks. The browser admin page should not ask for or store the executor token.
 
 Deploy/update the Worker:
 
@@ -196,11 +196,13 @@ Set Worker secrets:
 ```bash
 npx wrangler secret put EXECUTOR_BEARER_TOKEN --config workers/social-executor/wrangler.jsonc
 npx wrangler secret put META_LONG_LIVED_TOKEN --config workers/social-executor/wrangler.jsonc
+npx wrangler secret put IG_ACCESS_TOKEN --config workers/social-executor/wrangler.jsonc
 npx wrangler secret put FB_PAGE_ID --config workers/social-executor/wrangler.jsonc
 npx wrangler secret put IG_BUSINESS_ACCOUNT_ID --config workers/social-executor/wrangler.jsonc
 npx wrangler secret put TIKTOK_ACCESS_TOKEN --config workers/social-executor/wrangler.jsonc
 npx wrangler secret put GOOGLE_CLIENT_ID --config workers/social-executor/wrangler.jsonc
-npx wrangler secret put GOOGLE_CLIENT_SECRET --config workers/social-executor/wrangler.jsonc
+# Optional for older OAuth clients that still expose a client secret:
+# npx wrangler secret put GOOGLE_CLIENT_SECRET --config workers/social-executor/wrangler.jsonc
 npx wrangler secret put YOUTUBE_REFRESH_TOKEN --config workers/social-executor/wrangler.jsonc
 npx wrangler secret put X_USER_ACCESS_TOKEN --config workers/social-executor/wrangler.jsonc
 npx wrangler secret put SOCIAL_MEDIA_MAP_JSON --config workers/social-executor/wrangler.jsonc
@@ -233,7 +235,7 @@ Example value:
 {"slow-walk-cover":"1234567890123456789"}
 ```
 
-Example `SOCIAL_MEDIA_MAP_JSON` value for website-hosted media. Keep upload media outside `/admin/*`; Cloudflare Access protects `/admin`, so TikTok and YouTube cannot fetch those URLs as public media.
+Example `SOCIAL_MEDIA_MAP_JSON` value for website-hosted media. Keep upload media outside `/admin/*`; admin content is intended for signed-in browser use, so TikTok and YouTube cannot fetch those URLs as public media.
 
 ```json
 {"slow-walk-video":"https://www.lilyroo.com/assets/media/slow-walk-58s.mp4","slow-walk-cover":"https://i.ytimg.com/vi/R7evPASi8vM/maxresdefault.jpg"}
@@ -288,7 +290,7 @@ Live execute smoke test after secrets are set:
 python3 scripts/check_facebook_publishing.py --post-id FP-AUTO-210 --check-worker-secrets --check-worker-dry-run --executor-token "$EXECUTOR_BEARER_TOKEN"
 ```
 
-Security rule: protect `/admin/*` with Cloudflare Access. The Worker validates the Cloudflare Access JWT/cookie for browser execute calls and also keeps `EXECUTOR_BEARER_TOKEN` as a non-browser fallback for scripts.
+Security rule: `/admin` uses the fixed password `WhenLilyTalks` and remembers sign-in on the same computer with browser localStorage. The Worker validates the matching admin password header for browser execute calls and keeps `EXECUTOR_BEARER_TOKEN` as a non-browser fallback for scripts.
 
 Local-only Python bridge files are still useful for testing from a laptop. They are not used by the live website button.
 
@@ -297,10 +299,11 @@ Required local files are gitignored and live under the workspace-level `secrets/
 - `secrets/social_api.env`
   - Executor: `EXECUTOR_BEARER_TOKEN` for live dry-run checks
   - X: `X_USER_ACCESS_TOKEN` for OAuth 2 user context, or `X_API_KEY`, `X_API_SECRET`, `X_ACCESS_TOKEN`, `X_ACCESS_TOKEN_SECRET` for OAuth 1.0a
-  - Meta: `META_LONG_LIVED_TOKEN`, `FB_PAGE_ID`, `IG_BUSINESS_ACCOUNT_ID`, optional `META_GRAPH_VERSION`
+  - Meta: `META_LONG_LIVED_TOKEN`, optional `IG_ACCESS_TOKEN`, `FB_PAGE_ID`, `IG_BUSINESS_ACCOUNT_ID`, optional `META_GRAPH_VERSION`
   - TikTok: `TIKTOK_ACCESS_TOKEN`, optional `TIKTOK_IS_AIGC=true|false`
 - `secrets/youtube-api.env`
-  - `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `YOUTUBE_REFRESH_TOKEN`
+  - `GOOGLE_CLIENT_ID`, `YOUTUBE_REFRESH_TOKEN`
+  - optional: `GOOGLE_CLIENT_SECRET` for older OAuth clients that still expose a client secret
 - `secrets/social-media-map.json`
   - maps queue `media_key` values like `slow-walk-video` to local video files for TikTok/YouTube
   - maps image keys like `slow-walk-cover` to local image files when a platform needs uploadable local media
