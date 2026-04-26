@@ -6,60 +6,37 @@
   <title>Archive — Lily Roo</title>
   <meta name="description" content="The Lily Roo archive: transmissions, songs, and sessions." />
   <meta name="theme-color" content="#0b0c10" />
-  <style>
-    :root{--bg:#0b0c10;--card:#11131a;--text:#f6f7fb;--muted:#b7bccb;--accent:#8a5cff;--accent2:#33d6c9}
-    *{box-sizing:border-box}
-    body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-      background:radial-gradient(1200px 800px at 20% 10%, #201b3a 0%, var(--bg) 60%);
-      color:var(--text);
-    }
-    .wrap{max-width:880px;margin:0 auto;padding:56px 20px}
-    .card{background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
-      border:1px solid rgba(255,255,255,.10);border-radius:18px;padding:30px;
-      box-shadow:0 10px 40px rgba(0,0,0,.35)
-    }
-    h1{margin:0 0 10px;font-size:34px;letter-spacing:-.02em}
-    p{color:var(--muted);margin:0 0 18px;line-height:1.5}
-
-    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace}
-    .sig{display:inline-block;padding:2px 8px;border-radius:999px;border:1px solid rgba(255,255,255,.12);
-      background:rgba(0,0,0,.18);color:var(--muted);font-size:12px
-    }
-
-    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:14px}
-    @media (max-width:860px){.grid{grid-template-columns:1fr}}
-
-    .album{display:flex;flex-direction:column;gap:12px}
-    .album-head{display:flex;flex-direction:column;gap:4px;padding:4px 2px}
-    .album-title{margin:0;font-size:22px;letter-spacing:-.02em}
-    .album-sub{margin:0;color:var(--muted);font-size:13px}
-    .album-list{display:flex;flex-direction:column;gap:12px}
-
-    a.item{display:flex;gap:14px;align-items:center;padding:14px;border-radius:16px;
-      border:1px solid rgba(255,255,255,.10);background:rgba(17,19,26,.55);text-decoration:none;color:var(--text)
-    }
-    a.item:hover{border-color:rgba(138,92,255,.55);box-shadow:0 0 0 3px rgba(138,92,255,.15)}
-    .thumb{width:92px;height:52px;border-radius:12px;object-fit:cover;flex:0 0 auto;border:1px solid rgba(255,255,255,.14)}
-    .meta{min-width:0}
-    .title{font-weight:750;line-height:1.2}
-    .sub{color:var(--muted);font-size:13px;margin-top:4px}
-
-    .toprow{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
-    a.back{display:inline-block;margin-top:16px;color:var(--muted)}
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
 </head>
-<body>
-  <div class="wrap">
-    <div class="card">
+<body class="archive-page">
+  <div class="grain"></div>
+  <header class="site-header home-header">
+    <nav aria-label="Primary" class="main-nav">
+      <a href="/">Home</a>
+      <a href="/music.html">Archive</a>
+      <a href="https://www.facebook.com/903693509504290" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://www.tiktok.com/@lilyroo930" target="_blank" rel="noopener">TikTok</a>
+      <a href="https://www.paypal.com/ncp/payment/HKQAKAJ2S8EK4" target="_blank" rel="noopener">Donate</a>
+      <a href="/join.html">Join</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="archive-hero">
       <div class="toprow">
-        <h1 style="margin:0">Archive</h1>
+        <h1>Archive</h1>
         <span class="sig mono">TRANSMISSIONS</span>
       </div>
       <p>Every upload, grouped by album so the signal log feels like a discography.</p>
+    </section>
 
+    <section class="archive-card">
       <div class="grid" aria-label="Archive list by album">
         <section class="album" aria-labelledby="album-fifteen-seconds">
           <div class="album-head">
@@ -67,6 +44,13 @@
             <p class="album-sub">Foundational album transmissions</p>
           </div>
           <div class="album-list">
+            <div class="item pending">
+              <img class="thumb" src="/assets/img/the-power-of-light/the-power-of-light-my-second-room-has-no-light-switch-reprise-album-art.png" alt="The Power of Light cover art" />
+              <div class="meta">
+                <div class="title">The Power of Light (My Second Room Has No Light Switch Reprise)</div>
+                <div class="sub">new reprise of My Second Room Has No Light Switch</div>
+              </div>
+            </div>
             <a class="item" href="https://youtu.be/Hve5drBlN58" target="_blank" rel="noreferrer">
               <img class="thumb" src="https://i.ytimg.com/vi/Hve5drBlN58/hqdefault.jpg" alt="I Learned it all in Fifteen Seconds thumbnail" />
               <div class="meta"><div class="title">I Learned it all in Fifteen Seconds</div></div>
@@ -76,8 +60,8 @@
               <div class="meta"><div class="title">Second Serve</div></div>
             </a>
             <a class="item" href="https://youtu.be/k3VdR2FE0EI" target="_blank" rel="noreferrer">
-              <img class="thumb" src="https://i.ytimg.com/vi/k3VdR2FE0EI/hqdefault.jpg" alt="My Second Room Has No Lightswitch thumbnail" />
-              <div class="meta"><div class="title">My Second Room Has No Lightswitch</div></div>
+              <img class="thumb" src="https://i.ytimg.com/vi/k3VdR2FE0EI/hqdefault.jpg" alt="My Second Room Has No Light Switch thumbnail" />
+              <div class="meta"><div class="title">My Second Room Has No Light Switch</div></div>
             </a>
             <a class="item" href="https://youtu.be/cVuK20aaJb8" target="_blank" rel="noreferrer">
               <img class="thumb" src="https://i.ytimg.com/vi/cVuK20aaJb8/hqdefault.jpg" alt="The Importance of Bearing Witness thumbnail" />
@@ -173,10 +157,16 @@
         </section>
       </div>
 
-      <p style="margin-top:18px">Full channel: <a href="https://www.youtube.com/@lilyroo.artist" target="_blank" rel="noreferrer">@lilyroo.artist</a></p>
+      <p class="archive-channel">Full channel: <a href="https://www.youtube.com/@lilyroo.artist" target="_blank" rel="noreferrer">@lilyroo.artist</a></p>
+    </section>
+  </main>
 
-      <a class="back" href="/">← Back to home</a>
-    </div>
-  </div>
+  <footer class="site-footer">
+    <p>&copy; 2026 Lily Roo</p>
+    <nav aria-label="Legal" class="footer-links">
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+    </nav>
+  </footer>
 </body>
 </html>

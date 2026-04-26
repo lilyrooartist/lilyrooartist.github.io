@@ -55,6 +55,10 @@ main,
   border-bottom: 1px solid var(--line);
 }
 
+.home-header {
+  justify-content: flex-end;
+}
+
 .brand {
   color: var(--text);
   text-decoration: none;
@@ -216,30 +220,6 @@ main {
   box-shadow: 0 0 0 1px rgba(246, 244, 240, 0.35), 0 16px 38px rgba(0, 0, 0, 0.38);
 }
 
-.stripe {
-  overflow: hidden;
-  border-bottom: 1px solid var(--line);
-  border-top: 1px solid var(--line);
-  margin: 1rem 0 1.15rem;
-}
-
-.stripe p {
-  margin: 0;
-  padding: 0.32rem 0;
-  white-space: nowrap;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  font-family: "Space Mono", monospace;
-  font-size: 0.64rem;
-  color: var(--muted);
-  animation: tape 24s linear infinite;
-}
-
-@keyframes tape {
-  from { transform: translateX(0); }
-  to { transform: translateX(-45%); }
-}
-
 .panel {
   margin: 1.7rem 0;
   padding: clamp(1.2rem, 2vw, 2rem);
@@ -255,6 +235,156 @@ main {
   grid-template-columns: 1fr;
   margin-top: 1.25rem;
   padding: clamp(0.75rem, 1.4vw, 1rem);
+}
+
+.archive-hero {
+  padding: clamp(2.2rem, 6vw, 4.6rem) 0 1.25rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.archive-hero h1 {
+  margin: 0;
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 0.08em;
+  font-size: clamp(3.2rem, 10vw, 6.8rem);
+  line-height: 0.9;
+}
+
+.archive-hero p {
+  width: min(680px, 100%);
+  margin: 0.45rem 0 0;
+  color: var(--muted);
+  font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+  line-height: 1.35;
+}
+
+.archive-card {
+  margin: 1.7rem 0;
+  padding: clamp(1rem, 1.8vw, 1.3rem);
+  border: 1px solid var(--line);
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+}
+
+.archive-page .mono {
+  font-family: "Space Mono", monospace;
+}
+
+.archive-page .sig {
+  display: inline-block;
+  padding: 0.24rem 0.5rem;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+}
+
+.archive-page .toprow {
+  display: flex;
+  gap: 0.75rem;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+
+.archive-page .grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.9rem, 1.5vw, 1.2rem);
+}
+
+.archive-page .album {
+  min-width: 0;
+}
+
+.archive-page .album-head {
+  min-height: 5.3rem;
+  padding-bottom: 0.75rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.archive-page .album-title {
+  margin: 0;
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 0.06em;
+  font-size: clamp(1.8rem, 3.2vw, 2.5rem);
+  line-height: 0.95;
+}
+
+.archive-page .album-sub {
+  margin: 0.35rem 0 0;
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+.archive-page .album-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.archive-page .item {
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: center;
+  min-height: 78px;
+  padding: 0.65rem;
+  border: 1px solid var(--line);
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.025);
+  text-decoration: none;
+  transition: border-color 160ms ease, background-color 160ms ease, transform 160ms ease;
+}
+
+.archive-page a.item:hover,
+.archive-page a.item:focus-visible {
+  border-color: var(--gold);
+  background: rgba(203, 168, 111, 0.08);
+  transform: translateY(-1px);
+}
+
+.archive-page .item.pending {
+  border-color: rgba(203, 168, 111, 0.38);
+  background: rgba(203, 168, 111, 0.08);
+}
+
+.archive-page .thumb {
+  width: 92px;
+  height: 52px;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  display: block;
+}
+
+.archive-page .meta {
+  min-width: 0;
+}
+
+.archive-page .title {
+  font-family: "Space Mono", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  line-height: 1.25;
+}
+
+.archive-page .sub {
+  margin-top: 0.3rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.2;
+}
+
+.archive-channel {
+  margin: 1.15rem 0 0;
+  color: var(--muted);
+  font-family: "Space Mono", monospace;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.archive-channel a {
+  color: var(--gold);
 }
 
 .panel h2 {
@@ -523,6 +653,14 @@ main {
   .panel-now-playing,
   .panel-support {
     grid-template-columns: 1fr;
+  }
+
+  .archive-page .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .archive-page .album-head {
+    min-height: 0;
   }
 
   .show-list li {
