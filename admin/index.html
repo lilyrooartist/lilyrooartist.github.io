@@ -250,6 +250,17 @@
     return data;
   }
 
+  function postFingerprint(post, text){
+    const raw=[post.id||'',post.scheduled_at||'',post.platform||'',post.song||'',text||'',post.imagery_url||'',post.clip_url||''].join('|');
+    let hash=0;
+    for(let i=0;i<raw.length;i++) hash=(Math.imul(31,hash)+raw.charCodeAt(i))|0;
+    return `${post.id||'post'}_${(hash>>>0).toString(36)}`;
+  }
+
+  function postStatusKey(post, text){
+    return `status_${postFingerprint(post,text)}`;
+  }
+
   fetch(`/admin/future-posts.json?v=${Date.now()}`, {cache:'no-store'}).then(r=>r.json()).then(payload=>{
     const list=Array.isArray(payload)?payload:(payload.posts||[]);
     if(payload.last_synced) document.getElementById('future-sync').textContent='Last synced: '+formatDate(payload.last_synced);
@@ -261,8 +272,8 @@
       const key=`redo_${p.id}`; const idx=Number(localStorage.getItem(key)||0)%(p.drafts?.length||1);
       const text=(p.drafts&&p.drafts.length)?p.drafts[idx]:p.text;
       const d=document.createElement('div'); d.className='post';
-      const statusKey=`status_${p.id}`;
-      const statusVal=localStorage.getItem(statusKey)||'queued';
+      const getStatus=(currentText)=>localStorage.getItem(postStatusKey(p,currentText))||'queued';
+      const statusVal=getStatus(text);
       const mediaKey=(p.media_key||p.x_media_key||'').trim();
       const execLabel='Execute now';
       d.innerHTML=`<div class="meta"><span class="platform">${escapeHtml(p.platform)}</span><span class="time">${escapeHtml(formatDate(p.scheduled_at))}</span></div>
@@ -279,20 +290,25 @@
       d.querySelector('[data-role="redo"]').addEventListener('click',()=>{
         if(!p.drafts||!p.drafts.length) return;
         const n=(Number(localStorage.getItem(key)||0)+1)%p.drafts.length;
-        localStorage.setItem(key,String(n)); d.querySelector('[data-role="text"]').textContent=p.drafts[n];
+        localStorage.setItem(key,String(n));
+        d.querySelector('[data-role="text"]').textContent=p.drafts[n];
+        d.querySelector('[data-role="status"]').textContent=getStatus(p.drafts[n]);
       });
       d.querySelector('[data-role="exec"]').addEventListener('click',async()=>{
+        const currentText=d.querySelector('[data-role="text"]').textContent;
+        const statusKey=postStatusKey(p,currentText);
+        const previousStatus=getStatus(currentText);
         try{
           d.querySelector('[data-role="status"]').textContent='posting';
-          const result = await executeWebPost(p, d.querySelector('[data-role="text"]').textContent, p.reply_text||'', mediaKey);
+          const result = await executeWebPost(p, currentText, p.reply_text||'', mediaKey);
           localStorage.setItem(statusKey,'posted');
           const postedUrl=result.tweet_url||result.video_url||result.post_url||result.media_id||result.publish_id||'';
-          if(postedUrl) localStorage.setItem(`posted_url_${p.id}`,postedUrl);
+          if(postedUrl) localStorage.setItem(`posted_url_${postFingerprint(p,currentText)}`,postedUrl);
           d.querySelector('[data-role="status"]').textContent='posted';
           alert(`Posted: ${postedUrl || result.platform || 'success'}`);
           return;
         }catch(err){
-          d.querySelector('[data-role="status"]').textContent=statusVal;
+          d.querySelector('[data-role="status"]').textContent=previousStatus;
           alert(`Social executor failed: ${err.message}`);
           return;
         }
