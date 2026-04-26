@@ -224,7 +224,13 @@
   const executorTokenKey='lilyroo_executor_token';
 
   function savedExecutorToken(){
-    return window.LILYROO_EXECUTOR_TOKEN || localStorage.getItem(executorTokenKey) || sessionStorage.getItem(executorTokenKey) || '';
+    const configured=window.LILYROO_EXECUTOR_TOKEN || '';
+    if(configured) return configured;
+    const persistent=localStorage.getItem(executorTokenKey) || '';
+    if(persistent) return persistent;
+    const session=sessionStorage.getItem(executorTokenKey) || '';
+    if(session) localStorage.setItem(executorTokenKey, session);
+    return session;
   }
 
   function executorToken(){
