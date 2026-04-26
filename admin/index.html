@@ -250,7 +250,7 @@
     return data;
   }
 
-  fetch('/admin/future-posts.json').then(r=>r.json()).then(payload=>{
+  fetch(`/admin/future-posts.json?v=${Date.now()}`, {cache:'no-store'}).then(r=>r.json()).then(payload=>{
     const list=Array.isArray(payload)?payload:(payload.posts||[]);
     if(payload.last_synced) document.getElementById('future-sync').textContent='Last synced: '+formatDate(payload.last_synced);
     const posts=list.filter(p=>{const t=new Date(p.scheduled_at); return t>=now && t<=in7;}).sort((a,b)=>new Date(a.scheduled_at)-new Date(b.scheduled_at));
