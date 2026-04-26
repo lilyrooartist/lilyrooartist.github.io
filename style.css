@@ -170,18 +170,21 @@ main {
   border-color: var(--gold);
 }
 
-.btn-donate-cool {
-  background: linear-gradient(135deg, #f9d87a 0%, #f3b15a 35%, #d86bff 100%);
-  border-color: rgba(255, 213, 128, 0.95);
-  color: #1b0f08;
+.btn-donate-clear {
+  background: #f6f4f0;
+  border-color: #f6f4f0;
+  color: #070709;
   font-weight: 700;
-  box-shadow: 0 0 0 1px rgba(255, 228, 173, 0.35), 0 0 22px rgba(216, 107, 255, 0.38);
+  box-shadow: 0 0 0 1px rgba(203, 168, 111, 0.35), 0 14px 32px rgba(0, 0, 0, 0.32);
 }
 
-.btn-donate-cool:hover,
-.btn-donate-cool:focus-visible {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 0 0 1px rgba(255, 228, 173, 0.55), 0 0 30px rgba(216, 107, 255, 0.55);
+.btn-donate-clear:hover,
+.btn-donate-clear:focus-visible {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #070709;
+  transform: translateY(-2px);
+  box-shadow: 0 0 0 1px rgba(246, 244, 240, 0.35), 0 16px 38px rgba(0, 0, 0, 0.38);
 }
 
 .stripe {
@@ -337,7 +340,7 @@ main {
   margin-top: 0.8rem;
 }
 
-.support-fallback a {
+.support-fallback a:not(.btn) {
   color: var(--gold);
 }
 
