@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import csv, json
+import csv, json, re
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -10,6 +10,7 @@ FALLBACK_SOURCE = BASE / 'Backstory' / 'Scheduled_Posts.csv'
 if not SOURCE.exists():
     SOURCE = FALLBACK_SOURCE
 OUT = REPO_ROOT / 'admin' / 'future-posts.json'
+PUBLISHED_LOG = REPO_ROOT / 'admin' / 'content' / 'Published_Log.csv'
 
 def load_posts(path: Path):
     items = []
@@ -37,16 +38,34 @@ def load_posts(path: Path):
             })
     return items
 
+def load_published_queue_ids(path: Path):
+    if not path.exists():
+        return set()
+    ids = set()
+    with path.open(newline='', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        for r in reader:
+            content_id = (r.get('content_id') or '').strip()
+            if content_id.startswith('FP-AUTO-'):
+                ids.add(content_id)
+            notes = r.get('notes') or ''
+            ids.update(re.findall(r'queue_id=(FP-AUTO-\d+)', notes))
+    return ids
+
 try:
     posts = load_posts(SOURCE)
 except OSError:
     SOURCE = FALLBACK_SOURCE
     posts = load_posts(SOURCE)
 
+published_queue_ids = load_published_queue_ids(PUBLISHED_LOG)
+posts = [p for p in posts if p.get('id') not in published_queue_ids]
 posts.sort(key=lambda p: p.get('scheduled_at', ''))
 payload = {
     'last_synced': datetime.now(timezone.utc).isoformat(),
     'source': str(SOURCE.relative_to(REPO_ROOT)) if SOURCE.is_relative_to(REPO_ROOT) else str(SOURCE),
+    'published_log': str(PUBLISHED_LOG.relative_to(REPO_ROOT)),
+    'excluded_published_ids': sorted(published_queue_ids),
     'posts': posts,
 }
 
