@@ -10,10 +10,12 @@ from pathlib import Path
 from typing import Any
 
 from post_x_from_queue import oauth1_keys
+from post_x_from_queue import oauth1_header
 from social_exec_common import REPO_ROOT, SOCIAL_ENV, get_row, load_env
 
 DEFAULT_EXECUTOR_URL = "https://www.lilyroo.com/api/social/execute"
 DEFAULT_READINESS_URL = "https://www.lilyroo.com/api/social/readiness"
+VERIFY_CREDENTIALS_URL = "https://api.x.com/1.1/account/verify_credentials.json"
 WRANGLER_CONFIG = REPO_ROOT / "workers" / "social-executor" / "wrangler.jsonc"
 X_OAUTH1_SECRET_NAMES = {"X_API_KEY", "X_API_SECRET", "X_ACCESS_TOKEN", "X_ACCESS_TOKEN_SECRET"}
 
@@ -73,6 +75,30 @@ def worker_json_request(url: str, token: str = "", payload: dict[str, Any] | Non
         return {"status": exc.code, "body": body_json}
 
 
+def local_verify_credentials(env: dict[str, str]) -> dict[str, Any]:
+    request = urllib.request.Request(
+        VERIFY_CREDENTIALS_URL,
+        method="GET",
+        headers={"Authorization": oauth1_header("GET", VERIFY_CREDENTIALS_URL, env)},
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=20) as response:
+            data = json.loads(response.read().decode("utf-8"))
+            return {
+                "ok": True,
+                "status": response.status,
+                "screen_name": data.get("screen_name", ""),
+                "id_str": data.get("id_str", ""),
+            }
+    except urllib.error.HTTPError as exc:
+        raw = exc.read().decode("utf-8", "replace")
+        try:
+            body_json: Any = json.loads(raw)
+        except Exception:
+            body_json = raw
+        return {"ok": False, "status": exc.code, "body": body_json}
+
+
 def x_payload(row: dict[str, str], text: str) -> dict[str, Any]:
     return {
         "postId": row.get("id", ""),
@@ -94,6 +120,7 @@ def main() -> int:
     parser.add_argument("--executor-url", default=DEFAULT_EXECUTOR_URL)
     parser.add_argument("--readiness-url", default=DEFAULT_READINESS_URL)
     parser.add_argument("--executor-token", default="")
+    parser.add_argument("--check-local-x-auth", action="store_true")
     parser.add_argument("--check-worker-secrets", action="store_true")
     parser.add_argument("--check-worker-readiness", action="store_true")
     parser.add_argument("--check-worker-dry-run", action="store_true")
@@ -138,6 +165,12 @@ def main() -> int:
             "This row has an explicit media key. Set X_MEDIA_MAP_JSON for pre-uploaded media "
             "or complete OAuth 1.0a keys for image upload."
         )
+
+    if args.check_local_x_auth:
+        x_auth_check = local_verify_credentials(local_env)
+        report["local_x_auth_check"] = x_auth_check
+        if not x_auth_check.get("ok"):
+            report["ok"] = False
 
     if args.check_worker_secrets:
         names = worker_secret_names()
