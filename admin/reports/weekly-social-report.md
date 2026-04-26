@@ -1,7 +1,7 @@
 # Weekly Social Report — Lily Roo
 
 **Period:** 2026-04-19 to 2026-04-25  
-**Last updated:** 2026-04-25 07:00 AM EDT
+**Last updated:** 2026-04-25 09:38 PM EDT
 
 ## KPI Goal
 - Primary growth target: **1,000 YouTube subscribers** (monetization milestone)
@@ -31,7 +31,7 @@
 ### Facebook
 - Followers/Page likes: **pending**
 - Reach (7d): **pending**
-- Latest post: posted
+- Latest post: https://www.facebook.com/903693509504290_122113878687249470
 
 ## Weekly Activity Log
 - Admin site now includes left-tab ops navigation (Promo / Backstory / Reports)

@@ -8,8 +8,7 @@ import urllib.request
 
 from social_exec_common import SOCIAL_ENV, append_published_log, get_row, load_env, public_media_url, song_from_row
 
-GRAPH_VERSION = 'v23.0'
-BASE = f'https://graph.facebook.com/{GRAPH_VERSION}'
+DEFAULT_GRAPH_VERSION = 'v25.0'
 
 
 def api_post(url: str, data: dict[str, str]) -> dict:
@@ -17,6 +16,11 @@ def api_post(url: str, data: dict[str, str]) -> dict:
     req = urllib.request.Request(url, data=body, method='POST')
     with urllib.request.urlopen(req) as resp:
         return json.loads(resp.read().decode('utf-8'))
+
+
+def graph_base(env: dict[str, str]) -> str:
+    version = (env.get('META_GRAPH_VERSION') or DEFAULT_GRAPH_VERSION).strip()
+    return f'https://graph.facebook.com/{version}'
 
 
 def facebook_post(row: dict[str, str], text: str, env: dict[str, str], dry_run: bool) -> dict:
@@ -37,7 +41,7 @@ def facebook_post(row: dict[str, str], text: str, env: dict[str, str], dry_run: 
     if not token or not page_id:
         raise RuntimeError('Facebook posting needs META_LONG_LIVED_TOKEN and FB_PAGE_ID in secrets/social_api.env')
     if media_url:
-        data = api_post(f'{BASE}/{page_id}/photos', {
+        data = api_post(f'{graph_base(env)}/{page_id}/photos', {
             'url': media_url,
             'caption': text,
             'published': 'true',
@@ -47,7 +51,7 @@ def facebook_post(row: dict[str, str], text: str, env: dict[str, str], dry_run: 
         payload = {'message': text, 'access_token': token}
         if link:
             payload['link'] = link
-        data = api_post(f'{BASE}/{page_id}/feed', payload)
+        data = api_post(f'{graph_base(env)}/{page_id}/feed', payload)
     post_id = data.get('post_id') or data.get('id') or ''
     post_url = f'https://www.facebook.com/{post_id}' if post_id else 'posted'
     append_published_log('Facebook', post_url, song_from_row(row), text, 'posted via Meta Graph API')
@@ -78,11 +82,11 @@ def instagram_post(row: dict[str, str], text: str, env: dict[str, str], dry_run:
         create_payload.update({'media_type': 'REELS', 'video_url': media_url})
     else:
         create_payload.update({'image_url': media_url})
-    creation = api_post(f'{BASE}/{ig_id}/media', create_payload)
+    creation = api_post(f'{graph_base(env)}/{ig_id}/media', create_payload)
     creation_id = creation.get('id')
     if not creation_id:
         raise RuntimeError(f'Instagram media creation failed: {creation}')
-    publish = api_post(f'{BASE}/{ig_id}/media_publish', {
+    publish = api_post(f'{graph_base(env)}/{ig_id}/media_publish', {
         'creation_id': creation_id,
         'access_token': token,
     })

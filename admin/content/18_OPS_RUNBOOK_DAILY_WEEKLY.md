@@ -145,6 +145,16 @@ Check website posting executor health:
 curl https://www.lilyroo.com/api/social/health
 ```
 
+Check Facebook publishing readiness without posting:
+```bash
+python3 scripts/check_facebook_publishing.py --post-id FP-AUTO-210 --check-worker-secrets
+```
+
+Check X publishing readiness without posting:
+```bash
+python3 scripts/check_x_publishing.py --post-id FP-AUTO-213 --check-worker-secrets
+```
+
 Local development fallback only:
 ```bash
 python3 scripts/social_execute_bridge.py
@@ -173,6 +183,8 @@ The live `/admin` Execute now button calls the website API route:
 
 That route is served by the Cloudflare Worker in `workers/social-executor`. It exists because GitHub Pages is static and cannot safely hold social API credentials in browser JavaScript.
 
+The health endpoint is public. The execute endpoint accepts either the logged-in Cloudflare Access session from `/admin` or `EXECUTOR_BEARER_TOKEN` for command-line checks. The browser admin page should not ask for or store the executor token.
+
 Deploy/update the Worker:
 
 ```bash
@@ -182,6 +194,7 @@ npx wrangler deploy --config workers/social-executor/wrangler.jsonc
 Set Worker secrets:
 
 ```bash
+npx wrangler secret put EXECUTOR_BEARER_TOKEN --config workers/social-executor/wrangler.jsonc
 npx wrangler secret put META_LONG_LIVED_TOKEN --config workers/social-executor/wrangler.jsonc
 npx wrangler secret put FB_PAGE_ID --config workers/social-executor/wrangler.jsonc
 npx wrangler secret put IG_BUSINESS_ACCOUNT_ID --config workers/social-executor/wrangler.jsonc
@@ -191,6 +204,12 @@ npx wrangler secret put GOOGLE_CLIENT_SECRET --config workers/social-executor/wr
 npx wrangler secret put YOUTUBE_REFRESH_TOKEN --config workers/social-executor/wrangler.jsonc
 npx wrangler secret put X_USER_ACCESS_TOKEN --config workers/social-executor/wrangler.jsonc
 npx wrangler secret put SOCIAL_MEDIA_MAP_JSON --config workers/social-executor/wrangler.jsonc
+```
+
+Or push selected values from the local gitignored secret files:
+
+```bash
+python3 scripts/push_social_worker_secrets.py X_USER_ACCESS_TOKEN
 ```
 
 For X image upload fallback, also set OAuth 1.0a credentials:
@@ -222,15 +241,63 @@ Example `SOCIAL_MEDIA_MAP_JSON` value for website-hosted media:
 
 TikTok and YouTube need a public direct video URL, either in the queue `clip_url` column or in `SOCIAL_MEDIA_MAP_JSON`.
 
-Security rule: protect both `/admin/*` and `/api/social/*` with Cloudflare Access. `EXECUTOR_BEARER_TOKEN` is an optional second layer, not a replacement for Access. Only set it if the admin page also defines `window.LILYROO_EXECUTOR_TOKEN` at runtime.
+### X publishing
+
+The X queue path publishes text posts and optional reply posts through `POST https://api.x.com/2/tweets`.
+
+Required Cloudflare secrets for text/reply posting:
+- `EXECUTOR_BEARER_TOKEN`: random posting token used by command-line checks and emergency fallback
+- `X_USER_ACCESS_TOKEN`: OAuth 2 user access token with post/write access
+
+OAuth 1.0a credentials are only required for direct X media upload:
+- `X_API_KEY`
+- `X_API_SECRET`
+- `X_ACCESS_TOKEN`
+- `X_ACCESS_TOKEN_SECRET`
+
+Queued X posts are text-only unless `x_media_key` or `media_key` is populated. If an X row has an explicit media key, either map it to pre-uploaded X media IDs with `X_MEDIA_MAP_JSON`, or provide the OAuth 1.0a credentials for image upload.
+
+Current queued X smoke test:
+```bash
+python3 scripts/post_x_from_queue.py --post-id FP-AUTO-213 --dry-run
+```
+
+Live execute smoke test after secrets are set:
+```bash
+python3 scripts/check_x_publishing.py --post-id FP-AUTO-213 --check-worker-secrets --check-worker-readiness --check-worker-dry-run --executor-token "$EXECUTOR_BEARER_TOKEN"
+```
+
+### Facebook publishing
+
+The Facebook queue path publishes Page posts through Meta Graph API `v25.0`.
+
+Required Cloudflare secrets:
+- `EXECUTOR_BEARER_TOKEN`: random posting token used by command-line checks and emergency fallback
+- `META_LONG_LIVED_TOKEN`: Page access token for the Lily Roo Facebook Page
+- `FB_PAGE_ID`: Lily Roo Facebook Page ID
+
+The Meta token must be able to create Page posts. In Meta's current Pages API docs, Page publishing uses a Page access token with `pages_manage_posts`, and the publish endpoints are `/{page_id}/feed` for text/link posts and `/{page_id}/photos` for image URL posts.
+
+Current queued Facebook smoke test:
+```bash
+python3 scripts/post_meta_from_queue.py --post-id FP-AUTO-210 --dry-run
+```
+
+Live execute smoke test after secrets are set:
+```bash
+python3 scripts/check_facebook_publishing.py --post-id FP-AUTO-210 --check-worker-secrets --check-worker-dry-run --executor-token "$EXECUTOR_BEARER_TOKEN"
+```
+
+Security rule: protect `/admin/*` with Cloudflare Access. The Worker validates the Cloudflare Access JWT/cookie for browser execute calls and also keeps `EXECUTOR_BEARER_TOKEN` as a non-browser fallback for scripts.
 
 Local-only Python bridge files are still useful for testing from a laptop. They are not used by the live website button.
 
 Required local files are gitignored and live under the workspace-level `secrets/` directory:
 
 - `secrets/social_api.env`
+  - Executor: `EXECUTOR_BEARER_TOKEN` for live dry-run checks
   - X: `X_USER_ACCESS_TOKEN` for OAuth 2 user context, or `X_API_KEY`, `X_API_SECRET`, `X_ACCESS_TOKEN`, `X_ACCESS_TOKEN_SECRET` for OAuth 1.0a
-  - Meta: `META_LONG_LIVED_TOKEN`, `FB_PAGE_ID`, `IG_BUSINESS_ACCOUNT_ID`
+  - Meta: `META_LONG_LIVED_TOKEN`, `FB_PAGE_ID`, `IG_BUSINESS_ACCOUNT_ID`, optional `META_GRAPH_VERSION`
   - TikTok: `TIKTOK_ACCESS_TOKEN`, optional `TIKTOK_IS_AIGC=true|false`
 - `secrets/youtube-api.env`
   - `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `YOUTUBE_REFRESH_TOKEN`
