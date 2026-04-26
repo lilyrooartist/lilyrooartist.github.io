@@ -221,15 +221,24 @@
   loadQuickStart();
 
   const executorUrl=window.LILYROO_SOCIAL_EXECUTOR_URL || '/api/social/execute';
+  const executorTokenKey='lilyroo_executor_token';
+
+  function savedExecutorToken(){
+    return window.LILYROO_EXECUTOR_TOKEN || localStorage.getItem(executorTokenKey) || sessionStorage.getItem(executorTokenKey) || '';
+  }
 
   function executorToken(){
-    const storageKey='lilyroo_executor_token';
-    let token=window.LILYROO_EXECUTOR_TOKEN || sessionStorage.getItem(storageKey) || '';
+    let token=savedExecutorToken();
     if(!token){
       token=window.prompt('Executor access token') || '';
-      if(token) sessionStorage.setItem(storageKey, token);
+      if(token) localStorage.setItem(executorTokenKey, token);
     }
     return token;
+  }
+
+  function clearExecutorToken(){
+    localStorage.removeItem(executorTokenKey);
+    sessionStorage.removeItem(executorTokenKey);
   }
 
   async function executeWebPost(post, text, replyText, mediaKey){
@@ -259,7 +268,7 @@
     }
     const data = await res.json().catch(()=>({ok:false,error:'Invalid JSON from local social executor'}));
     if(res.status===401){
-      sessionStorage.removeItem('lilyroo_executor_token');
+      clearExecutorToken();
     }
     if(!res.ok || !data.ok) throw new Error(data.error || `Social executor failed (${res.status})`);
     return data;
