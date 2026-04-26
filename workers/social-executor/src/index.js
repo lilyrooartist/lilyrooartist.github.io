@@ -118,7 +118,8 @@ async function postFacebook(payload, env) {
 }
 
 async function postInstagram(payload, env) {
-  requireEnv(env, ["META_LONG_LIVED_TOKEN", "IG_BUSINESS_ACCOUNT_ID"], "Instagram posting");
+  requireEnv(env, ["META_LONG_LIVED_TOKEN"], "Instagram posting");
+  const igBusinessAccountId = await instagramBusinessAccountId(env);
   const url = mediaUrl(payload, env);
   if (!url) throw new Error("Instagram posting needs imageryUrl or clipUrl");
 
@@ -134,11 +135,11 @@ async function postInstagram(payload, env) {
     createParams.image_url = url;
   }
 
-  const creation = await formPost(`${metaBase(env)}/${env.IG_BUSINESS_ACCOUNT_ID}/media`, createParams);
+  const creation = await formPost(`${metaBase(env)}/${igBusinessAccountId}/media`, createParams);
   const creationId = creation.id;
   if (!creationId) throw new Error(`Instagram media creation failed: ${JSON.stringify(creation)}`);
 
-  const publish = await formPost(`${metaBase(env)}/${env.IG_BUSINESS_ACCOUNT_ID}/media_publish`, {
+  const publish = await formPost(`${metaBase(env)}/${igBusinessAccountId}/media_publish`, {
     access_token: env.META_LONG_LIVED_TOKEN,
     creation_id: creationId,
   });
@@ -150,6 +151,23 @@ async function postInstagram(payload, env) {
     media_id: publish.id || "",
     raw: publish,
   };
+}
+
+async function instagramBusinessAccountId(env) {
+  if (env.IG_BUSINESS_ACCOUNT_ID) return env.IG_BUSINESS_ACCOUNT_ID;
+  if (!env.FB_PAGE_ID) {
+    throw new Error("Instagram posting needs Worker secrets/vars: IG_BUSINESS_ACCOUNT_ID or FB_PAGE_ID");
+  }
+
+  const page = await jsonGet(`${metaBase(env)}/${env.FB_PAGE_ID}`, {
+    fields: "instagram_business_account",
+    access_token: env.META_LONG_LIVED_TOKEN,
+  });
+  const id = text(page?.instagram_business_account?.id);
+  if (!id) {
+    throw new Error("Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page");
+  }
+  return id;
 }
 
 async function postTikTok(payload, env) {
@@ -206,10 +224,13 @@ async function postYouTube(payload, env) {
   const media = await fetch(url);
   if (!media.ok) throw new Error(`Unable to fetch YouTube media URL (${media.status})`);
   const videoBytes = await media.arrayBuffer();
+  if (looksLikeGitLfsPointer(videoBytes)) {
+    throw new Error("YouTube media URL resolved to a Git LFS pointer, not a playable video. Host the Shorts clip as a public non-LFS asset.");
+  }
   const contentType = media.headers.get("content-type") || guessVideoType(url);
 
   const title = text(payload.title) || text(payload.text) || "Lily Roo upload";
-  const description = text(payload.description) || text(payload.replyText) || text(payload.text);
+  const description = youtubeDescription(payload);
   const init = await fetch(YOUTUBE_UPLOAD_INIT_URL, {
     method: "POST",
     headers: {
@@ -223,6 +244,7 @@ async function postYouTube(payload, env) {
         title: title.slice(0, 100),
         description: description.slice(0, 5000),
         categoryId: "10",
+        tags: youtubeTags(payload),
       },
       status: {
         privacyStatus: env.YOUTUBE_PRIVACY_STATUS || "public",
@@ -362,6 +384,17 @@ async function jsonPost(url, payload, headers = {}) {
     headers: { "Content-Type": "application/json; charset=UTF-8", ...headers },
     body: JSON.stringify(payload),
   });
+  const data = await response.json().catch(async () => ({ error: await safeText(response) }));
+  if (!response.ok) throw new Error(`API request failed (${response.status}): ${JSON.stringify(data)}`);
+  return data;
+}
+
+async function jsonGet(url, params = {}) {
+  const endpoint = new URL(url);
+  for (const [key, value] of Object.entries(params)) {
+    if (value !== undefined && value !== null) endpoint.searchParams.set(key, value);
+  }
+  const response = await fetch(endpoint.toString());
   const data = await response.json().catch(async () => ({ error: await safeText(response) }));
   if (!response.ok) throw new Error(`API request failed (${response.status}): ${JSON.stringify(data)}`);
   return data;
@@ -509,6 +542,8 @@ function readiness(env) {
   const xOAuth1 = ["X_API_KEY", "X_API_SECRET", "X_ACCESS_TOKEN", "X_ACCESS_TOKEN_SECRET"];
   const xOAuth1Present = xOAuth1.every((name) => Boolean(env[name]));
   const xTextPostingReady = Boolean(env.X_USER_ACCESS_TOKEN) || xOAuth1Present;
+  const youtubeRequired = ["GOOGLE_CLIENT_ID", "GOOGLE_CLIENT_SECRET", "YOUTUBE_REFRESH_TOKEN"];
+  const youtubeMissing = youtubeRequired.filter((name) => !env[name]);
 
   return {
     ok: true,
@@ -525,13 +560,17 @@ function readiness(env) {
         ready: Boolean(env.META_LONG_LIVED_TOKEN && env.FB_PAGE_ID),
       },
       instagram: {
-        ready: Boolean(env.META_LONG_LIVED_TOKEN && env.IG_BUSINESS_ACCOUNT_ID),
+        ready: Boolean(env.META_LONG_LIVED_TOKEN && (env.IG_BUSINESS_ACCOUNT_ID || env.FB_PAGE_ID)),
+        account_id_source: env.IG_BUSINESS_ACCOUNT_ID ? "IG_BUSINESS_ACCOUNT_ID" : (env.FB_PAGE_ID ? "FB_PAGE_ID" : ""),
       },
       tiktok: {
         ready: Boolean(env.TIKTOK_ACCESS_TOKEN),
       },
       youtube: {
-        ready: Boolean(env.GOOGLE_CLIENT_ID && env.GOOGLE_CLIENT_SECRET && env.YOUTUBE_REFRESH_TOKEN),
+        ready: youtubeMissing.length === 0,
+        missing_secrets: youtubeMissing,
+        media_map_present: Boolean(env.SOCIAL_MEDIA_MAP_JSON),
+        privacy_status: text(env.YOUTUBE_PRIVACY_STATUS) || "public",
       },
     },
   };
@@ -603,6 +642,27 @@ function parseJson(value) {
   } catch {
     return {};
   }
+}
+
+function youtubeDescription(payload) {
+  const base = text(payload.description) || text(payload.replyText) || text(payload.text);
+  const platform = text(payload.platform).toLowerCase();
+  if (!platform.includes("shorts") || /(^|\s)#shorts(\s|$)/i.test(base)) return base;
+  return `${base}\n\n#Shorts`;
+}
+
+function youtubeTags(payload) {
+  const platform = text(payload.platform).toLowerCase();
+  const tags = ["Lily Roo"];
+  const song = text(payload.song);
+  if (song) tags.push(song);
+  if (platform.includes("shorts")) tags.push("Shorts");
+  return [...new Set(tags)].slice(0, 10);
+}
+
+function looksLikeGitLfsPointer(bytes) {
+  const sample = new TextDecoder().decode(bytes.slice(0, Math.min(bytes.byteLength, 256)));
+  return sample.startsWith("version https://git-lfs.github.com/spec/v1");
 }
 
 function cookieValue(request, name) {

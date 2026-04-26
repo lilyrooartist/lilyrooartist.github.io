@@ -233,10 +233,10 @@ Example value:
 {"slow-walk-cover":"1234567890123456789"}
 ```
 
-Example `SOCIAL_MEDIA_MAP_JSON` value for website-hosted media:
+Example `SOCIAL_MEDIA_MAP_JSON` value for website-hosted media. Keep upload media outside `/admin/*`; Cloudflare Access protects `/admin`, so TikTok and YouTube cannot fetch those URLs as public media.
 
 ```json
-{"slow-walk-video":"https://www.lilyroo.com/admin/media/slow-walk-22s.mp4","slow-walk-cover":"https://i.ytimg.com/vi/R7evPASi8vM/maxresdefault.jpg"}
+{"slow-walk-video":"https://www.lilyroo.com/assets/media/slow-walk-58s.mp4","slow-walk-cover":"https://i.ytimg.com/vi/R7evPASi8vM/maxresdefault.jpg"}
 ```
 
 TikTok and YouTube need a public direct video URL, either in the queue `clip_url` column or in `SOCIAL_MEDIA_MAP_JSON`.

@@ -46,7 +46,7 @@ except OSError:
 posts.sort(key=lambda p: p.get('scheduled_at', ''))
 payload = {
     'last_synced': datetime.now(timezone.utc).isoformat(),
-    'source': str(SOURCE),
+    'source': str(SOURCE.relative_to(REPO_ROOT)) if SOURCE.is_relative_to(REPO_ROOT) else str(SOURCE),
     'posts': posts,
 }
 

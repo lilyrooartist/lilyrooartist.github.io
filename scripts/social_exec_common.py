@@ -68,13 +68,31 @@ def resolve_media_path(media_key: str = '', fallback_path: str = '') -> Path | N
     fallback_path = (fallback_path or '').strip()
     candidate = media_map_value(media_key)
     if candidate:
+        public_path = local_public_url_path(candidate)
+        if public_path:
+            return public_path
         path = Path(candidate).expanduser()
         if path.exists():
             return path
+    if fallback_path:
+        public_path = local_public_url_path(fallback_path)
+        if public_path:
+            return public_path
     if fallback_path and not fallback_path.startswith('http'):
         path = Path(fallback_path).expanduser()
         if path.exists():
             return path
+    return None
+
+
+def local_public_url_path(value: str) -> Path | None:
+    value = (value or '').strip()
+    prefixes = ('https://www.lilyroo.com/', 'https://lilyroo.com/')
+    for prefix in prefixes:
+        if value.startswith(prefix):
+            path = REPO_ROOT / value[len(prefix):]
+            if path.exists():
+                return path
     return None
 
 

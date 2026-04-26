@@ -25,7 +25,7 @@ browser admin UI should not store or prompt for the executor token.
 
 Notes:
 
-- TikTok and YouTube require a public direct video URL through `clip_url` or `SOCIAL_MEDIA_MAP_JSON`.
+- TikTok and YouTube require a public direct video URL through `clip_url` or `SOCIAL_MEDIA_MAP_JSON`. Do not point video media at `/admin/*`; Cloudflare Access protects that path, so upload media must live under a public path such as `/assets/media/*`.
 - X can post text/replies with `X_USER_ACCESS_TOKEN`. X media is only attached when a queue row provides an explicit media key; media upload uses OAuth 1.0a or pre-uploaded IDs in `X_MEDIA_MAP_JSON`.
 - The Worker route is configured for `www.lilyroo.com/api/social/*`.
 - `GET /api/social/health` is public. `POST /api/social/execute` is gated by
