@@ -27,10 +27,17 @@ At some point, the experience stops feeling special and starts feeling scripted.
 
 ## Promo Angles
 
-- **X:** short observational lines about copy-paste variety and the loop you cannot unsee.
-- **Instagram:** visual contrast between elegant tea service and captions about sameness disguised as choice.
-- **Facebook:** fuller backstory posts explaining the afternoon-tea pattern and the staged feeling underneath.
-- **YouTube CTA:** point to the full song as a transmission about noticing the script.
+- **X:** first-person, dry one-liners about copy-paste variety and the loop you cannot unsee.
+- **Instagram:** elegant tea visuals paired with Lily's sarcastic captions about sameness disguised as choice.
+- **Facebook:** Lily voice notes: personal, funny, observant, and lightly annoyed at the staged little ritual.
+- **YouTube CTA:** link casually from the observation; do not turn the post into a press release.
+
+## Voice Notes
+
+- Write as Lily posting, not as a narrator explaining Lily.
+- Prefer "I" and direct observation over "Lily noticed" or "the song is about."
+- Clever, sarcastic, and specific beats generic promo copy.
+- Let the link sit at the end; the post should still work as a standalone Lily thought.
 
 ## Avoid
 
@@ -38,3 +45,4 @@ At some point, the experience stops feeling special and starts feeling scripted.
 - Do not imply literal spilled tea.
 - Do not make the tone loud, angry, or messy.
 - Do not over-index on etiquette alone; the point is sameness wearing the costume of variety.
+- Do not write posts as third-person marketing copy about Lily or her songs.
