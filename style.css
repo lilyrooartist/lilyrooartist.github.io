@@ -102,8 +102,37 @@ main {
     url("assets/img/Lily Roo Youtube Backdrop.png") center 30% / cover no-repeat;
   border-bottom: 1px solid var(--line);
   display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(260px, 0.85fr);
   align-content: end;
+  align-items: end;
   gap: 0.7rem;
+}
+
+.hero-primary {
+  min-width: 0;
+}
+
+.hero-now-playing {
+  justify-self: end;
+  width: min(380px, 100%);
+  padding-left: clamp(0.9rem, 2vw, 1.35rem);
+  border-left: 1px solid rgba(246, 244, 240, 0.24);
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.72);
+}
+
+.hero-now-playing h2 {
+  margin: 0.35rem 0 0.55rem;
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 0.06em;
+  font-size: clamp(2rem, 4vw, 3.35rem);
+  line-height: 0.95;
+}
+
+.hero-now-playing p:last-child {
+  margin: 0;
+  color: rgba(246, 244, 240, 0.82);
+  font-size: clamp(0.98rem, 1.45vw, 1.18rem);
+  line-height: 1.32;
 }
 
 .kicker,
@@ -223,8 +252,9 @@ main {
 }
 
 .panel-now-playing {
-  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  grid-template-columns: 1fr;
   margin-top: 1.25rem;
+  padding: clamp(0.75rem, 1.4vw, 1rem);
 }
 
 .panel h2 {
@@ -474,6 +504,18 @@ main {
   .site-header {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: clamp(360px, 62vh, 540px);
+  }
+
+  .hero-now-playing {
+    justify-self: start;
+    padding: 0.9rem 0 0;
+    border-left: 0;
+    border-top: 1px solid rgba(246, 244, 240, 0.24);
   }
 
   .panel,
