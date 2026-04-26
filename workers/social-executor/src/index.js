@@ -1,11 +1,13 @@
-const GRAPH_VERSION = "v23.0";
-const META_BASE = `https://graph.facebook.com/${GRAPH_VERSION}`;
+const DEFAULT_GRAPH_VERSION = "v25.0";
 const X_CREATE_POST_URL = "https://api.x.com/2/tweets";
 const X_MEDIA_UPLOAD_URL = "https://upload.twitter.com/1.1/media/upload.json";
 const TIKTOK_CREATOR_INFO_URL = "https://open.tiktokapis.com/v2/post/publish/creator_info/query/";
 const TIKTOK_INIT_URL = "https://open.tiktokapis.com/v2/post/publish/video/init/";
 const GOOGLE_TOKEN_URL = "https://oauth2.googleapis.com/token";
 const YOUTUBE_UPLOAD_INIT_URL = "https://www.googleapis.com/upload/youtube/v3/videos?uploadType=resumable&part=snippet,status";
+const ACCESS_JWKS_CACHE_MS = 60 * 60 * 1000;
+
+let accessJwksCache = { teamDomain: "", expiresAt: 0, keys: [] };
 
 export default {
   async fetch(request, env, ctx) {
@@ -29,20 +31,32 @@ async function handleRequest(request, env) {
     return jsonResponse({ ok: false, error: "Origin is not allowed" }, 403, request, env);
   }
 
-  if (!isAuthorized(request, env)) {
-    return jsonResponse({ ok: false, error: "Unauthorized" }, 401, request, env);
-  }
-
   if (url.pathname === "/api/social/health" && request.method === "GET") {
     return jsonResponse({
       ok: true,
       service: "lilyroo-social-executor",
+      graph_version: metaGraphVersion(env),
+      execute_auth_required: true,
       supported_platforms: ["X", "Instagram", "Facebook", "TikTok", "YouTube Shorts"],
     }, 200, request, env);
   }
 
+  if (url.pathname === "/api/social/readiness" && request.method === "GET") {
+    const authError = await authorizationError(request, env);
+    if (authError) {
+      return jsonResponse({ ok: false, error: authError.message }, authError.status, request, env);
+    }
+
+    return jsonResponse(readiness(env), 200, request, env);
+  }
+
   if (url.pathname !== "/api/social/execute" || request.method !== "POST") {
     return jsonResponse({ ok: false, error: "Not found" }, 404, request, env);
+  }
+
+  const authError = await authorizationError(request, env);
+  if (authError) {
+    return jsonResponse({ ok: false, error: authError.message }, authError.status, request, env);
   }
 
   const payload = await request.json();
@@ -80,7 +94,7 @@ async function executePost(payload, env) {
 async function postFacebook(payload, env) {
   requireEnv(env, ["META_LONG_LIVED_TOKEN", "FB_PAGE_ID"], "Facebook posting");
   const url = mediaUrl(payload, env);
-  const endpoint = url ? `${META_BASE}/${env.FB_PAGE_ID}/photos` : `${META_BASE}/${env.FB_PAGE_ID}/feed`;
+  const endpoint = url ? `${metaBase(env)}/${env.FB_PAGE_ID}/photos` : `${metaBase(env)}/${env.FB_PAGE_ID}/feed`;
   const params = {
     access_token: env.META_LONG_LIVED_TOKEN,
   };
@@ -120,11 +134,11 @@ async function postInstagram(payload, env) {
     createParams.image_url = url;
   }
 
-  const creation = await formPost(`${META_BASE}/${env.IG_BUSINESS_ACCOUNT_ID}/media`, createParams);
+  const creation = await formPost(`${metaBase(env)}/${env.IG_BUSINESS_ACCOUNT_ID}/media`, createParams);
   const creationId = creation.id;
   if (!creationId) throw new Error(`Instagram media creation failed: ${JSON.stringify(creation)}`);
 
-  const publish = await formPost(`${META_BASE}/${env.IG_BUSINESS_ACCOUNT_ID}/media_publish`, {
+  const publish = await formPost(`${metaBase(env)}/${env.IG_BUSINESS_ACCOUNT_ID}/media_publish`, {
     access_token: env.META_LONG_LIVED_TOKEN,
     creation_id: creationId,
   });
@@ -261,6 +275,7 @@ async function xMediaIds(payload, env) {
 
   const map = parseJson(env.X_MEDIA_MAP_JSON || "{}");
   const mediaKey = text(payload.mediaKey);
+  if (!mediaKey) return [];
   const mapped = mediaKey ? map[mediaKey] : "";
   if (mapped) return Array.isArray(mapped) ? mapped.map(String) : String(mapped).split(",").map((item) => item.trim()).filter(Boolean);
 
@@ -369,10 +384,106 @@ function isAllowedOrigin(request, env) {
   return !allowed || !origin || origin === allowed;
 }
 
-function isAuthorized(request, env) {
-  if (!env.EXECUTOR_BEARER_TOKEN) return true;
+async function authorizationError(request, env) {
+  if (await isCloudflareAccessAuthorized(request, env)) return null;
+
   const header = request.headers.get("Authorization") || "";
-  return header === `Bearer ${env.EXECUTOR_BEARER_TOKEN}`;
+  if (env.EXECUTOR_BEARER_TOKEN && await bearerMatches(header, env.EXECUTOR_BEARER_TOKEN)) return null;
+
+  if (!env.EXECUTOR_BEARER_TOKEN && !accessAuthConfigured(env)) {
+    return { status: 500, message: "Social executor is missing EXECUTOR_BEARER_TOKEN or Cloudflare Access config" };
+  }
+  return { status: 401, message: "Unauthorized" };
+}
+
+async function bearerMatches(header, expected) {
+  if (!header.startsWith("Bearer ")) return false;
+  const actual = header.slice("Bearer ".length);
+  const actualBytes = utf8(actual);
+  const expectedBytes = utf8(expected);
+  if (actualBytes.byteLength !== expectedBytes.byteLength) return false;
+  return timingSafeEqual(actualBytes, expectedBytes);
+}
+
+async function isCloudflareAccessAuthorized(request, env) {
+  if (!accessAuthConfigured(env)) return false;
+
+  const token = accessJwt(request);
+  if (!token) return false;
+
+  try {
+    return await verifyAccessJwt(token, env);
+  } catch (error) {
+    console.warn(JSON.stringify({ level: "warn", message: "Cloudflare Access JWT validation failed", error: error.message }));
+    return false;
+  }
+}
+
+function accessAuthConfigured(env) {
+  return Boolean(text(env.CF_ACCESS_TEAM_DOMAIN) && text(env.CF_ACCESS_AUD));
+}
+
+function accessJwt(request) {
+  return text(request.headers.get("Cf-Access-Jwt-Assertion")) || cookieValue(request, "CF_Authorization");
+}
+
+async function verifyAccessJwt(token, env) {
+  const parts = token.split(".");
+  if (parts.length !== 3) return false;
+
+  const [encodedHeader, encodedPayload, encodedSignature] = parts;
+  const header = base64UrlJson(encodedHeader);
+  const payload = base64UrlJson(encodedPayload);
+  if (header.alg !== "RS256" || !header.kid) return false;
+
+  const teamDomain = normalizedTeamDomain(env.CF_ACCESS_TEAM_DOMAIN);
+  if (payload.iss !== teamDomain) return false;
+
+  const expectedAud = text(env.CF_ACCESS_AUD);
+  const tokenAud = Array.isArray(payload.aud) ? payload.aud.map(String) : [String(payload.aud || "")];
+  if (!tokenAud.includes(expectedAud)) return false;
+
+  const now = Math.floor(Date.now() / 1000);
+  if (typeof payload.exp === "number" && payload.exp <= now) return false;
+  if (typeof payload.nbf === "number" && payload.nbf > now + 60) return false;
+
+  const jwk = await accessJwk(teamDomain, header.kid);
+  if (!jwk) return false;
+
+  const key = await crypto.subtle.importKey(
+    "jwk",
+    jwk,
+    { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" },
+    false,
+    ["verify"],
+  );
+
+  return crypto.subtle.verify(
+    { name: "RSASSA-PKCS1-v1_5" },
+    key,
+    base64UrlBytes(encodedSignature),
+    utf8(`${encodedHeader}.${encodedPayload}`),
+  );
+}
+
+async function accessJwk(teamDomain, kid) {
+  const now = Date.now();
+  if (accessJwksCache.teamDomain !== teamDomain || accessJwksCache.expiresAt <= now) {
+    const response = await fetch(`${teamDomain}/cdn-cgi/access/certs`);
+    if (!response.ok) throw new Error(`Unable to fetch Cloudflare Access certs (${response.status})`);
+    const data = await response.json();
+    accessJwksCache = {
+      teamDomain,
+      expiresAt: now + ACCESS_JWKS_CACHE_MS,
+      keys: Array.isArray(data.keys) ? data.keys : [],
+    };
+  }
+
+  return accessJwksCache.keys.find((key) => key.kid === kid) || null;
+}
+
+function normalizedTeamDomain(value) {
+  return text(value).replace(/\/+$/, "");
 }
 
 function jsonResponse(payload, status, request, env) {
@@ -392,6 +503,38 @@ function requireEnv(env, names, label) {
 
 function requireOAuth1(env, label) {
   requireEnv(env, ["X_API_KEY", "X_API_SECRET", "X_ACCESS_TOKEN", "X_ACCESS_TOKEN_SECRET"], label);
+}
+
+function readiness(env) {
+  const xOAuth1 = ["X_API_KEY", "X_API_SECRET", "X_ACCESS_TOKEN", "X_ACCESS_TOKEN_SECRET"];
+  const xOAuth1Present = xOAuth1.every((name) => Boolean(env[name]));
+  const xTextPostingReady = Boolean(env.X_USER_ACCESS_TOKEN) || xOAuth1Present;
+
+  return {
+    ok: true,
+    execute_auth: Boolean(env.EXECUTOR_BEARER_TOKEN),
+    access_auth_configured: accessAuthConfigured(env),
+    platforms: {
+      x: {
+        text_posting_ready: xTextPostingReady,
+        oauth2_user_token_present: Boolean(env.X_USER_ACCESS_TOKEN),
+        oauth1_complete: xOAuth1Present,
+        media_map_present: Boolean(env.X_MEDIA_MAP_JSON),
+      },
+      facebook: {
+        ready: Boolean(env.META_LONG_LIVED_TOKEN && env.FB_PAGE_ID),
+      },
+      instagram: {
+        ready: Boolean(env.META_LONG_LIVED_TOKEN && env.IG_BUSINESS_ACCOUNT_ID),
+      },
+      tiktok: {
+        ready: Boolean(env.TIKTOK_ACCESS_TOKEN),
+      },
+      youtube: {
+        ready: Boolean(env.GOOGLE_CLIENT_ID && env.GOOGLE_CLIENT_SECRET && env.YOUTUBE_REFRESH_TOKEN),
+      },
+    },
+  };
 }
 
 function mediaUrl(payload, env = {}) {
@@ -460,6 +603,44 @@ function parseJson(value) {
   } catch {
     return {};
   }
+}
+
+function cookieValue(request, name) {
+  const cookie = request.headers.get("Cookie") || "";
+  const prefix = `${name}=`;
+  for (const part of cookie.split(";")) {
+    const value = part.trim();
+    if (value.startsWith(prefix)) return decodeURIComponent(value.slice(prefix.length));
+  }
+  return "";
+}
+
+function base64UrlJson(value) {
+  return JSON.parse(new TextDecoder().decode(base64UrlBytes(value)));
+}
+
+function base64UrlBytes(value) {
+  const normalized = value.replace(/-/g, "+").replace(/_/g, "/");
+  const padded = normalized + "=".repeat((4 - normalized.length % 4) % 4);
+  const binary = atob(padded);
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i += 1) bytes[i] = binary.charCodeAt(i);
+  return bytes;
+}
+
+function timingSafeEqual(left, right) {
+  if (left.byteLength !== right.byteLength) return false;
+  let diff = 0;
+  for (let i = 0; i < left.byteLength; i += 1) diff |= left[i] ^ right[i];
+  return diff === 0;
+}
+
+function metaGraphVersion(env) {
+  return text(env.META_GRAPH_VERSION) || DEFAULT_GRAPH_VERSION;
+}
+
+function metaBase(env) {
+  return `https://graph.facebook.com/${metaGraphVersion(env)}`;
 }
 
 async function safeText(response) {
