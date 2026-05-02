@@ -3,15 +3,15 @@
 These are priority songs where backstory + visual direction are tightened for consistent social storytelling.
 
 1. Analog Myth
-2. Guards Down
-3. Brain Rot
-4. I Learned It All in Fifteen Seconds
-5. Second Serve
-6. More Difference (Reprise)
-7. The Other One's Charging
-8. Twelve Dollars
-9. Every Pearl in Carmel
-10. Just Don't Talk About It
+2. No Mortgage
+3. Guards Down
+4. Brain Rot
+5. I Learned It All in Fifteen Seconds
+6. Second Serve
+7. More Difference (Reprise)
+8. The Other One's Charging
+9. Twelve Dollars
+10. Every Pearl in Carmel
 
 ## Canonization standard
 - One core emotional thesis per song
@@ -21,6 +21,7 @@ These are priority songs where backstory + visual direction are tightened for co
 
 ## Example canonical motif map
 - **Analog Myth:** clocks / blinking 12:00 / emotional time
+- **No Mortgage:** tiny house / big land / freedom by subtraction
 - **Guards Down:** screen certainty / no-undo choice / brave without cushioning
 - **Brain Rot:** overstimulation / satire-as-confession / notification storm
 - **Fifteen Seconds:** feed empathy / charger candle / thousand lives alone

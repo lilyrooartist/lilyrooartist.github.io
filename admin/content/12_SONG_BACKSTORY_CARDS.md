@@ -16,6 +16,12 @@
 - **Narrative angle:** "Clocks measure numbers, not grief"
 - **Linked anecdotes:** LR-ANEC-001..004
 
+## No Mortgage
+- **Card ID:** LR-SONG-NOMORTGAGE-01
+- **Theme tags:** escape economics, tiny-house independence, distance, chosen silence
+- **Narrative angle:** "The dream got smaller because the hooks got too expensive"
+- **Linked pack:** `packs/no-mortgage_backstory.md`
+
 ## Guards Down
 - **Card ID:** LR-SONG-GUARDSDOWN-01
 - **Theme tags:** exposed choice, handedness, courage, no-soft-edges stakes
