@@ -288,6 +288,7 @@ main {
 .archive-page .grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
   gap: clamp(0.9rem, 1.5vw, 1.2rem);
 }
 
@@ -296,7 +297,7 @@ main {
 }
 
 .archive-page .album-head {
-  min-height: 5.3rem;
+  min-height: 6.8rem;
   padding-bottom: 0.75rem;
   margin-bottom: 0.75rem;
   border-bottom: 1px solid var(--line);
@@ -320,6 +321,22 @@ main {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+}
+
+.archive-media {
+  margin-top: 1.7rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--line);
+}
+
+.archive-media .album-head {
+  min-height: 0;
+}
+
+.media-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.9rem, 1.5vw, 1.2rem);
 }
 
 .archive-page .item {
@@ -656,6 +673,10 @@ main {
   }
 
   .archive-page .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .media-list {
     grid-template-columns: 1fr;
   }
 
