@@ -92,6 +92,18 @@ main,
   opacity: 1;
 }
 
+.archive-page .main-nav a {
+  padding: 0.52rem 0.8rem;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.archive-page .main-nav a:hover,
+.archive-page .main-nav a:focus-visible {
+  border-color: var(--gold);
+  background: rgba(203, 168, 111, 0.08);
+}
+
 main {
   width: min(1200px, 92vw);
   margin: 0 auto;
