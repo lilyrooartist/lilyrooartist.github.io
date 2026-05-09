@@ -12,18 +12,36 @@ if not SOURCE.exists():
 OUT = REPO_ROOT / 'admin' / 'future-posts.json'
 PUBLISHED_LOG = REPO_ROOT / 'admin' / 'content' / 'Published_Log.csv'
 
-def load_posts(path: Path):
-    items = []
+def load_published_ids(path: Path):
+    ids = set()
+    if not path.exists():
+        return ids
     with path.open(newline='', encoding='utf-8') as f:
         reader = csv.DictReader(f)
         for r in reader:
+            content_id = (r.get('content_id') or '').strip()
+            if content_id.startswith('FP-AUTO-'):
+                ids.add(content_id)
+            for match in re.findall(r'\bqueue_id=(FP-AUTO-\d+)\b', r.get('notes') or ''):
+                ids.add(match)
+    return ids
+
+def load_posts(path: Path, published_ids=None):
+    items = []
+    published_ids = published_ids or set()
+    with path.open(newline='', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        for r in reader:
+            post_id = (r.get('id') or '').strip()
+            if post_id in published_ids:
+                continue
             drafts_raw = (r.get('drafts') or '').strip()
             drafts = [d.strip() for d in drafts_raw.split('||') if d.strip()] if drafts_raw else []
             text = (r.get('text') or '').strip()
             if not drafts and text:
                 drafts = [text]
             items.append({
-                'id': (r.get('id') or '').strip(),
+                'id': post_id,
                 'scheduled_at': (r.get('scheduled_at') or '').strip(),
                 'platform': (r.get('platform') or '').strip(),
                 'song': (r.get('song') or '').strip(),
@@ -38,34 +56,20 @@ def load_posts(path: Path):
             })
     return items
 
-def load_published_queue_ids(path: Path):
-    if not path.exists():
-        return set()
-    ids = set()
-    with path.open(newline='', encoding='utf-8') as f:
-        reader = csv.DictReader(f)
-        for r in reader:
-            content_id = (r.get('content_id') or '').strip()
-            if content_id.startswith('FP-AUTO-'):
-                ids.add(content_id)
-            notes = r.get('notes') or ''
-            ids.update(re.findall(r'queue_id=(FP-AUTO-\d+)', notes))
-    return ids
+published_ids = load_published_ids(PUBLISHED_LOG)
 
 try:
-    posts = load_posts(SOURCE)
+    posts = load_posts(SOURCE, published_ids)
 except OSError:
     SOURCE = FALLBACK_SOURCE
-    posts = load_posts(SOURCE)
+    posts = load_posts(SOURCE, published_ids)
 
-published_queue_ids = load_published_queue_ids(PUBLISHED_LOG)
-posts = [p for p in posts if p.get('id') not in published_queue_ids]
 posts.sort(key=lambda p: p.get('scheduled_at', ''))
 payload = {
     'last_synced': datetime.now(timezone.utc).isoformat(),
     'source': str(SOURCE.relative_to(REPO_ROOT)) if SOURCE.is_relative_to(REPO_ROOT) else str(SOURCE),
     'published_log': str(PUBLISHED_LOG.relative_to(REPO_ROOT)),
-    'excluded_published_ids': sorted(published_queue_ids),
+    'excluded_published_ids': sorted(published_ids),
     'posts': posts,
 }
 

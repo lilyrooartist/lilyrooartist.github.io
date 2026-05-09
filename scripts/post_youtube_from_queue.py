@@ -23,16 +23,18 @@ def post_form(url: str, data: dict[str, str]) -> dict:
 
 
 def refresh_access_token(env: dict[str, str]) -> str:
-    required = ['GOOGLE_CLIENT_ID', 'GOOGLE_CLIENT_SECRET', 'YOUTUBE_REFRESH_TOKEN']
+    required = ['GOOGLE_CLIENT_ID', 'YOUTUBE_REFRESH_TOKEN']
     missing = [k for k in required if not env.get(k)]
     if missing:
         raise RuntimeError(f'Missing YouTube OAuth keys in secrets/youtube-api.env: {", ".join(missing)}')
-    data = post_form(TOKEN_URL, {
+    refresh_params = {
         'client_id': env['GOOGLE_CLIENT_ID'],
-        'client_secret': env['GOOGLE_CLIENT_SECRET'],
         'refresh_token': env['YOUTUBE_REFRESH_TOKEN'],
         'grant_type': 'refresh_token',
-    })
+    }
+    if env.get('GOOGLE_CLIENT_SECRET'):
+        refresh_params['client_secret'] = env['GOOGLE_CLIENT_SECRET']
+    data = post_form(TOKEN_URL, refresh_params)
     token = data.get('access_token')
     if not token:
         raise RuntimeError(f'Unable to refresh YouTube access token: {data}')
@@ -127,7 +129,7 @@ def main() -> int:
     if not video_id:
         raise RuntimeError(f'YouTube upload did not return a video id: {data}')
     video_url = f'https://youtu.be/{video_id}'
-    append_published_log('YouTube', video_url, song_from_row(row), text, 'posted via YouTube Data API')
+    append_published_log('YouTube', video_url, song_from_row(row), text, f'queue_id={args.post_id}; posted via YouTube Data API')
     print(json.dumps({'ok': True, 'platform': 'YouTube', 'video_id': video_id, 'video_url': video_url}, ensure_ascii=False))
     return 0
 

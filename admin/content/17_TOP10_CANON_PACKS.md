@@ -8,10 +8,10 @@ These are priority songs where backstory + visual direction are tightened for co
 4. Brain Rot
 5. I Learned It All in Fifteen Seconds
 6. Second Serve
-7. More Difference (Reprise)
-8. The Other One's Charging
-9. Twelve Dollars
-10. Every Pearl in Carmel
+7. 13
+8. More Difference (Reprise)
+9. The Other One's Charging
+10. Twelve Dollars
 
 ## Canonization standard
 - One core emotional thesis per song
@@ -25,5 +25,6 @@ These are priority songs where backstory + visual direction are tightened for co
 - **Guards Down:** screen certainty / no-undo choice / brave without cushioning
 - **Brain Rot:** overstimulation / satire-as-confession / notification storm
 - **Fifteen Seconds:** feed empathy / charger candle / thousand lives alone
+- **13:** ordering for herself / one aisle over / raised hand / less hidden
 
 Use this as the active worklist for deepening each song pack from draft → canon.

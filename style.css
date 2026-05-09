@@ -115,7 +115,7 @@ main {
   padding: clamp(0.9rem, 2.6vw, 1.6rem) 0 1rem;
   background:
     linear-gradient(rgba(7, 7, 9, 0.4), rgba(7, 7, 9, 0.6)),
-    url("assets/img/Lily Roo Youtube Backdrop.png") center 30% / cover no-repeat;
+    url("assets/img/analog-myth/13/13-cover.png") center / cover no-repeat;
   border-bottom: 1px solid var(--line);
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(260px, 0.85fr);
@@ -438,11 +438,13 @@ main {
   object-fit: cover;
 }
 
-.frame iframe {
+.frame iframe,
+.frame video {
   width: 100%;
   aspect-ratio: 16 / 9;
   border: 1px solid var(--line);
   display: block;
+  background: #050508;
 }
 
 .panel-video {

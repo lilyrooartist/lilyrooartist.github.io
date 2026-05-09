@@ -1,5 +1,26 @@
 # Song Backstory Cards (Organized)
 
+## 13
+- **Card ID:** LR-SONG-13-01
+- **Theme tags:** quiet confidence, visibility, small independence, turning thirteen, still Lily
+- **Narrative angle:** "Not becoming someone else. Becoming a little less hidden."
+- **Anecdote seeds:**
+  - Ordering spicy rigatoni for herself.
+  - Leaving the grocery cart to go one aisle over and coming back.
+  - Raising her hand when the room is waiting for someone else.
+- **Lyric links:** LR-LYRIC-007..010
+- **Status:** canonized release pack
+
+## The Power of Light (My Second Room Has No Light Switch Reprise)
+- **Card ID:** LR-SONG-POWERLIGHT-01
+- **Theme tags:** reprise, agency, illumination, second room, chosen light
+- **Narrative angle:** "The room did not change first. The relationship to light did."
+- **Anecdote seeds:**
+  - My Second Room Has No Light Switch is the problem as a room.
+  - The Power of Light is the answer as a person carrying their own illumination.
+- **Lyric links:** add to `11_LYRIC_BACKSTORY_INDEX.csv` when final lyric excerpts are available
+- **Status:** new reprise starter pack
+
 ## Brain Rot
 - **Card ID:** LR-SONG-BRAINROT-01
 - **Theme tags:** feed fatigue, overstimulation, satire, dissociation
