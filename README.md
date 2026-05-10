@@ -8,7 +8,7 @@ Static site and admin workspace for Lily Roo.
 | --- | --- |
 | `index.html`, `music.html`, `press.html`, `contact.html` | Public GitHub Pages site. |
 | `style.css`, `script.js` | Shared public-site styling and small client behavior. |
-| `admin/index.html` | Local/admin operations surface: dashboard, backstory catalog, and promo queue. |
+| `admin/index.html` | Local/admin operations surface: dashboard, backstory library, song pack browser, and promo queue. |
 | `admin/content/` | Canon, voice, backstory, quips, promo strategy, reporting logs. |
 | `admin/content/packs/` | Per-song backstory and visual packs. |
 | `admin/backstory/` | JSON data and browser surface for song backstory browsing. |

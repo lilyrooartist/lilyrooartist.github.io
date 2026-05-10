@@ -32,11 +32,54 @@
     .preview img,.preview video{width:100%;max-height:170px;object-fit:cover;border-radius:10px;border:1px solid #2d3550;background:#0b101c}
     .song-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
     .song img{width:100%;height:120px;object-fit:cover;border-radius:8px;border:1px solid #2d3550}
+    .song h3{margin:9px 0 8px}
+    .song p{line-height:1.45}
     .pill{display:inline-block;font-size:12px;background:#24304f;color:#b8d8ff;padding:3px 8px;border-radius:999px}
     .preset-row{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
     .preset{background:#1e2a45;border:1px solid #3a4b75;color:#dbe7ff;border-radius:999px;padding:6px 10px;font-size:12px;cursor:pointer}
+    .preset:hover{border-color:#5b7ebd;background:#243454}
     .filter-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-    .filter-row select{background:#0f1320;color:#eef0f7;border:1px solid #334062;border-radius:8px;padding:6px}
+    .filter-row select,.filter-row input,.search-box{background:#0f1320;color:#eef0f7;border:1px solid #334062;border-radius:8px;padding:8px 9px}
+    .filter-row label,.search-label{display:grid;gap:5px;font-size:12px;color:#9ba3bf}
+    .search-label input{min-width:250px}
+    .section-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-end;margin-bottom:12px}
+    .section-head h1{margin:0}
+    .section-head p{margin:5px 0 0}
+    .library-shell{display:grid;gap:14px}
+    .library-hero{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;background:linear-gradient(135deg,#141722 0%,#161b2b 50%,#111827 100%);border:1px solid #2a2f44;border-radius:16px;padding:18px}
+    .library-hero h1{margin:0 0 6px;font-size:30px;line-height:1.05}
+    .library-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+    .library-stats{display:grid;grid-template-columns:repeat(4,minmax(130px,1fr));gap:12px}
+    .library-stat{background:#141722;border:1px solid #2a2f44;border-radius:14px;padding:13px;min-height:84px;box-sizing:border-box}
+    .library-stat b{display:block;font-size:24px;line-height:1.05;color:#fff;margin-bottom:8px}
+    .library-stat span{display:block;font-size:12px;color:#9ba3bf;text-transform:uppercase;letter-spacing:.08em;font-weight:800}
+    .library-grid{display:grid;grid-template-columns:330px minmax(0,1fr);gap:14px;align-items:start}
+    .library-sidebar,.doc-reader{background:#141722;border:1px solid #2a2f44;border-radius:14px;padding:14px;min-width:0}
+    .library-sidebar{position:sticky;top:14px}
+    .doc-list{display:grid;gap:8px;margin-top:12px}
+    .doc-card{width:100%;text-align:left;border:1px solid #26314e;border-radius:12px;background:#101523;color:#eef0f7;padding:10px;cursor:pointer}
+    .doc-card:hover,.doc-card.active{border-color:#4f79c6;background:#14203a}
+    .doc-card b{display:block;margin-bottom:4px}
+    .doc-card span{display:block;font-size:12px;color:#9ba3bf;line-height:1.35}
+    .doc-category{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#8f98b8;font-weight:800;margin-bottom:5px}
+    .doc-meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0 12px;color:#9ba3bf;font-size:12px}
+    .doc-content{color:#d7def2;line-height:1.6;font-size:14px}
+    .doc-content h1,.doc-content h2,.doc-content h3{color:#f4f7ff;line-height:1.2;margin:18px 0 8px}
+    .doc-content h1{font-size:24px}.doc-content h2{font-size:19px}.doc-content h3{font-size:16px}
+    .doc-content p{margin:9px 0}
+    .doc-content ul,.doc-content ol{padding-left:22px;margin:8px 0}
+    .doc-content li{margin:5px 0}
+    .doc-content code{background:#0f1320;border:1px solid #26314e;border-radius:5px;padding:1px 4px;color:#dce8ff}
+    .doc-table{width:100%;border-collapse:collapse;margin:10px 0;border:1px solid #26314e;border-radius:10px;overflow:hidden;font-size:13px}
+    .doc-table th,.doc-table td{padding:8px 9px;border-bottom:1px solid #26314e;text-align:left;vertical-align:top}
+    .doc-table th{background:#111827;color:#8f98b8;text-transform:uppercase;letter-spacing:.07em;font-size:11px}
+    .story-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    .story-card{background:#101523;border:1px solid #26314e;border-radius:12px;padding:12px}
+    .story-card h3{margin:7px 0 6px}
+    .story-card ul{margin:8px 0 0;padding-left:18px;color:#cdd5ec}
+    .story-card li{margin:5px 0}
+    .song-tools{background:#141722;border:1px solid #2a2f44;border-radius:14px;padding:14px;margin:10px 0 14px}
+    .song-count{font-size:12px;color:#9ba3bf;margin-top:9px}
     .reports-shell{display:grid;gap:14px}
     .report-hero{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;background:linear-gradient(135deg,#141722 0%,#151c2f 52%,#18202b 100%);border:1px solid #2a2f44;border-radius:16px;padding:18px}
     .report-hero h1{margin:0 0 6px;font-size:30px;line-height:1.05}
@@ -94,12 +137,14 @@
     .auth-card input{box-sizing:border-box;width:100%;background:#0f1320;color:#eef0f7;border:1px solid #334062;border-radius:8px;padding:10px;margin:10px 0}
     .auth-error{min-height:18px;color:#ff9fa8;font-size:12px;margin:4px 0 10px}
     @media(max-width:1180px){.report-grid{grid-template-columns:1fr}}
-    @media(max-width:1080px){.main-grid{grid-template-columns:1fr}.metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.layout{grid-template-columns:1fr}.nav{position:static;height:auto;border-right:0;border-bottom:1px solid #2a2f44}.report-hero{flex-direction:column}.report-actions{justify-content:flex-start}}
+    @media(max-width:1080px){.main-grid,.library-grid{grid-template-columns:1fr}.metric-grid,.library-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.layout{grid-template-columns:1fr}.nav,.library-sidebar{position:static;height:auto;border-right:0;border-bottom:1px solid #2a2f44}.report-hero,.library-hero{flex-direction:column}.report-actions,.library-actions{justify-content:flex-start}}
     @media(max-width:620px){
       .content{padding:14px}
-      .song-grid,.metric-grid,.source-grid{grid-template-columns:1fr}
-      .report-hero h1{font-size:25px}
+      .song-grid,.story-grid,.metric-grid,.library-stats,.source-grid{grid-template-columns:1fr}
+      .report-hero h1,.library-hero h1{font-size:25px}
       .metric-value{font-size:24px}
+      .section-head{display:block}
+      .search-label input{min-width:0}
       .table-wrap{border:0;overflow:visible}
       .report-table{min-width:0}
       .report-table,.report-table tbody,.report-table tr,.report-table td{display:block;width:100%;box-sizing:border-box}
@@ -126,6 +171,7 @@
     <div class="brand">Lily Roo Admin</div>
     <button class="tab active" data-tab="dashboard">Dashboard</button>
     <button class="tab" data-tab="backstory">Backstory</button>
+    <button class="tab" data-tab="songs">Songs</button>
     <button class="tab" data-tab="promo">Promo</button>
     <button class="tab" id="lock-admin" type="button">Lock admin</button>
     <p class="muted" style="margin-top:14px;font-size:12px">Password remembered on this computer</p>
@@ -177,26 +223,66 @@
     </section>
 
     <section class="panel" id="panel-backstory">
-      <h1>Backstory</h1>
-      <p class="muted">Organized canon + full catalog packs (backstory + visuals).</p>
+      <div class="library-shell">
+        <div class="library-hero">
+          <div>
+            <h1>Backstory</h1>
+            <div class="muted">Canon, voice, anecdotes, quips, and campaign lore in one readable library.</div>
+          </div>
+          <div class="library-actions">
+            <a class="btn secondary" href="content/README.md" target="_blank" rel="noopener">Content map</a>
+            <a class="btn ghost" href="content/CONTENT_INDEX.md" target="_blank" rel="noopener">Generated index</a>
+          </div>
+        </div>
 
-      <div class="card">
-        <h2>Core Backstory Files</h2>
-        <ul>
-          <li><a href="content/README.md" target="_blank">Content System README</a></li>
-          <li><a href="content/CONTENT_INDEX.md" target="_blank">Generated Content Index</a></li>
-          <li><a href="content/00_CANON.md" target="_blank">00_CANON.md</a></li>
-          <li><a href="content/01_VOICE_SYSTEM.md" target="_blank">01_VOICE_SYSTEM.md</a></li>
-          <li><a href="content/10_ANECDOTE_BANK.md" target="_blank">10_ANECDOTE_BANK.md</a></li>
-          <li><a href="content/11_LYRIC_BACKSTORY_INDEX.csv" target="_blank">11_LYRIC_BACKSTORY_INDEX.csv</a></li>
-          <li><a href="content/12_SONG_BACKSTORY_CARDS.md" target="_blank">12_SONG_BACKSTORY_CARDS.md</a></li>
-          <li><a href="content/20_QUIPS_BANK.csv" target="_blank">20_QUIPS_BANK.csv</a></li>
-          <li><a href="content/15_BRAINROT_CAPTION_PACKS.md" target="_blank">Brain Rot Caption Packs</a></li>
-          <li><a href="content/17_TOP10_CANON_PACKS.md" target="_blank">Top 10 Canon Packs</a></li>
-        </ul>
+        <div class="library-stats" aria-label="Backstory inventory">
+          <div class="library-stat"><b id="story-stat-songs">--</b><span>Songs indexed</span></div>
+          <div class="library-stat"><b id="story-stat-packs">--</b><span>Pack pairs</span></div>
+          <div class="library-stat"><b id="story-stat-quips">--</b><span>Quips</span></div>
+          <div class="library-stat"><b id="story-stat-anecdotes">--</b><span>Anecdotes</span></div>
+        </div>
+
+        <div class="library-grid">
+          <aside class="library-sidebar">
+            <label class="search-label">Search backstory
+              <input class="search-box" id="backstory-search" type="search" placeholder="Canon, voice, feed, room, clocks..." autocomplete="off" />
+            </label>
+            <div class="doc-list" id="backstory-doc-list"></div>
+          </aside>
+
+          <section class="doc-reader" aria-live="polite">
+            <div class="doc-category" id="backstory-reader-category">Library</div>
+            <h2 id="backstory-reader-title">Loading backstory...</h2>
+            <div class="doc-meta" id="backstory-reader-meta"></div>
+            <div class="doc-content" id="backstory-reader-content">Loading source files...</div>
+          </section>
+        </div>
+
+        <section class="report-card" aria-labelledby="story-cards-heading">
+          <div class="section-head">
+            <div>
+              <h2 id="story-cards-heading">Story Cards</h2>
+              <p class="muted">Song-level hooks and source details from the backstory catalog.</p>
+            </div>
+            <a class="btn ghost" href="backstory/backstory.json" target="_blank" rel="noopener">Open JSON</a>
+          </div>
+          <div class="story-grid" id="backstory-story-cards">
+            <div class="muted">Loading story cards...</div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="panel" id="panel-songs">
+      <div class="section-head">
+        <div>
+          <h1>Songs</h1>
+          <p class="muted">Archive song packs with backstory files, visual files, eras, statuses, and YouTube links.</p>
+        </div>
+        <a class="btn ghost" href="backstory/catalog.json" target="_blank" rel="noopener">Open catalog JSON</a>
       </div>
 
-      <div class="card">
+      <div class="song-tools">
         <h2>Archive Song Packs</h2>
         <div class="preset-row">
           <button class="preset" data-preset="needs-backstory">Needs backstory</button>
@@ -207,12 +293,14 @@
           <button class="preset" id="copy-view">Copy view URL</button>
         </div>
         <div class="filter-row">
+          <label>Search <input id="f-song-search" type="search" placeholder="Title, ID, era, status..." autocomplete="off" /></label>
           <label>Era <select id="f-era"><option value="">All</option></select></label>
           <label>Type <select id="f-type"><option value="">All</option></select></label>
           <label>Status <select id="f-status"><option value="">All</option></select></label>
         </div>
-        <div id="song-catalog" class="song-grid"></div>
+        <div class="song-count" id="song-count">Loading songs...</div>
       </div>
+      <div id="song-catalog" class="song-grid"></div>
     </section>
 
     <section class="panel active" id="panel-dashboard">
@@ -358,7 +446,7 @@
 <script type="text/plain" id="embedded-weekly-report"># Weekly Social Report — Lily Roo
 
 **Period:** 2026-05-04 to 2026-05-10
-**Last updated:** 2026-05-10 07:49 PM EDT
+**Last updated:** 2026-05-10 07:55 PM EDT
 
 ## KPI Goal
 - Primary growth target: **1,000 YouTube subscribers** (monetization milestone)
@@ -391,7 +479,7 @@
 - Latest post: https://www.facebook.com/903693509504290_122113878687249470
 
 ## Weekly Activity Log
-- Admin site now opens to Dashboard first, followed by Backstory and Promo
+- Admin site now uses Dashboard / Backstory / Songs / Promo navigation
 - Backstory and visual packs generated for all archive songs
 - Upcoming 7-day queue supports redo variants, imagery previews, and shareable filtered views
 
@@ -743,11 +831,17 @@
   const params = new URLSearchParams(window.location.search);
   const DEFAULT_TAB='dashboard';
   const TAB_ALIASES={reports:DEFAULT_TAB};
+  const TAB_PARAMS={backstory:['doc','storyq'],songs:['songq','era','type','status','preset']};
   const setParam = (k,v)=>{
     if(v) params.set(k,v);
     else params.delete(k);
     const query=params.toString();
     history.replaceState({},'',`${location.pathname}${query?`?${query}`:''}`);
+  };
+  const pruneTabParams=(tab)=>{
+    Object.entries(TAB_PARAMS).forEach(([owner,keys])=>{
+      if(owner!==tab) keys.forEach(key=>params.delete(key));
+    });
   };
   const canonicalTab=(value)=>TAB_ALIASES[value]||value||DEFAULT_TAB;
   const activateTab=(value,{updateUrl=false}={})=>{
@@ -759,7 +853,10 @@
     target.classList.add('active');
     document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
     panel.classList.add('active');
-    if(updateUrl) setParam('tab',tab===DEFAULT_TAB?'':tab);
+    if(updateUrl){
+      pruneTabParams(tab);
+      setParam('tab',tab===DEFAULT_TAB?'':tab);
+    }
     return true;
   };
 
@@ -809,6 +906,16 @@
   const EMBEDDED_JSON_ASSETS={
     'future-posts.json':'embedded-future-posts'
   };
+  const BACKSTORY_DOCS=[
+    {id:'canon',category:'Canon',title:'Canon Spine',url:'content/00_CANON.md',summary:'Mission, identity, recurring themes, origin story, objects, and era anchors.'},
+    {id:'voice',category:'Voice',title:'Voice System',url:'content/01_VOICE_SYSTEM.md',summary:'Reusable writing rules for Lily direct copy, public lore, captions, and admin language.'},
+    {id:'anecdotes',category:'Story Seeds',title:'Anecdote Bank',url:'content/10_ANECDOTE_BANK.md',summary:'Caption seeds, spoken-intro hooks, story fragments, and reusable CTA variants.'},
+    {id:'song-cards',category:'Song Lore',title:'Song Backstory Cards',url:'content/12_SONG_BACKSTORY_CARDS.md',summary:'Readable backstory cards for key songs and eras.'},
+    {id:'top10',category:'Song Lore',title:'Top 10 Canon Packs',url:'content/17_TOP10_CANON_PACKS.md',summary:'Priority canon packs for current and high-value songs.'},
+    {id:'brainrot',category:'Campaigns',title:'Brain Rot Caption Packs',url:'content/15_BRAINROT_CAPTION_PACKS.md',summary:'Brain Rot callbacks, caption angles, and campaign-specific language.'},
+    {id:'quips',category:'Quips',title:'Quips Bank',url:'content/20_QUIPS_BANK.csv',kind:'csv',summary:'Short Lily-style lines and caption turns organized by theme.'},
+    {id:'index',category:'Inventory',title:'Generated Content Index',url:'content/CONTENT_INDEX.md',summary:'Generated source map and inventory health for the whole content system.'}
+  ];
 
   function embeddedTextAsset(url){
     const key=String(url).split('?')[0].replace(/^\.\//,'');
@@ -1037,6 +1144,72 @@
     });
   }
 
+  function inlineMarkdown(value){
+    return escapeHtml(value)
+      .replace(/`([^`]+)`/g,'<code>$1</code>')
+      .replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>')
+      .replace(/(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" rel="noopener">$1</a>');
+  }
+
+  function markdownTableToHtml(lines){
+    const rows=lines.map(line=>line.trim().replace(/^\||\|$/g,'').split('|').map(cell=>cell.trim()));
+    const header=rows[0]||[];
+    const body=rows.slice(2);
+    return `<div class="table-wrap"><table class="doc-table"><thead><tr>${header.map(h=>`<th>${inlineMarkdown(h)}</th>`).join('')}</tr></thead><tbody>${body.map(row=>`<tr>${header.map((_,idx)=>`<td>${inlineMarkdown(row[idx]||'')}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+  }
+
+  function markdownToHtml(md){
+    const lines=String(md||'').split(/\r?\n/);
+    const html=[];
+    let listType='', listItems=[];
+    const flushList=()=>{
+      if(!listType) return;
+      html.push(`<${listType}>${listItems.map(item=>`<li>${inlineMarkdown(item)}</li>`).join('')}</${listType}>`);
+      listType=''; listItems=[];
+    };
+    for(let i=0;i<lines.length;i++){
+      const raw=lines[i];
+      const line=raw.trim();
+      if(!line){flushList();continue;}
+      if(line.startsWith('|') && lines[i+1]?.trim().startsWith('|') && /\|\s*-{2,}/.test(lines[i+1])){
+        flushList();
+        const tableLines=[];
+        while(i<lines.length && lines[i].trim().startsWith('|')){tableLines.push(lines[i]);i++;}
+        i--;
+        html.push(markdownTableToHtml(tableLines));
+        continue;
+      }
+      const heading=line.match(/^(#{1,3})\s+(.+)$/);
+      if(heading){
+        flushList();
+        const level=heading[1].length;
+        html.push(`<h${level}>${inlineMarkdown(heading[2])}</h${level}>`);
+        continue;
+      }
+      const bullet=line.match(/^[-*]\s+(.+)$/);
+      if(bullet){
+        if(listType && listType!=='ul') flushList();
+        listType='ul'; listItems.push(bullet[1]); continue;
+      }
+      const ordered=line.match(/^\d+\.\s+(.+)$/);
+      if(ordered){
+        if(listType && listType!=='ol') flushList();
+        listType='ol'; listItems.push(ordered[1]); continue;
+      }
+      flushList();
+      html.push(`<p>${inlineMarkdown(line)}</p>`);
+    }
+    flushList();
+    return html.join('');
+  }
+
+  function csvPreviewToHtml(text){
+    const rows=parseCsv(text);
+    if(!rows.length) return '<p class="muted">No rows found.</p>';
+    const headers=Object.keys(rows[0]).filter(Boolean).slice(0,4);
+    return `<div class="table-wrap"><table class="doc-table"><thead><tr>${headers.map(h=>`<th>${escapeHtml(h)}</th>`).join('')}</tr></thead><tbody>${rows.slice(0,30).map(row=>`<tr>${headers.map(h=>`<td>${inlineMarkdown(row[h]||'')}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+  }
+
   function parseReportTimestamp(value){
     const m=String(value||'').match(/^(\d{4})-(\d{2})-(\d{2})\s+(\d{1,2}):(\d{2})\s+(AM|PM)\s+(EDT|EST)$/i);
     if(!m) return null;
@@ -1072,6 +1245,104 @@
   function fetchJsonOr(url,fallback){
     const embedded=embeddedJsonAsset(url,fallback);
     return fetch(`${url}${url.includes('?')?'&':'?'}v=${Date.now()}`,{cache:'no-store'}).then(r=>r.ok?r.json():embedded).catch(()=>embedded);
+  }
+
+  function textMatches(query,...values){
+    const q=String(query||'').trim().toLowerCase();
+    if(!q) return true;
+    return values.some(value=>String(value||'').toLowerCase().includes(q));
+  }
+
+  async function loadBackstoryLibrary(){
+    const searchEl=document.getElementById('backstory-search');
+    const listEl=document.getElementById('backstory-doc-list');
+    const readerTitle=document.getElementById('backstory-reader-title');
+    const readerCategory=document.getElementById('backstory-reader-category');
+    const readerMeta=document.getElementById('backstory-reader-meta');
+    const readerContent=document.getElementById('backstory-reader-content');
+    const cardsEl=document.getElementById('backstory-story-cards');
+    if(!searchEl||!listEl||!readerTitle||!readerContent||!cardsEl) return;
+
+    const [contentIndex,backstoryData,docs]=await Promise.all([
+      fetchJsonOr(localPath('/admin/content/content_index.json'),{}),
+      fetchJsonOr(localPath('/admin/backstory/backstory.json'),{songs:[]}),
+      Promise.all(BACKSTORY_DOCS.map(async(doc)=>({
+        ...doc,
+        content:await fetchTextOrEmpty(localPath(`/admin/${doc.url}`))
+      })))
+    ]);
+
+    const counts=contentIndex.counts||{};
+    reportSetText('story-stat-songs',counts.songs ?? '--');
+    reportSetText('story-stat-packs',counts.complete_pack_pairs ?? '--');
+    reportSetText('story-stat-quips',counts.quips ?? '--');
+    reportSetText('story-stat-anecdotes',counts.anecdotes ?? '--');
+
+    let activeId=params.get('doc')||docs[0]?.id||'';
+
+    function selectDoc(id,{updateUrl=false}={}){
+      const doc=docs.find(item=>item.id===id)||docs[0];
+      if(!doc) return;
+      activeId=doc.id;
+      if(updateUrl) setParam('doc',doc.id===docs[0].id?'':doc.id);
+      readerCategory.textContent=doc.category;
+      readerTitle.textContent=doc.title;
+      readerMeta.innerHTML=`<span>${escapeHtml(doc.summary)}</span><a href="${escapeHtml(doc.url)}" target="_blank" rel="noopener">Open source</a>`;
+      readerContent.innerHTML=doc.kind==='csv'?csvPreviewToHtml(doc.content):markdownToHtml(doc.content);
+      listEl.querySelectorAll('.doc-card').forEach(btn=>btn.classList.toggle('active',btn.dataset.doc===doc.id));
+    }
+
+    function renderDocs(){
+      const q=searchEl.value;
+      const filtered=docs.filter(doc=>textMatches(q,doc.title,doc.category,doc.summary,doc.content));
+      listEl.innerHTML=filtered.length?filtered.map(doc=>`
+        <button class="doc-card${doc.id===activeId?' active':''}" type="button" data-doc="${escapeHtml(doc.id)}">
+          <div class="doc-category">${escapeHtml(doc.category)}</div>
+          <b>${escapeHtml(doc.title)}</b>
+          <span>${escapeHtml(doc.summary)}</span>
+        </button>`).join(''):'<div class="muted">No library files match that search.</div>';
+      listEl.querySelectorAll('.doc-card').forEach(btn=>btn.addEventListener('click',()=>selectDoc(btn.dataset.doc,{updateUrl:true})));
+      if(!filtered.some(doc=>doc.id===activeId) && filtered[0]) selectDoc(filtered[0].id);
+    }
+
+    function renderStoryCards(){
+      const q=searchEl.value;
+      const storyCards=(backstoryData.songs||[]).filter(song=>textMatches(
+        q,
+        song.song,
+        song.era,
+        song.core_hook,
+        (song.anecdotes||[]).join(' '),
+        (song.visuals||[]).map(v=>v.label).join(' ')
+      ));
+      cardsEl.innerHTML=storyCards.length?storyCards.map(song=>{
+        const youtube=safeUrl(song.youtube_url);
+        const pack=(song.visuals||[]).find(v=>/backstory pack/i.test(v.label||''))?.url || '';
+        const visual=(song.visuals||[]).find(v=>/visual pack/i.test(v.label||''))?.url || '';
+        const links=[
+          pack?`<a href="${escapeHtml(pack)}" target="_blank" rel="noopener">Backstory pack</a>`:'',
+          visual?`<a href="${escapeHtml(visual)}" target="_blank" rel="noopener">Visual pack</a>`:'',
+          youtube?`<a href="${escapeHtml(youtube)}" target="_blank" rel="noopener">YouTube</a>`:''
+        ].filter(Boolean).join(' · ');
+        return `<article class="story-card">
+          <span class="pill">${escapeHtml(song.era||'Story')}</span>
+          <h3>${escapeHtml(song.song||'Untitled')}</h3>
+          <p class="muted">${escapeHtml(song.core_hook||'No hook written yet.')}</p>
+          ${(song.anecdotes||[]).length?`<ul>${song.anecdotes.slice(0,3).map(item=>`<li>${escapeHtml(item)}</li>`).join('')}</ul>`:''}
+          ${links?`<p>${links}</p>`:''}
+        </article>`;
+      }).join(''):'<div class="muted">No story cards match that search.</div>';
+    }
+
+    searchEl.value=params.get('storyq')||'';
+    searchEl.addEventListener('input',()=>{
+      setParam('storyq',searchEl.value.trim());
+      renderDocs();
+      renderStoryCards();
+    });
+    renderDocs();
+    selectDoc(activeId);
+    renderStoryCards();
   }
 
   function latestRowsByPlatform(rows){
@@ -1467,9 +1738,13 @@
     });
   });
 
-  fetch(localPath('/admin/backstory/catalog.json')).then(r=>r.json()).then(data=>{
+  loadBackstoryLibrary();
+
+  fetchJsonOr(localPath('/admin/backstory/catalog.json'),{songs:[]}).then(data=>{
     const all=data.songs||[];
-    const eraSel=document.getElementById('f-era'), typeSel=document.getElementById('f-type'), statusSel=document.getElementById('f-status');
+    const eraSel=document.getElementById('f-era'), typeSel=document.getElementById('f-type'), statusSel=document.getElementById('f-status'), songSearch=document.getElementById('f-song-search');
+    const countEl=document.getElementById('song-count');
+    if(!eraSel||!typeSel||!statusSel||!songSearch) return;
     const uniq=(arr,key)=>[...new Set(arr.map(x=>x[key]).filter(Boolean))].sort();
     uniq(all,'era').forEach(v=>eraSel.insertAdjacentHTML('beforeend',`<option>${v}</option>`));
     uniq(all,'song_type').forEach(v=>typeSel.insertAdjacentHTML('beforeend',`<option>${v}</option>`));
@@ -1482,15 +1757,27 @@
       else if(name==='analog-cluster'){ eraSel.value='Current'; typeSel.value='Song'; statusSel.value='In Progress'; }
       else if(name==='brain-rot'){ eraSel.value='Archive'; typeSel.value='Song'; statusSel.value='Draft'; }
       else { eraSel.value=''; typeSel.value=''; statusSel.value=''; }
+      songSearch.value='';
       setParam('preset', name==='clear' ? '' : name);
+      setParam('songq','');
       render();
     }
 
     function render(){
-      const era=eraSel.value, typ=typeSel.value, st=statusSel.value;
-      setParam('era',era); setParam('type',typ); setParam('status',st);
-      const list=all.filter(s=>(!era||s.era===era)&&(!typ||s.song_type===typ)&&(!st||s.status===st));
+      const era=eraSel.value, typ=typeSel.value, st=statusSel.value, q=songSearch.value.trim();
+      setParam('era',era); setParam('type',typ); setParam('status',st); setParam('songq',q);
+      const list=all.filter(s=>
+        (!era||s.era===era)&&
+        (!typ||s.song_type===typ)&&
+        (!st||s.status===st)&&
+        textMatches(q,s.title,s.id,s.slug,s.era,s.song_type,s.status,s.url,s.backstory_file,s.visual_file)
+      );
+      if(countEl) countEl.textContent=`${list.length} of ${all.length} songs shown`;
       root.innerHTML='';
+      if(!list.length){
+        root.innerHTML='<div class="muted">No songs match the current filters.</div>';
+        return;
+      }
       list.forEach(s=>{
         const d=document.createElement('div'); d.className='card song';
         const thumb=safeUrl(s.thumb);
@@ -1512,6 +1799,7 @@
     });
 
     // hydrate from URL state
+    if(params.get('songq')) songSearch.value=params.get('songq');
     if(params.get('era')) eraSel.value=params.get('era');
     if(params.get('type')) typeSel.value=params.get('type');
     if(params.get('status')) statusSel.value=params.get('status');
@@ -1519,6 +1807,7 @@
     if(preset && !params.get('era') && !params.get('type') && !params.get('status')) applyPreset(preset); else render();
 
     [eraSel,typeSel,statusSel].forEach(el=>el.addEventListener('change',()=>{ setParam('preset',''); render(); }));
+    songSearch.addEventListener('input',()=>{ setParam('preset',''); render(); });
   });
   }
 
