@@ -1,7 +1,7 @@
 # Weekly Social Report — Lily Roo
 
 **Period:** 2026-05-04 to 2026-05-10
-**Last updated:** 2026-05-10 07:38 PM EDT
+**Last updated:** 2026-05-10 07:49 PM EDT
 
 ## KPI Goal
 - Primary growth target: **1,000 YouTube subscribers** (monetization milestone)
@@ -34,7 +34,7 @@
 - Latest post: https://www.facebook.com/903693509504290_122113878687249470
 
 ## Weekly Activity Log
-- Admin site now includes left-tab ops navigation (Promo / Backstory / Reports)
+- Admin site now opens to Dashboard first, followed by Backstory and Promo
 - Backstory and visual packs generated for all archive songs
 - Upcoming 7-day queue supports redo variants, imagery previews, and shareable filtered views
 

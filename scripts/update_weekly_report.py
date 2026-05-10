@@ -67,7 +67,7 @@ md = f'''# Weekly Social Report — Lily Roo
 - Latest post: {latest['Facebook'] or 'pending'}
 
 ## Weekly Activity Log
-- Admin site now includes left-tab ops navigation (Promo / Backstory / Reports)
+- Admin site now opens to Dashboard first, followed by Backstory and Promo
 - Backstory and visual packs generated for all archive songs
 - Upcoming 7-day queue supports redo variants, imagery previews, and shareable filtered views
 

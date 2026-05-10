@@ -124,15 +124,15 @@
 <div class="layout">
   <aside class="nav">
     <div class="brand">Lily Roo Admin</div>
-    <button class="tab active" data-tab="promo">Promo</button>
+    <button class="tab active" data-tab="dashboard">Dashboard</button>
     <button class="tab" data-tab="backstory">Backstory</button>
-    <button class="tab" data-tab="reports">Reports</button>
+    <button class="tab" data-tab="promo">Promo</button>
     <button class="tab" id="lock-admin" type="button">Lock admin</button>
     <p class="muted" style="margin-top:14px;font-size:12px">Password remembered on this computer</p>
   </aside>
 
   <main class="content">
-    <section class="panel active" id="panel-promo">
+    <section class="panel" id="panel-promo">
       <div class="main-grid">
         <div>
           <h1>Promo System</h1>
@@ -215,11 +215,11 @@
       </div>
     </section>
 
-    <section class="panel" id="panel-reports">
+    <section class="panel active" id="panel-dashboard">
       <div class="reports-shell">
         <div class="report-hero">
           <div>
-            <h1>Reports</h1>
+            <h1>Dashboard</h1>
             <div class="muted" id="reports-period">Loading weekly report...</div>
             <div class="report-kicker">
               <span class="status-chip neutral" id="report-freshness">Checking freshness</span>
@@ -358,7 +358,7 @@
 <script type="text/plain" id="embedded-weekly-report"># Weekly Social Report — Lily Roo
 
 **Period:** 2026-05-04 to 2026-05-10
-**Last updated:** 2026-05-10 07:38 PM EDT
+**Last updated:** 2026-05-10 07:49 PM EDT
 
 ## KPI Goal
 - Primary growth target: **1,000 YouTube subscribers** (monetization milestone)
@@ -391,7 +391,7 @@
 - Latest post: https://www.facebook.com/903693509504290_122113878687249470
 
 ## Weekly Activity Log
-- Admin site now includes left-tab ops navigation (Promo / Backstory / Reports)
+- Admin site now opens to Dashboard first, followed by Backstory and Promo
 - Backstory and visual packs generated for all archive songs
 - Upcoming 7-day queue supports redo variants, imagery previews, and shareable filtered views
 
@@ -741,19 +741,37 @@
 
   function initAdmin(){
   const params = new URLSearchParams(window.location.search);
-  const setParam = (k,v)=>{ if(v) params.set(k,v); else params.delete(k); history.replaceState({},'',`${location.pathname}?${params.toString()}`); };
+  const DEFAULT_TAB='dashboard';
+  const TAB_ALIASES={reports:DEFAULT_TAB};
+  const setParam = (k,v)=>{
+    if(v) params.set(k,v);
+    else params.delete(k);
+    const query=params.toString();
+    history.replaceState({},'',`${location.pathname}${query?`?${query}`:''}`);
+  };
+  const canonicalTab=(value)=>TAB_ALIASES[value]||value||DEFAULT_TAB;
+  const activateTab=(value,{updateUrl=false}={})=>{
+    const tab=canonicalTab(value);
+    const target=document.querySelector(`.tab[data-tab="${tab}"]`);
+    const panel=document.getElementById('panel-'+tab);
+    if(!target||!panel) return false;
+    document.querySelectorAll('.tab[data-tab]').forEach(b=>b.classList.remove('active'));
+    target.classList.add('active');
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+    panel.classList.add('active');
+    if(updateUrl) setParam('tab',tab===DEFAULT_TAB?'':tab);
+    return true;
+  };
 
   document.querySelectorAll('.tab[data-tab]').forEach(btn=>btn.addEventListener('click',()=>{
-    document.querySelectorAll('.tab[data-tab]').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    const tab=btn.dataset.tab;
-    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-    document.getElementById('panel-'+tab).classList.add('active');
-    setParam('tab',tab);
+    activateTab(btn.dataset.tab,{updateUrl:true});
   }));
 
-  const initialTab=params.get('tab');
-  if(initialTab && document.querySelector(`.tab[data-tab="${initialTab}"]`)) document.querySelector(`.tab[data-tab="${initialTab}"]`).click();
+  const requestedTab=params.get('tab');
+  const initialTab=canonicalTab(requestedTab);
+  if(!activateTab(initialTab,{updateUrl:Boolean(requestedTab && requestedTab!==initialTab)})){
+    activateTab(DEFAULT_TAB);
+  }
   document.getElementById('lock-admin').addEventListener('click',()=>{
     localStorage.removeItem(ADMIN_AUTH_KEY);
     location.reload();

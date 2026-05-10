@@ -8,7 +8,7 @@ Static site and admin workspace for Lily Roo.
 | --- | --- |
 | `index.html`, `music.html`, `press.html`, `contact.html` | Public GitHub Pages site. |
 | `style.css`, `script.js` | Shared public-site styling and small client behavior. |
-| `admin/index.html` | Local/admin operations surface: promo queue, backstory catalog, reports. |
+| `admin/index.html` | Local/admin operations surface: dashboard, backstory catalog, and promo queue. |
 | `admin/content/` | Canon, voice, backstory, quips, promo strategy, reporting logs. |
 | `admin/content/packs/` | Per-song backstory and visual packs. |
 | `admin/backstory/` | JSON data and browser surface for song backstory browsing. |
@@ -38,7 +38,7 @@ python3 -m http.server 4177 --bind 127.0.0.1
 
 Then open:
 
-`http://127.0.0.1:4177/admin/?tab=reports`
+`http://127.0.0.1:4177/admin/`
 
 ## AOL Mail Bridge
 
@@ -54,7 +54,7 @@ The installer copies the launchd runtime into `~/Library/Application Support/Lil
 - `admin/content/01_VOICE_SYSTEM.md` defines Lily's posting voice.
 - `admin/content/CONTENT_INDEX.md` and `admin/content/content_index.json` are generated inventory files.
 - `data/scheduled_posts.csv` drives the Promo tab and upcoming queue.
-- `admin/content/Published_Log.csv` drives published-post reporting.
+- `admin/content/Published_Log.csv` drives Dashboard publishing metrics.
 
 ## Deployment Note
 
