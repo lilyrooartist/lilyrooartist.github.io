@@ -9,9 +9,9 @@ These are priority songs where backstory + visual direction are tightened for co
 5. I Learned It All in Fifteen Seconds
 6. Second Serve
 7. 13
-8. More Difference (Reprise)
-9. The Other One's Charging
-10. Twelve Dollars
+8. The Power of Light (My Second Room Has No Light Switch Reprise)
+9. More Difference (Reprise)
+10. The Other One's Charging
 
 ## Canonization standard
 - One core emotional thesis per song
@@ -26,5 +26,6 @@ These are priority songs where backstory + visual direction are tightened for co
 - **Brain Rot:** overstimulation / satire-as-confession / notification storm
 - **Fifteen Seconds:** feed empathy / charger candle / thousand lives alone
 - **13:** ordering for herself / one aisle over / raised hand / less hidden
+- **The Power of Light (My Second Room Has No Light Switch Reprise):** missing switch / portable glow / same room, changed agency
 
 Use this as the active worklist for deepening each song pack from draft → canon.

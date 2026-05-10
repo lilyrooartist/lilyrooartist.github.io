@@ -1,15 +1,15 @@
 # Lily Roo Content Index
 
-Generated: `2026-05-10T23:31:26.253811+00:00`
+Generated: `2026-05-10T23:38:43.162172+00:00`
 
 ## Snapshot
 
-- Songs: **24**
-- Complete pack pairs: **24 / 24**
+- Songs: **25**
+- Complete pack pairs: **25 / 25**
 - Quips: **22**
 - Anecdotes: **25**
 - Queue posts: **14**
-- Published log rows: **8**
+- Published log rows: **14**
 - Weekly report: **2026-05-04 to 2026-05-10**
 
 ## Queue Mix
@@ -64,6 +64,7 @@ Generated: `2026-05-10T23:31:26.253811+00:00`
 - **My Second Room Has No Lightswitch** (`LR-SONG-016`): Archive / Draft / complete
 - **The Importance of Bearing Witness** (`LR-SONG-017`): Archive / Draft / complete
 - **Yeah, I Play the Violin** (`LR-SONG-018`): Archive / Draft / complete
+- **The Power of Light (My Second Room Has No Light Switch Reprise)** (`LR-SONG-023`): Current / Scheduled / complete
 
 ## Warnings
 
