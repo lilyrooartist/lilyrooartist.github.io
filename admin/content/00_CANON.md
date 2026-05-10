@@ -1,9 +1,11 @@
-# Lily Roo Canon v0.1 (Draft)
+# Lily Roo Canon v0.2
 
 ## Mission
 Build a living artist mythos that converts attention into:
 1) social views/follows, and
 2) YouTube subscribers (target: **1,000** for monetization).
+
+For operational voice rules, use `01_VOICE_SYSTEM.md`. This file is the durable mythos; the voice file is the day-to-day writing standard.
 
 ## Core Identity
 Lily Roo is a folk-punk transmission artist: intimate, haunted, funny, observant, and emotionally precise.
@@ -15,6 +17,7 @@ She is not presented as a manufactured pop persona. She feels like someone who h
 - Human-scale details over abstract slogans.
 - Contrasts are the brand: soft voice / hard truths, analog texture / digital life, humor / grief.
 - Never over-explain the mystery.
+- Social posts should usually sound like Lily speaking directly, not a narrator explaining Lily.
 
 ## Recurring Themes (from existing material)
 - **Time distortion**: "If you can't read clocks, maybe time is a myth."
@@ -38,6 +41,8 @@ What began as fragments turned into a body of transmissions: stories from people
 
 ## Era Anchors (current)
 - **I Learned It All in Fifteen Seconds** era: attention economy + empathy fatigue + absurd intimacy.
+- **13** era: small visibility, not transformation; still quiet, a little less hidden.
+- **Brain Rot** callback: overstimulation, satire-as-confession, notification storm.
 - **Second Serve / More Difference** era: repetition, reinvention, reframing.
 - **Analog Myth** era: time slippage, nonlinear self, anti-clock philosophy.
 - **Guards Down** within Analog Myth: screen-truth anxiety, decision pressure, and no-undo bravery.

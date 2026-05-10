@@ -31,21 +31,21 @@ render_one () {
     "$out"
 }
 
-# --- Track 1: I Learned it all in Fifteen Seconds
-ART1="assets/yt/Hve5drBlN58-hq.jpg"
+# --- Track 1: I Learned It All in Fifteen Seconds
+ART1="assets/img/i-learned-it-all-in-fifteen-seconds-cover.jpg"
 A1=$'I learned it all in fifteen seconds\nSwipe away before the pain sets in'
 A2=$'I keep a charger by my bed\nLike a Bible for the walking dead'
 A3=$'A world of strangers in my phone\nBut I\xE2\x80\x99ve lived a thousand lives alone'
 
-render_one "I Learned it all in Fifteen Seconds" \
+render_one "I Learned It All in Fifteen Seconds" \
   "assets/drive/extracted/I Learned it all in Fifteen Seconds/I Learned it all in Fifteen Seconds.wav" \
   "00:00:22" "00:00:22" "$A1" "$ART1" "$OUTDIR/fifteen-seconds_01.mp4" ".tmp/shorts_overlays/fifteen-seconds_01.png"
 
-render_one "I Learned it all in Fifteen Seconds" \
+render_one "I Learned It All in Fifteen Seconds" \
   "assets/drive/extracted/I Learned it all in Fifteen Seconds/I Learned it all in Fifteen Seconds.wav" \
   "00:00:58" "00:00:22" "$A2" "$ART1" "$OUTDIR/fifteen-seconds_02.mp4" ".tmp/shorts_overlays/fifteen-seconds_02.png"
 
-render_one "I Learned it all in Fifteen Seconds" \
+render_one "I Learned It All in Fifteen Seconds" \
   "assets/drive/extracted/I Learned it all in Fifteen Seconds/I Learned it all in Fifteen Seconds.wav" \
   "00:01:20" "00:00:22" "$A3" "$ART1" "$OUTDIR/fifteen-seconds_03.mp4" ".tmp/shorts_overlays/fifteen-seconds_03.png"
 

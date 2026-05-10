@@ -11,6 +11,7 @@ if not SOURCE.exists():
     SOURCE = FALLBACK_SOURCE
 OUT = REPO_ROOT / 'admin' / 'future-posts.json'
 PUBLISHED_LOG = REPO_ROOT / 'admin' / 'content' / 'Published_Log.csv'
+ADMIN_INDEX = REPO_ROOT / 'admin' / 'index.html'
 
 def load_published_ids(path: Path):
     ids = set()
@@ -74,4 +75,17 @@ payload = {
 }
 
 OUT.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+
+if ADMIN_INDEX.exists():
+    html = ADMIN_INDEX.read_text(encoding='utf-8')
+    embedded = json.dumps(payload, indent=2, ensure_ascii=False)
+    updated = re.sub(
+        r'(<script type="application/json" id="embedded-future-posts">)([\s\S]*?)(</script>)',
+        lambda m: m.group(1) + embedded + m.group(3),
+        html,
+        count=1,
+    )
+    if updated != html:
+        ADMIN_INDEX.write_text(updated, encoding='utf-8')
+
 print(f'Wrote {OUT} with {len(posts)} posts')

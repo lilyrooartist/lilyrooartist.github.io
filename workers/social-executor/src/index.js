@@ -1,9 +1,12 @@
 const DEFAULT_GRAPH_VERSION = "v25.0";
 const X_CREATE_POST_URL = "https://api.x.com/2/tweets";
+const X_USER_LOOKUP_URL = "https://api.x.com/2/users/me";
 const X_MEDIA_UPLOAD_URL = "https://upload.twitter.com/1.1/media/upload.json";
 const TIKTOK_CREATOR_INFO_URL = "https://open.tiktokapis.com/v2/post/publish/creator_info/query/";
 const TIKTOK_INIT_URL = "https://open.tiktokapis.com/v2/post/publish/video/init/";
 const GOOGLE_TOKEN_URL = "https://oauth2.googleapis.com/token";
+const YOUTUBE_CHANNELS_URL = "https://www.googleapis.com/youtube/v3/channels";
+const YOUTUBE_ANALYTICS_REPORTS_URL = "https://youtubeanalytics.googleapis.com/v2/reports";
 const YOUTUBE_UPLOAD_INIT_URL = "https://www.googleapis.com/upload/youtube/v3/videos?uploadType=resumable&part=snippet,status";
 
 export default {
@@ -47,6 +50,15 @@ async function handleRequest(request, env) {
     return jsonResponse(readiness(env), 200, request, env);
   }
 
+  if (url.pathname === "/api/social/metrics" && request.method === "GET") {
+    const authError = await authorizationError(request, env);
+    if (authError) {
+      return jsonResponse({ ok: false, error: authError.message }, authError.status, request, env);
+    }
+
+    return jsonResponse(await socialMetrics(env), 200, request, env);
+  }
+
   if (url.pathname !== "/api/social/execute" || request.method !== "POST") {
     return jsonResponse({ ok: false, error: "Not found" }, 404, request, env);
   }
@@ -86,6 +98,196 @@ async function executePost(payload, env) {
   if (platform.includes("youtube")) return postYouTube(payload, env);
 
   throw new Error(`Unsupported platform: ${payload.platform || ""}`);
+}
+
+async function socialMetrics(env) {
+  const [youtube, tiktok, instagram, facebook, x] = await Promise.all([
+    metricProbe(() => youtubeMetrics(env)),
+    metricProbe(() => tiktokMetrics(env)),
+    metricProbe(() => instagramMetrics(env)),
+    metricProbe(() => facebookMetrics(env)),
+    metricProbe(() => xMetrics(env)),
+  ]);
+
+  return {
+    ok: true,
+    updated_at: new Date().toISOString(),
+    platforms: {
+      youtube,
+      tiktok,
+      instagram,
+      facebook,
+      x,
+    },
+  };
+}
+
+async function metricProbe(fn) {
+  try {
+    return await fn();
+  } catch (error) {
+    return unavailableMetric(metricErrorMessage(error), {
+      status: error?.status || null,
+    });
+  }
+}
+
+function unavailableMetric(reason, extras = {}) {
+  return {
+    ok: false,
+    reason,
+    metrics: {},
+    ...extras,
+  };
+}
+
+function availableMetric(source, metrics, extras = {}) {
+  return {
+    ok: true,
+    source,
+    metrics,
+    ...extras,
+  };
+}
+
+async function youtubeMetrics(env) {
+  const missing = ["GOOGLE_CLIENT_ID", "YOUTUBE_REFRESH_TOKEN"].filter((name) => !env[name]);
+  if (missing.length) {
+    return unavailableMetric("YouTube metrics need OAuth refresh credentials.", { missing_secrets: missing });
+  }
+
+  const token = await googleAccessToken(env);
+  const channels = await jsonGetWithHeaders(YOUTUBE_CHANNELS_URL, {
+    part: "snippet,statistics",
+    mine: "true",
+  }, {
+    Authorization: `Bearer ${token}`,
+  });
+  const channel = (channels.items || [])[0] || {};
+  const stats = channel.statistics || {};
+  const metrics = {
+    subscribers: numberOrNull(stats.subscriberCount),
+    total_views: numberOrNull(stats.viewCount),
+    video_count: numberOrNull(stats.videoCount),
+  };
+  const period = lastNDaysPeriod(28);
+  let analyticsStatus = "not_requested";
+
+  try {
+    const analytics = await jsonGetWithHeaders(YOUTUBE_ANALYTICS_REPORTS_URL, {
+      ids: "channel==MINE",
+      startDate: period.startDate,
+      endDate: period.endDate,
+      metrics: "views,estimatedMinutesWatched",
+    }, {
+      Authorization: `Bearer ${token}`,
+    });
+    const row = (analytics.rows || [])[0] || [];
+    metrics.views_28d = numberOrNull(row[0]);
+    metrics.watch_time_minutes_28d = numberOrNull(row[1]);
+    metrics.watch_time_hours_28d = metrics.watch_time_minutes_28d === null
+      ? null
+      : Math.round((metrics.watch_time_minutes_28d / 60) * 10) / 10;
+    analyticsStatus = "ok";
+  } catch (error) {
+    analyticsStatus = metricErrorMessage(error);
+  }
+
+  return availableMetric("youtube-data-api", metrics, {
+    channel_title: text(channel?.snippet?.title),
+    period_28d: period,
+    analytics_status: analyticsStatus,
+  });
+}
+
+async function tiktokMetrics(env) {
+  if (!env.TIKTOK_ACCESS_TOKEN) {
+    return unavailableMetric("TikTok metrics need TIKTOK_ACCESS_TOKEN.", { missing_secrets: ["TIKTOK_ACCESS_TOKEN"] });
+  }
+
+  const creator = await jsonPost(TIKTOK_CREATOR_INFO_URL, {}, {
+    Authorization: `Bearer ${env.TIKTOK_ACCESS_TOKEN}`,
+  });
+  const data = creator?.data || {};
+  return unavailableMetric("TikTok Content Posting API returns creator and posting-permission info, not follower or profile-view analytics.", {
+    source: "tiktok-content-posting-api",
+    credential_ok: true,
+    username: text(data.creator_username),
+    display_name: text(data.creator_nickname),
+    metrics: {},
+  });
+}
+
+async function instagramMetrics(env) {
+  const accessToken = instagramAccessToken(env);
+  if (!accessToken) {
+    return unavailableMetric("Instagram metrics need IG_ACCESS_TOKEN or META_LONG_LIVED_TOKEN.", {
+      missing_secrets: ["IG_ACCESS_TOKEN or META_LONG_LIVED_TOKEN"],
+    });
+  }
+
+  const useInstagramLogin = isInstagramLoginToken(accessToken);
+  const igBusinessAccountId = useInstagramLogin
+    ? text(env.IG_BUSINESS_ACCOUNT_ID) || "me"
+    : await instagramBusinessAccountId(env, accessToken);
+  const base = useInstagramLogin ? instagramBase(env) : metaBase(env);
+  const profile = await jsonGet(`${base}/${igBusinessAccountId}`, {
+    fields: "username,followers_count,media_count",
+    access_token: accessToken,
+  });
+  const username = text(profile.username);
+  return availableMetric(useInstagramLogin ? "instagram-login-api" : "instagram-graph-api", {
+    followers: numberOrNull(profile.followers_count),
+    media_count: numberOrNull(profile.media_count),
+  }, {
+    username,
+    profile_url: username ? `https://www.instagram.com/${username}/` : "",
+  });
+}
+
+async function facebookMetrics(env) {
+  const missing = ["META_LONG_LIVED_TOKEN", "FB_PAGE_ID"].filter((name) => !env[name]);
+  if (missing.length) {
+    return unavailableMetric("Facebook metrics need Meta page credentials.", { missing_secrets: missing });
+  }
+
+  const page = await jsonGet(`${metaBase(env)}/${env.FB_PAGE_ID}`, {
+    fields: "name,link,followers_count,fan_count",
+    access_token: env.META_LONG_LIVED_TOKEN,
+  });
+  return availableMetric("meta-graph-page", {
+    followers: numberOrNull(page.followers_count),
+    page_likes: numberOrNull(page.fan_count),
+  }, {
+    page_name: text(page.name),
+    profile_url: text(page.link) || `https://www.facebook.com/${env.FB_PAGE_ID}`,
+  });
+}
+
+async function xMetrics(env) {
+  if (!env.X_USER_ACCESS_TOKEN) {
+    return unavailableMetric("X metrics need X_USER_ACCESS_TOKEN with user lookup access.", {
+      missing_secrets: ["X_USER_ACCESS_TOKEN"],
+    });
+  }
+
+  const payload = await jsonGetWithHeaders(X_USER_LOOKUP_URL, {
+    "user.fields": "public_metrics,username,name",
+  }, {
+    Authorization: `Bearer ${env.X_USER_ACCESS_TOKEN}`,
+  });
+  const user = payload.data || {};
+  const publicMetrics = user.public_metrics || {};
+  const username = text(user.username);
+  return availableMetric("x-api-user-lookup", {
+    followers: numberOrNull(publicMetrics.followers_count),
+    following: numberOrNull(publicMetrics.following_count),
+    post_count: numberOrNull(publicMetrics.tweet_count),
+    listed_count: numberOrNull(publicMetrics.listed_count),
+  }, {
+    username,
+    profile_url: username ? `https://x.com/${username}` : "",
+  });
 }
 
 async function postFacebook(payload, env) {
@@ -246,16 +448,7 @@ async function postYouTube(payload, env) {
     throw new Error("YouTube posting from the website needs a public clipUrl video URL");
   }
 
-  const refreshParams = {
-    client_id: env.GOOGLE_CLIENT_ID,
-    refresh_token: env.YOUTUBE_REFRESH_TOKEN,
-    grant_type: "refresh_token",
-  };
-  if (text(env.GOOGLE_CLIENT_SECRET)) refreshParams.client_secret = env.GOOGLE_CLIENT_SECRET;
-
-  const tokenData = await formPost(GOOGLE_TOKEN_URL, refreshParams);
-  const token = tokenData.access_token;
-  if (!token) throw new Error(`Unable to refresh YouTube access token: ${JSON.stringify(tokenData)}`);
+  const token = await googleAccessToken(env);
 
   const media = await fetch(url);
   if (!media.ok) throw new Error(`Unable to fetch YouTube media URL (${media.status})`);
@@ -419,6 +612,20 @@ async function formPost(url, params) {
   return data;
 }
 
+async function googleAccessToken(env) {
+  const refreshParams = {
+    client_id: env.GOOGLE_CLIENT_ID,
+    refresh_token: env.YOUTUBE_REFRESH_TOKEN,
+    grant_type: "refresh_token",
+  };
+  if (text(env.GOOGLE_CLIENT_SECRET)) refreshParams.client_secret = env.GOOGLE_CLIENT_SECRET;
+
+  const tokenData = await formPost(GOOGLE_TOKEN_URL, refreshParams);
+  const token = tokenData.access_token;
+  if (!token) throw new Error(`Unable to refresh YouTube access token: ${JSON.stringify(tokenData)}`);
+  return token;
+}
+
 async function jsonPost(url, payload, headers = {}) {
   const response = await fetch(url, {
     method: "POST",
@@ -436,11 +643,15 @@ async function jsonPost(url, payload, headers = {}) {
 }
 
 async function jsonGet(url, params = {}) {
+  return jsonGetWithHeaders(url, params);
+}
+
+async function jsonGetWithHeaders(url, params = {}, headers = {}) {
   const endpoint = new URL(url);
   for (const [key, value] of Object.entries(params)) {
     if (value !== undefined && value !== null) endpoint.searchParams.set(key, value);
   }
-  const response = await fetch(endpoint.toString());
+  const response = await fetch(endpoint.toString(), { headers });
   const data = await response.json().catch(async () => ({ error: await safeText(response) }));
   if (!response.ok) {
     const error = new Error(`API request failed (${response.status}): ${JSON.stringify(data)}`);
@@ -457,9 +668,13 @@ function sleep(ms) {
 
 function corsHeaders(request, env) {
   const origin = request.headers.get("Origin") || "";
-  const allowed = env.ALLOWED_ORIGIN || origin || "*";
+  const allowed = allowedOrigins(env);
+  const allowAny = allowed.includes("*");
+  const responseOrigin = allowAny
+    ? "*"
+    : (origin && isAllowedOriginValue(origin, allowed) ? origin : (allowed[0] || origin || "*"));
   return {
-    "Access-Control-Allow-Origin": allowed,
+    "Access-Control-Allow-Origin": responseOrigin,
     "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Lilyroo-Admin-Password",
     "Vary": "Origin",
@@ -467,9 +682,17 @@ function corsHeaders(request, env) {
 }
 
 function isAllowedOrigin(request, env) {
-  const allowed = env.ALLOWED_ORIGIN;
   const origin = request.headers.get("Origin");
-  return !allowed || !origin || origin === allowed;
+  const allowed = allowedOrigins(env);
+  return !origin || isAllowedOriginValue(origin, allowed);
+}
+
+function allowedOrigins(env) {
+  return text(env.ALLOWED_ORIGIN).split(",").map((origin) => origin.trim()).filter(Boolean);
+}
+
+function isAllowedOriginValue(origin, allowed) {
+  return allowed.length === 0 || allowed.includes("*") || allowed.includes(origin);
 }
 
 async function authorizationError(request, env) {
@@ -631,6 +854,31 @@ function parseJson(value) {
   } catch {
     return {};
   }
+}
+
+function numberOrNull(value) {
+  const n = Number(value);
+  return Number.isFinite(n) ? n : null;
+}
+
+function metricErrorMessage(error) {
+  const apiMessage = error?.data?.error?.message || error?.data?.message || error?.message;
+  return text(apiMessage) || "Metric request failed";
+}
+
+function lastNDaysPeriod(days) {
+  const end = new Date();
+  end.setUTCDate(end.getUTCDate() - 1);
+  const start = new Date(end);
+  start.setUTCDate(start.getUTCDate() - (days - 1));
+  return {
+    startDate: isoDate(start),
+    endDate: isoDate(end),
+  };
+}
+
+function isoDate(date) {
+  return date.toISOString().slice(0, 10);
 }
 
 function youtubeDescription(payload) {

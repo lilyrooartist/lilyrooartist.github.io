@@ -10,6 +10,11 @@ Primary KPI: **reach 1,000 YouTube subscribers**.
 3. **Action** (watch full song + subscribe on YouTube)
 4. **Archive** (log every post + URL + performance note)
 
+## Current Release Link
+- **I Learned It All in Fifteen Seconds** pre-save / HyperFollow: https://distrokid.com/hyperfollow/lilyroo/i-learned-it-all-in-fifteen-seconds
+- Use this link until Spotify/Apple live links exist.
+- Copy line: "out june 5. i learned it all in fifteen seconds and somehow still have homework."
+
 ## Platform behavior
 - **X:** short, sharp, quotable lines; 1-2/day.
 - **Instagram:** visual + lore caption; 4-6/week.

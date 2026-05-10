@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 from pathlib import Path
 from datetime import datetime, timedelta
-import json, csv
+import json, csv, re
 
 ROOT = Path(__file__).resolve().parent.parent
 REPORT = ROOT / 'admin' / 'reports' / 'weekly-social-report.md'
 MANUAL = ROOT / 'data' / 'manual_social_stats.json'
 PUBLISHED = ROOT / 'admin' / 'content' / 'Published_Log.csv'
+ADMIN_INDEX = ROOT / 'admin' / 'index.html'
 
 # Fallback values if API pull is not wired in this run
 yt_subs = '6'
@@ -32,7 +33,7 @@ end = today.date()
 
 md = f'''# Weekly Social Report — Lily Roo
 
-**Period:** {start} to {end}  
+**Period:** {start} to {end}
 **Last updated:** {today.strftime('%Y-%m-%d %I:%M %p %Z').strip()}
 
 ## KPI Goal
@@ -80,4 +81,23 @@ md = f'''# Weekly Social Report — Lily Roo
 - Source overrides: `data/manual_social_stats.json`
 '''
 REPORT.write_text(md, encoding='utf-8')
+
+
+def replace_embedded_block(html, block_id, content):
+    pattern = rf'(<script type="text/plain" id="{re.escape(block_id)}">)([\s\S]*?)(</script>)'
+    return re.sub(pattern, lambda m: m.group(1) + content.rstrip() + m.group(3), html, count=1)
+
+
+def sync_admin_embeds():
+    if not ADMIN_INDEX.exists():
+        return
+    html = ADMIN_INDEX.read_text(encoding='utf-8')
+    updated = replace_embedded_block(html, 'embedded-weekly-report', REPORT.read_text(encoding='utf-8'))
+    if PUBLISHED.exists():
+        updated = replace_embedded_block(updated, 'embedded-published-log', PUBLISHED.read_text(encoding='utf-8'))
+    if updated != html:
+        ADMIN_INDEX.write_text(updated, encoding='utf-8')
+
+
+sync_admin_embeds()
 print('updated', REPORT)

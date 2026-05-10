@@ -5,6 +5,8 @@ Cloudflare Worker backing the live `/admin` **Execute now** button.
 The public site is static GitHub Pages, so social API credentials must live in a server-side runtime. This Worker exposes:
 
 - `GET /api/social/health`
+- `GET /api/social/readiness`
+- `GET /api/social/metrics`
 - `POST /api/social/execute`
 
 Deploy:
@@ -29,8 +31,12 @@ localStorage for that computer until **Lock admin** is clicked.
 
 Notes:
 
+- `/api/social/metrics` is read-only and authenticated. It returns live metrics
+  where the current tokens/scopes support them, and an explicit unavailable or
+  API-limited status where a platform token only supports posting.
 - TikTok and YouTube require a public direct video URL through `clip_url` or `SOCIAL_MEDIA_MAP_JSON`. Do not point video media at `/admin/*`; admin content is intended for signed-in browser use, so upload media must live under a public path such as `/assets/media/*`.
 - X can post text/replies with `X_USER_ACCESS_TOKEN`. X media is only attached when a queue row provides an explicit media key; media upload uses OAuth 1.0a or pre-uploaded IDs in `X_MEDIA_MAP_JSON`.
 - The Worker route is configured for `www.lilyroo.com/api/social/*`.
-- `GET /api/social/health` is public. `POST /api/social/execute` is gated by
-  the admin password header or the executor bearer token fallback.
+- `GET /api/social/health` is public. `GET /api/social/readiness`,
+  `GET /api/social/metrics`, and `POST /api/social/execute` are gated by the
+  admin password header or the executor bearer token fallback.

@@ -1,11 +1,11 @@
-# I Learned it all in Fifteen Seconds — Backstory Pack
+# I Learned It All in Fifteen Seconds — Backstory Pack
 
 - **Song ID:** LR-SONG-012
 - **Status:** Draft starter pack
 - **Source link:** https://youtu.be/Hve5drBlN58
 
 ## Core narrative seed
-I Learned it all in Fifteen Seconds lives in Lily Roo's transmission universe as a scene-level artifact: one specific moment that reveals a bigger emotional system.
+I Learned It All in Fifteen Seconds lives in Lily Roo's transmission universe as a scene-level artifact: one specific moment that reveals a bigger emotional system.
 
 ## Anecdote hooks (starter)
 1. The line that sounds most casual is usually the one that hurt the most to write.

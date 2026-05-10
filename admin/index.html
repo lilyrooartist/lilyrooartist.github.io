@@ -13,7 +13,7 @@
     .brand{font-weight:800;margin-bottom:14px}
     .tab{display:block;width:100%;text-align:left;background:#151b2d;color:#d9def1;border:1px solid #2d3655;border-radius:10px;padding:10px 12px;margin:8px 0;cursor:pointer}
     .tab.active{background:#29406f;color:#fff;border-color:#4f79c6}
-    .content{padding:22px;max-width:1300px}
+    .content{padding:22px;max-width:1300px;width:100%;box-sizing:border-box}
     .panel{display:none}.panel.active{display:block}
     .main-grid{display:grid;grid-template-columns:minmax(0,1fr) 390px;gap:16px;align-items:start}
     .card{background:#141722;border:1px solid #2a2f44;border-radius:14px;padding:14px;margin:10px 0}
@@ -24,7 +24,9 @@
     .platform{font-size:12px;padding:4px 8px;border-radius:999px;background:#24304f;color:#b8d8ff}
     .time{font-size:12px;color:#9ba3bf}
     .label{font-size:12px;color:#9ba3bf;margin-top:8px}
-    .btn{background:#2f62ff;color:white;border:0;border-radius:8px;padding:7px 10px;font-size:12px;cursor:pointer}
+    .btn{background:#2f62ff;color:white;border:0;border-radius:8px;padding:7px 10px;font-size:12px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+    .btn.secondary{background:#20365f;color:#dce8ff;border:1px solid #416095}
+    .btn.ghost{background:#111827;color:#cfd7ef;border:1px solid #303856}
     .btn:disabled{background:#3a4055;color:#9ba3bf;cursor:not-allowed}
     .preview{margin-top:8px}
     .preview img,.preview video{width:100%;max-height:170px;object-fit:cover;border-radius:10px;border:1px solid #2d3550;background:#0b101c}
@@ -35,6 +37,55 @@
     .preset{background:#1e2a45;border:1px solid #3a4b75;color:#dbe7ff;border-radius:999px;padding:6px 10px;font-size:12px;cursor:pointer}
     .filter-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
     .filter-row select{background:#0f1320;color:#eef0f7;border:1px solid #334062;border-radius:8px;padding:6px}
+    .reports-shell{display:grid;gap:14px}
+    .report-hero{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;background:linear-gradient(135deg,#141722 0%,#151c2f 52%,#18202b 100%);border:1px solid #2a2f44;border-radius:16px;padding:18px}
+    .report-hero h1{margin:0 0 6px;font-size:30px;line-height:1.05}
+    .report-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+    .report-kicker{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px}
+    .status-chip{display:inline-flex;align-items:center;border-radius:999px;padding:4px 8px;font-size:12px;font-weight:700;background:#24304f;color:#b8d8ff;border:1px solid #334062}
+    .status-chip.ok{background:#123528;color:#9bf0c5;border-color:#1f684d}
+    .status-chip.warn{background:#3a2a12;color:#ffd88a;border-color:#6c4b16}
+    .status-chip.bad{background:#3b1820;color:#ffabb7;border-color:#74303d}
+    .status-chip.neutral{background:#20263a;color:#c7d0ea;border-color:#37415f}
+    .report-alert{border:1px solid #6c4b16;background:#2a2115;color:#ffd88a;border-radius:12px;padding:11px 12px;font-size:13px}
+    .report-alert[hidden]{display:none}
+    .metric-grid{display:grid;grid-template-columns:repeat(5,minmax(145px,1fr));gap:12px}
+    .metric-card{background:#141722;border:1px solid #2a2f44;border-radius:14px;padding:14px;min-height:112px;box-sizing:border-box}
+    .metric-label{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:#8f98b8;font-weight:800}
+    .metric-value{font-size:28px;line-height:1.1;font-weight:850;margin-top:10px;color:#fff}
+    .metric-note{font-size:12px;color:#9ba3bf;margin-top:8px}
+    .report-grid{display:grid;grid-template-columns:minmax(620px,1.7fr) minmax(300px,.8fr);gap:14px;align-items:start}
+    .report-stack{display:grid;gap:14px}
+    .report-card{background:#141722;border:1px solid #2a2f44;border-radius:14px;padding:15px;min-width:0}
+    .report-card h2{margin:0 0 10px;font-size:18px}
+    .report-card h3{margin:0;font-size:14px}
+    .goal-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center}
+    .goal-value{font-size:16px;font-weight:800}
+    .goal-track{height:10px;border-radius:999px;background:#0e1422;border:1px solid #26314e;overflow:hidden;margin-top:10px}
+    .goal-fill{height:100%;width:0%;background:linear-gradient(90deg,#36d399,#5bc0ff)}
+    .table-wrap{overflow:auto;border:1px solid #26314e;border-radius:12px}
+    .report-table{width:100%;border-collapse:collapse;min-width:620px}
+    .report-table th,.report-table td{padding:9px 10px;text-align:left;border-bottom:1px solid #26314e;vertical-align:top;font-size:13px}
+    .report-table th{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#8f98b8;background:#111827}
+    .report-table td:first-child{white-space:nowrap}
+    .report-table tr:last-child td{border-bottom:0}
+    .platform-name{display:flex;align-items:center;gap:8px;font-weight:800;color:#f4f7ff}
+    .platform-dot{width:9px;height:9px;border-radius:50%;background:#5bc0ff;box-shadow:0 0 0 3px rgba(91,192,255,.12)}
+    .platform-dot.youtube{background:#ff6b76;box-shadow:0 0 0 3px rgba(255,107,118,.13)}
+    .platform-dot.tiktok{background:#36d399;box-shadow:0 0 0 3px rgba(54,211,153,.13)}
+    .platform-dot.instagram{background:#b084ff;box-shadow:0 0 0 3px rgba(176,132,255,.14)}
+    .platform-dot.x{background:#d4d9e8;box-shadow:0 0 0 3px rgba(212,217,232,.13)}
+    .platform-dot.facebook{background:#5b8dff;box-shadow:0 0 0 3px rgba(91,141,255,.13)}
+    .queue-list{display:grid;gap:10px}
+    .queue-item{border:1px solid #26314e;border-radius:12px;padding:10px;background:#101523}
+    .queue-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+    .queue-title{font-weight:800;color:#f4f7ff}
+    .queue-meta{font-size:12px;color:#9ba3bf;margin-top:4px}
+    .priority-list{margin:0;padding-left:20px;color:#cdd5ec}
+    .priority-list li{margin:7px 0}
+    .source-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .source-link{border:1px solid #26314e;border-radius:10px;background:#101523;padding:9px;text-decoration:none;color:#cfe3ff;font-size:13px}
+    .source-link:hover{border-color:#4f79c6;background:#14203a}
     body.auth-pending .layout{display:none}
     body.authenticated #auth-screen{display:none}
     #auth-screen{min-height:100vh;display:grid;place-items:center;padding:20px;background:#0c0d12}
@@ -42,7 +93,22 @@
     .auth-card h1{margin:0 0 8px;font-size:24px}
     .auth-card input{box-sizing:border-box;width:100%;background:#0f1320;color:#eef0f7;border:1px solid #334062;border-radius:8px;padding:10px;margin:10px 0}
     .auth-error{min-height:18px;color:#ff9fa8;font-size:12px;margin:4px 0 10px}
-    @media(max-width:1080px){.main-grid{grid-template-columns:1fr}.layout{grid-template-columns:1fr}.nav{position:static;height:auto;border-right:0;border-bottom:1px solid #2a2f44}}
+    @media(max-width:1180px){.report-grid{grid-template-columns:1fr}}
+    @media(max-width:1080px){.main-grid{grid-template-columns:1fr}.metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.layout{grid-template-columns:1fr}.nav{position:static;height:auto;border-right:0;border-bottom:1px solid #2a2f44}.report-hero{flex-direction:column}.report-actions{justify-content:flex-start}}
+    @media(max-width:620px){
+      .content{padding:14px}
+      .song-grid,.metric-grid,.source-grid{grid-template-columns:1fr}
+      .report-hero h1{font-size:25px}
+      .metric-value{font-size:24px}
+      .table-wrap{border:0;overflow:visible}
+      .report-table{min-width:0}
+      .report-table,.report-table tbody,.report-table tr,.report-table td{display:block;width:100%;box-sizing:border-box}
+      .report-table thead{display:none}
+      .report-table tr{border:1px solid #26314e;border-radius:12px;margin:8px 0;background:#101523;overflow:hidden}
+      .report-table td{display:grid;grid-template-columns:86px minmax(0,1fr);gap:10px;white-space:normal}
+      .report-table td:first-child{white-space:normal}
+      .report-table td::before{content:attr(data-label);font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#8f98b8;font-weight:800}
+    }
   </style>
 </head>
 <body class="auth-pending">
@@ -90,12 +156,13 @@
 <div class="card">
             <h2>Strategy Links</h2>
             <ul>
-              <li><a href="/admin/content/30_PROMO_SYSTEM.md" target="_blank">30_PROMO_SYSTEM.md</a></li>
-              <li><a href="/admin/content/40_RANDOM_RHYTHM_PLAYBOOK.md" target="_blank">40_RANDOM_RHYTHM_PLAYBOOK.md</a></li>
-              <li><a href="/admin/content/Published_Log.csv" target="_blank">Published_Log.csv</a></li>
-              <li><a href="/admin/content/20_QUIPS_BANK.csv" target="_blank">20_QUIPS_BANK.csv</a></li>
-              <li><a href="/admin/content/18_OPS_RUNBOOK_DAILY_WEEKLY.md" target="_blank">Ops Runbook (Daily/Weekly)</a></li>
-              <li><a href="/admin/content/19_AOL_ACCOUNT_HANDOFF.md" target="_blank">AOL Account Handoff</a></li>
+              <li><a href="content/30_PROMO_SYSTEM.md" target="_blank">30_PROMO_SYSTEM.md</a></li>
+              <li><a href="content/40_RANDOM_RHYTHM_PLAYBOOK.md" target="_blank">40_RANDOM_RHYTHM_PLAYBOOK.md</a></li>
+              <li><a href="content/Published_Log.csv" target="_blank">Published_Log.csv</a></li>
+              <li><a href="content/20_QUIPS_BANK.csv" target="_blank">20_QUIPS_BANK.csv</a></li>
+              <li><a href="content/18_OPS_RUNBOOK_DAILY_WEEKLY.md" target="_blank">Ops Runbook (Daily/Weekly)</a></li>
+              <li><a href="content/19_AOL_ACCOUNT_HANDOFF.md" target="_blank">AOL Account Handoff</a></li>
+              <li><a href="content/21_AOL_GMAIL_BRIDGE.md" target="_blank">AOL to Gmail Bridge</a></li>
             </ul>
           </div>
         </div>
@@ -116,12 +183,16 @@
       <div class="card">
         <h2>Core Backstory Files</h2>
         <ul>
-          <li><a href="/admin/content/00_CANON.md" target="_blank">00_CANON.md</a></li>
-          <li><a href="/admin/content/10_ANECDOTE_BANK.md" target="_blank">10_ANECDOTE_BANK.md</a></li>
-          <li><a href="/admin/content/11_LYRIC_BACKSTORY_INDEX.csv" target="_blank">11_LYRIC_BACKSTORY_INDEX.csv</a></li>
-          <li><a href="/admin/content/12_SONG_BACKSTORY_CARDS.md" target="_blank">12_SONG_BACKSTORY_CARDS.md</a></li>
-          <li><a href="/admin/content/15_BRAINROT_CAPTION_PACKS.md" target="_blank">Brain Rot Caption Packs</a></li>
-          <li><a href="/admin/content/17_TOP10_CANON_PACKS.md" target="_blank">Top 10 Canon Packs</a></li>
+          <li><a href="content/README.md" target="_blank">Content System README</a></li>
+          <li><a href="content/CONTENT_INDEX.md" target="_blank">Generated Content Index</a></li>
+          <li><a href="content/00_CANON.md" target="_blank">00_CANON.md</a></li>
+          <li><a href="content/01_VOICE_SYSTEM.md" target="_blank">01_VOICE_SYSTEM.md</a></li>
+          <li><a href="content/10_ANECDOTE_BANK.md" target="_blank">10_ANECDOTE_BANK.md</a></li>
+          <li><a href="content/11_LYRIC_BACKSTORY_INDEX.csv" target="_blank">11_LYRIC_BACKSTORY_INDEX.csv</a></li>
+          <li><a href="content/12_SONG_BACKSTORY_CARDS.md" target="_blank">12_SONG_BACKSTORY_CARDS.md</a></li>
+          <li><a href="content/20_QUIPS_BANK.csv" target="_blank">20_QUIPS_BANK.csv</a></li>
+          <li><a href="content/15_BRAINROT_CAPTION_PACKS.md" target="_blank">Brain Rot Caption Packs</a></li>
+          <li><a href="content/17_TOP10_CANON_PACKS.md" target="_blank">Top 10 Canon Packs</a></li>
         </ul>
       </div>
 
@@ -145,16 +216,468 @@
     </section>
 
     <section class="panel" id="panel-reports">
-      <h1>Reports</h1>
-      <div class="card">
-        <ul>
-          <li><a href="/admin/reports/" target="_blank">Weekly Reports Index</a></li>
-          <li><a href="/admin/reports/weekly-social-report.md" target="_blank">Weekly Social Report</a></li>
-        </ul>
+      <div class="reports-shell">
+        <div class="report-hero">
+          <div>
+            <h1>Reports</h1>
+            <div class="muted" id="reports-period">Loading weekly report...</div>
+            <div class="report-kicker">
+              <span class="status-chip neutral" id="report-freshness">Checking freshness</span>
+              <span class="status-chip neutral" id="report-readiness">Checking executor</span>
+              <span class="status-chip neutral" id="report-metrics">Checking metrics</span>
+            </div>
+          </div>
+          <div class="report-actions">
+            <a class="btn secondary" href="reports/weekly-social-report.md" target="_blank" rel="noopener">Open weekly report</a>
+            <a class="btn ghost" href="content/Published_Log.csv" target="_blank" rel="noopener">Open published log</a>
+          </div>
+        </div>
+
+        <div class="report-alert" id="reports-alert" hidden></div>
+
+        <div class="metric-grid" aria-label="Report metrics">
+          <div class="metric-card">
+            <div class="metric-label">YouTube subs</div>
+            <div class="metric-value" id="metric-subs">--</div>
+            <div class="metric-note" id="metric-subs-note">Goal: 1,000</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">28d views</div>
+            <div class="metric-value" id="metric-views">--</div>
+            <div class="metric-note" id="metric-views-note">YouTube watch signal</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Watch time</div>
+            <div class="metric-value" id="metric-watch">--</div>
+            <div class="metric-note" id="metric-watch-note">Last 28 days</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Published</div>
+            <div class="metric-value" id="metric-published">--</div>
+            <div class="metric-note" id="metric-published-note">Last 30 days</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-label">Queue</div>
+            <div class="metric-value" id="metric-queue">--</div>
+            <div class="metric-note" id="metric-queue-note">Upcoming scheduled posts</div>
+          </div>
+        </div>
+
+        <div class="report-grid">
+          <div class="report-stack">
+            <section class="report-card" aria-labelledby="goal-heading">
+              <div class="goal-row">
+                <div>
+                  <h2 id="goal-heading">Monetization Goal</h2>
+                  <div class="muted" id="goal-copy">Waiting for subscriber count.</div>
+                </div>
+                <div class="goal-value" id="goal-percent">--</div>
+              </div>
+              <div class="goal-track" aria-hidden="true"><div class="goal-fill" id="goal-fill"></div></div>
+            </section>
+
+            <section class="report-card" aria-labelledby="platform-heading">
+              <h2 id="platform-heading">Platform Snapshot</h2>
+              <div class="table-wrap">
+                <table class="report-table">
+                  <thead>
+                    <tr>
+                      <th>Platform</th>
+                      <th>Audience</th>
+                      <th>Signal</th>
+                      <th>Latest</th>
+                      <th>Executor</th>
+                    </tr>
+                  </thead>
+                  <tbody id="platform-report-rows">
+                    <tr><td colspan="5" class="muted">Loading platform data...</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+
+            <section class="report-card" aria-labelledby="recent-heading">
+              <h2 id="recent-heading">Recent Publishing</h2>
+              <div class="table-wrap">
+                <table class="report-table">
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Platform</th>
+                      <th>Hook</th>
+                      <th>CTA</th>
+                      <th>Link</th>
+                    </tr>
+                  </thead>
+                  <tbody id="recent-publish-rows">
+                    <tr><td colspan="5" class="muted">Loading published log...</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+
+          <aside class="report-stack">
+            <section class="report-card" aria-labelledby="pipeline-heading">
+              <h2 id="pipeline-heading">Pipeline Health</h2>
+              <div class="queue-list" id="pipeline-health">
+                <div class="muted">Loading queue and executor status...</div>
+              </div>
+            </section>
+
+            <section class="report-card" aria-labelledby="next-posts-heading">
+              <h2 id="next-posts-heading">Next Scheduled Posts</h2>
+              <div class="queue-list" id="next-posts-report">
+                <div class="muted">Loading queue...</div>
+              </div>
+            </section>
+
+            <section class="report-card" aria-labelledby="priorities-heading">
+              <h2 id="priorities-heading">Next-week Priorities</h2>
+              <ol class="priority-list" id="report-priorities">
+                <li class="muted">Loading priorities...</li>
+              </ol>
+            </section>
+
+            <section class="report-card" aria-labelledby="sources-heading">
+              <h2 id="sources-heading">Source Files</h2>
+              <div class="source-grid">
+                <a class="source-link" href="reports/" target="_blank" rel="noopener">Reports index</a>
+                <a class="source-link" href="reports/weekly-social-report.md" target="_blank" rel="noopener">Weekly report</a>
+                <a class="source-link" href="../data/manual_social_stats.json" target="_blank" rel="noopener">Manual stats</a>
+                <a class="source-link" href="future-posts.json" target="_blank" rel="noopener">Future queue</a>
+              </div>
+            </section>
+          </aside>
+        </div>
       </div>
     </section>
   </main>
 </div>
+
+<script type="text/plain" id="embedded-weekly-report"># Weekly Social Report — Lily Roo
+
+**Period:** 2026-05-04 to 2026-05-10
+**Last updated:** 2026-05-10 07:31 PM EDT
+
+## KPI Goal
+- Primary growth target: **1,000 YouTube subscribers** (monetization milestone)
+
+## Platform Snapshot
+
+### YouTube
+- Subscribers: **6**
+- Last 28 days views: **109**
+- Last 28 days watch time: **3.4 hours**
+
+### TikTok
+- Followers: **pending**
+- Profile views (7d): **pending**
+- Latest post: https://www.tiktok.com/@lilyroo930/video/7611932426557754654
+
+### Instagram
+- Followers: **pending**
+- Profile visits (7d): **pending**
+- Latest post: https://www.instagram.com/p/DURjDIUgVn3/
+
+### X (Twitter)
+- Followers: **pending**
+- Impressions (7d): **pending**
+- Latest post: https://x.com/lilyrooartist/status/2043354786867589546
+
+### Facebook
+- Followers/Page likes: **pending**
+- Reach (7d): **pending**
+- Latest post: https://www.facebook.com/903693509504290_122113878687249470
+
+## Weekly Activity Log
+- Admin site now includes left-tab ops navigation (Promo / Backstory / Reports)
+- Backstory and visual packs generated for all archive songs
+- Upcoming 7-day queue supports redo variants, imagery previews, and shareable filtered views
+
+## Next-week priorities
+1. Publish at least 5 short-form posts from queue
+2. Use hard YouTube subscribe CTA every 2–3 posts
+3. Fill manual_social_stats.json values for platform deltas
+
+## Reporting cadence
+- Regenerate via: `python3 scripts/update_weekly_report.py`
+- Source overrides: `data/manual_social_stats.json`</script>
+
+<script type="text/plain" id="embedded-published-log">date,platform,post_id_or_url,content_id,song_era,hook,cta_type,youtube_linked,lilyroo_linked,views,likes,comments,shares,saves,subs_delta,notes
+2026-02-28,X,https://x.com/lilyrooartist/status/2027750321322148009,LR-ANEC-001,Analog Myth,If you can’t read clocks… maybe time is a myth,site_link,no,yes,,,,,,,Posted from approved Option A copy
+2026-02-28,Instagram,https://www.instagram.com/p/DURjDIUgVn3/,LR-ANEC-001,Analog Myth,New Now Playing: Analog Myth,link_in_bio,no,yes,,,,,,,Single image post
+2026-02-28,Facebook,posted,LR-ANEC-001,Analog Myth,Time myth concept + song context,site_link,no,yes,,,,,,,Posted on Lily Roo page
+2026-02-28,TikTok,https://www.tiktok.com/@lilyroo930/video/7611932426557754654,LR-ANEC-001,Analog Myth,If you can’t read clocks…,soft_subscribe,no,yes,,,,,,,Final privacy set to Everyone
+2026-04-12,X,https://x.com/lilyrooartist/status/2043354786867589546,,,Dropping the guards didn’t make me better. It made it real.,,no,no,,,,,,,queue_id=FP-AUTO-201; reply_url=https://x.com/lilyrooartist/status/2043354788054573307
+2026-04-25,Facebook,https://www.facebook.com/903693509504290_122113878687249470,FP-AUTO-210,Slow Walk,"Slow Walk is a song about setting your own pace while everybody else rushes the same finish line. Watch it on YouTube, then follow the rest of the signal at lilyroo.com.",site_link,yes,yes,,,,,,,queue_id=FP-AUTO-210; posted via Cloudflare Meta Graph API
+2026-05-02,YouTube,https://youtu.be/9rmy2JhBuF4,LR-SONG-024,No Mortgage,No Mortgage made public on YouTube,youtube_link,yes,yes,,,,,,,made public via YouTube Data API; launch queue FP-AUTO-221..228
+2026-05-09,YouTube,https://youtu.be/IahKaEXEA_0,FP-AUTO-229,13,13 - Lily Roo,youtube_link,yes,no,,,,,,,queue_id=FP-AUTO-229; posted via YouTube Data API; captions_id=AUieDaZVNGDBbcTT3oTade2eXB5JI5KhkLZanGM9z85Rse7_dhFYucuc</script>
+
+<script type="application/json" id="embedded-future-posts">{
+  "last_synced": "2026-05-10T23:31:26.274108+00:00",
+  "source": "data/scheduled_posts.csv",
+  "published_log": "admin/content/Published_Log.csv",
+  "excluded_published_ids": [
+    "FP-AUTO-201",
+    "FP-AUTO-210",
+    "FP-AUTO-229"
+  ],
+  "posts": [
+    {
+      "id": "FP-AUTO-235",
+      "scheduled_at": "2026-05-11T09:20:00-04:00",
+      "platform": "X",
+      "song": "I Learned It All in Fifteen Seconds",
+      "imagery": "I Learned cover + pre-save opener",
+      "imagery_url": "https://www.lilyroo.com/assets/img/i-learned-it-all-in-fifteen-seconds-cover.jpg",
+      "clip_url": "",
+      "text": "I learned empathy from strangers and buffering bars. Out June 5. Pre-save it before the algorithm teaches us another feeling.",
+      "drafts": [
+        "I learned empathy from strangers and buffering bars. Out June 5. Pre-save it before the algorithm teaches us another feeling.",
+        "Fifteen seconds is apparently enough time to borrow someone else's heartbreak and forget your own grocery list. Out June 5.",
+        "I keep a charger by my bed like a Bible for the walking dead. Very normal. Very June 5."
+      ],
+      "reply_text": "Pre-save: https://distrokid.com/hyperfollow/lilyroo/i-learned-it-all-in-fifteen-seconds",
+      "x_media_key": "",
+      "media_key": "i-learned-cover"
+    },
+    {
+      "id": "FP-AUTO-236",
+      "scheduled_at": "2026-05-11T20:10:00-04:00",
+      "platform": "Instagram",
+      "song": "I Learned It All in Fifteen Seconds",
+      "imagery": "I Learned cover + feed-life caption",
+      "imagery_url": "https://www.lilyroo.com/assets/img/i-learned-it-all-in-fifteen-seconds-cover.jpg",
+      "clip_url": "",
+      "text": "I wrote this one after realizing I knew a stranger's grief before I knew my neighbor's name. Out June 5.",
+      "drafts": [
+        "I wrote this one after realizing I knew a stranger's grief before I knew my neighbor's name. Out June 5.",
+        "Every story has a filter on it and somehow I still cried. I Learned It All in Fifteen Seconds is out June 5.",
+        "The phone taught me heartbreak at unsafe speed. Naturally I made it a song."
+      ],
+      "reply_text": "Pre-save: https://distrokid.com/hyperfollow/lilyroo/i-learned-it-all-in-fifteen-seconds",
+      "x_media_key": "",
+      "media_key": "i-learned-cover"
+    },
+    {
+      "id": "FP-AUTO-237",
+      "scheduled_at": "2026-05-12T13:35:00-04:00",
+      "platform": "TikTok",
+      "song": "I Learned It All in Fifteen Seconds",
+      "imagery": "I Learned 60s short clip",
+      "imagery_url": "https://www.lilyroo.com/assets/img/i-learned-it-all-in-fifteen-seconds-cover.jpg",
+      "clip_url": "https://www.lilyroo.com/assets/ig/01_i_learned_it_all_60s.mp4",
+      "text": "I learned it all in fifteen seconds and somehow still have homework.",
+      "drafts": [
+        "I learned it all in fifteen seconds and somehow still have homework.",
+        "A world of strangers in my phone. Very educational. Very concerning.",
+        "Swipe away before the pain sets in. Cute system we built."
+      ],
+      "reply_text": "Pre-save: https://distrokid.com/hyperfollow/lilyroo/i-learned-it-all-in-fifteen-seconds",
+      "x_media_key": "",
+      "media_key": "i-learned-60s"
+    },
+    {
+      "id": "FP-AUTO-238",
+      "scheduled_at": "2026-05-12T21:05:00-04:00",
+      "platform": "Facebook",
+      "song": "I Learned It All in Fifteen Seconds",
+      "imagery": "I Learned cover + longer context",
+      "imagery_url": "https://www.lilyroo.com/assets/img/i-learned-it-all-in-fifteen-seconds-cover.jpg",
+      "clip_url": "",
+      "text": "I Learned It All in Fifteen Seconds is about how fast the feed teaches you to feel. A cake with one good hand. A soldier coming home. A haircut. A subway heartbreak. You swipe away before the pain sets in and somehow it stays anyway.",
+      "drafts": [
+        "I Learned It All in Fifteen Seconds is about how fast the feed teaches you to feel. A cake with one good hand. A soldier coming home. A haircut. A subway heartbreak. You swipe away before the pain sets in and somehow it stays anyway.",
+        "The line about the charger by my bed is true. Modern candle. Tiny altar. Perfectly healthy object to write a song around. Out June 5.",
+        "I have never left this little room and still somehow I have been to Paris and a honeymoon. The internet is a haunted study abroad program."
+      ],
+      "reply_text": "Pre-save: https://distrokid.com/hyperfollow/lilyroo/i-learned-it-all-in-fifteen-seconds",
+      "x_media_key": "",
+      "media_key": "i-learned-cover"
+    },
+    {
+      "id": "FP-AUTO-239",
+      "scheduled_at": "2026-05-13T10:45:00-04:00",
+      "platform": "X",
+      "song": "13",
+      "imagery": "13 quiet-confidence callback",
+      "imagery_url": "https://www.lilyroo.com/assets/img/analog-myth/13/13-cover.png",
+      "clip_url": "",
+      "text": "Still weird. Still me. Less scared to be seen. That counts.",
+      "drafts": [
+        "Still weird. Still me. Less scared to be seen. That counts.",
+        "One aisle over is not far unless your nervous system is narrating.",
+        "13 is not a becoming-new song. Thank god. I was busy becoming slightly less hidden."
+      ],
+      "reply_text": "Watch 13: https://youtu.be/IahKaEXEA_0",
+      "x_media_key": "",
+      "media_key": "13-cover"
+    },
+    {
+      "id": "FP-AUTO-240",
+      "scheduled_at": "2026-05-13T16:25:00-04:00",
+      "platform": "Instagram",
+      "song": "13",
+      "imagery": "13 cover + small visibility caption",
+      "imagery_url": "https://www.lilyroo.com/assets/img/analog-myth/13/13-cover.png",
+      "clip_url": "",
+      "text": "I order. I answer. I leave. I come back. Still weird. Still me.",
+      "drafts": [
+        "I order. I answer. I leave. I come back. Still weird. Still me.",
+        "Thirteen did not make me loud. It made a few tiny things possible. Apparently that is enough for a song.",
+        "Small jump. Not brave. Just enough."
+      ],
+      "reply_text": "Watch 13: https://youtu.be/IahKaEXEA_0",
+      "x_media_key": "",
+      "media_key": "13-cover"
+    },
+    {
+      "id": "FP-AUTO-241",
+      "scheduled_at": "2026-05-14T11:15:00-04:00",
+      "platform": "X",
+      "song": "I Learned It All in Fifteen Seconds",
+      "imagery": "I Learned lyric quote card",
+      "imagery_url": "https://www.lilyroo.com/assets/img/i-learned-it-all-in-fifteen-seconds-cover.jpg",
+      "clip_url": "",
+      "text": "I keep a charger by my bed like a Bible for the walking dead. Anyway good morning.",
+      "drafts": [
+        "I keep a charger by my bed like a Bible for the walking dead. Anyway good morning.",
+        "Truth's a flash and then it's gone. Naturally I kept receipts.",
+        "Every story has a filter on it. Still rude when it works."
+      ],
+      "reply_text": "Pre-save: https://distrokid.com/hyperfollow/lilyroo/i-learned-it-all-in-fifteen-seconds",
+      "x_media_key": "",
+      "media_key": "i-learned-cover"
+    },
+    {
+      "id": "FP-AUTO-242",
+      "scheduled_at": "2026-05-14T19:40:00-04:00",
+      "platform": "Facebook",
+      "song": "Brain Rot",
+      "imagery": "Brain Rot older-song callback",
+      "imagery_url": "https://i.ytimg.com/vi/iI5wRXLmTM8/hqdefault.jpg",
+      "clip_url": "",
+      "text": "Brain Rot was supposed to be a joke until it sounded like my nervous system. Older song. Still current. Very annoying of it.",
+      "drafts": [
+        "Brain Rot was supposed to be a joke until it sounded like my nervous system. Older song. Still current. Very annoying of it.",
+        "My attention span became a group chat with no moderator and then asked for merch. Brain Rot remains unfortunately relevant.",
+        "I wrote Brain Rot as a joke first. Then it sat there looking like a diary entry. Rude."
+      ],
+      "reply_text": "Full archive: https://lilyroo.com/music.html",
+      "x_media_key": "",
+      "media_key": "brain-rot-thumb"
+    },
+    {
+      "id": "FP-AUTO-243",
+      "scheduled_at": "2026-05-15T09:55:00-04:00",
+      "platform": "Instagram",
+      "song": "I Learned It All in Fifteen Seconds",
+      "imagery": "I Learned cover + subscribe CTA",
+      "imagery_url": "https://www.lilyroo.com/assets/img/i-learned-it-all-in-fifteen-seconds-cover.jpg",
+      "clip_url": "",
+      "text": "Out June 5. I learned it all in fifteen seconds and somehow still have homework. Pre-save now and subscribe on YouTube if this signal found you.",
+      "drafts": [
+        "Out June 5. I learned it all in fifteen seconds and somehow still have homework. Pre-save now and subscribe on YouTube if this signal found you.",
+        "The song is about feeling too much too quickly and pretending the scroll did not rearrange your day. It did. Out June 5.",
+        "Pre-save the song. Subscribe on YouTube. Help us drag this tiny signal toward 1,000."
+      ],
+      "reply_text": "Pre-save: https://distrokid.com/hyperfollow/lilyroo/i-learned-it-all-in-fifteen-seconds",
+      "x_media_key": "",
+      "media_key": "i-learned-cover"
+    },
+    {
+      "id": "FP-AUTO-244",
+      "scheduled_at": "2026-05-15T22:15:00-04:00",
+      "platform": "TikTok",
+      "song": "13",
+      "imagery": "13 panning video callback",
+      "imagery_url": "https://www.lilyroo.com/assets/img/analog-myth/13/13-cover.png",
+      "clip_url": "https://www.lilyroo.com/assets/media/analog-myth/13/13-video.mp4",
+      "text": "One aisle over. Beating heart. Nobody noticed. Also good.",
+      "drafts": [
+        "One aisle over. Beating heart. Nobody noticed. Also good.",
+        "I did not become fearless. I became capable of going one aisle over. Please clap quietly.",
+        "13. Small jump. Not brave. Just enough."
+      ],
+      "reply_text": "Watch 13: https://youtu.be/IahKaEXEA_0",
+      "x_media_key": "",
+      "media_key": "13-video"
+    },
+    {
+      "id": "FP-AUTO-245",
+      "scheduled_at": "2026-05-16T12:30:00-04:00",
+      "platform": "X",
+      "song": "I Learned It All in Fifteen Seconds",
+      "imagery": "I Learned pre-save reminder",
+      "imagery_url": "https://www.lilyroo.com/assets/img/i-learned-it-all-in-fifteen-seconds-cover.jpg",
+      "clip_url": "",
+      "text": "A world of strangers in my phone and I still cannot find the thing I opened the app for.",
+      "drafts": [
+        "A world of strangers in my phone and I still cannot find the thing I opened the app for.",
+        "I have lived a thousand lives alone and still owe someone a text.",
+        "The feed taught me empathy and then served me an ad for shoes. Out June 5."
+      ],
+      "reply_text": "Pre-save: https://distrokid.com/hyperfollow/lilyroo/i-learned-it-all-in-fifteen-seconds",
+      "x_media_key": "",
+      "media_key": "i-learned-cover"
+    },
+    {
+      "id": "FP-AUTO-246",
+      "scheduled_at": "2026-05-16T20:50:00-04:00",
+      "platform": "Facebook",
+      "song": "I Learned It All in Fifteen Seconds",
+      "imagery": "I Learned weekend context",
+      "imagery_url": "https://www.lilyroo.com/assets/img/i-learned-it-all-in-fifteen-seconds-cover.jpg",
+      "clip_url": "",
+      "text": "This one is for the tiny room and the huge feed. The stories that flash by too fast. The grief you borrow for fifteen seconds. The weird guilt of feeling it and swiping anyway.",
+      "drafts": [
+        "This one is for the tiny room and the huge feed. The stories that flash by too fast. The grief you borrow for fifteen seconds. The weird guilt of feeling it and swiping anyway.",
+        "I Learned It All in Fifteen Seconds is out June 5. It is not anti-internet exactly. It is more like side-eye with a melody.",
+        "I know heartbreak on a subway ride and how to smile when your father dies. The feed is a terrible teacher. I took notes."
+      ],
+      "reply_text": "Pre-save: https://distrokid.com/hyperfollow/lilyroo/i-learned-it-all-in-fifteen-seconds",
+      "x_media_key": "",
+      "media_key": "i-learned-cover"
+    },
+    {
+      "id": "FP-AUTO-247",
+      "scheduled_at": "2026-05-17T10:25:00-04:00",
+      "platform": "Instagram",
+      "song": "Brain Rot",
+      "imagery": "Brain Rot callback + current-release bridge",
+      "imagery_url": "https://i.ytimg.com/vi/iI5wRXLmTM8/hqdefault.jpg",
+      "clip_url": "",
+      "text": "Brain Rot was the laugh. Fifteen Seconds is the part where the laugh turns into a receipt.",
+      "drafts": [
+        "Brain Rot was the laugh. Fifteen Seconds is the part where the laugh turns into a receipt.",
+        "Older song. Same phone. New damage report. Brain Rot still knows too much.",
+        "If Brain Rot was the browser tabs crashing then Fifteen Seconds is the screenshot I pretended not to save."
+      ],
+      "reply_text": "Pre-save Fifteen Seconds: https://distrokid.com/hyperfollow/lilyroo/i-learned-it-all-in-fifteen-seconds",
+      "x_media_key": "",
+      "media_key": "brain-rot-thumb"
+    },
+    {
+      "id": "FP-AUTO-248",
+      "scheduled_at": "2026-05-17T17:35:00-04:00",
+      "platform": "X",
+      "song": "I Learned It All in Fifteen Seconds",
+      "imagery": "I Learned week-close CTA",
+      "imagery_url": "https://www.lilyroo.com/assets/img/i-learned-it-all-in-fifteen-seconds-cover.jpg",
+      "clip_url": "",
+      "text": "If this line found you, pre-save Fifteen Seconds and subscribe on YouTube. We are building this signal to 1,000.",
+      "drafts": [
+        "If this line found you, pre-save Fifteen Seconds and subscribe on YouTube. We are building this signal to 1,000.",
+        "Help us hit 1,000 on YouTube. One subscribe moves the signal. One less refresh probably also helps but I will not ask for miracles.",
+        "Full transmission soon. Pre-save now. Subscribe if you like songs that keep receipts for feelings."
+      ],
+      "reply_text": "Pre-save: https://distrokid.com/hyperfollow/lilyroo/i-learned-it-all-in-fifteen-seconds",
+      "x_media_key": "",
+      "media_key": "i-learned-cover"
+    }
+  ]
+}</script>
 
 <script>
   const ADMIN_AUTH_KEY='lilyroo_admin_password_v1';
@@ -244,6 +767,34 @@
   };
   const now=new Date(), in7=new Date(now.getTime()+7*24*60*60*1000);
 
+  function localPath(path){
+    const clean=String(path).replace(/^\/+admin\//,'').replace(/^\/+/,'');
+    if(clean.startsWith('data/')) return `../${clean}`;
+    return clean;
+  }
+
+  const EMBEDDED_TEXT_ASSETS={
+    'reports/weekly-social-report.md':'embedded-weekly-report',
+    'content/Published_Log.csv':'embedded-published-log'
+  };
+  const EMBEDDED_JSON_ASSETS={
+    'future-posts.json':'embedded-future-posts'
+  };
+
+  function embeddedTextAsset(url){
+    const key=String(url).split('?')[0].replace(/^\.\//,'');
+    const el=document.getElementById(EMBEDDED_TEXT_ASSETS[key]);
+    return el ? el.textContent.trim() : '';
+  }
+
+  function embeddedJsonAsset(url,fallback){
+    const key=String(url).split('?')[0].replace(/^\.\//,'');
+    const el=document.getElementById(EMBEDDED_JSON_ASSETS[key]);
+    if(!el) return fallback;
+    try{return JSON.parse(el.textContent);}
+    catch(e){return fallback;}
+  }
+
   function renderImagePreview(el,p){
     const src=safeUrl(p.imagery_url);
     if(!src){el.innerHTML='';return;}
@@ -269,7 +820,7 @@
 
     // Source today/week from one JSON
     try{
-      const q=await fetch('/admin/content/runbook_quickstart.json').then(r=>r.json());
+      const q=await fetch(localPath('/admin/content/runbook_quickstart.json')).then(r=>r.json());
       (q.today_actions||[]).forEach(x=>{ const li=document.createElement('li'); li.textContent=x; todayEl.appendChild(li); });
       (q.week_priorities||[]).forEach(x=>{ const li=document.createElement('li'); li.textContent=x; weekEl.appendChild(li); });
       if(!(q.today_actions||[]).length){ todayEl.innerHTML='<li>Not configured yet</li>'; }
@@ -281,7 +832,7 @@
 
     // Auto-read report timestamp from report Last updated line; fallback if missing
     try{
-      const md=await fetch('/admin/reports/weekly-social-report.md').then(r=>r.ok?r.text():'');
+      const md=await fetch(localPath('/admin/reports/weekly-social-report.md')).then(r=>r.ok?r.text():'');
       const m=md.match(/\*\*Last updated:\*\*\s*(.+)/i);
       if(m && m[1]) tsEl.textContent='Last report: '+m[1].trim();
       else tsEl.textContent='Last report: not yet generated';
@@ -291,11 +842,24 @@
   }
   loadQuickStart();
 
-  const executorUrl=window.LILYROO_SOCIAL_EXECUTOR_URL || '/api/social/execute';
+  function defaultExecutorUrl(){
+    const host=location.hostname;
+    if(location.protocol==='file:' || host==='127.0.0.1' || host==='localhost' || host==='lilyrooartist.github.io' || host==='lilyroo.com'){
+      return 'https://www.lilyroo.com/api/social/execute';
+    }
+    return '/api/social/execute';
+  }
+
+  const executorUrl=window.LILYROO_SOCIAL_EXECUTOR_URL || defaultExecutorUrl();
   const readinessUrl=executorUrl.replace(/\/execute$/,'/readiness');
+  const metricsUrl=executorUrl.replace(/\/execute$/,'/metrics');
   let executorReadiness=null;
   const readinessPromise=fetch(readinessUrl,{
     headers: {[ADMIN_PASSWORD_HEADER]: adminPassword()}
+  }).then(r=>r.ok?r.json():null).catch(()=>null);
+  const metricsPromise=fetch(metricsUrl,{
+    headers: {[ADMIN_PASSWORD_HEADER]: adminPassword()},
+    cache:'no-store'
   }).then(r=>r.ok?r.json():null).catch(()=>null);
 
   function platformReadiness(platform){
@@ -323,6 +887,452 @@
     }
     return {ready:true,message:''};
   }
+
+  const REPORT_PLATFORM_CONFIG=[
+    {
+      label:'YouTube',
+      key:'youtube',
+      dot:'youtube',
+      audience:'Subscribers',
+      audienceMetric:'subscribers',
+      audienceLabel:'subscribers',
+      signal:[
+        {reportKey:'Last 28 days views', metricKey:'views_28d', label:'views'},
+        {reportKey:'Last 28 days watch time', metricKey:'watch_time_hours_28d', label:'watch time', suffix:'h'}
+      ]
+    },
+    {
+      label:'TikTok',
+      key:'tiktok',
+      dot:'tiktok',
+      audience:'Followers',
+      audienceMetric:'followers',
+      audienceLabel:'followers',
+      signal:[{reportKey:'Profile views (7d)', metricKey:'profile_views_7d', label:'profile views'}]
+    },
+    {
+      label:'Instagram',
+      key:'instagram',
+      dot:'instagram',
+      audience:'Followers',
+      audienceMetric:'followers',
+      audienceLabel:'followers',
+      signal:[{reportKey:'Profile visits (7d)', metricKey:'profile_visits_7d', label:'profile visits'}]
+    },
+    {
+      label:'X (Twitter)',
+      key:'x',
+      dot:'x',
+      audience:'Followers',
+      audienceMetric:'followers',
+      audienceLabel:'followers',
+      signal:[{reportKey:'Impressions (7d)', metricKey:'impressions_7d', label:'impressions'}],
+      logPlatform:'X'
+    },
+    {
+      label:'Facebook',
+      key:'facebook',
+      dot:'facebook',
+      audience:'Followers/Page likes',
+      audienceMetric:'followers',
+      audienceFallbackMetric:'page_likes',
+      audienceLabel:'followers',
+      signal:[{reportKey:'Reach (7d)', metricKey:'reach_7d', label:'reach'}]
+    }
+  ];
+
+  const reportSetText=(id,value)=>{
+    const el=document.getElementById(id);
+    if(el) el.textContent=value;
+  };
+
+  const compactNumber=(value)=>{
+    const n=Number(value);
+    if(!Number.isFinite(n)) return '--';
+    return new Intl.NumberFormat('en-US',{notation:n>=10000?'compact':'standard',maximumFractionDigits:n>=10000?1:0}).format(n);
+  };
+
+  const numberFromText=(value)=>{
+    const match=String(value ?? '').replace(/,/g,'').match(/-?\d+(\.\d+)?/);
+    return match?Number(match[0]):null;
+  };
+
+  const isPendingValue=(value)=>!String(value ?? '').trim() || /pending/i.test(String(value));
+
+  function parseWeeklyReport(md){
+    const report={period:'',lastUpdated:'',platforms:{},priorities:[]};
+    report.period=(md.match(/\*\*Period:\*\*\s*(.+)/i)||[])[1]?.trim()||'';
+    report.lastUpdated=(md.match(/\*\*Last updated:\*\*\s*(.+)/i)||[])[1]?.trim()||'';
+    let section='', platform='';
+    md.split(/\r?\n/).forEach(line=>{
+      const h2=line.match(/^##\s+(.+)/);
+      if(h2){section=h2[1].trim();platform='';return;}
+      const h3=line.match(/^###\s+(.+)/);
+      if(h3){
+        platform=h3[1].trim();
+        report.platforms[platform]=report.platforms[platform]||{};
+        return;
+      }
+      if(platform){
+        const kv=line.match(/^-\s+([^:]+):\s+(.+)$/);
+        if(kv) report.platforms[platform][kv[1].trim()]=kv[2].replace(/\*\*/g,'').trim();
+      }
+      if(/^Next-week priorities$/i.test(section)){
+        const item=line.match(/^\d+\.\s+(.+)/);
+        if(item) report.priorities.push(item[1].trim());
+      }
+    });
+    return report;
+  }
+
+  function parseCsv(text){
+    const rows=[]; let row=[], field='', quoted=false;
+    for(let i=0;i<text.length;i++){
+      const ch=text[i], next=text[i+1];
+      if(quoted){
+        if(ch==='"' && next==='"'){field+='"';i++;}
+        else if(ch==='"') quoted=false;
+        else field+=ch;
+      }else if(ch==='"') quoted=true;
+      else if(ch===','){row.push(field);field='';}
+      else if(ch==='\n'){
+        row.push(field); rows.push(row); row=[]; field='';
+      }else if(ch!=='\r') field+=ch;
+    }
+    if(field || row.length){row.push(field); rows.push(row);}
+    const headers=(rows.shift()||[]).map(h=>h.trim());
+    return rows.filter(r=>r.some(cell=>String(cell).trim())).map(r=>{
+      const item={};
+      headers.forEach((h,idx)=>item[h]=(r[idx]||'').trim());
+      return item;
+    });
+  }
+
+  function parseReportTimestamp(value){
+    const m=String(value||'').match(/^(\d{4})-(\d{2})-(\d{2})\s+(\d{1,2}):(\d{2})\s+(AM|PM)\s+(EDT|EST)$/i);
+    if(!m) return null;
+    let hour=Number(m[4]);
+    if(m[6].toUpperCase()==='PM' && hour!==12) hour+=12;
+    if(m[6].toUpperCase()==='AM' && hour===12) hour=0;
+    const offset=m[7].toUpperCase()==='EDT'?'-04:00':'-05:00';
+    const parsed=new Date(`${m[1]}-${m[2]}-${m[3]}T${String(hour).padStart(2,'0')}:${m[5]}:00${offset}`);
+    return Number.isNaN(parsed.getTime())?null:parsed;
+  }
+
+  function parseDateOnly(value){
+    const m=String(value||'').match(/^(\d{4})-(\d{2})-(\d{2})/);
+    return m?new Date(Number(m[1]),Number(m[2])-1,Number(m[3]),12):null;
+  }
+
+  function formatDateOnly(value){
+    const d=parseDateOnly(value);
+    return d?d.toLocaleDateString('en-US',{month:'short',day:'numeric'}):'--';
+  }
+
+  function formatQueueDate(value){
+    const d=new Date(value);
+    if(Number.isNaN(d.getTime())) return '--';
+    return d.toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});
+  }
+
+  function fetchTextOrEmpty(url){
+    const fallback=embeddedTextAsset(url);
+    return fetch(`${url}${url.includes('?')?'&':'?'}v=${Date.now()}`,{cache:'no-store'}).then(r=>r.ok?r.text():fallback).catch(()=>fallback);
+  }
+
+  function fetchJsonOr(url,fallback){
+    const embedded=embeddedJsonAsset(url,fallback);
+    return fetch(`${url}${url.includes('?')?'&':'?'}v=${Date.now()}`,{cache:'no-store'}).then(r=>r.ok?r.json():embedded).catch(()=>embedded);
+  }
+
+  function latestRowsByPlatform(rows){
+    const latest={};
+    rows.slice().sort((a,b)=>(parseDateOnly(a.date)?.getTime()||0)-(parseDateOnly(b.date)?.getTime()||0)).forEach(row=>{
+      const platform=(row.platform||'').trim();
+      const url=(row.post_id_or_url||'').trim();
+      if(platform && url) latest[platform]=row;
+    });
+    return latest;
+  }
+
+  function linkOrText(value,label='Open'){
+    const raw=String(value||'').trim();
+    const url=safeUrl(raw);
+    if(url) return `<a href="${escapeHtml(url)}" target="_blank" rel="noopener">${escapeHtml(label)}</a>`;
+    if(raw && !isPendingValue(raw)) return escapeHtml(raw);
+    return '<span class="muted">pending</span>';
+  }
+
+  function metricWithLabel(value,label){
+    if(isPendingValue(value)) return '<span class="muted">pending</span>';
+    return `${escapeHtml(value)} ${escapeHtml(label)}`;
+  }
+
+  function autoMetricNumber(platformMetrics, key){
+    const value=platformMetrics?.metrics?.[key];
+    if(value===undefined || value===null || value==='') return null;
+    const n=Number(value);
+    return Number.isFinite(n)?n:null;
+  }
+
+  function autoMetricDisplay(value, suffix=''){
+    const n=Number(value);
+    if(!Number.isFinite(n)) return escapeHtml(value);
+    if(suffix==='h') return `${new Intl.NumberFormat('en-US',{maximumFractionDigits:1}).format(n)}h`;
+    return compactNumber(n);
+  }
+
+  function metricUnavailableText(platformMetrics){
+    if(!platformMetrics) return 'pending';
+    if(platformMetrics.ok===false){
+      return platformMetrics.credential_ok ? 'API limited' : 'unavailable';
+    }
+    return 'not returned';
+  }
+
+  function metricFromSources(platformMetrics, metricKey, fallback, label, options={}){
+    const autoValue=platformMetrics?.metrics?.[metricKey];
+    if(autoValue!==undefined && autoValue!==null && autoValue!==''){
+      return `${autoMetricDisplay(autoValue,options.suffix)} ${escapeHtml(label)}`;
+    }
+    if(options.fallbackMetric){
+      const secondary=platformMetrics?.metrics?.[options.fallbackMetric];
+      if(secondary!==undefined && secondary!==null && secondary!==''){
+        return `${autoMetricDisplay(secondary,options.suffix)} ${escapeHtml(options.fallbackLabel||label)}`;
+      }
+    }
+    if(!isPendingValue(fallback)) return metricWithLabel(fallback,label);
+    const title=platformMetrics?.reason?` title="${escapeHtml(platformMetrics.reason)}"`:'';
+    return `<span class="muted"${title}>${escapeHtml(metricUnavailableText(platformMetrics))}</span>`;
+  }
+
+  function metricsSourceNote(platformMetrics){
+    if(!platformMetrics) return '<div class="metric-note">Metrics: static report</div>';
+    if(platformMetrics.ok){
+      return `<div class="metric-note">Metrics: ${escapeHtml(platformMetrics.source||'live API')}</div>`;
+    }
+    const status=platformMetrics.credential_ok?'API limited':'unavailable';
+    const reason=platformMetrics.reason?` title="${escapeHtml(platformMetrics.reason)}"`:'';
+    return `<div class="metric-note"${reason}>Metrics: ${escapeHtml(status)}</div>`;
+  }
+
+  function readinessChip(platform, readinessKnown){
+    if(!readinessKnown) return '<span class="status-chip neutral">Unknown</span>';
+    const info=platformReadiness(platform);
+    return `<span class="status-chip ${info.ready?'ok':'bad'}">${info.ready?'Ready':'Blocked'}</span>`;
+  }
+
+  function renderReportFreshness(report){
+    const period=report.period?`Period: ${report.period}`:'Period unavailable';
+    reportSetText('reports-period',period);
+    const freshness=document.getElementById('report-freshness');
+    const alert=document.getElementById('reports-alert');
+    const updated=parseReportTimestamp(report.lastUpdated);
+    if(!freshness) return;
+    freshness.className='status-chip neutral';
+    freshness.textContent=report.lastUpdated?`Updated ${report.lastUpdated}`:'No update timestamp';
+    if(alert) alert.hidden=true;
+    if(!updated) return;
+    const ageDays=Math.floor((Date.now()-updated.getTime())/(24*60*60*1000));
+    if(ageDays<=7){
+      freshness.className='status-chip ok';
+      freshness.textContent=`Fresh: ${ageDays}d old`;
+    }else{
+      freshness.className='status-chip warn';
+      freshness.textContent=`Stale: ${ageDays}d old`;
+      if(alert){
+        alert.hidden=false;
+        alert.textContent=`Weekly report is ${ageDays} days old. Refresh the report before using these numbers for a weekly readout.`;
+      }
+    }
+  }
+
+  function renderExecutorStatus(readiness){
+    const el=document.getElementById('report-readiness');
+    if(!el) return;
+    if(!readiness){
+      el.className='status-chip neutral';
+      el.textContent='Executor unavailable';
+      return;
+    }
+    const checks=['Facebook','Instagram','TikTok','YouTube','X'];
+    const readyCount=checks.filter(platform=>platformReadiness(platform).ready).length;
+    el.className=readyCount===checks.length?'status-chip ok':'status-chip warn';
+    el.textContent=`Executor ${readyCount}/${checks.length} ready`;
+  }
+
+  function renderMetricsStatus(metrics){
+    const el=document.getElementById('report-metrics');
+    if(!el) return;
+    if(!metrics){
+      el.className='status-chip neutral';
+      el.textContent='Metrics static';
+      return;
+    }
+    const platformMetrics=metrics.platforms||{};
+    const liveCount=REPORT_PLATFORM_CONFIG.filter(config=>platformMetrics[config.key]?.ok).length;
+    const limitedCount=REPORT_PLATFORM_CONFIG.filter(config=>platformMetrics[config.key]?.credential_ok && !platformMetrics[config.key]?.ok).length;
+    el.className=liveCount?'status-chip ok':'status-chip warn';
+    el.textContent=limitedCount?`Metrics ${liveCount}/5 live, ${limitedCount} limited`:`Metrics ${liveCount}/5 live`;
+  }
+
+  function renderMetricCards(report,publishedRows,queuePosts,metrics){
+    const youtube=report.platforms.YouTube||{};
+    const youtubeMetrics=metrics?.platforms?.youtube;
+    const subs=autoMetricNumber(youtubeMetrics,'subscribers') ?? numberFromText(youtube.Subscribers);
+    const liveViews=autoMetricNumber(youtubeMetrics,'views_28d');
+    const liveWatch=autoMetricNumber(youtubeMetrics,'watch_time_hours_28d');
+    const views=liveViews ?? numberFromText(youtube['Last 28 days views']);
+    const watch=liveWatch ?? numberFromText(youtube['Last 28 days watch time']);
+    const youtubeSource=liveViews!==null || liveWatch!==null ? 'Live from YouTube Analytics' : 'Weekly report';
+    const last30Start=new Date(Date.now()-30*24*60*60*1000);
+    const last30=publishedRows.filter(row=>{
+      const date=parseDateOnly(row.date);
+      return date && date>=last30Start;
+    }).length;
+    const upcoming=queuePosts.filter(post=>new Date(post.scheduled_at)>=now).length;
+    const due=queuePosts.filter(post=>new Date(post.scheduled_at)<now).length;
+    reportSetText('metric-subs',subs==null?'--':compactNumber(subs));
+    reportSetText('metric-subs-note',subs==null?'Goal: 1,000':`${Math.max(0,1000-subs)} to goal`);
+    reportSetText('metric-views',views==null?'--':compactNumber(views));
+    reportSetText('metric-views-note',`${youtubeSource} watch signal`);
+    reportSetText('metric-watch',watch==null?'--':`${watch}h`);
+    reportSetText('metric-watch-note',youtubeMetrics?.period_28d?`${youtubeMetrics.period_28d.startDate} to ${youtubeMetrics.period_28d.endDate}`:'Last 28 days');
+    reportSetText('metric-published',String(last30));
+    reportSetText('metric-published-note','Logged in last 30 days');
+    reportSetText('metric-queue',String(upcoming));
+    reportSetText('metric-queue-note',due?`${due} due earlier`:'Upcoming scheduled posts');
+
+    const pct=subs==null?0:Math.min(100,Math.max(0,(subs/1000)*100));
+    reportSetText('goal-percent',subs==null?'--':`${pct.toFixed(1)}%`);
+    reportSetText('goal-copy',subs==null?'Waiting for subscriber count.':`${subs} of 1,000 subscribers captured toward the YouTube monetization milestone.`);
+    const fill=document.getElementById('goal-fill');
+    if(fill) fill.style.width=`${pct}%`;
+  }
+
+  function renderPlatformRows(report,publishedRows,readiness,metrics){
+    const latest=latestRowsByPlatform(publishedRows);
+    const body=document.getElementById('platform-report-rows');
+    if(!body) return;
+    body.innerHTML=REPORT_PLATFORM_CONFIG.map(config=>{
+      const block=report.platforms[config.label]||{};
+      const platformMetrics=metrics?.platforms?.[config.key];
+      const logPlatform=config.logPlatform||config.label;
+      const latestUrl=latest[logPlatform]?.post_id_or_url || platformMetrics?.profile_url || block['Latest post'] || '';
+      const signal=config.signal.map(item=>metricFromSources(platformMetrics,item.metricKey,block[item.reportKey],item.label,item)).join('<br>');
+      return `<tr>
+        <td data-label="Platform"><div class="platform-name"><span class="platform-dot ${escapeHtml(config.dot)}"></span>${escapeHtml(config.label)}</div></td>
+        <td data-label="Audience">${metricFromSources(platformMetrics,config.audienceMetric,block[config.audience],config.audienceLabel,{fallbackMetric:config.audienceFallbackMetric,fallbackLabel:'page likes'})}</td>
+        <td data-label="Signal">${signal||'<span class="muted">pending</span>'}</td>
+        <td data-label="Latest">${linkOrText(latestUrl,'Open')}</td>
+        <td data-label="Executor">${readinessChip(config.label,Boolean(readiness))}${metricsSourceNote(platformMetrics)}</td>
+      </tr>`;
+    }).join('');
+  }
+
+  function renderRecentPublishing(rows){
+    const body=document.getElementById('recent-publish-rows');
+    if(!body) return;
+    const recent=rows.slice().sort((a,b)=>(parseDateOnly(b.date)?.getTime()||0)-(parseDateOnly(a.date)?.getTime()||0)).slice(0,7);
+    if(!recent.length){
+      body.innerHTML='<tr><td colspan="5" class="muted">No published posts logged yet.</td></tr>';
+      return;
+    }
+    body.innerHTML=recent.map(row=>`<tr>
+      <td data-label="Date">${escapeHtml(formatDateOnly(row.date))}</td>
+      <td data-label="Platform">${escapeHtml(row.platform||'--')}</td>
+      <td data-label="Hook">${escapeHtml(row.hook||row.content_id||'--')}</td>
+      <td data-label="CTA">${escapeHtml(row.cta_type||'--')}</td>
+      <td data-label="Link">${linkOrText(row.post_id_or_url,'Open')}</td>
+    </tr>`).join('');
+  }
+
+  function renderPipelineHealth(queuePayload,readiness,report,metrics){
+    const root=document.getElementById('pipeline-health');
+    if(!root) return;
+    const posts=Array.isArray(queuePayload)?queuePayload:(queuePayload.posts||[]);
+    const due=posts.filter(post=>new Date(post.scheduled_at)<now).length;
+    const upcoming=posts.filter(post=>new Date(post.scheduled_at)>=now).length;
+    const sync=queuePayload.last_synced?formatQueueDate(queuePayload.last_synced):'not available';
+    const updated=parseReportTimestamp(report.lastUpdated);
+    const reportAge=updated?Math.floor((Date.now()-updated.getTime())/(24*60*60*1000)):null;
+    const readyPlatforms=readiness?['Facebook','Instagram','TikTok','YouTube','X'].filter(platform=>platformReadiness(platform).ready).length:null;
+    const platformMetrics=metrics?.platforms||{};
+    const liveMetricCount=metrics?REPORT_PLATFORM_CONFIG.filter(config=>platformMetrics[config.key]?.ok).length:null;
+    const limitedMetricCount=metrics?REPORT_PLATFORM_CONFIG.filter(config=>platformMetrics[config.key]?.credential_ok && !platformMetrics[config.key]?.ok).length:0;
+    root.innerHTML=[
+      `<div class="queue-item"><div class="queue-top"><div><div class="queue-title">Weekly report</div><div class="queue-meta">${escapeHtml(report.lastUpdated||'No timestamp')}</div></div><span class="status-chip ${reportAge!==null&&reportAge<=7?'ok':'warn'}">${reportAge===null?'Unknown':reportAge<=7?'Fresh':'Stale'}</span></div></div>`,
+      `<div class="queue-item"><div class="queue-top"><div><div class="queue-title">Publishing queue</div><div class="queue-meta">Synced ${escapeHtml(sync)}</div></div><span class="status-chip ${due?'warn':'ok'}">${due?`${due} due`:`${upcoming} upcoming`}</span></div></div>`,
+      `<div class="queue-item"><div class="queue-top"><div><div class="queue-title">Platform metrics</div><div class="queue-meta">${metrics?.updated_at?`Checked ${escapeHtml(formatQueueDate(metrics.updated_at))}`:'Static report fallback'}${limitedMetricCount?` - ${limitedMetricCount} API-limited`:''}</div></div><span class="status-chip ${liveMetricCount===null?'neutral':liveMetricCount?'ok':'warn'}">${liveMetricCount===null?'Unknown':`${liveMetricCount}/5 live`}</span></div></div>`,
+      `<div class="queue-item"><div class="queue-top"><div><div class="queue-title">Website executor</div><div class="queue-meta">${escapeHtml(executorUrl)}</div></div><span class="status-chip ${readyPlatforms===null?'neutral':readyPlatforms===5?'ok':'warn'}">${readyPlatforms===null?'Unknown':`${readyPlatforms}/5 ready`}</span></div></div>`
+    ].join('');
+  }
+
+  function renderNextPosts(queuePayload){
+    const root=document.getElementById('next-posts-report');
+    if(!root) return;
+    const posts=(Array.isArray(queuePayload)?queuePayload:(queuePayload.posts||[])).slice().sort((a,b)=>new Date(a.scheduled_at)-new Date(b.scheduled_at));
+    const upcoming=posts.filter(post=>new Date(post.scheduled_at)>=now).slice(0,5);
+    const due=posts.filter(post=>new Date(post.scheduled_at)<now).slice(-3);
+    const list=upcoming.length?upcoming:due;
+    if(!list.length){
+      root.innerHTML='<div class="muted">No scheduled posts in the current queue.</div>';
+      return;
+    }
+    root.innerHTML=list.map(post=>{
+      const isDue=new Date(post.scheduled_at)<now;
+      return `<div class="queue-item">
+        <div class="queue-top">
+          <div>
+            <div class="queue-title">${escapeHtml(post.platform||'Post')} ${post.song?`- ${escapeHtml(post.song)}`:''}</div>
+            <div class="queue-meta">${escapeHtml(formatQueueDate(post.scheduled_at))} ${post.id?`- ${escapeHtml(post.id)}`:''}</div>
+          </div>
+          <span class="status-chip ${isDue?'warn':'ok'}">${isDue?'Due':'Upcoming'}</span>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  function renderPriorities(report){
+    const root=document.getElementById('report-priorities');
+    if(!root) return;
+    if(!report.priorities.length){
+      root.innerHTML='<li class="muted">No priorities listed in the weekly report.</li>';
+      return;
+    }
+    root.innerHTML=report.priorities.map(item=>`<li>${escapeHtml(item)}</li>`).join('');
+  }
+
+  async function loadReportsDashboard(){
+    if(!document.getElementById('reports-period')) return;
+    const [md,publishedCsv,queuePayload,readiness,metrics]=await Promise.all([
+      fetchTextOrEmpty(localPath('/admin/reports/weekly-social-report.md')),
+      fetchTextOrEmpty(localPath('/admin/content/Published_Log.csv')),
+      fetchJsonOr(localPath('/admin/future-posts.json'),{}),
+      readinessPromise,
+      metricsPromise
+    ]);
+    executorReadiness=readiness||executorReadiness;
+    const report=parseWeeklyReport(md);
+    const publishedRows=parseCsv(publishedCsv);
+    const queuePosts=Array.isArray(queuePayload)?queuePayload:(queuePayload.posts||[]);
+    renderReportFreshness(report);
+    renderExecutorStatus(readiness);
+    renderMetricsStatus(metrics);
+    renderMetricCards(report,publishedRows,queuePosts,metrics);
+    renderPlatformRows(report,publishedRows,readiness,metrics);
+    renderRecentPublishing(publishedRows);
+    renderPipelineHealth(queuePayload,readiness,report,metrics);
+    renderNextPosts(queuePayload);
+    renderPriorities(report);
+  }
+  loadReportsDashboard().catch(err=>{
+    const alert=document.getElementById('reports-alert');
+    if(alert){
+      alert.hidden=false;
+      alert.textContent=`Reports dashboard could not load: ${err.message}`;
+    }
+  });
 
   async function executeWebPost(post, text, replyText, mediaKey){
     let res;
@@ -428,7 +1438,7 @@
     });
   });
 
-  fetch('/admin/backstory/catalog.json').then(r=>r.json()).then(data=>{
+  fetch(localPath('/admin/backstory/catalog.json')).then(r=>r.json()).then(data=>{
     const all=data.songs||[];
     const eraSel=document.getElementById('f-era'), typeSel=document.getElementById('f-type'), statusSel=document.getElementById('f-status');
     const uniq=(arr,key)=>[...new Set(arr.map(x=>x[key]).filter(Boolean))].sort();
