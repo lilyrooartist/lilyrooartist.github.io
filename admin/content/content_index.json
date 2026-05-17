@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-10T23:38:43.162172+00:00",
+  "generated_at": "2026-05-17T22:01:15.578586+00:00",
   "sources": {
     "catalog": "admin/backstory/catalog.json",
     "quips": "admin/content/20_QUIPS_BANK.csv",
@@ -13,17 +13,17 @@
     "complete_pack_pairs": 25,
     "quips": 22,
     "anecdotes": 25,
-    "queue_posts": 14,
+    "queue_posts": 22,
     "published_rows": 14
   },
   "song_status": {
     "Current": 6,
-    "Draft": 18,
-    "Scheduled": 1
+    "Archive": 1,
+    "Draft": 18
   },
   "song_eras": {
-    "Current": 7,
-    "Archive": 15,
+    "Current": 6,
+    "Archive": 16,
     "Foundational": 3
   },
   "quip_themes": {
@@ -45,27 +45,40 @@
     "witness": 1
   },
   "queue_platforms": {
-    "Facebook": 3,
-    "Instagram": 4,
-    "TikTok": 2,
-    "X": 5
+    "Facebook": 4,
+    "Instagram": 6,
+    "TikTok": 4,
+    "X": 8
   },
   "queue_songs": {
-    "13": 3,
     "Brain Rot": 2,
-    "I Learned It All in Fifteen Seconds": 9
+    "I Learned It All in Fifteen Seconds": 9,
+    "The Power of Light": 11
   },
   "weekly_report": {
     "period": "2026-05-04 to 2026-05-10",
-    "last_updated": "2026-05-10 07:31 PM EDT"
+    "last_updated": "2026-05-10 07:55 PM EDT"
   },
   "songs": [
+    {
+      "id": "LR-SONG-023",
+      "title": "The Power of Light (My Second Room Has No Light Switch Reprise)",
+      "slug": "the-power-of-light",
+      "era": "Current",
+      "status": "Current",
+      "url": "https://youtu.be/BkkBE2pXHSY",
+      "packs": {
+        "backstory": "admin/content/packs/the-power-of-light_backstory.md",
+        "visual": "admin/content/packs/the-power-of-light_visuals.md",
+        "complete": true
+      }
+    },
     {
       "id": "LR-SONG-025",
       "title": "13",
       "slug": "13",
-      "era": "Current",
-      "status": "Current",
+      "era": "Archive",
+      "status": "Archive",
       "url": "https://youtu.be/IahKaEXEA_0",
       "packs": {
         "backstory": "admin/content/packs/13_backstory.md",
@@ -369,19 +382,6 @@
       "packs": {
         "backstory": "admin/content/packs/yeah-i-play-the-violin_backstory.md",
         "visual": "admin/content/packs/yeah-i-play-the-violin_visuals.md",
-        "complete": true
-      }
-    },
-    {
-      "id": "LR-SONG-023",
-      "title": "The Power of Light (My Second Room Has No Light Switch Reprise)",
-      "slug": "the-power-of-light",
-      "era": "Current",
-      "status": "Scheduled",
-      "url": "https://youtu.be/BkkBE2pXHSY",
-      "packs": {
-        "backstory": "admin/content/packs/the-power-of-light_backstory.md",
-        "visual": "admin/content/packs/the-power-of-light_visuals.md",
         "complete": true
       }
     }

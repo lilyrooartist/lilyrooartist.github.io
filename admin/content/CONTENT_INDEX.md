@@ -1,6 +1,6 @@
 # Lily Roo Content Index
 
-Generated: `2026-05-10T23:38:43.162172+00:00`
+Generated: `2026-05-17T22:01:15.578586+00:00`
 
 ## Snapshot
 
@@ -8,16 +8,16 @@ Generated: `2026-05-10T23:38:43.162172+00:00`
 - Complete pack pairs: **25 / 25**
 - Quips: **22**
 - Anecdotes: **25**
-- Queue posts: **14**
+- Queue posts: **22**
 - Published log rows: **14**
 - Weekly report: **2026-05-04 to 2026-05-10**
 
 ## Queue Mix
 
-- Facebook: 3
-- Instagram: 4
-- TikTok: 2
-- X: 5
+- Facebook: 4
+- Instagram: 6
+- TikTok: 4
+- X: 8
 
 ## Quip Themes
 
@@ -40,7 +40,8 @@ Generated: `2026-05-10T23:38:43.162172+00:00`
 
 ## Songs
 
-- **13** (`LR-SONG-025`): Current / Current / complete
+- **The Power of Light (My Second Room Has No Light Switch Reprise)** (`LR-SONG-023`): Current / Current / complete
+- **13** (`LR-SONG-025`): Archive / Archive / complete
 - **No Mortgage** (`LR-SONG-024`): Current / Current / complete
 - **Spilling the Tea** (`LR-SONG-022`): Current / Current / complete
 - **Slow Walk** (`LR-SONG-021`): Current / Current / complete
@@ -64,7 +65,6 @@ Generated: `2026-05-10T23:38:43.162172+00:00`
 - **My Second Room Has No Lightswitch** (`LR-SONG-016`): Archive / Draft / complete
 - **The Importance of Bearing Witness** (`LR-SONG-017`): Archive / Draft / complete
 - **Yeah, I Play the Violin** (`LR-SONG-018`): Archive / Draft / complete
-- **The Power of Light (My Second Room Has No Light Switch Reprise)** (`LR-SONG-023`): Current / Scheduled / complete
 
 ## Warnings
 

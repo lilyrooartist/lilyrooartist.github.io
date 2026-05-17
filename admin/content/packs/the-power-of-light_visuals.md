@@ -5,8 +5,8 @@
 - **Pan video master:** /assets/media/the-power-of-light/the-power-of-light-my-second-room-has-no-light-switch-reprise-pan.mp4
 - **Final song audio:** /assets/audio/the-power-of-light/the-power-of-light-my-second-room-has-no-light-switch-reprise.wav
 - **Final song video:** /assets/media/the-power-of-light/the-power-of-light-my-second-room-has-no-light-switch-reprise-video.mp4
-- **Unlisted YouTube link:** https://youtu.be/BkkBE2pXHSY
-- **Launch date:** Sunday, May 3, 2026
+- **YouTube link:** https://youtu.be/BkkBE2pXHSY
+- **Launch date:** Sunday, May 17, 2026
 - **Reprises:** My Second Room Has No Light Switch
 - **Reference inspiration:** taped smart-button/light-control over an old wall switch, with torn blue painter's tape on textured plaster
 
