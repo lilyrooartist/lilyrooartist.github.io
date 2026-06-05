@@ -54,7 +54,7 @@ def facebook_post(row: dict[str, str], text: str, env: dict[str, str], dry_run: 
         data = api_post(f'{graph_base(env)}/{page_id}/feed', payload)
     post_id = data.get('post_id') or data.get('id') or ''
     post_url = f'https://www.facebook.com/{post_id}' if post_id else 'posted'
-    append_published_log('Facebook', post_url, song_from_row(row), text, 'posted via Meta Graph API')
+    append_published_log('Facebook', post_url, song_from_row(row), text, 'posted via Meta Graph API', content_id=row.get('id', ''))
     return {'ok': True, 'platform': 'Facebook', 'post_id': post_id, 'post_url': post_url, 'raw': data}
 
 
@@ -91,7 +91,7 @@ def instagram_post(row: dict[str, str], text: str, env: dict[str, str], dry_run:
         'access_token': token,
     })
     media_id = publish.get('id') or ''
-    append_published_log('Instagram', media_id or 'posted', song_from_row(row), text, 'posted via Instagram Graph API')
+    append_published_log('Instagram', media_id or 'posted', song_from_row(row), text, 'posted via Instagram Graph API', content_id=row.get('id', ''))
     return {'ok': True, 'platform': 'Instagram', 'creation_id': creation_id, 'media_id': media_id, 'raw': publish}
 
 

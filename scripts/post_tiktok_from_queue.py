@@ -104,7 +104,7 @@ def main() -> int:
     mime = mimetypes.guess_type(str(media_path))[0] or 'video/mp4'
     with open(media_path, 'rb') as f:
         put_bytes(upload_url, f.read(), mime)
-    append_published_log('TikTok', publish_id, song_from_row(row), title, 'uploaded via TikTok Content Posting API')
+    append_published_log('TikTok', publish_id, song_from_row(row), title, 'uploaded via TikTok Content Posting API', content_id=args.post_id)
     print(json.dumps({'ok': True, 'platform': 'TikTok', 'publish_id': publish_id, 'status': 'uploaded_for_posting'}, ensure_ascii=False))
     return 0
 

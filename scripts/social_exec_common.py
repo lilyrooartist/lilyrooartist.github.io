@@ -118,14 +118,19 @@ def song_from_row(row: dict[str, str]) -> str:
     return ''
 
 
-def append_published_log(platform: str, posted_url: str, song: str, text: str, notes: str = '') -> None:
+def append_published_log(platform: str, posted_url: str, song: str, text: str, notes: str = '', content_id: str = '') -> None:
     PUBLISHED_LOG.parent.mkdir(parents=True, exist_ok=True)
     file_exists = PUBLISHED_LOG.exists()
-    fieldnames = [
+    default_fieldnames = [
         'date', 'platform', 'post_id_or_url', 'content_id', 'song', 'hook', 'cta_type',
         'youtube_linked', 'lilyroo_linked', 'views', 'likes', 'comments', 'shares', 'saves',
-        'followers_delta', 'subs_delta', 'notes'
+        'subs_delta', 'notes'
     ]
+    if file_exists:
+        with PUBLISHED_LOG.open(newline='', encoding='utf-8') as existing:
+            fieldnames = next(csv.reader(existing), default_fieldnames)
+    else:
+        fieldnames = default_fieldnames
     from datetime import datetime
     import csv as _csv
     with PUBLISHED_LOG.open('a', newline='', encoding='utf-8') as f:
@@ -133,20 +138,33 @@ def append_published_log(platform: str, posted_url: str, song: str, text: str, n
         if not file_exists:
             writer.writeheader()
         combined = ' '.join(x for x in [text, posted_url] if x)
-        writer.writerow({
+        row = {
             'date': datetime.now().astimezone().date().isoformat(),
             'platform': platform,
             'post_id_or_url': posted_url or 'posted',
-            'content_id': '',
+            'content_id': content_id,
+            'song_era': song,
             'song': song,
             'hook': (text or '')[:140],
-            'cta_type': 'youtube_link' if 'youtu' in combined.lower() else ('site_link' if 'lilyroo.com' in combined.lower() else ''),
+            'cta_type': cta_type(combined),
             'youtube_linked': 'yes' if 'youtu' in combined.lower() else 'no',
             'lilyroo_linked': 'yes' if 'lilyroo.com' in combined.lower() else 'no',
             'views': '', 'likes': '', 'comments': '', 'shares': '', 'saves': '',
-            'followers_delta': '', 'subs_delta': '',
+            'subs_delta': '',
             'notes': notes,
-        })
+        }
+        writer.writerow({key: row.get(key, '') for key in fieldnames})
+
+
+def cta_type(text: str) -> str:
+    lower = (text or '').lower()
+    if 'youtu' in lower:
+        return 'youtube_link'
+    if 'open.spotify.com' in lower or 'spotify:' in lower:
+        return 'spotify_link'
+    if 'lilyroo.com' in lower:
+        return 'site_link'
+    return ''
 
 
 def json_dumps(data: Any) -> str:

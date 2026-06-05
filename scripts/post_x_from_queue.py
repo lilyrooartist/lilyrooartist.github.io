@@ -203,7 +203,9 @@ def main() -> int:
         reply_id = str(((reply.get('data') or {}).get('id') or '')).strip()
 
     post_url = f'https://x.com/i/web/status/{post_id}'
-    append_published_log('X', post_url, song_from_row(row), text, 'posted via X API')
+    reply_url = f'https://x.com/i/web/status/{reply_id}' if reply_id else ''
+    notes = f'reply_url={reply_url}; posted via X API' if reply_url else 'posted via X API'
+    append_published_log('X', post_url, song_from_row(row), text, notes, content_id=args.post_id)
     print(json.dumps({
         'ok': True,
         'platform': 'X',

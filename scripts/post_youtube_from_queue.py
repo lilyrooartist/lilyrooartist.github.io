@@ -129,7 +129,7 @@ def main() -> int:
     if not video_id:
         raise RuntimeError(f'YouTube upload did not return a video id: {data}')
     video_url = f'https://youtu.be/{video_id}'
-    append_published_log('YouTube', video_url, song_from_row(row), text, f'queue_id={args.post_id}; posted via YouTube Data API')
+    append_published_log('YouTube', video_url, song_from_row(row), text, f'queue_id={args.post_id}; posted via YouTube Data API', content_id=args.post_id)
     print(json.dumps({'ok': True, 'platform': 'YouTube', 'video_id': video_id, 'video_url': video_url}, ensure_ascii=False))
     return 0
 
