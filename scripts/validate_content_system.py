@@ -12,6 +12,7 @@ CATALOG = ROOT / "admin" / "backstory" / "catalog.json"
 QUIPS = CONTENT / "20_QUIPS_BANK.csv"
 QUEUE = ROOT / "data" / "scheduled_posts.csv"
 FUTURE = ROOT / "admin" / "future-posts.json"
+LIVE_METRICS = ROOT / "data" / "live_social_metrics.json"
 REPORT = ROOT / "admin" / "reports" / "weekly-social-report.md"
 INDEX = CONTENT / "content_index.json"
 
@@ -100,6 +101,15 @@ def validate_generated_outputs(failures):
         ok(f"content index generated with {index.get('counts', {}).get('songs', 0)} songs")
     else:
         fail("content_index.json missing; run scripts/build_content_index.py", failures)
+    if LIVE_METRICS.exists():
+        snapshot = json.loads(LIVE_METRICS.read_text(encoding="utf-8"))
+        platforms = snapshot.get("platforms") or {}
+        if platforms:
+            ok(f"live social metrics snapshot has {len(platforms)} platforms")
+        else:
+            fail("live social metrics snapshot has no platforms", failures)
+    else:
+        fail("live_social_metrics.json missing; run scripts/capture_live_metrics.py", failures)
 
 
 def validate_report(failures):

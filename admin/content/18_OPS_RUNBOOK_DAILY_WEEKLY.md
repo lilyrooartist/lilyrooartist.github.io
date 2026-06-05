@@ -58,6 +58,7 @@ Keep promo momentum compounding with a lightweight routine:
 ### A) Refresh report
 Run:
 ```bash
+python3 scripts/capture_live_metrics.py
 python3 scripts/update_weekly_report.py
 ```
 Then review:
@@ -130,9 +131,15 @@ Actions:
 ### 4) Metrics unavailable
 Symptoms: API/data unavailable, platform stats missing.
 Actions:
-1. Update what is known
-2. Put missing values in `data/manual_social_stats.json` as `pending`
-3. Regenerate report anyway
+1. Run `python3 scripts/capture_live_metrics.py`
+2. Update what is known in `data/manual_social_stats.json`
+3. Put missing values in `data/manual_social_stats.json` as `pending`
+4. Regenerate report anyway
+
+Current known auth issue:
+- YouTube metrics return `invalid_grant` until `scripts/youtube_oauth_browser_helper.py`
+  is run and the new `YOUTUBE_REFRESH_TOKEN` is pushed to the Cloudflare Worker
+  from the owning Cloudflare account.
 
 **Done when:** weekly report updated with explicit pending markers (no silent gaps).
 

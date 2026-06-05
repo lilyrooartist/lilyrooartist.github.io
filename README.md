@@ -26,6 +26,7 @@ After editing canon, backstory, quips, queue, or reports:
 ```bash
 python3 scripts/build_content_index.py
 python3 scripts/sync_future_posts.py
+python3 scripts/capture_live_metrics.py
 python3 scripts/update_weekly_report.py
 python3 scripts/validate_content_system.py
 ```

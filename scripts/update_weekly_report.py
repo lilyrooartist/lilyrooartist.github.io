@@ -6,6 +6,7 @@ import json, csv, re
 ROOT = Path(__file__).resolve().parent.parent
 REPORT = ROOT / 'admin' / 'reports' / 'weekly-social-report.md'
 MANUAL = ROOT / 'data' / 'manual_social_stats.json'
+LIVE = ROOT / 'data' / 'live_social_metrics.json'
 PUBLISHED = ROOT / 'admin' / 'content' / 'Published_Log.csv'
 ADMIN_INDEX = ROOT / 'admin' / 'index.html'
 
@@ -21,17 +22,51 @@ if PUBLISHED.exists():
             latest[p] = url
 
 manual = json.loads(MANUAL.read_text(encoding='utf-8')) if MANUAL.exists() else {}
+live = json.loads(LIVE.read_text(encoding='utf-8')) if LIVE.exists() else {}
 youtube = manual.get('youtube', {})
 spotify = manual.get('spotify', {})
+live_platforms = live.get('platforms', {}) if isinstance(live, dict) else {}
 
-yt_subs = youtube.get('subscribers', 'pending')
-yt_views_28d = youtube.get('views_28d', 'pending')
-yt_watch_28d = youtube.get('watch_time_hours_28d', 'pending')
+
+def live_metric(platform, key):
+    metrics = live_platforms.get(platform, {}).get('metrics', {})
+    value = metrics.get(key)
+    return value if value not in (None, '') else None
+
+
+def live_reason(platform):
+    return live_platforms.get(platform, {}).get('reason', '')
+
+
+def status_text(reason):
+    reason = str(reason or '').strip()
+    if 'invalid_grant' in reason:
+        return 'YouTube OAuth refresh token invalid_grant; run scripts/youtube_oauth_browser_helper.py and redeploy/push the refreshed token'
+    return reason or 'manual fallback'
+
+
+def stat(platform, key, fallback='pending'):
+    value = live_metric(platform, key)
+    return str(value) if value is not None else str(fallback)
+
+yt_subs = stat('youtube', 'subscribers', youtube.get('subscribers', 'pending'))
+yt_views_28d = stat('youtube', 'views_28d', youtube.get('views_28d', 'pending'))
+yt_watch_28d = stat('youtube', 'watch_time_hours_28d', youtube.get('watch_time_hours_28d', 'pending'))
+youtube_status = 'live API' if live_platforms.get('youtube', {}).get('ok') else status_text(live_reason('youtube'))
 spotify_release_url = spotify.get('release_url', 'pending')
 spotify_artist_followers = spotify.get('artist_followers', 'pending')
 spotify_monthly_listeners = spotify.get('monthly_listeners', 'pending')
 spotify_release_streams = spotify.get('release_streams', 'pending')
 spotify_saves = spotify.get('saves', 'pending')
+tiktok_followers = stat('tiktok', 'followers', manual.get('tiktok',{}).get('followers','pending'))
+tiktok_profile_views = stat('tiktok', 'profile_views_7d', manual.get('tiktok',{}).get('profile_views_7d','pending'))
+instagram_followers = stat('instagram', 'followers', manual.get('instagram',{}).get('followers','pending'))
+instagram_profile_visits = stat('instagram', 'profile_visits_7d', manual.get('instagram',{}).get('profile_visits_7d','pending'))
+x_followers = stat('x', 'followers', manual.get('x',{}).get('followers','pending'))
+x_impressions = stat('x', 'impressions_7d', manual.get('x',{}).get('impressions_7d','pending'))
+facebook_followers = stat('facebook', 'followers', manual.get('facebook',{}).get('followers','pending'))
+facebook_reach = stat('facebook', 'reach_7d', manual.get('facebook',{}).get('reach_7d','pending'))
+metrics_snapshot = live.get('updated_at', 'not captured')
 
 today = datetime.now().astimezone()
 start = (today - timedelta(days=6)).date()
@@ -51,6 +86,7 @@ md = f'''# Weekly Social Report — Lily Roo
 - Subscribers: **{yt_subs}**
 - Last 28 days views: **{yt_views_28d}**
 - Last 28 days watch time: **{yt_watch_28d} hours**
+- API status: **{youtube_status}**
 
 ### Spotify
 - First single: {spotify_release_url}
@@ -60,24 +96,28 @@ md = f'''# Weekly Social Report — Lily Roo
 - Saves: **{spotify_saves}**
 
 ### TikTok
-- Followers: **{manual.get('tiktok',{}).get('followers','pending')}**
-- Profile views (7d): **{manual.get('tiktok',{}).get('profile_views_7d','pending')}**
+- Followers: **{tiktok_followers}**
+- Profile views (7d): **{tiktok_profile_views}**
 - Latest post: {latest['TikTok'] or 'pending'}
 
 ### Instagram
-- Followers: **{manual.get('instagram',{}).get('followers','pending')}**
-- Profile visits (7d): **{manual.get('instagram',{}).get('profile_visits_7d','pending')}**
+- Followers: **{instagram_followers}**
+- Profile visits (7d): **{instagram_profile_visits}**
 - Latest post: {latest['Instagram'] or 'pending'}
 
 ### X (Twitter)
-- Followers: **{manual.get('x',{}).get('followers','pending')}**
-- Impressions (7d): **{manual.get('x',{}).get('impressions_7d','pending')}**
+- Followers: **{x_followers}**
+- Impressions (7d): **{x_impressions}**
 - Latest post: {latest['X'] or 'pending'}
 
 ### Facebook
-- Followers/Page likes: **{manual.get('facebook',{}).get('followers','pending')}**
-- Reach (7d): **{manual.get('facebook',{}).get('reach_7d','pending')}**
+- Followers/Page likes: **{facebook_followers}**
+- Reach (7d): **{facebook_reach}**
 - Latest post: {latest['Facebook'] or 'pending'}
+
+## Metrics Snapshot
+- Live API captured: **{metrics_snapshot}**
+- Snapshot file: `data/live_social_metrics.json`
 
 ## Weekly Activity Log
 - Admin site now uses Dashboard / Backstory / Songs / Promo navigation
@@ -90,6 +130,7 @@ md = f'''# Weekly Social Report — Lily Roo
 3. Fill manual_social_stats.json values for platform deltas, including Spotify release streams once Spotify for Artists exposes them
 
 ## Reporting cadence
+- Capture live API metrics: `python3 scripts/capture_live_metrics.py`
 - Regenerate via: `python3 scripts/update_weekly_report.py`
 - Source overrides: `data/manual_social_stats.json`
 '''

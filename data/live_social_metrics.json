@@ -1,0 +1,49 @@
+{
+  "ok": true,
+  "updated_at": "2026-06-05T13:54:23.842Z",
+  "platforms": {
+    "youtube": {
+      "ok": false,
+      "reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Bad Request\"}",
+      "metrics": {},
+      "status": 400
+    },
+    "tiktok": {
+      "ok": false,
+      "reason": "TikTok metrics need TIKTOK_ACCESS_TOKEN.",
+      "metrics": {},
+      "missing_secrets": [
+        "TIKTOK_ACCESS_TOKEN"
+      ]
+    },
+    "instagram": {
+      "ok": true,
+      "source": "instagram-login-api",
+      "metrics": {
+        "followers": 0,
+        "media_count": 6
+      },
+      "username": "lilyroo.artist",
+      "profile_url": "https://www.instagram.com/lilyroo.artist/"
+    },
+    "facebook": {
+      "ok": true,
+      "source": "meta-graph-page",
+      "metrics": {
+        "followers": 0,
+        "page_likes": 0
+      },
+      "page_name": "Lily Roo",
+      "profile_url": "https://www.facebook.com/903693509504290"
+    },
+    "x": {
+      "ok": false,
+      "reason": "X metrics need X_USER_ACCESS_TOKEN with user lookup access.",
+      "metrics": {},
+      "missing_secrets": [
+        "X_USER_ACCESS_TOKEN"
+      ]
+    }
+  },
+  "capture_status": 200
+}

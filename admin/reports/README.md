@@ -3,6 +3,7 @@
 ## Weekly update command
 
 ```bash
+python3 scripts/capture_live_metrics.py
 python3 scripts/update_weekly_report.py
 ```
 
