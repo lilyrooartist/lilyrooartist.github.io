@@ -101,8 +101,9 @@ async function executePost(payload, env) {
 }
 
 async function socialMetrics(env) {
-  const [youtube, tiktok, instagram, facebook, x] = await Promise.all([
+  const [youtube, spotify, tiktok, instagram, facebook, x] = await Promise.all([
     metricProbe(() => youtubeMetrics(env)),
+    metricProbe(() => spotifyMetrics(env)),
     metricProbe(() => tiktokMetrics(env)),
     metricProbe(() => instagramMetrics(env)),
     metricProbe(() => facebookMetrics(env)),
@@ -114,6 +115,7 @@ async function socialMetrics(env) {
     updated_at: new Date().toISOString(),
     platforms: {
       youtube,
+      spotify,
       tiktok,
       instagram,
       facebook,
@@ -197,6 +199,16 @@ async function youtubeMetrics(env) {
     channel_title: text(channel?.snippet?.title),
     period_28d: period,
     analytics_status: analyticsStatus,
+  });
+}
+
+async function spotifyMetrics(env) {
+  const releaseUrl = text(env.SPOTIFY_RELEASE_URL) || "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi";
+  return unavailableMetric("Spotify streams, saves, monthly listeners, and artist followers require Spotify for Artists export or a connected analytics source.", {
+    source: "spotify-manual-export-required",
+    credential_ok: false,
+    profile_url: releaseUrl,
+    metrics: {},
   });
 }
 

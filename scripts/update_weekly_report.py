@@ -9,11 +9,6 @@ MANUAL = ROOT / 'data' / 'manual_social_stats.json'
 PUBLISHED = ROOT / 'admin' / 'content' / 'Published_Log.csv'
 ADMIN_INDEX = ROOT / 'admin' / 'index.html'
 
-# Fallback values if API pull is not wired in this run
-yt_subs = '6'
-yt_views_28d = '109'
-yt_watch_28d = '3.4'
-
 # Try to read latest published URLs
 latest = {'X':'', 'Instagram':'', 'TikTok':'', 'Facebook':''}
 if PUBLISHED.exists():
@@ -26,6 +21,17 @@ if PUBLISHED.exists():
             latest[p] = url
 
 manual = json.loads(MANUAL.read_text(encoding='utf-8')) if MANUAL.exists() else {}
+youtube = manual.get('youtube', {})
+spotify = manual.get('spotify', {})
+
+yt_subs = youtube.get('subscribers', 'pending')
+yt_views_28d = youtube.get('views_28d', 'pending')
+yt_watch_28d = youtube.get('watch_time_hours_28d', 'pending')
+spotify_release_url = spotify.get('release_url', 'pending')
+spotify_artist_followers = spotify.get('artist_followers', 'pending')
+spotify_monthly_listeners = spotify.get('monthly_listeners', 'pending')
+spotify_release_streams = spotify.get('release_streams', 'pending')
+spotify_saves = spotify.get('saves', 'pending')
 
 today = datetime.now().astimezone()
 start = (today - timedelta(days=6)).date()
@@ -45,6 +51,13 @@ md = f'''# Weekly Social Report — Lily Roo
 - Subscribers: **{yt_subs}**
 - Last 28 days views: **{yt_views_28d}**
 - Last 28 days watch time: **{yt_watch_28d} hours**
+
+### Spotify
+- First single: {spotify_release_url}
+- Artist followers: **{spotify_artist_followers}**
+- Monthly listeners: **{spotify_monthly_listeners}**
+- Release streams: **{spotify_release_streams}**
+- Saves: **{spotify_saves}**
 
 ### TikTok
 - Followers: **{manual.get('tiktok',{}).get('followers','pending')}**
@@ -74,7 +87,7 @@ md = f'''# Weekly Social Report — Lily Roo
 ## Next-week priorities
 1. Publish at least 5 short-form posts from queue
 2. Use hard YouTube subscribe CTA every 2–3 posts
-3. Fill manual_social_stats.json values for platform deltas
+3. Fill manual_social_stats.json values for platform deltas, including Spotify release streams once Spotify for Artists exposes them
 
 ## Reporting cadence
 - Regenerate via: `python3 scripts/update_weekly_report.py`

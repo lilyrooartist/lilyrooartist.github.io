@@ -15,6 +15,11 @@ Deploy:
 npx wrangler deploy --config workers/social-executor/wrangler.jsonc
 ```
 
+If deploy returns Cloudflare API authentication code `10000` for account
+`d7557073a09c5995e004a1839f0f4f70`, re-authenticate Wrangler with the
+Cloudflare account that owns the existing `lilyroo-social-executor` service and
+`lilyroo.com` zone, then rerun the same deploy command.
+
 Required secrets are listed in `admin/content/18_OPS_RUNBOOK_DAILY_WEEKLY.md`.
 
 Facebook publishing uses Meta Graph API `v25.0` by default. Override with the
@@ -34,6 +39,10 @@ Notes:
 - `/api/social/metrics` is read-only and authenticated. It returns live metrics
   where the current tokens/scopes support them, and an explicit unavailable or
   API-limited status where a platform token only supports posting.
+- Spotify is included in the metrics payload as a manual-export-required source;
+  release streams, saves, monthly listeners, and artist followers should be
+  entered in `data/manual_social_stats.json` until Spotify for Artists export or
+  another analytics source is connected.
 - TikTok and YouTube require a public direct video URL through `clip_url` or `SOCIAL_MEDIA_MAP_JSON`. Do not point video media at `/admin/*`; admin content is intended for signed-in browser use, so upload media must live under a public path such as `/assets/media/*`.
 - X can post text/replies with `X_USER_ACCESS_TOKEN`. X media is only attached when a queue row provides an explicit media key; media upload uses OAuth 1.0a or pre-uploaded IDs in `X_MEDIA_MAP_JSON`.
 - The Worker route is configured for `www.lilyroo.com/api/social/*`.
