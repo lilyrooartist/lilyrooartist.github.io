@@ -249,6 +249,21 @@ main {
   padding: clamp(0.75rem, 1.4vw, 1rem);
 }
 
+.panel-launch {
+  grid-template-columns: minmax(260px, 0.72fr) minmax(0, 1fr);
+  border-color: rgba(203, 168, 111, 0.34);
+  background:
+    linear-gradient(145deg, rgba(203, 168, 111, 0.12), rgba(139, 28, 43, 0.1)),
+    rgba(7, 7, 9, 0.68);
+}
+
+.album-art-frame img {
+  aspect-ratio: 1 / 1;
+  min-height: 0;
+  object-fit: cover;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.42);
+}
+
 .archive-hero {
   padding: clamp(2.2rem, 6vw, 4.6rem) 0 1.25rem;
   border-bottom: 1px solid var(--line);
@@ -375,6 +390,13 @@ main {
 .archive-page .item.pending {
   border-color: rgba(203, 168, 111, 0.38);
   background: rgba(203, 168, 111, 0.08);
+}
+
+.archive-page .item-featured {
+  border-color: rgba(203, 168, 111, 0.56);
+  background:
+    linear-gradient(135deg, rgba(203, 168, 111, 0.13), rgba(139, 28, 43, 0.08)),
+    rgba(255, 255, 255, 0.025);
 }
 
 .archive-page .thumb {
@@ -681,6 +703,7 @@ main {
 
   .panel,
   .panel-video,
+  .panel-launch,
   .panel-now-playing,
   .panel-support {
     grid-template-columns: 1fr;

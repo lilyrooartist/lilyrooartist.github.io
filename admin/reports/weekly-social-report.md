@@ -13,6 +13,13 @@
 - Last 28 days views: **109**
 - Last 28 days watch time: **3.4 hours**
 
+### Spotify
+- First single: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi
+- Artist followers: **pending**
+- Monthly listeners: **pending**
+- Release streams: **pending**
+- Saves: **pending**
+
 ### TikTok
 - Followers: **pending**
 - Profile views (7d): **pending**
@@ -41,7 +48,7 @@
 ## Next-week priorities
 1. Publish at least 5 short-form posts from queue
 2. Use hard YouTube subscribe CTA every 2–3 posts
-3. Fill manual_social_stats.json values for platform deltas
+3. Fill manual_social_stats.json values for platform deltas, including Spotify release streams once Spotify for Artists exposes them
 
 ## Reporting cadence
 - Regenerate via: `python3 scripts/update_weekly_report.py`
