@@ -1,6 +1,6 @@
 # Lily Roo Content Index
 
-Generated: `2026-06-05T16:06:58.138327+00:00`
+Generated: `2026-06-05T16:46:25.544355+00:00`
 
 ## Snapshot
 
@@ -8,17 +8,17 @@ Generated: `2026-06-05T16:06:58.138327+00:00`
 - Complete pack pairs: **25 / 25**
 - Quips: **22**
 - Anecdotes: **25**
-- Queue posts: **31**
+- Queue posts: **35**
 - Published log rows: **15**
 - Weekly report: **2026-05-30 to 2026-06-05**
 
 ## Queue Mix
 
-- Facebook: 6
-- Instagram: 8
+- Facebook: 7
+- Instagram: 9
 - TikTok: 6
-- X: 10
-- YouTube Community: 1
+- X: 11
+- YouTube Community: 2
 
 ## Quip Themes
 

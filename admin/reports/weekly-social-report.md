@@ -1,7 +1,7 @@
 # Weekly Social Report — Lily Roo
 
 **Period:** 2026-05-30 to 2026-06-05
-**Last updated:** 2026-06-05 12:06 PM EDT
+**Last updated:** 2026-06-05 12:47 PM EDT
 
 ## KPI Goal
 - Primary growth target: **1,000 YouTube subscribers** (monetization milestone)
@@ -47,11 +47,11 @@
 - Latest post: https://www.facebook.com/903693509504290_122113878687249470
 
 ## Metrics Snapshot
-- Live API captured: **2026-06-05T15:35:54.937Z**
+- Live API captured: **2026-06-05T16:46:53.144Z**
 - Snapshot file: `data/live_social_metrics.json`
-- YouTube public RSS captured: **2026-06-05T16:06:52.195402Z**
+- YouTube public RSS captured: **2026-06-05T16:46:52.311363Z**
 - YouTube public snapshot file: `data/youtube_public_snapshot.json`
-- Spotify public release captured: **2026-06-05T15:35:54.922464Z**
+- Spotify public release captured: **2026-06-05T16:46:52.454994Z**
 - Spotify snapshot file: `data/spotify_release_snapshot.json`
 
 ## Weekly Activity Log
