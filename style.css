@@ -257,6 +257,46 @@ main {
     rgba(7, 7, 9, 0.68);
 }
 
+.sponsor-banner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(1rem, 2vw, 1.6rem);
+  margin: 1.7rem 0;
+  padding: clamp(1.1rem, 2vw, 1.7rem);
+  border: 1px solid rgba(203, 168, 111, 0.42);
+  background:
+    linear-gradient(120deg, rgba(139, 28, 43, 0.28), rgba(203, 168, 111, 0.14)),
+    rgba(7, 7, 9, 0.72);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.26);
+}
+
+.sponsor-banner h2 {
+  margin: 0.35rem 0 0.65rem;
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 0.06em;
+  font-size: clamp(2rem, 4.8vw, 3.65rem);
+  line-height: 0.95;
+}
+
+.sponsor-banner p:last-child {
+  max-width: 780px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 1.08rem;
+  line-height: 1.45;
+}
+
+.sponsor-banner-actions {
+  display: grid;
+  gap: 0.75rem;
+  min-width: min(280px, 100%);
+}
+
+.sponsor-banner-actions .btn {
+  text-align: center;
+}
+
 .album-art-frame img {
   aspect-ratio: 1 / 1;
   min-height: 0;
@@ -705,7 +745,12 @@ main {
   .panel-video,
   .panel-launch,
   .panel-now-playing,
-  .panel-support {
+  .panel-support,
+  .sponsor-banner {
+    grid-template-columns: 1fr;
+  }
+
+  .sponsor-banner-actions {
     grid-template-columns: 1fr;
   }
 
