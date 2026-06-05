@@ -1,7 +1,7 @@
 # Weekly Social Report — Lily Roo
 
 **Period:** 2026-05-30 to 2026-06-05
-**Last updated:** 2026-06-05 09:54 AM EDT
+**Last updated:** 2026-06-05 11:15 AM EDT
 
 ## KPI Goal
 - Primary growth target: **1,000 YouTube subscribers** (monetization milestone)
@@ -16,10 +16,13 @@
 
 ### Spotify
 - First single: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi
+- Public release check: **I Learned It All in Fifteen Seconds**
+- Remastered artwork thumbnail: https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e021da9ba23024f9074f309f661
 - Artist followers: **pending**
 - Monthly listeners: **pending**
 - Release streams: **pending**
 - Saves: **pending**
+- Analytics status: **Streams, saves, monthly listeners, and artist followers still require Spotify for Artists export/API access.**
 
 ### TikTok
 - Followers: **pending**
@@ -42,8 +45,10 @@
 - Latest post: https://www.facebook.com/903693509504290_122113878687249470
 
 ## Metrics Snapshot
-- Live API captured: **2026-06-05T13:54:23.842Z**
+- Live API captured: **2026-06-05T15:15:12.315Z**
 - Snapshot file: `data/live_social_metrics.json`
+- Spotify public release captured: **2026-06-05T15:15:11.702193Z**
+- Spotify snapshot file: `data/spotify_release_snapshot.json`
 
 ## Weekly Activity Log
 - Admin site now uses Dashboard / Backstory / Songs / Promo navigation
@@ -56,6 +61,7 @@
 3. Fill manual_social_stats.json values for platform deltas, including Spotify release streams once Spotify for Artists exposes them
 
 ## Reporting cadence
+- Capture Spotify public release metadata: `python3 scripts/capture_spotify_release.py`
 - Capture live API metrics: `python3 scripts/capture_live_metrics.py`
 - Regenerate via: `python3 scripts/update_weekly_report.py`
 - Source overrides: `data/manual_social_stats.json`

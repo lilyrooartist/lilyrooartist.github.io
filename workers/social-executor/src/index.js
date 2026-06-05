@@ -8,6 +8,7 @@ const GOOGLE_TOKEN_URL = "https://oauth2.googleapis.com/token";
 const YOUTUBE_CHANNELS_URL = "https://www.googleapis.com/youtube/v3/channels";
 const YOUTUBE_ANALYTICS_REPORTS_URL = "https://youtubeanalytics.googleapis.com/v2/reports";
 const YOUTUBE_UPLOAD_INIT_URL = "https://www.googleapis.com/upload/youtube/v3/videos?uploadType=resumable&part=snippet,status";
+const SPOTIFY_OEMBED_URL = "https://open.spotify.com/oembed";
 
 export default {
   async fetch(request, env, ctx) {
@@ -204,11 +205,22 @@ async function youtubeMetrics(env) {
 
 async function spotifyMetrics(env) {
   const releaseUrl = text(env.SPOTIFY_RELEASE_URL) || "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi";
-  return unavailableMetric("Spotify streams, saves, monthly listeners, and artist followers require Spotify for Artists export or a connected analytics source.", {
-    source: "spotify-manual-export-required",
+  const release = await jsonGet(SPOTIFY_OEMBED_URL, { url: releaseUrl });
+  return availableMetric("spotify-oembed-public", {
+    release_verified: release?.title ? 1 : 0,
+  }, {
+    release_url: releaseUrl,
+    album_id: spotifyAlbumId(releaseUrl),
+    title: text(release?.title),
+    provider_name: text(release?.provider_name),
+    provider_url: text(release?.provider_url),
+    iframe_url: text(release?.iframe_url),
+    thumbnail_url: text(release?.thumbnail_url),
+    thumbnail_width: numberOrNull(release?.thumbnail_width),
+    thumbnail_height: numberOrNull(release?.thumbnail_height),
+    analytics_status: "Spotify streams, saves, monthly listeners, and artist followers require Spotify for Artists export or a connected analytics source.",
     credential_ok: false,
     profile_url: releaseUrl,
-    metrics: {},
   });
 }
 
@@ -871,6 +883,16 @@ function parseJson(value) {
 function numberOrNull(value) {
   const n = Number(value);
   return Number.isFinite(n) ? n : null;
+}
+
+function spotifyAlbumId(value) {
+  try {
+    const url = new URL(value);
+    const parts = url.pathname.split("/").filter(Boolean);
+    return parts[0] === "album" && parts[1] ? parts[1] : "";
+  } catch {
+    return "";
+  }
 }
 
 function metricErrorMessage(error) {

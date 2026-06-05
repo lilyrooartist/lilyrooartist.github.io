@@ -13,6 +13,7 @@ QUIPS = CONTENT / "20_QUIPS_BANK.csv"
 QUEUE = ROOT / "data" / "scheduled_posts.csv"
 FUTURE = ROOT / "admin" / "future-posts.json"
 LIVE_METRICS = ROOT / "data" / "live_social_metrics.json"
+SPOTIFY_SNAPSHOT = ROOT / "data" / "spotify_release_snapshot.json"
 REPORT = ROOT / "admin" / "reports" / "weekly-social-report.md"
 INDEX = CONTENT / "content_index.json"
 
@@ -110,6 +111,14 @@ def validate_generated_outputs(failures):
             fail("live social metrics snapshot has no platforms", failures)
     else:
         fail("live_social_metrics.json missing; run scripts/capture_live_metrics.py", failures)
+    if SPOTIFY_SNAPSHOT.exists():
+        snapshot = json.loads(SPOTIFY_SNAPSHOT.read_text(encoding="utf-8"))
+        if snapshot.get("ok") and snapshot.get("title") and snapshot.get("thumbnail_url"):
+            ok(f"Spotify release snapshot verifies {snapshot.get('title')}")
+        else:
+            fail("spotify_release_snapshot.json missing title or thumbnail_url", failures)
+    else:
+        fail("spotify_release_snapshot.json missing; run scripts/capture_spotify_release.py", failures)
 
 
 def validate_report(failures):

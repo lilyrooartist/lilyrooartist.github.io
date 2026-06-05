@@ -7,6 +7,7 @@ ROOT = Path(__file__).resolve().parent.parent
 REPORT = ROOT / 'admin' / 'reports' / 'weekly-social-report.md'
 MANUAL = ROOT / 'data' / 'manual_social_stats.json'
 LIVE = ROOT / 'data' / 'live_social_metrics.json'
+SPOTIFY_SNAPSHOT = ROOT / 'data' / 'spotify_release_snapshot.json'
 PUBLISHED = ROOT / 'admin' / 'content' / 'Published_Log.csv'
 ADMIN_INDEX = ROOT / 'admin' / 'index.html'
 
@@ -23,6 +24,7 @@ if PUBLISHED.exists():
 
 manual = json.loads(MANUAL.read_text(encoding='utf-8')) if MANUAL.exists() else {}
 live = json.loads(LIVE.read_text(encoding='utf-8')) if LIVE.exists() else {}
+spotify_snapshot = json.loads(SPOTIFY_SNAPSHOT.read_text(encoding='utf-8')) if SPOTIFY_SNAPSHOT.exists() else {}
 youtube = manual.get('youtube', {})
 spotify = manual.get('spotify', {})
 live_platforms = live.get('platforms', {}) if isinstance(live, dict) else {}
@@ -58,6 +60,10 @@ spotify_artist_followers = spotify.get('artist_followers', 'pending')
 spotify_monthly_listeners = spotify.get('monthly_listeners', 'pending')
 spotify_release_streams = spotify.get('release_streams', 'pending')
 spotify_saves = spotify.get('saves', 'pending')
+spotify_verified_title = spotify_snapshot.get('title') or 'pending'
+spotify_artwork = spotify_snapshot.get('thumbnail_url') or 'pending'
+spotify_snapshot_time = spotify_snapshot.get('updated_at') or 'not captured'
+spotify_analytics_status = spotify_snapshot.get('analytics_status') or 'manual Spotify for Artists export required'
 tiktok_followers = stat('tiktok', 'followers', manual.get('tiktok',{}).get('followers','pending'))
 tiktok_profile_views = stat('tiktok', 'profile_views_7d', manual.get('tiktok',{}).get('profile_views_7d','pending'))
 instagram_followers = stat('instagram', 'followers', manual.get('instagram',{}).get('followers','pending'))
@@ -90,10 +96,13 @@ md = f'''# Weekly Social Report — Lily Roo
 
 ### Spotify
 - First single: {spotify_release_url}
+- Public release check: **{spotify_verified_title}**
+- Remastered artwork thumbnail: {spotify_artwork}
 - Artist followers: **{spotify_artist_followers}**
 - Monthly listeners: **{spotify_monthly_listeners}**
 - Release streams: **{spotify_release_streams}**
 - Saves: **{spotify_saves}**
+- Analytics status: **{spotify_analytics_status}**
 
 ### TikTok
 - Followers: **{tiktok_followers}**
@@ -118,6 +127,8 @@ md = f'''# Weekly Social Report — Lily Roo
 ## Metrics Snapshot
 - Live API captured: **{metrics_snapshot}**
 - Snapshot file: `data/live_social_metrics.json`
+- Spotify public release captured: **{spotify_snapshot_time}**
+- Spotify snapshot file: `data/spotify_release_snapshot.json`
 
 ## Weekly Activity Log
 - Admin site now uses Dashboard / Backstory / Songs / Promo navigation
@@ -130,6 +141,7 @@ md = f'''# Weekly Social Report — Lily Roo
 3. Fill manual_social_stats.json values for platform deltas, including Spotify release streams once Spotify for Artists exposes them
 
 ## Reporting cadence
+- Capture Spotify public release metadata: `python3 scripts/capture_spotify_release.py`
 - Capture live API metrics: `python3 scripts/capture_live_metrics.py`
 - Regenerate via: `python3 scripts/update_weekly_report.py`
 - Source overrides: `data/manual_social_stats.json`
