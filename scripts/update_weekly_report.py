@@ -8,6 +8,7 @@ REPORT = ROOT / 'admin' / 'reports' / 'weekly-social-report.md'
 MANUAL = ROOT / 'data' / 'manual_social_stats.json'
 LIVE = ROOT / 'data' / 'live_social_metrics.json'
 SPOTIFY_SNAPSHOT = ROOT / 'data' / 'spotify_release_snapshot.json'
+YOUTUBE_PUBLIC = ROOT / 'data' / 'youtube_public_snapshot.json'
 PUBLISHED = ROOT / 'admin' / 'content' / 'Published_Log.csv'
 ADMIN_INDEX = ROOT / 'admin' / 'index.html'
 
@@ -25,6 +26,7 @@ if PUBLISHED.exists():
 manual = json.loads(MANUAL.read_text(encoding='utf-8')) if MANUAL.exists() else {}
 live = json.loads(LIVE.read_text(encoding='utf-8')) if LIVE.exists() else {}
 spotify_snapshot = json.loads(SPOTIFY_SNAPSHOT.read_text(encoding='utf-8')) if SPOTIFY_SNAPSHOT.exists() else {}
+youtube_public = json.loads(YOUTUBE_PUBLIC.read_text(encoding='utf-8')) if YOUTUBE_PUBLIC.exists() else {}
 youtube = manual.get('youtube', {})
 spotify = manual.get('spotify', {})
 live_platforms = live.get('platforms', {}) if isinstance(live, dict) else {}
@@ -55,6 +57,12 @@ yt_subs = stat('youtube', 'subscribers', youtube.get('subscribers', 'pending'))
 yt_views_28d = stat('youtube', 'views_28d', youtube.get('views_28d', 'pending'))
 yt_watch_28d = stat('youtube', 'watch_time_hours_28d', youtube.get('watch_time_hours_28d', 'pending'))
 youtube_status = 'live API' if live_platforms.get('youtube', {}).get('ok') else status_text(live_reason('youtube'))
+youtube_public_count = youtube_public.get('recent_video_count', 'pending')
+youtube_public_views = youtube_public.get('recent_public_views_total', 'pending')
+youtube_latest = youtube_public.get('latest_video') or {}
+youtube_latest_title = youtube_latest.get('title') or 'pending'
+youtube_latest_views = youtube_latest.get('views', 'pending')
+youtube_public_time = youtube_public.get('updated_at') or 'not captured'
 spotify_release_url = spotify.get('release_url', 'pending')
 spotify_artist_followers = spotify.get('artist_followers', 'pending')
 spotify_monthly_listeners = spotify.get('monthly_listeners', 'pending')
@@ -93,6 +101,8 @@ md = f'''# Weekly Social Report — Lily Roo
 - Last 28 days views: **{yt_views_28d}**
 - Last 28 days watch time: **{yt_watch_28d} hours**
 - API status: **{youtube_status}**
+- Public RSS recent-video views: **{youtube_public_views} across {youtube_public_count} videos**
+- Latest public upload: **{youtube_latest_title}** ({youtube_latest_views} views)
 
 ### Spotify
 - First single: {spotify_release_url}
@@ -127,6 +137,8 @@ md = f'''# Weekly Social Report — Lily Roo
 ## Metrics Snapshot
 - Live API captured: **{metrics_snapshot}**
 - Snapshot file: `data/live_social_metrics.json`
+- YouTube public RSS captured: **{youtube_public_time}**
+- YouTube public snapshot file: `data/youtube_public_snapshot.json`
 - Spotify public release captured: **{spotify_snapshot_time}**
 - Spotify snapshot file: `data/spotify_release_snapshot.json`
 
@@ -141,6 +153,7 @@ md = f'''# Weekly Social Report — Lily Roo
 3. Fill manual_social_stats.json values for platform deltas, including Spotify release streams once Spotify for Artists exposes them
 
 ## Reporting cadence
+- Capture YouTube public video views: `python3 scripts/capture_youtube_public.py`
 - Capture Spotify public release metadata: `python3 scripts/capture_spotify_release.py`
 - Capture live API metrics: `python3 scripts/capture_live_metrics.py`
 - Regenerate via: `python3 scripts/update_weekly_report.py`

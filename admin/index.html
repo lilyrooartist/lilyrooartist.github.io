@@ -447,7 +447,7 @@
 <script type="text/plain" id="embedded-weekly-report"># Weekly Social Report — Lily Roo
 
 **Period:** 2026-05-30 to 2026-06-05
-**Last updated:** 2026-06-05 11:32 AM EDT
+**Last updated:** 2026-06-05 12:06 PM EDT
 
 ## KPI Goal
 - Primary growth target: **1,000 YouTube subscribers** (monetization milestone)
@@ -459,11 +459,13 @@
 - Last 28 days views: **109**
 - Last 28 days watch time: **3.4 hours**
 - API status: **YouTube OAuth refresh token invalid_grant; run scripts/youtube_oauth_browser_helper.py and redeploy/push the refreshed token**
+- Public RSS recent-video views: **1012 across 15 videos**
+- Latest public upload: **13 - Lily Roo** (64 views)
 
 ### Spotify
 - First single: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi
 - Public release check: **I Learned It All in Fifteen Seconds**
-- Remastered artwork thumbnail: https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e021da9ba23024f9074f309f661
+- Remastered artwork thumbnail: https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e021da9ba23024f9074f309f661
 - Artist followers: **pending**
 - Monthly listeners: **pending**
 - Release streams: **pending**
@@ -491,9 +493,11 @@
 - Latest post: https://www.facebook.com/903693509504290_122113878687249470
 
 ## Metrics Snapshot
-- Live API captured: **2026-06-05T15:15:12.315Z**
+- Live API captured: **2026-06-05T15:35:54.937Z**
 - Snapshot file: `data/live_social_metrics.json`
-- Spotify public release captured: **2026-06-05T15:15:11.702193Z**
+- YouTube public RSS captured: **2026-06-05T16:06:52.195402Z**
+- YouTube public snapshot file: `data/youtube_public_snapshot.json`
+- Spotify public release captured: **2026-06-05T15:35:54.922464Z**
 - Spotify snapshot file: `data/spotify_release_snapshot.json`
 
 ## Weekly Activity Log
@@ -507,6 +511,7 @@
 3. Fill manual_social_stats.json values for platform deltas, including Spotify release streams once Spotify for Artists exposes them
 
 ## Reporting cadence
+- Capture YouTube public video views: `python3 scripts/capture_youtube_public.py`
 - Capture Spotify public release metadata: `python3 scripts/capture_spotify_release.py`
 - Capture live API metrics: `python3 scripts/capture_live_metrics.py`
 - Regenerate via: `python3 scripts/update_weekly_report.py`
@@ -530,7 +535,7 @@
 2026-06-05,X,https://x.com/i/web/status/2062920257577029712,FP-AUTO-257,I Learned It All in Fifteen Seconds,"First Lily Roo single is live on Spotify. Fifteen seconds, full feelings, remastered cover art.",spotify_link,no,no,,,,,,,reply_url=https://x.com/i/web/status/2062920258902507592; posted via X API</script>
 
 <script type="application/json" id="embedded-future-posts">{
-  "last_synced": "2026-06-05T15:32:01.936559+00:00",
+  "last_synced": "2026-06-05T16:06:58.048438+00:00",
   "source": "data/scheduled_posts.csv",
   "published_log": "admin/content/Published_Log.csv",
   "excluded_published_ids": [

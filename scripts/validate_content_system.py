@@ -14,6 +14,7 @@ QUEUE = ROOT / "data" / "scheduled_posts.csv"
 FUTURE = ROOT / "admin" / "future-posts.json"
 LIVE_METRICS = ROOT / "data" / "live_social_metrics.json"
 SPOTIFY_SNAPSHOT = ROOT / "data" / "spotify_release_snapshot.json"
+YOUTUBE_PUBLIC = ROOT / "data" / "youtube_public_snapshot.json"
 REPORT = ROOT / "admin" / "reports" / "weekly-social-report.md"
 INDEX = CONTENT / "content_index.json"
 
@@ -119,6 +120,14 @@ def validate_generated_outputs(failures):
             fail("spotify_release_snapshot.json missing title or thumbnail_url", failures)
     else:
         fail("spotify_release_snapshot.json missing; run scripts/capture_spotify_release.py", failures)
+    if YOUTUBE_PUBLIC.exists():
+        snapshot = json.loads(YOUTUBE_PUBLIC.read_text(encoding="utf-8"))
+        if snapshot.get("ok") and snapshot.get("recent_video_count") and snapshot.get("recent_public_views_total") is not None:
+            ok(f"YouTube public snapshot has {snapshot.get('recent_video_count')} recent videos")
+        else:
+            fail("youtube_public_snapshot.json missing recent video count or views", failures)
+    else:
+        fail("youtube_public_snapshot.json missing; run scripts/capture_youtube_public.py", failures)
 
 
 def validate_report(failures):
