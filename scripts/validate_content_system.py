@@ -19,6 +19,7 @@ YOUTUBE_PUBLIC = ROOT / "data" / "youtube_public_snapshot.json"
 YOUTUBE_TITLE_TRACK = ROOT / "data" / "youtube_title_track_snapshot.json"
 YOUTUBE_MUSIC_SNAPSHOT = ROOT / "data" / "youtube_music_release_snapshot.json"
 HYPERFOLLOW_SNAPSHOT = ROOT / "data" / "hyperfollow_store_links_snapshot.json"
+ALIGNMENT_AUDIT = ROOT / "data" / "first_single_alignment_audit.json"
 REPORT = ROOT / "admin" / "reports" / "weekly-social-report.md"
 INDEX = CONTENT / "content_index.json"
 
@@ -180,6 +181,17 @@ def validate_generated_outputs(failures):
             fail("hyperfollow_store_links_snapshot.json missing store links", failures)
     else:
         fail("hyperfollow_store_links_snapshot.json missing; run scripts/capture_hyperfollow_store_links.py", failures)
+    if ALIGNMENT_AUDIT.exists():
+        audit = json.loads(ALIGNMENT_AUDIT.read_text(encoding="utf-8"))
+        checks = audit.get("checks") or {}
+        if checks and "spotify" in checks and "youtube" in checks:
+            pending = ", ".join(audit.get("pending") or []) or "none"
+            action_required = ", ".join(audit.get("action_required") or []) or "none"
+            ok(f"first single alignment audit present; action_required={action_required}; pending={pending}")
+        else:
+            fail("first_single_alignment_audit.json missing platform checks", failures)
+    else:
+        fail("first_single_alignment_audit.json missing; run scripts/audit_first_single_alignment.py", failures)
 
 
 def validate_report(failures):

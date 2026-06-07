@@ -1,0 +1,70 @@
+{
+  "ok": false,
+  "updated_at": "2026-06-07T16:36:13.022541Z",
+  "official_title": "I Learned It All in Fifteen Seconds",
+  "action_required": [
+    "youtube",
+    "youtube_music"
+  ],
+  "pending": [
+    "amazon_music"
+  ],
+  "checks": {
+    "official_title": {
+      "status": "ok",
+      "value": "I Learned It All in Fifteen Seconds"
+    },
+    "website_home": {
+      "status": "ok",
+      "has_spotify": true,
+      "has_apple_music": true,
+      "has_youtube_music": true
+    },
+    "website_archive": {
+      "status": "ok",
+      "has_spotify": true,
+      "has_apple_music": true,
+      "has_youtube_music": true
+    },
+    "social_queue": {
+      "status": "ok",
+      "has_youtube_music": true,
+      "has_stale_spotify_apple_phrase": false
+    },
+    "spotify": {
+      "status": "ok",
+      "public_title": "I Learned It All in Fifteen Seconds",
+      "matches": true,
+      "url": "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi"
+    },
+    "apple_music": {
+      "status": "ok",
+      "collection_name": "I Learned It All in Fifteen Seconds - Single",
+      "url": "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249"
+    },
+    "youtube": {
+      "status": "action_required",
+      "public_title": "I Learned it all in Fifteen Seconds",
+      "matches": false,
+      "url": "https://www.youtube.com/watch?v=Hve5drBlN58",
+      "action": "Refresh YouTube OAuth, then run scripts/update_youtube_video_title.py --apply."
+    },
+    "youtube_music": {
+      "status": "action_required",
+      "public_title": "I Learned it all in Fifteen Seconds",
+      "matches": false,
+      "url": "https://music.youtube.com/watch?v=Hve5drBlN58",
+      "action": "Mirrors YouTube title; fix YouTube title after OAuth refresh."
+    },
+    "amazon_music": {
+      "status": "pending",
+      "url": "",
+      "evidence": "HyperFollow store list does not expose Amazon Music.",
+      "hyperfollow_stores": [
+        "applemusic",
+        "itunes",
+        "spotify"
+      ]
+    }
+  }
+}

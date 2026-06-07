@@ -13,6 +13,7 @@ YOUTUBE_PUBLIC = ROOT / 'data' / 'youtube_public_snapshot.json'
 YOUTUBE_TITLE_TRACK = ROOT / 'data' / 'youtube_title_track_snapshot.json'
 YOUTUBE_MUSIC_SNAPSHOT = ROOT / 'data' / 'youtube_music_release_snapshot.json'
 HYPERFOLLOW_SNAPSHOT = ROOT / 'data' / 'hyperfollow_store_links_snapshot.json'
+ALIGNMENT_AUDIT = ROOT / 'data' / 'first_single_alignment_audit.json'
 PUBLISHED = ROOT / 'admin' / 'content' / 'Published_Log.csv'
 ADMIN_INDEX = ROOT / 'admin' / 'index.html'
 
@@ -35,6 +36,7 @@ youtube_public = json.loads(YOUTUBE_PUBLIC.read_text(encoding='utf-8')) if YOUTU
 youtube_title_track = json.loads(YOUTUBE_TITLE_TRACK.read_text(encoding='utf-8')) if YOUTUBE_TITLE_TRACK.exists() else {}
 youtube_music_snapshot = json.loads(YOUTUBE_MUSIC_SNAPSHOT.read_text(encoding='utf-8')) if YOUTUBE_MUSIC_SNAPSHOT.exists() else {}
 hyperfollow_snapshot = json.loads(HYPERFOLLOW_SNAPSHOT.read_text(encoding='utf-8')) if HYPERFOLLOW_SNAPSHOT.exists() else {}
+alignment_audit = json.loads(ALIGNMENT_AUDIT.read_text(encoding='utf-8')) if ALIGNMENT_AUDIT.exists() else {}
 youtube = manual.get('youtube', {})
 spotify = manual.get('spotify', {})
 live_platforms = live.get('platforms', {}) if isinstance(live, dict) else {}
@@ -86,6 +88,10 @@ hyperfollow_url = hyperfollow_snapshot.get('hyperfollow_url') or 'pending'
 hyperfollow_stores = ', '.join(hyperfollow_snapshot.get('stores') or []) or 'pending'
 amazon_music_status = 'verified in HyperFollow' if hyperfollow_snapshot.get('amazon_music_available') else 'pending verified public URL; not exposed by current HyperFollow store list'
 hyperfollow_snapshot_time = hyperfollow_snapshot.get('updated_at') or 'not captured'
+alignment_action_required = ', '.join(alignment_audit.get('action_required') or []) or 'none'
+alignment_pending = ', '.join(alignment_audit.get('pending') or []) or 'none'
+alignment_status = 'aligned' if alignment_audit.get('ok') else 'needs attention'
+alignment_snapshot_time = alignment_audit.get('updated_at') or 'not captured'
 spotify_release_url = spotify.get('release_url', 'pending')
 spotify_artist_url = spotify.get('artist_url') or spotify_snapshot.get('artist_url') or 'pending'
 spotify_artist_followers = spotify.get('artist_followers', 'pending')
@@ -147,6 +153,11 @@ md = f'''# Weekly Social Report — Lily Roo
 - HyperFollow stores: **{hyperfollow_stores}**
 - Amazon Music: **{amazon_music_status}**
 
+### First Single Alignment
+- Status: **{alignment_status}**
+- Action required: **{alignment_action_required}**
+- Pending: **{alignment_pending}**
+
 ### Spotify
 - First single: {spotify_release_url}
 - Artist profile: {spotify_artist_url}
@@ -195,6 +206,8 @@ md = f'''# Weekly Social Report — Lily Roo
 - YouTube Music snapshot file: `data/youtube_music_release_snapshot.json`
 - HyperFollow stores captured: **{hyperfollow_snapshot_time}**
 - HyperFollow snapshot file: `data/hyperfollow_store_links_snapshot.json`
+- First single alignment audit captured: **{alignment_snapshot_time}**
+- First single alignment audit file: `data/first_single_alignment_audit.json`
 - Spotify public release captured: **{spotify_snapshot_time}**
 - Spotify snapshot file: `data/spotify_release_snapshot.json`
 - Apple Music public release captured: **{apple_music_snapshot_time}**
@@ -215,6 +228,7 @@ md = f'''# Weekly Social Report — Lily Roo
 - Capture YouTube title-track public metadata: `python3 scripts/capture_youtube_title_track.py`
 - Capture YouTube Music public release metadata: `python3 scripts/capture_youtube_music_release.py`
 - Capture HyperFollow store links: `python3 scripts/capture_hyperfollow_store_links.py`
+- Audit first single alignment: `python3 scripts/audit_first_single_alignment.py`
 - Capture Spotify public release metadata: `python3 scripts/capture_spotify_release.py`
 - Capture Apple Music public release metadata: `python3 scripts/capture_apple_music_release.py`
 - Capture live API metrics: `python3 scripts/capture_live_metrics.py`

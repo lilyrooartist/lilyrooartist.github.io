@@ -1,7 +1,7 @@
 # Weekly Social Report — Lily Roo
 
 **Period:** 2026-06-01 to 2026-06-07
-**Last updated:** 2026-06-07 12:29 PM EDT
+**Last updated:** 2026-06-07 12:36 PM EDT
 
 ## KPI Goal
 - Primary growth target: **1,000 YouTube subscribers** (monetization milestone)
@@ -30,11 +30,16 @@
 - HyperFollow stores: **applemusic, itunes, spotify**
 - Amazon Music: **pending verified public URL; not exposed by current HyperFollow store list**
 
+### First Single Alignment
+- Status: **needs attention**
+- Action required: **youtube, youtube_music**
+- Pending: **amazon_music**
+
 ### Spotify
 - First single: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi
 - Artist profile: https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a
 - Public release check: **I Learned It All in Fifteen Seconds**
-- Remastered artwork thumbnail: https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e021da9ba23024f9074f309f661
+- Remastered artwork thumbnail: https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e021da9ba23024f9074f309f661
 - Artist followers: **pending**
 - Monthly listeners: **pending**
 - Release streams: **pending**
@@ -72,15 +77,17 @@
 - Snapshot file: `data/live_social_metrics.json`
 - YouTube public RSS captured: **2026-06-05T16:52:32.267181Z**
 - YouTube public snapshot file: `data/youtube_public_snapshot.json`
-- YouTube title-track captured: **2026-06-07T16:13:05.939682Z**
+- YouTube title-track captured: **2026-06-07T16:34:19.691336Z**
 - YouTube title-track snapshot file: `data/youtube_title_track_snapshot.json`
-- YouTube Music public release captured: **2026-06-07T16:14:39.071668Z**
+- YouTube Music public release captured: **2026-06-07T16:34:19.988140Z**
 - YouTube Music snapshot file: `data/youtube_music_release_snapshot.json`
-- HyperFollow stores captured: **2026-06-07T16:20:46.115233Z**
+- HyperFollow stores captured: **2026-06-07T16:34:21.359633Z**
 - HyperFollow snapshot file: `data/hyperfollow_store_links_snapshot.json`
-- Spotify public release captured: **2026-06-07T16:13:08.005354Z**
+- First single alignment audit captured: **2026-06-07T16:36:13.022541Z**
+- First single alignment audit file: `data/first_single_alignment_audit.json`
+- Spotify public release captured: **2026-06-07T16:34:20.300171Z**
 - Spotify snapshot file: `data/spotify_release_snapshot.json`
-- Apple Music public release captured: **2026-06-07T16:13:08.522998Z**
+- Apple Music public release captured: **2026-06-07T16:34:20.905647Z**
 - Apple Music snapshot file: `data/apple_music_release_snapshot.json`
 
 ## Weekly Activity Log
@@ -98,6 +105,7 @@
 - Capture YouTube title-track public metadata: `python3 scripts/capture_youtube_title_track.py`
 - Capture YouTube Music public release metadata: `python3 scripts/capture_youtube_music_release.py`
 - Capture HyperFollow store links: `python3 scripts/capture_hyperfollow_store_links.py`
+- Audit first single alignment: `python3 scripts/audit_first_single_alignment.py`
 - Capture Spotify public release metadata: `python3 scripts/capture_spotify_release.py`
 - Capture Apple Music public release metadata: `python3 scripts/capture_apple_music_release.py`
 - Capture live API metrics: `python3 scripts/capture_live_metrics.py`
