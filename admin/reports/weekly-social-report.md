@@ -1,7 +1,7 @@
 # Weekly Social Report — Lily Roo
 
 **Period:** 2026-06-01 to 2026-06-07
-**Last updated:** 2026-06-07 08:36 AM EDT
+**Last updated:** 2026-06-07 11:48 AM EDT
 
 ## KPI Goal
 - Primary growth target: **1,000 YouTube subscribers** (monetization milestone)
@@ -18,6 +18,7 @@
 
 ### Spotify
 - First single: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi
+- Artist profile: https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a
 - Public release check: **I Learned It All in Fifteen Seconds**
 - Remastered artwork thumbnail: https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e021da9ba23024f9074f309f661
 - Artist followers: **pending**
@@ -25,6 +26,12 @@
 - Release streams: **pending**
 - Saves: **pending**
 - Analytics status: **Streams, saves, monthly listeners, and artist followers still require Spotify for Artists export/API access.**
+
+### Apple Music
+- First single: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249
+- Artist profile: https://music.apple.com/us/artist/lily-roo/1896604299
+- Public release check: **I Learned It All in Fifteen Seconds - Single**
+- Explicitness: **notExplicit**
 
 ### TikTok
 - Followers: **pending**
@@ -51,8 +58,10 @@
 - Snapshot file: `data/live_social_metrics.json`
 - YouTube public RSS captured: **2026-06-05T16:52:32.267181Z**
 - YouTube public snapshot file: `data/youtube_public_snapshot.json`
-- Spotify public release captured: **2026-06-07T12:31:10.260028Z**
+- Spotify public release captured: **2026-06-07T15:47:02.822108Z**
 - Spotify snapshot file: `data/spotify_release_snapshot.json`
+- Apple Music public release captured: **2026-06-07T15:47:03.558748Z**
+- Apple Music snapshot file: `data/apple_music_release_snapshot.json`
 
 ## Weekly Activity Log
 - Admin site now uses Dashboard / Backstory / Songs / Promo navigation
@@ -67,6 +76,7 @@
 ## Reporting cadence
 - Capture YouTube public video views: `python3 scripts/capture_youtube_public.py`
 - Capture Spotify public release metadata: `python3 scripts/capture_spotify_release.py`
+- Capture Apple Music public release metadata: `python3 scripts/capture_apple_music_release.py`
 - Capture live API metrics: `python3 scripts/capture_live_metrics.py`
 - Regenerate via: `python3 scripts/update_weekly_report.py`
 - Source overrides: `data/manual_social_stats.json`

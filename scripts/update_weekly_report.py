@@ -8,6 +8,7 @@ REPORT = ROOT / 'admin' / 'reports' / 'weekly-social-report.md'
 MANUAL = ROOT / 'data' / 'manual_social_stats.json'
 LIVE = ROOT / 'data' / 'live_social_metrics.json'
 SPOTIFY_SNAPSHOT = ROOT / 'data' / 'spotify_release_snapshot.json'
+APPLE_MUSIC_SNAPSHOT = ROOT / 'data' / 'apple_music_release_snapshot.json'
 YOUTUBE_PUBLIC = ROOT / 'data' / 'youtube_public_snapshot.json'
 PUBLISHED = ROOT / 'admin' / 'content' / 'Published_Log.csv'
 ADMIN_INDEX = ROOT / 'admin' / 'index.html'
@@ -26,6 +27,7 @@ if PUBLISHED.exists():
 manual = json.loads(MANUAL.read_text(encoding='utf-8')) if MANUAL.exists() else {}
 live = json.loads(LIVE.read_text(encoding='utf-8')) if LIVE.exists() else {}
 spotify_snapshot = json.loads(SPOTIFY_SNAPSHOT.read_text(encoding='utf-8')) if SPOTIFY_SNAPSHOT.exists() else {}
+apple_music_snapshot = json.loads(APPLE_MUSIC_SNAPSHOT.read_text(encoding='utf-8')) if APPLE_MUSIC_SNAPSHOT.exists() else {}
 youtube_public = json.loads(YOUTUBE_PUBLIC.read_text(encoding='utf-8')) if YOUTUBE_PUBLIC.exists() else {}
 youtube = manual.get('youtube', {})
 spotify = manual.get('spotify', {})
@@ -64,6 +66,7 @@ youtube_latest_title = youtube_latest.get('title') or 'pending'
 youtube_latest_views = youtube_latest.get('views', 'pending')
 youtube_public_time = youtube_public.get('updated_at') or 'not captured'
 spotify_release_url = spotify.get('release_url', 'pending')
+spotify_artist_url = spotify.get('artist_url') or spotify_snapshot.get('artist_url') or 'pending'
 spotify_artist_followers = spotify.get('artist_followers', 'pending')
 spotify_monthly_listeners = spotify.get('monthly_listeners', 'pending')
 spotify_release_streams = spotify.get('release_streams', 'pending')
@@ -72,6 +75,11 @@ spotify_verified_title = spotify_snapshot.get('title') or 'pending'
 spotify_artwork = spotify_snapshot.get('thumbnail_url') or 'pending'
 spotify_snapshot_time = spotify_snapshot.get('updated_at') or 'not captured'
 spotify_analytics_status = spotify_snapshot.get('analytics_status') or 'manual Spotify for Artists export required'
+apple_music_release_url = apple_music_snapshot.get('release_url') or 'pending'
+apple_music_artist_url = apple_music_snapshot.get('artist_url') or 'pending'
+apple_music_verified_title = apple_music_snapshot.get('collection_name') or 'pending'
+apple_music_explicitness = apple_music_snapshot.get('explicitness') or 'pending'
+apple_music_snapshot_time = apple_music_snapshot.get('updated_at') or 'not captured'
 tiktok_followers = stat('tiktok', 'followers', manual.get('tiktok',{}).get('followers','pending'))
 tiktok_profile_views = stat('tiktok', 'profile_views_7d', manual.get('tiktok',{}).get('profile_views_7d','pending'))
 instagram_followers = stat('instagram', 'followers', manual.get('instagram',{}).get('followers','pending'))
@@ -106,6 +114,7 @@ md = f'''# Weekly Social Report — Lily Roo
 
 ### Spotify
 - First single: {spotify_release_url}
+- Artist profile: {spotify_artist_url}
 - Public release check: **{spotify_verified_title}**
 - Remastered artwork thumbnail: {spotify_artwork}
 - Artist followers: **{spotify_artist_followers}**
@@ -113,6 +122,12 @@ md = f'''# Weekly Social Report — Lily Roo
 - Release streams: **{spotify_release_streams}**
 - Saves: **{spotify_saves}**
 - Analytics status: **{spotify_analytics_status}**
+
+### Apple Music
+- First single: {apple_music_release_url}
+- Artist profile: {apple_music_artist_url}
+- Public release check: **{apple_music_verified_title}**
+- Explicitness: **{apple_music_explicitness}**
 
 ### TikTok
 - Followers: **{tiktok_followers}**
@@ -141,6 +156,8 @@ md = f'''# Weekly Social Report — Lily Roo
 - YouTube public snapshot file: `data/youtube_public_snapshot.json`
 - Spotify public release captured: **{spotify_snapshot_time}**
 - Spotify snapshot file: `data/spotify_release_snapshot.json`
+- Apple Music public release captured: **{apple_music_snapshot_time}**
+- Apple Music snapshot file: `data/apple_music_release_snapshot.json`
 
 ## Weekly Activity Log
 - Admin site now uses Dashboard / Backstory / Songs / Promo navigation
@@ -155,6 +172,7 @@ md = f'''# Weekly Social Report — Lily Roo
 ## Reporting cadence
 - Capture YouTube public video views: `python3 scripts/capture_youtube_public.py`
 - Capture Spotify public release metadata: `python3 scripts/capture_spotify_release.py`
+- Capture Apple Music public release metadata: `python3 scripts/capture_apple_music_release.py`
 - Capture live API metrics: `python3 scripts/capture_live_metrics.py`
 - Regenerate via: `python3 scripts/update_weekly_report.py`
 - Source overrides: `data/manual_social_stats.json`

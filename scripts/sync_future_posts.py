@@ -13,6 +13,25 @@ OUT = REPO_ROOT / 'admin' / 'future-posts.json'
 PUBLISHED_LOG = REPO_ROOT / 'admin' / 'content' / 'Published_Log.csv'
 ADMIN_INDEX = REPO_ROOT / 'admin' / 'index.html'
 
+def infer_post_type(row):
+    platform = (row.get('platform') or '').strip().lower()
+    media = ((row.get('clip_url') or '') or (row.get('imagery_url') or '')).strip().lower()
+    if 'youtube community' in platform:
+        return 'community'
+    if 'youtube' in platform or 'tiktok' in platform:
+        return 'video'
+    if media.endswith(('.mp4', '.mov', '.webm')):
+        return 'video'
+    if media.endswith(('.png', '.jpg', '.jpeg', '.gif', '.webp')):
+        return 'image'
+    return 'text'
+
+def execution_mode(row):
+    explicit = (row.get('execution_mode') or '').strip().lower()
+    if explicit:
+        return explicit
+    return 'manual' if infer_post_type(row) == 'community' else 'auto'
+
 def load_published_ids(path: Path):
     ids = set()
     if not path.exists():
@@ -54,6 +73,10 @@ def load_posts(path: Path, published_ids=None):
                 'reply_text': (r.get('reply_text') or '').strip(),
                 'x_media_key': (r.get('x_media_key') or '').strip(),
                 'media_key': (r.get('media_key') or '').strip(),
+                'approved': (r.get('approved') or '').strip(),
+                'execution_mode': execution_mode(r),
+                'post_type': (r.get('post_type') or infer_post_type(r)).strip(),
+                'desired_privacy': (r.get('desired_privacy') or '').strip(),
             })
     return items
 

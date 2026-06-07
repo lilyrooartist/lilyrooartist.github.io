@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
@@ -12,6 +13,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 MANUAL = REPO_ROOT / "data" / "manual_social_stats.json"
 OUT = REPO_ROOT / "data" / "spotify_release_snapshot.json"
 DEFAULT_RELEASE_URL = "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi"
+DEFAULT_ARTIST_URL = "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a"
 OEMBED_URL = "https://open.spotify.com/oembed"
 
 
@@ -47,6 +49,20 @@ def fetch_oembed(url: str) -> dict:
         return payload
 
 
+def fetch_artist_url(url: str) -> str:
+    request = urllib.request.Request(url, headers={
+        "Accept": "text/html",
+        "User-Agent": "LilyRooSpotifyReleaseCapture/1.0",
+    })
+    try:
+        with urllib.request.urlopen(request, timeout=25) as response:
+            html = response.read().decode("utf-8", errors="replace")
+    except OSError:
+        return DEFAULT_ARTIST_URL
+    match = re.search(r"https://open\\.spotify\\.com/artist/[A-Za-z0-9]+", html)
+    return match.group(0) if match else DEFAULT_ARTIST_URL
+
+
 def main() -> int:
     url = release_url()
     oembed = fetch_oembed(url)
@@ -56,6 +72,7 @@ def main() -> int:
         "source": "spotify-oembed-public",
         "release_url": url,
         "album_id": album_id(url),
+        "artist_url": fetch_artist_url(url),
         "title": oembed.get("title", ""),
         "provider_name": oembed.get("provider_name", ""),
         "provider_url": oembed.get("provider_url", ""),

@@ -14,6 +14,7 @@ QUEUE = ROOT / "data" / "scheduled_posts.csv"
 FUTURE = ROOT / "admin" / "future-posts.json"
 LIVE_METRICS = ROOT / "data" / "live_social_metrics.json"
 SPOTIFY_SNAPSHOT = ROOT / "data" / "spotify_release_snapshot.json"
+APPLE_MUSIC_SNAPSHOT = ROOT / "data" / "apple_music_release_snapshot.json"
 YOUTUBE_PUBLIC = ROOT / "data" / "youtube_public_snapshot.json"
 REPORT = ROOT / "admin" / "reports" / "weekly-social-report.md"
 INDEX = CONTENT / "content_index.json"
@@ -65,7 +66,7 @@ def validate_quips(failures):
 
 def validate_queue(failures):
     rows = read_csv(QUEUE)
-    required = {"id", "scheduled_at", "platform", "song", "text", "drafts"}
+    required = {"id", "scheduled_at", "platform", "song", "text", "drafts", "approved", "execution_mode", "post_type"}
     if not rows:
         fail("scheduled queue is empty", failures)
         return
@@ -87,6 +88,15 @@ def validate_queue(failures):
             datetime.fromisoformat(row.get("scheduled_at", ""))
         except ValueError:
             fail(f"queue row {row.get('id')} has invalid scheduled_at", failures)
+        approved = row.get("approved", "").strip().lower()
+        if approved not in {"yes", "no"}:
+            fail(f"queue row {row.get('id')} approved must be yes or no", failures)
+        mode = row.get("execution_mode", "").strip().lower()
+        if mode not in {"auto", "manual"}:
+            fail(f"queue row {row.get('id')} execution_mode must be auto or manual", failures)
+        post_type = row.get("post_type", "").strip().lower()
+        if post_type not in {"text", "image", "video", "community", "link"}:
+            fail(f"queue row {row.get('id')} has unsupported post_type {post_type or '[missing]'}", failures)
 
 
 def validate_generated_outputs(failures):
@@ -120,6 +130,14 @@ def validate_generated_outputs(failures):
             fail("spotify_release_snapshot.json missing title or thumbnail_url", failures)
     else:
         fail("spotify_release_snapshot.json missing; run scripts/capture_spotify_release.py", failures)
+    if APPLE_MUSIC_SNAPSHOT.exists():
+        snapshot = json.loads(APPLE_MUSIC_SNAPSHOT.read_text(encoding="utf-8"))
+        if snapshot.get("ok") and snapshot.get("collection_name") and snapshot.get("release_url"):
+            ok(f"Apple Music release snapshot verifies {snapshot.get('collection_name')}")
+        else:
+            fail("apple_music_release_snapshot.json missing collection_name or release_url", failures)
+    else:
+        fail("apple_music_release_snapshot.json missing; run scripts/capture_apple_music_release.py", failures)
     if YOUTUBE_PUBLIC.exists():
         snapshot = json.loads(YOUTUBE_PUBLIC.read_text(encoding="utf-8"))
         if snapshot.get("ok") and snapshot.get("recent_video_count") and snapshot.get("recent_public_views_total") is not None:

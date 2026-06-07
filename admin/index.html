@@ -28,6 +28,12 @@
     .btn.secondary{background:#20365f;color:#dce8ff;border:1px solid #416095}
     .btn.ghost{background:#111827;color:#cfd7ef;border:1px solid #303856}
     .btn:disabled{background:#3a4055;color:#9ba3bf;cursor:not-allowed}
+    .btn.is-working{background:#244dcc;color:#fff}
+    .exec-feedback{margin-top:8px;border:1px solid #303856;border-radius:10px;padding:8px 9px;font-size:12px;line-height:1.35;background:#111827;color:#c7d0ea}
+    .exec-feedback[hidden]{display:none}
+    .exec-feedback.working{border-color:#416095;background:#14203a;color:#dce8ff}
+    .exec-feedback.success{border-color:#1f684d;background:#123528;color:#9bf0c5}
+    .exec-feedback.error{border-color:#74303d;background:#3b1820;color:#ffabb7}
     .preview{margin-top:8px}
     .preview img,.preview video{width:100%;max-height:170px;object-fit:cover;border-radius:10px;border:1px solid #2d3550;background:#0b101c}
     .song-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
@@ -447,7 +453,7 @@
 <script type="text/plain" id="embedded-weekly-report"># Weekly Social Report — Lily Roo
 
 **Period:** 2026-06-01 to 2026-06-07
-**Last updated:** 2026-06-07 08:36 AM EDT
+**Last updated:** 2026-06-07 11:48 AM EDT
 
 ## KPI Goal
 - Primary growth target: **1,000 YouTube subscribers** (monetization milestone)
@@ -464,6 +470,7 @@
 
 ### Spotify
 - First single: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi
+- Artist profile: https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a
 - Public release check: **I Learned It All in Fifteen Seconds**
 - Remastered artwork thumbnail: https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e021da9ba23024f9074f309f661
 - Artist followers: **pending**
@@ -471,6 +478,12 @@
 - Release streams: **pending**
 - Saves: **pending**
 - Analytics status: **Streams, saves, monthly listeners, and artist followers still require Spotify for Artists export/API access.**
+
+### Apple Music
+- First single: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249
+- Artist profile: https://music.apple.com/us/artist/lily-roo/1896604299
+- Public release check: **I Learned It All in Fifteen Seconds - Single**
+- Explicitness: **notExplicit**
 
 ### TikTok
 - Followers: **pending**
@@ -497,8 +510,10 @@
 - Snapshot file: `data/live_social_metrics.json`
 - YouTube public RSS captured: **2026-06-05T16:52:32.267181Z**
 - YouTube public snapshot file: `data/youtube_public_snapshot.json`
-- Spotify public release captured: **2026-06-07T12:31:10.260028Z**
+- Spotify public release captured: **2026-06-07T15:47:02.822108Z**
 - Spotify snapshot file: `data/spotify_release_snapshot.json`
+- Apple Music public release captured: **2026-06-07T15:47:03.558748Z**
+- Apple Music snapshot file: `data/apple_music_release_snapshot.json`
 
 ## Weekly Activity Log
 - Admin site now uses Dashboard / Backstory / Songs / Promo navigation
@@ -513,6 +528,7 @@
 ## Reporting cadence
 - Capture YouTube public video views: `python3 scripts/capture_youtube_public.py`
 - Capture Spotify public release metadata: `python3 scripts/capture_spotify_release.py`
+- Capture Apple Music public release metadata: `python3 scripts/capture_apple_music_release.py`
 - Capture live API metrics: `python3 scripts/capture_live_metrics.py`
 - Regenerate via: `python3 scripts/update_weekly_report.py`
 - Source overrides: `data/manual_social_stats.json`</script>
@@ -537,7 +553,7 @@
 2026-06-07,Facebook,https://www.facebook.com/903693509504290_122118326547249470,FP-AUTO-260,I Learned It All in Fifteen Seconds,"I Learned It All in Fifteen Seconds is live. Presave, stream, follow, and send the tiny-room signal onward: https://distrokid.com/hyperfollo",hyperfollow_link,no,no,,,,,,,posted via Meta Graph API</script>
 
 <script type="application/json" id="embedded-future-posts">{
-  "last_synced": "2026-06-07T12:36:42.833169+00:00",
+  "last_synced": "2026-06-07T15:47:03.605004+00:00",
   "source": "data/scheduled_posts.csv",
   "published_log": "admin/content/Published_Log.csv",
   "excluded_published_ids": [
@@ -568,16 +584,20 @@
         "The phone taught me heartbreak at unsafe speed. Naturally I made it a song, then gave the cover a cleaner master.",
         "I Learned It All in Fifteen Seconds is streaming now. Remastered cover art. Same little room. Sharper evidence."
       ],
-      "reply_text": "Listen / presave: https://distrokid.com/hyperfollow/lilyroo/i-learned-it-all-in-fifteen-seconds",
+      "reply_text": "Listen on Spotify: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
       "x_media_key": "",
-      "media_key": "i-learned-cover"
+      "media_key": "i-learned-cover",
+      "approved": "no",
+      "execution_mode": "auto",
+      "post_type": "image",
+      "desired_privacy": ""
     },
     {
       "id": "FP-AUTO-259",
       "scheduled_at": "2026-06-05T20:40:00-04:00",
       "platform": "TikTok",
       "song": "I Learned It All in Fifteen Seconds",
-      "imagery": "Launch clip + HyperFollow CTA",
+      "imagery": "Launch clip + Spotify CTA",
       "imagery_url": "https://www.lilyroo.com/assets/img/i-learned-it-all-in-fifteen-seconds-cover.jpg",
       "clip_url": "https://www.lilyroo.com/assets/ig/01_i_learned_it_all_60s.mp4",
       "text": "I learned it all in fifteen seconds and somehow still have homework. Streaming now.",
@@ -586,9 +606,13 @@
         "A world of strangers in my phone. Very educational. Very concerning. Now streaming.",
         "First single is live. Remastered art. Same emotional damage report."
       ],
-      "reply_text": "Listen / presave: https://distrokid.com/hyperfollow/lilyroo/i-learned-it-all-in-fifteen-seconds",
+      "reply_text": "Listen on Spotify: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
       "x_media_key": "",
-      "media_key": "i-learned-60s"
+      "media_key": "i-learned-60s",
+      "approved": "no",
+      "execution_mode": "auto",
+      "post_type": "video",
+      "desired_privacy": "PUBLIC_TO_EVERYONE"
     },
     {
       "id": "FP-AUTO-261",
@@ -604,9 +628,13 @@
         "The first Lily Roo single is now streaming. If this signal found you here first, the tiny room has officially expanded.",
         "I Learned It All in Fifteen Seconds is live now. Stream it, share it, and help us build the signal to 1,000 subscribers."
       ],
-      "reply_text": "Listen / presave: https://distrokid.com/hyperfollow/lilyroo/i-learned-it-all-in-fifteen-seconds",
+      "reply_text": "Stream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube: https://www.youtube.com/@lilyroo.artist",
       "x_media_key": "",
-      "media_key": "i-learned-cover"
+      "media_key": "i-learned-cover",
+      "approved": "no",
+      "execution_mode": "manual",
+      "post_type": "community",
+      "desired_privacy": ""
     },
     {
       "id": "FP-AUTO-263",
@@ -622,9 +650,13 @@
         "The single is streaming now. I gave the cover the big-frame treatment because apparently feelings need packaging.",
         "Fifteen seconds is apparently enough time to borrow someone else's heartbreak and forget your own grocery list. Streaming now."
       ],
-      "reply_text": "Listen / presave: https://distrokid.com/hyperfollow/lilyroo/i-learned-it-all-in-fifteen-seconds",
+      "reply_text": "Listen on Spotify: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
       "x_media_key": "",
-      "media_key": "i-learned-cover"
+      "media_key": "i-learned-cover",
+      "approved": "yes",
+      "execution_mode": "auto",
+      "post_type": "image",
+      "desired_privacy": ""
     },
     {
       "id": "FP-AUTO-264",
@@ -638,11 +670,15 @@
       "drafts": [
         "Swipe away before the pain sets in. Cute system we built. Streaming now.",
         "The first single is live and the cover art got remastered, so the phone is officially too powerful.",
-        "Fifteen seconds, full feelings, remastered cover art. Open the HyperFollow link."
+        "Fifteen seconds, full feelings, remastered cover art. Open Spotify."
       ],
-      "reply_text": "Listen / presave: https://distrokid.com/hyperfollow/lilyroo/i-learned-it-all-in-fifteen-seconds",
+      "reply_text": "Listen on Spotify: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
       "x_media_key": "",
-      "media_key": "i-learned-60s"
+      "media_key": "i-learned-60s",
+      "approved": "yes",
+      "execution_mode": "auto",
+      "post_type": "video",
+      "desired_privacy": "PUBLIC_TO_EVERYONE"
     },
     {
       "id": "FP-AUTO-265",
@@ -652,15 +688,19 @@
       "imagery": "Launch week subscriber CTA",
       "imagery_url": "https://www.lilyroo.com/assets/img/i-learned-it-all-in-fifteen-seconds-cover.jpg",
       "clip_url": "",
-      "text": "If I Learned It All in Fifteen Seconds found you, stream it through HyperFollow and subscribe on YouTube. We are building this tiny signal toward 1,000.",
+      "text": "If I Learned It All in Fifteen Seconds found you, stream it on Spotify and subscribe on YouTube. We are building this tiny signal toward 1,000.",
       "drafts": [
-        "If I Learned It All in Fifteen Seconds found you, stream it through HyperFollow and subscribe on YouTube. We are building this tiny signal toward 1,000.",
+        "If I Learned It All in Fifteen Seconds found you, stream it on Spotify and subscribe on YouTube. We are building this tiny signal toward 1,000.",
         "First Lily Roo single is live now. The cover art is remastered, the feelings are not, and the channel is still climbing toward 1,000 subscribers.",
         "Stream the first single, share the remastered cover, and subscribe if this little signal is your kind of strange."
       ],
-      "reply_text": "HyperFollow: https://distrokid.com/hyperfollow/lilyroo/i-learned-it-all-in-fifteen-seconds | YouTube: https://www.youtube.com/@lilyroo.artist",
+      "reply_text": "Stream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube: https://www.youtube.com/@lilyroo.artist",
       "x_media_key": "",
-      "media_key": "i-learned-cover"
+      "media_key": "i-learned-cover",
+      "approved": "yes",
+      "execution_mode": "auto",
+      "post_type": "image",
+      "desired_privacy": ""
     }
   ]
 }</script>
@@ -876,11 +916,16 @@
   const executorUrl=window.LILYROO_SOCIAL_EXECUTOR_URL || defaultExecutorUrl();
   const readinessUrl=executorUrl.replace(/\/execute$/,'/readiness');
   const metricsUrl=executorUrl.replace(/\/execute$/,'/metrics');
+  const executionsUrl=executorUrl.replace(/\/execute$/,'/executions');
   let executorReadiness=null;
   const readinessPromise=fetch(readinessUrl,{
     headers: {[ADMIN_PASSWORD_HEADER]: adminPassword()}
   }).then(r=>r.ok?r.json():null).catch(()=>null);
   const metricsPromise=fetch(metricsUrl,{
+    headers: {[ADMIN_PASSWORD_HEADER]: adminPassword()},
+    cache:'no-store'
+  }).then(r=>r.ok?r.json():null).catch(()=>null);
+  const executionsPromise=fetch(executionsUrl,{
     headers: {[ADMIN_PASSWORD_HEADER]: adminPassword()},
     cache:'no-store'
   }).then(r=>r.ok?r.json():null).catch(()=>null);
@@ -912,6 +957,34 @@
       return {ready:false,message:'Spotify metrics are manual until Spotify for Artists export/API access is connected.'};
     }
     return {ready:true,message:''};
+  }
+
+  function truthyQueueValue(value){
+    return ['1','true','yes','y','approved'].includes(String(value||'').trim().toLowerCase());
+  }
+
+  function executionsByPostId(executions){
+    const map={};
+    const list=(executions&&executions.executions)||[];
+    list.forEach(item=>{ if(item&&item.post_id) map[item.post_id]=item; });
+    return map;
+  }
+
+  function queueExecutionState(post, readiness, execution){
+    if(execution&&execution.status==='posted') return {label:'Posted',className:'ok',disabled:true,message:execution.post_url||'Already posted',href:execution.post_url||''};
+    if(execution&&execution.status==='failed') return {label:'Failed',className:'warn',disabled:false,message:execution.error||execution.reason||'Last execution failed'};
+    if(execution&&(execution.status==='blocked'||execution.status==='skipped')) return {label:'Blocked',className:'warn',disabled:true,message:execution.reason||'Blocked by executor'};
+    const mode=String(post.execution_mode||'').toLowerCase();
+    const type=String(post.post_type||'').toLowerCase();
+    if(mode==='manual'||type==='community'||String(post.platform||'').toLowerCase().includes('youtube community')){
+      return {label:'Manual only',className:'neutral',disabled:true,message:'Copy-ready/manual workflow; API execution is disabled.'};
+    }
+    if(!truthyQueueValue(post.approved)){
+      return {label:'Blocked',className:'warn',disabled:true,message:'Not approved for execution.'};
+    }
+    const readyState=readiness||platformReadiness(post.platform);
+    if(readyState.ready===false) return {label:'Blocked',className:'warn',disabled:true,message:readyState.message||'Platform is not ready.'};
+    return {label:'Auto ready',className:'ok',disabled:false,message:'Approved for guarded auto-posting.'};
   }
 
   const REPORT_PLATFORM_CONFIG=[
@@ -1473,9 +1546,10 @@
     ].join('');
   }
 
-  function renderNextPosts(queuePayload){
+  function renderNextPosts(queuePayload, executions){
     const root=document.getElementById('next-posts-report');
     if(!root) return;
+    const executionMap=executionsByPostId(executions);
     const posts=(Array.isArray(queuePayload)?queuePayload:(queuePayload.posts||[])).slice().sort((a,b)=>new Date(a.scheduled_at)-new Date(b.scheduled_at));
     const upcoming=posts.filter(post=>new Date(post.scheduled_at)>=now).slice(0,5);
     const due=posts.filter(post=>new Date(post.scheduled_at)<now).slice(-3);
@@ -1486,14 +1560,16 @@
     }
     root.innerHTML=list.map(post=>{
       const isDue=new Date(post.scheduled_at)<now;
+      const state=queueExecutionState(post, platformReadiness(post.platform), executionMap[post.id]);
       return `<div class="queue-item">
         <div class="queue-top">
           <div>
             <div class="queue-title">${escapeHtml(post.platform||'Post')} ${post.song?`- ${escapeHtml(post.song)}`:''}</div>
             <div class="queue-meta">${escapeHtml(formatQueueDate(post.scheduled_at))} ${post.id?`- ${escapeHtml(post.id)}`:''}</div>
           </div>
-          <span class="status-chip ${isDue?'warn':'ok'}">${isDue?'Due':'Upcoming'}</span>
+          <span class="status-chip ${escapeHtml(state.className||'neutral')}">${escapeHtml(state.label||'Queued')}</span>
         </div>
+        <div class="queue-meta">${isDue?'Due': 'Upcoming'}${state.message?` - ${escapeHtml(state.message)}`:''}</div>
       </div>`;
     }).join('');
   }
@@ -1510,12 +1586,13 @@
 
   async function loadReportsDashboard(){
     if(!document.getElementById('reports-period')) return;
-    const [md,publishedCsv,queuePayload,readiness,metrics]=await Promise.all([
+    const [md,publishedCsv,queuePayload,readiness,metrics,executions]=await Promise.all([
       fetchTextOrEmpty(localPath('/admin/reports/weekly-social-report.md')),
       fetchTextOrEmpty(localPath('/admin/content/Published_Log.csv')),
       fetchJsonOr(localPath('/admin/future-posts.json'),{}),
       readinessPromise,
-      metricsPromise
+      metricsPromise,
+      executionsPromise
     ]);
     executorReadiness=readiness||executorReadiness;
     const report=parseWeeklyReport(md);
@@ -1528,7 +1605,7 @@
     renderPlatformRows(report,publishedRows,readiness,metrics);
     renderRecentPublishing(publishedRows);
     renderPipelineHealth(queuePayload,readiness,report,metrics);
-    renderNextPosts(queuePayload);
+    renderNextPosts(queuePayload,executions);
     renderPriorities(report);
   }
   loadReportsDashboard().catch(err=>{
@@ -1557,7 +1634,11 @@
           mediaKey,
           imageryUrl: post.imagery_url || '',
           clipUrl: post.clip_url || '',
-          mediaUrl: post.clip_url || post.imagery_url || ''
+          mediaUrl: post.clip_url || post.imagery_url || '',
+          approved: post.approved || '',
+          executionMode: post.execution_mode || '',
+          postType: post.post_type || '',
+          desiredPrivacy: post.desired_privacy || ''
         })
       });
     }catch(err){
@@ -1579,11 +1660,31 @@
     return `status_${postFingerprint(post,text)}`;
   }
 
+  function setExecuteFeedback(root, type, message, href){
+    const feedback=root.querySelector('[data-role="exec-feedback"]');
+    if(!feedback) return;
+    feedback.hidden=false;
+    feedback.className=`exec-feedback ${type||''}`.trim();
+    const safeMessage=escapeHtml(message||'');
+    const safeHref=href&&/^https?:\/\//i.test(href)?href:'';
+    feedback.innerHTML=safeHref?`${safeMessage} <a href="${escapeHtml(safeHref)}" target="_blank" rel="noopener">Open post</a>`:safeMessage;
+  }
+
+  function clearExecuteFeedback(root){
+    const feedback=root.querySelector('[data-role="exec-feedback"]');
+    if(!feedback) return;
+    feedback.hidden=true;
+    feedback.className='exec-feedback';
+    feedback.textContent='';
+  }
+
   Promise.all([
     fetch(`/admin/future-posts.json?v=${Date.now()}`, {cache:'no-store'}).then(r=>r.json()),
     readinessPromise,
-  ]).then(([payload,readiness])=>{
+    executionsPromise,
+  ]).then(([payload,readiness,executions])=>{
     executorReadiness=readiness;
+    const executionMap=executionsByPostId(executions);
     const list=Array.isArray(payload)?payload:(payload.posts||[]);
     if(payload.last_synced) document.getElementById('future-sync').textContent='Last synced: '+formatDate(payload.last_synced);
     const posts=list.filter(p=>{const t=new Date(p.scheduled_at); return t>=now && t<=in7;}).sort((a,b)=>new Date(a.scheduled_at)-new Date(b.scheduled_at));
@@ -1598,17 +1699,20 @@
       const statusVal=getStatus(text);
       const mediaKey=(p.media_key||p.x_media_key||'').trim();
       const readyState=executorReadiness?platformReadiness(p.platform):{ready:true,message:''};
-      const disabled=readyState.ready===false;
+      const opState=queueExecutionState(p,readyState,executionMap[p.id]);
+      const disabled=Boolean(opState.disabled);
       const execLabel='Execute now';
       d.innerHTML=`<div class="meta"><span class="platform">${escapeHtml(p.platform)}</span><span class="time">${escapeHtml(formatDate(p.scheduled_at))}</span></div>
-      <div class="label"><b>Status</b>: <span data-role="status">${escapeHtml(statusVal)}</span></div>
+      <div class="label"><b>Status</b>: <span data-role="status" class="status-chip ${escapeHtml(opState.className||'neutral')}">${escapeHtml(opState.label||statusVal)}</span></div>
+      <div class="label muted">${escapeHtml(p.execution_mode||'auto')} · ${escapeHtml(p.post_type||'text')}${p.approved?` · approved: ${escapeHtml(p.approved)}`:''}</div>
       ${p.song?`<div class="label"><b>Song</b>: ${escapeHtml(p.song)}</div>`:''}
       <div><b>Text</b>: <span data-role="text">${escapeHtml(text)}</span></div>
       <div class="label"><b>Imagery</b>: ${escapeHtml(p.imagery||'')}</div>
       <div class="preview" data-role="preview-image"></div>
       <div class="preview" data-role="preview-clip"></div>
       <div class="label" style="margin-top:10px"><button class="btn" data-role="redo">Redo</button> <button class="btn" data-role="exec"${disabled?' disabled':''}>${escapeHtml(execLabel)}</button></div>
-      <div class="label muted" data-role="exec-hint">Uses website executor: ${escapeHtml(executorUrl)}${mediaKey?` · media key: ${escapeHtml(mediaKey)}`:''}${disabled?` · ${escapeHtml(readyState.message)}`:''}</div>`;
+      <div class="label muted" data-role="exec-hint">Uses website executor: ${escapeHtml(executorUrl)}${mediaKey?` · media key: ${escapeHtml(mediaKey)}`:''}${opState.message?` · ${escapeHtml(opState.message)}`:''}</div>
+      <div class="exec-feedback" data-role="exec-feedback" hidden></div>`;
       renderImagePreview(d.querySelector('[data-role="preview-image"]'),p);
       renderClipPreview(d.querySelector('[data-role="preview-clip"]'),p);
       d.querySelector('[data-role="redo"]').addEventListener('click',()=>{
@@ -1616,26 +1720,43 @@
         const n=(Number(localStorage.getItem(key)||0)+1)%p.drafts.length;
         localStorage.setItem(key,String(n));
         d.querySelector('[data-role="text"]').textContent=p.drafts[n];
-        d.querySelector('[data-role="status"]').textContent=getStatus(p.drafts[n]);
+        d.querySelector('[data-role="status"]').textContent=opState.label||getStatus(p.drafts[n]);
+        clearExecuteFeedback(d);
       });
       d.querySelector('[data-role="exec"]').addEventListener('click',async()=>{
         const currentText=d.querySelector('[data-role="text"]').textContent;
         const statusKey=postStatusKey(p,currentText);
         const previousStatus=getStatus(currentText);
+        const execBtn=d.querySelector('[data-role="exec"]');
+        const redoBtn=d.querySelector('[data-role="redo"]');
+        const originalExecText=execBtn.textContent;
+        execBtn.disabled=true;
+        redoBtn.disabled=true;
+        execBtn.classList.add('is-working');
+        execBtn.textContent='Publishing...';
+        d.querySelector('[data-role="status"]').textContent='posting';
+        setExecuteFeedback(d,'working',`Publishing ${p.platform || 'post'} now...`);
         try{
           const readyNow=platformReadiness(p.platform);
           if(readyNow.ready===false) throw new Error(readyNow.message);
-          d.querySelector('[data-role="status"]').textContent='posting';
           const result = await executeWebPost(p, currentText, p.reply_text||'', mediaKey);
           localStorage.setItem(statusKey,'posted');
           const postedUrl=result.tweet_url||result.video_url||result.post_url||result.media_id||result.publish_id||'';
           if(postedUrl) localStorage.setItem(`posted_url_${postFingerprint(p,currentText)}`,postedUrl);
-          d.querySelector('[data-role="status"]').textContent='posted';
-          alert(`Posted: ${postedUrl || result.platform || 'success'}`);
+          const statusEl=d.querySelector('[data-role="status"]');
+          statusEl.textContent='Posted';
+          statusEl.className='status-chip ok';
+          setExecuteFeedback(d,'success',`Published successfully${result.platform?` to ${result.platform}`:''}.`,postedUrl);
+          execBtn.classList.remove('is-working');
+          execBtn.textContent='Published';
           return;
         }catch(err){
           d.querySelector('[data-role="status"]').textContent=previousStatus;
-          alert(`Social executor failed: ${err.message}`);
+          setExecuteFeedback(d,'error',`Social executor failed: ${err.message}`);
+          execBtn.disabled=false;
+          redoBtn.disabled=false;
+          execBtn.classList.remove('is-working');
+          execBtn.textContent=originalExecText;
           return;
         }
       });
