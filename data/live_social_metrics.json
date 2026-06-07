@@ -1,12 +1,40 @@
 {
   "ok": true,
-  "updated_at": "2026-06-05T16:52:33.076Z",
+  "updated_at": "2026-06-07T20:28:53.808Z",
   "platforms": {
     "youtube": {
-      "ok": false,
-      "reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Bad Request\"}",
-      "metrics": {},
-      "status": 400
+      "ok": true,
+      "source": "youtube-data-api",
+      "metrics": {
+        "subscribers": 5,
+        "total_views": 2454,
+        "video_count": 25
+      },
+      "channel_title": "Lily Roo",
+      "period_28d": {
+        "startDate": "2026-05-10",
+        "endDate": "2026-06-06"
+      },
+      "analytics_status": "Request had insufficient authentication scopes."
+    },
+    "spotify": {
+      "ok": true,
+      "source": "spotify-oembed-public",
+      "metrics": {
+        "release_verified": 1
+      },
+      "release_url": "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+      "album_id": "5TBsbgE68DTPlAFsPsLEhi",
+      "title": "I Learned It All in Fifteen Seconds",
+      "provider_name": "Spotify",
+      "provider_url": "https://spotify.com",
+      "iframe_url": "https://open.spotify.com/embed/album/5TBsbgE68DTPlAFsPsLEhi?utm_source=oembed",
+      "thumbnail_url": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e021da9ba23024f9074f309f661",
+      "thumbnail_width": 300,
+      "thumbnail_height": 300,
+      "analytics_status": "Spotify streams, saves, monthly listeners, and artist followers require Spotify for Artists export or a connected analytics source.",
+      "credential_ok": false,
+      "profile_url": "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi"
     },
     "tiktok": {
       "ok": false,
@@ -17,14 +45,10 @@
       ]
     },
     "instagram": {
-      "ok": true,
-      "source": "instagram-login-api",
-      "metrics": {
-        "followers": 0,
-        "media_count": 6
-      },
-      "username": "lilyroo.artist",
-      "profile_url": "https://www.instagram.com/lilyroo.artist/"
+      "ok": false,
+      "reason": "Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page",
+      "metrics": {},
+      "status": null
     },
     "facebook": {
       "ok": true,

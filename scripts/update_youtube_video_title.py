@@ -13,6 +13,7 @@ from social_exec_common import YOUTUBE_ENV, load_env
 VIDEOS_URL = "https://www.googleapis.com/youtube/v3/videos"
 DEFAULT_VIDEO_ID = "Hve5drBlN58"
 DEFAULT_TITLE = "I Learned It All in Fifteen Seconds"
+OLD_TITLE = "I Learned it all in Fifteen Seconds"
 
 
 def api_json(url: str, token: str, *, method: str = "GET", payload: dict | None = None) -> dict:
@@ -48,7 +49,7 @@ def fetch_video(token: str, video_id: str) -> dict:
     return items[0]
 
 
-def update_title_resource(video: dict, title: str) -> dict:
+def update_title_resource(video: dict, title: str, *, normalize_description: bool = False) -> dict:
     snippet = dict(video.get("snippet") or {})
     status = dict(video.get("status") or {})
     if not snippet:
@@ -56,12 +57,16 @@ def update_title_resource(video: dict, title: str) -> dict:
     if not status:
         raise RuntimeError("YouTube response did not include status metadata.")
     before_title = snippet.get("title", "")
+    before_description = snippet.get("description", "")
     snippet["title"] = title[:100]
+    if normalize_description:
+        snippet["description"] = before_description.replace(OLD_TITLE, title)
     return {
         "id": video.get("id"),
         "snippet": snippet,
         "status": status,
         "_before_title": before_title,
+        "_before_description": before_description,
     }
 
 
@@ -79,24 +84,29 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Safely update the public title of an existing Lily Roo YouTube video.")
     parser.add_argument("--video-id", default=DEFAULT_VIDEO_ID)
     parser.add_argument("--title", default=DEFAULT_TITLE)
+    parser.add_argument("--normalize-description", action="store_true", help="Replace old title casing inside the video description too.")
     parser.add_argument("--apply", action="store_true", help="Actually call videos.update. Without this, only prints the planned change.")
     args = parser.parse_args()
 
     env = load_env(YOUTUBE_ENV)
     token = refresh_access_token(env)
     video = fetch_video(token, args.video_id)
-    resource = update_title_resource(video, args.title)
+    resource = update_title_resource(video, args.title, normalize_description=args.normalize_description)
+    before_description = resource["_before_description"]
+    after_description = resource["snippet"].get("description", "")
     result = {
         "ok": True,
         "dry_run": not args.apply,
         "video_id": args.video_id,
         "before_title": resource["_before_title"],
         "after_title": resource["snippet"]["title"],
+        "description_changed": before_description != after_description,
         "privacy_status": resource["status"].get("privacyStatus", ""),
     }
     if args.apply:
         updated = update_video(token, resource)
         result["updated_title"] = (updated.get("snippet") or {}).get("title", "")
+        result["updated_description_changed"] = result["description_changed"]
         result["url"] = f"https://www.youtube.com/watch?v={args.video_id}"
     print(json.dumps(result, indent=2, ensure_ascii=False))
     return 0

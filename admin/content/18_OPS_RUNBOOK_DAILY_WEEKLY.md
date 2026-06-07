@@ -140,10 +140,19 @@ Actions:
 5. Put missing values in `data/manual_social_stats.json` as `pending`
 6. Regenerate report anyway
 
-Current known auth issue:
-- YouTube metrics return `invalid_grant` until `scripts/youtube_oauth_browser_helper.py`
-  is run and the new `YOUTUBE_REFRESH_TOKEN` is pushed to the Cloudflare Worker
-  from the owning Cloudflare account.
+Current YouTube auth state:
+- YouTube OAuth was refreshed on 2026-06-07, and the new `YOUTUBE_REFRESH_TOKEN`
+  was pushed to the Cloudflare Worker.
+- The title-track video and YouTube Music mirror now match
+  `I Learned It All in Fifteen Seconds` in public title metadata.
+- To recheck or reapply the title normalization, run:
+  ```bash
+  python3 scripts/update_youtube_video_title.py
+  python3 scripts/update_youtube_video_title.py --normalize-description --apply
+  python3 scripts/capture_youtube_title_track.py
+  python3 scripts/capture_youtube_music_release.py
+  python3 scripts/update_weekly_report.py
+  ```
 - YouTube public RSS still captures recent upload view counts without auth, but
   it does not include subscribers or private 28-day analytics.
 - Spotify public release metadata is captured without auth, but streams, saves,

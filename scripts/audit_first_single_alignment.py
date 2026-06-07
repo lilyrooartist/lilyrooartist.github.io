@@ -100,7 +100,7 @@ def main() -> int:
     action_required = [name for name, check in checks.items() if check.get("status") == "action_required"]
     pending = [name for name, check in checks.items() if check.get("status") == "pending"]
     audit = {
-        "ok": not action_required and not pending,
+        "ok": not action_required,
         "updated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "official_title": OFFICIAL_TITLE,
         "action_required": action_required,

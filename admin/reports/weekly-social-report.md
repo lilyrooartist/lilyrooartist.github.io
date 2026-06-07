@@ -1,7 +1,7 @@
 # Weekly Social Report — Lily Roo
 
 **Period:** 2026-06-01 to 2026-06-07
-**Last updated:** 2026-06-07 12:57 PM EDT
+**Last updated:** 2026-06-07 04:30 PM EDT
 
 ## KPI Goal
 - Primary growth target: **1,000 YouTube subscribers** (monetization milestone)
@@ -9,21 +9,21 @@
 ## Platform Snapshot
 
 ### YouTube
-- Subscribers: **6**
+- Subscribers: **5**
 - Last 28 days views: **109**
 - Last 28 days watch time: **3.4 hours**
-- API status: **YouTube OAuth refresh token invalid_grant; run scripts/youtube_oauth_browser_helper.py, then run scripts/update_youtube_video_title.py --apply and redeploy/push the refreshed token**
+- API status: **live API**
 - Public RSS recent-video views: **1012 across 15 videos**
 - Latest public upload: **13 - Lily Roo** (64 views)
 - Title-track video: https://www.youtube.com/watch?v=Hve5drBlN58
-- Title-track public title: **I Learned it all in Fifteen Seconds**
+- Title-track public title: **I Learned It All in Fifteen Seconds**
 - Official title: **I Learned It All in Fifteen Seconds**
-- Title-track title status: **needs title capitalization update**
+- Title-track title status: **matches official title**
 
 ### YouTube Music
 - First single: https://music.youtube.com/watch?v=Hve5drBlN58
-- Public release check: **I Learned it all in Fifteen Seconds**
-- Title status: **mirrors YouTube title capitalization mismatch**
+- Public release check: **I Learned It All in Fifteen Seconds**
+- Title status: **matches official title**
 
 ### Other Stores
 - HyperFollow: https://distrokid.com/hyperfollow/lilyroo/i-learned-it-all-in-fifteen-seconds
@@ -31,8 +31,8 @@
 - Amazon Music: **pending verified public URL; not exposed by current HyperFollow store list**
 
 ### First Single Alignment
-- Status: **needs attention**
-- Action required: **youtube, youtube_music**
+- Status: **aligned**
+- Action required: **none**
 - Pending: **amazon_music**
 
 ### Spotify
@@ -58,7 +58,7 @@
 - Latest post: https://www.tiktok.com/@lilyroo930/video/7611932426557754654
 
 ### Instagram
-- Followers: **0**
+- Followers: **pending**
 - Profile visits (7d): **pending**
 - Latest post: posted
 
@@ -73,17 +73,17 @@
 - Latest post: https://www.facebook.com/903693509504290_122118326547249470
 
 ## Metrics Snapshot
-- Live API captured: **2026-06-05T16:52:33.076Z**
+- Live API captured: **2026-06-07T20:28:53.808Z**
 - Snapshot file: `data/live_social_metrics.json`
 - YouTube public RSS captured: **2026-06-05T16:52:32.267181Z**
 - YouTube public snapshot file: `data/youtube_public_snapshot.json`
-- YouTube title-track captured: **2026-06-07T16:51:58.509548Z**
+- YouTube title-track captured: **2026-06-07T20:30:28.383441Z**
 - YouTube title-track snapshot file: `data/youtube_title_track_snapshot.json`
-- YouTube Music public release captured: **2026-06-07T16:51:58.914451Z**
+- YouTube Music public release captured: **2026-06-07T20:30:28.733814Z**
 - YouTube Music snapshot file: `data/youtube_music_release_snapshot.json`
-- HyperFollow stores captured: **2026-06-07T16:51:59.316930Z**
+- HyperFollow stores captured: **2026-06-07T20:30:29.166720Z**
 - HyperFollow snapshot file: `data/hyperfollow_store_links_snapshot.json`
-- First single alignment audit captured: **2026-06-07T16:56:19.747732Z**
+- First single alignment audit captured: **2026-06-07T20:30:29.204776Z**
 - First single alignment audit file: `data/first_single_alignment_audit.json`
 - Spotify public release captured: **2026-06-07T16:51:57.554497Z**
 - Spotify snapshot file: `data/spotify_release_snapshot.json`
