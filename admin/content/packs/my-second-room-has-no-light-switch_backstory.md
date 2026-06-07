@@ -1,11 +1,11 @@
-# My Second Room Has No Lightswitch — Backstory Pack
+# My Second Room Has No Light Switch — Backstory Pack
 
 - **Song ID:** LR-SONG-016
 - **Status:** Draft starter pack
-- **Source link:** https://youtu.be/k3VdR2FE0EI
+- **Source link:** https://youtu.be/PUYKobQ0-ac
 
 ## Core narrative seed
-My Second Room Has No Lightswitch lives in Lily Roo's transmission universe as a scene-level artifact: one specific moment that reveals a bigger emotional system.
+My Second Room Has No Light Switch lives in Lily Roo's transmission universe as a scene-level artifact: one specific moment that reveals a bigger emotional system.
 
 ## Anecdote hooks (starter)
 1. The line that sounds most casual is usually the one that hurt the most to write.

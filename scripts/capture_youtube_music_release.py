@@ -11,8 +11,9 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 OUT = REPO_ROOT / "data" / "youtube_music_release_snapshot.json"
-VIDEO_ID = "Hve5drBlN58"
+VIDEO_ID = "g1XuXj8W3Vs"
 OFFICIAL_TITLE = "I Learned It All in Fifteen Seconds"
+CANONICAL_YOUTUBE_TITLE = f"{OFFICIAL_TITLE} - Lily Roo"
 YOUTUBE_MUSIC_URL = f"https://music.youtube.com/watch?v={VIDEO_ID}"
 
 
@@ -68,14 +69,14 @@ def main() -> int:
         "video_id": VIDEO_ID,
         "official_title": OFFICIAL_TITLE,
         "public_title": public_title,
-        "title_matches_official": public_title == OFFICIAL_TITLE,
+        "title_matches_official": public_title in {OFFICIAL_TITLE, CANONICAL_YOUTUBE_TITLE},
         "artist_name": "Lily Roo" if title_mentions_artist else "",
         "description_mentions_artist": title_mentions_artist,
         "description": description,
         "thumbnail_url": parser.meta.get("og:image", ""),
         "canonical_url": parser.meta.get("og:url", YOUTUBE_MUSIC_URL),
         "http_status": status,
-        "action_needed": "" if public_title == OFFICIAL_TITLE else "Refresh YouTube OAuth and update public video title capitalization; YouTube Music mirrors the same public title.",
+        "action_needed": "" if public_title in {OFFICIAL_TITLE, CANONICAL_YOUTUBE_TITLE} else "Update public YouTube title to the official title or canonical artist-title form; YouTube Music mirrors the same public title.",
     }
     OUT.write_text(json.dumps(snapshot, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(json.dumps({

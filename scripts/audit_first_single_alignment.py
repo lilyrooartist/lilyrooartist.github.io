@@ -11,8 +11,8 @@ OUT = ROOT / "data" / "first_single_alignment_audit.json"
 OFFICIAL_TITLE = "I Learned It All in Fifteen Seconds"
 SPOTIFY_URL = "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi"
 APPLE_URL = "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249"
-YOUTUBE_URL = "https://www.youtube.com/watch?v=Hve5drBlN58"
-YOUTUBE_MUSIC_URL = "https://music.youtube.com/watch?v=Hve5drBlN58"
+YOUTUBE_URL = "https://www.youtube.com/watch?v=g1XuXj8W3Vs"
+YOUTUBE_MUSIC_URL = "https://music.youtube.com/watch?v=g1XuXj8W3Vs"
 
 
 def read_json(path: str) -> dict:
@@ -32,10 +32,12 @@ def read_text(path: str) -> str:
 def check_title(public_title: str) -> dict:
     if not public_title:
         return {"status": "missing", "public_title": "", "matches": False}
+    canonical_titles = {OFFICIAL_TITLE, f"{OFFICIAL_TITLE} - Lily Roo"}
+    matches = public_title in canonical_titles
     return {
-        "status": "ok" if public_title == OFFICIAL_TITLE else "action_required",
+        "status": "ok" if matches else "action_required",
         "public_title": public_title,
-        "matches": public_title == OFFICIAL_TITLE,
+        "matches": matches,
     }
 
 
@@ -83,12 +85,12 @@ def main() -> int:
         "youtube": {
             **check_title(youtube.get("public_title", "")),
             "url": youtube.get("url") or YOUTUBE_URL,
-            "action": "" if youtube.get("title_matches_official") is True else "Refresh YouTube OAuth, then run scripts/update_youtube_video_title.py --apply.",
+            "action": "" if youtube.get("title_matches_official") is True else "Update YouTube title to the official title or canonical artist-title form.",
         },
         "youtube_music": {
             **check_title(youtube_music.get("public_title", "")),
             "url": youtube_music.get("release_url") or YOUTUBE_MUSIC_URL,
-            "action": "" if youtube_music.get("title_matches_official") is True else "Mirrors YouTube title; fix YouTube title after OAuth refresh.",
+            "action": "" if youtube_music.get("title_matches_official") is True else "Mirrors YouTube title; update YouTube title to the official title or canonical artist-title form.",
         },
         "amazon_music": {
             "status": "pending",

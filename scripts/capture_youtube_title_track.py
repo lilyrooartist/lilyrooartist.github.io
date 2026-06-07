@@ -9,8 +9,9 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 OUT = REPO_ROOT / "data" / "youtube_title_track_snapshot.json"
-VIDEO_ID = "Hve5drBlN58"
+VIDEO_ID = "g1XuXj8W3Vs"
 OFFICIAL_TITLE = "I Learned It All in Fifteen Seconds"
+CANONICAL_YOUTUBE_TITLE = f"{OFFICIAL_TITLE} - Lily Roo"
 OEMBED_URL = "https://www.youtube.com/oembed"
 
 
@@ -40,12 +41,12 @@ def main() -> int:
         "url": f"https://www.youtube.com/watch?v={VIDEO_ID}",
         "official_title": OFFICIAL_TITLE,
         "public_title": public_title,
-        "title_matches_official": public_title == OFFICIAL_TITLE,
+        "title_matches_official": public_title in {OFFICIAL_TITLE, CANONICAL_YOUTUBE_TITLE},
         "author_name": oembed.get("author_name", ""),
         "author_url": oembed.get("author_url", ""),
         "thumbnail_url": oembed.get("thumbnail_url", ""),
         "http_status": oembed.get("http_status"),
-        "action_needed": "" if public_title == OFFICIAL_TITLE else "Refresh YouTube OAuth and update public video title capitalization.",
+        "action_needed": "" if public_title in {OFFICIAL_TITLE, CANONICAL_YOUTUBE_TITLE} else "Update public YouTube title to the official title or canonical artist-title form.",
     }
     OUT.write_text(json.dumps(snapshot, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(json.dumps({

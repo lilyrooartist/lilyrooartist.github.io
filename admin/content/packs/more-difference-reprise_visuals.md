@@ -1,7 +1,7 @@
 # More Difference (Reprise) — Visual Pack
 
 - **Song ID:** LR-SONG-011
-- **Default thumb:** https://i.ytimg.com/vi/uOo30diDXOs/hqdefault.jpg
+- **Default thumb:** /assets/albums/i-learned-it-all-in-fifteen-seconds/art/08-more-difference-reprise.jpg
 
 ## Visual prompt set (starter)
 1. Cinematic still inspired by song title and emotional tone, indie folk-punk aesthetic.

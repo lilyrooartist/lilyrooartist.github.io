@@ -12,9 +12,12 @@
     .card{background:#141722;border:1px solid #2a2f44;border-radius:14px;padding:14px}
     .muted{color:#9ba3bf}.pill{display:inline-block;font-size:12px;background:#24304f;color:#b8d8ff;padding:3px 8px;border-radius:999px}
     a{color:#9ecbff}
+    .resource{display:grid;grid-template-columns:180px 1fr;gap:14px;align-items:start}
+    .resource img{width:180px;max-height:260px;object-fit:cover;border:1px solid #2f3650;border-radius:10px}
+    .file{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;color:#c9cedf;word-break:break-all}
     .vis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:8px}
     .vis img{width:100%;height:130px;object-fit:cover;border:1px solid #2f3650;border-radius:10px}
-    @media(max-width:900px){.grid{grid-template-columns:1fr}.vis{grid-template-columns:1fr}}
+    @media(max-width:900px){.grid,.resource{grid-template-columns:1fr}.vis{grid-template-columns:1fr}.resource img{width:100%;max-height:none}}
   </style>
 </head>
 <body>
@@ -31,6 +34,20 @@
       <li><a href="/admin/content/12_SONG_BACKSTORY_CARDS.md" target="_blank">12_SONG_BACKSTORY_CARDS.md</a></li>
       <li><a href="/admin/content/15_BRAINROT_CAPTION_PACKS.md" target="_blank">15_BRAINROT_CAPTION_PACKS.md</a></li>
     </ul>
+  </div>
+
+  <h2>Resources</h2>
+  <div class="card resource">
+    <a href="/admin/backstory/resources/i-learned-it-all-in-fifteen-seconds-album-art-sheet-2026-06-07.jpg" target="_blank" rel="noopener">
+      <img src="/admin/backstory/resources/i-learned-it-all-in-fifteen-seconds-album-art-sheet-2026-06-07.jpg" alt="I Learned It All in Fifteen Seconds album art sheet">
+    </a>
+    <div>
+      <div class="pill">First album art</div>
+      <h3>I Learned It All in Fifteen Seconds Album Art Sheet</h3>
+      <p class="muted">First album reference sheet with the release cover, eight track visuals, and filenames shown together.</p>
+      <p class="file">i-learned-it-all-in-fifteen-seconds-album-art-sheet-2026-06-07.jpg</p>
+      <p><a href="/admin/backstory/resources/i-learned-it-all-in-fifteen-seconds-album-art-sheet-2026-06-07.jpg" target="_blank" rel="noopener">Open resource</a></p>
+    </div>
   </div>
 
   <h2>Song Backstory Cards</h2>

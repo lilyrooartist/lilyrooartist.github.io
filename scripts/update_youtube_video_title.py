@@ -11,7 +11,7 @@ from post_youtube_from_queue import refresh_access_token
 from social_exec_common import YOUTUBE_ENV, load_env
 
 VIDEOS_URL = "https://www.googleapis.com/youtube/v3/videos"
-DEFAULT_VIDEO_ID = "Hve5drBlN58"
+DEFAULT_VIDEO_ID = "g1XuXj8W3Vs"
 DEFAULT_TITLE = "I Learned It All in Fifteen Seconds"
 OLD_TITLE = "I Learned it all in Fifteen Seconds"
 

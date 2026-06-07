@@ -2,7 +2,7 @@
 
 - **Song ID:** LR-SONG-011
 - **Status:** Draft starter pack
-- **Source link:** https://youtu.be/uOo30diDXOs
+- **Source link:** https://youtu.be/iPEilc2WO60
 
 ## Core narrative seed
 More Difference (Reprise) lives in Lily Roo's transmission universe as a scene-level artifact: one specific moment that reveals a bigger emotional system.

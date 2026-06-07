@@ -1,7 +1,7 @@
 # Dinner Table Tilt — Visual Pack
 
 - **Song ID:** LR-SONG-015
-- **Default thumb:** https://i.ytimg.com/vi/n6-vpeop_wc/hqdefault.jpg
+- **Default thumb:** /assets/albums/i-learned-it-all-in-fifteen-seconds/art/06-dinner-table-tilt.jpg
 
 ## Visual prompt set (starter)
 1. Cinematic still inspired by song title and emotional tone, indie folk-punk aesthetic.

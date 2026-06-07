@@ -2,7 +2,7 @@
 
 - **Song ID:** LR-SONG-018
 - **Status:** Draft starter pack
-- **Source link:** https://youtu.be/6TG-96QM_n0
+- **Source link:** https://youtu.be/aKKZu5vFe90
 
 ## Core narrative seed
 Yeah, I Play the Violin lives in Lily Roo's transmission universe as a scene-level artifact: one specific moment that reveals a bigger emotional system.

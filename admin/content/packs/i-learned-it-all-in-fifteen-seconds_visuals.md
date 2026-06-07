@@ -1,8 +1,8 @@
 # I Learned It All in Fifteen Seconds — Visual Pack
 
 - **Song ID:** LR-SONG-012
-- **Approved cover art:** /assets/img/i-learned-it-all-in-fifteen-seconds-cover.jpg
-- **YouTube thumbnail:** /assets/yt/Hve5drBlN58-custom-thumbnail.jpg
+- **Approved cover art:** /assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg
+- **YouTube thumbnail:** /assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg
 
 ## Visual prompt set (starter)
 1. Cinematic still inspired by song title and emotional tone, indie folk-punk aesthetic.

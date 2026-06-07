@@ -1,7 +1,7 @@
 # Sliding Out of Bed — Visual Pack
 
 - **Song ID:** LR-SONG-014
-- **Default thumb:** https://i.ytimg.com/vi/_A1vEHSYuyY/hqdefault.jpg
+- **Default thumb:** /assets/albums/i-learned-it-all-in-fifteen-seconds/art/05-sliding-out-of-bed.jpg
 
 ## Visual prompt set (starter)
 1. Cinematic still inspired by song title and emotional tone, indie folk-punk aesthetic.

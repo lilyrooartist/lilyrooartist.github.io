@@ -2,7 +2,7 @@
 
 - **Song ID:** LR-SONG-013
 - **Status:** Draft starter pack
-- **Source link:** https://youtu.be/_nxa0D-gqns
+- **Source link:** https://youtu.be/KTzM2WrKme4
 
 ## Core narrative seed
 Second Serve lives in Lily Roo's transmission universe as a scene-level artifact: one specific moment that reveals a bigger emotional system.

@@ -1,7 +1,7 @@
 # The Importance of Bearing Witness — Visual Pack
 
 - **Song ID:** LR-SONG-017
-- **Default thumb:** https://i.ytimg.com/vi/cVuK20aaJb8/hqdefault.jpg
+- **Default thumb:** /assets/albums/i-learned-it-all-in-fifteen-seconds/art/04-the-importance-of-bearing-witness.jpg
 
 ## Visual prompt set (starter)
 1. Cinematic still inspired by song title and emotional tone, indie folk-punk aesthetic.

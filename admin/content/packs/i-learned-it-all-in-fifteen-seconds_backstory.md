@@ -2,7 +2,7 @@
 
 - **Song ID:** LR-SONG-012
 - **Status:** Draft starter pack
-- **Source link:** https://youtu.be/Hve5drBlN58
+- **Source link:** https://youtu.be/g1XuXj8W3Vs
 
 ## Core narrative seed
 I Learned It All in Fifteen Seconds lives in Lily Roo's transmission universe as a scene-level artifact: one specific moment that reveals a bigger emotional system.

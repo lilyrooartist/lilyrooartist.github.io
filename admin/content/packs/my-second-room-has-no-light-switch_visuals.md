@@ -1,7 +1,7 @@
-# My Second Room Has No Lightswitch — Visual Pack
+# My Second Room Has No Light Switch — Visual Pack
 
 - **Song ID:** LR-SONG-016
-- **Default thumb:** https://i.ytimg.com/vi/k3VdR2FE0EI/hqdefault.jpg
+- **Default thumb:** /assets/albums/i-learned-it-all-in-fifteen-seconds/art/03-my-second-room-has-no-light-switch.jpg
 
 ## Visual prompt set (starter)
 1. Cinematic still inspired by song title and emotional tone, indie folk-punk aesthetic.

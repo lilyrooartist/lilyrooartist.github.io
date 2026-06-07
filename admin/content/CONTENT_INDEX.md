@@ -1,6 +1,6 @@
 # Lily Roo Content Index
 
-Generated: `2026-06-07T20:30:29.268509+00:00`
+Generated: `2026-06-07T20:52:12.941146+00:00`
 
 ## Snapshot
 
@@ -63,7 +63,7 @@ Generated: `2026-06-07T20:30:29.268509+00:00`
 - **Second Serve** (`LR-SONG-013`): Foundational / Draft / complete
 - **Sliding Out of Bed** (`LR-SONG-014`): Archive / Draft / complete
 - **Dinner Table Tilt** (`LR-SONG-015`): Archive / Draft / complete
-- **My Second Room Has No Lightswitch** (`LR-SONG-016`): Archive / Draft / complete
+- **My Second Room Has No Light Switch** (`LR-SONG-016`): Archive / Draft / complete
 - **The Importance of Bearing Witness** (`LR-SONG-017`): Archive / Draft / complete
 - **Yeah, I Play the Violin** (`LR-SONG-018`): Archive / Draft / complete
 

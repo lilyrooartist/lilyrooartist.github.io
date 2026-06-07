@@ -2,7 +2,7 @@
 
 - **Song ID:** LR-SONG-017
 - **Status:** Draft starter pack
-- **Source link:** https://youtu.be/cVuK20aaJb8
+- **Source link:** https://youtu.be/nZkTunrTbv4
 
 ## Core narrative seed
 The Importance of Bearing Witness lives in Lily Roo's transmission universe as a scene-level artifact: one specific moment that reveals a bigger emotional system.

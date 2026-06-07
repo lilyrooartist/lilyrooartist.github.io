@@ -1,7 +1,7 @@
 # Yeah, I Play the Violin — Visual Pack
 
 - **Song ID:** LR-SONG-018
-- **Default thumb:** https://i.ytimg.com/vi/6TG-96QM_n0/hqdefault.jpg
+- **Default thumb:** /assets/albums/i-learned-it-all-in-fifteen-seconds/art/07-yeah-i-play-the-violin.jpg
 
 ## Visual prompt set (starter)
 1. Cinematic still inspired by song title and emotional tone, indie folk-punk aesthetic.
