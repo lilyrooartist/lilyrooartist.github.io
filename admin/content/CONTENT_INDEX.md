@@ -1,6 +1,6 @@
 # Lily Roo Content Index
 
-Generated: `2026-06-06T02:19:46.529795+00:00`
+Generated: `2026-06-07T16:00:10.410573+00:00`
 
 ## Snapshot
 
@@ -9,8 +9,8 @@ Generated: `2026-06-06T02:19:46.529795+00:00`
 - Quips: **22**
 - Anecdotes: **25**
 - Queue posts: **9**
-- Published log rows: **15**
-- Weekly report: **2026-05-30 to 2026-06-05**
+- Published log rows: **17**
+- Weekly report: **2026-06-01 to 2026-06-07**
 
 ## Queue Mix
 

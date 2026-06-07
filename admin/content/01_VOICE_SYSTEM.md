@@ -39,7 +39,8 @@ Anchor lines:
 - "I have lived a thousand lives alone."
 
 CTA:
-- Pre-save: `https://distrokid.com/hyperfollow/lilyroo/i-learned-it-all-in-fifteen-seconds`
+- Stream: `https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi`
+- Apple Music: `https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249`
 - Subscribe ask every 2-3 posts: "Help us hit 1,000 on YouTube."
 
 ## Reusable formulas

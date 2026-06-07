@@ -22,7 +22,7 @@ This folder is the working content brain for Lily Roo admin operations. Keep the
 - Write queued posts as Lily posting directly unless the platform or page is explicitly editorial.
 - Keep each song's backstory pack paired with a visual pack.
 - Add one concrete object, scene, or lyric anchor before adding abstract brand language.
-- Every 2-3 queued posts should include a real conversion ask: pre-save, watch, subscribe, or visit the archive.
+- Every 2-3 queued posts should include a real conversion ask: stream, watch, subscribe, or visit the archive.
 - Regenerate generated artifacts after content changes:
 
 ```bash

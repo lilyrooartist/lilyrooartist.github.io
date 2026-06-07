@@ -453,7 +453,7 @@
 <script type="text/plain" id="embedded-weekly-report"># Weekly Social Report — Lily Roo
 
 **Period:** 2026-06-01 to 2026-06-07
-**Last updated:** 2026-06-07 11:48 AM EDT
+**Last updated:** 2026-06-07 12:00 PM EDT
 
 ## KPI Goal
 - Primary growth target: **1,000 YouTube subscribers** (monetization milestone)
@@ -467,6 +467,10 @@
 - API status: **YouTube OAuth refresh token invalid_grant; run scripts/youtube_oauth_browser_helper.py and redeploy/push the refreshed token**
 - Public RSS recent-video views: **1012 across 15 videos**
 - Latest public upload: **13 - Lily Roo** (64 views)
+- Title-track video: https://www.youtube.com/watch?v=Hve5drBlN58
+- Title-track public title: **I Learned it all in Fifteen Seconds**
+- Official title: **I Learned It All in Fifteen Seconds**
+- Title-track title status: **needs title capitalization update**
 
 ### Spotify
 - First single: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi
@@ -510,6 +514,8 @@
 - Snapshot file: `data/live_social_metrics.json`
 - YouTube public RSS captured: **2026-06-05T16:52:32.267181Z**
 - YouTube public snapshot file: `data/youtube_public_snapshot.json`
+- YouTube title-track captured: **2026-06-07T16:00:10.355866Z**
+- YouTube title-track snapshot file: `data/youtube_title_track_snapshot.json`
 - Spotify public release captured: **2026-06-07T15:47:02.822108Z**
 - Spotify snapshot file: `data/spotify_release_snapshot.json`
 - Apple Music public release captured: **2026-06-07T15:47:03.558748Z**
@@ -527,6 +533,7 @@
 
 ## Reporting cadence
 - Capture YouTube public video views: `python3 scripts/capture_youtube_public.py`
+- Capture YouTube title-track public metadata: `python3 scripts/capture_youtube_title_track.py`
 - Capture Spotify public release metadata: `python3 scripts/capture_spotify_release.py`
 - Capture Apple Music public release metadata: `python3 scripts/capture_apple_music_release.py`
 - Capture live API metrics: `python3 scripts/capture_live_metrics.py`
