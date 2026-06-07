@@ -11,7 +11,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 OUT = REPO_ROOT / "data" / "youtube_music_release_snapshot.json"
-VIDEO_ID = "g1XuXj8W3Vs"
+VIDEO_ID = "vK0mDIW65o4"
 OFFICIAL_TITLE = "I Learned It All in Fifteen Seconds"
 CANONICAL_YOUTUBE_TITLE = f"{OFFICIAL_TITLE} - Lily Roo"
 YOUTUBE_MUSIC_URL = f"https://music.youtube.com/watch?v={VIDEO_ID}"

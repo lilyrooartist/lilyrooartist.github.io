@@ -2,7 +2,7 @@
 
 - **Song ID:** LR-SONG-015
 - **Status:** Draft starter pack
-- **Source link:** https://youtu.be/kOECPc1ghTc
+- **Source link:** https://youtu.be/1K-vn5JABKg
 
 ## Core narrative seed
 Dinner Table Tilt lives in Lily Roo's transmission universe as a scene-level artifact: one specific moment that reveals a bigger emotional system.

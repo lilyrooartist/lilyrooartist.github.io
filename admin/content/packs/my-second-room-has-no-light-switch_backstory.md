@@ -2,7 +2,7 @@
 
 - **Song ID:** LR-SONG-016
 - **Status:** Draft starter pack
-- **Source link:** https://youtu.be/PUYKobQ0-ac
+- **Source link:** https://youtu.be/e58VZ-uT9K8
 
 ## Core narrative seed
 My Second Room Has No Light Switch lives in Lily Roo's transmission universe as a scene-level artifact: one specific moment that reveals a bigger emotional system.

@@ -11,8 +11,8 @@ OUT = ROOT / "data" / "first_single_alignment_audit.json"
 OFFICIAL_TITLE = "I Learned It All in Fifteen Seconds"
 SPOTIFY_URL = "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi"
 APPLE_URL = "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249"
-YOUTUBE_URL = "https://www.youtube.com/watch?v=g1XuXj8W3Vs"
-YOUTUBE_MUSIC_URL = "https://music.youtube.com/watch?v=g1XuXj8W3Vs"
+YOUTUBE_URL = "https://www.youtube.com/watch?v=vK0mDIW65o4"
+YOUTUBE_MUSIC_URL = "https://music.youtube.com/watch?v=vK0mDIW65o4"
 
 
 def read_json(path: str) -> dict:

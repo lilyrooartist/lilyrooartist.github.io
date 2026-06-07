@@ -2,7 +2,7 @@
 
 - **Song ID:** LR-SONG-014
 - **Status:** Draft starter pack
-- **Source link:** https://youtu.be/PWZL_UXaW_k
+- **Source link:** https://youtu.be/x__RCfMP3h8
 
 ## Core narrative seed
 Sliding Out of Bed lives in Lily Roo's transmission universe as a scene-level artifact: one specific moment that reveals a bigger emotional system.

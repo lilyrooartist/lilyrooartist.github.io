@@ -13,7 +13,7 @@ Primary KPI: **reach 1,000 YouTube subscribers**.
 ## Current Release Link
 - **I Learned It All in Fifteen Seconds** Spotify: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi
 - **I Learned It All in Fifteen Seconds** Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249
-- **I Learned It All in Fifteen Seconds** YouTube Music: https://music.youtube.com/watch?v=g1XuXj8W3Vs
+- **I Learned It All in Fifteen Seconds** YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4
 - HyperFollow fallback: https://distrokid.com/hyperfollow/lilyroo/i-learned-it-all-in-fifteen-seconds
 - Use Spotify as the primary website/social CTA now that the single is live. Use Apple Music and YouTube Music as secondary streaming links; keep HyperFollow only when one cross-platform landing page is useful.
 - Cover art line: "remastered 3000 x 3000 album art, because tiny-room songs deserve big-frame treatment."

@@ -1,7 +1,7 @@
 # Weekly Social Report — Lily Roo
 
 **Period:** 2026-06-01 to 2026-06-07
-**Last updated:** 2026-06-07 04:52 PM EDT
+**Last updated:** 2026-06-07 05:39 PM EDT
 
 ## KPI Goal
 - Primary growth target: **1,000 YouTube subscribers** (monetization milestone)
@@ -15,13 +15,13 @@
 - API status: **live API**
 - Public RSS recent-video views: **1012 across 15 videos**
 - Latest public upload: **13 - Lily Roo** (64 views)
-- Title-track video: https://www.youtube.com/watch?v=g1XuXj8W3Vs
+- Title-track video: https://www.youtube.com/watch?v=vK0mDIW65o4
 - Title-track public title: **I Learned It All in Fifteen Seconds - Lily Roo**
 - Official title: **I Learned It All in Fifteen Seconds**
 - Title-track title status: **matches official title**
 
 ### YouTube Music
-- First single: https://music.youtube.com/watch?v=g1XuXj8W3Vs
+- First single: https://music.youtube.com/watch?v=vK0mDIW65o4
 - Public release check: **I Learned It All in Fifteen Seconds - Lily Roo**
 - Title status: **matches official title**
 
@@ -77,13 +77,13 @@
 - Snapshot file: `data/live_social_metrics.json`
 - YouTube public RSS captured: **2026-06-05T16:52:32.267181Z**
 - YouTube public snapshot file: `data/youtube_public_snapshot.json`
-- YouTube title-track captured: **2026-06-07T20:52:12.514543Z**
+- YouTube title-track captured: **2026-06-07T21:39:01.715121Z**
 - YouTube title-track snapshot file: `data/youtube_title_track_snapshot.json`
-- YouTube Music public release captured: **2026-06-07T20:52:12.822174Z**
+- YouTube Music public release captured: **2026-06-07T21:39:01.838117Z**
 - YouTube Music snapshot file: `data/youtube_music_release_snapshot.json`
 - HyperFollow stores captured: **2026-06-07T20:51:14.275569Z**
 - HyperFollow snapshot file: `data/hyperfollow_store_links_snapshot.json`
-- First single alignment audit captured: **2026-06-07T20:52:12.874465Z**
+- First single alignment audit captured: **2026-06-07T21:39:03.668040Z**
 - First single alignment audit file: `data/first_single_alignment_audit.json`
 - Spotify public release captured: **2026-06-07T16:51:57.554497Z**
 - Spotify snapshot file: `data/spotify_release_snapshot.json`

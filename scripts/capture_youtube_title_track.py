@@ -9,7 +9,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 OUT = REPO_ROOT / "data" / "youtube_title_track_snapshot.json"
-VIDEO_ID = "g1XuXj8W3Vs"
+VIDEO_ID = "vK0mDIW65o4"
 OFFICIAL_TITLE = "I Learned It All in Fifteen Seconds"
 CANONICAL_YOUTUBE_TITLE = f"{OFFICIAL_TITLE} - Lily Roo"
 OEMBED_URL = "https://www.youtube.com/oembed"

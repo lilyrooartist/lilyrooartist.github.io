@@ -74,7 +74,7 @@ youtube_latest_title = youtube_latest.get('title') or 'pending'
 youtube_latest_views = youtube_latest.get('views', 'pending')
 youtube_public_time = youtube_public.get('updated_at') or 'not captured'
 youtube_title_track_time = youtube_title_track.get('updated_at') or 'not captured'
-youtube_title_track_url = youtube_title_track.get('url') or 'https://www.youtube.com/watch?v=g1XuXj8W3Vs'
+youtube_title_track_url = youtube_title_track.get('url') or 'https://www.youtube.com/watch?v=vK0mDIW65o4'
 youtube_public_title = youtube_title_track.get('public_title') or 'pending'
 youtube_official_title = youtube_title_track.get('official_title') or 'I Learned It All in Fifteen Seconds'
 youtube_title_match = youtube_title_track.get('title_matches_official')
