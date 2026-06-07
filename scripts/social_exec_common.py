@@ -160,6 +160,8 @@ def cta_type(text: str) -> str:
     lower = (text or '').lower()
     if 'youtu' in lower:
         return 'youtube_link'
+    if 'distrokid.com/hyperfollow' in lower:
+        return 'hyperfollow_link'
     if 'open.spotify.com' in lower or 'spotify:' in lower:
         return 'spotify_link'
     if 'lilyroo.com' in lower:

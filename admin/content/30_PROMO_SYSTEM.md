@@ -11,8 +11,8 @@ Primary KPI: **reach 1,000 YouTube subscribers**.
 4. **Archive** (log every post + URL + performance note)
 
 ## Current Release Link
-- **I Learned It All in Fifteen Seconds** live on Spotify: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi
-- Use Spotify as the primary release CTA now that the first single is live.
+- **I Learned It All in Fifteen Seconds** HyperFollow: https://distrokid.com/hyperfollow/lilyroo/i-learned-it-all-in-fifteen-seconds
+- Use HyperFollow as the primary website/social CTA so listeners have one shareable destination.
 - Cover art line: "remastered 3000 x 3000 album art, because tiny-room songs deserve big-frame treatment."
 - Copy line: "live now. i learned it all in fifteen seconds and somehow still have homework."
 
