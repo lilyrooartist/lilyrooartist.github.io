@@ -17,6 +17,7 @@ SPOTIFY_SNAPSHOT = ROOT / "data" / "spotify_release_snapshot.json"
 APPLE_MUSIC_SNAPSHOT = ROOT / "data" / "apple_music_release_snapshot.json"
 YOUTUBE_PUBLIC = ROOT / "data" / "youtube_public_snapshot.json"
 YOUTUBE_TITLE_TRACK = ROOT / "data" / "youtube_title_track_snapshot.json"
+YOUTUBE_MUSIC_SNAPSHOT = ROOT / "data" / "youtube_music_release_snapshot.json"
 REPORT = ROOT / "admin" / "reports" / "weekly-social-report.md"
 INDEX = CONTENT / "content_index.json"
 
@@ -158,6 +159,17 @@ def validate_generated_outputs(failures):
             fail("youtube_title_track_snapshot.json missing public_title or url", failures)
     else:
         fail("youtube_title_track_snapshot.json missing; run scripts/capture_youtube_title_track.py", failures)
+    if YOUTUBE_MUSIC_SNAPSHOT.exists():
+        snapshot = json.loads(YOUTUBE_MUSIC_SNAPSHOT.read_text(encoding="utf-8"))
+        if snapshot.get("ok") and snapshot.get("public_title") and snapshot.get("release_url"):
+            if snapshot.get("title_matches_official") is True:
+                ok("YouTube Music release title matches official title")
+            else:
+                ok(f"YouTube Music snapshot captured mirrored title mismatch: {snapshot.get('public_title')}")
+        else:
+            fail("youtube_music_release_snapshot.json missing public_title or release_url", failures)
+    else:
+        fail("youtube_music_release_snapshot.json missing; run scripts/capture_youtube_music_release.py", failures)
 
 
 def validate_report(failures):

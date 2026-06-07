@@ -11,6 +11,7 @@ SPOTIFY_SNAPSHOT = ROOT / 'data' / 'spotify_release_snapshot.json'
 APPLE_MUSIC_SNAPSHOT = ROOT / 'data' / 'apple_music_release_snapshot.json'
 YOUTUBE_PUBLIC = ROOT / 'data' / 'youtube_public_snapshot.json'
 YOUTUBE_TITLE_TRACK = ROOT / 'data' / 'youtube_title_track_snapshot.json'
+YOUTUBE_MUSIC_SNAPSHOT = ROOT / 'data' / 'youtube_music_release_snapshot.json'
 PUBLISHED = ROOT / 'admin' / 'content' / 'Published_Log.csv'
 ADMIN_INDEX = ROOT / 'admin' / 'index.html'
 
@@ -31,6 +32,7 @@ spotify_snapshot = json.loads(SPOTIFY_SNAPSHOT.read_text(encoding='utf-8')) if S
 apple_music_snapshot = json.loads(APPLE_MUSIC_SNAPSHOT.read_text(encoding='utf-8')) if APPLE_MUSIC_SNAPSHOT.exists() else {}
 youtube_public = json.loads(YOUTUBE_PUBLIC.read_text(encoding='utf-8')) if YOUTUBE_PUBLIC.exists() else {}
 youtube_title_track = json.loads(YOUTUBE_TITLE_TRACK.read_text(encoding='utf-8')) if YOUTUBE_TITLE_TRACK.exists() else {}
+youtube_music_snapshot = json.loads(YOUTUBE_MUSIC_SNAPSHOT.read_text(encoding='utf-8')) if YOUTUBE_MUSIC_SNAPSHOT.exists() else {}
 youtube = manual.get('youtube', {})
 spotify = manual.get('spotify', {})
 live_platforms = live.get('platforms', {}) if isinstance(live, dict) else {}
@@ -73,6 +75,11 @@ youtube_public_title = youtube_title_track.get('public_title') or 'pending'
 youtube_official_title = youtube_title_track.get('official_title') or 'I Learned It All in Fifteen Seconds'
 youtube_title_match = youtube_title_track.get('title_matches_official')
 youtube_title_status = 'matches official title' if youtube_title_match is True else 'needs title capitalization update'
+youtube_music_release_url = youtube_music_snapshot.get('release_url') or 'pending'
+youtube_music_public_title = youtube_music_snapshot.get('public_title') or 'pending'
+youtube_music_title_match = youtube_music_snapshot.get('title_matches_official')
+youtube_music_title_status = 'matches official title' if youtube_music_title_match is True else 'mirrors YouTube title capitalization mismatch'
+youtube_music_snapshot_time = youtube_music_snapshot.get('updated_at') or 'not captured'
 spotify_release_url = spotify.get('release_url', 'pending')
 spotify_artist_url = spotify.get('artist_url') or spotify_snapshot.get('artist_url') or 'pending'
 spotify_artist_followers = spotify.get('artist_followers', 'pending')
@@ -124,6 +131,11 @@ md = f'''# Weekly Social Report — Lily Roo
 - Official title: **{youtube_official_title}**
 - Title-track title status: **{youtube_title_status}**
 
+### YouTube Music
+- First single: {youtube_music_release_url}
+- Public release check: **{youtube_music_public_title}**
+- Title status: **{youtube_music_title_status}**
+
 ### Spotify
 - First single: {spotify_release_url}
 - Artist profile: {spotify_artist_url}
@@ -168,6 +180,8 @@ md = f'''# Weekly Social Report — Lily Roo
 - YouTube public snapshot file: `data/youtube_public_snapshot.json`
 - YouTube title-track captured: **{youtube_title_track_time}**
 - YouTube title-track snapshot file: `data/youtube_title_track_snapshot.json`
+- YouTube Music public release captured: **{youtube_music_snapshot_time}**
+- YouTube Music snapshot file: `data/youtube_music_release_snapshot.json`
 - Spotify public release captured: **{spotify_snapshot_time}**
 - Spotify snapshot file: `data/spotify_release_snapshot.json`
 - Apple Music public release captured: **{apple_music_snapshot_time}**
@@ -186,6 +200,7 @@ md = f'''# Weekly Social Report — Lily Roo
 ## Reporting cadence
 - Capture YouTube public video views: `python3 scripts/capture_youtube_public.py`
 - Capture YouTube title-track public metadata: `python3 scripts/capture_youtube_title_track.py`
+- Capture YouTube Music public release metadata: `python3 scripts/capture_youtube_music_release.py`
 - Capture Spotify public release metadata: `python3 scripts/capture_spotify_release.py`
 - Capture Apple Music public release metadata: `python3 scripts/capture_apple_music_release.py`
 - Capture live API metrics: `python3 scripts/capture_live_metrics.py`
