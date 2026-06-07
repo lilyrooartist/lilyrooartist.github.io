@@ -1,7 +1,7 @@
 # Weekly Social Report — Lily Roo
 
 **Period:** 2026-06-01 to 2026-06-07
-**Last updated:** 2026-06-07 12:17 PM EDT
+**Last updated:** 2026-06-07 12:22 PM EDT
 
 ## KPI Goal
 - Primary growth target: **1,000 YouTube subscribers** (monetization milestone)
@@ -24,6 +24,11 @@
 - First single: https://music.youtube.com/watch?v=Hve5drBlN58
 - Public release check: **I Learned it all in Fifteen Seconds**
 - Title status: **mirrors YouTube title capitalization mismatch**
+
+### Other Stores
+- HyperFollow: https://distrokid.com/hyperfollow/lilyroo/i-learned-it-all-in-fifteen-seconds
+- HyperFollow stores: **applemusic, itunes, spotify**
+- Amazon Music: **pending verified public URL; not exposed by current HyperFollow store list**
 
 ### Spotify
 - First single: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi
@@ -71,6 +76,8 @@
 - YouTube title-track snapshot file: `data/youtube_title_track_snapshot.json`
 - YouTube Music public release captured: **2026-06-07T16:14:39.071668Z**
 - YouTube Music snapshot file: `data/youtube_music_release_snapshot.json`
+- HyperFollow stores captured: **2026-06-07T16:20:46.115233Z**
+- HyperFollow snapshot file: `data/hyperfollow_store_links_snapshot.json`
 - Spotify public release captured: **2026-06-07T16:13:08.005354Z**
 - Spotify snapshot file: `data/spotify_release_snapshot.json`
 - Apple Music public release captured: **2026-06-07T16:13:08.522998Z**
@@ -90,6 +97,7 @@
 - Capture YouTube public video views: `python3 scripts/capture_youtube_public.py`
 - Capture YouTube title-track public metadata: `python3 scripts/capture_youtube_title_track.py`
 - Capture YouTube Music public release metadata: `python3 scripts/capture_youtube_music_release.py`
+- Capture HyperFollow store links: `python3 scripts/capture_hyperfollow_store_links.py`
 - Capture Spotify public release metadata: `python3 scripts/capture_spotify_release.py`
 - Capture Apple Music public release metadata: `python3 scripts/capture_apple_music_release.py`
 - Capture live API metrics: `python3 scripts/capture_live_metrics.py`

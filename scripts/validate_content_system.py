@@ -18,6 +18,7 @@ APPLE_MUSIC_SNAPSHOT = ROOT / "data" / "apple_music_release_snapshot.json"
 YOUTUBE_PUBLIC = ROOT / "data" / "youtube_public_snapshot.json"
 YOUTUBE_TITLE_TRACK = ROOT / "data" / "youtube_title_track_snapshot.json"
 YOUTUBE_MUSIC_SNAPSHOT = ROOT / "data" / "youtube_music_release_snapshot.json"
+HYPERFOLLOW_SNAPSHOT = ROOT / "data" / "hyperfollow_store_links_snapshot.json"
 REPORT = ROOT / "admin" / "reports" / "weekly-social-report.md"
 INDEX = CONTENT / "content_index.json"
 
@@ -170,6 +171,15 @@ def validate_generated_outputs(failures):
             fail("youtube_music_release_snapshot.json missing public_title or release_url", failures)
     else:
         fail("youtube_music_release_snapshot.json missing; run scripts/capture_youtube_music_release.py", failures)
+    if HYPERFOLLOW_SNAPSHOT.exists():
+        snapshot = json.loads(HYPERFOLLOW_SNAPSHOT.read_text(encoding="utf-8"))
+        stores = snapshot.get("stores") or []
+        if snapshot.get("ok") and stores:
+            ok(f"HyperFollow store snapshot has {', '.join(stores)}")
+        else:
+            fail("hyperfollow_store_links_snapshot.json missing store links", failures)
+    else:
+        fail("hyperfollow_store_links_snapshot.json missing; run scripts/capture_hyperfollow_store_links.py", failures)
 
 
 def validate_report(failures):
