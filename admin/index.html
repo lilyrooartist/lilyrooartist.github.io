@@ -28,7 +28,9 @@
     .btn.secondary{background:#20365f;color:#dce8ff;border:1px solid #416095}
     .btn.ghost{background:#111827;color:#cfd7ef;border:1px solid #303856}
     .btn:disabled{background:#3a4055;color:#9ba3bf;cursor:not-allowed}
-    .btn.is-working{background:#244dcc;color:#fff}
+    .btn.is-working{background:#244dcc;color:#fff;cursor:progress}
+    .btn.is-working::before{content:"";width:11px;height:11px;border-radius:50%;border:2px solid rgba(255,255,255,.38);border-top-color:#fff;animation:spin .8s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
     .exec-feedback{margin-top:8px;border:1px solid #303856;border-radius:10px;padding:8px 9px;font-size:12px;line-height:1.35;background:#111827;color:#c7d0ea}
     .exec-feedback[hidden]{display:none}
     .exec-feedback.working{border-color:#416095;background:#14203a;color:#dce8ff}
@@ -96,6 +98,7 @@
     .status-chip.warn{background:#3a2a12;color:#ffd88a;border-color:#6c4b16}
     .status-chip.bad{background:#3b1820;color:#ffabb7;border-color:#74303d}
     .status-chip.neutral{background:#20263a;color:#c7d0ea;border-color:#37415f}
+    .status-chip.working{background:#14203a;color:#dce8ff;border-color:#416095}
     .report-alert{border:1px solid #6c4b16;background:#2a2115;color:#ffd88a;border-radius:12px;padding:11px 12px;font-size:13px}
     .report-alert[hidden]{display:none}
     .metric-grid{display:grid;grid-template-columns:repeat(5,minmax(145px,1fr));gap:12px}
@@ -1685,6 +1688,10 @@
     feedback.textContent='';
   }
 
+  function nextPaint(){
+    return new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
+  }
+
   Promise.all([
     fetch(`/admin/future-posts.json?v=${Date.now()}`, {cache:'no-store'}).then(r=>r.json()),
     readinessPromise,
@@ -1717,9 +1724,9 @@
       <div class="label"><b>Imagery</b>: ${escapeHtml(p.imagery||'')}</div>
       <div class="preview" data-role="preview-image"></div>
       <div class="preview" data-role="preview-clip"></div>
-      <div class="label" style="margin-top:10px"><button class="btn" data-role="redo">Redo</button> <button class="btn" data-role="exec"${disabled?' disabled':''}>${escapeHtml(execLabel)}</button></div>
+      <div class="label" style="margin-top:10px"><button class="btn" data-role="redo">Redo</button> <button class="btn" data-role="exec"${disabled?' disabled':''} aria-busy="false">${escapeHtml(execLabel)}</button></div>
       <div class="label muted" data-role="exec-hint">Uses website executor: ${escapeHtml(executorUrl)}${mediaKey?` · media key: ${escapeHtml(mediaKey)}`:''}${opState.message?` · ${escapeHtml(opState.message)}`:''}</div>
-      <div class="exec-feedback" data-role="exec-feedback" hidden></div>`;
+      <div class="exec-feedback" data-role="exec-feedback" aria-live="polite" hidden></div>`;
       renderImagePreview(d.querySelector('[data-role="preview-image"]'),p);
       renderClipPreview(d.querySelector('[data-role="preview-clip"]'),p);
       d.querySelector('[data-role="redo"]').addEventListener('click',()=>{
@@ -1737,12 +1744,17 @@
         const execBtn=d.querySelector('[data-role="exec"]');
         const redoBtn=d.querySelector('[data-role="redo"]');
         const originalExecText=execBtn.textContent;
+        const statusEl=d.querySelector('[data-role="status"]');
+        const previousStatusClass=statusEl.className;
         execBtn.disabled=true;
         redoBtn.disabled=true;
         execBtn.classList.add('is-working');
         execBtn.textContent='Publishing...';
-        d.querySelector('[data-role="status"]').textContent='posting';
+        execBtn.setAttribute('aria-busy','true');
+        statusEl.textContent='Publishing';
+        statusEl.className='status-chip working';
         setExecuteFeedback(d,'working',`Publishing ${p.platform || 'post'} now...`);
+        await nextPaint();
         try{
           const readyNow=platformReadiness(p.platform);
           if(readyNow.ready===false) throw new Error(readyNow.message);
@@ -1750,19 +1762,21 @@
           localStorage.setItem(statusKey,'posted');
           const postedUrl=result.tweet_url||result.video_url||result.post_url||result.media_id||result.publish_id||'';
           if(postedUrl) localStorage.setItem(`posted_url_${postFingerprint(p,currentText)}`,postedUrl);
-          const statusEl=d.querySelector('[data-role="status"]');
           statusEl.textContent='Posted';
           statusEl.className='status-chip ok';
           setExecuteFeedback(d,'success',`Published successfully${result.platform?` to ${result.platform}`:''}.`,postedUrl);
           execBtn.classList.remove('is-working');
+          execBtn.setAttribute('aria-busy','false');
           execBtn.textContent='Published';
           return;
         }catch(err){
-          d.querySelector('[data-role="status"]').textContent=previousStatus;
+          statusEl.textContent=previousStatus;
+          statusEl.className=previousStatusClass;
           setExecuteFeedback(d,'error',`Social executor failed: ${err.message}`);
           execBtn.disabled=false;
           redoBtn.disabled=false;
           execBtn.classList.remove('is-working');
+          execBtn.setAttribute('aria-busy','false');
           execBtn.textContent=originalExecText;
           return;
         }
