@@ -232,6 +232,7 @@ class Handler(BaseHTTPRequestHandler):
 <h1>YouTube OAuth Saved</h1>
 <div class="note ok">
   <p>Saved YouTube OAuth credentials to <code>{html.escape(str(YOUTUBE_ENV))}</code>.</p>
+  <p>Next, run <code>python3 scripts/update_youtube_video_title.py --apply</code> from the site repo to fix the first single title capitalization.</p>
   <p>You can close this tab.</p>
 </div>
 """))

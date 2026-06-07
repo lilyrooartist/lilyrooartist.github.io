@@ -53,7 +53,7 @@ def live_reason(platform):
 def status_text(reason):
     reason = str(reason or '').strip()
     if 'invalid_grant' in reason:
-        return 'YouTube OAuth refresh token invalid_grant; run scripts/youtube_oauth_browser_helper.py and redeploy/push the refreshed token'
+        return 'YouTube OAuth refresh token invalid_grant; run scripts/youtube_oauth_browser_helper.py, then run scripts/update_youtube_video_title.py --apply and redeploy/push the refreshed token'
     return reason or 'manual fallback'
 
 

@@ -18,8 +18,16 @@ UPLOAD_INIT_URL = 'https://www.googleapis.com/upload/youtube/v3/videos?uploadTyp
 def post_form(url: str, data: dict[str, str]) -> dict:
     body = urllib.parse.urlencode(data).encode('utf-8')
     req = urllib.request.Request(url, data=body, method='POST')
-    with urllib.request.urlopen(req) as resp:
-        return json.loads(resp.read().decode('utf-8'))
+    try:
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            return json.loads(resp.read().decode('utf-8'))
+    except urllib.error.HTTPError as exc:
+        raw = exc.read().decode('utf-8', errors='replace')
+        try:
+            payload = json.loads(raw)
+        except json.JSONDecodeError:
+            payload = {'error': raw}
+        raise RuntimeError(f'YouTube OAuth token request failed ({exc.code}): {json.dumps(payload, ensure_ascii=False)}') from exc
 
 
 def refresh_access_token(env: dict[str, str]) -> str:

@@ -1,7 +1,7 @@
 # Weekly Social Report — Lily Roo
 
 **Period:** 2026-06-01 to 2026-06-07
-**Last updated:** 2026-06-07 12:22 PM EDT
+**Last updated:** 2026-06-07 12:29 PM EDT
 
 ## KPI Goal
 - Primary growth target: **1,000 YouTube subscribers** (monetization milestone)
@@ -12,7 +12,7 @@
 - Subscribers: **6**
 - Last 28 days views: **109**
 - Last 28 days watch time: **3.4 hours**
-- API status: **YouTube OAuth refresh token invalid_grant; run scripts/youtube_oauth_browser_helper.py and redeploy/push the refreshed token**
+- API status: **YouTube OAuth refresh token invalid_grant; run scripts/youtube_oauth_browser_helper.py, then run scripts/update_youtube_video_title.py --apply and redeploy/push the refreshed token**
 - Public RSS recent-video views: **1012 across 15 videos**
 - Latest public upload: **13 - Lily Roo** (64 views)
 - Title-track video: https://www.youtube.com/watch?v=Hve5drBlN58
