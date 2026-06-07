@@ -1,19 +1,32 @@
 {
   "$schema": "../../node_modules/wrangler/config-schema.json",
   "name": "lilyroo-social-executor",
+  "account_id": "d66c04796bf11481f6af6ae78492bd63",
   "main": "src/index.js",
+  "workers_dev": false,
   "compatibility_date": "2026-06-05",
   "observability": {
     "enabled": true,
     "head_sampling_rate": 1
   },
   "vars": {
-    "ADMIN_PASSWORD": "WhenLilyTalks",
     "ALLOWED_ORIGIN": "https://www.lilyroo.com,https://lilyroo.com,https://lilyrooartist.github.io,http://127.0.0.1:4177,http://localhost:4177",
     "META_GRAPH_VERSION": "v25.0",
     "TIKTOK_IS_AIGC": "true",
+    "TIKTOK_PUBLIC_POSTING_APPROVED": "false",
     "YOUTUBE_PRIVACY_STATUS": "public"
   },
+  "triggers": {
+    "crons": [
+      "*/15 * * * *"
+    ]
+  },
+  "kv_namespaces": [
+    {
+      "binding": "SOCIAL_EXECUTOR_STATE",
+      "id": "2896a2e6a88347bdbf63b2931fe252be"
+    }
+  ],
   "routes": [
     {
       "pattern": "www.lilyroo.com/api/social/*",

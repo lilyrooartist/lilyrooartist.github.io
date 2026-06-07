@@ -219,6 +219,7 @@ npx wrangler deploy --config workers/social-executor/wrangler.jsonc
 Set Worker secrets:
 
 ```bash
+npx wrangler secret put ADMIN_PASSWORD --config workers/social-executor/wrangler.jsonc
 npx wrangler secret put EXECUTOR_BEARER_TOKEN --config workers/social-executor/wrangler.jsonc
 npx wrangler secret put META_LONG_LIVED_TOKEN --config workers/social-executor/wrangler.jsonc
 npx wrangler secret put IG_ACCESS_TOKEN --config workers/social-executor/wrangler.jsonc
@@ -236,8 +237,18 @@ npx wrangler secret put SOCIAL_MEDIA_MAP_JSON --config workers/social-executor/w
 Or push selected values from the local gitignored secret files:
 
 ```bash
-python3 scripts/push_social_worker_secrets.py X_USER_ACCESS_TOKEN
+python3 scripts/push_social_worker_secrets.py ADMIN_PASSWORD X_USER_ACCESS_TOKEN TIKTOK_ACCESS_TOKEN
 ```
+
+Create the scheduler state namespace before turning on deploys from this checkout:
+
+```bash
+npx wrangler kv namespace create SOCIAL_EXECUTOR_STATE --config workers/social-executor/wrangler.jsonc
+```
+
+Copy the returned namespace id into `workers/social-executor/wrangler.jsonc` as a `kv_namespaces` binding named `SOCIAL_EXECUTOR_STATE`. The scheduler refuses to post without this binding so it cannot duplicate posts without idempotency state.
+
+If Wrangler returns Cloudflare authentication code `10000`, run `npx wrangler login` with the Cloudflare account that owns the `lilyroo-social-executor` Worker and `lilyroo.com` zone, then rerun the secret/KV commands.
 
 For X image upload fallback, also set OAuth 1.0a credentials:
 
@@ -267,6 +278,35 @@ Example `SOCIAL_MEDIA_MAP_JSON` value for website-hosted media. Keep upload medi
 ```
 
 TikTok and YouTube need a public direct video URL, either in the queue `clip_url` column or in `SOCIAL_MEDIA_MAP_JSON`.
+
+The guarded scheduler runs every 15 minutes after deploy. It only posts queue rows with `approved=yes`, `execution_mode=auto`, an executable `post_type`, and passing platform readiness. Rows marked `execution_mode=manual` are copy-ready only.
+
+TikTok auto-posting is additionally blocked unless:
+- `TIKTOK_ACCESS_TOKEN` is set.
+- `TIKTOK_PUBLIC_POSTING_APPROVED=true` is intentionally set for the Worker.
+- TikTok creator info includes `PUBLIC_TO_EVERYONE`.
+
+After a TikTok submit returns `publish_id`, check processing status:
+
+```bash
+curl "https://www.lilyroo.com/api/social/tiktok/status?publish_id=$TIKTOK_PUBLISH_ID" \
+  -H "Authorization: Bearer $EXECUTOR_BEARER_TOKEN"
+```
+
+Scheduler dry-run:
+
+```bash
+curl -X POST https://www.lilyroo.com/api/social/scheduler/dry-run \
+  -H "X-Lilyroo-Admin-Password: $LILYROO_ADMIN_PASSWORD" \
+  -H "Content-Type: application/json" \
+  -d '{"dryRun":true}'
+```
+
+Export posted Worker execution records into the publishing log:
+
+```bash
+LILYROO_ADMIN_PASSWORD="$LILYROO_ADMIN_PASSWORD" python3 scripts/export_social_executions.py
+```
 
 ### X publishing
 

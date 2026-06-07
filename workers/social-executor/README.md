@@ -7,7 +7,10 @@ The public site is static GitHub Pages, so social API credentials must live in a
 - `GET /api/social/health`
 - `GET /api/social/readiness`
 - `GET /api/social/metrics`
+- `GET /api/social/executions`
+- `GET /api/social/tiktok/status?publish_id=...`
 - `POST /api/social/execute`
+- `POST /api/social/scheduler/dry-run`
 
 Deploy:
 
@@ -21,6 +24,8 @@ Cloudflare account that owns the existing `lilyroo-social-executor` service and
 `lilyroo.com` zone, then rerun the same deploy command.
 
 Required secrets are listed in `admin/content/18_OPS_RUNBOOK_DAILY_WEEKLY.md`.
+`ADMIN_PASSWORD` must be set as a Worker secret; it is intentionally not stored
+in `wrangler.jsonc`.
 
 Facebook publishing uses Meta Graph API `v25.0` by default. Override with the
 `META_GRAPH_VERSION` Worker var only when intentionally testing a different
@@ -44,7 +49,13 @@ Notes:
   monthly listeners, and artist followers should still be entered in
   `data/manual_social_stats.json` until Spotify for Artists export or another
   analytics source is connected.
+- The cron trigger runs every 15 minutes, but scheduled posting is disabled
+  until a KV namespace binding named `SOCIAL_EXECUTOR_STATE` exists. That state
+  is used for idempotency, attempts, success URLs, skip reasons, and errors.
 - TikTok and YouTube require a public direct video URL through `clip_url` or `SOCIAL_MEDIA_MAP_JSON`. Do not point video media at `/admin/*`; admin content is intended for signed-in browser use, so upload media must live under a public path such as `/assets/media/*`.
+- TikTok auto-posting additionally requires `TIKTOK_PUBLIC_POSTING_APPROVED=true`
+  and a creator privacy option of `PUBLIC_TO_EVERYONE`.
+- TikTok posts return a `publish_id`; use `GET /api/social/tiktok/status?publish_id=...` to fetch follow-up processing status.
 - X can post text/replies with `X_USER_ACCESS_TOKEN`. X media is only attached when a queue row provides an explicit media key; media upload uses OAuth 1.0a or pre-uploaded IDs in `X_MEDIA_MAP_JSON`.
 - The Worker route is configured for `www.lilyroo.com/api/social/*`.
 - `GET /api/social/health` is public. `GET /api/social/readiness`,

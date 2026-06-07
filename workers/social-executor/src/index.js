@@ -4,11 +4,15 @@ const X_USER_LOOKUP_URL = "https://api.x.com/2/users/me";
 const X_MEDIA_UPLOAD_URL = "https://upload.twitter.com/1.1/media/upload.json";
 const TIKTOK_CREATOR_INFO_URL = "https://open.tiktokapis.com/v2/post/publish/creator_info/query/";
 const TIKTOK_INIT_URL = "https://open.tiktokapis.com/v2/post/publish/video/init/";
+const TIKTOK_STATUS_URL = "https://open.tiktokapis.com/v2/post/publish/status/fetch/";
 const GOOGLE_TOKEN_URL = "https://oauth2.googleapis.com/token";
 const YOUTUBE_CHANNELS_URL = "https://www.googleapis.com/youtube/v3/channels";
 const YOUTUBE_ANALYTICS_REPORTS_URL = "https://youtubeanalytics.googleapis.com/v2/reports";
 const YOUTUBE_UPLOAD_INIT_URL = "https://www.googleapis.com/upload/youtube/v3/videos?uploadType=resumable&part=snippet,status";
 const SPOTIFY_OEMBED_URL = "https://open.spotify.com/oembed";
+const DEFAULT_QUEUE_URL = "https://www.lilyroo.com/admin/future-posts.json";
+const EXECUTION_STATE_PREFIX = "post:";
+const MAX_SCHEDULE_ATTEMPTS = 3;
 
 export default {
   async fetch(request, env, ctx) {
@@ -18,6 +22,12 @@ export default {
       console.error(JSON.stringify({ level: "error", message: error.message, stack: error.stack }));
       return jsonResponse({ ok: false, error: error.message || "Unknown error" }, 500, request, env);
     }
+  },
+  async scheduled(controller, env, ctx) {
+    ctx.waitUntil(runScheduledPosts(env, {
+      scheduledTime: controller.scheduledTime || Date.now(),
+      source: "cron",
+    }));
   },
 };
 
@@ -60,6 +70,43 @@ async function handleRequest(request, env) {
     return jsonResponse(await socialMetrics(env), 200, request, env);
   }
 
+  if (url.pathname === "/api/social/tiktok/status" && request.method === "GET") {
+    const authError = await authorizationError(request, env);
+    if (authError) {
+      return jsonResponse({ ok: false, error: authError.message }, authError.status, request, env);
+    }
+
+    const publishId = text(url.searchParams.get("publish_id"));
+    if (!publishId) {
+      return jsonResponse({ ok: false, error: "publish_id is required" }, 400, request, env);
+    }
+    return jsonResponse(await tiktokPublishStatus(env, publishId), 200, request, env);
+  }
+
+  if (url.pathname === "/api/social/executions" && request.method === "GET") {
+    const authError = await authorizationError(request, env);
+    if (authError) {
+      return jsonResponse({ ok: false, error: authError.message }, authError.status, request, env);
+    }
+
+    return jsonResponse(await executionStates(env), 200, request, env);
+  }
+
+  if (url.pathname === "/api/social/scheduler/dry-run" && request.method === "POST") {
+    const authError = await authorizationError(request, env);
+    if (authError) {
+      return jsonResponse({ ok: false, error: authError.message }, authError.status, request, env);
+    }
+
+    const payload = await request.json().catch(() => ({}));
+    const result = await runScheduledPosts(env, {
+      scheduledTime: payload.scheduledTime || Date.now(),
+      source: "dry-run",
+      dryRun: true,
+    });
+    return jsonResponse(result, 200, request, env);
+  }
+
   if (url.pathname !== "/api/social/execute" || request.method !== "POST") {
     return jsonResponse({ ok: false, error: "Not found" }, 404, request, env);
   }
@@ -70,27 +117,94 @@ async function handleRequest(request, env) {
   }
 
   const payload = await request.json();
-  const result = await executePost(payload, env);
+  const result = await executeAndRecord(payload, env, { source: "manual" });
   return jsonResponse(result, 200, request, env);
 }
 
-async function executePost(payload, env) {
-  const platform = text(payload.platform).toLowerCase();
-  const bodyText = text(payload.text);
-
-  if (!platform) throw new Error("platform is required");
-  if (!bodyText) throw new Error("text is required");
+async function executeAndRecord(payload, env, options = {}) {
+  const normalized = normalizePostPayload(payload);
+  const validation = await validateExecutablePost(normalized, env, options);
 
   if (payload.dryRun) {
     return {
       ok: true,
       dry_run: true,
-      platform: payload.platform,
-      post_id: payload.postId || "",
-      media_url: mediaUrl(payload, env),
-      media_key: payload.mediaKey || "",
+      executable: validation.executable,
+      status: validation.status,
+      reason: validation.reason,
+      platform: normalized.platform,
+      post_id: normalized.postId,
+      post_type: normalized.postType,
+      execution_mode: normalized.executionMode,
+      media_url: mediaUrl(normalized, env),
+      media_key: normalized.mediaKey,
     };
   }
+
+  if (!validation.executable) {
+    throw new Error(validation.reason || "Post is not executable");
+  }
+
+  const existing = normalized.postId ? await executionState(env, normalized.postId) : null;
+  if (existing?.status === "posted") {
+    return {
+      ok: true,
+      duplicate: true,
+      platform: existing.platform || normalized.platform,
+      post_id: normalized.postId,
+      post_url: existing.post_url || "",
+      state: existing,
+    };
+  }
+
+  const attempt = Number(existing?.attempts || 0) + 1;
+  if (options.source === "cron" && attempt > MAX_SCHEDULE_ATTEMPTS) {
+    await writeExecutionState(env, normalized.postId, {
+      ...existing,
+      post_id: normalized.postId,
+      platform: normalized.platform,
+      status: "failed",
+      reason: "max_attempts_exceeded",
+      attempts: attempt - 1,
+      updated_at: new Date().toISOString(),
+    });
+    throw new Error("max_attempts_exceeded");
+  }
+
+  try {
+    const result = await executePost(normalized, env, options);
+    if (normalized.postId) {
+      await writeExecutionState(env, normalized.postId, {
+        post_id: normalized.postId,
+        platform: result.platform || normalized.platform,
+        status: "posted",
+        attempts: attempt,
+        post_url: postUrlFromResult(result),
+        external_id: externalIdFromResult(result),
+        result,
+        updated_at: new Date().toISOString(),
+        source: options.source || "manual",
+      });
+    }
+    return result;
+  } catch (error) {
+    if (normalized.postId) {
+      await writeExecutionState(env, normalized.postId, {
+        post_id: normalized.postId,
+        platform: normalized.platform,
+        status: "failed",
+        attempts: attempt,
+        error: error.message || "Unknown error",
+        updated_at: new Date().toISOString(),
+        source: options.source || "manual",
+      });
+    }
+    throw error;
+  }
+}
+
+async function executePost(payload, env, options = {}) {
+  const platform = text(payload.platform).toLowerCase();
 
   if (platform === "x" || platform.startsWith("x")) return postX(payload, env);
   if (platform.includes("instagram")) return postInstagram(payload, env);
@@ -99,6 +213,239 @@ async function executePost(payload, env) {
   if (platform.includes("youtube")) return postYouTube(payload, env);
 
   throw new Error(`Unsupported platform: ${payload.platform || ""}`);
+}
+
+async function runScheduledPosts(env, options = {}) {
+  const store = executionStore(env);
+  if (!store && !options.dryRun) {
+    return { ok: false, error: "SOCIAL_EXECUTOR_STATE KV binding is required for scheduled posting" };
+  }
+
+  const now = new Date(options.scheduledTime || Date.now());
+  const queue = await queuePosts(env);
+  const due = queue.filter((post) => {
+    const scheduled = new Date(text(post.scheduled_at || post.scheduledAt));
+    return Number.isFinite(scheduled.getTime()) && scheduled <= now;
+  });
+  const results = [];
+
+  for (const row of due) {
+    const payload = normalizePostPayload(queueRowPayload(row));
+    if (!payload.postId) continue;
+
+    const existing = await executionState(env, payload.postId);
+    if (existing?.status === "posted") {
+      results.push({ post_id: payload.postId, status: "posted", duplicate: true });
+      continue;
+    }
+
+    const validation = await validateExecutablePost(payload, env, { source: "cron" });
+    if (!validation.executable) {
+      const state = {
+        post_id: payload.postId,
+        platform: payload.platform,
+        status: validation.status === "manual_only" ? "skipped" : "blocked",
+        reason: validation.reason,
+        attempts: Number(existing?.attempts || 0),
+        updated_at: new Date().toISOString(),
+        source: options.source || "cron",
+      };
+      if (!options.dryRun) await writeExecutionState(env, payload.postId, state);
+      results.push(state);
+      continue;
+    }
+
+    if (options.dryRun) {
+      results.push({
+        post_id: payload.postId,
+        platform: payload.platform,
+        status: "would_post",
+        post_type: payload.postType,
+      });
+      continue;
+    }
+
+    try {
+      const result = await executeAndRecord(payload, env, { source: options.source || "cron" });
+      results.push({ post_id: payload.postId, status: "posted", post_url: postUrlFromResult(result) });
+    } catch (error) {
+      results.push({ post_id: payload.postId, status: "failed", error: error.message || "Unknown error" });
+    }
+  }
+
+  return {
+    ok: true,
+    dry_run: Boolean(options.dryRun),
+    checked_at: now.toISOString(),
+    due_count: due.length,
+    result_count: results.length,
+    results,
+  };
+}
+
+async function queuePosts(env) {
+  const url = text(env.SOCIAL_QUEUE_URL) || DEFAULT_QUEUE_URL;
+  const response = await fetch(`${url}${url.includes("?") ? "&" : "?"}v=${Date.now()}`, {
+    headers: { Accept: "application/json" },
+  });
+  if (!response.ok) throw new Error(`Unable to fetch social queue (${response.status})`);
+  const payload = await response.json();
+  return Array.isArray(payload) ? payload : (payload.posts || []);
+}
+
+function queueRowPayload(row) {
+  return {
+    postId: row.id,
+    platform: row.platform,
+    song: row.song,
+    text: row.text,
+    replyText: row.reply_text || row.replyText,
+    mediaKey: row.media_key || row.mediaKey || row.x_media_key || row.xMediaKey,
+    imageryUrl: row.imagery_url || row.imageryUrl,
+    clipUrl: row.clip_url || row.clipUrl,
+    mediaUrl: row.clip_url || row.clipUrl || row.imagery_url || row.imageryUrl,
+    approved: row.approved,
+    executionMode: row.execution_mode || row.executionMode,
+    postType: row.post_type || row.postType,
+    desiredPrivacy: row.desired_privacy || row.desiredPrivacy,
+  };
+}
+
+function normalizePostPayload(payload) {
+  const mediaKey = text(payload.mediaKey || payload.media_key || payload.x_media_key || payload.xMediaKey);
+  const normalized = {
+    ...payload,
+    postId: text(payload.postId || payload.post_id || payload.id),
+    platform: text(payload.platform),
+    song: text(payload.song),
+    text: text(payload.text),
+    replyText: text(payload.replyText || payload.reply_text),
+    mediaKey,
+    imageryUrl: text(payload.imageryUrl || payload.imagery_url),
+    clipUrl: text(payload.clipUrl || payload.clip_url),
+    mediaUrl: text(payload.mediaUrl || payload.media_url || payload.clipUrl || payload.clip_url || payload.imageryUrl || payload.imagery_url),
+    approved: truthy(payload.approved),
+    executionMode: text(payload.executionMode || payload.execution_mode),
+    postType: text(payload.postType || payload.post_type),
+    desiredPrivacy: text(payload.desiredPrivacy || payload.desired_privacy),
+  };
+  if (!normalized.executionMode) {
+    normalized.executionMode = inferPostType(normalized).postType === "community" ? "manual" : "auto";
+  }
+  if (!normalized.postType) {
+    normalized.postType = inferPostType(normalized).postType;
+  }
+  return normalized;
+}
+
+async function validateExecutablePost(payload, env, options = {}) {
+  const platform = text(payload.platform).toLowerCase();
+  const bodyText = text(payload.text);
+  const postType = text(payload.postType).toLowerCase();
+  const executionMode = text(payload.executionMode).toLowerCase();
+  const source = options.source || "manual";
+  const url = mediaUrl(payload, env);
+  const video = videoUrl(payload, env);
+
+  if (!platform) return blocked("blocked", "platform_required");
+  if (!bodyText) return blocked("blocked", "text_required");
+  if (source === "cron" && !payload.approved) return blocked("blocked", "not_approved");
+  if (executionMode === "manual") return blocked("manual_only", "manual_only");
+  if (postType === "community" || platform.includes("youtube community")) return blocked("manual_only", "youtube_community_manual_only");
+  if (["story", "stories", "carousel"].includes(postType)) return blocked("blocked", `${postType}_unsupported_v1`);
+
+  if (platform === "x" || platform.startsWith("x")) {
+    const xOAuth1 = env.X_API_KEY && env.X_API_SECRET && env.X_ACCESS_TOKEN && env.X_ACCESS_TOKEN_SECRET;
+    if (!env.X_USER_ACCESS_TOKEN && !xOAuth1) return blocked("blocked", "x_credentials_missing");
+    if (postType === "video" || postType === "gif" || isVideoUrl(url) || /\.gif(\?|$)/i.test(url)) {
+      return blocked("blocked", "x_video_or_gif_unsupported_v1");
+    }
+    return executable();
+  }
+
+  if (platform.includes("facebook")) {
+    if (!env.META_LONG_LIVED_TOKEN || !env.FB_PAGE_ID) return blocked("blocked", "facebook_credentials_missing");
+    if (postType === "video" || postType === "reel" || isVideoUrl(url)) return blocked("blocked", "facebook_video_unsupported_v1");
+    return executable();
+  }
+
+  if (platform.includes("instagram")) {
+    if (!instagramAccessToken(env)) return blocked("blocked", "instagram_credentials_missing");
+    if (!url) return blocked("blocked", "instagram_media_required");
+    if (!isImageUrl(url) && !isVideoUrl(url)) return blocked("blocked", "instagram_media_type_unsupported");
+    return executable();
+  }
+
+  if (platform.includes("tiktok")) {
+    if (!env.TIKTOK_ACCESS_TOKEN) return blocked("blocked", "tiktok_credentials_missing");
+    if (!video || !isHttpUrl(video) || !isVideoUrl(video)) return blocked("blocked", "tiktok_public_video_required");
+    if (source === "cron") {
+      if (env.TIKTOK_PUBLIC_POSTING_APPROVED !== "true") return blocked("blocked", "tiktok_public_posting_not_approved");
+      const creator = await tiktokCreatorInfo(env);
+      const optionsList = creator?.data?.privacy_level_options || [];
+      if (!optionsList.includes("PUBLIC_TO_EVERYONE")) return blocked("blocked", "tiktok_public_privacy_unavailable");
+    }
+    return executable();
+  }
+
+  if (platform.includes("youtube")) {
+    if (!env.GOOGLE_CLIENT_ID || !env.YOUTUBE_REFRESH_TOKEN) return blocked("blocked", "youtube_credentials_missing");
+    if (!video || !isHttpUrl(video) || !isVideoUrl(video)) return blocked("blocked", "youtube_public_video_required");
+    return executable();
+  }
+
+  return blocked("blocked", "unsupported_platform");
+}
+
+function executable() {
+  return { executable: true, status: "auto_ready", reason: "" };
+}
+
+function blocked(status, reason) {
+  return { executable: false, status, reason };
+}
+
+function inferPostType(payload) {
+  const platform = text(payload.platform).toLowerCase();
+  const url = text(payload.clipUrl || payload.mediaUrl || payload.imageryUrl);
+  if (platform.includes("youtube community")) return { postType: "community" };
+  if (platform.includes("youtube") || platform.includes("tiktok")) return { postType: "video" };
+  if (isVideoUrl(url)) return { postType: "video" };
+  if (isImageUrl(url)) return { postType: "image" };
+  return { postType: "text" };
+}
+
+async function executionStates(env) {
+  const store = executionStore(env);
+  if (!store) {
+    return { ok: false, error: "SOCIAL_EXECUTOR_STATE KV binding is not configured", executions: [] };
+  }
+  const list = await store.list({ prefix: EXECUTION_STATE_PREFIX, limit: 1000 });
+  const executions = [];
+  for (const key of list.keys || []) {
+    const value = await store.get(key.name, "json");
+    if (value) executions.push(value);
+  }
+  executions.sort((a, b) => text(b.updated_at).localeCompare(text(a.updated_at)));
+  return { ok: true, executions };
+}
+
+async function executionState(env, postId) {
+  const store = executionStore(env);
+  if (!store || !postId) return null;
+  return store.get(`${EXECUTION_STATE_PREFIX}${postId}`, "json");
+}
+
+async function writeExecutionState(env, postId, state) {
+  const store = executionStore(env);
+  if (!store || !postId) return;
+  await store.put(`${EXECUTION_STATE_PREFIX}${postId}`, JSON.stringify(state));
+}
+
+function executionStore(env) {
+  return env.SOCIAL_EXECUTOR_STATE && typeof env.SOCIAL_EXECUTOR_STATE.get === "function"
+    ? env.SOCIAL_EXECUTOR_STATE
+    : null;
 }
 
 async function socialMetrics(env) {
@@ -229,15 +576,16 @@ async function tiktokMetrics(env) {
     return unavailableMetric("TikTok metrics need TIKTOK_ACCESS_TOKEN.", { missing_secrets: ["TIKTOK_ACCESS_TOKEN"] });
   }
 
-  const creator = await jsonPost(TIKTOK_CREATOR_INFO_URL, {}, {
-    Authorization: `Bearer ${env.TIKTOK_ACCESS_TOKEN}`,
-  });
+  const creator = await tiktokCreatorInfo(env);
   const data = creator?.data || {};
   return unavailableMetric("TikTok Content Posting API returns creator and posting-permission info, not follower or profile-view analytics.", {
     source: "tiktok-content-posting-api",
     credential_ok: true,
     username: text(data.creator_username),
     display_name: text(data.creator_nickname),
+    privacy_level_options: data.privacy_level_options || [],
+    public_posting_ready: env.TIKTOK_PUBLIC_POSTING_APPROVED === "true"
+      && (data.privacy_level_options || []).includes("PUBLIC_TO_EVERYONE"),
     metrics: {},
   });
 }
@@ -317,13 +665,14 @@ async function xMetrics(env) {
 async function postFacebook(payload, env) {
   requireEnv(env, ["META_LONG_LIVED_TOKEN", "FB_PAGE_ID"], "Facebook posting");
   const url = mediaUrl(payload, env);
-  const endpoint = url ? `${metaBase(env)}/${env.FB_PAGE_ID}/photos` : `${metaBase(env)}/${env.FB_PAGE_ID}/feed`;
+  const forceLink = text(payload.postType).toLowerCase() === "link";
+  const endpoint = url && !forceLink ? `${metaBase(env)}/${env.FB_PAGE_ID}/photos` : `${metaBase(env)}/${env.FB_PAGE_ID}/feed`;
   const params = {
     access_token: env.META_LONG_LIVED_TOKEN,
   };
-  if (url) {
+  if (url && !forceLink) {
     params.url = url;
-    params.caption = text(payload.text);
+    params.caption = appendCta(text(payload.text), text(payload.replyText));
     params.published = "true";
   } else {
     params.message = text(payload.text);
@@ -367,6 +716,7 @@ async function postInstagram(payload, env) {
   const creationId = creation.id;
   if (!creationId) throw new Error(`Instagram media creation failed: ${JSON.stringify(creation)}`);
 
+  await waitForInstagramMedia(base, creationId, accessToken);
   const publish = await publishInstagramMedia(base, igBusinessAccountId, accessToken, creationId);
 
   return {
@@ -394,6 +744,24 @@ async function publishInstagramMedia(base, igBusinessAccountId, accessToken, cre
     }
   }
   throw lastError;
+}
+
+async function waitForInstagramMedia(base, creationId, accessToken) {
+  const delays = [0, 3000, 5000, 10000, 15000, 30000];
+  let lastStatus = "";
+  for (const delay of delays) {
+    if (delay) await sleep(delay);
+    const status = await jsonGet(`${base}/${creationId}`, {
+      fields: "status_code,status",
+      access_token: accessToken,
+    });
+    lastStatus = text(status.status_code || status.status);
+    if (!lastStatus || lastStatus === "FINISHED" || lastStatus === "PUBLISHED") return status;
+    if (lastStatus === "ERROR" || lastStatus === "EXPIRED") {
+      throw new Error(`Instagram media processing failed: ${JSON.stringify(status)}`);
+    }
+  }
+  throw new Error(`Instagram media was not ready to publish; last status: ${lastStatus || "unknown"}`);
 }
 
 function isInstagramMediaNotReady(error) {
@@ -437,11 +805,10 @@ async function postTikTok(payload, env) {
     throw new Error("TikTok posting from the website needs a public clipUrl video URL");
   }
 
-  const creator = await jsonPost(TIKTOK_CREATOR_INFO_URL, {}, {
-    Authorization: `Bearer ${env.TIKTOK_ACCESS_TOKEN}`,
-  });
+  const creator = await tiktokCreatorInfo(env);
   const options = creator?.data?.privacy_level_options || [];
-  const privacy = options.includes("SELF_ONLY") ? "SELF_ONLY" : (options[0] || "SELF_ONLY");
+  const desired = tiktokDesiredPrivacy(payload, env);
+  const privacy = options.includes(desired) ? desired : (options.includes("SELF_ONLY") ? "SELF_ONLY" : (options[0] || "SELF_ONLY"));
 
   const init = await jsonPost(TIKTOK_INIT_URL, {
     post_info: {
@@ -462,7 +829,20 @@ async function postTikTok(payload, env) {
 
   const publishId = init?.data?.publish_id || "";
   if (!publishId) throw new Error(`TikTok init failed: ${JSON.stringify(init)}`);
-  return { ok: true, platform: "TikTok", publish_id: publishId, status: "submitted_for_processing", raw: init };
+  const publishStatus = await tiktokPublishStatus(env, publishId).catch((error) => ({
+    ok: false,
+    error: metricErrorMessage(error),
+    status_code: error?.status || null,
+  }));
+  return {
+    ok: true,
+    platform: "TikTok",
+    publish_id: publishId,
+    status: tiktokStatusValue(publishStatus) || "submitted_for_processing",
+    publish_status: publishStatus,
+    post_url: tiktokPostUrl(publishStatus),
+    raw: init,
+  };
 }
 
 async function postYouTube(payload, env) {
@@ -500,7 +880,7 @@ async function postYouTube(payload, env) {
         tags: youtubeTags(payload),
       },
       status: {
-        privacyStatus: env.YOUTUBE_PRIVACY_STATUS || "public",
+        privacyStatus: text(payload.desiredPrivacy) || env.YOUTUBE_PRIVACY_STATUS || "public",
         selfDeclaredMadeForKids: false,
       },
     }),
@@ -783,6 +1163,11 @@ function readiness(env) {
     ok: true,
     admin_password_auth: Boolean(env.ADMIN_PASSWORD),
     execute_auth: Boolean(env.EXECUTOR_BEARER_TOKEN),
+    scheduler: {
+      enabled: Boolean(executionStore(env)),
+      queue_url: text(env.SOCIAL_QUEUE_URL) || DEFAULT_QUEUE_URL,
+      max_attempts: MAX_SCHEDULE_ATTEMPTS,
+    },
     platforms: {
       x: {
         text_posting_ready: xTextPostingReady,
@@ -800,6 +1185,8 @@ function readiness(env) {
       },
       tiktok: {
         ready: Boolean(env.TIKTOK_ACCESS_TOKEN),
+        public_posting_approved: env.TIKTOK_PUBLIC_POSTING_APPROVED === "true",
+        default_privacy: text(env.TIKTOK_DEFAULT_PRIVACY) || "PUBLIC_TO_EVERYONE",
       },
       youtube: {
         ready: youtubeMissing.length === 0,
@@ -878,6 +1265,54 @@ function parseJson(value) {
   } catch {
     return {};
   }
+}
+
+function truthy(value) {
+  const normalized = text(value).toLowerCase();
+  return ["1", "true", "yes", "y", "approved"].includes(normalized);
+}
+
+function appendCta(message, cta) {
+  const cleanMessage = text(message);
+  const cleanCta = text(cta);
+  if (!cleanCta || cleanMessage.includes(cleanCta)) return cleanMessage;
+  return `${cleanMessage}\n\n${cleanCta}`;
+}
+
+async function tiktokCreatorInfo(env) {
+  requireEnv(env, ["TIKTOK_ACCESS_TOKEN"], "TikTok creator info");
+  return jsonPost(TIKTOK_CREATOR_INFO_URL, {}, {
+    Authorization: `Bearer ${env.TIKTOK_ACCESS_TOKEN}`,
+  });
+}
+
+async function tiktokPublishStatus(env, publishId) {
+  requireEnv(env, ["TIKTOK_ACCESS_TOKEN"], "TikTok publish status");
+  return jsonPost(TIKTOK_STATUS_URL, { publish_id: publishId }, {
+    Authorization: `Bearer ${env.TIKTOK_ACCESS_TOKEN}`,
+  });
+}
+
+function tiktokDesiredPrivacy(payload, env) {
+  return text(payload.desiredPrivacy) || text(env.TIKTOK_DEFAULT_PRIVACY) || "PUBLIC_TO_EVERYONE";
+}
+
+function tiktokStatusValue(statusPayload) {
+  return text(statusPayload?.data?.status);
+}
+
+function tiktokPostUrl(statusPayload) {
+  const ids = statusPayload?.data?.publicaly_available_post_id || [];
+  const postId = Array.isArray(ids) ? text(ids[0]) : text(ids);
+  return postId ? `https://www.tiktok.com/@${text(statusPayload?.data?.creator_username) || "lilyroo930"}/video/${postId}` : "";
+}
+
+function postUrlFromResult(result) {
+  return text(result.post_url || result.tweet_url || result.video_url || result.media_url);
+}
+
+function externalIdFromResult(result) {
+  return text(result.post_id || result.tweet_id || result.video_id || result.media_id || result.publish_id || result.creation_id);
 }
 
 function numberOrNull(value) {
