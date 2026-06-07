@@ -55,6 +55,8 @@ Notes:
 - TikTok and YouTube require a public direct video URL through `clip_url` or `SOCIAL_MEDIA_MAP_JSON`. Do not point video media at `/admin/*`; admin content is intended for signed-in browser use, so upload media must live under a public path such as `/assets/media/*`.
 - TikTok auto-posting additionally requires `TIKTOK_PUBLIC_POSTING_APPROVED=true`
   and a creator privacy option of `PUBLIC_TO_EVERYONE`.
+- TikTok auth may use either a current `TIKTOK_ACCESS_TOKEN` or refresh credentials
+  `TIKTOK_CLIENT_KEY`, `TIKTOK_CLIENT_SECRET`, and `TIKTOK_REFRESH_TOKEN`.
 - TikTok posts return a `publish_id`; use `GET /api/social/tiktok/status?publish_id=...` to fetch follow-up processing status.
 - X can post text/replies with `X_USER_ACCESS_TOKEN`. X media is only attached when a queue row provides an explicit media key; media upload uses OAuth 1.0a or pre-uploaded IDs in `X_MEDIA_MAP_JSON`.
 - The Worker route is configured for `www.lilyroo.com/api/social/*`.

@@ -5,6 +5,7 @@ const X_MEDIA_UPLOAD_URL = "https://upload.twitter.com/1.1/media/upload.json";
 const TIKTOK_CREATOR_INFO_URL = "https://open.tiktokapis.com/v2/post/publish/creator_info/query/";
 const TIKTOK_INIT_URL = "https://open.tiktokapis.com/v2/post/publish/video/init/";
 const TIKTOK_STATUS_URL = "https://open.tiktokapis.com/v2/post/publish/status/fetch/";
+const TIKTOK_OAUTH_TOKEN_URL = "https://open.tiktokapis.com/v2/oauth/token/";
 const GOOGLE_TOKEN_URL = "https://oauth2.googleapis.com/token";
 const YOUTUBE_CHANNELS_URL = "https://www.googleapis.com/youtube/v3/channels";
 const YOUTUBE_ANALYTICS_REPORTS_URL = "https://youtubeanalytics.googleapis.com/v2/reports";
@@ -377,7 +378,7 @@ async function validateExecutablePost(payload, env, options = {}) {
   }
 
   if (platform.includes("tiktok")) {
-    if (!env.TIKTOK_ACCESS_TOKEN) return blocked("blocked", "tiktok_credentials_missing");
+    if (!tiktokCredentialsReady(env)) return blocked("blocked", "tiktok_credentials_missing");
     if (!video || !isHttpUrl(video) || !isVideoUrl(video)) return blocked("blocked", "tiktok_public_video_required");
     if (source === "cron") {
       if (env.TIKTOK_PUBLIC_POSTING_APPROVED !== "true") return blocked("blocked", "tiktok_public_posting_not_approved");
@@ -572,8 +573,8 @@ async function spotifyMetrics(env) {
 }
 
 async function tiktokMetrics(env) {
-  if (!env.TIKTOK_ACCESS_TOKEN) {
-    return unavailableMetric("TikTok metrics need TIKTOK_ACCESS_TOKEN.", { missing_secrets: ["TIKTOK_ACCESS_TOKEN"] });
+  if (!tiktokCredentialsReady(env)) {
+    return unavailableMetric("TikTok metrics need TikTok OAuth credentials.", { missing_secrets: tiktokMissingCredentials(env) });
   }
 
   const creator = await tiktokCreatorInfo(env);
@@ -799,7 +800,6 @@ async function instagramBusinessAccountId(env, accessToken) {
 }
 
 async function postTikTok(payload, env) {
-  requireEnv(env, ["TIKTOK_ACCESS_TOKEN"], "TikTok posting");
   const url = videoUrl(payload, env);
   if (!url || !isHttpUrl(url)) {
     throw new Error("TikTok posting from the website needs a public clipUrl video URL");
@@ -824,7 +824,7 @@ async function postTikTok(payload, env) {
       video_url: url,
     },
   }, {
-    Authorization: `Bearer ${env.TIKTOK_ACCESS_TOKEN}`,
+    Authorization: await tiktokAuthorization(env),
   });
 
   const publishId = init?.data?.publish_id || "";
@@ -1184,7 +1184,10 @@ function readiness(env) {
         account_id_source: env.IG_BUSINESS_ACCOUNT_ID ? "IG_BUSINESS_ACCOUNT_ID" : (instagramUsesLoginApi ? "me" : (env.FB_PAGE_ID ? "FB_PAGE_ID" : "")),
       },
       tiktok: {
-        ready: Boolean(env.TIKTOK_ACCESS_TOKEN),
+        ready: tiktokCredentialsReady(env),
+        access_token_present: Boolean(env.TIKTOK_ACCESS_TOKEN),
+        refresh_config_present: Boolean(env.TIKTOK_CLIENT_KEY && env.TIKTOK_CLIENT_SECRET && env.TIKTOK_REFRESH_TOKEN),
+        missing_secrets: tiktokMissingCredentials(env),
         public_posting_approved: env.TIKTOK_PUBLIC_POSTING_APPROVED === "true",
         default_privacy: text(env.TIKTOK_DEFAULT_PRIVACY) || "PUBLIC_TO_EVERYONE",
       },
@@ -1280,17 +1283,43 @@ function appendCta(message, cta) {
 }
 
 async function tiktokCreatorInfo(env) {
-  requireEnv(env, ["TIKTOK_ACCESS_TOKEN"], "TikTok creator info");
   return jsonPost(TIKTOK_CREATOR_INFO_URL, {}, {
-    Authorization: `Bearer ${env.TIKTOK_ACCESS_TOKEN}`,
+    Authorization: await tiktokAuthorization(env),
   });
 }
 
 async function tiktokPublishStatus(env, publishId) {
-  requireEnv(env, ["TIKTOK_ACCESS_TOKEN"], "TikTok publish status");
   return jsonPost(TIKTOK_STATUS_URL, { publish_id: publishId }, {
-    Authorization: `Bearer ${env.TIKTOK_ACCESS_TOKEN}`,
+    Authorization: await tiktokAuthorization(env),
   });
+}
+
+async function tiktokAuthorization(env) {
+  return `Bearer ${await tiktokAccessToken(env)}`;
+}
+
+async function tiktokAccessToken(env) {
+  if (env.TIKTOK_ACCESS_TOKEN) return env.TIKTOK_ACCESS_TOKEN;
+  requireEnv(env, ["TIKTOK_CLIENT_KEY", "TIKTOK_CLIENT_SECRET", "TIKTOK_REFRESH_TOKEN"], "TikTok OAuth refresh");
+  const data = await formPost(TIKTOK_OAUTH_TOKEN_URL, {
+    client_key: env.TIKTOK_CLIENT_KEY,
+    client_secret: env.TIKTOK_CLIENT_SECRET,
+    grant_type: "refresh_token",
+    refresh_token: env.TIKTOK_REFRESH_TOKEN,
+  });
+  const token = text(data.access_token);
+  if (!token) throw new Error(`TikTok refresh did not return an access token: ${JSON.stringify(data)}`);
+  return token;
+}
+
+function tiktokCredentialsReady(env) {
+  return Boolean(env.TIKTOK_ACCESS_TOKEN)
+    || Boolean(env.TIKTOK_CLIENT_KEY && env.TIKTOK_CLIENT_SECRET && env.TIKTOK_REFRESH_TOKEN);
+}
+
+function tiktokMissingCredentials(env) {
+  if (env.TIKTOK_ACCESS_TOKEN) return [];
+  return ["TIKTOK_CLIENT_KEY", "TIKTOK_CLIENT_SECRET", "TIKTOK_REFRESH_TOKEN"].filter((name) => !env[name]);
 }
 
 function tiktokDesiredPrivacy(payload, env) {

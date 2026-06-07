@@ -226,6 +226,9 @@ npx wrangler secret put IG_ACCESS_TOKEN --config workers/social-executor/wrangle
 npx wrangler secret put FB_PAGE_ID --config workers/social-executor/wrangler.jsonc
 npx wrangler secret put IG_BUSINESS_ACCOUNT_ID --config workers/social-executor/wrangler.jsonc
 npx wrangler secret put TIKTOK_ACCESS_TOKEN --config workers/social-executor/wrangler.jsonc
+npx wrangler secret put TIKTOK_CLIENT_KEY --config workers/social-executor/wrangler.jsonc
+npx wrangler secret put TIKTOK_CLIENT_SECRET --config workers/social-executor/wrangler.jsonc
+npx wrangler secret put TIKTOK_REFRESH_TOKEN --config workers/social-executor/wrangler.jsonc
 npx wrangler secret put GOOGLE_CLIENT_ID --config workers/social-executor/wrangler.jsonc
 # Optional for older OAuth clients that still expose a client secret:
 # npx wrangler secret put GOOGLE_CLIENT_SECRET --config workers/social-executor/wrangler.jsonc
@@ -237,7 +240,7 @@ npx wrangler secret put SOCIAL_MEDIA_MAP_JSON --config workers/social-executor/w
 Or push selected values from the local gitignored secret files:
 
 ```bash
-python3 scripts/push_social_worker_secrets.py ADMIN_PASSWORD X_USER_ACCESS_TOKEN TIKTOK_ACCESS_TOKEN
+python3 scripts/push_social_worker_secrets.py ADMIN_PASSWORD X_USER_ACCESS_TOKEN TIKTOK_ACCESS_TOKEN TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN
 ```
 
 Create the scheduler state namespace before turning on deploys from this checkout:
@@ -282,7 +285,7 @@ TikTok and YouTube need a public direct video URL, either in the queue `clip_url
 The guarded scheduler runs every 15 minutes after deploy. It only posts queue rows with `approved=yes`, `execution_mode=auto`, an executable `post_type`, and passing platform readiness. Rows marked `execution_mode=manual` are copy-ready only.
 
 TikTok auto-posting is additionally blocked unless:
-- `TIKTOK_ACCESS_TOKEN` is set.
+- `TIKTOK_ACCESS_TOKEN` is set, or `TIKTOK_CLIENT_KEY`, `TIKTOK_CLIENT_SECRET`, and `TIKTOK_REFRESH_TOKEN` are set so the Worker can refresh access tokens.
 - `TIKTOK_PUBLIC_POSTING_APPROVED=true` is intentionally set for the Worker.
 - TikTok creator info includes `PUBLIC_TO_EVERYONE`.
 
@@ -365,7 +368,7 @@ Required local files are gitignored and live under the workspace-level `secrets/
   - Executor: `EXECUTOR_BEARER_TOKEN` for live dry-run checks
   - X: `X_USER_ACCESS_TOKEN` for OAuth 2 user context, or `X_API_KEY`, `X_API_SECRET`, `X_ACCESS_TOKEN`, `X_ACCESS_TOKEN_SECRET` for OAuth 1.0a
   - Meta: `META_LONG_LIVED_TOKEN`, optional `IG_ACCESS_TOKEN`, `FB_PAGE_ID`, `IG_BUSINESS_ACCOUNT_ID`, optional `META_GRAPH_VERSION`
-  - TikTok: `TIKTOK_ACCESS_TOKEN`, optional `TIKTOK_IS_AIGC=true|false`
+  - TikTok: `TIKTOK_ACCESS_TOKEN`, or `TIKTOK_CLIENT_KEY`, `TIKTOK_CLIENT_SECRET`, and `TIKTOK_REFRESH_TOKEN`; optional `TIKTOK_IS_AIGC=true|false`
 - `secrets/youtube-api.env`
   - `GOOGLE_CLIENT_ID`, `YOUTUBE_REFRESH_TOKEN`
   - optional: `GOOGLE_CLIENT_SECRET` for older OAuth clients that still expose a client secret
