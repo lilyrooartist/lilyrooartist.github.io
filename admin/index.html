@@ -19,7 +19,10 @@
     .card{background:#141722;border:1px solid #2a2f44;border-radius:14px;padding:14px;margin:10px 0}
     .muted{color:#9ba3bf} a{color:#9ecbff}
     .sticky{position:sticky;top:14px}
-    .post{border:1px solid #303856;border-radius:12px;padding:12px;margin:10px 0;background:#101523}
+    .post{border:1px solid #303856;border-radius:12px;padding:12px;margin:10px 0;background:#101523;transition:border-color .15s ease,box-shadow .15s ease,background .15s ease}
+    .post.is-executing{border-color:#5d7dce;box-shadow:0 0 0 2px rgba(47,98,255,.22);background:#111a2d}
+    .post.is-posted{border-color:#1f684d;box-shadow:0 0 0 2px rgba(31,104,77,.18)}
+    .post.has-exec-error{border-color:#74303d;box-shadow:0 0 0 2px rgba(116,48,61,.18)}
     .meta{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:6px}
     .platform{font-size:12px;padding:4px 8px;border-radius:999px;background:#24304f;color:#b8d8ff}
     .time{font-size:12px;color:#9ba3bf}
@@ -28,10 +31,12 @@
     .btn.secondary{background:#20365f;color:#dce8ff;border:1px solid #416095}
     .btn.ghost{background:#111827;color:#cfd7ef;border:1px solid #303856}
     .btn:disabled{background:#3a4055;color:#9ba3bf;cursor:not-allowed}
-    .btn.is-working{background:#244dcc;color:#fff;cursor:progress}
+    .btn.is-working,.btn.is-working:disabled{background:#244dcc;color:#fff;cursor:progress}
     .btn.is-working::before{content:"";width:11px;height:11px;border-radius:50%;border:2px solid rgba(255,255,255,.38);border-top-color:#fff;animation:spin .8s linear infinite}
+    .exec-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}
+    .exec-actions .btn{min-height:34px}
     @keyframes spin{to{transform:rotate(360deg)}}
-    .exec-feedback{margin-top:8px;border:1px solid #303856;border-radius:10px;padding:8px 9px;font-size:12px;line-height:1.35;background:#111827;color:#c7d0ea}
+    .exec-feedback{margin:9px 0;border:1px solid #303856;border-radius:10px;padding:9px 10px;font-size:12px;line-height:1.35;background:#111827;color:#c7d0ea;font-weight:700}
     .exec-feedback[hidden]{display:none}
     .exec-feedback.working{border-color:#416095;background:#14203a;color:#dce8ff}
     .exec-feedback.success{border-color:#1f684d;background:#123528;color:#9bf0c5}
@@ -1710,6 +1715,7 @@
     feedback.hidden=true;
     feedback.className='exec-feedback';
     feedback.textContent='';
+    root.classList.remove('is-executing','is-posted','has-exec-error');
   }
 
   function nextPaint(){
@@ -1741,6 +1747,7 @@
       const disabled=Boolean(opState.disabled);
       const execLabel='Execute now';
       d.innerHTML=`<div class="meta"><span class="platform">${escapeHtml(p.platform)}</span><span class="time">${escapeHtml(formatDate(p.scheduled_at))}</span></div>
+      <div class="exec-feedback" data-role="exec-feedback" aria-live="polite" hidden></div>
       <div class="label"><b>Status</b>: <span data-role="status" class="status-chip ${escapeHtml(opState.className||'neutral')}">${escapeHtml(opState.label||statusVal)}</span></div>
       <div class="label muted">${escapeHtml(p.execution_mode||'auto')} · ${escapeHtml(p.post_type||'text')}${p.approved?` · approved: ${escapeHtml(p.approved)}`:''}</div>
       ${p.song?`<div class="label"><b>Song</b>: ${escapeHtml(p.song)}</div>`:''}
@@ -1748,9 +1755,8 @@
       <div class="label"><b>Imagery</b>: ${escapeHtml(p.imagery||'')}</div>
       <div class="preview" data-role="preview-image"></div>
       <div class="preview" data-role="preview-clip"></div>
-      <div class="label" style="margin-top:10px"><button class="btn" data-role="redo">Redo</button> <button class="btn" data-role="exec"${disabled?' disabled':''} aria-busy="false">${escapeHtml(execLabel)}</button></div>
-      <div class="label muted" data-role="exec-hint">Uses website executor: ${escapeHtml(executorUrl)}${mediaKey?` · media key: ${escapeHtml(mediaKey)}`:''}${opState.message?` · ${escapeHtml(opState.message)}`:''}</div>
-      <div class="exec-feedback" data-role="exec-feedback" aria-live="polite" hidden></div>`;
+      <div class="exec-actions"><button class="btn" data-role="redo">Redo</button> <button class="btn" data-role="exec"${disabled?' disabled':''} aria-busy="false">${escapeHtml(execLabel)}</button></div>
+      <div class="label muted" data-role="exec-hint">Uses website executor: ${escapeHtml(executorUrl)}${mediaKey?` · media key: ${escapeHtml(mediaKey)}`:''}${opState.message?` · ${escapeHtml(opState.message)}`:''}</div>`;
       renderImagePreview(d.querySelector('[data-role="preview-image"]'),p);
       renderClipPreview(d.querySelector('[data-role="preview-clip"]'),p);
       d.querySelector('[data-role="redo"]').addEventListener('click',()=>{
@@ -1772,12 +1778,14 @@
         const previousStatusClass=statusEl.className;
         execBtn.disabled=true;
         redoBtn.disabled=true;
+        d.classList.remove('is-posted','has-exec-error');
+        d.classList.add('is-executing');
         execBtn.classList.add('is-working');
         execBtn.textContent='Publishing...';
         execBtn.setAttribute('aria-busy','true');
         statusEl.textContent='Publishing';
         statusEl.className='status-chip working';
-        setExecuteFeedback(d,'working',`Publishing ${p.platform || 'post'} now...`);
+        setExecuteFeedback(d,'working',`Publishing ${p.platform || 'post'} now. This can take about 10 seconds.`);
         await nextPaint();
         try{
           const readyNow=platformReadiness(p.platform);
@@ -1788,6 +1796,8 @@
           if(postedUrl) localStorage.setItem(`posted_url_${postFingerprint(p,currentText)}`,postedUrl);
           statusEl.textContent='Posted';
           statusEl.className='status-chip ok';
+          d.classList.remove('is-executing','has-exec-error');
+          d.classList.add('is-posted');
           setExecuteFeedback(d,'success',`Published successfully${result.platform?` to ${result.platform}`:''}.`,postedUrl);
           execBtn.classList.remove('is-working');
           execBtn.setAttribute('aria-busy','false');
@@ -1796,6 +1806,8 @@
         }catch(err){
           statusEl.textContent=previousStatus;
           statusEl.className=previousStatusClass;
+          d.classList.remove('is-executing','is-posted');
+          d.classList.add('has-exec-error');
           setExecuteFeedback(d,'error',`Social executor failed: ${err.message}`);
           execBtn.disabled=false;
           redoBtn.disabled=false;
