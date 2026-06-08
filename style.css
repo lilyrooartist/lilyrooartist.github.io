@@ -440,11 +440,14 @@ main {
 }
 
 .archive-page .thumb {
-  width: 92px;
-  height: 52px;
+  width: 72px;
+  height: 72px;
+  aspect-ratio: 1;
   object-fit: cover;
+  object-position: center;
   border: 1px solid var(--line);
   display: block;
+  flex: 0 0 72px;
 }
 
 .archive-page .meta {
