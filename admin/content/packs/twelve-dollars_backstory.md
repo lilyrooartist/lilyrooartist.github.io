@@ -1,8 +1,8 @@
 # Twelve Dollars — Backstory Pack
 
 - **Song ID:** LR-SONG-007
-- **Status:** Draft starter pack
-- **Source link:** https://youtu.be/8DsCkwBPdhI
+- **Status:** Updated-art remaster pack
+- **Source link:** https://youtu.be/G2RlCwZKOsk
 
 ## Core narrative seed
 Twelve Dollars lives in Lily Roo's transmission universe as a scene-level artifact: one specific moment that reveals a bigger emotional system.
@@ -25,3 +25,4 @@ Twelve Dollars lives in Lily Roo's transmission universe as a scene-level artifa
 ## CTA variants
 - Full signal on YouTube + lilyroo.com
 - Subscribe on YouTube — building to 1,000
+- Watch the updated-art Twelve Dollars remaster
