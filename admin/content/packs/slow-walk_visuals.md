@@ -1,7 +1,7 @@
 # Slow Walk — Visual Pack
 
 - **Song ID:** LR-SONG-021
-- **Default thumb:** https://i.ytimg.com/vi/R7evPASi8vM/maxresdefault.jpg
+- **Default thumb:** /assets/albums/analog-myth/art/07-slow-walk.jpg
 
 ## Visual prompt set
 1. Night street or hallway still with one figure moving slowly through neon spill and soft grain.

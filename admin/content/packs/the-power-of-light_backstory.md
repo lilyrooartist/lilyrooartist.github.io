@@ -2,7 +2,7 @@
 
 - **Song ID:** LR-SONG-023
 - **Status:** Current release pack
-- **Source link:** https://youtu.be/BkkBE2pXHSY
+- **Source link:** https://youtu.be/ctZ2TRBWC-c
 - **Launch date:** Sunday, May 17, 2026
 - **Reprises:** My Second Room Has No Light Switch
 
@@ -39,4 +39,4 @@ This is not just "the light comes on." It is the discovery that light can be cho
 - Revisit the first room, then follow the light.
 - New reprise transmission: The Power of Light.
 - Full signal on YouTube + lilyroo.com
-- Watch The Power of Light: https://youtu.be/BkkBE2pXHSY
+- Watch The Power of Light: https://youtu.be/ctZ2TRBWC-c

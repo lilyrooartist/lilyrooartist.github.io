@@ -1,7 +1,7 @@
 # Guards Down — Visual Pack
 
 - **Song ID:** LR-SONG-019
-- **Default thumb:** https://i.ytimg.com/vi/M8RF-v1P4QY/maxresdefault.jpg
+- **Default thumb:** /assets/albums/analog-myth/art/06-guards-down.jpg
 
 ## Visual prompt set
 1. Split-decision portrait, scanline texture, tense stillness, indie folk-punk mood.

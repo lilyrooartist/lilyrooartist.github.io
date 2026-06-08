@@ -1,11 +1,11 @@
 # The Power of Light (My Second Room Has No Light Switch Reprise) — Visual Pack
 
 - **Song ID:** LR-SONG-023
-- **Album art:** /assets/img/the-power-of-light/the-power-of-light-my-second-room-has-no-light-switch-reprise-album-art.png
-- **Pan video master:** /assets/media/the-power-of-light/the-power-of-light-my-second-room-has-no-light-switch-reprise-pan.mp4
-- **Final song audio:** /assets/audio/the-power-of-light/the-power-of-light-my-second-room-has-no-light-switch-reprise.wav
-- **Final song video:** /assets/media/the-power-of-light/the-power-of-light-my-second-room-has-no-light-switch-reprise-video.mp4
-- **YouTube link:** https://youtu.be/BkkBE2pXHSY
+- **Album art:** /assets/albums/analog-myth/art/08-the-power-of-light.png
+- **Pan video master:** /_archive/2026-06-08-analog-myth-asset-cleanup/assets-media/the-power-of-light/the-power-of-light-my-second-room-has-no-light-switch-reprise-pan.mp4
+- **Final song audio:** /assets/albums/analog-myth/audio-distrokid-remastered/08-the-power-of-light.wav
+- **Final song video:** /assets/albums/analog-myth/video/08-the-power-of-light-youtube-remaster.mp4
+- **YouTube link:** https://youtu.be/ctZ2TRBWC-c
 - **Launch date:** Sunday, May 17, 2026
 - **Reprises:** My Second Room Has No Light Switch
 - **Reference inspiration:** taped smart-button/light-control over an old wall switch, with torn blue painter's tape on textured plaster
@@ -28,10 +28,10 @@
 - YouTube thumb: 1280x720
 
 ## Asset notes
-- Keep all newly generated assets in Lily Roo core folder under `assets/img/the-power-of-light/`.
-- Current album art: `/assets/img/the-power-of-light/the-power-of-light-my-second-room-has-no-light-switch-reprise-album-art.png`
-- Current video master: `/assets/media/the-power-of-light/the-power-of-light-my-second-room-has-no-light-switch-reprise-pan.mp4`
-- Current final song video: `/assets/media/the-power-of-light/the-power-of-light-my-second-room-has-no-light-switch-reprise-video.mp4`
+- Keep current release assets in the canonical Analog Myth album folder under `assets/albums/analog-myth/`.
+- Current album art: `/assets/albums/analog-myth/art/08-the-power-of-light.png`
+- Current video master: `/_archive/2026-06-08-analog-myth-asset-cleanup/assets-media/the-power-of-light/the-power-of-light-my-second-room-has-no-light-switch-reprise-pan.mp4`
+- Current final song video: `/assets/albums/analog-myth/video/08-the-power-of-light-youtube-remaster.mp4`
 - QA stills: `/exports/the-power-of-light/video-stills-final/`
 - Pair at least one promo visual with the original My Second Room Has No Light Switch artwork to make the reprise relationship legible.
 

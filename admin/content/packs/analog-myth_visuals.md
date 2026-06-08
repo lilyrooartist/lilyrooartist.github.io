@@ -1,7 +1,7 @@
 # Analog Myth — Visual Pack
 
 - **Song ID:** LR-SONG-020
-- **Default thumb:** https://i.ytimg.com/vi/wGFgXcTD1YE/maxresdefault.jpg
+- **Default thumb:** /assets/albums/analog-myth/art/03-analog-myth.jpg
 
 ## Visual prompt set
 1. Broken clock face dissolving into waveform, indie folk-punk palette.

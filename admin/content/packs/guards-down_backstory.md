@@ -2,7 +2,7 @@
 
 - **Song ID:** LR-SONG-019
 - **Status:** Current release starter pack
-- **Source link:** https://youtu.be/M8RF-v1P4QY
+- **Source link:** https://youtu.be/yn_315-h5vM
 - **Album context:** Analog Myth (work in progress)
 
 ## Core narrative seed

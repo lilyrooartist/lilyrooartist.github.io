@@ -277,7 +277,7 @@ Example value:
 Example `SOCIAL_MEDIA_MAP_JSON` value for website-hosted media. Keep upload media outside `/admin/*`; admin content is intended for signed-in browser use, so TikTok and YouTube cannot fetch those URLs as public media.
 
 ```json
-{"slow-walk-video":"https://www.lilyroo.com/assets/media/slow-walk-58s.mp4","slow-walk-cover":"https://i.ytimg.com/vi/R7evPASi8vM/maxresdefault.jpg"}
+{"slow-walk-video":"https://www.lilyroo.com/assets/albums/analog-myth/video/07-slow-walk-youtube-remaster.mp4","slow-walk-cover":"https://www.lilyroo.com/assets/albums/analog-myth/art/07-slow-walk.jpg"}
 ```
 
 TikTok and YouTube need a public direct video URL, either in the queue `clip_url` column or in `SOCIAL_MEDIA_MAP_JSON`.

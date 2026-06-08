@@ -2,13 +2,13 @@
 
 - **Song ID:** LR-SONG-025
 - **Album context:** Analog Myth
-- **Final song audio:** /assets/audio/analog-myth/13.wav
+- **Final song audio:** /assets/albums/analog-myth/audio-distrokid-remastered/01-13.wav
 - **Lyrics:** /assets/lyrics/13.txt
 - **Caption file:** /assets/lyrics/13.srt
-- **Album art:** /assets/img/analog-myth/13/13-cover.png
-- **YouTube thumbnail:** /assets/img/analog-myth/13/13-youtube-thumbnail.jpg
-- **Final song video source:** /assets/media/analog-myth/13/13-video.mp4
-- **YouTube link:** https://youtu.be/IahKaEXEA_0
+- **Album art:** /assets/albums/analog-myth/art/01-13.jpg
+- **YouTube thumbnail:** /assets/albums/analog-myth/art/01-13.jpg
+- **Final song video source:** /assets/albums/analog-myth/video/01-13-youtube-remaster.mp4
+- **YouTube link:** https://youtu.be/XL5VOVxwTw4
 
 ## Approved cover art
 The final cover uses a four-quadrant layout:
@@ -35,9 +35,9 @@ The visual direction should stay bright enough for a release thumbnail while kee
 - YouTube thumb: 1280x720
 
 ## Asset notes
-- Keep final assets in `assets/img/analog-myth/13/` and `assets/media/analog-myth/13/`.
-- Use `/assets/img/analog-myth/13/13-cover.png` as the website/admin/social artwork.
-- Use `/assets/img/analog-myth/13/13-youtube-thumbnail.jpg` as the 1280x720 compressed YouTube custom thumbnail source.
-- The public YouTube video is `https://youtu.be/IahKaEXEA_0`.
-- The full YouTube upload source is `/assets/media/analog-myth/13/13-video.mp4`, rendered with the same panning workflow used for prior Lily Roo song videos.
+- Keep final assets in `assets/albums/analog-myth/art/` and `assets/albums/analog-myth/video/`.
+- Use `/assets/albums/analog-myth/art/01-13.jpg` as the website/admin/social artwork.
+- Use `/assets/albums/analog-myth/art/01-13.jpg` as the 1280x720 compressed YouTube custom thumbnail source.
+- The public YouTube video is `https://youtu.be/XL5VOVxwTw4`.
+- The full YouTube upload source is `/assets/albums/analog-myth/video/01-13-youtube-remaster.mp4`, rendered with the same panning workflow used for prior Lily Roo song videos.
 - Avoid treating the title as horror, superstition, or a magical birthday. The visual world should feel observant, intimate, and quietly brave.

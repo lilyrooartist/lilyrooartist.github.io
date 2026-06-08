@@ -3,15 +3,15 @@
 - **Song ID:** LR-SONG-025
 - **Status:** New song starter pack
 - **Album context:** Analog Myth
-- **Source audio:** /assets/audio/analog-myth/13.wav
+- **Source audio:** /assets/albums/analog-myth/audio-distrokid-remastered/01-13.wav
 - **Lyrics:** /assets/lyrics/13.txt
 - **Captions:** /assets/lyrics/13.srt
-- **Album art:** /assets/img/analog-myth/13/13-cover.png
-- **YouTube thumbnail:** /assets/img/analog-myth/13/13-youtube-thumbnail.jpg
-- **YouTube video:** https://youtu.be/IahKaEXEA_0
-- **Final song video source:** /assets/media/analog-myth/13/13-video.mp4
+- **Album art:** /assets/albums/analog-myth/art/01-13.jpg
+- **YouTube thumbnail:** /assets/albums/analog-myth/art/01-13.jpg
+- **YouTube video:** https://youtu.be/XL5VOVxwTw4
+- **Final song video source:** /assets/albums/analog-myth/video/01-13-youtube-remaster.mp4
 - **Estimated duration:** 2:38
-- **Source link:** https://youtu.be/IahKaEXEA_0
+- **Source link:** https://youtu.be/XL5VOVxwTw4
 
 ## Core narrative seed
 This song is part of Lily Roo's story.
@@ -53,5 +53,5 @@ This is not a transformation song. It is a small-visibility song: still quiet, s
 
 ## CTA variants
 - New Analog Myth transmission: 13.
-- Watch 13: https://youtu.be/IahKaEXEA_0
+- Watch 13: https://youtu.be/XL5VOVxwTw4
 - Still quiet. A little less hidden.

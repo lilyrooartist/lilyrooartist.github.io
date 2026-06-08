@@ -2,7 +2,7 @@
 
 - **Song ID:** LR-SONG-020
 - **Status:** Current release pack
-- **Source link:** https://youtu.be/wGFgXcTD1YE
+- **Source link:** https://youtu.be/_rtioKYbCFM
 - **Album context:** Analog Myth
 
 ## Core narrative seed

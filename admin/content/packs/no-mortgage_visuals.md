@@ -1,7 +1,7 @@
 # No Mortgage — Visual Pack
 
 - **Song ID:** LR-SONG-024
-- **Default thumb:** https://i.ytimg.com/vi/9rmy2JhBuF4/hqdefault.jpg
+- **Default thumb:** /assets/albums/analog-myth/art/05-no-mortgage.jpg
 
 ## Visual prompt set
 1. Tiny house on wide cheap land at dusk, one warm window, huge empty sky, dry analog grain.

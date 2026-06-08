@@ -1,10 +1,10 @@
 # Spilling the Tea - Visual Pack
 
 - **Song ID:** LR-SONG-022
-- **Default album artwork:** /assets/img/spilling-the-tea-album-art-square.jpg
-- **Vertical pan source:** /assets/img/spilling-the-tea-lilyroo-phone-v2-pan-source.jpg
-- **Lily Roo phone variant:** /assets/img/spilling-the-tea-lilyroo-phone-v2-cover.jpg
-- **Lily Roo phone pan source:** /assets/img/spilling-the-tea-lilyroo-phone-v2-pan-source.jpg
+- **Default album artwork:** /assets/albums/analog-myth/art/04-spilling-the-tea.jpg
+- **Vertical pan source:** /_archive/2026-06-08-analog-myth-asset-cleanup/assets-img/spilling-the-tea-lilyroo-phone-v2-pan-source.jpg
+- **Lily Roo phone variant:** /_archive/2026-06-08-analog-myth-asset-cleanup/assets-img/spilling-the-tea-lilyroo-phone-v2-cover.jpg
+- **Lily Roo phone pan source:** /_archive/2026-06-08-analog-myth-asset-cleanup/assets-img/spilling-the-tea-lilyroo-phone-v2-pan-source.jpg
 
 ## Visual prompt set
 1. Formal afternoon tea service centered on an elegant three-tier silver platter with finger sandwiches, scones, petits fours, porcelain cups, and a teapot.
