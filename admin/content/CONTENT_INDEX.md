@@ -1,11 +1,11 @@
 # Lily Roo Content Index
 
-Generated: `2026-06-07T20:52:12.941146+00:00`
+Generated: `2026-06-08T12:34:48.553032+00:00`
 
 ## Snapshot
 
-- Songs: **25**
-- Complete pack pairs: **25 / 25**
+- Songs: **26**
+- Complete pack pairs: **26 / 26**
 - Quips: **22**
 - Anecdotes: **25**
 - Queue posts: **9**
@@ -43,6 +43,7 @@ Generated: `2026-06-07T20:52:12.941146+00:00`
 
 - **The Power of Light (My Second Room Has No Light Switch Reprise)** (`LR-SONG-023`): Current / Current / complete
 - **13** (`LR-SONG-025`): Archive / Archive / complete
+- **Girls Camp** (`LR-SONG-026`): Current / Current / complete
 - **No Mortgage** (`LR-SONG-024`): Current / Current / complete
 - **Spilling the Tea** (`LR-SONG-022`): Current / Current / complete
 - **Slow Walk** (`LR-SONG-021`): Current / Current / complete
