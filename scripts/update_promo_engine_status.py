@@ -19,6 +19,13 @@ OUT = ROOT / "data" / "promo_engine_status.json"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
 
 PROMO_PLATFORMS = ["X", "Instagram", "TikTok", "Facebook", "YouTube Community"]
+STORE_SERVICES = [
+    ("Spotify", "spotify_url"),
+    ("Apple Music", "apple_music_url"),
+    ("YouTube Music", "youtube_music_url"),
+    ("HyperFollow", "hyperfollow_url"),
+    ("YouTube playlist", "youtube_playlist_url"),
+]
 SOURCE_MAX_AGE_HOURS = {
     "release_status": 72,
     "scheduled_posts": 72,
@@ -230,6 +237,31 @@ def metric_state(manual, live):
     }
 
 
+def store_service_states(release):
+    status_text = " ".join(
+        str(release.get(key) or "")
+        for key in ("distrokid_status", "store_status", "release_date", "primary_cta")
+    ).lower()
+    distrokid_state = "Submitted" if any(
+        word in status_text for word in ("submitted", "uploaded", "prepared", "public")
+    ) else "Pending"
+    services = [
+        {
+            "label": "DistroKid",
+            "state": distrokid_state,
+            "url": "",
+        }
+    ]
+    for label, key in STORE_SERVICES:
+        url = str(release.get(key) or "").strip()
+        services.append({
+            "label": label,
+            "state": "Live" if url else "Pending",
+            "url": url,
+        })
+    return services
+
+
 def plan_rows_for_release(plan, release_title: str, track_lookup: set[str]):
     rows = []
     for post in plan.get("posts") or []:
@@ -251,6 +283,7 @@ def build_status():
 
     releases = []
     all_actions = []
+    store_state_counts = Counter()
     for release in release_status.get("releases", []):
         title = release.get("title") or "Untitled release"
         track_lookup = {norm(title)}
@@ -272,10 +305,18 @@ def build_status():
         planned_missing_platforms = [platform for platform in missing_platforms if platform in planned_platforms]
         unplanned_missing_platforms = [platform for platform in missing_platforms if platform not in planned_platforms]
         link_count = release_link_count(release)
+        store_services = store_service_states(release)
+        for service in store_services:
+            store_state_counts[service["state"]] += 1
+        live_store_labels = [service["label"] for service in store_services if service["state"] == "Live"]
+        pending_store_labels = [service["label"] for service in store_services if service["state"] == "Pending"]
 
         actions = []
         if link_count < 3:
-            actions.append("Verify and add remaining public store links.")
+            if pending_store_labels:
+                actions.append("Verify public store links for " + ", ".join(pending_store_labels[:4]) + ".")
+            else:
+                actions.append("Verify and add remaining public store links.")
         if not queued and planned:
             actions.append("Review and approve draft promo queue rows for this release.")
         elif not queued:
@@ -309,6 +350,9 @@ def build_status():
             "primary_cta": release.get("primary_cta", "pending"),
             "release_date": release.get("release_date", "pending"),
             "store_link_count": link_count,
+            "store_services": store_services,
+            "live_store_services": live_store_labels,
+            "pending_store_services": pending_store_labels,
             "queued_posts": len(queued),
             "planned_posts": len(planned),
             "published_posts": len(published),
@@ -351,6 +395,10 @@ def build_status():
             "pending_manual_update_command": metrics["pending_manual_update_command"],
             "pending_manual_update_by_platform": metrics["pending_manual_update_by_platform"],
             "live_metrics_updated_at": metrics["updated_at"],
+            "music_site_state_counts": dict(sorted(store_state_counts.items())),
+            "music_sites_live": store_state_counts.get("Live", 0),
+            "music_sites_submitted": store_state_counts.get("Submitted", 0),
+            "music_sites_pending": store_state_counts.get("Pending", 0),
             "stale_source_count": freshness_summary["stale"],
             "missing_source_count": freshness_summary["missing"],
         },

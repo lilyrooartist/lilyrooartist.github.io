@@ -236,6 +236,16 @@ def validate_generated_outputs(failures):
                 ok(f"promo engine manual metric platform commands track {len(pending_by_platform)} platforms")
             else:
                 fail("promo_engine_status.json missing manual metric platform commands", failures)
+        music_site_counts = kpi.get("music_site_state_counts") or {}
+        release_services = [
+            service
+            for release in releases
+            for service in (release.get("store_services") or [])
+        ]
+        if release_services and sum(int(value or 0) for value in music_site_counts.values()) == len(release_services):
+            ok(f"promo engine music site matrix tracks {len(release_services)} service states")
+        else:
+            fail("promo_engine_status.json missing music site service matrix", failures)
         if "next_actions" in status:
             ok(f"promo engine status has {len(status.get('next_actions') or [])} next actions")
         else:

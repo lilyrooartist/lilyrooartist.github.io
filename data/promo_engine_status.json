@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-09T16:29:32.366388+00:00",
+  "generated_at": "2026-06-09T16:51:12.397569+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -60,6 +60,14 @@
       "x": "python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impressions_7d=VALUE --refresh-admin"
     },
     "live_metrics_updated_at": "2026-06-09T14:06:46.496Z",
+    "music_site_state_counts": {
+      "Live": 8,
+      "Pending": 7,
+      "Submitted": 3
+    },
+    "music_sites_live": 8,
+    "music_sites_submitted": 3,
+    "music_sites_pending": 7,
     "stale_source_count": 0,
     "missing_source_count": 0
   },
@@ -77,14 +85,14 @@
       "fresh": 6,
       "stale": 0,
       "missing": 0,
-      "checked_at": "2026-06-09T16:29:32.366388+00:00"
+      "checked_at": "2026-06-09T16:51:12.397569+00:00"
     },
     "sources": [
       {
         "name": "release_status",
         "path": "data/distrokid_release_status.json",
         "status": "fresh",
-        "age_hours": 14.7,
+        "age_hours": 15.1,
         "max_age_hours": 72,
         "timestamp": "2026-06-09T01:47:42+00:00",
         "refresh_command": "Update data/distrokid_release_status.json after store/DistroKid verification."
@@ -93,7 +101,7 @@
         "name": "scheduled_posts",
         "path": "data/scheduled_posts.csv",
         "status": "fresh",
-        "age_hours": 42.8,
+        "age_hours": 43.2,
         "max_age_hours": 72,
         "timestamp": "2026-06-07T21:38:44.418468+00:00",
         "refresh_command": "python3 scripts/sync_future_posts.py"
@@ -104,14 +112,14 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-09T16:29:32.337815+00:00",
+        "timestamp": "2026-06-09T16:51:12.369277+00:00",
         "refresh_command": "python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
         "name": "published_log",
         "path": "admin/content/Published_Log.csv",
         "status": "fresh",
-        "age_hours": 51.9,
+        "age_hours": 52.2,
         "max_age_hours": 168,
         "timestamp": "2026-06-07T12:36:37.141276+00:00",
         "refresh_command": "Export or append latest published posts to admin/content/Published_Log.csv."
@@ -120,7 +128,7 @@
         "name": "manual_metrics",
         "path": "data/manual_social_stats.json",
         "status": "fresh",
-        "age_hours": 48.7,
+        "age_hours": 49.1,
         "max_age_hours": 72,
         "timestamp": "2026-06-07T15:47:26.729764+00:00",
         "refresh_command": "Update data/manual_social_stats.json with latest manual metrics."
@@ -129,7 +137,7 @@
         "name": "live_metrics",
         "path": "data/live_social_metrics.json",
         "status": "fresh",
-        "age_hours": 2.4,
+        "age_hours": 2.7,
         "max_age_hours": 24,
         "timestamp": "2026-06-09T14:06:46.496000+00:00",
         "refresh_command": "python3 scripts/capture_live_metrics.py"
@@ -144,6 +152,46 @@
       "primary_cta": "Spotify",
       "release_date": "2026-06-05",
       "store_link_count": 5,
+      "store_services": [
+        {
+          "label": "DistroKid",
+          "state": "Submitted",
+          "url": ""
+        },
+        {
+          "label": "Spotify",
+          "state": "Live",
+          "url": "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi"
+        },
+        {
+          "label": "Apple Music",
+          "state": "Live",
+          "url": "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249"
+        },
+        {
+          "label": "YouTube Music",
+          "state": "Live",
+          "url": "https://music.youtube.com/watch?v=vK0mDIW65o4"
+        },
+        {
+          "label": "HyperFollow",
+          "state": "Live",
+          "url": "https://distrokid.com/hyperfollow/lilyroo/i-learned-it-all-in-fifteen-seconds"
+        },
+        {
+          "label": "YouTube playlist",
+          "state": "Live",
+          "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXWKTqgIs2N6dCU3BfS_9J2C"
+        }
+      ],
+      "live_store_services": [
+        "Spotify",
+        "Apple Music",
+        "YouTube Music",
+        "HyperFollow",
+        "YouTube playlist"
+      ],
+      "pending_store_services": [],
       "queued_posts": 9,
       "planned_posts": 0,
       "published_posts": 3,
@@ -178,6 +226,47 @@
       "primary_cta": "YouTube playlist until store links are verified",
       "release_date": "pending public store verification",
       "store_link_count": 2,
+      "store_services": [
+        {
+          "label": "DistroKid",
+          "state": "Submitted",
+          "url": ""
+        },
+        {
+          "label": "Spotify",
+          "state": "Pending",
+          "url": ""
+        },
+        {
+          "label": "Apple Music",
+          "state": "Pending",
+          "url": ""
+        },
+        {
+          "label": "YouTube Music",
+          "state": "Live",
+          "url": "https://music.youtube.com/watch?v=G2RlCwZKOsk"
+        },
+        {
+          "label": "HyperFollow",
+          "state": "Pending",
+          "url": ""
+        },
+        {
+          "label": "YouTube playlist",
+          "state": "Live",
+          "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n"
+        }
+      ],
+      "live_store_services": [
+        "YouTube Music",
+        "YouTube playlist"
+      ],
+      "pending_store_services": [
+        "Spotify",
+        "Apple Music",
+        "HyperFollow"
+      ],
       "queued_posts": 0,
       "planned_posts": 5,
       "published_posts": 0,
@@ -209,7 +298,7 @@
       ],
       "unplanned_missing_platforms": [],
       "actions": [
-        "Verify and add remaining public store links.",
+        "Verify public store links for Spotify, Apple Music, HyperFollow.",
         "Review and approve draft promo queue rows for this release.",
         "Approve planned promo coverage for X, Instagram, TikTok, Facebook, YouTube Community.",
         "Refresh pending manual metrics before weekly reporting."
@@ -221,6 +310,47 @@
       "primary_cta": "YouTube playlist until July 1 store links are verified",
       "release_date": "2026-07-01",
       "store_link_count": 1,
+      "store_services": [
+        {
+          "label": "DistroKid",
+          "state": "Submitted",
+          "url": ""
+        },
+        {
+          "label": "Spotify",
+          "state": "Pending",
+          "url": ""
+        },
+        {
+          "label": "Apple Music",
+          "state": "Pending",
+          "url": ""
+        },
+        {
+          "label": "YouTube Music",
+          "state": "Pending",
+          "url": ""
+        },
+        {
+          "label": "HyperFollow",
+          "state": "Pending",
+          "url": ""
+        },
+        {
+          "label": "YouTube playlist",
+          "state": "Live",
+          "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0"
+        }
+      ],
+      "live_store_services": [
+        "YouTube playlist"
+      ],
+      "pending_store_services": [
+        "Spotify",
+        "Apple Music",
+        "YouTube Music",
+        "HyperFollow"
+      ],
       "queued_posts": 0,
       "planned_posts": 1,
       "published_posts": 13,
@@ -252,7 +382,7 @@
       ],
       "unplanned_missing_platforms": [],
       "actions": [
-        "Verify and add remaining public store links.",
+        "Verify public store links for Spotify, Apple Music, YouTube Music, HyperFollow.",
         "Review and approve draft promo queue rows for this release.",
         "Approve planned promo coverage for YouTube Community.",
         "Refresh pending manual metrics before weekly reporting."
@@ -261,11 +391,11 @@
   ],
   "next_actions": [
     "I Learned It All in Fifteen Seconds: Refresh pending manual metrics before weekly reporting.",
-    "Twelve Dollars: Verify and add remaining public store links.",
+    "Twelve Dollars: Verify public store links for Spotify, Apple Music, HyperFollow.",
     "Twelve Dollars: Review and approve draft promo queue rows for this release.",
     "Twelve Dollars: Approve planned promo coverage for X, Instagram, TikTok, Facebook, YouTube Community.",
     "Twelve Dollars: Refresh pending manual metrics before weekly reporting.",
-    "Analog Myth: Verify and add remaining public store links.",
+    "Analog Myth: Verify public store links for Spotify, Apple Music, YouTube Music, HyperFollow.",
     "Analog Myth: Review and approve draft promo queue rows for this release.",
     "Analog Myth: Approve planned promo coverage for YouTube Community."
   ]
