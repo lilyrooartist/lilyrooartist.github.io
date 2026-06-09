@@ -14,6 +14,13 @@ Primary KPI: **reach 1,000 YouTube subscribers**.
 
 Source of truth: `data/distrokid_release_status.json`
 
+Admin promo-health snapshot: `data/promo_engine_status.json`
+
+Refresh with:
+`python3 scripts/update_promo_engine_status.py`
+
+This snapshot combines release links, queued posts, published posts, platform coverage, live metric availability, and manual metric gaps into the Promo Health card on `/admin`.
+
 ### I Learned It All in Fifteen Seconds
 - Spotify: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi
 - Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249

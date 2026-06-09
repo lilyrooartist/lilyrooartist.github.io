@@ -20,6 +20,7 @@ YOUTUBE_TITLE_TRACK = ROOT / "data" / "youtube_title_track_snapshot.json"
 YOUTUBE_MUSIC_SNAPSHOT = ROOT / "data" / "youtube_music_release_snapshot.json"
 HYPERFOLLOW_SNAPSHOT = ROOT / "data" / "hyperfollow_store_links_snapshot.json"
 ALIGNMENT_AUDIT = ROOT / "data" / "first_single_alignment_audit.json"
+PROMO_ENGINE_STATUS = ROOT / "data" / "promo_engine_status.json"
 REPORT = ROOT / "admin" / "reports" / "weekly-social-report.md"
 INDEX = CONTENT / "content_index.json"
 
@@ -192,6 +193,20 @@ def validate_generated_outputs(failures):
             fail("first_single_alignment_audit.json missing platform checks", failures)
     else:
         fail("first_single_alignment_audit.json missing; run scripts/audit_first_single_alignment.py", failures)
+    if PROMO_ENGINE_STATUS.exists():
+        status = json.loads(PROMO_ENGINE_STATUS.read_text(encoding="utf-8"))
+        releases = status.get("releases") or []
+        health = status.get("health") or {}
+        if releases and health.get("tracked_releases") == len(releases):
+            ok(f"promo engine status tracks {len(releases)} releases")
+        else:
+            fail("promo_engine_status.json missing release health summary", failures)
+        if "next_actions" in status:
+            ok(f"promo engine status has {len(status.get('next_actions') or [])} next actions")
+        else:
+            fail("promo_engine_status.json missing next_actions", failures)
+    else:
+        fail("promo_engine_status.json missing; run scripts/update_promo_engine_status.py", failures)
 
 
 def validate_report(failures):

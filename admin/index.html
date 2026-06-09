@@ -437,6 +437,13 @@
               </div>
             </section>
 
+            <section class="report-card" aria-labelledby="promo-health-heading">
+              <h2 id="promo-health-heading">Promo Health</h2>
+              <div class="queue-list" id="promo-health">
+                <div class="muted">Loading promo health...</div>
+              </div>
+            </section>
+
             <section class="report-card" aria-labelledby="pipeline-heading">
               <h2 id="pipeline-heading">Pipeline Health</h2>
               <div class="queue-list" id="pipeline-health">
@@ -465,6 +472,7 @@
                 <a class="source-link" href="reports/weekly-social-report.md" target="_blank" rel="noopener">Weekly report</a>
                 <a class="source-link" href="../data/manual_social_stats.json" target="_blank" rel="noopener">Manual stats</a>
                 <a class="source-link" href="../data/distrokid_release_status.json" target="_blank" rel="noopener">Release status</a>
+                <a class="source-link" href="../data/promo_engine_status.json" target="_blank" rel="noopener">Promo health</a>
                 <a class="source-link" href="future-posts.json" target="_blank" rel="noopener">Future queue</a>
               </div>
             </section>
@@ -808,6 +816,204 @@
   ]
 }</script>
 
+<script type="application/json" id="embedded-promo-engine-status">{
+  "generated_at": "2026-06-09T12:21:44.551734+00:00",
+  "source": {
+    "release_status": "data/distrokid_release_status.json",
+    "scheduled_posts": "data/scheduled_posts.csv",
+    "published_log": "admin/content/Published_Log.csv",
+    "manual_metrics": "data/manual_social_stats.json",
+    "live_metrics": "data/live_social_metrics.json"
+  },
+  "objective": "Promote Lily Roo releases and keep lilyroo.com/admin status and metrics current.",
+  "kpi": {
+    "primary": "Reach 1,000 YouTube subscribers",
+    "live_platform_count": 3,
+    "pending_manual_metric_fields": 12,
+    "live_metrics_updated_at": "2026-06-07T20:28:53.808Z"
+  },
+  "health": {
+    "score": 0,
+    "healthy_releases": 0,
+    "tracked_releases": 3,
+    "open_action_count": 9
+  },
+  "releases": [
+    {
+      "title": "I Learned It All in Fifteen Seconds",
+      "status": "needs_attention",
+      "primary_cta": "Spotify",
+      "release_date": "2026-06-05",
+      "store_link_count": 5,
+      "queued_posts": 9,
+      "published_posts": 3,
+      "latest_published": "2026-06-07",
+      "queued_platforms": [
+        "Facebook",
+        "Instagram",
+        "TikTok",
+        "X",
+        "YouTube Community"
+      ],
+      "published_platforms": [
+        "Facebook",
+        "X"
+      ],
+      "published_platform_counts": {
+        "Facebook": 1,
+        "X": 2
+      },
+      "missing_platforms": [],
+      "actions": [
+        "Refresh pending manual metrics before weekly reporting."
+      ]
+    },
+    {
+      "title": "Twelve Dollars",
+      "status": "no_active_promo",
+      "primary_cta": "YouTube playlist until store links are verified",
+      "release_date": "pending public store verification",
+      "store_link_count": 2,
+      "queued_posts": 0,
+      "published_posts": 0,
+      "latest_published": "",
+      "queued_platforms": [],
+      "published_platforms": [],
+      "published_platform_counts": {},
+      "missing_platforms": [
+        "X",
+        "Instagram",
+        "TikTok",
+        "Facebook",
+        "YouTube Community"
+      ],
+      "actions": [
+        "Verify and add remaining public store links.",
+        "Create the next cross-platform promo queue for this release.",
+        "Add promo coverage for X, Instagram, TikTok, Facebook, YouTube Community.",
+        "Refresh pending manual metrics before weekly reporting."
+      ]
+    },
+    {
+      "title": "Analog Myth",
+      "status": "needs_attention",
+      "primary_cta": "YouTube playlist until July 1 store links are verified",
+      "release_date": "2026-07-01",
+      "store_link_count": 1,
+      "queued_posts": 0,
+      "published_posts": 13,
+      "latest_published": "2026-05-09",
+      "queued_platforms": [],
+      "published_platforms": [
+        "Facebook",
+        "Instagram",
+        "TikTok",
+        "X",
+        "YouTube"
+      ],
+      "published_platform_counts": {
+        "Facebook": 2,
+        "Instagram": 3,
+        "TikTok": 1,
+        "X": 3,
+        "YouTube": 4
+      },
+      "missing_platforms": [
+        "YouTube Community"
+      ],
+      "actions": [
+        "Verify and add remaining public store links.",
+        "Create the next cross-platform promo queue for this release.",
+        "Add promo coverage for YouTube Community.",
+        "Refresh pending manual metrics before weekly reporting."
+      ]
+    }
+  ],
+  "next_actions": [
+    "I Learned It All in Fifteen Seconds: Refresh pending manual metrics before weekly reporting.",
+    "Twelve Dollars: Verify and add remaining public store links.",
+    "Twelve Dollars: Create the next cross-platform promo queue for this release.",
+    "Twelve Dollars: Add promo coverage for X, Instagram, TikTok, Facebook, YouTube Community.",
+    "Twelve Dollars: Refresh pending manual metrics before weekly reporting.",
+    "Analog Myth: Verify and add remaining public store links.",
+    "Analog Myth: Create the next cross-platform promo queue for this release.",
+    "Analog Myth: Add promo coverage for YouTube Community."
+  ]
+}</script>
+
+<script type="application/json" id="embedded-distrokid-release-status">{
+  "updated_at": "2026-06-08T21:47:42-04:00",
+  "source": "local release manifests, public store snapshots, and YouTube playlist manifests",
+  "artist": "Lily Roo",
+  "producer_credit": "Lily Claw",
+  "releases": [
+    {
+      "title": "I Learned It All in Fifteen Seconds",
+      "type": "album",
+      "track_count": 8,
+      "distrokid_status": "submitted and public on verified stores for the title-track release",
+      "store_status": "Spotify, Apple Music, iTunes, and YouTube Music verified for the public title-track release; additional album/store links still need public verification as they appear.",
+      "release_date": "2026-06-05",
+      "primary_cta": "Spotify",
+      "spotify_url": "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+      "apple_music_url": "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+      "youtube_music_url": "https://music.youtube.com/watch?v=vK0mDIW65o4",
+      "hyperfollow_url": "https://distrokid.com/hyperfollow/lilyroo/i-learned-it-all-in-fifteen-seconds",
+      "youtube_playlist_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXWKTqgIs2N6dCU3BfS_9J2C",
+      "asset_root": "assets/albums/i-learned-it-all-in-fifteen-seconds/",
+      "notes": [
+        "Remastered YouTube album videos are public and ordered in the album playlist.",
+        "Spotify for Artists metrics still require manual export or connected analytics access."
+      ]
+    },
+    {
+      "title": "Twelve Dollars",
+      "type": "album",
+      "track_count": 8,
+      "distrokid_status": "uploaded/prepared from local masters; public streaming links still need verification when stores expose them",
+      "store_status": "YouTube remaster and album playlist are public; Spotify, Apple Music, and DistroKid/HyperFollow public links are pending verification.",
+      "release_date": "pending public store verification",
+      "primary_cta": "YouTube playlist until store links are verified",
+      "spotify_url": "",
+      "apple_music_url": "",
+      "youtube_music_url": "https://music.youtube.com/watch?v=G2RlCwZKOsk",
+      "hyperfollow_url": "",
+      "youtube_playlist_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+      "asset_root": "assets/albums/twelve-dollars/",
+      "notes": [
+        "Twelve Dollars title video was replaced with updated art and remastered local audio.",
+        "The old title video is unlisted and marked archived.",
+        "Playlist image was set to the approved Twelve Dollars cover."
+      ]
+    },
+    {
+      "title": "Analog Myth",
+      "type": "album",
+      "track_count": 8,
+      "distrokid_status": "submitted to DistroKid for July 1 release and remastered audio downloaded locally",
+      "store_status": "YouTube remaster album playlist is public; Spotify, Apple Music, and other DistroKid store links are pending public verification.",
+      "release_date": "2026-07-01",
+      "primary_cta": "YouTube playlist until July 1 store links are verified",
+      "spotify_url": "",
+      "apple_music_url": "",
+      "youtube_music_url": "",
+      "hyperfollow_url": "",
+      "youtube_playlist_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+      "asset_root": "assets/albums/analog-myth/",
+      "notes": [
+        "DistroKid/Mixea 24-bit/48k WAV masters are stored in audio-distrokid-remastered.",
+        "All eight Analog Myth YouTube videos were remastered, uploaded, and the originals were archived as unlisted.",
+        "Album order is 13, Girls Camp, Analog Myth, Spilling the Tea, No Mortgage, Guards Down, Slow Walk, The Power of Light."
+      ]
+    }
+  ],
+  "open_checks": [
+    "Verify Twelve Dollars public Spotify, Apple Music, YouTube Music release, and HyperFollow links when DistroKid exposes them.",
+    "Verify Analog Myth public Spotify, Apple Music, YouTube Music release, and HyperFollow links on or after 2026-07-01.",
+    "Keep Amazon Music pending until a public URL is found from DistroKid or direct store search."
+  ]
+}</script>
+
 <script>
   const ADMIN_AUTH_KEY='lilyroo_admin_password_v1';
   const ADMIN_PASSWORD_DIGEST='24b26ab1e602268c369f95fc3612fd80417c9d0fcb90b965ce8f4b227943c8df';
@@ -934,7 +1140,9 @@
     'content/Published_Log.csv':'embedded-published-log'
   };
   const EMBEDDED_JSON_ASSETS={
-    'future-posts.json':'embedded-future-posts'
+    'future-posts.json':'embedded-future-posts',
+    'data/distrokid_release_status.json':'embedded-distrokid-release-status',
+    'data/promo_engine_status.json':'embedded-promo-engine-status'
   };
   const BACKSTORY_DOCS=[
     {id:'canon',category:'Canon',title:'Canon Spine',url:'content/00_CANON.md',summary:'Mission, identity, recurring themes, origin story, objects, and era anchors.'},
@@ -954,7 +1162,7 @@
   }
 
   function embeddedJsonAsset(url,fallback){
-    const key=String(url).split('?')[0].replace(/^\.\//,'');
+    const key=String(url).split('?')[0].replace(/^\.\//,'').replace(/^\.\.\//,'');
     const el=document.getElementById(EMBEDDED_JSON_ASSETS[key]);
     if(!el) return fallback;
     try{return JSON.parse(el.textContent);}
@@ -1319,11 +1527,13 @@
 
   function fetchTextOrEmpty(url){
     const fallback=embeddedTextAsset(url);
+    if(typeof fetch!=='function') return Promise.resolve(fallback);
     return fetch(`${url}${url.includes('?')?'&':'?'}v=${Date.now()}`,{cache:'no-store'}).then(r=>r.ok?r.text():fallback).catch(()=>fallback);
   }
 
   function fetchJsonOr(url,fallback){
     const embedded=embeddedJsonAsset(url,fallback);
+    if(typeof fetch!=='function') return Promise.resolve(embedded);
     return fetch(`${url}${url.includes('?')?'&':'?'}v=${Date.now()}`,{cache:'no-store'}).then(r=>r.ok?r.json():embedded).catch(()=>embedded);
   }
 
@@ -1690,6 +1900,60 @@
     root.innerHTML=`${updated}${items}${checks}`;
   }
 
+  function promoHealthClass(status){
+    if(status==='healthy') return 'ok';
+    if(status==='no_active_promo') return 'bad';
+    if(status==='needs_attention') return 'warn';
+    return 'neutral';
+  }
+
+  function promoHealthLabel(status){
+    if(status==='healthy') return 'Healthy';
+    if(status==='no_active_promo') return 'No active promo';
+    if(status==='needs_attention') return 'Needs attention';
+    return status?'Tracked':'Unknown';
+  }
+
+  function renderPromoHealth(status){
+    const root=document.getElementById('promo-health');
+    if(!root) return;
+    const releases=Array.isArray(status?.releases)?status.releases:[];
+    if(!releases.length){
+      root.innerHTML='<div class="muted">No promo health snapshot found.</div>';
+      return;
+    }
+    const health=status.health||{};
+    const kpi=status.kpi||{};
+    const summary=`<div class="queue-item">
+      <div class="queue-top">
+        <div>
+          <div class="queue-title">Promotion engine</div>
+          <div class="queue-meta">${escapeHtml(health.open_action_count||0)} open actions - ${escapeHtml(kpi.live_platform_count||0)} live metric sources - ${escapeHtml(kpi.pending_manual_metric_fields||0)} pending manual fields</div>
+        </div>
+        <span class="status-chip ${Number(health.open_action_count||0)?'warn':'ok'}">${escapeHtml(health.score ?? 0)}%</span>
+      </div>
+    </div>`;
+    const releaseItems=releases.map(release=>{
+      const platforms=(release.missing_platforms||[]).length
+        ? `Missing: ${(release.missing_platforms||[]).join(', ')}`
+        : 'Platform coverage complete';
+      return `<div class="queue-item">
+        <div class="queue-top">
+          <div>
+            <div class="queue-title">${escapeHtml(release.title||'Untitled release')}</div>
+            <div class="queue-meta">${escapeHtml(release.published_posts||0)} posted - ${escapeHtml(release.queued_posts||0)} queued - ${escapeHtml(platforms)}</div>
+          </div>
+          <span class="status-chip ${escapeHtml(promoHealthClass(release.status))}">${escapeHtml(promoHealthLabel(release.status))}</span>
+        </div>
+      </div>`;
+    }).join('');
+    const actions=(status.next_actions||[]).slice(0,4);
+    const actionList=actions.length
+      ? `<ul class="release-open-checks">${actions.map(action=>`<li>${escapeHtml(action)}</li>`).join('')}</ul>`
+      : '<div class="muted">No immediate promo actions.</div>';
+    root.innerHTML=`${summary}${releaseItems}${actionList}`;
+  }
+
   function renderPipelineHealth(queuePayload,readiness,report,metrics){
     const root=document.getElementById('pipeline-health');
     if(!root) return;
@@ -1751,11 +2015,12 @@
 
   async function loadReportsDashboard(){
     if(!document.getElementById('reports-period')) return;
-    const [md,publishedCsv,queuePayload,releaseStatus,readiness,metrics,executions]=await Promise.all([
+    const [md,publishedCsv,queuePayload,releaseStatus,promoHealth,readiness,metrics,executions]=await Promise.all([
       fetchTextOrEmpty(localPath('/admin/reports/weekly-social-report.md')),
       fetchTextOrEmpty(localPath('/admin/content/Published_Log.csv')),
       fetchJsonOr(localPath('/admin/future-posts.json'),{}),
       fetchJsonOr(localPath('/data/distrokid_release_status.json'),{}),
+      fetchJsonOr(localPath('/data/promo_engine_status.json'),{}),
       readinessPromise,
       metricsPromise,
       executionsPromise
@@ -1771,6 +2036,7 @@
     renderPlatformRows(report,publishedRows,readiness,metrics);
     renderRecentPublishing(publishedRows);
     renderReleaseRollout(releaseStatus);
+    renderPromoHealth(promoHealth);
     renderPipelineHealth(queuePayload,readiness,report,metrics);
     renderNextPosts(queuePayload,executions);
     renderPriorities(report);
