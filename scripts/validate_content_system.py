@@ -21,6 +21,7 @@ YOUTUBE_MUSIC_SNAPSHOT = ROOT / "data" / "youtube_music_release_snapshot.json"
 HYPERFOLLOW_SNAPSHOT = ROOT / "data" / "hyperfollow_store_links_snapshot.json"
 ALIGNMENT_AUDIT = ROOT / "data" / "first_single_alignment_audit.json"
 PROMO_ENGINE_STATUS = ROOT / "data" / "promo_engine_status.json"
+PROMO_QUEUE_PLAN = ROOT / "data" / "promo_queue_plan.json"
 REPORT = ROOT / "admin" / "reports" / "weekly-social-report.md"
 INDEX = CONTENT / "content_index.json"
 
@@ -207,6 +208,19 @@ def validate_generated_outputs(failures):
             fail("promo_engine_status.json missing next_actions", failures)
     else:
         fail("promo_engine_status.json missing; run scripts/update_promo_engine_status.py", failures)
+    if PROMO_QUEUE_PLAN.exists():
+        plan = json.loads(PROMO_QUEUE_PLAN.read_text(encoding="utf-8"))
+        posts = plan.get("posts") or []
+        if posts and plan.get("mode") == "draft_plan_only":
+            ok(f"promo queue plan has {len(posts)} draft posts")
+        else:
+            fail("promo_queue_plan.json missing draft posts or mode", failures)
+        for post in posts:
+            for key in ("id", "scheduled_at", "platform", "song", "text", "execution_mode", "post_type"):
+                if not str(post.get(key) or "").strip():
+                    fail(f"promo queue plan row {post.get('id') or '[missing id]'} missing {key}", failures)
+    else:
+        fail("promo_queue_plan.json missing; run scripts/generate_promo_queue_plan.py", failures)
 
 
 def validate_report(failures):

@@ -444,6 +444,13 @@
               </div>
             </section>
 
+            <section class="report-card" aria-labelledby="promo-plan-heading">
+              <h2 id="promo-plan-heading">Promo Queue Plan</h2>
+              <div class="queue-list" id="promo-queue-plan">
+                <div class="muted">Loading promo plan...</div>
+              </div>
+            </section>
+
             <section class="report-card" aria-labelledby="pipeline-heading">
               <h2 id="pipeline-heading">Pipeline Health</h2>
               <div class="queue-list" id="pipeline-health">
@@ -473,6 +480,7 @@
                 <a class="source-link" href="../data/manual_social_stats.json" target="_blank" rel="noopener">Manual stats</a>
                 <a class="source-link" href="../data/distrokid_release_status.json" target="_blank" rel="noopener">Release status</a>
                 <a class="source-link" href="../data/promo_engine_status.json" target="_blank" rel="noopener">Promo health</a>
+                <a class="source-link" href="../data/promo_queue_plan.json" target="_blank" rel="noopener">Promo plan</a>
                 <a class="source-link" href="future-posts.json" target="_blank" rel="noopener">Future queue</a>
               </div>
             </section>
@@ -817,7 +825,7 @@
 }</script>
 
 <script type="application/json" id="embedded-promo-engine-status">{
-  "generated_at": "2026-06-09T12:21:44.551734+00:00",
+  "generated_at": "2026-06-09T12:45:49.828165+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -1014,6 +1022,157 @@
   ]
 }</script>
 
+<script type="application/json" id="embedded-promo-queue-plan">{
+  "generated_at": "2026-06-09T08:45:49.860194-04:00",
+  "source": {
+    "promo_engine_status": "data/promo_engine_status.json",
+    "release_status": "data/distrokid_release_status.json"
+  },
+  "mode": "draft_plan_only",
+  "csv_target": "data/scheduled_posts.csv",
+  "apply_note": "Review these rows, then copy approved rows into data/scheduled_posts.csv and run scripts/sync_future_posts.py.",
+  "posts": [
+    {
+      "id": "FP-PLAN-001",
+      "scheduled_at": "2026-06-10T10:15:00-04:00",
+      "platform": "X",
+      "song": "Twelve Dollars",
+      "imagery": "Twelve Dollars promo coverage",
+      "imagery_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
+      "clip_url": "",
+      "text": "Twelve Dollars is the part where the stage gets too bright and the joke gets honest. Full album playlist is live.",
+      "drafts": [
+        "Twelve Dollars is the part where the stage gets too bright and the joke gets honest. Full album playlist is live.",
+        "A small amount of money, a large amount of stage light. Full signal on YouTube.",
+        "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers."
+      ],
+      "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+      "x_media_key": "",
+      "media_key": "twelve-dollars-cover",
+      "approved": "no",
+      "execution_mode": "auto",
+      "post_type": "image",
+      "desired_privacy": "",
+      "reason": "Promo health flagged missing X coverage for Twelve Dollars."
+    },
+    {
+      "id": "FP-PLAN-002",
+      "scheduled_at": "2026-06-11T14:05:00-04:00",
+      "platform": "Instagram",
+      "song": "Twelve Dollars",
+      "imagery": "Twelve Dollars promo coverage",
+      "imagery_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
+      "clip_url": "",
+      "text": "Twelve Dollars is live on YouTube: stage lights, scattered bills, impossible shoes, and one very stubborn little signal.",
+      "drafts": [
+        "Twelve Dollars is live on YouTube: stage lights, scattered bills, impossible shoes, and one very stubborn little signal.",
+        "A small amount of money, a large amount of stage light. Full signal on YouTube.",
+        "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers."
+      ],
+      "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+      "x_media_key": "",
+      "media_key": "twelve-dollars-cover",
+      "approved": "no",
+      "execution_mode": "auto",
+      "post_type": "image",
+      "desired_privacy": "",
+      "reason": "Promo health flagged missing Instagram coverage for Twelve Dollars."
+    },
+    {
+      "id": "FP-PLAN-003",
+      "scheduled_at": "2026-06-12T20:40:00-04:00",
+      "platform": "TikTok",
+      "song": "Twelve Dollars",
+      "imagery": "Twelve Dollars promo coverage",
+      "imagery_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
+      "clip_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/video/04-twelve-dollars-youtube-remaster.mp4",
+      "text": "Twelve Dollars is what happens when the joke walks on stage wearing impossible shoes. Full album playlist is live.",
+      "drafts": [
+        "Twelve Dollars is what happens when the joke walks on stage wearing impossible shoes. Full album playlist is live.",
+        "A small amount of money, a large amount of stage light. Full signal on YouTube.",
+        "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers."
+      ],
+      "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+      "x_media_key": "",
+      "media_key": "twelve-dollars-video",
+      "approved": "no",
+      "execution_mode": "auto",
+      "post_type": "video",
+      "desired_privacy": "PUBLIC_TO_EVERYONE",
+      "reason": "Promo health flagged missing TikTok coverage for Twelve Dollars."
+    },
+    {
+      "id": "FP-PLAN-004",
+      "scheduled_at": "2026-06-13T11:20:00-04:00",
+      "platform": "Facebook",
+      "song": "Twelve Dollars",
+      "imagery": "Twelve Dollars promo coverage",
+      "imagery_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
+      "clip_url": "",
+      "text": "Twelve Dollars is live in the Lily Roo archive. The remastered videos are up, the playlist is public, and the stage finally has the right kind of trouble on it.",
+      "drafts": [
+        "Twelve Dollars is live in the Lily Roo archive. The remastered videos are up, the playlist is public, and the stage finally has the right kind of trouble on it.",
+        "A small amount of money, a large amount of stage light. Full signal on YouTube.",
+        "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers."
+      ],
+      "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+      "x_media_key": "",
+      "media_key": "twelve-dollars-cover",
+      "approved": "no",
+      "execution_mode": "auto",
+      "post_type": "image",
+      "desired_privacy": "",
+      "reason": "Promo health flagged missing Facebook coverage for Twelve Dollars."
+    },
+    {
+      "id": "FP-PLAN-005",
+      "scheduled_at": "2026-06-14T18:30:00-04:00",
+      "platform": "YouTube Community",
+      "song": "Twelve Dollars",
+      "imagery": "Twelve Dollars promo coverage",
+      "imagery_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
+      "clip_url": "",
+      "text": "New album transmission: Twelve Dollars. Remastered videos, updated art, full playlist live now.",
+      "drafts": [
+        "New album transmission: Twelve Dollars. Remastered videos, updated art, full playlist live now.",
+        "A small amount of money, a large amount of stage light. Full signal on YouTube.",
+        "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers."
+      ],
+      "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+      "x_media_key": "",
+      "media_key": "twelve-dollars-cover",
+      "approved": "no",
+      "execution_mode": "manual",
+      "post_type": "community",
+      "desired_privacy": "",
+      "reason": "Promo health flagged missing YouTube Community coverage for Twelve Dollars."
+    },
+    {
+      "id": "FP-PLAN-006",
+      "scheduled_at": "2026-06-15T18:30:00-04:00",
+      "platform": "YouTube Community",
+      "song": "Analog Myth",
+      "imagery": "Analog Myth promo coverage",
+      "imagery_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
+      "clip_url": "",
+      "text": "Analog Myth transmission is live: 13, Girls Camp, Analog Myth, Spilling the Tea, No Mortgage, Guards Down, Slow Walk, The Power of Light.",
+      "drafts": [
+        "Analog Myth transmission is live: 13, Girls Camp, Analog Myth, Spilling the Tea, No Mortgage, Guards Down, Slow Walk, The Power of Light.",
+        "Time broke, so Lily Roo made an album out of the pieces. Full signal on YouTube.",
+        "Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers."
+      ],
+      "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+      "x_media_key": "",
+      "media_key": "analog-myth-cover",
+      "approved": "no",
+      "execution_mode": "manual",
+      "post_type": "community",
+      "desired_privacy": "",
+      "reason": "Promo health flagged missing YouTube Community coverage for Analog Myth."
+    }
+  ]
+}</script>
+
 <script>
   const ADMIN_AUTH_KEY='lilyroo_admin_password_v1';
   const ADMIN_PASSWORD_DIGEST='24b26ab1e602268c369f95fc3612fd80417c9d0fcb90b965ce8f4b227943c8df';
@@ -1142,7 +1301,8 @@
   const EMBEDDED_JSON_ASSETS={
     'future-posts.json':'embedded-future-posts',
     'data/distrokid_release_status.json':'embedded-distrokid-release-status',
-    'data/promo_engine_status.json':'embedded-promo-engine-status'
+    'data/promo_engine_status.json':'embedded-promo-engine-status',
+    'data/promo_queue_plan.json':'embedded-promo-queue-plan'
   };
   const BACKSTORY_DOCS=[
     {id:'canon',category:'Canon',title:'Canon Spine',url:'content/00_CANON.md',summary:'Mission, identity, recurring themes, origin story, objects, and era anchors.'},
@@ -1954,6 +2114,37 @@
     root.innerHTML=`${summary}${releaseItems}${actionList}`;
   }
 
+  function renderPromoQueuePlan(plan){
+    const root=document.getElementById('promo-queue-plan');
+    if(!root) return;
+    const posts=Array.isArray(plan?.posts)?plan.posts:[];
+    if(!posts.length){
+      root.innerHTML='<div class="muted">No draft promo plan generated.</div>';
+      return;
+    }
+    const intro=`<div class="queue-item">
+      <div class="queue-top">
+        <div>
+          <div class="queue-title">${escapeHtml(posts.length)} draft posts ready for review</div>
+          <div class="queue-meta">${escapeHtml(plan.apply_note||'Review before adding to the live schedule.')}</div>
+        </div>
+        <span class="status-chip neutral">Draft</span>
+      </div>
+    </div>`;
+    const items=posts.slice(0,5).map(post=>`<div class="queue-item">
+      <div class="queue-top">
+        <div>
+          <div class="queue-title">${escapeHtml(post.platform||'Platform')} - ${escapeHtml(post.song||'Release')}</div>
+          <div class="queue-meta">${escapeHtml(formatQueueDate(post.scheduled_at))} - ${escapeHtml(post.post_type||'post')} - ${escapeHtml(post.execution_mode||'manual')}</div>
+          <div class="queue-meta">${escapeHtml(post.text||'')}</div>
+        </div>
+        <span class="status-chip ${post.approved==='yes'?'ok':'neutral'}">${escapeHtml(post.approved==='yes'?'Approved':'Review')}</span>
+      </div>
+    </div>`).join('');
+    const more=posts.length>5?`<div class="queue-meta">${escapeHtml(posts.length-5)} more draft post${posts.length-5===1?'':'s'} in the JSON plan.</div>`:'';
+    root.innerHTML=`${intro}${items}${more}`;
+  }
+
   function renderPipelineHealth(queuePayload,readiness,report,metrics){
     const root=document.getElementById('pipeline-health');
     if(!root) return;
@@ -2015,12 +2206,13 @@
 
   async function loadReportsDashboard(){
     if(!document.getElementById('reports-period')) return;
-    const [md,publishedCsv,queuePayload,releaseStatus,promoHealth,readiness,metrics,executions]=await Promise.all([
+    const [md,publishedCsv,queuePayload,releaseStatus,promoHealth,promoPlan,readiness,metrics,executions]=await Promise.all([
       fetchTextOrEmpty(localPath('/admin/reports/weekly-social-report.md')),
       fetchTextOrEmpty(localPath('/admin/content/Published_Log.csv')),
       fetchJsonOr(localPath('/admin/future-posts.json'),{}),
       fetchJsonOr(localPath('/data/distrokid_release_status.json'),{}),
       fetchJsonOr(localPath('/data/promo_engine_status.json'),{}),
+      fetchJsonOr(localPath('/data/promo_queue_plan.json'),{}),
       readinessPromise,
       metricsPromise,
       executionsPromise

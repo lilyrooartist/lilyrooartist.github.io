@@ -21,6 +21,11 @@ Refresh with:
 
 This snapshot combines release links, queued posts, published posts, platform coverage, live metric availability, and manual metric gaps into the Promo Health card on `/admin`.
 
+Draft next queue rows from those gaps with:
+`python3 scripts/generate_promo_queue_plan.py`
+
+This writes `data/promo_queue_plan.json`, embeds it into `/admin`, and keeps the output in draft-plan mode. Review the rows before copying approved items into `data/scheduled_posts.csv`.
+
 ### I Learned It All in Fifteen Seconds
 - Spotify: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi
 - Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249
