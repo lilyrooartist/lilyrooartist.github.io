@@ -94,6 +94,18 @@ def approval_command(post_id: str) -> str:
     return f"python3 scripts/approve_promo_queue_plan.py --id {post_id} --refresh-admin"
 
 
+def approval_scope_command(*, release: str = "", platform: str = "", all_posts: bool = False) -> str:
+    parts = ["python3", "scripts/approve_promo_queue_plan.py"]
+    if all_posts:
+        parts.append("--all")
+    if release:
+        parts.extend(["--release", json.dumps(release)])
+    if platform:
+        parts.extend(["--platform", json.dumps(platform)])
+    parts.append("--refresh-admin")
+    return " ".join(parts)
+
+
 def apply_command() -> str:
     return "python3 scripts/apply_promo_queue_plan.py --apply --refresh-admin"
 
@@ -230,6 +242,23 @@ def apply_preview(posts, scheduled_rows):
     }
 
 
+def approval_commands(posts):
+    review_posts = [post for post in posts if post.get("approved") != "yes"]
+    releases = sorted({post.get("song") for post in review_posts if post.get("song")})
+    platforms = sorted({post.get("platform") for post in review_posts if post.get("platform")})
+    return {
+        "all_review": approval_scope_command(all_posts=True) if review_posts else "",
+        "by_release": {
+            release: approval_scope_command(release=release)
+            for release in releases
+        },
+        "by_platform": {
+            platform: approval_scope_command(platform=platform)
+            for platform in platforms
+        },
+    }
+
+
 def build_plan():
     promo = read_json(PROMO_STATUS, {})
     releases = release_lookup(read_json(RELEASE_STATUS, {}))
@@ -284,6 +313,7 @@ def build_plan():
         "csv_target": "data/scheduled_posts.csv",
         "apply_note": "Mark reviewed rows approved=yes, then apply approved rows into the live schedule.",
         "apply_command": apply_command(),
+        "approval_commands": approval_commands(posts),
         "summary": plan_summary(posts),
         "apply_preview": apply_preview(posts, scheduled_rows),
         "posts": posts,

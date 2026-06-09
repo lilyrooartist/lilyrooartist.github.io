@@ -272,6 +272,18 @@ def validate_generated_outputs(failures):
             ok("promo queue plan includes refresh-aware apply command")
         else:
             fail("promo_queue_plan.json missing refresh-aware apply command", failures)
+        approval_commands = plan.get("approval_commands") or {}
+        if summary.get("review_posts", 0):
+            all_review_command = approval_commands.get("all_review") or ""
+            by_release = approval_commands.get("by_release") or {}
+            if "approve_promo_queue_plan.py --all --refresh-admin" in all_review_command:
+                ok("promo queue plan includes all-review approval command")
+            else:
+                fail("promo_queue_plan.json missing all-review approval command", failures)
+            if by_release:
+                ok(f"promo queue plan includes release approval commands for {len(by_release)} release(s)")
+            else:
+                fail("promo_queue_plan.json missing release approval commands", failures)
         apply_preview = plan.get("apply_preview") or {}
         for key in ("ready_to_apply_posts", "review_posts", "scheduled_duplicate_posts", "ready_ids", "scheduled_duplicate_ids"):
             if key not in apply_preview:
