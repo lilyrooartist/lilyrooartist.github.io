@@ -19,9 +19,9 @@ Admin promo-health snapshot: `data/promo_engine_status.json`
 Refresh with:
 `python3 scripts/update_promo_engine_status.py`
 
-This snapshot combines release links, queued posts, published posts, platform coverage, live metric availability, and manual metric gaps into the Promo Health card on `/admin`.
+This snapshot combines release links, store verification history, queued posts, published posts, platform coverage, live metric availability, and manual metric gaps into the Promo Health card on `/admin`.
 
-It also audits source freshness so `/admin` shows when release status, the queue, promo plan, published log, manual metrics, or live metrics need refresh. Live metrics and promo plans are expected to be refreshed daily; release status, queue, and manual metrics every 72 hours; the published log weekly.
+It also audits source freshness so `/admin` shows when release status, the queue, promo plan, published log, manual metrics, live metrics, executor readiness, or store verification history need refresh. Live metrics, promo plans, executor readiness, and store verification history are expected to be refreshed daily; release status, queue, and manual metrics every 72 hours; the published log weekly.
 
 When live APIs cannot provide a metric, the snapshot includes `pending_manual_by_platform` so `/admin` names the exact manual fields still needed for reporting.
 

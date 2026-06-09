@@ -509,7 +509,7 @@
 <script type="text/plain" id="embedded-weekly-report"># Weekly Social Report — Lily Roo
 
 **Period:** 2026-06-03 to 2026-06-09
-**Last updated:** 2026-06-09 03:42 PM EDT
+**Last updated:** 2026-06-09 04:07 PM EDT
 
 ## KPI Goal
 - Primary growth target: **1,000 YouTube subscribers** (monetization milestone)
@@ -584,6 +584,7 @@
 - HyperFollow: https://distrokid.com/hyperfollow/lilyroo/i-learned-it-all-in-fifteen-seconds
 - HyperFollow stores: **applemusic, itunes, spotify**
 - Amazon Music: **pending verified public URL; not exposed by current HyperFollow store list**
+- All-release store verification: **8 live, 4 checked pending, 3 pending, 4 snapshots**
 
 ### First Single Alignment
 - Status: **aligned**
@@ -638,6 +639,8 @@
 - YouTube Music snapshot file: `data/youtube_music_release_snapshot.json`
 - HyperFollow stores captured: **2026-06-07T20:51:14.275569Z**
 - HyperFollow snapshot file: `data/hyperfollow_store_links_snapshot.json`
+- All-release store verification captured: **2026-06-09T20:06:31.705996+00:00**
+- All-release store verification file: `data/store_verification_history.json`
 - First single alignment audit captured: **2026-06-07T21:39:03.668040Z**
 - First single alignment audit file: `data/first_single_alignment_audit.json`
 - Spotify public release captured: **2026-06-07T16:51:57.554497Z**
@@ -843,7 +846,7 @@
 }</script>
 
 <script type="application/json" id="embedded-promo-engine-status">{
-  "generated_at": "2026-06-09T19:42:20.610434+00:00",
+  "generated_at": "2026-06-09T20:06:31.705996+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -852,7 +855,8 @@
     "manual_metrics": "data/manual_social_stats.json",
     "live_metrics": "data/live_social_metrics.json",
     "metrics_history": "data/metrics_history.json",
-    "executor_readiness": "data/executor_readiness_snapshot.json"
+    "executor_readiness": "data/executor_readiness_snapshot.json",
+    "store_verification_history": "data/store_verification_history.json"
   },
   "objective": "Promote Lily Roo releases and keep lilyroo.com/admin status and metrics current.",
   "kpi": {
@@ -1033,6 +1037,15 @@
     "music_sites_submitted": 3,
     "music_sites_pending": 7,
     "store_verification_command_count": 7,
+    "store_verification_history": {
+      "total_services": 15,
+      "live": 8,
+      "submitted": 0,
+      "pending": 3,
+      "checked_pending": 4,
+      "found_in_snapshot": 0,
+      "snapshot_count": 4
+    },
     "stale_source_count": 0,
     "missing_source_count": 0
   },
@@ -1041,23 +1054,23 @@
     "healthy_releases": 0,
     "tracked_releases": 3,
     "open_action_count": 9,
-    "fresh_sources": 8,
+    "fresh_sources": 9,
     "stale_sources": 0,
     "missing_sources": 0
   },
   "freshness": {
     "summary": {
-      "fresh": 8,
+      "fresh": 9,
       "stale": 0,
       "missing": 0,
-      "checked_at": "2026-06-09T19:42:20.610434+00:00"
+      "checked_at": "2026-06-09T20:06:31.705996+00:00"
     },
     "sources": [
       {
         "name": "release_status",
         "path": "data/distrokid_release_status.json",
         "status": "fresh",
-        "age_hours": 17.9,
+        "age_hours": 18.3,
         "max_age_hours": 72,
         "timestamp": "2026-06-09T01:47:42+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin; update data/distrokid_release_status.json when a public URL is verified."
@@ -1066,7 +1079,7 @@
         "name": "scheduled_posts",
         "path": "data/scheduled_posts.csv",
         "status": "fresh",
-        "age_hours": 46.1,
+        "age_hours": 46.5,
         "max_age_hours": 72,
         "timestamp": "2026-06-07T21:38:44.418468+00:00",
         "refresh_command": "python3 scripts/sync_future_posts.py"
@@ -1075,7 +1088,7 @@
         "name": "promo_queue_plan",
         "path": "data/promo_queue_plan.json",
         "status": "fresh",
-        "age_hours": 0.0,
+        "age_hours": 0.4,
         "max_age_hours": 24,
         "timestamp": "2026-06-09T19:42:20.583384+00:00",
         "refresh_command": "python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
@@ -1084,7 +1097,7 @@
         "name": "published_log",
         "path": "admin/content/Published_Log.csv",
         "status": "fresh",
-        "age_hours": 55.1,
+        "age_hours": 55.5,
         "max_age_hours": 168,
         "timestamp": "2026-06-07T12:36:37.141276+00:00",
         "refresh_command": "Export or append latest published posts to admin/content/Published_Log.csv."
@@ -1093,7 +1106,7 @@
         "name": "manual_metrics",
         "path": "data/manual_social_stats.json",
         "status": "fresh",
-        "age_hours": 51.9,
+        "age_hours": 52.3,
         "max_age_hours": 72,
         "timestamp": "2026-06-07T15:47:26.729764+00:00",
         "refresh_command": "Update data/manual_social_stats.json with latest manual metrics."
@@ -1102,7 +1115,7 @@
         "name": "live_metrics",
         "path": "data/live_social_metrics.json",
         "status": "fresh",
-        "age_hours": 5.6,
+        "age_hours": 6.0,
         "max_age_hours": 24,
         "timestamp": "2026-06-09T14:06:46.496000+00:00",
         "refresh_command": "python3 scripts/capture_live_metrics.py"
@@ -1111,7 +1124,7 @@
         "name": "metrics_history",
         "path": "data/metrics_history.json",
         "status": "fresh",
-        "age_hours": 0.3,
+        "age_hours": 0.7,
         "max_age_hours": 24,
         "timestamp": "2026-06-09T19:22:44.862530+00:00",
         "refresh_command": "python3 scripts/update_metrics_history.py --refresh-admin"
@@ -1120,10 +1133,19 @@
         "name": "executor_readiness",
         "path": "data/executor_readiness_snapshot.json",
         "status": "fresh",
-        "age_hours": 0.1,
+        "age_hours": 0.5,
         "max_age_hours": 24,
         "timestamp": "2026-06-09T19:35:48.248684+00:00",
         "refresh_command": "LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
+      },
+      {
+        "name": "store_verification_history",
+        "path": "data/store_verification_history.json",
+        "status": "fresh",
+        "age_hours": 0.0,
+        "max_age_hours": 24,
+        "timestamp": "2026-06-09T20:06:31.705996+00:00",
+        "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin"
       }
     ],
     "actions": []
@@ -1265,7 +1287,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-09T18:46:46.500692Z",
+            "updated_at": "2026-06-09T20:06:30.642222Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
           }
         },
@@ -1276,7 +1298,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-09T18:46:46.821659Z",
+            "updated_at": "2026-06-09T20:06:30.999389Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
           }
         }
@@ -1379,7 +1401,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-09T18:46:47.057355Z",
+            "updated_at": "2026-06-09T20:06:31.237416Z",
             "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
           }
         },
@@ -1396,7 +1418,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-09T18:46:47.467969Z",
+            "updated_at": "2026-06-09T20:06:31.649291Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
           }
         }
@@ -2864,11 +2886,17 @@
       : kpi.pending_manual_update_command || '';
     const metricCollectionRows=renderMetricCollectionRows(kpi);
     const metricsHistoryMeta=renderMetricsHistoryMeta(kpi);
+    const storeHistory=kpi.store_verification_history||{};
     const musicSiteMeta=[
       `${Number(kpi.music_sites_live||0)} live music sites`,
       `${Number(kpi.music_sites_submitted||0)} submitted`,
       `${Number(kpi.music_sites_pending||0)} pending`,
       `${Number(kpi.store_verification_command_count||0)} verification commands`
+    ].join(' - ');
+    const storeHistoryMeta=[
+      `${Number(storeHistory.snapshot_count||0)} store check snapshots`,
+      `${Number(storeHistory.checked_pending||0)} checked pending`,
+      `${Number(storeHistory.found_in_snapshot||0)} found in snapshots`
     ].join(' - ');
     const summary=`<div class="queue-item">
       <div class="queue-top">
@@ -2876,6 +2904,7 @@
           <div class="queue-title">Promotion engine</div>
           <div class="queue-meta">${escapeHtml(health.open_action_count||0)} open actions - ${escapeHtml(kpi.live_platform_count||0)} live metric sources - ${escapeHtml(kpi.pending_manual_metric_fields||0)} pending manual fields</div>
           <div class="queue-meta">${escapeHtml(musicSiteMeta)}</div>
+          <div class="queue-meta">${escapeHtml(storeHistoryMeta)}</div>
           <div class="queue-meta">${sourceMeta}</div>
           ${metricsHistoryMeta?`<div class="queue-meta">${escapeHtml(metricsHistoryMeta)}</div>`:''}
           ${manualGapMeta?`<div class="queue-meta">Manual gaps: ${escapeHtml(manualGapMeta)}</div>`:''}

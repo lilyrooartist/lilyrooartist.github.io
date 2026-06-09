@@ -15,6 +15,7 @@ FUTURE = ROOT / "admin" / "future-posts.json"
 LIVE_METRICS = ROOT / "data" / "live_social_metrics.json"
 METRICS_HISTORY = ROOT / "data" / "metrics_history.json"
 EXECUTOR_READINESS = ROOT / "data" / "executor_readiness_snapshot.json"
+STORE_VERIFICATION_HISTORY = ROOT / "data" / "store_verification_history.json"
 SPOTIFY_SNAPSHOT = ROOT / "data" / "spotify_release_snapshot.json"
 APPLE_MUSIC_SNAPSHOT = ROOT / "data" / "apple_music_release_snapshot.json"
 YOUTUBE_PUBLIC = ROOT / "data" / "youtube_public_snapshot.json"
@@ -157,6 +158,16 @@ def validate_generated_outputs(failures):
             fail("executor_readiness_snapshot.json missing summary or timestamp", failures)
     else:
         fail("executor_readiness_snapshot.json missing; run scripts/capture_executor_readiness.py", failures)
+    if STORE_VERIFICATION_HISTORY.exists():
+        store_history = json.loads(STORE_VERIFICATION_HISTORY.read_text(encoding="utf-8"))
+        summary = store_history.get("summary") or {}
+        rows = store_history.get("rows") or []
+        if summary.get("total_services") == len(rows) and "snapshot_count" in summary:
+            ok(f"store verification history tracks {len(rows)} service states")
+        else:
+            fail("store_verification_history.json summary does not match rows", failures)
+    else:
+        fail("store_verification_history.json missing; run scripts/update_promo_engine_status.py", failures)
     if SPOTIFY_SNAPSHOT.exists():
         snapshot = json.loads(SPOTIFY_SNAPSHOT.read_text(encoding="utf-8"))
         if snapshot.get("ok") and snapshot.get("title") and snapshot.get("thumbnail_url"):
@@ -302,6 +313,11 @@ def validate_generated_outputs(failures):
             ok(f"promo engine store verification commands track {len(verification_commands)} pending services")
         else:
             fail("promo_engine_status.json store verification commands do not match pending services", failures)
+        store_history_summary = kpi.get("store_verification_history") or {}
+        if store_history_summary.get("total_services") and "snapshot_count" in store_history_summary:
+            ok("promo engine includes store verification history summary")
+        else:
+            fail("promo_engine_status.json missing store verification history summary", failures)
         for command in verification_commands:
             if "scripts/capture_" not in str(command.get("command") or ""):
                 fail(f"store verification command for {command.get('service') or 'unknown service'} missing capture script", failures)

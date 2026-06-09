@@ -1,7 +1,7 @@
 # Weekly Social Report — Lily Roo
 
 **Period:** 2026-06-03 to 2026-06-09
-**Last updated:** 2026-06-09 03:42 PM EDT
+**Last updated:** 2026-06-09 04:07 PM EDT
 
 ## KPI Goal
 - Primary growth target: **1,000 YouTube subscribers** (monetization milestone)
@@ -76,6 +76,7 @@
 - HyperFollow: https://distrokid.com/hyperfollow/lilyroo/i-learned-it-all-in-fifteen-seconds
 - HyperFollow stores: **applemusic, itunes, spotify**
 - Amazon Music: **pending verified public URL; not exposed by current HyperFollow store list**
+- All-release store verification: **8 live, 4 checked pending, 3 pending, 4 snapshots**
 
 ### First Single Alignment
 - Status: **aligned**
@@ -130,6 +131,8 @@
 - YouTube Music snapshot file: `data/youtube_music_release_snapshot.json`
 - HyperFollow stores captured: **2026-06-07T20:51:14.275569Z**
 - HyperFollow snapshot file: `data/hyperfollow_store_links_snapshot.json`
+- All-release store verification captured: **2026-06-09T20:06:31.705996+00:00**
+- All-release store verification file: `data/store_verification_history.json`
 - First single alignment audit captured: **2026-06-07T21:39:03.668040Z**
 - First single alignment audit file: `data/first_single_alignment_audit.json`
 - Spotify public release captured: **2026-06-07T16:51:57.554497Z**

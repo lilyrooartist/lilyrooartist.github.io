@@ -15,6 +15,7 @@ MANUAL_METRICS = ROOT / "data" / "manual_social_stats.json"
 LIVE_METRICS = ROOT / "data" / "live_social_metrics.json"
 METRICS_HISTORY = ROOT / "data" / "metrics_history.json"
 EXECUTOR_READINESS = ROOT / "data" / "executor_readiness_snapshot.json"
+STORE_VERIFICATION_HISTORY = ROOT / "data" / "store_verification_history.json"
 SCHEDULED = ROOT / "data" / "scheduled_posts.csv"
 PROMO_QUEUE_PLAN = ROOT / "data" / "promo_queue_plan.json"
 PUBLISHED = ROOT / "admin" / "content" / "Published_Log.csv"
@@ -38,6 +39,7 @@ SOURCE_MAX_AGE_HOURS = {
     "live_metrics": 24,
     "metrics_history": 24,
     "executor_readiness": 24,
+    "store_verification_history": 24,
 }
 
 RELEASE_TRACKS = {
@@ -146,10 +148,11 @@ def refresh_command(name: str) -> str:
         "live_metrics": "python3 scripts/capture_live_metrics.py",
         "metrics_history": "python3 scripts/update_metrics_history.py --refresh-admin",
         "executor_readiness": "LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py",
+        "store_verification_history": "python3 scripts/verify_pending_store_links.py --refresh-admin",
     }.get(name, "")
 
 
-def source_freshness(release_status, manual, live, metrics_history, executor_readiness, promo_plan, now: datetime):
+def source_freshness(release_status, manual, live, metrics_history, executor_readiness, store_history, promo_plan, now: datetime):
     rows = [
         freshness_row("release_status", RELEASE_STATUS, release_status, now),
         freshness_row("scheduled_posts", SCHEDULED, None, now),
@@ -159,6 +162,7 @@ def source_freshness(release_status, manual, live, metrics_history, executor_rea
         freshness_row("live_metrics", LIVE_METRICS, live, now),
         freshness_row("metrics_history", METRICS_HISTORY, metrics_history, now),
         freshness_row("executor_readiness", EXECUTOR_READINESS, executor_readiness, now),
+        freshness_row("store_verification_history", STORE_VERIFICATION_HISTORY, store_history, now),
     ]
     stale = [row for row in rows if row["status"] == "stale"]
     missing = [row for row in rows if row["status"] == "missing"]
@@ -354,11 +358,13 @@ def verification_snapshot_path(release_slug: str, service: str) -> Path:
         "YouTube Music": "youtube_music_release_snapshot.json",
         "HyperFollow": "hyperfollow_store_links_snapshot.json",
     }.get(service, "")
+    if not filename:
+        return Path()
     return ROOT / "data" / "store-verification" / release_slug / filename
 
 
 def verification_snapshot_summary(path: Path) -> dict:
-    if not path.exists():
+    if not path or not path.exists() or not path.is_file():
         return {}
     try:
         snapshot = json.loads(path.read_text(encoding="utf-8"))
@@ -380,6 +386,53 @@ def verification_snapshot_summary(path: Path) -> dict:
         "updated_at": snapshot.get("updated_at", ""),
         "summary": summary,
     }
+
+
+def build_store_verification_history(release_status: dict, now: datetime) -> dict:
+    rows = []
+    counts = Counter()
+    for release in release_status.get("releases", []):
+        title = release.get("title") or "Untitled release"
+        release_slug = slugify(title)
+        for service in store_service_states(release):
+            label = service["label"]
+            if label == "DistroKid":
+                continue
+            snapshot = verification_snapshot_summary(verification_snapshot_path(release_slug, label))
+            state = service["state"]
+            if snapshot:
+                if snapshot.get("ok") and state == "Pending":
+                    state = "Found in snapshot"
+                elif not snapshot.get("ok") and state == "Pending":
+                    state = "Checked pending"
+            counts[state] += 1
+            rows.append({
+                "release": title,
+                "service": label,
+                "state": state,
+                "url": service.get("url", ""),
+                "latest_snapshot": snapshot,
+                "action": "" if state == "Live" else f"Verify {label} public URL for {title}.",
+            })
+    history = {
+        "generated_at": now.isoformat(),
+        "source": {
+            "release_status": str(RELEASE_STATUS.relative_to(ROOT)),
+            "store_verification_root": "data/store-verification",
+        },
+        "summary": {
+            "total_services": len(rows),
+            "live": counts.get("Live", 0),
+            "submitted": counts.get("Submitted", 0),
+            "pending": counts.get("Pending", 0),
+            "checked_pending": counts.get("Checked pending", 0),
+            "found_in_snapshot": counts.get("Found in snapshot", 0),
+            "snapshot_count": sum(1 for row in rows if row.get("latest_snapshot")),
+        },
+        "rows": rows,
+    }
+    STORE_VERIFICATION_HISTORY.write_text(json.dumps(history, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    return history
 
 
 def store_verification_commands(release, store_services):
@@ -449,11 +502,12 @@ def build_status():
     metrics_history = read_json(METRICS_HISTORY, {})
     executor_readiness = read_json(EXECUTOR_READINESS, {})
     promo_plan = read_json(PROMO_QUEUE_PLAN, {})
+    store_history = build_store_verification_history(release_status, now)
     scheduled_rows = read_csv(SCHEDULED)
     published_rows = read_csv(PUBLISHED)
     metrics = metric_state(manual, live)
     history = metrics_history_state(metrics_history)
-    freshness = source_freshness(release_status, manual, live, metrics_history, executor_readiness, promo_plan, now)
+    freshness = source_freshness(release_status, manual, live, metrics_history, executor_readiness, store_history, promo_plan, now)
 
     releases = []
     all_actions = []
@@ -563,6 +617,7 @@ def build_status():
             "live_metrics": str(LIVE_METRICS.relative_to(ROOT)),
             "metrics_history": str(METRICS_HISTORY.relative_to(ROOT)),
             "executor_readiness": str(EXECUTOR_READINESS.relative_to(ROOT)),
+            "store_verification_history": str(STORE_VERIFICATION_HISTORY.relative_to(ROOT)),
         },
         "objective": "Promote Lily Roo releases and keep lilyroo.com/admin status and metrics current.",
         "kpi": {
@@ -582,6 +637,7 @@ def build_status():
             "music_sites_submitted": store_state_counts.get("Submitted", 0),
             "music_sites_pending": store_state_counts.get("Pending", 0),
             "store_verification_command_count": verification_command_count,
+            "store_verification_history": store_history["summary"],
             "stale_source_count": freshness_summary["stale"],
             "missing_source_count": freshness_summary["missing"],
         },
