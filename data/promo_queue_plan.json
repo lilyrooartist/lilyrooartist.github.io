@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-09T13:58:02.361632-04:00",
+  "generated_at": "2026-06-09T14:09:15.572959-04:00",
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
     "release_status": "data/distrokid_release_status.json"
@@ -20,6 +20,20 @@
       "TikTok": "python3 scripts/approve_promo_queue_plan.py --platform \"TikTok\" --refresh-admin",
       "X": "python3 scripts/approve_promo_queue_plan.py --platform \"X\" --refresh-admin",
       "YouTube Community": "python3 scripts/approve_promo_queue_plan.py --platform \"YouTube Community\" --refresh-admin"
+    }
+  },
+  "apply_commands": {
+    "all_approved": "python3 scripts/apply_promo_queue_plan.py --apply --refresh-admin",
+    "by_release": {
+      "Analog Myth": "python3 scripts/apply_promo_queue_plan.py --apply --release \"Analog Myth\" --refresh-admin",
+      "Twelve Dollars": "python3 scripts/apply_promo_queue_plan.py --apply --release \"Twelve Dollars\" --refresh-admin"
+    },
+    "by_platform": {
+      "Facebook": "python3 scripts/apply_promo_queue_plan.py --apply --platform \"Facebook\" --refresh-admin",
+      "Instagram": "python3 scripts/apply_promo_queue_plan.py --apply --platform \"Instagram\" --refresh-admin",
+      "TikTok": "python3 scripts/apply_promo_queue_plan.py --apply --platform \"TikTok\" --refresh-admin",
+      "X": "python3 scripts/apply_promo_queue_plan.py --apply --platform \"X\" --refresh-admin",
+      "YouTube Community": "python3 scripts/apply_promo_queue_plan.py --apply --platform \"YouTube Community\" --refresh-admin"
     }
   },
   "summary": {

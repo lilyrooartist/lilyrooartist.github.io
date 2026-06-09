@@ -110,6 +110,16 @@ def apply_command() -> str:
     return "python3 scripts/apply_promo_queue_plan.py --apply --refresh-admin"
 
 
+def apply_scope_command(*, release: str = "", platform: str = "") -> str:
+    parts = ["python3", "scripts/apply_promo_queue_plan.py", "--apply"]
+    if release:
+        parts.extend(["--release", json.dumps(release)])
+    if platform:
+        parts.extend(["--platform", json.dumps(platform)])
+    parts.append("--refresh-admin")
+    return " ".join(parts)
+
+
 def prior_approval_lookup(plan):
     by_id = {}
     by_slot = {}
@@ -259,6 +269,22 @@ def approval_commands(posts):
     }
 
 
+def apply_commands(posts):
+    releases = sorted({post.get("song") for post in posts if post.get("song")})
+    platforms = sorted({post.get("platform") for post in posts if post.get("platform")})
+    return {
+        "all_approved": apply_command(),
+        "by_release": {
+            release: apply_scope_command(release=release)
+            for release in releases
+        },
+        "by_platform": {
+            platform: apply_scope_command(platform=platform)
+            for platform in platforms
+        },
+    }
+
+
 def build_plan():
     promo = read_json(PROMO_STATUS, {})
     releases = release_lookup(read_json(RELEASE_STATUS, {}))
@@ -314,6 +340,7 @@ def build_plan():
         "apply_note": "Mark reviewed rows approved=yes, then apply approved rows into the live schedule.",
         "apply_command": apply_command(),
         "approval_commands": approval_commands(posts),
+        "apply_commands": apply_commands(posts),
         "summary": plan_summary(posts),
         "apply_preview": apply_preview(posts, scheduled_rows),
         "posts": posts,

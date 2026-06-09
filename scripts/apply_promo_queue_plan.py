@@ -57,14 +57,24 @@ def queue_row(post):
     return row
 
 
-def selected_posts(plan, ids):
+def norm(value: str | None) -> str:
+    return " ".join(str(value or "").strip().lower().split())
+
+
+def selected_posts(plan, args):
     posts = plan.get("posts") or []
-    if ids:
-        wanted = set(ids)
+    wanted = set(args.id or [])
+    release = norm(args.release)
+    platform = norm(args.platform)
+    if wanted:
         posts = [post for post in posts if post.get("id") in wanted]
         missing = sorted(wanted - {post.get("id") for post in posts})
         if missing:
             raise SystemExit(f"Plan is missing requested id(s): {', '.join(missing)}")
+    if release:
+        posts = [post for post in posts if norm(post.get("song")) == release]
+    if platform:
+        posts = [post for post in posts if norm(post.get("platform")) == platform]
     return posts
 
 
@@ -106,13 +116,15 @@ def main():
     parser.add_argument("--apply", action="store_true", help="Actually append rows. Default is dry-run.")
     parser.add_argument("--include-unapproved", action="store_true", help="Allow rows with approved != yes.")
     parser.add_argument("--id", action="append", default=[], help="Only apply a specific FP-PLAN id. Repeatable.")
+    parser.add_argument("--release", help="Only apply rows for a release title.")
+    parser.add_argument("--platform", help="Only apply rows for a platform.")
     parser.add_argument("--refresh-admin", action="store_true", help="Sync future posts and regenerate promo status/admin embeds after applying.")
     args = parser.parse_args()
 
     plan = read_plan()
     existing = read_queue()
     existing_ids = {row.get("id") for row in existing}
-    posts = selected_posts(plan, args.id)
+    posts = selected_posts(plan, args)
     if not args.include_unapproved:
         posts = [post for post in posts if str(post.get("approved") or "").lower() == "yes"]
     additions = [queue_row(post) for post in posts if post.get("id") not in existing_ids]

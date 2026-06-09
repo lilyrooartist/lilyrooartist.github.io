@@ -833,7 +833,7 @@
 }</script>
 
 <script type="application/json" id="embedded-promo-engine-status">{
-  "generated_at": "2026-06-09T17:58:02.391066+00:00",
+  "generated_at": "2026-06-09T18:09:15.602194+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -919,14 +919,14 @@
       "fresh": 6,
       "stale": 0,
       "missing": 0,
-      "checked_at": "2026-06-09T17:58:02.391066+00:00"
+      "checked_at": "2026-06-09T18:09:15.602194+00:00"
     },
     "sources": [
       {
         "name": "release_status",
         "path": "data/distrokid_release_status.json",
         "status": "fresh",
-        "age_hours": 16.2,
+        "age_hours": 16.4,
         "max_age_hours": 72,
         "timestamp": "2026-06-09T01:47:42+00:00",
         "refresh_command": "Update data/distrokid_release_status.json after store/DistroKid verification."
@@ -935,7 +935,7 @@
         "name": "scheduled_posts",
         "path": "data/scheduled_posts.csv",
         "status": "fresh",
-        "age_hours": 44.3,
+        "age_hours": 44.5,
         "max_age_hours": 72,
         "timestamp": "2026-06-07T21:38:44.418468+00:00",
         "refresh_command": "python3 scripts/sync_future_posts.py"
@@ -946,14 +946,14 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-09T17:58:02.361632+00:00",
+        "timestamp": "2026-06-09T18:09:15.572959+00:00",
         "refresh_command": "python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
         "name": "published_log",
         "path": "admin/content/Published_Log.csv",
         "status": "fresh",
-        "age_hours": 53.4,
+        "age_hours": 53.5,
         "max_age_hours": 168,
         "timestamp": "2026-06-07T12:36:37.141276+00:00",
         "refresh_command": "Export or append latest published posts to admin/content/Published_Log.csv."
@@ -962,7 +962,7 @@
         "name": "manual_metrics",
         "path": "data/manual_social_stats.json",
         "status": "fresh",
-        "age_hours": 50.2,
+        "age_hours": 50.4,
         "max_age_hours": 72,
         "timestamp": "2026-06-07T15:47:26.729764+00:00",
         "refresh_command": "Update data/manual_social_stats.json with latest manual metrics."
@@ -971,7 +971,7 @@
         "name": "live_metrics",
         "path": "data/live_social_metrics.json",
         "status": "fresh",
-        "age_hours": 3.9,
+        "age_hours": 4.0,
         "max_age_hours": 24,
         "timestamp": "2026-06-09T14:06:46.496000+00:00",
         "refresh_command": "python3 scripts/capture_live_metrics.py"
@@ -1309,7 +1309,7 @@
 }</script>
 
 <script type="application/json" id="embedded-promo-queue-plan">{
-  "generated_at": "2026-06-09T13:58:02.361632-04:00",
+  "generated_at": "2026-06-09T14:09:15.572959-04:00",
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
     "release_status": "data/distrokid_release_status.json"
@@ -1330,6 +1330,20 @@
       "TikTok": "python3 scripts/approve_promo_queue_plan.py --platform \"TikTok\" --refresh-admin",
       "X": "python3 scripts/approve_promo_queue_plan.py --platform \"X\" --refresh-admin",
       "YouTube Community": "python3 scripts/approve_promo_queue_plan.py --platform \"YouTube Community\" --refresh-admin"
+    }
+  },
+  "apply_commands": {
+    "all_approved": "python3 scripts/apply_promo_queue_plan.py --apply --refresh-admin",
+    "by_release": {
+      "Analog Myth": "python3 scripts/apply_promo_queue_plan.py --apply --release \"Analog Myth\" --refresh-admin",
+      "Twelve Dollars": "python3 scripts/apply_promo_queue_plan.py --apply --release \"Twelve Dollars\" --refresh-admin"
+    },
+    "by_platform": {
+      "Facebook": "python3 scripts/apply_promo_queue_plan.py --apply --platform \"Facebook\" --refresh-admin",
+      "Instagram": "python3 scripts/apply_promo_queue_plan.py --apply --platform \"Instagram\" --refresh-admin",
+      "TikTok": "python3 scripts/apply_promo_queue_plan.py --apply --platform \"TikTok\" --refresh-admin",
+      "X": "python3 scripts/apply_promo_queue_plan.py --apply --platform \"X\" --refresh-admin",
+      "YouTube Community": "python3 scripts/apply_promo_queue_plan.py --apply --platform \"YouTube Community\" --refresh-admin"
     }
   },
   "summary": {
@@ -2619,6 +2633,13 @@
       approvalCommands.all_review?`All review: ${approvalCommands.all_review}`:'',
       ...releaseApprovalCommands
     ].filter(Boolean).slice(0,4);
+    const applyCommands=plan.apply_commands||{};
+    const releaseApplyCommands=Object.entries(applyCommands.by_release||{})
+      .map(([release,command])=>`${release}: ${command}`);
+    const applyCommandMeta=[
+      applyCommands.all_approved?`All approved: ${applyCommands.all_approved}`:'',
+      ...releaseApplyCommands
+    ].filter(Boolean).slice(0,4);
     const intro=`<div class="queue-item">
       <div class="queue-top">
         <div>
@@ -2627,7 +2648,8 @@
           <div class="queue-meta">${escapeHtml(applyMeta)}</div>
           <div class="queue-meta">${escapeHtml(plan.apply_note||'Review before adding to the live schedule.')}</div>
           ${approvalCommandMeta.map(command=>`<div class="queue-meta">${escapeHtml(command)}</div>`).join('')}
-          ${plan.apply_command?`<div class="queue-meta">${escapeHtml(plan.apply_command)}</div>`:''}
+          ${applyCommandMeta.map(command=>`<div class="queue-meta">${escapeHtml(command)}</div>`).join('')}
+          ${!applyCommandMeta.length&&plan.apply_command?`<div class="queue-meta">${escapeHtml(plan.apply_command)}</div>`:''}
         </div>
         <span class="status-chip ${reviewCount?'neutral':'ok'}">${reviewCount?'Draft':'Approved'}</span>
       </div>

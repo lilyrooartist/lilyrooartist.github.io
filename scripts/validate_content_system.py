@@ -272,6 +272,16 @@ def validate_generated_outputs(failures):
             ok("promo queue plan includes refresh-aware apply command")
         else:
             fail("promo_queue_plan.json missing refresh-aware apply command", failures)
+        apply_commands = plan.get("apply_commands") or {}
+        apply_by_release = apply_commands.get("by_release") or {}
+        if "apply_promo_queue_plan.py --apply --refresh-admin" in (apply_commands.get("all_approved") or ""):
+            ok("promo queue plan includes all-approved apply command")
+        else:
+            fail("promo_queue_plan.json missing all-approved apply command", failures)
+        if apply_by_release:
+            ok(f"promo queue plan includes release apply commands for {len(apply_by_release)} release(s)")
+        else:
+            fail("promo_queue_plan.json missing release apply commands", failures)
         approval_commands = plan.get("approval_commands") or {}
         if summary.get("review_posts", 0):
             all_review_command = approval_commands.get("all_review") or ""
@@ -315,6 +325,10 @@ def validate_generated_outputs(failures):
             ok("promo queue apply script can refresh admin")
         else:
             fail("apply_promo_queue_plan.py missing --refresh-admin flow", failures)
+        if "--release" in apply_text and "--platform" in apply_text:
+            ok("promo queue apply script supports scoped release/platform apply")
+        else:
+            fail("apply_promo_queue_plan.py missing scoped release/platform apply", failures)
     else:
         fail("apply_promo_queue_plan.py missing", failures)
     if PROMO_QUEUE_APPROVE.exists():
