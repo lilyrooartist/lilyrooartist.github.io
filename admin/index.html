@@ -509,7 +509,7 @@
 <script type="text/plain" id="embedded-weekly-report"># Weekly Social Report — Lily Roo
 
 **Period:** 2026-06-03 to 2026-06-09
-**Last updated:** 2026-06-09 04:07 PM EDT
+**Last updated:** 2026-06-09 04:31 PM EDT
 
 ## KPI Goal
 - Primary growth target: **1,000 YouTube subscribers** (monetization milestone)
@@ -585,6 +585,7 @@
 - HyperFollow stores: **applemusic, itunes, spotify**
 - Amazon Music: **pending verified public URL; not exposed by current HyperFollow store list**
 - All-release store verification: **8 live, 4 checked pending, 3 pending, 4 snapshots**
+- Social executor history: **5 records, 0 posted, 5 attention**
 
 ### First Single Alignment
 - Status: **aligned**
@@ -639,8 +640,10 @@
 - YouTube Music snapshot file: `data/youtube_music_release_snapshot.json`
 - HyperFollow stores captured: **2026-06-07T20:51:14.275569Z**
 - HyperFollow snapshot file: `data/hyperfollow_store_links_snapshot.json`
-- All-release store verification captured: **2026-06-09T20:06:31.705996+00:00**
+- All-release store verification captured: **2026-06-09T20:31:31.947676+00:00**
 - All-release store verification file: `data/store_verification_history.json`
+- Social executor history captured: **2026-06-09T20:27:53.917316Z**
+- Social executor history file: `data/social_execution_snapshot.json`
 - First single alignment audit captured: **2026-06-07T21:39:03.668040Z**
 - First single alignment audit file: `data/first_single_alignment_audit.json`
 - Spotify public release captured: **2026-06-07T16:51:57.554497Z**
@@ -670,6 +673,7 @@
 - Capture live API metrics: `python3 scripts/capture_live_metrics.py`
 - Update metrics history: `python3 scripts/update_metrics_history.py --refresh-admin`
 - Capture executor readiness: `LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
+- Capture social execution history: `LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py`
 - Regenerate via: `python3 scripts/update_weekly_report.py`
 - Source overrides: `data/manual_social_stats.json`</script>
 
@@ -846,7 +850,7 @@
 }</script>
 
 <script type="application/json" id="embedded-promo-engine-status">{
-  "generated_at": "2026-06-09T20:06:31.705996+00:00",
+  "generated_at": "2026-06-09T20:31:31.947676+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -856,7 +860,8 @@
     "live_metrics": "data/live_social_metrics.json",
     "metrics_history": "data/metrics_history.json",
     "executor_readiness": "data/executor_readiness_snapshot.json",
-    "store_verification_history": "data/store_verification_history.json"
+    "store_verification_history": "data/store_verification_history.json",
+    "social_executions": "data/social_execution_snapshot.json"
   },
   "objective": "Promote Lily Roo releases and keep lilyroo.com/admin status and metrics current.",
   "kpi": {
@@ -1046,6 +1051,82 @@
       "found_in_snapshot": 0,
       "snapshot_count": 4
     },
+    "social_execution_summary": {
+      "ok": true,
+      "updated_at": "2026-06-09T20:27:53.917316Z",
+      "http_status": 200,
+      "execution_count": 5,
+      "posted_count": 0,
+      "attention_count": 5,
+      "status_counts": {
+        "blocked": 3,
+        "failed": 2
+      },
+      "platform_counts": {
+        "Facebook": 1,
+        "Instagram": 2,
+        "TikTok": 1,
+        "YouTube Community": 1
+      },
+      "latest_attention": [
+        {
+          "post_id": "FP-AUTO-263",
+          "platform": "Instagram",
+          "status": "failed",
+          "reason": "max_attempts_exceeded",
+          "attempts": 3,
+          "updated_at": "2026-06-09T20:15:19.326Z",
+          "source": "cron",
+          "post_url": "",
+          "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID."
+        },
+        {
+          "post_id": "FP-AUTO-261",
+          "platform": "YouTube Community",
+          "status": "blocked",
+          "reason": "not_approved",
+          "attempts": 0,
+          "updated_at": "2026-06-09T20:15:18.525Z",
+          "source": "cron",
+          "post_url": "",
+          "error_summary": ""
+        },
+        {
+          "post_id": "FP-AUTO-259",
+          "platform": "TikTok",
+          "status": "blocked",
+          "reason": "not_approved",
+          "attempts": 0,
+          "updated_at": "2026-06-09T20:15:17.664Z",
+          "source": "cron",
+          "post_url": "",
+          "error_summary": ""
+        },
+        {
+          "post_id": "FP-AUTO-258",
+          "platform": "Instagram",
+          "status": "blocked",
+          "reason": "not_approved",
+          "attempts": 0,
+          "updated_at": "2026-06-09T20:15:16.821Z",
+          "source": "cron",
+          "post_url": "",
+          "error_summary": ""
+        },
+        {
+          "post_id": "FP-AUTO-265",
+          "platform": "Facebook",
+          "status": "failed",
+          "reason": "",
+          "attempts": 1,
+          "updated_at": "2026-06-09T02:01:38.028Z",
+          "source": "manual",
+          "post_url": "",
+          "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app."
+        }
+      ],
+      "action_needed": ""
+    },
     "stale_source_count": 0,
     "missing_source_count": 0
   },
@@ -1053,24 +1134,24 @@
     "score": 0,
     "healthy_releases": 0,
     "tracked_releases": 3,
-    "open_action_count": 9,
-    "fresh_sources": 9,
+    "open_action_count": 10,
+    "fresh_sources": 10,
     "stale_sources": 0,
     "missing_sources": 0
   },
   "freshness": {
     "summary": {
-      "fresh": 9,
+      "fresh": 10,
       "stale": 0,
       "missing": 0,
-      "checked_at": "2026-06-09T20:06:31.705996+00:00"
+      "checked_at": "2026-06-09T20:31:31.947676+00:00"
     },
     "sources": [
       {
         "name": "release_status",
         "path": "data/distrokid_release_status.json",
         "status": "fresh",
-        "age_hours": 18.3,
+        "age_hours": 18.7,
         "max_age_hours": 72,
         "timestamp": "2026-06-09T01:47:42+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin; update data/distrokid_release_status.json when a public URL is verified."
@@ -1079,7 +1160,7 @@
         "name": "scheduled_posts",
         "path": "data/scheduled_posts.csv",
         "status": "fresh",
-        "age_hours": 46.5,
+        "age_hours": 46.9,
         "max_age_hours": 72,
         "timestamp": "2026-06-07T21:38:44.418468+00:00",
         "refresh_command": "python3 scripts/sync_future_posts.py"
@@ -1088,7 +1169,7 @@
         "name": "promo_queue_plan",
         "path": "data/promo_queue_plan.json",
         "status": "fresh",
-        "age_hours": 0.4,
+        "age_hours": 0.8,
         "max_age_hours": 24,
         "timestamp": "2026-06-09T19:42:20.583384+00:00",
         "refresh_command": "python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
@@ -1097,7 +1178,7 @@
         "name": "published_log",
         "path": "admin/content/Published_Log.csv",
         "status": "fresh",
-        "age_hours": 55.5,
+        "age_hours": 55.9,
         "max_age_hours": 168,
         "timestamp": "2026-06-07T12:36:37.141276+00:00",
         "refresh_command": "Export or append latest published posts to admin/content/Published_Log.csv."
@@ -1106,7 +1187,7 @@
         "name": "manual_metrics",
         "path": "data/manual_social_stats.json",
         "status": "fresh",
-        "age_hours": 52.3,
+        "age_hours": 52.7,
         "max_age_hours": 72,
         "timestamp": "2026-06-07T15:47:26.729764+00:00",
         "refresh_command": "Update data/manual_social_stats.json with latest manual metrics."
@@ -1115,7 +1196,7 @@
         "name": "live_metrics",
         "path": "data/live_social_metrics.json",
         "status": "fresh",
-        "age_hours": 6.0,
+        "age_hours": 6.4,
         "max_age_hours": 24,
         "timestamp": "2026-06-09T14:06:46.496000+00:00",
         "refresh_command": "python3 scripts/capture_live_metrics.py"
@@ -1124,7 +1205,7 @@
         "name": "metrics_history",
         "path": "data/metrics_history.json",
         "status": "fresh",
-        "age_hours": 0.7,
+        "age_hours": 1.1,
         "max_age_hours": 24,
         "timestamp": "2026-06-09T19:22:44.862530+00:00",
         "refresh_command": "python3 scripts/update_metrics_history.py --refresh-admin"
@@ -1133,7 +1214,7 @@
         "name": "executor_readiness",
         "path": "data/executor_readiness_snapshot.json",
         "status": "fresh",
-        "age_hours": 0.5,
+        "age_hours": 0.9,
         "max_age_hours": 24,
         "timestamp": "2026-06-09T19:35:48.248684+00:00",
         "refresh_command": "LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
@@ -1144,8 +1225,17 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-09T20:06:31.705996+00:00",
+        "timestamp": "2026-06-09T20:31:31.947676+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin"
+      },
+      {
+        "name": "social_executions",
+        "path": "data/social_execution_snapshot.json",
+        "status": "fresh",
+        "age_hours": 0.1,
+        "max_age_hours": 24,
+        "timestamp": "2026-06-09T20:27:53.917316+00:00",
+        "refresh_command": "LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py && python3 scripts/update_promo_engine_status.py"
       }
     ],
     "actions": []
@@ -1462,14 +1552,14 @@
     }
   ],
   "next_actions": [
+    "Resolve social executor attention states: 3 blocked, 2 failed.",
     "I Learned It All in Fifteen Seconds: Refresh pending manual metrics before weekly reporting.",
     "Twelve Dollars: Verify public store links for Spotify, Apple Music, HyperFollow.",
     "Twelve Dollars: Review and approve draft promo queue rows for this release.",
     "Twelve Dollars: Approve planned promo coverage for X, Instagram, TikTok, Facebook, YouTube Community.",
     "Twelve Dollars: Refresh pending manual metrics before weekly reporting.",
     "Analog Myth: Verify public store links for Spotify, Apple Music, YouTube Music, HyperFollow.",
-    "Analog Myth: Review and approve draft promo queue rows for this release.",
-    "Analog Myth: Approve planned promo coverage for YouTube Community."
+    "Analog Myth: Review and approve draft promo queue rows for this release."
   ]
 }</script>
 
@@ -2858,6 +2948,21 @@
     return bits.join(' - ');
   }
 
+  function renderSocialExecutionRows(summary){
+    const rows=Array.isArray(summary?.latest_attention)?summary.latest_attention:[];
+    if(!rows.length) return '';
+    return `<div class="collection-grid">${rows.slice(0,5).map(item=>{
+      const detail=[
+        item.reason?`reason: ${item.reason}`:'',
+        item.error_summary||''
+      ].filter(Boolean).join(' - ');
+      return `<div class="collection-row">
+        <b>${escapeHtml(item.platform||'Social')} ${escapeHtml(item.post_id||'post')}</b>: ${escapeHtml(item.status||'attention')}
+        ${detail?`<div class="verification-note">${escapeHtml(detail)}</div>`:''}
+      </div>`;
+    }).join('')}</div>`;
+  }
+
   function renderPromoHealth(status){
     const root=document.getElementById('promo-health');
     if(!root) return;
@@ -2887,6 +2992,8 @@
     const metricCollectionRows=renderMetricCollectionRows(kpi);
     const metricsHistoryMeta=renderMetricsHistoryMeta(kpi);
     const storeHistory=kpi.store_verification_history||{};
+    const socialExecution=kpi.social_execution_summary||{};
+    const socialExecutionRows=renderSocialExecutionRows(socialExecution);
     const musicSiteMeta=[
       `${Number(kpi.music_sites_live||0)} live music sites`,
       `${Number(kpi.music_sites_submitted||0)} submitted`,
@@ -2898,6 +3005,9 @@
       `${Number(storeHistory.checked_pending||0)} checked pending`,
       `${Number(storeHistory.found_in_snapshot||0)} found in snapshots`
     ].join(' - ');
+    const executionMeta=socialExecution.ok
+      ? `${Number(socialExecution.execution_count||0)} executor records - ${Number(socialExecution.posted_count||0)} posted - ${Number(socialExecution.attention_count||0)} need attention`
+      : `Executor records not captured${socialExecution.action_needed?`: ${socialExecution.action_needed}`:''}`;
     const summary=`<div class="queue-item">
       <div class="queue-top">
         <div>
@@ -2905,10 +3015,12 @@
           <div class="queue-meta">${escapeHtml(health.open_action_count||0)} open actions - ${escapeHtml(kpi.live_platform_count||0)} live metric sources - ${escapeHtml(kpi.pending_manual_metric_fields||0)} pending manual fields</div>
           <div class="queue-meta">${escapeHtml(musicSiteMeta)}</div>
           <div class="queue-meta">${escapeHtml(storeHistoryMeta)}</div>
+          <div class="queue-meta">${escapeHtml(executionMeta)}</div>
           <div class="queue-meta">${sourceMeta}</div>
           ${metricsHistoryMeta?`<div class="queue-meta">${escapeHtml(metricsHistoryMeta)}</div>`:''}
           ${manualGapMeta?`<div class="queue-meta">Manual gaps: ${escapeHtml(manualGapMeta)}</div>`:''}
           ${manualUpdateMeta?`<div class="queue-meta">${escapeHtml(manualUpdateMeta)}</div>`:''}
+          ${socialExecutionRows}
           ${metricCollectionRows}
         </div>
         <span class="status-chip ${staleSourceCount||missingSourceCount?'warn':Number(health.open_action_count||0)?'warn':'ok'}">${escapeHtml(health.score ?? 0)}%</span>

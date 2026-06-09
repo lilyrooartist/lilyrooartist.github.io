@@ -1,7 +1,7 @@
 # Weekly Social Report — Lily Roo
 
 **Period:** 2026-06-03 to 2026-06-09
-**Last updated:** 2026-06-09 04:07 PM EDT
+**Last updated:** 2026-06-09 04:31 PM EDT
 
 ## KPI Goal
 - Primary growth target: **1,000 YouTube subscribers** (monetization milestone)
@@ -77,6 +77,7 @@
 - HyperFollow stores: **applemusic, itunes, spotify**
 - Amazon Music: **pending verified public URL; not exposed by current HyperFollow store list**
 - All-release store verification: **8 live, 4 checked pending, 3 pending, 4 snapshots**
+- Social executor history: **5 records, 0 posted, 5 attention**
 
 ### First Single Alignment
 - Status: **aligned**
@@ -131,8 +132,10 @@
 - YouTube Music snapshot file: `data/youtube_music_release_snapshot.json`
 - HyperFollow stores captured: **2026-06-07T20:51:14.275569Z**
 - HyperFollow snapshot file: `data/hyperfollow_store_links_snapshot.json`
-- All-release store verification captured: **2026-06-09T20:06:31.705996+00:00**
+- All-release store verification captured: **2026-06-09T20:31:31.947676+00:00**
 - All-release store verification file: `data/store_verification_history.json`
+- Social executor history captured: **2026-06-09T20:27:53.917316Z**
+- Social executor history file: `data/social_execution_snapshot.json`
 - First single alignment audit captured: **2026-06-07T21:39:03.668040Z**
 - First single alignment audit file: `data/first_single_alignment_audit.json`
 - Spotify public release captured: **2026-06-07T16:51:57.554497Z**
@@ -162,5 +165,6 @@
 - Capture live API metrics: `python3 scripts/capture_live_metrics.py`
 - Update metrics history: `python3 scripts/update_metrics_history.py --refresh-admin`
 - Capture executor readiness: `LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
+- Capture social execution history: `LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py`
 - Regenerate via: `python3 scripts/update_weekly_report.py`
 - Source overrides: `data/manual_social_stats.json`

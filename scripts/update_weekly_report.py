@@ -14,6 +14,7 @@ YOUTUBE_TITLE_TRACK = ROOT / 'data' / 'youtube_title_track_snapshot.json'
 YOUTUBE_MUSIC_SNAPSHOT = ROOT / 'data' / 'youtube_music_release_snapshot.json'
 HYPERFOLLOW_SNAPSHOT = ROOT / 'data' / 'hyperfollow_store_links_snapshot.json'
 STORE_VERIFICATION_HISTORY = ROOT / 'data' / 'store_verification_history.json'
+SOCIAL_EXECUTION_SNAPSHOT = ROOT / 'data' / 'social_execution_snapshot.json'
 ALIGNMENT_AUDIT = ROOT / 'data' / 'first_single_alignment_audit.json'
 DISTROKID_RELEASE_STATUS = ROOT / 'data' / 'distrokid_release_status.json'
 PUBLISHED = ROOT / 'admin' / 'content' / 'Published_Log.csv'
@@ -39,6 +40,7 @@ youtube_title_track = json.loads(YOUTUBE_TITLE_TRACK.read_text(encoding='utf-8')
 youtube_music_snapshot = json.loads(YOUTUBE_MUSIC_SNAPSHOT.read_text(encoding='utf-8')) if YOUTUBE_MUSIC_SNAPSHOT.exists() else {}
 hyperfollow_snapshot = json.loads(HYPERFOLLOW_SNAPSHOT.read_text(encoding='utf-8')) if HYPERFOLLOW_SNAPSHOT.exists() else {}
 store_verification_history = json.loads(STORE_VERIFICATION_HISTORY.read_text(encoding='utf-8')) if STORE_VERIFICATION_HISTORY.exists() else {}
+social_execution_snapshot = json.loads(SOCIAL_EXECUTION_SNAPSHOT.read_text(encoding='utf-8')) if SOCIAL_EXECUTION_SNAPSHOT.exists() else {}
 alignment_audit = json.loads(ALIGNMENT_AUDIT.read_text(encoding='utf-8')) if ALIGNMENT_AUDIT.exists() else {}
 distrokid_release_status = json.loads(DISTROKID_RELEASE_STATUS.read_text(encoding='utf-8')) if DISTROKID_RELEASE_STATUS.exists() else {}
 youtube = manual.get('youtube', {})
@@ -138,6 +140,13 @@ store_history_status = (
     f"{store_history_summary.get('pending', 0)} pending, "
     f"{store_history_summary.get('snapshot_count', 0)} snapshots"
 )
+execution_summary = social_execution_snapshot.get('summary') or {}
+social_execution_time = social_execution_snapshot.get('updated_at') or 'not captured'
+social_execution_status = (
+    f"{execution_summary.get('execution_count', 0)} records, "
+    f"{execution_summary.get('posted_count', 0)} posted, "
+    f"{execution_summary.get('attention_count', 0)} attention"
+) if social_execution_snapshot.get('ok') else (social_execution_snapshot.get('action_needed') or 'not captured')
 alignment_action_required = ', '.join(alignment_audit.get('action_required') or []) or 'none'
 alignment_pending = ', '.join(alignment_audit.get('pending') or []) or 'none'
 alignment_status = 'aligned' if alignment_audit.get('ok') else 'needs attention'
@@ -204,6 +213,7 @@ md = f'''# Weekly Social Report — Lily Roo
 - HyperFollow stores: **{hyperfollow_stores}**
 - Amazon Music: **{amazon_music_status}**
 - All-release store verification: **{store_history_status}**
+- Social executor history: **{social_execution_status}**
 
 ### First Single Alignment
 - Status: **{alignment_status}**
@@ -260,6 +270,8 @@ md = f'''# Weekly Social Report — Lily Roo
 - HyperFollow snapshot file: `data/hyperfollow_store_links_snapshot.json`
 - All-release store verification captured: **{store_history_time}**
 - All-release store verification file: `data/store_verification_history.json`
+- Social executor history captured: **{social_execution_time}**
+- Social executor history file: `data/social_execution_snapshot.json`
 - First single alignment audit captured: **{alignment_snapshot_time}**
 - First single alignment audit file: `data/first_single_alignment_audit.json`
 - Spotify public release captured: **{spotify_snapshot_time}**
@@ -289,6 +301,7 @@ md = f'''# Weekly Social Report — Lily Roo
 - Capture live API metrics: `python3 scripts/capture_live_metrics.py`
 - Update metrics history: `python3 scripts/update_metrics_history.py --refresh-admin`
 - Capture executor readiness: `LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
+- Capture social execution history: `LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py`
 - Regenerate via: `python3 scripts/update_weekly_report.py`
 - Source overrides: `data/manual_social_stats.json`
 '''

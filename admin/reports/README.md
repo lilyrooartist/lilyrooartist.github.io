@@ -9,6 +9,7 @@ python3 scripts/capture_live_metrics.py
 python3 scripts/update_metrics_history.py --refresh-admin
 python3 scripts/verify_pending_store_links.py --refresh-admin
 LILYROO_ADMIN_PASSWORD="$LILYROO_ADMIN_PASSWORD" python3 scripts/capture_executor_readiness.py
+LILYROO_ADMIN_PASSWORD="$LILYROO_ADMIN_PASSWORD" python3 scripts/capture_social_executions.py
 python3 scripts/update_weekly_report.py
 ```
 
@@ -30,6 +31,9 @@ Executor readiness is captured into:
 
 All-release store verification history is captured into:
 `data/store_verification_history.json`
+
+Social execution history is captured into:
+`data/social_execution_snapshot.json`
 
 Then re-run the update command to regenerate:
 `admin/reports/weekly-social-report.md`

@@ -16,6 +16,7 @@ LIVE_METRICS = ROOT / "data" / "live_social_metrics.json"
 METRICS_HISTORY = ROOT / "data" / "metrics_history.json"
 EXECUTOR_READINESS = ROOT / "data" / "executor_readiness_snapshot.json"
 STORE_VERIFICATION_HISTORY = ROOT / "data" / "store_verification_history.json"
+SOCIAL_EXECUTION_SNAPSHOT = ROOT / "data" / "social_execution_snapshot.json"
 SPOTIFY_SNAPSHOT = ROOT / "data" / "spotify_release_snapshot.json"
 APPLE_MUSIC_SNAPSHOT = ROOT / "data" / "apple_music_release_snapshot.json"
 YOUTUBE_PUBLIC = ROOT / "data" / "youtube_public_snapshot.json"
@@ -33,6 +34,7 @@ MANUAL_METRICS_UPDATER = ROOT / "scripts" / "update_manual_social_stats.py"
 STORE_LINK_VERIFIER = ROOT / "scripts" / "verify_pending_store_links.py"
 METRICS_HISTORY_UPDATER = ROOT / "scripts" / "update_metrics_history.py"
 EXECUTOR_READINESS_CAPTURE = ROOT / "scripts" / "capture_executor_readiness.py"
+SOCIAL_EXECUTION_CAPTURE = ROOT / "scripts" / "capture_social_executions.py"
 REPORT = ROOT / "admin" / "reports" / "weekly-social-report.md"
 INDEX = CONTENT / "content_index.json"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
@@ -168,6 +170,15 @@ def validate_generated_outputs(failures):
             fail("store_verification_history.json summary does not match rows", failures)
     else:
         fail("store_verification_history.json missing; run scripts/update_promo_engine_status.py", failures)
+    if SOCIAL_EXECUTION_SNAPSHOT.exists():
+        execution_snapshot = json.loads(SOCIAL_EXECUTION_SNAPSHOT.read_text(encoding="utf-8"))
+        summary = execution_snapshot.get("summary") or {}
+        if "updated_at" in execution_snapshot and "execution_count" in summary:
+            ok(f"social execution snapshot tracks {summary.get('execution_count')} executor records")
+        else:
+            fail("social_execution_snapshot.json missing summary or timestamp", failures)
+    else:
+        fail("social_execution_snapshot.json missing; run scripts/capture_social_executions.py", failures)
     if SPOTIFY_SNAPSHOT.exists():
         snapshot = json.loads(SPOTIFY_SNAPSHOT.read_text(encoding="utf-8"))
         if snapshot.get("ok") and snapshot.get("title") and snapshot.get("thumbnail_url"):
@@ -318,6 +329,11 @@ def validate_generated_outputs(failures):
             ok("promo engine includes store verification history summary")
         else:
             fail("promo_engine_status.json missing store verification history summary", failures)
+        execution_summary = kpi.get("social_execution_summary") or {}
+        if "execution_count" in execution_summary and "status_counts" in execution_summary:
+            ok("promo engine includes social execution summary")
+        else:
+            fail("promo_engine_status.json missing social execution summary", failures)
         for command in verification_commands:
             if "scripts/capture_" not in str(command.get("command") or ""):
                 fail(f"store verification command for {command.get('service') or 'unknown service'} missing capture script", failures)
@@ -453,6 +469,14 @@ def validate_generated_outputs(failures):
             fail("capture_executor_readiness.py missing readiness snapshot or auth header support", failures)
     else:
         fail("capture_executor_readiness.py missing", failures)
+    if SOCIAL_EXECUTION_CAPTURE.exists():
+        execution_text = SOCIAL_EXECUTION_CAPTURE.read_text(encoding="utf-8")
+        if "social_execution_snapshot.json" in execution_text and "X-Lilyroo-Admin-Password" in execution_text:
+            ok("social execution capture script present")
+        else:
+            fail("capture_social_executions.py missing execution snapshot or auth header support", failures)
+    else:
+        fail("capture_social_executions.py missing", failures)
 
 
 def validate_report(failures):

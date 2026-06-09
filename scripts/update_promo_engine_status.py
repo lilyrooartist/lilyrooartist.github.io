@@ -16,6 +16,7 @@ LIVE_METRICS = ROOT / "data" / "live_social_metrics.json"
 METRICS_HISTORY = ROOT / "data" / "metrics_history.json"
 EXECUTOR_READINESS = ROOT / "data" / "executor_readiness_snapshot.json"
 STORE_VERIFICATION_HISTORY = ROOT / "data" / "store_verification_history.json"
+SOCIAL_EXECUTIONS = ROOT / "data" / "social_execution_snapshot.json"
 SCHEDULED = ROOT / "data" / "scheduled_posts.csv"
 PROMO_QUEUE_PLAN = ROOT / "data" / "promo_queue_plan.json"
 PUBLISHED = ROOT / "admin" / "content" / "Published_Log.csv"
@@ -40,6 +41,7 @@ SOURCE_MAX_AGE_HOURS = {
     "metrics_history": 24,
     "executor_readiness": 24,
     "store_verification_history": 24,
+    "social_executions": 24,
 }
 
 RELEASE_TRACKS = {
@@ -149,10 +151,11 @@ def refresh_command(name: str) -> str:
         "metrics_history": "python3 scripts/update_metrics_history.py --refresh-admin",
         "executor_readiness": "LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py",
         "store_verification_history": "python3 scripts/verify_pending_store_links.py --refresh-admin",
+        "social_executions": "LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py && python3 scripts/update_promo_engine_status.py",
     }.get(name, "")
 
 
-def source_freshness(release_status, manual, live, metrics_history, executor_readiness, store_history, promo_plan, now: datetime):
+def source_freshness(release_status, manual, live, metrics_history, executor_readiness, store_history, social_executions, promo_plan, now: datetime):
     rows = [
         freshness_row("release_status", RELEASE_STATUS, release_status, now),
         freshness_row("scheduled_posts", SCHEDULED, None, now),
@@ -163,6 +166,7 @@ def source_freshness(release_status, manual, live, metrics_history, executor_rea
         freshness_row("metrics_history", METRICS_HISTORY, metrics_history, now),
         freshness_row("executor_readiness", EXECUTOR_READINESS, executor_readiness, now),
         freshness_row("store_verification_history", STORE_VERIFICATION_HISTORY, store_history, now),
+        freshness_row("social_executions", SOCIAL_EXECUTIONS, social_executions, now),
     ]
     stale = [row for row in rows if row["status"] == "stale"]
     missing = [row for row in rows if row["status"] == "missing"]
@@ -319,6 +323,23 @@ def metrics_history_state(metrics_history):
         "latest": latest,
         "previous_date": previous.get("date", ""),
         "delta_from_previous": latest.get("delta_from_previous", {}),
+    }
+
+
+def social_execution_state(snapshot):
+    summary = snapshot.get("summary") if isinstance(snapshot, dict) else {}
+    summary = summary or {}
+    return {
+        "ok": bool(snapshot.get("ok")) if isinstance(snapshot, dict) else False,
+        "updated_at": snapshot.get("updated_at", "") if isinstance(snapshot, dict) else "",
+        "http_status": snapshot.get("http_status", "") if isinstance(snapshot, dict) else "",
+        "execution_count": int(summary.get("execution_count") or 0),
+        "posted_count": int(summary.get("posted_count") or 0),
+        "attention_count": int(summary.get("attention_count") or 0),
+        "status_counts": summary.get("status_counts") or {},
+        "platform_counts": summary.get("platform_counts") or {},
+        "latest_attention": summary.get("latest_attention") or [],
+        "action_needed": snapshot.get("action_needed", "") if isinstance(snapshot, dict) else "Run scripts/capture_social_executions.py.",
     }
 
 
@@ -501,13 +522,15 @@ def build_status():
     live = read_json(LIVE_METRICS, {})
     metrics_history = read_json(METRICS_HISTORY, {})
     executor_readiness = read_json(EXECUTOR_READINESS, {})
+    social_executions = read_json(SOCIAL_EXECUTIONS, {})
     promo_plan = read_json(PROMO_QUEUE_PLAN, {})
     store_history = build_store_verification_history(release_status, now)
     scheduled_rows = read_csv(SCHEDULED)
     published_rows = read_csv(PUBLISHED)
     metrics = metric_state(manual, live)
     history = metrics_history_state(metrics_history)
-    freshness = source_freshness(release_status, manual, live, metrics_history, executor_readiness, store_history, promo_plan, now)
+    execution_state = social_execution_state(social_executions)
+    freshness = source_freshness(release_status, manual, live, metrics_history, executor_readiness, store_history, social_executions, promo_plan, now)
 
     releases = []
     all_actions = []
@@ -606,6 +629,13 @@ def build_status():
     freshness_summary = freshness["summary"]
     freshness_actions = freshness["actions"]
     all_actions = freshness_actions + all_actions
+    if execution_state["attention_count"]:
+        status_bits = ", ".join(
+            f"{count} {status}"
+            for status, count in sorted((execution_state.get("status_counts") or {}).items())
+            if status in {"failed", "blocked", "skipped"}
+        )
+        all_actions.insert(0, f"Resolve social executor attention states: {status_bits or execution_state['attention_count']}.")
     return {
         "generated_at": now.isoformat(),
         "source": {
@@ -618,6 +648,7 @@ def build_status():
             "metrics_history": str(METRICS_HISTORY.relative_to(ROOT)),
             "executor_readiness": str(EXECUTOR_READINESS.relative_to(ROOT)),
             "store_verification_history": str(STORE_VERIFICATION_HISTORY.relative_to(ROOT)),
+            "social_executions": str(SOCIAL_EXECUTIONS.relative_to(ROOT)),
         },
         "objective": "Promote Lily Roo releases and keep lilyroo.com/admin status and metrics current.",
         "kpi": {
@@ -638,6 +669,7 @@ def build_status():
             "music_sites_pending": store_state_counts.get("Pending", 0),
             "store_verification_command_count": verification_command_count,
             "store_verification_history": store_history["summary"],
+            "social_execution_summary": execution_state,
             "stale_source_count": freshness_summary["stale"],
             "missing_source_count": freshness_summary["missing"],
         },
