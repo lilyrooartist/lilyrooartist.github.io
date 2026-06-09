@@ -48,6 +48,9 @@ Approve selected rows without hand-editing JSON:
 After approving selected rows, append them to the live queue with:
 `python3 scripts/apply_promo_queue_plan.py --apply`
 
+Approve or unapprove rows that are already in the live scheduled queue:
+`python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --refresh-admin`
+
 Then refresh the admin queue:
 `python3 scripts/sync_future_posts.py`
 

@@ -345,8 +345,12 @@ def social_execution_state(snapshot, scheduled_rows=None):
             "approved": queue_row.get("approved", ""),
         }
         if item.get("reason") == "not_approved" or queue_row.get("approved") == "no":
+            enriched["repair_action"] = "Review this queued post, set approved=yes only if it should publish, then refresh the admin queue."
+            enriched["repair_command"] = f"python3 scripts/update_scheduled_post_approval.py {shell_quote(item.get('post_id', ''))} --refresh-admin"
             approval_needed.append(enriched)
         else:
+            guidance = social_platform_repair_guidance(item)
+            enriched.update(guidance)
             platform_fix_needed.append(enriched)
     return {
         "ok": bool(snapshot.get("ok")) if isinstance(snapshot, dict) else False,
@@ -363,6 +367,29 @@ def social_execution_state(snapshot, scheduled_rows=None):
         "approval_needed": approval_needed,
         "platform_fix_needed": platform_fix_needed,
         "action_needed": snapshot.get("action_needed", "") if isinstance(snapshot, dict) else "Run scripts/capture_social_executions.py.",
+    }
+
+
+def social_platform_repair_guidance(item: dict) -> dict:
+    platform = str(item.get("platform") or "").strip().lower()
+    error = str(item.get("error_summary") or "")
+    post_id = str(item.get("post_id") or "").strip()
+    if "instagram" in platform or "instagram_business_account" in error:
+        return {
+            "repair_action": "Reconnect the Instagram Business/Creator account to the Facebook Page or set IG_BUSINESS_ACCOUNT_ID, then push the worker secret and recapture readiness.",
+            "repair_command": "python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py",
+        }
+    if "facebook" in platform or "identity" in error:
+        command = "python3 scripts/check_facebook_publishing.py --post-id "
+        command += shell_quote(post_id) if post_id else "POST_ID"
+        command += " --check-worker-dry-run"
+        return {
+            "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
+            "repair_command": command,
+        }
+    return {
+        "repair_action": "Review platform credentials/readiness, then rerun the social execution capture.",
+        "repair_command": "LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py",
     }
 
 

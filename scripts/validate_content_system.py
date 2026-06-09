@@ -30,6 +30,7 @@ TWELVE_DOLLARS_REMASTER = ROOT / "data" / "youtube_twelve_dollars_remaster_manif
 TWELVE_DOLLARS_PLAYLIST = ROOT / "data" / "youtube_twelve_dollars_playlist.json"
 PROMO_QUEUE_APPLY = ROOT / "scripts" / "apply_promo_queue_plan.py"
 PROMO_QUEUE_APPROVE = ROOT / "scripts" / "approve_promo_queue_plan.py"
+SCHEDULED_POST_APPROVAL = ROOT / "scripts" / "update_scheduled_post_approval.py"
 MANUAL_METRICS_UPDATER = ROOT / "scripts" / "update_manual_social_stats.py"
 STORE_LINK_VERIFIER = ROOT / "scripts" / "verify_pending_store_links.py"
 METRICS_HISTORY_UPDATER = ROOT / "scripts" / "update_metrics_history.py"
@@ -334,6 +335,11 @@ def validate_generated_outputs(failures):
             ok("promo engine includes social execution summary")
         else:
             fail("promo_engine_status.json missing categorized social execution summary", failures)
+        repair_rows = (execution_summary.get("approval_needed") or []) + (execution_summary.get("platform_fix_needed") or [])
+        if repair_rows and all(row.get("repair_action") and row.get("repair_command") for row in repair_rows):
+            ok(f"promo engine social execution rows include {len(repair_rows)} repair commands")
+        else:
+            fail("promo_engine_status.json social execution rows missing repair guidance", failures)
         for command in verification_commands:
             if "scripts/capture_" not in str(command.get("command") or ""):
                 fail(f"store verification command for {command.get('service') or 'unknown service'} missing capture script", failures)
@@ -441,6 +447,14 @@ def validate_generated_outputs(failures):
         ok("promo queue approval script present")
     else:
         fail("approve_promo_queue_plan.py missing", failures)
+    if SCHEDULED_POST_APPROVAL.exists():
+        approval_text = SCHEDULED_POST_APPROVAL.read_text(encoding="utf-8")
+        if "scheduled_posts.csv" in approval_text and "--refresh-admin" in approval_text and "sync_future_posts.py" in approval_text:
+            ok("scheduled post approval script can refresh admin")
+        else:
+            fail("update_scheduled_post_approval.py missing scheduled queue refresh support", failures)
+    else:
+        fail("update_scheduled_post_approval.py missing", failures)
     if MANUAL_METRICS_UPDATER.exists():
         ok("manual social stats updater present")
     else:

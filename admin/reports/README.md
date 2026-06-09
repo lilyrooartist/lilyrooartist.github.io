@@ -13,6 +13,9 @@ LILYROO_ADMIN_PASSWORD="$LILYROO_ADMIN_PASSWORD" python3 scripts/capture_social_
 python3 scripts/update_weekly_report.py
 ```
 
+Approve a reviewed live queue row with:
+`python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --refresh-admin`
+
 ## Manual stat overrides
 Edit:
 `data/manual_social_stats.json`
