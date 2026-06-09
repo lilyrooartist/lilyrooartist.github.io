@@ -1,19 +1,19 @@
 {
   "ok": true,
-  "updated_at": "2026-06-07T20:28:53.808Z",
+  "updated_at": "2026-06-09T14:06:46.496Z",
   "platforms": {
     "youtube": {
       "ok": true,
       "source": "youtube-data-api",
       "metrics": {
         "subscribers": 5,
-        "total_views": 2454,
-        "video_count": 25
+        "total_views": 879,
+        "video_count": 28
       },
       "channel_title": "Lily Roo",
       "period_28d": {
-        "startDate": "2026-05-10",
-        "endDate": "2026-06-06"
+        "startDate": "2026-05-12",
+        "endDate": "2026-06-08"
       },
       "analytics_status": "Request had insufficient authentication scopes."
     },
@@ -38,10 +38,12 @@
     },
     "tiktok": {
       "ok": false,
-      "reason": "TikTok metrics need TIKTOK_ACCESS_TOKEN.",
+      "reason": "TikTok metrics need TikTok OAuth credentials.",
       "metrics": {},
       "missing_secrets": [
-        "TIKTOK_ACCESS_TOKEN"
+        "TIKTOK_CLIENT_KEY",
+        "TIKTOK_CLIENT_SECRET",
+        "TIKTOK_REFRESH_TOKEN"
       ]
     },
     "instagram": {
