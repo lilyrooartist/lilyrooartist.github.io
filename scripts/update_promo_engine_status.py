@@ -14,6 +14,7 @@ RELEASE_STATUS = ROOT / "data" / "distrokid_release_status.json"
 MANUAL_METRICS = ROOT / "data" / "manual_social_stats.json"
 LIVE_METRICS = ROOT / "data" / "live_social_metrics.json"
 METRICS_HISTORY = ROOT / "data" / "metrics_history.json"
+EXECUTOR_READINESS = ROOT / "data" / "executor_readiness_snapshot.json"
 SCHEDULED = ROOT / "data" / "scheduled_posts.csv"
 PROMO_QUEUE_PLAN = ROOT / "data" / "promo_queue_plan.json"
 PUBLISHED = ROOT / "admin" / "content" / "Published_Log.csv"
@@ -36,6 +37,7 @@ SOURCE_MAX_AGE_HOURS = {
     "manual_metrics": 72,
     "live_metrics": 24,
     "metrics_history": 24,
+    "executor_readiness": 24,
 }
 
 RELEASE_TRACKS = {
@@ -143,10 +145,11 @@ def refresh_command(name: str) -> str:
         "manual_metrics": "Update data/manual_social_stats.json with latest manual metrics.",
         "live_metrics": "python3 scripts/capture_live_metrics.py",
         "metrics_history": "python3 scripts/update_metrics_history.py --refresh-admin",
+        "executor_readiness": "LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py",
     }.get(name, "")
 
 
-def source_freshness(release_status, manual, live, metrics_history, promo_plan, now: datetime):
+def source_freshness(release_status, manual, live, metrics_history, executor_readiness, promo_plan, now: datetime):
     rows = [
         freshness_row("release_status", RELEASE_STATUS, release_status, now),
         freshness_row("scheduled_posts", SCHEDULED, None, now),
@@ -155,6 +158,7 @@ def source_freshness(release_status, manual, live, metrics_history, promo_plan, 
         freshness_row("manual_metrics", MANUAL_METRICS, manual, now),
         freshness_row("live_metrics", LIVE_METRICS, live, now),
         freshness_row("metrics_history", METRICS_HISTORY, metrics_history, now),
+        freshness_row("executor_readiness", EXECUTOR_READINESS, executor_readiness, now),
     ]
     stale = [row for row in rows if row["status"] == "stale"]
     missing = [row for row in rows if row["status"] == "missing"]
@@ -443,12 +447,13 @@ def build_status():
     manual = read_json(MANUAL_METRICS, {})
     live = read_json(LIVE_METRICS, {})
     metrics_history = read_json(METRICS_HISTORY, {})
+    executor_readiness = read_json(EXECUTOR_READINESS, {})
     promo_plan = read_json(PROMO_QUEUE_PLAN, {})
     scheduled_rows = read_csv(SCHEDULED)
     published_rows = read_csv(PUBLISHED)
     metrics = metric_state(manual, live)
     history = metrics_history_state(metrics_history)
-    freshness = source_freshness(release_status, manual, live, metrics_history, promo_plan, now)
+    freshness = source_freshness(release_status, manual, live, metrics_history, executor_readiness, promo_plan, now)
 
     releases = []
     all_actions = []
@@ -557,6 +562,7 @@ def build_status():
             "manual_metrics": str(MANUAL_METRICS.relative_to(ROOT)),
             "live_metrics": str(LIVE_METRICS.relative_to(ROOT)),
             "metrics_history": str(METRICS_HISTORY.relative_to(ROOT)),
+            "executor_readiness": str(EXECUTOR_READINESS.relative_to(ROOT)),
         },
         "objective": "Promote Lily Roo releases and keep lilyroo.com/admin status and metrics current.",
         "kpi": {

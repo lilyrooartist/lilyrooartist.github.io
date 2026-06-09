@@ -509,7 +509,7 @@
 <script type="text/plain" id="embedded-weekly-report"># Weekly Social Report — Lily Roo
 
 **Period:** 2026-06-03 to 2026-06-09
-**Last updated:** 2026-06-09 03:22 PM EDT
+**Last updated:** 2026-06-09 03:42 PM EDT
 
 ## KPI Goal
 - Primary growth target: **1,000 YouTube subscribers** (monetization milestone)
@@ -666,6 +666,7 @@
 - Capture Apple Music public release metadata: `python3 scripts/capture_apple_music_release.py`
 - Capture live API metrics: `python3 scripts/capture_live_metrics.py`
 - Update metrics history: `python3 scripts/update_metrics_history.py --refresh-admin`
+- Capture executor readiness: `LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
 - Regenerate via: `python3 scripts/update_weekly_report.py`
 - Source overrides: `data/manual_social_stats.json`</script>
 
@@ -842,7 +843,7 @@
 }</script>
 
 <script type="application/json" id="embedded-promo-engine-status">{
-  "generated_at": "2026-06-09T19:23:32.575904+00:00",
+  "generated_at": "2026-06-09T19:42:20.610434+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -850,7 +851,8 @@
     "published_log": "admin/content/Published_Log.csv",
     "manual_metrics": "data/manual_social_stats.json",
     "live_metrics": "data/live_social_metrics.json",
-    "metrics_history": "data/metrics_history.json"
+    "metrics_history": "data/metrics_history.json",
+    "executor_readiness": "data/executor_readiness_snapshot.json"
   },
   "objective": "Promote Lily Roo releases and keep lilyroo.com/admin status and metrics current.",
   "kpi": {
@@ -1039,23 +1041,23 @@
     "healthy_releases": 0,
     "tracked_releases": 3,
     "open_action_count": 9,
-    "fresh_sources": 7,
+    "fresh_sources": 8,
     "stale_sources": 0,
     "missing_sources": 0
   },
   "freshness": {
     "summary": {
-      "fresh": 7,
+      "fresh": 8,
       "stale": 0,
       "missing": 0,
-      "checked_at": "2026-06-09T19:23:32.575904+00:00"
+      "checked_at": "2026-06-09T19:42:20.610434+00:00"
     },
     "sources": [
       {
         "name": "release_status",
         "path": "data/distrokid_release_status.json",
         "status": "fresh",
-        "age_hours": 17.6,
+        "age_hours": 17.9,
         "max_age_hours": 72,
         "timestamp": "2026-06-09T01:47:42+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin; update data/distrokid_release_status.json when a public URL is verified."
@@ -1064,7 +1066,7 @@
         "name": "scheduled_posts",
         "path": "data/scheduled_posts.csv",
         "status": "fresh",
-        "age_hours": 45.7,
+        "age_hours": 46.1,
         "max_age_hours": 72,
         "timestamp": "2026-06-07T21:38:44.418468+00:00",
         "refresh_command": "python3 scripts/sync_future_posts.py"
@@ -1073,16 +1075,16 @@
         "name": "promo_queue_plan",
         "path": "data/promo_queue_plan.json",
         "status": "fresh",
-        "age_hours": 1.2,
+        "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-09T18:09:15.572959+00:00",
+        "timestamp": "2026-06-09T19:42:20.583384+00:00",
         "refresh_command": "python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
         "name": "published_log",
         "path": "admin/content/Published_Log.csv",
         "status": "fresh",
-        "age_hours": 54.8,
+        "age_hours": 55.1,
         "max_age_hours": 168,
         "timestamp": "2026-06-07T12:36:37.141276+00:00",
         "refresh_command": "Export or append latest published posts to admin/content/Published_Log.csv."
@@ -1091,7 +1093,7 @@
         "name": "manual_metrics",
         "path": "data/manual_social_stats.json",
         "status": "fresh",
-        "age_hours": 51.6,
+        "age_hours": 51.9,
         "max_age_hours": 72,
         "timestamp": "2026-06-07T15:47:26.729764+00:00",
         "refresh_command": "Update data/manual_social_stats.json with latest manual metrics."
@@ -1100,7 +1102,7 @@
         "name": "live_metrics",
         "path": "data/live_social_metrics.json",
         "status": "fresh",
-        "age_hours": 5.3,
+        "age_hours": 5.6,
         "max_age_hours": 24,
         "timestamp": "2026-06-09T14:06:46.496000+00:00",
         "refresh_command": "python3 scripts/capture_live_metrics.py"
@@ -1109,10 +1111,19 @@
         "name": "metrics_history",
         "path": "data/metrics_history.json",
         "status": "fresh",
-        "age_hours": 0.0,
+        "age_hours": 0.3,
         "max_age_hours": 24,
         "timestamp": "2026-06-09T19:22:44.862530+00:00",
         "refresh_command": "python3 scripts/update_metrics_history.py --refresh-admin"
+      },
+      {
+        "name": "executor_readiness",
+        "path": "data/executor_readiness_snapshot.json",
+        "status": "fresh",
+        "age_hours": 0.1,
+        "max_age_hours": 24,
+        "timestamp": "2026-06-09T19:35:48.248684+00:00",
+        "refresh_command": "LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       }
     ],
     "actions": []
@@ -1514,7 +1525,7 @@
 }</script>
 
 <script type="application/json" id="embedded-promo-queue-plan">{
-  "generated_at": "2026-06-09T14:09:15.572959-04:00",
+  "generated_at": "2026-06-09T15:42:20.583384-04:00",
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
     "release_status": "data/distrokid_release_status.json"
@@ -1613,6 +1624,65 @@
     "scheduled_duplicate_posts": 0,
     "ready_ids": [],
     "scheduled_duplicate_ids": []
+  },
+  "readiness_audit": {
+    "source": "data/executor_readiness_snapshot.json",
+    "updated_at": "2026-06-09T19:35:48.248684Z",
+    "ok": false,
+    "counts": {
+      "manual_only": 2,
+      "unknown": 4
+    },
+    "rows": [
+      {
+        "id": "FP-PLAN-TWELVE-DOLLARS-X",
+        "platform": "X",
+        "execution_mode": "auto",
+        "approved": "no",
+        "state": "unknown",
+        "message": "Set LILYROO_ADMIN_PASSWORD and rerun to capture executor readiness."
+      },
+      {
+        "id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+        "platform": "Instagram",
+        "execution_mode": "auto",
+        "approved": "no",
+        "state": "unknown",
+        "message": "Set LILYROO_ADMIN_PASSWORD and rerun to capture executor readiness."
+      },
+      {
+        "id": "FP-PLAN-TWELVE-DOLLARS-TIKTOK",
+        "platform": "TikTok",
+        "execution_mode": "auto",
+        "approved": "no",
+        "state": "unknown",
+        "message": "Set LILYROO_ADMIN_PASSWORD and rerun to capture executor readiness."
+      },
+      {
+        "id": "FP-PLAN-TWELVE-DOLLARS-FACEBOOK",
+        "platform": "Facebook",
+        "execution_mode": "auto",
+        "approved": "no",
+        "state": "unknown",
+        "message": "Set LILYROO_ADMIN_PASSWORD and rerun to capture executor readiness."
+      },
+      {
+        "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+        "platform": "YouTube Community",
+        "execution_mode": "manual",
+        "approved": "no",
+        "state": "manual_only",
+        "message": "YouTube Community posts are copy-ready manual workflow."
+      },
+      {
+        "id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+        "platform": "YouTube Community",
+        "execution_mode": "manual",
+        "approved": "no",
+        "state": "manual_only",
+        "message": "YouTube Community posts are copy-ready manual workflow."
+      }
+    ]
   },
   "posts": [
     {
@@ -2872,8 +2942,10 @@
     const manualCount=Number(summary.manual_posts||0);
     const autoCount=Number(summary.auto_posts||0);
     const applyPreview=plan.apply_preview||{};
+    const readinessAudit=plan.readiness_audit||{};
     const readyCount=Number(applyPreview.ready_to_apply_posts||0);
     const duplicateCount=Number(applyPreview.scheduled_duplicate_posts||0);
+    const readinessCounts=readinessAudit.counts||{};
     const planMeta=[
       `${approvedCount} approved`,
       `${reviewCount} review`,
@@ -2884,6 +2956,15 @@
       `${readyCount} ready to apply`,
       `${duplicateCount} already scheduled`
     ].join(' - ');
+    const readinessMeta=[
+      readinessAudit.updated_at?`Readiness checked ${formatQueueDate(readinessAudit.updated_at)}`:'Readiness not captured',
+      readinessCounts.ready_after_approval?`${readinessCounts.ready_after_approval} ready after approval`:'',
+      readinessCounts.blocked?`${readinessCounts.blocked} blocked`:'',
+      readinessCounts.manual_only?`${readinessCounts.manual_only} manual only`:'',
+      readinessCounts.unknown?`${readinessCounts.unknown} unknown`:''
+    ].filter(Boolean).join(' - ');
+    const readinessById={};
+    (readinessAudit.rows||[]).forEach(row=>{ if(row.id) readinessById[row.id]=row; });
     const approvalCommands=plan.approval_commands||{};
     const releaseApprovalCommands=Object.entries(approvalCommands.by_release||{})
       .map(([release,command])=>`${release}: ${command}`);
@@ -2904,6 +2985,7 @@
           <div class="queue-title">${escapeHtml(posts.length)} draft posts ready for review</div>
           <div class="queue-meta">${escapeHtml(planMeta)}</div>
           <div class="queue-meta">${escapeHtml(applyMeta)}</div>
+          <div class="queue-meta">${escapeHtml(readinessMeta)}</div>
           <div class="queue-meta">${escapeHtml(plan.apply_note||'Review before adding to the live schedule.')}</div>
           ${approvalCommandMeta.map(command=>`<div class="queue-meta">${escapeHtml(command)}</div>`).join('')}
           ${applyCommandMeta.map(command=>`<div class="queue-meta">${escapeHtml(command)}</div>`).join('')}
@@ -2913,10 +2995,12 @@
       </div>
     </div>`;
     const items=posts.slice(0,5).map(post=>`<div class="queue-item">
+      ${(()=>{ const audit=readinessById[post.id]||{}; post._readinessAudit=audit; return ''; })()}
       <div class="queue-top">
         <div>
           <div class="queue-title">${escapeHtml(post.platform||'Platform')} - ${escapeHtml(post.song||'Release')}</div>
           <div class="queue-meta">${escapeHtml(post.id||'draft')} - ${escapeHtml(formatQueueDate(post.scheduled_at))} - ${escapeHtml(post.post_type||'post')} - ${escapeHtml(post.execution_mode||'manual')}</div>
+          ${post._readinessAudit?.state?`<div class="queue-meta">Readiness: ${escapeHtml(post._readinessAudit.state)}${post._readinessAudit.message?` - ${escapeHtml(post._readinessAudit.message)}`:''}</div>`:''}
           ${post.reason?`<div class="queue-meta">${escapeHtml(post.reason)}</div>`:''}
           <div class="queue-meta">${escapeHtml(post.text||'')}</div>
           ${post.approval_command?`<div class="queue-meta">${escapeHtml(post.approval_command)}</div>`:''}

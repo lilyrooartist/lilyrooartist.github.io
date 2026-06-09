@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-09T14:09:15.572959-04:00",
+  "generated_at": "2026-06-09T15:42:20.583384-04:00",
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
     "release_status": "data/distrokid_release_status.json"
@@ -98,6 +98,65 @@
     "scheduled_duplicate_posts": 0,
     "ready_ids": [],
     "scheduled_duplicate_ids": []
+  },
+  "readiness_audit": {
+    "source": "data/executor_readiness_snapshot.json",
+    "updated_at": "2026-06-09T19:35:48.248684Z",
+    "ok": false,
+    "counts": {
+      "manual_only": 2,
+      "unknown": 4
+    },
+    "rows": [
+      {
+        "id": "FP-PLAN-TWELVE-DOLLARS-X",
+        "platform": "X",
+        "execution_mode": "auto",
+        "approved": "no",
+        "state": "unknown",
+        "message": "Set LILYROO_ADMIN_PASSWORD and rerun to capture executor readiness."
+      },
+      {
+        "id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+        "platform": "Instagram",
+        "execution_mode": "auto",
+        "approved": "no",
+        "state": "unknown",
+        "message": "Set LILYROO_ADMIN_PASSWORD and rerun to capture executor readiness."
+      },
+      {
+        "id": "FP-PLAN-TWELVE-DOLLARS-TIKTOK",
+        "platform": "TikTok",
+        "execution_mode": "auto",
+        "approved": "no",
+        "state": "unknown",
+        "message": "Set LILYROO_ADMIN_PASSWORD and rerun to capture executor readiness."
+      },
+      {
+        "id": "FP-PLAN-TWELVE-DOLLARS-FACEBOOK",
+        "platform": "Facebook",
+        "execution_mode": "auto",
+        "approved": "no",
+        "state": "unknown",
+        "message": "Set LILYROO_ADMIN_PASSWORD and rerun to capture executor readiness."
+      },
+      {
+        "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+        "platform": "YouTube Community",
+        "execution_mode": "manual",
+        "approved": "no",
+        "state": "manual_only",
+        "message": "YouTube Community posts are copy-ready manual workflow."
+      },
+      {
+        "id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+        "platform": "YouTube Community",
+        "execution_mode": "manual",
+        "approved": "no",
+        "state": "manual_only",
+        "message": "YouTube Community posts are copy-ready manual workflow."
+      }
+    ]
   },
   "posts": [
     {

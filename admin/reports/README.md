@@ -7,6 +7,7 @@ python3 scripts/capture_youtube_public.py
 python3 scripts/capture_spotify_release.py
 python3 scripts/capture_live_metrics.py
 python3 scripts/update_metrics_history.py --refresh-admin
+LILYROO_ADMIN_PASSWORD="$LILYROO_ADMIN_PASSWORD" python3 scripts/capture_executor_readiness.py
 python3 scripts/update_weekly_report.py
 ```
 
@@ -22,6 +23,9 @@ YouTube public video-view metadata is captured into:
 
 Daily trend snapshots are captured into:
 `data/metrics_history.json`
+
+Executor readiness is captured into:
+`data/executor_readiness_snapshot.json`
 
 Then re-run the update command to regenerate:
 `admin/reports/weekly-social-report.md`

@@ -1,0 +1,31 @@
+{
+  "ok": false,
+  "updated_at": "2026-06-09T19:35:48.248684Z",
+  "source": "lilyroo-social-executor-readiness",
+  "url": "https://www.lilyroo.com/api/social/readiness",
+  "http_status": 401,
+  "error": "HTTP 401: Unauthorized",
+  "password_supplied": false,
+  "summary": {
+    "ready_platforms": [],
+    "blocked_platforms": [
+      "X",
+      "Instagram",
+      "TikTok",
+      "Facebook",
+      "YouTube Community"
+    ],
+    "platforms": {
+      "X": false,
+      "Instagram": false,
+      "TikTok": false,
+      "Facebook": false,
+      "YouTube Community": false
+    }
+  },
+  "payload": {
+    "ok": false,
+    "error": "Unauthorized"
+  },
+  "action_needed": "Set LILYROO_ADMIN_PASSWORD and rerun to capture executor readiness."
+}

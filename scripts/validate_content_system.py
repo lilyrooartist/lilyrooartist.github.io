@@ -14,6 +14,7 @@ QUEUE = ROOT / "data" / "scheduled_posts.csv"
 FUTURE = ROOT / "admin" / "future-posts.json"
 LIVE_METRICS = ROOT / "data" / "live_social_metrics.json"
 METRICS_HISTORY = ROOT / "data" / "metrics_history.json"
+EXECUTOR_READINESS = ROOT / "data" / "executor_readiness_snapshot.json"
 SPOTIFY_SNAPSHOT = ROOT / "data" / "spotify_release_snapshot.json"
 APPLE_MUSIC_SNAPSHOT = ROOT / "data" / "apple_music_release_snapshot.json"
 YOUTUBE_PUBLIC = ROOT / "data" / "youtube_public_snapshot.json"
@@ -30,6 +31,7 @@ PROMO_QUEUE_APPROVE = ROOT / "scripts" / "approve_promo_queue_plan.py"
 MANUAL_METRICS_UPDATER = ROOT / "scripts" / "update_manual_social_stats.py"
 STORE_LINK_VERIFIER = ROOT / "scripts" / "verify_pending_store_links.py"
 METRICS_HISTORY_UPDATER = ROOT / "scripts" / "update_metrics_history.py"
+EXECUTOR_READINESS_CAPTURE = ROOT / "scripts" / "capture_executor_readiness.py"
 REPORT = ROOT / "admin" / "reports" / "weekly-social-report.md"
 INDEX = CONTENT / "content_index.json"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
@@ -147,6 +149,14 @@ def validate_generated_outputs(failures):
             fail("metrics_history.json missing snapshots or deltas", failures)
     else:
         fail("metrics_history.json missing; run scripts/update_metrics_history.py", failures)
+    if EXECUTOR_READINESS.exists():
+        readiness = json.loads(EXECUTOR_READINESS.read_text(encoding="utf-8"))
+        if "summary" in readiness and "updated_at" in readiness:
+            ok("executor readiness snapshot present")
+        else:
+            fail("executor_readiness_snapshot.json missing summary or timestamp", failures)
+    else:
+        fail("executor_readiness_snapshot.json missing; run scripts/capture_executor_readiness.py", failures)
     if SPOTIFY_SNAPSHOT.exists():
         snapshot = json.loads(SPOTIFY_SNAPSHOT.read_text(encoding="utf-8"))
         if snapshot.get("ok") and snapshot.get("title") and snapshot.get("thumbnail_url"):
@@ -354,9 +364,14 @@ def validate_generated_outputs(failures):
             else:
                 fail("promo_queue_plan.json missing release approval commands", failures)
         apply_preview = plan.get("apply_preview") or {}
+        readiness_audit = plan.get("readiness_audit") or {}
         for key in ("ready_to_apply_posts", "review_posts", "scheduled_duplicate_posts", "ready_ids", "scheduled_duplicate_ids"):
             if key not in apply_preview:
                 fail(f"promo_queue_plan.json apply_preview missing {key}", failures)
+        if readiness_audit.get("rows") and readiness_audit.get("counts") is not None:
+            ok("promo queue plan includes executor readiness audit")
+        else:
+            fail("promo_queue_plan.json missing executor readiness audit", failures)
         ready_ids = apply_preview.get("ready_ids") or []
         duplicate_ids = apply_preview.get("scheduled_duplicate_ids") or []
         if apply_preview.get("ready_to_apply_posts") == len(ready_ids):
@@ -414,6 +429,14 @@ def validate_generated_outputs(failures):
             fail("update_metrics_history.py missing history or refresh support", failures)
     else:
         fail("update_metrics_history.py missing", failures)
+    if EXECUTOR_READINESS_CAPTURE.exists():
+        readiness_text = EXECUTOR_READINESS_CAPTURE.read_text(encoding="utf-8")
+        if "executor_readiness_snapshot.json" in readiness_text and "X-Lilyroo-Admin-Password" in readiness_text:
+            ok("executor readiness capture script present")
+        else:
+            fail("capture_executor_readiness.py missing readiness snapshot or auth header support", failures)
+    else:
+        fail("capture_executor_readiness.py missing", failures)
 
 
 def validate_report(failures):

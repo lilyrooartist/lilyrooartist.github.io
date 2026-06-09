@@ -16,6 +16,7 @@ RELEASE_STATUS = ROOT / "data" / "distrokid_release_status.json"
 OUT = ROOT / "data" / "promo_queue_plan.json"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
 SCHEDULED = ROOT / "data" / "scheduled_posts.csv"
+EXECUTOR_READINESS = ROOT / "data" / "executor_readiness_snapshot.json"
 
 TZ = ZoneInfo("America/New_York")
 PLATFORM_ORDER = ["X", "Instagram", "TikTok", "Facebook", "YouTube Community"]
@@ -252,6 +253,68 @@ def apply_preview(posts, scheduled_rows):
     }
 
 
+def readiness_for_platform(readiness, platform: str) -> dict:
+    if platform == "YouTube Community":
+        return {
+            "state": "manual_only",
+            "ready": False,
+            "message": "YouTube Community posts are copy-ready manual workflow.",
+        }
+    if not readiness:
+        return {
+            "state": "unknown",
+            "ready": None,
+            "message": "No executor readiness snapshot captured yet.",
+        }
+    if not readiness.get("ok"):
+        return {
+            "state": "unknown",
+            "ready": None,
+            "message": readiness.get("action_needed") or readiness.get("error") or "Executor readiness could not be captured.",
+        }
+    summary = readiness.get("summary") or {}
+    platform_map = summary.get("platforms") or {}
+    if platform not in platform_map:
+        return {
+            "state": "unknown",
+            "ready": None,
+            "message": "Executor readiness snapshot does not include this platform.",
+        }
+    ready = bool(platform_map.get(platform))
+    return {
+        "state": "ready" if ready else "blocked",
+        "ready": ready,
+        "message": "Ready after approval." if ready else "Executor credentials or platform setup are not ready.",
+    }
+
+
+def readiness_audit(posts, readiness):
+    rows = []
+    counts = Counter()
+    for post in posts:
+        item = readiness_for_platform(readiness, post.get("platform") or "")
+        if post.get("approved") != "yes" and item["state"] == "ready":
+            state = "ready_after_approval"
+        else:
+            state = item["state"]
+        counts[state] += 1
+        rows.append({
+            "id": post.get("id", ""),
+            "platform": post.get("platform", ""),
+            "execution_mode": post.get("execution_mode", ""),
+            "approved": post.get("approved", "no"),
+            "state": state,
+            "message": item["message"],
+        })
+    return {
+        "source": str(EXECUTOR_READINESS.relative_to(ROOT)),
+        "updated_at": readiness.get("updated_at", "") if isinstance(readiness, dict) else "",
+        "ok": bool(readiness.get("ok")) if isinstance(readiness, dict) else False,
+        "counts": dict(sorted(counts.items())),
+        "rows": rows,
+    }
+
+
 def approval_commands(posts):
     review_posts = [post for post in posts if post.get("approved") != "yes"]
     releases = sorted({post.get("song") for post in review_posts if post.get("song")})
@@ -288,6 +351,7 @@ def apply_commands(posts):
 def build_plan():
     promo = read_json(PROMO_STATUS, {})
     releases = release_lookup(read_json(RELEASE_STATUS, {}))
+    readiness = read_json(EXECUTOR_READINESS, {})
     prior_by_id, prior_by_slot = prior_approval_lookup(read_json(OUT, {}))
     scheduled_rows = read_csv(SCHEDULED)
     posts = []
@@ -343,6 +407,7 @@ def build_plan():
         "apply_commands": apply_commands(posts),
         "summary": plan_summary(posts),
         "apply_preview": apply_preview(posts, scheduled_rows),
+        "readiness_audit": readiness_audit(posts, readiness),
         "posts": posts,
     }
 
