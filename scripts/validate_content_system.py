@@ -27,6 +27,7 @@ PROMO_QUEUE_APPROVE = ROOT / "scripts" / "approve_promo_queue_plan.py"
 MANUAL_METRICS_UPDATER = ROOT / "scripts" / "update_manual_social_stats.py"
 REPORT = ROOT / "admin" / "reports" / "weekly-social-report.md"
 INDEX = CONTENT / "content_index.json"
+ADMIN_INDEX = ROOT / "admin" / "index.html"
 
 
 def read_csv(path):
@@ -320,6 +321,23 @@ def validate_report(failures):
         fail("weekly report missing Last updated timestamp", failures)
 
 
+def validate_admin_execution_feedback(failures):
+    text = ADMIN_INDEX.read_text(encoding="utf-8") if ADMIN_INDEX.exists() else ""
+    checks = {
+        "live feedback region": 'data-role="exec-feedback" aria-live="polite"' in text,
+        "working acknowledgement": "Publishing ${p.platform || 'post'} now" in text,
+        "success acknowledgement": "Published successfully" in text,
+        "failure helper": "socialExecutorFailureMessage" in text,
+        "failed status": "statusEl.textContent='Failed'" in text,
+        "long feedback wrapping": "overflow-wrap:anywhere" in text,
+    }
+    missing = [label for label, present in checks.items() if not present]
+    if missing:
+        fail("admin execute feedback missing " + ", ".join(missing), failures)
+    else:
+        ok("admin execute button has working/success/error feedback")
+
+
 def main():
     failures = []
     validate_pack_pairs(failures)
@@ -327,6 +345,7 @@ def main():
     validate_queue(failures)
     validate_generated_outputs(failures)
     validate_report(failures)
+    validate_admin_execution_feedback(failures)
     if failures:
         print(f"\n{len(failures)} validation issue(s)")
         return 1
