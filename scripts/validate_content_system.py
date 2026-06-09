@@ -211,6 +211,13 @@ def validate_generated_outputs(failures):
             ok(f"promo engine freshness audit tracks {len(sources)} sources")
         else:
             fail("promo_engine_status.json missing source freshness audit", failures)
+        for source in sources:
+            name = source.get("name") or "[missing source]"
+            if source.get("status") not in {"fresh", "stale", "missing"}:
+                fail(f"promo engine freshness source {name} has invalid status", failures)
+            for key in ("path", "max_age_hours", "refresh_command"):
+                if not str(source.get(key) or "").strip():
+                    fail(f"promo engine freshness source {name} missing {key}", failures)
         kpi = status.get("kpi") or {}
         pending_count = kpi.get("pending_manual_metric_fields", 0)
         pending_details = kpi.get("pending_manual_metric_details") or []

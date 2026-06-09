@@ -150,6 +150,10 @@
     .store-pill{display:flex;justify-content:space-between;gap:8px;align-items:center;border:1px solid #26314e;border-radius:9px;background:#0f1320;padding:7px 8px;font-size:11px;color:#cdd5ec}
     .store-pill a{color:#cfe3ff;text-decoration:none;font-weight:800}
     .store-pill a:hover{text-decoration:underline}
+    .freshness-grid{display:grid;gap:7px;margin-top:10px}
+    .freshness-row{border:1px solid #26314e;border-radius:9px;background:#0f1320;padding:8px}
+    .freshness-row-head{display:flex;justify-content:space-between;gap:8px;align-items:center;font-size:12px;font-weight:800;color:#f4f7ff}
+    .freshness-command{font-size:11px;color:#9ba3bf;margin-top:5px;overflow-wrap:anywhere}
     .release-open-checks{margin:10px 0 0;padding-left:18px;color:#cdd5ec;font-size:12px;line-height:1.4}
     .release-open-checks li{margin:5px 0}
     .priority-list{margin:0;padding-left:20px;color:#cdd5ec}
@@ -2311,6 +2315,31 @@
     return status?'Tracked':'Unknown';
   }
 
+  function freshnessClass(status){
+    if(status==='fresh') return 'ok';
+    if(status==='stale') return 'warn';
+    if(status==='missing') return 'bad';
+    return 'neutral';
+  }
+
+  function renderFreshnessRows(freshness){
+    const rows=Array.isArray(freshness?.sources)?freshness.sources:[];
+    if(!rows.length) return '';
+    return `<div class="freshness-grid">${rows.map(source=>{
+      const label=String(source.name||'source').replaceAll('_',' ');
+      const age=source.age_hours===null || source.age_hours===undefined ? 'n/a' : `${source.age_hours}h`;
+      const max=source.max_age_hours ? ` / ${source.max_age_hours}h max` : '';
+      return `<div class="freshness-row">
+        <div class="freshness-row-head">
+          <span>${escapeHtml(label)}</span>
+          <span class="status-chip ${escapeHtml(freshnessClass(source.status))}">${escapeHtml(source.status||'unknown')}</span>
+        </div>
+        <div class="queue-meta">${escapeHtml(age + max)} - ${escapeHtml(source.path||'')}</div>
+        ${source.refresh_command?`<div class="freshness-command">${escapeHtml(source.refresh_command)}</div>`:''}
+      </div>`;
+    }).join('')}</div>`;
+  }
+
   function renderPromoHealth(status){
     const root=document.getElementById('promo-health');
     if(!root) return;
@@ -2369,11 +2398,12 @@
       .slice(0,3)
       .map(source=>`<li>${escapeHtml((source.name||'source').replaceAll('_',' '))}: ${escapeHtml(source.status||'unknown')} (${escapeHtml(source.age_hours ?? 'n/a')}h)</li>`)
       .join('');
+    const sourceRows=renderFreshnessRows(freshness);
     const actionRows=(status.next_actions||[]).slice(0,4).map(action=>`<li>${escapeHtml(action)}</li>`).join('');
     const actionList=freshnessRows||actionRows
       ? `<ul class="release-open-checks">${freshnessRows}${actionRows}</ul>`
       : '<div class="muted">No immediate promo actions.</div>';
-    root.innerHTML=`${summary}${releaseItems}${actionList}`;
+    root.innerHTML=`${summary}${releaseItems}${sourceRows}${actionList}`;
   }
 
   function renderPromoQueuePlan(plan){
