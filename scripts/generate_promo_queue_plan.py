@@ -85,6 +85,10 @@ def approval_command(post_id: str) -> str:
     return f"python3 scripts/approve_promo_queue_plan.py --id {post_id} --refresh-admin"
 
 
+def apply_command() -> str:
+    return "python3 scripts/apply_promo_queue_plan.py --apply --refresh-admin"
+
+
 def prior_approval_lookup(plan):
     by_id = {}
     by_slot = {}
@@ -253,7 +257,8 @@ def build_plan():
         },
         "mode": "draft_plan_only",
         "csv_target": "data/scheduled_posts.csv",
-        "apply_note": "Mark reviewed rows approved=yes, then run scripts/apply_promo_queue_plan.py --apply and scripts/sync_future_posts.py.",
+        "apply_note": "Mark reviewed rows approved=yes, then apply approved rows into the live schedule.",
+        "apply_command": apply_command(),
         "summary": plan_summary(posts),
         "posts": posts,
     }

@@ -243,6 +243,11 @@ def validate_generated_outputs(failures):
             ok("promo queue plan summary matches draft post count")
         else:
             fail("promo_queue_plan.json summary draft_posts does not match posts", failures)
+        apply_command = plan.get("apply_command") or ""
+        if "apply_promo_queue_plan.py --apply --refresh-admin" in apply_command:
+            ok("promo queue plan includes refresh-aware apply command")
+        else:
+            fail("promo_queue_plan.json missing refresh-aware apply command", failures)
         for post in posts:
             for key in ("id", "scheduled_at", "platform", "song", "text", "execution_mode", "post_type", "approval_command"):
                 if not str(post.get(key) or "").strip():
@@ -255,6 +260,11 @@ def validate_generated_outputs(failures):
         fail("promo_queue_plan.json missing; run scripts/generate_promo_queue_plan.py", failures)
     if PROMO_QUEUE_APPLY.exists():
         ok("promo queue apply script present")
+        apply_text = PROMO_QUEUE_APPLY.read_text(encoding="utf-8")
+        if "--refresh-admin" in apply_text and "scripts/sync_future_posts.py" in apply_text:
+            ok("promo queue apply script can refresh admin")
+        else:
+            fail("apply_promo_queue_plan.py missing --refresh-admin flow", failures)
     else:
         fail("apply_promo_queue_plan.py missing", failures)
     if PROMO_QUEUE_APPROVE.exists():

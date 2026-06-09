@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import subprocess
 from pathlib import Path
 
 
@@ -89,11 +90,23 @@ def write_queue(existing, additions):
         writer.writerows(additions)
 
 
+def refresh_admin():
+    commands = [
+        ["python3", "scripts/sync_future_posts.py"],
+        ["python3", "scripts/update_promo_engine_status.py"],
+        ["python3", "scripts/generate_promo_queue_plan.py"],
+        ["python3", "scripts/update_promo_engine_status.py"],
+    ]
+    for command in commands:
+        subprocess.run(command, cwd=ROOT, check=True)
+
+
 def main():
     parser = argparse.ArgumentParser(description="Append approved promo plan rows into data/scheduled_posts.csv.")
     parser.add_argument("--apply", action="store_true", help="Actually append rows. Default is dry-run.")
     parser.add_argument("--include-unapproved", action="store_true", help="Allow rows with approved != yes.")
     parser.add_argument("--id", action="append", default=[], help="Only apply a specific FP-PLAN id. Repeatable.")
+    parser.add_argument("--refresh-admin", action="store_true", help="Sync future posts and regenerate promo status/admin embeds after applying.")
     args = parser.parse_args()
 
     plan = read_plan()
@@ -119,6 +132,9 @@ def main():
         return
     write_queue(existing, additions)
     print(f"Appended {len(additions)} row(s) to {QUEUE}")
+    if args.refresh_admin:
+        refresh_admin()
+        print("Refreshed future posts, promo status, promo plan, and admin embeds")
 
 
 if __name__ == "__main__":
