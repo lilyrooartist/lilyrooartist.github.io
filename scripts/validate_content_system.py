@@ -23,6 +23,7 @@ ALIGNMENT_AUDIT = ROOT / "data" / "first_single_alignment_audit.json"
 PROMO_ENGINE_STATUS = ROOT / "data" / "promo_engine_status.json"
 PROMO_QUEUE_PLAN = ROOT / "data" / "promo_queue_plan.json"
 PROMO_QUEUE_APPLY = ROOT / "scripts" / "apply_promo_queue_plan.py"
+PROMO_QUEUE_APPROVE = ROOT / "scripts" / "approve_promo_queue_plan.py"
 MANUAL_METRICS_UPDATER = ROOT / "scripts" / "update_manual_social_stats.py"
 REPORT = ROOT / "admin" / "reports" / "weekly-social-report.md"
 INDEX = CONTENT / "content_index.json"
@@ -247,6 +248,10 @@ def validate_generated_outputs(failures):
         ok("promo queue apply script present")
     else:
         fail("apply_promo_queue_plan.py missing", failures)
+    if PROMO_QUEUE_APPROVE.exists():
+        ok("promo queue approval script present")
+    else:
+        fail("approve_promo_queue_plan.py missing", failures)
     if MANUAL_METRICS_UPDATER.exists():
         ok("manual social stats updater present")
     else:

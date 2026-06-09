@@ -42,7 +42,10 @@ Safe apply workflow:
 The apply script is dry-run by default and only selects plan rows where `approved` is `yes`. To preview a specific draft without writing:
 `python3 scripts/apply_promo_queue_plan.py --include-unapproved --id FP-PLAN-TWELVE-DOLLARS-X`
 
-After marking selected rows approved in `data/promo_queue_plan.json`, append them to the live queue with:
+Approve selected rows without hand-editing JSON:
+`python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-X --refresh-admin`
+
+After approving selected rows, append them to the live queue with:
 `python3 scripts/apply_promo_queue_plan.py --apply`
 
 Then refresh the admin queue:
