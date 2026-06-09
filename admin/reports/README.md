@@ -3,15 +3,10 @@
 ## Weekly update command
 
 ```bash
-python3 scripts/capture_youtube_public.py
-python3 scripts/capture_spotify_release.py
-python3 scripts/capture_live_metrics.py
-python3 scripts/update_metrics_history.py --refresh-admin
-python3 scripts/verify_pending_store_links.py --refresh-admin
-python3 scripts/capture_executor_readiness.py
-python3 scripts/capture_social_executions.py
-python3 scripts/update_weekly_report.py
+python3 scripts/refresh_promo_admin.py
 ```
+
+This safe refresh updates read-only store checks, live metrics, executor readiness, social execution history, metrics history, the weekly report, and the Admin embedded promo snapshot. It writes the run log to `data/promo_admin_refresh_run.json`.
 
 The executor capture scripts use `LILYROO_EXECUTOR_BEARER_TOKEN` when available and fall back to `LILYROO_ADMIN_PASSWORD`.
 
@@ -39,6 +34,9 @@ All-release store verification history is captured into:
 
 Social execution history is captured into:
 `data/social_execution_snapshot.json`
+
+Safe refresh run history is captured into:
+`data/promo_admin_refresh_run.json`
 
 Then re-run the update command to regenerate:
 `admin/reports/weekly-social-report.md`

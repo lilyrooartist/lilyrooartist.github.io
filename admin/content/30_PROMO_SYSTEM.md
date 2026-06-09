@@ -17,11 +17,13 @@ Source of truth: `data/distrokid_release_status.json`
 Admin promo-health snapshot: `data/promo_engine_status.json`
 
 Refresh with:
-`python3 scripts/update_promo_engine_status.py`
+`python3 scripts/refresh_promo_admin.py`
 
 This snapshot combines release links, store verification history, queued posts, published posts, social execution history, platform coverage, live metric availability, and manual metric gaps into the Promo Health card on `/admin`.
 
-It also audits source freshness so `/admin` shows when release status, the queue, promo plan, published log, manual metrics, live metrics, executor readiness, store verification history, or social execution history need refresh. Live metrics, promo plans, executor readiness, store verification history, and social execution history are expected to be refreshed daily; release status, queue, and manual metrics every 72 hours; the published log weekly.
+It also audits source freshness so `/admin` shows when release status, the queue, promo plan, published log, manual metrics, live metrics, executor readiness, store verification history, social execution history, or the safe refresh run needs refresh. Live metrics, promo plans, executor readiness, store verification history, social execution history, and refresh run history are expected to be refreshed daily; release status, queue, and manual metrics every 72 hours; the published log weekly.
+
+The refresh script is read-only for external services. It does not approve, apply, or publish queued posts. It writes the latest run summary to `data/promo_admin_refresh_run.json` so Admin can show whether the new DistroKid/music-site content and social execution snapshots were refreshed cleanly.
 
 When live APIs cannot provide a metric, the snapshot includes `pending_manual_by_platform` so `/admin` names the exact manual fields still needed for reporting.
 
@@ -34,7 +36,7 @@ Draft next queue rows from those gaps with:
 This writes `data/promo_queue_plan.json`, embeds it into `/admin`, and keeps the output in draft-plan mode. Plan row ids are stable by release/platform, and approved rows stay approved across refreshes when the same release/platform gap still exists.
 
 For a full refresh where Promo Health should account for the latest draft plan, run:
-`python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py`
+`python3 scripts/refresh_promo_admin.py`
 
 Safe apply workflow:
 `python3 scripts/apply_promo_queue_plan.py`

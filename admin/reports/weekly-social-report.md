@@ -1,7 +1,7 @@
 # Weekly Social Report — Lily Roo
 
 **Period:** 2026-06-03 to 2026-06-09
-**Last updated:** 2026-06-09 05:13 PM EDT
+**Last updated:** 2026-06-09 05:48 PM EDT
 
 ## KPI Goal
 - Primary growth target: **1,000 YouTube subscribers** (monetization milestone)
@@ -122,7 +122,7 @@
 - Latest post: https://www.facebook.com/903693509504290_122118326547249470
 
 ## Metrics Snapshot
-- Live API captured: **2026-06-09T14:06:46.496Z**
+- Live API captured: **2026-06-09T21:48:21.525Z**
 - Snapshot file: `data/live_social_metrics.json`
 - YouTube public RSS captured: **2026-06-09T12:08:07.783949Z**
 - YouTube public snapshot file: `data/youtube_public_snapshot.json`
@@ -132,9 +132,9 @@
 - YouTube Music snapshot file: `data/youtube_music_release_snapshot.json`
 - HyperFollow stores captured: **2026-06-07T20:51:14.275569Z**
 - HyperFollow snapshot file: `data/hyperfollow_store_links_snapshot.json`
-- All-release store verification captured: **2026-06-09T21:13:57.169281+00:00**
+- All-release store verification captured: **2026-06-09T21:48:24.200281+00:00**
 - All-release store verification file: `data/store_verification_history.json`
-- Social executor history captured: **2026-06-09T21:08:38.859702Z**
+- Social executor history captured: **2026-06-09T21:48:24.062529Z**
 - Social executor history file: `data/social_execution_snapshot.json`
 - First single alignment audit captured: **2026-06-07T21:39:03.668040Z**
 - First single alignment audit file: `data/first_single_alignment_audit.json`
@@ -154,6 +154,7 @@
 3. Fill manual_social_stats.json values for platform deltas, including Spotify release streams once Spotify for Artists exposes them
 
 ## Reporting cadence
+- Safe one-command Admin refresh: `python3 scripts/refresh_promo_admin.py`
 - Capture YouTube public video views: `python3 scripts/capture_youtube_public.py`
 - Capture YouTube title-track public metadata: `python3 scripts/capture_youtube_title_track.py`
 - Capture YouTube Music public release metadata: `python3 scripts/capture_youtube_music_release.py`

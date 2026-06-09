@@ -164,6 +164,33 @@ def attach_deltas(snapshot: dict, previous: dict | None) -> dict:
     return snapshot
 
 
+def set_dot(payload: dict, path: str, value):
+    parts = path.split(".")
+    target = payload
+    for part in parts[:-1]:
+        target = target.setdefault(part, {})
+    target[parts[-1]] = value
+
+
+def preserve_same_day_values(snapshot: dict, same_day: dict | None) -> dict:
+    if not same_day:
+        return snapshot
+    preserved = []
+    for field in [
+        "youtube.subscribers",
+        "youtube.total_views",
+        "youtube.video_count",
+        "facebook.followers",
+        "facebook.page_likes",
+    ]:
+        if dot_get(snapshot, field) is None and dot_get(same_day, field) is not None:
+            set_dot(snapshot, field, dot_get(same_day, field))
+            preserved.append(field)
+    if preserved:
+        snapshot["preserved_from_same_day_snapshot"] = preserved
+    return snapshot
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Append or update today's Lily Roo promo metrics history snapshot.")
     parser.add_argument("--refresh-admin", action="store_true", help="Regenerate promo status/admin embeds after updating history.")
@@ -172,9 +199,11 @@ def main() -> int:
     now = datetime.now(timezone.utc)
     history = read_json(OUT, {"snapshots": []})
     snapshots = history.get("snapshots") or []
+    same_day = next((item for item in reversed(snapshots) if item.get("date") == now.date().isoformat()), None)
     snapshots = [item for item in snapshots if item.get("date") != now.date().isoformat()]
     previous = snapshots[-1] if snapshots else None
-    snapshot = attach_deltas(build_snapshot(now), previous)
+    snapshot = preserve_same_day_values(build_snapshot(now), same_day)
+    snapshot = attach_deltas(snapshot, previous)
     snapshots.append(snapshot)
     history = {
         "updated_at": now.isoformat().replace("+00:00", "Z"),

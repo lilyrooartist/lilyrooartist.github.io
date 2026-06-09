@@ -17,6 +17,7 @@ METRICS_HISTORY = ROOT / "data" / "metrics_history.json"
 EXECUTOR_READINESS = ROOT / "data" / "executor_readiness_snapshot.json"
 STORE_VERIFICATION_HISTORY = ROOT / "data" / "store_verification_history.json"
 SOCIAL_EXECUTIONS = ROOT / "data" / "social_execution_snapshot.json"
+PROMO_REFRESH_RUN = ROOT / "data" / "promo_admin_refresh_run.json"
 SCHEDULED = ROOT / "data" / "scheduled_posts.csv"
 PROMO_QUEUE_PLAN = ROOT / "data" / "promo_queue_plan.json"
 PUBLISHED = ROOT / "admin" / "content" / "Published_Log.csv"
@@ -42,6 +43,7 @@ SOURCE_MAX_AGE_HOURS = {
     "executor_readiness": 24,
     "store_verification_history": 24,
     "social_executions": 24,
+    "promo_refresh_run": 24,
 }
 
 RELEASE_TRACKS = {
@@ -152,10 +154,11 @@ def refresh_command(name: str) -> str:
         "executor_readiness": "python3 scripts/capture_executor_readiness.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py",
         "store_verification_history": "python3 scripts/verify_pending_store_links.py --refresh-admin",
         "social_executions": "python3 scripts/capture_social_executions.py && python3 scripts/update_promo_engine_status.py",
+        "promo_refresh_run": "python3 scripts/refresh_promo_admin.py",
     }.get(name, "")
 
 
-def source_freshness(release_status, manual, live, metrics_history, executor_readiness, store_history, social_executions, promo_plan, now: datetime):
+def source_freshness(release_status, manual, live, metrics_history, executor_readiness, store_history, social_executions, promo_refresh_run, promo_plan, now: datetime):
     rows = [
         freshness_row("release_status", RELEASE_STATUS, release_status, now),
         freshness_row("scheduled_posts", SCHEDULED, None, now),
@@ -167,6 +170,7 @@ def source_freshness(release_status, manual, live, metrics_history, executor_rea
         freshness_row("executor_readiness", EXECUTOR_READINESS, executor_readiness, now),
         freshness_row("store_verification_history", STORE_VERIFICATION_HISTORY, store_history, now),
         freshness_row("social_executions", SOCIAL_EXECUTIONS, social_executions, now),
+        freshness_row("promo_refresh_run", PROMO_REFRESH_RUN, promo_refresh_run, now),
     ]
     stale = [row for row in rows if row["status"] == "stale"]
     missing = [row for row in rows if row["status"] == "missing"]
@@ -323,6 +327,47 @@ def metrics_history_state(metrics_history):
         "latest": latest,
         "previous_date": previous.get("date", ""),
         "delta_from_previous": latest.get("delta_from_previous", {}),
+    }
+
+
+def refresh_run_state(promo_refresh_run):
+    if not isinstance(promo_refresh_run, dict) or not promo_refresh_run:
+        return {
+            "ok": False,
+            "available": False,
+            "finished_at": "",
+            "duration_seconds": None,
+            "command_count": 0,
+            "passed": 0,
+            "failed": 0,
+            "allowed_failures": 0,
+            "action_needed": "Run python3 scripts/refresh_promo_admin.py",
+        }
+    summary = promo_refresh_run.get("summary") or {}
+    commands = promo_refresh_run.get("commands") or promo_refresh_run.get("steps") or []
+    failed_commands = [
+        {
+            "name": command.get("name", "unknown"),
+            "required": bool(command.get("required")),
+            "returncode": command.get("returncode"),
+            "stderr_tail": command.get("stderr_tail") or command.get("stderr") or "",
+        }
+        for command in commands
+        if not command.get("ok")
+    ]
+    return {
+        "ok": bool(promo_refresh_run.get("ok")),
+        "available": True,
+        "safe_mode": bool(promo_refresh_run.get("safe_mode")),
+        "finalized": bool(promo_refresh_run.get("finalized")),
+        "finished_at": promo_refresh_run.get("finished_at", ""),
+        "duration_seconds": promo_refresh_run.get("duration_seconds"),
+        "command_count": int(summary.get("command_count") or summary.get("steps_run") or len(commands) or 0),
+        "passed": int(summary.get("passed") or 0),
+        "failed": int(summary.get("failed") or summary.get("required_failed") or 0),
+        "allowed_failures": int(summary.get("allowed_failures") or summary.get("optional_failed") or 0),
+        "failed_commands": failed_commands[:4],
+        "action_needed": "" if promo_refresh_run.get("ok") else "Review failed promo refresh command output.",
     }
 
 
@@ -573,14 +618,16 @@ def build_status():
     metrics_history = read_json(METRICS_HISTORY, {})
     executor_readiness = read_json(EXECUTOR_READINESS, {})
     social_executions = read_json(SOCIAL_EXECUTIONS, {})
+    promo_refresh_run = read_json(PROMO_REFRESH_RUN, {})
     promo_plan = read_json(PROMO_QUEUE_PLAN, {})
     store_history = build_store_verification_history(release_status, now)
     scheduled_rows = read_csv(SCHEDULED)
     published_rows = read_csv(PUBLISHED)
     metrics = metric_state(manual, live)
     history = metrics_history_state(metrics_history)
+    refresh_run = refresh_run_state(promo_refresh_run)
     execution_state = social_execution_state(social_executions, scheduled_rows)
-    freshness = source_freshness(release_status, manual, live, metrics_history, executor_readiness, store_history, social_executions, promo_plan, now)
+    freshness = source_freshness(release_status, manual, live, metrics_history, executor_readiness, store_history, social_executions, promo_refresh_run, promo_plan, now)
 
     releases = []
     all_actions = []
@@ -708,6 +755,7 @@ def build_status():
             "executor_readiness": str(EXECUTOR_READINESS.relative_to(ROOT)),
             "store_verification_history": str(STORE_VERIFICATION_HISTORY.relative_to(ROOT)),
             "social_executions": str(SOCIAL_EXECUTIONS.relative_to(ROOT)),
+            "promo_refresh_run": str(PROMO_REFRESH_RUN.relative_to(ROOT)),
         },
         "objective": "Promote Lily Roo releases and keep lilyroo.com/admin status and metrics current.",
         "kpi": {
@@ -729,6 +777,7 @@ def build_status():
             "store_verification_command_count": verification_command_count,
             "store_verification_history": store_history["summary"],
             "social_execution_summary": execution_state,
+            "last_refresh_run": refresh_run,
             "stale_source_count": freshness_summary["stale"],
             "missing_source_count": freshness_summary["missing"],
         },

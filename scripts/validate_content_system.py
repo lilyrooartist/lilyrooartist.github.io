@@ -17,6 +17,7 @@ METRICS_HISTORY = ROOT / "data" / "metrics_history.json"
 EXECUTOR_READINESS = ROOT / "data" / "executor_readiness_snapshot.json"
 STORE_VERIFICATION_HISTORY = ROOT / "data" / "store_verification_history.json"
 SOCIAL_EXECUTION_SNAPSHOT = ROOT / "data" / "social_execution_snapshot.json"
+PROMO_REFRESH_RUN = ROOT / "data" / "promo_admin_refresh_run.json"
 SPOTIFY_SNAPSHOT = ROOT / "data" / "spotify_release_snapshot.json"
 APPLE_MUSIC_SNAPSHOT = ROOT / "data" / "apple_music_release_snapshot.json"
 YOUTUBE_PUBLIC = ROOT / "data" / "youtube_public_snapshot.json"
@@ -36,6 +37,7 @@ STORE_LINK_VERIFIER = ROOT / "scripts" / "verify_pending_store_links.py"
 METRICS_HISTORY_UPDATER = ROOT / "scripts" / "update_metrics_history.py"
 EXECUTOR_READINESS_CAPTURE = ROOT / "scripts" / "capture_executor_readiness.py"
 SOCIAL_EXECUTION_CAPTURE = ROOT / "scripts" / "capture_social_executions.py"
+PROMO_REFRESH_SCRIPT = ROOT / "scripts" / "refresh_promo_admin.py"
 REPORT = ROOT / "admin" / "reports" / "weekly-social-report.md"
 INDEX = CONTENT / "content_index.json"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
@@ -180,6 +182,20 @@ def validate_generated_outputs(failures):
             fail("social_execution_snapshot.json missing categorized summary, timestamp, or auth method", failures)
     else:
         fail("social_execution_snapshot.json missing; run scripts/capture_social_executions.py", failures)
+    if PROMO_REFRESH_RUN.exists():
+        refresh_run = json.loads(PROMO_REFRESH_RUN.read_text(encoding="utf-8"))
+        summary = refresh_run.get("summary") or {}
+        commands = refresh_run.get("commands") or refresh_run.get("steps") or []
+        if "started_at" in refresh_run and "finished_at" in refresh_run and summary.get("command_count") == len(commands):
+            ok(f"promo admin refresh run tracks {len(commands)} command(s)")
+        else:
+            fail("promo_admin_refresh_run.json missing timestamps or command summary", failures)
+        if refresh_run.get("safe_mode") is True and all("command" in command and "returncode" in command for command in commands):
+            ok("promo admin refresh run records safe command results")
+        else:
+            fail("promo_admin_refresh_run.json missing safe command result detail", failures)
+    else:
+        fail("promo_admin_refresh_run.json missing; run scripts/refresh_promo_admin.py", failures)
     if SPOTIFY_SNAPSHOT.exists():
         snapshot = json.loads(SPOTIFY_SNAPSHOT.read_text(encoding="utf-8"))
         if snapshot.get("ok") and snapshot.get("title") and snapshot.get("thumbnail_url"):
@@ -335,6 +351,11 @@ def validate_generated_outputs(failures):
             ok("promo engine includes social execution summary")
         else:
             fail("promo_engine_status.json missing categorized social execution summary", failures)
+        refresh_run = kpi.get("last_refresh_run") or {}
+        if "available" in refresh_run and "command_count" in refresh_run and "finished_at" in refresh_run:
+            ok("promo engine includes last refresh run summary")
+        else:
+            fail("promo_engine_status.json missing last refresh run summary", failures)
         repair_rows = (execution_summary.get("approval_needed") or []) + (execution_summary.get("platform_fix_needed") or [])
         if repair_rows and all(row.get("repair_action") and row.get("repair_command") for row in repair_rows):
             ok(f"promo engine social execution rows include {len(repair_rows)} repair commands")
@@ -491,6 +512,27 @@ def validate_generated_outputs(failures):
             fail("capture_social_executions.py missing execution snapshot or auth header support", failures)
     else:
         fail("capture_social_executions.py missing", failures)
+    if PROMO_REFRESH_SCRIPT.exists():
+        refresh_text = PROMO_REFRESH_SCRIPT.read_text(encoding="utf-8")
+        required_bits = [
+            "promo_admin_refresh_run.json",
+            "capture_live_metrics.py",
+            "verify_pending_store_links.py",
+            "capture_executor_readiness.py",
+            "capture_social_executions.py",
+            "update_weekly_report.py",
+        ]
+        forbidden_bits = [
+            "apply_promo_queue_plan.py --apply",
+            '"scripts/post_youtube_from_queue.py"',
+            '"scripts/post_youtube_captions.py"',
+        ]
+        if all(bit in refresh_text for bit in required_bits) and not any(bit in refresh_text for bit in forbidden_bits):
+            ok("promo admin refresh script covers safe refresh steps")
+        else:
+            fail("refresh_promo_admin.py missing safe refresh coverage or includes posting commands", failures)
+    else:
+        fail("refresh_promo_admin.py missing", failures)
 
 
 def validate_report(failures):

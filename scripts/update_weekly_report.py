@@ -291,6 +291,7 @@ md = f'''# Weekly Social Report — Lily Roo
 3. Fill manual_social_stats.json values for platform deltas, including Spotify release streams once Spotify for Artists exposes them
 
 ## Reporting cadence
+- Safe one-command Admin refresh: `python3 scripts/refresh_promo_admin.py`
 - Capture YouTube public video views: `python3 scripts/capture_youtube_public.py`
 - Capture YouTube title-track public metadata: `python3 scripts/capture_youtube_title_track.py`
 - Capture YouTube Music public release metadata: `python3 scripts/capture_youtube_music_release.py`
