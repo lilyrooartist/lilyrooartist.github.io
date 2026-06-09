@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-09T10:24:43.178586-04:00",
+  "generated_at": "2026-06-09T11:05:31.625301-04:00",
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
     "release_status": "data/distrokid_release_status.json"
@@ -85,7 +85,8 @@
       "execution_mode": "auto",
       "post_type": "image",
       "desired_privacy": "",
-      "reason": "Promo health flagged missing X coverage for Twelve Dollars."
+      "reason": "Promo health flagged missing X coverage for Twelve Dollars.",
+      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-X --refresh-admin"
     },
     {
       "id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
@@ -108,7 +109,8 @@
       "execution_mode": "auto",
       "post_type": "image",
       "desired_privacy": "",
-      "reason": "Promo health flagged missing Instagram coverage for Twelve Dollars."
+      "reason": "Promo health flagged missing Instagram coverage for Twelve Dollars.",
+      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --refresh-admin"
     },
     {
       "id": "FP-PLAN-TWELVE-DOLLARS-TIKTOK",
@@ -131,7 +133,8 @@
       "execution_mode": "auto",
       "post_type": "video",
       "desired_privacy": "PUBLIC_TO_EVERYONE",
-      "reason": "Promo health flagged missing TikTok coverage for Twelve Dollars."
+      "reason": "Promo health flagged missing TikTok coverage for Twelve Dollars.",
+      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --refresh-admin"
     },
     {
       "id": "FP-PLAN-TWELVE-DOLLARS-FACEBOOK",
@@ -154,7 +157,8 @@
       "execution_mode": "auto",
       "post_type": "image",
       "desired_privacy": "",
-      "reason": "Promo health flagged missing Facebook coverage for Twelve Dollars."
+      "reason": "Promo health flagged missing Facebook coverage for Twelve Dollars.",
+      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --refresh-admin"
     },
     {
       "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
@@ -177,7 +181,8 @@
       "execution_mode": "manual",
       "post_type": "community",
       "desired_privacy": "",
-      "reason": "Promo health flagged missing YouTube Community coverage for Twelve Dollars."
+      "reason": "Promo health flagged missing YouTube Community coverage for Twelve Dollars.",
+      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin"
     },
     {
       "id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
@@ -200,7 +205,8 @@
       "execution_mode": "manual",
       "post_type": "community",
       "desired_privacy": "",
-      "reason": "Promo health flagged missing YouTube Community coverage for Analog Myth."
+      "reason": "Promo health flagged missing YouTube Community coverage for Analog Myth.",
+      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin"
     }
   ]
 }

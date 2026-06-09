@@ -237,9 +237,11 @@ def validate_generated_outputs(failures):
         else:
             fail("promo_queue_plan.json summary draft_posts does not match posts", failures)
         for post in posts:
-            for key in ("id", "scheduled_at", "platform", "song", "text", "execution_mode", "post_type"):
+            for key in ("id", "scheduled_at", "platform", "song", "text", "execution_mode", "post_type", "approval_command"):
                 if not str(post.get(key) or "").strip():
                     fail(f"promo queue plan row {post.get('id') or '[missing id]'} missing {key}", failures)
+            if post.get("id") and post.get("approval_command") and post["id"] not in post["approval_command"]:
+                fail(f"promo queue plan row {post.get('id')} approval_command does not reference row id", failures)
             if str(post.get("approved") or "").lower() not in {"yes", "no"}:
                 fail(f"promo queue plan row {post.get('id') or '[missing id]'} approved must be yes or no", failures)
     else:

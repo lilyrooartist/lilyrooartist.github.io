@@ -825,7 +825,7 @@
 }</script>
 
 <script type="application/json" id="embedded-promo-engine-status">{
-  "generated_at": "2026-06-09T14:24:43.206823+00:00",
+  "generated_at": "2026-06-09T15:05:31.662517+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -895,14 +895,14 @@
       "fresh": 6,
       "stale": 0,
       "missing": 0,
-      "checked_at": "2026-06-09T14:24:43.206823+00:00"
+      "checked_at": "2026-06-09T15:05:31.662517+00:00"
     },
     "sources": [
       {
         "name": "release_status",
         "path": "data/distrokid_release_status.json",
         "status": "fresh",
-        "age_hours": 12.6,
+        "age_hours": 13.3,
         "max_age_hours": 72,
         "timestamp": "2026-06-09T01:47:42+00:00",
         "refresh_command": "Update data/distrokid_release_status.json after store/DistroKid verification."
@@ -911,7 +911,7 @@
         "name": "scheduled_posts",
         "path": "data/scheduled_posts.csv",
         "status": "fresh",
-        "age_hours": 40.8,
+        "age_hours": 41.4,
         "max_age_hours": 72,
         "timestamp": "2026-06-07T21:38:44.418468+00:00",
         "refresh_command": "python3 scripts/sync_future_posts.py"
@@ -922,14 +922,14 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-09T14:24:43.178586+00:00",
+        "timestamp": "2026-06-09T15:05:31.625301+00:00",
         "refresh_command": "python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
         "name": "published_log",
         "path": "admin/content/Published_Log.csv",
         "status": "fresh",
-        "age_hours": 49.8,
+        "age_hours": 50.5,
         "max_age_hours": 168,
         "timestamp": "2026-06-07T12:36:37.141276+00:00",
         "refresh_command": "Export or append latest published posts to admin/content/Published_Log.csv."
@@ -938,7 +938,7 @@
         "name": "manual_metrics",
         "path": "data/manual_social_stats.json",
         "status": "fresh",
-        "age_hours": 46.6,
+        "age_hours": 47.3,
         "max_age_hours": 72,
         "timestamp": "2026-06-07T15:47:26.729764+00:00",
         "refresh_command": "Update data/manual_social_stats.json with latest manual metrics."
@@ -947,7 +947,7 @@
         "name": "live_metrics",
         "path": "data/live_social_metrics.json",
         "status": "fresh",
-        "age_hours": 0.3,
+        "age_hours": 1.0,
         "max_age_hours": 24,
         "timestamp": "2026-06-09T14:06:46.496000+00:00",
         "refresh_command": "python3 scripts/capture_live_metrics.py"
@@ -1163,7 +1163,7 @@
 }</script>
 
 <script type="application/json" id="embedded-promo-queue-plan">{
-  "generated_at": "2026-06-09T10:24:43.178586-04:00",
+  "generated_at": "2026-06-09T11:05:31.625301-04:00",
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
     "release_status": "data/distrokid_release_status.json"
@@ -1249,7 +1249,8 @@
       "execution_mode": "auto",
       "post_type": "image",
       "desired_privacy": "",
-      "reason": "Promo health flagged missing X coverage for Twelve Dollars."
+      "reason": "Promo health flagged missing X coverage for Twelve Dollars.",
+      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-X --refresh-admin"
     },
     {
       "id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
@@ -1272,7 +1273,8 @@
       "execution_mode": "auto",
       "post_type": "image",
       "desired_privacy": "",
-      "reason": "Promo health flagged missing Instagram coverage for Twelve Dollars."
+      "reason": "Promo health flagged missing Instagram coverage for Twelve Dollars.",
+      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --refresh-admin"
     },
     {
       "id": "FP-PLAN-TWELVE-DOLLARS-TIKTOK",
@@ -1295,7 +1297,8 @@
       "execution_mode": "auto",
       "post_type": "video",
       "desired_privacy": "PUBLIC_TO_EVERYONE",
-      "reason": "Promo health flagged missing TikTok coverage for Twelve Dollars."
+      "reason": "Promo health flagged missing TikTok coverage for Twelve Dollars.",
+      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --refresh-admin"
     },
     {
       "id": "FP-PLAN-TWELVE-DOLLARS-FACEBOOK",
@@ -1318,7 +1321,8 @@
       "execution_mode": "auto",
       "post_type": "image",
       "desired_privacy": "",
-      "reason": "Promo health flagged missing Facebook coverage for Twelve Dollars."
+      "reason": "Promo health flagged missing Facebook coverage for Twelve Dollars.",
+      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --refresh-admin"
     },
     {
       "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
@@ -1341,7 +1345,8 @@
       "execution_mode": "manual",
       "post_type": "community",
       "desired_privacy": "",
-      "reason": "Promo health flagged missing YouTube Community coverage for Twelve Dollars."
+      "reason": "Promo health flagged missing YouTube Community coverage for Twelve Dollars.",
+      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin"
     },
     {
       "id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
@@ -1364,7 +1369,8 @@
       "execution_mode": "manual",
       "post_type": "community",
       "desired_privacy": "",
-      "reason": "Promo health flagged missing YouTube Community coverage for Analog Myth."
+      "reason": "Promo health flagged missing YouTube Community coverage for Analog Myth.",
+      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin"
     }
   ]
 }</script>
@@ -2370,8 +2376,10 @@
       <div class="queue-top">
         <div>
           <div class="queue-title">${escapeHtml(post.platform||'Platform')} - ${escapeHtml(post.song||'Release')}</div>
-          <div class="queue-meta">${escapeHtml(formatQueueDate(post.scheduled_at))} - ${escapeHtml(post.post_type||'post')} - ${escapeHtml(post.execution_mode||'manual')}</div>
+          <div class="queue-meta">${escapeHtml(post.id||'draft')} - ${escapeHtml(formatQueueDate(post.scheduled_at))} - ${escapeHtml(post.post_type||'post')} - ${escapeHtml(post.execution_mode||'manual')}</div>
+          ${post.reason?`<div class="queue-meta">${escapeHtml(post.reason)}</div>`:''}
           <div class="queue-meta">${escapeHtml(post.text||'')}</div>
+          ${post.approval_command?`<div class="queue-meta">${escapeHtml(post.approval_command)}</div>`:''}
         </div>
         <span class="status-chip ${post.approved==='yes'?'ok':'neutral'}">${escapeHtml(post.approved==='yes'?'Approved':'Review')}</span>
       </div>

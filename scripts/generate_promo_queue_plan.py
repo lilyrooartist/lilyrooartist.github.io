@@ -81,6 +81,10 @@ def plan_id(title: str, platform: str) -> str:
     return f"FP-PLAN-{slug(title).upper()}-{slug(platform).upper()}"
 
 
+def approval_command(post_id: str) -> str:
+    return f"python3 scripts/approve_promo_queue_plan.py --id {post_id} --refresh-admin"
+
+
 def prior_approval_lookup(plan):
     by_id = {}
     by_slot = {}
@@ -216,8 +220,9 @@ def build_plan():
             kind = post_type(platform)
             media_url = assets.get("video" if kind == "video" else "image", "")
             media_key = assets.get("video_key" if kind == "video" else "media_key", "")
+            draft_id = plan_id(title, platform)
             post = {
-                "id": plan_id(title, platform),
+                "id": draft_id,
                 "scheduled_at": first_future_slot(post_index, platform),
                 "platform": platform,
                 "song": title,
@@ -234,6 +239,7 @@ def build_plan():
                 "post_type": kind,
                 "desired_privacy": "PUBLIC_TO_EVERYONE" if platform == "TikTok" else "",
                 "reason": f"Promo health flagged missing {platform} coverage for {title}.",
+                "approval_command": approval_command(draft_id),
             }
             post["approved"] = preserved_approval(prior_by_id, prior_by_slot, post)
             posts.append(post)
