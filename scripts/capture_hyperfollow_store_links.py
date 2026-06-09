@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import argparse
 import urllib.request
 from datetime import datetime, timezone
 from html import unescape
@@ -29,7 +30,15 @@ class StoreLinkParser(HTMLParser):
 
 
 def main() -> int:
-    request = urllib.request.Request(HYPERFOLLOW_URL, headers={
+    parser = argparse.ArgumentParser(description="Capture public DistroKid HyperFollow store links.")
+    parser.add_argument("--url", default=HYPERFOLLOW_URL, help="HyperFollow URL to capture.")
+    parser.add_argument("--out", default=str(OUT.relative_to(REPO_ROOT)), help="Output JSON path, relative to repo root or absolute.")
+    args = parser.parse_args()
+    out = Path(args.out)
+    if not out.is_absolute():
+        out = REPO_ROOT / out
+
+    request = urllib.request.Request(args.url, headers={
         "Accept": "text/html",
         "User-Agent": "LilyRooHyperFollowStoreCapture/1.0",
     })
@@ -43,7 +52,7 @@ def main() -> int:
         "ok": status == 200 and bool(parser.links),
         "updated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "source": "distrokid-hyperfollow-public-html",
-        "hyperfollow_url": HYPERFOLLOW_URL,
+        "hyperfollow_url": args.url,
         "stores": stores,
         "links": parser.links,
         "amazon_music_available": any("amazon" in store.lower() for store in stores),
@@ -51,12 +60,13 @@ def main() -> int:
         "http_status": status,
         "note": "HyperFollow currently exposes only these public store links; use direct verified URLs for stores not listed here.",
     }
-    OUT.write_text(json.dumps(snapshot, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(snapshot, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(json.dumps({
         "ok": snapshot["ok"],
         "stores": snapshot["stores"],
         "amazon_music_available": snapshot["amazon_music_available"],
-        "output": str(OUT.relative_to(REPO_ROOT)),
+        "output": str(out.relative_to(REPO_ROOT)),
     }, indent=2))
     return 0 if snapshot["ok"] else 1
 

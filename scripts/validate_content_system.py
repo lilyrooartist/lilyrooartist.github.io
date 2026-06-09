@@ -249,6 +249,24 @@ def validate_generated_outputs(failures):
             ok(f"promo engine music site matrix tracks {len(release_services)} service states")
         else:
             fail("promo_engine_status.json missing music site service matrix", failures)
+        verification_commands = [
+            command
+            for release in releases
+            for command in (release.get("store_verification_commands") or [])
+        ]
+        expected_pending = [
+            service
+            for release in releases
+            for service in (release.get("store_services") or [])
+            if service.get("state") == "Pending" and service.get("label") not in {"DistroKid", "YouTube playlist"}
+        ]
+        if len(verification_commands) == len(expected_pending) == int(kpi.get("store_verification_command_count") or 0):
+            ok(f"promo engine store verification commands track {len(verification_commands)} pending services")
+        else:
+            fail("promo_engine_status.json store verification commands do not match pending services", failures)
+        for command in verification_commands:
+            if "scripts/capture_" not in str(command.get("command") or ""):
+                fail(f"store verification command for {command.get('service') or 'unknown service'} missing capture script", failures)
         if "next_actions" in status:
             ok(f"promo engine status has {len(status.get('next_actions') or [])} next actions")
         else:

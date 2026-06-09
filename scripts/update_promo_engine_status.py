@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import csv
 import json
+import re
 from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
@@ -172,6 +173,15 @@ def norm(value: str | None) -> str:
     return " ".join(str(value or "").strip().lower().split())
 
 
+def shell_quote(value: str) -> str:
+    return "'" + str(value).replace("'", "'\"'\"'") + "'"
+
+
+def slugify(value: str) -> str:
+    slug = re.sub(r"[^a-z0-9]+", "-", norm(value))
+    return slug.strip("-") or "release"
+
+
 def platform_bucket(platform: str) -> str:
     platform = (platform or "").strip()
     return "YouTube Community" if platform.lower() == "youtube community" else platform
@@ -262,6 +272,59 @@ def store_service_states(release):
     return services
 
 
+def hyperfollow_guess(title: str) -> str:
+    return "https://distrokid.com/hyperfollow/lilyroo/" + slugify(title)
+
+
+def store_verification_commands(release, store_services):
+    title = release.get("title") or "Untitled release"
+    artist = "Lily Roo"
+    release_slug = slugify(title)
+    output_root = f"data/store-verification/{release_slug}"
+    commands = []
+    for service in store_services:
+        label = service["label"]
+        if label in {"DistroKid", "YouTube playlist"} or service["state"] != "Pending":
+            continue
+        if label == "Spotify":
+            search_url = "https://open.spotify.com/search/" + release_slug.replace("-", "%20") + "%20Lily%20Roo/albums"
+            command = (
+                f"open {shell_quote(search_url)} && "
+                f"python3 scripts/capture_spotify_release.py --release-url SPOTIFY_ALBUM_URL "
+                f"--out {shell_quote(output_root + '/spotify_release_snapshot.json')}"
+            )
+            note = "Search Spotify, copy the public album URL, then replace SPOTIFY_ALBUM_URL before running the capture."
+        elif label == "Apple Music":
+            command = (
+                f"python3 scripts/capture_apple_music_release.py --artist {shell_quote(artist)} "
+                f"--title {shell_quote(title)} "
+                f"--out {shell_quote(output_root + '/apple_music_release_snapshot.json')}"
+            )
+            note = "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json."
+        elif label == "YouTube Music":
+            command = (
+                f"python3 scripts/capture_youtube_music_release.py --url YOUTUBE_MUSIC_URL "
+                f"--title {shell_quote(title)} "
+                f"--out {shell_quote(output_root + '/youtube_music_release_snapshot.json')}"
+            )
+            note = "Replace YOUTUBE_MUSIC_URL with the public music.youtube.com/watch URL once the release appears."
+        elif label == "HyperFollow":
+            guessed_url = release.get("hyperfollow_url") or hyperfollow_guess(title)
+            command = (
+                f"python3 scripts/capture_hyperfollow_store_links.py --url {shell_quote(guessed_url)} "
+                f"--out {shell_quote(output_root + '/hyperfollow_store_links_snapshot.json')}"
+            )
+            note = "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug."
+        else:
+            continue
+        commands.append({
+            "service": label,
+            "command": command,
+            "note": note,
+        })
+    return commands
+
+
 def plan_rows_for_release(plan, release_title: str, track_lookup: set[str]):
     rows = []
     for post in plan.get("posts") or []:
@@ -310,6 +373,7 @@ def build_status():
             store_state_counts[service["state"]] += 1
         live_store_labels = [service["label"] for service in store_services if service["state"] == "Live"]
         pending_store_labels = [service["label"] for service in store_services if service["state"] == "Pending"]
+        verification_commands = store_verification_commands(release, store_services)
 
         actions = []
         if link_count < 3:
@@ -353,6 +417,7 @@ def build_status():
             "store_services": store_services,
             "live_store_services": live_store_labels,
             "pending_store_services": pending_store_labels,
+            "store_verification_commands": verification_commands,
             "queued_posts": len(queued),
             "planned_posts": len(planned),
             "published_posts": len(published),
@@ -371,6 +436,7 @@ def build_status():
         all_actions.extend(f"{title}: {action}" for action in actions)
 
     healthy_count = sum(1 for release in releases if release["status"] == "healthy")
+    verification_command_count = sum(len(release.get("store_verification_commands") or []) for release in releases)
     score = round((healthy_count / len(releases)) * 100) if releases else 0
     freshness_summary = freshness["summary"]
     freshness_actions = freshness["actions"]
@@ -399,6 +465,7 @@ def build_status():
             "music_sites_live": store_state_counts.get("Live", 0),
             "music_sites_submitted": store_state_counts.get("Submitted", 0),
             "music_sites_pending": store_state_counts.get("Pending", 0),
+            "store_verification_command_count": verification_command_count,
             "stale_source_count": freshness_summary["stale"],
             "missing_source_count": freshness_summary["missing"],
         },

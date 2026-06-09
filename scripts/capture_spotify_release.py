@@ -6,6 +6,7 @@ import os
 import re
 import urllib.parse
 import urllib.request
+import argparse
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -17,7 +18,9 @@ DEFAULT_ARTIST_URL = "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a"
 OEMBED_URL = "https://open.spotify.com/oembed"
 
 
-def release_url() -> str:
+def release_url(explicit_arg: str = "") -> str:
+    if explicit_arg.strip():
+        return explicit_arg.strip()
     explicit = os.environ.get("SPOTIFY_RELEASE_URL", "").strip()
     if explicit:
         return explicit
@@ -64,7 +67,15 @@ def fetch_artist_url(url: str) -> str:
 
 
 def main() -> int:
-    url = release_url()
+    parser = argparse.ArgumentParser(description="Capture public Spotify oEmbed release metadata.")
+    parser.add_argument("--release-url", default="", help="Spotify album/single URL to capture.")
+    parser.add_argument("--out", default=str(OUT.relative_to(REPO_ROOT)), help="Output JSON path, relative to repo root or absolute.")
+    args = parser.parse_args()
+    out = Path(args.out)
+    if not out.is_absolute():
+        out = REPO_ROOT / out
+
+    url = release_url(args.release_url)
     oembed = fetch_oembed(url)
     snapshot = {
         "ok": True,
@@ -85,13 +96,14 @@ def main() -> int:
         "http_status": oembed.get("http_status"),
         "analytics_status": "Streams, saves, monthly listeners, and artist followers still require Spotify for Artists export/API access.",
     }
-    OUT.write_text(json.dumps(snapshot, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(snapshot, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(json.dumps({
         "ok": snapshot["ok"],
         "title": snapshot["title"],
         "album_id": snapshot["album_id"],
         "thumbnail_url": snapshot["thumbnail_url"],
-        "output": str(OUT.relative_to(REPO_ROOT)),
+        "output": str(out.relative_to(REPO_ROOT)),
     }, indent=2))
     return 0
 

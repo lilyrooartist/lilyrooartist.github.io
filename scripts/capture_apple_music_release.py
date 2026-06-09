@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import argparse
 import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
@@ -14,9 +15,9 @@ ARTIST = "Lily Roo"
 TITLE = "I Learned It All in Fifteen Seconds"
 
 
-def fetch_release() -> dict:
+def fetch_release(artist: str, title: str) -> dict:
     params = {
-        "term": f"{ARTIST} {TITLE}",
+        "term": f"{artist} {title}",
         "entity": "album",
         "limit": "10",
         "country": "US",
@@ -31,13 +32,22 @@ def fetch_release() -> dict:
     with urllib.request.urlopen(request, timeout=25) as response:
         payload = json.loads(response.read().decode("utf-8"))
     for item in payload.get("results", []):
-        if item.get("artistName") == ARTIST and TITLE in item.get("collectionName", ""):
+        if item.get("artistName") == artist and title.lower() in item.get("collectionName", "").lower():
             return item
-    raise RuntimeError(f"Apple Music release not found for {ARTIST} - {TITLE}")
+    raise RuntimeError(f"Apple Music release not found for {artist} - {title}")
 
 
 def main() -> int:
-    item = fetch_release()
+    parser = argparse.ArgumentParser(description="Capture public Apple Music/iTunes release metadata.")
+    parser.add_argument("--artist", default=ARTIST)
+    parser.add_argument("--title", default=TITLE)
+    parser.add_argument("--out", default=str(OUT.relative_to(REPO_ROOT)), help="Output JSON path, relative to repo root or absolute.")
+    args = parser.parse_args()
+    out = Path(args.out)
+    if not out.is_absolute():
+        out = REPO_ROOT / out
+
+    item = fetch_release(args.artist, args.title)
     snapshot = {
         "ok": True,
         "updated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
@@ -56,13 +66,14 @@ def main() -> int:
         "release_date": item.get("releaseDate", ""),
         "primary_genre": item.get("primaryGenreName", ""),
     }
-    OUT.write_text(json.dumps(snapshot, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(snapshot, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(json.dumps({
         "ok": snapshot["ok"],
         "collection_name": snapshot["collection_name"],
         "collection_id": snapshot["collection_id"],
         "release_url": snapshot["release_url"],
-        "output": str(OUT.relative_to(REPO_ROOT)),
+        "output": str(out.relative_to(REPO_ROOT)),
     }, indent=2))
     return 0
 
