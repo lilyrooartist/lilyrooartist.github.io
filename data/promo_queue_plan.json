@@ -1,15 +1,71 @@
 {
-  "generated_at": "2026-06-09T09:09:19.803121-04:00",
+  "generated_at": "2026-06-09T09:37:40.354212-04:00",
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
     "release_status": "data/distrokid_release_status.json"
   },
   "mode": "draft_plan_only",
   "csv_target": "data/scheduled_posts.csv",
-  "apply_note": "Review these rows, then copy approved rows into data/scheduled_posts.csv and run scripts/sync_future_posts.py.",
+  "apply_note": "Mark reviewed rows approved=yes, then run scripts/apply_promo_queue_plan.py --apply and scripts/sync_future_posts.py.",
+  "summary": {
+    "draft_posts": 6,
+    "approved_posts": 0,
+    "review_posts": 6,
+    "auto_posts": 4,
+    "manual_posts": 2,
+    "releases": {
+      "Analog Myth": {
+        "draft_posts": 1,
+        "approved_posts": 0,
+        "review_posts": 1,
+        "platforms": [
+          "YouTube Community"
+        ]
+      },
+      "Twelve Dollars": {
+        "draft_posts": 5,
+        "approved_posts": 0,
+        "review_posts": 5,
+        "platforms": [
+          "Facebook",
+          "Instagram",
+          "TikTok",
+          "X",
+          "YouTube Community"
+        ]
+      }
+    },
+    "platforms": {
+      "Facebook": {
+        "draft_posts": 1,
+        "approved_posts": 0,
+        "review_posts": 1
+      },
+      "Instagram": {
+        "draft_posts": 1,
+        "approved_posts": 0,
+        "review_posts": 1
+      },
+      "TikTok": {
+        "draft_posts": 1,
+        "approved_posts": 0,
+        "review_posts": 1
+      },
+      "X": {
+        "draft_posts": 1,
+        "approved_posts": 0,
+        "review_posts": 1
+      },
+      "YouTube Community": {
+        "draft_posts": 2,
+        "approved_posts": 0,
+        "review_posts": 2
+      }
+    }
+  },
   "posts": [
     {
-      "id": "FP-PLAN-001",
+      "id": "FP-PLAN-TWELVE-DOLLARS-X",
       "scheduled_at": "2026-06-10T10:15:00-04:00",
       "platform": "X",
       "song": "Twelve Dollars",
@@ -32,7 +88,7 @@
       "reason": "Promo health flagged missing X coverage for Twelve Dollars."
     },
     {
-      "id": "FP-PLAN-002",
+      "id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
       "scheduled_at": "2026-06-11T14:05:00-04:00",
       "platform": "Instagram",
       "song": "Twelve Dollars",
@@ -55,7 +111,7 @@
       "reason": "Promo health flagged missing Instagram coverage for Twelve Dollars."
     },
     {
-      "id": "FP-PLAN-003",
+      "id": "FP-PLAN-TWELVE-DOLLARS-TIKTOK",
       "scheduled_at": "2026-06-12T20:40:00-04:00",
       "platform": "TikTok",
       "song": "Twelve Dollars",
@@ -78,7 +134,7 @@
       "reason": "Promo health flagged missing TikTok coverage for Twelve Dollars."
     },
     {
-      "id": "FP-PLAN-004",
+      "id": "FP-PLAN-TWELVE-DOLLARS-FACEBOOK",
       "scheduled_at": "2026-06-13T11:20:00-04:00",
       "platform": "Facebook",
       "song": "Twelve Dollars",
@@ -101,7 +157,7 @@
       "reason": "Promo health flagged missing Facebook coverage for Twelve Dollars."
     },
     {
-      "id": "FP-PLAN-005",
+      "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
       "scheduled_at": "2026-06-14T18:30:00-04:00",
       "platform": "YouTube Community",
       "song": "Twelve Dollars",
@@ -124,7 +180,7 @@
       "reason": "Promo health flagged missing YouTube Community coverage for Twelve Dollars."
     },
     {
-      "id": "FP-PLAN-006",
+      "id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
       "scheduled_at": "2026-06-15T18:30:00-04:00",
       "platform": "YouTube Community",
       "song": "Analog Myth",

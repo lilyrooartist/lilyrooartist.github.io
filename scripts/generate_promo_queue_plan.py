@@ -2,6 +2,8 @@
 from __future__ import annotations
 
 import json
+import re
+from collections import Counter
 from datetime import datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -70,6 +72,42 @@ def read_json(path: Path, fallback):
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def slug(value: str) -> str:
+    cleaned = re.sub(r"[^a-z0-9]+", "-", str(value or "").strip().lower()).strip("-")
+    return cleaned or "item"
+
+
+def plan_id(title: str, platform: str) -> str:
+    return f"FP-PLAN-{slug(title).upper()}-{slug(platform).upper()}"
+
+
+def prior_approval_lookup(plan):
+    by_id = {}
+    by_slot = {}
+    for post in plan.get("posts") or []:
+        approved = "yes" if str(post.get("approved") or "").lower() == "yes" else "no"
+        by_id[str(post.get("id") or "")] = approved
+        key = (
+            str(post.get("song") or "").strip().lower(),
+            str(post.get("platform") or "").strip().lower(),
+            str(post.get("post_type") or "").strip().lower(),
+        )
+        by_slot[key] = approved
+    return by_id, by_slot
+
+
+def preserved_approval(by_id, by_slot, post):
+    post_id = str(post.get("id") or "")
+    if by_id.get(post_id) == "yes":
+        return "yes"
+    key = (
+        str(post.get("song") or "").strip().lower(),
+        str(post.get("platform") or "").strip().lower(),
+        str(post.get("post_type") or "").strip().lower(),
+    )
+    return "yes" if by_slot.get(key) == "yes" else "no"
+
+
 def first_future_slot(index: int, platform: str) -> str:
     now = datetime.now(TZ)
     base = now.date() + timedelta(days=1 + index)
@@ -129,9 +167,41 @@ def draft_variants(title, platform):
     ]
 
 
+def plan_summary(posts):
+    counts = Counter("approved" if post.get("approved") == "yes" else "review" for post in posts)
+    execution = Counter(post.get("execution_mode") or "unknown" for post in posts)
+    releases = {}
+    for title in sorted({post.get("song") or "Untitled release" for post in posts}):
+        release_posts = [post for post in posts if (post.get("song") or "Untitled release") == title]
+        releases[title] = {
+            "draft_posts": len(release_posts),
+            "approved_posts": sum(1 for post in release_posts if post.get("approved") == "yes"),
+            "review_posts": sum(1 for post in release_posts if post.get("approved") != "yes"),
+            "platforms": sorted({post.get("platform") for post in release_posts if post.get("platform")}),
+        }
+    platforms = {}
+    for platform in sorted({post.get("platform") or "Unknown" for post in posts}):
+        platform_posts = [post for post in posts if (post.get("platform") or "Unknown") == platform]
+        platforms[platform] = {
+            "draft_posts": len(platform_posts),
+            "approved_posts": sum(1 for post in platform_posts if post.get("approved") == "yes"),
+            "review_posts": sum(1 for post in platform_posts if post.get("approved") != "yes"),
+        }
+    return {
+        "draft_posts": len(posts),
+        "approved_posts": counts["approved"],
+        "review_posts": counts["review"],
+        "auto_posts": execution["auto"],
+        "manual_posts": execution["manual"],
+        "releases": releases,
+        "platforms": platforms,
+    }
+
+
 def build_plan():
     promo = read_json(PROMO_STATUS, {})
     releases = release_lookup(read_json(RELEASE_STATUS, {}))
+    prior_by_id, prior_by_slot = prior_approval_lookup(read_json(OUT, {}))
     posts = []
     post_index = 0
 
@@ -146,8 +216,8 @@ def build_plan():
             kind = post_type(platform)
             media_url = assets.get("video" if kind == "video" else "image", "")
             media_key = assets.get("video_key" if kind == "video" else "media_key", "")
-            posts.append({
-                "id": f"FP-PLAN-{post_index + 1:03d}",
+            post = {
+                "id": plan_id(title, platform),
                 "scheduled_at": first_future_slot(post_index, platform),
                 "platform": platform,
                 "song": title,
@@ -164,7 +234,9 @@ def build_plan():
                 "post_type": kind,
                 "desired_privacy": "PUBLIC_TO_EVERYONE" if platform == "TikTok" else "",
                 "reason": f"Promo health flagged missing {platform} coverage for {title}.",
-            })
+            }
+            post["approved"] = preserved_approval(prior_by_id, prior_by_slot, post)
+            posts.append(post)
             post_index += 1
 
     return {
@@ -175,7 +247,8 @@ def build_plan():
         },
         "mode": "draft_plan_only",
         "csv_target": "data/scheduled_posts.csv",
-        "apply_note": "Review these rows, then copy approved rows into data/scheduled_posts.csv and run scripts/sync_future_posts.py.",
+        "apply_note": "Mark reviewed rows approved=yes, then run scripts/apply_promo_queue_plan.py --apply and scripts/sync_future_posts.py.",
+        "summary": plan_summary(posts),
         "posts": posts,
     }
 

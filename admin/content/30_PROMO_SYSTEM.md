@@ -24,7 +24,7 @@ This snapshot combines release links, queued posts, published posts, platform co
 Draft next queue rows from those gaps with:
 `python3 scripts/generate_promo_queue_plan.py`
 
-This writes `data/promo_queue_plan.json`, embeds it into `/admin`, and keeps the output in draft-plan mode. Review the rows before copying approved items into `data/scheduled_posts.csv`.
+This writes `data/promo_queue_plan.json`, embeds it into `/admin`, and keeps the output in draft-plan mode. Plan row ids are stable by release/platform, and approved rows stay approved across refreshes when the same release/platform gap still exists.
 
 For a full refresh where Promo Health should account for the latest draft plan, run:
 `python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py`
@@ -33,7 +33,7 @@ Safe apply workflow:
 `python3 scripts/apply_promo_queue_plan.py`
 
 The apply script is dry-run by default and only selects plan rows where `approved` is `yes`. To preview a specific draft without writing:
-`python3 scripts/apply_promo_queue_plan.py --include-unapproved --id FP-PLAN-001`
+`python3 scripts/apply_promo_queue_plan.py --include-unapproved --id FP-PLAN-TWELVE-DOLLARS-X`
 
 After marking selected rows approved in `data/promo_queue_plan.json`, append them to the live queue with:
 `python3 scripts/apply_promo_queue_plan.py --apply`
