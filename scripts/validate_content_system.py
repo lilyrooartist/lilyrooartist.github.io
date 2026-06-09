@@ -225,6 +225,17 @@ def validate_generated_outputs(failures):
             ok(f"promo engine manual metric gap detail tracks {pending_count} fields")
         else:
             fail("promo_engine_status.json manual metric gap detail does not match pending count", failures)
+        pending_command = kpi.get("pending_manual_update_command") or ""
+        pending_by_platform = kpi.get("pending_manual_update_by_platform") or {}
+        if pending_count:
+            if "update_manual_social_stats.py" in pending_command and "--refresh-admin" in pending_command:
+                ok("promo engine manual metric update command present")
+            else:
+                fail("promo_engine_status.json missing manual metric update command", failures)
+            if pending_by_platform:
+                ok(f"promo engine manual metric platform commands track {len(pending_by_platform)} platforms")
+            else:
+                fail("promo_engine_status.json missing manual metric platform commands", failures)
         if "next_actions" in status:
             ok(f"promo engine status has {len(status.get('next_actions') or [])} next actions")
         else:

@@ -209,10 +209,23 @@ def metric_state(manual, live):
             if value == "pending":
                 pending_manual.append(f"{platform}.{key}")
                 pending_by_platform.setdefault(platform, []).append(key)
+    pending_update_args = [f"{field}=VALUE" for field in pending_manual]
+    pending_update_command = ""
+    if pending_update_args:
+        pending_update_command = "python3 scripts/update_manual_social_stats.py " + " ".join(pending_update_args) + " --refresh-admin"
+    pending_update_by_platform = {
+        platform: "python3 scripts/update_manual_social_stats.py "
+        + " ".join(f"{platform}.{field}=VALUE" for field in fields)
+        + " --refresh-admin"
+        for platform, fields in sorted(pending_by_platform.items())
+        if fields
+    }
     return {
         "live_platform_count": live_count,
         "pending_manual_fields": pending_manual,
         "pending_manual_by_platform": dict(sorted(pending_by_platform.items())),
+        "pending_manual_update_command": pending_update_command,
+        "pending_manual_update_by_platform": pending_update_by_platform,
         "updated_at": live.get("updated_at") if isinstance(live, dict) else "",
     }
 
@@ -335,6 +348,8 @@ def build_status():
             "pending_manual_metric_fields": len(metrics["pending_manual_fields"]),
             "pending_manual_metric_details": metrics["pending_manual_fields"],
             "pending_manual_by_platform": metrics["pending_manual_by_platform"],
+            "pending_manual_update_command": metrics["pending_manual_update_command"],
+            "pending_manual_update_by_platform": metrics["pending_manual_update_by_platform"],
             "live_metrics_updated_at": metrics["updated_at"],
             "stale_source_count": freshness_summary["stale"],
             "missing_source_count": freshness_summary["missing"],
