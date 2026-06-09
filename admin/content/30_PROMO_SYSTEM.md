@@ -26,6 +26,18 @@ Draft next queue rows from those gaps with:
 
 This writes `data/promo_queue_plan.json`, embeds it into `/admin`, and keeps the output in draft-plan mode. Review the rows before copying approved items into `data/scheduled_posts.csv`.
 
+Safe apply workflow:
+`python3 scripts/apply_promo_queue_plan.py`
+
+The apply script is dry-run by default and only selects plan rows where `approved` is `yes`. To preview a specific draft without writing:
+`python3 scripts/apply_promo_queue_plan.py --include-unapproved --id FP-PLAN-001`
+
+After marking selected rows approved in `data/promo_queue_plan.json`, append them to the live queue with:
+`python3 scripts/apply_promo_queue_plan.py --apply`
+
+Then refresh the admin queue:
+`python3 scripts/sync_future_posts.py`
+
 ### I Learned It All in Fifteen Seconds
 - Spotify: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi
 - Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249

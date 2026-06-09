@@ -22,6 +22,7 @@ HYPERFOLLOW_SNAPSHOT = ROOT / "data" / "hyperfollow_store_links_snapshot.json"
 ALIGNMENT_AUDIT = ROOT / "data" / "first_single_alignment_audit.json"
 PROMO_ENGINE_STATUS = ROOT / "data" / "promo_engine_status.json"
 PROMO_QUEUE_PLAN = ROOT / "data" / "promo_queue_plan.json"
+PROMO_QUEUE_APPLY = ROOT / "scripts" / "apply_promo_queue_plan.py"
 REPORT = ROOT / "admin" / "reports" / "weekly-social-report.md"
 INDEX = CONTENT / "content_index.json"
 
@@ -221,6 +222,10 @@ def validate_generated_outputs(failures):
                     fail(f"promo queue plan row {post.get('id') or '[missing id]'} missing {key}", failures)
     else:
         fail("promo_queue_plan.json missing; run scripts/generate_promo_queue_plan.py", failures)
+    if PROMO_QUEUE_APPLY.exists():
+        ok("promo queue apply script present")
+    else:
+        fail("apply_promo_queue_plan.py missing", failures)
 
 
 def validate_report(failures):

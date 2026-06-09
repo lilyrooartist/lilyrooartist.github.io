@@ -825,7 +825,7 @@
 }</script>
 
 <script type="application/json" id="embedded-promo-engine-status">{
-  "generated_at": "2026-06-09T12:45:49.828165+00:00",
+  "generated_at": "2026-06-09T12:58:24.688040+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -1023,7 +1023,7 @@
 }</script>
 
 <script type="application/json" id="embedded-promo-queue-plan">{
-  "generated_at": "2026-06-09T08:45:49.860194-04:00",
+  "generated_at": "2026-06-09T08:58:24.726468-04:00",
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
     "release_status": "data/distrokid_release_status.json"
@@ -2229,6 +2229,7 @@
     renderRecentPublishing(publishedRows);
     renderReleaseRollout(releaseStatus);
     renderPromoHealth(promoHealth);
+    renderPromoQueuePlan(promoPlan);
     renderPipelineHealth(queuePayload,readiness,report,metrics);
     renderNextPosts(queuePayload,executions);
     renderPriorities(report);
