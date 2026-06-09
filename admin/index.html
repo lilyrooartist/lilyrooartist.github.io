@@ -146,6 +146,10 @@
     .release-links{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
     .release-links a{font-size:11px;text-decoration:none;border:1px solid #334062;border-radius:999px;padding:4px 7px;background:#111827;color:#cfe3ff}
     .release-links a:hover{border-color:#4f79c6;background:#14203a}
+    .store-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin-top:9px}
+    .store-pill{display:flex;justify-content:space-between;gap:8px;align-items:center;border:1px solid #26314e;border-radius:9px;background:#0f1320;padding:7px 8px;font-size:11px;color:#cdd5ec}
+    .store-pill a{color:#cfe3ff;text-decoration:none;font-weight:800}
+    .store-pill a:hover{text-decoration:underline}
     .release-open-checks{margin:10px 0 0;padding-left:18px;color:#cdd5ec;font-size:12px;line-height:1.4}
     .release-open-checks li{margin:5px 0}
     .priority-list{margin:0;padding-left:20px;color:#cdd5ec}
@@ -2237,6 +2241,34 @@
     return `<div class="release-links">${links.map(([label,url])=>`<a href="${escapeHtml(safeUrl(url))}" target="_blank" rel="noopener">${escapeHtml(label)}</a>`).join('')}</div>`;
   }
 
+  function serviceState(label, url, fallbackText, allowSubmitted){
+    const href=safeUrl(url);
+    if(href){
+      return {label, href, state:'Live', className:'ok'};
+    }
+    const text=String(fallbackText||'').toLowerCase();
+    if(allowSubmitted && (text.includes('submitted') || text.includes('uploaded') || text.includes('prepared'))){
+      return {label, href:'', state:'Submitted', className:'neutral'};
+    }
+    return {label, href:'', state:'Pending', className:'warn'};
+  }
+
+  function releaseStoreMatrix(release){
+    const statusText=[release?.distrokid_status,release?.store_status,release?.release_date].join(' ');
+    const stores=[
+      serviceState('DistroKid', '', release?.distrokid_status, true),
+      serviceState('Spotify', release?.spotify_url, statusText),
+      serviceState('Apple Music', release?.apple_music_url, statusText),
+      serviceState('YouTube Music', release?.youtube_music_url, statusText),
+      serviceState('HyperFollow', release?.hyperfollow_url, statusText),
+      serviceState('YouTube playlist', release?.youtube_playlist_url, statusText)
+    ];
+    return `<div class="store-grid">${stores.map(store=>`<div class="store-pill">
+      <span>${store.href?`<a href="${escapeHtml(store.href)}" target="_blank" rel="noopener">${escapeHtml(store.label)}</a>`:escapeHtml(store.label)}</span>
+      <span class="status-chip ${escapeHtml(store.className)}">${escapeHtml(store.state)}</span>
+    </div>`).join('')}</div>`;
+  }
+
   function renderReleaseRollout(status){
     const root=document.getElementById('release-rollout');
     if(!root) return;
@@ -2254,6 +2286,7 @@
       <div class="release-meta">${escapeHtml(release.track_count||'--')} tracks - ${escapeHtml(release.release_date||'date pending')}</div>
       <div class="release-meta"><b>CTA:</b> ${escapeHtml(release.primary_cta||'pending')}</div>
       <div class="release-meta">${escapeHtml(release.store_status||release.distrokid_status||'status pending')}</div>
+      ${releaseStoreMatrix(release)}
       ${releaseLinkList(release)}
     </div>`).join('');
     const checks=Array.isArray(status.open_checks)&&status.open_checks.length
