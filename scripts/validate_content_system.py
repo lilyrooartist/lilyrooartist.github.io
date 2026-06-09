@@ -231,6 +231,8 @@ def validate_generated_outputs(failures):
             fail("promo_engine_status.json manual metric gap detail does not match pending count", failures)
         pending_command = kpi.get("pending_manual_update_command") or ""
         pending_by_platform = kpi.get("pending_manual_update_by_platform") or {}
+        auto_covered = kpi.get("auto_covered_manual_metric_fields") or []
+        collection_steps = kpi.get("manual_metric_collection_steps") or []
         if pending_count:
             if "update_manual_social_stats.py" in pending_command and "--refresh-admin" in pending_command:
                 ok("promo engine manual metric update command present")
@@ -240,6 +242,14 @@ def validate_generated_outputs(failures):
                 ok(f"promo engine manual metric platform commands track {len(pending_by_platform)} platforms")
             else:
                 fail("promo_engine_status.json missing manual metric platform commands", failures)
+            if collection_steps:
+                ok(f"promo engine manual metric collection steps track {len(collection_steps)} platforms")
+            else:
+                fail("promo_engine_status.json missing manual metric collection steps", failures)
+        if auto_covered and any(item.get("field") == "facebook.followers" for item in auto_covered):
+            ok("promo engine recognizes live API-covered manual metric fields")
+        else:
+            fail("promo_engine_status.json missing API-covered manual metric evidence", failures)
         music_site_counts = kpi.get("music_site_state_counts") or {}
         release_services = [
             service

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-09T18:55:45.859045+00:00",
+  "generated_at": "2026-06-09T19:06:14.215524+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -12,7 +12,7 @@
   "kpi": {
     "primary": "Reach 1,000 YouTube subscribers",
     "live_platform_count": 3,
-    "pending_manual_metric_fields": 12,
+    "pending_manual_metric_fields": 11,
     "pending_manual_metric_details": [
       "tiktok.followers",
       "tiktok.profile_views_7d",
@@ -20,7 +20,6 @@
       "instagram.profile_visits_7d",
       "x.followers",
       "x.impressions_7d",
-      "facebook.followers",
       "facebook.reach_7d",
       "spotify.artist_followers",
       "spotify.monthly_listeners",
@@ -29,7 +28,6 @@
     ],
     "pending_manual_by_platform": {
       "facebook": [
-        "followers",
         "reach_7d"
       ],
       "instagram": [
@@ -51,14 +49,74 @@
         "impressions_7d"
       ]
     },
-    "pending_manual_update_command": "python3 scripts/update_manual_social_stats.py tiktok.followers=VALUE tiktok.profile_views_7d=VALUE instagram.followers=VALUE instagram.profile_visits_7d=VALUE x.followers=VALUE x.impressions_7d=VALUE facebook.followers=VALUE facebook.reach_7d=VALUE spotify.artist_followers=VALUE spotify.monthly_listeners=VALUE spotify.release_streams=VALUE spotify.saves=VALUE --refresh-admin",
+    "pending_manual_update_command": "python3 scripts/update_manual_social_stats.py tiktok.followers=VALUE tiktok.profile_views_7d=VALUE instagram.followers=VALUE instagram.profile_visits_7d=VALUE x.followers=VALUE x.impressions_7d=VALUE facebook.reach_7d=VALUE spotify.artist_followers=VALUE spotify.monthly_listeners=VALUE spotify.release_streams=VALUE spotify.saves=VALUE --refresh-admin",
     "pending_manual_update_by_platform": {
-      "facebook": "python3 scripts/update_manual_social_stats.py facebook.followers=VALUE facebook.reach_7d=VALUE --refresh-admin",
+      "facebook": "python3 scripts/update_manual_social_stats.py facebook.reach_7d=VALUE --refresh-admin",
       "instagram": "python3 scripts/update_manual_social_stats.py instagram.followers=VALUE instagram.profile_visits_7d=VALUE --refresh-admin",
       "spotify": "python3 scripts/update_manual_social_stats.py spotify.artist_followers=VALUE spotify.monthly_listeners=VALUE spotify.release_streams=VALUE spotify.saves=VALUE --refresh-admin",
       "tiktok": "python3 scripts/update_manual_social_stats.py tiktok.followers=VALUE tiktok.profile_views_7d=VALUE --refresh-admin",
       "x": "python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impressions_7d=VALUE --refresh-admin"
     },
+    "auto_covered_manual_metric_fields": [
+      {
+        "field": "facebook.followers",
+        "source": "meta-graph-page",
+        "value": 0
+      }
+    ],
+    "manual_metric_collection_steps": [
+      {
+        "platform": "facebook",
+        "fields": [
+          "reach_7d"
+        ],
+        "summary": "facebook: collect reach_7d",
+        "reason": "Facebook reach requires Page insights access or manual Meta Business Suite export.",
+        "command": "python3 scripts/update_manual_social_stats.py facebook.reach_7d=VALUE --refresh-admin"
+      },
+      {
+        "platform": "instagram",
+        "fields": [
+          "followers",
+          "profile_visits_7d"
+        ],
+        "summary": "instagram: collect followers, profile_visits_7d",
+        "reason": "Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page",
+        "command": "python3 scripts/update_manual_social_stats.py instagram.followers=VALUE instagram.profile_visits_7d=VALUE --refresh-admin"
+      },
+      {
+        "platform": "spotify",
+        "fields": [
+          "artist_followers",
+          "monthly_listeners",
+          "release_streams",
+          "saves"
+        ],
+        "summary": "spotify: collect artist_followers, monthly_listeners, release_streams, saves",
+        "reason": "Spotify streams, saves, monthly listeners, and artist followers require Spotify for Artists export or a connected analytics source.",
+        "command": "python3 scripts/update_manual_social_stats.py spotify.artist_followers=VALUE spotify.monthly_listeners=VALUE spotify.release_streams=VALUE spotify.saves=VALUE --refresh-admin"
+      },
+      {
+        "platform": "tiktok",
+        "fields": [
+          "followers",
+          "profile_views_7d"
+        ],
+        "summary": "tiktok: collect followers, profile_views_7d",
+        "reason": "TikTok metrics need TikTok OAuth credentials.",
+        "command": "python3 scripts/update_manual_social_stats.py tiktok.followers=VALUE tiktok.profile_views_7d=VALUE --refresh-admin"
+      },
+      {
+        "platform": "x",
+        "fields": [
+          "followers",
+          "impressions_7d"
+        ],
+        "summary": "x: collect followers, impressions_7d",
+        "reason": "X metrics need X_USER_ACCESS_TOKEN with user lookup access.",
+        "command": "python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impressions_7d=VALUE --refresh-admin"
+      }
+    ],
     "live_metrics_updated_at": "2026-06-09T14:06:46.496Z",
     "music_site_state_counts": {
       "Live": 8,
@@ -86,14 +144,14 @@
       "fresh": 6,
       "stale": 0,
       "missing": 0,
-      "checked_at": "2026-06-09T18:55:45.859045+00:00"
+      "checked_at": "2026-06-09T19:06:14.215524+00:00"
     },
     "sources": [
       {
         "name": "release_status",
         "path": "data/distrokid_release_status.json",
         "status": "fresh",
-        "age_hours": 17.1,
+        "age_hours": 17.3,
         "max_age_hours": 72,
         "timestamp": "2026-06-09T01:47:42+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin; update data/distrokid_release_status.json when a public URL is verified."
@@ -102,7 +160,7 @@
         "name": "scheduled_posts",
         "path": "data/scheduled_posts.csv",
         "status": "fresh",
-        "age_hours": 45.3,
+        "age_hours": 45.5,
         "max_age_hours": 72,
         "timestamp": "2026-06-07T21:38:44.418468+00:00",
         "refresh_command": "python3 scripts/sync_future_posts.py"
@@ -111,7 +169,7 @@
         "name": "promo_queue_plan",
         "path": "data/promo_queue_plan.json",
         "status": "fresh",
-        "age_hours": 0.8,
+        "age_hours": 0.9,
         "max_age_hours": 24,
         "timestamp": "2026-06-09T18:09:15.572959+00:00",
         "refresh_command": "python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
@@ -120,7 +178,7 @@
         "name": "published_log",
         "path": "admin/content/Published_Log.csv",
         "status": "fresh",
-        "age_hours": 54.3,
+        "age_hours": 54.5,
         "max_age_hours": 168,
         "timestamp": "2026-06-07T12:36:37.141276+00:00",
         "refresh_command": "Export or append latest published posts to admin/content/Published_Log.csv."
@@ -129,7 +187,7 @@
         "name": "manual_metrics",
         "path": "data/manual_social_stats.json",
         "status": "fresh",
-        "age_hours": 51.1,
+        "age_hours": 51.3,
         "max_age_hours": 72,
         "timestamp": "2026-06-07T15:47:26.729764+00:00",
         "refresh_command": "Update data/manual_social_stats.json with latest manual metrics."
@@ -138,7 +196,7 @@
         "name": "live_metrics",
         "path": "data/live_social_metrics.json",
         "status": "fresh",
-        "age_hours": 4.8,
+        "age_hours": 5.0,
         "max_age_hours": 24,
         "timestamp": "2026-06-09T14:06:46.496000+00:00",
         "refresh_command": "python3 scripts/capture_live_metrics.py"

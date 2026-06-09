@@ -219,11 +219,21 @@ def metric_state(manual, live):
     live_count = sum(1 for data in (platforms or {}).values() if isinstance(data, dict) and data.get("ok"))
     pending_manual = []
     pending_by_platform = {}
+    auto_covered = []
+    collection_steps = []
     for platform, values in (manual or {}).items():
         if not isinstance(values, dict):
             continue
         for key, value in values.items():
             if value == "pending":
+                live_value = live_metric_value(platforms, platform, key)
+                if live_value is not None:
+                    auto_covered.append({
+                        "field": f"{platform}.{key}",
+                        "source": (platforms.get(platform) or {}).get("source", "live metrics"),
+                        "value": live_value,
+                    })
+                    continue
                 pending_manual.append(f"{platform}.{key}")
                 pending_by_platform.setdefault(platform, []).append(key)
     pending_update_args = [f"{field}=VALUE" for field in pending_manual]
@@ -237,14 +247,52 @@ def metric_state(manual, live):
         for platform, fields in sorted(pending_by_platform.items())
         if fields
     }
+    for platform, fields in sorted(pending_by_platform.items()):
+        platform_metrics = (platforms or {}).get(platform) or {}
+        fields_display = ", ".join(fields)
+        command = pending_update_by_platform.get(platform, "")
+        reason = platform_metrics.get("reason") or platform_metrics.get("analytics_status") or metric_collection_reason(platform)
+        collection_steps.append({
+            "platform": platform,
+            "fields": fields,
+            "summary": f"{platform}: collect {fields_display}",
+            "reason": reason,
+            "command": command,
+        })
     return {
         "live_platform_count": live_count,
         "pending_manual_fields": pending_manual,
         "pending_manual_by_platform": dict(sorted(pending_by_platform.items())),
         "pending_manual_update_command": pending_update_command,
         "pending_manual_update_by_platform": pending_update_by_platform,
+        "auto_covered_fields": auto_covered,
+        "manual_metric_collection_steps": collection_steps,
         "updated_at": live.get("updated_at") if isinstance(live, dict) else "",
     }
+
+
+def live_metric_value(platforms, platform: str, key: str):
+    data = (platforms or {}).get(platform) or {}
+    metrics = data.get("metrics") or {}
+    if key in metrics and metrics.get(key) not in (None, ""):
+        return metrics.get(key)
+    fallback_keys = {
+        ("facebook", "followers"): ["page_likes"],
+    }.get((platform, key), [])
+    for fallback_key in fallback_keys:
+        if fallback_key in metrics and metrics.get(fallback_key) not in (None, ""):
+            return metrics.get(fallback_key)
+    return None
+
+
+def metric_collection_reason(platform: str) -> str:
+    return {
+        "spotify": "Spotify streams, saves, monthly listeners, and artist followers require Spotify for Artists export or connected analytics access.",
+        "tiktok": "TikTok metrics require OAuth credentials or manual Creator/Business analytics export.",
+        "instagram": "Instagram metrics require a connected Business/Creator account or manual insights export.",
+        "x": "X metrics require an access token with user lookup/analytics access or manual export.",
+        "facebook": "Facebook reach requires Page insights access or manual Meta Business Suite export.",
+    }.get(platform, "Manual platform export required.")
 
 
 def store_service_states(release):
@@ -497,6 +545,8 @@ def build_status():
             "pending_manual_by_platform": metrics["pending_manual_by_platform"],
             "pending_manual_update_command": metrics["pending_manual_update_command"],
             "pending_manual_update_by_platform": metrics["pending_manual_update_by_platform"],
+            "auto_covered_manual_metric_fields": metrics["auto_covered_fields"],
+            "manual_metric_collection_steps": metrics["manual_metric_collection_steps"],
             "live_metrics_updated_at": metrics["updated_at"],
             "music_site_state_counts": dict(sorted(store_state_counts.items())),
             "music_sites_live": store_state_counts.get("Live", 0),
