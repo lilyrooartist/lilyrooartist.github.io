@@ -25,6 +25,9 @@ It also audits source freshness so `/admin` shows when release status, the queue
 
 When live APIs cannot provide a metric, the snapshot includes `pending_manual_by_platform` so `/admin` names the exact manual fields still needed for reporting.
 
+Update known manual values without hand-editing JSON:
+`python3 scripts/update_manual_social_stats.py tiktok.followers=0 spotify.release_streams=0 --refresh-admin`
+
 Draft next queue rows from those gaps with:
 `python3 scripts/generate_promo_queue_plan.py`
 
