@@ -25,6 +25,8 @@ It also audits source freshness so `/admin` shows when release status, the queue
 
 The refresh script is read-only for external services. It does not approve, apply, or publish queued posts. It writes the latest run summary to `data/promo_admin_refresh_run.json` so Admin can show whether the new DistroKid/music-site content and social execution snapshots were refreshed cleanly.
 
+It also writes a review packet to `data/promo_operations_packet.json` and `admin/reports/promo-operations-packet.md`, grouping platform fixes, draft approvals, store checks, and manual metrics into one operator-facing checklist.
+
 When live APIs cannot provide a metric, the snapshot includes `pending_manual_by_platform` so `/admin` names the exact manual fields still needed for reporting.
 
 Update known manual values without hand-editing JSON:

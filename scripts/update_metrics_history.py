@@ -117,9 +117,9 @@ def build_snapshot(now: datetime) -> dict:
         "captured_at": now.isoformat().replace("+00:00", "Z"),
         "live_metrics_updated_at": live.get("updated_at", ""),
         "youtube": {
-            "subscribers": metric(platforms, "youtube", "subscribers"),
-            "total_views": metric(platforms, "youtube", "total_views"),
-            "video_count": metric(platforms, "youtube", "video_count"),
+            "subscribers": metric(platforms, "youtube", "subscribers") or manual_value(manual, "youtube", "subscribers"),
+            "total_views": metric(platforms, "youtube", "total_views") or manual_value(manual, "youtube", "total_views"),
+            "video_count": metric(platforms, "youtube", "video_count") or manual_value(manual, "youtube", "video_count"),
         },
         "facebook": {
             "followers": metric(platforms, "facebook", "followers"),

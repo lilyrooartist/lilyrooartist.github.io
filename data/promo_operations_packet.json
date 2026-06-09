@@ -1,0 +1,324 @@
+{
+  "generated_at": "2026-06-09T22:14:45.586671Z",
+  "safe_mode": true,
+  "source": {
+    "promo_engine_status": "data/promo_engine_status.json",
+    "promo_queue_plan": "data/promo_queue_plan.json",
+    "social_executions": "data/social_execution_snapshot.json"
+  },
+  "summary": {
+    "action_count": 20,
+    "user_review": 6,
+    "platform_fixes": 2,
+    "store_checks": 7,
+    "manual_metric_updates": 5,
+    "safe_apply_commands": 0,
+    "blocked_review_items": 1,
+    "manual_only_review_items": 2
+  },
+  "actions": [
+    {
+      "label": "Fix Facebook executor",
+      "kind": "platform_fix",
+      "priority": 1,
+      "command": "python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run",
+      "context": {
+        "post_id": "FP-AUTO-265",
+        "platform": "Facebook",
+        "reason": "",
+        "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
+        "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check."
+      }
+    },
+    {
+      "label": "Fix Instagram executor",
+      "kind": "platform_fix",
+      "priority": 1,
+      "command": "python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py",
+      "context": {
+        "post_id": "FP-AUTO-263",
+        "platform": "Instagram",
+        "reason": "max_attempts_exceeded",
+        "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
+        "repair_action": "Reconnect the Instagram Business/Creator account to the Facebook Page or set IG_BUSINESS_ACCOUNT_ID, then push the worker secret and recapture readiness."
+      }
+    },
+    {
+      "label": "Review Facebook draft for Twelve Dollars",
+      "kind": "approval_review",
+      "priority": 10,
+      "command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --refresh-admin",
+      "context": {
+        "id": "FP-PLAN-TWELVE-DOLLARS-FACEBOOK",
+        "release": "Twelve Dollars",
+        "platform": "Facebook",
+        "scheduled_at": "2026-06-13T11:20:00-04:00",
+        "execution_mode": "auto",
+        "post_type": "image",
+        "readiness_state": "ready_after_approval",
+        "readiness_message": "Ready after approval.",
+        "text": "Twelve Dollars is live in the Lily Roo archive. The remastered videos are up, the playlist is public, and the stage finally has the right kind of trouble on it.",
+        "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+        "media_key": "twelve-dollars-cover"
+      }
+    },
+    {
+      "label": "Review Instagram draft for Twelve Dollars",
+      "kind": "approval_review",
+      "priority": 10,
+      "command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --refresh-admin",
+      "context": {
+        "id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+        "release": "Twelve Dollars",
+        "platform": "Instagram",
+        "scheduled_at": "2026-06-11T14:05:00-04:00",
+        "execution_mode": "auto",
+        "post_type": "image",
+        "readiness_state": "ready_after_approval",
+        "readiness_message": "Ready after approval.",
+        "text": "Twelve Dollars is live on YouTube: stage lights, scattered bills, impossible shoes, and one very stubborn little signal.",
+        "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+        "media_key": "twelve-dollars-cover"
+      }
+    },
+    {
+      "label": "Review X draft for Twelve Dollars",
+      "kind": "approval_review",
+      "priority": 10,
+      "command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-X --refresh-admin",
+      "context": {
+        "id": "FP-PLAN-TWELVE-DOLLARS-X",
+        "release": "Twelve Dollars",
+        "platform": "X",
+        "scheduled_at": "2026-06-10T10:15:00-04:00",
+        "execution_mode": "auto",
+        "post_type": "image",
+        "readiness_state": "ready_after_approval",
+        "readiness_message": "Ready after approval.",
+        "text": "Twelve Dollars is the part where the stage gets too bright and the joke gets honest. Full album playlist is live.",
+        "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+        "media_key": "twelve-dollars-cover"
+      }
+    },
+    {
+      "label": "Review YouTube Community draft for Analog Myth",
+      "kind": "approval_review",
+      "priority": 15,
+      "command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin",
+      "context": {
+        "id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+        "release": "Analog Myth",
+        "platform": "YouTube Community",
+        "scheduled_at": "2026-06-15T18:30:00-04:00",
+        "execution_mode": "manual",
+        "post_type": "community",
+        "readiness_state": "manual_only",
+        "readiness_message": "YouTube Community posts are copy-ready manual workflow.",
+        "text": "Analog Myth transmission is live: 13, Girls Camp, Analog Myth, Spilling the Tea, No Mortgage, Guards Down, Slow Walk, The Power of Light.",
+        "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+        "media_key": "analog-myth-cover"
+      }
+    },
+    {
+      "label": "Review YouTube Community draft for Twelve Dollars",
+      "kind": "approval_review",
+      "priority": 15,
+      "command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+      "context": {
+        "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+        "release": "Twelve Dollars",
+        "platform": "YouTube Community",
+        "scheduled_at": "2026-06-14T18:30:00-04:00",
+        "execution_mode": "manual",
+        "post_type": "community",
+        "readiness_state": "manual_only",
+        "readiness_message": "YouTube Community posts are copy-ready manual workflow.",
+        "text": "New album transmission: Twelve Dollars. Remastered videos, updated art, full playlist live now.",
+        "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+        "media_key": "twelve-dollars-cover"
+      }
+    },
+    {
+      "label": "Verify Analog Myth on Apple Music",
+      "kind": "store_verification",
+      "priority": 20,
+      "command": "python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/apple_music_release_snapshot.json'",
+      "context": {
+        "release": "Analog Myth",
+        "service": "Apple Music",
+        "latest_snapshot": {
+          "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
+          "ok": false,
+          "updated_at": "2026-06-09T22:14:43.967671Z",
+          "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
+        }
+      }
+    },
+    {
+      "label": "Verify Analog Myth on HyperFollow",
+      "kind": "store_verification",
+      "priority": 20,
+      "command": "python3 scripts/capture_hyperfollow_store_links.py --url 'https://distrokid.com/hyperfollow/lilyroo/analog-myth' --out 'data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json'",
+      "context": {
+        "release": "Analog Myth",
+        "service": "HyperFollow",
+        "latest_snapshot": {
+          "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
+          "ok": false,
+          "updated_at": "2026-06-09T22:14:44.406051Z",
+          "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
+        }
+      }
+    },
+    {
+      "label": "Verify Analog Myth on Spotify",
+      "kind": "store_verification",
+      "priority": 20,
+      "command": "open 'https://open.spotify.com/search/analog%20myth%20Lily%20Roo/albums' && python3 scripts/capture_spotify_release.py --release-url SPOTIFY_ALBUM_URL --out 'data/store-verification/analog-myth/spotify_release_snapshot.json'",
+      "context": {
+        "release": "Analog Myth",
+        "service": "Spotify",
+        "latest_snapshot": {}
+      }
+    },
+    {
+      "label": "Verify Analog Myth on YouTube Music",
+      "kind": "store_verification",
+      "priority": 20,
+      "command": "python3 scripts/capture_youtube_music_release.py --url YOUTUBE_MUSIC_URL --title 'Analog Myth' --out 'data/store-verification/analog-myth/youtube_music_release_snapshot.json'",
+      "context": {
+        "release": "Analog Myth",
+        "service": "YouTube Music",
+        "latest_snapshot": {}
+      }
+    },
+    {
+      "label": "Verify Twelve Dollars on Apple Music",
+      "kind": "store_verification",
+      "priority": 20,
+      "command": "python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/apple_music_release_snapshot.json'",
+      "context": {
+        "release": "Twelve Dollars",
+        "service": "Apple Music",
+        "latest_snapshot": {
+          "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
+          "ok": false,
+          "updated_at": "2026-06-09T22:14:43.281048Z",
+          "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
+        }
+      }
+    },
+    {
+      "label": "Verify Twelve Dollars on HyperFollow",
+      "kind": "store_verification",
+      "priority": 20,
+      "command": "python3 scripts/capture_hyperfollow_store_links.py --url 'https://distrokid.com/hyperfollow/lilyroo/twelve-dollars' --out 'data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json'",
+      "context": {
+        "release": "Twelve Dollars",
+        "service": "HyperFollow",
+        "latest_snapshot": {
+          "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
+          "ok": false,
+          "updated_at": "2026-06-09T22:14:43.635705Z",
+          "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
+        }
+      }
+    },
+    {
+      "label": "Verify Twelve Dollars on Spotify",
+      "kind": "store_verification",
+      "priority": 20,
+      "command": "open 'https://open.spotify.com/search/twelve%20dollars%20Lily%20Roo/albums' && python3 scripts/capture_spotify_release.py --release-url SPOTIFY_ALBUM_URL --out 'data/store-verification/twelve-dollars/spotify_release_snapshot.json'",
+      "context": {
+        "release": "Twelve Dollars",
+        "service": "Spotify",
+        "latest_snapshot": {}
+      }
+    },
+    {
+      "label": "Fill manual metrics for facebook",
+      "kind": "manual_metrics",
+      "priority": 30,
+      "command": "python3 scripts/update_manual_social_stats.py facebook.reach_7d=VALUE --refresh-admin",
+      "context": {
+        "platform": "facebook",
+        "fields": [
+          "reach_7d"
+        ]
+      }
+    },
+    {
+      "label": "Fill manual metrics for instagram",
+      "kind": "manual_metrics",
+      "priority": 30,
+      "command": "python3 scripts/update_manual_social_stats.py instagram.followers=VALUE instagram.profile_visits_7d=VALUE --refresh-admin",
+      "context": {
+        "platform": "instagram",
+        "fields": [
+          "followers",
+          "profile_visits_7d"
+        ]
+      }
+    },
+    {
+      "label": "Fill manual metrics for spotify",
+      "kind": "manual_metrics",
+      "priority": 30,
+      "command": "python3 scripts/update_manual_social_stats.py spotify.artist_followers=VALUE spotify.monthly_listeners=VALUE spotify.release_streams=VALUE spotify.saves=VALUE --refresh-admin",
+      "context": {
+        "platform": "spotify",
+        "fields": [
+          "artist_followers",
+          "monthly_listeners",
+          "release_streams",
+          "saves"
+        ]
+      }
+    },
+    {
+      "label": "Fill manual metrics for tiktok",
+      "kind": "manual_metrics",
+      "priority": 30,
+      "command": "python3 scripts/update_manual_social_stats.py tiktok.followers=VALUE tiktok.profile_views_7d=VALUE --refresh-admin",
+      "context": {
+        "platform": "tiktok",
+        "fields": [
+          "followers",
+          "profile_views_7d"
+        ]
+      }
+    },
+    {
+      "label": "Fill manual metrics for x",
+      "kind": "manual_metrics",
+      "priority": 30,
+      "command": "python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impressions_7d=VALUE --refresh-admin",
+      "context": {
+        "platform": "x",
+        "fields": [
+          "followers",
+          "impressions_7d"
+        ]
+      }
+    },
+    {
+      "label": "Review TikTok draft for Twelve Dollars",
+      "kind": "approval_review",
+      "priority": 40,
+      "command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --refresh-admin",
+      "context": {
+        "id": "FP-PLAN-TWELVE-DOLLARS-TIKTOK",
+        "release": "Twelve Dollars",
+        "platform": "TikTok",
+        "scheduled_at": "2026-06-12T20:40:00-04:00",
+        "execution_mode": "auto",
+        "post_type": "video",
+        "readiness_state": "blocked",
+        "readiness_message": "Executor credentials or platform setup are not ready.",
+        "text": "Twelve Dollars is what happens when the joke walks on stage wearing impossible shoes. Full album playlist is live.",
+        "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+        "media_key": "twelve-dollars-video"
+      }
+    }
+  ]
+}

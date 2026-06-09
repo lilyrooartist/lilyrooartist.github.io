@@ -18,6 +18,7 @@ EXECUTOR_READINESS = ROOT / "data" / "executor_readiness_snapshot.json"
 STORE_VERIFICATION_HISTORY = ROOT / "data" / "store_verification_history.json"
 SOCIAL_EXECUTION_SNAPSHOT = ROOT / "data" / "social_execution_snapshot.json"
 PROMO_REFRESH_RUN = ROOT / "data" / "promo_admin_refresh_run.json"
+PROMO_OPERATIONS_PACKET = ROOT / "data" / "promo_operations_packet.json"
 SPOTIFY_SNAPSHOT = ROOT / "data" / "spotify_release_snapshot.json"
 APPLE_MUSIC_SNAPSHOT = ROOT / "data" / "apple_music_release_snapshot.json"
 YOUTUBE_PUBLIC = ROOT / "data" / "youtube_public_snapshot.json"
@@ -38,7 +39,9 @@ METRICS_HISTORY_UPDATER = ROOT / "scripts" / "update_metrics_history.py"
 EXECUTOR_READINESS_CAPTURE = ROOT / "scripts" / "capture_executor_readiness.py"
 SOCIAL_EXECUTION_CAPTURE = ROOT / "scripts" / "capture_social_executions.py"
 PROMO_REFRESH_SCRIPT = ROOT / "scripts" / "refresh_promo_admin.py"
+PROMO_OPERATIONS_SCRIPT = ROOT / "scripts" / "build_promo_operations_packet.py"
 REPORT = ROOT / "admin" / "reports" / "weekly-social-report.md"
+PROMO_OPERATIONS_REPORT = ROOT / "admin" / "reports" / "promo-operations-packet.md"
 INDEX = CONTENT / "content_index.json"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
 
@@ -196,6 +199,22 @@ def validate_generated_outputs(failures):
             fail("promo_admin_refresh_run.json missing safe command result detail", failures)
     else:
         fail("promo_admin_refresh_run.json missing; run scripts/refresh_promo_admin.py", failures)
+    if PROMO_OPERATIONS_PACKET.exists():
+        packet = json.loads(PROMO_OPERATIONS_PACKET.read_text(encoding="utf-8"))
+        summary = packet.get("summary") or {}
+        actions = packet.get("actions") or []
+        if packet.get("safe_mode") is True and summary.get("action_count") == len(actions):
+            ok(f"promo operations packet tracks {len(actions)} action(s)")
+        else:
+            fail("promo_operations_packet.json missing safe summary or action count", failures)
+        action_kinds = {action.get("kind") for action in actions}
+        required_kinds = {"approval_review", "store_verification", "manual_metrics", "platform_fix"}
+        if required_kinds <= action_kinds and all("command" in action and "label" in action for action in actions):
+            ok("promo operations packet groups approval, store, metric, and platform work")
+        else:
+            fail("promo_operations_packet.json missing required action groups", failures)
+    else:
+        fail("promo_operations_packet.json missing; run scripts/build_promo_operations_packet.py", failures)
     if SPOTIFY_SNAPSHOT.exists():
         snapshot = json.loads(SPOTIFY_SNAPSHOT.read_text(encoding="utf-8"))
         if snapshot.get("ok") and snapshot.get("title") and snapshot.get("thumbnail_url"):
@@ -520,6 +539,7 @@ def validate_generated_outputs(failures):
             "verify_pending_store_links.py",
             "capture_executor_readiness.py",
             "capture_social_executions.py",
+            "build_promo_operations_packet.py",
             "update_weekly_report.py",
         ]
         forbidden_bits = [
@@ -533,6 +553,22 @@ def validate_generated_outputs(failures):
             fail("refresh_promo_admin.py missing safe refresh coverage or includes posting commands", failures)
     else:
         fail("refresh_promo_admin.py missing", failures)
+    if PROMO_OPERATIONS_SCRIPT.exists():
+        packet_text = PROMO_OPERATIONS_SCRIPT.read_text(encoding="utf-8")
+        if "promo_operations_packet.json" in packet_text and "promo-operations-packet.md" in packet_text and "approval_review" in packet_text and "subprocess" not in packet_text:
+            ok("promo operations packet builder is review-only")
+        else:
+            fail("build_promo_operations_packet.py missing review packet outputs or executes commands", failures)
+    else:
+        fail("build_promo_operations_packet.py missing", failures)
+    if PROMO_OPERATIONS_REPORT.exists():
+        report_text = PROMO_OPERATIONS_REPORT.read_text(encoding="utf-8")
+        if "Promo Operations Packet" in report_text and "Top Actions" in report_text:
+            ok("promo operations markdown report present")
+        else:
+            fail("promo operations markdown report missing expected sections", failures)
+    else:
+        fail("promo-operations-packet.md missing", failures)
 
 
 def validate_report(failures):
