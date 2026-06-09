@@ -326,9 +326,28 @@ def metrics_history_state(metrics_history):
     }
 
 
-def social_execution_state(snapshot):
+def social_execution_state(snapshot, scheduled_rows=None):
     summary = snapshot.get("summary") if isinstance(snapshot, dict) else {}
     summary = summary or {}
+    scheduled = {
+        row.get("id"): row
+        for row in (scheduled_rows or [])
+        if row.get("id")
+    }
+    attention = summary.get("latest_attention") or []
+    approval_needed = []
+    platform_fix_needed = []
+    for item in attention:
+        queue_row = scheduled.get(item.get("post_id"), {})
+        enriched = {
+            **item,
+            "song": queue_row.get("song", ""),
+            "approved": queue_row.get("approved", ""),
+        }
+        if item.get("reason") == "not_approved" or queue_row.get("approved") == "no":
+            approval_needed.append(enriched)
+        else:
+            platform_fix_needed.append(enriched)
     return {
         "ok": bool(snapshot.get("ok")) if isinstance(snapshot, dict) else False,
         "updated_at": snapshot.get("updated_at", "") if isinstance(snapshot, dict) else "",
@@ -336,9 +355,13 @@ def social_execution_state(snapshot):
         "execution_count": int(summary.get("execution_count") or 0),
         "posted_count": int(summary.get("posted_count") or 0),
         "attention_count": int(summary.get("attention_count") or 0),
+        "approval_needed_count": len(approval_needed),
+        "platform_fix_needed_count": len(platform_fix_needed),
         "status_counts": summary.get("status_counts") or {},
         "platform_counts": summary.get("platform_counts") or {},
-        "latest_attention": summary.get("latest_attention") or [],
+        "latest_attention": attention,
+        "approval_needed": approval_needed,
+        "platform_fix_needed": platform_fix_needed,
         "action_needed": snapshot.get("action_needed", "") if isinstance(snapshot, dict) else "Run scripts/capture_social_executions.py.",
     }
 
@@ -529,7 +552,7 @@ def build_status():
     published_rows = read_csv(PUBLISHED)
     metrics = metric_state(manual, live)
     history = metrics_history_state(metrics_history)
-    execution_state = social_execution_state(social_executions)
+    execution_state = social_execution_state(social_executions, scheduled_rows)
     freshness = source_freshness(release_status, manual, live, metrics_history, executor_readiness, store_history, social_executions, promo_plan, now)
 
     releases = []
@@ -629,7 +652,16 @@ def build_status():
     freshness_summary = freshness["summary"]
     freshness_actions = freshness["actions"]
     all_actions = freshness_actions + all_actions
-    if execution_state["attention_count"]:
+    if execution_state["platform_fix_needed_count"]:
+        platforms = ", ".join(sorted({
+            item.get("platform", "Social")
+            for item in execution_state.get("platform_fix_needed") or []
+            if item.get("platform")
+        }))
+        all_actions.insert(0, f"Fix social executor platform failures for {platforms or 'configured platforms'}.")
+    if execution_state["approval_needed_count"]:
+        all_actions.insert(0, f"Review approval blockers for {execution_state['approval_needed_count']} queued executor records.")
+    elif execution_state["attention_count"]:
         status_bits = ", ".join(
             f"{count} {status}"
             for status, count in sorted((execution_state.get("status_counts") or {}).items())

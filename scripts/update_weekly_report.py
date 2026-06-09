@@ -145,7 +145,8 @@ social_execution_time = social_execution_snapshot.get('updated_at') or 'not capt
 social_execution_status = (
     f"{execution_summary.get('execution_count', 0)} records, "
     f"{execution_summary.get('posted_count', 0)} posted, "
-    f"{execution_summary.get('attention_count', 0)} attention"
+    f"{execution_summary.get('platform_fix_needed_count', 0)} platform fixes, "
+    f"{execution_summary.get('approval_needed_count', 0)} approval blockers"
 ) if social_execution_snapshot.get('ok') else (social_execution_snapshot.get('action_needed') or 'not captured')
 alignment_action_required = ', '.join(alignment_audit.get('action_required') or []) or 'none'
 alignment_pending = ', '.join(alignment_audit.get('pending') or []) or 'none'

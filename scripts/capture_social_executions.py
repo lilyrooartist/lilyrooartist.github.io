@@ -98,13 +98,25 @@ def summarize(payload: dict) -> dict:
         item for item in executions
         if isinstance(item, dict) and item.get("status") in {"failed", "blocked", "skipped"}
     ]
+    approval_needed = [
+        item for item in failed
+        if item.get("reason") == "not_approved"
+    ]
+    platform_fix_needed = [
+        item for item in failed
+        if item.get("reason") != "not_approved"
+    ]
     return {
         "execution_count": len(executions),
         "posted_count": len(posted),
         "attention_count": len(failed),
+        "approval_needed_count": len(approval_needed),
+        "platform_fix_needed_count": len(platform_fix_needed),
         "status_counts": dict(sorted(status_counts.items())),
         "platform_counts": dict(sorted(platform_counts.items())),
         "latest_posted": [safe_execution(item) for item in posted[:5]],
+        "approval_needed": [safe_execution(item) for item in approval_needed[:5]],
+        "platform_fix_needed": [safe_execution(item) for item in platform_fix_needed[:5]],
         "latest_attention": [safe_execution(item) for item in failed[:5]],
     }
 

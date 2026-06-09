@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-09T20:31:31.947676+00:00",
+  "generated_at": "2026-06-09T20:42:14.263728+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -202,11 +202,13 @@
     },
     "social_execution_summary": {
       "ok": true,
-      "updated_at": "2026-06-09T20:27:53.917316Z",
+      "updated_at": "2026-06-09T20:42:14.198618Z",
       "http_status": 200,
       "execution_count": 5,
       "posted_count": 0,
       "attention_count": 5,
+      "approval_needed_count": 3,
+      "platform_fix_needed_count": 2,
       "status_counts": {
         "blocked": 3,
         "failed": 2
@@ -224,7 +226,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-06-09T20:15:19.326Z",
+          "updated_at": "2026-06-09T20:30:19.304Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID."
@@ -235,7 +237,7 @@
           "status": "blocked",
           "reason": "not_approved",
           "attempts": 0,
-          "updated_at": "2026-06-09T20:15:18.525Z",
+          "updated_at": "2026-06-09T20:30:18.565Z",
           "source": "cron",
           "post_url": "",
           "error_summary": ""
@@ -246,7 +248,7 @@
           "status": "blocked",
           "reason": "not_approved",
           "attempts": 0,
-          "updated_at": "2026-06-09T20:15:17.664Z",
+          "updated_at": "2026-06-09T20:30:17.651Z",
           "source": "cron",
           "post_url": "",
           "error_summary": ""
@@ -257,7 +259,7 @@
           "status": "blocked",
           "reason": "not_approved",
           "attempts": 0,
-          "updated_at": "2026-06-09T20:15:16.821Z",
+          "updated_at": "2026-06-09T20:30:16.845Z",
           "source": "cron",
           "post_url": "",
           "error_summary": ""
@@ -274,6 +276,75 @@
           "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app."
         }
       ],
+      "approval_needed": [
+        {
+          "post_id": "FP-AUTO-261",
+          "platform": "YouTube Community",
+          "status": "blocked",
+          "reason": "not_approved",
+          "attempts": 0,
+          "updated_at": "2026-06-09T20:30:18.565Z",
+          "source": "cron",
+          "post_url": "",
+          "error_summary": "",
+          "song": "I Learned It All in Fifteen Seconds",
+          "approved": "no"
+        },
+        {
+          "post_id": "FP-AUTO-259",
+          "platform": "TikTok",
+          "status": "blocked",
+          "reason": "not_approved",
+          "attempts": 0,
+          "updated_at": "2026-06-09T20:30:17.651Z",
+          "source": "cron",
+          "post_url": "",
+          "error_summary": "",
+          "song": "I Learned It All in Fifteen Seconds",
+          "approved": "no"
+        },
+        {
+          "post_id": "FP-AUTO-258",
+          "platform": "Instagram",
+          "status": "blocked",
+          "reason": "not_approved",
+          "attempts": 0,
+          "updated_at": "2026-06-09T20:30:16.845Z",
+          "source": "cron",
+          "post_url": "",
+          "error_summary": "",
+          "song": "I Learned It All in Fifteen Seconds",
+          "approved": "no"
+        }
+      ],
+      "platform_fix_needed": [
+        {
+          "post_id": "FP-AUTO-263",
+          "platform": "Instagram",
+          "status": "failed",
+          "reason": "max_attempts_exceeded",
+          "attempts": 3,
+          "updated_at": "2026-06-09T20:30:19.304Z",
+          "source": "cron",
+          "post_url": "",
+          "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
+          "song": "I Learned It All in Fifteen Seconds",
+          "approved": "yes"
+        },
+        {
+          "post_id": "FP-AUTO-265",
+          "platform": "Facebook",
+          "status": "failed",
+          "reason": "",
+          "attempts": 1,
+          "updated_at": "2026-06-09T02:01:38.028Z",
+          "source": "manual",
+          "post_url": "",
+          "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
+          "song": "I Learned It All in Fifteen Seconds",
+          "approved": "yes"
+        }
+      ],
       "action_needed": ""
     },
     "stale_source_count": 0,
@@ -283,7 +354,7 @@
     "score": 0,
     "healthy_releases": 0,
     "tracked_releases": 3,
-    "open_action_count": 10,
+    "open_action_count": 11,
     "fresh_sources": 10,
     "stale_sources": 0,
     "missing_sources": 0
@@ -293,14 +364,14 @@
       "fresh": 10,
       "stale": 0,
       "missing": 0,
-      "checked_at": "2026-06-09T20:31:31.947676+00:00"
+      "checked_at": "2026-06-09T20:42:14.263728+00:00"
     },
     "sources": [
       {
         "name": "release_status",
         "path": "data/distrokid_release_status.json",
         "status": "fresh",
-        "age_hours": 18.7,
+        "age_hours": 18.9,
         "max_age_hours": 72,
         "timestamp": "2026-06-09T01:47:42+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin; update data/distrokid_release_status.json when a public URL is verified."
@@ -309,7 +380,7 @@
         "name": "scheduled_posts",
         "path": "data/scheduled_posts.csv",
         "status": "fresh",
-        "age_hours": 46.9,
+        "age_hours": 47.1,
         "max_age_hours": 72,
         "timestamp": "2026-06-07T21:38:44.418468+00:00",
         "refresh_command": "python3 scripts/sync_future_posts.py"
@@ -318,7 +389,7 @@
         "name": "promo_queue_plan",
         "path": "data/promo_queue_plan.json",
         "status": "fresh",
-        "age_hours": 0.8,
+        "age_hours": 1.0,
         "max_age_hours": 24,
         "timestamp": "2026-06-09T19:42:20.583384+00:00",
         "refresh_command": "python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
@@ -327,7 +398,7 @@
         "name": "published_log",
         "path": "admin/content/Published_Log.csv",
         "status": "fresh",
-        "age_hours": 55.9,
+        "age_hours": 56.1,
         "max_age_hours": 168,
         "timestamp": "2026-06-07T12:36:37.141276+00:00",
         "refresh_command": "Export or append latest published posts to admin/content/Published_Log.csv."
@@ -336,7 +407,7 @@
         "name": "manual_metrics",
         "path": "data/manual_social_stats.json",
         "status": "fresh",
-        "age_hours": 52.7,
+        "age_hours": 52.9,
         "max_age_hours": 72,
         "timestamp": "2026-06-07T15:47:26.729764+00:00",
         "refresh_command": "Update data/manual_social_stats.json with latest manual metrics."
@@ -345,7 +416,7 @@
         "name": "live_metrics",
         "path": "data/live_social_metrics.json",
         "status": "fresh",
-        "age_hours": 6.4,
+        "age_hours": 6.6,
         "max_age_hours": 24,
         "timestamp": "2026-06-09T14:06:46.496000+00:00",
         "refresh_command": "python3 scripts/capture_live_metrics.py"
@@ -354,7 +425,7 @@
         "name": "metrics_history",
         "path": "data/metrics_history.json",
         "status": "fresh",
-        "age_hours": 1.1,
+        "age_hours": 1.3,
         "max_age_hours": 24,
         "timestamp": "2026-06-09T19:22:44.862530+00:00",
         "refresh_command": "python3 scripts/update_metrics_history.py --refresh-admin"
@@ -363,7 +434,7 @@
         "name": "executor_readiness",
         "path": "data/executor_readiness_snapshot.json",
         "status": "fresh",
-        "age_hours": 0.9,
+        "age_hours": 1.1,
         "max_age_hours": 24,
         "timestamp": "2026-06-09T19:35:48.248684+00:00",
         "refresh_command": "LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
@@ -374,16 +445,16 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-09T20:31:31.947676+00:00",
+        "timestamp": "2026-06-09T20:42:14.263728+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin"
       },
       {
         "name": "social_executions",
         "path": "data/social_execution_snapshot.json",
         "status": "fresh",
-        "age_hours": 0.1,
+        "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-09T20:27:53.917316+00:00",
+        "timestamp": "2026-06-09T20:42:14.198618+00:00",
         "refresh_command": "LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py && python3 scripts/update_promo_engine_status.py"
       }
     ],
@@ -701,13 +772,13 @@
     }
   ],
   "next_actions": [
-    "Resolve social executor attention states: 3 blocked, 2 failed.",
+    "Review approval blockers for 3 queued executor records.",
+    "Fix social executor platform failures for Facebook, Instagram.",
     "I Learned It All in Fifteen Seconds: Refresh pending manual metrics before weekly reporting.",
     "Twelve Dollars: Verify public store links for Spotify, Apple Music, HyperFollow.",
     "Twelve Dollars: Review and approve draft promo queue rows for this release.",
     "Twelve Dollars: Approve planned promo coverage for X, Instagram, TikTok, Facebook, YouTube Community.",
     "Twelve Dollars: Refresh pending manual metrics before weekly reporting.",
-    "Analog Myth: Verify public store links for Spotify, Apple Music, YouTube Music, HyperFollow.",
-    "Analog Myth: Review and approve draft promo queue rows for this release."
+    "Analog Myth: Verify public store links for Spotify, Apple Music, YouTube Music, HyperFollow."
   ]
 }

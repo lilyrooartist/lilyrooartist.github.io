@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "updated_at": "2026-06-09T20:27:53.917316Z",
+  "updated_at": "2026-06-09T20:42:14.198618Z",
   "source": "lilyroo-social-executor-executions",
   "url": "https://www.lilyroo.com/api/social/executions",
   "http_status": 200,
@@ -10,6 +10,8 @@
     "execution_count": 5,
     "posted_count": 0,
     "attention_count": 5,
+    "approval_needed_count": 3,
+    "platform_fix_needed_count": 2,
     "status_counts": {
       "blocked": 3,
       "failed": 2
@@ -21,25 +23,14 @@
       "YouTube Community": 1
     },
     "latest_posted": [],
-    "latest_attention": [
-      {
-        "post_id": "FP-AUTO-263",
-        "platform": "Instagram",
-        "status": "failed",
-        "reason": "max_attempts_exceeded",
-        "attempts": 3,
-        "updated_at": "2026-06-09T20:15:19.326Z",
-        "source": "cron",
-        "post_url": "",
-        "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID."
-      },
+    "approval_needed": [
       {
         "post_id": "FP-AUTO-261",
         "platform": "YouTube Community",
         "status": "blocked",
         "reason": "not_approved",
         "attempts": 0,
-        "updated_at": "2026-06-09T20:15:18.525Z",
+        "updated_at": "2026-06-09T20:30:18.565Z",
         "source": "cron",
         "post_url": "",
         "error_summary": ""
@@ -50,7 +41,7 @@
         "status": "blocked",
         "reason": "not_approved",
         "attempts": 0,
-        "updated_at": "2026-06-09T20:15:17.664Z",
+        "updated_at": "2026-06-09T20:30:17.651Z",
         "source": "cron",
         "post_url": "",
         "error_summary": ""
@@ -61,7 +52,77 @@
         "status": "blocked",
         "reason": "not_approved",
         "attempts": 0,
-        "updated_at": "2026-06-09T20:15:16.821Z",
+        "updated_at": "2026-06-09T20:30:16.845Z",
+        "source": "cron",
+        "post_url": "",
+        "error_summary": ""
+      }
+    ],
+    "platform_fix_needed": [
+      {
+        "post_id": "FP-AUTO-263",
+        "platform": "Instagram",
+        "status": "failed",
+        "reason": "max_attempts_exceeded",
+        "attempts": 3,
+        "updated_at": "2026-06-09T20:30:19.304Z",
+        "source": "cron",
+        "post_url": "",
+        "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID."
+      },
+      {
+        "post_id": "FP-AUTO-265",
+        "platform": "Facebook",
+        "status": "failed",
+        "reason": "",
+        "attempts": 1,
+        "updated_at": "2026-06-09T02:01:38.028Z",
+        "source": "manual",
+        "post_url": "",
+        "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app."
+      }
+    ],
+    "latest_attention": [
+      {
+        "post_id": "FP-AUTO-263",
+        "platform": "Instagram",
+        "status": "failed",
+        "reason": "max_attempts_exceeded",
+        "attempts": 3,
+        "updated_at": "2026-06-09T20:30:19.304Z",
+        "source": "cron",
+        "post_url": "",
+        "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID."
+      },
+      {
+        "post_id": "FP-AUTO-261",
+        "platform": "YouTube Community",
+        "status": "blocked",
+        "reason": "not_approved",
+        "attempts": 0,
+        "updated_at": "2026-06-09T20:30:18.565Z",
+        "source": "cron",
+        "post_url": "",
+        "error_summary": ""
+      },
+      {
+        "post_id": "FP-AUTO-259",
+        "platform": "TikTok",
+        "status": "blocked",
+        "reason": "not_approved",
+        "attempts": 0,
+        "updated_at": "2026-06-09T20:30:17.651Z",
+        "source": "cron",
+        "post_url": "",
+        "error_summary": ""
+      },
+      {
+        "post_id": "FP-AUTO-258",
+        "platform": "Instagram",
+        "status": "blocked",
+        "reason": "not_approved",
+        "attempts": 0,
+        "updated_at": "2026-06-09T20:30:16.845Z",
         "source": "cron",
         "post_url": "",
         "error_summary": ""

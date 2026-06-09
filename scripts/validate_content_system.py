@@ -173,10 +173,10 @@ def validate_generated_outputs(failures):
     if SOCIAL_EXECUTION_SNAPSHOT.exists():
         execution_snapshot = json.loads(SOCIAL_EXECUTION_SNAPSHOT.read_text(encoding="utf-8"))
         summary = execution_snapshot.get("summary") or {}
-        if "updated_at" in execution_snapshot and "execution_count" in summary:
+        if "updated_at" in execution_snapshot and "execution_count" in summary and "approval_needed_count" in summary and "platform_fix_needed_count" in summary:
             ok(f"social execution snapshot tracks {summary.get('execution_count')} executor records")
         else:
-            fail("social_execution_snapshot.json missing summary or timestamp", failures)
+            fail("social_execution_snapshot.json missing categorized summary or timestamp", failures)
     else:
         fail("social_execution_snapshot.json missing; run scripts/capture_social_executions.py", failures)
     if SPOTIFY_SNAPSHOT.exists():
@@ -330,10 +330,10 @@ def validate_generated_outputs(failures):
         else:
             fail("promo_engine_status.json missing store verification history summary", failures)
         execution_summary = kpi.get("social_execution_summary") or {}
-        if "execution_count" in execution_summary and "status_counts" in execution_summary:
+        if "execution_count" in execution_summary and "status_counts" in execution_summary and "approval_needed_count" in execution_summary and "platform_fix_needed_count" in execution_summary:
             ok("promo engine includes social execution summary")
         else:
-            fail("promo_engine_status.json missing social execution summary", failures)
+            fail("promo_engine_status.json missing categorized social execution summary", failures)
         for command in verification_commands:
             if "scripts/capture_" not in str(command.get("command") or ""):
                 fail(f"store verification command for {command.get('service') or 'unknown service'} missing capture script", failures)
