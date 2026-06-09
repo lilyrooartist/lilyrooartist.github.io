@@ -68,6 +68,17 @@ def auth_headers(password: str = "") -> dict[str, str]:
     return headers
 
 
+def auth_method(password: str = "") -> str:
+    bearer = os.environ.get("LILYROO_EXECUTOR_BEARER_TOKEN", "").strip()
+    if not bearer and SOCIAL_ENV:
+        bearer = load_env(SOCIAL_ENV).get("EXECUTOR_BEARER_TOKEN", "").strip()
+    if bearer:
+        return "bearer"
+    if password or os.environ.get("LILYROO_ADMIN_PASSWORD", "").strip():
+        return "admin_password"
+    return "none"
+
+
 def fetch(url: str, password: str) -> tuple[int, dict, str]:
     request = urllib.request.Request(url, headers=auth_headers(password), method="GET")
     try:
@@ -142,6 +153,7 @@ def main() -> int:
         "http_status": status,
         "error": error or (payload.get("error") if isinstance(payload, dict) else ""),
         "password_supplied": bool(args.password),
+        "auth_method": auth_method(args.password),
         "summary": summary,
         "payload": {
             "ok": bool(payload.get("ok")) if isinstance(payload, dict) else False,

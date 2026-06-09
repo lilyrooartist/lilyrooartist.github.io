@@ -149,9 +149,9 @@ def refresh_command(name: str) -> str:
         "manual_metrics": "Update data/manual_social_stats.json with latest manual metrics.",
         "live_metrics": "python3 scripts/capture_live_metrics.py",
         "metrics_history": "python3 scripts/update_metrics_history.py --refresh-admin",
-        "executor_readiness": "LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py",
+        "executor_readiness": "python3 scripts/capture_executor_readiness.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py",
         "store_verification_history": "python3 scripts/verify_pending_store_links.py --refresh-admin",
-        "social_executions": "LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py && python3 scripts/update_promo_engine_status.py",
+        "social_executions": "python3 scripts/capture_social_executions.py && python3 scripts/update_promo_engine_status.py",
     }.get(name, "")
 
 

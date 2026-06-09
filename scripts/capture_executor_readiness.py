@@ -9,6 +9,14 @@ import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
+try:
+    from social_exec_common import SOCIAL_ENV, load_env
+except ImportError:
+    SOCIAL_ENV = None
+
+    def load_env(_path):
+        return {}
+
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "data" / "executor_readiness_snapshot.json"
@@ -16,12 +24,36 @@ DEFAULT_URL = "https://www.lilyroo.com/api/social/readiness"
 ADMIN_PASSWORD_HEADER = "X-Lilyroo-Admin-Password"
 
 
-def fetch(url: str, password: str) -> tuple[int, dict, str]:
-    request = urllib.request.Request(url, headers={
+def auth_headers(password: str = "") -> dict[str, str]:
+    headers = {
         "Accept": "application/json",
         "User-Agent": "LilyRooExecutorReadinessCapture/1.0",
-        ADMIN_PASSWORD_HEADER: password,
-    })
+    }
+    bearer = os.environ.get("LILYROO_EXECUTOR_BEARER_TOKEN", "").strip()
+    if not bearer and SOCIAL_ENV:
+        bearer = load_env(SOCIAL_ENV).get("EXECUTOR_BEARER_TOKEN", "").strip()
+    if bearer:
+        headers["Authorization"] = f"Bearer {bearer}"
+        return headers
+    password = password or os.environ.get("LILYROO_ADMIN_PASSWORD", "").strip()
+    if password:
+        headers[ADMIN_PASSWORD_HEADER] = password
+    return headers
+
+
+def auth_method(password: str = "") -> str:
+    bearer = os.environ.get("LILYROO_EXECUTOR_BEARER_TOKEN", "").strip()
+    if not bearer and SOCIAL_ENV:
+        bearer = load_env(SOCIAL_ENV).get("EXECUTOR_BEARER_TOKEN", "").strip()
+    if bearer:
+        return "bearer"
+    if password or os.environ.get("LILYROO_ADMIN_PASSWORD", "").strip():
+        return "admin_password"
+    return "none"
+
+
+def fetch(url: str, password: str) -> tuple[int, dict, str]:
+    request = urllib.request.Request(url, headers=auth_headers(password))
     try:
         with urllib.request.urlopen(request, timeout=25) as response:
             raw = response.read().decode("utf-8")
@@ -74,6 +106,7 @@ def main() -> int:
         "http_status": status,
         "error": error,
         "password_supplied": bool(args.password),
+        "auth_method": auth_method(args.password),
         "summary": summary,
         "payload": payload,
         "action_needed": "" if status == 200 else "Set LILYROO_ADMIN_PASSWORD and rerun to capture executor readiness.",

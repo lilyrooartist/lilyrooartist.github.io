@@ -155,10 +155,10 @@ def validate_generated_outputs(failures):
         fail("metrics_history.json missing; run scripts/update_metrics_history.py", failures)
     if EXECUTOR_READINESS.exists():
         readiness = json.loads(EXECUTOR_READINESS.read_text(encoding="utf-8"))
-        if "summary" in readiness and "updated_at" in readiness:
+        if "summary" in readiness and "updated_at" in readiness and readiness.get("auth_method") in {"bearer", "admin_password", "none"}:
             ok("executor readiness snapshot present")
         else:
-            fail("executor_readiness_snapshot.json missing summary or timestamp", failures)
+            fail("executor_readiness_snapshot.json missing summary, timestamp, or auth method", failures)
     else:
         fail("executor_readiness_snapshot.json missing; run scripts/capture_executor_readiness.py", failures)
     if STORE_VERIFICATION_HISTORY.exists():
@@ -174,10 +174,10 @@ def validate_generated_outputs(failures):
     if SOCIAL_EXECUTION_SNAPSHOT.exists():
         execution_snapshot = json.loads(SOCIAL_EXECUTION_SNAPSHOT.read_text(encoding="utf-8"))
         summary = execution_snapshot.get("summary") or {}
-        if "updated_at" in execution_snapshot and "execution_count" in summary and "approval_needed_count" in summary and "platform_fix_needed_count" in summary:
+        if "updated_at" in execution_snapshot and execution_snapshot.get("auth_method") in {"bearer", "admin_password", "none"} and "execution_count" in summary and "approval_needed_count" in summary and "platform_fix_needed_count" in summary:
             ok(f"social execution snapshot tracks {summary.get('execution_count')} executor records")
         else:
-            fail("social_execution_snapshot.json missing categorized summary or timestamp", failures)
+            fail("social_execution_snapshot.json missing categorized summary, timestamp, or auth method", failures)
     else:
         fail("social_execution_snapshot.json missing; run scripts/capture_social_executions.py", failures)
     if SPOTIFY_SNAPSHOT.exists():

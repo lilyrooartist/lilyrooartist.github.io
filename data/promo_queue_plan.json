@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-09T15:42:20.583384-04:00",
+  "generated_at": "2026-06-09T17:08:38.919044-04:00",
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
     "release_status": "data/distrokid_release_status.json"
@@ -101,11 +101,12 @@
   },
   "readiness_audit": {
     "source": "data/executor_readiness_snapshot.json",
-    "updated_at": "2026-06-09T19:35:48.248684Z",
-    "ok": false,
+    "updated_at": "2026-06-09T21:08:37.910190Z",
+    "ok": true,
     "counts": {
+      "blocked": 1,
       "manual_only": 2,
-      "unknown": 4
+      "ready_after_approval": 3
     },
     "rows": [
       {
@@ -113,32 +114,32 @@
         "platform": "X",
         "execution_mode": "auto",
         "approved": "no",
-        "state": "unknown",
-        "message": "Set LILYROO_ADMIN_PASSWORD and rerun to capture executor readiness."
+        "state": "ready_after_approval",
+        "message": "Ready after approval."
       },
       {
         "id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
         "platform": "Instagram",
         "execution_mode": "auto",
         "approved": "no",
-        "state": "unknown",
-        "message": "Set LILYROO_ADMIN_PASSWORD and rerun to capture executor readiness."
+        "state": "ready_after_approval",
+        "message": "Ready after approval."
       },
       {
         "id": "FP-PLAN-TWELVE-DOLLARS-TIKTOK",
         "platform": "TikTok",
         "execution_mode": "auto",
         "approved": "no",
-        "state": "unknown",
-        "message": "Set LILYROO_ADMIN_PASSWORD and rerun to capture executor readiness."
+        "state": "blocked",
+        "message": "Executor credentials or platform setup are not ready."
       },
       {
         "id": "FP-PLAN-TWELVE-DOLLARS-FACEBOOK",
         "platform": "Facebook",
         "execution_mode": "auto",
         "approved": "no",
-        "state": "unknown",
-        "message": "Set LILYROO_ADMIN_PASSWORD and rerun to capture executor readiness."
+        "state": "ready_after_approval",
+        "message": "Ready after approval."
       },
       {
         "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",

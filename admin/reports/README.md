@@ -8,10 +8,12 @@ python3 scripts/capture_spotify_release.py
 python3 scripts/capture_live_metrics.py
 python3 scripts/update_metrics_history.py --refresh-admin
 python3 scripts/verify_pending_store_links.py --refresh-admin
-LILYROO_ADMIN_PASSWORD="$LILYROO_ADMIN_PASSWORD" python3 scripts/capture_executor_readiness.py
-LILYROO_ADMIN_PASSWORD="$LILYROO_ADMIN_PASSWORD" python3 scripts/capture_social_executions.py
+python3 scripts/capture_executor_readiness.py
+python3 scripts/capture_social_executions.py
 python3 scripts/update_weekly_report.py
 ```
+
+The executor capture scripts use `LILYROO_EXECUTOR_BEARER_TOKEN` when available and fall back to `LILYROO_ADMIN_PASSWORD`.
 
 Approve a reviewed live queue row with:
 `python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --refresh-admin`

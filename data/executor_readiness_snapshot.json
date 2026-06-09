@@ -1,31 +1,74 @@
 {
-  "ok": false,
-  "updated_at": "2026-06-09T19:35:48.248684Z",
+  "ok": true,
+  "updated_at": "2026-06-09T21:08:37.910190Z",
   "source": "lilyroo-social-executor-readiness",
   "url": "https://www.lilyroo.com/api/social/readiness",
-  "http_status": 401,
-  "error": "HTTP 401: Unauthorized",
+  "http_status": 200,
+  "error": "",
   "password_supplied": false,
+  "auth_method": "bearer",
   "summary": {
-    "ready_platforms": [],
-    "blocked_platforms": [
+    "ready_platforms": [
       "X",
       "Instagram",
-      "TikTok",
       "Facebook",
       "YouTube Community"
     ],
+    "blocked_platforms": [
+      "TikTok"
+    ],
     "platforms": {
-      "X": false,
-      "Instagram": false,
+      "X": true,
+      "Instagram": true,
       "TikTok": false,
-      "Facebook": false,
-      "YouTube Community": false
+      "Facebook": true,
+      "YouTube Community": true
     }
   },
   "payload": {
-    "ok": false,
-    "error": "Unauthorized"
+    "ok": true,
+    "admin_password_auth": true,
+    "execute_auth": true,
+    "scheduler": {
+      "enabled": true,
+      "queue_url": "https://www.lilyroo.com/admin/future-posts.json",
+      "max_attempts": 3
+    },
+    "platforms": {
+      "x": {
+        "text_posting_ready": true,
+        "oauth2_user_token_present": false,
+        "oauth1_complete": true,
+        "media_map_present": false
+      },
+      "facebook": {
+        "ready": true
+      },
+      "instagram": {
+        "ready": true,
+        "api": "facebook-login",
+        "account_id_source": "FB_PAGE_ID"
+      },
+      "tiktok": {
+        "ready": false,
+        "access_token_present": false,
+        "refresh_config_present": false,
+        "missing_secrets": [
+          "TIKTOK_CLIENT_KEY",
+          "TIKTOK_CLIENT_SECRET",
+          "TIKTOK_REFRESH_TOKEN"
+        ],
+        "public_posting_approved": false,
+        "default_privacy": "PUBLIC_TO_EVERYONE"
+      },
+      "youtube": {
+        "ready": true,
+        "missing_secrets": [],
+        "client_secret_present": true,
+        "media_map_present": true,
+        "privacy_status": "public"
+      }
+    }
   },
-  "action_needed": "Set LILYROO_ADMIN_PASSWORD and rerun to capture executor readiness."
+  "action_needed": ""
 }
