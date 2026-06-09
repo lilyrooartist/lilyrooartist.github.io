@@ -825,10 +825,11 @@
 }</script>
 
 <script type="application/json" id="embedded-promo-engine-status">{
-  "generated_at": "2026-06-09T12:58:24.688040+00:00",
+  "generated_at": "2026-06-09T13:09:19.836105+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
+    "promo_queue_plan": "data/promo_queue_plan.json",
     "published_log": "admin/content/Published_Log.csv",
     "manual_metrics": "data/manual_social_stats.json",
     "live_metrics": "data/live_social_metrics.json"
@@ -854,6 +855,7 @@
       "release_date": "2026-06-05",
       "store_link_count": 5,
       "queued_posts": 9,
+      "planned_posts": 0,
       "published_posts": 3,
       "latest_published": "2026-06-07",
       "queued_platforms": [
@@ -863,6 +865,8 @@
         "X",
         "YouTube Community"
       ],
+      "planned_platforms": [],
+      "approved_plan_platforms": [],
       "published_platforms": [
         "Facebook",
         "X"
@@ -872,20 +876,31 @@
         "X": 2
       },
       "missing_platforms": [],
+      "planned_missing_platforms": [],
+      "unplanned_missing_platforms": [],
       "actions": [
         "Refresh pending manual metrics before weekly reporting."
       ]
     },
     {
       "title": "Twelve Dollars",
-      "status": "no_active_promo",
+      "status": "planned_promo",
       "primary_cta": "YouTube playlist until store links are verified",
       "release_date": "pending public store verification",
       "store_link_count": 2,
       "queued_posts": 0,
+      "planned_posts": 5,
       "published_posts": 0,
       "latest_published": "",
       "queued_platforms": [],
+      "planned_platforms": [
+        "Facebook",
+        "Instagram",
+        "TikTok",
+        "X",
+        "YouTube Community"
+      ],
+      "approved_plan_platforms": [],
       "published_platforms": [],
       "published_platform_counts": {},
       "missing_platforms": [
@@ -895,10 +910,18 @@
         "Facebook",
         "YouTube Community"
       ],
+      "planned_missing_platforms": [
+        "X",
+        "Instagram",
+        "TikTok",
+        "Facebook",
+        "YouTube Community"
+      ],
+      "unplanned_missing_platforms": [],
       "actions": [
         "Verify and add remaining public store links.",
-        "Create the next cross-platform promo queue for this release.",
-        "Add promo coverage for X, Instagram, TikTok, Facebook, YouTube Community.",
+        "Review and approve draft promo queue rows for this release.",
+        "Approve planned promo coverage for X, Instagram, TikTok, Facebook, YouTube Community.",
         "Refresh pending manual metrics before weekly reporting."
       ]
     },
@@ -909,9 +932,14 @@
       "release_date": "2026-07-01",
       "store_link_count": 1,
       "queued_posts": 0,
+      "planned_posts": 1,
       "published_posts": 13,
       "latest_published": "2026-05-09",
       "queued_platforms": [],
+      "planned_platforms": [
+        "YouTube Community"
+      ],
+      "approved_plan_platforms": [],
       "published_platforms": [
         "Facebook",
         "Instagram",
@@ -929,10 +957,14 @@
       "missing_platforms": [
         "YouTube Community"
       ],
+      "planned_missing_platforms": [
+        "YouTube Community"
+      ],
+      "unplanned_missing_platforms": [],
       "actions": [
         "Verify and add remaining public store links.",
-        "Create the next cross-platform promo queue for this release.",
-        "Add promo coverage for YouTube Community.",
+        "Review and approve draft promo queue rows for this release.",
+        "Approve planned promo coverage for YouTube Community.",
         "Refresh pending manual metrics before weekly reporting."
       ]
     }
@@ -940,12 +972,12 @@
   "next_actions": [
     "I Learned It All in Fifteen Seconds: Refresh pending manual metrics before weekly reporting.",
     "Twelve Dollars: Verify and add remaining public store links.",
-    "Twelve Dollars: Create the next cross-platform promo queue for this release.",
-    "Twelve Dollars: Add promo coverage for X, Instagram, TikTok, Facebook, YouTube Community.",
+    "Twelve Dollars: Review and approve draft promo queue rows for this release.",
+    "Twelve Dollars: Approve planned promo coverage for X, Instagram, TikTok, Facebook, YouTube Community.",
     "Twelve Dollars: Refresh pending manual metrics before weekly reporting.",
     "Analog Myth: Verify and add remaining public store links.",
-    "Analog Myth: Create the next cross-platform promo queue for this release.",
-    "Analog Myth: Add promo coverage for YouTube Community."
+    "Analog Myth: Review and approve draft promo queue rows for this release.",
+    "Analog Myth: Approve planned promo coverage for YouTube Community."
   ]
 }</script>
 
@@ -1023,7 +1055,7 @@
 }</script>
 
 <script type="application/json" id="embedded-promo-queue-plan">{
-  "generated_at": "2026-06-09T08:58:24.726468-04:00",
+  "generated_at": "2026-06-09T09:09:19.803121-04:00",
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
     "release_status": "data/distrokid_release_status.json"
@@ -2062,6 +2094,7 @@
 
   function promoHealthClass(status){
     if(status==='healthy') return 'ok';
+    if(status==='planned_promo') return 'neutral';
     if(status==='no_active_promo') return 'bad';
     if(status==='needs_attention') return 'warn';
     return 'neutral';
@@ -2069,6 +2102,7 @@
 
   function promoHealthLabel(status){
     if(status==='healthy') return 'Healthy';
+    if(status==='planned_promo') return 'Planned promo';
     if(status==='no_active_promo') return 'No active promo';
     if(status==='needs_attention') return 'Needs attention';
     return status?'Tracked':'Unknown';
@@ -2094,14 +2128,22 @@
       </div>
     </div>`;
     const releaseItems=releases.map(release=>{
-      const platforms=(release.missing_platforms||[]).length
-        ? `Missing: ${(release.missing_platforms||[]).join(', ')}`
-        : 'Platform coverage complete';
+      const planned=(release.planned_missing_platforms||[]).length
+        ? `Planned: ${(release.planned_missing_platforms||[]).join(', ')}`
+        : '';
+      const unplanned=(release.unplanned_missing_platforms||[]).length
+        ? `Missing: ${(release.unplanned_missing_platforms||[]).join(', ')}`
+        : '';
+      const platforms=[planned,unplanned].filter(Boolean).join(' - ') || 'Platform coverage complete';
+      const draftCount=Number(release.planned_posts||0);
+      const queueMeta=draftCount
+        ? `${escapeHtml(release.published_posts||0)} posted - ${escapeHtml(release.queued_posts||0)} queued - ${escapeHtml(draftCount)} draft - ${escapeHtml(platforms)}`
+        : `${escapeHtml(release.published_posts||0)} posted - ${escapeHtml(release.queued_posts||0)} queued - ${escapeHtml(platforms)}`;
       return `<div class="queue-item">
         <div class="queue-top">
           <div>
             <div class="queue-title">${escapeHtml(release.title||'Untitled release')}</div>
-            <div class="queue-meta">${escapeHtml(release.published_posts||0)} posted - ${escapeHtml(release.queued_posts||0)} queued - ${escapeHtml(platforms)}</div>
+            <div class="queue-meta">${queueMeta}</div>
           </div>
           <span class="status-chip ${escapeHtml(promoHealthClass(release.status))}">${escapeHtml(promoHealthLabel(release.status))}</span>
         </div>

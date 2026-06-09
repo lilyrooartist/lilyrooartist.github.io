@@ -13,6 +13,7 @@ RELEASE_STATUS = ROOT / "data" / "distrokid_release_status.json"
 MANUAL_METRICS = ROOT / "data" / "manual_social_stats.json"
 LIVE_METRICS = ROOT / "data" / "live_social_metrics.json"
 SCHEDULED = ROOT / "data" / "scheduled_posts.csv"
+PROMO_QUEUE_PLAN = ROOT / "data" / "promo_queue_plan.json"
 PUBLISHED = ROOT / "admin" / "content" / "Published_Log.csv"
 OUT = ROOT / "data" / "promo_engine_status.json"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
@@ -113,10 +114,19 @@ def metric_state(manual, live):
     }
 
 
+def plan_rows_for_release(plan, release_title: str, track_lookup: set[str]):
+    rows = []
+    for post in plan.get("posts") or []:
+        if row_release(post, release_title, track_lookup):
+            rows.append(post)
+    return rows
+
+
 def build_status():
     release_status = read_json(RELEASE_STATUS, {})
     manual = read_json(MANUAL_METRICS, {})
     live = read_json(LIVE_METRICS, {})
+    promo_plan = read_json(PROMO_QUEUE_PLAN, {})
     scheduled_rows = read_csv(SCHEDULED)
     published_rows = read_csv(PUBLISHED)
     metrics = metric_state(manual, live)
@@ -130,26 +140,43 @@ def build_status():
 
         queued = [row for row in scheduled_rows if row_release(row, title, track_lookup)]
         published = [row for row in published_rows if row_release(row, title, track_lookup)]
+        planned = plan_rows_for_release(promo_plan, title, track_lookup)
         queued_platforms = sorted({platform_bucket(row.get("platform") or "") for row in queued if row.get("platform")})
         published_platforms = sorted({platform_bucket(row.get("platform") or "") for row in published if row.get("platform")})
+        planned_platforms = sorted({platform_bucket(row.get("platform") or "") for row in planned if row.get("platform")})
+        approved_plan_platforms = sorted({
+            platform_bucket(row.get("platform") or "")
+            for row in planned
+            if row.get("platform") and str(row.get("approved") or "").lower() == "yes"
+        })
         covered_platforms = set(queued_platforms) | set(published_platforms)
         missing_platforms = [platform for platform in PROMO_PLATFORMS if platform not in covered_platforms]
+        planned_missing_platforms = [platform for platform in missing_platforms if platform in planned_platforms]
+        unplanned_missing_platforms = [platform for platform in missing_platforms if platform not in planned_platforms]
         link_count = release_link_count(release)
 
         actions = []
         if link_count < 3:
             actions.append("Verify and add remaining public store links.")
-        if not queued:
+        if not queued and planned:
+            actions.append("Review and approve draft promo queue rows for this release.")
+        elif not queued:
             actions.append("Create the next cross-platform promo queue for this release.")
-        if missing_platforms:
-            actions.append("Add promo coverage for " + ", ".join(missing_platforms) + ".")
+        if approved_plan_platforms:
+            actions.append("Apply approved promo plan rows and sync the future queue.")
+        if planned_missing_platforms:
+            actions.append("Approve planned promo coverage for " + ", ".join(planned_missing_platforms) + ".")
+        if unplanned_missing_platforms:
+            actions.append("Add promo coverage for " + ", ".join(unplanned_missing_platforms) + ".")
         if metrics["pending_manual_fields"]:
             actions.append("Refresh pending manual metrics before weekly reporting.")
 
         status = "healthy"
         if actions:
             status = "needs_attention"
-        if not published and not queued:
+        if not published and not queued and planned:
+            status = "planned_promo"
+        elif not published and not queued:
             status = "no_active_promo"
 
         platform_counts = Counter(platform_bucket(row.get("platform") or "") for row in published if row.get("platform"))
@@ -165,12 +192,17 @@ def build_status():
             "release_date": release.get("release_date", "pending"),
             "store_link_count": link_count,
             "queued_posts": len(queued),
+            "planned_posts": len(planned),
             "published_posts": len(published),
             "latest_published": latest_published,
             "queued_platforms": queued_platforms,
+            "planned_platforms": planned_platforms,
+            "approved_plan_platforms": approved_plan_platforms,
             "published_platforms": published_platforms,
             "published_platform_counts": dict(sorted(platform_counts.items())),
             "missing_platforms": missing_platforms,
+            "planned_missing_platforms": planned_missing_platforms,
+            "unplanned_missing_platforms": unplanned_missing_platforms,
             "actions": actions[:4],
         }
         releases.append(release_result)
@@ -183,6 +215,7 @@ def build_status():
         "source": {
             "release_status": str(RELEASE_STATUS.relative_to(ROOT)),
             "scheduled_posts": str(SCHEDULED.relative_to(ROOT)),
+            "promo_queue_plan": str(PROMO_QUEUE_PLAN.relative_to(ROOT)),
             "published_log": str(PUBLISHED.relative_to(ROOT)),
             "manual_metrics": str(MANUAL_METRICS.relative_to(ROOT)),
             "live_metrics": str(LIVE_METRICS.relative_to(ROOT)),

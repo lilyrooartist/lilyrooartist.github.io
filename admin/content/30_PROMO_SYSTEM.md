@@ -26,6 +26,9 @@ Draft next queue rows from those gaps with:
 
 This writes `data/promo_queue_plan.json`, embeds it into `/admin`, and keeps the output in draft-plan mode. Review the rows before copying approved items into `data/scheduled_posts.csv`.
 
+For a full refresh where Promo Health should account for the latest draft plan, run:
+`python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py`
+
 Safe apply workflow:
 `python3 scripts/apply_promo_queue_plan.py`
 
