@@ -139,6 +139,15 @@
     .queue-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
     .queue-title{font-weight:800;color:#f4f7ff}
     .queue-meta{font-size:12px;color:#9ba3bf;margin-top:4px}
+    .release-list{display:grid;gap:10px}
+    .release-item{border:1px solid #26314e;border-radius:12px;padding:10px;background:#101523}
+    .release-title{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;font-weight:850;color:#f4f7ff}
+    .release-meta{font-size:12px;color:#9ba3bf;margin-top:5px;line-height:1.4}
+    .release-links{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+    .release-links a{font-size:11px;text-decoration:none;border:1px solid #334062;border-radius:999px;padding:4px 7px;background:#111827;color:#cfe3ff}
+    .release-links a:hover{border-color:#4f79c6;background:#14203a}
+    .release-open-checks{margin:10px 0 0;padding-left:18px;color:#cdd5ec;font-size:12px;line-height:1.4}
+    .release-open-checks li{margin:5px 0}
     .priority-list{margin:0;padding-left:20px;color:#cdd5ec}
     .priority-list li{margin:7px 0}
     .source-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -421,6 +430,13 @@
           </div>
 
           <aside class="report-stack">
+            <section class="report-card" aria-labelledby="release-rollout-heading">
+              <h2 id="release-rollout-heading">Release Rollout</h2>
+              <div class="release-list" id="release-rollout">
+                <div class="muted">Loading release status...</div>
+              </div>
+            </section>
+
             <section class="report-card" aria-labelledby="pipeline-heading">
               <h2 id="pipeline-heading">Pipeline Health</h2>
               <div class="queue-list" id="pipeline-health">
@@ -448,6 +464,7 @@
                 <a class="source-link" href="reports/" target="_blank" rel="noopener">Reports index</a>
                 <a class="source-link" href="reports/weekly-social-report.md" target="_blank" rel="noopener">Weekly report</a>
                 <a class="source-link" href="../data/manual_social_stats.json" target="_blank" rel="noopener">Manual stats</a>
+                <a class="source-link" href="../data/distrokid_release_status.json" target="_blank" rel="noopener">Release status</a>
                 <a class="source-link" href="future-posts.json" target="_blank" rel="noopener">Future queue</a>
               </div>
             </section>
@@ -1611,6 +1628,68 @@
     </tr>`).join('');
   }
 
+  function releaseStatusClass(release){
+    const text=[
+      release?.distrokid_status,
+      release?.store_status,
+      release?.release_date,
+      release?.primary_cta
+    ].join(' ').toLowerCase();
+    if(text.includes('pending') || text.includes('verify')) return 'warn';
+    if(text.includes('public') || text.includes('verified')) return 'ok';
+    return 'neutral';
+  }
+
+  function releaseStatusLabel(release){
+    const text=[
+      release?.distrokid_status,
+      release?.store_status,
+      release?.release_date,
+      release?.primary_cta
+    ].join(' ').toLowerCase();
+    if(text.includes('pending public store verification')) return 'Pending stores';
+    if(text.includes('pending') || text.includes('verify')) return 'Needs check';
+    if(text.includes('public') || text.includes('verified')) return 'Live';
+    return 'Tracked';
+  }
+
+  function releaseLinkList(release){
+    const links=[
+      ['Spotify',release?.spotify_url],
+      ['Apple',release?.apple_music_url],
+      ['YT Music',release?.youtube_music_url],
+      ['HyperFollow',release?.hyperfollow_url],
+      ['Playlist',release?.youtube_playlist_url]
+    ].filter(([,url])=>safeUrl(url));
+    if(!links.length) return '';
+    return `<div class="release-links">${links.map(([label,url])=>`<a href="${escapeHtml(safeUrl(url))}" target="_blank" rel="noopener">${escapeHtml(label)}</a>`).join('')}</div>`;
+  }
+
+  function renderReleaseRollout(status){
+    const root=document.getElementById('release-rollout');
+    if(!root) return;
+    const releases=Array.isArray(status?.releases)?status.releases:[];
+    if(!releases.length){
+      root.innerHTML='<div class="muted">No release status file found.</div>';
+      return;
+    }
+    const updated=status.updated_at?`<div class="queue-meta">Updated ${escapeHtml(formatQueueDate(status.updated_at))}</div>`:'';
+    const items=releases.map(release=>`<div class="release-item">
+      <div class="release-title">
+        <span>${escapeHtml(release.title||'Untitled release')}</span>
+        <span class="status-chip ${escapeHtml(releaseStatusClass(release))}">${escapeHtml(releaseStatusLabel(release))}</span>
+      </div>
+      <div class="release-meta">${escapeHtml(release.track_count||'--')} tracks - ${escapeHtml(release.release_date||'date pending')}</div>
+      <div class="release-meta"><b>CTA:</b> ${escapeHtml(release.primary_cta||'pending')}</div>
+      <div class="release-meta">${escapeHtml(release.store_status||release.distrokid_status||'status pending')}</div>
+      ${releaseLinkList(release)}
+    </div>`).join('');
+    const checks=Array.isArray(status.open_checks)&&status.open_checks.length
+      ? `<ul class="release-open-checks">${status.open_checks.slice(0,3).map(check=>`<li>${escapeHtml(check)}</li>`).join('')}</ul>`
+      : '';
+    root.innerHTML=`${updated}${items}${checks}`;
+  }
+
   function renderPipelineHealth(queuePayload,readiness,report,metrics){
     const root=document.getElementById('pipeline-health');
     if(!root) return;
@@ -1672,10 +1751,11 @@
 
   async function loadReportsDashboard(){
     if(!document.getElementById('reports-period')) return;
-    const [md,publishedCsv,queuePayload,readiness,metrics,executions]=await Promise.all([
+    const [md,publishedCsv,queuePayload,releaseStatus,readiness,metrics,executions]=await Promise.all([
       fetchTextOrEmpty(localPath('/admin/reports/weekly-social-report.md')),
       fetchTextOrEmpty(localPath('/admin/content/Published_Log.csv')),
       fetchJsonOr(localPath('/admin/future-posts.json'),{}),
+      fetchJsonOr(localPath('/data/distrokid_release_status.json'),{}),
       readinessPromise,
       metricsPromise,
       executionsPromise
@@ -1690,6 +1770,7 @@
     renderMetricCards(report,publishedRows,queuePosts,metrics);
     renderPlatformRows(report,publishedRows,readiness,metrics);
     renderRecentPublishing(publishedRows);
+    renderReleaseRollout(releaseStatus);
     renderPipelineHealth(queuePayload,readiness,report,metrics);
     renderNextPosts(queuePayload,executions);
     renderPriorities(report);
