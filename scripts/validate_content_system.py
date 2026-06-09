@@ -13,6 +13,7 @@ QUIPS = CONTENT / "20_QUIPS_BANK.csv"
 QUEUE = ROOT / "data" / "scheduled_posts.csv"
 FUTURE = ROOT / "admin" / "future-posts.json"
 LIVE_METRICS = ROOT / "data" / "live_social_metrics.json"
+METRICS_HISTORY = ROOT / "data" / "metrics_history.json"
 SPOTIFY_SNAPSHOT = ROOT / "data" / "spotify_release_snapshot.json"
 APPLE_MUSIC_SNAPSHOT = ROOT / "data" / "apple_music_release_snapshot.json"
 YOUTUBE_PUBLIC = ROOT / "data" / "youtube_public_snapshot.json"
@@ -28,6 +29,7 @@ PROMO_QUEUE_APPLY = ROOT / "scripts" / "apply_promo_queue_plan.py"
 PROMO_QUEUE_APPROVE = ROOT / "scripts" / "approve_promo_queue_plan.py"
 MANUAL_METRICS_UPDATER = ROOT / "scripts" / "update_manual_social_stats.py"
 STORE_LINK_VERIFIER = ROOT / "scripts" / "verify_pending_store_links.py"
+METRICS_HISTORY_UPDATER = ROOT / "scripts" / "update_metrics_history.py"
 REPORT = ROOT / "admin" / "reports" / "weekly-social-report.md"
 INDEX = CONTENT / "content_index.json"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
@@ -135,6 +137,16 @@ def validate_generated_outputs(failures):
             fail("live social metrics snapshot has no platforms", failures)
     else:
         fail("live_social_metrics.json missing; run scripts/capture_live_metrics.py", failures)
+    if METRICS_HISTORY.exists():
+        history_snapshot = json.loads(METRICS_HISTORY.read_text(encoding="utf-8"))
+        snapshots = history_snapshot.get("snapshots") or []
+        latest = snapshots[-1] if snapshots else {}
+        if snapshots and latest.get("date") and "delta_from_previous" in latest:
+            ok(f"metrics history has {len(snapshots)} snapshot(s)")
+        else:
+            fail("metrics_history.json missing snapshots or deltas", failures)
+    else:
+        fail("metrics_history.json missing; run scripts/update_metrics_history.py", failures)
     if SPOTIFY_SNAPSHOT.exists():
         snapshot = json.loads(SPOTIFY_SNAPSHOT.read_text(encoding="utf-8"))
         if snapshot.get("ok") and snapshot.get("title") and snapshot.get("thumbnail_url"):
@@ -250,6 +262,11 @@ def validate_generated_outputs(failures):
             ok("promo engine recognizes live API-covered manual metric fields")
         else:
             fail("promo_engine_status.json missing API-covered manual metric evidence", failures)
+        history = kpi.get("metrics_history") or {}
+        if history.get("snapshot_count") and history.get("latest_date"):
+            ok(f"promo engine metrics history tracks {history.get('snapshot_count')} snapshot(s)")
+        else:
+            fail("promo_engine_status.json missing metrics history KPI summary", failures)
         music_site_counts = kpi.get("music_site_state_counts") or {}
         release_services = [
             service
@@ -389,6 +406,14 @@ def validate_generated_outputs(failures):
             fail("verify_pending_store_links.py missing capture or refresh support", failures)
     else:
         fail("verify_pending_store_links.py missing", failures)
+    if METRICS_HISTORY_UPDATER.exists():
+        history_text = METRICS_HISTORY_UPDATER.read_text(encoding="utf-8")
+        if "metrics_history.json" in history_text and "--refresh-admin" in history_text:
+            ok("metrics history updater can refresh admin")
+        else:
+            fail("update_metrics_history.py missing history or refresh support", failures)
+    else:
+        fail("update_metrics_history.py missing", failures)
 
 
 def validate_report(failures):

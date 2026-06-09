@@ -1,12 +1,13 @@
 {
-  "generated_at": "2026-06-09T19:06:14.215524+00:00",
+  "generated_at": "2026-06-09T19:23:32.575904+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
     "promo_queue_plan": "data/promo_queue_plan.json",
     "published_log": "admin/content/Published_Log.csv",
     "manual_metrics": "data/manual_social_stats.json",
-    "live_metrics": "data/live_social_metrics.json"
+    "live_metrics": "data/live_social_metrics.json",
+    "metrics_history": "data/metrics_history.json"
   },
   "objective": "Promote Lily Roo releases and keep lilyroo.com/admin status and metrics current.",
   "kpi": {
@@ -118,6 +119,66 @@
       }
     ],
     "live_metrics_updated_at": "2026-06-09T14:06:46.496Z",
+    "metrics_history": {
+      "snapshot_count": 1,
+      "updated_at": "2026-06-09T19:22:44.862530Z",
+      "latest_date": "2026-06-09",
+      "latest": {
+        "date": "2026-06-09",
+        "captured_at": "2026-06-09T19:22:44.862530Z",
+        "live_metrics_updated_at": "2026-06-09T14:06:46.496Z",
+        "youtube": {
+          "subscribers": 5,
+          "total_views": 879,
+          "video_count": 28
+        },
+        "facebook": {
+          "followers": 0,
+          "page_likes": 0,
+          "reach_7d": null
+        },
+        "spotify": {
+          "artist_followers": null,
+          "monthly_listeners": null,
+          "release_streams": null,
+          "saves": null
+        },
+        "publishing": {
+          "published_30d": 3,
+          "published_total": 17
+        },
+        "queue": {
+          "approved_upcoming": 2,
+          "approved_total": 6,
+          "scheduled_total": 9
+        },
+        "delta_from_previous": {
+          "youtube.subscribers": null,
+          "youtube.total_views": null,
+          "youtube.video_count": null,
+          "facebook.followers": null,
+          "facebook.page_likes": null,
+          "publishing.published_30d": null,
+          "publishing.published_total": null,
+          "queue.approved_upcoming": null,
+          "queue.approved_total": null,
+          "queue.scheduled_total": null
+        }
+      },
+      "previous_date": "",
+      "delta_from_previous": {
+        "youtube.subscribers": null,
+        "youtube.total_views": null,
+        "youtube.video_count": null,
+        "facebook.followers": null,
+        "facebook.page_likes": null,
+        "publishing.published_30d": null,
+        "publishing.published_total": null,
+        "queue.approved_upcoming": null,
+        "queue.approved_total": null,
+        "queue.scheduled_total": null
+      }
+    },
     "music_site_state_counts": {
       "Live": 8,
       "Pending": 7,
@@ -135,23 +196,23 @@
     "healthy_releases": 0,
     "tracked_releases": 3,
     "open_action_count": 9,
-    "fresh_sources": 6,
+    "fresh_sources": 7,
     "stale_sources": 0,
     "missing_sources": 0
   },
   "freshness": {
     "summary": {
-      "fresh": 6,
+      "fresh": 7,
       "stale": 0,
       "missing": 0,
-      "checked_at": "2026-06-09T19:06:14.215524+00:00"
+      "checked_at": "2026-06-09T19:23:32.575904+00:00"
     },
     "sources": [
       {
         "name": "release_status",
         "path": "data/distrokid_release_status.json",
         "status": "fresh",
-        "age_hours": 17.3,
+        "age_hours": 17.6,
         "max_age_hours": 72,
         "timestamp": "2026-06-09T01:47:42+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin; update data/distrokid_release_status.json when a public URL is verified."
@@ -160,7 +221,7 @@
         "name": "scheduled_posts",
         "path": "data/scheduled_posts.csv",
         "status": "fresh",
-        "age_hours": 45.5,
+        "age_hours": 45.7,
         "max_age_hours": 72,
         "timestamp": "2026-06-07T21:38:44.418468+00:00",
         "refresh_command": "python3 scripts/sync_future_posts.py"
@@ -169,7 +230,7 @@
         "name": "promo_queue_plan",
         "path": "data/promo_queue_plan.json",
         "status": "fresh",
-        "age_hours": 0.9,
+        "age_hours": 1.2,
         "max_age_hours": 24,
         "timestamp": "2026-06-09T18:09:15.572959+00:00",
         "refresh_command": "python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
@@ -178,7 +239,7 @@
         "name": "published_log",
         "path": "admin/content/Published_Log.csv",
         "status": "fresh",
-        "age_hours": 54.5,
+        "age_hours": 54.8,
         "max_age_hours": 168,
         "timestamp": "2026-06-07T12:36:37.141276+00:00",
         "refresh_command": "Export or append latest published posts to admin/content/Published_Log.csv."
@@ -187,7 +248,7 @@
         "name": "manual_metrics",
         "path": "data/manual_social_stats.json",
         "status": "fresh",
-        "age_hours": 51.3,
+        "age_hours": 51.6,
         "max_age_hours": 72,
         "timestamp": "2026-06-07T15:47:26.729764+00:00",
         "refresh_command": "Update data/manual_social_stats.json with latest manual metrics."
@@ -196,10 +257,19 @@
         "name": "live_metrics",
         "path": "data/live_social_metrics.json",
         "status": "fresh",
-        "age_hours": 5.0,
+        "age_hours": 5.3,
         "max_age_hours": 24,
         "timestamp": "2026-06-09T14:06:46.496000+00:00",
         "refresh_command": "python3 scripts/capture_live_metrics.py"
+      },
+      {
+        "name": "metrics_history",
+        "path": "data/metrics_history.json",
+        "status": "fresh",
+        "age_hours": 0.0,
+        "max_age_hours": 24,
+        "timestamp": "2026-06-09T19:22:44.862530+00:00",
+        "refresh_command": "python3 scripts/update_metrics_history.py --refresh-admin"
       }
     ],
     "actions": []

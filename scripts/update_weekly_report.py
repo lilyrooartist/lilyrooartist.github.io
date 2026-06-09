@@ -274,6 +274,7 @@ md = f'''# Weekly Social Report — Lily Roo
 - Capture Spotify public release metadata: `python3 scripts/capture_spotify_release.py`
 - Capture Apple Music public release metadata: `python3 scripts/capture_apple_music_release.py`
 - Capture live API metrics: `python3 scripts/capture_live_metrics.py`
+- Update metrics history: `python3 scripts/update_metrics_history.py --refresh-admin`
 - Regenerate via: `python3 scripts/update_weekly_report.py`
 - Source overrides: `data/manual_social_stats.json`
 '''

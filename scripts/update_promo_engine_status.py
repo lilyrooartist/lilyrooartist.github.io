@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parent.parent
 RELEASE_STATUS = ROOT / "data" / "distrokid_release_status.json"
 MANUAL_METRICS = ROOT / "data" / "manual_social_stats.json"
 LIVE_METRICS = ROOT / "data" / "live_social_metrics.json"
+METRICS_HISTORY = ROOT / "data" / "metrics_history.json"
 SCHEDULED = ROOT / "data" / "scheduled_posts.csv"
 PROMO_QUEUE_PLAN = ROOT / "data" / "promo_queue_plan.json"
 PUBLISHED = ROOT / "admin" / "content" / "Published_Log.csv"
@@ -34,6 +35,7 @@ SOURCE_MAX_AGE_HOURS = {
     "published_log": 168,
     "manual_metrics": 72,
     "live_metrics": 24,
+    "metrics_history": 24,
 }
 
 RELEASE_TRACKS = {
@@ -140,10 +142,11 @@ def refresh_command(name: str) -> str:
         "published_log": "Export or append latest published posts to admin/content/Published_Log.csv.",
         "manual_metrics": "Update data/manual_social_stats.json with latest manual metrics.",
         "live_metrics": "python3 scripts/capture_live_metrics.py",
+        "metrics_history": "python3 scripts/update_metrics_history.py --refresh-admin",
     }.get(name, "")
 
 
-def source_freshness(release_status, manual, live, promo_plan, now: datetime):
+def source_freshness(release_status, manual, live, metrics_history, promo_plan, now: datetime):
     rows = [
         freshness_row("release_status", RELEASE_STATUS, release_status, now),
         freshness_row("scheduled_posts", SCHEDULED, None, now),
@@ -151,6 +154,7 @@ def source_freshness(release_status, manual, live, promo_plan, now: datetime):
         freshness_row("published_log", PUBLISHED, None, now),
         freshness_row("manual_metrics", MANUAL_METRICS, manual, now),
         freshness_row("live_metrics", LIVE_METRICS, live, now),
+        freshness_row("metrics_history", METRICS_HISTORY, metrics_history, now),
     ]
     stale = [row for row in rows if row["status"] == "stale"]
     missing = [row for row in rows if row["status"] == "missing"]
@@ -295,6 +299,21 @@ def metric_collection_reason(platform: str) -> str:
     }.get(platform, "Manual platform export required.")
 
 
+def metrics_history_state(metrics_history):
+    snapshots = metrics_history.get("snapshots") if isinstance(metrics_history, dict) else []
+    snapshots = snapshots or []
+    latest = snapshots[-1] if snapshots else {}
+    previous = snapshots[-2] if len(snapshots) > 1 else {}
+    return {
+        "snapshot_count": len(snapshots),
+        "updated_at": metrics_history.get("updated_at", "") if isinstance(metrics_history, dict) else "",
+        "latest_date": latest.get("date", ""),
+        "latest": latest,
+        "previous_date": previous.get("date", ""),
+        "delta_from_previous": latest.get("delta_from_previous", {}),
+    }
+
+
 def store_service_states(release):
     status_text = " ".join(
         str(release.get(key) or "")
@@ -423,11 +442,13 @@ def build_status():
     release_status = read_json(RELEASE_STATUS, {})
     manual = read_json(MANUAL_METRICS, {})
     live = read_json(LIVE_METRICS, {})
+    metrics_history = read_json(METRICS_HISTORY, {})
     promo_plan = read_json(PROMO_QUEUE_PLAN, {})
     scheduled_rows = read_csv(SCHEDULED)
     published_rows = read_csv(PUBLISHED)
     metrics = metric_state(manual, live)
-    freshness = source_freshness(release_status, manual, live, promo_plan, now)
+    history = metrics_history_state(metrics_history)
+    freshness = source_freshness(release_status, manual, live, metrics_history, promo_plan, now)
 
     releases = []
     all_actions = []
@@ -535,6 +556,7 @@ def build_status():
             "published_log": str(PUBLISHED.relative_to(ROOT)),
             "manual_metrics": str(MANUAL_METRICS.relative_to(ROOT)),
             "live_metrics": str(LIVE_METRICS.relative_to(ROOT)),
+            "metrics_history": str(METRICS_HISTORY.relative_to(ROOT)),
         },
         "objective": "Promote Lily Roo releases and keep lilyroo.com/admin status and metrics current.",
         "kpi": {
@@ -548,6 +570,7 @@ def build_status():
             "auto_covered_manual_metric_fields": metrics["auto_covered_fields"],
             "manual_metric_collection_steps": metrics["manual_metric_collection_steps"],
             "live_metrics_updated_at": metrics["updated_at"],
+            "metrics_history": history,
             "music_site_state_counts": dict(sorted(store_state_counts.items())),
             "music_sites_live": store_state_counts.get("Live", 0),
             "music_sites_submitted": store_state_counts.get("Submitted", 0),
