@@ -1,7 +1,7 @@
 # Weekly Social Report — Lily Roo
 
-**Period:** 2026-06-02 to 2026-06-08
-**Last updated:** 2026-06-08 09:54 PM EDT
+**Period:** 2026-06-03 to 2026-06-09
+**Last updated:** 2026-06-09 02:55 PM EDT
 
 ## KPI Goal
 - Primary growth target: **1,000 YouTube subscribers** (monetization milestone)
@@ -60,8 +60,8 @@
 - Last 28 days views: **109**
 - Last 28 days watch time: **3.4 hours**
 - API status: **live API**
-- Public RSS recent-video views: **17 across 15 videos**
-- Latest public upload: **Twelve Dollars - Lily Roo** (1 views)
+- Public RSS recent-video views: **27 across 15 videos**
+- Latest public upload: **Just Don't Talk About It - Lily Roo** (0 views)
 - Title-track video: https://www.youtube.com/watch?v=vK0mDIW65o4
 - Title-track public title: **I Learned It All in Fifteen Seconds - Lily Roo**
 - Official title: **I Learned It All in Fifteen Seconds**
@@ -120,9 +120,9 @@
 - Latest post: https://www.facebook.com/903693509504290_122118326547249470
 
 ## Metrics Snapshot
-- Live API captured: **2026-06-07T20:28:53.808Z**
+- Live API captured: **2026-06-09T14:06:46.496Z**
 - Snapshot file: `data/live_social_metrics.json`
-- YouTube public RSS captured: **2026-06-09T01:53:03.970919Z**
+- YouTube public RSS captured: **2026-06-09T12:08:07.783949Z**
 - YouTube public snapshot file: `data/youtube_public_snapshot.json`
 - YouTube title-track captured: **2026-06-07T21:39:01.715121Z**
 - YouTube title-track snapshot file: `data/youtube_title_track_snapshot.json`
@@ -152,6 +152,7 @@
 - Capture YouTube title-track public metadata: `python3 scripts/capture_youtube_title_track.py`
 - Capture YouTube Music public release metadata: `python3 scripts/capture_youtube_music_release.py`
 - Capture HyperFollow store links: `python3 scripts/capture_hyperfollow_store_links.py`
+- Verify pending DistroKid store links: `python3 scripts/verify_pending_store_links.py --refresh-admin`
 - Audit first single alignment: `python3 scripts/audit_first_single_alignment.py`
 - Capture Spotify public release metadata: `python3 scripts/capture_spotify_release.py`
 - Capture Apple Music public release metadata: `python3 scripts/capture_apple_music_release.py`

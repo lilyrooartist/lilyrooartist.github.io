@@ -134,7 +134,7 @@ def freshness_row(name: str, path: Path, payload, now: datetime):
 
 def refresh_command(name: str) -> str:
     return {
-        "release_status": "Update data/distrokid_release_status.json after store/DistroKid verification.",
+        "release_status": "python3 scripts/verify_pending_store_links.py --refresh-admin; update data/distrokid_release_status.json when a public URL is verified.",
         "scheduled_posts": "python3 scripts/sync_future_posts.py",
         "promo_queue_plan": "python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py",
         "published_log": "Export or append latest published posts to admin/content/Published_Log.csv.",
@@ -276,6 +276,41 @@ def hyperfollow_guess(title: str) -> str:
     return "https://distrokid.com/hyperfollow/lilyroo/" + slugify(title)
 
 
+def verification_snapshot_path(release_slug: str, service: str) -> Path:
+    filename = {
+        "Spotify": "spotify_release_snapshot.json",
+        "Apple Music": "apple_music_release_snapshot.json",
+        "YouTube Music": "youtube_music_release_snapshot.json",
+        "HyperFollow": "hyperfollow_store_links_snapshot.json",
+    }.get(service, "")
+    return ROOT / "data" / "store-verification" / release_slug / filename
+
+
+def verification_snapshot_summary(path: Path) -> dict:
+    if not path.exists():
+        return {}
+    try:
+        snapshot = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return {
+            "path": str(path.relative_to(ROOT)),
+            "ok": False,
+            "updated_at": "",
+            "summary": "Snapshot is not valid JSON.",
+        }
+    summary = ""
+    if snapshot.get("ok"):
+        summary = snapshot.get("release_url") or ", ".join(snapshot.get("stores") or []) or "public link verified"
+    else:
+        summary = snapshot.get("action_needed") or snapshot.get("error") or "public link not verified yet"
+    return {
+        "path": str(path.relative_to(ROOT)),
+        "ok": bool(snapshot.get("ok")),
+        "updated_at": snapshot.get("updated_at", ""),
+        "summary": summary,
+    }
+
+
 def store_verification_commands(release, store_services):
     title = release.get("title") or "Untitled release"
     artist = "Lily Roo"
@@ -317,10 +352,12 @@ def store_verification_commands(release, store_services):
             note = "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug."
         else:
             continue
+        latest = verification_snapshot_summary(verification_snapshot_path(release_slug, label))
         commands.append({
             "service": label,
             "command": command,
             "note": note,
+            "latest_snapshot": latest,
         })
     return commands
 

@@ -269,6 +269,7 @@ md = f'''# Weekly Social Report — Lily Roo
 - Capture YouTube title-track public metadata: `python3 scripts/capture_youtube_title_track.py`
 - Capture YouTube Music public release metadata: `python3 scripts/capture_youtube_music_release.py`
 - Capture HyperFollow store links: `python3 scripts/capture_hyperfollow_store_links.py`
+- Verify pending DistroKid store links: `python3 scripts/verify_pending_store_links.py --refresh-admin`
 - Audit first single alignment: `python3 scripts/audit_first_single_alignment.py`
 - Capture Spotify public release metadata: `python3 scripts/capture_spotify_release.py`
 - Capture Apple Music public release metadata: `python3 scripts/capture_apple_music_release.py`

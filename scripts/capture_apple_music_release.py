@@ -15,7 +15,7 @@ ARTIST = "Lily Roo"
 TITLE = "I Learned It All in Fifteen Seconds"
 
 
-def fetch_release(artist: str, title: str) -> dict:
+def fetch_results(artist: str, title: str) -> dict:
     params = {
         "term": f"{artist} {title}",
         "entity": "album",
@@ -30,11 +30,14 @@ def fetch_release(artist: str, title: str) -> dict:
         },
     )
     with urllib.request.urlopen(request, timeout=25) as response:
-        payload = json.loads(response.read().decode("utf-8"))
+        return json.loads(response.read().decode("utf-8"))
+
+
+def find_release(payload: dict, artist: str, title: str) -> dict | None:
     for item in payload.get("results", []):
         if item.get("artistName") == artist and title.lower() in item.get("collectionName", "").lower():
             return item
-    raise RuntimeError(f"Apple Music release not found for {artist} - {title}")
+    return None
 
 
 def main() -> int:
@@ -47,35 +50,57 @@ def main() -> int:
     if not out.is_absolute():
         out = REPO_ROOT / out
 
-    item = fetch_release(args.artist, args.title)
-    snapshot = {
-        "ok": True,
-        "updated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
-        "source": "itunes-search-api",
-        "artist_name": item.get("artistName", ""),
-        "artist_id": item.get("artistId"),
-        "artist_url": item.get("artistViewUrl", "").replace("?uo=4", ""),
-        "collection_name": item.get("collectionName", ""),
-        "collection_id": item.get("collectionId"),
-        "release_url": item.get("collectionViewUrl", "").replace("?uo=4", ""),
-        "artwork_url": item.get("artworkUrl100", "").replace("100x100bb.jpg", "1200x1200bb.jpg"),
-        "explicitness": item.get("collectionExplicitness", ""),
-        "track_count": item.get("trackCount"),
-        "copyright": item.get("copyright", ""),
-        "country": item.get("country", ""),
-        "release_date": item.get("releaseDate", ""),
-        "primary_genre": item.get("primaryGenreName", ""),
-    }
+    payload = fetch_results(args.artist, args.title)
+    item = find_release(payload, args.artist, args.title)
+    if item:
+        snapshot = {
+            "ok": True,
+            "updated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+            "source": "itunes-search-api",
+            "artist_name": item.get("artistName", ""),
+            "artist_id": item.get("artistId"),
+            "artist_url": item.get("artistViewUrl", "").replace("?uo=4", ""),
+            "collection_name": item.get("collectionName", ""),
+            "collection_id": item.get("collectionId"),
+            "release_url": item.get("collectionViewUrl", "").replace("?uo=4", ""),
+            "artwork_url": item.get("artworkUrl100", "").replace("100x100bb.jpg", "1200x1200bb.jpg"),
+            "explicitness": item.get("collectionExplicitness", ""),
+            "track_count": item.get("trackCount"),
+            "copyright": item.get("copyright", ""),
+            "country": item.get("country", ""),
+            "release_date": item.get("releaseDate", ""),
+            "primary_genre": item.get("primaryGenreName", ""),
+        }
+    else:
+        snapshot = {
+            "ok": False,
+            "updated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+            "source": "itunes-search-api",
+            "artist_name": args.artist,
+            "collection_name": "",
+            "release_url": "",
+            "query": f"{args.artist} {args.title}",
+            "result_count": payload.get("resultCount", 0),
+            "candidate_collections": [
+                {
+                    "artist_name": result.get("artistName", ""),
+                    "collection_name": result.get("collectionName", ""),
+                    "release_url": result.get("collectionViewUrl", "").replace("?uo=4", ""),
+                }
+                for result in payload.get("results", [])[:5]
+            ],
+            "action_needed": f"Apple Music release not found for {args.artist} - {args.title}. Re-run after DistroKid exposes the public release.",
+        }
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(snapshot, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(json.dumps({
         "ok": snapshot["ok"],
         "collection_name": snapshot["collection_name"],
-        "collection_id": snapshot["collection_id"],
+        "collection_id": snapshot.get("collection_id"),
         "release_url": snapshot["release_url"],
         "output": str(out.relative_to(REPO_ROOT)),
     }, indent=2))
-    return 0
+    return 0 if snapshot["ok"] else 1
 
 
 if __name__ == "__main__":

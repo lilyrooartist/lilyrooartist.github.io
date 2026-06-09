@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import json
 import argparse
+import urllib.error
 import urllib.request
 from datetime import datetime, timezone
 from html import unescape
@@ -42,9 +43,19 @@ def main() -> int:
         "Accept": "text/html",
         "User-Agent": "LilyRooHyperFollowStoreCapture/1.0",
     })
-    with urllib.request.urlopen(request, timeout=25) as response:
-        html = response.read().decode("utf-8", errors="replace")
-        status = response.status
+    html = ""
+    status = 0
+    error = ""
+    try:
+        with urllib.request.urlopen(request, timeout=25) as response:
+            html = response.read().decode("utf-8", errors="replace")
+            status = response.status
+    except urllib.error.HTTPError as exc:
+        status = exc.code
+        error = f"HTTP {exc.code}: {exc.reason}"
+        html = exc.read().decode("utf-8", errors="replace")
+    except urllib.error.URLError as exc:
+        error = str(exc.reason)
     parser = StoreLinkParser()
     parser.feed(html)
     stores = sorted({link["store"] for link in parser.links})
@@ -58,7 +69,9 @@ def main() -> int:
         "amazon_music_available": any("amazon" in store.lower() for store in stores),
         "youtube_music_available": any("youtube" in store.lower() for store in stores),
         "http_status": status,
+        "error": error,
         "note": "HyperFollow currently exposes only these public store links; use direct verified URLs for stores not listed here.",
+        "action_needed": "" if parser.links else "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
     }
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(snapshot, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")

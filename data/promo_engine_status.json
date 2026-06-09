@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-09T18:25:47.145421+00:00",
+  "generated_at": "2026-06-09T18:55:45.859045+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -86,23 +86,23 @@
       "fresh": 6,
       "stale": 0,
       "missing": 0,
-      "checked_at": "2026-06-09T18:25:47.145421+00:00"
+      "checked_at": "2026-06-09T18:55:45.859045+00:00"
     },
     "sources": [
       {
         "name": "release_status",
         "path": "data/distrokid_release_status.json",
         "status": "fresh",
-        "age_hours": 16.6,
+        "age_hours": 17.1,
         "max_age_hours": 72,
         "timestamp": "2026-06-09T01:47:42+00:00",
-        "refresh_command": "Update data/distrokid_release_status.json after store/DistroKid verification."
+        "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin; update data/distrokid_release_status.json when a public URL is verified."
       },
       {
         "name": "scheduled_posts",
         "path": "data/scheduled_posts.csv",
         "status": "fresh",
-        "age_hours": 44.8,
+        "age_hours": 45.3,
         "max_age_hours": 72,
         "timestamp": "2026-06-07T21:38:44.418468+00:00",
         "refresh_command": "python3 scripts/sync_future_posts.py"
@@ -111,7 +111,7 @@
         "name": "promo_queue_plan",
         "path": "data/promo_queue_plan.json",
         "status": "fresh",
-        "age_hours": 0.3,
+        "age_hours": 0.8,
         "max_age_hours": 24,
         "timestamp": "2026-06-09T18:09:15.572959+00:00",
         "refresh_command": "python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
@@ -120,7 +120,7 @@
         "name": "published_log",
         "path": "admin/content/Published_Log.csv",
         "status": "fresh",
-        "age_hours": 53.8,
+        "age_hours": 54.3,
         "max_age_hours": 168,
         "timestamp": "2026-06-07T12:36:37.141276+00:00",
         "refresh_command": "Export or append latest published posts to admin/content/Published_Log.csv."
@@ -129,7 +129,7 @@
         "name": "manual_metrics",
         "path": "data/manual_social_stats.json",
         "status": "fresh",
-        "age_hours": 50.6,
+        "age_hours": 51.1,
         "max_age_hours": 72,
         "timestamp": "2026-06-07T15:47:26.729764+00:00",
         "refresh_command": "Update data/manual_social_stats.json with latest manual metrics."
@@ -138,7 +138,7 @@
         "name": "live_metrics",
         "path": "data/live_social_metrics.json",
         "status": "fresh",
-        "age_hours": 4.3,
+        "age_hours": 4.8,
         "max_age_hours": 24,
         "timestamp": "2026-06-09T14:06:46.496000+00:00",
         "refresh_command": "python3 scripts/capture_live_metrics.py"
@@ -273,17 +273,30 @@
         {
           "service": "Spotify",
           "command": "open 'https://open.spotify.com/search/twelve%20dollars%20Lily%20Roo/albums' && python3 scripts/capture_spotify_release.py --release-url SPOTIFY_ALBUM_URL --out 'data/store-verification/twelve-dollars/spotify_release_snapshot.json'",
-          "note": "Search Spotify, copy the public album URL, then replace SPOTIFY_ALBUM_URL before running the capture."
+          "note": "Search Spotify, copy the public album URL, then replace SPOTIFY_ALBUM_URL before running the capture.",
+          "latest_snapshot": {}
         },
         {
           "service": "Apple Music",
           "command": "python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/apple_music_release_snapshot.json'",
-          "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json."
+          "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json.",
+          "latest_snapshot": {
+            "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
+            "ok": false,
+            "updated_at": "2026-06-09T18:46:46.500692Z",
+            "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
+          }
         },
         {
           "service": "HyperFollow",
           "command": "python3 scripts/capture_hyperfollow_store_links.py --url 'https://distrokid.com/hyperfollow/lilyroo/twelve-dollars' --out 'data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json'",
-          "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug."
+          "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug.",
+          "latest_snapshot": {
+            "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
+            "ok": false,
+            "updated_at": "2026-06-09T18:46:46.821659Z",
+            "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
+          }
         }
       ],
       "queued_posts": 0,
@@ -374,22 +387,36 @@
         {
           "service": "Spotify",
           "command": "open 'https://open.spotify.com/search/analog%20myth%20Lily%20Roo/albums' && python3 scripts/capture_spotify_release.py --release-url SPOTIFY_ALBUM_URL --out 'data/store-verification/analog-myth/spotify_release_snapshot.json'",
-          "note": "Search Spotify, copy the public album URL, then replace SPOTIFY_ALBUM_URL before running the capture."
+          "note": "Search Spotify, copy the public album URL, then replace SPOTIFY_ALBUM_URL before running the capture.",
+          "latest_snapshot": {}
         },
         {
           "service": "Apple Music",
           "command": "python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/apple_music_release_snapshot.json'",
-          "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json."
+          "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json.",
+          "latest_snapshot": {
+            "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
+            "ok": false,
+            "updated_at": "2026-06-09T18:46:47.057355Z",
+            "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
+          }
         },
         {
           "service": "YouTube Music",
           "command": "python3 scripts/capture_youtube_music_release.py --url YOUTUBE_MUSIC_URL --title 'Analog Myth' --out 'data/store-verification/analog-myth/youtube_music_release_snapshot.json'",
-          "note": "Replace YOUTUBE_MUSIC_URL with the public music.youtube.com/watch URL once the release appears."
+          "note": "Replace YOUTUBE_MUSIC_URL with the public music.youtube.com/watch URL once the release appears.",
+          "latest_snapshot": {}
         },
         {
           "service": "HyperFollow",
           "command": "python3 scripts/capture_hyperfollow_store_links.py --url 'https://distrokid.com/hyperfollow/lilyroo/analog-myth' --out 'data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json'",
-          "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug."
+          "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug.",
+          "latest_snapshot": {
+            "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
+            "ok": false,
+            "updated_at": "2026-06-09T18:46:47.467969Z",
+            "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
+          }
         }
       ],
       "queued_posts": 0,

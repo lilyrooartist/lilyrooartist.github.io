@@ -27,6 +27,7 @@ TWELVE_DOLLARS_PLAYLIST = ROOT / "data" / "youtube_twelve_dollars_playlist.json"
 PROMO_QUEUE_APPLY = ROOT / "scripts" / "apply_promo_queue_plan.py"
 PROMO_QUEUE_APPROVE = ROOT / "scripts" / "approve_promo_queue_plan.py"
 MANUAL_METRICS_UPDATER = ROOT / "scripts" / "update_manual_social_stats.py"
+STORE_LINK_VERIFIER = ROOT / "scripts" / "verify_pending_store_links.py"
 REPORT = ROOT / "admin" / "reports" / "weekly-social-report.md"
 INDEX = CONTENT / "content_index.json"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
@@ -267,6 +268,19 @@ def validate_generated_outputs(failures):
         for command in verification_commands:
             if "scripts/capture_" not in str(command.get("command") or ""):
                 fail(f"store verification command for {command.get('service') or 'unknown service'} missing capture script", failures)
+        automatable_commands = [
+            command for command in verification_commands
+            if command.get("service") in {"Apple Music", "HyperFollow"}
+        ]
+        snapshotted = [
+            command for command in automatable_commands
+            if (command.get("latest_snapshot") or {}).get("path")
+            and (command.get("latest_snapshot") or {}).get("updated_at")
+        ]
+        if len(snapshotted) == len(automatable_commands):
+            ok(f"promo engine store verifier has snapshot evidence for {len(snapshotted)} automatable pending checks")
+        else:
+            fail("promo_engine_status.json missing latest snapshot evidence for automatable pending store checks", failures)
         if "next_actions" in status:
             ok(f"promo engine status has {len(status.get('next_actions') or [])} next actions")
         else:
@@ -357,6 +371,14 @@ def validate_generated_outputs(failures):
         ok("manual social stats updater present")
     else:
         fail("update_manual_social_stats.py missing", failures)
+    if STORE_LINK_VERIFIER.exists():
+        verifier_text = STORE_LINK_VERIFIER.read_text(encoding="utf-8")
+        if "capture_apple_music_release.py" in verifier_text and "capture_hyperfollow_store_links.py" in verifier_text and "--refresh-admin" in verifier_text:
+            ok("pending store link verifier can refresh admin")
+        else:
+            fail("verify_pending_store_links.py missing capture or refresh support", failures)
+    else:
+        fail("verify_pending_store_links.py missing", failures)
 
 
 def validate_report(failures):
