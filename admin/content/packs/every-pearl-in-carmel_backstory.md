@@ -2,7 +2,7 @@
 
 - **Song ID:** LR-SONG-008
 - **Status:** Draft starter pack
-- **Source link:** https://youtu.be/mJVDj-RJtlg
+- **Source link:** https://youtu.be/QodRYnvTVZc
 
 ## Core narrative seed
 Every Pearl in Carmel lives in Lily Roo's transmission universe as a scene-level artifact: one specific moment that reveals a bigger emotional system.

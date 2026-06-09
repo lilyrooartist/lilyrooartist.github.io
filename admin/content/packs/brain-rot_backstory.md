@@ -2,7 +2,7 @@
 
 - **Song ID:** LR-SONG-006
 - **Status:** Draft starter pack
-- **Source link:** https://youtu.be/iI5wRXLmTM8
+- **Source link:** https://youtu.be/U7aczBSruAY
 
 ## Core narrative seed
 Brain Rot lives in Lily Roo's transmission universe as a scene-level artifact: one specific moment that reveals a bigger emotional system.

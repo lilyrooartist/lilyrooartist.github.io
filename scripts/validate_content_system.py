@@ -22,6 +22,8 @@ HYPERFOLLOW_SNAPSHOT = ROOT / "data" / "hyperfollow_store_links_snapshot.json"
 ALIGNMENT_AUDIT = ROOT / "data" / "first_single_alignment_audit.json"
 PROMO_ENGINE_STATUS = ROOT / "data" / "promo_engine_status.json"
 PROMO_QUEUE_PLAN = ROOT / "data" / "promo_queue_plan.json"
+TWELVE_DOLLARS_REMASTER = ROOT / "data" / "youtube_twelve_dollars_remaster_manifest.json"
+TWELVE_DOLLARS_PLAYLIST = ROOT / "data" / "youtube_twelve_dollars_playlist.json"
 PROMO_QUEUE_APPLY = ROOT / "scripts" / "apply_promo_queue_plan.py"
 PROMO_QUEUE_APPROVE = ROOT / "scripts" / "approve_promo_queue_plan.py"
 MANUAL_METRICS_UPDATER = ROOT / "scripts" / "update_manual_social_stats.py"
@@ -338,6 +340,48 @@ def validate_admin_execution_feedback(failures):
         ok("admin execute button has working/success/error feedback")
 
 
+def validate_twelve_dollars_remasters(failures):
+    if not TWELVE_DOLLARS_REMASTER.exists() or not TWELVE_DOLLARS_PLAYLIST.exists():
+        fail("Twelve Dollars remaster manifest or playlist snapshot missing", failures)
+        return
+    manifest = json.loads(TWELVE_DOLLARS_REMASTER.read_text(encoding="utf-8"))
+    playlist = json.loads(TWELVE_DOLLARS_PLAYLIST.read_text(encoding="utf-8"))
+    tracks = manifest.get("tracks") or []
+    playlist_tracks = playlist.get("tracks") or []
+    expected_titles = [
+        "Brain Rot",
+        "Every Pearl in Carmel",
+        "The Other One's Charging",
+        "Twelve Dollars",
+        "William and Dander",
+        "Just Don't Talk About It",
+        "Gluten Free Bread",
+        "When Lily Talks",
+    ]
+    manifest_titles = [track.get("title") for track in tracks]
+    playlist_titles = [track.get("title") for track in playlist_tracks]
+    if manifest.get("ok") and manifest.get("applied") and manifest_titles == expected_titles:
+        ok("Twelve Dollars remaster manifest tracks all eight canonical videos")
+    else:
+        fail("Twelve Dollars remaster manifest does not match canonical track list", failures)
+    if playlist.get("ok") and playlist.get("verified_items") == 8 and playlist_titles == expected_titles:
+        ok("Twelve Dollars playlist snapshot verifies eight-track order")
+    else:
+        fail("Twelve Dollars playlist snapshot does not verify canonical order", failures)
+    for track in tracks:
+        title = track.get("title") or "[missing title]"
+        if not track.get("new_video_id"):
+            fail(f"Twelve Dollars remaster missing new_video_id for {title}", failures)
+        if not track.get("old_archived"):
+            fail(f"Twelve Dollars remaster old upload not archived for {title}", failures)
+        if (track.get("thumbnail_result") or {}).get("ok") is not True:
+            fail(f"Twelve Dollars remaster thumbnail not confirmed for {title}", failures)
+        for key in ("video_file", "thumbnail_file"):
+            path = ROOT / str(track.get(key) or "")
+            if not path.exists():
+                fail(f"Twelve Dollars remaster {title} missing {key}", failures)
+
+
 def main():
     failures = []
     validate_pack_pairs(failures)
@@ -346,6 +390,7 @@ def main():
     validate_generated_outputs(failures)
     validate_report(failures)
     validate_admin_execution_feedback(failures)
+    validate_twelve_dollars_remasters(failures)
     if failures:
         print(f"\n{len(failures)} validation issue(s)")
         return 1

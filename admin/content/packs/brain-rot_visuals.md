@@ -1,7 +1,7 @@
 # Brain Rot — Visual Pack
 
 - **Song ID:** LR-SONG-006
-- **Default thumb:** https://i.ytimg.com/vi/iI5wRXLmTM8/hqdefault.jpg
+- **Default thumb:** /assets/albums/twelve-dollars/art/01-brain-rot-youtube-thumbnail.jpg
 
 ## Visual prompt set (starter)
 1. Cinematic still inspired by song title and emotional tone, indie folk-punk aesthetic.

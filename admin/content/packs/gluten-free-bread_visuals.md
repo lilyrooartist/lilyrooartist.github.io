@@ -1,7 +1,7 @@
 # Gluten Free Bread — Visual Pack
 
 - **Song ID:** LR-SONG-004
-- **Default thumb:** https://i.ytimg.com/vi/tdcQ2mG1j6A/hqdefault.jpg
+- **Default thumb:** /assets/albums/twelve-dollars/art/07-gluten-free-bread-youtube-thumbnail.jpg
 
 ## Visual prompt set (starter)
 1. Cinematic still inspired by song title and emotional tone, indie folk-punk aesthetic.

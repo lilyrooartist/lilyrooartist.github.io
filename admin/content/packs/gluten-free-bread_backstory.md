@@ -2,7 +2,7 @@
 
 - **Song ID:** LR-SONG-004
 - **Status:** Draft starter pack
-- **Source link:** https://youtu.be/tdcQ2mG1j6A
+- **Source link:** https://youtu.be/ajN3i75Sc74
 
 ## Core narrative seed
 Gluten Free Bread lives in Lily Roo's transmission universe as a scene-level artifact: one specific moment that reveals a bigger emotional system.

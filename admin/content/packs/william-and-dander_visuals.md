@@ -1,7 +1,7 @@
 # William and Dander — Visual Pack
 
 - **Song ID:** LR-SONG-005
-- **Default thumb:** https://i.ytimg.com/vi/CA7T9sFvRYk/hqdefault.jpg
+- **Default thumb:** /assets/albums/twelve-dollars/art/05-william-and-dander-youtube-thumbnail.jpg
 
 ## Visual prompt set (starter)
 1. Cinematic still inspired by song title and emotional tone, indie folk-punk aesthetic.

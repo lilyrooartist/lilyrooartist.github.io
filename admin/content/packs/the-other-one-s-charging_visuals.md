@@ -1,7 +1,7 @@
 # The Other One's Charging — Visual Pack
 
 - **Song ID:** LR-SONG-009
-- **Default thumb:** https://i.ytimg.com/vi/6lXKGPD36dc/hqdefault.jpg
+- **Default thumb:** /assets/albums/twelve-dollars/art/03-the-other-ones-charging-youtube-thumbnail.jpg
 
 ## Visual prompt set (starter)
 1. Cinematic still inspired by song title and emotional tone, indie folk-punk aesthetic.

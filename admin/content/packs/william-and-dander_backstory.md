@@ -2,7 +2,7 @@
 
 - **Song ID:** LR-SONG-005
 - **Status:** Draft starter pack
-- **Source link:** https://youtu.be/CA7T9sFvRYk
+- **Source link:** https://youtu.be/qjh8DUlg5UU
 
 ## Core narrative seed
 William and Dander lives in Lily Roo's transmission universe as a scene-level artifact: one specific moment that reveals a bigger emotional system.

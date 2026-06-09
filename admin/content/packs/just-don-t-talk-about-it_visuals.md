@@ -1,7 +1,7 @@
 # Just Don't Talk About It — Visual Pack
 
 - **Song ID:** LR-SONG-003
-- **Default thumb:** https://i.ytimg.com/vi/5czT_TIS1rQ/hqdefault.jpg
+- **Default thumb:** /assets/albums/twelve-dollars/art/06-just-dont-talk-about-it-youtube-thumbnail.jpg
 
 ## Visual prompt set (starter)
 1. Cinematic still inspired by song title and emotional tone, indie folk-punk aesthetic.

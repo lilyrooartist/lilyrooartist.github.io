@@ -1,7 +1,7 @@
 # When Lily Talks — Visual Pack
 
 - **Song ID:** LR-SONG-001
-- **Default thumb:** https://i.ytimg.com/vi/wM6JE2yaDcg/hqdefault.jpg
+- **Default thumb:** /assets/albums/twelve-dollars/art/08-when-lily-talks-youtube-thumbnail.jpg
 
 ## Visual prompt set (starter)
 1. Cinematic still inspired by song title and emotional tone, indie folk-punk aesthetic.

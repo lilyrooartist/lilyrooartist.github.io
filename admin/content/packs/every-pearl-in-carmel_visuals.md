@@ -1,7 +1,7 @@
 # Every Pearl in Carmel — Visual Pack
 
 - **Song ID:** LR-SONG-008
-- **Default thumb:** https://i.ytimg.com/vi/mJVDj-RJtlg/hqdefault.jpg
+- **Default thumb:** /assets/albums/twelve-dollars/art/02-every-pearl-in-carmel-youtube-thumbnail.jpg
 
 ## Visual prompt set (starter)
 1. Cinematic still inspired by song title and emotional tone, indie folk-punk aesthetic.

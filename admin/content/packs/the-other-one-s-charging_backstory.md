@@ -2,7 +2,7 @@
 
 - **Song ID:** LR-SONG-009
 - **Status:** Draft starter pack
-- **Source link:** https://youtu.be/6lXKGPD36dc
+- **Source link:** https://youtu.be/EprgLKHp-lE
 
 ## Core narrative seed
 The Other One's Charging lives in Lily Roo's transmission universe as a scene-level artifact: one specific moment that reveals a bigger emotional system.

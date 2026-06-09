@@ -2,7 +2,7 @@
 
 - **Song ID:** LR-SONG-001
 - **Status:** Draft starter pack
-- **Source link:** https://youtu.be/wM6JE2yaDcg
+- **Source link:** https://youtu.be/xp3DAk8RphU
 
 ## Core narrative seed
 When Lily Talks lives in Lily Roo's transmission universe as a scene-level artifact: one specific moment that reveals a bigger emotional system.

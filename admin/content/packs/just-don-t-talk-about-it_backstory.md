@@ -2,7 +2,7 @@
 
 - **Song ID:** LR-SONG-003
 - **Status:** Draft starter pack
-- **Source link:** https://youtu.be/5czT_TIS1rQ
+- **Source link:** https://youtu.be/3M0CvX5BRrA
 
 ## Core narrative seed
 Just Don't Talk About It lives in Lily Roo's transmission universe as a scene-level artifact: one specific moment that reveals a bigger emotional system.
