@@ -19,6 +19,14 @@ OUT = ROOT / "data" / "promo_engine_status.json"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
 
 PROMO_PLATFORMS = ["X", "Instagram", "TikTok", "Facebook", "YouTube Community"]
+SOURCE_MAX_AGE_HOURS = {
+    "release_status": 72,
+    "scheduled_posts": 72,
+    "promo_queue_plan": 24,
+    "published_log": 168,
+    "manual_metrics": 72,
+    "live_metrics": 24,
+}
 
 RELEASE_TRACKS = {
     "I Learned It All in Fifteen Seconds": [
@@ -59,6 +67,98 @@ def read_csv(path: Path):
         return []
     with path.open(newline="", encoding="utf-8") as handle:
         return list(csv.DictReader(handle))
+
+
+def parse_datetime(value: str | None):
+    raw = str(value or "").strip()
+    if not raw:
+        return None
+    if raw.endswith("Z"):
+        raw = raw[:-1] + "+00:00"
+    try:
+        parsed = datetime.fromisoformat(raw)
+    except ValueError:
+        return None
+    if parsed.tzinfo is None:
+        return parsed.replace(tzinfo=timezone.utc)
+    return parsed.astimezone(timezone.utc)
+
+
+def file_mtime(path: Path):
+    if not path.exists():
+        return None
+    return datetime.fromtimestamp(path.stat().st_mtime, tz=timezone.utc)
+
+
+def payload_timestamp(path: Path, payload):
+    if isinstance(payload, dict):
+        for key in ("generated_at", "updated_at"):
+            parsed = parse_datetime(payload.get(key))
+            if parsed:
+                return parsed
+    return file_mtime(path)
+
+
+def freshness_row(name: str, path: Path, payload, now: datetime):
+    timestamp = payload_timestamp(path, payload)
+    max_age = SOURCE_MAX_AGE_HOURS[name]
+    if timestamp is None:
+        return {
+            "name": name,
+            "path": str(path.relative_to(ROOT)),
+            "status": "missing",
+            "age_hours": None,
+            "max_age_hours": max_age,
+            "timestamp": "",
+            "refresh_command": refresh_command(name),
+        }
+    age_hours = round((now - timestamp).total_seconds() / 3600, 1)
+    return {
+        "name": name,
+        "path": str(path.relative_to(ROOT)),
+        "status": "fresh" if age_hours <= max_age else "stale",
+        "age_hours": age_hours,
+        "max_age_hours": max_age,
+        "timestamp": timestamp.isoformat(),
+        "refresh_command": refresh_command(name),
+    }
+
+
+def refresh_command(name: str) -> str:
+    return {
+        "release_status": "Update data/distrokid_release_status.json after store/DistroKid verification.",
+        "scheduled_posts": "python3 scripts/sync_future_posts.py",
+        "promo_queue_plan": "python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py",
+        "published_log": "Export or append latest published posts to admin/content/Published_Log.csv.",
+        "manual_metrics": "Update data/manual_social_stats.json with latest manual metrics.",
+        "live_metrics": "python3 scripts/capture_live_metrics.py",
+    }.get(name, "")
+
+
+def source_freshness(release_status, manual, live, promo_plan, now: datetime):
+    rows = [
+        freshness_row("release_status", RELEASE_STATUS, release_status, now),
+        freshness_row("scheduled_posts", SCHEDULED, None, now),
+        freshness_row("promo_queue_plan", PROMO_QUEUE_PLAN, promo_plan, now),
+        freshness_row("published_log", PUBLISHED, None, now),
+        freshness_row("manual_metrics", MANUAL_METRICS, manual, now),
+        freshness_row("live_metrics", LIVE_METRICS, live, now),
+    ]
+    stale = [row for row in rows if row["status"] == "stale"]
+    missing = [row for row in rows if row["status"] == "missing"]
+    return {
+        "summary": {
+            "fresh": sum(1 for row in rows if row["status"] == "fresh"),
+            "stale": len(stale),
+            "missing": len(missing),
+            "checked_at": now.isoformat(),
+        },
+        "sources": rows,
+        "actions": [
+            f"Refresh {row['name'].replace('_', ' ')}: {row['refresh_command']}"
+            for row in stale + missing
+        ],
+    }
 
 
 def norm(value: str | None) -> str:
@@ -123,6 +223,7 @@ def plan_rows_for_release(plan, release_title: str, track_lookup: set[str]):
 
 
 def build_status():
+    now = datetime.now(timezone.utc)
     release_status = read_json(RELEASE_STATUS, {})
     manual = read_json(MANUAL_METRICS, {})
     live = read_json(LIVE_METRICS, {})
@@ -130,6 +231,7 @@ def build_status():
     scheduled_rows = read_csv(SCHEDULED)
     published_rows = read_csv(PUBLISHED)
     metrics = metric_state(manual, live)
+    freshness = source_freshness(release_status, manual, live, promo_plan, now)
 
     releases = []
     all_actions = []
@@ -210,8 +312,11 @@ def build_status():
 
     healthy_count = sum(1 for release in releases if release["status"] == "healthy")
     score = round((healthy_count / len(releases)) * 100) if releases else 0
+    freshness_summary = freshness["summary"]
+    freshness_actions = freshness["actions"]
+    all_actions = freshness_actions + all_actions
     return {
-        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "generated_at": now.isoformat(),
         "source": {
             "release_status": str(RELEASE_STATUS.relative_to(ROOT)),
             "scheduled_posts": str(SCHEDULED.relative_to(ROOT)),
@@ -226,13 +331,19 @@ def build_status():
             "live_platform_count": metrics["live_platform_count"],
             "pending_manual_metric_fields": len(metrics["pending_manual_fields"]),
             "live_metrics_updated_at": metrics["updated_at"],
+            "stale_source_count": freshness_summary["stale"],
+            "missing_source_count": freshness_summary["missing"],
         },
         "health": {
             "score": score,
             "healthy_releases": healthy_count,
             "tracked_releases": len(releases),
             "open_action_count": len(all_actions),
+            "fresh_sources": freshness_summary["fresh"],
+            "stale_sources": freshness_summary["stale"],
+            "missing_sources": freshness_summary["missing"],
         },
+        "freshness": freshness,
         "releases": releases,
         "next_actions": all_actions[:8],
     }

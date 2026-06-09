@@ -203,6 +203,12 @@ def validate_generated_outputs(failures):
             ok(f"promo engine status tracks {len(releases)} releases")
         else:
             fail("promo_engine_status.json missing release health summary", failures)
+        freshness = status.get("freshness") or {}
+        sources = freshness.get("sources") or []
+        if sources and freshness.get("summary", {}).get("fresh", 0) + freshness.get("summary", {}).get("stale", 0) + freshness.get("summary", {}).get("missing", 0) == len(sources):
+            ok(f"promo engine freshness audit tracks {len(sources)} sources")
+        else:
+            fail("promo_engine_status.json missing source freshness audit", failures)
         if "next_actions" in status:
             ok(f"promo engine status has {len(status.get('next_actions') or [])} next actions")
         else:

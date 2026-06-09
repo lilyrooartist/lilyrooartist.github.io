@@ -825,7 +825,7 @@
 }</script>
 
 <script type="application/json" id="embedded-promo-engine-status">{
-  "generated_at": "2026-06-09T13:37:40.384335+00:00",
+  "generated_at": "2026-06-09T13:57:35.292703+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -839,13 +839,85 @@
     "primary": "Reach 1,000 YouTube subscribers",
     "live_platform_count": 3,
     "pending_manual_metric_fields": 12,
-    "live_metrics_updated_at": "2026-06-07T20:28:53.808Z"
+    "live_metrics_updated_at": "2026-06-07T20:28:53.808Z",
+    "stale_source_count": 1,
+    "missing_source_count": 0
   },
   "health": {
     "score": 0,
     "healthy_releases": 0,
     "tracked_releases": 3,
-    "open_action_count": 9
+    "open_action_count": 10,
+    "fresh_sources": 5,
+    "stale_sources": 1,
+    "missing_sources": 0
+  },
+  "freshness": {
+    "summary": {
+      "fresh": 5,
+      "stale": 1,
+      "missing": 0,
+      "checked_at": "2026-06-09T13:57:35.292703+00:00"
+    },
+    "sources": [
+      {
+        "name": "release_status",
+        "path": "data/distrokid_release_status.json",
+        "status": "fresh",
+        "age_hours": 12.2,
+        "max_age_hours": 72,
+        "timestamp": "2026-06-09T01:47:42+00:00",
+        "refresh_command": "Update data/distrokid_release_status.json after store/DistroKid verification."
+      },
+      {
+        "name": "scheduled_posts",
+        "path": "data/scheduled_posts.csv",
+        "status": "fresh",
+        "age_hours": 40.3,
+        "max_age_hours": 72,
+        "timestamp": "2026-06-07T21:38:44.418468+00:00",
+        "refresh_command": "python3 scripts/sync_future_posts.py"
+      },
+      {
+        "name": "promo_queue_plan",
+        "path": "data/promo_queue_plan.json",
+        "status": "fresh",
+        "age_hours": 0.0,
+        "max_age_hours": 24,
+        "timestamp": "2026-06-09T13:57:35.261404+00:00",
+        "refresh_command": "python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
+      },
+      {
+        "name": "published_log",
+        "path": "admin/content/Published_Log.csv",
+        "status": "fresh",
+        "age_hours": 49.3,
+        "max_age_hours": 168,
+        "timestamp": "2026-06-07T12:36:37.141276+00:00",
+        "refresh_command": "Export or append latest published posts to admin/content/Published_Log.csv."
+      },
+      {
+        "name": "manual_metrics",
+        "path": "data/manual_social_stats.json",
+        "status": "fresh",
+        "age_hours": 46.2,
+        "max_age_hours": 72,
+        "timestamp": "2026-06-07T15:47:26.729764+00:00",
+        "refresh_command": "Update data/manual_social_stats.json with latest manual metrics."
+      },
+      {
+        "name": "live_metrics",
+        "path": "data/live_social_metrics.json",
+        "status": "stale",
+        "age_hours": 41.5,
+        "max_age_hours": 24,
+        "timestamp": "2026-06-07T20:28:53.808000+00:00",
+        "refresh_command": "python3 scripts/capture_live_metrics.py"
+      }
+    ],
+    "actions": [
+      "Refresh live metrics: python3 scripts/capture_live_metrics.py"
+    ]
   },
   "releases": [
     {
@@ -970,14 +1042,14 @@
     }
   ],
   "next_actions": [
+    "Refresh live metrics: python3 scripts/capture_live_metrics.py",
     "I Learned It All in Fifteen Seconds: Refresh pending manual metrics before weekly reporting.",
     "Twelve Dollars: Verify and add remaining public store links.",
     "Twelve Dollars: Review and approve draft promo queue rows for this release.",
     "Twelve Dollars: Approve planned promo coverage for X, Instagram, TikTok, Facebook, YouTube Community.",
     "Twelve Dollars: Refresh pending manual metrics before weekly reporting.",
     "Analog Myth: Verify and add remaining public store links.",
-    "Analog Myth: Review and approve draft promo queue rows for this release.",
-    "Analog Myth: Approve planned promo coverage for YouTube Community."
+    "Analog Myth: Review and approve draft promo queue rows for this release."
   ]
 }</script>
 
@@ -1055,7 +1127,7 @@
 }</script>
 
 <script type="application/json" id="embedded-promo-queue-plan">{
-  "generated_at": "2026-06-09T09:37:40.354212-04:00",
+  "generated_at": "2026-06-09T09:57:35.261404-04:00",
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
     "release_status": "data/distrokid_release_status.json"
@@ -2174,13 +2246,19 @@
     }
     const health=status.health||{};
     const kpi=status.kpi||{};
+    const freshness=status.freshness||{};
+    const freshnessSummary=freshness.summary||{};
+    const staleSourceCount=Number(freshnessSummary.stale||0);
+    const missingSourceCount=Number(freshnessSummary.missing||0);
+    const sourceMeta=`${escapeHtml(freshnessSummary.fresh ?? 0)} fresh sources - ${escapeHtml(staleSourceCount)} stale - ${escapeHtml(missingSourceCount)} missing`;
     const summary=`<div class="queue-item">
       <div class="queue-top">
         <div>
           <div class="queue-title">Promotion engine</div>
           <div class="queue-meta">${escapeHtml(health.open_action_count||0)} open actions - ${escapeHtml(kpi.live_platform_count||0)} live metric sources - ${escapeHtml(kpi.pending_manual_metric_fields||0)} pending manual fields</div>
+          <div class="queue-meta">${sourceMeta}</div>
         </div>
-        <span class="status-chip ${Number(health.open_action_count||0)?'warn':'ok'}">${escapeHtml(health.score ?? 0)}%</span>
+        <span class="status-chip ${staleSourceCount||missingSourceCount?'warn':Number(health.open_action_count||0)?'warn':'ok'}">${escapeHtml(health.score ?? 0)}%</span>
       </div>
     </div>`;
     const releaseItems=releases.map(release=>{
@@ -2205,9 +2283,14 @@
         </div>
       </div>`;
     }).join('');
-    const actions=(status.next_actions||[]).slice(0,4);
-    const actionList=actions.length
-      ? `<ul class="release-open-checks">${actions.map(action=>`<li>${escapeHtml(action)}</li>`).join('')}</ul>`
+    const freshnessRows=(freshness.sources||[])
+      .filter(source=>source.status!=='fresh')
+      .slice(0,3)
+      .map(source=>`<li>${escapeHtml((source.name||'source').replaceAll('_',' '))}: ${escapeHtml(source.status||'unknown')} (${escapeHtml(source.age_hours ?? 'n/a')}h)</li>`)
+      .join('');
+    const actionRows=(status.next_actions||[]).slice(0,4).map(action=>`<li>${escapeHtml(action)}</li>`).join('');
+    const actionList=freshnessRows||actionRows
+      ? `<ul class="release-open-checks">${freshnessRows}${actionRows}</ul>`
       : '<div class="muted">No immediate promo actions.</div>';
     root.innerHTML=`${summary}${releaseItems}${actionList}`;
   }

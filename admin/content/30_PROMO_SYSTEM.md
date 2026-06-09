@@ -21,6 +21,8 @@ Refresh with:
 
 This snapshot combines release links, queued posts, published posts, platform coverage, live metric availability, and manual metric gaps into the Promo Health card on `/admin`.
 
+It also audits source freshness so `/admin` shows when release status, the queue, promo plan, published log, manual metrics, or live metrics need refresh. Live metrics and promo plans are expected to be refreshed daily; release status, queue, and manual metrics every 72 hours; the published log weekly.
+
 Draft next queue rows from those gaps with:
 `python3 scripts/generate_promo_queue_plan.py`
 
