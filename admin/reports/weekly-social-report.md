@@ -1,10 +1,57 @@
 # Weekly Social Report — Lily Roo
 
-**Period:** 2026-06-01 to 2026-06-07
-**Last updated:** 2026-06-07 05:39 PM EDT
+**Period:** 2026-06-02 to 2026-06-08
+**Last updated:** 2026-06-08 09:54 PM EDT
 
 ## KPI Goal
 - Primary growth target: **1,000 YouTube subscribers** (monetization milestone)
+
+## Release Rollout
+
+### I Learned It All in Fifteen Seconds
+- Type: **album**
+- Tracks: **8**
+- DistroKid status: **submitted and public on verified stores for the title-track release**
+- Store status: **Spotify, Apple Music, iTunes, and YouTube Music verified for the public title-track release; additional album/store links still need public verification as they appear.**
+- Release date: **2026-06-05**
+- Primary CTA: **Spotify**
+- Spotify: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi
+- Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249
+- YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4
+- HyperFollow: https://distrokid.com/hyperfollow/lilyroo/i-learned-it-all-in-fifteen-seconds
+- YouTube playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXWKTqgIs2N6dCU3BfS_9J2C
+- Note: Remastered YouTube album videos are public and ordered in the album playlist.
+- Note: Spotify for Artists metrics still require manual export or connected analytics access.
+
+### Twelve Dollars
+- Type: **album**
+- Tracks: **8**
+- DistroKid status: **uploaded/prepared from local masters; public streaming links still need verification when stores expose them**
+- Store status: **YouTube remaster and album playlist are public; Spotify, Apple Music, and DistroKid/HyperFollow public links are pending verification.**
+- Release date: **pending public store verification**
+- Primary CTA: **YouTube playlist until store links are verified**
+- YouTube Music: https://music.youtube.com/watch?v=G2RlCwZKOsk
+- YouTube playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
+- Note: Twelve Dollars title video was replaced with updated art and remastered local audio.
+- Note: The old title video is unlisted and marked archived.
+- Note: Playlist image was set to the approved Twelve Dollars cover.
+
+### Analog Myth
+- Type: **album**
+- Tracks: **8**
+- DistroKid status: **submitted to DistroKid for July 1 release and remastered audio downloaded locally**
+- Store status: **YouTube remaster album playlist is public; Spotify, Apple Music, and other DistroKid store links are pending public verification.**
+- Release date: **2026-07-01**
+- Primary CTA: **YouTube playlist until July 1 store links are verified**
+- YouTube playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0
+- Note: DistroKid/Mixea 24-bit/48k WAV masters are stored in audio-distrokid-remastered.
+- Note: All eight Analog Myth YouTube videos were remastered, uploaded, and the originals were archived as unlisted.
+- Note: Album order is 13, Girls Camp, Analog Myth, Spilling the Tea, No Mortgage, Guards Down, Slow Walk, The Power of Light.
+
+### Open Store Checks
+- Verify Twelve Dollars public Spotify, Apple Music, YouTube Music release, and HyperFollow links when DistroKid exposes them.
+- Verify Analog Myth public Spotify, Apple Music, YouTube Music release, and HyperFollow links on or after 2026-07-01.
+- Keep Amazon Music pending until a public URL is found from DistroKid or direct store search.
 
 ## Platform Snapshot
 
@@ -13,8 +60,8 @@
 - Last 28 days views: **109**
 - Last 28 days watch time: **3.4 hours**
 - API status: **live API**
-- Public RSS recent-video views: **1012 across 15 videos**
-- Latest public upload: **13 - Lily Roo** (64 views)
+- Public RSS recent-video views: **17 across 15 videos**
+- Latest public upload: **Twelve Dollars - Lily Roo** (1 views)
 - Title-track video: https://www.youtube.com/watch?v=vK0mDIW65o4
 - Title-track public title: **I Learned It All in Fifteen Seconds - Lily Roo**
 - Official title: **I Learned It All in Fifteen Seconds**
@@ -75,7 +122,7 @@
 ## Metrics Snapshot
 - Live API captured: **2026-06-07T20:28:53.808Z**
 - Snapshot file: `data/live_social_metrics.json`
-- YouTube public RSS captured: **2026-06-05T16:52:32.267181Z**
+- YouTube public RSS captured: **2026-06-09T01:53:03.970919Z**
 - YouTube public snapshot file: `data/youtube_public_snapshot.json`
 - YouTube title-track captured: **2026-06-07T21:39:01.715121Z**
 - YouTube title-track snapshot file: `data/youtube_title_track_snapshot.json`

@@ -15,6 +15,7 @@ This folder is the working content brain for Lily Roo admin operations. Keep the
 | Account operations | `19_AOL_ACCOUNT_HANDOFF.md`, `21_AOL_GMAIL_BRIDGE.md` | AOL account handoff plus the local AOL-to-Gmail bridge runbook. |
 | Queue | `../../data/scheduled_posts.csv` | Source of truth for upcoming scheduled posts. |
 | Published log | `Published_Log.csv` | Source of truth for completed posts and report latest-post links. |
+| Release status | `../../data/distrokid_release_status.json` | Source of truth for DistroKid/store rollout status and current release CTAs. |
 | Generated index | `CONTENT_INDEX.md`, `content_index.json` | Generated inventory of songs, packs, quips, queue state, and drift warnings. |
 
 ## Operating rules

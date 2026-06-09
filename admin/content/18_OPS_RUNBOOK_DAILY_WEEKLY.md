@@ -65,11 +65,23 @@ python3 scripts/update_weekly_report.py
 ```
 Then review:
 - `/admin/reports/weekly-social-report.md`
+- `data/distrokid_release_status.json`
 
 **Definition of done:**
 - report regenerated this week
 - period + last updated fields current
 - KPI section reflects latest known numbers
+- release rollout section reflects the latest verified DistroKid/store links
+
+### A2) Verify DistroKid store links
+- Check public DistroKid/HyperFollow pages for new store links.
+- Update `data/distrokid_release_status.json` when Spotify, Apple Music, YouTube Music, Amazon Music, or other public links appear.
+- For `Twelve Dollars`, keep the YouTube playlist as the primary CTA until Spotify/Apple/HyperFollow links are verified.
+- For `Analog Myth`, verify store links on or after **July 1, 2026**, then switch the primary CTA from YouTube playlist to Spotify once public.
+
+**Definition of done:**
+- release status JSON has current links or explicit pending markers
+- weekly report regenerated after any release-status update
 
 ---
 

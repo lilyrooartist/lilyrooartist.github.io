@@ -14,6 +14,7 @@ YOUTUBE_TITLE_TRACK = ROOT / 'data' / 'youtube_title_track_snapshot.json'
 YOUTUBE_MUSIC_SNAPSHOT = ROOT / 'data' / 'youtube_music_release_snapshot.json'
 HYPERFOLLOW_SNAPSHOT = ROOT / 'data' / 'hyperfollow_store_links_snapshot.json'
 ALIGNMENT_AUDIT = ROOT / 'data' / 'first_single_alignment_audit.json'
+DISTROKID_RELEASE_STATUS = ROOT / 'data' / 'distrokid_release_status.json'
 PUBLISHED = ROOT / 'admin' / 'content' / 'Published_Log.csv'
 ADMIN_INDEX = ROOT / 'admin' / 'index.html'
 
@@ -37,6 +38,7 @@ youtube_title_track = json.loads(YOUTUBE_TITLE_TRACK.read_text(encoding='utf-8')
 youtube_music_snapshot = json.loads(YOUTUBE_MUSIC_SNAPSHOT.read_text(encoding='utf-8')) if YOUTUBE_MUSIC_SNAPSHOT.exists() else {}
 hyperfollow_snapshot = json.loads(HYPERFOLLOW_SNAPSHOT.read_text(encoding='utf-8')) if HYPERFOLLOW_SNAPSHOT.exists() else {}
 alignment_audit = json.loads(ALIGNMENT_AUDIT.read_text(encoding='utf-8')) if ALIGNMENT_AUDIT.exists() else {}
+distrokid_release_status = json.loads(DISTROKID_RELEASE_STATUS.read_text(encoding='utf-8')) if DISTROKID_RELEASE_STATUS.exists() else {}
 youtube = manual.get('youtube', {})
 spotify = manual.get('spotify', {})
 live_platforms = live.get('platforms', {}) if isinstance(live, dict) else {}
@@ -57,6 +59,44 @@ def status_text(reason):
     if 'invalid_grant' in reason:
         return 'YouTube OAuth refresh token invalid_grant; run scripts/youtube_oauth_browser_helper.py, then run scripts/update_youtube_video_title.py --apply and redeploy/push the refreshed token'
     return reason or 'manual fallback'
+
+
+def release_rollout_section(status):
+    releases = status.get('releases') or []
+    if not releases:
+        return '## Release Rollout\n- No DistroKid release status file found.\n'
+    lines = ['## Release Rollout']
+    for release in releases:
+        title = release.get('title') or 'Untitled release'
+        lines.extend([
+            '',
+            f"### {title}",
+            f"- Type: **{release.get('type', 'release')}**",
+            f"- Tracks: **{release.get('track_count', 'pending')}**",
+            f"- DistroKid status: **{release.get('distrokid_status', 'pending')}**",
+            f"- Store status: **{release.get('store_status', 'pending')}**",
+            f"- Release date: **{release.get('release_date', 'pending')}**",
+            f"- Primary CTA: **{release.get('primary_cta', 'pending')}**",
+        ])
+        links = [
+            ('Spotify', release.get('spotify_url')),
+            ('Apple Music', release.get('apple_music_url')),
+            ('YouTube Music', release.get('youtube_music_url')),
+            ('HyperFollow', release.get('hyperfollow_url')),
+            ('YouTube playlist', release.get('youtube_playlist_url')),
+        ]
+        for label, url in links:
+            if url:
+                lines.append(f"- {label}: {url}")
+        notes = release.get('notes') or []
+        for note in notes:
+            lines.append(f"- Note: {note}")
+    open_checks = status.get('open_checks') or []
+    if open_checks:
+        lines.extend(['', '### Open Store Checks'])
+        for check in open_checks:
+            lines.append(f"- {check}")
+    return '\n'.join(lines) + '\n'
 
 
 def stat(platform, key, fallback='pending'):
@@ -129,6 +169,7 @@ md = f'''# Weekly Social Report — Lily Roo
 ## KPI Goal
 - Primary growth target: **1,000 YouTube subscribers** (monetization milestone)
 
+{release_rollout_section(distrokid_release_status)}
 ## Platform Snapshot
 
 ### YouTube

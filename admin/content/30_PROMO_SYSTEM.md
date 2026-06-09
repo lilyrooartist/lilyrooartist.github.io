@@ -10,14 +10,34 @@ Primary KPI: **reach 1,000 YouTube subscribers**.
 3. **Action** (watch full song + subscribe on YouTube)
 4. **Archive** (log every post + URL + performance note)
 
-## Current Release Link
-- **I Learned It All in Fifteen Seconds** Spotify: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi
-- **I Learned It All in Fifteen Seconds** Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249
-- **I Learned It All in Fifteen Seconds** YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4
+## Current Release Links and Status
+
+Source of truth: `data/distrokid_release_status.json`
+
+### I Learned It All in Fifteen Seconds
+- Spotify: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi
+- Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249
+- YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4
+- YouTube playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXWKTqgIs2N6dCU3BfS_9J2C
 - HyperFollow fallback: https://distrokid.com/hyperfollow/lilyroo/i-learned-it-all-in-fifteen-seconds
-- Use Spotify as the primary website/social CTA now that the single is live. Use Apple Music and YouTube Music as secondary streaming links; keep HyperFollow only when one cross-platform landing page is useful.
-- Cover art line: "remastered 3000 x 3000 album art, because tiny-room songs deserve big-frame treatment."
-- Copy line: "live now. i learned it all in fifteen seconds and somehow still have homework."
+- Use Spotify as the primary website/social CTA. Use Apple Music and YouTube Music as secondary streaming links; keep HyperFollow only when one cross-platform landing page is useful.
+
+### Twelve Dollars
+- YouTube playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
+- YouTube Music title track: https://music.youtube.com/watch?v=G2RlCwZKOsk
+- Spotify, Apple Music, and HyperFollow public links are pending verification when DistroKid exposes them.
+- Until store links are verified, use the YouTube playlist as the primary CTA.
+
+### Analog Myth
+- YouTube playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0
+- DistroKid target release date: July 1, 2026
+- Spotify, Apple Music, YouTube Music release, and HyperFollow public links are pending verification on or after July 1, 2026.
+- Until store links are verified, use the YouTube playlist as the primary CTA.
+
+### Copy Anchors
+- I Learned It All in Fifteen Seconds: "live now. i learned it all in fifteen seconds and somehow still have homework."
+- Twelve Dollars: "a small amount of money, a large amount of stage light."
+- Analog Myth: "time broke, so Lily Roo made an album out of the pieces."
 
 ## Platform behavior
 - **X:** short, sharp, quotable lines; 1-2/day.
