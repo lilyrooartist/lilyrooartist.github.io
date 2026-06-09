@@ -23,6 +23,8 @@ This snapshot combines release links, queued posts, published posts, platform co
 
 It also audits source freshness so `/admin` shows when release status, the queue, promo plan, published log, manual metrics, or live metrics need refresh. Live metrics and promo plans are expected to be refreshed daily; release status, queue, and manual metrics every 72 hours; the published log weekly.
 
+When live APIs cannot provide a metric, the snapshot includes `pending_manual_by_platform` so `/admin` names the exact manual fields still needed for reporting.
+
 Draft next queue rows from those gaps with:
 `python3 scripts/generate_promo_queue_plan.py`
 

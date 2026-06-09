@@ -825,7 +825,7 @@
 }</script>
 
 <script type="application/json" id="embedded-promo-engine-status">{
-  "generated_at": "2026-06-09T14:08:03.362655+00:00",
+  "generated_at": "2026-06-09T14:24:43.206823+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -839,6 +839,44 @@
     "primary": "Reach 1,000 YouTube subscribers",
     "live_platform_count": 3,
     "pending_manual_metric_fields": 12,
+    "pending_manual_metric_details": [
+      "tiktok.followers",
+      "tiktok.profile_views_7d",
+      "instagram.followers",
+      "instagram.profile_visits_7d",
+      "x.followers",
+      "x.impressions_7d",
+      "facebook.followers",
+      "facebook.reach_7d",
+      "spotify.artist_followers",
+      "spotify.monthly_listeners",
+      "spotify.release_streams",
+      "spotify.saves"
+    ],
+    "pending_manual_by_platform": {
+      "facebook": [
+        "followers",
+        "reach_7d"
+      ],
+      "instagram": [
+        "followers",
+        "profile_visits_7d"
+      ],
+      "spotify": [
+        "artist_followers",
+        "monthly_listeners",
+        "release_streams",
+        "saves"
+      ],
+      "tiktok": [
+        "followers",
+        "profile_views_7d"
+      ],
+      "x": [
+        "followers",
+        "impressions_7d"
+      ]
+    },
     "live_metrics_updated_at": "2026-06-09T14:06:46.496Z",
     "stale_source_count": 0,
     "missing_source_count": 0
@@ -857,14 +895,14 @@
       "fresh": 6,
       "stale": 0,
       "missing": 0,
-      "checked_at": "2026-06-09T14:08:03.362655+00:00"
+      "checked_at": "2026-06-09T14:24:43.206823+00:00"
     },
     "sources": [
       {
         "name": "release_status",
         "path": "data/distrokid_release_status.json",
         "status": "fresh",
-        "age_hours": 12.3,
+        "age_hours": 12.6,
         "max_age_hours": 72,
         "timestamp": "2026-06-09T01:47:42+00:00",
         "refresh_command": "Update data/distrokid_release_status.json after store/DistroKid verification."
@@ -873,7 +911,7 @@
         "name": "scheduled_posts",
         "path": "data/scheduled_posts.csv",
         "status": "fresh",
-        "age_hours": 40.5,
+        "age_hours": 40.8,
         "max_age_hours": 72,
         "timestamp": "2026-06-07T21:38:44.418468+00:00",
         "refresh_command": "python3 scripts/sync_future_posts.py"
@@ -884,14 +922,14 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-09T14:08:03.325720+00:00",
+        "timestamp": "2026-06-09T14:24:43.178586+00:00",
         "refresh_command": "python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
         "name": "published_log",
         "path": "admin/content/Published_Log.csv",
         "status": "fresh",
-        "age_hours": 49.5,
+        "age_hours": 49.8,
         "max_age_hours": 168,
         "timestamp": "2026-06-07T12:36:37.141276+00:00",
         "refresh_command": "Export or append latest published posts to admin/content/Published_Log.csv."
@@ -900,7 +938,7 @@
         "name": "manual_metrics",
         "path": "data/manual_social_stats.json",
         "status": "fresh",
-        "age_hours": 46.3,
+        "age_hours": 46.6,
         "max_age_hours": 72,
         "timestamp": "2026-06-07T15:47:26.729764+00:00",
         "refresh_command": "Update data/manual_social_stats.json with latest manual metrics."
@@ -909,7 +947,7 @@
         "name": "live_metrics",
         "path": "data/live_social_metrics.json",
         "status": "fresh",
-        "age_hours": 0.0,
+        "age_hours": 0.3,
         "max_age_hours": 24,
         "timestamp": "2026-06-09T14:06:46.496000+00:00",
         "refresh_command": "python3 scripts/capture_live_metrics.py"
@@ -1125,7 +1163,7 @@
 }</script>
 
 <script type="application/json" id="embedded-promo-queue-plan">{
-  "generated_at": "2026-06-09T09:57:35.261404-04:00",
+  "generated_at": "2026-06-09T10:24:43.178586-04:00",
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
     "release_status": "data/distrokid_release_status.json"
@@ -2249,12 +2287,18 @@
     const staleSourceCount=Number(freshnessSummary.stale||0);
     const missingSourceCount=Number(freshnessSummary.missing||0);
     const sourceMeta=`${escapeHtml(freshnessSummary.fresh ?? 0)} fresh sources - ${escapeHtml(staleSourceCount)} stale - ${escapeHtml(missingSourceCount)} missing`;
+    const pendingManualByPlatform=kpi.pending_manual_by_platform||{};
+    const manualGapMeta=Object.entries(pendingManualByPlatform)
+      .map(([platform,fields])=>`${platform}: ${(Array.isArray(fields)?fields:[]).join(', ')}`)
+      .slice(0,5)
+      .join(' - ');
     const summary=`<div class="queue-item">
       <div class="queue-top">
         <div>
           <div class="queue-title">Promotion engine</div>
           <div class="queue-meta">${escapeHtml(health.open_action_count||0)} open actions - ${escapeHtml(kpi.live_platform_count||0)} live metric sources - ${escapeHtml(kpi.pending_manual_metric_fields||0)} pending manual fields</div>
           <div class="queue-meta">${sourceMeta}</div>
+          ${manualGapMeta?`<div class="queue-meta">Manual gaps: ${escapeHtml(manualGapMeta)}</div>`:''}
         </div>
         <span class="status-chip ${staleSourceCount||missingSourceCount?'warn':Number(health.open_action_count||0)?'warn':'ok'}">${escapeHtml(health.score ?? 0)}%</span>
       </div>

@@ -209,6 +209,13 @@ def validate_generated_outputs(failures):
             ok(f"promo engine freshness audit tracks {len(sources)} sources")
         else:
             fail("promo_engine_status.json missing source freshness audit", failures)
+        kpi = status.get("kpi") or {}
+        pending_count = kpi.get("pending_manual_metric_fields", 0)
+        pending_details = kpi.get("pending_manual_metric_details") or []
+        if len(pending_details) == pending_count:
+            ok(f"promo engine manual metric gap detail tracks {pending_count} fields")
+        else:
+            fail("promo_engine_status.json manual metric gap detail does not match pending count", failures)
         if "next_actions" in status:
             ok(f"promo engine status has {len(status.get('next_actions') or [])} next actions")
         else:

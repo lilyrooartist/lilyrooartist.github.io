@@ -201,15 +201,18 @@ def metric_state(manual, live):
     platforms = live.get("platforms") if isinstance(live, dict) else {}
     live_count = sum(1 for data in (platforms or {}).values() if isinstance(data, dict) and data.get("ok"))
     pending_manual = []
+    pending_by_platform = {}
     for platform, values in (manual or {}).items():
         if not isinstance(values, dict):
             continue
         for key, value in values.items():
             if value == "pending":
                 pending_manual.append(f"{platform}.{key}")
+                pending_by_platform.setdefault(platform, []).append(key)
     return {
         "live_platform_count": live_count,
         "pending_manual_fields": pending_manual,
+        "pending_manual_by_platform": dict(sorted(pending_by_platform.items())),
         "updated_at": live.get("updated_at") if isinstance(live, dict) else "",
     }
 
@@ -330,6 +333,8 @@ def build_status():
             "primary": "Reach 1,000 YouTube subscribers",
             "live_platform_count": metrics["live_platform_count"],
             "pending_manual_metric_fields": len(metrics["pending_manual_fields"]),
+            "pending_manual_metric_details": metrics["pending_manual_fields"],
+            "pending_manual_by_platform": metrics["pending_manual_by_platform"],
             "live_metrics_updated_at": metrics["updated_at"],
             "stale_source_count": freshness_summary["stale"],
             "missing_source_count": freshness_summary["missing"],
