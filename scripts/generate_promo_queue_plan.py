@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import json
 import re
+import csv
 from collections import Counter
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -14,6 +15,7 @@ PROMO_STATUS = ROOT / "data" / "promo_engine_status.json"
 RELEASE_STATUS = ROOT / "data" / "distrokid_release_status.json"
 OUT = ROOT / "data" / "promo_queue_plan.json"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
+SCHEDULED = ROOT / "data" / "scheduled_posts.csv"
 
 TZ = ZoneInfo("America/New_York")
 PLATFORM_ORDER = ["X", "Instagram", "TikTok", "Facebook", "YouTube Community"]
@@ -70,6 +72,13 @@ def read_json(path: Path, fallback):
     if not path.exists():
         return fallback
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def read_csv(path: Path):
+    if not path.exists():
+        return []
+    with path.open(newline="", encoding="utf-8") as handle:
+        return list(csv.DictReader(handle))
 
 
 def slug(value: str) -> str:
@@ -206,10 +215,26 @@ def plan_summary(posts):
     }
 
 
+def apply_preview(posts, scheduled_rows):
+    scheduled_ids = {row.get("id") for row in scheduled_rows if row.get("id")}
+    approved = [post for post in posts if post.get("approved") == "yes"]
+    ready = [post for post in approved if post.get("id") not in scheduled_ids]
+    duplicates = [post for post in approved if post.get("id") in scheduled_ids]
+    review = [post for post in posts if post.get("approved") != "yes"]
+    return {
+        "ready_to_apply_posts": len(ready),
+        "review_posts": len(review),
+        "scheduled_duplicate_posts": len(duplicates),
+        "ready_ids": [post.get("id") for post in ready],
+        "scheduled_duplicate_ids": [post.get("id") for post in duplicates],
+    }
+
+
 def build_plan():
     promo = read_json(PROMO_STATUS, {})
     releases = release_lookup(read_json(RELEASE_STATUS, {}))
     prior_by_id, prior_by_slot = prior_approval_lookup(read_json(OUT, {}))
+    scheduled_rows = read_csv(SCHEDULED)
     posts = []
     post_index = 0
 
@@ -260,6 +285,7 @@ def build_plan():
         "apply_note": "Mark reviewed rows approved=yes, then apply approved rows into the live schedule.",
         "apply_command": apply_command(),
         "summary": plan_summary(posts),
+        "apply_preview": apply_preview(posts, scheduled_rows),
         "posts": posts,
     }
 

@@ -248,6 +248,20 @@ def validate_generated_outputs(failures):
             ok("promo queue plan includes refresh-aware apply command")
         else:
             fail("promo_queue_plan.json missing refresh-aware apply command", failures)
+        apply_preview = plan.get("apply_preview") or {}
+        for key in ("ready_to_apply_posts", "review_posts", "scheduled_duplicate_posts", "ready_ids", "scheduled_duplicate_ids"):
+            if key not in apply_preview:
+                fail(f"promo_queue_plan.json apply_preview missing {key}", failures)
+        ready_ids = apply_preview.get("ready_ids") or []
+        duplicate_ids = apply_preview.get("scheduled_duplicate_ids") or []
+        if apply_preview.get("ready_to_apply_posts") == len(ready_ids):
+            ok("promo queue apply preview tracks ready ids")
+        else:
+            fail("promo_queue_plan.json apply_preview ready count mismatch", failures)
+        if apply_preview.get("scheduled_duplicate_posts") == len(duplicate_ids):
+            ok("promo queue apply preview tracks duplicate ids")
+        else:
+            fail("promo_queue_plan.json apply_preview duplicate count mismatch", failures)
         for post in posts:
             for key in ("id", "scheduled_at", "platform", "song", "text", "execution_mode", "post_type", "approval_command"):
                 if not str(post.get(key) or "").strip():
