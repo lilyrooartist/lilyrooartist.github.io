@@ -1,6 +1,6 @@
 # Promo Operations Packet - Lily Roo
 
-Generated: 2026-06-10T02:59:01.317246Z
+Generated: 2026-06-10T04:50:21.153089Z
 
 ## Summary
 - Actions: **20**
@@ -9,7 +9,7 @@ Generated: 2026-06-10T02:59:01.317246Z
 - Store checks: **7**
 - Manual metric updates: **5**
 - Safe apply commands ready: **0**
-- Urgency: **blocked: 1, high: 3, low: 5, medium: 11**
+- Urgency: **blocked: 1, high: 2, low: 5, medium: 12**
 
 ## Phase Counts
 - Fill manual metrics: **5**
@@ -41,8 +41,8 @@ Generated: 2026-06-10T02:59:01.317246Z
   - Command: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
 
 ### Review draft posts
-- **[high] Review X draft for Twelve Dollars**
-  - Why: Draft is scheduled within 24 hours.
+- **[medium] Review X draft for Twelve Dollars**
+  - Why: Draft is scheduled within 72 hours.
   - Detail: Ready after approval.
   - Command: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-X --refresh-admin`
 - **[medium] Review Instagram draft for Twelve Dollars**
@@ -65,7 +65,7 @@ Generated: 2026-06-10T02:59:01.317246Z
 ### Verify music sites
 - **[medium] Verify Twelve Dollars on Spotify**
   - Why: Public store links should be checked until DistroKid exposes them.
-  - Command: `open 'https://open.spotify.com/search/twelve%20dollars%20Lily%20Roo/albums' && python3 scripts/capture_spotify_release.py --release-url SPOTIFY_ALBUM_URL --out 'data/store-verification/twelve-dollars/spotify_release_snapshot.json'`
+  - Command: `python3 scripts/search_spotify_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/spotify_release_snapshot.json'`
 - **[medium] Verify Twelve Dollars on Apple Music**
   - Why: Public store links should be checked until DistroKid exposes them.
   - Command: `python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/apple_music_release_snapshot.json'`
@@ -74,7 +74,7 @@ Generated: 2026-06-10T02:59:01.317246Z
   - Command: `python3 scripts/capture_hyperfollow_store_links.py --url 'https://distrokid.com/hyperfollow/lilyroo/twelve-dollars' --out 'data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json'`
 - **[medium] Verify Analog Myth on Spotify**
   - Why: Public store links should be checked as the July 1 release approaches.
-  - Command: `open 'https://open.spotify.com/search/analog%20myth%20Lily%20Roo/albums' && python3 scripts/capture_spotify_release.py --release-url SPOTIFY_ALBUM_URL --out 'data/store-verification/analog-myth/spotify_release_snapshot.json'`
+  - Command: `python3 scripts/search_spotify_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/spotify_release_snapshot.json'`
 
 ## Guardrails
 - This packet does not publish, approve, apply, or post anything.

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-10T02:59:01.400713+00:00",
+  "generated_at": "2026-06-10T04:50:21.226635+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "store_verification_root": "data/store-verification"
@@ -8,10 +8,10 @@
     "total_services": 15,
     "live": 8,
     "submitted": 0,
-    "pending": 3,
-    "checked_pending": 4,
+    "pending": 1,
+    "checked_pending": 6,
     "found_in_snapshot": 0,
-    "snapshot_count": 4
+    "snapshot_count": 6
   },
   "rows": [
     {
@@ -57,9 +57,14 @@
     {
       "release": "Twelve Dollars",
       "service": "Spotify",
-      "state": "Pending",
+      "state": "Checked pending",
       "url": "",
-      "latest_snapshot": {},
+      "latest_snapshot": {
+        "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
+        "ok": false,
+        "updated_at": "2026-06-10T04:50:17.048909Z",
+        "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
+      },
       "action": "Verify Spotify public URL for Twelve Dollars."
     },
     {
@@ -70,7 +75,7 @@
       "latest_snapshot": {
         "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
         "ok": false,
-        "updated_at": "2026-06-10T02:58:59.133472Z",
+        "updated_at": "2026-06-10T04:50:18.134868Z",
         "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
       },
       "action": "Verify Apple Music public URL for Twelve Dollars."
@@ -91,7 +96,7 @@
       "latest_snapshot": {
         "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
         "ok": false,
-        "updated_at": "2026-06-10T02:58:59.461308Z",
+        "updated_at": "2026-06-10T04:50:18.467421Z",
         "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
       },
       "action": "Verify HyperFollow public URL for Twelve Dollars."
@@ -107,9 +112,14 @@
     {
       "release": "Analog Myth",
       "service": "Spotify",
-      "state": "Pending",
+      "state": "Checked pending",
       "url": "",
-      "latest_snapshot": {},
+      "latest_snapshot": {
+        "path": "data/store-verification/analog-myth/spotify_release_snapshot.json",
+        "ok": false,
+        "updated_at": "2026-06-10T04:50:18.544290Z",
+        "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
+      },
       "action": "Verify Spotify public URL for Analog Myth."
     },
     {
@@ -120,7 +130,7 @@
       "latest_snapshot": {
         "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
         "ok": false,
-        "updated_at": "2026-06-10T02:58:59.699759Z",
+        "updated_at": "2026-06-10T04:50:19.550081Z",
         "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
       },
       "action": "Verify Apple Music public URL for Analog Myth."
@@ -141,7 +151,7 @@
       "latest_snapshot": {
         "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
         "ok": false,
-        "updated_at": "2026-06-10T02:59:00.048094Z",
+        "updated_at": "2026-06-10T04:50:19.948438Z",
         "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
       },
       "action": "Verify HyperFollow public URL for Analog Myth."

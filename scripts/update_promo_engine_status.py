@@ -567,13 +567,12 @@ def store_verification_commands(release, store_services):
         if label in {"DistroKid", "YouTube playlist"} or service["state"] != "Pending":
             continue
         if label == "Spotify":
-            search_url = "https://open.spotify.com/search/" + release_slug.replace("-", "%20") + "%20Lily%20Roo/albums"
             command = (
-                f"open {shell_quote(search_url)} && "
-                f"python3 scripts/capture_spotify_release.py --release-url SPOTIFY_ALBUM_URL "
+                f"python3 scripts/search_spotify_release.py --artist {shell_quote(artist)} "
+                f"--title {shell_quote(title)} "
                 f"--out {shell_quote(output_root + '/spotify_release_snapshot.json')}"
             )
-            note = "Search Spotify, copy the public album URL, then replace SPOTIFY_ALBUM_URL before running the capture."
+            note = "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed."
         elif label == "Apple Music":
             command = (
                 f"python3 scripts/capture_apple_music_release.py --artist {shell_quote(artist)} "

@@ -27,6 +27,8 @@ The refresh script is read-only for external services. It does not approve, appl
 
 It also writes a review packet to `data/promo_operations_packet.json` and `admin/reports/promo-operations-packet.md`, grouping platform fixes, draft approvals, store checks, and manual metrics into one operator-facing checklist with phase counts and urgency labels.
 
+Pending Spotify album links are checked with `scripts/search_spotify_release.py`, which searches public web results for Spotify album URLs and validates exact-title candidates through Spotify oEmbed before marking a snapshot as found.
+
 When live APIs cannot provide a metric, the snapshot includes `pending_manual_by_platform` so `/admin` names the exact manual fields still needed for reporting.
 
 The refresh also writes a fill-in worksheet for those gaps at `data/manual_metric_collection_template.csv` and a readable checklist at `admin/reports/manual-metric-collection.md`.

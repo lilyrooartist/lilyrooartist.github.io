@@ -44,6 +44,17 @@ def main() -> int:
             continue
         slug = slugify(title)
         output_root = Path("data") / "store-verification" / slug
+        if not release.get("spotify_url"):
+            results.append(run([
+                "python3",
+                "scripts/search_spotify_release.py",
+                "--artist",
+                status.get("artist", "Lily Roo"),
+                "--title",
+                title,
+                "--out",
+                str(output_root / "spotify_release_snapshot.json"),
+            ]))
         if not release.get("apple_music_url"):
             results.append(run([
                 "python3",
