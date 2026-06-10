@@ -217,6 +217,15 @@ def validate_generated_outputs(failures):
             ok("promo operations packet groups approval, store, metric, and platform work")
         else:
             fail("promo_operations_packet.json missing required action groups", failures)
+        tiktok_actions = [
+            action for action in actions
+            if (action.get("context") or {}).get("platform") == "TikTok"
+            and action.get("urgency") in {"blocked", "high"}
+        ]
+        if tiktok_actions and any((action.get("context") or {}).get("missing_secrets") for action in tiktok_actions):
+            ok("promo operations packet includes TikTok missing-secret diagnostics")
+        else:
+            fail("promo_operations_packet.json missing TikTok missing-secret diagnostics", failures)
     else:
         fail("promo_operations_packet.json missing; run scripts/build_promo_operations_packet.py", failures)
     if SPOTIFY_SNAPSHOT.exists():
@@ -559,7 +568,7 @@ def validate_generated_outputs(failures):
         fail("refresh_promo_admin.py missing", failures)
     if PROMO_OPERATIONS_SCRIPT.exists():
         packet_text = PROMO_OPERATIONS_SCRIPT.read_text(encoding="utf-8")
-        if "promo_operations_packet.json" in packet_text and "promo-operations-packet.md" in packet_text and "approval_review" in packet_text and "urgency_for" in packet_text and "subprocess" not in packet_text:
+        if "promo_operations_packet.json" in packet_text and "promo-operations-packet.md" in packet_text and "approval_review" in packet_text and "urgency_for" in packet_text and "missing_secrets" in packet_text and "subprocess" not in packet_text:
             ok("promo operations packet builder is review-only")
         else:
             fail("build_promo_operations_packet.py missing review packet outputs or executes commands", failures)

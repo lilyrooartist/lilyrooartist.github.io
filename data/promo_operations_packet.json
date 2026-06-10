@@ -1,10 +1,11 @@
 {
-  "generated_at": "2026-06-10T01:54:46.705293Z",
+  "generated_at": "2026-06-10T02:09:57.780543Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
     "promo_queue_plan": "data/promo_queue_plan.json",
-    "social_executions": "data/social_execution_snapshot.json"
+    "social_executions": "data/social_execution_snapshot.json",
+    "executor_readiness": "data/executor_readiness_snapshot.json"
   },
   "summary": {
     "action_count": 20,
@@ -32,13 +33,34 @@
       "label": "Fix TikTok executor",
       "kind": "platform_fix",
       "priority": 1,
-      "command": "LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py",
+      "command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
       "context": {
         "post_id": "FP-AUTO-264",
         "platform": "TikTok",
         "reason": "tiktok_credentials_missing",
         "error_summary": "",
-        "repair_action": "Review platform credentials/readiness, then rerun the social execution capture."
+        "repair_action": "Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok public posting approval is false. Complete TikTok OAuth/public posting setup, push secrets, then refresh Admin.",
+        "readiness": {
+          "ready": false,
+          "access_token_present": false,
+          "refresh_config_present": false,
+          "missing_secrets": [
+            "TIKTOK_CLIENT_KEY",
+            "TIKTOK_CLIENT_SECRET",
+            "TIKTOK_REFRESH_TOKEN"
+          ],
+          "public_posting_approved": false,
+          "default_privacy": "PUBLIC_TO_EVERYONE"
+        },
+        "missing_secrets": [
+          "TIKTOK_CLIENT_KEY",
+          "TIKTOK_CLIENT_SECRET",
+          "TIKTOK_REFRESH_TOKEN"
+        ],
+        "public_posting_approved": false,
+        "refresh_config_present": false,
+        "access_token_present": false,
+        "default_privacy": "PUBLIC_TO_EVERYONE"
       },
       "phase": "Repair executor",
       "urgency": "high",
@@ -68,7 +90,28 @@
         "readiness_message": "Executor credentials or platform setup are not ready.",
         "text": "Twelve Dollars is what happens when the joke walks on stage wearing impossible shoes. Full album playlist is live.",
         "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-        "media_key": "twelve-dollars-video"
+        "media_key": "twelve-dollars-video",
+        "readiness": {
+          "ready": false,
+          "access_token_present": false,
+          "refresh_config_present": false,
+          "missing_secrets": [
+            "TIKTOK_CLIENT_KEY",
+            "TIKTOK_CLIENT_SECRET",
+            "TIKTOK_REFRESH_TOKEN"
+          ],
+          "public_posting_approved": false,
+          "default_privacy": "PUBLIC_TO_EVERYONE"
+        },
+        "missing_secrets": [
+          "TIKTOK_CLIENT_KEY",
+          "TIKTOK_CLIENT_SECRET",
+          "TIKTOK_REFRESH_TOKEN"
+        ],
+        "public_posting_approved": false,
+        "refresh_config_present": false,
+        "access_token_present": false,
+        "default_privacy": "PUBLIC_TO_EVERYONE"
       },
       "phase": "Review blocked drafts",
       "urgency": "blocked",
@@ -84,13 +127,34 @@
       "label": "Fix TikTok executor",
       "kind": "platform_fix",
       "priority": 1,
-      "command": "LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py",
+      "command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
       "context": {
         "post_id": "FP-AUTO-264",
         "platform": "TikTok",
         "reason": "tiktok_credentials_missing",
         "error_summary": "",
-        "repair_action": "Review platform credentials/readiness, then rerun the social execution capture."
+        "repair_action": "Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok public posting approval is false. Complete TikTok OAuth/public posting setup, push secrets, then refresh Admin.",
+        "readiness": {
+          "ready": false,
+          "access_token_present": false,
+          "refresh_config_present": false,
+          "missing_secrets": [
+            "TIKTOK_CLIENT_KEY",
+            "TIKTOK_CLIENT_SECRET",
+            "TIKTOK_REFRESH_TOKEN"
+          ],
+          "public_posting_approved": false,
+          "default_privacy": "PUBLIC_TO_EVERYONE"
+        },
+        "missing_secrets": [
+          "TIKTOK_CLIENT_KEY",
+          "TIKTOK_CLIENT_SECRET",
+          "TIKTOK_REFRESH_TOKEN"
+        ],
+        "public_posting_approved": false,
+        "refresh_config_present": false,
+        "access_token_present": false,
+        "default_privacy": "PUBLIC_TO_EVERYONE"
       },
       "phase": "Repair executor",
       "urgency": "high",
@@ -112,7 +176,12 @@
         "platform": "Instagram",
         "reason": "max_attempts_exceeded",
         "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
-        "repair_action": "Reconnect the Instagram Business/Creator account to the Facebook Page or set IG_BUSINESS_ACCOUNT_ID, then push the worker secret and recapture readiness."
+        "repair_action": "Reconnect the Instagram Business/Creator account to the Facebook Page or set IG_BUSINESS_ACCOUNT_ID, then push the worker secret and recapture readiness.",
+        "readiness": {
+          "ready": true,
+          "api": "facebook-login",
+          "account_id_source": "FB_PAGE_ID"
+        }
       },
       "phase": "Repair executor",
       "urgency": "high",
@@ -140,7 +209,13 @@
         "readiness_message": "Ready after approval.",
         "text": "Twelve Dollars is the part where the stage gets too bright and the joke gets honest. Full album playlist is live.",
         "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-        "media_key": "twelve-dollars-cover"
+        "media_key": "twelve-dollars-cover",
+        "readiness": {
+          "text_posting_ready": true,
+          "oauth2_user_token_present": false,
+          "oauth1_complete": true,
+          "media_map_present": false
+        }
       },
       "phase": "Review draft posts",
       "urgency": "high",
@@ -168,7 +243,12 @@
         "readiness_message": "Ready after approval.",
         "text": "Twelve Dollars is live on YouTube: stage lights, scattered bills, impossible shoes, and one very stubborn little signal.",
         "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-        "media_key": "twelve-dollars-cover"
+        "media_key": "twelve-dollars-cover",
+        "readiness": {
+          "ready": true,
+          "api": "facebook-login",
+          "account_id_source": "FB_PAGE_ID"
+        }
       },
       "phase": "Review draft posts",
       "urgency": "medium",
@@ -196,7 +276,10 @@
         "readiness_message": "Ready after approval.",
         "text": "Twelve Dollars is live in the Lily Roo archive. The remastered videos are up, the playlist is public, and the stage finally has the right kind of trouble on it.",
         "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-        "media_key": "twelve-dollars-cover"
+        "media_key": "twelve-dollars-cover",
+        "readiness": {
+          "ready": true
+        }
       },
       "phase": "Review draft posts",
       "urgency": "medium",
@@ -224,7 +307,14 @@
         "readiness_message": "YouTube Community posts are copy-ready manual workflow.",
         "text": "New album transmission: Twelve Dollars. Remastered videos, updated art, full playlist live now.",
         "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-        "media_key": "twelve-dollars-cover"
+        "media_key": "twelve-dollars-cover",
+        "readiness": {
+          "ready": true,
+          "missing_secrets": [],
+          "client_secret_present": true,
+          "media_map_present": true,
+          "privacy_status": "public"
+        }
       },
       "phase": "Review draft posts",
       "urgency": "medium",
@@ -252,7 +342,14 @@
         "readiness_message": "YouTube Community posts are copy-ready manual workflow.",
         "text": "Analog Myth transmission is live: 13, Girls Camp, Analog Myth, Spilling the Tea, No Mortgage, Guards Down, Slow Walk, The Power of Light.",
         "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
-        "media_key": "analog-myth-cover"
+        "media_key": "analog-myth-cover",
+        "readiness": {
+          "ready": true,
+          "missing_secrets": [],
+          "client_secret_present": true,
+          "media_map_present": true,
+          "privacy_status": "public"
+        }
       },
       "phase": "Review draft posts",
       "urgency": "medium",
@@ -295,7 +392,7 @@
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-10T01:54:43.934698Z",
+          "updated_at": "2026-06-10T02:09:55.494566Z",
           "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
         }
       },
@@ -320,7 +417,7 @@
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-10T01:54:44.186334Z",
+          "updated_at": "2026-06-10T02:09:55.782632Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
         }
       },
@@ -365,7 +462,7 @@
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-10T01:54:44.924460Z",
+          "updated_at": "2026-06-10T02:09:55.987764Z",
           "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
         }
       },
@@ -410,7 +507,7 @@
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-10T01:54:45.304939Z",
+          "updated_at": "2026-06-10T02:09:56.387886Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
         }
       },

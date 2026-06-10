@@ -1,6 +1,6 @@
 # Promo Operations Packet - Lily Roo
 
-Generated: 2026-06-10T01:54:46.705293Z
+Generated: 2026-06-10T02:09:57.780543Z
 
 ## Summary
 - Actions: **20**
@@ -24,12 +24,17 @@ Generated: 2026-06-10T01:54:46.705293Z
 - **[blocked] Review TikTok draft for Twelve Dollars**
   - Why: Executor setup is not ready for this draft.
   - Detail: Executor credentials or platform setup are not ready.
+  - Missing secrets: `TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN`
+  - Public posting approved: `False`
   - Command: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --refresh-admin`
 
 ### Repair executor
 - **[high] Fix TikTok executor**
   - Why: Platform executor needs repair before queued auto posts can publish.
-  - Command: `LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py`
+  - Detail: Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok public posting approval is false. Complete TikTok OAuth/public posting setup, push secrets, then refresh Admin.
+  - Missing secrets: `TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN`
+  - Public posting approved: `False`
+  - Command: `python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py`
 - **[high] Fix Instagram executor**
   - Why: Platform executor needs repair before queued auto posts can publish.
   - Detail: Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.

@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PROMO_STATUS = ROOT / "data" / "promo_engine_status.json"
 PROMO_PLAN = ROOT / "data" / "promo_queue_plan.json"
 SOCIAL_EXECUTIONS = ROOT / "data" / "social_execution_snapshot.json"
+EXECUTOR_READINESS = ROOT / "data" / "executor_readiness_snapshot.json"
 OUT = ROOT / "data" / "promo_operations_packet.json"
 REPORT = ROOT / "admin" / "reports" / "promo-operations-packet.md"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
@@ -149,7 +150,53 @@ def pending_store_actions(status):
     return actions
 
 
-def approval_actions(plan):
+def platform_slug(platform: str) -> str:
+    value = str(platform or "").strip().lower()
+    return {
+        "youtube community": "youtube",
+        "x": "x",
+        "instagram": "instagram",
+        "tiktok": "tiktok",
+        "facebook": "facebook",
+    }.get(value, value)
+
+
+def readiness_diagnostics(readiness: dict, platform: str) -> dict:
+    payload = readiness.get("payload") if isinstance(readiness, dict) else {}
+    platform_data = ((payload or {}).get("platforms") or {}).get(platform_slug(platform)) or {}
+    missing_secrets = platform_data.get("missing_secrets") or []
+    diagnostics = {
+        "readiness": platform_data,
+        "missing_secrets": missing_secrets,
+        "public_posting_approved": platform_data.get("public_posting_approved"),
+        "refresh_config_present": platform_data.get("refresh_config_present"),
+        "access_token_present": platform_data.get("access_token_present"),
+        "default_privacy": platform_data.get("default_privacy"),
+    }
+    return {key: value for key, value in diagnostics.items() if value not in (None, "", [])}
+
+
+def repair_command_for(platform: str, fallback: str) -> str:
+    if platform_slug(platform) == "tiktok":
+        return "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py"
+    return fallback
+
+
+def repair_action_for(platform: str, fallback: str, diagnostics: dict) -> str:
+    if platform_slug(platform) == "tiktok":
+        missing = ", ".join(diagnostics.get("missing_secrets") or [])
+        approval = diagnostics.get("public_posting_approved")
+        pieces = []
+        if missing:
+            pieces.append(f"Missing worker secrets: {missing}.")
+        if approval is False:
+            pieces.append("TikTok public posting approval is false.")
+        pieces.append("Complete TikTok OAuth/public posting setup, push secrets, then refresh Admin.")
+        return " ".join(pieces)
+    return fallback
+
+
+def approval_actions(plan, readiness):
     actions = []
     readiness_by_id = {
         row.get("id"): row
@@ -159,8 +206,8 @@ def approval_actions(plan):
     for post in plan.get("posts") or []:
         if post.get("approved") == "yes":
             continue
-        readiness = readiness_by_id.get(post.get("id")) or {}
-        state = readiness.get("state") or "unknown"
+        post_readiness = readiness_by_id.get(post.get("id")) or {}
+        state = post_readiness.get("state") or "unknown"
         priority = 10
         if state == "blocked":
             priority = 40
@@ -179,10 +226,11 @@ def approval_actions(plan):
                 "execution_mode": post.get("execution_mode") or "",
                 "post_type": post.get("post_type") or "",
                 "readiness_state": state,
-                "readiness_message": readiness.get("message") or "",
+                "readiness_message": post_readiness.get("message") or "",
                 "text": post.get("text") or "",
                 "reply_text": post.get("reply_text") or "",
                 "media_key": post.get("media_key") or "",
+                **readiness_diagnostics(readiness, post.get("platform") or ""),
             },
         ))
     return actions
@@ -220,22 +268,27 @@ def manual_metric_actions(status):
     return actions
 
 
-def platform_fix_actions(status, executions):
+def platform_fix_actions(status, executions, readiness):
     summary = status.get("kpi", {}).get("social_execution_summary") or {}
     rows = summary.get("platform_fix_needed") or (executions.get("summary") or {}).get("platform_fix_needed") or []
     actions = []
     for row in rows:
+        platform = row.get("platform") or ""
+        diagnostics = readiness_diagnostics(readiness, platform)
+        fallback_action = row.get("repair_action") or ""
+        fallback_command = row.get("repair_command") or "python3 scripts/refresh_promo_admin.py"
         actions.append(command_row(
-            f"Fix {row.get('platform') or 'social'} executor",
-            row.get("repair_command") or "python3 scripts/refresh_promo_admin.py",
+            f"Fix {platform or 'social'} executor",
+            repair_command_for(platform, fallback_command),
             "platform_fix",
             1,
             {
                 "post_id": row.get("post_id") or "",
-                "platform": row.get("platform") or "",
+                "platform": platform,
                 "reason": row.get("reason") or "",
                 "error_summary": row.get("error_summary") or "",
-                "repair_action": row.get("repair_action") or "",
+                "repair_action": repair_action_for(platform, fallback_action, diagnostics),
+                **diagnostics,
             },
         ))
     return actions
@@ -273,12 +326,17 @@ def build_markdown(packet):
                 lines.append(f"### {phase}")
                 current_phase = phase
             context = action.get("context") or {}
-            detail = context.get("error_summary") or context.get("readiness_message") or ", ".join(context.get("fields") or [])
+            detail = context.get("error_summary") or context.get("repair_action") or context.get("readiness_message") or ", ".join(context.get("fields") or [])
+            missing_secrets = ", ".join(context.get("missing_secrets") or [])
             lines.append(f"- **[{action.get('urgency', 'low')}] {action['label']}**")
             if action.get("urgency_reason"):
                 lines.append(f"  - Why: {action['urgency_reason']}")
             if detail:
                 lines.append(f"  - Detail: {detail}")
+            if missing_secrets:
+                lines.append(f"  - Missing secrets: `{missing_secrets}`")
+            if "public_posting_approved" in context:
+                lines.append(f"  - Public posting approved: `{context.get('public_posting_approved')}`")
             if action.get("command"):
                 lines.append(f"  - Command: `{action['command']}`")
     else:
@@ -335,10 +393,11 @@ def main() -> int:
     status = read_json(PROMO_STATUS, {})
     plan = read_json(PROMO_PLAN, {})
     executions = read_json(SOCIAL_EXECUTIONS, {})
+    readiness = read_json(EXECUTOR_READINESS, {})
     actions = (
-        platform_fix_actions(status, executions)
+        platform_fix_actions(status, executions, readiness)
         + apply_actions(plan)
-        + approval_actions(plan)
+        + approval_actions(plan, readiness)
         + pending_store_actions(status)
         + manual_metric_actions(status)
     )
@@ -363,6 +422,7 @@ def main() -> int:
             "promo_engine_status": str(PROMO_STATUS.relative_to(ROOT)),
             "promo_queue_plan": str(PROMO_PLAN.relative_to(ROOT)),
             "social_executions": str(SOCIAL_EXECUTIONS.relative_to(ROOT)),
+            "executor_readiness": str(EXECUTOR_READINESS.relative_to(ROOT)),
         },
         "summary": summary,
         "actions": actions,

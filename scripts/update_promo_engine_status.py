@@ -432,6 +432,11 @@ def social_platform_repair_guidance(item: dict) -> dict:
             "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
             "repair_command": command,
         }
+    if "tiktok" in platform:
+        return {
+            "repair_action": "Add TikTok OAuth credentials and confirm public posting approval, then push TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, and TIKTOK_REFRESH_TOKEN to the worker.",
+            "repair_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
+        }
     return {
         "repair_action": "Review platform credentials/readiness, then rerun the social execution capture.",
         "repair_command": "LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_social_executions.py",
