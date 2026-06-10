@@ -380,9 +380,14 @@ def social_execution_state(snapshot, scheduled_rows=None):
         if row.get("id")
     }
     attention = summary.get("latest_attention") or []
+    categorized_attention = dedupe_execution_rows(
+        (summary.get("approval_needed") or [])
+        + (summary.get("platform_fix_needed") or [])
+    )
+    source_rows = categorized_attention or attention
     approval_needed = []
     platform_fix_needed = []
-    for item in attention:
+    for item in source_rows:
         queue_row = scheduled.get(item.get("post_id"), {})
         enriched = {
             **item,
@@ -413,6 +418,23 @@ def social_execution_state(snapshot, scheduled_rows=None):
         "platform_fix_needed": platform_fix_needed,
         "action_needed": snapshot.get("action_needed", "") if isinstance(snapshot, dict) else "Run scripts/capture_social_executions.py.",
     }
+
+
+def dedupe_execution_rows(rows: list[dict]) -> list[dict]:
+    seen = set()
+    deduped = []
+    for row in rows:
+        key = row.get("post_id") or (
+            row.get("platform"),
+            row.get("status"),
+            row.get("reason"),
+            row.get("updated_at"),
+        )
+        if key in seen:
+            continue
+        seen.add(key)
+        deduped.append(row)
+    return deduped
 
 
 def social_platform_repair_guidance(item: dict) -> dict:

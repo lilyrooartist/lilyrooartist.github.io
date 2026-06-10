@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-10T05:04:14.626687Z",
+  "generated_at": "2026-06-10T05:14:20.604855Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -8,9 +8,9 @@
     "executor_readiness": "data/executor_readiness_snapshot.json"
   },
   "summary": {
-    "action_count": 20,
+    "action_count": 21,
     "user_review": 6,
-    "platform_fixes": 2,
+    "platform_fixes": 3,
     "store_checks": 7,
     "manual_metric_updates": 5,
     "safe_apply_commands": 0,
@@ -18,14 +18,14 @@
     "manual_only_review_items": 2,
     "phases": {
       "Fill manual metrics": 5,
-      "Repair executor": 2,
+      "Repair executor": 3,
       "Review blocked drafts": 1,
       "Review draft posts": 5,
       "Verify music sites": 7
     },
     "urgencies": {
       "blocked": 1,
-      "high": 2,
+      "high": 3,
       "low": 5,
       "medium": 12
     },
@@ -120,7 +120,7 @@
       "sort_key": [
         0,
         40,
-        4
+        5
       ]
     },
     {
@@ -194,6 +194,31 @@
       ]
     },
     {
+      "label": "Fix Facebook executor",
+      "kind": "platform_fix",
+      "priority": 1,
+      "command": "python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run",
+      "context": {
+        "post_id": "FP-AUTO-265",
+        "platform": "Facebook",
+        "reason": "",
+        "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
+        "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
+        "readiness": {
+          "ready": true
+        }
+      },
+      "phase": "Repair executor",
+      "urgency": "high",
+      "urgency_reason": "Platform executor needs repair before queued auto posts can publish.",
+      "status": "needs_fix",
+      "sort_key": [
+        1,
+        1,
+        2
+      ]
+    },
+    {
       "label": "Review X draft for Twelve Dollars",
       "kind": "approval_review",
       "priority": 10,
@@ -224,7 +249,7 @@
       "sort_key": [
         2,
         10,
-        2
+        3
       ]
     },
     {
@@ -257,7 +282,7 @@
       "sort_key": [
         2,
         10,
-        3
+        4
       ]
     },
     {
@@ -288,7 +313,7 @@
       "sort_key": [
         2,
         10,
-        5
+        6
       ]
     },
     {
@@ -323,7 +348,7 @@
       "sort_key": [
         2,
         15,
-        6
+        7
       ]
     },
     {
@@ -358,7 +383,7 @@
       "sort_key": [
         2,
         15,
-        7
+        8
       ]
     },
     {
@@ -372,33 +397,8 @@
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-10T05:04:09.251154Z",
+          "updated_at": "2026-06-10T05:14:15.179325Z",
           "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
-        }
-      },
-      "phase": "Verify music sites",
-      "urgency": "medium",
-      "urgency_reason": "Public store links should be checked until DistroKid exposes them.",
-      "status": "ready",
-      "sort_key": [
-        2,
-        20,
-        8
-      ]
-    },
-    {
-      "label": "Verify Twelve Dollars on Apple Music",
-      "kind": "store_verification",
-      "priority": 20,
-      "command": "python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/apple_music_release_snapshot.json'",
-      "context": {
-        "release": "Twelve Dollars",
-        "service": "Apple Music",
-        "latest_snapshot": {
-          "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
-          "ok": false,
-          "updated_at": "2026-06-10T05:04:10.283142Z",
-          "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
         }
       },
       "phase": "Verify music sites",
@@ -412,18 +412,18 @@
       ]
     },
     {
-      "label": "Verify Twelve Dollars on HyperFollow",
+      "label": "Verify Twelve Dollars on Apple Music",
       "kind": "store_verification",
       "priority": 20,
-      "command": "python3 scripts/capture_hyperfollow_store_links.py --url 'https://distrokid.com/hyperfollow/lilyroo/twelve-dollars' --out 'data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json'",
+      "command": "python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/apple_music_release_snapshot.json'",
       "context": {
         "release": "Twelve Dollars",
-        "service": "HyperFollow",
+        "service": "Apple Music",
         "latest_snapshot": {
-          "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
+          "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-10T05:04:10.567116Z",
-          "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
+          "updated_at": "2026-06-10T05:14:16.344648Z",
+          "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
         }
       },
       "phase": "Verify music sites",
@@ -437,6 +437,31 @@
       ]
     },
     {
+      "label": "Verify Twelve Dollars on HyperFollow",
+      "kind": "store_verification",
+      "priority": 20,
+      "command": "python3 scripts/capture_hyperfollow_store_links.py --url 'https://distrokid.com/hyperfollow/lilyroo/twelve-dollars' --out 'data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json'",
+      "context": {
+        "release": "Twelve Dollars",
+        "service": "HyperFollow",
+        "latest_snapshot": {
+          "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
+          "ok": false,
+          "updated_at": "2026-06-10T05:14:16.720257Z",
+          "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
+        }
+      },
+      "phase": "Verify music sites",
+      "urgency": "medium",
+      "urgency_reason": "Public store links should be checked until DistroKid exposes them.",
+      "status": "ready",
+      "sort_key": [
+        2,
+        20,
+        11
+      ]
+    },
+    {
       "label": "Verify Analog Myth on Spotify",
       "kind": "store_verification",
       "priority": 20,
@@ -447,33 +472,8 @@
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/spotify_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-10T05:04:10.644912Z",
+          "updated_at": "2026-06-10T05:14:16.798642Z",
           "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
-        }
-      },
-      "phase": "Verify music sites",
-      "urgency": "medium",
-      "urgency_reason": "Public store links should be checked as the July 1 release approaches.",
-      "status": "ready",
-      "sort_key": [
-        2,
-        20,
-        11
-      ]
-    },
-    {
-      "label": "Verify Analog Myth on Apple Music",
-      "kind": "store_verification",
-      "priority": 20,
-      "command": "python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/apple_music_release_snapshot.json'",
-      "context": {
-        "release": "Analog Myth",
-        "service": "Apple Music",
-        "latest_snapshot": {
-          "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
-          "ok": false,
-          "updated_at": "2026-06-10T05:04:11.714439Z",
-          "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
         }
       },
       "phase": "Verify music sites",
@@ -487,18 +487,18 @@
       ]
     },
     {
-      "label": "Verify Analog Myth on YouTube Music",
+      "label": "Verify Analog Myth on Apple Music",
       "kind": "store_verification",
       "priority": 20,
-      "command": "python3 scripts/search_youtube_music_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/youtube_music_release_snapshot.json'",
+      "command": "python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/apple_music_release_snapshot.json'",
       "context": {
         "release": "Analog Myth",
-        "service": "YouTube Music",
+        "service": "Apple Music",
         "latest_snapshot": {
-          "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
+          "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-10T05:04:11.785115Z",
-          "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release."
+          "updated_at": "2026-06-10T05:14:17.808837Z",
+          "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
         }
       },
       "phase": "Verify music sites",
@@ -512,18 +512,18 @@
       ]
     },
     {
-      "label": "Verify Analog Myth on HyperFollow",
+      "label": "Verify Analog Myth on YouTube Music",
       "kind": "store_verification",
       "priority": 20,
-      "command": "python3 scripts/capture_hyperfollow_store_links.py --url 'https://distrokid.com/hyperfollow/lilyroo/analog-myth' --out 'data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json'",
+      "command": "python3 scripts/search_youtube_music_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/youtube_music_release_snapshot.json'",
       "context": {
         "release": "Analog Myth",
-        "service": "HyperFollow",
+        "service": "YouTube Music",
         "latest_snapshot": {
-          "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
+          "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-10T05:04:13.354292Z",
-          "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
+          "updated_at": "2026-06-10T05:14:17.880820Z",
+          "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release."
         }
       },
       "phase": "Verify music sites",
@@ -534,6 +534,31 @@
         2,
         20,
         14
+      ]
+    },
+    {
+      "label": "Verify Analog Myth on HyperFollow",
+      "kind": "store_verification",
+      "priority": 20,
+      "command": "python3 scripts/capture_hyperfollow_store_links.py --url 'https://distrokid.com/hyperfollow/lilyroo/analog-myth' --out 'data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json'",
+      "context": {
+        "release": "Analog Myth",
+        "service": "HyperFollow",
+        "latest_snapshot": {
+          "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
+          "ok": false,
+          "updated_at": "2026-06-10T05:14:19.462154Z",
+          "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
+        }
+      },
+      "phase": "Verify music sites",
+      "urgency": "medium",
+      "urgency_reason": "Public store links should be checked as the July 1 release approaches.",
+      "status": "ready",
+      "sort_key": [
+        2,
+        20,
+        15
       ]
     },
     {
@@ -554,7 +579,7 @@
       "sort_key": [
         3,
         30,
-        15
+        16
       ]
     },
     {
@@ -576,7 +601,7 @@
       "sort_key": [
         3,
         30,
-        16
+        17
       ]
     },
     {
@@ -600,7 +625,7 @@
       "sort_key": [
         3,
         30,
-        17
+        18
       ]
     },
     {
@@ -622,7 +647,7 @@
       "sort_key": [
         3,
         30,
-        18
+        19
       ]
     },
     {
@@ -644,7 +669,7 @@
       "sort_key": [
         3,
         30,
-        19
+        20
       ]
     }
   ]

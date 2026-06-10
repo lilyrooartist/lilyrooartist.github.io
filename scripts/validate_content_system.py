@@ -421,6 +421,13 @@ def validate_generated_outputs(failures):
             ok("promo engine includes social execution summary")
         else:
             fail("promo_engine_status.json missing categorized social execution summary", failures)
+        if SOCIAL_EXECUTION_SNAPSHOT.exists():
+            raw_execution = json.loads(SOCIAL_EXECUTION_SNAPSHOT.read_text(encoding="utf-8"))
+            raw_summary = raw_execution.get("summary") or {}
+            if execution_summary.get("platform_fix_needed_count") == len(raw_summary.get("platform_fix_needed") or []):
+                ok("promo engine platform-fix count matches executor snapshot")
+            else:
+                fail("promo_engine_status.json platform-fix count does not match executor snapshot", failures)
         refresh_run = kpi.get("last_refresh_run") or {}
         if "available" in refresh_run and "command_count" in refresh_run and "finished_at" in refresh_run:
             ok("promo engine includes last refresh run summary")

@@ -1,19 +1,19 @@
 # Promo Operations Packet - Lily Roo
 
-Generated: 2026-06-10T05:04:14.626687Z
+Generated: 2026-06-10T05:14:20.604855Z
 
 ## Summary
-- Actions: **20**
+- Actions: **21**
 - User review: **6**
-- Platform fixes: **2**
+- Platform fixes: **3**
 - Store checks: **7**
 - Manual metric updates: **5**
 - Safe apply commands ready: **0**
-- Urgency: **blocked: 1, high: 2, low: 5, medium: 12**
+- Urgency: **blocked: 1, high: 3, low: 5, medium: 12**
 
 ## Phase Counts
 - Fill manual metrics: **5**
-- Repair executor: **2**
+- Repair executor: **3**
 - Review blocked drafts: **1**
 - Review draft posts: **5**
 - Verify music sites: **7**
@@ -39,6 +39,10 @@ Generated: 2026-06-10T05:04:14.626687Z
   - Why: Platform executor needs repair before queued auto posts can publish.
   - Detail: Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.
   - Command: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
+- **[high] Fix Facebook executor**
+  - Why: Platform executor needs repair before queued auto posts can publish.
+  - Detail: Facebook blocked Page publishing until identity is confirmed in the Facebook app.
+  - Command: `python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run`
 
 ### Review draft posts
 - **[medium] Review X draft for Twelve Dollars**
@@ -72,9 +76,6 @@ Generated: 2026-06-10T05:04:14.626687Z
 - **[medium] Verify Twelve Dollars on HyperFollow**
   - Why: Public store links should be checked until DistroKid exposes them.
   - Command: `python3 scripts/capture_hyperfollow_store_links.py --url 'https://distrokid.com/hyperfollow/lilyroo/twelve-dollars' --out 'data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json'`
-- **[medium] Verify Analog Myth on Spotify**
-  - Why: Public store links should be checked as the July 1 release approaches.
-  - Command: `python3 scripts/search_spotify_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/spotify_release_snapshot.json'`
 
 ## Guardrails
 - This packet does not publish, approve, apply, or post anything.
