@@ -31,6 +31,105 @@ def command_row(label: str, command: str, kind: str, priority: int, context: dic
     }
 
 
+def parse_datetime(value: str | None):
+    raw = str(value or "").strip()
+    if not raw:
+        return None
+    if raw.endswith("Z"):
+        raw = raw[:-1] + "+00:00"
+    try:
+        parsed = datetime.fromisoformat(raw)
+    except ValueError:
+        return None
+    if parsed.tzinfo is None:
+        return parsed.replace(tzinfo=timezone.utc)
+    return parsed.astimezone(timezone.utc)
+
+
+def phase_for(action: dict) -> str:
+    kind = action.get("kind")
+    if kind == "platform_fix":
+        return "Repair executor"
+    if kind == "apply_approved":
+        return "Apply approved"
+    if kind == "approval_review":
+        state = (action.get("context") or {}).get("readiness_state")
+        if state == "blocked":
+            return "Review blocked drafts"
+        return "Review draft posts"
+    if kind == "store_verification":
+        return "Verify music sites"
+    if kind == "manual_metrics":
+        return "Fill manual metrics"
+    return "Other"
+
+
+def urgency_for(action: dict, now: datetime) -> tuple[str, str]:
+    kind = action.get("kind")
+    context = action.get("context") or {}
+    if kind == "platform_fix":
+        return "high", "Platform executor needs repair before queued auto posts can publish."
+    if kind == "apply_approved":
+        return "high", "Approved rows are ready to move into the live queue."
+    if kind == "approval_review":
+        state = context.get("readiness_state")
+        if state == "blocked":
+            return "blocked", "Executor setup is not ready for this draft."
+        scheduled = parse_datetime(context.get("scheduled_at"))
+        if scheduled:
+            hours = (scheduled - now).total_seconds() / 3600
+            if hours <= 24:
+                return "high", "Draft is scheduled within 24 hours."
+            if hours <= 72:
+                return "medium", "Draft is scheduled within 72 hours."
+        if state == "manual_only":
+            return "medium", "Manual copy is ready for human posting workflow."
+        return "medium", "Auto draft is ready once reviewed and approved."
+    if kind == "store_verification":
+        release = context.get("release", "")
+        if release == "Analog Myth":
+            return "medium", "Public store links should be checked as the July 1 release approaches."
+        return "medium", "Public store links should be checked until DistroKid exposes them."
+    if kind == "manual_metrics":
+        return "low", "Manual metric gaps affect reporting, not publishing."
+    return "low", ""
+
+
+def enrich_actions(actions: list[dict], now: datetime) -> list[dict]:
+    enriched = []
+    urgency_order = {"blocked": 0, "high": 1, "medium": 2, "low": 3}
+    for index, action in enumerate(actions):
+        urgency, reason = urgency_for(action, now)
+        phase = phase_for(action)
+        item = dict(action)
+        item["phase"] = phase
+        item["urgency"] = urgency
+        item["urgency_reason"] = reason
+        if urgency == "blocked":
+            item["status"] = "blocked"
+        elif action.get("kind") in {"approval_review", "manual_metrics"}:
+            item["status"] = "waiting_for_user"
+        elif action.get("kind") == "platform_fix":
+            item["status"] = "needs_fix"
+        else:
+            item["status"] = "ready"
+        item["sort_key"] = [
+            urgency_order.get(urgency, 9),
+            int(action.get("priority") or 999),
+            index,
+        ]
+        enriched.append(item)
+    return sorted(enriched, key=lambda action: (action["sort_key"], action["label"]))
+
+
+def grouped_counts(actions: list[dict], field: str) -> dict:
+    counts = {}
+    for action in actions:
+        key = action.get(field) or "unknown"
+        counts[key] = counts.get(key, 0) + 1
+    return dict(sorted(counts.items()))
+
+
 def pending_store_actions(status):
     actions = []
     for release in status.get("releases") or []:
@@ -143,6 +242,8 @@ def platform_fix_actions(status, executions):
 
 
 def build_markdown(packet):
+    phases = packet["summary"].get("phases") or {}
+    urgencies = packet["summary"].get("urgencies") or {}
     lines = [
         "# Promo Operations Packet - Lily Roo",
         "",
@@ -155,18 +256,32 @@ def build_markdown(packet):
         f"- Store checks: **{packet['summary']['store_checks']}**",
         f"- Manual metric updates: **{packet['summary']['manual_metric_updates']}**",
         f"- Safe apply commands ready: **{packet['summary']['safe_apply_commands']}**",
+        f"- Urgency: **{', '.join(f'{key}: {value}' for key, value in urgencies.items()) or 'none'}**",
         "",
-        "## Top Actions",
+        "## Phase Counts",
     ]
-    for action in packet["actions"][:12]:
-        context = action.get("context") or {}
-        detail = context.get("error_summary") or context.get("readiness_message") or ", ".join(context.get("fields") or [])
-        lines.append(f"- **{action['label']}**")
-        if detail:
-            lines.append(f"  - Detail: {detail}")
-        if action.get("command"):
-            lines.append(f"  - Command: `{action['command']}`")
-    if not packet["actions"]:
+    for phase, count in phases.items():
+        lines.append(f"- {phase}: **{count}**")
+    lines.append("")
+    lines.append("## Top Actions")
+    if packet["actions"]:
+        current_phase = ""
+        for action in packet["actions"][:12]:
+            phase = action.get("phase") or "Other"
+            if phase != current_phase:
+                lines.append("")
+                lines.append(f"### {phase}")
+                current_phase = phase
+            context = action.get("context") or {}
+            detail = context.get("error_summary") or context.get("readiness_message") or ", ".join(context.get("fields") or [])
+            lines.append(f"- **[{action.get('urgency', 'low')}] {action['label']}**")
+            if action.get("urgency_reason"):
+                lines.append(f"  - Why: {action['urgency_reason']}")
+            if detail:
+                lines.append(f"  - Detail: {detail}")
+            if action.get("command"):
+                lines.append(f"  - Command: `{action['command']}`")
+    else:
         lines.append("- No open promo operations.")
     lines.append("")
     lines.append("## Guardrails")
@@ -216,6 +331,7 @@ def sync_admin(packet, markdown):
 
 
 def main() -> int:
+    now = datetime.now(timezone.utc)
     status = read_json(PROMO_STATUS, {})
     plan = read_json(PROMO_PLAN, {})
     executions = read_json(SOCIAL_EXECUTIONS, {})
@@ -226,7 +342,7 @@ def main() -> int:
         + pending_store_actions(status)
         + manual_metric_actions(status)
     )
-    actions = sorted(actions, key=lambda action: (action["priority"], action["label"]))
+    actions = enrich_actions(actions, now)
     summary = {
         "action_count": len(actions),
         "user_review": sum(1 for action in actions if action["kind"] == "approval_review"),
@@ -236,9 +352,12 @@ def main() -> int:
         "safe_apply_commands": sum(1 for action in actions if action["kind"] == "apply_approved"),
         "blocked_review_items": sum(1 for action in actions if action["context"].get("readiness_state") == "blocked"),
         "manual_only_review_items": sum(1 for action in actions if action["context"].get("readiness_state") == "manual_only"),
+        "phases": grouped_counts(actions, "phase"),
+        "urgencies": grouped_counts(actions, "urgency"),
+        "next_action": next((action for action in actions if action.get("status") != "blocked"), actions[0] if actions else {}),
     }
     packet = {
-        "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+        "generated_at": now.isoformat().replace("+00:00", "Z"),
         "safe_mode": True,
         "source": {
             "promo_engine_status": str(PROMO_STATUS.relative_to(ROOT)),

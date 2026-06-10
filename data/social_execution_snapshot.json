@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "updated_at": "2026-06-09T22:14:45.447486Z",
+  "updated_at": "2026-06-10T01:54:46.538794Z",
   "source": "lilyroo-social-executor-executions",
   "url": "https://www.lilyroo.com/api/social/executions",
   "http_status": 200,
@@ -8,19 +8,19 @@
   "password_supplied": false,
   "auth_method": "bearer",
   "summary": {
-    "execution_count": 5,
+    "execution_count": 6,
     "posted_count": 0,
-    "attention_count": 5,
+    "attention_count": 6,
     "approval_needed_count": 3,
-    "platform_fix_needed_count": 2,
+    "platform_fix_needed_count": 3,
     "status_counts": {
-      "blocked": 3,
+      "blocked": 4,
       "failed": 2
     },
     "platform_counts": {
       "Facebook": 1,
       "Instagram": 2,
-      "TikTok": 1,
+      "TikTok": 2,
       "YouTube Community": 1
     },
     "latest_posted": [],
@@ -31,7 +31,7 @@
         "status": "blocked",
         "reason": "not_approved",
         "attempts": 0,
-        "updated_at": "2026-06-09T22:00:18.419Z",
+        "updated_at": "2026-06-10T01:45:18.645Z",
         "source": "cron",
         "post_url": "",
         "error_summary": ""
@@ -42,7 +42,7 @@
         "status": "blocked",
         "reason": "not_approved",
         "attempts": 0,
-        "updated_at": "2026-06-09T22:00:17.650Z",
+        "updated_at": "2026-06-10T01:45:17.743Z",
         "source": "cron",
         "post_url": "",
         "error_summary": ""
@@ -53,7 +53,7 @@
         "status": "blocked",
         "reason": "not_approved",
         "attempts": 0,
-        "updated_at": "2026-06-09T22:00:16.836Z",
+        "updated_at": "2026-06-10T01:45:16.862Z",
         "source": "cron",
         "post_url": "",
         "error_summary": ""
@@ -61,12 +61,23 @@
     ],
     "platform_fix_needed": [
       {
+        "post_id": "FP-AUTO-264",
+        "platform": "TikTok",
+        "status": "blocked",
+        "reason": "tiktok_credentials_missing",
+        "attempts": 0,
+        "updated_at": "2026-06-10T01:45:20.378Z",
+        "source": "cron",
+        "post_url": "",
+        "error_summary": ""
+      },
+      {
         "post_id": "FP-AUTO-263",
         "platform": "Instagram",
         "status": "failed",
         "reason": "max_attempts_exceeded",
         "attempts": 3,
-        "updated_at": "2026-06-09T22:00:19.154Z",
+        "updated_at": "2026-06-10T01:45:19.542Z",
         "source": "cron",
         "post_url": "",
         "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID."
@@ -85,12 +96,23 @@
     ],
     "latest_attention": [
       {
+        "post_id": "FP-AUTO-264",
+        "platform": "TikTok",
+        "status": "blocked",
+        "reason": "tiktok_credentials_missing",
+        "attempts": 0,
+        "updated_at": "2026-06-10T01:45:20.378Z",
+        "source": "cron",
+        "post_url": "",
+        "error_summary": ""
+      },
+      {
         "post_id": "FP-AUTO-263",
         "platform": "Instagram",
         "status": "failed",
         "reason": "max_attempts_exceeded",
         "attempts": 3,
-        "updated_at": "2026-06-09T22:00:19.154Z",
+        "updated_at": "2026-06-10T01:45:19.542Z",
         "source": "cron",
         "post_url": "",
         "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID."
@@ -101,7 +123,7 @@
         "status": "blocked",
         "reason": "not_approved",
         "attempts": 0,
-        "updated_at": "2026-06-09T22:00:18.419Z",
+        "updated_at": "2026-06-10T01:45:18.645Z",
         "source": "cron",
         "post_url": "",
         "error_summary": ""
@@ -112,7 +134,7 @@
         "status": "blocked",
         "reason": "not_approved",
         "attempts": 0,
-        "updated_at": "2026-06-09T22:00:17.650Z",
+        "updated_at": "2026-06-10T01:45:17.743Z",
         "source": "cron",
         "post_url": "",
         "error_summary": ""
@@ -123,27 +145,16 @@
         "status": "blocked",
         "reason": "not_approved",
         "attempts": 0,
-        "updated_at": "2026-06-09T22:00:16.836Z",
+        "updated_at": "2026-06-10T01:45:16.862Z",
         "source": "cron",
         "post_url": "",
         "error_summary": ""
-      },
-      {
-        "post_id": "FP-AUTO-265",
-        "platform": "Facebook",
-        "status": "failed",
-        "reason": "",
-        "attempts": 1,
-        "updated_at": "2026-06-09T02:01:38.028Z",
-        "source": "manual",
-        "post_url": "",
-        "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app."
       }
     ]
   },
   "payload": {
     "ok": true,
-    "execution_count": 5
+    "execution_count": 6
   },
   "action_needed": ""
 }

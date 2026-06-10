@@ -172,23 +172,44 @@ def set_dot(payload: dict, path: str, value):
     target[parts[-1]] = value
 
 
-def preserve_same_day_values(snapshot: dict, same_day: dict | None) -> dict:
-    if not same_day:
+def preserve_snapshot_values(snapshot: dict, source_snapshot: dict | None, marker: str, fields: list[str]) -> dict:
+    if not source_snapshot:
         return snapshot
     preserved = []
-    for field in [
-        "youtube.subscribers",
-        "youtube.total_views",
-        "youtube.video_count",
-        "facebook.followers",
-        "facebook.page_likes",
-    ]:
-        if dot_get(snapshot, field) is None and dot_get(same_day, field) is not None:
-            set_dot(snapshot, field, dot_get(same_day, field))
+    for field in fields:
+        if dot_get(snapshot, field) is None and dot_get(source_snapshot, field) is not None:
+            set_dot(snapshot, field, dot_get(source_snapshot, field))
             preserved.append(field)
     if preserved:
-        snapshot["preserved_from_same_day_snapshot"] = preserved
+        snapshot[marker] = preserved
     return snapshot
+
+
+def preserve_same_day_values(snapshot: dict, same_day: dict | None) -> dict:
+    return preserve_snapshot_values(
+        snapshot,
+        same_day,
+        "preserved_from_same_day_snapshot",
+        [
+            "youtube.subscribers",
+            "youtube.total_views",
+            "youtube.video_count",
+            "facebook.followers",
+            "facebook.page_likes",
+        ],
+    )
+
+
+def preserve_previous_cumulative_values(snapshot: dict, previous: dict | None) -> dict:
+    return preserve_snapshot_values(
+        snapshot,
+        previous,
+        "preserved_from_previous_snapshot",
+        [
+            "youtube.total_views",
+            "youtube.video_count",
+        ],
+    )
 
 
 def main() -> int:
@@ -203,6 +224,7 @@ def main() -> int:
     snapshots = [item for item in snapshots if item.get("date") != now.date().isoformat()]
     previous = snapshots[-1] if snapshots else None
     snapshot = preserve_same_day_values(build_snapshot(now), same_day)
+    snapshot = preserve_previous_cumulative_values(snapshot, previous)
     snapshot = attach_deltas(snapshot, previous)
     snapshots.append(snapshot)
     history = {

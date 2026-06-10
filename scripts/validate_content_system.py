@@ -207,9 +207,13 @@ def validate_generated_outputs(failures):
             ok(f"promo operations packet tracks {len(actions)} action(s)")
         else:
             fail("promo_operations_packet.json missing safe summary or action count", failures)
+        if summary.get("phases") and summary.get("urgencies") and summary.get("next_action"):
+            ok("promo operations packet summarizes phases and urgency")
+        else:
+            fail("promo_operations_packet.json missing phase or urgency summary", failures)
         action_kinds = {action.get("kind") for action in actions}
         required_kinds = {"approval_review", "store_verification", "manual_metrics", "platform_fix"}
-        if required_kinds <= action_kinds and all("command" in action and "label" in action for action in actions):
+        if required_kinds <= action_kinds and all("command" in action and "label" in action and "phase" in action and "urgency" in action for action in actions):
             ok("promo operations packet groups approval, store, metric, and platform work")
         else:
             fail("promo_operations_packet.json missing required action groups", failures)
@@ -555,7 +559,7 @@ def validate_generated_outputs(failures):
         fail("refresh_promo_admin.py missing", failures)
     if PROMO_OPERATIONS_SCRIPT.exists():
         packet_text = PROMO_OPERATIONS_SCRIPT.read_text(encoding="utf-8")
-        if "promo_operations_packet.json" in packet_text and "promo-operations-packet.md" in packet_text and "approval_review" in packet_text and "subprocess" not in packet_text:
+        if "promo_operations_packet.json" in packet_text and "promo-operations-packet.md" in packet_text and "approval_review" in packet_text and "urgency_for" in packet_text and "subprocess" not in packet_text:
             ok("promo operations packet builder is review-only")
         else:
             fail("build_promo_operations_packet.py missing review packet outputs or executes commands", failures)
