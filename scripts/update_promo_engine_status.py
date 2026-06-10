@@ -582,11 +582,11 @@ def store_verification_commands(release, store_services):
             note = "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json."
         elif label == "YouTube Music":
             command = (
-                f"python3 scripts/capture_youtube_music_release.py --url YOUTUBE_MUSIC_URL "
+                f"python3 scripts/search_youtube_music_release.py --artist {shell_quote(artist)} "
                 f"--title {shell_quote(title)} "
                 f"--out {shell_quote(output_root + '/youtube_music_release_snapshot.json')}"
             )
-            note = "Replace YOUTUBE_MUSIC_URL with the public music.youtube.com/watch URL once the release appears."
+            note = "Searches public web results for YouTube Music watch URLs, then validates the public title."
         elif label == "HyperFollow":
             guessed_url = release.get("hyperfollow_url") or hyperfollow_guess(title)
             command = (

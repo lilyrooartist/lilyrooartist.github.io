@@ -37,6 +37,7 @@ SCHEDULED_POST_APPROVAL = ROOT / "scripts" / "update_scheduled_post_approval.py"
 MANUAL_METRICS_UPDATER = ROOT / "scripts" / "update_manual_social_stats.py"
 STORE_LINK_VERIFIER = ROOT / "scripts" / "verify_pending_store_links.py"
 SPOTIFY_SEARCH_VERIFIER = ROOT / "scripts" / "search_spotify_release.py"
+YOUTUBE_MUSIC_SEARCH_VERIFIER = ROOT / "scripts" / "search_youtube_music_release.py"
 METRICS_HISTORY_UPDATER = ROOT / "scripts" / "update_metrics_history.py"
 EXECUTOR_READINESS_CAPTURE = ROOT / "scripts" / "capture_executor_readiness.py"
 SOCIAL_EXECUTION_CAPTURE = ROOT / "scripts" / "capture_social_executions.py"
@@ -432,11 +433,11 @@ def validate_generated_outputs(failures):
             fail("promo_engine_status.json social execution rows missing repair guidance", failures)
         for command in verification_commands:
             command_text = str(command.get("command") or "")
-            if "scripts/capture_" not in command_text and "scripts/search_spotify_release.py" not in command_text:
+            if "scripts/capture_" not in command_text and "scripts/search_spotify_release.py" not in command_text and "scripts/search_youtube_music_release.py" not in command_text:
                 fail(f"store verification command for {command.get('service') or 'unknown service'} missing capture script", failures)
         automatable_commands = [
             command for command in verification_commands
-            if command.get("service") in {"Spotify", "Apple Music", "HyperFollow"}
+            if command.get("service") in {"Spotify", "Apple Music", "YouTube Music", "HyperFollow"}
         ]
         snapshotted = [
             command for command in automatable_commands
@@ -552,7 +553,7 @@ def validate_generated_outputs(failures):
         fail("update_manual_social_stats.py missing", failures)
     if STORE_LINK_VERIFIER.exists():
         verifier_text = STORE_LINK_VERIFIER.read_text(encoding="utf-8")
-        if "search_spotify_release.py" in verifier_text and "capture_apple_music_release.py" in verifier_text and "capture_hyperfollow_store_links.py" in verifier_text and "--refresh-admin" in verifier_text:
+        if "search_spotify_release.py" in verifier_text and "capture_apple_music_release.py" in verifier_text and "search_youtube_music_release.py" in verifier_text and "capture_hyperfollow_store_links.py" in verifier_text and "--refresh-admin" in verifier_text:
             ok("pending store link verifier can refresh admin")
         else:
             fail("verify_pending_store_links.py missing capture or refresh support", failures)
@@ -566,6 +567,14 @@ def validate_generated_outputs(failures):
             fail("search_spotify_release.py missing public search or oEmbed validation", failures)
     else:
         fail("search_spotify_release.py missing", failures)
+    if YOUTUBE_MUSIC_SEARCH_VERIFIER.exists():
+        youtube_music_search_text = YOUTUBE_MUSIC_SEARCH_VERIFIER.read_text(encoding="utf-8")
+        if "public-web-search-plus-youtube-music-html" in youtube_music_search_text and "music.youtube.com/watch" in youtube_music_search_text and "title_matches_official" in youtube_music_search_text:
+            ok("YouTube Music public search verifier validates candidate titles")
+        else:
+            fail("search_youtube_music_release.py missing public search or title validation", failures)
+    else:
+        fail("search_youtube_music_release.py missing", failures)
     if METRICS_HISTORY_UPDATER.exists():
         history_text = METRICS_HISTORY_UPDATER.read_text(encoding="utf-8")
         if "metrics_history.json" in history_text and "--refresh-admin" in history_text:

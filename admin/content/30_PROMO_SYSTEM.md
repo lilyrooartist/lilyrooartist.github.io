@@ -29,6 +29,8 @@ It also writes a review packet to `data/promo_operations_packet.json` and `admin
 
 Pending Spotify album links are checked with `scripts/search_spotify_release.py`, which searches public web results for Spotify album URLs and validates exact-title candidates through Spotify oEmbed before marking a snapshot as found.
 
+Pending YouTube Music links are checked with `scripts/search_youtube_music_release.py`, which searches public web results for music.youtube.com watch URLs and validates exact-title candidates before marking a snapshot as found.
+
 When live APIs cannot provide a metric, the snapshot includes `pending_manual_by_platform` so `/admin` names the exact manual fields still needed for reporting.
 
 The refresh also writes a fill-in worksheet for those gaps at `data/manual_metric_collection_template.csv` and a readable checklist at `admin/reports/manual-metric-collection.md`.

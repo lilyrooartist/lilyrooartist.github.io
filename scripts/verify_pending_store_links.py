@@ -66,6 +66,17 @@ def main() -> int:
                 "--out",
                 str(output_root / "apple_music_release_snapshot.json"),
             ]))
+        if not release.get("youtube_music_url"):
+            results.append(run([
+                "python3",
+                "scripts/search_youtube_music_release.py",
+                "--artist",
+                status.get("artist", "Lily Roo"),
+                "--title",
+                title,
+                "--out",
+                str(output_root / "youtube_music_release_snapshot.json"),
+            ]))
         if not release.get("hyperfollow_url"):
             results.append(run([
                 "python3",

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-10T04:50:21.153089Z",
+  "generated_at": "2026-06-10T05:04:14.626687Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -372,7 +372,7 @@
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-10T04:50:17.048909Z",
+          "updated_at": "2026-06-10T05:04:09.251154Z",
           "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
         }
       },
@@ -397,7 +397,7 @@
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-10T04:50:18.134868Z",
+          "updated_at": "2026-06-10T05:04:10.283142Z",
           "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
         }
       },
@@ -422,7 +422,7 @@
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-10T04:50:18.467421Z",
+          "updated_at": "2026-06-10T05:04:10.567116Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
         }
       },
@@ -447,7 +447,7 @@
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/spotify_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-10T04:50:18.544290Z",
+          "updated_at": "2026-06-10T05:04:10.644912Z",
           "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
         }
       },
@@ -472,7 +472,7 @@
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-10T04:50:19.550081Z",
+          "updated_at": "2026-06-10T05:04:11.714439Z",
           "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
         }
       },
@@ -490,11 +490,16 @@
       "label": "Verify Analog Myth on YouTube Music",
       "kind": "store_verification",
       "priority": 20,
-      "command": "python3 scripts/capture_youtube_music_release.py --url YOUTUBE_MUSIC_URL --title 'Analog Myth' --out 'data/store-verification/analog-myth/youtube_music_release_snapshot.json'",
+      "command": "python3 scripts/search_youtube_music_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/youtube_music_release_snapshot.json'",
       "context": {
         "release": "Analog Myth",
         "service": "YouTube Music",
-        "latest_snapshot": {}
+        "latest_snapshot": {
+          "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
+          "ok": false,
+          "updated_at": "2026-06-10T05:04:11.785115Z",
+          "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release."
+        }
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -517,7 +522,7 @@
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-10T04:50:19.948438Z",
+          "updated_at": "2026-06-10T05:04:13.354292Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
         }
       },
