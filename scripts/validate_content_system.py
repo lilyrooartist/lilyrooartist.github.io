@@ -19,6 +19,7 @@ STORE_VERIFICATION_HISTORY = ROOT / "data" / "store_verification_history.json"
 SOCIAL_EXECUTION_SNAPSHOT = ROOT / "data" / "social_execution_snapshot.json"
 PROMO_REFRESH_RUN = ROOT / "data" / "promo_admin_refresh_run.json"
 PROMO_OPERATIONS_PACKET = ROOT / "data" / "promo_operations_packet.json"
+MANUAL_METRIC_TEMPLATE = ROOT / "data" / "manual_metric_collection_template.csv"
 SPOTIFY_SNAPSHOT = ROOT / "data" / "spotify_release_snapshot.json"
 APPLE_MUSIC_SNAPSHOT = ROOT / "data" / "apple_music_release_snapshot.json"
 YOUTUBE_PUBLIC = ROOT / "data" / "youtube_public_snapshot.json"
@@ -40,8 +41,10 @@ EXECUTOR_READINESS_CAPTURE = ROOT / "scripts" / "capture_executor_readiness.py"
 SOCIAL_EXECUTION_CAPTURE = ROOT / "scripts" / "capture_social_executions.py"
 PROMO_REFRESH_SCRIPT = ROOT / "scripts" / "refresh_promo_admin.py"
 PROMO_OPERATIONS_SCRIPT = ROOT / "scripts" / "build_promo_operations_packet.py"
+MANUAL_METRIC_COLLECTION_SCRIPT = ROOT / "scripts" / "build_manual_metric_collection.py"
 REPORT = ROOT / "admin" / "reports" / "weekly-social-report.md"
 PROMO_OPERATIONS_REPORT = ROOT / "admin" / "reports" / "promo-operations-packet.md"
+MANUAL_METRIC_REPORT = ROOT / "admin" / "reports" / "manual-metric-collection.md"
 INDEX = CONTENT / "content_index.json"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
 
@@ -228,6 +231,39 @@ def validate_generated_outputs(failures):
             fail("promo_operations_packet.json missing TikTok missing-secret diagnostics", failures)
     else:
         fail("promo_operations_packet.json missing; run scripts/build_promo_operations_packet.py", failures)
+    if MANUAL_METRIC_TEMPLATE.exists():
+        rows = read_csv(MANUAL_METRIC_TEMPLATE)
+        required = {
+            "platform",
+            "field",
+            "current_value",
+            "new_value",
+            "source_hint",
+            "reason",
+            "update_assignment",
+            "platform_update_command",
+        }
+        if rows and set(rows[0].keys()) >= required:
+            ok(f"manual metric CSV template has {len(rows)} pending field(s)")
+        else:
+            fail("manual_metric_collection_template.csv missing required columns or rows", failures)
+        if PROMO_ENGINE_STATUS.exists():
+            status = json.loads(PROMO_ENGINE_STATUS.read_text(encoding="utf-8"))
+            expected = int((status.get("kpi") or {}).get("pending_manual_metric_fields") or 0)
+            if len(rows) == expected:
+                ok("manual metric CSV row count matches pending metric KPI")
+            else:
+                fail("manual_metric_collection_template.csv row count does not match pending metric KPI", failures)
+    else:
+        fail("manual_metric_collection_template.csv missing; run scripts/build_manual_metric_collection.py", failures)
+    if MANUAL_METRIC_REPORT.exists():
+        report_text = MANUAL_METRIC_REPORT.read_text(encoding="utf-8")
+        if "Manual Metric Collection" in report_text and "Pending fields" in report_text:
+            ok("manual metric markdown report present")
+        else:
+            fail("manual-metric-collection.md missing expected sections", failures)
+    else:
+        fail("manual-metric-collection.md missing; run scripts/build_manual_metric_collection.py", failures)
     if SPOTIFY_SNAPSHOT.exists():
         snapshot = json.loads(SPOTIFY_SNAPSHOT.read_text(encoding="utf-8"))
         if snapshot.get("ok") and snapshot.get("title") and snapshot.get("thumbnail_url"):
@@ -553,6 +589,7 @@ def validate_generated_outputs(failures):
             "capture_executor_readiness.py",
             "capture_social_executions.py",
             "build_promo_operations_packet.py",
+            "build_manual_metric_collection.py",
             "update_weekly_report.py",
         ]
         forbidden_bits = [
@@ -574,6 +611,14 @@ def validate_generated_outputs(failures):
             fail("build_promo_operations_packet.py missing review packet outputs or executes commands", failures)
     else:
         fail("build_promo_operations_packet.py missing", failures)
+    if MANUAL_METRIC_COLLECTION_SCRIPT.exists():
+        collection_text = MANUAL_METRIC_COLLECTION_SCRIPT.read_text(encoding="utf-8")
+        if "manual_metric_collection_template.csv" in collection_text and "manual-metric-collection.md" in collection_text and "pending_manual_by_platform" in collection_text and "subprocess" not in collection_text:
+            ok("manual metric collection builder is review-only")
+        else:
+            fail("build_manual_metric_collection.py missing worksheet outputs or executes commands", failures)
+    else:
+        fail("build_manual_metric_collection.py missing", failures)
     if PROMO_OPERATIONS_REPORT.exists():
         report_text = PROMO_OPERATIONS_REPORT.read_text(encoding="utf-8")
         if "Promo Operations Packet" in report_text and "Top Actions" in report_text:

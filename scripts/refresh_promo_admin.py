@@ -65,6 +65,11 @@ FINALIZE_STEPS = [
         "required": True,
     },
     {
+        "name": "build_manual_metric_collection",
+        "command": ["python3", "scripts/build_manual_metric_collection.py"],
+        "required": True,
+    },
+    {
         "name": "update_weekly_report",
         "command": ["python3", "scripts/update_weekly_report.py"],
         "required": True,

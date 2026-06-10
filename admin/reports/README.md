@@ -8,6 +8,7 @@ python3 scripts/refresh_promo_admin.py
 
 This safe refresh updates read-only store checks, live metrics, executor readiness, social execution history, metrics history, the weekly report, and the Admin embedded promo snapshot. It writes the run log to `data/promo_admin_refresh_run.json`.
 It also writes the review-ready operations packet to `data/promo_operations_packet.json` and `admin/reports/promo-operations-packet.md`.
+It also writes the manual metric collection worksheet to `data/manual_metric_collection_template.csv` and `admin/reports/manual-metric-collection.md`.
 
 The executor capture scripts use `LILYROO_EXECUTOR_BEARER_TOKEN` when available and fall back to `LILYROO_ADMIN_PASSWORD`.
 

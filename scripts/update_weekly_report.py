@@ -293,6 +293,7 @@ md = f'''# Weekly Social Report — Lily Roo
 ## Reporting cadence
 - Safe one-command Admin refresh: `python3 scripts/refresh_promo_admin.py`
 - Open promo operations packet: `admin/reports/promo-operations-packet.md`
+- Open manual metric collection worksheet: `admin/reports/manual-metric-collection.md`
 - Capture YouTube public video views: `python3 scripts/capture_youtube_public.py`
 - Capture YouTube title-track public metadata: `python3 scripts/capture_youtube_title_track.py`
 - Capture YouTube Music public release metadata: `python3 scripts/capture_youtube_music_release.py`

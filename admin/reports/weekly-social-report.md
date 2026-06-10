@@ -1,7 +1,7 @@
 # Weekly Social Report — Lily Roo
 
 **Period:** 2026-06-03 to 2026-06-09
-**Last updated:** 2026-06-09 10:09 PM EDT
+**Last updated:** 2026-06-09 10:59 PM EDT
 
 ## KPI Goal
 - Primary growth target: **1,000 YouTube subscribers** (monetization milestone)
@@ -122,7 +122,7 @@
 - Latest post: https://www.facebook.com/903693509504290_122118326547249470
 
 ## Metrics Snapshot
-- Live API captured: **2026-06-10T02:09:55.350Z**
+- Live API captured: **2026-06-10T02:58:58.957Z**
 - Snapshot file: `data/live_social_metrics.json`
 - YouTube public RSS captured: **2026-06-09T12:08:07.783949Z**
 - YouTube public snapshot file: `data/youtube_public_snapshot.json`
@@ -132,9 +132,9 @@
 - YouTube Music snapshot file: `data/youtube_music_release_snapshot.json`
 - HyperFollow stores captured: **2026-06-07T20:51:14.275569Z**
 - HyperFollow snapshot file: `data/hyperfollow_store_links_snapshot.json`
-- All-release store verification captured: **2026-06-10T02:09:57.749065+00:00**
+- All-release store verification captured: **2026-06-10T02:59:01.286443+00:00**
 - All-release store verification file: `data/store_verification_history.json`
-- Social executor history captured: **2026-06-10T02:09:57.627397Z**
+- Social executor history captured: **2026-06-10T02:59:01.151517Z**
 - Social executor history file: `data/social_execution_snapshot.json`
 - First single alignment audit captured: **2026-06-07T21:39:03.668040Z**
 - First single alignment audit file: `data/first_single_alignment_audit.json`
@@ -156,6 +156,7 @@
 ## Reporting cadence
 - Safe one-command Admin refresh: `python3 scripts/refresh_promo_admin.py`
 - Open promo operations packet: `admin/reports/promo-operations-packet.md`
+- Open manual metric collection worksheet: `admin/reports/manual-metric-collection.md`
 - Capture YouTube public video views: `python3 scripts/capture_youtube_public.py`
 - Capture YouTube title-track public metadata: `python3 scripts/capture_youtube_title_track.py`
 - Capture YouTube Music public release metadata: `python3 scripts/capture_youtube_music_release.py`

@@ -29,6 +29,8 @@ It also writes a review packet to `data/promo_operations_packet.json` and `admin
 
 When live APIs cannot provide a metric, the snapshot includes `pending_manual_by_platform` so `/admin` names the exact manual fields still needed for reporting.
 
+The refresh also writes a fill-in worksheet for those gaps at `data/manual_metric_collection_template.csv` and a readable checklist at `admin/reports/manual-metric-collection.md`.
+
 Update known manual values without hand-editing JSON:
 `python3 scripts/update_manual_social_stats.py tiktok.followers=0 spotify.release_streams=0 --refresh-admin`
 
