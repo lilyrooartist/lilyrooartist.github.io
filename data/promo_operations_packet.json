@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-12T22:58:53.525328Z",
+  "generated_at": "2026-06-12T23:11:39.145335Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -40,6 +40,7 @@
         "reason": "max_attempts_exceeded",
         "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
         "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
+        "repair_apply_command": "",
         "readiness": {
           "ready": true
         }
@@ -118,6 +119,7 @@
         "reason": "max_attempts_exceeded",
         "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
         "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
+        "repair_apply_command": "",
         "readiness": {
           "ready": true
         }
@@ -136,13 +138,14 @@
       "label": "Fix TikTok executor",
       "kind": "platform_fix",
       "priority": 1,
-      "command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
+      "command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
       "context": {
         "post_id": "FP-AUTO-264",
         "platform": "TikTok",
         "reason": "tiktok_credentials_missing",
         "error_summary": "",
         "repair_action": "Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok public posting approval is false. Complete TikTok OAuth/public posting setup, push secrets, then refresh Admin.",
+        "repair_apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
         "readiness": {
           "ready": false,
           "access_token_present": false,
@@ -179,13 +182,14 @@
       "label": "Fix Instagram executor",
       "kind": "platform_fix",
       "priority": 1,
-      "command": "python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py",
+      "command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
       "context": {
         "post_id": "FP-AUTO-263",
         "platform": "Instagram",
         "reason": "max_attempts_exceeded",
         "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
         "repair_action": "Reconnect the Instagram Business/Creator account to the Facebook Page or set IG_BUSINESS_ACCOUNT_ID, then push the worker secret and recapture readiness.",
+        "repair_apply_command": "python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py",
         "readiness": {
           "ready": true,
           "api": "facebook-login",

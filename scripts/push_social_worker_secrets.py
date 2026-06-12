@@ -57,7 +57,10 @@ def load_secret_value(name: str) -> str:
     raise RuntimeError(f"Unsupported secret name: {name}")
 
 
-def put_secret(name: str, value: str) -> None:
+def put_secret(name: str, value: str, dry_run: bool = False) -> None:
+    if dry_run:
+        print(f"would update {name} ({len(value)} characters loaded locally)")
+        return
     result = subprocess.run(
         ["npx", "wrangler", "secret", "put", name, "--config", str(WRANGLER_CONFIG)],
         cwd=str(REPO_ROOT),
@@ -78,10 +81,20 @@ def main() -> int:
         nargs="+",
         help="Secret names to push, for example X_USER_ACCESS_TOKEN or EXECUTOR_BEARER_TOKEN.",
     )
+    parser.add_argument("--dry-run", action="store_true", help="Load and validate local secret values without pushing to Cloudflare.")
     args = parser.parse_args()
 
+    errors = []
     for name in args.names:
-        put_secret(name, load_secret_value(name))
+        try:
+            put_secret(name, load_secret_value(name), args.dry_run)
+        except RuntimeError as exc:
+            errors.append(str(exc))
+
+    if errors:
+        for error in errors:
+            print(f"ERROR: {error}")
+        return 1
 
     return 0
 

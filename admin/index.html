@@ -518,7 +518,7 @@
 <script type="text/plain" id="embedded-weekly-report"># Weekly Social Report — Lily Roo
 
 **Period:** 2026-06-06 to 2026-06-12
-**Last updated:** 2026-06-12 06:58 PM EDT
+**Last updated:** 2026-06-12 07:11 PM EDT
 
 ## KPI Goal
 - Primary growth target: **1,000 YouTube subscribers** (monetization milestone)
@@ -2135,7 +2135,7 @@
 
 
 <script type="application/json" id="embedded-promo-operations-packet">{
-  "generated_at": "2026-06-12T22:58:53.525328Z",
+  "generated_at": "2026-06-12T23:11:39.145335Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -2176,6 +2176,7 @@
         "reason": "max_attempts_exceeded",
         "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
         "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
+        "repair_apply_command": "",
         "readiness": {
           "ready": true
         }
@@ -2254,6 +2255,7 @@
         "reason": "max_attempts_exceeded",
         "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
         "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
+        "repair_apply_command": "",
         "readiness": {
           "ready": true
         }
@@ -2272,13 +2274,14 @@
       "label": "Fix TikTok executor",
       "kind": "platform_fix",
       "priority": 1,
-      "command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
+      "command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
       "context": {
         "post_id": "FP-AUTO-264",
         "platform": "TikTok",
         "reason": "tiktok_credentials_missing",
         "error_summary": "",
         "repair_action": "Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok public posting approval is false. Complete TikTok OAuth/public posting setup, push secrets, then refresh Admin.",
+        "repair_apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
         "readiness": {
           "ready": false,
           "access_token_present": false,
@@ -2315,13 +2318,14 @@
       "label": "Fix Instagram executor",
       "kind": "platform_fix",
       "priority": 1,
-      "command": "python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py",
+      "command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
       "context": {
         "post_id": "FP-AUTO-263",
         "platform": "Instagram",
         "reason": "max_attempts_exceeded",
         "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
         "repair_action": "Reconnect the Instagram Business/Creator account to the Facebook Page or set IG_BUSINESS_ACCOUNT_ID, then push the worker secret and recapture readiness.",
+        "repair_apply_command": "python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py",
         "readiness": {
           "ready": true,
           "api": "facebook-login",
@@ -2852,7 +2856,7 @@
 
 <script type="text/plain" id="embedded-promo-operations-report"># Promo Operations Packet - Lily Roo
 
-Generated: 2026-06-12T22:58:53.525328Z
+Generated: 2026-06-12T23:11:39.145335Z
 
 ## Summary
 - Actions: **21**
@@ -2891,11 +2895,13 @@ Generated: 2026-06-12T22:58:53.525328Z
   - Detail: Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok public posting approval is false. Complete TikTok OAuth/public posting setup, push secrets, then refresh Admin.
   - Missing secrets: `TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN`
   - Public posting approved: `False`
-  - Command: `python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py`
+  - Command: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
+  - Apply repair after preview: `python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py`
 - **[high] Fix Instagram executor**
   - Why: Platform executor needs repair before queued auto posts can publish.
   - Detail: Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.
-  - Command: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
+  - Command: `python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID`
+  - Apply repair after preview: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
 
 ### Review draft posts
 - **[high] Review X draft for Twelve Dollars**
@@ -4230,6 +4236,7 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
       const worksheetCommand=context.worksheet_import_command||'';
       const directUpdateCommand=context.direct_update_command||'';
       const approvalCommand=context.approval_command||'';
+      const repairApplyCommand=context.repair_apply_command||'';
       const chipClass=action.urgency==='blocked'||action.urgency==='high'||action.kind==='platform_fix'||context.readiness_state==='blocked'?'warn':action.kind==='apply_approved'?'ok':'neutral';
       return `<div class="queue-item">
         <div class="queue-top">
@@ -4243,6 +4250,7 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
             ${context.collection_url?`<div class="queue-meta"><a href="${escapeHtml(context.collection_url)}" target="_blank" rel="noopener">Open metric source</a></div>`:''}
             ${context.text?`<div class="queue-meta">${escapeHtml(context.text)}</div>`:''}
             ${action.command?`<div class="queue-meta">${escapeHtml(action.command)}</div>`:''}
+            ${repairApplyCommand?`<div class="queue-meta">Apply repair after preview: ${escapeHtml(repairApplyCommand)}</div>`:''}
             ${approvalCommand?`<div class="queue-meta">Approve after review: ${escapeHtml(approvalCommand)}</div>`:''}
             ${worksheetCommand?`<div class="queue-meta">Import filled worksheet: ${escapeHtml(worksheetCommand)}</div>`:''}
             ${directUpdateCommand?`<div class="queue-meta">Direct update fallback: ${escapeHtml(directUpdateCommand)}</div>`:''}

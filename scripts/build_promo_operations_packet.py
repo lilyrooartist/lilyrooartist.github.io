@@ -186,8 +186,18 @@ def readiness_diagnostics(readiness: dict, platform: str) -> dict:
 
 def repair_command_for(platform: str, fallback: str) -> str:
     if platform_slug(platform) == "tiktok":
-        return "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py"
+        return "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN"
+    if platform_slug(platform) == "instagram":
+        return "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID"
     return fallback
+
+
+def repair_apply_command_for(platform: str, fallback: str) -> str:
+    if platform_slug(platform) == "tiktok":
+        return "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py"
+    if platform_slug(platform) == "instagram":
+        return "python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py"
+    return ""
 
 
 def repair_action_for(platform: str, fallback: str, diagnostics: dict) -> str:
@@ -303,9 +313,10 @@ def platform_fix_actions(status, executions, readiness):
         diagnostics = readiness_diagnostics(readiness, platform)
         fallback_action = row.get("repair_action") or ""
         fallback_command = row.get("repair_command") or "python3 scripts/refresh_promo_admin.py"
+        command = repair_command_for(platform, fallback_command)
         actions.append(command_row(
             f"Fix {platform or 'social'} executor",
-            repair_command_for(platform, fallback_command),
+            command,
             "platform_fix",
             1,
             {
@@ -314,6 +325,7 @@ def platform_fix_actions(status, executions, readiness):
                 "reason": row.get("reason") or "",
                 "error_summary": row.get("error_summary") or "",
                 "repair_action": repair_action_for(platform, fallback_action, diagnostics),
+                "repair_apply_command": repair_apply_command_for(platform, fallback_command),
                 **diagnostics,
             },
         ))
@@ -367,6 +379,8 @@ def build_markdown(packet):
                 lines.append(f"  - Public posting approved: `{context.get('public_posting_approved')}`")
             if action.get("command"):
                 lines.append(f"  - Command: `{action['command']}`")
+            if context.get("repair_apply_command"):
+                lines.append(f"  - Apply repair after preview: `{context['repair_apply_command']}`")
             if context.get("approval_command"):
                 lines.append(f"  - Approve after review: `{context['approval_command']}`")
             if context.get("collection_url"):

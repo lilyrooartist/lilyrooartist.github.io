@@ -235,6 +235,19 @@ def validate_generated_outputs(failures):
             ok("promo operations packet uses dry-run approval previews")
         else:
             fail("promo_operations_packet.json approval review actions missing dry-run previews", failures)
+        secret_platform_fix_actions = [
+            action for action in actions
+            if action.get("kind") == "platform_fix"
+            and (action.get("context") or {}).get("repair_apply_command")
+        ]
+        if secret_platform_fix_actions and all(
+            "--dry-run" in (action.get("command") or "")
+            and "--dry-run" not in ((action.get("context") or {}).get("repair_apply_command") or "")
+            for action in secret_platform_fix_actions
+        ):
+            ok("promo operations packet uses dry-run secret repair previews")
+        else:
+            fail("promo_operations_packet.json secret repair actions missing dry-run previews", failures)
         tiktok_actions = [
             action for action in actions
             if (action.get("context") or {}).get("platform") == "TikTok"
@@ -725,6 +738,15 @@ def validate_generated_outputs(failures):
             fail("refresh_promo_admin.py missing safe refresh coverage or includes posting commands", failures)
     else:
         fail("refresh_promo_admin.py missing", failures)
+    secret_push = ROOT / "scripts" / "push_social_worker_secrets.py"
+    if secret_push.exists():
+        secret_text = secret_push.read_text(encoding="utf-8")
+        if "--dry-run" in secret_text and "would update" in secret_text and "wrangler" in secret_text:
+            ok("social worker secret push script supports dry-run")
+        else:
+            fail("push_social_worker_secrets.py missing dry-run support", failures)
+    else:
+        fail("push_social_worker_secrets.py missing", failures)
     if PROMO_OPERATIONS_SCRIPT.exists():
         packet_text = PROMO_OPERATIONS_SCRIPT.read_text(encoding="utf-8")
         if "promo_operations_packet.json" in packet_text and "promo-operations-packet.md" in packet_text and "approval_review" in packet_text and "urgency_for" in packet_text and "missing_secrets" in packet_text and "subprocess" not in packet_text:
