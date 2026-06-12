@@ -3203,6 +3203,7 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
       label:'YouTube',
       key:'youtube',
       dot:'youtube',
+      hasExecutor:true,
       audience:'Subscribers',
       audienceMetric:'subscribers',
       audienceLabel:'subscribers',
@@ -3215,6 +3216,7 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
       label:'Spotify',
       key:'spotify',
       dot:'spotify',
+      hasExecutor:false,
       audience:'Artist followers',
       audienceMetric:'artist_followers',
       audienceLabel:'followers',
@@ -3229,6 +3231,7 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
       label:'TikTok',
       key:'tiktok',
       dot:'tiktok',
+      hasExecutor:true,
       audience:'Followers',
       audienceMetric:'followers',
       audienceLabel:'followers',
@@ -3238,6 +3241,7 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
       label:'Instagram',
       key:'instagram',
       dot:'instagram',
+      hasExecutor:true,
       audience:'Followers',
       audienceMetric:'followers',
       audienceLabel:'followers',
@@ -3247,6 +3251,7 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
       label:'X (Twitter)',
       key:'x',
       dot:'x',
+      hasExecutor:true,
       audience:'Followers',
       audienceMetric:'followers',
       audienceLabel:'followers',
@@ -3257,6 +3262,7 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
       label:'Facebook',
       key:'facebook',
       dot:'facebook',
+      hasExecutor:true,
       audience:'Followers/Page likes',
       audienceMetric:'followers',
       audienceFallbackMetric:'page_likes',
@@ -3606,7 +3612,8 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
     return `<div class="metric-note"${reason}>Metrics: ${escapeHtml(status)}</div>`;
   }
 
-  function readinessChip(platform, readinessKnown){
+  function readinessChip(platform, readinessKnown, hasExecutor=true){
+    if(!hasExecutor) return '<span class="status-chip neutral">N/A</span>';
     if(!readinessKnown) return '<span class="status-chip neutral">Unknown</span>';
     const info=platformReadiness(platform);
     return `<span class="status-chip ${info.ready?'ok':'bad'}">${info.ready?'Ready':'Blocked'}</span>`;
@@ -3716,7 +3723,7 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
         <td data-label="Audience">${metricFromSources(platformMetrics,config.audienceMetric,block[config.audience],config.audienceLabel,{fallbackMetric:config.audienceFallbackMetric,fallbackLabel:'page likes'})}</td>
         <td data-label="Signal">${signal||'<span class="muted">pending</span>'}</td>
         <td data-label="Latest">${linkOrText(latestUrl,'Open')}</td>
-        <td data-label="Executor">${readinessChip(config.label,Boolean(readiness))}${metricsSourceNote(platformMetrics)}</td>
+        <td data-label="Executor">${readinessChip(config.label,Boolean(readiness),config.hasExecutor!==false)}${metricsSourceNote(platformMetrics)}</td>
       </tr>`;
     }).join('');
   }

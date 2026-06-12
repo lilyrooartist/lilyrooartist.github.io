@@ -701,6 +701,16 @@ def validate_admin_execution_feedback(failures):
         fail("admin execute feedback missing " + ", ".join(missing), failures)
     else:
         ok("admin execute button has working/success/error feedback")
+    platform_checks = {
+        "spotify executor marked not applicable": "label:'Spotify'" in text and "hasExecutor:false" in text,
+        "executor chip supports not-applicable state": "if(!hasExecutor) return '<span class=\"status-chip neutral\">N/A</span>'" in text,
+        "platform rows pass executor applicability": "config.hasExecutor!==false" in text,
+    }
+    missing_platform = [label for label, present in platform_checks.items() if not present]
+    if missing_platform:
+        fail("admin platform snapshot executor labels missing " + ", ".join(missing_platform), failures)
+    else:
+        ok("admin platform snapshot separates metrics-only platforms from executor blocks")
 
 
 def validate_twelve_dollars_remasters(failures):
