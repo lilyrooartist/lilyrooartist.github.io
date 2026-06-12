@@ -416,6 +416,29 @@ def validate_generated_outputs(failures):
             ok("promo engine includes store verification history summary")
         else:
             fail("promo_engine_status.json missing store verification history summary", failures)
+        verification_counts = kpi.get("music_site_verification_state_counts") or {}
+        if verification_counts:
+            expected_counts = {
+                "Live": int(store_history_summary.get("live") or 0),
+                "Submitted": int(store_history_summary.get("submitted") or 0),
+                "Pending": int(store_history_summary.get("pending") or 0),
+                "Checked pending": int(store_history_summary.get("checked_pending") or 0),
+                "Found in snapshot": int(store_history_summary.get("found_in_snapshot") or 0),
+            }
+            if all(int(verification_counts.get(label) or 0) == value for label, value in expected_counts.items()):
+                ok("promo engine music site verification counts match store history")
+            else:
+                fail("promo_engine_status.json music site verification counts do not match store history", failures)
+        else:
+            fail("promo_engine_status.json missing music site verification counts", failures)
+        if int(kpi.get("music_sites_pending") or 0) == int(store_history_summary.get("pending") or 0):
+            ok("promo engine pending music site KPI matches unchecked pending stores")
+        else:
+            fail("promo_engine_status.json pending music site KPI includes checked-pending stores", failures)
+        if int(kpi.get("music_sites_checked_pending") or 0) == int(store_history_summary.get("checked_pending") or 0):
+            ok("promo engine checked-pending music site KPI matches store history")
+        else:
+            fail("promo_engine_status.json checked-pending music site KPI does not match store history", failures)
         execution_summary = kpi.get("social_execution_summary") or {}
         if "execution_count" in execution_summary and "status_counts" in execution_summary and "approval_needed_count" in execution_summary and "platform_fix_needed_count" in execution_summary:
             ok("promo engine includes social execution summary")

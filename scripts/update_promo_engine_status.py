@@ -748,6 +748,7 @@ def build_status():
 
     healthy_count = sum(1 for release in releases if release["status"] == "healthy")
     verification_command_count = sum(len(release.get("store_verification_commands") or []) for release in releases)
+    store_history_summary = store_history["summary"]
     score = round((healthy_count / len(releases)) * 100) if releases else 0
     freshness_summary = freshness["summary"]
     freshness_actions = freshness["actions"]
@@ -797,11 +798,21 @@ def build_status():
             "live_metrics_updated_at": metrics["updated_at"],
             "metrics_history": history,
             "music_site_state_counts": dict(sorted(store_state_counts.items())),
-            "music_sites_live": store_state_counts.get("Live", 0),
-            "music_sites_submitted": store_state_counts.get("Submitted", 0),
-            "music_sites_pending": store_state_counts.get("Pending", 0),
+            "music_site_verification_state_counts": {
+                "Live": store_history_summary.get("live", 0),
+                "Submitted": store_history_summary.get("submitted", 0),
+                "Pending": store_history_summary.get("pending", 0),
+                "Checked pending": store_history_summary.get("checked_pending", 0),
+                "Found in snapshot": store_history_summary.get("found_in_snapshot", 0),
+            },
+            "music_sites_live": store_history_summary.get("live", 0),
+            "music_sites_submitted": store_history_summary.get("submitted", 0),
+            "music_sites_pending": store_history_summary.get("pending", 0),
+            "music_sites_checked_pending": store_history_summary.get("checked_pending", 0),
+            "music_sites_found_in_snapshot": store_history_summary.get("found_in_snapshot", 0),
+            "music_sites_missing_url": store_state_counts.get("Pending", 0),
             "store_verification_command_count": verification_command_count,
-            "store_verification_history": store_history["summary"],
+            "store_verification_history": store_history_summary,
             "social_execution_summary": execution_state,
             "last_refresh_run": refresh_run,
             "stale_source_count": freshness_summary["stale"],
