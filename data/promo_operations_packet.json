@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-12T21:30:23.744779Z",
+  "generated_at": "2026-06-12T22:14:15.779548Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -547,12 +547,18 @@
       "label": "Fill manual metrics for facebook",
       "kind": "manual_metrics",
       "priority": 30,
-      "command": "python3 scripts/update_manual_social_stats.py facebook.reach_7d=VALUE --refresh-admin",
+      "command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
       "context": {
         "platform": "facebook",
         "fields": [
           "reach_7d"
-        ]
+        ],
+        "collection_url": "https://www.facebook.com/903693509504290",
+        "csv_path": "data/manual_metric_collection_template.csv",
+        "report_path": "admin/reports/manual-metric-collection.md",
+        "direct_update_command": "python3 scripts/update_manual_social_stats.py facebook.reach_7d=VALUE --refresh-admin",
+        "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
+        "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin"
       },
       "phase": "Fill manual metrics",
       "urgency": "low",
@@ -568,13 +574,19 @@
       "label": "Fill manual metrics for instagram",
       "kind": "manual_metrics",
       "priority": 30,
-      "command": "python3 scripts/update_manual_social_stats.py instagram.followers=VALUE instagram.profile_visits_7d=VALUE --refresh-admin",
+      "command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
       "context": {
         "platform": "instagram",
         "fields": [
           "followers",
           "profile_visits_7d"
-        ]
+        ],
+        "collection_url": "https://www.instagram.com/professional_dashboard/",
+        "csv_path": "data/manual_metric_collection_template.csv",
+        "report_path": "admin/reports/manual-metric-collection.md",
+        "direct_update_command": "python3 scripts/update_manual_social_stats.py instagram.followers=VALUE instagram.profile_visits_7d=VALUE --refresh-admin",
+        "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
+        "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin"
       },
       "phase": "Fill manual metrics",
       "urgency": "low",
@@ -590,7 +602,7 @@
       "label": "Fill manual metrics for spotify",
       "kind": "manual_metrics",
       "priority": 30,
-      "command": "python3 scripts/update_manual_social_stats.py spotify.artist_followers=VALUE spotify.monthly_listeners=VALUE spotify.release_streams=VALUE spotify.saves=VALUE --refresh-admin",
+      "command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
       "context": {
         "platform": "spotify",
         "fields": [
@@ -598,7 +610,13 @@
           "monthly_listeners",
           "release_streams",
           "saves"
-        ]
+        ],
+        "collection_url": "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a",
+        "csv_path": "data/manual_metric_collection_template.csv",
+        "report_path": "admin/reports/manual-metric-collection.md",
+        "direct_update_command": "python3 scripts/update_manual_social_stats.py spotify.artist_followers=VALUE spotify.monthly_listeners=VALUE spotify.release_streams=VALUE spotify.saves=VALUE --refresh-admin",
+        "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
+        "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin"
       },
       "phase": "Fill manual metrics",
       "urgency": "low",
@@ -614,13 +632,19 @@
       "label": "Fill manual metrics for tiktok",
       "kind": "manual_metrics",
       "priority": 30,
-      "command": "python3 scripts/update_manual_social_stats.py tiktok.followers=VALUE tiktok.profile_views_7d=VALUE --refresh-admin",
+      "command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
       "context": {
         "platform": "tiktok",
         "fields": [
           "followers",
           "profile_views_7d"
-        ]
+        ],
+        "collection_url": "https://www.tiktok.com/creator-center/analytics",
+        "csv_path": "data/manual_metric_collection_template.csv",
+        "report_path": "admin/reports/manual-metric-collection.md",
+        "direct_update_command": "python3 scripts/update_manual_social_stats.py tiktok.followers=VALUE tiktok.profile_views_7d=VALUE --refresh-admin",
+        "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
+        "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin"
       },
       "phase": "Fill manual metrics",
       "urgency": "low",
@@ -636,13 +660,19 @@
       "label": "Fill manual metrics for x",
       "kind": "manual_metrics",
       "priority": 30,
-      "command": "python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impressions_7d=VALUE --refresh-admin",
+      "command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
       "context": {
         "platform": "x",
         "fields": [
           "followers",
           "impressions_7d"
-        ]
+        ],
+        "collection_url": "https://analytics.x.com/",
+        "csv_path": "data/manual_metric_collection_template.csv",
+        "report_path": "admin/reports/manual-metric-collection.md",
+        "direct_update_command": "python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impressions_7d=VALUE --refresh-admin",
+        "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
+        "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin"
       },
       "phase": "Fill manual metrics",
       "urgency": "low",

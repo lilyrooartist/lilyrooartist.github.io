@@ -231,6 +231,20 @@ def validate_generated_outputs(failures):
             ok("promo operations packet includes TikTok missing-secret diagnostics")
         else:
             fail("promo_operations_packet.json missing TikTok missing-secret diagnostics", failures)
+        manual_metric_actions = [
+            action for action in actions
+            if action.get("kind") == "manual_metrics"
+        ]
+        if manual_metric_actions and all(
+            (action.get("context") or {}).get("collection_url")
+            and (action.get("context") or {}).get("worksheet_import_preview_command")
+            and (action.get("context") or {}).get("worksheet_import_command")
+            and (action.get("context") or {}).get("direct_update_command")
+            for action in manual_metric_actions
+        ):
+            ok("promo operations packet links manual metric collection and worksheet import")
+        else:
+            fail("promo_operations_packet.json missing manual metric collection/import context", failures)
     else:
         fail("promo_operations_packet.json missing; run scripts/build_promo_operations_packet.py", failures)
     if MANUAL_METRIC_TEMPLATE.exists():
@@ -382,6 +396,15 @@ def validate_generated_outputs(failures):
                 ok(f"promo engine manual metric collection steps track {len(collection_steps)} platforms")
             else:
                 fail("promo_engine_status.json missing manual metric collection steps", failures)
+            if collection_steps and all(
+                step.get("collection_url")
+                and step.get("worksheet_import_preview_command")
+                and step.get("worksheet_import_command")
+                for step in collection_steps
+            ):
+                ok("promo engine manual metric steps include source links and worksheet import commands")
+            else:
+                fail("promo_engine_status.json manual metric steps missing source links or worksheet import commands", failures)
         if auto_covered and any(item.get("field") == "facebook.followers" for item in auto_covered):
             ok("promo engine recognizes live API-covered manual metric fields")
         else:

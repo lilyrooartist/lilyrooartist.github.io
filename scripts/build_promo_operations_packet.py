@@ -253,16 +253,28 @@ def apply_actions(plan):
 
 def manual_metric_actions(status):
     kpi = status.get("kpi") or {}
+    steps = {
+        step.get("platform"): step
+        for step in (kpi.get("manual_metric_collection_steps") or [])
+        if step.get("platform")
+    }
     actions = []
     for platform, command in sorted((kpi.get("pending_manual_update_by_platform") or {}).items()):
+        step = steps.get(platform) or {}
         actions.append(command_row(
             f"Fill manual metrics for {platform}",
-            command,
+            step.get("worksheet_import_preview_command") or "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
             "manual_metrics",
             30,
             {
                 "platform": platform,
                 "fields": (kpi.get("pending_manual_by_platform") or {}).get(platform) or [],
+                "collection_url": step.get("collection_url") or "",
+                "csv_path": step.get("csv_path") or "data/manual_metric_collection_template.csv",
+                "report_path": step.get("report_path") or "admin/reports/manual-metric-collection.md",
+                "direct_update_command": command,
+                "worksheet_import_preview_command": step.get("worksheet_import_preview_command") or "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
+                "worksheet_import_command": step.get("worksheet_import_command") or "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
             },
         ))
     return actions
@@ -339,6 +351,12 @@ def build_markdown(packet):
                 lines.append(f"  - Public posting approved: `{context.get('public_posting_approved')}`")
             if action.get("command"):
                 lines.append(f"  - Command: `{action['command']}`")
+            if context.get("collection_url"):
+                lines.append(f"  - Open: {context['collection_url']}")
+            if context.get("worksheet_import_command"):
+                lines.append(f"  - Import filled worksheet: `{context['worksheet_import_command']}`")
+            if context.get("direct_update_command"):
+                lines.append(f"  - Direct update fallback: `{context['direct_update_command']}`")
     else:
         lines.append("- No open promo operations.")
     lines.append("")

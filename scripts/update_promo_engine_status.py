@@ -306,6 +306,11 @@ def metric_state(manual, live):
             "fields": fields,
             "summary": f"{platform}: collect {fields_display}",
             "reason": reason,
+            "collection_url": metric_collection_url(platform, manual, live),
+            "csv_path": "data/manual_metric_collection_template.csv",
+            "report_path": "admin/reports/manual-metric-collection.md",
+            "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
+            "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
             "command": command,
         })
     return {
@@ -342,6 +347,23 @@ def metric_collection_reason(platform: str) -> str:
         "x": "X metrics require an access token with user lookup/analytics access or manual export.",
         "facebook": "Facebook reach requires Page insights access or manual Meta Business Suite export.",
     }.get(platform, "Manual platform export required.")
+
+
+def metric_collection_url(platform: str, manual: dict, live: dict) -> str:
+    defaults = {
+        "facebook": "https://business.facebook.com/latest/insights",
+        "instagram": "https://www.instagram.com/professional_dashboard/",
+        "spotify": "https://artists.spotify.com/",
+        "tiktok": "https://www.tiktok.com/creator-center/analytics",
+        "x": "https://analytics.x.com/",
+    }
+    manual_platform = (manual.get(platform) or {}) if isinstance(manual, dict) else {}
+    live_platform = ((live.get("platforms") or {}).get(platform) or {}) if isinstance(live, dict) else {}
+    for key in ("artist_url", "profile_url", "release_url", "provider_url"):
+        value = str(manual_platform.get(key) or live_platform.get(key) or "").strip()
+        if value:
+            return value
+    return defaults.get(platform, "")
 
 
 def metrics_history_state(metrics_history):
