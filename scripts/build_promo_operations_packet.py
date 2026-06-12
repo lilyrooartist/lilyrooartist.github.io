@@ -136,15 +136,23 @@ def pending_store_actions(status):
     for release in status.get("releases") or []:
         title = release.get("title") or "Untitled release"
         for item in release.get("store_verification_commands") or []:
+            latest = item.get("latest_snapshot") or {}
+            checked_at = latest.get("checked_at") or latest.get("updated_at") or latest.get("generated_at") or latest.get("captured_at") or ""
+            label_prefix = "Re-check" if latest else "Verify"
+            note = item.get("note") or ""
+            if latest:
+                note = f"{note} Latest snapshot found no public URL; keep this pending until DistroKid exposes the release.".strip()
             actions.append(command_row(
-                f"Verify {title} on {item.get('service') or 'store'}",
+                f"{label_prefix} {title} on {item.get('service') or 'store'}",
                 item.get("command") or "",
                 "store_verification",
                 20,
                 {
                     "release": title,
                     "service": item.get("service") or "",
-                    "latest_snapshot": item.get("latest_snapshot") or {},
+                    "checked_at": checked_at,
+                    "latest_snapshot": latest,
+                    "note": note,
                 },
             ))
     return actions
@@ -338,7 +346,7 @@ def build_markdown(packet):
                 lines.append(f"### {phase}")
                 current_phase = phase
             context = action.get("context") or {}
-            detail = context.get("error_summary") or context.get("repair_action") or context.get("readiness_message") or ", ".join(context.get("fields") or [])
+            detail = context.get("error_summary") or context.get("repair_action") or context.get("readiness_message") or context.get("note") or ", ".join(context.get("fields") or [])
             missing_secrets = ", ".join(context.get("missing_secrets") or [])
             lines.append(f"- **[{action.get('urgency', 'low')}] {action['label']}**")
             if action.get("urgency_reason"):
@@ -347,6 +355,8 @@ def build_markdown(packet):
                 lines.append(f"  - Detail: {detail}")
             if missing_secrets:
                 lines.append(f"  - Missing secrets: `{missing_secrets}`")
+            if context.get("checked_at"):
+                lines.append(f"  - Latest snapshot checked: `{context['checked_at']}`")
             if "public_posting_approved" in context:
                 lines.append(f"  - Public posting approved: `{context.get('public_posting_approved')}`")
             if action.get("command"):

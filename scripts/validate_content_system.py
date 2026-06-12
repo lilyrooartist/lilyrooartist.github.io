@@ -245,6 +245,20 @@ def validate_generated_outputs(failures):
             ok("promo operations packet links manual metric collection and worksheet import")
         else:
             fail("promo_operations_packet.json missing manual metric collection/import context", failures)
+        checked_store_actions = [
+            action for action in actions
+            if action.get("kind") == "store_verification"
+            and (action.get("context") or {}).get("latest_snapshot")
+        ]
+        if checked_store_actions and all(
+            str(action.get("label") or "").startswith("Re-check ")
+            and (action.get("context") or {}).get("checked_at")
+            and "Latest snapshot" in ((action.get("context") or {}).get("note") or "")
+            for action in checked_store_actions
+        ):
+            ok("promo operations packet labels checked store snapshots as re-checks")
+        else:
+            fail("promo_operations_packet.json missing checked store re-check context", failures)
     else:
         fail("promo_operations_packet.json missing; run scripts/build_promo_operations_packet.py", failures)
     if MANUAL_METRIC_TEMPLATE.exists():
