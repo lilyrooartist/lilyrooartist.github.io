@@ -241,6 +241,7 @@ def validate_generated_outputs(failures):
             "current_value",
             "new_value",
             "source_hint",
+            "collection_url",
             "reason",
             "update_assignment",
             "platform_update_command",
@@ -260,7 +261,7 @@ def validate_generated_outputs(failures):
         fail("manual_metric_collection_template.csv missing; run scripts/build_manual_metric_collection.py", failures)
     if MANUAL_METRIC_REPORT.exists():
         report_text = MANUAL_METRIC_REPORT.read_text(encoding="utf-8")
-        if "Manual Metric Collection" in report_text and "Pending fields" in report_text:
+        if "Manual Metric Collection" in report_text and "Pending fields" in report_text and "Open: " in report_text:
             ok("manual metric markdown report present")
         else:
             fail("manual-metric-collection.md missing expected sections", failures)
@@ -666,7 +667,7 @@ def validate_generated_outputs(failures):
         fail("build_promo_operations_packet.py missing", failures)
     if MANUAL_METRIC_COLLECTION_SCRIPT.exists():
         collection_text = MANUAL_METRIC_COLLECTION_SCRIPT.read_text(encoding="utf-8")
-        if "manual_metric_collection_template.csv" in collection_text and "manual-metric-collection.md" in collection_text and "pending_manual_by_platform" in collection_text and "subprocess" not in collection_text:
+        if "manual_metric_collection_template.csv" in collection_text and "manual-metric-collection.md" in collection_text and "pending_manual_by_platform" in collection_text and "collection_url" in collection_text and "subprocess" not in collection_text:
             ok("manual metric collection builder is review-only")
         else:
             fail("build_manual_metric_collection.py missing worksheet outputs or executes commands", failures)

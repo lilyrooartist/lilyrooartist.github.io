@@ -1,6 +1,6 @@
 # Manual Metric Collection - Lily Roo
 
-Generated: 2026-06-12T21:30:23.773151Z
+Generated: 2026-06-12T21:42:48.717437Z
 
 Pending fields: **11**
 
@@ -9,6 +9,7 @@ Fill `new_value` in `data/manual_metric_collection_template.csv`, then run the p
 ## facebook
 
 Source: Meta Business Suite > Insights
+Open: https://www.facebook.com/903693509504290
 Why: Facebook reach requires Page insights access or manual Meta Business Suite export.
 
 - `reach_7d` current `pending` -> `VALUE`
@@ -18,6 +19,7 @@ Command: `python3 scripts/update_manual_social_stats.py facebook.reach_7d=VALUE 
 ## instagram
 
 Source: Instagram Professional Dashboard > Insights
+Open: https://www.instagram.com/professional_dashboard/
 Why: Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page
 
 - `followers` current `pending` -> `VALUE`
@@ -28,6 +30,7 @@ Command: `python3 scripts/update_manual_social_stats.py instagram.followers=VALU
 ## spotify
 
 Source: Spotify for Artists > Music/Stats export
+Open: https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a
 Why: Spotify streams, saves, monthly listeners, and artist followers require Spotify for Artists export or a connected analytics source.
 
 - `artist_followers` current `pending` -> `VALUE`
@@ -40,6 +43,7 @@ Command: `python3 scripts/update_manual_social_stats.py spotify.artist_followers
 ## tiktok
 
 Source: TikTok Studio or Creator Center analytics
+Open: https://www.tiktok.com/creator-center/analytics
 Why: TikTok metrics need TikTok OAuth credentials.
 
 - `followers` current `pending` -> `VALUE`
@@ -50,6 +54,7 @@ Command: `python3 scripts/update_manual_social_stats.py tiktok.followers=VALUE t
 ## x
 
 Source: X Analytics or account profile metrics
+Open: https://analytics.x.com/
 Why: X metrics need X_USER_ACCESS_TOKEN with user lookup access.
 
 - `followers` current `pending` -> `VALUE`

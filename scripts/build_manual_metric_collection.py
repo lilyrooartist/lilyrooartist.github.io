@@ -10,6 +10,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 PROMO_STATUS = ROOT / "data" / "promo_engine_status.json"
 MANUAL_STATS = ROOT / "data" / "manual_social_stats.json"
+LIVE_METRICS = ROOT / "data" / "live_social_metrics.json"
 OUT_CSV = ROOT / "data" / "manual_metric_collection_template.csv"
 OUT_MD = ROOT / "admin" / "reports" / "manual-metric-collection.md"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
@@ -24,6 +25,15 @@ SOURCE_HINTS = {
 }
 
 
+DEFAULT_COLLECTION_URLS = {
+    "facebook": "https://business.facebook.com/latest/insights",
+    "instagram": "https://www.instagram.com/professional_dashboard/",
+    "spotify": "https://artists.spotify.com/",
+    "tiktok": "https://www.tiktok.com/creator-center/analytics",
+    "x": "https://analytics.x.com/",
+}
+
+
 def read_json(path: Path, fallback):
     if not path.exists():
         return fallback
@@ -34,7 +44,17 @@ def current_value(manual: dict, platform: str, field: str) -> str:
     return str(((manual.get(platform) or {}).get(field)) or "")
 
 
-def build_rows(status: dict, manual: dict) -> list[dict]:
+def collection_url(platform: str, manual: dict, live: dict) -> str:
+    manual_platform = (manual.get(platform) or {}) if isinstance(manual, dict) else {}
+    live_platform = ((live.get("platforms") or {}).get(platform) or {}) if isinstance(live, dict) else {}
+    for key in ("artist_url", "profile_url", "release_url", "provider_url"):
+        value = str(manual_platform.get(key) or live_platform.get(key) or "").strip()
+        if value:
+            return value
+    return DEFAULT_COLLECTION_URLS.get(platform, "")
+
+
+def build_rows(status: dict, manual: dict, live: dict) -> list[dict]:
     kpi = status.get("kpi") or {}
     pending = kpi.get("pending_manual_by_platform") or {}
     commands = kpi.get("pending_manual_update_by_platform") or {}
@@ -53,6 +73,7 @@ def build_rows(status: dict, manual: dict) -> list[dict]:
                 "current_value": current_value(manual, platform, field),
                 "new_value": "",
                 "source_hint": SOURCE_HINTS.get(platform, "Manual platform export"),
+                "collection_url": collection_url(platform, manual, live),
                 "reason": step.get("reason") or "",
                 "update_assignment": f"{platform}.{field}=VALUE",
                 "platform_update_command": commands.get(platform, ""),
@@ -68,12 +89,13 @@ def write_csv(rows: list[dict]) -> None:
         "current_value",
         "new_value",
         "source_hint",
+        "collection_url",
         "reason",
         "update_assignment",
         "platform_update_command",
     ]
     with OUT_CSV.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
 
@@ -96,6 +118,9 @@ def build_markdown(rows: list[dict], generated_at: str) -> str:
         lines.append(f"## {platform}")
         lines.append("")
         lines.append(f"Source: {SOURCE_HINTS.get(platform, 'Manual platform export')}")
+        url = platform_rows[0].get("collection_url")
+        if url:
+            lines.append(f"Open: {url}")
         reason = platform_rows[0].get("reason")
         if reason:
             lines.append(f"Why: {reason}")
@@ -139,7 +164,8 @@ def main() -> int:
     generated_at = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
     status = read_json(PROMO_STATUS, {})
     manual = read_json(MANUAL_STATS, {})
-    rows = build_rows(status, manual)
+    live = read_json(LIVE_METRICS, {})
+    rows = build_rows(status, manual, live)
     write_csv(rows)
     markdown = build_markdown(rows, generated_at)
     OUT_MD.write_text(markdown, encoding="utf-8")
