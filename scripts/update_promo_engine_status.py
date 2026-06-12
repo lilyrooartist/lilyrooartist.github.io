@@ -21,6 +21,7 @@ PROMO_REFRESH_RUN = ROOT / "data" / "promo_admin_refresh_run.json"
 SCHEDULED = ROOT / "data" / "scheduled_posts.csv"
 PROMO_QUEUE_PLAN = ROOT / "data" / "promo_queue_plan.json"
 PUBLISHED = ROOT / "admin" / "content" / "Published_Log.csv"
+FUTURE_POSTS = ROOT / "admin" / "future-posts.json"
 OUT = ROOT / "data" / "promo_engine_status.json"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
 
@@ -158,10 +159,10 @@ def refresh_command(name: str) -> str:
     }.get(name, "")
 
 
-def source_freshness(release_status, manual, live, metrics_history, executor_readiness, store_history, social_executions, promo_refresh_run, promo_plan, now: datetime):
+def source_freshness(release_status, manual, live, metrics_history, executor_readiness, store_history, social_executions, promo_refresh_run, promo_plan, future_posts, now: datetime):
     rows = [
         freshness_row("release_status", RELEASE_STATUS, release_status, now),
-        freshness_row("scheduled_posts", SCHEDULED, None, now),
+        freshness_row("scheduled_posts", FUTURE_POSTS, future_posts, now),
         freshness_row("promo_queue_plan", PROMO_QUEUE_PLAN, promo_plan, now),
         freshness_row("published_log", PUBLISHED, None, now),
         freshness_row("manual_metrics", MANUAL_METRICS, manual, now),
@@ -646,6 +647,7 @@ def build_status():
     social_executions = read_json(SOCIAL_EXECUTIONS, {})
     promo_refresh_run = read_json(PROMO_REFRESH_RUN, {})
     promo_plan = read_json(PROMO_QUEUE_PLAN, {})
+    future_posts = read_json(FUTURE_POSTS, {})
     store_history = build_store_verification_history(release_status, now)
     scheduled_rows = read_csv(SCHEDULED)
     published_rows = read_csv(PUBLISHED)
@@ -653,7 +655,7 @@ def build_status():
     history = metrics_history_state(metrics_history)
     refresh_run = refresh_run_state(promo_refresh_run)
     execution_state = social_execution_state(social_executions, scheduled_rows)
-    freshness = source_freshness(release_status, manual, live, metrics_history, executor_readiness, store_history, social_executions, promo_refresh_run, promo_plan, now)
+    freshness = source_freshness(release_status, manual, live, metrics_history, executor_readiness, store_history, social_executions, promo_refresh_run, promo_plan, future_posts, now)
 
     releases = []
     all_actions = []

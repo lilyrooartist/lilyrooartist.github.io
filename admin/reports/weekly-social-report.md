@@ -1,7 +1,7 @@
 # Weekly Social Report — Lily Roo
 
-**Period:** 2026-06-04 to 2026-06-10
-**Last updated:** 2026-06-10 01:30 AM EDT
+**Period:** 2026-06-06 to 2026-06-12
+**Last updated:** 2026-06-12 05:00 PM EDT
 
 ## KPI Goal
 - Primary growth target: **1,000 YouTube subscribers** (monetization milestone)
@@ -56,10 +56,10 @@
 ## Platform Snapshot
 
 ### YouTube
-- Subscribers: **6**
+- Subscribers: **5**
 - Last 28 days views: **109**
 - Last 28 days watch time: **3.4 hours**
-- API status: **The request cannot be completed because you have exceeded your <a href="/youtube/v3/getting-started#quota">quota</a>.**
+- API status: **live API**
 - Public RSS recent-video views: **27 across 15 videos**
 - Latest public upload: **Just Don't Talk About It - Lily Roo** (0 views)
 - Title-track video: https://www.youtube.com/watch?v=vK0mDIW65o4
@@ -122,7 +122,7 @@
 - Latest post: https://www.facebook.com/903693509504290_122118326547249470
 
 ## Metrics Snapshot
-- Live API captured: **2026-06-10T05:29:57.180Z**
+- Live API captured: **2026-06-12T21:00:47.265Z**
 - Snapshot file: `data/live_social_metrics.json`
 - YouTube public RSS captured: **2026-06-09T12:08:07.783949Z**
 - YouTube public snapshot file: `data/youtube_public_snapshot.json`
@@ -132,9 +132,9 @@
 - YouTube Music snapshot file: `data/youtube_music_release_snapshot.json`
 - HyperFollow stores captured: **2026-06-07T20:51:14.275569Z**
 - HyperFollow snapshot file: `data/hyperfollow_store_links_snapshot.json`
-- All-release store verification captured: **2026-06-10T05:30:03.763228+00:00**
+- All-release store verification captured: **2026-06-12T21:00:53.337158+00:00**
 - All-release store verification file: `data/store_verification_history.json`
-- Social executor history captured: **2026-06-10T05:30:03.626726Z**
+- Social executor history captured: **2026-06-12T21:00:53.203090Z**
 - Social executor history file: `data/social_execution_snapshot.json`
 - First single alignment audit captured: **2026-06-07T21:39:03.668040Z**
 - First single alignment audit file: `data/first_single_alignment_audit.json`

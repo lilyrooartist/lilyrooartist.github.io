@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-10T05:30:03.797248Z",
+  "generated_at": "2026-06-12T21:00:53.367512Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -25,42 +25,24 @@
     },
     "urgencies": {
       "blocked": 1,
-      "high": 3,
+      "high": 4,
       "low": 5,
-      "medium": 12
+      "medium": 11
     },
     "next_action": {
-      "label": "Fix TikTok executor",
+      "label": "Fix Facebook executor",
       "kind": "platform_fix",
       "priority": 1,
-      "command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
+      "command": "python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run",
       "context": {
-        "post_id": "FP-AUTO-264",
-        "platform": "TikTok",
-        "reason": "tiktok_credentials_missing",
-        "error_summary": "",
-        "repair_action": "Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok public posting approval is false. Complete TikTok OAuth/public posting setup, push secrets, then refresh Admin.",
+        "post_id": "FP-AUTO-265",
+        "platform": "Facebook",
+        "reason": "max_attempts_exceeded",
+        "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
+        "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
         "readiness": {
-          "ready": false,
-          "access_token_present": false,
-          "refresh_config_present": false,
-          "missing_secrets": [
-            "TIKTOK_CLIENT_KEY",
-            "TIKTOK_CLIENT_SECRET",
-            "TIKTOK_REFRESH_TOKEN"
-          ],
-          "public_posting_approved": false,
-          "default_privacy": "PUBLIC_TO_EVERYONE"
-        },
-        "missing_secrets": [
-          "TIKTOK_CLIENT_KEY",
-          "TIKTOK_CLIENT_SECRET",
-          "TIKTOK_REFRESH_TOKEN"
-        ],
-        "public_posting_approved": false,
-        "refresh_config_present": false,
-        "access_token_present": false,
-        "default_privacy": "PUBLIC_TO_EVERYONE"
+          "ready": true
+        }
       },
       "phase": "Repair executor",
       "urgency": "high",
@@ -83,7 +65,7 @@
         "id": "FP-PLAN-TWELVE-DOLLARS-TIKTOK",
         "release": "Twelve Dollars",
         "platform": "TikTok",
-        "scheduled_at": "2026-06-13T20:40:00-04:00",
+        "scheduled_at": "2026-06-15T20:40:00-04:00",
         "execution_mode": "auto",
         "post_type": "video",
         "readiness_state": "blocked",
@@ -124,6 +106,31 @@
       ]
     },
     {
+      "label": "Fix Facebook executor",
+      "kind": "platform_fix",
+      "priority": 1,
+      "command": "python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run",
+      "context": {
+        "post_id": "FP-AUTO-265",
+        "platform": "Facebook",
+        "reason": "max_attempts_exceeded",
+        "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
+        "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
+        "readiness": {
+          "ready": true
+        }
+      },
+      "phase": "Repair executor",
+      "urgency": "high",
+      "urgency_reason": "Platform executor needs repair before queued auto posts can publish.",
+      "status": "needs_fix",
+      "sort_key": [
+        1,
+        1,
+        0
+      ]
+    },
+    {
       "label": "Fix TikTok executor",
       "kind": "platform_fix",
       "priority": 1,
@@ -163,7 +170,7 @@
       "sort_key": [
         1,
         1,
-        0
+        1
       ]
     },
     {
@@ -190,31 +197,6 @@
       "sort_key": [
         1,
         1,
-        1
-      ]
-    },
-    {
-      "label": "Fix Facebook executor",
-      "kind": "platform_fix",
-      "priority": 1,
-      "command": "python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run",
-      "context": {
-        "post_id": "FP-AUTO-265",
-        "platform": "Facebook",
-        "reason": "",
-        "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
-        "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
-        "readiness": {
-          "ready": true
-        }
-      },
-      "phase": "Repair executor",
-      "urgency": "high",
-      "urgency_reason": "Platform executor needs repair before queued auto posts can publish.",
-      "status": "needs_fix",
-      "sort_key": [
-        1,
-        1,
         2
       ]
     },
@@ -227,7 +209,7 @@
         "id": "FP-PLAN-TWELVE-DOLLARS-X",
         "release": "Twelve Dollars",
         "platform": "X",
-        "scheduled_at": "2026-06-11T10:15:00-04:00",
+        "scheduled_at": "2026-06-13T10:15:00-04:00",
         "execution_mode": "auto",
         "post_type": "image",
         "readiness_state": "ready_after_approval",
@@ -243,11 +225,11 @@
         }
       },
       "phase": "Review draft posts",
-      "urgency": "medium",
-      "urgency_reason": "Draft is scheduled within 72 hours.",
+      "urgency": "high",
+      "urgency_reason": "Draft is scheduled within 24 hours.",
       "status": "waiting_for_user",
       "sort_key": [
-        2,
+        1,
         10,
         3
       ]
@@ -261,7 +243,7 @@
         "id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
         "release": "Twelve Dollars",
         "platform": "Instagram",
-        "scheduled_at": "2026-06-12T14:05:00-04:00",
+        "scheduled_at": "2026-06-14T14:05:00-04:00",
         "execution_mode": "auto",
         "post_type": "image",
         "readiness_state": "ready_after_approval",
@@ -294,7 +276,7 @@
         "id": "FP-PLAN-TWELVE-DOLLARS-FACEBOOK",
         "release": "Twelve Dollars",
         "platform": "Facebook",
-        "scheduled_at": "2026-06-14T11:20:00-04:00",
+        "scheduled_at": "2026-06-16T11:20:00-04:00",
         "execution_mode": "auto",
         "post_type": "image",
         "readiness_state": "ready_after_approval",
@@ -325,7 +307,7 @@
         "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
         "release": "Twelve Dollars",
         "platform": "YouTube Community",
-        "scheduled_at": "2026-06-15T18:30:00-04:00",
+        "scheduled_at": "2026-06-17T18:30:00-04:00",
         "execution_mode": "manual",
         "post_type": "community",
         "readiness_state": "manual_only",
@@ -360,7 +342,7 @@
         "id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
         "release": "Analog Myth",
         "platform": "YouTube Community",
-        "scheduled_at": "2026-06-16T18:30:00-04:00",
+        "scheduled_at": "2026-06-18T18:30:00-04:00",
         "execution_mode": "manual",
         "post_type": "community",
         "readiness_state": "manual_only",
@@ -397,7 +379,7 @@
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-10T05:29:57.240924Z",
+          "updated_at": "2026-06-12T21:00:47.233483Z",
           "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
         }
       },
@@ -422,7 +404,7 @@
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-10T05:29:58.371186Z",
+          "updated_at": "2026-06-12T21:00:48.864068Z",
           "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
         }
       },
@@ -447,7 +429,7 @@
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-10T05:29:58.706207Z",
+          "updated_at": "2026-06-12T21:00:49.263763Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
         }
       },
@@ -472,7 +454,7 @@
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/spotify_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-10T05:29:58.785504Z",
+          "updated_at": "2026-06-12T21:00:49.312485Z",
           "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
         }
       },
@@ -497,7 +479,7 @@
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-10T05:29:59.828399Z",
+          "updated_at": "2026-06-12T21:00:50.563112Z",
           "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
         }
       },
@@ -522,7 +504,7 @@
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-10T05:14:17.880820Z",
+          "updated_at": "2026-06-12T21:00:50.639713Z",
           "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release."
         }
       },
@@ -547,7 +529,7 @@
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-10T05:30:02.499441Z",
+          "updated_at": "2026-06-12T21:00:52.425641Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
         }
       },

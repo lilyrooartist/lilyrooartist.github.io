@@ -1,6 +1,6 @@
 # Promo Operations Packet - Lily Roo
 
-Generated: 2026-06-10T05:30:03.797248Z
+Generated: 2026-06-12T21:00:53.367512Z
 
 ## Summary
 - Actions: **21**
@@ -9,7 +9,7 @@ Generated: 2026-06-10T05:30:03.797248Z
 - Store checks: **7**
 - Manual metric updates: **5**
 - Safe apply commands ready: **0**
-- Urgency: **blocked: 1, high: 3, low: 5, medium: 12**
+- Urgency: **blocked: 1, high: 4, low: 5, medium: 11**
 
 ## Phase Counts
 - Fill manual metrics: **5**
@@ -29,6 +29,10 @@ Generated: 2026-06-10T05:30:03.797248Z
   - Command: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --refresh-admin`
 
 ### Repair executor
+- **[high] Fix Facebook executor**
+  - Why: Platform executor needs repair before queued auto posts can publish.
+  - Detail: Facebook blocked Page publishing until identity is confirmed in the Facebook app.
+  - Command: `python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run`
 - **[high] Fix TikTok executor**
   - Why: Platform executor needs repair before queued auto posts can publish.
   - Detail: Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok public posting approval is false. Complete TikTok OAuth/public posting setup, push secrets, then refresh Admin.
@@ -39,14 +43,10 @@ Generated: 2026-06-10T05:30:03.797248Z
   - Why: Platform executor needs repair before queued auto posts can publish.
   - Detail: Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.
   - Command: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
-- **[high] Fix Facebook executor**
-  - Why: Platform executor needs repair before queued auto posts can publish.
-  - Detail: Facebook blocked Page publishing until identity is confirmed in the Facebook app.
-  - Command: `python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run`
 
 ### Review draft posts
-- **[medium] Review X draft for Twelve Dollars**
-  - Why: Draft is scheduled within 72 hours.
+- **[high] Review X draft for Twelve Dollars**
+  - Why: Draft is scheduled within 24 hours.
   - Detail: Ready after approval.
   - Command: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-X --refresh-admin`
 - **[medium] Review Instagram draft for Twelve Dollars**
