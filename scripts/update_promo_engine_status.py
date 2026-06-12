@@ -18,6 +18,7 @@ EXECUTOR_READINESS = ROOT / "data" / "executor_readiness_snapshot.json"
 STORE_VERIFICATION_HISTORY = ROOT / "data" / "store_verification_history.json"
 SOCIAL_EXECUTIONS = ROOT / "data" / "social_execution_snapshot.json"
 PROMO_REFRESH_RUN = ROOT / "data" / "promo_admin_refresh_run.json"
+PROMO_REFRESH_WORKFLOW = ROOT / ".github" / "workflows" / "promo-admin-refresh.yml"
 SCHEDULED = ROOT / "data" / "scheduled_posts.csv"
 PROMO_QUEUE_PLAN = ROOT / "data" / "promo_queue_plan.json"
 PUBLISHED = ROOT / "admin" / "content" / "Published_Log.csv"
@@ -433,6 +434,31 @@ def refresh_run_state(promo_refresh_run):
     }
 
 
+def refresh_automation_state() -> dict:
+    if not PROMO_REFRESH_WORKFLOW.exists():
+        return {
+            "configured": False,
+            "path": str(PROMO_REFRESH_WORKFLOW.relative_to(ROOT)),
+            "cadence": "",
+            "manual_dispatch": False,
+            "commits_snapshots": False,
+            "safe_refresh_command": "",
+            "action_needed": "Add .github/workflows/promo-admin-refresh.yml.",
+        }
+    text = PROMO_REFRESH_WORKFLOW.read_text(encoding="utf-8")
+    match = re.search(r"cron:\s*[\"']([^\"']+)[\"']", text)
+    safe_command = "python3 scripts/refresh_promo_admin.py"
+    return {
+        "configured": True,
+        "path": str(PROMO_REFRESH_WORKFLOW.relative_to(ROOT)),
+        "cadence": match.group(1) if match else "",
+        "manual_dispatch": "workflow_dispatch:" in text,
+        "commits_snapshots": "git add admin data" in text,
+        "safe_refresh_command": safe_command if safe_command in text else "",
+        "action_needed": "" if safe_command in text and "schedule:" in text else "Review promo admin refresh workflow configuration.",
+    }
+
+
 def social_execution_state(snapshot, scheduled_rows=None):
     summary = snapshot.get("summary") if isinstance(snapshot, dict) else {}
     summary = summary or {}
@@ -729,6 +755,7 @@ def build_status():
     metrics = metric_state(manual, live)
     history = metrics_history_state(metrics_history)
     refresh_run = refresh_run_state(promo_refresh_run)
+    refresh_automation = refresh_automation_state()
     execution_state = social_execution_state(social_executions, scheduled_rows)
     freshness = source_freshness(release_status, manual, live, metrics_history, executor_readiness, store_history, social_executions, promo_refresh_run, promo_plan, future_posts, now)
 
@@ -889,6 +916,7 @@ def build_status():
             "store_verification_history": store_history_summary,
             "social_execution_summary": execution_state,
             "last_refresh_run": refresh_run,
+            "refresh_automation": refresh_automation,
             "stale_source_count": freshness_summary["stale"],
             "missing_source_count": freshness_summary["missing"],
         },
