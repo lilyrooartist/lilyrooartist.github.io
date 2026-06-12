@@ -212,10 +212,21 @@ def source_freshness(release_status, manual, live, metrics_history, executor_rea
         },
         "sources": rows,
         "actions": [
-            f"Refresh {row['name'].replace('_', ' ')}: {row['refresh_command']}"
+            freshness_action_message(row)
             for row in stale + missing
         ],
     }
+
+
+def freshness_action_message(row: dict) -> str:
+    name = row["name"].replace("_", " ")
+    if row.get("name") == "manual_metrics":
+        return (
+            "Refresh manual metrics: fill data/manual_metric_collection_template.csv, "
+            "preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run, "
+            "then import with python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin."
+        )
+    return f"Refresh {name}: {row['refresh_command']}"
 
 
 def norm(value: str | None) -> str:
@@ -679,6 +690,20 @@ def store_verification_commands(release, store_services):
     return commands
 
 
+def store_link_action(pending_labels, verification_commands):
+    if not pending_labels:
+        return "Verify and add remaining public store links."
+    checked = {
+        command.get("service")
+        for command in verification_commands
+        if command.get("latest_snapshot")
+    }
+    labels = ", ".join(pending_labels[:4])
+    if checked and set(pending_labels) <= checked:
+        return f"Re-check checked-pending store links for {labels}; no public URLs were found in the latest snapshots."
+    return "Verify public store links for " + labels + "."
+
+
 def plan_rows_for_release(plan, release_title: str, track_lookup: set[str]):
     rows = []
     for post in plan.get("posts") or []:
@@ -740,10 +765,7 @@ def build_status():
 
         actions = []
         if link_count < 3:
-            if pending_store_labels:
-                actions.append("Verify public store links for " + ", ".join(pending_store_labels[:4]) + ".")
-            else:
-                actions.append("Verify and add remaining public store links.")
+            actions.append(store_link_action(pending_store_labels, verification_commands))
         if not queued and planned:
             actions.append("Review and approve draft promo queue rows for this release.")
         elif not queued:
@@ -755,7 +777,7 @@ def build_status():
         if unplanned_missing_platforms:
             actions.append("Add promo coverage for " + ", ".join(unplanned_missing_platforms) + ".")
         if metrics["pending_manual_fields"]:
-            actions.append("Refresh pending manual metrics before weekly reporting.")
+            actions.append("Fill manual metric worksheet and import it before weekly reporting.")
 
         status = "healthy"
         if actions:

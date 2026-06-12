@@ -510,6 +510,15 @@ def validate_generated_outputs(failures):
             ok(f"promo engine status has {len(status.get('next_actions') or [])} next actions")
         else:
             fail("promo_engine_status.json missing next_actions", failures)
+        next_actions = status.get("next_actions") or []
+        if pending_count and any("--from-csv --dry-run" in action for action in next_actions):
+            ok("promo engine manual metric next action includes worksheet dry run")
+        elif pending_count:
+            fail("promo_engine_status.json manual metric next action missing worksheet dry run", failures)
+        if (status.get("kpi") or {}).get("music_sites_checked_pending") and not any("Verify public store links" in action for action in next_actions):
+            ok("promo engine checked-pending store actions avoid unchecked wording")
+        elif (status.get("kpi") or {}).get("music_sites_checked_pending"):
+            fail("promo_engine_status.json checked-pending store actions still say verify public store links", failures)
     else:
         fail("promo_engine_status.json missing; run scripts/update_promo_engine_status.py", failures)
     if PROMO_QUEUE_PLAN.exists():
