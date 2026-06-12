@@ -261,7 +261,7 @@ def validate_generated_outputs(failures):
         fail("manual_metric_collection_template.csv missing; run scripts/build_manual_metric_collection.py", failures)
     if MANUAL_METRIC_REPORT.exists():
         report_text = MANUAL_METRIC_REPORT.read_text(encoding="utf-8")
-        if "Manual Metric Collection" in report_text and "Pending fields" in report_text and "Open: " in report_text:
+        if "Manual Metric Collection" in report_text and "Pending fields" in report_text and "Open: " in report_text and "--from-csv --refresh-admin" in report_text:
             ok("manual metric markdown report present")
         else:
             fail("manual-metric-collection.md missing expected sections", failures)
@@ -584,6 +584,11 @@ def validate_generated_outputs(failures):
         fail("update_scheduled_post_approval.py missing", failures)
     if MANUAL_METRICS_UPDATER.exists():
         ok("manual social stats updater present")
+        updater_text = MANUAL_METRICS_UPDATER.read_text(encoding="utf-8")
+        if "--from-csv" in updater_text and "--dry-run" in updater_text and "new_value" in updater_text and "csv.DictReader" in updater_text:
+            ok("manual social stats updater can import filled CSV values")
+        else:
+            fail("update_manual_social_stats.py missing filled CSV import support", failures)
     else:
         fail("update_manual_social_stats.py missing", failures)
     if STORE_LINK_VERIFIER.exists():

@@ -108,7 +108,15 @@ def build_markdown(rows: list[dict], generated_at: str) -> str:
         "",
         f"Pending fields: **{len(rows)}**",
         "",
-        "Fill `new_value` in `data/manual_metric_collection_template.csv`, then run the platform update command with real values.",
+        "Fill `new_value` in `data/manual_metric_collection_template.csv`, then run:",
+        "",
+        "`python3 scripts/update_manual_social_stats.py --from-csv --dry-run`",
+        "",
+        "If the preview looks right, run:",
+        "",
+        "`python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`",
+        "",
+        "You can still run a platform update command directly if you only collect one platform.",
         "",
     ]
     by_platform = {}

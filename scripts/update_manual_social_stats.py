@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 import subprocess
 from pathlib import Path
@@ -9,6 +10,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 MANUAL = ROOT / "data" / "manual_social_stats.json"
+DEFAULT_CSV = ROOT / "data" / "manual_metric_collection_template.csv"
 
 
 def read_manual():
@@ -29,6 +31,28 @@ def parse_assignment(raw: str):
     if not platform or not metric:
         raise SystemExit(f"Expected platform.metric=value, got: {raw}")
     return platform, metric, value.strip()
+
+
+def csv_assignments(path: Path):
+    if not path.exists():
+        raise SystemExit(f"Missing {path}")
+    assignments = []
+    with path.open(newline="", encoding="utf-8") as handle:
+        reader = csv.DictReader(handle)
+        required = {"platform", "field", "new_value"}
+        missing = required - set(reader.fieldnames or [])
+        if missing:
+            raise SystemExit(f"{path.relative_to(ROOT)} missing columns: {', '.join(sorted(missing))}")
+        for index, row in enumerate(reader, start=2):
+            value = str(row.get("new_value") or "").strip()
+            if not value:
+                continue
+            platform = str(row.get("platform") or "").strip()
+            metric = str(row.get("field") or "").strip()
+            if not platform or not metric:
+                raise SystemExit(f"{path.relative_to(ROOT)} row {index} missing platform or field")
+            assignments.append(f"{platform}.{metric}={value}")
+    return assignments
 
 
 def update_value(data, platform: str, metric: str, value: str):
@@ -57,20 +81,41 @@ def main():
     parser = argparse.ArgumentParser(
         description="Update data/manual_social_stats.json with platform.metric=value assignments."
     )
-    parser.add_argument("assignments", nargs="+", help="Example: youtube.subscribers=6")
+    parser.add_argument("assignments", nargs="*", help="Example: youtube.subscribers=6")
+    parser.add_argument(
+        "--from-csv",
+        nargs="?",
+        const=str(DEFAULT_CSV.relative_to(ROOT)),
+        default="",
+        help="Import filled new_value cells from the manual metric CSV.",
+    )
+    parser.add_argument("--dry-run", action="store_true", help="Show changes without writing manual stats.")
     parser.add_argument("--refresh-admin", action="store_true", help="Regenerate promo status and admin embeds after writing.")
     args = parser.parse_args()
 
+    assignments = list(args.assignments)
+    if args.from_csv:
+        csv_path = Path(args.from_csv)
+        if not csv_path.is_absolute():
+            csv_path = ROOT / csv_path
+        assignments.extend(csv_assignments(csv_path))
+    if not assignments:
+        raise SystemExit("No metric assignments supplied. Add platform.metric=value args or fill new_value cells and use --from-csv.")
+
     data = read_manual()
     changes = []
-    for raw in args.assignments:
+    for raw in assignments:
         platform, metric, value = parse_assignment(raw)
         previous = update_value(data, platform, metric, value)
         changes.append((platform, metric, previous, value))
 
-    MANUAL.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     for platform, metric, previous, value in changes:
         print(f"{platform}.{metric}: {previous!r} -> {value!r}")
+    if args.dry_run:
+        print(f"Dry run only; did not update {MANUAL.relative_to(ROOT)}")
+        return
+
+    MANUAL.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(f"Updated {MANUAL.relative_to(ROOT)}")
 
     if args.refresh_admin:

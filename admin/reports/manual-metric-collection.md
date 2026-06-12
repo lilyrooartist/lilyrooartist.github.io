@@ -1,10 +1,18 @@
 # Manual Metric Collection - Lily Roo
 
-Generated: 2026-06-12T21:42:48.717437Z
+Generated: 2026-06-12T21:55:48.051488Z
 
 Pending fields: **11**
 
-Fill `new_value` in `data/manual_metric_collection_template.csv`, then run the platform update command with real values.
+Fill `new_value` in `data/manual_metric_collection_template.csv`, then run:
+
+`python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
+
+If the preview looks right, run:
+
+`python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
+
+You can still run a platform update command directly if you only collect one platform.
 
 ## facebook
 

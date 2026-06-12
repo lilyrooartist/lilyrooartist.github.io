@@ -33,9 +33,10 @@ Pending YouTube Music links are checked with `scripts/search_youtube_music_relea
 
 When live APIs cannot provide a metric, the snapshot includes `pending_manual_by_platform` so `/admin` names the exact manual fields still needed for reporting.
 
-The refresh also writes a fill-in worksheet for those gaps at `data/manual_metric_collection_template.csv` and a readable checklist at `admin/reports/manual-metric-collection.md`.
+The refresh also writes a fill-in worksheet for those gaps at `data/manual_metric_collection_template.csv` and a readable checklist at `admin/reports/manual-metric-collection.md`. Fill the worksheet's `new_value` cells, then import them with:
+`python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
 
-Update known manual values without hand-editing JSON:
+For a quick single-platform update, known manual values can still be passed without hand-editing JSON:
 `python3 scripts/update_manual_social_stats.py tiktok.followers=0 spotify.release_streams=0 --refresh-admin`
 
 Draft next queue rows from those gaps with:
