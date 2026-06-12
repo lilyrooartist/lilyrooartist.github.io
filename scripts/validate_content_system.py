@@ -342,17 +342,21 @@ def validate_generated_outputs(failures):
             fail("promo_engine_status.json missing release health summary", failures)
         freshness = status.get("freshness") or {}
         sources = freshness.get("sources") or []
-        if sources and freshness.get("summary", {}).get("fresh", 0) + freshness.get("summary", {}).get("stale", 0) + freshness.get("summary", {}).get("missing", 0) == len(sources):
+        freshness_statuses = {"fresh", "stale", "missing", "checked_no_change"}
+        summary = freshness.get("summary", {})
+        if sources and sum(int(summary.get(state) or 0) for state in freshness_statuses) == len(sources):
             ok(f"promo engine freshness audit tracks {len(sources)} sources")
         else:
             fail("promo_engine_status.json missing source freshness audit", failures)
         for source in sources:
             name = source.get("name") or "[missing source]"
-            if source.get("status") not in {"fresh", "stale", "missing"}:
+            if source.get("status") not in freshness_statuses:
                 fail(f"promo engine freshness source {name} has invalid status", failures)
             for key in ("path", "max_age_hours", "refresh_command"):
                 if not str(source.get(key) or "").strip():
                     fail(f"promo engine freshness source {name} missing {key}", failures)
+            if source.get("status") == "checked_no_change" and not str(source.get("evidence") or "").strip():
+                fail(f"promo engine freshness source {name} missing checked-no-change evidence", failures)
         kpi = status.get("kpi") or {}
         pending_count = kpi.get("pending_manual_metric_fields", 0)
         pending_details = kpi.get("pending_manual_metric_details") or []
@@ -705,6 +709,8 @@ def validate_admin_execution_feedback(failures):
         "spotify executor marked not applicable": "label:'Spotify'" in text and "hasExecutor:false" in text,
         "executor chip supports not-applicable state": "if(!hasExecutor) return '<span class=\"status-chip neutral\">N/A</span>'" in text,
         "platform rows pass executor applicability": "config.hasExecutor!==false" in text,
+        "checked no-change freshness neutral": "if(status==='checked_no_change') return 'neutral'" in text,
+        "checked no-change hidden from urgent actions": "source.status!=='fresh'&&source.status!=='checked_no_change'" in text,
     }
     missing_platform = [label for label, present in platform_checks.items() if not present]
     if missing_platform:

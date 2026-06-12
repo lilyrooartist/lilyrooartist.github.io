@@ -143,6 +143,32 @@ def freshness_row(name: str, path: Path, payload, now: datetime):
     }
 
 
+def release_status_checked_no_change(row: dict, store_history: dict, now: datetime) -> dict:
+    if row.get("status") != "stale":
+        return row
+    summary = store_history.get("summary") or {}
+    checked_at = payload_timestamp(STORE_VERIFICATION_HISTORY, store_history)
+    if not checked_at:
+        return row
+    checked_age = round((now - checked_at).total_seconds() / 3600, 1)
+    if checked_age > SOURCE_MAX_AGE_HOURS["store_verification_history"]:
+        return row
+    if int(summary.get("snapshot_count") or 0) <= 0:
+        return row
+    if int(summary.get("found_in_snapshot") or 0) > 0:
+        return row
+    checked_pending = int(summary.get("checked_pending") or 0)
+    if checked_pending <= 0:
+        return row
+    updated = dict(row)
+    updated["status"] = "checked_no_change"
+    updated["checked_at"] = checked_at.isoformat()
+    updated["checked_age_hours"] = checked_age
+    updated["evidence"] = f"{checked_pending} pending store links checked; no new public URLs found."
+    updated["refresh_command"] = "Store checks are current; update data/distrokid_release_status.json when a verified public URL appears."
+    return updated
+
+
 def refresh_command(name: str) -> str:
     return {
         "release_status": "python3 scripts/verify_pending_store_links.py --refresh-admin; update data/distrokid_release_status.json when a public URL is verified.",
@@ -161,7 +187,7 @@ def refresh_command(name: str) -> str:
 
 def source_freshness(release_status, manual, live, metrics_history, executor_readiness, store_history, social_executions, promo_refresh_run, promo_plan, future_posts, now: datetime):
     rows = [
-        freshness_row("release_status", RELEASE_STATUS, release_status, now),
+        release_status_checked_no_change(freshness_row("release_status", RELEASE_STATUS, release_status, now), store_history, now),
         freshness_row("scheduled_posts", FUTURE_POSTS, future_posts, now),
         freshness_row("promo_queue_plan", PROMO_QUEUE_PLAN, promo_plan, now),
         freshness_row("published_log", PUBLISHED, None, now),
@@ -175,11 +201,13 @@ def source_freshness(release_status, manual, live, metrics_history, executor_rea
     ]
     stale = [row for row in rows if row["status"] == "stale"]
     missing = [row for row in rows if row["status"] == "missing"]
+    checked_no_change = [row for row in rows if row["status"] == "checked_no_change"]
     return {
         "summary": {
             "fresh": sum(1 for row in rows if row["status"] == "fresh"),
             "stale": len(stale),
             "missing": len(missing),
+            "checked_no_change": len(checked_no_change),
             "checked_at": now.isoformat(),
         },
         "sources": rows,
