@@ -518,7 +518,7 @@
 <script type="text/plain" id="embedded-weekly-report"># Weekly Social Report — Lily Roo
 
 **Period:** 2026-06-06 to 2026-06-12
-**Last updated:** 2026-06-12 06:45 PM EDT
+**Last updated:** 2026-06-12 06:58 PM EDT
 
 ## KPI Goal
 - Primary growth target: **1,000 YouTube subscribers** (monetization milestone)
@@ -2135,7 +2135,7 @@
 
 
 <script type="application/json" id="embedded-promo-operations-packet">{
-  "generated_at": "2026-06-12T22:45:20.438146Z",
+  "generated_at": "2026-06-12T22:58:53.525328Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -2196,7 +2196,7 @@
       "label": "Review TikTok draft for Twelve Dollars",
       "kind": "approval_review",
       "priority": 40,
-      "command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --refresh-admin",
+      "command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --dry-run",
       "context": {
         "id": "FP-PLAN-TWELVE-DOLLARS-TIKTOK",
         "release": "Twelve Dollars",
@@ -2209,6 +2209,8 @@
         "text": "Twelve Dollars is what happens when the joke walks on stage wearing impossible shoes. Full album playlist is live.",
         "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
         "media_key": "twelve-dollars-video",
+        "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --refresh-admin",
+        "preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --dry-run",
         "readiness": {
           "ready": false,
           "access_token_present": false,
@@ -2340,7 +2342,7 @@
       "label": "Review X draft for Twelve Dollars",
       "kind": "approval_review",
       "priority": 10,
-      "command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-X --refresh-admin",
+      "command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-X --dry-run",
       "context": {
         "id": "FP-PLAN-TWELVE-DOLLARS-X",
         "release": "Twelve Dollars",
@@ -2353,6 +2355,8 @@
         "text": "Twelve Dollars is the part where the stage gets too bright and the joke gets honest. Full album playlist is live.",
         "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
         "media_key": "twelve-dollars-cover",
+        "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-X --refresh-admin",
+        "preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-X --dry-run",
         "readiness": {
           "text_posting_ready": true,
           "oauth2_user_token_present": false,
@@ -2374,7 +2378,7 @@
       "label": "Review Instagram draft for Twelve Dollars",
       "kind": "approval_review",
       "priority": 10,
-      "command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --refresh-admin",
+      "command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --dry-run",
       "context": {
         "id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
         "release": "Twelve Dollars",
@@ -2387,6 +2391,8 @@
         "text": "Twelve Dollars is live on YouTube: stage lights, scattered bills, impossible shoes, and one very stubborn little signal.",
         "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
         "media_key": "twelve-dollars-cover",
+        "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --refresh-admin",
+        "preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --dry-run",
         "readiness": {
           "ready": true,
           "api": "facebook-login",
@@ -2407,7 +2413,7 @@
       "label": "Review Facebook draft for Twelve Dollars",
       "kind": "approval_review",
       "priority": 10,
-      "command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --refresh-admin",
+      "command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --dry-run",
       "context": {
         "id": "FP-PLAN-TWELVE-DOLLARS-FACEBOOK",
         "release": "Twelve Dollars",
@@ -2420,6 +2426,8 @@
         "text": "Twelve Dollars is live in the Lily Roo archive. The remastered videos are up, the playlist is public, and the stage finally has the right kind of trouble on it.",
         "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
         "media_key": "twelve-dollars-cover",
+        "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --refresh-admin",
+        "preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --dry-run",
         "readiness": {
           "ready": true
         }
@@ -2438,7 +2446,7 @@
       "label": "Review YouTube Community draft for Twelve Dollars",
       "kind": "approval_review",
       "priority": 15,
-      "command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+      "command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
       "context": {
         "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
         "release": "Twelve Dollars",
@@ -2451,6 +2459,8 @@
         "text": "New album transmission: Twelve Dollars. Remastered videos, updated art, full playlist live now.",
         "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
         "media_key": "twelve-dollars-cover",
+        "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+        "preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
         "readiness": {
           "ready": true,
           "missing_secrets": [],
@@ -2473,7 +2483,7 @@
       "label": "Review YouTube Community draft for Analog Myth",
       "kind": "approval_review",
       "priority": 15,
-      "command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin",
+      "command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --dry-run",
       "context": {
         "id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
         "release": "Analog Myth",
@@ -2486,6 +2496,8 @@
         "text": "Analog Myth transmission is live: 13, Girls Camp, Analog Myth, Spilling the Tea, No Mortgage, Guards Down, Slow Walk, The Power of Light.",
         "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
         "media_key": "analog-myth-cover",
+        "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin",
+        "preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --dry-run",
         "readiness": {
           "ready": true,
           "missing_secrets": [],
@@ -2840,7 +2852,7 @@
 
 <script type="text/plain" id="embedded-promo-operations-report"># Promo Operations Packet - Lily Roo
 
-Generated: 2026-06-12T22:45:20.438146Z
+Generated: 2026-06-12T22:58:53.525328Z
 
 ## Summary
 - Actions: **21**
@@ -2866,7 +2878,8 @@ Generated: 2026-06-12T22:45:20.438146Z
   - Detail: Executor credentials or platform setup are not ready.
   - Missing secrets: `TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN`
   - Public posting approved: `False`
-  - Command: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --refresh-admin`
+  - Command: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --dry-run`
+  - Approve after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --refresh-admin`
 
 ### Repair executor
 - **[high] Fix Facebook executor**
@@ -2888,23 +2901,28 @@ Generated: 2026-06-12T22:45:20.438146Z
 - **[high] Review X draft for Twelve Dollars**
   - Why: Draft is scheduled within 24 hours.
   - Detail: Ready after approval.
-  - Command: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-X --refresh-admin`
+  - Command: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-X --dry-run`
+  - Approve after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-X --refresh-admin`
 - **[medium] Review Instagram draft for Twelve Dollars**
   - Why: Draft is scheduled within 72 hours.
   - Detail: Ready after approval.
-  - Command: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --refresh-admin`
+  - Command: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --dry-run`
+  - Approve after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --refresh-admin`
 - **[medium] Review Facebook draft for Twelve Dollars**
   - Why: Auto draft is ready once reviewed and approved.
   - Detail: Ready after approval.
-  - Command: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --refresh-admin`
+  - Command: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --dry-run`
+  - Approve after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --refresh-admin`
 - **[medium] Review YouTube Community draft for Twelve Dollars**
   - Why: Manual copy is ready for human posting workflow.
   - Detail: YouTube Community posts are copy-ready manual workflow.
-  - Command: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin`
+  - Command: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run`
+  - Approve after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin`
 - **[medium] Review YouTube Community draft for Analog Myth**
   - Why: Manual copy is ready for human posting workflow.
   - Detail: YouTube Community posts are copy-ready manual workflow.
-  - Command: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin`
+  - Command: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --dry-run`
+  - Approve after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin`
 
 ### Verify music sites
 - **[medium] Re-check Twelve Dollars on Spotify**
@@ -4211,6 +4229,7 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
       const detail=context.error_summary||context.repair_action||context.readiness_message||context.note||(Array.isArray(context.fields)?context.fields.join(', '):'')||context.service||'';
       const worksheetCommand=context.worksheet_import_command||'';
       const directUpdateCommand=context.direct_update_command||'';
+      const approvalCommand=context.approval_command||'';
       const chipClass=action.urgency==='blocked'||action.urgency==='high'||action.kind==='platform_fix'||context.readiness_state==='blocked'?'warn':action.kind==='apply_approved'?'ok':'neutral';
       return `<div class="queue-item">
         <div class="queue-top">
@@ -4224,6 +4243,7 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
             ${context.collection_url?`<div class="queue-meta"><a href="${escapeHtml(context.collection_url)}" target="_blank" rel="noopener">Open metric source</a></div>`:''}
             ${context.text?`<div class="queue-meta">${escapeHtml(context.text)}</div>`:''}
             ${action.command?`<div class="queue-meta">${escapeHtml(action.command)}</div>`:''}
+            ${approvalCommand?`<div class="queue-meta">Approve after review: ${escapeHtml(approvalCommand)}</div>`:''}
             ${worksheetCommand?`<div class="queue-meta">Import filled worksheet: ${escapeHtml(worksheetCommand)}</div>`:''}
             ${directUpdateCommand?`<div class="queue-meta">Direct update fallback: ${escapeHtml(directUpdateCommand)}</div>`:''}
           </div>

@@ -221,9 +221,13 @@ def approval_actions(plan, readiness):
             priority = 40
         elif state == "manual_only":
             priority = 15
+        approval_command = post.get("approval_command") or ""
+        preview_command = approval_command.replace("--refresh-admin", "--dry-run").strip()
+        if preview_command == approval_command and approval_command:
+            preview_command = approval_command + " --dry-run"
         actions.append(command_row(
             f"Review {post.get('platform') or 'platform'} draft for {post.get('song') or 'release'}",
-            post.get("approval_command") or "",
+            preview_command,
             "approval_review",
             priority,
             {
@@ -238,6 +242,8 @@ def approval_actions(plan, readiness):
                 "text": post.get("text") or "",
                 "reply_text": post.get("reply_text") or "",
                 "media_key": post.get("media_key") or "",
+                "approval_command": approval_command,
+                "preview_command": preview_command,
                 **readiness_diagnostics(readiness, post.get("platform") or ""),
             },
         ))
@@ -361,6 +367,8 @@ def build_markdown(packet):
                 lines.append(f"  - Public posting approved: `{context.get('public_posting_approved')}`")
             if action.get("command"):
                 lines.append(f"  - Command: `{action['command']}`")
+            if context.get("approval_command"):
+                lines.append(f"  - Approve after review: `{context['approval_command']}`")
             if context.get("collection_url"):
                 lines.append(f"  - Open: {context['collection_url']}")
             if context.get("worksheet_import_command"):

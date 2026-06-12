@@ -222,6 +222,19 @@ def validate_generated_outputs(failures):
             ok("promo operations packet groups approval, store, metric, and platform work")
         else:
             fail("promo_operations_packet.json missing required action groups", failures)
+        approval_review_actions = [
+            action for action in actions
+            if action.get("kind") == "approval_review"
+        ]
+        if approval_review_actions and all(
+            "--dry-run" in (action.get("command") or "")
+            and "--dry-run" not in ((action.get("context") or {}).get("approval_command") or "")
+            and ((action.get("context") or {}).get("preview_command") == action.get("command"))
+            for action in approval_review_actions
+        ):
+            ok("promo operations packet uses dry-run approval previews")
+        else:
+            fail("promo_operations_packet.json approval review actions missing dry-run previews", failures)
         tiktok_actions = [
             action for action in actions
             if (action.get("context") or {}).get("platform") == "TikTok"
@@ -617,7 +630,11 @@ def validate_generated_outputs(failures):
     else:
         fail("apply_promo_queue_plan.py missing", failures)
     if PROMO_QUEUE_APPROVE.exists():
-        ok("promo queue approval script present")
+        approval_text = PROMO_QUEUE_APPROVE.read_text(encoding="utf-8")
+        if "--refresh-admin" in approval_text and "--dry-run" in approval_text and "Dry run only" in approval_text:
+            ok("promo queue approval script supports dry-run and refresh")
+        else:
+            fail("approve_promo_queue_plan.py missing dry-run or refresh support", failures)
     else:
         fail("approve_promo_queue_plan.py missing", failures)
     if SCHEDULED_POST_APPROVAL.exists():

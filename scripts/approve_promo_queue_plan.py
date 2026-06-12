@@ -106,6 +106,7 @@ def main():
     parser.add_argument("--platform", help="Select rows for a platform.")
     parser.add_argument("--all", action="store_true", help="Select all draft rows.")
     parser.add_argument("--unapprove", action="store_true", help="Set selected rows approved=no instead of yes.")
+    parser.add_argument("--dry-run", action="store_true", help="Preview selected rows without changing approval state.")
     parser.add_argument("--refresh-admin", action="store_true", help="Regenerate promo status and admin embeds after writing.")
     args = parser.parse_args()
 
@@ -120,8 +121,13 @@ def main():
     value = "no" if args.unapprove else "yes"
     for post in posts:
         previous = post.get("approved", "no")
-        post["approved"] = value
         print(f"{post.get('id')}: approved {previous!r} -> {value!r}")
+    if args.dry_run:
+        print(f"Dry run only; no changes written to {PLAN.relative_to(ROOT)}")
+        return
+
+    for post in posts:
+        post["approved"] = value
     write_plan(plan)
     print(f"Updated {PLAN.relative_to(ROOT)} ({len(posts)} row(s))")
 
