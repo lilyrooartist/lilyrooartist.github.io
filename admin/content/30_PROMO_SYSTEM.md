@@ -25,6 +25,8 @@ It also audits source freshness so `/admin` shows when release status, the queue
 
 The refresh script is read-only for external services. It does not approve, apply, or publish queued posts. It writes the latest run summary to `data/promo_admin_refresh_run.json` so Admin can show whether the new DistroKid/music-site content and social execution snapshots were refreshed cleanly.
 
+GitHub Actions also runs `.github/workflows/promo-admin-refresh.yml` every 6 hours and on manual dispatch. The workflow runs the same safe refresh, validates the content system, and commits changed `admin/` or `data/` snapshots. It requires repository secret `LILYROO_ADMIN_PASSWORD` or `LILYROO_EXECUTOR_BEARER_TOKEN` for authenticated executor captures. It must never approve, apply, or publish posts.
+
 It also writes a review packet to `data/promo_operations_packet.json` and `admin/reports/promo-operations-packet.md`, grouping platform fixes, draft approvals, store checks, and manual metrics into one operator-facing checklist with phase counts and urgency labels.
 
 Pending Spotify album links are checked with `scripts/search_spotify_release.py`, which searches public web results for Spotify album URLs and validates exact-title candidates through Spotify oEmbed before marking a snapshot as found.

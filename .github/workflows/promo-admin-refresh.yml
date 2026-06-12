@@ -1,0 +1,56 @@
+name: Promo admin refresh
+
+on:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: promo-admin-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      LILYROO_ADMIN_PASSWORD: ${{ secrets.LILYROO_ADMIN_PASSWORD }}
+      LILYROO_EXECUTOR_BEARER_TOKEN: ${{ secrets.LILYROO_EXECUTOR_BEARER_TOKEN }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run safe promo admin refresh
+        run: python3 scripts/refresh_promo_admin.py
+
+      - name: Validate content system
+        run: |
+          python3 scripts/validate_content_system.py
+          python3 -m py_compile \
+            scripts/refresh_promo_admin.py \
+            scripts/update_promo_engine_status.py \
+            scripts/build_promo_operations_packet.py \
+            scripts/build_manual_metric_collection.py \
+            scripts/validate_content_system.py
+
+      - name: Commit refreshed admin data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet; then
+            echo "No promo admin refresh changes to commit."
+          else
+            git add admin data
+            git commit -m "Refresh promo admin snapshots"
+            git push
+          fi

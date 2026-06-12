@@ -33,6 +33,11 @@ python3 scripts/update_weekly_report.py
 python3 scripts/validate_content_system.py
 ```
 
+Promo/admin freshness is also automated by `.github/workflows/promo-admin-refresh.yml`.
+It runs the safe refresh pipeline every 6 hours and can be run manually from GitHub Actions.
+The workflow only captures metrics/status, rebuilds admin reports, validates the content system, and commits changed `admin/` or `data/` snapshots. It does not approve, apply, or publish posts.
+For authenticated executor captures, configure repository secrets `LILYROO_ADMIN_PASSWORD` or `LILYROO_EXECUTOR_BEARER_TOKEN`.
+
 The admin page can be opened from a local server or directly as a file. The served path is preferred:
 
 ```bash

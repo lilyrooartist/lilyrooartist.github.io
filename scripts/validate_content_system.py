@@ -42,6 +42,7 @@ METRICS_HISTORY_UPDATER = ROOT / "scripts" / "update_metrics_history.py"
 EXECUTOR_READINESS_CAPTURE = ROOT / "scripts" / "capture_executor_readiness.py"
 SOCIAL_EXECUTION_CAPTURE = ROOT / "scripts" / "capture_social_executions.py"
 PROMO_REFRESH_SCRIPT = ROOT / "scripts" / "refresh_promo_admin.py"
+PROMO_REFRESH_WORKFLOW = ROOT / ".github" / "workflows" / "promo-admin-refresh.yml"
 PROMO_OPERATIONS_SCRIPT = ROOT / "scripts" / "build_promo_operations_packet.py"
 MANUAL_METRIC_COLLECTION_SCRIPT = ROOT / "scripts" / "build_manual_metric_collection.py"
 REPORT = ROOT / "admin" / "reports" / "weekly-social-report.md"
@@ -738,6 +739,29 @@ def validate_generated_outputs(failures):
             fail("refresh_promo_admin.py missing safe refresh coverage or includes posting commands", failures)
     else:
         fail("refresh_promo_admin.py missing", failures)
+    if PROMO_REFRESH_WORKFLOW.exists():
+        workflow_text = PROMO_REFRESH_WORKFLOW.read_text(encoding="utf-8")
+        required_bits = [
+            "schedule:",
+            "workflow_dispatch:",
+            "python3 scripts/refresh_promo_admin.py",
+            "python3 scripts/validate_content_system.py",
+            "contents: write",
+            "git add admin data",
+        ]
+        forbidden_bits = [
+            "apply_promo_queue_plan.py --apply",
+            "post_youtube_from_queue.py",
+            "post_youtube_captions.py",
+            "post_x_from_queue.py",
+            "post_tiktok_from_queue.py",
+        ]
+        if all(bit in workflow_text for bit in required_bits) and not any(bit in workflow_text for bit in forbidden_bits):
+            ok("promo admin scheduled refresh workflow is safe")
+        else:
+            fail("promo admin scheduled refresh workflow missing safe refresh coverage or includes posting commands", failures)
+    else:
+        fail("promo admin scheduled refresh workflow missing", failures)
     secret_push = ROOT / "scripts" / "push_social_worker_secrets.py"
     if secret_push.exists():
         secret_text = secret_push.read_text(encoding="utf-8")
