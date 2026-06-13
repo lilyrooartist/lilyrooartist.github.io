@@ -25,6 +25,7 @@ STEPS = [
         "name": "capture_live_metrics",
         "command": ["python3", "scripts/capture_live_metrics.py"],
         "required": False,
+        "preserve_on_failure": ["data/live_social_metrics.json"],
     },
     {
         "name": "verify_pending_store_links",
@@ -35,11 +36,13 @@ STEPS = [
         "name": "capture_executor_readiness",
         "command": ["python3", "scripts/capture_executor_readiness.py"],
         "required": False,
+        "preserve_on_failure": ["data/executor_readiness_snapshot.json"],
     },
     {
         "name": "capture_social_executions",
         "command": ["python3", "scripts/capture_social_executions.py"],
         "required": False,
+        "preserve_on_failure": ["data/social_execution_snapshot.json"],
     },
     {
         "name": "generate_promo_queue_plan",
@@ -50,6 +53,7 @@ STEPS = [
         "name": "update_metrics_history",
         "command": ["python3", "scripts/update_metrics_history.py"],
         "required": False,
+        "preserve_on_failure": ["data/metrics_history.json"],
     },
     {
         "name": "capture_github_workflow_status",
@@ -102,6 +106,10 @@ def assert_safe_steps(steps: list[dict]) -> None:
 def run_step(step: dict, dry_run: bool) -> dict:
     command = step["command"]
     started = monotonic()
+    backups = {}
+    for relative in step.get("preserve_on_failure", []):
+        path = ROOT / relative
+        backups[relative] = path.read_bytes() if path.exists() else None
     if dry_run:
         return {
             "name": step["name"],
@@ -114,6 +122,15 @@ def run_step(step: dict, dry_run: bool) -> dict:
             "stderr_tail": "",
         }
     proc = subprocess.run(command, cwd=ROOT, text=True, capture_output=True, check=False)
+    if not step["required"] and proc.returncode != 0:
+        for relative, content in backups.items():
+            path = ROOT / relative
+            if content is None:
+                if path.exists():
+                    path.unlink()
+            else:
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_bytes(content)
     return {
         "name": step["name"],
         "command": command_text(command),
