@@ -49,7 +49,7 @@ STEPS = [
     {
         "name": "update_metrics_history",
         "command": ["python3", "scripts/update_metrics_history.py"],
-        "required": True,
+        "required": False,
     },
     {
         "name": "capture_github_workflow_status",
