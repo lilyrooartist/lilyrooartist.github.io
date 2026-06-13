@@ -1,14 +1,80 @@
 {
   "ok": false,
-  "updated_at": "2026-06-13T01:56:57.623782Z",
+  "updated_at": "2026-06-13T14:27:04.249723Z",
   "source": "github-actions-workflow-runs",
   "repo": "lilyrooartist/lilyrooartist.github.io",
   "workflow": "promo-admin-refresh.yml",
   "api_url": "https://api.github.com/repos/lilyrooartist/lilyrooartist.github.io/actions/workflows/promo-admin-refresh.yml/runs?per_page=5",
   "actions_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/workflows/promo-admin-refresh.yml",
-  "http_status": 0,
-  "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>",
-  "latest_run": {},
-  "recent_runs": [],
-  "action_needed": "Review GitHub Actions API access, then rerun workflow status capture."
+  "http_status": 200,
+  "error": "",
+  "latest_run": {
+    "id": 27463050828,
+    "status": "completed",
+    "conclusion": "failure",
+    "event": "schedule",
+    "created_at": "2026-06-13T09:34:57Z",
+    "updated_at": "2026-06-13T09:35:11Z",
+    "html_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/27463050828",
+    "head_branch": "main",
+    "head_sha": "a8427eb5dde1841e0b534d65df228d806a31a6b5"
+  },
+  "recent_runs": [
+    {
+      "id": 27463050828,
+      "status": "completed",
+      "conclusion": "failure",
+      "event": "schedule",
+      "created_at": "2026-06-13T09:34:57Z",
+      "updated_at": "2026-06-13T09:35:11Z",
+      "html_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/27463050828",
+      "head_branch": "main",
+      "head_sha": "a8427eb5dde1841e0b534d65df228d806a31a6b5"
+    },
+    {
+      "id": 27457071235,
+      "status": "completed",
+      "conclusion": "failure",
+      "event": "schedule",
+      "created_at": "2026-06-13T04:52:52Z",
+      "updated_at": "2026-06-13T04:53:06Z",
+      "html_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/27457071235",
+      "head_branch": "main",
+      "head_sha": "a8427eb5dde1841e0b534d65df228d806a31a6b5"
+    },
+    {
+      "id": 27453295817,
+      "status": "completed",
+      "conclusion": "failure",
+      "event": "workflow_dispatch",
+      "created_at": "2026-06-13T02:01:16Z",
+      "updated_at": "2026-06-13T02:01:36Z",
+      "html_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/27453295817",
+      "head_branch": "main",
+      "head_sha": "a8427eb5dde1841e0b534d65df228d806a31a6b5"
+    },
+    {
+      "id": 27453124685,
+      "status": "completed",
+      "conclusion": "failure",
+      "event": "workflow_dispatch",
+      "created_at": "2026-06-13T01:54:09Z",
+      "updated_at": "2026-06-13T01:54:26Z",
+      "html_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/27453124685",
+      "head_branch": "main",
+      "head_sha": "775d8c0f876b27c4d6ef0fcbc0f1c2ef8f5bb636"
+    },
+    {
+      "id": 27452932737,
+      "status": "completed",
+      "conclusion": "failure",
+      "event": "workflow_dispatch",
+      "created_at": "2026-06-13T01:46:29Z",
+      "updated_at": "2026-06-13T01:46:47Z",
+      "html_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/27452932737",
+      "head_branch": "main",
+      "head_sha": "8184247931e4d4a4bc7020e1ec2f6b4cf146c33f"
+    }
+  ],
+  "action_needed": "Open the latest promo admin refresh workflow run and fix the failure result."
 }

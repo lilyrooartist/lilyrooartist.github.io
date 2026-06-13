@@ -893,6 +893,13 @@ def build_status():
     freshness_summary = freshness["summary"]
     freshness_actions = freshness["actions"]
     all_actions = freshness_actions + all_actions
+    if metrics["pending_manual_fields"] and not any("--from-csv --dry-run" in action for action in all_actions):
+        all_actions.insert(
+            0,
+            "Refresh manual metrics: fill data/manual_metric_collection_template.csv, "
+            "preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run, "
+            "then import with python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin.",
+        )
     if execution_state["platform_fix_needed_count"]:
         platforms = ", ".join(sorted({
             item.get("platform", "Social")
@@ -923,6 +930,7 @@ def build_status():
             "store_verification_history": str(STORE_VERIFICATION_HISTORY.relative_to(ROOT)),
             "social_executions": str(SOCIAL_EXECUTIONS.relative_to(ROOT)),
             "promo_refresh_run": str(PROMO_REFRESH_RUN.relative_to(ROOT)),
+            "promo_refresh_workflow_status": str(PROMO_REFRESH_WORKFLOW_STATUS.relative_to(ROOT)),
         },
         "objective": "Promote Lily Roo releases and keep lilyroo.com/admin status and metrics current.",
         "kpi": {

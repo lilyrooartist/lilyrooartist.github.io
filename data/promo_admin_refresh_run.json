@@ -3,20 +3,17 @@
   "safe_mode": true,
   "finalized": true,
   "dry_run": false,
-  "started_at": "2026-06-13T01:56:56.869090Z",
-  "finished_at": "2026-06-13T01:56:57.737360Z",
-  "duration_seconds": 0.87,
+  "started_at": "2026-06-13T14:26:55.031524Z",
+  "finished_at": "2026-06-13T14:27:04.398343Z",
+  "duration_seconds": 9.37,
   "summary": {
     "command_count": 11,
-    "passed": 7,
-    "failed": 4,
+    "passed": 10,
+    "failed": 1,
     "required_failed": 0,
-    "optional_failed": 4,
-    "allowed_failures": 4,
+    "optional_failed": 1,
+    "allowed_failures": 1,
     "optional_failures_tolerated": [
-      "capture_live_metrics",
-      "capture_executor_readiness",
-      "capture_social_executions",
       "capture_github_workflow_status"
     ]
   },
@@ -25,11 +22,11 @@
       "name": "capture_live_metrics",
       "command": "python3 scripts/capture_live_metrics.py",
       "required": false,
-      "returncode": 1,
-      "ok": false,
-      "duration_seconds": 0.05,
-      "stdout_tail": "",
-      "stderr_tail": "Traceback (most recent call last):\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/urllib/request.py\", line 1346, in do_open\n    h.request(req.get_method(), req.selector, req.data, headers,\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py\", line 1257, in request\n    self._send_request(method, url, body, headers, encode_chunked)\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py\", line 1303, in _send_request\n    self.endheaders(body, encode_chunked=encode_chunked)\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py\", line 1252, in endheaders\n    self._send_output(message_body, encode_chunked=encode_chunked)\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py\", line 1012, in _send_output\n    self.send(msg)\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py\", line 952, in send\n    self.connect()\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py\", line 1419, in connect\n    super().connect()\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py\", line 923, in connect\n    self.sock = self._create_connection(\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/socket.py\", line 822, in create_connection\n    for res in getaddrinfo(host, port, 0, SOCK_STREAM):\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/socket.py\", line 953, in getaddrinfo\n    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):\nsocket.gaierror: [Errno 8] nodename nor servname provided, or not known\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/Users/tod.famous/Documents/New project/lilyrooartist.github.io/scripts/capture_live_metrics.py\", line 92, in <module>\n    raise SystemExit(main())\n  File \"/Users/tod.famous/Documents/New project/lilyrooartist.github.io/scripts/capture_live_metrics.py\", line 78, in main\n    payload = fetch_metrics(url, admin_password(), bearer_token())\n  File \"/Users/tod.famous/Documents/New project/lilyrooartist.github.io/scripts/capture_live_metrics.py\", line 59, in fetch_metrics\n    with urllib.request.urlopen(request, timeout=25) as response:\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/urllib/request.py\", line 214, in urlopen\n    return opener.open(url, data, timeout)\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/urllib/request.py\", line 517, in open\n    response = self._open(req, data)\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/urllib/request.py\", line 534, in _open\n    result = self._call_chain(self.handle_open, protocol, protocol +\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/urllib/request.py\", line 494, in _call_chain\n    result = func(*args)\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/urllib/request.py\", line 1389, in https_open\n    return self.do_open(http.client.HTTPSConnection, req,\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/urllib/request.py\", line 1349, in do_open\n    raise URLError(err)\nurllib.error.URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>"
+      "returncode": 0,
+      "ok": true,
+      "duration_seconds": 1.22,
+      "stdout_tail": "{\n  \"ok\": true,\n  \"capture_status\": 200,\n  \"updated_at\": \"2026-06-13T14:26:56.297Z\",\n  \"platforms\": [\n    \"facebook\",\n    \"instagram\",\n    \"spotify\",\n    \"tiktok\",\n    \"x\",\n    \"youtube\"\n  ],\n  \"output\": \"data/live_social_metrics.json\"\n}",
+      "stderr_tail": ""
     },
     {
       "name": "verify_pending_store_links",
@@ -37,28 +34,28 @@
       "required": false,
       "returncode": 0,
       "ok": true,
-      "duration_seconds": 0.48,
-      "stdout_tail": "{\n  \"checked\": 8,\n  \"ok\": 1,\n  \"not_live_or_failed\": 7,\n  \"results\": [\n    {\n      \"command\": \"python3 scripts/search_spotify_release.py --artist Lily Roo --title Twelve Dollars --out data/store-verification/twelve-dollars/spotify_release_snapshot.json\",\n      \"returncode\": 1,\n      \"stdout\": \"{\\n  \\\"ok\\\": false,\\n  \\\"title\\\": \\\"\\\",\\n  \\\"album_id\\\": \\\"\\\",\\n  \\\"release_url\\\": \\\"\\\",\\n  \\\"candidate_count\\\": 0,\\n  \\\"output\\\": \\\"data/store-verification/twelve-dollars/spotify_release_snapshot.json\\\"\\n}\",\n      \"stderr\": \"\"\n    },\n    {\n      \"command\": \"python3 scripts/capture_apple_music_release.py --artist Lily Roo --title Twelve Dollars --out data/store-verification/twelve-dollars/apple_music_release_snapshot.json\",\n      \"returncode\": 1,\n      \"stdout\": \"\",\n      \"stderr\": \"Traceback (most recent call last):\\n  File \\\"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/urllib/request.py\\\", line 1346, in do_open\\n    h.request(req.get_method(), req.selector, req.data, headers,\\n  File \\\"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py\\\", line 1257, in request\\n    self._send_request(method, url, body, headers, encode_chunked)\\n  File \\\"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py\\\", line 1303, in _send_request\\n    self.endheaders(body, encode_chunked=encode_chunked)\\n  File \\\"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py\\\", line 1252, in endheaders\\n    self._send_output(message_body, encode_chunked=encode_chunked)\\n  File \\\"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py\\\", line 1012, in _send_output\\n    self.send(msg)\\n  File \\\"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py\\\", line 952, in send\\n    self.connect()\\n  File \\\"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py\\\", line 1419, in connect\\n    super().connect()\\n  File \\\"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py\\\", line 923, in connect\\n    self.sock = self._create_connection(\\n  File \\\"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/socket.py\\\", line 822, in create_connection\\n    for res in getaddrinfo(host, port, 0, SOCK_STREAM):\\n  File \\\"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/socket.py\\\", line 953, in getaddrinfo\\n    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):\\nsocket.gaierror: [Errno 8] nodename nor servname provided, or not known\\n\\nDuring handling of the above exception, another exception occurred:\\n\\nTraceback (most recent call last):\\n  File \\\"/Users/tod.famous/Documents/New project/lilyrooartist.github.io/scripts/capture_apple_music_release.py\\\", line 107, in <module>\\n    raise SystemExit(main())\\n  File \\\"/Users/tod.famous/Documents/New project/lilyrooartist.github.io/scripts/capture_apple_music_release.py\\\", line 53, in main\\n    payload = fetch_results(args.artist, args.title)\\n  File \\\"/Users/tod.famous/Documents/New project/lilyrooartist.github.io/scripts/capture_apple_music_release.py\\\", line 32, in fetch_results\\n    with urllib.request.urlopen(request, timeout=25) as response:\\n  File \\\"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/urllib/request.py\\\", line 214, in urlopen\\n    return opener.open(url, data, timeout)\\n  File \\\"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/urllib/request.py\\\", line 517, in open\\n    response = self._open(req, data)\\n  File \\\"/Library/Developer/CommandLine\n...[truncated]",
+      "duration_seconds": 6.24,
+      "stdout_tail": "{\n  \"checked\": 8,\n  \"ok\": 1,\n  \"not_live_or_failed\": 7,\n  \"results\": [\n    {\n      \"command\": \"python3 scripts/search_spotify_release.py --artist Lily Roo --title Twelve Dollars --out data/store-verification/twelve-dollars/spotify_release_snapshot.json\",\n      \"returncode\": 1,\n      \"stdout\": \"{\\n  \\\"ok\\\": false,\\n  \\\"title\\\": \\\"\\\",\\n  \\\"album_id\\\": \\\"\\\",\\n  \\\"release_url\\\": \\\"\\\",\\n  \\\"candidate_count\\\": 0,\\n  \\\"output\\\": \\\"data/store-verification/twelve-dollars/spotify_release_snapshot.json\\\"\\n}\",\n      \"stderr\": \"\"\n    },\n    {\n      \"command\": \"python3 scripts/capture_apple_music_release.py --artist Lily Roo --title Twelve Dollars --out data/store-verification/twelve-dollars/apple_music_release_snapshot.json\",\n      \"returncode\": 1,\n      \"stdout\": \"{\\n  \\\"ok\\\": false,\\n  \\\"collection_name\\\": \\\"\\\",\\n  \\\"collection_id\\\": null,\\n  \\\"release_url\\\": \\\"\\\",\\n  \\\"output\\\": \\\"data/store-verification/twelve-dollars/apple_music_release_snapshot.json\\\"\\n}\",\n      \"stderr\": \"\"\n    },\n    {\n      \"command\": \"python3 scripts/capture_hyperfollow_store_links.py --url https://distrokid.com/hyperfollow/lilyroo/twelve-dollars --out data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json\",\n      \"returncode\": 1,\n      \"stdout\": \"{\\n  \\\"ok\\\": false,\\n  \\\"stores\\\": [],\\n  \\\"amazon_music_available\\\": false,\\n  \\\"output\\\": \\\"data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json\\\"\\n}\",\n      \"stderr\": \"\"\n    },\n    {\n      \"command\": \"python3 scripts/search_spotify_release.py --artist Lily Roo --title Analog Myth --out data/store-verification/analog-myth/spotify_release_snapshot.json\",\n      \"returncode\": 1,\n      \"stdout\": \"{\\n  \\\"ok\\\": false,\\n  \\\"title\\\": \\\"\\\",\\n  \\\"album_id\\\": \\\"\\\",\\n  \\\"release_url\\\": \\\"\\\",\\n  \\\"candidate_count\\\": 0,\\n  \\\"output\\\": \\\"data/store-verification/analog-myth/spotify_release_snapshot.json\\\"\\n}\",\n      \"stderr\": \"\"\n    },\n    {\n      \"command\": \"python3 scripts/capture_apple_music_release.py --artist Lily Roo --title Analog Myth --out data/store-verification/analog-myth/apple_music_release_snapshot.json\",\n      \"returncode\": 1,\n      \"stdout\": \"{\\n  \\\"ok\\\": false,\\n  \\\"collection_name\\\": \\\"\\\",\\n  \\\"collection_id\\\": null,\\n  \\\"release_url\\\": \\\"\\\",\\n  \\\"output\\\": \\\"data/store-verification/analog-myth/apple_music_release_snapshot.json\\\"\\n}\",\n      \"stderr\": \"\"\n    },\n    {\n      \"command\": \"python3 scripts/search_youtube_music_release.py --artist Lily Roo --title Analog Myth --out data/store-verification/analog-myth/youtube_music_release_snapshot.json\",\n      \"returncode\": 1,\n      \"stdout\": \"{\\n  \\\"ok\\\": false,\\n  \\\"release_url\\\": \\\"\\\",\\n  \\\"public_title\\\": \\\"\\\",\\n  \\\"title_matches_official\\\": false,\\n  \\\"candidate_count\\\": 0,\\n  \\\"output\\\": \\\"data/store-verification/analog-myth/youtube_music_release_snapshot.json\\\"\\n}\",\n      \"stderr\": \"\"\n    },\n    {\n      \"command\": \"python3 scripts/capture_hyperfollow_store_links.py --url https://distrokid.com/hyperfollow/lilyroo/analog-myth --out data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json\",\n      \"returncode\": 1,\n      \"stdout\": \"{\\n  \\\"ok\\\": false,\\n  \\\"stores\\\": [],\\n  \\\"amazon_music_available\\\": false,\\n  \\\"output\\\": \\\"data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json\\\"\\n}\",\n      \"stderr\": \"\"\n    },\n    {\n      \"command\": \"python3 scripts/update_promo_engine_status.py\",\n      \"returncode\": 0,\n      \"stdout\": \"Wrote /Users/tod.famous/Documents/New project/lilyrooartist.github.io/data/promo_engine_status.json with 3 releases\",\n      \"stderr\": \"\"\n    }\n  ]\n}",
       "stderr_tail": ""
     },
     {
       "name": "capture_executor_readiness",
       "command": "python3 scripts/capture_executor_readiness.py",
       "required": false,
-      "returncode": 1,
-      "ok": false,
-      "duration_seconds": 0.05,
-      "stdout_tail": "{\n  \"ok\": false,\n  \"http_status\": 0,\n  \"ready_platforms\": [],\n  \"blocked_platforms\": [\n    \"X\",\n    \"Instagram\",\n    \"TikTok\",\n    \"Facebook\",\n    \"YouTube Community\"\n  ],\n  \"output\": \"data/executor_readiness_snapshot.json\"\n}",
+      "returncode": 0,
+      "ok": true,
+      "duration_seconds": 0.2,
+      "stdout_tail": "{\n  \"ok\": true,\n  \"http_status\": 200,\n  \"ready_platforms\": [\n    \"X\",\n    \"Instagram\",\n    \"Facebook\",\n    \"YouTube Community\"\n  ],\n  \"blocked_platforms\": [\n    \"TikTok\"\n  ],\n  \"output\": \"data/executor_readiness_snapshot.json\"\n}",
       "stderr_tail": ""
     },
     {
       "name": "capture_social_executions",
       "command": "python3 scripts/capture_social_executions.py",
       "required": false,
-      "returncode": 1,
-      "ok": false,
-      "duration_seconds": 0.07,
-      "stdout_tail": "{\n  \"ok\": false,\n  \"http_status\": 0,\n  \"execution_count\": 0,\n  \"posted_count\": 0,\n  \"attention_count\": 0,\n  \"output\": \"data/social_execution_snapshot.json\"\n}",
+      "returncode": 0,
+      "ok": true,
+      "duration_seconds": 0.93,
+      "stdout_tail": "{\n  \"ok\": true,\n  \"http_status\": 200,\n  \"execution_count\": 6,\n  \"posted_count\": 0,\n  \"attention_count\": 6,\n  \"output\": \"data/social_execution_snapshot.json\"\n}",
       "stderr_tail": ""
     },
     {
@@ -67,7 +64,7 @@
       "required": true,
       "returncode": 0,
       "ok": true,
-      "duration_seconds": 0.03,
+      "duration_seconds": 0.05,
       "stdout_tail": "Wrote /Users/tod.famous/Documents/New project/lilyrooartist.github.io/data/promo_queue_plan.json with 6 draft posts",
       "stderr_tail": ""
     },
@@ -77,8 +74,8 @@
       "required": false,
       "returncode": 0,
       "ok": true,
-      "duration_seconds": 0.03,
-      "stdout_tail": "{\n  \"updated\": \"data/metrics_history.json\",\n  \"snapshots\": 4,\n  \"latest\": {\n    \"date\": \"2026-06-13\",\n    \"captured_at\": \"2026-06-13T01:56:57.578787Z\",\n    \"live_metrics_updated_at\": \"2026-06-13T01:50:05.225Z\",\n    \"youtube\": {\n      \"subscribers\": 5,\n      \"total_views\": 239,\n      \"video_count\": 28\n    },\n    \"facebook\": {\n      \"followers\": 0,\n      \"page_likes\": 0,\n      \"reach_7d\": null\n    },\n    \"spotify\": {\n      \"artist_followers\": null,\n      \"monthly_listeners\": null,\n      \"release_streams\": null,\n      \"saves\": null\n    },\n    \"publishing\": {\n      \"published_30d\": 3,\n      \"published_total\": 17\n    },\n    \"queue\": {\n      \"approved_upcoming\": 0,\n      \"approved_total\": 6,\n      \"scheduled_total\": 9\n    },\n    \"delta_from_previous\": {\n      \"youtube.subscribers\": 0,\n      \"youtube.total_views\": 0,\n      \"youtube.video_count\": 0,\n      \"facebook.followers\": 0,\n      \"facebook.page_likes\": 0,\n      \"publishing.published_30d\": 0,\n      \"publishing.published_total\": 0,\n      \"queue.approved_upcoming\": 0,\n      \"queue.approved_total\": 0,\n      \"queue.scheduled_total\": 0\n    }\n  }\n}",
+      "duration_seconds": 0.04,
+      "stdout_tail": "{\n  \"updated\": \"data/metrics_history.json\",\n  \"snapshots\": 4,\n  \"latest\": {\n    \"date\": \"2026-06-13\",\n    \"captured_at\": \"2026-06-13T14:27:03.708230Z\",\n    \"live_metrics_updated_at\": \"2026-06-13T14:26:56.297Z\",\n    \"youtube\": {\n      \"subscribers\": 5,\n      \"total_views\": 251,\n      \"video_count\": 28\n    },\n    \"facebook\": {\n      \"followers\": 0,\n      \"page_likes\": 0,\n      \"reach_7d\": null\n    },\n    \"spotify\": {\n      \"artist_followers\": null,\n      \"monthly_listeners\": null,\n      \"release_streams\": null,\n      \"saves\": null\n    },\n    \"publishing\": {\n      \"published_30d\": 3,\n      \"published_total\": 17\n    },\n    \"queue\": {\n      \"approved_upcoming\": 0,\n      \"approved_total\": 6,\n      \"scheduled_total\": 9\n    },\n    \"delta_from_previous\": {\n      \"youtube.subscribers\": 0,\n      \"youtube.total_views\": 12,\n      \"youtube.video_count\": 0,\n      \"facebook.followers\": 0,\n      \"facebook.page_likes\": 0,\n      \"publishing.published_30d\": 0,\n      \"publishing.published_total\": 0,\n      \"queue.approved_upcoming\": 0,\n      \"queue.approved_total\": 0,\n      \"queue.scheduled_total\": 0\n    }\n  }\n}",
       "stderr_tail": ""
     },
     {
@@ -87,8 +84,8 @@
       "required": false,
       "returncode": 1,
       "ok": false,
-      "duration_seconds": 0.05,
-      "stdout_tail": "{\n  \"ok\": false,\n  \"http_status\": 0,\n  \"latest_status\": \"\",\n  \"latest_conclusion\": \"\",\n  \"output\": \"data/promo_refresh_workflow_status.json\"\n}",
+      "duration_seconds": 0.54,
+      "stdout_tail": "{\n  \"ok\": false,\n  \"http_status\": 200,\n  \"latest_status\": \"completed\",\n  \"latest_conclusion\": \"failure\",\n  \"output\": \"data/promo_refresh_workflow_status.json\"\n}",
       "stderr_tail": ""
     },
     {
@@ -97,7 +94,7 @@
       "required": true,
       "returncode": 0,
       "ok": true,
-      "duration_seconds": 0.03,
+      "duration_seconds": 0.04,
       "stdout_tail": "Wrote /Users/tod.famous/Documents/New project/lilyrooartist.github.io/data/promo_engine_status.json with 3 releases",
       "stderr_tail": ""
     },
@@ -107,7 +104,7 @@
       "required": true,
       "returncode": 0,
       "ok": true,
-      "duration_seconds": 0.03,
+      "duration_seconds": 0.04,
       "stdout_tail": "{\n  \"output\": \"data/promo_operations_packet.json\",\n  \"actions\": 21\n}",
       "stderr_tail": ""
     },
@@ -117,7 +114,7 @@
       "required": true,
       "returncode": 0,
       "ok": true,
-      "duration_seconds": 0.02,
+      "duration_seconds": 0.03,
       "stdout_tail": "{\n  \"csv\": \"data/manual_metric_collection_template.csv\",\n  \"report\": \"admin/reports/manual-metric-collection.md\",\n  \"pending_fields\": 11\n}",
       "stderr_tail": ""
     },
@@ -127,7 +124,7 @@
       "required": true,
       "returncode": 0,
       "ok": true,
-      "duration_seconds": 0.03,
+      "duration_seconds": 0.04,
       "stdout_tail": "updated /Users/tod.famous/Documents/New project/lilyrooartist.github.io/admin/reports/weekly-social-report.md",
       "stderr_tail": ""
     }
@@ -137,11 +134,11 @@
       "name": "capture_live_metrics",
       "command": "python3 scripts/capture_live_metrics.py",
       "required": false,
-      "returncode": 1,
-      "ok": false,
-      "duration_seconds": 0.05,
-      "stdout_tail": "",
-      "stderr_tail": "Traceback (most recent call last):\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/urllib/request.py\", line 1346, in do_open\n    h.request(req.get_method(), req.selector, req.data, headers,\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py\", line 1257, in request\n    self._send_request(method, url, body, headers, encode_chunked)\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py\", line 1303, in _send_request\n    self.endheaders(body, encode_chunked=encode_chunked)\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py\", line 1252, in endheaders\n    self._send_output(message_body, encode_chunked=encode_chunked)\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py\", line 1012, in _send_output\n    self.send(msg)\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py\", line 952, in send\n    self.connect()\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py\", line 1419, in connect\n    super().connect()\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py\", line 923, in connect\n    self.sock = self._create_connection(\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/socket.py\", line 822, in create_connection\n    for res in getaddrinfo(host, port, 0, SOCK_STREAM):\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/socket.py\", line 953, in getaddrinfo\n    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):\nsocket.gaierror: [Errno 8] nodename nor servname provided, or not known\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/Users/tod.famous/Documents/New project/lilyrooartist.github.io/scripts/capture_live_metrics.py\", line 92, in <module>\n    raise SystemExit(main())\n  File \"/Users/tod.famous/Documents/New project/lilyrooartist.github.io/scripts/capture_live_metrics.py\", line 78, in main\n    payload = fetch_metrics(url, admin_password(), bearer_token())\n  File \"/Users/tod.famous/Documents/New project/lilyrooartist.github.io/scripts/capture_live_metrics.py\", line 59, in fetch_metrics\n    with urllib.request.urlopen(request, timeout=25) as response:\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/urllib/request.py\", line 214, in urlopen\n    return opener.open(url, data, timeout)\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/urllib/request.py\", line 517, in open\n    response = self._open(req, data)\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/urllib/request.py\", line 534, in _open\n    result = self._call_chain(self.handle_open, protocol, protocol +\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/urllib/request.py\", line 494, in _call_chain\n    result = func(*args)\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/urllib/request.py\", line 1389, in https_open\n    return self.do_open(http.client.HTTPSConnection, req,\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/urllib/request.py\", line 1349, in do_open\n    raise URLError(err)\nurllib.error.URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>"
+      "returncode": 0,
+      "ok": true,
+      "duration_seconds": 1.22,
+      "stdout_tail": "{\n  \"ok\": true,\n  \"capture_status\": 200,\n  \"updated_at\": \"2026-06-13T14:26:56.297Z\",\n  \"platforms\": [\n    \"facebook\",\n    \"instagram\",\n    \"spotify\",\n    \"tiktok\",\n    \"x\",\n    \"youtube\"\n  ],\n  \"output\": \"data/live_social_metrics.json\"\n}",
+      "stderr_tail": ""
     },
     {
       "name": "verify_pending_store_links",
@@ -149,28 +146,28 @@
       "required": false,
       "returncode": 0,
       "ok": true,
-      "duration_seconds": 0.48,
-      "stdout_tail": "{\n  \"checked\": 8,\n  \"ok\": 1,\n  \"not_live_or_failed\": 7,\n  \"results\": [\n    {\n      \"command\": \"python3 scripts/search_spotify_release.py --artist Lily Roo --title Twelve Dollars --out data/store-verification/twelve-dollars/spotify_release_snapshot.json\",\n      \"returncode\": 1,\n      \"stdout\": \"{\\n  \\\"ok\\\": false,\\n  \\\"title\\\": \\\"\\\",\\n  \\\"album_id\\\": \\\"\\\",\\n  \\\"release_url\\\": \\\"\\\",\\n  \\\"candidate_count\\\": 0,\\n  \\\"output\\\": \\\"data/store-verification/twelve-dollars/spotify_release_snapshot.json\\\"\\n}\",\n      \"stderr\": \"\"\n    },\n    {\n      \"command\": \"python3 scripts/capture_apple_music_release.py --artist Lily Roo --title Twelve Dollars --out data/store-verification/twelve-dollars/apple_music_release_snapshot.json\",\n      \"returncode\": 1,\n      \"stdout\": \"\",\n      \"stderr\": \"Traceback (most recent call last):\\n  File \\\"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/urllib/request.py\\\", line 1346, in do_open\\n    h.request(req.get_method(), req.selector, req.data, headers,\\n  File \\\"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py\\\", line 1257, in request\\n    self._send_request(method, url, body, headers, encode_chunked)\\n  File \\\"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py\\\", line 1303, in _send_request\\n    self.endheaders(body, encode_chunked=encode_chunked)\\n  File \\\"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py\\\", line 1252, in endheaders\\n    self._send_output(message_body, encode_chunked=encode_chunked)\\n  File \\\"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py\\\", line 1012, in _send_output\\n    self.send(msg)\\n  File \\\"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py\\\", line 952, in send\\n    self.connect()\\n  File \\\"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py\\\", line 1419, in connect\\n    super().connect()\\n  File \\\"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py\\\", line 923, in connect\\n    self.sock = self._create_connection(\\n  File \\\"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/socket.py\\\", line 822, in create_connection\\n    for res in getaddrinfo(host, port, 0, SOCK_STREAM):\\n  File \\\"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/socket.py\\\", line 953, in getaddrinfo\\n    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):\\nsocket.gaierror: [Errno 8] nodename nor servname provided, or not known\\n\\nDuring handling of the above exception, another exception occurred:\\n\\nTraceback (most recent call last):\\n  File \\\"/Users/tod.famous/Documents/New project/lilyrooartist.github.io/scripts/capture_apple_music_release.py\\\", line 107, in <module>\\n    raise SystemExit(main())\\n  File \\\"/Users/tod.famous/Documents/New project/lilyrooartist.github.io/scripts/capture_apple_music_release.py\\\", line 53, in main\\n    payload = fetch_results(args.artist, args.title)\\n  File \\\"/Users/tod.famous/Documents/New project/lilyrooartist.github.io/scripts/capture_apple_music_release.py\\\", line 32, in fetch_results\\n    with urllib.request.urlopen(request, timeout=25) as response:\\n  File \\\"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/urllib/request.py\\\", line 214, in urlopen\\n    return opener.open(url, data, timeout)\\n  File \\\"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/urllib/request.py\\\", line 517, in open\\n    response = self._open(req, data)\\n  File \\\"/Library/Developer/CommandLine\n...[truncated]",
+      "duration_seconds": 6.24,
+      "stdout_tail": "{\n  \"checked\": 8,\n  \"ok\": 1,\n  \"not_live_or_failed\": 7,\n  \"results\": [\n    {\n      \"command\": \"python3 scripts/search_spotify_release.py --artist Lily Roo --title Twelve Dollars --out data/store-verification/twelve-dollars/spotify_release_snapshot.json\",\n      \"returncode\": 1,\n      \"stdout\": \"{\\n  \\\"ok\\\": false,\\n  \\\"title\\\": \\\"\\\",\\n  \\\"album_id\\\": \\\"\\\",\\n  \\\"release_url\\\": \\\"\\\",\\n  \\\"candidate_count\\\": 0,\\n  \\\"output\\\": \\\"data/store-verification/twelve-dollars/spotify_release_snapshot.json\\\"\\n}\",\n      \"stderr\": \"\"\n    },\n    {\n      \"command\": \"python3 scripts/capture_apple_music_release.py --artist Lily Roo --title Twelve Dollars --out data/store-verification/twelve-dollars/apple_music_release_snapshot.json\",\n      \"returncode\": 1,\n      \"stdout\": \"{\\n  \\\"ok\\\": false,\\n  \\\"collection_name\\\": \\\"\\\",\\n  \\\"collection_id\\\": null,\\n  \\\"release_url\\\": \\\"\\\",\\n  \\\"output\\\": \\\"data/store-verification/twelve-dollars/apple_music_release_snapshot.json\\\"\\n}\",\n      \"stderr\": \"\"\n    },\n    {\n      \"command\": \"python3 scripts/capture_hyperfollow_store_links.py --url https://distrokid.com/hyperfollow/lilyroo/twelve-dollars --out data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json\",\n      \"returncode\": 1,\n      \"stdout\": \"{\\n  \\\"ok\\\": false,\\n  \\\"stores\\\": [],\\n  \\\"amazon_music_available\\\": false,\\n  \\\"output\\\": \\\"data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json\\\"\\n}\",\n      \"stderr\": \"\"\n    },\n    {\n      \"command\": \"python3 scripts/search_spotify_release.py --artist Lily Roo --title Analog Myth --out data/store-verification/analog-myth/spotify_release_snapshot.json\",\n      \"returncode\": 1,\n      \"stdout\": \"{\\n  \\\"ok\\\": false,\\n  \\\"title\\\": \\\"\\\",\\n  \\\"album_id\\\": \\\"\\\",\\n  \\\"release_url\\\": \\\"\\\",\\n  \\\"candidate_count\\\": 0,\\n  \\\"output\\\": \\\"data/store-verification/analog-myth/spotify_release_snapshot.json\\\"\\n}\",\n      \"stderr\": \"\"\n    },\n    {\n      \"command\": \"python3 scripts/capture_apple_music_release.py --artist Lily Roo --title Analog Myth --out data/store-verification/analog-myth/apple_music_release_snapshot.json\",\n      \"returncode\": 1,\n      \"stdout\": \"{\\n  \\\"ok\\\": false,\\n  \\\"collection_name\\\": \\\"\\\",\\n  \\\"collection_id\\\": null,\\n  \\\"release_url\\\": \\\"\\\",\\n  \\\"output\\\": \\\"data/store-verification/analog-myth/apple_music_release_snapshot.json\\\"\\n}\",\n      \"stderr\": \"\"\n    },\n    {\n      \"command\": \"python3 scripts/search_youtube_music_release.py --artist Lily Roo --title Analog Myth --out data/store-verification/analog-myth/youtube_music_release_snapshot.json\",\n      \"returncode\": 1,\n      \"stdout\": \"{\\n  \\\"ok\\\": false,\\n  \\\"release_url\\\": \\\"\\\",\\n  \\\"public_title\\\": \\\"\\\",\\n  \\\"title_matches_official\\\": false,\\n  \\\"candidate_count\\\": 0,\\n  \\\"output\\\": \\\"data/store-verification/analog-myth/youtube_music_release_snapshot.json\\\"\\n}\",\n      \"stderr\": \"\"\n    },\n    {\n      \"command\": \"python3 scripts/capture_hyperfollow_store_links.py --url https://distrokid.com/hyperfollow/lilyroo/analog-myth --out data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json\",\n      \"returncode\": 1,\n      \"stdout\": \"{\\n  \\\"ok\\\": false,\\n  \\\"stores\\\": [],\\n  \\\"amazon_music_available\\\": false,\\n  \\\"output\\\": \\\"data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json\\\"\\n}\",\n      \"stderr\": \"\"\n    },\n    {\n      \"command\": \"python3 scripts/update_promo_engine_status.py\",\n      \"returncode\": 0,\n      \"stdout\": \"Wrote /Users/tod.famous/Documents/New project/lilyrooartist.github.io/data/promo_engine_status.json with 3 releases\",\n      \"stderr\": \"\"\n    }\n  ]\n}",
       "stderr_tail": ""
     },
     {
       "name": "capture_executor_readiness",
       "command": "python3 scripts/capture_executor_readiness.py",
       "required": false,
-      "returncode": 1,
-      "ok": false,
-      "duration_seconds": 0.05,
-      "stdout_tail": "{\n  \"ok\": false,\n  \"http_status\": 0,\n  \"ready_platforms\": [],\n  \"blocked_platforms\": [\n    \"X\",\n    \"Instagram\",\n    \"TikTok\",\n    \"Facebook\",\n    \"YouTube Community\"\n  ],\n  \"output\": \"data/executor_readiness_snapshot.json\"\n}",
+      "returncode": 0,
+      "ok": true,
+      "duration_seconds": 0.2,
+      "stdout_tail": "{\n  \"ok\": true,\n  \"http_status\": 200,\n  \"ready_platforms\": [\n    \"X\",\n    \"Instagram\",\n    \"Facebook\",\n    \"YouTube Community\"\n  ],\n  \"blocked_platforms\": [\n    \"TikTok\"\n  ],\n  \"output\": \"data/executor_readiness_snapshot.json\"\n}",
       "stderr_tail": ""
     },
     {
       "name": "capture_social_executions",
       "command": "python3 scripts/capture_social_executions.py",
       "required": false,
-      "returncode": 1,
-      "ok": false,
-      "duration_seconds": 0.07,
-      "stdout_tail": "{\n  \"ok\": false,\n  \"http_status\": 0,\n  \"execution_count\": 0,\n  \"posted_count\": 0,\n  \"attention_count\": 0,\n  \"output\": \"data/social_execution_snapshot.json\"\n}",
+      "returncode": 0,
+      "ok": true,
+      "duration_seconds": 0.93,
+      "stdout_tail": "{\n  \"ok\": true,\n  \"http_status\": 200,\n  \"execution_count\": 6,\n  \"posted_count\": 0,\n  \"attention_count\": 6,\n  \"output\": \"data/social_execution_snapshot.json\"\n}",
       "stderr_tail": ""
     },
     {
@@ -179,7 +176,7 @@
       "required": true,
       "returncode": 0,
       "ok": true,
-      "duration_seconds": 0.03,
+      "duration_seconds": 0.05,
       "stdout_tail": "Wrote /Users/tod.famous/Documents/New project/lilyrooartist.github.io/data/promo_queue_plan.json with 6 draft posts",
       "stderr_tail": ""
     },
@@ -189,8 +186,8 @@
       "required": false,
       "returncode": 0,
       "ok": true,
-      "duration_seconds": 0.03,
-      "stdout_tail": "{\n  \"updated\": \"data/metrics_history.json\",\n  \"snapshots\": 4,\n  \"latest\": {\n    \"date\": \"2026-06-13\",\n    \"captured_at\": \"2026-06-13T01:56:57.578787Z\",\n    \"live_metrics_updated_at\": \"2026-06-13T01:50:05.225Z\",\n    \"youtube\": {\n      \"subscribers\": 5,\n      \"total_views\": 239,\n      \"video_count\": 28\n    },\n    \"facebook\": {\n      \"followers\": 0,\n      \"page_likes\": 0,\n      \"reach_7d\": null\n    },\n    \"spotify\": {\n      \"artist_followers\": null,\n      \"monthly_listeners\": null,\n      \"release_streams\": null,\n      \"saves\": null\n    },\n    \"publishing\": {\n      \"published_30d\": 3,\n      \"published_total\": 17\n    },\n    \"queue\": {\n      \"approved_upcoming\": 0,\n      \"approved_total\": 6,\n      \"scheduled_total\": 9\n    },\n    \"delta_from_previous\": {\n      \"youtube.subscribers\": 0,\n      \"youtube.total_views\": 0,\n      \"youtube.video_count\": 0,\n      \"facebook.followers\": 0,\n      \"facebook.page_likes\": 0,\n      \"publishing.published_30d\": 0,\n      \"publishing.published_total\": 0,\n      \"queue.approved_upcoming\": 0,\n      \"queue.approved_total\": 0,\n      \"queue.scheduled_total\": 0\n    }\n  }\n}",
+      "duration_seconds": 0.04,
+      "stdout_tail": "{\n  \"updated\": \"data/metrics_history.json\",\n  \"snapshots\": 4,\n  \"latest\": {\n    \"date\": \"2026-06-13\",\n    \"captured_at\": \"2026-06-13T14:27:03.708230Z\",\n    \"live_metrics_updated_at\": \"2026-06-13T14:26:56.297Z\",\n    \"youtube\": {\n      \"subscribers\": 5,\n      \"total_views\": 251,\n      \"video_count\": 28\n    },\n    \"facebook\": {\n      \"followers\": 0,\n      \"page_likes\": 0,\n      \"reach_7d\": null\n    },\n    \"spotify\": {\n      \"artist_followers\": null,\n      \"monthly_listeners\": null,\n      \"release_streams\": null,\n      \"saves\": null\n    },\n    \"publishing\": {\n      \"published_30d\": 3,\n      \"published_total\": 17\n    },\n    \"queue\": {\n      \"approved_upcoming\": 0,\n      \"approved_total\": 6,\n      \"scheduled_total\": 9\n    },\n    \"delta_from_previous\": {\n      \"youtube.subscribers\": 0,\n      \"youtube.total_views\": 12,\n      \"youtube.video_count\": 0,\n      \"facebook.followers\": 0,\n      \"facebook.page_likes\": 0,\n      \"publishing.published_30d\": 0,\n      \"publishing.published_total\": 0,\n      \"queue.approved_upcoming\": 0,\n      \"queue.approved_total\": 0,\n      \"queue.scheduled_total\": 0\n    }\n  }\n}",
       "stderr_tail": ""
     },
     {
@@ -199,8 +196,8 @@
       "required": false,
       "returncode": 1,
       "ok": false,
-      "duration_seconds": 0.05,
-      "stdout_tail": "{\n  \"ok\": false,\n  \"http_status\": 0,\n  \"latest_status\": \"\",\n  \"latest_conclusion\": \"\",\n  \"output\": \"data/promo_refresh_workflow_status.json\"\n}",
+      "duration_seconds": 0.54,
+      "stdout_tail": "{\n  \"ok\": false,\n  \"http_status\": 200,\n  \"latest_status\": \"completed\",\n  \"latest_conclusion\": \"failure\",\n  \"output\": \"data/promo_refresh_workflow_status.json\"\n}",
       "stderr_tail": ""
     },
     {
@@ -209,7 +206,7 @@
       "required": true,
       "returncode": 0,
       "ok": true,
-      "duration_seconds": 0.03,
+      "duration_seconds": 0.04,
       "stdout_tail": "Wrote /Users/tod.famous/Documents/New project/lilyrooartist.github.io/data/promo_engine_status.json with 3 releases",
       "stderr_tail": ""
     },
@@ -219,7 +216,7 @@
       "required": true,
       "returncode": 0,
       "ok": true,
-      "duration_seconds": 0.03,
+      "duration_seconds": 0.04,
       "stdout_tail": "{\n  \"output\": \"data/promo_operations_packet.json\",\n  \"actions\": 21\n}",
       "stderr_tail": ""
     },
@@ -229,7 +226,7 @@
       "required": true,
       "returncode": 0,
       "ok": true,
-      "duration_seconds": 0.02,
+      "duration_seconds": 0.03,
       "stdout_tail": "{\n  \"csv\": \"data/manual_metric_collection_template.csv\",\n  \"report\": \"admin/reports/manual-metric-collection.md\",\n  \"pending_fields\": 11\n}",
       "stderr_tail": ""
     },
@@ -239,7 +236,7 @@
       "required": true,
       "returncode": 0,
       "ok": true,
-      "duration_seconds": 0.03,
+      "duration_seconds": 0.04,
       "stdout_tail": "updated /Users/tod.famous/Documents/New project/lilyrooartist.github.io/admin/reports/weekly-social-report.md",
       "stderr_tail": ""
     }

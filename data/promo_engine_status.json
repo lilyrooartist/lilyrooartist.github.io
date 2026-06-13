@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-13T01:56:57.761953+00:00",
+  "generated_at": "2026-06-13T14:27:04.431340+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -11,7 +11,8 @@
     "executor_readiness": "data/executor_readiness_snapshot.json",
     "store_verification_history": "data/store_verification_history.json",
     "social_executions": "data/social_execution_snapshot.json",
-    "promo_refresh_run": "data/promo_admin_refresh_run.json"
+    "promo_refresh_run": "data/promo_admin_refresh_run.json",
+    "promo_refresh_workflow_status": "data/promo_refresh_workflow_status.json"
   },
   "objective": "Promote Lily Roo releases and keep lilyroo.com/admin status and metrics current.",
   "kpi": {
@@ -147,18 +148,18 @@
         "command": "python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impressions_7d=VALUE --refresh-admin"
       }
     ],
-    "live_metrics_updated_at": "2026-06-13T01:50:05.225Z",
+    "live_metrics_updated_at": "2026-06-13T14:26:56.297Z",
     "metrics_history": {
       "snapshot_count": 4,
-      "updated_at": "2026-06-13T01:56:57.578787Z",
+      "updated_at": "2026-06-13T14:27:03.708230Z",
       "latest_date": "2026-06-13",
       "latest": {
         "date": "2026-06-13",
-        "captured_at": "2026-06-13T01:56:57.578787Z",
-        "live_metrics_updated_at": "2026-06-13T01:50:05.225Z",
+        "captured_at": "2026-06-13T14:27:03.708230Z",
+        "live_metrics_updated_at": "2026-06-13T14:26:56.297Z",
         "youtube": {
           "subscribers": 5,
-          "total_views": 239,
+          "total_views": 251,
           "video_count": 28
         },
         "facebook": {
@@ -183,7 +184,7 @@
         },
         "delta_from_previous": {
           "youtube.subscribers": 0,
-          "youtube.total_views": 0,
+          "youtube.total_views": 12,
           "youtube.video_count": 0,
           "facebook.followers": 0,
           "facebook.page_likes": 0,
@@ -197,7 +198,7 @@
       "previous_date": "2026-06-12",
       "delta_from_previous": {
         "youtube.subscribers": 0,
-        "youtube.total_views": 0,
+        "youtube.total_views": 12,
         "youtube.video_count": 0,
         "facebook.followers": 0,
         "facebook.page_likes": 0,
@@ -238,7 +239,7 @@
     },
     "social_execution_summary": {
       "ok": true,
-      "updated_at": "2026-06-13T01:50:11.508805Z",
+      "updated_at": "2026-06-13T14:27:03.617692Z",
       "http_status": 200,
       "execution_count": 6,
       "posted_count": 0,
@@ -262,7 +263,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-06-13T01:45:25.156Z",
+          "updated_at": "2026-06-13T14:15:25.150Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app."
@@ -273,7 +274,7 @@
           "status": "blocked",
           "reason": "tiktok_credentials_missing",
           "attempts": 0,
-          "updated_at": "2026-06-13T01:45:24.883Z",
+          "updated_at": "2026-06-13T14:15:24.913Z",
           "source": "cron",
           "post_url": "",
           "error_summary": ""
@@ -284,7 +285,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-06-13T01:45:24.625Z",
+          "updated_at": "2026-06-13T14:15:24.663Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID."
@@ -295,7 +296,7 @@
           "status": "blocked",
           "reason": "not_approved",
           "attempts": 0,
-          "updated_at": "2026-06-13T01:45:24.385Z",
+          "updated_at": "2026-06-13T14:15:24.435Z",
           "source": "cron",
           "post_url": "",
           "error_summary": ""
@@ -306,7 +307,7 @@
           "status": "blocked",
           "reason": "not_approved",
           "attempts": 0,
-          "updated_at": "2026-06-13T01:45:24.163Z",
+          "updated_at": "2026-06-13T14:15:24.186Z",
           "source": "cron",
           "post_url": "",
           "error_summary": ""
@@ -319,7 +320,7 @@
           "status": "blocked",
           "reason": "not_approved",
           "attempts": 0,
-          "updated_at": "2026-06-13T01:45:24.385Z",
+          "updated_at": "2026-06-13T14:15:24.435Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "",
@@ -334,7 +335,7 @@
           "status": "blocked",
           "reason": "not_approved",
           "attempts": 0,
-          "updated_at": "2026-06-13T01:45:24.163Z",
+          "updated_at": "2026-06-13T14:15:24.186Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "",
@@ -349,7 +350,7 @@
           "status": "blocked",
           "reason": "not_approved",
           "attempts": 0,
-          "updated_at": "2026-06-13T01:45:23.942Z",
+          "updated_at": "2026-06-13T14:15:23.946Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "",
@@ -366,7 +367,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-06-13T01:45:25.156Z",
+          "updated_at": "2026-06-13T14:15:25.150Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
@@ -381,7 +382,7 @@
           "status": "blocked",
           "reason": "tiktok_credentials_missing",
           "attempts": 0,
-          "updated_at": "2026-06-13T01:45:24.883Z",
+          "updated_at": "2026-06-13T14:15:24.913Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "",
@@ -396,7 +397,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-06-13T01:45:24.625Z",
+          "updated_at": "2026-06-13T14:15:24.663Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
@@ -413,31 +414,13 @@
       "available": true,
       "safe_mode": true,
       "finalized": true,
-      "finished_at": "2026-06-13T01:56:57.737360Z",
-      "duration_seconds": 0.87,
+      "finished_at": "2026-06-13T14:27:04.398343Z",
+      "duration_seconds": 9.37,
       "command_count": 11,
-      "passed": 7,
-      "failed": 4,
-      "allowed_failures": 4,
+      "passed": 10,
+      "failed": 1,
+      "allowed_failures": 1,
       "failed_commands": [
-        {
-          "name": "capture_live_metrics",
-          "required": false,
-          "returncode": 1,
-          "stderr_tail": "Traceback (most recent call last):\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/urllib/request.py\", line 1346, in do_open\n    h.request(req.get_method(), req.selector, req.data, headers,\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py\", line 1257, in request\n    self._send_request(method, url, body, headers, encode_chunked)\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py\", line 1303, in _send_request\n    self.endheaders(body, encode_chunked=encode_chunked)\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py\", line 1252, in endheaders\n    self._send_output(message_body, encode_chunked=encode_chunked)\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py\", line 1012, in _send_output\n    self.send(msg)\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py\", line 952, in send\n    self.connect()\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py\", line 1419, in connect\n    super().connect()\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/http/client.py\", line 923, in connect\n    self.sock = self._create_connection(\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/socket.py\", line 822, in create_connection\n    for res in getaddrinfo(host, port, 0, SOCK_STREAM):\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/socket.py\", line 953, in getaddrinfo\n    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):\nsocket.gaierror: [Errno 8] nodename nor servname provided, or not known\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/Users/tod.famous/Documents/New project/lilyrooartist.github.io/scripts/capture_live_metrics.py\", line 92, in <module>\n    raise SystemExit(main())\n  File \"/Users/tod.famous/Documents/New project/lilyrooartist.github.io/scripts/capture_live_metrics.py\", line 78, in main\n    payload = fetch_metrics(url, admin_password(), bearer_token())\n  File \"/Users/tod.famous/Documents/New project/lilyrooartist.github.io/scripts/capture_live_metrics.py\", line 59, in fetch_metrics\n    with urllib.request.urlopen(request, timeout=25) as response:\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/urllib/request.py\", line 214, in urlopen\n    return opener.open(url, data, timeout)\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/urllib/request.py\", line 517, in open\n    response = self._open(req, data)\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/urllib/request.py\", line 534, in _open\n    result = self._call_chain(self.handle_open, protocol, protocol +\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/urllib/request.py\", line 494, in _call_chain\n    result = func(*args)\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/urllib/request.py\", line 1389, in https_open\n    return self.do_open(http.client.HTTPSConnection, req,\n  File \"/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/urllib/request.py\", line 1349, in do_open\n    raise URLError(err)\nurllib.error.URLError: <urlopen error [Errno 8] nodename nor servname provided, or not known>"
-        },
-        {
-          "name": "capture_executor_readiness",
-          "required": false,
-          "returncode": 1,
-          "stderr_tail": ""
-        },
-        {
-          "name": "capture_social_executions",
-          "required": false,
-          "returncode": 1,
-          "stderr_tail": ""
-        },
         {
           "name": "capture_github_workflow_status",
           "required": false,
@@ -459,11 +442,11 @@
       "action_needed": "",
       "workflow_status_available": true,
       "workflow_status_ok": false,
-      "latest_run_status": "",
-      "latest_run_conclusion": "",
-      "latest_run_updated_at": "",
-      "latest_run_url": "",
-      "workflow_status_action_needed": "Review GitHub Actions API access, then rerun workflow status capture."
+      "latest_run_status": "completed",
+      "latest_run_conclusion": "failure",
+      "latest_run_updated_at": "2026-06-13T09:35:11Z",
+      "latest_run_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/27463050828",
+      "workflow_status_action_needed": "Open the latest promo admin refresh workflow run and fix the failure result."
     },
     "stale_source_count": 1,
     "missing_source_count": 0
@@ -483,18 +466,18 @@
       "stale": 1,
       "missing": 0,
       "checked_no_change": 1,
-      "checked_at": "2026-06-13T01:56:57.761953+00:00"
+      "checked_at": "2026-06-13T14:27:04.431340+00:00"
     },
     "sources": [
       {
         "name": "release_status",
         "path": "data/distrokid_release_status.json",
         "status": "checked_no_change",
-        "age_hours": 96.2,
+        "age_hours": 108.7,
         "max_age_hours": 72,
         "timestamp": "2026-06-09T01:47:42+00:00",
         "refresh_command": "Store checks are current; update data/distrokid_release_status.json when a verified public URL appears.",
-        "checked_at": "2026-06-13T01:56:57.761953+00:00",
+        "checked_at": "2026-06-13T14:27:04.431340+00:00",
         "checked_age_hours": 0.0,
         "evidence": "7 pending store links checked; no new public URLs found."
       },
@@ -502,7 +485,7 @@
         "name": "scheduled_posts",
         "path": "admin/future-posts.json",
         "status": "fresh",
-        "age_hours": 5.0,
+        "age_hours": 17.5,
         "max_age_hours": 72,
         "timestamp": "2026-06-12T20:56:00.115863+00:00",
         "refresh_command": "python3 scripts/sync_future_posts.py"
@@ -513,14 +496,14 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-13T01:56:57.548952+00:00",
+        "timestamp": "2026-06-13T14:27:03.667802+00:00",
         "refresh_command": "python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
         "name": "published_log",
         "path": "admin/content/Published_Log.csv",
         "status": "fresh",
-        "age_hours": 133.3,
+        "age_hours": 145.8,
         "max_age_hours": 168,
         "timestamp": "2026-06-07T12:36:37.141276+00:00",
         "refresh_command": "Export or append latest published posts to admin/content/Published_Log.csv."
@@ -529,7 +512,7 @@
         "name": "manual_metrics",
         "path": "data/manual_social_stats.json",
         "status": "stale",
-        "age_hours": 130.2,
+        "age_hours": 142.7,
         "max_age_hours": 72,
         "timestamp": "2026-06-07T15:47:26.729764+00:00",
         "refresh_command": "Update data/manual_social_stats.json with latest manual metrics."
@@ -538,9 +521,9 @@
         "name": "live_metrics",
         "path": "data/live_social_metrics.json",
         "status": "fresh",
-        "age_hours": 0.1,
+        "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-13T01:50:05.225000+00:00",
+        "timestamp": "2026-06-13T14:26:56.297000+00:00",
         "refresh_command": "python3 scripts/capture_live_metrics.py"
       },
       {
@@ -549,16 +532,16 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-13T01:56:57.578787+00:00",
+        "timestamp": "2026-06-13T14:27:03.708230+00:00",
         "refresh_command": "python3 scripts/update_metrics_history.py --refresh-admin"
       },
       {
         "name": "executor_readiness",
         "path": "data/executor_readiness_snapshot.json",
         "status": "fresh",
-        "age_hours": 0.1,
+        "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-13T01:50:10.525835+00:00",
+        "timestamp": "2026-06-13T14:27:02.691427+00:00",
         "refresh_command": "python3 scripts/capture_executor_readiness.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -567,16 +550,16 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-13T01:56:57.761953+00:00",
+        "timestamp": "2026-06-13T14:27:04.431340+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin"
       },
       {
         "name": "social_executions",
         "path": "data/social_execution_snapshot.json",
         "status": "fresh",
-        "age_hours": 0.1,
+        "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-13T01:50:11.508805+00:00",
+        "timestamp": "2026-06-13T14:27:03.617692+00:00",
         "refresh_command": "python3 scripts/capture_social_executions.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -585,7 +568,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-13T01:56:57.737671+00:00",
+        "timestamp": "2026-06-13T14:27:04.398694+00:00",
         "refresh_command": "python3 scripts/refresh_promo_admin.py"
       },
       {
@@ -594,7 +577,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-13T01:56:57.623782+00:00",
+        "timestamp": "2026-06-13T14:27:04.249723+00:00",
         "refresh_command": "python3 scripts/capture_github_workflow_status.py && python3 scripts/update_promo_engine_status.py"
       }
     ],
@@ -733,7 +716,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-13T01:56:57.010281Z",
+            "updated_at": "2026-06-13T14:26:56.338789Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
           }
         },
@@ -744,7 +727,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-13T01:50:06.647449Z",
+            "updated_at": "2026-06-13T14:26:58.927494Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
           }
         },
@@ -755,7 +738,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-13T01:56:57.139295Z",
+            "updated_at": "2026-06-13T14:26:59.314617Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
           }
         }
@@ -852,7 +835,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-13T01:56:57.183228Z",
+            "updated_at": "2026-06-13T14:26:59.369314Z",
             "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
           }
         },
@@ -863,7 +846,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-13T01:50:08.384204Z",
+            "updated_at": "2026-06-13T14:27:00.602198Z",
             "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
           }
         },
@@ -874,7 +857,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-13T01:56:57.292306Z",
+            "updated_at": "2026-06-13T14:27:00.658597Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release."
           }
         },
@@ -885,7 +868,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-13T01:56:57.360705Z",
+            "updated_at": "2026-06-13T14:27:02.430807Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
           }
         }
