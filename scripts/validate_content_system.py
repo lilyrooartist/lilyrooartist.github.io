@@ -459,6 +459,8 @@ def validate_generated_outputs(failures):
         if (
             automation.get("configured") is True
             and automation.get("path") == ".github/workflows/promo-admin-refresh.yml"
+            and str(automation.get("actions_url") or "").endswith("/actions/workflows/promo-admin-refresh.yml")
+            and str(automation.get("source_url") or "").endswith("/blob/main/.github/workflows/promo-admin-refresh.yml")
             and automation.get("cadence")
             and automation.get("manual_dispatch") is True
             and automation.get("commits_snapshots") is True
@@ -838,6 +840,7 @@ def validate_admin_execution_feedback(failures):
         "checked no-change freshness neutral": "if(status==='checked_no_change') return 'neutral'" in text,
         "checked no-change hidden from urgent actions": "source.status!=='fresh'&&source.status!=='checked_no_change'" in text,
         "refresh automation shown": "Refresh automation:" in text and "refreshAutomation" in text,
+        "refresh workflow link shown": "Open refresh workflow runs" in text and "actions/workflows/promo-admin-refresh.yml" in text,
     }
     missing_platform = [label for label, present in platform_checks.items() if not present]
     if missing_platform:

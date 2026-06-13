@@ -10,6 +10,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parent.parent
+GITHUB_REPO_URL = "https://github.com/lilyrooartist/lilyrooartist.github.io"
 RELEASE_STATUS = ROOT / "data" / "distrokid_release_status.json"
 MANUAL_METRICS = ROOT / "data" / "manual_social_stats.json"
 LIVE_METRICS = ROOT / "data" / "live_social_metrics.json"
@@ -435,10 +436,15 @@ def refresh_run_state(promo_refresh_run):
 
 
 def refresh_automation_state() -> dict:
+    path = str(PROMO_REFRESH_WORKFLOW.relative_to(ROOT))
+    source_url = f"{GITHUB_REPO_URL}/blob/main/{path}"
+    actions_url = f"{GITHUB_REPO_URL}/actions/workflows/{PROMO_REFRESH_WORKFLOW.name}"
     if not PROMO_REFRESH_WORKFLOW.exists():
         return {
             "configured": False,
-            "path": str(PROMO_REFRESH_WORKFLOW.relative_to(ROOT)),
+            "path": path,
+            "source_url": source_url,
+            "actions_url": actions_url,
             "cadence": "",
             "manual_dispatch": False,
             "commits_snapshots": False,
@@ -450,7 +456,9 @@ def refresh_automation_state() -> dict:
     safe_command = "python3 scripts/refresh_promo_admin.py"
     return {
         "configured": True,
-        "path": str(PROMO_REFRESH_WORKFLOW.relative_to(ROOT)),
+        "path": path,
+        "source_url": source_url,
+        "actions_url": actions_url,
         "cadence": match.group(1) if match else "",
         "manual_dispatch": "workflow_dispatch:" in text,
         "commits_snapshots": "git add admin data" in text,
