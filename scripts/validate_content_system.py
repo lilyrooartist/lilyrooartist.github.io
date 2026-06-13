@@ -18,6 +18,7 @@ EXECUTOR_READINESS = ROOT / "data" / "executor_readiness_snapshot.json"
 STORE_VERIFICATION_HISTORY = ROOT / "data" / "store_verification_history.json"
 SOCIAL_EXECUTION_SNAPSHOT = ROOT / "data" / "social_execution_snapshot.json"
 PROMO_REFRESH_RUN = ROOT / "data" / "promo_admin_refresh_run.json"
+PROMO_REFRESH_WORKFLOW_STATUS = ROOT / "data" / "promo_refresh_workflow_status.json"
 PROMO_OPERATIONS_PACKET = ROOT / "data" / "promo_operations_packet.json"
 MANUAL_METRIC_TEMPLATE = ROOT / "data" / "manual_metric_collection_template.csv"
 SPOTIFY_SNAPSHOT = ROOT / "data" / "spotify_release_snapshot.json"
@@ -42,6 +43,7 @@ METRICS_HISTORY_UPDATER = ROOT / "scripts" / "update_metrics_history.py"
 EXECUTOR_READINESS_CAPTURE = ROOT / "scripts" / "capture_executor_readiness.py"
 SOCIAL_EXECUTION_CAPTURE = ROOT / "scripts" / "capture_social_executions.py"
 PROMO_REFRESH_SCRIPT = ROOT / "scripts" / "refresh_promo_admin.py"
+PROMO_REFRESH_WORKFLOW_CAPTURE = ROOT / "scripts" / "capture_github_workflow_status.py"
 PROMO_REFRESH_WORKFLOW = ROOT / ".github" / "workflows" / "promo-admin-refresh.yml"
 PROMO_OPERATIONS_SCRIPT = ROOT / "scripts" / "build_promo_operations_packet.py"
 MANUAL_METRIC_COLLECTION_SCRIPT = ROOT / "scripts" / "build_manual_metric_collection.py"
@@ -205,6 +207,14 @@ def validate_generated_outputs(failures):
             fail("promo_admin_refresh_run.json missing safe command result detail", failures)
     else:
         fail("promo_admin_refresh_run.json missing; run scripts/refresh_promo_admin.py", failures)
+    if PROMO_REFRESH_WORKFLOW_STATUS.exists():
+        workflow_status = json.loads(PROMO_REFRESH_WORKFLOW_STATUS.read_text(encoding="utf-8"))
+        if workflow_status.get("source") == "github-actions-workflow-runs" and workflow_status.get("workflow") == "promo-admin-refresh.yml" and "latest_run" in workflow_status and "recent_runs" in workflow_status:
+            ok("promo refresh workflow status snapshot present")
+        else:
+            fail("promo_refresh_workflow_status.json missing workflow run status fields", failures)
+    else:
+        fail("promo_refresh_workflow_status.json missing; run scripts/capture_github_workflow_status.py", failures)
     if PROMO_OPERATIONS_PACKET.exists():
         packet = json.loads(PROMO_OPERATIONS_PACKET.read_text(encoding="utf-8"))
         summary = packet.get("summary") or {}
@@ -468,6 +478,16 @@ def validate_generated_outputs(failures):
             ok("promo engine status includes scheduled refresh automation")
         else:
             fail("promo_engine_status.json missing scheduled refresh automation status", failures)
+        if (
+            automation.get("workflow_status_available") is True
+            and "workflow_status_ok" in automation
+            and "latest_run_status" in automation
+            and "latest_run_conclusion" in automation
+            and "workflow_status_action_needed" in automation
+        ):
+            ok("promo engine status includes scheduled workflow run health")
+        else:
+            fail("promo_engine_status.json missing scheduled workflow run health", failures)
         music_site_counts = kpi.get("music_site_state_counts") or {}
         release_services = [
             service
@@ -737,6 +757,7 @@ def validate_generated_outputs(failures):
             "verify_pending_store_links.py",
             "capture_executor_readiness.py",
             "capture_social_executions.py",
+            "capture_github_workflow_status.py",
             "build_promo_operations_packet.py",
             "build_manual_metric_collection.py",
             "update_weekly_report.py",
@@ -752,6 +773,14 @@ def validate_generated_outputs(failures):
             fail("refresh_promo_admin.py missing safe refresh coverage or includes posting commands", failures)
     else:
         fail("refresh_promo_admin.py missing", failures)
+    if PROMO_REFRESH_WORKFLOW_CAPTURE.exists():
+        workflow_capture_text = PROMO_REFRESH_WORKFLOW_CAPTURE.read_text(encoding="utf-8")
+        if "promo_refresh_workflow_status.json" in workflow_capture_text and "api.github.com" in workflow_capture_text and "workflow_runs" in workflow_capture_text:
+            ok("promo refresh workflow status capture script present")
+        else:
+            fail("capture_github_workflow_status.py missing GitHub workflow run capture support", failures)
+    else:
+        fail("capture_github_workflow_status.py missing", failures)
     if PROMO_REFRESH_WORKFLOW.exists():
         workflow_text = PROMO_REFRESH_WORKFLOW.read_text(encoding="utf-8")
         required_bits = [
@@ -760,6 +789,8 @@ def validate_generated_outputs(failures):
             "python3 scripts/refresh_promo_admin.py",
             "python3 scripts/validate_content_system.py",
             "contents: write",
+            "GITHUB_TOKEN: ${{ github.token }}",
+            "scripts/capture_github_workflow_status.py",
             "git add admin data",
         ]
         forbidden_bits = [
@@ -835,11 +866,12 @@ def validate_admin_execution_feedback(failures):
         ok("admin execute button has working/success/error feedback")
     platform_checks = {
         "spotify executor marked not applicable": "label:'Spotify'" in text and "hasExecutor:false" in text,
-        "executor chip supports not-applicable state": "if(!hasExecutor) return '<span class=\"status-chip neutral\">N/A</span>'" in text,
+        "executor chip explains manual metric state": "if(!hasExecutor) return '<span class=\"status-chip neutral\">Manual metrics</span>'" in text,
         "platform rows pass executor applicability": "config.hasExecutor!==false" in text,
         "checked no-change freshness neutral": "if(status==='checked_no_change') return 'neutral'" in text,
         "checked no-change hidden from urgent actions": "source.status!=='fresh'&&source.status!=='checked_no_change'" in text,
         "refresh automation shown": "Refresh automation:" in text and "refreshAutomation" in text,
+        "workflow run health shown": "Workflow run:" in text and "Open latest refresh run" in text,
         "refresh workflow link shown": "Open refresh workflow runs" in text and "actions/workflows/promo-admin-refresh.yml" in text,
     }
     missing_platform = [label for label, present in platform_checks.items() if not present]

@@ -19,6 +19,7 @@ EXECUTOR_READINESS = ROOT / "data" / "executor_readiness_snapshot.json"
 STORE_VERIFICATION_HISTORY = ROOT / "data" / "store_verification_history.json"
 SOCIAL_EXECUTIONS = ROOT / "data" / "social_execution_snapshot.json"
 PROMO_REFRESH_RUN = ROOT / "data" / "promo_admin_refresh_run.json"
+PROMO_REFRESH_WORKFLOW_STATUS = ROOT / "data" / "promo_refresh_workflow_status.json"
 PROMO_REFRESH_WORKFLOW = ROOT / ".github" / "workflows" / "promo-admin-refresh.yml"
 SCHEDULED = ROOT / "data" / "scheduled_posts.csv"
 PROMO_QUEUE_PLAN = ROOT / "data" / "promo_queue_plan.json"
@@ -47,6 +48,7 @@ SOURCE_MAX_AGE_HOURS = {
     "store_verification_history": 24,
     "social_executions": 24,
     "promo_refresh_run": 24,
+    "promo_refresh_workflow_status": 24,
 }
 
 RELEASE_TRACKS = {
@@ -184,10 +186,11 @@ def refresh_command(name: str) -> str:
         "store_verification_history": "python3 scripts/verify_pending_store_links.py --refresh-admin",
         "social_executions": "python3 scripts/capture_social_executions.py && python3 scripts/update_promo_engine_status.py",
         "promo_refresh_run": "python3 scripts/refresh_promo_admin.py",
+        "promo_refresh_workflow_status": "python3 scripts/capture_github_workflow_status.py && python3 scripts/update_promo_engine_status.py",
     }.get(name, "")
 
 
-def source_freshness(release_status, manual, live, metrics_history, executor_readiness, store_history, social_executions, promo_refresh_run, promo_plan, future_posts, now: datetime):
+def source_freshness(release_status, manual, live, metrics_history, executor_readiness, store_history, social_executions, promo_refresh_run, promo_refresh_workflow_status, promo_plan, future_posts, now: datetime):
     rows = [
         release_status_checked_no_change(freshness_row("release_status", RELEASE_STATUS, release_status, now), store_history, now),
         freshness_row("scheduled_posts", FUTURE_POSTS, future_posts, now),
@@ -200,6 +203,7 @@ def source_freshness(release_status, manual, live, metrics_history, executor_rea
         freshness_row("store_verification_history", STORE_VERIFICATION_HISTORY, store_history, now),
         freshness_row("social_executions", SOCIAL_EXECUTIONS, social_executions, now),
         freshness_row("promo_refresh_run", PROMO_REFRESH_RUN, promo_refresh_run, now),
+        freshness_row("promo_refresh_workflow_status", PROMO_REFRESH_WORKFLOW_STATUS, promo_refresh_workflow_status, now),
     ]
     stale = [row for row in rows if row["status"] == "stale"]
     missing = [row for row in rows if row["status"] == "missing"]
@@ -435,10 +439,34 @@ def refresh_run_state(promo_refresh_run):
     }
 
 
-def refresh_automation_state() -> dict:
+def workflow_status_state(workflow_status: dict) -> dict:
+    if not isinstance(workflow_status, dict) or not workflow_status:
+        return {
+            "workflow_status_available": False,
+            "workflow_status_ok": False,
+            "latest_run_status": "",
+            "latest_run_conclusion": "",
+            "latest_run_updated_at": "",
+            "latest_run_url": "",
+            "workflow_status_action_needed": "Run python3 scripts/capture_github_workflow_status.py.",
+        }
+    latest = workflow_status.get("latest_run") or {}
+    return {
+        "workflow_status_available": True,
+        "workflow_status_ok": bool(workflow_status.get("ok")),
+        "latest_run_status": latest.get("status", ""),
+        "latest_run_conclusion": latest.get("conclusion", ""),
+        "latest_run_updated_at": latest.get("updated_at", ""),
+        "latest_run_url": latest.get("html_url", ""),
+        "workflow_status_action_needed": workflow_status.get("action_needed", ""),
+    }
+
+
+def refresh_automation_state(workflow_status: dict) -> dict:
     path = str(PROMO_REFRESH_WORKFLOW.relative_to(ROOT))
     source_url = f"{GITHUB_REPO_URL}/blob/main/{path}"
     actions_url = f"{GITHUB_REPO_URL}/actions/workflows/{PROMO_REFRESH_WORKFLOW.name}"
+    workflow_state = workflow_status_state(workflow_status)
     if not PROMO_REFRESH_WORKFLOW.exists():
         return {
             "configured": False,
@@ -450,6 +478,7 @@ def refresh_automation_state() -> dict:
             "commits_snapshots": False,
             "safe_refresh_command": "",
             "action_needed": "Add .github/workflows/promo-admin-refresh.yml.",
+            **workflow_state,
         }
     text = PROMO_REFRESH_WORKFLOW.read_text(encoding="utf-8")
     match = re.search(r"cron:\s*[\"']([^\"']+)[\"']", text)
@@ -464,6 +493,7 @@ def refresh_automation_state() -> dict:
         "commits_snapshots": "git add admin data" in text,
         "safe_refresh_command": safe_command if safe_command in text else "",
         "action_needed": "" if safe_command in text and "schedule:" in text else "Review promo admin refresh workflow configuration.",
+        **workflow_state,
     }
 
 
@@ -755,6 +785,7 @@ def build_status():
     executor_readiness = read_json(EXECUTOR_READINESS, {})
     social_executions = read_json(SOCIAL_EXECUTIONS, {})
     promo_refresh_run = read_json(PROMO_REFRESH_RUN, {})
+    promo_refresh_workflow_status = read_json(PROMO_REFRESH_WORKFLOW_STATUS, {})
     promo_plan = read_json(PROMO_QUEUE_PLAN, {})
     future_posts = read_json(FUTURE_POSTS, {})
     store_history = build_store_verification_history(release_status, now)
@@ -763,9 +794,9 @@ def build_status():
     metrics = metric_state(manual, live)
     history = metrics_history_state(metrics_history)
     refresh_run = refresh_run_state(promo_refresh_run)
-    refresh_automation = refresh_automation_state()
+    refresh_automation = refresh_automation_state(promo_refresh_workflow_status)
     execution_state = social_execution_state(social_executions, scheduled_rows)
-    freshness = source_freshness(release_status, manual, live, metrics_history, executor_readiness, store_history, social_executions, promo_refresh_run, promo_plan, future_posts, now)
+    freshness = source_freshness(release_status, manual, live, metrics_history, executor_readiness, store_history, social_executions, promo_refresh_run, promo_refresh_workflow_status, promo_plan, future_posts, now)
 
     releases = []
     all_actions = []

@@ -51,6 +51,11 @@ STEPS = [
         "command": ["python3", "scripts/update_metrics_history.py"],
         "required": True,
     },
+    {
+        "name": "capture_github_workflow_status",
+        "command": ["python3", "scripts/capture_github_workflow_status.py"],
+        "required": False,
+    },
 ]
 
 FINALIZE_STEPS = [

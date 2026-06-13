@@ -19,6 +19,7 @@ jobs:
     env:
       LILYROO_ADMIN_PASSWORD: ${{ secrets.LILYROO_ADMIN_PASSWORD }}
       LILYROO_EXECUTOR_BEARER_TOKEN: ${{ secrets.LILYROO_EXECUTOR_BEARER_TOKEN }}
+      GITHUB_TOKEN: ${{ github.token }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -38,6 +39,7 @@ jobs:
           python3 scripts/validate_content_system.py
           python3 -m py_compile \
             scripts/refresh_promo_admin.py \
+            scripts/capture_github_workflow_status.py \
             scripts/update_promo_engine_status.py \
             scripts/build_promo_operations_packet.py \
             scripts/build_manual_metric_collection.py \

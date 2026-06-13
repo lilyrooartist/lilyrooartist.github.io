@@ -519,7 +519,7 @@
 <script type="text/plain" id="embedded-weekly-report"># Weekly Social Report — Lily Roo
 
 **Period:** 2026-06-06 to 2026-06-12
-**Last updated:** 2026-06-12 08:00 PM EDT
+**Last updated:** 2026-06-12 08:41 PM EDT
 
 ## KPI Goal
 - Primary growth target: **1,000 YouTube subscribers** (monetization milestone)
@@ -650,7 +650,7 @@
 - YouTube Music snapshot file: `data/youtube_music_release_snapshot.json`
 - HyperFollow stores captured: **2026-06-07T20:51:14.275569Z**
 - HyperFollow snapshot file: `data/hyperfollow_store_links_snapshot.json`
-- All-release store verification captured: **2026-06-13T00:00:02.671955+00:00**
+- All-release store verification captured: **2026-06-13T00:40:02.460428+00:00**
 - All-release store verification file: `data/store_verification_history.json`
 - Social executor history captured: **2026-06-12T22:23:47.618002Z**
 - Social executor history file: `data/social_execution_snapshot.json`
@@ -863,7 +863,7 @@
 }</script>
 
 <script type="application/json" id="embedded-promo-engine-status">{
-  "generated_at": "2026-06-13T00:00:02.671955+00:00",
+  "generated_at": "2026-06-13T00:40:02.460428+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -1295,7 +1295,14 @@
       "manual_dispatch": true,
       "commits_snapshots": true,
       "safe_refresh_command": "python3 scripts/refresh_promo_admin.py",
-      "action_needed": ""
+      "action_needed": "",
+      "workflow_status_available": true,
+      "workflow_status_ok": false,
+      "latest_run_status": "",
+      "latest_run_conclusion": "",
+      "latest_run_updated_at": "",
+      "latest_run_url": "",
+      "workflow_status_action_needed": "Run the promo admin refresh workflow once so the dashboard can capture a latest run."
     },
     "stale_source_count": 1,
     "missing_source_count": 0
@@ -1305,28 +1312,28 @@
     "healthy_releases": 0,
     "tracked_releases": 3,
     "open_action_count": 12,
-    "fresh_sources": 9,
+    "fresh_sources": 10,
     "stale_sources": 1,
     "missing_sources": 0
   },
   "freshness": {
     "summary": {
-      "fresh": 9,
+      "fresh": 10,
       "stale": 1,
       "missing": 0,
       "checked_no_change": 1,
-      "checked_at": "2026-06-13T00:00:02.671955+00:00"
+      "checked_at": "2026-06-13T00:40:02.460428+00:00"
     },
     "sources": [
       {
         "name": "release_status",
         "path": "data/distrokid_release_status.json",
         "status": "checked_no_change",
-        "age_hours": 94.2,
+        "age_hours": 94.9,
         "max_age_hours": 72,
         "timestamp": "2026-06-09T01:47:42+00:00",
         "refresh_command": "Store checks are current; update data/distrokid_release_status.json when a verified public URL appears.",
-        "checked_at": "2026-06-13T00:00:02.671955+00:00",
+        "checked_at": "2026-06-13T00:40:02.460428+00:00",
         "checked_age_hours": 0.0,
         "evidence": "7 pending store links checked; no new public URLs found."
       },
@@ -1334,7 +1341,7 @@
         "name": "scheduled_posts",
         "path": "admin/future-posts.json",
         "status": "fresh",
-        "age_hours": 3.1,
+        "age_hours": 3.7,
         "max_age_hours": 72,
         "timestamp": "2026-06-12T20:56:00.115863+00:00",
         "refresh_command": "python3 scripts/sync_future_posts.py"
@@ -1343,7 +1350,7 @@
         "name": "promo_queue_plan",
         "path": "data/promo_queue_plan.json",
         "status": "fresh",
-        "age_hours": 1.6,
+        "age_hours": 2.3,
         "max_age_hours": 24,
         "timestamp": "2026-06-12T22:23:47.668232+00:00",
         "refresh_command": "python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
@@ -1352,7 +1359,7 @@
         "name": "published_log",
         "path": "admin/content/Published_Log.csv",
         "status": "fresh",
-        "age_hours": 131.4,
+        "age_hours": 132.1,
         "max_age_hours": 168,
         "timestamp": "2026-06-07T12:36:37.141276+00:00",
         "refresh_command": "Export or append latest published posts to admin/content/Published_Log.csv."
@@ -1361,7 +1368,7 @@
         "name": "manual_metrics",
         "path": "data/manual_social_stats.json",
         "status": "stale",
-        "age_hours": 128.2,
+        "age_hours": 128.9,
         "max_age_hours": 72,
         "timestamp": "2026-06-07T15:47:26.729764+00:00",
         "refresh_command": "Update data/manual_social_stats.json with latest manual metrics."
@@ -1370,7 +1377,7 @@
         "name": "live_metrics",
         "path": "data/live_social_metrics.json",
         "status": "fresh",
-        "age_hours": 1.6,
+        "age_hours": 2.3,
         "max_age_hours": 24,
         "timestamp": "2026-06-12T22:23:41.238000+00:00",
         "refresh_command": "python3 scripts/capture_live_metrics.py"
@@ -1379,7 +1386,7 @@
         "name": "metrics_history",
         "path": "data/metrics_history.json",
         "status": "fresh",
-        "age_hours": 1.6,
+        "age_hours": 2.3,
         "max_age_hours": 24,
         "timestamp": "2026-06-12T22:23:47.704914+00:00",
         "refresh_command": "python3 scripts/update_metrics_history.py --refresh-admin"
@@ -1388,7 +1395,7 @@
         "name": "executor_readiness",
         "path": "data/executor_readiness_snapshot.json",
         "status": "fresh",
-        "age_hours": 1.6,
+        "age_hours": 2.3,
         "max_age_hours": 24,
         "timestamp": "2026-06-12T22:23:46.663949+00:00",
         "refresh_command": "python3 scripts/capture_executor_readiness.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
@@ -1399,14 +1406,14 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-13T00:00:02.671955+00:00",
+        "timestamp": "2026-06-13T00:40:02.460428+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin"
       },
       {
         "name": "social_executions",
         "path": "data/social_execution_snapshot.json",
         "status": "fresh",
-        "age_hours": 1.6,
+        "age_hours": 2.3,
         "max_age_hours": 24,
         "timestamp": "2026-06-12T22:23:47.618002+00:00",
         "refresh_command": "python3 scripts/capture_social_executions.py && python3 scripts/update_promo_engine_status.py"
@@ -1415,10 +1422,19 @@
         "name": "promo_refresh_run",
         "path": "data/promo_admin_refresh_run.json",
         "status": "fresh",
-        "age_hours": 1.6,
+        "age_hours": 2.3,
         "max_age_hours": 24,
         "timestamp": "2026-06-12T22:23:47.837637+00:00",
         "refresh_command": "python3 scripts/refresh_promo_admin.py"
+      },
+      {
+        "name": "promo_refresh_workflow_status",
+        "path": "data/promo_refresh_workflow_status.json",
+        "status": "fresh",
+        "age_hours": 0.0,
+        "max_age_hours": 24,
+        "timestamp": "2026-06-13T00:39:17.593231+00:00",
+        "refresh_command": "python3 scripts/capture_github_workflow_status.py && python3 scripts/update_promo_engine_status.py"
       }
     ],
     "actions": [
@@ -2147,7 +2163,7 @@
 
 
 <script type="application/json" id="embedded-promo-operations-packet">{
-  "generated_at": "2026-06-12T23:11:39.145335Z",
+  "generated_at": "2026-06-13T00:40:02.440634Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -2868,7 +2884,7 @@
 
 <script type="text/plain" id="embedded-promo-operations-report"># Promo Operations Packet - Lily Roo
 
-Generated: 2026-06-12T23:11:39.145335Z
+Generated: 2026-06-13T00:40:02.440634Z
 
 ## Summary
 - Actions: **21**
@@ -2967,7 +2983,7 @@ Generated: 2026-06-12T23:11:39.145335Z
 
 <script type="text/plain" id="embedded-manual-metric-collection"># Manual Metric Collection - Lily Roo
 
-Generated: 2026-06-12T22:23:47.802459Z
+Generated: 2026-06-13T00:40:06.409748Z
 
 Pending fields: **11**
 
@@ -3740,7 +3756,7 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
   }
 
   function readinessChip(platform, readinessKnown, hasExecutor=true){
-    if(!hasExecutor) return '<span class="status-chip neutral">N/A</span>';
+    if(!hasExecutor) return '<span class="status-chip neutral">Manual metrics</span>';
     if(!readinessKnown) return '<span class="status-chip neutral">Unknown</span>';
     const info=platformReadiness(platform);
     return `<span class="status-chip ${info.ready?'ok':'bad'}">${info.ready?'Ready':'Blocked'}</span>`;
@@ -4143,6 +4159,9 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
     const refreshAutomationMeta=refreshAutomation.configured
       ? `Refresh automation: ${refreshAutomation.cadence||'scheduled'} - ${refreshAutomation.manual_dispatch?'manual dispatch enabled':'manual dispatch missing'} - ${refreshAutomation.commits_snapshots?'commits admin/data snapshots':'does not commit snapshots'}`
       : `Refresh automation missing - ${refreshAutomation.action_needed||'configure GitHub Actions refresh'}`;
+    const workflowStatus=refreshAutomation.workflow_status_available
+      ? `Workflow run: ${refreshAutomation.workflow_status_ok?'ok':'needs attention'} - ${refreshAutomation.latest_run_status||'unknown'}${refreshAutomation.latest_run_conclusion?`/${refreshAutomation.latest_run_conclusion}`:''} - ${formatQueueDate(refreshAutomation.latest_run_updated_at)}`
+      : `Workflow run not captured - ${refreshAutomation.workflow_status_action_needed||'run python3 scripts/capture_github_workflow_status.py'}`;
     const failedRefreshRows=Array.isArray(refreshRun.failed_commands)&&refreshRun.failed_commands.length
       ? `<ul class="release-open-checks">${refreshRun.failed_commands.slice(0,2).map(command=>`<li>Refresh failed: ${escapeHtml(command.name||'unknown')} (${escapeHtml(command.returncode ?? 'n/a')})</li>`).join('')}</ul>`
       : '';
@@ -4156,6 +4175,8 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
           <div class="queue-meta">${escapeHtml(executionMeta)}</div>
           <div class="queue-meta">${escapeHtml(refreshMeta)}</div>
           <div class="queue-meta">${escapeHtml(refreshAutomationMeta)}</div>
+          <div class="queue-meta">${escapeHtml(workflowStatus)}</div>
+          ${refreshAutomation.latest_run_url?`<div class="queue-meta"><a href="${escapeHtml(refreshAutomation.latest_run_url)}" target="_blank" rel="noopener">Open latest refresh run</a></div>`:''}
           ${refreshAutomation.actions_url?`<div class="queue-meta"><a href="${escapeHtml(refreshAutomation.actions_url)}" target="_blank" rel="noopener">Open refresh workflow runs</a></div>`:''}
           <div class="queue-meta">${sourceMeta}</div>
           ${metricsHistoryMeta?`<div class="queue-meta">${escapeHtml(metricsHistoryMeta)}</div>`:''}
