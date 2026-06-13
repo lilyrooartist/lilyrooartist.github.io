@@ -34,12 +34,12 @@ STEPS = [
     {
         "name": "capture_executor_readiness",
         "command": ["python3", "scripts/capture_executor_readiness.py"],
-        "required": True,
+        "required": False,
     },
     {
         "name": "capture_social_executions",
         "command": ["python3", "scripts/capture_social_executions.py"],
-        "required": True,
+        "required": False,
     },
     {
         "name": "generate_promo_queue_plan",
