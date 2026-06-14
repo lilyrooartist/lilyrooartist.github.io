@@ -1,0 +1,67 @@
+{
+  "generated_at": "2026-06-14T01:52:48.900780Z",
+  "safe_mode": true,
+  "source": {
+    "promo_queue_plan": "data/promo_queue_plan.json",
+    "approval_runway": "data/approval_runway.json"
+  },
+  "summary": {
+    "manual_ready_count": 2,
+    "youtube_community_count": 2,
+    "hard_cta_count": 2,
+    "approved_manual_count": 0,
+    "ready_to_post_after_review_count": 2
+  },
+  "rows": [
+    {
+      "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+      "platform": "YouTube Community",
+      "release": "Twelve Dollars",
+      "scheduled_at": "2026-06-18T18:30:00-04:00",
+      "post_type": "community",
+      "approved": "no",
+      "readiness_state": "manual_only",
+      "readiness_message": "YouTube Community posts are copy-ready manual workflow.",
+      "subscriber_growth_score": 116,
+      "selected_cta_strength": "hard_goal",
+      "text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
+      "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+      "imagery_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
+      "clip_url": "",
+      "media_key": "twelve-dollars-cover",
+      "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
+      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+      "manual_workflow": [
+        "Review the copy and linked playlist.",
+        "Approve only after human review if it should become the current manual posting candidate.",
+        "Post manually in YouTube Studio Community using the copy and asset below.",
+        "After posting, append the public URL to admin/content/Published_Log.csv and refresh Admin."
+      ]
+    },
+    {
+      "id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+      "platform": "YouTube Community",
+      "release": "Analog Myth",
+      "scheduled_at": "2026-06-19T18:30:00-04:00",
+      "post_type": "community",
+      "approved": "no",
+      "readiness_state": "manual_only",
+      "readiness_message": "YouTube Community posts are copy-ready manual workflow.",
+      "subscriber_growth_score": 116,
+      "selected_cta_strength": "hard_goal",
+      "text": "Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
+      "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+      "imagery_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
+      "clip_url": "",
+      "media_key": "analog-myth-cover",
+      "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --dry-run",
+      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin",
+      "manual_workflow": [
+        "Review the copy and linked playlist.",
+        "Approve only after human review if it should become the current manual posting candidate.",
+        "Post manually in YouTube Studio Community using the copy and asset below.",
+        "After posting, append the public URL to admin/content/Published_Log.csv and refresh Admin."
+      ]
+    }
+  ]
+}

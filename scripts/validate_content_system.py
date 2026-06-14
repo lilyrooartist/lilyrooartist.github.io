@@ -23,6 +23,7 @@ PROMO_OPERATIONS_PACKET = ROOT / "data" / "promo_operations_packet.json"
 PLATFORM_REPAIR_STATUS = ROOT / "data" / "platform_repair_status.json"
 APPROVAL_RUNWAY = ROOT / "data" / "approval_runway.json"
 SUBSCRIBER_CTA_AUDIT = ROOT / "data" / "subscriber_cta_audit.json"
+MANUAL_DISTRIBUTION_PACKET = ROOT / "data" / "manual_distribution_packet.json"
 MONETIZATION_ACTIVATION_PLAN = ROOT / "data" / "monetization_activation_plan.json"
 BACKLOG_RESCHEDULE_PREVIEW = ROOT / "data" / "backlog_reschedule_preview.json"
 MANUAL_METRIC_TEMPLATE = ROOT / "data" / "manual_metric_collection_template.csv"
@@ -55,6 +56,7 @@ PROMO_OPERATIONS_SCRIPT = ROOT / "scripts" / "build_promo_operations_packet.py"
 PLATFORM_REPAIR_SCRIPT = ROOT / "scripts" / "build_platform_repair_status.py"
 APPROVAL_RUNWAY_SCRIPT = ROOT / "scripts" / "build_approval_runway.py"
 SUBSCRIBER_CTA_AUDIT_SCRIPT = ROOT / "scripts" / "build_subscriber_cta_audit.py"
+MANUAL_DISTRIBUTION_PACKET_SCRIPT = ROOT / "scripts" / "build_manual_distribution_packet.py"
 MONETIZATION_ACTIVATION_SCRIPT = ROOT / "scripts" / "build_monetization_activation_plan.py"
 BACKLOG_RESCHEDULE_PREVIEW_SCRIPT = ROOT / "scripts" / "build_backlog_reschedule_preview.py"
 MANUAL_METRIC_COLLECTION_SCRIPT = ROOT / "scripts" / "build_manual_metric_collection.py"
@@ -63,6 +65,7 @@ PROMO_OPERATIONS_REPORT = ROOT / "admin" / "reports" / "promo-operations-packet.
 PLATFORM_REPAIR_REPORT = ROOT / "admin" / "reports" / "platform-repair-status.md"
 APPROVAL_RUNWAY_REPORT = ROOT / "admin" / "reports" / "approval-runway.md"
 SUBSCRIBER_CTA_AUDIT_REPORT = ROOT / "admin" / "reports" / "subscriber-cta-audit.md"
+MANUAL_DISTRIBUTION_REPORT = ROOT / "admin" / "reports" / "manual-distribution-packet.md"
 MONETIZATION_ACTIVATION_REPORT = ROOT / "admin" / "reports" / "monetization-activation-plan.md"
 BACKLOG_RESCHEDULE_PREVIEW_REPORT = ROOT / "admin" / "reports" / "backlog-reschedule-preview.md"
 MANUAL_METRIC_REPORT = ROOT / "admin" / "reports" / "manual-metric-collection.md"
@@ -397,6 +400,23 @@ def validate_generated_outputs(failures):
             fail("subscriber_cta_audit.json missing safe CTA summary or row classifications", failures)
     else:
         fail("subscriber_cta_audit.json missing; run scripts/build_subscriber_cta_audit.py", failures)
+    if MANUAL_DISTRIBUTION_PACKET.exists():
+        manual_packet = json.loads(MANUAL_DISTRIBUTION_PACKET.read_text(encoding="utf-8"))
+        summary = manual_packet.get("summary") or {}
+        rows = manual_packet.get("rows") or []
+        hard_rows = [row for row in rows if row.get("selected_cta_strength") in {"hard_subscribe", "hard_goal"}]
+        if (
+            manual_packet.get("safe_mode") is True
+            and summary.get("manual_ready_count") == len(rows)
+            and summary.get("youtube_community_count") == len([row for row in rows if row.get("platform") == "YouTube Community"])
+            and summary.get("hard_cta_count") == len(hard_rows) == len(rows)
+            and all(row.get("id") and row.get("text") and row.get("approval_preview_command") and row.get("manual_workflow") for row in rows)
+        ):
+            ok(f"manual distribution packet packages {len(rows)} manual post(s)")
+        else:
+            fail("manual_distribution_packet.json missing safe manual rows, hard CTAs, or preview commands", failures)
+    else:
+        fail("manual_distribution_packet.json missing; run scripts/build_manual_distribution_packet.py", failures)
     if MONETIZATION_ACTIVATION_PLAN.exists():
         activation = json.loads(MONETIZATION_ACTIVATION_PLAN.read_text(encoding="utf-8"))
         summary = activation.get("summary") or {}
@@ -989,6 +1009,7 @@ def validate_generated_outputs(failures):
             "build_promo_operations_packet.py",
             "build_approval_runway.py",
             "build_subscriber_cta_audit.py",
+            "build_manual_distribution_packet.py",
             "build_monetization_activation_plan.py",
             "build_backlog_reschedule_preview.py",
             "build_platform_repair_status.py",
@@ -1082,6 +1103,14 @@ def validate_generated_outputs(failures):
             fail("build_subscriber_cta_audit.py missing CTA audit outputs or executes commands", failures)
     else:
         fail("build_subscriber_cta_audit.py missing", failures)
+    if MANUAL_DISTRIBUTION_PACKET_SCRIPT.exists():
+        manual_distribution_text = MANUAL_DISTRIBUTION_PACKET_SCRIPT.read_text(encoding="utf-8")
+        if "manual_distribution_packet.json" in manual_distribution_text and "manual-distribution-packet.md" in manual_distribution_text and "Manual Posting Queue" in manual_distribution_text and "subprocess" not in manual_distribution_text:
+            ok("manual distribution packet builder is review-only")
+        else:
+            fail("build_manual_distribution_packet.py missing manual distribution outputs or executes commands", failures)
+    else:
+        fail("build_manual_distribution_packet.py missing", failures)
     if MONETIZATION_ACTIVATION_SCRIPT.exists():
         activation_text = MONETIZATION_ACTIVATION_SCRIPT.read_text(encoding="utf-8")
         if "monetization_activation_plan.json" in activation_text and "monetization-activation-plan.md" in activation_text and "Activation Sequence" in activation_text and "subprocess" not in activation_text:
@@ -1138,6 +1167,14 @@ def validate_generated_outputs(failures):
             fail("subscriber-cta-audit.md missing expected sections", failures)
     else:
         fail("subscriber-cta-audit.md missing", failures)
+    if MANUAL_DISTRIBUTION_REPORT.exists():
+        manual_distribution_report = MANUAL_DISTRIBUTION_REPORT.read_text(encoding="utf-8")
+        if "Manual Distribution Packet" in manual_distribution_report and "Manual Posting Queue" in manual_distribution_report and "Guardrails" in manual_distribution_report:
+            ok("manual distribution markdown report present")
+        else:
+            fail("manual-distribution-packet.md missing expected sections", failures)
+    else:
+        fail("manual-distribution-packet.md missing", failures)
     if MONETIZATION_ACTIVATION_REPORT.exists():
         activation_report_text = MONETIZATION_ACTIVATION_REPORT.read_text(encoding="utf-8")
         if "Monetization Activation Plan" in activation_report_text and "Activation Sequence" in activation_report_text and "Guardrails" in activation_report_text:

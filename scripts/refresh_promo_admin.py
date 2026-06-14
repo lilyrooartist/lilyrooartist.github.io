@@ -96,6 +96,11 @@ FINALIZE_STEPS = [
         "required": True,
     },
     {
+        "name": "build_manual_distribution_packet",
+        "command": ["python3", "scripts/build_manual_distribution_packet.py"],
+        "required": True,
+    },
+    {
         "name": "build_monetization_activation_plan",
         "command": ["python3", "scripts/build_monetization_activation_plan.py"],
         "required": True,

@@ -480,6 +480,13 @@
               </div>
             </section>
 
+            <section class="report-card" aria-labelledby="manual-distribution-heading">
+              <h2 id="manual-distribution-heading">Manual Distribution</h2>
+              <div class="queue-list" id="manual-distribution-packet">
+                <div class="muted">Loading manual distribution packet...</div>
+              </div>
+            </section>
+
             <section class="report-card" aria-labelledby="monetization-activation-heading">
               <h2 id="monetization-activation-heading">Monetization Activation</h2>
               <div class="queue-list" id="monetization-activation-plan">
@@ -554,7 +561,7 @@
 <script type="text/plain" id="embedded-weekly-report"># Weekly Social Report — Lily Roo
 
 **Period:** 2026-06-07 to 2026-06-13
-**Last updated:** 2026-06-13 09:48 PM EDT
+**Last updated:** 2026-06-13 09:52 PM EDT
 
 ## KPI Goal
 - Primary growth target: **1,000 YouTube subscribers** (monetization milestone)
@@ -675,7 +682,7 @@
 - Latest post: https://www.facebook.com/903693509504290_122118326547249470
 
 ## Metrics Snapshot
-- Live API captured: **2026-06-14T01:47:28.736Z**
+- Live API captured: **2026-06-14T01:52:02.158Z**
 - Snapshot file: `data/live_social_metrics.json`
 - YouTube public RSS captured: **2026-06-09T12:08:07.783949Z**
 - YouTube public snapshot file: `data/youtube_public_snapshot.json`
@@ -685,9 +692,9 @@
 - YouTube Music snapshot file: `data/youtube_music_release_snapshot.json`
 - HyperFollow stores captured: **2026-06-07T20:51:14.275569Z**
 - HyperFollow snapshot file: `data/hyperfollow_store_links_snapshot.json`
-- All-release store verification captured: **2026-06-14T01:48:15.345397+00:00**
+- All-release store verification captured: **2026-06-14T01:52:48.778292+00:00**
 - All-release store verification file: `data/store_verification_history.json`
-- Social executor history captured: **2026-06-14T01:48:14.668645Z**
+- Social executor history captured: **2026-06-14T01:52:48.183167Z**
 - Social executor history file: `data/social_execution_snapshot.json`
 - First single alignment audit captured: **2026-06-07T21:39:03.668040Z**
 - First single alignment audit file: `data/first_single_alignment_audit.json`
@@ -898,7 +905,7 @@
 }</script>
 
 <script type="application/json" id="embedded-promo-engine-status">{
-  "generated_at": "2026-06-14T01:48:15.598533+00:00",
+  "generated_at": "2026-06-14T01:52:49.082343+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -1091,15 +1098,15 @@
         "command": "python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impressions_7d=VALUE --refresh-admin"
       }
     ],
-    "live_metrics_updated_at": "2026-06-14T01:47:28.736Z",
+    "live_metrics_updated_at": "2026-06-14T01:52:02.158Z",
     "metrics_history": {
       "snapshot_count": 5,
-      "updated_at": "2026-06-14T01:48:14.766199Z",
+      "updated_at": "2026-06-14T01:52:48.258083Z",
       "latest_date": "2026-06-14",
       "latest": {
         "date": "2026-06-14",
-        "captured_at": "2026-06-14T01:48:14.766199Z",
-        "live_metrics_updated_at": "2026-06-14T01:47:28.736Z",
+        "captured_at": "2026-06-14T01:52:48.258083Z",
+        "live_metrics_updated_at": "2026-06-14T01:52:02.158Z",
         "youtube": {
           "subscribers": 5,
           "total_views": 251,
@@ -1182,7 +1189,7 @@
     },
     "social_execution_summary": {
       "ok": true,
-      "updated_at": "2026-06-14T01:48:14.668645Z",
+      "updated_at": "2026-06-14T01:52:48.183167Z",
       "http_status": 200,
       "execution_count": 6,
       "posted_count": 0,
@@ -1357,10 +1364,10 @@
       "available": true,
       "safe_mode": true,
       "finalized": true,
-      "finished_at": "2026-06-14T01:48:15.571265Z",
-      "duration_seconds": 47.79,
-      "command_count": 16,
-      "passed": 15,
+      "finished_at": "2026-06-14T01:52:49.051839Z",
+      "duration_seconds": 48.36,
+      "command_count": 17,
+      "passed": 16,
       "failed": 1,
       "allowed_failures": 1,
       "failed_commands": [
@@ -1409,18 +1416,18 @@
       "stale": 1,
       "missing": 0,
       "checked_no_change": 1,
-      "checked_at": "2026-06-14T01:48:15.598533+00:00"
+      "checked_at": "2026-06-14T01:52:49.082343+00:00"
     },
     "sources": [
       {
         "name": "release_status",
         "path": "data/distrokid_release_status.json",
         "status": "checked_no_change",
-        "age_hours": 120.0,
+        "age_hours": 120.1,
         "max_age_hours": 72,
         "timestamp": "2026-06-09T01:47:42+00:00",
         "refresh_command": "Store checks are current; update data/distrokid_release_status.json when a verified public URL appears.",
-        "checked_at": "2026-06-14T01:48:15.598533+00:00",
+        "checked_at": "2026-06-14T01:52:49.082343+00:00",
         "checked_age_hours": 0.0,
         "evidence": "7 pending store links checked; no new public URLs found."
       },
@@ -1439,14 +1446,14 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T01:48:14.729831+00:00",
+        "timestamp": "2026-06-14T01:52:48.222354+00:00",
         "refresh_command": "python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
         "name": "published_log",
         "path": "admin/content/Published_Log.csv",
         "status": "fresh",
-        "age_hours": 157.2,
+        "age_hours": 157.3,
         "max_age_hours": 168,
         "timestamp": "2026-06-07T12:36:37.141276+00:00",
         "refresh_command": "Export or append latest published posts to admin/content/Published_Log.csv."
@@ -1455,7 +1462,7 @@
         "name": "manual_metrics",
         "path": "data/manual_social_stats.json",
         "status": "stale",
-        "age_hours": 154.0,
+        "age_hours": 154.1,
         "max_age_hours": 72,
         "timestamp": "2026-06-07T15:47:26.729764+00:00",
         "refresh_command": "Update data/manual_social_stats.json with latest manual metrics."
@@ -1466,7 +1473,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T01:47:28.736000+00:00",
+        "timestamp": "2026-06-14T01:52:02.158000+00:00",
         "refresh_command": "python3 scripts/capture_live_metrics.py"
       },
       {
@@ -1475,7 +1482,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T01:48:14.766199+00:00",
+        "timestamp": "2026-06-14T01:52:48.258083+00:00",
         "refresh_command": "python3 scripts/update_metrics_history.py --refresh-admin"
       },
       {
@@ -1484,7 +1491,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T01:48:13.794334+00:00",
+        "timestamp": "2026-06-14T01:52:47.284184+00:00",
         "refresh_command": "python3 scripts/capture_executor_readiness.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -1493,7 +1500,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T01:48:15.598533+00:00",
+        "timestamp": "2026-06-14T01:52:49.082343+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin"
       },
       {
@@ -1502,7 +1509,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T01:48:14.668645+00:00",
+        "timestamp": "2026-06-14T01:52:48.183167+00:00",
         "refresh_command": "python3 scripts/capture_social_executions.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -1511,7 +1518,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T01:48:15.571611+00:00",
+        "timestamp": "2026-06-14T01:52:49.052325+00:00",
         "refresh_command": "python3 scripts/refresh_promo_admin.py"
       },
       {
@@ -1520,7 +1527,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T01:48:15.284170+00:00",
+        "timestamp": "2026-06-14T01:52:48.737125+00:00",
         "refresh_command": "python3 scripts/capture_github_workflow_status.py && python3 scripts/update_promo_engine_status.py"
       }
     ],
@@ -1940,7 +1947,7 @@
 }</script>
 
 <script type="application/json" id="embedded-promo-queue-plan">{
-  "generated_at": "2026-06-13T21:48:14.729831-04:00",
+  "generated_at": "2026-06-13T21:52:48.222354-04:00",
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
     "release_status": "data/distrokid_release_status.json"
@@ -2043,7 +2050,7 @@
   },
   "readiness_audit": {
     "source": "data/executor_readiness_snapshot.json",
-    "updated_at": "2026-06-14T01:48:13.794334Z",
+    "updated_at": "2026-06-14T01:52:47.284184Z",
     "ok": true,
     "counts": {
       "blocked": 1,
@@ -2263,7 +2270,7 @@
 
 
 <script type="application/json" id="embedded-promo-operations-packet">{
-  "generated_at": "2026-06-14T01:48:15.381348Z",
+  "generated_at": "2026-06-14T01:52:48.813475Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -3002,7 +3009,7 @@
 
 <script type="text/plain" id="embedded-promo-operations-report"># Promo Operations Packet - Lily Roo
 
-Generated: 2026-06-14T01:48:15.381348Z
+Generated: 2026-06-14T01:52:48.813475Z
 
 ## Summary
 - Actions: **22**
@@ -3104,7 +3111,7 @@ Generated: 2026-06-14T01:48:15.381348Z
 
 <script type="text/plain" id="embedded-manual-metric-collection"># Manual Metric Collection - Lily Roo
 
-Generated: 2026-06-14T01:48:15.541937Z
+Generated: 2026-06-14T01:52:49.018141Z
 
 Pending fields: **11**
 
@@ -3176,7 +3183,7 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
 
 
 <script type="application/json" id="embedded-platform-repair-status">{
-  "generated_at": "2026-06-14T01:48:15.515673Z",
+  "generated_at": "2026-06-14T01:52:48.988924Z",
   "safe_mode": true,
   "source": {
     "promo_operations_packet": "data/promo_operations_packet.json",
@@ -3272,7 +3279,7 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
 
 
 <script type="application/json" id="embedded-approval-runway">{
-  "generated_at": "2026-06-14T01:48:15.409894Z",
+  "generated_at": "2026-06-14T01:52:48.843220Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -3392,7 +3399,7 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
 
 <script type="text/plain" id="embedded-approval-runway-report"># Approval Runway - Lily Roo
 
-Generated: 2026-06-14T01:48:15.409894Z
+Generated: 2026-06-14T01:52:48.843220Z
 
 ## Summary
 - Drafts needing review: **6**
@@ -3447,7 +3454,7 @@ Generated: 2026-06-14T01:48:15.409894Z
 
 
 <script type="application/json" id="embedded-subscriber-cta-audit">{
-  "generated_at": "2026-06-14T01:48:15.436710Z",
+  "generated_at": "2026-06-14T01:52:48.872327Z",
   "safe_mode": true,
   "source": {
     "promo_queue_plan": "data/promo_queue_plan.json",
@@ -3558,7 +3565,7 @@ Generated: 2026-06-14T01:48:15.409894Z
 
 <script type="text/plain" id="embedded-subscriber-cta-audit-report"># Subscriber CTA Audit - Lily Roo
 
-Generated: 2026-06-14T01:48:15.436710Z
+Generated: 2026-06-14T01:52:48.872327Z
 
 ## Summary
 - Draft posts: **6**
@@ -3610,7 +3617,7 @@ Generated: 2026-06-14T01:48:15.436710Z
 
 
 <script type="application/json" id="embedded-monetization-activation-plan">{
-  "generated_at": "2026-06-14T01:48:15.463319Z",
+  "generated_at": "2026-06-14T01:52:48.929354Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -3759,7 +3766,7 @@ Generated: 2026-06-14T01:48:15.436710Z
 
 <script type="text/plain" id="embedded-monetization-activation-report"># Monetization Activation Plan - Lily Roo
 
-Generated: 2026-06-14T01:48:15.463319Z
+Generated: 2026-06-14T01:52:48.929354Z
 
 ## Summary
 - Current subscribers: **5 / 1000**
@@ -3821,7 +3828,7 @@ Generated: 2026-06-14T01:48:15.463319Z
 
 
 <script type="application/json" id="embedded-backlog-reschedule-preview">{
-  "generated_at": "2026-06-13T21:48:15.490435-04:00",
+  "generated_at": "2026-06-13T21:52:48.960103-04:00",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -3879,7 +3886,7 @@ Generated: 2026-06-14T01:48:15.463319Z
 
 <script type="text/plain" id="embedded-backlog-reschedule-preview-report"># Backlog Reschedule Preview - Lily Roo
 
-Generated: 2026-06-13T21:48:15.490435-04:00
+Generated: 2026-06-13T21:52:48.960103-04:00
 
 ## Summary
 - Approved backlog rows: **3**
@@ -3914,7 +3921,7 @@ Generated: 2026-06-13T21:48:15.490435-04:00
 
 <script type="text/plain" id="embedded-platform-repair-report"># Platform Repair Status - Lily Roo
 
-Generated: 2026-06-14T01:48:15.515673Z
+Generated: 2026-06-14T01:52:48.988924Z
 
 ## Summary
 - Platform fixes: **3**
@@ -3946,6 +3953,109 @@ Generated: 2026-06-14T01:48:15.515673Z
 - This report does not push secrets, reconnect accounts, approve posts, or publish posts.
 - Run preview/check commands before any repair apply command.
 - Re-run the safe admin refresh after repairs so backlog and readiness state update together.</script>
+
+
+<script type="application/json" id="embedded-manual-distribution-packet">{
+  "generated_at": "2026-06-14T01:52:48.900780Z",
+  "safe_mode": true,
+  "source": {
+    "promo_queue_plan": "data/promo_queue_plan.json",
+    "approval_runway": "data/approval_runway.json"
+  },
+  "summary": {
+    "manual_ready_count": 2,
+    "youtube_community_count": 2,
+    "hard_cta_count": 2,
+    "approved_manual_count": 0,
+    "ready_to_post_after_review_count": 2
+  },
+  "rows": [
+    {
+      "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+      "platform": "YouTube Community",
+      "release": "Twelve Dollars",
+      "scheduled_at": "2026-06-18T18:30:00-04:00",
+      "post_type": "community",
+      "approved": "no",
+      "readiness_state": "manual_only",
+      "readiness_message": "YouTube Community posts are copy-ready manual workflow.",
+      "subscriber_growth_score": 116,
+      "selected_cta_strength": "hard_goal",
+      "text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
+      "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+      "imagery_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
+      "clip_url": "",
+      "media_key": "twelve-dollars-cover",
+      "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
+      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+      "manual_workflow": [
+        "Review the copy and linked playlist.",
+        "Approve only after human review if it should become the current manual posting candidate.",
+        "Post manually in YouTube Studio Community using the copy and asset below.",
+        "After posting, append the public URL to admin/content/Published_Log.csv and refresh Admin."
+      ]
+    },
+    {
+      "id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+      "platform": "YouTube Community",
+      "release": "Analog Myth",
+      "scheduled_at": "2026-06-19T18:30:00-04:00",
+      "post_type": "community",
+      "approved": "no",
+      "readiness_state": "manual_only",
+      "readiness_message": "YouTube Community posts are copy-ready manual workflow.",
+      "subscriber_growth_score": 116,
+      "selected_cta_strength": "hard_goal",
+      "text": "Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
+      "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+      "imagery_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
+      "clip_url": "",
+      "media_key": "analog-myth-cover",
+      "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --dry-run",
+      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin",
+      "manual_workflow": [
+        "Review the copy and linked playlist.",
+        "Approve only after human review if it should become the current manual posting candidate.",
+        "Post manually in YouTube Studio Community using the copy and asset below.",
+        "After posting, append the public URL to admin/content/Published_Log.csv and refresh Admin."
+      ]
+    }
+  ]
+}</script>
+
+
+<script type="text/plain" id="embedded-manual-distribution-report"># Manual Distribution Packet - Lily Roo
+
+Generated: 2026-06-14T01:52:48.900780Z
+
+## Summary
+- Manual-ready posts: **2**
+- YouTube Community posts: **2**
+- Hard subscriber CTAs: **2**
+- Approved manual posts: **0**
+
+## Manual Posting Queue
+- **YouTube Community - Twelve Dollars** (`FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY`)
+  - Scheduled target: `2026-06-18T18:30:00-04:00`
+  - Readiness: `manual_only`; CTA: `hard_goal`
+  - Copy: Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.
+  - Link/reply: Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
+  - Asset: https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg
+  - Preview approval: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run`
+  - Approve after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin`
+- **YouTube Community - Analog Myth** (`FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY`)
+  - Scheduled target: `2026-06-19T18:30:00-04:00`
+  - Readiness: `manual_only`; CTA: `hard_goal`
+  - Copy: Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.
+  - Link/reply: Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0
+  - Asset: https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg
+  - Preview approval: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --dry-run`
+  - Approve after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin`
+
+## Guardrails
+- This packet does not approve, schedule, publish, or post anything.
+- Use it as a human posting checklist for manual YouTube Community distribution.
+- Log the public post URL after manual posting so metrics and admin state stay accurate.</script>
 
 <script>
   const ADMIN_AUTH_KEY='lilyroo_admin_password_v1';
@@ -4074,6 +4184,7 @@ Generated: 2026-06-14T01:48:15.515673Z
     'reports/manual-metric-collection.md':'embedded-manual-metric-collection',
     'reports/approval-runway.md':'embedded-approval-runway-report',
     'reports/subscriber-cta-audit.md':'embedded-subscriber-cta-audit-report',
+    'reports/manual-distribution-packet.md':'embedded-manual-distribution-report',
     'reports/monetization-activation-plan.md':'embedded-monetization-activation-report',
     'reports/backlog-reschedule-preview.md':'embedded-backlog-reschedule-preview-report',
     'reports/platform-repair-status.md':'embedded-platform-repair-report',
@@ -4087,6 +4198,7 @@ Generated: 2026-06-14T01:48:15.515673Z
     'data/promo_operations_packet.json':'embedded-promo-operations-packet',
     'data/approval_runway.json':'embedded-approval-runway',
     'data/subscriber_cta_audit.json':'embedded-subscriber-cta-audit',
+    'data/manual_distribution_packet.json':'embedded-manual-distribution-packet',
     'data/monetization_activation_plan.json':'embedded-monetization-activation-plan',
     'data/backlog_reschedule_preview.json':'embedded-backlog-reschedule-preview',
     'data/platform_repair_status.json':'embedded-platform-repair-status'
@@ -5315,6 +5427,49 @@ Generated: 2026-06-14T01:48:15.515673Z
     root.innerHTML=`${intro}${items}${more}`;
   }
 
+  function renderManualDistributionPacket(packet){
+    const root=document.getElementById('manual-distribution-packet');
+    if(!root) return;
+    const rows=Array.isArray(packet?.rows)?packet.rows:[];
+    const summary=packet?.summary||{};
+    if(!rows.length){
+      root.innerHTML='<div class="muted">No manual distribution posts are currently packaged.</div>';
+      return;
+    }
+    const meta=[
+      `${Number(summary.manual_ready_count||rows.length)} manual ready`,
+      `${Number(summary.youtube_community_count||0)} YouTube Community`,
+      `${Number(summary.hard_cta_count||0)} hard CTAs`,
+      `${Number(summary.approved_manual_count||0)} approved`
+    ].join(' - ');
+    const intro=`<div class="queue-item">
+      <div class="queue-top">
+        <div>
+          <div class="queue-title">Manual posts can bypass broken auto executors</div>
+          <div class="queue-meta">${escapeHtml(meta)}</div>
+          <div class="queue-meta">Review copy, post manually in YouTube Studio Community, then log the public URL.</div>
+        </div>
+        <span class="status-chip ${Number(summary.manual_ready_count||rows.length)?'warn':'neutral'}">${escapeHtml(Number(summary.manual_ready_count||rows.length))}</span>
+      </div>
+    </div>`;
+    const items=rows.slice(0,4).map(row=>`<div class="queue-item">
+      <div class="queue-top">
+        <div>
+          <div class="queue-title">${escapeHtml(row.platform||'Manual')} - ${escapeHtml(row.release||'Release')}</div>
+          <div class="queue-meta">${escapeHtml(row.id||'manual post')} - ${escapeHtml(formatQueueDate(row.scheduled_at))} - ${escapeHtml(row.readiness_state||'manual')}</div>
+          <div class="queue-meta">${escapeHtml(row.text||'')}</div>
+          ${row.reply_text?`<div class="queue-meta">${escapeHtml(row.reply_text)}</div>`:''}
+          ${row.imagery_url?`<div class="queue-meta"><a href="${escapeHtml(row.imagery_url)}" target="_blank" rel="noopener">Open asset</a></div>`:''}
+          ${row.approval_preview_command?`<div class="queue-meta">Preview approval: ${escapeHtml(row.approval_preview_command)}</div>`:''}
+          ${row.approval_command?`<div class="queue-meta">Approve after review: ${escapeHtml(row.approval_command)}</div>`:''}
+        </div>
+        <span class="status-chip ${row.approved==='yes'?'ok':'neutral'}">${escapeHtml(row.approved==='yes'?'Approved':'Review')}</span>
+      </div>
+    </div>`).join('');
+    const more=rows.length>4?`<div class="queue-meta">${escapeHtml(rows.length-4)} more manual distribution row${rows.length-4===1?'':'s'} in data/manual_distribution_packet.json.</div>`:'';
+    root.innerHTML=`${intro}${items}${more}`;
+  }
+
   function renderMonetizationActivationPlan(plan){
     const root=document.getElementById('monetization-activation-plan');
     if(!root) return;
@@ -5593,7 +5748,7 @@ Generated: 2026-06-14T01:48:15.515673Z
 
   async function loadReportsDashboard(){
     if(!document.getElementById('reports-period')) return;
-    const [md,publishedCsv,queuePayload,releaseStatus,promoHealth,promoPlan,promoOps,approvalRunway,subscriberCtaAudit,activationPlan,backlogPreview,platformRepair,readiness,metrics,executions]=await Promise.all([
+    const [md,publishedCsv,queuePayload,releaseStatus,promoHealth,promoPlan,promoOps,approvalRunway,subscriberCtaAudit,manualDistribution,activationPlan,backlogPreview,platformRepair,readiness,metrics,executions]=await Promise.all([
       fetchTextOrEmpty(localPath('/admin/reports/weekly-social-report.md')),
       fetchTextOrEmpty(localPath('/admin/content/Published_Log.csv')),
       fetchJsonOr(localPath('/admin/future-posts.json'),{}),
@@ -5603,6 +5758,7 @@ Generated: 2026-06-14T01:48:15.515673Z
       fetchJsonOr(localPath('/data/promo_operations_packet.json'),{}),
       fetchJsonOr(localPath('/data/approval_runway.json'),{}),
       fetchJsonOr(localPath('/data/subscriber_cta_audit.json'),{}),
+      fetchJsonOr(localPath('/data/manual_distribution_packet.json'),{}),
       fetchJsonOr(localPath('/data/monetization_activation_plan.json'),{}),
       fetchJsonOr(localPath('/data/backlog_reschedule_preview.json'),{}),
       fetchJsonOr(localPath('/data/platform_repair_status.json'),{}),
@@ -5625,6 +5781,7 @@ Generated: 2026-06-14T01:48:15.515673Z
     renderPromoOperationsPacket(promoOps);
     renderApprovalRunway(approvalRunway);
     renderSubscriberCtaAudit(subscriberCtaAudit);
+    renderManualDistributionPacket(manualDistribution);
     renderMonetizationActivationPlan(activationPlan);
     renderBacklogReschedulePreview(backlogPreview);
     renderPlatformRepairStatus(platformRepair);

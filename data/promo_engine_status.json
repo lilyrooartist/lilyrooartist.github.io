@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-14T01:48:15.598533+00:00",
+  "generated_at": "2026-06-14T01:52:49.082343+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -192,15 +192,15 @@
         "command": "python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impressions_7d=VALUE --refresh-admin"
       }
     ],
-    "live_metrics_updated_at": "2026-06-14T01:47:28.736Z",
+    "live_metrics_updated_at": "2026-06-14T01:52:02.158Z",
     "metrics_history": {
       "snapshot_count": 5,
-      "updated_at": "2026-06-14T01:48:14.766199Z",
+      "updated_at": "2026-06-14T01:52:48.258083Z",
       "latest_date": "2026-06-14",
       "latest": {
         "date": "2026-06-14",
-        "captured_at": "2026-06-14T01:48:14.766199Z",
-        "live_metrics_updated_at": "2026-06-14T01:47:28.736Z",
+        "captured_at": "2026-06-14T01:52:48.258083Z",
+        "live_metrics_updated_at": "2026-06-14T01:52:02.158Z",
         "youtube": {
           "subscribers": 5,
           "total_views": 251,
@@ -283,7 +283,7 @@
     },
     "social_execution_summary": {
       "ok": true,
-      "updated_at": "2026-06-14T01:48:14.668645Z",
+      "updated_at": "2026-06-14T01:52:48.183167Z",
       "http_status": 200,
       "execution_count": 6,
       "posted_count": 0,
@@ -458,10 +458,10 @@
       "available": true,
       "safe_mode": true,
       "finalized": true,
-      "finished_at": "2026-06-14T01:48:15.571265Z",
-      "duration_seconds": 47.79,
-      "command_count": 16,
-      "passed": 15,
+      "finished_at": "2026-06-14T01:52:49.051839Z",
+      "duration_seconds": 48.36,
+      "command_count": 17,
+      "passed": 16,
       "failed": 1,
       "allowed_failures": 1,
       "failed_commands": [
@@ -510,18 +510,18 @@
       "stale": 1,
       "missing": 0,
       "checked_no_change": 1,
-      "checked_at": "2026-06-14T01:48:15.598533+00:00"
+      "checked_at": "2026-06-14T01:52:49.082343+00:00"
     },
     "sources": [
       {
         "name": "release_status",
         "path": "data/distrokid_release_status.json",
         "status": "checked_no_change",
-        "age_hours": 120.0,
+        "age_hours": 120.1,
         "max_age_hours": 72,
         "timestamp": "2026-06-09T01:47:42+00:00",
         "refresh_command": "Store checks are current; update data/distrokid_release_status.json when a verified public URL appears.",
-        "checked_at": "2026-06-14T01:48:15.598533+00:00",
+        "checked_at": "2026-06-14T01:52:49.082343+00:00",
         "checked_age_hours": 0.0,
         "evidence": "7 pending store links checked; no new public URLs found."
       },
@@ -540,14 +540,14 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T01:48:14.729831+00:00",
+        "timestamp": "2026-06-14T01:52:48.222354+00:00",
         "refresh_command": "python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
         "name": "published_log",
         "path": "admin/content/Published_Log.csv",
         "status": "fresh",
-        "age_hours": 157.2,
+        "age_hours": 157.3,
         "max_age_hours": 168,
         "timestamp": "2026-06-07T12:36:37.141276+00:00",
         "refresh_command": "Export or append latest published posts to admin/content/Published_Log.csv."
@@ -556,7 +556,7 @@
         "name": "manual_metrics",
         "path": "data/manual_social_stats.json",
         "status": "stale",
-        "age_hours": 154.0,
+        "age_hours": 154.1,
         "max_age_hours": 72,
         "timestamp": "2026-06-07T15:47:26.729764+00:00",
         "refresh_command": "Update data/manual_social_stats.json with latest manual metrics."
@@ -567,7 +567,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T01:47:28.736000+00:00",
+        "timestamp": "2026-06-14T01:52:02.158000+00:00",
         "refresh_command": "python3 scripts/capture_live_metrics.py"
       },
       {
@@ -576,7 +576,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T01:48:14.766199+00:00",
+        "timestamp": "2026-06-14T01:52:48.258083+00:00",
         "refresh_command": "python3 scripts/update_metrics_history.py --refresh-admin"
       },
       {
@@ -585,7 +585,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T01:48:13.794334+00:00",
+        "timestamp": "2026-06-14T01:52:47.284184+00:00",
         "refresh_command": "python3 scripts/capture_executor_readiness.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -594,7 +594,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T01:48:15.598533+00:00",
+        "timestamp": "2026-06-14T01:52:49.082343+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin"
       },
       {
@@ -603,7 +603,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T01:48:14.668645+00:00",
+        "timestamp": "2026-06-14T01:52:48.183167+00:00",
         "refresh_command": "python3 scripts/capture_social_executions.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -612,7 +612,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T01:48:15.571611+00:00",
+        "timestamp": "2026-06-14T01:52:49.052325+00:00",
         "refresh_command": "python3 scripts/refresh_promo_admin.py"
       },
       {
@@ -621,7 +621,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T01:48:15.284170+00:00",
+        "timestamp": "2026-06-14T01:52:48.737125+00:00",
         "refresh_command": "python3 scripts/capture_github_workflow_status.py && python3 scripts/update_promo_engine_status.py"
       }
     ],
