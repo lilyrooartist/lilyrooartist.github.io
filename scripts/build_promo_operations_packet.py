@@ -295,7 +295,7 @@ def backlog_reschedule_actions(status):
                 "approved_backlog_posts": approved_backlog,
                 "approved_upcoming_posts": int(monetization.get("approved_upcoming_posts") or 0),
                 "apply_command": monetization.get("backlog_reschedule_apply_command") or "",
-                "note": "Preview first; apply only after confirming the new schedule and platform blockers.",
+                "note": "Preview first. Apply refuses rows with known executor blockers unless blockers are fixed or --allow-blocked is used after deliberate review.",
             },
         )
     ]

@@ -245,6 +245,7 @@ def validate_generated_outputs(failures):
                 backlog_actions
                 and all("--apply" not in (action.get("command") or "") for action in backlog_actions)
                 and all((action.get("context") or {}).get("apply_command") for action in backlog_actions)
+                and all("refuses" in ((action.get("context") or {}).get("note") or "") for action in backlog_actions)
                 and summary.get("backlog_reschedules") == len(backlog_actions)
             ):
                 ok("promo operations packet includes dry-run backlog reschedule action")
@@ -767,10 +768,18 @@ def validate_generated_outputs(failures):
         fail("update_scheduled_post_approval.py missing", failures)
     if SCHEDULED_POST_RESCHEDULE.exists():
         reschedule_text = SCHEDULED_POST_RESCHEDULE.read_text(encoding="utf-8")
-        if "--approved-backlog" in reschedule_text and "--apply" in reschedule_text and "Dry run only" in reschedule_text and "Published_Log.csv" in reschedule_text:
-            ok("scheduled post reschedule script supports dry-run approved backlog previews")
+        if (
+            "--approved-backlog" in reschedule_text
+            and "--apply" in reschedule_text
+            and "--allow-blocked" in reschedule_text
+            and "Dry run only" in reschedule_text
+            and "Published_Log.csv" in reschedule_text
+            and "social_execution_snapshot.json" in reschedule_text
+            and "Refusing to apply blocked reschedule" in reschedule_text
+        ):
+            ok("scheduled post reschedule script supports blocker-aware dry-run approved backlog previews")
         else:
-            fail("reschedule_scheduled_posts.py missing dry-run approved backlog support", failures)
+            fail("reschedule_scheduled_posts.py missing blocker-aware dry-run approved backlog support", failures)
     else:
         fail("reschedule_scheduled_posts.py missing", failures)
     if MANUAL_METRICS_UPDATER.exists():

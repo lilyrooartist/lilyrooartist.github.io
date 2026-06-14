@@ -1,6 +1,6 @@
 # Promo Operations Packet - Lily Roo
 
-Generated: 2026-06-14T01:04:40.473419Z
+Generated: 2026-06-14T01:07:01.356529Z
 
 ## Summary
 - Actions: **22**
@@ -33,7 +33,7 @@ Generated: 2026-06-14T01:04:40.473419Z
 ### Reschedule approved backlog
 - **[high] Preview reschedule for approved past-due posts**
   - Why: Approved posts are past due; preview a new schedule before any apply step.
-  - Detail: Preview first; apply only after confirming the new schedule and platform blockers.
+  - Detail: Preview first. Apply refuses rows with known executor blockers unless blockers are fixed or --allow-blocked is used after deliberate review.
   - Command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-14T10:00:00-04:00' --spacing-hours 24`
   - Apply after review: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-14T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin`
 

@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import json
 import re
 import subprocess
 from datetime import datetime, timedelta
@@ -12,6 +13,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 QUEUE = ROOT / "data" / "scheduled_posts.csv"
 PUBLISHED_LOG = ROOT / "admin" / "content" / "Published_Log.csv"
+SOCIAL_EXECUTIONS = ROOT / "data" / "social_execution_snapshot.json"
 
 
 def parse_datetime(value: str) -> datetime:
@@ -50,6 +52,23 @@ def load_published_ids() -> set[str]:
             for match in re.findall(r"\bqueue_id=(FP-AUTO-\d+)\b", row.get("notes") or ""):
                 ids.add(match)
     return ids
+
+
+def load_execution_blockers() -> dict[str, dict[str, str]]:
+    if not SOCIAL_EXECUTIONS.exists():
+        return {}
+    try:
+        snapshot = json.loads(SOCIAL_EXECUTIONS.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return {}
+    summary = snapshot.get("summary") or {}
+    blockers = {}
+    for key in ("platform_fix_needed", "approval_needed", "latest_attention"):
+        for row in summary.get(key) or []:
+            post_id = row.get("post_id")
+            if post_id and post_id not in blockers:
+                blockers[post_id] = row
+    return blockers
 
 
 def refresh_admin() -> None:
@@ -99,6 +118,7 @@ def main() -> int:
     parser.add_argument("--start-at", required=True, help="First replacement ISO datetime, for example 2026-06-15T10:00:00-04:00.")
     parser.add_argument("--spacing-hours", type=int, default=24, help="Hours between selected rows. Default: 24.")
     parser.add_argument("--apply", action="store_true", help="Write the new scheduled_at values. Default is dry-run.")
+    parser.add_argument("--allow-blocked", action="store_true", help="Allow applying rows with known executor/platform blockers.")
     parser.add_argument("--refresh-admin", action="store_true", help="Refresh generated admin artifacts after applying.")
     args = parser.parse_args()
 
@@ -112,16 +132,29 @@ def main() -> int:
     selected.sort(key=lambda row: row.get("scheduled_at", ""))
     slots = next_slots(parse_datetime(args.start_at), len(selected), args.spacing_hours)
     replacements = dict(zip([row.get("id", "") for row in selected], slots))
+    blockers = load_execution_blockers()
+    selected_blockers = {row.get("id", ""): blockers[row.get("id", "")] for row in selected if row.get("id", "") in blockers}
 
     print(f"Rows selected: {len(selected)}")
     for row in selected:
         row_id = row.get("id", "")
         replacement = replacements[row_id].isoformat()
         print(f"- {row_id} {row.get('platform', '')} {row.get('song', '')}: {row.get('scheduled_at', '')} -> {replacement}")
+        blocker = selected_blockers.get(row_id)
+        if blocker:
+            detail = blocker.get("error_summary") or blocker.get("reason") or blocker.get("status") or "executor attention required"
+            print(f"  WARNING: known blocker: {detail}")
 
     if not args.apply:
         print("Dry run only. Re-run with --apply to write the schedule.")
         return 0
+    if selected_blockers and not args.allow_blocked:
+        blocked_ids = ", ".join(sorted(selected_blockers))
+        raise SystemExit(
+            "Refusing to apply blocked reschedule for "
+            + blocked_ids
+            + ". Fix/clear executor blockers first, or rerun with --allow-blocked after deliberate review."
+        )
 
     for row in rows:
         row_id = row.get("id", "")
