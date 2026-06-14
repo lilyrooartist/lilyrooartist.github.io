@@ -417,6 +417,90 @@ def latest_youtube_subscribers(metrics: dict, history: dict) -> int:
     return int_metric(live_youtube.get("subscribers"), int_metric(latest_youtube.get("subscribers")))
 
 
+def date_value(value: str | None):
+    parsed = parse_datetime(value)
+    if parsed:
+        return parsed.date()
+    raw = str(value or "").strip()
+    if not raw:
+        return None
+    try:
+        return datetime.fromisoformat(raw).date()
+    except ValueError:
+        return None
+
+
+def monetization_runway(metrics_history: dict, subscribers: int, remaining: int, target: int) -> dict:
+    snapshots = []
+    for snapshot in (metrics_history.get("snapshots") or []):
+        youtube = snapshot.get("youtube") or {}
+        snapshot_date = date_value(snapshot.get("date") or snapshot.get("captured_at"))
+        if not snapshot_date:
+            continue
+        snapshots.append({
+            "date": snapshot_date,
+            "subscribers": int_metric(youtube.get("subscribers")),
+        })
+    if not snapshots:
+        return {
+            "status": "insufficient_history",
+            "snapshot_count": 0,
+            "window_days": 0,
+            "subscriber_delta": 0,
+            "subscribers_per_week": 0,
+            "estimated_weeks_to_target": None,
+            "required_subscribers_per_week": {
+                "90_days": round(remaining / (90 / 7), 2) if remaining else 0,
+                "180_days": round(remaining / (180 / 7), 2) if remaining else 0,
+                "365_days": round(remaining / (365 / 7), 2) if remaining else 0,
+            },
+            "action_needed": "Capture at least two dated YouTube metric snapshots to calculate monetization pace.",
+        }
+    first = snapshots[0]
+    latest = snapshots[-1]
+    window_days = max((latest["date"] - first["date"]).days, 0)
+    subscriber_delta = subscribers - first["subscribers"]
+    subscribers_per_week = round((subscriber_delta / window_days) * 7, 2) if window_days else 0
+    estimated_weeks = round(remaining / subscribers_per_week, 1) if remaining and subscribers_per_week > 0 else None
+    required = {
+        "90_days": round(remaining / (90 / 7), 2) if remaining else 0,
+        "180_days": round(remaining / (180 / 7), 2) if remaining else 0,
+        "365_days": round(remaining / (365 / 7), 2) if remaining else 0,
+    }
+    if remaining <= 0:
+        status = "target_reached"
+        action_needed = "Monetization subscriber target reached; verify partner-program eligibility requirements."
+    elif len(snapshots) < 2 or window_days == 0:
+        status = "insufficient_history"
+        action_needed = "Capture another dated YouTube metric snapshot to calculate subscriber pace."
+    elif subscribers_per_week <= 0:
+        status = "stalled"
+        action_needed = "Restart subscriber-growth distribution: approve draft posts, clear executor blockers, and keep weekly metrics current."
+    elif subscribers_per_week < required["365_days"]:
+        status = "behind_365_day_pace"
+        action_needed = "Increase weekly subscriber acquisition before the channel can reach 1,000 subscribers within a year."
+    elif subscribers_per_week < required["180_days"]:
+        status = "behind_180_day_pace"
+        action_needed = "Current growth can reach the target, but not within six months; add more approved subscriber CTAs."
+    else:
+        status = "on_pace"
+        action_needed = "Maintain approved distribution and monitor subscriber pace every refresh."
+    return {
+        "status": status,
+        "snapshot_count": len(snapshots),
+        "first_date": first["date"].isoformat(),
+        "latest_date": latest["date"].isoformat(),
+        "window_days": window_days,
+        "first_subscribers": first["subscribers"],
+        "latest_subscribers": subscribers,
+        "subscriber_delta": subscriber_delta,
+        "subscribers_per_week": subscribers_per_week,
+        "estimated_weeks_to_target": estimated_weeks,
+        "required_subscribers_per_week": required,
+        "action_needed": action_needed,
+    }
+
+
 def approved_queue_counts(future_posts: dict, now: datetime) -> dict:
     counts = {
         "approved_upcoming_posts": 0,
@@ -439,11 +523,12 @@ def approved_queue_counts(future_posts: dict, now: datetime) -> dict:
     return counts
 
 
-def monetization_state(metrics: dict, history: dict, promo_plan: dict, future_posts: dict, execution_state: dict, now: datetime) -> dict:
+def monetization_state(metrics: dict, history: dict, metrics_history: dict, promo_plan: dict, future_posts: dict, execution_state: dict, now: datetime) -> dict:
     subscribers = latest_youtube_subscribers(metrics, history)
     target = YOUTUBE_MONETIZATION_SUBSCRIBER_TARGET
     remaining = max(target - subscribers, 0)
     progress = round((subscribers / target) * 100, 2) if target else 0
+    runway = monetization_runway(metrics_history, subscribers, remaining, target)
     plan_summary = promo_plan.get("summary") or {}
     apply_preview = promo_plan.get("apply_preview") or {}
     queue_counts = approved_queue_counts(future_posts, now)
@@ -466,12 +551,15 @@ def monetization_state(metrics: dict, history: dict, promo_plan: dict, future_po
         next_pressure.append(f"{approval_blockers} executor records are blocked by approval.")
     if platform_fix_blockers:
         next_pressure.append(f"{platform_fix_blockers} executor records need platform repair before they can publish.")
+    if runway.get("status") in {"stalled", "behind_365_day_pace", "behind_180_day_pace"}:
+        next_pressure.append(runway["action_needed"])
     return {
         "target": target,
         "current_subscribers": subscribers,
         "remaining_subscribers": remaining,
         "progress_percent": progress,
         "source": "youtube live metrics, with metrics history fallback",
+        "runway": runway,
         "approved_upcoming_posts": approved_upcoming,
         "approved_backlog_posts": queue_counts["approved_backlog_posts"],
         "review_upcoming_posts": queue_counts["review_upcoming_posts"],
@@ -886,7 +974,7 @@ def build_status():
     refresh_run = refresh_run_state(promo_refresh_run)
     refresh_automation = refresh_automation_state(promo_refresh_workflow_status)
     execution_state = social_execution_state(social_executions, scheduled_rows)
-    monetization = monetization_state(live, history, promo_plan, future_posts, execution_state, now)
+    monetization = monetization_state(live, history, metrics_history, promo_plan, future_posts, execution_state, now)
     freshness = source_freshness(release_status, manual, live, metrics_history, executor_readiness, store_history, social_executions, promo_refresh_run, promo_refresh_workflow_status, promo_plan, future_posts, now)
 
     releases = []
@@ -984,13 +1072,11 @@ def build_status():
     freshness_summary = freshness["summary"]
     freshness_actions = freshness["actions"]
     all_actions = freshness_actions + all_actions
-    if metrics["pending_manual_fields"] and not any("--from-csv --dry-run" in action for action in all_actions):
-        all_actions.insert(
-            0,
-            "Refresh manual metrics: fill data/manual_metric_collection_template.csv, "
-            "preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run, "
-            "then import with python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin.",
-        )
+    manual_metric_action = (
+        "Refresh manual metrics: fill data/manual_metric_collection_template.csv, "
+        "preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run, "
+        "then import with python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin."
+    )
     if execution_state["platform_fix_needed_count"]:
         platforms = ", ".join(sorted({
             item.get("platform", "Social")
@@ -1012,6 +1098,8 @@ def build_status():
             all_actions.insert(0, pressure)
     if monetization.get("approved_backlog_posts") and monetization.get("backlog_reschedule_preview_command"):
         all_actions.insert(0, f"Preview approved backlog reschedule: {monetization['backlog_reschedule_preview_command']}")
+    if metrics["pending_manual_fields"] and not any("--from-csv --dry-run" in action for action in all_actions[:8]):
+        all_actions.insert(0, manual_metric_action)
     return {
         "generated_at": now.isoformat(),
         "source": {

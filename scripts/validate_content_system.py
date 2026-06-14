@@ -523,6 +523,19 @@ def validate_generated_outputs(failures):
             ok("promo engine tracks YouTube monetization subscriber gap")
         else:
             fail("promo_engine_status.json missing valid monetization subscriber gap", failures)
+        runway = monetization.get("runway") or {}
+        required_weekly = runway.get("required_subscribers_per_week") or {}
+        if (
+            runway.get("status")
+            and int(runway.get("latest_subscribers") or 0) == current_subscribers
+            and int(runway.get("snapshot_count") or 0) == int(history.get("snapshot_count") or 0)
+            and "subscribers_per_week" in runway
+            and float(required_weekly.get("365_days") or 0) >= 0
+            and runway.get("action_needed")
+        ):
+            ok("promo engine tracks monetization runway pace")
+        else:
+            fail("promo_engine_status.json missing monetization runway pace", failures)
         plan_snapshot = json.loads(PROMO_QUEUE_PLAN.read_text(encoding="utf-8")) if PROMO_QUEUE_PLAN.exists() else {}
         plan_summary = plan_snapshot.get("summary") or {}
         future_snapshot = json.loads(FUTURE.read_text(encoding="utf-8")) if FUTURE.exists() else {}
