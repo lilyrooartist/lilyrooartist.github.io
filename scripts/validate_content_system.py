@@ -465,6 +465,50 @@ def validate_generated_outputs(failures):
             ok(f"promo engine metrics history tracks {history.get('snapshot_count')} snapshot(s)")
         else:
             fail("promo_engine_status.json missing metrics history KPI summary", failures)
+        monetization = kpi.get("monetization") or {}
+        latest = history.get("latest") or {}
+        latest_youtube = latest.get("youtube") or {}
+        current_subscribers = int(latest_youtube.get("subscribers") or 0)
+        live_metrics_snapshot = json.loads(LIVE_METRICS.read_text(encoding="utf-8")) if LIVE_METRICS.exists() else {}
+        live_youtube = ((live_metrics_snapshot.get("platforms") or {}).get("youtube") or {}).get("metrics") or {}
+        if live_youtube.get("subscribers") not in (None, ""):
+            current_subscribers = int(live_youtube.get("subscribers"))
+        target = int(monetization.get("target") or 0)
+        if (
+            target == 1000
+            and int(monetization.get("current_subscribers") or 0) == current_subscribers
+            and int(monetization.get("remaining_subscribers") or 0) == max(1000 - current_subscribers, 0)
+            and "progress_percent" in monetization
+        ):
+            ok("promo engine tracks YouTube monetization subscriber gap")
+        else:
+            fail("promo_engine_status.json missing valid monetization subscriber gap", failures)
+        plan_snapshot = json.loads(PROMO_QUEUE_PLAN.read_text(encoding="utf-8")) if PROMO_QUEUE_PLAN.exists() else {}
+        plan_summary = plan_snapshot.get("summary") or {}
+        future_snapshot = json.loads(FUTURE.read_text(encoding="utf-8")) if FUTURE.exists() else {}
+        now_local = datetime.now().astimezone()
+        approved_upcoming = 0
+        approved_backlog = 0
+        for row in future_snapshot.get("posts") or []:
+            if str(row.get("approved") or "").strip().lower() != "yes":
+                continue
+            try:
+                scheduled_at = datetime.fromisoformat(str(row.get("scheduled_at") or ""))
+            except ValueError:
+                scheduled_at = None
+            if scheduled_at and scheduled_at >= now_local:
+                approved_upcoming += 1
+            else:
+                approved_backlog += 1
+        if (
+            int(monetization.get("approved_upcoming_posts") or 0) == approved_upcoming
+            and int(monetization.get("approved_backlog_posts") or 0) == approved_backlog
+            and int(monetization.get("draft_review_posts") or 0) == int(plan_summary.get("review_posts") or 0)
+            and isinstance(monetization.get("next_pressure") or [], list)
+        ):
+            ok("promo engine tracks monetization queue pressure")
+        else:
+            fail("promo_engine_status.json missing monetization queue pressure", failures)
         automation = kpi.get("refresh_automation") or {}
         if (
             automation.get("configured") is True

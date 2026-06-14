@@ -29,6 +29,7 @@ OUT = ROOT / "data" / "promo_engine_status.json"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
 
 PROMO_PLATFORMS = ["X", "Instagram", "TikTok", "Facebook", "YouTube Community"]
+YOUTUBE_MONETIZATION_SUBSCRIBER_TARGET = 1000
 STORE_SERVICES = [
     ("Spotify", "spotify_url"),
     ("Apple Music", "apple_music_url"),
@@ -395,6 +396,89 @@ def metrics_history_state(metrics_history):
         "latest": latest,
         "previous_date": previous.get("date", ""),
         "delta_from_previous": latest.get("delta_from_previous", {}),
+    }
+
+
+def int_metric(value, default=0):
+    try:
+        if value in (None, ""):
+            return default
+        return int(float(value))
+    except (TypeError, ValueError):
+        return default
+
+
+def latest_youtube_subscribers(metrics: dict, history: dict) -> int:
+    latest = history.get("latest") or {}
+    latest_youtube = latest.get("youtube") or {}
+    live_platforms = metrics.get("platforms") if isinstance(metrics, dict) else {}
+    live_youtube = ((live_platforms or {}).get("youtube") or {}).get("metrics") or {}
+    return int_metric(live_youtube.get("subscribers"), int_metric(latest_youtube.get("subscribers")))
+
+
+def approved_queue_counts(future_posts: dict, now: datetime) -> dict:
+    counts = {
+        "approved_upcoming_posts": 0,
+        "approved_backlog_posts": 0,
+        "review_upcoming_posts": 0,
+        "review_backlog_posts": 0,
+    }
+    for row in future_posts.get("posts") or []:
+        approved = norm(row.get("approved")) == "yes"
+        scheduled_at = parse_datetime(row.get("scheduled_at"))
+        is_upcoming = bool(scheduled_at and scheduled_at >= now)
+        if approved and is_upcoming:
+            counts["approved_upcoming_posts"] += 1
+        elif approved:
+            counts["approved_backlog_posts"] += 1
+        elif is_upcoming:
+            counts["review_upcoming_posts"] += 1
+        else:
+            counts["review_backlog_posts"] += 1
+    return counts
+
+
+def monetization_state(metrics: dict, history: dict, promo_plan: dict, future_posts: dict, execution_state: dict, now: datetime) -> dict:
+    subscribers = latest_youtube_subscribers(metrics, history)
+    target = YOUTUBE_MONETIZATION_SUBSCRIBER_TARGET
+    remaining = max(target - subscribers, 0)
+    progress = round((subscribers / target) * 100, 2) if target else 0
+    plan_summary = promo_plan.get("summary") or {}
+    apply_preview = promo_plan.get("apply_preview") or {}
+    queue_counts = approved_queue_counts(future_posts, now)
+    approved_upcoming = queue_counts["approved_upcoming_posts"]
+    review_posts = int_metric(plan_summary.get("review_posts"))
+    draft_posts = int_metric(plan_summary.get("draft_posts"))
+    approved_plan_posts = int_metric(plan_summary.get("approved_posts"))
+    ready_to_apply = int_metric(apply_preview.get("ready_to_apply_posts"))
+    approval_blockers = int_metric(execution_state.get("approval_needed_count"))
+    platform_fix_blockers = int_metric(execution_state.get("platform_fix_needed_count"))
+    next_pressure = []
+    if approved_upcoming <= 0 and review_posts > 0:
+        next_pressure.append("No approved upcoming posts; review draft promo queue rows to restart subscriber-growth distribution.")
+    if queue_counts["approved_backlog_posts"]:
+        next_pressure.append(f"{queue_counts['approved_backlog_posts']} approved unpublished posts are past their scheduled time; repair executor/platform blockers or reschedule them.")
+    if approval_blockers:
+        next_pressure.append(f"{approval_blockers} executor records are blocked by approval.")
+    if platform_fix_blockers:
+        next_pressure.append(f"{platform_fix_blockers} executor records need platform repair before they can publish.")
+    return {
+        "target": target,
+        "current_subscribers": subscribers,
+        "remaining_subscribers": remaining,
+        "progress_percent": progress,
+        "source": "youtube live metrics, with metrics history fallback",
+        "approved_upcoming_posts": approved_upcoming,
+        "approved_backlog_posts": queue_counts["approved_backlog_posts"],
+        "review_upcoming_posts": queue_counts["review_upcoming_posts"],
+        "review_backlog_posts": queue_counts["review_backlog_posts"],
+        "draft_review_posts": review_posts,
+        "draft_posts": draft_posts,
+        "approved_plan_posts": approved_plan_posts,
+        "ready_to_apply_posts": ready_to_apply,
+        "approval_blockers": approval_blockers,
+        "platform_fix_blockers": platform_fix_blockers,
+        "next_pressure": next_pressure,
     }
 
 
@@ -796,6 +880,7 @@ def build_status():
     refresh_run = refresh_run_state(promo_refresh_run)
     refresh_automation = refresh_automation_state(promo_refresh_workflow_status)
     execution_state = social_execution_state(social_executions, scheduled_rows)
+    monetization = monetization_state(live, history, promo_plan, future_posts, execution_state, now)
     freshness = source_freshness(release_status, manual, live, metrics_history, executor_readiness, store_history, social_executions, promo_refresh_run, promo_refresh_workflow_status, promo_plan, future_posts, now)
 
     releases = []
@@ -916,6 +1001,9 @@ def build_status():
             if status in {"failed", "blocked", "skipped"}
         )
         all_actions.insert(0, f"Resolve social executor attention states: {status_bits or execution_state['attention_count']}.")
+    for pressure in reversed(monetization["next_pressure"]):
+        if pressure not in all_actions:
+            all_actions.insert(0, pressure)
     return {
         "generated_at": now.isoformat(),
         "source": {
@@ -932,9 +1020,10 @@ def build_status():
             "promo_refresh_run": str(PROMO_REFRESH_RUN.relative_to(ROOT)),
             "promo_refresh_workflow_status": str(PROMO_REFRESH_WORKFLOW_STATUS.relative_to(ROOT)),
         },
-        "objective": "Promote Lily Roo releases and keep lilyroo.com/admin status and metrics current.",
+        "objective": "Promote Lily Roo releases, keep lilyroo.com/admin status and metrics current, and drive YouTube monetization progress.",
         "kpi": {
             "primary": "Reach 1,000 YouTube subscribers",
+            "monetization": monetization,
             "live_platform_count": metrics["live_platform_count"],
             "pending_manual_metric_fields": len(metrics["pending_manual_fields"]),
             "pending_manual_metric_details": metrics["pending_manual_fields"],
