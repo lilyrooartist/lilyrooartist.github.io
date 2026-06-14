@@ -22,6 +22,7 @@ PROMO_REFRESH_WORKFLOW_STATUS = ROOT / "data" / "promo_refresh_workflow_status.j
 PROMO_OPERATIONS_PACKET = ROOT / "data" / "promo_operations_packet.json"
 PLATFORM_REPAIR_STATUS = ROOT / "data" / "platform_repair_status.json"
 APPROVAL_RUNWAY = ROOT / "data" / "approval_runway.json"
+SUBSCRIBER_CTA_AUDIT = ROOT / "data" / "subscriber_cta_audit.json"
 MANUAL_METRIC_TEMPLATE = ROOT / "data" / "manual_metric_collection_template.csv"
 SPOTIFY_SNAPSHOT = ROOT / "data" / "spotify_release_snapshot.json"
 APPLE_MUSIC_SNAPSHOT = ROOT / "data" / "apple_music_release_snapshot.json"
@@ -51,10 +52,12 @@ PROMO_REFRESH_WORKFLOW = ROOT / ".github" / "workflows" / "promo-admin-refresh.y
 PROMO_OPERATIONS_SCRIPT = ROOT / "scripts" / "build_promo_operations_packet.py"
 PLATFORM_REPAIR_SCRIPT = ROOT / "scripts" / "build_platform_repair_status.py"
 APPROVAL_RUNWAY_SCRIPT = ROOT / "scripts" / "build_approval_runway.py"
+SUBSCRIBER_CTA_AUDIT_SCRIPT = ROOT / "scripts" / "build_subscriber_cta_audit.py"
 MANUAL_METRIC_COLLECTION_SCRIPT = ROOT / "scripts" / "build_manual_metric_collection.py"
 REPORT = ROOT / "admin" / "reports" / "weekly-social-report.md"
 PROMO_OPERATIONS_REPORT = ROOT / "admin" / "reports" / "promo-operations-packet.md"
 APPROVAL_RUNWAY_REPORT = ROOT / "admin" / "reports" / "approval-runway.md"
+SUBSCRIBER_CTA_AUDIT_REPORT = ROOT / "admin" / "reports" / "subscriber-cta-audit.md"
 MANUAL_METRIC_REPORT = ROOT / "admin" / "reports" / "manual-metric-collection.md"
 INDEX = CONTENT / "content_index.json"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
@@ -357,6 +360,21 @@ def validate_generated_outputs(failures):
             fail("approval_runway.json missing safe approval runway summary or dry-run previews", failures)
     else:
         fail("approval_runway.json missing; run scripts/build_approval_runway.py", failures)
+    if SUBSCRIBER_CTA_AUDIT.exists():
+        cta_audit = json.loads(SUBSCRIBER_CTA_AUDIT.read_text(encoding="utf-8"))
+        summary = cta_audit.get("summary") or {}
+        rows = cta_audit.get("rows") or []
+        if (
+            cta_audit.get("safe_mode") is True
+            and summary.get("draft_count") == len(rows)
+            and "subscriber_swap_count" in summary
+            and all("selected_strength" in row and "recommended_strength" in row and "needs_subscriber_cta_swap" in row for row in rows)
+        ):
+            ok(f"subscriber CTA audit checks {len(rows)} draft CTA(s)")
+        else:
+            fail("subscriber_cta_audit.json missing safe CTA summary or row classifications", failures)
+    else:
+        fail("subscriber_cta_audit.json missing; run scripts/build_subscriber_cta_audit.py", failures)
     if MANUAL_METRIC_TEMPLATE.exists():
         rows = read_csv(MANUAL_METRIC_TEMPLATE)
         required = {
@@ -904,6 +922,7 @@ def validate_generated_outputs(failures):
             "capture_github_workflow_status.py",
             "build_promo_operations_packet.py",
             "build_approval_runway.py",
+            "build_subscriber_cta_audit.py",
             "build_platform_repair_status.py",
             "build_manual_metric_collection.py",
             "update_weekly_report.py",
@@ -985,6 +1004,14 @@ def validate_generated_outputs(failures):
             fail("build_approval_runway.py missing runway outputs or executes commands", failures)
     else:
         fail("build_approval_runway.py missing", failures)
+    if SUBSCRIBER_CTA_AUDIT_SCRIPT.exists():
+        cta_text = SUBSCRIBER_CTA_AUDIT_SCRIPT.read_text(encoding="utf-8")
+        if "subscriber_cta_audit.json" in cta_text and "subscriber-cta-audit.md" in cta_text and "needs_subscriber_cta_swap" in cta_text and "subprocess" not in cta_text:
+            ok("subscriber CTA audit builder is review-only")
+        else:
+            fail("build_subscriber_cta_audit.py missing CTA audit outputs or executes commands", failures)
+    else:
+        fail("build_subscriber_cta_audit.py missing", failures)
     if MANUAL_METRIC_COLLECTION_SCRIPT.exists():
         collection_text = MANUAL_METRIC_COLLECTION_SCRIPT.read_text(encoding="utf-8")
         if "manual_metric_collection_template.csv" in collection_text and "manual-metric-collection.md" in collection_text and "pending_manual_by_platform" in collection_text and "collection_url" in collection_text and "subprocess" not in collection_text:
@@ -1009,6 +1036,14 @@ def validate_generated_outputs(failures):
             fail("approval-runway.md missing expected sections", failures)
     else:
         fail("approval-runway.md missing", failures)
+    if SUBSCRIBER_CTA_AUDIT_REPORT.exists():
+        cta_report_text = SUBSCRIBER_CTA_AUDIT_REPORT.read_text(encoding="utf-8")
+        if "Subscriber CTA Audit" in cta_report_text and "CTA Review Queue" in cta_report_text and "Guardrails" in cta_report_text:
+            ok("subscriber CTA audit markdown report present")
+        else:
+            fail("subscriber-cta-audit.md missing expected sections", failures)
+    else:
+        fail("subscriber-cta-audit.md missing", failures)
 
 
 def validate_report(failures):

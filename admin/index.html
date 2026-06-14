@@ -473,6 +473,13 @@
               </div>
             </section>
 
+            <section class="report-card" aria-labelledby="subscriber-cta-heading">
+              <h2 id="subscriber-cta-heading">Subscriber CTA Audit</h2>
+              <div class="queue-list" id="subscriber-cta-audit">
+                <div class="muted">Loading subscriber CTA audit...</div>
+              </div>
+            </section>
+
             <section class="report-card" aria-labelledby="promo-plan-heading">
               <h2 id="promo-plan-heading">Promo Queue Plan</h2>
               <div class="queue-list" id="promo-queue-plan">
@@ -526,7 +533,7 @@
 <script type="text/plain" id="embedded-weekly-report"># Weekly Social Report — Lily Roo
 
 **Period:** 2026-06-07 to 2026-06-13
-**Last updated:** 2026-06-13 09:21 PM EDT
+**Last updated:** 2026-06-13 09:27 PM EDT
 
 ## KPI Goal
 - Primary growth target: **1,000 YouTube subscribers** (monetization milestone)
@@ -647,7 +654,7 @@
 - Latest post: https://www.facebook.com/903693509504290_122118326547249470
 
 ## Metrics Snapshot
-- Live API captured: **2026-06-14T01:21:39.368Z**
+- Live API captured: **2026-06-14T01:27:42.520Z**
 - Snapshot file: `data/live_social_metrics.json`
 - YouTube public RSS captured: **2026-06-09T12:08:07.783949Z**
 - YouTube public snapshot file: `data/youtube_public_snapshot.json`
@@ -657,9 +664,9 @@
 - YouTube Music snapshot file: `data/youtube_music_release_snapshot.json`
 - HyperFollow stores captured: **2026-06-07T20:51:14.275569Z**
 - HyperFollow snapshot file: `data/hyperfollow_store_links_snapshot.json`
-- All-release store verification captured: **2026-06-14T01:21:45.677438+00:00**
+- All-release store verification captured: **2026-06-14T01:27:48.607828+00:00**
 - All-release store verification file: `data/store_verification_history.json`
-- Social executor history captured: **2026-06-14T01:21:45.055703Z**
+- Social executor history captured: **2026-06-14T01:27:48.012448Z**
 - Social executor history file: `data/social_execution_snapshot.json`
 - First single alignment audit captured: **2026-06-07T21:39:03.668040Z**
 - First single alignment audit file: `data/first_single_alignment_audit.json`
@@ -870,7 +877,7 @@
 }</script>
 
 <script type="application/json" id="embedded-promo-engine-status">{
-  "generated_at": "2026-06-14T01:21:45.846668+00:00",
+  "generated_at": "2026-06-14T01:27:48.827896+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -1063,15 +1070,15 @@
         "command": "python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impressions_7d=VALUE --refresh-admin"
       }
     ],
-    "live_metrics_updated_at": "2026-06-14T01:21:39.368Z",
+    "live_metrics_updated_at": "2026-06-14T01:27:42.520Z",
     "metrics_history": {
       "snapshot_count": 5,
-      "updated_at": "2026-06-14T01:21:45.157543Z",
+      "updated_at": "2026-06-14T01:27:48.089410Z",
       "latest_date": "2026-06-14",
       "latest": {
         "date": "2026-06-14",
-        "captured_at": "2026-06-14T01:21:45.157543Z",
-        "live_metrics_updated_at": "2026-06-14T01:21:39.368Z",
+        "captured_at": "2026-06-14T01:27:48.089410Z",
+        "live_metrics_updated_at": "2026-06-14T01:27:42.520Z",
         "youtube": {
           "subscribers": 5,
           "total_views": 251,
@@ -1154,7 +1161,7 @@
     },
     "social_execution_summary": {
       "ok": true,
-      "updated_at": "2026-06-14T01:21:45.055703Z",
+      "updated_at": "2026-06-14T01:27:48.012448Z",
       "http_status": 200,
       "execution_count": 6,
       "posted_count": 0,
@@ -1329,10 +1336,10 @@
       "available": true,
       "safe_mode": true,
       "finalized": true,
-      "finished_at": "2026-06-14T01:21:45.820394Z",
-      "duration_seconds": 8.83,
-      "command_count": 13,
-      "passed": 13,
+      "finished_at": "2026-06-14T01:27:48.796542Z",
+      "duration_seconds": 7.38,
+      "command_count": 14,
+      "passed": 14,
       "failed": 0,
       "allowed_failures": 0,
       "failed_commands": [],
@@ -1374,18 +1381,18 @@
       "stale": 1,
       "missing": 0,
       "checked_no_change": 1,
-      "checked_at": "2026-06-14T01:21:45.846668+00:00"
+      "checked_at": "2026-06-14T01:27:48.827896+00:00"
     },
     "sources": [
       {
         "name": "release_status",
         "path": "data/distrokid_release_status.json",
         "status": "checked_no_change",
-        "age_hours": 119.6,
+        "age_hours": 119.7,
         "max_age_hours": 72,
         "timestamp": "2026-06-09T01:47:42+00:00",
         "refresh_command": "Store checks are current; update data/distrokid_release_status.json when a verified public URL appears.",
-        "checked_at": "2026-06-14T01:21:45.846668+00:00",
+        "checked_at": "2026-06-14T01:27:48.827896+00:00",
         "checked_age_hours": 0.0,
         "evidence": "7 pending store links checked; no new public URLs found."
       },
@@ -1393,7 +1400,7 @@
         "name": "scheduled_posts",
         "path": "admin/future-posts.json",
         "status": "fresh",
-        "age_hours": 28.4,
+        "age_hours": 28.5,
         "max_age_hours": 72,
         "timestamp": "2026-06-12T20:56:00.115863+00:00",
         "refresh_command": "python3 scripts/sync_future_posts.py"
@@ -1404,14 +1411,14 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T01:21:45.121169+00:00",
+        "timestamp": "2026-06-14T01:27:48.051841+00:00",
         "refresh_command": "python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
         "name": "published_log",
         "path": "admin/content/Published_Log.csv",
         "status": "fresh",
-        "age_hours": 156.8,
+        "age_hours": 156.9,
         "max_age_hours": 168,
         "timestamp": "2026-06-07T12:36:37.141276+00:00",
         "refresh_command": "Export or append latest published posts to admin/content/Published_Log.csv."
@@ -1420,7 +1427,7 @@
         "name": "manual_metrics",
         "path": "data/manual_social_stats.json",
         "status": "stale",
-        "age_hours": 153.6,
+        "age_hours": 153.7,
         "max_age_hours": 72,
         "timestamp": "2026-06-07T15:47:26.729764+00:00",
         "refresh_command": "Update data/manual_social_stats.json with latest manual metrics."
@@ -1431,7 +1438,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T01:21:39.368000+00:00",
+        "timestamp": "2026-06-14T01:27:42.520000+00:00",
         "refresh_command": "python3 scripts/capture_live_metrics.py"
       },
       {
@@ -1440,7 +1447,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T01:21:45.157543+00:00",
+        "timestamp": "2026-06-14T01:27:48.089410+00:00",
         "refresh_command": "python3 scripts/update_metrics_history.py --refresh-admin"
       },
       {
@@ -1449,7 +1456,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T01:21:44.121379+00:00",
+        "timestamp": "2026-06-14T01:27:47.163640+00:00",
         "refresh_command": "python3 scripts/capture_executor_readiness.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -1458,7 +1465,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T01:21:45.846668+00:00",
+        "timestamp": "2026-06-14T01:27:48.827896+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin"
       },
       {
@@ -1467,7 +1474,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T01:21:45.055703+00:00",
+        "timestamp": "2026-06-14T01:27:48.012448+00:00",
         "refresh_command": "python3 scripts/capture_social_executions.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -1476,7 +1483,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T01:21:45.820733+00:00",
+        "timestamp": "2026-06-14T01:27:48.796969+00:00",
         "refresh_command": "python3 scripts/refresh_promo_admin.py"
       },
       {
@@ -1485,7 +1492,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T01:21:45.617730+00:00",
+        "timestamp": "2026-06-14T01:27:48.561708+00:00",
         "refresh_command": "python3 scripts/capture_github_workflow_status.py && python3 scripts/update_promo_engine_status.py"
       }
     ],
@@ -1624,7 +1631,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-14T01:21:39.382226Z",
+            "updated_at": "2026-06-14T01:27:42.568331Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
           }
         },
@@ -1635,7 +1642,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-14T01:21:40.562473Z",
+            "updated_at": "2026-06-14T01:27:43.707564Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
           }
         },
@@ -1646,7 +1653,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-14T01:21:40.916006Z",
+            "updated_at": "2026-06-14T01:27:44.044969Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
           }
         }
@@ -1743,7 +1750,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-14T01:21:40.991935Z",
+            "updated_at": "2026-06-14T01:27:44.096303Z",
             "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
           }
         },
@@ -1754,7 +1761,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-14T01:21:42.096526Z",
+            "updated_at": "2026-06-14T01:27:45.254736Z",
             "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
           }
         },
@@ -1765,7 +1772,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-14T01:21:42.168107Z",
+            "updated_at": "2026-06-14T01:27:45.312580Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release."
           }
         },
@@ -1776,7 +1783,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-14T01:21:43.921128Z",
+            "updated_at": "2026-06-14T01:27:46.949414Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
           }
         }
@@ -1905,7 +1912,7 @@
 }</script>
 
 <script type="application/json" id="embedded-promo-queue-plan">{
-  "generated_at": "2026-06-13T21:21:45.121169-04:00",
+  "generated_at": "2026-06-13T21:27:48.051841-04:00",
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
     "release_status": "data/distrokid_release_status.json"
@@ -2007,7 +2014,7 @@
   },
   "readiness_audit": {
     "source": "data/executor_readiness_snapshot.json",
-    "updated_at": "2026-06-14T01:21:44.121379Z",
+    "updated_at": "2026-06-14T01:27:47.163640Z",
     "ok": true,
     "counts": {
       "blocked": 1,
@@ -2215,7 +2222,7 @@
 
 
 <script type="application/json" id="embedded-promo-operations-packet">{
-  "generated_at": "2026-06-14T01:21:45.713597Z",
+  "generated_at": "2026-06-14T01:27:48.646496Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -2626,11 +2633,11 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "Spotify",
-        "checked_at": "2026-06-14T01:21:39.382226Z",
+        "checked_at": "2026-06-14T01:27:42.568331Z",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-14T01:21:39.382226Z",
+          "updated_at": "2026-06-14T01:27:42.568331Z",
           "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
         },
         "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -2653,11 +2660,11 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "Apple Music",
-        "checked_at": "2026-06-14T01:21:40.562473Z",
+        "checked_at": "2026-06-14T01:27:43.707564Z",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-14T01:21:40.562473Z",
+          "updated_at": "2026-06-14T01:27:43.707564Z",
           "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
         },
         "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -2680,11 +2687,11 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "HyperFollow",
-        "checked_at": "2026-06-14T01:21:40.916006Z",
+        "checked_at": "2026-06-14T01:27:44.044969Z",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-14T01:21:40.916006Z",
+          "updated_at": "2026-06-14T01:27:44.044969Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
         },
         "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -2707,11 +2714,11 @@
       "context": {
         "release": "Analog Myth",
         "service": "Spotify",
-        "checked_at": "2026-06-14T01:21:40.991935Z",
+        "checked_at": "2026-06-14T01:27:44.096303Z",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/spotify_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-14T01:21:40.991935Z",
+          "updated_at": "2026-06-14T01:27:44.096303Z",
           "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
         },
         "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -2734,11 +2741,11 @@
       "context": {
         "release": "Analog Myth",
         "service": "Apple Music",
-        "checked_at": "2026-06-14T01:21:42.096526Z",
+        "checked_at": "2026-06-14T01:27:45.254736Z",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-14T01:21:42.096526Z",
+          "updated_at": "2026-06-14T01:27:45.254736Z",
           "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
         },
         "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -2761,11 +2768,11 @@
       "context": {
         "release": "Analog Myth",
         "service": "YouTube Music",
-        "checked_at": "2026-06-14T01:21:42.168107Z",
+        "checked_at": "2026-06-14T01:27:45.312580Z",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-14T01:21:42.168107Z",
+          "updated_at": "2026-06-14T01:27:45.312580Z",
           "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release."
         },
         "note": "Searches public web results for YouTube Music watch URLs, then validates the public title. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -2788,11 +2795,11 @@
       "context": {
         "release": "Analog Myth",
         "service": "HyperFollow",
-        "checked_at": "2026-06-14T01:21:43.921128Z",
+        "checked_at": "2026-06-14T01:27:46.949414Z",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-14T01:21:43.921128Z",
+          "updated_at": "2026-06-14T01:27:46.949414Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
         },
         "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -2954,7 +2961,7 @@
 
 <script type="text/plain" id="embedded-promo-operations-report"># Promo Operations Packet - Lily Roo
 
-Generated: 2026-06-14T01:21:45.713597Z
+Generated: 2026-06-14T01:27:48.646496Z
 
 ## Summary
 - Actions: **22**
@@ -3040,12 +3047,12 @@ Generated: 2026-06-14T01:21:45.713597Z
 - **[medium] Re-check Twelve Dollars on Spotify**
   - Why: Public store links should be checked until DistroKid exposes them.
   - Detail: Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release.
-  - Latest snapshot checked: `2026-06-14T01:21:39.382226Z`
+  - Latest snapshot checked: `2026-06-14T01:27:42.568331Z`
   - Command: `python3 scripts/search_spotify_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/spotify_release_snapshot.json'`
 - **[medium] Re-check Twelve Dollars on Apple Music**
   - Why: Public store links should be checked until DistroKid exposes them.
   - Detail: Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release.
-  - Latest snapshot checked: `2026-06-14T01:21:40.562473Z`
+  - Latest snapshot checked: `2026-06-14T01:27:43.707564Z`
   - Command: `python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/apple_music_release_snapshot.json'`
 
 ## Guardrails
@@ -3056,7 +3063,7 @@ Generated: 2026-06-14T01:21:45.713597Z
 
 <script type="text/plain" id="embedded-manual-metric-collection"># Manual Metric Collection - Lily Roo
 
-Generated: 2026-06-14T01:21:45.792697Z
+Generated: 2026-06-14T01:27:48.763082Z
 
 Pending fields: **11**
 
@@ -3128,7 +3135,7 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
 
 
 <script type="application/json" id="embedded-platform-repair-status">{
-  "generated_at": "2026-06-14T01:21:45.767451Z",
+  "generated_at": "2026-06-14T01:27:48.733744Z",
   "safe_mode": true,
   "source": {
     "promo_operations_packet": "data/promo_operations_packet.json",
@@ -3221,7 +3228,7 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
 
 
 <script type="application/json" id="embedded-approval-runway">{
-  "generated_at": "2026-06-14T01:21:45.741694Z",
+  "generated_at": "2026-06-14T01:27:48.677440Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -3341,7 +3348,7 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
 
 <script type="text/plain" id="embedded-approval-runway-report"># Approval Runway - Lily Roo
 
-Generated: 2026-06-14T01:21:45.741694Z
+Generated: 2026-06-14T01:27:48.677440Z
 
 ## Summary
 - Drafts needing review: **6**
@@ -3393,6 +3400,180 @@ Generated: 2026-06-14T01:21:45.741694Z
 - This runway does not approve, apply, publish, or post anything.
 - Run preview commands first, then approval commands only after copy review.
 - Applying approved rows to the live queue remains a separate deliberate step.</script>
+
+
+<script type="application/json" id="embedded-subscriber-cta-audit">{
+  "generated_at": "2026-06-14T01:27:48.705234Z",
+  "safe_mode": true,
+  "source": {
+    "promo_queue_plan": "data/promo_queue_plan.json",
+    "approval_runway": "data/approval_runway.json"
+  },
+  "summary": {
+    "draft_count": 6,
+    "selected_hard_cta_count": 0,
+    "subscriber_swap_count": 6,
+    "ready_after_approval_swap_count": 3,
+    "recommended_swap_ids": [
+      "FP-PLAN-TWELVE-DOLLARS-X",
+      "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+      "FP-PLAN-TWELVE-DOLLARS-TIKTOK",
+      "FP-PLAN-TWELVE-DOLLARS-FACEBOOK",
+      "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+      "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY"
+    ],
+    "ready_after_approval_swap_ids": [
+      "FP-PLAN-TWELVE-DOLLARS-X",
+      "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+      "FP-PLAN-TWELVE-DOLLARS-FACEBOOK"
+    ]
+  },
+  "rows": [
+    {
+      "id": "FP-PLAN-TWELVE-DOLLARS-X",
+      "release": "Twelve Dollars",
+      "platform": "X",
+      "approved": "no",
+      "readiness_state": "ready_after_approval",
+      "selected_strength": "soft_listen",
+      "recommended_strength": "hard_goal",
+      "selected_text": "Twelve Dollars is the part where the stage gets too bright and the joke gets honest. Full album playlist is live.",
+      "recommended_text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
+      "needs_subscriber_cta_swap": true,
+      "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-X --dry-run",
+      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-X --refresh-admin",
+      "action": "Use the stronger subscriber CTA variant before approval."
+    },
+    {
+      "id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+      "release": "Twelve Dollars",
+      "platform": "Instagram",
+      "approved": "no",
+      "readiness_state": "ready_after_approval",
+      "selected_strength": "youtube_link",
+      "recommended_strength": "hard_goal",
+      "selected_text": "Twelve Dollars is live on YouTube: stage lights, scattered bills, impossible shoes, and one very stubborn little signal.",
+      "recommended_text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
+      "needs_subscriber_cta_swap": true,
+      "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --dry-run",
+      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --refresh-admin",
+      "action": "Use the stronger subscriber CTA variant before approval."
+    },
+    {
+      "id": "FP-PLAN-TWELVE-DOLLARS-TIKTOK",
+      "release": "Twelve Dollars",
+      "platform": "TikTok",
+      "approved": "no",
+      "readiness_state": "blocked",
+      "selected_strength": "soft_listen",
+      "recommended_strength": "hard_goal",
+      "selected_text": "Twelve Dollars is what happens when the joke walks on stage wearing impossible shoes. Full album playlist is live.",
+      "recommended_text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
+      "needs_subscriber_cta_swap": true,
+      "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --dry-run",
+      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --refresh-admin",
+      "action": "Use the stronger subscriber CTA variant before approval."
+    },
+    {
+      "id": "FP-PLAN-TWELVE-DOLLARS-FACEBOOK",
+      "release": "Twelve Dollars",
+      "platform": "Facebook",
+      "approved": "no",
+      "readiness_state": "ready_after_approval",
+      "selected_strength": "soft_listen",
+      "recommended_strength": "hard_goal",
+      "selected_text": "Twelve Dollars is live in the Lily Roo archive. The remastered videos are up, the playlist is public, and the stage finally has the right kind of trouble on it.",
+      "recommended_text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
+      "needs_subscriber_cta_swap": true,
+      "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --dry-run",
+      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --refresh-admin",
+      "action": "Use the stronger subscriber CTA variant before approval."
+    },
+    {
+      "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+      "release": "Twelve Dollars",
+      "platform": "YouTube Community",
+      "approved": "no",
+      "readiness_state": "manual_only",
+      "selected_strength": "soft_listen",
+      "recommended_strength": "hard_goal",
+      "selected_text": "New album transmission: Twelve Dollars. Remastered videos, updated art, full playlist live now.",
+      "recommended_text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
+      "needs_subscriber_cta_swap": true,
+      "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
+      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+      "action": "Use the stronger subscriber CTA variant before approval."
+    },
+    {
+      "id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+      "release": "Analog Myth",
+      "platform": "YouTube Community",
+      "approved": "no",
+      "readiness_state": "manual_only",
+      "selected_strength": "missing",
+      "recommended_strength": "hard_goal",
+      "selected_text": "Analog Myth transmission is live: 13, Girls Camp, Analog Myth, Spilling the Tea, No Mortgage, Guards Down, Slow Walk, The Power of Light.",
+      "recommended_text": "Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
+      "needs_subscriber_cta_swap": true,
+      "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --dry-run",
+      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin",
+      "action": "Use the stronger subscriber CTA variant before approval."
+    }
+  ]
+}</script>
+
+
+<script type="text/plain" id="embedded-subscriber-cta-audit-report"># Subscriber CTA Audit - Lily Roo
+
+Generated: 2026-06-14T01:27:48.705234Z
+
+## Summary
+- Draft posts: **6**
+- Selected hard CTAs: **0**
+- Stronger subscriber variants available: **6**
+- Ready-after-approval swaps: **3**
+
+## CTA Review Queue
+- **X - Twelve Dollars** (`FP-PLAN-TWELVE-DOLLARS-X`)
+  - Selected strength: `soft_listen`; recommended: `hard_goal`
+  - Action: Use the stronger subscriber CTA variant before approval.
+  - Recommended copy: Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.
+  - Preview: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-X --dry-run`
+  - Approve after CTA review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-X --refresh-admin`
+- **Instagram - Twelve Dollars** (`FP-PLAN-TWELVE-DOLLARS-INSTAGRAM`)
+  - Selected strength: `youtube_link`; recommended: `hard_goal`
+  - Action: Use the stronger subscriber CTA variant before approval.
+  - Recommended copy: Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.
+  - Preview: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --dry-run`
+  - Approve after CTA review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --refresh-admin`
+- **TikTok - Twelve Dollars** (`FP-PLAN-TWELVE-DOLLARS-TIKTOK`)
+  - Selected strength: `soft_listen`; recommended: `hard_goal`
+  - Action: Use the stronger subscriber CTA variant before approval.
+  - Recommended copy: Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.
+  - Preview: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --dry-run`
+  - Approve after CTA review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --refresh-admin`
+- **Facebook - Twelve Dollars** (`FP-PLAN-TWELVE-DOLLARS-FACEBOOK`)
+  - Selected strength: `soft_listen`; recommended: `hard_goal`
+  - Action: Use the stronger subscriber CTA variant before approval.
+  - Recommended copy: Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.
+  - Preview: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --dry-run`
+  - Approve after CTA review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --refresh-admin`
+- **YouTube Community - Twelve Dollars** (`FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY`)
+  - Selected strength: `soft_listen`; recommended: `hard_goal`
+  - Action: Use the stronger subscriber CTA variant before approval.
+  - Recommended copy: Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.
+  - Preview: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run`
+  - Approve after CTA review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin`
+- **YouTube Community - Analog Myth** (`FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY`)
+  - Selected strength: `missing`; recommended: `hard_goal`
+  - Action: Use the stronger subscriber CTA variant before approval.
+  - Recommended copy: Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.
+  - Preview: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --dry-run`
+  - Approve after CTA review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin`
+
+## Guardrails
+- This audit does not edit, approve, apply, publish, or post anything.
+- Use it to choose stronger copy before running approval commands.</script>
 
 <script>
   const ADMIN_AUTH_KEY='lilyroo_admin_password_v1';
@@ -3520,6 +3701,7 @@ Generated: 2026-06-14T01:21:45.741694Z
     'reports/promo-operations-packet.md':'embedded-promo-operations-report',
     'reports/manual-metric-collection.md':'embedded-manual-metric-collection',
     'reports/approval-runway.md':'embedded-approval-runway-report',
+    'reports/subscriber-cta-audit.md':'embedded-subscriber-cta-audit-report',
     'content/Published_Log.csv':'embedded-published-log'
   };
   const EMBEDDED_JSON_ASSETS={
@@ -3528,7 +3710,8 @@ Generated: 2026-06-14T01:21:45.741694Z
     'data/promo_engine_status.json':'embedded-promo-engine-status',
     'data/promo_queue_plan.json':'embedded-promo-queue-plan',
     'data/promo_operations_packet.json':'embedded-promo-operations-packet',
-    'data/approval_runway.json':'embedded-approval-runway'
+    'data/approval_runway.json':'embedded-approval-runway',
+    'data/subscriber_cta_audit.json':'embedded-subscriber-cta-audit'
   };
   const BACKSTORY_DOCS=[
     {id:'canon',category:'Canon',title:'Canon Spine',url:'content/00_CANON.md',summary:'Mission, identity, recurring themes, origin story, objects, and era anchors.'},
@@ -4712,6 +4895,48 @@ Generated: 2026-06-14T01:21:45.741694Z
     root.innerHTML=`${intro}${items}${more}`;
   }
 
+  function renderSubscriberCtaAudit(audit){
+    const root=document.getElementById('subscriber-cta-audit');
+    if(!root) return;
+    const rows=Array.isArray(audit?.rows)?audit.rows:[];
+    const summary=audit?.summary||{};
+    if(!rows.length){
+      root.innerHTML='<div class="muted">No subscriber CTA audit available.</div>';
+      return;
+    }
+    const swapRows=rows.filter(row=>row.needs_subscriber_cta_swap);
+    const meta=[
+      `${Number(summary.draft_count||rows.length)} drafts`,
+      `${Number(summary.selected_hard_cta_count||0)} selected hard CTAs`,
+      `${Number(summary.subscriber_swap_count||swapRows.length)} stronger variants`,
+      `${Number(summary.ready_after_approval_swap_count||0)} ready swaps`
+    ].join(' - ');
+    const intro=`<div class="queue-item">
+      <div class="queue-top">
+        <div>
+          <div class="queue-title">${escapeHtml(Number(summary.subscriber_swap_count||0))} subscriber CTA swaps available</div>
+          <div class="queue-meta">${escapeHtml(meta)}</div>
+          <div class="queue-meta">Use the harder subscribe variant before approval when the goal is YouTube monetization.</div>
+        </div>
+        <span class="status-chip ${Number(summary.subscriber_swap_count||0)?'warn':'ok'}">${escapeHtml(Number(summary.subscriber_swap_count||0))}</span>
+      </div>
+    </div>`;
+    const items=(swapRows.length?swapRows:rows).slice(0,5).map(row=>`<div class="queue-item">
+      <div class="queue-top">
+        <div>
+          <div class="queue-title">${escapeHtml(row.platform||'Platform')} - ${escapeHtml(row.release||'Release')}</div>
+          <div class="queue-meta">${escapeHtml(row.id||'draft')} - selected ${escapeHtml(row.selected_strength||'unknown')} - recommended ${escapeHtml(row.recommended_strength||'unknown')}</div>
+          ${row.action?`<div class="queue-meta">${escapeHtml(row.action)}</div>`:''}
+          ${row.recommended_text?`<div class="queue-meta">${escapeHtml(row.recommended_text)}</div>`:''}
+          ${row.approval_preview_command?`<div class="queue-meta">${escapeHtml(row.approval_preview_command)}</div>`:''}
+        </div>
+        <span class="status-chip ${row.needs_subscriber_cta_swap?'warn':'neutral'}">${escapeHtml(row.needs_subscriber_cta_swap?'Swap':'Review')}</span>
+      </div>
+    </div>`).join('');
+    const more=(swapRows.length?swapRows:rows).length>5?`<div class="queue-meta">${escapeHtml((swapRows.length?swapRows:rows).length-5)} more CTA row${(swapRows.length?swapRows:rows).length-5===1?'':'s'} in data/subscriber_cta_audit.json.</div>`:'';
+    root.innerHTML=`${intro}${items}${more}`;
+  }
+
   function renderPromoQueuePlan(plan){
     const root=document.getElementById('promo-queue-plan');
     if(!root) return;
@@ -4857,7 +5082,7 @@ Generated: 2026-06-14T01:21:45.741694Z
 
   async function loadReportsDashboard(){
     if(!document.getElementById('reports-period')) return;
-    const [md,publishedCsv,queuePayload,releaseStatus,promoHealth,promoPlan,promoOps,approvalRunway,readiness,metrics,executions]=await Promise.all([
+    const [md,publishedCsv,queuePayload,releaseStatus,promoHealth,promoPlan,promoOps,approvalRunway,subscriberCtaAudit,readiness,metrics,executions]=await Promise.all([
       fetchTextOrEmpty(localPath('/admin/reports/weekly-social-report.md')),
       fetchTextOrEmpty(localPath('/admin/content/Published_Log.csv')),
       fetchJsonOr(localPath('/admin/future-posts.json'),{}),
@@ -4866,6 +5091,7 @@ Generated: 2026-06-14T01:21:45.741694Z
       fetchJsonOr(localPath('/data/promo_queue_plan.json'),{}),
       fetchJsonOr(localPath('/data/promo_operations_packet.json'),{}),
       fetchJsonOr(localPath('/data/approval_runway.json'),{}),
+      fetchJsonOr(localPath('/data/subscriber_cta_audit.json'),{}),
       readinessPromise,
       metricsPromise,
       executionsPromise
@@ -4884,6 +5110,7 @@ Generated: 2026-06-14T01:21:45.741694Z
     renderPromoHealth(promoHealth);
     renderPromoOperationsPacket(promoOps);
     renderApprovalRunway(approvalRunway);
+    renderSubscriberCtaAudit(subscriberCtaAudit);
     renderPromoQueuePlan(promoPlan);
     renderPipelineHealth(queuePayload,readiness,report,metrics);
     renderNextPosts(queuePayload,executions);

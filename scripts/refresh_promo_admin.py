@@ -79,6 +79,11 @@ FINALIZE_STEPS = [
         "required": True,
     },
     {
+        "name": "build_subscriber_cta_audit",
+        "command": ["python3", "scripts/build_subscriber_cta_audit.py"],
+        "required": True,
+    },
+    {
         "name": "build_platform_repair_status",
         "command": ["python3", "scripts/build_platform_repair_status.py"],
         "required": True,
