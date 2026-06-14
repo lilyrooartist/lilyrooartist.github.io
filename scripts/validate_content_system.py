@@ -35,6 +35,7 @@ TWELVE_DOLLARS_PLAYLIST = ROOT / "data" / "youtube_twelve_dollars_playlist.json"
 PROMO_QUEUE_APPLY = ROOT / "scripts" / "apply_promo_queue_plan.py"
 PROMO_QUEUE_APPROVE = ROOT / "scripts" / "approve_promo_queue_plan.py"
 SCHEDULED_POST_APPROVAL = ROOT / "scripts" / "update_scheduled_post_approval.py"
+SCHEDULED_POST_RESCHEDULE = ROOT / "scripts" / "reschedule_scheduled_posts.py"
 MANUAL_METRICS_UPDATER = ROOT / "scripts" / "update_manual_social_stats.py"
 STORE_LINK_VERIFIER = ROOT / "scripts" / "verify_pending_store_links.py"
 SPOTIFY_SEARCH_VERIFIER = ROOT / "scripts" / "search_spotify_release.py"
@@ -509,6 +510,18 @@ def validate_generated_outputs(failures):
             ok("promo engine tracks monetization queue pressure")
         else:
             fail("promo_engine_status.json missing monetization queue pressure", failures)
+        preview_command = monetization.get("backlog_reschedule_preview_command") or ""
+        apply_command = monetization.get("backlog_reschedule_apply_command") or ""
+        if (
+            "scripts/reschedule_scheduled_posts.py" in preview_command
+            and "--approved-backlog" in preview_command
+            and "--start-at" in preview_command
+            and "--apply" not in preview_command
+            and "--apply --refresh-admin" in apply_command
+        ):
+            ok("promo engine includes dry-run backlog reschedule command")
+        else:
+            fail("promo_engine_status.json missing safe backlog reschedule command", failures)
         automation = kpi.get("refresh_automation") or {}
         if (
             automation.get("configured") is True
@@ -736,6 +749,14 @@ def validate_generated_outputs(failures):
             fail("update_scheduled_post_approval.py missing scheduled queue refresh support", failures)
     else:
         fail("update_scheduled_post_approval.py missing", failures)
+    if SCHEDULED_POST_RESCHEDULE.exists():
+        reschedule_text = SCHEDULED_POST_RESCHEDULE.read_text(encoding="utf-8")
+        if "--approved-backlog" in reschedule_text and "--apply" in reschedule_text and "Dry run only" in reschedule_text and "Published_Log.csv" in reschedule_text:
+            ok("scheduled post reschedule script supports dry-run approved backlog previews")
+        else:
+            fail("reschedule_scheduled_posts.py missing dry-run approved backlog support", failures)
+    else:
+        fail("reschedule_scheduled_posts.py missing", failures)
     if MANUAL_METRICS_UPDATER.exists():
         ok("manual social stats updater present")
         updater_text = MANUAL_METRICS_UPDATER.read_text(encoding="utf-8")

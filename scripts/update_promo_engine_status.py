@@ -5,7 +5,7 @@ import csv
 import json
 import re
 from collections import Counter
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 
@@ -25,6 +25,7 @@ SCHEDULED = ROOT / "data" / "scheduled_posts.csv"
 PROMO_QUEUE_PLAN = ROOT / "data" / "promo_queue_plan.json"
 PUBLISHED = ROOT / "admin" / "content" / "Published_Log.csv"
 FUTURE_POSTS = ROOT / "admin" / "future-posts.json"
+RESCHEDULE_SCRIPT = ROOT / "scripts" / "reschedule_scheduled_posts.py"
 OUT = ROOT / "data" / "promo_engine_status.json"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
 
@@ -453,6 +454,9 @@ def monetization_state(metrics: dict, history: dict, promo_plan: dict, future_po
     ready_to_apply = int_metric(apply_preview.get("ready_to_apply_posts"))
     approval_blockers = int_metric(execution_state.get("approval_needed_count"))
     platform_fix_blockers = int_metric(execution_state.get("platform_fix_needed_count"))
+    reschedule_start = (datetime.now().astimezone() + timedelta(days=1)).replace(hour=10, minute=0, second=0, microsecond=0).isoformat()
+    reschedule_preview_command = f"python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at {shell_quote(reschedule_start)} --spacing-hours 24"
+    reschedule_apply_command = reschedule_preview_command + " --apply --refresh-admin"
     next_pressure = []
     if approved_upcoming <= 0 and review_posts > 0:
         next_pressure.append("No approved upcoming posts; review draft promo queue rows to restart subscriber-growth distribution.")
@@ -478,6 +482,8 @@ def monetization_state(metrics: dict, history: dict, promo_plan: dict, future_po
         "ready_to_apply_posts": ready_to_apply,
         "approval_blockers": approval_blockers,
         "platform_fix_blockers": platform_fix_blockers,
+        "backlog_reschedule_preview_command": reschedule_preview_command,
+        "backlog_reschedule_apply_command": reschedule_apply_command,
         "next_pressure": next_pressure,
     }
 
@@ -1004,6 +1010,8 @@ def build_status():
     for pressure in reversed(monetization["next_pressure"]):
         if pressure not in all_actions:
             all_actions.insert(0, pressure)
+    if monetization.get("approved_backlog_posts") and monetization.get("backlog_reschedule_preview_command"):
+        all_actions.insert(0, f"Preview approved backlog reschedule: {monetization['backlog_reschedule_preview_command']}")
     return {
         "generated_at": now.isoformat(),
         "source": {

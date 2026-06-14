@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-14T00:56:29.819573+00:00",
+  "generated_at": "2026-06-14T01:00:44.408194+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -33,6 +33,8 @@
       "ready_to_apply_posts": 0,
       "approval_blockers": 3,
       "platform_fix_blockers": 3,
+      "backlog_reschedule_preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-14T10:00:00-04:00' --spacing-hours 24",
+      "backlog_reschedule_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-14T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
       "next_pressure": [
         "No approved upcoming posts; review draft promo queue rows to restart subscriber-growth distribution.",
         "3 approved unpublished posts are past their scheduled time; repair executor/platform blockers or reschedule them.",
@@ -471,7 +473,7 @@
     "score": 0,
     "healthy_releases": 0,
     "tracked_releases": 3,
-    "open_action_count": 16,
+    "open_action_count": 17,
     "fresh_sources": 10,
     "stale_sources": 1,
     "missing_sources": 0
@@ -482,18 +484,18 @@
       "stale": 1,
       "missing": 0,
       "checked_no_change": 1,
-      "checked_at": "2026-06-14T00:56:29.819573+00:00"
+      "checked_at": "2026-06-14T01:00:44.408194+00:00"
     },
     "sources": [
       {
         "name": "release_status",
         "path": "data/distrokid_release_status.json",
         "status": "checked_no_change",
-        "age_hours": 119.1,
+        "age_hours": 119.2,
         "max_age_hours": 72,
         "timestamp": "2026-06-09T01:47:42+00:00",
         "refresh_command": "Store checks are current; update data/distrokid_release_status.json when a verified public URL appears.",
-        "checked_at": "2026-06-14T00:56:29.819573+00:00",
+        "checked_at": "2026-06-14T01:00:44.408194+00:00",
         "checked_age_hours": 0.0,
         "evidence": "7 pending store links checked; no new public URLs found."
       },
@@ -501,7 +503,7 @@
         "name": "scheduled_posts",
         "path": "admin/future-posts.json",
         "status": "fresh",
-        "age_hours": 28.0,
+        "age_hours": 28.1,
         "max_age_hours": 72,
         "timestamp": "2026-06-12T20:56:00.115863+00:00",
         "refresh_command": "python3 scripts/sync_future_posts.py"
@@ -510,7 +512,7 @@
         "name": "promo_queue_plan",
         "path": "data/promo_queue_plan.json",
         "status": "fresh",
-        "age_hours": 0.1,
+        "age_hours": 0.2,
         "max_age_hours": 24,
         "timestamp": "2026-06-14T00:50:05.142702+00:00",
         "refresh_command": "python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
@@ -519,7 +521,7 @@
         "name": "published_log",
         "path": "admin/content/Published_Log.csv",
         "status": "fresh",
-        "age_hours": 156.3,
+        "age_hours": 156.4,
         "max_age_hours": 168,
         "timestamp": "2026-06-07T12:36:37.141276+00:00",
         "refresh_command": "Export or append latest published posts to admin/content/Published_Log.csv."
@@ -537,7 +539,7 @@
         "name": "live_metrics",
         "path": "data/live_social_metrics.json",
         "status": "fresh",
-        "age_hours": 0.1,
+        "age_hours": 0.2,
         "max_age_hours": 24,
         "timestamp": "2026-06-14T00:49:57.107000+00:00",
         "refresh_command": "python3 scripts/capture_live_metrics.py"
@@ -546,7 +548,7 @@
         "name": "metrics_history",
         "path": "data/metrics_history.json",
         "status": "fresh",
-        "age_hours": 0.1,
+        "age_hours": 0.2,
         "max_age_hours": 24,
         "timestamp": "2026-06-14T00:50:05.179216+00:00",
         "refresh_command": "python3 scripts/update_metrics_history.py --refresh-admin"
@@ -555,7 +557,7 @@
         "name": "executor_readiness",
         "path": "data/executor_readiness_snapshot.json",
         "status": "fresh",
-        "age_hours": 0.1,
+        "age_hours": 0.2,
         "max_age_hours": 24,
         "timestamp": "2026-06-14T00:50:04.156943+00:00",
         "refresh_command": "python3 scripts/capture_executor_readiness.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
@@ -566,14 +568,14 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T00:56:29.819573+00:00",
+        "timestamp": "2026-06-14T01:00:44.408194+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin"
       },
       {
         "name": "social_executions",
         "path": "data/social_execution_snapshot.json",
         "status": "fresh",
-        "age_hours": 0.1,
+        "age_hours": 0.2,
         "max_age_hours": 24,
         "timestamp": "2026-06-14T00:50:05.099350+00:00",
         "refresh_command": "python3 scripts/capture_social_executions.py && python3 scripts/update_promo_engine_status.py"
@@ -582,7 +584,7 @@
         "name": "promo_refresh_run",
         "path": "data/promo_admin_refresh_run.json",
         "status": "fresh",
-        "age_hours": 0.1,
+        "age_hours": 0.2,
         "max_age_hours": 24,
         "timestamp": "2026-06-14T00:51:02.946778+00:00",
         "refresh_command": "python3 scripts/refresh_promo_admin.py"
@@ -591,7 +593,7 @@
         "name": "promo_refresh_workflow_status",
         "path": "data/promo_refresh_workflow_status.json",
         "status": "fresh",
-        "age_hours": 0.1,
+        "age_hours": 0.2,
         "max_age_hours": 24,
         "timestamp": "2026-06-14T00:50:11.363764+00:00",
         "refresh_command": "python3 scripts/capture_github_workflow_status.py && python3 scripts/update_promo_engine_status.py"
@@ -928,13 +930,13 @@
     }
   ],
   "next_actions": [
+    "Preview approved backlog reschedule: python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-14T10:00:00-04:00' --spacing-hours 24",
     "No approved upcoming posts; review draft promo queue rows to restart subscriber-growth distribution.",
     "3 approved unpublished posts are past their scheduled time; repair executor/platform blockers or reschedule them.",
     "3 executor records are blocked by approval.",
     "3 executor records need platform repair before they can publish.",
     "Review approval blockers for 3 queued executor records.",
     "Fix social executor platform failures for Facebook, Instagram, TikTok.",
-    "Refresh manual metrics: fill data/manual_metric_collection_template.csv, preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run, then import with python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin.",
-    "I Learned It All in Fifteen Seconds: Fill manual metric worksheet and import it before weekly reporting."
+    "Refresh manual metrics: fill data/manual_metric_collection_template.csv, preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run, then import with python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin."
   ]
 }
