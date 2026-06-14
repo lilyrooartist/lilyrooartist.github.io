@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-14T01:32:28.089070Z",
+  "generated_at": "2026-06-14T01:36:52.076558Z",
   "safe_mode": true,
   "source": {
     "promo_queue_plan": "data/promo_queue_plan.json",
@@ -7,22 +7,11 @@
   },
   "summary": {
     "draft_count": 6,
-    "selected_hard_cta_count": 0,
-    "subscriber_swap_count": 6,
-    "ready_after_approval_swap_count": 3,
-    "recommended_swap_ids": [
-      "FP-PLAN-TWELVE-DOLLARS-X",
-      "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
-      "FP-PLAN-TWELVE-DOLLARS-TIKTOK",
-      "FP-PLAN-TWELVE-DOLLARS-FACEBOOK",
-      "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
-      "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY"
-    ],
-    "ready_after_approval_swap_ids": [
-      "FP-PLAN-TWELVE-DOLLARS-X",
-      "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
-      "FP-PLAN-TWELVE-DOLLARS-FACEBOOK"
-    ]
+    "selected_hard_cta_count": 6,
+    "subscriber_swap_count": 0,
+    "ready_after_approval_swap_count": 0,
+    "recommended_swap_ids": [],
+    "ready_after_approval_swap_ids": []
   },
   "rows": [
     {
@@ -31,14 +20,14 @@
       "platform": "X",
       "approved": "no",
       "readiness_state": "ready_after_approval",
-      "selected_strength": "soft_listen",
+      "selected_strength": "hard_goal",
       "recommended_strength": "hard_goal",
-      "selected_text": "Twelve Dollars is the part where the stage gets too bright and the joke gets honest. Full album playlist is live.",
+      "selected_text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
       "recommended_text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
-      "needs_subscriber_cta_swap": true,
+      "needs_subscriber_cta_swap": false,
       "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-X --dry-run",
       "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-X --refresh-admin",
-      "action": "Use the stronger subscriber CTA variant before approval."
+      "action": "Selected copy already has a hard subscriber CTA."
     },
     {
       "id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
@@ -46,14 +35,14 @@
       "platform": "Instagram",
       "approved": "no",
       "readiness_state": "ready_after_approval",
-      "selected_strength": "youtube_link",
+      "selected_strength": "hard_goal",
       "recommended_strength": "hard_goal",
-      "selected_text": "Twelve Dollars is live on YouTube: stage lights, scattered bills, impossible shoes, and one very stubborn little signal.",
+      "selected_text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
       "recommended_text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
-      "needs_subscriber_cta_swap": true,
+      "needs_subscriber_cta_swap": false,
       "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --dry-run",
       "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --refresh-admin",
-      "action": "Use the stronger subscriber CTA variant before approval."
+      "action": "Selected copy already has a hard subscriber CTA."
     },
     {
       "id": "FP-PLAN-TWELVE-DOLLARS-TIKTOK",
@@ -61,14 +50,14 @@
       "platform": "TikTok",
       "approved": "no",
       "readiness_state": "blocked",
-      "selected_strength": "soft_listen",
+      "selected_strength": "hard_goal",
       "recommended_strength": "hard_goal",
-      "selected_text": "Twelve Dollars is what happens when the joke walks on stage wearing impossible shoes. Full album playlist is live.",
+      "selected_text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
       "recommended_text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
-      "needs_subscriber_cta_swap": true,
+      "needs_subscriber_cta_swap": false,
       "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --dry-run",
       "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --refresh-admin",
-      "action": "Use the stronger subscriber CTA variant before approval."
+      "action": "Selected copy already has a hard subscriber CTA."
     },
     {
       "id": "FP-PLAN-TWELVE-DOLLARS-FACEBOOK",
@@ -76,14 +65,14 @@
       "platform": "Facebook",
       "approved": "no",
       "readiness_state": "ready_after_approval",
-      "selected_strength": "soft_listen",
+      "selected_strength": "hard_goal",
       "recommended_strength": "hard_goal",
-      "selected_text": "Twelve Dollars is live in the Lily Roo archive. The remastered videos are up, the playlist is public, and the stage finally has the right kind of trouble on it.",
+      "selected_text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
       "recommended_text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
-      "needs_subscriber_cta_swap": true,
+      "needs_subscriber_cta_swap": false,
       "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --dry-run",
       "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --refresh-admin",
-      "action": "Use the stronger subscriber CTA variant before approval."
+      "action": "Selected copy already has a hard subscriber CTA."
     },
     {
       "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
@@ -91,14 +80,14 @@
       "platform": "YouTube Community",
       "approved": "no",
       "readiness_state": "manual_only",
-      "selected_strength": "soft_listen",
+      "selected_strength": "hard_goal",
       "recommended_strength": "hard_goal",
-      "selected_text": "New album transmission: Twelve Dollars. Remastered videos, updated art, full playlist live now.",
+      "selected_text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
       "recommended_text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
-      "needs_subscriber_cta_swap": true,
+      "needs_subscriber_cta_swap": false,
       "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
       "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
-      "action": "Use the stronger subscriber CTA variant before approval."
+      "action": "Selected copy already has a hard subscriber CTA."
     },
     {
       "id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
@@ -106,14 +95,14 @@
       "platform": "YouTube Community",
       "approved": "no",
       "readiness_state": "manual_only",
-      "selected_strength": "missing",
+      "selected_strength": "hard_goal",
       "recommended_strength": "hard_goal",
-      "selected_text": "Analog Myth transmission is live: 13, Girls Camp, Analog Myth, Spilling the Tea, No Mortgage, Guards Down, Slow Walk, The Power of Light.",
+      "selected_text": "Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
       "recommended_text": "Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
-      "needs_subscriber_cta_swap": true,
+      "needs_subscriber_cta_swap": false,
       "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --dry-run",
       "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin",
-      "action": "Use the stronger subscriber CTA variant before approval."
+      "action": "Selected copy already has a hard subscriber CTA."
     }
   ]
 }

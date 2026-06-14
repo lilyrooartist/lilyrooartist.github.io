@@ -1,29 +1,29 @@
 # Monetization Activation Plan - Lily Roo
 
-Generated: 2026-06-14T01:32:28.115344Z
+Generated: 2026-06-14T01:36:52.106024Z
 
 ## Summary
 - Current subscribers: **5 / 1000**
 - Runway status: **stalled**
 - Ready subscriber CTA approvals: **3**
-- Subscriber CTA swaps available: **6**
+- Subscriber CTA swaps available: **0**
 - Platform fixes: **3**
 - Activation actions: **9**
 
 ## Activation Sequence
 1. **Review subscriber CTA for Facebook**
    - Phase: `Tighten subscriber CTA`; status: `waiting_for_review`
-   - Detail: Use the stronger subscriber CTA variant before approval. Recommended copy: Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.
+   - Detail: Selected copy already has a hard subscriber CTA. Recommended copy: Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.
    - Preview/check: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --dry-run`
    - After review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --refresh-admin`
 2. **Review subscriber CTA for Instagram**
    - Phase: `Tighten subscriber CTA`; status: `waiting_for_review`
-   - Detail: Use the stronger subscriber CTA variant before approval. Recommended copy: Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.
+   - Detail: Selected copy already has a hard subscriber CTA. Recommended copy: Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.
    - Preview/check: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --dry-run`
    - After review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --refresh-admin`
 3. **Review subscriber CTA for X**
    - Phase: `Tighten subscriber CTA`; status: `waiting_for_review`
-   - Detail: Use the stronger subscriber CTA variant before approval. Recommended copy: Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.
+   - Detail: Selected copy already has a hard subscriber CTA. Recommended copy: Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.
    - Preview/check: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-X --dry-run`
    - After review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-X --refresh-admin`
 4. **Apply approved plan rows after review**

@@ -28,6 +28,9 @@ TIME_WINDOWS = {
     "YouTube Community": (18, 30),
 }
 
+HARD_CTA_TERMS = ("subscribe", "subscribers", "1,000", "1000")
+YOUTUBE_TERMS = ("youtube", "youtu.be", "youtube.com")
+
 ASSET_MAP = {
     "Twelve Dollars": {
         "image": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
@@ -207,6 +210,44 @@ def draft_variants(title, platform):
     ]
 
 
+def cta_strength(text: str) -> str:
+    lower = str(text or "").lower()
+    has_hard = any(term in lower for term in HARD_CTA_TERMS)
+    has_youtube = any(term in lower for term in YOUTUBE_TERMS)
+    if has_hard and has_youtube:
+        return "hard_subscribe"
+    if has_hard:
+        return "hard_goal"
+    if has_youtube:
+        return "youtube_link"
+    if "playlist" in lower or "stream" in lower or "listen" in lower:
+        return "soft_listen"
+    return "missing"
+
+
+def score_strength(strength: str) -> int:
+    return {
+        "hard_subscribe": 4,
+        "hard_goal": 3,
+        "youtube_link": 2,
+        "soft_listen": 1,
+        "missing": 0,
+    }.get(strength, 0)
+
+
+def selected_growth_copy(variants: list[str]) -> tuple[str, str]:
+    best_text = ""
+    best_strength = "missing"
+    for variant in variants:
+        strength = cta_strength(variant)
+        if score_strength(strength) > score_strength(best_strength):
+            best_text = variant
+            best_strength = strength
+    if best_text:
+        return best_text, best_strength
+    return "", "missing"
+
+
 def plan_summary(posts):
     counts = Counter("approved" if post.get("approved") == "yes" else "review" for post in posts)
     execution = Counter(post.get("execution_mode") or "unknown" for post in posts)
@@ -233,6 +274,7 @@ def plan_summary(posts):
         "review_posts": counts["review"],
         "auto_posts": execution["auto"],
         "manual_posts": execution["manual"],
+        "selected_hard_cta_posts": sum(1 for post in posts if post.get("selected_cta_strength") in {"hard_subscribe", "hard_goal"}),
         "releases": releases,
         "platforms": platforms,
     }
@@ -369,6 +411,8 @@ def build_plan():
             media_url = assets.get("video" if kind == "video" else "image", "")
             media_key = assets.get("video_key" if kind == "video" else "media_key", "")
             draft_id = plan_id(title, platform)
+            drafts = draft_variants(title, platform)
+            selected_text, selected_strength = selected_growth_copy(drafts)
             post = {
                 "id": draft_id,
                 "scheduled_at": first_future_slot(post_index, platform),
@@ -377,9 +421,11 @@ def build_plan():
                 "imagery": f"{title} promo coverage",
                 "imagery_url": media_url if kind != "video" else assets.get("image", ""),
                 "clip_url": media_url if kind == "video" else "",
-                "text": copy_for(title, platform),
-                "drafts": draft_variants(title, platform),
+                "text": selected_text or copy_for(title, platform),
+                "drafts": drafts,
                 "reply_text": cta_text(release),
+                "selected_cta_strength": selected_strength,
+                "selected_copy_strategy": "growth_first_subscriber_cta",
                 "x_media_key": "",
                 "media_key": media_key,
                 "approved": "no",

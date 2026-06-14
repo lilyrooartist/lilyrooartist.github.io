@@ -80,6 +80,21 @@ def ok(message):
     print(f"OK: {message}")
 
 
+def cta_strength(text):
+    lower = str(text or "").lower()
+    has_hard = any(term in lower for term in ("subscribe", "subscribers", "1,000", "1000"))
+    has_youtube = any(term in lower for term in ("youtube", "youtu.be", "youtube.com"))
+    if has_hard and has_youtube:
+        return "hard_subscribe"
+    if has_hard:
+        return "hard_goal"
+    if has_youtube:
+        return "youtube_link"
+    if "playlist" in lower or "stream" in lower or "listen" in lower:
+        return "soft_listen"
+    return "missing"
+
+
 def validate_pack_pairs(failures):
     data = json.loads(CATALOG.read_text(encoding="utf-8"))
     missing = []
@@ -772,6 +787,16 @@ def validate_generated_outputs(failures):
             ok("promo queue plan summary matches draft post count")
         else:
             fail("promo_queue_plan.json summary draft_posts does not match posts", failures)
+        hard_cta_posts = [
+            post for post in posts
+            if post.get("selected_cta_strength") in {"hard_subscribe", "hard_goal"}
+            and cta_strength(post.get("text")) in {"hard_subscribe", "hard_goal"}
+            and post.get("selected_copy_strategy") == "growth_first_subscriber_cta"
+        ]
+        if summary.get("selected_hard_cta_posts") == len(hard_cta_posts) == len(posts):
+            ok("promo queue plan selects subscriber-growth CTA copy by default")
+        else:
+            fail("promo_queue_plan.json selected copy is not subscriber-growth CTA first", failures)
         apply_command = plan.get("apply_command") or ""
         if "apply_promo_queue_plan.py --apply --refresh-admin" in apply_command:
             ok("promo queue plan includes refresh-aware apply command")
