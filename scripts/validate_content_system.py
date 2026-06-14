@@ -23,6 +23,7 @@ PROMO_OPERATIONS_PACKET = ROOT / "data" / "promo_operations_packet.json"
 PLATFORM_REPAIR_STATUS = ROOT / "data" / "platform_repair_status.json"
 APPROVAL_RUNWAY = ROOT / "data" / "approval_runway.json"
 SUBSCRIBER_CTA_AUDIT = ROOT / "data" / "subscriber_cta_audit.json"
+MONETIZATION_ACTIVATION_PLAN = ROOT / "data" / "monetization_activation_plan.json"
 MANUAL_METRIC_TEMPLATE = ROOT / "data" / "manual_metric_collection_template.csv"
 SPOTIFY_SNAPSHOT = ROOT / "data" / "spotify_release_snapshot.json"
 APPLE_MUSIC_SNAPSHOT = ROOT / "data" / "apple_music_release_snapshot.json"
@@ -53,11 +54,13 @@ PROMO_OPERATIONS_SCRIPT = ROOT / "scripts" / "build_promo_operations_packet.py"
 PLATFORM_REPAIR_SCRIPT = ROOT / "scripts" / "build_platform_repair_status.py"
 APPROVAL_RUNWAY_SCRIPT = ROOT / "scripts" / "build_approval_runway.py"
 SUBSCRIBER_CTA_AUDIT_SCRIPT = ROOT / "scripts" / "build_subscriber_cta_audit.py"
+MONETIZATION_ACTIVATION_SCRIPT = ROOT / "scripts" / "build_monetization_activation_plan.py"
 MANUAL_METRIC_COLLECTION_SCRIPT = ROOT / "scripts" / "build_manual_metric_collection.py"
 REPORT = ROOT / "admin" / "reports" / "weekly-social-report.md"
 PROMO_OPERATIONS_REPORT = ROOT / "admin" / "reports" / "promo-operations-packet.md"
 APPROVAL_RUNWAY_REPORT = ROOT / "admin" / "reports" / "approval-runway.md"
 SUBSCRIBER_CTA_AUDIT_REPORT = ROOT / "admin" / "reports" / "subscriber-cta-audit.md"
+MONETIZATION_ACTIVATION_REPORT = ROOT / "admin" / "reports" / "monetization-activation-plan.md"
 MANUAL_METRIC_REPORT = ROOT / "admin" / "reports" / "manual-metric-collection.md"
 INDEX = CONTENT / "content_index.json"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
@@ -375,6 +378,22 @@ def validate_generated_outputs(failures):
             fail("subscriber_cta_audit.json missing safe CTA summary or row classifications", failures)
     else:
         fail("subscriber_cta_audit.json missing; run scripts/build_subscriber_cta_audit.py", failures)
+    if MONETIZATION_ACTIVATION_PLAN.exists():
+        activation = json.loads(MONETIZATION_ACTIVATION_PLAN.read_text(encoding="utf-8"))
+        summary = activation.get("summary") or {}
+        actions = activation.get("actions") or []
+        if (
+            activation.get("safe_mode") is True
+            and summary.get("action_count") == len(actions)
+            and "ready_subscriber_approval_count" in summary
+            and "subscriber_swap_count" in summary
+            and all("phase" in action and "status" in action and "label" in action for action in actions)
+        ):
+            ok(f"monetization activation plan sequences {len(actions)} action(s)")
+        else:
+            fail("monetization_activation_plan.json missing safe activation summary or action phases", failures)
+    else:
+        fail("monetization_activation_plan.json missing; run scripts/build_monetization_activation_plan.py", failures)
     if MANUAL_METRIC_TEMPLATE.exists():
         rows = read_csv(MANUAL_METRIC_TEMPLATE)
         required = {
@@ -923,6 +942,7 @@ def validate_generated_outputs(failures):
             "build_promo_operations_packet.py",
             "build_approval_runway.py",
             "build_subscriber_cta_audit.py",
+            "build_monetization_activation_plan.py",
             "build_platform_repair_status.py",
             "build_manual_metric_collection.py",
             "update_weekly_report.py",
@@ -1012,6 +1032,14 @@ def validate_generated_outputs(failures):
             fail("build_subscriber_cta_audit.py missing CTA audit outputs or executes commands", failures)
     else:
         fail("build_subscriber_cta_audit.py missing", failures)
+    if MONETIZATION_ACTIVATION_SCRIPT.exists():
+        activation_text = MONETIZATION_ACTIVATION_SCRIPT.read_text(encoding="utf-8")
+        if "monetization_activation_plan.json" in activation_text and "monetization-activation-plan.md" in activation_text and "Activation Sequence" in activation_text and "subprocess" not in activation_text:
+            ok("monetization activation plan builder is review-only")
+        else:
+            fail("build_monetization_activation_plan.py missing activation outputs or executes commands", failures)
+    else:
+        fail("build_monetization_activation_plan.py missing", failures)
     if MANUAL_METRIC_COLLECTION_SCRIPT.exists():
         collection_text = MANUAL_METRIC_COLLECTION_SCRIPT.read_text(encoding="utf-8")
         if "manual_metric_collection_template.csv" in collection_text and "manual-metric-collection.md" in collection_text and "pending_manual_by_platform" in collection_text and "collection_url" in collection_text and "subprocess" not in collection_text:
@@ -1044,6 +1072,14 @@ def validate_generated_outputs(failures):
             fail("subscriber-cta-audit.md missing expected sections", failures)
     else:
         fail("subscriber-cta-audit.md missing", failures)
+    if MONETIZATION_ACTIVATION_REPORT.exists():
+        activation_report_text = MONETIZATION_ACTIVATION_REPORT.read_text(encoding="utf-8")
+        if "Monetization Activation Plan" in activation_report_text and "Activation Sequence" in activation_report_text and "Guardrails" in activation_report_text:
+            ok("monetization activation markdown report present")
+        else:
+            fail("monetization-activation-plan.md missing expected sections", failures)
+    else:
+        fail("monetization-activation-plan.md missing", failures)
 
 
 def validate_report(failures):

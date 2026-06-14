@@ -1,0 +1,146 @@
+{
+  "generated_at": "2026-06-14T01:32:28.115344Z",
+  "safe_mode": true,
+  "source": {
+    "promo_engine_status": "data/promo_engine_status.json",
+    "approval_runway": "data/approval_runway.json",
+    "subscriber_cta_audit": "data/subscriber_cta_audit.json",
+    "platform_repair_status": "data/platform_repair_status.json",
+    "promo_operations_packet": "data/promo_operations_packet.json"
+  },
+  "summary": {
+    "target_subscribers": 1000,
+    "current_subscribers": 5,
+    "remaining_subscribers": 995,
+    "runway_status": "stalled",
+    "subscribers_per_week": 0.0,
+    "required_subscribers_per_week_365": 19.08,
+    "ready_subscriber_approval_count": 3,
+    "subscriber_swap_count": 6,
+    "ready_after_approval_swap_count": 3,
+    "platform_fix_count": 3,
+    "action_count": 9
+  },
+  "actions": [
+    {
+      "label": "Review subscriber CTA for Facebook",
+      "phase": "Tighten subscriber CTA",
+      "status": "waiting_for_review",
+      "detail": "Use the stronger subscriber CTA variant before approval. Recommended copy: Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
+      "command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --dry-run",
+      "after_review_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --refresh-admin",
+      "context": {
+        "post_id": "FP-PLAN-TWELVE-DOLLARS-FACEBOOK",
+        "release": "Twelve Dollars",
+        "selected_strength": "soft_listen",
+        "recommended_strength": "hard_goal",
+        "readiness_state": "ready_after_approval"
+      }
+    },
+    {
+      "label": "Review subscriber CTA for Instagram",
+      "phase": "Tighten subscriber CTA",
+      "status": "waiting_for_review",
+      "detail": "Use the stronger subscriber CTA variant before approval. Recommended copy: Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
+      "command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --dry-run",
+      "after_review_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --refresh-admin",
+      "context": {
+        "post_id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+        "release": "Twelve Dollars",
+        "selected_strength": "youtube_link",
+        "recommended_strength": "hard_goal",
+        "readiness_state": "ready_after_approval"
+      }
+    },
+    {
+      "label": "Review subscriber CTA for X",
+      "phase": "Tighten subscriber CTA",
+      "status": "waiting_for_review",
+      "detail": "Use the stronger subscriber CTA variant before approval. Recommended copy: Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
+      "command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-X --dry-run",
+      "after_review_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-X --refresh-admin",
+      "context": {
+        "post_id": "FP-PLAN-TWELVE-DOLLARS-X",
+        "release": "Twelve Dollars",
+        "selected_strength": "soft_listen",
+        "recommended_strength": "hard_goal",
+        "readiness_state": "ready_after_approval"
+      }
+    },
+    {
+      "label": "Apply approved plan rows after review",
+      "phase": "Move approved subscriber posts into queue",
+      "status": "blocked_until_approved",
+      "detail": "After copy review and approval, apply only approved rows to the live queue; this does not directly post externally.",
+      "command": "",
+      "after_review_command": "python3 scripts/apply_promo_queue_plan.py --apply --refresh-admin",
+      "context": {
+        "approved_plan_posts": 0,
+        "ready_to_apply_posts": 0
+      }
+    },
+    {
+      "label": "Preview approved backlog reschedule",
+      "phase": "Recover stalled approved backlog",
+      "status": "preview_first",
+      "detail": "Preview a new schedule for approved past-due posts. Apply refuses known blocked executor rows unless deliberately overridden.",
+      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-14T10:00:00-04:00' --spacing-hours 24",
+      "after_review_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-14T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+      "context": {
+        "approved_backlog_posts": 3,
+        "approved_upcoming_posts": 0
+      }
+    },
+    {
+      "label": "Repair Facebook executor",
+      "phase": "Clear platform blockers",
+      "status": "needs_platform_fix",
+      "detail": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
+      "command": "python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run",
+      "after_review_command": "",
+      "context": {
+        "post_id": "FP-AUTO-265",
+        "platform": "Facebook",
+        "reason": "max_attempts_exceeded"
+      }
+    },
+    {
+      "label": "Repair TikTok executor",
+      "phase": "Clear platform blockers",
+      "status": "needs_platform_fix",
+      "detail": "Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok public posting approval is false. Complete TikTok OAuth/public posting setup, push secrets, then refresh Admin.",
+      "command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+      "after_review_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
+      "context": {
+        "post_id": "FP-AUTO-264",
+        "platform": "TikTok",
+        "reason": "tiktok_credentials_missing"
+      }
+    },
+    {
+      "label": "Repair Instagram executor",
+      "phase": "Clear platform blockers",
+      "status": "needs_platform_fix",
+      "detail": "Reconnect the Instagram Business/Creator account to the Facebook Page or set IG_BUSINESS_ACCOUNT_ID, then push the worker secret and recapture readiness.",
+      "command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
+      "after_review_command": "python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py",
+      "context": {
+        "post_id": "FP-AUTO-263",
+        "platform": "Instagram",
+        "reason": "max_attempts_exceeded"
+      }
+    },
+    {
+      "label": "Current operations next action: Preview reschedule for approved past-due posts",
+      "phase": "Operations packet",
+      "status": "waiting_for_user",
+      "detail": "Approved posts are past due; preview a new schedule before any apply step.",
+      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-14T10:00:00-04:00' --spacing-hours 24",
+      "after_review_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-14T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+      "context": {
+        "kind": "backlog_reschedule",
+        "urgency": "high"
+      }
+    }
+  ]
+}

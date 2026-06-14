@@ -84,6 +84,11 @@ FINALIZE_STEPS = [
         "required": True,
     },
     {
+        "name": "build_monetization_activation_plan",
+        "command": ["python3", "scripts/build_monetization_activation_plan.py"],
+        "required": True,
+    },
+    {
         "name": "build_platform_repair_status",
         "command": ["python3", "scripts/build_platform_repair_status.py"],
         "required": True,
