@@ -11,6 +11,7 @@ OPERATIONS = ROOT / "data" / "promo_operations_packet.json"
 EXECUTIONS = ROOT / "data" / "social_execution_snapshot.json"
 READINESS = ROOT / "data" / "executor_readiness_snapshot.json"
 OUT = ROOT / "data" / "platform_repair_status.json"
+REPORT = ROOT / "admin" / "reports" / "platform-repair-status.md"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
 
 
@@ -63,11 +64,77 @@ def replace_json_embed(html: str, block_id: str, payload) -> str:
     return html[:start_content] + encoded + html[end:]
 
 
-def sync_admin(payload: dict) -> None:
+def replace_text_embed(html: str, block_id: str, content: str) -> str:
+    marker = f'<script type="text/plain" id="{block_id}">'
+    end_marker = "</script>"
+    start = html.find(marker)
+    if start == -1:
+        insert = f"\n{marker}{content.rstrip()}{end_marker}\n"
+        return html.replace("<script>", insert + "\n<script>", 1)
+    start_content = start + len(marker)
+    end = html.find(end_marker, start_content)
+    if end == -1:
+        raise RuntimeError(f"Could not find end marker for {block_id}")
+    return html[:start_content] + content.rstrip() + html[end:]
+
+
+def repair_priority(row: dict) -> int:
+    platform = platform_slug(row.get("platform") or "")
+    if platform == "instagram":
+        return 1
+    if platform == "facebook":
+        return 2
+    if platform == "tiktok":
+        return 3
+    return 9
+
+
+def build_markdown(payload: dict) -> str:
+    summary = payload["summary"]
+    lines = [
+        "# Platform Repair Status - Lily Roo",
+        "",
+        f"Generated: {payload['generated_at']}",
+        "",
+        "## Summary",
+        f"- Platform fixes: **{summary['platform_fix_count']}**",
+        f"- Blocked rows: **{summary['blocked_count']}**",
+        f"- Preview commands: **{summary['preview_command_count']}**",
+        f"- Apply commands: **{summary['apply_command_count']}**",
+        f"- Platforms: **{', '.join(summary['platforms']) or 'none'}**",
+        "",
+        "## Repair Checklist",
+    ]
+    for row in payload["rows"]:
+        lines.append(f"- **{row['platform']}** (`{row['post_id']}`)")
+        lines.append(f"  - Status: `{row['status']}`; reason: `{row['reason']}`")
+        if row.get("error_summary"):
+            lines.append(f"  - Error: {row['error_summary']}")
+        if row.get("repair_action"):
+            lines.append(f"  - Repair: {row['repair_action']}")
+        if row.get("missing_secrets"):
+            lines.append(f"  - Missing secrets: {', '.join(row['missing_secrets'])}")
+        if row.get("preview_command"):
+            lines.append(f"  - Preview/check: `{row['preview_command']}`")
+        if row.get("apply_command"):
+            lines.append(f"  - Apply after review: `{row['apply_command']}`")
+    lines.extend([
+        "",
+        "## Guardrails",
+        "- This report does not push secrets, reconnect accounts, approve posts, or publish posts.",
+        "- Run preview/check commands before any repair apply command.",
+        "- Re-run the safe admin refresh after repairs so backlog and readiness state update together.",
+        "",
+    ])
+    return "\n".join(lines)
+
+
+def sync_admin(payload: dict, markdown: str) -> None:
     if not ADMIN_INDEX.exists():
         return
     html = ADMIN_INDEX.read_text(encoding="utf-8")
     html = replace_json_embed(html, "embedded-platform-repair-status", payload)
+    html = replace_text_embed(html, "embedded-platform-repair-report", markdown)
     ADMIN_INDEX.write_text(html, encoding="utf-8")
 
 
@@ -91,6 +158,7 @@ def build_status() -> dict:
         rows.append({
             "post_id": post_id,
             "platform": platform,
+            "priority": repair_priority({"platform": platform}),
             "status": execution.get("status") or "needs_fix",
             "reason": execution.get("reason") or context.get("reason") or "",
             "attempts": execution.get("attempts"),
@@ -104,6 +172,7 @@ def build_status() -> dict:
             "public_posting_approved": context.get("public_posting_approved", platform_readiness.get("public_posting_approved")),
             "blocked": True,
         })
+    rows.sort(key=lambda row: (row.get("priority") or 9, row.get("platform") or "", row.get("post_id") or ""))
     summary = {
         "platform_fix_count": len(rows),
         "blocked_count": sum(1 for row in rows if row.get("blocked")),
@@ -127,7 +196,9 @@ def build_status() -> dict:
 def main() -> int:
     status = build_status()
     OUT.write_text(json.dumps(status, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    sync_admin(status)
+    markdown = build_markdown(status)
+    REPORT.write_text(markdown, encoding="utf-8")
+    sync_admin(status, markdown)
     print(json.dumps({"output": str(OUT.relative_to(ROOT)), "platform_fix_count": status["summary"]["platform_fix_count"]}, indent=2))
     return 0
 

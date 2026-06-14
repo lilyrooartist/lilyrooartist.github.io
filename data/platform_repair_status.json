@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-14T01:44:14.734489Z",
+  "generated_at": "2026-06-14T01:48:15.515673Z",
   "safe_mode": true,
   "source": {
     "promo_operations_packet": "data/promo_operations_packet.json",
@@ -19,12 +19,34 @@
   },
   "rows": [
     {
-      "post_id": "FP-AUTO-265",
-      "platform": "Facebook",
+      "post_id": "FP-AUTO-263",
+      "platform": "Instagram",
+      "priority": 1,
       "status": "failed",
       "reason": "max_attempts_exceeded",
       "attempts": 3,
-      "updated_at": "2026-06-14T01:30:25.177Z",
+      "updated_at": "2026-06-14T01:45:24.645Z",
+      "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
+      "repair_action": "Reconnect the Instagram Business/Creator account to the Facebook Page or set IG_BUSINESS_ACCOUNT_ID, then push the worker secret and recapture readiness.",
+      "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
+      "apply_command": "python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py",
+      "readiness": {
+        "ready": true,
+        "api": "facebook-login",
+        "account_id_source": "FB_PAGE_ID"
+      },
+      "missing_secrets": [],
+      "public_posting_approved": null,
+      "blocked": true
+    },
+    {
+      "post_id": "FP-AUTO-265",
+      "platform": "Facebook",
+      "priority": 2,
+      "status": "failed",
+      "reason": "max_attempts_exceeded",
+      "attempts": 3,
+      "updated_at": "2026-06-14T01:45:25.199Z",
       "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
       "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
       "preview_command": "python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run",
@@ -39,10 +61,11 @@
     {
       "post_id": "FP-AUTO-264",
       "platform": "TikTok",
+      "priority": 3,
       "status": "blocked",
       "reason": "tiktok_credentials_missing",
       "attempts": 0,
-      "updated_at": "2026-06-14T01:30:24.900Z",
+      "updated_at": "2026-06-14T01:45:24.922Z",
       "error_summary": "",
       "repair_action": "Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok public posting approval is false. Complete TikTok OAuth/public posting setup, push secrets, then refresh Admin.",
       "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
@@ -65,26 +88,6 @@
         "TIKTOK_REFRESH_TOKEN"
       ],
       "public_posting_approved": false,
-      "blocked": true
-    },
-    {
-      "post_id": "FP-AUTO-263",
-      "platform": "Instagram",
-      "status": "failed",
-      "reason": "max_attempts_exceeded",
-      "attempts": 3,
-      "updated_at": "2026-06-14T01:30:24.646Z",
-      "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
-      "repair_action": "Reconnect the Instagram Business/Creator account to the Facebook Page or set IG_BUSINESS_ACCOUNT_ID, then push the worker secret and recapture readiness.",
-      "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
-      "apply_command": "python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py",
-      "readiness": {
-        "ready": true,
-        "api": "facebook-login",
-        "account_id_source": "FB_PAGE_ID"
-      },
-      "missing_secrets": [],
-      "public_posting_approved": null,
       "blocked": true
     }
   ]

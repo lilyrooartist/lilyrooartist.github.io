@@ -60,6 +60,7 @@ BACKLOG_RESCHEDULE_PREVIEW_SCRIPT = ROOT / "scripts" / "build_backlog_reschedule
 MANUAL_METRIC_COLLECTION_SCRIPT = ROOT / "scripts" / "build_manual_metric_collection.py"
 REPORT = ROOT / "admin" / "reports" / "weekly-social-report.md"
 PROMO_OPERATIONS_REPORT = ROOT / "admin" / "reports" / "promo-operations-packet.md"
+PLATFORM_REPAIR_REPORT = ROOT / "admin" / "reports" / "platform-repair-status.md"
 APPROVAL_RUNWAY_REPORT = ROOT / "admin" / "reports" / "approval-runway.md"
 SUBSCRIBER_CTA_AUDIT_REPORT = ROOT / "admin" / "reports" / "subscriber-cta-audit.md"
 MONETIZATION_ACTIVATION_REPORT = ROOT / "admin" / "reports" / "monetization-activation-plan.md"
@@ -358,7 +359,7 @@ def validate_generated_outputs(failures):
             repair_status.get("safe_mode") is True
             and repair_summary.get("platform_fix_count") == len(repair_rows) == len(platform_actions)
             and repair_summary.get("preview_command_count") == len([row for row in repair_rows if row.get("preview_command")])
-            and all(row.get("post_id") and row.get("platform") and row.get("repair_action") and row.get("preview_command") for row in repair_rows)
+            and all(row.get("post_id") and row.get("platform") and row.get("priority") and row.get("repair_action") and row.get("preview_command") for row in repair_rows)
         ):
             ok(f"platform repair status tracks {len(repair_rows)} blocked platform repair(s)")
         else:
@@ -1059,7 +1060,7 @@ def validate_generated_outputs(failures):
         fail("build_promo_operations_packet.py missing", failures)
     if PLATFORM_REPAIR_SCRIPT.exists():
         repair_text = PLATFORM_REPAIR_SCRIPT.read_text(encoding="utf-8")
-        if "platform_repair_status.json" in repair_text and "promo_operations_packet.json" in repair_text and "social_execution_snapshot.json" in repair_text and "executor_readiness_snapshot.json" in repair_text and "subprocess" not in repair_text:
+        if "platform_repair_status.json" in repair_text and "platform-repair-status.md" in repair_text and "Repair Checklist" in repair_text and "promo_operations_packet.json" in repair_text and "social_execution_snapshot.json" in repair_text and "executor_readiness_snapshot.json" in repair_text and "subprocess" not in repair_text:
             ok("platform repair status builder is review-only")
         else:
             fail("build_platform_repair_status.py missing repair status outputs or executes commands", failures)
@@ -1113,6 +1114,14 @@ def validate_generated_outputs(failures):
             fail("promo operations markdown report missing expected sections", failures)
     else:
         fail("promo-operations-packet.md missing", failures)
+    if PLATFORM_REPAIR_REPORT.exists():
+        repair_report_text = PLATFORM_REPAIR_REPORT.read_text(encoding="utf-8")
+        if "Platform Repair Status" in repair_report_text and "Repair Checklist" in repair_report_text and "Guardrails" in repair_report_text:
+            ok("platform repair markdown report present")
+        else:
+            fail("platform-repair-status.md missing expected sections", failures)
+    else:
+        fail("platform-repair-status.md missing", failures)
     if APPROVAL_RUNWAY_REPORT.exists():
         runway_report_text = APPROVAL_RUNWAY_REPORT.read_text(encoding="utf-8")
         if "Approval Runway" in runway_report_text and "Recommended Sequence" in runway_report_text and "Guardrails" in runway_report_text:

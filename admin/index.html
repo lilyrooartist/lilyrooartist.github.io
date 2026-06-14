@@ -494,6 +494,13 @@
               </div>
             </section>
 
+            <section class="report-card" aria-labelledby="platform-repair-heading">
+              <h2 id="platform-repair-heading">Platform Repair</h2>
+              <div class="queue-list" id="platform-repair-status">
+                <div class="muted">Loading platform repair checklist...</div>
+              </div>
+            </section>
+
             <section class="report-card" aria-labelledby="promo-plan-heading">
               <h2 id="promo-plan-heading">Promo Queue Plan</h2>
               <div class="queue-list" id="promo-queue-plan">
@@ -547,7 +554,7 @@
 <script type="text/plain" id="embedded-weekly-report"># Weekly Social Report — Lily Roo
 
 **Period:** 2026-06-07 to 2026-06-13
-**Last updated:** 2026-06-13 09:44 PM EDT
+**Last updated:** 2026-06-13 09:48 PM EDT
 
 ## KPI Goal
 - Primary growth target: **1,000 YouTube subscribers** (monetization milestone)
@@ -668,7 +675,7 @@
 - Latest post: https://www.facebook.com/903693509504290_122118326547249470
 
 ## Metrics Snapshot
-- Live API captured: **2026-06-14T01:43:28.072Z**
+- Live API captured: **2026-06-14T01:47:28.736Z**
 - Snapshot file: `data/live_social_metrics.json`
 - YouTube public RSS captured: **2026-06-09T12:08:07.783949Z**
 - YouTube public snapshot file: `data/youtube_public_snapshot.json`
@@ -678,9 +685,9 @@
 - YouTube Music snapshot file: `data/youtube_music_release_snapshot.json`
 - HyperFollow stores captured: **2026-06-07T20:51:14.275569Z**
 - HyperFollow snapshot file: `data/hyperfollow_store_links_snapshot.json`
-- All-release store verification captured: **2026-06-14T01:44:14.574885+00:00**
+- All-release store verification captured: **2026-06-14T01:48:15.345397+00:00**
 - All-release store verification file: `data/store_verification_history.json`
-- Social executor history captured: **2026-06-14T01:44:13.997346Z**
+- Social executor history captured: **2026-06-14T01:48:14.668645Z**
 - Social executor history file: `data/social_execution_snapshot.json`
 - First single alignment audit captured: **2026-06-07T21:39:03.668040Z**
 - First single alignment audit file: `data/first_single_alignment_audit.json`
@@ -891,7 +898,7 @@
 }</script>
 
 <script type="application/json" id="embedded-promo-engine-status">{
-  "generated_at": "2026-06-14T01:44:14.817599+00:00",
+  "generated_at": "2026-06-14T01:48:15.598533+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -1084,15 +1091,15 @@
         "command": "python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impressions_7d=VALUE --refresh-admin"
       }
     ],
-    "live_metrics_updated_at": "2026-06-14T01:43:28.072Z",
+    "live_metrics_updated_at": "2026-06-14T01:47:28.736Z",
     "metrics_history": {
       "snapshot_count": 5,
-      "updated_at": "2026-06-14T01:44:14.064318Z",
+      "updated_at": "2026-06-14T01:48:14.766199Z",
       "latest_date": "2026-06-14",
       "latest": {
         "date": "2026-06-14",
-        "captured_at": "2026-06-14T01:44:14.064318Z",
-        "live_metrics_updated_at": "2026-06-14T01:43:28.072Z",
+        "captured_at": "2026-06-14T01:48:14.766199Z",
+        "live_metrics_updated_at": "2026-06-14T01:47:28.736Z",
         "youtube": {
           "subscribers": 5,
           "total_views": 251,
@@ -1175,7 +1182,7 @@
     },
     "social_execution_summary": {
       "ok": true,
-      "updated_at": "2026-06-14T01:44:13.997346Z",
+      "updated_at": "2026-06-14T01:48:14.668645Z",
       "http_status": 200,
       "execution_count": 6,
       "posted_count": 0,
@@ -1199,7 +1206,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-06-14T01:30:25.177Z",
+          "updated_at": "2026-06-14T01:45:25.199Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app."
@@ -1210,7 +1217,7 @@
           "status": "blocked",
           "reason": "tiktok_credentials_missing",
           "attempts": 0,
-          "updated_at": "2026-06-14T01:30:24.900Z",
+          "updated_at": "2026-06-14T01:45:24.922Z",
           "source": "cron",
           "post_url": "",
           "error_summary": ""
@@ -1221,7 +1228,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-06-14T01:30:24.646Z",
+          "updated_at": "2026-06-14T01:45:24.645Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID."
@@ -1232,7 +1239,7 @@
           "status": "blocked",
           "reason": "not_approved",
           "attempts": 0,
-          "updated_at": "2026-06-14T01:30:24.397Z",
+          "updated_at": "2026-06-14T01:45:24.386Z",
           "source": "cron",
           "post_url": "",
           "error_summary": ""
@@ -1243,7 +1250,7 @@
           "status": "blocked",
           "reason": "not_approved",
           "attempts": 0,
-          "updated_at": "2026-06-14T01:30:24.157Z",
+          "updated_at": "2026-06-14T01:45:24.162Z",
           "source": "cron",
           "post_url": "",
           "error_summary": ""
@@ -1256,7 +1263,7 @@
           "status": "blocked",
           "reason": "not_approved",
           "attempts": 0,
-          "updated_at": "2026-06-14T01:30:24.397Z",
+          "updated_at": "2026-06-14T01:45:24.386Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "",
@@ -1271,7 +1278,7 @@
           "status": "blocked",
           "reason": "not_approved",
           "attempts": 0,
-          "updated_at": "2026-06-14T01:30:24.157Z",
+          "updated_at": "2026-06-14T01:45:24.162Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "",
@@ -1286,7 +1293,7 @@
           "status": "blocked",
           "reason": "not_approved",
           "attempts": 0,
-          "updated_at": "2026-06-14T01:30:23.925Z",
+          "updated_at": "2026-06-14T01:45:23.931Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "",
@@ -1303,7 +1310,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-06-14T01:30:25.177Z",
+          "updated_at": "2026-06-14T01:45:25.199Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
@@ -1318,7 +1325,7 @@
           "status": "blocked",
           "reason": "tiktok_credentials_missing",
           "attempts": 0,
-          "updated_at": "2026-06-14T01:30:24.900Z",
+          "updated_at": "2026-06-14T01:45:24.922Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "",
@@ -1333,7 +1340,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-06-14T01:30:24.646Z",
+          "updated_at": "2026-06-14T01:45:24.645Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
@@ -1350,8 +1357,8 @@
       "available": true,
       "safe_mode": true,
       "finalized": true,
-      "finished_at": "2026-06-14T01:44:14.790484Z",
-      "duration_seconds": 47.48,
+      "finished_at": "2026-06-14T01:48:15.571265Z",
+      "duration_seconds": 47.79,
       "command_count": 16,
       "passed": 15,
       "failed": 1,
@@ -1402,18 +1409,18 @@
       "stale": 1,
       "missing": 0,
       "checked_no_change": 1,
-      "checked_at": "2026-06-14T01:44:14.817599+00:00"
+      "checked_at": "2026-06-14T01:48:15.598533+00:00"
     },
     "sources": [
       {
         "name": "release_status",
         "path": "data/distrokid_release_status.json",
         "status": "checked_no_change",
-        "age_hours": 119.9,
+        "age_hours": 120.0,
         "max_age_hours": 72,
         "timestamp": "2026-06-09T01:47:42+00:00",
         "refresh_command": "Store checks are current; update data/distrokid_release_status.json when a verified public URL appears.",
-        "checked_at": "2026-06-14T01:44:14.817599+00:00",
+        "checked_at": "2026-06-14T01:48:15.598533+00:00",
         "checked_age_hours": 0.0,
         "evidence": "7 pending store links checked; no new public URLs found."
       },
@@ -1421,7 +1428,7 @@
         "name": "scheduled_posts",
         "path": "admin/future-posts.json",
         "status": "fresh",
-        "age_hours": 28.8,
+        "age_hours": 28.9,
         "max_age_hours": 72,
         "timestamp": "2026-06-12T20:56:00.115863+00:00",
         "refresh_command": "python3 scripts/sync_future_posts.py"
@@ -1432,14 +1439,14 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T01:44:14.031499+00:00",
+        "timestamp": "2026-06-14T01:48:14.729831+00:00",
         "refresh_command": "python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
         "name": "published_log",
         "path": "admin/content/Published_Log.csv",
         "status": "fresh",
-        "age_hours": 157.1,
+        "age_hours": 157.2,
         "max_age_hours": 168,
         "timestamp": "2026-06-07T12:36:37.141276+00:00",
         "refresh_command": "Export or append latest published posts to admin/content/Published_Log.csv."
@@ -1448,7 +1455,7 @@
         "name": "manual_metrics",
         "path": "data/manual_social_stats.json",
         "status": "stale",
-        "age_hours": 153.9,
+        "age_hours": 154.0,
         "max_age_hours": 72,
         "timestamp": "2026-06-07T15:47:26.729764+00:00",
         "refresh_command": "Update data/manual_social_stats.json with latest manual metrics."
@@ -1459,7 +1466,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T01:43:28.072000+00:00",
+        "timestamp": "2026-06-14T01:47:28.736000+00:00",
         "refresh_command": "python3 scripts/capture_live_metrics.py"
       },
       {
@@ -1468,7 +1475,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T01:44:14.064318+00:00",
+        "timestamp": "2026-06-14T01:48:14.766199+00:00",
         "refresh_command": "python3 scripts/update_metrics_history.py --refresh-admin"
       },
       {
@@ -1477,7 +1484,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T01:44:13.136737+00:00",
+        "timestamp": "2026-06-14T01:48:13.794334+00:00",
         "refresh_command": "python3 scripts/capture_executor_readiness.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -1486,7 +1493,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T01:44:14.817599+00:00",
+        "timestamp": "2026-06-14T01:48:15.598533+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin"
       },
       {
@@ -1495,7 +1502,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T01:44:13.997346+00:00",
+        "timestamp": "2026-06-14T01:48:14.668645+00:00",
         "refresh_command": "python3 scripts/capture_social_executions.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -1504,7 +1511,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T01:44:14.790857+00:00",
+        "timestamp": "2026-06-14T01:48:15.571611+00:00",
         "refresh_command": "python3 scripts/refresh_promo_admin.py"
       },
       {
@@ -1513,7 +1520,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T01:44:14.539322+00:00",
+        "timestamp": "2026-06-14T01:48:15.284170+00:00",
         "refresh_command": "python3 scripts/capture_github_workflow_status.py && python3 scripts/update_promo_engine_status.py"
       }
     ],
@@ -1933,7 +1940,7 @@
 }</script>
 
 <script type="application/json" id="embedded-promo-queue-plan">{
-  "generated_at": "2026-06-13T21:44:14.031499-04:00",
+  "generated_at": "2026-06-13T21:48:14.729831-04:00",
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
     "release_status": "data/distrokid_release_status.json"
@@ -2036,7 +2043,7 @@
   },
   "readiness_audit": {
     "source": "data/executor_readiness_snapshot.json",
-    "updated_at": "2026-06-14T01:44:13.136737Z",
+    "updated_at": "2026-06-14T01:48:13.794334Z",
     "ok": true,
     "counts": {
       "blocked": 1,
@@ -2256,7 +2263,7 @@
 
 
 <script type="application/json" id="embedded-promo-operations-packet">{
-  "generated_at": "2026-06-14T01:44:14.605645Z",
+  "generated_at": "2026-06-14T01:48:15.381348Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -2995,7 +3002,7 @@
 
 <script type="text/plain" id="embedded-promo-operations-report"># Promo Operations Packet - Lily Roo
 
-Generated: 2026-06-14T01:44:14.605645Z
+Generated: 2026-06-14T01:48:15.381348Z
 
 ## Summary
 - Actions: **22**
@@ -3097,7 +3104,7 @@ Generated: 2026-06-14T01:44:14.605645Z
 
 <script type="text/plain" id="embedded-manual-metric-collection"># Manual Metric Collection - Lily Roo
 
-Generated: 2026-06-14T01:44:14.760099Z
+Generated: 2026-06-14T01:48:15.541937Z
 
 Pending fields: **11**
 
@@ -3169,7 +3176,7 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
 
 
 <script type="application/json" id="embedded-platform-repair-status">{
-  "generated_at": "2026-06-14T01:44:14.734489Z",
+  "generated_at": "2026-06-14T01:48:15.515673Z",
   "safe_mode": true,
   "source": {
     "promo_operations_packet": "data/promo_operations_packet.json",
@@ -3189,12 +3196,34 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
   },
   "rows": [
     {
-      "post_id": "FP-AUTO-265",
-      "platform": "Facebook",
+      "post_id": "FP-AUTO-263",
+      "platform": "Instagram",
+      "priority": 1,
       "status": "failed",
       "reason": "max_attempts_exceeded",
       "attempts": 3,
-      "updated_at": "2026-06-14T01:30:25.177Z",
+      "updated_at": "2026-06-14T01:45:24.645Z",
+      "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
+      "repair_action": "Reconnect the Instagram Business/Creator account to the Facebook Page or set IG_BUSINESS_ACCOUNT_ID, then push the worker secret and recapture readiness.",
+      "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
+      "apply_command": "python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py",
+      "readiness": {
+        "ready": true,
+        "api": "facebook-login",
+        "account_id_source": "FB_PAGE_ID"
+      },
+      "missing_secrets": [],
+      "public_posting_approved": null,
+      "blocked": true
+    },
+    {
+      "post_id": "FP-AUTO-265",
+      "platform": "Facebook",
+      "priority": 2,
+      "status": "failed",
+      "reason": "max_attempts_exceeded",
+      "attempts": 3,
+      "updated_at": "2026-06-14T01:45:25.199Z",
       "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
       "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
       "preview_command": "python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run",
@@ -3209,10 +3238,11 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
     {
       "post_id": "FP-AUTO-264",
       "platform": "TikTok",
+      "priority": 3,
       "status": "blocked",
       "reason": "tiktok_credentials_missing",
       "attempts": 0,
-      "updated_at": "2026-06-14T01:30:24.900Z",
+      "updated_at": "2026-06-14T01:45:24.922Z",
       "error_summary": "",
       "repair_action": "Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok public posting approval is false. Complete TikTok OAuth/public posting setup, push secrets, then refresh Admin.",
       "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
@@ -3236,33 +3266,13 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
       ],
       "public_posting_approved": false,
       "blocked": true
-    },
-    {
-      "post_id": "FP-AUTO-263",
-      "platform": "Instagram",
-      "status": "failed",
-      "reason": "max_attempts_exceeded",
-      "attempts": 3,
-      "updated_at": "2026-06-14T01:30:24.646Z",
-      "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
-      "repair_action": "Reconnect the Instagram Business/Creator account to the Facebook Page or set IG_BUSINESS_ACCOUNT_ID, then push the worker secret and recapture readiness.",
-      "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
-      "apply_command": "python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py",
-      "readiness": {
-        "ready": true,
-        "api": "facebook-login",
-        "account_id_source": "FB_PAGE_ID"
-      },
-      "missing_secrets": [],
-      "public_posting_approved": null,
-      "blocked": true
     }
   ]
 }</script>
 
 
 <script type="application/json" id="embedded-approval-runway">{
-  "generated_at": "2026-06-14T01:44:14.632243Z",
+  "generated_at": "2026-06-14T01:48:15.409894Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -3382,7 +3392,7 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
 
 <script type="text/plain" id="embedded-approval-runway-report"># Approval Runway - Lily Roo
 
-Generated: 2026-06-14T01:44:14.632243Z
+Generated: 2026-06-14T01:48:15.409894Z
 
 ## Summary
 - Drafts needing review: **6**
@@ -3437,7 +3447,7 @@ Generated: 2026-06-14T01:44:14.632243Z
 
 
 <script type="application/json" id="embedded-subscriber-cta-audit">{
-  "generated_at": "2026-06-14T01:44:14.657699Z",
+  "generated_at": "2026-06-14T01:48:15.436710Z",
   "safe_mode": true,
   "source": {
     "promo_queue_plan": "data/promo_queue_plan.json",
@@ -3548,7 +3558,7 @@ Generated: 2026-06-14T01:44:14.632243Z
 
 <script type="text/plain" id="embedded-subscriber-cta-audit-report"># Subscriber CTA Audit - Lily Roo
 
-Generated: 2026-06-14T01:44:14.657699Z
+Generated: 2026-06-14T01:48:15.436710Z
 
 ## Summary
 - Draft posts: **6**
@@ -3600,7 +3610,7 @@ Generated: 2026-06-14T01:44:14.657699Z
 
 
 <script type="application/json" id="embedded-monetization-activation-plan">{
-  "generated_at": "2026-06-14T01:44:14.683270Z",
+  "generated_at": "2026-06-14T01:48:15.463319Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -3693,6 +3703,19 @@ Generated: 2026-06-14T01:44:14.657699Z
       }
     },
     {
+      "label": "Repair Instagram executor",
+      "phase": "Clear platform blockers",
+      "status": "needs_platform_fix",
+      "detail": "Reconnect the Instagram Business/Creator account to the Facebook Page or set IG_BUSINESS_ACCOUNT_ID, then push the worker secret and recapture readiness.",
+      "command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
+      "after_review_command": "python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py",
+      "context": {
+        "post_id": "FP-AUTO-263",
+        "platform": "Instagram",
+        "reason": "max_attempts_exceeded"
+      }
+    },
+    {
       "label": "Repair Facebook executor",
       "phase": "Clear platform blockers",
       "status": "needs_platform_fix",
@@ -3719,19 +3742,6 @@ Generated: 2026-06-14T01:44:14.657699Z
       }
     },
     {
-      "label": "Repair Instagram executor",
-      "phase": "Clear platform blockers",
-      "status": "needs_platform_fix",
-      "detail": "Reconnect the Instagram Business/Creator account to the Facebook Page or set IG_BUSINESS_ACCOUNT_ID, then push the worker secret and recapture readiness.",
-      "command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
-      "after_review_command": "python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py",
-      "context": {
-        "post_id": "FP-AUTO-263",
-        "platform": "Instagram",
-        "reason": "max_attempts_exceeded"
-      }
-    },
-    {
       "label": "Current operations next action: Preview reschedule for approved past-due posts",
       "phase": "Operations packet",
       "status": "waiting_for_user",
@@ -3749,7 +3759,7 @@ Generated: 2026-06-14T01:44:14.657699Z
 
 <script type="text/plain" id="embedded-monetization-activation-report"># Monetization Activation Plan - Lily Roo
 
-Generated: 2026-06-14T01:44:14.683270Z
+Generated: 2026-06-14T01:48:15.463319Z
 
 ## Summary
 - Current subscribers: **5 / 1000**
@@ -3784,20 +3794,20 @@ Generated: 2026-06-14T01:44:14.683270Z
    - Detail: Preview a new schedule for approved past-due posts. Apply refuses known blocked executor rows unless deliberately overridden.
    - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-14T10:00:00-04:00' --spacing-hours 24`
    - After review: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-14T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin`
-6. **Repair Facebook executor**
-   - Phase: `Clear platform blockers`; status: `needs_platform_fix`
-   - Detail: Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.
-   - Preview/check: `python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run`
-7. **Repair TikTok executor**
-   - Phase: `Clear platform blockers`; status: `needs_platform_fix`
-   - Detail: Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok public posting approval is false. Complete TikTok OAuth/public posting setup, push secrets, then refresh Admin.
-   - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
-   - After review: `python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py`
-8. **Repair Instagram executor**
+6. **Repair Instagram executor**
    - Phase: `Clear platform blockers`; status: `needs_platform_fix`
    - Detail: Reconnect the Instagram Business/Creator account to the Facebook Page or set IG_BUSINESS_ACCOUNT_ID, then push the worker secret and recapture readiness.
    - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID`
    - After review: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
+7. **Repair Facebook executor**
+   - Phase: `Clear platform blockers`; status: `needs_platform_fix`
+   - Detail: Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.
+   - Preview/check: `python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run`
+8. **Repair TikTok executor**
+   - Phase: `Clear platform blockers`; status: `needs_platform_fix`
+   - Detail: Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok public posting approval is false. Complete TikTok OAuth/public posting setup, push secrets, then refresh Admin.
+   - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
+   - After review: `python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py`
 9. **Current operations next action: Preview reschedule for approved past-due posts**
    - Phase: `Operations packet`; status: `waiting_for_user`
    - Detail: Approved posts are past due; preview a new schedule before any apply step.
@@ -3811,7 +3821,7 @@ Generated: 2026-06-14T01:44:14.683270Z
 
 
 <script type="application/json" id="embedded-backlog-reschedule-preview">{
-  "generated_at": "2026-06-13T21:44:14.709880-04:00",
+  "generated_at": "2026-06-13T21:48:15.490435-04:00",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -3869,7 +3879,7 @@ Generated: 2026-06-14T01:44:14.683270Z
 
 <script type="text/plain" id="embedded-backlog-reschedule-preview-report"># Backlog Reschedule Preview - Lily Roo
 
-Generated: 2026-06-13T21:44:14.709880-04:00
+Generated: 2026-06-13T21:48:15.490435-04:00
 
 ## Summary
 - Approved backlog rows: **3**
@@ -3900,6 +3910,42 @@ Generated: 2026-06-13T21:44:14.709880-04:00
 ## Guardrails
 - This preview does not write schedule changes, approve posts, publish posts, or push secrets.
 - Apply refuses known blocked rows unless `--allow-blocked` is used after deliberate review.</script>
+
+
+<script type="text/plain" id="embedded-platform-repair-report"># Platform Repair Status - Lily Roo
+
+Generated: 2026-06-14T01:48:15.515673Z
+
+## Summary
+- Platform fixes: **3**
+- Blocked rows: **3**
+- Preview commands: **3**
+- Apply commands: **2**
+- Platforms: **Facebook, Instagram, TikTok**
+
+## Repair Checklist
+- **Instagram** (`FP-AUTO-263`)
+  - Status: `failed`; reason: `max_attempts_exceeded`
+  - Error: Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.
+  - Repair: Reconnect the Instagram Business/Creator account to the Facebook Page or set IG_BUSINESS_ACCOUNT_ID, then push the worker secret and recapture readiness.
+  - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID`
+  - Apply after review: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
+- **Facebook** (`FP-AUTO-265`)
+  - Status: `failed`; reason: `max_attempts_exceeded`
+  - Error: Facebook blocked Page publishing until identity is confirmed in the Facebook app.
+  - Repair: Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.
+  - Preview/check: `python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run`
+- **TikTok** (`FP-AUTO-264`)
+  - Status: `blocked`; reason: `tiktok_credentials_missing`
+  - Repair: Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok public posting approval is false. Complete TikTok OAuth/public posting setup, push secrets, then refresh Admin.
+  - Missing secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN
+  - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
+  - Apply after review: `python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py`
+
+## Guardrails
+- This report does not push secrets, reconnect accounts, approve posts, or publish posts.
+- Run preview/check commands before any repair apply command.
+- Re-run the safe admin refresh after repairs so backlog and readiness state update together.</script>
 
 <script>
   const ADMIN_AUTH_KEY='lilyroo_admin_password_v1';
@@ -4030,6 +4076,7 @@ Generated: 2026-06-13T21:44:14.709880-04:00
     'reports/subscriber-cta-audit.md':'embedded-subscriber-cta-audit-report',
     'reports/monetization-activation-plan.md':'embedded-monetization-activation-report',
     'reports/backlog-reschedule-preview.md':'embedded-backlog-reschedule-preview-report',
+    'reports/platform-repair-status.md':'embedded-platform-repair-report',
     'content/Published_Log.csv':'embedded-published-log'
   };
   const EMBEDDED_JSON_ASSETS={
@@ -4041,7 +4088,8 @@ Generated: 2026-06-13T21:44:14.709880-04:00
     'data/approval_runway.json':'embedded-approval-runway',
     'data/subscriber_cta_audit.json':'embedded-subscriber-cta-audit',
     'data/monetization_activation_plan.json':'embedded-monetization-activation-plan',
-    'data/backlog_reschedule_preview.json':'embedded-backlog-reschedule-preview'
+    'data/backlog_reschedule_preview.json':'embedded-backlog-reschedule-preview',
+    'data/platform_repair_status.json':'embedded-platform-repair-status'
   };
   const BACKSTORY_DOCS=[
     {id:'canon',category:'Canon',title:'Canon Spine',url:'content/00_CANON.md',summary:'Mission, identity, recurring themes, origin story, objects, and era anchors.'},
@@ -5354,6 +5402,52 @@ Generated: 2026-06-13T21:44:14.709880-04:00
     root.innerHTML=`${intro}${rows}${more}`;
   }
 
+  function renderPlatformRepairStatus(status){
+    const root=document.getElementById('platform-repair-status');
+    if(!root) return;
+    const rows=Array.isArray(status?.rows)?status.rows:[];
+    const summary=status?.summary||{};
+    if(!rows.length){
+      root.innerHTML='<div class="muted">No platform repairs are currently blocking distribution.</div>';
+      return;
+    }
+    const meta=[
+      `${Number(summary.platform_fix_count||rows.length)} fixes`,
+      `${Number(summary.blocked_count||0)} blocked`,
+      `${Number(summary.preview_command_count||0)} checks`,
+      `${Number(summary.apply_command_count||0)} apply commands`
+    ].join(' - ');
+    const intro=`<div class="queue-item">
+      <div class="queue-top">
+        <div>
+          <div class="queue-title">Repair checklist before backlog can move</div>
+          <div class="queue-meta">${escapeHtml(meta)}</div>
+          ${Array.isArray(summary.platforms)&&summary.platforms.length?`<div class="queue-meta">${escapeHtml(summary.platforms.join(', '))}</div>`:''}
+        </div>
+        <span class="status-chip ${Number(summary.blocked_count||0)?'warn':'ok'}">${escapeHtml(Number(summary.blocked_count||rows.length))}</span>
+      </div>
+    </div>`;
+    const items=rows.slice(0,5).map(row=>{
+      const missing=Array.isArray(row.missing_secrets)?row.missing_secrets.join(', '):'';
+      return `<div class="queue-item">
+        <div class="queue-top">
+          <div>
+            <div class="queue-title">${escapeHtml(row.platform||'Platform')} - ${escapeHtml(row.post_id||'queued post')}</div>
+            <div class="queue-meta">${escapeHtml(row.status||'needs_fix')} - ${escapeHtml(row.reason||'repair required')}${row.attempts!==null&&row.attempts!==undefined?` - attempts ${escapeHtml(row.attempts)}`:''}</div>
+            ${row.error_summary?`<div class="queue-meta">${escapeHtml(row.error_summary)}</div>`:''}
+            ${row.repair_action?`<div class="queue-meta">${escapeHtml(row.repair_action)}</div>`:''}
+            ${missing?`<div class="queue-meta">Missing secrets: ${escapeHtml(missing)}</div>`:''}
+            ${row.preview_command?`<div class="queue-meta">Preview/check: ${escapeHtml(row.preview_command)}</div>`:''}
+            ${row.apply_command?`<div class="queue-meta">Apply after review: ${escapeHtml(row.apply_command)}</div>`:''}
+          </div>
+          <span class="status-chip warn">${escapeHtml(row.apply_command?'Repair':'Check')}</span>
+        </div>
+      </div>`;
+    }).join('');
+    const more=rows.length>5?`<div class="queue-meta">${escapeHtml(rows.length-5)} more repair row${rows.length-5===1?'':'s'} in data/platform_repair_status.json.</div>`:'';
+    root.innerHTML=`${intro}${items}${more}`;
+  }
+
   function renderPromoQueuePlan(plan){
     const root=document.getElementById('promo-queue-plan');
     if(!root) return;
@@ -5499,7 +5593,7 @@ Generated: 2026-06-13T21:44:14.709880-04:00
 
   async function loadReportsDashboard(){
     if(!document.getElementById('reports-period')) return;
-    const [md,publishedCsv,queuePayload,releaseStatus,promoHealth,promoPlan,promoOps,approvalRunway,subscriberCtaAudit,activationPlan,backlogPreview,readiness,metrics,executions]=await Promise.all([
+    const [md,publishedCsv,queuePayload,releaseStatus,promoHealth,promoPlan,promoOps,approvalRunway,subscriberCtaAudit,activationPlan,backlogPreview,platformRepair,readiness,metrics,executions]=await Promise.all([
       fetchTextOrEmpty(localPath('/admin/reports/weekly-social-report.md')),
       fetchTextOrEmpty(localPath('/admin/content/Published_Log.csv')),
       fetchJsonOr(localPath('/admin/future-posts.json'),{}),
@@ -5511,6 +5605,7 @@ Generated: 2026-06-13T21:44:14.709880-04:00
       fetchJsonOr(localPath('/data/subscriber_cta_audit.json'),{}),
       fetchJsonOr(localPath('/data/monetization_activation_plan.json'),{}),
       fetchJsonOr(localPath('/data/backlog_reschedule_preview.json'),{}),
+      fetchJsonOr(localPath('/data/platform_repair_status.json'),{}),
       readinessPromise,
       metricsPromise,
       executionsPromise
@@ -5532,6 +5627,7 @@ Generated: 2026-06-13T21:44:14.709880-04:00
     renderSubscriberCtaAudit(subscriberCtaAudit);
     renderMonetizationActivationPlan(activationPlan);
     renderBacklogReschedulePreview(backlogPreview);
+    renderPlatformRepairStatus(platformRepair);
     renderPromoQueuePlan(promoPlan);
     renderPipelineHealth(queuePayload,readiness,report,metrics);
     renderNextPosts(queuePayload,executions);
