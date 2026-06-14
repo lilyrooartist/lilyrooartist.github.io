@@ -49,6 +49,8 @@ def parse_datetime(value: str | None):
 
 def phase_for(action: dict) -> str:
     kind = action.get("kind")
+    if kind == "backlog_reschedule":
+        return "Reschedule approved backlog"
     if kind == "platform_fix":
         return "Repair executor"
     if kind == "apply_approved":
@@ -68,6 +70,8 @@ def phase_for(action: dict) -> str:
 def urgency_for(action: dict, now: datetime) -> tuple[str, str]:
     kind = action.get("kind")
     context = action.get("context") or {}
+    if kind == "backlog_reschedule":
+        return "high", "Approved posts are past due; preview a new schedule before any apply step."
     if kind == "platform_fix":
         return "high", "Platform executor needs repair before queued auto posts can publish."
     if kind == "apply_approved":
@@ -108,7 +112,7 @@ def enrich_actions(actions: list[dict], now: datetime) -> list[dict]:
         item["urgency_reason"] = reason
         if urgency == "blocked":
             item["status"] = "blocked"
-        elif action.get("kind") in {"approval_review", "manual_metrics"}:
+        elif action.get("kind") in {"approval_review", "manual_metrics", "backlog_reschedule"}:
             item["status"] = "waiting_for_user"
         elif action.get("kind") == "platform_fix":
             item["status"] = "needs_fix"
@@ -116,7 +120,7 @@ def enrich_actions(actions: list[dict], now: datetime) -> list[dict]:
             item["status"] = "ready"
         item["sort_key"] = [
             urgency_order.get(urgency, 9),
-            int(action.get("priority") or 999),
+            int(action["priority"]) if action.get("priority") is not None else 999,
             index,
         ]
         enriched.append(item)
@@ -275,6 +279,28 @@ def apply_actions(plan):
     ]
 
 
+def backlog_reschedule_actions(status):
+    monetization = (status.get("kpi") or {}).get("monetization") or {}
+    approved_backlog = int(monetization.get("approved_backlog_posts") or 0)
+    preview_command = monetization.get("backlog_reschedule_preview_command") or ""
+    if not approved_backlog or not preview_command:
+        return []
+    return [
+        command_row(
+            "Preview reschedule for approved past-due posts",
+            preview_command,
+            "backlog_reschedule",
+            0,
+            {
+                "approved_backlog_posts": approved_backlog,
+                "approved_upcoming_posts": int(monetization.get("approved_upcoming_posts") or 0),
+                "apply_command": monetization.get("backlog_reschedule_apply_command") or "",
+                "note": "Preview first; apply only after confirming the new schedule and platform blockers.",
+            },
+        )
+    ]
+
+
 def manual_metric_actions(status):
     kpi = status.get("kpi") or {}
     steps = {
@@ -389,6 +415,8 @@ def build_markdown(packet):
                 lines.append(f"  - Import filled worksheet: `{context['worksheet_import_command']}`")
             if context.get("direct_update_command"):
                 lines.append(f"  - Direct update fallback: `{context['direct_update_command']}`")
+            if context.get("apply_command"):
+                lines.append(f"  - Apply after review: `{context['apply_command']}`")
     else:
         lines.append("- No open promo operations.")
     lines.append("")
@@ -445,7 +473,8 @@ def main() -> int:
     executions = read_json(SOCIAL_EXECUTIONS, {})
     readiness = read_json(EXECUTOR_READINESS, {})
     actions = (
-        platform_fix_actions(status, executions, readiness)
+        backlog_reschedule_actions(status)
+        + platform_fix_actions(status, executions, readiness)
         + apply_actions(plan)
         + approval_actions(plan, readiness)
         + pending_store_actions(status)
@@ -458,6 +487,7 @@ def main() -> int:
         "platform_fixes": sum(1 for action in actions if action["kind"] == "platform_fix"),
         "store_checks": sum(1 for action in actions if action["kind"] == "store_verification"),
         "manual_metric_updates": sum(1 for action in actions if action["kind"] == "manual_metrics"),
+        "backlog_reschedules": sum(1 for action in actions if action["kind"] == "backlog_reschedule"),
         "safe_apply_commands": sum(1 for action in actions if action["kind"] == "apply_approved"),
         "blocked_review_items": sum(1 for action in actions if action["context"].get("readiness_state") == "blocked"),
         "manual_only_review_items": sum(1 for action in actions if action["context"].get("readiness_state") == "manual_only"),

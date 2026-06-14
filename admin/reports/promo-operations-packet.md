@@ -1,19 +1,20 @@
 # Promo Operations Packet - Lily Roo
 
-Generated: 2026-06-14T01:00:44.440030Z
+Generated: 2026-06-14T01:04:40.473419Z
 
 ## Summary
-- Actions: **21**
+- Actions: **22**
 - User review: **6**
 - Platform fixes: **3**
 - Store checks: **7**
 - Manual metric updates: **5**
 - Safe apply commands ready: **0**
-- Urgency: **blocked: 1, high: 4, low: 5, medium: 11**
+- Urgency: **blocked: 1, high: 5, low: 5, medium: 11**
 
 ## Phase Counts
 - Fill manual metrics: **5**
 - Repair executor: **3**
+- Reschedule approved backlog: **1**
 - Review blocked drafts: **1**
 - Review draft posts: **5**
 - Verify music sites: **7**
@@ -28,6 +29,13 @@ Generated: 2026-06-14T01:00:44.440030Z
   - Public posting approved: `False`
   - Command: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --dry-run`
   - Approve after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --refresh-admin`
+
+### Reschedule approved backlog
+- **[high] Preview reschedule for approved past-due posts**
+  - Why: Approved posts are past due; preview a new schedule before any apply step.
+  - Detail: Preview first; apply only after confirming the new schedule and platform blockers.
+  - Command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-14T10:00:00-04:00' --spacing-hours 24`
+  - Apply after review: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-14T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin`
 
 ### Repair executor
 - **[high] Fix Facebook executor**
@@ -85,11 +93,6 @@ Generated: 2026-06-14T01:00:44.440030Z
   - Detail: Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release.
   - Latest snapshot checked: `2026-06-14T00:50:00.102761Z`
   - Command: `python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/apple_music_release_snapshot.json'`
-- **[medium] Re-check Twelve Dollars on HyperFollow**
-  - Why: Public store links should be checked until DistroKid exposes them.
-  - Detail: Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release.
-  - Latest snapshot checked: `2026-06-14T00:50:00.568141Z`
-  - Command: `python3 scripts/capture_hyperfollow_store_links.py --url 'https://distrokid.com/hyperfollow/lilyroo/twelve-dollars' --out 'data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json'`
 
 ## Guardrails
 - This packet does not publish, approve, apply, or post anything.

@@ -234,6 +234,22 @@ def validate_generated_outputs(failures):
             ok("promo operations packet groups approval, store, metric, and platform work")
         else:
             fail("promo_operations_packet.json missing required action groups", failures)
+        status = json.loads(PROMO_ENGINE_STATUS.read_text(encoding="utf-8")) if PROMO_ENGINE_STATUS.exists() else {}
+        monetization = (status.get("kpi") or {}).get("monetization") or {}
+        backlog_actions = [
+            action for action in actions
+            if action.get("kind") == "backlog_reschedule"
+        ]
+        if int(monetization.get("approved_backlog_posts") or 0):
+            if (
+                backlog_actions
+                and all("--apply" not in (action.get("command") or "") for action in backlog_actions)
+                and all((action.get("context") or {}).get("apply_command") for action in backlog_actions)
+                and summary.get("backlog_reschedules") == len(backlog_actions)
+            ):
+                ok("promo operations packet includes dry-run backlog reschedule action")
+            else:
+                fail("promo_operations_packet.json missing dry-run backlog reschedule action", failures)
         approval_review_actions = [
             action for action in actions
             if action.get("kind") == "approval_review"

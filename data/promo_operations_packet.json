@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-14T01:00:44.440030Z",
+  "generated_at": "2026-06-14T01:04:40.473419Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -8,50 +8,47 @@
     "executor_readiness": "data/executor_readiness_snapshot.json"
   },
   "summary": {
-    "action_count": 21,
+    "action_count": 22,
     "user_review": 6,
     "platform_fixes": 3,
     "store_checks": 7,
     "manual_metric_updates": 5,
+    "backlog_reschedules": 1,
     "safe_apply_commands": 0,
     "blocked_review_items": 1,
     "manual_only_review_items": 2,
     "phases": {
       "Fill manual metrics": 5,
       "Repair executor": 3,
+      "Reschedule approved backlog": 1,
       "Review blocked drafts": 1,
       "Review draft posts": 5,
       "Verify music sites": 7
     },
     "urgencies": {
       "blocked": 1,
-      "high": 4,
+      "high": 5,
       "low": 5,
       "medium": 11
     },
     "next_action": {
-      "label": "Fix Facebook executor",
-      "kind": "platform_fix",
-      "priority": 1,
-      "command": "python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run",
+      "label": "Preview reschedule for approved past-due posts",
+      "kind": "backlog_reschedule",
+      "priority": 0,
+      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-14T10:00:00-04:00' --spacing-hours 24",
       "context": {
-        "post_id": "FP-AUTO-265",
-        "platform": "Facebook",
-        "reason": "max_attempts_exceeded",
-        "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
-        "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
-        "repair_apply_command": "",
-        "readiness": {
-          "ready": true
-        }
+        "approved_backlog_posts": 3,
+        "approved_upcoming_posts": 0,
+        "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-14T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+        "note": "Preview first; apply only after confirming the new schedule and platform blockers."
       },
-      "phase": "Repair executor",
+      "phase": "Reschedule approved backlog",
       "urgency": "high",
-      "urgency_reason": "Platform executor needs repair before queued auto posts can publish.",
-      "status": "needs_fix",
+      "urgency_reason": "Approved posts are past due; preview a new schedule before any apply step.",
+      "status": "waiting_for_user",
       "sort_key": [
         1,
-        1,
+        0,
         0
       ]
     }
@@ -105,7 +102,28 @@
       "sort_key": [
         0,
         40,
-        5
+        6
+      ]
+    },
+    {
+      "label": "Preview reschedule for approved past-due posts",
+      "kind": "backlog_reschedule",
+      "priority": 0,
+      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-14T10:00:00-04:00' --spacing-hours 24",
+      "context": {
+        "approved_backlog_posts": 3,
+        "approved_upcoming_posts": 0,
+        "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-14T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+        "note": "Preview first; apply only after confirming the new schedule and platform blockers."
+      },
+      "phase": "Reschedule approved backlog",
+      "urgency": "high",
+      "urgency_reason": "Approved posts are past due; preview a new schedule before any apply step.",
+      "status": "waiting_for_user",
+      "sort_key": [
+        1,
+        0,
+        0
       ]
     },
     {
@@ -131,7 +149,7 @@
       "sort_key": [
         1,
         1,
-        0
+        1
       ]
     },
     {
@@ -175,7 +193,7 @@
       "sort_key": [
         1,
         1,
-        1
+        2
       ]
     },
     {
@@ -203,7 +221,7 @@
       "sort_key": [
         1,
         1,
-        2
+        3
       ]
     },
     {
@@ -239,7 +257,7 @@
       "sort_key": [
         1,
         10,
-        3
+        4
       ]
     },
     {
@@ -274,7 +292,7 @@
       "sort_key": [
         2,
         10,
-        4
+        5
       ]
     },
     {
@@ -307,7 +325,7 @@
       "sort_key": [
         2,
         10,
-        6
+        7
       ]
     },
     {
@@ -344,7 +362,7 @@
       "sort_key": [
         2,
         15,
-        7
+        8
       ]
     },
     {
@@ -381,7 +399,7 @@
       "sort_key": [
         2,
         15,
-        8
+        9
       ]
     },
     {
@@ -408,7 +426,7 @@
       "sort_key": [
         2,
         20,
-        9
+        10
       ]
     },
     {
@@ -435,7 +453,7 @@
       "sort_key": [
         2,
         20,
-        10
+        11
       ]
     },
     {
@@ -462,7 +480,7 @@
       "sort_key": [
         2,
         20,
-        11
+        12
       ]
     },
     {
@@ -489,7 +507,7 @@
       "sort_key": [
         2,
         20,
-        12
+        13
       ]
     },
     {
@@ -516,7 +534,7 @@
       "sort_key": [
         2,
         20,
-        13
+        14
       ]
     },
     {
@@ -543,7 +561,7 @@
       "sort_key": [
         2,
         20,
-        14
+        15
       ]
     },
     {
@@ -570,7 +588,7 @@
       "sort_key": [
         2,
         20,
-        15
+        16
       ]
     },
     {
@@ -597,7 +615,7 @@
       "sort_key": [
         3,
         30,
-        16
+        17
       ]
     },
     {
@@ -625,7 +643,7 @@
       "sort_key": [
         3,
         30,
-        17
+        18
       ]
     },
     {
@@ -655,7 +673,7 @@
       "sort_key": [
         3,
         30,
-        18
+        19
       ]
     },
     {
@@ -683,7 +701,7 @@
       "sort_key": [
         3,
         30,
-        19
+        20
       ]
     },
     {
@@ -711,7 +729,7 @@
       "sort_key": [
         3,
         30,
-        20
+        21
       ]
     }
   ]
