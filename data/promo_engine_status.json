@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-14T01:16:39.299815+00:00",
+  "generated_at": "2026-06-14T01:21:45.846668+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -192,15 +192,15 @@
         "command": "python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impressions_7d=VALUE --refresh-admin"
       }
     ],
-    "live_metrics_updated_at": "2026-06-14T00:49:57.107Z",
+    "live_metrics_updated_at": "2026-06-14T01:21:39.368Z",
     "metrics_history": {
       "snapshot_count": 5,
-      "updated_at": "2026-06-14T00:50:05.179216Z",
+      "updated_at": "2026-06-14T01:21:45.157543Z",
       "latest_date": "2026-06-14",
       "latest": {
         "date": "2026-06-14",
-        "captured_at": "2026-06-14T00:50:05.179216Z",
-        "live_metrics_updated_at": "2026-06-14T00:49:57.107Z",
+        "captured_at": "2026-06-14T01:21:45.157543Z",
+        "live_metrics_updated_at": "2026-06-14T01:21:39.368Z",
         "youtube": {
           "subscribers": 5,
           "total_views": 251,
@@ -283,7 +283,7 @@
     },
     "social_execution_summary": {
       "ok": true,
-      "updated_at": "2026-06-14T00:50:05.099350Z",
+      "updated_at": "2026-06-14T01:21:45.055703Z",
       "http_status": 200,
       "execution_count": 6,
       "posted_count": 0,
@@ -307,7 +307,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-06-14T00:45:25.247Z",
+          "updated_at": "2026-06-14T01:15:25.299Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app."
@@ -318,7 +318,7 @@
           "status": "blocked",
           "reason": "tiktok_credentials_missing",
           "attempts": 0,
-          "updated_at": "2026-06-14T00:45:25.007Z",
+          "updated_at": "2026-06-14T01:15:25.051Z",
           "source": "cron",
           "post_url": "",
           "error_summary": ""
@@ -329,7 +329,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-06-14T00:45:24.728Z",
+          "updated_at": "2026-06-14T01:15:24.782Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID."
@@ -340,7 +340,7 @@
           "status": "blocked",
           "reason": "not_approved",
           "attempts": 0,
-          "updated_at": "2026-06-14T00:45:24.493Z",
+          "updated_at": "2026-06-14T01:15:24.543Z",
           "source": "cron",
           "post_url": "",
           "error_summary": ""
@@ -351,7 +351,7 @@
           "status": "blocked",
           "reason": "not_approved",
           "attempts": 0,
-          "updated_at": "2026-06-14T00:45:24.276Z",
+          "updated_at": "2026-06-14T01:15:24.291Z",
           "source": "cron",
           "post_url": "",
           "error_summary": ""
@@ -364,7 +364,7 @@
           "status": "blocked",
           "reason": "not_approved",
           "attempts": 0,
-          "updated_at": "2026-06-14T00:45:24.493Z",
+          "updated_at": "2026-06-14T01:15:24.543Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "",
@@ -379,7 +379,7 @@
           "status": "blocked",
           "reason": "not_approved",
           "attempts": 0,
-          "updated_at": "2026-06-14T00:45:24.276Z",
+          "updated_at": "2026-06-14T01:15:24.291Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "",
@@ -394,7 +394,7 @@
           "status": "blocked",
           "reason": "not_approved",
           "attempts": 0,
-          "updated_at": "2026-06-14T00:45:24.003Z",
+          "updated_at": "2026-06-14T01:15:23.997Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "",
@@ -411,7 +411,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-06-14T00:45:25.247Z",
+          "updated_at": "2026-06-14T01:15:25.299Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
@@ -426,7 +426,7 @@
           "status": "blocked",
           "reason": "tiktok_credentials_missing",
           "attempts": 0,
-          "updated_at": "2026-06-14T00:45:25.007Z",
+          "updated_at": "2026-06-14T01:15:25.051Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "",
@@ -441,7 +441,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-06-14T00:45:24.728Z",
+          "updated_at": "2026-06-14T01:15:24.782Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
@@ -458,10 +458,10 @@
       "available": true,
       "safe_mode": true,
       "finalized": true,
-      "finished_at": "2026-06-14T00:50:05.850293Z",
-      "duration_seconds": 9.63,
-      "command_count": 11,
-      "passed": 11,
+      "finished_at": "2026-06-14T01:21:45.820394Z",
+      "duration_seconds": 8.83,
+      "command_count": 13,
+      "passed": 13,
       "failed": 0,
       "allowed_failures": 0,
       "failed_commands": [],
@@ -503,18 +503,18 @@
       "stale": 1,
       "missing": 0,
       "checked_no_change": 1,
-      "checked_at": "2026-06-14T01:16:39.299815+00:00"
+      "checked_at": "2026-06-14T01:21:45.846668+00:00"
     },
     "sources": [
       {
         "name": "release_status",
         "path": "data/distrokid_release_status.json",
         "status": "checked_no_change",
-        "age_hours": 119.5,
+        "age_hours": 119.6,
         "max_age_hours": 72,
         "timestamp": "2026-06-09T01:47:42+00:00",
         "refresh_command": "Store checks are current; update data/distrokid_release_status.json when a verified public URL appears.",
-        "checked_at": "2026-06-14T01:16:39.299815+00:00",
+        "checked_at": "2026-06-14T01:21:45.846668+00:00",
         "checked_age_hours": 0.0,
         "evidence": "7 pending store links checked; no new public URLs found."
       },
@@ -522,7 +522,7 @@
         "name": "scheduled_posts",
         "path": "admin/future-posts.json",
         "status": "fresh",
-        "age_hours": 28.3,
+        "age_hours": 28.4,
         "max_age_hours": 72,
         "timestamp": "2026-06-12T20:56:00.115863+00:00",
         "refresh_command": "python3 scripts/sync_future_posts.py"
@@ -531,16 +531,16 @@
         "name": "promo_queue_plan",
         "path": "data/promo_queue_plan.json",
         "status": "fresh",
-        "age_hours": 0.4,
+        "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T00:50:05.142702+00:00",
+        "timestamp": "2026-06-14T01:21:45.121169+00:00",
         "refresh_command": "python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
         "name": "published_log",
         "path": "admin/content/Published_Log.csv",
         "status": "fresh",
-        "age_hours": 156.7,
+        "age_hours": 156.8,
         "max_age_hours": 168,
         "timestamp": "2026-06-07T12:36:37.141276+00:00",
         "refresh_command": "Export or append latest published posts to admin/content/Published_Log.csv."
@@ -549,7 +549,7 @@
         "name": "manual_metrics",
         "path": "data/manual_social_stats.json",
         "status": "stale",
-        "age_hours": 153.5,
+        "age_hours": 153.6,
         "max_age_hours": 72,
         "timestamp": "2026-06-07T15:47:26.729764+00:00",
         "refresh_command": "Update data/manual_social_stats.json with latest manual metrics."
@@ -558,27 +558,27 @@
         "name": "live_metrics",
         "path": "data/live_social_metrics.json",
         "status": "fresh",
-        "age_hours": 0.4,
+        "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T00:49:57.107000+00:00",
+        "timestamp": "2026-06-14T01:21:39.368000+00:00",
         "refresh_command": "python3 scripts/capture_live_metrics.py"
       },
       {
         "name": "metrics_history",
         "path": "data/metrics_history.json",
         "status": "fresh",
-        "age_hours": 0.4,
+        "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T00:50:05.179216+00:00",
+        "timestamp": "2026-06-14T01:21:45.157543+00:00",
         "refresh_command": "python3 scripts/update_metrics_history.py --refresh-admin"
       },
       {
         "name": "executor_readiness",
         "path": "data/executor_readiness_snapshot.json",
         "status": "fresh",
-        "age_hours": 0.4,
+        "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T00:50:04.156943+00:00",
+        "timestamp": "2026-06-14T01:21:44.121379+00:00",
         "refresh_command": "python3 scripts/capture_executor_readiness.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -587,34 +587,34 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T01:16:39.299815+00:00",
+        "timestamp": "2026-06-14T01:21:45.846668+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin"
       },
       {
         "name": "social_executions",
         "path": "data/social_execution_snapshot.json",
         "status": "fresh",
-        "age_hours": 0.4,
+        "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T00:50:05.099350+00:00",
+        "timestamp": "2026-06-14T01:21:45.055703+00:00",
         "refresh_command": "python3 scripts/capture_social_executions.py && python3 scripts/update_promo_engine_status.py"
       },
       {
         "name": "promo_refresh_run",
         "path": "data/promo_admin_refresh_run.json",
         "status": "fresh",
-        "age_hours": 0.4,
+        "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T00:51:02.946778+00:00",
+        "timestamp": "2026-06-14T01:21:45.820733+00:00",
         "refresh_command": "python3 scripts/refresh_promo_admin.py"
       },
       {
         "name": "promo_refresh_workflow_status",
         "path": "data/promo_refresh_workflow_status.json",
         "status": "fresh",
-        "age_hours": 0.4,
+        "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T00:50:11.363764+00:00",
+        "timestamp": "2026-06-14T01:21:45.617730+00:00",
         "refresh_command": "python3 scripts/capture_github_workflow_status.py && python3 scripts/update_promo_engine_status.py"
       }
     ],
@@ -753,7 +753,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-14T00:49:57.181431Z",
+            "updated_at": "2026-06-14T01:21:39.382226Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
           }
         },
@@ -764,7 +764,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-14T00:50:00.102761Z",
+            "updated_at": "2026-06-14T01:21:40.562473Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
           }
         },
@@ -775,7 +775,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-14T00:50:00.568141Z",
+            "updated_at": "2026-06-14T01:21:40.916006Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
           }
         }
@@ -872,7 +872,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-14T00:50:00.625185Z",
+            "updated_at": "2026-06-14T01:21:40.991935Z",
             "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
           }
         },
@@ -883,7 +883,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-14T00:50:01.918470Z",
+            "updated_at": "2026-06-14T01:21:42.096526Z",
             "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
           }
         },
@@ -894,7 +894,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-14T00:50:01.992730Z",
+            "updated_at": "2026-06-14T01:21:42.168107Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release."
           }
         },
@@ -905,7 +905,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-14T00:50:03.945594Z",
+            "updated_at": "2026-06-14T01:21:43.921128Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
           }
         }

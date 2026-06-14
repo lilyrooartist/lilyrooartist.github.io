@@ -21,6 +21,7 @@ PROMO_REFRESH_RUN = ROOT / "data" / "promo_admin_refresh_run.json"
 PROMO_REFRESH_WORKFLOW_STATUS = ROOT / "data" / "promo_refresh_workflow_status.json"
 PROMO_OPERATIONS_PACKET = ROOT / "data" / "promo_operations_packet.json"
 PLATFORM_REPAIR_STATUS = ROOT / "data" / "platform_repair_status.json"
+APPROVAL_RUNWAY = ROOT / "data" / "approval_runway.json"
 MANUAL_METRIC_TEMPLATE = ROOT / "data" / "manual_metric_collection_template.csv"
 SPOTIFY_SNAPSHOT = ROOT / "data" / "spotify_release_snapshot.json"
 APPLE_MUSIC_SNAPSHOT = ROOT / "data" / "apple_music_release_snapshot.json"
@@ -49,9 +50,11 @@ PROMO_REFRESH_WORKFLOW_CAPTURE = ROOT / "scripts" / "capture_github_workflow_sta
 PROMO_REFRESH_WORKFLOW = ROOT / ".github" / "workflows" / "promo-admin-refresh.yml"
 PROMO_OPERATIONS_SCRIPT = ROOT / "scripts" / "build_promo_operations_packet.py"
 PLATFORM_REPAIR_SCRIPT = ROOT / "scripts" / "build_platform_repair_status.py"
+APPROVAL_RUNWAY_SCRIPT = ROOT / "scripts" / "build_approval_runway.py"
 MANUAL_METRIC_COLLECTION_SCRIPT = ROOT / "scripts" / "build_manual_metric_collection.py"
 REPORT = ROOT / "admin" / "reports" / "weekly-social-report.md"
 PROMO_OPERATIONS_REPORT = ROOT / "admin" / "reports" / "promo-operations-packet.md"
+APPROVAL_RUNWAY_REPORT = ROOT / "admin" / "reports" / "approval-runway.md"
 MANUAL_METRIC_REPORT = ROOT / "admin" / "reports" / "manual-metric-collection.md"
 INDEX = CONTENT / "content_index.json"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
@@ -338,6 +341,22 @@ def validate_generated_outputs(failures):
             fail("platform_repair_status.json missing repair row summary or preview commands", failures)
     else:
         fail("platform_repair_status.json missing; run scripts/build_platform_repair_status.py", failures)
+    if APPROVAL_RUNWAY.exists():
+        runway = json.loads(APPROVAL_RUNWAY.read_text(encoding="utf-8"))
+        summary = runway.get("summary") or {}
+        rows = runway.get("rows") or []
+        recommended = summary.get("recommended_ids") or []
+        if (
+            runway.get("safe_mode") is True
+            and summary.get("review_count") == len(rows)
+            and summary.get("ready_after_approval") == len(recommended)
+            and all(row.get("approval_preview_command") and "--dry-run" in row.get("approval_preview_command", "") for row in rows)
+        ):
+            ok(f"approval runway ranks {len(rows)} draft approval(s)")
+        else:
+            fail("approval_runway.json missing safe approval runway summary or dry-run previews", failures)
+    else:
+        fail("approval_runway.json missing; run scripts/build_approval_runway.py", failures)
     if MANUAL_METRIC_TEMPLATE.exists():
         rows = read_csv(MANUAL_METRIC_TEMPLATE)
         required = {
@@ -884,6 +903,7 @@ def validate_generated_outputs(failures):
             "capture_social_executions.py",
             "capture_github_workflow_status.py",
             "build_promo_operations_packet.py",
+            "build_approval_runway.py",
             "build_platform_repair_status.py",
             "build_manual_metric_collection.py",
             "update_weekly_report.py",
@@ -957,6 +977,14 @@ def validate_generated_outputs(failures):
             fail("build_platform_repair_status.py missing repair status outputs or executes commands", failures)
     else:
         fail("build_platform_repair_status.py missing", failures)
+    if APPROVAL_RUNWAY_SCRIPT.exists():
+        runway_text = APPROVAL_RUNWAY_SCRIPT.read_text(encoding="utf-8")
+        if "approval_runway.json" in runway_text and "approval-runway.md" in runway_text and "subscriber_growth_score" in runway_text and "approval_preview_command" in runway_text and "subprocess" not in runway_text:
+            ok("approval runway builder is review-only")
+        else:
+            fail("build_approval_runway.py missing runway outputs or executes commands", failures)
+    else:
+        fail("build_approval_runway.py missing", failures)
     if MANUAL_METRIC_COLLECTION_SCRIPT.exists():
         collection_text = MANUAL_METRIC_COLLECTION_SCRIPT.read_text(encoding="utf-8")
         if "manual_metric_collection_template.csv" in collection_text and "manual-metric-collection.md" in collection_text and "pending_manual_by_platform" in collection_text and "collection_url" in collection_text and "subprocess" not in collection_text:
@@ -973,6 +1001,14 @@ def validate_generated_outputs(failures):
             fail("promo operations markdown report missing expected sections", failures)
     else:
         fail("promo-operations-packet.md missing", failures)
+    if APPROVAL_RUNWAY_REPORT.exists():
+        runway_report_text = APPROVAL_RUNWAY_REPORT.read_text(encoding="utf-8")
+        if "Approval Runway" in runway_report_text and "Recommended Sequence" in runway_report_text and "Guardrails" in runway_report_text:
+            ok("approval runway markdown report present")
+        else:
+            fail("approval-runway.md missing expected sections", failures)
+    else:
+        fail("approval-runway.md missing", failures)
 
 
 def validate_report(failures):

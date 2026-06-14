@@ -1,0 +1,117 @@
+{
+  "generated_at": "2026-06-14T01:21:45.741694Z",
+  "safe_mode": true,
+  "source": {
+    "promo_engine_status": "data/promo_engine_status.json",
+    "promo_queue_plan": "data/promo_queue_plan.json"
+  },
+  "summary": {
+    "review_count": 6,
+    "ready_after_approval": 3,
+    "manual_only": 2,
+    "blocked": 1,
+    "recommended_approval_count": 3,
+    "recommended_ids": [
+      "FP-PLAN-TWELVE-DOLLARS-FACEBOOK",
+      "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+      "FP-PLAN-TWELVE-DOLLARS-X"
+    ],
+    "runway_status": "stalled",
+    "subscribers_per_week": 0.0,
+    "required_subscribers_per_week_365": 19.08,
+    "all_review_preview_command": "python3 scripts/approve_promo_queue_plan.py --all --dry-run",
+    "all_review_approval_command": "python3 scripts/approve_promo_queue_plan.py --all --refresh-admin"
+  },
+  "rows": [
+    {
+      "id": "FP-PLAN-TWELVE-DOLLARS-FACEBOOK",
+      "release": "Twelve Dollars",
+      "platform": "Facebook",
+      "scheduled_at": "2026-06-17T11:20:00-04:00",
+      "execution_mode": "auto",
+      "post_type": "image",
+      "readiness_state": "ready_after_approval",
+      "readiness_message": "Ready after approval.",
+      "text": "Twelve Dollars is live in the Lily Roo archive. The remastered videos are up, the playlist is public, and the stage finally has the right kind of trouble on it.",
+      "subscriber_growth_score": 108,
+      "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --dry-run",
+      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --refresh-admin",
+      "recommendation": "Review copy, then approve to unlock an auto-publishable subscriber CTA."
+    },
+    {
+      "id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+      "release": "Twelve Dollars",
+      "platform": "Instagram",
+      "scheduled_at": "2026-06-15T14:05:00-04:00",
+      "execution_mode": "auto",
+      "post_type": "image",
+      "readiness_state": "ready_after_approval",
+      "readiness_message": "Ready after approval.",
+      "text": "Twelve Dollars is live on YouTube: stage lights, scattered bills, impossible shoes, and one very stubborn little signal.",
+      "subscriber_growth_score": 108,
+      "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --dry-run",
+      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --refresh-admin",
+      "recommendation": "Review copy, then approve to unlock an auto-publishable subscriber CTA."
+    },
+    {
+      "id": "FP-PLAN-TWELVE-DOLLARS-X",
+      "release": "Twelve Dollars",
+      "platform": "X",
+      "scheduled_at": "2026-06-14T10:15:00-04:00",
+      "execution_mode": "auto",
+      "post_type": "image",
+      "readiness_state": "ready_after_approval",
+      "readiness_message": "Ready after approval.",
+      "text": "Twelve Dollars is the part where the stage gets too bright and the joke gets honest. Full album playlist is live.",
+      "subscriber_growth_score": 108,
+      "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-X --dry-run",
+      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-X --refresh-admin",
+      "recommendation": "Review copy, then approve to unlock an auto-publishable subscriber CTA."
+    },
+    {
+      "id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+      "release": "Analog Myth",
+      "platform": "YouTube Community",
+      "scheduled_at": "2026-06-19T18:30:00-04:00",
+      "execution_mode": "manual",
+      "post_type": "community",
+      "readiness_state": "manual_only",
+      "readiness_message": "YouTube Community posts are copy-ready manual workflow.",
+      "text": "Analog Myth transmission is live: 13, Girls Camp, Analog Myth, Spilling the Tea, No Mortgage, Guards Down, Slow Walk, The Power of Light.",
+      "subscriber_growth_score": 101,
+      "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --dry-run",
+      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin",
+      "recommendation": "Review copy and use the manual posting workflow; approval will not auto-post this row."
+    },
+    {
+      "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+      "release": "Twelve Dollars",
+      "platform": "YouTube Community",
+      "scheduled_at": "2026-06-18T18:30:00-04:00",
+      "execution_mode": "manual",
+      "post_type": "community",
+      "readiness_state": "manual_only",
+      "readiness_message": "YouTube Community posts are copy-ready manual workflow.",
+      "text": "New album transmission: Twelve Dollars. Remastered videos, updated art, full playlist live now.",
+      "subscriber_growth_score": 101,
+      "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
+      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+      "recommendation": "Review copy and use the manual posting workflow; approval will not auto-post this row."
+    },
+    {
+      "id": "FP-PLAN-TWELVE-DOLLARS-TIKTOK",
+      "release": "Twelve Dollars",
+      "platform": "TikTok",
+      "scheduled_at": "2026-06-16T20:40:00-04:00",
+      "execution_mode": "auto",
+      "post_type": "video",
+      "readiness_state": "blocked",
+      "readiness_message": "Executor credentials or platform setup are not ready.",
+      "text": "Twelve Dollars is what happens when the joke walks on stage wearing impossible shoes. Full album playlist is live.",
+      "subscriber_growth_score": 3,
+      "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --dry-run",
+      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --refresh-admin",
+      "recommendation": "Repair platform readiness before approval can create reliable distribution."
+    }
+  ]
+}

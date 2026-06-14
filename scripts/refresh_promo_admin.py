@@ -74,6 +74,11 @@ FINALIZE_STEPS = [
         "required": True,
     },
     {
+        "name": "build_approval_runway",
+        "command": ["python3", "scripts/build_approval_runway.py"],
+        "required": True,
+    },
+    {
         "name": "build_platform_repair_status",
         "command": ["python3", "scripts/build_platform_repair_status.py"],
         "required": True,
