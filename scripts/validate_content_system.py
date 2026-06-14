@@ -24,6 +24,7 @@ PLATFORM_REPAIR_STATUS = ROOT / "data" / "platform_repair_status.json"
 APPROVAL_RUNWAY = ROOT / "data" / "approval_runway.json"
 SUBSCRIBER_CTA_AUDIT = ROOT / "data" / "subscriber_cta_audit.json"
 MONETIZATION_ACTIVATION_PLAN = ROOT / "data" / "monetization_activation_plan.json"
+BACKLOG_RESCHEDULE_PREVIEW = ROOT / "data" / "backlog_reschedule_preview.json"
 MANUAL_METRIC_TEMPLATE = ROOT / "data" / "manual_metric_collection_template.csv"
 SPOTIFY_SNAPSHOT = ROOT / "data" / "spotify_release_snapshot.json"
 APPLE_MUSIC_SNAPSHOT = ROOT / "data" / "apple_music_release_snapshot.json"
@@ -55,12 +56,14 @@ PLATFORM_REPAIR_SCRIPT = ROOT / "scripts" / "build_platform_repair_status.py"
 APPROVAL_RUNWAY_SCRIPT = ROOT / "scripts" / "build_approval_runway.py"
 SUBSCRIBER_CTA_AUDIT_SCRIPT = ROOT / "scripts" / "build_subscriber_cta_audit.py"
 MONETIZATION_ACTIVATION_SCRIPT = ROOT / "scripts" / "build_monetization_activation_plan.py"
+BACKLOG_RESCHEDULE_PREVIEW_SCRIPT = ROOT / "scripts" / "build_backlog_reschedule_preview.py"
 MANUAL_METRIC_COLLECTION_SCRIPT = ROOT / "scripts" / "build_manual_metric_collection.py"
 REPORT = ROOT / "admin" / "reports" / "weekly-social-report.md"
 PROMO_OPERATIONS_REPORT = ROOT / "admin" / "reports" / "promo-operations-packet.md"
 APPROVAL_RUNWAY_REPORT = ROOT / "admin" / "reports" / "approval-runway.md"
 SUBSCRIBER_CTA_AUDIT_REPORT = ROOT / "admin" / "reports" / "subscriber-cta-audit.md"
 MONETIZATION_ACTIVATION_REPORT = ROOT / "admin" / "reports" / "monetization-activation-plan.md"
+BACKLOG_RESCHEDULE_PREVIEW_REPORT = ROOT / "admin" / "reports" / "backlog-reschedule-preview.md"
 MANUAL_METRIC_REPORT = ROOT / "admin" / "reports" / "manual-metric-collection.md"
 INDEX = CONTENT / "content_index.json"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
@@ -409,6 +412,24 @@ def validate_generated_outputs(failures):
             fail("monetization_activation_plan.json missing safe activation summary or action phases", failures)
     else:
         fail("monetization_activation_plan.json missing; run scripts/build_monetization_activation_plan.py", failures)
+    if BACKLOG_RESCHEDULE_PREVIEW.exists():
+        backlog_preview = json.loads(BACKLOG_RESCHEDULE_PREVIEW.read_text(encoding="utf-8"))
+        summary = backlog_preview.get("summary") or {}
+        items = backlog_preview.get("items") or []
+        blocked = [item for item in items if item.get("blocked")]
+        if (
+            backlog_preview.get("safe_mode") is True
+            and summary.get("approved_backlog_count") == len(items)
+            and summary.get("blocked_backlog_count") == len(blocked)
+            and summary.get("clear_to_apply_count") == len(items) - len(blocked)
+            and bool(summary.get("apply_allowed_without_override")) == (len(blocked) == 0)
+            and all(item.get("id") and item.get("current_scheduled_at") and item.get("proposed_scheduled_at") for item in items)
+        ):
+            ok(f"backlog reschedule preview checks {len(items)} approved backlog row(s)")
+        else:
+            fail("backlog_reschedule_preview.json missing safe summary, blocker accounting, or proposed rows", failures)
+    else:
+        fail("backlog_reschedule_preview.json missing; run scripts/build_backlog_reschedule_preview.py", failures)
     if MANUAL_METRIC_TEMPLATE.exists():
         rows = read_csv(MANUAL_METRIC_TEMPLATE)
         required = {
@@ -968,9 +989,12 @@ def validate_generated_outputs(failures):
             "build_approval_runway.py",
             "build_subscriber_cta_audit.py",
             "build_monetization_activation_plan.py",
+            "build_backlog_reschedule_preview.py",
             "build_platform_repair_status.py",
             "build_manual_metric_collection.py",
             "update_weekly_report.py",
+            "timeout_seconds",
+            "TimeoutExpired",
         ]
         forbidden_bits = [
             "apply_promo_queue_plan.py --apply",
@@ -1065,6 +1089,14 @@ def validate_generated_outputs(failures):
             fail("build_monetization_activation_plan.py missing activation outputs or executes commands", failures)
     else:
         fail("build_monetization_activation_plan.py missing", failures)
+    if BACKLOG_RESCHEDULE_PREVIEW_SCRIPT.exists():
+        backlog_text = BACKLOG_RESCHEDULE_PREVIEW_SCRIPT.read_text(encoding="utf-8")
+        if "backlog_reschedule_preview.json" in backlog_text and "backlog-reschedule-preview.md" in backlog_text and "Apply allowed without override" in backlog_text and "subprocess" not in backlog_text:
+            ok("backlog reschedule preview builder is review-only")
+        else:
+            fail("build_backlog_reschedule_preview.py missing preview outputs or executes commands", failures)
+    else:
+        fail("build_backlog_reschedule_preview.py missing", failures)
     if MANUAL_METRIC_COLLECTION_SCRIPT.exists():
         collection_text = MANUAL_METRIC_COLLECTION_SCRIPT.read_text(encoding="utf-8")
         if "manual_metric_collection_template.csv" in collection_text and "manual-metric-collection.md" in collection_text and "pending_manual_by_platform" in collection_text and "collection_url" in collection_text and "subprocess" not in collection_text:
@@ -1105,6 +1137,14 @@ def validate_generated_outputs(failures):
             fail("monetization-activation-plan.md missing expected sections", failures)
     else:
         fail("monetization-activation-plan.md missing", failures)
+    if BACKLOG_RESCHEDULE_PREVIEW_REPORT.exists():
+        backlog_report_text = BACKLOG_RESCHEDULE_PREVIEW_REPORT.read_text(encoding="utf-8")
+        if "Backlog Reschedule Preview" in backlog_report_text and "Proposed Reschedule" in backlog_report_text and "Guardrails" in backlog_report_text:
+            ok("backlog reschedule markdown report present")
+        else:
+            fail("backlog-reschedule-preview.md missing expected sections", failures)
+    else:
+        fail("backlog-reschedule-preview.md missing", failures)
 
 
 def validate_report(failures):

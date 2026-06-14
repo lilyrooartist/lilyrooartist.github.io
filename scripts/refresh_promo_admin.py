@@ -11,6 +11,7 @@ from time import monotonic
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "data" / "promo_admin_refresh_run.json"
+DEFAULT_OPTIONAL_TIMEOUT_SECONDS = 45
 DISALLOWED_COMMAND_PARTS = {
     "--apply",
     "post_youtube_from_queue.py",
@@ -31,6 +32,17 @@ STEPS = [
         "name": "verify_pending_store_links",
         "command": ["python3", "scripts/verify_pending_store_links.py", "--refresh-admin"],
         "required": False,
+        "timeout_seconds": 45,
+        "preserve_on_failure": [
+            "data/store_verification_history.json",
+            "data/store-verification/analog-myth/apple_music_release_snapshot.json",
+            "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
+            "data/store-verification/analog-myth/spotify_release_snapshot.json",
+            "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
+            "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
+            "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
+            "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
+        ],
     },
     {
         "name": "capture_executor_readiness",
@@ -89,6 +101,11 @@ FINALIZE_STEPS = [
         "required": True,
     },
     {
+        "name": "build_backlog_reschedule_preview",
+        "command": ["python3", "scripts/build_backlog_reschedule_preview.py"],
+        "required": True,
+    },
+    {
         "name": "build_platform_repair_status",
         "command": ["python3", "scripts/build_platform_repair_status.py"],
         "required": True,
@@ -107,6 +124,8 @@ FINALIZE_STEPS = [
 
 
 def trim(value: str, limit: int = 4000) -> str:
+    if isinstance(value, bytes):
+        value = value.decode("utf-8", errors="replace")
     value = value.strip()
     return value if len(value) <= limit else value[:limit] + "\n...[truncated]"
 
@@ -141,8 +160,21 @@ def run_step(step: dict, dry_run: bool) -> dict:
             "stdout_tail": "dry-run",
             "stderr_tail": "",
         }
-    proc = subprocess.run(command, cwd=ROOT, text=True, capture_output=True, check=False)
-    if not step["required"] and proc.returncode != 0:
+    timeout = step.get("timeout_seconds")
+    if timeout is None and not step["required"]:
+        timeout = DEFAULT_OPTIONAL_TIMEOUT_SECONDS
+    timed_out = False
+    try:
+        proc = subprocess.run(command, cwd=ROOT, text=True, capture_output=True, check=False, timeout=timeout)
+        returncode = proc.returncode
+        stdout = proc.stdout
+        stderr = proc.stderr
+    except subprocess.TimeoutExpired as exc:
+        timed_out = True
+        returncode = 124
+        stdout = exc.stdout or ""
+        stderr = (exc.stderr or "") + f"\nTimed out after {timeout} seconds."
+    if not step["required"] and returncode != 0:
         for relative, content in backups.items():
             path = ROOT / relative
             if content is None:
@@ -155,11 +187,13 @@ def run_step(step: dict, dry_run: bool) -> dict:
         "name": step["name"],
         "command": command_text(command),
         "required": step["required"],
-        "returncode": proc.returncode,
-        "ok": proc.returncode == 0,
+        "timeout_seconds": timeout,
+        "timed_out": timed_out,
+        "returncode": returncode,
+        "ok": returncode == 0,
         "duration_seconds": round(monotonic() - started, 2),
-        "stdout_tail": trim(proc.stdout),
-        "stderr_tail": trim(proc.stderr),
+        "stdout_tail": trim(stdout),
+        "stderr_tail": trim(stderr),
     }
 
 

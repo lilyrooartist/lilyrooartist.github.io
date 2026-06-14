@@ -487,6 +487,13 @@
               </div>
             </section>
 
+            <section class="report-card" aria-labelledby="backlog-reschedule-heading">
+              <h2 id="backlog-reschedule-heading">Backlog Reschedule</h2>
+              <div class="queue-list" id="backlog-reschedule-preview">
+                <div class="muted">Loading backlog reschedule preview...</div>
+              </div>
+            </section>
+
             <section class="report-card" aria-labelledby="promo-plan-heading">
               <h2 id="promo-plan-heading">Promo Queue Plan</h2>
               <div class="queue-list" id="promo-queue-plan">
@@ -540,7 +547,7 @@
 <script type="text/plain" id="embedded-weekly-report"># Weekly Social Report — Lily Roo
 
 **Period:** 2026-06-07 to 2026-06-13
-**Last updated:** 2026-06-13 09:36 PM EDT
+**Last updated:** 2026-06-13 09:44 PM EDT
 
 ## KPI Goal
 - Primary growth target: **1,000 YouTube subscribers** (monetization milestone)
@@ -661,7 +668,7 @@
 - Latest post: https://www.facebook.com/903693509504290_122118326547249470
 
 ## Metrics Snapshot
-- Live API captured: **2026-06-14T01:36:45.330Z**
+- Live API captured: **2026-06-14T01:43:28.072Z**
 - Snapshot file: `data/live_social_metrics.json`
 - YouTube public RSS captured: **2026-06-09T12:08:07.783949Z**
 - YouTube public snapshot file: `data/youtube_public_snapshot.json`
@@ -671,9 +678,9 @@
 - YouTube Music snapshot file: `data/youtube_music_release_snapshot.json`
 - HyperFollow stores captured: **2026-06-07T20:51:14.275569Z**
 - HyperFollow snapshot file: `data/hyperfollow_store_links_snapshot.json`
-- All-release store verification captured: **2026-06-14T01:36:51.981327+00:00**
+- All-release store verification captured: **2026-06-14T01:44:14.574885+00:00**
 - All-release store verification file: `data/store_verification_history.json`
-- Social executor history captured: **2026-06-14T01:36:51.364120Z**
+- Social executor history captured: **2026-06-14T01:44:13.997346Z**
 - Social executor history file: `data/social_execution_snapshot.json`
 - First single alignment audit captured: **2026-06-07T21:39:03.668040Z**
 - First single alignment audit file: `data/first_single_alignment_audit.json`
@@ -884,7 +891,7 @@
 }</script>
 
 <script type="application/json" id="embedded-promo-engine-status">{
-  "generated_at": "2026-06-14T01:36:52.231883+00:00",
+  "generated_at": "2026-06-14T01:44:14.817599+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -1077,15 +1084,15 @@
         "command": "python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impressions_7d=VALUE --refresh-admin"
       }
     ],
-    "live_metrics_updated_at": "2026-06-14T01:36:45.330Z",
+    "live_metrics_updated_at": "2026-06-14T01:43:28.072Z",
     "metrics_history": {
       "snapshot_count": 5,
-      "updated_at": "2026-06-14T01:36:51.440484Z",
+      "updated_at": "2026-06-14T01:44:14.064318Z",
       "latest_date": "2026-06-14",
       "latest": {
         "date": "2026-06-14",
-        "captured_at": "2026-06-14T01:36:51.440484Z",
-        "live_metrics_updated_at": "2026-06-14T01:36:45.330Z",
+        "captured_at": "2026-06-14T01:44:14.064318Z",
+        "live_metrics_updated_at": "2026-06-14T01:43:28.072Z",
         "youtube": {
           "subscribers": 5,
           "total_views": 251,
@@ -1168,7 +1175,7 @@
     },
     "social_execution_summary": {
       "ok": true,
-      "updated_at": "2026-06-14T01:36:51.364120Z",
+      "updated_at": "2026-06-14T01:44:13.997346Z",
       "http_status": 200,
       "execution_count": 6,
       "posted_count": 0,
@@ -1343,13 +1350,20 @@
       "available": true,
       "safe_mode": true,
       "finalized": true,
-      "finished_at": "2026-06-14T01:36:52.201165Z",
-      "duration_seconds": 7.68,
-      "command_count": 15,
+      "finished_at": "2026-06-14T01:44:14.790484Z",
+      "duration_seconds": 47.48,
+      "command_count": 16,
       "passed": 15,
-      "failed": 0,
-      "allowed_failures": 0,
-      "failed_commands": [],
+      "failed": 1,
+      "allowed_failures": 1,
+      "failed_commands": [
+        {
+          "name": "verify_pending_store_links",
+          "required": false,
+          "returncode": 124,
+          "stderr_tail": "Timed out after 45 seconds."
+        }
+      ],
       "action_needed": ""
     },
     "refresh_automation": {
@@ -1388,18 +1402,18 @@
       "stale": 1,
       "missing": 0,
       "checked_no_change": 1,
-      "checked_at": "2026-06-14T01:36:52.231883+00:00"
+      "checked_at": "2026-06-14T01:44:14.817599+00:00"
     },
     "sources": [
       {
         "name": "release_status",
         "path": "data/distrokid_release_status.json",
         "status": "checked_no_change",
-        "age_hours": 119.8,
+        "age_hours": 119.9,
         "max_age_hours": 72,
         "timestamp": "2026-06-09T01:47:42+00:00",
         "refresh_command": "Store checks are current; update data/distrokid_release_status.json when a verified public URL appears.",
-        "checked_at": "2026-06-14T01:36:52.231883+00:00",
+        "checked_at": "2026-06-14T01:44:14.817599+00:00",
         "checked_age_hours": 0.0,
         "evidence": "7 pending store links checked; no new public URLs found."
       },
@@ -1407,7 +1421,7 @@
         "name": "scheduled_posts",
         "path": "admin/future-posts.json",
         "status": "fresh",
-        "age_hours": 28.7,
+        "age_hours": 28.8,
         "max_age_hours": 72,
         "timestamp": "2026-06-12T20:56:00.115863+00:00",
         "refresh_command": "python3 scripts/sync_future_posts.py"
@@ -1418,14 +1432,14 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T01:36:51.401483+00:00",
+        "timestamp": "2026-06-14T01:44:14.031499+00:00",
         "refresh_command": "python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
         "name": "published_log",
         "path": "admin/content/Published_Log.csv",
         "status": "fresh",
-        "age_hours": 157.0,
+        "age_hours": 157.1,
         "max_age_hours": 168,
         "timestamp": "2026-06-07T12:36:37.141276+00:00",
         "refresh_command": "Export or append latest published posts to admin/content/Published_Log.csv."
@@ -1434,7 +1448,7 @@
         "name": "manual_metrics",
         "path": "data/manual_social_stats.json",
         "status": "stale",
-        "age_hours": 153.8,
+        "age_hours": 153.9,
         "max_age_hours": 72,
         "timestamp": "2026-06-07T15:47:26.729764+00:00",
         "refresh_command": "Update data/manual_social_stats.json with latest manual metrics."
@@ -1445,7 +1459,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T01:36:45.330000+00:00",
+        "timestamp": "2026-06-14T01:43:28.072000+00:00",
         "refresh_command": "python3 scripts/capture_live_metrics.py"
       },
       {
@@ -1454,7 +1468,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T01:36:51.440484+00:00",
+        "timestamp": "2026-06-14T01:44:14.064318+00:00",
         "refresh_command": "python3 scripts/update_metrics_history.py --refresh-admin"
       },
       {
@@ -1463,7 +1477,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T01:36:50.369916+00:00",
+        "timestamp": "2026-06-14T01:44:13.136737+00:00",
         "refresh_command": "python3 scripts/capture_executor_readiness.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -1472,7 +1486,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T01:36:52.231883+00:00",
+        "timestamp": "2026-06-14T01:44:14.817599+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin"
       },
       {
@@ -1481,7 +1495,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T01:36:51.364120+00:00",
+        "timestamp": "2026-06-14T01:44:13.997346+00:00",
         "refresh_command": "python3 scripts/capture_social_executions.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -1490,7 +1504,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T01:36:52.201577+00:00",
+        "timestamp": "2026-06-14T01:44:14.790857+00:00",
         "refresh_command": "python3 scripts/refresh_promo_admin.py"
       },
       {
@@ -1499,7 +1513,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-14T01:36:51.946168+00:00",
+        "timestamp": "2026-06-14T01:44:14.539322+00:00",
         "refresh_command": "python3 scripts/capture_github_workflow_status.py && python3 scripts/update_promo_engine_status.py"
       }
     ],
@@ -1638,7 +1652,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-14T01:36:45.329990Z",
+            "updated_at": "2026-06-14T01:40:37.919512Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
           }
         },
@@ -1649,7 +1663,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-14T01:36:46.709143Z",
+            "updated_at": "2026-06-14T01:40:39.638006Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
           }
         },
@@ -1660,7 +1674,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-14T01:36:47.085754Z",
+            "updated_at": "2026-06-14T01:40:40.187554Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
           }
         }
@@ -1768,7 +1782,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-14T01:36:48.235207Z",
+            "updated_at": "2026-06-14T01:40:41.834595Z",
             "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
           }
         },
@@ -1919,7 +1933,7 @@
 }</script>
 
 <script type="application/json" id="embedded-promo-queue-plan">{
-  "generated_at": "2026-06-13T21:36:51.401483-04:00",
+  "generated_at": "2026-06-13T21:44:14.031499-04:00",
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
     "release_status": "data/distrokid_release_status.json"
@@ -2022,7 +2036,7 @@
   },
   "readiness_audit": {
     "source": "data/executor_readiness_snapshot.json",
-    "updated_at": "2026-06-14T01:36:50.369916Z",
+    "updated_at": "2026-06-14T01:44:13.136737Z",
     "ok": true,
     "counts": {
       "blocked": 1,
@@ -2242,7 +2256,7 @@
 
 
 <script type="application/json" id="embedded-promo-operations-packet">{
-  "generated_at": "2026-06-14T01:36:52.015498Z",
+  "generated_at": "2026-06-14T01:44:14.605645Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -2653,11 +2667,11 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "Spotify",
-        "checked_at": "2026-06-14T01:36:45.329990Z",
+        "checked_at": "2026-06-14T01:40:37.919512Z",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-14T01:36:45.329990Z",
+          "updated_at": "2026-06-14T01:40:37.919512Z",
           "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
         },
         "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -2680,11 +2694,11 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "Apple Music",
-        "checked_at": "2026-06-14T01:36:46.709143Z",
+        "checked_at": "2026-06-14T01:40:39.638006Z",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-14T01:36:46.709143Z",
+          "updated_at": "2026-06-14T01:40:39.638006Z",
           "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
         },
         "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -2707,11 +2721,11 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "HyperFollow",
-        "checked_at": "2026-06-14T01:36:47.085754Z",
+        "checked_at": "2026-06-14T01:40:40.187554Z",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-14T01:36:47.085754Z",
+          "updated_at": "2026-06-14T01:40:40.187554Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
         },
         "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -2761,11 +2775,11 @@
       "context": {
         "release": "Analog Myth",
         "service": "Apple Music",
-        "checked_at": "2026-06-14T01:36:48.235207Z",
+        "checked_at": "2026-06-14T01:40:41.834595Z",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-14T01:36:48.235207Z",
+          "updated_at": "2026-06-14T01:40:41.834595Z",
           "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
         },
         "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -2981,7 +2995,7 @@
 
 <script type="text/plain" id="embedded-promo-operations-report"># Promo Operations Packet - Lily Roo
 
-Generated: 2026-06-14T01:36:52.015498Z
+Generated: 2026-06-14T01:44:14.605645Z
 
 ## Summary
 - Actions: **22**
@@ -3067,12 +3081,12 @@ Generated: 2026-06-14T01:36:52.015498Z
 - **[medium] Re-check Twelve Dollars on Spotify**
   - Why: Public store links should be checked until DistroKid exposes them.
   - Detail: Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release.
-  - Latest snapshot checked: `2026-06-14T01:36:45.329990Z`
+  - Latest snapshot checked: `2026-06-14T01:40:37.919512Z`
   - Command: `python3 scripts/search_spotify_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/spotify_release_snapshot.json'`
 - **[medium] Re-check Twelve Dollars on Apple Music**
   - Why: Public store links should be checked until DistroKid exposes them.
   - Detail: Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release.
-  - Latest snapshot checked: `2026-06-14T01:36:46.709143Z`
+  - Latest snapshot checked: `2026-06-14T01:40:39.638006Z`
   - Command: `python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/apple_music_release_snapshot.json'`
 
 ## Guardrails
@@ -3083,7 +3097,7 @@ Generated: 2026-06-14T01:36:52.015498Z
 
 <script type="text/plain" id="embedded-manual-metric-collection"># Manual Metric Collection - Lily Roo
 
-Generated: 2026-06-14T01:36:52.167503Z
+Generated: 2026-06-14T01:44:14.760099Z
 
 Pending fields: **11**
 
@@ -3155,7 +3169,7 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
 
 
 <script type="application/json" id="embedded-platform-repair-status">{
-  "generated_at": "2026-06-14T01:36:52.137271Z",
+  "generated_at": "2026-06-14T01:44:14.734489Z",
   "safe_mode": true,
   "source": {
     "promo_operations_packet": "data/promo_operations_packet.json",
@@ -3248,7 +3262,7 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
 
 
 <script type="application/json" id="embedded-approval-runway">{
-  "generated_at": "2026-06-14T01:36:52.046823Z",
+  "generated_at": "2026-06-14T01:44:14.632243Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -3368,7 +3382,7 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
 
 <script type="text/plain" id="embedded-approval-runway-report"># Approval Runway - Lily Roo
 
-Generated: 2026-06-14T01:36:52.046823Z
+Generated: 2026-06-14T01:44:14.632243Z
 
 ## Summary
 - Drafts needing review: **6**
@@ -3423,7 +3437,7 @@ Generated: 2026-06-14T01:36:52.046823Z
 
 
 <script type="application/json" id="embedded-subscriber-cta-audit">{
-  "generated_at": "2026-06-14T01:36:52.076558Z",
+  "generated_at": "2026-06-14T01:44:14.657699Z",
   "safe_mode": true,
   "source": {
     "promo_queue_plan": "data/promo_queue_plan.json",
@@ -3534,7 +3548,7 @@ Generated: 2026-06-14T01:36:52.046823Z
 
 <script type="text/plain" id="embedded-subscriber-cta-audit-report"># Subscriber CTA Audit - Lily Roo
 
-Generated: 2026-06-14T01:36:52.076558Z
+Generated: 2026-06-14T01:44:14.657699Z
 
 ## Summary
 - Draft posts: **6**
@@ -3586,7 +3600,7 @@ Generated: 2026-06-14T01:36:52.076558Z
 
 
 <script type="application/json" id="embedded-monetization-activation-plan">{
-  "generated_at": "2026-06-14T01:36:52.106024Z",
+  "generated_at": "2026-06-14T01:44:14.683270Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -3735,7 +3749,7 @@ Generated: 2026-06-14T01:36:52.076558Z
 
 <script type="text/plain" id="embedded-monetization-activation-report"># Monetization Activation Plan - Lily Roo
 
-Generated: 2026-06-14T01:36:52.106024Z
+Generated: 2026-06-14T01:44:14.683270Z
 
 ## Summary
 - Current subscribers: **5 / 1000**
@@ -3794,6 +3808,98 @@ Generated: 2026-06-14T01:36:52.106024Z
 - This plan does not approve, apply, publish, or post anything.
 - Approval and apply commands are shown as deliberate after-review steps.
 - Run preview/check commands first when present.</script>
+
+
+<script type="application/json" id="embedded-backlog-reschedule-preview">{
+  "generated_at": "2026-06-13T21:44:14.709880-04:00",
+  "safe_mode": true,
+  "source": {
+    "scheduled_posts": "data/scheduled_posts.csv",
+    "published_log": "admin/content/Published_Log.csv",
+    "social_execution_snapshot": "data/social_execution_snapshot.json",
+    "promo_engine_status": "data/promo_engine_status.json"
+  },
+  "summary": {
+    "approved_backlog_count": 3,
+    "blocked_backlog_count": 3,
+    "clear_to_apply_count": 0,
+    "start_at": "2026-06-14T10:00:00-04:00",
+    "spacing_hours": 24,
+    "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-14T10:00:00-04:00' --spacing-hours 24",
+    "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-14T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+    "apply_allowed_without_override": false
+  },
+  "items": [
+    {
+      "id": "FP-AUTO-263",
+      "platform": "Instagram",
+      "song": "I Learned It All in Fifteen Seconds",
+      "current_scheduled_at": "2026-06-08T14:05:00-04:00",
+      "proposed_scheduled_at": "2026-06-14T10:00:00-04:00",
+      "blocked": true,
+      "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
+      "blocker_status": "failed",
+      "blocker_source": "cron"
+    },
+    {
+      "id": "FP-AUTO-264",
+      "platform": "TikTok",
+      "song": "I Learned It All in Fifteen Seconds",
+      "current_scheduled_at": "2026-06-09T21:25:00-04:00",
+      "proposed_scheduled_at": "2026-06-15T10:00:00-04:00",
+      "blocked": true,
+      "blocker_reason": "tiktok_credentials_missing",
+      "blocker_status": "blocked",
+      "blocker_source": "cron"
+    },
+    {
+      "id": "FP-AUTO-265",
+      "platform": "Facebook",
+      "song": "I Learned It All in Fifteen Seconds",
+      "current_scheduled_at": "2026-06-10T12:30:00-04:00",
+      "proposed_scheduled_at": "2026-06-16T10:00:00-04:00",
+      "blocked": true,
+      "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
+      "blocker_status": "failed",
+      "blocker_source": "cron"
+    }
+  ]
+}</script>
+
+
+<script type="text/plain" id="embedded-backlog-reschedule-preview-report"># Backlog Reschedule Preview - Lily Roo
+
+Generated: 2026-06-13T21:44:14.709880-04:00
+
+## Summary
+- Approved backlog rows: **3**
+- Rows with known blockers: **3**
+- Clear to apply without override: **0**
+- Start at: **2026-06-14T10:00:00-04:00**
+- Spacing hours: **24**
+- Apply allowed without override: **False**
+
+## Proposed Reschedule
+- **Instagram - I Learned It All in Fifteen Seconds** (`FP-AUTO-263`)
+  - Current: `2026-06-08T14:05:00-04:00`
+  - Proposed: `2026-06-14T10:00:00-04:00`
+  - Blocker: Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.
+- **TikTok - I Learned It All in Fifteen Seconds** (`FP-AUTO-264`)
+  - Current: `2026-06-09T21:25:00-04:00`
+  - Proposed: `2026-06-15T10:00:00-04:00`
+  - Blocker: tiktok_credentials_missing
+- **Facebook - I Learned It All in Fifteen Seconds** (`FP-AUTO-265`)
+  - Current: `2026-06-10T12:30:00-04:00`
+  - Proposed: `2026-06-16T10:00:00-04:00`
+  - Blocker: Facebook blocked Page publishing until identity is confirmed in the Facebook app.
+
+## Commands
+- Preview: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-14T10:00:00-04:00' --spacing-hours 24`
+- Apply after blockers are cleared: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-14T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin`
+
+## Guardrails
+- This preview does not write schedule changes, approve posts, publish posts, or push secrets.
+- Apply refuses known blocked rows unless `--allow-blocked` is used after deliberate review.</script>
 
 <script>
   const ADMIN_AUTH_KEY='lilyroo_admin_password_v1';
@@ -3923,6 +4029,7 @@ Generated: 2026-06-14T01:36:52.106024Z
     'reports/approval-runway.md':'embedded-approval-runway-report',
     'reports/subscriber-cta-audit.md':'embedded-subscriber-cta-audit-report',
     'reports/monetization-activation-plan.md':'embedded-monetization-activation-report',
+    'reports/backlog-reschedule-preview.md':'embedded-backlog-reschedule-preview-report',
     'content/Published_Log.csv':'embedded-published-log'
   };
   const EMBEDDED_JSON_ASSETS={
@@ -3933,7 +4040,8 @@ Generated: 2026-06-14T01:36:52.106024Z
     'data/promo_operations_packet.json':'embedded-promo-operations-packet',
     'data/approval_runway.json':'embedded-approval-runway',
     'data/subscriber_cta_audit.json':'embedded-subscriber-cta-audit',
-    'data/monetization_activation_plan.json':'embedded-monetization-activation-plan'
+    'data/monetization_activation_plan.json':'embedded-monetization-activation-plan',
+    'data/backlog_reschedule_preview.json':'embedded-backlog-reschedule-preview'
   };
   const BACKSTORY_DOCS=[
     {id:'canon',category:'Canon',title:'Canon Spine',url:'content/00_CANON.md',summary:'Mission, identity, recurring themes, origin story, objects, and era anchors.'},
@@ -5203,6 +5311,49 @@ Generated: 2026-06-14T01:36:52.106024Z
     root.innerHTML=`${intro}${rows}${more}`;
   }
 
+  function renderBacklogReschedulePreview(preview){
+    const root=document.getElementById('backlog-reschedule-preview');
+    if(!root) return;
+    const items=Array.isArray(preview?.items)?preview.items:[];
+    const summary=preview?.summary||{};
+    if(!items.length){
+      root.innerHTML='<div class="muted">No approved backlog posts need rescheduling.</div>';
+      return;
+    }
+    const blockedCount=Number(summary.blocked_backlog_count||0);
+    const clearCount=Number(summary.clear_to_apply_count||0);
+    const meta=[
+      `${Number(summary.approved_backlog_count||items.length)} approved backlog`,
+      `${blockedCount} blocked`,
+      `${clearCount} clear to apply`
+    ].join(' - ');
+    const intro=`<div class="queue-item">
+      <div class="queue-top">
+        <div>
+          <div class="queue-title">${blockedCount ? 'Blocked reschedule preview' : 'Reschedule preview ready'}</div>
+          <div class="queue-meta">${escapeHtml(meta)}</div>
+          ${summary.start_at?`<div class="queue-meta">Start: ${escapeHtml(formatQueueDate(summary.start_at))} - spacing ${escapeHtml(summary.spacing_hours||24)}h</div>`:''}
+          ${summary.preview_command?`<div class="queue-meta">Preview: ${escapeHtml(summary.preview_command)}</div>`:''}
+          ${summary.apply_command?`<div class="queue-meta">Apply after blockers clear: ${escapeHtml(summary.apply_command)}</div>`:''}
+        </div>
+        <span class="status-chip ${blockedCount?'warn':'ok'}">${escapeHtml(blockedCount || clearCount)}</span>
+      </div>
+    </div>`;
+    const rows=items.slice(0,5).map(item=>`<div class="queue-item">
+      <div class="queue-top">
+        <div>
+          <div class="queue-title">${escapeHtml(item.platform||'Platform')} - ${escapeHtml(item.song||'Release')}</div>
+          <div class="queue-meta">${escapeHtml(item.id||'scheduled post')}</div>
+          <div class="queue-meta">${escapeHtml(formatQueueDate(item.current_scheduled_at))} -> ${escapeHtml(formatQueueDate(item.proposed_scheduled_at))}</div>
+          ${item.blocker_reason?`<div class="queue-meta">Blocker: ${escapeHtml(item.blocker_reason)}</div>`:''}
+        </div>
+        <span class="status-chip ${item.blocked?'warn':'ok'}">${escapeHtml(item.blocked?'Blocked':'Ready')}</span>
+      </div>
+    </div>`).join('');
+    const more=items.length>5?`<div class="queue-meta">${escapeHtml(items.length-5)} more backlog row${items.length-5===1?'':'s'} in data/backlog_reschedule_preview.json.</div>`:'';
+    root.innerHTML=`${intro}${rows}${more}`;
+  }
+
   function renderPromoQueuePlan(plan){
     const root=document.getElementById('promo-queue-plan');
     if(!root) return;
@@ -5348,7 +5499,7 @@ Generated: 2026-06-14T01:36:52.106024Z
 
   async function loadReportsDashboard(){
     if(!document.getElementById('reports-period')) return;
-    const [md,publishedCsv,queuePayload,releaseStatus,promoHealth,promoPlan,promoOps,approvalRunway,subscriberCtaAudit,activationPlan,readiness,metrics,executions]=await Promise.all([
+    const [md,publishedCsv,queuePayload,releaseStatus,promoHealth,promoPlan,promoOps,approvalRunway,subscriberCtaAudit,activationPlan,backlogPreview,readiness,metrics,executions]=await Promise.all([
       fetchTextOrEmpty(localPath('/admin/reports/weekly-social-report.md')),
       fetchTextOrEmpty(localPath('/admin/content/Published_Log.csv')),
       fetchJsonOr(localPath('/admin/future-posts.json'),{}),
@@ -5359,6 +5510,7 @@ Generated: 2026-06-14T01:36:52.106024Z
       fetchJsonOr(localPath('/data/approval_runway.json'),{}),
       fetchJsonOr(localPath('/data/subscriber_cta_audit.json'),{}),
       fetchJsonOr(localPath('/data/monetization_activation_plan.json'),{}),
+      fetchJsonOr(localPath('/data/backlog_reschedule_preview.json'),{}),
       readinessPromise,
       metricsPromise,
       executionsPromise
@@ -5379,6 +5531,7 @@ Generated: 2026-06-14T01:36:52.106024Z
     renderApprovalRunway(approvalRunway);
     renderSubscriberCtaAudit(subscriberCtaAudit);
     renderMonetizationActivationPlan(activationPlan);
+    renderBacklogReschedulePreview(backlogPreview);
     renderPromoQueuePlan(promoPlan);
     renderPipelineHealth(queuePayload,readiness,report,metrics);
     renderNextPosts(queuePayload,executions);

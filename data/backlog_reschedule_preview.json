@@ -1,0 +1,55 @@
+{
+  "generated_at": "2026-06-13T21:44:14.709880-04:00",
+  "safe_mode": true,
+  "source": {
+    "scheduled_posts": "data/scheduled_posts.csv",
+    "published_log": "admin/content/Published_Log.csv",
+    "social_execution_snapshot": "data/social_execution_snapshot.json",
+    "promo_engine_status": "data/promo_engine_status.json"
+  },
+  "summary": {
+    "approved_backlog_count": 3,
+    "blocked_backlog_count": 3,
+    "clear_to_apply_count": 0,
+    "start_at": "2026-06-14T10:00:00-04:00",
+    "spacing_hours": 24,
+    "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-14T10:00:00-04:00' --spacing-hours 24",
+    "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-14T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+    "apply_allowed_without_override": false
+  },
+  "items": [
+    {
+      "id": "FP-AUTO-263",
+      "platform": "Instagram",
+      "song": "I Learned It All in Fifteen Seconds",
+      "current_scheduled_at": "2026-06-08T14:05:00-04:00",
+      "proposed_scheduled_at": "2026-06-14T10:00:00-04:00",
+      "blocked": true,
+      "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
+      "blocker_status": "failed",
+      "blocker_source": "cron"
+    },
+    {
+      "id": "FP-AUTO-264",
+      "platform": "TikTok",
+      "song": "I Learned It All in Fifteen Seconds",
+      "current_scheduled_at": "2026-06-09T21:25:00-04:00",
+      "proposed_scheduled_at": "2026-06-15T10:00:00-04:00",
+      "blocked": true,
+      "blocker_reason": "tiktok_credentials_missing",
+      "blocker_status": "blocked",
+      "blocker_source": "cron"
+    },
+    {
+      "id": "FP-AUTO-265",
+      "platform": "Facebook",
+      "song": "I Learned It All in Fifteen Seconds",
+      "current_scheduled_at": "2026-06-10T12:30:00-04:00",
+      "proposed_scheduled_at": "2026-06-16T10:00:00-04:00",
+      "blocked": true,
+      "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
+      "blocker_status": "failed",
+      "blocker_source": "cron"
+    }
+  ]
+}
