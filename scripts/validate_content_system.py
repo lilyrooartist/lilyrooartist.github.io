@@ -20,6 +20,7 @@ SOCIAL_EXECUTION_SNAPSHOT = ROOT / "data" / "social_execution_snapshot.json"
 PROMO_REFRESH_RUN = ROOT / "data" / "promo_admin_refresh_run.json"
 PROMO_REFRESH_WORKFLOW_STATUS = ROOT / "data" / "promo_refresh_workflow_status.json"
 PROMO_OPERATIONS_PACKET = ROOT / "data" / "promo_operations_packet.json"
+PLATFORM_REPAIR_STATUS = ROOT / "data" / "platform_repair_status.json"
 MANUAL_METRIC_TEMPLATE = ROOT / "data" / "manual_metric_collection_template.csv"
 SPOTIFY_SNAPSHOT = ROOT / "data" / "spotify_release_snapshot.json"
 APPLE_MUSIC_SNAPSHOT = ROOT / "data" / "apple_music_release_snapshot.json"
@@ -47,6 +48,7 @@ PROMO_REFRESH_SCRIPT = ROOT / "scripts" / "refresh_promo_admin.py"
 PROMO_REFRESH_WORKFLOW_CAPTURE = ROOT / "scripts" / "capture_github_workflow_status.py"
 PROMO_REFRESH_WORKFLOW = ROOT / ".github" / "workflows" / "promo-admin-refresh.yml"
 PROMO_OPERATIONS_SCRIPT = ROOT / "scripts" / "build_promo_operations_packet.py"
+PLATFORM_REPAIR_SCRIPT = ROOT / "scripts" / "build_platform_repair_status.py"
 MANUAL_METRIC_COLLECTION_SCRIPT = ROOT / "scripts" / "build_manual_metric_collection.py"
 REPORT = ROOT / "admin" / "reports" / "weekly-social-report.md"
 PROMO_OPERATIONS_REPORT = ROOT / "admin" / "reports" / "promo-operations-packet.md"
@@ -316,6 +318,26 @@ def validate_generated_outputs(failures):
             fail("promo_operations_packet.json missing checked store re-check context", failures)
     else:
         fail("promo_operations_packet.json missing; run scripts/build_promo_operations_packet.py", failures)
+    if PLATFORM_REPAIR_STATUS.exists():
+        repair_status = json.loads(PLATFORM_REPAIR_STATUS.read_text(encoding="utf-8"))
+        repair_summary = repair_status.get("summary") or {}
+        repair_rows = repair_status.get("rows") or []
+        packet = json.loads(PROMO_OPERATIONS_PACKET.read_text(encoding="utf-8")) if PROMO_OPERATIONS_PACKET.exists() else {}
+        platform_actions = [
+            action for action in packet.get("actions") or []
+            if action.get("kind") == "platform_fix"
+        ]
+        if (
+            repair_status.get("safe_mode") is True
+            and repair_summary.get("platform_fix_count") == len(repair_rows) == len(platform_actions)
+            and repair_summary.get("preview_command_count") == len([row for row in repair_rows if row.get("preview_command")])
+            and all(row.get("post_id") and row.get("platform") and row.get("repair_action") and row.get("preview_command") for row in repair_rows)
+        ):
+            ok(f"platform repair status tracks {len(repair_rows)} blocked platform repair(s)")
+        else:
+            fail("platform_repair_status.json missing repair row summary or preview commands", failures)
+    else:
+        fail("platform_repair_status.json missing; run scripts/build_platform_repair_status.py", failures)
     if MANUAL_METRIC_TEMPLATE.exists():
         rows = read_csv(MANUAL_METRIC_TEMPLATE)
         required = {
@@ -849,6 +871,7 @@ def validate_generated_outputs(failures):
             "capture_social_executions.py",
             "capture_github_workflow_status.py",
             "build_promo_operations_packet.py",
+            "build_platform_repair_status.py",
             "build_manual_metric_collection.py",
             "update_weekly_report.py",
         ]
@@ -913,6 +936,14 @@ def validate_generated_outputs(failures):
             fail("build_promo_operations_packet.py missing review packet outputs or executes commands", failures)
     else:
         fail("build_promo_operations_packet.py missing", failures)
+    if PLATFORM_REPAIR_SCRIPT.exists():
+        repair_text = PLATFORM_REPAIR_SCRIPT.read_text(encoding="utf-8")
+        if "platform_repair_status.json" in repair_text and "promo_operations_packet.json" in repair_text and "social_execution_snapshot.json" in repair_text and "executor_readiness_snapshot.json" in repair_text and "subprocess" not in repair_text:
+            ok("platform repair status builder is review-only")
+        else:
+            fail("build_platform_repair_status.py missing repair status outputs or executes commands", failures)
+    else:
+        fail("build_platform_repair_status.py missing", failures)
     if MANUAL_METRIC_COLLECTION_SCRIPT.exists():
         collection_text = MANUAL_METRIC_COLLECTION_SCRIPT.read_text(encoding="utf-8")
         if "manual_metric_collection_template.csv" in collection_text and "manual-metric-collection.md" in collection_text and "pending_manual_by_platform" in collection_text and "collection_url" in collection_text and "subprocess" not in collection_text:

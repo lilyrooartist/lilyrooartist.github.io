@@ -74,6 +74,11 @@ FINALIZE_STEPS = [
         "required": True,
     },
     {
+        "name": "build_platform_repair_status",
+        "command": ["python3", "scripts/build_platform_repair_status.py"],
+        "required": True,
+    },
+    {
         "name": "build_manual_metric_collection",
         "command": ["python3", "scripts/build_manual_metric_collection.py"],
         "required": True,
@@ -204,13 +209,17 @@ def main() -> int:
     if snapshot["ok"] and not args.dry_run:
         subprocess.run(["python3", "scripts/update_promo_engine_status.py"], cwd=ROOT, check=True)
 
+    try:
+        output_path = str(out.relative_to(ROOT))
+    except ValueError:
+        output_path = str(out)
     print(json.dumps({
         "ok": snapshot["ok"],
         "dry_run": bool(args.dry_run),
         "command_count": snapshot["summary"]["command_count"],
         "required_failed": snapshot["summary"]["required_failed"],
         "optional_failed": snapshot["summary"]["optional_failed"],
-        "output": str(out.relative_to(ROOT)),
+        "output": output_path,
     }, indent=2))
     return 0 if snapshot["ok"] else 1
 

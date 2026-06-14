@@ -1,0 +1,91 @@
+{
+  "generated_at": "2026-06-14T01:11:10.777177Z",
+  "safe_mode": true,
+  "source": {
+    "promo_operations_packet": "data/promo_operations_packet.json",
+    "social_executions": "data/social_execution_snapshot.json",
+    "executor_readiness": "data/executor_readiness_snapshot.json"
+  },
+  "summary": {
+    "platform_fix_count": 3,
+    "blocked_count": 3,
+    "preview_command_count": 3,
+    "apply_command_count": 2,
+    "platforms": [
+      "Facebook",
+      "Instagram",
+      "TikTok"
+    ]
+  },
+  "rows": [
+    {
+      "post_id": "FP-AUTO-265",
+      "platform": "Facebook",
+      "status": "failed",
+      "reason": "max_attempts_exceeded",
+      "attempts": 3,
+      "updated_at": "2026-06-14T00:45:25.247Z",
+      "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
+      "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
+      "preview_command": "python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run",
+      "apply_command": "",
+      "readiness": {
+        "ready": true
+      },
+      "missing_secrets": [],
+      "public_posting_approved": null,
+      "blocked": true
+    },
+    {
+      "post_id": "FP-AUTO-264",
+      "platform": "TikTok",
+      "status": "blocked",
+      "reason": "tiktok_credentials_missing",
+      "attempts": 0,
+      "updated_at": "2026-06-14T00:45:25.007Z",
+      "error_summary": "",
+      "repair_action": "Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok public posting approval is false. Complete TikTok OAuth/public posting setup, push secrets, then refresh Admin.",
+      "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+      "apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
+      "readiness": {
+        "ready": false,
+        "access_token_present": false,
+        "refresh_config_present": false,
+        "missing_secrets": [
+          "TIKTOK_CLIENT_KEY",
+          "TIKTOK_CLIENT_SECRET",
+          "TIKTOK_REFRESH_TOKEN"
+        ],
+        "public_posting_approved": false,
+        "default_privacy": "PUBLIC_TO_EVERYONE"
+      },
+      "missing_secrets": [
+        "TIKTOK_CLIENT_KEY",
+        "TIKTOK_CLIENT_SECRET",
+        "TIKTOK_REFRESH_TOKEN"
+      ],
+      "public_posting_approved": false,
+      "blocked": true
+    },
+    {
+      "post_id": "FP-AUTO-263",
+      "platform": "Instagram",
+      "status": "failed",
+      "reason": "max_attempts_exceeded",
+      "attempts": 3,
+      "updated_at": "2026-06-14T00:45:24.728Z",
+      "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
+      "repair_action": "Reconnect the Instagram Business/Creator account to the Facebook Page or set IG_BUSINESS_ACCOUNT_ID, then push the worker secret and recapture readiness.",
+      "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
+      "apply_command": "python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py",
+      "readiness": {
+        "ready": true,
+        "api": "facebook-login",
+        "account_id_source": "FB_PAGE_ID"
+      },
+      "missing_secrets": [],
+      "public_posting_approved": null,
+      "blocked": true
+    }
+  ]
+}
