@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-15T21:23:54.327197Z",
+  "generated_at": "2026-06-16T05:35:04.245401Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -84,8 +84,8 @@
       "phase": "Recover stalled approved backlog",
       "status": "preview_first",
       "detail": "Preview a new schedule for approved past-due posts. Apply refuses known blocked executor rows unless deliberately overridden.",
-      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-16T10:00:00+00:00' --spacing-hours 24",
-      "after_review_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-16T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-17T10:00:00+00:00' --spacing-hours 24",
+      "after_review_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-17T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
       "context": {
         "approved_backlog_posts": 3,
         "approved_upcoming_posts": 0
@@ -135,8 +135,8 @@
       "phase": "Operations packet",
       "status": "waiting_for_user",
       "detail": "Approved posts are past due; preview a new schedule before any apply step.",
-      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-16T10:00:00+00:00' --spacing-hours 24",
-      "after_review_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-16T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-17T10:00:00+00:00' --spacing-hours 24",
+      "after_review_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-17T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
       "context": {
         "kind": "backlog_reschedule",
         "urgency": "high"

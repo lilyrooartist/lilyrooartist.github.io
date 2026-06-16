@@ -1,6 +1,6 @@
 # Manual Distribution Packet - Lily Roo
 
-Generated: 2026-06-15T21:23:54.296739Z
+Generated: 2026-06-16T05:35:04.215575Z
 
 ## Summary
 - Manual-ready posts: **2**
@@ -10,7 +10,7 @@ Generated: 2026-06-15T21:23:54.296739Z
 
 ## Manual Posting Queue
 - **YouTube Community - Twelve Dollars** (`FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY`)
-  - Scheduled target: `2026-06-20T18:30:00-04:00`
+  - Scheduled target: `2026-06-21T18:30:00-04:00`
   - Readiness: `manual_only`; CTA: `hard_goal`
   - Copy: Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.
   - Link/reply: Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
@@ -18,7 +18,7 @@ Generated: 2026-06-15T21:23:54.296739Z
   - Preview approval: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run`
   - Approve after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin`
 - **YouTube Community - Analog Myth** (`FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY`)
-  - Scheduled target: `2026-06-21T18:30:00-04:00`
+  - Scheduled target: `2026-06-22T18:30:00-04:00`
   - Readiness: `manual_only`; CTA: `hard_goal`
   - Copy: Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.
   - Link/reply: Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0
