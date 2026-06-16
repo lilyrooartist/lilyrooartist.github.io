@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-16T11:35:23.288640+00:00",
+  "generated_at": "2026-06-16T17:22:11.520120+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -195,11 +195,11 @@
     "live_metrics_updated_at": "2026-06-14T01:52:02.158Z",
     "metrics_history": {
       "snapshot_count": 7,
-      "updated_at": "2026-06-16T11:35:22.480524Z",
+      "updated_at": "2026-06-16T17:22:10.695270Z",
       "latest_date": "2026-06-16",
       "latest": {
         "date": "2026-06-16",
-        "captured_at": "2026-06-16T11:35:22.480524Z",
+        "captured_at": "2026-06-16T17:22:10.695270Z",
         "live_metrics_updated_at": "2026-06-14T01:52:02.158Z",
         "youtube": {
           "subscribers": 5,
@@ -458,8 +458,8 @@
       "available": true,
       "safe_mode": true,
       "finalized": true,
-      "finished_at": "2026-06-16T11:35:23.259514Z",
-      "duration_seconds": 4.67,
+      "finished_at": "2026-06-16T17:22:11.488965Z",
+      "duration_seconds": 5.33,
       "command_count": 17,
       "passed": 14,
       "failed": 3,
@@ -500,8 +500,8 @@
       "workflow_status_ok": true,
       "latest_run_status": "in_progress",
       "latest_run_conclusion": "",
-      "latest_run_updated_at": "2026-06-16T11:35:14Z",
-      "latest_run_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/27614626891",
+      "latest_run_updated_at": "2026-06-16T17:22:02Z",
+      "latest_run_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/27635608159",
       "workflow_status_action_needed": ""
     },
     "stale_source_count": 3,
@@ -522,18 +522,18 @@
       "stale": 3,
       "missing": 0,
       "checked_no_change": 1,
-      "checked_at": "2026-06-16T11:35:23.288640+00:00"
+      "checked_at": "2026-06-16T17:22:11.520120+00:00"
     },
     "sources": [
       {
         "name": "release_status",
         "path": "data/distrokid_release_status.json",
         "status": "checked_no_change",
-        "age_hours": 177.8,
+        "age_hours": 183.6,
         "max_age_hours": 72,
         "timestamp": "2026-06-09T01:47:42+00:00",
         "refresh_command": "Store checks are current; update data/distrokid_release_status.json when a verified public URL appears.",
-        "checked_at": "2026-06-16T11:35:23.288640+00:00",
+        "checked_at": "2026-06-16T17:22:11.520120+00:00",
         "checked_age_hours": 0.0,
         "evidence": "7 pending store links checked; no new public URLs found."
       },
@@ -543,7 +543,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 72,
-        "timestamp": "2026-06-16T11:35:18.122701+00:00",
+        "timestamp": "2026-06-16T17:22:05.238016+00:00",
         "refresh_command": "python3 scripts/sync_future_posts.py"
       },
       {
@@ -552,7 +552,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-16T11:35:22.443554+00:00",
+        "timestamp": "2026-06-16T17:22:10.659536+00:00",
         "refresh_command": "python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -561,7 +561,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 168,
-        "timestamp": "2026-06-16T11:35:18.121701+00:00",
+        "timestamp": "2026-06-16T17:22:05.236883+00:00",
         "refresh_command": "Export or append latest published posts to admin/content/Published_Log.csv."
       },
       {
@@ -570,14 +570,14 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 72,
-        "timestamp": "2026-06-16T11:35:18.210815+00:00",
+        "timestamp": "2026-06-16T17:22:05.321182+00:00",
         "refresh_command": "Update data/manual_social_stats.json with latest manual metrics."
       },
       {
         "name": "live_metrics",
         "path": "data/live_social_metrics.json",
         "status": "stale",
-        "age_hours": 57.7,
+        "age_hours": 63.5,
         "max_age_hours": 24,
         "timestamp": "2026-06-14T01:52:02.158000+00:00",
         "refresh_command": "python3 scripts/capture_live_metrics.py"
@@ -588,14 +588,14 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-16T11:35:22.480524+00:00",
+        "timestamp": "2026-06-16T17:22:10.695270+00:00",
         "refresh_command": "python3 scripts/update_metrics_history.py --refresh-admin"
       },
       {
         "name": "executor_readiness",
         "path": "data/executor_readiness_snapshot.json",
         "status": "stale",
-        "age_hours": 57.7,
+        "age_hours": 63.5,
         "max_age_hours": 24,
         "timestamp": "2026-06-14T01:52:47.284184+00:00",
         "refresh_command": "python3 scripts/capture_executor_readiness.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
@@ -606,14 +606,14 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-16T11:35:23.288640+00:00",
+        "timestamp": "2026-06-16T17:22:11.520120+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin"
       },
       {
         "name": "social_executions",
         "path": "data/social_execution_snapshot.json",
         "status": "stale",
-        "age_hours": 57.7,
+        "age_hours": 63.5,
         "max_age_hours": 24,
         "timestamp": "2026-06-14T01:52:48.183167+00:00",
         "refresh_command": "python3 scripts/capture_social_executions.py && python3 scripts/update_promo_engine_status.py"
@@ -624,7 +624,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-16T11:35:23.260148+00:00",
+        "timestamp": "2026-06-16T17:22:11.489446+00:00",
         "refresh_command": "python3 scripts/refresh_promo_admin.py"
       },
       {
@@ -633,7 +633,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-16T11:35:22.955641+00:00",
+        "timestamp": "2026-06-16T17:22:11.174721+00:00",
         "refresh_command": "python3 scripts/capture_github_workflow_status.py && python3 scripts/update_promo_engine_status.py"
       }
     ],
@@ -774,7 +774,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-16T11:35:18.907641Z",
+            "updated_at": "2026-06-16T17:22:06.614271Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
           }
         },
@@ -785,7 +785,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-16T11:35:20.578972Z",
+            "updated_at": "2026-06-16T17:22:08.607423Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
           }
         },
@@ -796,7 +796,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-16T11:35:20.839531Z",
+            "updated_at": "2026-06-16T17:22:08.732027Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
           }
         }
@@ -893,7 +893,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-16T11:35:20.894731Z",
+            "updated_at": "2026-06-16T17:22:08.785619Z",
             "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
           }
         },
@@ -904,7 +904,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-16T11:35:21.317921Z",
+            "updated_at": "2026-06-16T17:22:09.445765Z",
             "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
           }
         },
@@ -915,7 +915,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-16T11:35:21.376807Z",
+            "updated_at": "2026-06-16T17:22:09.503437Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release."
           }
         },
@@ -926,7 +926,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-16T11:35:22.013291Z",
+            "updated_at": "2026-06-16T17:22:10.260312Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
           }
         }
