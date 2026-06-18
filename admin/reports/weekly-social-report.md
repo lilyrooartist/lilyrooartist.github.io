@@ -1,7 +1,7 @@
 # Weekly Social Report — Lily Roo
 
-**Period:** 2026-06-11 to 2026-06-17
-**Last updated:** 2026-06-17 08:31 PM UTC
+**Period:** 2026-06-12 to 2026-06-18
+**Last updated:** 2026-06-18 05:03 AM UTC
 
 ## KPI Goal
 - Primary growth target: **1,000 YouTube subscribers** (monetization milestone)
@@ -132,7 +132,7 @@
 - YouTube Music snapshot file: `data/youtube_music_release_snapshot.json`
 - HyperFollow stores captured: **2026-06-07T20:51:14.275569Z**
 - HyperFollow snapshot file: `data/hyperfollow_store_links_snapshot.json`
-- All-release store verification captured: **2026-06-17T20:31:16.749294+00:00**
+- All-release store verification captured: **2026-06-18T05:03:55.140230+00:00**
 - All-release store verification file: `data/store_verification_history.json`
 - Social executor history captured: **2026-06-14T01:52:48.183167Z**
 - Social executor history file: `data/social_execution_snapshot.json`
