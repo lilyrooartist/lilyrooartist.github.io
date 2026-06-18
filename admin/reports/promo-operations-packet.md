@@ -1,6 +1,6 @@
 # Promo Operations Packet - Lily Roo
 
-Generated: 2026-06-18T10:49:32.069844Z
+Generated: 2026-06-18T15:53:49.555918Z
 
 ## Summary
 - Actions: **22**
@@ -9,7 +9,7 @@ Generated: 2026-06-18T10:49:32.069844Z
 - Store checks: **7**
 - Manual metric updates: **5**
 - Safe apply commands ready: **0**
-- Urgency: **blocked: 1, high: 4, low: 5, medium: 12**
+- Urgency: **blocked: 1, high: 5, low: 5, medium: 11**
 
 ## Phase Counts
 - Fill manual metrics: **5**
@@ -56,8 +56,8 @@ Generated: 2026-06-18T10:49:32.069844Z
   - Apply repair after preview: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
 
 ### Review draft posts
-- **[medium] Review X draft for Twelve Dollars**
-  - Why: Draft is scheduled within 72 hours.
+- **[high] Review X draft for Twelve Dollars**
+  - Why: Draft is scheduled within 24 hours.
   - Detail: Ready after approval.
   - Command: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-X --dry-run`
   - Approve after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-X --refresh-admin`
@@ -86,12 +86,12 @@ Generated: 2026-06-18T10:49:32.069844Z
 - **[medium] Re-check Twelve Dollars on Spotify**
   - Why: Public store links should be checked until DistroKid exposes them.
   - Detail: Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release.
-  - Latest snapshot checked: `2026-06-18T10:49:27.916938Z`
+  - Latest snapshot checked: `2026-06-18T15:53:43.941555Z`
   - Command: `python3 scripts/search_spotify_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/spotify_release_snapshot.json'`
 - **[medium] Re-check Twelve Dollars on Apple Music**
   - Why: Public store links should be checked until DistroKid exposes them.
   - Detail: Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release.
-  - Latest snapshot checked: `2026-06-18T10:49:29.485566Z`
+  - Latest snapshot checked: `2026-06-18T15:53:45.881437Z`
   - Command: `python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/apple_music_release_snapshot.json'`
 
 ## Guardrails
