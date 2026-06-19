@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-19T23:48:53.404302Z",
+  "generated_at": "2026-06-19T23:54:44.861882Z",
   "safe_mode": true,
   "source": {
     "promo_operations_packet": "data/promo_operations_packet.json",
@@ -11,6 +11,7 @@
     "blocked_count": 3,
     "preview_command_count": 3,
     "apply_command_count": 2,
+    "retry_reset_count": 2,
     "platforms": [
       "Facebook",
       "Instagram",
@@ -30,6 +31,9 @@
       "repair_action": "Reconnect the Instagram Business/Creator account to the Facebook Page or set IG_BUSINESS_ACCOUNT_ID, then push the worker secret and recapture readiness.",
       "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
       "apply_command": "python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py",
+      "retry_reset_preview_command": "python3 scripts/reset_social_execution_state.py FP-AUTO-263",
+      "retry_reset_apply_command": "python3 scripts/reset_social_execution_state.py FP-AUTO-263 --apply",
+      "retry_reset_note": "Run only after the external platform repair is verified; this clears the retry cap so cron can attempt the row again.",
       "readiness": {
         "ready": true,
         "api": "facebook-login",
@@ -51,6 +55,9 @@
       "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
       "preview_command": "python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run",
       "apply_command": "",
+      "retry_reset_preview_command": "python3 scripts/reset_social_execution_state.py FP-AUTO-265",
+      "retry_reset_apply_command": "python3 scripts/reset_social_execution_state.py FP-AUTO-265 --apply",
+      "retry_reset_note": "Run only after the external platform repair is verified; this clears the retry cap so cron can attempt the row again.",
       "readiness": {
         "ready": true
       },
@@ -70,6 +77,9 @@
       "repair_action": "Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok public posting approval is false. Complete TikTok OAuth/public posting setup, push secrets, then refresh Admin.",
       "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
       "apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
+      "retry_reset_preview_command": "",
+      "retry_reset_apply_command": "",
+      "retry_reset_note": "",
       "readiness": {
         "ready": false,
         "access_token_present": false,

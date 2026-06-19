@@ -51,6 +51,7 @@ METRICS_HISTORY_UPDATER = ROOT / "scripts" / "update_metrics_history.py"
 EXECUTOR_READINESS_CAPTURE = ROOT / "scripts" / "capture_executor_readiness.py"
 SOCIAL_EXECUTION_CAPTURE = ROOT / "scripts" / "capture_social_executions.py"
 SOCIAL_SCHEDULER_CAPTURE = ROOT / "scripts" / "capture_scheduler_dry_run.py"
+SOCIAL_EXECUTION_RESET = ROOT / "scripts" / "reset_social_execution_state.py"
 PROMO_REFRESH_SCRIPT = ROOT / "scripts" / "refresh_promo_admin.py"
 PROMO_REFRESH_WORKFLOW_CAPTURE = ROOT / "scripts" / "capture_github_workflow_status.py"
 PROMO_REFRESH_WORKFLOW = ROOT / ".github" / "workflows" / "promo-admin-refresh.yml"
@@ -321,6 +322,21 @@ def validate_generated_outputs(failures):
             ok("promo operations packet uses dry-run secret repair previews")
         else:
             fail("promo_operations_packet.json secret repair actions missing dry-run previews", failures)
+        retry_reset_actions = [
+            action for action in actions
+            if action.get("kind") == "platform_fix"
+            and (action.get("context") or {}).get("reason") == "max_attempts_exceeded"
+        ]
+        if retry_reset_actions and all(
+            "reset_social_execution_state.py" in ((action.get("context") or {}).get("retry_reset_preview_command") or "")
+            and "--apply" not in ((action.get("context") or {}).get("retry_reset_preview_command") or "")
+            and "--apply" in ((action.get("context") or {}).get("retry_reset_apply_command") or "")
+            and (action.get("context") or {}).get("retry_reset_note")
+            for action in retry_reset_actions
+        ):
+            ok("promo operations packet includes retry reset previews for max-attempt rows")
+        else:
+            fail("promo_operations_packet.json missing retry reset previews for max-attempt rows", failures)
         tiktok_actions = [
             action for action in actions
             if (action.get("context") or {}).get("platform") == "TikTok"
@@ -373,6 +389,7 @@ def validate_generated_outputs(failures):
             repair_status.get("safe_mode") is True
             and repair_summary.get("platform_fix_count") == len(repair_rows) == len(platform_actions)
             and repair_summary.get("preview_command_count") == len([row for row in repair_rows if row.get("preview_command")])
+            and repair_summary.get("retry_reset_count") == len([row for row in repair_rows if row.get("retry_reset_preview_command")])
             and all(row.get("post_id") and row.get("platform") and row.get("priority") and row.get("repair_action") and row.get("preview_command") for row in repair_rows)
         ):
             ok(f"platform repair status tracks {len(repair_rows)} blocked platform repair(s)")
@@ -1096,6 +1113,22 @@ def validate_generated_outputs(failures):
             fail("push_social_worker_secrets.py missing dry-run support", failures)
     else:
         fail("push_social_worker_secrets.py missing", failures)
+    if SOCIAL_EXECUTION_RESET.exists():
+        reset_text = SOCIAL_EXECUTION_RESET.read_text(encoding="utf-8")
+        if (
+            "wrangler" in reset_text
+            and "kv" in reset_text
+            and "key" in reset_text
+            and "delete" in reset_text
+            and "--apply" in reset_text
+            and "max_attempts_exceeded" in reset_text
+            and "SOCIAL_EXECUTOR_STATE" in reset_text
+        ):
+            ok("social execution reset script is dry-run-first and retry-cap scoped")
+        else:
+            fail("reset_social_execution_state.py missing dry-run-first retry reset behavior", failures)
+    else:
+        fail("reset_social_execution_state.py missing", failures)
     if PROMO_OPERATIONS_SCRIPT.exists():
         packet_text = PROMO_OPERATIONS_SCRIPT.read_text(encoding="utf-8")
         if "promo_operations_packet.json" in packet_text and "promo-operations-packet.md" in packet_text and "approval_review" in packet_text and "urgency_for" in packet_text and "missing_secrets" in packet_text and "subprocess" not in packet_text:

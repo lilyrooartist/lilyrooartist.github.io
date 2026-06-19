@@ -218,6 +218,18 @@ def repair_action_for(platform: str, fallback: str, diagnostics: dict) -> str:
     return fallback
 
 
+def retry_reset_context(row: dict) -> dict:
+    post_id = row.get("post_id") or ""
+    if row.get("reason") != "max_attempts_exceeded" or not post_id:
+        return {}
+    base = f"python3 scripts/reset_social_execution_state.py {post_id}"
+    return {
+        "retry_reset_preview_command": base,
+        "retry_reset_apply_command": base + " --apply",
+        "retry_reset_note": "Run only after the external platform repair is verified; this clears the retry cap so cron can attempt the row again.",
+    }
+
+
 def approval_actions(plan, readiness):
     actions = []
     readiness_by_id = {
@@ -352,6 +364,7 @@ def platform_fix_actions(status, executions, readiness):
                 "error_summary": row.get("error_summary") or "",
                 "repair_action": repair_action_for(platform, fallback_action, diagnostics),
                 "repair_apply_command": repair_apply_command_for(platform, fallback_command),
+                **retry_reset_context(row),
                 **diagnostics,
             },
         ))
@@ -407,6 +420,10 @@ def build_markdown(packet):
                 lines.append(f"  - Command: `{action['command']}`")
             if context.get("repair_apply_command"):
                 lines.append(f"  - Apply repair after preview: `{context['repair_apply_command']}`")
+            if context.get("retry_reset_preview_command"):
+                lines.append(f"  - Preview retry reset after repair: `{context['retry_reset_preview_command']}`")
+            if context.get("retry_reset_apply_command"):
+                lines.append(f"  - Apply retry reset after repair: `{context['retry_reset_apply_command']}`")
             if context.get("approval_command"):
                 lines.append(f"  - Approve after review: `{context['approval_command']}`")
             if context.get("collection_url"):

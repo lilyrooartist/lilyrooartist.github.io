@@ -1,6 +1,6 @@
 # Promo Operations Packet - Lily Roo
 
-Generated: 2026-06-19T23:48:53.218256Z
+Generated: 2026-06-19T23:54:44.677447Z
 
 ## Summary
 - Actions: **19**
@@ -42,6 +42,8 @@ Generated: 2026-06-19T23:48:53.218256Z
   - Why: Platform executor needs repair before queued auto posts can publish.
   - Detail: Facebook blocked Page publishing until identity is confirmed in the Facebook app.
   - Command: `python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run`
+  - Preview retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-AUTO-265`
+  - Apply retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-AUTO-265 --apply`
 - **[high] Fix TikTok executor**
   - Why: Platform executor needs repair before queued auto posts can publish.
   - Detail: Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok public posting approval is false. Complete TikTok OAuth/public posting setup, push secrets, then refresh Admin.
@@ -54,6 +56,8 @@ Generated: 2026-06-19T23:48:53.218256Z
   - Detail: Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.
   - Command: `python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID`
   - Apply repair after preview: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
+  - Preview retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-AUTO-263`
+  - Apply retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-AUTO-263 --apply`
 
 ### Review draft posts
 - **[medium] Review YouTube Community draft for Twelve Dollars**

@@ -118,6 +118,12 @@ def build_markdown(payload: dict) -> str:
             lines.append(f"  - Preview/check: `{row['preview_command']}`")
         if row.get("apply_command"):
             lines.append(f"  - Apply after review: `{row['apply_command']}`")
+        if row.get("retry_reset_preview_command"):
+            lines.append(f"  - Preview retry reset after platform repair: `{row['retry_reset_preview_command']}`")
+        if row.get("retry_reset_apply_command"):
+            lines.append(f"  - Apply retry reset after platform repair: `{row['retry_reset_apply_command']}`")
+        if row.get("retry_reset_note"):
+            lines.append(f"  - Retry reset note: {row['retry_reset_note']}")
     lines.extend([
         "",
         "## Guardrails",
@@ -167,6 +173,9 @@ def build_status() -> dict:
             "repair_action": context.get("repair_action") or "",
             "preview_command": preview_command,
             "apply_command": apply_command,
+            "retry_reset_preview_command": context.get("retry_reset_preview_command") or "",
+            "retry_reset_apply_command": context.get("retry_reset_apply_command") or "",
+            "retry_reset_note": context.get("retry_reset_note") or "",
             "readiness": platform_readiness,
             "missing_secrets": context.get("missing_secrets") or platform_readiness.get("missing_secrets") or [],
             "public_posting_approved": context.get("public_posting_approved", platform_readiness.get("public_posting_approved")),
@@ -178,6 +187,7 @@ def build_status() -> dict:
         "blocked_count": sum(1 for row in rows if row.get("blocked")),
         "preview_command_count": sum(1 for row in rows if row.get("preview_command")),
         "apply_command_count": sum(1 for row in rows if row.get("apply_command")),
+        "retry_reset_count": sum(1 for row in rows if row.get("retry_reset_preview_command")),
         "platforms": sorted({row.get("platform") for row in rows if row.get("platform")}),
     }
     return {
