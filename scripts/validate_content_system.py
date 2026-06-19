@@ -43,6 +43,7 @@ PROMO_QUEUE_APPLY = ROOT / "scripts" / "apply_promo_queue_plan.py"
 PROMO_QUEUE_APPROVE = ROOT / "scripts" / "approve_promo_queue_plan.py"
 SCHEDULED_POST_APPROVAL = ROOT / "scripts" / "update_scheduled_post_approval.py"
 SCHEDULED_POST_RESCHEDULE = ROOT / "scripts" / "reschedule_scheduled_posts.py"
+MANUAL_DISTRIBUTION_LOGGER = ROOT / "scripts" / "log_manual_distribution.py"
 MANUAL_METRICS_UPDATER = ROOT / "scripts" / "update_manual_social_stats.py"
 STORE_LINK_VERIFIER = ROOT / "scripts" / "verify_pending_store_links.py"
 SPOTIFY_SEARCH_VERIFIER = ROOT / "scripts" / "search_spotify_release.py"
@@ -438,11 +439,22 @@ def validate_generated_outputs(failures):
             and summary.get("manual_ready_count") == len(rows)
             and summary.get("youtube_community_count") == len([row for row in rows if row.get("platform") == "YouTube Community"])
             and summary.get("hard_cta_count") == len(hard_rows) == len(rows)
-            and all(row.get("id") and row.get("text") and row.get("approval_preview_command") and row.get("manual_workflow") for row in rows)
+            and all(
+                row.get("id")
+                and row.get("text")
+                and row.get("copy_block")
+                and row.get("asset_download_url")
+                and row.get("approval_preview_command")
+                and row.get("manual_workflow")
+                and "log_manual_distribution.py" in row.get("log_preview_command", "")
+                and "--apply" not in row.get("log_preview_command", "")
+                and "--apply --refresh-admin" in row.get("log_apply_command", "")
+                for row in rows
+            )
         ):
             ok(f"manual distribution packet packages {len(rows)} manual post(s)")
         else:
-            fail("manual_distribution_packet.json missing safe manual rows, hard CTAs, or preview commands", failures)
+            fail("manual_distribution_packet.json missing safe manual rows, copy blocks, log commands, hard CTAs, or preview commands", failures)
     else:
         fail("manual_distribution_packet.json missing; run scripts/build_manual_distribution_packet.py", failures)
     if MONETIZATION_ACTIVATION_PLAN.exists():
@@ -1163,12 +1175,20 @@ def validate_generated_outputs(failures):
         fail("build_subscriber_cta_audit.py missing", failures)
     if MANUAL_DISTRIBUTION_PACKET_SCRIPT.exists():
         manual_distribution_text = MANUAL_DISTRIBUTION_PACKET_SCRIPT.read_text(encoding="utf-8")
-        if "manual_distribution_packet.json" in manual_distribution_text and "manual-distribution-packet.md" in manual_distribution_text and "Manual Posting Queue" in manual_distribution_text and "subprocess" not in manual_distribution_text:
+        if "manual_distribution_packet.json" in manual_distribution_text and "manual-distribution-packet.md" in manual_distribution_text and "Manual Posting Queue" in manual_distribution_text and "copy_block" in manual_distribution_text and "log_manual_distribution.py" in manual_distribution_text and "subprocess" not in manual_distribution_text:
             ok("manual distribution packet builder is review-only")
         else:
             fail("build_manual_distribution_packet.py missing manual distribution outputs or executes commands", failures)
     else:
         fail("build_manual_distribution_packet.py missing", failures)
+    if MANUAL_DISTRIBUTION_LOGGER.exists():
+        logger_text = MANUAL_DISTRIBUTION_LOGGER.read_text(encoding="utf-8")
+        if "--apply" in logger_text and "--refresh-admin" in logger_text and "append_published_log" in logger_text and "dry_run" in logger_text:
+            ok("manual distribution logger is dry-run-first")
+        else:
+            fail("log_manual_distribution.py missing dry-run-first logging behavior", failures)
+    else:
+        fail("log_manual_distribution.py missing", failures)
     if MONETIZATION_ACTIVATION_SCRIPT.exists():
         activation_text = MONETIZATION_ACTIVATION_SCRIPT.read_text(encoding="utf-8")
         if "monetization_activation_plan.json" in activation_text and "monetization-activation-plan.md" in activation_text and "Activation Sequence" in activation_text and "subprocess" not in activation_text:

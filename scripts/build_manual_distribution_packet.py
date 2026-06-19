@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import shlex
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -28,6 +29,20 @@ def runway_lookup(runway: dict) -> dict[str, dict]:
     }
 
 
+def copy_block(post: dict) -> str:
+    parts = [post.get("text") or ""]
+    if post.get("reply_text"):
+        parts.append(post.get("reply_text") or "")
+    return "\n\n".join(part for part in parts if part)
+
+
+def log_command(post_id: str, apply: bool = False) -> str:
+    command = f"python3 scripts/log_manual_distribution.py --id {shlex.quote(post_id)} --url PUBLIC_URL"
+    if apply:
+        command += " --apply --refresh-admin"
+    return command
+
+
 def build_rows(plan: dict, runway: dict) -> list[dict]:
     runway_by_id = runway_lookup(runway)
     rows = []
@@ -48,16 +63,20 @@ def build_rows(plan: dict, runway: dict) -> list[dict]:
             "selected_cta_strength": post.get("selected_cta_strength") or "",
             "text": post.get("text") or "",
             "reply_text": post.get("reply_text") or "",
+            "copy_block": copy_block(post),
             "imagery_url": post.get("imagery_url") or "",
             "clip_url": post.get("clip_url") or "",
+            "asset_download_url": post.get("clip_url") or post.get("imagery_url") or "",
             "media_key": post.get("media_key") or "",
             "approval_preview_command": review.get("approval_preview_command") or "",
             "approval_command": review.get("approval_command") or post.get("approval_command") or "",
+            "log_preview_command": log_command(post.get("id") or ""),
+            "log_apply_command": log_command(post.get("id") or "", apply=True),
             "manual_workflow": [
                 "Review the copy and linked playlist.",
                 "Approve only after human review if it should become the current manual posting candidate.",
                 "Post manually in YouTube Studio Community using the copy and asset below.",
-                "After posting, append the public URL to admin/content/Published_Log.csv and refresh Admin.",
+                "After posting, run the log preview command with the public URL, then run the apply command to update Published_Log.csv and refresh Admin.",
             ],
         })
     return sorted(rows, key=lambda row: (row["scheduled_at"], row["release"], row["id"]))
@@ -112,12 +131,20 @@ def build_markdown(payload: dict) -> str:
         lines.append(f"  - Copy: {row['text']}")
         if row.get("reply_text"):
             lines.append(f"  - Link/reply: {row['reply_text']}")
-        if row.get("imagery_url"):
-            lines.append(f"  - Asset: {row['imagery_url']}")
+        if row.get("copy_block"):
+            lines.append("  - Paste block:")
+            for line in row["copy_block"].splitlines():
+                lines.append(f"    {line}" if line else "    ")
+        if row.get("asset_download_url"):
+            lines.append(f"  - Asset: {row['asset_download_url']}")
         if row.get("approval_preview_command"):
             lines.append(f"  - Preview approval: `{row['approval_preview_command']}`")
         if row.get("approval_command"):
             lines.append(f"  - Approve after review: `{row['approval_command']}`")
+        if row.get("log_preview_command"):
+            lines.append(f"  - Preview public URL log: `{row['log_preview_command']}`")
+        if row.get("log_apply_command"):
+            lines.append(f"  - Apply public URL log after posting: `{row['log_apply_command']}`")
     lines.extend([
         "",
         "## Guardrails",

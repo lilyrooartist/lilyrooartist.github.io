@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-19T23:54:44.769771Z",
+  "generated_at": "2026-06-19T23:59:15.380788Z",
   "safe_mode": true,
   "source": {
     "promo_queue_plan": "data/promo_queue_plan.json",
@@ -26,16 +26,20 @@
       "selected_cta_strength": "hard_goal",
       "text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
       "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+      "copy_block": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
       "imagery_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
       "clip_url": "",
+      "asset_download_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
       "media_key": "twelve-dollars-cover",
       "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
       "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+      "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+      "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
       "manual_workflow": [
         "Review the copy and linked playlist.",
         "Approve only after human review if it should become the current manual posting candidate.",
         "Post manually in YouTube Studio Community using the copy and asset below.",
-        "After posting, append the public URL to admin/content/Published_Log.csv and refresh Admin."
+        "After posting, run the log preview command with the public URL, then run the apply command to update Published_Log.csv and refresh Admin."
       ]
     },
     {
@@ -51,16 +55,20 @@
       "selected_cta_strength": "hard_goal",
       "text": "Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
       "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+      "copy_block": "Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
       "imagery_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
       "clip_url": "",
+      "asset_download_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
       "media_key": "analog-myth-cover",
       "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --dry-run",
       "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin",
+      "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+      "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
       "manual_workflow": [
         "Review the copy and linked playlist.",
         "Approve only after human review if it should become the current manual posting candidate.",
         "Post manually in YouTube Studio Community using the copy and asset below.",
-        "After posting, append the public URL to admin/content/Published_Log.csv and refresh Admin."
+        "After posting, run the log preview command with the public URL, then run the apply command to update Published_Log.csv and refresh Admin."
       ]
     }
   ]
