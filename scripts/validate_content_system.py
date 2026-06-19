@@ -17,6 +17,7 @@ METRICS_HISTORY = ROOT / "data" / "metrics_history.json"
 EXECUTOR_READINESS = ROOT / "data" / "executor_readiness_snapshot.json"
 STORE_VERIFICATION_HISTORY = ROOT / "data" / "store_verification_history.json"
 SOCIAL_EXECUTION_SNAPSHOT = ROOT / "data" / "social_execution_snapshot.json"
+SOCIAL_SCHEDULER_DRY_RUN = ROOT / "data" / "social_scheduler_dry_run.json"
 PROMO_REFRESH_RUN = ROOT / "data" / "promo_admin_refresh_run.json"
 PROMO_REFRESH_WORKFLOW_STATUS = ROOT / "data" / "promo_refresh_workflow_status.json"
 PROMO_OPERATIONS_PACKET = ROOT / "data" / "promo_operations_packet.json"
@@ -49,6 +50,7 @@ YOUTUBE_MUSIC_SEARCH_VERIFIER = ROOT / "scripts" / "search_youtube_music_release
 METRICS_HISTORY_UPDATER = ROOT / "scripts" / "update_metrics_history.py"
 EXECUTOR_READINESS_CAPTURE = ROOT / "scripts" / "capture_executor_readiness.py"
 SOCIAL_EXECUTION_CAPTURE = ROOT / "scripts" / "capture_social_executions.py"
+SOCIAL_SCHEDULER_CAPTURE = ROOT / "scripts" / "capture_scheduler_dry_run.py"
 PROMO_REFRESH_SCRIPT = ROOT / "scripts" / "refresh_promo_admin.py"
 PROMO_REFRESH_WORKFLOW_CAPTURE = ROOT / "scripts" / "capture_github_workflow_status.py"
 PROMO_REFRESH_WORKFLOW = ROOT / ".github" / "workflows" / "promo-admin-refresh.yml"
@@ -227,6 +229,15 @@ def validate_generated_outputs(failures):
             fail("social_execution_snapshot.json missing categorized summary, timestamp, or auth method", failures)
     else:
         fail("social_execution_snapshot.json missing; run scripts/capture_social_executions.py", failures)
+    if SOCIAL_SCHEDULER_DRY_RUN.exists():
+        scheduler_snapshot = json.loads(SOCIAL_SCHEDULER_DRY_RUN.read_text(encoding="utf-8"))
+        summary = scheduler_snapshot.get("summary") or {}
+        if scheduler_snapshot.get("dry_run") is True and "updated_at" in scheduler_snapshot and "would_post_count" in summary and "blocked_count" in summary:
+            ok(f"social scheduler dry-run tracks {summary.get('result_count')} due result(s)")
+        else:
+            fail("social_scheduler_dry_run.json missing dry-run summary or timestamp", failures)
+    else:
+        fail("social_scheduler_dry_run.json missing; run scripts/capture_scheduler_dry_run.py", failures)
     if PROMO_REFRESH_RUN.exists():
         refresh_run = json.loads(PROMO_REFRESH_RUN.read_text(encoding="utf-8"))
         summary = refresh_run.get("summary") or {}
@@ -768,6 +779,11 @@ def validate_generated_outputs(failures):
             ok("promo engine includes social execution summary")
         else:
             fail("promo_engine_status.json missing categorized social execution summary", failures)
+        scheduler_summary = kpi.get("social_scheduler_dry_run") or {}
+        if scheduler_summary.get("dry_run") is True and "would_post_count" in scheduler_summary and "blocked_count" in scheduler_summary:
+            ok("promo engine includes scheduler dry-run summary")
+        else:
+            fail("promo_engine_status.json missing scheduler dry-run summary", failures)
         if SOCIAL_EXECUTION_SNAPSHOT.exists():
             raw_execution = json.loads(SOCIAL_EXECUTION_SNAPSHOT.read_text(encoding="utf-8"))
             raw_summary = raw_execution.get("summary") or {}
@@ -997,6 +1013,14 @@ def validate_generated_outputs(failures):
             fail("capture_social_executions.py missing execution snapshot or auth header support", failures)
     else:
         fail("capture_social_executions.py missing", failures)
+    if SOCIAL_SCHEDULER_CAPTURE.exists():
+        scheduler_text = SOCIAL_SCHEDULER_CAPTURE.read_text(encoding="utf-8")
+        if "social_scheduler_dry_run.json" in scheduler_text and "/scheduler/dry-run" in scheduler_text and "method=\"POST\"" in scheduler_text:
+            ok("scheduler dry-run capture script present")
+        else:
+            fail("capture_scheduler_dry_run.py missing dry-run endpoint support", failures)
+    else:
+        fail("capture_scheduler_dry_run.py missing", failures)
     if PROMO_REFRESH_SCRIPT.exists():
         refresh_text = PROMO_REFRESH_SCRIPT.read_text(encoding="utf-8")
         required_bits = [
@@ -1005,6 +1029,7 @@ def validate_generated_outputs(failures):
             "verify_pending_store_links.py",
             "capture_executor_readiness.py",
             "capture_social_executions.py",
+            "capture_scheduler_dry_run.py",
             "capture_github_workflow_status.py",
             "build_promo_operations_packet.py",
             "build_approval_runway.py",
@@ -1225,6 +1250,7 @@ def validate_admin_execution_feedback(failures):
         "refresh automation shown": "Refresh automation:" in text and "refreshAutomation" in text,
         "workflow run health shown": "Workflow run:" in text and "Open latest refresh run" in text,
         "refresh workflow link shown": "Open refresh workflow runs" in text and "actions/workflows/promo-admin-refresh.yml" in text,
+        "scheduler dry-run shown": "Scheduler dry-run:" in text and "social_scheduler_dry_run" in text,
     }
     missing_platform = [label for label, present in platform_checks.items() if not present]
     if missing_platform:

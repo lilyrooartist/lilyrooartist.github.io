@@ -1,0 +1,104 @@
+{
+  "ok": true,
+  "updated_at": "2026-06-19T23:43:50.506777Z",
+  "source": "lilyroo-social-scheduler-dry-run",
+  "url": "https://www.lilyroo.com/api/social/scheduler/dry-run",
+  "http_status": 200,
+  "error": null,
+  "auth_method": "bearer",
+  "requested_scheduled_time": "2026-06-19T23:43:50.395050Z",
+  "dry_run": true,
+  "checked_at": "2026-06-19T23:43:50.395Z",
+  "summary": {
+    "due_count": 6,
+    "result_count": 6,
+    "would_post_count": 2,
+    "blocked_count": 4,
+    "status_counts": {
+      "blocked": 4,
+      "would_post": 2
+    },
+    "platform_counts": {
+      "Facebook": 1,
+      "Instagram": 2,
+      "TikTok": 2,
+      "YouTube Community": 1
+    },
+    "would_post": [
+      {
+        "post_id": "FP-AUTO-263",
+        "platform": "Instagram",
+        "status": "would_post",
+        "reason": "",
+        "post_type": "image",
+        "attempts": 0,
+        "updated_at": "",
+        "source": "",
+        "error_summary": ""
+      },
+      {
+        "post_id": "FP-AUTO-265",
+        "platform": "Facebook",
+        "status": "would_post",
+        "reason": "",
+        "post_type": "image",
+        "attempts": 0,
+        "updated_at": "",
+        "source": "",
+        "error_summary": ""
+      }
+    ],
+    "blocked": [
+      {
+        "post_id": "FP-AUTO-258",
+        "platform": "Instagram",
+        "status": "blocked",
+        "reason": "not_approved",
+        "post_type": "",
+        "attempts": 0,
+        "updated_at": "2026-06-19T23:43:50.689Z",
+        "source": "dry-run",
+        "error_summary": ""
+      },
+      {
+        "post_id": "FP-AUTO-259",
+        "platform": "TikTok",
+        "status": "blocked",
+        "reason": "not_approved",
+        "post_type": "",
+        "attempts": 0,
+        "updated_at": "2026-06-19T23:43:50.692Z",
+        "source": "dry-run",
+        "error_summary": ""
+      },
+      {
+        "post_id": "FP-AUTO-261",
+        "platform": "YouTube Community",
+        "status": "blocked",
+        "reason": "not_approved",
+        "post_type": "",
+        "attempts": 0,
+        "updated_at": "2026-06-19T23:43:50.695Z",
+        "source": "dry-run",
+        "error_summary": ""
+      },
+      {
+        "post_id": "FP-AUTO-264",
+        "platform": "TikTok",
+        "status": "blocked",
+        "reason": "tiktok_credentials_missing",
+        "post_type": "",
+        "attempts": 0,
+        "updated_at": "2026-06-19T23:43:50.699Z",
+        "source": "dry-run",
+        "error_summary": ""
+      }
+    ]
+  },
+  "payload": {
+    "ok": true,
+    "due_count": 6,
+    "result_count": 6
+  },
+  "action_needed": ""
+}

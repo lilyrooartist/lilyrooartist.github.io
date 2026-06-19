@@ -18,6 +18,7 @@ METRICS_HISTORY = ROOT / "data" / "metrics_history.json"
 EXECUTOR_READINESS = ROOT / "data" / "executor_readiness_snapshot.json"
 STORE_VERIFICATION_HISTORY = ROOT / "data" / "store_verification_history.json"
 SOCIAL_EXECUTIONS = ROOT / "data" / "social_execution_snapshot.json"
+SOCIAL_SCHEDULER_DRY_RUN = ROOT / "data" / "social_scheduler_dry_run.json"
 PROMO_REFRESH_RUN = ROOT / "data" / "promo_admin_refresh_run.json"
 PROMO_REFRESH_WORKFLOW_STATUS = ROOT / "data" / "promo_refresh_workflow_status.json"
 PROMO_REFRESH_WORKFLOW = ROOT / ".github" / "workflows" / "promo-admin-refresh.yml"
@@ -49,6 +50,7 @@ SOURCE_MAX_AGE_HOURS = {
     "executor_readiness": 24,
     "store_verification_history": 24,
     "social_executions": 24,
+    "social_scheduler_dry_run": 24,
     "promo_refresh_run": 24,
     "promo_refresh_workflow_status": 24,
 }
@@ -187,12 +189,13 @@ def refresh_command(name: str) -> str:
         "executor_readiness": "python3 scripts/capture_executor_readiness.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py",
         "store_verification_history": "python3 scripts/verify_pending_store_links.py --refresh-admin",
         "social_executions": "python3 scripts/capture_social_executions.py && python3 scripts/update_promo_engine_status.py",
+        "social_scheduler_dry_run": "python3 scripts/capture_scheduler_dry_run.py && python3 scripts/update_promo_engine_status.py",
         "promo_refresh_run": "python3 scripts/refresh_promo_admin.py",
         "promo_refresh_workflow_status": "python3 scripts/capture_github_workflow_status.py && python3 scripts/update_promo_engine_status.py",
     }.get(name, "")
 
 
-def source_freshness(release_status, manual, live, metrics_history, executor_readiness, store_history, social_executions, promo_refresh_run, promo_refresh_workflow_status, promo_plan, future_posts, now: datetime):
+def source_freshness(release_status, manual, live, metrics_history, executor_readiness, store_history, social_executions, social_scheduler_dry_run, promo_refresh_run, promo_refresh_workflow_status, promo_plan, future_posts, now: datetime):
     rows = [
         release_status_checked_no_change(freshness_row("release_status", RELEASE_STATUS, release_status, now), store_history, now),
         freshness_row("scheduled_posts", FUTURE_POSTS, future_posts, now),
@@ -204,6 +207,7 @@ def source_freshness(release_status, manual, live, metrics_history, executor_rea
         freshness_row("executor_readiness", EXECUTOR_READINESS, executor_readiness, now),
         freshness_row("store_verification_history", STORE_VERIFICATION_HISTORY, store_history, now),
         freshness_row("social_executions", SOCIAL_EXECUTIONS, social_executions, now),
+        freshness_row("social_scheduler_dry_run", SOCIAL_SCHEDULER_DRY_RUN, social_scheduler_dry_run, now),
         freshness_row("promo_refresh_run", PROMO_REFRESH_RUN, promo_refresh_run, now),
         freshness_row("promo_refresh_workflow_status", PROMO_REFRESH_WORKFLOW_STATUS, promo_refresh_workflow_status, now),
     ]
@@ -724,6 +728,29 @@ def social_execution_state(snapshot, scheduled_rows=None):
     }
 
 
+def social_scheduler_dry_run_state(snapshot):
+    summary = snapshot.get("summary") if isinstance(snapshot, dict) else {}
+    summary = summary or {}
+    return {
+        "ok": bool(snapshot.get("ok")) if isinstance(snapshot, dict) else False,
+        "updated_at": snapshot.get("updated_at", "") if isinstance(snapshot, dict) else "",
+        "http_status": snapshot.get("http_status", "") if isinstance(snapshot, dict) else "",
+        "auth_method": snapshot.get("auth_method", "") if isinstance(snapshot, dict) else "",
+        "requested_scheduled_time": snapshot.get("requested_scheduled_time", "") if isinstance(snapshot, dict) else "",
+        "checked_at": snapshot.get("checked_at", "") if isinstance(snapshot, dict) else "",
+        "dry_run": bool(snapshot.get("dry_run")) if isinstance(snapshot, dict) else False,
+        "due_count": int(summary.get("due_count") or 0),
+        "result_count": int(summary.get("result_count") or 0),
+        "would_post_count": int(summary.get("would_post_count") or 0),
+        "blocked_count": int(summary.get("blocked_count") or 0),
+        "status_counts": summary.get("status_counts") or {},
+        "platform_counts": summary.get("platform_counts") or {},
+        "would_post": summary.get("would_post") or [],
+        "blocked": summary.get("blocked") or [],
+        "action_needed": snapshot.get("action_needed", "") if isinstance(snapshot, dict) else "Run scripts/capture_scheduler_dry_run.py.",
+    }
+
+
 def dedupe_execution_rows(rows: list[dict]) -> list[dict]:
     seen = set()
     deduped = []
@@ -962,6 +989,7 @@ def build_status():
     metrics_history = read_json(METRICS_HISTORY, {})
     executor_readiness = read_json(EXECUTOR_READINESS, {})
     social_executions = read_json(SOCIAL_EXECUTIONS, {})
+    social_scheduler_dry_run = read_json(SOCIAL_SCHEDULER_DRY_RUN, {})
     promo_refresh_run = read_json(PROMO_REFRESH_RUN, {})
     promo_refresh_workflow_status = read_json(PROMO_REFRESH_WORKFLOW_STATUS, {})
     promo_plan = read_json(PROMO_QUEUE_PLAN, {})
@@ -974,8 +1002,9 @@ def build_status():
     refresh_run = refresh_run_state(promo_refresh_run)
     refresh_automation = refresh_automation_state(promo_refresh_workflow_status)
     execution_state = social_execution_state(social_executions, scheduled_rows)
+    scheduler_state = social_scheduler_dry_run_state(social_scheduler_dry_run)
     monetization = monetization_state(live, history, metrics_history, promo_plan, future_posts, execution_state, now)
-    freshness = source_freshness(release_status, manual, live, metrics_history, executor_readiness, store_history, social_executions, promo_refresh_run, promo_refresh_workflow_status, promo_plan, future_posts, now)
+    freshness = source_freshness(release_status, manual, live, metrics_history, executor_readiness, store_history, social_executions, social_scheduler_dry_run, promo_refresh_run, promo_refresh_workflow_status, promo_plan, future_posts, now)
 
     releases = []
     all_actions = []
@@ -1113,6 +1142,7 @@ def build_status():
             "executor_readiness": str(EXECUTOR_READINESS.relative_to(ROOT)),
             "store_verification_history": str(STORE_VERIFICATION_HISTORY.relative_to(ROOT)),
             "social_executions": str(SOCIAL_EXECUTIONS.relative_to(ROOT)),
+            "social_scheduler_dry_run": str(SOCIAL_SCHEDULER_DRY_RUN.relative_to(ROOT)),
             "promo_refresh_run": str(PROMO_REFRESH_RUN.relative_to(ROOT)),
             "promo_refresh_workflow_status": str(PROMO_REFRESH_WORKFLOW_STATUS.relative_to(ROOT)),
         },
@@ -1147,6 +1177,7 @@ def build_status():
             "store_verification_command_count": verification_command_count,
             "store_verification_history": store_history_summary,
             "social_execution_summary": execution_state,
+            "social_scheduler_dry_run": scheduler_state,
             "last_refresh_run": refresh_run,
             "refresh_automation": refresh_automation,
             "stale_source_count": freshness_summary["stale"],

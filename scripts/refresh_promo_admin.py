@@ -57,6 +57,12 @@ STEPS = [
         "preserve_on_failure": ["data/social_execution_snapshot.json"],
     },
     {
+        "name": "capture_scheduler_dry_run",
+        "command": ["python3", "scripts/capture_scheduler_dry_run.py"],
+        "required": False,
+        "preserve_on_failure": ["data/social_scheduler_dry_run.json"],
+    },
+    {
         "name": "generate_promo_queue_plan",
         "command": ["python3", "scripts/generate_promo_queue_plan.py"],
         "required": True,
