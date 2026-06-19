@@ -1,49 +1,19 @@
 {
-  "generated_at": "2026-06-19T23:30:40.494400Z",
+  "generated_at": "2026-06-19T23:35:47.129449Z",
   "safe_mode": true,
   "source": {
     "promo_queue_plan": "data/promo_queue_plan.json",
     "approval_runway": "data/approval_runway.json"
   },
   "summary": {
-    "draft_count": 6,
-    "selected_hard_cta_count": 6,
+    "draft_count": 3,
+    "selected_hard_cta_count": 3,
     "subscriber_swap_count": 0,
     "ready_after_approval_swap_count": 0,
     "recommended_swap_ids": [],
     "ready_after_approval_swap_ids": []
   },
   "rows": [
-    {
-      "id": "FP-PLAN-TWELVE-DOLLARS-X",
-      "release": "Twelve Dollars",
-      "platform": "X",
-      "approved": "no",
-      "readiness_state": "ready_after_approval",
-      "selected_strength": "hard_goal",
-      "recommended_strength": "hard_goal",
-      "selected_text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
-      "recommended_text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
-      "needs_subscriber_cta_swap": false,
-      "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-X --dry-run",
-      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-X --refresh-admin",
-      "action": "Selected copy already has a hard subscriber CTA."
-    },
-    {
-      "id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
-      "release": "Twelve Dollars",
-      "platform": "Instagram",
-      "approved": "no",
-      "readiness_state": "ready_after_approval",
-      "selected_strength": "hard_goal",
-      "recommended_strength": "hard_goal",
-      "selected_text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
-      "recommended_text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
-      "needs_subscriber_cta_swap": false,
-      "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --dry-run",
-      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --refresh-admin",
-      "action": "Selected copy already has a hard subscriber CTA."
-    },
     {
       "id": "FP-PLAN-TWELVE-DOLLARS-TIKTOK",
       "release": "Twelve Dollars",
@@ -57,21 +27,6 @@
       "needs_subscriber_cta_swap": false,
       "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --dry-run",
       "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --refresh-admin",
-      "action": "Selected copy already has a hard subscriber CTA."
-    },
-    {
-      "id": "FP-PLAN-TWELVE-DOLLARS-FACEBOOK",
-      "release": "Twelve Dollars",
-      "platform": "Facebook",
-      "approved": "no",
-      "readiness_state": "ready_after_approval",
-      "selected_strength": "hard_goal",
-      "recommended_strength": "hard_goal",
-      "selected_text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
-      "recommended_text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
-      "needs_subscriber_cta_swap": false,
-      "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --dry-run",
-      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --refresh-admin",
       "action": "Selected copy already has a hard subscriber CTA."
     },
     {

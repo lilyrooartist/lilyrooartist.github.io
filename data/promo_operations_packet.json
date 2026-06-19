@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-19T23:30:40.425570Z",
+  "generated_at": "2026-06-19T23:35:47.066272Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -8,8 +8,8 @@
     "executor_readiness": "data/executor_readiness_snapshot.json"
   },
   "summary": {
-    "action_count": 22,
-    "user_review": 6,
+    "action_count": 19,
+    "user_review": 3,
     "platform_fixes": 3,
     "store_checks": 7,
     "manual_metric_updates": 5,
@@ -22,14 +22,14 @@
       "Repair executor": 3,
       "Reschedule approved backlog": 1,
       "Review blocked drafts": 1,
-      "Review draft posts": 5,
+      "Review draft posts": 2,
       "Verify music sites": 7
     },
     "urgencies": {
       "blocked": 1,
-      "high": 5,
+      "high": 4,
       "low": 5,
-      "medium": 11
+      "medium": 9
     },
     "next_action": {
       "label": "Preview reschedule for approved past-due posts",
@@ -38,7 +38,7 @@
       "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
       "context": {
         "approved_backlog_posts": 3,
-        "approved_upcoming_posts": 0,
+        "approved_upcoming_posts": 3,
         "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --apply --refresh-admin",
         "note": "Preview first. Apply refuses rows with known executor blockers unless blockers are fixed or --allow-blocked is used after deliberate review."
       },
@@ -63,7 +63,7 @@
         "id": "FP-PLAN-TWELVE-DOLLARS-TIKTOK",
         "release": "Twelve Dollars",
         "platform": "TikTok",
-        "scheduled_at": "2026-06-22T20:40:00-04:00",
+        "scheduled_at": "2026-06-20T20:40:00-04:00",
         "execution_mode": "auto",
         "post_type": "video",
         "readiness_state": "blocked",
@@ -102,7 +102,7 @@
       "sort_key": [
         0,
         40,
-        6
+        4
       ]
     },
     {
@@ -112,7 +112,7 @@
       "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
       "context": {
         "approved_backlog_posts": 3,
-        "approved_upcoming_posts": 0,
+        "approved_upcoming_posts": 3,
         "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --apply --refresh-admin",
         "note": "Preview first. Apply refuses rows with known executor blockers unless blockers are fixed or --allow-blocked is used after deliberate review."
       },
@@ -225,110 +225,6 @@
       ]
     },
     {
-      "label": "Review X draft for Twelve Dollars",
-      "kind": "approval_review",
-      "priority": 10,
-      "command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-X --dry-run",
-      "context": {
-        "id": "FP-PLAN-TWELVE-DOLLARS-X",
-        "release": "Twelve Dollars",
-        "platform": "X",
-        "scheduled_at": "2026-06-20T10:15:00-04:00",
-        "execution_mode": "auto",
-        "post_type": "image",
-        "readiness_state": "ready_after_approval",
-        "readiness_message": "Ready after approval.",
-        "text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
-        "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-        "media_key": "twelve-dollars-cover",
-        "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-X --refresh-admin",
-        "preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-X --dry-run",
-        "readiness": {
-          "text_posting_ready": true,
-          "oauth2_user_token_present": false,
-          "oauth1_complete": true,
-          "media_map_present": false
-        }
-      },
-      "phase": "Review draft posts",
-      "urgency": "high",
-      "urgency_reason": "Draft is scheduled within 24 hours.",
-      "status": "waiting_for_user",
-      "sort_key": [
-        1,
-        10,
-        4
-      ]
-    },
-    {
-      "label": "Review Instagram draft for Twelve Dollars",
-      "kind": "approval_review",
-      "priority": 10,
-      "command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --dry-run",
-      "context": {
-        "id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
-        "release": "Twelve Dollars",
-        "platform": "Instagram",
-        "scheduled_at": "2026-06-21T14:05:00-04:00",
-        "execution_mode": "auto",
-        "post_type": "image",
-        "readiness_state": "ready_after_approval",
-        "readiness_message": "Ready after approval.",
-        "text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
-        "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-        "media_key": "twelve-dollars-cover",
-        "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --refresh-admin",
-        "preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --dry-run",
-        "readiness": {
-          "ready": true,
-          "api": "facebook-login",
-          "account_id_source": "FB_PAGE_ID"
-        }
-      },
-      "phase": "Review draft posts",
-      "urgency": "medium",
-      "urgency_reason": "Draft is scheduled within 72 hours.",
-      "status": "waiting_for_user",
-      "sort_key": [
-        2,
-        10,
-        5
-      ]
-    },
-    {
-      "label": "Review Facebook draft for Twelve Dollars",
-      "kind": "approval_review",
-      "priority": 10,
-      "command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --dry-run",
-      "context": {
-        "id": "FP-PLAN-TWELVE-DOLLARS-FACEBOOK",
-        "release": "Twelve Dollars",
-        "platform": "Facebook",
-        "scheduled_at": "2026-06-23T11:20:00-04:00",
-        "execution_mode": "auto",
-        "post_type": "image",
-        "readiness_state": "ready_after_approval",
-        "readiness_message": "Ready after approval.",
-        "text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
-        "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-        "media_key": "twelve-dollars-cover",
-        "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --refresh-admin",
-        "preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --dry-run",
-        "readiness": {
-          "ready": true
-        }
-      },
-      "phase": "Review draft posts",
-      "urgency": "medium",
-      "urgency_reason": "Auto draft is ready once reviewed and approved.",
-      "status": "waiting_for_user",
-      "sort_key": [
-        2,
-        10,
-        7
-      ]
-    },
-    {
       "label": "Review YouTube Community draft for Twelve Dollars",
       "kind": "approval_review",
       "priority": 15,
@@ -337,7 +233,7 @@
         "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
         "release": "Twelve Dollars",
         "platform": "YouTube Community",
-        "scheduled_at": "2026-06-24T18:30:00-04:00",
+        "scheduled_at": "2026-06-21T18:30:00-04:00",
         "execution_mode": "manual",
         "post_type": "community",
         "readiness_state": "manual_only",
@@ -357,12 +253,12 @@
       },
       "phase": "Review draft posts",
       "urgency": "medium",
-      "urgency_reason": "Manual copy is ready for human posting workflow.",
+      "urgency_reason": "Draft is scheduled within 72 hours.",
       "status": "waiting_for_user",
       "sort_key": [
         2,
         15,
-        8
+        5
       ]
     },
     {
@@ -374,7 +270,7 @@
         "id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
         "release": "Analog Myth",
         "platform": "YouTube Community",
-        "scheduled_at": "2026-06-25T18:30:00-04:00",
+        "scheduled_at": "2026-06-22T18:30:00-04:00",
         "execution_mode": "manual",
         "post_type": "community",
         "readiness_state": "manual_only",
@@ -394,12 +290,12 @@
       },
       "phase": "Review draft posts",
       "urgency": "medium",
-      "urgency_reason": "Manual copy is ready for human posting workflow.",
+      "urgency_reason": "Draft is scheduled within 72 hours.",
       "status": "waiting_for_user",
       "sort_key": [
         2,
         15,
-        9
+        6
       ]
     },
     {
@@ -410,11 +306,11 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "Spotify",
-        "checked_at": "2026-06-19T23:30:30.605148Z",
+        "checked_at": "2026-06-19T23:35:37.236976Z",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-19T23:30:30.605148Z",
+          "updated_at": "2026-06-19T23:35:37.236976Z",
           "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
         },
         "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -426,7 +322,7 @@
       "sort_key": [
         2,
         20,
-        10
+        7
       ]
     },
     {
@@ -437,11 +333,11 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "Apple Music",
-        "checked_at": "2026-06-19T23:30:32.406186Z",
+        "checked_at": "2026-06-19T23:35:39.077185Z",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-19T23:30:32.406186Z",
+          "updated_at": "2026-06-19T23:35:39.077185Z",
           "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
         },
         "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -453,7 +349,7 @@
       "sort_key": [
         2,
         20,
-        11
+        8
       ]
     },
     {
@@ -464,11 +360,11 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "HyperFollow",
-        "checked_at": "2026-06-19T23:30:32.742469Z",
+        "checked_at": "2026-06-19T23:35:39.478452Z",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-19T23:30:32.742469Z",
+          "updated_at": "2026-06-19T23:35:39.478452Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
         },
         "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -480,7 +376,7 @@
       "sort_key": [
         2,
         20,
-        12
+        9
       ]
     },
     {
@@ -491,11 +387,11 @@
       "context": {
         "release": "Analog Myth",
         "service": "Spotify",
-        "checked_at": "2026-06-19T23:30:32.794908Z",
+        "checked_at": "2026-06-19T23:35:39.537190Z",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/spotify_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-19T23:30:32.794908Z",
+          "updated_at": "2026-06-19T23:35:39.537190Z",
           "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
         },
         "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -507,7 +403,7 @@
       "sort_key": [
         2,
         20,
-        13
+        10
       ]
     },
     {
@@ -518,11 +414,11 @@
       "context": {
         "release": "Analog Myth",
         "service": "Apple Music",
-        "checked_at": "2026-06-19T23:30:34.620267Z",
+        "checked_at": "2026-06-19T23:35:41.336945Z",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-19T23:30:34.620267Z",
+          "updated_at": "2026-06-19T23:35:41.336945Z",
           "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
         },
         "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -534,7 +430,7 @@
       "sort_key": [
         2,
         20,
-        14
+        11
       ]
     },
     {
@@ -545,11 +441,11 @@
       "context": {
         "release": "Analog Myth",
         "service": "YouTube Music",
-        "checked_at": "2026-06-19T23:30:34.676812Z",
+        "checked_at": "2026-06-19T23:35:41.391437Z",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-19T23:30:34.676812Z",
+          "updated_at": "2026-06-19T23:35:41.391437Z",
           "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release."
         },
         "note": "Searches public web results for YouTube Music watch URLs, then validates the public title. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -561,7 +457,7 @@
       "sort_key": [
         2,
         20,
-        15
+        12
       ]
     },
     {
@@ -572,11 +468,11 @@
       "context": {
         "release": "Analog Myth",
         "service": "HyperFollow",
-        "checked_at": "2026-06-19T23:30:37.715480Z",
+        "checked_at": "2026-06-19T23:35:44.331185Z",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-19T23:30:37.715480Z",
+          "updated_at": "2026-06-19T23:35:44.331185Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
         },
         "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -588,7 +484,7 @@
       "sort_key": [
         2,
         20,
-        16
+        13
       ]
     },
     {
@@ -615,7 +511,7 @@
       "sort_key": [
         3,
         30,
-        17
+        14
       ]
     },
     {
@@ -643,7 +539,7 @@
       "sort_key": [
         3,
         30,
-        18
+        15
       ]
     },
     {
@@ -673,7 +569,7 @@
       "sort_key": [
         3,
         30,
-        19
+        16
       ]
     },
     {
@@ -701,7 +597,7 @@
       "sort_key": [
         3,
         30,
-        20
+        17
       ]
     },
     {
@@ -729,7 +625,7 @@
       "sort_key": [
         3,
         30,
-        21
+        18
       ]
     }
   ]

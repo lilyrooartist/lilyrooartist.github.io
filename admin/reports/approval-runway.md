@@ -1,34 +1,16 @@
 # Approval Runway - Lily Roo
 
-Generated: 2026-06-19T23:30:40.458398Z
+Generated: 2026-06-19T23:35:47.098674Z
 
 ## Summary
-- Drafts needing review: **6**
-- Ready after approval: **3**
+- Drafts needing review: **3**
+- Ready after approval: **0**
 - Manual-only drafts: **2**
 - Blocked drafts: **1**
-- Recommended approvals: **3**
+- Recommended approvals: **0**
 - Monetization runway: **behind_365_day_pace**, 0.7 subs/week observed, 19.06 subs/week needed for 365 days
 
 ## Recommended Sequence
-- **Facebook - Twelve Dollars** (`FP-PLAN-TWELVE-DOLLARS-FACEBOOK`)
-  - Readiness: `ready_after_approval`; score: `123`
-  - Recommendation: Review copy, then approve to unlock an auto-publishable subscriber CTA.
-  - Copy: Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.
-  - Preview: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --dry-run`
-  - Approve after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --refresh-admin`
-- **Instagram - Twelve Dollars** (`FP-PLAN-TWELVE-DOLLARS-INSTAGRAM`)
-  - Readiness: `ready_after_approval`; score: `123`
-  - Recommendation: Review copy, then approve to unlock an auto-publishable subscriber CTA.
-  - Copy: Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.
-  - Preview: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --dry-run`
-  - Approve after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --refresh-admin`
-- **X - Twelve Dollars** (`FP-PLAN-TWELVE-DOLLARS-X`)
-  - Readiness: `ready_after_approval`; score: `123`
-  - Recommendation: Review copy, then approve to unlock an auto-publishable subscriber CTA.
-  - Copy: Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.
-  - Preview: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-X --dry-run`
-  - Approve after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-X --refresh-admin`
 - **YouTube Community - Analog Myth** (`FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY`)
   - Readiness: `manual_only`; score: `116`
   - Recommendation: Review copy and use the manual posting workflow; approval will not auto-post this row.
