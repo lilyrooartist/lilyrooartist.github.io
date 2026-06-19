@@ -552,7 +552,7 @@ async function youtubeMetrics(env) {
 }
 
 async function spotifyMetrics(env) {
-  const releaseUrl = text(env.SPOTIFY_RELEASE_URL) || "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi";
+  const releaseUrl = text(env.SPOTIFY_RELEASE_URL) || "https://open.spotify.com/album/4Al5eYOqGFMKEES5fDWIfI";
   const release = await jsonGet(SPOTIFY_OEMBED_URL, { url: releaseUrl });
   return availableMetric("spotify-oembed-public", {
     release_verified: release?.title ? 1 : 0,
