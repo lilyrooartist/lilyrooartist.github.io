@@ -1,22 +1,22 @@
 {
   "ok": true,
-  "updated_at": "2026-06-19T23:43:50.506777Z",
+  "updated_at": "2026-06-19T23:48:52.565557Z",
   "source": "lilyroo-social-scheduler-dry-run",
   "url": "https://www.lilyroo.com/api/social/scheduler/dry-run",
   "http_status": 200,
   "error": null,
   "auth_method": "bearer",
-  "requested_scheduled_time": "2026-06-19T23:43:50.395050Z",
+  "requested_scheduled_time": "2026-06-19T23:48:52.279493Z",
   "dry_run": true,
-  "checked_at": "2026-06-19T23:43:50.395Z",
+  "checked_at": "2026-06-19T23:48:52.279Z",
   "summary": {
     "due_count": 6,
     "result_count": 6,
-    "would_post_count": 2,
-    "blocked_count": 4,
+    "would_post_count": 0,
+    "blocked_count": 6,
     "status_counts": {
       "blocked": 4,
-      "would_post": 2
+      "failed": 2
     },
     "platform_counts": {
       "Facebook": 1,
@@ -24,30 +24,7 @@
       "TikTok": 2,
       "YouTube Community": 1
     },
-    "would_post": [
-      {
-        "post_id": "FP-AUTO-263",
-        "platform": "Instagram",
-        "status": "would_post",
-        "reason": "",
-        "post_type": "image",
-        "attempts": 0,
-        "updated_at": "",
-        "source": "",
-        "error_summary": ""
-      },
-      {
-        "post_id": "FP-AUTO-265",
-        "platform": "Facebook",
-        "status": "would_post",
-        "reason": "",
-        "post_type": "image",
-        "attempts": 0,
-        "updated_at": "",
-        "source": "",
-        "error_summary": ""
-      }
-    ],
+    "would_post": [],
     "blocked": [
       {
         "post_id": "FP-AUTO-258",
@@ -56,7 +33,7 @@
         "reason": "not_approved",
         "post_type": "",
         "attempts": 0,
-        "updated_at": "2026-06-19T23:43:50.689Z",
+        "updated_at": "2026-06-19T23:48:52.739Z",
         "source": "dry-run",
         "error_summary": ""
       },
@@ -67,7 +44,7 @@
         "reason": "not_approved",
         "post_type": "",
         "attempts": 0,
-        "updated_at": "2026-06-19T23:43:50.692Z",
+        "updated_at": "2026-06-19T23:48:52.742Z",
         "source": "dry-run",
         "error_summary": ""
       },
@@ -78,7 +55,18 @@
         "reason": "not_approved",
         "post_type": "",
         "attempts": 0,
-        "updated_at": "2026-06-19T23:43:50.695Z",
+        "updated_at": "2026-06-19T23:48:52.746Z",
+        "source": "dry-run",
+        "error_summary": ""
+      },
+      {
+        "post_id": "FP-AUTO-263",
+        "platform": "Instagram",
+        "status": "failed",
+        "reason": "max_attempts_exceeded",
+        "post_type": "",
+        "attempts": 3,
+        "updated_at": "2026-06-19T23:48:52.749Z",
         "source": "dry-run",
         "error_summary": ""
       },
@@ -89,7 +77,18 @@
         "reason": "tiktok_credentials_missing",
         "post_type": "",
         "attempts": 0,
-        "updated_at": "2026-06-19T23:43:50.699Z",
+        "updated_at": "2026-06-19T23:48:52.751Z",
+        "source": "dry-run",
+        "error_summary": ""
+      },
+      {
+        "post_id": "FP-AUTO-265",
+        "platform": "Facebook",
+        "status": "failed",
+        "reason": "max_attempts_exceeded",
+        "post_type": "",
+        "attempts": 3,
+        "updated_at": "2026-06-19T23:48:52.754Z",
         "source": "dry-run",
         "error_summary": ""
       }

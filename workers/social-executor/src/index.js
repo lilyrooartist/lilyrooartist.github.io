@@ -216,6 +216,18 @@ async function executePost(payload, env, options = {}) {
   throw new Error(`Unsupported platform: ${payload.platform || ""}`);
 }
 
+function scheduleAttemptState(payload, existing, options = {}) {
+  return {
+    post_id: payload.postId,
+    platform: payload.platform,
+    status: "failed",
+    reason: "max_attempts_exceeded",
+    attempts: Number(existing?.attempts || MAX_SCHEDULE_ATTEMPTS),
+    updated_at: new Date().toISOString(),
+    source: options.source || "cron",
+  };
+}
+
 async function runScheduledPosts(env, options = {}) {
   const store = executionStore(env);
   if (!store && !options.dryRun) {
@@ -237,6 +249,13 @@ async function runScheduledPosts(env, options = {}) {
     const existing = await executionState(env, payload.postId);
     if (existing?.status === "posted") {
       results.push({ post_id: payload.postId, status: "posted", duplicate: true });
+      continue;
+    }
+
+    if (Number(existing?.attempts || 0) >= MAX_SCHEDULE_ATTEMPTS) {
+      const state = scheduleAttemptState(payload, existing, options);
+      if (!options.dryRun) await writeExecutionState(env, payload.postId, state);
+      results.push(state);
       continue;
     }
 
