@@ -1,7 +1,7 @@
 # Weekly Social Report — Lily Roo
 
-**Period:** 2026-06-13 to 2026-06-19
-**Last updated:** 2026-06-19 08:04 PM UTC
+**Period:** 2026-06-14 to 2026-06-20
+**Last updated:** 2026-06-20 08:30 AM JST
 
 ## KPI Goal
 - Primary growth target: **1,000 YouTube subscribers** (monetization milestone)
@@ -11,16 +11,18 @@
 ### I Learned It All in Fifteen Seconds
 - Type: **album**
 - Tracks: **8**
-- DistroKid status: **submitted and public on verified stores for the title-track release**
-- Store status: **Spotify, Apple Music, iTunes, and YouTube Music verified for the public title-track release; additional album/store links still need public verification as they appear.**
-- Release date: **2026-06-05**
+- DistroKid status: **album successfully processed and delivered to stores; separate title-track single remains pending Spotify-only removal through DistroKid support**
+- Store status: **Spotify and Apple Music verified for the 8-track album release; YouTube Music title-track link remains verified; separate Spotify single exists until DistroKid processes a Spotify-only removal.**
+- Release date: **2026-06-12**
 - Primary CTA: **Spotify**
-- Spotify: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi
-- Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249
+- Spotify: https://open.spotify.com/album/4Al5eYOqGFMKEES5fDWIfI
+- Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds/6777735762
 - YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4
-- HyperFollow: https://distrokid.com/hyperfollow/lilyroo/i-learned-it-all-in-fifteen-seconds
+- HyperFollow: https://distrokid.com/hyperfollow/lilyroo/i-learned-it-all-in-fifteen-seconds-2
 - YouTube playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXWKTqgIs2N6dCU3BfS_9J2C
 - Note: Remastered YouTube album videos are public and ordered in the album playlist.
+- Note: DistroKid album UPC: 883306931106.
+- Note: Separate single UPC 825254833842 / ISRC QZZ7M2641250 remains available for historical reference.
 - Note: Spotify for Artists metrics still require manual export or connected analytics access.
 
 ### Twelve Dollars
@@ -56,10 +58,10 @@
 ## Platform Snapshot
 
 ### YouTube
-- Subscribers: **5**
+- Subscribers: **6**
 - Last 28 days views: **109**
 - Last 28 days watch time: **3.4 hours**
-- API status: **live API**
+- API status: **YouTube OAuth refresh token invalid_grant; run scripts/youtube_oauth_browser_helper.py, then run scripts/update_youtube_video_title.py --apply and redeploy/push the refreshed token**
 - Public RSS recent-video views: **27 across 15 videos**
 - Latest public upload: **Just Don't Talk About It - Lily Roo** (0 views)
 - Title-track video: https://www.youtube.com/watch?v=vK0mDIW65o4
@@ -85,10 +87,10 @@
 - Pending: **amazon_music**
 
 ### Spotify
-- First single: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi
+- First single: https://open.spotify.com/album/4Al5eYOqGFMKEES5fDWIfI
 - Artist profile: https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a
 - Public release check: **I Learned It All in Fifteen Seconds**
-- Remastered artwork thumbnail: https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e021da9ba23024f9074f309f661
+- Remastered artwork thumbnail: https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0287c54a775685e36e4f534ad4
 - Artist followers: **pending**
 - Monthly listeners: **pending**
 - Release streams: **pending**
@@ -122,7 +124,7 @@
 - Latest post: https://www.facebook.com/903693509504290_122118326547249470
 
 ## Metrics Snapshot
-- Live API captured: **2026-06-14T01:52:02.158Z**
+- Live API captured: **2026-06-19T23:30:30.742Z**
 - Snapshot file: `data/live_social_metrics.json`
 - YouTube public RSS captured: **2026-06-09T12:08:07.783949Z**
 - YouTube public snapshot file: `data/youtube_public_snapshot.json`
@@ -132,13 +134,13 @@
 - YouTube Music snapshot file: `data/youtube_music_release_snapshot.json`
 - HyperFollow stores captured: **2026-06-07T20:51:14.275569Z**
 - HyperFollow snapshot file: `data/hyperfollow_store_links_snapshot.json`
-- All-release store verification captured: **2026-06-19T20:04:24.653411+00:00**
+- All-release store verification captured: **2026-06-19T23:30:40.387693+00:00**
 - All-release store verification file: `data/store_verification_history.json`
-- Social executor history captured: **2026-06-14T01:52:48.183167Z**
+- Social executor history captured: **2026-06-19T23:30:39.754414Z**
 - Social executor history file: `data/social_execution_snapshot.json`
 - First single alignment audit captured: **2026-06-07T21:39:03.668040Z**
 - First single alignment audit file: `data/first_single_alignment_audit.json`
-- Spotify public release captured: **2026-06-07T16:51:57.554497Z**
+- Spotify public release captured: **2026-06-17T09:11:29.767742Z**
 - Spotify snapshot file: `data/spotify_release_snapshot.json`
 - Apple Music public release captured: **2026-06-07T16:51:58.229563Z**
 - Apple Music snapshot file: `data/apple_music_release_snapshot.json`

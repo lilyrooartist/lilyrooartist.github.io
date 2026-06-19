@@ -1,6 +1,6 @@
 # Approval Runway - Lily Roo
 
-Generated: 2026-06-19T20:04:24.723735Z
+Generated: 2026-06-19T23:30:40.458398Z
 
 ## Summary
 - Drafts needing review: **6**
@@ -8,7 +8,7 @@ Generated: 2026-06-19T20:04:24.723735Z
 - Manual-only drafts: **2**
 - Blocked drafts: **1**
 - Recommended approvals: **3**
-- Monetization runway: **stalled**, 0.0 subs/week observed, 19.08 subs/week needed for 365 days
+- Monetization runway: **behind_365_day_pace**, 0.7 subs/week observed, 19.06 subs/week needed for 365 days
 
 ## Recommended Sequence
 - **Facebook - Twelve Dollars** (`FP-PLAN-TWELVE-DOLLARS-FACEBOOK`)

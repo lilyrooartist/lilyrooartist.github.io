@@ -68,11 +68,11 @@ Then refresh the admin queue:
 `python3 scripts/sync_future_posts.py`
 
 ### I Learned It All in Fifteen Seconds
-- Spotify: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi
-- Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249
+- Spotify: https://open.spotify.com/album/4Al5eYOqGFMKEES5fDWIfI
+- Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds/6777735762
 - YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4
 - YouTube playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXWKTqgIs2N6dCU3BfS_9J2C
-- HyperFollow fallback: https://distrokid.com/hyperfollow/lilyroo/i-learned-it-all-in-fifteen-seconds
+- HyperFollow fallback: https://distrokid.com/hyperfollow/lilyroo/i-learned-it-all-in-fifteen-seconds-2
 - Use Spotify as the primary website/social CTA. Use Apple Music and YouTube Music as secondary streaming links; keep HyperFollow only when one cross-platform landing page is useful.
 
 ### Twelve Dollars

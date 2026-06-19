@@ -1,10 +1,10 @@
 # Monetization Activation Plan - Lily Roo
 
-Generated: 2026-06-19T20:04:24.812265Z
+Generated: 2026-06-19T23:30:40.582328Z
 
 ## Summary
-- Current subscribers: **5 / 1000**
-- Runway status: **stalled**
+- Current subscribers: **6 / 1000**
+- Runway status: **behind_365_day_pace**
 - Ready subscriber CTA approvals: **3**
 - Subscriber CTA swaps available: **0**
 - Platform fixes: **3**
@@ -33,8 +33,8 @@ Generated: 2026-06-19T20:04:24.812265Z
 5. **Preview approved backlog reschedule**
    - Phase: `Recover stalled approved backlog`; status: `preview_first`
    - Detail: Preview a new schedule for approved past-due posts. Apply refuses known blocked executor rows unless deliberately overridden.
-   - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-20T10:00:00+00:00' --spacing-hours 24`
-   - After review: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-20T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin`
+   - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24`
+   - After review: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --apply --refresh-admin`
 6. **Repair Instagram executor**
    - Phase: `Clear platform blockers`; status: `needs_platform_fix`
    - Detail: Reconnect the Instagram Business/Creator account to the Facebook Page or set IG_BUSINESS_ACCOUNT_ID, then push the worker secret and recapture readiness.
@@ -52,8 +52,8 @@ Generated: 2026-06-19T20:04:24.812265Z
 9. **Current operations next action: Preview reschedule for approved past-due posts**
    - Phase: `Operations packet`; status: `waiting_for_user`
    - Detail: Approved posts are past due; preview a new schedule before any apply step.
-   - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-20T10:00:00+00:00' --spacing-hours 24`
-   - After review: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-20T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin`
+   - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24`
+   - After review: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --apply --refresh-admin`
 
 ## Guardrails
 - This plan does not approve, apply, publish, or post anything.

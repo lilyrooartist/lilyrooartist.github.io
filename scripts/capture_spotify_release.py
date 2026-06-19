@@ -13,7 +13,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 MANUAL = REPO_ROOT / "data" / "manual_social_stats.json"
 OUT = REPO_ROOT / "data" / "spotify_release_snapshot.json"
-DEFAULT_RELEASE_URL = "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi"
+DEFAULT_RELEASE_URL = "https://open.spotify.com/album/4Al5eYOqGFMKEES5fDWIfI"
 DEFAULT_ARTIST_URL = "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a"
 OEMBED_URL = "https://open.spotify.com/oembed"
 

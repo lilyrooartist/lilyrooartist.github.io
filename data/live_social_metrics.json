@@ -1,21 +1,12 @@
 {
   "ok": true,
-  "updated_at": "2026-06-14T01:52:02.158Z",
+  "updated_at": "2026-06-19T23:30:30.742Z",
   "platforms": {
     "youtube": {
-      "ok": true,
-      "source": "youtube-data-api",
-      "metrics": {
-        "subscribers": 5,
-        "total_views": 251,
-        "video_count": 28
-      },
-      "channel_title": "Lily Roo",
-      "period_28d": {
-        "startDate": "2026-05-17",
-        "endDate": "2026-06-13"
-      },
-      "analytics_status": "Request had insufficient authentication scopes."
+      "ok": false,
+      "reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
+      "metrics": {},
+      "status": 400
     },
     "spotify": {
       "ok": true,
