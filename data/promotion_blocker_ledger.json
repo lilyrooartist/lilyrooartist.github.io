@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T02:32:46.944814Z",
+  "generated_at": "2026-06-20T02:37:48.148161Z",
   "safe_mode": true,
   "summary": {
     "open_blocker_count": 12,
@@ -38,8 +38,8 @@
       "auto_rows_unblocked": 1,
       "manual_rows_unblocked": 1,
       "effect_count": 2,
-      "preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --dry-run",
-      "apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --refresh-admin",
+      "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+      "apply_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
       "guardrail": "Human review is still required; blocked review IDs stay excluded from the checked batch."
     },
     "sources": [
@@ -62,7 +62,7 @@
       "platform": "Instagram",
       "release": "I Learned It All in Fifteen Seconds",
       "evidence": "FP-AUTO-258 is blocked by not_approved in executor state. Automated review checks passed.",
-      "next_step": "Use the checked batch after human review: preview `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --dry-run`, then apply `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --refresh-admin`.",
+      "next_step": "Use the checked batch after human review: preview `python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run`, then apply `python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin`.",
       "preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 --dry-run",
       "apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 --refresh-admin",
       "source_path": "data/scheduled_approval_packet.json",
@@ -150,7 +150,7 @@
       "platform": "YouTube Community",
       "release": "I Learned It All in Fifteen Seconds",
       "evidence": "FP-AUTO-261 is blocked by not_approved in executor state. Automated review checks passed.",
-      "next_step": "Use the checked batch after human review: preview `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --dry-run`, then apply `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --refresh-admin`.",
+      "next_step": "Use the checked batch after human review: preview `python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run`, then apply `python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin`.",
       "preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-261 --dry-run",
       "apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-261 --refresh-admin",
       "source_path": "data/scheduled_approval_packet.json",

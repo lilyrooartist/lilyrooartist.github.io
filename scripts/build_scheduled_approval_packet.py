@@ -54,6 +54,14 @@ def approval_batch_command(rows: list[dict], *, dry_run: bool) -> str:
     return "python3 scripts/update_scheduled_post_approval.py " + " ".join(ids) + suffix
 
 
+def approval_checked_batch_command(rows: list[dict], *, dry_run: bool) -> str:
+    ids = [row.get("id") or "" for row in rows if row.get("id")]
+    if not ids:
+        return ""
+    suffix = " --dry-run" if dry_run else " --refresh-admin"
+    return "python3 scripts/update_scheduled_post_approval.py --checked-batch" + suffix
+
+
 def approval_effect(row: dict, *, target_value: str = "yes") -> dict:
     previous = row.get("approved") or ""
     changed = previous != target_value
@@ -225,6 +233,8 @@ def build_markdown(payload: dict) -> str:
         f"- Blocked review IDs: `{', '.join(summary['blocked_review_ids'])}`" if summary.get("blocked_review_ids") else "- Blocked review IDs: none",
         f"- Checked-only preview: `{summary['checked_batch_preview_command']}`" if summary.get("checked_batch_preview_command") else "- Checked-only preview: none",
         f"- Checked-only approve after review: `{summary['checked_batch_apply_command']}`" if summary.get("checked_batch_apply_command") else "- Checked-only approve after review: none",
+        f"- Checked-only explicit preview: `{summary['checked_batch_explicit_preview_command']}`" if summary.get("checked_batch_explicit_preview_command") else "- Checked-only explicit preview: none",
+        f"- Checked-only explicit approve after review: `{summary['checked_batch_explicit_apply_command']}`" if summary.get("checked_batch_explicit_apply_command") else "- Checked-only explicit approve after review: none",
         f"- Checked-only effect: **{summary['checked_batch_effect']['change_count']}** row(s) would change approval state" if summary.get("checked_batch_effect") else "- Checked-only effect: none",
         f"- Batch preview: `{summary['batch_preview_command']}`" if summary.get("batch_preview_command") else "- Batch preview: none",
         f"- Batch approve after review: `{summary['batch_apply_command']}`" if summary.get("batch_apply_command") else "- Batch approve after review: none",
@@ -312,8 +322,10 @@ def main() -> int:
             review_check_status_counts[status] = review_check_status_counts.get(status, 0) + 1
     batch_preview_command = approval_batch_command(rows, dry_run=True)
     batch_apply_command = approval_batch_command(rows, dry_run=False)
-    checked_batch_preview_command = approval_batch_command(checked_rows, dry_run=True)
-    checked_batch_apply_command = approval_batch_command(checked_rows, dry_run=False)
+    checked_batch_preview_command = approval_checked_batch_command(checked_rows, dry_run=True)
+    checked_batch_apply_command = approval_checked_batch_command(checked_rows, dry_run=False)
+    checked_batch_explicit_preview_command = approval_batch_command(checked_rows, dry_run=True)
+    checked_batch_explicit_apply_command = approval_batch_command(checked_rows, dry_run=False)
     checked_batch_effect = approval_effect_summary(checked_rows)
     batch_effect = approval_effect_summary(rows)
     payload = {
@@ -335,6 +347,8 @@ def main() -> int:
             "review_check_status_counts": dict(sorted(review_check_status_counts.items())),
             "checked_batch_preview_command": checked_batch_preview_command,
             "checked_batch_apply_command": checked_batch_apply_command,
+            "checked_batch_explicit_preview_command": checked_batch_explicit_preview_command,
+            "checked_batch_explicit_apply_command": checked_batch_explicit_apply_command,
             "checked_batch_effect": checked_batch_effect,
             "preview_command_count": sum(1 for row in rows if row.get("approval_preview_command")),
             "apply_command_count": sum(1 for row in rows if row.get("approval_apply_command")),

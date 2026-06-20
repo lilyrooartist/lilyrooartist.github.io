@@ -1,6 +1,6 @@
 # Scheduled Approval Packet - Lily Roo
 
-Generated: 2026-06-20T02:32:46.769178Z
+Generated: 2026-06-20T02:37:47.969873Z
 
 ## Summary
 - Approval blockers: **3**
@@ -10,8 +10,10 @@ Generated: 2026-06-20T02:32:46.769178Z
 - Review checks blocked: **1**
 - Checked batch IDs: `FP-AUTO-258, FP-AUTO-261`
 - Blocked review IDs: `FP-AUTO-259`
-- Checked-only preview: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --dry-run`
-- Checked-only approve after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --refresh-admin`
+- Checked-only preview: `python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run`
+- Checked-only approve after review: `python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin`
+- Checked-only explicit preview: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --dry-run`
+- Checked-only explicit approve after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --refresh-admin`
 - Checked-only effect: **2** row(s) would change approval state
 - Batch preview: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-259 FP-AUTO-261 --dry-run`
 - Batch approve after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-259 FP-AUTO-261 --refresh-admin`

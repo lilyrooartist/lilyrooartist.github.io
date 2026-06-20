@@ -496,8 +496,14 @@ def validate_generated_outputs(failures):
                 or (
                     summary.get("checked_batch_preview_command")
                     and "--dry-run" in summary.get("checked_batch_preview_command", "")
+                    and "--checked-batch" in summary.get("checked_batch_preview_command", "")
                     and summary.get("checked_batch_apply_command")
                     and "--refresh-admin" in summary.get("checked_batch_apply_command", "")
+                    and "--checked-batch" in summary.get("checked_batch_apply_command", "")
+                    and summary.get("checked_batch_explicit_preview_command")
+                    and "--dry-run" in summary.get("checked_batch_explicit_preview_command", "")
+                    and summary.get("checked_batch_explicit_apply_command")
+                    and "--refresh-admin" in summary.get("checked_batch_explicit_apply_command", "")
                 )
             )
             and summary.get("preview_command_count") == len([row for row in rows if row.get("approval_preview_command")])
@@ -1202,10 +1208,10 @@ def validate_generated_outputs(failures):
         fail("approve_promo_queue_plan.py missing", failures)
     if SCHEDULED_POST_APPROVAL.exists():
         approval_text = SCHEDULED_POST_APPROVAL.read_text(encoding="utf-8")
-        if "scheduled_posts.csv" in approval_text and "--refresh-admin" in approval_text and "--dry-run" in approval_text and "Dry run only" in approval_text and "sync_future_posts.py" in approval_text:
+        if "scheduled_posts.csv" in approval_text and "--refresh-admin" in approval_text and "--dry-run" in approval_text and "--checked-batch" in approval_text and "--allow-unchecked" in approval_text and "scheduled_approval_packet.json" in approval_text and "Refusing to approve unchecked" in approval_text and "Dry run only" in approval_text and "sync_future_posts.py" in approval_text:
             ok("scheduled post approval script can refresh admin")
         else:
-            fail("update_scheduled_post_approval.py missing scheduled queue dry-run or refresh support", failures)
+            fail("update_scheduled_post_approval.py missing guarded checked-batch dry-run or refresh support", failures)
     else:
         fail("update_scheduled_post_approval.py missing", failures)
     if SCHEDULED_POST_RESCHEDULE.exists():
@@ -1434,7 +1440,7 @@ def validate_generated_outputs(failures):
         fail("build_approval_runway.py missing", failures)
     if SCHEDULED_APPROVAL_SCRIPT.exists():
         scheduled_approval_text = SCHEDULED_APPROVAL_SCRIPT.read_text(encoding="utf-8")
-        if "scheduled_approval_packet.json" in scheduled_approval_text and "scheduled-approval-packet.md" in scheduled_approval_text and "approval_preview_command" in scheduled_approval_text and "approval_apply_command" in scheduled_approval_text and "batch_preview_command" in scheduled_approval_text and "batch_apply_command" in scheduled_approval_text and "checked_batch_preview_command" in scheduled_approval_text and "checked_batch_apply_command" in scheduled_approval_text and "review_checks" in scheduled_approval_text and "executor_readiness_snapshot.json" in scheduled_approval_text and "subprocess" not in scheduled_approval_text:
+        if "scheduled_approval_packet.json" in scheduled_approval_text and "scheduled-approval-packet.md" in scheduled_approval_text and "approval_preview_command" in scheduled_approval_text and "approval_apply_command" in scheduled_approval_text and "batch_preview_command" in scheduled_approval_text and "batch_apply_command" in scheduled_approval_text and "checked_batch_preview_command" in scheduled_approval_text and "checked_batch_apply_command" in scheduled_approval_text and "checked_batch_explicit_preview_command" in scheduled_approval_text and "checked_batch_explicit_apply_command" in scheduled_approval_text and "--checked-batch" in scheduled_approval_text and "review_checks" in scheduled_approval_text and "executor_readiness_snapshot.json" in scheduled_approval_text and "subprocess" not in scheduled_approval_text:
             ok("scheduled approval packet builder is review-only")
         else:
             fail("build_scheduled_approval_packet.py missing approval packet outputs, batch commands, review checks, or executes commands", failures)

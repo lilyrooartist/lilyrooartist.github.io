@@ -1,6 +1,6 @@
 # Promotion Blocker Ledger - Lily Roo
 
-Generated: 2026-06-20T02:32:46.944814Z
+Generated: 2026-06-20T02:37:48.148161Z
 
 ## Summary
 - Open blockers: **12**
@@ -13,7 +13,7 @@ Generated: 2026-06-20T02:32:46.944814Z
 - **[high] Approve scheduled Instagram row** (`approval-FP-AUTO-258`)
   - Owner: `tod`; status: `ready_for_reviewed_approval`; category: `approval`
   - Evidence: FP-AUTO-258 is blocked by not_approved in executor state. Automated review checks passed.
-  - Next step: Use the checked batch after human review: preview `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --dry-run`, then apply `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --refresh-admin`.
+  - Next step: Use the checked batch after human review: preview `python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run`, then apply `python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin`.
   - Open: https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg
   - Preview/check: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 --dry-run`
   - Apply/log after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 --refresh-admin`
@@ -45,7 +45,7 @@ Generated: 2026-06-20T02:32:46.944814Z
 - **[medium] Approve scheduled YouTube Community row** (`approval-FP-AUTO-261`)
   - Owner: `tod`; status: `ready_for_reviewed_approval`; category: `approval`
   - Evidence: FP-AUTO-261 is blocked by not_approved in executor state. Automated review checks passed.
-  - Next step: Use the checked batch after human review: preview `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --dry-run`, then apply `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --refresh-admin`.
+  - Next step: Use the checked batch after human review: preview `python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run`, then apply `python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin`.
   - Open: https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg
   - Preview/check: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-261 --dry-run`
   - Apply/log after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-261 --refresh-admin`

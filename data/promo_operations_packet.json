@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T02:32:46.715958Z",
+  "generated_at": "2026-06-20T02:37:47.916334Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -12,7 +12,7 @@
     "label": "Preview checked scheduled approval batch",
     "kind": "scheduled_approval_batch",
     "priority": -1,
-    "command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --dry-run",
+    "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
     "context": {
       "approval_blocker_count": 3,
       "review_check_passed_count": 2,
@@ -30,7 +30,7 @@
       },
       "auto_count": 2,
       "manual_count": 1,
-      "apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --refresh-admin",
+      "apply_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
       "note": "Review all passing rows first. The checked batch excludes rows with failed review checks."
     },
     "phase": "Review scheduled approvals",
@@ -73,7 +73,7 @@
       "label": "Preview checked scheduled approval batch",
       "kind": "scheduled_approval_batch",
       "priority": -1,
-      "command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --dry-run",
+      "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
       "context": {
         "approval_blocker_count": 3,
         "review_check_passed_count": 2,
@@ -91,7 +91,7 @@
         },
         "auto_count": 2,
         "manual_count": 1,
-        "apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --refresh-admin",
+        "apply_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
         "note": "Review all passing rows first. The checked batch excludes rows with failed review checks."
       },
       "phase": "Review scheduled approvals",
@@ -161,7 +161,7 @@
       "label": "Preview checked scheduled approval batch",
       "kind": "scheduled_approval_batch",
       "priority": -1,
-      "command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --dry-run",
+      "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
       "context": {
         "approval_blocker_count": 3,
         "review_check_passed_count": 2,
@@ -179,7 +179,7 @@
         },
         "auto_count": 2,
         "manual_count": 1,
-        "apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --refresh-admin",
+        "apply_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
         "note": "Review all passing rows first. The checked batch excludes rows with failed review checks."
       },
       "phase": "Review scheduled approvals",
@@ -378,11 +378,11 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "Apple Music",
-        "checked_at": "2026-06-20T02:32:33.102026Z",
+        "checked_at": "2026-06-20T02:37:34.280017Z",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T02:32:33.102026Z",
+          "updated_at": "2026-06-20T02:37:34.280017Z",
           "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
         },
         "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -405,11 +405,11 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "HyperFollow",
-        "checked_at": "2026-06-20T02:32:33.451618Z",
+        "checked_at": "2026-06-20T02:37:34.642740Z",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T02:32:33.451618Z",
+          "updated_at": "2026-06-20T02:37:34.642740Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
         },
         "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -459,11 +459,11 @@
       "context": {
         "release": "Analog Myth",
         "service": "Apple Music",
-        "checked_at": "2026-06-20T02:32:38.588745Z",
+        "checked_at": "2026-06-20T02:37:39.814146Z",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T02:32:38.588745Z",
+          "updated_at": "2026-06-20T02:37:39.814146Z",
           "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
         },
         "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -513,11 +513,11 @@
       "context": {
         "release": "Analog Myth",
         "service": "HyperFollow",
-        "checked_at": "2026-06-20T02:32:44.175828Z",
+        "checked_at": "2026-06-20T02:37:45.305415Z",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T02:32:44.175828Z",
+          "updated_at": "2026-06-20T02:37:45.305415Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
         },
         "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."

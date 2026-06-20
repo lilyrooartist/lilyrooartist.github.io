@@ -1,6 +1,6 @@
 # Monetization Activation Plan - Lily Roo
 
-Generated: 2026-06-20T02:32:46.843858Z
+Generated: 2026-06-20T02:37:48.045211Z
 
 ## Summary
 - Current subscribers: **6 / 1000**
@@ -31,8 +31,8 @@ Generated: 2026-06-20T02:32:46.843858Z
 4. **Current operations next action: Preview checked scheduled approval batch**
    - Phase: `Operations packet`; status: `waiting_for_user`
    - Detail: Scheduled executor records are blocked until reviewed approval is applied.
-   - Preview/check: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --dry-run`
-   - After review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --refresh-admin`
+   - Preview/check: `python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run`
+   - After review: `python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin`
 
 ## Guardrails
 - This plan does not approve, apply, publish, or post anything.
