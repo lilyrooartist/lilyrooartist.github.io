@@ -133,6 +133,48 @@ def approval_docket(checked_rows: list[dict], blocked_rows: list[dict], summary:
     }
 
 
+def decision_manifest_row(row: dict, *, decision: str) -> dict:
+    failed = row.get("failed_review_checks") or []
+    passed = [item for item in row.get("review_checks") or [] if item.get("status") == "pass"]
+    next_step = (
+        "Apply through --checked-batch after human copy/media/link review."
+        if decision == "ready_to_approve"
+        else "Repair failed checks before including this row in an approval batch."
+    )
+    if decision == "ready_to_approve" and row.get("manual_dispatch"):
+        next_step = "Apply through --checked-batch, then post manually and log the public URL."
+    return {
+        "id": row.get("id") or "",
+        "decision": decision,
+        "platform": row.get("platform") or "",
+        "song": row.get("song") or "",
+        "execution_mode": row.get("execution_mode") or "",
+        "scheduled_at": row.get("scheduled_at") or "",
+        "checked_batch_member": bool(row.get("checked_batch_member")),
+        "approval_effect": row.get("approval_effect") or {},
+        "passed_check_names": [item.get("name") for item in passed if item.get("name")],
+        "failed_check_names": [item.get("name") for item in failed if item.get("name")],
+        "decision_reason": row.get("approval_batch_reason") or "",
+        "post_approval_next_step": next_step,
+        "manual_dispatch_required": bool(row.get("manual_dispatch")),
+    }
+
+
+def approval_decision_manifest(checked_rows: list[dict], blocked_rows: list[dict], summary: dict) -> dict:
+    ready = [decision_manifest_row(row, decision="ready_to_approve") for row in checked_rows]
+    held = [decision_manifest_row(row, decision="held") for row in blocked_rows]
+    return {
+        "status": "ready_for_review" if ready else "blocked",
+        "ready_ids": [row.get("id") for row in ready if row.get("id")],
+        "held_ids": [row.get("id") for row in held if row.get("id")],
+        "decisions": ready + held,
+        "expected_checked_batch_effect": summary.get("checked_batch_effect") or {},
+        "review_command": summary.get("checked_batch_preview_command") or "",
+        "apply_after_review_command": summary.get("checked_batch_apply_command") or "",
+        "guardrail": "Only ready_to_approve decisions may be applied through --checked-batch; held rows require repair first.",
+    }
+
+
 def platform_slug(platform: str) -> str:
     value = str(platform or "").strip().lower()
     return {
@@ -300,12 +342,14 @@ def build_markdown(payload: dict) -> str:
         "## Approval Docket",
     ]
     docket = payload.get("approval_docket") or {}
+    decision_manifest = payload.get("approval_decision_manifest") or {}
     lines.extend([
         f"- Status: **{docket.get('status', 'unknown')}**",
         f"- Ready to approve: **{docket.get('ready_count', 0)}**",
         f"- Held: **{docket.get('held_count', 0)}**",
         f"- Checked batch preview: `{docket.get('checked_batch_preview_command') or 'none'}`",
         f"- Checked batch approve after review: `{docket.get('checked_batch_apply_command') or 'none'}`",
+        f"- Decision manifest: **{len(decision_manifest.get('decisions') or [])}** reviewed row(s); ready `{', '.join(decision_manifest.get('ready_ids') or []) or 'none'}`; held `{', '.join(decision_manifest.get('held_ids') or []) or 'none'}`",
         "",
         "### Ready to Approve",
     ])
@@ -464,6 +508,7 @@ def main() -> int:
         },
         "summary": summary,
         "approval_docket": approval_docket(checked_rows, blocked_rows, summary),
+        "approval_decision_manifest": approval_decision_manifest(checked_rows, blocked_rows, summary),
         "rows": rows,
     }
     OUT.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")

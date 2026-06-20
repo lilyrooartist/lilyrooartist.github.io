@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T05:14:36.070331Z",
+  "generated_at": "2026-06-20T05:18:43.030558Z",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -253,6 +253,137 @@
       "Use --checked-batch so held rows with failed checks stay excluded.",
       "Manual-dispatch rows still need manual posting and public URL logging after approval."
     ]
+  },
+  "approval_decision_manifest": {
+    "status": "ready_for_review",
+    "ready_ids": [
+      "FP-AUTO-258",
+      "FP-AUTO-261"
+    ],
+    "held_ids": [
+      "FP-AUTO-259"
+    ],
+    "decisions": [
+      {
+        "id": "FP-AUTO-258",
+        "decision": "ready_to_approve",
+        "platform": "Instagram",
+        "song": "I Learned It All in Fifteen Seconds",
+        "execution_mode": "auto",
+        "scheduled_at": "2026-06-05T15:35:00-04:00",
+        "checked_batch_member": true,
+        "approval_effect": {
+          "field": "approved",
+          "from": "no",
+          "to": "yes",
+          "changed": true,
+          "summary": "approved 'no' -> 'yes'"
+        },
+        "passed_check_names": [
+          "copy_present",
+          "destination_links_present",
+          "asset_file_present",
+          "executor_blocker_confirmed",
+          "platform_readiness"
+        ],
+        "failed_check_names": [],
+        "decision_reason": "All automated review checks passed.",
+        "post_approval_next_step": "Apply through --checked-batch after human copy/media/link review.",
+        "manual_dispatch_required": false
+      },
+      {
+        "id": "FP-AUTO-261",
+        "decision": "ready_to_approve",
+        "platform": "YouTube Community",
+        "song": "I Learned It All in Fifteen Seconds",
+        "execution_mode": "manual",
+        "scheduled_at": "2026-06-06T19:10:00-04:00",
+        "checked_batch_member": true,
+        "approval_effect": {
+          "field": "approved",
+          "from": "no",
+          "to": "yes",
+          "changed": true,
+          "summary": "approved 'no' -> 'yes'"
+        },
+        "passed_check_names": [
+          "copy_present",
+          "destination_links_present",
+          "asset_file_present",
+          "executor_blocker_confirmed",
+          "platform_readiness"
+        ],
+        "failed_check_names": [],
+        "decision_reason": "All automated review checks passed.",
+        "post_approval_next_step": "Apply through --checked-batch, then post manually and log the public URL.",
+        "manual_dispatch_required": true
+      },
+      {
+        "id": "FP-AUTO-259",
+        "decision": "held",
+        "platform": "TikTok",
+        "song": "I Learned It All in Fifteen Seconds",
+        "execution_mode": "auto",
+        "scheduled_at": "2026-06-05T20:40:00-04:00",
+        "checked_batch_member": false,
+        "approval_effect": {
+          "field": "approved",
+          "from": "no",
+          "to": "yes",
+          "changed": true,
+          "summary": "approved 'no' -> 'yes'"
+        },
+        "passed_check_names": [
+          "copy_present",
+          "destination_links_present",
+          "asset_file_present",
+          "executor_blocker_confirmed"
+        ],
+        "failed_check_names": [
+          "platform_readiness"
+        ],
+        "decision_reason": "Held outside checked batch until failed/review checks clear.",
+        "post_approval_next_step": "Repair failed checks before including this row in an approval batch.",
+        "manual_dispatch_required": false
+      }
+    ],
+    "expected_checked_batch_effect": {
+      "row_count": 2,
+      "change_count": 2,
+      "ids": [
+        "FP-AUTO-258",
+        "FP-AUTO-261"
+      ],
+      "effects": [
+        {
+          "id": "FP-AUTO-258",
+          "platform": "Instagram",
+          "execution_mode": "auto",
+          "effect": {
+            "field": "approved",
+            "from": "no",
+            "to": "yes",
+            "changed": true,
+            "summary": "approved 'no' -> 'yes'"
+          }
+        },
+        {
+          "id": "FP-AUTO-261",
+          "platform": "YouTube Community",
+          "execution_mode": "manual",
+          "effect": {
+            "field": "approved",
+            "from": "no",
+            "to": "yes",
+            "changed": true,
+            "summary": "approved 'no' -> 'yes'"
+          }
+        }
+      ]
+    },
+    "review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+    "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+    "guardrail": "Only ready_to_approve decisions may be applied through --checked-batch; held rows require repair first."
   },
   "rows": [
     {
