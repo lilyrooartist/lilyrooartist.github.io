@@ -15,6 +15,8 @@ PUBLISHED_LOG = ROOT / "admin" / "content" / "Published_Log.csv"
 OUT = ROOT / "data" / "manual_distribution_packet.json"
 REPORT = ROOT / "admin" / "reports" / "manual-distribution-packet.md"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
+YOUTUBE_CHANNEL_URL = "https://www.youtube.com/@lilyroo.artist"
+YOUTUBE_COMMUNITY_URL = "https://www.youtube.com/@lilyroo.artist/community"
 
 
 def read_json(path: Path, fallback):
@@ -94,6 +96,36 @@ def log_effect(post: dict, published_row: dict) -> dict:
     }
 
 
+def manual_posting_packet(post: dict, approved: str, logged: bool, distribution_status: str, published_row: dict, approval_command: str) -> dict:
+    post_id = post.get("id") or ""
+    approval_required = approved != "yes"
+    postable_now = approved == "yes" and not logged
+    if logged:
+        next_action = "already_logged"
+        next_command = ""
+    elif approval_required:
+        next_action = "review_and_approve"
+        next_command = approval_command
+    else:
+        next_action = "post_manually_then_log_url"
+        next_command = log_command(post_id)
+    return {
+        "posting_surface": "YouTube Studio Community",
+        "public_channel_url": YOUTUBE_CHANNEL_URL,
+        "public_community_url": YOUTUBE_COMMUNITY_URL,
+        "paste_text": copy_block(post),
+        "asset_url": post.get("clip_url") or post.get("imagery_url") or "",
+        "approval_required": approval_required,
+        "postable_now": postable_now,
+        "logging_required": not logged,
+        "logged": logged,
+        "published_url": published_row.get("published_url") or "",
+        "distribution_status": distribution_status,
+        "next_action": next_action,
+        "next_command": next_command,
+    }
+
+
 def build_rows(plan: dict, runway: dict, published: dict[str, dict]) -> list[dict]:
     runway_by_id = runway_lookup(runway)
     rows = []
@@ -110,6 +142,8 @@ def build_rows(plan: dict, runway: dict, published: dict[str, dict]) -> list[dic
             distribution_status = "ready_for_manual_post"
         else:
             distribution_status = "waiting_for_review"
+        approval_command = review.get("approval_command") or post.get("approval_command") or ""
+        posting_packet = manual_posting_packet(post, approved, logged, distribution_status, published_row, approval_command)
         rows.append({
             "id": post.get("id") or "",
             "platform": post.get("platform") or "",
@@ -134,10 +168,11 @@ def build_rows(plan: dict, runway: dict, published: dict[str, dict]) -> list[dic
             "asset_download_url": post.get("clip_url") or post.get("imagery_url") or "",
             "media_key": post.get("media_key") or "",
             "approval_preview_command": review.get("approval_preview_command") or "",
-            "approval_command": review.get("approval_command") or post.get("approval_command") or "",
+            "approval_command": approval_command,
             "log_preview_command": log_command(post.get("id") or ""),
             "log_apply_command": log_command(post.get("id") or "", apply=True),
             "log_effect": log_effect(post, published_row),
+            "manual_posting_packet": posting_packet,
             "manual_workflow": [
                 "Review the copy and linked playlist.",
                 "Approve only after human review if it should become the current manual posting candidate.",
@@ -210,6 +245,13 @@ def build_markdown(payload: dict) -> str:
                 lines.append(f"    {line}" if line else "    ")
         if row.get("asset_download_url"):
             lines.append(f"  - Asset: {row['asset_download_url']}")
+        if row.get("manual_posting_packet"):
+            packet = row["manual_posting_packet"]
+            lines.append(f"  - Next manual action: `{packet.get('next_action')}`")
+            lines.append(f"  - Postable now: `{packet.get('postable_now')}`; approval required: `{packet.get('approval_required')}`; logging required: `{packet.get('logging_required')}`")
+            lines.append(f"  - Public community surface: {packet.get('public_community_url')}")
+            if packet.get("next_command"):
+                lines.append(f"  - Next command: `{packet['next_command']}`")
         if row.get("log_effect"):
             lines.append(f"  - Log effect: {row['log_effect']['summary']}")
         if row.get("approval_preview_command"):
@@ -250,6 +292,8 @@ def main() -> int:
     logged_rows = [row for row in rows if row.get("logged")]
     unlogged_rows = [row for row in rows if not row.get("logged")]
     log_needed_rows = [row for row in rows if (row.get("log_effect") or {}).get("would_append")]
+    review_rows = [row for row in unlogged_rows if (row.get("manual_posting_packet") or {}).get("approval_required")]
+    postable_rows = [row for row in unlogged_rows if (row.get("manual_posting_packet") or {}).get("postable_now")]
     payload = {
         "generated_at": now.isoformat().replace("+00:00", "Z"),
         "safe_mode": True,
@@ -269,6 +313,10 @@ def main() -> int:
             "ready_to_post_after_review_count": sum(1 for row in unlogged_rows if row.get("readiness_state") == "manual_only"),
             "ready_for_manual_post_count": sum(1 for row in unlogged_rows if row.get("distribution_status") == "ready_for_manual_post"),
             "waiting_for_review_count": sum(1 for row in unlogged_rows if row.get("distribution_status") == "waiting_for_review"),
+            "manual_review_required_count": len(review_rows),
+            "postable_now_count": len(postable_rows),
+            "next_manual_action": "review_and_approve" if review_rows else ("post_manually_then_log_url" if postable_rows else "none"),
+            "public_community_url": YOUTUBE_COMMUNITY_URL,
         },
         "rows": rows,
     }

@@ -664,6 +664,8 @@ def validate_generated_outputs(failures):
         hard_rows = [row for row in rows if row.get("selected_cta_strength") in {"hard_subscribe", "hard_goal"}]
         logged_rows = [row for row in rows if row.get("logged")]
         unlogged_rows = [row for row in rows if not row.get("logged")]
+        review_rows = [row for row in unlogged_rows if (row.get("manual_posting_packet") or {}).get("approval_required")]
+        postable_rows = [row for row in unlogged_rows if (row.get("manual_posting_packet") or {}).get("postable_now")]
         if (
             manual_packet.get("safe_mode") is True
             and summary.get("manual_ready_count") == len(rows)
@@ -673,6 +675,10 @@ def validate_generated_outputs(failures):
             and summary.get("unlogged_manual_count") == len(unlogged_rows)
             and summary.get("public_url_log_needed_count") == len([row for row in rows if (row.get("log_effect") or {}).get("would_append")])
             and summary.get("ready_to_post_after_review_count") == len([row for row in unlogged_rows if row.get("readiness_state") == "manual_only"])
+            and summary.get("manual_review_required_count") == len(review_rows)
+            and summary.get("postable_now_count") == len(postable_rows)
+            and summary.get("next_manual_action") in {"review_and_approve", "post_manually_then_log_url", "none"}
+            and summary.get("public_community_url") == "https://www.youtube.com/@lilyroo.artist/community"
             and all(
                 row.get("id")
                 and row.get("text")
@@ -686,6 +692,13 @@ def validate_generated_outputs(failures):
                 and (row.get("log_effect") or {}).get("content_id") == row.get("id")
                 and (row.get("log_effect") or {}).get("url_placeholder") == "PUBLIC_URL"
                 and isinstance((row.get("log_effect") or {}).get("would_append"), bool)
+                and (row.get("manual_posting_packet") or {}).get("posting_surface") == "YouTube Studio Community"
+                and (row.get("manual_posting_packet") or {}).get("public_community_url") == "https://www.youtube.com/@lilyroo.artist/community"
+                and (row.get("manual_posting_packet") or {}).get("paste_text") == row.get("copy_block")
+                and isinstance((row.get("manual_posting_packet") or {}).get("approval_required"), bool)
+                and isinstance((row.get("manual_posting_packet") or {}).get("postable_now"), bool)
+                and isinstance((row.get("manual_posting_packet") or {}).get("logging_required"), bool)
+                and (row.get("manual_posting_packet") or {}).get("next_action") in {"review_and_approve", "post_manually_then_log_url", "already_logged"}
                 and "log_manual_distribution.py" in row.get("log_preview_command", "")
                 and "--apply" not in row.get("log_preview_command", "")
                 and "--apply --refresh-admin" in row.get("log_apply_command", "")
@@ -1599,7 +1612,7 @@ def validate_generated_outputs(failures):
         fail("build_subscriber_cta_audit.py missing", failures)
     if MANUAL_DISTRIBUTION_PACKET_SCRIPT.exists():
         manual_distribution_text = MANUAL_DISTRIBUTION_PACKET_SCRIPT.read_text(encoding="utf-8")
-        if "manual_distribution_packet.json" in manual_distribution_text and "manual-distribution-packet.md" in manual_distribution_text and "Manual Posting Queue" in manual_distribution_text and "copy_block" in manual_distribution_text and "log_manual_distribution.py" in manual_distribution_text and "Published_Log.csv" in manual_distribution_text and "distribution_status" in manual_distribution_text and "subprocess" not in manual_distribution_text:
+        if "manual_distribution_packet.json" in manual_distribution_text and "manual-distribution-packet.md" in manual_distribution_text and "Manual Posting Queue" in manual_distribution_text and "copy_block" in manual_distribution_text and "manual_posting_packet" in manual_distribution_text and "postable_now" in manual_distribution_text and "log_manual_distribution.py" in manual_distribution_text and "Published_Log.csv" in manual_distribution_text and "distribution_status" in manual_distribution_text and "subprocess" not in manual_distribution_text:
             ok("manual distribution packet builder is review-only")
         else:
             fail("build_manual_distribution_packet.py missing manual distribution outputs or executes commands", failures)
