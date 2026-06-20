@@ -737,11 +737,23 @@ def validate_generated_outputs(failures):
             and summary.get("blocked_backlog_count") == len(blocked)
             and summary.get("clear_to_apply_count") == len(items) - len(blocked)
             and bool(summary.get("apply_allowed_without_override")) == (len(blocked) == 0)
+            and summary.get("blocked_ids") == [item.get("id") for item in blocked]
+            and summary.get("normal_apply_gate") == ("blocked_until_clearance_steps_complete" if blocked else "clear")
+            and isinstance(summary.get("clearance_steps"), list)
             and (
                 (not blocked and summary.get("apply_command") and not summary.get("blocked_apply_command") and not summary.get("override_apply_command"))
                 or (blocked and not summary.get("apply_command") and summary.get("blocked_apply_command") and "--allow-blocked" in summary.get("override_apply_command", ""))
             )
-            and all(item.get("id") and item.get("current_scheduled_at") and item.get("proposed_scheduled_at") for item in items)
+            and all(
+                item.get("id")
+                and item.get("current_scheduled_at")
+                and item.get("proposed_scheduled_at")
+                and "blocks_normal_apply" in item
+                and "safe_apply_available" in item
+                and isinstance(item.get("clearance_steps"), list)
+                and (not item.get("blocked") or item.get("clearance_steps"))
+                for item in items
+            )
         ):
             ok(f"backlog reschedule preview checks {len(items)} approved backlog row(s)")
         else:
@@ -1644,7 +1656,7 @@ def validate_generated_outputs(failures):
         fail("build_monetization_activation_plan.py missing", failures)
     if BACKLOG_RESCHEDULE_PREVIEW_SCRIPT.exists():
         backlog_text = BACKLOG_RESCHEDULE_PREVIEW_SCRIPT.read_text(encoding="utf-8")
-        if "backlog_reschedule_preview.json" in backlog_text and "backlog-reschedule-preview.md" in backlog_text and "Apply allowed without override" in backlog_text and "blocked_apply_command" in backlog_text and "override_apply_command" in backlog_text and "subprocess" not in backlog_text:
+        if "backlog_reschedule_preview.json" in backlog_text and "backlog-reschedule-preview.md" in backlog_text and "Apply allowed without override" in backlog_text and "normal_apply_gate" in backlog_text and "clearance_steps" in backlog_text and "executor_readiness_snapshot.json" in backlog_text and "blocked_apply_command" in backlog_text and "override_apply_command" in backlog_text and "subprocess" not in backlog_text:
             ok("backlog reschedule preview builder is review-only")
         else:
             fail("build_backlog_reschedule_preview.py missing preview outputs or executes commands", failures)

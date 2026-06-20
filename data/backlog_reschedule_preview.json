@@ -1,10 +1,11 @@
 {
-  "generated_at": "2026-06-20T12:21:31.632371+09:00",
+  "generated_at": "2026-06-20T12:26:53.203523+09:00",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
     "published_log": "admin/content/Published_Log.csv",
     "social_execution_snapshot": "data/social_execution_snapshot.json",
+    "executor_readiness": "data/executor_readiness_snapshot.json",
     "promo_engine_status": "data/promo_engine_status.json"
   },
   "summary": {
@@ -18,7 +19,16 @@
     "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --apply --refresh-admin",
     "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
     "apply_blocked_reason": "Known executor/platform blockers must clear before normal apply.",
-    "apply_allowed_without_override": false
+    "apply_allowed_without_override": false,
+    "blocked_ids": [
+      "FP-AUTO-264"
+    ],
+    "normal_apply_gate": "blocked_until_clearance_steps_complete",
+    "clearance_steps": [
+      "Add local TikTok OAuth credentials, then push worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
+      "Confirm TikTok public posting approval before treating auto-posting as ready.",
+      "Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair."
+    ]
   },
   "items": [
     {
@@ -30,7 +40,15 @@
       "blocked": true,
       "blocker_reason": "tiktok_credentials_missing",
       "blocker_status": "blocked",
-      "blocker_source": "cron"
+      "blocker_source": "cron",
+      "blocker_kind": "tiktok_credentials_missing",
+      "blocks_normal_apply": true,
+      "safe_apply_available": false,
+      "clearance_steps": [
+        "Add local TikTok OAuth credentials, then push worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
+        "Confirm TikTok public posting approval before treating auto-posting as ready.",
+        "Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair."
+      ]
     }
   ]
 }

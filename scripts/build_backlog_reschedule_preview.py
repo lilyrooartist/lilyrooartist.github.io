@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 QUEUE = ROOT / "data" / "scheduled_posts.csv"
 PUBLISHED_LOG = ROOT / "admin" / "content" / "Published_Log.csv"
 SOCIAL_EXECUTIONS = ROOT / "data" / "social_execution_snapshot.json"
+EXECUTOR_READINESS = ROOT / "data" / "executor_readiness_snapshot.json"
 PROMO_STATUS = ROOT / "data" / "promo_engine_status.json"
 OUT = ROOT / "data" / "backlog_reschedule_preview.json"
 REPORT = ROOT / "admin" / "reports" / "backlog-reschedule-preview.md"
@@ -62,6 +63,23 @@ def load_execution_blockers() -> dict[str, dict]:
     return blockers
 
 
+def clearance_steps(blocker: dict, readiness: dict) -> list[str]:
+    platform = str(blocker.get("platform") or "").strip().lower()
+    reason = str(blocker.get("reason") or "").strip()
+    platform_payload = ((readiness.get("payload") or {}).get("platforms") or {}).get(platform) or {}
+    missing = platform_payload.get("missing_secrets") or blocker.get("missing_secrets") or []
+    steps = []
+    if reason == "tiktok_credentials_missing" or platform == "tiktok":
+        if missing:
+            steps.append("Add local TikTok OAuth credentials, then push worker secrets: " + ", ".join(missing) + ".")
+        if platform_payload.get("public_posting_approved") is False:
+            steps.append("Confirm TikTok public posting approval before treating auto-posting as ready.")
+        steps.append("Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair.")
+    elif blocker:
+        steps.append("Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply.")
+    return steps
+
+
 def preview_command(status: dict) -> str:
     monetization = (status.get("kpi") or {}).get("monetization") or {}
     command = monetization.get("backlog_reschedule_preview_command") or ""
@@ -107,6 +125,7 @@ def spacing_from_status(status: dict) -> int:
 def build_preview() -> dict:
     now = datetime.now().astimezone()
     status = read_json(PROMO_STATUS, {})
+    readiness = read_json(EXECUTOR_READINESS, {})
     published_ids = load_published_ids()
     blockers = load_execution_blockers()
     rows = []
@@ -127,6 +146,7 @@ def build_preview() -> dict:
         blocker = blockers.get(row_id) or {}
         proposed = start_at + timedelta(hours=spacing_hours * index)
         blocker_detail = blocker.get("error_summary") or blocker.get("reason") or blocker.get("status") or ""
+        steps = clearance_steps(blocker, readiness)
         items.append({
             "id": row_id,
             "platform": row.get("platform") or "",
@@ -137,9 +157,18 @@ def build_preview() -> dict:
             "blocker_reason": blocker_detail,
             "blocker_status": blocker.get("status") or "",
             "blocker_source": blocker.get("source") or "",
+            "blocker_kind": blocker.get("reason") or blocker.get("status") or "",
+            "blocks_normal_apply": bool(blocker),
+            "safe_apply_available": not bool(blocker),
+            "clearance_steps": steps,
         })
 
     blocked_items = [item for item in items if item["blocked"]]
+    clearance_summary = []
+    for item in blocked_items:
+        for step in item.get("clearance_steps") or []:
+            if step not in clearance_summary:
+                clearance_summary.append(step)
     safe_apply_command = apply_command(status) if not blocked_items else ""
     blocked_apply_command = apply_command(status) if blocked_items else ""
     return {
@@ -149,6 +178,7 @@ def build_preview() -> dict:
             "scheduled_posts": str(QUEUE.relative_to(ROOT)),
             "published_log": str(PUBLISHED_LOG.relative_to(ROOT)),
             "social_execution_snapshot": str(SOCIAL_EXECUTIONS.relative_to(ROOT)),
+            "executor_readiness": str(EXECUTOR_READINESS.relative_to(ROOT)),
             "promo_engine_status": str(PROMO_STATUS.relative_to(ROOT)),
         },
         "summary": {
@@ -163,6 +193,9 @@ def build_preview() -> dict:
             "override_apply_command": override_apply_command(status) if blocked_items else "",
             "apply_blocked_reason": "Known executor/platform blockers must clear before normal apply." if blocked_items else "",
             "apply_allowed_without_override": len(blocked_items) == 0,
+            "blocked_ids": [item["id"] for item in blocked_items],
+            "normal_apply_gate": "blocked_until_clearance_steps_complete" if blocked_items else "clear",
+            "clearance_steps": clearance_summary,
         },
         "items": items,
     }
@@ -209,6 +242,7 @@ def build_markdown(payload: dict) -> str:
         f"- Start at: **{summary['start_at']}**",
         f"- Spacing hours: **{summary['spacing_hours']}**",
         f"- Apply allowed without override: **{summary['apply_allowed_without_override']}**",
+        f"- Normal apply gate: **{summary.get('normal_apply_gate', 'unknown')}**",
         "",
         "## Proposed Reschedule",
     ]
@@ -218,6 +252,8 @@ def build_markdown(payload: dict) -> str:
         lines.append(f"  - Proposed: `{item['proposed_scheduled_at']}`")
         if item["blocked"]:
             lines.append(f"  - Blocker: {item['blocker_reason'] or item['blocker_status'] or 'executor attention required'}")
+            for step in item.get("clearance_steps") or []:
+                lines.append(f"  - Clearance: {step}")
     lines.extend([
         "",
         "## Commands",
