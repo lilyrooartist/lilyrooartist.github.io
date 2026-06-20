@@ -14,6 +14,7 @@ SOCIAL_EXECUTIONS = ROOT / "data" / "social_execution_snapshot.json"
 EXECUTOR_READINESS = ROOT / "data" / "executor_readiness_snapshot.json"
 SCHEDULED_APPROVAL = ROOT / "data" / "scheduled_approval_packet.json"
 BACKLOG_RESCHEDULE = ROOT / "data" / "backlog_reschedule_preview.json"
+MANUAL_METRICS = ROOT / "data" / "manual_metric_collection_packet.json"
 OUT = ROOT / "data" / "promo_operations_packet.json"
 REPORT = ROOT / "admin" / "reports" / "promo-operations-packet.md"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
@@ -404,30 +405,33 @@ def backlog_reschedule_actions(status, backlog_preview):
     ]
 
 
-def manual_metric_actions(status):
-    kpi = status.get("kpi") or {}
-    steps = {
-        step.get("platform"): step
-        for step in (kpi.get("manual_metric_collection_steps") or [])
-        if step.get("platform")
-    }
+def manual_metric_actions(packet):
+    summary = packet.get("summary") or {}
     actions = []
-    for platform, command in sorted((kpi.get("pending_manual_update_by_platform") or {}).items()):
-        step = steps.get(platform) or {}
+    for batch in packet.get("priority_batches") or []:
+        fields = batch.get("fields") or []
+        priority = int(batch.get("priority") or 4)
         actions.append(command_row(
-            f"Fill manual metrics for {platform}",
-            step.get("worksheet_import_preview_command") or "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
+            f"Fill priority {priority} metrics: {batch.get('label') or 'manual metrics'}",
+            batch.get("worksheet_import_preview_command") or summary.get("worksheet_import_preview_command") or "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
             "manual_metrics",
-            30,
+            30 + priority,
             {
-                "platform": platform,
-                "fields": (kpi.get("pending_manual_by_platform") or {}).get(platform) or [],
-                "collection_url": step.get("collection_url") or "",
-                "csv_path": step.get("csv_path") or "data/manual_metric_collection_template.csv",
-                "report_path": step.get("report_path") or "admin/reports/manual-metric-collection.md",
-                "direct_update_command": command,
-                "worksheet_import_preview_command": step.get("worksheet_import_preview_command") or "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
-                "worksheet_import_command": step.get("worksheet_import_command") or "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
+                "priority": priority,
+                "label": batch.get("label") or "",
+                "status": batch.get("status") or "",
+                "field_count": batch.get("field_count") or len(fields),
+                "waiting_count": batch.get("waiting_count") or 0,
+                "ready_to_import_count": batch.get("ready_to_import_count") or 0,
+                "platforms": batch.get("platforms") or [],
+                "access_levels": batch.get("access_levels") or [],
+                "csv_rows": batch.get("csv_rows") or [],
+                "fields": [f"{field.get('platform')}.{field.get('field')}" for field in fields if field.get("platform") and field.get("field")],
+                "evidence_hints": [field.get("evidence_hint") for field in fields if field.get("evidence_hint")],
+                "csv_path": summary.get("csv_path") or "data/manual_metric_collection_template.csv",
+                "report_path": summary.get("report_path") or "admin/reports/manual-metric-collection.md",
+                "worksheet_import_preview_command": batch.get("worksheet_import_preview_command") or summary.get("worksheet_import_preview_command") or "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
+                "worksheet_import_command": batch.get("worksheet_import_command") or summary.get("worksheet_import_command") or "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
             },
         ))
     return actions
@@ -526,6 +530,10 @@ def build_markdown(packet):
                 lines.append(f"  - Approve after review: `{context['approval_command']}`")
             if context.get("collection_url"):
                 lines.append(f"  - Open: {context['collection_url']}")
+            if context.get("access_levels"):
+                lines.append(f"  - Access: `{', '.join(context['access_levels'])}`")
+            if context.get("csv_rows"):
+                lines.append(f"  - CSV rows: `{', '.join(str(item) for item in context['csv_rows'])}`")
             if context.get("worksheet_import_command"):
                 lines.append(f"  - Import filled worksheet: `{context['worksheet_import_command']}`")
             if context.get("direct_update_command"):
@@ -589,6 +597,7 @@ def main() -> int:
     readiness = read_json(EXECUTOR_READINESS, {})
     scheduled_approval = read_json(SCHEDULED_APPROVAL, {})
     backlog_preview = read_json(BACKLOG_RESCHEDULE, {})
+    manual_metrics = read_json(MANUAL_METRICS, {})
     actions = (
         scheduled_approval_batch_actions(scheduled_approval)
         + backlog_reschedule_actions(status, backlog_preview)
@@ -596,7 +605,7 @@ def main() -> int:
         + apply_actions(plan)
         + approval_actions(plan, readiness)
         + pending_store_actions(status)
-        + manual_metric_actions(status)
+        + manual_metric_actions(manual_metrics)
     )
     actions = enrich_actions(actions, now)
     summary = {
@@ -624,6 +633,7 @@ def main() -> int:
             "social_executions": str(SOCIAL_EXECUTIONS.relative_to(ROOT)),
             "executor_readiness": str(EXECUTOR_READINESS.relative_to(ROOT)),
             "scheduled_approval": str(SCHEDULED_APPROVAL.relative_to(ROOT)),
+            "manual_metrics": str(MANUAL_METRICS.relative_to(ROOT)),
         },
         "next_action": next_action,
         "summary": summary,

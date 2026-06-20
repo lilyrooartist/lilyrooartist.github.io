@@ -1,13 +1,13 @@
 # Promo Consistency Audit - Lily Roo
 
-Generated: 2026-06-20T04:54:54.395448Z
+Generated: 2026-06-20T05:00:07.708194Z
 
 ## Summary
 - Status: **fail**
-- Checks: **18 / 19** passed
-- Failed checks: **1**
+- Checks: **16 / 19** passed
+- Failed checks: **3**
 - High severity failures: **1**
-- Medium severity failures: **0**
+- Medium severity failures: **2**
 
 ## Checks
 - **ledger_open_count_matches_rows**: `pass`
@@ -16,7 +16,7 @@ Generated: 2026-06-20T04:54:54.395448Z
   - Blocker category counts should account for every blocker row.
 - **status_open_actions_match_operations**: `fail`
   - Promo status open action count should mirror the operations packet.
-  - Expected: `18`
+  - Expected: `16`
   - Actual: `19`
 - **approval_counts_match**: `pass`
   - Scheduled approval packet should match approval blockers in the ledger.
@@ -38,10 +38,14 @@ Generated: 2026-06-20T04:54:54.395448Z
   - Manual distribution packet should match manual distribution blockers in the ledger.
 - **manual_distribution_handoff_count_matches_packet**: `pass`
   - Human handoff should include every unlogged manual distribution row.
-- **manual_metric_platform_count_matches_ledger**: `pass`
+- **manual_metric_platform_count_matches_ledger**: `fail`
   - Manual metric packet platform count should match manual metric blockers.
-- **manual_metric_handoff_count_matches_packet**: `pass`
+  - Expected: `5`
+  - Actual: `3`
+- **manual_metric_handoff_count_matches_packet**: `fail`
   - Human handoff should include every manual metric platform.
+  - Expected: `5`
+  - Actual: `3`
 - **store_checks_match_checked_pending_services**: `pass`
   - Operations store checks should match checked-pending store services.
 - **handoff_blocker_summary_matches_ledger**: `pass`

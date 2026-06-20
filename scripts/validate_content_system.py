@@ -506,15 +506,18 @@ def validate_generated_outputs(failures):
             if action.get("kind") == "manual_metrics"
         ]
         if manual_metric_actions and all(
-            (action.get("context") or {}).get("collection_url")
+            (action.get("context") or {}).get("priority")
+            and (action.get("context") or {}).get("label")
+            and (action.get("context") or {}).get("field_count")
+            and (action.get("context") or {}).get("access_levels")
+            and (action.get("context") or {}).get("csv_rows")
             and (action.get("context") or {}).get("worksheet_import_preview_command")
             and (action.get("context") or {}).get("worksheet_import_command")
-            and (action.get("context") or {}).get("direct_update_command")
             for action in manual_metric_actions
         ):
-            ok("promo operations packet links manual metric collection and worksheet import")
+            ok("promo operations packet links priority-batched manual metric collection and worksheet import")
         else:
-            fail("promo_operations_packet.json missing manual metric collection/import context", failures)
+            fail("promo_operations_packet.json missing priority-batched manual metric collection/import context", failures)
         checked_store_actions = [
             action for action in actions
             if action.get("kind") == "store_verification"
@@ -1897,7 +1900,7 @@ def validate_generated_outputs(failures):
         fail("build_published_log_reconciliation.py missing", failures)
     if HUMAN_HANDOFF_SCRIPT.exists():
         handoff_text = HUMAN_HANDOFF_SCRIPT.read_text(encoding="utf-8")
-        if "human_handoff_packet.json" in handoff_text and "human-handoff-packet.md" in handoff_text and "promotion_blocker_ledger.json" in handoff_text and "manual_metric_collection_packet.json" in handoff_text and "manual_distribution_packet.json" in handoff_text and "approval_runway.json" in handoff_text and "scheduled_approval_packet.json" in handoff_text and "platform_repair_status.json" in handoff_text and "tiktok_setup_preflight.json" in handoff_text and "action_docket" in handoff_text and "build_action_docket" in handoff_text and "command_sequence" in handoff_text and "completion_evidence" in handoff_text and "next_step_after_apply" in handoff_text and "subprocess" not in handoff_text:
+        if "human_handoff_packet.json" in handoff_text and "human-handoff-packet.md" in handoff_text and "promotion_blocker_ledger.json" in handoff_text and "manual_metric_collection_packet.json" in handoff_text and "priority_batches" in handoff_text and "batch_count" in handoff_text and "manual_distribution_packet.json" in handoff_text and "approval_runway.json" in handoff_text and "scheduled_approval_packet.json" in handoff_text and "platform_repair_status.json" in handoff_text and "tiktok_setup_preflight.json" in handoff_text and "action_docket" in handoff_text and "build_action_docket" in handoff_text and "command_sequence" in handoff_text and "completion_evidence" in handoff_text and "next_step_after_apply" in handoff_text and "subprocess" not in handoff_text:
             ok("human handoff packet builder is review-only")
         else:
             fail("build_human_handoff_packet.py missing handoff outputs or executes commands", failures)
@@ -1905,7 +1908,7 @@ def validate_generated_outputs(failures):
         fail("build_human_handoff_packet.py missing", failures)
     if PROMOTION_BLOCKER_LEDGER_SCRIPT.exists():
         ledger_text = PROMOTION_BLOCKER_LEDGER_SCRIPT.read_text(encoding="utf-8")
-        if "promotion_blocker_ledger.json" in ledger_text and "promotion-blocker-ledger.md" in ledger_text and "owner_counts" in ledger_text and "category_counts" in ledger_text and "manual_metric_collection_packet.json" in ledger_text and "approval_runway.json" in ledger_text and "blocker_unlock_roadmap" in ledger_text and "build_unlock_roadmap" in ledger_text and "next_resolution_projection" in ledger_text and "approval_projection" in ledger_text and "subprocess" not in ledger_text:
+        if "promotion_blocker_ledger.json" in ledger_text and "promotion-blocker-ledger.md" in ledger_text and "owner_counts" in ledger_text and "category_counts" in ledger_text and "manual_metric_collection_packet.json" in ledger_text and "priority_batches" in ledger_text and "manual_metric_batch" in ledger_text and "approval_runway.json" in ledger_text and "blocker_unlock_roadmap" in ledger_text and "build_unlock_roadmap" in ledger_text and "next_resolution_projection" in ledger_text and "approval_projection" in ledger_text and "subprocess" not in ledger_text:
             ok("promotion blocker ledger builder is review-only")
         else:
             fail("build_promotion_blocker_ledger.py missing ledger outputs or executes commands", failures)

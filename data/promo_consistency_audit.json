@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-06-20T04:54:54.395448Z",
+  "generated_at": "2026-06-20T05:00:07.708194Z",
   "safe_mode": true,
   "summary": {
     "check_count": 19,
-    "passed": 18,
-    "failed": 1,
+    "passed": 16,
+    "failed": 3,
     "high_failed": 1,
-    "medium_failed": 0,
+    "medium_failed": 2,
     "status": "fail"
   },
   "checks": [
@@ -15,23 +15,23 @@
       "status": "pass",
       "severity": "ok",
       "detail": "Blocker ledger summary should match row count.",
-      "expected": 12,
-      "actual": 12
+      "expected": 10,
+      "actual": 10
     },
     {
       "name": "ledger_category_total_matches_rows",
       "status": "pass",
       "severity": "ok",
       "detail": "Blocker category counts should account for every blocker row.",
-      "expected": 12,
-      "actual": 12
+      "expected": 10,
+      "actual": 10
     },
     {
       "name": "status_open_actions_match_operations",
       "status": "fail",
       "severity": "high",
       "detail": "Promo status open action count should mirror the operations packet.",
-      "expected": 18,
+      "expected": 16,
       "actual": 19
     },
     {
@@ -132,19 +132,19 @@
     },
     {
       "name": "manual_metric_platform_count_matches_ledger",
-      "status": "pass",
-      "severity": "ok",
+      "status": "fail",
+      "severity": "medium",
       "detail": "Manual metric packet platform count should match manual metric blockers.",
       "expected": 5,
-      "actual": 5
+      "actual": 3
     },
     {
       "name": "manual_metric_handoff_count_matches_packet",
-      "status": "pass",
-      "severity": "ok",
+      "status": "fail",
+      "severity": "medium",
       "detail": "Human handoff should include every manual metric platform.",
       "expected": 5,
-      "actual": 5
+      "actual": 3
     },
     {
       "name": "store_checks_match_checked_pending_services",
@@ -159,8 +159,8 @@
       "status": "pass",
       "severity": "ok",
       "detail": "Human handoff blocker summary should be copied from the blocker ledger.",
-      "expected": 12,
-      "actual": 12
+      "expected": 10,
+      "actual": 10
     },
     {
       "name": "handoff_projection_matches_ledger_projection",

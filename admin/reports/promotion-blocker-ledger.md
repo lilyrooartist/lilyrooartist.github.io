@@ -1,10 +1,10 @@
 # Promotion Blocker Ledger - Lily Roo
 
-Generated: 2026-06-20T04:54:54.279188Z
+Generated: 2026-06-20T05:00:07.591202Z
 
 ## Summary
-- Open blockers: **12**
-- User-owned: **11**
+- Open blockers: **10**
+- User-owned: **9**
 - External platform-owned: **1**
 - Codex-actionable: **0**
 - High or critical: **4**
@@ -35,9 +35,9 @@ Generated: 2026-06-20T04:54:54.279188Z
   - Blocked by: FP-AUTO-264
   - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24`
 - **Fill manual metric worksheet** (`needs_values`)
-  - Owner: `tod`; projected blockers resolved: **5**
+  - Owner: `tod`; projected blockers resolved: **11**
   - Unlocks: Admin health and weekly reporting can use fresh cross-platform metrics.; Manual metric blockers clear once worksheet values are imported.
-  - Blocked by: facebook:1, instagram:2, spotify:4, tiktok:2, x:2
+  - Blocked by: P1 Audience size snapshot:5, P2 Recent discovery and traffic:4, P3 Release depth metrics:2
   - Preview/check: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
   - Apply after review: `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
 
@@ -98,46 +98,30 @@ Generated: 2026-06-20T04:54:54.279188Z
   - Preview/check: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --dry-run`
   - Apply/log after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin`
   - Guardrail: Manual posting happens outside this repo; only log the URL after the post is live. URL logging command after posting: python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin
-- **[low] Fill facebook manual metrics** (`metrics-facebook`)
-  - Owner: `tod`; status: `waiting_for_manual_values`; category: `manual_metrics`
-  - Evidence: 1 pending field(s): reach_7d.
-  - Next step: Open the metric source, fill the CSV worksheet, preview import, then refresh admin.
-  - Open: https://www.facebook.com/903693509504290
+- **[low] Fill priority 1 metrics: Audience size snapshot** (`metrics-priority-1`)
+  - Owner: `tod`; status: `needs_values`; category: `manual_metrics`
+  - Evidence: 5 pending field(s): instagram.followers, spotify.artist_followers, spotify.monthly_listeners, tiktok.followers, x.followers.
+  - Next step: Collect this priority batch, fill the CSV worksheet rows, preview import, then refresh admin.
   - Preview/check: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
   - Apply/log after review: `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
   - Guardrail: Do not guess analytics values; import only values copied from the platform source.
-- **[low] Fill instagram manual metrics** (`metrics-instagram`)
-  - Owner: `tod`; status: `waiting_for_manual_values`; category: `manual_metrics`
-  - Evidence: 2 pending field(s): followers, profile_visits_7d.
-  - Next step: Open the metric source, fill the CSV worksheet, preview import, then refresh admin.
-  - Open: https://www.instagram.com/professional_dashboard/
+  - Impact: priority 1; fields: 5; access: public_profile; csv rows: 3, 5, 6, 9, 11
+- **[low] Fill priority 2 metrics: Recent discovery and traffic** (`metrics-priority-2`)
+  - Owner: `tod`; status: `needs_values`; category: `manual_metrics`
+  - Evidence: 4 pending field(s): facebook.reach_7d, instagram.profile_visits_7d, tiktok.profile_views_7d, x.impressions_7d.
+  - Next step: Collect this priority batch, fill the CSV worksheet rows, preview import, then refresh admin.
   - Preview/check: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
   - Apply/log after review: `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
   - Guardrail: Do not guess analytics values; import only values copied from the platform source.
-- **[low] Fill spotify manual metrics** (`metrics-spotify`)
-  - Owner: `tod`; status: `waiting_for_manual_values`; category: `manual_metrics`
-  - Evidence: 4 pending field(s): artist_followers, monthly_listeners, release_streams, saves.
-  - Next step: Open the metric source, fill the CSV worksheet, preview import, then refresh admin.
-  - Open: https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a
+  - Impact: priority 2; fields: 4; access: private_analytics; csv rows: 2, 4, 10, 12
+- **[low] Fill priority 3 metrics: Release depth metrics** (`metrics-priority-3`)
+  - Owner: `tod`; status: `needs_values`; category: `manual_metrics`
+  - Evidence: 2 pending field(s): spotify.release_streams, spotify.saves.
+  - Next step: Collect this priority batch, fill the CSV worksheet rows, preview import, then refresh admin.
   - Preview/check: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
   - Apply/log after review: `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
   - Guardrail: Do not guess analytics values; import only values copied from the platform source.
-- **[low] Fill tiktok manual metrics** (`metrics-tiktok`)
-  - Owner: `tod`; status: `waiting_for_manual_values`; category: `manual_metrics`
-  - Evidence: 2 pending field(s): followers, profile_views_7d.
-  - Next step: Open the metric source, fill the CSV worksheet, preview import, then refresh admin.
-  - Open: https://www.tiktok.com/creator-center/analytics
-  - Preview/check: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
-  - Apply/log after review: `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
-  - Guardrail: Do not guess analytics values; import only values copied from the platform source.
-- **[low] Fill x manual metrics** (`metrics-x`)
-  - Owner: `tod`; status: `waiting_for_manual_values`; category: `manual_metrics`
-  - Evidence: 2 pending field(s): followers, impressions_7d.
-  - Next step: Open the metric source, fill the CSV worksheet, preview import, then refresh admin.
-  - Open: https://analytics.x.com/
-  - Preview/check: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
-  - Apply/log after review: `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
-  - Guardrail: Do not guess analytics values; import only values copied from the platform source.
+  - Impact: priority 3; fields: 2; access: private_analytics; csv rows: 7, 8
 
 ## Guardrails
 - This ledger does not approve posts, post externally, push secrets, or invent metric values.

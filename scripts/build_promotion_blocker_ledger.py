@@ -227,23 +227,35 @@ def add_manual_distribution(rows: list[dict]) -> None:
 
 def add_manual_metrics(rows: list[dict]) -> None:
     packet = read_json(MANUAL_METRICS, {})
-    for item in packet.get("platforms") or []:
-        fields = [field.get("field") for field in item.get("fields") or [] if field.get("field")]
+    summary = packet.get("summary") or {}
+    for item in packet.get("priority_batches") or []:
+        fields = [f"{field.get('platform')}.{field.get('field')}" for field in item.get("fields") or [] if field.get("platform") and field.get("field")]
+        priority = int(item.get("priority") or 4)
         rows.append(row(
-            blocker_id=f"metrics-{item.get('platform')}",
-            title=f"Fill {item.get('platform')} manual metrics",
+            blocker_id=f"metrics-priority-{priority}",
+            title=f"Fill priority {priority} metrics: {item.get('label') or 'manual metrics'}",
             category="manual_metrics",
             owner="tod",
             urgency="low",
-            status="waiting_for_manual_values",
+            status=item.get("status") or "waiting_for_manual_values",
             platform=item.get("platform") or "",
             evidence=f"{len(fields)} pending field(s): {', '.join(fields)}.",
-            next_step="Open the metric source, fill the CSV worksheet, preview import, then refresh admin.",
-            preview_command=item.get("worksheet_import_preview_command") or "",
-            apply_command=item.get("worksheet_import_command") or "",
+            next_step="Collect this priority batch, fill the CSV worksheet rows, preview import, then refresh admin.",
+            preview_command=item.get("worksheet_import_preview_command") or summary.get("worksheet_import_preview_command") or "",
+            apply_command=item.get("worksheet_import_command") or summary.get("worksheet_import_command") or "",
             source_path=str(MANUAL_METRICS.relative_to(ROOT)),
-            external_url=item.get("collection_url") or "",
             guardrail="Do not guess analytics values; import only values copied from the platform source.",
+            impact={
+                "kind": "manual_metric_batch",
+                "priority": priority,
+                "label": item.get("label") or "",
+                "field_count": item.get("field_count") or len(fields),
+                "waiting_count": item.get("waiting_count") or 0,
+                "ready_to_import_count": item.get("ready_to_import_count") or 0,
+                "platforms": item.get("platforms") or [],
+                "access_levels": item.get("access_levels") or [],
+                "csv_rows": item.get("csv_rows") or [],
+            },
         ))
 
 
@@ -310,6 +322,8 @@ def build_unlock_roadmap(rows: list[dict], projection: dict) -> list[dict]:
     backlog = read_json(BACKLOG_RESCHEDULE, {})
     metrics = read_json(MANUAL_METRICS, {})
     metric_docket = metrics.get("metric_collection_docket") or {}
+    metric_summary = metrics.get("summary") or {}
+    metric_batches = metrics.get("priority_batches") or []
     platform_rows = platform_repair.get("rows") or []
     tiktok_rows = [item for item in platform_rows if str(item.get("platform") or "").lower() == "tiktok"]
     backlog_summary = backlog.get("summary") or {}
@@ -380,12 +394,14 @@ def build_unlock_roadmap(rows: list[dict], projection: dict) -> list[dict]:
             "phase": "Fill manual metric worksheet",
             "status": metric_docket.get("status") or "unknown",
             "owner": "tod",
-            "blockers_resolved": int(metric_docket.get("platform_count") or 0),
+            "blockers_resolved": int(metric_summary.get("pending_field_count") or 0),
             "unlocks": [
                 "Admin health and weekly reporting can use fresh cross-platform metrics.",
                 "Manual metric blockers clear once worksheet values are imported.",
             ],
-            "blocked_by": [f"{group.get('platform')}:{group.get('waiting_count')}" for group in metric_docket.get("platform_groups") or [] if group.get("waiting_count")],
+            "blocked_by": [f"P{batch.get('priority')} {batch.get('label')}:{batch.get('waiting_count')}" for batch in metric_batches if batch.get("waiting_count")],
+            "batch_count": int(metric_summary.get("priority_batch_count") or len(metric_batches)),
+            "field_count": int(metric_summary.get("pending_field_count") or 0),
             "preview_command": metric_docket.get("worksheet_import_preview_command") or "",
             "apply_command": metric_docket.get("worksheet_import_command") or "",
             "source_path": str(MANUAL_METRICS.relative_to(ROOT)),
@@ -451,6 +467,13 @@ def build_markdown(payload: dict) -> str:
                 impact_bits.append(f"downstream: {impact.get('downstream')}")
             if impact.get("blockers_resolved_by_checked_batch") is not None:
                 impact_bits.append(f"checked batch resolves {impact.get('blockers_resolved_by_checked_batch')} blocker(s)")
+            if impact.get("kind") == "manual_metric_batch":
+                impact_bits.append(f"priority {impact.get('priority')}")
+                impact_bits.append(f"fields: {impact.get('field_count')}")
+                if impact.get("access_levels"):
+                    impact_bits.append(f"access: {', '.join(impact.get('access_levels') or [])}")
+                if impact.get("csv_rows"):
+                    impact_bits.append(f"csv rows: {', '.join(str(value) for value in impact.get('csv_rows') or [])}")
             if impact_bits:
                 lines.append(f"  - Impact: {'; '.join(impact_bits)}")
     lines.extend([

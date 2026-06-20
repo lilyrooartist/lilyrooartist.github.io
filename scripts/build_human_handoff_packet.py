@@ -140,27 +140,35 @@ def manual_distribution_tasks(packet: dict) -> list[dict]:
 
 def manual_metric_tasks(packet: dict) -> list[dict]:
     tasks = []
-    for platform in packet.get("platforms") or []:
-        fields = platform.get("fields") or []
+    summary = packet.get("summary") or {}
+    for batch in packet.get("priority_batches") or []:
+        fields = batch.get("fields") or []
+        priority = int(batch.get("priority") or 4)
+        label = batch.get("label") or "manual metrics"
         tasks.append(command_task(
-            f"manual-metrics-{platform.get('platform')}",
-            f"Fill {platform.get('platform')} manual metrics",
+            f"manual-metrics-priority-{priority}",
+            f"Fill priority {priority} metrics: {label}",
             "Manual metrics",
             "tod",
             "low",
-            "waiting_for_manual_values",
-            f"Collect {len(fields)} field(s), fill the worksheet, preview import, then refresh Admin.",
-            platform.get("worksheet_import_preview_command") or "",
-            platform.get("worksheet_import_command") or "",
+            batch.get("status") or "waiting_for_manual_values",
+            f"Collect {len(fields)} field(s) across {', '.join(batch.get('platforms') or [])}, fill the worksheet rows, preview import, then refresh Admin.",
+            batch.get("worksheet_import_preview_command") or summary.get("worksheet_import_preview_command") or "",
+            batch.get("worksheet_import_command") or summary.get("worksheet_import_command") or "",
             str(MANUAL_METRICS.relative_to(ROOT)),
             {
-                "platform": platform.get("platform") or "",
+                "priority": priority,
+                "label": label,
                 "field_count": len(fields),
-                "pending_assignments": platform.get("pending_assignments") or [],
-                "platform_update_command": platform.get("platform_update_command") or "",
+                "waiting_count": batch.get("waiting_count") or 0,
+                "ready_to_import_count": batch.get("ready_to_import_count") or 0,
+                "platforms": batch.get("platforms") or [],
+                "access_levels": batch.get("access_levels") or [],
+                "csv_rows": batch.get("csv_rows") or [],
+                "pending_assignments": [f"{field.get('platform')}.{field.get('field')}" for field in fields if field.get("platform") and field.get("field")],
+                "evidence_hints": [field.get("evidence_hint") for field in fields if field.get("evidence_hint")],
             },
-            links=[{"label": "metric source", "url": platform.get("collection_url") or ""}] if platform.get("collection_url") else [],
-            guardrail="Only import nonnegative numeric values; leave unknown values blank instead of guessing.",
+            guardrail="Only import nonnegative numeric values copied from the named source; leave unknown values blank instead of guessing.",
         ))
     return tasks
 
@@ -335,8 +343,19 @@ def build_action_docket(tasks: list[dict], blocker_summary: dict, approval_runwa
             "state": "needs_values" if metric_field_count else "clear",
             "owner": "tod",
             "task_ids": [task["id"] for task in manual_metrics],
-            "blockers_resolved": len(manual_metrics),
+            "blockers_resolved": metric_field_count,
             "field_count": metric_field_count,
+            "batch_count": len(manual_metrics),
+            "batches": [
+                {
+                    "priority": (task.get("impact") or {}).get("priority"),
+                    "label": (task.get("impact") or {}).get("label"),
+                    "field_count": (task.get("impact") or {}).get("field_count"),
+                    "access_levels": (task.get("impact") or {}).get("access_levels") or [],
+                    "csv_rows": (task.get("impact") or {}).get("csv_rows") or [],
+                }
+                for task in manual_metrics
+            ],
             "preview_command": metric_preview_command,
             "apply_command": metric_apply_command,
             "command_sequence": command_sequence(metric_preview_command, metric_apply_command, "python3 scripts/refresh_promo_admin.py"),
@@ -402,6 +421,16 @@ def build_markdown(payload: dict) -> str:
         lines.append(f"  - Owner: `{item['owner']}`; tasks: **{len(item.get('task_ids') or [])}**; blockers resolved: **{item.get('blockers_resolved', 0)}**")
         if item.get("field_count"):
             lines.append(f"  - Fields: **{item['field_count']}**")
+        if item.get("batch_count"):
+            lines.append(f"  - Batches: **{item['batch_count']}**")
+        for batch in item.get("batches") or []:
+            bits = []
+            if batch.get("access_levels"):
+                bits.append(f"access: {', '.join(batch['access_levels'])}")
+            if batch.get("csv_rows"):
+                bits.append(f"rows: {', '.join(str(value) for value in batch['csv_rows'])}")
+            suffix = f" ({'; '.join(bits)})" if bits else ""
+            lines.append(f"  - Priority {batch.get('priority')}: {batch.get('label')} - **{batch.get('field_count', 0)}** field(s){suffix}")
         if item.get("ready_ids"):
             lines.append(f"  - Ready IDs: `{', '.join(item['ready_ids'])}`")
         if item.get("blocked_ids"):

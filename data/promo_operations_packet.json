@@ -1,12 +1,13 @@
 {
-  "generated_at": "2026-06-20T04:54:53.980860Z",
+  "generated_at": "2026-06-20T05:00:07.292834Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
     "promo_queue_plan": "data/promo_queue_plan.json",
     "social_executions": "data/social_execution_snapshot.json",
     "executor_readiness": "data/executor_readiness_snapshot.json",
-    "scheduled_approval": "data/scheduled_approval_packet.json"
+    "scheduled_approval": "data/scheduled_approval_packet.json",
+    "manual_metrics": "data/manual_metric_collection_packet.json"
   },
   "next_action": {
     "label": "Preview checked scheduled approval batch",
@@ -44,18 +45,18 @@
     ]
   },
   "summary": {
-    "action_count": 18,
+    "action_count": 16,
     "user_review": 3,
     "platform_fixes": 1,
     "scheduled_approval_batches": 1,
     "store_checks": 7,
-    "manual_metric_updates": 5,
+    "manual_metric_updates": 3,
     "backlog_reschedules": 1,
     "safe_apply_commands": 0,
     "blocked_review_items": 1,
     "manual_only_review_items": 2,
     "phases": {
-      "Fill manual metrics": 5,
+      "Fill manual metrics": 3,
       "Repair executor": 1,
       "Reschedule approved backlog": 1,
       "Review blocked drafts": 1,
@@ -66,7 +67,7 @@
     "urgencies": {
       "blocked": 1,
       "high": 3,
-      "low": 5,
+      "low": 3,
       "medium": 9
     },
     "next_action": {
@@ -383,11 +384,11 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "Apple Music",
-        "checked_at": "2026-06-20T04:54:40.065216Z",
+        "checked_at": "2026-06-20T04:59:53.512852Z",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T04:54:40.065216Z",
+          "updated_at": "2026-06-20T04:59:53.512852Z",
           "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
         },
         "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -410,11 +411,11 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "HyperFollow",
-        "checked_at": "2026-06-20T04:54:40.422404Z",
+        "checked_at": "2026-06-20T04:59:53.868652Z",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T04:54:40.422404Z",
+          "updated_at": "2026-06-20T04:59:53.868652Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
         },
         "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -464,11 +465,11 @@
       "context": {
         "release": "Analog Myth",
         "service": "Apple Music",
-        "checked_at": "2026-06-20T04:54:45.591372Z",
+        "checked_at": "2026-06-20T04:59:59.028961Z",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T04:54:45.591372Z",
+          "updated_at": "2026-06-20T04:59:59.028961Z",
           "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
         },
         "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -518,11 +519,11 @@
       "context": {
         "release": "Analog Myth",
         "service": "HyperFollow",
-        "checked_at": "2026-06-20T04:54:51.107087Z",
+        "checked_at": "2026-06-20T05:00:04.596121Z",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T04:54:51.107087Z",
+          "updated_at": "2026-06-20T05:00:04.596121Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
         },
         "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -538,19 +539,49 @@
       ]
     },
     {
-      "label": "Fill manual metrics for facebook",
+      "label": "Fill priority 1 metrics: Audience size snapshot",
       "kind": "manual_metrics",
-      "priority": 30,
+      "priority": 31,
       "command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
       "context": {
-        "platform": "facebook",
-        "fields": [
-          "reach_7d"
+        "priority": 1,
+        "label": "Audience size snapshot",
+        "status": "needs_values",
+        "field_count": 5,
+        "waiting_count": 5,
+        "ready_to_import_count": 0,
+        "platforms": [
+          "instagram",
+          "spotify",
+          "tiktok",
+          "x"
         ],
-        "collection_url": "https://www.facebook.com/903693509504290",
+        "access_levels": [
+          "public_profile"
+        ],
+        "csv_rows": [
+          3,
+          5,
+          6,
+          9,
+          11
+        ],
+        "fields": [
+          "instagram.followers",
+          "spotify.artist_followers",
+          "spotify.monthly_listeners",
+          "tiktok.followers",
+          "x.followers"
+        ],
+        "evidence_hints": [
+          "Capture the public follower count from the profile page or account dashboard.",
+          "Capture the public Spotify artist follower count if visible, otherwise use Spotify for Artists.",
+          "Capture the public Spotify monthly listeners count from the artist profile.",
+          "Capture the public follower count from the profile page or account dashboard.",
+          "Capture the public follower count from the profile page or account dashboard."
+        ],
         "csv_path": "data/manual_metric_collection_template.csv",
         "report_path": "admin/reports/manual-metric-collection.md",
-        "direct_update_command": "python3 scripts/update_manual_social_stats.py facebook.reach_7d=VALUE --refresh-admin",
         "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
         "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin"
       },
@@ -560,25 +591,51 @@
       "status": "waiting_for_user",
       "sort_key": [
         3,
-        30,
+        31,
         13
       ]
     },
     {
-      "label": "Fill manual metrics for instagram",
+      "label": "Fill priority 2 metrics: Recent discovery and traffic",
       "kind": "manual_metrics",
-      "priority": 30,
+      "priority": 32,
       "command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
       "context": {
-        "platform": "instagram",
-        "fields": [
-          "followers",
-          "profile_visits_7d"
+        "priority": 2,
+        "label": "Recent discovery and traffic",
+        "status": "needs_values",
+        "field_count": 4,
+        "waiting_count": 4,
+        "ready_to_import_count": 0,
+        "platforms": [
+          "facebook",
+          "instagram",
+          "tiktok",
+          "x"
         ],
-        "collection_url": "https://www.instagram.com/professional_dashboard/",
+        "access_levels": [
+          "private_analytics"
+        ],
+        "csv_rows": [
+          2,
+          4,
+          10,
+          12
+        ],
+        "fields": [
+          "facebook.reach_7d",
+          "instagram.profile_visits_7d",
+          "tiktok.profile_views_7d",
+          "x.impressions_7d"
+        ],
+        "evidence_hints": [
+          "Use the last-7-days reach value from Meta insights.",
+          "Use the last-7-days profile visits value from the professional dashboard.",
+          "Use the last-7-days profile views value from TikTok analytics.",
+          "Use the last-7-days impressions value from X analytics."
+        ],
         "csv_path": "data/manual_metric_collection_template.csv",
         "report_path": "admin/reports/manual-metric-collection.md",
-        "direct_update_command": "python3 scripts/update_manual_social_stats.py instagram.followers=VALUE instagram.profile_visits_7d=VALUE --refresh-admin",
         "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
         "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin"
       },
@@ -588,27 +645,42 @@
       "status": "waiting_for_user",
       "sort_key": [
         3,
-        30,
+        32,
         14
       ]
     },
     {
-      "label": "Fill manual metrics for spotify",
+      "label": "Fill priority 3 metrics: Release depth metrics",
       "kind": "manual_metrics",
-      "priority": 30,
+      "priority": 33,
       "command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
       "context": {
-        "platform": "spotify",
-        "fields": [
-          "artist_followers",
-          "monthly_listeners",
-          "release_streams",
-          "saves"
+        "priority": 3,
+        "label": "Release depth metrics",
+        "status": "needs_values",
+        "field_count": 2,
+        "waiting_count": 2,
+        "ready_to_import_count": 0,
+        "platforms": [
+          "spotify"
         ],
-        "collection_url": "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a",
+        "access_levels": [
+          "private_analytics"
+        ],
+        "csv_rows": [
+          7,
+          8
+        ],
+        "fields": [
+          "spotify.release_streams",
+          "spotify.saves"
+        ],
+        "evidence_hints": [
+          "Use lifetime streams for the promoted release from Spotify for Artists.",
+          "Use lifetime saves for the promoted release from Spotify for Artists."
+        ],
         "csv_path": "data/manual_metric_collection_template.csv",
         "report_path": "admin/reports/manual-metric-collection.md",
-        "direct_update_command": "python3 scripts/update_manual_social_stats.py spotify.artist_followers=VALUE spotify.monthly_listeners=VALUE spotify.release_streams=VALUE spotify.saves=VALUE --refresh-admin",
         "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
         "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin"
       },
@@ -618,64 +690,8 @@
       "status": "waiting_for_user",
       "sort_key": [
         3,
-        30,
+        33,
         15
-      ]
-    },
-    {
-      "label": "Fill manual metrics for tiktok",
-      "kind": "manual_metrics",
-      "priority": 30,
-      "command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
-      "context": {
-        "platform": "tiktok",
-        "fields": [
-          "followers",
-          "profile_views_7d"
-        ],
-        "collection_url": "https://www.tiktok.com/creator-center/analytics",
-        "csv_path": "data/manual_metric_collection_template.csv",
-        "report_path": "admin/reports/manual-metric-collection.md",
-        "direct_update_command": "python3 scripts/update_manual_social_stats.py tiktok.followers=VALUE tiktok.profile_views_7d=VALUE --refresh-admin",
-        "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
-        "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin"
-      },
-      "phase": "Fill manual metrics",
-      "urgency": "low",
-      "urgency_reason": "Manual metric gaps affect reporting, not publishing.",
-      "status": "waiting_for_user",
-      "sort_key": [
-        3,
-        30,
-        16
-      ]
-    },
-    {
-      "label": "Fill manual metrics for x",
-      "kind": "manual_metrics",
-      "priority": 30,
-      "command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
-      "context": {
-        "platform": "x",
-        "fields": [
-          "followers",
-          "impressions_7d"
-        ],
-        "collection_url": "https://analytics.x.com/",
-        "csv_path": "data/manual_metric_collection_template.csv",
-        "report_path": "admin/reports/manual-metric-collection.md",
-        "direct_update_command": "python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impressions_7d=VALUE --refresh-admin",
-        "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
-        "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin"
-      },
-      "phase": "Fill manual metrics",
-      "urgency": "low",
-      "urgency_reason": "Manual metric gaps affect reporting, not publishing.",
-      "status": "waiting_for_user",
-      "sort_key": [
-        3,
-        30,
-        17
       ]
     }
   ]

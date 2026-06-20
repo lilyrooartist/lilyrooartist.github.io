@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T04:54:54.452914+00:00",
+  "generated_at": "2026-06-20T05:00:07.766059+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -189,15 +189,15 @@
         "command": "python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impressions_7d=VALUE --refresh-admin"
       }
     ],
-    "live_metrics_updated_at": "2026-06-20T04:54:35.024Z",
+    "live_metrics_updated_at": "2026-06-20T04:59:48.465Z",
     "metrics_history": {
       "snapshot_count": 11,
-      "updated_at": "2026-06-20T04:54:53.287681Z",
+      "updated_at": "2026-06-20T05:00:06.629790Z",
       "latest_date": "2026-06-20",
       "latest": {
         "date": "2026-06-20",
-        "captured_at": "2026-06-20T04:54:53.287681Z",
-        "live_metrics_updated_at": "2026-06-20T04:54:35.024Z",
+        "captured_at": "2026-06-20T05:00:06.629790Z",
+        "live_metrics_updated_at": "2026-06-20T04:59:48.465Z",
         "youtube": {
           "subscribers": 6,
           "total_views": 251,
@@ -284,7 +284,7 @@
     },
     "social_execution_summary": {
       "ok": true,
-      "updated_at": "2026-06-20T04:54:52.623098Z",
+      "updated_at": "2026-06-20T05:00:06.163999Z",
       "http_status": 200,
       "execution_count": 4,
       "posted_count": 0,
@@ -413,11 +413,11 @@
     },
     "social_scheduler_dry_run": {
       "ok": true,
-      "updated_at": "2026-06-20T04:54:53.184224Z",
+      "updated_at": "2026-06-20T05:00:06.533451Z",
       "http_status": 200,
       "auth_method": "bearer",
-      "requested_scheduled_time": "2026-06-20T04:54:52.698551Z",
-      "checked_at": "2026-06-20T04:54:52.698Z",
+      "requested_scheduled_time": "2026-06-20T05:00:06.242559Z",
+      "checked_at": "2026-06-20T05:00:06.242Z",
       "dry_run": true,
       "due_count": 4,
       "result_count": 4,
@@ -440,7 +440,7 @@
           "reason": "not_approved",
           "post_type": "",
           "attempts": 0,
-          "updated_at": "2026-06-20T04:54:53.287Z",
+          "updated_at": "2026-06-20T05:00:06.710Z",
           "source": "dry-run",
           "error_summary": ""
         },
@@ -451,7 +451,7 @@
           "reason": "not_approved",
           "post_type": "",
           "attempts": 0,
-          "updated_at": "2026-06-20T04:54:53.290Z",
+          "updated_at": "2026-06-20T05:00:06.717Z",
           "source": "dry-run",
           "error_summary": ""
         },
@@ -462,7 +462,7 @@
           "reason": "not_approved",
           "post_type": "",
           "attempts": 0,
-          "updated_at": "2026-06-20T04:54:53.293Z",
+          "updated_at": "2026-06-20T05:00:06.724Z",
           "source": "dry-run",
           "error_summary": ""
         },
@@ -473,7 +473,7 @@
           "reason": "tiktok_credentials_missing",
           "post_type": "",
           "attempts": 0,
-          "updated_at": "2026-06-20T04:54:53.296Z",
+          "updated_at": "2026-06-20T05:00:06.731Z",
           "source": "dry-run",
           "error_summary": ""
         }
@@ -485,8 +485,8 @@
       "available": true,
       "safe_mode": true,
       "finalized": true,
-      "finished_at": "2026-06-20T04:54:54.426031Z",
-      "duration_seconds": 20.19,
+      "finished_at": "2026-06-20T05:00:07.738987Z",
+      "duration_seconds": 20.14,
       "command_count": 28,
       "passed": 28,
       "failed": 0,
@@ -548,22 +548,22 @@
       ]
     },
     "unlock_impact": {
-      "open_blocker_count": 12,
+      "open_blocker_count": 10,
       "urgent_count": 4,
       "owner_counts": {
         "external_platform": 1,
-        "tod": 11
+        "tod": 9
       },
       "category_counts": {
         "approval": 3,
         "backlog_reschedule": 1,
         "manual_distribution": 2,
-        "manual_metrics": 5,
+        "manual_metrics": 3,
         "platform_repair": 1
       },
       "roadmap_step_count": 5,
-      "projected_resolvable_blockers": 11,
-      "user_action_blocker_count": 11,
+      "projected_resolvable_blockers": 17,
+      "user_action_blocker_count": 9,
       "external_blocker_count": 1,
       "next_resolution_projection": {
         "label": "Checked scheduled approval batch",
@@ -591,13 +591,11 @@
         "phase": "Fill manual metric worksheet",
         "status": "needs_values",
         "owner": "tod",
-        "blockers_resolved": 5,
+        "blockers_resolved": 11,
         "blocked_by": [
-          "facebook:1",
-          "instagram:2",
-          "spotify:4",
-          "tiktok:2",
-          "x:2"
+          "P1 Audience size snapshot:5",
+          "P2 Recent discovery and traffic:4",
+          "P3 Release depth metrics:2"
         ],
         "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
         "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
@@ -663,13 +661,11 @@
           "phase": "Fill manual metric worksheet",
           "status": "needs_values",
           "owner": "tod",
-          "blockers_resolved": 5,
+          "blockers_resolved": 11,
           "blocked_by": [
-            "facebook:1",
-            "instagram:2",
-            "spotify:4",
-            "tiktok:2",
-            "x:2"
+            "P1 Audience size snapshot:5",
+            "P2 Recent discovery and traffic:4",
+            "P3 Release depth metrics:2"
           ],
           "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
           "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
@@ -684,7 +680,7 @@
       "ready_step_count": 3,
       "blocked_step_count": 2,
       "roadmap_step_count": 5,
-      "task_count": 10,
+      "task_count": 8,
       "manual_post_count": 2,
       "manual_metric_field_count": 11,
       "first_ready_step": {
@@ -891,14 +887,56 @@
           "state": "needs_values",
           "owner": "tod",
           "task_ids": [
-            "manual-metrics-facebook",
-            "manual-metrics-instagram",
-            "manual-metrics-spotify",
-            "manual-metrics-tiktok",
-            "manual-metrics-x"
+            "manual-metrics-priority-1",
+            "manual-metrics-priority-2",
+            "manual-metrics-priority-3"
           ],
-          "blockers_resolved": 5,
+          "blockers_resolved": 11,
           "field_count": 11,
+          "batch_count": 3,
+          "batches": [
+            {
+              "priority": 1,
+              "label": "Audience size snapshot",
+              "field_count": 5,
+              "access_levels": [
+                "public_profile"
+              ],
+              "csv_rows": [
+                3,
+                5,
+                6,
+                9,
+                11
+              ]
+            },
+            {
+              "priority": 2,
+              "label": "Recent discovery and traffic",
+              "field_count": 4,
+              "access_levels": [
+                "private_analytics"
+              ],
+              "csv_rows": [
+                2,
+                4,
+                10,
+                12
+              ]
+            },
+            {
+              "priority": 3,
+              "label": "Release depth metrics",
+              "field_count": 2,
+              "access_levels": [
+                "private_analytics"
+              ],
+              "csv_rows": [
+                7,
+                8
+              ]
+            }
+          ],
           "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
           "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
           "command_sequence": [
@@ -998,22 +1036,22 @@
       ]
     },
     "unlock_impact": {
-      "open_blocker_count": 12,
+      "open_blocker_count": 10,
       "urgent_count": 4,
       "owner_counts": {
         "external_platform": 1,
-        "tod": 11
+        "tod": 9
       },
       "category_counts": {
         "approval": 3,
         "backlog_reschedule": 1,
         "manual_distribution": 2,
-        "manual_metrics": 5,
+        "manual_metrics": 3,
         "platform_repair": 1
       },
       "roadmap_step_count": 5,
-      "projected_resolvable_blockers": 11,
-      "user_action_blocker_count": 11,
+      "projected_resolvable_blockers": 17,
+      "user_action_blocker_count": 9,
       "external_blocker_count": 1,
       "next_resolution_projection": {
         "label": "Checked scheduled approval batch",
@@ -1041,13 +1079,11 @@
         "phase": "Fill manual metric worksheet",
         "status": "needs_values",
         "owner": "tod",
-        "blockers_resolved": 5,
+        "blockers_resolved": 11,
         "blocked_by": [
-          "facebook:1",
-          "instagram:2",
-          "spotify:4",
-          "tiktok:2",
-          "x:2"
+          "P1 Audience size snapshot:5",
+          "P2 Recent discovery and traffic:4",
+          "P3 Release depth metrics:2"
         ],
         "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
         "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
@@ -1113,13 +1149,11 @@
           "phase": "Fill manual metric worksheet",
           "status": "needs_values",
           "owner": "tod",
-          "blockers_resolved": 5,
+          "blockers_resolved": 11,
           "blocked_by": [
-            "facebook:1",
-            "instagram:2",
-            "spotify:4",
-            "tiktok:2",
-            "x:2"
+            "P1 Audience size snapshot:5",
+            "P2 Recent discovery and traffic:4",
+            "P3 Release depth metrics:2"
           ],
           "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
           "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
@@ -1134,7 +1168,7 @@
       "ready_step_count": 3,
       "blocked_step_count": 2,
       "roadmap_step_count": 5,
-      "task_count": 10,
+      "task_count": 8,
       "manual_post_count": 2,
       "manual_metric_field_count": 11,
       "first_ready_step": {
@@ -1341,14 +1375,56 @@
           "state": "needs_values",
           "owner": "tod",
           "task_ids": [
-            "manual-metrics-facebook",
-            "manual-metrics-instagram",
-            "manual-metrics-spotify",
-            "manual-metrics-tiktok",
-            "manual-metrics-x"
+            "manual-metrics-priority-1",
+            "manual-metrics-priority-2",
+            "manual-metrics-priority-3"
           ],
-          "blockers_resolved": 5,
+          "blockers_resolved": 11,
           "field_count": 11,
+          "batch_count": 3,
+          "batches": [
+            {
+              "priority": 1,
+              "label": "Audience size snapshot",
+              "field_count": 5,
+              "access_levels": [
+                "public_profile"
+              ],
+              "csv_rows": [
+                3,
+                5,
+                6,
+                9,
+                11
+              ]
+            },
+            {
+              "priority": 2,
+              "label": "Recent discovery and traffic",
+              "field_count": 4,
+              "access_levels": [
+                "private_analytics"
+              ],
+              "csv_rows": [
+                2,
+                4,
+                10,
+                12
+              ]
+            },
+            {
+              "priority": 3,
+              "label": "Release depth metrics",
+              "field_count": 2,
+              "access_levels": [
+                "private_analytics"
+              ],
+              "csv_rows": [
+                7,
+                8
+              ]
+            }
+          ],
           "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
           "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
           "command_sequence": [
@@ -1408,14 +1484,14 @@
       "stale": 1,
       "missing": 0,
       "checked_no_change": 0,
-      "checked_at": "2026-06-20T04:54:54.452914+00:00"
+      "checked_at": "2026-06-20T05:00:07.766059+00:00"
     },
     "sources": [
       {
         "name": "release_status",
         "path": "data/distrokid_release_status.json",
         "status": "fresh",
-        "age_hours": 67.5,
+        "age_hours": 67.6,
         "max_age_hours": 72,
         "timestamp": "2026-06-17T09:25:00+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin; update data/distrokid_release_status.json when a public URL is verified."
@@ -1424,7 +1500,7 @@
         "name": "scheduled_posts",
         "path": "admin/future-posts.json",
         "status": "fresh",
-        "age_hours": 3.4,
+        "age_hours": 3.5,
         "max_age_hours": 72,
         "timestamp": "2026-06-20T01:28:46.696230+00:00",
         "refresh_command": "python3 scripts/sync_future_posts.py"
@@ -1435,14 +1511,14 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T04:54:53.249513+00:00",
+        "timestamp": "2026-06-20T05:00:06.592967+00:00",
         "refresh_command": "python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
         "name": "published_log",
         "path": "admin/content/Published_Log.csv",
         "status": "stale",
-        "age_hours": 304.3,
+        "age_hours": 304.4,
         "max_age_hours": 168,
         "timestamp": "2026-06-07T12:36:37.141276+00:00",
         "refresh_command": "Preview Worker export with python3 scripts/export_social_executions.py --dry-run; after review run python3 scripts/export_social_executions.py --refresh-admin. For manual posts, log the public URL with scripts/log_manual_distribution.py.",
@@ -1460,7 +1536,7 @@
         "name": "manual_metrics",
         "path": "data/manual_social_stats.json",
         "status": "fresh",
-        "age_hours": 4.3,
+        "age_hours": 4.4,
         "max_age_hours": 72,
         "timestamp": "2026-06-20T00:37:40.066733+00:00",
         "refresh_command": "Update data/manual_social_stats.json with latest manual metrics."
@@ -1471,7 +1547,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T04:54:35.024000+00:00",
+        "timestamp": "2026-06-20T04:59:48.465000+00:00",
         "refresh_command": "python3 scripts/capture_live_metrics.py"
       },
       {
@@ -1480,7 +1556,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T04:54:53.287681+00:00",
+        "timestamp": "2026-06-20T05:00:06.629790+00:00",
         "refresh_command": "python3 scripts/update_metrics_history.py --refresh-admin"
       },
       {
@@ -1489,7 +1565,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T04:54:51.270608+00:00",
+        "timestamp": "2026-06-20T05:00:04.754156+00:00",
         "refresh_command": "python3 scripts/capture_executor_readiness.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -1498,7 +1574,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T04:54:54.452914+00:00",
+        "timestamp": "2026-06-20T05:00:07.766059+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin"
       },
       {
@@ -1507,7 +1583,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T04:54:52.623098+00:00",
+        "timestamp": "2026-06-20T05:00:06.163999+00:00",
         "refresh_command": "python3 scripts/capture_social_executions.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -1516,7 +1592,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T04:54:53.184224+00:00",
+        "timestamp": "2026-06-20T05:00:06.533451+00:00",
         "refresh_command": "python3 scripts/capture_scheduler_dry_run.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -1525,7 +1601,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T04:54:54.426476+00:00",
+        "timestamp": "2026-06-20T05:00:07.739449+00:00",
         "refresh_command": "python3 scripts/refresh_promo_admin.py"
       },
       {
@@ -1534,7 +1610,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T04:54:53.852389+00:00",
+        "timestamp": "2026-06-20T05:00:07.167440+00:00",
         "refresh_command": "python3 scripts/capture_github_workflow_status.py && python3 scripts/update_promo_engine_status.py"
       }
     ],
@@ -1686,7 +1762,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T04:54:40.065216Z",
+            "updated_at": "2026-06-20T04:59:53.512852Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
           }
         },
@@ -1697,7 +1773,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T04:54:40.422404Z",
+            "updated_at": "2026-06-20T04:59:53.868652Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
           }
         }
@@ -1799,7 +1875,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T04:54:45.591372Z",
+            "updated_at": "2026-06-20T04:59:59.028961Z",
             "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
           }
         },
@@ -1821,7 +1897,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T04:54:51.107087Z",
+            "updated_at": "2026-06-20T05:00:04.596121Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
           }
         }

@@ -1,13 +1,13 @@
 # Human Handoff Packet - Lily Roo
 
-Generated: 2026-06-20T04:54:54.307923Z
+Generated: 2026-06-20T05:00:07.620307Z
 
 ## Summary
-- Open handoff tasks: **10**
-- Tod-owned tasks: **9**
+- Open handoff tasks: **8**
+- Tod-owned tasks: **7**
 - External/platform-gated tasks: **1**
 - High urgency tasks: **3**
-- Low urgency tasks: **5**
+- Low urgency tasks: **3**
 
 ## Action Docket
 - Ready steps: **3**
@@ -48,8 +48,12 @@ Generated: 2026-06-20T04:54:54.307923Z
   - Next after apply: Recapture admin state and only then revisit TikTok approval or backlog reschedule rows.
   - Guardrail: Run preflight and confirm local OAuth/public-posting setup before pushing secrets.
 - **Fill and import manual metric worksheet** (`needs_values`)
-  - Owner: `tod`; tasks: **5**; blockers resolved: **5**
+  - Owner: `tod`; tasks: **3**; blockers resolved: **11**
   - Fields: **11**
+  - Batches: **3**
+  - Priority 1: Audience size snapshot - **5** field(s) (access: public_profile; rows: 3, 5, 6, 9, 11)
+  - Priority 2: Recent discovery and traffic - **4** field(s) (access: private_analytics; rows: 2, 4, 10, 12)
+  - Priority 3: Release depth metrics - **2** field(s) (access: private_analytics; rows: 7, 8)
   - Preview/check: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
   - Apply after review: `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
   - Sequence preview: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
@@ -99,41 +103,24 @@ Generated: 2026-06-20T04:54:54.307923Z
   - Apply after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin`
   - asset: https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg
   - Guardrail: Do not log a manual post until a real public URL exists.
-- **Fill facebook manual metrics** (`manual-metrics-facebook`)
-  - Phase: `Manual metrics`; owner: `tod`; status: `waiting_for_manual_values`; urgency: `low`
-  - Detail: Collect 1 field(s), fill the worksheet, preview import, then refresh Admin.
+- **Fill priority 1 metrics: Audience size snapshot** (`manual-metrics-priority-1`)
+  - Phase: `Manual metrics`; owner: `tod`; status: `needs_values`; urgency: `low`
+  - Detail: Collect 5 field(s) across instagram, spotify, tiktok, x, fill the worksheet rows, preview import, then refresh Admin.
   - Preview/check: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
   - Apply after review: `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
-  - metric source: https://www.facebook.com/903693509504290
-  - Guardrail: Only import nonnegative numeric values; leave unknown values blank instead of guessing.
-- **Fill instagram manual metrics** (`manual-metrics-instagram`)
-  - Phase: `Manual metrics`; owner: `tod`; status: `waiting_for_manual_values`; urgency: `low`
-  - Detail: Collect 2 field(s), fill the worksheet, preview import, then refresh Admin.
+  - Guardrail: Only import nonnegative numeric values copied from the named source; leave unknown values blank instead of guessing.
+- **Fill priority 2 metrics: Recent discovery and traffic** (`manual-metrics-priority-2`)
+  - Phase: `Manual metrics`; owner: `tod`; status: `needs_values`; urgency: `low`
+  - Detail: Collect 4 field(s) across facebook, instagram, tiktok, x, fill the worksheet rows, preview import, then refresh Admin.
   - Preview/check: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
   - Apply after review: `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
-  - metric source: https://www.instagram.com/professional_dashboard/
-  - Guardrail: Only import nonnegative numeric values; leave unknown values blank instead of guessing.
-- **Fill spotify manual metrics** (`manual-metrics-spotify`)
-  - Phase: `Manual metrics`; owner: `tod`; status: `waiting_for_manual_values`; urgency: `low`
-  - Detail: Collect 4 field(s), fill the worksheet, preview import, then refresh Admin.
+  - Guardrail: Only import nonnegative numeric values copied from the named source; leave unknown values blank instead of guessing.
+- **Fill priority 3 metrics: Release depth metrics** (`manual-metrics-priority-3`)
+  - Phase: `Manual metrics`; owner: `tod`; status: `needs_values`; urgency: `low`
+  - Detail: Collect 2 field(s) across spotify, fill the worksheet rows, preview import, then refresh Admin.
   - Preview/check: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
   - Apply after review: `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
-  - metric source: https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a
-  - Guardrail: Only import nonnegative numeric values; leave unknown values blank instead of guessing.
-- **Fill tiktok manual metrics** (`manual-metrics-tiktok`)
-  - Phase: `Manual metrics`; owner: `tod`; status: `waiting_for_manual_values`; urgency: `low`
-  - Detail: Collect 2 field(s), fill the worksheet, preview import, then refresh Admin.
-  - Preview/check: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
-  - Apply after review: `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
-  - metric source: https://www.tiktok.com/creator-center/analytics
-  - Guardrail: Only import nonnegative numeric values; leave unknown values blank instead of guessing.
-- **Fill x manual metrics** (`manual-metrics-x`)
-  - Phase: `Manual metrics`; owner: `tod`; status: `waiting_for_manual_values`; urgency: `low`
-  - Detail: Collect 2 field(s), fill the worksheet, preview import, then refresh Admin.
-  - Preview/check: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
-  - Apply after review: `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
-  - metric source: https://analytics.x.com/
-  - Guardrail: Only import nonnegative numeric values; leave unknown values blank instead of guessing.
+  - Guardrail: Only import nonnegative numeric values copied from the named source; leave unknown values blank instead of guessing.
 
 ## Guardrails
 - This packet is review-only and does not approve, post, publish, push secrets, or import metrics.

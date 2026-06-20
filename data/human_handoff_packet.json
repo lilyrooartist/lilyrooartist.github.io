@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T04:54:54.307923Z",
+  "generated_at": "2026-06-20T05:00:07.620307Z",
   "safe_mode": true,
   "source": {
     "promotion_blocker_ledger": "data/promotion_blocker_ledger.json",
@@ -12,42 +12,42 @@
     "backlog_reschedule": "data/backlog_reschedule_preview.json"
   },
   "summary": {
-    "task_count": 10,
+    "task_count": 8,
     "owner_counts": {
       "external_platform": 1,
-      "tod": 9
+      "tod": 7
     },
     "urgency_counts": {
       "high": 3,
-      "low": 5,
+      "low": 3,
       "medium": 2
     },
     "phase_counts": {
       "Approval": 1,
       "Backlog recovery": 1,
       "Manual distribution": 2,
-      "Manual metrics": 5,
+      "Manual metrics": 3,
       "Platform setup": 1
     },
     "blocker_summary": {
-      "open_blocker_count": 12,
+      "open_blocker_count": 10,
       "urgent_count": 4,
       "owner_counts": {
         "external_platform": 1,
-        "tod": 11
+        "tod": 9
       },
       "category_counts": {
         "approval": 3,
         "backlog_reschedule": 1,
         "manual_distribution": 2,
-        "manual_metrics": 5,
+        "manual_metrics": 3,
         "platform_repair": 1
       },
       "status_counts": {
         "blocked": 2,
         "blocked_by_review_checks": 1,
+        "needs_values": 3,
         "ready_for_reviewed_approval": 2,
-        "waiting_for_manual_values": 5,
         "waiting_for_review": 2
       },
       "next_resolution_projection": {
@@ -147,18 +147,18 @@
           "phase": "Fill manual metric worksheet",
           "status": "needs_values",
           "owner": "tod",
-          "blockers_resolved": 5,
+          "blockers_resolved": 11,
           "unlocks": [
             "Admin health and weekly reporting can use fresh cross-platform metrics.",
             "Manual metric blockers clear once worksheet values are imported."
           ],
           "blocked_by": [
-            "facebook:1",
-            "instagram:2",
-            "spotify:4",
-            "tiktok:2",
-            "x:2"
+            "P1 Audience size snapshot:5",
+            "P2 Recent discovery and traffic:4",
+            "P3 Release depth metrics:2"
           ],
+          "batch_count": 3,
+          "field_count": 11,
           "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
           "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
           "source_path": "data/manual_metric_collection_packet.json"
@@ -177,7 +177,7 @@
   "action_docket": {
     "source": "data/human_handoff_packet.json",
     "roadmap_step_count": 5,
-    "task_count": 10,
+    "task_count": 8,
     "ready_step_count": 3,
     "blocked_step_count": 2,
     "manual_post_count": 2,
@@ -386,14 +386,56 @@
         "state": "needs_values",
         "owner": "tod",
         "task_ids": [
-          "manual-metrics-facebook",
-          "manual-metrics-instagram",
-          "manual-metrics-spotify",
-          "manual-metrics-tiktok",
-          "manual-metrics-x"
+          "manual-metrics-priority-1",
+          "manual-metrics-priority-2",
+          "manual-metrics-priority-3"
         ],
-        "blockers_resolved": 5,
+        "blockers_resolved": 11,
         "field_count": 11,
+        "batch_count": 3,
+        "batches": [
+          {
+            "priority": 1,
+            "label": "Audience size snapshot",
+            "field_count": 5,
+            "access_levels": [
+              "public_profile"
+            ],
+            "csv_rows": [
+              3,
+              5,
+              6,
+              9,
+              11
+            ]
+          },
+          {
+            "priority": 2,
+            "label": "Recent discovery and traffic",
+            "field_count": 4,
+            "access_levels": [
+              "private_analytics"
+            ],
+            "csv_rows": [
+              2,
+              4,
+              10,
+              12
+            ]
+          },
+          {
+            "priority": 3,
+            "label": "Release depth metrics",
+            "field_count": 2,
+            "access_levels": [
+              "private_analytics"
+            ],
+            "csv_rows": [
+              7,
+              8
+            ]
+          }
+        ],
         "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
         "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
         "command_sequence": [
@@ -584,145 +626,142 @@
       "guardrail": "Do not log a manual post until a real public URL exists."
     },
     {
-      "id": "manual-metrics-facebook",
-      "title": "Fill facebook manual metrics",
+      "id": "manual-metrics-priority-1",
+      "title": "Fill priority 1 metrics: Audience size snapshot",
       "phase": "Manual metrics",
       "owner": "tod",
       "urgency": "low",
-      "status": "waiting_for_manual_values",
-      "detail": "Collect 1 field(s), fill the worksheet, preview import, then refresh Admin.",
+      "status": "needs_values",
+      "detail": "Collect 5 field(s) across instagram, spotify, tiktok, x, fill the worksheet rows, preview import, then refresh Admin.",
       "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
       "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
       "source_path": "data/manual_metric_collection_packet.json",
       "impact": {
-        "platform": "facebook",
-        "field_count": 1,
-        "pending_assignments": [
-          "facebook.reach_7d=VALUE"
+        "priority": 1,
+        "label": "Audience size snapshot",
+        "field_count": 5,
+        "waiting_count": 5,
+        "ready_to_import_count": 0,
+        "platforms": [
+          "instagram",
+          "spotify",
+          "tiktok",
+          "x"
         ],
-        "platform_update_command": "python3 scripts/update_manual_social_stats.py facebook.reach_7d=VALUE --refresh-admin"
+        "access_levels": [
+          "public_profile"
+        ],
+        "csv_rows": [
+          3,
+          5,
+          6,
+          9,
+          11
+        ],
+        "pending_assignments": [
+          "instagram.followers",
+          "spotify.artist_followers",
+          "spotify.monthly_listeners",
+          "tiktok.followers",
+          "x.followers"
+        ],
+        "evidence_hints": [
+          "Capture the public follower count from the profile page or account dashboard.",
+          "Capture the public Spotify artist follower count if visible, otherwise use Spotify for Artists.",
+          "Capture the public Spotify monthly listeners count from the artist profile.",
+          "Capture the public follower count from the profile page or account dashboard.",
+          "Capture the public follower count from the profile page or account dashboard."
+        ]
       },
-      "links": [
-        {
-          "label": "metric source",
-          "url": "https://www.facebook.com/903693509504290"
-        }
-      ],
-      "guardrail": "Only import nonnegative numeric values; leave unknown values blank instead of guessing."
+      "links": [],
+      "guardrail": "Only import nonnegative numeric values copied from the named source; leave unknown values blank instead of guessing."
     },
     {
-      "id": "manual-metrics-instagram",
-      "title": "Fill instagram manual metrics",
+      "id": "manual-metrics-priority-2",
+      "title": "Fill priority 2 metrics: Recent discovery and traffic",
       "phase": "Manual metrics",
       "owner": "tod",
       "urgency": "low",
-      "status": "waiting_for_manual_values",
-      "detail": "Collect 2 field(s), fill the worksheet, preview import, then refresh Admin.",
+      "status": "needs_values",
+      "detail": "Collect 4 field(s) across facebook, instagram, tiktok, x, fill the worksheet rows, preview import, then refresh Admin.",
       "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
       "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
       "source_path": "data/manual_metric_collection_packet.json",
       "impact": {
-        "platform": "instagram",
-        "field_count": 2,
-        "pending_assignments": [
-          "instagram.followers=VALUE",
-          "instagram.profile_visits_7d=VALUE"
-        ],
-        "platform_update_command": "python3 scripts/update_manual_social_stats.py instagram.followers=VALUE instagram.profile_visits_7d=VALUE --refresh-admin"
-      },
-      "links": [
-        {
-          "label": "metric source",
-          "url": "https://www.instagram.com/professional_dashboard/"
-        }
-      ],
-      "guardrail": "Only import nonnegative numeric values; leave unknown values blank instead of guessing."
-    },
-    {
-      "id": "manual-metrics-spotify",
-      "title": "Fill spotify manual metrics",
-      "phase": "Manual metrics",
-      "owner": "tod",
-      "urgency": "low",
-      "status": "waiting_for_manual_values",
-      "detail": "Collect 4 field(s), fill the worksheet, preview import, then refresh Admin.",
-      "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
-      "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
-      "source_path": "data/manual_metric_collection_packet.json",
-      "impact": {
-        "platform": "spotify",
+        "priority": 2,
+        "label": "Recent discovery and traffic",
         "field_count": 4,
-        "pending_assignments": [
-          "spotify.artist_followers=VALUE",
-          "spotify.monthly_listeners=VALUE",
-          "spotify.release_streams=VALUE",
-          "spotify.saves=VALUE"
+        "waiting_count": 4,
+        "ready_to_import_count": 0,
+        "platforms": [
+          "facebook",
+          "instagram",
+          "tiktok",
+          "x"
         ],
-        "platform_update_command": "python3 scripts/update_manual_social_stats.py spotify.artist_followers=VALUE spotify.monthly_listeners=VALUE spotify.release_streams=VALUE spotify.saves=VALUE --refresh-admin"
+        "access_levels": [
+          "private_analytics"
+        ],
+        "csv_rows": [
+          2,
+          4,
+          10,
+          12
+        ],
+        "pending_assignments": [
+          "facebook.reach_7d",
+          "instagram.profile_visits_7d",
+          "tiktok.profile_views_7d",
+          "x.impressions_7d"
+        ],
+        "evidence_hints": [
+          "Use the last-7-days reach value from Meta insights.",
+          "Use the last-7-days profile visits value from the professional dashboard.",
+          "Use the last-7-days profile views value from TikTok analytics.",
+          "Use the last-7-days impressions value from X analytics."
+        ]
       },
-      "links": [
-        {
-          "label": "metric source",
-          "url": "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a"
-        }
-      ],
-      "guardrail": "Only import nonnegative numeric values; leave unknown values blank instead of guessing."
+      "links": [],
+      "guardrail": "Only import nonnegative numeric values copied from the named source; leave unknown values blank instead of guessing."
     },
     {
-      "id": "manual-metrics-tiktok",
-      "title": "Fill tiktok manual metrics",
+      "id": "manual-metrics-priority-3",
+      "title": "Fill priority 3 metrics: Release depth metrics",
       "phase": "Manual metrics",
       "owner": "tod",
       "urgency": "low",
-      "status": "waiting_for_manual_values",
-      "detail": "Collect 2 field(s), fill the worksheet, preview import, then refresh Admin.",
+      "status": "needs_values",
+      "detail": "Collect 2 field(s) across spotify, fill the worksheet rows, preview import, then refresh Admin.",
       "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
       "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
       "source_path": "data/manual_metric_collection_packet.json",
       "impact": {
-        "platform": "tiktok",
+        "priority": 3,
+        "label": "Release depth metrics",
         "field_count": 2,
-        "pending_assignments": [
-          "tiktok.followers=VALUE",
-          "tiktok.profile_views_7d=VALUE"
+        "waiting_count": 2,
+        "ready_to_import_count": 0,
+        "platforms": [
+          "spotify"
         ],
-        "platform_update_command": "python3 scripts/update_manual_social_stats.py tiktok.followers=VALUE tiktok.profile_views_7d=VALUE --refresh-admin"
-      },
-      "links": [
-        {
-          "label": "metric source",
-          "url": "https://www.tiktok.com/creator-center/analytics"
-        }
-      ],
-      "guardrail": "Only import nonnegative numeric values; leave unknown values blank instead of guessing."
-    },
-    {
-      "id": "manual-metrics-x",
-      "title": "Fill x manual metrics",
-      "phase": "Manual metrics",
-      "owner": "tod",
-      "urgency": "low",
-      "status": "waiting_for_manual_values",
-      "detail": "Collect 2 field(s), fill the worksheet, preview import, then refresh Admin.",
-      "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
-      "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
-      "source_path": "data/manual_metric_collection_packet.json",
-      "impact": {
-        "platform": "x",
-        "field_count": 2,
-        "pending_assignments": [
-          "x.followers=VALUE",
-          "x.impressions_7d=VALUE"
+        "access_levels": [
+          "private_analytics"
         ],
-        "platform_update_command": "python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impressions_7d=VALUE --refresh-admin"
+        "csv_rows": [
+          7,
+          8
+        ],
+        "pending_assignments": [
+          "spotify.release_streams",
+          "spotify.saves"
+        ],
+        "evidence_hints": [
+          "Use lifetime streams for the promoted release from Spotify for Artists.",
+          "Use lifetime saves for the promoted release from Spotify for Artists."
+        ]
       },
-      "links": [
-        {
-          "label": "metric source",
-          "url": "https://analytics.x.com/"
-        }
-      ],
-      "guardrail": "Only import nonnegative numeric values; leave unknown values blank instead of guessing."
+      "links": [],
+      "guardrail": "Only import nonnegative numeric values copied from the named source; leave unknown values blank instead of guessing."
     }
   ]
 }
