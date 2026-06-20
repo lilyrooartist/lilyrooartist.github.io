@@ -446,6 +446,7 @@ def validate_generated_outputs(failures):
         if (
             approval_packet.get("safe_mode") is True
             and summary.get("approval_blocker_count") == len(rows)
+            and summary.get("review_check_passed_count") + summary.get("review_check_blocked_count") == len(rows)
             and summary.get("preview_command_count") == len([row for row in rows if row.get("approval_preview_command")])
             and summary.get("apply_command_count") == len([row for row in rows if row.get("approval_apply_command")])
             and all(
@@ -453,6 +454,8 @@ def validate_generated_outputs(failures):
                 and row.get("platform")
                 and row.get("copy_block")
                 and row.get("asset_url")
+                and row.get("review_checks")
+                and {"copy_present", "destination_links_present", "asset_file_present", "executor_blocker_confirmed", "platform_readiness"} <= {check.get("name") for check in row.get("review_checks", [])}
                 and "--dry-run" in row.get("approval_preview_command", "")
                 and "--refresh-admin" in row.get("approval_apply_command", "")
                 for row in rows
@@ -1286,10 +1289,10 @@ def validate_generated_outputs(failures):
         fail("build_approval_runway.py missing", failures)
     if SCHEDULED_APPROVAL_SCRIPT.exists():
         scheduled_approval_text = SCHEDULED_APPROVAL_SCRIPT.read_text(encoding="utf-8")
-        if "scheduled_approval_packet.json" in scheduled_approval_text and "scheduled-approval-packet.md" in scheduled_approval_text and "approval_preview_command" in scheduled_approval_text and "approval_apply_command" in scheduled_approval_text and "batch_preview_command" in scheduled_approval_text and "batch_apply_command" in scheduled_approval_text and "subprocess" not in scheduled_approval_text:
+        if "scheduled_approval_packet.json" in scheduled_approval_text and "scheduled-approval-packet.md" in scheduled_approval_text and "approval_preview_command" in scheduled_approval_text and "approval_apply_command" in scheduled_approval_text and "batch_preview_command" in scheduled_approval_text and "batch_apply_command" in scheduled_approval_text and "review_checks" in scheduled_approval_text and "executor_readiness_snapshot.json" in scheduled_approval_text and "subprocess" not in scheduled_approval_text:
             ok("scheduled approval packet builder is review-only")
         else:
-            fail("build_scheduled_approval_packet.py missing approval packet outputs, batch commands, or executes commands", failures)
+            fail("build_scheduled_approval_packet.py missing approval packet outputs, batch commands, review checks, or executes commands", failures)
     else:
         fail("build_scheduled_approval_packet.py missing", failures)
     if SUBSCRIBER_CTA_AUDIT_SCRIPT.exists():

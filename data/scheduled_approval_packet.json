@@ -1,14 +1,17 @@
 {
-  "generated_at": "2026-06-20T00:57:58.823746Z",
+  "generated_at": "2026-06-20T01:03:01.402619Z",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
-    "social_execution_snapshot": "data/social_execution_snapshot.json"
+    "social_execution_snapshot": "data/social_execution_snapshot.json",
+    "executor_readiness": "data/executor_readiness_snapshot.json"
   },
   "summary": {
     "approval_blocker_count": 3,
     "auto_count": 2,
     "manual_count": 1,
+    "review_check_passed_count": 2,
+    "review_check_blocked_count": 1,
     "preview_command_count": 3,
     "apply_command_count": 3,
     "batch_preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-259 FP-AUTO-261 --dry-run",
@@ -34,6 +37,34 @@
       "asset_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
       "media_key": "i-learned-cover",
       "desired_privacy": "",
+      "review_checks": [
+        {
+          "name": "copy_present",
+          "status": "pass",
+          "detail": "104 characters of primary copy."
+        },
+        {
+          "name": "destination_links_present",
+          "status": "pass",
+          "detail": "3 link(s): https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi, https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249, https://music.youtube.com/watch?v=vK0mDIW65o4"
+        },
+        {
+          "name": "asset_file_present",
+          "status": "pass",
+          "detail": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg maps to assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg."
+        },
+        {
+          "name": "executor_blocker_confirmed",
+          "status": "pass",
+          "detail": "Current executor state is blocked / not_approved."
+        },
+        {
+          "name": "platform_readiness",
+          "status": "pass",
+          "detail": "Executor readiness snapshot marks platform ready."
+        }
+      ],
+      "review_check_passed": true,
       "approval_preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 --dry-run",
       "approval_apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 --refresh-admin",
       "recommendation": "Review copy, media, destination links, and platform readiness before approval.",
@@ -58,6 +89,34 @@
       "asset_url": "https://www.lilyroo.com/assets/ig/01_i_learned_it_all_60s.mp4",
       "media_key": "i-learned-60s",
       "desired_privacy": "PUBLIC_TO_EVERYONE",
+      "review_checks": [
+        {
+          "name": "copy_present",
+          "status": "pass",
+          "detail": "83 characters of primary copy."
+        },
+        {
+          "name": "destination_links_present",
+          "status": "pass",
+          "detail": "3 link(s): https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi, https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249, https://music.youtube.com/watch?v=vK0mDIW65o4"
+        },
+        {
+          "name": "asset_file_present",
+          "status": "pass",
+          "detail": "https://www.lilyroo.com/assets/ig/01_i_learned_it_all_60s.mp4 maps to assets/ig/01_i_learned_it_all_60s.mp4."
+        },
+        {
+          "name": "executor_blocker_confirmed",
+          "status": "pass",
+          "detail": "Current executor state is blocked / not_approved."
+        },
+        {
+          "name": "platform_readiness",
+          "status": "fail",
+          "detail": "Executor readiness snapshot marks platform blocked. Missing secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN."
+        }
+      ],
+      "review_check_passed": false,
       "approval_preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --dry-run",
       "approval_apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --refresh-admin",
       "recommendation": "Review copy, media, destination links, and platform readiness before approval.",
@@ -82,6 +141,34 @@
       "asset_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
       "media_key": "i-learned-cover",
       "desired_privacy": "",
+      "review_checks": [
+        {
+          "name": "copy_present",
+          "status": "pass",
+          "detail": "119 characters of primary copy."
+        },
+        {
+          "name": "destination_links_present",
+          "status": "pass",
+          "detail": "4 link(s): https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi, https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249, https://www.youtube.com/@lilyroo.artist, https://music.youtube.com/watch?v=vK0mDIW65o4"
+        },
+        {
+          "name": "asset_file_present",
+          "status": "pass",
+          "detail": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg maps to assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg."
+        },
+        {
+          "name": "executor_blocker_confirmed",
+          "status": "pass",
+          "detail": "Current executor state is blocked / not_approved."
+        },
+        {
+          "name": "platform_readiness",
+          "status": "pass",
+          "detail": "Executor readiness snapshot marks platform ready."
+        }
+      ],
+      "review_check_passed": true,
       "approval_preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-261 --dry-run",
       "approval_apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-261 --refresh-admin",
       "recommendation": "Review copy, media, destination links, and platform readiness before approval.",

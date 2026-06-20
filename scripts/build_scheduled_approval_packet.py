@@ -3,16 +3,20 @@ from __future__ import annotations
 
 import csv
 import json
+import re
 from datetime import datetime, timezone
 from pathlib import Path
+from urllib.parse import urlparse
 
 
 ROOT = Path(__file__).resolve().parents[1]
 QUEUE = ROOT / "data" / "scheduled_posts.csv"
 EXECUTIONS = ROOT / "data" / "social_execution_snapshot.json"
+EXECUTOR_READINESS = ROOT / "data" / "executor_readiness_snapshot.json"
 OUT = ROOT / "data" / "scheduled_approval_packet.json"
 REPORT = ROOT / "admin" / "reports" / "scheduled-approval-packet.md"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
+URL_RE = re.compile(r"https?://[^\s|]+")
 
 
 def read_json(path: Path, fallback):
@@ -50,7 +54,91 @@ def approval_batch_command(rows: list[dict], *, dry_run: bool) -> str:
     return "python3 scripts/update_scheduled_post_approval.py " + " ".join(ids) + suffix
 
 
-def build_rows(queue: dict[str, dict[str, str]], executions: dict) -> list[dict]:
+def platform_slug(platform: str) -> str:
+    value = str(platform or "").strip().lower()
+    return {
+        "youtube community": "youtube",
+        "x": "x",
+        "instagram": "instagram",
+        "tiktok": "tiktok",
+        "facebook": "facebook",
+    }.get(value, value)
+
+
+def links_in_text(value: str) -> list[str]:
+    return [match.group(0).rstrip(".,);]") for match in URL_RE.finditer(value or "")]
+
+
+def local_public_path(url: str) -> Path | None:
+    parsed = urlparse(url or "")
+    if parsed.netloc not in {"www.lilyroo.com", "lilyroo.com", "lilyrooartist.github.io"}:
+        return None
+    if not parsed.path:
+        return None
+    return ROOT / parsed.path.lstrip("/")
+
+
+def check(name: str, status: str, detail: str) -> dict:
+    return {"name": name, "status": status, "detail": detail}
+
+
+def review_checks(row: dict[str, str], item: dict, readiness: dict) -> list[dict]:
+    checks = []
+    text = row.get("text") or ""
+    reply_text = row.get("reply_text") or ""
+    media_url = row.get("clip_url") or row.get("imagery_url") or ""
+    links = links_in_text("\n".join([text, reply_text]))
+    local_asset = local_public_path(media_url)
+    platform = row.get("platform") or item.get("platform") or ""
+    platform_ready = ((readiness.get("summary") or {}).get("platforms") or {}).get(platform)
+    platform_payload = ((readiness.get("payload") or {}).get("platforms") or {}).get(platform_slug(platform)) or {}
+    missing_secrets = ", ".join(platform_payload.get("missing_secrets") or [])
+
+    checks.append(check(
+        "copy_present",
+        "pass" if text else "fail",
+        f"{len(text)} characters of primary copy." if text else "Primary copy is empty.",
+    ))
+    checks.append(check(
+        "destination_links_present",
+        "pass" if links else "fail",
+        f"{len(links)} link(s): {', '.join(links)}" if links else "No destination links found in copy or reply text.",
+    ))
+    if media_url and local_asset:
+        checks.append(check(
+            "asset_file_present",
+            "pass" if local_asset.exists() else "fail",
+            f"{media_url} maps to {local_asset.relative_to(ROOT)}.",
+        ))
+    elif media_url:
+        checks.append(check("asset_file_present", "review", f"{media_url} is external; review manually."))
+    else:
+        checks.append(check("asset_file_present", "fail", "No media URL is attached."))
+    checks.append(check(
+        "executor_blocker_confirmed",
+        "pass" if item.get("reason") == "not_approved" else "review",
+        f"Current executor state is {item.get('status') or 'unknown'} / {item.get('reason') or 'unknown'}.",
+    ))
+    if platform_ready is True:
+        readiness_detail = "Executor readiness snapshot marks platform ready."
+        readiness_status = "pass"
+    elif platform_ready is False:
+        readiness_detail = "Executor readiness snapshot marks platform blocked."
+        if missing_secrets:
+            readiness_detail += f" Missing secrets: {missing_secrets}."
+        readiness_status = "fail"
+    else:
+        readiness_detail = "Platform readiness is absent from the snapshot."
+        readiness_status = "review"
+    checks.append(check("platform_readiness", readiness_status, readiness_detail))
+    return checks
+
+
+def checks_passed(checks: list[dict]) -> bool:
+    return bool(checks) and all(item.get("status") == "pass" for item in checks)
+
+
+def build_rows(queue: dict[str, dict[str, str]], executions: dict, readiness: dict) -> list[dict]:
     rows = []
     for item in (executions.get("summary") or {}).get("approval_needed") or []:
         post_id = item.get("post_id") or ""
@@ -58,6 +146,7 @@ def build_rows(queue: dict[str, dict[str, str]], executions: dict) -> list[dict]
         if not row:
             continue
         media_url = row.get("clip_url") or row.get("imagery_url") or ""
+        checks = review_checks(row, item, readiness)
         rows.append({
             "id": post_id,
             "platform": row.get("platform") or item.get("platform") or "",
@@ -77,6 +166,8 @@ def build_rows(queue: dict[str, dict[str, str]], executions: dict) -> list[dict]
             "asset_url": media_url,
             "media_key": row.get("media_key") or "",
             "desired_privacy": row.get("desired_privacy") or "",
+            "review_checks": checks,
+            "review_check_passed": checks_passed(checks),
             "approval_preview_command": approval_preview_command(post_id),
             "approval_apply_command": approval_apply_command(post_id),
             "recommendation": "Review copy, media, destination links, and platform readiness before approval.",
@@ -110,6 +201,10 @@ def build_markdown(payload: dict) -> str:
             lines.append(f"  - Link/reply: {row['reply_text']}")
         if row.get("asset_url"):
             lines.append(f"  - Asset: {row['asset_url']}")
+        if row.get("review_checks"):
+            lines.append("  - Review checks:")
+            for item in row["review_checks"]:
+                lines.append(f"    - `{item['status']}` {item['name']}: {item['detail']}")
         lines.append(f"  - Preview approval: `{row['approval_preview_command']}`")
         lines.append(f"  - Approve after review: `{row['approval_apply_command']}`")
     lines.extend([
@@ -163,7 +258,8 @@ def main() -> int:
     now = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
     queue = read_queue()
     executions = read_json(EXECUTIONS, {})
-    rows = build_rows(queue, executions)
+    readiness = read_json(EXECUTOR_READINESS, {})
+    rows = build_rows(queue, executions, readiness)
     batch_preview_command = approval_batch_command(rows, dry_run=True)
     batch_apply_command = approval_batch_command(rows, dry_run=False)
     payload = {
@@ -172,11 +268,14 @@ def main() -> int:
         "source": {
             "scheduled_posts": str(QUEUE.relative_to(ROOT)),
             "social_execution_snapshot": str(EXECUTIONS.relative_to(ROOT)),
+            "executor_readiness": str(EXECUTOR_READINESS.relative_to(ROOT)),
         },
         "summary": {
             "approval_blocker_count": len(rows),
             "auto_count": sum(1 for row in rows if row.get("execution_mode") == "auto"),
             "manual_count": sum(1 for row in rows if row.get("execution_mode") == "manual"),
+            "review_check_passed_count": sum(1 for row in rows if row.get("review_check_passed")),
+            "review_check_blocked_count": sum(1 for row in rows if not row.get("review_check_passed")),
             "preview_command_count": sum(1 for row in rows if row.get("approval_preview_command")),
             "apply_command_count": sum(1 for row in rows if row.get("approval_apply_command")),
             "batch_preview_command": batch_preview_command,
