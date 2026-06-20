@@ -370,11 +370,27 @@ def release_link_count(release):
     return sum(1 for key in keys if str(release.get(key) or "").strip())
 
 
+METRIC_ACCESS_LEVEL = {
+    "followers": "public_profile",
+    "artist_followers": "public_profile",
+    "monthly_listeners": "public_profile",
+    "reach_7d": "private_analytics",
+    "profile_visits_7d": "private_analytics",
+    "profile_views_7d": "private_analytics",
+    "impressions_7d": "private_analytics",
+    "release_streams": "private_analytics",
+    "saves": "private_analytics",
+}
+
+
 def metric_state(manual, live):
     platforms = live.get("platforms") if isinstance(live, dict) else {}
     live_count = sum(1 for data in (platforms or {}).values() if isinstance(data, dict) and data.get("ok"))
     pending_manual = []
     pending_by_platform = {}
+    pending_public = []
+    pending_private = []
+    public_capture_backlog = []
     auto_covered = []
     collection_steps = []
     for platform, values in (manual or {}).items():
@@ -390,7 +406,22 @@ def metric_state(manual, live):
                         "value": live_value,
                     })
                     continue
-                pending_manual.append(f"{platform}.{key}")
+                field_id = f"{platform}.{key}"
+                access_level = METRIC_ACCESS_LEVEL.get(key, "private_analytics")
+                pending_manual.append(field_id)
+                if access_level == "public_profile":
+                    pending_public.append(field_id)
+                    public_capture_backlog.append({
+                        "field": field_id,
+                        "platform": platform,
+                        "metric": key,
+                        "access_level": access_level,
+                        "collection_url": metric_collection_url(platform, manual, live),
+                        "source_hint": metric_collection_reason(platform),
+                        "live_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-live --dry-run",
+                    })
+                else:
+                    pending_private.append(field_id)
                 pending_by_platform.setdefault(platform, []).append(key)
     pending_update_args = [f"{field}=VALUE" for field in pending_manual]
     pending_update_command = ""
@@ -428,6 +459,9 @@ def metric_state(manual, live):
     return {
         "live_platform_count": live_count,
         "pending_manual_fields": pending_manual,
+        "pending_public_metric_fields": pending_public,
+        "pending_private_metric_fields": pending_private,
+        "public_metric_capture_backlog": public_capture_backlog,
         "pending_manual_by_platform": dict(sorted(pending_by_platform.items())),
         "pending_manual_update_command": pending_update_command,
         "pending_manual_update_by_platform": pending_update_by_platform,
@@ -1366,6 +1400,17 @@ def manual_metric_next_action(packet: dict) -> str:
     )
 
 
+def public_metric_capture_next_action(metrics: dict, packet: dict) -> str:
+    backlog = (packet.get("public_metric_capture_backlog") or {}) if isinstance(packet, dict) else {}
+    count = int_metric(backlog.get("field_count")) or len(metrics.get("public_metric_capture_backlog") or [])
+    if not count:
+        return ""
+    return (
+        f"Automate public profile metrics: {count} public-profile field(s) still need capture adapters; "
+        "see data/manual_metric_collection_packet.json public_metric_capture_backlog."
+    )
+
+
 def plan_rows_for_release(plan, release_title: str, track_lookup: set[str]):
     rows = []
     for post in plan.get("posts") or []:
@@ -1523,6 +1568,7 @@ def build_status():
             + (f" — {command}" if command else "")
         )
     manual_metric_action = manual_metric_next_action(manual_metric_packet)
+    public_metric_capture_action = public_metric_capture_next_action(metrics, manual_metric_packet)
     manual_distribution_action = manual_distribution_next_action(manual_distribution, published_log_reconciliation)
     store_verification_action = store_verification_next_action(store_verification)
     refresh_automation_action = refresh_automation_next_action(refresh_automation)
@@ -1549,6 +1595,8 @@ def build_status():
         all_actions.insert(0, f"Preview approved backlog reschedule: {monetization['backlog_reschedule_preview_command']}")
     if metrics["pending_manual_fields"] and not any("--from-csv --dry-run" in action for action in all_actions[:8]):
         all_actions.insert(0, manual_metric_action)
+    if public_metric_capture_action and public_metric_capture_action not in all_actions:
+        all_actions.insert(0, public_metric_capture_action)
     if manual_distribution_action and manual_distribution_action not in all_actions:
         all_actions.insert(0, manual_distribution_action)
     if store_verification_action and store_verification_action not in all_actions:
@@ -1592,6 +1640,15 @@ def build_status():
             "live_platform_count": metrics["live_platform_count"],
             "pending_manual_metric_fields": len(metrics["pending_manual_fields"]),
             "pending_manual_metric_details": metrics["pending_manual_fields"],
+            "pending_public_profile_metric_fields": len(metrics["pending_public_metric_fields"]),
+            "pending_public_profile_metric_details": metrics["pending_public_metric_fields"],
+            "pending_private_analytics_metric_fields": len(metrics["pending_private_metric_fields"]),
+            "pending_private_analytics_metric_details": metrics["pending_private_metric_fields"],
+            "public_metric_capture_backlog": manual_metric_packet.get("public_metric_capture_backlog") or {
+                "status": "needs_capture_adapter" if metrics["public_metric_capture_backlog"] else "clear",
+                "field_count": len(metrics["public_metric_capture_backlog"]),
+                "fields": metrics["public_metric_capture_backlog"],
+            },
             "pending_manual_by_platform": metrics["pending_manual_by_platform"],
             "pending_manual_update_command": metrics["pending_manual_update_command"],
             "pending_manual_update_by_platform": metrics["pending_manual_update_by_platform"],

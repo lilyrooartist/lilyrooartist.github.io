@@ -1080,8 +1080,17 @@ def validate_generated_outputs(failures):
         ready_rows = [row for row in rows if row.get("ready_to_import")]
         public_profile_rows = [row for row in rows if row.get("access_level") == "public_profile"]
         private_analytics_rows = [row for row in rows if row.get("access_level") == "private_analytics"]
+        public_manual_rows = [
+            row for row in manual_rows
+            if row.get("access_level") == "public_profile" and not row.get("ready_to_import")
+        ]
+        private_manual_rows = [
+            row for row in manual_rows
+            if row.get("access_level") == "private_analytics" and not row.get("ready_to_import")
+        ]
         docket = packet.get("metric_collection_docket") or {}
         import_manifest = packet.get("worksheet_import_manifest") or {}
+        public_backlog = packet.get("public_metric_capture_backlog") or {}
         docket_groups = docket.get("platform_groups") or []
         waiting_count = len([row for row in rows if not row.get("ready_to_import")])
         batch_fields = [
@@ -1096,6 +1105,8 @@ def validate_generated_outputs(failures):
             and summary.get("priority_batch_count") == len(priority_batches)
             and summary.get("public_profile_field_count") == len(public_profile_rows)
             and summary.get("private_analytics_field_count") == len(private_analytics_rows)
+            and summary.get("public_profile_manual_required_count") == len(public_manual_rows)
+            and summary.get("private_analytics_manual_required_count") == len(private_manual_rows)
             and summary.get("live_import_available_count") == len(live_import_rows)
             and summary.get("manual_collection_required_count") == len(manual_rows)
             and summary.get("ready_to_import_count") == len(ready_rows)
@@ -1123,6 +1134,10 @@ def validate_generated_outputs(failures):
             and import_manifest.get("preview_command") == summary.get("worksheet_import_preview_command")
             and (bool(import_manifest.get("apply_command")) is bool(ready_rows))
             and len(import_manifest.get("rows") or []) == len(rows)
+            and public_backlog.get("field_count") == len(public_manual_rows)
+            and public_backlog.get("status") in {"clear", "needs_capture_adapter"}
+            and len(public_backlog.get("fields") or []) == len(public_manual_rows)
+            and all(item.get("collection_url") and item.get("update_assignment") for item in public_backlog.get("fields") or [])
             and all(item.get("csv_row") and item.get("platform") and item.get("field") and "ready_to_import" in item and item.get("update_assignment") and item.get("import_effect") for item in import_manifest.get("rows") or [])
             and "new_value" in (import_manifest.get("guardrail") or "")
             and [group.get("platform") for group in docket_groups] == [platform.get("platform") for platform in platforms]
@@ -1369,10 +1384,25 @@ def validate_generated_outputs(failures):
         kpi = status.get("kpi") or {}
         pending_count = kpi.get("pending_manual_metric_fields", 0)
         pending_details = kpi.get("pending_manual_metric_details") or []
+        pending_public_count = kpi.get("pending_public_profile_metric_fields", 0)
+        pending_public_details = kpi.get("pending_public_profile_metric_details") or []
+        pending_private_count = kpi.get("pending_private_analytics_metric_fields", 0)
+        pending_private_details = kpi.get("pending_private_analytics_metric_details") or []
+        public_metric_backlog = kpi.get("public_metric_capture_backlog") or {}
         if len(pending_details) == pending_count:
             ok(f"promo engine manual metric gap detail tracks {pending_count} fields")
         else:
             fail("promo_engine_status.json manual metric gap detail does not match pending count", failures)
+        if (
+            len(pending_public_details) == pending_public_count
+            and len(pending_private_details) == pending_private_count
+            and pending_public_count + pending_private_count == pending_count
+            and public_metric_backlog.get("field_count") == pending_public_count
+            and public_metric_backlog.get("status") in {"clear", "needs_capture_adapter"}
+        ):
+            ok("promo engine separates public-profile metric backlog from private analytics metrics")
+        else:
+            fail("promo_engine_status.json missing public/private manual metric split", failures)
         pending_command = kpi.get("pending_manual_update_command") or ""
         pending_by_platform = kpi.get("pending_manual_update_by_platform") or {}
         auto_covered = kpi.get("auto_covered_manual_metric_fields") or []
@@ -2196,7 +2226,7 @@ def validate_generated_outputs(failures):
         fail("build_backlog_reschedule_preview.py missing", failures)
     if MANUAL_METRIC_COLLECTION_SCRIPT.exists():
         collection_text = MANUAL_METRIC_COLLECTION_SCRIPT.read_text(encoding="utf-8")
-        if "manual_metric_collection_template.csv" in collection_text and "manual_metric_collection_packet.json" in collection_text and "manual-metric-collection.md" in collection_text and "pending_manual_by_platform" in collection_text and "metric_collection_docket" in collection_text and "worksheet_import_manifest" in collection_text and "platform_groups" in collection_text and "priority_batches" in collection_text and "collection_priority" in collection_text and "metric_category" in collection_text and "access_level" in collection_text and "evidence_hint" in collection_text and "collection_url" in collection_text and "--from-live" in collection_text and "collection_mode" in collection_text and "live_import_available_count" in collection_text and "ready_to_import_count" in collection_text and "existing_new_values" in collection_text and "value_type" in collection_text and "import_effect" in collection_text and "subprocess" not in collection_text:
+        if "manual_metric_collection_template.csv" in collection_text and "manual_metric_collection_packet.json" in collection_text and "manual-metric-collection.md" in collection_text and "pending_manual_by_platform" in collection_text and "metric_collection_docket" in collection_text and "worksheet_import_manifest" in collection_text and "platform_groups" in collection_text and "priority_batches" in collection_text and "collection_priority" in collection_text and "metric_category" in collection_text and "access_level" in collection_text and "evidence_hint" in collection_text and "collection_url" in collection_text and "--from-live" in collection_text and "collection_mode" in collection_text and "live_import_available_count" in collection_text and "public_metric_capture_backlog" in collection_text and "public_profile_manual_required_count" in collection_text and "ready_to_import_count" in collection_text and "existing_new_values" in collection_text and "value_type" in collection_text and "import_effect" in collection_text and "subprocess" not in collection_text:
             ok("manual metric collection builder is review-only")
         else:
             fail("build_manual_metric_collection.py missing worksheet outputs or executes commands", failures)

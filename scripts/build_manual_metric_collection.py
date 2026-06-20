@@ -205,6 +205,14 @@ def build_packet(rows: list[dict], generated_at: str) -> dict:
     by_platform = {}
     live_import_rows = [row for row in rows if row.get("collection_mode") == "live_import_available"]
     manual_rows = [row for row in rows if row.get("collection_mode") != "live_import_available"]
+    public_manual_rows = [
+        row for row in manual_rows
+        if row.get("access_level") == "public_profile" and not row.get("ready_to_import")
+    ]
+    private_manual_rows = [
+        row for row in manual_rows
+        if row.get("access_level") == "private_analytics" and not row.get("ready_to_import")
+    ]
     ready_rows = [row for row in rows if row.get("ready_to_import")]
     for row in rows:
         platform = row["platform"]
@@ -286,6 +294,8 @@ def build_packet(rows: list[dict], generated_at: str) -> dict:
             "pending_field_count": len(rows),
             "live_import_available_count": len(live_import_rows),
             "manual_collection_required_count": len(manual_rows),
+            "public_profile_manual_required_count": len(public_manual_rows),
+            "private_analytics_manual_required_count": len(private_manual_rows),
             "ready_to_import_count": len(ready_rows),
             "preserved_new_value_count": len(ready_rows),
             "platform_count": len(platforms),
@@ -301,9 +311,35 @@ def build_packet(rows: list[dict], generated_at: str) -> dict:
         },
         "metric_collection_docket": docket,
         "worksheet_import_manifest": build_import_manifest(rows),
+        "public_metric_capture_backlog": build_public_metric_capture_backlog(public_manual_rows),
         "priority_batches": priority_batches,
         "platforms": platforms,
         "rows": rows,
+    }
+
+
+def build_public_metric_capture_backlog(rows: list[dict]) -> dict:
+    return {
+        "status": "needs_capture_adapter" if rows else "clear",
+        "field_count": len(rows),
+        "fields": [
+            {
+                "platform": row.get("platform") or "",
+                "field": row.get("field") or "",
+                "csv_row": row.get("csv_row"),
+                "collection_url": row.get("collection_url") or "",
+                "source_hint": row.get("source_hint") or "",
+                "evidence_hint": row.get("evidence_hint") or "",
+                "update_assignment": row.get("update_assignment") or "",
+            }
+            for row in rows
+        ],
+        "recommended_engine_work": (
+            "Add safe public profile capture adapters for these public fields, then route them through "
+            "data/live_social_metrics.json and scripts/update_manual_social_stats.py --from-live."
+            if rows else ""
+        ),
+        "guardrail": "Do not treat private analytics fields as public-capture candidates.",
     }
 
 
@@ -479,6 +515,24 @@ def build_markdown(rows: list[dict], generated_at: str, packet: dict) -> str:
         f"- Apply worksheet import after review: `{docket.get('worksheet_import_command') or WORKSHEET_IMPORT_COMMAND}`",
         "",
     ])
+    public_backlog = packet.get("public_metric_capture_backlog") or {}
+    if public_backlog.get("field_count"):
+        lines.extend([
+            "## Public Metric Capture Backlog",
+            "",
+            f"- Fields: **{public_backlog.get('field_count', 0)}**",
+            f"- Status: **{public_backlog.get('status', 'unknown')}**",
+            f"- Engine work: {public_backlog.get('recommended_engine_work')}",
+            f"- Guardrail: {public_backlog.get('guardrail')}",
+            "",
+        ])
+        for field in public_backlog.get("fields") or []:
+            lines.append(f"- CSV row `{field.get('csv_row')}` `{field.get('platform')}.{field.get('field')}`")
+            if field.get("collection_url"):
+                lines.append(f"  - Public/source URL: {field['collection_url']}")
+            if field.get("evidence_hint"):
+                lines.append(f"  - Evidence: {field['evidence_hint']}")
+        lines.append("")
     for batch in packet.get("priority_batches") or []:
         lines.append(f"### Priority {batch.get('priority')}: {batch.get('label')}")
         lines.append(f"- Status: `{batch.get('status')}`; waiting: **{batch.get('waiting_count', 0)}**; ready: **{batch.get('ready_to_import_count', 0)}**")

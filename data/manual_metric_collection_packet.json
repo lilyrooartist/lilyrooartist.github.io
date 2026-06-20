@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T06:04:02.198221Z",
+  "generated_at": "2026-06-20T06:08:02.921021Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -12,6 +12,8 @@
     "pending_field_count": 11,
     "live_import_available_count": 0,
     "manual_collection_required_count": 11,
+    "public_profile_manual_required_count": 5,
+    "private_analytics_manual_required_count": 6,
     "ready_to_import_count": 0,
     "preserved_new_value_count": 0,
     "platform_count": 5,
@@ -766,6 +768,59 @@
       }
     ],
     "guardrail": "Import only filled nonnegative numeric new_value cells; leave unknown rows blank."
+  },
+  "public_metric_capture_backlog": {
+    "status": "needs_capture_adapter",
+    "field_count": 5,
+    "fields": [
+      {
+        "platform": "instagram",
+        "field": "followers",
+        "csv_row": 3,
+        "collection_url": "https://www.instagram.com/professional_dashboard/",
+        "source_hint": "Instagram Professional Dashboard > Insights",
+        "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
+        "update_assignment": "instagram.followers=VALUE"
+      },
+      {
+        "platform": "spotify",
+        "field": "artist_followers",
+        "csv_row": 5,
+        "collection_url": "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a",
+        "source_hint": "Spotify for Artists > Music/Stats export",
+        "evidence_hint": "Capture the public Spotify artist follower count if visible, otherwise use Spotify for Artists.",
+        "update_assignment": "spotify.artist_followers=VALUE"
+      },
+      {
+        "platform": "spotify",
+        "field": "monthly_listeners",
+        "csv_row": 6,
+        "collection_url": "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a",
+        "source_hint": "Spotify for Artists > Music/Stats export",
+        "evidence_hint": "Capture the public Spotify monthly listeners count from the artist profile.",
+        "update_assignment": "spotify.monthly_listeners=VALUE"
+      },
+      {
+        "platform": "tiktok",
+        "field": "followers",
+        "csv_row": 9,
+        "collection_url": "https://www.tiktok.com/creator-center/analytics",
+        "source_hint": "TikTok Studio or Creator Center analytics",
+        "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
+        "update_assignment": "tiktok.followers=VALUE"
+      },
+      {
+        "platform": "x",
+        "field": "followers",
+        "csv_row": 11,
+        "collection_url": "https://analytics.x.com/",
+        "source_hint": "X Analytics or account profile metrics",
+        "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
+        "update_assignment": "x.followers=VALUE"
+      }
+    ],
+    "recommended_engine_work": "Add safe public profile capture adapters for these public fields, then route them through data/live_social_metrics.json and scripts/update_manual_social_stats.py --from-live.",
+    "guardrail": "Do not treat private analytics fields as public-capture candidates."
   },
   "priority_batches": [
     {

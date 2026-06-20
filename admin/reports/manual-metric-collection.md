@@ -1,6 +1,6 @@
 # Manual Metric Collection - Lily Roo
 
-Generated: 2026-06-20T06:04:02.198221Z
+Generated: 2026-06-20T06:08:02.921021Z
 
 Pending fields: **11**
 
@@ -34,6 +34,29 @@ You can still run a platform update command directly if you only collect one pla
 - CSV: `data/manual_metric_collection_template.csv`
 - Preview worksheet import: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
 - Apply worksheet import after review: `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
+
+## Public Metric Capture Backlog
+
+- Fields: **5**
+- Status: **needs_capture_adapter**
+- Engine work: Add safe public profile capture adapters for these public fields, then route them through data/live_social_metrics.json and scripts/update_manual_social_stats.py --from-live.
+- Guardrail: Do not treat private analytics fields as public-capture candidates.
+
+- CSV row `3` `instagram.followers`
+  - Public/source URL: https://www.instagram.com/professional_dashboard/
+  - Evidence: Capture the public follower count from the profile page or account dashboard.
+- CSV row `5` `spotify.artist_followers`
+  - Public/source URL: https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a
+  - Evidence: Capture the public Spotify artist follower count if visible, otherwise use Spotify for Artists.
+- CSV row `6` `spotify.monthly_listeners`
+  - Public/source URL: https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a
+  - Evidence: Capture the public Spotify monthly listeners count from the artist profile.
+- CSV row `9` `tiktok.followers`
+  - Public/source URL: https://www.tiktok.com/creator-center/analytics
+  - Evidence: Capture the public follower count from the profile page or account dashboard.
+- CSV row `11` `x.followers`
+  - Public/source URL: https://analytics.x.com/
+  - Evidence: Capture the public follower count from the profile page or account dashboard.
 
 ### Priority 1: Audience size snapshot
 - Status: `needs_values`; waiting: **5**; ready: **0**
