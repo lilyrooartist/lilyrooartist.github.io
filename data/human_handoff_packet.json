@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T03:58:26.633524Z",
+  "generated_at": "2026-06-20T04:04:09.848389Z",
   "safe_mode": true,
   "source": {
     "promotion_blocker_ledger": "data/promotion_blocker_ledger.json",
@@ -169,6 +169,129 @@
         "data/manual_metric_collection_packet.json"
       ]
     }
+  },
+  "action_docket": {
+    "source": "data/human_handoff_packet.json",
+    "roadmap_step_count": 5,
+    "task_count": 10,
+    "ready_step_count": 3,
+    "blocked_step_count": 2,
+    "manual_post_count": 2,
+    "manual_metric_field_count": 11,
+    "first_ready_step": {
+      "id": "review-checked-approval-batch",
+      "label": "Review checked approval batch",
+      "state": "ready_for_review",
+      "owner": "tod",
+      "task_ids": [
+        "approve-checked-scheduled-batch"
+      ],
+      "blockers_resolved": 2,
+      "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+      "apply_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+      "guardrail": "Use --checked-batch so only rows that passed review checks are approved."
+    },
+    "blocked_steps": [
+      {
+        "id": "platform-repair-gate",
+        "label": "Repair blocked platform executor setup",
+        "state": "blocked",
+        "owner": "tod",
+        "task_ids": [
+          "platform-setup-FP-AUTO-264"
+        ],
+        "blockers_resolved": 1,
+        "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+        "apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
+        "guardrail": "Run preflight and confirm local OAuth/public-posting setup before pushing secrets."
+      },
+      {
+        "id": "backlog-reschedule-gate",
+        "label": "Reschedule approved backlog after blockers clear",
+        "state": "blocked",
+        "owner": "external_platform",
+        "task_ids": [
+          "backlog-reschedule"
+        ],
+        "blockers_resolved": 1,
+        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
+        "apply_command": "",
+        "guardrail": "Normal apply stays hidden until known executor/platform blockers clear."
+      }
+    ],
+    "checklist": [
+      {
+        "id": "review-checked-approval-batch",
+        "label": "Review checked approval batch",
+        "state": "ready_for_review",
+        "owner": "tod",
+        "task_ids": [
+          "approve-checked-scheduled-batch"
+        ],
+        "blockers_resolved": 2,
+        "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+        "apply_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+        "guardrail": "Use --checked-batch so only rows that passed review checks are approved."
+      },
+      {
+        "id": "manual-posting-review",
+        "label": "Review and post manual distribution rows",
+        "state": "needs_review",
+        "owner": "tod",
+        "task_ids": [
+          "manual-distribution-FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+          "manual-distribution-FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
+        ],
+        "blockers_resolved": 2,
+        "preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --dry-run",
+        "apply_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin",
+        "guardrail": "Post manually first, then log only real public URLs."
+      },
+      {
+        "id": "platform-repair-gate",
+        "label": "Repair blocked platform executor setup",
+        "state": "blocked",
+        "owner": "tod",
+        "task_ids": [
+          "platform-setup-FP-AUTO-264"
+        ],
+        "blockers_resolved": 1,
+        "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+        "apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
+        "guardrail": "Run preflight and confirm local OAuth/public-posting setup before pushing secrets."
+      },
+      {
+        "id": "manual-metric-worksheet",
+        "label": "Fill and import manual metric worksheet",
+        "state": "needs_values",
+        "owner": "tod",
+        "task_ids": [
+          "manual-metrics-facebook",
+          "manual-metrics-instagram",
+          "manual-metrics-spotify",
+          "manual-metrics-tiktok",
+          "manual-metrics-x"
+        ],
+        "blockers_resolved": 5,
+        "field_count": 11,
+        "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
+        "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
+        "guardrail": "Import only collected numeric values; leave unknown cells blank."
+      },
+      {
+        "id": "backlog-reschedule-gate",
+        "label": "Reschedule approved backlog after blockers clear",
+        "state": "blocked",
+        "owner": "external_platform",
+        "task_ids": [
+          "backlog-reschedule"
+        ],
+        "blockers_resolved": 1,
+        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
+        "apply_command": "",
+        "guardrail": "Normal apply stays hidden until known executor/platform blockers clear."
+      }
+    ]
   },
   "tasks": [
     {

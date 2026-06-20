@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T03:58:26.315043Z",
+  "generated_at": "2026-06-20T04:04:09.527969Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -115,7 +115,7 @@
         "id": "FP-PLAN-TWELVE-DOLLARS-TIKTOK",
         "release": "Twelve Dollars",
         "platform": "TikTok",
-        "scheduled_at": "2026-06-20T20:40:00-04:00",
+        "scheduled_at": "2026-06-21T20:40:00-04:00",
         "execution_mode": "auto",
         "post_type": "video",
         "readiness_state": "blocked",
@@ -283,7 +283,7 @@
         "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
         "release": "Twelve Dollars",
         "platform": "YouTube Community",
-        "scheduled_at": "2026-06-21T18:30:00-04:00",
+        "scheduled_at": "2026-06-22T18:30:00-04:00",
         "execution_mode": "manual",
         "post_type": "community",
         "readiness_state": "manual_only",
@@ -320,7 +320,7 @@
         "id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
         "release": "Analog Myth",
         "platform": "YouTube Community",
-        "scheduled_at": "2026-06-22T18:30:00-04:00",
+        "scheduled_at": "2026-06-23T18:30:00-04:00",
         "execution_mode": "manual",
         "post_type": "community",
         "readiness_state": "manual_only",
@@ -340,7 +340,7 @@
       },
       "phase": "Review draft posts",
       "urgency": "medium",
-      "urgency_reason": "Draft is scheduled within 72 hours.",
+      "urgency_reason": "Manual copy is ready for human posting workflow.",
       "status": "waiting_for_user",
       "sort_key": [
         2,
@@ -383,11 +383,11 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "Apple Music",
-        "checked_at": "2026-06-20T03:58:12.510839Z",
+        "checked_at": "2026-06-20T04:03:55.526507Z",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T03:58:12.510839Z",
+          "updated_at": "2026-06-20T04:03:55.526507Z",
           "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
         },
         "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -410,11 +410,11 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "HyperFollow",
-        "checked_at": "2026-06-20T03:58:12.886690Z",
+        "checked_at": "2026-06-20T04:03:55.912609Z",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T03:58:12.886690Z",
+          "updated_at": "2026-06-20T04:03:55.912609Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
         },
         "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -464,11 +464,11 @@
       "context": {
         "release": "Analog Myth",
         "service": "Apple Music",
-        "checked_at": "2026-06-20T03:58:18.069240Z",
+        "checked_at": "2026-06-20T04:04:01.121051Z",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T03:58:18.069240Z",
+          "updated_at": "2026-06-20T04:04:01.121051Z",
           "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
         },
         "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -518,11 +518,11 @@
       "context": {
         "release": "Analog Myth",
         "service": "HyperFollow",
-        "checked_at": "2026-06-20T03:58:23.648220Z",
+        "checked_at": "2026-06-20T04:04:06.804793Z",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T03:58:23.648220Z",
+          "updated_at": "2026-06-20T04:04:06.804793Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
         },
         "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."

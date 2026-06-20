@@ -229,8 +229,102 @@ def backlog_tasks(packet: dict) -> list[dict]:
     ]
 
 
+def first_task(tasks: list[dict], phase: str) -> dict:
+    return next((task for task in tasks if task.get("phase") == phase), {})
+
+
+def tasks_for_phase(tasks: list[dict], phase: str) -> list[dict]:
+    return [task for task in tasks if task.get("phase") == phase]
+
+
+def build_action_docket(tasks: list[dict], blocker_summary: dict) -> dict:
+    projection = blocker_summary.get("next_resolution_projection") or {}
+    roadmap = blocker_summary.get("blocker_unlock_roadmap") or []
+    manual_distribution = tasks_for_phase(tasks, "Manual distribution")
+    manual_metrics = tasks_for_phase(tasks, "Manual metrics")
+    platform_setup = tasks_for_phase(tasks, "Platform setup")
+    backlog = first_task(tasks, "Backlog recovery")
+    approval = first_task(tasks, "Approval")
+    metric_field_count = sum(int((task.get("impact") or {}).get("field_count") or 0) for task in manual_metrics)
+    manual_post_count = len(manual_distribution)
+    blocked_platform_count = len([task for task in platform_setup if task.get("status") == "blocked"])
+    checklist = [
+        {
+            "id": "review-checked-approval-batch",
+            "label": "Review checked approval batch",
+            "state": "ready_for_review" if approval else "not_available",
+            "owner": "tod",
+            "task_ids": [approval.get("id")] if approval else [],
+            "blockers_resolved": projection.get("blockers_resolved") or 0,
+            "preview_command": approval.get("preview_command") or projection.get("preview_command") or "",
+            "apply_command": approval.get("apply_command") or projection.get("apply_command") or "",
+            "guardrail": approval.get("guardrail") or projection.get("guardrail") or "",
+        },
+        {
+            "id": "manual-posting-review",
+            "label": "Review and post manual distribution rows",
+            "state": "needs_review" if manual_distribution else "clear",
+            "owner": "tod",
+            "task_ids": [task["id"] for task in manual_distribution],
+            "blockers_resolved": manual_post_count,
+            "preview_command": manual_distribution[0].get("preview_command") if manual_distribution else "",
+            "apply_command": manual_distribution[0].get("apply_command") if manual_distribution else "",
+            "guardrail": "Post manually first, then log only real public URLs.",
+        },
+        {
+            "id": "platform-repair-gate",
+            "label": "Repair blocked platform executor setup",
+            "state": "blocked" if blocked_platform_count else "clear",
+            "owner": "tod",
+            "task_ids": [task["id"] for task in platform_setup],
+            "blockers_resolved": blocked_platform_count,
+            "preview_command": platform_setup[0].get("preview_command") if platform_setup else "",
+            "apply_command": platform_setup[0].get("apply_command") if platform_setup else "",
+            "guardrail": "Run preflight and confirm local OAuth/public-posting setup before pushing secrets.",
+        },
+        {
+            "id": "manual-metric-worksheet",
+            "label": "Fill and import manual metric worksheet",
+            "state": "needs_values" if metric_field_count else "clear",
+            "owner": "tod",
+            "task_ids": [task["id"] for task in manual_metrics],
+            "blockers_resolved": len(manual_metrics),
+            "field_count": metric_field_count,
+            "preview_command": manual_metrics[0].get("preview_command") if manual_metrics else "",
+            "apply_command": manual_metrics[0].get("apply_command") if manual_metrics else "",
+            "guardrail": "Import only collected numeric values; leave unknown cells blank.",
+        },
+        {
+            "id": "backlog-reschedule-gate",
+            "label": "Reschedule approved backlog after blockers clear",
+            "state": "blocked" if backlog and backlog.get("owner") == "external_platform" else ("ready" if backlog else "clear"),
+            "owner": backlog.get("owner") or "tod",
+            "task_ids": [backlog.get("id")] if backlog else [],
+            "blockers_resolved": (backlog.get("impact") or {}).get("approved_backlog_count") or 0,
+            "preview_command": backlog.get("preview_command") if backlog else "",
+            "apply_command": backlog.get("apply_command") if backlog else "",
+            "guardrail": backlog.get("guardrail") or "Do not apply blocked backlog reschedules without clearing platform readiness.",
+        },
+    ]
+    ready = [item for item in checklist if item["state"] in {"ready", "ready_for_review", "needs_review", "needs_values"}]
+    blocked = [item for item in checklist if item["state"] == "blocked"]
+    return {
+        "source": "data/human_handoff_packet.json",
+        "roadmap_step_count": len(roadmap),
+        "task_count": len(tasks),
+        "ready_step_count": len(ready),
+        "blocked_step_count": len(blocked),
+        "manual_post_count": manual_post_count,
+        "manual_metric_field_count": metric_field_count,
+        "first_ready_step": ready[0] if ready else {},
+        "blocked_steps": blocked,
+        "checklist": checklist,
+    }
+
+
 def build_markdown(payload: dict) -> str:
     summary = payload["summary"]
+    docket = payload.get("action_docket") or {}
     lines = [
         "# Human Handoff Packet - Lily Roo",
         "",
@@ -243,8 +337,28 @@ def build_markdown(payload: dict) -> str:
         f"- High urgency tasks: **{summary['urgency_counts'].get('high', 0)}**",
         f"- Low urgency tasks: **{summary['urgency_counts'].get('low', 0)}**",
         "",
-        "## Tasks",
+        "## Action Docket",
+        f"- Ready steps: **{docket.get('ready_step_count', 0)}**",
+        f"- Blocked steps: **{docket.get('blocked_step_count', 0)}**",
+        f"- Manual posts packaged: **{docket.get('manual_post_count', 0)}**",
+        f"- Manual metric fields: **{docket.get('manual_metric_field_count', 0)}**",
+        "",
     ]
+    for item in docket.get("checklist") or []:
+        lines.append(f"- **{item['label']}** (`{item['state']}`)")
+        lines.append(f"  - Owner: `{item['owner']}`; tasks: **{len(item.get('task_ids') or [])}**; blockers resolved: **{item.get('blockers_resolved', 0)}**")
+        if item.get("field_count"):
+            lines.append(f"  - Fields: **{item['field_count']}**")
+        if item.get("preview_command"):
+            lines.append(f"  - Preview/check: `{item['preview_command']}`")
+        if item.get("apply_command"):
+            lines.append(f"  - Apply after review: `{item['apply_command']}`")
+        if item.get("guardrail"):
+            lines.append(f"  - Guardrail: {item['guardrail']}")
+    lines.extend([
+        "",
+        "## Tasks",
+    ])
     for task in payload["tasks"]:
         lines.append(f"- **{task['title']}** (`{task['id']}`)")
         lines.append(f"  - Phase: `{task['phase']}`; owner: `{task['owner']}`; status: `{task['status']}`; urgency: `{task['urgency']}`")
@@ -324,6 +438,7 @@ def main() -> int:
         owner_counts[task["owner"]] = owner_counts.get(task["owner"], 0) + 1
         urgency_counts[task["urgency"]] = urgency_counts.get(task["urgency"], 0) + 1
         phase_counts[task["phase"]] = phase_counts.get(task["phase"], 0) + 1
+    action_docket = build_action_docket(tasks, blocker_summary)
     payload = {
         "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "safe_mode": True,
@@ -343,6 +458,7 @@ def main() -> int:
             "phase_counts": dict(sorted(phase_counts.items())),
             "blocker_summary": blocker_summary,
         },
+        "action_docket": action_docket,
         "tasks": tasks,
     }
     OUT.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")

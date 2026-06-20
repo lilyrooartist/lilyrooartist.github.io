@@ -532,12 +532,15 @@ def validate_generated_outputs(failures):
         handoff = json.loads(HUMAN_HANDOFF_PACKET.read_text(encoding="utf-8"))
         summary = handoff.get("summary") or {}
         tasks = handoff.get("tasks") or []
+        docket = handoff.get("action_docket") or {}
+        docket_checklist = docket.get("checklist") or []
         phases = {task.get("phase") for task in tasks}
         owners = summary.get("owner_counts") or {}
         urgencies = summary.get("urgency_counts") or {}
         approval_task = next((task for task in tasks if task.get("id") == "approve-checked-scheduled-batch"), {})
         approval_impact = approval_task.get("impact") or {}
         blocker_projection = ((summary.get("blocker_summary") or {}).get("next_resolution_projection") or {})
+        metric_task_field_count = sum(int((task.get("impact") or {}).get("field_count") or 0) for task in tasks if task.get("phase") == "Manual metrics")
         if (
             handoff.get("safe_mode") is True
             and summary.get("task_count") == len(tasks)
@@ -554,6 +557,13 @@ def validate_generated_outputs(failures):
             and approval_impact.get("approval_blockers_after") == blocker_projection.get("approval_blockers_after")
             and approval_impact.get("auto_rows_unblocked") == blocker_projection.get("auto_rows_unblocked")
             and approval_impact.get("manual_rows_unblocked") == blocker_projection.get("manual_rows_unblocked")
+            and docket.get("task_count") == len(tasks)
+            and docket.get("roadmap_step_count") == len((summary.get("blocker_summary") or {}).get("blocker_unlock_roadmap") or [])
+            and docket.get("ready_step_count") == len([item for item in docket_checklist if item.get("state") in {"ready", "ready_for_review", "needs_review", "needs_values"}])
+            and docket.get("blocked_step_count") == len([item for item in docket_checklist if item.get("state") == "blocked"])
+            and (docket.get("first_ready_step") or {}).get("id") == "review-checked-approval-batch"
+            and any(item.get("id") == "manual-metric-worksheet" and item.get("field_count") == metric_task_field_count and "--from-csv --dry-run" in item.get("preview_command", "") for item in docket_checklist)
+            and any(item.get("id") == "platform-repair-gate" and item.get("state") == "blocked" and "push_social_worker_secrets.py --dry-run" in item.get("preview_command", "") for item in docket_checklist)
             and any(task.get("phase") == "Manual metrics" and (task.get("impact") or {}).get("pending_assignments") for task in tasks)
             and any(task.get("phase") == "Platform setup" and (task.get("impact") or {}).get("missing_secrets") for task in tasks)
             and any(task.get("phase") == "Platform setup" and (task.get("impact") or {}).get("platform") == "TikTok" and (task.get("impact") or {}).get("preflight_status") and (task.get("impact") or {}).get("preflight_command") and (task.get("impact") or {}).get("preflight_report") for task in tasks)
@@ -1713,7 +1723,7 @@ def validate_generated_outputs(failures):
         fail("build_promo_operations_packet.py missing", failures)
     if HUMAN_HANDOFF_SCRIPT.exists():
         handoff_text = HUMAN_HANDOFF_SCRIPT.read_text(encoding="utf-8")
-        if "human_handoff_packet.json" in handoff_text and "human-handoff-packet.md" in handoff_text and "promotion_blocker_ledger.json" in handoff_text and "manual_metric_collection_packet.json" in handoff_text and "manual_distribution_packet.json" in handoff_text and "scheduled_approval_packet.json" in handoff_text and "platform_repair_status.json" in handoff_text and "tiktok_setup_preflight.json" in handoff_text and "subprocess" not in handoff_text:
+        if "human_handoff_packet.json" in handoff_text and "human-handoff-packet.md" in handoff_text and "promotion_blocker_ledger.json" in handoff_text and "manual_metric_collection_packet.json" in handoff_text and "manual_distribution_packet.json" in handoff_text and "scheduled_approval_packet.json" in handoff_text and "platform_repair_status.json" in handoff_text and "tiktok_setup_preflight.json" in handoff_text and "action_docket" in handoff_text and "build_action_docket" in handoff_text and "subprocess" not in handoff_text:
             ok("human handoff packet builder is review-only")
         else:
             fail("build_human_handoff_packet.py missing handoff outputs or executes commands", failures)
@@ -1841,7 +1851,7 @@ def validate_generated_outputs(failures):
         fail("promo-operations-packet.md missing", failures)
     if HUMAN_HANDOFF_REPORT.exists():
         handoff_report_text = HUMAN_HANDOFF_REPORT.read_text(encoding="utf-8")
-        if "Human Handoff Packet" in handoff_report_text and "Tasks" in handoff_report_text and "Guardrails" in handoff_report_text:
+        if "Human Handoff Packet" in handoff_report_text and "Action Docket" in handoff_report_text and "Tasks" in handoff_report_text and "Guardrails" in handoff_report_text:
             ok("human handoff markdown report present")
         else:
             fail("human-handoff-packet.md missing expected sections", failures)
@@ -1947,6 +1957,7 @@ def validate_admin_execution_feedback(failures):
         "refresh workflow link shown": "Open refresh workflow runs" in text and "actions/workflows/promo-admin-refresh.yml" in text,
         "scheduler dry-run shown": "Scheduler dry-run:" in text and "social_scheduler_dry_run" in text,
         "unlock impact shown": "Unlock impact:" in text and "Immediate unlock:" in text and "Largest unlock lane:" in text,
+        "handoff action docket shown": "Action docket:" in text and "First ready step:" in text,
     }
     missing_platform = [label for label, present in platform_checks.items() if not present]
     if missing_platform:

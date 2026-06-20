@@ -1,6 +1,6 @@
 # Human Handoff Packet - Lily Roo
 
-Generated: 2026-06-20T03:58:26.633524Z
+Generated: 2026-06-20T04:04:09.848389Z
 
 ## Summary
 - Open handoff tasks: **10**
@@ -8,6 +8,38 @@ Generated: 2026-06-20T03:58:26.633524Z
 - External/platform-gated tasks: **1**
 - High urgency tasks: **3**
 - Low urgency tasks: **5**
+
+## Action Docket
+- Ready steps: **3**
+- Blocked steps: **2**
+- Manual posts packaged: **2**
+- Manual metric fields: **11**
+
+- **Review checked approval batch** (`ready_for_review`)
+  - Owner: `tod`; tasks: **1**; blockers resolved: **2**
+  - Preview/check: `python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run`
+  - Apply after review: `python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin`
+  - Guardrail: Use --checked-batch so only rows that passed review checks are approved.
+- **Review and post manual distribution rows** (`needs_review`)
+  - Owner: `tod`; tasks: **2**; blockers resolved: **2**
+  - Preview/check: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --dry-run`
+  - Apply after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin`
+  - Guardrail: Post manually first, then log only real public URLs.
+- **Repair blocked platform executor setup** (`blocked`)
+  - Owner: `tod`; tasks: **1**; blockers resolved: **1**
+  - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
+  - Apply after review: `python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py`
+  - Guardrail: Run preflight and confirm local OAuth/public-posting setup before pushing secrets.
+- **Fill and import manual metric worksheet** (`needs_values`)
+  - Owner: `tod`; tasks: **5**; blockers resolved: **5**
+  - Fields: **11**
+  - Preview/check: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
+  - Apply after review: `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
+  - Guardrail: Import only collected numeric values; leave unknown cells blank.
+- **Reschedule approved backlog after blockers clear** (`blocked`)
+  - Owner: `external_platform`; tasks: **1**; blockers resolved: **1**
+  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24`
+  - Guardrail: Normal apply stays hidden until known executor/platform blockers clear.
 
 ## Tasks
 - **Review and approve checked scheduled batch** (`approve-checked-scheduled-batch`)
