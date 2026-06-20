@@ -1,6 +1,6 @@
 # Promo Consistency Audit - Lily Roo
 
-Generated: 2026-06-20T05:58:27.333187Z
+Generated: 2026-06-20T06:03:18.030348Z
 
 ## Summary
 - Status: **pass**
@@ -46,8 +46,8 @@ Generated: 2026-06-20T05:58:27.333187Z
   - Human handoff blocker summary should be copied from the blocker ledger.
 - **handoff_projection_matches_ledger_projection**: `pass`
   - Human handoff next-resolution projection should match the blocker ledger projection.
-- **refresh_run_successful**: `pass`
-  - Latest promo admin refresh should have no required or optional failures.
+- **refresh_run_required_steps_successful**: `pass`
+  - Latest promo admin refresh should have no required failures; tolerated optional capture failures stay visible in the refresh run summary.
 
 ## Guardrails
 - This audit does not mutate promotion, posting, approval, metrics, or secrets state.

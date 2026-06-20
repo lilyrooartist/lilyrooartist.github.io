@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T05:58:26.876802Z",
+  "generated_at": "2026-06-20T06:03:17.569143Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -158,6 +158,69 @@
               }
             }
           ]
+        },
+        "checked_batch_dry_run_preview": {
+          "status": "ready_for_review",
+          "dry_run": true,
+          "would_write_files": false,
+          "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+          "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+          "checked_batch_ids": [
+            "FP-AUTO-258",
+            "FP-AUTO-261"
+          ],
+          "requested_ids": [
+            "FP-AUTO-258",
+            "FP-AUTO-261"
+          ],
+          "unchecked_ids": [],
+          "row_count": 2,
+          "change_count": 2,
+          "expected_effect": {
+            "row_count": 2,
+            "change_count": 2,
+            "ids": [
+              "FP-AUTO-258",
+              "FP-AUTO-261"
+            ],
+            "effects": [
+              {
+                "id": "FP-AUTO-258",
+                "platform": "Instagram",
+                "execution_mode": "auto",
+                "effect": {
+                  "field": "approved",
+                  "from": "no",
+                  "to": "yes",
+                  "changed": true,
+                  "summary": "approved 'no' -> 'yes'"
+                }
+              },
+              {
+                "id": "FP-AUTO-261",
+                "platform": "YouTube Community",
+                "execution_mode": "manual",
+                "effect": {
+                  "field": "approved",
+                  "from": "no",
+                  "to": "yes",
+                  "changed": true,
+                  "summary": "approved 'no' -> 'yes'"
+                }
+              }
+            ]
+          },
+          "output_lines": [
+            "FP-AUTO-258: approved 'no' -> 'yes'",
+            "FP-AUTO-261: approved 'no' -> 'yes'",
+            "Checked batch guard: 2 checked id(s); 2 requested; 0 unchecked; 2 change(s).",
+            "Dry run only; did not update data/scheduled_posts.csv"
+          ],
+          "post_apply_verification": [
+            "python3 scripts/refresh_promo_admin.py",
+            "python3 scripts/validate_content_system.py"
+          ],
+          "guardrail": "This is a computed dry-run preview; approval still requires human review and the --checked-batch apply command."
         },
         "review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
         "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
@@ -423,6 +486,69 @@
                 }
               }
             ]
+          },
+          "checked_batch_dry_run_preview": {
+            "status": "ready_for_review",
+            "dry_run": true,
+            "would_write_files": false,
+            "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+            "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+            "checked_batch_ids": [
+              "FP-AUTO-258",
+              "FP-AUTO-261"
+            ],
+            "requested_ids": [
+              "FP-AUTO-258",
+              "FP-AUTO-261"
+            ],
+            "unchecked_ids": [],
+            "row_count": 2,
+            "change_count": 2,
+            "expected_effect": {
+              "row_count": 2,
+              "change_count": 2,
+              "ids": [
+                "FP-AUTO-258",
+                "FP-AUTO-261"
+              ],
+              "effects": [
+                {
+                  "id": "FP-AUTO-258",
+                  "platform": "Instagram",
+                  "execution_mode": "auto",
+                  "effect": {
+                    "field": "approved",
+                    "from": "no",
+                    "to": "yes",
+                    "changed": true,
+                    "summary": "approved 'no' -> 'yes'"
+                  }
+                },
+                {
+                  "id": "FP-AUTO-261",
+                  "platform": "YouTube Community",
+                  "execution_mode": "manual",
+                  "effect": {
+                    "field": "approved",
+                    "from": "no",
+                    "to": "yes",
+                    "changed": true,
+                    "summary": "approved 'no' -> 'yes'"
+                  }
+                }
+              ]
+            },
+            "output_lines": [
+              "FP-AUTO-258: approved 'no' -> 'yes'",
+              "FP-AUTO-261: approved 'no' -> 'yes'",
+              "Checked batch guard: 2 checked id(s); 2 requested; 0 unchecked; 2 change(s).",
+              "Dry run only; did not update data/scheduled_posts.csv"
+            ],
+            "post_apply_verification": [
+              "python3 scripts/refresh_promo_admin.py",
+              "python3 scripts/validate_content_system.py"
+            ],
+            "guardrail": "This is a computed dry-run preview; approval still requires human review and the --checked-batch apply command."
           },
           "review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
           "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
@@ -716,6 +842,69 @@
               }
             ]
           },
+          "checked_batch_dry_run_preview": {
+            "status": "ready_for_review",
+            "dry_run": true,
+            "would_write_files": false,
+            "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+            "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+            "checked_batch_ids": [
+              "FP-AUTO-258",
+              "FP-AUTO-261"
+            ],
+            "requested_ids": [
+              "FP-AUTO-258",
+              "FP-AUTO-261"
+            ],
+            "unchecked_ids": [],
+            "row_count": 2,
+            "change_count": 2,
+            "expected_effect": {
+              "row_count": 2,
+              "change_count": 2,
+              "ids": [
+                "FP-AUTO-258",
+                "FP-AUTO-261"
+              ],
+              "effects": [
+                {
+                  "id": "FP-AUTO-258",
+                  "platform": "Instagram",
+                  "execution_mode": "auto",
+                  "effect": {
+                    "field": "approved",
+                    "from": "no",
+                    "to": "yes",
+                    "changed": true,
+                    "summary": "approved 'no' -> 'yes'"
+                  }
+                },
+                {
+                  "id": "FP-AUTO-261",
+                  "platform": "YouTube Community",
+                  "execution_mode": "manual",
+                  "effect": {
+                    "field": "approved",
+                    "from": "no",
+                    "to": "yes",
+                    "changed": true,
+                    "summary": "approved 'no' -> 'yes'"
+                  }
+                }
+              ]
+            },
+            "output_lines": [
+              "FP-AUTO-258: approved 'no' -> 'yes'",
+              "FP-AUTO-261: approved 'no' -> 'yes'",
+              "Checked batch guard: 2 checked id(s); 2 requested; 0 unchecked; 2 change(s).",
+              "Dry run only; did not update data/scheduled_posts.csv"
+            ],
+            "post_apply_verification": [
+              "python3 scripts/refresh_promo_admin.py",
+              "python3 scripts/validate_content_system.py"
+            ],
+            "guardrail": "This is a computed dry-run preview; approval still requires human review and the --checked-batch apply command."
+          },
           "review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
           "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
           "guardrail": "Only ready_to_approve decisions may be applied through --checked-batch; held rows require repair first."
@@ -996,11 +1185,11 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "Apple Music",
-        "checked_at": "2026-06-20T05:58:12.885057Z",
+        "checked_at": "2026-06-20T06:03:03.686318Z",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T05:58:12.885057Z",
+          "updated_at": "2026-06-20T06:03:03.686318Z",
           "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
         },
         "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -1023,11 +1212,11 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "HyperFollow",
-        "checked_at": "2026-06-20T05:58:13.270461Z",
+        "checked_at": "2026-06-20T06:03:04.038252Z",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T05:58:13.270461Z",
+          "updated_at": "2026-06-20T06:03:04.038252Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
         },
         "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -1077,11 +1266,11 @@
       "context": {
         "release": "Analog Myth",
         "service": "Apple Music",
-        "checked_at": "2026-06-20T05:58:18.441125Z",
+        "checked_at": "2026-06-20T06:03:09.195229Z",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T05:58:18.441125Z",
+          "updated_at": "2026-06-20T06:03:09.195229Z",
           "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
         },
         "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -1131,11 +1320,11 @@
       "context": {
         "release": "Analog Myth",
         "service": "HyperFollow",
-        "checked_at": "2026-06-20T05:58:23.912414Z",
+        "checked_at": "2026-06-20T06:03:14.865811Z",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T05:58:23.912414Z",
+          "updated_at": "2026-06-20T06:03:14.865811Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
         },
         "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."

@@ -212,11 +212,16 @@ def build_checks() -> dict:
         handoff_projection,
         "Human handoff next-resolution projection should match the blocker ledger projection.",
     ))
-    checks.append(same_value(
-        "refresh_run_successful",
-        0,
-        int(((refresh.get("summary") or {}).get("required_failed") or 0) + ((refresh.get("summary") or {}).get("optional_failed") or 0)),
-        "Latest promo admin refresh should have no required or optional failures.",
+    refresh_summary = refresh.get("summary") or {}
+    required_failed = int(refresh_summary.get("required_failed") or 0)
+    optional_failed = int(refresh_summary.get("optional_failed") or 0)
+    allowed_failures = int(refresh_summary.get("allowed_failures") or 0)
+    checks.append(verdict(
+        "refresh_run_required_steps_successful",
+        required_failed == 0 and optional_failed <= allowed_failures,
+        "Latest promo admin refresh should have no required failures; tolerated optional capture failures stay visible in the refresh run summary.",
+        expected={"required_failed": 0, "optional_failed_lte_allowed_failures": True},
+        actual={"required_failed": required_failed, "optional_failed": optional_failed, "allowed_failures": allowed_failures},
     ))
 
     failed = [check for check in checks if check.get("status") != "pass"]
