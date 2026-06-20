@@ -1,6 +1,6 @@
 # Promotion Blocker Ledger - Lily Roo
 
-Generated: 2026-06-20T01:12:35.974514Z
+Generated: 2026-06-20T01:21:23.149494Z
 
 ## Summary
 - Open blockers: **14**
@@ -43,15 +43,15 @@ Generated: 2026-06-20T01:12:35.974514Z
 - **[high] Repair Facebook executor** (`platform-FP-AUTO-265`)
   - Owner: `external_platform`; status: `blocked`; category: `platform_repair`
   - Evidence: Facebook retry cap reached; rerun the Facebook dry-run check after identity confirmation.
-  - Next step: Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check. After repair, preview retry reset before applying it.
-  - Preview/check: `python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run`
+  - Next step: Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check. Run `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-265` before any retry reset; only reset if the worker reports executable.
+  - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-265`
   - Apply/log after review: `python3 scripts/reset_social_execution_state.py FP-AUTO-265 --apply`
   - Guardrail: Run retry resets only after the external platform repair is verified.
 - **[high] Repair Instagram executor** (`platform-FP-AUTO-263`)
   - Owner: `external_platform`; status: `blocked`; category: `platform_repair`
   - Evidence: Instagram retry cap reached; verify instagram_business_account repair before resetting execution state.
-  - Next step: Reconnect the Instagram Business/Creator account to the Facebook Page or set IG_BUSINESS_ACCOUNT_ID, then push the worker secret and recapture readiness. After repair, preview retry reset before applying it.
-  - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID`
+  - Next step: Reconnect the Instagram Business/Creator account to the Facebook Page or set IG_BUSINESS_ACCOUNT_ID, then push the worker secret and recapture readiness. Run `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263` before any retry reset; only reset if the worker reports executable.
+  - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263`
   - Apply/log after review: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
   - Guardrail: Run retry resets only after the external platform repair is verified.
 - **[medium] Approve scheduled YouTube Community row** (`approval-FP-AUTO-261`)

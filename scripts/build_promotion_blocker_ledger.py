@@ -74,8 +74,12 @@ def add_platform_repairs(rows: list[dict]) -> None:
             reason = f"{reason} Missing secrets: {missing}."
         owner = "external_platform" if platform in {"Facebook", "Instagram"} else "tod"
         next_step = item.get("repair_action") or "Complete the platform repair, then refresh admin."
+        verification = item.get("retry_reset_verification_command") or ""
         if item.get("retry_reset_preview_command"):
-            next_step = f"{next_step} After repair, preview retry reset before applying it."
+            if verification:
+                next_step = f"{next_step} Run `{verification}` before any retry reset; only reset if the worker reports executable."
+            else:
+                next_step = f"{next_step} After repair, preview retry reset before applying it."
         rows.append(row(
             blocker_id=f"platform-{post_id}",
             title=f"Repair {platform} executor",
@@ -86,7 +90,7 @@ def add_platform_repairs(rows: list[dict]) -> None:
             platform=platform,
             evidence=reason,
             next_step=next_step,
-            preview_command=item.get("preview_command") or item.get("retry_reset_preview_command") or "",
+            preview_command=item.get("preview_command") or verification or item.get("retry_reset_preview_command") or "",
             apply_command=item.get("apply_command") or item.get("retry_reset_apply_command") or "",
             source_path=str(PLATFORM_REPAIR.relative_to(ROOT)),
             guardrail="Run retry resets only after the external platform repair is verified.",

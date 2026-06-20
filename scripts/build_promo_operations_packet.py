@@ -193,7 +193,11 @@ def readiness_diagnostics(readiness: dict, platform: str) -> dict:
     return {key: value for key, value in diagnostics.items() if value not in (None, "", [])}
 
 
-def repair_command_for(platform: str, fallback: str) -> str:
+def repair_command_for(platform: str, fallback: str, row: dict | None = None) -> str:
+    row = row or {}
+    post_id = row.get("post_id") or ""
+    if row.get("reason") == "max_attempts_exceeded" and post_id and platform_slug(platform) != "tiktok":
+        return f"python3 scripts/check_social_executor_dry_run.py --post-id {post_id}"
     if platform_slug(platform) == "tiktok":
         return "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN"
     if platform_slug(platform) == "instagram":
@@ -229,9 +233,10 @@ def retry_reset_context(row: dict) -> dict:
         return {}
     base = f"python3 scripts/reset_social_execution_state.py {post_id}"
     return {
+        "retry_reset_verification_command": f"python3 scripts/check_social_executor_dry_run.py --post-id {post_id}",
         "retry_reset_preview_command": base,
         "retry_reset_apply_command": base + " --apply",
-        "retry_reset_note": "Run only after the external platform repair is verified; this clears the retry cap so cron can attempt the row again.",
+        "retry_reset_note": "Run the dry-run verification command first. Apply the retry reset only when the worker reports the row is executable.",
     }
 
 
@@ -388,7 +393,7 @@ def platform_fix_actions(status, executions, readiness):
         diagnostics = readiness_diagnostics(readiness, platform)
         fallback_action = row.get("repair_action") or ""
         fallback_command = row.get("repair_command") or "python3 scripts/refresh_promo_admin.py"
-        command = repair_command_for(platform, fallback_command)
+        command = repair_command_for(platform, fallback_command, row)
         actions.append(command_row(
             f"Fix {platform or 'social'} executor",
             command,

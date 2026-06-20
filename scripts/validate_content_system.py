@@ -344,6 +344,7 @@ def validate_generated_outputs(failures):
             action for action in actions
             if action.get("kind") == "platform_fix"
             and (action.get("context") or {}).get("repair_apply_command")
+            and (action.get("context") or {}).get("reason") != "max_attempts_exceeded"
         ]
         if secret_platform_fix_actions and all(
             "--dry-run" in (action.get("command") or "")
@@ -360,14 +361,15 @@ def validate_generated_outputs(failures):
         ]
         if retry_reset_actions and all(
             "reset_social_execution_state.py" in ((action.get("context") or {}).get("retry_reset_preview_command") or "")
+            and "check_social_executor_dry_run.py" in ((action.get("context") or {}).get("retry_reset_verification_command") or "")
             and "--apply" not in ((action.get("context") or {}).get("retry_reset_preview_command") or "")
             and "--apply" in ((action.get("context") or {}).get("retry_reset_apply_command") or "")
             and (action.get("context") or {}).get("retry_reset_note")
             for action in retry_reset_actions
         ):
-            ok("promo operations packet includes retry reset previews for max-attempt rows")
+            ok("promo operations packet includes verified retry reset previews for max-attempt rows")
         else:
-            fail("promo_operations_packet.json missing retry reset previews for max-attempt rows", failures)
+            fail("promo_operations_packet.json missing verified retry reset previews for max-attempt rows", failures)
         tiktok_actions = [
             action for action in actions
             if (action.get("context") or {}).get("platform") == "TikTok"
@@ -1291,6 +1293,15 @@ def validate_generated_outputs(failures):
             fail("reset_social_execution_state.py missing dry-run-first retry reset behavior", failures)
     else:
         fail("reset_social_execution_state.py missing", failures)
+    dry_run_checker = ROOT / "scripts" / "check_social_executor_dry_run.py"
+    if dry_run_checker.exists():
+        checker_text = dry_run_checker.read_text(encoding="utf-8")
+        if "dryRun" in checker_text and "/api/social/execute" in checker_text and "urllib.request" in checker_text and "--apply" not in checker_text:
+            ok("social executor dry-run checker verifies retry reset candidates")
+        else:
+            fail("check_social_executor_dry_run.py missing dry-run execute verification", failures)
+    else:
+        fail("check_social_executor_dry_run.py missing", failures)
     if PROMO_OPERATIONS_SCRIPT.exists():
         packet_text = PROMO_OPERATIONS_SCRIPT.read_text(encoding="utf-8")
         if "promo_operations_packet.json" in packet_text and "promo-operations-packet.md" in packet_text and "approval_review" in packet_text and "urgency_for" in packet_text and "missing_secrets" in packet_text and "subprocess" not in packet_text:

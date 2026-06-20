@@ -1,6 +1,6 @@
 # Promo Operations Packet - Lily Roo
 
-Generated: 2026-06-20T01:12:35.736686Z
+Generated: 2026-06-20T01:21:22.911713Z
 
 ## Summary
 - Actions: **20**
@@ -50,7 +50,7 @@ Generated: 2026-06-20T01:12:35.736686Z
 - **[high] Fix Facebook executor**
   - Why: Platform executor needs repair before queued auto posts can publish.
   - Detail: Facebook retry cap reached; rerun the Facebook dry-run check after identity confirmation.
-  - Command: `python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run`
+  - Command: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-265`
   - Preview retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-AUTO-265`
   - Apply retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-AUTO-265 --apply`
 - **[high] Fix TikTok executor**
@@ -63,7 +63,7 @@ Generated: 2026-06-20T01:12:35.736686Z
 - **[high] Fix Instagram executor**
   - Why: Platform executor needs repair before queued auto posts can publish.
   - Detail: Instagram retry cap reached; verify instagram_business_account repair before resetting execution state.
-  - Command: `python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID`
+  - Command: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263`
   - Apply repair after preview: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
   - Preview retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-AUTO-263`
   - Apply retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-AUTO-263 --apply`

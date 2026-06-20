@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T01:12:35.870715Z",
+  "generated_at": "2026-06-20T01:21:23.042804Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -51,7 +51,7 @@
       "phase": "Clear platform blockers",
       "status": "needs_platform_fix",
       "detail": "Reconnect the Instagram Business/Creator account to the Facebook Page or set IG_BUSINESS_ACCOUNT_ID, then push the worker secret and recapture readiness.",
-      "command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
+      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263",
       "after_review_command": "python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py",
       "context": {
         "post_id": "FP-AUTO-263",
@@ -64,7 +64,7 @@
       "phase": "Clear platform blockers",
       "status": "needs_platform_fix",
       "detail": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
-      "command": "python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run",
+      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-265",
       "after_review_command": "",
       "context": {
         "post_id": "FP-AUTO-265",

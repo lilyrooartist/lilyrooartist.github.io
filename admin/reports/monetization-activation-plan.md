@@ -1,6 +1,6 @@
 # Monetization Activation Plan - Lily Roo
 
-Generated: 2026-06-20T01:12:35.870715Z
+Generated: 2026-06-20T01:21:23.042804Z
 
 ## Summary
 - Current subscribers: **6 / 1000**
@@ -23,12 +23,12 @@ Generated: 2026-06-20T01:12:35.870715Z
 3. **Repair Instagram executor**
    - Phase: `Clear platform blockers`; status: `needs_platform_fix`
    - Detail: Reconnect the Instagram Business/Creator account to the Facebook Page or set IG_BUSINESS_ACCOUNT_ID, then push the worker secret and recapture readiness.
-   - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID`
+   - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263`
    - After review: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
 4. **Repair Facebook executor**
    - Phase: `Clear platform blockers`; status: `needs_platform_fix`
    - Detail: Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.
-   - Preview/check: `python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run`
+   - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-265`
 5. **Repair TikTok executor**
    - Phase: `Clear platform blockers`; status: `needs_platform_fix`
    - Detail: Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok public posting approval is false. Complete TikTok OAuth/public posting setup, push secrets, then refresh Admin.

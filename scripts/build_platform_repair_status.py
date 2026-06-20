@@ -118,6 +118,8 @@ def build_markdown(payload: dict) -> str:
             lines.append(f"  - Preview/check: `{row['preview_command']}`")
         if row.get("apply_command"):
             lines.append(f"  - Apply after review: `{row['apply_command']}`")
+        if row.get("retry_reset_verification_command"):
+            lines.append(f"  - Verify before retry reset: `{row['retry_reset_verification_command']}`")
         if row.get("retry_reset_preview_command"):
             lines.append(f"  - Preview retry reset after platform repair: `{row['retry_reset_preview_command']}`")
         if row.get("retry_reset_apply_command"):
@@ -173,6 +175,7 @@ def build_status() -> dict:
             "repair_action": context.get("repair_action") or "",
             "preview_command": preview_command,
             "apply_command": apply_command,
+            "retry_reset_verification_command": context.get("retry_reset_verification_command") or "",
             "retry_reset_preview_command": context.get("retry_reset_preview_command") or "",
             "retry_reset_apply_command": context.get("retry_reset_apply_command") or "",
             "retry_reset_note": context.get("retry_reset_note") or "",
