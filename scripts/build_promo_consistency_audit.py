@@ -12,6 +12,7 @@ PROMO_OPERATIONS = ROOT / "data" / "promo_operations_packet.json"
 BLOCKER_LEDGER = ROOT / "data" / "promotion_blocker_ledger.json"
 HUMAN_HANDOFF = ROOT / "data" / "human_handoff_packet.json"
 HUMAN_HANDOFF_RESOLUTION_PREVIEW = ROOT / "data" / "human_handoff_resolution_preview.json"
+PROMO_UNLOCK_SEQUENCE = ROOT / "data" / "promo_unlock_sequence.json"
 SCHEDULED_APPROVAL = ROOT / "data" / "scheduled_approval_packet.json"
 PLATFORM_REPAIR = ROOT / "data" / "platform_repair_status.json"
 TIKTOK_PREFLIGHT = ROOT / "data" / "tiktok_setup_preflight.json"
@@ -74,6 +75,7 @@ def build_checks() -> dict:
     ledger = read_json(BLOCKER_LEDGER, {})
     handoff = read_json(HUMAN_HANDOFF, {})
     handoff_preview = read_json(HUMAN_HANDOFF_RESOLUTION_PREVIEW, {})
+    unlock_sequence = read_json(PROMO_UNLOCK_SEQUENCE, {})
     scheduled = read_json(SCHEDULED_APPROVAL, {})
     platform = read_json(PLATFORM_REPAIR, {})
     tiktok_preflight = read_json(TIKTOK_PREFLIGHT, {})
@@ -91,6 +93,7 @@ def build_checks() -> dict:
     operations_summary = operations.get("summary") or {}
     status_health = status.get("health") or {}
     status_preview = (status.get("kpi") or {}).get("handoff_resolution_preview") or {}
+    unlock_summary = unlock_sequence.get("summary") or {}
     execution_summary = executions.get("summary") or {}
     scheduler_summary = scheduler.get("summary") or {}
     preflight_summary = tiktok_preflight.get("summary") or {}
@@ -267,6 +270,35 @@ def build_checks() -> dict:
         actual=status.get("next_actions") or [],
         severity="medium",
     ))
+    roadmap = ledger_summary.get("blocker_unlock_roadmap") or []
+    unlock_steps = unlock_sequence.get("steps") or []
+    checks.append(same_value(
+        "unlock_sequence_step_count_matches_roadmap",
+        len(roadmap),
+        int(unlock_summary.get("step_count") or 0),
+        "Promo unlock sequence should include one step for every blocker roadmap phase.",
+    ))
+    checks.append(same_value(
+        "unlock_sequence_order_matches_roadmap",
+        [item.get("id") for item in roadmap],
+        [step.get("id") for step in unlock_steps],
+        "Promo unlock sequence order should mirror the blocker ledger roadmap order.",
+    ))
+    checks.append(same_value(
+        "unlock_sequence_open_blockers_match_ledger",
+        int(ledger_summary.get("open_blocker_count") or 0),
+        int(unlock_summary.get("open_blocker_count") or 0),
+        "Promo unlock sequence should mirror the blocker ledger open blocker count.",
+    ))
+    checks.append(verdict(
+        "unlock_sequence_current_step_is_preview_ready",
+        (unlock_summary.get("current_step_id") == "unlock-checked-scheduled-approval"
+         and unlock_summary.get("current_gate_state") == "ready_for_human_review"),
+        "Promo unlock sequence should lead with the checked scheduled approval batch while it is the highest-leverage safe review step.",
+        expected={"current_step_id": "unlock-checked-scheduled-approval", "current_gate_state": "ready_for_human_review"},
+        actual={"current_step_id": unlock_summary.get("current_step_id"), "current_gate_state": unlock_summary.get("current_gate_state")},
+        severity="medium",
+    ))
     refresh_summary = refresh.get("summary") or {}
     required_failed = int(refresh_summary.get("required_failed") or 0)
     optional_failed = int(refresh_summary.get("optional_failed") or 0)
@@ -297,6 +329,7 @@ def build_checks() -> dict:
             "promotion_blocker_ledger": str(BLOCKER_LEDGER.relative_to(ROOT)),
             "human_handoff_packet": str(HUMAN_HANDOFF.relative_to(ROOT)),
             "human_handoff_resolution_preview": str(HUMAN_HANDOFF_RESOLUTION_PREVIEW.relative_to(ROOT)),
+            "promo_unlock_sequence": str(PROMO_UNLOCK_SEQUENCE.relative_to(ROOT)),
             "scheduled_approval_packet": str(SCHEDULED_APPROVAL.relative_to(ROOT)),
             "platform_repair_status": str(PLATFORM_REPAIR.relative_to(ROOT)),
             "tiktok_setup_preflight": str(TIKTOK_PREFLIGHT.relative_to(ROOT)),

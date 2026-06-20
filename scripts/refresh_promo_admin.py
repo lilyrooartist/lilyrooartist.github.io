@@ -169,6 +169,11 @@ FINALIZE_STEPS = [
         "required": True,
     },
     {
+        "name": "build_promo_unlock_sequence",
+        "command": ["python3", "scripts/build_promo_unlock_sequence.py"],
+        "required": True,
+    },
+    {
         "name": "build_published_log_reconciliation",
         "command": ["python3", "scripts/build_published_log_reconciliation.py"],
         "required": True,

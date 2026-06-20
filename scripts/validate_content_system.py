@@ -32,6 +32,7 @@ PUBLISHED_LOG_RECONCILIATION = ROOT / "data" / "published_log_reconciliation.jso
 HUMAN_HANDOFF_PACKET = ROOT / "data" / "human_handoff_packet.json"
 HUMAN_HANDOFF_RESOLUTION_WORKSHEET = ROOT / "data" / "human_handoff_resolution_worksheet.csv"
 HUMAN_HANDOFF_RESOLUTION_PREVIEW = ROOT / "data" / "human_handoff_resolution_preview.json"
+PROMO_UNLOCK_SEQUENCE = ROOT / "data" / "promo_unlock_sequence.json"
 PROMOTION_BLOCKER_LEDGER = ROOT / "data" / "promotion_blocker_ledger.json"
 PLATFORM_REPAIR_STATUS = ROOT / "data" / "platform_repair_status.json"
 APPROVAL_RUNWAY = ROOT / "data" / "approval_runway.json"
@@ -81,6 +82,7 @@ PROMO_OPERATIONS_SCRIPT = ROOT / "scripts" / "build_promo_operations_packet.py"
 PUBLISHED_LOG_RECONCILIATION_SCRIPT = ROOT / "scripts" / "build_published_log_reconciliation.py"
 HUMAN_HANDOFF_SCRIPT = ROOT / "scripts" / "build_human_handoff_packet.py"
 HANDOFF_RESOLUTION_PREVIEW_SCRIPT = ROOT / "scripts" / "build_handoff_resolution_preview.py"
+PROMO_UNLOCK_SEQUENCE_SCRIPT = ROOT / "scripts" / "build_promo_unlock_sequence.py"
 PROMOTION_BLOCKER_LEDGER_SCRIPT = ROOT / "scripts" / "build_promotion_blocker_ledger.py"
 PLATFORM_REPAIR_SCRIPT = ROOT / "scripts" / "build_platform_repair_status.py"
 APPROVAL_RUNWAY_SCRIPT = ROOT / "scripts" / "build_approval_runway.py"
@@ -98,6 +100,7 @@ PROMO_OPERATIONS_REPORT = ROOT / "admin" / "reports" / "promo-operations-packet.
 PUBLISHED_LOG_RECONCILIATION_REPORT = ROOT / "admin" / "reports" / "published-log-reconciliation.md"
 HUMAN_HANDOFF_REPORT = ROOT / "admin" / "reports" / "human-handoff-packet.md"
 HANDOFF_RESOLUTION_PREVIEW_REPORT = ROOT / "admin" / "reports" / "human-handoff-resolution-preview.md"
+PROMO_UNLOCK_SEQUENCE_REPORT = ROOT / "admin" / "reports" / "promo-unlock-sequence.md"
 PROMOTION_BLOCKER_LEDGER_REPORT = ROOT / "admin" / "reports" / "promotion-blocker-ledger.md"
 PLATFORM_REPAIR_REPORT = ROOT / "admin" / "reports" / "platform-repair-status.md"
 APPROVAL_RUNWAY_REPORT = ROOT / "admin" / "reports" / "approval-runway.md"
@@ -147,6 +150,7 @@ GENERATED_REFRESH_PATHS = {
     "data/promo_operations_packet.json",
     "data/promo_queue_plan.json",
     "data/promo_refresh_workflow_status.json",
+    "data/promo_unlock_sequence.json",
     "data/promotion_blocker_ledger.json",
     "data/published_log_reconciliation.json",
     "data/scheduled_approval_packet.json",
@@ -453,8 +457,9 @@ def validate_generated_outputs(failures):
             and summary.get("status") == "pass"
             and summary.get("failed") == 0
             and all(check.get("name") and check.get("status") in {"pass", "fail"} and check.get("detail") for check in checks)
-            and {"promo_engine_status", "promo_operations_packet", "promotion_blocker_ledger", "human_handoff_packet", "human_handoff_resolution_preview", "social_execution_snapshot", "social_scheduler_dry_run", "tiktok_setup_preflight"} <= set(source)
+            and {"promo_engine_status", "promo_operations_packet", "promotion_blocker_ledger", "human_handoff_packet", "human_handoff_resolution_preview", "promo_unlock_sequence", "social_execution_snapshot", "social_scheduler_dry_run", "tiktok_setup_preflight"} <= set(source)
             and any(check.get("name") == "handoff_preview_status_matches_status_kpi" for check in checks)
+            and any(check.get("name") == "unlock_sequence_order_matches_roadmap" for check in checks)
         ):
             ok(f"promo consistency audit passes {len(checks)} cross-surface check(s)")
         else:
@@ -961,6 +966,37 @@ def validate_generated_outputs(failures):
             fail("human_handoff_resolution_preview.json missing safe preview alignment", failures)
     else:
         fail("human_handoff_resolution_preview.json missing; run scripts/build_handoff_resolution_preview.py", failures)
+    if PROMO_UNLOCK_SEQUENCE.exists():
+        unlock_sequence = json.loads(PROMO_UNLOCK_SEQUENCE.read_text(encoding="utf-8"))
+        unlock_summary = unlock_sequence.get("summary") or {}
+        unlock_steps = unlock_sequence.get("steps") or []
+        unlock_source = unlock_sequence.get("source") or {}
+        ledger_roadmap = []
+        ledger_open_count = 0
+        if PROMOTION_BLOCKER_LEDGER.exists():
+            ledger_for_unlock = json.loads(PROMOTION_BLOCKER_LEDGER.read_text(encoding="utf-8"))
+            ledger_summary_for_unlock = ledger_for_unlock.get("summary") or {}
+            ledger_roadmap = ledger_summary_for_unlock.get("blocker_unlock_roadmap") or []
+            ledger_open_count = ledger_summary_for_unlock.get("open_blocker_count") or 0
+        if (
+            unlock_sequence.get("safe_mode") is True
+            and unlock_summary.get("step_count") == len(unlock_steps) == len(ledger_roadmap)
+            and unlock_summary.get("current_step_id") == "unlock-checked-scheduled-approval"
+            and unlock_summary.get("current_gate_state") == "ready_for_human_review"
+            and unlock_summary.get("open_blocker_count") == ledger_open_count
+            and [step.get("id") for step in unlock_steps] == [item.get("id") for item in ledger_roadmap]
+            and any(step.get("gate_state") == "blocked_until_input" for step in unlock_steps)
+            and any(step.get("gate_state") == "preview_ready_with_blocker_warning" for step in unlock_steps)
+            and all(step.get("commands") and step.get("completion_evidence") and step.get("guardrail") for step in unlock_steps)
+            and all(command.get("safe_to_run") is True for step in unlock_steps for command in (step.get("commands") or []) if command.get("step") == "preview")
+            and (unlock_sequence.get("operator_contract") or {}).get("does_not_apply") is True
+            and {"promotion_blocker_ledger", "human_handoff_packet", "human_handoff_resolution_preview", "promo_engine_status"} <= set(unlock_source)
+        ):
+            ok(f"promo unlock sequence orders {len(unlock_steps)} gated promotion step(s)")
+        else:
+            fail("promo_unlock_sequence.json missing safe ordered unlock steps", failures)
+    else:
+        fail("promo_unlock_sequence.json missing; run scripts/build_promo_unlock_sequence.py", failures)
     if PLATFORM_REPAIR_STATUS.exists():
         repair_status = json.loads(PLATFORM_REPAIR_STATUS.read_text(encoding="utf-8"))
         repair_summary = repair_status.get("summary") or {}
@@ -2581,6 +2617,7 @@ def validate_generated_outputs(failures):
             "build_tiktok_setup_preflight.py",
             "build_manual_metric_collection.py",
             "build_promotion_blocker_ledger.py",
+            "build_promo_unlock_sequence.py",
             "update_weekly_report.py",
             "timeout_seconds",
             "TimeoutExpired",
@@ -2665,7 +2702,7 @@ def validate_generated_outputs(failures):
         fail("check_social_executor_dry_run.py missing", failures)
     if PROMO_CONSISTENCY_SCRIPT.exists():
         consistency_text = PROMO_CONSISTENCY_SCRIPT.read_text(encoding="utf-8")
-        if "promo_consistency_audit.json" in consistency_text and "promo-consistency-audit.md" in consistency_text and "promotion_blocker_ledger.json" in consistency_text and "human_handoff_packet.json" in consistency_text and "human_handoff_resolution_preview.json" in consistency_text and "handoff_preview_status_matches_status_kpi" in consistency_text and "manual_metric_batch_count_matches_ledger" in consistency_text and "priority_batch_count" in consistency_text and "social_execution_snapshot.json" in consistency_text and "social_scheduler_dry_run.json" in consistency_text and "tiktok_setup_preflight.json" in consistency_text and "subprocess" not in consistency_text:
+        if "promo_consistency_audit.json" in consistency_text and "promo-consistency-audit.md" in consistency_text and "promotion_blocker_ledger.json" in consistency_text and "human_handoff_packet.json" in consistency_text and "human_handoff_resolution_preview.json" in consistency_text and "promo_unlock_sequence.json" in consistency_text and "handoff_preview_status_matches_status_kpi" in consistency_text and "unlock_sequence_order_matches_roadmap" in consistency_text and "manual_metric_batch_count_matches_ledger" in consistency_text and "priority_batch_count" in consistency_text and "social_execution_snapshot.json" in consistency_text and "social_scheduler_dry_run.json" in consistency_text and "tiktok_setup_preflight.json" in consistency_text and "subprocess" not in consistency_text:
             ok("promo consistency audit builder is review-only")
         else:
             fail("build_promo_consistency_audit.py missing audit outputs or executes commands", failures)
@@ -2731,6 +2768,24 @@ def validate_generated_outputs(failures):
             fail("build_handoff_resolution_preview.py missing preview outputs or mutation guardrails", failures)
     else:
         fail("build_handoff_resolution_preview.py missing", failures)
+    if PROMO_UNLOCK_SEQUENCE_SCRIPT.exists():
+        unlock_text = PROMO_UNLOCK_SEQUENCE_SCRIPT.read_text(encoding="utf-8")
+        if (
+            "promo_unlock_sequence.json" in unlock_text
+            and "promo-unlock-sequence.md" in unlock_text
+            and "promotion_blocker_ledger.json" in unlock_text
+            and "human_handoff_resolution_preview.json" in unlock_text
+            and "operator_contract" in unlock_text
+            and "does_not_apply" in unlock_text
+            and "ready_for_human_review" in unlock_text
+            and "blocked_until_input" in unlock_text
+            and "subprocess" not in unlock_text
+        ):
+            ok("promo unlock sequence builder is review-only")
+        else:
+            fail("build_promo_unlock_sequence.py missing review-only unlock sequencing", failures)
+    else:
+        fail("build_promo_unlock_sequence.py missing", failures)
     if PROMOTION_BLOCKER_LEDGER_SCRIPT.exists():
         ledger_text = PROMOTION_BLOCKER_LEDGER_SCRIPT.read_text(encoding="utf-8")
         if "promotion_blocker_ledger.json" in ledger_text and "promotion-blocker-ledger.md" in ledger_text and "owner_counts" in ledger_text and "category_counts" in ledger_text and "manual_metric_collection_packet.json" in ledger_text and "priority_batches" in ledger_text and "manual_metric_batch" in ledger_text and "backlog_clearance_manifest" in ledger_text and "approval_runway.json" in ledger_text and "blocker_unlock_roadmap" in ledger_text and "build_unlock_roadmap" in ledger_text and "next_resolution_projection" in ledger_text and "approval_projection" in ledger_text and "subprocess" not in ledger_text:
@@ -2875,6 +2930,14 @@ def validate_generated_outputs(failures):
             fail("human-handoff-resolution-preview.md missing expected sections", failures)
     else:
         fail("human-handoff-resolution-preview.md missing", failures)
+    if PROMO_UNLOCK_SEQUENCE_REPORT.exists():
+        unlock_report_text = PROMO_UNLOCK_SEQUENCE_REPORT.read_text(encoding="utf-8")
+        if "Promo Unlock Sequence" in unlock_report_text and "Summary" in unlock_report_text and "Sequence" in unlock_report_text and "Guardrails" in unlock_report_text:
+            ok("promo unlock sequence markdown report present")
+        else:
+            fail("promo-unlock-sequence.md missing expected sections", failures)
+    else:
+        fail("promo-unlock-sequence.md missing", failures)
     if PROMOTION_BLOCKER_LEDGER_REPORT.exists():
         ledger_report_text = PROMOTION_BLOCKER_LEDGER_REPORT.read_text(encoding="utf-8")
         if "Promotion Blocker Ledger" in ledger_report_text and "Unlock Roadmap" in ledger_report_text and "Ledger" in ledger_report_text and "Guardrails" in ledger_report_text:

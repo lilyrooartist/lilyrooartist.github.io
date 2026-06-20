@@ -1,10 +1,10 @@
 # Promo Consistency Audit - Lily Roo
 
-Generated: 2026-06-20T09:26:58.563854Z
+Generated: 2026-06-20T09:35:53.768426Z
 
 ## Summary
 - Status: **pass**
-- Checks: **24 / 24** passed
+- Checks: **28 / 28** passed
 - Failed checks: **0**
 - High severity failures: **0**
 - Medium severity failures: **0**
@@ -56,6 +56,14 @@ Generated: 2026-06-20T09:26:58.563854Z
   - Promo status handoff preview KPI should mirror preview summary counts.
 - **handoff_preview_next_action_matches_status**: `pass`
   - Promo status next actions should expose the handoff preview health summary.
+- **unlock_sequence_step_count_matches_roadmap**: `pass`
+  - Promo unlock sequence should include one step for every blocker roadmap phase.
+- **unlock_sequence_order_matches_roadmap**: `pass`
+  - Promo unlock sequence order should mirror the blocker ledger roadmap order.
+- **unlock_sequence_open_blockers_match_ledger**: `pass`
+  - Promo unlock sequence should mirror the blocker ledger open blocker count.
+- **unlock_sequence_current_step_is_preview_ready**: `pass`
+  - Promo unlock sequence should lead with the checked scheduled approval batch while it is the highest-leverage safe review step.
 - **refresh_run_required_steps_successful**: `pass`
   - Latest promo admin refresh should have no required failures; tolerated optional capture failures stay visible in the refresh run summary.
 
