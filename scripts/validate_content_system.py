@@ -1609,6 +1609,50 @@ def validate_generated_outputs(failures):
             ok("promo engine status mirrors human handoff action docket")
         else:
             fail("promo_engine_status.json missing human handoff action docket summary", failures)
+        manual_packet = json.loads(MANUAL_DISTRIBUTION_PACKET.read_text(encoding="utf-8")) if MANUAL_DISTRIBUTION_PACKET.exists() else {}
+        manual_summary = manual_packet.get("summary") or {}
+        manual_approval = manual_packet.get("manual_approval_docket") or {}
+        manual_docket = manual_packet.get("manual_distribution_docket") or {}
+        published_reconciliation = json.loads(PUBLISHED_LOG_RECONCILIATION.read_text(encoding="utf-8")) if PUBLISHED_LOG_RECONCILIATION.exists() else {}
+        reconciliation_summary = published_reconciliation.get("summary") or {}
+        status_manual_distribution = kpi.get("manual_distribution") or {}
+        status_reconciliation = kpi.get("published_log_reconciliation") or {}
+        manual_distribution_action = next((action for action in next_actions if action.startswith("Resolve manual distribution gate:")), "")
+        if (
+            status_manual_distribution.get("available") is True
+            and status.get("health", {}).get("manual_distribution") == status_manual_distribution
+            and status_manual_distribution.get("source_path") == "data/manual_distribution_packet.json"
+            and status_manual_distribution.get("review_count") == (manual_docket.get("review_count") or 0)
+            and status_manual_distribution.get("postable_count") == (manual_docket.get("postable_count") or 0)
+            and status_manual_distribution.get("unlogged_manual_count") == (manual_summary.get("unlogged_manual_count") or 0)
+            and status_manual_distribution.get("approval_ready_ids") == (manual_approval.get("ready_ids") or [])
+            and status_manual_distribution.get("approval_blocked_ids") == (manual_approval.get("blocked_ids") or [])
+            and status_manual_distribution.get("approval_preview_command") == (manual_approval.get("preview_command") or "")
+        ):
+            ok("promo engine status mirrors manual distribution gate")
+        else:
+            fail("promo_engine_status.json missing manual distribution gate summary", failures)
+        if (
+            status_reconciliation.get("available") is True
+            and status.get("health", {}).get("published_log_reconciliation") == status_reconciliation
+            and status_reconciliation.get("source_path") == "data/published_log_reconciliation.json"
+            and status_reconciliation.get("status") == (reconciliation_summary.get("published_log_status") or "unknown")
+            and status_reconciliation.get("unlogged_manual_posts") == (reconciliation_summary.get("unlogged_manual_posts") or 0)
+            and status_reconciliation.get("next_gate") == (reconciliation_summary.get("next_gate") or "")
+            and status_reconciliation.get("next_preview_command") == (reconciliation_summary.get("next_preview_command") or "")
+        ):
+            ok("promo engine status mirrors published-log reconciliation gate")
+        else:
+            fail("promo_engine_status.json missing published-log reconciliation gate summary", failures)
+        if (
+            (reconciliation_summary.get("unlogged_manual_posts") or 0)
+            and manual_distribution_action
+            and (reconciliation_summary.get("next_preview_command") or "") in manual_distribution_action
+            and "YouTube Community" in manual_distribution_action
+        ):
+            ok("promo engine manual distribution next action includes safe review preview")
+        elif reconciliation_summary.get("unlogged_manual_posts"):
+            fail("promo_engine_status.json manual distribution next action missing safe preview", failures)
         unlock_impact = kpi.get("unlock_impact") or {}
         unlock_lanes = unlock_impact.get("lanes") or []
         blocker_ledger = json.loads(PROMOTION_BLOCKER_LEDGER.read_text(encoding="utf-8")) if PROMOTION_BLOCKER_LEDGER.exists() else {}

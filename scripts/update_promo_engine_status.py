@@ -29,6 +29,7 @@ PROMO_OPERATIONS_PACKET = ROOT / "data" / "promo_operations_packet.json"
 PROMOTION_BLOCKER_LEDGER = ROOT / "data" / "promotion_blocker_ledger.json"
 HUMAN_HANDOFF_PACKET = ROOT / "data" / "human_handoff_packet.json"
 MANUAL_DISTRIBUTION_PACKET = ROOT / "data" / "manual_distribution_packet.json"
+PUBLISHED_LOG_RECONCILIATION = ROOT / "data" / "published_log_reconciliation.json"
 PUBLISHED = ROOT / "admin" / "content" / "Published_Log.csv"
 FUTURE_POSTS = ROOT / "admin" / "future-posts.json"
 RESCHEDULE_SCRIPT = ROOT / "scripts" / "reschedule_scheduled_posts.py"
@@ -1135,6 +1136,89 @@ def operator_docket_state(handoff: dict) -> dict:
     }
 
 
+def manual_distribution_state(packet: dict) -> dict:
+    summary = packet.get("summary") if isinstance(packet, dict) else {}
+    summary = summary or {}
+    approval_docket = packet.get("manual_approval_docket") if isinstance(packet, dict) else {}
+    approval_docket = approval_docket or {}
+    distribution_docket = packet.get("manual_distribution_docket") if isinstance(packet, dict) else {}
+    distribution_docket = distribution_docket or {}
+    review_queue = distribution_docket.get("review_queue") or []
+    postable_now = distribution_docket.get("postable_now") or []
+    return {
+        "source_path": str(MANUAL_DISTRIBUTION_PACKET.relative_to(ROOT)),
+        "available": bool(packet),
+        "status": distribution_docket.get("status") or summary.get("next_manual_action") or "unknown",
+        "manual_ready_count": int_metric(summary.get("manual_ready_count")),
+        "review_count": int_metric(distribution_docket.get("review_count")),
+        "postable_count": int_metric(distribution_docket.get("postable_count")),
+        "logged_count": int_metric(distribution_docket.get("logged_count")),
+        "unlogged_manual_count": int_metric(summary.get("unlogged_manual_count")),
+        "approval_ready_count": int_metric(approval_docket.get("ready_count")),
+        "approval_blocked_count": int_metric(approval_docket.get("blocked_count")),
+        "approval_ready_ids": approval_docket.get("ready_ids") or [],
+        "approval_blocked_ids": approval_docket.get("blocked_ids") or [],
+        "approval_preview_command": approval_docket.get("preview_command") or "",
+        "approval_apply_command": approval_docket.get("apply_command") or "",
+        "public_community_url": summary.get("public_community_url") or distribution_docket.get("public_community_url") or "",
+        "review_queue": review_queue,
+        "postable_now": postable_now,
+        "guardrails": distribution_docket.get("guardrails") or [],
+    }
+
+
+def published_log_reconciliation_state(packet: dict) -> dict:
+    summary = packet.get("summary") if isinstance(packet, dict) else {}
+    summary = summary or {}
+    manual = packet.get("manual_logging") if isinstance(packet, dict) else {}
+    manual = manual or {}
+    approval_gate = manual.get("approval_gate") or {}
+    posting_gate = manual.get("posting_gate") or {}
+    return {
+        "source_path": str(PUBLISHED_LOG_RECONCILIATION.relative_to(ROOT)),
+        "available": bool(packet),
+        "status": summary.get("published_log_status") or "unknown",
+        "reconciliation_needed": bool(summary.get("reconciliation_needed")),
+        "unlogged_worker_posts": int_metric(summary.get("unlogged_worker_posts")),
+        "unlogged_manual_posts": int_metric(summary.get("unlogged_manual_posts")),
+        "manual_log_gate_counts": summary.get("manual_log_gate_counts") or {},
+        "manual_logging_gate_status": summary.get("manual_logging_gate_status") or "",
+        "next_gate": summary.get("next_gate") or "",
+        "next_preview_command": summary.get("next_preview_command") or "",
+        "next_apply_command": summary.get("next_apply_command") or "",
+        "approval_gate": approval_gate,
+        "posting_gate": posting_gate,
+        "rows": manual.get("rows") or [],
+        "guardrail": manual.get("guardrail") or "",
+    }
+
+
+def manual_distribution_next_action(distribution: dict, reconciliation: dict) -> str:
+    if not distribution.get("available") and not reconciliation.get("available"):
+        return ""
+    unlogged_manual = int_metric(reconciliation.get("unlogged_manual_posts")) or int_metric(distribution.get("unlogged_manual_count"))
+    review_count = int_metric(distribution.get("review_count"))
+    postable_count = int_metric(distribution.get("postable_count"))
+    if not unlogged_manual and not review_count and not postable_count:
+        return ""
+    preview = reconciliation.get("next_preview_command") or distribution.get("approval_preview_command") or ""
+    gate = reconciliation.get("next_gate") or distribution.get("status") or "manual_distribution"
+    if review_count:
+        return (
+            f"Resolve manual distribution gate: {review_count} YouTube Community row(s) need review "
+            f"({gate}); preview with {preview}."
+        )
+    if postable_count:
+        return (
+            f"Resolve manual distribution gate: {postable_count} approved YouTube Community row(s) need manual posting "
+            f"and public URL logging; open {distribution.get('public_community_url') or 'the YouTube Community page'}."
+        )
+    return (
+        f"Resolve published-log reconciliation: {unlogged_manual} manual row(s) remain gated "
+        f"({gate}); preview with {preview}."
+    )
+
+
 def manual_metric_next_action(packet: dict) -> str:
     manifest = packet.get("worksheet_import_manifest") if isinstance(packet, dict) else {}
     manifest = manifest or {}
@@ -1183,6 +1267,7 @@ def build_status():
     promotion_blockers = read_json(PROMOTION_BLOCKER_LEDGER, {})
     human_handoff = read_json(HUMAN_HANDOFF_PACKET, {})
     manual_distribution = read_json(MANUAL_DISTRIBUTION_PACKET, {})
+    published_log_reconciliation = read_json(PUBLISHED_LOG_RECONCILIATION, {})
     manual_metric_packet = read_json(MANUAL_METRIC_PACKET, {})
     future_posts = read_json(FUTURE_POSTS, {})
     store_history = build_store_verification_history(release_status, now)
@@ -1296,6 +1381,8 @@ def build_status():
     operations_action_count = int((promo_operations.get("summary") or {}).get("action_count") or 0)
     unlock_impact = blocker_unlock_impact(promotion_blockers)
     operator_docket = operator_docket_state(human_handoff)
+    manual_distribution = manual_distribution_state(manual_distribution)
+    published_log_reconciliation = published_log_reconciliation_state(published_log_reconciliation)
     operator_first_step = operator_docket.get("first_ready_step") or {}
     operator_first_step_text = ""
     if operator_first_step.get("label"):
@@ -1312,6 +1399,7 @@ def build_status():
             + (f" — {command}" if command else "")
         )
     manual_metric_action = manual_metric_next_action(manual_metric_packet)
+    manual_distribution_action = manual_distribution_next_action(manual_distribution, published_log_reconciliation)
     if execution_state["platform_fix_needed_count"]:
         platforms = ", ".join(sorted({
             item.get("platform", "Social")
@@ -1335,6 +1423,8 @@ def build_status():
         all_actions.insert(0, f"Preview approved backlog reschedule: {monetization['backlog_reschedule_preview_command']}")
     if metrics["pending_manual_fields"] and not any("--from-csv --dry-run" in action for action in all_actions[:8]):
         all_actions.insert(0, manual_metric_action)
+    if manual_distribution_action and manual_distribution_action not in all_actions:
+        all_actions.insert(0, manual_distribution_action)
     if operational_next_action_text:
         all_actions = [action for action in all_actions if action != operational_next_action_text]
         all_actions.insert(0, operational_next_action_text)
@@ -1352,6 +1442,7 @@ def build_status():
             "promotion_blocker_ledger": str(PROMOTION_BLOCKER_LEDGER.relative_to(ROOT)),
             "human_handoff_packet": str(HUMAN_HANDOFF_PACKET.relative_to(ROOT)),
             "manual_distribution_packet": str(MANUAL_DISTRIBUTION_PACKET.relative_to(ROOT)),
+            "published_log_reconciliation": str(PUBLISHED_LOG_RECONCILIATION.relative_to(ROOT)),
             "published_log": str(PUBLISHED.relative_to(ROOT)),
             "manual_metrics": str(MANUAL_METRICS.relative_to(ROOT)),
             "manual_metric_packet": str(MANUAL_METRIC_PACKET.relative_to(ROOT)),
@@ -1402,6 +1493,8 @@ def build_status():
             "operational_next_action": operational_next_action,
             "unlock_impact": unlock_impact,
             "operator_docket": operator_docket,
+            "manual_distribution": manual_distribution,
+            "published_log_reconciliation": published_log_reconciliation,
             "stale_source_count": freshness_summary["stale"],
             "missing_source_count": freshness_summary["missing"],
         },
@@ -1417,6 +1510,8 @@ def build_status():
             "operational_next_action": operational_next_action,
             "unlock_impact": unlock_impact,
             "operator_docket": operator_docket,
+            "manual_distribution": manual_distribution,
+            "published_log_reconciliation": published_log_reconciliation,
         },
         "freshness": freshness,
         "releases": releases,
