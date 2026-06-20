@@ -143,6 +143,11 @@ FINALIZE_STEPS = [
         "required": True,
     },
     {
+        "name": "build_tiktok_repair_runbook",
+        "command": ["python3", "scripts/build_tiktok_repair_runbook.py"],
+        "required": True,
+    },
+    {
         "name": "build_manual_metric_collection",
         "command": ["python3", "scripts/build_manual_metric_collection.py"],
         "required": True,

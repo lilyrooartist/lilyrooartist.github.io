@@ -23,6 +23,7 @@ PROMO_REFRESH_RUN = ROOT / "data" / "promo_admin_refresh_run.json"
 PROMO_REFRESH_WORKFLOW_STATUS = ROOT / "data" / "promo_refresh_workflow_status.json"
 PROMO_CONSISTENCY_AUDIT = ROOT / "data" / "promo_consistency_audit.json"
 TIKTOK_SETUP_PREFLIGHT = ROOT / "data" / "tiktok_setup_preflight.json"
+TIKTOK_REPAIR_RUNBOOK = ROOT / "data" / "tiktok_repair_runbook.json"
 PROMO_OPERATIONS_PACKET = ROOT / "data" / "promo_operations_packet.json"
 HUMAN_HANDOFF_PACKET = ROOT / "data" / "human_handoff_packet.json"
 PROMOTION_BLOCKER_LEDGER = ROOT / "data" / "promotion_blocker_ledger.json"
@@ -67,6 +68,7 @@ PROMO_REFRESH_WORKFLOW_CAPTURE = ROOT / "scripts" / "capture_github_workflow_sta
 PROMO_REFRESH_WORKFLOW = ROOT / ".github" / "workflows" / "promo-admin-refresh.yml"
 PROMO_CONSISTENCY_SCRIPT = ROOT / "scripts" / "build_promo_consistency_audit.py"
 TIKTOK_SETUP_PREFLIGHT_SCRIPT = ROOT / "scripts" / "build_tiktok_setup_preflight.py"
+TIKTOK_REPAIR_RUNBOOK_SCRIPT = ROOT / "scripts" / "build_tiktok_repair_runbook.py"
 PROMO_OPERATIONS_SCRIPT = ROOT / "scripts" / "build_promo_operations_packet.py"
 HUMAN_HANDOFF_SCRIPT = ROOT / "scripts" / "build_human_handoff_packet.py"
 PROMOTION_BLOCKER_LEDGER_SCRIPT = ROOT / "scripts" / "build_promotion_blocker_ledger.py"
@@ -81,6 +83,7 @@ MANUAL_METRIC_COLLECTION_SCRIPT = ROOT / "scripts" / "build_manual_metric_collec
 REPORT = ROOT / "admin" / "reports" / "weekly-social-report.md"
 PROMO_CONSISTENCY_REPORT = ROOT / "admin" / "reports" / "promo-consistency-audit.md"
 TIKTOK_SETUP_PREFLIGHT_REPORT = ROOT / "admin" / "reports" / "tiktok-setup-preflight.md"
+TIKTOK_REPAIR_RUNBOOK_REPORT = ROOT / "admin" / "reports" / "tiktok-repair-runbook.md"
 PROMO_OPERATIONS_REPORT = ROOT / "admin" / "reports" / "promo-operations-packet.md"
 HUMAN_HANDOFF_REPORT = ROOT / "admin" / "reports" / "human-handoff-packet.md"
 PROMOTION_BLOCKER_LEDGER_REPORT = ROOT / "admin" / "reports" / "promotion-blocker-ledger.md"
@@ -330,6 +333,42 @@ def validate_generated_outputs(failures):
             fail("tiktok_setup_preflight.json missing safe setup preflight checks", failures)
     else:
         fail("tiktok_setup_preflight.json missing; run scripts/build_tiktok_setup_preflight.py", failures)
+    if TIKTOK_REPAIR_RUNBOOK.exists():
+        runbook = json.loads(TIKTOK_REPAIR_RUNBOOK.read_text(encoding="utf-8"))
+        summary = runbook.get("summary") or {}
+        steps = runbook.get("steps") or []
+        source = runbook.get("source") or {}
+        blocked_count = sum(1 for step in steps if step.get("status") == "blocked")
+        phases = {step.get("phase") for step in steps}
+        step_ids = {step.get("id") for step in steps}
+        required_steps = {
+            "collect_local_oauth_credentials",
+            "confirm_public_posting_approval",
+            "preview_worker_secret_push",
+            "apply_worker_secret_push",
+            "recapture_readiness",
+            "clear_backlog_gate",
+        }
+        required_source = {"tiktok_setup_preflight", "platform_repair_status", "executor_readiness", "wrangler_config"}
+        required_phases = {"Collect credentials", "Confirm approval", "Preview push", "Apply push", "Verify repair", "Clear gate"}
+        if (
+            runbook.get("safe_mode") is True
+            and runbook.get("status") in {"blocked", "ready_for_apply", "ready_for_backlog_clearance"}
+            and summary.get("step_count") == len(steps)
+            and summary.get("blocked_step_count") == blocked_count
+            and summary.get("phase_count") == len(phases)
+            and required_steps <= step_ids
+            and required_phases <= phases
+            and required_source <= set(source)
+            and set(summary.get("required_secret_names") or []) == {"TIKTOK_CLIENT_KEY", "TIKTOK_CLIENT_SECRET", "TIKTOK_REFRESH_TOKEN"}
+            and "Secret values" in (runbook.get("redaction") or "")
+            and all(step.get("id") and step.get("phase") and step.get("title") and step.get("status") in {"pass", "ready", "waiting", "blocked"} and step.get("detail") for step in steps)
+        ):
+            ok(f"tiktok_repair_runbook.json tracks {len(steps)} guarded repair step(s)")
+        else:
+            fail("tiktok_repair_runbook.json missing guarded TikTok repair sequence", failures)
+    else:
+        fail("tiktok_repair_runbook.json missing; run scripts/build_tiktok_repair_runbook.py", failures)
     if PROMO_OPERATIONS_PACKET.exists():
         packet = json.loads(PROMO_OPERATIONS_PACKET.read_text(encoding="utf-8"))
         summary = packet.get("summary") or {}
@@ -1574,6 +1613,14 @@ def validate_generated_outputs(failures):
             fail("build_tiktok_setup_preflight.py missing preflight outputs or exposes execution/secrets", failures)
     else:
         fail("build_tiktok_setup_preflight.py missing", failures)
+    if TIKTOK_REPAIR_RUNBOOK_SCRIPT.exists():
+        runbook_text = TIKTOK_REPAIR_RUNBOOK_SCRIPT.read_text(encoding="utf-8")
+        if "tiktok_repair_runbook.json" in runbook_text and "tiktok-repair-runbook.md" in runbook_text and "Collect credentials" in runbook_text and "blocked_apply_command" in runbook_text and "Secret values" in runbook_text and "subprocess" not in runbook_text:
+            ok("TikTok repair runbook builder is review-only")
+        else:
+            fail("build_tiktok_repair_runbook.py missing runbook outputs or exposes execution/secrets", failures)
+    else:
+        fail("build_tiktok_repair_runbook.py missing", failures)
     if PROMO_OPERATIONS_SCRIPT.exists():
         packet_text = PROMO_OPERATIONS_SCRIPT.read_text(encoding="utf-8")
         if "promo_operations_packet.json" in packet_text and "promo-operations-packet.md" in packet_text and "approval_review" in packet_text and "urgency_for" in packet_text and "missing_secrets" in packet_text and "subprocess" not in packet_text:
@@ -1694,6 +1741,14 @@ def validate_generated_outputs(failures):
             fail("tiktok-setup-preflight.md missing expected sections", failures)
     else:
         fail("tiktok-setup-preflight.md missing", failures)
+    if TIKTOK_REPAIR_RUNBOOK_REPORT.exists():
+        runbook_report_text = TIKTOK_REPAIR_RUNBOOK_REPORT.read_text(encoding="utf-8")
+        if "TikTok Repair Runbook" in runbook_report_text and "Sequence" in runbook_report_text and "Guardrails" in runbook_report_text:
+            ok("TikTok repair runbook markdown report present")
+        else:
+            fail("tiktok-repair-runbook.md missing expected sections", failures)
+    else:
+        fail("tiktok-repair-runbook.md missing", failures)
     if PROMO_OPERATIONS_REPORT.exists():
         report_text = PROMO_OPERATIONS_REPORT.read_text(encoding="utf-8")
         if "Promo Operations Packet" in report_text and "Top Actions" in report_text:

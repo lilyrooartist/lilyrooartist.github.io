@@ -1,0 +1,128 @@
+{
+  "generated_at": "2026-06-20T03:32:44.988781Z",
+  "safe_mode": true,
+  "status": "blocked",
+  "source": {
+    "tiktok_setup_preflight": "data/tiktok_setup_preflight.json",
+    "platform_repair_status": "data/platform_repair_status.json",
+    "executor_readiness": "data/executor_readiness_snapshot.json",
+    "wrangler_config": "workers/social-executor/wrangler.jsonc"
+  },
+  "summary": {
+    "phase_count": 6,
+    "step_count": 6,
+    "blocked_step_count": 6,
+    "blocked_step_ids": [
+      "collect_local_oauth_credentials",
+      "confirm_public_posting_approval",
+      "preview_worker_secret_push",
+      "apply_worker_secret_push",
+      "recapture_readiness",
+      "clear_backlog_gate"
+    ],
+    "required_secret_names": [
+      "TIKTOK_CLIENT_KEY",
+      "TIKTOK_CLIENT_SECRET",
+      "TIKTOK_REFRESH_TOKEN"
+    ],
+    "local_missing_secrets": [
+      "TIKTOK_CLIENT_KEY",
+      "TIKTOK_CLIENT_SECRET",
+      "TIKTOK_REFRESH_TOKEN"
+    ],
+    "worker_missing_secrets": [
+      "TIKTOK_CLIENT_KEY",
+      "TIKTOK_CLIENT_SECRET",
+      "TIKTOK_REFRESH_TOKEN"
+    ],
+    "public_posting_approved": false,
+    "ready_to_apply_worker_secrets": false,
+    "ready_to_clear_backlog_gate": false,
+    "repair_row_count": 1,
+    "repair_post_id": "FP-AUTO-264",
+    "blocked_apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
+    "apply_command": ""
+  },
+  "steps": [
+    {
+      "id": "collect_local_oauth_credentials",
+      "phase": "Collect credentials",
+      "status": "blocked",
+      "title": "Add TikTok OAuth credentials locally",
+      "detail": "Populate the local social API env file with the required TikTok refresh credential names. Values stay local and are never written to generated reports.",
+      "command": "",
+      "blocked_by": [
+        "TIKTOK_CLIENT_KEY",
+        "TIKTOK_CLIENT_SECRET",
+        "TIKTOK_REFRESH_TOKEN"
+      ]
+    },
+    {
+      "id": "confirm_public_posting_approval",
+      "phase": "Confirm approval",
+      "status": "blocked",
+      "title": "Confirm public posting approval",
+      "detail": "Set TikTok public posting approval only after Lily Roo is approved for public TikTok posting and PUBLIC_TO_EVERYONE is intentionally allowed.",
+      "command": "",
+      "blocked_by": [
+        "TIKTOK_PUBLIC_POSTING_APPROVED"
+      ]
+    },
+    {
+      "id": "preview_worker_secret_push",
+      "phase": "Preview push",
+      "status": "blocked",
+      "title": "Dry-run worker secret push",
+      "detail": "Preview the exact secret names that would be pushed to the worker before any apply command is available.",
+      "command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+      "blocked_by": [
+        "TIKTOK_CLIENT_KEY",
+        "TIKTOK_CLIENT_SECRET",
+        "TIKTOK_REFRESH_TOKEN"
+      ]
+    },
+    {
+      "id": "apply_worker_secret_push",
+      "phase": "Apply push",
+      "status": "blocked",
+      "title": "Push worker secrets after review",
+      "detail": "Run the apply command only after local credentials exist and public posting approval is confirmed.",
+      "command": "",
+      "blocked_by": [
+        "TIKTOK_CLIENT_KEY",
+        "TIKTOK_CLIENT_SECRET",
+        "TIKTOK_REFRESH_TOKEN",
+        "TIKTOK_PUBLIC_POSTING_APPROVED"
+      ]
+    },
+    {
+      "id": "recapture_readiness",
+      "phase": "Verify repair",
+      "status": "blocked",
+      "title": "Recapture executor readiness",
+      "detail": "After applying secrets, recapture worker readiness and rebuild the admin packets so platform repair, blocker, handoff, and backlog state agree.",
+      "command": "python3 scripts/refresh_promo_admin.py",
+      "blocked_by": [
+        "apply_worker_secret_push"
+      ]
+    },
+    {
+      "id": "clear_backlog_gate",
+      "phase": "Clear gate",
+      "status": "blocked",
+      "title": "Clear TikTok backlog gate",
+      "detail": "Once readiness is clean, rerun the backlog reschedule preview and apply the approved row only if the gate reports safe apply available.",
+      "command": "",
+      "blocked_by": [
+        "worker_refresh_credentials",
+        "public_posting_approval"
+      ]
+    }
+  ],
+  "redaction": "Secret values are never written to this runbook; only required names, missing names, and presence-derived readiness are recorded.",
+  "guardrails": [
+    "This runbook does not push secrets, approve public posting, publish posts, or clear backlog rows.",
+    "Use the dry-run secret push before any apply command.",
+    "Do not run a TikTok backlog apply until fresh admin evidence shows TikTok readiness is clean."
+  ]
+}

@@ -543,6 +543,13 @@
               </div>
             </section>
 
+            <section class="report-card" aria-labelledby="tiktok-runbook-heading">
+              <h2 id="tiktok-runbook-heading">TikTok Repair Runbook</h2>
+              <div class="queue-list" id="tiktok-repair-runbook">
+                <div class="muted">Loading TikTok repair runbook...</div>
+              </div>
+            </section>
+
             <section class="report-card" aria-labelledby="promo-plan-heading">
               <h2 id="promo-plan-heading">Promo Queue Plan</h2>
               <div class="queue-list" id="promo-queue-plan">
@@ -578,6 +585,7 @@
                 <a class="source-link" href="reports/weekly-social-report.md" target="_blank" rel="noopener">Weekly report</a>
                 <a class="source-link" href="reports/promo-consistency-audit.md" target="_blank" rel="noopener">Consistency audit</a>
                 <a class="source-link" href="reports/tiktok-setup-preflight.md" target="_blank" rel="noopener">TikTok preflight</a>
+                <a class="source-link" href="reports/tiktok-repair-runbook.md" target="_blank" rel="noopener">TikTok runbook</a>
                 <a class="source-link" href="reports/human-handoff-packet.md" target="_blank" rel="noopener">Human handoff</a>
                 <a class="source-link" href="reports/promotion-blocker-ledger.md" target="_blank" rel="noopener">Blocker ledger</a>
                 <a class="source-link" href="reports/manual-metric-collection.md" target="_blank" rel="noopener">Metric collection</a>
@@ -591,6 +599,7 @@
                 <a class="source-link" href="../data/promo_engine_status.json" target="_blank" rel="noopener">Promo health</a>
                 <a class="source-link" href="../data/promo_consistency_audit.json" target="_blank" rel="noopener">Consistency JSON</a>
                 <a class="source-link" href="../data/tiktok_setup_preflight.json" target="_blank" rel="noopener">TikTok preflight JSON</a>
+                <a class="source-link" href="../data/tiktok_repair_runbook.json" target="_blank" rel="noopener">TikTok runbook JSON</a>
                 <a class="source-link" href="../data/promo_queue_plan.json" target="_blank" rel="noopener">Promo plan</a>
                 <a class="source-link" href="../data/scheduled_approval_packet.json" target="_blank" rel="noopener">Approval packet</a>
                 <a class="source-link" href="future-posts.json" target="_blank" rel="noopener">Future queue</a>
@@ -607,7 +616,7 @@
 <script type="text/plain" id="embedded-weekly-report"># Weekly Social Report — Lily Roo
 
 **Period:** 2026-06-14 to 2026-06-20
-**Last updated:** 2026-06-20 12:26 PM JST
+**Last updated:** 2026-06-20 12:32 PM JST
 
 ## KPI Goal
 - Primary growth target: **1,000 YouTube subscribers** (monetization milestone)
@@ -730,7 +739,7 @@
 - Latest post: https://www.facebook.com/903693509504290_122118326547249470
 
 ## Metrics Snapshot
-- Live API captured: **2026-06-20T03:26:34.328Z**
+- Live API captured: **2026-06-20T03:32:26.045Z**
 - Snapshot file: `data/live_social_metrics.json`
 - YouTube public RSS captured: **2026-06-09T12:08:07.783949Z**
 - YouTube public snapshot file: `data/youtube_public_snapshot.json`
@@ -740,9 +749,9 @@
 - YouTube Music snapshot file: `data/youtube_music_release_snapshot.json`
 - HyperFollow stores captured: **2026-06-07T20:51:14.275569Z**
 - HyperFollow snapshot file: `data/hyperfollow_store_links_snapshot.json`
-- All-release store verification captured: **2026-06-20T03:26:53.167725+00:00**
+- All-release store verification captured: **2026-06-20T03:32:44.690677+00:00**
 - All-release store verification file: `data/store_verification_history.json`
-- Social executor history captured: **2026-06-20T03:26:52.039496Z**
+- Social executor history captured: **2026-06-20T03:32:43.692770Z**
 - Social executor history file: `data/social_execution_snapshot.json`
 - First single alignment audit captured: **2026-06-07T21:39:03.668040Z**
 - First single alignment audit file: `data/first_single_alignment_audit.json`
@@ -1019,7 +1028,7 @@
 }</script>
 
 <script type="application/json" id="embedded-promo-engine-status">{
-  "generated_at": "2026-06-20T03:26:53.594421+00:00",
+  "generated_at": "2026-06-20T03:32:45.149534+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -1207,15 +1216,15 @@
         "command": "python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impressions_7d=VALUE --refresh-admin"
       }
     ],
-    "live_metrics_updated_at": "2026-06-20T03:26:34.328Z",
+    "live_metrics_updated_at": "2026-06-20T03:32:26.045Z",
     "metrics_history": {
       "snapshot_count": 11,
-      "updated_at": "2026-06-20T03:26:52.548658Z",
+      "updated_at": "2026-06-20T03:32:44.131684Z",
       "latest_date": "2026-06-20",
       "latest": {
         "date": "2026-06-20",
-        "captured_at": "2026-06-20T03:26:52.548658Z",
-        "live_metrics_updated_at": "2026-06-20T03:26:34.328Z",
+        "captured_at": "2026-06-20T03:32:44.131684Z",
+        "live_metrics_updated_at": "2026-06-20T03:32:26.045Z",
         "youtube": {
           "subscribers": 6,
           "total_views": 251,
@@ -1302,7 +1311,7 @@
     },
     "social_execution_summary": {
       "ok": true,
-      "updated_at": "2026-06-20T03:26:52.039496Z",
+      "updated_at": "2026-06-20T03:32:43.692770Z",
       "http_status": 200,
       "execution_count": 4,
       "posted_count": 0,
@@ -1324,7 +1333,7 @@
           "status": "blocked",
           "reason": "tiktok_credentials_missing",
           "attempts": 0,
-          "updated_at": "2026-06-20T03:15:10.782Z",
+          "updated_at": "2026-06-20T03:30:10.829Z",
           "source": "cron",
           "post_url": "",
           "error_summary": ""
@@ -1335,7 +1344,7 @@
           "status": "blocked",
           "reason": "not_approved",
           "attempts": 0,
-          "updated_at": "2026-06-20T03:15:10.422Z",
+          "updated_at": "2026-06-20T03:30:10.484Z",
           "source": "cron",
           "post_url": "",
           "error_summary": ""
@@ -1346,7 +1355,7 @@
           "status": "blocked",
           "reason": "not_approved",
           "attempts": 0,
-          "updated_at": "2026-06-20T03:15:10.083Z",
+          "updated_at": "2026-06-20T03:30:10.158Z",
           "source": "cron",
           "post_url": "",
           "error_summary": ""
@@ -1357,7 +1366,7 @@
           "status": "blocked",
           "reason": "not_approved",
           "attempts": 0,
-          "updated_at": "2026-06-20T03:15:09.745Z",
+          "updated_at": "2026-06-20T03:30:09.817Z",
           "source": "cron",
           "post_url": "",
           "error_summary": ""
@@ -1370,7 +1379,7 @@
           "status": "blocked",
           "reason": "not_approved",
           "attempts": 0,
-          "updated_at": "2026-06-20T03:15:10.422Z",
+          "updated_at": "2026-06-20T03:30:10.484Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "",
@@ -1385,7 +1394,7 @@
           "status": "blocked",
           "reason": "not_approved",
           "attempts": 0,
-          "updated_at": "2026-06-20T03:15:10.083Z",
+          "updated_at": "2026-06-20T03:30:10.158Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "",
@@ -1400,7 +1409,7 @@
           "status": "blocked",
           "reason": "not_approved",
           "attempts": 0,
-          "updated_at": "2026-06-20T03:15:09.745Z",
+          "updated_at": "2026-06-20T03:30:09.817Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "",
@@ -1417,7 +1426,7 @@
           "status": "blocked",
           "reason": "tiktok_credentials_missing",
           "attempts": 0,
-          "updated_at": "2026-06-20T03:15:10.782Z",
+          "updated_at": "2026-06-20T03:30:10.829Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "",
@@ -1431,11 +1440,11 @@
     },
     "social_scheduler_dry_run": {
       "ok": true,
-      "updated_at": "2026-06-20T03:26:52.449320Z",
+      "updated_at": "2026-06-20T03:32:44.030289Z",
       "http_status": 200,
       "auth_method": "bearer",
-      "requested_scheduled_time": "2026-06-20T03:26:52.121784Z",
-      "checked_at": "2026-06-20T03:26:52.121Z",
+      "requested_scheduled_time": "2026-06-20T03:32:43.770700Z",
+      "checked_at": "2026-06-20T03:32:43.770Z",
       "dry_run": true,
       "due_count": 4,
       "result_count": 4,
@@ -1458,7 +1467,7 @@
           "reason": "not_approved",
           "post_type": "",
           "attempts": 0,
-          "updated_at": "2026-06-20T03:26:52.566Z",
+          "updated_at": "2026-06-20T03:32:44.205Z",
           "source": "dry-run",
           "error_summary": ""
         },
@@ -1469,7 +1478,7 @@
           "reason": "not_approved",
           "post_type": "",
           "attempts": 0,
-          "updated_at": "2026-06-20T03:26:52.570Z",
+          "updated_at": "2026-06-20T03:32:44.208Z",
           "source": "dry-run",
           "error_summary": ""
         },
@@ -1480,7 +1489,7 @@
           "reason": "not_approved",
           "post_type": "",
           "attempts": 0,
-          "updated_at": "2026-06-20T03:26:52.573Z",
+          "updated_at": "2026-06-20T03:32:44.212Z",
           "source": "dry-run",
           "error_summary": ""
         },
@@ -1491,7 +1500,7 @@
           "reason": "tiktok_credentials_missing",
           "post_type": "",
           "attempts": 0,
-          "updated_at": "2026-06-20T03:26:52.576Z",
+          "updated_at": "2026-06-20T03:32:44.215Z",
           "source": "dry-run",
           "error_summary": ""
         }
@@ -1503,10 +1512,10 @@
       "available": true,
       "safe_mode": true,
       "finalized": true,
-      "finished_at": "2026-06-20T03:26:53.569609Z",
-      "duration_seconds": 20.17,
-      "command_count": 25,
-      "passed": 25,
+      "finished_at": "2026-06-20T03:32:45.122989Z",
+      "duration_seconds": 19.93,
+      "command_count": 26,
+      "passed": 26,
       "failed": 0,
       "allowed_failures": 0,
       "failed_commands": [],
@@ -1618,14 +1627,14 @@
       "stale": 1,
       "missing": 0,
       "checked_no_change": 0,
-      "checked_at": "2026-06-20T03:26:53.594421+00:00"
+      "checked_at": "2026-06-20T03:32:45.149534+00:00"
     },
     "sources": [
       {
         "name": "release_status",
         "path": "data/distrokid_release_status.json",
         "status": "fresh",
-        "age_hours": 66.0,
+        "age_hours": 66.1,
         "max_age_hours": 72,
         "timestamp": "2026-06-17T09:25:00+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin; update data/distrokid_release_status.json when a public URL is verified."
@@ -1634,7 +1643,7 @@
         "name": "scheduled_posts",
         "path": "admin/future-posts.json",
         "status": "fresh",
-        "age_hours": 2.0,
+        "age_hours": 2.1,
         "max_age_hours": 72,
         "timestamp": "2026-06-20T01:28:46.696230+00:00",
         "refresh_command": "python3 scripts/sync_future_posts.py"
@@ -1645,14 +1654,14 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T03:26:52.512639+00:00",
+        "timestamp": "2026-06-20T03:32:44.094197+00:00",
         "refresh_command": "python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
         "name": "published_log",
         "path": "admin/content/Published_Log.csv",
         "status": "stale",
-        "age_hours": 302.8,
+        "age_hours": 302.9,
         "max_age_hours": 168,
         "timestamp": "2026-06-07T12:36:37.141276+00:00",
         "refresh_command": "Preview Worker export with python3 scripts/export_social_executions.py --dry-run; after review run python3 scripts/export_social_executions.py --refresh-admin. For manual posts, log the public URL with scripts/log_manual_distribution.py.",
@@ -1670,7 +1679,7 @@
         "name": "manual_metrics",
         "path": "data/manual_social_stats.json",
         "status": "fresh",
-        "age_hours": 2.8,
+        "age_hours": 2.9,
         "max_age_hours": 72,
         "timestamp": "2026-06-20T00:37:40.066733+00:00",
         "refresh_command": "Update data/manual_social_stats.json with latest manual metrics."
@@ -1681,7 +1690,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T03:26:34.328000+00:00",
+        "timestamp": "2026-06-20T03:32:26.045000+00:00",
         "refresh_command": "python3 scripts/capture_live_metrics.py"
       },
       {
@@ -1690,7 +1699,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T03:26:52.548658+00:00",
+        "timestamp": "2026-06-20T03:32:44.131684+00:00",
         "refresh_command": "python3 scripts/update_metrics_history.py --refresh-admin"
       },
       {
@@ -1699,7 +1708,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T03:26:50.536369+00:00",
+        "timestamp": "2026-06-20T03:32:42.257237+00:00",
         "refresh_command": "python3 scripts/capture_executor_readiness.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -1708,7 +1717,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T03:26:53.594421+00:00",
+        "timestamp": "2026-06-20T03:32:45.149534+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin"
       },
       {
@@ -1717,7 +1726,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T03:26:52.039496+00:00",
+        "timestamp": "2026-06-20T03:32:43.692770+00:00",
         "refresh_command": "python3 scripts/capture_social_executions.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -1726,7 +1735,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T03:26:52.449320+00:00",
+        "timestamp": "2026-06-20T03:32:44.030289+00:00",
         "refresh_command": "python3 scripts/capture_scheduler_dry_run.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -1735,7 +1744,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T03:26:53.570040+00:00",
+        "timestamp": "2026-06-20T03:32:45.123415+00:00",
         "refresh_command": "python3 scripts/refresh_promo_admin.py"
       },
       {
@@ -1744,7 +1753,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T03:26:53.106459+00:00",
+        "timestamp": "2026-06-20T03:32:44.633550+00:00",
         "refresh_command": "python3 scripts/capture_github_workflow_status.py && python3 scripts/update_promo_engine_status.py"
       }
     ],
@@ -1896,7 +1905,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T03:26:39.355049Z",
+            "updated_at": "2026-06-20T03:32:31.098275Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
           }
         },
@@ -1907,7 +1916,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T03:26:39.723316Z",
+            "updated_at": "2026-06-20T03:32:31.470445Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
           }
         }
@@ -2009,7 +2018,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T03:26:44.899728Z",
+            "updated_at": "2026-06-20T03:32:36.633334Z",
             "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
           }
         },
@@ -2031,7 +2040,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T03:26:50.374286Z",
+            "updated_at": "2026-06-20T03:32:42.110190Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
           }
         }
@@ -2162,7 +2171,7 @@
 }</script>
 
 <script type="application/json" id="embedded-promo-queue-plan">{
-  "generated_at": "2026-06-19T23:26:52.512639-04:00",
+  "generated_at": "2026-06-19T23:32:44.094197-04:00",
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
     "release_status": "data/distrokid_release_status.json"
@@ -2241,7 +2250,7 @@
   },
   "readiness_audit": {
     "source": "data/executor_readiness_snapshot.json",
-    "updated_at": "2026-06-20T03:26:50.536369Z",
+    "updated_at": "2026-06-20T03:32:42.257237Z",
     "ok": true,
     "counts": {
       "blocked": 1,
@@ -2358,7 +2367,7 @@
 
 
 <script type="application/json" id="embedded-promo-operations-packet">{
-  "generated_at": "2026-06-20T03:26:53.234323Z",
+  "generated_at": "2026-06-20T03:32:44.754478Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -2742,11 +2751,11 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "Apple Music",
-        "checked_at": "2026-06-20T03:26:39.355049Z",
+        "checked_at": "2026-06-20T03:32:31.098275Z",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T03:26:39.355049Z",
+          "updated_at": "2026-06-20T03:32:31.098275Z",
           "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
         },
         "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -2769,11 +2778,11 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "HyperFollow",
-        "checked_at": "2026-06-20T03:26:39.723316Z",
+        "checked_at": "2026-06-20T03:32:31.470445Z",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T03:26:39.723316Z",
+          "updated_at": "2026-06-20T03:32:31.470445Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
         },
         "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -2823,11 +2832,11 @@
       "context": {
         "release": "Analog Myth",
         "service": "Apple Music",
-        "checked_at": "2026-06-20T03:26:44.899728Z",
+        "checked_at": "2026-06-20T03:32:36.633334Z",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T03:26:44.899728Z",
+          "updated_at": "2026-06-20T03:32:36.633334Z",
           "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
         },
         "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -2877,11 +2886,11 @@
       "context": {
         "release": "Analog Myth",
         "service": "HyperFollow",
-        "checked_at": "2026-06-20T03:26:50.374286Z",
+        "checked_at": "2026-06-20T03:32:42.110190Z",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T03:26:50.374286Z",
+          "updated_at": "2026-06-20T03:32:42.110190Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
         },
         "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -3043,7 +3052,7 @@
 
 <script type="text/plain" id="embedded-promo-operations-report"># Promo Operations Packet - Lily Roo
 
-Generated: 2026-06-20T03:26:53.234323Z
+Generated: 2026-06-20T03:32:44.754478Z
 
 ## Summary
 - Actions: **18**
@@ -3120,12 +3129,12 @@ Generated: 2026-06-20T03:26:53.234323Z
 - **[medium] Re-check Twelve Dollars on Apple Music**
   - Why: Public store links should be checked until DistroKid exposes them.
   - Detail: Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release.
-  - Latest snapshot checked: `2026-06-20T03:26:39.355049Z`
+  - Latest snapshot checked: `2026-06-20T03:32:31.098275Z`
   - Command: `python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/apple_music_release_snapshot.json'`
 - **[medium] Re-check Twelve Dollars on HyperFollow**
   - Why: Public store links should be checked until DistroKid exposes them.
   - Detail: Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release.
-  - Latest snapshot checked: `2026-06-20T03:26:39.723316Z`
+  - Latest snapshot checked: `2026-06-20T03:32:31.470445Z`
   - Command: `python3 scripts/capture_hyperfollow_store_links.py --url 'https://distrokid.com/hyperfollow/lilyroo/twelve-dollars' --out 'data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json'`
 - **[medium] Re-check Analog Myth on Spotify**
   - Why: Public store links should be checked as the July 1 release approaches.
@@ -3135,7 +3144,7 @@ Generated: 2026-06-20T03:26:53.234323Z
 - **[medium] Re-check Analog Myth on Apple Music**
   - Why: Public store links should be checked as the July 1 release approaches.
   - Detail: Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release.
-  - Latest snapshot checked: `2026-06-20T03:26:44.899728Z`
+  - Latest snapshot checked: `2026-06-20T03:32:36.633334Z`
   - Command: `python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/apple_music_release_snapshot.json'`
 - **[medium] Re-check Analog Myth on YouTube Music**
   - Why: Public store links should be checked as the July 1 release approaches.
@@ -3151,7 +3160,7 @@ Generated: 2026-06-20T03:26:53.234323Z
 
 <script type="text/plain" id="embedded-manual-metric-collection"># Manual Metric Collection - Lily Roo
 
-Generated: 2026-06-20T03:26:53.464917Z
+Generated: 2026-06-20T03:32:45.014437Z
 
 Pending fields: **11**
 
@@ -3256,7 +3265,7 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
 
 
 <script type="application/json" id="embedded-platform-repair-status">{
-  "generated_at": "2026-06-20T03:26:53.440396Z",
+  "generated_at": "2026-06-20T03:32:44.963565Z",
   "safe_mode": true,
   "source": {
     "promo_operations_packet": "data/promo_operations_packet.json",
@@ -3284,7 +3293,7 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
       "status": "blocked",
       "reason": "tiktok_credentials_missing",
       "attempts": 0,
-      "updated_at": "2026-06-20T03:15:10.782Z",
+      "updated_at": "2026-06-20T03:30:10.829Z",
       "error_summary": "",
       "repair_action": "Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok public posting approval is false. Local secret source is also missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Complete TikTok OAuth/public posting setup locally, then push secrets and refresh Admin.",
       "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
@@ -3365,7 +3374,7 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
 
 
 <script type="application/json" id="embedded-approval-runway">{
-  "generated_at": "2026-06-20T03:26:53.261108Z",
+  "generated_at": "2026-06-20T03:32:44.781525Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -3436,7 +3445,7 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
 
 <script type="text/plain" id="embedded-approval-runway-report"># Approval Runway - Lily Roo
 
-Generated: 2026-06-20T03:26:53.261108Z
+Generated: 2026-06-20T03:32:44.781525Z
 
 ## Summary
 - Drafts needing review: **3**
@@ -3473,7 +3482,7 @@ Generated: 2026-06-20T03:26:53.261108Z
 
 
 <script type="application/json" id="embedded-subscriber-cta-audit">{
-  "generated_at": "2026-06-20T03:26:53.317532Z",
+  "generated_at": "2026-06-20T03:32:44.833395Z",
   "safe_mode": true,
   "source": {
     "promo_queue_plan": "data/promo_queue_plan.json",
@@ -3539,7 +3548,7 @@ Generated: 2026-06-20T03:26:53.261108Z
 
 <script type="text/plain" id="embedded-subscriber-cta-audit-report"># Subscriber CTA Audit - Lily Roo
 
-Generated: 2026-06-20T03:26:53.317532Z
+Generated: 2026-06-20T03:32:44.833395Z
 
 ## Summary
 - Draft posts: **3**
@@ -3573,7 +3582,7 @@ Generated: 2026-06-20T03:26:53.317532Z
 
 
 <script type="application/json" id="embedded-monetization-activation-plan">{
-  "generated_at": "2026-06-20T03:26:53.367332Z",
+  "generated_at": "2026-06-20T03:32:44.885331Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -3668,7 +3677,7 @@ Generated: 2026-06-20T03:26:53.317532Z
 
 <script type="text/plain" id="embedded-monetization-activation-report"># Monetization Activation Plan - Lily Roo
 
-Generated: 2026-06-20T03:26:53.367332Z
+Generated: 2026-06-20T03:32:44.885331Z
 
 ## Summary
 - Current subscribers: **6 / 1000**
@@ -3710,7 +3719,7 @@ Generated: 2026-06-20T03:26:53.367332Z
 
 
 <script type="application/json" id="embedded-backlog-reschedule-preview">{
-  "generated_at": "2026-06-20T12:26:53.203523+09:00",
+  "generated_at": "2026-06-20T12:32:44.726289+09:00",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -3767,7 +3776,7 @@ Generated: 2026-06-20T03:26:53.367332Z
 
 <script type="text/plain" id="embedded-backlog-reschedule-preview-report"># Backlog Reschedule Preview - Lily Roo
 
-Generated: 2026-06-20T12:26:53.203523+09:00
+Generated: 2026-06-20T12:32:44.726289+09:00
 
 ## Summary
 - Approved backlog rows: **1**
@@ -3801,7 +3810,7 @@ Generated: 2026-06-20T12:26:53.203523+09:00
 
 <script type="text/plain" id="embedded-platform-repair-report"># Platform Repair Status - Lily Roo
 
-Generated: 2026-06-20T03:26:53.440396Z
+Generated: 2026-06-20T03:32:44.963565Z
 
 ## Summary
 - Platform fixes: **1**
@@ -3837,7 +3846,7 @@ Generated: 2026-06-20T03:26:53.440396Z
 
 
 <script type="application/json" id="embedded-manual-distribution-packet">{
-  "generated_at": "2026-06-20T03:26:53.342811Z",
+  "generated_at": "2026-06-20T03:32:44.859646Z",
   "safe_mode": true,
   "source": {
     "promo_queue_plan": "data/promo_queue_plan.json",
@@ -3997,7 +4006,7 @@ Generated: 2026-06-20T03:26:53.440396Z
 
 <script type="text/plain" id="embedded-manual-distribution-report"># Manual Distribution Packet - Lily Roo
 
-Generated: 2026-06-20T03:26:53.342811Z
+Generated: 2026-06-20T03:32:44.859646Z
 
 ## Summary
 - Manual-ready posts: **2**
@@ -4057,7 +4066,7 @@ Generated: 2026-06-20T03:26:53.342811Z
 
 
 <script type="application/json" id="embedded-manual-metric-collection-packet">{
-  "generated_at": "2026-06-20T03:26:53.464917Z",
+  "generated_at": "2026-06-20T03:32:45.014437Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -4710,7 +4719,7 @@ Generated: 2026-06-20T03:26:53.342811Z
 
 
 <script type="application/json" id="embedded-scheduled-approval-packet">{
-  "generated_at": "2026-06-20T03:26:53.288959Z",
+  "generated_at": "2026-06-20T03:32:44.807611Z",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -5026,7 +5035,7 @@ Generated: 2026-06-20T03:26:53.342811Z
 
 <script type="text/plain" id="embedded-scheduled-approval-report"># Scheduled Approval Packet - Lily Roo
 
-Generated: 2026-06-20T03:26:53.288959Z
+Generated: 2026-06-20T03:32:44.807611Z
 
 ## Summary
 - Approval blockers: **3**
@@ -5110,7 +5119,7 @@ Generated: 2026-06-20T03:26:53.288959Z
 
 
 <script type="application/json" id="embedded-promotion-blocker-ledger">{
-  "generated_at": "2026-06-20T03:26:53.490843Z",
+  "generated_at": "2026-06-20T03:32:45.042577Z",
   "safe_mode": true,
   "summary": {
     "open_blocker_count": 12,
@@ -5420,7 +5429,7 @@ Generated: 2026-06-20T03:26:53.288959Z
 
 <script type="text/plain" id="embedded-promotion-blocker-ledger-report"># Promotion Blocker Ledger - Lily Roo
 
-Generated: 2026-06-20T03:26:53.490843Z
+Generated: 2026-06-20T03:32:45.042577Z
 
 ## Summary
 - Open blockers: **12**
@@ -5533,7 +5542,7 @@ Generated: 2026-06-20T03:26:53.490843Z
 
 
 <script type="application/json" id="embedded-human-handoff-packet">{
-  "generated_at": "2026-06-20T03:26:53.516419Z",
+  "generated_at": "2026-06-20T03:32:45.067398Z",
   "safe_mode": true,
   "source": {
     "promotion_blocker_ledger": "data/promotion_blocker_ledger.json",
@@ -5896,7 +5905,7 @@ Generated: 2026-06-20T03:26:53.490843Z
 
 <script type="text/plain" id="embedded-human-handoff-report"># Human Handoff Packet - Lily Roo
 
-Generated: 2026-06-20T03:26:53.516419Z
+Generated: 2026-06-20T03:32:45.067398Z
 
 ## Summary
 - Open handoff tasks: **10**
@@ -5980,7 +5989,7 @@ Generated: 2026-06-20T03:26:53.516419Z
 
 
 <script type="application/json" id="embedded-promo-consistency-audit">{
-  "generated_at": "2026-06-20T03:26:53.540733Z",
+  "generated_at": "2026-06-20T03:32:45.093199Z",
   "safe_mode": true,
   "summary": {
     "check_count": 19,
@@ -6218,7 +6227,7 @@ Generated: 2026-06-20T03:26:53.516419Z
 
 <script type="text/plain" id="embedded-promo-consistency-audit-report"># Promo Consistency Audit - Lily Roo
 
-Generated: 2026-06-20T03:26:53.540733Z
+Generated: 2026-06-20T03:32:45.093199Z
 
 ## Summary
 - Status: **pass**
@@ -6273,7 +6282,7 @@ Generated: 2026-06-20T03:26:53.540733Z
 
 
 <script type="application/json" id="embedded-tiktok-setup-preflight">{
-  "generated_at": "2026-06-20T03:26:53.416395Z",
+  "generated_at": "2026-06-20T03:32:44.938032Z",
   "safe_mode": true,
   "source": {
     "local_secret_source": "secrets/social_api.env",
@@ -6348,7 +6357,7 @@ Generated: 2026-06-20T03:26:53.540733Z
 
 <script type="text/plain" id="embedded-tiktok-setup-preflight-report"># TikTok Setup Preflight - Lily Roo
 
-Generated: 2026-06-20T03:26:53.416395Z
+Generated: 2026-06-20T03:32:44.938032Z
 
 ## Summary
 - Status: **blocked**
@@ -6386,6 +6395,178 @@ Generated: 2026-06-20T03:26:53.416395Z
 - This preflight does not push secrets, approve posts, publish posts, or write credentials.
 - Secret values are redacted; only presence and readiness booleans are recorded.
 - Public posting approval must be confirmed before TikTok auto-posting is treated as ready.</script>
+
+
+<script type="application/json" id="embedded-tiktok-repair-runbook">{
+  "generated_at": "2026-06-20T03:32:44.988781Z",
+  "safe_mode": true,
+  "status": "blocked",
+  "source": {
+    "tiktok_setup_preflight": "data/tiktok_setup_preflight.json",
+    "platform_repair_status": "data/platform_repair_status.json",
+    "executor_readiness": "data/executor_readiness_snapshot.json",
+    "wrangler_config": "workers/social-executor/wrangler.jsonc"
+  },
+  "summary": {
+    "phase_count": 6,
+    "step_count": 6,
+    "blocked_step_count": 6,
+    "blocked_step_ids": [
+      "collect_local_oauth_credentials",
+      "confirm_public_posting_approval",
+      "preview_worker_secret_push",
+      "apply_worker_secret_push",
+      "recapture_readiness",
+      "clear_backlog_gate"
+    ],
+    "required_secret_names": [
+      "TIKTOK_CLIENT_KEY",
+      "TIKTOK_CLIENT_SECRET",
+      "TIKTOK_REFRESH_TOKEN"
+    ],
+    "local_missing_secrets": [
+      "TIKTOK_CLIENT_KEY",
+      "TIKTOK_CLIENT_SECRET",
+      "TIKTOK_REFRESH_TOKEN"
+    ],
+    "worker_missing_secrets": [
+      "TIKTOK_CLIENT_KEY",
+      "TIKTOK_CLIENT_SECRET",
+      "TIKTOK_REFRESH_TOKEN"
+    ],
+    "public_posting_approved": false,
+    "ready_to_apply_worker_secrets": false,
+    "ready_to_clear_backlog_gate": false,
+    "repair_row_count": 1,
+    "repair_post_id": "FP-AUTO-264",
+    "blocked_apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
+    "apply_command": ""
+  },
+  "steps": [
+    {
+      "id": "collect_local_oauth_credentials",
+      "phase": "Collect credentials",
+      "status": "blocked",
+      "title": "Add TikTok OAuth credentials locally",
+      "detail": "Populate the local social API env file with the required TikTok refresh credential names. Values stay local and are never written to generated reports.",
+      "command": "",
+      "blocked_by": [
+        "TIKTOK_CLIENT_KEY",
+        "TIKTOK_CLIENT_SECRET",
+        "TIKTOK_REFRESH_TOKEN"
+      ]
+    },
+    {
+      "id": "confirm_public_posting_approval",
+      "phase": "Confirm approval",
+      "status": "blocked",
+      "title": "Confirm public posting approval",
+      "detail": "Set TikTok public posting approval only after Lily Roo is approved for public TikTok posting and PUBLIC_TO_EVERYONE is intentionally allowed.",
+      "command": "",
+      "blocked_by": [
+        "TIKTOK_PUBLIC_POSTING_APPROVED"
+      ]
+    },
+    {
+      "id": "preview_worker_secret_push",
+      "phase": "Preview push",
+      "status": "blocked",
+      "title": "Dry-run worker secret push",
+      "detail": "Preview the exact secret names that would be pushed to the worker before any apply command is available.",
+      "command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+      "blocked_by": [
+        "TIKTOK_CLIENT_KEY",
+        "TIKTOK_CLIENT_SECRET",
+        "TIKTOK_REFRESH_TOKEN"
+      ]
+    },
+    {
+      "id": "apply_worker_secret_push",
+      "phase": "Apply push",
+      "status": "blocked",
+      "title": "Push worker secrets after review",
+      "detail": "Run the apply command only after local credentials exist and public posting approval is confirmed.",
+      "command": "",
+      "blocked_by": [
+        "TIKTOK_CLIENT_KEY",
+        "TIKTOK_CLIENT_SECRET",
+        "TIKTOK_REFRESH_TOKEN",
+        "TIKTOK_PUBLIC_POSTING_APPROVED"
+      ]
+    },
+    {
+      "id": "recapture_readiness",
+      "phase": "Verify repair",
+      "status": "blocked",
+      "title": "Recapture executor readiness",
+      "detail": "After applying secrets, recapture worker readiness and rebuild the admin packets so platform repair, blocker, handoff, and backlog state agree.",
+      "command": "python3 scripts/refresh_promo_admin.py",
+      "blocked_by": [
+        "apply_worker_secret_push"
+      ]
+    },
+    {
+      "id": "clear_backlog_gate",
+      "phase": "Clear gate",
+      "status": "blocked",
+      "title": "Clear TikTok backlog gate",
+      "detail": "Once readiness is clean, rerun the backlog reschedule preview and apply the approved row only if the gate reports safe apply available.",
+      "command": "",
+      "blocked_by": [
+        "worker_refresh_credentials",
+        "public_posting_approval"
+      ]
+    }
+  ],
+  "redaction": "Secret values are never written to this runbook; only required names, missing names, and presence-derived readiness are recorded.",
+  "guardrails": [
+    "This runbook does not push secrets, approve public posting, publish posts, or clear backlog rows.",
+    "Use the dry-run secret push before any apply command.",
+    "Do not run a TikTok backlog apply until fresh admin evidence shows TikTok readiness is clean."
+  ]
+}</script>
+
+
+<script type="text/plain" id="embedded-tiktok-repair-runbook-report"># TikTok Repair Runbook - Lily Roo
+
+Generated: 2026-06-20T03:32:44.988781Z
+
+## Summary
+- Status: **blocked**
+- Phases: **6**
+- Steps: **6**
+- Blocked steps: **6**
+- Public posting approved: **False**
+- Ready to apply worker secrets: **False**
+- Ready to clear backlog gate: **False**
+
+## Sequence
+- **Collect credentials - Add TikTok OAuth credentials locally**: `blocked`
+  - Populate the local social API env file with the required TikTok refresh credential names. Values stay local and are never written to generated reports.
+  - Blocked by: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN
+- **Confirm approval - Confirm public posting approval**: `blocked`
+  - Set TikTok public posting approval only after Lily Roo is approved for public TikTok posting and PUBLIC_TO_EVERYONE is intentionally allowed.
+  - Blocked by: TIKTOK_PUBLIC_POSTING_APPROVED
+- **Preview push - Dry-run worker secret push**: `blocked`
+  - Preview the exact secret names that would be pushed to the worker before any apply command is available.
+  - Blocked by: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN
+  - Command: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
+- **Apply push - Push worker secrets after review**: `blocked`
+  - Run the apply command only after local credentials exist and public posting approval is confirmed.
+  - Blocked by: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN, TIKTOK_PUBLIC_POSTING_APPROVED
+- **Verify repair - Recapture executor readiness**: `blocked`
+  - After applying secrets, recapture worker readiness and rebuild the admin packets so platform repair, blocker, handoff, and backlog state agree.
+  - Blocked by: apply_worker_secret_push
+  - Command: `python3 scripts/refresh_promo_admin.py`
+- **Clear gate - Clear TikTok backlog gate**: `blocked`
+  - Once readiness is clean, rerun the backlog reschedule preview and apply the approved row only if the gate reports safe apply available.
+  - Blocked by: worker_refresh_credentials, public_posting_approval
+
+## Guardrails
+- This runbook does not push secrets, approve public posting, publish posts, or clear backlog rows.
+- Use the dry-run secret push before any apply command.
+- Do not run a TikTok backlog apply until fresh admin evidence shows TikTok readiness is clean.
+- Secret values are never written to this runbook; only required names, missing names, and presence-derived readiness are recorded.</script>
 
 <script>
   const ADMIN_AUTH_KEY='lilyroo_admin_password_v1';
@@ -6512,6 +6693,7 @@ Generated: 2026-06-20T03:26:53.416395Z
     'reports/weekly-social-report.md':'embedded-weekly-report',
     'reports/promo-consistency-audit.md':'embedded-promo-consistency-audit-report',
     'reports/tiktok-setup-preflight.md':'embedded-tiktok-setup-preflight-report',
+    'reports/tiktok-repair-runbook.md':'embedded-tiktok-repair-runbook-report',
     'reports/promo-operations-packet.md':'embedded-promo-operations-report',
     'reports/human-handoff-packet.md':'embedded-human-handoff-report',
     'reports/promotion-blocker-ledger.md':'embedded-promotion-blocker-ledger-report',
@@ -6531,6 +6713,7 @@ Generated: 2026-06-20T03:26:53.416395Z
     'data/promo_engine_status.json':'embedded-promo-engine-status',
     'data/promo_consistency_audit.json':'embedded-promo-consistency-audit',
     'data/tiktok_setup_preflight.json':'embedded-tiktok-setup-preflight',
+    'data/tiktok_repair_runbook.json':'embedded-tiktok-repair-runbook',
     'data/promo_queue_plan.json':'embedded-promo-queue-plan',
     'data/promo_operations_packet.json':'embedded-promo-operations-packet',
     'data/human_handoff_packet.json':'embedded-human-handoff-packet',
@@ -8345,6 +8528,54 @@ Generated: 2026-06-20T03:26:53.416395Z
     root.innerHTML=`${intro}${rows}${more}`;
   }
 
+  function renderTikTokRepairRunbook(runbook){
+    const root=document.getElementById('tiktok-repair-runbook');
+    if(!root) return;
+    const steps=Array.isArray(runbook?.steps)?runbook.steps:[];
+    const summary=runbook?.summary||{};
+    if(!steps.length){
+      root.innerHTML='<div class="muted">No TikTok repair runbook is available yet.</div>';
+      return;
+    }
+    const blocked=steps.filter(step=>step.status==='blocked');
+    const display=(blocked.length?blocked:steps).slice(0,6);
+    const meta=[
+      `${Number(summary.step_count||steps.length)} steps`,
+      `${Number(summary.blocked_step_count||blocked.length)} blocked`,
+      `apply secrets: ${summary.ready_to_apply_worker_secrets?'ready':'blocked'}`,
+      `backlog gate: ${summary.ready_to_clear_backlog_gate?'ready':'blocked'}`
+    ].join(' - ');
+    const intro=`<div class="queue-item">
+      <div class="queue-top">
+        <div>
+          <div class="queue-title">TikTok repair is ${escapeHtml(runbook.status||'unknown')}</div>
+          <div class="queue-meta">${escapeHtml(meta)}</div>
+          ${summary.repair_post_id?`<div class="queue-meta">Repair row: ${escapeHtml(summary.repair_post_id)}</div>`:''}
+          ${summary.public_posting_approved!==undefined?`<div class="queue-meta">Public posting approved: ${escapeHtml(summary.public_posting_approved)}</div>`:''}
+          ${summary.blocked_apply_command?`<div class="queue-meta">Blocked apply command: ${escapeHtml(summary.blocked_apply_command)}</div>`:''}
+          ${summary.apply_command?`<div class="queue-meta">Apply after review: ${escapeHtml(summary.apply_command)}</div>`:''}
+        </div>
+        <span class="status-chip ${Number(summary.blocked_step_count||0)?'warn':'ok'}">${escapeHtml(runbook.status||'review')}</span>
+      </div>
+    </div>`;
+    const rows=display.map(step=>{
+      const blockers=Array.isArray(step.blocked_by)&&step.blocked_by.length?`<div class="queue-meta">Blocked by: ${escapeHtml(step.blocked_by.join(', '))}</div>`:'';
+      return `<div class="queue-item">
+        <div class="queue-top">
+          <div>
+            <div class="queue-title">${escapeHtml(step.phase||'Phase')} - ${escapeHtml(step.title||step.id||'Repair step')}</div>
+            <div class="queue-meta">${escapeHtml(step.detail||'')}</div>
+            ${blockers}
+            ${step.command?`<div class="queue-meta">Command: ${escapeHtml(step.command)}</div>`:''}
+          </div>
+          <span class="status-chip ${step.status==='pass'||step.status==='ready'?'ok':step.status==='blocked'?'warn':'neutral'}">${escapeHtml(step.status||'review')}</span>
+        </div>
+      </div>`;
+    }).join('');
+    const more=steps.length>display.length?`<div class="queue-meta">${escapeHtml(steps.length-display.length)} more runbook step${steps.length-display.length===1?'':'s'} in data/tiktok_repair_runbook.json.</div>`:'';
+    root.innerHTML=`${intro}${rows}${more}`;
+  }
+
   function renderPromoQueuePlan(plan){
     const root=document.getElementById('promo-queue-plan');
     if(!root) return;
@@ -8490,7 +8721,7 @@ Generated: 2026-06-20T03:26:53.416395Z
 
   async function loadReportsDashboard(){
     if(!document.getElementById('reports-period')) return;
-    const [md,publishedCsv,queuePayload,releaseStatus,promoHealth,promoConsistency,tiktokPreflight,promoPlan,promoOps,humanHandoff,promotionBlockers,manualMetricPacket,approvalRunway,scheduledApproval,subscriberCtaAudit,manualDistribution,activationPlan,backlogPreview,platformRepair,readinessSnapshot,metrics,executions]=await Promise.all([
+    const [md,publishedCsv,queuePayload,releaseStatus,promoHealth,promoConsistency,tiktokPreflight,tiktokRunbook,promoPlan,promoOps,humanHandoff,promotionBlockers,manualMetricPacket,approvalRunway,scheduledApproval,subscriberCtaAudit,manualDistribution,activationPlan,backlogPreview,platformRepair,readinessSnapshot,metrics,executions]=await Promise.all([
       fetchTextOrEmpty(localPath('/admin/reports/weekly-social-report.md')),
       fetchTextOrEmpty(localPath('/admin/content/Published_Log.csv')),
       fetchJsonOr(localPath('/admin/future-posts.json'),{}),
@@ -8498,6 +8729,7 @@ Generated: 2026-06-20T03:26:53.416395Z
       fetchJsonOr(localPath('/data/promo_engine_status.json'),{}),
       fetchJsonOr(localPath('/data/promo_consistency_audit.json'),{}),
       fetchJsonOr(localPath('/data/tiktok_setup_preflight.json'),{}),
+      fetchJsonOr(localPath('/data/tiktok_repair_runbook.json'),{}),
       fetchJsonOr(localPath('/data/promo_queue_plan.json'),{}),
       fetchJsonOr(localPath('/data/promo_operations_packet.json'),{}),
       fetchJsonOr(localPath('/data/human_handoff_packet.json'),{}),
@@ -8539,6 +8771,7 @@ Generated: 2026-06-20T03:26:53.416395Z
     renderBacklogReschedulePreview(backlogPreview);
     renderPlatformRepairStatus(platformRepair);
     renderTikTokSetupPreflight(tiktokPreflight);
+    renderTikTokRepairRunbook(tiktokRunbook);
     renderPromoQueuePlan(promoPlan);
     renderPipelineHealth(queuePayload,readiness,report,metrics);
     renderNextPosts(queuePayload,executions);
