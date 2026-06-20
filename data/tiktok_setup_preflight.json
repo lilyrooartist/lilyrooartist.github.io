@@ -1,8 +1,9 @@
 {
-  "generated_at": "2026-06-20T12:13:01.034997Z",
+  "generated_at": "2026-06-20T12:22:19.295861Z",
   "safe_mode": true,
   "source": {
     "local_secret_source": "secrets/social_api.env",
+    "api_strategy": "data/tiktok_api_strategy.json",
     "handoff_template": "data/tiktok_secret_handoff_template.env",
     "executor_readiness": "data/executor_readiness_snapshot.json",
     "platform_repair_status": "data/platform_repair_status.json",
@@ -10,6 +11,8 @@
   },
   "summary": {
     "status": "blocked",
+    "posting_mode": "api",
+    "api_strategy_confirmed": true,
     "check_count": 6,
     "blocked_count": 4,
     "ready_to_push_worker_secrets": false,
@@ -75,6 +78,20 @@
       "data/platform_repair_status.json no longer lists TikTok as blocked by missing credentials."
     ],
     "redaction": "Secret values are never written here; only required names, missing names, and presence booleans are recorded."
+  },
+  "api_strategy": {
+    "posting_mode": "api",
+    "decision_source": "user_confirmed",
+    "decision_note": "TikTok posting should be connected through APIs, not handled as manual-only or deferred.",
+    "public_posting_approval_confirmed": false,
+    "credential_values_present": false,
+    "required_before_posting": [
+      "TIKTOK_CLIENT_KEY",
+      "TIKTOK_CLIENT_SECRET",
+      "TIKTOK_REFRESH_TOKEN",
+      "TIKTOK_PUBLIC_POSTING_APPROVED=true"
+    ],
+    "guardrail": "This records the chosen integration path only; it does not contain secrets, approve public posting, or allow TikTok posts to publish."
   },
   "checks": [
     {

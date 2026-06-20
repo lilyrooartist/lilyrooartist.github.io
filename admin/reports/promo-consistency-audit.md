@@ -1,6 +1,6 @@
 # Promo Consistency Audit - Lily Roo
 
-Generated: 2026-06-20T12:13:01.708968Z
+Generated: 2026-06-20T12:22:41.182064Z
 
 ## Summary
 - Status: **pass**
@@ -30,8 +30,8 @@ Generated: 2026-06-20T12:13:01.708968Z
   - TikTok preflight local missing secrets should match the platform repair row.
 - **tiktok_preflight_worker_missing_matches_platform_repair**: `pass`
   - TikTok preflight worker missing secrets should match the platform repair row.
-- **scheduler_blocked_matches_executor_attention**: `pass`
-  - Scheduler dry-run blocked count should match executor attention count.
+- **scheduler_blocked_ids_present_in_executor_attention**: `pass`
+  - Scheduler dry-run blockers should be represented in executor attention; executor history may include stale rows that are now would-post.
 - **manual_distribution_count_matches_ledger**: `pass`
   - Manual distribution packet should match manual distribution blockers in the ledger.
 - **manual_distribution_handoff_count_matches_packet**: `pass`

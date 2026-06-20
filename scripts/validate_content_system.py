@@ -26,6 +26,7 @@ PROMO_REFRESH_WORKFLOW_STATUS = ROOT / "data" / "promo_refresh_workflow_status.j
 PROMO_CONSISTENCY_AUDIT = ROOT / "data" / "promo_consistency_audit.json"
 TIKTOK_SETUP_PREFLIGHT = ROOT / "data" / "tiktok_setup_preflight.json"
 TIKTOK_REPAIR_RUNBOOK = ROOT / "data" / "tiktok_repair_runbook.json"
+TIKTOK_API_STRATEGY = ROOT / "data" / "tiktok_api_strategy.json"
 TIKTOK_SECRET_HANDOFF_TEMPLATE = ROOT / "data" / "tiktok_secret_handoff_template.env"
 PROMO_OPERATIONS_PACKET = ROOT / "data" / "promo_operations_packet.json"
 PUBLISHED_LOG_RECONCILIATION = ROOT / "data" / "published_log_reconciliation.json"
@@ -473,6 +474,7 @@ def validate_generated_outputs(failures):
         checks = preflight.get("checks") or []
         source = preflight.get("source") or {}
         credential_handoff = preflight.get("credential_handoff") or {}
+        api_strategy = preflight.get("api_strategy") or {}
         blocked_count = sum(1 for check in checks if check.get("status") == "blocked")
         check_names = {check.get("name") for check in checks}
         required_checks = {
@@ -484,10 +486,13 @@ def validate_generated_outputs(failures):
             "admin_refresh_after_repair",
         }
         template_text = TIKTOK_SECRET_HANDOFF_TEMPLATE.read_text(encoding="utf-8") if TIKTOK_SECRET_HANDOFF_TEMPLATE.exists() else ""
-        required_source = {"local_secret_source", "handoff_template", "executor_readiness", "platform_repair_status", "wrangler_config"}
+        required_source = {"local_secret_source", "api_strategy", "handoff_template", "executor_readiness", "platform_repair_status", "wrangler_config"}
         if (
             preflight.get("safe_mode") is True
             and summary.get("status") in {"ready", "blocked"}
+            and summary.get("posting_mode") == "api"
+            and summary.get("api_strategy_confirmed") is True
+            and api_strategy.get("posting_mode") == "api"
             and summary.get("check_count") == len(checks)
             and summary.get("blocked_count") == blocked_count
             and required_checks <= check_names
@@ -498,6 +503,8 @@ def validate_generated_outputs(failures):
             and credential_handoff.get("handoff_template_path") == "data/tiktok_secret_handoff_template.env"
             and set(credential_handoff.get("handoff_template_required_names") or []) >= {"TIKTOK_CLIENT_KEY", "TIKTOK_CLIENT_SECRET", "TIKTOK_REFRESH_TOKEN", "TIKTOK_PUBLIC_POSTING_APPROVED", "TIKTOK_DEFAULT_PRIVACY"}
             and TIKTOK_SECRET_HANDOFF_TEMPLATE.exists()
+            and TIKTOK_API_STRATEGY.exists()
+            and "Posting mode selected: API integration." in template_text
             and "TIKTOK_CLIENT_KEY=" in template_text
             and "TIKTOK_CLIENT_SECRET=" in template_text
             and "TIKTOK_REFRESH_TOKEN=" in template_text
@@ -540,6 +547,8 @@ def validate_generated_outputs(failures):
         if (
             runbook.get("safe_mode") is True
             and runbook.get("status") in {"blocked", "ready_for_apply", "ready_for_backlog_clearance"}
+            and summary.get("posting_mode") == "api"
+            and summary.get("api_strategy_confirmed") is True
             and summary.get("step_count") == len(steps)
             and summary.get("blocked_step_count") == blocked_count
             and summary.get("phase_count") == len(phases)

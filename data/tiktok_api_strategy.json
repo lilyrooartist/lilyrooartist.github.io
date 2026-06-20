@@ -1,0 +1,14 @@
+{
+  "posting_mode": "api",
+  "decision_source": "user_confirmed",
+  "decision_note": "TikTok posting should be connected through APIs, not handled as manual-only or deferred.",
+  "public_posting_approval_confirmed": false,
+  "credential_values_present": false,
+  "required_before_posting": [
+    "TIKTOK_CLIENT_KEY",
+    "TIKTOK_CLIENT_SECRET",
+    "TIKTOK_REFRESH_TOKEN",
+    "TIKTOK_PUBLIC_POSTING_APPROVED=true"
+  ],
+  "guardrail": "This records the chosen integration path only; it does not contain secrets, approve public posting, or allow TikTok posts to publish."
+}

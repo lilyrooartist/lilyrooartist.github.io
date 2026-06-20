@@ -12,6 +12,7 @@ from social_exec_common import REPO_ROOT, SOCIAL_ENV, load_env
 ROOT = REPO_ROOT
 READINESS = ROOT / "data" / "executor_readiness_snapshot.json"
 PLATFORM_REPAIR = ROOT / "data" / "platform_repair_status.json"
+API_STRATEGY = ROOT / "data" / "tiktok_api_strategy.json"
 WRANGLER_CONFIG = ROOT / "workers" / "social-executor" / "wrangler.jsonc"
 HANDOFF_TEMPLATE = ROOT / "data" / "tiktok_secret_handoff_template.env"
 OUT = ROOT / "data" / "tiktok_setup_preflight.json"
@@ -25,6 +26,7 @@ OPTIONAL_ACCESS_TOKEN = "TIKTOK_ACCESS_TOKEN"
 def write_handoff_template() -> None:
     lines = [
         "# Lily Roo TikTok secret handoff template",
+        "# Posting mode selected: API integration.",
         "# Fill values locally in secrets/social_api.env, not in this generated file.",
         "# Keep TIKTOK_PUBLIC_POSTING_APPROVED=false until public posting approval is confirmed.",
         "TIKTOK_CLIENT_KEY=",
@@ -71,7 +73,9 @@ def build_payload() -> dict:
     write_handoff_template()
     readiness = read_json(READINESS, {})
     platform_repair = read_json(PLATFORM_REPAIR, {})
+    strategy = read_json(API_STRATEGY, {})
     tiktok_readiness = (((readiness.get("payload") or {}).get("platforms") or {}).get("tiktok") or {})
+    posting_mode = strategy.get("posting_mode") or "api"
     presence = local_secret_presence()
     local_missing = [name for name in REQUIRED_REFRESH_SECRETS if not presence.get(name)]
     worker_missing = tiktok_readiness.get("missing_secrets") or []
@@ -159,6 +163,7 @@ def build_payload() -> dict:
         "safe_mode": True,
         "source": {
             "local_secret_source": str(SOCIAL_ENV.relative_to(ROOT.parent)),
+            "api_strategy": str(API_STRATEGY.relative_to(ROOT)),
             "handoff_template": str(HANDOFF_TEMPLATE.relative_to(ROOT)),
             "executor_readiness": str(READINESS.relative_to(ROOT)),
             "platform_repair_status": str(PLATFORM_REPAIR.relative_to(ROOT)),
@@ -166,6 +171,8 @@ def build_payload() -> dict:
         },
         "summary": {
             "status": "ready" if ready_to_post else "blocked",
+            "posting_mode": posting_mode,
+            "api_strategy_confirmed": posting_mode == "api",
             "check_count": len(preflight_checks),
             "blocked_count": len(blocked),
             "ready_to_push_worker_secrets": ready_to_push,
@@ -180,6 +187,7 @@ def build_payload() -> dict:
             "platform_repair_rows": len(repair_rows),
         },
         "credential_handoff": credential_handoff,
+        "api_strategy": strategy,
         "checks": preflight_checks,
         "redaction": "Secret values are never written to this preflight; only presence booleans are recorded.",
     }
@@ -194,6 +202,8 @@ def build_markdown(payload: dict) -> str:
         "",
         "## Summary",
         f"- Status: **{summary['status']}**",
+        f"- Posting mode: **{summary['posting_mode']}**",
+        f"- API strategy confirmed: **{summary['api_strategy_confirmed']}**",
         f"- Checks: **{summary['check_count']}**",
         f"- Blocked checks: **{summary['blocked_count']}**",
         f"- Ready to push worker secrets: **{summary['ready_to_push_worker_secrets']}**",

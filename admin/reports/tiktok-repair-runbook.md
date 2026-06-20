@@ -1,9 +1,11 @@
 # TikTok Repair Runbook - Lily Roo
 
-Generated: 2026-06-20T12:13:01.099937Z
+Generated: 2026-06-20T12:22:19.358164Z
 
 ## Summary
 - Status: **blocked**
+- Posting mode: **api**
+- API strategy confirmed: **True**
 - Phases: **6**
 - Steps: **6**
 - Blocked steps: **6**

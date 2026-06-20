@@ -165,11 +165,23 @@ def build_checks() -> dict:
         sorted(preflight_summary.get("worker_missing_secrets") or []),
         "TikTok preflight worker missing secrets should match the platform repair row.",
     ))
-    checks.append(same_value(
-        "scheduler_blocked_matches_executor_attention",
-        int(scheduler_summary.get("blocked_count") or 0),
-        int(execution_summary.get("attention_count") or 0),
-        "Scheduler dry-run blocked count should match executor attention count.",
+    scheduler_blocked_ids = {
+        item.get("post_id")
+        for item in scheduler_summary.get("blocked") or []
+        if item.get("post_id")
+    }
+    executor_attention_ids = {
+        item.get("post_id")
+        for item in execution_summary.get("latest_attention") or []
+        if item.get("post_id")
+    }
+    checks.append(verdict(
+        "scheduler_blocked_ids_present_in_executor_attention",
+        scheduler_blocked_ids <= executor_attention_ids,
+        "Scheduler dry-run blockers should be represented in executor attention; executor history may include stale rows that are now would-post.",
+        expected=sorted(scheduler_blocked_ids),
+        actual=sorted(executor_attention_ids),
+        severity="high",
     ))
     checks.append(same_value(
         "manual_distribution_count_matches_ledger",

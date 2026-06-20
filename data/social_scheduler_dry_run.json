@@ -1,40 +1,43 @@
 {
   "ok": true,
-  "updated_at": "2026-06-20T12:13:00.039050Z",
+  "updated_at": "2026-06-20T12:22:18.215909Z",
   "source": "lilyroo-social-scheduler-dry-run",
   "url": "https://www.lilyroo.com/api/social/scheduler/dry-run",
   "http_status": 200,
   "error": null,
   "auth_method": "bearer",
-  "requested_scheduled_time": "2026-06-20T12:12:59.957689Z",
+  "requested_scheduled_time": "2026-06-20T12:22:18.131175Z",
   "dry_run": true,
-  "checked_at": "2026-06-20T12:12:59.957Z",
+  "checked_at": "2026-06-20T12:22:18.131Z",
   "summary": {
     "due_count": 4,
     "result_count": 4,
-    "would_post_count": 0,
-    "blocked_count": 4,
+    "would_post_count": 1,
+    "blocked_count": 3,
     "status_counts": {
-      "blocked": 4
+      "blocked": 2,
+      "skipped": 1,
+      "would_post": 1
     },
     "platform_counts": {
       "Instagram": 1,
       "TikTok": 2,
       "YouTube Community": 1
     },
-    "would_post": [],
-    "blocked": [
+    "would_post": [
       {
         "post_id": "FP-AUTO-258",
         "platform": "Instagram",
-        "status": "blocked",
-        "reason": "not_approved",
-        "post_type": "",
+        "status": "would_post",
+        "reason": "",
+        "post_type": "image",
         "attempts": 0,
-        "updated_at": "2026-06-20T12:13:00.227Z",
-        "source": "dry-run",
+        "updated_at": "",
+        "source": "",
         "error_summary": ""
-      },
+      }
+    ],
+    "blocked": [
       {
         "post_id": "FP-AUTO-259",
         "platform": "TikTok",
@@ -42,18 +45,18 @@
         "reason": "not_approved",
         "post_type": "",
         "attempts": 0,
-        "updated_at": "2026-06-20T12:13:00.230Z",
+        "updated_at": "2026-06-20T12:22:18.444Z",
         "source": "dry-run",
         "error_summary": ""
       },
       {
         "post_id": "FP-AUTO-261",
         "platform": "YouTube Community",
-        "status": "blocked",
-        "reason": "not_approved",
+        "status": "skipped",
+        "reason": "manual_only",
         "post_type": "",
         "attempts": 0,
-        "updated_at": "2026-06-20T12:13:00.232Z",
+        "updated_at": "2026-06-20T12:22:18.446Z",
         "source": "dry-run",
         "error_summary": ""
       },
@@ -64,7 +67,7 @@
         "reason": "tiktok_credentials_missing",
         "post_type": "",
         "attempts": 0,
-        "updated_at": "2026-06-20T12:13:00.235Z",
+        "updated_at": "2026-06-20T12:22:18.451Z",
         "source": "dry-run",
         "error_summary": ""
       }

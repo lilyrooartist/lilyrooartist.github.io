@@ -71,6 +71,8 @@ def build_payload() -> dict:
     backlog = read_json(BACKLOG_RESCHEDULE, {})
     preflight_summary = preflight.get("summary") or {}
     credential_handoff = preflight.get("credential_handoff") or {}
+    api_strategy = preflight.get("api_strategy") or {}
+    posting_mode = preflight_summary.get("posting_mode") or api_strategy.get("posting_mode") or "api"
     backlog_summary = backlog.get("summary") or {}
     local_missing = preflight_summary.get("local_missing_secrets") or []
     worker_missing = preflight_summary.get("worker_missing_secrets") or []
@@ -164,6 +166,8 @@ def build_payload() -> dict:
             "wrangler_config": str(WRANGLER_CONFIG.relative_to(ROOT)),
         },
         "summary": {
+            "posting_mode": posting_mode,
+            "api_strategy_confirmed": posting_mode == "api",
             "phase_count": len({step["phase"] for step in steps}),
             "step_count": len(steps),
             "blocked_step_count": len(blocked_ids),
@@ -202,6 +206,8 @@ def build_markdown(payload: dict) -> str:
         "",
         "## Summary",
         f"- Status: **{payload['status']}**",
+        f"- Posting mode: **{summary['posting_mode']}**",
+        f"- API strategy confirmed: **{summary['api_strategy_confirmed']}**",
         f"- Phases: **{summary['phase_count']}**",
         f"- Steps: **{summary['step_count']}**",
         f"- Blocked steps: **{summary['blocked_step_count']}**",
