@@ -306,6 +306,22 @@ def validate_generated_outputs(failures):
                 ok("promo operations packet includes dry-run backlog reschedule action")
             else:
                 fail("promo_operations_packet.json missing dry-run backlog reschedule action", failures)
+        scheduled_batch_actions = [
+            action for action in actions
+            if action.get("kind") == "scheduled_approval_batch"
+        ]
+        scheduled_packet = json.loads(SCHEDULED_APPROVAL_PACKET.read_text(encoding="utf-8")) if SCHEDULED_APPROVAL_PACKET.exists() else {}
+        if int((scheduled_packet.get("summary") or {}).get("approval_blocker_count") or 0):
+            if (
+                scheduled_batch_actions
+                and summary.get("scheduled_approval_batches") == len(scheduled_batch_actions)
+                and all("--dry-run" in (action.get("command") or "") for action in scheduled_batch_actions)
+                and all("--dry-run" not in ((action.get("context") or {}).get("apply_command") or "") for action in scheduled_batch_actions)
+                and all((action.get("context") or {}).get("approval_blocker_count") for action in scheduled_batch_actions)
+            ):
+                ok("promo operations packet includes scheduled approval batch preview")
+            else:
+                fail("promo_operations_packet.json missing scheduled approval batch preview", failures)
         approval_review_actions = [
             action for action in actions
             if action.get("kind") == "approval_review"

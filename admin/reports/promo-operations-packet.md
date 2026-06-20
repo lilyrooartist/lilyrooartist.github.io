@@ -1,15 +1,16 @@
 # Promo Operations Packet - Lily Roo
 
-Generated: 2026-06-20T00:53:17.811782Z
+Generated: 2026-06-20T00:57:58.769814Z
 
 ## Summary
-- Actions: **19**
+- Actions: **20**
 - User review: **3**
 - Platform fixes: **3**
+- Scheduled approval batches: **1**
 - Store checks: **7**
 - Manual metric updates: **5**
 - Safe apply commands ready: **0**
-- Urgency: **blocked: 1, high: 4, low: 5, medium: 9**
+- Urgency: **blocked: 1, high: 5, low: 5, medium: 9**
 
 ## Phase Counts
 - Fill manual metrics: **5**
@@ -17,6 +18,7 @@ Generated: 2026-06-20T00:53:17.811782Z
 - Reschedule approved backlog: **1**
 - Review blocked drafts: **1**
 - Review draft posts: **2**
+- Review scheduled approvals: **1**
 - Verify music sites: **7**
 
 ## Top Actions
@@ -29,6 +31,13 @@ Generated: 2026-06-20T00:53:17.811782Z
   - Public posting approved: `False`
   - Command: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --dry-run`
   - Approve after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --refresh-admin`
+
+### Review scheduled approvals
+- **[high] Preview scheduled approval batch**
+  - Why: Scheduled executor records are blocked until reviewed approval is applied.
+  - Detail: Review all copy, assets, links, and platform readiness first. Apply only after human approval.
+  - Command: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-259 FP-AUTO-261 --dry-run`
+  - Apply after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-259 FP-AUTO-261 --refresh-admin`
 
 ### Reschedule approved backlog
 - **[high] Preview reschedule for approved past-due posts**
@@ -92,11 +101,6 @@ Generated: 2026-06-20T00:53:17.811782Z
   - Detail: Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release.
   - Latest snapshot checked: `2026-06-19T23:43:44.750461Z`
   - Command: `python3 scripts/search_spotify_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/spotify_release_snapshot.json'`
-- **[medium] Re-check Analog Myth on Apple Music**
-  - Why: Public store links should be checked as the July 1 release approaches.
-  - Detail: Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release.
-  - Latest snapshot checked: `2026-06-19T23:43:46.535618Z`
-  - Command: `python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/apple_music_release_snapshot.json'`
 
 ## Guardrails
 - This packet does not publish, approve, apply, or post anything.

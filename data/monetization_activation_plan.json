@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T00:53:17.930987Z",
+  "generated_at": "2026-06-20T00:57:58.899497Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -86,14 +86,14 @@
       }
     },
     {
-      "label": "Current operations next action: Preview reschedule for approved past-due posts",
+      "label": "Current operations next action: Preview scheduled approval batch",
       "phase": "Operations packet",
       "status": "waiting_for_user",
-      "detail": "Approved posts are past due; preview a new schedule before any apply step.",
-      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
-      "after_review_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --apply --refresh-admin",
+      "detail": "Scheduled executor records are blocked until reviewed approval is applied.",
+      "command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-259 FP-AUTO-261 --dry-run",
+      "after_review_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-259 FP-AUTO-261 --refresh-admin",
       "context": {
-        "kind": "backlog_reschedule",
+        "kind": "scheduled_approval_batch",
         "urgency": "high"
       }
     }

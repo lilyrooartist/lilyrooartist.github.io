@@ -1,16 +1,18 @@
 {
-  "generated_at": "2026-06-20T00:53:17.811782Z",
+  "generated_at": "2026-06-20T00:57:58.769814Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
     "promo_queue_plan": "data/promo_queue_plan.json",
     "social_executions": "data/social_execution_snapshot.json",
-    "executor_readiness": "data/executor_readiness_snapshot.json"
+    "executor_readiness": "data/executor_readiness_snapshot.json",
+    "scheduled_approval": "data/scheduled_approval_packet.json"
   },
   "summary": {
-    "action_count": 19,
+    "action_count": 20,
     "user_review": 3,
     "platform_fixes": 3,
+    "scheduled_approval_batches": 1,
     "store_checks": 7,
     "manual_metric_updates": 5,
     "backlog_reschedules": 1,
@@ -23,32 +25,34 @@
       "Reschedule approved backlog": 1,
       "Review blocked drafts": 1,
       "Review draft posts": 2,
+      "Review scheduled approvals": 1,
       "Verify music sites": 7
     },
     "urgencies": {
       "blocked": 1,
-      "high": 4,
+      "high": 5,
       "low": 5,
       "medium": 9
     },
     "next_action": {
-      "label": "Preview reschedule for approved past-due posts",
-      "kind": "backlog_reschedule",
-      "priority": 0,
-      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
+      "label": "Preview scheduled approval batch",
+      "kind": "scheduled_approval_batch",
+      "priority": -1,
+      "command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-259 FP-AUTO-261 --dry-run",
       "context": {
-        "approved_backlog_posts": 3,
-        "approved_upcoming_posts": 3,
-        "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --apply --refresh-admin",
-        "note": "Preview first. Apply refuses rows with known executor blockers unless blockers are fixed or --allow-blocked is used after deliberate review."
+        "approval_blocker_count": 3,
+        "auto_count": 2,
+        "manual_count": 1,
+        "apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-259 FP-AUTO-261 --refresh-admin",
+        "note": "Review all copy, assets, links, and platform readiness first. Apply only after human approval."
       },
-      "phase": "Reschedule approved backlog",
+      "phase": "Review scheduled approvals",
       "urgency": "high",
-      "urgency_reason": "Approved posts are past due; preview a new schedule before any apply step.",
+      "urgency_reason": "Scheduled executor records are blocked until reviewed approval is applied.",
       "status": "waiting_for_user",
       "sort_key": [
         1,
-        0,
+        -1,
         0
       ]
     }
@@ -102,7 +106,29 @@
       "sort_key": [
         0,
         40,
-        4
+        5
+      ]
+    },
+    {
+      "label": "Preview scheduled approval batch",
+      "kind": "scheduled_approval_batch",
+      "priority": -1,
+      "command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-259 FP-AUTO-261 --dry-run",
+      "context": {
+        "approval_blocker_count": 3,
+        "auto_count": 2,
+        "manual_count": 1,
+        "apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-259 FP-AUTO-261 --refresh-admin",
+        "note": "Review all copy, assets, links, and platform readiness first. Apply only after human approval."
+      },
+      "phase": "Review scheduled approvals",
+      "urgency": "high",
+      "urgency_reason": "Scheduled executor records are blocked until reviewed approval is applied.",
+      "status": "waiting_for_user",
+      "sort_key": [
+        1,
+        -1,
+        0
       ]
     },
     {
@@ -123,7 +149,7 @@
       "sort_key": [
         1,
         0,
-        0
+        1
       ]
     },
     {
@@ -152,7 +178,7 @@
       "sort_key": [
         1,
         1,
-        1
+        2
       ]
     },
     {
@@ -196,7 +222,7 @@
       "sort_key": [
         1,
         1,
-        2
+        3
       ]
     },
     {
@@ -227,7 +253,7 @@
       "sort_key": [
         1,
         1,
-        3
+        4
       ]
     },
     {
@@ -264,7 +290,7 @@
       "sort_key": [
         2,
         15,
-        5
+        6
       ]
     },
     {
@@ -301,7 +327,7 @@
       "sort_key": [
         2,
         15,
-        6
+        7
       ]
     },
     {
@@ -328,7 +354,7 @@
       "sort_key": [
         2,
         20,
-        7
+        8
       ]
     },
     {
@@ -355,7 +381,7 @@
       "sort_key": [
         2,
         20,
-        8
+        9
       ]
     },
     {
@@ -382,7 +408,7 @@
       "sort_key": [
         2,
         20,
-        9
+        10
       ]
     },
     {
@@ -409,7 +435,7 @@
       "sort_key": [
         2,
         20,
-        10
+        11
       ]
     },
     {
@@ -436,7 +462,7 @@
       "sort_key": [
         2,
         20,
-        11
+        12
       ]
     },
     {
@@ -463,7 +489,7 @@
       "sort_key": [
         2,
         20,
-        12
+        13
       ]
     },
     {
@@ -490,7 +516,7 @@
       "sort_key": [
         2,
         20,
-        13
+        14
       ]
     },
     {
@@ -517,7 +543,7 @@
       "sort_key": [
         3,
         30,
-        14
+        15
       ]
     },
     {
@@ -545,7 +571,7 @@
       "sort_key": [
         3,
         30,
-        15
+        16
       ]
     },
     {
@@ -575,7 +601,7 @@
       "sort_key": [
         3,
         30,
-        16
+        17
       ]
     },
     {
@@ -603,7 +629,7 @@
       "sort_key": [
         3,
         30,
-        17
+        18
       ]
     },
     {
@@ -631,7 +657,7 @@
       "sort_key": [
         3,
         30,
-        18
+        19
       ]
     }
   ]

@@ -11,6 +11,7 @@ PROMO_STATUS = ROOT / "data" / "promo_engine_status.json"
 PROMO_PLAN = ROOT / "data" / "promo_queue_plan.json"
 SOCIAL_EXECUTIONS = ROOT / "data" / "social_execution_snapshot.json"
 EXECUTOR_READINESS = ROOT / "data" / "executor_readiness_snapshot.json"
+SCHEDULED_APPROVAL = ROOT / "data" / "scheduled_approval_packet.json"
 OUT = ROOT / "data" / "promo_operations_packet.json"
 REPORT = ROOT / "admin" / "reports" / "promo-operations-packet.md"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
@@ -51,6 +52,8 @@ def phase_for(action: dict) -> str:
     kind = action.get("kind")
     if kind == "backlog_reschedule":
         return "Reschedule approved backlog"
+    if kind == "scheduled_approval_batch":
+        return "Review scheduled approvals"
     if kind == "platform_fix":
         return "Repair executor"
     if kind == "apply_approved":
@@ -72,6 +75,8 @@ def urgency_for(action: dict, now: datetime) -> tuple[str, str]:
     context = action.get("context") or {}
     if kind == "backlog_reschedule":
         return "high", "Approved posts are past due; preview a new schedule before any apply step."
+    if kind == "scheduled_approval_batch":
+        return "high", "Scheduled executor records are blocked until reviewed approval is applied."
     if kind == "platform_fix":
         return "high", "Platform executor needs repair before queued auto posts can publish."
     if kind == "apply_approved":
@@ -112,7 +117,7 @@ def enrich_actions(actions: list[dict], now: datetime) -> list[dict]:
         item["urgency_reason"] = reason
         if urgency == "blocked":
             item["status"] = "blocked"
-        elif action.get("kind") in {"approval_review", "manual_metrics", "backlog_reschedule"}:
+        elif action.get("kind") in {"approval_review", "manual_metrics", "backlog_reschedule", "scheduled_approval_batch"}:
             item["status"] = "waiting_for_user"
         elif action.get("kind") == "platform_fix":
             item["status"] = "needs_fix"
@@ -291,6 +296,30 @@ def apply_actions(plan):
     ]
 
 
+def scheduled_approval_batch_actions(packet):
+    summary = packet.get("summary") or {}
+    preview_command = summary.get("batch_preview_command") or ""
+    apply_command = summary.get("batch_apply_command") or ""
+    blocker_count = int(summary.get("approval_blocker_count") or 0)
+    if not blocker_count or not preview_command:
+        return []
+    return [
+        command_row(
+            "Preview scheduled approval batch",
+            preview_command,
+            "scheduled_approval_batch",
+            -1,
+            {
+                "approval_blocker_count": blocker_count,
+                "auto_count": int(summary.get("auto_count") or 0),
+                "manual_count": int(summary.get("manual_count") or 0),
+                "apply_command": apply_command,
+                "note": "Review all copy, assets, links, and platform readiness first. Apply only after human approval.",
+            },
+        )
+    ]
+
+
 def backlog_reschedule_actions(status):
     monetization = (status.get("kpi") or {}).get("monetization") or {}
     approved_backlog = int(monetization.get("approved_backlog_posts") or 0)
@@ -383,6 +412,7 @@ def build_markdown(packet):
         f"- Actions: **{packet['summary']['action_count']}**",
         f"- User review: **{packet['summary']['user_review']}**",
         f"- Platform fixes: **{packet['summary']['platform_fixes']}**",
+        f"- Scheduled approval batches: **{packet['summary']['scheduled_approval_batches']}**",
         f"- Store checks: **{packet['summary']['store_checks']}**",
         f"- Manual metric updates: **{packet['summary']['manual_metric_updates']}**",
         f"- Safe apply commands ready: **{packet['summary']['safe_apply_commands']}**",
@@ -489,8 +519,10 @@ def main() -> int:
     plan = read_json(PROMO_PLAN, {})
     executions = read_json(SOCIAL_EXECUTIONS, {})
     readiness = read_json(EXECUTOR_READINESS, {})
+    scheduled_approval = read_json(SCHEDULED_APPROVAL, {})
     actions = (
-        backlog_reschedule_actions(status)
+        scheduled_approval_batch_actions(scheduled_approval)
+        + backlog_reschedule_actions(status)
         + platform_fix_actions(status, executions, readiness)
         + apply_actions(plan)
         + approval_actions(plan, readiness)
@@ -502,6 +534,7 @@ def main() -> int:
         "action_count": len(actions),
         "user_review": sum(1 for action in actions if action["kind"] == "approval_review"),
         "platform_fixes": sum(1 for action in actions if action["kind"] == "platform_fix"),
+        "scheduled_approval_batches": sum(1 for action in actions if action["kind"] == "scheduled_approval_batch"),
         "store_checks": sum(1 for action in actions if action["kind"] == "store_verification"),
         "manual_metric_updates": sum(1 for action in actions if action["kind"] == "manual_metrics"),
         "backlog_reschedules": sum(1 for action in actions if action["kind"] == "backlog_reschedule"),
@@ -520,6 +553,7 @@ def main() -> int:
             "promo_queue_plan": str(PROMO_PLAN.relative_to(ROOT)),
             "social_executions": str(SOCIAL_EXECUTIONS.relative_to(ROOT)),
             "executor_readiness": str(EXECUTOR_READINESS.relative_to(ROOT)),
+            "scheduled_approval": str(SCHEDULED_APPROVAL.relative_to(ROOT)),
         },
         "summary": summary,
         "actions": actions,
