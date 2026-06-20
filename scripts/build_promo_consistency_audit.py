@@ -11,6 +11,7 @@ PROMO_STATUS = ROOT / "data" / "promo_engine_status.json"
 PROMO_OPERATIONS = ROOT / "data" / "promo_operations_packet.json"
 BLOCKER_LEDGER = ROOT / "data" / "promotion_blocker_ledger.json"
 HUMAN_HANDOFF = ROOT / "data" / "human_handoff_packet.json"
+HUMAN_HANDOFF_RESOLUTION_PREVIEW = ROOT / "data" / "human_handoff_resolution_preview.json"
 SCHEDULED_APPROVAL = ROOT / "data" / "scheduled_approval_packet.json"
 PLATFORM_REPAIR = ROOT / "data" / "platform_repair_status.json"
 TIKTOK_PREFLIGHT = ROOT / "data" / "tiktok_setup_preflight.json"
@@ -72,6 +73,7 @@ def build_checks() -> dict:
     operations = read_json(PROMO_OPERATIONS, {})
     ledger = read_json(BLOCKER_LEDGER, {})
     handoff = read_json(HUMAN_HANDOFF, {})
+    handoff_preview = read_json(HUMAN_HANDOFF_RESOLUTION_PREVIEW, {})
     scheduled = read_json(SCHEDULED_APPROVAL, {})
     platform = read_json(PLATFORM_REPAIR, {})
     tiktok_preflight = read_json(TIKTOK_PREFLIGHT, {})
@@ -85,8 +87,10 @@ def build_checks() -> dict:
     ledger_rows = ledger.get("rows") or []
     ledger_summary = ledger.get("summary") or {}
     handoff_summary = handoff.get("summary") or {}
+    handoff_preview_summary = handoff_preview.get("summary") or {}
     operations_summary = operations.get("summary") or {}
     status_health = status.get("health") or {}
+    status_preview = (status.get("kpi") or {}).get("handoff_resolution_preview") or {}
     execution_summary = executions.get("summary") or {}
     scheduler_summary = scheduler.get("summary") or {}
     preflight_summary = tiktok_preflight.get("summary") or {}
@@ -212,6 +216,57 @@ def build_checks() -> dict:
         handoff_projection,
         "Human handoff next-resolution projection should match the blocker ledger projection.",
     ))
+    handoff_task_ids = sorted(task.get("id") for task in handoff.get("tasks") or [] if task.get("id"))
+    handoff_preview_task_ids = sorted(preview.get("task_id") for preview in handoff_preview.get("previews") or [] if preview.get("task_id"))
+    checks.append(same_value(
+        "handoff_preview_task_alignment",
+        handoff_task_ids,
+        handoff_preview_task_ids,
+        "Human handoff preview should include one preview row for every handoff task.",
+    ))
+    checks.append(same_value(
+        "handoff_preview_worksheet_row_count_matches_handoff",
+        int(((handoff.get("resolution_worksheet") or {}).get("row_count")) or 0),
+        int(handoff_preview_summary.get("worksheet_row_count") or 0),
+        "Human handoff preview worksheet row count should match the handoff packet worksheet summary.",
+    ))
+    checks.append(same_value(
+        "handoff_preview_status_matches_status_kpi",
+        handoff_preview_summary.get("status_counts") or {},
+        status_preview.get("status_counts") or {},
+        "Promo status handoff preview KPI should mirror preview status counts.",
+    ))
+    checks.append(same_value(
+        "handoff_preview_counts_match_status_kpi",
+        {
+            "worksheet_row_count": int(handoff_preview_summary.get("worksheet_row_count") or 0),
+            "preview_count": int(handoff_preview_summary.get("preview_count") or 0),
+            "executed_preview_count": int(handoff_preview_summary.get("executed_preview_count") or 0),
+            "skipped_preview_count": int(handoff_preview_summary.get("skipped_preview_count") or 0),
+        },
+        {
+            "worksheet_row_count": int(status_preview.get("worksheet_row_count") or 0),
+            "preview_count": int(status_preview.get("preview_count") or 0),
+            "executed_preview_count": int(status_preview.get("executed_preview_count") or 0),
+            "skipped_preview_count": int(status_preview.get("skipped_preview_count") or 0),
+        },
+        "Promo status handoff preview KPI should mirror preview summary counts.",
+    ))
+    preview_next_action = (
+        "Review handoff preview health: "
+        f"{int(status_preview.get('ready_preview_count') or 0)} preview-clean, "
+        f"{int(status_preview.get('input_missing_count') or 0)} missing input, "
+        f"{int(status_preview.get('warning_preview_count') or 0)} warning; "
+        "see data/human_handoff_resolution_preview.json."
+    )
+    checks.append(verdict(
+        "handoff_preview_next_action_matches_status",
+        preview_next_action in (status.get("next_actions") or []),
+        "Promo status next actions should expose the handoff preview health summary.",
+        expected=preview_next_action,
+        actual=status.get("next_actions") or [],
+        severity="medium",
+    ))
     refresh_summary = refresh.get("summary") or {}
     required_failed = int(refresh_summary.get("required_failed") or 0)
     optional_failed = int(refresh_summary.get("optional_failed") or 0)
@@ -241,6 +296,7 @@ def build_checks() -> dict:
             "promo_operations_packet": str(PROMO_OPERATIONS.relative_to(ROOT)),
             "promotion_blocker_ledger": str(BLOCKER_LEDGER.relative_to(ROOT)),
             "human_handoff_packet": str(HUMAN_HANDOFF.relative_to(ROOT)),
+            "human_handoff_resolution_preview": str(HUMAN_HANDOFF_RESOLUTION_PREVIEW.relative_to(ROOT)),
             "scheduled_approval_packet": str(SCHEDULED_APPROVAL.relative_to(ROOT)),
             "platform_repair_status": str(PLATFORM_REPAIR.relative_to(ROOT)),
             "tiktok_setup_preflight": str(TIKTOK_PREFLIGHT.relative_to(ROOT)),

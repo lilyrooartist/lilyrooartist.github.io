@@ -1,10 +1,10 @@
 # Promo Consistency Audit - Lily Roo
 
-Generated: 2026-06-20T09:21:18.711099Z
+Generated: 2026-06-20T09:26:07.388197Z
 
 ## Summary
 - Status: **pass**
-- Checks: **19 / 19** passed
+- Checks: **24 / 24** passed
 - Failed checks: **0**
 - High severity failures: **0**
 - Medium severity failures: **0**
@@ -46,6 +46,16 @@ Generated: 2026-06-20T09:21:18.711099Z
   - Human handoff blocker summary should be copied from the blocker ledger.
 - **handoff_projection_matches_ledger_projection**: `pass`
   - Human handoff next-resolution projection should match the blocker ledger projection.
+- **handoff_preview_task_alignment**: `pass`
+  - Human handoff preview should include one preview row for every handoff task.
+- **handoff_preview_worksheet_row_count_matches_handoff**: `pass`
+  - Human handoff preview worksheet row count should match the handoff packet worksheet summary.
+- **handoff_preview_status_matches_status_kpi**: `pass`
+  - Promo status handoff preview KPI should mirror preview status counts.
+- **handoff_preview_counts_match_status_kpi**: `pass`
+  - Promo status handoff preview KPI should mirror preview summary counts.
+- **handoff_preview_next_action_matches_status**: `pass`
+  - Promo status next actions should expose the handoff preview health summary.
 - **refresh_run_required_steps_successful**: `pass`
   - Latest promo admin refresh should have no required failures; tolerated optional capture failures stay visible in the refresh run summary.
 
