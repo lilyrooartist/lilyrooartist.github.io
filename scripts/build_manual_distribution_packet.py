@@ -4,6 +4,7 @@ from __future__ import annotations
 import json
 import shlex
 import csv
+import re
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -17,6 +18,7 @@ REPORT = ROOT / "admin" / "reports" / "manual-distribution-packet.md"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
 YOUTUBE_CHANNEL_URL = "https://www.youtube.com/@lilyroo.artist"
 YOUTUBE_COMMUNITY_URL = "https://www.youtube.com/@lilyroo.artist/community"
+URL_RE = re.compile(r"https?://[^\s|]+")
 
 
 def read_json(path: Path, fallback):
@@ -65,6 +67,10 @@ def copy_block(post: dict) -> str:
     if post.get("reply_text"):
         parts.append(post.get("reply_text") or "")
     return "\n\n".join(part for part in parts if part)
+
+
+def links_in_text(value: str) -> list[str]:
+    return [match.group(0).rstrip(".,);]") for match in URL_RE.finditer(value or "")]
 
 
 def log_command(post_id: str, apply: bool = False) -> str:
@@ -123,6 +129,66 @@ def manual_posting_packet(post: dict, approved: str, logged: bool, distribution_
         "distribution_status": distribution_status,
         "next_action": next_action,
         "next_command": next_command,
+    }
+
+
+def docket_row(row: dict) -> dict:
+    posting = row.get("manual_posting_packet") or {}
+    paste_text = posting.get("paste_text") or row.get("copy_block") or ""
+    return {
+        "id": row.get("id") or "",
+        "platform": row.get("platform") or "",
+        "release": row.get("release") or "",
+        "scheduled_at": row.get("scheduled_at") or "",
+        "distribution_status": row.get("distribution_status") or "",
+        "subscriber_growth_score": row.get("subscriber_growth_score"),
+        "selected_cta_strength": row.get("selected_cta_strength") or "",
+        "posting_surface": posting.get("posting_surface") or "YouTube Studio Community",
+        "public_community_url": posting.get("public_community_url") or YOUTUBE_COMMUNITY_URL,
+        "paste_text": paste_text,
+        "asset_url": posting.get("asset_url") or row.get("asset_download_url") or "",
+        "destination_links": links_in_text(paste_text),
+        "approval_required": bool(posting.get("approval_required")),
+        "postable_now": bool(posting.get("postable_now")),
+        "logging_required": bool(posting.get("logging_required")),
+        "logged": bool(row.get("logged")),
+        "published_url": row.get("published_url") or "",
+        "next_action": posting.get("next_action") or "",
+        "next_command": posting.get("next_command") or "",
+        "approval_preview_command": row.get("approval_preview_command") or "",
+        "approval_command": row.get("approval_command") or "",
+        "log_preview_command": row.get("log_preview_command") or "",
+        "log_apply_command": row.get("log_apply_command") or "",
+        "log_effect": row.get("log_effect") or {},
+    }
+
+
+def manual_distribution_docket(rows: list[dict], summary: dict) -> dict:
+    review_rows = [row for row in rows if (row.get("manual_posting_packet") or {}).get("approval_required") and not row.get("logged")]
+    postable_rows = [row for row in rows if (row.get("manual_posting_packet") or {}).get("postable_now") and not row.get("logged")]
+    logged_rows = [row for row in rows if row.get("logged")]
+    status = "empty"
+    if postable_rows:
+        status = "postable_now"
+    elif review_rows:
+        status = "needs_review"
+    elif logged_rows:
+        status = "logged"
+    return {
+        "status": status,
+        "review_count": len(review_rows),
+        "postable_count": len(postable_rows),
+        "logged_count": len(logged_rows),
+        "review_queue": [docket_row(row) for row in review_rows],
+        "postable_now": [docket_row(row) for row in postable_rows],
+        "logged": [docket_row(row) for row in logged_rows],
+        "next_manual_action": summary.get("next_manual_action") or "none",
+        "public_community_url": summary.get("public_community_url") or YOUTUBE_COMMUNITY_URL,
+        "guardrails": [
+            "Manual posting happens in YouTube Studio Community, outside this repository.",
+            "Approve a row before posting it, then log only after the public URL exists.",
+            "Use the log preview command before applying a Published_Log.csv update.",
+        ],
     }
 
 
@@ -227,8 +293,50 @@ def build_markdown(payload: dict) -> str:
         f"- Unlogged manual posts: **{summary['unlogged_manual_count']}**",
         f"- Public URL logs still needed: **{summary['public_url_log_needed_count']}**",
         "",
-        "## Manual Posting Queue",
+        "## Manual Posting Docket",
     ]
+    docket = payload.get("manual_distribution_docket") or {}
+    lines.extend([
+        f"- Status: **{docket.get('status', 'unknown')}**",
+        f"- Needs review: **{docket.get('review_count', 0)}**",
+        f"- Postable now: **{docket.get('postable_count', 0)}**",
+        f"- Logged: **{docket.get('logged_count', 0)}**",
+        f"- Public community surface: {docket.get('public_community_url') or YOUTUBE_COMMUNITY_URL}",
+        "",
+        "### Needs Review",
+    ])
+    review_queue = docket.get("review_queue") or []
+    if review_queue:
+        for item in review_queue:
+            lines.append(f"- **{item['platform']} - {item['release']}** (`{item['id']}`)")
+            lines.append(f"  - Paste text: {item['paste_text']}")
+            lines.append(f"  - Asset: {item['asset_url']}")
+            if item.get("destination_links"):
+                lines.append(f"  - Destination links: {', '.join(item['destination_links'])}")
+            if item.get("approval_preview_command"):
+                lines.append(f"  - Preview approval: `{item['approval_preview_command']}`")
+            if item.get("approval_command"):
+                lines.append(f"  - Approve after review: `{item['approval_command']}`")
+    else:
+        lines.append("- None")
+    lines.extend([
+        "",
+        "### Postable Now",
+    ])
+    postable_now = docket.get("postable_now") or []
+    if postable_now:
+        for item in postable_now:
+            lines.append(f"- **{item['platform']} - {item['release']}** (`{item['id']}`)")
+            lines.append(f"  - Paste text: {item['paste_text']}")
+            lines.append(f"  - Asset: {item['asset_url']}")
+            lines.append(f"  - Log preview after posting: `{item['log_preview_command']}`")
+            lines.append(f"  - Log apply after posting: `{item['log_apply_command']}`")
+    else:
+        lines.append("- None")
+    lines.extend([
+        "",
+        "## Manual Posting Queue",
+    ])
     for row in payload["rows"]:
         lines.append(f"- **{row['platform']} - {row['release']}** (`{row['id']}`)")
         lines.append(f"  - Scheduled target: `{row['scheduled_at']}`")
@@ -294,6 +402,22 @@ def main() -> int:
     log_needed_rows = [row for row in rows if (row.get("log_effect") or {}).get("would_append")]
     review_rows = [row for row in unlogged_rows if (row.get("manual_posting_packet") or {}).get("approval_required")]
     postable_rows = [row for row in unlogged_rows if (row.get("manual_posting_packet") or {}).get("postable_now")]
+    summary = {
+        "manual_ready_count": len(rows),
+        "youtube_community_count": sum(1 for row in rows if row.get("platform") == "YouTube Community"),
+        "hard_cta_count": len(hard_cta),
+        "approved_manual_count": sum(1 for row in rows if str(row.get("approved") or "").lower() == "yes"),
+        "logged_manual_count": len(logged_rows),
+        "unlogged_manual_count": len(unlogged_rows),
+        "public_url_log_needed_count": len(log_needed_rows),
+        "ready_to_post_after_review_count": sum(1 for row in unlogged_rows if row.get("readiness_state") == "manual_only"),
+        "ready_for_manual_post_count": sum(1 for row in unlogged_rows if row.get("distribution_status") == "ready_for_manual_post"),
+        "waiting_for_review_count": sum(1 for row in unlogged_rows if row.get("distribution_status") == "waiting_for_review"),
+        "manual_review_required_count": len(review_rows),
+        "postable_now_count": len(postable_rows),
+        "next_manual_action": "review_and_approve" if review_rows else ("post_manually_then_log_url" if postable_rows else "none"),
+        "public_community_url": YOUTUBE_COMMUNITY_URL,
+    }
     payload = {
         "generated_at": now.isoformat().replace("+00:00", "Z"),
         "safe_mode": True,
@@ -302,22 +426,8 @@ def main() -> int:
             "approval_runway": str(APPROVAL_RUNWAY.relative_to(ROOT)),
             "published_log": str(PUBLISHED_LOG.relative_to(ROOT)),
         },
-        "summary": {
-            "manual_ready_count": len(rows),
-            "youtube_community_count": sum(1 for row in rows if row.get("platform") == "YouTube Community"),
-            "hard_cta_count": len(hard_cta),
-            "approved_manual_count": sum(1 for row in rows if str(row.get("approved") or "").lower() == "yes"),
-            "logged_manual_count": len(logged_rows),
-            "unlogged_manual_count": len(unlogged_rows),
-            "public_url_log_needed_count": len(log_needed_rows),
-            "ready_to_post_after_review_count": sum(1 for row in unlogged_rows if row.get("readiness_state") == "manual_only"),
-            "ready_for_manual_post_count": sum(1 for row in unlogged_rows if row.get("distribution_status") == "ready_for_manual_post"),
-            "waiting_for_review_count": sum(1 for row in unlogged_rows if row.get("distribution_status") == "waiting_for_review"),
-            "manual_review_required_count": len(review_rows),
-            "postable_now_count": len(postable_rows),
-            "next_manual_action": "review_and_approve" if review_rows else ("post_manually_then_log_url" if postable_rows else "none"),
-            "public_community_url": YOUTUBE_COMMUNITY_URL,
-        },
+        "summary": summary,
+        "manual_distribution_docket": manual_distribution_docket(rows, summary),
         "rows": rows,
     }
     OUT.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")

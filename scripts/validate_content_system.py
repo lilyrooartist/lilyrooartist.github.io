@@ -718,6 +718,10 @@ def validate_generated_outputs(failures):
         unlogged_rows = [row for row in rows if not row.get("logged")]
         review_rows = [row for row in unlogged_rows if (row.get("manual_posting_packet") or {}).get("approval_required")]
         postable_rows = [row for row in unlogged_rows if (row.get("manual_posting_packet") or {}).get("postable_now")]
+        docket = manual_packet.get("manual_distribution_docket") or {}
+        docket_review = docket.get("review_queue") or []
+        docket_postable = docket.get("postable_now") or []
+        docket_logged = docket.get("logged") or []
         if (
             manual_packet.get("safe_mode") is True
             and summary.get("manual_ready_count") == len(rows)
@@ -731,6 +735,17 @@ def validate_generated_outputs(failures):
             and summary.get("postable_now_count") == len(postable_rows)
             and summary.get("next_manual_action") in {"review_and_approve", "post_manually_then_log_url", "none"}
             and summary.get("public_community_url") == "https://www.youtube.com/@lilyroo.artist/community"
+            and docket.get("status") in {"needs_review", "postable_now", "logged", "empty"}
+            and docket.get("review_count") == len(review_rows)
+            and docket.get("postable_count") == len(postable_rows)
+            and docket.get("logged_count") == len(logged_rows)
+            and [item.get("id") for item in docket_review] == [row.get("id") for row in review_rows]
+            and [item.get("id") for item in docket_postable] == [row.get("id") for row in postable_rows]
+            and [item.get("id") for item in docket_logged] == [row.get("id") for row in logged_rows]
+            and docket.get("next_manual_action") == summary.get("next_manual_action")
+            and docket.get("public_community_url") == "https://www.youtube.com/@lilyroo.artist/community"
+            and all(item.get("paste_text") and item.get("asset_url") and item.get("destination_links") and item.get("approval_command") for item in docket_review)
+            and all(item.get("paste_text") and item.get("asset_url") and "log_manual_distribution.py" in item.get("log_preview_command", "") and "--apply --refresh-admin" in item.get("log_apply_command", "") for item in docket_postable)
             and all(
                 row.get("id")
                 and row.get("text")
@@ -1692,7 +1707,7 @@ def validate_generated_outputs(failures):
         fail("build_subscriber_cta_audit.py missing", failures)
     if MANUAL_DISTRIBUTION_PACKET_SCRIPT.exists():
         manual_distribution_text = MANUAL_DISTRIBUTION_PACKET_SCRIPT.read_text(encoding="utf-8")
-        if "manual_distribution_packet.json" in manual_distribution_text and "manual-distribution-packet.md" in manual_distribution_text and "Manual Posting Queue" in manual_distribution_text and "copy_block" in manual_distribution_text and "manual_posting_packet" in manual_distribution_text and "postable_now" in manual_distribution_text and "log_manual_distribution.py" in manual_distribution_text and "Published_Log.csv" in manual_distribution_text and "distribution_status" in manual_distribution_text and "subprocess" not in manual_distribution_text:
+        if "manual_distribution_packet.json" in manual_distribution_text and "manual-distribution-packet.md" in manual_distribution_text and "Manual Posting Queue" in manual_distribution_text and "manual_distribution_docket" in manual_distribution_text and "review_queue" in manual_distribution_text and "copy_block" in manual_distribution_text and "manual_posting_packet" in manual_distribution_text and "postable_now" in manual_distribution_text and "log_manual_distribution.py" in manual_distribution_text and "Published_Log.csv" in manual_distribution_text and "distribution_status" in manual_distribution_text and "subprocess" not in manual_distribution_text:
             ok("manual distribution packet builder is review-only")
         else:
             fail("build_manual_distribution_packet.py missing manual distribution outputs or executes commands", failures)
@@ -1820,7 +1835,7 @@ def validate_generated_outputs(failures):
         fail("subscriber-cta-audit.md missing", failures)
     if MANUAL_DISTRIBUTION_REPORT.exists():
         manual_distribution_report = MANUAL_DISTRIBUTION_REPORT.read_text(encoding="utf-8")
-        if "Manual Distribution Packet" in manual_distribution_report and "Manual Posting Queue" in manual_distribution_report and "Guardrails" in manual_distribution_report:
+        if "Manual Distribution Packet" in manual_distribution_report and "Manual Posting Docket" in manual_distribution_report and "Manual Posting Queue" in manual_distribution_report and "Guardrails" in manual_distribution_report:
             ok("manual distribution markdown report present")
         else:
             fail("manual-distribution-packet.md missing expected sections", failures)

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T03:39:11.639394Z",
+  "generated_at": "2026-06-20T03:44:23.302944Z",
   "safe_mode": true,
   "source": {
     "promo_queue_plan": "data/promo_queue_plan.json",
@@ -21,6 +21,107 @@
     "postable_now_count": 0,
     "next_manual_action": "review_and_approve",
     "public_community_url": "https://www.youtube.com/@lilyroo.artist/community"
+  },
+  "manual_distribution_docket": {
+    "status": "needs_review",
+    "review_count": 2,
+    "postable_count": 0,
+    "logged_count": 0,
+    "review_queue": [
+      {
+        "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+        "platform": "YouTube Community",
+        "release": "Twelve Dollars",
+        "scheduled_at": "2026-06-21T18:30:00-04:00",
+        "distribution_status": "waiting_for_review",
+        "subscriber_growth_score": 116,
+        "selected_cta_strength": "hard_goal",
+        "posting_surface": "YouTube Studio Community",
+        "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
+        "paste_text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+        "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
+        "destination_links": [
+          "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n"
+        ],
+        "approval_required": true,
+        "postable_now": false,
+        "logging_required": true,
+        "logged": false,
+        "published_url": "",
+        "next_action": "review_and_approve",
+        "next_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+        "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
+        "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+        "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+        "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
+        "log_effect": {
+          "target": "admin/content/Published_Log.csv",
+          "content_id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+          "platform": "YouTube Community",
+          "release": "Twelve Dollars",
+          "requires_public_url": true,
+          "url_placeholder": "PUBLIC_URL",
+          "duplicate_checked_by": [
+            "content_id",
+            "manual_distribution_id"
+          ],
+          "notes": "manual_distribution_id=FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY; source=data/manual_distribution_packet.json",
+          "would_append": true,
+          "summary": "append Published_Log.csv content_id=FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY after public URL is available"
+        }
+      },
+      {
+        "id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+        "platform": "YouTube Community",
+        "release": "Analog Myth",
+        "scheduled_at": "2026-06-22T18:30:00-04:00",
+        "distribution_status": "waiting_for_review",
+        "subscriber_growth_score": 116,
+        "selected_cta_strength": "hard_goal",
+        "posting_surface": "YouTube Studio Community",
+        "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
+        "paste_text": "Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+        "asset_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
+        "destination_links": [
+          "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0"
+        ],
+        "approval_required": true,
+        "postable_now": false,
+        "logging_required": true,
+        "logged": false,
+        "published_url": "",
+        "next_action": "review_and_approve",
+        "next_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin",
+        "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --dry-run",
+        "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin",
+        "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+        "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
+        "log_effect": {
+          "target": "admin/content/Published_Log.csv",
+          "content_id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+          "platform": "YouTube Community",
+          "release": "Analog Myth",
+          "requires_public_url": true,
+          "url_placeholder": "PUBLIC_URL",
+          "duplicate_checked_by": [
+            "content_id",
+            "manual_distribution_id"
+          ],
+          "notes": "manual_distribution_id=FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY; source=data/manual_distribution_packet.json",
+          "would_append": true,
+          "summary": "append Published_Log.csv content_id=FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY after public URL is available"
+        }
+      }
+    ],
+    "postable_now": [],
+    "logged": [],
+    "next_manual_action": "review_and_approve",
+    "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
+    "guardrails": [
+      "Manual posting happens in YouTube Studio Community, outside this repository.",
+      "Approve a row before posting it, then log only after the public URL exists.",
+      "Use the log preview command before applying a Published_Log.csv update."
+    ]
   },
   "rows": [
     {

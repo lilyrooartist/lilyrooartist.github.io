@@ -1,6 +1,6 @@
 # Manual Distribution Packet - Lily Roo
 
-Generated: 2026-06-20T03:39:11.639394Z
+Generated: 2026-06-20T03:44:23.302944Z
 
 ## Summary
 - Manual-ready posts: **2**
@@ -10,6 +10,34 @@ Generated: 2026-06-20T03:39:11.639394Z
 - Logged manual posts: **0**
 - Unlogged manual posts: **2**
 - Public URL logs still needed: **2**
+
+## Manual Posting Docket
+- Status: **needs_review**
+- Needs review: **2**
+- Postable now: **0**
+- Logged: **0**
+- Public community surface: https://www.youtube.com/@lilyroo.artist/community
+
+### Needs Review
+- **YouTube Community - Twelve Dollars** (`FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY`)
+  - Paste text: Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.
+
+Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
+  - Asset: https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg
+  - Destination links: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
+  - Preview approval: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run`
+  - Approve after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin`
+- **YouTube Community - Analog Myth** (`FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY`)
+  - Paste text: Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.
+
+Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0
+  - Asset: https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg
+  - Destination links: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0
+  - Preview approval: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --dry-run`
+  - Approve after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin`
+
+### Postable Now
+- None
 
 ## Manual Posting Queue
 - **YouTube Community - Twelve Dollars** (`FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY`)
