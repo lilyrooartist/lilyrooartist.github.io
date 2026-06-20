@@ -1,12 +1,12 @@
 # Backlog Reschedule Preview - Lily Roo
 
-Generated: 2026-06-20T21:22:19.023092+09:00
+Generated: 2026-06-20T12:28:20.252289+00:00
 
 ## Summary
 - Approved backlog rows: **3**
 - Rows with known blockers: **3**
 - Clear to apply without override: **0**
-- Start at: **2026-06-21T10:00:00+09:00**
+- Start at: **2026-06-21T10:00:00+00:00**
 - Spacing hours: **24**
 - Apply allowed without override: **False**
 - Normal apply gate: **blocked_until_clearance_steps_complete**
@@ -14,17 +14,17 @@ Generated: 2026-06-20T21:22:19.023092+09:00
 ## Proposed Reschedule
 - **Instagram - I Learned It All in Fifteen Seconds** (`FP-AUTO-258`)
   - Current: `2026-06-05T15:35:00-04:00`
-  - Proposed: `2026-06-21T10:00:00+09:00`
+  - Proposed: `2026-06-21T10:00:00+00:00`
   - Blocker: not_approved
   - Clearance: Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply.
 - **YouTube Community - I Learned It All in Fifteen Seconds** (`FP-AUTO-261`)
   - Current: `2026-06-06T19:10:00-04:00`
-  - Proposed: `2026-06-22T10:00:00+09:00`
+  - Proposed: `2026-06-22T10:00:00+00:00`
   - Blocker: not_approved
   - Clearance: Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply.
 - **TikTok - I Learned It All in Fifteen Seconds** (`FP-AUTO-264`)
   - Current: `2026-06-09T21:25:00-04:00`
-  - Proposed: `2026-06-23T10:00:00+09:00`
+  - Proposed: `2026-06-23T10:00:00+00:00`
   - Blocker: tiktok_credentials_missing
   - Clearance: Add local TikTok OAuth credentials, then push worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.
   - Clearance: Confirm TikTok public posting approval before treating auto-posting as ready.
@@ -55,10 +55,10 @@ Generated: 2026-06-20T21:22:19.023092+09:00
 - A reschedule does not publish, approve, or repair platform credentials by itself.
 
 ## Commands
-- Preview: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24`
+- Preview: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24`
 - Safe apply: none until blockers clear
-- Blocked apply command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --apply --refresh-admin`
-- Deliberate override command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin`
+- Blocked apply command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin`
+- Deliberate override command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin`
 
 ## Guardrails
 - This preview does not write schedule changes, approve posts, publish posts, or push secrets.
