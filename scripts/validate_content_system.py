@@ -2196,6 +2196,39 @@ def validate_generated_outputs(failures):
             ok("promo engine status mirrors human handoff action docket")
         else:
             fail("promo_engine_status.json missing human handoff action docket summary", failures)
+        handoff_preview = kpi.get("handoff_resolution_preview") or {}
+        preview_packet = json.loads(HUMAN_HANDOFF_RESOLUTION_PREVIEW.read_text(encoding="utf-8")) if HUMAN_HANDOFF_RESOLUTION_PREVIEW.exists() else {}
+        preview_summary = preview_packet.get("summary") or {}
+        preview_rows = preview_packet.get("previews") or []
+        preview_action = next((action for action in next_actions if action.startswith("Review handoff preview health:")), "")
+        preview_ready = [row for row in preview_rows if row.get("preview_status") == "preview_ok"]
+        preview_missing = [row for row in preview_rows if row.get("preview_status") == "input_missing"]
+        preview_warning = [row for row in preview_rows if row.get("preview_status") == "preview_ok_with_warning"]
+        if (
+            handoff_preview.get("available") is True
+            and status.get("health", {}).get("handoff_resolution_preview") == handoff_preview
+            and handoff_preview.get("source_path") == "data/human_handoff_resolution_preview.json"
+            and handoff_preview.get("worksheet_row_count") == preview_summary.get("worksheet_row_count")
+            and handoff_preview.get("preview_count") == len(preview_rows) == preview_summary.get("preview_count")
+            and handoff_preview.get("executed_preview_count") == preview_summary.get("executed_preview_count")
+            and handoff_preview.get("skipped_preview_count") == preview_summary.get("skipped_preview_count")
+            and handoff_preview.get("status_counts") == (preview_summary.get("status_counts") or {})
+            and handoff_preview.get("ready_preview_count") == len(preview_ready)
+            and handoff_preview.get("input_missing_count") == len(preview_missing)
+            and handoff_preview.get("warning_preview_count") == len(preview_warning)
+            and handoff_preview.get("ready_previews") == preview_ready
+            and handoff_preview.get("input_missing_previews") == preview_missing
+            and handoff_preview.get("warning_previews") == preview_warning
+            and "never executes apply" in (handoff_preview.get("mutation_guardrail") or "")
+            and preview_action
+            and f"{len(preview_ready)} preview-clean" in preview_action
+            and f"{len(preview_missing)} missing input" in preview_action
+            and f"{len(preview_warning)} warning" in preview_action
+            and handoff_preview.get("source_path") in preview_action
+        ):
+            ok("promo engine status mirrors handoff resolution preview health")
+        else:
+            fail("promo_engine_status.json missing handoff resolution preview health", failures)
         manual_packet = json.loads(MANUAL_DISTRIBUTION_PACKET.read_text(encoding="utf-8")) if MANUAL_DISTRIBUTION_PACKET.exists() else {}
         manual_summary = manual_packet.get("summary") or {}
         manual_approval = manual_packet.get("manual_approval_docket") or {}
