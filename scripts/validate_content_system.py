@@ -869,6 +869,9 @@ def validate_generated_outputs(failures):
         live_import_rows = [row for row in rows if row.get("collection_mode") == "live_import_available"]
         manual_rows = [row for row in rows if row.get("collection_mode") != "live_import_available"]
         ready_rows = [row for row in rows if row.get("ready_to_import")]
+        docket = packet.get("metric_collection_docket") or {}
+        docket_groups = docket.get("platform_groups") or []
+        waiting_count = len([row for row in rows if not row.get("ready_to_import")])
         if (
             packet.get("safe_mode") is True
             and summary.get("pending_field_count") == len(rows)
@@ -882,6 +885,23 @@ def validate_generated_outputs(failures):
             and "--from-live --refresh-admin" in (summary.get("live_import_command") or "")
             and "--from-csv --dry-run" in (summary.get("worksheet_import_preview_command") or "")
             and "--from-csv --refresh-admin" in (summary.get("worksheet_import_command") or "")
+            and docket.get("status") in {"needs_values", "ready_to_import"}
+            and docket.get("platform_count") == len(platforms)
+            and docket.get("ready_to_import_count") == len(ready_rows)
+            and docket.get("waiting_field_count") == waiting_count
+            and docket.get("csv_path") == "data/manual_metric_collection_template.csv"
+            and docket.get("worksheet_import_preview_command") == summary.get("worksheet_import_preview_command")
+            and docket.get("worksheet_import_command") == summary.get("worksheet_import_command")
+            and [group.get("platform") for group in docket_groups] == [platform.get("platform") for platform in platforms]
+            and all(
+                group.get("field_count") == len(group.get("fields") or [])
+                and group.get("waiting_count") == len([field for field in group.get("fields") or [] if not field.get("ready_to_import")])
+                and group.get("ready_to_import_count") == len([field for field in group.get("fields") or [] if field.get("ready_to_import")])
+                and group.get("collection_url")
+                and group.get("worksheet_import_preview_command")
+                and group.get("worksheet_import_command")
+                for group in docket_groups
+            )
             and all(
                 platform.get("platform")
                 and platform.get("collection_url")
@@ -963,7 +983,7 @@ def validate_generated_outputs(failures):
         fail("promotion_blocker_ledger.json missing; run scripts/build_promotion_blocker_ledger.py", failures)
     if MANUAL_METRIC_REPORT.exists():
         report_text = MANUAL_METRIC_REPORT.read_text(encoding="utf-8")
-        if "Manual Metric Collection" in report_text and "Pending fields" in report_text and "Open: " in report_text and "--from-csv --refresh-admin" in report_text and "--from-live --dry-run" in report_text:
+        if "Manual Metric Collection" in report_text and "Metric Collection Docket" in report_text and "Pending fields" in report_text and "Open: " in report_text and "--from-csv --refresh-admin" in report_text and "--from-live --dry-run" in report_text:
             ok("manual metric markdown report present")
         else:
             fail("manual-metric-collection.md missing expected sections", failures)
@@ -1739,7 +1759,7 @@ def validate_generated_outputs(failures):
         fail("build_backlog_reschedule_preview.py missing", failures)
     if MANUAL_METRIC_COLLECTION_SCRIPT.exists():
         collection_text = MANUAL_METRIC_COLLECTION_SCRIPT.read_text(encoding="utf-8")
-        if "manual_metric_collection_template.csv" in collection_text and "manual_metric_collection_packet.json" in collection_text and "manual-metric-collection.md" in collection_text and "pending_manual_by_platform" in collection_text and "collection_url" in collection_text and "--from-live" in collection_text and "collection_mode" in collection_text and "live_import_available_count" in collection_text and "ready_to_import_count" in collection_text and "existing_new_values" in collection_text and "value_type" in collection_text and "import_effect" in collection_text and "subprocess" not in collection_text:
+        if "manual_metric_collection_template.csv" in collection_text and "manual_metric_collection_packet.json" in collection_text and "manual-metric-collection.md" in collection_text and "pending_manual_by_platform" in collection_text and "metric_collection_docket" in collection_text and "platform_groups" in collection_text and "collection_url" in collection_text and "--from-live" in collection_text and "collection_mode" in collection_text and "live_import_available_count" in collection_text and "ready_to_import_count" in collection_text and "existing_new_values" in collection_text and "value_type" in collection_text and "import_effect" in collection_text and "subprocess" not in collection_text:
             ok("manual metric collection builder is review-only")
         else:
             fail("build_manual_metric_collection.py missing worksheet outputs or executes commands", failures)

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T03:44:23.449139Z",
+  "generated_at": "2026-06-20T03:48:08.630715Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -21,6 +21,425 @@
     "live_import_command": "python3 scripts/update_manual_social_stats.py --from-live --refresh-admin",
     "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
     "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin"
+  },
+  "metric_collection_docket": {
+    "status": "needs_values",
+    "platform_count": 5,
+    "ready_to_import_count": 0,
+    "waiting_field_count": 11,
+    "platform_groups": [
+      {
+        "platform": "facebook",
+        "status": "needs_values",
+        "field_count": 1,
+        "waiting_count": 1,
+        "ready_to_import_count": 0,
+        "source_hint": "Meta Business Suite > Insights",
+        "collection_url": "https://www.facebook.com/903693509504290",
+        "reason": "(#100) The value must be a valid insights metric",
+        "fields": [
+          {
+            "field": "reach_7d",
+            "current_value": "pending",
+            "new_value": "",
+            "live_value": "",
+            "collection_mode": "manual_collection_required",
+            "value_type": "nonnegative_integer",
+            "example_value": "123",
+            "collection_instruction": "Enter reach for the last 7 days.",
+            "update_assignment": "facebook.reach_7d=VALUE",
+            "import_effect": "update data/manual_social_stats.json facebook.reach_7d from 'pending' to the filled new_value",
+            "csv_row": 2,
+            "ready_to_import": false
+          }
+        ],
+        "collection_packets": [
+          {
+            "csv_row": 2,
+            "field": "reach_7d",
+            "current_value": "pending",
+            "new_value": "",
+            "ready_to_import": false,
+            "collection_mode": "manual_collection_required",
+            "source_hint": "Meta Business Suite > Insights",
+            "collection_url": "https://www.facebook.com/903693509504290",
+            "collection_instruction": "Enter reach for the last 7 days.",
+            "update_assignment": "facebook.reach_7d=VALUE",
+            "import_effect": "update data/manual_social_stats.json facebook.reach_7d from 'pending' to the filled new_value"
+          }
+        ],
+        "pending_assignments": [
+          "facebook.reach_7d=VALUE"
+        ],
+        "platform_update_command": "python3 scripts/update_manual_social_stats.py facebook.reach_7d=VALUE --refresh-admin",
+        "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
+        "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin"
+      },
+      {
+        "platform": "instagram",
+        "status": "needs_values",
+        "field_count": 2,
+        "waiting_count": 2,
+        "ready_to_import_count": 0,
+        "source_hint": "Instagram Professional Dashboard > Insights",
+        "collection_url": "https://www.instagram.com/professional_dashboard/",
+        "reason": "Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page",
+        "fields": [
+          {
+            "field": "followers",
+            "current_value": "pending",
+            "new_value": "",
+            "live_value": "",
+            "collection_mode": "manual_collection_required",
+            "value_type": "nonnegative_integer",
+            "example_value": "123",
+            "collection_instruction": "Enter the current public follower count.",
+            "update_assignment": "instagram.followers=VALUE",
+            "import_effect": "update data/manual_social_stats.json instagram.followers from 'pending' to the filled new_value",
+            "csv_row": 3,
+            "ready_to_import": false
+          },
+          {
+            "field": "profile_visits_7d",
+            "current_value": "pending",
+            "new_value": "",
+            "live_value": "",
+            "collection_mode": "manual_collection_required",
+            "value_type": "nonnegative_integer",
+            "example_value": "12",
+            "collection_instruction": "Enter profile visits for the last 7 days.",
+            "update_assignment": "instagram.profile_visits_7d=VALUE",
+            "import_effect": "update data/manual_social_stats.json instagram.profile_visits_7d from 'pending' to the filled new_value",
+            "csv_row": 4,
+            "ready_to_import": false
+          }
+        ],
+        "collection_packets": [
+          {
+            "csv_row": 3,
+            "field": "followers",
+            "current_value": "pending",
+            "new_value": "",
+            "ready_to_import": false,
+            "collection_mode": "manual_collection_required",
+            "source_hint": "Instagram Professional Dashboard > Insights",
+            "collection_url": "https://www.instagram.com/professional_dashboard/",
+            "collection_instruction": "Enter the current public follower count.",
+            "update_assignment": "instagram.followers=VALUE",
+            "import_effect": "update data/manual_social_stats.json instagram.followers from 'pending' to the filled new_value"
+          },
+          {
+            "csv_row": 4,
+            "field": "profile_visits_7d",
+            "current_value": "pending",
+            "new_value": "",
+            "ready_to_import": false,
+            "collection_mode": "manual_collection_required",
+            "source_hint": "Instagram Professional Dashboard > Insights",
+            "collection_url": "https://www.instagram.com/professional_dashboard/",
+            "collection_instruction": "Enter profile visits for the last 7 days.",
+            "update_assignment": "instagram.profile_visits_7d=VALUE",
+            "import_effect": "update data/manual_social_stats.json instagram.profile_visits_7d from 'pending' to the filled new_value"
+          }
+        ],
+        "pending_assignments": [
+          "instagram.followers=VALUE",
+          "instagram.profile_visits_7d=VALUE"
+        ],
+        "platform_update_command": "python3 scripts/update_manual_social_stats.py instagram.followers=VALUE instagram.profile_visits_7d=VALUE --refresh-admin",
+        "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
+        "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin"
+      },
+      {
+        "platform": "spotify",
+        "status": "needs_values",
+        "field_count": 4,
+        "waiting_count": 4,
+        "ready_to_import_count": 0,
+        "source_hint": "Spotify for Artists > Music/Stats export",
+        "collection_url": "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a",
+        "reason": "Spotify streams, saves, monthly listeners, and artist followers require Spotify for Artists export or a connected analytics source.",
+        "fields": [
+          {
+            "field": "artist_followers",
+            "current_value": "pending",
+            "new_value": "",
+            "live_value": "",
+            "collection_mode": "manual_collection_required",
+            "value_type": "nonnegative_integer",
+            "example_value": "123",
+            "collection_instruction": "Enter the current Spotify artist follower count.",
+            "update_assignment": "spotify.artist_followers=VALUE",
+            "import_effect": "update data/manual_social_stats.json spotify.artist_followers from 'pending' to the filled new_value",
+            "csv_row": 5,
+            "ready_to_import": false
+          },
+          {
+            "field": "monthly_listeners",
+            "current_value": "pending",
+            "new_value": "",
+            "live_value": "",
+            "collection_mode": "manual_collection_required",
+            "value_type": "nonnegative_integer",
+            "example_value": "123",
+            "collection_instruction": "Enter the current Spotify monthly listener count.",
+            "update_assignment": "spotify.monthly_listeners=VALUE",
+            "import_effect": "update data/manual_social_stats.json spotify.monthly_listeners from 'pending' to the filled new_value",
+            "csv_row": 6,
+            "ready_to_import": false
+          },
+          {
+            "field": "release_streams",
+            "current_value": "pending",
+            "new_value": "",
+            "live_value": "",
+            "collection_mode": "manual_collection_required",
+            "value_type": "nonnegative_integer",
+            "example_value": "1234",
+            "collection_instruction": "Enter lifetime streams for the promoted release.",
+            "update_assignment": "spotify.release_streams=VALUE",
+            "import_effect": "update data/manual_social_stats.json spotify.release_streams from 'pending' to the filled new_value",
+            "csv_row": 7,
+            "ready_to_import": false
+          },
+          {
+            "field": "saves",
+            "current_value": "pending",
+            "new_value": "",
+            "live_value": "",
+            "collection_mode": "manual_collection_required",
+            "value_type": "nonnegative_integer",
+            "example_value": "12",
+            "collection_instruction": "Enter lifetime saves for the promoted release.",
+            "update_assignment": "spotify.saves=VALUE",
+            "import_effect": "update data/manual_social_stats.json spotify.saves from 'pending' to the filled new_value",
+            "csv_row": 8,
+            "ready_to_import": false
+          }
+        ],
+        "collection_packets": [
+          {
+            "csv_row": 5,
+            "field": "artist_followers",
+            "current_value": "pending",
+            "new_value": "",
+            "ready_to_import": false,
+            "collection_mode": "manual_collection_required",
+            "source_hint": "Spotify for Artists > Music/Stats export",
+            "collection_url": "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a",
+            "collection_instruction": "Enter the current Spotify artist follower count.",
+            "update_assignment": "spotify.artist_followers=VALUE",
+            "import_effect": "update data/manual_social_stats.json spotify.artist_followers from 'pending' to the filled new_value"
+          },
+          {
+            "csv_row": 6,
+            "field": "monthly_listeners",
+            "current_value": "pending",
+            "new_value": "",
+            "ready_to_import": false,
+            "collection_mode": "manual_collection_required",
+            "source_hint": "Spotify for Artists > Music/Stats export",
+            "collection_url": "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a",
+            "collection_instruction": "Enter the current Spotify monthly listener count.",
+            "update_assignment": "spotify.monthly_listeners=VALUE",
+            "import_effect": "update data/manual_social_stats.json spotify.monthly_listeners from 'pending' to the filled new_value"
+          },
+          {
+            "csv_row": 7,
+            "field": "release_streams",
+            "current_value": "pending",
+            "new_value": "",
+            "ready_to_import": false,
+            "collection_mode": "manual_collection_required",
+            "source_hint": "Spotify for Artists > Music/Stats export",
+            "collection_url": "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a",
+            "collection_instruction": "Enter lifetime streams for the promoted release.",
+            "update_assignment": "spotify.release_streams=VALUE",
+            "import_effect": "update data/manual_social_stats.json spotify.release_streams from 'pending' to the filled new_value"
+          },
+          {
+            "csv_row": 8,
+            "field": "saves",
+            "current_value": "pending",
+            "new_value": "",
+            "ready_to_import": false,
+            "collection_mode": "manual_collection_required",
+            "source_hint": "Spotify for Artists > Music/Stats export",
+            "collection_url": "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a",
+            "collection_instruction": "Enter lifetime saves for the promoted release.",
+            "update_assignment": "spotify.saves=VALUE",
+            "import_effect": "update data/manual_social_stats.json spotify.saves from 'pending' to the filled new_value"
+          }
+        ],
+        "pending_assignments": [
+          "spotify.artist_followers=VALUE",
+          "spotify.monthly_listeners=VALUE",
+          "spotify.release_streams=VALUE",
+          "spotify.saves=VALUE"
+        ],
+        "platform_update_command": "python3 scripts/update_manual_social_stats.py spotify.artist_followers=VALUE spotify.monthly_listeners=VALUE spotify.release_streams=VALUE spotify.saves=VALUE --refresh-admin",
+        "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
+        "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin"
+      },
+      {
+        "platform": "tiktok",
+        "status": "needs_values",
+        "field_count": 2,
+        "waiting_count": 2,
+        "ready_to_import_count": 0,
+        "source_hint": "TikTok Studio or Creator Center analytics",
+        "collection_url": "https://www.tiktok.com/creator-center/analytics",
+        "reason": "TikTok metrics need TikTok OAuth credentials.",
+        "fields": [
+          {
+            "field": "followers",
+            "current_value": "pending",
+            "new_value": "",
+            "live_value": "",
+            "collection_mode": "manual_collection_required",
+            "value_type": "nonnegative_integer",
+            "example_value": "123",
+            "collection_instruction": "Enter the current public follower count.",
+            "update_assignment": "tiktok.followers=VALUE",
+            "import_effect": "update data/manual_social_stats.json tiktok.followers from 'pending' to the filled new_value",
+            "csv_row": 9,
+            "ready_to_import": false
+          },
+          {
+            "field": "profile_views_7d",
+            "current_value": "pending",
+            "new_value": "",
+            "live_value": "",
+            "collection_mode": "manual_collection_required",
+            "value_type": "nonnegative_integer",
+            "example_value": "12",
+            "collection_instruction": "Enter profile views for the last 7 days.",
+            "update_assignment": "tiktok.profile_views_7d=VALUE",
+            "import_effect": "update data/manual_social_stats.json tiktok.profile_views_7d from 'pending' to the filled new_value",
+            "csv_row": 10,
+            "ready_to_import": false
+          }
+        ],
+        "collection_packets": [
+          {
+            "csv_row": 9,
+            "field": "followers",
+            "current_value": "pending",
+            "new_value": "",
+            "ready_to_import": false,
+            "collection_mode": "manual_collection_required",
+            "source_hint": "TikTok Studio or Creator Center analytics",
+            "collection_url": "https://www.tiktok.com/creator-center/analytics",
+            "collection_instruction": "Enter the current public follower count.",
+            "update_assignment": "tiktok.followers=VALUE",
+            "import_effect": "update data/manual_social_stats.json tiktok.followers from 'pending' to the filled new_value"
+          },
+          {
+            "csv_row": 10,
+            "field": "profile_views_7d",
+            "current_value": "pending",
+            "new_value": "",
+            "ready_to_import": false,
+            "collection_mode": "manual_collection_required",
+            "source_hint": "TikTok Studio or Creator Center analytics",
+            "collection_url": "https://www.tiktok.com/creator-center/analytics",
+            "collection_instruction": "Enter profile views for the last 7 days.",
+            "update_assignment": "tiktok.profile_views_7d=VALUE",
+            "import_effect": "update data/manual_social_stats.json tiktok.profile_views_7d from 'pending' to the filled new_value"
+          }
+        ],
+        "pending_assignments": [
+          "tiktok.followers=VALUE",
+          "tiktok.profile_views_7d=VALUE"
+        ],
+        "platform_update_command": "python3 scripts/update_manual_social_stats.py tiktok.followers=VALUE tiktok.profile_views_7d=VALUE --refresh-admin",
+        "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
+        "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin"
+      },
+      {
+        "platform": "x",
+        "status": "needs_values",
+        "field_count": 2,
+        "waiting_count": 2,
+        "ready_to_import_count": 0,
+        "source_hint": "X Analytics or account profile metrics",
+        "collection_url": "https://analytics.x.com/",
+        "reason": "X metrics need X_USER_ACCESS_TOKEN with user lookup access.",
+        "fields": [
+          {
+            "field": "followers",
+            "current_value": "pending",
+            "new_value": "",
+            "live_value": "",
+            "collection_mode": "manual_collection_required",
+            "value_type": "nonnegative_integer",
+            "example_value": "123",
+            "collection_instruction": "Enter the current public follower count.",
+            "update_assignment": "x.followers=VALUE",
+            "import_effect": "update data/manual_social_stats.json x.followers from 'pending' to the filled new_value",
+            "csv_row": 11,
+            "ready_to_import": false
+          },
+          {
+            "field": "impressions_7d",
+            "current_value": "pending",
+            "new_value": "",
+            "live_value": "",
+            "collection_mode": "manual_collection_required",
+            "value_type": "nonnegative_integer",
+            "example_value": "123",
+            "collection_instruction": "Enter impressions for the last 7 days.",
+            "update_assignment": "x.impressions_7d=VALUE",
+            "import_effect": "update data/manual_social_stats.json x.impressions_7d from 'pending' to the filled new_value",
+            "csv_row": 12,
+            "ready_to_import": false
+          }
+        ],
+        "collection_packets": [
+          {
+            "csv_row": 11,
+            "field": "followers",
+            "current_value": "pending",
+            "new_value": "",
+            "ready_to_import": false,
+            "collection_mode": "manual_collection_required",
+            "source_hint": "X Analytics or account profile metrics",
+            "collection_url": "https://analytics.x.com/",
+            "collection_instruction": "Enter the current public follower count.",
+            "update_assignment": "x.followers=VALUE",
+            "import_effect": "update data/manual_social_stats.json x.followers from 'pending' to the filled new_value"
+          },
+          {
+            "csv_row": 12,
+            "field": "impressions_7d",
+            "current_value": "pending",
+            "new_value": "",
+            "ready_to_import": false,
+            "collection_mode": "manual_collection_required",
+            "source_hint": "X Analytics or account profile metrics",
+            "collection_url": "https://analytics.x.com/",
+            "collection_instruction": "Enter impressions for the last 7 days.",
+            "update_assignment": "x.impressions_7d=VALUE",
+            "import_effect": "update data/manual_social_stats.json x.impressions_7d from 'pending' to the filled new_value"
+          }
+        ],
+        "pending_assignments": [
+          "x.followers=VALUE",
+          "x.impressions_7d=VALUE"
+        ],
+        "platform_update_command": "python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impressions_7d=VALUE --refresh-admin",
+        "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
+        "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin"
+      }
+    ],
+    "csv_path": "data/manual_metric_collection_template.csv",
+    "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
+    "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
+    "guardrails": [
+      "Fill only new_value cells in the CSV; generated context columns are overwritten on refresh.",
+      "Run the worksheet import preview before applying metric updates.",
+      "Keep metric values nonnegative and source them from the linked platform analytics surfaces."
+    ]
   },
   "platforms": [
     {

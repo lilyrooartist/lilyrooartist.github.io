@@ -237,6 +237,7 @@ def build_packet(rows: list[dict], generated_at: str) -> dict:
         if row.get("ready_to_import"):
             group["ready_to_import_count"] += 1
     platforms = list(by_platform.values())
+    docket = build_collection_docket(platforms, ready_rows)
     return {
         "generated_at": generated_at,
         "safe_mode": True,
@@ -261,12 +262,52 @@ def build_packet(rows: list[dict], generated_at: str) -> dict:
             "worksheet_import_preview_command": WORKSHEET_IMPORT_PREVIEW_COMMAND,
             "worksheet_import_command": WORKSHEET_IMPORT_COMMAND,
         },
+        "metric_collection_docket": docket,
         "platforms": platforms,
         "rows": rows,
     }
 
 
-def build_markdown(rows: list[dict], generated_at: str) -> str:
+def build_collection_docket(platforms: list[dict], ready_rows: list[dict]) -> dict:
+    platform_groups = []
+    for platform in platforms:
+        fields = platform.get("fields") or []
+        waiting_fields = [field for field in fields if not field.get("ready_to_import")]
+        ready_fields = [field for field in fields if field.get("ready_to_import")]
+        platform_groups.append({
+            "platform": platform.get("platform") or "",
+            "status": "ready_to_import" if ready_fields and not waiting_fields else ("partial" if ready_fields else "needs_values"),
+            "field_count": len(fields),
+            "waiting_count": len(waiting_fields),
+            "ready_to_import_count": len(ready_fields),
+            "source_hint": platform.get("source_hint") or "",
+            "collection_url": platform.get("collection_url") or "",
+            "reason": platform.get("reason") or "",
+            "fields": fields,
+            "collection_packets": platform.get("collection_packets") or [],
+            "pending_assignments": platform.get("pending_assignments") or [],
+            "platform_update_command": platform.get("platform_update_command") or "",
+            "worksheet_import_preview_command": platform.get("worksheet_import_preview_command") or WORKSHEET_IMPORT_PREVIEW_COMMAND,
+            "worksheet_import_command": platform.get("worksheet_import_command") or WORKSHEET_IMPORT_COMMAND,
+        })
+    return {
+        "status": "ready_to_import" if ready_rows else "needs_values",
+        "platform_count": len(platforms),
+        "ready_to_import_count": len(ready_rows),
+        "waiting_field_count": sum(group["waiting_count"] for group in platform_groups),
+        "platform_groups": platform_groups,
+        "csv_path": str(OUT_CSV.relative_to(ROOT)),
+        "worksheet_import_preview_command": WORKSHEET_IMPORT_PREVIEW_COMMAND,
+        "worksheet_import_command": WORKSHEET_IMPORT_COMMAND,
+        "guardrails": [
+            "Fill only new_value cells in the CSV; generated context columns are overwritten on refresh.",
+            "Run the worksheet import preview before applying metric updates.",
+            "Keep metric values nonnegative and source them from the linked platform analytics surfaces.",
+        ],
+    }
+
+
+def build_markdown(rows: list[dict], generated_at: str, packet: dict) -> str:
     lines = [
         "# Manual Metric Collection - Lily Roo",
         "",
@@ -295,7 +336,35 @@ def build_markdown(rows: list[dict], generated_at: str) -> str:
         "",
         "You can still run a platform update command directly if you only collect one platform.",
         "",
+        "## Metric Collection Docket",
+        "",
     ]
+    docket = packet.get("metric_collection_docket") or {}
+    lines.extend([
+        f"- Status: **{docket.get('status', 'unknown')}**",
+        f"- Platforms: **{docket.get('platform_count', 0)}**",
+        f"- Waiting fields: **{docket.get('waiting_field_count', 0)}**",
+        f"- Ready to import: **{docket.get('ready_to_import_count', 0)}**",
+        f"- CSV: `{docket.get('csv_path') or str(OUT_CSV.relative_to(ROOT))}`",
+        f"- Preview worksheet import: `{docket.get('worksheet_import_preview_command') or WORKSHEET_IMPORT_PREVIEW_COMMAND}`",
+        f"- Apply worksheet import after review: `{docket.get('worksheet_import_command') or WORKSHEET_IMPORT_COMMAND}`",
+        "",
+    ])
+    for group in docket.get("platform_groups") or []:
+        lines.append(f"### {group.get('platform')}")
+        lines.append(f"- Status: `{group.get('status')}`; waiting: **{group.get('waiting_count', 0)}**; ready: **{group.get('ready_to_import_count', 0)}**")
+        if group.get("collection_url"):
+            lines.append(f"- Open: {group['collection_url']}")
+        if group.get("reason"):
+            lines.append(f"- Why: {group['reason']}")
+        for field in group.get("fields") or []:
+            target = field.get("new_value") if field.get("ready_to_import") else f"{field.get('value_type', 'value')} e.g. {field.get('example_value', '')}".strip()
+            lines.append(f"- CSV row `{field.get('csv_row')}` `{field.get('field')}` current `{field.get('current_value')}` -> `{target}`")
+            if field.get("collection_instruction"):
+                lines.append(f"  - {field['collection_instruction']}")
+        if group.get("platform_update_command"):
+            lines.append(f"- Platform command: `{group['platform_update_command']}`")
+        lines.append("")
     by_platform = {}
     for row in rows:
         by_platform.setdefault(row["platform"], []).append(row)
@@ -380,7 +449,7 @@ def main() -> int:
     write_csv(rows)
     packet = build_packet(rows, generated_at)
     OUT_JSON.write_text(json.dumps(packet, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    markdown = build_markdown(rows, generated_at)
+    markdown = build_markdown(rows, generated_at, packet)
     OUT_MD.write_text(markdown, encoding="utf-8")
     sync_admin(markdown, packet)
     print(json.dumps({
