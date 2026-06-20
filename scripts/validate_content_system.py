@@ -650,6 +650,7 @@ def validate_generated_outputs(failures):
             and category_counts
             and all(
                 row.get("id")
+                and row.get("blocker_id") == row.get("id")
                 and row.get("title")
                 and row.get("category")
                 and row.get("owner") in {"codex", "tod", "external_platform"}

@@ -46,6 +46,7 @@ def row(
 ) -> dict:
     return {
         "id": blocker_id,
+        "blocker_id": blocker_id,
         "title": title,
         "category": category,
         "owner": owner,
