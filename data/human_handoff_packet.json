@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T02:51:41.588402Z",
+  "generated_at": "2026-06-20T02:55:11.721980Z",
   "safe_mode": true,
   "source": {
     "promotion_blocker_ledger": "data/promotion_blocker_ledger.json",
@@ -98,9 +98,11 @@
           "FP-AUTO-259"
         ],
         "blockers_resolved": 2,
+        "approval_blockers_before": 3,
+        "approval_blockers_after": 1,
         "change_count": 2,
-        "auto_count": 2,
-        "manual_count": 1
+        "auto_rows_unblocked": 1,
+        "manual_rows_unblocked": 1
       },
       "links": [],
       "guardrail": "Use --checked-batch so only rows that passed review checks are approved."

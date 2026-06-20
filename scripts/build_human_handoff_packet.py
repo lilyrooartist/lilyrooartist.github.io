@@ -56,12 +56,25 @@ def command_task(
     }
 
 
-def approval_tasks(packet: dict) -> list[dict]:
+def approval_tasks(packet: dict, blocker_summary: dict) -> list[dict]:
     summary = packet.get("summary") or {}
     checked_ids = summary.get("checked_batch_ids") or []
     if not checked_ids:
         return []
     effect = summary.get("checked_batch_effect") or {}
+    rows_by_id = {
+        row.get("id"): row
+        for row in packet.get("rows") or []
+        if row.get("id")
+    }
+    checked_rows = [rows_by_id.get(post_id) or {} for post_id in checked_ids]
+    projection = blocker_summary.get("next_resolution_projection") or {}
+    auto_rows_unblocked = projection.get("auto_rows_unblocked")
+    manual_rows_unblocked = projection.get("manual_rows_unblocked")
+    if auto_rows_unblocked is None:
+        auto_rows_unblocked = sum(1 for row in checked_rows if row.get("execution_mode") == "auto")
+    if manual_rows_unblocked is None:
+        manual_rows_unblocked = sum(1 for row in checked_rows if row.get("execution_mode") == "manual")
     return [
         command_task(
             "approve-checked-scheduled-batch",
@@ -77,10 +90,12 @@ def approval_tasks(packet: dict) -> list[dict]:
             {
                 "checked_ids": checked_ids,
                 "blocked_ids_retained": summary.get("blocked_review_ids") or [],
-                "blockers_resolved": len(checked_ids),
+                "blockers_resolved": projection.get("blockers_resolved") or len(checked_ids),
+                "approval_blockers_before": projection.get("approval_blockers_before") or summary.get("approval_blocker_count") or 0,
+                "approval_blockers_after": projection.get("approval_blockers_after") if projection.get("approval_blockers_after") is not None else len(summary.get("blocked_review_ids") or []),
                 "change_count": effect.get("change_count") or 0,
-                "auto_count": summary.get("auto_count") or 0,
-                "manual_count": summary.get("manual_count") or 0,
+                "auto_rows_unblocked": auto_rows_unblocked,
+                "manual_rows_unblocked": manual_rows_unblocked,
             },
             guardrail="Use --checked-batch so only rows that passed review checks are approved.",
         )
@@ -279,8 +294,9 @@ def sync_admin(payload: dict, markdown: str) -> None:
 
 
 def main() -> int:
+    blocker_summary = (read_json(BLOCKER_LEDGER, {}).get("summary") or {})
     tasks = []
-    tasks.extend(approval_tasks(read_json(SCHEDULED_APPROVAL, {})))
+    tasks.extend(approval_tasks(read_json(SCHEDULED_APPROVAL, {}), blocker_summary))
     tasks.extend(manual_distribution_tasks(read_json(MANUAL_DISTRIBUTION, {})))
     tasks.extend(platform_setup_tasks(read_json(PLATFORM_REPAIR, {})))
     tasks.extend(backlog_tasks(read_json(BACKLOG_RESCHEDULE, {})))
@@ -295,7 +311,6 @@ def main() -> int:
         owner_counts[task["owner"]] = owner_counts.get(task["owner"], 0) + 1
         urgency_counts[task["urgency"]] = urgency_counts.get(task["urgency"], 0) + 1
         phase_counts[task["phase"]] = phase_counts.get(task["phase"], 0) + 1
-    blocker_summary = (read_json(BLOCKER_LEDGER, {}).get("summary") or {})
     payload = {
         "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "safe_mode": True,

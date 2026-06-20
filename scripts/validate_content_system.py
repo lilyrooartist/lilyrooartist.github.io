@@ -441,6 +441,9 @@ def validate_generated_outputs(failures):
         phases = {task.get("phase") for task in tasks}
         owners = summary.get("owner_counts") or {}
         urgencies = summary.get("urgency_counts") or {}
+        approval_task = next((task for task in tasks if task.get("id") == "approve-checked-scheduled-batch"), {})
+        approval_impact = approval_task.get("impact") or {}
+        blocker_projection = ((summary.get("blocker_summary") or {}).get("next_resolution_projection") or {})
         if (
             handoff.get("safe_mode") is True
             and summary.get("task_count") == len(tasks)
@@ -448,7 +451,15 @@ def validate_generated_outputs(failures):
             and sum(int(value or 0) for value in urgencies.values()) == len(tasks)
             and {"Approval", "Manual distribution", "Manual metrics", "Platform setup", "Backlog recovery"} <= phases
             and all(task.get("id") and task.get("title") and task.get("owner") and task.get("urgency") and task.get("status") and task.get("source_path") for task in tasks)
-            and any(task.get("id") == "approve-checked-scheduled-batch" and "--checked-batch" in task.get("apply_command", "") for task in tasks)
+            and approval_task
+            and "--checked-batch" in approval_task.get("apply_command", "")
+            and approval_impact.get("checked_ids") == blocker_projection.get("checked_ids")
+            and approval_impact.get("blocked_ids_retained") == blocker_projection.get("blocked_ids_retained")
+            and approval_impact.get("blockers_resolved") == blocker_projection.get("blockers_resolved")
+            and approval_impact.get("approval_blockers_before") == blocker_projection.get("approval_blockers_before")
+            and approval_impact.get("approval_blockers_after") == blocker_projection.get("approval_blockers_after")
+            and approval_impact.get("auto_rows_unblocked") == blocker_projection.get("auto_rows_unblocked")
+            and approval_impact.get("manual_rows_unblocked") == blocker_projection.get("manual_rows_unblocked")
             and any(task.get("phase") == "Manual metrics" and (task.get("impact") or {}).get("pending_assignments") for task in tasks)
             and any(task.get("phase") == "Platform setup" and (task.get("impact") or {}).get("missing_secrets") for task in tasks)
         ):
