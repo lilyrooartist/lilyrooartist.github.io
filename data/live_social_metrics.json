@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "updated_at": "2026-06-20T06:46:48.650Z",
+  "updated_at": "2026-06-20T06:47:36.517Z",
   "platforms": {
     "youtube": {
       "ok": false,
@@ -56,12 +56,12 @@
       "status": null,
       "source": "instagram-public-profile-page",
       "profile_url": "https://www.instagram.com/lilyroo.artist/",
-      "http_status": 429,
-      "html_bytes": 0,
+      "http_status": 200,
+      "html_bytes": 739574,
       "pending_fields": [
         "followers"
       ],
-      "public_capture_status": "HTTP Error 429: Too Many Requests"
+      "public_capture_status": "Instagram public profile did not expose a stable follower value without authenticated or cookie-backed access."
     },
     "facebook": {
       "ok": true,
@@ -85,7 +85,7 @@
       "source": "x-public-profile-page",
       "profile_url": "https://x.com/lilyrooartist",
       "http_status": 200,
-      "html_bytes": 64268,
+      "html_bytes": 64134,
       "pending_fields": [
         "followers"
       ],
@@ -124,12 +124,12 @@
         "source": "instagram-public-profile-page",
         "metrics": {},
         "profile_url": "https://www.instagram.com/lilyroo.artist/",
-        "http_status": 429,
-        "html_bytes": 0,
+        "http_status": 200,
+        "html_bytes": 739574,
         "pending_fields": [
           "followers"
         ],
-        "public_capture_status": "HTTP Error 429: Too Many Requests"
+        "public_capture_status": "Instagram public profile did not expose a stable follower value without authenticated or cookie-backed access."
       },
       "x": {
         "ok": false,
@@ -137,14 +137,12 @@
         "metrics": {},
         "profile_url": "https://x.com/lilyrooartist",
         "http_status": 200,
-        "html_bytes": 64268,
+        "html_bytes": 64134,
         "pending_fields": [
           "followers"
         ],
         "public_capture_status": "X public profile did not expose a stable numeric follower value; use X API credentials or manual profile review."
       }
     }
-  },
-  "authenticated_capture_error": "Unauthorized",
-  "authenticated_capture_status": 401
+  }
 }
