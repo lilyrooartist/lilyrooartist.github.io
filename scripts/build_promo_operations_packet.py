@@ -423,6 +423,7 @@ def scheduled_approval_batch_actions(packet):
 def backlog_reschedule_actions(status, backlog_preview):
     monetization = (status.get("kpi") or {}).get("monetization") or {}
     backlog_summary = (backlog_preview.get("summary") or {}) if backlog_preview else {}
+    clearance_manifest = (backlog_preview.get("backlog_clearance_manifest") or {}) if backlog_preview else {}
     approved_backlog = int(monetization.get("approved_backlog_posts") or 0)
     preview_command = backlog_summary.get("preview_command") or monetization.get("backlog_reschedule_preview_command") or ""
     if not approved_backlog or not preview_command:
@@ -446,6 +447,10 @@ def backlog_reschedule_actions(status, backlog_preview):
                 "apply_command": backlog_summary.get("apply_command") or "",
                 "blocked_apply_command": backlog_summary.get("blocked_apply_command") or "",
                 "override_apply_command": backlog_summary.get("override_apply_command") or "",
+                "backlog_clearance_manifest": clearance_manifest,
+                "clearance_checklist": clearance_manifest.get("operator_checklist") or [],
+                "completion_evidence": clearance_manifest.get("completion_evidence") or [],
+                "clearance_guardrails": clearance_manifest.get("guardrails") or [],
                 "note": note,
             },
         )

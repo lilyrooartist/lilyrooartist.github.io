@@ -295,6 +295,7 @@ def add_backlog(rows: list[dict]) -> None:
             "apply_allowed_without_override": bool(summary.get("apply_allowed_without_override")),
             "blocked_apply_command": summary.get("blocked_apply_command") or "",
             "override_apply_command": summary.get("override_apply_command") or "",
+            "backlog_clearance_manifest": packet.get("backlog_clearance_manifest") or {},
         },
     ))
 

@@ -171,6 +171,22 @@ def build_preview() -> dict:
                 clearance_summary.append(step)
     safe_apply_command = apply_command(status) if not blocked_items else ""
     blocked_apply_command = apply_command(status) if blocked_items else ""
+    summary = {
+        "approved_backlog_count": len(items),
+        "blocked_backlog_count": len(blocked_items),
+        "clear_to_apply_count": len(items) - len(blocked_items),
+        "start_at": start_at.isoformat(),
+        "spacing_hours": spacing_hours,
+        "preview_command": preview_command(status),
+        "apply_command": safe_apply_command,
+        "blocked_apply_command": blocked_apply_command,
+        "override_apply_command": override_apply_command(status) if blocked_items else "",
+        "apply_blocked_reason": "Known executor/platform blockers must clear before normal apply." if blocked_items else "",
+        "apply_allowed_without_override": len(blocked_items) == 0,
+        "blocked_ids": [item["id"] for item in blocked_items],
+        "normal_apply_gate": "blocked_until_clearance_steps_complete" if blocked_items else "clear",
+        "clearance_steps": clearance_summary,
+    }
     return {
         "generated_at": datetime.now().astimezone().isoformat(),
         "safe_mode": True,
@@ -181,23 +197,57 @@ def build_preview() -> dict:
             "executor_readiness": str(EXECUTOR_READINESS.relative_to(ROOT)),
             "promo_engine_status": str(PROMO_STATUS.relative_to(ROOT)),
         },
-        "summary": {
-            "approved_backlog_count": len(items),
-            "blocked_backlog_count": len(blocked_items),
-            "clear_to_apply_count": len(items) - len(blocked_items),
-            "start_at": start_at.isoformat(),
-            "spacing_hours": spacing_hours,
-            "preview_command": preview_command(status),
-            "apply_command": safe_apply_command,
-            "blocked_apply_command": blocked_apply_command,
-            "override_apply_command": override_apply_command(status) if blocked_items else "",
-            "apply_blocked_reason": "Known executor/platform blockers must clear before normal apply." if blocked_items else "",
-            "apply_allowed_without_override": len(blocked_items) == 0,
-            "blocked_ids": [item["id"] for item in blocked_items],
-            "normal_apply_gate": "blocked_until_clearance_steps_complete" if blocked_items else "clear",
-            "clearance_steps": clearance_summary,
-        },
+        "summary": summary,
+        "backlog_clearance_manifest": backlog_clearance_manifest(summary, items),
         "items": items,
+    }
+
+
+def backlog_clearance_manifest(summary: dict, items: list[dict]) -> dict:
+    blocked_items = [item for item in items if item.get("blocked")]
+    return {
+        "status": summary.get("normal_apply_gate") or "unknown",
+        "approved_backlog_count": summary.get("approved_backlog_count") or 0,
+        "blocked_backlog_count": summary.get("blocked_backlog_count") or 0,
+        "clear_to_apply_count": summary.get("clear_to_apply_count") or 0,
+        "blocked_ids": summary.get("blocked_ids") or [],
+        "preview_command": summary.get("preview_command") or "",
+        "safe_apply_command": summary.get("apply_command") or "",
+        "blocked_apply_command": summary.get("blocked_apply_command") or "",
+        "override_apply_command": summary.get("override_apply_command") or "",
+        "apply_allowed_without_override": bool(summary.get("apply_allowed_without_override")),
+        "apply_gate": summary.get("normal_apply_gate") or "unknown",
+        "clearance_steps": summary.get("clearance_steps") or [],
+        "blocked_items": [
+            {
+                "id": item.get("id") or "",
+                "platform": item.get("platform") or "",
+                "song": item.get("song") or "",
+                "blocker_kind": item.get("blocker_kind") or "",
+                "blocker_reason": item.get("blocker_reason") or "",
+                "proposed_scheduled_at": item.get("proposed_scheduled_at") or "",
+                "clearance_steps": item.get("clearance_steps") or [],
+            }
+            for item in blocked_items
+        ],
+        "operator_checklist": [
+            "Run the preview command and confirm it proposes only approved unpublished backlog rows.",
+            "Complete every listed platform/executor clearance step before normal apply.",
+            "Refresh Admin and confirm the normal apply gate is clear.",
+            "Apply only when safe_apply_command is populated without --allow-blocked.",
+            "After apply, refresh Admin and confirm the backlog rows have future scheduled_at values.",
+        ],
+        "completion_evidence": [
+            "data/backlog_reschedule_preview.json shows normal_apply_gate clear.",
+            "data/platform_repair_status.json shows the affected platform repair gate clear.",
+            "data/social_execution_snapshot.json no longer reports the row as blocked by executor/platform repair.",
+            "data/promo_engine_status.json and lilyroo.com/admin expose a safe apply command or no approved past-due backlog.",
+        ],
+        "guardrails": [
+            "Normal apply stays hidden while blocked_ids are present.",
+            "Do not use the override command unless accepting the blocked executor risk deliberately.",
+            "A reschedule does not publish, approve, or repair platform credentials by itself.",
+        ],
     }
 
 
@@ -230,6 +280,7 @@ def replace_text_embed(html: str, block_id: str, content: str) -> str:
 
 def build_markdown(payload: dict) -> str:
     summary = payload["summary"]
+    manifest = payload.get("backlog_clearance_manifest") or {}
     lines = [
         "# Backlog Reschedule Preview - Lily Roo",
         "",
@@ -254,6 +305,30 @@ def build_markdown(payload: dict) -> str:
             lines.append(f"  - Blocker: {item['blocker_reason'] or item['blocker_status'] or 'executor attention required'}")
             for step in item.get("clearance_steps") or []:
                 lines.append(f"  - Clearance: {step}")
+    lines.extend([
+        "",
+        "## Clearance Manifest",
+        f"- Status: **{manifest.get('status', 'unknown')}**",
+        f"- Blocked IDs: `{', '.join(manifest.get('blocked_ids') or []) or 'none'}`",
+        f"- Safe apply command: `{manifest.get('safe_apply_command') or 'blocked until clearance steps complete'}`",
+        f"- Apply gate: **{manifest.get('apply_gate', 'unknown')}**",
+        "",
+        "### Operator Checklist",
+    ])
+    for item in manifest.get("operator_checklist") or []:
+        lines.append(f"- {item}")
+    lines.extend([
+        "",
+        "### Completion Evidence",
+    ])
+    for item in manifest.get("completion_evidence") or []:
+        lines.append(f"- {item}")
+    lines.extend([
+        "",
+        "### Clearance Guardrails",
+    ])
+    for item in manifest.get("guardrails") or []:
+        lines.append(f"- {item}")
     lines.extend([
         "",
         "## Commands",

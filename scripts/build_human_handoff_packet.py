@@ -227,6 +227,7 @@ def platform_setup_tasks(packet: dict, tiktok_preflight: dict) -> list[dict]:
 
 def backlog_tasks(packet: dict) -> list[dict]:
     summary = packet.get("summary") or {}
+    clearance_manifest = packet.get("backlog_clearance_manifest") or {}
     if not int(summary.get("approved_backlog_count") or 0):
         return []
     return [
@@ -246,6 +247,10 @@ def backlog_tasks(packet: dict) -> list[dict]:
                 "blocked_backlog_count": summary.get("blocked_backlog_count") or 0,
                 "blocked_apply_command": summary.get("blocked_apply_command") or "",
                 "override_apply_command": summary.get("override_apply_command") or "",
+                "backlog_clearance_manifest": clearance_manifest,
+                "clearance_checklist": clearance_manifest.get("operator_checklist") or [],
+                "completion_evidence": clearance_manifest.get("completion_evidence") or [],
+                "clearance_guardrails": clearance_manifest.get("guardrails") or [],
             },
             guardrail="Normal apply stays hidden until known executor/platform blockers clear.",
         )
@@ -308,6 +313,7 @@ def build_action_docket(tasks: list[dict], blocker_summary: dict, approval_runwa
     metric_manifest = (manual_metrics[0].get("impact") or {}).get("metric_completion_manifest") if manual_metrics else {}
     backlog_preview_command = backlog.get("preview_command") if backlog else ""
     backlog_apply_command = backlog.get("apply_command") if backlog else ""
+    backlog_manifest = (backlog.get("impact") or {}).get("backlog_clearance_manifest") if backlog else {}
     checklist = [
         {
             "id": "review-checked-approval-batch",
@@ -395,6 +401,9 @@ def build_action_docket(tasks: list[dict], blocker_summary: dict, approval_runwa
             "owner": backlog.get("owner") or "tod",
             "task_ids": [backlog.get("id")] if backlog else [],
             "blockers_resolved": (backlog.get("impact") or {}).get("approved_backlog_count") or 0,
+            "backlog_clearance_manifest": backlog_manifest or {},
+            "clearance_checklist": (backlog_manifest or {}).get("operator_checklist") or [],
+            "clearance_guardrails": (backlog_manifest or {}).get("guardrails") or [],
             "preview_command": backlog_preview_command,
             "apply_command": backlog_apply_command,
             "command_sequence": command_sequence(backlog_preview_command, backlog_apply_command, "python3 scripts/refresh_promo_admin.py"),

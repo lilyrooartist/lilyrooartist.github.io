@@ -32,6 +32,7 @@ PROMOTION_BLOCKER_LEDGER = ROOT / "data" / "promotion_blocker_ledger.json"
 HUMAN_HANDOFF_PACKET = ROOT / "data" / "human_handoff_packet.json"
 MANUAL_DISTRIBUTION_PACKET = ROOT / "data" / "manual_distribution_packet.json"
 PUBLISHED_LOG_RECONCILIATION = ROOT / "data" / "published_log_reconciliation.json"
+BACKLOG_RESCHEDULE_PREVIEW = ROOT / "data" / "backlog_reschedule_preview.json"
 PUBLISHED = ROOT / "admin" / "content" / "Published_Log.csv"
 FUTURE_POSTS = ROOT / "admin" / "future-posts.json"
 RESCHEDULE_SCRIPT = ROOT / "scripts" / "reschedule_scheduled_posts.py"
@@ -1626,6 +1627,7 @@ def build_status():
     human_handoff = read_json(HUMAN_HANDOFF_PACKET, {})
     manual_distribution = read_json(MANUAL_DISTRIBUTION_PACKET, {})
     published_log_reconciliation = read_json(PUBLISHED_LOG_RECONCILIATION, {})
+    backlog_reschedule_preview = read_json(BACKLOG_RESCHEDULE_PREVIEW, {})
     manual_metric_packet = read_json(MANUAL_METRIC_PACKET, {})
     store_verification_run = read_json(STORE_VERIFICATION_RUN, {})
     future_posts = read_json(FUTURE_POSTS, {})
@@ -1876,6 +1878,12 @@ def build_status():
             "operator_docket": operator_docket,
             "manual_distribution": manual_distribution,
             "published_log_reconciliation": published_log_reconciliation,
+            "backlog_reschedule": {
+                "source_path": str(BACKLOG_RESCHEDULE_PREVIEW.relative_to(ROOT)),
+                "available": bool(backlog_reschedule_preview),
+                "summary": backlog_reschedule_preview.get("summary") or {},
+                "backlog_clearance_manifest": backlog_reschedule_preview.get("backlog_clearance_manifest") or {},
+            },
             "stale_source_count": freshness_summary["stale"],
             "missing_source_count": freshness_summary["missing"],
         },

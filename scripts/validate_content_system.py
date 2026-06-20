@@ -569,6 +569,9 @@ def validate_generated_outputs(failures):
                             and not (action.get("context") or {}).get("apply_command")
                             and (action.get("context") or {}).get("blocked_apply_command")
                             and (action.get("context") or {}).get("override_apply_command")
+                            and (action.get("context") or {}).get("backlog_clearance_manifest")
+                            and (action.get("context") or {}).get("clearance_checklist")
+                            and (action.get("context") or {}).get("clearance_guardrails")
                         )
                     )
                     for action in backlog_actions
@@ -837,6 +840,7 @@ def validate_generated_outputs(failures):
             and manual_posting_step.get("apply_command") == (manual_approval_docket.get("apply_command") or "")
             and manual_approval_docket.get("guardrail") in manual_posting_step.get("guardrail", "")
             and any(item.get("id") == "manual-metric-worksheet" and item.get("field_count") == metric_task_field_count and "--from-csv --dry-run" in item.get("preview_command", "") and item.get("metric_completion_manifest") and item.get("completion_checklist") and item.get("completion_guardrails") for item in docket_checklist)
+            and any(item.get("id") == "backlog-reschedule-gate" and item.get("backlog_clearance_manifest") and item.get("clearance_checklist") and item.get("clearance_guardrails") for item in docket_checklist)
             and any(item.get("id") == "platform-repair-gate" and item.get("state") == "blocked" and "push_social_worker_secrets.py --dry-run" in item.get("preview_command", "") for item in docket_checklist)
             and all(
                 item.get("completion_evidence")
@@ -848,6 +852,7 @@ def validate_generated_outputs(failures):
                 if item.get("state") != "clear"
             )
             and any(task.get("phase") == "Manual metrics" and (task.get("impact") or {}).get("pending_assignments") and (task.get("impact") or {}).get("metric_completion_manifest") and (task.get("impact") or {}).get("completion_checklist") for task in tasks)
+            and any(task.get("phase") == "Backlog recovery" and (task.get("impact") or {}).get("backlog_clearance_manifest") and (task.get("impact") or {}).get("clearance_checklist") for task in tasks)
             and any(task.get("phase") == "Platform setup" and (task.get("impact") or {}).get("missing_secrets") for task in tasks)
             and any(task.get("phase") == "Platform setup" and (task.get("impact") or {}).get("platform") == "TikTok" and (task.get("impact") or {}).get("preflight_status") and (task.get("impact") or {}).get("preflight_command") and (task.get("impact") or {}).get("preflight_report") for task in tasks)
         ):
@@ -1244,6 +1249,7 @@ def validate_generated_outputs(failures):
         summary = backlog_preview.get("summary") or {}
         items = backlog_preview.get("items") or []
         blocked = [item for item in items if item.get("blocked")]
+        clearance_manifest = backlog_preview.get("backlog_clearance_manifest") or {}
         if (
             backlog_preview.get("safe_mode") is True
             and summary.get("approved_backlog_count") == len(items)
@@ -1253,6 +1259,19 @@ def validate_generated_outputs(failures):
             and summary.get("blocked_ids") == [item.get("id") for item in blocked]
             and summary.get("normal_apply_gate") == ("blocked_until_clearance_steps_complete" if blocked else "clear")
             and isinstance(summary.get("clearance_steps"), list)
+            and clearance_manifest.get("status") == summary.get("normal_apply_gate")
+            and clearance_manifest.get("approved_backlog_count") == summary.get("approved_backlog_count")
+            and clearance_manifest.get("blocked_backlog_count") == summary.get("blocked_backlog_count")
+            and clearance_manifest.get("clear_to_apply_count") == summary.get("clear_to_apply_count")
+            and clearance_manifest.get("blocked_ids") == summary.get("blocked_ids")
+            and clearance_manifest.get("preview_command") == summary.get("preview_command")
+            and clearance_manifest.get("safe_apply_command") == summary.get("apply_command")
+            and clearance_manifest.get("blocked_apply_command") == summary.get("blocked_apply_command")
+            and clearance_manifest.get("override_apply_command") == summary.get("override_apply_command")
+            and clearance_manifest.get("apply_gate") == summary.get("normal_apply_gate")
+            and len(clearance_manifest.get("blocked_items") or []) == len(blocked)
+            and any("normal_apply_gate clear" in item for item in clearance_manifest.get("completion_evidence") or [])
+            and any("Normal apply stays hidden" in item for item in clearance_manifest.get("guardrails") or [])
             and (
                 (not blocked and summary.get("apply_command") and not summary.get("blocked_apply_command") and not summary.get("override_apply_command"))
                 or (blocked and not summary.get("apply_command") and summary.get("blocked_apply_command") and "--allow-blocked" in summary.get("override_apply_command", ""))
@@ -1820,6 +1839,8 @@ def validate_generated_outputs(failures):
             fail("promo_engine_status.json missing monetization queue pressure", failures)
         preview_command = monetization.get("backlog_reschedule_preview_command") or ""
         apply_command = monetization.get("backlog_reschedule_apply_command") or ""
+        backlog_preview = json.loads(BACKLOG_RESCHEDULE_PREVIEW.read_text(encoding="utf-8")) if BACKLOG_RESCHEDULE_PREVIEW.exists() else {}
+        backlog_status = kpi.get("backlog_reschedule") or {}
         if (
             "scripts/reschedule_scheduled_posts.py" in preview_command
             and "--approved-backlog" in preview_command
@@ -1830,6 +1851,15 @@ def validate_generated_outputs(failures):
             ok("promo engine includes dry-run backlog reschedule command")
         else:
             fail("promo_engine_status.json missing safe backlog reschedule command", failures)
+        if (
+            backlog_status.get("available") is True
+            and backlog_status.get("source_path") == "data/backlog_reschedule_preview.json"
+            and backlog_status.get("summary") == (backlog_preview.get("summary") or {})
+            and backlog_status.get("backlog_clearance_manifest") == (backlog_preview.get("backlog_clearance_manifest") or {})
+        ):
+            ok("promo engine status mirrors backlog reschedule clearance manifest")
+        else:
+            fail("promo_engine_status.json missing backlog reschedule clearance manifest", failures)
         automation = kpi.get("refresh_automation") or {}
         if (
             automation.get("configured") is True
@@ -2504,7 +2534,7 @@ def validate_generated_outputs(failures):
         fail("build_published_log_reconciliation.py missing", failures)
     if HUMAN_HANDOFF_SCRIPT.exists():
         handoff_text = HUMAN_HANDOFF_SCRIPT.read_text(encoding="utf-8")
-        if "human_handoff_packet.json" in handoff_text and "human-handoff-packet.md" in handoff_text and "promotion_blocker_ledger.json" in handoff_text and "manual_metric_collection_packet.json" in handoff_text and "priority_batches" in handoff_text and "batch_count" in handoff_text and "metric_completion_manifest" in handoff_text and "completion_checklist" in handoff_text and "manual_distribution_packet.json" in handoff_text and "approval_runway.json" in handoff_text and "scheduled_approval_packet.json" in handoff_text and "platform_repair_status.json" in handoff_text and "tiktok_setup_preflight.json" in handoff_text and "action_docket" in handoff_text and "approval_decision_manifest" in handoff_text and "approval_review_runbook" in handoff_text and "review_checklist" in handoff_text and "Review runbook" in handoff_text and "decision_ready_ids" in handoff_text and "build_action_docket" in handoff_text and "command_sequence" in handoff_text and "completion_evidence" in handoff_text and "next_step_after_apply" in handoff_text and "subprocess" not in handoff_text:
+        if "human_handoff_packet.json" in handoff_text and "human-handoff-packet.md" in handoff_text and "promotion_blocker_ledger.json" in handoff_text and "manual_metric_collection_packet.json" in handoff_text and "priority_batches" in handoff_text and "batch_count" in handoff_text and "metric_completion_manifest" in handoff_text and "completion_checklist" in handoff_text and "backlog_clearance_manifest" in handoff_text and "clearance_checklist" in handoff_text and "manual_distribution_packet.json" in handoff_text and "approval_runway.json" in handoff_text and "scheduled_approval_packet.json" in handoff_text and "platform_repair_status.json" in handoff_text and "tiktok_setup_preflight.json" in handoff_text and "action_docket" in handoff_text and "approval_decision_manifest" in handoff_text and "approval_review_runbook" in handoff_text and "review_checklist" in handoff_text and "Review runbook" in handoff_text and "decision_ready_ids" in handoff_text and "build_action_docket" in handoff_text and "command_sequence" in handoff_text and "completion_evidence" in handoff_text and "next_step_after_apply" in handoff_text and "subprocess" not in handoff_text:
             ok("human handoff packet builder is review-only")
         else:
             fail("build_human_handoff_packet.py missing handoff outputs or executes commands", failures)
@@ -2512,7 +2542,7 @@ def validate_generated_outputs(failures):
         fail("build_human_handoff_packet.py missing", failures)
     if PROMOTION_BLOCKER_LEDGER_SCRIPT.exists():
         ledger_text = PROMOTION_BLOCKER_LEDGER_SCRIPT.read_text(encoding="utf-8")
-        if "promotion_blocker_ledger.json" in ledger_text and "promotion-blocker-ledger.md" in ledger_text and "owner_counts" in ledger_text and "category_counts" in ledger_text and "manual_metric_collection_packet.json" in ledger_text and "priority_batches" in ledger_text and "manual_metric_batch" in ledger_text and "approval_runway.json" in ledger_text and "blocker_unlock_roadmap" in ledger_text and "build_unlock_roadmap" in ledger_text and "next_resolution_projection" in ledger_text and "approval_projection" in ledger_text and "subprocess" not in ledger_text:
+        if "promotion_blocker_ledger.json" in ledger_text and "promotion-blocker-ledger.md" in ledger_text and "owner_counts" in ledger_text and "category_counts" in ledger_text and "manual_metric_collection_packet.json" in ledger_text and "priority_batches" in ledger_text and "manual_metric_batch" in ledger_text and "backlog_clearance_manifest" in ledger_text and "approval_runway.json" in ledger_text and "blocker_unlock_roadmap" in ledger_text and "build_unlock_roadmap" in ledger_text and "next_resolution_projection" in ledger_text and "approval_projection" in ledger_text and "subprocess" not in ledger_text:
             ok("promotion blocker ledger builder is review-only")
         else:
             fail("build_promotion_blocker_ledger.py missing ledger outputs or executes commands", failures)
@@ -2576,7 +2606,7 @@ def validate_generated_outputs(failures):
         fail("build_monetization_activation_plan.py missing", failures)
     if BACKLOG_RESCHEDULE_PREVIEW_SCRIPT.exists():
         backlog_text = BACKLOG_RESCHEDULE_PREVIEW_SCRIPT.read_text(encoding="utf-8")
-        if "backlog_reschedule_preview.json" in backlog_text and "backlog-reschedule-preview.md" in backlog_text and "Apply allowed without override" in backlog_text and "normal_apply_gate" in backlog_text and "clearance_steps" in backlog_text and "executor_readiness_snapshot.json" in backlog_text and "blocked_apply_command" in backlog_text and "override_apply_command" in backlog_text and "subprocess" not in backlog_text:
+        if "backlog_reschedule_preview.json" in backlog_text and "backlog-reschedule-preview.md" in backlog_text and "Apply allowed without override" in backlog_text and "backlog_clearance_manifest" in backlog_text and "Clearance Manifest" in backlog_text and "normal_apply_gate" in backlog_text and "clearance_steps" in backlog_text and "executor_readiness_snapshot.json" in backlog_text and "blocked_apply_command" in backlog_text and "override_apply_command" in backlog_text and "subprocess" not in backlog_text:
             ok("backlog reschedule preview builder is review-only")
         else:
             fail("build_backlog_reschedule_preview.py missing preview outputs or executes commands", failures)
