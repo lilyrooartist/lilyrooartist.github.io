@@ -1,6 +1,6 @@
 # Human Handoff Packet - Lily Roo
 
-Generated: 2026-06-20T05:21:54.030252Z
+Generated: 2026-06-20T05:25:09.465063Z
 
 ## Summary
 - Open handoff tasks: **8**
@@ -17,6 +17,7 @@ Generated: 2026-06-20T05:21:54.030252Z
 
 - **Review checked approval batch** (`ready_for_review`)
   - Owner: `tod`; tasks: **1**; blockers resolved: **2**
+  - Decision manifest: ready `FP-AUTO-258, FP-AUTO-261`; held `FP-AUTO-259`
   - Preview/check: `python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run`
   - Apply after review: `python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin`
   - Sequence preview: `python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run`

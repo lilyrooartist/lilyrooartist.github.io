@@ -60,6 +60,7 @@ def command_task(
 
 def approval_tasks(packet: dict, blocker_summary: dict) -> list[dict]:
     summary = packet.get("summary") or {}
+    decision_manifest = packet.get("approval_decision_manifest") or {}
     checked_ids = summary.get("checked_batch_ids") or []
     if not checked_ids:
         return []
@@ -98,6 +99,10 @@ def approval_tasks(packet: dict, blocker_summary: dict) -> list[dict]:
                 "change_count": effect.get("change_count") or 0,
                 "auto_rows_unblocked": auto_rows_unblocked,
                 "manual_rows_unblocked": manual_rows_unblocked,
+                "approval_decision_manifest": decision_manifest,
+                "decision_ready_ids": decision_manifest.get("ready_ids") or [],
+                "decision_held_ids": decision_manifest.get("held_ids") or [],
+                "decision_guardrail": decision_manifest.get("guardrail") or "",
             },
             guardrail="Use --checked-batch so only rows that passed review checks are approved.",
         )
@@ -286,6 +291,7 @@ def build_action_docket(tasks: list[dict], blocker_summary: dict, approval_runwa
     manual_guardrail = manual_approval_docket.get("guardrail") or "Post manually first, then log only real public URLs."
     approval_preview_command = approval.get("preview_command") or projection.get("preview_command") or ""
     approval_apply_command = approval.get("apply_command") or projection.get("apply_command") or ""
+    approval_impact = approval.get("impact") or {}
     platform_preview_command = platform_setup[0].get("preview_command") if platform_setup else ""
     platform_apply_command = platform_setup[0].get("apply_command") if platform_setup else ""
     metric_preview_command = manual_metrics[0].get("preview_command") if manual_metrics else ""
@@ -300,6 +306,9 @@ def build_action_docket(tasks: list[dict], blocker_summary: dict, approval_runwa
             "owner": "tod",
             "task_ids": [approval.get("id")] if approval else [],
             "blockers_resolved": projection.get("blockers_resolved") or 0,
+            "decision_ready_ids": approval_impact.get("decision_ready_ids") or [],
+            "decision_held_ids": approval_impact.get("decision_held_ids") or [],
+            "approval_decision_manifest": approval_impact.get("approval_decision_manifest") or {},
             "preview_command": approval_preview_command,
             "apply_command": approval_apply_command,
             "command_sequence": command_sequence(approval_preview_command, approval_apply_command, "python3 scripts/refresh_promo_admin.py"),
@@ -435,6 +444,10 @@ def build_markdown(payload: dict) -> str:
             lines.append(f"  - Ready IDs: `{', '.join(item['ready_ids'])}`")
         if item.get("blocked_ids"):
             lines.append(f"  - Blocked IDs: `{', '.join(item['blocked_ids'])}`")
+        if item.get("decision_ready_ids") or item.get("decision_held_ids"):
+            ready_ids = ", ".join(item.get("decision_ready_ids") or []) or "none"
+            held_ids = ", ".join(item.get("decision_held_ids") or []) or "none"
+            lines.append(f"  - Decision manifest: ready `{ready_ids}`; held `{held_ids}`")
         if item.get("preview_command"):
             lines.append(f"  - Preview/check: `{item['preview_command']}`")
         if item.get("apply_command"):
