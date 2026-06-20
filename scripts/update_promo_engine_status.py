@@ -24,6 +24,7 @@ PROMO_REFRESH_WORKFLOW_STATUS = ROOT / "data" / "promo_refresh_workflow_status.j
 PROMO_REFRESH_WORKFLOW = ROOT / ".github" / "workflows" / "promo-admin-refresh.yml"
 SCHEDULED = ROOT / "data" / "scheduled_posts.csv"
 PROMO_QUEUE_PLAN = ROOT / "data" / "promo_queue_plan.json"
+PROMO_OPERATIONS_PACKET = ROOT / "data" / "promo_operations_packet.json"
 PUBLISHED = ROOT / "admin" / "content" / "Published_Log.csv"
 FUTURE_POSTS = ROOT / "admin" / "future-posts.json"
 RESCHEDULE_SCRIPT = ROOT / "scripts" / "reschedule_scheduled_posts.py"
@@ -1034,6 +1035,7 @@ def build_status():
     promo_refresh_run = read_json(PROMO_REFRESH_RUN, {})
     promo_refresh_workflow_status = read_json(PROMO_REFRESH_WORKFLOW_STATUS, {})
     promo_plan = read_json(PROMO_QUEUE_PLAN, {})
+    promo_operations = read_json(PROMO_OPERATIONS_PACKET, {})
     future_posts = read_json(FUTURE_POSTS, {})
     store_history = build_store_verification_history(release_status, now)
     scheduled_rows = read_csv(SCHEDULED)
@@ -1142,6 +1144,14 @@ def build_status():
     freshness_summary = freshness["summary"]
     freshness_actions = freshness["actions"]
     all_actions = freshness_actions + all_actions
+    operational_next_action = promo_operations.get("next_action") or (promo_operations.get("summary") or {}).get("next_action") or {}
+    operational_next_action_text = ""
+    if operational_next_action.get("label"):
+        command = operational_next_action.get("command") or ""
+        operational_next_action_text = (
+            f"Next operational action: {operational_next_action['label']}"
+            + (f" — {command}" if command else "")
+        )
     manual_metric_action = (
         "Refresh manual metrics: fill data/manual_metric_collection_template.csv, "
         "preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run, "
@@ -1170,12 +1180,16 @@ def build_status():
         all_actions.insert(0, f"Preview approved backlog reschedule: {monetization['backlog_reschedule_preview_command']}")
     if metrics["pending_manual_fields"] and not any("--from-csv --dry-run" in action for action in all_actions[:8]):
         all_actions.insert(0, manual_metric_action)
+    if operational_next_action_text:
+        all_actions = [action for action in all_actions if action != operational_next_action_text]
+        all_actions.insert(0, operational_next_action_text)
     return {
         "generated_at": now.isoformat(),
         "source": {
             "release_status": str(RELEASE_STATUS.relative_to(ROOT)),
             "scheduled_posts": str(SCHEDULED.relative_to(ROOT)),
             "promo_queue_plan": str(PROMO_QUEUE_PLAN.relative_to(ROOT)),
+            "promo_operations_packet": str(PROMO_OPERATIONS_PACKET.relative_to(ROOT)),
             "published_log": str(PUBLISHED.relative_to(ROOT)),
             "manual_metrics": str(MANUAL_METRICS.relative_to(ROOT)),
             "live_metrics": str(LIVE_METRICS.relative_to(ROOT)),
@@ -1221,6 +1235,7 @@ def build_status():
             "social_scheduler_dry_run": scheduler_state,
             "last_refresh_run": refresh_run,
             "refresh_automation": refresh_automation,
+            "operational_next_action": operational_next_action,
             "stale_source_count": freshness_summary["stale"],
             "missing_source_count": freshness_summary["missing"],
         },
@@ -1232,6 +1247,7 @@ def build_status():
             "fresh_sources": freshness_summary["fresh"],
             "stale_sources": freshness_summary["stale"],
             "missing_sources": freshness_summary["missing"],
+            "operational_next_action": operational_next_action,
         },
         "freshness": freshness,
         "releases": releases,

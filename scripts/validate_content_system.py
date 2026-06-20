@@ -1056,6 +1056,11 @@ def validate_generated_outputs(failures):
         else:
             fail("promo_engine_status.json missing next_actions", failures)
         next_actions = status.get("next_actions") or []
+        operational_next = kpi.get("operational_next_action") or {}
+        if operational_next.get("label") and next_actions and operational_next.get("label") in next_actions[0] and status.get("health", {}).get("operational_next_action") == operational_next:
+            ok("promo engine status mirrors operational next action")
+        else:
+            fail("promo_engine_status.json missing top-priority operational next action", failures)
         if pending_count and any("--from-csv --dry-run" in action for action in next_actions):
             ok("promo engine manual metric next action includes worksheet dry run")
         elif pending_count:
