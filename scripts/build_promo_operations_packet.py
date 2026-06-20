@@ -341,6 +341,7 @@ def apply_actions(plan):
 def scheduled_approval_batch_actions(packet):
     summary = packet.get("summary") or {}
     decision_manifest = packet.get("approval_decision_manifest") or {}
+    review_runbook = packet.get("approval_review_runbook") or {}
     decisions = decision_manifest.get("decisions") or []
     preview_command = summary.get("checked_batch_preview_command") or summary.get("batch_preview_command") or ""
     apply_command = summary.get("checked_batch_apply_command") or summary.get("batch_apply_command") or ""
@@ -391,6 +392,9 @@ def scheduled_approval_batch_actions(packet):
                 "manual_count": int(summary.get("manual_count") or 0),
                 "apply_command": apply_command,
                 "approval_decision_manifest": decision_manifest,
+                "approval_review_runbook": review_runbook,
+                "review_runbook_step_count": len(review_runbook.get("steps") or []),
+                "review_checklist_count": len(review_runbook.get("review_checklist") or []),
                 "approval_impact": approval_impact,
                 "decision_ready_ids": decision_manifest.get("ready_ids") or [],
                 "decision_held_ids": decision_manifest.get("held_ids") or [],
@@ -548,6 +552,11 @@ def build_markdown(packet):
                 ready_ids = ", ".join(context.get("decision_ready_ids") or []) or "none"
                 held_ids = ", ".join(context.get("decision_held_ids") or []) or "none"
                 lines.append(f"  - Decision manifest: ready `{ready_ids}`; held `{held_ids}`")
+            if context.get("review_runbook_step_count") is not None:
+                lines.append(
+                    f"  - Review runbook: **{context.get('review_runbook_step_count', 0)}** step(s), "
+                    f"**{context.get('review_checklist_count', 0)}** checklist row(s)"
+                )
             if context.get("decision_guardrail"):
                 lines.append(f"  - Decision guardrail: {context['decision_guardrail']}")
             approval_impact = context.get("approval_impact") or {}

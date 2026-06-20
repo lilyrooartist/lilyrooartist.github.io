@@ -563,6 +563,7 @@ def validate_generated_outputs(failures):
         ]
         scheduled_packet = json.loads(SCHEDULED_APPROVAL_PACKET.read_text(encoding="utf-8")) if SCHEDULED_APPROVAL_PACKET.exists() else {}
         scheduled_manifest = scheduled_packet.get("approval_decision_manifest") or {}
+        scheduled_runbook = scheduled_packet.get("approval_review_runbook") or {}
         scheduled_decisions = scheduled_manifest.get("decisions") or []
         ready_decisions = [item for item in scheduled_decisions if item.get("decision") == "ready_to_approve"]
         held_decisions = [item for item in scheduled_decisions if item.get("decision") == "held"]
@@ -578,6 +579,9 @@ def validate_generated_outputs(failures):
                 and all((action.get("context") or {}).get("decision_ready_ids") == (scheduled_manifest.get("ready_ids") or []) for action in scheduled_batch_actions)
                 and all((action.get("context") or {}).get("decision_held_ids") == (scheduled_manifest.get("held_ids") or []) for action in scheduled_batch_actions)
                 and all(((action.get("context") or {}).get("approval_decision_manifest") or {}).get("decisions") == (scheduled_manifest.get("decisions") or []) for action in scheduled_batch_actions)
+                and all(((action.get("context") or {}).get("approval_review_runbook") or {}).get("steps") == (scheduled_runbook.get("steps") or []) for action in scheduled_batch_actions)
+                and all((action.get("context") or {}).get("review_runbook_step_count") == len(scheduled_runbook.get("steps") or []) for action in scheduled_batch_actions)
+                and all((action.get("context") or {}).get("review_checklist_count") == len(scheduled_runbook.get("review_checklist") or []) for action in scheduled_batch_actions)
                 and all("--checked-batch" in ((action.get("context") or {}).get("decision_guardrail") or "") for action in scheduled_batch_actions)
                 and all(
                     not int((scheduled_packet.get("summary") or {}).get("review_check_passed_count") or 0)
@@ -758,6 +762,7 @@ def validate_generated_outputs(failures):
         blocker_projection = ((summary.get("blocker_summary") or {}).get("next_resolution_projection") or {})
         scheduled_packet = json.loads(SCHEDULED_APPROVAL_PACKET.read_text(encoding="utf-8")) if SCHEDULED_APPROVAL_PACKET.exists() else {}
         scheduled_manifest = scheduled_packet.get("approval_decision_manifest") or {}
+        scheduled_runbook = scheduled_packet.get("approval_review_runbook") or {}
         approval_runway = json.loads(APPROVAL_RUNWAY.read_text(encoding="utf-8")) if APPROVAL_RUNWAY.exists() else {}
         manual_approval_docket = approval_runway.get("manual_approval_docket") or {}
         manual_posting_step = next((item for item in docket_checklist if item.get("id") == "manual-posting-review"), {})
@@ -782,6 +787,9 @@ def validate_generated_outputs(failures):
             and approval_impact.get("decision_ready_ids") == (scheduled_manifest.get("ready_ids") or [])
             and approval_impact.get("decision_held_ids") == (scheduled_manifest.get("held_ids") or [])
             and (approval_impact.get("approval_decision_manifest") or {}).get("decisions") == (scheduled_manifest.get("decisions") or [])
+            and (approval_impact.get("approval_review_runbook") or {}).get("steps") == (scheduled_runbook.get("steps") or [])
+            and approval_impact.get("review_runbook_steps") == (scheduled_runbook.get("steps") or [])
+            and approval_impact.get("review_checklist") == (scheduled_runbook.get("review_checklist") or [])
             and "--checked-batch" in (approval_impact.get("decision_guardrail") or "")
             and docket.get("task_count") == len(tasks)
             and docket.get("roadmap_step_count") == len((summary.get("blocker_summary") or {}).get("blocker_unlock_roadmap") or [])
@@ -791,6 +799,9 @@ def validate_generated_outputs(failures):
             and first_ready_step.get("decision_ready_ids") == (scheduled_manifest.get("ready_ids") or [])
             and first_ready_step.get("decision_held_ids") == (scheduled_manifest.get("held_ids") or [])
             and (first_ready_step.get("approval_decision_manifest") or {}).get("decisions") == (scheduled_manifest.get("decisions") or [])
+            and (first_ready_step.get("approval_review_runbook") or {}).get("steps") == (scheduled_runbook.get("steps") or [])
+            and first_ready_step.get("review_runbook_steps") == (scheduled_runbook.get("steps") or [])
+            and first_ready_step.get("review_checklist") == (scheduled_runbook.get("review_checklist") or [])
             and manual_posting_step
             and manual_posting_step.get("ready_ids") == (manual_approval_docket.get("ready_ids") or [])
             and manual_posting_step.get("blocked_ids") == (manual_approval_docket.get("blocked_ids") or [])
@@ -2425,7 +2436,7 @@ def validate_generated_outputs(failures):
         fail("build_published_log_reconciliation.py missing", failures)
     if HUMAN_HANDOFF_SCRIPT.exists():
         handoff_text = HUMAN_HANDOFF_SCRIPT.read_text(encoding="utf-8")
-        if "human_handoff_packet.json" in handoff_text and "human-handoff-packet.md" in handoff_text and "promotion_blocker_ledger.json" in handoff_text and "manual_metric_collection_packet.json" in handoff_text and "priority_batches" in handoff_text and "batch_count" in handoff_text and "manual_distribution_packet.json" in handoff_text and "approval_runway.json" in handoff_text and "scheduled_approval_packet.json" in handoff_text and "platform_repair_status.json" in handoff_text and "tiktok_setup_preflight.json" in handoff_text and "action_docket" in handoff_text and "approval_decision_manifest" in handoff_text and "decision_ready_ids" in handoff_text and "build_action_docket" in handoff_text and "command_sequence" in handoff_text and "completion_evidence" in handoff_text and "next_step_after_apply" in handoff_text and "subprocess" not in handoff_text:
+        if "human_handoff_packet.json" in handoff_text and "human-handoff-packet.md" in handoff_text and "promotion_blocker_ledger.json" in handoff_text and "manual_metric_collection_packet.json" in handoff_text and "priority_batches" in handoff_text and "batch_count" in handoff_text and "manual_distribution_packet.json" in handoff_text and "approval_runway.json" in handoff_text and "scheduled_approval_packet.json" in handoff_text and "platform_repair_status.json" in handoff_text and "tiktok_setup_preflight.json" in handoff_text and "action_docket" in handoff_text and "approval_decision_manifest" in handoff_text and "approval_review_runbook" in handoff_text and "review_checklist" in handoff_text and "Review runbook" in handoff_text and "decision_ready_ids" in handoff_text and "build_action_docket" in handoff_text and "command_sequence" in handoff_text and "completion_evidence" in handoff_text and "next_step_after_apply" in handoff_text and "subprocess" not in handoff_text:
             ok("human handoff packet builder is review-only")
         else:
             fail("build_human_handoff_packet.py missing handoff outputs or executes commands", failures)

@@ -61,6 +61,7 @@ def command_task(
 def approval_tasks(packet: dict, blocker_summary: dict) -> list[dict]:
     summary = packet.get("summary") or {}
     decision_manifest = packet.get("approval_decision_manifest") or {}
+    review_runbook = packet.get("approval_review_runbook") or {}
     checked_ids = summary.get("checked_batch_ids") or []
     if not checked_ids:
         return []
@@ -100,6 +101,9 @@ def approval_tasks(packet: dict, blocker_summary: dict) -> list[dict]:
                 "auto_rows_unblocked": auto_rows_unblocked,
                 "manual_rows_unblocked": manual_rows_unblocked,
                 "approval_decision_manifest": decision_manifest,
+                "approval_review_runbook": review_runbook,
+                "review_runbook_steps": review_runbook.get("steps") or [],
+                "review_checklist": review_runbook.get("review_checklist") or [],
                 "decision_ready_ids": decision_manifest.get("ready_ids") or [],
                 "decision_held_ids": decision_manifest.get("held_ids") or [],
                 "decision_guardrail": decision_manifest.get("guardrail") or "",
@@ -309,6 +313,9 @@ def build_action_docket(tasks: list[dict], blocker_summary: dict, approval_runwa
             "decision_ready_ids": approval_impact.get("decision_ready_ids") or [],
             "decision_held_ids": approval_impact.get("decision_held_ids") or [],
             "approval_decision_manifest": approval_impact.get("approval_decision_manifest") or {},
+            "approval_review_runbook": approval_impact.get("approval_review_runbook") or {},
+            "review_runbook_steps": approval_impact.get("review_runbook_steps") or [],
+            "review_checklist": approval_impact.get("review_checklist") or [],
             "preview_command": approval_preview_command,
             "apply_command": approval_apply_command,
             "command_sequence": command_sequence(approval_preview_command, approval_apply_command, "python3 scripts/refresh_promo_admin.py"),
@@ -448,6 +455,11 @@ def build_markdown(payload: dict) -> str:
             ready_ids = ", ".join(item.get("decision_ready_ids") or []) or "none"
             held_ids = ", ".join(item.get("decision_held_ids") or []) or "none"
             lines.append(f"  - Decision manifest: ready `{ready_ids}`; held `{held_ids}`")
+        if item.get("review_runbook_steps") is not None:
+            lines.append(
+                f"  - Review runbook: **{len(item.get('review_runbook_steps') or [])}** step(s), "
+                f"**{len(item.get('review_checklist') or [])}** checklist row(s)"
+            )
         if item.get("preview_command"):
             lines.append(f"  - Preview/check: `{item['preview_command']}`")
         if item.get("apply_command"):

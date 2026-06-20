@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T08:04:28.693624Z",
+  "generated_at": "2026-06-20T08:08:47.942242Z",
   "safe_mode": true,
   "source": {
     "promotion_blocker_ledger": "data/promotion_blocker_ledger.json",
@@ -138,7 +138,7 @@
           "blocked_by": [
             "FP-AUTO-264"
           ],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
           "apply_command": "",
           "source_path": "data/backlog_reschedule_preview.json"
         },
@@ -391,6 +391,318 @@
         "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
         "guardrail": "Only ready_to_approve decisions may be applied through --checked-batch; held rows require repair first."
       },
+      "approval_review_runbook": {
+        "status": "ready_for_review",
+        "ready_ids": [
+          "FP-AUTO-258",
+          "FP-AUTO-261"
+        ],
+        "blocked_ids": [
+          "FP-AUTO-259"
+        ],
+        "ready_count": 2,
+        "blocked_count": 1,
+        "manual_dispatch_ready_count": 1,
+        "review_checklist": [
+          {
+            "id": "FP-AUTO-258",
+            "platform": "Instagram",
+            "song": "I Learned It All in Fifteen Seconds",
+            "execution_mode": "auto",
+            "scheduled_at": "2026-06-05T15:35:00-04:00",
+            "checked_batch_member": true,
+            "copy_block": "The first Lily Roo single is live, and the cover art has been remastered into its proper tiny-room glow.\n\nListen on Spotify: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
+            "asset_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
+            "destination_links": [
+              "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+              "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+              "https://music.youtube.com/watch?v=vK0mDIW65o4"
+            ],
+            "human_review_required": true,
+            "checklist": [
+              {
+                "item": "copy",
+                "status": "ready_for_human_review",
+                "evidence": "104 primary-copy character(s)"
+              },
+              {
+                "item": "destination_links",
+                "status": "ready_for_human_review",
+                "evidence": "3/3 link(s) have local evidence"
+              },
+              {
+                "item": "media_asset",
+                "status": "ready_for_human_review",
+                "evidence": "assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg"
+              },
+              {
+                "item": "platform_readiness",
+                "status": "ready_for_human_review",
+                "evidence": "All automated review checks passed."
+              }
+            ],
+            "preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 --dry-run",
+            "post_approval_next_step": "Approve with the checked batch; executor can retry once approval is visible."
+          },
+          {
+            "id": "FP-AUTO-261",
+            "platform": "YouTube Community",
+            "song": "I Learned It All in Fifteen Seconds",
+            "execution_mode": "manual",
+            "scheduled_at": "2026-06-06T19:10:00-04:00",
+            "checked_batch_member": true,
+            "copy_block": "New transmission: I Learned It All in Fifteen Seconds is live. Remastered cover art, same suspicious amount of feeling.\n\nStream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube: https://www.youtube.com/@lilyroo.artist | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
+            "asset_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
+            "destination_links": [
+              "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+              "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+              "https://www.youtube.com/@lilyroo.artist",
+              "https://music.youtube.com/watch?v=vK0mDIW65o4"
+            ],
+            "human_review_required": true,
+            "checklist": [
+              {
+                "item": "copy",
+                "status": "ready_for_human_review",
+                "evidence": "119 primary-copy character(s)"
+              },
+              {
+                "item": "destination_links",
+                "status": "ready_for_human_review",
+                "evidence": "4/4 link(s) have local evidence"
+              },
+              {
+                "item": "media_asset",
+                "status": "ready_for_human_review",
+                "evidence": "assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg"
+              },
+              {
+                "item": "platform_readiness",
+                "status": "ready_for_human_review",
+                "evidence": "All automated review checks passed."
+              },
+              {
+                "item": "manual_dispatch",
+                "status": "required_after_approval",
+                "evidence": "Post manually and log the public URL after the checked approval batch is applied."
+              }
+            ],
+            "preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-261 --dry-run",
+            "post_approval_next_step": "Approve with the checked batch, then post manually and log the public URL."
+          }
+        ],
+        "steps": [
+          {
+            "order": 1,
+            "title": "Review ready checked-batch rows",
+            "owner": "tod",
+            "status": "ready_for_review",
+            "command": "",
+            "evidence": "Review copy_block, destination_links, asset_url, and checklist for each ready row.",
+            "applies_to_ids": [
+              "FP-AUTO-258",
+              "FP-AUTO-261"
+            ]
+          },
+          {
+            "order": 2,
+            "title": "Preview the guarded checked batch",
+            "owner": "tod",
+            "status": "ready_for_review",
+            "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+            "evidence": "Dry run must report no file writes and only the checked IDs.",
+            "applies_to_ids": [
+              "FP-AUTO-258",
+              "FP-AUTO-261"
+            ]
+          },
+          {
+            "order": 3,
+            "title": "Apply after human review",
+            "owner": "tod",
+            "status": "ready_after_review",
+            "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+            "evidence": "Apply only after human copy/media/link review passes.",
+            "applies_to_ids": [
+              "FP-AUTO-258",
+              "FP-AUTO-261"
+            ]
+          },
+          {
+            "order": 4,
+            "title": "Refresh and validate admin state",
+            "owner": "codex",
+            "status": "ready_after_apply",
+            "command": "python3 scripts/refresh_promo_admin.py && python3 scripts/validate_content_system.py",
+            "evidence": "Admin should show fewer approval blockers and fresh execution state.",
+            "applies_to_ids": [
+              "FP-AUTO-258",
+              "FP-AUTO-261"
+            ]
+          },
+          {
+            "order": 5,
+            "title": "Post and log manual rows",
+            "owner": "tod",
+            "status": "required_after_apply",
+            "command": "python3 scripts/log_manual_distribution.py --dry-run",
+            "evidence": "Manual YouTube Community rows need real public post URLs before logging.",
+            "applies_to_ids": [
+              "FP-AUTO-261"
+            ]
+          }
+        ],
+        "guardrail": "This runbook is review-only; it does not approve, publish, post, or log anything."
+      },
+      "review_runbook_steps": [
+        {
+          "order": 1,
+          "title": "Review ready checked-batch rows",
+          "owner": "tod",
+          "status": "ready_for_review",
+          "command": "",
+          "evidence": "Review copy_block, destination_links, asset_url, and checklist for each ready row.",
+          "applies_to_ids": [
+            "FP-AUTO-258",
+            "FP-AUTO-261"
+          ]
+        },
+        {
+          "order": 2,
+          "title": "Preview the guarded checked batch",
+          "owner": "tod",
+          "status": "ready_for_review",
+          "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+          "evidence": "Dry run must report no file writes and only the checked IDs.",
+          "applies_to_ids": [
+            "FP-AUTO-258",
+            "FP-AUTO-261"
+          ]
+        },
+        {
+          "order": 3,
+          "title": "Apply after human review",
+          "owner": "tod",
+          "status": "ready_after_review",
+          "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+          "evidence": "Apply only after human copy/media/link review passes.",
+          "applies_to_ids": [
+            "FP-AUTO-258",
+            "FP-AUTO-261"
+          ]
+        },
+        {
+          "order": 4,
+          "title": "Refresh and validate admin state",
+          "owner": "codex",
+          "status": "ready_after_apply",
+          "command": "python3 scripts/refresh_promo_admin.py && python3 scripts/validate_content_system.py",
+          "evidence": "Admin should show fewer approval blockers and fresh execution state.",
+          "applies_to_ids": [
+            "FP-AUTO-258",
+            "FP-AUTO-261"
+          ]
+        },
+        {
+          "order": 5,
+          "title": "Post and log manual rows",
+          "owner": "tod",
+          "status": "required_after_apply",
+          "command": "python3 scripts/log_manual_distribution.py --dry-run",
+          "evidence": "Manual YouTube Community rows need real public post URLs before logging.",
+          "applies_to_ids": [
+            "FP-AUTO-261"
+          ]
+        }
+      ],
+      "review_checklist": [
+        {
+          "id": "FP-AUTO-258",
+          "platform": "Instagram",
+          "song": "I Learned It All in Fifteen Seconds",
+          "execution_mode": "auto",
+          "scheduled_at": "2026-06-05T15:35:00-04:00",
+          "checked_batch_member": true,
+          "copy_block": "The first Lily Roo single is live, and the cover art has been remastered into its proper tiny-room glow.\n\nListen on Spotify: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
+          "asset_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
+          "destination_links": [
+            "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+            "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+            "https://music.youtube.com/watch?v=vK0mDIW65o4"
+          ],
+          "human_review_required": true,
+          "checklist": [
+            {
+              "item": "copy",
+              "status": "ready_for_human_review",
+              "evidence": "104 primary-copy character(s)"
+            },
+            {
+              "item": "destination_links",
+              "status": "ready_for_human_review",
+              "evidence": "3/3 link(s) have local evidence"
+            },
+            {
+              "item": "media_asset",
+              "status": "ready_for_human_review",
+              "evidence": "assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg"
+            },
+            {
+              "item": "platform_readiness",
+              "status": "ready_for_human_review",
+              "evidence": "All automated review checks passed."
+            }
+          ],
+          "preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 --dry-run",
+          "post_approval_next_step": "Approve with the checked batch; executor can retry once approval is visible."
+        },
+        {
+          "id": "FP-AUTO-261",
+          "platform": "YouTube Community",
+          "song": "I Learned It All in Fifteen Seconds",
+          "execution_mode": "manual",
+          "scheduled_at": "2026-06-06T19:10:00-04:00",
+          "checked_batch_member": true,
+          "copy_block": "New transmission: I Learned It All in Fifteen Seconds is live. Remastered cover art, same suspicious amount of feeling.\n\nStream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube: https://www.youtube.com/@lilyroo.artist | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
+          "asset_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
+          "destination_links": [
+            "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+            "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+            "https://www.youtube.com/@lilyroo.artist",
+            "https://music.youtube.com/watch?v=vK0mDIW65o4"
+          ],
+          "human_review_required": true,
+          "checklist": [
+            {
+              "item": "copy",
+              "status": "ready_for_human_review",
+              "evidence": "119 primary-copy character(s)"
+            },
+            {
+              "item": "destination_links",
+              "status": "ready_for_human_review",
+              "evidence": "4/4 link(s) have local evidence"
+            },
+            {
+              "item": "media_asset",
+              "status": "ready_for_human_review",
+              "evidence": "assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg"
+            },
+            {
+              "item": "platform_readiness",
+              "status": "ready_for_human_review",
+              "evidence": "All automated review checks passed."
+            },
+            {
+              "item": "manual_dispatch",
+              "status": "required_after_approval",
+              "evidence": "Post manually and log the public URL after the checked approval batch is applied."
+            }
+          ],
+          "preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-261 --dry-run",
+          "post_approval_next_step": "Approve with the checked batch, then post manually and log the public URL."
+        }
+      ],
       "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
       "apply_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
       "command_sequence": [
@@ -451,12 +763,12 @@
           "backlog-reschedule"
         ],
         "blockers_resolved": 1,
-        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
         "apply_command": "",
         "command_sequence": [
           {
             "step": "preview",
-            "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+            "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
             "required_before_apply": true
           },
           {
@@ -681,6 +993,318 @@
           "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
           "guardrail": "Only ready_to_approve decisions may be applied through --checked-batch; held rows require repair first."
         },
+        "approval_review_runbook": {
+          "status": "ready_for_review",
+          "ready_ids": [
+            "FP-AUTO-258",
+            "FP-AUTO-261"
+          ],
+          "blocked_ids": [
+            "FP-AUTO-259"
+          ],
+          "ready_count": 2,
+          "blocked_count": 1,
+          "manual_dispatch_ready_count": 1,
+          "review_checklist": [
+            {
+              "id": "FP-AUTO-258",
+              "platform": "Instagram",
+              "song": "I Learned It All in Fifteen Seconds",
+              "execution_mode": "auto",
+              "scheduled_at": "2026-06-05T15:35:00-04:00",
+              "checked_batch_member": true,
+              "copy_block": "The first Lily Roo single is live, and the cover art has been remastered into its proper tiny-room glow.\n\nListen on Spotify: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
+              "asset_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
+              "destination_links": [
+                "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+                "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+                "https://music.youtube.com/watch?v=vK0mDIW65o4"
+              ],
+              "human_review_required": true,
+              "checklist": [
+                {
+                  "item": "copy",
+                  "status": "ready_for_human_review",
+                  "evidence": "104 primary-copy character(s)"
+                },
+                {
+                  "item": "destination_links",
+                  "status": "ready_for_human_review",
+                  "evidence": "3/3 link(s) have local evidence"
+                },
+                {
+                  "item": "media_asset",
+                  "status": "ready_for_human_review",
+                  "evidence": "assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg"
+                },
+                {
+                  "item": "platform_readiness",
+                  "status": "ready_for_human_review",
+                  "evidence": "All automated review checks passed."
+                }
+              ],
+              "preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 --dry-run",
+              "post_approval_next_step": "Approve with the checked batch; executor can retry once approval is visible."
+            },
+            {
+              "id": "FP-AUTO-261",
+              "platform": "YouTube Community",
+              "song": "I Learned It All in Fifteen Seconds",
+              "execution_mode": "manual",
+              "scheduled_at": "2026-06-06T19:10:00-04:00",
+              "checked_batch_member": true,
+              "copy_block": "New transmission: I Learned It All in Fifteen Seconds is live. Remastered cover art, same suspicious amount of feeling.\n\nStream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube: https://www.youtube.com/@lilyroo.artist | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
+              "asset_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
+              "destination_links": [
+                "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+                "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+                "https://www.youtube.com/@lilyroo.artist",
+                "https://music.youtube.com/watch?v=vK0mDIW65o4"
+              ],
+              "human_review_required": true,
+              "checklist": [
+                {
+                  "item": "copy",
+                  "status": "ready_for_human_review",
+                  "evidence": "119 primary-copy character(s)"
+                },
+                {
+                  "item": "destination_links",
+                  "status": "ready_for_human_review",
+                  "evidence": "4/4 link(s) have local evidence"
+                },
+                {
+                  "item": "media_asset",
+                  "status": "ready_for_human_review",
+                  "evidence": "assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg"
+                },
+                {
+                  "item": "platform_readiness",
+                  "status": "ready_for_human_review",
+                  "evidence": "All automated review checks passed."
+                },
+                {
+                  "item": "manual_dispatch",
+                  "status": "required_after_approval",
+                  "evidence": "Post manually and log the public URL after the checked approval batch is applied."
+                }
+              ],
+              "preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-261 --dry-run",
+              "post_approval_next_step": "Approve with the checked batch, then post manually and log the public URL."
+            }
+          ],
+          "steps": [
+            {
+              "order": 1,
+              "title": "Review ready checked-batch rows",
+              "owner": "tod",
+              "status": "ready_for_review",
+              "command": "",
+              "evidence": "Review copy_block, destination_links, asset_url, and checklist for each ready row.",
+              "applies_to_ids": [
+                "FP-AUTO-258",
+                "FP-AUTO-261"
+              ]
+            },
+            {
+              "order": 2,
+              "title": "Preview the guarded checked batch",
+              "owner": "tod",
+              "status": "ready_for_review",
+              "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+              "evidence": "Dry run must report no file writes and only the checked IDs.",
+              "applies_to_ids": [
+                "FP-AUTO-258",
+                "FP-AUTO-261"
+              ]
+            },
+            {
+              "order": 3,
+              "title": "Apply after human review",
+              "owner": "tod",
+              "status": "ready_after_review",
+              "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+              "evidence": "Apply only after human copy/media/link review passes.",
+              "applies_to_ids": [
+                "FP-AUTO-258",
+                "FP-AUTO-261"
+              ]
+            },
+            {
+              "order": 4,
+              "title": "Refresh and validate admin state",
+              "owner": "codex",
+              "status": "ready_after_apply",
+              "command": "python3 scripts/refresh_promo_admin.py && python3 scripts/validate_content_system.py",
+              "evidence": "Admin should show fewer approval blockers and fresh execution state.",
+              "applies_to_ids": [
+                "FP-AUTO-258",
+                "FP-AUTO-261"
+              ]
+            },
+            {
+              "order": 5,
+              "title": "Post and log manual rows",
+              "owner": "tod",
+              "status": "required_after_apply",
+              "command": "python3 scripts/log_manual_distribution.py --dry-run",
+              "evidence": "Manual YouTube Community rows need real public post URLs before logging.",
+              "applies_to_ids": [
+                "FP-AUTO-261"
+              ]
+            }
+          ],
+          "guardrail": "This runbook is review-only; it does not approve, publish, post, or log anything."
+        },
+        "review_runbook_steps": [
+          {
+            "order": 1,
+            "title": "Review ready checked-batch rows",
+            "owner": "tod",
+            "status": "ready_for_review",
+            "command": "",
+            "evidence": "Review copy_block, destination_links, asset_url, and checklist for each ready row.",
+            "applies_to_ids": [
+              "FP-AUTO-258",
+              "FP-AUTO-261"
+            ]
+          },
+          {
+            "order": 2,
+            "title": "Preview the guarded checked batch",
+            "owner": "tod",
+            "status": "ready_for_review",
+            "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+            "evidence": "Dry run must report no file writes and only the checked IDs.",
+            "applies_to_ids": [
+              "FP-AUTO-258",
+              "FP-AUTO-261"
+            ]
+          },
+          {
+            "order": 3,
+            "title": "Apply after human review",
+            "owner": "tod",
+            "status": "ready_after_review",
+            "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+            "evidence": "Apply only after human copy/media/link review passes.",
+            "applies_to_ids": [
+              "FP-AUTO-258",
+              "FP-AUTO-261"
+            ]
+          },
+          {
+            "order": 4,
+            "title": "Refresh and validate admin state",
+            "owner": "codex",
+            "status": "ready_after_apply",
+            "command": "python3 scripts/refresh_promo_admin.py && python3 scripts/validate_content_system.py",
+            "evidence": "Admin should show fewer approval blockers and fresh execution state.",
+            "applies_to_ids": [
+              "FP-AUTO-258",
+              "FP-AUTO-261"
+            ]
+          },
+          {
+            "order": 5,
+            "title": "Post and log manual rows",
+            "owner": "tod",
+            "status": "required_after_apply",
+            "command": "python3 scripts/log_manual_distribution.py --dry-run",
+            "evidence": "Manual YouTube Community rows need real public post URLs before logging.",
+            "applies_to_ids": [
+              "FP-AUTO-261"
+            ]
+          }
+        ],
+        "review_checklist": [
+          {
+            "id": "FP-AUTO-258",
+            "platform": "Instagram",
+            "song": "I Learned It All in Fifteen Seconds",
+            "execution_mode": "auto",
+            "scheduled_at": "2026-06-05T15:35:00-04:00",
+            "checked_batch_member": true,
+            "copy_block": "The first Lily Roo single is live, and the cover art has been remastered into its proper tiny-room glow.\n\nListen on Spotify: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
+            "asset_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
+            "destination_links": [
+              "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+              "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+              "https://music.youtube.com/watch?v=vK0mDIW65o4"
+            ],
+            "human_review_required": true,
+            "checklist": [
+              {
+                "item": "copy",
+                "status": "ready_for_human_review",
+                "evidence": "104 primary-copy character(s)"
+              },
+              {
+                "item": "destination_links",
+                "status": "ready_for_human_review",
+                "evidence": "3/3 link(s) have local evidence"
+              },
+              {
+                "item": "media_asset",
+                "status": "ready_for_human_review",
+                "evidence": "assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg"
+              },
+              {
+                "item": "platform_readiness",
+                "status": "ready_for_human_review",
+                "evidence": "All automated review checks passed."
+              }
+            ],
+            "preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 --dry-run",
+            "post_approval_next_step": "Approve with the checked batch; executor can retry once approval is visible."
+          },
+          {
+            "id": "FP-AUTO-261",
+            "platform": "YouTube Community",
+            "song": "I Learned It All in Fifteen Seconds",
+            "execution_mode": "manual",
+            "scheduled_at": "2026-06-06T19:10:00-04:00",
+            "checked_batch_member": true,
+            "copy_block": "New transmission: I Learned It All in Fifteen Seconds is live. Remastered cover art, same suspicious amount of feeling.\n\nStream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube: https://www.youtube.com/@lilyroo.artist | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
+            "asset_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
+            "destination_links": [
+              "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+              "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+              "https://www.youtube.com/@lilyroo.artist",
+              "https://music.youtube.com/watch?v=vK0mDIW65o4"
+            ],
+            "human_review_required": true,
+            "checklist": [
+              {
+                "item": "copy",
+                "status": "ready_for_human_review",
+                "evidence": "119 primary-copy character(s)"
+              },
+              {
+                "item": "destination_links",
+                "status": "ready_for_human_review",
+                "evidence": "4/4 link(s) have local evidence"
+              },
+              {
+                "item": "media_asset",
+                "status": "ready_for_human_review",
+                "evidence": "assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg"
+              },
+              {
+                "item": "platform_readiness",
+                "status": "ready_for_human_review",
+                "evidence": "All automated review checks passed."
+              },
+              {
+                "item": "manual_dispatch",
+                "status": "required_after_approval",
+                "evidence": "Post manually and log the public URL after the checked approval batch is applied."
+              }
+            ],
+            "preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-261 --dry-run",
+            "post_approval_next_step": "Approve with the checked batch, then post manually and log the public URL."
+          }
+        ],
         "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
         "apply_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
         "command_sequence": [
@@ -843,12 +1467,12 @@
           "backlog-reschedule"
         ],
         "blockers_resolved": 1,
-        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
         "apply_command": "",
         "command_sequence": [
           {
             "step": "preview",
-            "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+            "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
             "required_before_apply": true
           },
           {
@@ -1083,6 +1707,318 @@
           "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
           "guardrail": "Only ready_to_approve decisions may be applied through --checked-batch; held rows require repair first."
         },
+        "approval_review_runbook": {
+          "status": "ready_for_review",
+          "ready_ids": [
+            "FP-AUTO-258",
+            "FP-AUTO-261"
+          ],
+          "blocked_ids": [
+            "FP-AUTO-259"
+          ],
+          "ready_count": 2,
+          "blocked_count": 1,
+          "manual_dispatch_ready_count": 1,
+          "review_checklist": [
+            {
+              "id": "FP-AUTO-258",
+              "platform": "Instagram",
+              "song": "I Learned It All in Fifteen Seconds",
+              "execution_mode": "auto",
+              "scheduled_at": "2026-06-05T15:35:00-04:00",
+              "checked_batch_member": true,
+              "copy_block": "The first Lily Roo single is live, and the cover art has been remastered into its proper tiny-room glow.\n\nListen on Spotify: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
+              "asset_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
+              "destination_links": [
+                "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+                "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+                "https://music.youtube.com/watch?v=vK0mDIW65o4"
+              ],
+              "human_review_required": true,
+              "checklist": [
+                {
+                  "item": "copy",
+                  "status": "ready_for_human_review",
+                  "evidence": "104 primary-copy character(s)"
+                },
+                {
+                  "item": "destination_links",
+                  "status": "ready_for_human_review",
+                  "evidence": "3/3 link(s) have local evidence"
+                },
+                {
+                  "item": "media_asset",
+                  "status": "ready_for_human_review",
+                  "evidence": "assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg"
+                },
+                {
+                  "item": "platform_readiness",
+                  "status": "ready_for_human_review",
+                  "evidence": "All automated review checks passed."
+                }
+              ],
+              "preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 --dry-run",
+              "post_approval_next_step": "Approve with the checked batch; executor can retry once approval is visible."
+            },
+            {
+              "id": "FP-AUTO-261",
+              "platform": "YouTube Community",
+              "song": "I Learned It All in Fifteen Seconds",
+              "execution_mode": "manual",
+              "scheduled_at": "2026-06-06T19:10:00-04:00",
+              "checked_batch_member": true,
+              "copy_block": "New transmission: I Learned It All in Fifteen Seconds is live. Remastered cover art, same suspicious amount of feeling.\n\nStream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube: https://www.youtube.com/@lilyroo.artist | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
+              "asset_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
+              "destination_links": [
+                "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+                "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+                "https://www.youtube.com/@lilyroo.artist",
+                "https://music.youtube.com/watch?v=vK0mDIW65o4"
+              ],
+              "human_review_required": true,
+              "checklist": [
+                {
+                  "item": "copy",
+                  "status": "ready_for_human_review",
+                  "evidence": "119 primary-copy character(s)"
+                },
+                {
+                  "item": "destination_links",
+                  "status": "ready_for_human_review",
+                  "evidence": "4/4 link(s) have local evidence"
+                },
+                {
+                  "item": "media_asset",
+                  "status": "ready_for_human_review",
+                  "evidence": "assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg"
+                },
+                {
+                  "item": "platform_readiness",
+                  "status": "ready_for_human_review",
+                  "evidence": "All automated review checks passed."
+                },
+                {
+                  "item": "manual_dispatch",
+                  "status": "required_after_approval",
+                  "evidence": "Post manually and log the public URL after the checked approval batch is applied."
+                }
+              ],
+              "preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-261 --dry-run",
+              "post_approval_next_step": "Approve with the checked batch, then post manually and log the public URL."
+            }
+          ],
+          "steps": [
+            {
+              "order": 1,
+              "title": "Review ready checked-batch rows",
+              "owner": "tod",
+              "status": "ready_for_review",
+              "command": "",
+              "evidence": "Review copy_block, destination_links, asset_url, and checklist for each ready row.",
+              "applies_to_ids": [
+                "FP-AUTO-258",
+                "FP-AUTO-261"
+              ]
+            },
+            {
+              "order": 2,
+              "title": "Preview the guarded checked batch",
+              "owner": "tod",
+              "status": "ready_for_review",
+              "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+              "evidence": "Dry run must report no file writes and only the checked IDs.",
+              "applies_to_ids": [
+                "FP-AUTO-258",
+                "FP-AUTO-261"
+              ]
+            },
+            {
+              "order": 3,
+              "title": "Apply after human review",
+              "owner": "tod",
+              "status": "ready_after_review",
+              "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+              "evidence": "Apply only after human copy/media/link review passes.",
+              "applies_to_ids": [
+                "FP-AUTO-258",
+                "FP-AUTO-261"
+              ]
+            },
+            {
+              "order": 4,
+              "title": "Refresh and validate admin state",
+              "owner": "codex",
+              "status": "ready_after_apply",
+              "command": "python3 scripts/refresh_promo_admin.py && python3 scripts/validate_content_system.py",
+              "evidence": "Admin should show fewer approval blockers and fresh execution state.",
+              "applies_to_ids": [
+                "FP-AUTO-258",
+                "FP-AUTO-261"
+              ]
+            },
+            {
+              "order": 5,
+              "title": "Post and log manual rows",
+              "owner": "tod",
+              "status": "required_after_apply",
+              "command": "python3 scripts/log_manual_distribution.py --dry-run",
+              "evidence": "Manual YouTube Community rows need real public post URLs before logging.",
+              "applies_to_ids": [
+                "FP-AUTO-261"
+              ]
+            }
+          ],
+          "guardrail": "This runbook is review-only; it does not approve, publish, post, or log anything."
+        },
+        "review_runbook_steps": [
+          {
+            "order": 1,
+            "title": "Review ready checked-batch rows",
+            "owner": "tod",
+            "status": "ready_for_review",
+            "command": "",
+            "evidence": "Review copy_block, destination_links, asset_url, and checklist for each ready row.",
+            "applies_to_ids": [
+              "FP-AUTO-258",
+              "FP-AUTO-261"
+            ]
+          },
+          {
+            "order": 2,
+            "title": "Preview the guarded checked batch",
+            "owner": "tod",
+            "status": "ready_for_review",
+            "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+            "evidence": "Dry run must report no file writes and only the checked IDs.",
+            "applies_to_ids": [
+              "FP-AUTO-258",
+              "FP-AUTO-261"
+            ]
+          },
+          {
+            "order": 3,
+            "title": "Apply after human review",
+            "owner": "tod",
+            "status": "ready_after_review",
+            "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+            "evidence": "Apply only after human copy/media/link review passes.",
+            "applies_to_ids": [
+              "FP-AUTO-258",
+              "FP-AUTO-261"
+            ]
+          },
+          {
+            "order": 4,
+            "title": "Refresh and validate admin state",
+            "owner": "codex",
+            "status": "ready_after_apply",
+            "command": "python3 scripts/refresh_promo_admin.py && python3 scripts/validate_content_system.py",
+            "evidence": "Admin should show fewer approval blockers and fresh execution state.",
+            "applies_to_ids": [
+              "FP-AUTO-258",
+              "FP-AUTO-261"
+            ]
+          },
+          {
+            "order": 5,
+            "title": "Post and log manual rows",
+            "owner": "tod",
+            "status": "required_after_apply",
+            "command": "python3 scripts/log_manual_distribution.py --dry-run",
+            "evidence": "Manual YouTube Community rows need real public post URLs before logging.",
+            "applies_to_ids": [
+              "FP-AUTO-261"
+            ]
+          }
+        ],
+        "review_checklist": [
+          {
+            "id": "FP-AUTO-258",
+            "platform": "Instagram",
+            "song": "I Learned It All in Fifteen Seconds",
+            "execution_mode": "auto",
+            "scheduled_at": "2026-06-05T15:35:00-04:00",
+            "checked_batch_member": true,
+            "copy_block": "The first Lily Roo single is live, and the cover art has been remastered into its proper tiny-room glow.\n\nListen on Spotify: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
+            "asset_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
+            "destination_links": [
+              "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+              "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+              "https://music.youtube.com/watch?v=vK0mDIW65o4"
+            ],
+            "human_review_required": true,
+            "checklist": [
+              {
+                "item": "copy",
+                "status": "ready_for_human_review",
+                "evidence": "104 primary-copy character(s)"
+              },
+              {
+                "item": "destination_links",
+                "status": "ready_for_human_review",
+                "evidence": "3/3 link(s) have local evidence"
+              },
+              {
+                "item": "media_asset",
+                "status": "ready_for_human_review",
+                "evidence": "assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg"
+              },
+              {
+                "item": "platform_readiness",
+                "status": "ready_for_human_review",
+                "evidence": "All automated review checks passed."
+              }
+            ],
+            "preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 --dry-run",
+            "post_approval_next_step": "Approve with the checked batch; executor can retry once approval is visible."
+          },
+          {
+            "id": "FP-AUTO-261",
+            "platform": "YouTube Community",
+            "song": "I Learned It All in Fifteen Seconds",
+            "execution_mode": "manual",
+            "scheduled_at": "2026-06-06T19:10:00-04:00",
+            "checked_batch_member": true,
+            "copy_block": "New transmission: I Learned It All in Fifteen Seconds is live. Remastered cover art, same suspicious amount of feeling.\n\nStream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube: https://www.youtube.com/@lilyroo.artist | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
+            "asset_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
+            "destination_links": [
+              "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+              "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+              "https://www.youtube.com/@lilyroo.artist",
+              "https://music.youtube.com/watch?v=vK0mDIW65o4"
+            ],
+            "human_review_required": true,
+            "checklist": [
+              {
+                "item": "copy",
+                "status": "ready_for_human_review",
+                "evidence": "119 primary-copy character(s)"
+              },
+              {
+                "item": "destination_links",
+                "status": "ready_for_human_review",
+                "evidence": "4/4 link(s) have local evidence"
+              },
+              {
+                "item": "media_asset",
+                "status": "ready_for_human_review",
+                "evidence": "assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg"
+              },
+              {
+                "item": "platform_readiness",
+                "status": "ready_for_human_review",
+                "evidence": "All automated review checks passed."
+              },
+              {
+                "item": "manual_dispatch",
+                "status": "required_after_approval",
+                "evidence": "Post manually and log the public URL after the checked approval batch is applied."
+              }
+            ],
+            "preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-261 --dry-run",
+            "post_approval_next_step": "Approve with the checked batch, then post manually and log the public URL."
+          }
+        ],
         "decision_ready_ids": [
           "FP-AUTO-258",
           "FP-AUTO-261"
@@ -1138,14 +2074,14 @@
       "urgency": "high",
       "status": "blocked",
       "detail": "Known executor/platform blockers must clear before normal apply.",
-      "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+      "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
       "apply_command": "",
       "source_path": "data/backlog_reschedule_preview.json",
       "impact": {
         "approved_backlog_count": 1,
         "blocked_backlog_count": 1,
-        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin"
+        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --apply --refresh-admin",
+        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin"
       },
       "links": [],
       "guardrail": "Normal apply stays hidden until known executor/platform blockers clear."
