@@ -559,8 +559,14 @@ def validate_generated_outputs(failures):
             and reconciliation_summary.get("unlogged_manual_posts") == manual.get("unlogged_manual_count") == expected_unlogged_manual
             and reconciliation_summary.get("manual_log_gate_counts") == dict(sorted(gate_counts.items()))
             and reconciliation_summary.get("manual_logging_gate_status") == (manual_distribution_docket.get("status") or "unknown")
+            and reconciliation_summary.get("next_gate") in {"worker_export", "manual_approval", "clear"}
+            and reconciliation_summary.get("posting_gate_status") == (posting_gate.get("status") or "unknown")
             and "export_social_executions.py --dry-run" in (worker.get("preview_command") or "")
             and "export_social_executions.py --refresh-admin" in (worker.get("apply_command") or "")
+            and (
+                reconciliation_summary.get("next_gate") != "manual_approval"
+                or reconciliation_summary.get("next_preview_command") == (approval_gate.get("preview_command") or "")
+            )
             and approval_gate.get("ready_ids") == (manual_approval_docket.get("ready_ids") or [])
             and approval_gate.get("blocked_ids") == (manual_approval_docket.get("blocked_ids") or [])
             and approval_gate.get("preview_command") == (manual_approval_docket.get("preview_command") or "")
@@ -1243,7 +1249,7 @@ def validate_generated_outputs(failures):
             fail("promo_engine_status.json missing release health summary", failures)
         freshness = status.get("freshness") or {}
         sources = freshness.get("sources") or []
-        freshness_statuses = {"fresh", "stale", "missing", "checked_no_change"}
+        freshness_statuses = {"fresh", "stale", "missing", "checked_no_change", "gated_manual_pending"}
         summary = freshness.get("summary", {})
         if sources and sum(int(summary.get(state) or 0) for state in freshness_statuses) == len(sources):
             ok(f"promo engine freshness audit tracks {len(sources)} sources")
@@ -1258,6 +1264,13 @@ def validate_generated_outputs(failures):
                     fail(f"promo engine freshness source {name} missing {key}", failures)
             if source.get("status") == "checked_no_change" and not str(source.get("evidence") or "").strip():
                 fail(f"promo engine freshness source {name} missing checked-no-change evidence", failures)
+            if source.get("status") == "gated_manual_pending" and not (
+                int(source.get("worker_unlogged_count") if source.get("worker_unlogged_count") is not None else -1) == 0
+                and int(source.get("manual_unlogged_count") or 0) > 0
+                and source.get("manual_approval_preview_command")
+                and str(source.get("evidence") or "").strip()
+            ):
+                fail(f"promo engine freshness source {name} missing gated manual-pending evidence", failures)
             if source.get("name") == "published_log":
                 if not (
                     isinstance(source.get("row_count"), int)
@@ -1893,7 +1906,7 @@ def validate_generated_outputs(failures):
         fail("build_promo_operations_packet.py missing", failures)
     if PUBLISHED_LOG_RECONCILIATION_SCRIPT.exists():
         reconciliation_text = PUBLISHED_LOG_RECONCILIATION_SCRIPT.read_text(encoding="utf-8")
-        if "published_log_reconciliation.json" in reconciliation_text and "published-log-reconciliation.md" in reconciliation_text and "export_social_executions.py --dry-run" in reconciliation_text and "manual_distribution_packet.json" in reconciliation_text and "approval_gate" in reconciliation_text and "log_gate" in reconciliation_text and "log_preview_command" in reconciliation_text and "subprocess" not in reconciliation_text:
+        if "published_log_reconciliation.json" in reconciliation_text and "published-log-reconciliation.md" in reconciliation_text and "export_social_executions.py --dry-run" in reconciliation_text and "manual_distribution_packet.json" in reconciliation_text and "approval_gate" in reconciliation_text and "next_gate" in reconciliation_text and "manual_approval" in reconciliation_text and "log_gate" in reconciliation_text and "log_preview_command" in reconciliation_text and "subprocess" not in reconciliation_text:
             ok("published log reconciliation builder is review-only")
         else:
             fail("build_published_log_reconciliation.py missing safe reconciliation outputs or executes commands", failures)

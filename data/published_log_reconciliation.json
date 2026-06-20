@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T05:04:12.012609Z",
+  "generated_at": "2026-06-20T05:09:05.332992Z",
   "safe_mode": true,
   "source": {
     "published_log": "admin/content/Published_Log.csv",
@@ -8,7 +8,7 @@
     "manual_distribution_packet": "data/manual_distribution_packet.json"
   },
   "summary": {
-    "published_log_status": "stale",
+    "published_log_status": "gated_manual_pending",
     "published_log_rows": 17,
     "latest_entry_date": "2026-06-07",
     "latest_entry_platform": "Facebook",
@@ -21,8 +21,10 @@
     },
     "manual_logging_gate_status": "needs_review",
     "reconciliation_needed": true,
-    "next_preview_command": "python3 scripts/export_social_executions.py --dry-run",
-    "next_apply_command": ""
+    "next_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
+    "next_apply_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+    "next_gate": "manual_approval",
+    "posting_gate_status": "needs_review"
   },
   "worker_export": {
     "posted_worker_count": 0,

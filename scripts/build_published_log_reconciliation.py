@@ -249,6 +249,14 @@ def main() -> int:
     manual = manual_log_packet(read_json(MANUAL_DISTRIBUTION, {}), existing_ids)
     latest = published_rows[-1] if published_rows else {}
     reconciliation_needed = bool(worker["unlogged_worker_count"] or manual["unlogged_manual_count"] or source.get("status") == "stale")
+    approval_gate = manual.get("approval_gate") or {}
+    posting_gate = manual.get("posting_gate") or {}
+    next_preview_command = worker["preview_command"] if worker["unlogged_worker_count"] else (approval_gate.get("preview_command") or "")
+    next_apply_command = ""
+    if worker["unlogged_worker_count"]:
+        next_apply_command = worker["apply_command"]
+    elif manual["unlogged_manual_count"]:
+        next_apply_command = approval_gate.get("apply_command") or ""
     payload = {
         "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "safe_mode": True,
@@ -270,8 +278,10 @@ def main() -> int:
             "manual_log_gate_counts": manual.get("gate_counts") or {},
             "manual_logging_gate_status": (manual.get("posting_gate") or {}).get("status") or "unknown",
             "reconciliation_needed": reconciliation_needed,
-            "next_preview_command": worker["preview_command"],
-            "next_apply_command": worker["apply_command"] if worker["unlogged_worker_count"] else "",
+            "next_preview_command": next_preview_command,
+            "next_apply_command": next_apply_command,
+            "next_gate": "worker_export" if worker["unlogged_worker_count"] else ("manual_approval" if manual["unlogged_manual_count"] else "clear"),
+            "posting_gate_status": posting_gate.get("status") or "unknown",
         },
         "worker_export": worker,
         "manual_logging": manual,

@@ -27,6 +27,7 @@ PROMO_QUEUE_PLAN = ROOT / "data" / "promo_queue_plan.json"
 PROMO_OPERATIONS_PACKET = ROOT / "data" / "promo_operations_packet.json"
 PROMOTION_BLOCKER_LEDGER = ROOT / "data" / "promotion_blocker_ledger.json"
 HUMAN_HANDOFF_PACKET = ROOT / "data" / "human_handoff_packet.json"
+MANUAL_DISTRIBUTION_PACKET = ROOT / "data" / "manual_distribution_packet.json"
 PUBLISHED = ROOT / "admin" / "content" / "Published_Log.csv"
 FUTURE_POSTS = ROOT / "admin" / "future-posts.json"
 RESCHEDULE_SCRIPT = ROOT / "scripts" / "reschedule_scheduled_posts.py"
@@ -209,6 +210,41 @@ def release_status_checked_no_change(row: dict, store_history: dict, now: dateti
     return updated
 
 
+def published_log_gated_manual(row: dict, social_executions: dict, manual_distribution: dict) -> dict:
+    if row.get("status") != "stale":
+        return row
+    execution_summary = social_executions.get("summary") or {}
+    manual_summary = manual_distribution.get("summary") or {}
+    unlogged_worker = int(execution_summary.get("posted_count") or 0)
+    unlogged_manual = int(manual_summary.get("unlogged_manual_count") or 0)
+    if unlogged_worker or not unlogged_manual:
+        return row
+    approval_docket = manual_distribution.get("manual_approval_docket") or {}
+    distribution_docket = manual_distribution.get("manual_distribution_docket") or {}
+    review_count = int(distribution_docket.get("review_count") or 0)
+    postable_count = int(distribution_docket.get("postable_count") or 0)
+    if not review_count and not postable_count:
+        return row
+    updated = dict(row)
+    updated["status"] = "gated_manual_pending"
+    updated["worker_unlogged_count"] = 0
+    updated["manual_unlogged_count"] = unlogged_manual
+    updated["manual_review_count"] = review_count
+    updated["manual_postable_count"] = postable_count
+    updated["manual_approval_preview_command"] = approval_docket.get("preview_command") or ""
+    updated["manual_approval_apply_command"] = approval_docket.get("apply_command") or ""
+    updated["public_community_url"] = manual_summary.get("public_community_url") or distribution_docket.get("public_community_url") or ""
+    updated["evidence"] = (
+        f"{row.get('evidence') or 'Published log is older than the freshness window.'} "
+        f"No unlogged Worker posts are available; {unlogged_manual} manual row(s) are gated by review/posting before URL logging."
+    )
+    updated["refresh_command"] = (
+        "Review and approve the manual YouTube Community rows, post them manually, then log real public URLs; "
+        "Worker export has no unlogged posted records right now."
+    )
+    return updated
+
+
 def refresh_command(name: str) -> str:
     return {
         "release_status": "python3 scripts/verify_pending_store_links.py --refresh-admin; update data/distrokid_release_status.json when a public URL is verified.",
@@ -227,12 +263,12 @@ def refresh_command(name: str) -> str:
     }.get(name, "")
 
 
-def source_freshness(release_status, manual, live, metrics_history, executor_readiness, store_history, social_executions, social_scheduler_dry_run, promo_refresh_run, promo_refresh_workflow_status, promo_plan, future_posts, now: datetime):
+def source_freshness(release_status, manual, live, metrics_history, executor_readiness, store_history, social_executions, social_scheduler_dry_run, promo_refresh_run, promo_refresh_workflow_status, promo_plan, future_posts, manual_distribution, now: datetime):
     rows = [
         release_status_checked_no_change(freshness_row("release_status", RELEASE_STATUS, release_status, now), store_history, now),
         freshness_row("scheduled_posts", FUTURE_POSTS, future_posts, now),
         freshness_row("promo_queue_plan", PROMO_QUEUE_PLAN, promo_plan, now),
-        freshness_row("published_log", PUBLISHED, None, now),
+        published_log_gated_manual(freshness_row("published_log", PUBLISHED, None, now), social_executions, manual_distribution),
         freshness_row("manual_metrics", MANUAL_METRICS, manual, now),
         freshness_row("live_metrics", LIVE_METRICS, live, now),
         freshness_row("metrics_history", METRICS_HISTORY, metrics_history, now),
@@ -246,12 +282,14 @@ def source_freshness(release_status, manual, live, metrics_history, executor_rea
     stale = [row for row in rows if row["status"] == "stale"]
     missing = [row for row in rows if row["status"] == "missing"]
     checked_no_change = [row for row in rows if row["status"] == "checked_no_change"]
+    gated_manual_pending = [row for row in rows if row["status"] == "gated_manual_pending"]
     return {
         "summary": {
             "fresh": sum(1 for row in rows if row["status"] == "fresh"),
             "stale": len(stale),
             "missing": len(missing),
             "checked_no_change": len(checked_no_change),
+            "gated_manual_pending": len(gated_manual_pending),
             "checked_at": now.isoformat(),
         },
         "sources": rows,
@@ -264,6 +302,9 @@ def source_freshness(release_status, manual, live, metrics_history, executor_rea
 
 def freshness_action_message(row: dict) -> str:
     name = row["name"].replace("_", " ")
+    if row.get("status") == "gated_manual_pending":
+        command = row.get("manual_approval_preview_command") or "python3 scripts/approve_promo_queue_plan.py --all --dry-run"
+        return f"Resolve manual published-log gate: review manual YouTube Community approvals with {command}, then post and log public URLs."
     if row.get("name") == "published_log":
         return (
             "Refresh published log: preview Worker-posted records with "
@@ -1115,6 +1156,7 @@ def build_status():
     promo_operations = read_json(PROMO_OPERATIONS_PACKET, {})
     promotion_blockers = read_json(PROMOTION_BLOCKER_LEDGER, {})
     human_handoff = read_json(HUMAN_HANDOFF_PACKET, {})
+    manual_distribution = read_json(MANUAL_DISTRIBUTION_PACKET, {})
     future_posts = read_json(FUTURE_POSTS, {})
     store_history = build_store_verification_history(release_status, now)
     scheduled_rows = read_csv(SCHEDULED)
@@ -1126,7 +1168,7 @@ def build_status():
     execution_state = social_execution_state(social_executions, scheduled_rows)
     scheduler_state = social_scheduler_dry_run_state(social_scheduler_dry_run)
     monetization = monetization_state(live, history, metrics_history, promo_plan, future_posts, execution_state, now)
-    freshness = source_freshness(release_status, manual, live, metrics_history, executor_readiness, store_history, social_executions, social_scheduler_dry_run, promo_refresh_run, promo_refresh_workflow_status, promo_plan, future_posts, now)
+    freshness = source_freshness(release_status, manual, live, metrics_history, executor_readiness, store_history, social_executions, social_scheduler_dry_run, promo_refresh_run, promo_refresh_workflow_status, promo_plan, future_posts, manual_distribution, now)
 
     releases = []
     all_actions = []
@@ -1286,6 +1328,7 @@ def build_status():
             "promo_operations_packet": str(PROMO_OPERATIONS_PACKET.relative_to(ROOT)),
             "promotion_blocker_ledger": str(PROMOTION_BLOCKER_LEDGER.relative_to(ROOT)),
             "human_handoff_packet": str(HUMAN_HANDOFF_PACKET.relative_to(ROOT)),
+            "manual_distribution_packet": str(MANUAL_DISTRIBUTION_PACKET.relative_to(ROOT)),
             "published_log": str(PUBLISHED.relative_to(ROOT)),
             "manual_metrics": str(MANUAL_METRICS.relative_to(ROOT)),
             "live_metrics": str(LIVE_METRICS.relative_to(ROOT)),
