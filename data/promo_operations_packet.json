@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T01:03:01.351448Z",
+  "generated_at": "2026-06-20T01:07:26.300145Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -35,16 +35,18 @@
       "medium": 9
     },
     "next_action": {
-      "label": "Preview scheduled approval batch",
+      "label": "Preview checked scheduled approval batch",
       "kind": "scheduled_approval_batch",
       "priority": -1,
-      "command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-259 FP-AUTO-261 --dry-run",
+      "command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --dry-run",
       "context": {
         "approval_blocker_count": 3,
+        "review_check_passed_count": 2,
+        "review_check_blocked_count": 1,
         "auto_count": 2,
         "manual_count": 1,
-        "apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-259 FP-AUTO-261 --refresh-admin",
-        "note": "Review all copy, assets, links, and platform readiness first. Apply only after human approval."
+        "apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --refresh-admin",
+        "note": "Review all passing rows first. The checked batch excludes rows with failed review checks."
       },
       "phase": "Review scheduled approvals",
       "urgency": "high",
@@ -110,16 +112,18 @@
       ]
     },
     {
-      "label": "Preview scheduled approval batch",
+      "label": "Preview checked scheduled approval batch",
       "kind": "scheduled_approval_batch",
       "priority": -1,
-      "command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-259 FP-AUTO-261 --dry-run",
+      "command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --dry-run",
       "context": {
         "approval_blocker_count": 3,
+        "review_check_passed_count": 2,
+        "review_check_blocked_count": 1,
         "auto_count": 2,
         "manual_count": 1,
-        "apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-259 FP-AUTO-261 --refresh-admin",
-        "note": "Review all copy, assets, links, and platform readiness first. Apply only after human approval."
+        "apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --refresh-admin",
+        "note": "Review all passing rows first. The checked batch excludes rows with failed review checks."
       },
       "phase": "Review scheduled approvals",
       "urgency": "high",

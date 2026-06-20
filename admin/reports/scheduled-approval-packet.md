@@ -1,11 +1,15 @@
 # Scheduled Approval Packet - Lily Roo
 
-Generated: 2026-06-20T01:03:01.402619Z
+Generated: 2026-06-20T01:07:26.357059Z
 
 ## Summary
 - Approval blockers: **3**
 - Auto rows: **2**
 - Manual rows: **1**
+- Review checks passed: **2**
+- Review checks blocked: **1**
+- Checked-only preview: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --dry-run`
+- Checked-only approve after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --refresh-admin`
 - Batch preview: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-259 FP-AUTO-261 --dry-run`
 - Batch approve after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-259 FP-AUTO-261 --refresh-admin`
 

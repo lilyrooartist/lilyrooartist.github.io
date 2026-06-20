@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T01:03:01.475433Z",
+  "generated_at": "2026-06-20T01:07:26.433001Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -86,12 +86,12 @@
       }
     },
     {
-      "label": "Current operations next action: Preview scheduled approval batch",
+      "label": "Current operations next action: Preview checked scheduled approval batch",
       "phase": "Operations packet",
       "status": "waiting_for_user",
       "detail": "Scheduled executor records are blocked until reviewed approval is applied.",
-      "command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-259 FP-AUTO-261 --dry-run",
-      "after_review_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-259 FP-AUTO-261 --refresh-admin",
+      "command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --dry-run",
+      "after_review_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --refresh-admin",
       "context": {
         "kind": "scheduled_approval_batch",
         "urgency": "high"

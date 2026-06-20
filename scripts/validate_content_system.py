@@ -318,6 +318,11 @@ def validate_generated_outputs(failures):
                 and all("--dry-run" in (action.get("command") or "") for action in scheduled_batch_actions)
                 and all("--dry-run" not in ((action.get("context") or {}).get("apply_command") or "") for action in scheduled_batch_actions)
                 and all((action.get("context") or {}).get("approval_blocker_count") for action in scheduled_batch_actions)
+                and all(
+                    not int((scheduled_packet.get("summary") or {}).get("review_check_passed_count") or 0)
+                    or action.get("command") == (scheduled_packet.get("summary") or {}).get("checked_batch_preview_command")
+                    for action in scheduled_batch_actions
+                )
             ):
                 ok("promo operations packet includes scheduled approval batch preview")
             else:
@@ -447,6 +452,15 @@ def validate_generated_outputs(failures):
             approval_packet.get("safe_mode") is True
             and summary.get("approval_blocker_count") == len(rows)
             and summary.get("review_check_passed_count") + summary.get("review_check_blocked_count") == len(rows)
+            and (
+                not summary.get("review_check_passed_count")
+                or (
+                    summary.get("checked_batch_preview_command")
+                    and "--dry-run" in summary.get("checked_batch_preview_command", "")
+                    and summary.get("checked_batch_apply_command")
+                    and "--refresh-admin" in summary.get("checked_batch_apply_command", "")
+                )
+            )
             and summary.get("preview_command_count") == len([row for row in rows if row.get("approval_preview_command")])
             and summary.get("apply_command_count") == len([row for row in rows if row.get("approval_apply_command")])
             and all(
@@ -1289,7 +1303,7 @@ def validate_generated_outputs(failures):
         fail("build_approval_runway.py missing", failures)
     if SCHEDULED_APPROVAL_SCRIPT.exists():
         scheduled_approval_text = SCHEDULED_APPROVAL_SCRIPT.read_text(encoding="utf-8")
-        if "scheduled_approval_packet.json" in scheduled_approval_text and "scheduled-approval-packet.md" in scheduled_approval_text and "approval_preview_command" in scheduled_approval_text and "approval_apply_command" in scheduled_approval_text and "batch_preview_command" in scheduled_approval_text and "batch_apply_command" in scheduled_approval_text and "review_checks" in scheduled_approval_text and "executor_readiness_snapshot.json" in scheduled_approval_text and "subprocess" not in scheduled_approval_text:
+        if "scheduled_approval_packet.json" in scheduled_approval_text and "scheduled-approval-packet.md" in scheduled_approval_text and "approval_preview_command" in scheduled_approval_text and "approval_apply_command" in scheduled_approval_text and "batch_preview_command" in scheduled_approval_text and "batch_apply_command" in scheduled_approval_text and "checked_batch_preview_command" in scheduled_approval_text and "checked_batch_apply_command" in scheduled_approval_text and "review_checks" in scheduled_approval_text and "executor_readiness_snapshot.json" in scheduled_approval_text and "subprocess" not in scheduled_approval_text:
             ok("scheduled approval packet builder is review-only")
         else:
             fail("build_scheduled_approval_packet.py missing approval packet outputs, batch commands, review checks, or executes commands", failures)

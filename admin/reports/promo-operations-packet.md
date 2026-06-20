@@ -1,6 +1,6 @@
 # Promo Operations Packet - Lily Roo
 
-Generated: 2026-06-20T01:03:01.351448Z
+Generated: 2026-06-20T01:07:26.300145Z
 
 ## Summary
 - Actions: **20**
@@ -33,11 +33,11 @@ Generated: 2026-06-20T01:03:01.351448Z
   - Approve after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --refresh-admin`
 
 ### Review scheduled approvals
-- **[high] Preview scheduled approval batch**
+- **[high] Preview checked scheduled approval batch**
   - Why: Scheduled executor records are blocked until reviewed approval is applied.
-  - Detail: Review all copy, assets, links, and platform readiness first. Apply only after human approval.
-  - Command: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-259 FP-AUTO-261 --dry-run`
-  - Apply after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-259 FP-AUTO-261 --refresh-admin`
+  - Detail: Review all passing rows first. The checked batch excludes rows with failed review checks.
+  - Command: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --dry-run`
+  - Apply after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --refresh-admin`
 
 ### Reschedule approved backlog
 - **[high] Preview reschedule for approved past-due posts**

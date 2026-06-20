@@ -298,23 +298,31 @@ def apply_actions(plan):
 
 def scheduled_approval_batch_actions(packet):
     summary = packet.get("summary") or {}
-    preview_command = summary.get("batch_preview_command") or ""
-    apply_command = summary.get("batch_apply_command") or ""
+    preview_command = summary.get("checked_batch_preview_command") or summary.get("batch_preview_command") or ""
+    apply_command = summary.get("checked_batch_apply_command") or summary.get("batch_apply_command") or ""
     blocker_count = int(summary.get("approval_blocker_count") or 0)
     if not blocker_count or not preview_command:
         return []
+    checked_count = int(summary.get("review_check_passed_count") or 0)
+    blocked_count = int(summary.get("review_check_blocked_count") or 0)
+    label = "Preview checked scheduled approval batch" if checked_count else "Preview scheduled approval batch"
+    note = "Review all passing rows first. The checked batch excludes rows with failed review checks."
+    if not checked_count:
+        note = "Review all copy, assets, links, and platform readiness first. Apply only after human approval."
     return [
         command_row(
-            "Preview scheduled approval batch",
+            label,
             preview_command,
             "scheduled_approval_batch",
             -1,
             {
                 "approval_blocker_count": blocker_count,
+                "review_check_passed_count": checked_count,
+                "review_check_blocked_count": blocked_count,
                 "auto_count": int(summary.get("auto_count") or 0),
                 "manual_count": int(summary.get("manual_count") or 0),
                 "apply_command": apply_command,
-                "note": "Review all copy, assets, links, and platform readiness first. Apply only after human approval.",
+                "note": note,
             },
         )
     ]

@@ -1,6 +1,6 @@
 # Monetization Activation Plan - Lily Roo
 
-Generated: 2026-06-20T01:03:01.475433Z
+Generated: 2026-06-20T01:07:26.433001Z
 
 ## Summary
 - Current subscribers: **6 / 1000**
@@ -34,11 +34,11 @@ Generated: 2026-06-20T01:03:01.475433Z
    - Detail: Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok public posting approval is false. Complete TikTok OAuth/public posting setup, push secrets, then refresh Admin.
    - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
    - After review: `python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py`
-6. **Current operations next action: Preview scheduled approval batch**
+6. **Current operations next action: Preview checked scheduled approval batch**
    - Phase: `Operations packet`; status: `waiting_for_user`
    - Detail: Scheduled executor records are blocked until reviewed approval is applied.
-   - Preview/check: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-259 FP-AUTO-261 --dry-run`
-   - After review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-259 FP-AUTO-261 --refresh-admin`
+   - Preview/check: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --dry-run`
+   - After review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --refresh-admin`
 
 ## Guardrails
 - This plan does not approve, apply, publish, or post anything.

@@ -187,6 +187,10 @@ def build_markdown(payload: dict) -> str:
         f"- Approval blockers: **{summary['approval_blocker_count']}**",
         f"- Auto rows: **{summary['auto_count']}**",
         f"- Manual rows: **{summary['manual_count']}**",
+        f"- Review checks passed: **{summary['review_check_passed_count']}**",
+        f"- Review checks blocked: **{summary['review_check_blocked_count']}**",
+        f"- Checked-only preview: `{summary['checked_batch_preview_command']}`" if summary.get("checked_batch_preview_command") else "- Checked-only preview: none",
+        f"- Checked-only approve after review: `{summary['checked_batch_apply_command']}`" if summary.get("checked_batch_apply_command") else "- Checked-only approve after review: none",
         f"- Batch preview: `{summary['batch_preview_command']}`" if summary.get("batch_preview_command") else "- Batch preview: none",
         f"- Batch approve after review: `{summary['batch_apply_command']}`" if summary.get("batch_apply_command") else "- Batch approve after review: none",
         "",
@@ -260,8 +264,11 @@ def main() -> int:
     executions = read_json(EXECUTIONS, {})
     readiness = read_json(EXECUTOR_READINESS, {})
     rows = build_rows(queue, executions, readiness)
+    checked_rows = [row for row in rows if row.get("review_check_passed")]
     batch_preview_command = approval_batch_command(rows, dry_run=True)
     batch_apply_command = approval_batch_command(rows, dry_run=False)
+    checked_batch_preview_command = approval_batch_command(checked_rows, dry_run=True)
+    checked_batch_apply_command = approval_batch_command(checked_rows, dry_run=False)
     payload = {
         "generated_at": now,
         "safe_mode": True,
@@ -276,6 +283,8 @@ def main() -> int:
             "manual_count": sum(1 for row in rows if row.get("execution_mode") == "manual"),
             "review_check_passed_count": sum(1 for row in rows if row.get("review_check_passed")),
             "review_check_blocked_count": sum(1 for row in rows if not row.get("review_check_passed")),
+            "checked_batch_preview_command": checked_batch_preview_command,
+            "checked_batch_apply_command": checked_batch_apply_command,
             "preview_command_count": sum(1 for row in rows if row.get("approval_preview_command")),
             "apply_command_count": sum(1 for row in rows if row.get("approval_apply_command")),
             "batch_preview_command": batch_preview_command,
