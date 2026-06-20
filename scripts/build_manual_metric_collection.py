@@ -12,6 +12,7 @@ PROMO_STATUS = ROOT / "data" / "promo_engine_status.json"
 MANUAL_STATS = ROOT / "data" / "manual_social_stats.json"
 LIVE_METRICS = ROOT / "data" / "live_social_metrics.json"
 OUT_CSV = ROOT / "data" / "manual_metric_collection_template.csv"
+OUT_ENTRY_CSV = ROOT / "data" / "manual_metric_entry_template.csv"
 OUT_JSON = ROOT / "data" / "manual_metric_collection_packet.json"
 OUT_MD = ROOT / "admin" / "reports" / "manual-metric-collection.md"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
@@ -43,6 +44,8 @@ LIVE_IMPORT_PREVIEW_COMMAND = "python3 scripts/update_manual_social_stats.py --f
 LIVE_IMPORT_COMMAND = "python3 scripts/update_manual_social_stats.py --from-live --refresh-admin"
 WORKSHEET_IMPORT_PREVIEW_COMMAND = "python3 scripts/update_manual_social_stats.py --from-csv --dry-run"
 WORKSHEET_IMPORT_COMMAND = "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin"
+ENTRY_IMPORT_PREVIEW_COMMAND = "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run"
+ENTRY_IMPORT_COMMAND = "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin"
 
 METRIC_SPECS = {
     "followers": ("nonnegative_integer", "123", "Enter the current public follower count."),
@@ -76,18 +79,34 @@ def read_json(path: Path, fallback):
 
 
 def existing_new_values() -> dict[tuple[str, str], str]:
-    if not OUT_CSV.exists():
-        return {}
     values = {}
-    with OUT_CSV.open(newline="", encoding="utf-8") as handle:
+    for path in [OUT_CSV, OUT_ENTRY_CSV]:
+        if not path.exists():
+            continue
+        with path.open(newline="", encoding="utf-8") as handle:
+            reader = csv.DictReader(handle)
+            for row in reader:
+                platform = str(row.get("platform") or "").strip()
+                field = str(row.get("field") or "").strip()
+                new_value = str(row.get("new_value") or "").strip()
+                if platform and field and new_value:
+                    values[(platform, field)] = new_value
+    return values
+
+
+def existing_entry_notes() -> dict[tuple[str, str], str]:
+    if not OUT_ENTRY_CSV.exists():
+        return {}
+    notes = {}
+    with OUT_ENTRY_CSV.open(newline="", encoding="utf-8") as handle:
         reader = csv.DictReader(handle)
         for row in reader:
             platform = str(row.get("platform") or "").strip()
             field = str(row.get("field") or "").strip()
-            new_value = str(row.get("new_value") or "").strip()
-            if platform and field and new_value:
-                values[(platform, field)] = new_value
-    return values
+            evidence_note = str(row.get("evidence_note") or "").strip()
+            if platform and field and evidence_note:
+                notes[(platform, field)] = evidence_note
+    return notes
 
 
 def current_value(manual: dict, platform: str, field: str) -> str:
@@ -141,7 +160,7 @@ def import_effect(platform: str, field: str, current: str) -> str:
     return f"update data/manual_social_stats.json {platform}.{field} from {current!r} to the filled new_value"
 
 
-def build_rows(status: dict, manual: dict, live: dict, preserved_values: dict[tuple[str, str], str]) -> list[dict]:
+def build_rows(status: dict, manual: dict, live: dict, preserved_values: dict[tuple[str, str], str], preserved_notes: dict[tuple[str, str], str]) -> list[dict]:
     kpi = status.get("kpi") or {}
     pending = kpi.get("pending_manual_by_platform") or {}
     commands = kpi.get("pending_manual_update_by_platform") or {}
@@ -166,6 +185,7 @@ def build_rows(status: dict, manual: dict, live: dict, preserved_values: dict[tu
                 "field": field,
                 "current_value": current,
                 "new_value": preserved_values.get((platform, field), ""),
+                "evidence_note": preserved_notes.get((platform, field), ""),
                 "live_value": "" if live_value is None else str(live_value),
                 "collection_mode": collection_mode,
                 "collection_priority": priority,
@@ -197,6 +217,7 @@ def write_csv(rows: list[dict]) -> None:
         "field",
         "current_value",
         "new_value",
+        "evidence_note",
         "live_value",
         "collection_mode",
         "collection_priority",
@@ -221,6 +242,32 @@ def write_csv(rows: list[dict]) -> None:
         writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
+
+
+def write_entry_csv(rows: list[dict]) -> None:
+    OUT_ENTRY_CSV.parent.mkdir(parents=True, exist_ok=True)
+    fieldnames = [
+        "platform",
+        "field",
+        "new_value",
+        "evidence_note",
+        "current_value",
+        "value_type",
+        "example_value",
+        "collection_priority",
+        "metric_category",
+        "access_level",
+        "collection_url",
+        "collection_instruction",
+        "evidence_hint",
+        "csv_row",
+        "update_assignment",
+        "import_effect",
+    ]
+    with OUT_ENTRY_CSV.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="\n")
+        writer.writeheader()
+        writer.writerows({key: row.get(key, "") for key in fieldnames} for row in rows)
 
 
 def build_packet(rows: list[dict], generated_at: str) -> dict:
@@ -255,11 +302,15 @@ def build_packet(rows: list[dict], generated_at: str) -> dict:
             "live_import_command": LIVE_IMPORT_COMMAND,
             "worksheet_import_preview_command": WORKSHEET_IMPORT_PREVIEW_COMMAND,
             "worksheet_import_command": WORKSHEET_IMPORT_COMMAND,
+            "entry_csv_path": str(OUT_ENTRY_CSV.relative_to(ROOT)),
+            "entry_import_preview_command": ENTRY_IMPORT_PREVIEW_COMMAND,
+            "entry_import_command": ENTRY_IMPORT_COMMAND,
         })
         group["fields"].append({
                 "field": row["field"],
                 "current_value": row.get("current_value") or "",
                 "new_value": row.get("new_value") or "",
+                "evidence_note": row.get("evidence_note") or "",
                 "live_value": row.get("live_value") or "",
                 "collection_mode": row.get("collection_mode") or "manual_collection_required",
                 "collection_priority": row.get("collection_priority") or 4,
@@ -281,6 +332,7 @@ def build_packet(rows: list[dict], generated_at: str) -> dict:
             "field": row["field"],
             "current_value": row.get("current_value") or "",
             "new_value": row.get("new_value") or "",
+            "evidence_note": row.get("evidence_note") or "",
             "ready_to_import": bool(row.get("ready_to_import")),
             "collection_mode": row.get("collection_mode") or "manual_collection_required",
             "collection_priority": row.get("collection_priority") or 4,
@@ -314,6 +366,7 @@ def build_packet(rows: list[dict], generated_at: str) -> dict:
             "manual_social_stats": str(MANUAL_STATS.relative_to(ROOT)),
             "live_metrics": str(LIVE_METRICS.relative_to(ROOT)),
             "csv": str(OUT_CSV.relative_to(ROOT)),
+            "entry_csv": str(OUT_ENTRY_CSV.relative_to(ROOT)),
             "report": str(OUT_MD.relative_to(ROOT)),
         },
         "summary": {
@@ -329,11 +382,14 @@ def build_packet(rows: list[dict], generated_at: str) -> dict:
             "public_profile_field_count": len([row for row in rows if row.get("access_level") == "public_profile"]),
             "private_analytics_field_count": len([row for row in rows if row.get("access_level") == "private_analytics"]),
             "csv_path": str(OUT_CSV.relative_to(ROOT)),
+            "entry_csv_path": str(OUT_ENTRY_CSV.relative_to(ROOT)),
             "report_path": str(OUT_MD.relative_to(ROOT)),
             "live_import_preview_command": LIVE_IMPORT_PREVIEW_COMMAND,
             "live_import_command": LIVE_IMPORT_COMMAND,
             "worksheet_import_preview_command": WORKSHEET_IMPORT_PREVIEW_COMMAND,
             "worksheet_import_command": WORKSHEET_IMPORT_COMMAND,
+            "entry_import_preview_command": ENTRY_IMPORT_PREVIEW_COMMAND,
+            "entry_import_command": ENTRY_IMPORT_COMMAND,
         },
         "metric_collection_docket": docket,
         "worksheet_import_manifest": build_import_manifest(rows),
@@ -390,6 +446,8 @@ def build_priority_batches(rows: list[dict]) -> list[dict]:
             "fields": [],
             "worksheet_import_preview_command": WORKSHEET_IMPORT_PREVIEW_COMMAND,
             "worksheet_import_command": WORKSHEET_IMPORT_COMMAND,
+            "entry_import_preview_command": ENTRY_IMPORT_PREVIEW_COMMAND,
+            "entry_import_command": ENTRY_IMPORT_COMMAND,
         })
         batch["field_count"] += 1
         batch["csv_rows"].append(row.get("csv_row"))
@@ -405,6 +463,7 @@ def build_priority_batches(rows: list[dict]) -> list[dict]:
             "collection_url": row.get("collection_url") or "",
             "collection_instruction": row.get("collection_instruction") or "",
             "evidence_hint": row.get("evidence_hint") or "",
+            "evidence_note": row.get("evidence_note") or "",
             "update_assignment": row.get("update_assignment") or "",
         }
         batch["fields"].append(field_payload)
@@ -444,6 +503,8 @@ def build_collection_docket(platforms: list[dict], ready_rows: list[dict]) -> di
             "platform_update_command": platform.get("platform_update_command") or "",
             "worksheet_import_preview_command": platform.get("worksheet_import_preview_command") or WORKSHEET_IMPORT_PREVIEW_COMMAND,
             "worksheet_import_command": platform.get("worksheet_import_command") or WORKSHEET_IMPORT_COMMAND,
+            "entry_import_preview_command": platform.get("entry_import_preview_command") or ENTRY_IMPORT_PREVIEW_COMMAND,
+            "entry_import_command": platform.get("entry_import_command") or ENTRY_IMPORT_COMMAND,
         })
     return {
         "status": "ready_to_import" if ready_rows else "needs_values",
@@ -452,10 +513,13 @@ def build_collection_docket(platforms: list[dict], ready_rows: list[dict]) -> di
         "waiting_field_count": sum(group["waiting_count"] for group in platform_groups),
         "platform_groups": platform_groups,
         "csv_path": str(OUT_CSV.relative_to(ROOT)),
+        "entry_csv_path": str(OUT_ENTRY_CSV.relative_to(ROOT)),
         "worksheet_import_preview_command": WORKSHEET_IMPORT_PREVIEW_COMMAND,
         "worksheet_import_command": WORKSHEET_IMPORT_COMMAND,
+        "entry_import_preview_command": ENTRY_IMPORT_PREVIEW_COMMAND,
+        "entry_import_command": ENTRY_IMPORT_COMMAND,
         "guardrails": [
-            "Fill only new_value cells in the CSV; generated context columns are overwritten on refresh.",
+            "Fill only new_value cells in the CSVs; generated context columns are overwritten on refresh.",
             "Run the worksheet import preview before applying metric updates.",
             "Keep metric values nonnegative and source them from the linked platform analytics surfaces.",
         ],
@@ -468,6 +532,7 @@ def build_import_manifest(rows: list[dict]) -> dict:
     return {
         "status": "ready_to_import" if ready_rows and not waiting_rows else ("partial" if ready_rows else "needs_values"),
         "csv_path": str(OUT_CSV.relative_to(ROOT)),
+        "entry_csv_path": str(OUT_ENTRY_CSV.relative_to(ROOT)),
         "ready_row_count": len(ready_rows),
         "waiting_row_count": len(waiting_rows),
         "ready_csv_rows": [row.get("csv_row") for row in ready_rows],
@@ -476,6 +541,8 @@ def build_import_manifest(rows: list[dict]) -> dict:
         "waiting_assignments": [row.get("update_assignment") for row in waiting_rows if row.get("update_assignment")],
         "preview_command": WORKSHEET_IMPORT_PREVIEW_COMMAND,
         "apply_command": WORKSHEET_IMPORT_COMMAND if ready_rows else "",
+        "entry_preview_command": ENTRY_IMPORT_PREVIEW_COMMAND,
+        "entry_apply_command": ENTRY_IMPORT_COMMAND if ready_rows else "",
         "apply_gate": "ready_rows_available" if ready_rows else "blocked_until_new_values_filled",
         "rows": [
             {
@@ -484,6 +551,7 @@ def build_import_manifest(rows: list[dict]) -> dict:
                 "field": row.get("field") or "",
                 "ready_to_import": bool(row.get("ready_to_import")),
                 "new_value": row.get("new_value") or "",
+                "evidence_note": row.get("evidence_note") or "",
                 "value_type": row.get("value_type") or "",
                 "collection_priority": row.get("collection_priority") or 4,
                 "metric_category": row.get("metric_category") or "",
@@ -511,7 +579,15 @@ def build_markdown(rows: list[dict], generated_at: str, packet: dict) -> str:
         f"Live-importable fields: **{len([row for row in rows if row.get('collection_mode') == 'live_import_available'])}**",
         f"Manual collection required: **{len([row for row in rows if row.get('collection_mode') != 'live_import_available'])}**",
         "",
-        "Fill `new_value` in `data/manual_metric_collection_template.csv`, then run:",
+        "Fill `new_value` in `data/manual_metric_entry_template.csv` for the short entry workflow, then run:",
+        "",
+        f"`{ENTRY_IMPORT_PREVIEW_COMMAND}`",
+        "",
+        "If the preview looks right, run:",
+        "",
+        f"`{ENTRY_IMPORT_COMMAND}`",
+        "",
+        "The detailed worksheet remains available at `data/manual_metric_collection_template.csv`:",
         "",
         f"`{WORKSHEET_IMPORT_PREVIEW_COMMAND}`",
         "",
@@ -539,8 +615,11 @@ def build_markdown(rows: list[dict], generated_at: str, packet: dict) -> str:
         f"- Waiting fields: **{docket.get('waiting_field_count', 0)}**",
         f"- Ready to import: **{docket.get('ready_to_import_count', 0)}**",
         f"- CSV: `{docket.get('csv_path') or str(OUT_CSV.relative_to(ROOT))}`",
+        f"- Short entry CSV: `{docket.get('entry_csv_path') or str(OUT_ENTRY_CSV.relative_to(ROOT))}`",
         f"- Preview worksheet import: `{docket.get('worksheet_import_preview_command') or WORKSHEET_IMPORT_PREVIEW_COMMAND}`",
         f"- Apply worksheet import after review: `{docket.get('worksheet_import_command') or WORKSHEET_IMPORT_COMMAND}`",
+        f"- Preview short entry import: `{docket.get('entry_import_preview_command') or ENTRY_IMPORT_PREVIEW_COMMAND}`",
+        f"- Apply short entry import after review: `{docket.get('entry_import_command') or ENTRY_IMPORT_COMMAND}`",
         "",
     ])
     public_backlog = packet.get("public_metric_capture_backlog") or {}
@@ -583,6 +662,8 @@ def build_markdown(rows: list[dict], generated_at: str, packet: dict) -> str:
         f"- Waiting rows: **{manifest.get('waiting_row_count', 0)}**",
         f"- Preview: `{manifest.get('preview_command') or WORKSHEET_IMPORT_PREVIEW_COMMAND}`",
         f"- Apply after review: `{manifest.get('apply_command') or 'blocked until new_value cells are filled'}`",
+        f"- Short entry preview: `{manifest.get('entry_preview_command') or ENTRY_IMPORT_PREVIEW_COMMAND}`",
+        f"- Short entry apply after review: `{manifest.get('entry_apply_command') or 'blocked until new_value cells are filled'}`",
         f"- Apply gate: **{manifest.get('apply_gate', 'unknown')}**",
         f"- Guardrail: {manifest.get('guardrail') or 'Import only collected values.'}",
         "",
@@ -684,8 +765,9 @@ def main() -> int:
     status = read_json(PROMO_STATUS, {})
     manual = read_json(MANUAL_STATS, {})
     live = read_json(LIVE_METRICS, {})
-    rows = build_rows(status, manual, live, existing_new_values())
+    rows = build_rows(status, manual, live, existing_new_values(), existing_entry_notes())
     write_csv(rows)
+    write_entry_csv(rows)
     packet = build_packet(rows, generated_at)
     OUT_JSON.write_text(json.dumps(packet, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     markdown = build_markdown(rows, generated_at, packet)
@@ -693,6 +775,7 @@ def main() -> int:
     sync_admin(markdown, packet)
     print(json.dumps({
         "csv": str(OUT_CSV.relative_to(ROOT)),
+        "entry_csv": str(OUT_ENTRY_CSV.relative_to(ROOT)),
         "json": str(OUT_JSON.relative_to(ROOT)),
         "report": str(OUT_MD.relative_to(ROOT)),
         "pending_fields": len(rows),

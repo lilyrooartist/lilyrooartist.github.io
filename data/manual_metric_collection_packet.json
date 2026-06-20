@@ -1,11 +1,12 @@
 {
-  "generated_at": "2026-06-20T07:37:26.074407Z",
+  "generated_at": "2026-06-20T07:44:17.434601Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
     "manual_social_stats": "data/manual_social_stats.json",
     "live_metrics": "data/live_social_metrics.json",
     "csv": "data/manual_metric_collection_template.csv",
+    "entry_csv": "data/manual_metric_entry_template.csv",
     "report": "admin/reports/manual-metric-collection.md"
   },
   "summary": {
@@ -21,11 +22,14 @@
     "public_profile_field_count": 0,
     "private_analytics_field_count": 6,
     "csv_path": "data/manual_metric_collection_template.csv",
+    "entry_csv_path": "data/manual_metric_entry_template.csv",
     "report_path": "admin/reports/manual-metric-collection.md",
     "live_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-live --dry-run",
     "live_import_command": "python3 scripts/update_manual_social_stats.py --from-live --refresh-admin",
     "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
-    "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin"
+    "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
+    "entry_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run",
+    "entry_import_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin"
   },
   "metric_collection_docket": {
     "status": "needs_values",
@@ -50,6 +54,7 @@
             "field": "reach_7d",
             "current_value": "pending",
             "new_value": "",
+            "evidence_note": "",
             "live_value": "",
             "collection_mode": "manual_collection_required",
             "collection_priority": 2,
@@ -73,6 +78,7 @@
             "field": "reach_7d",
             "current_value": "pending",
             "new_value": "",
+            "evidence_note": "",
             "ready_to_import": false,
             "collection_mode": "manual_collection_required",
             "collection_priority": 2,
@@ -93,7 +99,9 @@
         ],
         "platform_update_command": "python3 scripts/update_manual_social_stats.py facebook.reach_7d=VALUE --refresh-admin",
         "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
-        "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin"
+        "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
+        "entry_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run",
+        "entry_import_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin"
       },
       {
         "platform": "instagram",
@@ -112,6 +120,7 @@
             "field": "profile_visits_7d",
             "current_value": "pending",
             "new_value": "",
+            "evidence_note": "",
             "live_value": "",
             "collection_mode": "manual_collection_required",
             "collection_priority": 2,
@@ -135,6 +144,7 @@
             "field": "profile_visits_7d",
             "current_value": "pending",
             "new_value": "",
+            "evidence_note": "",
             "ready_to_import": false,
             "collection_mode": "manual_collection_required",
             "collection_priority": 2,
@@ -155,7 +165,9 @@
         ],
         "platform_update_command": "python3 scripts/update_manual_social_stats.py instagram.profile_visits_7d=VALUE --refresh-admin",
         "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
-        "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin"
+        "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
+        "entry_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run",
+        "entry_import_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin"
       },
       {
         "platform": "spotify",
@@ -174,6 +186,7 @@
             "field": "release_streams",
             "current_value": "pending",
             "new_value": "",
+            "evidence_note": "",
             "live_value": "",
             "collection_mode": "manual_collection_required",
             "collection_priority": 3,
@@ -194,6 +207,7 @@
             "field": "saves",
             "current_value": "pending",
             "new_value": "",
+            "evidence_note": "",
             "live_value": "",
             "collection_mode": "manual_collection_required",
             "collection_priority": 3,
@@ -217,6 +231,7 @@
             "field": "release_streams",
             "current_value": "pending",
             "new_value": "",
+            "evidence_note": "",
             "ready_to_import": false,
             "collection_mode": "manual_collection_required",
             "collection_priority": 3,
@@ -236,6 +251,7 @@
             "field": "saves",
             "current_value": "pending",
             "new_value": "",
+            "evidence_note": "",
             "ready_to_import": false,
             "collection_mode": "manual_collection_required",
             "collection_priority": 3,
@@ -257,7 +273,9 @@
         ],
         "platform_update_command": "python3 scripts/update_manual_social_stats.py spotify.release_streams=VALUE spotify.saves=VALUE --refresh-admin",
         "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
-        "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin"
+        "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
+        "entry_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run",
+        "entry_import_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin"
       },
       {
         "platform": "tiktok",
@@ -276,6 +294,7 @@
             "field": "profile_views_7d",
             "current_value": "pending",
             "new_value": "",
+            "evidence_note": "",
             "live_value": "",
             "collection_mode": "manual_collection_required",
             "collection_priority": 2,
@@ -299,6 +318,7 @@
             "field": "profile_views_7d",
             "current_value": "pending",
             "new_value": "",
+            "evidence_note": "",
             "ready_to_import": false,
             "collection_mode": "manual_collection_required",
             "collection_priority": 2,
@@ -319,7 +339,9 @@
         ],
         "platform_update_command": "python3 scripts/update_manual_social_stats.py tiktok.profile_views_7d=VALUE --refresh-admin",
         "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
-        "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin"
+        "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
+        "entry_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run",
+        "entry_import_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin"
       },
       {
         "platform": "x",
@@ -338,6 +360,7 @@
             "field": "impressions_7d",
             "current_value": "pending",
             "new_value": "",
+            "evidence_note": "",
             "live_value": "",
             "collection_mode": "manual_collection_required",
             "collection_priority": 2,
@@ -361,6 +384,7 @@
             "field": "impressions_7d",
             "current_value": "pending",
             "new_value": "",
+            "evidence_note": "",
             "ready_to_import": false,
             "collection_mode": "manual_collection_required",
             "collection_priority": 2,
@@ -381,14 +405,19 @@
         ],
         "platform_update_command": "python3 scripts/update_manual_social_stats.py x.impressions_7d=VALUE --refresh-admin",
         "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
-        "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin"
+        "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
+        "entry_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run",
+        "entry_import_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin"
       }
     ],
     "csv_path": "data/manual_metric_collection_template.csv",
+    "entry_csv_path": "data/manual_metric_entry_template.csv",
     "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
     "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
+    "entry_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run",
+    "entry_import_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin",
     "guardrails": [
-      "Fill only new_value cells in the CSV; generated context columns are overwritten on refresh.",
+      "Fill only new_value cells in the CSVs; generated context columns are overwritten on refresh.",
       "Run the worksheet import preview before applying metric updates.",
       "Keep metric values nonnegative and source them from the linked platform analytics surfaces."
     ]
@@ -396,6 +425,7 @@
   "worksheet_import_manifest": {
     "status": "needs_values",
     "csv_path": "data/manual_metric_collection_template.csv",
+    "entry_csv_path": "data/manual_metric_entry_template.csv",
     "ready_row_count": 0,
     "waiting_row_count": 6,
     "ready_csv_rows": [],
@@ -418,6 +448,8 @@
     ],
     "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
     "apply_command": "",
+    "entry_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run",
+    "entry_apply_command": "",
     "apply_gate": "blocked_until_new_values_filled",
     "rows": [
       {
@@ -426,6 +458,7 @@
         "field": "reach_7d",
         "ready_to_import": false,
         "new_value": "",
+        "evidence_note": "",
         "value_type": "nonnegative_integer",
         "collection_priority": 2,
         "metric_category": "Recent discovery and traffic",
@@ -442,6 +475,7 @@
         "field": "profile_visits_7d",
         "ready_to_import": false,
         "new_value": "",
+        "evidence_note": "",
         "value_type": "nonnegative_integer",
         "collection_priority": 2,
         "metric_category": "Recent discovery and traffic",
@@ -458,6 +492,7 @@
         "field": "release_streams",
         "ready_to_import": false,
         "new_value": "",
+        "evidence_note": "",
         "value_type": "nonnegative_integer",
         "collection_priority": 3,
         "metric_category": "Release depth metrics",
@@ -474,6 +509,7 @@
         "field": "saves",
         "ready_to_import": false,
         "new_value": "",
+        "evidence_note": "",
         "value_type": "nonnegative_integer",
         "collection_priority": 3,
         "metric_category": "Release depth metrics",
@@ -490,6 +526,7 @@
         "field": "profile_views_7d",
         "ready_to_import": false,
         "new_value": "",
+        "evidence_note": "",
         "value_type": "nonnegative_integer",
         "collection_priority": 2,
         "metric_category": "Recent discovery and traffic",
@@ -506,6 +543,7 @@
         "field": "impressions_7d",
         "ready_to_import": false,
         "new_value": "",
+        "evidence_note": "",
         "value_type": "nonnegative_integer",
         "collection_priority": 2,
         "metric_category": "Recent discovery and traffic",
@@ -558,6 +596,7 @@
           "collection_url": "https://www.facebook.com/903693509504290",
           "collection_instruction": "Enter reach for the last 7 days.",
           "evidence_hint": "Use the last-7-days reach value from Meta insights.",
+          "evidence_note": "",
           "update_assignment": "facebook.reach_7d=VALUE"
         },
         {
@@ -568,6 +607,7 @@
           "collection_url": "https://www.instagram.com/lilyroo.artist/",
           "collection_instruction": "Enter profile visits for the last 7 days.",
           "evidence_hint": "Use the last-7-days profile visits value from the professional dashboard.",
+          "evidence_note": "",
           "update_assignment": "instagram.profile_visits_7d=VALUE"
         },
         {
@@ -578,6 +618,7 @@
           "collection_url": "https://www.tiktok.com/@lilyroo930",
           "collection_instruction": "Enter profile views for the last 7 days.",
           "evidence_hint": "Use the last-7-days profile views value from TikTok analytics.",
+          "evidence_note": "",
           "update_assignment": "tiktok.profile_views_7d=VALUE"
         },
         {
@@ -588,11 +629,14 @@
           "collection_url": "https://x.com/lilyrooartist",
           "collection_instruction": "Enter impressions for the last 7 days.",
           "evidence_hint": "Use the last-7-days impressions value from X analytics.",
+          "evidence_note": "",
           "update_assignment": "x.impressions_7d=VALUE"
         }
       ],
       "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
-      "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin"
+      "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
+      "entry_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run",
+      "entry_import_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin"
     },
     {
       "priority": 3,
@@ -620,6 +664,7 @@
           "collection_url": "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a",
           "collection_instruction": "Enter lifetime streams for the promoted release.",
           "evidence_hint": "Use lifetime streams for the promoted release from Spotify for Artists.",
+          "evidence_note": "",
           "update_assignment": "spotify.release_streams=VALUE"
         },
         {
@@ -630,11 +675,14 @@
           "collection_url": "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a",
           "collection_instruction": "Enter lifetime saves for the promoted release.",
           "evidence_hint": "Use lifetime saves for the promoted release from Spotify for Artists.",
+          "evidence_note": "",
           "update_assignment": "spotify.saves=VALUE"
         }
       ],
       "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
-      "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin"
+      "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
+      "entry_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run",
+      "entry_import_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin"
     }
   ],
   "platforms": [
@@ -648,6 +696,7 @@
           "field": "reach_7d",
           "current_value": "pending",
           "new_value": "",
+          "evidence_note": "",
           "live_value": "",
           "collection_mode": "manual_collection_required",
           "collection_priority": 2,
@@ -675,6 +724,7 @@
           "field": "reach_7d",
           "current_value": "pending",
           "new_value": "",
+          "evidence_note": "",
           "ready_to_import": false,
           "collection_mode": "manual_collection_required",
           "collection_priority": 2,
@@ -697,7 +747,10 @@
       "live_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-live --dry-run",
       "live_import_command": "python3 scripts/update_manual_social_stats.py --from-live --refresh-admin",
       "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
-      "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin"
+      "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
+      "entry_csv_path": "data/manual_metric_entry_template.csv",
+      "entry_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run",
+      "entry_import_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin"
     },
     {
       "platform": "instagram",
@@ -709,6 +762,7 @@
           "field": "profile_visits_7d",
           "current_value": "pending",
           "new_value": "",
+          "evidence_note": "",
           "live_value": "",
           "collection_mode": "manual_collection_required",
           "collection_priority": 2,
@@ -736,6 +790,7 @@
           "field": "profile_visits_7d",
           "current_value": "pending",
           "new_value": "",
+          "evidence_note": "",
           "ready_to_import": false,
           "collection_mode": "manual_collection_required",
           "collection_priority": 2,
@@ -758,7 +813,10 @@
       "live_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-live --dry-run",
       "live_import_command": "python3 scripts/update_manual_social_stats.py --from-live --refresh-admin",
       "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
-      "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin"
+      "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
+      "entry_csv_path": "data/manual_metric_entry_template.csv",
+      "entry_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run",
+      "entry_import_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin"
     },
     {
       "platform": "spotify",
@@ -770,6 +828,7 @@
           "field": "release_streams",
           "current_value": "pending",
           "new_value": "",
+          "evidence_note": "",
           "live_value": "",
           "collection_mode": "manual_collection_required",
           "collection_priority": 3,
@@ -790,6 +849,7 @@
           "field": "saves",
           "current_value": "pending",
           "new_value": "",
+          "evidence_note": "",
           "live_value": "",
           "collection_mode": "manual_collection_required",
           "collection_priority": 3,
@@ -818,6 +878,7 @@
           "field": "release_streams",
           "current_value": "pending",
           "new_value": "",
+          "evidence_note": "",
           "ready_to_import": false,
           "collection_mode": "manual_collection_required",
           "collection_priority": 3,
@@ -837,6 +898,7 @@
           "field": "saves",
           "current_value": "pending",
           "new_value": "",
+          "evidence_note": "",
           "ready_to_import": false,
           "collection_mode": "manual_collection_required",
           "collection_priority": 3,
@@ -859,7 +921,10 @@
       "live_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-live --dry-run",
       "live_import_command": "python3 scripts/update_manual_social_stats.py --from-live --refresh-admin",
       "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
-      "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin"
+      "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
+      "entry_csv_path": "data/manual_metric_entry_template.csv",
+      "entry_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run",
+      "entry_import_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin"
     },
     {
       "platform": "tiktok",
@@ -871,6 +936,7 @@
           "field": "profile_views_7d",
           "current_value": "pending",
           "new_value": "",
+          "evidence_note": "",
           "live_value": "",
           "collection_mode": "manual_collection_required",
           "collection_priority": 2,
@@ -898,6 +964,7 @@
           "field": "profile_views_7d",
           "current_value": "pending",
           "new_value": "",
+          "evidence_note": "",
           "ready_to_import": false,
           "collection_mode": "manual_collection_required",
           "collection_priority": 2,
@@ -920,7 +987,10 @@
       "live_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-live --dry-run",
       "live_import_command": "python3 scripts/update_manual_social_stats.py --from-live --refresh-admin",
       "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
-      "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin"
+      "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
+      "entry_csv_path": "data/manual_metric_entry_template.csv",
+      "entry_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run",
+      "entry_import_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin"
     },
     {
       "platform": "x",
@@ -932,6 +1002,7 @@
           "field": "impressions_7d",
           "current_value": "pending",
           "new_value": "",
+          "evidence_note": "",
           "live_value": "",
           "collection_mode": "manual_collection_required",
           "collection_priority": 2,
@@ -959,6 +1030,7 @@
           "field": "impressions_7d",
           "current_value": "pending",
           "new_value": "",
+          "evidence_note": "",
           "ready_to_import": false,
           "collection_mode": "manual_collection_required",
           "collection_priority": 2,
@@ -981,7 +1053,10 @@
       "live_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-live --dry-run",
       "live_import_command": "python3 scripts/update_manual_social_stats.py --from-live --refresh-admin",
       "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
-      "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin"
+      "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
+      "entry_csv_path": "data/manual_metric_entry_template.csv",
+      "entry_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run",
+      "entry_import_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin"
     }
   ],
   "rows": [
@@ -990,6 +1065,7 @@
       "field": "reach_7d",
       "current_value": "pending",
       "new_value": "",
+      "evidence_note": "",
       "live_value": "",
       "collection_mode": "manual_collection_required",
       "collection_priority": 2,
@@ -1015,6 +1091,7 @@
       "field": "profile_visits_7d",
       "current_value": "pending",
       "new_value": "",
+      "evidence_note": "",
       "live_value": "",
       "collection_mode": "manual_collection_required",
       "collection_priority": 2,
@@ -1040,6 +1117,7 @@
       "field": "release_streams",
       "current_value": "pending",
       "new_value": "",
+      "evidence_note": "",
       "live_value": "",
       "collection_mode": "manual_collection_required",
       "collection_priority": 3,
@@ -1065,6 +1143,7 @@
       "field": "saves",
       "current_value": "pending",
       "new_value": "",
+      "evidence_note": "",
       "live_value": "",
       "collection_mode": "manual_collection_required",
       "collection_priority": 3,
@@ -1090,6 +1169,7 @@
       "field": "profile_views_7d",
       "current_value": "pending",
       "new_value": "",
+      "evidence_note": "",
       "live_value": "",
       "collection_mode": "manual_collection_required",
       "collection_priority": 2,
@@ -1115,6 +1195,7 @@
       "field": "impressions_7d",
       "current_value": "pending",
       "new_value": "",
+      "evidence_note": "",
       "live_value": "",
       "collection_mode": "manual_collection_required",
       "collection_priority": 2,

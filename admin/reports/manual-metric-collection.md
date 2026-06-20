@@ -1,13 +1,21 @@
 # Manual Metric Collection - Lily Roo
 
-Generated: 2026-06-20T07:37:26.074407Z
+Generated: 2026-06-20T07:44:17.434601Z
 
 Pending fields: **6**
 
 Live-importable fields: **0**
 Manual collection required: **6**
 
-Fill `new_value` in `data/manual_metric_collection_template.csv`, then run:
+Fill `new_value` in `data/manual_metric_entry_template.csv` for the short entry workflow, then run:
+
+`python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run`
+
+If the preview looks right, run:
+
+`python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin`
+
+The detailed worksheet remains available at `data/manual_metric_collection_template.csv`:
 
 `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
 
@@ -32,8 +40,11 @@ You can still run a platform update command directly if you only collect one pla
 - Waiting fields: **6**
 - Ready to import: **0**
 - CSV: `data/manual_metric_collection_template.csv`
+- Short entry CSV: `data/manual_metric_entry_template.csv`
 - Preview worksheet import: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
 - Apply worksheet import after review: `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
+- Preview short entry import: `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run`
+- Apply short entry import after review: `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin`
 
 ### Priority 2: Recent discovery and traffic
 - Status: `needs_values`; waiting: **4**; ready: **0**
@@ -72,6 +83,8 @@ You can still run a platform update command directly if you only collect one pla
 - Waiting rows: **6**
 - Preview: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
 - Apply after review: `blocked until new_value cells are filled`
+- Short entry preview: `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run`
+- Short entry apply after review: `blocked until new_value cells are filled`
 - Apply gate: **blocked_until_new_values_filled**
 - Guardrail: Import only filled nonnegative numeric new_value cells; leave unknown rows blank.
 
