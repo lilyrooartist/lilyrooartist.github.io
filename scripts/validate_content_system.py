@@ -616,6 +616,15 @@ def validate_generated_outputs(failures):
             and manual_approval_docket.get("guardrail") in manual_posting_step.get("guardrail", "")
             and any(item.get("id") == "manual-metric-worksheet" and item.get("field_count") == metric_task_field_count and "--from-csv --dry-run" in item.get("preview_command", "") for item in docket_checklist)
             and any(item.get("id") == "platform-repair-gate" and item.get("state") == "blocked" and "push_social_worker_secrets.py --dry-run" in item.get("preview_command", "") for item in docket_checklist)
+            and all(
+                item.get("completion_evidence")
+                and item.get("next_step_after_apply")
+                and item.get("command_sequence")
+                and (not item.get("apply_command") or any(sequence_item.get("step") == "apply_after_review" and sequence_item.get("command") == item.get("apply_command") for sequence_item in item.get("command_sequence") or []))
+                and (not item.get("preview_command") or any(sequence_item.get("step") == "preview" and sequence_item.get("command") == item.get("preview_command") for sequence_item in item.get("command_sequence") or []))
+                for item in docket_checklist
+                if item.get("state") != "clear"
+            )
             and any(task.get("phase") == "Manual metrics" and (task.get("impact") or {}).get("pending_assignments") for task in tasks)
             and any(task.get("phase") == "Platform setup" and (task.get("impact") or {}).get("missing_secrets") for task in tasks)
             and any(task.get("phase") == "Platform setup" and (task.get("impact") or {}).get("platform") == "TikTok" and (task.get("impact") or {}).get("preflight_status") and (task.get("impact") or {}).get("preflight_command") and (task.get("impact") or {}).get("preflight_report") for task in tasks)
@@ -1860,7 +1869,7 @@ def validate_generated_outputs(failures):
         fail("build_published_log_reconciliation.py missing", failures)
     if HUMAN_HANDOFF_SCRIPT.exists():
         handoff_text = HUMAN_HANDOFF_SCRIPT.read_text(encoding="utf-8")
-        if "human_handoff_packet.json" in handoff_text and "human-handoff-packet.md" in handoff_text and "promotion_blocker_ledger.json" in handoff_text and "manual_metric_collection_packet.json" in handoff_text and "manual_distribution_packet.json" in handoff_text and "approval_runway.json" in handoff_text and "scheduled_approval_packet.json" in handoff_text and "platform_repair_status.json" in handoff_text and "tiktok_setup_preflight.json" in handoff_text and "action_docket" in handoff_text and "build_action_docket" in handoff_text and "subprocess" not in handoff_text:
+        if "human_handoff_packet.json" in handoff_text and "human-handoff-packet.md" in handoff_text and "promotion_blocker_ledger.json" in handoff_text and "manual_metric_collection_packet.json" in handoff_text and "manual_distribution_packet.json" in handoff_text and "approval_runway.json" in handoff_text and "scheduled_approval_packet.json" in handoff_text and "platform_repair_status.json" in handoff_text and "tiktok_setup_preflight.json" in handoff_text and "action_docket" in handoff_text and "build_action_docket" in handoff_text and "command_sequence" in handoff_text and "completion_evidence" in handoff_text and "next_step_after_apply" in handoff_text and "subprocess" not in handoff_text:
             ok("human handoff packet builder is review-only")
         else:
             fail("build_human_handoff_packet.py missing handoff outputs or executes commands", failures)

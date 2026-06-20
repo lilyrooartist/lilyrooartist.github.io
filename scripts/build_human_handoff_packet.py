@@ -238,6 +238,29 @@ def tasks_for_phase(tasks: list[dict], phase: str) -> list[dict]:
     return [task for task in tasks if task.get("phase") == phase]
 
 
+def command_sequence(preview_command: str = "", apply_command: str = "", verify_command: str = "") -> list[dict]:
+    sequence = []
+    if preview_command:
+        sequence.append({
+            "step": "preview",
+            "command": preview_command,
+            "required_before_apply": True,
+        })
+    if apply_command:
+        sequence.append({
+            "step": "apply_after_review",
+            "command": apply_command,
+            "required_before_apply": False,
+        })
+    if verify_command:
+        sequence.append({
+            "step": "verify",
+            "command": verify_command,
+            "required_before_apply": False,
+        })
+    return sequence
+
+
 def build_action_docket(tasks: list[dict], blocker_summary: dict, approval_runway: dict) -> dict:
     projection = blocker_summary.get("next_resolution_projection") or {}
     roadmap = blocker_summary.get("blocker_unlock_roadmap") or []
@@ -253,6 +276,14 @@ def build_action_docket(tasks: list[dict], blocker_summary: dict, approval_runwa
     manual_preview_command = manual_approval_docket.get("preview_command") or (manual_distribution[0].get("preview_command") if manual_distribution else "")
     manual_apply_command = manual_approval_docket.get("apply_command") or (manual_distribution[0].get("apply_command") if manual_distribution else "")
     manual_guardrail = manual_approval_docket.get("guardrail") or "Post manually first, then log only real public URLs."
+    approval_preview_command = approval.get("preview_command") or projection.get("preview_command") or ""
+    approval_apply_command = approval.get("apply_command") or projection.get("apply_command") or ""
+    platform_preview_command = platform_setup[0].get("preview_command") if platform_setup else ""
+    platform_apply_command = platform_setup[0].get("apply_command") if platform_setup else ""
+    metric_preview_command = manual_metrics[0].get("preview_command") if manual_metrics else ""
+    metric_apply_command = manual_metrics[0].get("apply_command") if manual_metrics else ""
+    backlog_preview_command = backlog.get("preview_command") if backlog else ""
+    backlog_apply_command = backlog.get("apply_command") if backlog else ""
     checklist = [
         {
             "id": "review-checked-approval-batch",
@@ -261,8 +292,11 @@ def build_action_docket(tasks: list[dict], blocker_summary: dict, approval_runwa
             "owner": "tod",
             "task_ids": [approval.get("id")] if approval else [],
             "blockers_resolved": projection.get("blockers_resolved") or 0,
-            "preview_command": approval.get("preview_command") or projection.get("preview_command") or "",
-            "apply_command": approval.get("apply_command") or projection.get("apply_command") or "",
+            "preview_command": approval_preview_command,
+            "apply_command": approval_apply_command,
+            "command_sequence": command_sequence(approval_preview_command, approval_apply_command, "python3 scripts/refresh_promo_admin.py"),
+            "completion_evidence": "data/scheduled_approval_packet.json should show fewer approval blockers, and data/social_scheduler_dry_run.json should no longer block the approved Instagram row on not_approved.",
+            "next_step_after_apply": "Run the safe admin refresh, then manually post/log any newly approved YouTube Community row before treating the published log as current.",
             "guardrail": approval.get("guardrail") or projection.get("guardrail") or "",
         },
         {
@@ -276,6 +310,9 @@ def build_action_docket(tasks: list[dict], blocker_summary: dict, approval_runwa
             "blocked_ids": manual_approval_docket.get("blocked_ids") or [],
             "preview_command": manual_preview_command,
             "apply_command": manual_apply_command,
+            "command_sequence": command_sequence(manual_preview_command, manual_apply_command, "python3 scripts/refresh_promo_admin.py"),
+            "completion_evidence": "data/manual_distribution_packet.json should move approved rows from review_queue toward postable manual distribution, and data/published_log_reconciliation.json should remain gated until public URLs are logged.",
+            "next_step_after_apply": "Post each approved YouTube Community row manually, then log its public URL with scripts/log_manual_distribution.py.",
             "guardrail": f"{manual_guardrail} Post manually first, then log only real public URLs.",
         },
         {
@@ -285,8 +322,11 @@ def build_action_docket(tasks: list[dict], blocker_summary: dict, approval_runwa
             "owner": "tod",
             "task_ids": [task["id"] for task in platform_setup],
             "blockers_resolved": blocked_platform_count,
-            "preview_command": platform_setup[0].get("preview_command") if platform_setup else "",
-            "apply_command": platform_setup[0].get("apply_command") if platform_setup else "",
+            "preview_command": platform_preview_command,
+            "apply_command": platform_apply_command,
+            "command_sequence": command_sequence(platform_preview_command, platform_apply_command, "python3 scripts/refresh_promo_admin.py"),
+            "completion_evidence": "data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_post_publicly before TikTok backlog work is allowed.",
+            "next_step_after_apply": "Recapture admin state and only then revisit TikTok approval or backlog reschedule rows.",
             "guardrail": "Run preflight and confirm local OAuth/public-posting setup before pushing secrets.",
         },
         {
@@ -297,8 +337,11 @@ def build_action_docket(tasks: list[dict], blocker_summary: dict, approval_runwa
             "task_ids": [task["id"] for task in manual_metrics],
             "blockers_resolved": len(manual_metrics),
             "field_count": metric_field_count,
-            "preview_command": manual_metrics[0].get("preview_command") if manual_metrics else "",
-            "apply_command": manual_metrics[0].get("apply_command") if manual_metrics else "",
+            "preview_command": metric_preview_command,
+            "apply_command": metric_apply_command,
+            "command_sequence": command_sequence(metric_preview_command, metric_apply_command, "python3 scripts/refresh_promo_admin.py"),
+            "completion_evidence": "data/manual_metric_collection_packet.json should reduce pending_field_count, and data/metrics_history.json should preserve the imported metrics in the latest snapshot.",
+            "next_step_after_apply": "Rebuild the weekly report and confirm lilyroo.com/admin shows fewer pending manual metric fields.",
             "guardrail": "Import only collected numeric values; leave unknown cells blank.",
         },
         {
@@ -308,8 +351,11 @@ def build_action_docket(tasks: list[dict], blocker_summary: dict, approval_runwa
             "owner": backlog.get("owner") or "tod",
             "task_ids": [backlog.get("id")] if backlog else [],
             "blockers_resolved": (backlog.get("impact") or {}).get("approved_backlog_count") or 0,
-            "preview_command": backlog.get("preview_command") if backlog else "",
-            "apply_command": backlog.get("apply_command") if backlog else "",
+            "preview_command": backlog_preview_command,
+            "apply_command": backlog_apply_command,
+            "command_sequence": command_sequence(backlog_preview_command, backlog_apply_command, "python3 scripts/refresh_promo_admin.py"),
+            "completion_evidence": "data/backlog_reschedule_preview.json should show normal_apply_gate clear before any non-override apply command is exposed.",
+            "next_step_after_apply": "Refresh admin and confirm approved past-due posts have future scheduled_at values before relying on the scheduler.",
             "guardrail": backlog.get("guardrail") or "Do not apply blocked backlog reschedules without clearing platform readiness.",
         },
     ]
@@ -364,6 +410,13 @@ def build_markdown(payload: dict) -> str:
             lines.append(f"  - Preview/check: `{item['preview_command']}`")
         if item.get("apply_command"):
             lines.append(f"  - Apply after review: `{item['apply_command']}`")
+        for sequence_item in item.get("command_sequence") or []:
+            if sequence_item.get("command"):
+                lines.append(f"  - Sequence {sequence_item.get('step')}: `{sequence_item['command']}`")
+        if item.get("completion_evidence"):
+            lines.append(f"  - Completion evidence: {item['completion_evidence']}")
+        if item.get("next_step_after_apply"):
+            lines.append(f"  - Next after apply: {item['next_step_after_apply']}")
         if item.get("guardrail"):
             lines.append(f"  - Guardrail: {item['guardrail']}")
     lines.extend([

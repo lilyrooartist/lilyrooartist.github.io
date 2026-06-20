@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T04:44:50.015849Z",
+  "generated_at": "2026-06-20T04:50:00.483442Z",
   "safe_mode": true,
   "source": {
     "promotion_blocker_ledger": "data/promotion_blocker_ledger.json",
@@ -193,6 +193,25 @@
       "blockers_resolved": 2,
       "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
       "apply_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+      "command_sequence": [
+        {
+          "step": "preview",
+          "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+          "required_before_apply": true
+        },
+        {
+          "step": "apply_after_review",
+          "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+          "required_before_apply": false
+        },
+        {
+          "step": "verify",
+          "command": "python3 scripts/refresh_promo_admin.py",
+          "required_before_apply": false
+        }
+      ],
+      "completion_evidence": "data/scheduled_approval_packet.json should show fewer approval blockers, and data/social_scheduler_dry_run.json should no longer block the approved Instagram row on not_approved.",
+      "next_step_after_apply": "Run the safe admin refresh, then manually post/log any newly approved YouTube Community row before treating the published log as current.",
       "guardrail": "Use --checked-batch so only rows that passed review checks are approved."
     },
     "blocked_steps": [
@@ -207,6 +226,25 @@
         "blockers_resolved": 1,
         "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
         "apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
+        "command_sequence": [
+          {
+            "step": "preview",
+            "command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+            "required_before_apply": true
+          },
+          {
+            "step": "apply_after_review",
+            "command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
+            "required_before_apply": false
+          },
+          {
+            "step": "verify",
+            "command": "python3 scripts/refresh_promo_admin.py",
+            "required_before_apply": false
+          }
+        ],
+        "completion_evidence": "data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_post_publicly before TikTok backlog work is allowed.",
+        "next_step_after_apply": "Recapture admin state and only then revisit TikTok approval or backlog reschedule rows.",
         "guardrail": "Run preflight and confirm local OAuth/public-posting setup before pushing secrets."
       },
       {
@@ -220,6 +258,20 @@
         "blockers_resolved": 1,
         "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
         "apply_command": "",
+        "command_sequence": [
+          {
+            "step": "preview",
+            "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
+            "required_before_apply": true
+          },
+          {
+            "step": "verify",
+            "command": "python3 scripts/refresh_promo_admin.py",
+            "required_before_apply": false
+          }
+        ],
+        "completion_evidence": "data/backlog_reschedule_preview.json should show normal_apply_gate clear before any non-override apply command is exposed.",
+        "next_step_after_apply": "Refresh admin and confirm approved past-due posts have future scheduled_at values before relying on the scheduler.",
         "guardrail": "Normal apply stays hidden until known executor/platform blockers clear."
       }
     ],
@@ -235,6 +287,25 @@
         "blockers_resolved": 2,
         "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
         "apply_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+        "command_sequence": [
+          {
+            "step": "preview",
+            "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+            "required_before_apply": true
+          },
+          {
+            "step": "apply_after_review",
+            "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+            "required_before_apply": false
+          },
+          {
+            "step": "verify",
+            "command": "python3 scripts/refresh_promo_admin.py",
+            "required_before_apply": false
+          }
+        ],
+        "completion_evidence": "data/scheduled_approval_packet.json should show fewer approval blockers, and data/social_scheduler_dry_run.json should no longer block the approved Instagram row on not_approved.",
+        "next_step_after_apply": "Run the safe admin refresh, then manually post/log any newly approved YouTube Community row before treating the published log as current.",
         "guardrail": "Use --checked-batch so only rows that passed review checks are approved."
       },
       {
@@ -256,6 +327,25 @@
         ],
         "preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
         "apply_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+        "command_sequence": [
+          {
+            "step": "preview",
+            "command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
+            "required_before_apply": true
+          },
+          {
+            "step": "apply_after_review",
+            "command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+            "required_before_apply": false
+          },
+          {
+            "step": "verify",
+            "command": "python3 scripts/refresh_promo_admin.py",
+            "required_before_apply": false
+          }
+        ],
+        "completion_evidence": "data/manual_distribution_packet.json should move approved rows from review_queue toward postable manual distribution, and data/published_log_reconciliation.json should remain gated until public URLs are logged.",
+        "next_step_after_apply": "Post each approved YouTube Community row manually, then log its public URL with scripts/log_manual_distribution.py.",
         "guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review. Post manually first, then log only real public URLs."
       },
       {
@@ -269,6 +359,25 @@
         "blockers_resolved": 1,
         "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
         "apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
+        "command_sequence": [
+          {
+            "step": "preview",
+            "command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+            "required_before_apply": true
+          },
+          {
+            "step": "apply_after_review",
+            "command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
+            "required_before_apply": false
+          },
+          {
+            "step": "verify",
+            "command": "python3 scripts/refresh_promo_admin.py",
+            "required_before_apply": false
+          }
+        ],
+        "completion_evidence": "data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_post_publicly before TikTok backlog work is allowed.",
+        "next_step_after_apply": "Recapture admin state and only then revisit TikTok approval or backlog reschedule rows.",
         "guardrail": "Run preflight and confirm local OAuth/public-posting setup before pushing secrets."
       },
       {
@@ -287,6 +396,25 @@
         "field_count": 11,
         "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
         "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
+        "command_sequence": [
+          {
+            "step": "preview",
+            "command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
+            "required_before_apply": true
+          },
+          {
+            "step": "apply_after_review",
+            "command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
+            "required_before_apply": false
+          },
+          {
+            "step": "verify",
+            "command": "python3 scripts/refresh_promo_admin.py",
+            "required_before_apply": false
+          }
+        ],
+        "completion_evidence": "data/manual_metric_collection_packet.json should reduce pending_field_count, and data/metrics_history.json should preserve the imported metrics in the latest snapshot.",
+        "next_step_after_apply": "Rebuild the weekly report and confirm lilyroo.com/admin shows fewer pending manual metric fields.",
         "guardrail": "Import only collected numeric values; leave unknown cells blank."
       },
       {
@@ -300,6 +428,20 @@
         "blockers_resolved": 1,
         "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
         "apply_command": "",
+        "command_sequence": [
+          {
+            "step": "preview",
+            "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
+            "required_before_apply": true
+          },
+          {
+            "step": "verify",
+            "command": "python3 scripts/refresh_promo_admin.py",
+            "required_before_apply": false
+          }
+        ],
+        "completion_evidence": "data/backlog_reschedule_preview.json should show normal_apply_gate clear before any non-override apply command is exposed.",
+        "next_step_after_apply": "Refresh admin and confirm approved past-due posts have future scheduled_at values before relying on the scheduler.",
         "guardrail": "Normal apply stays hidden until known executor/platform blockers clear."
       }
     ]

@@ -1,6 +1,6 @@
 # Human Handoff Packet - Lily Roo
 
-Generated: 2026-06-20T04:44:50.015849Z
+Generated: 2026-06-20T04:50:00.483442Z
 
 ## Summary
 - Open handoff tasks: **10**
@@ -19,6 +19,11 @@ Generated: 2026-06-20T04:44:50.015849Z
   - Owner: `tod`; tasks: **1**; blockers resolved: **2**
   - Preview/check: `python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run`
   - Apply after review: `python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin`
+  - Sequence preview: `python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run`
+  - Sequence apply_after_review: `python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin`
+  - Sequence verify: `python3 scripts/refresh_promo_admin.py`
+  - Completion evidence: data/scheduled_approval_packet.json should show fewer approval blockers, and data/social_scheduler_dry_run.json should no longer block the approved Instagram row on not_approved.
+  - Next after apply: Run the safe admin refresh, then manually post/log any newly approved YouTube Community row before treating the published log as current.
   - Guardrail: Use --checked-batch so only rows that passed review checks are approved.
 - **Review and post manual distribution rows** (`needs_review`)
   - Owner: `tod`; tasks: **2**; blockers resolved: **2**
@@ -26,21 +31,40 @@ Generated: 2026-06-20T04:44:50.015849Z
   - Blocked IDs: `FP-PLAN-TWELVE-DOLLARS-TIKTOK`
   - Preview/check: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run`
   - Apply after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin`
+  - Sequence preview: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run`
+  - Sequence apply_after_review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin`
+  - Sequence verify: `python3 scripts/refresh_promo_admin.py`
+  - Completion evidence: data/manual_distribution_packet.json should move approved rows from review_queue toward postable manual distribution, and data/published_log_reconciliation.json should remain gated until public URLs are logged.
+  - Next after apply: Post each approved YouTube Community row manually, then log its public URL with scripts/log_manual_distribution.py.
   - Guardrail: Manual-only approvals do not auto-post; posting and public URL logging remain separate after review. Post manually first, then log only real public URLs.
 - **Repair blocked platform executor setup** (`blocked`)
   - Owner: `tod`; tasks: **1**; blockers resolved: **1**
   - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
   - Apply after review: `python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py`
+  - Sequence preview: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
+  - Sequence apply_after_review: `python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py`
+  - Sequence verify: `python3 scripts/refresh_promo_admin.py`
+  - Completion evidence: data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_post_publicly before TikTok backlog work is allowed.
+  - Next after apply: Recapture admin state and only then revisit TikTok approval or backlog reschedule rows.
   - Guardrail: Run preflight and confirm local OAuth/public-posting setup before pushing secrets.
 - **Fill and import manual metric worksheet** (`needs_values`)
   - Owner: `tod`; tasks: **5**; blockers resolved: **5**
   - Fields: **11**
   - Preview/check: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
   - Apply after review: `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
+  - Sequence preview: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
+  - Sequence apply_after_review: `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
+  - Sequence verify: `python3 scripts/refresh_promo_admin.py`
+  - Completion evidence: data/manual_metric_collection_packet.json should reduce pending_field_count, and data/metrics_history.json should preserve the imported metrics in the latest snapshot.
+  - Next after apply: Rebuild the weekly report and confirm lilyroo.com/admin shows fewer pending manual metric fields.
   - Guardrail: Import only collected numeric values; leave unknown cells blank.
 - **Reschedule approved backlog after blockers clear** (`blocked`)
   - Owner: `external_platform`; tasks: **1**; blockers resolved: **1**
   - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24`
+  - Sequence preview: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24`
+  - Sequence verify: `python3 scripts/refresh_promo_admin.py`
+  - Completion evidence: data/backlog_reschedule_preview.json should show normal_apply_gate clear before any non-override apply command is exposed.
+  - Next after apply: Refresh admin and confirm approved past-due posts have future scheduled_at values before relying on the scheduler.
   - Guardrail: Normal apply stays hidden until known executor/platform blockers clear.
 
 ## Tasks
