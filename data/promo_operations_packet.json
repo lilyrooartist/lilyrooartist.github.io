@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T01:30:42.347066Z",
+  "generated_at": "2026-06-20T01:35:51.632975Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -166,7 +166,7 @@
         "platform": "TikTok",
         "reason": "tiktok_credentials_missing",
         "error_summary": "",
-        "repair_action": "Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok public posting approval is false. Complete TikTok OAuth/public posting setup, push secrets, then refresh Admin.",
+        "repair_action": "Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok public posting approval is false. Local secret source is also missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Complete TikTok OAuth/public posting setup locally, then push secrets and refresh Admin.",
         "repair_apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
         "readiness": {
           "ready": false,
@@ -188,7 +188,19 @@
         "public_posting_approved": false,
         "refresh_config_present": false,
         "access_token_present": false,
-        "default_privacy": "PUBLIC_TO_EVERYONE"
+        "default_privacy": "PUBLIC_TO_EVERYONE",
+        "local_secret_source": "secrets/social_api.env",
+        "local_secret_presence": {
+          "TIKTOK_CLIENT_KEY": false,
+          "TIKTOK_CLIENT_SECRET": false,
+          "TIKTOK_REFRESH_TOKEN": false
+        },
+        "local_missing_secrets": [
+          "TIKTOK_CLIENT_KEY",
+          "TIKTOK_CLIENT_SECRET",
+          "TIKTOK_REFRESH_TOKEN"
+        ],
+        "local_secret_ready": false
       },
       "phase": "Repair executor",
       "urgency": "high",

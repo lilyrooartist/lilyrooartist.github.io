@@ -111,6 +111,11 @@ def build_actions(status: dict, runway: dict, cta_audit: dict, platform_repair: 
                 "post_id": row.get("post_id") or "",
                 "platform": row.get("platform") or "",
                 "reason": row.get("reason") or "",
+                "missing_secrets": row.get("missing_secrets") or [],
+                "local_missing_secrets": row.get("local_missing_secrets") or [],
+                "local_secret_source": row.get("local_secret_source") or "",
+                "local_secret_ready": row.get("local_secret_ready"),
+                "public_posting_approved": row.get("public_posting_approved"),
             },
         ))
 
@@ -183,6 +188,13 @@ def build_markdown(payload: dict) -> str:
         lines.append(f"   - Phase: `{action['phase']}`; status: `{action['status']}`")
         if action.get("detail"):
             lines.append(f"   - Detail: {action['detail']}")
+        context = action.get("context") or {}
+        if context.get("missing_secrets"):
+            lines.append(f"   - Missing secrets: `{', '.join(context['missing_secrets'])}`")
+        if context.get("local_missing_secrets"):
+            lines.append(f"   - Missing locally: `{', '.join(context['local_missing_secrets'])}`")
+        if context.get("local_secret_source"):
+            lines.append(f"   - Local source: `{context['local_secret_source']}`")
         if action.get("command"):
             lines.append(f"   - Preview/check: `{action['command']}`")
         if action.get("after_review_command"):

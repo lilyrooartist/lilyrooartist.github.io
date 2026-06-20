@@ -72,6 +72,9 @@ def add_platform_repairs(rows: list[dict]) -> None:
         missing = ", ".join(item.get("missing_secrets") or [])
         if missing:
             reason = f"{reason} Missing secrets: {missing}."
+        local_missing = ", ".join(item.get("local_missing_secrets") or [])
+        if local_missing:
+            reason = f"{reason} Local secret source is missing: {local_missing}."
         owner = "external_platform" if platform in {"Facebook", "Instagram"} else "tod"
         next_step = item.get("repair_action") or "Complete the platform repair, then refresh admin."
         verification = item.get("retry_reset_verification_command") or ""

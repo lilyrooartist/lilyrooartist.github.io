@@ -378,10 +378,15 @@ def validate_generated_outputs(failures):
             if (action.get("context") or {}).get("platform") == "TikTok"
             and action.get("urgency") in {"blocked", "high"}
         ]
-        if tiktok_actions and any((action.get("context") or {}).get("missing_secrets") for action in tiktok_actions):
-            ok("promo operations packet includes TikTok missing-secret diagnostics")
+        if tiktok_actions and any(
+            (action.get("context") or {}).get("missing_secrets")
+            and (action.get("context") or {}).get("local_missing_secrets")
+            and (action.get("context") or {}).get("local_secret_source")
+            for action in tiktok_actions
+        ):
+            ok("promo operations packet includes TikTok remote and local missing-secret diagnostics")
         else:
-            fail("promo_operations_packet.json missing TikTok missing-secret diagnostics", failures)
+            fail("promo_operations_packet.json missing TikTok remote/local missing-secret diagnostics", failures)
         manual_metric_actions = [
             action for action in actions
             if action.get("kind") == "manual_metrics"

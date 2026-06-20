@@ -7,6 +7,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+SOCIAL_ENV = ROOT.parent / "secrets" / "social_api.env"
 PROMO_STATUS = ROOT / "data" / "promo_engine_status.json"
 PROMO_PLAN = ROOT / "data" / "promo_queue_plan.json"
 SOCIAL_EXECUTIONS = ROOT / "data" / "social_execution_snapshot.json"
@@ -21,6 +22,21 @@ def read_json(path: Path, fallback):
     if not path.exists():
         return fallback
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def read_env_presence(path: Path, names: list[str]) -> dict[str, bool]:
+    present = {name: False for name in names}
+    if not path.exists():
+        return present
+    for raw in path.read_text(encoding="utf-8").splitlines():
+        line = raw.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        key = key.strip()
+        if key in present:
+            present[key] = bool(value.strip().strip('"').strip("'"))
+    return present
 
 
 def command_row(label: str, command: str, kind: str, priority: int, context: dict | None = None) -> dict:
@@ -193,6 +209,20 @@ def readiness_diagnostics(readiness: dict, platform: str) -> dict:
     return {key: value for key, value in diagnostics.items() if value not in (None, "", [])}
 
 
+def local_secret_diagnostics(platform: str, missing_secrets: list[str]) -> dict:
+    names = list(missing_secrets or [])
+    if platform_slug(platform) != "tiktok" or not names:
+        return {}
+    present = read_env_presence(SOCIAL_ENV, names)
+    missing_local = [name for name in names if not present.get(name)]
+    return {
+        "local_secret_source": str(SOCIAL_ENV.relative_to(ROOT.parent)),
+        "local_secret_presence": present,
+        "local_missing_secrets": missing_local,
+        "local_secret_ready": not missing_local,
+    }
+
+
 def repair_command_for(platform: str, fallback: str, row: dict | None = None) -> str:
     row = row or {}
     post_id = row.get("post_id") or ""
@@ -222,7 +252,12 @@ def repair_action_for(platform: str, fallback: str, diagnostics: dict) -> str:
             pieces.append(f"Missing worker secrets: {missing}.")
         if approval is False:
             pieces.append("TikTok public posting approval is false.")
-        pieces.append("Complete TikTok OAuth/public posting setup, push secrets, then refresh Admin.")
+        local_missing = ", ".join(diagnostics.get("local_missing_secrets") or [])
+        if local_missing:
+            pieces.append(f"Local secret source is also missing: {local_missing}.")
+            pieces.append("Complete TikTok OAuth/public posting setup locally, then push secrets and refresh Admin.")
+        else:
+            pieces.append("Complete TikTok OAuth/public posting setup, push secrets, then refresh Admin.")
         return " ".join(pieces)
     return fallback
 
@@ -391,6 +426,7 @@ def platform_fix_actions(status, executions, readiness):
     for row in rows:
         platform = row.get("platform") or ""
         diagnostics = readiness_diagnostics(readiness, platform)
+        diagnostics.update(local_secret_diagnostics(platform, diagnostics.get("missing_secrets") or []))
         fallback_action = row.get("repair_action") or ""
         fallback_command = row.get("repair_command") or "python3 scripts/refresh_promo_admin.py"
         command = repair_command_for(platform, fallback_command, row)
@@ -455,6 +491,11 @@ def build_markdown(packet):
                 lines.append(f"  - Detail: {detail}")
             if missing_secrets:
                 lines.append(f"  - Missing secrets: `{missing_secrets}`")
+            local_missing = ", ".join(context.get("local_missing_secrets") or [])
+            if local_missing:
+                lines.append(f"  - Missing locally: `{local_missing}`")
+            if context.get("local_secret_source"):
+                lines.append(f"  - Local source: `{context['local_secret_source']}`")
             if context.get("checked_at"):
                 lines.append(f"  - Latest snapshot checked: `{context['checked_at']}`")
             if "public_posting_approved" in context:

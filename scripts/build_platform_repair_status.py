@@ -114,6 +114,10 @@ def build_markdown(payload: dict) -> str:
             lines.append(f"  - Repair: {row['repair_action']}")
         if row.get("missing_secrets"):
             lines.append(f"  - Missing secrets: {', '.join(row['missing_secrets'])}")
+        if row.get("local_missing_secrets"):
+            lines.append(f"  - Missing locally: {', '.join(row['local_missing_secrets'])}")
+        if row.get("local_secret_source"):
+            lines.append(f"  - Local source: `{row['local_secret_source']}`")
         if row.get("preview_command"):
             lines.append(f"  - Preview/check: `{row['preview_command']}`")
         if row.get("apply_command"):
@@ -181,6 +185,10 @@ def build_status() -> dict:
             "retry_reset_note": context.get("retry_reset_note") or "",
             "readiness": platform_readiness,
             "missing_secrets": context.get("missing_secrets") or platform_readiness.get("missing_secrets") or [],
+            "local_missing_secrets": context.get("local_missing_secrets") or [],
+            "local_secret_presence": context.get("local_secret_presence") or {},
+            "local_secret_ready": context.get("local_secret_ready"),
+            "local_secret_source": context.get("local_secret_source") or "",
             "public_posting_approved": context.get("public_posting_approved", platform_readiness.get("public_posting_approved")),
             "blocked": True,
         })
