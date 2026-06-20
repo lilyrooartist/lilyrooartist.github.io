@@ -1042,6 +1042,7 @@ def validate_generated_outputs(failures):
         public_profile_rows = [row for row in rows if row.get("access_level") == "public_profile"]
         private_analytics_rows = [row for row in rows if row.get("access_level") == "private_analytics"]
         docket = packet.get("metric_collection_docket") or {}
+        import_manifest = packet.get("worksheet_import_manifest") or {}
         docket_groups = docket.get("platform_groups") or []
         waiting_count = len([row for row in rows if not row.get("ready_to_import")])
         batch_fields = [
@@ -1072,6 +1073,19 @@ def validate_generated_outputs(failures):
             and docket.get("csv_path") == "data/manual_metric_collection_template.csv"
             and docket.get("worksheet_import_preview_command") == summary.get("worksheet_import_preview_command")
             and docket.get("worksheet_import_command") == summary.get("worksheet_import_command")
+            and import_manifest.get("status") in {"needs_values", "partial", "ready_to_import"}
+            and import_manifest.get("csv_path") == "data/manual_metric_collection_template.csv"
+            and import_manifest.get("ready_row_count") == len(ready_rows)
+            and import_manifest.get("waiting_row_count") == waiting_count
+            and import_manifest.get("ready_csv_rows") == [row.get("csv_row") for row in ready_rows]
+            and import_manifest.get("waiting_csv_rows") == [row.get("csv_row") for row in rows if not row.get("ready_to_import")]
+            and import_manifest.get("ready_assignments") == [row.get("update_assignment") for row in ready_rows if row.get("update_assignment")]
+            and import_manifest.get("waiting_assignments") == [row.get("update_assignment") for row in rows if not row.get("ready_to_import") and row.get("update_assignment")]
+            and import_manifest.get("preview_command") == summary.get("worksheet_import_preview_command")
+            and (bool(import_manifest.get("apply_command")) is bool(ready_rows))
+            and len(import_manifest.get("rows") or []) == len(rows)
+            and all(item.get("csv_row") and item.get("platform") and item.get("field") and "ready_to_import" in item and item.get("update_assignment") and item.get("import_effect") for item in import_manifest.get("rows") or [])
+            and "new_value" in (import_manifest.get("guardrail") or "")
             and [group.get("platform") for group in docket_groups] == [platform.get("platform") for platform in platforms]
             and all(
                 group.get("field_count") == len(group.get("fields") or [])
@@ -2026,7 +2040,7 @@ def validate_generated_outputs(failures):
         fail("build_backlog_reschedule_preview.py missing", failures)
     if MANUAL_METRIC_COLLECTION_SCRIPT.exists():
         collection_text = MANUAL_METRIC_COLLECTION_SCRIPT.read_text(encoding="utf-8")
-        if "manual_metric_collection_template.csv" in collection_text and "manual_metric_collection_packet.json" in collection_text and "manual-metric-collection.md" in collection_text and "pending_manual_by_platform" in collection_text and "metric_collection_docket" in collection_text and "platform_groups" in collection_text and "priority_batches" in collection_text and "collection_priority" in collection_text and "metric_category" in collection_text and "access_level" in collection_text and "evidence_hint" in collection_text and "collection_url" in collection_text and "--from-live" in collection_text and "collection_mode" in collection_text and "live_import_available_count" in collection_text and "ready_to_import_count" in collection_text and "existing_new_values" in collection_text and "value_type" in collection_text and "import_effect" in collection_text and "subprocess" not in collection_text:
+        if "manual_metric_collection_template.csv" in collection_text and "manual_metric_collection_packet.json" in collection_text and "manual-metric-collection.md" in collection_text and "pending_manual_by_platform" in collection_text and "metric_collection_docket" in collection_text and "worksheet_import_manifest" in collection_text and "platform_groups" in collection_text and "priority_batches" in collection_text and "collection_priority" in collection_text and "metric_category" in collection_text and "access_level" in collection_text and "evidence_hint" in collection_text and "collection_url" in collection_text and "--from-live" in collection_text and "collection_mode" in collection_text and "live_import_available_count" in collection_text and "ready_to_import_count" in collection_text and "existing_new_values" in collection_text and "value_type" in collection_text and "import_effect" in collection_text and "subprocess" not in collection_text:
             ok("manual metric collection builder is review-only")
         else:
             fail("build_manual_metric_collection.py missing worksheet outputs or executes commands", failures)

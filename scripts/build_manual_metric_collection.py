@@ -300,6 +300,7 @@ def build_packet(rows: list[dict], generated_at: str) -> dict:
             "worksheet_import_command": WORKSHEET_IMPORT_COMMAND,
         },
         "metric_collection_docket": docket,
+        "worksheet_import_manifest": build_import_manifest(rows),
         "priority_batches": priority_batches,
         "platforms": platforms,
         "rows": rows,
@@ -397,6 +398,44 @@ def build_collection_docket(platforms: list[dict], ready_rows: list[dict]) -> di
     }
 
 
+def build_import_manifest(rows: list[dict]) -> dict:
+    ready_rows = [row for row in rows if row.get("ready_to_import")]
+    waiting_rows = [row for row in rows if not row.get("ready_to_import")]
+    return {
+        "status": "ready_to_import" if ready_rows and not waiting_rows else ("partial" if ready_rows else "needs_values"),
+        "csv_path": str(OUT_CSV.relative_to(ROOT)),
+        "ready_row_count": len(ready_rows),
+        "waiting_row_count": len(waiting_rows),
+        "ready_csv_rows": [row.get("csv_row") for row in ready_rows],
+        "waiting_csv_rows": [row.get("csv_row") for row in waiting_rows],
+        "ready_assignments": [row.get("update_assignment") for row in ready_rows if row.get("update_assignment")],
+        "waiting_assignments": [row.get("update_assignment") for row in waiting_rows if row.get("update_assignment")],
+        "preview_command": WORKSHEET_IMPORT_PREVIEW_COMMAND,
+        "apply_command": WORKSHEET_IMPORT_COMMAND if ready_rows else "",
+        "apply_gate": "ready_rows_available" if ready_rows else "blocked_until_new_values_filled",
+        "rows": [
+            {
+                "csv_row": row.get("csv_row"),
+                "platform": row.get("platform") or "",
+                "field": row.get("field") or "",
+                "ready_to_import": bool(row.get("ready_to_import")),
+                "new_value": row.get("new_value") or "",
+                "value_type": row.get("value_type") or "",
+                "collection_priority": row.get("collection_priority") or 4,
+                "metric_category": row.get("metric_category") or "",
+                "access_level": row.get("access_level") or "",
+                "source_hint": row.get("source_hint") or "",
+                "collection_url": row.get("collection_url") or "",
+                "evidence_hint": row.get("evidence_hint") or "",
+                "update_assignment": row.get("update_assignment") or "",
+                "import_effect": row.get("import_effect") or "",
+            }
+            for row in rows
+        ],
+        "guardrail": "Import only filled nonnegative numeric new_value cells; leave unknown rows blank.",
+    }
+
+
 def build_markdown(rows: list[dict], generated_at: str, packet: dict) -> str:
     lines = [
         "# Manual Metric Collection - Lily Roo",
@@ -453,6 +492,19 @@ def build_markdown(rows: list[dict], generated_at: str, packet: dict) -> str:
             if field.get("evidence_hint"):
                 lines.append(f"  - Evidence: {field['evidence_hint']}")
         lines.append("")
+    manifest = packet.get("worksheet_import_manifest") or {}
+    lines.extend([
+        "## Worksheet Import Manifest",
+        "",
+        f"- Status: **{manifest.get('status', 'unknown')}**",
+        f"- Ready rows: **{manifest.get('ready_row_count', 0)}**",
+        f"- Waiting rows: **{manifest.get('waiting_row_count', 0)}**",
+        f"- Preview: `{manifest.get('preview_command') or WORKSHEET_IMPORT_PREVIEW_COMMAND}`",
+        f"- Apply after review: `{manifest.get('apply_command') or 'blocked until new_value cells are filled'}`",
+        f"- Apply gate: **{manifest.get('apply_gate', 'unknown')}**",
+        f"- Guardrail: {manifest.get('guardrail') or 'Import only collected values.'}",
+        "",
+    ])
     for group in docket.get("platform_groups") or []:
         lines.append(f"### {group.get('platform')}")
         lines.append(f"- Status: `{group.get('status')}`; waiting: **{group.get('waiting_count', 0)}**; ready: **{group.get('ready_to_import_count', 0)}**")

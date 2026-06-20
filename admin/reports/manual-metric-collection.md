@@ -1,6 +1,6 @@
 # Manual Metric Collection - Lily Roo
 
-Generated: 2026-06-20T05:25:09.405499Z
+Generated: 2026-06-20T05:28:35.208659Z
 
 Pending fields: **11**
 
@@ -85,6 +85,16 @@ You can still run a platform update command directly if you only collect one pla
 - Row `8` `spotify.saves`
   - Enter lifetime saves for the promoted release.
   - Evidence: Use lifetime saves for the promoted release from Spotify for Artists.
+
+## Worksheet Import Manifest
+
+- Status: **needs_values**
+- Ready rows: **0**
+- Waiting rows: **11**
+- Preview: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
+- Apply after review: `blocked until new_value cells are filled`
+- Apply gate: **blocked_until_new_values_filled**
+- Guardrail: Import only filled nonnegative numeric new_value cells; leave unknown rows blank.
 
 ### facebook
 - Status: `needs_values`; waiting: **1**; ready: **0**
