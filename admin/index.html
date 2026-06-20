@@ -625,7 +625,7 @@
 <script type="text/plain" id="embedded-weekly-report"># Weekly Social Report — Lily Roo
 
 **Period:** 2026-06-14 to 2026-06-20
-**Last updated:** 2026-06-20 04:41 AM UTC
+**Last updated:** 2026-06-20 01:44 PM JST
 
 ## KPI Goal
 - Primary growth target: **1,000 YouTube subscribers** (monetization milestone)
@@ -748,7 +748,7 @@
 - Latest post: https://www.facebook.com/903693509504290_122118326547249470
 
 ## Metrics Snapshot
-- Live API captured: **2026-06-20T04:38:36.880Z**
+- Live API captured: **2026-06-20T04:44:30.692Z**
 - Snapshot file: `data/live_social_metrics.json`
 - YouTube public RSS captured: **2026-06-09T12:08:07.783949Z**
 - YouTube public snapshot file: `data/youtube_public_snapshot.json`
@@ -758,9 +758,9 @@
 - YouTube Music snapshot file: `data/youtube_music_release_snapshot.json`
 - HyperFollow stores captured: **2026-06-07T20:51:14.275569Z**
 - HyperFollow snapshot file: `data/hyperfollow_store_links_snapshot.json`
-- All-release store verification captured: **2026-06-20T04:41:30.754379+00:00**
+- All-release store verification captured: **2026-06-20T04:44:50.072557+00:00**
 - All-release store verification file: `data/store_verification_history.json`
-- Social executor history captured: **2026-06-20T04:38:47.991740Z**
+- Social executor history captured: **2026-06-20T04:44:48.560660Z**
 - Social executor history file: `data/social_execution_snapshot.json`
 - First single alignment audit captured: **2026-06-07T21:39:03.668040Z**
 - First single alignment audit file: `data/first_single_alignment_audit.json`
@@ -1037,13 +1037,14 @@
 }</script>
 
 <script type="application/json" id="embedded-promo-engine-status">{
-  "generated_at": "2026-06-20T04:41:31.406282+00:00",
+  "generated_at": "2026-06-20T04:44:50.161483+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
     "promo_queue_plan": "data/promo_queue_plan.json",
     "promo_operations_packet": "data/promo_operations_packet.json",
     "promotion_blocker_ledger": "data/promotion_blocker_ledger.json",
+    "human_handoff_packet": "data/human_handoff_packet.json",
     "published_log": "admin/content/Published_Log.csv",
     "manual_metrics": "data/manual_social_stats.json",
     "live_metrics": "data/live_social_metrics.json",
@@ -1092,8 +1093,8 @@
       "ready_to_apply_posts": 0,
       "approval_blockers": 3,
       "platform_fix_blockers": 1,
-      "backlog_reschedule_preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
-      "backlog_reschedule_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+      "backlog_reschedule_preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
+      "backlog_reschedule_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --apply --refresh-admin",
       "next_pressure": [
         "1 approved unpublished posts are past their scheduled time; repair executor/platform blockers or reschedule them.",
         "3 executor records are blocked by approval.",
@@ -1226,15 +1227,15 @@
         "command": "python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impressions_7d=VALUE --refresh-admin"
       }
     ],
-    "live_metrics_updated_at": "2026-06-20T04:38:36.880Z",
+    "live_metrics_updated_at": "2026-06-20T04:44:30.692Z",
     "metrics_history": {
       "snapshot_count": 11,
-      "updated_at": "2026-06-20T04:41:30.353358Z",
+      "updated_at": "2026-06-20T04:44:48.947727Z",
       "latest_date": "2026-06-20",
       "latest": {
         "date": "2026-06-20",
-        "captured_at": "2026-06-20T04:41:30.353358Z",
-        "live_metrics_updated_at": "2026-06-20T04:38:36.880Z",
+        "captured_at": "2026-06-20T04:44:48.947727Z",
+        "live_metrics_updated_at": "2026-06-20T04:44:30.692Z",
         "youtube": {
           "subscribers": 6,
           "total_views": 251,
@@ -1321,7 +1322,7 @@
     },
     "social_execution_summary": {
       "ok": true,
-      "updated_at": "2026-06-20T04:38:47.991740Z",
+      "updated_at": "2026-06-20T04:44:48.560660Z",
       "http_status": 200,
       "execution_count": 4,
       "posted_count": 0,
@@ -1450,11 +1451,11 @@
     },
     "social_scheduler_dry_run": {
       "ok": true,
-      "updated_at": "2026-06-20T04:38:48.454056Z",
+      "updated_at": "2026-06-20T04:44:48.882969Z",
       "http_status": 200,
       "auth_method": "bearer",
-      "requested_scheduled_time": "2026-06-20T04:38:48.069250Z",
-      "checked_at": "2026-06-20T04:38:48.069Z",
+      "requested_scheduled_time": "2026-06-20T04:44:48.608902Z",
+      "checked_at": "2026-06-20T04:44:48.608Z",
       "dry_run": true,
       "due_count": 4,
       "result_count": 4,
@@ -1477,7 +1478,7 @@
           "reason": "not_approved",
           "post_type": "",
           "attempts": 0,
-          "updated_at": "2026-06-20T04:38:48.549Z",
+          "updated_at": "2026-06-20T04:44:49.077Z",
           "source": "dry-run",
           "error_summary": ""
         },
@@ -1488,7 +1489,7 @@
           "reason": "not_approved",
           "post_type": "",
           "attempts": 0,
-          "updated_at": "2026-06-20T04:38:48.552Z",
+          "updated_at": "2026-06-20T04:44:49.085Z",
           "source": "dry-run",
           "error_summary": ""
         },
@@ -1499,7 +1500,7 @@
           "reason": "not_approved",
           "post_type": "",
           "attempts": 0,
-          "updated_at": "2026-06-20T04:38:48.556Z",
+          "updated_at": "2026-06-20T04:44:49.090Z",
           "source": "dry-run",
           "error_summary": ""
         },
@@ -1510,7 +1511,7 @@
           "reason": "tiktok_credentials_missing",
           "post_type": "",
           "attempts": 0,
-          "updated_at": "2026-06-20T04:38:48.560Z",
+          "updated_at": "2026-06-20T04:44:49.096Z",
           "source": "dry-run",
           "error_summary": ""
         }
@@ -1522,38 +1523,13 @@
       "available": true,
       "safe_mode": true,
       "finalized": true,
-      "finished_at": "2026-06-20T04:41:31.372569Z",
-      "duration_seconds": 5.32,
-      "command_count": 27,
-      "passed": 23,
-      "failed": 4,
-      "allowed_failures": 4,
-      "failed_commands": [
-        {
-          "name": "capture_live_metrics",
-          "required": false,
-          "returncode": 1,
-          "stderr_tail": ""
-        },
-        {
-          "name": "capture_executor_readiness",
-          "required": false,
-          "returncode": 1,
-          "stderr_tail": ""
-        },
-        {
-          "name": "capture_social_executions",
-          "required": false,
-          "returncode": 1,
-          "stderr_tail": ""
-        },
-        {
-          "name": "capture_scheduler_dry_run",
-          "required": false,
-          "returncode": 1,
-          "stderr_tail": ""
-        }
-      ],
+      "finished_at": "2026-06-20T04:44:50.133676Z",
+      "duration_seconds": 20.25,
+      "command_count": 28,
+      "passed": 28,
+      "failed": 0,
+      "allowed_failures": 0,
+      "failed_commands": [],
       "action_needed": ""
     },
     "refresh_automation": {
@@ -1568,9 +1544,9 @@
       "action_needed": "",
       "workflow_status_available": true,
       "workflow_status_ok": true,
-      "latest_run_status": "in_progress",
-      "latest_run_conclusion": "",
-      "latest_run_updated_at": "2026-06-20T04:41:22Z",
+      "latest_run_status": "completed",
+      "latest_run_conclusion": "success",
+      "latest_run_updated_at": "2026-06-20T04:41:37Z",
       "latest_run_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/27860471602",
       "workflow_status_action_needed": ""
     },
@@ -1716,7 +1692,7 @@
           "blocked_by": [
             "FP-AUTO-264"
           ],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
           "apply_command": "",
           "source_path": "data/backlog_reschedule_preview.json"
         },
@@ -1740,16 +1716,147 @@
       ],
       "source_path": "data/promotion_blocker_ledger.json"
     },
-    "stale_source_count": 0,
+    "operator_docket": {
+      "source_path": "data/human_handoff_packet.json",
+      "available": true,
+      "ready_step_count": 3,
+      "blocked_step_count": 2,
+      "roadmap_step_count": 5,
+      "task_count": 10,
+      "manual_post_count": 2,
+      "manual_metric_field_count": 11,
+      "first_ready_step": {
+        "id": "review-checked-approval-batch",
+        "label": "Review checked approval batch",
+        "state": "ready_for_review",
+        "owner": "tod",
+        "task_ids": [
+          "approve-checked-scheduled-batch"
+        ],
+        "blockers_resolved": 2,
+        "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+        "apply_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+        "guardrail": "Use --checked-batch so only rows that passed review checks are approved."
+      },
+      "blocked_steps": [
+        {
+          "id": "platform-repair-gate",
+          "label": "Repair blocked platform executor setup",
+          "state": "blocked",
+          "owner": "tod",
+          "task_ids": [
+            "platform-setup-FP-AUTO-264"
+          ],
+          "blockers_resolved": 1,
+          "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+          "apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
+          "guardrail": "Run preflight and confirm local OAuth/public-posting setup before pushing secrets."
+        },
+        {
+          "id": "backlog-reschedule-gate",
+          "label": "Reschedule approved backlog after blockers clear",
+          "state": "blocked",
+          "owner": "external_platform",
+          "task_ids": [
+            "backlog-reschedule"
+          ],
+          "blockers_resolved": 1,
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
+          "apply_command": "",
+          "guardrail": "Normal apply stays hidden until known executor/platform blockers clear."
+        }
+      ],
+      "checklist": [
+        {
+          "id": "review-checked-approval-batch",
+          "label": "Review checked approval batch",
+          "state": "ready_for_review",
+          "owner": "tod",
+          "task_ids": [
+            "approve-checked-scheduled-batch"
+          ],
+          "blockers_resolved": 2,
+          "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+          "apply_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+          "guardrail": "Use --checked-batch so only rows that passed review checks are approved."
+        },
+        {
+          "id": "manual-posting-review",
+          "label": "Review and post manual distribution rows",
+          "state": "needs_review",
+          "owner": "tod",
+          "task_ids": [
+            "manual-distribution-FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+            "manual-distribution-FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
+          ],
+          "blockers_resolved": 2,
+          "ready_ids": [
+            "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+            "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
+          ],
+          "blocked_ids": [
+            "FP-PLAN-TWELVE-DOLLARS-TIKTOK"
+          ],
+          "preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
+          "apply_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+          "guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review. Post manually first, then log only real public URLs."
+        },
+        {
+          "id": "platform-repair-gate",
+          "label": "Repair blocked platform executor setup",
+          "state": "blocked",
+          "owner": "tod",
+          "task_ids": [
+            "platform-setup-FP-AUTO-264"
+          ],
+          "blockers_resolved": 1,
+          "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+          "apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
+          "guardrail": "Run preflight and confirm local OAuth/public-posting setup before pushing secrets."
+        },
+        {
+          "id": "manual-metric-worksheet",
+          "label": "Fill and import manual metric worksheet",
+          "state": "needs_values",
+          "owner": "tod",
+          "task_ids": [
+            "manual-metrics-facebook",
+            "manual-metrics-instagram",
+            "manual-metrics-spotify",
+            "manual-metrics-tiktok",
+            "manual-metrics-x"
+          ],
+          "blockers_resolved": 5,
+          "field_count": 11,
+          "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
+          "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
+          "guardrail": "Import only collected numeric values; leave unknown cells blank."
+        },
+        {
+          "id": "backlog-reschedule-gate",
+          "label": "Reschedule approved backlog after blockers clear",
+          "state": "blocked",
+          "owner": "external_platform",
+          "task_ids": [
+            "backlog-reschedule"
+          ],
+          "blockers_resolved": 1,
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
+          "apply_command": "",
+          "guardrail": "Normal apply stays hidden until known executor/platform blockers clear."
+        }
+      ]
+    },
+    "stale_source_count": 1,
     "missing_source_count": 0
   },
   "health": {
     "score": 0,
     "healthy_releases": 0,
     "tracked_releases": 3,
-    "open_action_count": 17,
-    "fresh_sources": 13,
-    "stale_sources": 0,
+    "open_action_count": 19,
+    "fresh_sources": 12,
+    "stale_sources": 1,
     "missing_sources": 0,
     "operational_next_action": {
       "label": "Preview checked scheduled approval batch",
@@ -1893,7 +2000,7 @@
           "blocked_by": [
             "FP-AUTO-264"
           ],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
           "apply_command": "",
           "source_path": "data/backlog_reschedule_preview.json"
         },
@@ -1916,15 +2023,146 @@
         }
       ],
       "source_path": "data/promotion_blocker_ledger.json"
+    },
+    "operator_docket": {
+      "source_path": "data/human_handoff_packet.json",
+      "available": true,
+      "ready_step_count": 3,
+      "blocked_step_count": 2,
+      "roadmap_step_count": 5,
+      "task_count": 10,
+      "manual_post_count": 2,
+      "manual_metric_field_count": 11,
+      "first_ready_step": {
+        "id": "review-checked-approval-batch",
+        "label": "Review checked approval batch",
+        "state": "ready_for_review",
+        "owner": "tod",
+        "task_ids": [
+          "approve-checked-scheduled-batch"
+        ],
+        "blockers_resolved": 2,
+        "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+        "apply_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+        "guardrail": "Use --checked-batch so only rows that passed review checks are approved."
+      },
+      "blocked_steps": [
+        {
+          "id": "platform-repair-gate",
+          "label": "Repair blocked platform executor setup",
+          "state": "blocked",
+          "owner": "tod",
+          "task_ids": [
+            "platform-setup-FP-AUTO-264"
+          ],
+          "blockers_resolved": 1,
+          "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+          "apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
+          "guardrail": "Run preflight and confirm local OAuth/public-posting setup before pushing secrets."
+        },
+        {
+          "id": "backlog-reschedule-gate",
+          "label": "Reschedule approved backlog after blockers clear",
+          "state": "blocked",
+          "owner": "external_platform",
+          "task_ids": [
+            "backlog-reschedule"
+          ],
+          "blockers_resolved": 1,
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
+          "apply_command": "",
+          "guardrail": "Normal apply stays hidden until known executor/platform blockers clear."
+        }
+      ],
+      "checklist": [
+        {
+          "id": "review-checked-approval-batch",
+          "label": "Review checked approval batch",
+          "state": "ready_for_review",
+          "owner": "tod",
+          "task_ids": [
+            "approve-checked-scheduled-batch"
+          ],
+          "blockers_resolved": 2,
+          "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+          "apply_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+          "guardrail": "Use --checked-batch so only rows that passed review checks are approved."
+        },
+        {
+          "id": "manual-posting-review",
+          "label": "Review and post manual distribution rows",
+          "state": "needs_review",
+          "owner": "tod",
+          "task_ids": [
+            "manual-distribution-FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+            "manual-distribution-FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
+          ],
+          "blockers_resolved": 2,
+          "ready_ids": [
+            "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+            "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
+          ],
+          "blocked_ids": [
+            "FP-PLAN-TWELVE-DOLLARS-TIKTOK"
+          ],
+          "preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
+          "apply_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+          "guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review. Post manually first, then log only real public URLs."
+        },
+        {
+          "id": "platform-repair-gate",
+          "label": "Repair blocked platform executor setup",
+          "state": "blocked",
+          "owner": "tod",
+          "task_ids": [
+            "platform-setup-FP-AUTO-264"
+          ],
+          "blockers_resolved": 1,
+          "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+          "apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
+          "guardrail": "Run preflight and confirm local OAuth/public-posting setup before pushing secrets."
+        },
+        {
+          "id": "manual-metric-worksheet",
+          "label": "Fill and import manual metric worksheet",
+          "state": "needs_values",
+          "owner": "tod",
+          "task_ids": [
+            "manual-metrics-facebook",
+            "manual-metrics-instagram",
+            "manual-metrics-spotify",
+            "manual-metrics-tiktok",
+            "manual-metrics-x"
+          ],
+          "blockers_resolved": 5,
+          "field_count": 11,
+          "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
+          "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
+          "guardrail": "Import only collected numeric values; leave unknown cells blank."
+        },
+        {
+          "id": "backlog-reschedule-gate",
+          "label": "Reschedule approved backlog after blockers clear",
+          "state": "blocked",
+          "owner": "external_platform",
+          "task_ids": [
+            "backlog-reschedule"
+          ],
+          "blockers_resolved": 1,
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
+          "apply_command": "",
+          "guardrail": "Normal apply stays hidden until known executor/platform blockers clear."
+        }
+      ]
     }
   },
   "freshness": {
     "summary": {
-      "fresh": 13,
-      "stale": 0,
+      "fresh": 12,
+      "stale": 1,
       "missing": 0,
       "checked_no_change": 0,
-      "checked_at": "2026-06-20T04:41:31.406282+00:00"
+      "checked_at": "2026-06-20T04:44:50.161483+00:00"
     },
     "sources": [
       {
@@ -1940,9 +2178,9 @@
         "name": "scheduled_posts",
         "path": "admin/future-posts.json",
         "status": "fresh",
-        "age_hours": 0.0,
+        "age_hours": 3.3,
         "max_age_hours": 72,
-        "timestamp": "2026-06-20T04:41:25.609822+00:00",
+        "timestamp": "2026-06-20T01:28:46.696230+00:00",
         "refresh_command": "python3 scripts/sync_future_posts.py"
       },
       {
@@ -1951,16 +2189,16 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T04:41:30.312664+00:00",
+        "timestamp": "2026-06-20T04:44:48.918015+00:00",
         "refresh_command": "python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
         "name": "published_log",
         "path": "admin/content/Published_Log.csv",
-        "status": "fresh",
-        "age_hours": 0.0,
+        "status": "stale",
+        "age_hours": 304.1,
         "max_age_hours": 168,
-        "timestamp": "2026-06-20T04:41:25.607822+00:00",
+        "timestamp": "2026-06-07T12:36:37.141276+00:00",
         "refresh_command": "Preview Worker export with python3 scripts/export_social_executions.py --dry-run; after review run python3 scripts/export_social_executions.py --refresh-admin. For manual posts, log the public URL with scripts/log_manual_distribution.py.",
         "row_count": 17,
         "worker_export_preview_command": "python3 scripts/export_social_executions.py --dry-run",
@@ -1976,9 +2214,9 @@
         "name": "manual_metrics",
         "path": "data/manual_social_stats.json",
         "status": "fresh",
-        "age_hours": 0.0,
+        "age_hours": 4.1,
         "max_age_hours": 72,
-        "timestamp": "2026-06-20T04:41:25.700821+00:00",
+        "timestamp": "2026-06-20T00:37:40.066733+00:00",
         "refresh_command": "Update data/manual_social_stats.json with latest manual metrics."
       },
       {
@@ -1987,7 +2225,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T04:38:36.880000+00:00",
+        "timestamp": "2026-06-20T04:44:30.692000+00:00",
         "refresh_command": "python3 scripts/capture_live_metrics.py"
       },
       {
@@ -1996,7 +2234,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T04:41:30.353358+00:00",
+        "timestamp": "2026-06-20T04:44:48.947727+00:00",
         "refresh_command": "python3 scripts/update_metrics_history.py --refresh-admin"
       },
       {
@@ -2005,7 +2243,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T04:38:46.601709+00:00",
+        "timestamp": "2026-06-20T04:44:47.171179+00:00",
         "refresh_command": "python3 scripts/capture_executor_readiness.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -2014,7 +2252,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T04:41:31.406282+00:00",
+        "timestamp": "2026-06-20T04:44:50.161483+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin"
       },
       {
@@ -2023,7 +2261,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T04:38:47.991740+00:00",
+        "timestamp": "2026-06-20T04:44:48.560660+00:00",
         "refresh_command": "python3 scripts/capture_social_executions.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -2032,7 +2270,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T04:38:48.454056+00:00",
+        "timestamp": "2026-06-20T04:44:48.882969+00:00",
         "refresh_command": "python3 scripts/capture_scheduler_dry_run.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -2041,7 +2279,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T04:41:31.373322+00:00",
+        "timestamp": "2026-06-20T04:44:50.134130+00:00",
         "refresh_command": "python3 scripts/refresh_promo_admin.py"
       },
       {
@@ -2050,11 +2288,13 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T04:41:30.711292+00:00",
+        "timestamp": "2026-06-20T04:44:49.564975+00:00",
         "refresh_command": "python3 scripts/capture_github_workflow_status.py && python3 scripts/update_promo_engine_status.py"
       }
     ],
-    "actions": []
+    "actions": [
+      "Refresh published log: preview Worker-posted records with python3 scripts/export_social_executions.py --dry-run; after review run python3 scripts/export_social_executions.py --refresh-admin. For manual distribution, use python3 scripts/log_manual_distribution.py --id MANUAL_DISTRIBUTION_ID --url PUBLIC_URL --apply --refresh-admin."
+    ]
   },
   "releases": [
     {
@@ -2200,7 +2440,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T04:41:28.051117Z",
+            "updated_at": "2026-06-20T04:44:35.800493Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
           }
         },
@@ -2211,7 +2451,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T04:41:28.179872Z",
+            "updated_at": "2026-06-20T04:44:36.161199Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
           }
         }
@@ -2313,7 +2553,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T04:41:28.835665Z",
+            "updated_at": "2026-06-20T04:44:41.388617Z",
             "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
           }
         },
@@ -2335,7 +2575,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T04:41:29.813172Z",
+            "updated_at": "2026-06-20T04:44:46.968941Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
           }
         }
@@ -2380,13 +2620,13 @@
   ],
   "next_actions": [
     "Next operational action: Preview checked scheduled approval batch — python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+    "First handoff step: Review checked approval batch — python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
     "Refresh manual metrics: fill data/manual_metric_collection_template.csv, preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run, then import with python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin.",
-    "Preview approved backlog reschedule: python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+    "Preview approved backlog reschedule: python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
     "1 approved unpublished posts are past their scheduled time; repair executor/platform blockers or reschedule them.",
     "3 executor records are blocked by approval.",
     "1 executor records need platform repair before they can publish.",
-    "Increase weekly subscriber acquisition before the channel can reach 1,000 subscribers within a year.",
-    "Review approval blockers for 3 queued executor records."
+    "Increase weekly subscriber acquisition before the channel can reach 1,000 subscribers within a year."
   ]
 }</script>
 
@@ -2466,7 +2706,7 @@
 }</script>
 
 <script type="application/json" id="embedded-promo-queue-plan">{
-  "generated_at": "2026-06-20T00:41:30.312664-04:00",
+  "generated_at": "2026-06-20T00:44:48.918015-04:00",
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
     "release_status": "data/distrokid_release_status.json"
@@ -2545,7 +2785,7 @@
   },
   "readiness_audit": {
     "source": "data/executor_readiness_snapshot.json",
-    "updated_at": "2026-06-20T04:38:46.601709Z",
+    "updated_at": "2026-06-20T04:44:47.171179Z",
     "ok": true,
     "counts": {
       "blocked": 1,
@@ -2662,7 +2902,7 @@
 
 
 <script type="application/json" id="embedded-promo-operations-packet">{
-  "generated_at": "2026-06-20T04:41:30.834428Z",
+  "generated_at": "2026-06-20T04:44:49.692837Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -2859,7 +3099,7 @@
       "label": "Preview reschedule for approved past-due posts",
       "kind": "backlog_reschedule",
       "priority": 0,
-      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
       "context": {
         "approved_backlog_posts": 1,
         "approved_upcoming_posts": 5,
@@ -2867,8 +3107,8 @@
         "clear_to_apply_count": 0,
         "apply_allowed_without_override": false,
         "apply_command": "",
-        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
+        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --apply --refresh-admin",
+        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
         "note": "Preview first. Normal apply is hidden until known executor/platform blockers clear; override requires deliberate review."
       },
       "phase": "Reschedule approved backlog",
@@ -3046,11 +3286,11 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "Apple Music",
-        "checked_at": "2026-06-20T04:41:28.051117Z",
+        "checked_at": "2026-06-20T04:44:35.800493Z",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T04:41:28.051117Z",
+          "updated_at": "2026-06-20T04:44:35.800493Z",
           "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
         },
         "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -3073,11 +3313,11 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "HyperFollow",
-        "checked_at": "2026-06-20T04:41:28.179872Z",
+        "checked_at": "2026-06-20T04:44:36.161199Z",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T04:41:28.179872Z",
+          "updated_at": "2026-06-20T04:44:36.161199Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
         },
         "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -3127,11 +3367,11 @@
       "context": {
         "release": "Analog Myth",
         "service": "Apple Music",
-        "checked_at": "2026-06-20T04:41:28.835665Z",
+        "checked_at": "2026-06-20T04:44:41.388617Z",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T04:41:28.835665Z",
+          "updated_at": "2026-06-20T04:44:41.388617Z",
           "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
         },
         "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -3181,11 +3421,11 @@
       "context": {
         "release": "Analog Myth",
         "service": "HyperFollow",
-        "checked_at": "2026-06-20T04:41:29.813172Z",
+        "checked_at": "2026-06-20T04:44:46.968941Z",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T04:41:29.813172Z",
+          "updated_at": "2026-06-20T04:44:46.968941Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
         },
         "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -3347,7 +3587,7 @@
 
 <script type="text/plain" id="embedded-promo-operations-report"># Promo Operations Packet - Lily Roo
 
-Generated: 2026-06-20T04:41:30.834428Z
+Generated: 2026-06-20T04:44:49.692837Z
 
 ## Summary
 - Actions: **18**
@@ -3390,7 +3630,7 @@ Generated: 2026-06-20T04:41:30.834428Z
 - **[high] Preview reschedule for approved past-due posts**
   - Why: Approved posts are past due; preview a new schedule before any apply step.
   - Detail: Preview first. Normal apply is hidden until known executor/platform blockers clear; override requires deliberate review.
-  - Command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24`
+  - Command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24`
 
 ### Repair executor
 - **[high] Fix TikTok executor**
@@ -3424,12 +3664,12 @@ Generated: 2026-06-20T04:41:30.834428Z
 - **[medium] Re-check Twelve Dollars on Apple Music**
   - Why: Public store links should be checked until DistroKid exposes them.
   - Detail: Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release.
-  - Latest snapshot checked: `2026-06-20T04:41:28.051117Z`
+  - Latest snapshot checked: `2026-06-20T04:44:35.800493Z`
   - Command: `python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/apple_music_release_snapshot.json'`
 - **[medium] Re-check Twelve Dollars on HyperFollow**
   - Why: Public store links should be checked until DistroKid exposes them.
   - Detail: Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release.
-  - Latest snapshot checked: `2026-06-20T04:41:28.179872Z`
+  - Latest snapshot checked: `2026-06-20T04:44:36.161199Z`
   - Command: `python3 scripts/capture_hyperfollow_store_links.py --url 'https://distrokid.com/hyperfollow/lilyroo/twelve-dollars' --out 'data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json'`
 - **[medium] Re-check Analog Myth on Spotify**
   - Why: Public store links should be checked as the July 1 release approaches.
@@ -3439,7 +3679,7 @@ Generated: 2026-06-20T04:41:30.834428Z
 - **[medium] Re-check Analog Myth on Apple Music**
   - Why: Public store links should be checked as the July 1 release approaches.
   - Detail: Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release.
-  - Latest snapshot checked: `2026-06-20T04:41:28.835665Z`
+  - Latest snapshot checked: `2026-06-20T04:44:41.388617Z`
   - Command: `python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/apple_music_release_snapshot.json'`
 - **[medium] Re-check Analog Myth on YouTube Music**
   - Why: Public store links should be checked as the July 1 release approaches.
@@ -3455,7 +3695,7 @@ Generated: 2026-06-20T04:41:30.834428Z
 
 <script type="text/plain" id="embedded-manual-metric-collection"># Manual Metric Collection - Lily Roo
 
-Generated: 2026-06-20T04:41:31.182929Z
+Generated: 2026-06-20T04:44:49.959135Z
 
 Pending fields: **11**
 
@@ -3622,7 +3862,7 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
 
 
 <script type="application/json" id="embedded-platform-repair-status">{
-  "generated_at": "2026-06-20T04:41:31.115658Z",
+  "generated_at": "2026-06-20T04:44:49.906761Z",
   "safe_mode": true,
   "source": {
     "promo_operations_packet": "data/promo_operations_packet.json",
@@ -3731,7 +3971,7 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
 
 
 <script type="application/json" id="embedded-approval-runway">{
-  "generated_at": "2026-06-20T04:41:30.869173Z",
+  "generated_at": "2026-06-20T04:44:49.720927Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -3843,7 +4083,7 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
 
 <script type="text/plain" id="embedded-approval-runway-report"># Approval Runway - Lily Roo
 
-Generated: 2026-06-20T04:41:30.869173Z
+Generated: 2026-06-20T04:44:49.720927Z
 
 ## Summary
 - Drafts needing review: **3**
@@ -3889,7 +4129,7 @@ Generated: 2026-06-20T04:41:30.869173Z
 
 
 <script type="application/json" id="embedded-subscriber-cta-audit">{
-  "generated_at": "2026-06-20T04:41:30.937968Z",
+  "generated_at": "2026-06-20T04:44:49.774653Z",
   "safe_mode": true,
   "source": {
     "promo_queue_plan": "data/promo_queue_plan.json",
@@ -3955,7 +4195,7 @@ Generated: 2026-06-20T04:41:30.869173Z
 
 <script type="text/plain" id="embedded-subscriber-cta-audit-report"># Subscriber CTA Audit - Lily Roo
 
-Generated: 2026-06-20T04:41:30.937968Z
+Generated: 2026-06-20T04:44:49.774653Z
 
 ## Summary
 - Draft posts: **3**
@@ -3989,7 +4229,7 @@ Generated: 2026-06-20T04:41:30.937968Z
 
 
 <script type="application/json" id="embedded-monetization-activation-plan">{
-  "generated_at": "2026-06-20T04:41:31.010904Z",
+  "generated_at": "2026-06-20T04:44:49.828274Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -4077,15 +4317,15 @@ Generated: 2026-06-20T04:41:30.937968Z
       "phase": "Recover stalled approved backlog",
       "status": "preview_first",
       "detail": "Preview a new schedule for approved past-due posts. Normal apply is hidden until known executor/platform blockers clear.",
-      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
       "after_review_command": "",
       "context": {
         "approved_backlog_posts": 1,
         "approved_upcoming_posts": 5,
         "blocked_backlog_count": 1,
         "apply_allowed_without_override": false,
-        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin"
+        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --apply --refresh-admin",
+        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin"
       }
     },
     {
@@ -4132,7 +4372,7 @@ Generated: 2026-06-20T04:41:30.937968Z
 
 <script type="text/plain" id="embedded-monetization-activation-report"># Monetization Activation Plan - Lily Roo
 
-Generated: 2026-06-20T04:41:31.010904Z
+Generated: 2026-06-20T04:44:49.828274Z
 
 ## Summary
 - Current subscribers: **6 / 1000**
@@ -4158,9 +4398,9 @@ Generated: 2026-06-20T04:41:31.010904Z
 3. **Preview approved backlog reschedule**
    - Phase: `Recover stalled approved backlog`; status: `preview_first`
    - Detail: Preview a new schedule for approved past-due posts. Normal apply is hidden until known executor/platform blockers clear.
-   - Blocked apply command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin`
-   - Deliberate override command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin`
-   - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24`
+   - Blocked apply command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --apply --refresh-admin`
+   - Deliberate override command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin`
+   - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24`
 4. **Repair TikTok executor**
    - Phase: `Clear platform blockers`; status: `needs_platform_fix`
    - Detail: Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok public posting approval is false. Local secret source is also missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Complete TikTok OAuth/public posting setup locally, then push secrets and refresh Admin.
@@ -4182,7 +4422,7 @@ Generated: 2026-06-20T04:41:31.010904Z
 
 
 <script type="application/json" id="embedded-backlog-reschedule-preview">{
-  "generated_at": "2026-06-20T04:41:30.798382+00:00",
+  "generated_at": "2026-06-20T13:44:49.663709+09:00",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -4195,12 +4435,12 @@ Generated: 2026-06-20T04:41:31.010904Z
     "approved_backlog_count": 1,
     "blocked_backlog_count": 1,
     "clear_to_apply_count": 0,
-    "start_at": "2026-06-21T10:00:00+00:00",
+    "start_at": "2026-06-21T10:00:00+09:00",
     "spacing_hours": 24,
-    "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+    "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
     "apply_command": "",
-    "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-    "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
+    "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --apply --refresh-admin",
+    "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
     "apply_blocked_reason": "Known executor/platform blockers must clear before normal apply.",
     "apply_allowed_without_override": false,
     "blocked_ids": [
@@ -4219,7 +4459,7 @@ Generated: 2026-06-20T04:41:31.010904Z
       "platform": "TikTok",
       "song": "I Learned It All in Fifteen Seconds",
       "current_scheduled_at": "2026-06-09T21:25:00-04:00",
-      "proposed_scheduled_at": "2026-06-21T10:00:00+00:00",
+      "proposed_scheduled_at": "2026-06-21T10:00:00+09:00",
       "blocked": true,
       "blocker_reason": "tiktok_credentials_missing",
       "blocker_status": "blocked",
@@ -4239,13 +4479,13 @@ Generated: 2026-06-20T04:41:31.010904Z
 
 <script type="text/plain" id="embedded-backlog-reschedule-preview-report"># Backlog Reschedule Preview - Lily Roo
 
-Generated: 2026-06-20T04:41:30.798382+00:00
+Generated: 2026-06-20T13:44:49.663709+09:00
 
 ## Summary
 - Approved backlog rows: **1**
 - Rows with known blockers: **1**
 - Clear to apply without override: **0**
-- Start at: **2026-06-21T10:00:00+00:00**
+- Start at: **2026-06-21T10:00:00+09:00**
 - Spacing hours: **24**
 - Apply allowed without override: **False**
 - Normal apply gate: **blocked_until_clearance_steps_complete**
@@ -4253,17 +4493,17 @@ Generated: 2026-06-20T04:41:30.798382+00:00
 ## Proposed Reschedule
 - **TikTok - I Learned It All in Fifteen Seconds** (`FP-AUTO-264`)
   - Current: `2026-06-09T21:25:00-04:00`
-  - Proposed: `2026-06-21T10:00:00+00:00`
+  - Proposed: `2026-06-21T10:00:00+09:00`
   - Blocker: tiktok_credentials_missing
   - Clearance: Add local TikTok OAuth credentials, then push worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.
   - Clearance: Confirm TikTok public posting approval before treating auto-posting as ready.
   - Clearance: Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair.
 
 ## Commands
-- Preview: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24`
+- Preview: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24`
 - Safe apply: none until blockers clear
-- Blocked apply command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin`
-- Deliberate override command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin`
+- Blocked apply command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --apply --refresh-admin`
+- Deliberate override command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin`
 
 ## Guardrails
 - This preview does not write schedule changes, approve posts, publish posts, or push secrets.
@@ -4273,7 +4513,7 @@ Generated: 2026-06-20T04:41:30.798382+00:00
 
 <script type="text/plain" id="embedded-platform-repair-report"># Platform Repair Status - Lily Roo
 
-Generated: 2026-06-20T04:41:31.115658Z
+Generated: 2026-06-20T04:44:49.906761Z
 
 ## Summary
 - Platform fixes: **1**
@@ -4309,7 +4549,7 @@ Generated: 2026-06-20T04:41:31.115658Z
 
 
 <script type="application/json" id="embedded-manual-distribution-packet">{
-  "generated_at": "2026-06-20T04:41:30.975609Z",
+  "generated_at": "2026-06-20T04:44:49.801983Z",
   "safe_mode": true,
   "source": {
     "promo_queue_plan": "data/promo_queue_plan.json",
@@ -4603,7 +4843,7 @@ Generated: 2026-06-20T04:41:31.115658Z
 
 <script type="text/plain" id="embedded-manual-distribution-report"># Manual Distribution Packet - Lily Roo
 
-Generated: 2026-06-20T04:41:30.975609Z
+Generated: 2026-06-20T04:44:49.801983Z
 
 ## Summary
 - Manual-ready posts: **2**
@@ -4701,7 +4941,7 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
 
 
 <script type="application/json" id="embedded-manual-metric-collection-packet">{
-  "generated_at": "2026-06-20T04:41:31.182929Z",
+  "generated_at": "2026-06-20T04:44:49.959135Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -5773,7 +6013,7 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
 
 
 <script type="application/json" id="embedded-scheduled-approval-packet">{
-  "generated_at": "2026-06-20T04:41:30.905289Z",
+  "generated_at": "2026-06-20T04:44:49.748163Z",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -6230,7 +6470,7 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
 
 <script type="text/plain" id="embedded-scheduled-approval-report"># Scheduled Approval Packet - Lily Roo
 
-Generated: 2026-06-20T04:41:30.905289Z
+Generated: 2026-06-20T04:44:49.748163Z
 
 ## Summary
 - Approval blockers: **3**
@@ -6346,7 +6586,7 @@ Stream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: htt
 
 
 <script type="application/json" id="embedded-promotion-blocker-ledger">{
-  "generated_at": "2026-06-20T04:41:31.220816Z",
+  "generated_at": "2026-06-20T04:44:49.987351Z",
   "safe_mode": true,
   "summary": {
     "open_blocker_count": 12,
@@ -6457,7 +6697,7 @@ Stream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: htt
         "blocked_by": [
           "FP-AUTO-264"
         ],
-        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
         "apply_command": "",
         "source_path": "data/backlog_reschedule_preview.json"
       },
@@ -6574,7 +6814,7 @@ Stream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: htt
       "release": "",
       "evidence": "1 approved backlog row(s); 1 still have executor blockers.",
       "next_step": "Preview a new schedule. Safe apply becomes available after known executor blockers clear.",
-      "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+      "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
       "apply_command": "",
       "source_path": "data/backlog_reschedule_preview.json",
       "external_url": "",
@@ -6582,8 +6822,8 @@ Stream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: htt
       "impact": {
         "kind": "backlog_reschedule_gate",
         "apply_allowed_without_override": false,
-        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin"
+        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --apply --refresh-admin",
+        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin"
       }
     },
     {
@@ -6751,7 +6991,7 @@ Stream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: htt
 
 <script type="text/plain" id="embedded-promotion-blocker-ledger-report"># Promotion Blocker Ledger - Lily Roo
 
-Generated: 2026-06-20T04:41:31.220816Z
+Generated: 2026-06-20T04:44:49.987351Z
 
 ## Summary
 - Open blockers: **12**
@@ -6784,7 +7024,7 @@ Generated: 2026-06-20T04:41:31.220816Z
   - Owner: `external_platform`; projected blockers resolved: **1**
   - Unlocks: Approved past-due queue rows get a fresh schedule after executor blockers clear.
   - Blocked by: FP-AUTO-264
-  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24`
+  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24`
 - **Fill manual metric worksheet** (`needs_values`)
   - Owner: `tod`; projected blockers resolved: **5**
   - Unlocks: Admin health and weekly reporting can use fresh cross-platform metrics.; Manual metric blockers clear once worksheet values are imported.
@@ -6822,7 +7062,7 @@ Generated: 2026-06-20T04:41:31.220816Z
   - Owner: `external_platform`; status: `blocked`; category: `backlog_reschedule`
   - Evidence: 1 approved backlog row(s); 1 still have executor blockers.
   - Next step: Preview a new schedule. Safe apply becomes available after known executor blockers clear.
-  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24`
+  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24`
   - Guardrail: Normal apply is hidden while rows have known executor blockers.
 - **[medium] Approve scheduled YouTube Community row** (`approval-FP-AUTO-261`)
   - Owner: `tod`; status: `ready_for_reviewed_approval`; category: `approval`
@@ -6896,7 +7136,7 @@ Generated: 2026-06-20T04:41:31.220816Z
 
 
 <script type="application/json" id="embedded-human-handoff-packet">{
-  "generated_at": "2026-06-20T04:41:31.258419Z",
+  "generated_at": "2026-06-20T04:44:50.015849Z",
   "safe_mode": true,
   "source": {
     "promotion_blocker_ledger": "data/promotion_blocker_ledger.json",
@@ -7035,7 +7275,7 @@ Generated: 2026-06-20T04:41:31.220816Z
           "blocked_by": [
             "FP-AUTO-264"
           ],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
           "apply_command": "",
           "source_path": "data/backlog_reschedule_preview.json"
         },
@@ -7115,7 +7355,7 @@ Generated: 2026-06-20T04:41:31.220816Z
           "backlog-reschedule"
         ],
         "blockers_resolved": 1,
-        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
         "apply_command": "",
         "guardrail": "Normal apply stays hidden until known executor/platform blockers clear."
       }
@@ -7195,7 +7435,7 @@ Generated: 2026-06-20T04:41:31.220816Z
           "backlog-reschedule"
         ],
         "blockers_resolved": 1,
-        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
         "apply_command": "",
         "guardrail": "Normal apply stays hidden until known executor/platform blockers clear."
       }
@@ -7274,14 +7514,14 @@ Generated: 2026-06-20T04:41:31.220816Z
       "urgency": "high",
       "status": "blocked",
       "detail": "Known executor/platform blockers must clear before normal apply.",
-      "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+      "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
       "apply_command": "",
       "source_path": "data/backlog_reschedule_preview.json",
       "impact": {
         "approved_backlog_count": 1,
         "blocked_backlog_count": 1,
-        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin"
+        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --apply --refresh-admin",
+        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin"
       },
       "links": [],
       "guardrail": "Normal apply stays hidden until known executor/platform blockers clear."
@@ -7485,7 +7725,7 @@ Generated: 2026-06-20T04:41:31.220816Z
 
 <script type="text/plain" id="embedded-human-handoff-report"># Human Handoff Packet - Lily Roo
 
-Generated: 2026-06-20T04:41:31.258419Z
+Generated: 2026-06-20T04:44:50.015849Z
 
 ## Summary
 - Open handoff tasks: **10**
@@ -7525,7 +7765,7 @@ Generated: 2026-06-20T04:41:31.258419Z
   - Guardrail: Import only collected numeric values; leave unknown cells blank.
 - **Reschedule approved backlog after blockers clear** (`blocked`)
   - Owner: `external_platform`; tasks: **1**; blockers resolved: **1**
-  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24`
+  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24`
   - Guardrail: Normal apply stays hidden until known executor/platform blockers clear.
 
 ## Tasks
@@ -7544,7 +7784,7 @@ Generated: 2026-06-20T04:41:31.258419Z
 - **Preview approved backlog reschedule** (`backlog-reschedule`)
   - Phase: `Backlog recovery`; owner: `external_platform`; status: `blocked`; urgency: `high`
   - Detail: Known executor/platform blockers must clear before normal apply.
-  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24`
+  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24`
   - Guardrail: Normal apply stays hidden until known executor/platform blockers clear.
 - **Post Analog Myth to YouTube Community** (`manual-distribution-FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY`)
   - Phase: `Manual distribution`; owner: `tod`; status: `waiting_for_review`; urgency: `medium`
@@ -7603,13 +7843,13 @@ Generated: 2026-06-20T04:41:31.258419Z
 
 
 <script type="application/json" id="embedded-promo-consistency-audit">{
-  "generated_at": "2026-06-20T04:41:31.326664Z",
+  "generated_at": "2026-06-20T04:44:50.103247Z",
   "safe_mode": true,
   "summary": {
     "check_count": 19,
-    "passed": 17,
-    "failed": 2,
-    "high_failed": 2,
+    "passed": 18,
+    "failed": 1,
+    "high_failed": 1,
     "medium_failed": 0,
     "status": "fail"
   },
@@ -7636,7 +7876,7 @@ Generated: 2026-06-20T04:41:31.258419Z
       "severity": "high",
       "detail": "Promo status open action count should mirror the operations packet.",
       "expected": 18,
-      "actual": 17
+      "actual": 19
     },
     {
       "name": "approval_counts_match",
@@ -7814,11 +8054,11 @@ Generated: 2026-06-20T04:41:31.258419Z
     },
     {
       "name": "refresh_run_successful",
-      "status": "fail",
-      "severity": "high",
+      "status": "pass",
+      "severity": "ok",
       "detail": "Latest promo admin refresh should have no required or optional failures.",
       "expected": 0,
-      "actual": 4
+      "actual": 0
     }
   ],
   "source": {
@@ -7841,13 +8081,13 @@ Generated: 2026-06-20T04:41:31.258419Z
 
 <script type="text/plain" id="embedded-promo-consistency-audit-report"># Promo Consistency Audit - Lily Roo
 
-Generated: 2026-06-20T04:41:31.326664Z
+Generated: 2026-06-20T04:44:50.103247Z
 
 ## Summary
 - Status: **fail**
-- Checks: **17 / 19** passed
-- Failed checks: **2**
-- High severity failures: **2**
+- Checks: **18 / 19** passed
+- Failed checks: **1**
+- High severity failures: **1**
 - Medium severity failures: **0**
 
 ## Checks
@@ -7858,7 +8098,7 @@ Generated: 2026-06-20T04:41:31.326664Z
 - **status_open_actions_match_operations**: `fail`
   - Promo status open action count should mirror the operations packet.
   - Expected: `18`
-  - Actual: `17`
+  - Actual: `19`
 - **approval_counts_match**: `pass`
   - Scheduled approval packet should match approval blockers in the ledger.
 - **executor_approval_count_matches_scheduled_packet**: `pass`
@@ -7889,10 +8129,8 @@ Generated: 2026-06-20T04:41:31.326664Z
   - Human handoff blocker summary should be copied from the blocker ledger.
 - **handoff_projection_matches_ledger_projection**: `pass`
   - Human handoff next-resolution projection should match the blocker ledger projection.
-- **refresh_run_successful**: `fail`
+- **refresh_run_successful**: `pass`
   - Latest promo admin refresh should have no required or optional failures.
-  - Expected: `0`
-  - Actual: `4`
 
 ## Guardrails
 - This audit does not mutate promotion, posting, approval, metrics, or secrets state.
@@ -7900,7 +8138,7 @@ Generated: 2026-06-20T04:41:31.326664Z
 
 
 <script type="application/json" id="embedded-tiktok-setup-preflight">{
-  "generated_at": "2026-06-20T04:41:31.081856Z",
+  "generated_at": "2026-06-20T04:44:49.881254Z",
   "safe_mode": true,
   "source": {
     "local_secret_source": "secrets/social_api.env",
@@ -7975,7 +8213,7 @@ Generated: 2026-06-20T04:41:31.326664Z
 
 <script type="text/plain" id="embedded-tiktok-setup-preflight-report"># TikTok Setup Preflight - Lily Roo
 
-Generated: 2026-06-20T04:41:31.081856Z
+Generated: 2026-06-20T04:44:49.881254Z
 
 ## Summary
 - Status: **blocked**
@@ -8016,7 +8254,7 @@ Generated: 2026-06-20T04:41:31.081856Z
 
 
 <script type="application/json" id="embedded-tiktok-repair-runbook">{
-  "generated_at": "2026-06-20T04:41:31.147924Z",
+  "generated_at": "2026-06-20T04:44:49.932430Z",
   "safe_mode": true,
   "status": "blocked",
   "source": {
@@ -8147,7 +8385,7 @@ Generated: 2026-06-20T04:41:31.081856Z
 
 <script type="text/plain" id="embedded-tiktok-repair-runbook-report"># TikTok Repair Runbook - Lily Roo
 
-Generated: 2026-06-20T04:41:31.147924Z
+Generated: 2026-06-20T04:44:49.932430Z
 
 ## Summary
 - Status: **blocked**
@@ -8188,7 +8426,7 @@ Generated: 2026-06-20T04:41:31.147924Z
 
 
 <script type="application/json" id="embedded-published-log-reconciliation">{
-  "generated_at": "2026-06-20T04:41:31.293504Z",
+  "generated_at": "2026-06-20T04:44:50.043531Z",
   "safe_mode": true,
   "source": {
     "published_log": "admin/content/Published_Log.csv",
@@ -8197,7 +8435,7 @@ Generated: 2026-06-20T04:41:31.147924Z
     "manual_distribution_packet": "data/manual_distribution_packet.json"
   },
   "summary": {
-    "published_log_status": "fresh",
+    "published_log_status": "stale",
     "published_log_rows": 17,
     "latest_entry_date": "2026-06-07",
     "latest_entry_platform": "Facebook",
@@ -8288,10 +8526,10 @@ Generated: 2026-06-20T04:41:31.147924Z
 
 <script type="text/plain" id="embedded-published-log-reconciliation-report"># Published Log Reconciliation - Lily Roo
 
-Generated: 2026-06-20T04:41:31.293504Z
+Generated: 2026-06-20T04:44:50.043531Z
 
 ## Summary
-- Published log status: **fresh**
+- Published log status: **stale**
 - Published log rows: **17**
 - Unlogged Worker posts: **0**
 - Unlogged manual posts: **2**
@@ -9501,6 +9739,8 @@ Generated: 2026-06-20T04:41:31.293504Z
     const monetization=kpi.monetization||{};
     const socialExecutionRows=renderSocialExecutionRows(socialExecution);
     const unlockImpact=kpi.unlock_impact||health.unlock_impact||{};
+    const operatorDocket=kpi.operator_docket||health.operator_docket||{};
+    const operatorFirstStep=operatorDocket.first_ready_step||{};
     const immediateUnlock=unlockImpact.immediate_unlock||{};
     const topUnlock=unlockImpact.top_unlock||{};
     const nextProjection=unlockImpact.next_resolution_projection||{};
@@ -9551,6 +9791,12 @@ Generated: 2026-06-20T04:41:31.293504Z
     const operationalNextMeta=operationalNext.label
       ? `Operational next: ${operationalNext.label}${operationalNext.command?` - ${operationalNext.command}`:''}`
       : '';
+    const operatorDocketMeta=operatorDocket.available
+      ? `Operator docket: ${Number(operatorDocket.ready_step_count||0)} ready steps - ${Number(operatorDocket.blocked_step_count||0)} blocked - ${Number(operatorDocket.task_count||0)} handoff tasks`
+      : '';
+    const operatorFirstMeta=operatorFirstStep.label
+      ? `First handoff step: ${operatorFirstStep.label} (${operatorFirstStep.state||'ready'})`
+      : '';
     const unlockMeta=Number(unlockImpact.open_blocker_count||0)
       ? `Unlock impact: ${Number(unlockImpact.open_blocker_count||0)} blockers across ${Number(unlockImpact.roadmap_step_count||0)} roadmap steps - ${Number(unlockImpact.user_action_blocker_count||0)} need Tod - ${Number(unlockImpact.external_blocker_count||0)} external`
       : '';
@@ -9580,6 +9826,11 @@ Generated: 2026-06-20T04:41:31.293504Z
           <div class="queue-meta">${escapeHtml(refreshAutomationMeta)}</div>
           <div class="queue-meta">${escapeHtml(workflowStatus)}</div>
           ${operationalNextMeta?`<div class="queue-meta">${escapeHtml(operationalNextMeta)}</div>`:''}
+          ${operatorDocketMeta?`<div class="queue-meta">${escapeHtml(operatorDocketMeta)}</div>`:''}
+          ${operatorFirstMeta?`<div class="queue-meta">${escapeHtml(operatorFirstMeta)}</div>`:''}
+          ${operatorFirstStep.preview_command?`<div class="collection-command">${escapeHtml(operatorFirstStep.preview_command)}</div>`:''}
+          ${operatorFirstStep.apply_command?`<div class="collection-command">${escapeHtml(operatorFirstStep.apply_command)}</div>`:''}
+          ${operatorFirstStep.guardrail?`<div class="queue-meta">${escapeHtml(operatorFirstStep.guardrail)}</div>`:''}
           ${unlockMeta?`<div class="queue-meta">${escapeHtml(unlockMeta)}</div>`:''}
           ${immediateUnlockMeta?`<div class="queue-meta">${escapeHtml(immediateUnlockMeta)}</div>`:''}
           ${topUnlockMeta?`<div class="queue-meta">${escapeHtml(topUnlockMeta)}</div>`:''}

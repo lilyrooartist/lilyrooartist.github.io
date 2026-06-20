@@ -1472,6 +1472,23 @@ def validate_generated_outputs(failures):
             ok("promo engine status mirrors operational next action")
         else:
             fail("promo_engine_status.json missing top-priority operational next action", failures)
+        operator_docket = kpi.get("operator_docket") or {}
+        handoff_packet = json.loads(HUMAN_HANDOFF_PACKET.read_text(encoding="utf-8")) if HUMAN_HANDOFF_PACKET.exists() else {}
+        handoff_docket = handoff_packet.get("action_docket") or {}
+        handoff_first = handoff_docket.get("first_ready_step") or {}
+        if (
+            operator_docket.get("available") is True
+            and status.get("health", {}).get("operator_docket") == operator_docket
+            and operator_docket.get("source_path") == "data/human_handoff_packet.json"
+            and operator_docket.get("ready_step_count") == handoff_docket.get("ready_step_count")
+            and operator_docket.get("blocked_step_count") == handoff_docket.get("blocked_step_count")
+            and operator_docket.get("task_count") == handoff_docket.get("task_count")
+            and (operator_docket.get("first_ready_step") or {}).get("id") == handoff_first.get("id")
+            and any(handoff_first.get("label", "") in action for action in next_actions[:2])
+        ):
+            ok("promo engine status mirrors human handoff action docket")
+        else:
+            fail("promo_engine_status.json missing human handoff action docket summary", failures)
         unlock_impact = kpi.get("unlock_impact") or {}
         unlock_lanes = unlock_impact.get("lanes") or []
         blocker_ledger = json.loads(PROMOTION_BLOCKER_LEDGER.read_text(encoding="utf-8")) if PROMOTION_BLOCKER_LEDGER.exists() else {}

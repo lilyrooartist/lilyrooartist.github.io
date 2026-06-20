@@ -1,12 +1,12 @@
 # Promo Consistency Audit - Lily Roo
 
-Generated: 2026-06-20T04:41:31.326664Z
+Generated: 2026-06-20T04:44:50.103247Z
 
 ## Summary
 - Status: **fail**
-- Checks: **17 / 19** passed
-- Failed checks: **2**
-- High severity failures: **2**
+- Checks: **18 / 19** passed
+- Failed checks: **1**
+- High severity failures: **1**
 - Medium severity failures: **0**
 
 ## Checks
@@ -17,7 +17,7 @@ Generated: 2026-06-20T04:41:31.326664Z
 - **status_open_actions_match_operations**: `fail`
   - Promo status open action count should mirror the operations packet.
   - Expected: `18`
-  - Actual: `17`
+  - Actual: `19`
 - **approval_counts_match**: `pass`
   - Scheduled approval packet should match approval blockers in the ledger.
 - **executor_approval_count_matches_scheduled_packet**: `pass`
@@ -48,10 +48,8 @@ Generated: 2026-06-20T04:41:31.326664Z
   - Human handoff blocker summary should be copied from the blocker ledger.
 - **handoff_projection_matches_ledger_projection**: `pass`
   - Human handoff next-resolution projection should match the blocker ledger projection.
-- **refresh_run_successful**: `fail`
+- **refresh_run_successful**: `pass`
   - Latest promo admin refresh should have no required or optional failures.
-  - Expected: `0`
-  - Actual: `4`
 
 ## Guardrails
 - This audit does not mutate promotion, posting, approval, metrics, or secrets state.

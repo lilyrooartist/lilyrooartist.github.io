@@ -26,6 +26,7 @@ SCHEDULED = ROOT / "data" / "scheduled_posts.csv"
 PROMO_QUEUE_PLAN = ROOT / "data" / "promo_queue_plan.json"
 PROMO_OPERATIONS_PACKET = ROOT / "data" / "promo_operations_packet.json"
 PROMOTION_BLOCKER_LEDGER = ROOT / "data" / "promotion_blocker_ledger.json"
+HUMAN_HANDOFF_PACKET = ROOT / "data" / "human_handoff_packet.json"
 PUBLISHED = ROOT / "admin" / "content" / "Published_Log.csv"
 FUTURE_POSTS = ROOT / "admin" / "future-posts.json"
 RESCHEDULE_SCRIPT = ROOT / "scripts" / "reschedule_scheduled_posts.py"
@@ -1061,6 +1062,36 @@ def blocker_unlock_impact(ledger: dict) -> dict:
     }
 
 
+def operator_docket_state(handoff: dict) -> dict:
+    docket = handoff.get("action_docket") if isinstance(handoff, dict) else {}
+    docket = docket or {}
+    checklist = docket.get("checklist") or []
+    first_ready = docket.get("first_ready_step") or next(
+        (
+            item
+            for item in checklist
+            if item.get("state") in {"ready", "ready_for_review", "needs_review", "needs_values"}
+        ),
+        {},
+    )
+    blocked_steps = docket.get("blocked_steps") or [
+        item for item in checklist if item.get("state") == "blocked"
+    ]
+    return {
+        "source_path": str(HUMAN_HANDOFF_PACKET.relative_to(ROOT)),
+        "available": bool(docket),
+        "ready_step_count": int_metric(docket.get("ready_step_count")),
+        "blocked_step_count": int_metric(docket.get("blocked_step_count")),
+        "roadmap_step_count": int_metric(docket.get("roadmap_step_count")),
+        "task_count": int_metric(docket.get("task_count")),
+        "manual_post_count": int_metric(docket.get("manual_post_count")),
+        "manual_metric_field_count": int_metric(docket.get("manual_metric_field_count")),
+        "first_ready_step": first_ready,
+        "blocked_steps": blocked_steps,
+        "checklist": checklist,
+    }
+
+
 def plan_rows_for_release(plan, release_title: str, track_lookup: set[str]):
     rows = []
     for post in plan.get("posts") or []:
@@ -1083,6 +1114,7 @@ def build_status():
     promo_plan = read_json(PROMO_QUEUE_PLAN, {})
     promo_operations = read_json(PROMO_OPERATIONS_PACKET, {})
     promotion_blockers = read_json(PROMOTION_BLOCKER_LEDGER, {})
+    human_handoff = read_json(HUMAN_HANDOFF_PACKET, {})
     future_posts = read_json(FUTURE_POSTS, {})
     store_history = build_store_verification_history(release_status, now)
     scheduled_rows = read_csv(SCHEDULED)
@@ -1193,6 +1225,15 @@ def build_status():
     all_actions = freshness_actions + all_actions
     operational_next_action = promo_operations.get("next_action") or (promo_operations.get("summary") or {}).get("next_action") or {}
     unlock_impact = blocker_unlock_impact(promotion_blockers)
+    operator_docket = operator_docket_state(human_handoff)
+    operator_first_step = operator_docket.get("first_ready_step") or {}
+    operator_first_step_text = ""
+    if operator_first_step.get("label"):
+        command = operator_first_step.get("preview_command") or operator_first_step.get("apply_command") or ""
+        operator_first_step_text = (
+            f"First handoff step: {operator_first_step['label']}"
+            + (f" — {command}" if command else "")
+        )
     operational_next_action_text = ""
     if operational_next_action.get("label"):
         command = operational_next_action.get("command") or ""
@@ -1231,6 +1272,10 @@ def build_status():
     if operational_next_action_text:
         all_actions = [action for action in all_actions if action != operational_next_action_text]
         all_actions.insert(0, operational_next_action_text)
+    if operator_first_step_text:
+        all_actions = [action for action in all_actions if action != operator_first_step_text]
+        insert_at = 1 if operational_next_action_text and all_actions[:1] == [operational_next_action_text] else 0
+        all_actions.insert(insert_at, operator_first_step_text)
     return {
         "generated_at": now.isoformat(),
         "source": {
@@ -1239,6 +1284,7 @@ def build_status():
             "promo_queue_plan": str(PROMO_QUEUE_PLAN.relative_to(ROOT)),
             "promo_operations_packet": str(PROMO_OPERATIONS_PACKET.relative_to(ROOT)),
             "promotion_blocker_ledger": str(PROMOTION_BLOCKER_LEDGER.relative_to(ROOT)),
+            "human_handoff_packet": str(HUMAN_HANDOFF_PACKET.relative_to(ROOT)),
             "published_log": str(PUBLISHED.relative_to(ROOT)),
             "manual_metrics": str(MANUAL_METRICS.relative_to(ROOT)),
             "live_metrics": str(LIVE_METRICS.relative_to(ROOT)),
@@ -1286,6 +1332,7 @@ def build_status():
             "refresh_automation": refresh_automation,
             "operational_next_action": operational_next_action,
             "unlock_impact": unlock_impact,
+            "operator_docket": operator_docket,
             "stale_source_count": freshness_summary["stale"],
             "missing_source_count": freshness_summary["missing"],
         },
@@ -1299,6 +1346,7 @@ def build_status():
             "missing_sources": freshness_summary["missing"],
             "operational_next_action": operational_next_action,
             "unlock_impact": unlock_impact,
+            "operator_docket": operator_docket,
         },
         "freshness": freshness,
         "releases": releases,
