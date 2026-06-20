@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T01:25:13.028561Z",
+  "generated_at": "2026-06-20T01:28:05.594468Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -18,8 +18,8 @@
     "ready_subscriber_approval_count": 0,
     "subscriber_swap_count": 0,
     "ready_after_approval_swap_count": 0,
-    "platform_fix_count": 3,
-    "action_count": 6
+    "platform_fix_count": 1,
+    "action_count": 4
   },
   "actions": [
     {
@@ -44,32 +44,6 @@
       "context": {
         "approved_backlog_posts": 3,
         "approved_upcoming_posts": 3
-      }
-    },
-    {
-      "label": "Repair Instagram executor",
-      "phase": "Clear platform blockers",
-      "status": "needs_platform_fix",
-      "detail": "Reconnect the Instagram Business/Creator account to the Facebook Page or set IG_BUSINESS_ACCOUNT_ID, then push the worker secret and recapture readiness.",
-      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263",
-      "after_review_command": "python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py",
-      "context": {
-        "post_id": "FP-AUTO-263",
-        "platform": "Instagram",
-        "reason": "max_attempts_exceeded"
-      }
-    },
-    {
-      "label": "Repair Facebook executor",
-      "phase": "Clear platform blockers",
-      "status": "needs_platform_fix",
-      "detail": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
-      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-265",
-      "after_review_command": "",
-      "context": {
-        "post_id": "FP-AUTO-265",
-        "platform": "Facebook",
-        "reason": "max_attempts_exceeded"
       }
     },
     {
