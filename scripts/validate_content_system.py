@@ -447,6 +447,7 @@ def validate_generated_outputs(failures):
         summary = preflight.get("summary") or {}
         checks = preflight.get("checks") or []
         source = preflight.get("source") or {}
+        credential_handoff = preflight.get("credential_handoff") or {}
         blocked_count = sum(1 for check in checks if check.get("status") == "blocked")
         check_names = {check.get("name") for check in checks}
         required_checks = {
@@ -465,6 +466,17 @@ def validate_generated_outputs(failures):
             and summary.get("blocked_count") == blocked_count
             and required_checks <= check_names
             and required_source <= set(source)
+            and credential_handoff.get("status") in {"ready_to_push", "needs_local_values"}
+            and credential_handoff.get("required_secret_names") == ["TIKTOK_CLIENT_KEY", "TIKTOK_CLIENT_SECRET", "TIKTOK_REFRESH_TOKEN"]
+            and credential_handoff.get("local_secret_source") == source.get("local_secret_source")
+            and credential_handoff.get("local_missing_secrets") == (summary.get("local_missing_secrets") or [])
+            and credential_handoff.get("worker_missing_secrets") == (summary.get("worker_missing_secrets") or [])
+            and "--dry-run" in (credential_handoff.get("dry_run_first_command") or "")
+            and "push_social_worker_secrets.py" in (credential_handoff.get("dry_run_first_command") or "")
+            and (not credential_handoff.get("apply_command") or "--dry-run" not in credential_handoff.get("apply_command"))
+            and "python3 scripts/validate_content_system.py" in (credential_handoff.get("post_apply_verification_commands") or [])
+            and len(credential_handoff.get("completion_evidence") or []) >= 3
+            and "Secret values" in (credential_handoff.get("redaction") or "")
             and "Secret values" in (preflight.get("redaction") or "")
             and all(check.get("name") and check.get("status") in {"pass", "blocked", "review", "waiting"} and check.get("detail") for check in checks)
         ):
@@ -2404,7 +2416,7 @@ def validate_generated_outputs(failures):
         fail("build_promo_consistency_audit.py missing", failures)
     if TIKTOK_SETUP_PREFLIGHT_SCRIPT.exists():
         preflight_text = TIKTOK_SETUP_PREFLIGHT_SCRIPT.read_text(encoding="utf-8")
-        if "tiktok_setup_preflight.json" in preflight_text and "tiktok-setup-preflight.md" in preflight_text and "TIKTOK_CLIENT_KEY" in preflight_text and "TIKTOK_PUBLIC_POSTING_APPROVED" in preflight_text and "Secret values" in preflight_text and "subprocess" not in preflight_text:
+        if "tiktok_setup_preflight.json" in preflight_text and "tiktok-setup-preflight.md" in preflight_text and "credential_handoff" in preflight_text and "completion_evidence" in preflight_text and "TIKTOK_CLIENT_KEY" in preflight_text and "TIKTOK_PUBLIC_POSTING_APPROVED" in preflight_text and "Secret values" in preflight_text and "subprocess" not in preflight_text:
             ok("TikTok setup preflight builder is review-only")
         else:
             fail("build_tiktok_setup_preflight.py missing preflight outputs or exposes execution/secrets", failures)
@@ -2540,7 +2552,7 @@ def validate_generated_outputs(failures):
         fail("promo-consistency-audit.md missing", failures)
     if TIKTOK_SETUP_PREFLIGHT_REPORT.exists():
         preflight_report_text = TIKTOK_SETUP_PREFLIGHT_REPORT.read_text(encoding="utf-8")
-        if "TikTok Setup Preflight" in preflight_report_text and "Checks" in preflight_report_text and "Guardrails" in preflight_report_text:
+        if "TikTok Setup Preflight" in preflight_report_text and "Credential Handoff" in preflight_report_text and "Checks" in preflight_report_text and "Guardrails" in preflight_report_text:
             ok("TikTok setup preflight markdown report present")
         else:
             fail("tiktok-setup-preflight.md missing expected sections", failures)

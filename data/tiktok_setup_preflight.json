@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T08:09:32.631785Z",
+  "generated_at": "2026-06-20T08:13:47.728331Z",
   "safe_mode": true,
   "source": {
     "local_secret_source": "secrets/social_api.env",
@@ -29,6 +29,43 @@
     "push_apply_command": "",
     "refresh_command": "python3 scripts/refresh_promo_admin.py",
     "platform_repair_rows": 1
+  },
+  "credential_handoff": {
+    "status": "needs_local_values",
+    "required_secret_names": [
+      "TIKTOK_CLIENT_KEY",
+      "TIKTOK_CLIENT_SECRET",
+      "TIKTOK_REFRESH_TOKEN"
+    ],
+    "optional_secret_names": [
+      "TIKTOK_ACCESS_TOKEN"
+    ],
+    "local_secret_source": "secrets/social_api.env",
+    "local_missing_secrets": [
+      "TIKTOK_CLIENT_KEY",
+      "TIKTOK_CLIENT_SECRET",
+      "TIKTOK_REFRESH_TOKEN"
+    ],
+    "worker_missing_secrets": [
+      "TIKTOK_CLIENT_KEY",
+      "TIKTOK_CLIENT_SECRET",
+      "TIKTOK_REFRESH_TOKEN"
+    ],
+    "public_posting_approved": false,
+    "default_privacy": "PUBLIC_TO_EVERYONE",
+    "dry_run_first_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+    "apply_command": "",
+    "post_apply_verification_commands": [
+      "python3 scripts/capture_executor_readiness.py",
+      "python3 scripts/refresh_promo_admin.py",
+      "python3 scripts/validate_content_system.py"
+    ],
+    "completion_evidence": [
+      "data/tiktok_setup_preflight.json reports ready_to_push_worker_secrets true.",
+      "data/executor_readiness_snapshot.json reports TikTok refresh configuration present.",
+      "data/platform_repair_status.json no longer lists TikTok as blocked by missing credentials."
+    ],
+    "redaction": "Secret values are never written here; only required names, missing names, and presence booleans are recorded."
   },
   "checks": [
     {

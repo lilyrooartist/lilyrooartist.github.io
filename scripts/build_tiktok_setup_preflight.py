@@ -110,6 +110,30 @@ def build_payload() -> dict:
     ]
     push_preview = "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN"
     push_apply = "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py"
+    refresh_command = "python3 scripts/refresh_promo_admin.py"
+    credential_handoff = {
+        "status": "ready_to_push" if ready_to_push else "needs_local_values",
+        "required_secret_names": REQUIRED_REFRESH_SECRETS,
+        "optional_secret_names": [OPTIONAL_ACCESS_TOKEN],
+        "local_secret_source": str(SOCIAL_ENV.relative_to(ROOT.parent)),
+        "local_missing_secrets": local_missing,
+        "worker_missing_secrets": worker_missing,
+        "public_posting_approved": public_posting,
+        "default_privacy": default_privacy,
+        "dry_run_first_command": push_preview,
+        "apply_command": push_apply if ready_to_push else "",
+        "post_apply_verification_commands": [
+            "python3 scripts/capture_executor_readiness.py",
+            refresh_command,
+            "python3 scripts/validate_content_system.py",
+        ],
+        "completion_evidence": [
+            "data/tiktok_setup_preflight.json reports ready_to_push_worker_secrets true.",
+            "data/executor_readiness_snapshot.json reports TikTok refresh configuration present.",
+            "data/platform_repair_status.json no longer lists TikTok as blocked by missing credentials.",
+        ],
+        "redaction": "Secret values are never written here; only required names, missing names, and presence booleans are recorded.",
+    }
     return {
         "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "safe_mode": True,
@@ -131,9 +155,10 @@ def build_payload() -> dict:
             "default_privacy": default_privacy,
             "push_preview_command": push_preview,
             "push_apply_command": push_apply if ready_to_push else "",
-            "refresh_command": "python3 scripts/refresh_promo_admin.py",
+            "refresh_command": refresh_command,
             "platform_repair_rows": len(repair_rows),
         },
+        "credential_handoff": credential_handoff,
         "checks": preflight_checks,
         "redaction": "Secret values are never written to this preflight; only presence booleans are recorded.",
     }
@@ -155,8 +180,24 @@ def build_markdown(payload: dict) -> str:
         f"- Public posting approved: **{summary['public_posting_approved']}**",
         f"- Default privacy: **{summary['default_privacy']}**",
         "",
-        "## Checks",
+        "## Credential Handoff",
+        f"- Status: **{payload['credential_handoff']['status']}**",
+        f"- Required names: `{', '.join(payload['credential_handoff']['required_secret_names'])}`",
+        f"- Missing locally: `{', '.join(payload['credential_handoff']['local_missing_secrets']) or 'none'}`",
+        f"- Missing in worker: `{', '.join(payload['credential_handoff']['worker_missing_secrets']) or 'none'}`",
+        f"- Dry-run first: `{payload['credential_handoff']['dry_run_first_command']}`",
+        f"- Apply after review: `{payload['credential_handoff']['apply_command'] or 'not available until local secrets exist'}`",
+        "- Post-apply verification:",
     ]
+    lines.extend(f"  - `{command}`" for command in payload["credential_handoff"]["post_apply_verification_commands"])
+    lines.extend([
+        "- Completion evidence:",
+    ])
+    lines.extend(f"  - {item}" for item in payload["credential_handoff"]["completion_evidence"])
+    lines.extend([
+        "",
+        "## Checks",
+    ])
     for item in payload["checks"]:
         lines.append(f"- **{item['name']}**: `{item['status']}`")
         lines.append(f"  - {item['detail']}")

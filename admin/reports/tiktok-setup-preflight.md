@@ -1,6 +1,6 @@
 # TikTok Setup Preflight - Lily Roo
 
-Generated: 2026-06-20T08:09:32.631785Z
+Generated: 2026-06-20T08:13:47.728331Z
 
 ## Summary
 - Status: **blocked**
@@ -10,6 +10,22 @@ Generated: 2026-06-20T08:09:32.631785Z
 - Ready to post publicly: **False**
 - Public posting approved: **False**
 - Default privacy: **PUBLIC_TO_EVERYONE**
+
+## Credential Handoff
+- Status: **needs_local_values**
+- Required names: `TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN`
+- Missing locally: `TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN`
+- Missing in worker: `TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN`
+- Dry-run first: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
+- Apply after review: `not available until local secrets exist`
+- Post-apply verification:
+  - `python3 scripts/capture_executor_readiness.py`
+  - `python3 scripts/refresh_promo_admin.py`
+  - `python3 scripts/validate_content_system.py`
+- Completion evidence:
+  - data/tiktok_setup_preflight.json reports ready_to_push_worker_secrets true.
+  - data/executor_readiness_snapshot.json reports TikTok refresh configuration present.
+  - data/platform_repair_status.json no longer lists TikTok as blocked by missing credentials.
 
 ## Checks
 - **local_refresh_credentials**: `blocked`
