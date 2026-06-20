@@ -13,6 +13,7 @@ QUIPS = CONTENT / "20_QUIPS_BANK.csv"
 QUEUE = ROOT / "data" / "scheduled_posts.csv"
 FUTURE = ROOT / "admin" / "future-posts.json"
 LIVE_METRICS = ROOT / "data" / "live_social_metrics.json"
+MANUAL_SOCIAL_STATS = ROOT / "data" / "manual_social_stats.json"
 METRICS_HISTORY = ROOT / "data" / "metrics_history.json"
 EXECUTOR_READINESS = ROOT / "data" / "executor_readiness_snapshot.json"
 STORE_VERIFICATION_HISTORY = ROOT / "data" / "store_verification_history.json"
@@ -558,6 +559,8 @@ def validate_generated_outputs(failures):
             and summary.get("pending_field_count") == len(rows)
             and summary.get("platform_count") == len(platforms)
             and summary.get("csv_path") == "data/manual_metric_collection_template.csv"
+            and "--from-live --dry-run" in (summary.get("live_import_preview_command") or "")
+            and "--from-live --refresh-admin" in (summary.get("live_import_command") or "")
             and "--from-csv --dry-run" in (summary.get("worksheet_import_preview_command") or "")
             and "--from-csv --refresh-admin" in (summary.get("worksheet_import_command") or "")
             and all(
@@ -605,7 +608,7 @@ def validate_generated_outputs(failures):
         fail("promotion_blocker_ledger.json missing; run scripts/build_promotion_blocker_ledger.py", failures)
     if MANUAL_METRIC_REPORT.exists():
         report_text = MANUAL_METRIC_REPORT.read_text(encoding="utf-8")
-        if "Manual Metric Collection" in report_text and "Pending fields" in report_text and "Open: " in report_text and "--from-csv --refresh-admin" in report_text:
+        if "Manual Metric Collection" in report_text and "Pending fields" in report_text and "Open: " in report_text and "--from-csv --refresh-admin" in report_text and "--from-live --dry-run" in report_text:
             ok("manual metric markdown report present")
         else:
             fail("manual-metric-collection.md missing expected sections", failures)
@@ -735,10 +738,14 @@ def validate_generated_outputs(failures):
                 ok("promo engine manual metric steps include source links and worksheet import commands")
             else:
                 fail("promo_engine_status.json manual metric steps missing source links or worksheet import commands", failures)
+        manual_stats = json.loads(MANUAL_SOCIAL_STATS.read_text(encoding="utf-8")) if MANUAL_SOCIAL_STATS.exists() else {}
+        facebook_followers_synced = str(((manual_stats.get("facebook") or {}).get("followers")) or "").strip().lower() != "pending"
         if auto_covered and any(item.get("field") == "facebook.followers" for item in auto_covered):
             ok("promo engine recognizes live API-covered manual metric fields")
+        elif facebook_followers_synced:
+            ok("promo engine synced live API-covered Facebook follower metric")
         else:
-            fail("promo_engine_status.json missing API-covered manual metric evidence", failures)
+            fail("promo_engine_status.json missing API-covered or synced Facebook follower metric evidence", failures)
         history = kpi.get("metrics_history") or {}
         if history.get("snapshot_count") and history.get("latest_date"):
             ok(f"promo engine metrics history tracks {history.get('snapshot_count')} snapshot(s)")
@@ -1074,10 +1081,10 @@ def validate_generated_outputs(failures):
     if MANUAL_METRICS_UPDATER.exists():
         ok("manual social stats updater present")
         updater_text = MANUAL_METRICS_UPDATER.read_text(encoding="utf-8")
-        if "--from-csv" in updater_text and "--dry-run" in updater_text and "new_value" in updater_text and "csv.DictReader" in updater_text:
+        if "--from-csv" in updater_text and "--from-live" in updater_text and "live_social_metrics.json" in updater_text and "--dry-run" in updater_text and "new_value" in updater_text and "csv.DictReader" in updater_text:
             ok("manual social stats updater can import filled CSV values")
         else:
-            fail("update_manual_social_stats.py missing filled CSV import support", failures)
+            fail("update_manual_social_stats.py missing filled CSV or live metric import support", failures)
     else:
         fail("update_manual_social_stats.py missing", failures)
     if STORE_LINK_VERIFIER.exists():
@@ -1310,7 +1317,7 @@ def validate_generated_outputs(failures):
         fail("build_backlog_reschedule_preview.py missing", failures)
     if MANUAL_METRIC_COLLECTION_SCRIPT.exists():
         collection_text = MANUAL_METRIC_COLLECTION_SCRIPT.read_text(encoding="utf-8")
-        if "manual_metric_collection_template.csv" in collection_text and "manual_metric_collection_packet.json" in collection_text and "manual-metric-collection.md" in collection_text and "pending_manual_by_platform" in collection_text and "collection_url" in collection_text and "subprocess" not in collection_text:
+        if "manual_metric_collection_template.csv" in collection_text and "manual_metric_collection_packet.json" in collection_text and "manual-metric-collection.md" in collection_text and "pending_manual_by_platform" in collection_text and "collection_url" in collection_text and "--from-live" in collection_text and "subprocess" not in collection_text:
             ok("manual metric collection builder is review-only")
         else:
             fail("build_manual_metric_collection.py missing worksheet outputs or executes commands", failures)

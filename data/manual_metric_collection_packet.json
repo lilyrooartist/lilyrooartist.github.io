@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T00:27:40.099348Z",
+  "generated_at": "2026-06-20T00:40:48.774635Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -13,6 +13,8 @@
     "platform_count": 5,
     "csv_path": "data/manual_metric_collection_template.csv",
     "report_path": "admin/reports/manual-metric-collection.md",
+    "live_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-live --dry-run",
+    "live_import_command": "python3 scripts/update_manual_social_stats.py --from-live --refresh-admin",
     "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
     "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin"
   },

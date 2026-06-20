@@ -34,6 +34,11 @@ DEFAULT_COLLECTION_URLS = {
     "x": "https://analytics.x.com/",
 }
 
+LIVE_IMPORT_PREVIEW_COMMAND = "python3 scripts/update_manual_social_stats.py --from-live --dry-run"
+LIVE_IMPORT_COMMAND = "python3 scripts/update_manual_social_stats.py --from-live --refresh-admin"
+WORKSHEET_IMPORT_PREVIEW_COMMAND = "python3 scripts/update_manual_social_stats.py --from-csv --dry-run"
+WORKSHEET_IMPORT_COMMAND = "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin"
+
 
 def read_json(path: Path, fallback):
     if not path.exists():
@@ -114,8 +119,8 @@ def build_packet(rows: list[dict], generated_at: str) -> dict:
             "field_count": 0,
             "pending_assignments": [],
             "platform_update_command": row.get("platform_update_command") or "",
-            "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
-            "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
+            "worksheet_import_preview_command": WORKSHEET_IMPORT_PREVIEW_COMMAND,
+            "worksheet_import_command": WORKSHEET_IMPORT_COMMAND,
         })
         group["fields"].append({
             "field": row["field"],
@@ -141,8 +146,10 @@ def build_packet(rows: list[dict], generated_at: str) -> dict:
             "platform_count": len(platforms),
             "csv_path": str(OUT_CSV.relative_to(ROOT)),
             "report_path": str(OUT_MD.relative_to(ROOT)),
-            "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
-            "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
+            "live_import_preview_command": LIVE_IMPORT_PREVIEW_COMMAND,
+            "live_import_command": LIVE_IMPORT_COMMAND,
+            "worksheet_import_preview_command": WORKSHEET_IMPORT_PREVIEW_COMMAND,
+            "worksheet_import_command": WORKSHEET_IMPORT_COMMAND,
         },
         "platforms": platforms,
         "rows": rows,
@@ -159,11 +166,19 @@ def build_markdown(rows: list[dict], generated_at: str) -> str:
         "",
         "Fill `new_value` in `data/manual_metric_collection_template.csv`, then run:",
         "",
-        "`python3 scripts/update_manual_social_stats.py --from-csv --dry-run`",
+        f"`{WORKSHEET_IMPORT_PREVIEW_COMMAND}`",
         "",
         "If the preview looks right, run:",
         "",
-        "`python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`",
+        f"`{WORKSHEET_IMPORT_COMMAND}`",
+        "",
+        "To sync metrics already covered by `data/live_social_metrics.json`, run:",
+        "",
+        f"`{LIVE_IMPORT_PREVIEW_COMMAND}`",
+        "",
+        "If the preview looks right, run:",
+        "",
+        f"`{LIVE_IMPORT_COMMAND}`",
         "",
         "You can still run a platform update command directly if you only collect one platform.",
         "",

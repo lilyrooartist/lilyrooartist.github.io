@@ -1,6 +1,6 @@
 # Manual Metric Collection - Lily Roo
 
-Generated: 2026-06-20T00:27:40.099348Z
+Generated: 2026-06-20T00:40:48.774635Z
 
 Pending fields: **11**
 
@@ -11,6 +11,14 @@ Fill `new_value` in `data/manual_metric_collection_template.csv`, then run:
 If the preview looks right, run:
 
 `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
+
+To sync metrics already covered by `data/live_social_metrics.json`, run:
+
+`python3 scripts/update_manual_social_stats.py --from-live --dry-run`
+
+If the preview looks right, run:
+
+`python3 scripts/update_manual_social_stats.py --from-live --refresh-admin`
 
 You can still run a platform update command directly if you only collect one platform.
 
