@@ -460,6 +460,7 @@ def validate_generated_outputs(failures):
             and {"promo_engine_status", "promo_operations_packet", "promotion_blocker_ledger", "human_handoff_packet", "human_handoff_resolution_preview", "promo_unlock_sequence", "social_execution_snapshot", "social_scheduler_dry_run", "tiktok_setup_preflight"} <= set(source)
             and any(check.get("name") == "handoff_preview_status_matches_status_kpi" for check in checks)
             and any(check.get("name") == "unlock_sequence_order_matches_roadmap" for check in checks)
+            and any(check.get("name") == "unlock_sequence_matches_status_kpi" for check in checks)
         ):
             ok(f"promo consistency audit passes {len(checks)} cross-surface check(s)")
         else:
@@ -2266,6 +2267,33 @@ def validate_generated_outputs(failures):
             ok("promo engine status mirrors handoff resolution preview health")
         else:
             fail("promo_engine_status.json missing handoff resolution preview health", failures)
+        unlock_sequence = kpi.get("promo_unlock_sequence") or {}
+        unlock_packet = json.loads(PROMO_UNLOCK_SEQUENCE.read_text(encoding="utf-8")) if PROMO_UNLOCK_SEQUENCE.exists() else {}
+        unlock_summary = unlock_packet.get("summary") or {}
+        unlock_steps = unlock_packet.get("steps") or []
+        unlock_current = next((step for step in unlock_steps if step.get("id") == unlock_summary.get("current_step_id")), unlock_steps[0] if unlock_steps else {})
+        unlock_action = next((action for action in next_actions if action.startswith("Current unlock gate:")), "")
+        if (
+            unlock_sequence.get("available") is True
+            and status.get("health", {}).get("promo_unlock_sequence") == unlock_sequence
+            and unlock_sequence.get("source_path") == "data/promo_unlock_sequence.json"
+            and unlock_sequence.get("step_count") == unlock_summary.get("step_count") == len(unlock_steps)
+            and unlock_sequence.get("ready_for_human_review_count") == unlock_summary.get("ready_for_human_review_count")
+            and unlock_sequence.get("blocked_or_warning_count") == unlock_summary.get("blocked_or_warning_count")
+            and unlock_sequence.get("total_projected_resolution_units") == unlock_summary.get("total_projected_resolution_units")
+            and unlock_sequence.get("open_blocker_count") == unlock_summary.get("open_blocker_count")
+            and unlock_sequence.get("current_step_id") == unlock_summary.get("current_step_id")
+            and unlock_sequence.get("current_gate_state") == unlock_summary.get("current_gate_state")
+            and unlock_sequence.get("current_step") == unlock_current
+            and unlock_sequence.get("operator_contract") == (unlock_packet.get("operator_contract") or {})
+            and unlock_action
+            and unlock_sequence.get("current_gate_state") in unlock_action
+            and unlock_sequence.get("source_path") in unlock_action
+            and any((command.get("command") or "") in unlock_action for command in (unlock_current.get("commands") or []) if command.get("step") == "preview")
+        ):
+            ok("promo engine status mirrors promo unlock sequence")
+        else:
+            fail("promo_engine_status.json missing promo unlock sequence summary", failures)
         manual_packet = json.loads(MANUAL_DISTRIBUTION_PACKET.read_text(encoding="utf-8")) if MANUAL_DISTRIBUTION_PACKET.exists() else {}
         manual_summary = manual_packet.get("summary") or {}
         manual_approval = manual_packet.get("manual_approval_docket") or {}
@@ -2702,7 +2730,7 @@ def validate_generated_outputs(failures):
         fail("check_social_executor_dry_run.py missing", failures)
     if PROMO_CONSISTENCY_SCRIPT.exists():
         consistency_text = PROMO_CONSISTENCY_SCRIPT.read_text(encoding="utf-8")
-        if "promo_consistency_audit.json" in consistency_text and "promo-consistency-audit.md" in consistency_text and "promotion_blocker_ledger.json" in consistency_text and "human_handoff_packet.json" in consistency_text and "human_handoff_resolution_preview.json" in consistency_text and "promo_unlock_sequence.json" in consistency_text and "handoff_preview_status_matches_status_kpi" in consistency_text and "unlock_sequence_order_matches_roadmap" in consistency_text and "manual_metric_batch_count_matches_ledger" in consistency_text and "priority_batch_count" in consistency_text and "social_execution_snapshot.json" in consistency_text and "social_scheduler_dry_run.json" in consistency_text and "tiktok_setup_preflight.json" in consistency_text and "subprocess" not in consistency_text:
+        if "promo_consistency_audit.json" in consistency_text and "promo-consistency-audit.md" in consistency_text and "promotion_blocker_ledger.json" in consistency_text and "human_handoff_packet.json" in consistency_text and "human_handoff_resolution_preview.json" in consistency_text and "promo_unlock_sequence.json" in consistency_text and "handoff_preview_status_matches_status_kpi" in consistency_text and "unlock_sequence_order_matches_roadmap" in consistency_text and "unlock_sequence_matches_status_kpi" in consistency_text and "manual_metric_batch_count_matches_ledger" in consistency_text and "priority_batch_count" in consistency_text and "social_execution_snapshot.json" in consistency_text and "social_scheduler_dry_run.json" in consistency_text and "tiktok_setup_preflight.json" in consistency_text and "subprocess" not in consistency_text:
             ok("promo consistency audit builder is review-only")
         else:
             fail("build_promo_consistency_audit.py missing audit outputs or executes commands", failures)

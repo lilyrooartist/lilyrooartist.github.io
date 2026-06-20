@@ -1,10 +1,10 @@
 # Promo Consistency Audit - Lily Roo
 
-Generated: 2026-06-20T09:43:14.015921Z
+Generated: 2026-06-20T09:45:35.103100Z
 
 ## Summary
 - Status: **pass**
-- Checks: **28 / 28** passed
+- Checks: **30 / 30** passed
 - Failed checks: **0**
 - High severity failures: **0**
 - Medium severity failures: **0**
@@ -64,6 +64,10 @@ Generated: 2026-06-20T09:43:14.015921Z
   - Promo unlock sequence should mirror the blocker ledger open blocker count.
 - **unlock_sequence_current_step_is_preview_ready**: `pass`
   - Promo unlock sequence should lead with the checked scheduled approval batch while it is the highest-leverage safe review step.
+- **unlock_sequence_matches_status_kpi**: `pass`
+  - Promo status should mirror the unlock sequence summary.
+- **unlock_sequence_next_action_matches_status**: `pass`
+  - Promo status next actions should expose the current unlock sequence gate.
 - **refresh_run_required_steps_successful**: `pass`
   - Latest promo admin refresh should have no required failures; tolerated optional capture failures stay visible in the refresh run summary.
 

@@ -93,6 +93,7 @@ def build_checks() -> dict:
     operations_summary = operations.get("summary") or {}
     status_health = status.get("health") or {}
     status_preview = (status.get("kpi") or {}).get("handoff_resolution_preview") or {}
+    status_unlock_sequence = (status.get("kpi") or {}).get("promo_unlock_sequence") or {}
     unlock_summary = unlock_sequence.get("summary") or {}
     execution_summary = executions.get("summary") or {}
     scheduler_summary = scheduler.get("summary") or {}
@@ -297,6 +298,34 @@ def build_checks() -> dict:
         "Promo unlock sequence should lead with the checked scheduled approval batch while it is the highest-leverage safe review step.",
         expected={"current_step_id": "unlock-checked-scheduled-approval", "current_gate_state": "ready_for_human_review"},
         actual={"current_step_id": unlock_summary.get("current_step_id"), "current_gate_state": unlock_summary.get("current_gate_state")},
+        severity="medium",
+    ))
+    checks.append(same_value(
+        "unlock_sequence_matches_status_kpi",
+        {
+            "step_count": int(unlock_summary.get("step_count") or 0),
+            "ready_for_human_review_count": int(unlock_summary.get("ready_for_human_review_count") or 0),
+            "blocked_or_warning_count": int(unlock_summary.get("blocked_or_warning_count") or 0),
+            "current_step_id": unlock_summary.get("current_step_id") or "",
+            "current_gate_state": unlock_summary.get("current_gate_state") or "",
+            "open_blocker_count": int(unlock_summary.get("open_blocker_count") or 0),
+        },
+        {
+            "step_count": int(status_unlock_sequence.get("step_count") or 0),
+            "ready_for_human_review_count": int(status_unlock_sequence.get("ready_for_human_review_count") or 0),
+            "blocked_or_warning_count": int(status_unlock_sequence.get("blocked_or_warning_count") or 0),
+            "current_step_id": status_unlock_sequence.get("current_step_id") or "",
+            "current_gate_state": status_unlock_sequence.get("current_gate_state") or "",
+            "open_blocker_count": int(status_unlock_sequence.get("open_blocker_count") or 0),
+        },
+        "Promo status should mirror the unlock sequence summary.",
+    ))
+    checks.append(verdict(
+        "unlock_sequence_next_action_matches_status",
+        any(action.startswith("Current unlock gate:") and status_unlock_sequence.get("source_path") in action for action in status.get("next_actions") or []),
+        "Promo status next actions should expose the current unlock sequence gate.",
+        expected="Current unlock gate action includes data/promo_unlock_sequence.json",
+        actual=status.get("next_actions") or [],
         severity="medium",
     ))
     refresh_summary = refresh.get("summary") or {}

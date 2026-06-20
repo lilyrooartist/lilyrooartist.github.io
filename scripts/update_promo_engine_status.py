@@ -31,6 +31,7 @@ PROMO_OPERATIONS_PACKET = ROOT / "data" / "promo_operations_packet.json"
 PROMOTION_BLOCKER_LEDGER = ROOT / "data" / "promotion_blocker_ledger.json"
 HUMAN_HANDOFF_PACKET = ROOT / "data" / "human_handoff_packet.json"
 HUMAN_HANDOFF_RESOLUTION_PREVIEW = ROOT / "data" / "human_handoff_resolution_preview.json"
+PROMO_UNLOCK_SEQUENCE = ROOT / "data" / "promo_unlock_sequence.json"
 SCHEDULED_APPROVAL_PACKET = ROOT / "data" / "scheduled_approval_packet.json"
 MANUAL_DISTRIBUTION_PACKET = ROOT / "data" / "manual_distribution_packet.json"
 PUBLISHED_LOG_RECONCILIATION = ROOT / "data" / "published_log_reconciliation.json"
@@ -798,6 +799,7 @@ GENERATED_REFRESH_PATHS = {
     "data/promo_operations_packet.json",
     "data/promo_queue_plan.json",
     "data/promo_refresh_workflow_status.json",
+    "data/promo_unlock_sequence.json",
     "data/promotion_blocker_ledger.json",
     "data/published_log_reconciliation.json",
     "data/scheduled_approval_packet.json",
@@ -1415,6 +1417,55 @@ def handoff_resolution_preview_next_action(state: dict) -> str:
     )
 
 
+def promo_unlock_sequence_state(sequence: dict) -> dict:
+    summary = sequence.get("summary") if isinstance(sequence, dict) else {}
+    summary = summary or {}
+    steps = sequence.get("steps") if isinstance(sequence, dict) else []
+    steps = steps or []
+    current_id = summary.get("current_step_id") or ""
+    current_step = next((step for step in steps if step.get("id") == current_id), steps[0] if steps else {})
+    ready_steps = [step for step in steps if step.get("gate_state") == "ready_for_human_review"]
+    blocked_steps = [
+        step for step in steps
+        if step.get("gate_state") in {"blocked", "blocked_until_input", "preview_ready_with_blocker_warning"}
+    ]
+    return {
+        "source_path": str(PROMO_UNLOCK_SEQUENCE.relative_to(ROOT)),
+        "available": bool(sequence),
+        "step_count": int_metric(summary.get("step_count")),
+        "ready_for_human_review_count": int_metric(summary.get("ready_for_human_review_count")),
+        "blocked_or_warning_count": int_metric(summary.get("blocked_or_warning_count")),
+        "total_projected_resolution_units": int_metric(summary.get("total_projected_resolution_units")),
+        "open_blocker_count": int_metric(summary.get("open_blocker_count")),
+        "current_step_id": current_id,
+        "current_gate_state": summary.get("current_gate_state") or "",
+        "current_step": current_step,
+        "ready_steps": ready_steps,
+        "blocked_or_warning_steps": blocked_steps,
+        "operator_contract": sequence.get("operator_contract") or {},
+    }
+
+
+def promo_unlock_sequence_next_action(state: dict) -> str:
+    if not state.get("available"):
+        return ""
+    current = state.get("current_step") or {}
+    command = ""
+    for item in current.get("commands") or []:
+        if item.get("step") == "preview":
+            command = item.get("command") or ""
+            break
+    return (
+        "Current unlock gate: "
+        + f"{current.get('phase') or state.get('current_step_id')} "
+        + f"({state.get('current_gate_state')}); "
+        + f"{int_metric(state.get('ready_for_human_review_count'))} ready, "
+        + f"{int_metric(state.get('blocked_or_warning_count'))} blocked/warning"
+        + (f"; preview {command}" if command else "")
+        + f"; see {state.get('source_path')}."
+    )
+
+
 def manual_distribution_state(packet: dict) -> dict:
     summary = packet.get("summary") if isinstance(packet, dict) else {}
     summary = summary or {}
@@ -1690,6 +1741,7 @@ def build_status():
     promotion_blockers = read_json(PROMOTION_BLOCKER_LEDGER, {})
     human_handoff = read_json(HUMAN_HANDOFF_PACKET, {})
     handoff_resolution_preview = read_json(HUMAN_HANDOFF_RESOLUTION_PREVIEW, {})
+    promo_unlock_sequence = read_json(PROMO_UNLOCK_SEQUENCE, {})
     scheduled_approval = read_json(SCHEDULED_APPROVAL_PACKET, {})
     manual_distribution = read_json(MANUAL_DISTRIBUTION_PACKET, {})
     published_log_reconciliation = read_json(PUBLISHED_LOG_RECONCILIATION, {})
@@ -1810,6 +1862,7 @@ def build_status():
     unlock_impact = blocker_unlock_impact(promotion_blockers)
     operator_docket = operator_docket_state(human_handoff)
     handoff_preview = handoff_resolution_preview_state(handoff_resolution_preview)
+    unlock_sequence = promo_unlock_sequence_state(promo_unlock_sequence)
     manual_distribution = manual_distribution_state(manual_distribution)
     published_log_reconciliation = published_log_reconciliation_state(published_log_reconciliation)
     operator_first_step = operator_docket.get("first_ready_step") or {}
@@ -1833,6 +1886,7 @@ def build_status():
     store_verification_action = store_verification_next_action(store_verification)
     refresh_automation_action = refresh_automation_next_action(refresh_automation)
     handoff_preview_action = handoff_resolution_preview_next_action(handoff_preview)
+    unlock_sequence_action = promo_unlock_sequence_next_action(unlock_sequence)
     if execution_state["platform_fix_needed_count"]:
         platforms = ", ".join(sorted({
             item.get("platform", "Social")
@@ -1866,6 +1920,8 @@ def build_status():
         all_actions.insert(0, refresh_automation_action)
     if handoff_preview_action and handoff_preview_action not in all_actions:
         all_actions.insert(0, handoff_preview_action)
+    if unlock_sequence_action and unlock_sequence_action not in all_actions:
+        all_actions.insert(0, unlock_sequence_action)
     if operational_next_action_text:
         all_actions = [action for action in all_actions if action != operational_next_action_text]
         all_actions.insert(0, operational_next_action_text)
@@ -1883,6 +1939,7 @@ def build_status():
             "promotion_blocker_ledger": str(PROMOTION_BLOCKER_LEDGER.relative_to(ROOT)),
             "human_handoff_packet": str(HUMAN_HANDOFF_PACKET.relative_to(ROOT)),
             "human_handoff_resolution_preview": str(HUMAN_HANDOFF_RESOLUTION_PREVIEW.relative_to(ROOT)),
+            "promo_unlock_sequence": str(PROMO_UNLOCK_SEQUENCE.relative_to(ROOT)),
             "manual_distribution_packet": str(MANUAL_DISTRIBUTION_PACKET.relative_to(ROOT)),
             "published_log_reconciliation": str(PUBLISHED_LOG_RECONCILIATION.relative_to(ROOT)),
             "published_log": str(PUBLISHED.relative_to(ROOT)),
@@ -1946,6 +2003,7 @@ def build_status():
             "refresh_automation": refresh_automation,
             "operational_next_action": operational_next_action,
             "unlock_impact": unlock_impact,
+            "promo_unlock_sequence": unlock_sequence,
             "operator_docket": operator_docket,
             "handoff_resolution_preview": handoff_preview,
             "scheduled_approval": {
@@ -1978,6 +2036,7 @@ def build_status():
             "missing_sources": freshness_summary["missing"],
             "operational_next_action": operational_next_action,
             "unlock_impact": unlock_impact,
+            "promo_unlock_sequence": unlock_sequence,
             "operator_docket": operator_docket,
             "handoff_resolution_preview": handoff_preview,
             "manual_distribution": manual_distribution,
