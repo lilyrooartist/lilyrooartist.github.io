@@ -21,6 +21,7 @@ SOCIAL_EXECUTION_SNAPSHOT = ROOT / "data" / "social_execution_snapshot.json"
 SOCIAL_SCHEDULER_DRY_RUN = ROOT / "data" / "social_scheduler_dry_run.json"
 PROMO_REFRESH_RUN = ROOT / "data" / "promo_admin_refresh_run.json"
 PROMO_REFRESH_WORKFLOW_STATUS = ROOT / "data" / "promo_refresh_workflow_status.json"
+PROMO_CONSISTENCY_AUDIT = ROOT / "data" / "promo_consistency_audit.json"
 PROMO_OPERATIONS_PACKET = ROOT / "data" / "promo_operations_packet.json"
 HUMAN_HANDOFF_PACKET = ROOT / "data" / "human_handoff_packet.json"
 PROMOTION_BLOCKER_LEDGER = ROOT / "data" / "promotion_blocker_ledger.json"
@@ -63,6 +64,7 @@ SOCIAL_EXECUTION_RESET = ROOT / "scripts" / "reset_social_execution_state.py"
 PROMO_REFRESH_SCRIPT = ROOT / "scripts" / "refresh_promo_admin.py"
 PROMO_REFRESH_WORKFLOW_CAPTURE = ROOT / "scripts" / "capture_github_workflow_status.py"
 PROMO_REFRESH_WORKFLOW = ROOT / ".github" / "workflows" / "promo-admin-refresh.yml"
+PROMO_CONSISTENCY_SCRIPT = ROOT / "scripts" / "build_promo_consistency_audit.py"
 PROMO_OPERATIONS_SCRIPT = ROOT / "scripts" / "build_promo_operations_packet.py"
 HUMAN_HANDOFF_SCRIPT = ROOT / "scripts" / "build_human_handoff_packet.py"
 PROMOTION_BLOCKER_LEDGER_SCRIPT = ROOT / "scripts" / "build_promotion_blocker_ledger.py"
@@ -75,6 +77,7 @@ MONETIZATION_ACTIVATION_SCRIPT = ROOT / "scripts" / "build_monetization_activati
 BACKLOG_RESCHEDULE_PREVIEW_SCRIPT = ROOT / "scripts" / "build_backlog_reschedule_preview.py"
 MANUAL_METRIC_COLLECTION_SCRIPT = ROOT / "scripts" / "build_manual_metric_collection.py"
 REPORT = ROOT / "admin" / "reports" / "weekly-social-report.md"
+PROMO_CONSISTENCY_REPORT = ROOT / "admin" / "reports" / "promo-consistency-audit.md"
 PROMO_OPERATIONS_REPORT = ROOT / "admin" / "reports" / "promo-operations-packet.md"
 HUMAN_HANDOFF_REPORT = ROOT / "admin" / "reports" / "human-handoff-packet.md"
 PROMOTION_BLOCKER_LEDGER_REPORT = ROOT / "admin" / "reports" / "promotion-blocker-ledger.md"
@@ -275,6 +278,24 @@ def validate_generated_outputs(failures):
             fail("promo_refresh_workflow_status.json missing workflow run status fields", failures)
     else:
         fail("promo_refresh_workflow_status.json missing; run scripts/capture_github_workflow_status.py", failures)
+    if PROMO_CONSISTENCY_AUDIT.exists():
+        consistency = json.loads(PROMO_CONSISTENCY_AUDIT.read_text(encoding="utf-8"))
+        summary = consistency.get("summary") or {}
+        checks = consistency.get("checks") or []
+        source = consistency.get("source") or {}
+        if (
+            consistency.get("safe_mode") is True
+            and summary.get("check_count") == len(checks)
+            and summary.get("passed") + summary.get("failed") == len(checks)
+            and summary.get("status") in {"pass", "fail"}
+            and all(check.get("name") and check.get("status") in {"pass", "fail"} and check.get("detail") for check in checks)
+            and {"promo_engine_status", "promo_operations_packet", "promotion_blocker_ledger", "human_handoff_packet", "social_execution_snapshot", "social_scheduler_dry_run"} <= set(source)
+        ):
+            ok(f"promo consistency audit runs {len(checks)} cross-surface check(s)")
+        else:
+            fail("promo_consistency_audit.json missing safe cross-surface checks", failures)
+    else:
+        fail("promo_consistency_audit.json missing; run scripts/build_promo_consistency_audit.py", failures)
     if PROMO_OPERATIONS_PACKET.exists():
         packet = json.loads(PROMO_OPERATIONS_PACKET.read_text(encoding="utf-8"))
         summary = packet.get("summary") or {}
@@ -1458,6 +1479,14 @@ def validate_generated_outputs(failures):
             fail("check_social_executor_dry_run.py missing dry-run execute verification", failures)
     else:
         fail("check_social_executor_dry_run.py missing", failures)
+    if PROMO_CONSISTENCY_SCRIPT.exists():
+        consistency_text = PROMO_CONSISTENCY_SCRIPT.read_text(encoding="utf-8")
+        if "promo_consistency_audit.json" in consistency_text and "promo-consistency-audit.md" in consistency_text and "promotion_blocker_ledger.json" in consistency_text and "human_handoff_packet.json" in consistency_text and "social_execution_snapshot.json" in consistency_text and "social_scheduler_dry_run.json" in consistency_text and "subprocess" not in consistency_text:
+            ok("promo consistency audit builder is review-only")
+        else:
+            fail("build_promo_consistency_audit.py missing audit outputs or executes commands", failures)
+    else:
+        fail("build_promo_consistency_audit.py missing", failures)
     if PROMO_OPERATIONS_SCRIPT.exists():
         packet_text = PROMO_OPERATIONS_SCRIPT.read_text(encoding="utf-8")
         if "promo_operations_packet.json" in packet_text and "promo-operations-packet.md" in packet_text and "approval_review" in packet_text and "urgency_for" in packet_text and "missing_secrets" in packet_text and "subprocess" not in packet_text:
@@ -1562,6 +1591,14 @@ def validate_generated_outputs(failures):
             fail("social executor missing Facebook reach metric support", failures)
     else:
         fail("social executor Worker missing", failures)
+    if PROMO_CONSISTENCY_REPORT.exists():
+        consistency_report_text = PROMO_CONSISTENCY_REPORT.read_text(encoding="utf-8")
+        if "Promo Consistency Audit" in consistency_report_text and "Checks" in consistency_report_text and "Guardrails" in consistency_report_text:
+            ok("promo consistency markdown report present")
+        else:
+            fail("promo-consistency-audit.md missing expected sections", failures)
+    else:
+        fail("promo-consistency-audit.md missing", failures)
     if PROMO_OPERATIONS_REPORT.exists():
         report_text = PROMO_OPERATIONS_REPORT.read_text(encoding="utf-8")
         if "Promo Operations Packet" in report_text and "Top Actions" in report_text:

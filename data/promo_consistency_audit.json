@@ -1,0 +1,194 @@
+{
+  "generated_at": "2026-06-20T03:00:43.752000Z",
+  "safe_mode": true,
+  "summary": {
+    "check_count": 16,
+    "passed": 16,
+    "failed": 0,
+    "high_failed": 0,
+    "medium_failed": 0,
+    "status": "pass"
+  },
+  "checks": [
+    {
+      "name": "ledger_open_count_matches_rows",
+      "status": "pass",
+      "severity": "ok",
+      "detail": "Blocker ledger summary should match row count.",
+      "expected": 12,
+      "actual": 12
+    },
+    {
+      "name": "ledger_category_total_matches_rows",
+      "status": "pass",
+      "severity": "ok",
+      "detail": "Blocker category counts should account for every blocker row.",
+      "expected": 12,
+      "actual": 12
+    },
+    {
+      "name": "status_open_actions_match_operations",
+      "status": "pass",
+      "severity": "ok",
+      "detail": "Promo status open action count should mirror the operations packet.",
+      "expected": 18,
+      "actual": 18
+    },
+    {
+      "name": "approval_counts_match",
+      "status": "pass",
+      "severity": "ok",
+      "detail": "Scheduled approval packet should match approval blockers in the ledger.",
+      "expected": 3,
+      "actual": 3
+    },
+    {
+      "name": "executor_approval_count_matches_scheduled_packet",
+      "status": "pass",
+      "severity": "ok",
+      "detail": "Executor approval-needed count should match the scheduled approval packet.",
+      "expected": 3,
+      "actual": 3
+    },
+    {
+      "name": "platform_repair_count_matches_ledger",
+      "status": "pass",
+      "severity": "ok",
+      "detail": "Platform repair packet should match platform repair blockers in the ledger.",
+      "expected": 1,
+      "actual": 1
+    },
+    {
+      "name": "executor_platform_fix_count_matches_platform_packet",
+      "status": "pass",
+      "severity": "ok",
+      "detail": "Executor platform-fix count should match the platform repair packet.",
+      "expected": 1,
+      "actual": 1
+    },
+    {
+      "name": "scheduler_blocked_matches_executor_attention",
+      "status": "pass",
+      "severity": "ok",
+      "detail": "Scheduler dry-run blocked count should match executor attention count.",
+      "expected": 4,
+      "actual": 4
+    },
+    {
+      "name": "manual_distribution_count_matches_ledger",
+      "status": "pass",
+      "severity": "ok",
+      "detail": "Manual distribution packet should match manual distribution blockers in the ledger.",
+      "expected": 2,
+      "actual": 2
+    },
+    {
+      "name": "manual_distribution_handoff_count_matches_packet",
+      "status": "pass",
+      "severity": "ok",
+      "detail": "Human handoff should include every unlogged manual distribution row.",
+      "expected": 2,
+      "actual": 2
+    },
+    {
+      "name": "manual_metric_platform_count_matches_ledger",
+      "status": "pass",
+      "severity": "ok",
+      "detail": "Manual metric packet platform count should match manual metric blockers.",
+      "expected": 5,
+      "actual": 5
+    },
+    {
+      "name": "manual_metric_handoff_count_matches_packet",
+      "status": "pass",
+      "severity": "ok",
+      "detail": "Human handoff should include every manual metric platform.",
+      "expected": 5,
+      "actual": 5
+    },
+    {
+      "name": "store_checks_match_checked_pending_services",
+      "status": "pass",
+      "severity": "ok",
+      "detail": "Operations store checks should match checked-pending store services.",
+      "expected": 7,
+      "actual": 7
+    },
+    {
+      "name": "handoff_blocker_summary_matches_ledger",
+      "status": "pass",
+      "severity": "ok",
+      "detail": "Human handoff blocker summary should be copied from the blocker ledger.",
+      "expected": 12,
+      "actual": 12
+    },
+    {
+      "name": "handoff_projection_matches_ledger_projection",
+      "status": "pass",
+      "severity": "ok",
+      "detail": "Human handoff next-resolution projection should match the blocker ledger projection.",
+      "expected": {
+        "kind": "checked_scheduled_approval_batch",
+        "label": "Checked scheduled approval batch",
+        "checked_ids": [
+          "FP-AUTO-258",
+          "FP-AUTO-261"
+        ],
+        "blocked_ids_retained": [
+          "FP-AUTO-259"
+        ],
+        "blockers_resolved": 2,
+        "approval_blockers_before": 3,
+        "approval_blockers_after": 1,
+        "auto_rows_unblocked": 1,
+        "manual_rows_unblocked": 1,
+        "effect_count": 2,
+        "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+        "apply_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+        "guardrail": "Human review is still required; blocked review IDs stay excluded from the checked batch."
+      },
+      "actual": {
+        "kind": "checked_scheduled_approval_batch",
+        "label": "Checked scheduled approval batch",
+        "checked_ids": [
+          "FP-AUTO-258",
+          "FP-AUTO-261"
+        ],
+        "blocked_ids_retained": [
+          "FP-AUTO-259"
+        ],
+        "blockers_resolved": 2,
+        "approval_blockers_before": 3,
+        "approval_blockers_after": 1,
+        "auto_rows_unblocked": 1,
+        "manual_rows_unblocked": 1,
+        "effect_count": 2,
+        "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+        "apply_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+        "guardrail": "Human review is still required; blocked review IDs stay excluded from the checked batch."
+      }
+    },
+    {
+      "name": "refresh_run_successful",
+      "status": "pass",
+      "severity": "ok",
+      "detail": "Latest promo admin refresh should have no required or optional failures.",
+      "expected": 0,
+      "actual": 0
+    }
+  ],
+  "source": {
+    "promo_engine_status": "data/promo_engine_status.json",
+    "promo_operations_packet": "data/promo_operations_packet.json",
+    "promotion_blocker_ledger": "data/promotion_blocker_ledger.json",
+    "human_handoff_packet": "data/human_handoff_packet.json",
+    "scheduled_approval_packet": "data/scheduled_approval_packet.json",
+    "platform_repair_status": "data/platform_repair_status.json",
+    "manual_distribution_packet": "data/manual_distribution_packet.json",
+    "manual_metric_collection_packet": "data/manual_metric_collection_packet.json",
+    "store_verification_history": "data/store_verification_history.json",
+    "social_execution_snapshot": "data/social_execution_snapshot.json",
+    "social_scheduler_dry_run": "data/social_scheduler_dry_run.json",
+    "promo_admin_refresh_run": "data/promo_admin_refresh_run.json"
+  }
+}

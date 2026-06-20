@@ -1,6 +1,6 @@
 # Promo Operations Packet - Lily Roo
 
-Generated: 2026-06-20T02:55:11.453955Z
+Generated: 2026-06-20T03:00:43.508399Z
 
 ## Summary
 - Actions: **18**
@@ -77,12 +77,12 @@ Generated: 2026-06-20T02:55:11.453955Z
 - **[medium] Re-check Twelve Dollars on Apple Music**
   - Why: Public store links should be checked until DistroKid exposes them.
   - Detail: Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release.
-  - Latest snapshot checked: `2026-06-20T02:54:57.787987Z`
+  - Latest snapshot checked: `2026-06-20T03:00:29.718815Z`
   - Command: `python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/apple_music_release_snapshot.json'`
 - **[medium] Re-check Twelve Dollars on HyperFollow**
   - Why: Public store links should be checked until DistroKid exposes them.
   - Detail: Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release.
-  - Latest snapshot checked: `2026-06-20T02:54:58.135372Z`
+  - Latest snapshot checked: `2026-06-20T03:00:30.082586Z`
   - Command: `python3 scripts/capture_hyperfollow_store_links.py --url 'https://distrokid.com/hyperfollow/lilyroo/twelve-dollars' --out 'data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json'`
 - **[medium] Re-check Analog Myth on Spotify**
   - Why: Public store links should be checked as the July 1 release approaches.
@@ -92,7 +92,7 @@ Generated: 2026-06-20T02:55:11.453955Z
 - **[medium] Re-check Analog Myth on Apple Music**
   - Why: Public store links should be checked as the July 1 release approaches.
   - Detail: Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release.
-  - Latest snapshot checked: `2026-06-20T02:55:03.296253Z`
+  - Latest snapshot checked: `2026-06-20T03:00:35.236672Z`
   - Command: `python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/apple_music_release_snapshot.json'`
 - **[medium] Re-check Analog Myth on YouTube Music**
   - Why: Public store links should be checked as the July 1 release approaches.
