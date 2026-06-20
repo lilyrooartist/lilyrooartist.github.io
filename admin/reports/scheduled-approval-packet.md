@@ -1,6 +1,6 @@
 # Scheduled Approval Packet - Lily Roo
 
-Generated: 2026-06-20T07:13:21.036212Z
+Generated: 2026-06-20T07:21:52.800301Z
 
 ## Summary
 - Approval blockers: **3**
@@ -36,6 +36,10 @@ Generated: 2026-06-20T07:13:21.036212Z
 Listen on Spotify: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4
   - Asset: https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg
   - Destination links: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi, https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249, https://music.youtube.com/watch?v=vK0mDIW65o4
+  - Destination link evidence:
+    - `verified_local_evidence` https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi: HyperFollow spotify link (data/hyperfollow_store_links_snapshot.json); spotify alignment check: ok (data/first_single_alignment_audit.json)
+    - `verified_local_evidence` https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249: HyperFollow applemusic link (data/hyperfollow_store_links_snapshot.json); HyperFollow itunes link (data/hyperfollow_store_links_snapshot.json); apple_music alignment check: ok (data/first_single_alignment_audit.json); Apple Music release snapshot: I Learned It All in Fifteen Seconds - Single (data/apple_music_release_snapshot.json)
+    - `verified_local_evidence` https://music.youtube.com/watch?v=vK0mDIW65o4: youtube_music alignment check: ok (data/first_single_alignment_audit.json); YouTube Music release snapshot: I Learned It All in Fifteen Seconds - Lily Roo (data/youtube_music_release_snapshot.json)
   - Preview: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 --dry-run`
   - Apply after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 --refresh-admin`
 - **YouTube Community - I Learned It All in Fifteen Seconds** (`FP-AUTO-261`)
@@ -45,6 +49,11 @@ Listen on Spotify: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple
 Stream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube: https://www.youtube.com/@lilyroo.artist | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4
   - Asset: https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg
   - Destination links: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi, https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249, https://www.youtube.com/@lilyroo.artist, https://music.youtube.com/watch?v=vK0mDIW65o4
+  - Destination link evidence:
+    - `verified_local_evidence` https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi: HyperFollow spotify link (data/hyperfollow_store_links_snapshot.json); spotify alignment check: ok (data/first_single_alignment_audit.json)
+    - `verified_local_evidence` https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249: HyperFollow applemusic link (data/hyperfollow_store_links_snapshot.json); HyperFollow itunes link (data/hyperfollow_store_links_snapshot.json); apple_music alignment check: ok (data/first_single_alignment_audit.json); Apple Music release snapshot: I Learned It All in Fifteen Seconds - Single (data/apple_music_release_snapshot.json)
+    - `verified_local_evidence` https://www.youtube.com/@lilyroo.artist: YouTube artist channel snapshot: Lily Roo (data/youtube_title_track_snapshot.json)
+    - `verified_local_evidence` https://music.youtube.com/watch?v=vK0mDIW65o4: youtube_music alignment check: ok (data/first_single_alignment_audit.json); YouTube Music release snapshot: I Learned It All in Fifteen Seconds - Lily Roo (data/youtube_music_release_snapshot.json)
   - Manual dispatch required after approval.
   - Preview: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-261 --dry-run`
   - Apply after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-261 --refresh-admin`
@@ -66,6 +75,10 @@ Stream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: htt
     - `pass` asset_file_present: https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg maps to assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg.
     - `pass` executor_blocker_confirmed: Current executor state is blocked / not_approved.
     - `pass` platform_readiness: Executor readiness snapshot marks platform ready.
+  - Destination link evidence:
+    - `verified_local_evidence` https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi: HyperFollow spotify link (data/hyperfollow_store_links_snapshot.json); spotify alignment check: ok (data/first_single_alignment_audit.json)
+    - `verified_local_evidence` https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249: HyperFollow applemusic link (data/hyperfollow_store_links_snapshot.json); HyperFollow itunes link (data/hyperfollow_store_links_snapshot.json); apple_music alignment check: ok (data/first_single_alignment_audit.json); Apple Music release snapshot: I Learned It All in Fifteen Seconds - Single (data/apple_music_release_snapshot.json)
+    - `verified_local_evidence` https://music.youtube.com/watch?v=vK0mDIW65o4: youtube_music alignment check: ok (data/first_single_alignment_audit.json); YouTube Music release snapshot: I Learned It All in Fifteen Seconds - Lily Roo (data/youtube_music_release_snapshot.json)
   - Approval review status: `checked_batch_ready`
   - Checked batch member: `True`
   - Batch reason: All automated review checks passed.
@@ -84,6 +97,10 @@ Stream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: htt
     - `pass` asset_file_present: https://www.lilyroo.com/assets/ig/01_i_learned_it_all_60s.mp4 maps to assets/ig/01_i_learned_it_all_60s.mp4.
     - `pass` executor_blocker_confirmed: Current executor state is blocked / not_approved.
     - `fail` platform_readiness: Executor readiness snapshot marks platform blocked. Missing secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.
+  - Destination link evidence:
+    - `verified_local_evidence` https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi: HyperFollow spotify link (data/hyperfollow_store_links_snapshot.json); spotify alignment check: ok (data/first_single_alignment_audit.json)
+    - `verified_local_evidence` https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249: HyperFollow applemusic link (data/hyperfollow_store_links_snapshot.json); HyperFollow itunes link (data/hyperfollow_store_links_snapshot.json); apple_music alignment check: ok (data/first_single_alignment_audit.json); Apple Music release snapshot: I Learned It All in Fifteen Seconds - Single (data/apple_music_release_snapshot.json)
+    - `verified_local_evidence` https://music.youtube.com/watch?v=vK0mDIW65o4: youtube_music alignment check: ok (data/first_single_alignment_audit.json); YouTube Music release snapshot: I Learned It All in Fifteen Seconds - Lily Roo (data/youtube_music_release_snapshot.json)
   - Approval review status: `held_by_failed_checks`
   - Checked batch member: `False`
   - Failed checks holding this row:
@@ -104,6 +121,11 @@ Stream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: htt
     - `pass` asset_file_present: https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg maps to assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg.
     - `pass` executor_blocker_confirmed: Current executor state is blocked / not_approved.
     - `pass` platform_readiness: Executor readiness snapshot marks platform ready.
+  - Destination link evidence:
+    - `verified_local_evidence` https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi: HyperFollow spotify link (data/hyperfollow_store_links_snapshot.json); spotify alignment check: ok (data/first_single_alignment_audit.json)
+    - `verified_local_evidence` https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249: HyperFollow applemusic link (data/hyperfollow_store_links_snapshot.json); HyperFollow itunes link (data/hyperfollow_store_links_snapshot.json); apple_music alignment check: ok (data/first_single_alignment_audit.json); Apple Music release snapshot: I Learned It All in Fifteen Seconds - Single (data/apple_music_release_snapshot.json)
+    - `verified_local_evidence` https://www.youtube.com/@lilyroo.artist: YouTube artist channel snapshot: Lily Roo (data/youtube_title_track_snapshot.json)
+    - `verified_local_evidence` https://music.youtube.com/watch?v=vK0mDIW65o4: youtube_music alignment check: ok (data/first_single_alignment_audit.json); YouTube Music release snapshot: I Learned It All in Fifteen Seconds - Lily Roo (data/youtube_music_release_snapshot.json)
   - Approval review status: `checked_batch_ready`
   - Checked batch member: `True`
   - Batch reason: All automated review checks passed.

@@ -13,6 +13,11 @@ ROOT = Path(__file__).resolve().parents[1]
 QUEUE = ROOT / "data" / "scheduled_posts.csv"
 EXECUTIONS = ROOT / "data" / "social_execution_snapshot.json"
 EXECUTOR_READINESS = ROOT / "data" / "executor_readiness_snapshot.json"
+HYPERFOLLOW_SNAPSHOT = ROOT / "data" / "hyperfollow_store_links_snapshot.json"
+ALIGNMENT_AUDIT = ROOT / "data" / "first_single_alignment_audit.json"
+APPLE_MUSIC_SNAPSHOT = ROOT / "data" / "apple_music_release_snapshot.json"
+YOUTUBE_TITLE_TRACK = ROOT / "data" / "youtube_title_track_snapshot.json"
+YOUTUBE_MUSIC_SNAPSHOT = ROOT / "data" / "youtube_music_release_snapshot.json"
 OUT = ROOT / "data" / "scheduled_approval_packet.json"
 REPORT = ROOT / "admin" / "reports" / "scheduled-approval-packet.md"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
@@ -143,7 +148,9 @@ def docket_row(row: dict) -> dict:
         "checked_batch_member": bool(row.get("checked_batch_member")),
         "paste_text": row.get("copy_block") or "",
         "asset_url": row.get("asset_url") or "",
-        "destination_links": links_in_text(row.get("copy_block") or ""),
+        "destination_links": row.get("destination_links") or links_in_text(row.get("copy_block") or ""),
+        "destination_link_audit": row.get("destination_link_audit") or [],
+        "destination_link_audit_summary": row.get("destination_link_audit_summary") or {},
         "failed_review_checks": failed,
         "approval_effect": row.get("approval_effect") or {},
         "preview_command": row.get("approval_preview_command") or "",
@@ -229,6 +236,131 @@ def links_in_text(value: str) -> list[str]:
     return [match.group(0).rstrip(".,);]") for match in URL_RE.finditer(value or "")]
 
 
+def canonical_url(value: str) -> str:
+    parsed = urlparse(value or "")
+    if not parsed.scheme or not parsed.netloc:
+        return value or ""
+    return parsed._replace(query="", fragment="").geturl().rstrip("/")
+
+
+def add_destination_evidence(
+    evidence: dict[str, list[dict]],
+    url: str,
+    *,
+    source: str,
+    label: str,
+    status: str,
+) -> None:
+    if not url:
+        return
+    key = canonical_url(url)
+    item = {"source": source, "label": label, "status": status}
+    evidence.setdefault(key, [])
+    if item not in evidence[key]:
+        evidence[key].append(item)
+
+
+def destination_evidence_index() -> dict[str, list[dict]]:
+    evidence: dict[str, list[dict]] = {}
+
+    hyperfollow = read_json(HYPERFOLLOW_SNAPSHOT, {})
+    for item in hyperfollow.get("links") or []:
+        add_destination_evidence(
+            evidence,
+            item.get("url") or "",
+            source=str(HYPERFOLLOW_SNAPSHOT.relative_to(ROOT)),
+            label=f"HyperFollow {item.get('store') or 'store'} link",
+            status="known_store_link",
+        )
+
+    alignment = read_json(ALIGNMENT_AUDIT, {})
+    for service, item in ((alignment.get("checks") or {}).items()):
+        if isinstance(item, dict):
+            add_destination_evidence(
+                evidence,
+                item.get("url") or "",
+                source=str(ALIGNMENT_AUDIT.relative_to(ROOT)),
+                label=f"{service} alignment check: {item.get('status') or 'unknown'}",
+                status="known_alignment_check",
+            )
+
+    apple = read_json(APPLE_MUSIC_SNAPSHOT, {})
+    add_destination_evidence(
+        evidence,
+        apple.get("release_url") or "",
+        source=str(APPLE_MUSIC_SNAPSHOT.relative_to(ROOT)),
+        label=f"Apple Music release snapshot: {apple.get('collection_name') or 'release'}",
+        status="known_release_snapshot",
+    )
+
+    youtube = read_json(YOUTUBE_TITLE_TRACK, {})
+    add_destination_evidence(
+        evidence,
+        youtube.get("url") or "",
+        source=str(YOUTUBE_TITLE_TRACK.relative_to(ROOT)),
+        label=f"YouTube title-track snapshot: {youtube.get('public_title') or 'title track'}",
+        status="known_release_snapshot",
+    )
+    add_destination_evidence(
+        evidence,
+        youtube.get("author_url") or "",
+        source=str(YOUTUBE_TITLE_TRACK.relative_to(ROOT)),
+        label=f"YouTube artist channel snapshot: {youtube.get('author_name') or 'artist channel'}",
+        status="known_artist_profile",
+    )
+
+    youtube_music = read_json(YOUTUBE_MUSIC_SNAPSHOT, {})
+    youtube_music_label = f"YouTube Music release snapshot: {youtube_music.get('public_title') or 'release'}"
+    add_destination_evidence(
+        evidence,
+        youtube_music.get("release_url") or "",
+        source=str(YOUTUBE_MUSIC_SNAPSHOT.relative_to(ROOT)),
+        label=youtube_music_label,
+        status="known_release_snapshot",
+    )
+    add_destination_evidence(
+        evidence,
+        youtube_music.get("canonical_url") or "",
+        source=str(YOUTUBE_MUSIC_SNAPSHOT.relative_to(ROOT)),
+        label=youtube_music_label,
+        status="known_release_snapshot",
+    )
+
+    return evidence
+
+
+def audit_destination_links(links: list[str], evidence: dict[str, list[dict]]) -> list[dict]:
+    audit = []
+    for url in links:
+        matched = evidence.get(canonical_url(url), [])
+        audit.append({
+            "url": url,
+            "canonical_url": canonical_url(url),
+            "status": "verified_local_evidence" if matched else "needs_manual_review",
+            "evidence": matched,
+            "evidence_count": len(matched),
+            "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed.",
+        })
+    return audit
+
+
+def audit_summary(audit: list[dict]) -> dict:
+    verified = sum(1 for item in audit if item.get("status") == "verified_local_evidence")
+    return {
+        "link_count": len(audit),
+        "verified_local_evidence_count": verified,
+        "needs_manual_review_count": len(audit) - verified,
+        "all_links_have_local_evidence": bool(audit) and verified == len(audit),
+    }
+
+
+def audit_sources_line(audit: dict) -> str:
+    evidence = audit.get("evidence") or []
+    if not evidence:
+        return "no local evidence"
+    return "; ".join(f"{item.get('label')} ({item.get('source')})" for item in evidence)
+
+
 def local_public_path(url: str) -> Path | None:
     parsed = urlparse(url or "")
     if parsed.netloc not in {"www.lilyroo.com", "lilyroo.com", "lilyrooartist.github.io"}:
@@ -310,7 +442,7 @@ def failed_review_checks(checks: list[dict]) -> list[dict]:
     return [item for item in checks if item.get("status") == "fail"]
 
 
-def build_rows(queue: dict[str, dict[str, str]], executions: dict, readiness: dict) -> list[dict]:
+def build_rows(queue: dict[str, dict[str, str]], executions: dict, readiness: dict, evidence: dict[str, list[dict]]) -> list[dict]:
     rows = []
     for item in (executions.get("summary") or {}).get("approval_needed") or []:
         post_id = item.get("post_id") or ""
@@ -318,6 +450,8 @@ def build_rows(queue: dict[str, dict[str, str]], executions: dict, readiness: di
         if not row:
             continue
         media_url = row.get("clip_url") or row.get("imagery_url") or ""
+        destination_links = links_in_text(copy_block(row))
+        link_audit = audit_destination_links(destination_links, evidence)
         checks = review_checks(row, item, readiness)
         review_status = approval_review_status(checks)
         rows.append({
@@ -337,6 +471,9 @@ def build_rows(queue: dict[str, dict[str, str]], executions: dict, readiness: di
             "imagery_url": row.get("imagery_url") or "",
             "clip_url": row.get("clip_url") or "",
             "asset_url": media_url,
+            "destination_links": destination_links,
+            "destination_link_audit": link_audit,
+            "destination_link_audit_summary": audit_summary(link_audit),
             "media_key": row.get("media_key") or "",
             "desired_privacy": row.get("desired_privacy") or "",
             "review_checks": checks,
@@ -402,6 +539,10 @@ def build_markdown(payload: dict) -> str:
             lines.append(f"  - Asset: {item['asset_url']}")
             if item.get("destination_links"):
                 lines.append(f"  - Destination links: {', '.join(item['destination_links'])}")
+            if item.get("destination_link_audit"):
+                lines.append("  - Destination link evidence:")
+                for audit in item["destination_link_audit"]:
+                    lines.append(f"    - `{audit['status']}` {audit['url']}: {audit_sources_line(audit)}")
             if item.get("manual_dispatch_required"):
                 lines.append("  - Manual dispatch required after approval.")
             lines.append(f"  - Preview: `{item['preview_command']}`")
@@ -437,6 +578,10 @@ def build_markdown(payload: dict) -> str:
             lines.append("  - Review checks:")
             for item in row["review_checks"]:
                 lines.append(f"    - `{item['status']}` {item['name']}: {item['detail']}")
+        if row.get("destination_link_audit"):
+            lines.append("  - Destination link evidence:")
+            for audit in row["destination_link_audit"]:
+                lines.append(f"    - `{audit['status']}` {audit['url']}: {audit_sources_line(audit)}")
         lines.append(f"  - Approval review status: `{row.get('approval_review_status')}`")
         lines.append(f"  - Checked batch member: `{row.get('checked_batch_member')}`")
         if row.get("failed_review_checks"):
@@ -502,7 +647,8 @@ def main() -> int:
     queue = read_queue()
     executions = read_json(EXECUTIONS, {})
     readiness = read_json(EXECUTOR_READINESS, {})
-    rows = build_rows(queue, executions, readiness)
+    evidence = destination_evidence_index()
+    rows = build_rows(queue, executions, readiness, evidence)
     checked_rows = [row for row in rows if row.get("review_check_passed")]
     blocked_rows = [row for row in rows if not row.get("review_check_passed")]
     review_check_status_counts = {}
@@ -546,6 +692,16 @@ def main() -> int:
             "scheduled_posts": str(QUEUE.relative_to(ROOT)),
             "social_execution_snapshot": str(EXECUTIONS.relative_to(ROOT)),
             "executor_readiness": str(EXECUTOR_READINESS.relative_to(ROOT)),
+            "destination_evidence": [
+                str(path.relative_to(ROOT))
+                for path in [
+                    HYPERFOLLOW_SNAPSHOT,
+                    ALIGNMENT_AUDIT,
+                    APPLE_MUSIC_SNAPSHOT,
+                    YOUTUBE_TITLE_TRACK,
+                    YOUTUBE_MUSIC_SNAPSHOT,
+                ]
+            ],
         },
         "summary": summary,
         "approval_docket": approval_docket(checked_rows, blocked_rows, summary),

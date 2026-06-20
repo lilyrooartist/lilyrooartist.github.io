@@ -1,10 +1,17 @@
 {
-  "generated_at": "2026-06-20T07:13:21.036212Z",
+  "generated_at": "2026-06-20T07:21:52.800301Z",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
     "social_execution_snapshot": "data/social_execution_snapshot.json",
-    "executor_readiness": "data/executor_readiness_snapshot.json"
+    "executor_readiness": "data/executor_readiness_snapshot.json",
+    "destination_evidence": [
+      "data/hyperfollow_store_links_snapshot.json",
+      "data/first_single_alignment_audit.json",
+      "data/apple_music_release_snapshot.json",
+      "data/youtube_title_track_snapshot.json",
+      "data/youtube_music_release_snapshot.json"
+    ]
   },
   "summary": {
     "approval_blocker_count": 3,
@@ -197,6 +204,81 @@
           "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
           "https://music.youtube.com/watch?v=vK0mDIW65o4"
         ],
+        "destination_link_audit": [
+          {
+            "url": "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+            "canonical_url": "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+            "status": "verified_local_evidence",
+            "evidence": [
+              {
+                "source": "data/hyperfollow_store_links_snapshot.json",
+                "label": "HyperFollow spotify link",
+                "status": "known_store_link"
+              },
+              {
+                "source": "data/first_single_alignment_audit.json",
+                "label": "spotify alignment check: ok",
+                "status": "known_alignment_check"
+              }
+            ],
+            "evidence_count": 2,
+            "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+          },
+          {
+            "url": "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+            "canonical_url": "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+            "status": "verified_local_evidence",
+            "evidence": [
+              {
+                "source": "data/hyperfollow_store_links_snapshot.json",
+                "label": "HyperFollow applemusic link",
+                "status": "known_store_link"
+              },
+              {
+                "source": "data/hyperfollow_store_links_snapshot.json",
+                "label": "HyperFollow itunes link",
+                "status": "known_store_link"
+              },
+              {
+                "source": "data/first_single_alignment_audit.json",
+                "label": "apple_music alignment check: ok",
+                "status": "known_alignment_check"
+              },
+              {
+                "source": "data/apple_music_release_snapshot.json",
+                "label": "Apple Music release snapshot: I Learned It All in Fifteen Seconds - Single",
+                "status": "known_release_snapshot"
+              }
+            ],
+            "evidence_count": 4,
+            "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+          },
+          {
+            "url": "https://music.youtube.com/watch?v=vK0mDIW65o4",
+            "canonical_url": "https://music.youtube.com/watch",
+            "status": "verified_local_evidence",
+            "evidence": [
+              {
+                "source": "data/first_single_alignment_audit.json",
+                "label": "youtube_music alignment check: ok",
+                "status": "known_alignment_check"
+              },
+              {
+                "source": "data/youtube_music_release_snapshot.json",
+                "label": "YouTube Music release snapshot: I Learned It All in Fifteen Seconds - Lily Roo",
+                "status": "known_release_snapshot"
+              }
+            ],
+            "evidence_count": 2,
+            "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+          }
+        ],
+        "destination_link_audit_summary": {
+          "link_count": 3,
+          "verified_local_evidence_count": 3,
+          "needs_manual_review_count": 0,
+          "all_links_have_local_evidence": true
+        },
         "failed_review_checks": [],
         "approval_effect": {
           "field": "approved",
@@ -226,6 +308,95 @@
           "https://www.youtube.com/@lilyroo.artist",
           "https://music.youtube.com/watch?v=vK0mDIW65o4"
         ],
+        "destination_link_audit": [
+          {
+            "url": "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+            "canonical_url": "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+            "status": "verified_local_evidence",
+            "evidence": [
+              {
+                "source": "data/hyperfollow_store_links_snapshot.json",
+                "label": "HyperFollow spotify link",
+                "status": "known_store_link"
+              },
+              {
+                "source": "data/first_single_alignment_audit.json",
+                "label": "spotify alignment check: ok",
+                "status": "known_alignment_check"
+              }
+            ],
+            "evidence_count": 2,
+            "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+          },
+          {
+            "url": "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+            "canonical_url": "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+            "status": "verified_local_evidence",
+            "evidence": [
+              {
+                "source": "data/hyperfollow_store_links_snapshot.json",
+                "label": "HyperFollow applemusic link",
+                "status": "known_store_link"
+              },
+              {
+                "source": "data/hyperfollow_store_links_snapshot.json",
+                "label": "HyperFollow itunes link",
+                "status": "known_store_link"
+              },
+              {
+                "source": "data/first_single_alignment_audit.json",
+                "label": "apple_music alignment check: ok",
+                "status": "known_alignment_check"
+              },
+              {
+                "source": "data/apple_music_release_snapshot.json",
+                "label": "Apple Music release snapshot: I Learned It All in Fifteen Seconds - Single",
+                "status": "known_release_snapshot"
+              }
+            ],
+            "evidence_count": 4,
+            "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+          },
+          {
+            "url": "https://www.youtube.com/@lilyroo.artist",
+            "canonical_url": "https://www.youtube.com/@lilyroo.artist",
+            "status": "verified_local_evidence",
+            "evidence": [
+              {
+                "source": "data/youtube_title_track_snapshot.json",
+                "label": "YouTube artist channel snapshot: Lily Roo",
+                "status": "known_artist_profile"
+              }
+            ],
+            "evidence_count": 1,
+            "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+          },
+          {
+            "url": "https://music.youtube.com/watch?v=vK0mDIW65o4",
+            "canonical_url": "https://music.youtube.com/watch",
+            "status": "verified_local_evidence",
+            "evidence": [
+              {
+                "source": "data/first_single_alignment_audit.json",
+                "label": "youtube_music alignment check: ok",
+                "status": "known_alignment_check"
+              },
+              {
+                "source": "data/youtube_music_release_snapshot.json",
+                "label": "YouTube Music release snapshot: I Learned It All in Fifteen Seconds - Lily Roo",
+                "status": "known_release_snapshot"
+              }
+            ],
+            "evidence_count": 2,
+            "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+          }
+        ],
+        "destination_link_audit_summary": {
+          "link_count": 4,
+          "verified_local_evidence_count": 4,
+          "needs_manual_review_count": 0,
+          "all_links_have_local_evidence": true
+        },
         "failed_review_checks": [],
         "approval_effect": {
           "field": "approved",
@@ -256,6 +427,81 @@
           "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
           "https://music.youtube.com/watch?v=vK0mDIW65o4"
         ],
+        "destination_link_audit": [
+          {
+            "url": "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+            "canonical_url": "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+            "status": "verified_local_evidence",
+            "evidence": [
+              {
+                "source": "data/hyperfollow_store_links_snapshot.json",
+                "label": "HyperFollow spotify link",
+                "status": "known_store_link"
+              },
+              {
+                "source": "data/first_single_alignment_audit.json",
+                "label": "spotify alignment check: ok",
+                "status": "known_alignment_check"
+              }
+            ],
+            "evidence_count": 2,
+            "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+          },
+          {
+            "url": "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+            "canonical_url": "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+            "status": "verified_local_evidence",
+            "evidence": [
+              {
+                "source": "data/hyperfollow_store_links_snapshot.json",
+                "label": "HyperFollow applemusic link",
+                "status": "known_store_link"
+              },
+              {
+                "source": "data/hyperfollow_store_links_snapshot.json",
+                "label": "HyperFollow itunes link",
+                "status": "known_store_link"
+              },
+              {
+                "source": "data/first_single_alignment_audit.json",
+                "label": "apple_music alignment check: ok",
+                "status": "known_alignment_check"
+              },
+              {
+                "source": "data/apple_music_release_snapshot.json",
+                "label": "Apple Music release snapshot: I Learned It All in Fifteen Seconds - Single",
+                "status": "known_release_snapshot"
+              }
+            ],
+            "evidence_count": 4,
+            "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+          },
+          {
+            "url": "https://music.youtube.com/watch?v=vK0mDIW65o4",
+            "canonical_url": "https://music.youtube.com/watch",
+            "status": "verified_local_evidence",
+            "evidence": [
+              {
+                "source": "data/first_single_alignment_audit.json",
+                "label": "youtube_music alignment check: ok",
+                "status": "known_alignment_check"
+              },
+              {
+                "source": "data/youtube_music_release_snapshot.json",
+                "label": "YouTube Music release snapshot: I Learned It All in Fifteen Seconds - Lily Roo",
+                "status": "known_release_snapshot"
+              }
+            ],
+            "evidence_count": 2,
+            "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+          }
+        ],
+        "destination_link_audit_summary": {
+          "link_count": 3,
+          "verified_local_evidence_count": 3,
+          "needs_manual_review_count": 0,
+          "all_links_have_local_evidence": true
+        },
         "failed_review_checks": [
           {
             "name": "platform_readiness",
@@ -592,6 +838,86 @@
       "imagery_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
       "clip_url": "",
       "asset_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
+      "destination_links": [
+        "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+        "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+        "https://music.youtube.com/watch?v=vK0mDIW65o4"
+      ],
+      "destination_link_audit": [
+        {
+          "url": "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+          "canonical_url": "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+          "status": "verified_local_evidence",
+          "evidence": [
+            {
+              "source": "data/hyperfollow_store_links_snapshot.json",
+              "label": "HyperFollow spotify link",
+              "status": "known_store_link"
+            },
+            {
+              "source": "data/first_single_alignment_audit.json",
+              "label": "spotify alignment check: ok",
+              "status": "known_alignment_check"
+            }
+          ],
+          "evidence_count": 2,
+          "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+        },
+        {
+          "url": "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+          "canonical_url": "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+          "status": "verified_local_evidence",
+          "evidence": [
+            {
+              "source": "data/hyperfollow_store_links_snapshot.json",
+              "label": "HyperFollow applemusic link",
+              "status": "known_store_link"
+            },
+            {
+              "source": "data/hyperfollow_store_links_snapshot.json",
+              "label": "HyperFollow itunes link",
+              "status": "known_store_link"
+            },
+            {
+              "source": "data/first_single_alignment_audit.json",
+              "label": "apple_music alignment check: ok",
+              "status": "known_alignment_check"
+            },
+            {
+              "source": "data/apple_music_release_snapshot.json",
+              "label": "Apple Music release snapshot: I Learned It All in Fifteen Seconds - Single",
+              "status": "known_release_snapshot"
+            }
+          ],
+          "evidence_count": 4,
+          "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+        },
+        {
+          "url": "https://music.youtube.com/watch?v=vK0mDIW65o4",
+          "canonical_url": "https://music.youtube.com/watch",
+          "status": "verified_local_evidence",
+          "evidence": [
+            {
+              "source": "data/first_single_alignment_audit.json",
+              "label": "youtube_music alignment check: ok",
+              "status": "known_alignment_check"
+            },
+            {
+              "source": "data/youtube_music_release_snapshot.json",
+              "label": "YouTube Music release snapshot: I Learned It All in Fifteen Seconds - Lily Roo",
+              "status": "known_release_snapshot"
+            }
+          ],
+          "evidence_count": 2,
+          "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+        }
+      ],
+      "destination_link_audit_summary": {
+        "link_count": 3,
+        "verified_local_evidence_count": 3,
+        "needs_manual_review_count": 0,
+        "all_links_have_local_evidence": true
+      },
       "media_key": "i-learned-cover",
       "desired_privacy": "",
       "review_checks": [
@@ -655,6 +981,86 @@
       "imagery_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
       "clip_url": "https://www.lilyroo.com/assets/ig/01_i_learned_it_all_60s.mp4",
       "asset_url": "https://www.lilyroo.com/assets/ig/01_i_learned_it_all_60s.mp4",
+      "destination_links": [
+        "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+        "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+        "https://music.youtube.com/watch?v=vK0mDIW65o4"
+      ],
+      "destination_link_audit": [
+        {
+          "url": "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+          "canonical_url": "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+          "status": "verified_local_evidence",
+          "evidence": [
+            {
+              "source": "data/hyperfollow_store_links_snapshot.json",
+              "label": "HyperFollow spotify link",
+              "status": "known_store_link"
+            },
+            {
+              "source": "data/first_single_alignment_audit.json",
+              "label": "spotify alignment check: ok",
+              "status": "known_alignment_check"
+            }
+          ],
+          "evidence_count": 2,
+          "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+        },
+        {
+          "url": "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+          "canonical_url": "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+          "status": "verified_local_evidence",
+          "evidence": [
+            {
+              "source": "data/hyperfollow_store_links_snapshot.json",
+              "label": "HyperFollow applemusic link",
+              "status": "known_store_link"
+            },
+            {
+              "source": "data/hyperfollow_store_links_snapshot.json",
+              "label": "HyperFollow itunes link",
+              "status": "known_store_link"
+            },
+            {
+              "source": "data/first_single_alignment_audit.json",
+              "label": "apple_music alignment check: ok",
+              "status": "known_alignment_check"
+            },
+            {
+              "source": "data/apple_music_release_snapshot.json",
+              "label": "Apple Music release snapshot: I Learned It All in Fifteen Seconds - Single",
+              "status": "known_release_snapshot"
+            }
+          ],
+          "evidence_count": 4,
+          "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+        },
+        {
+          "url": "https://music.youtube.com/watch?v=vK0mDIW65o4",
+          "canonical_url": "https://music.youtube.com/watch",
+          "status": "verified_local_evidence",
+          "evidence": [
+            {
+              "source": "data/first_single_alignment_audit.json",
+              "label": "youtube_music alignment check: ok",
+              "status": "known_alignment_check"
+            },
+            {
+              "source": "data/youtube_music_release_snapshot.json",
+              "label": "YouTube Music release snapshot: I Learned It All in Fifteen Seconds - Lily Roo",
+              "status": "known_release_snapshot"
+            }
+          ],
+          "evidence_count": 2,
+          "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+        }
+      ],
+      "destination_link_audit_summary": {
+        "link_count": 3,
+        "verified_local_evidence_count": 3,
+        "needs_manual_review_count": 0,
+        "all_links_have_local_evidence": true
+      },
       "media_key": "i-learned-60s",
       "desired_privacy": "PUBLIC_TO_EVERYONE",
       "review_checks": [
@@ -724,6 +1130,101 @@
       "imagery_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
       "clip_url": "",
       "asset_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
+      "destination_links": [
+        "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+        "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+        "https://www.youtube.com/@lilyroo.artist",
+        "https://music.youtube.com/watch?v=vK0mDIW65o4"
+      ],
+      "destination_link_audit": [
+        {
+          "url": "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+          "canonical_url": "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+          "status": "verified_local_evidence",
+          "evidence": [
+            {
+              "source": "data/hyperfollow_store_links_snapshot.json",
+              "label": "HyperFollow spotify link",
+              "status": "known_store_link"
+            },
+            {
+              "source": "data/first_single_alignment_audit.json",
+              "label": "spotify alignment check: ok",
+              "status": "known_alignment_check"
+            }
+          ],
+          "evidence_count": 2,
+          "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+        },
+        {
+          "url": "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+          "canonical_url": "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+          "status": "verified_local_evidence",
+          "evidence": [
+            {
+              "source": "data/hyperfollow_store_links_snapshot.json",
+              "label": "HyperFollow applemusic link",
+              "status": "known_store_link"
+            },
+            {
+              "source": "data/hyperfollow_store_links_snapshot.json",
+              "label": "HyperFollow itunes link",
+              "status": "known_store_link"
+            },
+            {
+              "source": "data/first_single_alignment_audit.json",
+              "label": "apple_music alignment check: ok",
+              "status": "known_alignment_check"
+            },
+            {
+              "source": "data/apple_music_release_snapshot.json",
+              "label": "Apple Music release snapshot: I Learned It All in Fifteen Seconds - Single",
+              "status": "known_release_snapshot"
+            }
+          ],
+          "evidence_count": 4,
+          "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+        },
+        {
+          "url": "https://www.youtube.com/@lilyroo.artist",
+          "canonical_url": "https://www.youtube.com/@lilyroo.artist",
+          "status": "verified_local_evidence",
+          "evidence": [
+            {
+              "source": "data/youtube_title_track_snapshot.json",
+              "label": "YouTube artist channel snapshot: Lily Roo",
+              "status": "known_artist_profile"
+            }
+          ],
+          "evidence_count": 1,
+          "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+        },
+        {
+          "url": "https://music.youtube.com/watch?v=vK0mDIW65o4",
+          "canonical_url": "https://music.youtube.com/watch",
+          "status": "verified_local_evidence",
+          "evidence": [
+            {
+              "source": "data/first_single_alignment_audit.json",
+              "label": "youtube_music alignment check: ok",
+              "status": "known_alignment_check"
+            },
+            {
+              "source": "data/youtube_music_release_snapshot.json",
+              "label": "YouTube Music release snapshot: I Learned It All in Fifteen Seconds - Lily Roo",
+              "status": "known_release_snapshot"
+            }
+          ],
+          "evidence_count": 2,
+          "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+        }
+      ],
+      "destination_link_audit_summary": {
+        "link_count": 4,
+        "verified_local_evidence_count": 4,
+        "needs_manual_review_count": 0,
+        "all_links_have_local_evidence": true
+      },
       "media_key": "i-learned-cover",
       "desired_privacy": "",
       "review_checks": [

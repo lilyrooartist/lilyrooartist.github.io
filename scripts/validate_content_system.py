@@ -926,7 +926,16 @@ def validate_generated_outputs(failures):
             and docket.get("checked_batch_apply_command") == summary.get("checked_batch_apply_command")
             and (docket.get("checked_batch_dry_run_preview") or {}).get("checked_batch_ids") == summary.get("checked_batch_ids")
             and (docket.get("checked_batch_effect") or {}).get("ids") == checked_batch_effect.get("ids")
-            and all(item.get("paste_text") and item.get("asset_url") and item.get("destination_links") and item.get("preview_command") and item.get("apply_command") for item in ready_docket)
+            and all(
+                item.get("paste_text")
+                and item.get("asset_url")
+                and item.get("destination_links")
+                and len(item.get("destination_link_audit") or []) == len(item.get("destination_links") or [])
+                and (item.get("destination_link_audit_summary") or {}).get("all_links_have_local_evidence") is True
+                and item.get("preview_command")
+                and item.get("apply_command")
+                for item in ready_docket
+            )
             and all(item.get("failed_review_checks") for item in held_docket)
             and decision_manifest.get("status") == docket.get("status")
             and decision_manifest.get("ready_ids") == [row.get("id") for row in checked_rows]
@@ -976,6 +985,11 @@ def validate_generated_outputs(failures):
                 and row.get("platform")
                 and row.get("copy_block")
                 and row.get("asset_url")
+                and row.get("destination_links")
+                and len(row.get("destination_link_audit") or []) == len(row.get("destination_links") or [])
+                and (row.get("destination_link_audit_summary") or {}).get("link_count") == len(row.get("destination_links") or [])
+                and (row.get("destination_link_audit_summary") or {}).get("all_links_have_local_evidence") is True
+                and all(item.get("url") and item.get("status") == "verified_local_evidence" and item.get("evidence") for item in row.get("destination_link_audit") or [])
                 and row.get("review_checks")
                 and (row.get("approval_effect") or {}).get("field") == "approved"
                 and (row.get("approval_effect") or {}).get("to") == "yes"
