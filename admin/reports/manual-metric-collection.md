@@ -1,6 +1,6 @@
 # Manual Metric Collection - Lily Roo
 
-Generated: 2026-06-20T06:13:55.035860Z
+Generated: 2026-06-20T06:19:49.528283Z
 
 Pending fields: **8**
 
@@ -43,10 +43,10 @@ You can still run a platform update command directly if you only collect one pla
 - Guardrail: Do not treat private analytics fields as public-capture candidates.
 
 - CSV row `3` `instagram.followers`
-  - Public/source URL: https://www.instagram.com/professional_dashboard/
+  - Public/source URL: https://www.instagram.com/lilyroo.artist/
   - Evidence: Capture the public follower count from the profile page or account dashboard.
 - CSV row `8` `x.followers`
-  - Public/source URL: https://analytics.x.com/
+  - Public/source URL: https://x.com/lilyrooartist
   - Evidence: Capture the public follower count from the profile page or account dashboard.
 
 ### Priority 1: Audience size snapshot
@@ -112,7 +112,7 @@ You can still run a platform update command directly if you only collect one pla
 
 ### instagram
 - Status: `needs_values`; waiting: **2**; ready: **0**
-- Open: https://www.instagram.com/professional_dashboard/
+- Open: https://www.instagram.com/lilyroo.artist/
 - Why: Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page
 - CSV row `3` `followers` current `pending` -> `nonnegative_integer e.g. 123`
   - Enter the current public follower count.
@@ -145,7 +145,7 @@ You can still run a platform update command directly if you only collect one pla
 
 ### x
 - Status: `needs_values`; waiting: **2**; ready: **0**
-- Open: https://analytics.x.com/
+- Open: https://x.com/lilyrooartist
 - Why: X metrics need X_USER_ACCESS_TOKEN with user lookup access.
 - CSV row `8` `followers` current `pending` -> `nonnegative_integer e.g. 123`
   - Enter the current public follower count.
@@ -170,7 +170,7 @@ Command: `python3 scripts/update_manual_social_stats.py facebook.reach_7d=VALUE 
 ## instagram
 
 Source: Instagram Professional Dashboard > Insights
-Open: https://www.instagram.com/professional_dashboard/
+Open: https://www.instagram.com/lilyroo.artist/
 Why: Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page
 
 - CSV row `3` `followers` current `pending` -> `VALUE` (nonnegative_integer; example `123`)
@@ -212,7 +212,7 @@ Command: `python3 scripts/update_manual_social_stats.py tiktok.profile_views_7d=
 ## x
 
 Source: X Analytics or account profile metrics
-Open: https://analytics.x.com/
+Open: https://x.com/lilyrooartist
 Why: X metrics need X_USER_ACCESS_TOKEN with user lookup access.
 
 - CSV row `8` `followers` current `pending` -> `VALUE` (nonnegative_integer; example `123`)

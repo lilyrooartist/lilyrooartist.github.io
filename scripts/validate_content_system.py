@@ -216,6 +216,7 @@ def validate_generated_outputs(failures):
         spotify_metrics = ((platforms.get("spotify") or {}).get("metrics") or {})
         tiktok_metrics = ((platforms.get("tiktok") or {}).get("metrics") or {})
         public_capture = snapshot.get("public_profile_capture") or {}
+        public_capture_platforms = public_capture.get("platforms") or {}
         if platforms:
             ok(f"live social metrics snapshot has {len(platforms)} platforms")
         else:
@@ -229,6 +230,19 @@ def validate_generated_outputs(failures):
             ok("live social metrics captures public Spotify and TikTok profile metrics")
         else:
             fail("live_social_metrics.json missing public Spotify/TikTok profile metric capture", failures)
+        instagram_capture = public_capture_platforms.get("instagram") or {}
+        x_capture = public_capture_platforms.get("x") or {}
+        if (
+            instagram_capture.get("profile_url") == "https://www.instagram.com/lilyroo.artist/"
+            and instagram_capture.get("pending_fields") == ["followers"]
+            and instagram_capture.get("public_capture_status")
+            and x_capture.get("profile_url") == "https://x.com/lilyrooartist"
+            and x_capture.get("pending_fields") == ["followers"]
+            and x_capture.get("public_capture_status")
+        ):
+            ok("live social metrics records unresolved Instagram and X public follower adapter blockers")
+        else:
+            fail("live_social_metrics.json missing Instagram/X public follower adapter blocker evidence", failures)
     else:
         fail("live_social_metrics.json missing; run scripts/capture_live_metrics.py", failures)
     if METRICS_HISTORY.exists():
@@ -1198,6 +1212,21 @@ def validate_generated_outputs(failures):
             ok(f"manual metric collection packet groups {len(platforms)} platform(s)")
         else:
             fail("manual_metric_collection_packet.json missing safe grouped metric collection data", failures)
+        public_backlog_lookup = {
+            (field.get("platform"), field.get("field")): field
+            for field in (public_backlog.get("fields") or [])
+        }
+        instagram_backlog = public_backlog_lookup.get(("instagram", "followers")) or {}
+        x_backlog = public_backlog_lookup.get(("x", "followers")) or {}
+        if (
+            instagram_backlog.get("collection_url") == "https://www.instagram.com/lilyroo.artist/"
+            and instagram_backlog.get("adapter_blocker")
+            and x_backlog.get("collection_url") == "https://x.com/lilyrooartist"
+            and x_backlog.get("adapter_blocker")
+        ):
+            ok("manual metric public backlog points to real profile URLs with adapter blockers")
+        else:
+            fail("manual_metric_collection_packet.json missing real public profile URLs or adapter blockers", failures)
     else:
         fail("manual_metric_collection_packet.json missing; run scripts/build_manual_metric_collection.py", failures)
     if PROMOTION_BLOCKER_LEDGER.exists():
@@ -1959,6 +1988,8 @@ def validate_generated_outputs(failures):
             "public_profile_capture" in live_capture_text
             and "spotify_public_metrics" in live_capture_text
             and "tiktok_public_metrics" in live_capture_text
+            and "instagram_public_metrics" in live_capture_text
+            and "x_public_metrics" in live_capture_text
             and "read_existing_snapshot" in live_capture_text
             and "authenticated_capture_error" in live_capture_text
         ):
@@ -2257,7 +2288,7 @@ def validate_generated_outputs(failures):
         fail("build_backlog_reschedule_preview.py missing", failures)
     if MANUAL_METRIC_COLLECTION_SCRIPT.exists():
         collection_text = MANUAL_METRIC_COLLECTION_SCRIPT.read_text(encoding="utf-8")
-        if "manual_metric_collection_template.csv" in collection_text and "manual_metric_collection_packet.json" in collection_text and "manual-metric-collection.md" in collection_text and "pending_manual_by_platform" in collection_text and "metric_collection_docket" in collection_text and "worksheet_import_manifest" in collection_text and "platform_groups" in collection_text and "priority_batches" in collection_text and "collection_priority" in collection_text and "metric_category" in collection_text and "access_level" in collection_text and "evidence_hint" in collection_text and "collection_url" in collection_text and "--from-live" in collection_text and "collection_mode" in collection_text and "live_import_available_count" in collection_text and "public_metric_capture_backlog" in collection_text and "public_profile_manual_required_count" in collection_text and "ready_to_import_count" in collection_text and "existing_new_values" in collection_text and "value_type" in collection_text and "import_effect" in collection_text and "subprocess" not in collection_text:
+        if "manual_metric_collection_template.csv" in collection_text and "manual_metric_collection_packet.json" in collection_text and "manual-metric-collection.md" in collection_text and "pending_manual_by_platform" in collection_text and "metric_collection_docket" in collection_text and "worksheet_import_manifest" in collection_text and "platform_groups" in collection_text and "priority_batches" in collection_text and "collection_priority" in collection_text and "metric_category" in collection_text and "access_level" in collection_text and "evidence_hint" in collection_text and "collection_url" in collection_text and "PUBLIC_PROFILE_COLLECTION_URLS" in collection_text and "adapter_blocker" in collection_text and "--from-live" in collection_text and "collection_mode" in collection_text and "live_import_available_count" in collection_text and "public_metric_capture_backlog" in collection_text and "public_profile_manual_required_count" in collection_text and "ready_to_import_count" in collection_text and "existing_new_values" in collection_text and "value_type" in collection_text and "import_effect" in collection_text and "subprocess" not in collection_text:
             ok("manual metric collection builder is review-only")
         else:
             fail("build_manual_metric_collection.py missing worksheet outputs or executes commands", failures)

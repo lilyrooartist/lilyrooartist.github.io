@@ -34,6 +34,11 @@ DEFAULT_COLLECTION_URLS = {
     "x": "https://analytics.x.com/",
 }
 
+PUBLIC_PROFILE_COLLECTION_URLS = {
+    ("instagram", "followers"): "https://www.instagram.com/lilyroo.artist/",
+    ("x", "followers"): "https://x.com/lilyrooartist",
+}
+
 LIVE_IMPORT_PREVIEW_COMMAND = "python3 scripts/update_manual_social_stats.py --from-live --dry-run"
 LIVE_IMPORT_COMMAND = "python3 scripts/update_manual_social_stats.py --from-live --refresh-admin"
 WORKSHEET_IMPORT_PREVIEW_COMMAND = "python3 scripts/update_manual_social_stats.py --from-csv --dry-run"
@@ -89,10 +94,12 @@ def current_value(manual: dict, platform: str, field: str) -> str:
     return str(((manual.get(platform) or {}).get(field)) or "")
 
 
-def collection_url(platform: str, manual: dict, live: dict) -> str:
+def collection_url(platform: str, field: str, manual: dict, live: dict) -> str:
+    if (platform, field) in PUBLIC_PROFILE_COLLECTION_URLS:
+        return PUBLIC_PROFILE_COLLECTION_URLS[(platform, field)]
     manual_platform = (manual.get(platform) or {}) if isinstance(manual, dict) else {}
     live_platform = ((live.get("platforms") or {}).get(platform) or {}) if isinstance(live, dict) else {}
-    for key in ("artist_url", "profile_url", "release_url", "provider_url"):
+    for key in ("artist_url", "profile_url", "public_profile_url", "release_url", "provider_url"):
         value = str(manual_platform.get(key) or live_platform.get(key) or "").strip()
         if value:
             return value
@@ -111,6 +118,15 @@ def live_metric_value(live: dict, platform: str, field: str):
         if key in metrics and metrics.get(key) not in (None, ""):
             return metrics.get(key)
     return None
+
+
+def public_capture_status(live: dict, platform: str) -> str:
+    data = ((live.get("public_profile_capture") or {}).get("platforms") or {}).get(platform) or {}
+    status = str(data.get("public_capture_status") or "").strip()
+    if status:
+        return status
+    data = ((live.get("platforms") or {}).get(platform) or {}) if isinstance(live, dict) else {}
+    return str(data.get("public_capture_status") or "").strip()
 
 
 def metric_spec(field: str) -> tuple[str, str, str]:
@@ -143,6 +159,8 @@ def build_rows(status: dict, manual: dict, live: dict, preserved_values: dict[tu
             current = current_value(manual, platform, field)
             value_type, example_value, instruction = metric_spec(field)
             priority, category, access_level, evidence_hint = metric_strategy(field)
+            capture_status = public_capture_status(live, platform) if access_level == "public_profile" else ""
+            adapter_blocker = "" if live_value is not None else capture_status
             rows.append({
                 "platform": platform,
                 "field": field,
@@ -158,7 +176,9 @@ def build_rows(status: dict, manual: dict, live: dict, preserved_values: dict[tu
                 "collection_instruction": instruction,
                 "evidence_hint": evidence_hint,
                 "source_hint": SOURCE_HINTS.get(platform, "Manual platform export"),
-                "collection_url": collection_url(platform, manual, live),
+                "collection_url": collection_url(platform, field, manual, live),
+                "public_capture_status": capture_status,
+                "adapter_blocker": adapter_blocker,
                 "reason": step.get("reason") or "",
                 "update_assignment": f"{platform}.{field}=VALUE",
                 "import_effect": import_effect(platform, field, current),
@@ -188,6 +208,8 @@ def write_csv(rows: list[dict]) -> None:
         "evidence_hint",
         "source_hint",
         "collection_url",
+        "public_capture_status",
+        "adapter_blocker",
         "reason",
         "update_assignment",
         "import_effect",
@@ -247,6 +269,8 @@ def build_packet(rows: list[dict], generated_at: str) -> dict:
                 "example_value": row.get("example_value") or "",
                 "collection_instruction": row.get("collection_instruction") or "",
                 "evidence_hint": row.get("evidence_hint") or "",
+                "public_capture_status": row.get("public_capture_status") or "",
+                "adapter_blocker": row.get("adapter_blocker") or "",
                 "update_assignment": row.get("update_assignment") or "",
                 "import_effect": row.get("import_effect") or "",
                 "csv_row": row.get("csv_row"),
@@ -266,6 +290,8 @@ def build_packet(rows: list[dict], generated_at: str) -> dict:
             "collection_url": row.get("collection_url") or "",
             "collection_instruction": row.get("collection_instruction") or "",
             "evidence_hint": row.get("evidence_hint") or "",
+            "public_capture_status": row.get("public_capture_status") or "",
+            "adapter_blocker": row.get("adapter_blocker") or "",
             "update_assignment": row.get("update_assignment") or "",
             "import_effect": row.get("import_effect") or "",
         })
@@ -330,6 +356,8 @@ def build_public_metric_capture_backlog(rows: list[dict]) -> dict:
                 "collection_url": row.get("collection_url") or "",
                 "source_hint": row.get("source_hint") or "",
                 "evidence_hint": row.get("evidence_hint") or "",
+                "public_capture_status": row.get("public_capture_status") or "",
+                "adapter_blocker": row.get("adapter_blocker") or "",
                 "update_assignment": row.get("update_assignment") or "",
             }
             for row in rows

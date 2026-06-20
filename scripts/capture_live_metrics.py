@@ -18,6 +18,8 @@ OUT = REPO_ROOT / "data" / "live_social_metrics.json"
 DEFAULT_URL = "https://www.lilyroo.com/api/social/metrics"
 SPOTIFY_ARTIST_URL = "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a"
 TIKTOK_PROFILE_URL = "https://www.tiktok.com/@lilyroo930"
+INSTAGRAM_PROFILE_URL = "https://www.instagram.com/lilyroo.artist/"
+X_PROFILE_URL = "https://x.com/lilyrooartist"
 
 
 def load_env(path: Path) -> dict[str, str]:
@@ -184,17 +186,53 @@ def tiktok_public_metrics() -> dict:
     }
 
 
+def unresolved_public_profile_metrics(platform: str, url: str, source: str, field: str, blocker: str) -> dict:
+    status, html, error = fetch_text(url)
+    return {
+        "ok": False,
+        "source": source,
+        "metrics": {},
+        "profile_url": url,
+        "http_status": status,
+        "html_bytes": len(html or ""),
+        "pending_fields": [field],
+        "public_capture_status": error or blocker,
+    }
+
+
+def instagram_public_metrics() -> dict:
+    return unresolved_public_profile_metrics(
+        "instagram",
+        INSTAGRAM_PROFILE_URL,
+        "instagram-public-profile-page",
+        "followers",
+        "Instagram public profile did not expose a stable follower value without authenticated or cookie-backed access.",
+    )
+
+
+def x_public_metrics() -> dict:
+    return unresolved_public_profile_metrics(
+        "x",
+        X_PROFILE_URL,
+        "x-public-profile-page",
+        "followers",
+        "X public profile did not expose a stable numeric follower value; use X API credentials or manual profile review.",
+    )
+
+
 def merge_public_metrics(payload: dict) -> dict:
     platforms = payload.setdefault("platforms", {})
     public_updates = {
         "spotify": spotify_public_metrics(),
         "tiktok": tiktok_public_metrics(),
+        "instagram": instagram_public_metrics(),
+        "x": x_public_metrics(),
     }
     for platform, update in public_updates.items():
         if not update.get("ok"):
             current = platforms.setdefault(platform, {})
-            current.setdefault("public_capture_status", update.get("public_capture_status", "unavailable"))
-            current.setdefault("public_profile_url", update.get("profile_url", ""))
+            current.update({key: value for key, value in update.items() if key != "metrics"})
+            current.setdefault("metrics", {})
             continue
         current = platforms.setdefault(platform, {})
         metrics = current.setdefault("metrics", {})

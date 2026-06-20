@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "updated_at": "2026-06-20T06:13:50.095Z",
+  "updated_at": "2026-06-20T06:19:30.354Z",
   "platforms": {
     "youtube": {
       "ok": false,
@@ -22,7 +22,7 @@
       "provider_name": "Spotify",
       "provider_url": "https://spotify.com",
       "iframe_url": "https://open.spotify.com/embed/album/4Al5eYOqGFMKEES5fDWIfI?utm_source=oembed",
-      "thumbnail_url": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0287c54a775685e36e4f534ad4",
+      "thumbnail_url": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e0287c54a775685e36e4f534ad4",
       "thumbnail_width": 300,
       "thumbnail_height": 300,
       "analytics_status": "Spotify streams, saves, monthly listeners, and artist followers require Spotify for Artists export or a connected analytics source.",
@@ -53,7 +53,15 @@
       "ok": false,
       "reason": "Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page",
       "metrics": {},
-      "status": null
+      "status": null,
+      "source": "instagram-public-profile-page",
+      "profile_url": "https://www.instagram.com/lilyroo.artist/",
+      "http_status": 200,
+      "html_bytes": 709111,
+      "pending_fields": [
+        "followers"
+      ],
+      "public_capture_status": "Instagram public profile did not expose a stable follower value without authenticated or cookie-backed access."
     },
     "facebook": {
       "ok": true,
@@ -73,7 +81,15 @@
       "metrics": {},
       "missing_secrets": [
         "X_USER_ACCESS_TOKEN"
-      ]
+      ],
+      "source": "x-public-profile-page",
+      "profile_url": "https://x.com/lilyrooartist",
+      "http_status": 200,
+      "html_bytes": 64134,
+      "pending_fields": [
+        "followers"
+      ],
+      "public_capture_status": "X public profile did not expose a stable numeric follower value; use X API credentials or manual profile review."
     }
   },
   "capture_status": 200,
@@ -102,9 +118,31 @@
         "http_status": 200,
         "display_name": "lilyroo930",
         "public_capture_status": "ok"
+      },
+      "instagram": {
+        "ok": false,
+        "source": "instagram-public-profile-page",
+        "metrics": {},
+        "profile_url": "https://www.instagram.com/lilyroo.artist/",
+        "http_status": 200,
+        "html_bytes": 709111,
+        "pending_fields": [
+          "followers"
+        ],
+        "public_capture_status": "Instagram public profile did not expose a stable follower value without authenticated or cookie-backed access."
+      },
+      "x": {
+        "ok": false,
+        "source": "x-public-profile-page",
+        "metrics": {},
+        "profile_url": "https://x.com/lilyrooartist",
+        "http_status": 200,
+        "html_bytes": 64134,
+        "pending_fields": [
+          "followers"
+        ],
+        "public_capture_status": "X public profile did not expose a stable numeric follower value; use X API credentials or manual profile review."
       }
     }
-  },
-  "authenticated_capture_error": "Unauthorized",
-  "authenticated_capture_status": 401
+  }
 }
