@@ -51,6 +51,18 @@ METRIC_SPECS = {
     "impressions_7d": ("nonnegative_integer", "123", "Enter impressions for the last 7 days."),
 }
 
+METRIC_STRATEGY = {
+    "followers": (1, "Audience size snapshot", "public_profile", "Capture the public follower count from the profile page or account dashboard."),
+    "artist_followers": (1, "Audience size snapshot", "public_profile", "Capture the public Spotify artist follower count if visible, otherwise use Spotify for Artists."),
+    "monthly_listeners": (1, "Audience size snapshot", "public_profile", "Capture the public Spotify monthly listeners count from the artist profile."),
+    "reach_7d": (2, "Recent discovery and traffic", "private_analytics", "Use the last-7-days reach value from Meta insights."),
+    "profile_visits_7d": (2, "Recent discovery and traffic", "private_analytics", "Use the last-7-days profile visits value from the professional dashboard."),
+    "profile_views_7d": (2, "Recent discovery and traffic", "private_analytics", "Use the last-7-days profile views value from TikTok analytics."),
+    "impressions_7d": (2, "Recent discovery and traffic", "private_analytics", "Use the last-7-days impressions value from X analytics."),
+    "release_streams": (3, "Release depth metrics", "private_analytics", "Use lifetime streams for the promoted release from Spotify for Artists."),
+    "saves": (3, "Release depth metrics", "private_analytics", "Use lifetime saves for the promoted release from Spotify for Artists."),
+}
+
 
 def read_json(path: Path, fallback):
     if not path.exists():
@@ -105,6 +117,10 @@ def metric_spec(field: str) -> tuple[str, str, str]:
     return METRIC_SPECS.get(field, ("nonnegative_number", "123", "Enter the latest metric value."))
 
 
+def metric_strategy(field: str) -> tuple[int, str, str, str]:
+    return METRIC_STRATEGY.get(field, (4, "Other manual metrics", "private_analytics", "Use the linked platform source and record the latest available value."))
+
+
 def import_effect(platform: str, field: str, current: str) -> str:
     return f"update data/manual_social_stats.json {platform}.{field} from {current!r} to the filled new_value"
 
@@ -126,6 +142,7 @@ def build_rows(status: dict, manual: dict, live: dict, preserved_values: dict[tu
             collection_mode = "live_import_available" if live_value is not None else "manual_collection_required"
             current = current_value(manual, platform, field)
             value_type, example_value, instruction = metric_spec(field)
+            priority, category, access_level, evidence_hint = metric_strategy(field)
             rows.append({
                 "platform": platform,
                 "field": field,
@@ -133,9 +150,13 @@ def build_rows(status: dict, manual: dict, live: dict, preserved_values: dict[tu
                 "new_value": preserved_values.get((platform, field), ""),
                 "live_value": "" if live_value is None else str(live_value),
                 "collection_mode": collection_mode,
+                "collection_priority": priority,
+                "metric_category": category,
+                "access_level": access_level,
                 "value_type": value_type,
                 "example_value": example_value,
                 "collection_instruction": instruction,
+                "evidence_hint": evidence_hint,
                 "source_hint": SOURCE_HINTS.get(platform, "Manual platform export"),
                 "collection_url": collection_url(platform, manual, live),
                 "reason": step.get("reason") or "",
@@ -158,9 +179,13 @@ def write_csv(rows: list[dict]) -> None:
         "new_value",
         "live_value",
         "collection_mode",
+        "collection_priority",
+        "metric_category",
+        "access_level",
         "value_type",
         "example_value",
         "collection_instruction",
+        "evidence_hint",
         "source_hint",
         "collection_url",
         "reason",
@@ -207,9 +232,13 @@ def build_packet(rows: list[dict], generated_at: str) -> dict:
                 "new_value": row.get("new_value") or "",
                 "live_value": row.get("live_value") or "",
                 "collection_mode": row.get("collection_mode") or "manual_collection_required",
+                "collection_priority": row.get("collection_priority") or 4,
+                "metric_category": row.get("metric_category") or "",
+                "access_level": row.get("access_level") or "",
                 "value_type": row.get("value_type") or "nonnegative_number",
                 "example_value": row.get("example_value") or "",
                 "collection_instruction": row.get("collection_instruction") or "",
+                "evidence_hint": row.get("evidence_hint") or "",
                 "update_assignment": row.get("update_assignment") or "",
                 "import_effect": row.get("import_effect") or "",
                 "csv_row": row.get("csv_row"),
@@ -222,9 +251,13 @@ def build_packet(rows: list[dict], generated_at: str) -> dict:
             "new_value": row.get("new_value") or "",
             "ready_to_import": bool(row.get("ready_to_import")),
             "collection_mode": row.get("collection_mode") or "manual_collection_required",
+            "collection_priority": row.get("collection_priority") or 4,
+            "metric_category": row.get("metric_category") or "",
+            "access_level": row.get("access_level") or "",
             "source_hint": row.get("source_hint") or "",
             "collection_url": row.get("collection_url") or "",
             "collection_instruction": row.get("collection_instruction") or "",
+            "evidence_hint": row.get("evidence_hint") or "",
             "update_assignment": row.get("update_assignment") or "",
             "import_effect": row.get("import_effect") or "",
         })
@@ -238,6 +271,7 @@ def build_packet(rows: list[dict], generated_at: str) -> dict:
             group["ready_to_import_count"] += 1
     platforms = list(by_platform.values())
     docket = build_collection_docket(platforms, ready_rows)
+    priority_batches = build_priority_batches(rows)
     return {
         "generated_at": generated_at,
         "safe_mode": True,
@@ -255,6 +289,9 @@ def build_packet(rows: list[dict], generated_at: str) -> dict:
             "ready_to_import_count": len(ready_rows),
             "preserved_new_value_count": len(ready_rows),
             "platform_count": len(platforms),
+            "priority_batch_count": len(priority_batches),
+            "public_profile_field_count": len([row for row in rows if row.get("access_level") == "public_profile"]),
+            "private_analytics_field_count": len([row for row in rows if row.get("access_level") == "private_analytics"]),
             "csv_path": str(OUT_CSV.relative_to(ROOT)),
             "report_path": str(OUT_MD.relative_to(ROOT)),
             "live_import_preview_command": LIVE_IMPORT_PREVIEW_COMMAND,
@@ -263,9 +300,61 @@ def build_packet(rows: list[dict], generated_at: str) -> dict:
             "worksheet_import_command": WORKSHEET_IMPORT_COMMAND,
         },
         "metric_collection_docket": docket,
+        "priority_batches": priority_batches,
         "platforms": platforms,
         "rows": rows,
     }
+
+
+def build_priority_batches(rows: list[dict]) -> list[dict]:
+    batches = {}
+    for row in rows:
+        priority = int(row.get("collection_priority") or 4)
+        category = row.get("metric_category") or "Other manual metrics"
+        key = (priority, category)
+        batch = batches.setdefault(key, {
+            "priority": priority,
+            "label": category,
+            "status": "needs_values",
+            "field_count": 0,
+            "waiting_count": 0,
+            "ready_to_import_count": 0,
+            "platforms": [],
+            "access_levels": [],
+            "csv_rows": [],
+            "fields": [],
+            "worksheet_import_preview_command": WORKSHEET_IMPORT_PREVIEW_COMMAND,
+            "worksheet_import_command": WORKSHEET_IMPORT_COMMAND,
+        })
+        batch["field_count"] += 1
+        batch["csv_rows"].append(row.get("csv_row"))
+        if row.get("platform") not in batch["platforms"]:
+            batch["platforms"].append(row.get("platform"))
+        if row.get("access_level") not in batch["access_levels"]:
+            batch["access_levels"].append(row.get("access_level"))
+        field_payload = {
+            "platform": row.get("platform") or "",
+            "field": row.get("field") or "",
+            "csv_row": row.get("csv_row"),
+            "ready_to_import": bool(row.get("ready_to_import")),
+            "collection_url": row.get("collection_url") or "",
+            "collection_instruction": row.get("collection_instruction") or "",
+            "evidence_hint": row.get("evidence_hint") or "",
+            "update_assignment": row.get("update_assignment") or "",
+        }
+        batch["fields"].append(field_payload)
+        if row.get("ready_to_import"):
+            batch["ready_to_import_count"] += 1
+        else:
+            batch["waiting_count"] += 1
+    ordered = []
+    for (_priority, _category), batch in sorted(batches.items()):
+        if batch["ready_to_import_count"] and not batch["waiting_count"]:
+            batch["status"] = "ready_to_import"
+        elif batch["ready_to_import_count"]:
+            batch["status"] = "partial"
+        ordered.append(batch)
+    return ordered
 
 
 def build_collection_docket(platforms: list[dict], ready_rows: list[dict]) -> dict:
@@ -283,6 +372,7 @@ def build_collection_docket(platforms: list[dict], ready_rows: list[dict]) -> di
             "source_hint": platform.get("source_hint") or "",
             "collection_url": platform.get("collection_url") or "",
             "reason": platform.get("reason") or "",
+            "priority_summary": sorted({field.get("metric_category") for field in fields if field.get("metric_category")}),
             "fields": fields,
             "collection_packets": platform.get("collection_packets") or [],
             "pending_assignments": platform.get("pending_assignments") or [],
@@ -350,6 +440,19 @@ def build_markdown(rows: list[dict], generated_at: str, packet: dict) -> str:
         f"- Apply worksheet import after review: `{docket.get('worksheet_import_command') or WORKSHEET_IMPORT_COMMAND}`",
         "",
     ])
+    for batch in packet.get("priority_batches") or []:
+        lines.append(f"### Priority {batch.get('priority')}: {batch.get('label')}")
+        lines.append(f"- Status: `{batch.get('status')}`; waiting: **{batch.get('waiting_count', 0)}**; ready: **{batch.get('ready_to_import_count', 0)}**")
+        lines.append(f"- Platforms: `{', '.join(batch.get('platforms') or [])}`")
+        lines.append(f"- Access: `{', '.join(batch.get('access_levels') or [])}`")
+        lines.append(f"- CSV rows: `{', '.join(str(item) for item in batch.get('csv_rows') or [])}`")
+        for field in batch.get("fields") or []:
+            lines.append(f"- Row `{field.get('csv_row')}` `{field.get('platform')}.{field.get('field')}`")
+            if field.get("collection_instruction"):
+                lines.append(f"  - {field['collection_instruction']}")
+            if field.get("evidence_hint"):
+                lines.append(f"  - Evidence: {field['evidence_hint']}")
+        lines.append("")
     for group in docket.get("platform_groups") or []:
         lines.append(f"### {group.get('platform')}")
         lines.append(f"- Status: `{group.get('status')}`; waiting: **{group.get('waiting_count', 0)}**; ready: **{group.get('ready_to_import_count', 0)}**")
@@ -362,6 +465,8 @@ def build_markdown(rows: list[dict], generated_at: str, packet: dict) -> str:
             lines.append(f"- CSV row `{field.get('csv_row')}` `{field.get('field')}` current `{field.get('current_value')}` -> `{target}`")
             if field.get("collection_instruction"):
                 lines.append(f"  - {field['collection_instruction']}")
+            if field.get("evidence_hint"):
+                lines.append(f"  - Evidence: {field['evidence_hint']}")
         if group.get("platform_update_command"):
             lines.append(f"- Platform command: `{group['platform_update_command']}`")
         lines.append("")

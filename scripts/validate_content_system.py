@@ -959,9 +959,13 @@ def validate_generated_outputs(failures):
             "new_value",
             "live_value",
             "collection_mode",
+            "collection_priority",
+            "metric_category",
+            "access_level",
             "value_type",
             "example_value",
             "collection_instruction",
+            "evidence_hint",
             "source_hint",
             "collection_url",
             "reason",
@@ -989,16 +993,27 @@ def validate_generated_outputs(failures):
         summary = packet.get("summary") or {}
         platforms = packet.get("platforms") or []
         rows = packet.get("rows") or []
+        priority_batches = packet.get("priority_batches") or []
         live_import_rows = [row for row in rows if row.get("collection_mode") == "live_import_available"]
         manual_rows = [row for row in rows if row.get("collection_mode") != "live_import_available"]
         ready_rows = [row for row in rows if row.get("ready_to_import")]
+        public_profile_rows = [row for row in rows if row.get("access_level") == "public_profile"]
+        private_analytics_rows = [row for row in rows if row.get("access_level") == "private_analytics"]
         docket = packet.get("metric_collection_docket") or {}
         docket_groups = docket.get("platform_groups") or []
         waiting_count = len([row for row in rows if not row.get("ready_to_import")])
+        batch_fields = [
+            field
+            for batch in priority_batches
+            for field in (batch.get("fields") or [])
+        ]
         if (
             packet.get("safe_mode") is True
             and summary.get("pending_field_count") == len(rows)
             and summary.get("platform_count") == len(platforms)
+            and summary.get("priority_batch_count") == len(priority_batches)
+            and summary.get("public_profile_field_count") == len(public_profile_rows)
+            and summary.get("private_analytics_field_count") == len(private_analytics_rows)
             and summary.get("live_import_available_count") == len(live_import_rows)
             and summary.get("manual_collection_required_count") == len(manual_rows)
             and summary.get("ready_to_import_count") == len(ready_rows)
@@ -1021,9 +1036,22 @@ def validate_generated_outputs(failures):
                 and group.get("waiting_count") == len([field for field in group.get("fields") or [] if not field.get("ready_to_import")])
                 and group.get("ready_to_import_count") == len([field for field in group.get("fields") or [] if field.get("ready_to_import")])
                 and group.get("collection_url")
+                and isinstance(group.get("priority_summary"), list)
                 and group.get("worksheet_import_preview_command")
                 and group.get("worksheet_import_command")
                 for group in docket_groups
+            )
+            and priority_batches
+            and [batch.get("priority") for batch in priority_batches] == sorted(batch.get("priority") for batch in priority_batches)
+            and len(batch_fields) == len(rows)
+            and all(
+                batch.get("label")
+                and batch.get("field_count") == len(batch.get("fields") or [])
+                and batch.get("waiting_count") == len([field for field in batch.get("fields") or [] if not field.get("ready_to_import")])
+                and batch.get("ready_to_import_count") == len([field for field in batch.get("fields") or [] if field.get("ready_to_import")])
+                and batch.get("worksheet_import_preview_command") == summary.get("worksheet_import_preview_command")
+                and all(field.get("platform") and field.get("field") and field.get("csv_row") and field.get("evidence_hint") for field in batch.get("fields") or [])
+                for batch in priority_batches
             )
             and all(
                 platform.get("platform")
@@ -1034,8 +1062,8 @@ def validate_generated_outputs(failures):
                 and platform.get("ready_to_import_count") == len([field for field in platform.get("fields") or [] if field.get("ready_to_import")])
                 and len(platform.get("collection_packets") or []) == len(platform.get("fields") or [])
                 and platform.get("pending_assignments")
-                and all(field.get("value_type") and field.get("example_value") and field.get("collection_instruction") and field.get("import_effect") and field.get("csv_row") for field in platform.get("fields") or [])
-                and all(packet.get("csv_row") and "ready_to_import" in packet and packet.get("update_assignment") and packet.get("import_effect") for packet in platform.get("collection_packets") or [])
+                and all(field.get("value_type") and field.get("example_value") and field.get("collection_instruction") and field.get("evidence_hint") and field.get("metric_category") and field.get("access_level") and field.get("import_effect") and field.get("csv_row") for field in platform.get("fields") or [])
+                and all(packet.get("csv_row") and "ready_to_import" in packet and packet.get("update_assignment") and packet.get("import_effect") and packet.get("evidence_hint") and packet.get("access_level") for packet in platform.get("collection_packets") or [])
                 and platform.get("worksheet_import_preview_command")
                 for platform in platforms
             )
@@ -1949,7 +1977,7 @@ def validate_generated_outputs(failures):
         fail("build_backlog_reschedule_preview.py missing", failures)
     if MANUAL_METRIC_COLLECTION_SCRIPT.exists():
         collection_text = MANUAL_METRIC_COLLECTION_SCRIPT.read_text(encoding="utf-8")
-        if "manual_metric_collection_template.csv" in collection_text and "manual_metric_collection_packet.json" in collection_text and "manual-metric-collection.md" in collection_text and "pending_manual_by_platform" in collection_text and "metric_collection_docket" in collection_text and "platform_groups" in collection_text and "collection_url" in collection_text and "--from-live" in collection_text and "collection_mode" in collection_text and "live_import_available_count" in collection_text and "ready_to_import_count" in collection_text and "existing_new_values" in collection_text and "value_type" in collection_text and "import_effect" in collection_text and "subprocess" not in collection_text:
+        if "manual_metric_collection_template.csv" in collection_text and "manual_metric_collection_packet.json" in collection_text and "manual-metric-collection.md" in collection_text and "pending_manual_by_platform" in collection_text and "metric_collection_docket" in collection_text and "platform_groups" in collection_text and "priority_batches" in collection_text and "collection_priority" in collection_text and "metric_category" in collection_text and "access_level" in collection_text and "evidence_hint" in collection_text and "collection_url" in collection_text and "--from-live" in collection_text and "collection_mode" in collection_text and "live_import_available_count" in collection_text and "ready_to_import_count" in collection_text and "existing_new_values" in collection_text and "value_type" in collection_text and "import_effect" in collection_text and "subprocess" not in collection_text:
             ok("manual metric collection builder is review-only")
         else:
             fail("build_manual_metric_collection.py missing worksheet outputs or executes commands", failures)
