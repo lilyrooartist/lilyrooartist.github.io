@@ -42,6 +42,14 @@ def approval_apply_command(post_id: str) -> str:
     return f"python3 scripts/update_scheduled_post_approval.py {post_id} --refresh-admin"
 
 
+def approval_batch_command(rows: list[dict], *, dry_run: bool) -> str:
+    ids = [row.get("id") or "" for row in rows if row.get("id")]
+    if not ids:
+        return ""
+    suffix = " --dry-run" if dry_run else " --refresh-admin"
+    return "python3 scripts/update_scheduled_post_approval.py " + " ".join(ids) + suffix
+
+
 def build_rows(queue: dict[str, dict[str, str]], executions: dict) -> list[dict]:
     rows = []
     for item in (executions.get("summary") or {}).get("approval_needed") or []:
@@ -88,6 +96,8 @@ def build_markdown(payload: dict) -> str:
         f"- Approval blockers: **{summary['approval_blocker_count']}**",
         f"- Auto rows: **{summary['auto_count']}**",
         f"- Manual rows: **{summary['manual_count']}**",
+        f"- Batch preview: `{summary['batch_preview_command']}`" if summary.get("batch_preview_command") else "- Batch preview: none",
+        f"- Batch approve after review: `{summary['batch_apply_command']}`" if summary.get("batch_apply_command") else "- Batch approve after review: none",
         "",
         "## Review Queue",
     ]
@@ -154,6 +164,8 @@ def main() -> int:
     queue = read_queue()
     executions = read_json(EXECUTIONS, {})
     rows = build_rows(queue, executions)
+    batch_preview_command = approval_batch_command(rows, dry_run=True)
+    batch_apply_command = approval_batch_command(rows, dry_run=False)
     payload = {
         "generated_at": now,
         "safe_mode": True,
@@ -167,6 +179,8 @@ def main() -> int:
             "manual_count": sum(1 for row in rows if row.get("execution_mode") == "manual"),
             "preview_command_count": sum(1 for row in rows if row.get("approval_preview_command")),
             "apply_command_count": sum(1 for row in rows if row.get("approval_apply_command")),
+            "batch_preview_command": batch_preview_command,
+            "batch_apply_command": batch_apply_command,
         },
         "rows": rows,
     }
