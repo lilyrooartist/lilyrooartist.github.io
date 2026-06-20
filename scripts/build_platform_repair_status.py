@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 OPERATIONS = ROOT / "data" / "promo_operations_packet.json"
 EXECUTIONS = ROOT / "data" / "social_execution_snapshot.json"
 READINESS = ROOT / "data" / "executor_readiness_snapshot.json"
+TIKTOK_PREFLIGHT = ROOT / "data" / "tiktok_setup_preflight.json"
 OUT = ROOT / "data" / "platform_repair_status.json"
 REPORT = ROOT / "admin" / "reports" / "platform-repair-status.md"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
@@ -184,6 +185,12 @@ def build_markdown(payload: dict) -> str:
             lines.append(f"  - Missing locally: {', '.join(row['local_missing_secrets'])}")
         if row.get("local_secret_source"):
             lines.append(f"  - Local source: `{row['local_secret_source']}`")
+        if row.get("preflight_status"):
+            lines.append(f"  - Setup preflight: `{row['preflight_status']}`; blocked checks: `{row.get('preflight_blocked_count')}`")
+        if row.get("preflight_command"):
+            lines.append(f"  - Rebuild setup preflight: `{row['preflight_command']}`")
+        if row.get("preflight_report"):
+            lines.append(f"  - Preflight report: `{row['preflight_report']}`")
         if row.get("repair_checklist"):
             lines.append("  - Checklist:")
             for item in row["repair_checklist"]:
@@ -226,6 +233,7 @@ def build_status() -> dict:
     operations = read_json(OPERATIONS, {})
     executions = read_json(EXECUTIONS, {})
     readiness = read_json(READINESS, {})
+    tiktok_preflight = read_json(TIKTOK_PREFLIGHT, {})
     execution_by_id = execution_rows(executions)
     rows = []
     for action in operations.get("actions") or []:
@@ -239,6 +247,8 @@ def build_status() -> dict:
         preview_command = action.get("command") or ""
         apply_command = context.get("repair_apply_command") or ""
         checklist = repair_checklist(context, platform_readiness, preview_command, apply_command)
+        preflight = tiktok_preflight if platform_slug(platform) == "tiktok" else {}
+        preflight_summary = preflight.get("summary") or {}
         rows.append({
             "post_id": post_id,
             "platform": platform,
@@ -262,6 +272,10 @@ def build_status() -> dict:
             "local_secret_ready": context.get("local_secret_ready"),
             "local_secret_source": context.get("local_secret_source") or "",
             "public_posting_approved": context.get("public_posting_approved", platform_readiness.get("public_posting_approved")),
+            "preflight_status": preflight_summary.get("status") or "",
+            "preflight_blocked_count": preflight_summary.get("blocked_count"),
+            "preflight_command": "python3 scripts/build_tiktok_setup_preflight.py" if platform_slug(platform) == "tiktok" else "",
+            "preflight_report": str((ROOT / "admin" / "reports" / "tiktok-setup-preflight.md").relative_to(ROOT)) if platform_slug(platform) == "tiktok" else "",
             "repair_checklist": checklist,
             "repair_checklist_blocked_count": sum(1 for item in checklist if item.get("status") == "blocked"),
             "blocked": True,
@@ -284,6 +298,7 @@ def build_status() -> dict:
             "promo_operations_packet": str(OPERATIONS.relative_to(ROOT)),
             "social_executions": str(EXECUTIONS.relative_to(ROOT)),
             "executor_readiness": str(READINESS.relative_to(ROOT)),
+            "tiktok_setup_preflight": str(TIKTOK_PREFLIGHT.relative_to(ROOT)),
         },
         "summary": summary,
         "rows": rows,

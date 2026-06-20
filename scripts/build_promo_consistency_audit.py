@@ -13,6 +13,7 @@ BLOCKER_LEDGER = ROOT / "data" / "promotion_blocker_ledger.json"
 HUMAN_HANDOFF = ROOT / "data" / "human_handoff_packet.json"
 SCHEDULED_APPROVAL = ROOT / "data" / "scheduled_approval_packet.json"
 PLATFORM_REPAIR = ROOT / "data" / "platform_repair_status.json"
+TIKTOK_PREFLIGHT = ROOT / "data" / "tiktok_setup_preflight.json"
 MANUAL_DISTRIBUTION = ROOT / "data" / "manual_distribution_packet.json"
 MANUAL_METRICS = ROOT / "data" / "manual_metric_collection_packet.json"
 STORE_HISTORY = ROOT / "data" / "store_verification_history.json"
@@ -73,6 +74,7 @@ def build_checks() -> dict:
     handoff = read_json(HUMAN_HANDOFF, {})
     scheduled = read_json(SCHEDULED_APPROVAL, {})
     platform = read_json(PLATFORM_REPAIR, {})
+    tiktok_preflight = read_json(TIKTOK_PREFLIGHT, {})
     manual_distribution = read_json(MANUAL_DISTRIBUTION, {})
     manual_metrics = read_json(MANUAL_METRICS, {})
     store = read_json(STORE_HISTORY, {})
@@ -87,6 +89,11 @@ def build_checks() -> dict:
     status_health = status.get("health") or {}
     execution_summary = executions.get("summary") or {}
     scheduler_summary = scheduler.get("summary") or {}
+    preflight_summary = tiktok_preflight.get("summary") or {}
+    tiktok_repair = next(
+        (row for row in platform.get("rows") or [] if str(row.get("platform") or "").lower() == "tiktok"),
+        {},
+    )
     checks = []
 
     ledger_category_total = sum(int(value or 0) for value in (ledger_summary.get("category_counts") or {}).values())
@@ -131,6 +138,24 @@ def build_checks() -> dict:
         int(execution_summary.get("platform_fix_needed_count") or 0),
         int((platform.get("summary") or {}).get("platform_fix_count") or 0),
         "Executor platform-fix count should match the platform repair packet.",
+    ))
+    checks.append(same_value(
+        "tiktok_preflight_status_matches_platform_repair",
+        tiktok_repair.get("preflight_status") or "",
+        preflight_summary.get("status") or "",
+        "TikTok platform repair row should mirror the setup preflight status.",
+    ))
+    checks.append(same_value(
+        "tiktok_preflight_local_missing_matches_platform_repair",
+        sorted(tiktok_repair.get("local_missing_secrets") or []),
+        sorted(preflight_summary.get("local_missing_secrets") or []),
+        "TikTok preflight local missing secrets should match the platform repair row.",
+    ))
+    checks.append(same_value(
+        "tiktok_preflight_worker_missing_matches_platform_repair",
+        sorted(tiktok_repair.get("missing_secrets") or []),
+        sorted(preflight_summary.get("worker_missing_secrets") or []),
+        "TikTok preflight worker missing secrets should match the platform repair row.",
     ))
     checks.append(same_value(
         "scheduler_blocked_matches_executor_attention",
@@ -213,6 +238,7 @@ def build_checks() -> dict:
             "human_handoff_packet": str(HUMAN_HANDOFF.relative_to(ROOT)),
             "scheduled_approval_packet": str(SCHEDULED_APPROVAL.relative_to(ROOT)),
             "platform_repair_status": str(PLATFORM_REPAIR.relative_to(ROOT)),
+            "tiktok_setup_preflight": str(TIKTOK_PREFLIGHT.relative_to(ROOT)),
             "manual_distribution_packet": str(MANUAL_DISTRIBUTION.relative_to(ROOT)),
             "manual_metric_collection_packet": str(MANUAL_METRICS.relative_to(ROOT)),
             "store_verification_history": str(STORE_HISTORY.relative_to(ROOT)),

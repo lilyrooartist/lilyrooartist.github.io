@@ -22,6 +22,7 @@ SOCIAL_SCHEDULER_DRY_RUN = ROOT / "data" / "social_scheduler_dry_run.json"
 PROMO_REFRESH_RUN = ROOT / "data" / "promo_admin_refresh_run.json"
 PROMO_REFRESH_WORKFLOW_STATUS = ROOT / "data" / "promo_refresh_workflow_status.json"
 PROMO_CONSISTENCY_AUDIT = ROOT / "data" / "promo_consistency_audit.json"
+TIKTOK_SETUP_PREFLIGHT = ROOT / "data" / "tiktok_setup_preflight.json"
 PROMO_OPERATIONS_PACKET = ROOT / "data" / "promo_operations_packet.json"
 HUMAN_HANDOFF_PACKET = ROOT / "data" / "human_handoff_packet.json"
 PROMOTION_BLOCKER_LEDGER = ROOT / "data" / "promotion_blocker_ledger.json"
@@ -65,6 +66,7 @@ PROMO_REFRESH_SCRIPT = ROOT / "scripts" / "refresh_promo_admin.py"
 PROMO_REFRESH_WORKFLOW_CAPTURE = ROOT / "scripts" / "capture_github_workflow_status.py"
 PROMO_REFRESH_WORKFLOW = ROOT / ".github" / "workflows" / "promo-admin-refresh.yml"
 PROMO_CONSISTENCY_SCRIPT = ROOT / "scripts" / "build_promo_consistency_audit.py"
+TIKTOK_SETUP_PREFLIGHT_SCRIPT = ROOT / "scripts" / "build_tiktok_setup_preflight.py"
 PROMO_OPERATIONS_SCRIPT = ROOT / "scripts" / "build_promo_operations_packet.py"
 HUMAN_HANDOFF_SCRIPT = ROOT / "scripts" / "build_human_handoff_packet.py"
 PROMOTION_BLOCKER_LEDGER_SCRIPT = ROOT / "scripts" / "build_promotion_blocker_ledger.py"
@@ -78,6 +80,7 @@ BACKLOG_RESCHEDULE_PREVIEW_SCRIPT = ROOT / "scripts" / "build_backlog_reschedule
 MANUAL_METRIC_COLLECTION_SCRIPT = ROOT / "scripts" / "build_manual_metric_collection.py"
 REPORT = ROOT / "admin" / "reports" / "weekly-social-report.md"
 PROMO_CONSISTENCY_REPORT = ROOT / "admin" / "reports" / "promo-consistency-audit.md"
+TIKTOK_SETUP_PREFLIGHT_REPORT = ROOT / "admin" / "reports" / "tiktok-setup-preflight.md"
 PROMO_OPERATIONS_REPORT = ROOT / "admin" / "reports" / "promo-operations-packet.md"
 HUMAN_HANDOFF_REPORT = ROOT / "admin" / "reports" / "human-handoff-packet.md"
 PROMOTION_BLOCKER_LEDGER_REPORT = ROOT / "admin" / "reports" / "promotion-blocker-ledger.md"
@@ -289,13 +292,44 @@ def validate_generated_outputs(failures):
             and summary.get("passed") + summary.get("failed") == len(checks)
             and summary.get("status") in {"pass", "fail"}
             and all(check.get("name") and check.get("status") in {"pass", "fail"} and check.get("detail") for check in checks)
-            and {"promo_engine_status", "promo_operations_packet", "promotion_blocker_ledger", "human_handoff_packet", "social_execution_snapshot", "social_scheduler_dry_run"} <= set(source)
+            and {"promo_engine_status", "promo_operations_packet", "promotion_blocker_ledger", "human_handoff_packet", "social_execution_snapshot", "social_scheduler_dry_run", "tiktok_setup_preflight"} <= set(source)
         ):
             ok(f"promo consistency audit runs {len(checks)} cross-surface check(s)")
         else:
             fail("promo_consistency_audit.json missing safe cross-surface checks", failures)
     else:
         fail("promo_consistency_audit.json missing; run scripts/build_promo_consistency_audit.py", failures)
+    if TIKTOK_SETUP_PREFLIGHT.exists():
+        preflight = json.loads(TIKTOK_SETUP_PREFLIGHT.read_text(encoding="utf-8"))
+        summary = preflight.get("summary") or {}
+        checks = preflight.get("checks") or []
+        source = preflight.get("source") or {}
+        blocked_count = sum(1 for check in checks if check.get("status") == "blocked")
+        check_names = {check.get("name") for check in checks}
+        required_checks = {
+            "local_refresh_credentials",
+            "worker_refresh_credentials",
+            "worker_token_path",
+            "public_posting_approval",
+            "default_privacy",
+            "admin_refresh_after_repair",
+        }
+        required_source = {"local_secret_source", "executor_readiness", "platform_repair_status", "wrangler_config"}
+        if (
+            preflight.get("safe_mode") is True
+            and summary.get("status") in {"ready", "blocked"}
+            and summary.get("check_count") == len(checks)
+            and summary.get("blocked_count") == blocked_count
+            and required_checks <= check_names
+            and required_source <= set(source)
+            and "Secret values" in (preflight.get("redaction") or "")
+            and all(check.get("name") and check.get("status") in {"pass", "blocked", "review", "waiting"} and check.get("detail") for check in checks)
+        ):
+            ok(f"tiktok_setup_preflight.json tracks {len(checks)} safe setup check(s)")
+        else:
+            fail("tiktok_setup_preflight.json missing safe setup preflight checks", failures)
+    else:
+        fail("tiktok_setup_preflight.json missing; run scripts/build_tiktok_setup_preflight.py", failures)
     if PROMO_OPERATIONS_PACKET.exists():
         packet = json.loads(PROMO_OPERATIONS_PACKET.read_text(encoding="utf-8"))
         summary = packet.get("summary") or {}
@@ -483,6 +517,7 @@ def validate_generated_outputs(failures):
             and approval_impact.get("manual_rows_unblocked") == blocker_projection.get("manual_rows_unblocked")
             and any(task.get("phase") == "Manual metrics" and (task.get("impact") or {}).get("pending_assignments") for task in tasks)
             and any(task.get("phase") == "Platform setup" and (task.get("impact") or {}).get("missing_secrets") for task in tasks)
+            and any(task.get("phase") == "Platform setup" and (task.get("impact") or {}).get("platform") == "TikTok" and (task.get("impact") or {}).get("preflight_status") and (task.get("impact") or {}).get("preflight_command") and (task.get("impact") or {}).get("preflight_report") for task in tasks)
         ):
             ok(f"human handoff packet packages {len(tasks)} human task(s)")
         else:
@@ -497,6 +532,10 @@ def validate_generated_outputs(failures):
         platform_actions = [
             action for action in packet.get("actions") or []
             if action.get("kind") == "platform_fix"
+        ]
+        tiktok_rows = [
+            row for row in repair_rows
+            if str(row.get("platform") or "").lower() == "tiktok"
         ]
         if (
             repair_status.get("safe_mode") is True
@@ -515,6 +554,7 @@ def validate_generated_outputs(failures):
                 and all(item.get("id") and item.get("label") and item.get("status") and item.get("detail") for item in row.get("repair_checklist") or [])
                 for row in repair_rows
             )
+            and all(row.get("preflight_status") and row.get("preflight_command") and row.get("preflight_report") for row in tiktok_rows)
         ):
             ok(f"platform repair status tracks {len(repair_rows)} blocked platform repair(s)")
         else:
@@ -1395,6 +1435,7 @@ def validate_generated_outputs(failures):
             "build_monetization_activation_plan.py",
             "build_backlog_reschedule_preview.py",
             "build_platform_repair_status.py",
+            "build_tiktok_setup_preflight.py",
             "build_manual_metric_collection.py",
             "build_promotion_blocker_ledger.py",
             "update_weekly_report.py",
@@ -1481,12 +1522,20 @@ def validate_generated_outputs(failures):
         fail("check_social_executor_dry_run.py missing", failures)
     if PROMO_CONSISTENCY_SCRIPT.exists():
         consistency_text = PROMO_CONSISTENCY_SCRIPT.read_text(encoding="utf-8")
-        if "promo_consistency_audit.json" in consistency_text and "promo-consistency-audit.md" in consistency_text and "promotion_blocker_ledger.json" in consistency_text and "human_handoff_packet.json" in consistency_text and "social_execution_snapshot.json" in consistency_text and "social_scheduler_dry_run.json" in consistency_text and "subprocess" not in consistency_text:
+        if "promo_consistency_audit.json" in consistency_text and "promo-consistency-audit.md" in consistency_text and "promotion_blocker_ledger.json" in consistency_text and "human_handoff_packet.json" in consistency_text and "social_execution_snapshot.json" in consistency_text and "social_scheduler_dry_run.json" in consistency_text and "tiktok_setup_preflight.json" in consistency_text and "subprocess" not in consistency_text:
             ok("promo consistency audit builder is review-only")
         else:
             fail("build_promo_consistency_audit.py missing audit outputs or executes commands", failures)
     else:
         fail("build_promo_consistency_audit.py missing", failures)
+    if TIKTOK_SETUP_PREFLIGHT_SCRIPT.exists():
+        preflight_text = TIKTOK_SETUP_PREFLIGHT_SCRIPT.read_text(encoding="utf-8")
+        if "tiktok_setup_preflight.json" in preflight_text and "tiktok-setup-preflight.md" in preflight_text and "TIKTOK_CLIENT_KEY" in preflight_text and "TIKTOK_PUBLIC_POSTING_APPROVED" in preflight_text and "Secret values" in preflight_text and "subprocess" not in preflight_text:
+            ok("TikTok setup preflight builder is review-only")
+        else:
+            fail("build_tiktok_setup_preflight.py missing preflight outputs or exposes execution/secrets", failures)
+    else:
+        fail("build_tiktok_setup_preflight.py missing", failures)
     if PROMO_OPERATIONS_SCRIPT.exists():
         packet_text = PROMO_OPERATIONS_SCRIPT.read_text(encoding="utf-8")
         if "promo_operations_packet.json" in packet_text and "promo-operations-packet.md" in packet_text and "approval_review" in packet_text and "urgency_for" in packet_text and "missing_secrets" in packet_text and "subprocess" not in packet_text:
@@ -1497,7 +1546,7 @@ def validate_generated_outputs(failures):
         fail("build_promo_operations_packet.py missing", failures)
     if HUMAN_HANDOFF_SCRIPT.exists():
         handoff_text = HUMAN_HANDOFF_SCRIPT.read_text(encoding="utf-8")
-        if "human_handoff_packet.json" in handoff_text and "human-handoff-packet.md" in handoff_text and "promotion_blocker_ledger.json" in handoff_text and "manual_metric_collection_packet.json" in handoff_text and "manual_distribution_packet.json" in handoff_text and "scheduled_approval_packet.json" in handoff_text and "platform_repair_status.json" in handoff_text and "subprocess" not in handoff_text:
+        if "human_handoff_packet.json" in handoff_text and "human-handoff-packet.md" in handoff_text and "promotion_blocker_ledger.json" in handoff_text and "manual_metric_collection_packet.json" in handoff_text and "manual_distribution_packet.json" in handoff_text and "scheduled_approval_packet.json" in handoff_text and "platform_repair_status.json" in handoff_text and "tiktok_setup_preflight.json" in handoff_text and "subprocess" not in handoff_text:
             ok("human handoff packet builder is review-only")
         else:
             fail("build_human_handoff_packet.py missing handoff outputs or executes commands", failures)
@@ -1513,7 +1562,7 @@ def validate_generated_outputs(failures):
         fail("build_promotion_blocker_ledger.py missing", failures)
     if PLATFORM_REPAIR_SCRIPT.exists():
         repair_text = PLATFORM_REPAIR_SCRIPT.read_text(encoding="utf-8")
-        if "platform_repair_status.json" in repair_text and "platform-repair-status.md" in repair_text and "Repair Checklist" in repair_text and "repair_checklist" in repair_text and "checklist_blocked_count" in repair_text and "promo_operations_packet.json" in repair_text and "social_execution_snapshot.json" in repair_text and "executor_readiness_snapshot.json" in repair_text and "subprocess" not in repair_text:
+        if "platform_repair_status.json" in repair_text and "platform-repair-status.md" in repair_text and "Repair Checklist" in repair_text and "repair_checklist" in repair_text and "checklist_blocked_count" in repair_text and "promo_operations_packet.json" in repair_text and "social_execution_snapshot.json" in repair_text and "executor_readiness_snapshot.json" in repair_text and "tiktok_setup_preflight.json" in repair_text and "subprocess" not in repair_text:
             ok("platform repair status builder is review-only")
         else:
             fail("build_platform_repair_status.py missing repair status outputs or executes commands", failures)
@@ -1599,6 +1648,14 @@ def validate_generated_outputs(failures):
             fail("promo-consistency-audit.md missing expected sections", failures)
     else:
         fail("promo-consistency-audit.md missing", failures)
+    if TIKTOK_SETUP_PREFLIGHT_REPORT.exists():
+        preflight_report_text = TIKTOK_SETUP_PREFLIGHT_REPORT.read_text(encoding="utf-8")
+        if "TikTok Setup Preflight" in preflight_report_text and "Checks" in preflight_report_text and "Guardrails" in preflight_report_text:
+            ok("TikTok setup preflight markdown report present")
+        else:
+            fail("tiktok-setup-preflight.md missing expected sections", failures)
+    else:
+        fail("tiktok-setup-preflight.md missing", failures)
     if PROMO_OPERATIONS_REPORT.exists():
         report_text = PROMO_OPERATIONS_REPORT.read_text(encoding="utf-8")
         if "Promo Operations Packet" in report_text and "Top Actions" in report_text:

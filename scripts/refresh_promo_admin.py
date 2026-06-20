@@ -133,6 +133,16 @@ FINALIZE_STEPS = [
         "required": True,
     },
     {
+        "name": "build_tiktok_setup_preflight",
+        "command": ["python3", "scripts/build_tiktok_setup_preflight.py"],
+        "required": True,
+    },
+    {
+        "name": "build_platform_repair_status_with_preflight",
+        "command": ["python3", "scripts/build_platform_repair_status.py"],
+        "required": True,
+    },
+    {
         "name": "build_manual_metric_collection",
         "command": ["python3", "scripts/build_manual_metric_collection.py"],
         "required": True,

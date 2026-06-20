@@ -12,6 +12,7 @@ SCHEDULED_APPROVAL = ROOT / "data" / "scheduled_approval_packet.json"
 MANUAL_DISTRIBUTION = ROOT / "data" / "manual_distribution_packet.json"
 MANUAL_METRICS = ROOT / "data" / "manual_metric_collection_packet.json"
 PLATFORM_REPAIR = ROOT / "data" / "platform_repair_status.json"
+TIKTOK_PREFLIGHT = ROOT / "data" / "tiktok_setup_preflight.json"
 BACKLOG_RESCHEDULE = ROOT / "data" / "backlog_reschedule_preview.json"
 OUT = ROOT / "data" / "human_handoff_packet.json"
 REPORT = ROOT / "admin" / "reports" / "human-handoff-packet.md"
@@ -163,9 +164,27 @@ def manual_metric_tasks(packet: dict) -> list[dict]:
     return tasks
 
 
-def platform_setup_tasks(packet: dict) -> list[dict]:
+def platform_setup_tasks(packet: dict, tiktok_preflight: dict) -> list[dict]:
     tasks = []
+    preflight_summary = tiktok_preflight.get("summary") or {}
     for row in packet.get("rows") or []:
+        is_tiktok = str(row.get("platform") or "").lower() == "tiktok"
+        impact = {
+            "platform": row.get("platform") or "",
+            "missing_secrets": row.get("missing_secrets") or [],
+            "local_missing_secrets": row.get("local_missing_secrets") or [],
+            "public_posting_approved": row.get("public_posting_approved"),
+            "repair_checklist_blocked_count": row.get("repair_checklist_blocked_count") or 0,
+        }
+        if is_tiktok:
+            impact.update({
+                "preflight_status": preflight_summary.get("status") or row.get("preflight_status") or "",
+                "preflight_blocked_count": preflight_summary.get("blocked_count") if preflight_summary.get("blocked_count") is not None else row.get("preflight_blocked_count"),
+                "ready_to_push_worker_secrets": preflight_summary.get("ready_to_push_worker_secrets"),
+                "ready_to_post_publicly": preflight_summary.get("ready_to_post_publicly"),
+                "preflight_report": str((ROOT / "admin" / "reports" / "tiktok-setup-preflight.md").relative_to(ROOT)),
+                "preflight_command": "python3 scripts/build_tiktok_setup_preflight.py",
+            })
         tasks.append(command_task(
             f"platform-setup-{row.get('post_id') or row.get('platform')}",
             f"Repair {row.get('platform') or 'platform'} executor",
@@ -177,14 +196,8 @@ def platform_setup_tasks(packet: dict) -> list[dict]:
             row.get("preview_command") or "",
             row.get("apply_command") or "",
             str(PLATFORM_REPAIR.relative_to(ROOT)),
-            {
-                "platform": row.get("platform") or "",
-                "missing_secrets": row.get("missing_secrets") or [],
-                "local_missing_secrets": row.get("local_missing_secrets") or [],
-                "public_posting_approved": row.get("public_posting_approved"),
-                "repair_checklist_blocked_count": row.get("repair_checklist_blocked_count") or 0,
-            },
-            guardrail="Push worker secrets only after local OAuth/public posting setup is complete.",
+            impact,
+            guardrail="Run the TikTok preflight before pushing secrets; push worker secrets only after local OAuth/public posting setup is complete." if is_tiktok else "Push worker secrets only after local OAuth/public posting setup is complete.",
         ))
     return tasks
 
@@ -298,7 +311,7 @@ def main() -> int:
     tasks = []
     tasks.extend(approval_tasks(read_json(SCHEDULED_APPROVAL, {}), blocker_summary))
     tasks.extend(manual_distribution_tasks(read_json(MANUAL_DISTRIBUTION, {})))
-    tasks.extend(platform_setup_tasks(read_json(PLATFORM_REPAIR, {})))
+    tasks.extend(platform_setup_tasks(read_json(PLATFORM_REPAIR, {}), read_json(TIKTOK_PREFLIGHT, {})))
     tasks.extend(backlog_tasks(read_json(BACKLOG_RESCHEDULE, {})))
     tasks.extend(manual_metric_tasks(read_json(MANUAL_METRICS, {})))
     urgency_order = {"high": 0, "medium": 1, "low": 2}
@@ -320,6 +333,7 @@ def main() -> int:
             "manual_distribution": str(MANUAL_DISTRIBUTION.relative_to(ROOT)),
             "manual_metrics": str(MANUAL_METRICS.relative_to(ROOT)),
             "platform_repair": str(PLATFORM_REPAIR.relative_to(ROOT)),
+            "tiktok_setup_preflight": str(TIKTOK_PREFLIGHT.relative_to(ROOT)),
             "backlog_reschedule": str(BACKLOG_RESCHEDULE.relative_to(ROOT)),
         },
         "summary": {

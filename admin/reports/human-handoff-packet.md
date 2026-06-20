@@ -1,6 +1,6 @@
 # Human Handoff Packet - Lily Roo
 
-Generated: 2026-06-20T03:00:43.727461Z
+Generated: 2026-06-20T03:09:13.380367Z
 
 ## Summary
 - Open handoff tasks: **10**
@@ -21,7 +21,7 @@ Generated: 2026-06-20T03:00:43.727461Z
   - Detail: Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok public posting approval is false. Local secret source is also missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Complete TikTok OAuth/public posting setup locally, then push secrets and refresh Admin.
   - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
   - Apply after review: `python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py`
-  - Guardrail: Push worker secrets only after local OAuth/public posting setup is complete.
+  - Guardrail: Run the TikTok preflight before pushing secrets; push worker secrets only after local OAuth/public posting setup is complete.
 - **Preview approved backlog reschedule** (`backlog-reschedule`)
   - Phase: `Backlog recovery`; owner: `external_platform`; status: `blocked`; urgency: `high`
   - Detail: Known executor/platform blockers must clear before normal apply.

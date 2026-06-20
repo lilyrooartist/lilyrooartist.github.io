@@ -1,0 +1,72 @@
+{
+  "generated_at": "2026-06-20T03:09:13.282974Z",
+  "safe_mode": true,
+  "source": {
+    "local_secret_source": "secrets/social_api.env",
+    "executor_readiness": "data/executor_readiness_snapshot.json",
+    "platform_repair_status": "data/platform_repair_status.json",
+    "wrangler_config": "workers/social-executor/wrangler.jsonc"
+  },
+  "summary": {
+    "status": "blocked",
+    "check_count": 6,
+    "blocked_count": 4,
+    "ready_to_push_worker_secrets": false,
+    "ready_to_post_publicly": false,
+    "local_missing_secrets": [
+      "TIKTOK_CLIENT_KEY",
+      "TIKTOK_CLIENT_SECRET",
+      "TIKTOK_REFRESH_TOKEN"
+    ],
+    "worker_missing_secrets": [
+      "TIKTOK_CLIENT_KEY",
+      "TIKTOK_CLIENT_SECRET",
+      "TIKTOK_REFRESH_TOKEN"
+    ],
+    "public_posting_approved": false,
+    "default_privacy": "PUBLIC_TO_EVERYONE",
+    "push_preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+    "push_apply_command": "",
+    "refresh_command": "python3 scripts/refresh_promo_admin.py",
+    "platform_repair_rows": 1
+  },
+  "checks": [
+    {
+      "name": "local_refresh_credentials",
+      "status": "blocked",
+      "detail": "secrets/social_api.env is missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
+      "command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN"
+    },
+    {
+      "name": "worker_refresh_credentials",
+      "status": "blocked",
+      "detail": "Worker readiness reports missing secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
+      "command": "python3 scripts/capture_executor_readiness.py"
+    },
+    {
+      "name": "worker_token_path",
+      "status": "blocked",
+      "detail": "Worker has neither access token nor refresh credentials.",
+      "command": "python3 scripts/capture_executor_readiness.py"
+    },
+    {
+      "name": "public_posting_approval",
+      "status": "blocked",
+      "detail": "TikTok public posting approval is not enabled.",
+      "command": ""
+    },
+    {
+      "name": "default_privacy",
+      "status": "pass",
+      "detail": "TikTok default privacy is PUBLIC_TO_EVERYONE.",
+      "command": ""
+    },
+    {
+      "name": "admin_refresh_after_repair",
+      "status": "waiting",
+      "detail": "After credentials and public posting approval are fixed, refresh Admin to recapture readiness, execution, blocker, handoff, and consistency state.",
+      "command": "python3 scripts/refresh_promo_admin.py"
+    }
+  ],
+  "redaction": "Secret values are never written to this preflight; only presence booleans are recorded."
+}

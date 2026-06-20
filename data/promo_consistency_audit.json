@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-06-20T03:00:43.752000Z",
+  "generated_at": "2026-06-20T03:09:13.405745Z",
   "safe_mode": true,
   "summary": {
-    "check_count": 16,
-    "passed": 16,
+    "check_count": 19,
+    "passed": 19,
     "failed": 0,
     "high_failed": 0,
     "medium_failed": 0,
@@ -65,6 +65,46 @@
       "detail": "Executor platform-fix count should match the platform repair packet.",
       "expected": 1,
       "actual": 1
+    },
+    {
+      "name": "tiktok_preflight_status_matches_platform_repair",
+      "status": "pass",
+      "severity": "ok",
+      "detail": "TikTok platform repair row should mirror the setup preflight status.",
+      "expected": "blocked",
+      "actual": "blocked"
+    },
+    {
+      "name": "tiktok_preflight_local_missing_matches_platform_repair",
+      "status": "pass",
+      "severity": "ok",
+      "detail": "TikTok preflight local missing secrets should match the platform repair row.",
+      "expected": [
+        "TIKTOK_CLIENT_KEY",
+        "TIKTOK_CLIENT_SECRET",
+        "TIKTOK_REFRESH_TOKEN"
+      ],
+      "actual": [
+        "TIKTOK_CLIENT_KEY",
+        "TIKTOK_CLIENT_SECRET",
+        "TIKTOK_REFRESH_TOKEN"
+      ]
+    },
+    {
+      "name": "tiktok_preflight_worker_missing_matches_platform_repair",
+      "status": "pass",
+      "severity": "ok",
+      "detail": "TikTok preflight worker missing secrets should match the platform repair row.",
+      "expected": [
+        "TIKTOK_CLIENT_KEY",
+        "TIKTOK_CLIENT_SECRET",
+        "TIKTOK_REFRESH_TOKEN"
+      ],
+      "actual": [
+        "TIKTOK_CLIENT_KEY",
+        "TIKTOK_CLIENT_SECRET",
+        "TIKTOK_REFRESH_TOKEN"
+      ]
     },
     {
       "name": "scheduler_blocked_matches_executor_attention",
@@ -184,6 +224,7 @@
     "human_handoff_packet": "data/human_handoff_packet.json",
     "scheduled_approval_packet": "data/scheduled_approval_packet.json",
     "platform_repair_status": "data/platform_repair_status.json",
+    "tiktok_setup_preflight": "data/tiktok_setup_preflight.json",
     "manual_distribution_packet": "data/manual_distribution_packet.json",
     "manual_metric_collection_packet": "data/manual_metric_collection_packet.json",
     "store_verification_history": "data/store_verification_history.json",

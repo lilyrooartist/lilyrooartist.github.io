@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T03:00:43.727461Z",
+  "generated_at": "2026-06-20T03:09:13.380367Z",
   "safe_mode": true,
   "source": {
     "promotion_blocker_ledger": "data/promotion_blocker_ledger.json",
@@ -7,6 +7,7 @@
     "manual_distribution": "data/manual_distribution_packet.json",
     "manual_metrics": "data/manual_metric_collection_packet.json",
     "platform_repair": "data/platform_repair_status.json",
+    "tiktok_setup_preflight": "data/tiktok_setup_preflight.json",
     "backlog_reschedule": "data/backlog_reschedule_preview.json"
   },
   "summary": {
@@ -131,10 +132,16 @@
           "TIKTOK_REFRESH_TOKEN"
         ],
         "public_posting_approved": false,
-        "repair_checklist_blocked_count": 3
+        "repair_checklist_blocked_count": 3,
+        "preflight_status": "blocked",
+        "preflight_blocked_count": 4,
+        "ready_to_push_worker_secrets": false,
+        "ready_to_post_publicly": false,
+        "preflight_report": "admin/reports/tiktok-setup-preflight.md",
+        "preflight_command": "python3 scripts/build_tiktok_setup_preflight.py"
       },
       "links": [],
-      "guardrail": "Push worker secrets only after local OAuth/public posting setup is complete."
+      "guardrail": "Run the TikTok preflight before pushing secrets; push worker secrets only after local OAuth/public posting setup is complete."
     },
     {
       "id": "backlog-reschedule",

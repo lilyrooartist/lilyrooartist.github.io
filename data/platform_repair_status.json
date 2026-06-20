@@ -1,10 +1,11 @@
 {
-  "generated_at": "2026-06-20T03:00:43.652674Z",
+  "generated_at": "2026-06-20T03:09:13.306181Z",
   "safe_mode": true,
   "source": {
     "promo_operations_packet": "data/promo_operations_packet.json",
     "social_executions": "data/social_execution_snapshot.json",
-    "executor_readiness": "data/executor_readiness_snapshot.json"
+    "executor_readiness": "data/executor_readiness_snapshot.json",
+    "tiktok_setup_preflight": "data/tiktok_setup_preflight.json"
   },
   "summary": {
     "platform_fix_count": 1,
@@ -65,6 +66,10 @@
       "local_secret_ready": false,
       "local_secret_source": "secrets/social_api.env",
       "public_posting_approved": false,
+      "preflight_status": "blocked",
+      "preflight_blocked_count": 4,
+      "preflight_command": "python3 scripts/build_tiktok_setup_preflight.py",
+      "preflight_report": "admin/reports/tiktok-setup-preflight.md",
       "repair_checklist": [
         {
           "id": "remote_worker_secrets",

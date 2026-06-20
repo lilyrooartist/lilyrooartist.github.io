@@ -1,6 +1,6 @@
 # Platform Repair Status - Lily Roo
 
-Generated: 2026-06-20T03:00:43.652674Z
+Generated: 2026-06-20T03:09:13.306181Z
 
 ## Summary
 - Platform fixes: **1**
@@ -18,6 +18,9 @@ Generated: 2026-06-20T03:00:43.652674Z
   - Missing secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN
   - Missing locally: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN
   - Local source: `secrets/social_api.env`
+  - Setup preflight: `blocked`; blocked checks: `4`
+  - Rebuild setup preflight: `python3 scripts/build_tiktok_setup_preflight.py`
+  - Preflight report: `admin/reports/tiktok-setup-preflight.md`
   - Checklist:
     - `blocked` Worker secrets: Missing remote worker secret(s): TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Command: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
     - `blocked` Local secret source: secrets/social_api.env is missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.
