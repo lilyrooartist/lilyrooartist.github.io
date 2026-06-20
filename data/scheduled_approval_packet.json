@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T05:53:42.433993Z",
+  "generated_at": "2026-06-20T05:58:26.933528Z",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -111,6 +111,69 @@
           }
         }
       ]
+    },
+    "checked_batch_dry_run_preview": {
+      "status": "ready_for_review",
+      "dry_run": true,
+      "would_write_files": false,
+      "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+      "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+      "checked_batch_ids": [
+        "FP-AUTO-258",
+        "FP-AUTO-261"
+      ],
+      "requested_ids": [
+        "FP-AUTO-258",
+        "FP-AUTO-261"
+      ],
+      "unchecked_ids": [],
+      "row_count": 2,
+      "change_count": 2,
+      "expected_effect": {
+        "row_count": 2,
+        "change_count": 2,
+        "ids": [
+          "FP-AUTO-258",
+          "FP-AUTO-261"
+        ],
+        "effects": [
+          {
+            "id": "FP-AUTO-258",
+            "platform": "Instagram",
+            "execution_mode": "auto",
+            "effect": {
+              "field": "approved",
+              "from": "no",
+              "to": "yes",
+              "changed": true,
+              "summary": "approved 'no' -> 'yes'"
+            }
+          },
+          {
+            "id": "FP-AUTO-261",
+            "platform": "YouTube Community",
+            "execution_mode": "manual",
+            "effect": {
+              "field": "approved",
+              "from": "no",
+              "to": "yes",
+              "changed": true,
+              "summary": "approved 'no' -> 'yes'"
+            }
+          }
+        ]
+      },
+      "output_lines": [
+        "FP-AUTO-258: approved 'no' -> 'yes'",
+        "FP-AUTO-261: approved 'no' -> 'yes'",
+        "Checked batch guard: 2 checked id(s); 2 requested; 0 unchecked; 2 change(s).",
+        "Dry run only; did not update data/scheduled_posts.csv"
+      ],
+      "post_apply_verification": [
+        "python3 scripts/refresh_promo_admin.py",
+        "python3 scripts/validate_content_system.py"
+      ],
+      "guardrail": "This is a computed dry-run preview; approval still requires human review and the --checked-batch apply command."
     }
   },
   "approval_docket": {
@@ -214,6 +277,69 @@
     ],
     "checked_batch_preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
     "checked_batch_apply_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+    "checked_batch_dry_run_preview": {
+      "status": "ready_for_review",
+      "dry_run": true,
+      "would_write_files": false,
+      "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+      "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+      "checked_batch_ids": [
+        "FP-AUTO-258",
+        "FP-AUTO-261"
+      ],
+      "requested_ids": [
+        "FP-AUTO-258",
+        "FP-AUTO-261"
+      ],
+      "unchecked_ids": [],
+      "row_count": 2,
+      "change_count": 2,
+      "expected_effect": {
+        "row_count": 2,
+        "change_count": 2,
+        "ids": [
+          "FP-AUTO-258",
+          "FP-AUTO-261"
+        ],
+        "effects": [
+          {
+            "id": "FP-AUTO-258",
+            "platform": "Instagram",
+            "execution_mode": "auto",
+            "effect": {
+              "field": "approved",
+              "from": "no",
+              "to": "yes",
+              "changed": true,
+              "summary": "approved 'no' -> 'yes'"
+            }
+          },
+          {
+            "id": "FP-AUTO-261",
+            "platform": "YouTube Community",
+            "execution_mode": "manual",
+            "effect": {
+              "field": "approved",
+              "from": "no",
+              "to": "yes",
+              "changed": true,
+              "summary": "approved 'no' -> 'yes'"
+            }
+          }
+        ]
+      },
+      "output_lines": [
+        "FP-AUTO-258: approved 'no' -> 'yes'",
+        "FP-AUTO-261: approved 'no' -> 'yes'",
+        "Checked batch guard: 2 checked id(s); 2 requested; 0 unchecked; 2 change(s).",
+        "Dry run only; did not update data/scheduled_posts.csv"
+      ],
+      "post_apply_verification": [
+        "python3 scripts/refresh_promo_admin.py",
+        "python3 scripts/validate_content_system.py"
+      ],
+      "guardrail": "This is a computed dry-run preview; approval still requires human review and the --checked-batch apply command."
+    },
     "checked_batch_effect": {
       "row_count": 2,
       "change_count": 2,
@@ -380,6 +506,69 @@
           }
         }
       ]
+    },
+    "checked_batch_dry_run_preview": {
+      "status": "ready_for_review",
+      "dry_run": true,
+      "would_write_files": false,
+      "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+      "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+      "checked_batch_ids": [
+        "FP-AUTO-258",
+        "FP-AUTO-261"
+      ],
+      "requested_ids": [
+        "FP-AUTO-258",
+        "FP-AUTO-261"
+      ],
+      "unchecked_ids": [],
+      "row_count": 2,
+      "change_count": 2,
+      "expected_effect": {
+        "row_count": 2,
+        "change_count": 2,
+        "ids": [
+          "FP-AUTO-258",
+          "FP-AUTO-261"
+        ],
+        "effects": [
+          {
+            "id": "FP-AUTO-258",
+            "platform": "Instagram",
+            "execution_mode": "auto",
+            "effect": {
+              "field": "approved",
+              "from": "no",
+              "to": "yes",
+              "changed": true,
+              "summary": "approved 'no' -> 'yes'"
+            }
+          },
+          {
+            "id": "FP-AUTO-261",
+            "platform": "YouTube Community",
+            "execution_mode": "manual",
+            "effect": {
+              "field": "approved",
+              "from": "no",
+              "to": "yes",
+              "changed": true,
+              "summary": "approved 'no' -> 'yes'"
+            }
+          }
+        ]
+      },
+      "output_lines": [
+        "FP-AUTO-258: approved 'no' -> 'yes'",
+        "FP-AUTO-261: approved 'no' -> 'yes'",
+        "Checked batch guard: 2 checked id(s); 2 requested; 0 unchecked; 2 change(s).",
+        "Dry run only; did not update data/scheduled_posts.csv"
+      ],
+      "post_apply_verification": [
+        "python3 scripts/refresh_promo_admin.py",
+        "python3 scripts/validate_content_system.py"
+      ],
+      "guardrail": "This is a computed dry-run preview; approval still requires human review and the --checked-batch apply command."
     },
     "review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
     "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",

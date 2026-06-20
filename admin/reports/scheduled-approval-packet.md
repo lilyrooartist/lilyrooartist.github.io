@@ -1,6 +1,6 @@
 # Scheduled Approval Packet - Lily Roo
 
-Generated: 2026-06-20T05:53:42.433993Z
+Generated: 2026-06-20T05:58:26.933528Z
 
 ## Summary
 - Approval blockers: **3**
@@ -25,6 +25,7 @@ Generated: 2026-06-20T05:53:42.433993Z
 - Held: **1**
 - Checked batch preview: `python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run`
 - Checked batch approve after review: `python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin`
+- Checked batch dry-run result: **2** change(s), **2** reviewed row(s), no files written
 - Decision manifest: **3** reviewed row(s); ready `FP-AUTO-258, FP-AUTO-261`; held `FP-AUTO-259`
 
 ### Ready to Approve

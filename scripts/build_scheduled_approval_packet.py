@@ -93,6 +93,43 @@ def approval_effect_summary(rows: list[dict]) -> dict:
     }
 
 
+def checked_batch_dry_run_preview(checked_rows: list[dict], summary: dict) -> dict:
+    checked_ids = [row.get("id") or "" for row in checked_rows if row.get("id")]
+    effect = summary.get("checked_batch_effect") or {}
+    change_count = int(effect.get("change_count") or 0)
+    output_lines = []
+    for item in effect.get("effects") or []:
+        row_effect = item.get("effect") or {}
+        output_lines.append(
+            f"{item.get('id')}: approved {row_effect.get('from')!r} -> {row_effect.get('to')!r}"
+        )
+    output_lines.extend([
+        "Checked batch guard: "
+        f"{len(checked_ids)} checked id(s); {len(checked_ids)} requested; "
+        f"0 unchecked; {change_count} change(s).",
+        "Dry run only; did not update data/scheduled_posts.csv",
+    ])
+    return {
+        "status": "ready_for_review" if checked_ids else "blocked",
+        "dry_run": True,
+        "would_write_files": False,
+        "command": summary.get("checked_batch_preview_command") or "",
+        "apply_after_review_command": summary.get("checked_batch_apply_command") or "",
+        "checked_batch_ids": checked_ids,
+        "requested_ids": checked_ids,
+        "unchecked_ids": [],
+        "row_count": len(checked_ids),
+        "change_count": change_count,
+        "expected_effect": effect,
+        "output_lines": output_lines,
+        "post_apply_verification": [
+            "python3 scripts/refresh_promo_admin.py",
+            "python3 scripts/validate_content_system.py",
+        ],
+        "guardrail": "This is a computed dry-run preview; approval still requires human review and the --checked-batch apply command.",
+    }
+
+
 def docket_row(row: dict) -> dict:
     failed = row.get("failed_review_checks") or []
     return {
@@ -124,6 +161,7 @@ def approval_docket(checked_rows: list[dict], blocked_rows: list[dict], summary:
         "held": [docket_row(row) for row in blocked_rows],
         "checked_batch_preview_command": summary.get("checked_batch_preview_command") or "",
         "checked_batch_apply_command": summary.get("checked_batch_apply_command") or "",
+        "checked_batch_dry_run_preview": summary.get("checked_batch_dry_run_preview") or {},
         "checked_batch_effect": summary.get("checked_batch_effect") or {},
         "guardrails": [
             "Review paste text, destination links, media, and platform readiness before applying the checked batch.",
@@ -169,6 +207,7 @@ def approval_decision_manifest(checked_rows: list[dict], blocked_rows: list[dict
         "held_ids": [row.get("id") for row in held if row.get("id")],
         "decisions": ready + held,
         "expected_checked_batch_effect": summary.get("checked_batch_effect") or {},
+        "checked_batch_dry_run_preview": summary.get("checked_batch_dry_run_preview") or {},
         "review_command": summary.get("checked_batch_preview_command") or "",
         "apply_after_review_command": summary.get("checked_batch_apply_command") or "",
         "guardrail": "Only ready_to_approve decisions may be applied through --checked-batch; held rows require repair first.",
@@ -349,6 +388,7 @@ def build_markdown(payload: dict) -> str:
         f"- Held: **{docket.get('held_count', 0)}**",
         f"- Checked batch preview: `{docket.get('checked_batch_preview_command') or 'none'}`",
         f"- Checked batch approve after review: `{docket.get('checked_batch_apply_command') or 'none'}`",
+        f"- Checked batch dry-run result: **{(docket.get('checked_batch_dry_run_preview') or {}).get('change_count', 0)}** change(s), **{(docket.get('checked_batch_dry_run_preview') or {}).get('row_count', 0)}** reviewed row(s), no files written",
         f"- Decision manifest: **{len(decision_manifest.get('decisions') or [])}** reviewed row(s); ready `{', '.join(decision_manifest.get('ready_ids') or []) or 'none'}`; held `{', '.join(decision_manifest.get('held_ids') or []) or 'none'}`",
         "",
         "### Ready to Approve",
@@ -498,6 +538,7 @@ def main() -> int:
         "batch_apply_command": batch_apply_command,
         "batch_effect": batch_effect,
     }
+    summary["checked_batch_dry_run_preview"] = checked_batch_dry_run_preview(checked_rows, summary)
     payload = {
         "generated_at": now,
         "safe_mode": True,
