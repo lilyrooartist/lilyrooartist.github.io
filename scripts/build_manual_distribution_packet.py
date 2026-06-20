@@ -192,6 +192,37 @@ def manual_distribution_docket(rows: list[dict], summary: dict) -> dict:
     }
 
 
+def manual_approval_docket(runway: dict, rows: list[dict]) -> dict:
+    docket = runway.get("manual_approval_docket") or {}
+    ready_ids = docket.get("ready_ids") or []
+    blocked_ids = docket.get("blocked_ids") or []
+    rows_by_id = {row.get("id"): row for row in rows if row.get("id")}
+    ready_rows = [
+        {
+            "id": post_id,
+            "release": rows_by_id.get(post_id, {}).get("release") or "",
+            "platform": rows_by_id.get(post_id, {}).get("platform") or "",
+            "distribution_status": rows_by_id.get(post_id, {}).get("distribution_status") or "",
+            "subscriber_growth_score": rows_by_id.get(post_id, {}).get("subscriber_growth_score"),
+            "postable_after_approval": bool((rows_by_id.get(post_id, {}).get("manual_posting_packet") or {}).get("approval_required")),
+        }
+        for post_id in ready_ids
+        if post_id in rows_by_id
+    ]
+    status = docket.get("status") or ("ready_for_manual_review" if ready_rows else "empty")
+    return {
+        "status": status,
+        "ready_count": len(ready_rows),
+        "blocked_count": len(blocked_ids),
+        "ready_ids": [row["id"] for row in ready_rows],
+        "blocked_ids": blocked_ids,
+        "preview_command": docket.get("preview_command") or "",
+        "apply_command": docket.get("apply_command") or "",
+        "guardrail": docket.get("guardrail") or "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review.",
+        "ready_to_review": ready_rows,
+    }
+
+
 def build_rows(plan: dict, runway: dict, published: dict[str, dict]) -> list[dict]:
     runway_by_id = runway_lookup(runway)
     rows = []
@@ -296,12 +327,30 @@ def build_markdown(payload: dict) -> str:
         "## Manual Posting Docket",
     ]
     docket = payload.get("manual_distribution_docket") or {}
+    approval_docket = payload.get("manual_approval_docket") or {}
     lines.extend([
         f"- Status: **{docket.get('status', 'unknown')}**",
         f"- Needs review: **{docket.get('review_count', 0)}**",
         f"- Postable now: **{docket.get('postable_count', 0)}**",
         f"- Logged: **{docket.get('logged_count', 0)}**",
         f"- Public community surface: {docket.get('public_community_url') or YOUTUBE_COMMUNITY_URL}",
+        "",
+        "### Approval Gate",
+        f"- Status: **{approval_docket.get('status', 'unknown')}**",
+        f"- Ready approvals: **{approval_docket.get('ready_count', 0)}**",
+        f"- Blocked approvals: **{approval_docket.get('blocked_count', 0)}**",
+    ])
+    if approval_docket.get("ready_ids"):
+        lines.append(f"- Ready IDs: `{', '.join(approval_docket['ready_ids'])}`")
+    if approval_docket.get("blocked_ids"):
+        lines.append(f"- Blocked IDs: `{', '.join(approval_docket['blocked_ids'])}`")
+    if approval_docket.get("preview_command"):
+        lines.append(f"- Preview approvals: `{approval_docket['preview_command']}`")
+    if approval_docket.get("apply_command"):
+        lines.append(f"- Approve after review: `{approval_docket['apply_command']}`")
+    if approval_docket.get("guardrail"):
+        lines.append(f"- Guardrail: {approval_docket['guardrail']}")
+    lines.extend([
         "",
         "### Needs Review",
     ])
@@ -427,6 +476,7 @@ def main() -> int:
             "published_log": str(PUBLISHED_LOG.relative_to(ROOT)),
         },
         "summary": summary,
+        "manual_approval_docket": manual_approval_docket(runway, rows),
         "manual_distribution_docket": manual_distribution_docket(rows, summary),
         "rows": rows,
     }

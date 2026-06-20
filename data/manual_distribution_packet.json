@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T04:30:43.009899Z",
+  "generated_at": "2026-06-20T04:34:24.039402Z",
   "safe_mode": true,
   "source": {
     "promo_queue_plan": "data/promo_queue_plan.json",
@@ -21,6 +21,39 @@
     "postable_now_count": 0,
     "next_manual_action": "review_and_approve",
     "public_community_url": "https://www.youtube.com/@lilyroo.artist/community"
+  },
+  "manual_approval_docket": {
+    "status": "ready_for_manual_review",
+    "ready_count": 2,
+    "blocked_count": 1,
+    "ready_ids": [
+      "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+      "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
+    ],
+    "blocked_ids": [
+      "FP-PLAN-TWELVE-DOLLARS-TIKTOK"
+    ],
+    "preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
+    "apply_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+    "guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review.",
+    "ready_to_review": [
+      {
+        "id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+        "release": "Analog Myth",
+        "platform": "YouTube Community",
+        "distribution_status": "waiting_for_review",
+        "subscriber_growth_score": 116,
+        "postable_after_approval": true
+      },
+      {
+        "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+        "release": "Twelve Dollars",
+        "platform": "YouTube Community",
+        "distribution_status": "waiting_for_review",
+        "subscriber_growth_score": 116,
+        "postable_after_approval": true
+      }
+    ]
   },
   "manual_distribution_docket": {
     "status": "needs_review",

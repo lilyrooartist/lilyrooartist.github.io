@@ -779,6 +779,9 @@ def validate_generated_outputs(failures):
         review_rows = [row for row in unlogged_rows if (row.get("manual_posting_packet") or {}).get("approval_required")]
         postable_rows = [row for row in unlogged_rows if (row.get("manual_posting_packet") or {}).get("postable_now")]
         docket = manual_packet.get("manual_distribution_docket") or {}
+        approval_runway = json.loads(APPROVAL_RUNWAY.read_text(encoding="utf-8")) if APPROVAL_RUNWAY.exists() else {}
+        runway_approval_docket = approval_runway.get("manual_approval_docket") or {}
+        approval_docket = manual_packet.get("manual_approval_docket") or {}
         docket_review = docket.get("review_queue") or []
         docket_postable = docket.get("postable_now") or []
         docket_logged = docket.get("logged") or []
@@ -804,6 +807,13 @@ def validate_generated_outputs(failures):
             and [item.get("id") for item in docket_logged] == [row.get("id") for row in logged_rows]
             and docket.get("next_manual_action") == summary.get("next_manual_action")
             and docket.get("public_community_url") == "https://www.youtube.com/@lilyroo.artist/community"
+            and approval_docket.get("ready_ids") == (runway_approval_docket.get("ready_ids") or [])
+            and approval_docket.get("blocked_ids") == (runway_approval_docket.get("blocked_ids") or [])
+            and approval_docket.get("preview_command") == (runway_approval_docket.get("preview_command") or "")
+            and approval_docket.get("apply_command") == (runway_approval_docket.get("apply_command") or "")
+            and approval_docket.get("guardrail") == (runway_approval_docket.get("guardrail") or "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review.")
+            and approval_docket.get("ready_count") == len(approval_docket.get("ready_to_review") or []) == len(review_rows)
+            and all(item.get("id") and item.get("distribution_status") == "waiting_for_review" and item.get("postable_after_approval") is True for item in approval_docket.get("ready_to_review") or [])
             and all(item.get("paste_text") and item.get("asset_url") and item.get("destination_links") and item.get("approval_command") for item in docket_review)
             and all(item.get("paste_text") and item.get("asset_url") and "log_manual_distribution.py" in item.get("log_preview_command", "") and "--apply --refresh-admin" in item.get("log_apply_command", "") for item in docket_postable)
             and all(
@@ -1864,7 +1874,7 @@ def validate_generated_outputs(failures):
         fail("build_subscriber_cta_audit.py missing", failures)
     if MANUAL_DISTRIBUTION_PACKET_SCRIPT.exists():
         manual_distribution_text = MANUAL_DISTRIBUTION_PACKET_SCRIPT.read_text(encoding="utf-8")
-        if "manual_distribution_packet.json" in manual_distribution_text and "manual-distribution-packet.md" in manual_distribution_text and "Manual Posting Queue" in manual_distribution_text and "manual_distribution_docket" in manual_distribution_text and "review_queue" in manual_distribution_text and "copy_block" in manual_distribution_text and "manual_posting_packet" in manual_distribution_text and "postable_now" in manual_distribution_text and "log_manual_distribution.py" in manual_distribution_text and "Published_Log.csv" in manual_distribution_text and "distribution_status" in manual_distribution_text and "subprocess" not in manual_distribution_text:
+        if "manual_distribution_packet.json" in manual_distribution_text and "manual-distribution-packet.md" in manual_distribution_text and "Manual Posting Queue" in manual_distribution_text and "manual_distribution_docket" in manual_distribution_text and "manual_approval_docket" in manual_distribution_text and "review_queue" in manual_distribution_text and "copy_block" in manual_distribution_text and "manual_posting_packet" in manual_distribution_text and "postable_now" in manual_distribution_text and "log_manual_distribution.py" in manual_distribution_text and "Published_Log.csv" in manual_distribution_text and "distribution_status" in manual_distribution_text and "subprocess" not in manual_distribution_text:
             ok("manual distribution packet builder is review-only")
         else:
             fail("build_manual_distribution_packet.py missing manual distribution outputs or executes commands", failures)

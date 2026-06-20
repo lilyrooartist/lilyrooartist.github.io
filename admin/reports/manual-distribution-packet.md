@@ -1,6 +1,6 @@
 # Manual Distribution Packet - Lily Roo
 
-Generated: 2026-06-20T04:30:43.009899Z
+Generated: 2026-06-20T04:34:24.039402Z
 
 ## Summary
 - Manual-ready posts: **2**
@@ -17,6 +17,16 @@ Generated: 2026-06-20T04:30:43.009899Z
 - Postable now: **0**
 - Logged: **0**
 - Public community surface: https://www.youtube.com/@lilyroo.artist/community
+
+### Approval Gate
+- Status: **ready_for_manual_review**
+- Ready approvals: **2**
+- Blocked approvals: **1**
+- Ready IDs: `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY, FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY`
+- Blocked IDs: `FP-PLAN-TWELVE-DOLLARS-TIKTOK`
+- Preview approvals: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run`
+- Approve after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin`
+- Guardrail: Manual-only approvals do not auto-post; posting and public URL logging remain separate after review.
 
 ### Needs Review
 - **YouTube Community - Twelve Dollars** (`FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY`)
