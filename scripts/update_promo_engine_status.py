@@ -782,6 +782,7 @@ GENERATED_REFRESH_PATHS = {
     "data/manual_distribution_packet.json",
     "data/manual_metric_collection_packet.json",
     "data/manual_metric_collection_template.csv",
+    "data/manual_metric_entry_template.csv",
     "data/metrics_history.json",
     "data/monetization_activation_plan.json",
     "data/platform_repair_status.json",
