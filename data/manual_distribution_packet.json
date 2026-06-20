@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T02:14:49.012923Z",
+  "generated_at": "2026-06-20T02:19:40.021399Z",
   "safe_mode": true,
   "source": {
     "promo_queue_plan": "data/promo_queue_plan.json",
@@ -13,6 +13,7 @@
     "approved_manual_count": 0,
     "logged_manual_count": 0,
     "unlogged_manual_count": 2,
+    "public_url_log_needed_count": 2,
     "ready_to_post_after_review_count": 2,
     "ready_for_manual_post_count": 0,
     "waiting_for_review_count": 2
@@ -45,6 +46,21 @@
       "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
       "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL",
       "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
+      "log_effect": {
+        "target": "admin/content/Published_Log.csv",
+        "content_id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+        "platform": "YouTube Community",
+        "release": "Twelve Dollars",
+        "requires_public_url": true,
+        "url_placeholder": "PUBLIC_URL",
+        "duplicate_checked_by": [
+          "content_id",
+          "manual_distribution_id"
+        ],
+        "notes": "manual_distribution_id=FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY; source=data/manual_distribution_packet.json",
+        "would_append": true,
+        "summary": "append Published_Log.csv content_id=FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY after public URL is available"
+      },
       "manual_workflow": [
         "Review the copy and linked playlist.",
         "Approve only after human review if it should become the current manual posting candidate.",
@@ -80,6 +96,21 @@
       "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin",
       "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL",
       "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
+      "log_effect": {
+        "target": "admin/content/Published_Log.csv",
+        "content_id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+        "platform": "YouTube Community",
+        "release": "Analog Myth",
+        "requires_public_url": true,
+        "url_placeholder": "PUBLIC_URL",
+        "duplicate_checked_by": [
+          "content_id",
+          "manual_distribution_id"
+        ],
+        "notes": "manual_distribution_id=FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY; source=data/manual_distribution_packet.json",
+        "would_append": true,
+        "summary": "append Published_Log.csv content_id=FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY after public URL is available"
+      },
       "manual_workflow": [
         "Review the copy and linked playlist.",
         "Approve only after human review if it should become the current manual posting candidate.",

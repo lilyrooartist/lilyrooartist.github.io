@@ -551,6 +551,7 @@ def validate_generated_outputs(failures):
             and summary.get("hard_cta_count") == len(hard_rows) == len(rows)
             and summary.get("logged_manual_count") == len(logged_rows)
             and summary.get("unlogged_manual_count") == len(unlogged_rows)
+            and summary.get("public_url_log_needed_count") == len([row for row in rows if (row.get("log_effect") or {}).get("would_append")])
             and summary.get("ready_to_post_after_review_count") == len([row for row in unlogged_rows if row.get("readiness_state") == "manual_only"])
             and all(
                 row.get("id")
@@ -561,6 +562,10 @@ def validate_generated_outputs(failures):
                 and isinstance(row.get("logged"), bool)
                 and row.get("approval_preview_command")
                 and row.get("manual_workflow")
+                and (row.get("log_effect") or {}).get("target") == "admin/content/Published_Log.csv"
+                and (row.get("log_effect") or {}).get("content_id") == row.get("id")
+                and (row.get("log_effect") or {}).get("url_placeholder") == "PUBLIC_URL"
+                and isinstance((row.get("log_effect") or {}).get("would_append"), bool)
                 and "log_manual_distribution.py" in row.get("log_preview_command", "")
                 and "--apply" not in row.get("log_preview_command", "")
                 and "--apply --refresh-admin" in row.get("log_apply_command", "")
@@ -1441,10 +1446,10 @@ def validate_generated_outputs(failures):
         fail("build_manual_distribution_packet.py missing", failures)
     if MANUAL_DISTRIBUTION_LOGGER.exists():
         logger_text = MANUAL_DISTRIBUTION_LOGGER.read_text(encoding="utf-8")
-        if "--apply" in logger_text and "--refresh-admin" in logger_text and "append_published_log" in logger_text and "dry_run" in logger_text:
+        if "--apply" in logger_text and "--refresh-admin" in logger_text and "append_published_log" in logger_text and "dry_run" in logger_text and "validate_public_url" in logger_text and "already_logged" in logger_text and "PUBLIC_URL" in logger_text:
             ok("manual distribution logger is dry-run-first")
         else:
-            fail("log_manual_distribution.py missing dry-run-first logging behavior", failures)
+            fail("log_manual_distribution.py missing dry-run-first logging behavior or URL/duplicate guards", failures)
     else:
         fail("log_manual_distribution.py missing", failures)
     if MONETIZATION_ACTIVATION_SCRIPT.exists():

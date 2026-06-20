@@ -72,6 +72,28 @@ def log_command(post_id: str, apply: bool = False) -> str:
     return command
 
 
+def log_effect(post: dict, published_row: dict) -> dict:
+    post_id = post.get("id") or ""
+    logged = bool(published_row.get("logged"))
+    notes = f"manual_distribution_id={post_id}; source=data/manual_distribution_packet.json"
+    return {
+        "target": "admin/content/Published_Log.csv",
+        "content_id": post_id,
+        "platform": post.get("platform") or "Manual",
+        "release": post.get("song") or "",
+        "requires_public_url": not logged,
+        "url_placeholder": "PUBLIC_URL",
+        "duplicate_checked_by": ["content_id", "manual_distribution_id"],
+        "notes": notes,
+        "would_append": not logged,
+        "summary": (
+            "already logged; no append needed"
+            if logged
+            else f"append Published_Log.csv content_id={post_id} after public URL is available"
+        ),
+    }
+
+
 def build_rows(plan: dict, runway: dict, published: dict[str, dict]) -> list[dict]:
     runway_by_id = runway_lookup(runway)
     rows = []
@@ -115,6 +137,7 @@ def build_rows(plan: dict, runway: dict, published: dict[str, dict]) -> list[dic
             "approval_command": review.get("approval_command") or post.get("approval_command") or "",
             "log_preview_command": log_command(post.get("id") or ""),
             "log_apply_command": log_command(post.get("id") or "", apply=True),
+            "log_effect": log_effect(post, published_row),
             "manual_workflow": [
                 "Review the copy and linked playlist.",
                 "Approve only after human review if it should become the current manual posting candidate.",
@@ -167,6 +190,7 @@ def build_markdown(payload: dict) -> str:
         f"- Approved manual posts: **{summary['approved_manual_count']}**",
         f"- Logged manual posts: **{summary['logged_manual_count']}**",
         f"- Unlogged manual posts: **{summary['unlogged_manual_count']}**",
+        f"- Public URL logs still needed: **{summary['public_url_log_needed_count']}**",
         "",
         "## Manual Posting Queue",
     ]
@@ -186,6 +210,8 @@ def build_markdown(payload: dict) -> str:
                 lines.append(f"    {line}" if line else "    ")
         if row.get("asset_download_url"):
             lines.append(f"  - Asset: {row['asset_download_url']}")
+        if row.get("log_effect"):
+            lines.append(f"  - Log effect: {row['log_effect']['summary']}")
         if row.get("approval_preview_command"):
             lines.append(f"  - Preview approval: `{row['approval_preview_command']}`")
         if row.get("approval_command"):
@@ -223,6 +249,7 @@ def main() -> int:
     hard_cta = [row for row in rows if row.get("selected_cta_strength") in {"hard_subscribe", "hard_goal"}]
     logged_rows = [row for row in rows if row.get("logged")]
     unlogged_rows = [row for row in rows if not row.get("logged")]
+    log_needed_rows = [row for row in rows if (row.get("log_effect") or {}).get("would_append")]
     payload = {
         "generated_at": now.isoformat().replace("+00:00", "Z"),
         "safe_mode": True,
@@ -238,6 +265,7 @@ def main() -> int:
             "approved_manual_count": sum(1 for row in rows if str(row.get("approved") or "").lower() == "yes"),
             "logged_manual_count": len(logged_rows),
             "unlogged_manual_count": len(unlogged_rows),
+            "public_url_log_needed_count": len(log_needed_rows),
             "ready_to_post_after_review_count": sum(1 for row in unlogged_rows if row.get("readiness_state") == "manual_only"),
             "ready_for_manual_post_count": sum(1 for row in unlogged_rows if row.get("distribution_status") == "ready_for_manual_post"),
             "waiting_for_review_count": sum(1 for row in unlogged_rows if row.get("distribution_status") == "waiting_for_review"),
