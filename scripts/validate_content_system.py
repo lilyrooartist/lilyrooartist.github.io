@@ -566,6 +566,9 @@ def validate_generated_outputs(failures):
         approval_task = next((task for task in tasks if task.get("id") == "approve-checked-scheduled-batch"), {})
         approval_impact = approval_task.get("impact") or {}
         blocker_projection = ((summary.get("blocker_summary") or {}).get("next_resolution_projection") or {})
+        approval_runway = json.loads(APPROVAL_RUNWAY.read_text(encoding="utf-8")) if APPROVAL_RUNWAY.exists() else {}
+        manual_approval_docket = approval_runway.get("manual_approval_docket") or {}
+        manual_posting_step = next((item for item in docket_checklist if item.get("id") == "manual-posting-review"), {})
         metric_task_field_count = sum(int((task.get("impact") or {}).get("field_count") or 0) for task in tasks if task.get("phase") == "Manual metrics")
         if (
             handoff.get("safe_mode") is True
@@ -588,6 +591,12 @@ def validate_generated_outputs(failures):
             and docket.get("ready_step_count") == len([item for item in docket_checklist if item.get("state") in {"ready", "ready_for_review", "needs_review", "needs_values"}])
             and docket.get("blocked_step_count") == len([item for item in docket_checklist if item.get("state") == "blocked"])
             and (docket.get("first_ready_step") or {}).get("id") == "review-checked-approval-batch"
+            and manual_posting_step
+            and manual_posting_step.get("ready_ids") == (manual_approval_docket.get("ready_ids") or [])
+            and manual_posting_step.get("blocked_ids") == (manual_approval_docket.get("blocked_ids") or [])
+            and manual_posting_step.get("preview_command") == (manual_approval_docket.get("preview_command") or "")
+            and manual_posting_step.get("apply_command") == (manual_approval_docket.get("apply_command") or "")
+            and manual_approval_docket.get("guardrail") in manual_posting_step.get("guardrail", "")
             and any(item.get("id") == "manual-metric-worksheet" and item.get("field_count") == metric_task_field_count and "--from-csv --dry-run" in item.get("preview_command", "") for item in docket_checklist)
             and any(item.get("id") == "platform-repair-gate" and item.get("state") == "blocked" and "push_social_worker_secrets.py --dry-run" in item.get("preview_command", "") for item in docket_checklist)
             and any(task.get("phase") == "Manual metrics" and (task.get("impact") or {}).get("pending_assignments") for task in tasks)
@@ -1009,6 +1018,9 @@ def validate_generated_outputs(failures):
         projection = summary.get("next_resolution_projection") or {}
         roadmap = summary.get("blocker_unlock_roadmap") or []
         roadmap_ids = {item.get("id") for item in roadmap}
+        approval_runway = json.loads(APPROVAL_RUNWAY.read_text(encoding="utf-8")) if APPROVAL_RUNWAY.exists() else {}
+        manual_approval_docket = approval_runway.get("manual_approval_docket") or {}
+        manual_roadmap = next((item for item in roadmap if item.get("id") == "unlock-manual-distribution"), {})
         if (
             ledger.get("safe_mode") is True
             and summary.get("open_blocker_count") == len(ledger_rows)
@@ -1030,6 +1042,11 @@ def validate_generated_outputs(failures):
                 for item in roadmap
             )
             and any(item.get("id") == "unlock-checked-scheduled-approval" and item.get("preview_command") == projection.get("preview_command") and item.get("apply_command") == projection.get("apply_command") for item in roadmap)
+            and manual_roadmap
+            and manual_roadmap.get("preview_command") == (manual_approval_docket.get("preview_command") or "")
+            and manual_roadmap.get("apply_command") == (manual_approval_docket.get("apply_command") or "")
+            and manual_roadmap.get("blocked_by") == (manual_approval_docket.get("blocked_ids") or [])
+            and manual_roadmap.get("guardrail") == (manual_approval_docket.get("guardrail") or "Manual posting and public URL logging remain separate after approval.")
             and any(item.get("id") == "unlock-manual-metrics" and "update_manual_social_stats.py --from-csv --dry-run" in (item.get("preview_command") or "") for item in roadmap)
             and all(
                 row.get("id")
@@ -1799,7 +1816,7 @@ def validate_generated_outputs(failures):
         fail("build_published_log_reconciliation.py missing", failures)
     if HUMAN_HANDOFF_SCRIPT.exists():
         handoff_text = HUMAN_HANDOFF_SCRIPT.read_text(encoding="utf-8")
-        if "human_handoff_packet.json" in handoff_text and "human-handoff-packet.md" in handoff_text and "promotion_blocker_ledger.json" in handoff_text and "manual_metric_collection_packet.json" in handoff_text and "manual_distribution_packet.json" in handoff_text and "scheduled_approval_packet.json" in handoff_text and "platform_repair_status.json" in handoff_text and "tiktok_setup_preflight.json" in handoff_text and "action_docket" in handoff_text and "build_action_docket" in handoff_text and "subprocess" not in handoff_text:
+        if "human_handoff_packet.json" in handoff_text and "human-handoff-packet.md" in handoff_text and "promotion_blocker_ledger.json" in handoff_text and "manual_metric_collection_packet.json" in handoff_text and "manual_distribution_packet.json" in handoff_text and "approval_runway.json" in handoff_text and "scheduled_approval_packet.json" in handoff_text and "platform_repair_status.json" in handoff_text and "tiktok_setup_preflight.json" in handoff_text and "action_docket" in handoff_text and "build_action_docket" in handoff_text and "subprocess" not in handoff_text:
             ok("human handoff packet builder is review-only")
         else:
             fail("build_human_handoff_packet.py missing handoff outputs or executes commands", failures)
@@ -1807,7 +1824,7 @@ def validate_generated_outputs(failures):
         fail("build_human_handoff_packet.py missing", failures)
     if PROMOTION_BLOCKER_LEDGER_SCRIPT.exists():
         ledger_text = PROMOTION_BLOCKER_LEDGER_SCRIPT.read_text(encoding="utf-8")
-        if "promotion_blocker_ledger.json" in ledger_text and "promotion-blocker-ledger.md" in ledger_text and "owner_counts" in ledger_text and "category_counts" in ledger_text and "manual_metric_collection_packet.json" in ledger_text and "blocker_unlock_roadmap" in ledger_text and "build_unlock_roadmap" in ledger_text and "next_resolution_projection" in ledger_text and "approval_projection" in ledger_text and "subprocess" not in ledger_text:
+        if "promotion_blocker_ledger.json" in ledger_text and "promotion-blocker-ledger.md" in ledger_text and "owner_counts" in ledger_text and "category_counts" in ledger_text and "manual_metric_collection_packet.json" in ledger_text and "approval_runway.json" in ledger_text and "blocker_unlock_roadmap" in ledger_text and "build_unlock_roadmap" in ledger_text and "next_resolution_projection" in ledger_text and "approval_projection" in ledger_text and "subprocess" not in ledger_text:
             ok("promotion blocker ledger builder is review-only")
         else:
             fail("build_promotion_blocker_ledger.py missing ledger outputs or executes commands", failures)

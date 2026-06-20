@@ -1,6 +1,6 @@
 # Human Handoff Packet - Lily Roo
 
-Generated: 2026-06-20T04:24:57.864884Z
+Generated: 2026-06-20T04:30:43.223022Z
 
 ## Summary
 - Open handoff tasks: **10**
@@ -22,9 +22,11 @@ Generated: 2026-06-20T04:24:57.864884Z
   - Guardrail: Use --checked-batch so only rows that passed review checks are approved.
 - **Review and post manual distribution rows** (`needs_review`)
   - Owner: `tod`; tasks: **2**; blockers resolved: **2**
-  - Preview/check: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --dry-run`
-  - Apply after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin`
-  - Guardrail: Post manually first, then log only real public URLs.
+  - Ready IDs: `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY, FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY`
+  - Blocked IDs: `FP-PLAN-TWELVE-DOLLARS-TIKTOK`
+  - Preview/check: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run`
+  - Apply after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin`
+  - Guardrail: Manual-only approvals do not auto-post; posting and public URL logging remain separate after review. Post manually first, then log only real public URLs.
 - **Repair blocked platform executor setup** (`blocked`)
   - Owner: `tod`; tasks: **1**; blockers resolved: **1**
   - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`

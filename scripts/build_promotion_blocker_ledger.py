@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PLATFORM_REPAIR = ROOT / "data" / "platform_repair_status.json"
 SCHEDULED_APPROVAL = ROOT / "data" / "scheduled_approval_packet.json"
 MANUAL_DISTRIBUTION = ROOT / "data" / "manual_distribution_packet.json"
+APPROVAL_RUNWAY = ROOT / "data" / "approval_runway.json"
 MANUAL_METRICS = ROOT / "data" / "manual_metric_collection_packet.json"
 BACKLOG_RESCHEDULE = ROOT / "data" / "backlog_reschedule_preview.json"
 OUT = ROOT / "data" / "promotion_blocker_ledger.json"
@@ -303,6 +304,8 @@ def unique_values(values: list[str]) -> list[str]:
 def build_unlock_roadmap(rows: list[dict], projection: dict) -> list[dict]:
     manual_distribution = read_json(MANUAL_DISTRIBUTION, {})
     manual_docket = manual_distribution.get("manual_distribution_docket") or {}
+    approval_runway = read_json(APPROVAL_RUNWAY, {})
+    approval_docket = approval_runway.get("manual_approval_docket") or {}
     platform_repair = read_json(PLATFORM_REPAIR, {})
     backlog = read_json(BACKLOG_RESCHEDULE, {})
     metrics = read_json(MANUAL_METRICS, {})
@@ -329,17 +332,19 @@ def build_unlock_roadmap(rows: list[dict], projection: dict) -> list[dict]:
         {
             "id": "unlock-manual-distribution",
             "phase": "Review and post manual YouTube Community rows",
-            "status": manual_docket.get("status") or "unknown",
+            "status": approval_docket.get("status") or manual_docket.get("status") or "unknown",
             "owner": "tod",
-            "blockers_resolved": int(manual_docket.get("review_count") or 0) + int(manual_docket.get("postable_count") or 0),
+            "blockers_resolved": int(approval_docket.get("ready_count") or 0) or int(manual_docket.get("review_count") or 0) + int(manual_docket.get("postable_count") or 0),
             "unlocks": [
                 "Manual YouTube Community promotion can publish without waiting for broken auto executors.",
                 "Published_Log.csv can be updated after public URLs exist.",
             ],
-            "blocked_by": ["manual approval"] if manual_docket.get("review_count") else [],
-            "preview_command": "",
-            "apply_command": "",
+            "blocked_by": approval_docket.get("blocked_ids") or (["manual approval"] if manual_docket.get("review_count") else []),
+            "preview_command": approval_docket.get("preview_command") or "",
+            "apply_command": approval_docket.get("apply_command") or "",
             "source_path": str(MANUAL_DISTRIBUTION.relative_to(ROOT)),
+            "command_source_path": str(APPROVAL_RUNWAY.relative_to(ROOT)),
+            "guardrail": approval_docket.get("guardrail") or "Manual posting and public URL logging remain separate after approval.",
         },
         {
             "id": "unlock-tiktok-platform-repair",
@@ -416,6 +421,8 @@ def build_markdown(payload: dict) -> str:
             lines.append(f"  - Preview/check: `{item['preview_command']}`")
         if item.get("apply_command"):
             lines.append(f"  - Apply after review: `{item['apply_command']}`")
+        if item.get("guardrail"):
+            lines.append(f"  - Guardrail: {item['guardrail']}")
     lines.extend([
         "",
         "## Ledger",
@@ -526,6 +533,7 @@ def build_ledger() -> dict:
             str(PLATFORM_REPAIR.relative_to(ROOT)),
             str(SCHEDULED_APPROVAL.relative_to(ROOT)),
             str(MANUAL_DISTRIBUTION.relative_to(ROOT)),
+            str(APPROVAL_RUNWAY.relative_to(ROOT)),
             str(MANUAL_METRICS.relative_to(ROOT)),
         ],
     }

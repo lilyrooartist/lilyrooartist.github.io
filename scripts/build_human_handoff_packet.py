@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 BLOCKER_LEDGER = ROOT / "data" / "promotion_blocker_ledger.json"
 SCHEDULED_APPROVAL = ROOT / "data" / "scheduled_approval_packet.json"
 MANUAL_DISTRIBUTION = ROOT / "data" / "manual_distribution_packet.json"
+APPROVAL_RUNWAY = ROOT / "data" / "approval_runway.json"
 MANUAL_METRICS = ROOT / "data" / "manual_metric_collection_packet.json"
 PLATFORM_REPAIR = ROOT / "data" / "platform_repair_status.json"
 TIKTOK_PREFLIGHT = ROOT / "data" / "tiktok_setup_preflight.json"
@@ -237,9 +238,10 @@ def tasks_for_phase(tasks: list[dict], phase: str) -> list[dict]:
     return [task for task in tasks if task.get("phase") == phase]
 
 
-def build_action_docket(tasks: list[dict], blocker_summary: dict) -> dict:
+def build_action_docket(tasks: list[dict], blocker_summary: dict, approval_runway: dict) -> dict:
     projection = blocker_summary.get("next_resolution_projection") or {}
     roadmap = blocker_summary.get("blocker_unlock_roadmap") or []
+    manual_approval_docket = approval_runway.get("manual_approval_docket") or {}
     manual_distribution = tasks_for_phase(tasks, "Manual distribution")
     manual_metrics = tasks_for_phase(tasks, "Manual metrics")
     platform_setup = tasks_for_phase(tasks, "Platform setup")
@@ -248,6 +250,9 @@ def build_action_docket(tasks: list[dict], blocker_summary: dict) -> dict:
     metric_field_count = sum(int((task.get("impact") or {}).get("field_count") or 0) for task in manual_metrics)
     manual_post_count = len(manual_distribution)
     blocked_platform_count = len([task for task in platform_setup if task.get("status") == "blocked"])
+    manual_preview_command = manual_approval_docket.get("preview_command") or (manual_distribution[0].get("preview_command") if manual_distribution else "")
+    manual_apply_command = manual_approval_docket.get("apply_command") or (manual_distribution[0].get("apply_command") if manual_distribution else "")
+    manual_guardrail = manual_approval_docket.get("guardrail") or "Post manually first, then log only real public URLs."
     checklist = [
         {
             "id": "review-checked-approval-batch",
@@ -267,9 +272,11 @@ def build_action_docket(tasks: list[dict], blocker_summary: dict) -> dict:
             "owner": "tod",
             "task_ids": [task["id"] for task in manual_distribution],
             "blockers_resolved": manual_post_count,
-            "preview_command": manual_distribution[0].get("preview_command") if manual_distribution else "",
-            "apply_command": manual_distribution[0].get("apply_command") if manual_distribution else "",
-            "guardrail": "Post manually first, then log only real public URLs.",
+            "ready_ids": manual_approval_docket.get("ready_ids") or [],
+            "blocked_ids": manual_approval_docket.get("blocked_ids") or [],
+            "preview_command": manual_preview_command,
+            "apply_command": manual_apply_command,
+            "guardrail": f"{manual_guardrail} Post manually first, then log only real public URLs.",
         },
         {
             "id": "platform-repair-gate",
@@ -349,6 +356,10 @@ def build_markdown(payload: dict) -> str:
         lines.append(f"  - Owner: `{item['owner']}`; tasks: **{len(item.get('task_ids') or [])}**; blockers resolved: **{item.get('blockers_resolved', 0)}**")
         if item.get("field_count"):
             lines.append(f"  - Fields: **{item['field_count']}**")
+        if item.get("ready_ids"):
+            lines.append(f"  - Ready IDs: `{', '.join(item['ready_ids'])}`")
+        if item.get("blocked_ids"):
+            lines.append(f"  - Blocked IDs: `{', '.join(item['blocked_ids'])}`")
         if item.get("preview_command"):
             lines.append(f"  - Preview/check: `{item['preview_command']}`")
         if item.get("apply_command"):
@@ -422,6 +433,7 @@ def sync_admin(payload: dict, markdown: str) -> None:
 
 def main() -> int:
     blocker_summary = (read_json(BLOCKER_LEDGER, {}).get("summary") or {})
+    approval_runway = read_json(APPROVAL_RUNWAY, {})
     tasks = []
     tasks.extend(approval_tasks(read_json(SCHEDULED_APPROVAL, {}), blocker_summary))
     tasks.extend(manual_distribution_tasks(read_json(MANUAL_DISTRIBUTION, {})))
@@ -438,7 +450,7 @@ def main() -> int:
         owner_counts[task["owner"]] = owner_counts.get(task["owner"], 0) + 1
         urgency_counts[task["urgency"]] = urgency_counts.get(task["urgency"], 0) + 1
         phase_counts[task["phase"]] = phase_counts.get(task["phase"], 0) + 1
-    action_docket = build_action_docket(tasks, blocker_summary)
+    action_docket = build_action_docket(tasks, blocker_summary, approval_runway)
     payload = {
         "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "safe_mode": True,
@@ -446,6 +458,7 @@ def main() -> int:
             "promotion_blocker_ledger": str(BLOCKER_LEDGER.relative_to(ROOT)),
             "scheduled_approval": str(SCHEDULED_APPROVAL.relative_to(ROOT)),
             "manual_distribution": str(MANUAL_DISTRIBUTION.relative_to(ROOT)),
+            "approval_runway": str(APPROVAL_RUNWAY.relative_to(ROOT)),
             "manual_metrics": str(MANUAL_METRICS.relative_to(ROOT)),
             "platform_repair": str(PLATFORM_REPAIR.relative_to(ROOT)),
             "tiktok_setup_preflight": str(TIKTOK_PREFLIGHT.relative_to(ROOT)),

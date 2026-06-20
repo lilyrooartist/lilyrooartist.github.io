@@ -1,10 +1,11 @@
 {
-  "generated_at": "2026-06-20T04:24:57.864884Z",
+  "generated_at": "2026-06-20T04:30:43.223022Z",
   "safe_mode": true,
   "source": {
     "promotion_blocker_ledger": "data/promotion_blocker_ledger.json",
     "scheduled_approval": "data/scheduled_approval_packet.json",
     "manual_distribution": "data/manual_distribution_packet.json",
+    "approval_runway": "data/approval_runway.json",
     "manual_metrics": "data/manual_metric_collection_packet.json",
     "platform_repair": "data/platform_repair_status.json",
     "tiktok_setup_preflight": "data/tiktok_setup_preflight.json",
@@ -90,7 +91,7 @@
         {
           "id": "unlock-manual-distribution",
           "phase": "Review and post manual YouTube Community rows",
-          "status": "needs_review",
+          "status": "ready_for_manual_review",
           "owner": "tod",
           "blockers_resolved": 2,
           "unlocks": [
@@ -98,11 +99,13 @@
             "Published_Log.csv can be updated after public URLs exist."
           ],
           "blocked_by": [
-            "manual approval"
+            "FP-PLAN-TWELVE-DOLLARS-TIKTOK"
           ],
-          "preview_command": "",
-          "apply_command": "",
-          "source_path": "data/manual_distribution_packet.json"
+          "preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
+          "apply_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+          "source_path": "data/manual_distribution_packet.json",
+          "command_source_path": "data/approval_runway.json",
+          "guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review."
         },
         {
           "id": "unlock-tiktok-platform-repair",
@@ -166,6 +169,7 @@
         "data/platform_repair_status.json",
         "data/scheduled_approval_packet.json",
         "data/manual_distribution_packet.json",
+        "data/approval_runway.json",
         "data/manual_metric_collection_packet.json"
       ]
     }
@@ -243,9 +247,16 @@
           "manual-distribution-FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
         ],
         "blockers_resolved": 2,
-        "preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --dry-run",
-        "apply_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin",
-        "guardrail": "Post manually first, then log only real public URLs."
+        "ready_ids": [
+          "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+          "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
+        ],
+        "blocked_ids": [
+          "FP-PLAN-TWELVE-DOLLARS-TIKTOK"
+        ],
+        "preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
+        "apply_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+        "guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review. Post manually first, then log only real public URLs."
       },
       {
         "id": "platform-repair-gate",

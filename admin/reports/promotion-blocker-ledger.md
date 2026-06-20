@@ -1,6 +1,6 @@
 # Promotion Blocker Ledger - Lily Roo
 
-Generated: 2026-06-20T04:24:57.836232Z
+Generated: 2026-06-20T04:30:43.194445Z
 
 ## Summary
 - Open blockers: **12**
@@ -16,10 +16,13 @@ Generated: 2026-06-20T04:24:57.836232Z
   - Blocked by: FP-AUTO-259
   - Preview/check: `python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run`
   - Apply after review: `python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin`
-- **Review and post manual YouTube Community rows** (`needs_review`)
+- **Review and post manual YouTube Community rows** (`ready_for_manual_review`)
   - Owner: `tod`; projected blockers resolved: **2**
   - Unlocks: Manual YouTube Community promotion can publish without waiting for broken auto executors.; Published_Log.csv can be updated after public URLs exist.
-  - Blocked by: manual approval
+  - Blocked by: FP-PLAN-TWELVE-DOLLARS-TIKTOK
+  - Preview/check: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run`
+  - Apply after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin`
+  - Guardrail: Manual-only approvals do not auto-post; posting and public URL logging remain separate after review.
 - **Repair TikTok executor** (`blocked`)
   - Owner: `tod`; projected blockers resolved: **1**
   - Unlocks: Held TikTok approval rows can pass platform-readiness review.; Approved TikTok backlog can become safe to reschedule and publish.
