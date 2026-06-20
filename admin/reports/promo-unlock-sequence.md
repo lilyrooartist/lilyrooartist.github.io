@@ -1,12 +1,12 @@
 # Promo Unlock Sequence - Lily Roo
 
-Generated: 2026-06-20T12:28:21.139071Z
+Generated: 2026-06-20T14:32:14.508210Z
 
 ## Summary
 - Steps: **5**
 - Ready for human review: **1**
 - Blocked or warning: **3**
-- Projected resolution units across sequence: **12**
+- Projected resolution units across sequence: **13**
 - Current step: `unlock-manual-distribution` (`ready_for_human_review`)
 - Open blockers still tracked: **9**
 

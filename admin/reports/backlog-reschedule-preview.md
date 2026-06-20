@@ -1,11 +1,11 @@
 # Backlog Reschedule Preview - Lily Roo
 
-Generated: 2026-06-20T12:28:20.252289+00:00
+Generated: 2026-06-20T14:32:13.577353+00:00
 
 ## Summary
-- Approved backlog rows: **3**
+- Approved backlog rows: **4**
 - Rows with known blockers: **3**
-- Clear to apply without override: **0**
+- Clear to apply without override: **1**
 - Start at: **2026-06-21T10:00:00+00:00**
 - Spacing hours: **24**
 - Apply allowed without override: **False**
@@ -29,6 +29,9 @@ Generated: 2026-06-20T12:28:20.252289+00:00
   - Clearance: Add local TikTok OAuth credentials, then push worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.
   - Clearance: Confirm TikTok public posting approval before treating auto-posting as ready.
   - Clearance: Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair.
+- **X - Twelve Dollars** (`FP-PLAN-TWELVE-DOLLARS-X`)
+  - Current: `2026-06-20T10:15:00-04:00`
+  - Proposed: `2026-06-24T10:00:00+00:00`
 
 ## Clearance Manifest
 - Status: **blocked_until_clearance_steps_complete**

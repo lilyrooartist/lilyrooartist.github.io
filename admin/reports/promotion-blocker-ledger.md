@@ -1,6 +1,6 @@
 # Promotion Blocker Ledger - Lily Roo
 
-Generated: 2026-06-20T12:28:20.747178Z
+Generated: 2026-06-20T14:32:14.096272Z
 
 ## Summary
 - Open blockers: **9**
@@ -29,7 +29,7 @@ Generated: 2026-06-20T12:28:20.747178Z
   - Blocked by: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN
   - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
 - **Reschedule approved past-due backlog** (`blocked_until_clearance_steps_complete`)
-  - Owner: `external_platform`; projected blockers resolved: **3**
+  - Owner: `external_platform`; projected blockers resolved: **4**
   - Unlocks: Approved past-due queue rows get a fresh schedule after executor blockers clear.
   - Blocked by: FP-AUTO-258, FP-AUTO-261, FP-AUTO-264
   - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24`
@@ -69,7 +69,7 @@ Generated: 2026-06-20T12:28:20.747178Z
   - Impact: apply blocked by: local_secret_source_missing:TIKTOK_CLIENT_KEY,TIKTOK_CLIENT_SECRET,TIKTOK_REFRESH_TOKEN, public_posting_approval_not_confirmed
 - **[high] Reschedule approved past-due backlog** (`backlog-reschedule`)
   - Owner: `external_platform`; status: `blocked`; category: `backlog_reschedule`
-  - Evidence: 3 approved backlog row(s); 3 still have executor blockers.
+  - Evidence: 4 approved backlog row(s); 3 still have executor blockers.
   - Next step: Preview a new schedule. Safe apply becomes available after known executor blockers clear.
   - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24`
   - Guardrail: Normal apply is hidden while rows have known executor blockers.

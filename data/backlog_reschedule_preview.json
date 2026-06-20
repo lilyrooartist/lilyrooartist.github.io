@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T12:28:20.252289+00:00",
+  "generated_at": "2026-06-20T14:32:13.577353+00:00",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -9,9 +9,9 @@
     "promo_engine_status": "data/promo_engine_status.json"
   },
   "summary": {
-    "approved_backlog_count": 3,
+    "approved_backlog_count": 4,
     "blocked_backlog_count": 3,
-    "clear_to_apply_count": 0,
+    "clear_to_apply_count": 1,
     "start_at": "2026-06-21T10:00:00+00:00",
     "spacing_hours": 24,
     "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
@@ -35,9 +35,9 @@
   },
   "backlog_clearance_manifest": {
     "status": "blocked_until_clearance_steps_complete",
-    "approved_backlog_count": 3,
+    "approved_backlog_count": 4,
     "blocked_backlog_count": 3,
-    "clear_to_apply_count": 0,
+    "clear_to_apply_count": 1,
     "blocked_ids": [
       "FP-AUTO-258",
       "FP-AUTO-261",
@@ -164,6 +164,21 @@
         "Confirm TikTok public posting approval before treating auto-posting as ready.",
         "Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair."
       ]
+    },
+    {
+      "id": "FP-PLAN-TWELVE-DOLLARS-X",
+      "platform": "X",
+      "song": "Twelve Dollars",
+      "current_scheduled_at": "2026-06-20T10:15:00-04:00",
+      "proposed_scheduled_at": "2026-06-24T10:00:00+00:00",
+      "blocked": false,
+      "blocker_reason": "",
+      "blocker_status": "",
+      "blocker_source": "",
+      "blocker_kind": "",
+      "blocks_normal_apply": false,
+      "safe_apply_available": true,
+      "clearance_steps": []
     }
   ]
 }
