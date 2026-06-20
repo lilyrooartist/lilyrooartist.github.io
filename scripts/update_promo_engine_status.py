@@ -771,6 +771,78 @@ def workflow_status_state(workflow_status: dict) -> dict:
     }
 
 
+GENERATED_REFRESH_PATHS = {
+    "admin/index.html",
+    "data/approval_runway.json",
+    "data/backlog_reschedule_preview.json",
+    "data/executor_readiness_snapshot.json",
+    "data/human_handoff_packet.json",
+    "data/live_social_metrics.json",
+    "data/manual_distribution_packet.json",
+    "data/manual_metric_collection_packet.json",
+    "data/manual_metric_collection_template.csv",
+    "data/metrics_history.json",
+    "data/monetization_activation_plan.json",
+    "data/platform_repair_status.json",
+    "data/promo_admin_refresh_run.json",
+    "data/promo_consistency_audit.json",
+    "data/promo_engine_status.json",
+    "data/promo_operations_packet.json",
+    "data/promo_queue_plan.json",
+    "data/promo_refresh_workflow_status.json",
+    "data/promotion_blocker_ledger.json",
+    "data/published_log_reconciliation.json",
+    "data/scheduled_approval_packet.json",
+    "data/social_execution_snapshot.json",
+    "data/social_scheduler_dry_run.json",
+    "data/store_verification_history.json",
+    "data/subscriber_cta_audit.json",
+    "data/tiktok_repair_runbook.json",
+    "data/tiktok_setup_preflight.json",
+}
+
+GENERATED_REFRESH_PREFIXES = (
+    "admin/reports/",
+    "data/store-verification/",
+)
+
+
+def generated_refresh_path(path: str) -> bool:
+    return path in GENERATED_REFRESH_PATHS or any(path.startswith(prefix) for prefix in GENERATED_REFRESH_PREFIXES)
+
+
+def changed_paths_since(commit: str) -> list[str]:
+    if not commit:
+        return []
+    output = git_output(["diff", "--name-only", f"{commit}..HEAD"])
+    return [line.strip() for line in output.splitlines() if line.strip()]
+
+
+def refresh_coverage_state(source_commit: str, latest_head_sha: str) -> dict:
+    if not source_commit or not latest_head_sha:
+        return {
+            "covered": False,
+            "basis": "missing_source_or_workflow_head",
+            "changed_paths_since_latest_run": [],
+            "uncovered_paths_since_latest_run": [],
+        }
+    if source_commit == latest_head_sha:
+        return {
+            "covered": True,
+            "basis": "exact_source_commit",
+            "changed_paths_since_latest_run": [],
+            "uncovered_paths_since_latest_run": [],
+        }
+    changed = changed_paths_since(latest_head_sha)
+    uncovered = [path for path in changed if not generated_refresh_path(path)]
+    return {
+        "covered": bool(changed and not uncovered),
+        "basis": "generated_refresh_outputs_only" if changed and not uncovered else "source_changed_after_latest_run",
+        "changed_paths_since_latest_run": changed[:40],
+        "uncovered_paths_since_latest_run": uncovered[:20],
+    }
+
+
 def refresh_automation_state(workflow_status: dict) -> dict:
     source_revision = source_revision_state()
     path = str(PROMO_REFRESH_WORKFLOW.relative_to(ROOT))
@@ -779,7 +851,8 @@ def refresh_automation_state(workflow_status: dict) -> dict:
     workflow_state = workflow_status_state(workflow_status)
     latest_head_sha = workflow_state.get("latest_run_head_sha") or ""
     source_commit = source_revision.get("commit") or ""
-    latest_covers_source = bool(source_commit and latest_head_sha and source_commit == latest_head_sha)
+    coverage = refresh_coverage_state(source_commit, latest_head_sha)
+    latest_covers_source = bool(coverage.get("covered"))
     if not PROMO_REFRESH_WORKFLOW.exists():
         return {
             "configured": False,
@@ -792,6 +865,9 @@ def refresh_automation_state(workflow_status: dict) -> dict:
             "safe_refresh_command": "",
             "source_revision": source_revision,
             "latest_run_covers_source_commit": latest_covers_source,
+            "latest_run_coverage_basis": coverage.get("basis", ""),
+            "changed_paths_since_latest_run": coverage.get("changed_paths_since_latest_run", []),
+            "uncovered_paths_since_latest_run": coverage.get("uncovered_paths_since_latest_run", []),
             "action_needed": "Add .github/workflows/promo-admin-refresh.yml.",
             **workflow_state,
         }
@@ -809,6 +885,9 @@ def refresh_automation_state(workflow_status: dict) -> dict:
         "safe_refresh_command": safe_command if safe_command in text else "",
         "source_revision": source_revision,
         "latest_run_covers_source_commit": latest_covers_source,
+        "latest_run_coverage_basis": coverage.get("basis", ""),
+        "changed_paths_since_latest_run": coverage.get("changed_paths_since_latest_run", []),
+        "uncovered_paths_since_latest_run": coverage.get("uncovered_paths_since_latest_run", []),
         "action_needed": "" if safe_command in text and "schedule:" in text else "Review promo admin refresh workflow configuration.",
         **workflow_state,
     }

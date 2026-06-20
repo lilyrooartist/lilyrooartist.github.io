@@ -2,6 +2,7 @@
 import csv
 import json
 import re
+import subprocess
 import sys
 from datetime import datetime
 from pathlib import Path
@@ -114,6 +115,72 @@ def fail(message, failures):
 
 def ok(message):
     print(f"OK: {message}")
+
+
+GENERATED_REFRESH_PATHS = {
+    "admin/index.html",
+    "data/approval_runway.json",
+    "data/backlog_reschedule_preview.json",
+    "data/executor_readiness_snapshot.json",
+    "data/human_handoff_packet.json",
+    "data/live_social_metrics.json",
+    "data/manual_distribution_packet.json",
+    "data/manual_metric_collection_packet.json",
+    "data/manual_metric_collection_template.csv",
+    "data/metrics_history.json",
+    "data/monetization_activation_plan.json",
+    "data/platform_repair_status.json",
+    "data/promo_admin_refresh_run.json",
+    "data/promo_consistency_audit.json",
+    "data/promo_engine_status.json",
+    "data/promo_operations_packet.json",
+    "data/promo_queue_plan.json",
+    "data/promo_refresh_workflow_status.json",
+    "data/promotion_blocker_ledger.json",
+    "data/published_log_reconciliation.json",
+    "data/scheduled_approval_packet.json",
+    "data/social_execution_snapshot.json",
+    "data/social_scheduler_dry_run.json",
+    "data/store_verification_history.json",
+    "data/subscriber_cta_audit.json",
+    "data/tiktok_repair_runbook.json",
+    "data/tiktok_setup_preflight.json",
+}
+
+GENERATED_REFRESH_PREFIXES = (
+    "admin/reports/",
+    "data/store-verification/",
+)
+
+
+def generated_refresh_path(path):
+    return path in GENERATED_REFRESH_PATHS or any(path.startswith(prefix) for prefix in GENERATED_REFRESH_PREFIXES)
+
+
+def git_output(args):
+    try:
+        return subprocess.check_output(["git", *args], cwd=ROOT, text=True, stderr=subprocess.DEVNULL).strip()
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        return ""
+
+
+def changed_paths_since(commit):
+    if not commit:
+        return []
+    output = git_output(["diff", "--name-only", f"{commit}..HEAD"])
+    return [line.strip() for line in output.splitlines() if line.strip()]
+
+
+def expected_refresh_coverage(source_commit, latest_head_sha):
+    if not source_commit or not latest_head_sha:
+        return False, "missing_source_or_workflow_head", [], []
+    if source_commit == latest_head_sha:
+        return True, "exact_source_commit", [], []
+    changed = changed_paths_since(latest_head_sha)
+    uncovered = [path for path in changed if not generated_refresh_path(path)]
+    if changed and not uncovered:
+        return True, "generated_refresh_outputs_only", changed[:40], []
+    return False, "source_changed_after_latest_run", changed[:40], uncovered[:20]
 
 
 def cta_strength(text):
@@ -1584,15 +1651,19 @@ def validate_generated_outputs(failures):
         source_revision = automation.get("source_revision") or {}
         workflow_status = json.loads(PROMO_REFRESH_WORKFLOW_STATUS.read_text(encoding="utf-8")) if PROMO_REFRESH_WORKFLOW_STATUS.exists() else {}
         latest_workflow_run = workflow_status.get("latest_run") or {}
+        expected_covered, expected_basis, expected_changed, expected_uncovered = expected_refresh_coverage(
+            source_revision.get("commit") or "",
+            latest_workflow_run.get("head_sha") or "",
+        )
         if (
             source_revision.get("commit")
             and source_revision.get("short_commit")
             and source_revision.get("source_url")
             and automation.get("latest_run_head_sha") == (latest_workflow_run.get("head_sha") or "")
-            and automation.get("latest_run_covers_source_commit") == (
-                bool(source_revision.get("commit") and latest_workflow_run.get("head_sha"))
-                and source_revision.get("commit") == latest_workflow_run.get("head_sha")
-            )
+            and automation.get("latest_run_covers_source_commit") == expected_covered
+            and automation.get("latest_run_coverage_basis") == expected_basis
+            and automation.get("changed_paths_since_latest_run") == expected_changed
+            and automation.get("uncovered_paths_since_latest_run") == expected_uncovered
         ):
             ok("promo engine status tracks refresh automation source coverage")
         else:
