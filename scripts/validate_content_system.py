@@ -1538,6 +1538,25 @@ def validate_generated_outputs(failures):
             ok("promo engine checked-pending music site KPI matches store history")
         else:
             fail("promo_engine_status.json checked-pending music site KPI does not match store history", failures)
+        store_verification = kpi.get("store_verification") or {}
+        store_history_rows = store_history.get("rows") or []
+        checked_pending_rows = [row for row in store_history_rows if row.get("state") == "Checked pending"]
+        found_snapshot_rows = [row for row in store_history_rows if row.get("state") == "Found in snapshot"]
+        pending_rows = [row for row in store_history_rows if row.get("state") == "Pending"]
+        if (
+            store_verification.get("available") is True
+            and status.get("health", {}).get("store_verification") == store_verification
+            and store_verification.get("source_path") == "data/store_verification_history.json"
+            and store_verification.get("checked_pending_count") == len(checked_pending_rows) == int(store_history_summary.get("checked_pending") or 0)
+            and store_verification.get("found_in_snapshot_count") == len(found_snapshot_rows) == int(store_history_summary.get("found_in_snapshot") or 0)
+            and store_verification.get("pending_count") == len(pending_rows) == int(store_history_summary.get("pending") or 0)
+            and store_verification.get("snapshot_count") == int(store_history_summary.get("snapshot_count") or 0)
+            and store_verification.get("verification_command_count") == len(verification_commands)
+            and "verify_pending_store_links.py --refresh-admin" in (store_verification.get("refresh_command") or "")
+        ):
+            ok("promo engine status mirrors store verification gate")
+        else:
+            fail("promo_engine_status.json missing store verification gate summary", failures)
         execution_summary = kpi.get("social_execution_summary") or {}
         if "execution_count" in execution_summary and "status_counts" in execution_summary and "approval_needed_count" in execution_summary and "platform_fix_needed_count" in execution_summary:
             ok("promo engine includes social execution summary")
@@ -1696,6 +1715,15 @@ def validate_generated_outputs(failures):
             ok("promo engine checked-pending store actions avoid unchecked wording")
         elif (status.get("kpi") or {}).get("music_sites_checked_pending"):
             fail("promo_engine_status.json checked-pending store actions still say verify public store links", failures)
+        store_action = next((action for action in next_actions if action.startswith("Re-check checked-pending store links:") or action.startswith("Apply verified store URLs:") or action.startswith("Verify public store links:")), "")
+        if (
+            (kpi.get("store_verification") or {}).get("checked_pending_count")
+            and store_action.startswith("Re-check checked-pending store links:")
+            and ((kpi.get("store_verification") or {}).get("refresh_command") or "") in store_action
+        ):
+            ok("promo engine store verification next action includes retry command")
+        elif (kpi.get("store_verification") or {}).get("checked_pending_count"):
+            fail("promo_engine_status.json missing checked-pending store retry action", failures)
     else:
         fail("promo_engine_status.json missing; run scripts/update_promo_engine_status.py", failures)
     if PROMO_QUEUE_PLAN.exists():

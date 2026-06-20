@@ -1219,6 +1219,81 @@ def manual_distribution_next_action(distribution: dict, reconciliation: dict) ->
     )
 
 
+def store_verification_state(store_history: dict, releases: list[dict]) -> dict:
+    summary = store_history.get("summary") if isinstance(store_history, dict) else {}
+    summary = summary or {}
+    rows = store_history.get("rows") if isinstance(store_history, dict) else []
+    rows = rows or []
+    checked_pending = [
+        row for row in rows
+        if row.get("state") == "Checked pending"
+    ]
+    found_in_snapshot = [
+        row for row in rows
+        if row.get("state") == "Found in snapshot"
+    ]
+    pending = [
+        row for row in rows
+        if row.get("state") == "Pending"
+    ]
+    commands = []
+    for release in releases:
+        title = release.get("title") or ""
+        for command in release.get("store_verification_commands") or []:
+            commands.append({
+                "release": title,
+                "service": command.get("service") or "",
+                "command": command.get("command") or "",
+                "latest_snapshot": command.get("latest_snapshot") or {},
+                "note": command.get("note") or "",
+            })
+    stale_snapshots = [
+        command for command in commands
+        if not (command.get("latest_snapshot") or {}).get("updated_at")
+    ]
+    return {
+        "source_path": str(STORE_VERIFICATION_HISTORY.relative_to(ROOT)),
+        "available": bool(store_history),
+        "total_services": int_metric(summary.get("total_services")),
+        "live_count": int_metric(summary.get("live")),
+        "pending_count": int_metric(summary.get("pending")),
+        "checked_pending_count": int_metric(summary.get("checked_pending")),
+        "found_in_snapshot_count": int_metric(summary.get("found_in_snapshot")),
+        "snapshot_count": int_metric(summary.get("snapshot_count")),
+        "verification_command_count": len(commands),
+        "checked_pending_rows": checked_pending,
+        "found_in_snapshot_rows": found_in_snapshot,
+        "pending_rows": pending,
+        "verification_commands": commands,
+        "stale_snapshot_count": len(stale_snapshots),
+        "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin",
+        "apply_found_url_instruction": "When a public URL is verified, copy it into data/distrokid_release_status.json and refresh Admin.",
+    }
+
+
+def store_verification_next_action(state: dict) -> str:
+    checked = int_metric(state.get("checked_pending_count"))
+    found = int_metric(state.get("found_in_snapshot_count"))
+    pending = int_metric(state.get("pending_count"))
+    command = state.get("refresh_command") or "python3 scripts/verify_pending_store_links.py --refresh-admin"
+    if found:
+        return (
+            f"Apply verified store URLs: {found} music site snapshot(s) found public URLs; "
+            "copy them into data/distrokid_release_status.json and refresh Admin."
+        )
+    if checked:
+        return (
+            f"Re-check checked-pending store links: {checked} music site snapshot(s) still have no public URL; "
+            f"run {command}."
+        )
+    if pending:
+        return (
+            f"Verify public store links: {pending} music site(s) still need first public checks; "
+            f"run {command}."
+        )
+    return ""
+
+
 def manual_metric_next_action(packet: dict) -> str:
     manifest = packet.get("worksheet_import_manifest") if isinstance(packet, dict) else {}
     manifest = manifest or {}
@@ -1373,6 +1448,7 @@ def build_status():
     healthy_count = sum(1 for release in releases if release["status"] == "healthy")
     verification_command_count = sum(len(release.get("store_verification_commands") or []) for release in releases)
     store_history_summary = store_history["summary"]
+    store_verification = store_verification_state(store_history, releases)
     score = round((healthy_count / len(releases)) * 100) if releases else 0
     freshness_summary = freshness["summary"]
     freshness_actions = freshness["actions"]
@@ -1400,6 +1476,7 @@ def build_status():
         )
     manual_metric_action = manual_metric_next_action(manual_metric_packet)
     manual_distribution_action = manual_distribution_next_action(manual_distribution, published_log_reconciliation)
+    store_verification_action = store_verification_next_action(store_verification)
     if execution_state["platform_fix_needed_count"]:
         platforms = ", ".join(sorted({
             item.get("platform", "Social")
@@ -1425,6 +1502,8 @@ def build_status():
         all_actions.insert(0, manual_metric_action)
     if manual_distribution_action and manual_distribution_action not in all_actions:
         all_actions.insert(0, manual_distribution_action)
+    if store_verification_action and store_verification_action not in all_actions:
+        all_actions.insert(0, store_verification_action)
     if operational_next_action_text:
         all_actions = [action for action in all_actions if action != operational_next_action_text]
         all_actions.insert(0, operational_next_action_text)
@@ -1486,6 +1565,7 @@ def build_status():
             "music_sites_missing_url": store_state_counts.get("Pending", 0),
             "store_verification_command_count": verification_command_count,
             "store_verification_history": store_history_summary,
+            "store_verification": store_verification,
             "social_execution_summary": execution_state,
             "social_scheduler_dry_run": scheduler_state,
             "last_refresh_run": refresh_run,
@@ -1512,6 +1592,7 @@ def build_status():
             "operator_docket": operator_docket,
             "manual_distribution": manual_distribution,
             "published_log_reconciliation": published_log_reconciliation,
+            "store_verification": store_verification,
         },
         "freshness": freshness,
         "releases": releases,
