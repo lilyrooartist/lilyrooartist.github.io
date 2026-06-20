@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T09:35:53.768426Z",
+  "generated_at": "2026-06-20T09:36:36.606828Z",
   "safe_mode": true,
   "summary": {
     "check_count": 28,
@@ -284,10 +284,10 @@
         "Next operational action: Preview checked scheduled approval batch — python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
         "First handoff step: Review checked approval batch — python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
         "Review handoff preview health: 3 preview-clean, 3 missing input, 1 warning; see data/human_handoff_resolution_preview.json.",
-        "Re-check checked-pending store links: 7 music site snapshot(s) still have no public URL; next recommended re-check after 2026-06-21T09:34:46.776252+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 then.",
+        "Re-check checked-pending store links: 7 music site snapshot(s) still have no public URL; next recommended re-check after 2026-06-21T09:36:30.537410+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 then.",
         "Resolve manual distribution gate: 2 YouTube Community row(s) need review (manual_approval); preview with python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run.",
         "Refresh manual metrics: 6 worksheet row(s) still need new_value entries (blocked_until_new_values_filled); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values.",
-        "Preview approved backlog reschedule: python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
+        "Preview approved backlog reschedule: python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
         "1 approved unpublished posts are past their scheduled time; repair executor/platform blockers or reschedule them."
       ]
     },
@@ -352,8 +352,8 @@
       },
       "actual": {
         "required_failed": 0,
-        "optional_failed": 0,
-        "allowed_failures": 0
+        "optional_failed": 3,
+        "allowed_failures": 3
       }
     }
   ],
