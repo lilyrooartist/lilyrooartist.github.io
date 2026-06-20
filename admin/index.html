@@ -459,6 +459,13 @@
               </div>
             </section>
 
+            <section class="report-card" aria-labelledby="promo-unlock-sequence-heading">
+              <h2 id="promo-unlock-sequence-heading">Unlock Sequence</h2>
+              <div class="queue-list" id="promo-unlock-sequence">
+                <div class="muted">Loading unlock sequence...</div>
+              </div>
+            </section>
+
             <section class="report-card" aria-labelledby="promo-consistency-heading">
               <h2 id="promo-consistency-heading">Consistency Audit</h2>
               <div class="queue-list" id="promo-consistency-audit">
@@ -590,6 +597,7 @@
               <div class="source-grid">
                 <a class="source-link" href="reports/" target="_blank" rel="noopener">Reports index</a>
                 <a class="source-link" href="reports/weekly-social-report.md" target="_blank" rel="noopener">Weekly report</a>
+                <a class="source-link" href="reports/promo-unlock-sequence.md" target="_blank" rel="noopener">Unlock sequence</a>
                 <a class="source-link" href="reports/promo-consistency-audit.md" target="_blank" rel="noopener">Consistency audit</a>
                 <a class="source-link" href="reports/published-log-reconciliation.md" target="_blank" rel="noopener">Published log reconciliation</a>
                 <a class="source-link" href="reports/tiktok-setup-preflight.md" target="_blank" rel="noopener">TikTok preflight</a>
@@ -605,6 +613,7 @@
                 <a class="source-link" href="../data/promotion_blocker_ledger.json" target="_blank" rel="noopener">Blocker JSON</a>
                 <a class="source-link" href="../data/distrokid_release_status.json" target="_blank" rel="noopener">Release status</a>
                 <a class="source-link" href="../data/promo_engine_status.json" target="_blank" rel="noopener">Promo health</a>
+                <a class="source-link" href="../data/promo_unlock_sequence.json" target="_blank" rel="noopener">Unlock sequence JSON</a>
                 <a class="source-link" href="../data/promo_consistency_audit.json" target="_blank" rel="noopener">Consistency JSON</a>
                 <a class="source-link" href="../data/published_log_reconciliation.json" target="_blank" rel="noopener">Log reconciliation JSON</a>
                 <a class="source-link" href="../data/tiktok_setup_preflight.json" target="_blank" rel="noopener">TikTok preflight JSON</a>
@@ -25383,6 +25392,46 @@ Generated: 2026-06-20T09:46:13.904365Z
     root.innerHTML=`${summary}${releaseItems}${sourceRows}${actionList}`;
   }
 
+  function commandForStep(step,kind){
+    return (Array.isArray(step?.commands)?step.commands:[]).find(command=>command.step===kind)||{};
+  }
+
+  function renderPromoUnlockSequence(status){
+    const root=document.getElementById('promo-unlock-sequence');
+    if(!root) return;
+    const unlock=(status?.kpi||{}).promo_unlock_sequence||(status?.health||{}).promo_unlock_sequence||{};
+    if(!unlock.available){
+      root.innerHTML='<div class="muted">No unlock sequence snapshot found.</div>';
+      return;
+    }
+    const current=unlock.current_step||{};
+    const preview=commandForStep(current,'preview');
+    const apply=commandForStep(current,'apply_after_review');
+    const readySteps=Array.isArray(unlock.ready_steps)?unlock.ready_steps:[];
+    const blockedSteps=Array.isArray(unlock.blocked_or_warning_steps)?unlock.blocked_or_warning_steps:[];
+    const stateClass=String(unlock.current_gate_state||'').includes('ready')?'ok':String(unlock.current_gate_state||'').includes('blocked')?'warn':'neutral';
+    const readyRows=readySteps.slice(0,3).map(step=>`<li>${escapeHtml(step.phase||step.id||'Unlock step')} (${escapeHtml(step.gate_state||'ready')})</li>`).join('');
+    const blockedRows=blockedSteps.slice(0,3).map(step=>`<li>${escapeHtml(step.phase||step.id||'Blocked step')}: ${escapeHtml(step.reason||step.gate_state||'blocked')}</li>`).join('');
+    const source=unlock.source_path||'data/promo_unlock_sequence.json';
+    root.innerHTML=`<div class="queue-item">
+      <div class="queue-top">
+        <div>
+          <div class="queue-title">${escapeHtml(current.phase||unlock.current_step_id||'Current unlock gate')}</div>
+          <div class="queue-meta">${escapeHtml(unlock.current_gate_state||'unknown')} - ${escapeHtml(unlock.ready_for_human_review_count||0)} ready - ${escapeHtml(unlock.blocked_or_warning_count||0)} blocked/warning - ${escapeHtml(unlock.open_blocker_count||0)} open blockers</div>
+          ${current.reason?`<div class="queue-meta">${escapeHtml(current.reason)}</div>`:''}
+          ${preview.command?`<div class="collection-command">${escapeHtml(preview.command)}</div>`:''}
+          ${apply.command?`<div class="collection-command">${escapeHtml(apply.command)}</div>`:''}
+          ${current.completion_evidence?`<div class="queue-meta">Evidence: ${escapeHtml(current.completion_evidence)}</div>`:''}
+          ${current.guardrail?`<div class="queue-meta">Guardrail: ${escapeHtml(current.guardrail)}</div>`:''}
+          <div class="queue-meta"><a href="../${escapeHtml(source)}" target="_blank" rel="noopener">Open unlock JSON</a> · <a href="reports/promo-unlock-sequence.md" target="_blank" rel="noopener">Open report</a></div>
+        </div>
+        <span class="status-chip ${stateClass}">${escapeHtml(unlock.current_gate_state||'unknown')}</span>
+      </div>
+      ${readyRows?`<ul class="release-open-checks">${readyRows}</ul>`:''}
+      ${blockedRows?`<ul class="release-open-checks">${blockedRows}</ul>`:''}
+    </div>`;
+  }
+
   function renderPromoOperationsPacket(packet){
     const root=document.getElementById('promo-operations-packet');
     if(!root) return;
@@ -26519,6 +26568,7 @@ Generated: 2026-06-20T09:46:13.904365Z
     renderRecentPublishing(publishedRows);
     renderReleaseRollout(releaseStatus);
     renderPromoHealth(promoHealth, manualMetricPacket);
+    renderPromoUnlockSequence(promoHealth);
     renderPromoConsistencyAudit(promoConsistency);
     renderPromoOperationsPacket(promoOps);
     renderPublishedLogReconciliation(publishedLogReconciliation);
