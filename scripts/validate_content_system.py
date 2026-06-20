@@ -929,6 +929,8 @@ def validate_generated_outputs(failures):
         owner_counts = summary.get("owner_counts") or {}
         category_counts = summary.get("category_counts") or {}
         projection = summary.get("next_resolution_projection") or {}
+        roadmap = summary.get("blocker_unlock_roadmap") or []
+        roadmap_ids = {item.get("id") for item in roadmap}
         if (
             ledger.get("safe_mode") is True
             and summary.get("open_blocker_count") == len(ledger_rows)
@@ -938,6 +940,19 @@ def validate_generated_outputs(failures):
             and projection.get("kind") == "checked_scheduled_approval_batch"
             and isinstance(projection.get("blockers_resolved"), int)
             and isinstance(projection.get("approval_blockers_after"), int)
+            and {"unlock-checked-scheduled-approval", "unlock-manual-distribution", "unlock-tiktok-platform-repair", "unlock-backlog-reschedule", "unlock-manual-metrics"} <= roadmap_ids
+            and all(
+                item.get("id")
+                and item.get("phase")
+                and item.get("status")
+                and item.get("owner") in {"tod", "external_platform", "codex"}
+                and isinstance(item.get("blockers_resolved"), int)
+                and item.get("unlocks")
+                and item.get("source_path")
+                for item in roadmap
+            )
+            and any(item.get("id") == "unlock-checked-scheduled-approval" and item.get("preview_command") == projection.get("preview_command") and item.get("apply_command") == projection.get("apply_command") for item in roadmap)
+            and any(item.get("id") == "unlock-manual-metrics" and "update_manual_social_stats.py --from-csv --dry-run" in (item.get("preview_command") or "") for item in roadmap)
             and all(
                 row.get("id")
                 and row.get("blocker_id") == row.get("id")
@@ -1687,7 +1702,7 @@ def validate_generated_outputs(failures):
         fail("build_human_handoff_packet.py missing", failures)
     if PROMOTION_BLOCKER_LEDGER_SCRIPT.exists():
         ledger_text = PROMOTION_BLOCKER_LEDGER_SCRIPT.read_text(encoding="utf-8")
-        if "promotion_blocker_ledger.json" in ledger_text and "promotion-blocker-ledger.md" in ledger_text and "owner_counts" in ledger_text and "category_counts" in ledger_text and "manual_metric_collection_packet.json" in ledger_text and "next_resolution_projection" in ledger_text and "approval_projection" in ledger_text and "subprocess" not in ledger_text:
+        if "promotion_blocker_ledger.json" in ledger_text and "promotion-blocker-ledger.md" in ledger_text and "owner_counts" in ledger_text and "category_counts" in ledger_text and "manual_metric_collection_packet.json" in ledger_text and "blocker_unlock_roadmap" in ledger_text and "build_unlock_roadmap" in ledger_text and "next_resolution_projection" in ledger_text and "approval_projection" in ledger_text and "subprocess" not in ledger_text:
             ok("promotion blocker ledger builder is review-only")
         else:
             fail("build_promotion_blocker_ledger.py missing ledger outputs or executes commands", failures)
@@ -1815,7 +1830,7 @@ def validate_generated_outputs(failures):
         fail("human-handoff-packet.md missing", failures)
     if PROMOTION_BLOCKER_LEDGER_REPORT.exists():
         ledger_report_text = PROMOTION_BLOCKER_LEDGER_REPORT.read_text(encoding="utf-8")
-        if "Promotion Blocker Ledger" in ledger_report_text and "Ledger" in ledger_report_text and "Guardrails" in ledger_report_text:
+        if "Promotion Blocker Ledger" in ledger_report_text and "Unlock Roadmap" in ledger_report_text and "Ledger" in ledger_report_text and "Guardrails" in ledger_report_text:
             ok("promotion blocker ledger markdown report present")
         else:
             fail("promotion-blocker-ledger.md missing expected sections", failures)

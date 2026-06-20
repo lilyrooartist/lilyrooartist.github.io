@@ -1,6 +1,6 @@
 # Promotion Blocker Ledger - Lily Roo
 
-Generated: 2026-06-20T03:48:08.659108Z
+Generated: 2026-06-20T03:53:28.868874Z
 
 ## Summary
 - Open blockers: **12**
@@ -8,6 +8,35 @@ Generated: 2026-06-20T03:48:08.659108Z
 - External platform-owned: **1**
 - Codex-actionable: **0**
 - High or critical: **4**
+
+## Unlock Roadmap
+- **Approve checked scheduled rows** (`ready_for_review`)
+  - Owner: `tod`; projected blockers resolved: **2**
+  - Unlocks: Instagram executor row can become publish-eligible after approval.; One scheduled YouTube Community row can move into manual distribution after approval.
+  - Blocked by: FP-AUTO-259
+  - Preview/check: `python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run`
+  - Apply after review: `python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin`
+- **Review and post manual YouTube Community rows** (`needs_review`)
+  - Owner: `tod`; projected blockers resolved: **2**
+  - Unlocks: Manual YouTube Community promotion can publish without waiting for broken auto executors.; Published_Log.csv can be updated after public URLs exist.
+  - Blocked by: manual approval
+- **Repair TikTok executor** (`blocked`)
+  - Owner: `tod`; projected blockers resolved: **1**
+  - Unlocks: Held TikTok approval rows can pass platform-readiness review.; Approved TikTok backlog can become safe to reschedule and publish.
+  - Blocked by: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN
+  - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
+  - Apply after review: `python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py`
+- **Reschedule approved past-due backlog** (`blocked_until_clearance_steps_complete`)
+  - Owner: `external_platform`; projected blockers resolved: **1**
+  - Unlocks: Approved past-due queue rows get a fresh schedule after executor blockers clear.
+  - Blocked by: FP-AUTO-264
+  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24`
+- **Fill manual metric worksheet** (`needs_values`)
+  - Owner: `tod`; projected blockers resolved: **5**
+  - Unlocks: Admin health and weekly reporting can use fresh cross-platform metrics.; Manual metric blockers clear once worksheet values are imported.
+  - Blocked by: facebook:1, instagram:2, spotify:4, tiktok:2, x:2
+  - Preview/check: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
+  - Apply after review: `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
 
 ## Ledger
 - **[high] Approve scheduled Instagram row** (`approval-FP-AUTO-258`)

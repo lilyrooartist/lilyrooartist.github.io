@@ -289,6 +289,106 @@ def grouped_counts(rows: list[dict], key: str) -> dict:
     return dict(sorted(counts.items()))
 
 
+def unique_values(values: list[str]) -> list[str]:
+    unique = []
+    seen = set()
+    for value in values:
+        if value in seen:
+            continue
+        seen.add(value)
+        unique.append(value)
+    return unique
+
+
+def build_unlock_roadmap(rows: list[dict], projection: dict) -> list[dict]:
+    manual_distribution = read_json(MANUAL_DISTRIBUTION, {})
+    manual_docket = manual_distribution.get("manual_distribution_docket") or {}
+    platform_repair = read_json(PLATFORM_REPAIR, {})
+    backlog = read_json(BACKLOG_RESCHEDULE, {})
+    metrics = read_json(MANUAL_METRICS, {})
+    metric_docket = metrics.get("metric_collection_docket") or {}
+    platform_rows = platform_repair.get("rows") or []
+    tiktok_rows = [item for item in platform_rows if str(item.get("platform") or "").lower() == "tiktok"]
+    backlog_summary = backlog.get("summary") or {}
+    roadmap = [
+        {
+            "id": "unlock-checked-scheduled-approval",
+            "phase": "Approve checked scheduled rows",
+            "status": "ready_for_review" if projection.get("checked_ids") else "blocked",
+            "owner": "tod",
+            "blockers_resolved": int(projection.get("blockers_resolved") or 0),
+            "unlocks": [
+                "Instagram executor row can become publish-eligible after approval.",
+                "One scheduled YouTube Community row can move into manual distribution after approval.",
+            ],
+            "blocked_by": projection.get("blocked_ids_retained") or [],
+            "preview_command": projection.get("preview_command") or "",
+            "apply_command": projection.get("apply_command") or "",
+            "source_path": str(SCHEDULED_APPROVAL.relative_to(ROOT)),
+        },
+        {
+            "id": "unlock-manual-distribution",
+            "phase": "Review and post manual YouTube Community rows",
+            "status": manual_docket.get("status") or "unknown",
+            "owner": "tod",
+            "blockers_resolved": int(manual_docket.get("review_count") or 0) + int(manual_docket.get("postable_count") or 0),
+            "unlocks": [
+                "Manual YouTube Community promotion can publish without waiting for broken auto executors.",
+                "Published_Log.csv can be updated after public URLs exist.",
+            ],
+            "blocked_by": ["manual approval"] if manual_docket.get("review_count") else [],
+            "preview_command": "",
+            "apply_command": "",
+            "source_path": str(MANUAL_DISTRIBUTION.relative_to(ROOT)),
+        },
+        {
+            "id": "unlock-tiktok-platform-repair",
+            "phase": "Repair TikTok executor",
+            "status": "blocked" if tiktok_rows else "ready",
+            "owner": "tod",
+            "blockers_resolved": len(tiktok_rows),
+            "unlocks": [
+                "Held TikTok approval rows can pass platform-readiness review.",
+                "Approved TikTok backlog can become safe to reschedule and publish.",
+            ],
+            "blocked_by": unique_values((tiktok_rows[0].get("missing_secrets") or []) + (tiktok_rows[0].get("local_missing_secrets") or [])) if tiktok_rows else [],
+            "preview_command": (tiktok_rows[0].get("preview_command") or "") if tiktok_rows else "",
+            "apply_command": (tiktok_rows[0].get("apply_command") or "") if tiktok_rows else "",
+            "source_path": str(PLATFORM_REPAIR.relative_to(ROOT)),
+        },
+        {
+            "id": "unlock-backlog-reschedule",
+            "phase": "Reschedule approved past-due backlog",
+            "status": backlog_summary.get("normal_apply_gate") or ("ready" if backlog_summary.get("apply_command") else "blocked"),
+            "owner": "external_platform" if backlog_summary.get("blocked_backlog_count") else "tod",
+            "blockers_resolved": int(backlog_summary.get("approved_backlog_count") or 0),
+            "unlocks": [
+                "Approved past-due queue rows get a fresh schedule after executor blockers clear.",
+            ],
+            "blocked_by": backlog_summary.get("blocked_ids") or [],
+            "preview_command": backlog_summary.get("preview_command") or "",
+            "apply_command": backlog_summary.get("apply_command") or "",
+            "source_path": str(BACKLOG_RESCHEDULE.relative_to(ROOT)),
+        },
+        {
+            "id": "unlock-manual-metrics",
+            "phase": "Fill manual metric worksheet",
+            "status": metric_docket.get("status") or "unknown",
+            "owner": "tod",
+            "blockers_resolved": int(metric_docket.get("platform_count") or 0),
+            "unlocks": [
+                "Admin health and weekly reporting can use fresh cross-platform metrics.",
+                "Manual metric blockers clear once worksheet values are imported.",
+            ],
+            "blocked_by": [f"{group.get('platform')}:{group.get('waiting_count')}" for group in metric_docket.get("platform_groups") or [] if group.get("waiting_count")],
+            "preview_command": metric_docket.get("worksheet_import_preview_command") or "",
+            "apply_command": metric_docket.get("worksheet_import_command") or "",
+            "source_path": str(MANUAL_METRICS.relative_to(ROOT)),
+        },
+    ]
+    return roadmap
+
+
 def build_markdown(payload: dict) -> str:
     summary = payload["summary"]
     lines = [
@@ -303,8 +403,23 @@ def build_markdown(payload: dict) -> str:
         f"- Codex-actionable: **{summary['owner_counts'].get('codex', 0)}**",
         f"- High or critical: **{summary['urgent_count']}**",
         "",
-        "## Ledger",
+        "## Unlock Roadmap",
     ]
+    for item in summary.get("blocker_unlock_roadmap") or []:
+        lines.append(f"- **{item['phase']}** (`{item['status']}`)")
+        lines.append(f"  - Owner: `{item['owner']}`; projected blockers resolved: **{item.get('blockers_resolved', 0)}**")
+        if item.get("unlocks"):
+            lines.append(f"  - Unlocks: {'; '.join(item['unlocks'])}")
+        if item.get("blocked_by"):
+            lines.append(f"  - Blocked by: {', '.join(item['blocked_by'])}")
+        if item.get("preview_command"):
+            lines.append(f"  - Preview/check: `{item['preview_command']}`")
+        if item.get("apply_command"):
+            lines.append(f"  - Apply after review: `{item['apply_command']}`")
+    lines.extend([
+        "",
+        "## Ledger",
+    ])
     for item in payload["rows"]:
         lines.append(f"- **[{item['urgency']}] {item['title']}** (`{item['id']}`)")
         lines.append(f"  - Owner: `{item['owner']}`; status: `{item['status']}`; category: `{item['category']}`")
@@ -405,6 +520,7 @@ def build_ledger() -> dict:
         "category_counts": grouped_counts(rows, "category"),
         "status_counts": grouped_counts(rows, "status"),
         "next_resolution_projection": next_resolution_projection,
+        "blocker_unlock_roadmap": build_unlock_roadmap(rows, next_resolution_projection),
         "sources": [
             str(BACKLOG_RESCHEDULE.relative_to(ROOT)),
             str(PLATFORM_REPAIR.relative_to(ROOT)),

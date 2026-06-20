@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T03:48:08.686507Z",
+  "generated_at": "2026-06-20T03:53:28.894893Z",
   "safe_mode": true,
   "source": {
     "promotion_blocker_ledger": "data/promotion_blocker_ledger.json",
@@ -69,6 +69,98 @@
         "apply_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
         "guardrail": "Human review is still required; blocked review IDs stay excluded from the checked batch."
       },
+      "blocker_unlock_roadmap": [
+        {
+          "id": "unlock-checked-scheduled-approval",
+          "phase": "Approve checked scheduled rows",
+          "status": "ready_for_review",
+          "owner": "tod",
+          "blockers_resolved": 2,
+          "unlocks": [
+            "Instagram executor row can become publish-eligible after approval.",
+            "One scheduled YouTube Community row can move into manual distribution after approval."
+          ],
+          "blocked_by": [
+            "FP-AUTO-259"
+          ],
+          "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+          "apply_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+          "source_path": "data/scheduled_approval_packet.json"
+        },
+        {
+          "id": "unlock-manual-distribution",
+          "phase": "Review and post manual YouTube Community rows",
+          "status": "needs_review",
+          "owner": "tod",
+          "blockers_resolved": 2,
+          "unlocks": [
+            "Manual YouTube Community promotion can publish without waiting for broken auto executors.",
+            "Published_Log.csv can be updated after public URLs exist."
+          ],
+          "blocked_by": [
+            "manual approval"
+          ],
+          "preview_command": "",
+          "apply_command": "",
+          "source_path": "data/manual_distribution_packet.json"
+        },
+        {
+          "id": "unlock-tiktok-platform-repair",
+          "phase": "Repair TikTok executor",
+          "status": "blocked",
+          "owner": "tod",
+          "blockers_resolved": 1,
+          "unlocks": [
+            "Held TikTok approval rows can pass platform-readiness review.",
+            "Approved TikTok backlog can become safe to reschedule and publish."
+          ],
+          "blocked_by": [
+            "TIKTOK_CLIENT_KEY",
+            "TIKTOK_CLIENT_SECRET",
+            "TIKTOK_REFRESH_TOKEN"
+          ],
+          "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+          "apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
+          "source_path": "data/platform_repair_status.json"
+        },
+        {
+          "id": "unlock-backlog-reschedule",
+          "phase": "Reschedule approved past-due backlog",
+          "status": "blocked_until_clearance_steps_complete",
+          "owner": "external_platform",
+          "blockers_resolved": 1,
+          "unlocks": [
+            "Approved past-due queue rows get a fresh schedule after executor blockers clear."
+          ],
+          "blocked_by": [
+            "FP-AUTO-264"
+          ],
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
+          "apply_command": "",
+          "source_path": "data/backlog_reschedule_preview.json"
+        },
+        {
+          "id": "unlock-manual-metrics",
+          "phase": "Fill manual metric worksheet",
+          "status": "needs_values",
+          "owner": "tod",
+          "blockers_resolved": 5,
+          "unlocks": [
+            "Admin health and weekly reporting can use fresh cross-platform metrics.",
+            "Manual metric blockers clear once worksheet values are imported."
+          ],
+          "blocked_by": [
+            "facebook:1",
+            "instagram:2",
+            "spotify:4",
+            "tiktok:2",
+            "x:2"
+          ],
+          "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
+          "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
+          "source_path": "data/manual_metric_collection_packet.json"
+        }
+      ],
       "sources": [
         "data/backlog_reschedule_preview.json",
         "data/platform_repair_status.json",
