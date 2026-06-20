@@ -674,6 +674,7 @@ def refresh_run_state(promo_refresh_run):
         return {
             "ok": False,
             "available": False,
+            "source_revision": {},
             "finished_at": "",
             "duration_seconds": None,
             "command_count": 0,
@@ -699,6 +700,7 @@ def refresh_run_state(promo_refresh_run):
         "available": True,
         "safe_mode": bool(promo_refresh_run.get("safe_mode")),
         "finalized": bool(promo_refresh_run.get("finalized")),
+        "source_revision": promo_refresh_run.get("source_revision") or {},
         "finished_at": promo_refresh_run.get("finished_at", ""),
         "duration_seconds": promo_refresh_run.get("duration_seconds"),
         "command_count": int(summary.get("command_count") or summary.get("steps_run") or len(commands) or 0),

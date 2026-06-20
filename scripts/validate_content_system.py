@@ -273,6 +273,11 @@ def validate_generated_outputs(failures):
             ok(f"promo admin refresh run tracks {len(commands)} command(s)")
         else:
             fail("promo_admin_refresh_run.json missing timestamps or command summary", failures)
+        source_revision = refresh_run.get("source_revision") or {}
+        if source_revision.get("commit") and source_revision.get("short_commit") and source_revision.get("source_url"):
+            ok("promo admin refresh run records source revision")
+        else:
+            fail("promo_admin_refresh_run.json missing source revision", failures)
         if refresh_run.get("safe_mode") is True and all("command" in command and "returncode" in command for command in commands):
             ok("promo admin refresh run records safe command results")
         else:
@@ -1592,7 +1597,13 @@ def validate_generated_outputs(failures):
             else:
                 fail("promo_engine_status.json platform-fix count does not match executor snapshot", failures)
         refresh_run = kpi.get("last_refresh_run") or {}
-        if "available" in refresh_run and "command_count" in refresh_run and "finished_at" in refresh_run:
+        raw_refresh_run = json.loads(PROMO_REFRESH_RUN.read_text(encoding="utf-8")) if PROMO_REFRESH_RUN.exists() else {}
+        if (
+            "available" in refresh_run
+            and "command_count" in refresh_run
+            and "finished_at" in refresh_run
+            and refresh_run.get("source_revision") == (raw_refresh_run.get("source_revision") or {})
+        ):
             ok("promo engine includes last refresh run summary")
         else:
             fail("promo_engine_status.json missing last refresh run summary", failures)

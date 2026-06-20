@@ -196,6 +196,27 @@ def command_text(command: list[str]) -> str:
     return " ".join(command)
 
 
+def git_output(args: list[str]) -> str:
+    try:
+        return subprocess.check_output(["git", *args], cwd=ROOT, text=True, stderr=subprocess.DEVNULL).strip()
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        return ""
+
+
+def source_revision_state() -> dict:
+    commit = git_output(["rev-parse", "HEAD"])
+    short = git_output(["rev-parse", "--short", "HEAD"])
+    branch = git_output(["branch", "--show-current"])
+    commit_time = git_output(["log", "-1", "--format=%cI"])
+    return {
+        "commit": commit,
+        "short_commit": short,
+        "branch": branch,
+        "committed_at": commit_time,
+        "source_url": f"https://github.com/lilyrooartist/lilyrooartist.github.io/commit/{commit}" if commit else "",
+    }
+
+
 def assert_safe_steps(steps: list[dict]) -> None:
     for step in steps:
         command = command_text(step["command"])
@@ -267,6 +288,7 @@ def main() -> int:
 
     assert_safe_steps(STEPS + FINALIZE_STEPS)
     started = datetime.now(timezone.utc)
+    source_revision = source_revision_state()
     results = []
     for step in STEPS:
         result = run_step(step, args.dry_run)
@@ -285,6 +307,7 @@ def main() -> int:
             "safe_mode": True,
             "finalized": finalized,
             "dry_run": bool(args.dry_run),
+            "source_revision": source_revision,
             "started_at": started.isoformat().replace("+00:00", "Z"),
             "finished_at": finished.isoformat().replace("+00:00", "Z"),
             "duration_seconds": round((finished - started).total_seconds(), 2),
