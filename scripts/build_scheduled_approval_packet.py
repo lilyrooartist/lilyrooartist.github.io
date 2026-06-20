@@ -177,6 +177,18 @@ def checks_passed(checks: list[dict]) -> bool:
     return bool(checks) and all(item.get("status") == "pass" for item in checks)
 
 
+def approval_review_status(checks: list[dict]) -> str:
+    if checks_passed(checks):
+        return "checked_batch_ready"
+    if any(item.get("status") == "fail" for item in checks):
+        return "held_by_failed_checks"
+    return "needs_manual_review"
+
+
+def failed_review_checks(checks: list[dict]) -> list[dict]:
+    return [item for item in checks if item.get("status") == "fail"]
+
+
 def build_rows(queue: dict[str, dict[str, str]], executions: dict, readiness: dict) -> list[dict]:
     rows = []
     for item in (executions.get("summary") or {}).get("approval_needed") or []:
@@ -186,6 +198,7 @@ def build_rows(queue: dict[str, dict[str, str]], executions: dict, readiness: di
             continue
         media_url = row.get("clip_url") or row.get("imagery_url") or ""
         checks = review_checks(row, item, readiness)
+        review_status = approval_review_status(checks)
         rows.append({
             "id": post_id,
             "platform": row.get("platform") or item.get("platform") or "",
@@ -207,6 +220,10 @@ def build_rows(queue: dict[str, dict[str, str]], executions: dict, readiness: di
             "desired_privacy": row.get("desired_privacy") or "",
             "review_checks": checks,
             "review_check_passed": checks_passed(checks),
+            "failed_review_checks": failed_review_checks(checks),
+            "approval_review_status": review_status,
+            "checked_batch_member": review_status == "checked_batch_ready",
+            "approval_batch_reason": "All automated review checks passed." if review_status == "checked_batch_ready" else "Held outside checked batch until failed/review checks clear.",
             "approval_effect": approval_effect(row),
             "approval_preview_command": approval_preview_command(post_id),
             "approval_apply_command": approval_apply_command(post_id),
@@ -255,6 +272,14 @@ def build_markdown(payload: dict) -> str:
             lines.append("  - Review checks:")
             for item in row["review_checks"]:
                 lines.append(f"    - `{item['status']}` {item['name']}: {item['detail']}")
+        lines.append(f"  - Approval review status: `{row.get('approval_review_status')}`")
+        lines.append(f"  - Checked batch member: `{row.get('checked_batch_member')}`")
+        if row.get("failed_review_checks"):
+            lines.append("  - Failed checks holding this row:")
+            for item in row["failed_review_checks"]:
+                lines.append(f"    - `{item['name']}`: {item['detail']}")
+        if row.get("approval_batch_reason"):
+            lines.append(f"  - Batch reason: {row['approval_batch_reason']}")
         if row.get("approval_effect"):
             effect = row["approval_effect"]
             lines.append(f"  - Approval effect: `{effect['summary']}`")

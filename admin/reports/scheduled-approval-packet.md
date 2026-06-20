@@ -1,6 +1,6 @@
 # Scheduled Approval Packet - Lily Roo
 
-Generated: 2026-06-20T03:09:13.152691Z
+Generated: 2026-06-20T03:13:31.120445Z
 
 ## Summary
 - Approval blockers: **3**
@@ -32,6 +32,9 @@ Generated: 2026-06-20T03:09:13.152691Z
     - `pass` asset_file_present: https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg maps to assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg.
     - `pass` executor_blocker_confirmed: Current executor state is blocked / not_approved.
     - `pass` platform_readiness: Executor readiness snapshot marks platform ready.
+  - Approval review status: `checked_batch_ready`
+  - Checked batch member: `True`
+  - Batch reason: All automated review checks passed.
   - Approval effect: `approved 'no' -> 'yes'`
   - Preview approval: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 --dry-run`
   - Approve after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 --refresh-admin`
@@ -47,6 +50,11 @@ Generated: 2026-06-20T03:09:13.152691Z
     - `pass` asset_file_present: https://www.lilyroo.com/assets/ig/01_i_learned_it_all_60s.mp4 maps to assets/ig/01_i_learned_it_all_60s.mp4.
     - `pass` executor_blocker_confirmed: Current executor state is blocked / not_approved.
     - `fail` platform_readiness: Executor readiness snapshot marks platform blocked. Missing secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.
+  - Approval review status: `held_by_failed_checks`
+  - Checked batch member: `False`
+  - Failed checks holding this row:
+    - `platform_readiness`: Executor readiness snapshot marks platform blocked. Missing secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.
+  - Batch reason: Held outside checked batch until failed/review checks clear.
   - Approval effect: `approved 'no' -> 'yes'`
   - Preview approval: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --dry-run`
   - Approve after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --refresh-admin`
@@ -62,6 +70,9 @@ Generated: 2026-06-20T03:09:13.152691Z
     - `pass` asset_file_present: https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg maps to assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg.
     - `pass` executor_blocker_confirmed: Current executor state is blocked / not_approved.
     - `pass` platform_readiness: Executor readiness snapshot marks platform ready.
+  - Approval review status: `checked_batch_ready`
+  - Checked batch member: `True`
+  - Batch reason: All automated review checks passed.
   - Approval effect: `approved 'no' -> 'yes'`
   - Preview approval: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-261 --dry-run`
   - Approve after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-261 --refresh-admin`
