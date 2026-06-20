@@ -1,0 +1,149 @@
+{
+  "generated_at": "2026-06-20T09:14:41.782468Z",
+  "safe_mode": true,
+  "source": {
+    "resolution_worksheet": "data/human_handoff_resolution_worksheet.csv",
+    "human_handoff_packet": "data/human_handoff_packet.json"
+  },
+  "summary": {
+    "worksheet_row_count": 7,
+    "preview_count": 7,
+    "executed_preview_count": 7,
+    "skipped_preview_count": 0,
+    "status_counts": {
+      "input_missing": 3,
+      "preview_ok": 3,
+      "preview_ok_with_warning": 1
+    },
+    "phase_counts": {
+      "Approval": 1,
+      "Backlog recovery": 1,
+      "Manual distribution": 2,
+      "Manual metrics": 2,
+      "Platform setup": 1
+    },
+    "safe_command_policy": "Only python3 scripts/* commands with --dry-run, or reschedule previews without --apply, are executed.",
+    "mutation_guardrail": "This preview runner never executes apply, refresh-admin, PUBLIC_URL placeholder, non-python, or unsupported commands."
+  },
+  "previews": [
+    {
+      "task_id": "approve-checked-scheduled-batch",
+      "phase": "Approval",
+      "status": "waiting_for_review",
+      "input_needed": "human_review_decision",
+      "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+      "safety": "safe_preview",
+      "safety_reason": "dry_run_command",
+      "returncode": 0,
+      "preview_status": "preview_ok",
+      "output_excerpt": "FP-AUTO-258: approved 'no' -> 'yes'\nFP-AUTO-261: approved 'no' -> 'yes'\nChecked batch guard: 2 checked id(s); 2 requested; 0 unchecked; 2 change(s).\nDry run only; did not update data/scheduled_posts.csv",
+      "completion_evidence": "data/scheduled_approval_packet.json should show fewer approval blockers, and data/social_scheduler_dry_run.json should no longer block the approved Instagram row on not_approved.",
+      "guardrail": "Use --checked-batch so only rows that passed review checks are approved."
+    },
+    {
+      "task_id": "platform-setup-FP-AUTO-264",
+      "phase": "Platform setup",
+      "status": "blocked",
+      "input_needed": "local_secret_presence_and_public_posting_approval",
+      "command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+      "safety": "safe_preview",
+      "safety_reason": "dry_run_command",
+      "returncode": 1,
+      "preview_status": "input_missing",
+      "output_excerpt": "ERROR: TIKTOK_CLIENT_KEY is missing from secrets/social_api.env\nERROR: TIKTOK_CLIENT_SECRET is missing from secrets/social_api.env\nERROR: TIKTOK_REFRESH_TOKEN is missing from secrets/social_api.env",
+      "completion_evidence": "data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_post_publicly before TikTok backlog work is allowed.",
+      "guardrail": "Run the TikTok preflight before pushing secrets; push worker secrets only after local OAuth/public posting setup is complete."
+    },
+    {
+      "task_id": "backlog-reschedule",
+      "phase": "Backlog recovery",
+      "status": "blocked",
+      "input_needed": "clearance_confirmation",
+      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
+      "safety": "safe_preview",
+      "safety_reason": "reschedule_preview_command",
+      "returncode": 0,
+      "preview_status": "preview_ok_with_warning",
+      "output_excerpt": "Rows selected: 1\n- FP-AUTO-264 TikTok I Learned It All in Fifteen Seconds: 2026-06-09T21:25:00-04:00 -> 2026-06-21T10:00:00+09:00\n  WARNING: known blocker: tiktok_credentials_missing\nDry run only. Re-run with --apply to write the schedule.",
+      "completion_evidence": "data/backlog_reschedule_preview.json should show normal_apply_gate clear before any non-override apply command is exposed.",
+      "guardrail": "Normal apply stays hidden until known executor/platform blockers clear."
+    },
+    {
+      "task_id": "manual-distribution-FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+      "phase": "Manual distribution",
+      "status": "waiting_for_review",
+      "input_needed": "manual_post_review_and_public_url",
+      "command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --dry-run",
+      "safety": "safe_preview",
+      "safety_reason": "dry_run_command",
+      "returncode": 0,
+      "preview_status": "preview_ok",
+      "output_excerpt": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY: approved 'no' -> 'yes'\nDry run only; no changes written to data/promo_queue_plan.json",
+      "completion_evidence": "data/manual_distribution_packet.json should move approved rows from review_queue toward postable manual distribution, and data/published_log_reconciliation.json should remain gated until public URLs are logged.",
+      "guardrail": "Do not log a manual post until a real public URL exists."
+    },
+    {
+      "task_id": "manual-distribution-FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+      "phase": "Manual distribution",
+      "status": "waiting_for_review",
+      "input_needed": "manual_post_review_and_public_url",
+      "command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
+      "safety": "safe_preview",
+      "safety_reason": "dry_run_command",
+      "returncode": 0,
+      "preview_status": "preview_ok",
+      "output_excerpt": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY: approved 'no' -> 'yes'\nDry run only; no changes written to data/promo_queue_plan.json",
+      "completion_evidence": "data/manual_distribution_packet.json should move approved rows from review_queue toward postable manual distribution, and data/published_log_reconciliation.json should remain gated until public URLs are logged.",
+      "guardrail": "Do not log a manual post until a real public URL exists."
+    },
+    {
+      "task_id": "manual-metrics-priority-2",
+      "phase": "Manual metrics",
+      "status": "needs_values",
+      "input_needed": "private_metric_values",
+      "command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
+      "safety": "safe_preview",
+      "safety_reason": "dry_run_command",
+      "returncode": 1,
+      "preview_status": "input_missing",
+      "output_excerpt": "No metric assignments supplied. Add platform.metric=value args or fill new_value cells and use --from-csv.",
+      "completion_evidence": "data/manual_metric_collection_packet.json should reduce pending_field_count, and data/metrics_history.json should preserve the imported metrics in the latest snapshot.",
+      "guardrail": "Only import nonnegative numeric values copied from the named source; leave unknown values blank instead of guessing."
+    },
+    {
+      "task_id": "manual-metrics-priority-3",
+      "phase": "Manual metrics",
+      "status": "needs_values",
+      "input_needed": "private_metric_values",
+      "command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
+      "safety": "safe_preview",
+      "safety_reason": "dry_run_command",
+      "returncode": 1,
+      "preview_status": "input_missing",
+      "output_excerpt": "No metric assignments supplied. Add platform.metric=value args or fill new_value cells and use --from-csv.",
+      "completion_evidence": "data/manual_metric_collection_packet.json should reduce pending_field_count, and data/metrics_history.json should preserve the imported metrics in the latest snapshot.",
+      "guardrail": "Only import nonnegative numeric values copied from the named source; leave unknown values blank instead of guessing."
+    }
+  ],
+  "handoff_resolution_summary": {
+    "path": "data/human_handoff_resolution_worksheet.csv",
+    "row_count": 7,
+    "fieldnames": [
+      "task_id",
+      "phase",
+      "owner",
+      "urgency",
+      "status",
+      "title",
+      "input_needed",
+      "worksheet_reference",
+      "source_path",
+      "preview_command",
+      "apply_after_review_command",
+      "completion_evidence",
+      "guardrail"
+    ],
+    "safe_mode": true,
+    "redaction": "Worksheet rows collect prompts, commands, and evidence targets only; private metric values, public URLs, approval decisions, and secret values stay out of generated reports."
+  }
+}

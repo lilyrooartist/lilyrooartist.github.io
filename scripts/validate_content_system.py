@@ -31,6 +31,7 @@ PROMO_OPERATIONS_PACKET = ROOT / "data" / "promo_operations_packet.json"
 PUBLISHED_LOG_RECONCILIATION = ROOT / "data" / "published_log_reconciliation.json"
 HUMAN_HANDOFF_PACKET = ROOT / "data" / "human_handoff_packet.json"
 HUMAN_HANDOFF_RESOLUTION_WORKSHEET = ROOT / "data" / "human_handoff_resolution_worksheet.csv"
+HUMAN_HANDOFF_RESOLUTION_PREVIEW = ROOT / "data" / "human_handoff_resolution_preview.json"
 PROMOTION_BLOCKER_LEDGER = ROOT / "data" / "promotion_blocker_ledger.json"
 PLATFORM_REPAIR_STATUS = ROOT / "data" / "platform_repair_status.json"
 APPROVAL_RUNWAY = ROOT / "data" / "approval_runway.json"
@@ -79,6 +80,7 @@ TIKTOK_REPAIR_RUNBOOK_SCRIPT = ROOT / "scripts" / "build_tiktok_repair_runbook.p
 PROMO_OPERATIONS_SCRIPT = ROOT / "scripts" / "build_promo_operations_packet.py"
 PUBLISHED_LOG_RECONCILIATION_SCRIPT = ROOT / "scripts" / "build_published_log_reconciliation.py"
 HUMAN_HANDOFF_SCRIPT = ROOT / "scripts" / "build_human_handoff_packet.py"
+HANDOFF_RESOLUTION_PREVIEW_SCRIPT = ROOT / "scripts" / "build_handoff_resolution_preview.py"
 PROMOTION_BLOCKER_LEDGER_SCRIPT = ROOT / "scripts" / "build_promotion_blocker_ledger.py"
 PLATFORM_REPAIR_SCRIPT = ROOT / "scripts" / "build_platform_repair_status.py"
 APPROVAL_RUNWAY_SCRIPT = ROOT / "scripts" / "build_approval_runway.py"
@@ -95,6 +97,7 @@ TIKTOK_REPAIR_RUNBOOK_REPORT = ROOT / "admin" / "reports" / "tiktok-repair-runbo
 PROMO_OPERATIONS_REPORT = ROOT / "admin" / "reports" / "promo-operations-packet.md"
 PUBLISHED_LOG_RECONCILIATION_REPORT = ROOT / "admin" / "reports" / "published-log-reconciliation.md"
 HUMAN_HANDOFF_REPORT = ROOT / "admin" / "reports" / "human-handoff-packet.md"
+HANDOFF_RESOLUTION_PREVIEW_REPORT = ROOT / "admin" / "reports" / "human-handoff-resolution-preview.md"
 PROMOTION_BLOCKER_LEDGER_REPORT = ROOT / "admin" / "reports" / "promotion-blocker-ledger.md"
 PLATFORM_REPAIR_REPORT = ROOT / "admin" / "reports" / "platform-repair-status.md"
 APPROVAL_RUNWAY_REPORT = ROOT / "admin" / "reports" / "approval-runway.md"
@@ -129,6 +132,7 @@ GENERATED_REFRESH_PATHS = {
     "data/executor_readiness_snapshot.json",
     "data/human_handoff_packet.json",
     "data/human_handoff_resolution_worksheet.csv",
+    "data/human_handoff_resolution_preview.json",
     "data/live_social_metrics.json",
     "data/manual_distribution_packet.json",
     "data/manual_metric_collection_packet.json",
@@ -922,6 +926,40 @@ def validate_generated_outputs(failures):
             fail("human_handoff_packet.json missing safe consolidated handoff tasks", failures)
     else:
         fail("human_handoff_packet.json missing; run scripts/build_human_handoff_packet.py", failures)
+    if HUMAN_HANDOFF_RESOLUTION_PREVIEW.exists():
+        preview = json.loads(HUMAN_HANDOFF_RESOLUTION_PREVIEW.read_text(encoding="utf-8"))
+        summary = preview.get("summary") or {}
+        previews = preview.get("previews") or []
+        handoff = json.loads(HUMAN_HANDOFF_PACKET.read_text(encoding="utf-8")) if HUMAN_HANDOFF_PACKET.exists() else {}
+        tasks = handoff.get("tasks") or []
+        worksheet_rows = read_csv(HUMAN_HANDOFF_RESOLUTION_WORKSHEET) if HUMAN_HANDOFF_RESOLUTION_WORKSHEET.exists() else []
+        status_counts = summary.get("status_counts") or {}
+        if (
+            preview.get("safe_mode") is True
+            and (preview.get("source") or {}).get("resolution_worksheet") == "data/human_handoff_resolution_worksheet.csv"
+            and (preview.get("source") or {}).get("human_handoff_packet") == "data/human_handoff_packet.json"
+            and summary.get("worksheet_row_count") == len(worksheet_rows)
+            and summary.get("preview_count") == len(previews) == len(tasks)
+            and summary.get("executed_preview_count") == len([item for item in previews if item.get("safety") == "safe_preview"])
+            and summary.get("skipped_preview_count") == len([item for item in previews if item.get("safety") != "safe_preview"])
+            and sum(int(value or 0) for value in status_counts.values()) == len(previews)
+            and "Only python3 scripts/* commands" in (summary.get("safe_command_policy") or "")
+            and "never executes apply" in (summary.get("mutation_guardrail") or "")
+            and [item.get("task_id") for item in previews] == [task.get("id") for task in tasks]
+            and all(item.get("command") and item.get("safety") == "safe_preview" and "--apply" not in item.get("command", "") and "--refresh-admin" not in item.get("command", "") and "PUBLIC_URL" not in item.get("command", "") for item in previews)
+            and any(item.get("preview_status") == "input_missing" and item.get("input_needed") == "local_secret_presence_and_public_posting_approval" for item in previews)
+            and any(item.get("preview_status") == "input_missing" and item.get("input_needed") == "private_metric_values" for item in previews)
+            and any(item.get("preview_status") in {"preview_ok", "preview_ok_with_warning"} and item.get("phase") == "Approval" for item in previews)
+            and any(item.get("preview_status") == "preview_ok_with_warning" and item.get("phase") == "Backlog recovery" for item in previews)
+            and all(item.get("output_excerpt") is not None and item.get("guardrail") for item in previews)
+            and all("/Users/" not in item.get("output_excerpt", "") for item in previews)
+            and (preview.get("handoff_resolution_summary") or {}).get("path") == "data/human_handoff_resolution_worksheet.csv"
+        ):
+            ok(f"human handoff resolution preview checks {len(previews)} handoff command(s)")
+        else:
+            fail("human_handoff_resolution_preview.json missing safe preview alignment", failures)
+    else:
+        fail("human_handoff_resolution_preview.json missing; run scripts/build_handoff_resolution_preview.py", failures)
     if PLATFORM_REPAIR_STATUS.exists():
         repair_status = json.loads(PLATFORM_REPAIR_STATUS.read_text(encoding="utf-8"))
         repair_summary = repair_status.get("summary") or {}
@@ -2639,6 +2677,26 @@ def validate_generated_outputs(failures):
             fail("build_human_handoff_packet.py missing handoff outputs or executes commands", failures)
     else:
         fail("build_human_handoff_packet.py missing", failures)
+    if HANDOFF_RESOLUTION_PREVIEW_SCRIPT.exists():
+        preview_text = HANDOFF_RESOLUTION_PREVIEW_SCRIPT.read_text(encoding="utf-8")
+        if (
+            "human_handoff_resolution_preview.json" in preview_text
+            and "human-handoff-resolution-preview.md" in preview_text
+            and "human_handoff_resolution_worksheet.csv" in preview_text
+            and "FORBIDDEN_TOKENS" in preview_text
+            and '"--apply"' in preview_text
+            and '"--refresh-admin"' in preview_text
+            and "PUBLIC_URL" in preview_text
+            and "safe_preview" in preview_text
+            and "subprocess.run" in preview_text
+            and "timeout=60" in preview_text
+            and "never executes apply" in preview_text
+        ):
+            ok("human handoff resolution preview runner is mutation-guarded")
+        else:
+            fail("build_handoff_resolution_preview.py missing preview outputs or mutation guardrails", failures)
+    else:
+        fail("build_handoff_resolution_preview.py missing", failures)
     if PROMOTION_BLOCKER_LEDGER_SCRIPT.exists():
         ledger_text = PROMOTION_BLOCKER_LEDGER_SCRIPT.read_text(encoding="utf-8")
         if "promotion_blocker_ledger.json" in ledger_text and "promotion-blocker-ledger.md" in ledger_text and "owner_counts" in ledger_text and "category_counts" in ledger_text and "manual_metric_collection_packet.json" in ledger_text and "priority_batches" in ledger_text and "manual_metric_batch" in ledger_text and "backlog_clearance_manifest" in ledger_text and "approval_runway.json" in ledger_text and "blocker_unlock_roadmap" in ledger_text and "build_unlock_roadmap" in ledger_text and "next_resolution_projection" in ledger_text and "approval_projection" in ledger_text and "subprocess" not in ledger_text:
@@ -2775,6 +2833,14 @@ def validate_generated_outputs(failures):
             fail("human-handoff-packet.md missing expected sections", failures)
     else:
         fail("human-handoff-packet.md missing", failures)
+    if HANDOFF_RESOLUTION_PREVIEW_REPORT.exists():
+        preview_report_text = HANDOFF_RESOLUTION_PREVIEW_REPORT.read_text(encoding="utf-8")
+        if "Human Handoff Resolution Preview" in preview_report_text and "Summary" in preview_report_text and "Previews" in preview_report_text and "Guardrails" in preview_report_text:
+            ok("human handoff resolution preview markdown report present")
+        else:
+            fail("human-handoff-resolution-preview.md missing expected sections", failures)
+    else:
+        fail("human-handoff-resolution-preview.md missing", failures)
     if PROMOTION_BLOCKER_LEDGER_REPORT.exists():
         ledger_report_text = PROMOTION_BLOCKER_LEDGER_REPORT.read_text(encoding="utf-8")
         if "Promotion Blocker Ledger" in ledger_report_text and "Unlock Roadmap" in ledger_report_text and "Ledger" in ledger_report_text and "Guardrails" in ledger_report_text:

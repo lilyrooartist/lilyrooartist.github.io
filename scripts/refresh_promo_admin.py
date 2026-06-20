@@ -164,6 +164,11 @@ FINALIZE_STEPS = [
         "required": True,
     },
     {
+        "name": "build_handoff_resolution_preview",
+        "command": ["python3", "scripts/build_handoff_resolution_preview.py"],
+        "required": True,
+    },
+    {
         "name": "build_published_log_reconciliation",
         "command": ["python3", "scripts/build_published_log_reconciliation.py"],
         "required": True,
