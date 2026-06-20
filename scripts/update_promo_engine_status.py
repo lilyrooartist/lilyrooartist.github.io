@@ -1293,6 +1293,8 @@ def manual_distribution_state(packet: dict) -> dict:
     approval_docket = approval_docket or {}
     distribution_docket = packet.get("manual_distribution_docket") if isinstance(packet, dict) else {}
     distribution_docket = distribution_docket or {}
+    completion_manifest = packet.get("manual_completion_manifest") if isinstance(packet, dict) else {}
+    completion_manifest = completion_manifest or {}
     review_queue = distribution_docket.get("review_queue") or []
     postable_now = distribution_docket.get("postable_now") or []
     return {
@@ -1313,6 +1315,7 @@ def manual_distribution_state(packet: dict) -> dict:
         "public_community_url": summary.get("public_community_url") or distribution_docket.get("public_community_url") or "",
         "review_queue": review_queue,
         "postable_now": postable_now,
+        "manual_completion_manifest": completion_manifest,
         "guardrails": distribution_docket.get("guardrails") or [],
     }
 

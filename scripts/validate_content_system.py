@@ -1088,6 +1088,7 @@ def validate_generated_outputs(failures):
         approval_runway = json.loads(APPROVAL_RUNWAY.read_text(encoding="utf-8")) if APPROVAL_RUNWAY.exists() else {}
         runway_approval_docket = approval_runway.get("manual_approval_docket") or {}
         approval_docket = manual_packet.get("manual_approval_docket") or {}
+        completion_manifest = manual_packet.get("manual_completion_manifest") or {}
         docket_review = docket.get("review_queue") or []
         docket_postable = docket.get("postable_now") or []
         docket_logged = docket.get("logged") or []
@@ -1111,6 +1112,17 @@ def validate_generated_outputs(failures):
             and [item.get("id") for item in docket_review] == [row.get("id") for row in review_rows]
             and [item.get("id") for item in docket_postable] == [row.get("id") for row in postable_rows]
             and [item.get("id") for item in docket_logged] == [row.get("id") for row in logged_rows]
+            and completion_manifest.get("status") in {"needs_review", "ready_to_post_and_log", "clear"}
+            and completion_manifest.get("posting_surface") == "YouTube Studio Community"
+            and completion_manifest.get("public_community_url") == "https://www.youtube.com/@lilyroo.artist/community"
+            and completion_manifest.get("approval_preview_command") == (approval_docket.get("preview_command") or "")
+            and completion_manifest.get("approval_apply_command") == (approval_docket.get("apply_command") or "")
+            and completion_manifest.get("review_queue_ids") == [row.get("id") for row in docket_review]
+            and completion_manifest.get("postable_now_ids") == [row.get("id") for row in docket_postable]
+            and completion_manifest.get("pending_log_ids") == [row.get("id") for row in unlogged_rows]
+            and all("PUBLIC_URL" in (item.get("preview_command") or "") and "--apply --refresh-admin" in (item.get("apply_command") or "") for item in completion_manifest.get("log_commands") or [])
+            and any("Do not log a placeholder URL" in item for item in completion_manifest.get("guardrails") or [])
+            and any("Published_Log.csv" in item for item in completion_manifest.get("completion_evidence") or [])
             and docket.get("next_manual_action") == summary.get("next_manual_action")
             and docket.get("public_community_url") == "https://www.youtube.com/@lilyroo.artist/community"
             and approval_docket.get("ready_ids") == (runway_approval_docket.get("ready_ids") or [])
@@ -2011,6 +2023,7 @@ def validate_generated_outputs(failures):
             and status_manual_distribution.get("approval_ready_ids") == (manual_approval.get("ready_ids") or [])
             and status_manual_distribution.get("approval_blocked_ids") == (manual_approval.get("blocked_ids") or [])
             and status_manual_distribution.get("approval_preview_command") == (manual_approval.get("preview_command") or "")
+            and status_manual_distribution.get("manual_completion_manifest") == (manual_packet.get("manual_completion_manifest") or {})
         ):
             ok("promo engine status mirrors manual distribution gate")
         else:
@@ -2496,7 +2509,7 @@ def validate_generated_outputs(failures):
         fail("build_subscriber_cta_audit.py missing", failures)
     if MANUAL_DISTRIBUTION_PACKET_SCRIPT.exists():
         manual_distribution_text = MANUAL_DISTRIBUTION_PACKET_SCRIPT.read_text(encoding="utf-8")
-        if "manual_distribution_packet.json" in manual_distribution_text and "manual-distribution-packet.md" in manual_distribution_text and "Manual Posting Queue" in manual_distribution_text and "manual_distribution_docket" in manual_distribution_text and "manual_approval_docket" in manual_distribution_text and "review_queue" in manual_distribution_text and "copy_block" in manual_distribution_text and "manual_posting_packet" in manual_distribution_text and "postable_now" in manual_distribution_text and "log_manual_distribution.py" in manual_distribution_text and "Published_Log.csv" in manual_distribution_text and "distribution_status" in manual_distribution_text and "subprocess" not in manual_distribution_text:
+        if "manual_distribution_packet.json" in manual_distribution_text and "manual-distribution-packet.md" in manual_distribution_text and "Manual Posting Queue" in manual_distribution_text and "manual_distribution_docket" in manual_distribution_text and "manual_approval_docket" in manual_distribution_text and "manual_completion_manifest" in manual_distribution_text and "Completion Manifest" in manual_distribution_text and "Do not log a placeholder URL" in manual_distribution_text and "review_queue" in manual_distribution_text and "copy_block" in manual_distribution_text and "manual_posting_packet" in manual_distribution_text and "postable_now" in manual_distribution_text and "log_manual_distribution.py" in manual_distribution_text and "Published_Log.csv" in manual_distribution_text and "distribution_status" in manual_distribution_text and "subprocess" not in manual_distribution_text:
             ok("manual distribution packet builder is review-only")
         else:
             fail("build_manual_distribution_packet.py missing manual distribution outputs or executes commands", failures)
@@ -2632,7 +2645,7 @@ def validate_generated_outputs(failures):
         fail("subscriber-cta-audit.md missing", failures)
     if MANUAL_DISTRIBUTION_REPORT.exists():
         manual_distribution_report = MANUAL_DISTRIBUTION_REPORT.read_text(encoding="utf-8")
-        if "Manual Distribution Packet" in manual_distribution_report and "Manual Posting Docket" in manual_distribution_report and "Manual Posting Queue" in manual_distribution_report and "Guardrails" in manual_distribution_report:
+        if "Manual Distribution Packet" in manual_distribution_report and "Manual Posting Docket" in manual_distribution_report and "Completion Manifest" in manual_distribution_report and "Manual Posting Queue" in manual_distribution_report and "Guardrails" in manual_distribution_report:
             ok("manual distribution markdown report present")
         else:
             fail("manual-distribution-packet.md missing expected sections", failures)

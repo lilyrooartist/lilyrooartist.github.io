@@ -1,6 +1,6 @@
 # Manual Distribution Packet - Lily Roo
 
-Generated: 2026-06-20T08:14:32.127717Z
+Generated: 2026-06-20T08:19:56.833788Z
 
 ## Summary
 - Manual-ready posts: **2**
@@ -27,6 +27,31 @@ Generated: 2026-06-20T08:14:32.127717Z
 - Preview approvals: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run`
 - Approve after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin`
 - Guardrail: Manual-only approvals do not auto-post; posting and public URL logging remain separate after review.
+
+### Completion Manifest
+- Status: **needs_review**
+- Review queue IDs: `FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY, FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY`
+- Postable now IDs: `none`
+- Pending log IDs: `FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY, FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY`
+- Posting surface: YouTube Studio Community
+- Public community URL: https://www.youtube.com/@lilyroo.artist/community
+- Approval preview: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run`
+- Approval apply after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin`
+- Operator checklist:
+  - Review the packaged copy, asset, destination link evidence, and subscriber CTA.
+  - Run the approval preview command before applying any manual approval.
+  - Post approved rows manually in YouTube Studio Community.
+  - Copy the real public Community post URL after posting.
+  - Run the log preview command with the real URL, then apply with --apply --refresh-admin.
+- Completion evidence:
+  - data/manual_distribution_packet.json shows the row as logged or no longer pending.
+  - data/published_log_reconciliation.json no longer reports the row as an unlogged manual post.
+  - admin/content/Published_Log.csv contains the real public URL and manual_distribution_id note.
+  - data/promo_engine_status.json and lilyroo.com/admin reflect the updated manual distribution counts.
+- Guardrails:
+  - Manual-only approvals do not auto-post.
+  - Do not log a placeholder URL.
+  - Do not mark manual distribution complete until a real public YouTube Community URL is logged.
 
 ### Needs Review
 - **YouTube Community - Twelve Dollars** (`FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY`)

@@ -292,6 +292,50 @@ def manual_distribution_docket(rows: list[dict], summary: dict) -> dict:
     }
 
 
+def manual_completion_manifest(approval_docket: dict, distribution_docket: dict, rows: list[dict]) -> dict:
+    review_queue = distribution_docket.get("review_queue") or []
+    postable_now = distribution_docket.get("postable_now") or []
+    pending_rows = [row for row in rows if not row.get("logged")]
+    log_commands = [
+        {
+            "id": row.get("id") or "",
+            "preview_command": row.get("log_preview_command") or "",
+            "apply_command": row.get("log_apply_command") or "",
+        }
+        for row in pending_rows
+    ]
+    return {
+        "status": "needs_review" if review_queue else ("ready_to_post_and_log" if postable_now else "clear"),
+        "posting_surface": "YouTube Studio Community",
+        "public_community_url": distribution_docket.get("public_community_url") or YOUTUBE_COMMUNITY_URL,
+        "approval_preview_command": approval_docket.get("preview_command") or "",
+        "approval_apply_command": approval_docket.get("apply_command") or "",
+        "review_queue_ids": [row.get("id") for row in review_queue if row.get("id")],
+        "postable_now_ids": [row.get("id") for row in postable_now if row.get("id")],
+        "logged_ids": [row.get("id") for row in rows if row.get("logged") and row.get("id")],
+        "pending_log_ids": [row.get("id") for row in pending_rows if row.get("id")],
+        "log_commands": log_commands,
+        "operator_checklist": [
+            "Review the packaged copy, asset, destination link evidence, and subscriber CTA.",
+            "Run the approval preview command before applying any manual approval.",
+            "Post approved rows manually in YouTube Studio Community.",
+            "Copy the real public Community post URL after posting.",
+            "Run the log preview command with the real URL, then apply with --apply --refresh-admin.",
+        ],
+        "completion_evidence": [
+            "data/manual_distribution_packet.json shows the row as logged or no longer pending.",
+            "data/published_log_reconciliation.json no longer reports the row as an unlogged manual post.",
+            "admin/content/Published_Log.csv contains the real public URL and manual_distribution_id note.",
+            "data/promo_engine_status.json and lilyroo.com/admin reflect the updated manual distribution counts.",
+        ],
+        "guardrails": [
+            "Manual-only approvals do not auto-post.",
+            "Do not log a placeholder URL.",
+            "Do not mark manual distribution complete until a real public YouTube Community URL is logged.",
+        ],
+    }
+
+
 def manual_approval_docket(runway: dict, rows: list[dict]) -> dict:
     docket = runway.get("manual_approval_docket") or {}
     ready_ids = docket.get("ready_ids") or []
@@ -435,6 +479,7 @@ def build_markdown(payload: dict) -> str:
     ]
     docket = payload.get("manual_distribution_docket") or {}
     approval_docket = payload.get("manual_approval_docket") or {}
+    completion_manifest = payload.get("manual_completion_manifest") or {}
     lines.extend([
         f"- Status: **{docket.get('status', 'unknown')}**",
         f"- Needs review: **{docket.get('review_count', 0)}**",
@@ -457,6 +502,32 @@ def build_markdown(payload: dict) -> str:
         lines.append(f"- Approve after review: `{approval_docket['apply_command']}`")
     if approval_docket.get("guardrail"):
         lines.append(f"- Guardrail: {approval_docket['guardrail']}")
+    lines.extend([
+        "",
+        "### Completion Manifest",
+        f"- Status: **{completion_manifest.get('status', 'unknown')}**",
+        f"- Review queue IDs: `{', '.join(completion_manifest.get('review_queue_ids') or []) or 'none'}`",
+        f"- Postable now IDs: `{', '.join(completion_manifest.get('postable_now_ids') or []) or 'none'}`",
+        f"- Pending log IDs: `{', '.join(completion_manifest.get('pending_log_ids') or []) or 'none'}`",
+        f"- Posting surface: {completion_manifest.get('posting_surface') or 'YouTube Studio Community'}",
+        f"- Public community URL: {completion_manifest.get('public_community_url') or YOUTUBE_COMMUNITY_URL}",
+    ])
+    if completion_manifest.get("approval_preview_command"):
+        lines.append(f"- Approval preview: `{completion_manifest['approval_preview_command']}`")
+    if completion_manifest.get("approval_apply_command"):
+        lines.append(f"- Approval apply after review: `{completion_manifest['approval_apply_command']}`")
+    if completion_manifest.get("operator_checklist"):
+        lines.append("- Operator checklist:")
+        for item in completion_manifest["operator_checklist"]:
+            lines.append(f"  - {item}")
+    if completion_manifest.get("completion_evidence"):
+        lines.append("- Completion evidence:")
+        for item in completion_manifest["completion_evidence"]:
+            lines.append(f"  - {item}")
+    if completion_manifest.get("guardrails"):
+        lines.append("- Guardrails:")
+        for item in completion_manifest["guardrails"]:
+            lines.append(f"  - {item}")
     lines.extend([
         "",
         "### Needs Review",
@@ -606,10 +677,15 @@ def main() -> int:
             ],
         },
         "summary": summary,
-        "manual_approval_docket": manual_approval_docket(runway, rows),
-        "manual_distribution_docket": manual_distribution_docket(rows, summary),
         "rows": rows,
     }
+    payload["manual_approval_docket"] = manual_approval_docket(runway, rows)
+    payload["manual_distribution_docket"] = manual_distribution_docket(rows, summary)
+    payload["manual_completion_manifest"] = manual_completion_manifest(
+        payload["manual_approval_docket"],
+        payload["manual_distribution_docket"],
+        rows,
+    )
     OUT.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     markdown = build_markdown(payload)
     REPORT.write_text(markdown, encoding="utf-8")
