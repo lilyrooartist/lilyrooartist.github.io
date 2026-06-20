@@ -5,6 +5,7 @@ import argparse
 import csv
 import json
 import subprocess
+from decimal import Decimal, InvalidOperation
 from pathlib import Path
 
 
@@ -12,6 +13,7 @@ ROOT = Path(__file__).resolve().parent.parent
 MANUAL = ROOT / "data" / "manual_social_stats.json"
 LIVE_METRICS = ROOT / "data" / "live_social_metrics.json"
 DEFAULT_CSV = ROOT / "data" / "manual_metric_collection_template.csv"
+NON_NUMERIC_FIELDS = {"artist_url", "profile_url", "release_url", "provider_url"}
 
 
 def read_manual():
@@ -103,6 +105,21 @@ def update_value(data, platform: str, metric: str, value: str):
     return previous
 
 
+def validate_metric_value(platform: str, metric: str, value: str) -> str:
+    if metric in NON_NUMERIC_FIELDS or metric.endswith("_url"):
+        return str(value or "").strip()
+    cleaned = str(value or "").strip().replace(",", "")
+    if not cleaned or cleaned.lower() in {"pending", "n/a", "na", "none"}:
+        raise SystemExit(f"{platform}.{metric} must be a collected non-negative numeric value, got {value!r}.")
+    try:
+        parsed = Decimal(cleaned)
+    except InvalidOperation:
+        raise SystemExit(f"{platform}.{metric} must be numeric, got {value!r}.")
+    if parsed < 0:
+        raise SystemExit(f"{platform}.{metric} must be non-negative, got {value!r}.")
+    return cleaned
+
+
 def refresh_admin():
     commands = [
         ["python3", "scripts/update_promo_engine_status.py"],
@@ -148,8 +165,9 @@ def main():
     changes = []
     for raw in assignments:
         platform, metric, value = parse_assignment(raw)
-        previous = update_value(data, platform, metric, value)
-        changes.append((platform, metric, previous, value))
+        normalized_value = validate_metric_value(platform, metric, value)
+        previous = update_value(data, platform, metric, normalized_value)
+        changes.append((platform, metric, previous, normalized_value))
 
     for platform, metric, previous, value in changes:
         print(f"{platform}.{metric}: {previous!r} -> {value!r}")

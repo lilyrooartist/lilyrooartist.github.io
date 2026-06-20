@@ -39,6 +39,18 @@ LIVE_IMPORT_COMMAND = "python3 scripts/update_manual_social_stats.py --from-live
 WORKSHEET_IMPORT_PREVIEW_COMMAND = "python3 scripts/update_manual_social_stats.py --from-csv --dry-run"
 WORKSHEET_IMPORT_COMMAND = "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin"
 
+METRIC_SPECS = {
+    "followers": ("nonnegative_integer", "123", "Enter the current public follower count."),
+    "artist_followers": ("nonnegative_integer", "123", "Enter the current Spotify artist follower count."),
+    "monthly_listeners": ("nonnegative_integer", "123", "Enter the current Spotify monthly listener count."),
+    "release_streams": ("nonnegative_integer", "1234", "Enter lifetime streams for the promoted release."),
+    "saves": ("nonnegative_integer", "12", "Enter lifetime saves for the promoted release."),
+    "reach_7d": ("nonnegative_integer", "123", "Enter reach for the last 7 days."),
+    "profile_visits_7d": ("nonnegative_integer", "12", "Enter profile visits for the last 7 days."),
+    "profile_views_7d": ("nonnegative_integer", "12", "Enter profile views for the last 7 days."),
+    "impressions_7d": ("nonnegative_integer", "123", "Enter impressions for the last 7 days."),
+}
+
 
 def read_json(path: Path, fallback):
     if not path.exists():
@@ -74,6 +86,14 @@ def live_metric_value(live: dict, platform: str, field: str):
     return None
 
 
+def metric_spec(field: str) -> tuple[str, str, str]:
+    return METRIC_SPECS.get(field, ("nonnegative_number", "123", "Enter the latest metric value."))
+
+
+def import_effect(platform: str, field: str, current: str) -> str:
+    return f"update data/manual_social_stats.json {platform}.{field} from {current!r} to the filled new_value"
+
+
 def build_rows(status: dict, manual: dict, live: dict) -> list[dict]:
     kpi = status.get("kpi") or {}
     pending = kpi.get("pending_manual_by_platform") or {}
@@ -89,17 +109,23 @@ def build_rows(status: dict, manual: dict, live: dict) -> list[dict]:
         for field in fields:
             live_value = live_metric_value(live, platform, field)
             collection_mode = "live_import_available" if live_value is not None else "manual_collection_required"
+            current = current_value(manual, platform, field)
+            value_type, example_value, instruction = metric_spec(field)
             rows.append({
                 "platform": platform,
                 "field": field,
-                "current_value": current_value(manual, platform, field),
+                "current_value": current,
                 "new_value": "",
                 "live_value": "" if live_value is None else str(live_value),
                 "collection_mode": collection_mode,
+                "value_type": value_type,
+                "example_value": example_value,
+                "collection_instruction": instruction,
                 "source_hint": SOURCE_HINTS.get(platform, "Manual platform export"),
                 "collection_url": collection_url(platform, manual, live),
                 "reason": step.get("reason") or "",
                 "update_assignment": f"{platform}.{field}=VALUE",
+                "import_effect": import_effect(platform, field, current),
                 "platform_update_command": commands.get(platform, ""),
             })
     return rows
@@ -114,10 +140,14 @@ def write_csv(rows: list[dict]) -> None:
         "new_value",
         "live_value",
         "collection_mode",
+        "value_type",
+        "example_value",
+        "collection_instruction",
         "source_hint",
         "collection_url",
         "reason",
         "update_assignment",
+        "import_effect",
         "platform_update_command",
     ]
     with OUT_CSV.open("w", newline="", encoding="utf-8") as handle:
@@ -154,7 +184,11 @@ def build_packet(rows: list[dict], generated_at: str) -> dict:
                 "new_value": row.get("new_value") or "",
                 "live_value": row.get("live_value") or "",
                 "collection_mode": row.get("collection_mode") or "manual_collection_required",
+                "value_type": row.get("value_type") or "nonnegative_number",
+                "example_value": row.get("example_value") or "",
+                "collection_instruction": row.get("collection_instruction") or "",
                 "update_assignment": row.get("update_assignment") or "",
+                "import_effect": row.get("import_effect") or "",
             })
         group["pending_assignments"].append(row.get("update_assignment") or "")
         group["field_count"] = len(group["fields"])
@@ -238,7 +272,11 @@ def build_markdown(rows: list[dict], generated_at: str) -> str:
             if row.get("collection_mode") == "live_import_available":
                 lines.append(f"- `{row['field']}` current `{row['current_value']}` -> live `{row['live_value']}`")
             else:
-                lines.append(f"- `{row['field']}` current `{row['current_value']}` -> `VALUE`")
+                lines.append(f"- `{row['field']}` current `{row['current_value']}` -> `VALUE` ({row.get('value_type')}; example `{row.get('example_value')}`)")
+            if row.get("collection_instruction"):
+                lines.append(f"  - {row['collection_instruction']}")
+            if row.get("import_effect"):
+                lines.append(f"  - Import effect: {row['import_effect']}")
         command = platform_rows[0].get("platform_update_command")
         if command:
             lines.append("")

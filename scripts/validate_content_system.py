@@ -620,10 +620,14 @@ def validate_generated_outputs(failures):
             "new_value",
             "live_value",
             "collection_mode",
+            "value_type",
+            "example_value",
+            "collection_instruction",
             "source_hint",
             "collection_url",
             "reason",
             "update_assignment",
+            "import_effect",
             "platform_update_command",
         }
         if rows and set(rows[0].keys()) >= required:
@@ -664,6 +668,7 @@ def validate_generated_outputs(failures):
                 and "live_import_available_count" in platform
                 and "manual_collection_required_count" in platform
                 and platform.get("pending_assignments")
+                and all(field.get("value_type") and field.get("example_value") and field.get("collection_instruction") and field.get("import_effect") for field in platform.get("fields") or [])
                 and platform.get("worksheet_import_preview_command")
                 for platform in platforms
             )
@@ -1215,10 +1220,10 @@ def validate_generated_outputs(failures):
     if MANUAL_METRICS_UPDATER.exists():
         ok("manual social stats updater present")
         updater_text = MANUAL_METRICS_UPDATER.read_text(encoding="utf-8")
-        if "--from-csv" in updater_text and "--from-live" in updater_text and "live_social_metrics.json" in updater_text and "--dry-run" in updater_text and "new_value" in updater_text and "csv.DictReader" in updater_text and "No live-covered pending metrics available" in updater_text:
+        if "--from-csv" in updater_text and "--from-live" in updater_text and "live_social_metrics.json" in updater_text and "--dry-run" in updater_text and "new_value" in updater_text and "csv.DictReader" in updater_text and "No live-covered pending metrics available" in updater_text and "validate_metric_value" in updater_text and "Decimal" in updater_text:
             ok("manual social stats updater can import filled CSV values")
         else:
-            fail("update_manual_social_stats.py missing filled CSV or live metric import support", failures)
+            fail("update_manual_social_stats.py missing filled CSV/live metric import support or numeric value guards", failures)
     else:
         fail("update_manual_social_stats.py missing", failures)
     if STORE_LINK_VERIFIER.exists():
@@ -1470,7 +1475,7 @@ def validate_generated_outputs(failures):
         fail("build_backlog_reschedule_preview.py missing", failures)
     if MANUAL_METRIC_COLLECTION_SCRIPT.exists():
         collection_text = MANUAL_METRIC_COLLECTION_SCRIPT.read_text(encoding="utf-8")
-        if "manual_metric_collection_template.csv" in collection_text and "manual_metric_collection_packet.json" in collection_text and "manual-metric-collection.md" in collection_text and "pending_manual_by_platform" in collection_text and "collection_url" in collection_text and "--from-live" in collection_text and "collection_mode" in collection_text and "live_import_available_count" in collection_text and "subprocess" not in collection_text:
+        if "manual_metric_collection_template.csv" in collection_text and "manual_metric_collection_packet.json" in collection_text and "manual-metric-collection.md" in collection_text and "pending_manual_by_platform" in collection_text and "collection_url" in collection_text and "--from-live" in collection_text and "collection_mode" in collection_text and "live_import_available_count" in collection_text and "value_type" in collection_text and "import_effect" in collection_text and "subprocess" not in collection_text:
             ok("manual metric collection builder is review-only")
         else:
             fail("build_manual_metric_collection.py missing worksheet outputs or executes commands", failures)
