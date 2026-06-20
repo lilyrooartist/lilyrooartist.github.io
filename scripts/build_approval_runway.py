@@ -94,6 +94,38 @@ def build_rows(plan: dict) -> list[dict]:
     return sorted(rows, key=lambda row: (-row["subscriber_growth_score"], row["platform"], row["id"]))
 
 
+def approve_ids_command(ids: list[str], dry_run: bool = False) -> str:
+    if not ids:
+        return ""
+    command = "python3 scripts/approve_promo_queue_plan.py " + " ".join(f"--id {post_id}" for post_id in ids)
+    return command + (" --dry-run" if dry_run else " --refresh-admin")
+
+
+def build_manual_approval_docket(manual_rows: list[dict], blocked_rows: list[dict]) -> dict:
+    ids = [row["id"] for row in manual_rows]
+    return {
+        "status": "ready_for_manual_review" if manual_rows else "clear",
+        "ready_count": len(manual_rows),
+        "blocked_count": len(blocked_rows),
+        "ready_ids": ids,
+        "blocked_ids": [row["id"] for row in blocked_rows],
+        "preview_command": approve_ids_command(ids, dry_run=True),
+        "apply_command": approve_ids_command(ids, dry_run=False),
+        "guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review.",
+        "ready_to_review": [
+            {
+                "id": row["id"],
+                "release": row["release"],
+                "platform": row["platform"],
+                "subscriber_growth_score": row["subscriber_growth_score"],
+                "approval_preview_command": row["approval_preview_command"],
+                "approval_command": row["approval_command"],
+            }
+            for row in manual_rows
+        ],
+    }
+
+
 def replace_json_embed(html: str, block_id: str, payload) -> str:
     marker = f'<script type="application/json" id="{block_id}">'
     end_marker = "</script>"
@@ -125,6 +157,7 @@ def replace_text_embed(html: str, block_id: str, content: str) -> str:
 
 def build_markdown(payload: dict) -> str:
     summary = payload["summary"]
+    docket = payload.get("manual_approval_docket") or {}
     lines = [
         "# Approval Runway - Lily Roo",
         "",
@@ -136,10 +169,24 @@ def build_markdown(payload: dict) -> str:
         f"- Manual-only drafts: **{summary['manual_only']}**",
         f"- Blocked drafts: **{summary['blocked']}**",
         f"- Recommended approvals: **{summary['recommended_approval_count']}**",
+        f"- Recommended manual approvals: **{summary.get('recommended_manual_approval_count', 0)}**",
         f"- Monetization runway: **{summary['runway_status']}**, {summary['subscribers_per_week']} subs/week observed, {summary['required_subscribers_per_week_365']} subs/week needed for 365 days",
         "",
-        "## Recommended Sequence",
+        "## Manual Approval Docket",
+        f"- Status: **{docket.get('status', 'unknown')}**",
+        f"- Ready manual approvals: **{docket.get('ready_count', 0)}**",
+        f"- Blocked rows kept out: **{docket.get('blocked_count', 0)}**",
     ]
+    if docket.get("preview_command"):
+        lines.append(f"- Preview manual approvals: `{docket['preview_command']}`")
+    if docket.get("apply_command"):
+        lines.append(f"- Approve manual rows after review: `{docket['apply_command']}`")
+    if docket.get("guardrail"):
+        lines.append(f"- Guardrail: {docket['guardrail']}")
+    lines.extend([
+        "",
+        "## Recommended Sequence",
+    ])
     for row in payload["rows"][:8]:
         lines.append(f"- **{row['platform']} - {row['release']}** (`{row['id']}`)")
         lines.append(f"  - Readiness: `{row['readiness_state']}`; score: `{row['subscriber_growth_score']}`")
@@ -176,13 +223,19 @@ def main() -> int:
     runway = monetization.get("runway") or {}
     rows = build_rows(plan)
     ready_rows = [row for row in rows if row["readiness_state"] == "ready_after_approval"]
+    manual_rows = [row for row in rows if row["readiness_state"] == "manual_only"]
+    blocked_rows = [row for row in rows if row["readiness_state"] == "blocked"]
+    manual_docket = build_manual_approval_docket(manual_rows, blocked_rows)
     summary = {
         "review_count": len(rows),
         "ready_after_approval": len(ready_rows),
-        "manual_only": sum(1 for row in rows if row["readiness_state"] == "manual_only"),
-        "blocked": sum(1 for row in rows if row["readiness_state"] == "blocked"),
-        "recommended_approval_count": len(ready_rows),
+        "manual_only": len(manual_rows),
+        "blocked": len(blocked_rows),
+        "recommended_approval_count": len(ready_rows) + len(manual_rows),
+        "recommended_manual_approval_count": len(manual_rows),
         "recommended_ids": [row["id"] for row in ready_rows],
+        "recommended_manual_ids": [row["id"] for row in manual_rows],
+        "blocked_ids": [row["id"] for row in blocked_rows],
         "runway_status": runway.get("status") or "",
         "subscribers_per_week": runway.get("subscribers_per_week"),
         "required_subscribers_per_week_365": (runway.get("required_subscribers_per_week") or {}).get("365_days"),
@@ -197,13 +250,14 @@ def main() -> int:
             "promo_queue_plan": str(PROMO_PLAN.relative_to(ROOT)),
         },
         "summary": summary,
+        "manual_approval_docket": manual_docket,
         "rows": rows,
     }
     OUT.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     markdown = build_markdown(payload)
     REPORT.write_text(markdown, encoding="utf-8")
     sync_admin(payload, markdown)
-    print(json.dumps({"output": str(OUT.relative_to(ROOT)), "review_count": len(rows), "recommended": len(ready_rows)}, indent=2))
+    print(json.dumps({"output": str(OUT.relative_to(ROOT)), "review_count": len(rows), "recommended": summary["recommended_approval_count"]}, indent=2))
     return 0
 
 

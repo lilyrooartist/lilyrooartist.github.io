@@ -641,10 +641,25 @@ def validate_generated_outputs(failures):
         summary = runway.get("summary") or {}
         rows = runway.get("rows") or []
         recommended = summary.get("recommended_ids") or []
+        recommended_manual = summary.get("recommended_manual_ids") or []
+        blocked_ids = summary.get("blocked_ids") or []
+        manual_docket = runway.get("manual_approval_docket") or {}
+        manual_rows = [row for row in rows if row.get("readiness_state") == "manual_only"]
+        blocked_rows = [row for row in rows if row.get("readiness_state") == "blocked"]
         if (
             runway.get("safe_mode") is True
             and summary.get("review_count") == len(rows)
             and summary.get("ready_after_approval") == len(recommended)
+            and summary.get("recommended_manual_approval_count") == len(recommended_manual) == len(manual_rows)
+            and summary.get("recommended_approval_count") == len(recommended) + len(recommended_manual)
+            and blocked_ids == [row.get("id") for row in blocked_rows]
+            and manual_docket.get("ready_ids") == recommended_manual
+            and manual_docket.get("blocked_ids") == blocked_ids
+            and "approve_promo_queue_plan.py" in (manual_docket.get("preview_command") or "")
+            and "--dry-run" in (manual_docket.get("preview_command") or "")
+            and "approve_promo_queue_plan.py" in (manual_docket.get("apply_command") or "")
+            and "--refresh-admin" in (manual_docket.get("apply_command") or "")
+            and manual_docket.get("guardrail")
             and all(row.get("approval_preview_command") and "--dry-run" in row.get("approval_preview_command", "") for row in rows)
         ):
             ok(f"approval runway ranks {len(rows)} draft approval(s)")
@@ -1781,7 +1796,7 @@ def validate_generated_outputs(failures):
         fail("build_platform_repair_status.py missing", failures)
     if APPROVAL_RUNWAY_SCRIPT.exists():
         runway_text = APPROVAL_RUNWAY_SCRIPT.read_text(encoding="utf-8")
-        if "approval_runway.json" in runway_text and "approval-runway.md" in runway_text and "subscriber_growth_score" in runway_text and "approval_preview_command" in runway_text and "subprocess" not in runway_text:
+        if "approval_runway.json" in runway_text and "approval-runway.md" in runway_text and "subscriber_growth_score" in runway_text and "approval_preview_command" in runway_text and "manual_approval_docket" in runway_text and "build_manual_approval_docket" in runway_text and "subprocess" not in runway_text:
             ok("approval runway builder is review-only")
         else:
             fail("build_approval_runway.py missing runway outputs or executes commands", failures)
@@ -1917,7 +1932,7 @@ def validate_generated_outputs(failures):
         fail("platform-repair-status.md missing", failures)
     if APPROVAL_RUNWAY_REPORT.exists():
         runway_report_text = APPROVAL_RUNWAY_REPORT.read_text(encoding="utf-8")
-        if "Approval Runway" in runway_report_text and "Recommended Sequence" in runway_report_text and "Guardrails" in runway_report_text:
+        if "Approval Runway" in runway_report_text and "Manual Approval Docket" in runway_report_text and "Recommended Sequence" in runway_report_text and "Guardrails" in runway_report_text:
             ok("approval runway markdown report present")
         else:
             fail("approval-runway.md missing expected sections", failures)
@@ -2001,6 +2016,7 @@ def validate_admin_execution_feedback(failures):
         "unlock impact shown": "Unlock impact:" in text and "Immediate unlock:" in text and "Largest unlock lane:" in text,
         "handoff action docket shown": "Action docket:" in text and "First ready step:" in text,
         "published log reconciliation shown": "Published log reconciliation" in text and "Worker export" in text and "Manual Logging" in text,
+        "manual approval docket shown": "Manual approval docket:" in text and "Preview manual approvals:" in text,
     }
     missing_platform = [label for label, present in platform_checks.items() if not present]
     if missing_platform:

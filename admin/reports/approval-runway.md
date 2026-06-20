@@ -1,14 +1,23 @@
 # Approval Runway - Lily Roo
 
-Generated: 2026-06-20T04:11:30.661304Z
+Generated: 2026-06-20T04:17:55.209928Z
 
 ## Summary
 - Drafts needing review: **3**
 - Ready after approval: **0**
 - Manual-only drafts: **2**
 - Blocked drafts: **1**
-- Recommended approvals: **0**
+- Recommended approvals: **2**
+- Recommended manual approvals: **2**
 - Monetization runway: **behind_365_day_pace**, 0.64 subs/week observed, 19.06 subs/week needed for 365 days
+
+## Manual Approval Docket
+- Status: **ready_for_manual_review**
+- Ready manual approvals: **2**
+- Blocked rows kept out: **1**
+- Preview manual approvals: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run`
+- Approve manual rows after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin`
+- Guardrail: Manual-only approvals do not auto-post; posting and public URL logging remain separate after review.
 
 ## Recommended Sequence
 - **YouTube Community - Analog Myth** (`FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY`)
