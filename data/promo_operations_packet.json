@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T01:28:05.463789Z",
+  "generated_at": "2026-06-20T01:30:42.347066Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -141,8 +141,8 @@
       "priority": 0,
       "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
       "context": {
-        "approved_backlog_posts": 3,
-        "approved_upcoming_posts": 3,
+        "approved_backlog_posts": 1,
+        "approved_upcoming_posts": 5,
         "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --apply --refresh-admin",
         "note": "Preview first. Apply refuses rows with known executor blockers unless blockers are fixed or --allow-blocked is used after deliberate review."
       },
