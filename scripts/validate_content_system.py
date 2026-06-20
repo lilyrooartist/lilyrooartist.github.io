@@ -510,16 +510,23 @@ def validate_generated_outputs(failures):
         summary = manual_packet.get("summary") or {}
         rows = manual_packet.get("rows") or []
         hard_rows = [row for row in rows if row.get("selected_cta_strength") in {"hard_subscribe", "hard_goal"}]
+        logged_rows = [row for row in rows if row.get("logged")]
+        unlogged_rows = [row for row in rows if not row.get("logged")]
         if (
             manual_packet.get("safe_mode") is True
             and summary.get("manual_ready_count") == len(rows)
             and summary.get("youtube_community_count") == len([row for row in rows if row.get("platform") == "YouTube Community"])
             and summary.get("hard_cta_count") == len(hard_rows) == len(rows)
+            and summary.get("logged_manual_count") == len(logged_rows)
+            and summary.get("unlogged_manual_count") == len(unlogged_rows)
+            and summary.get("ready_to_post_after_review_count") == len([row for row in unlogged_rows if row.get("readiness_state") == "manual_only"])
             and all(
                 row.get("id")
                 and row.get("text")
                 and row.get("copy_block")
                 and row.get("asset_download_url")
+                and row.get("distribution_status") in {"waiting_for_review", "ready_for_manual_post", "logged"}
+                and isinstance(row.get("logged"), bool)
                 and row.get("approval_preview_command")
                 and row.get("manual_workflow")
                 and "log_manual_distribution.py" in row.get("log_preview_command", "")
@@ -1360,7 +1367,7 @@ def validate_generated_outputs(failures):
         fail("build_subscriber_cta_audit.py missing", failures)
     if MANUAL_DISTRIBUTION_PACKET_SCRIPT.exists():
         manual_distribution_text = MANUAL_DISTRIBUTION_PACKET_SCRIPT.read_text(encoding="utf-8")
-        if "manual_distribution_packet.json" in manual_distribution_text and "manual-distribution-packet.md" in manual_distribution_text and "Manual Posting Queue" in manual_distribution_text and "copy_block" in manual_distribution_text and "log_manual_distribution.py" in manual_distribution_text and "subprocess" not in manual_distribution_text:
+        if "manual_distribution_packet.json" in manual_distribution_text and "manual-distribution-packet.md" in manual_distribution_text and "Manual Posting Queue" in manual_distribution_text and "copy_block" in manual_distribution_text and "log_manual_distribution.py" in manual_distribution_text and "Published_Log.csv" in manual_distribution_text and "distribution_status" in manual_distribution_text and "subprocess" not in manual_distribution_text:
             ok("manual distribution packet builder is review-only")
         else:
             fail("build_manual_distribution_packet.py missing manual distribution outputs or executes commands", failures)

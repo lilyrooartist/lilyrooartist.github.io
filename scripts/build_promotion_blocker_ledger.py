@@ -144,6 +144,8 @@ def add_scheduled_approvals(rows: list[dict]) -> None:
 def add_manual_distribution(rows: list[dict]) -> None:
     packet = read_json(MANUAL_DISTRIBUTION, {})
     for item in packet.get("rows") or []:
+        if item.get("logged"):
+            continue
         approved = item.get("approved") == "yes"
         preview_command = item.get("log_preview_command") if approved else item.get("approval_preview_command")
         apply_command = item.get("log_apply_command") if approved else item.get("approval_command")

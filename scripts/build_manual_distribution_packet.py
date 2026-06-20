@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import json
 import shlex
+import csv
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -10,6 +11,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 PROMO_PLAN = ROOT / "data" / "promo_queue_plan.json"
 APPROVAL_RUNWAY = ROOT / "data" / "approval_runway.json"
+PUBLISHED_LOG = ROOT / "admin" / "content" / "Published_Log.csv"
 OUT = ROOT / "data" / "manual_distribution_packet.json"
 REPORT = ROOT / "admin" / "reports" / "manual-distribution-packet.md"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
@@ -29,6 +31,33 @@ def runway_lookup(runway: dict) -> dict[str, dict]:
     }
 
 
+def published_lookup() -> dict[str, dict]:
+    if not PUBLISHED_LOG.exists():
+        return {}
+    with PUBLISHED_LOG.open(newline="", encoding="utf-8") as f:
+        rows = list(csv.DictReader(f))
+    lookup = {}
+    for row in rows:
+        content_id = (row.get("content_id") or "").strip()
+        notes = row.get("notes") or ""
+        manual_id = ""
+        for part in notes.split(";"):
+            part = part.strip()
+            if part.startswith("manual_distribution_id="):
+                manual_id = part.split("=", 1)[1].strip()
+                break
+        for key in {content_id, manual_id}:
+            if key:
+                lookup[key] = {
+                    "logged": True,
+                    "logged_at": row.get("date") or "",
+                    "published_url": row.get("post_id_or_url") or "",
+                    "published_log_content_id": content_id,
+                    "published_log_notes": notes,
+                }
+    return lookup
+
+
 def copy_block(post: dict) -> str:
     parts = [post.get("text") or ""]
     if post.get("reply_text"):
@@ -43,20 +72,34 @@ def log_command(post_id: str, apply: bool = False) -> str:
     return command
 
 
-def build_rows(plan: dict, runway: dict) -> list[dict]:
+def build_rows(plan: dict, runway: dict, published: dict[str, dict]) -> list[dict]:
     runway_by_id = runway_lookup(runway)
     rows = []
     for post in plan.get("posts") or []:
         if post.get("execution_mode") != "manual":
             continue
         review = runway_by_id.get(post.get("id")) or {}
+        published_row = published.get(post.get("id") or "") or {}
+        logged = bool(published_row.get("logged"))
+        approved = post.get("approved") or "no"
+        if logged:
+            distribution_status = "logged"
+        elif approved == "yes":
+            distribution_status = "ready_for_manual_post"
+        else:
+            distribution_status = "waiting_for_review"
         rows.append({
             "id": post.get("id") or "",
             "platform": post.get("platform") or "",
             "release": post.get("song") or "",
             "scheduled_at": post.get("scheduled_at") or "",
             "post_type": post.get("post_type") or "",
-            "approved": post.get("approved") or "no",
+            "approved": approved,
+            "distribution_status": distribution_status,
+            "logged": logged,
+            "logged_at": published_row.get("logged_at") or "",
+            "published_url": published_row.get("published_url") or "",
+            "published_log_content_id": published_row.get("published_log_content_id") or "",
             "readiness_state": review.get("readiness_state") or "",
             "readiness_message": review.get("readiness_message") or "",
             "subscriber_growth_score": review.get("subscriber_growth_score"),
@@ -77,6 +120,7 @@ def build_rows(plan: dict, runway: dict) -> list[dict]:
                 "Approve only after human review if it should become the current manual posting candidate.",
                 "Post manually in YouTube Studio Community using the copy and asset below.",
                 "After posting, run the log preview command with the public URL, then run the apply command to update Published_Log.csv and refresh Admin.",
+                "Rows already found in Published_Log.csv are marked logged and should not be treated as pending manual work.",
             ],
         })
     return sorted(rows, key=lambda row: (row["scheduled_at"], row["release"], row["id"]))
@@ -121,12 +165,17 @@ def build_markdown(payload: dict) -> str:
         f"- YouTube Community posts: **{summary['youtube_community_count']}**",
         f"- Hard subscriber CTAs: **{summary['hard_cta_count']}**",
         f"- Approved manual posts: **{summary['approved_manual_count']}**",
+        f"- Logged manual posts: **{summary['logged_manual_count']}**",
+        f"- Unlogged manual posts: **{summary['unlogged_manual_count']}**",
         "",
         "## Manual Posting Queue",
     ]
     for row in payload["rows"]:
         lines.append(f"- **{row['platform']} - {row['release']}** (`{row['id']}`)")
         lines.append(f"  - Scheduled target: `{row['scheduled_at']}`")
+        lines.append(f"  - Distribution status: `{row['distribution_status']}`")
+        if row.get("published_url"):
+            lines.append(f"  - Published URL: {row['published_url']}")
         lines.append(f"  - Readiness: `{row['readiness_state']}`; CTA: `{row['selected_cta_strength']}`")
         lines.append(f"  - Copy: {row['text']}")
         if row.get("reply_text"):
@@ -169,21 +218,29 @@ def main() -> int:
     now = datetime.now(timezone.utc)
     plan = read_json(PROMO_PLAN, {})
     runway = read_json(APPROVAL_RUNWAY, {})
-    rows = build_rows(plan, runway)
+    published = published_lookup()
+    rows = build_rows(plan, runway, published)
     hard_cta = [row for row in rows if row.get("selected_cta_strength") in {"hard_subscribe", "hard_goal"}]
+    logged_rows = [row for row in rows if row.get("logged")]
+    unlogged_rows = [row for row in rows if not row.get("logged")]
     payload = {
         "generated_at": now.isoformat().replace("+00:00", "Z"),
         "safe_mode": True,
         "source": {
             "promo_queue_plan": str(PROMO_PLAN.relative_to(ROOT)),
             "approval_runway": str(APPROVAL_RUNWAY.relative_to(ROOT)),
+            "published_log": str(PUBLISHED_LOG.relative_to(ROOT)),
         },
         "summary": {
             "manual_ready_count": len(rows),
             "youtube_community_count": sum(1 for row in rows if row.get("platform") == "YouTube Community"),
             "hard_cta_count": len(hard_cta),
             "approved_manual_count": sum(1 for row in rows if str(row.get("approved") or "").lower() == "yes"),
-            "ready_to_post_after_review_count": sum(1 for row in rows if row.get("readiness_state") == "manual_only"),
+            "logged_manual_count": len(logged_rows),
+            "unlogged_manual_count": len(unlogged_rows),
+            "ready_to_post_after_review_count": sum(1 for row in unlogged_rows if row.get("readiness_state") == "manual_only"),
+            "ready_for_manual_post_count": sum(1 for row in unlogged_rows if row.get("distribution_status") == "ready_for_manual_post"),
+            "waiting_for_review_count": sum(1 for row in unlogged_rows if row.get("distribution_status") == "waiting_for_review"),
         },
         "rows": rows,
     }

@@ -1,16 +1,21 @@
 {
-  "generated_at": "2026-06-20T01:35:51.736486Z",
+  "generated_at": "2026-06-20T01:41:15.620824Z",
   "safe_mode": true,
   "source": {
     "promo_queue_plan": "data/promo_queue_plan.json",
-    "approval_runway": "data/approval_runway.json"
+    "approval_runway": "data/approval_runway.json",
+    "published_log": "admin/content/Published_Log.csv"
   },
   "summary": {
     "manual_ready_count": 2,
     "youtube_community_count": 2,
     "hard_cta_count": 2,
     "approved_manual_count": 0,
-    "ready_to_post_after_review_count": 2
+    "logged_manual_count": 0,
+    "unlogged_manual_count": 2,
+    "ready_to_post_after_review_count": 2,
+    "ready_for_manual_post_count": 0,
+    "waiting_for_review_count": 2
   },
   "rows": [
     {
@@ -20,6 +25,11 @@
       "scheduled_at": "2026-06-21T18:30:00-04:00",
       "post_type": "community",
       "approved": "no",
+      "distribution_status": "waiting_for_review",
+      "logged": false,
+      "logged_at": "",
+      "published_url": "",
+      "published_log_content_id": "",
       "readiness_state": "manual_only",
       "readiness_message": "YouTube Community posts are copy-ready manual workflow.",
       "subscriber_growth_score": 116,
@@ -39,7 +49,8 @@
         "Review the copy and linked playlist.",
         "Approve only after human review if it should become the current manual posting candidate.",
         "Post manually in YouTube Studio Community using the copy and asset below.",
-        "After posting, run the log preview command with the public URL, then run the apply command to update Published_Log.csv and refresh Admin."
+        "After posting, run the log preview command with the public URL, then run the apply command to update Published_Log.csv and refresh Admin.",
+        "Rows already found in Published_Log.csv are marked logged and should not be treated as pending manual work."
       ]
     },
     {
@@ -49,6 +60,11 @@
       "scheduled_at": "2026-06-22T18:30:00-04:00",
       "post_type": "community",
       "approved": "no",
+      "distribution_status": "waiting_for_review",
+      "logged": false,
+      "logged_at": "",
+      "published_url": "",
+      "published_log_content_id": "",
       "readiness_state": "manual_only",
       "readiness_message": "YouTube Community posts are copy-ready manual workflow.",
       "subscriber_growth_score": 116,
@@ -68,7 +84,8 @@
         "Review the copy and linked playlist.",
         "Approve only after human review if it should become the current manual posting candidate.",
         "Post manually in YouTube Studio Community using the copy and asset below.",
-        "After posting, run the log preview command with the public URL, then run the apply command to update Published_Log.csv and refresh Admin."
+        "After posting, run the log preview command with the public URL, then run the apply command to update Published_Log.csv and refresh Admin.",
+        "Rows already found in Published_Log.csv are marked logged and should not be treated as pending manual work."
       ]
     }
   ]
