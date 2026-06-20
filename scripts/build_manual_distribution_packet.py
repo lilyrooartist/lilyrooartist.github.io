@@ -7,11 +7,15 @@ import csv
 import re
 from datetime import datetime, timezone
 from pathlib import Path
+from urllib.parse import urlparse
 
 
 ROOT = Path(__file__).resolve().parents[1]
 PROMO_PLAN = ROOT / "data" / "promo_queue_plan.json"
 APPROVAL_RUNWAY = ROOT / "data" / "approval_runway.json"
+DISTROKID_RELEASE_STATUS = ROOT / "data" / "distrokid_release_status.json"
+TWELVE_DOLLARS_PLAYLIST = ROOT / "data" / "youtube_twelve_dollars_playlist.json"
+ANALOG_MYTH_PLAYLIST = ROOT / "data" / "youtube_analog_myth_playlist.json"
 PUBLISHED_LOG = ROOT / "admin" / "content" / "Published_Log.csv"
 OUT = ROOT / "data" / "manual_distribution_packet.json"
 REPORT = ROOT / "admin" / "reports" / "manual-distribution-packet.md"
@@ -71,6 +75,99 @@ def copy_block(post: dict) -> str:
 
 def links_in_text(value: str) -> list[str]:
     return [match.group(0).rstrip(".,);]") for match in URL_RE.finditer(value or "")]
+
+
+def canonical_url(value: str) -> str:
+    parsed = urlparse(value or "")
+    if not parsed.scheme or not parsed.netloc:
+        return value or ""
+    return parsed._replace(fragment="").geturl().rstrip("/")
+
+
+def local_public_path(url: str) -> Path | None:
+    parsed = urlparse(url or "")
+    if parsed.netloc not in {"www.lilyroo.com", "lilyroo.com", "lilyrooartist.github.io"}:
+        return None
+    if not parsed.path:
+        return None
+    return ROOT / parsed.path.lstrip("/")
+
+
+def add_evidence(evidence: dict[str, list[dict]], url: str, *, source: str, label: str, status: str) -> None:
+    if not url:
+        return
+    key = canonical_url(url)
+    item = {"source": source, "label": label, "status": status}
+    evidence.setdefault(key, [])
+    if item not in evidence[key]:
+        evidence[key].append(item)
+
+
+def destination_evidence_index() -> dict[str, list[dict]]:
+    evidence: dict[str, list[dict]] = {}
+    release_status = read_json(DISTROKID_RELEASE_STATUS, {})
+    for release in release_status.get("releases") or []:
+        add_evidence(
+            evidence,
+            release.get("youtube_playlist_url") or "",
+            source=str(DISTROKID_RELEASE_STATUS.relative_to(ROOT)),
+            label=f"{release.get('title') or 'release'} YouTube playlist URL",
+            status="known_release_playlist",
+        )
+    for path in [TWELVE_DOLLARS_PLAYLIST, ANALOG_MYTH_PLAYLIST]:
+        playlist = read_json(path, {})
+        add_evidence(
+            evidence,
+            playlist.get("playlist_url") or "",
+            source=str(path.relative_to(ROOT)),
+            label=f"{playlist.get('playlist_title') or 'YouTube playlist'} verified items: {playlist.get('verified_items') or 0}",
+            status="known_playlist_snapshot",
+        )
+    return evidence
+
+
+def audit_destination_links(links: list[str], evidence: dict[str, list[dict]]) -> list[dict]:
+    audit = []
+    for url in links:
+        matched = evidence.get(canonical_url(url), [])
+        audit.append({
+            "url": url,
+            "canonical_url": canonical_url(url),
+            "status": "verified_local_evidence" if matched else "needs_manual_review",
+            "evidence": matched,
+            "evidence_count": len(matched),
+            "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed.",
+        })
+    return audit
+
+
+def audit_summary(audit: list[dict]) -> dict:
+    verified = sum(1 for item in audit if item.get("status") == "verified_local_evidence")
+    return {
+        "link_count": len(audit),
+        "verified_local_evidence_count": verified,
+        "needs_manual_review_count": len(audit) - verified,
+        "all_links_have_local_evidence": bool(audit) and verified == len(audit),
+    }
+
+
+def asset_audit(url: str) -> dict:
+    local_path = local_public_path(url)
+    exists = bool(local_path and local_path.exists())
+    return {
+        "url": url or "",
+        "status": "local_asset_present" if exists else "needs_manual_review",
+        "local_path": str(local_path.relative_to(ROOT)) if local_path else "",
+        "exists": exists,
+        "guardrail": "Local file check only; no posting or live network check was performed.",
+    }
+
+
+def audit_sources_line(audit: dict) -> str:
+    evidence = audit.get("evidence") or []
+    if not evidence:
+        return "no local evidence"
+    return "; ".join(f"{item.get('label')} ({item.get('source')})" for item in evidence)
 
 
 def log_command(post_id: str, apply: bool = False) -> str:
@@ -148,6 +245,9 @@ def docket_row(row: dict) -> dict:
         "paste_text": paste_text,
         "asset_url": posting.get("asset_url") or row.get("asset_download_url") or "",
         "destination_links": links_in_text(paste_text),
+        "destination_link_audit": row.get("destination_link_audit") or [],
+        "destination_link_audit_summary": row.get("destination_link_audit_summary") or {},
+        "asset_audit": row.get("asset_audit") or {},
         "approval_required": bool(posting.get("approval_required")),
         "postable_now": bool(posting.get("postable_now")),
         "logging_required": bool(posting.get("logging_required")),
@@ -223,7 +323,7 @@ def manual_approval_docket(runway: dict, rows: list[dict]) -> dict:
     }
 
 
-def build_rows(plan: dict, runway: dict, published: dict[str, dict]) -> list[dict]:
+def build_rows(plan: dict, runway: dict, published: dict[str, dict], evidence: dict[str, list[dict]]) -> list[dict]:
     runway_by_id = runway_lookup(runway)
     rows = []
     for post in plan.get("posts") or []:
@@ -241,6 +341,9 @@ def build_rows(plan: dict, runway: dict, published: dict[str, dict]) -> list[dic
             distribution_status = "waiting_for_review"
         approval_command = review.get("approval_command") or post.get("approval_command") or ""
         posting_packet = manual_posting_packet(post, approved, logged, distribution_status, published_row, approval_command)
+        destination_links = links_in_text(copy_block(post))
+        link_audit = audit_destination_links(destination_links, evidence)
+        media_url = post.get("clip_url") or post.get("imagery_url") or ""
         rows.append({
             "id": post.get("id") or "",
             "platform": post.get("platform") or "",
@@ -262,7 +365,11 @@ def build_rows(plan: dict, runway: dict, published: dict[str, dict]) -> list[dic
             "copy_block": copy_block(post),
             "imagery_url": post.get("imagery_url") or "",
             "clip_url": post.get("clip_url") or "",
-            "asset_download_url": post.get("clip_url") or post.get("imagery_url") or "",
+            "asset_download_url": media_url,
+            "destination_links": destination_links,
+            "destination_link_audit": link_audit,
+            "destination_link_audit_summary": audit_summary(link_audit),
+            "asset_audit": asset_audit(media_url),
             "media_key": post.get("media_key") or "",
             "approval_preview_command": review.get("approval_preview_command") or "",
             "approval_command": approval_command,
@@ -360,8 +467,15 @@ def build_markdown(payload: dict) -> str:
             lines.append(f"- **{item['platform']} - {item['release']}** (`{item['id']}`)")
             lines.append(f"  - Paste text: {item['paste_text']}")
             lines.append(f"  - Asset: {item['asset_url']}")
+            if item.get("asset_audit"):
+                audit = item["asset_audit"]
+                lines.append(f"  - Asset evidence: `{audit.get('status')}` {audit.get('local_path') or audit.get('url')}")
             if item.get("destination_links"):
                 lines.append(f"  - Destination links: {', '.join(item['destination_links'])}")
+            if item.get("destination_link_audit"):
+                lines.append("  - Destination link evidence:")
+                for audit in item["destination_link_audit"]:
+                    lines.append(f"    - `{audit['status']}` {audit['url']}: {audit_sources_line(audit)}")
             if item.get("approval_preview_command"):
                 lines.append(f"  - Preview approval: `{item['approval_preview_command']}`")
             if item.get("approval_command"):
@@ -402,6 +516,13 @@ def build_markdown(payload: dict) -> str:
                 lines.append(f"    {line}" if line else "    ")
         if row.get("asset_download_url"):
             lines.append(f"  - Asset: {row['asset_download_url']}")
+        if row.get("asset_audit"):
+            audit = row["asset_audit"]
+            lines.append(f"  - Asset evidence: `{audit.get('status')}` {audit.get('local_path') or audit.get('url')}")
+        if row.get("destination_link_audit"):
+            lines.append("  - Destination link evidence:")
+            for audit in row["destination_link_audit"]:
+                lines.append(f"    - `{audit['status']}` {audit['url']}: {audit_sources_line(audit)}")
         if row.get("manual_posting_packet"):
             packet = row["manual_posting_packet"]
             lines.append(f"  - Next manual action: `{packet.get('next_action')}`")
@@ -444,7 +565,8 @@ def main() -> int:
     plan = read_json(PROMO_PLAN, {})
     runway = read_json(APPROVAL_RUNWAY, {})
     published = published_lookup()
-    rows = build_rows(plan, runway, published)
+    evidence = destination_evidence_index()
+    rows = build_rows(plan, runway, published, evidence)
     hard_cta = [row for row in rows if row.get("selected_cta_strength") in {"hard_subscribe", "hard_goal"}]
     logged_rows = [row for row in rows if row.get("logged")]
     unlogged_rows = [row for row in rows if not row.get("logged")]
@@ -474,6 +596,14 @@ def main() -> int:
             "promo_queue_plan": str(PROMO_PLAN.relative_to(ROOT)),
             "approval_runway": str(APPROVAL_RUNWAY.relative_to(ROOT)),
             "published_log": str(PUBLISHED_LOG.relative_to(ROOT)),
+            "destination_evidence": [
+                str(path.relative_to(ROOT))
+                for path in [
+                    DISTROKID_RELEASE_STATUS,
+                    TWELVE_DOLLARS_PLAYLIST,
+                    ANALOG_MYTH_PLAYLIST,
+                ]
+            ],
         },
         "summary": summary,
         "manual_approval_docket": manual_approval_docket(runway, rows),

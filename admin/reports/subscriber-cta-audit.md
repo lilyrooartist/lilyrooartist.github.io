@@ -1,6 +1,6 @@
 # Subscriber CTA Audit - Lily Roo
 
-Generated: 2026-06-20T07:24:06.312411Z
+Generated: 2026-06-20T07:29:16.445892Z
 
 ## Summary
 - Draft posts: **3**

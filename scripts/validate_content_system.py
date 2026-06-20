@@ -1070,13 +1070,28 @@ def validate_generated_outputs(failures):
             and approval_docket.get("guardrail") == (runway_approval_docket.get("guardrail") or "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review.")
             and approval_docket.get("ready_count") == len(approval_docket.get("ready_to_review") or []) == len(review_rows)
             and all(item.get("id") and item.get("distribution_status") == "waiting_for_review" and item.get("postable_after_approval") is True for item in approval_docket.get("ready_to_review") or [])
-            and all(item.get("paste_text") and item.get("asset_url") and item.get("destination_links") and item.get("approval_command") for item in docket_review)
+            and all(
+                item.get("paste_text")
+                and item.get("asset_url")
+                and (item.get("asset_audit") or {}).get("exists") is True
+                and item.get("destination_links")
+                and len(item.get("destination_link_audit") or []) == len(item.get("destination_links") or [])
+                and (item.get("destination_link_audit_summary") or {}).get("all_links_have_local_evidence") is True
+                and item.get("approval_command")
+                for item in docket_review
+            )
             and all(item.get("paste_text") and item.get("asset_url") and "log_manual_distribution.py" in item.get("log_preview_command", "") and "--apply --refresh-admin" in item.get("log_apply_command", "") for item in docket_postable)
             and all(
                 row.get("id")
                 and row.get("text")
                 and row.get("copy_block")
                 and row.get("asset_download_url")
+                and (row.get("asset_audit") or {}).get("exists") is True
+                and row.get("destination_links")
+                and len(row.get("destination_link_audit") or []) == len(row.get("destination_links") or [])
+                and (row.get("destination_link_audit_summary") or {}).get("link_count") == len(row.get("destination_links") or [])
+                and (row.get("destination_link_audit_summary") or {}).get("all_links_have_local_evidence") is True
+                and all(item.get("url") and item.get("status") == "verified_local_evidence" and item.get("evidence") for item in row.get("destination_link_audit") or [])
                 and row.get("distribution_status") in {"waiting_for_review", "ready_for_manual_post", "logged"}
                 and isinstance(row.get("logged"), bool)
                 and row.get("approval_preview_command")
