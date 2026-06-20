@@ -1,6 +1,6 @@
 # Promotion Blocker Ledger - Lily Roo
 
-Generated: 2026-06-20T01:07:26.533883Z
+Generated: 2026-06-20T01:12:35.974514Z
 
 ## Summary
 - Open blockers: **14**
@@ -11,17 +11,17 @@ Generated: 2026-06-20T01:07:26.533883Z
 
 ## Ledger
 - **[high] Approve scheduled Instagram row** (`approval-FP-AUTO-258`)
-  - Owner: `tod`; status: `waiting_for_review`; category: `approval`
-  - Evidence: FP-AUTO-258 is blocked by not_approved in executor state.
-  - Next step: Review copy, asset, destination links, and platform readiness before approving.
+  - Owner: `tod`; status: `ready_for_reviewed_approval`; category: `approval`
+  - Evidence: FP-AUTO-258 is blocked by not_approved in executor state. Automated review checks passed.
+  - Next step: Use the checked batch after human review: preview `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --dry-run`, then apply `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --refresh-admin`.
   - Open: https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg
   - Preview/check: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 --dry-run`
   - Apply/log after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 --refresh-admin`
   - Guardrail: Approval does not guarantee posting if the platform executor is still blocked.
 - **[high] Approve scheduled TikTok row** (`approval-FP-AUTO-259`)
-  - Owner: `tod`; status: `waiting_for_review`; category: `approval`
-  - Evidence: FP-AUTO-259 is blocked by not_approved in executor state.
-  - Next step: Review copy, asset, destination links, and platform readiness before approving.
+  - Owner: `tod`; status: `blocked_by_review_checks`; category: `approval`
+  - Evidence: FP-AUTO-259 is blocked by not_approved in executor state. Failed review checks: platform_readiness: Executor readiness snapshot marks platform blocked. Missing secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.
+  - Next step: Resolve failed review checks before approving this scheduled row.
   - Open: https://www.lilyroo.com/assets/ig/01_i_learned_it_all_60s.mp4
   - Preview/check: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --dry-run`
   - Apply/log after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --refresh-admin`
@@ -55,9 +55,9 @@ Generated: 2026-06-20T01:07:26.533883Z
   - Apply/log after review: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
   - Guardrail: Run retry resets only after the external platform repair is verified.
 - **[medium] Approve scheduled YouTube Community row** (`approval-FP-AUTO-261`)
-  - Owner: `tod`; status: `waiting_for_review`; category: `approval`
-  - Evidence: FP-AUTO-261 is blocked by not_approved in executor state.
-  - Next step: Review copy, asset, destination links, and platform readiness before approving.
+  - Owner: `tod`; status: `ready_for_reviewed_approval`; category: `approval`
+  - Evidence: FP-AUTO-261 is blocked by not_approved in executor state. Automated review checks passed.
+  - Next step: Use the checked batch after human review: preview `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --dry-run`, then apply `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --refresh-admin`.
   - Open: https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg
   - Preview/check: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-261 --dry-run`
   - Apply/log after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-261 --refresh-admin`

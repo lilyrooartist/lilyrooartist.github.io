@@ -638,6 +638,28 @@ def validate_generated_outputs(failures):
             ok(f"promotion blocker ledger tracks {len(ledger_rows)} open blocker(s)")
         else:
             fail("promotion_blocker_ledger.json missing safe owner/category blocker rows", failures)
+        if SCHEDULED_APPROVAL_PACKET.exists():
+            scheduled_packet = json.loads(SCHEDULED_APPROVAL_PACKET.read_text(encoding="utf-8"))
+            scheduled_rows = scheduled_packet.get("rows") or []
+            approval_rows = {
+                row.get("id"): row
+                for row in ledger_rows
+                if row.get("category") == "approval"
+            }
+            if scheduled_rows and all(
+                (
+                    item.get("review_check_passed")
+                    and (approval_rows.get(f"approval-{item.get('id')}") or {}).get("status") == "ready_for_reviewed_approval"
+                )
+                or (
+                    not item.get("review_check_passed")
+                    and (approval_rows.get(f"approval-{item.get('id')}") or {}).get("status") == "blocked_by_review_checks"
+                )
+                for item in scheduled_rows
+            ):
+                ok("promotion blocker ledger reflects scheduled approval review checks")
+            else:
+                fail("promotion_blocker_ledger.json missing scheduled approval review-check statuses", failures)
     else:
         fail("promotion_blocker_ledger.json missing; run scripts/build_promotion_blocker_ledger.py", failures)
     if MANUAL_METRIC_REPORT.exists():

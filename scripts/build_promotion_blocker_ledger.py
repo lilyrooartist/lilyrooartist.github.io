@@ -95,18 +95,37 @@ def add_platform_repairs(rows: list[dict]) -> None:
 
 def add_scheduled_approvals(rows: list[dict]) -> None:
     packet = read_json(SCHEDULED_APPROVAL, {})
+    summary = packet.get("summary") or {}
+    checked_preview = summary.get("checked_batch_preview_command") or ""
+    checked_apply = summary.get("checked_batch_apply_command") or ""
     for item in packet.get("rows") or []:
+        checks = item.get("review_checks") or []
+        failed_checks = [check for check in checks if check.get("status") != "pass"]
+        checks_passed = bool(item.get("review_check_passed"))
+        evidence = f"{item.get('id')} is blocked by {item.get('reason') or 'not_approved'} in executor state."
+        next_step = "Review copy, asset, destination links, and platform readiness before approving."
+        status = "waiting_for_review"
+        if checks_passed:
+            status = "ready_for_reviewed_approval"
+            evidence = f"{evidence} Automated review checks passed."
+            if checked_preview and checked_apply:
+                next_step = f"Use the checked batch after human review: preview `{checked_preview}`, then apply `{checked_apply}`."
+        elif failed_checks:
+            status = "blocked_by_review_checks"
+            failed = "; ".join(f"{check.get('name')}: {check.get('detail')}" for check in failed_checks)
+            evidence = f"{evidence} Failed review checks: {failed}"
+            next_step = "Resolve failed review checks before approving this scheduled row."
         rows.append(row(
             blocker_id=f"approval-{item.get('id')}",
             title=f"Approve scheduled {item.get('platform') or 'post'} row",
             category="approval",
             owner="tod",
             urgency="high" if item.get("execution_mode") == "auto" else "medium",
-            status="waiting_for_review",
+            status=status,
             platform=item.get("platform") or "",
             release=item.get("song") or "",
-            evidence=f"{item.get('id')} is blocked by {item.get('reason') or 'not_approved'} in executor state.",
-            next_step="Review copy, asset, destination links, and platform readiness before approving.",
+            evidence=evidence,
+            next_step=next_step,
             preview_command=item.get("approval_preview_command") or "",
             apply_command=item.get("approval_apply_command") or "",
             source_path=str(SCHEDULED_APPROVAL.relative_to(ROOT)),
