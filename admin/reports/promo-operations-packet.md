@@ -1,20 +1,20 @@
 # Promo Operations Packet - Lily Roo
 
-Generated: 2026-06-20T01:21:22.911713Z
+Generated: 2026-06-20T01:25:12.898933Z
 
 ## Summary
-- Actions: **20**
+- Actions: **18**
 - User review: **3**
-- Platform fixes: **3**
+- Platform fixes: **1**
 - Scheduled approval batches: **1**
 - Store checks: **7**
 - Manual metric updates: **5**
 - Safe apply commands ready: **0**
-- Urgency: **blocked: 1, high: 5, low: 5, medium: 9**
+- Urgency: **blocked: 1, high: 3, low: 5, medium: 9**
 
 ## Phase Counts
 - Fill manual metrics: **5**
-- Repair executor: **3**
+- Repair executor: **1**
 - Reschedule approved backlog: **1**
 - Review blocked drafts: **1**
 - Review draft posts: **2**
@@ -47,12 +47,6 @@ Generated: 2026-06-20T01:21:22.911713Z
   - Apply after review: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --apply --refresh-admin`
 
 ### Repair executor
-- **[high] Fix Facebook executor**
-  - Why: Platform executor needs repair before queued auto posts can publish.
-  - Detail: Facebook retry cap reached; rerun the Facebook dry-run check after identity confirmation.
-  - Command: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-265`
-  - Preview retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-AUTO-265`
-  - Apply retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-AUTO-265 --apply`
 - **[high] Fix TikTok executor**
   - Why: Platform executor needs repair before queued auto posts can publish.
   - Detail: Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok public posting approval is false. Complete TikTok OAuth/public posting setup, push secrets, then refresh Admin.
@@ -60,13 +54,6 @@ Generated: 2026-06-20T01:21:22.911713Z
   - Public posting approved: `False`
   - Command: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
   - Apply repair after preview: `python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py`
-- **[high] Fix Instagram executor**
-  - Why: Platform executor needs repair before queued auto posts can publish.
-  - Detail: Instagram retry cap reached; verify instagram_business_account repair before resetting execution state.
-  - Command: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263`
-  - Apply repair after preview: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
-  - Preview retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-AUTO-263`
-  - Apply retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-AUTO-263 --apply`
 
 ### Review draft posts
 - **[medium] Review YouTube Community draft for Twelve Dollars**
@@ -101,6 +88,16 @@ Generated: 2026-06-20T01:21:22.911713Z
   - Detail: Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release.
   - Latest snapshot checked: `2026-06-19T23:43:44.750461Z`
   - Command: `python3 scripts/search_spotify_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/spotify_release_snapshot.json'`
+- **[medium] Re-check Analog Myth on Apple Music**
+  - Why: Public store links should be checked as the July 1 release approaches.
+  - Detail: Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release.
+  - Latest snapshot checked: `2026-06-19T23:43:46.535618Z`
+  - Command: `python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/apple_music_release_snapshot.json'`
+- **[medium] Re-check Analog Myth on YouTube Music**
+  - Why: Public store links should be checked as the July 1 release approaches.
+  - Detail: Searches public web results for YouTube Music watch URLs, then validates the public title. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release.
+  - Latest snapshot checked: `2026-06-19T23:43:46.590983Z`
+  - Command: `python3 scripts/search_youtube_music_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/youtube_music_release_snapshot.json'`
 
 ## Guardrails
 - This packet does not publish, approve, apply, or post anything.

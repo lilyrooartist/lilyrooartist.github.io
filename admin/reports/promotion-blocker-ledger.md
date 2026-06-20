@@ -1,13 +1,13 @@
 # Promotion Blocker Ledger - Lily Roo
 
-Generated: 2026-06-20T01:21:23.149494Z
+Generated: 2026-06-20T01:25:13.129991Z
 
 ## Summary
-- Open blockers: **14**
+- Open blockers: **12**
 - User-owned: **11**
-- External platform-owned: **3**
+- External platform-owned: **1**
 - Codex-actionable: **0**
-- High or critical: **6**
+- High or critical: **4**
 
 ## Ledger
 - **[high] Approve scheduled Instagram row** (`approval-FP-AUTO-258`)
@@ -35,25 +35,11 @@ Generated: 2026-06-20T01:21:23.149494Z
   - Guardrail: Run retry resets only after the external platform repair is verified.
 - **[high] Reschedule approved past-due backlog** (`backlog-reschedule`)
   - Owner: `external_platform`; status: `blocked`; category: `backlog_reschedule`
-  - Evidence: 3 approved backlog row(s); 3 still have executor blockers.
+  - Evidence: 1 approved backlog row(s); 1 still have executor blockers.
   - Next step: Preview a new schedule. Apply only after known executor blockers clear.
   - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24`
   - Apply/log after review: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --apply --refresh-admin`
   - Guardrail: The apply command refuses known blocked rows unless deliberately overridden.
-- **[high] Repair Facebook executor** (`platform-FP-AUTO-265`)
-  - Owner: `external_platform`; status: `blocked`; category: `platform_repair`
-  - Evidence: Facebook retry cap reached; rerun the Facebook dry-run check after identity confirmation.
-  - Next step: Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check. Run `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-265` before any retry reset; only reset if the worker reports executable.
-  - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-265`
-  - Apply/log after review: `python3 scripts/reset_social_execution_state.py FP-AUTO-265 --apply`
-  - Guardrail: Run retry resets only after the external platform repair is verified.
-- **[high] Repair Instagram executor** (`platform-FP-AUTO-263`)
-  - Owner: `external_platform`; status: `blocked`; category: `platform_repair`
-  - Evidence: Instagram retry cap reached; verify instagram_business_account repair before resetting execution state.
-  - Next step: Reconnect the Instagram Business/Creator account to the Facebook Page or set IG_BUSINESS_ACCOUNT_ID, then push the worker secret and recapture readiness. Run `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263` before any retry reset; only reset if the worker reports executable.
-  - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263`
-  - Apply/log after review: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
-  - Guardrail: Run retry resets only after the external platform repair is verified.
 - **[medium] Approve scheduled YouTube Community row** (`approval-FP-AUTO-261`)
   - Owner: `tod`; status: `ready_for_reviewed_approval`; category: `approval`
   - Evidence: FP-AUTO-261 is blocked by not_approved in executor state. Automated review checks passed.

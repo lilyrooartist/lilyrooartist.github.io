@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T10:21:23.070156+09:00",
+  "generated_at": "2026-06-20T10:25:13.054442+09:00",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -8,8 +8,8 @@
     "promo_engine_status": "data/promo_engine_status.json"
   },
   "summary": {
-    "approved_backlog_count": 3,
-    "blocked_backlog_count": 3,
+    "approved_backlog_count": 1,
+    "blocked_backlog_count": 1,
     "clear_to_apply_count": 0,
     "start_at": "2026-06-21T10:00:00+09:00",
     "spacing_hours": 24,
@@ -19,36 +19,14 @@
   },
   "items": [
     {
-      "id": "FP-AUTO-263",
-      "platform": "Instagram",
-      "song": "I Learned It All in Fifteen Seconds",
-      "current_scheduled_at": "2026-06-08T14:05:00-04:00",
-      "proposed_scheduled_at": "2026-06-21T10:00:00+09:00",
-      "blocked": true,
-      "blocker_reason": "Instagram retry cap reached; verify instagram_business_account repair before resetting execution state.",
-      "blocker_status": "failed",
-      "blocker_source": "cron"
-    },
-    {
       "id": "FP-AUTO-264",
       "platform": "TikTok",
       "song": "I Learned It All in Fifteen Seconds",
       "current_scheduled_at": "2026-06-09T21:25:00-04:00",
-      "proposed_scheduled_at": "2026-06-22T10:00:00+09:00",
+      "proposed_scheduled_at": "2026-06-21T10:00:00+09:00",
       "blocked": true,
       "blocker_reason": "tiktok_credentials_missing",
       "blocker_status": "blocked",
-      "blocker_source": "cron"
-    },
-    {
-      "id": "FP-AUTO-265",
-      "platform": "Facebook",
-      "song": "I Learned It All in Fifteen Seconds",
-      "current_scheduled_at": "2026-06-10T12:30:00-04:00",
-      "proposed_scheduled_at": "2026-06-23T10:00:00+09:00",
-      "blocked": true,
-      "blocker_reason": "Facebook retry cap reached; rerun the Facebook dry-run check after identity confirmation.",
-      "blocker_status": "failed",
       "blocker_source": "cron"
     }
   ]

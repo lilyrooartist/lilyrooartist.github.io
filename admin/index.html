@@ -580,7 +580,7 @@
 <script type="text/plain" id="embedded-weekly-report"># Weekly Social Report — Lily Roo
 
 **Period:** 2026-06-14 to 2026-06-20
-**Last updated:** 2026-06-20 10:21 AM JST
+**Last updated:** 2026-06-20 10:25 AM JST
 
 ## KPI Goal
 - Primary growth target: **1,000 YouTube subscribers** (monetization milestone)
@@ -658,7 +658,7 @@
 - HyperFollow stores: **applemusic, itunes, spotify**
 - Amazon Music: **pending verified public URL; not exposed by current HyperFollow store list**
 - All-release store verification: **8 live, 7 checked pending, 0 pending, 7 snapshots**
-- Social executor history: **6 records, 0 posted, 3 platform fixes, 3 approval blockers**
+- Social executor history: **4 records, 0 posted, 1 platform fixes, 3 approval blockers**
 
 ### First Single Alignment
 - Status: **aligned**
@@ -703,7 +703,7 @@
 - Latest post: https://www.facebook.com/903693509504290_122118326547249470
 
 ## Metrics Snapshot
-- Live API captured: **2026-06-20T01:20:32.562Z**
+- Live API captured: **2026-06-20T01:24:25.401Z**
 - Snapshot file: `data/live_social_metrics.json`
 - YouTube public RSS captured: **2026-06-09T12:08:07.783949Z**
 - YouTube public snapshot file: `data/youtube_public_snapshot.json`
@@ -713,9 +713,9 @@
 - YouTube Music snapshot file: `data/youtube_music_release_snapshot.json`
 - HyperFollow stores captured: **2026-06-07T20:51:14.275569Z**
 - HyperFollow snapshot file: `data/hyperfollow_store_links_snapshot.json`
-- All-release store verification captured: **2026-06-20T01:21:22.874785+00:00**
+- All-release store verification captured: **2026-06-20T01:25:12.863667+00:00**
 - All-release store verification file: `data/store_verification_history.json`
-- Social executor history captured: **2026-06-20T01:21:21.058595Z**
+- Social executor history captured: **2026-06-20T01:25:11.846235Z**
 - Social executor history file: `data/social_execution_snapshot.json`
 - First single alignment audit captured: **2026-06-07T21:39:03.668040Z**
 - First single alignment audit file: `data/first_single_alignment_audit.json`
@@ -992,7 +992,7 @@
 }</script>
 
 <script type="application/json" id="embedded-promo-engine-status">{
-  "generated_at": "2026-06-20T01:21:23.204974+00:00",
+  "generated_at": "2026-06-20T01:25:13.184136+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -1044,13 +1044,13 @@
       "approved_plan_posts": 0,
       "ready_to_apply_posts": 0,
       "approval_blockers": 3,
-      "platform_fix_blockers": 3,
+      "platform_fix_blockers": 1,
       "backlog_reschedule_preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
       "backlog_reschedule_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --apply --refresh-admin",
       "next_pressure": [
         "3 approved unpublished posts are past their scheduled time; repair executor/platform blockers or reschedule them.",
         "3 executor records are blocked by approval.",
-        "3 executor records need platform repair before they can publish.",
+        "1 executor records need platform repair before they can publish.",
         "Increase weekly subscriber acquisition before the channel can reach 1,000 subscribers within a year."
       ]
     },
@@ -1179,15 +1179,15 @@
         "command": "python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impressions_7d=VALUE --refresh-admin"
       }
     ],
-    "live_metrics_updated_at": "2026-06-20T01:20:32.562Z",
+    "live_metrics_updated_at": "2026-06-20T01:24:25.401Z",
     "metrics_history": {
       "snapshot_count": 11,
-      "updated_at": "2026-06-20T01:21:21.626044Z",
+      "updated_at": "2026-06-20T01:25:12.293750Z",
       "latest_date": "2026-06-20",
       "latest": {
         "date": "2026-06-20",
-        "captured_at": "2026-06-20T01:21:21.626044Z",
-        "live_metrics_updated_at": "2026-06-20T01:20:32.562Z",
+        "captured_at": "2026-06-20T01:25:12.293750Z",
+        "live_metrics_updated_at": "2026-06-20T01:24:25.401Z",
         "youtube": {
           "subscribers": 6,
           "total_views": 251,
@@ -1209,7 +1209,7 @@
           "published_total": 17
         },
         "queue": {
-          "approved_upcoming": 3,
+          "approved_upcoming": 5,
           "approved_total": 9,
           "scheduled_total": 12
         },
@@ -1225,7 +1225,7 @@
           "facebook.page_likes": 0,
           "publishing.published_30d": 0,
           "publishing.published_total": 0,
-          "queue.approved_upcoming": 0,
+          "queue.approved_upcoming": 2,
           "queue.approved_total": 0,
           "queue.scheduled_total": 0
         }
@@ -1239,7 +1239,7 @@
         "facebook.page_likes": 0,
         "publishing.published_30d": 0,
         "publishing.published_total": 0,
-        "queue.approved_upcoming": 0,
+        "queue.approved_upcoming": 2,
         "queue.approved_total": 0,
         "queue.scheduled_total": 0
       }
@@ -1274,35 +1274,22 @@
     },
     "social_execution_summary": {
       "ok": true,
-      "updated_at": "2026-06-20T01:21:21.058595Z",
+      "updated_at": "2026-06-20T01:25:11.846235Z",
       "http_status": 200,
-      "execution_count": 6,
+      "execution_count": 4,
       "posted_count": 0,
-      "attention_count": 6,
+      "attention_count": 4,
       "approval_needed_count": 3,
-      "platform_fix_needed_count": 3,
+      "platform_fix_needed_count": 1,
       "status_counts": {
-        "blocked": 4,
-        "failed": 2
+        "blocked": 4
       },
       "platform_counts": {
-        "Facebook": 1,
-        "Instagram": 2,
+        "Instagram": 1,
         "TikTok": 2,
         "YouTube Community": 1
       },
       "latest_attention": [
-        {
-          "post_id": "FP-AUTO-265",
-          "platform": "Facebook",
-          "status": "failed",
-          "reason": "max_attempts_exceeded",
-          "attempts": 3,
-          "updated_at": "2026-06-20T01:15:11.284Z",
-          "source": "cron",
-          "post_url": "",
-          "error_summary": "Facebook retry cap reached; rerun the Facebook dry-run check after identity confirmation."
-        },
         {
           "post_id": "FP-AUTO-264",
           "platform": "TikTok",
@@ -1313,17 +1300,6 @@
           "source": "cron",
           "post_url": "",
           "error_summary": ""
-        },
-        {
-          "post_id": "FP-AUTO-263",
-          "platform": "Instagram",
-          "status": "failed",
-          "reason": "max_attempts_exceeded",
-          "attempts": 3,
-          "updated_at": "2026-06-20T01:15:10.649Z",
-          "source": "cron",
-          "post_url": "",
-          "error_summary": "Instagram retry cap reached; verify instagram_business_account repair before resetting execution state."
         },
         {
           "post_id": "FP-AUTO-261",
@@ -1343,6 +1319,17 @@
           "reason": "not_approved",
           "attempts": 0,
           "updated_at": "2026-06-20T01:15:10.047Z",
+          "source": "cron",
+          "post_url": "",
+          "error_summary": ""
+        },
+        {
+          "post_id": "FP-AUTO-258",
+          "platform": "Instagram",
+          "status": "blocked",
+          "reason": "not_approved",
+          "attempts": 0,
+          "updated_at": "2026-06-20T01:15:09.759Z",
           "source": "cron",
           "post_url": "",
           "error_summary": ""
@@ -1397,21 +1384,6 @@
       ],
       "platform_fix_needed": [
         {
-          "post_id": "FP-AUTO-265",
-          "platform": "Facebook",
-          "status": "failed",
-          "reason": "max_attempts_exceeded",
-          "attempts": 3,
-          "updated_at": "2026-06-20T01:15:11.284Z",
-          "source": "cron",
-          "post_url": "",
-          "error_summary": "Facebook retry cap reached; rerun the Facebook dry-run check after identity confirmation.",
-          "song": "I Learned It All in Fifteen Seconds",
-          "approved": "yes",
-          "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
-          "repair_command": "python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run"
-        },
-        {
           "post_id": "FP-AUTO-264",
           "platform": "TikTok",
           "status": "blocked",
@@ -1425,40 +1397,25 @@
           "approved": "yes",
           "repair_action": "Add TikTok OAuth credentials and confirm public posting approval, then push TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, and TIKTOK_REFRESH_TOKEN to the worker.",
           "repair_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py"
-        },
-        {
-          "post_id": "FP-AUTO-263",
-          "platform": "Instagram",
-          "status": "failed",
-          "reason": "max_attempts_exceeded",
-          "attempts": 3,
-          "updated_at": "2026-06-20T01:15:10.649Z",
-          "source": "cron",
-          "post_url": "",
-          "error_summary": "Instagram retry cap reached; verify instagram_business_account repair before resetting execution state.",
-          "song": "I Learned It All in Fifteen Seconds",
-          "approved": "yes",
-          "repair_action": "Reconnect the Instagram Business/Creator account to the Facebook Page or set IG_BUSINESS_ACCOUNT_ID, then push the worker secret and recapture readiness.",
-          "repair_command": "python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py"
         }
       ],
       "action_needed": ""
     },
     "social_scheduler_dry_run": {
       "ok": true,
-      "updated_at": "2026-06-20T01:21:21.526354Z",
+      "updated_at": "2026-06-20T01:25:12.196032Z",
       "http_status": 200,
       "auth_method": "bearer",
-      "requested_scheduled_time": "2026-06-20T01:21:21.133218Z",
-      "checked_at": "2026-06-20T01:21:21.133Z",
+      "requested_scheduled_time": "2026-06-20T01:25:11.925833Z",
+      "checked_at": "2026-06-20T01:25:11.925Z",
       "dry_run": true,
       "due_count": 6,
       "result_count": 6,
-      "would_post_count": 0,
-      "blocked_count": 6,
+      "would_post_count": 2,
+      "blocked_count": 4,
       "status_counts": {
         "blocked": 4,
-        "failed": 2
+        "would_post": 2
       },
       "platform_counts": {
         "Facebook": 1,
@@ -1466,7 +1423,30 @@
         "TikTok": 2,
         "YouTube Community": 1
       },
-      "would_post": [],
+      "would_post": [
+        {
+          "post_id": "FP-AUTO-263",
+          "platform": "Instagram",
+          "status": "would_post",
+          "reason": "",
+          "post_type": "image",
+          "attempts": 0,
+          "updated_at": "",
+          "source": "",
+          "error_summary": ""
+        },
+        {
+          "post_id": "FP-AUTO-265",
+          "platform": "Facebook",
+          "status": "would_post",
+          "reason": "",
+          "post_type": "image",
+          "attempts": 0,
+          "updated_at": "",
+          "source": "",
+          "error_summary": ""
+        }
+      ],
       "blocked": [
         {
           "post_id": "FP-AUTO-258",
@@ -1475,7 +1455,7 @@
           "reason": "not_approved",
           "post_type": "",
           "attempts": 0,
-          "updated_at": "2026-06-20T01:21:21.560Z",
+          "updated_at": "2026-06-20T01:25:12.355Z",
           "source": "dry-run",
           "error_summary": ""
         },
@@ -1486,7 +1466,7 @@
           "reason": "not_approved",
           "post_type": "",
           "attempts": 0,
-          "updated_at": "2026-06-20T01:21:21.563Z",
+          "updated_at": "2026-06-20T01:25:12.358Z",
           "source": "dry-run",
           "error_summary": ""
         },
@@ -1497,18 +1477,7 @@
           "reason": "not_approved",
           "post_type": "",
           "attempts": 0,
-          "updated_at": "2026-06-20T01:21:21.567Z",
-          "source": "dry-run",
-          "error_summary": ""
-        },
-        {
-          "post_id": "FP-AUTO-263",
-          "platform": "Instagram",
-          "status": "failed",
-          "reason": "max_attempts_exceeded",
-          "post_type": "",
-          "attempts": 3,
-          "updated_at": "2026-06-20T01:21:21.570Z",
+          "updated_at": "2026-06-20T01:25:12.361Z",
           "source": "dry-run",
           "error_summary": ""
         },
@@ -1519,18 +1488,7 @@
           "reason": "tiktok_credentials_missing",
           "post_type": "",
           "attempts": 0,
-          "updated_at": "2026-06-20T01:21:21.573Z",
-          "source": "dry-run",
-          "error_summary": ""
-        },
-        {
-          "post_id": "FP-AUTO-265",
-          "platform": "Facebook",
-          "status": "failed",
-          "reason": "max_attempts_exceeded",
-          "post_type": "",
-          "attempts": 3,
-          "updated_at": "2026-06-20T01:21:21.577Z",
+          "updated_at": "2026-06-20T01:25:12.366Z",
           "source": "dry-run",
           "error_summary": ""
         }
@@ -1542,8 +1500,8 @@
       "available": true,
       "safe_mode": true,
       "finalized": true,
-      "finished_at": "2026-06-20T01:21:23.179399Z",
-      "duration_seconds": 51.49,
+      "finished_at": "2026-06-20T01:25:13.158283Z",
+      "duration_seconds": 48.98,
       "command_count": 20,
       "passed": 19,
       "failed": 1,
@@ -1594,14 +1552,14 @@
       "stale": 1,
       "missing": 0,
       "checked_no_change": 0,
-      "checked_at": "2026-06-20T01:21:23.204974+00:00"
+      "checked_at": "2026-06-20T01:25:13.184136+00:00"
     },
     "sources": [
       {
         "name": "release_status",
         "path": "data/distrokid_release_status.json",
         "status": "fresh",
-        "age_hours": 63.9,
+        "age_hours": 64.0,
         "max_age_hours": 72,
         "timestamp": "2026-06-17T09:25:00+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin; update data/distrokid_release_status.json when a public URL is verified."
@@ -1621,14 +1579,14 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T01:21:21.590277+00:00",
+        "timestamp": "2026-06-20T01:25:12.256794+00:00",
         "refresh_command": "python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
         "name": "published_log",
         "path": "admin/content/Published_Log.csv",
         "status": "stale",
-        "age_hours": 300.7,
+        "age_hours": 300.8,
         "max_age_hours": 168,
         "timestamp": "2026-06-07T12:36:37.141276+00:00",
         "refresh_command": "Export or append latest published posts to admin/content/Published_Log.csv."
@@ -1637,7 +1595,7 @@
         "name": "manual_metrics",
         "path": "data/manual_social_stats.json",
         "status": "fresh",
-        "age_hours": 0.7,
+        "age_hours": 0.8,
         "max_age_hours": 72,
         "timestamp": "2026-06-20T00:37:40.066733+00:00",
         "refresh_command": "Update data/manual_social_stats.json with latest manual metrics."
@@ -1648,7 +1606,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T01:20:32.562000+00:00",
+        "timestamp": "2026-06-20T01:24:25.401000+00:00",
         "refresh_command": "python3 scripts/capture_live_metrics.py"
       },
       {
@@ -1657,7 +1615,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T01:21:21.626044+00:00",
+        "timestamp": "2026-06-20T01:25:12.293750+00:00",
         "refresh_command": "python3 scripts/update_metrics_history.py --refresh-admin"
       },
       {
@@ -1666,7 +1624,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T01:21:18.675931+00:00",
+        "timestamp": "2026-06-20T01:25:10.434570+00:00",
         "refresh_command": "python3 scripts/capture_executor_readiness.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -1675,7 +1633,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T01:21:23.204974+00:00",
+        "timestamp": "2026-06-20T01:25:13.184136+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin"
       },
       {
@@ -1684,7 +1642,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T01:21:21.058595+00:00",
+        "timestamp": "2026-06-20T01:25:11.846235+00:00",
         "refresh_command": "python3 scripts/capture_social_executions.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -1693,7 +1651,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T01:21:21.526354+00:00",
+        "timestamp": "2026-06-20T01:25:12.196032+00:00",
         "refresh_command": "python3 scripts/capture_scheduler_dry_run.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -1702,7 +1660,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T01:21:23.179749+00:00",
+        "timestamp": "2026-06-20T01:25:13.158640+00:00",
         "refresh_command": "python3 scripts/refresh_promo_admin.py"
       },
       {
@@ -1711,7 +1669,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T01:21:22.817041+00:00",
+        "timestamp": "2026-06-20T01:25:12.802257+00:00",
         "refresh_command": "python3 scripts/capture_github_workflow_status.py && python3 scripts/update_promo_engine_status.py"
       }
     ],
@@ -2046,10 +2004,10 @@
     "Preview approved backlog reschedule: python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
     "3 approved unpublished posts are past their scheduled time; repair executor/platform blockers or reschedule them.",
     "3 executor records are blocked by approval.",
-    "3 executor records need platform repair before they can publish.",
+    "1 executor records need platform repair before they can publish.",
     "Increase weekly subscriber acquisition before the channel can reach 1,000 subscribers within a year.",
     "Review approval blockers for 3 queued executor records.",
-    "Fix social executor platform failures for Facebook, Instagram, TikTok."
+    "Fix social executor platform failures for TikTok."
   ]
 }</script>
 
@@ -2129,7 +2087,7 @@
 }</script>
 
 <script type="application/json" id="embedded-promo-queue-plan">{
-  "generated_at": "2026-06-19T21:21:21.590277-04:00",
+  "generated_at": "2026-06-19T21:25:12.256794-04:00",
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
     "release_status": "data/distrokid_release_status.json"
@@ -2208,7 +2166,7 @@
   },
   "readiness_audit": {
     "source": "data/executor_readiness_snapshot.json",
-    "updated_at": "2026-06-20T01:21:18.675931Z",
+    "updated_at": "2026-06-20T01:25:10.434570Z",
     "ok": true,
     "counts": {
       "blocked": 1,
@@ -2325,7 +2283,7 @@
 
 
 <script type="application/json" id="embedded-promo-operations-packet">{
-  "generated_at": "2026-06-20T01:21:22.911713Z",
+  "generated_at": "2026-06-20T01:25:12.898933Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -2335,9 +2293,9 @@
     "scheduled_approval": "data/scheduled_approval_packet.json"
   },
   "summary": {
-    "action_count": 20,
+    "action_count": 18,
     "user_review": 3,
-    "platform_fixes": 3,
+    "platform_fixes": 1,
     "scheduled_approval_batches": 1,
     "store_checks": 7,
     "manual_metric_updates": 5,
@@ -2347,7 +2305,7 @@
     "manual_only_review_items": 2,
     "phases": {
       "Fill manual metrics": 5,
-      "Repair executor": 3,
+      "Repair executor": 1,
       "Reschedule approved backlog": 1,
       "Review blocked drafts": 1,
       "Review draft posts": 2,
@@ -2356,7 +2314,7 @@
     },
     "urgencies": {
       "blocked": 1,
-      "high": 5,
+      "high": 3,
       "low": 5,
       "medium": 9
     },
@@ -2434,7 +2392,7 @@
       "sort_key": [
         0,
         40,
-        5
+        3
       ]
     },
     {
@@ -2483,36 +2441,6 @@
       ]
     },
     {
-      "label": "Fix Facebook executor",
-      "kind": "platform_fix",
-      "priority": 1,
-      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-265",
-      "context": {
-        "post_id": "FP-AUTO-265",
-        "platform": "Facebook",
-        "reason": "max_attempts_exceeded",
-        "error_summary": "Facebook retry cap reached; rerun the Facebook dry-run check after identity confirmation.",
-        "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
-        "repair_apply_command": "",
-        "retry_reset_verification_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-265",
-        "retry_reset_preview_command": "python3 scripts/reset_social_execution_state.py FP-AUTO-265",
-        "retry_reset_apply_command": "python3 scripts/reset_social_execution_state.py FP-AUTO-265 --apply",
-        "retry_reset_note": "Run the dry-run verification command first. Apply the retry reset only when the worker reports the row is executable.",
-        "readiness": {
-          "ready": true
-        }
-      },
-      "phase": "Repair executor",
-      "urgency": "high",
-      "urgency_reason": "Platform executor needs repair before queued auto posts can publish.",
-      "status": "needs_fix",
-      "sort_key": [
-        1,
-        1,
-        2
-      ]
-    },
-    {
       "label": "Fix TikTok executor",
       "kind": "platform_fix",
       "priority": 1,
@@ -2553,39 +2481,7 @@
       "sort_key": [
         1,
         1,
-        3
-      ]
-    },
-    {
-      "label": "Fix Instagram executor",
-      "kind": "platform_fix",
-      "priority": 1,
-      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263",
-      "context": {
-        "post_id": "FP-AUTO-263",
-        "platform": "Instagram",
-        "reason": "max_attempts_exceeded",
-        "error_summary": "Instagram retry cap reached; verify instagram_business_account repair before resetting execution state.",
-        "repair_action": "Reconnect the Instagram Business/Creator account to the Facebook Page or set IG_BUSINESS_ACCOUNT_ID, then push the worker secret and recapture readiness.",
-        "repair_apply_command": "python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py",
-        "retry_reset_verification_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263",
-        "retry_reset_preview_command": "python3 scripts/reset_social_execution_state.py FP-AUTO-263",
-        "retry_reset_apply_command": "python3 scripts/reset_social_execution_state.py FP-AUTO-263 --apply",
-        "retry_reset_note": "Run the dry-run verification command first. Apply the retry reset only when the worker reports the row is executable.",
-        "readiness": {
-          "ready": true,
-          "api": "facebook-login",
-          "account_id_source": "FB_PAGE_ID"
-        }
-      },
-      "phase": "Repair executor",
-      "urgency": "high",
-      "urgency_reason": "Platform executor needs repair before queued auto posts can publish.",
-      "status": "needs_fix",
-      "sort_key": [
-        1,
-        1,
-        4
+        2
       ]
     },
     {
@@ -2622,7 +2518,7 @@
       "sort_key": [
         2,
         15,
-        6
+        4
       ]
     },
     {
@@ -2659,7 +2555,7 @@
       "sort_key": [
         2,
         15,
-        7
+        5
       ]
     },
     {
@@ -2686,7 +2582,7 @@
       "sort_key": [
         2,
         20,
-        8
+        6
       ]
     },
     {
@@ -2713,7 +2609,7 @@
       "sort_key": [
         2,
         20,
-        9
+        7
       ]
     },
     {
@@ -2740,7 +2636,7 @@
       "sort_key": [
         2,
         20,
-        10
+        8
       ]
     },
     {
@@ -2767,7 +2663,7 @@
       "sort_key": [
         2,
         20,
-        11
+        9
       ]
     },
     {
@@ -2794,7 +2690,7 @@
       "sort_key": [
         2,
         20,
-        12
+        10
       ]
     },
     {
@@ -2821,7 +2717,7 @@
       "sort_key": [
         2,
         20,
-        13
+        11
       ]
     },
     {
@@ -2848,7 +2744,7 @@
       "sort_key": [
         2,
         20,
-        14
+        12
       ]
     },
     {
@@ -2875,7 +2771,7 @@
       "sort_key": [
         3,
         30,
-        15
+        13
       ]
     },
     {
@@ -2903,7 +2799,7 @@
       "sort_key": [
         3,
         30,
-        16
+        14
       ]
     },
     {
@@ -2933,7 +2829,7 @@
       "sort_key": [
         3,
         30,
-        17
+        15
       ]
     },
     {
@@ -2961,7 +2857,7 @@
       "sort_key": [
         3,
         30,
-        18
+        16
       ]
     },
     {
@@ -2989,7 +2885,7 @@
       "sort_key": [
         3,
         30,
-        19
+        17
       ]
     }
   ]
@@ -2998,21 +2894,21 @@
 
 <script type="text/plain" id="embedded-promo-operations-report"># Promo Operations Packet - Lily Roo
 
-Generated: 2026-06-20T01:21:22.911713Z
+Generated: 2026-06-20T01:25:12.898933Z
 
 ## Summary
-- Actions: **20**
+- Actions: **18**
 - User review: **3**
-- Platform fixes: **3**
+- Platform fixes: **1**
 - Scheduled approval batches: **1**
 - Store checks: **7**
 - Manual metric updates: **5**
 - Safe apply commands ready: **0**
-- Urgency: **blocked: 1, high: 5, low: 5, medium: 9**
+- Urgency: **blocked: 1, high: 3, low: 5, medium: 9**
 
 ## Phase Counts
 - Fill manual metrics: **5**
-- Repair executor: **3**
+- Repair executor: **1**
 - Reschedule approved backlog: **1**
 - Review blocked drafts: **1**
 - Review draft posts: **2**
@@ -3045,12 +2941,6 @@ Generated: 2026-06-20T01:21:22.911713Z
   - Apply after review: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --apply --refresh-admin`
 
 ### Repair executor
-- **[high] Fix Facebook executor**
-  - Why: Platform executor needs repair before queued auto posts can publish.
-  - Detail: Facebook retry cap reached; rerun the Facebook dry-run check after identity confirmation.
-  - Command: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-265`
-  - Preview retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-AUTO-265`
-  - Apply retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-AUTO-265 --apply`
 - **[high] Fix TikTok executor**
   - Why: Platform executor needs repair before queued auto posts can publish.
   - Detail: Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok public posting approval is false. Complete TikTok OAuth/public posting setup, push secrets, then refresh Admin.
@@ -3058,13 +2948,6 @@ Generated: 2026-06-20T01:21:22.911713Z
   - Public posting approved: `False`
   - Command: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
   - Apply repair after preview: `python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py`
-- **[high] Fix Instagram executor**
-  - Why: Platform executor needs repair before queued auto posts can publish.
-  - Detail: Instagram retry cap reached; verify instagram_business_account repair before resetting execution state.
-  - Command: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263`
-  - Apply repair after preview: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
-  - Preview retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-AUTO-263`
-  - Apply retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-AUTO-263 --apply`
 
 ### Review draft posts
 - **[medium] Review YouTube Community draft for Twelve Dollars**
@@ -3099,6 +2982,16 @@ Generated: 2026-06-20T01:21:22.911713Z
   - Detail: Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release.
   - Latest snapshot checked: `2026-06-19T23:43:44.750461Z`
   - Command: `python3 scripts/search_spotify_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/spotify_release_snapshot.json'`
+- **[medium] Re-check Analog Myth on Apple Music**
+  - Why: Public store links should be checked as the July 1 release approaches.
+  - Detail: Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release.
+  - Latest snapshot checked: `2026-06-19T23:43:46.535618Z`
+  - Command: `python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/apple_music_release_snapshot.json'`
+- **[medium] Re-check Analog Myth on YouTube Music**
+  - Why: Public store links should be checked as the July 1 release approaches.
+  - Detail: Searches public web results for YouTube Music watch URLs, then validates the public title. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release.
+  - Latest snapshot checked: `2026-06-19T23:43:46.590983Z`
+  - Command: `python3 scripts/search_youtube_music_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/youtube_music_release_snapshot.json'`
 
 ## Guardrails
 - This packet does not publish, approve, apply, or post anything.
@@ -3108,7 +3001,7 @@ Generated: 2026-06-20T01:21:22.911713Z
 
 <script type="text/plain" id="embedded-manual-metric-collection"># Manual Metric Collection - Lily Roo
 
-Generated: 2026-06-20T01:21:23.121609Z
+Generated: 2026-06-20T01:25:13.103970Z
 
 Pending fields: **11**
 
@@ -3188,7 +3081,7 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
 
 
 <script type="application/json" id="embedded-platform-repair-status">{
-  "generated_at": "2026-06-20T01:21:23.095498Z",
+  "generated_at": "2026-06-20T01:25:13.078847Z",
   "safe_mode": true,
   "source": {
     "promo_operations_packet": "data/promo_operations_packet.json",
@@ -3196,66 +3089,16 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
     "executor_readiness": "data/executor_readiness_snapshot.json"
   },
   "summary": {
-    "platform_fix_count": 3,
-    "blocked_count": 3,
-    "preview_command_count": 3,
-    "apply_command_count": 2,
-    "retry_reset_count": 2,
+    "platform_fix_count": 1,
+    "blocked_count": 1,
+    "preview_command_count": 1,
+    "apply_command_count": 1,
+    "retry_reset_count": 0,
     "platforms": [
-      "Facebook",
-      "Instagram",
       "TikTok"
     ]
   },
   "rows": [
-    {
-      "post_id": "FP-AUTO-263",
-      "platform": "Instagram",
-      "priority": 1,
-      "status": "failed",
-      "reason": "max_attempts_exceeded",
-      "attempts": 3,
-      "updated_at": "2026-06-20T01:15:10.649Z",
-      "error_summary": "Instagram retry cap reached; verify instagram_business_account repair before resetting execution state.",
-      "repair_action": "Reconnect the Instagram Business/Creator account to the Facebook Page or set IG_BUSINESS_ACCOUNT_ID, then push the worker secret and recapture readiness.",
-      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263",
-      "apply_command": "python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py",
-      "retry_reset_verification_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263",
-      "retry_reset_preview_command": "python3 scripts/reset_social_execution_state.py FP-AUTO-263",
-      "retry_reset_apply_command": "python3 scripts/reset_social_execution_state.py FP-AUTO-263 --apply",
-      "retry_reset_note": "Run the dry-run verification command first. Apply the retry reset only when the worker reports the row is executable.",
-      "readiness": {
-        "ready": true,
-        "api": "facebook-login",
-        "account_id_source": "FB_PAGE_ID"
-      },
-      "missing_secrets": [],
-      "public_posting_approved": null,
-      "blocked": true
-    },
-    {
-      "post_id": "FP-AUTO-265",
-      "platform": "Facebook",
-      "priority": 2,
-      "status": "failed",
-      "reason": "max_attempts_exceeded",
-      "attempts": 3,
-      "updated_at": "2026-06-20T01:15:11.284Z",
-      "error_summary": "Facebook retry cap reached; rerun the Facebook dry-run check after identity confirmation.",
-      "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
-      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-265",
-      "apply_command": "",
-      "retry_reset_verification_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-265",
-      "retry_reset_preview_command": "python3 scripts/reset_social_execution_state.py FP-AUTO-265",
-      "retry_reset_apply_command": "python3 scripts/reset_social_execution_state.py FP-AUTO-265 --apply",
-      "retry_reset_note": "Run the dry-run verification command first. Apply the retry reset only when the worker reports the row is executable.",
-      "readiness": {
-        "ready": true
-      },
-      "missing_secrets": [],
-      "public_posting_approved": null,
-      "blocked": true
-    },
     {
       "post_id": "FP-AUTO-264",
       "platform": "TikTok",
@@ -3297,7 +3140,7 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
 
 
 <script type="application/json" id="embedded-approval-runway">{
-  "generated_at": "2026-06-20T01:21:22.938712Z",
+  "generated_at": "2026-06-20T01:25:12.926894Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -3368,7 +3211,7 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
 
 <script type="text/plain" id="embedded-approval-runway-report"># Approval Runway - Lily Roo
 
-Generated: 2026-06-20T01:21:22.938712Z
+Generated: 2026-06-20T01:25:12.926894Z
 
 ## Summary
 - Drafts needing review: **3**
@@ -3405,7 +3248,7 @@ Generated: 2026-06-20T01:21:22.938712Z
 
 
 <script type="application/json" id="embedded-subscriber-cta-audit">{
-  "generated_at": "2026-06-20T01:21:22.991061Z",
+  "generated_at": "2026-06-20T01:25:12.978312Z",
   "safe_mode": true,
   "source": {
     "promo_queue_plan": "data/promo_queue_plan.json",
@@ -3471,7 +3314,7 @@ Generated: 2026-06-20T01:21:22.938712Z
 
 <script type="text/plain" id="embedded-subscriber-cta-audit-report"># Subscriber CTA Audit - Lily Roo
 
-Generated: 2026-06-20T01:21:22.991061Z
+Generated: 2026-06-20T01:25:12.978312Z
 
 ## Summary
 - Draft posts: **3**
@@ -3505,7 +3348,7 @@ Generated: 2026-06-20T01:21:22.991061Z
 
 
 <script type="application/json" id="embedded-monetization-activation-plan">{
-  "generated_at": "2026-06-20T01:21:23.042804Z",
+  "generated_at": "2026-06-20T01:25:13.028561Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -3609,7 +3452,7 @@ Generated: 2026-06-20T01:21:22.991061Z
 
 <script type="text/plain" id="embedded-monetization-activation-report"># Monetization Activation Plan - Lily Roo
 
-Generated: 2026-06-20T01:21:23.042804Z
+Generated: 2026-06-20T01:25:13.028561Z
 
 ## Summary
 - Current subscribers: **6 / 1000**
@@ -3656,7 +3499,7 @@ Generated: 2026-06-20T01:21:23.042804Z
 
 
 <script type="application/json" id="embedded-backlog-reschedule-preview">{
-  "generated_at": "2026-06-20T10:21:23.070156+09:00",
+  "generated_at": "2026-06-20T10:25:13.054442+09:00",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -3665,8 +3508,8 @@ Generated: 2026-06-20T01:21:23.042804Z
     "promo_engine_status": "data/promo_engine_status.json"
   },
   "summary": {
-    "approved_backlog_count": 3,
-    "blocked_backlog_count": 3,
+    "approved_backlog_count": 1,
+    "blocked_backlog_count": 1,
     "clear_to_apply_count": 0,
     "start_at": "2026-06-21T10:00:00+09:00",
     "spacing_hours": 24,
@@ -3676,36 +3519,14 @@ Generated: 2026-06-20T01:21:23.042804Z
   },
   "items": [
     {
-      "id": "FP-AUTO-263",
-      "platform": "Instagram",
-      "song": "I Learned It All in Fifteen Seconds",
-      "current_scheduled_at": "2026-06-08T14:05:00-04:00",
-      "proposed_scheduled_at": "2026-06-21T10:00:00+09:00",
-      "blocked": true,
-      "blocker_reason": "Instagram retry cap reached; verify instagram_business_account repair before resetting execution state.",
-      "blocker_status": "failed",
-      "blocker_source": "cron"
-    },
-    {
       "id": "FP-AUTO-264",
       "platform": "TikTok",
       "song": "I Learned It All in Fifteen Seconds",
       "current_scheduled_at": "2026-06-09T21:25:00-04:00",
-      "proposed_scheduled_at": "2026-06-22T10:00:00+09:00",
+      "proposed_scheduled_at": "2026-06-21T10:00:00+09:00",
       "blocked": true,
       "blocker_reason": "tiktok_credentials_missing",
       "blocker_status": "blocked",
-      "blocker_source": "cron"
-    },
-    {
-      "id": "FP-AUTO-265",
-      "platform": "Facebook",
-      "song": "I Learned It All in Fifteen Seconds",
-      "current_scheduled_at": "2026-06-10T12:30:00-04:00",
-      "proposed_scheduled_at": "2026-06-23T10:00:00+09:00",
-      "blocked": true,
-      "blocker_reason": "Facebook retry cap reached; rerun the Facebook dry-run check after identity confirmation.",
-      "blocker_status": "failed",
       "blocker_source": "cron"
     }
   ]
@@ -3714,29 +3535,21 @@ Generated: 2026-06-20T01:21:23.042804Z
 
 <script type="text/plain" id="embedded-backlog-reschedule-preview-report"># Backlog Reschedule Preview - Lily Roo
 
-Generated: 2026-06-20T10:21:23.070156+09:00
+Generated: 2026-06-20T10:25:13.054442+09:00
 
 ## Summary
-- Approved backlog rows: **3**
-- Rows with known blockers: **3**
+- Approved backlog rows: **1**
+- Rows with known blockers: **1**
 - Clear to apply without override: **0**
 - Start at: **2026-06-21T10:00:00+09:00**
 - Spacing hours: **24**
 - Apply allowed without override: **False**
 
 ## Proposed Reschedule
-- **Instagram - I Learned It All in Fifteen Seconds** (`FP-AUTO-263`)
-  - Current: `2026-06-08T14:05:00-04:00`
-  - Proposed: `2026-06-21T10:00:00+09:00`
-  - Blocker: Instagram retry cap reached; verify instagram_business_account repair before resetting execution state.
 - **TikTok - I Learned It All in Fifteen Seconds** (`FP-AUTO-264`)
   - Current: `2026-06-09T21:25:00-04:00`
-  - Proposed: `2026-06-22T10:00:00+09:00`
+  - Proposed: `2026-06-21T10:00:00+09:00`
   - Blocker: tiktok_credentials_missing
-- **Facebook - I Learned It All in Fifteen Seconds** (`FP-AUTO-265`)
-  - Current: `2026-06-10T12:30:00-04:00`
-  - Proposed: `2026-06-23T10:00:00+09:00`
-  - Blocker: Facebook retry cap reached; rerun the Facebook dry-run check after identity confirmation.
 
 ## Commands
 - Preview: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24`
@@ -3749,35 +3562,16 @@ Generated: 2026-06-20T10:21:23.070156+09:00
 
 <script type="text/plain" id="embedded-platform-repair-report"># Platform Repair Status - Lily Roo
 
-Generated: 2026-06-20T01:21:23.095498Z
+Generated: 2026-06-20T01:25:13.078847Z
 
 ## Summary
-- Platform fixes: **3**
-- Blocked rows: **3**
-- Preview commands: **3**
-- Apply commands: **2**
-- Platforms: **Facebook, Instagram, TikTok**
+- Platform fixes: **1**
+- Blocked rows: **1**
+- Preview commands: **1**
+- Apply commands: **1**
+- Platforms: **TikTok**
 
 ## Repair Checklist
-- **Instagram** (`FP-AUTO-263`)
-  - Status: `failed`; reason: `max_attempts_exceeded`
-  - Error: Instagram retry cap reached; verify instagram_business_account repair before resetting execution state.
-  - Repair: Reconnect the Instagram Business/Creator account to the Facebook Page or set IG_BUSINESS_ACCOUNT_ID, then push the worker secret and recapture readiness.
-  - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263`
-  - Apply after review: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
-  - Verify before retry reset: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263`
-  - Preview retry reset after platform repair: `python3 scripts/reset_social_execution_state.py FP-AUTO-263`
-  - Apply retry reset after platform repair: `python3 scripts/reset_social_execution_state.py FP-AUTO-263 --apply`
-  - Retry reset note: Run the dry-run verification command first. Apply the retry reset only when the worker reports the row is executable.
-- **Facebook** (`FP-AUTO-265`)
-  - Status: `failed`; reason: `max_attempts_exceeded`
-  - Error: Facebook retry cap reached; rerun the Facebook dry-run check after identity confirmation.
-  - Repair: Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.
-  - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-265`
-  - Verify before retry reset: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-265`
-  - Preview retry reset after platform repair: `python3 scripts/reset_social_execution_state.py FP-AUTO-265`
-  - Apply retry reset after platform repair: `python3 scripts/reset_social_execution_state.py FP-AUTO-265 --apply`
-  - Retry reset note: Run the dry-run verification command first. Apply the retry reset only when the worker reports the row is executable.
 - **TikTok** (`FP-AUTO-264`)
   - Status: `blocked`; reason: `tiktok_credentials_missing`
   - Repair: Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok public posting approval is false. Complete TikTok OAuth/public posting setup, push secrets, then refresh Admin.
@@ -3792,7 +3586,7 @@ Generated: 2026-06-20T01:21:23.095498Z
 
 
 <script type="application/json" id="embedded-manual-distribution-packet">{
-  "generated_at": "2026-06-20T01:21:23.018331Z",
+  "generated_at": "2026-06-20T01:25:13.003867Z",
   "safe_mode": true,
   "source": {
     "promo_queue_plan": "data/promo_queue_plan.json",
@@ -3870,7 +3664,7 @@ Generated: 2026-06-20T01:21:23.095498Z
 
 <script type="text/plain" id="embedded-manual-distribution-report"># Manual Distribution Packet - Lily Roo
 
-Generated: 2026-06-20T01:21:23.018331Z
+Generated: 2026-06-20T01:25:13.003867Z
 
 ## Summary
 - Manual-ready posts: **2**
@@ -3915,7 +3709,7 @@ Generated: 2026-06-20T01:21:23.018331Z
 
 
 <script type="application/json" id="embedded-manual-metric-collection-packet">{
-  "generated_at": "2026-06-20T01:21:23.121609Z",
+  "generated_at": "2026-06-20T01:25:13.103970Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -4210,7 +4004,7 @@ Generated: 2026-06-20T01:21:23.018331Z
 
 
 <script type="application/json" id="embedded-scheduled-approval-packet">{
-  "generated_at": "2026-06-20T01:21:22.964657Z",
+  "generated_at": "2026-06-20T01:25:12.953529Z",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -4393,7 +4187,7 @@ Generated: 2026-06-20T01:21:23.018331Z
 
 <script type="text/plain" id="embedded-scheduled-approval-report"># Scheduled Approval Packet - Lily Roo
 
-Generated: 2026-06-20T01:21:22.964657Z
+Generated: 2026-06-20T01:25:12.953529Z
 
 ## Summary
 - Approval blockers: **3**
@@ -4457,13 +4251,13 @@ Generated: 2026-06-20T01:21:22.964657Z
 
 
 <script type="application/json" id="embedded-promotion-blocker-ledger">{
-  "generated_at": "2026-06-20T01:21:23.149494Z",
+  "generated_at": "2026-06-20T01:25:13.129991Z",
   "safe_mode": true,
   "summary": {
-    "open_blocker_count": 14,
-    "urgent_count": 6,
+    "open_blocker_count": 12,
+    "urgent_count": 4,
     "owner_counts": {
-      "external_platform": 3,
+      "external_platform": 1,
       "tod": 11
     },
     "category_counts": {
@@ -4471,10 +4265,10 @@ Generated: 2026-06-20T01:21:22.964657Z
       "backlog_reschedule": 1,
       "manual_distribution": 2,
       "manual_metrics": 5,
-      "platform_repair": 3
+      "platform_repair": 1
     },
     "status_counts": {
-      "blocked": 4,
+      "blocked": 2,
       "blocked_by_review_checks": 1,
       "ready_for_reviewed_approval": 2,
       "waiting_for_manual_values": 5,
@@ -4549,47 +4343,13 @@ Generated: 2026-06-20T01:21:22.964657Z
       "status": "blocked",
       "platform": "",
       "release": "",
-      "evidence": "3 approved backlog row(s); 3 still have executor blockers.",
+      "evidence": "1 approved backlog row(s); 1 still have executor blockers.",
       "next_step": "Preview a new schedule. Apply only after known executor blockers clear.",
       "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
       "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --apply --refresh-admin",
       "source_path": "data/backlog_reschedule_preview.json",
       "external_url": "",
       "guardrail": "The apply command refuses known blocked rows unless deliberately overridden."
-    },
-    {
-      "id": "platform-FP-AUTO-265",
-      "title": "Repair Facebook executor",
-      "category": "platform_repair",
-      "owner": "external_platform",
-      "urgency": "high",
-      "status": "blocked",
-      "platform": "Facebook",
-      "release": "",
-      "evidence": "Facebook retry cap reached; rerun the Facebook dry-run check after identity confirmation.",
-      "next_step": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check. Run `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-265` before any retry reset; only reset if the worker reports executable.",
-      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-265",
-      "apply_command": "python3 scripts/reset_social_execution_state.py FP-AUTO-265 --apply",
-      "source_path": "data/platform_repair_status.json",
-      "external_url": "",
-      "guardrail": "Run retry resets only after the external platform repair is verified."
-    },
-    {
-      "id": "platform-FP-AUTO-263",
-      "title": "Repair Instagram executor",
-      "category": "platform_repair",
-      "owner": "external_platform",
-      "urgency": "high",
-      "status": "blocked",
-      "platform": "Instagram",
-      "release": "",
-      "evidence": "Instagram retry cap reached; verify instagram_business_account repair before resetting execution state.",
-      "next_step": "Reconnect the Instagram Business/Creator account to the Facebook Page or set IG_BUSINESS_ACCOUNT_ID, then push the worker secret and recapture readiness. Run `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263` before any retry reset; only reset if the worker reports executable.",
-      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263",
-      "apply_command": "python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py",
-      "source_path": "data/platform_repair_status.json",
-      "external_url": "",
-      "guardrail": "Run retry resets only after the external platform repair is verified."
     },
     {
       "id": "approval-FP-AUTO-261",
@@ -4733,14 +4493,14 @@ Generated: 2026-06-20T01:21:22.964657Z
 
 <script type="text/plain" id="embedded-promotion-blocker-ledger-report"># Promotion Blocker Ledger - Lily Roo
 
-Generated: 2026-06-20T01:21:23.149494Z
+Generated: 2026-06-20T01:25:13.129991Z
 
 ## Summary
-- Open blockers: **14**
+- Open blockers: **12**
 - User-owned: **11**
-- External platform-owned: **3**
+- External platform-owned: **1**
 - Codex-actionable: **0**
-- High or critical: **6**
+- High or critical: **4**
 
 ## Ledger
 - **[high] Approve scheduled Instagram row** (`approval-FP-AUTO-258`)
@@ -4768,25 +4528,11 @@ Generated: 2026-06-20T01:21:23.149494Z
   - Guardrail: Run retry resets only after the external platform repair is verified.
 - **[high] Reschedule approved past-due backlog** (`backlog-reschedule`)
   - Owner: `external_platform`; status: `blocked`; category: `backlog_reschedule`
-  - Evidence: 3 approved backlog row(s); 3 still have executor blockers.
+  - Evidence: 1 approved backlog row(s); 1 still have executor blockers.
   - Next step: Preview a new schedule. Apply only after known executor blockers clear.
   - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24`
   - Apply/log after review: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --apply --refresh-admin`
   - Guardrail: The apply command refuses known blocked rows unless deliberately overridden.
-- **[high] Repair Facebook executor** (`platform-FP-AUTO-265`)
-  - Owner: `external_platform`; status: `blocked`; category: `platform_repair`
-  - Evidence: Facebook retry cap reached; rerun the Facebook dry-run check after identity confirmation.
-  - Next step: Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check. Run `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-265` before any retry reset; only reset if the worker reports executable.
-  - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-265`
-  - Apply/log after review: `python3 scripts/reset_social_execution_state.py FP-AUTO-265 --apply`
-  - Guardrail: Run retry resets only after the external platform repair is verified.
-- **[high] Repair Instagram executor** (`platform-FP-AUTO-263`)
-  - Owner: `external_platform`; status: `blocked`; category: `platform_repair`
-  - Evidence: Instagram retry cap reached; verify instagram_business_account repair before resetting execution state.
-  - Next step: Reconnect the Instagram Business/Creator account to the Facebook Page or set IG_BUSINESS_ACCOUNT_ID, then push the worker secret and recapture readiness. Run `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263` before any retry reset; only reset if the worker reports executable.
-  - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263`
-  - Apply/log after review: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
-  - Guardrail: Run retry resets only after the external platform repair is verified.
 - **[medium] Approve scheduled YouTube Community row** (`approval-FP-AUTO-261`)
   - Owner: `tod`; status: `ready_for_reviewed_approval`; category: `approval`
   - Evidence: FP-AUTO-261 is blocked by not_approved in executor state. Automated review checks passed.

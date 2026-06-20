@@ -359,17 +359,20 @@ def validate_generated_outputs(failures):
             if action.get("kind") == "platform_fix"
             and (action.get("context") or {}).get("reason") == "max_attempts_exceeded"
         ]
-        if retry_reset_actions and all(
-            "reset_social_execution_state.py" in ((action.get("context") or {}).get("retry_reset_preview_command") or "")
-            and "check_social_executor_dry_run.py" in ((action.get("context") or {}).get("retry_reset_verification_command") or "")
-            and "--apply" not in ((action.get("context") or {}).get("retry_reset_preview_command") or "")
-            and "--apply" in ((action.get("context") or {}).get("retry_reset_apply_command") or "")
-            and (action.get("context") or {}).get("retry_reset_note")
-            for action in retry_reset_actions
-        ):
-            ok("promo operations packet includes verified retry reset previews for max-attempt rows")
+        if retry_reset_actions:
+            if all(
+                "reset_social_execution_state.py" in ((action.get("context") or {}).get("retry_reset_preview_command") or "")
+                and "check_social_executor_dry_run.py" in ((action.get("context") or {}).get("retry_reset_verification_command") or "")
+                and "--apply" not in ((action.get("context") or {}).get("retry_reset_preview_command") or "")
+                and "--apply" in ((action.get("context") or {}).get("retry_reset_apply_command") or "")
+                and (action.get("context") or {}).get("retry_reset_note")
+                for action in retry_reset_actions
+            ):
+                ok("promo operations packet includes verified retry reset previews for max-attempt rows")
+            else:
+                fail("promo_operations_packet.json missing verified retry reset previews for max-attempt rows", failures)
         else:
-            fail("promo_operations_packet.json missing verified retry reset previews for max-attempt rows", failures)
+            ok("promo operations packet has no max-attempt retry reset rows")
         tiktok_actions = [
             action for action in actions
             if (action.get("context") or {}).get("platform") == "TikTok"

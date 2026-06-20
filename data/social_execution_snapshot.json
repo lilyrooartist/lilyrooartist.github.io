@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "updated_at": "2026-06-20T01:21:21.058595Z",
+  "updated_at": "2026-06-20T01:25:11.846235Z",
   "source": "lilyroo-social-executor-executions",
   "url": "https://www.lilyroo.com/api/social/executions",
   "http_status": 200,
@@ -8,18 +8,16 @@
   "password_supplied": false,
   "auth_method": "bearer",
   "summary": {
-    "execution_count": 6,
+    "execution_count": 4,
     "posted_count": 0,
-    "attention_count": 6,
+    "attention_count": 4,
     "approval_needed_count": 3,
-    "platform_fix_needed_count": 3,
+    "platform_fix_needed_count": 1,
     "status_counts": {
-      "blocked": 4,
-      "failed": 2
+      "blocked": 4
     },
     "platform_counts": {
-      "Facebook": 1,
-      "Instagram": 2,
+      "Instagram": 1,
       "TikTok": 2,
       "YouTube Community": 1
     },
@@ -61,17 +59,6 @@
     ],
     "platform_fix_needed": [
       {
-        "post_id": "FP-AUTO-265",
-        "platform": "Facebook",
-        "status": "failed",
-        "reason": "max_attempts_exceeded",
-        "attempts": 3,
-        "updated_at": "2026-06-20T01:15:11.284Z",
-        "source": "cron",
-        "post_url": "",
-        "error_summary": "Facebook retry cap reached; rerun the Facebook dry-run check after identity confirmation."
-      },
-      {
         "post_id": "FP-AUTO-264",
         "platform": "TikTok",
         "status": "blocked",
@@ -81,32 +68,10 @@
         "source": "cron",
         "post_url": "",
         "error_summary": ""
-      },
-      {
-        "post_id": "FP-AUTO-263",
-        "platform": "Instagram",
-        "status": "failed",
-        "reason": "max_attempts_exceeded",
-        "attempts": 3,
-        "updated_at": "2026-06-20T01:15:10.649Z",
-        "source": "cron",
-        "post_url": "",
-        "error_summary": "Instagram retry cap reached; verify instagram_business_account repair before resetting execution state."
       }
     ],
     "latest_attention": [
       {
-        "post_id": "FP-AUTO-265",
-        "platform": "Facebook",
-        "status": "failed",
-        "reason": "max_attempts_exceeded",
-        "attempts": 3,
-        "updated_at": "2026-06-20T01:15:11.284Z",
-        "source": "cron",
-        "post_url": "",
-        "error_summary": "Facebook retry cap reached; rerun the Facebook dry-run check after identity confirmation."
-      },
-      {
         "post_id": "FP-AUTO-264",
         "platform": "TikTok",
         "status": "blocked",
@@ -116,17 +81,6 @@
         "source": "cron",
         "post_url": "",
         "error_summary": ""
-      },
-      {
-        "post_id": "FP-AUTO-263",
-        "platform": "Instagram",
-        "status": "failed",
-        "reason": "max_attempts_exceeded",
-        "attempts": 3,
-        "updated_at": "2026-06-20T01:15:10.649Z",
-        "source": "cron",
-        "post_url": "",
-        "error_summary": "Instagram retry cap reached; verify instagram_business_account repair before resetting execution state."
       },
       {
         "post_id": "FP-AUTO-261",
@@ -149,12 +103,23 @@
         "source": "cron",
         "post_url": "",
         "error_summary": ""
+      },
+      {
+        "post_id": "FP-AUTO-258",
+        "platform": "Instagram",
+        "status": "blocked",
+        "reason": "not_approved",
+        "attempts": 0,
+        "updated_at": "2026-06-20T01:15:09.759Z",
+        "source": "cron",
+        "post_url": "",
+        "error_summary": ""
       }
     ]
   },
   "payload": {
     "ok": true,
-    "execution_count": 6
+    "execution_count": 4
   },
   "action_needed": ""
 }
