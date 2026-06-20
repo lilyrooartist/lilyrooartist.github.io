@@ -266,6 +266,7 @@ def x_public_metrics() -> dict:
 
 def merge_public_metrics(payload: dict) -> dict:
     platforms = payload.setdefault("platforms", {})
+    previous_platforms = read_existing_snapshot().get("platforms") or {}
     public_updates = {
         "spotify": spotify_public_metrics(),
         "tiktok": tiktok_public_metrics(),
@@ -273,6 +274,20 @@ def merge_public_metrics(payload: dict) -> dict:
         "x": x_public_metrics(),
     }
     for platform, update in public_updates.items():
+        if not update.get("ok"):
+            previous = previous_platforms.get(platform) or {}
+            previous_metrics = previous.get("metrics") or {}
+            if previous_metrics:
+                update["ok"] = True
+                update["metrics"] = previous_metrics
+                update["preserved_previous_public_metrics"] = True
+                update["latest_capture_status"] = update.get("public_capture_status") or ""
+                update["public_capture_status"] = "ok"
+            else:
+                current = platforms.setdefault(platform, {})
+                current.update({key: value for key, value in update.items() if key != "metrics"})
+                current.setdefault("metrics", {})
+                continue
         if not update.get("ok"):
             current = platforms.setdefault(platform, {})
             current.update({key: value for key, value in update.items() if key != "metrics"})
