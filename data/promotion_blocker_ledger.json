@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T06:40:00.318343Z",
+  "generated_at": "2026-06-20T06:46:08.626520Z",
   "safe_mode": true,
   "summary": {
     "open_blocker_count": 10,
@@ -95,7 +95,7 @@
           "TIKTOK_REFRESH_TOKEN"
         ],
         "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
-        "apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
+        "apply_command": "",
         "source_path": "data/platform_repair_status.json"
       },
       {
@@ -209,11 +209,18 @@
       "evidence": "tiktok_credentials_missing Missing secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Local secret source is missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
       "next_step": "Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok public posting approval is false. Local secret source is also missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Complete TikTok OAuth/public posting setup locally, then push secrets and refresh Admin.",
       "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
-      "apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
+      "apply_command": "",
       "source_path": "data/platform_repair_status.json",
       "external_url": "",
       "guardrail": "Run retry resets only after the external platform repair is verified.",
-      "impact": {}
+      "impact": {
+        "kind": "platform_repair_gate",
+        "blocked_apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
+        "blocked_apply_reasons": [
+          "local_secret_source_missing:TIKTOK_CLIENT_KEY,TIKTOK_CLIENT_SECRET,TIKTOK_REFRESH_TOKEN",
+          "public_posting_approval_not_confirmed"
+        ]
+      }
     },
     {
       "id": "backlog-reschedule",

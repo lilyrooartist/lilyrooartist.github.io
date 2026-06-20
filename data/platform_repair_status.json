@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T06:40:00.233378Z",
+  "generated_at": "2026-06-20T06:46:08.542622Z",
   "safe_mode": true,
   "source": {
     "promo_operations_packet": "data/promo_operations_packet.json",
@@ -11,7 +11,7 @@
     "platform_fix_count": 1,
     "blocked_count": 1,
     "preview_command_count": 1,
-    "apply_command_count": 1,
+    "apply_command_count": 0,
     "retry_reset_count": 0,
     "checklist_item_count": 4,
     "checklist_blocked_count": 3,
@@ -31,7 +31,12 @@
       "error_summary": "",
       "repair_action": "Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok public posting approval is false. Local secret source is also missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Complete TikTok OAuth/public posting setup locally, then push secrets and refresh Admin.",
       "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
-      "apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
+      "apply_command": "",
+      "blocked_apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
+      "blocked_apply_reasons": [
+        "local_secret_source_missing:TIKTOK_CLIENT_KEY,TIKTOK_CLIENT_SECRET,TIKTOK_REFRESH_TOKEN",
+        "public_posting_approval_not_confirmed"
+      ],
       "retry_reset_verification_command": "",
       "retry_reset_preview_command": "",
       "retry_reset_apply_command": "",
@@ -95,9 +100,9 @@
         {
           "id": "refresh_verification",
           "label": "Refresh verification",
-          "status": "waiting",
+          "status": "review",
           "detail": "After repair, refresh admin so readiness, scheduler, blocker, and backlog state update together.",
-          "command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py"
+          "command": "python3 scripts/refresh_promo_admin.py"
         }
       ],
       "repair_checklist_blocked_count": 3,

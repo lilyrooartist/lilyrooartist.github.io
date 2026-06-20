@@ -200,6 +200,10 @@ def build_markdown(payload: dict) -> str:
             lines.append(f"  - Preview/check: `{row['preview_command']}`")
         if row.get("apply_command"):
             lines.append(f"  - Apply after review: `{row['apply_command']}`")
+        if row.get("blocked_apply_command"):
+            lines.append(f"  - Blocked apply command: `{row['blocked_apply_command']}`")
+        if row.get("blocked_apply_reasons"):
+            lines.append(f"  - Apply blocked by: {', '.join(row['blocked_apply_reasons'])}")
         if row.get("retry_reset_verification_command"):
             lines.append(f"  - Verify before retry reset: `{row['retry_reset_verification_command']}`")
         if row.get("retry_reset_preview_command"):
@@ -245,10 +249,18 @@ def build_status() -> dict:
         execution = execution_by_id.get(post_id) or {}
         platform_readiness = readiness_for(readiness, platform)
         preview_command = action.get("command") or ""
-        apply_command = context.get("repair_apply_command") or ""
-        checklist = repair_checklist(context, platform_readiness, preview_command, apply_command)
         preflight = tiktok_preflight if platform_slug(platform) == "tiktok" else {}
         preflight_summary = preflight.get("summary") or {}
+        raw_apply_command = context.get("repair_apply_command") or ""
+        local_missing = context.get("local_missing_secrets") or []
+        public_posting_approved = context.get("public_posting_approved", platform_readiness.get("public_posting_approved"))
+        blocked_apply_reasons = []
+        if local_missing:
+            blocked_apply_reasons.append(f"local_secret_source_missing:{','.join(local_missing)}")
+        if platform_slug(platform) == "tiktok" and public_posting_approved is not True:
+            blocked_apply_reasons.append("public_posting_approval_not_confirmed")
+        apply_command = "" if blocked_apply_reasons else raw_apply_command
+        checklist = repair_checklist(context, platform_readiness, preview_command, apply_command)
         rows.append({
             "post_id": post_id,
             "platform": platform,
@@ -261,17 +273,19 @@ def build_status() -> dict:
             "repair_action": context.get("repair_action") or "",
             "preview_command": preview_command,
             "apply_command": apply_command,
+            "blocked_apply_command": raw_apply_command if blocked_apply_reasons else "",
+            "blocked_apply_reasons": blocked_apply_reasons,
             "retry_reset_verification_command": context.get("retry_reset_verification_command") or "",
             "retry_reset_preview_command": context.get("retry_reset_preview_command") or "",
             "retry_reset_apply_command": context.get("retry_reset_apply_command") or "",
             "retry_reset_note": context.get("retry_reset_note") or "",
             "readiness": platform_readiness,
             "missing_secrets": context.get("missing_secrets") or platform_readiness.get("missing_secrets") or [],
-            "local_missing_secrets": context.get("local_missing_secrets") or [],
+            "local_missing_secrets": local_missing,
             "local_secret_presence": context.get("local_secret_presence") or {},
             "local_secret_ready": context.get("local_secret_ready"),
             "local_secret_source": context.get("local_secret_source") or "",
-            "public_posting_approved": context.get("public_posting_approved", platform_readiness.get("public_posting_approved")),
+            "public_posting_approved": public_posting_approved,
             "preflight_status": preflight_summary.get("status") or "",
             "preflight_blocked_count": preflight_summary.get("blocked_count"),
             "preflight_command": "python3 scripts/build_tiktok_setup_preflight.py" if platform_slug(platform) == "tiktok" else "",

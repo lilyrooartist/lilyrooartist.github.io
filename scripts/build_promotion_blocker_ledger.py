@@ -125,6 +125,11 @@ def add_platform_repairs(rows: list[dict]) -> None:
             apply_command=item.get("apply_command") or item.get("retry_reset_apply_command") or "",
             source_path=str(PLATFORM_REPAIR.relative_to(ROOT)),
             guardrail="Run retry resets only after the external platform repair is verified.",
+            impact={
+                "kind": "platform_repair_gate",
+                "blocked_apply_command": item.get("blocked_apply_command") or "",
+                "blocked_apply_reasons": item.get("blocked_apply_reasons") or [],
+            },
         ))
 
 
@@ -474,6 +479,10 @@ def build_markdown(payload: dict) -> str:
                     impact_bits.append(f"access: {', '.join(impact.get('access_levels') or [])}")
                 if impact.get("csv_rows"):
                     impact_bits.append(f"csv rows: {', '.join(str(value) for value in impact.get('csv_rows') or [])}")
+            if impact.get("blocked_apply_reasons"):
+                impact_bits.append(f"apply blocked by: {', '.join(impact.get('blocked_apply_reasons') or [])}")
+            if impact.get("blocked_apply_command"):
+                lines.append(f"  - Blocked apply command: `{impact.get('blocked_apply_command')}`")
             if impact_bits:
                 lines.append(f"  - Impact: {'; '.join(impact_bits)}")
     lines.extend([

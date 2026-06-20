@@ -1,6 +1,6 @@
 # Monetization Activation Plan - Lily Roo
 
-Generated: 2026-06-20T06:40:00.147508Z
+Generated: 2026-06-20T06:46:08.460615Z
 
 ## Summary
 - Current subscribers: **6 / 1000**
@@ -36,7 +36,6 @@ Generated: 2026-06-20T06:40:00.147508Z
    - Missing locally: `TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN`
    - Local source: `secrets/social_api.env`
    - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
-   - After review: `python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py`
 5. **Current operations next action: Preview checked scheduled approval batch**
    - Phase: `Operations packet`; status: `waiting_for_user`
    - Detail: Scheduled executor records are blocked until reviewed approval is applied.
