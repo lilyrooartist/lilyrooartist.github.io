@@ -473,6 +473,13 @@
               </div>
             </section>
 
+            <section class="report-card" aria-labelledby="scheduled-approval-heading">
+              <h2 id="scheduled-approval-heading">Scheduled Approvals</h2>
+              <div class="queue-list" id="scheduled-approval-packet">
+                <div class="muted">Loading scheduled approval packet...</div>
+              </div>
+            </section>
+
             <section class="report-card" aria-labelledby="subscriber-cta-heading">
               <h2 id="subscriber-cta-heading">Subscriber CTA Audit</h2>
               <div class="queue-list" id="subscriber-cta-audit">
@@ -542,12 +549,14 @@
                 <a class="source-link" href="reports/" target="_blank" rel="noopener">Reports index</a>
                 <a class="source-link" href="reports/weekly-social-report.md" target="_blank" rel="noopener">Weekly report</a>
                 <a class="source-link" href="reports/manual-metric-collection.md" target="_blank" rel="noopener">Metric collection</a>
+                <a class="source-link" href="reports/scheduled-approval-packet.md" target="_blank" rel="noopener">Scheduled approvals</a>
                 <a class="source-link" href="../data/manual_social_stats.json" target="_blank" rel="noopener">Manual stats</a>
                 <a class="source-link" href="../data/manual_metric_collection_template.csv" target="_blank" rel="noopener">Metric CSV</a>
                 <a class="source-link" href="../data/manual_metric_collection_packet.json" target="_blank" rel="noopener">Metric packet</a>
                 <a class="source-link" href="../data/distrokid_release_status.json" target="_blank" rel="noopener">Release status</a>
                 <a class="source-link" href="../data/promo_engine_status.json" target="_blank" rel="noopener">Promo health</a>
                 <a class="source-link" href="../data/promo_queue_plan.json" target="_blank" rel="noopener">Promo plan</a>
+                <a class="source-link" href="../data/scheduled_approval_packet.json" target="_blank" rel="noopener">Approval packet</a>
                 <a class="source-link" href="future-posts.json" target="_blank" rel="noopener">Future queue</a>
                 <a class="source-link" href="https://github.com/lilyrooartist/lilyrooartist.github.io/actions/workflows/promo-admin-refresh.yml" target="_blank" rel="noopener">Refresh workflow</a>
               </div>
@@ -562,7 +571,7 @@
 <script type="text/plain" id="embedded-weekly-report"># Weekly Social Report — Lily Roo
 
 **Period:** 2026-06-14 to 2026-06-20
-**Last updated:** 2026-06-20 09:07 AM JST
+**Last updated:** 2026-06-20 09:19 AM JST
 
 ## KPI Goal
 - Primary growth target: **1,000 YouTube subscribers** (monetization milestone)
@@ -685,7 +694,7 @@
 - Latest post: https://www.facebook.com/903693509504290_122118326547249470
 
 ## Metrics Snapshot
-- Live API captured: **2026-06-20T00:06:33.691Z**
+- Live API captured: **2026-06-20T00:18:23.078Z**
 - Snapshot file: `data/live_social_metrics.json`
 - YouTube public RSS captured: **2026-06-09T12:08:07.783949Z**
 - YouTube public snapshot file: `data/youtube_public_snapshot.json`
@@ -695,9 +704,9 @@
 - YouTube Music snapshot file: `data/youtube_music_release_snapshot.json`
 - HyperFollow stores captured: **2026-06-07T20:51:14.275569Z**
 - HyperFollow snapshot file: `data/hyperfollow_store_links_snapshot.json`
-- All-release store verification captured: **2026-06-20T00:07:20.144322+00:00**
+- All-release store verification captured: **2026-06-20T00:19:11.078908+00:00**
 - All-release store verification file: `data/store_verification_history.json`
-- Social executor history captured: **2026-06-20T00:07:19.124570Z**
+- Social executor history captured: **2026-06-20T00:19:09.984287Z**
 - Social executor history file: `data/social_execution_snapshot.json`
 - First single alignment audit captured: **2026-06-07T21:39:03.668040Z**
 - First single alignment audit file: `data/first_single_alignment_audit.json`
@@ -974,7 +983,7 @@
 }</script>
 
 <script type="application/json" id="embedded-promo-engine-status">{
-  "generated_at": "2026-06-20T00:07:20.434269+00:00",
+  "generated_at": "2026-06-20T00:19:11.374418+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -1167,15 +1176,15 @@
         "command": "python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impressions_7d=VALUE --refresh-admin"
       }
     ],
-    "live_metrics_updated_at": "2026-06-20T00:06:33.691Z",
+    "live_metrics_updated_at": "2026-06-20T00:18:23.078Z",
     "metrics_history": {
       "snapshot_count": 11,
-      "updated_at": "2026-06-20T00:07:19.578115Z",
+      "updated_at": "2026-06-20T00:19:10.419074Z",
       "latest_date": "2026-06-20",
       "latest": {
         "date": "2026-06-20",
-        "captured_at": "2026-06-20T00:07:19.578115Z",
-        "live_metrics_updated_at": "2026-06-20T00:06:33.691Z",
+        "captured_at": "2026-06-20T00:19:10.419074Z",
+        "live_metrics_updated_at": "2026-06-20T00:18:23.078Z",
         "youtube": {
           "subscribers": 6,
           "total_views": 251,
@@ -1262,7 +1271,7 @@
     },
     "social_execution_summary": {
       "ok": true,
-      "updated_at": "2026-06-20T00:07:19.124570Z",
+      "updated_at": "2026-06-20T00:19:09.984287Z",
       "http_status": 200,
       "execution_count": 6,
       "posted_count": 0,
@@ -1286,7 +1295,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-06-20T00:00:11.517Z",
+          "updated_at": "2026-06-20T00:15:11.804Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "Facebook retry cap reached; rerun the Facebook dry-run check after identity confirmation."
@@ -1297,7 +1306,7 @@
           "status": "blocked",
           "reason": "tiktok_credentials_missing",
           "attempts": 0,
-          "updated_at": "2026-06-20T00:00:11.159Z",
+          "updated_at": "2026-06-20T00:15:11.453Z",
           "source": "cron",
           "post_url": "",
           "error_summary": ""
@@ -1308,7 +1317,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-06-20T00:00:10.896Z",
+          "updated_at": "2026-06-20T00:15:11.159Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "Instagram retry cap reached; verify instagram_business_account repair before resetting execution state."
@@ -1319,7 +1328,7 @@
           "status": "blocked",
           "reason": "not_approved",
           "attempts": 0,
-          "updated_at": "2026-06-20T00:00:10.524Z",
+          "updated_at": "2026-06-20T00:15:10.807Z",
           "source": "cron",
           "post_url": "",
           "error_summary": ""
@@ -1330,7 +1339,7 @@
           "status": "blocked",
           "reason": "not_approved",
           "attempts": 0,
-          "updated_at": "2026-06-20T00:00:10.164Z",
+          "updated_at": "2026-06-20T00:15:10.094Z",
           "source": "cron",
           "post_url": "",
           "error_summary": ""
@@ -1343,7 +1352,7 @@
           "status": "blocked",
           "reason": "not_approved",
           "attempts": 0,
-          "updated_at": "2026-06-20T00:00:10.524Z",
+          "updated_at": "2026-06-20T00:15:10.807Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "",
@@ -1358,7 +1367,7 @@
           "status": "blocked",
           "reason": "not_approved",
           "attempts": 0,
-          "updated_at": "2026-06-20T00:00:10.164Z",
+          "updated_at": "2026-06-20T00:15:10.094Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "",
@@ -1373,7 +1382,7 @@
           "status": "blocked",
           "reason": "not_approved",
           "attempts": 0,
-          "updated_at": "2026-06-20T00:00:09.797Z",
+          "updated_at": "2026-06-20T00:15:09.760Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "",
@@ -1390,7 +1399,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-06-20T00:00:11.517Z",
+          "updated_at": "2026-06-20T00:15:11.804Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "Facebook retry cap reached; rerun the Facebook dry-run check after identity confirmation.",
@@ -1405,7 +1414,7 @@
           "status": "blocked",
           "reason": "tiktok_credentials_missing",
           "attempts": 0,
-          "updated_at": "2026-06-20T00:00:11.159Z",
+          "updated_at": "2026-06-20T00:15:11.453Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "",
@@ -1420,7 +1429,7 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-06-20T00:00:10.896Z",
+          "updated_at": "2026-06-20T00:15:11.159Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "Instagram retry cap reached; verify instagram_business_account repair before resetting execution state.",
@@ -1434,11 +1443,11 @@
     },
     "social_scheduler_dry_run": {
       "ok": true,
-      "updated_at": "2026-06-20T00:07:19.475956Z",
+      "updated_at": "2026-06-20T00:19:10.318946Z",
       "http_status": 200,
       "auth_method": "bearer",
-      "requested_scheduled_time": "2026-06-20T00:07:19.204311Z",
-      "checked_at": "2026-06-20T00:07:19.204Z",
+      "requested_scheduled_time": "2026-06-20T00:19:10.061165Z",
+      "checked_at": "2026-06-20T00:19:10.061Z",
       "dry_run": true,
       "due_count": 6,
       "result_count": 6,
@@ -1463,7 +1472,7 @@
           "reason": "not_approved",
           "post_type": "",
           "attempts": 0,
-          "updated_at": "2026-06-20T00:07:19.655Z",
+          "updated_at": "2026-06-20T00:19:10.480Z",
           "source": "dry-run",
           "error_summary": ""
         },
@@ -1474,7 +1483,7 @@
           "reason": "not_approved",
           "post_type": "",
           "attempts": 0,
-          "updated_at": "2026-06-20T00:07:19.657Z",
+          "updated_at": "2026-06-20T00:19:10.482Z",
           "source": "dry-run",
           "error_summary": ""
         },
@@ -1485,7 +1494,7 @@
           "reason": "not_approved",
           "post_type": "",
           "attempts": 0,
-          "updated_at": "2026-06-20T00:07:19.659Z",
+          "updated_at": "2026-06-20T00:19:10.484Z",
           "source": "dry-run",
           "error_summary": ""
         },
@@ -1496,7 +1505,7 @@
           "reason": "max_attempts_exceeded",
           "post_type": "",
           "attempts": 3,
-          "updated_at": "2026-06-20T00:07:19.662Z",
+          "updated_at": "2026-06-20T00:19:10.487Z",
           "source": "dry-run",
           "error_summary": ""
         },
@@ -1507,7 +1516,7 @@
           "reason": "tiktok_credentials_missing",
           "post_type": "",
           "attempts": 0,
-          "updated_at": "2026-06-20T00:07:19.664Z",
+          "updated_at": "2026-06-20T00:19:10.489Z",
           "source": "dry-run",
           "error_summary": ""
         },
@@ -1518,7 +1527,7 @@
           "reason": "max_attempts_exceeded",
           "post_type": "",
           "attempts": 3,
-          "updated_at": "2026-06-20T00:07:19.666Z",
+          "updated_at": "2026-06-20T00:19:10.491Z",
           "source": "dry-run",
           "error_summary": ""
         }
@@ -1530,10 +1539,10 @@
       "available": true,
       "safe_mode": true,
       "finalized": true,
-      "finished_at": "2026-06-20T00:07:20.404132Z",
-      "duration_seconds": 49.12,
-      "command_count": 18,
-      "passed": 17,
+      "finished_at": "2026-06-20T00:19:11.349007Z",
+      "duration_seconds": 49.13,
+      "command_count": 19,
+      "passed": 18,
       "failed": 1,
       "allowed_failures": 1,
       "failed_commands": [
@@ -1582,14 +1591,14 @@
       "stale": 1,
       "missing": 0,
       "checked_no_change": 0,
-      "checked_at": "2026-06-20T00:07:20.434269+00:00"
+      "checked_at": "2026-06-20T00:19:11.374418+00:00"
     },
     "sources": [
       {
         "name": "release_status",
         "path": "data/distrokid_release_status.json",
         "status": "fresh",
-        "age_hours": 62.7,
+        "age_hours": 62.9,
         "max_age_hours": 72,
         "timestamp": "2026-06-17T09:25:00+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin; update data/distrokid_release_status.json when a public URL is verified."
@@ -1598,7 +1607,7 @@
         "name": "scheduled_posts",
         "path": "admin/future-posts.json",
         "status": "fresh",
-        "age_hours": 0.5,
+        "age_hours": 0.7,
         "max_age_hours": 72,
         "timestamp": "2026-06-19T23:35:31.943002+00:00",
         "refresh_command": "python3 scripts/sync_future_posts.py"
@@ -1609,14 +1618,14 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T00:07:19.539018+00:00",
+        "timestamp": "2026-06-20T00:19:10.381770+00:00",
         "refresh_command": "python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
         "name": "published_log",
         "path": "admin/content/Published_Log.csv",
         "status": "stale",
-        "age_hours": 299.5,
+        "age_hours": 299.7,
         "max_age_hours": 168,
         "timestamp": "2026-06-07T12:36:37.141276+00:00",
         "refresh_command": "Export or append latest published posts to admin/content/Published_Log.csv."
@@ -1625,7 +1634,7 @@
         "name": "manual_metrics",
         "path": "data/manual_social_stats.json",
         "status": "fresh",
-        "age_hours": 0.6,
+        "age_hours": 0.8,
         "max_age_hours": 72,
         "timestamp": "2026-06-19T23:30:01.268314+00:00",
         "refresh_command": "Update data/manual_social_stats.json with latest manual metrics."
@@ -1636,7 +1645,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T00:06:33.691000+00:00",
+        "timestamp": "2026-06-20T00:18:23.078000+00:00",
         "refresh_command": "python3 scripts/capture_live_metrics.py"
       },
       {
@@ -1645,7 +1654,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T00:07:19.578115+00:00",
+        "timestamp": "2026-06-20T00:19:10.419074+00:00",
         "refresh_command": "python3 scripts/update_metrics_history.py --refresh-admin"
       },
       {
@@ -1654,7 +1663,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T00:07:18.633814+00:00",
+        "timestamp": "2026-06-20T00:19:08.039008+00:00",
         "refresh_command": "python3 scripts/capture_executor_readiness.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -1663,7 +1672,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T00:07:20.434269+00:00",
+        "timestamp": "2026-06-20T00:19:11.374418+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin"
       },
       {
@@ -1672,7 +1681,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T00:07:19.124570+00:00",
+        "timestamp": "2026-06-20T00:19:09.984287+00:00",
         "refresh_command": "python3 scripts/capture_social_executions.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -1681,7 +1690,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T00:07:19.475956+00:00",
+        "timestamp": "2026-06-20T00:19:10.318946+00:00",
         "refresh_command": "python3 scripts/capture_scheduler_dry_run.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -1690,7 +1699,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T00:07:20.404536+00:00",
+        "timestamp": "2026-06-20T00:19:11.349357+00:00",
         "refresh_command": "python3 scripts/refresh_promo_admin.py"
       },
       {
@@ -1699,7 +1708,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T00:07:20.082064+00:00",
+        "timestamp": "2026-06-20T00:19:11.016989+00:00",
         "refresh_command": "python3 scripts/capture_github_workflow_status.py && python3 scripts/update_promo_engine_status.py"
       }
     ],
@@ -2117,7 +2126,7 @@
 }</script>
 
 <script type="application/json" id="embedded-promo-queue-plan">{
-  "generated_at": "2026-06-19T20:07:19.539018-04:00",
+  "generated_at": "2026-06-19T20:19:10.381770-04:00",
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
     "release_status": "data/distrokid_release_status.json"
@@ -2196,7 +2205,7 @@
   },
   "readiness_audit": {
     "source": "data/executor_readiness_snapshot.json",
-    "updated_at": "2026-06-20T00:07:18.633814Z",
+    "updated_at": "2026-06-20T00:19:08.039008Z",
     "ok": true,
     "counts": {
       "blocked": 1,
@@ -2313,7 +2322,7 @@
 
 
 <script type="application/json" id="embedded-promo-operations-packet">{
-  "generated_at": "2026-06-20T00:07:20.180849Z",
+  "generated_at": "2026-06-20T00:19:11.114476Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -2954,7 +2963,7 @@
 
 <script type="text/plain" id="embedded-promo-operations-report"># Promo Operations Packet - Lily Roo
 
-Generated: 2026-06-20T00:07:20.180849Z
+Generated: 2026-06-20T00:19:11.114476Z
 
 ## Summary
 - Actions: **19**
@@ -3060,7 +3069,7 @@ Generated: 2026-06-20T00:07:20.180849Z
 
 <script type="text/plain" id="embedded-manual-metric-collection"># Manual Metric Collection - Lily Roo
 
-Generated: 2026-06-20T00:07:20.373370Z
+Generated: 2026-06-20T00:19:11.318177Z
 
 Pending fields: **11**
 
@@ -3132,7 +3141,7 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
 
 
 <script type="application/json" id="embedded-platform-repair-status">{
-  "generated_at": "2026-06-20T00:07:20.346457Z",
+  "generated_at": "2026-06-20T00:19:11.292996Z",
   "safe_mode": true,
   "source": {
     "promo_operations_packet": "data/promo_operations_packet.json",
@@ -3159,7 +3168,7 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
       "status": "failed",
       "reason": "max_attempts_exceeded",
       "attempts": 3,
-      "updated_at": "2026-06-20T00:00:10.896Z",
+      "updated_at": "2026-06-20T00:15:11.159Z",
       "error_summary": "Instagram retry cap reached; verify instagram_business_account repair before resetting execution state.",
       "repair_action": "Reconnect the Instagram Business/Creator account to the Facebook Page or set IG_BUSINESS_ACCOUNT_ID, then push the worker secret and recapture readiness.",
       "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
@@ -3183,7 +3192,7 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
       "status": "failed",
       "reason": "max_attempts_exceeded",
       "attempts": 3,
-      "updated_at": "2026-06-20T00:00:11.517Z",
+      "updated_at": "2026-06-20T00:15:11.804Z",
       "error_summary": "Facebook retry cap reached; rerun the Facebook dry-run check after identity confirmation.",
       "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
       "preview_command": "python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run",
@@ -3205,7 +3214,7 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
       "status": "blocked",
       "reason": "tiktok_credentials_missing",
       "attempts": 0,
-      "updated_at": "2026-06-20T00:00:11.159Z",
+      "updated_at": "2026-06-20T00:15:11.453Z",
       "error_summary": "",
       "repair_action": "Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok public posting approval is false. Complete TikTok OAuth/public posting setup, push secrets, then refresh Admin.",
       "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
@@ -3238,7 +3247,7 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
 
 
 <script type="application/json" id="embedded-approval-runway">{
-  "generated_at": "2026-06-20T00:07:20.211055Z",
+  "generated_at": "2026-06-20T00:19:11.142236Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -3309,7 +3318,7 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
 
 <script type="text/plain" id="embedded-approval-runway-report"># Approval Runway - Lily Roo
 
-Generated: 2026-06-20T00:07:20.211055Z
+Generated: 2026-06-20T00:19:11.142236Z
 
 ## Summary
 - Drafts needing review: **3**
@@ -3346,7 +3355,7 @@ Generated: 2026-06-20T00:07:20.211055Z
 
 
 <script type="application/json" id="embedded-subscriber-cta-audit">{
-  "generated_at": "2026-06-20T00:07:20.238180Z",
+  "generated_at": "2026-06-20T00:19:11.192397Z",
   "safe_mode": true,
   "source": {
     "promo_queue_plan": "data/promo_queue_plan.json",
@@ -3412,7 +3421,7 @@ Generated: 2026-06-20T00:07:20.211055Z
 
 <script type="text/plain" id="embedded-subscriber-cta-audit-report"># Subscriber CTA Audit - Lily Roo
 
-Generated: 2026-06-20T00:07:20.238180Z
+Generated: 2026-06-20T00:19:11.192397Z
 
 ## Summary
 - Draft posts: **3**
@@ -3446,7 +3455,7 @@ Generated: 2026-06-20T00:07:20.238180Z
 
 
 <script type="application/json" id="embedded-monetization-activation-plan">{
-  "generated_at": "2026-06-20T00:07:20.291616Z",
+  "generated_at": "2026-06-20T00:19:11.242944Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -3550,7 +3559,7 @@ Generated: 2026-06-20T00:07:20.238180Z
 
 <script type="text/plain" id="embedded-monetization-activation-report"># Monetization Activation Plan - Lily Roo
 
-Generated: 2026-06-20T00:07:20.291616Z
+Generated: 2026-06-20T00:19:11.242944Z
 
 ## Summary
 - Current subscribers: **6 / 1000**
@@ -3597,7 +3606,7 @@ Generated: 2026-06-20T00:07:20.291616Z
 
 
 <script type="application/json" id="embedded-backlog-reschedule-preview">{
-  "generated_at": "2026-06-20T09:07:20.319420+09:00",
+  "generated_at": "2026-06-20T09:19:11.268626+09:00",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -3655,7 +3664,7 @@ Generated: 2026-06-20T00:07:20.291616Z
 
 <script type="text/plain" id="embedded-backlog-reschedule-preview-report"># Backlog Reschedule Preview - Lily Roo
 
-Generated: 2026-06-20T09:07:20.319420+09:00
+Generated: 2026-06-20T09:19:11.268626+09:00
 
 ## Summary
 - Approved backlog rows: **3**
@@ -3690,7 +3699,7 @@ Generated: 2026-06-20T09:07:20.319420+09:00
 
 <script type="text/plain" id="embedded-platform-repair-report"># Platform Repair Status - Lily Roo
 
-Generated: 2026-06-20T00:07:20.346457Z
+Generated: 2026-06-20T00:19:11.292996Z
 
 ## Summary
 - Platform fixes: **3**
@@ -3731,7 +3740,7 @@ Generated: 2026-06-20T00:07:20.346457Z
 
 
 <script type="application/json" id="embedded-manual-distribution-packet">{
-  "generated_at": "2026-06-20T00:07:20.264562Z",
+  "generated_at": "2026-06-20T00:19:11.217693Z",
   "safe_mode": true,
   "source": {
     "promo_queue_plan": "data/promo_queue_plan.json",
@@ -3809,7 +3818,7 @@ Generated: 2026-06-20T00:07:20.346457Z
 
 <script type="text/plain" id="embedded-manual-distribution-report"># Manual Distribution Packet - Lily Roo
 
-Generated: 2026-06-20T00:07:20.264562Z
+Generated: 2026-06-20T00:19:11.217693Z
 
 ## Summary
 - Manual-ready posts: **2**
@@ -3854,7 +3863,7 @@ Generated: 2026-06-20T00:07:20.264562Z
 
 
 <script type="application/json" id="embedded-manual-metric-collection-packet">{
-  "generated_at": "2026-06-20T00:07:20.373370Z",
+  "generated_at": "2026-06-20T00:19:11.318177Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -4145,6 +4154,138 @@ Generated: 2026-06-20T00:07:20.264562Z
   ]
 }</script>
 
+
+<script type="application/json" id="embedded-scheduled-approval-packet">{
+  "generated_at": "2026-06-20T00:19:11.167612Z",
+  "safe_mode": true,
+  "source": {
+    "scheduled_posts": "data/scheduled_posts.csv",
+    "social_execution_snapshot": "data/social_execution_snapshot.json"
+  },
+  "summary": {
+    "approval_blocker_count": 3,
+    "auto_count": 2,
+    "manual_count": 1,
+    "preview_command_count": 3,
+    "apply_command_count": 3
+  },
+  "rows": [
+    {
+      "id": "FP-AUTO-258",
+      "platform": "Instagram",
+      "song": "I Learned It All in Fifteen Seconds",
+      "scheduled_at": "2026-06-05T15:35:00-04:00",
+      "execution_mode": "auto",
+      "post_type": "image",
+      "approved": "no",
+      "status": "blocked",
+      "reason": "not_approved",
+      "attempts": 0,
+      "text": "The first Lily Roo single is live, and the cover art has been remastered into its proper tiny-room glow.",
+      "reply_text": "Listen on Spotify: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
+      "copy_block": "The first Lily Roo single is live, and the cover art has been remastered into its proper tiny-room glow.\n\nListen on Spotify: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
+      "imagery_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
+      "clip_url": "",
+      "asset_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
+      "media_key": "i-learned-cover",
+      "desired_privacy": "",
+      "approval_preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 --dry-run",
+      "approval_apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 --refresh-admin",
+      "recommendation": "Review copy, media, destination links, and platform readiness before approval.",
+      "manual_dispatch": false
+    },
+    {
+      "id": "FP-AUTO-259",
+      "platform": "TikTok",
+      "song": "I Learned It All in Fifteen Seconds",
+      "scheduled_at": "2026-06-05T20:40:00-04:00",
+      "execution_mode": "auto",
+      "post_type": "video",
+      "approved": "no",
+      "status": "blocked",
+      "reason": "not_approved",
+      "attempts": 0,
+      "text": "I learned it all in fifteen seconds and somehow still have homework. Streaming now.",
+      "reply_text": "Listen on Spotify: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
+      "copy_block": "I learned it all in fifteen seconds and somehow still have homework. Streaming now.\n\nListen on Spotify: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
+      "imagery_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
+      "clip_url": "https://www.lilyroo.com/assets/ig/01_i_learned_it_all_60s.mp4",
+      "asset_url": "https://www.lilyroo.com/assets/ig/01_i_learned_it_all_60s.mp4",
+      "media_key": "i-learned-60s",
+      "desired_privacy": "PUBLIC_TO_EVERYONE",
+      "approval_preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --dry-run",
+      "approval_apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --refresh-admin",
+      "recommendation": "Review copy, media, destination links, and platform readiness before approval.",
+      "manual_dispatch": false
+    },
+    {
+      "id": "FP-AUTO-261",
+      "platform": "YouTube Community",
+      "song": "I Learned It All in Fifteen Seconds",
+      "scheduled_at": "2026-06-06T19:10:00-04:00",
+      "execution_mode": "manual",
+      "post_type": "community",
+      "approved": "no",
+      "status": "blocked",
+      "reason": "not_approved",
+      "attempts": 0,
+      "text": "New transmission: I Learned It All in Fifteen Seconds is live. Remastered cover art, same suspicious amount of feeling.",
+      "reply_text": "Stream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube: https://www.youtube.com/@lilyroo.artist | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
+      "copy_block": "New transmission: I Learned It All in Fifteen Seconds is live. Remastered cover art, same suspicious amount of feeling.\n\nStream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube: https://www.youtube.com/@lilyroo.artist | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
+      "imagery_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
+      "clip_url": "",
+      "asset_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
+      "media_key": "i-learned-cover",
+      "desired_privacy": "",
+      "approval_preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-261 --dry-run",
+      "approval_apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-261 --refresh-admin",
+      "recommendation": "Review copy, media, destination links, and platform readiness before approval.",
+      "manual_dispatch": true
+    }
+  ]
+}</script>
+
+
+<script type="text/plain" id="embedded-scheduled-approval-report"># Scheduled Approval Packet - Lily Roo
+
+Generated: 2026-06-20T00:19:11.167612Z
+
+## Summary
+- Approval blockers: **3**
+- Auto rows: **2**
+- Manual rows: **1**
+
+## Review Queue
+- **Instagram - I Learned It All in Fifteen Seconds** (`FP-AUTO-258`)
+  - Scheduled: `2026-06-05T15:35:00-04:00`; mode: `auto`; type: `image`
+  - Reason: `not_approved`
+  - Copy: The first Lily Roo single is live, and the cover art has been remastered into its proper tiny-room glow.
+  - Link/reply: Listen on Spotify: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4
+  - Asset: https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg
+  - Preview approval: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 --dry-run`
+  - Approve after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 --refresh-admin`
+- **TikTok - I Learned It All in Fifteen Seconds** (`FP-AUTO-259`)
+  - Scheduled: `2026-06-05T20:40:00-04:00`; mode: `auto`; type: `video`
+  - Reason: `not_approved`
+  - Copy: I learned it all in fifteen seconds and somehow still have homework. Streaming now.
+  - Link/reply: Listen on Spotify: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4
+  - Asset: https://www.lilyroo.com/assets/ig/01_i_learned_it_all_60s.mp4
+  - Preview approval: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --dry-run`
+  - Approve after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --refresh-admin`
+- **YouTube Community - I Learned It All in Fifteen Seconds** (`FP-AUTO-261`)
+  - Scheduled: `2026-06-06T19:10:00-04:00`; mode: `manual`; type: `community`
+  - Reason: `not_approved`
+  - Copy: New transmission: I Learned It All in Fifteen Seconds is live. Remastered cover art, same suspicious amount of feeling.
+  - Link/reply: Stream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube: https://www.youtube.com/@lilyroo.artist | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4
+  - Asset: https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg
+  - Preview approval: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-261 --dry-run`
+  - Approve after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-261 --refresh-admin`
+
+## Guardrails
+- This packet does not approve, publish, or post anything.
+- Use preview commands before approval apply commands.
+- Manual rows still require human posting and public URL logging after approval.</script>
+
 <script>
   const ADMIN_AUTH_KEY='lilyroo_admin_password_v1';
   const ADMIN_PASSWORD_DIGEST='24b26ab1e602268c369f95fc3612fd80417c9d0fcb90b965ce8f4b227943c8df';
@@ -4271,6 +4412,7 @@ Generated: 2026-06-20T00:07:20.264562Z
     'reports/promo-operations-packet.md':'embedded-promo-operations-report',
     'reports/manual-metric-collection.md':'embedded-manual-metric-collection',
     'reports/approval-runway.md':'embedded-approval-runway-report',
+    'reports/scheduled-approval-packet.md':'embedded-scheduled-approval-report',
     'reports/subscriber-cta-audit.md':'embedded-subscriber-cta-audit-report',
     'reports/manual-distribution-packet.md':'embedded-manual-distribution-report',
     'reports/monetization-activation-plan.md':'embedded-monetization-activation-report',
@@ -4286,6 +4428,7 @@ Generated: 2026-06-20T00:07:20.264562Z
     'data/promo_operations_packet.json':'embedded-promo-operations-packet',
     'data/manual_metric_collection_packet.json':'embedded-manual-metric-collection-packet',
     'data/approval_runway.json':'embedded-approval-runway',
+    'data/scheduled_approval_packet.json':'embedded-scheduled-approval-packet',
     'data/subscriber_cta_audit.json':'embedded-subscriber-cta-audit',
     'data/manual_distribution_packet.json':'embedded-manual-distribution-packet',
     'data/monetization_activation_plan.json':'embedded-monetization-activation-plan',
@@ -5495,6 +5638,48 @@ Generated: 2026-06-20T00:07:20.264562Z
     root.innerHTML=`${intro}${items}${more}`;
   }
 
+  function renderScheduledApprovalPacket(packet){
+    const root=document.getElementById('scheduled-approval-packet');
+    if(!root) return;
+    const rows=Array.isArray(packet?.rows)?packet.rows:[];
+    const summary=packet?.summary||{};
+    if(!rows.length){
+      root.innerHTML='<div class="muted">No scheduled rows are blocked by approval.</div>';
+      return;
+    }
+    const meta=[
+      `${Number(summary.approval_blocker_count||rows.length)} blockers`,
+      `${Number(summary.auto_count||0)} auto`,
+      `${Number(summary.manual_count||0)} manual`,
+      `${Number(summary.preview_command_count||0)} previews`
+    ].join(' - ');
+    const intro=`<div class="queue-item">
+      <div class="queue-top">
+        <div>
+          <div class="queue-title">Queued posts waiting on approval</div>
+          <div class="queue-meta">${escapeHtml(meta)}</div>
+          <div class="queue-meta">Review copy, media, links, and platform readiness before applying approval.</div>
+        </div>
+        <span class="status-chip warn">${escapeHtml(Number(summary.approval_blocker_count||rows.length))}</span>
+      </div>
+    </div>`;
+    const items=rows.slice(0,5).map(row=>`<div class="queue-item">
+      <div class="queue-top">
+        <div>
+          <div class="queue-title">${escapeHtml(row.platform||'Platform')} - ${escapeHtml(row.song||'Release')}</div>
+          <div class="queue-meta">${escapeHtml(row.id||'queued row')} - ${escapeHtml(formatQueueDate(row.scheduled_at))} - ${escapeHtml(row.execution_mode||'mode')}</div>
+          ${row.copy_block?`<div class="queue-meta">${escapeHtml(row.copy_block)}</div>`:''}
+          ${row.asset_url?`<div class="queue-meta"><a href="${escapeHtml(row.asset_url)}" target="_blank" rel="noopener">Open asset</a></div>`:''}
+          ${row.approval_preview_command?`<div class="queue-meta">Preview approval: ${escapeHtml(row.approval_preview_command)}</div>`:''}
+          ${row.approval_apply_command?`<div class="queue-meta">Approve after review: ${escapeHtml(row.approval_apply_command)}</div>`:''}
+        </div>
+        <span class="status-chip neutral">${escapeHtml(row.manual_dispatch?'Manual':'Auto')}</span>
+      </div>
+    </div>`).join('');
+    const more=rows.length>5?`<div class="queue-meta">${escapeHtml(rows.length-5)} more approval row${rows.length-5===1?'':'s'} in data/scheduled_approval_packet.json.</div>`:'';
+    root.innerHTML=`${intro}${items}${more}`;
+  }
+
   function renderSubscriberCtaAudit(audit){
     const root=document.getElementById('subscriber-cta-audit');
     if(!root) return;
@@ -5864,7 +6049,7 @@ Generated: 2026-06-20T00:07:20.264562Z
 
   async function loadReportsDashboard(){
     if(!document.getElementById('reports-period')) return;
-    const [md,publishedCsv,queuePayload,releaseStatus,promoHealth,promoPlan,promoOps,manualMetricPacket,approvalRunway,subscriberCtaAudit,manualDistribution,activationPlan,backlogPreview,platformRepair,readiness,metrics,executions]=await Promise.all([
+    const [md,publishedCsv,queuePayload,releaseStatus,promoHealth,promoPlan,promoOps,manualMetricPacket,approvalRunway,scheduledApproval,subscriberCtaAudit,manualDistribution,activationPlan,backlogPreview,platformRepair,readiness,metrics,executions]=await Promise.all([
       fetchTextOrEmpty(localPath('/admin/reports/weekly-social-report.md')),
       fetchTextOrEmpty(localPath('/admin/content/Published_Log.csv')),
       fetchJsonOr(localPath('/admin/future-posts.json'),{}),
@@ -5874,6 +6059,7 @@ Generated: 2026-06-20T00:07:20.264562Z
       fetchJsonOr(localPath('/data/promo_operations_packet.json'),{}),
       fetchJsonOr(localPath('/data/manual_metric_collection_packet.json'),{}),
       fetchJsonOr(localPath('/data/approval_runway.json'),{}),
+      fetchJsonOr(localPath('/data/scheduled_approval_packet.json'),{}),
       fetchJsonOr(localPath('/data/subscriber_cta_audit.json'),{}),
       fetchJsonOr(localPath('/data/manual_distribution_packet.json'),{}),
       fetchJsonOr(localPath('/data/monetization_activation_plan.json'),{}),
@@ -5897,6 +6083,7 @@ Generated: 2026-06-20T00:07:20.264562Z
     renderPromoHealth(promoHealth);
     renderPromoOperationsPacket(promoOps);
     renderApprovalRunway(approvalRunway);
+    renderScheduledApprovalPacket(scheduledApproval);
     renderSubscriberCtaAudit(subscriberCtaAudit);
     renderManualDistributionPacket(manualDistribution);
     renderMonetizationActivationPlan(activationPlan);

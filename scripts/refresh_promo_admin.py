@@ -97,6 +97,11 @@ FINALIZE_STEPS = [
         "required": True,
     },
     {
+        "name": "build_scheduled_approval_packet",
+        "command": ["python3", "scripts/build_scheduled_approval_packet.py"],
+        "required": True,
+    },
+    {
         "name": "build_subscriber_cta_audit",
         "command": ["python3", "scripts/build_subscriber_cta_audit.py"],
         "required": True,

@@ -37,6 +37,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Mark rows in data/scheduled_posts.csv approved or unapproved.")
     parser.add_argument("ids", nargs="+")
     parser.add_argument("--unapprove", action="store_true", help="Set approved=no instead of approved=yes.")
+    parser.add_argument("--dry-run", action="store_true", help="Preview approval changes without writing scheduled_posts.csv.")
     parser.add_argument("--refresh-admin", action="store_true")
     args = parser.parse_args()
 
@@ -54,6 +55,10 @@ def main() -> int:
     missing = sorted(wanted - found)
     if missing:
         raise SystemExit("Missing scheduled post id(s): " + ", ".join(missing))
+    if args.dry_run:
+        print("Dry run only; did not update data/scheduled_posts.csv")
+        return 0
+
     write_rows(rows, fieldnames)
     if args.refresh_admin:
         refresh_admin()

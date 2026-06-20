@@ -23,6 +23,7 @@ PROMO_REFRESH_WORKFLOW_STATUS = ROOT / "data" / "promo_refresh_workflow_status.j
 PROMO_OPERATIONS_PACKET = ROOT / "data" / "promo_operations_packet.json"
 PLATFORM_REPAIR_STATUS = ROOT / "data" / "platform_repair_status.json"
 APPROVAL_RUNWAY = ROOT / "data" / "approval_runway.json"
+SCHEDULED_APPROVAL_PACKET = ROOT / "data" / "scheduled_approval_packet.json"
 SUBSCRIBER_CTA_AUDIT = ROOT / "data" / "subscriber_cta_audit.json"
 MANUAL_DISTRIBUTION_PACKET = ROOT / "data" / "manual_distribution_packet.json"
 MONETIZATION_ACTIVATION_PLAN = ROOT / "data" / "monetization_activation_plan.json"
@@ -60,6 +61,7 @@ PROMO_REFRESH_WORKFLOW = ROOT / ".github" / "workflows" / "promo-admin-refresh.y
 PROMO_OPERATIONS_SCRIPT = ROOT / "scripts" / "build_promo_operations_packet.py"
 PLATFORM_REPAIR_SCRIPT = ROOT / "scripts" / "build_platform_repair_status.py"
 APPROVAL_RUNWAY_SCRIPT = ROOT / "scripts" / "build_approval_runway.py"
+SCHEDULED_APPROVAL_SCRIPT = ROOT / "scripts" / "build_scheduled_approval_packet.py"
 SUBSCRIBER_CTA_AUDIT_SCRIPT = ROOT / "scripts" / "build_subscriber_cta_audit.py"
 MANUAL_DISTRIBUTION_PACKET_SCRIPT = ROOT / "scripts" / "build_manual_distribution_packet.py"
 MONETIZATION_ACTIVATION_SCRIPT = ROOT / "scripts" / "build_monetization_activation_plan.py"
@@ -69,6 +71,7 @@ REPORT = ROOT / "admin" / "reports" / "weekly-social-report.md"
 PROMO_OPERATIONS_REPORT = ROOT / "admin" / "reports" / "promo-operations-packet.md"
 PLATFORM_REPAIR_REPORT = ROOT / "admin" / "reports" / "platform-repair-status.md"
 APPROVAL_RUNWAY_REPORT = ROOT / "admin" / "reports" / "approval-runway.md"
+SCHEDULED_APPROVAL_REPORT = ROOT / "admin" / "reports" / "scheduled-approval-packet.md"
 SUBSCRIBER_CTA_AUDIT_REPORT = ROOT / "admin" / "reports" / "subscriber-cta-audit.md"
 MANUAL_DISTRIBUTION_REPORT = ROOT / "admin" / "reports" / "manual-distribution-packet.md"
 MONETIZATION_ACTIVATION_REPORT = ROOT / "admin" / "reports" / "monetization-activation-plan.md"
@@ -415,6 +418,30 @@ def validate_generated_outputs(failures):
             fail("approval_runway.json missing safe approval runway summary or dry-run previews", failures)
     else:
         fail("approval_runway.json missing; run scripts/build_approval_runway.py", failures)
+    if SCHEDULED_APPROVAL_PACKET.exists():
+        approval_packet = json.loads(SCHEDULED_APPROVAL_PACKET.read_text(encoding="utf-8"))
+        summary = approval_packet.get("summary") or {}
+        rows = approval_packet.get("rows") or []
+        if (
+            approval_packet.get("safe_mode") is True
+            and summary.get("approval_blocker_count") == len(rows)
+            and summary.get("preview_command_count") == len([row for row in rows if row.get("approval_preview_command")])
+            and summary.get("apply_command_count") == len([row for row in rows if row.get("approval_apply_command")])
+            and all(
+                row.get("id")
+                and row.get("platform")
+                and row.get("copy_block")
+                and row.get("asset_url")
+                and "--dry-run" in row.get("approval_preview_command", "")
+                and "--refresh-admin" in row.get("approval_apply_command", "")
+                for row in rows
+            )
+        ):
+            ok(f"scheduled approval packet packages {len(rows)} approval blocker(s)")
+        else:
+            fail("scheduled_approval_packet.json missing safe approval blocker rows or commands", failures)
+    else:
+        fail("scheduled_approval_packet.json missing; run scripts/build_scheduled_approval_packet.py", failures)
     if SUBSCRIBER_CTA_AUDIT.exists():
         cta_audit = json.loads(SUBSCRIBER_CTA_AUDIT.read_text(encoding="utf-8"))
         summary = cta_audit.get("summary") or {}
@@ -990,10 +1017,10 @@ def validate_generated_outputs(failures):
         fail("approve_promo_queue_plan.py missing", failures)
     if SCHEDULED_POST_APPROVAL.exists():
         approval_text = SCHEDULED_POST_APPROVAL.read_text(encoding="utf-8")
-        if "scheduled_posts.csv" in approval_text and "--refresh-admin" in approval_text and "sync_future_posts.py" in approval_text:
+        if "scheduled_posts.csv" in approval_text and "--refresh-admin" in approval_text and "--dry-run" in approval_text and "Dry run only" in approval_text and "sync_future_posts.py" in approval_text:
             ok("scheduled post approval script can refresh admin")
         else:
-            fail("update_scheduled_post_approval.py missing scheduled queue refresh support", failures)
+            fail("update_scheduled_post_approval.py missing scheduled queue dry-run or refresh support", failures)
     else:
         fail("update_scheduled_post_approval.py missing", failures)
     if SCHEDULED_POST_RESCHEDULE.exists():
@@ -1192,6 +1219,14 @@ def validate_generated_outputs(failures):
             fail("build_approval_runway.py missing runway outputs or executes commands", failures)
     else:
         fail("build_approval_runway.py missing", failures)
+    if SCHEDULED_APPROVAL_SCRIPT.exists():
+        scheduled_approval_text = SCHEDULED_APPROVAL_SCRIPT.read_text(encoding="utf-8")
+        if "scheduled_approval_packet.json" in scheduled_approval_text and "scheduled-approval-packet.md" in scheduled_approval_text and "approval_preview_command" in scheduled_approval_text and "approval_apply_command" in scheduled_approval_text and "subprocess" not in scheduled_approval_text:
+            ok("scheduled approval packet builder is review-only")
+        else:
+            fail("build_scheduled_approval_packet.py missing approval packet outputs or executes commands", failures)
+    else:
+        fail("build_scheduled_approval_packet.py missing", failures)
     if SUBSCRIBER_CTA_AUDIT_SCRIPT.exists():
         cta_text = SUBSCRIBER_CTA_AUDIT_SCRIPT.read_text(encoding="utf-8")
         if "subscriber_cta_audit.json" in cta_text and "subscriber-cta-audit.md" in cta_text and "needs_subscriber_cta_swap" in cta_text and "subprocess" not in cta_text:
@@ -1264,6 +1299,14 @@ def validate_generated_outputs(failures):
             fail("approval-runway.md missing expected sections", failures)
     else:
         fail("approval-runway.md missing", failures)
+    if SCHEDULED_APPROVAL_REPORT.exists():
+        scheduled_approval_report_text = SCHEDULED_APPROVAL_REPORT.read_text(encoding="utf-8")
+        if "Scheduled Approval Packet" in scheduled_approval_report_text and "Review Queue" in scheduled_approval_report_text and "Guardrails" in scheduled_approval_report_text:
+            ok("scheduled approval markdown report present")
+        else:
+            fail("scheduled-approval-packet.md missing expected sections", failures)
+    else:
+        fail("scheduled-approval-packet.md missing", failures)
     if SUBSCRIBER_CTA_AUDIT_REPORT.exists():
         cta_report_text = SUBSCRIBER_CTA_AUDIT_REPORT.read_text(encoding="utf-8")
         if "Subscriber CTA Audit" in cta_report_text and "CTA Review Queue" in cta_report_text and "Guardrails" in cta_report_text:
