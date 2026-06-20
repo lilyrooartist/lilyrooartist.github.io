@@ -18,6 +18,7 @@ MANUAL_SOCIAL_STATS = ROOT / "data" / "manual_social_stats.json"
 METRICS_HISTORY = ROOT / "data" / "metrics_history.json"
 EXECUTOR_READINESS = ROOT / "data" / "executor_readiness_snapshot.json"
 STORE_VERIFICATION_HISTORY = ROOT / "data" / "store_verification_history.json"
+STORE_VERIFICATION_RUN = ROOT / "data" / "store_verification_run.json"
 SOCIAL_EXECUTION_SNAPSHOT = ROOT / "data" / "social_execution_snapshot.json"
 SOCIAL_SCHEDULER_DRY_RUN = ROOT / "data" / "social_scheduler_dry_run.json"
 PROMO_REFRESH_RUN = ROOT / "data" / "promo_admin_refresh_run.json"
@@ -142,6 +143,7 @@ GENERATED_REFRESH_PATHS = {
     "data/social_execution_snapshot.json",
     "data/social_scheduler_dry_run.json",
     "data/store_verification_history.json",
+    "data/store_verification_run.json",
     "data/subscriber_cta_audit.json",
     "data/tiktok_repair_runbook.json",
     "data/tiktok_setup_preflight.json",
@@ -345,6 +347,23 @@ def validate_generated_outputs(failures):
             fail("store_verification_history.json summary does not match rows", failures)
     else:
         fail("store_verification_history.json missing; run scripts/update_promo_engine_status.py", failures)
+    if STORE_VERIFICATION_RUN.exists():
+        store_run = json.loads(STORE_VERIFICATION_RUN.read_text(encoding="utf-8"))
+        run_summary = store_run.get("summary") or {}
+        if (
+            store_run.get("source") == "public-store-link-verification-run"
+            and store_run.get("updated_at")
+            and "checked" in run_summary
+            and "timed_out" in run_summary
+            and "admin_update_ok" in run_summary
+            and "verify_pending_store_links.py --refresh-admin" in (store_run.get("retry_command") or "")
+            and isinstance(store_run.get("results"), list)
+        ):
+            ok("store verification run captures public lookup outcomes")
+        else:
+            fail("store_verification_run.json missing lookup outcome summary", failures)
+    else:
+        fail("store_verification_run.json missing; run scripts/verify_pending_store_links.py --refresh-admin", failures)
     if SOCIAL_EXECUTION_SNAPSHOT.exists():
         execution_snapshot = json.loads(SOCIAL_EXECUTION_SNAPSHOT.read_text(encoding="utf-8"))
         summary = execution_snapshot.get("summary") or {}
@@ -1722,6 +1741,9 @@ def validate_generated_outputs(failures):
         else:
             fail("promo_engine_status.json checked-pending music site KPI does not match store history", failures)
         store_verification = kpi.get("store_verification") or {}
+        store_verification_run = json.loads(STORE_VERIFICATION_RUN.read_text(encoding="utf-8")) if STORE_VERIFICATION_RUN.exists() else {}
+        store_run_summary = store_verification_run.get("summary") or {}
+        mirrored_store_run = store_verification.get("latest_run") or {}
         store_history_rows = store_history.get("rows") or []
         checked_pending_rows = [row for row in store_history_rows if row.get("state") == "Checked pending"]
         found_snapshot_rows = [row for row in store_history_rows if row.get("state") == "Found in snapshot"]
@@ -1735,6 +1757,10 @@ def validate_generated_outputs(failures):
             and store_verification.get("pending_count") == len(pending_rows) == int(store_history_summary.get("pending") or 0)
             and store_verification.get("snapshot_count") == int(store_history_summary.get("snapshot_count") or 0)
             and store_verification.get("verification_command_count") == len(verification_commands)
+            and store_verification.get("last_run_timeout_count") == int(store_run_summary.get("timed_out") or 0)
+            and mirrored_store_run.get("source_path") == "data/store_verification_run.json"
+            and mirrored_store_run.get("checked") == int(store_run_summary.get("checked") or 0)
+            and mirrored_store_run.get("timed_out") == int(store_run_summary.get("timed_out") or 0)
             and "verify_pending_store_links.py --refresh-admin" in (store_verification.get("refresh_command") or "")
         ):
             ok("promo engine status mirrors store verification gate")
@@ -2071,7 +2097,7 @@ def validate_generated_outputs(failures):
         fail("capture_live_metrics.py missing", failures)
     if STORE_LINK_VERIFIER.exists():
         verifier_text = STORE_LINK_VERIFIER.read_text(encoding="utf-8")
-        if "search_spotify_release.py" in verifier_text and "capture_apple_music_release.py" in verifier_text and "search_youtube_music_release.py" in verifier_text and "capture_hyperfollow_store_links.py" in verifier_text and "--refresh-admin" in verifier_text and "--step-timeout-seconds" in verifier_text and "TimeoutExpired" in verifier_text and '"timed_out"' in verifier_text:
+        if "search_spotify_release.py" in verifier_text and "capture_apple_music_release.py" in verifier_text and "search_youtube_music_release.py" in verifier_text and "capture_hyperfollow_store_links.py" in verifier_text and "store_verification_run.json" in verifier_text and "--refresh-admin" in verifier_text and "--step-timeout-seconds" in verifier_text and "TimeoutExpired" in verifier_text and '"timed_out"' in verifier_text:
             ok("pending store link verifier can refresh admin")
         else:
             fail("verify_pending_store_links.py missing capture, bounded timeout, or refresh support", failures)

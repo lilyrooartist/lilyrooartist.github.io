@@ -36,10 +36,11 @@ STEPS = [
     },
     {
         "name": "verify_pending_store_links",
-        "command": ["python3", "scripts/verify_pending_store_links.py", "--refresh-admin"],
+        "command": ["python3", "scripts/verify_pending_store_links.py", "--refresh-admin", "--step-timeout-seconds", "25"],
         "required": False,
-        "timeout_seconds": 45,
+        "timeout_seconds": 120,
         "preserve_on_failure": [
+            "data/store_verification_run.json",
             "data/store_verification_history.json",
             "data/store-verification/analog-myth/apple_music_release_snapshot.json",
             "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",

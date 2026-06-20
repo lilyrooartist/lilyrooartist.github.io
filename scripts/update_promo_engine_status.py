@@ -19,6 +19,7 @@ LIVE_METRICS = ROOT / "data" / "live_social_metrics.json"
 METRICS_HISTORY = ROOT / "data" / "metrics_history.json"
 EXECUTOR_READINESS = ROOT / "data" / "executor_readiness_snapshot.json"
 STORE_VERIFICATION_HISTORY = ROOT / "data" / "store_verification_history.json"
+STORE_VERIFICATION_RUN = ROOT / "data" / "store_verification_run.json"
 SOCIAL_EXECUTIONS = ROOT / "data" / "social_execution_snapshot.json"
 SOCIAL_SCHEDULER_DRY_RUN = ROOT / "data" / "social_scheduler_dry_run.json"
 PROMO_REFRESH_RUN = ROOT / "data" / "promo_admin_refresh_run.json"
@@ -796,6 +797,7 @@ GENERATED_REFRESH_PATHS = {
     "data/social_execution_snapshot.json",
     "data/social_scheduler_dry_run.json",
     "data/store_verification_history.json",
+    "data/store_verification_run.json",
     "data/subscriber_cta_audit.json",
     "data/tiktok_repair_runbook.json",
     "data/tiktok_setup_preflight.json",
@@ -1366,7 +1368,7 @@ def manual_distribution_next_action(distribution: dict, reconciliation: dict) ->
     )
 
 
-def store_verification_state(store_history: dict, releases: list[dict]) -> dict:
+def store_verification_state(store_history: dict, releases: list[dict], verification_run: dict) -> dict:
     summary = store_history.get("summary") if isinstance(store_history, dict) else {}
     summary = summary or {}
     rows = store_history.get("rows") if isinstance(store_history, dict) else []
@@ -1398,6 +1400,21 @@ def store_verification_state(store_history: dict, releases: list[dict]) -> dict:
         command for command in commands
         if not (command.get("latest_snapshot") or {}).get("updated_at")
     ]
+    run_summary = verification_run.get("summary") if isinstance(verification_run, dict) else {}
+    run_summary = run_summary or {}
+    latest_run = {
+        "source_path": str(STORE_VERIFICATION_RUN.relative_to(ROOT)),
+        "available": bool(verification_run),
+        "updated_at": verification_run.get("updated_at", "") if isinstance(verification_run, dict) else "",
+        "step_timeout_seconds": int_metric(verification_run.get("step_timeout_seconds")) if isinstance(verification_run, dict) else 0,
+        "checked": int_metric(run_summary.get("checked")),
+        "ok": int_metric(run_summary.get("ok")),
+        "not_live_or_failed": int_metric(run_summary.get("not_live_or_failed")),
+        "timed_out": int_metric(run_summary.get("timed_out")),
+        "failed": int_metric(run_summary.get("failed")),
+        "admin_update_ok": run_summary.get("admin_update_ok"),
+        "retry_command": verification_run.get("retry_command", "") if isinstance(verification_run, dict) else "",
+    }
     return {
         "source_path": str(STORE_VERIFICATION_HISTORY.relative_to(ROOT)),
         "available": bool(store_history),
@@ -1413,7 +1430,9 @@ def store_verification_state(store_history: dict, releases: list[dict]) -> dict:
         "pending_rows": pending,
         "verification_commands": commands,
         "stale_snapshot_count": len(stale_snapshots),
-        "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin",
+        "latest_run": latest_run,
+        "last_run_timeout_count": int_metric(latest_run.get("timed_out")),
+        "refresh_command": latest_run.get("retry_command") or "python3 scripts/verify_pending_store_links.py --refresh-admin",
         "apply_found_url_instruction": "When a public URL is verified, copy it into data/distrokid_release_status.json and refresh Admin.",
     }
 
@@ -1429,9 +1448,11 @@ def store_verification_next_action(state: dict) -> str:
             "copy them into data/distrokid_release_status.json and refresh Admin."
         )
     if checked:
+        timed_out = int_metric(state.get("last_run_timeout_count"))
+        timeout_note = f" Last run had {timed_out} timeout(s)." if timed_out else ""
         return (
             f"Re-check checked-pending store links: {checked} music site snapshot(s) still have no public URL; "
-            f"run {command}."
+            f"run {command}.{timeout_note}"
         )
     if pending:
         return (
@@ -1516,6 +1537,7 @@ def build_status():
     manual_distribution = read_json(MANUAL_DISTRIBUTION_PACKET, {})
     published_log_reconciliation = read_json(PUBLISHED_LOG_RECONCILIATION, {})
     manual_metric_packet = read_json(MANUAL_METRIC_PACKET, {})
+    store_verification_run = read_json(STORE_VERIFICATION_RUN, {})
     future_posts = read_json(FUTURE_POSTS, {})
     store_history = build_store_verification_history(release_status, now)
     scheduled_rows = read_csv(SCHEDULED)
@@ -1620,7 +1642,7 @@ def build_status():
     healthy_count = sum(1 for release in releases if release["status"] == "healthy")
     verification_command_count = sum(len(release.get("store_verification_commands") or []) for release in releases)
     store_history_summary = store_history["summary"]
-    store_verification = store_verification_state(store_history, releases)
+    store_verification = store_verification_state(store_history, releases, store_verification_run)
     score = round((healthy_count / len(releases)) * 100) if releases else 0
     freshness_summary = freshness["summary"]
     freshness_actions = freshness["actions"]
@@ -1707,6 +1729,7 @@ def build_status():
             "metrics_history": str(METRICS_HISTORY.relative_to(ROOT)),
             "executor_readiness": str(EXECUTOR_READINESS.relative_to(ROOT)),
             "store_verification_history": str(STORE_VERIFICATION_HISTORY.relative_to(ROOT)),
+            "store_verification_run": str(STORE_VERIFICATION_RUN.relative_to(ROOT)),
             "social_executions": str(SOCIAL_EXECUTIONS.relative_to(ROOT)),
             "social_scheduler_dry_run": str(SOCIAL_SCHEDULER_DRY_RUN.relative_to(ROOT)),
             "promo_refresh_run": str(PROMO_REFRESH_RUN.relative_to(ROOT)),
