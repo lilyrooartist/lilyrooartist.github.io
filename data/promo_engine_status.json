@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T05:28:35.417113+00:00",
+  "generated_at": "2026-06-20T05:32:32.310105+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -10,6 +10,7 @@
     "manual_distribution_packet": "data/manual_distribution_packet.json",
     "published_log": "admin/content/Published_Log.csv",
     "manual_metrics": "data/manual_social_stats.json",
+    "manual_metric_packet": "data/manual_metric_collection_packet.json",
     "live_metrics": "data/live_social_metrics.json",
     "metrics_history": "data/metrics_history.json",
     "executor_readiness": "data/executor_readiness_snapshot.json",
@@ -190,15 +191,231 @@
         "command": "python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impressions_7d=VALUE --refresh-admin"
       }
     ],
-    "live_metrics_updated_at": "2026-06-20T05:28:16.238Z",
+    "manual_metric_import_manifest": {
+      "status": "needs_values",
+      "csv_path": "data/manual_metric_collection_template.csv",
+      "ready_row_count": 0,
+      "waiting_row_count": 11,
+      "ready_csv_rows": [],
+      "waiting_csv_rows": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "ready_assignments": [],
+      "waiting_assignments": [
+        "facebook.reach_7d=VALUE",
+        "instagram.followers=VALUE",
+        "instagram.profile_visits_7d=VALUE",
+        "spotify.artist_followers=VALUE",
+        "spotify.monthly_listeners=VALUE",
+        "spotify.release_streams=VALUE",
+        "spotify.saves=VALUE",
+        "tiktok.followers=VALUE",
+        "tiktok.profile_views_7d=VALUE",
+        "x.followers=VALUE",
+        "x.impressions_7d=VALUE"
+      ],
+      "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
+      "apply_command": "",
+      "apply_gate": "blocked_until_new_values_filled",
+      "rows": [
+        {
+          "csv_row": 2,
+          "platform": "facebook",
+          "field": "reach_7d",
+          "ready_to_import": false,
+          "new_value": "",
+          "value_type": "nonnegative_integer",
+          "collection_priority": 2,
+          "metric_category": "Recent discovery and traffic",
+          "access_level": "private_analytics",
+          "source_hint": "Meta Business Suite > Insights",
+          "collection_url": "https://www.facebook.com/903693509504290",
+          "evidence_hint": "Use the last-7-days reach value from Meta insights.",
+          "update_assignment": "facebook.reach_7d=VALUE",
+          "import_effect": "update data/manual_social_stats.json facebook.reach_7d from 'pending' to the filled new_value"
+        },
+        {
+          "csv_row": 3,
+          "platform": "instagram",
+          "field": "followers",
+          "ready_to_import": false,
+          "new_value": "",
+          "value_type": "nonnegative_integer",
+          "collection_priority": 1,
+          "metric_category": "Audience size snapshot",
+          "access_level": "public_profile",
+          "source_hint": "Instagram Professional Dashboard > Insights",
+          "collection_url": "https://www.instagram.com/professional_dashboard/",
+          "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
+          "update_assignment": "instagram.followers=VALUE",
+          "import_effect": "update data/manual_social_stats.json instagram.followers from 'pending' to the filled new_value"
+        },
+        {
+          "csv_row": 4,
+          "platform": "instagram",
+          "field": "profile_visits_7d",
+          "ready_to_import": false,
+          "new_value": "",
+          "value_type": "nonnegative_integer",
+          "collection_priority": 2,
+          "metric_category": "Recent discovery and traffic",
+          "access_level": "private_analytics",
+          "source_hint": "Instagram Professional Dashboard > Insights",
+          "collection_url": "https://www.instagram.com/professional_dashboard/",
+          "evidence_hint": "Use the last-7-days profile visits value from the professional dashboard.",
+          "update_assignment": "instagram.profile_visits_7d=VALUE",
+          "import_effect": "update data/manual_social_stats.json instagram.profile_visits_7d from 'pending' to the filled new_value"
+        },
+        {
+          "csv_row": 5,
+          "platform": "spotify",
+          "field": "artist_followers",
+          "ready_to_import": false,
+          "new_value": "",
+          "value_type": "nonnegative_integer",
+          "collection_priority": 1,
+          "metric_category": "Audience size snapshot",
+          "access_level": "public_profile",
+          "source_hint": "Spotify for Artists > Music/Stats export",
+          "collection_url": "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a",
+          "evidence_hint": "Capture the public Spotify artist follower count if visible, otherwise use Spotify for Artists.",
+          "update_assignment": "spotify.artist_followers=VALUE",
+          "import_effect": "update data/manual_social_stats.json spotify.artist_followers from 'pending' to the filled new_value"
+        },
+        {
+          "csv_row": 6,
+          "platform": "spotify",
+          "field": "monthly_listeners",
+          "ready_to_import": false,
+          "new_value": "",
+          "value_type": "nonnegative_integer",
+          "collection_priority": 1,
+          "metric_category": "Audience size snapshot",
+          "access_level": "public_profile",
+          "source_hint": "Spotify for Artists > Music/Stats export",
+          "collection_url": "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a",
+          "evidence_hint": "Capture the public Spotify monthly listeners count from the artist profile.",
+          "update_assignment": "spotify.monthly_listeners=VALUE",
+          "import_effect": "update data/manual_social_stats.json spotify.monthly_listeners from 'pending' to the filled new_value"
+        },
+        {
+          "csv_row": 7,
+          "platform": "spotify",
+          "field": "release_streams",
+          "ready_to_import": false,
+          "new_value": "",
+          "value_type": "nonnegative_integer",
+          "collection_priority": 3,
+          "metric_category": "Release depth metrics",
+          "access_level": "private_analytics",
+          "source_hint": "Spotify for Artists > Music/Stats export",
+          "collection_url": "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a",
+          "evidence_hint": "Use lifetime streams for the promoted release from Spotify for Artists.",
+          "update_assignment": "spotify.release_streams=VALUE",
+          "import_effect": "update data/manual_social_stats.json spotify.release_streams from 'pending' to the filled new_value"
+        },
+        {
+          "csv_row": 8,
+          "platform": "spotify",
+          "field": "saves",
+          "ready_to_import": false,
+          "new_value": "",
+          "value_type": "nonnegative_integer",
+          "collection_priority": 3,
+          "metric_category": "Release depth metrics",
+          "access_level": "private_analytics",
+          "source_hint": "Spotify for Artists > Music/Stats export",
+          "collection_url": "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a",
+          "evidence_hint": "Use lifetime saves for the promoted release from Spotify for Artists.",
+          "update_assignment": "spotify.saves=VALUE",
+          "import_effect": "update data/manual_social_stats.json spotify.saves from 'pending' to the filled new_value"
+        },
+        {
+          "csv_row": 9,
+          "platform": "tiktok",
+          "field": "followers",
+          "ready_to_import": false,
+          "new_value": "",
+          "value_type": "nonnegative_integer",
+          "collection_priority": 1,
+          "metric_category": "Audience size snapshot",
+          "access_level": "public_profile",
+          "source_hint": "TikTok Studio or Creator Center analytics",
+          "collection_url": "https://www.tiktok.com/creator-center/analytics",
+          "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
+          "update_assignment": "tiktok.followers=VALUE",
+          "import_effect": "update data/manual_social_stats.json tiktok.followers from 'pending' to the filled new_value"
+        },
+        {
+          "csv_row": 10,
+          "platform": "tiktok",
+          "field": "profile_views_7d",
+          "ready_to_import": false,
+          "new_value": "",
+          "value_type": "nonnegative_integer",
+          "collection_priority": 2,
+          "metric_category": "Recent discovery and traffic",
+          "access_level": "private_analytics",
+          "source_hint": "TikTok Studio or Creator Center analytics",
+          "collection_url": "https://www.tiktok.com/creator-center/analytics",
+          "evidence_hint": "Use the last-7-days profile views value from TikTok analytics.",
+          "update_assignment": "tiktok.profile_views_7d=VALUE",
+          "import_effect": "update data/manual_social_stats.json tiktok.profile_views_7d from 'pending' to the filled new_value"
+        },
+        {
+          "csv_row": 11,
+          "platform": "x",
+          "field": "followers",
+          "ready_to_import": false,
+          "new_value": "",
+          "value_type": "nonnegative_integer",
+          "collection_priority": 1,
+          "metric_category": "Audience size snapshot",
+          "access_level": "public_profile",
+          "source_hint": "X Analytics or account profile metrics",
+          "collection_url": "https://analytics.x.com/",
+          "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
+          "update_assignment": "x.followers=VALUE",
+          "import_effect": "update data/manual_social_stats.json x.followers from 'pending' to the filled new_value"
+        },
+        {
+          "csv_row": 12,
+          "platform": "x",
+          "field": "impressions_7d",
+          "ready_to_import": false,
+          "new_value": "",
+          "value_type": "nonnegative_integer",
+          "collection_priority": 2,
+          "metric_category": "Recent discovery and traffic",
+          "access_level": "private_analytics",
+          "source_hint": "X Analytics or account profile metrics",
+          "collection_url": "https://analytics.x.com/",
+          "evidence_hint": "Use the last-7-days impressions value from X analytics.",
+          "update_assignment": "x.impressions_7d=VALUE",
+          "import_effect": "update data/manual_social_stats.json x.impressions_7d from 'pending' to the filled new_value"
+        }
+      ],
+      "guardrail": "Import only filled nonnegative numeric new_value cells; leave unknown rows blank."
+    },
+    "live_metrics_updated_at": "2026-06-20T05:32:11.951Z",
     "metrics_history": {
       "snapshot_count": 11,
-      "updated_at": "2026-06-20T05:28:34.293729Z",
+      "updated_at": "2026-06-20T05:32:31.044175Z",
       "latest_date": "2026-06-20",
       "latest": {
         "date": "2026-06-20",
-        "captured_at": "2026-06-20T05:28:34.293729Z",
-        "live_metrics_updated_at": "2026-06-20T05:28:16.238Z",
+        "captured_at": "2026-06-20T05:32:31.044175Z",
+        "live_metrics_updated_at": "2026-06-20T05:32:11.951Z",
         "youtube": {
           "subscribers": 6,
           "total_views": 251,
@@ -285,7 +502,7 @@
     },
     "social_execution_summary": {
       "ok": true,
-      "updated_at": "2026-06-20T05:28:33.850985Z",
+      "updated_at": "2026-06-20T05:32:30.613059Z",
       "http_status": 200,
       "execution_count": 4,
       "posted_count": 0,
@@ -307,7 +524,7 @@
           "status": "blocked",
           "reason": "tiktok_credentials_missing",
           "attempts": 0,
-          "updated_at": "2026-06-20T05:15:10.753Z",
+          "updated_at": "2026-06-20T05:30:10.704Z",
           "source": "cron",
           "post_url": "",
           "error_summary": ""
@@ -318,7 +535,7 @@
           "status": "blocked",
           "reason": "not_approved",
           "attempts": 0,
-          "updated_at": "2026-06-20T05:15:10.405Z",
+          "updated_at": "2026-06-20T05:30:10.358Z",
           "source": "cron",
           "post_url": "",
           "error_summary": ""
@@ -329,7 +546,7 @@
           "status": "blocked",
           "reason": "not_approved",
           "attempts": 0,
-          "updated_at": "2026-06-20T05:15:10.078Z",
+          "updated_at": "2026-06-20T05:30:10.091Z",
           "source": "cron",
           "post_url": "",
           "error_summary": ""
@@ -340,7 +557,7 @@
           "status": "blocked",
           "reason": "not_approved",
           "attempts": 0,
-          "updated_at": "2026-06-20T05:15:09.743Z",
+          "updated_at": "2026-06-20T05:30:09.741Z",
           "source": "cron",
           "post_url": "",
           "error_summary": ""
@@ -353,7 +570,7 @@
           "status": "blocked",
           "reason": "not_approved",
           "attempts": 0,
-          "updated_at": "2026-06-20T05:15:10.405Z",
+          "updated_at": "2026-06-20T05:30:10.358Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "",
@@ -368,7 +585,7 @@
           "status": "blocked",
           "reason": "not_approved",
           "attempts": 0,
-          "updated_at": "2026-06-20T05:15:10.078Z",
+          "updated_at": "2026-06-20T05:30:10.091Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "",
@@ -383,7 +600,7 @@
           "status": "blocked",
           "reason": "not_approved",
           "attempts": 0,
-          "updated_at": "2026-06-20T05:15:09.743Z",
+          "updated_at": "2026-06-20T05:30:09.741Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "",
@@ -400,7 +617,7 @@
           "status": "blocked",
           "reason": "tiktok_credentials_missing",
           "attempts": 0,
-          "updated_at": "2026-06-20T05:15:10.753Z",
+          "updated_at": "2026-06-20T05:30:10.704Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "",
@@ -414,11 +631,11 @@
     },
     "social_scheduler_dry_run": {
       "ok": true,
-      "updated_at": "2026-06-20T05:28:34.198089Z",
+      "updated_at": "2026-06-20T05:32:30.945276Z",
       "http_status": 200,
       "auth_method": "bearer",
-      "requested_scheduled_time": "2026-06-20T05:28:33.923737Z",
-      "checked_at": "2026-06-20T05:28:33.923Z",
+      "requested_scheduled_time": "2026-06-20T05:32:30.691324Z",
+      "checked_at": "2026-06-20T05:32:30.691Z",
       "dry_run": true,
       "due_count": 4,
       "result_count": 4,
@@ -441,7 +658,7 @@
           "reason": "not_approved",
           "post_type": "",
           "attempts": 0,
-          "updated_at": "2026-06-20T05:28:34.395Z",
+          "updated_at": "2026-06-20T05:32:31.146Z",
           "source": "dry-run",
           "error_summary": ""
         },
@@ -452,7 +669,7 @@
           "reason": "not_approved",
           "post_type": "",
           "attempts": 0,
-          "updated_at": "2026-06-20T05:28:34.399Z",
+          "updated_at": "2026-06-20T05:32:31.148Z",
           "source": "dry-run",
           "error_summary": ""
         },
@@ -463,7 +680,7 @@
           "reason": "not_approved",
           "post_type": "",
           "attempts": 0,
-          "updated_at": "2026-06-20T05:28:34.402Z",
+          "updated_at": "2026-06-20T05:32:31.151Z",
           "source": "dry-run",
           "error_summary": ""
         },
@@ -474,7 +691,7 @@
           "reason": "tiktok_credentials_missing",
           "post_type": "",
           "attempts": 0,
-          "updated_at": "2026-06-20T05:28:34.405Z",
+          "updated_at": "2026-06-20T05:32:31.154Z",
           "source": "dry-run",
           "error_summary": ""
         }
@@ -486,8 +703,8 @@
       "available": true,
       "safe_mode": true,
       "finalized": true,
-      "finished_at": "2026-06-20T05:28:35.389539Z",
-      "duration_seconds": 20.16,
+      "finished_at": "2026-06-20T05:32:32.271284Z",
+      "duration_seconds": 21.16,
       "command_count": 28,
       "passed": 28,
       "failed": 0,
@@ -2317,7 +2534,7 @@
       "missing": 0,
       "checked_no_change": 0,
       "gated_manual_pending": 1,
-      "checked_at": "2026-06-20T05:28:35.417113+00:00"
+      "checked_at": "2026-06-20T05:32:32.310105+00:00"
     },
     "sources": [
       {
@@ -2333,7 +2550,7 @@
         "name": "scheduled_posts",
         "path": "admin/future-posts.json",
         "status": "fresh",
-        "age_hours": 4.0,
+        "age_hours": 4.1,
         "max_age_hours": 72,
         "timestamp": "2026-06-20T01:28:46.696230+00:00",
         "refresh_command": "python3 scripts/sync_future_posts.py"
@@ -2344,7 +2561,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T05:28:34.257087+00:00",
+        "timestamp": "2026-06-20T05:32:31.007005+00:00",
         "refresh_command": "python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -2376,7 +2593,7 @@
         "name": "manual_metrics",
         "path": "data/manual_social_stats.json",
         "status": "fresh",
-        "age_hours": 4.8,
+        "age_hours": 4.9,
         "max_age_hours": 72,
         "timestamp": "2026-06-20T00:37:40.066733+00:00",
         "refresh_command": "Update data/manual_social_stats.json with latest manual metrics."
@@ -2387,7 +2604,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T05:28:16.238000+00:00",
+        "timestamp": "2026-06-20T05:32:11.951000+00:00",
         "refresh_command": "python3 scripts/capture_live_metrics.py"
       },
       {
@@ -2396,7 +2613,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T05:28:34.293729+00:00",
+        "timestamp": "2026-06-20T05:32:31.044175+00:00",
         "refresh_command": "python3 scripts/update_metrics_history.py --refresh-admin"
       },
       {
@@ -2405,7 +2622,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T05:28:32.419309+00:00",
+        "timestamp": "2026-06-20T05:32:29.275128+00:00",
         "refresh_command": "python3 scripts/capture_executor_readiness.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -2414,7 +2631,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T05:28:35.417113+00:00",
+        "timestamp": "2026-06-20T05:32:32.310105+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin"
       },
       {
@@ -2423,7 +2640,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T05:28:33.850985+00:00",
+        "timestamp": "2026-06-20T05:32:30.613059+00:00",
         "refresh_command": "python3 scripts/capture_social_executions.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -2432,7 +2649,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T05:28:34.198089+00:00",
+        "timestamp": "2026-06-20T05:32:30.945276+00:00",
         "refresh_command": "python3 scripts/capture_scheduler_dry_run.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -2441,7 +2658,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T05:28:35.389989+00:00",
+        "timestamp": "2026-06-20T05:32:32.271728+00:00",
         "refresh_command": "python3 scripts/refresh_promo_admin.py"
       },
       {
@@ -2450,7 +2667,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T05:28:34.814746+00:00",
+        "timestamp": "2026-06-20T05:32:31.679303+00:00",
         "refresh_command": "python3 scripts/capture_github_workflow_status.py && python3 scripts/update_promo_engine_status.py"
       }
     ],
@@ -2600,7 +2817,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T05:28:21.259049Z",
+            "updated_at": "2026-06-20T05:32:17.057586Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
           }
         },
@@ -2611,7 +2828,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T05:28:21.593862Z",
+            "updated_at": "2026-06-20T05:32:18.375305Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
           }
         }
@@ -2713,7 +2930,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T05:28:26.753252Z",
+            "updated_at": "2026-06-20T05:32:23.533921Z",
             "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
           }
         },
@@ -2735,7 +2952,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T05:28:32.251093Z",
+            "updated_at": "2026-06-20T05:32:29.106853Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
           }
         }
@@ -2781,7 +2998,7 @@
   "next_actions": [
     "Next operational action: Preview checked scheduled approval batch — python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
     "First handoff step: Review checked approval batch — python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
-    "Refresh manual metrics: fill data/manual_metric_collection_template.csv, preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run, then import with python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin.",
+    "Refresh manual metrics: 11 worksheet row(s) still need new_value entries (blocked_until_new_values_filled); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values.",
     "Preview approved backlog reschedule: python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
     "1 approved unpublished posts are past their scheduled time; repair executor/platform blockers or reschedule them.",
     "3 executor records are blocked by approval.",

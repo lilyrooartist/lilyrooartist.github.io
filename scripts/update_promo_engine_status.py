@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parent.parent
 GITHUB_REPO_URL = "https://github.com/lilyrooartist/lilyrooartist.github.io"
 RELEASE_STATUS = ROOT / "data" / "distrokid_release_status.json"
 MANUAL_METRICS = ROOT / "data" / "manual_social_stats.json"
+MANUAL_METRIC_PACKET = ROOT / "data" / "manual_metric_collection_packet.json"
 LIVE_METRICS = ROOT / "data" / "live_social_metrics.json"
 METRICS_HISTORY = ROOT / "data" / "metrics_history.json"
 EXECUTOR_READINESS = ROOT / "data" / "executor_readiness_snapshot.json"
@@ -49,6 +50,7 @@ SOURCE_MAX_AGE_HOURS = {
     "promo_queue_plan": 24,
     "published_log": 168,
     "manual_metrics": 72,
+    "manual_metric_packet": 24,
     "live_metrics": 24,
     "metrics_history": 24,
     "executor_readiness": 24,
@@ -1133,6 +1135,30 @@ def operator_docket_state(handoff: dict) -> dict:
     }
 
 
+def manual_metric_next_action(packet: dict) -> str:
+    manifest = packet.get("worksheet_import_manifest") if isinstance(packet, dict) else {}
+    manifest = manifest or {}
+    preview = manifest.get("preview_command") or "python3 scripts/update_manual_social_stats.py --from-csv --dry-run"
+    apply_gate = manifest.get("apply_gate") or "unknown"
+    ready = int_metric(manifest.get("ready_row_count"))
+    waiting = int_metric(manifest.get("waiting_row_count"))
+    if manifest:
+        if ready:
+            apply_command = manifest.get("apply_command") or "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin"
+            return (
+                f"Refresh manual metrics: {ready} worksheet row(s) ready and {waiting} waiting; "
+                f"preview with {preview}, then import with {apply_command}."
+            )
+        return (
+            f"Refresh manual metrics: {waiting} worksheet row(s) still need new_value entries "
+            f"({apply_gate}); preview with {preview} after filling values."
+        )
+    return (
+        "Refresh manual metrics: fill data/manual_metric_collection_template.csv, "
+        f"preview with {preview}, then import with python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin."
+    )
+
+
 def plan_rows_for_release(plan, release_title: str, track_lookup: set[str]):
     rows = []
     for post in plan.get("posts") or []:
@@ -1157,6 +1183,7 @@ def build_status():
     promotion_blockers = read_json(PROMOTION_BLOCKER_LEDGER, {})
     human_handoff = read_json(HUMAN_HANDOFF_PACKET, {})
     manual_distribution = read_json(MANUAL_DISTRIBUTION_PACKET, {})
+    manual_metric_packet = read_json(MANUAL_METRIC_PACKET, {})
     future_posts = read_json(FUTURE_POSTS, {})
     store_history = build_store_verification_history(release_status, now)
     scheduled_rows = read_csv(SCHEDULED)
@@ -1284,11 +1311,7 @@ def build_status():
             f"Next operational action: {operational_next_action['label']}"
             + (f" — {command}" if command else "")
         )
-    manual_metric_action = (
-        "Refresh manual metrics: fill data/manual_metric_collection_template.csv, "
-        "preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run, "
-        "then import with python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin."
-    )
+    manual_metric_action = manual_metric_next_action(manual_metric_packet)
     if execution_state["platform_fix_needed_count"]:
         platforms = ", ".join(sorted({
             item.get("platform", "Social")
@@ -1331,6 +1354,7 @@ def build_status():
             "manual_distribution_packet": str(MANUAL_DISTRIBUTION_PACKET.relative_to(ROOT)),
             "published_log": str(PUBLISHED.relative_to(ROOT)),
             "manual_metrics": str(MANUAL_METRICS.relative_to(ROOT)),
+            "manual_metric_packet": str(MANUAL_METRIC_PACKET.relative_to(ROOT)),
             "live_metrics": str(LIVE_METRICS.relative_to(ROOT)),
             "metrics_history": str(METRICS_HISTORY.relative_to(ROOT)),
             "executor_readiness": str(EXECUTOR_READINESS.relative_to(ROOT)),
@@ -1352,6 +1376,7 @@ def build_status():
             "pending_manual_update_by_platform": metrics["pending_manual_update_by_platform"],
             "auto_covered_manual_metric_fields": metrics["auto_covered_fields"],
             "manual_metric_collection_steps": metrics["manual_metric_collection_steps"],
+            "manual_metric_import_manifest": manual_metric_packet.get("worksheet_import_manifest") or {},
             "live_metrics_updated_at": metrics["updated_at"],
             "metrics_history": history,
             "music_site_state_counts": dict(sorted(store_state_counts.items())),

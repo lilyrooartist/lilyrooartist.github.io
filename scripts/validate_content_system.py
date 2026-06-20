@@ -1612,6 +1612,22 @@ def validate_generated_outputs(failures):
             ok("promo engine manual metric next action includes worksheet dry run")
         elif pending_count:
             fail("promo_engine_status.json manual metric next action missing worksheet dry run", failures)
+        metric_packet = json.loads(MANUAL_METRIC_PACKET.read_text(encoding="utf-8")) if MANUAL_METRIC_PACKET.exists() else {}
+        import_manifest = metric_packet.get("worksheet_import_manifest") or {}
+        metric_action = next((action for action in next_actions if "Refresh manual metrics:" in action), "")
+        if (
+            pending_count
+            and kpi.get("manual_metric_import_manifest") == import_manifest
+            and import_manifest.get("waiting_row_count") == pending_count
+            and import_manifest.get("preview_command") in metric_action
+            and (
+                (import_manifest.get("ready_row_count") and "worksheet row(s) ready" in metric_action)
+                or (not import_manifest.get("ready_row_count") and "new_value" in metric_action and import_manifest.get("apply_gate") in metric_action)
+            )
+        ):
+            ok("promo engine status mirrors manual metric import manifest")
+        elif pending_count:
+            fail("promo_engine_status.json missing manual metric import manifest gate", failures)
         if (status.get("kpi") or {}).get("music_sites_checked_pending") and not any("Verify public store links" in action for action in next_actions):
             ok("promo engine checked-pending store actions avoid unchecked wording")
         elif (status.get("kpi") or {}).get("music_sites_checked_pending"):
