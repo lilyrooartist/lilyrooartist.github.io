@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T01:51:56.107042Z",
+  "generated_at": "2026-06-20T01:54:30.813943Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -7,6 +7,41 @@
     "social_executions": "data/social_execution_snapshot.json",
     "executor_readiness": "data/executor_readiness_snapshot.json",
     "scheduled_approval": "data/scheduled_approval_packet.json"
+  },
+  "next_action": {
+    "label": "Preview checked scheduled approval batch",
+    "kind": "scheduled_approval_batch",
+    "priority": -1,
+    "command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --dry-run",
+    "context": {
+      "approval_blocker_count": 3,
+      "review_check_passed_count": 2,
+      "review_check_blocked_count": 1,
+      "checked_batch_ids": [
+        "FP-AUTO-258",
+        "FP-AUTO-261"
+      ],
+      "blocked_review_ids": [
+        "FP-AUTO-259"
+      ],
+      "review_check_status_counts": {
+        "fail": 1,
+        "pass": 14
+      },
+      "auto_count": 2,
+      "manual_count": 1,
+      "apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --refresh-admin",
+      "note": "Review all passing rows first. The checked batch excludes rows with failed review checks."
+    },
+    "phase": "Review scheduled approvals",
+    "urgency": "high",
+    "urgency_reason": "Scheduled executor records are blocked until reviewed approval is applied.",
+    "status": "waiting_for_user",
+    "sort_key": [
+      1,
+      -1,
+      0
+    ]
   },
   "summary": {
     "action_count": 18,
@@ -43,6 +78,17 @@
         "approval_blocker_count": 3,
         "review_check_passed_count": 2,
         "review_check_blocked_count": 1,
+        "checked_batch_ids": [
+          "FP-AUTO-258",
+          "FP-AUTO-261"
+        ],
+        "blocked_review_ids": [
+          "FP-AUTO-259"
+        ],
+        "review_check_status_counts": {
+          "fail": 1,
+          "pass": 14
+        },
         "auto_count": 2,
         "manual_count": 1,
         "apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --refresh-admin",
@@ -120,6 +166,17 @@
         "approval_blocker_count": 3,
         "review_check_passed_count": 2,
         "review_check_blocked_count": 1,
+        "checked_batch_ids": [
+          "FP-AUTO-258",
+          "FP-AUTO-261"
+        ],
+        "blocked_review_ids": [
+          "FP-AUTO-259"
+        ],
+        "review_check_status_counts": {
+          "fail": 1,
+          "pass": 14
+        },
         "auto_count": 2,
         "manual_count": 1,
         "apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --refresh-admin",
@@ -294,11 +351,11 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "Spotify",
-        "checked_at": "2026-06-20T01:51:46.502281Z",
+        "checked_at": "2026-06-20T01:54:21.349042Z",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T01:51:46.502281Z",
+          "updated_at": "2026-06-20T01:54:21.349042Z",
           "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
         },
         "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -321,11 +378,11 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "Apple Music",
-        "checked_at": "2026-06-20T01:51:48.334548Z",
+        "checked_at": "2026-06-20T01:54:23.175710Z",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T01:51:48.334548Z",
+          "updated_at": "2026-06-20T01:54:23.175710Z",
           "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
         },
         "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -348,11 +405,11 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "HyperFollow",
-        "checked_at": "2026-06-20T01:51:48.667654Z",
+        "checked_at": "2026-06-20T01:54:23.497954Z",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T01:51:48.667654Z",
+          "updated_at": "2026-06-20T01:54:23.497954Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
         },
         "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -375,11 +432,11 @@
       "context": {
         "release": "Analog Myth",
         "service": "Spotify",
-        "checked_at": "2026-06-20T01:51:48.715042Z",
+        "checked_at": "2026-06-20T01:54:23.550511Z",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/spotify_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T01:51:48.715042Z",
+          "updated_at": "2026-06-20T01:54:23.550511Z",
           "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
         },
         "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -402,11 +459,11 @@
       "context": {
         "release": "Analog Myth",
         "service": "Apple Music",
-        "checked_at": "2026-06-20T01:51:50.512744Z",
+        "checked_at": "2026-06-20T01:54:25.322616Z",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T01:51:50.512744Z",
+          "updated_at": "2026-06-20T01:54:25.322616Z",
           "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
         },
         "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -429,11 +486,11 @@
       "context": {
         "release": "Analog Myth",
         "service": "YouTube Music",
-        "checked_at": "2026-06-20T01:51:50.591282Z",
+        "checked_at": "2026-06-20T01:54:25.379811Z",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T01:51:50.591282Z",
+          "updated_at": "2026-06-20T01:54:25.379811Z",
           "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release."
         },
         "note": "Searches public web results for YouTube Music watch URLs, then validates the public title. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -456,11 +513,11 @@
       "context": {
         "release": "Analog Myth",
         "service": "HyperFollow",
-        "checked_at": "2026-06-20T01:51:53.500410Z",
+        "checked_at": "2026-06-20T01:54:28.317007Z",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T01:51:53.500410Z",
+          "updated_at": "2026-06-20T01:54:28.317007Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
         },
         "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."

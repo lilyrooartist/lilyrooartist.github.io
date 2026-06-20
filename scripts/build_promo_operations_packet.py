@@ -359,6 +359,9 @@ def scheduled_approval_batch_actions(packet):
                 "approval_blocker_count": blocker_count,
                 "review_check_passed_count": checked_count,
                 "review_check_blocked_count": blocked_count,
+                "checked_batch_ids": summary.get("checked_batch_ids") or [],
+                "blocked_review_ids": summary.get("blocked_review_ids") or [],
+                "review_check_status_counts": summary.get("review_check_status_counts") or {},
                 "auto_count": int(summary.get("auto_count") or 0),
                 "manual_count": int(summary.get("manual_count") or 0),
                 "apply_command": apply_command,
@@ -599,6 +602,7 @@ def main() -> int:
         "urgencies": grouped_counts(actions, "urgency"),
         "next_action": next((action for action in actions if action.get("status") != "blocked"), actions[0] if actions else {}),
     }
+    next_action = summary["next_action"]
     packet = {
         "generated_at": now.isoformat().replace("+00:00", "Z"),
         "safe_mode": True,
@@ -609,6 +613,7 @@ def main() -> int:
             "executor_readiness": str(EXECUTOR_READINESS.relative_to(ROOT)),
             "scheduled_approval": str(SCHEDULED_APPROVAL.relative_to(ROOT)),
         },
+        "next_action": next_action,
         "summary": summary,
         "actions": actions,
     }

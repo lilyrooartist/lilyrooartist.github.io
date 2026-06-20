@@ -279,7 +279,7 @@ def validate_generated_outputs(failures):
             ok(f"promo operations packet tracks {len(actions)} action(s)")
         else:
             fail("promo_operations_packet.json missing safe summary or action count", failures)
-        if summary.get("phases") and summary.get("urgencies") and summary.get("next_action"):
+        if summary.get("phases") and summary.get("urgencies") and summary.get("next_action") and packet.get("next_action") == summary.get("next_action"):
             ok("promo operations packet summarizes phases and urgency")
         else:
             fail("promo_operations_packet.json missing phase or urgency summary", failures)
@@ -318,6 +318,8 @@ def validate_generated_outputs(failures):
                 and all("--dry-run" in (action.get("command") or "") for action in scheduled_batch_actions)
                 and all("--dry-run" not in ((action.get("context") or {}).get("apply_command") or "") for action in scheduled_batch_actions)
                 and all((action.get("context") or {}).get("approval_blocker_count") for action in scheduled_batch_actions)
+                and all((action.get("context") or {}).get("checked_batch_ids") == ((scheduled_packet.get("summary") or {}).get("checked_batch_ids") or []) for action in scheduled_batch_actions)
+                and all((action.get("context") or {}).get("blocked_review_ids") == ((scheduled_packet.get("summary") or {}).get("blocked_review_ids") or []) for action in scheduled_batch_actions)
                 and all(
                     not int((scheduled_packet.get("summary") or {}).get("review_check_passed_count") or 0)
                     or action.get("command") == (scheduled_packet.get("summary") or {}).get("checked_batch_preview_command")
