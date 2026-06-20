@@ -12,6 +12,7 @@ PROMO_STATUS = ROOT / "data" / "promo_engine_status.json"
 MANUAL_STATS = ROOT / "data" / "manual_social_stats.json"
 LIVE_METRICS = ROOT / "data" / "live_social_metrics.json"
 OUT_CSV = ROOT / "data" / "manual_metric_collection_template.csv"
+OUT_JSON = ROOT / "data" / "manual_metric_collection_packet.json"
 OUT_MD = ROOT / "admin" / "reports" / "manual-metric-collection.md"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
 
@@ -100,6 +101,54 @@ def write_csv(rows: list[dict]) -> None:
         writer.writerows(rows)
 
 
+def build_packet(rows: list[dict], generated_at: str) -> dict:
+    by_platform = {}
+    for row in rows:
+        platform = row["platform"]
+        group = by_platform.setdefault(platform, {
+            "platform": platform,
+            "source_hint": row.get("source_hint") or SOURCE_HINTS.get(platform, "Manual platform export"),
+            "collection_url": row.get("collection_url") or "",
+            "reason": row.get("reason") or "",
+            "fields": [],
+            "field_count": 0,
+            "pending_assignments": [],
+            "platform_update_command": row.get("platform_update_command") or "",
+            "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
+            "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
+        })
+        group["fields"].append({
+            "field": row["field"],
+            "current_value": row.get("current_value") or "",
+            "new_value": row.get("new_value") or "",
+            "update_assignment": row.get("update_assignment") or "",
+        })
+        group["pending_assignments"].append(row.get("update_assignment") or "")
+        group["field_count"] = len(group["fields"])
+    platforms = list(by_platform.values())
+    return {
+        "generated_at": generated_at,
+        "safe_mode": True,
+        "source": {
+            "promo_engine_status": str(PROMO_STATUS.relative_to(ROOT)),
+            "manual_social_stats": str(MANUAL_STATS.relative_to(ROOT)),
+            "live_metrics": str(LIVE_METRICS.relative_to(ROOT)),
+            "csv": str(OUT_CSV.relative_to(ROOT)),
+            "report": str(OUT_MD.relative_to(ROOT)),
+        },
+        "summary": {
+            "pending_field_count": len(rows),
+            "platform_count": len(platforms),
+            "csv_path": str(OUT_CSV.relative_to(ROOT)),
+            "report_path": str(OUT_MD.relative_to(ROOT)),
+            "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
+            "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
+        },
+        "platforms": platforms,
+        "rows": rows,
+    }
+
+
 def build_markdown(rows: list[dict], generated_at: str) -> str:
     lines = [
         "# Manual Metric Collection - Lily Roo",
@@ -160,11 +209,27 @@ def replace_text_embed(html: str, block_id: str, content: str) -> str:
     return html[:start_content] + content.rstrip() + html[end:]
 
 
-def sync_admin(markdown: str) -> None:
+def replace_json_embed(html: str, block_id: str, payload) -> str:
+    marker = f'<script type="application/json" id="{block_id}">'
+    end_marker = "</script>"
+    encoded = json.dumps(payload, indent=2, ensure_ascii=False)
+    start = html.find(marker)
+    if start == -1:
+        insert = f"\n{marker}{encoded}{end_marker}\n"
+        return html.replace("<script>", insert + "\n<script>", 1)
+    start_content = start + len(marker)
+    end = html.find(end_marker, start_content)
+    if end == -1:
+        raise RuntimeError(f"Could not find end marker for {block_id}")
+    return html[:start_content] + encoded + html[end:]
+
+
+def sync_admin(markdown: str, packet: dict) -> None:
     if not ADMIN_INDEX.exists():
         return
     html = ADMIN_INDEX.read_text(encoding="utf-8")
     html = replace_text_embed(html, "embedded-manual-metric-collection", markdown)
+    html = replace_json_embed(html, "embedded-manual-metric-collection-packet", packet)
     ADMIN_INDEX.write_text(html, encoding="utf-8")
 
 
@@ -175,11 +240,14 @@ def main() -> int:
     live = read_json(LIVE_METRICS, {})
     rows = build_rows(status, manual, live)
     write_csv(rows)
+    packet = build_packet(rows, generated_at)
+    OUT_JSON.write_text(json.dumps(packet, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     markdown = build_markdown(rows, generated_at)
     OUT_MD.write_text(markdown, encoding="utf-8")
-    sync_admin(markdown)
+    sync_admin(markdown, packet)
     print(json.dumps({
         "csv": str(OUT_CSV.relative_to(ROOT)),
+        "json": str(OUT_JSON.relative_to(ROOT)),
         "report": str(OUT_MD.relative_to(ROOT)),
         "pending_fields": len(rows),
     }, indent=2))

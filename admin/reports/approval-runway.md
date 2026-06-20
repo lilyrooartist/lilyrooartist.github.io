@@ -1,6 +1,6 @@
 # Approval Runway - Lily Roo
 
-Generated: 2026-06-19T23:59:15.322355Z
+Generated: 2026-06-20T00:07:20.211055Z
 
 ## Summary
 - Drafts needing review: **3**
@@ -8,7 +8,7 @@ Generated: 2026-06-19T23:59:15.322355Z
 - Manual-only drafts: **2**
 - Blocked drafts: **1**
 - Recommended approvals: **0**
-- Monetization runway: **behind_365_day_pace**, 0.7 subs/week observed, 19.06 subs/week needed for 365 days
+- Monetization runway: **behind_365_day_pace**, 0.64 subs/week observed, 19.06 subs/week needed for 365 days
 
 ## Recommended Sequence
 - **YouTube Community - Analog Myth** (`FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY`)

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-19T23:59:15.562910+00:00",
+  "generated_at": "2026-06-20T00:07:20.434269+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -26,15 +26,15 @@
       "source": "youtube live metrics, with metrics history fallback",
       "runway": {
         "status": "behind_365_day_pace",
-        "snapshot_count": 10,
+        "snapshot_count": 11,
         "first_date": "2026-06-09",
-        "latest_date": "2026-06-19",
-        "window_days": 10,
+        "latest_date": "2026-06-20",
+        "window_days": 11,
         "first_subscribers": 5,
         "latest_subscribers": 6,
         "subscriber_delta": 1,
-        "subscribers_per_week": 0.7,
-        "estimated_weeks_to_target": 1420.0,
+        "subscribers_per_week": 0.64,
+        "estimated_weeks_to_target": 1553.1,
         "required_subscribers_per_week": {
           "90_days": 77.31,
           "180_days": 38.66,
@@ -192,15 +192,15 @@
         "command": "python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impressions_7d=VALUE --refresh-admin"
       }
     ],
-    "live_metrics_updated_at": "2026-06-19T23:58:27.346Z",
+    "live_metrics_updated_at": "2026-06-20T00:06:33.691Z",
     "metrics_history": {
-      "snapshot_count": 10,
-      "updated_at": "2026-06-19T23:59:14.653642Z",
-      "latest_date": "2026-06-19",
+      "snapshot_count": 11,
+      "updated_at": "2026-06-20T00:07:19.578115Z",
+      "latest_date": "2026-06-20",
       "latest": {
-        "date": "2026-06-19",
-        "captured_at": "2026-06-19T23:59:14.653642Z",
-        "live_metrics_updated_at": "2026-06-19T23:58:27.346Z",
+        "date": "2026-06-20",
+        "captured_at": "2026-06-20T00:07:19.578115Z",
+        "live_metrics_updated_at": "2026-06-20T00:06:33.691Z",
         "youtube": {
           "subscribers": 6,
           "total_views": 251,
@@ -231,30 +231,30 @@
           "youtube.video_count"
         ],
         "delta_from_previous": {
-          "youtube.subscribers": 1,
+          "youtube.subscribers": 0,
           "youtube.total_views": 0,
           "youtube.video_count": 0,
           "facebook.followers": 0,
           "facebook.page_likes": 0,
           "publishing.published_30d": 0,
           "publishing.published_total": 0,
-          "queue.approved_upcoming": 3,
-          "queue.approved_total": 3,
-          "queue.scheduled_total": 3
+          "queue.approved_upcoming": 0,
+          "queue.approved_total": 0,
+          "queue.scheduled_total": 0
         }
       },
-      "previous_date": "2026-06-18",
+      "previous_date": "2026-06-19",
       "delta_from_previous": {
-        "youtube.subscribers": 1,
+        "youtube.subscribers": 0,
         "youtube.total_views": 0,
         "youtube.video_count": 0,
         "facebook.followers": 0,
         "facebook.page_likes": 0,
         "publishing.published_30d": 0,
         "publishing.published_total": 0,
-        "queue.approved_upcoming": 3,
-        "queue.approved_total": 3,
-        "queue.scheduled_total": 3
+        "queue.approved_upcoming": 0,
+        "queue.approved_total": 0,
+        "queue.scheduled_total": 0
       }
     },
     "music_site_state_counts": {
@@ -287,7 +287,7 @@
     },
     "social_execution_summary": {
       "ok": true,
-      "updated_at": "2026-06-19T23:59:14.198531Z",
+      "updated_at": "2026-06-20T00:07:19.124570Z",
       "http_status": 200,
       "execution_count": 6,
       "posted_count": 0,
@@ -311,10 +311,10 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-06-19T23:45:11.514Z",
+          "updated_at": "2026-06-20T00:00:11.517Z",
           "source": "cron",
           "post_url": "",
-          "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app."
+          "error_summary": "Facebook retry cap reached; rerun the Facebook dry-run check after identity confirmation."
         },
         {
           "post_id": "FP-AUTO-264",
@@ -322,7 +322,7 @@
           "status": "blocked",
           "reason": "tiktok_credentials_missing",
           "attempts": 0,
-          "updated_at": "2026-06-19T23:45:11.162Z",
+          "updated_at": "2026-06-20T00:00:11.159Z",
           "source": "cron",
           "post_url": "",
           "error_summary": ""
@@ -333,10 +333,10 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-06-19T23:45:10.860Z",
+          "updated_at": "2026-06-20T00:00:10.896Z",
           "source": "cron",
           "post_url": "",
-          "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID."
+          "error_summary": "Instagram retry cap reached; verify instagram_business_account repair before resetting execution state."
         },
         {
           "post_id": "FP-AUTO-261",
@@ -344,7 +344,7 @@
           "status": "blocked",
           "reason": "not_approved",
           "attempts": 0,
-          "updated_at": "2026-06-19T23:45:10.498Z",
+          "updated_at": "2026-06-20T00:00:10.524Z",
           "source": "cron",
           "post_url": "",
           "error_summary": ""
@@ -355,7 +355,7 @@
           "status": "blocked",
           "reason": "not_approved",
           "attempts": 0,
-          "updated_at": "2026-06-19T23:45:10.153Z",
+          "updated_at": "2026-06-20T00:00:10.164Z",
           "source": "cron",
           "post_url": "",
           "error_summary": ""
@@ -368,7 +368,7 @@
           "status": "blocked",
           "reason": "not_approved",
           "attempts": 0,
-          "updated_at": "2026-06-19T23:45:10.498Z",
+          "updated_at": "2026-06-20T00:00:10.524Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "",
@@ -383,7 +383,7 @@
           "status": "blocked",
           "reason": "not_approved",
           "attempts": 0,
-          "updated_at": "2026-06-19T23:45:10.153Z",
+          "updated_at": "2026-06-20T00:00:10.164Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "",
@@ -398,7 +398,7 @@
           "status": "blocked",
           "reason": "not_approved",
           "attempts": 0,
-          "updated_at": "2026-06-19T23:45:09.781Z",
+          "updated_at": "2026-06-20T00:00:09.797Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "",
@@ -415,10 +415,10 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-06-19T23:45:11.514Z",
+          "updated_at": "2026-06-20T00:00:11.517Z",
           "source": "cron",
           "post_url": "",
-          "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
+          "error_summary": "Facebook retry cap reached; rerun the Facebook dry-run check after identity confirmation.",
           "song": "I Learned It All in Fifteen Seconds",
           "approved": "yes",
           "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
@@ -430,7 +430,7 @@
           "status": "blocked",
           "reason": "tiktok_credentials_missing",
           "attempts": 0,
-          "updated_at": "2026-06-19T23:45:11.162Z",
+          "updated_at": "2026-06-20T00:00:11.159Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "",
@@ -445,10 +445,10 @@
           "status": "failed",
           "reason": "max_attempts_exceeded",
           "attempts": 3,
-          "updated_at": "2026-06-19T23:45:10.860Z",
+          "updated_at": "2026-06-20T00:00:10.896Z",
           "source": "cron",
           "post_url": "",
-          "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
+          "error_summary": "Instagram retry cap reached; verify instagram_business_account repair before resetting execution state.",
           "song": "I Learned It All in Fifteen Seconds",
           "approved": "yes",
           "repair_action": "Reconnect the Instagram Business/Creator account to the Facebook Page or set IG_BUSINESS_ACCOUNT_ID, then push the worker secret and recapture readiness.",
@@ -459,11 +459,11 @@
     },
     "social_scheduler_dry_run": {
       "ok": true,
-      "updated_at": "2026-06-19T23:59:14.570049Z",
+      "updated_at": "2026-06-20T00:07:19.475956Z",
       "http_status": 200,
       "auth_method": "bearer",
-      "requested_scheduled_time": "2026-06-19T23:59:14.278392Z",
-      "checked_at": "2026-06-19T23:59:14.278Z",
+      "requested_scheduled_time": "2026-06-20T00:07:19.204311Z",
+      "checked_at": "2026-06-20T00:07:19.204Z",
       "dry_run": true,
       "due_count": 6,
       "result_count": 6,
@@ -488,7 +488,7 @@
           "reason": "not_approved",
           "post_type": "",
           "attempts": 0,
-          "updated_at": "2026-06-19T23:59:14.749Z",
+          "updated_at": "2026-06-20T00:07:19.655Z",
           "source": "dry-run",
           "error_summary": ""
         },
@@ -499,7 +499,7 @@
           "reason": "not_approved",
           "post_type": "",
           "attempts": 0,
-          "updated_at": "2026-06-19T23:59:14.751Z",
+          "updated_at": "2026-06-20T00:07:19.657Z",
           "source": "dry-run",
           "error_summary": ""
         },
@@ -510,7 +510,7 @@
           "reason": "not_approved",
           "post_type": "",
           "attempts": 0,
-          "updated_at": "2026-06-19T23:59:14.755Z",
+          "updated_at": "2026-06-20T00:07:19.659Z",
           "source": "dry-run",
           "error_summary": ""
         },
@@ -521,7 +521,7 @@
           "reason": "max_attempts_exceeded",
           "post_type": "",
           "attempts": 3,
-          "updated_at": "2026-06-19T23:59:14.758Z",
+          "updated_at": "2026-06-20T00:07:19.662Z",
           "source": "dry-run",
           "error_summary": ""
         },
@@ -532,7 +532,7 @@
           "reason": "tiktok_credentials_missing",
           "post_type": "",
           "attempts": 0,
-          "updated_at": "2026-06-19T23:59:14.761Z",
+          "updated_at": "2026-06-20T00:07:19.664Z",
           "source": "dry-run",
           "error_summary": ""
         },
@@ -543,7 +543,7 @@
           "reason": "max_attempts_exceeded",
           "post_type": "",
           "attempts": 3,
-          "updated_at": "2026-06-19T23:59:14.764Z",
+          "updated_at": "2026-06-20T00:07:19.666Z",
           "source": "dry-run",
           "error_summary": ""
         }
@@ -555,8 +555,8 @@
       "available": true,
       "safe_mode": true,
       "finalized": true,
-      "finished_at": "2026-06-19T23:59:15.533397Z",
-      "duration_seconds": 49.83,
+      "finished_at": "2026-06-20T00:07:20.404132Z",
+      "duration_seconds": 49.12,
       "command_count": 18,
       "passed": 17,
       "failed": 1,
@@ -607,14 +607,14 @@
       "stale": 1,
       "missing": 0,
       "checked_no_change": 0,
-      "checked_at": "2026-06-19T23:59:15.562910+00:00"
+      "checked_at": "2026-06-20T00:07:20.434269+00:00"
     },
     "sources": [
       {
         "name": "release_status",
         "path": "data/distrokid_release_status.json",
         "status": "fresh",
-        "age_hours": 62.6,
+        "age_hours": 62.7,
         "max_age_hours": 72,
         "timestamp": "2026-06-17T09:25:00+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin; update data/distrokid_release_status.json when a public URL is verified."
@@ -623,7 +623,7 @@
         "name": "scheduled_posts",
         "path": "admin/future-posts.json",
         "status": "fresh",
-        "age_hours": 0.4,
+        "age_hours": 0.5,
         "max_age_hours": 72,
         "timestamp": "2026-06-19T23:35:31.943002+00:00",
         "refresh_command": "python3 scripts/sync_future_posts.py"
@@ -634,14 +634,14 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-19T23:59:14.613264+00:00",
+        "timestamp": "2026-06-20T00:07:19.539018+00:00",
         "refresh_command": "python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
         "name": "published_log",
         "path": "admin/content/Published_Log.csv",
         "status": "stale",
-        "age_hours": 299.4,
+        "age_hours": 299.5,
         "max_age_hours": 168,
         "timestamp": "2026-06-07T12:36:37.141276+00:00",
         "refresh_command": "Export or append latest published posts to admin/content/Published_Log.csv."
@@ -650,7 +650,7 @@
         "name": "manual_metrics",
         "path": "data/manual_social_stats.json",
         "status": "fresh",
-        "age_hours": 0.5,
+        "age_hours": 0.6,
         "max_age_hours": 72,
         "timestamp": "2026-06-19T23:30:01.268314+00:00",
         "refresh_command": "Update data/manual_social_stats.json with latest manual metrics."
@@ -661,7 +661,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-19T23:58:27.346000+00:00",
+        "timestamp": "2026-06-20T00:06:33.691000+00:00",
         "refresh_command": "python3 scripts/capture_live_metrics.py"
       },
       {
@@ -670,7 +670,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-19T23:59:14.653642+00:00",
+        "timestamp": "2026-06-20T00:07:19.578115+00:00",
         "refresh_command": "python3 scripts/update_metrics_history.py --refresh-admin"
       },
       {
@@ -679,7 +679,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-19T23:59:12.268603+00:00",
+        "timestamp": "2026-06-20T00:07:18.633814+00:00",
         "refresh_command": "python3 scripts/capture_executor_readiness.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -688,7 +688,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-19T23:59:15.562910+00:00",
+        "timestamp": "2026-06-20T00:07:20.434269+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin"
       },
       {
@@ -697,7 +697,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-19T23:59:14.198531+00:00",
+        "timestamp": "2026-06-20T00:07:19.124570+00:00",
         "refresh_command": "python3 scripts/capture_social_executions.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -706,7 +706,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-19T23:59:14.570049+00:00",
+        "timestamp": "2026-06-20T00:07:19.475956+00:00",
         "refresh_command": "python3 scripts/capture_scheduler_dry_run.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -715,7 +715,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-19T23:59:15.533736+00:00",
+        "timestamp": "2026-06-20T00:07:20.404536+00:00",
         "refresh_command": "python3 scripts/refresh_promo_admin.py"
       },
       {
@@ -724,7 +724,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-19T23:59:15.193577+00:00",
+        "timestamp": "2026-06-20T00:07:20.082064+00:00",
         "refresh_command": "python3 scripts/capture_github_workflow_status.py && python3 scripts/update_promo_engine_status.py"
       }
     ],

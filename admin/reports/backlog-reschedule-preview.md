@@ -1,6 +1,6 @@
 # Backlog Reschedule Preview - Lily Roo
 
-Generated: 2026-06-20T08:59:15.438935+09:00
+Generated: 2026-06-20T09:07:20.319420+09:00
 
 ## Summary
 - Approved backlog rows: **3**
@@ -14,7 +14,7 @@ Generated: 2026-06-20T08:59:15.438935+09:00
 - **Instagram - I Learned It All in Fifteen Seconds** (`FP-AUTO-263`)
   - Current: `2026-06-08T14:05:00-04:00`
   - Proposed: `2026-06-21T10:00:00+09:00`
-  - Blocker: Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.
+  - Blocker: Instagram retry cap reached; verify instagram_business_account repair before resetting execution state.
 - **TikTok - I Learned It All in Fifteen Seconds** (`FP-AUTO-264`)
   - Current: `2026-06-09T21:25:00-04:00`
   - Proposed: `2026-06-22T10:00:00+09:00`
@@ -22,7 +22,7 @@ Generated: 2026-06-20T08:59:15.438935+09:00
 - **Facebook - I Learned It All in Fifteen Seconds** (`FP-AUTO-265`)
   - Current: `2026-06-10T12:30:00-04:00`
   - Proposed: `2026-06-23T10:00:00+09:00`
-  - Blocker: Facebook blocked Page publishing until identity is confirmed in the Facebook app.
+  - Blocker: Facebook retry cap reached; rerun the Facebook dry-run check after identity confirmation.
 
 ## Commands
 - Preview: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24`

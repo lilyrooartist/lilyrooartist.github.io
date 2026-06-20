@@ -28,6 +28,7 @@ MANUAL_DISTRIBUTION_PACKET = ROOT / "data" / "manual_distribution_packet.json"
 MONETIZATION_ACTIVATION_PLAN = ROOT / "data" / "monetization_activation_plan.json"
 BACKLOG_RESCHEDULE_PREVIEW = ROOT / "data" / "backlog_reschedule_preview.json"
 MANUAL_METRIC_TEMPLATE = ROOT / "data" / "manual_metric_collection_template.csv"
+MANUAL_METRIC_PACKET = ROOT / "data" / "manual_metric_collection_packet.json"
 SPOTIFY_SNAPSHOT = ROOT / "data" / "spotify_release_snapshot.json"
 APPLE_MUSIC_SNAPSHOT = ROOT / "data" / "apple_music_release_snapshot.json"
 YOUTUBE_PUBLIC = ROOT / "data" / "youtube_public_snapshot.json"
@@ -517,6 +518,32 @@ def validate_generated_outputs(failures):
                 fail("manual_metric_collection_template.csv row count does not match pending metric KPI", failures)
     else:
         fail("manual_metric_collection_template.csv missing; run scripts/build_manual_metric_collection.py", failures)
+    if MANUAL_METRIC_PACKET.exists():
+        packet = json.loads(MANUAL_METRIC_PACKET.read_text(encoding="utf-8"))
+        summary = packet.get("summary") or {}
+        platforms = packet.get("platforms") or []
+        rows = packet.get("rows") or []
+        if (
+            packet.get("safe_mode") is True
+            and summary.get("pending_field_count") == len(rows)
+            and summary.get("platform_count") == len(platforms)
+            and summary.get("csv_path") == "data/manual_metric_collection_template.csv"
+            and "--from-csv --dry-run" in (summary.get("worksheet_import_preview_command") or "")
+            and "--from-csv --refresh-admin" in (summary.get("worksheet_import_command") or "")
+            and all(
+                platform.get("platform")
+                and platform.get("collection_url")
+                and platform.get("field_count") == len(platform.get("fields") or [])
+                and platform.get("pending_assignments")
+                and platform.get("worksheet_import_preview_command")
+                for platform in platforms
+            )
+        ):
+            ok(f"manual metric collection packet groups {len(platforms)} platform(s)")
+        else:
+            fail("manual_metric_collection_packet.json missing safe grouped metric collection data", failures)
+    else:
+        fail("manual_metric_collection_packet.json missing; run scripts/build_manual_metric_collection.py", failures)
     if MANUAL_METRIC_REPORT.exists():
         report_text = MANUAL_METRIC_REPORT.read_text(encoding="utf-8")
         if "Manual Metric Collection" in report_text and "Pending fields" in report_text and "Open: " in report_text and "--from-csv --refresh-admin" in report_text:
@@ -1207,7 +1234,7 @@ def validate_generated_outputs(failures):
         fail("build_backlog_reschedule_preview.py missing", failures)
     if MANUAL_METRIC_COLLECTION_SCRIPT.exists():
         collection_text = MANUAL_METRIC_COLLECTION_SCRIPT.read_text(encoding="utf-8")
-        if "manual_metric_collection_template.csv" in collection_text and "manual-metric-collection.md" in collection_text and "pending_manual_by_platform" in collection_text and "collection_url" in collection_text and "subprocess" not in collection_text:
+        if "manual_metric_collection_template.csv" in collection_text and "manual_metric_collection_packet.json" in collection_text and "manual-metric-collection.md" in collection_text and "pending_manual_by_platform" in collection_text and "collection_url" in collection_text and "subprocess" not in collection_text:
             ok("manual metric collection builder is review-only")
         else:
             fail("build_manual_metric_collection.py missing worksheet outputs or executes commands", failures)

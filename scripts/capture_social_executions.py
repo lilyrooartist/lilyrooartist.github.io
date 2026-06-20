@@ -36,6 +36,21 @@ def compact_error(value: str) -> str:
     return text[:240]
 
 
+def execution_summary(item: dict) -> str:
+    summary = compact_error(item.get("error", ""))
+    if summary:
+        return summary
+    platform = str(item.get("platform") or "").lower()
+    reason = str(item.get("reason") or "")
+    if reason == "max_attempts_exceeded":
+        if "facebook" in platform:
+            return "Facebook retry cap reached; rerun the Facebook dry-run check after identity confirmation."
+        if "instagram" in platform:
+            return "Instagram retry cap reached; verify instagram_business_account repair before resetting execution state."
+        return "Retry cap reached; repair the platform blocker before resetting execution state."
+    return ""
+
+
 def safe_execution(item: dict) -> dict:
     return {
         "post_id": item.get("post_id", ""),
@@ -46,7 +61,7 @@ def safe_execution(item: dict) -> dict:
         "updated_at": item.get("updated_at", ""),
         "source": item.get("source", ""),
         "post_url": item.get("post_url", ""),
-        "error_summary": compact_error(item.get("error", "")),
+        "error_summary": execution_summary(item),
     }
 
 

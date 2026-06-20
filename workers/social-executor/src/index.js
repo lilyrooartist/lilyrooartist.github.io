@@ -218,6 +218,7 @@ async function executePost(payload, env, options = {}) {
 
 function scheduleAttemptState(payload, existing, options = {}) {
   return {
+    ...existing,
     post_id: payload.postId,
     platform: payload.platform,
     status: "failed",
