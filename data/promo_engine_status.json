@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T02:24:38.354745+00:00",
+  "generated_at": "2026-06-20T02:28:40.143521+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -187,15 +187,15 @@
         "command": "python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impressions_7d=VALUE --refresh-admin"
       }
     ],
-    "live_metrics_updated_at": "2026-06-20T02:23:50.678Z",
+    "live_metrics_updated_at": "2026-06-20T02:28:21.370Z",
     "metrics_history": {
       "snapshot_count": 11,
-      "updated_at": "2026-06-20T02:24:37.426059Z",
+      "updated_at": "2026-06-20T02:28:39.248755Z",
       "latest_date": "2026-06-20",
       "latest": {
         "date": "2026-06-20",
-        "captured_at": "2026-06-20T02:24:37.426059Z",
-        "live_metrics_updated_at": "2026-06-20T02:23:50.678Z",
+        "captured_at": "2026-06-20T02:28:39.248755Z",
+        "live_metrics_updated_at": "2026-06-20T02:28:21.370Z",
         "youtube": {
           "subscribers": 6,
           "total_views": 251,
@@ -282,7 +282,7 @@
     },
     "social_execution_summary": {
       "ok": true,
-      "updated_at": "2026-06-20T02:24:36.995877Z",
+      "updated_at": "2026-06-20T02:28:38.874563Z",
       "http_status": 200,
       "execution_count": 4,
       "posted_count": 0,
@@ -411,11 +411,11 @@
     },
     "social_scheduler_dry_run": {
       "ok": true,
-      "updated_at": "2026-06-20T02:24:37.336376Z",
+      "updated_at": "2026-06-20T02:28:39.181918Z",
       "http_status": 200,
       "auth_method": "bearer",
-      "requested_scheduled_time": "2026-06-20T02:24:37.050009Z",
-      "checked_at": "2026-06-20T02:24:37.050Z",
+      "requested_scheduled_time": "2026-06-20T02:28:38.926005Z",
+      "checked_at": "2026-06-20T02:28:38.926Z",
       "dry_run": true,
       "due_count": 4,
       "result_count": 4,
@@ -438,7 +438,7 @@
           "reason": "not_approved",
           "post_type": "",
           "attempts": 0,
-          "updated_at": "2026-06-20T02:24:37.583Z",
+          "updated_at": "2026-06-20T02:28:39.446Z",
           "source": "dry-run",
           "error_summary": ""
         },
@@ -449,7 +449,7 @@
           "reason": "not_approved",
           "post_type": "",
           "attempts": 0,
-          "updated_at": "2026-06-20T02:24:37.587Z",
+          "updated_at": "2026-06-20T02:28:39.449Z",
           "source": "dry-run",
           "error_summary": ""
         },
@@ -460,7 +460,7 @@
           "reason": "not_approved",
           "post_type": "",
           "attempts": 0,
-          "updated_at": "2026-06-20T02:24:37.590Z",
+          "updated_at": "2026-06-20T02:28:39.452Z",
           "source": "dry-run",
           "error_summary": ""
         },
@@ -471,7 +471,7 @@
           "reason": "tiktok_credentials_missing",
           "post_type": "",
           "attempts": 0,
-          "updated_at": "2026-06-20T02:24:37.595Z",
+          "updated_at": "2026-06-20T02:28:39.455Z",
           "source": "dry-run",
           "error_summary": ""
         }
@@ -483,20 +483,13 @@
       "available": true,
       "safe_mode": true,
       "finalized": true,
-      "finished_at": "2026-06-20T02:24:38.326031Z",
-      "duration_seconds": 48.59,
+      "finished_at": "2026-06-20T02:28:40.116086Z",
+      "duration_seconds": 19.66,
       "command_count": 21,
-      "passed": 20,
-      "failed": 1,
-      "allowed_failures": 1,
-      "failed_commands": [
-        {
-          "name": "verify_pending_store_links",
-          "required": false,
-          "returncode": 124,
-          "stderr_tail": "Timed out after 45 seconds."
-        }
-      ],
+      "passed": 21,
+      "failed": 0,
+      "allowed_failures": 0,
+      "failed_commands": [],
       "action_needed": ""
     },
     "refresh_automation": {
@@ -605,14 +598,14 @@
       "stale": 1,
       "missing": 0,
       "checked_no_change": 0,
-      "checked_at": "2026-06-20T02:24:38.354745+00:00"
+      "checked_at": "2026-06-20T02:28:40.143521+00:00"
     },
     "sources": [
       {
         "name": "release_status",
         "path": "data/distrokid_release_status.json",
         "status": "fresh",
-        "age_hours": 65.0,
+        "age_hours": 65.1,
         "max_age_hours": 72,
         "timestamp": "2026-06-17T09:25:00+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin; update data/distrokid_release_status.json when a public URL is verified."
@@ -621,7 +614,7 @@
         "name": "scheduled_posts",
         "path": "admin/future-posts.json",
         "status": "fresh",
-        "age_hours": 0.9,
+        "age_hours": 1.0,
         "max_age_hours": 72,
         "timestamp": "2026-06-20T01:28:46.696230+00:00",
         "refresh_command": "python3 scripts/sync_future_posts.py"
@@ -632,14 +625,14 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T02:24:37.390475+00:00",
+        "timestamp": "2026-06-20T02:28:39.218318+00:00",
         "refresh_command": "python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
         "name": "published_log",
         "path": "admin/content/Published_Log.csv",
         "status": "stale",
-        "age_hours": 301.8,
+        "age_hours": 301.9,
         "max_age_hours": 168,
         "timestamp": "2026-06-07T12:36:37.141276+00:00",
         "refresh_command": "Preview Worker export with python3 scripts/export_social_executions.py --dry-run; after review run python3 scripts/export_social_executions.py --refresh-admin. For manual posts, log the public URL with scripts/log_manual_distribution.py.",
@@ -657,7 +650,7 @@
         "name": "manual_metrics",
         "path": "data/manual_social_stats.json",
         "status": "fresh",
-        "age_hours": 1.8,
+        "age_hours": 1.9,
         "max_age_hours": 72,
         "timestamp": "2026-06-20T00:37:40.066733+00:00",
         "refresh_command": "Update data/manual_social_stats.json with latest manual metrics."
@@ -668,7 +661,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T02:23:50.678000+00:00",
+        "timestamp": "2026-06-20T02:28:21.370000+00:00",
         "refresh_command": "python3 scripts/capture_live_metrics.py"
       },
       {
@@ -677,7 +670,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T02:24:37.426059+00:00",
+        "timestamp": "2026-06-20T02:28:39.248755+00:00",
         "refresh_command": "python3 scripts/update_metrics_history.py --refresh-admin"
       },
       {
@@ -686,7 +679,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T02:24:35.576103+00:00",
+        "timestamp": "2026-06-20T02:28:37.461443+00:00",
         "refresh_command": "python3 scripts/capture_executor_readiness.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -695,7 +688,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T02:24:38.354745+00:00",
+        "timestamp": "2026-06-20T02:28:40.143521+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin"
       },
       {
@@ -704,7 +697,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T02:24:36.995877+00:00",
+        "timestamp": "2026-06-20T02:28:38.874563+00:00",
         "refresh_command": "python3 scripts/capture_social_executions.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -713,7 +706,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T02:24:37.336376+00:00",
+        "timestamp": "2026-06-20T02:28:39.181918+00:00",
         "refresh_command": "python3 scripts/capture_scheduler_dry_run.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -722,7 +715,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T02:24:38.326454+00:00",
+        "timestamp": "2026-06-20T02:28:40.116488+00:00",
         "refresh_command": "python3 scripts/refresh_promo_admin.py"
       },
       {
@@ -731,7 +724,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T02:24:37.956713+00:00",
+        "timestamp": "2026-06-20T02:28:39.757219+00:00",
         "refresh_command": "python3 scripts/capture_github_workflow_status.py && python3 scripts/update_promo_engine_status.py"
       }
     ],
@@ -883,7 +876,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T02:06:00.436764Z",
+            "updated_at": "2026-06-20T02:28:26.314365Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
           }
         },
@@ -894,7 +887,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T02:06:00.800899Z",
+            "updated_at": "2026-06-20T02:28:26.677023Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
           }
         }
@@ -996,7 +989,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T02:06:02.672429Z",
+            "updated_at": "2026-06-20T02:28:31.846443Z",
             "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
           }
         },
@@ -1018,7 +1011,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T02:06:04.137514Z",
+            "updated_at": "2026-06-20T02:28:37.308169Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
           }
         }

@@ -1228,10 +1228,10 @@ def validate_generated_outputs(failures):
         fail("update_manual_social_stats.py missing", failures)
     if STORE_LINK_VERIFIER.exists():
         verifier_text = STORE_LINK_VERIFIER.read_text(encoding="utf-8")
-        if "search_spotify_release.py" in verifier_text and "capture_apple_music_release.py" in verifier_text and "search_youtube_music_release.py" in verifier_text and "capture_hyperfollow_store_links.py" in verifier_text and "--refresh-admin" in verifier_text:
+        if "search_spotify_release.py" in verifier_text and "capture_apple_music_release.py" in verifier_text and "search_youtube_music_release.py" in verifier_text and "capture_hyperfollow_store_links.py" in verifier_text and "--refresh-admin" in verifier_text and "--step-timeout-seconds" in verifier_text and "TimeoutExpired" in verifier_text and '"timed_out"' in verifier_text:
             ok("pending store link verifier can refresh admin")
         else:
-            fail("verify_pending_store_links.py missing capture or refresh support", failures)
+            fail("verify_pending_store_links.py missing capture, bounded timeout, or refresh support", failures)
     else:
         fail("verify_pending_store_links.py missing", failures)
     if SPOTIFY_SEARCH_VERIFIER.exists():
