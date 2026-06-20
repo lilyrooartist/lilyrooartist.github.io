@@ -1,0 +1,56 @@
+{
+  "generated_at": "2026-06-20T04:11:30.984110Z",
+  "safe_mode": true,
+  "source": {
+    "published_log": "admin/content/Published_Log.csv",
+    "promo_engine_status": "data/promo_engine_status.json",
+    "social_execution_snapshot": "data/social_execution_snapshot.json",
+    "manual_distribution_packet": "data/manual_distribution_packet.json"
+  },
+  "summary": {
+    "published_log_status": "stale",
+    "published_log_rows": 17,
+    "latest_entry_date": "2026-06-07",
+    "latest_entry_platform": "Facebook",
+    "latest_entry_content_id": "FP-AUTO-260",
+    "latest_entry_url": "https://www.facebook.com/903693509504290_122118326547249470",
+    "unlogged_worker_posts": 0,
+    "unlogged_manual_posts": 2,
+    "reconciliation_needed": true,
+    "next_preview_command": "python3 scripts/export_social_executions.py --dry-run",
+    "next_apply_command": ""
+  },
+  "worker_export": {
+    "posted_worker_count": 0,
+    "unlogged_worker_count": 0,
+    "rows": [],
+    "preview_command": "python3 scripts/export_social_executions.py --dry-run",
+    "apply_command": "python3 scripts/export_social_executions.py --refresh-admin"
+  },
+  "manual_logging": {
+    "unlogged_manual_count": 2,
+    "rows": [
+      {
+        "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+        "release": "Twelve Dollars",
+        "platform": "YouTube Community",
+        "status": "waiting_for_review",
+        "requires_public_url": true,
+        "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+        "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
+        "public_community_url": "https://www.youtube.com/@lilyroo.artist/community"
+      },
+      {
+        "id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+        "release": "Analog Myth",
+        "platform": "YouTube Community",
+        "status": "waiting_for_review",
+        "requires_public_url": true,
+        "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+        "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
+        "public_community_url": "https://www.youtube.com/@lilyroo.artist/community"
+      }
+    ],
+    "guardrail": "Only log manual distribution after the public post URL exists."
+  }
+}

@@ -25,6 +25,7 @@ PROMO_CONSISTENCY_AUDIT = ROOT / "data" / "promo_consistency_audit.json"
 TIKTOK_SETUP_PREFLIGHT = ROOT / "data" / "tiktok_setup_preflight.json"
 TIKTOK_REPAIR_RUNBOOK = ROOT / "data" / "tiktok_repair_runbook.json"
 PROMO_OPERATIONS_PACKET = ROOT / "data" / "promo_operations_packet.json"
+PUBLISHED_LOG_RECONCILIATION = ROOT / "data" / "published_log_reconciliation.json"
 HUMAN_HANDOFF_PACKET = ROOT / "data" / "human_handoff_packet.json"
 PROMOTION_BLOCKER_LEDGER = ROOT / "data" / "promotion_blocker_ledger.json"
 PLATFORM_REPAIR_STATUS = ROOT / "data" / "platform_repair_status.json"
@@ -70,6 +71,7 @@ PROMO_CONSISTENCY_SCRIPT = ROOT / "scripts" / "build_promo_consistency_audit.py"
 TIKTOK_SETUP_PREFLIGHT_SCRIPT = ROOT / "scripts" / "build_tiktok_setup_preflight.py"
 TIKTOK_REPAIR_RUNBOOK_SCRIPT = ROOT / "scripts" / "build_tiktok_repair_runbook.py"
 PROMO_OPERATIONS_SCRIPT = ROOT / "scripts" / "build_promo_operations_packet.py"
+PUBLISHED_LOG_RECONCILIATION_SCRIPT = ROOT / "scripts" / "build_published_log_reconciliation.py"
 HUMAN_HANDOFF_SCRIPT = ROOT / "scripts" / "build_human_handoff_packet.py"
 PROMOTION_BLOCKER_LEDGER_SCRIPT = ROOT / "scripts" / "build_promotion_blocker_ledger.py"
 PLATFORM_REPAIR_SCRIPT = ROOT / "scripts" / "build_platform_repair_status.py"
@@ -85,6 +87,7 @@ PROMO_CONSISTENCY_REPORT = ROOT / "admin" / "reports" / "promo-consistency-audit
 TIKTOK_SETUP_PREFLIGHT_REPORT = ROOT / "admin" / "reports" / "tiktok-setup-preflight.md"
 TIKTOK_REPAIR_RUNBOOK_REPORT = ROOT / "admin" / "reports" / "tiktok-repair-runbook.md"
 PROMO_OPERATIONS_REPORT = ROOT / "admin" / "reports" / "promo-operations-packet.md"
+PUBLISHED_LOG_RECONCILIATION_REPORT = ROOT / "admin" / "reports" / "published-log-reconciliation.md"
 HUMAN_HANDOFF_REPORT = ROOT / "admin" / "reports" / "human-handoff-packet.md"
 PROMOTION_BLOCKER_LEDGER_REPORT = ROOT / "admin" / "reports" / "promotion-blocker-ledger.md"
 PLATFORM_REPAIR_REPORT = ROOT / "admin" / "reports" / "platform-repair-status.md"
@@ -528,6 +531,29 @@ def validate_generated_outputs(failures):
             fail("promo_operations_packet.json missing checked store re-check context", failures)
     else:
         fail("promo_operations_packet.json missing; run scripts/build_promo_operations_packet.py", failures)
+    if PUBLISHED_LOG_RECONCILIATION.exists():
+        reconciliation = json.loads(PUBLISHED_LOG_RECONCILIATION.read_text(encoding="utf-8"))
+        reconciliation_summary = reconciliation.get("summary") or {}
+        published_rows = read_csv(CONTENT / "Published_Log.csv") if (CONTENT / "Published_Log.csv").exists() else []
+        worker = reconciliation.get("worker_export") or {}
+        manual = reconciliation.get("manual_logging") or {}
+        manual_packet = json.loads(MANUAL_DISTRIBUTION_PACKET.read_text(encoding="utf-8")) if MANUAL_DISTRIBUTION_PACKET.exists() else {}
+        expected_unlogged_manual = int((manual_packet.get("summary") or {}).get("unlogged_manual_count") or 0)
+        if (
+            reconciliation.get("safe_mode") is True
+            and reconciliation_summary.get("published_log_rows") == len(published_rows)
+            and reconciliation_summary.get("unlogged_worker_posts") == worker.get("unlogged_worker_count")
+            and reconciliation_summary.get("unlogged_manual_posts") == manual.get("unlogged_manual_count") == expected_unlogged_manual
+            and "export_social_executions.py --dry-run" in (worker.get("preview_command") or "")
+            and "export_social_executions.py --refresh-admin" in (worker.get("apply_command") or "")
+            and all("PUBLIC_URL" in (row.get("log_preview_command") or "") and "--apply" in (row.get("log_apply_command") or "") for row in manual.get("rows") or [])
+            and manual.get("guardrail")
+        ):
+            ok("published log reconciliation packages Worker export and manual URL logging checks")
+        else:
+            fail("published_log_reconciliation.json missing safe published-log reconciliation data", failures)
+    else:
+        fail("published_log_reconciliation.json missing; run scripts/build_published_log_reconciliation.py", failures)
     if HUMAN_HANDOFF_PACKET.exists():
         handoff = json.loads(HUMAN_HANDOFF_PACKET.read_text(encoding="utf-8"))
         summary = handoff.get("summary") or {}
@@ -1721,6 +1747,14 @@ def validate_generated_outputs(failures):
             fail("build_promo_operations_packet.py missing review packet outputs or executes commands", failures)
     else:
         fail("build_promo_operations_packet.py missing", failures)
+    if PUBLISHED_LOG_RECONCILIATION_SCRIPT.exists():
+        reconciliation_text = PUBLISHED_LOG_RECONCILIATION_SCRIPT.read_text(encoding="utf-8")
+        if "published_log_reconciliation.json" in reconciliation_text and "published-log-reconciliation.md" in reconciliation_text and "export_social_executions.py --dry-run" in reconciliation_text and "manual_distribution_packet.json" in reconciliation_text and "log_preview_command" in reconciliation_text and "subprocess" not in reconciliation_text:
+            ok("published log reconciliation builder is review-only")
+        else:
+            fail("build_published_log_reconciliation.py missing safe reconciliation outputs or executes commands", failures)
+    else:
+        fail("build_published_log_reconciliation.py missing", failures)
     if HUMAN_HANDOFF_SCRIPT.exists():
         handoff_text = HUMAN_HANDOFF_SCRIPT.read_text(encoding="utf-8")
         if "human_handoff_packet.json" in handoff_text and "human-handoff-packet.md" in handoff_text and "promotion_blocker_ledger.json" in handoff_text and "manual_metric_collection_packet.json" in handoff_text and "manual_distribution_packet.json" in handoff_text and "scheduled_approval_packet.json" in handoff_text and "platform_repair_status.json" in handoff_text and "tiktok_setup_preflight.json" in handoff_text and "action_docket" in handoff_text and "build_action_docket" in handoff_text and "subprocess" not in handoff_text:
@@ -1849,6 +1883,14 @@ def validate_generated_outputs(failures):
             fail("promo operations markdown report missing expected sections", failures)
     else:
         fail("promo-operations-packet.md missing", failures)
+    if PUBLISHED_LOG_RECONCILIATION_REPORT.exists():
+        reconciliation_report_text = PUBLISHED_LOG_RECONCILIATION_REPORT.read_text(encoding="utf-8")
+        if "Published Log Reconciliation" in reconciliation_report_text and "Worker Export" in reconciliation_report_text and "Manual Logging" in reconciliation_report_text and "Guardrails" in reconciliation_report_text:
+            ok("published log reconciliation markdown report present")
+        else:
+            fail("published-log-reconciliation.md missing expected sections", failures)
+    else:
+        fail("published-log-reconciliation.md missing", failures)
     if HUMAN_HANDOFF_REPORT.exists():
         handoff_report_text = HUMAN_HANDOFF_REPORT.read_text(encoding="utf-8")
         if "Human Handoff Packet" in handoff_report_text and "Action Docket" in handoff_report_text and "Tasks" in handoff_report_text and "Guardrails" in handoff_report_text:
@@ -1958,6 +2000,7 @@ def validate_admin_execution_feedback(failures):
         "scheduler dry-run shown": "Scheduler dry-run:" in text and "social_scheduler_dry_run" in text,
         "unlock impact shown": "Unlock impact:" in text and "Immediate unlock:" in text and "Largest unlock lane:" in text,
         "handoff action docket shown": "Action docket:" in text and "First ready step:" in text,
+        "published log reconciliation shown": "Published log reconciliation" in text and "Worker export" in text and "Manual Logging" in text,
     }
     missing_platform = [label for label, present in platform_checks.items() if not present]
     if missing_platform:

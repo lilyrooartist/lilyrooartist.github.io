@@ -163,6 +163,11 @@ FINALIZE_STEPS = [
         "required": True,
     },
     {
+        "name": "build_published_log_reconciliation",
+        "command": ["python3", "scripts/build_published_log_reconciliation.py"],
+        "required": True,
+    },
+    {
         "name": "build_promo_consistency_audit",
         "command": ["python3", "scripts/build_promo_consistency_audit.py"],
         "required": True,
