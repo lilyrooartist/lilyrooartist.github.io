@@ -1,6 +1,6 @@
 # Promotion Blocker Ledger - Lily Roo
 
-Generated: 2026-06-20T02:28:40.086866Z
+Generated: 2026-06-20T02:32:46.944814Z
 
 ## Summary
 - Open blockers: **12**
@@ -18,6 +18,7 @@ Generated: 2026-06-20T02:28:40.086866Z
   - Preview/check: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 --dry-run`
   - Apply/log after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 --refresh-admin`
   - Guardrail: Approval does not guarantee posting if the platform executor is still blocked.
+  - Impact: resolves blocker: True; downstream: auto executor eligible after approval; checked batch resolves 2 blocker(s)
 - **[high] Approve scheduled TikTok row** (`approval-FP-AUTO-259`)
   - Owner: `tod`; status: `blocked_by_review_checks`; category: `approval`
   - Evidence: FP-AUTO-259 is blocked by not_approved in executor state. Failed review checks: platform_readiness: Executor readiness snapshot marks platform blocked. Missing secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.
@@ -26,6 +27,7 @@ Generated: 2026-06-20T02:28:40.086866Z
   - Preview/check: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --dry-run`
   - Apply/log after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --refresh-admin`
   - Guardrail: Approval does not guarantee posting if the platform executor is still blocked.
+  - Impact: resolves blocker: False
 - **[high] Repair TikTok executor** (`platform-FP-AUTO-264`)
   - Owner: `tod`; status: `blocked`; category: `platform_repair`
   - Evidence: tiktok_credentials_missing Missing secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Local secret source is missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.
@@ -48,6 +50,7 @@ Generated: 2026-06-20T02:28:40.086866Z
   - Preview/check: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-261 --dry-run`
   - Apply/log after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-261 --refresh-admin`
   - Guardrail: Approval does not guarantee posting if the platform executor is still blocked.
+  - Impact: resolves blocker: True; downstream: manual distribution can proceed after approval; checked batch resolves 2 blocker(s)
 - **[medium] Manually post YouTube Community copy** (`manual-FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY`)
   - Owner: `tod`; status: `waiting_for_review`; category: `manual_distribution`
   - Evidence: FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY is packaged for manual distribution.

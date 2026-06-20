@@ -684,12 +684,16 @@ def validate_generated_outputs(failures):
         ledger_rows = ledger.get("rows") or []
         owner_counts = summary.get("owner_counts") or {}
         category_counts = summary.get("category_counts") or {}
+        projection = summary.get("next_resolution_projection") or {}
         if (
             ledger.get("safe_mode") is True
             and summary.get("open_blocker_count") == len(ledger_rows)
             and summary.get("urgent_count") == len([row for row in ledger_rows if row.get("urgency") in {"critical", "high"}])
             and owner_counts
             and category_counts
+            and projection.get("kind") == "checked_scheduled_approval_batch"
+            and isinstance(projection.get("blockers_resolved"), int)
+            and isinstance(projection.get("approval_blockers_after"), int)
             and all(
                 row.get("id")
                 and row.get("blocker_id") == row.get("id")
@@ -700,6 +704,7 @@ def validate_generated_outputs(failures):
                 and row.get("evidence")
                 and row.get("next_step")
                 and row.get("source_path")
+                and isinstance(row.get("impact") or {}, dict)
                 for row in ledger_rows
             )
         ):
@@ -718,10 +723,12 @@ def validate_generated_outputs(failures):
                 (
                     item.get("review_check_passed")
                     and (approval_rows.get(f"approval-{item.get('id')}") or {}).get("status") == "ready_for_reviewed_approval"
+                    and ((approval_rows.get(f"approval-{item.get('id')}") or {}).get("impact") or {}).get("resolves_blocker") is True
                 )
                 or (
                     not item.get("review_check_passed")
                     and (approval_rows.get(f"approval-{item.get('id')}") or {}).get("status") == "blocked_by_review_checks"
+                    and ((approval_rows.get(f"approval-{item.get('id')}") or {}).get("impact") or {}).get("resolves_blocker") is False
                 )
                 for item in scheduled_rows
             ):
@@ -1403,7 +1410,7 @@ def validate_generated_outputs(failures):
         fail("build_promo_operations_packet.py missing", failures)
     if PROMOTION_BLOCKER_LEDGER_SCRIPT.exists():
         ledger_text = PROMOTION_BLOCKER_LEDGER_SCRIPT.read_text(encoding="utf-8")
-        if "promotion_blocker_ledger.json" in ledger_text and "promotion-blocker-ledger.md" in ledger_text and "owner_counts" in ledger_text and "category_counts" in ledger_text and "manual_metric_collection_packet.json" in ledger_text and "subprocess" not in ledger_text:
+        if "promotion_blocker_ledger.json" in ledger_text and "promotion-blocker-ledger.md" in ledger_text and "owner_counts" in ledger_text and "category_counts" in ledger_text and "manual_metric_collection_packet.json" in ledger_text and "next_resolution_projection" in ledger_text and "approval_projection" in ledger_text and "subprocess" not in ledger_text:
             ok("promotion blocker ledger builder is review-only")
         else:
             fail("build_promotion_blocker_ledger.py missing ledger outputs or executes commands", failures)

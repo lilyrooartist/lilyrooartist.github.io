@@ -43,6 +43,7 @@ def row(
     release: str = "",
     external_url: str = "",
     guardrail: str = "",
+    impact: dict | None = None,
 ) -> dict:
     return {
         "id": blocker_id,
@@ -61,6 +62,31 @@ def row(
         "source_path": source_path,
         "external_url": external_url,
         "guardrail": guardrail,
+        "impact": impact or {},
+    }
+
+
+def approval_projection(summary: dict, rows: list[dict]) -> dict:
+    checked_ids = summary.get("checked_batch_ids") or []
+    blocked_ids = summary.get("blocked_review_ids") or []
+    checked_effect = summary.get("checked_batch_effect") or {}
+    checked_rows = [item for item in rows if item.get("id") in checked_ids]
+    auto_count = sum(1 for item in checked_rows if item.get("execution_mode") == "auto")
+    manual_count = sum(1 for item in checked_rows if item.get("execution_mode") == "manual")
+    return {
+        "kind": "checked_scheduled_approval_batch",
+        "label": "Checked scheduled approval batch",
+        "checked_ids": checked_ids,
+        "blocked_ids_retained": blocked_ids,
+        "blockers_resolved": len(checked_ids),
+        "approval_blockers_before": int(summary.get("approval_blocker_count") or 0),
+        "approval_blockers_after": len(blocked_ids),
+        "auto_rows_unblocked": auto_count,
+        "manual_rows_unblocked": manual_count,
+        "effect_count": int(checked_effect.get("change_count") or len(checked_ids)),
+        "preview_command": summary.get("checked_batch_preview_command") or "",
+        "apply_command": summary.get("checked_batch_apply_command") or "",
+        "guardrail": "Human review is still required; blocked review IDs stay excluded from the checked batch.",
     }
 
 
@@ -104,6 +130,7 @@ def add_platform_repairs(rows: list[dict]) -> None:
 def add_scheduled_approvals(rows: list[dict]) -> None:
     packet = read_json(SCHEDULED_APPROVAL, {})
     summary = packet.get("summary") or {}
+    projection = approval_projection(summary, packet.get("rows") or [])
     checked_preview = summary.get("checked_batch_preview_command") or ""
     checked_apply = summary.get("checked_batch_apply_command") or ""
     for item in packet.get("rows") or []:
@@ -116,6 +143,14 @@ def add_scheduled_approvals(rows: list[dict]) -> None:
         if checks_passed:
             status = "ready_for_reviewed_approval"
             evidence = f"{evidence} Automated review checks passed."
+            impact = {
+                "kind": "approval_blocker_resolution",
+                "resolves_blocker": True,
+                "checked_batch_member": item.get("id") in (projection.get("checked_ids") or []),
+                "blockers_resolved_by_checked_batch": projection.get("blockers_resolved") or 0,
+                "approval_blockers_after_checked_batch": projection.get("approval_blockers_after") or 0,
+                "downstream": "auto executor eligible after approval" if item.get("execution_mode") == "auto" else "manual distribution can proceed after approval",
+            }
             if checked_preview and checked_apply:
                 next_step = f"Use the checked batch after human review: preview `{checked_preview}`, then apply `{checked_apply}`."
         elif failed_checks:
@@ -123,6 +158,18 @@ def add_scheduled_approvals(rows: list[dict]) -> None:
             failed = "; ".join(f"{check.get('name')}: {check.get('detail')}" for check in failed_checks)
             evidence = f"{evidence} Failed review checks: {failed}"
             next_step = "Resolve failed review checks before approving this scheduled row."
+            impact = {
+                "kind": "approval_blocker_resolution",
+                "resolves_blocker": False,
+                "checked_batch_member": False,
+                "reason": "Review checks failed; this row remains excluded from the checked batch.",
+            }
+        else:
+            impact = {
+                "kind": "approval_blocker_resolution",
+                "resolves_blocker": False,
+                "checked_batch_member": False,
+            }
         rows.append(row(
             blocker_id=f"approval-{item.get('id')}",
             title=f"Approve scheduled {item.get('platform') or 'post'} row",
@@ -139,6 +186,7 @@ def add_scheduled_approvals(rows: list[dict]) -> None:
             source_path=str(SCHEDULED_APPROVAL.relative_to(ROOT)),
             external_url=item.get("asset_url") or "",
             guardrail="Approval does not guarantee posting if the platform executor is still blocked.",
+            impact=impact,
         ))
 
 
@@ -261,6 +309,17 @@ def build_markdown(payload: dict) -> str:
             lines.append(f"  - Apply/log after review: `{item['apply_command']}`")
         if item.get("guardrail"):
             lines.append(f"  - Guardrail: {item['guardrail']}")
+        impact = item.get("impact") or {}
+        if impact.get("kind"):
+            impact_bits = []
+            if "resolves_blocker" in impact:
+                impact_bits.append(f"resolves blocker: {impact.get('resolves_blocker')}")
+            if impact.get("downstream"):
+                impact_bits.append(f"downstream: {impact.get('downstream')}")
+            if impact.get("blockers_resolved_by_checked_batch") is not None:
+                impact_bits.append(f"checked batch resolves {impact.get('blockers_resolved_by_checked_batch')} blocker(s)")
+            if impact_bits:
+                lines.append(f"  - Impact: {'; '.join(impact_bits)}")
     lines.extend([
         "",
         "## Guardrails",
@@ -323,12 +382,18 @@ def build_ledger() -> dict:
         item.get("category") or "",
         item.get("title") or "",
     ))
+    scheduled_packet = read_json(SCHEDULED_APPROVAL, {})
+    next_resolution_projection = approval_projection(
+        scheduled_packet.get("summary") or {},
+        scheduled_packet.get("rows") or [],
+    )
     summary = {
         "open_blocker_count": len(rows),
         "urgent_count": sum(1 for item in rows if item.get("urgency") in {"critical", "high"}),
         "owner_counts": grouped_counts(rows, "owner"),
         "category_counts": grouped_counts(rows, "category"),
         "status_counts": grouped_counts(rows, "status"),
+        "next_resolution_projection": next_resolution_projection,
         "sources": [
             str(BACKLOG_RESCHEDULE.relative_to(ROOT)),
             str(PLATFORM_REPAIR.relative_to(ROOT)),

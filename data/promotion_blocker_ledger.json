@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T02:28:40.086866Z",
+  "generated_at": "2026-06-20T02:32:46.944814Z",
   "safe_mode": true,
   "summary": {
     "open_blocker_count": 12,
@@ -21,6 +21,26 @@
       "ready_for_reviewed_approval": 2,
       "waiting_for_manual_values": 5,
       "waiting_for_review": 2
+    },
+    "next_resolution_projection": {
+      "kind": "checked_scheduled_approval_batch",
+      "label": "Checked scheduled approval batch",
+      "checked_ids": [
+        "FP-AUTO-258",
+        "FP-AUTO-261"
+      ],
+      "blocked_ids_retained": [
+        "FP-AUTO-259"
+      ],
+      "blockers_resolved": 2,
+      "approval_blockers_before": 3,
+      "approval_blockers_after": 1,
+      "auto_rows_unblocked": 1,
+      "manual_rows_unblocked": 1,
+      "effect_count": 2,
+      "preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --dry-run",
+      "apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --refresh-admin",
+      "guardrail": "Human review is still required; blocked review IDs stay excluded from the checked batch."
     },
     "sources": [
       "data/backlog_reschedule_preview.json",
@@ -47,7 +67,15 @@
       "apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 --refresh-admin",
       "source_path": "data/scheduled_approval_packet.json",
       "external_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
-      "guardrail": "Approval does not guarantee posting if the platform executor is still blocked."
+      "guardrail": "Approval does not guarantee posting if the platform executor is still blocked.",
+      "impact": {
+        "kind": "approval_blocker_resolution",
+        "resolves_blocker": true,
+        "checked_batch_member": true,
+        "blockers_resolved_by_checked_batch": 2,
+        "approval_blockers_after_checked_batch": 1,
+        "downstream": "auto executor eligible after approval"
+      }
     },
     {
       "id": "approval-FP-AUTO-259",
@@ -65,7 +93,13 @@
       "apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --refresh-admin",
       "source_path": "data/scheduled_approval_packet.json",
       "external_url": "https://www.lilyroo.com/assets/ig/01_i_learned_it_all_60s.mp4",
-      "guardrail": "Approval does not guarantee posting if the platform executor is still blocked."
+      "guardrail": "Approval does not guarantee posting if the platform executor is still blocked.",
+      "impact": {
+        "kind": "approval_blocker_resolution",
+        "resolves_blocker": false,
+        "checked_batch_member": false,
+        "reason": "Review checks failed; this row remains excluded from the checked batch."
+      }
     },
     {
       "id": "platform-FP-AUTO-264",
@@ -83,7 +117,8 @@
       "apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
       "source_path": "data/platform_repair_status.json",
       "external_url": "",
-      "guardrail": "Run retry resets only after the external platform repair is verified."
+      "guardrail": "Run retry resets only after the external platform repair is verified.",
+      "impact": {}
     },
     {
       "id": "backlog-reschedule",
@@ -101,7 +136,8 @@
       "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --apply --refresh-admin",
       "source_path": "data/backlog_reschedule_preview.json",
       "external_url": "",
-      "guardrail": "The apply command refuses known blocked rows unless deliberately overridden."
+      "guardrail": "The apply command refuses known blocked rows unless deliberately overridden.",
+      "impact": {}
     },
     {
       "id": "approval-FP-AUTO-261",
@@ -119,7 +155,15 @@
       "apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-261 --refresh-admin",
       "source_path": "data/scheduled_approval_packet.json",
       "external_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
-      "guardrail": "Approval does not guarantee posting if the platform executor is still blocked."
+      "guardrail": "Approval does not guarantee posting if the platform executor is still blocked.",
+      "impact": {
+        "kind": "approval_blocker_resolution",
+        "resolves_blocker": true,
+        "checked_batch_member": true,
+        "blockers_resolved_by_checked_batch": 2,
+        "approval_blockers_after_checked_batch": 1,
+        "downstream": "manual distribution can proceed after approval"
+      }
     },
     {
       "id": "manual-FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
@@ -137,7 +181,8 @@
       "apply_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
       "source_path": "data/manual_distribution_packet.json",
       "external_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
-      "guardrail": "Manual posting happens outside this repo; only log the URL after the post is live. URL logging command after posting: python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin"
+      "guardrail": "Manual posting happens outside this repo; only log the URL after the post is live. URL logging command after posting: python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
+      "impact": {}
     },
     {
       "id": "manual-FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
@@ -155,7 +200,8 @@
       "apply_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin",
       "source_path": "data/manual_distribution_packet.json",
       "external_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
-      "guardrail": "Manual posting happens outside this repo; only log the URL after the post is live. URL logging command after posting: python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin"
+      "guardrail": "Manual posting happens outside this repo; only log the URL after the post is live. URL logging command after posting: python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
+      "impact": {}
     },
     {
       "id": "metrics-facebook",
@@ -173,7 +219,8 @@
       "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
       "source_path": "data/manual_metric_collection_packet.json",
       "external_url": "https://www.facebook.com/903693509504290",
-      "guardrail": "Do not guess analytics values; import only values copied from the platform source."
+      "guardrail": "Do not guess analytics values; import only values copied from the platform source.",
+      "impact": {}
     },
     {
       "id": "metrics-instagram",
@@ -191,7 +238,8 @@
       "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
       "source_path": "data/manual_metric_collection_packet.json",
       "external_url": "https://www.instagram.com/professional_dashboard/",
-      "guardrail": "Do not guess analytics values; import only values copied from the platform source."
+      "guardrail": "Do not guess analytics values; import only values copied from the platform source.",
+      "impact": {}
     },
     {
       "id": "metrics-spotify",
@@ -209,7 +257,8 @@
       "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
       "source_path": "data/manual_metric_collection_packet.json",
       "external_url": "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a",
-      "guardrail": "Do not guess analytics values; import only values copied from the platform source."
+      "guardrail": "Do not guess analytics values; import only values copied from the platform source.",
+      "impact": {}
     },
     {
       "id": "metrics-tiktok",
@@ -227,7 +276,8 @@
       "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
       "source_path": "data/manual_metric_collection_packet.json",
       "external_url": "https://www.tiktok.com/creator-center/analytics",
-      "guardrail": "Do not guess analytics values; import only values copied from the platform source."
+      "guardrail": "Do not guess analytics values; import only values copied from the platform source.",
+      "impact": {}
     },
     {
       "id": "metrics-x",
@@ -245,7 +295,8 @@
       "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
       "source_path": "data/manual_metric_collection_packet.json",
       "external_url": "https://analytics.x.com/",
-      "guardrail": "Do not guess analytics values; import only values copied from the platform source."
+      "guardrail": "Do not guess analytics values; import only values copied from the platform source.",
+      "impact": {}
     }
   ]
 }
