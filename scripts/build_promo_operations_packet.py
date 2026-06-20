@@ -341,6 +341,7 @@ def apply_actions(plan):
 def scheduled_approval_batch_actions(packet):
     summary = packet.get("summary") or {}
     decision_manifest = packet.get("approval_decision_manifest") or {}
+    decisions = decision_manifest.get("decisions") or []
     preview_command = summary.get("checked_batch_preview_command") or summary.get("batch_preview_command") or ""
     apply_command = summary.get("checked_batch_apply_command") or summary.get("batch_apply_command") or ""
     blocker_count = int(summary.get("approval_blocker_count") or 0)
@@ -352,6 +353,27 @@ def scheduled_approval_batch_actions(packet):
     note = "Review all passing rows first. The checked batch excludes rows with failed review checks."
     if not checked_count:
         note = "Review all copy, assets, links, and platform readiness first. Apply only after human approval."
+    ready_decisions = [item for item in decisions if item.get("decision") == "ready_to_approve"]
+    held_decisions = [item for item in decisions if item.get("decision") == "held"]
+    manual_dispatch_ids = [item.get("id") for item in ready_decisions if item.get("manual_dispatch_required")]
+    approval_impact = {
+        "ready_ids": decision_manifest.get("ready_ids") or [],
+        "held_ids": decision_manifest.get("held_ids") or [],
+        "checked_batch_ids": summary.get("checked_batch_ids") or [],
+        "blocked_review_ids": summary.get("blocked_review_ids") or [],
+        "expected_effect": decision_manifest.get("expected_checked_batch_effect") or {},
+        "change_count": int((decision_manifest.get("expected_checked_batch_effect") or {}).get("change_count") or 0),
+        "auto_rows_unblocked": sum(1 for item in ready_decisions if item.get("execution_mode") == "auto"),
+        "manual_rows_unblocked": sum(1 for item in ready_decisions if item.get("execution_mode") == "manual"),
+        "manual_dispatch_ids": [post_id for post_id in manual_dispatch_ids if post_id],
+        "held_repair_ids": [item.get("id") for item in held_decisions if item.get("id")],
+        "post_approval_next_steps": {
+            item.get("id"): item.get("post_approval_next_step")
+            for item in decisions
+            if item.get("id") and item.get("post_approval_next_step")
+        },
+        "guardrail": decision_manifest.get("guardrail") or "",
+    }
     return [
         command_row(
             label,
@@ -369,6 +391,7 @@ def scheduled_approval_batch_actions(packet):
                 "manual_count": int(summary.get("manual_count") or 0),
                 "apply_command": apply_command,
                 "approval_decision_manifest": decision_manifest,
+                "approval_impact": approval_impact,
                 "decision_ready_ids": decision_manifest.get("ready_ids") or [],
                 "decision_held_ids": decision_manifest.get("held_ids") or [],
                 "decision_guardrail": decision_manifest.get("guardrail") or "",
@@ -527,6 +550,17 @@ def build_markdown(packet):
                 lines.append(f"  - Decision manifest: ready `{ready_ids}`; held `{held_ids}`")
             if context.get("decision_guardrail"):
                 lines.append(f"  - Decision guardrail: {context['decision_guardrail']}")
+            approval_impact = context.get("approval_impact") or {}
+            if approval_impact:
+                lines.append(
+                    "  - Approval impact: "
+                    f"{approval_impact.get('change_count', 0)} checked change(s); "
+                    f"{approval_impact.get('auto_rows_unblocked', 0)} auto row(s), "
+                    f"{approval_impact.get('manual_rows_unblocked', 0)} manual row(s); "
+                    f"held `{', '.join(approval_impact.get('held_repair_ids') or []) or 'none'}`"
+                )
+                if approval_impact.get("manual_dispatch_ids"):
+                    lines.append(f"  - Manual dispatch after approval: `{', '.join(approval_impact['manual_dispatch_ids'])}`")
             if "public_posting_approved" in context:
                 lines.append(f"  - Public posting approved: `{context.get('public_posting_approved')}`")
             if action.get("command"):

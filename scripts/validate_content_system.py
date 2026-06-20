@@ -427,6 +427,9 @@ def validate_generated_outputs(failures):
         ]
         scheduled_packet = json.loads(SCHEDULED_APPROVAL_PACKET.read_text(encoding="utf-8")) if SCHEDULED_APPROVAL_PACKET.exists() else {}
         scheduled_manifest = scheduled_packet.get("approval_decision_manifest") or {}
+        scheduled_decisions = scheduled_manifest.get("decisions") or []
+        ready_decisions = [item for item in scheduled_decisions if item.get("decision") == "ready_to_approve"]
+        held_decisions = [item for item in scheduled_decisions if item.get("decision") == "held"]
         if int((scheduled_packet.get("summary") or {}).get("approval_blocker_count") or 0):
             if (
                 scheduled_batch_actions
@@ -449,6 +452,23 @@ def validate_generated_outputs(failures):
                 ok("promo operations packet includes scheduled approval batch preview")
             else:
                 fail("promo_operations_packet.json missing scheduled approval batch preview", failures)
+            if all(
+                ((action.get("context") or {}).get("approval_impact") or {}).get("ready_ids") == (scheduled_manifest.get("ready_ids") or [])
+                and ((action.get("context") or {}).get("approval_impact") or {}).get("held_ids") == (scheduled_manifest.get("held_ids") or [])
+                and ((action.get("context") or {}).get("approval_impact") or {}).get("checked_batch_ids") == ((scheduled_packet.get("summary") or {}).get("checked_batch_ids") or [])
+                and ((action.get("context") or {}).get("approval_impact") or {}).get("blocked_review_ids") == ((scheduled_packet.get("summary") or {}).get("blocked_review_ids") or [])
+                and ((action.get("context") or {}).get("approval_impact") or {}).get("expected_effect") == (scheduled_manifest.get("expected_checked_batch_effect") or {})
+                and ((action.get("context") or {}).get("approval_impact") or {}).get("change_count") == int((scheduled_manifest.get("expected_checked_batch_effect") or {}).get("change_count") or 0)
+                and ((action.get("context") or {}).get("approval_impact") or {}).get("auto_rows_unblocked") == sum(1 for item in ready_decisions if item.get("execution_mode") == "auto")
+                and ((action.get("context") or {}).get("approval_impact") or {}).get("manual_rows_unblocked") == sum(1 for item in ready_decisions if item.get("execution_mode") == "manual")
+                and ((action.get("context") or {}).get("approval_impact") or {}).get("manual_dispatch_ids") == [item.get("id") for item in ready_decisions if item.get("manual_dispatch_required") and item.get("id")]
+                and ((action.get("context") or {}).get("approval_impact") or {}).get("held_repair_ids") == [item.get("id") for item in held_decisions if item.get("id")]
+                and "--checked-batch" in (((action.get("context") or {}).get("approval_impact") or {}).get("guardrail") or "")
+                for action in scheduled_batch_actions
+            ):
+                ok("promo operations packet mirrors scheduled approval impact")
+            else:
+                fail("promo_operations_packet.json missing scheduled approval impact summary", failures)
         approval_review_actions = [
             action for action in actions
             if action.get("kind") == "approval_review"

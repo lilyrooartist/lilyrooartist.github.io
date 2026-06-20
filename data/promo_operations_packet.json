@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T05:32:31.808047Z",
+  "generated_at": "2026-06-20T05:36:25.603631Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -161,6 +161,71 @@
         },
         "review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
         "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+        "guardrail": "Only ready_to_approve decisions may be applied through --checked-batch; held rows require repair first."
+      },
+      "approval_impact": {
+        "ready_ids": [
+          "FP-AUTO-258",
+          "FP-AUTO-261"
+        ],
+        "held_ids": [
+          "FP-AUTO-259"
+        ],
+        "checked_batch_ids": [
+          "FP-AUTO-258",
+          "FP-AUTO-261"
+        ],
+        "blocked_review_ids": [
+          "FP-AUTO-259"
+        ],
+        "expected_effect": {
+          "row_count": 2,
+          "change_count": 2,
+          "ids": [
+            "FP-AUTO-258",
+            "FP-AUTO-261"
+          ],
+          "effects": [
+            {
+              "id": "FP-AUTO-258",
+              "platform": "Instagram",
+              "execution_mode": "auto",
+              "effect": {
+                "field": "approved",
+                "from": "no",
+                "to": "yes",
+                "changed": true,
+                "summary": "approved 'no' -> 'yes'"
+              }
+            },
+            {
+              "id": "FP-AUTO-261",
+              "platform": "YouTube Community",
+              "execution_mode": "manual",
+              "effect": {
+                "field": "approved",
+                "from": "no",
+                "to": "yes",
+                "changed": true,
+                "summary": "approved 'no' -> 'yes'"
+              }
+            }
+          ]
+        },
+        "change_count": 2,
+        "auto_rows_unblocked": 1,
+        "manual_rows_unblocked": 1,
+        "manual_dispatch_ids": [
+          "FP-AUTO-261"
+        ],
+        "held_repair_ids": [
+          "FP-AUTO-259"
+        ],
+        "post_approval_next_steps": {
+          "FP-AUTO-258": "Apply through --checked-batch after human copy/media/link review.",
+          "FP-AUTO-261": "Apply through --checked-batch, then post manually and log the public URL.",
+          "FP-AUTO-259": "Repair failed checks before including this row in an approval batch."
+        },
         "guardrail": "Only ready_to_approve decisions may be applied through --checked-batch; held rows require repair first."
       },
       "decision_ready_ids": [
@@ -361,6 +426,71 @@
           },
           "review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
           "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+          "guardrail": "Only ready_to_approve decisions may be applied through --checked-batch; held rows require repair first."
+        },
+        "approval_impact": {
+          "ready_ids": [
+            "FP-AUTO-258",
+            "FP-AUTO-261"
+          ],
+          "held_ids": [
+            "FP-AUTO-259"
+          ],
+          "checked_batch_ids": [
+            "FP-AUTO-258",
+            "FP-AUTO-261"
+          ],
+          "blocked_review_ids": [
+            "FP-AUTO-259"
+          ],
+          "expected_effect": {
+            "row_count": 2,
+            "change_count": 2,
+            "ids": [
+              "FP-AUTO-258",
+              "FP-AUTO-261"
+            ],
+            "effects": [
+              {
+                "id": "FP-AUTO-258",
+                "platform": "Instagram",
+                "execution_mode": "auto",
+                "effect": {
+                  "field": "approved",
+                  "from": "no",
+                  "to": "yes",
+                  "changed": true,
+                  "summary": "approved 'no' -> 'yes'"
+                }
+              },
+              {
+                "id": "FP-AUTO-261",
+                "platform": "YouTube Community",
+                "execution_mode": "manual",
+                "effect": {
+                  "field": "approved",
+                  "from": "no",
+                  "to": "yes",
+                  "changed": true,
+                  "summary": "approved 'no' -> 'yes'"
+                }
+              }
+            ]
+          },
+          "change_count": 2,
+          "auto_rows_unblocked": 1,
+          "manual_rows_unblocked": 1,
+          "manual_dispatch_ids": [
+            "FP-AUTO-261"
+          ],
+          "held_repair_ids": [
+            "FP-AUTO-259"
+          ],
+          "post_approval_next_steps": {
+            "FP-AUTO-258": "Apply through --checked-batch after human copy/media/link review.",
+            "FP-AUTO-261": "Apply through --checked-batch, then post manually and log the public URL.",
+            "FP-AUTO-259": "Repair failed checks before including this row in an approval batch."
+          },
           "guardrail": "Only ready_to_approve decisions may be applied through --checked-batch; held rows require repair first."
         },
         "decision_ready_ids": [
@@ -590,6 +720,71 @@
           "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
           "guardrail": "Only ready_to_approve decisions may be applied through --checked-batch; held rows require repair first."
         },
+        "approval_impact": {
+          "ready_ids": [
+            "FP-AUTO-258",
+            "FP-AUTO-261"
+          ],
+          "held_ids": [
+            "FP-AUTO-259"
+          ],
+          "checked_batch_ids": [
+            "FP-AUTO-258",
+            "FP-AUTO-261"
+          ],
+          "blocked_review_ids": [
+            "FP-AUTO-259"
+          ],
+          "expected_effect": {
+            "row_count": 2,
+            "change_count": 2,
+            "ids": [
+              "FP-AUTO-258",
+              "FP-AUTO-261"
+            ],
+            "effects": [
+              {
+                "id": "FP-AUTO-258",
+                "platform": "Instagram",
+                "execution_mode": "auto",
+                "effect": {
+                  "field": "approved",
+                  "from": "no",
+                  "to": "yes",
+                  "changed": true,
+                  "summary": "approved 'no' -> 'yes'"
+                }
+              },
+              {
+                "id": "FP-AUTO-261",
+                "platform": "YouTube Community",
+                "execution_mode": "manual",
+                "effect": {
+                  "field": "approved",
+                  "from": "no",
+                  "to": "yes",
+                  "changed": true,
+                  "summary": "approved 'no' -> 'yes'"
+                }
+              }
+            ]
+          },
+          "change_count": 2,
+          "auto_rows_unblocked": 1,
+          "manual_rows_unblocked": 1,
+          "manual_dispatch_ids": [
+            "FP-AUTO-261"
+          ],
+          "held_repair_ids": [
+            "FP-AUTO-259"
+          ],
+          "post_approval_next_steps": {
+            "FP-AUTO-258": "Apply through --checked-batch after human copy/media/link review.",
+            "FP-AUTO-261": "Apply through --checked-batch, then post manually and log the public URL.",
+            "FP-AUTO-259": "Repair failed checks before including this row in an approval batch."
+          },
+          "guardrail": "Only ready_to_approve decisions may be applied through --checked-batch; held rows require repair first."
+        },
         "decision_ready_ids": [
           "FP-AUTO-258",
           "FP-AUTO-261"
@@ -801,11 +996,11 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "Apple Music",
-        "checked_at": "2026-06-20T05:32:17.057586Z",
+        "checked_at": "2026-06-20T05:36:12.075785Z",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T05:32:17.057586Z",
+          "updated_at": "2026-06-20T05:36:12.075785Z",
           "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
         },
         "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -828,11 +1023,11 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "HyperFollow",
-        "checked_at": "2026-06-20T05:32:18.375305Z",
+        "checked_at": "2026-06-20T05:36:12.416825Z",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T05:32:18.375305Z",
+          "updated_at": "2026-06-20T05:36:12.416825Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
         },
         "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -882,11 +1077,11 @@
       "context": {
         "release": "Analog Myth",
         "service": "Apple Music",
-        "checked_at": "2026-06-20T05:32:23.533921Z",
+        "checked_at": "2026-06-20T05:36:17.587254Z",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T05:32:23.533921Z",
+          "updated_at": "2026-06-20T05:36:17.587254Z",
           "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
         },
         "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -936,11 +1131,11 @@
       "context": {
         "release": "Analog Myth",
         "service": "HyperFollow",
-        "checked_at": "2026-06-20T05:32:29.106853Z",
+        "checked_at": "2026-06-20T05:36:23.025124Z",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T05:32:29.106853Z",
+          "updated_at": "2026-06-20T05:36:23.025124Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
         },
         "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
