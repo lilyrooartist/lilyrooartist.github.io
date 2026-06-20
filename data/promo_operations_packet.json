@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T08:44:29.309880Z",
+  "generated_at": "2026-06-20T08:50:34.473005Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -226,6 +226,112 @@
         "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
         "guardrail": "Only ready_to_approve decisions may be applied through --checked-batch; held rows require repair first."
       },
+      "approval_apply_manifest": {
+        "status": "ready_for_human_review",
+        "ready_ids": [
+          "FP-AUTO-258",
+          "FP-AUTO-261"
+        ],
+        "held_ids": [
+          "FP-AUTO-259"
+        ],
+        "apply_scope": "checked_batch",
+        "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+        "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+        "expected_change_count": 2,
+        "expected_effect": {
+          "row_count": 2,
+          "change_count": 2,
+          "ids": [
+            "FP-AUTO-258",
+            "FP-AUTO-261"
+          ],
+          "effects": [
+            {
+              "id": "FP-AUTO-258",
+              "platform": "Instagram",
+              "execution_mode": "auto",
+              "effect": {
+                "field": "approved",
+                "from": "no",
+                "to": "yes",
+                "changed": true,
+                "summary": "approved 'no' -> 'yes'"
+              }
+            },
+            {
+              "id": "FP-AUTO-261",
+              "platform": "YouTube Community",
+              "execution_mode": "manual",
+              "effect": {
+                "field": "approved",
+                "from": "no",
+                "to": "yes",
+                "changed": true,
+                "summary": "approved 'no' -> 'yes'"
+              }
+            }
+          ]
+        },
+        "ready_rows": [
+          {
+            "id": "FP-AUTO-258",
+            "platform": "Instagram",
+            "song": "I Learned It All in Fifteen Seconds",
+            "execution_mode": "auto",
+            "manual_dispatch_required": false,
+            "post_approval_next_step": "Refresh Admin and let the executor retry after approval is visible.",
+            "required_review": [
+              "copy",
+              "destination_links",
+              "media_asset",
+              "platform_readiness"
+            ]
+          },
+          {
+            "id": "FP-AUTO-261",
+            "platform": "YouTube Community",
+            "song": "I Learned It All in Fifteen Seconds",
+            "execution_mode": "manual",
+            "manual_dispatch_required": true,
+            "post_approval_next_step": "Post manually and log the public URL after approval.",
+            "required_review": [
+              "copy",
+              "destination_links",
+              "media_asset",
+              "platform_readiness"
+            ]
+          }
+        ],
+        "held_rows": [
+          {
+            "id": "FP-AUTO-259",
+            "platform": "TikTok",
+            "song": "I Learned It All in Fifteen Seconds",
+            "failed_check_names": [
+              "platform_readiness"
+            ]
+          }
+        ],
+        "pre_apply_checklist": [
+          "Review copy, links, and media for every ready row.",
+          "Run the preview command and confirm it lists only ready_ids.",
+          "Confirm held_ids are excluded from the checked batch.",
+          "Apply only with --checked-batch after human review passes."
+        ],
+        "post_apply_evidence": [
+          "data/scheduled_posts.csv shows ready_ids changed from approved=no to approved=yes.",
+          "data/scheduled_approval_packet.json reports fewer approval blockers after refresh.",
+          "data/social_scheduler_dry_run.json no longer blocks the approved Instagram row on not_approved.",
+          "Manual-dispatch ready rows remain in the manual posting/logging workflow until a real public URL exists."
+        ],
+        "guardrails": [
+          "This manifest does not approve, publish, post, or log anything.",
+          "Do not use the full batch command while held_ids are present.",
+          "Do not approve held rows until failed review checks clear.",
+          "Manual dispatch remains separate from approval."
+        ]
+      },
       "approval_review_runbook": {
         "status": "ready_for_review",
         "ready_ids": [
@@ -389,6 +495,24 @@
         ],
         "guardrail": "This runbook is review-only; it does not approve, publish, post, or log anything."
       },
+      "pre_apply_checklist": [
+        "Review copy, links, and media for every ready row.",
+        "Run the preview command and confirm it lists only ready_ids.",
+        "Confirm held_ids are excluded from the checked batch.",
+        "Apply only with --checked-batch after human review passes."
+      ],
+      "post_apply_evidence": [
+        "data/scheduled_posts.csv shows ready_ids changed from approved=no to approved=yes.",
+        "data/scheduled_approval_packet.json reports fewer approval blockers after refresh.",
+        "data/social_scheduler_dry_run.json no longer blocks the approved Instagram row on not_approved.",
+        "Manual-dispatch ready rows remain in the manual posting/logging workflow until a real public URL exists."
+      ],
+      "apply_guardrails": [
+        "This manifest does not approve, publish, post, or log anything.",
+        "Do not use the full batch command while held_ids are present.",
+        "Do not approve held rows until failed review checks clear.",
+        "Manual dispatch remains separate from approval."
+      ],
       "review_runbook_step_count": 5,
       "review_checklist_count": 2,
       "approval_impact": {
@@ -454,7 +578,131 @@
           "FP-AUTO-261": "Apply through --checked-batch, then post manually and log the public URL.",
           "FP-AUTO-259": "Repair failed checks before including this row in an approval batch."
         },
-        "guardrail": "Only ready_to_approve decisions may be applied through --checked-batch; held rows require repair first."
+        "guardrail": "Only ready_to_approve decisions may be applied through --checked-batch; held rows require repair first.",
+        "approval_apply_manifest": {
+          "status": "ready_for_human_review",
+          "ready_ids": [
+            "FP-AUTO-258",
+            "FP-AUTO-261"
+          ],
+          "held_ids": [
+            "FP-AUTO-259"
+          ],
+          "apply_scope": "checked_batch",
+          "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+          "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+          "expected_change_count": 2,
+          "expected_effect": {
+            "row_count": 2,
+            "change_count": 2,
+            "ids": [
+              "FP-AUTO-258",
+              "FP-AUTO-261"
+            ],
+            "effects": [
+              {
+                "id": "FP-AUTO-258",
+                "platform": "Instagram",
+                "execution_mode": "auto",
+                "effect": {
+                  "field": "approved",
+                  "from": "no",
+                  "to": "yes",
+                  "changed": true,
+                  "summary": "approved 'no' -> 'yes'"
+                }
+              },
+              {
+                "id": "FP-AUTO-261",
+                "platform": "YouTube Community",
+                "execution_mode": "manual",
+                "effect": {
+                  "field": "approved",
+                  "from": "no",
+                  "to": "yes",
+                  "changed": true,
+                  "summary": "approved 'no' -> 'yes'"
+                }
+              }
+            ]
+          },
+          "ready_rows": [
+            {
+              "id": "FP-AUTO-258",
+              "platform": "Instagram",
+              "song": "I Learned It All in Fifteen Seconds",
+              "execution_mode": "auto",
+              "manual_dispatch_required": false,
+              "post_approval_next_step": "Refresh Admin and let the executor retry after approval is visible.",
+              "required_review": [
+                "copy",
+                "destination_links",
+                "media_asset",
+                "platform_readiness"
+              ]
+            },
+            {
+              "id": "FP-AUTO-261",
+              "platform": "YouTube Community",
+              "song": "I Learned It All in Fifteen Seconds",
+              "execution_mode": "manual",
+              "manual_dispatch_required": true,
+              "post_approval_next_step": "Post manually and log the public URL after approval.",
+              "required_review": [
+                "copy",
+                "destination_links",
+                "media_asset",
+                "platform_readiness"
+              ]
+            }
+          ],
+          "held_rows": [
+            {
+              "id": "FP-AUTO-259",
+              "platform": "TikTok",
+              "song": "I Learned It All in Fifteen Seconds",
+              "failed_check_names": [
+                "platform_readiness"
+              ]
+            }
+          ],
+          "pre_apply_checklist": [
+            "Review copy, links, and media for every ready row.",
+            "Run the preview command and confirm it lists only ready_ids.",
+            "Confirm held_ids are excluded from the checked batch.",
+            "Apply only with --checked-batch after human review passes."
+          ],
+          "post_apply_evidence": [
+            "data/scheduled_posts.csv shows ready_ids changed from approved=no to approved=yes.",
+            "data/scheduled_approval_packet.json reports fewer approval blockers after refresh.",
+            "data/social_scheduler_dry_run.json no longer blocks the approved Instagram row on not_approved.",
+            "Manual-dispatch ready rows remain in the manual posting/logging workflow until a real public URL exists."
+          ],
+          "guardrails": [
+            "This manifest does not approve, publish, post, or log anything.",
+            "Do not use the full batch command while held_ids are present.",
+            "Do not approve held rows until failed review checks clear.",
+            "Manual dispatch remains separate from approval."
+          ]
+        },
+        "pre_apply_checklist": [
+          "Review copy, links, and media for every ready row.",
+          "Run the preview command and confirm it lists only ready_ids.",
+          "Confirm held_ids are excluded from the checked batch.",
+          "Apply only with --checked-batch after human review passes."
+        ],
+        "post_apply_evidence": [
+          "data/scheduled_posts.csv shows ready_ids changed from approved=no to approved=yes.",
+          "data/scheduled_approval_packet.json reports fewer approval blockers after refresh.",
+          "data/social_scheduler_dry_run.json no longer blocks the approved Instagram row on not_approved.",
+          "Manual-dispatch ready rows remain in the manual posting/logging workflow until a real public URL exists."
+        ],
+        "apply_guardrails": [
+          "This manifest does not approve, publish, post, or log anything.",
+          "Do not use the full batch command while held_ids are present.",
+          "Do not approve held rows until failed review checks clear.",
+          "Manual dispatch remains separate from approval."
+        ]
       },
       "decision_ready_ids": [
         "FP-AUTO-258",
@@ -719,6 +967,112 @@
           "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
           "guardrail": "Only ready_to_approve decisions may be applied through --checked-batch; held rows require repair first."
         },
+        "approval_apply_manifest": {
+          "status": "ready_for_human_review",
+          "ready_ids": [
+            "FP-AUTO-258",
+            "FP-AUTO-261"
+          ],
+          "held_ids": [
+            "FP-AUTO-259"
+          ],
+          "apply_scope": "checked_batch",
+          "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+          "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+          "expected_change_count": 2,
+          "expected_effect": {
+            "row_count": 2,
+            "change_count": 2,
+            "ids": [
+              "FP-AUTO-258",
+              "FP-AUTO-261"
+            ],
+            "effects": [
+              {
+                "id": "FP-AUTO-258",
+                "platform": "Instagram",
+                "execution_mode": "auto",
+                "effect": {
+                  "field": "approved",
+                  "from": "no",
+                  "to": "yes",
+                  "changed": true,
+                  "summary": "approved 'no' -> 'yes'"
+                }
+              },
+              {
+                "id": "FP-AUTO-261",
+                "platform": "YouTube Community",
+                "execution_mode": "manual",
+                "effect": {
+                  "field": "approved",
+                  "from": "no",
+                  "to": "yes",
+                  "changed": true,
+                  "summary": "approved 'no' -> 'yes'"
+                }
+              }
+            ]
+          },
+          "ready_rows": [
+            {
+              "id": "FP-AUTO-258",
+              "platform": "Instagram",
+              "song": "I Learned It All in Fifteen Seconds",
+              "execution_mode": "auto",
+              "manual_dispatch_required": false,
+              "post_approval_next_step": "Refresh Admin and let the executor retry after approval is visible.",
+              "required_review": [
+                "copy",
+                "destination_links",
+                "media_asset",
+                "platform_readiness"
+              ]
+            },
+            {
+              "id": "FP-AUTO-261",
+              "platform": "YouTube Community",
+              "song": "I Learned It All in Fifteen Seconds",
+              "execution_mode": "manual",
+              "manual_dispatch_required": true,
+              "post_approval_next_step": "Post manually and log the public URL after approval.",
+              "required_review": [
+                "copy",
+                "destination_links",
+                "media_asset",
+                "platform_readiness"
+              ]
+            }
+          ],
+          "held_rows": [
+            {
+              "id": "FP-AUTO-259",
+              "platform": "TikTok",
+              "song": "I Learned It All in Fifteen Seconds",
+              "failed_check_names": [
+                "platform_readiness"
+              ]
+            }
+          ],
+          "pre_apply_checklist": [
+            "Review copy, links, and media for every ready row.",
+            "Run the preview command and confirm it lists only ready_ids.",
+            "Confirm held_ids are excluded from the checked batch.",
+            "Apply only with --checked-batch after human review passes."
+          ],
+          "post_apply_evidence": [
+            "data/scheduled_posts.csv shows ready_ids changed from approved=no to approved=yes.",
+            "data/scheduled_approval_packet.json reports fewer approval blockers after refresh.",
+            "data/social_scheduler_dry_run.json no longer blocks the approved Instagram row on not_approved.",
+            "Manual-dispatch ready rows remain in the manual posting/logging workflow until a real public URL exists."
+          ],
+          "guardrails": [
+            "This manifest does not approve, publish, post, or log anything.",
+            "Do not use the full batch command while held_ids are present.",
+            "Do not approve held rows until failed review checks clear.",
+            "Manual dispatch remains separate from approval."
+          ]
+        },
         "approval_review_runbook": {
           "status": "ready_for_review",
           "ready_ids": [
@@ -882,6 +1236,24 @@
           ],
           "guardrail": "This runbook is review-only; it does not approve, publish, post, or log anything."
         },
+        "pre_apply_checklist": [
+          "Review copy, links, and media for every ready row.",
+          "Run the preview command and confirm it lists only ready_ids.",
+          "Confirm held_ids are excluded from the checked batch.",
+          "Apply only with --checked-batch after human review passes."
+        ],
+        "post_apply_evidence": [
+          "data/scheduled_posts.csv shows ready_ids changed from approved=no to approved=yes.",
+          "data/scheduled_approval_packet.json reports fewer approval blockers after refresh.",
+          "data/social_scheduler_dry_run.json no longer blocks the approved Instagram row on not_approved.",
+          "Manual-dispatch ready rows remain in the manual posting/logging workflow until a real public URL exists."
+        ],
+        "apply_guardrails": [
+          "This manifest does not approve, publish, post, or log anything.",
+          "Do not use the full batch command while held_ids are present.",
+          "Do not approve held rows until failed review checks clear.",
+          "Manual dispatch remains separate from approval."
+        ],
         "review_runbook_step_count": 5,
         "review_checklist_count": 2,
         "approval_impact": {
@@ -947,7 +1319,131 @@
             "FP-AUTO-261": "Apply through --checked-batch, then post manually and log the public URL.",
             "FP-AUTO-259": "Repair failed checks before including this row in an approval batch."
           },
-          "guardrail": "Only ready_to_approve decisions may be applied through --checked-batch; held rows require repair first."
+          "guardrail": "Only ready_to_approve decisions may be applied through --checked-batch; held rows require repair first.",
+          "approval_apply_manifest": {
+            "status": "ready_for_human_review",
+            "ready_ids": [
+              "FP-AUTO-258",
+              "FP-AUTO-261"
+            ],
+            "held_ids": [
+              "FP-AUTO-259"
+            ],
+            "apply_scope": "checked_batch",
+            "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+            "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+            "expected_change_count": 2,
+            "expected_effect": {
+              "row_count": 2,
+              "change_count": 2,
+              "ids": [
+                "FP-AUTO-258",
+                "FP-AUTO-261"
+              ],
+              "effects": [
+                {
+                  "id": "FP-AUTO-258",
+                  "platform": "Instagram",
+                  "execution_mode": "auto",
+                  "effect": {
+                    "field": "approved",
+                    "from": "no",
+                    "to": "yes",
+                    "changed": true,
+                    "summary": "approved 'no' -> 'yes'"
+                  }
+                },
+                {
+                  "id": "FP-AUTO-261",
+                  "platform": "YouTube Community",
+                  "execution_mode": "manual",
+                  "effect": {
+                    "field": "approved",
+                    "from": "no",
+                    "to": "yes",
+                    "changed": true,
+                    "summary": "approved 'no' -> 'yes'"
+                  }
+                }
+              ]
+            },
+            "ready_rows": [
+              {
+                "id": "FP-AUTO-258",
+                "platform": "Instagram",
+                "song": "I Learned It All in Fifteen Seconds",
+                "execution_mode": "auto",
+                "manual_dispatch_required": false,
+                "post_approval_next_step": "Refresh Admin and let the executor retry after approval is visible.",
+                "required_review": [
+                  "copy",
+                  "destination_links",
+                  "media_asset",
+                  "platform_readiness"
+                ]
+              },
+              {
+                "id": "FP-AUTO-261",
+                "platform": "YouTube Community",
+                "song": "I Learned It All in Fifteen Seconds",
+                "execution_mode": "manual",
+                "manual_dispatch_required": true,
+                "post_approval_next_step": "Post manually and log the public URL after approval.",
+                "required_review": [
+                  "copy",
+                  "destination_links",
+                  "media_asset",
+                  "platform_readiness"
+                ]
+              }
+            ],
+            "held_rows": [
+              {
+                "id": "FP-AUTO-259",
+                "platform": "TikTok",
+                "song": "I Learned It All in Fifteen Seconds",
+                "failed_check_names": [
+                  "platform_readiness"
+                ]
+              }
+            ],
+            "pre_apply_checklist": [
+              "Review copy, links, and media for every ready row.",
+              "Run the preview command and confirm it lists only ready_ids.",
+              "Confirm held_ids are excluded from the checked batch.",
+              "Apply only with --checked-batch after human review passes."
+            ],
+            "post_apply_evidence": [
+              "data/scheduled_posts.csv shows ready_ids changed from approved=no to approved=yes.",
+              "data/scheduled_approval_packet.json reports fewer approval blockers after refresh.",
+              "data/social_scheduler_dry_run.json no longer blocks the approved Instagram row on not_approved.",
+              "Manual-dispatch ready rows remain in the manual posting/logging workflow until a real public URL exists."
+            ],
+            "guardrails": [
+              "This manifest does not approve, publish, post, or log anything.",
+              "Do not use the full batch command while held_ids are present.",
+              "Do not approve held rows until failed review checks clear.",
+              "Manual dispatch remains separate from approval."
+            ]
+          },
+          "pre_apply_checklist": [
+            "Review copy, links, and media for every ready row.",
+            "Run the preview command and confirm it lists only ready_ids.",
+            "Confirm held_ids are excluded from the checked batch.",
+            "Apply only with --checked-batch after human review passes."
+          ],
+          "post_apply_evidence": [
+            "data/scheduled_posts.csv shows ready_ids changed from approved=no to approved=yes.",
+            "data/scheduled_approval_packet.json reports fewer approval blockers after refresh.",
+            "data/social_scheduler_dry_run.json no longer blocks the approved Instagram row on not_approved.",
+            "Manual-dispatch ready rows remain in the manual posting/logging workflow until a real public URL exists."
+          ],
+          "apply_guardrails": [
+            "This manifest does not approve, publish, post, or log anything.",
+            "Do not use the full batch command while held_ids are present.",
+            "Do not approve held rows until failed review checks clear.",
+            "Manual dispatch remains separate from approval."
+          ]
         },
         "decision_ready_ids": [
           "FP-AUTO-258",
@@ -1239,6 +1735,112 @@
           "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
           "guardrail": "Only ready_to_approve decisions may be applied through --checked-batch; held rows require repair first."
         },
+        "approval_apply_manifest": {
+          "status": "ready_for_human_review",
+          "ready_ids": [
+            "FP-AUTO-258",
+            "FP-AUTO-261"
+          ],
+          "held_ids": [
+            "FP-AUTO-259"
+          ],
+          "apply_scope": "checked_batch",
+          "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+          "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+          "expected_change_count": 2,
+          "expected_effect": {
+            "row_count": 2,
+            "change_count": 2,
+            "ids": [
+              "FP-AUTO-258",
+              "FP-AUTO-261"
+            ],
+            "effects": [
+              {
+                "id": "FP-AUTO-258",
+                "platform": "Instagram",
+                "execution_mode": "auto",
+                "effect": {
+                  "field": "approved",
+                  "from": "no",
+                  "to": "yes",
+                  "changed": true,
+                  "summary": "approved 'no' -> 'yes'"
+                }
+              },
+              {
+                "id": "FP-AUTO-261",
+                "platform": "YouTube Community",
+                "execution_mode": "manual",
+                "effect": {
+                  "field": "approved",
+                  "from": "no",
+                  "to": "yes",
+                  "changed": true,
+                  "summary": "approved 'no' -> 'yes'"
+                }
+              }
+            ]
+          },
+          "ready_rows": [
+            {
+              "id": "FP-AUTO-258",
+              "platform": "Instagram",
+              "song": "I Learned It All in Fifteen Seconds",
+              "execution_mode": "auto",
+              "manual_dispatch_required": false,
+              "post_approval_next_step": "Refresh Admin and let the executor retry after approval is visible.",
+              "required_review": [
+                "copy",
+                "destination_links",
+                "media_asset",
+                "platform_readiness"
+              ]
+            },
+            {
+              "id": "FP-AUTO-261",
+              "platform": "YouTube Community",
+              "song": "I Learned It All in Fifteen Seconds",
+              "execution_mode": "manual",
+              "manual_dispatch_required": true,
+              "post_approval_next_step": "Post manually and log the public URL after approval.",
+              "required_review": [
+                "copy",
+                "destination_links",
+                "media_asset",
+                "platform_readiness"
+              ]
+            }
+          ],
+          "held_rows": [
+            {
+              "id": "FP-AUTO-259",
+              "platform": "TikTok",
+              "song": "I Learned It All in Fifteen Seconds",
+              "failed_check_names": [
+                "platform_readiness"
+              ]
+            }
+          ],
+          "pre_apply_checklist": [
+            "Review copy, links, and media for every ready row.",
+            "Run the preview command and confirm it lists only ready_ids.",
+            "Confirm held_ids are excluded from the checked batch.",
+            "Apply only with --checked-batch after human review passes."
+          ],
+          "post_apply_evidence": [
+            "data/scheduled_posts.csv shows ready_ids changed from approved=no to approved=yes.",
+            "data/scheduled_approval_packet.json reports fewer approval blockers after refresh.",
+            "data/social_scheduler_dry_run.json no longer blocks the approved Instagram row on not_approved.",
+            "Manual-dispatch ready rows remain in the manual posting/logging workflow until a real public URL exists."
+          ],
+          "guardrails": [
+            "This manifest does not approve, publish, post, or log anything.",
+            "Do not use the full batch command while held_ids are present.",
+            "Do not approve held rows until failed review checks clear.",
+            "Manual dispatch remains separate from approval."
+          ]
+        },
         "approval_review_runbook": {
           "status": "ready_for_review",
           "ready_ids": [
@@ -1402,6 +2004,24 @@
           ],
           "guardrail": "This runbook is review-only; it does not approve, publish, post, or log anything."
         },
+        "pre_apply_checklist": [
+          "Review copy, links, and media for every ready row.",
+          "Run the preview command and confirm it lists only ready_ids.",
+          "Confirm held_ids are excluded from the checked batch.",
+          "Apply only with --checked-batch after human review passes."
+        ],
+        "post_apply_evidence": [
+          "data/scheduled_posts.csv shows ready_ids changed from approved=no to approved=yes.",
+          "data/scheduled_approval_packet.json reports fewer approval blockers after refresh.",
+          "data/social_scheduler_dry_run.json no longer blocks the approved Instagram row on not_approved.",
+          "Manual-dispatch ready rows remain in the manual posting/logging workflow until a real public URL exists."
+        ],
+        "apply_guardrails": [
+          "This manifest does not approve, publish, post, or log anything.",
+          "Do not use the full batch command while held_ids are present.",
+          "Do not approve held rows until failed review checks clear.",
+          "Manual dispatch remains separate from approval."
+        ],
         "review_runbook_step_count": 5,
         "review_checklist_count": 2,
         "approval_impact": {
@@ -1467,7 +2087,131 @@
             "FP-AUTO-261": "Apply through --checked-batch, then post manually and log the public URL.",
             "FP-AUTO-259": "Repair failed checks before including this row in an approval batch."
           },
-          "guardrail": "Only ready_to_approve decisions may be applied through --checked-batch; held rows require repair first."
+          "guardrail": "Only ready_to_approve decisions may be applied through --checked-batch; held rows require repair first.",
+          "approval_apply_manifest": {
+            "status": "ready_for_human_review",
+            "ready_ids": [
+              "FP-AUTO-258",
+              "FP-AUTO-261"
+            ],
+            "held_ids": [
+              "FP-AUTO-259"
+            ],
+            "apply_scope": "checked_batch",
+            "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+            "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+            "expected_change_count": 2,
+            "expected_effect": {
+              "row_count": 2,
+              "change_count": 2,
+              "ids": [
+                "FP-AUTO-258",
+                "FP-AUTO-261"
+              ],
+              "effects": [
+                {
+                  "id": "FP-AUTO-258",
+                  "platform": "Instagram",
+                  "execution_mode": "auto",
+                  "effect": {
+                    "field": "approved",
+                    "from": "no",
+                    "to": "yes",
+                    "changed": true,
+                    "summary": "approved 'no' -> 'yes'"
+                  }
+                },
+                {
+                  "id": "FP-AUTO-261",
+                  "platform": "YouTube Community",
+                  "execution_mode": "manual",
+                  "effect": {
+                    "field": "approved",
+                    "from": "no",
+                    "to": "yes",
+                    "changed": true,
+                    "summary": "approved 'no' -> 'yes'"
+                  }
+                }
+              ]
+            },
+            "ready_rows": [
+              {
+                "id": "FP-AUTO-258",
+                "platform": "Instagram",
+                "song": "I Learned It All in Fifteen Seconds",
+                "execution_mode": "auto",
+                "manual_dispatch_required": false,
+                "post_approval_next_step": "Refresh Admin and let the executor retry after approval is visible.",
+                "required_review": [
+                  "copy",
+                  "destination_links",
+                  "media_asset",
+                  "platform_readiness"
+                ]
+              },
+              {
+                "id": "FP-AUTO-261",
+                "platform": "YouTube Community",
+                "song": "I Learned It All in Fifteen Seconds",
+                "execution_mode": "manual",
+                "manual_dispatch_required": true,
+                "post_approval_next_step": "Post manually and log the public URL after approval.",
+                "required_review": [
+                  "copy",
+                  "destination_links",
+                  "media_asset",
+                  "platform_readiness"
+                ]
+              }
+            ],
+            "held_rows": [
+              {
+                "id": "FP-AUTO-259",
+                "platform": "TikTok",
+                "song": "I Learned It All in Fifteen Seconds",
+                "failed_check_names": [
+                  "platform_readiness"
+                ]
+              }
+            ],
+            "pre_apply_checklist": [
+              "Review copy, links, and media for every ready row.",
+              "Run the preview command and confirm it lists only ready_ids.",
+              "Confirm held_ids are excluded from the checked batch.",
+              "Apply only with --checked-batch after human review passes."
+            ],
+            "post_apply_evidence": [
+              "data/scheduled_posts.csv shows ready_ids changed from approved=no to approved=yes.",
+              "data/scheduled_approval_packet.json reports fewer approval blockers after refresh.",
+              "data/social_scheduler_dry_run.json no longer blocks the approved Instagram row on not_approved.",
+              "Manual-dispatch ready rows remain in the manual posting/logging workflow until a real public URL exists."
+            ],
+            "guardrails": [
+              "This manifest does not approve, publish, post, or log anything.",
+              "Do not use the full batch command while held_ids are present.",
+              "Do not approve held rows until failed review checks clear.",
+              "Manual dispatch remains separate from approval."
+            ]
+          },
+          "pre_apply_checklist": [
+            "Review copy, links, and media for every ready row.",
+            "Run the preview command and confirm it lists only ready_ids.",
+            "Confirm held_ids are excluded from the checked batch.",
+            "Apply only with --checked-batch after human review passes."
+          ],
+          "post_apply_evidence": [
+            "data/scheduled_posts.csv shows ready_ids changed from approved=no to approved=yes.",
+            "data/scheduled_approval_packet.json reports fewer approval blockers after refresh.",
+            "data/social_scheduler_dry_run.json no longer blocks the approved Instagram row on not_approved.",
+            "Manual-dispatch ready rows remain in the manual posting/logging workflow until a real public URL exists."
+          ],
+          "apply_guardrails": [
+            "This manifest does not approve, publish, post, or log anything.",
+            "Do not use the full batch command while held_ids are present.",
+            "Do not approve held rows until failed review checks clear.",
+            "Manual dispatch remains separate from approval."
+          ]
         },
         "decision_ready_ids": [
           "FP-AUTO-258",
@@ -1493,7 +2237,7 @@
       "label": "Preview reschedule for approved past-due posts",
       "kind": "backlog_reschedule",
       "priority": 0,
-      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
       "context": {
         "approved_backlog_posts": 1,
         "approved_upcoming_posts": 5,
@@ -1501,8 +2245,8 @@
         "clear_to_apply_count": 0,
         "apply_allowed_without_override": false,
         "apply_command": "",
-        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
+        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --apply --refresh-admin",
+        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
         "backlog_clearance_manifest": {
           "status": "blocked_until_clearance_steps_complete",
           "approved_backlog_count": 1,
@@ -1511,10 +2255,10 @@
           "blocked_ids": [
             "FP-AUTO-264"
           ],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
           "safe_apply_command": "",
-          "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-          "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
+          "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --apply --refresh-admin",
+          "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
           "apply_allowed_without_override": false,
           "apply_gate": "blocked_until_clearance_steps_complete",
           "clearance_steps": [
@@ -1529,7 +2273,7 @@
               "song": "I Learned It All in Fifteen Seconds",
               "blocker_kind": "tiktok_credentials_missing",
               "blocker_reason": "tiktok_credentials_missing",
-              "proposed_scheduled_at": "2026-06-21T10:00:00+00:00",
+              "proposed_scheduled_at": "2026-06-21T10:00:00+09:00",
               "clearance_steps": [
                 "Add local TikTok OAuth credentials, then push worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
                 "Confirm TikTok public posting approval before treating auto-posting as ready.",
@@ -1724,25 +2468,25 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "Spotify",
-        "checked_at": "2026-06-20T08:44:25.785433+00:00",
+        "checked_at": "2026-06-20T08:49:28.337492+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-06-21T08:44:25.785433+00:00",
+        "next_recheck_at": "2026-06-21T08:49:28.337492+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T08:44:25.785433Z",
+          "updated_at": "2026-06-20T08:49:28.337492Z",
           "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-          "checked_at": "2026-06-20T08:44:25.785433+00:00",
+          "checked_at": "2026-06-20T08:49:28.337492+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-06-21T08:44:25.785433+00:00",
+          "next_recheck_at": "2026-06-21T08:49:28.337492+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-06-21T08:44:25.785433+00:00. Status: waiting_for_release_propagation."
+        "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-06-21T08:49:28.337492+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -1762,25 +2506,25 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "Apple Music",
-        "checked_at": "2026-06-20T08:44:27.110027+00:00",
+        "checked_at": "2026-06-20T08:49:48.466886+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-06-21T08:44:27.110027+00:00",
+        "next_recheck_at": "2026-06-21T08:49:48.466886+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T08:44:27.110027Z",
+          "updated_at": "2026-06-20T08:49:48.466886Z",
           "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-          "checked_at": "2026-06-20T08:44:27.110027+00:00",
+          "checked_at": "2026-06-20T08:49:48.466886+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-06-21T08:44:27.110027+00:00",
+          "next_recheck_at": "2026-06-21T08:49:48.466886+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-06-21T08:44:27.110027+00:00. Status: waiting_for_release_propagation."
+        "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-06-21T08:49:48.466886+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -1800,25 +2544,25 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "HyperFollow",
-        "checked_at": "2026-06-20T08:44:27.222361+00:00",
+        "checked_at": "2026-06-20T08:49:48.814914+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-06-21T08:44:27.222361+00:00",
+        "next_recheck_at": "2026-06-21T08:49:48.814914+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T08:44:27.222361Z",
+          "updated_at": "2026-06-20T08:49:48.814914Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-          "checked_at": "2026-06-20T08:44:27.222361+00:00",
+          "checked_at": "2026-06-20T08:49:48.814914+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-06-21T08:44:27.222361+00:00",
+          "next_recheck_at": "2026-06-21T08:49:48.814914+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; next recommended re-check after 2026-06-21T08:44:27.222361+00:00. Status: waiting_for_release_propagation."
+        "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; next recommended re-check after 2026-06-21T08:49:48.814914+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -1838,25 +2582,25 @@
       "context": {
         "release": "Analog Myth",
         "service": "Spotify",
-        "checked_at": "2026-06-20T08:44:27.288519+00:00",
+        "checked_at": "2026-06-20T08:49:48.862591+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-06-21T08:44:27.288519+00:00",
+        "next_recheck_at": "2026-06-21T08:49:48.862591+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/spotify_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T08:44:27.288519Z",
+          "updated_at": "2026-06-20T08:49:48.862591Z",
           "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
-          "checked_at": "2026-06-20T08:44:27.288519+00:00",
+          "checked_at": "2026-06-20T08:49:48.862591+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-06-21T08:44:27.288519+00:00",
+          "next_recheck_at": "2026-06-21T08:49:48.862591+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-06-21T08:44:27.288519+00:00. Status: waiting_for_release_propagation."
+        "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-06-21T08:49:48.862591+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -1876,25 +2620,25 @@
       "context": {
         "release": "Analog Myth",
         "service": "Apple Music",
-        "checked_at": "2026-06-20T08:44:27.684649+00:00",
+        "checked_at": "2026-06-20T08:50:09.045430+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-06-21T08:44:27.684649+00:00",
+        "next_recheck_at": "2026-06-21T08:50:09.045430+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T08:44:27.684649Z",
+          "updated_at": "2026-06-20T08:50:09.045430Z",
           "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
-          "checked_at": "2026-06-20T08:44:27.684649+00:00",
+          "checked_at": "2026-06-20T08:50:09.045430+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-06-21T08:44:27.684649+00:00",
+          "next_recheck_at": "2026-06-21T08:50:09.045430+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-06-21T08:44:27.684649+00:00. Status: waiting_for_release_propagation."
+        "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-06-21T08:50:09.045430+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -1914,25 +2658,25 @@
       "context": {
         "release": "Analog Myth",
         "service": "YouTube Music",
-        "checked_at": "2026-06-20T08:44:27.752405+00:00",
+        "checked_at": "2026-06-20T08:50:09.103466+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-06-21T08:44:27.752405+00:00",
+        "next_recheck_at": "2026-06-21T08:50:09.103466+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T08:44:27.752405Z",
+          "updated_at": "2026-06-20T08:50:09.103466Z",
           "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-          "checked_at": "2026-06-20T08:44:27.752405+00:00",
+          "checked_at": "2026-06-20T08:50:09.103466+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-06-21T08:44:27.752405+00:00",
+          "next_recheck_at": "2026-06-21T08:50:09.103466+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Searches public web results for YouTube Music watch URLs, then validates the public title. Latest snapshot found no public URL; next recommended re-check after 2026-06-21T08:44:27.752405+00:00. Status: waiting_for_release_propagation."
+        "note": "Searches public web results for YouTube Music watch URLs, then validates the public title. Latest snapshot found no public URL; next recommended re-check after 2026-06-21T08:50:09.103466+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -1952,25 +2696,25 @@
       "context": {
         "release": "Analog Myth",
         "service": "HyperFollow",
-        "checked_at": "2026-06-20T08:44:28.274045+00:00",
+        "checked_at": "2026-06-20T08:50:31.603627+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-06-21T08:44:28.274045+00:00",
+        "next_recheck_at": "2026-06-21T08:50:31.603627+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T08:44:28.274045Z",
+          "updated_at": "2026-06-20T08:50:31.603627Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-          "checked_at": "2026-06-20T08:44:28.274045+00:00",
+          "checked_at": "2026-06-20T08:50:31.603627+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-06-21T08:44:28.274045+00:00",
+          "next_recheck_at": "2026-06-21T08:50:31.603627+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; next recommended re-check after 2026-06-21T08:44:28.274045+00:00. Status: waiting_for_release_propagation."
+        "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; next recommended re-check after 2026-06-21T08:50:31.603627+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",

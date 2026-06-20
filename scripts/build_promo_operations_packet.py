@@ -356,6 +356,7 @@ def apply_actions(plan):
 def scheduled_approval_batch_actions(packet):
     summary = packet.get("summary") or {}
     decision_manifest = packet.get("approval_decision_manifest") or {}
+    apply_manifest = packet.get("approval_apply_manifest") or {}
     review_runbook = packet.get("approval_review_runbook") or {}
     decisions = decision_manifest.get("decisions") or []
     preview_command = summary.get("checked_batch_preview_command") or summary.get("batch_preview_command") or ""
@@ -389,6 +390,10 @@ def scheduled_approval_batch_actions(packet):
             if item.get("id") and item.get("post_approval_next_step")
         },
         "guardrail": decision_manifest.get("guardrail") or "",
+        "approval_apply_manifest": apply_manifest,
+        "pre_apply_checklist": apply_manifest.get("pre_apply_checklist") or [],
+        "post_apply_evidence": apply_manifest.get("post_apply_evidence") or [],
+        "apply_guardrails": apply_manifest.get("guardrails") or [],
     }
     return [
         command_row(
@@ -407,7 +412,11 @@ def scheduled_approval_batch_actions(packet):
                 "manual_count": int(summary.get("manual_count") or 0),
                 "apply_command": apply_command,
                 "approval_decision_manifest": decision_manifest,
+                "approval_apply_manifest": apply_manifest,
                 "approval_review_runbook": review_runbook,
+                "pre_apply_checklist": apply_manifest.get("pre_apply_checklist") or [],
+                "post_apply_evidence": apply_manifest.get("post_apply_evidence") or [],
+                "apply_guardrails": apply_manifest.get("guardrails") or [],
                 "review_runbook_step_count": len(review_runbook.get("steps") or []),
                 "review_checklist_count": len(review_runbook.get("review_checklist") or []),
                 "approval_impact": approval_impact,

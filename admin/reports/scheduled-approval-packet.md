@@ -1,6 +1,6 @@
 # Scheduled Approval Packet - Lily Roo
 
-Generated: 2026-06-20T08:44:29.409205Z
+Generated: 2026-06-20T08:50:34.533611Z
 
 ## Summary
 - Approval blockers: **3**
@@ -27,6 +27,33 @@ Generated: 2026-06-20T08:44:29.409205Z
 - Checked batch approve after review: `python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin`
 - Checked batch dry-run result: **2** change(s), **2** reviewed row(s), no files written
 - Decision manifest: **3** reviewed row(s); ready `FP-AUTO-258, FP-AUTO-261`; held `FP-AUTO-259`
+
+### Approval Apply Manifest
+- Status: **ready_for_human_review**
+- Apply scope: **checked_batch**
+- Ready IDs: `FP-AUTO-258, FP-AUTO-261`
+- Held IDs: `FP-AUTO-259`
+- Expected changes: **2**
+- Preview: `python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run`
+- Apply after review: `python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin`
+
+#### Pre-Apply Checklist
+- Review copy, links, and media for every ready row.
+- Run the preview command and confirm it lists only ready_ids.
+- Confirm held_ids are excluded from the checked batch.
+- Apply only with --checked-batch after human review passes.
+
+#### Post-Apply Evidence
+- data/scheduled_posts.csv shows ready_ids changed from approved=no to approved=yes.
+- data/scheduled_approval_packet.json reports fewer approval blockers after refresh.
+- data/social_scheduler_dry_run.json no longer blocks the approved Instagram row on not_approved.
+- Manual-dispatch ready rows remain in the manual posting/logging workflow until a real public URL exists.
+
+#### Apply Guardrails
+- This manifest does not approve, publish, post, or log anything.
+- Do not use the full batch command while held_ids are present.
+- Do not approve held rows until failed review checks clear.
+- Manual dispatch remains separate from approval.
 
 ### Approval Review Runbook
 - Status: **ready_for_review**

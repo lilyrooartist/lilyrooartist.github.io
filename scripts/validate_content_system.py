@@ -588,6 +588,7 @@ def validate_generated_outputs(failures):
         ]
         scheduled_packet = json.loads(SCHEDULED_APPROVAL_PACKET.read_text(encoding="utf-8")) if SCHEDULED_APPROVAL_PACKET.exists() else {}
         scheduled_manifest = scheduled_packet.get("approval_decision_manifest") or {}
+        scheduled_apply_manifest = scheduled_packet.get("approval_apply_manifest") or {}
         scheduled_runbook = scheduled_packet.get("approval_review_runbook") or {}
         scheduled_decisions = scheduled_manifest.get("decisions") or []
         ready_decisions = [item for item in scheduled_decisions if item.get("decision") == "ready_to_approve"]
@@ -604,6 +605,10 @@ def validate_generated_outputs(failures):
                 and all((action.get("context") or {}).get("decision_ready_ids") == (scheduled_manifest.get("ready_ids") or []) for action in scheduled_batch_actions)
                 and all((action.get("context") or {}).get("decision_held_ids") == (scheduled_manifest.get("held_ids") or []) for action in scheduled_batch_actions)
                 and all(((action.get("context") or {}).get("approval_decision_manifest") or {}).get("decisions") == (scheduled_manifest.get("decisions") or []) for action in scheduled_batch_actions)
+                and all((action.get("context") or {}).get("approval_apply_manifest") == scheduled_apply_manifest for action in scheduled_batch_actions)
+                and all((action.get("context") or {}).get("pre_apply_checklist") == (scheduled_apply_manifest.get("pre_apply_checklist") or []) for action in scheduled_batch_actions)
+                and all((action.get("context") or {}).get("post_apply_evidence") == (scheduled_apply_manifest.get("post_apply_evidence") or []) for action in scheduled_batch_actions)
+                and all((action.get("context") or {}).get("apply_guardrails") == (scheduled_apply_manifest.get("guardrails") or []) for action in scheduled_batch_actions)
                 and all(((action.get("context") or {}).get("approval_review_runbook") or {}).get("steps") == (scheduled_runbook.get("steps") or []) for action in scheduled_batch_actions)
                 and all((action.get("context") or {}).get("review_runbook_step_count") == len(scheduled_runbook.get("steps") or []) for action in scheduled_batch_actions)
                 and all((action.get("context") or {}).get("review_checklist_count") == len(scheduled_runbook.get("review_checklist") or []) for action in scheduled_batch_actions)
@@ -628,6 +633,10 @@ def validate_generated_outputs(failures):
                 and ((action.get("context") or {}).get("approval_impact") or {}).get("manual_rows_unblocked") == sum(1 for item in ready_decisions if item.get("execution_mode") == "manual")
                 and ((action.get("context") or {}).get("approval_impact") or {}).get("manual_dispatch_ids") == [item.get("id") for item in ready_decisions if item.get("manual_dispatch_required") and item.get("id")]
                 and ((action.get("context") or {}).get("approval_impact") or {}).get("held_repair_ids") == [item.get("id") for item in held_decisions if item.get("id")]
+                and ((action.get("context") or {}).get("approval_impact") or {}).get("approval_apply_manifest") == scheduled_apply_manifest
+                and ((action.get("context") or {}).get("approval_impact") or {}).get("pre_apply_checklist") == (scheduled_apply_manifest.get("pre_apply_checklist") or [])
+                and ((action.get("context") or {}).get("approval_impact") or {}).get("post_apply_evidence") == (scheduled_apply_manifest.get("post_apply_evidence") or [])
+                and ((action.get("context") or {}).get("approval_impact") or {}).get("apply_guardrails") == (scheduled_apply_manifest.get("guardrails") or [])
                 and "--checked-batch" in (((action.get("context") or {}).get("approval_impact") or {}).get("guardrail") or "")
                 for action in scheduled_batch_actions
             ):
@@ -793,6 +802,7 @@ def validate_generated_outputs(failures):
         blocker_projection = ((summary.get("blocker_summary") or {}).get("next_resolution_projection") or {})
         scheduled_packet = json.loads(SCHEDULED_APPROVAL_PACKET.read_text(encoding="utf-8")) if SCHEDULED_APPROVAL_PACKET.exists() else {}
         scheduled_manifest = scheduled_packet.get("approval_decision_manifest") or {}
+        scheduled_apply_manifest = scheduled_packet.get("approval_apply_manifest") or {}
         scheduled_runbook = scheduled_packet.get("approval_review_runbook") or {}
         approval_runway = json.loads(APPROVAL_RUNWAY.read_text(encoding="utf-8")) if APPROVAL_RUNWAY.exists() else {}
         manual_approval_docket = approval_runway.get("manual_approval_docket") or {}
@@ -818,6 +828,10 @@ def validate_generated_outputs(failures):
             and approval_impact.get("decision_ready_ids") == (scheduled_manifest.get("ready_ids") or [])
             and approval_impact.get("decision_held_ids") == (scheduled_manifest.get("held_ids") or [])
             and (approval_impact.get("approval_decision_manifest") or {}).get("decisions") == (scheduled_manifest.get("decisions") or [])
+            and approval_impact.get("approval_apply_manifest") == scheduled_apply_manifest
+            and approval_impact.get("pre_apply_checklist") == (scheduled_apply_manifest.get("pre_apply_checklist") or [])
+            and approval_impact.get("post_apply_evidence") == (scheduled_apply_manifest.get("post_apply_evidence") or [])
+            and approval_impact.get("apply_guardrails") == (scheduled_apply_manifest.get("guardrails") or [])
             and (approval_impact.get("approval_review_runbook") or {}).get("steps") == (scheduled_runbook.get("steps") or [])
             and approval_impact.get("review_runbook_steps") == (scheduled_runbook.get("steps") or [])
             and approval_impact.get("review_checklist") == (scheduled_runbook.get("review_checklist") or [])
@@ -830,6 +844,10 @@ def validate_generated_outputs(failures):
             and first_ready_step.get("decision_ready_ids") == (scheduled_manifest.get("ready_ids") or [])
             and first_ready_step.get("decision_held_ids") == (scheduled_manifest.get("held_ids") or [])
             and (first_ready_step.get("approval_decision_manifest") or {}).get("decisions") == (scheduled_manifest.get("decisions") or [])
+            and first_ready_step.get("approval_apply_manifest") == scheduled_apply_manifest
+            and first_ready_step.get("pre_apply_checklist") == (scheduled_apply_manifest.get("pre_apply_checklist") or [])
+            and first_ready_step.get("post_apply_evidence") == (scheduled_apply_manifest.get("post_apply_evidence") or [])
+            and first_ready_step.get("apply_guardrails") == (scheduled_apply_manifest.get("guardrails") or [])
             and (first_ready_step.get("approval_review_runbook") or {}).get("steps") == (scheduled_runbook.get("steps") or [])
             and first_ready_step.get("review_runbook_steps") == (scheduled_runbook.get("steps") or [])
             and first_ready_step.get("review_checklist") == (scheduled_runbook.get("review_checklist") or [])
@@ -950,6 +968,7 @@ def validate_generated_outputs(failures):
         ready_docket = docket.get("ready_to_approve") or []
         held_docket = docket.get("held") or []
         decision_manifest = approval_packet.get("approval_decision_manifest") or {}
+        apply_manifest = approval_packet.get("approval_apply_manifest") or {}
         decisions = decision_manifest.get("decisions") or []
         ready_decisions = [item for item in decisions if item.get("decision") == "ready_to_approve"]
         held_decisions = [item for item in decisions if item.get("decision") == "held"]
@@ -998,6 +1017,21 @@ def validate_generated_outputs(failures):
             and [item.get("id") for item in held_decisions] == [row.get("id") for row in blocked_rows]
             and all(item.get("checked_batch_member") is True and item.get("post_approval_next_step") and (item.get("approval_effect") or {}).get("to") == "yes" for item in ready_decisions)
             and all(item.get("checked_batch_member") is False and item.get("failed_check_names") and item.get("post_approval_next_step") for item in held_decisions)
+            and apply_manifest.get("status") == ("ready_for_human_review" if checked_rows else "blocked")
+            and apply_manifest.get("ready_ids") == [row.get("id") for row in checked_rows]
+            and apply_manifest.get("held_ids") == [row.get("id") for row in blocked_rows]
+            and apply_manifest.get("apply_scope") == "checked_batch"
+            and apply_manifest.get("preview_command") == summary.get("checked_batch_preview_command")
+            and apply_manifest.get("apply_after_review_command") == summary.get("checked_batch_apply_command")
+            and apply_manifest.get("expected_change_count") == checked_batch_effect.get("change_count")
+            and apply_manifest.get("expected_effect") == checked_batch_effect
+            and [item.get("id") for item in apply_manifest.get("ready_rows") or []] == [row.get("id") for row in checked_rows]
+            and [item.get("id") for item in apply_manifest.get("held_rows") or []] == [row.get("id") for row in blocked_rows]
+            and all({"copy", "destination_links", "media_asset", "platform_readiness"} <= set(item.get("required_review") or []) for item in apply_manifest.get("ready_rows") or [])
+            and all(item.get("failed_check_names") for item in apply_manifest.get("held_rows") or [])
+            and any("Run the preview command" in item for item in apply_manifest.get("pre_apply_checklist") or [])
+            and any("data/scheduled_posts.csv" in item for item in apply_manifest.get("post_apply_evidence") or [])
+            and any("does not approve" in item for item in apply_manifest.get("guardrails") or [])
             and review_runbook.get("status") == docket.get("status")
             and review_runbook.get("ready_ids") == [row.get("id") for row in checked_rows]
             and review_runbook.get("blocked_ids") == [row.get("id") for row in blocked_rows]
@@ -2117,6 +2151,19 @@ def validate_generated_outputs(failures):
             ok("promo engine manual distribution next action includes safe review preview")
         elif reconciliation_summary.get("unlogged_manual_posts"):
             fail("promo_engine_status.json manual distribution next action missing safe preview", failures)
+        scheduled_packet = json.loads(SCHEDULED_APPROVAL_PACKET.read_text(encoding="utf-8")) if SCHEDULED_APPROVAL_PACKET.exists() else {}
+        scheduled_status = kpi.get("scheduled_approval") or {}
+        if (
+            scheduled_status.get("available") is True
+            and scheduled_status.get("source_path") == "data/scheduled_approval_packet.json"
+            and scheduled_status.get("summary") == (scheduled_packet.get("summary") or {})
+            and scheduled_status.get("approval_decision_manifest") == (scheduled_packet.get("approval_decision_manifest") or {})
+            and scheduled_status.get("approval_apply_manifest") == (scheduled_packet.get("approval_apply_manifest") or {})
+            and scheduled_status.get("approval_review_runbook") == (scheduled_packet.get("approval_review_runbook") or {})
+        ):
+            ok("promo engine status mirrors scheduled approval apply manifest")
+        else:
+            fail("promo_engine_status.json missing scheduled approval apply manifest", failures)
         unlock_impact = kpi.get("unlock_impact") or {}
         unlock_lanes = unlock_impact.get("lanes") or []
         blocker_ledger = json.loads(PROMOTION_BLOCKER_LEDGER.read_text(encoding="utf-8")) if PROMOTION_BLOCKER_LEDGER.exists() else {}
@@ -2534,7 +2581,7 @@ def validate_generated_outputs(failures):
         fail("build_published_log_reconciliation.py missing", failures)
     if HUMAN_HANDOFF_SCRIPT.exists():
         handoff_text = HUMAN_HANDOFF_SCRIPT.read_text(encoding="utf-8")
-        if "human_handoff_packet.json" in handoff_text and "human-handoff-packet.md" in handoff_text and "promotion_blocker_ledger.json" in handoff_text and "manual_metric_collection_packet.json" in handoff_text and "priority_batches" in handoff_text and "batch_count" in handoff_text and "metric_completion_manifest" in handoff_text and "completion_checklist" in handoff_text and "backlog_clearance_manifest" in handoff_text and "clearance_checklist" in handoff_text and "manual_distribution_packet.json" in handoff_text and "approval_runway.json" in handoff_text and "scheduled_approval_packet.json" in handoff_text and "platform_repair_status.json" in handoff_text and "tiktok_setup_preflight.json" in handoff_text and "action_docket" in handoff_text and "approval_decision_manifest" in handoff_text and "approval_review_runbook" in handoff_text and "review_checklist" in handoff_text and "Review runbook" in handoff_text and "decision_ready_ids" in handoff_text and "build_action_docket" in handoff_text and "command_sequence" in handoff_text and "completion_evidence" in handoff_text and "next_step_after_apply" in handoff_text and "subprocess" not in handoff_text:
+        if "human_handoff_packet.json" in handoff_text and "human-handoff-packet.md" in handoff_text and "promotion_blocker_ledger.json" in handoff_text and "manual_metric_collection_packet.json" in handoff_text and "priority_batches" in handoff_text and "batch_count" in handoff_text and "metric_completion_manifest" in handoff_text and "completion_checklist" in handoff_text and "backlog_clearance_manifest" in handoff_text and "clearance_checklist" in handoff_text and "manual_distribution_packet.json" in handoff_text and "approval_runway.json" in handoff_text and "scheduled_approval_packet.json" in handoff_text and "platform_repair_status.json" in handoff_text and "tiktok_setup_preflight.json" in handoff_text and "action_docket" in handoff_text and "approval_decision_manifest" in handoff_text and "approval_apply_manifest" in handoff_text and "pre_apply_checklist" in handoff_text and "approval_review_runbook" in handoff_text and "review_checklist" in handoff_text and "Review runbook" in handoff_text and "decision_ready_ids" in handoff_text and "build_action_docket" in handoff_text and "command_sequence" in handoff_text and "completion_evidence" in handoff_text and "next_step_after_apply" in handoff_text and "subprocess" not in handoff_text:
             ok("human handoff packet builder is review-only")
         else:
             fail("build_human_handoff_packet.py missing handoff outputs or executes commands", failures)
@@ -2566,7 +2613,7 @@ def validate_generated_outputs(failures):
         fail("build_approval_runway.py missing", failures)
     if SCHEDULED_APPROVAL_SCRIPT.exists():
         scheduled_approval_text = SCHEDULED_APPROVAL_SCRIPT.read_text(encoding="utf-8")
-        if "scheduled_approval_packet.json" in scheduled_approval_text and "scheduled-approval-packet.md" in scheduled_approval_text and "approval_preview_command" in scheduled_approval_text and "approval_apply_command" in scheduled_approval_text and "batch_preview_command" in scheduled_approval_text and "batch_apply_command" in scheduled_approval_text and "checked_batch_preview_command" in scheduled_approval_text and "checked_batch_apply_command" in scheduled_approval_text and "checked_batch_explicit_preview_command" in scheduled_approval_text and "checked_batch_explicit_apply_command" in scheduled_approval_text and "checked_batch_dry_run_preview" in scheduled_approval_text and "--checked-batch" in scheduled_approval_text and "approval_docket" in scheduled_approval_text and "approval_decision_manifest" in scheduled_approval_text and "approval_review_runbook" in scheduled_approval_text and "approval_review_checklist_row" in scheduled_approval_text and "ready_to_approve" in scheduled_approval_text and "review_checks" in scheduled_approval_text and "failed_review_checks" in scheduled_approval_text and "approval_review_status" in scheduled_approval_text and "executor_readiness_snapshot.json" in scheduled_approval_text and "subprocess" not in scheduled_approval_text:
+        if "scheduled_approval_packet.json" in scheduled_approval_text and "scheduled-approval-packet.md" in scheduled_approval_text and "approval_preview_command" in scheduled_approval_text and "approval_apply_command" in scheduled_approval_text and "batch_preview_command" in scheduled_approval_text and "batch_apply_command" in scheduled_approval_text and "checked_batch_preview_command" in scheduled_approval_text and "checked_batch_apply_command" in scheduled_approval_text and "checked_batch_explicit_preview_command" in scheduled_approval_text and "checked_batch_explicit_apply_command" in scheduled_approval_text and "checked_batch_dry_run_preview" in scheduled_approval_text and "--checked-batch" in scheduled_approval_text and "approval_docket" in scheduled_approval_text and "approval_decision_manifest" in scheduled_approval_text and "approval_apply_manifest" in scheduled_approval_text and "Approval Apply Manifest" in scheduled_approval_text and "pre_apply_checklist" in scheduled_approval_text and "post_apply_evidence" in scheduled_approval_text and "approval_review_runbook" in scheduled_approval_text and "approval_review_checklist_row" in scheduled_approval_text and "ready_to_approve" in scheduled_approval_text and "review_checks" in scheduled_approval_text and "failed_review_checks" in scheduled_approval_text and "approval_review_status" in scheduled_approval_text and "executor_readiness_snapshot.json" in scheduled_approval_text and "subprocess" not in scheduled_approval_text:
             ok("scheduled approval packet builder is review-only")
         else:
             fail("build_scheduled_approval_packet.py missing approval packet outputs, batch commands, review checks, or executes commands", failures)
@@ -2702,7 +2749,7 @@ def validate_generated_outputs(failures):
         fail("approval-runway.md missing", failures)
     if SCHEDULED_APPROVAL_REPORT.exists():
         scheduled_approval_report_text = SCHEDULED_APPROVAL_REPORT.read_text(encoding="utf-8")
-        if "Scheduled Approval Packet" in scheduled_approval_report_text and "Approval Docket" in scheduled_approval_report_text and "Approval Review Runbook" in scheduled_approval_report_text and "Ready Row Checklist" in scheduled_approval_report_text and "Review Queue" in scheduled_approval_report_text and "Guardrails" in scheduled_approval_report_text:
+        if "Scheduled Approval Packet" in scheduled_approval_report_text and "Approval Docket" in scheduled_approval_report_text and "Approval Apply Manifest" in scheduled_approval_report_text and "Pre-Apply Checklist" in scheduled_approval_report_text and "Post-Apply Evidence" in scheduled_approval_report_text and "Approval Review Runbook" in scheduled_approval_report_text and "Ready Row Checklist" in scheduled_approval_report_text and "Review Queue" in scheduled_approval_report_text and "Guardrails" in scheduled_approval_report_text:
             ok("scheduled approval markdown report present")
         else:
             fail("scheduled-approval-packet.md missing expected sections", failures)

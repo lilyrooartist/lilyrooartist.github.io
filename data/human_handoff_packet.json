@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T08:44:29.868693Z",
+  "generated_at": "2026-06-20T08:50:34.818374Z",
   "safe_mode": true,
   "source": {
     "promotion_blocker_ledger": "data/promotion_blocker_ledger.json",
@@ -138,7 +138,7 @@
           "blocked_by": [
             "FP-AUTO-264"
           ],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
           "apply_command": "",
           "source_path": "data/backlog_reschedule_preview.json"
         },
@@ -391,6 +391,112 @@
         "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
         "guardrail": "Only ready_to_approve decisions may be applied through --checked-batch; held rows require repair first."
       },
+      "approval_apply_manifest": {
+        "status": "ready_for_human_review",
+        "ready_ids": [
+          "FP-AUTO-258",
+          "FP-AUTO-261"
+        ],
+        "held_ids": [
+          "FP-AUTO-259"
+        ],
+        "apply_scope": "checked_batch",
+        "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+        "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+        "expected_change_count": 2,
+        "expected_effect": {
+          "row_count": 2,
+          "change_count": 2,
+          "ids": [
+            "FP-AUTO-258",
+            "FP-AUTO-261"
+          ],
+          "effects": [
+            {
+              "id": "FP-AUTO-258",
+              "platform": "Instagram",
+              "execution_mode": "auto",
+              "effect": {
+                "field": "approved",
+                "from": "no",
+                "to": "yes",
+                "changed": true,
+                "summary": "approved 'no' -> 'yes'"
+              }
+            },
+            {
+              "id": "FP-AUTO-261",
+              "platform": "YouTube Community",
+              "execution_mode": "manual",
+              "effect": {
+                "field": "approved",
+                "from": "no",
+                "to": "yes",
+                "changed": true,
+                "summary": "approved 'no' -> 'yes'"
+              }
+            }
+          ]
+        },
+        "ready_rows": [
+          {
+            "id": "FP-AUTO-258",
+            "platform": "Instagram",
+            "song": "I Learned It All in Fifteen Seconds",
+            "execution_mode": "auto",
+            "manual_dispatch_required": false,
+            "post_approval_next_step": "Refresh Admin and let the executor retry after approval is visible.",
+            "required_review": [
+              "copy",
+              "destination_links",
+              "media_asset",
+              "platform_readiness"
+            ]
+          },
+          {
+            "id": "FP-AUTO-261",
+            "platform": "YouTube Community",
+            "song": "I Learned It All in Fifteen Seconds",
+            "execution_mode": "manual",
+            "manual_dispatch_required": true,
+            "post_approval_next_step": "Post manually and log the public URL after approval.",
+            "required_review": [
+              "copy",
+              "destination_links",
+              "media_asset",
+              "platform_readiness"
+            ]
+          }
+        ],
+        "held_rows": [
+          {
+            "id": "FP-AUTO-259",
+            "platform": "TikTok",
+            "song": "I Learned It All in Fifteen Seconds",
+            "failed_check_names": [
+              "platform_readiness"
+            ]
+          }
+        ],
+        "pre_apply_checklist": [
+          "Review copy, links, and media for every ready row.",
+          "Run the preview command and confirm it lists only ready_ids.",
+          "Confirm held_ids are excluded from the checked batch.",
+          "Apply only with --checked-batch after human review passes."
+        ],
+        "post_apply_evidence": [
+          "data/scheduled_posts.csv shows ready_ids changed from approved=no to approved=yes.",
+          "data/scheduled_approval_packet.json reports fewer approval blockers after refresh.",
+          "data/social_scheduler_dry_run.json no longer blocks the approved Instagram row on not_approved.",
+          "Manual-dispatch ready rows remain in the manual posting/logging workflow until a real public URL exists."
+        ],
+        "guardrails": [
+          "This manifest does not approve, publish, post, or log anything.",
+          "Do not use the full batch command while held_ids are present.",
+          "Do not approve held rows until failed review checks clear.",
+          "Manual dispatch remains separate from approval."
+        ]
+      },
       "approval_review_runbook": {
         "status": "ready_for_review",
         "ready_ids": [
@@ -554,6 +660,24 @@
         ],
         "guardrail": "This runbook is review-only; it does not approve, publish, post, or log anything."
       },
+      "pre_apply_checklist": [
+        "Review copy, links, and media for every ready row.",
+        "Run the preview command and confirm it lists only ready_ids.",
+        "Confirm held_ids are excluded from the checked batch.",
+        "Apply only with --checked-batch after human review passes."
+      ],
+      "post_apply_evidence": [
+        "data/scheduled_posts.csv shows ready_ids changed from approved=no to approved=yes.",
+        "data/scheduled_approval_packet.json reports fewer approval blockers after refresh.",
+        "data/social_scheduler_dry_run.json no longer blocks the approved Instagram row on not_approved.",
+        "Manual-dispatch ready rows remain in the manual posting/logging workflow until a real public URL exists."
+      ],
+      "apply_guardrails": [
+        "This manifest does not approve, publish, post, or log anything.",
+        "Do not use the full batch command while held_ids are present.",
+        "Do not approve held rows until failed review checks clear.",
+        "Manual dispatch remains separate from approval."
+      ],
       "review_runbook_steps": [
         {
           "order": 1,
@@ -771,10 +895,10 @@
           "blocked_ids": [
             "FP-AUTO-264"
           ],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
           "safe_apply_command": "",
-          "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-          "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
+          "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --apply --refresh-admin",
+          "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
           "apply_allowed_without_override": false,
           "apply_gate": "blocked_until_clearance_steps_complete",
           "clearance_steps": [
@@ -789,7 +913,7 @@
               "song": "I Learned It All in Fifteen Seconds",
               "blocker_kind": "tiktok_credentials_missing",
               "blocker_reason": "tiktok_credentials_missing",
-              "proposed_scheduled_at": "2026-06-21T10:00:00+00:00",
+              "proposed_scheduled_at": "2026-06-21T10:00:00+09:00",
               "clearance_steps": [
                 "Add local TikTok OAuth credentials, then push worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
                 "Confirm TikTok public posting approval before treating auto-posting as ready.",
@@ -828,12 +952,12 @@
           "Do not use the override command unless accepting the blocked executor risk deliberately.",
           "A reschedule does not publish, approve, or repair platform credentials by itself."
         ],
-        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
         "apply_command": "",
         "command_sequence": [
           {
             "step": "preview",
-            "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+            "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
             "required_before_apply": true
           },
           {
@@ -1058,6 +1182,112 @@
           "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
           "guardrail": "Only ready_to_approve decisions may be applied through --checked-batch; held rows require repair first."
         },
+        "approval_apply_manifest": {
+          "status": "ready_for_human_review",
+          "ready_ids": [
+            "FP-AUTO-258",
+            "FP-AUTO-261"
+          ],
+          "held_ids": [
+            "FP-AUTO-259"
+          ],
+          "apply_scope": "checked_batch",
+          "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+          "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+          "expected_change_count": 2,
+          "expected_effect": {
+            "row_count": 2,
+            "change_count": 2,
+            "ids": [
+              "FP-AUTO-258",
+              "FP-AUTO-261"
+            ],
+            "effects": [
+              {
+                "id": "FP-AUTO-258",
+                "platform": "Instagram",
+                "execution_mode": "auto",
+                "effect": {
+                  "field": "approved",
+                  "from": "no",
+                  "to": "yes",
+                  "changed": true,
+                  "summary": "approved 'no' -> 'yes'"
+                }
+              },
+              {
+                "id": "FP-AUTO-261",
+                "platform": "YouTube Community",
+                "execution_mode": "manual",
+                "effect": {
+                  "field": "approved",
+                  "from": "no",
+                  "to": "yes",
+                  "changed": true,
+                  "summary": "approved 'no' -> 'yes'"
+                }
+              }
+            ]
+          },
+          "ready_rows": [
+            {
+              "id": "FP-AUTO-258",
+              "platform": "Instagram",
+              "song": "I Learned It All in Fifteen Seconds",
+              "execution_mode": "auto",
+              "manual_dispatch_required": false,
+              "post_approval_next_step": "Refresh Admin and let the executor retry after approval is visible.",
+              "required_review": [
+                "copy",
+                "destination_links",
+                "media_asset",
+                "platform_readiness"
+              ]
+            },
+            {
+              "id": "FP-AUTO-261",
+              "platform": "YouTube Community",
+              "song": "I Learned It All in Fifteen Seconds",
+              "execution_mode": "manual",
+              "manual_dispatch_required": true,
+              "post_approval_next_step": "Post manually and log the public URL after approval.",
+              "required_review": [
+                "copy",
+                "destination_links",
+                "media_asset",
+                "platform_readiness"
+              ]
+            }
+          ],
+          "held_rows": [
+            {
+              "id": "FP-AUTO-259",
+              "platform": "TikTok",
+              "song": "I Learned It All in Fifteen Seconds",
+              "failed_check_names": [
+                "platform_readiness"
+              ]
+            }
+          ],
+          "pre_apply_checklist": [
+            "Review copy, links, and media for every ready row.",
+            "Run the preview command and confirm it lists only ready_ids.",
+            "Confirm held_ids are excluded from the checked batch.",
+            "Apply only with --checked-batch after human review passes."
+          ],
+          "post_apply_evidence": [
+            "data/scheduled_posts.csv shows ready_ids changed from approved=no to approved=yes.",
+            "data/scheduled_approval_packet.json reports fewer approval blockers after refresh.",
+            "data/social_scheduler_dry_run.json no longer blocks the approved Instagram row on not_approved.",
+            "Manual-dispatch ready rows remain in the manual posting/logging workflow until a real public URL exists."
+          ],
+          "guardrails": [
+            "This manifest does not approve, publish, post, or log anything.",
+            "Do not use the full batch command while held_ids are present.",
+            "Do not approve held rows until failed review checks clear.",
+            "Manual dispatch remains separate from approval."
+          ]
+        },
         "approval_review_runbook": {
           "status": "ready_for_review",
           "ready_ids": [
@@ -1221,6 +1451,24 @@
           ],
           "guardrail": "This runbook is review-only; it does not approve, publish, post, or log anything."
         },
+        "pre_apply_checklist": [
+          "Review copy, links, and media for every ready row.",
+          "Run the preview command and confirm it lists only ready_ids.",
+          "Confirm held_ids are excluded from the checked batch.",
+          "Apply only with --checked-batch after human review passes."
+        ],
+        "post_apply_evidence": [
+          "data/scheduled_posts.csv shows ready_ids changed from approved=no to approved=yes.",
+          "data/scheduled_approval_packet.json reports fewer approval blockers after refresh.",
+          "data/social_scheduler_dry_run.json no longer blocks the approved Instagram row on not_approved.",
+          "Manual-dispatch ready rows remain in the manual posting/logging workflow until a real public URL exists."
+        ],
+        "apply_guardrails": [
+          "This manifest does not approve, publish, post, or log anything.",
+          "Do not use the full batch command while held_ids are present.",
+          "Do not approve held rows until failed review checks clear.",
+          "Manual dispatch remains separate from approval."
+        ],
         "review_runbook_steps": [
           {
             "order": 1,
@@ -1627,10 +1875,10 @@
           "blocked_ids": [
             "FP-AUTO-264"
           ],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
           "safe_apply_command": "",
-          "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-          "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
+          "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --apply --refresh-admin",
+          "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
           "apply_allowed_without_override": false,
           "apply_gate": "blocked_until_clearance_steps_complete",
           "clearance_steps": [
@@ -1645,7 +1893,7 @@
               "song": "I Learned It All in Fifteen Seconds",
               "blocker_kind": "tiktok_credentials_missing",
               "blocker_reason": "tiktok_credentials_missing",
-              "proposed_scheduled_at": "2026-06-21T10:00:00+00:00",
+              "proposed_scheduled_at": "2026-06-21T10:00:00+09:00",
               "clearance_steps": [
                 "Add local TikTok OAuth credentials, then push worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
                 "Confirm TikTok public posting approval before treating auto-posting as ready.",
@@ -1684,12 +1932,12 @@
           "Do not use the override command unless accepting the blocked executor risk deliberately.",
           "A reschedule does not publish, approve, or repair platform credentials by itself."
         ],
-        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
         "apply_command": "",
         "command_sequence": [
           {
             "step": "preview",
-            "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+            "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
             "required_before_apply": true
           },
           {
@@ -1924,6 +2172,112 @@
           "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
           "guardrail": "Only ready_to_approve decisions may be applied through --checked-batch; held rows require repair first."
         },
+        "approval_apply_manifest": {
+          "status": "ready_for_human_review",
+          "ready_ids": [
+            "FP-AUTO-258",
+            "FP-AUTO-261"
+          ],
+          "held_ids": [
+            "FP-AUTO-259"
+          ],
+          "apply_scope": "checked_batch",
+          "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+          "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+          "expected_change_count": 2,
+          "expected_effect": {
+            "row_count": 2,
+            "change_count": 2,
+            "ids": [
+              "FP-AUTO-258",
+              "FP-AUTO-261"
+            ],
+            "effects": [
+              {
+                "id": "FP-AUTO-258",
+                "platform": "Instagram",
+                "execution_mode": "auto",
+                "effect": {
+                  "field": "approved",
+                  "from": "no",
+                  "to": "yes",
+                  "changed": true,
+                  "summary": "approved 'no' -> 'yes'"
+                }
+              },
+              {
+                "id": "FP-AUTO-261",
+                "platform": "YouTube Community",
+                "execution_mode": "manual",
+                "effect": {
+                  "field": "approved",
+                  "from": "no",
+                  "to": "yes",
+                  "changed": true,
+                  "summary": "approved 'no' -> 'yes'"
+                }
+              }
+            ]
+          },
+          "ready_rows": [
+            {
+              "id": "FP-AUTO-258",
+              "platform": "Instagram",
+              "song": "I Learned It All in Fifteen Seconds",
+              "execution_mode": "auto",
+              "manual_dispatch_required": false,
+              "post_approval_next_step": "Refresh Admin and let the executor retry after approval is visible.",
+              "required_review": [
+                "copy",
+                "destination_links",
+                "media_asset",
+                "platform_readiness"
+              ]
+            },
+            {
+              "id": "FP-AUTO-261",
+              "platform": "YouTube Community",
+              "song": "I Learned It All in Fifteen Seconds",
+              "execution_mode": "manual",
+              "manual_dispatch_required": true,
+              "post_approval_next_step": "Post manually and log the public URL after approval.",
+              "required_review": [
+                "copy",
+                "destination_links",
+                "media_asset",
+                "platform_readiness"
+              ]
+            }
+          ],
+          "held_rows": [
+            {
+              "id": "FP-AUTO-259",
+              "platform": "TikTok",
+              "song": "I Learned It All in Fifteen Seconds",
+              "failed_check_names": [
+                "platform_readiness"
+              ]
+            }
+          ],
+          "pre_apply_checklist": [
+            "Review copy, links, and media for every ready row.",
+            "Run the preview command and confirm it lists only ready_ids.",
+            "Confirm held_ids are excluded from the checked batch.",
+            "Apply only with --checked-batch after human review passes."
+          ],
+          "post_apply_evidence": [
+            "data/scheduled_posts.csv shows ready_ids changed from approved=no to approved=yes.",
+            "data/scheduled_approval_packet.json reports fewer approval blockers after refresh.",
+            "data/social_scheduler_dry_run.json no longer blocks the approved Instagram row on not_approved.",
+            "Manual-dispatch ready rows remain in the manual posting/logging workflow until a real public URL exists."
+          ],
+          "guardrails": [
+            "This manifest does not approve, publish, post, or log anything.",
+            "Do not use the full batch command while held_ids are present.",
+            "Do not approve held rows until failed review checks clear.",
+            "Manual dispatch remains separate from approval."
+          ]
+        },
         "approval_review_runbook": {
           "status": "ready_for_review",
           "ready_ids": [
@@ -2087,6 +2441,24 @@
           ],
           "guardrail": "This runbook is review-only; it does not approve, publish, post, or log anything."
         },
+        "pre_apply_checklist": [
+          "Review copy, links, and media for every ready row.",
+          "Run the preview command and confirm it lists only ready_ids.",
+          "Confirm held_ids are excluded from the checked batch.",
+          "Apply only with --checked-batch after human review passes."
+        ],
+        "post_apply_evidence": [
+          "data/scheduled_posts.csv shows ready_ids changed from approved=no to approved=yes.",
+          "data/scheduled_approval_packet.json reports fewer approval blockers after refresh.",
+          "data/social_scheduler_dry_run.json no longer blocks the approved Instagram row on not_approved.",
+          "Manual-dispatch ready rows remain in the manual posting/logging workflow until a real public URL exists."
+        ],
+        "apply_guardrails": [
+          "This manifest does not approve, publish, post, or log anything.",
+          "Do not use the full batch command while held_ids are present.",
+          "Do not approve held rows until failed review checks clear.",
+          "Manual dispatch remains separate from approval."
+        ],
         "review_runbook_steps": [
           {
             "order": 1,
@@ -2291,14 +2663,14 @@
       "urgency": "high",
       "status": "blocked",
       "detail": "Known executor/platform blockers must clear before normal apply.",
-      "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+      "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
       "apply_command": "",
       "source_path": "data/backlog_reschedule_preview.json",
       "impact": {
         "approved_backlog_count": 1,
         "blocked_backlog_count": 1,
-        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
+        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --apply --refresh-admin",
+        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
         "backlog_clearance_manifest": {
           "status": "blocked_until_clearance_steps_complete",
           "approved_backlog_count": 1,
@@ -2307,10 +2679,10 @@
           "blocked_ids": [
             "FP-AUTO-264"
           ],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
           "safe_apply_command": "",
-          "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-          "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
+          "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --apply --refresh-admin",
+          "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
           "apply_allowed_without_override": false,
           "apply_gate": "blocked_until_clearance_steps_complete",
           "clearance_steps": [
@@ -2325,7 +2697,7 @@
               "song": "I Learned It All in Fifteen Seconds",
               "blocker_kind": "tiktok_credentials_missing",
               "blocker_reason": "tiktok_credentials_missing",
-              "proposed_scheduled_at": "2026-06-21T10:00:00+00:00",
+              "proposed_scheduled_at": "2026-06-21T10:00:00+09:00",
               "clearance_steps": [
                 "Add local TikTok OAuth credentials, then push worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
                 "Confirm TikTok public posting approval before treating auto-posting as ready.",

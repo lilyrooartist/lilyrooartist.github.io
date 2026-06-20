@@ -30,6 +30,7 @@ PROMO_QUEUE_PLAN = ROOT / "data" / "promo_queue_plan.json"
 PROMO_OPERATIONS_PACKET = ROOT / "data" / "promo_operations_packet.json"
 PROMOTION_BLOCKER_LEDGER = ROOT / "data" / "promotion_blocker_ledger.json"
 HUMAN_HANDOFF_PACKET = ROOT / "data" / "human_handoff_packet.json"
+SCHEDULED_APPROVAL_PACKET = ROOT / "data" / "scheduled_approval_packet.json"
 MANUAL_DISTRIBUTION_PACKET = ROOT / "data" / "manual_distribution_packet.json"
 PUBLISHED_LOG_RECONCILIATION = ROOT / "data" / "published_log_reconciliation.json"
 BACKLOG_RESCHEDULE_PREVIEW = ROOT / "data" / "backlog_reschedule_preview.json"
@@ -1625,6 +1626,7 @@ def build_status():
     promo_operations = read_json(PROMO_OPERATIONS_PACKET, {})
     promotion_blockers = read_json(PROMOTION_BLOCKER_LEDGER, {})
     human_handoff = read_json(HUMAN_HANDOFF_PACKET, {})
+    scheduled_approval = read_json(SCHEDULED_APPROVAL_PACKET, {})
     manual_distribution = read_json(MANUAL_DISTRIBUTION_PACKET, {})
     published_log_reconciliation = read_json(PUBLISHED_LOG_RECONCILIATION, {})
     backlog_reschedule_preview = read_json(BACKLOG_RESCHEDULE_PREVIEW, {})
@@ -1876,6 +1878,14 @@ def build_status():
             "operational_next_action": operational_next_action,
             "unlock_impact": unlock_impact,
             "operator_docket": operator_docket,
+            "scheduled_approval": {
+                "source_path": str(SCHEDULED_APPROVAL_PACKET.relative_to(ROOT)),
+                "available": bool(scheduled_approval),
+                "summary": scheduled_approval.get("summary") or {},
+                "approval_decision_manifest": scheduled_approval.get("approval_decision_manifest") or {},
+                "approval_apply_manifest": scheduled_approval.get("approval_apply_manifest") or {},
+                "approval_review_runbook": scheduled_approval.get("approval_review_runbook") or {},
+            },
             "manual_distribution": manual_distribution,
             "published_log_reconciliation": published_log_reconciliation,
             "backlog_reschedule": {

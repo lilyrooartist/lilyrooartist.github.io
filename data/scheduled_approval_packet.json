@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T08:44:29.409205Z",
+  "generated_at": "2026-06-20T08:50:34.533611Z",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -819,6 +819,112 @@
     "review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
     "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
     "guardrail": "Only ready_to_approve decisions may be applied through --checked-batch; held rows require repair first."
+  },
+  "approval_apply_manifest": {
+    "status": "ready_for_human_review",
+    "ready_ids": [
+      "FP-AUTO-258",
+      "FP-AUTO-261"
+    ],
+    "held_ids": [
+      "FP-AUTO-259"
+    ],
+    "apply_scope": "checked_batch",
+    "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+    "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+    "expected_change_count": 2,
+    "expected_effect": {
+      "row_count": 2,
+      "change_count": 2,
+      "ids": [
+        "FP-AUTO-258",
+        "FP-AUTO-261"
+      ],
+      "effects": [
+        {
+          "id": "FP-AUTO-258",
+          "platform": "Instagram",
+          "execution_mode": "auto",
+          "effect": {
+            "field": "approved",
+            "from": "no",
+            "to": "yes",
+            "changed": true,
+            "summary": "approved 'no' -> 'yes'"
+          }
+        },
+        {
+          "id": "FP-AUTO-261",
+          "platform": "YouTube Community",
+          "execution_mode": "manual",
+          "effect": {
+            "field": "approved",
+            "from": "no",
+            "to": "yes",
+            "changed": true,
+            "summary": "approved 'no' -> 'yes'"
+          }
+        }
+      ]
+    },
+    "ready_rows": [
+      {
+        "id": "FP-AUTO-258",
+        "platform": "Instagram",
+        "song": "I Learned It All in Fifteen Seconds",
+        "execution_mode": "auto",
+        "manual_dispatch_required": false,
+        "post_approval_next_step": "Refresh Admin and let the executor retry after approval is visible.",
+        "required_review": [
+          "copy",
+          "destination_links",
+          "media_asset",
+          "platform_readiness"
+        ]
+      },
+      {
+        "id": "FP-AUTO-261",
+        "platform": "YouTube Community",
+        "song": "I Learned It All in Fifteen Seconds",
+        "execution_mode": "manual",
+        "manual_dispatch_required": true,
+        "post_approval_next_step": "Post manually and log the public URL after approval.",
+        "required_review": [
+          "copy",
+          "destination_links",
+          "media_asset",
+          "platform_readiness"
+        ]
+      }
+    ],
+    "held_rows": [
+      {
+        "id": "FP-AUTO-259",
+        "platform": "TikTok",
+        "song": "I Learned It All in Fifteen Seconds",
+        "failed_check_names": [
+          "platform_readiness"
+        ]
+      }
+    ],
+    "pre_apply_checklist": [
+      "Review copy, links, and media for every ready row.",
+      "Run the preview command and confirm it lists only ready_ids.",
+      "Confirm held_ids are excluded from the checked batch.",
+      "Apply only with --checked-batch after human review passes."
+    ],
+    "post_apply_evidence": [
+      "data/scheduled_posts.csv shows ready_ids changed from approved=no to approved=yes.",
+      "data/scheduled_approval_packet.json reports fewer approval blockers after refresh.",
+      "data/social_scheduler_dry_run.json no longer blocks the approved Instagram row on not_approved.",
+      "Manual-dispatch ready rows remain in the manual posting/logging workflow until a real public URL exists."
+    ],
+    "guardrails": [
+      "This manifest does not approve, publish, post, or log anything.",
+      "Do not use the full batch command while held_ids are present.",
+      "Do not approve held rows until failed review checks clear.",
+      "Manual dispatch remains separate from approval."
+    ]
   },
   "approval_review_runbook": {
     "status": "ready_for_review",

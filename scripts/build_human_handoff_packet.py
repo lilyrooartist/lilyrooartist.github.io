@@ -61,6 +61,7 @@ def command_task(
 def approval_tasks(packet: dict, blocker_summary: dict) -> list[dict]:
     summary = packet.get("summary") or {}
     decision_manifest = packet.get("approval_decision_manifest") or {}
+    apply_manifest = packet.get("approval_apply_manifest") or {}
     review_runbook = packet.get("approval_review_runbook") or {}
     checked_ids = summary.get("checked_batch_ids") or []
     if not checked_ids:
@@ -101,7 +102,11 @@ def approval_tasks(packet: dict, blocker_summary: dict) -> list[dict]:
                 "auto_rows_unblocked": auto_rows_unblocked,
                 "manual_rows_unblocked": manual_rows_unblocked,
                 "approval_decision_manifest": decision_manifest,
+                "approval_apply_manifest": apply_manifest,
                 "approval_review_runbook": review_runbook,
+                "pre_apply_checklist": apply_manifest.get("pre_apply_checklist") or [],
+                "post_apply_evidence": apply_manifest.get("post_apply_evidence") or [],
+                "apply_guardrails": apply_manifest.get("guardrails") or [],
                 "review_runbook_steps": review_runbook.get("steps") or [],
                 "review_checklist": review_runbook.get("review_checklist") or [],
                 "decision_ready_ids": decision_manifest.get("ready_ids") or [],
@@ -325,7 +330,11 @@ def build_action_docket(tasks: list[dict], blocker_summary: dict, approval_runwa
             "decision_ready_ids": approval_impact.get("decision_ready_ids") or [],
             "decision_held_ids": approval_impact.get("decision_held_ids") or [],
             "approval_decision_manifest": approval_impact.get("approval_decision_manifest") or {},
+            "approval_apply_manifest": approval_impact.get("approval_apply_manifest") or {},
             "approval_review_runbook": approval_impact.get("approval_review_runbook") or {},
+            "pre_apply_checklist": approval_impact.get("pre_apply_checklist") or [],
+            "post_apply_evidence": approval_impact.get("post_apply_evidence") or [],
+            "apply_guardrails": approval_impact.get("apply_guardrails") or [],
             "review_runbook_steps": approval_impact.get("review_runbook_steps") or [],
             "review_checklist": approval_impact.get("review_checklist") or [],
             "preview_command": approval_preview_command,

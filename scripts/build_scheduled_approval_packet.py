@@ -221,6 +221,74 @@ def approval_decision_manifest(checked_rows: list[dict], blocked_rows: list[dict
     }
 
 
+def approval_apply_manifest(checked_rows: list[dict], blocked_rows: list[dict], summary: dict) -> dict:
+    ready_ids = [row.get("id") for row in checked_rows if row.get("id")]
+    held_ids = [row.get("id") for row in blocked_rows if row.get("id")]
+    expected_effect = summary.get("checked_batch_effect") or {}
+    return {
+        "status": "ready_for_human_review" if ready_ids else "blocked",
+        "ready_ids": ready_ids,
+        "held_ids": held_ids,
+        "apply_scope": "checked_batch",
+        "preview_command": summary.get("checked_batch_preview_command") or "",
+        "apply_after_review_command": summary.get("checked_batch_apply_command") or "",
+        "expected_change_count": int(expected_effect.get("change_count") or 0),
+        "expected_effect": expected_effect,
+        "ready_rows": [
+            {
+                "id": row.get("id") or "",
+                "platform": row.get("platform") or "",
+                "song": row.get("song") or "",
+                "execution_mode": row.get("execution_mode") or "",
+                "manual_dispatch_required": bool(row.get("manual_dispatch")),
+                "post_approval_next_step": (
+                    "Post manually and log the public URL after approval."
+                    if row.get("manual_dispatch")
+                    else "Refresh Admin and let the executor retry after approval is visible."
+                ),
+                "required_review": [
+                    "copy",
+                    "destination_links",
+                    "media_asset",
+                    "platform_readiness",
+                ],
+            }
+            for row in checked_rows
+        ],
+        "held_rows": [
+            {
+                "id": row.get("id") or "",
+                "platform": row.get("platform") or "",
+                "song": row.get("song") or "",
+                "failed_check_names": [
+                    item.get("name")
+                    for item in row.get("failed_review_checks") or []
+                    if item.get("name")
+                ],
+            }
+            for row in blocked_rows
+        ],
+        "pre_apply_checklist": [
+            "Review copy, links, and media for every ready row.",
+            "Run the preview command and confirm it lists only ready_ids.",
+            "Confirm held_ids are excluded from the checked batch.",
+            "Apply only with --checked-batch after human review passes.",
+        ],
+        "post_apply_evidence": [
+            "data/scheduled_posts.csv shows ready_ids changed from approved=no to approved=yes.",
+            "data/scheduled_approval_packet.json reports fewer approval blockers after refresh.",
+            "data/social_scheduler_dry_run.json no longer blocks the approved Instagram row on not_approved.",
+            "Manual-dispatch ready rows remain in the manual posting/logging workflow until a real public URL exists.",
+        ],
+        "guardrails": [
+            "This manifest does not approve, publish, post, or log anything.",
+            "Do not use the full batch command while held_ids are present.",
+            "Do not approve held rows until failed review checks clear.",
+            "Manual dispatch remains separate from approval.",
+        ],
+    }
+
+
 def approval_review_checklist_row(row: dict) -> dict:
     link_summary = row.get("destination_link_audit_summary") or {}
     local_asset = local_public_path(row.get("asset_url") or "")
@@ -638,6 +706,7 @@ def build_markdown(payload: dict) -> str:
     ]
     docket = payload.get("approval_docket") or {}
     decision_manifest = payload.get("approval_decision_manifest") or {}
+    apply_manifest = payload.get("approval_apply_manifest") or {}
     lines.extend([
         f"- Status: **{docket.get('status', 'unknown')}**",
         f"- Ready to approve: **{docket.get('ready_count', 0)}**",
@@ -647,6 +716,33 @@ def build_markdown(payload: dict) -> str:
         f"- Checked batch dry-run result: **{(docket.get('checked_batch_dry_run_preview') or {}).get('change_count', 0)}** change(s), **{(docket.get('checked_batch_dry_run_preview') or {}).get('row_count', 0)}** reviewed row(s), no files written",
         f"- Decision manifest: **{len(decision_manifest.get('decisions') or [])}** reviewed row(s); ready `{', '.join(decision_manifest.get('ready_ids') or []) or 'none'}`; held `{', '.join(decision_manifest.get('held_ids') or []) or 'none'}`",
     ])
+    lines.extend([
+        "",
+        "### Approval Apply Manifest",
+        f"- Status: **{apply_manifest.get('status', 'unknown')}**",
+        f"- Apply scope: **{apply_manifest.get('apply_scope', 'unknown')}**",
+        f"- Ready IDs: `{', '.join(apply_manifest.get('ready_ids') or []) or 'none'}`",
+        f"- Held IDs: `{', '.join(apply_manifest.get('held_ids') or []) or 'none'}`",
+        f"- Expected changes: **{apply_manifest.get('expected_change_count', 0)}**",
+        f"- Preview: `{apply_manifest.get('preview_command') or 'none'}`",
+        f"- Apply after review: `{apply_manifest.get('apply_after_review_command') or 'none'}`",
+        "",
+        "#### Pre-Apply Checklist",
+    ])
+    for item in apply_manifest.get("pre_apply_checklist") or []:
+        lines.append(f"- {item}")
+    lines.extend([
+        "",
+        "#### Post-Apply Evidence",
+    ])
+    for item in apply_manifest.get("post_apply_evidence") or []:
+        lines.append(f"- {item}")
+    lines.extend([
+        "",
+        "#### Apply Guardrails",
+    ])
+    for item in apply_manifest.get("guardrails") or []:
+        lines.append(f"- {item}")
     runbook = payload.get("approval_review_runbook") or {}
     lines.extend([
         "",
@@ -847,6 +943,7 @@ def main() -> int:
         "summary": summary,
         "approval_docket": approval_docket(checked_rows, blocked_rows, summary),
         "approval_decision_manifest": approval_decision_manifest(checked_rows, blocked_rows, summary),
+        "approval_apply_manifest": approval_apply_manifest(checked_rows, blocked_rows, summary),
         "approval_review_runbook": approval_review_runbook(checked_rows, blocked_rows, summary),
         "rows": rows,
     }
