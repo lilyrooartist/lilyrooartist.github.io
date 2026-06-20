@@ -168,7 +168,17 @@ def pending_store_actions(status):
             label_prefix = "Re-check" if latest else "Verify"
             note = item.get("note") or ""
             if latest:
-                note = f"{note} Latest snapshot found no public URL; keep this pending until DistroKid exposes the release.".strip()
+                recheck_status = latest.get("recheck_status") or ""
+                next_recheck = latest.get("next_recheck_at") or ""
+                if latest.get("recheck_due"):
+                    cadence_note = "Latest snapshot found no public URL and is due for re-check."
+                elif next_recheck:
+                    cadence_note = f"Latest snapshot found no public URL; next recommended re-check after {next_recheck}."
+                else:
+                    cadence_note = "Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
+                if recheck_status:
+                    cadence_note = f"{cadence_note} Status: {recheck_status}."
+                note = f"{note} {cadence_note}".strip()
             actions.append(command_row(
                 f"{label_prefix} {title} on {item.get('service') or 'store'}",
                 item.get("command") or "",
@@ -178,6 +188,11 @@ def pending_store_actions(status):
                     "release": title,
                     "service": item.get("service") or "",
                     "checked_at": checked_at,
+                    "checked_age_hours": latest.get("checked_age_hours"),
+                    "recheck_interval_hours": latest.get("recheck_interval_hours"),
+                    "next_recheck_at": latest.get("next_recheck_at") or "",
+                    "recheck_due": latest.get("recheck_due"),
+                    "recheck_status": latest.get("recheck_status") or "",
                     "latest_snapshot": latest,
                     "note": note,
                 },

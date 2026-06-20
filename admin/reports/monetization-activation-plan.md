@@ -1,6 +1,6 @@
 # Monetization Activation Plan - Lily Roo
 
-Generated: 2026-06-20T08:20:58.376028Z
+Generated: 2026-06-20T08:26:21.330850Z
 
 ## Summary
 - Current subscribers: **6 / 1000**
@@ -26,9 +26,9 @@ Generated: 2026-06-20T08:20:58.376028Z
 3. **Preview approved backlog reschedule**
    - Phase: `Recover stalled approved backlog`; status: `preview_first`
    - Detail: Preview a new schedule for approved past-due posts. Normal apply is hidden until known executor/platform blockers clear.
-   - Blocked apply command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin`
-   - Deliberate override command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin`
-   - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24`
+   - Blocked apply command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --apply --refresh-admin`
+   - Deliberate override command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin`
+   - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24`
 4. **Repair TikTok executor**
    - Phase: `Clear platform blockers`; status: `needs_platform_fix`
    - Detail: Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok public posting approval is false. Local secret source is also missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Complete TikTok OAuth/public posting setup locally, then push secrets and refresh Admin.

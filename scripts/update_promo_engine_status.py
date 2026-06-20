@@ -40,6 +40,7 @@ ADMIN_INDEX = ROOT / "admin" / "index.html"
 
 PROMO_PLATFORMS = ["X", "Instagram", "TikTok", "Facebook", "YouTube Community"]
 YOUTUBE_MONETIZATION_SUBSCRIBER_TARGET = 1000
+STORE_RECHECK_INTERVAL_HOURS = 24
 STORE_SERVICES = [
     ("Spotify", "spotify_url"),
     ("Apple Music", "apple_music_url"),
@@ -1100,6 +1101,38 @@ def verification_snapshot_summary(path: Path) -> dict:
     }
 
 
+def store_recheck_metadata(snapshot: dict, now: datetime) -> dict:
+    checked_at = parse_datetime(snapshot.get("updated_at")) if snapshot else None
+    if not checked_at:
+        return {
+            "checked_at": "",
+            "checked_age_hours": None,
+            "recheck_interval_hours": STORE_RECHECK_INTERVAL_HOURS,
+            "next_recheck_at": "",
+            "recheck_due": True,
+            "recheck_status": "needs_first_check",
+        }
+    next_recheck = checked_at + timedelta(hours=STORE_RECHECK_INTERVAL_HOURS)
+    age_hours = round((now - checked_at).total_seconds() / 3600, 1)
+    due = now >= next_recheck
+    return {
+        "checked_at": checked_at.isoformat(),
+        "checked_age_hours": age_hours,
+        "recheck_interval_hours": STORE_RECHECK_INTERVAL_HOURS,
+        "next_recheck_at": next_recheck.isoformat(),
+        "recheck_due": due,
+        "recheck_status": "recheck_due" if due else "waiting_for_release_propagation",
+    }
+
+
+def apply_store_recheck_metadata(snapshot: dict, now: datetime) -> dict:
+    if not snapshot:
+        return {}
+    enriched = dict(snapshot)
+    enriched.update(store_recheck_metadata(snapshot, now))
+    return enriched
+
+
 def build_store_verification_history(release_status: dict, now: datetime) -> dict:
     rows = []
     counts = Counter()
@@ -1110,7 +1143,10 @@ def build_store_verification_history(release_status: dict, now: datetime) -> dic
             label = service["label"]
             if label == "DistroKid":
                 continue
-            snapshot = verification_snapshot_summary(verification_snapshot_path(release_slug, label))
+            snapshot = apply_store_recheck_metadata(
+                verification_snapshot_summary(verification_snapshot_path(release_slug, label)),
+                now,
+            )
             state = service["state"]
             if snapshot:
                 if snapshot.get("ok") and state == "Pending":
@@ -1140,6 +1176,31 @@ def build_store_verification_history(release_status: dict, now: datetime) -> dic
             "checked_pending": counts.get("Checked pending", 0),
             "found_in_snapshot": counts.get("Found in snapshot", 0),
             "snapshot_count": sum(1 for row in rows if row.get("latest_snapshot")),
+            "recheck_interval_hours": STORE_RECHECK_INTERVAL_HOURS,
+            "recheck_due": sum(
+                1 for row in rows
+                if row.get("state") == "Checked pending" and (row.get("latest_snapshot") or {}).get("recheck_due")
+            ),
+            "waiting_for_next_recheck": sum(
+                1 for row in rows
+                if row.get("state") == "Checked pending" and not (row.get("latest_snapshot") or {}).get("recheck_due")
+            ),
+            "oldest_checked_pending_age_hours": max(
+                [
+                    (row.get("latest_snapshot") or {}).get("checked_age_hours")
+                    for row in rows
+                    if row.get("state") == "Checked pending"
+                    and (row.get("latest_snapshot") or {}).get("checked_age_hours") is not None
+                ] or [None]
+            ),
+            "next_recheck_at": min(
+                [
+                    (row.get("latest_snapshot") or {}).get("next_recheck_at")
+                    for row in rows
+                    if row.get("state") == "Checked pending"
+                    and (row.get("latest_snapshot") or {}).get("next_recheck_at")
+                ] or [""]
+            ),
         },
         "rows": rows,
     }
@@ -1147,7 +1208,7 @@ def build_store_verification_history(release_status: dict, now: datetime) -> dic
     return history
 
 
-def store_verification_commands(release, store_services):
+def store_verification_commands(release, store_services, now: datetime):
     title = release.get("title") or "Untitled release"
     artist = "Lily Roo"
     release_slug = slugify(title)
@@ -1187,7 +1248,10 @@ def store_verification_commands(release, store_services):
             note = "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug."
         else:
             continue
-        latest = verification_snapshot_summary(verification_snapshot_path(release_slug, label))
+        latest = apply_store_recheck_metadata(
+            verification_snapshot_summary(verification_snapshot_path(release_slug, label)),
+            now,
+        )
         commands.append({
             "service": label,
             "command": command,
@@ -1404,6 +1468,14 @@ def store_verification_state(store_history: dict, releases: list[dict], verifica
         command for command in commands
         if not (command.get("latest_snapshot") or {}).get("updated_at")
     ]
+    recheck_due_rows = [
+        row for row in checked_pending
+        if (row.get("latest_snapshot") or {}).get("recheck_due")
+    ]
+    waiting_recheck_rows = [
+        row for row in checked_pending
+        if not (row.get("latest_snapshot") or {}).get("recheck_due")
+    ]
     run_summary = verification_run.get("summary") if isinstance(verification_run, dict) else {}
     run_summary = run_summary or {}
     latest_run = {
@@ -1434,6 +1506,13 @@ def store_verification_state(store_history: dict, releases: list[dict], verifica
         "pending_rows": pending,
         "verification_commands": commands,
         "stale_snapshot_count": len(stale_snapshots),
+        "recheck_interval_hours": int_metric(summary.get("recheck_interval_hours")) or STORE_RECHECK_INTERVAL_HOURS,
+        "recheck_due_count": int_metric(summary.get("recheck_due")),
+        "waiting_for_next_recheck_count": int_metric(summary.get("waiting_for_next_recheck")),
+        "oldest_checked_pending_age_hours": summary.get("oldest_checked_pending_age_hours"),
+        "next_recheck_at": summary.get("next_recheck_at") or "",
+        "recheck_due_rows": recheck_due_rows,
+        "waiting_recheck_rows": waiting_recheck_rows,
         "latest_run": latest_run,
         "last_run_timeout_count": int_metric(latest_run.get("timed_out")),
         "refresh_command": latest_run.get("retry_command") or "python3 scripts/verify_pending_store_links.py --refresh-admin",
@@ -1454,9 +1533,16 @@ def store_verification_next_action(state: dict) -> str:
     if checked:
         timed_out = int_metric(state.get("last_run_timeout_count"))
         timeout_note = f" Last run had {timed_out} timeout(s)." if timed_out else ""
+        due_count = int_metric(state.get("recheck_due_count"))
+        next_recheck = state.get("next_recheck_at") or ""
+        if not due_count and next_recheck:
+            return (
+                f"Re-check checked-pending store links: {checked} music site snapshot(s) still have no public URL; "
+                f"next recommended re-check after {next_recheck}. Run {command} then."
+            )
         return (
             f"Re-check checked-pending store links: {checked} music site snapshot(s) still have no public URL; "
-            f"run {command}.{timeout_note}"
+            f"{due_count or checked} due for re-check now; run {command}.{timeout_note}"
         )
     if pending:
         return (
@@ -1584,7 +1670,7 @@ def build_status():
             store_state_counts[service["state"]] += 1
         live_store_labels = [service["label"] for service in store_services if service["state"] == "Live"]
         pending_store_labels = [service["label"] for service in store_services if service["state"] == "Pending"]
-        verification_commands = store_verification_commands(release, store_services)
+        verification_commands = store_verification_commands(release, store_services, now)
 
         actions = []
         if link_count < 3:

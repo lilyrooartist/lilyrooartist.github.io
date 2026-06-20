@@ -355,10 +355,20 @@ def validate_generated_outputs(failures):
         store_history = json.loads(STORE_VERIFICATION_HISTORY.read_text(encoding="utf-8"))
         summary = store_history.get("summary") or {}
         rows = store_history.get("rows") or []
-        if summary.get("total_services") == len(rows) and "snapshot_count" in summary:
+        checked_pending_rows = [row for row in rows if row.get("state") == "Checked pending"]
+        checked_snapshots = [row.get("latest_snapshot") or {} for row in checked_pending_rows]
+        if (
+            summary.get("total_services") == len(rows)
+            and "snapshot_count" in summary
+            and "recheck_interval_hours" in summary
+            and "recheck_due" in summary
+            and "waiting_for_next_recheck" in summary
+            and summary.get("checked_pending") == len(checked_pending_rows)
+            and all(snapshot.get("checked_at") and "recheck_due" in snapshot and snapshot.get("next_recheck_at") for snapshot in checked_snapshots)
+        ):
             ok(f"store verification history tracks {len(rows)} service states")
         else:
-            fail("store_verification_history.json summary does not match rows", failures)
+            fail("store_verification_history.json summary does not match rows or recheck cadence", failures)
     else:
         fail("store_verification_history.json missing; run scripts/update_promo_engine_status.py", failures)
     if STORE_VERIFICATION_RUN.exists():
@@ -706,6 +716,9 @@ def validate_generated_outputs(failures):
         if checked_store_actions and all(
             str(action.get("label") or "").startswith("Re-check ")
             and (action.get("context") or {}).get("checked_at")
+            and (action.get("context") or {}).get("recheck_status")
+            and "recheck_due" in (action.get("context") or {})
+            and (action.get("context") or {}).get("next_recheck_at")
             and "Latest snapshot" in ((action.get("context") or {}).get("note") or "")
             for action in checked_store_actions
         ):
@@ -1912,6 +1925,12 @@ def validate_generated_outputs(failures):
             and store_verification.get("pending_count") == len(pending_rows) == int(store_history_summary.get("pending") or 0)
             and store_verification.get("snapshot_count") == int(store_history_summary.get("snapshot_count") or 0)
             and store_verification.get("verification_command_count") == len(verification_commands)
+            and store_verification.get("recheck_interval_hours") == int(store_history_summary.get("recheck_interval_hours") or 0)
+            and store_verification.get("recheck_due_count") == int(store_history_summary.get("recheck_due") or 0)
+            and store_verification.get("waiting_for_next_recheck_count") == int(store_history_summary.get("waiting_for_next_recheck") or 0)
+            and "next_recheck_at" in store_verification
+            and len(store_verification.get("recheck_due_rows") or []) == int(store_history_summary.get("recheck_due") or 0)
+            and len(store_verification.get("waiting_recheck_rows") or []) == int(store_history_summary.get("waiting_for_next_recheck") or 0)
             and store_verification.get("last_run_timeout_count") == int(store_run_summary.get("timed_out") or 0)
             and mirrored_store_run.get("source_path") == "data/store_verification_run.json"
             and mirrored_store_run.get("checked") == int(store_run_summary.get("checked") or 0)
@@ -2097,10 +2116,14 @@ def validate_generated_outputs(failures):
             (kpi.get("store_verification") or {}).get("checked_pending_count")
             and store_action.startswith("Re-check checked-pending store links:")
             and ((kpi.get("store_verification") or {}).get("refresh_command") or "") in store_action
+            and (
+                "due for re-check now" in store_action
+                or "next recommended re-check after" in store_action
+            )
         ):
-            ok("promo engine store verification next action includes retry command")
+            ok("promo engine store verification next action includes retry cadence")
         elif (kpi.get("store_verification") or {}).get("checked_pending_count"):
-            fail("promo_engine_status.json missing checked-pending store retry action", failures)
+            fail("promo_engine_status.json missing checked-pending store retry cadence", failures)
     else:
         fail("promo_engine_status.json missing; run scripts/update_promo_engine_status.py", failures)
     if PROMO_QUEUE_PLAN.exists():
