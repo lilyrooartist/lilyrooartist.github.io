@@ -458,10 +458,15 @@ def validate_generated_outputs(failures):
         approval_packet = json.loads(SCHEDULED_APPROVAL_PACKET.read_text(encoding="utf-8"))
         summary = approval_packet.get("summary") or {}
         rows = approval_packet.get("rows") or []
+        checked_rows = [row for row in rows if row.get("review_check_passed")]
+        blocked_rows = [row for row in rows if not row.get("review_check_passed")]
         if (
             approval_packet.get("safe_mode") is True
             and summary.get("approval_blocker_count") == len(rows)
             and summary.get("review_check_passed_count") + summary.get("review_check_blocked_count") == len(rows)
+            and summary.get("checked_batch_ids") == [row.get("id") for row in checked_rows]
+            and summary.get("blocked_review_ids") == [row.get("id") for row in blocked_rows]
+            and isinstance(summary.get("review_check_status_counts"), dict)
             and (
                 not summary.get("review_check_passed_count")
                 or (

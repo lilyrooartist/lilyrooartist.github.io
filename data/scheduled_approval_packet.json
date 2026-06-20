@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T01:49:20.749145Z",
+  "generated_at": "2026-06-20T01:51:56.163626Z",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -12,6 +12,17 @@
     "manual_count": 1,
     "review_check_passed_count": 2,
     "review_check_blocked_count": 1,
+    "checked_batch_ids": [
+      "FP-AUTO-258",
+      "FP-AUTO-261"
+    ],
+    "blocked_review_ids": [
+      "FP-AUTO-259"
+    ],
+    "review_check_status_counts": {
+      "fail": 1,
+      "pass": 14
+    },
     "checked_batch_preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --dry-run",
     "checked_batch_apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --refresh-admin",
     "preview_command_count": 3,

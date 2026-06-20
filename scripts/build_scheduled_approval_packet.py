@@ -189,6 +189,8 @@ def build_markdown(payload: dict) -> str:
         f"- Manual rows: **{summary['manual_count']}**",
         f"- Review checks passed: **{summary['review_check_passed_count']}**",
         f"- Review checks blocked: **{summary['review_check_blocked_count']}**",
+        f"- Checked batch IDs: `{', '.join(summary['checked_batch_ids'])}`" if summary.get("checked_batch_ids") else "- Checked batch IDs: none",
+        f"- Blocked review IDs: `{', '.join(summary['blocked_review_ids'])}`" if summary.get("blocked_review_ids") else "- Blocked review IDs: none",
         f"- Checked-only preview: `{summary['checked_batch_preview_command']}`" if summary.get("checked_batch_preview_command") else "- Checked-only preview: none",
         f"- Checked-only approve after review: `{summary['checked_batch_apply_command']}`" if summary.get("checked_batch_apply_command") else "- Checked-only approve after review: none",
         f"- Batch preview: `{summary['batch_preview_command']}`" if summary.get("batch_preview_command") else "- Batch preview: none",
@@ -265,6 +267,12 @@ def main() -> int:
     readiness = read_json(EXECUTOR_READINESS, {})
     rows = build_rows(queue, executions, readiness)
     checked_rows = [row for row in rows if row.get("review_check_passed")]
+    blocked_rows = [row for row in rows if not row.get("review_check_passed")]
+    review_check_status_counts = {}
+    for row in rows:
+        for item in row.get("review_checks") or []:
+            status = item.get("status") or "unknown"
+            review_check_status_counts[status] = review_check_status_counts.get(status, 0) + 1
     batch_preview_command = approval_batch_command(rows, dry_run=True)
     batch_apply_command = approval_batch_command(rows, dry_run=False)
     checked_batch_preview_command = approval_batch_command(checked_rows, dry_run=True)
@@ -283,6 +291,9 @@ def main() -> int:
             "manual_count": sum(1 for row in rows if row.get("execution_mode") == "manual"),
             "review_check_passed_count": sum(1 for row in rows if row.get("review_check_passed")),
             "review_check_blocked_count": sum(1 for row in rows if not row.get("review_check_passed")),
+            "checked_batch_ids": [row.get("id") for row in checked_rows if row.get("id")],
+            "blocked_review_ids": [row.get("id") for row in blocked_rows if row.get("id")],
+            "review_check_status_counts": dict(sorted(review_check_status_counts.items())),
             "checked_batch_preview_command": checked_batch_preview_command,
             "checked_batch_apply_command": checked_batch_apply_command,
             "preview_command_count": sum(1 for row in rows if row.get("approval_preview_command")),
