@@ -1,11 +1,11 @@
 # Manual Metric Collection - Lily Roo
 
-Generated: 2026-06-20T06:08:42.129931Z
+Generated: 2026-06-20T06:12:26.472191Z
 
-Pending fields: **11**
+Pending fields: **8**
 
 Live-importable fields: **0**
-Manual collection required: **11**
+Manual collection required: **8**
 
 Fill `new_value` in `data/manual_metric_collection_template.csv`, then run:
 
@@ -29,7 +29,7 @@ You can still run a platform update command directly if you only collect one pla
 
 - Status: **needs_values**
 - Platforms: **5**
-- Waiting fields: **11**
+- Waiting fields: **8**
 - Ready to import: **0**
 - CSV: `data/manual_metric_collection_template.csv`
 - Preview worksheet import: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
@@ -37,7 +37,7 @@ You can still run a platform update command directly if you only collect one pla
 
 ## Public Metric Capture Backlog
 
-- Fields: **5**
+- Fields: **2**
 - Status: **needs_capture_adapter**
 - Engine work: Add safe public profile capture adapters for these public fields, then route them through data/live_social_metrics.json and scripts/update_manual_social_stats.py --from-live.
 - Guardrail: Do not treat private analytics fields as public-capture candidates.
@@ -45,37 +45,19 @@ You can still run a platform update command directly if you only collect one pla
 - CSV row `3` `instagram.followers`
   - Public/source URL: https://www.instagram.com/professional_dashboard/
   - Evidence: Capture the public follower count from the profile page or account dashboard.
-- CSV row `5` `spotify.artist_followers`
-  - Public/source URL: https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a
-  - Evidence: Capture the public Spotify artist follower count if visible, otherwise use Spotify for Artists.
-- CSV row `6` `spotify.monthly_listeners`
-  - Public/source URL: https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a
-  - Evidence: Capture the public Spotify monthly listeners count from the artist profile.
-- CSV row `9` `tiktok.followers`
-  - Public/source URL: https://www.tiktok.com/creator-center/analytics
-  - Evidence: Capture the public follower count from the profile page or account dashboard.
-- CSV row `11` `x.followers`
+- CSV row `8` `x.followers`
   - Public/source URL: https://analytics.x.com/
   - Evidence: Capture the public follower count from the profile page or account dashboard.
 
 ### Priority 1: Audience size snapshot
-- Status: `needs_values`; waiting: **5**; ready: **0**
-- Platforms: `instagram, spotify, tiktok, x`
+- Status: `needs_values`; waiting: **2**; ready: **0**
+- Platforms: `instagram, x`
 - Access: `public_profile`
-- CSV rows: `3, 5, 6, 9, 11`
+- CSV rows: `3, 8`
 - Row `3` `instagram.followers`
   - Enter the current public follower count.
   - Evidence: Capture the public follower count from the profile page or account dashboard.
-- Row `5` `spotify.artist_followers`
-  - Enter the current Spotify artist follower count.
-  - Evidence: Capture the public Spotify artist follower count if visible, otherwise use Spotify for Artists.
-- Row `6` `spotify.monthly_listeners`
-  - Enter the current Spotify monthly listener count.
-  - Evidence: Capture the public Spotify monthly listeners count from the artist profile.
-- Row `9` `tiktok.followers`
-  - Enter the current public follower count.
-  - Evidence: Capture the public follower count from the profile page or account dashboard.
-- Row `11` `x.followers`
+- Row `8` `x.followers`
   - Enter the current public follower count.
   - Evidence: Capture the public follower count from the profile page or account dashboard.
 
@@ -83,17 +65,17 @@ You can still run a platform update command directly if you only collect one pla
 - Status: `needs_values`; waiting: **4**; ready: **0**
 - Platforms: `facebook, instagram, tiktok, x`
 - Access: `private_analytics`
-- CSV rows: `2, 4, 10, 12`
+- CSV rows: `2, 4, 7, 9`
 - Row `2` `facebook.reach_7d`
   - Enter reach for the last 7 days.
   - Evidence: Use the last-7-days reach value from Meta insights.
 - Row `4` `instagram.profile_visits_7d`
   - Enter profile visits for the last 7 days.
   - Evidence: Use the last-7-days profile visits value from the professional dashboard.
-- Row `10` `tiktok.profile_views_7d`
+- Row `7` `tiktok.profile_views_7d`
   - Enter profile views for the last 7 days.
   - Evidence: Use the last-7-days profile views value from TikTok analytics.
-- Row `12` `x.impressions_7d`
+- Row `9` `x.impressions_7d`
   - Enter impressions for the last 7 days.
   - Evidence: Use the last-7-days impressions value from X analytics.
 
@@ -101,11 +83,11 @@ You can still run a platform update command directly if you only collect one pla
 - Status: `needs_values`; waiting: **2**; ready: **0**
 - Platforms: `spotify`
 - Access: `private_analytics`
-- CSV rows: `7, 8`
-- Row `7` `spotify.release_streams`
+- CSV rows: `5, 6`
+- Row `5` `spotify.release_streams`
   - Enter lifetime streams for the promoted release.
   - Evidence: Use lifetime streams for the promoted release from Spotify for Artists.
-- Row `8` `spotify.saves`
+- Row `6` `spotify.saves`
   - Enter lifetime saves for the promoted release.
   - Evidence: Use lifetime saves for the promoted release from Spotify for Artists.
 
@@ -113,7 +95,7 @@ You can still run a platform update command directly if you only collect one pla
 
 - Status: **needs_values**
 - Ready rows: **0**
-- Waiting rows: **11**
+- Waiting rows: **8**
 - Preview: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
 - Apply after review: `blocked until new_value cells are filled`
 - Apply gate: **blocked_until_new_values_filled**
@@ -141,43 +123,34 @@ You can still run a platform update command directly if you only collect one pla
 - Platform command: `python3 scripts/update_manual_social_stats.py instagram.followers=VALUE instagram.profile_visits_7d=VALUE --refresh-admin`
 
 ### spotify
-- Status: `needs_values`; waiting: **4**; ready: **0**
+- Status: `needs_values`; waiting: **2**; ready: **0**
 - Open: https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a
 - Why: Spotify streams, saves, monthly listeners, and artist followers require Spotify for Artists export or a connected analytics source.
-- CSV row `5` `artist_followers` current `pending` -> `nonnegative_integer e.g. 123`
-  - Enter the current Spotify artist follower count.
-  - Evidence: Capture the public Spotify artist follower count if visible, otherwise use Spotify for Artists.
-- CSV row `6` `monthly_listeners` current `pending` -> `nonnegative_integer e.g. 123`
-  - Enter the current Spotify monthly listener count.
-  - Evidence: Capture the public Spotify monthly listeners count from the artist profile.
-- CSV row `7` `release_streams` current `pending` -> `nonnegative_integer e.g. 1234`
+- CSV row `5` `release_streams` current `pending` -> `nonnegative_integer e.g. 1234`
   - Enter lifetime streams for the promoted release.
   - Evidence: Use lifetime streams for the promoted release from Spotify for Artists.
-- CSV row `8` `saves` current `pending` -> `nonnegative_integer e.g. 12`
+- CSV row `6` `saves` current `pending` -> `nonnegative_integer e.g. 12`
   - Enter lifetime saves for the promoted release.
   - Evidence: Use lifetime saves for the promoted release from Spotify for Artists.
-- Platform command: `python3 scripts/update_manual_social_stats.py spotify.artist_followers=VALUE spotify.monthly_listeners=VALUE spotify.release_streams=VALUE spotify.saves=VALUE --refresh-admin`
+- Platform command: `python3 scripts/update_manual_social_stats.py spotify.release_streams=VALUE spotify.saves=VALUE --refresh-admin`
 
 ### tiktok
-- Status: `needs_values`; waiting: **2**; ready: **0**
-- Open: https://www.tiktok.com/creator-center/analytics
+- Status: `needs_values`; waiting: **1**; ready: **0**
+- Open: https://www.tiktok.com/@lilyroo930
 - Why: TikTok metrics need TikTok OAuth credentials.
-- CSV row `9` `followers` current `pending` -> `nonnegative_integer e.g. 123`
-  - Enter the current public follower count.
-  - Evidence: Capture the public follower count from the profile page or account dashboard.
-- CSV row `10` `profile_views_7d` current `pending` -> `nonnegative_integer e.g. 12`
+- CSV row `7` `profile_views_7d` current `pending` -> `nonnegative_integer e.g. 12`
   - Enter profile views for the last 7 days.
   - Evidence: Use the last-7-days profile views value from TikTok analytics.
-- Platform command: `python3 scripts/update_manual_social_stats.py tiktok.followers=VALUE tiktok.profile_views_7d=VALUE --refresh-admin`
+- Platform command: `python3 scripts/update_manual_social_stats.py tiktok.profile_views_7d=VALUE --refresh-admin`
 
 ### x
 - Status: `needs_values`; waiting: **2**; ready: **0**
 - Open: https://analytics.x.com/
 - Why: X metrics need X_USER_ACCESS_TOKEN with user lookup access.
-- CSV row `11` `followers` current `pending` -> `nonnegative_integer e.g. 123`
+- CSV row `8` `followers` current `pending` -> `nonnegative_integer e.g. 123`
   - Enter the current public follower count.
   - Evidence: Capture the public follower count from the profile page or account dashboard.
-- CSV row `12` `impressions_7d` current `pending` -> `nonnegative_integer e.g. 123`
+- CSV row `9` `impressions_7d` current `pending` -> `nonnegative_integer e.g. 123`
   - Enter impressions for the last 7 days.
   - Evidence: Use the last-7-days impressions value from X analytics.
 - Platform command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impressions_7d=VALUE --refresh-admin`
@@ -215,35 +188,26 @@ Source: Spotify for Artists > Music/Stats export
 Open: https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a
 Why: Spotify streams, saves, monthly listeners, and artist followers require Spotify for Artists export or a connected analytics source.
 
-- CSV row `5` `artist_followers` current `pending` -> `VALUE` (nonnegative_integer; example `123`)
-  - Enter the current Spotify artist follower count.
-  - Import effect: update data/manual_social_stats.json spotify.artist_followers from 'pending' to the filled new_value
-- CSV row `6` `monthly_listeners` current `pending` -> `VALUE` (nonnegative_integer; example `123`)
-  - Enter the current Spotify monthly listener count.
-  - Import effect: update data/manual_social_stats.json spotify.monthly_listeners from 'pending' to the filled new_value
-- CSV row `7` `release_streams` current `pending` -> `VALUE` (nonnegative_integer; example `1234`)
+- CSV row `5` `release_streams` current `pending` -> `VALUE` (nonnegative_integer; example `1234`)
   - Enter lifetime streams for the promoted release.
   - Import effect: update data/manual_social_stats.json spotify.release_streams from 'pending' to the filled new_value
-- CSV row `8` `saves` current `pending` -> `VALUE` (nonnegative_integer; example `12`)
+- CSV row `6` `saves` current `pending` -> `VALUE` (nonnegative_integer; example `12`)
   - Enter lifetime saves for the promoted release.
   - Import effect: update data/manual_social_stats.json spotify.saves from 'pending' to the filled new_value
 
-Command: `python3 scripts/update_manual_social_stats.py spotify.artist_followers=VALUE spotify.monthly_listeners=VALUE spotify.release_streams=VALUE spotify.saves=VALUE --refresh-admin`
+Command: `python3 scripts/update_manual_social_stats.py spotify.release_streams=VALUE spotify.saves=VALUE --refresh-admin`
 
 ## tiktok
 
 Source: TikTok Studio or Creator Center analytics
-Open: https://www.tiktok.com/creator-center/analytics
+Open: https://www.tiktok.com/@lilyroo930
 Why: TikTok metrics need TikTok OAuth credentials.
 
-- CSV row `9` `followers` current `pending` -> `VALUE` (nonnegative_integer; example `123`)
-  - Enter the current public follower count.
-  - Import effect: update data/manual_social_stats.json tiktok.followers from 'pending' to the filled new_value
-- CSV row `10` `profile_views_7d` current `pending` -> `VALUE` (nonnegative_integer; example `12`)
+- CSV row `7` `profile_views_7d` current `pending` -> `VALUE` (nonnegative_integer; example `12`)
   - Enter profile views for the last 7 days.
   - Import effect: update data/manual_social_stats.json tiktok.profile_views_7d from 'pending' to the filled new_value
 
-Command: `python3 scripts/update_manual_social_stats.py tiktok.followers=VALUE tiktok.profile_views_7d=VALUE --refresh-admin`
+Command: `python3 scripts/update_manual_social_stats.py tiktok.profile_views_7d=VALUE --refresh-admin`
 
 ## x
 
@@ -251,10 +215,10 @@ Source: X Analytics or account profile metrics
 Open: https://analytics.x.com/
 Why: X metrics need X_USER_ACCESS_TOKEN with user lookup access.
 
-- CSV row `11` `followers` current `pending` -> `VALUE` (nonnegative_integer; example `123`)
+- CSV row `8` `followers` current `pending` -> `VALUE` (nonnegative_integer; example `123`)
   - Enter the current public follower count.
   - Import effect: update data/manual_social_stats.json x.followers from 'pending' to the filled new_value
-- CSV row `12` `impressions_7d` current `pending` -> `VALUE` (nonnegative_integer; example `123`)
+- CSV row `9` `impressions_7d` current `pending` -> `VALUE` (nonnegative_integer; example `123`)
   - Enter impressions for the last 7 days.
   - Import effect: update data/manual_social_stats.json x.impressions_7d from 'pending' to the filled new_value
 

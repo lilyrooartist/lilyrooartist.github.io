@@ -213,10 +213,22 @@ def validate_generated_outputs(failures):
     if LIVE_METRICS.exists():
         snapshot = json.loads(LIVE_METRICS.read_text(encoding="utf-8"))
         platforms = snapshot.get("platforms") or {}
+        spotify_metrics = ((platforms.get("spotify") or {}).get("metrics") or {})
+        tiktok_metrics = ((platforms.get("tiktok") or {}).get("metrics") or {})
+        public_capture = snapshot.get("public_profile_capture") or {}
         if platforms:
             ok(f"live social metrics snapshot has {len(platforms)} platforms")
         else:
             fail("live social metrics snapshot has no platforms", failures)
+        if (
+            public_capture.get("status") == "ok"
+            and spotify_metrics.get("artist_followers") is not None
+            and spotify_metrics.get("monthly_listeners") is not None
+            and tiktok_metrics.get("followers") is not None
+        ):
+            ok("live social metrics captures public Spotify and TikTok profile metrics")
+        else:
+            fail("live_social_metrics.json missing public Spotify/TikTok profile metric capture", failures)
     else:
         fail("live_social_metrics.json missing; run scripts/capture_live_metrics.py", failures)
     if METRICS_HISTORY.exists():
@@ -227,6 +239,11 @@ def validate_generated_outputs(failures):
             ok(f"metrics history has {len(snapshots)} snapshot(s)")
         else:
             fail("metrics_history.json missing snapshots or deltas", failures)
+        latest_spotify = latest.get("spotify") or {}
+        if latest_spotify.get("artist_followers") is not None and latest_spotify.get("monthly_listeners") is not None:
+            ok("metrics history preserves public Spotify profile metrics")
+        else:
+            fail("metrics_history.json missing public Spotify profile metrics", failures)
     else:
         fail("metrics_history.json missing; run scripts/update_metrics_history.py", failures)
     if EXECUTOR_READINESS.exists():
@@ -1936,6 +1953,20 @@ def validate_generated_outputs(failures):
             fail("update_manual_social_stats.py missing filled CSV/live metric import support or numeric value guards", failures)
     else:
         fail("update_manual_social_stats.py missing", failures)
+    if (ROOT / "scripts" / "capture_live_metrics.py").exists():
+        live_capture_text = (ROOT / "scripts" / "capture_live_metrics.py").read_text(encoding="utf-8")
+        if (
+            "public_profile_capture" in live_capture_text
+            and "spotify_public_metrics" in live_capture_text
+            and "tiktok_public_metrics" in live_capture_text
+            and "read_existing_snapshot" in live_capture_text
+            and "authenticated_capture_error" in live_capture_text
+        ):
+            ok("live metrics capture includes public profile fallback adapters")
+        else:
+            fail("capture_live_metrics.py missing public profile fallback adapters", failures)
+    else:
+        fail("capture_live_metrics.py missing", failures)
     if STORE_LINK_VERIFIER.exists():
         verifier_text = STORE_LINK_VERIFIER.read_text(encoding="utf-8")
         if "search_spotify_release.py" in verifier_text and "capture_apple_music_release.py" in verifier_text and "search_youtube_music_release.py" in verifier_text and "capture_hyperfollow_store_links.py" in verifier_text and "--refresh-admin" in verifier_text and "--step-timeout-seconds" in verifier_text and "TimeoutExpired" in verifier_text and '"timed_out"' in verifier_text:

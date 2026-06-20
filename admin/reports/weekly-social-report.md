@@ -1,7 +1,7 @@
 # Weekly Social Report — Lily Roo
 
 **Period:** 2026-06-14 to 2026-06-20
-**Last updated:** 2026-06-20 06:08 AM UTC
+**Last updated:** 2026-06-20 03:12 PM JST
 
 ## KPI Goal
 - Primary growth target: **1,000 YouTube subscribers** (monetization milestone)
@@ -91,8 +91,8 @@
 - Artist profile: https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a
 - Public release check: **I Learned It All in Fifteen Seconds**
 - Remastered artwork thumbnail: https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0287c54a775685e36e4f534ad4
-- Artist followers: **pending**
-- Monthly listeners: **pending**
+- Artist followers: **1**
+- Monthly listeners: **2**
 - Release streams: **pending**
 - Saves: **pending**
 - Analytics status: **Streams, saves, monthly listeners, and artist followers still require Spotify for Artists export/API access.**
@@ -104,7 +104,7 @@
 - Explicitness: **notExplicit**
 
 ### TikTok
-- Followers: **pending**
+- Followers: **0**
 - Profile views (7d): **pending**
 - Latest post: https://www.tiktok.com/@lilyroo930/video/7611932426557754654
 
@@ -124,7 +124,7 @@
 - Latest post: https://www.facebook.com/903693509504290_122118326547249470
 
 ## Metrics Snapshot
-- Live API captured: **2026-06-20T06:07:43.774Z**
+- Live API captured: **2026-06-20T06:12:06.967Z**
 - Snapshot file: `data/live_social_metrics.json`
 - YouTube public RSS captured: **2026-06-09T12:08:07.783949Z**
 - YouTube public snapshot file: `data/youtube_public_snapshot.json`
@@ -134,9 +134,9 @@
 - YouTube Music snapshot file: `data/youtube_music_release_snapshot.json`
 - HyperFollow stores captured: **2026-06-07T20:51:14.275569Z**
 - HyperFollow snapshot file: `data/hyperfollow_store_links_snapshot.json`
-- All-release store verification captured: **2026-06-20T06:08:42.313839+00:00**
+- All-release store verification captured: **2026-06-20T06:12:26.590501+00:00**
 - All-release store verification file: `data/store_verification_history.json`
-- Social executor history captured: **2026-06-20T06:08:01.508944Z**
+- Social executor history captured: **2026-06-20T06:12:25.032700Z**
 - Social executor history file: `data/social_execution_snapshot.json`
 - First single alignment audit captured: **2026-06-07T21:39:03.668040Z**
 - First single alignment audit file: `data/first_single_alignment_audit.json`

@@ -1,6 +1,6 @@
 # Promotion Blocker Ledger - Lily Roo
 
-Generated: 2026-06-20T06:08:42.173739Z
+Generated: 2026-06-20T06:12:26.501835Z
 
 ## Summary
 - Open blockers: **10**
@@ -33,11 +33,11 @@ Generated: 2026-06-20T06:08:42.173739Z
   - Owner: `external_platform`; projected blockers resolved: **1**
   - Unlocks: Approved past-due queue rows get a fresh schedule after executor blockers clear.
   - Blocked by: FP-AUTO-264
-  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24`
+  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24`
 - **Fill manual metric worksheet** (`needs_values`)
-  - Owner: `tod`; projected blockers resolved: **11**
+  - Owner: `tod`; projected blockers resolved: **8**
   - Unlocks: Admin health and weekly reporting can use fresh cross-platform metrics.; Manual metric blockers clear once worksheet values are imported.
-  - Blocked by: P1 Audience size snapshot:5, P2 Recent discovery and traffic:4, P3 Release depth metrics:2
+  - Blocked by: P1 Audience size snapshot:2, P2 Recent discovery and traffic:4, P3 Release depth metrics:2
   - Preview/check: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
   - Apply after review: `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
 
@@ -71,7 +71,7 @@ Generated: 2026-06-20T06:08:42.173739Z
   - Owner: `external_platform`; status: `blocked`; category: `backlog_reschedule`
   - Evidence: 1 approved backlog row(s); 1 still have executor blockers.
   - Next step: Preview a new schedule. Safe apply becomes available after known executor blockers clear.
-  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24`
+  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24`
   - Guardrail: Normal apply is hidden while rows have known executor blockers.
 - **[medium] Approve scheduled YouTube Community row** (`approval-FP-AUTO-261`)
   - Owner: `tod`; status: `ready_for_reviewed_approval`; category: `approval`
@@ -100,12 +100,12 @@ Generated: 2026-06-20T06:08:42.173739Z
   - Guardrail: Manual posting happens outside this repo; only log the URL after the post is live. URL logging command after posting: python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin
 - **[low] Fill priority 1 metrics: Audience size snapshot** (`metrics-priority-1`)
   - Owner: `tod`; status: `needs_values`; category: `manual_metrics`
-  - Evidence: 5 pending field(s): instagram.followers, spotify.artist_followers, spotify.monthly_listeners, tiktok.followers, x.followers.
+  - Evidence: 2 pending field(s): instagram.followers, x.followers.
   - Next step: Collect this priority batch, fill the CSV worksheet rows, preview import, then refresh admin.
   - Preview/check: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
   - Apply/log after review: `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
   - Guardrail: Do not guess analytics values; import only values copied from the platform source.
-  - Impact: priority 1; fields: 5; access: public_profile; csv rows: 3, 5, 6, 9, 11
+  - Impact: priority 1; fields: 2; access: public_profile; csv rows: 3, 8
 - **[low] Fill priority 2 metrics: Recent discovery and traffic** (`metrics-priority-2`)
   - Owner: `tod`; status: `needs_values`; category: `manual_metrics`
   - Evidence: 4 pending field(s): facebook.reach_7d, instagram.profile_visits_7d, tiktok.profile_views_7d, x.impressions_7d.
@@ -113,7 +113,7 @@ Generated: 2026-06-20T06:08:42.173739Z
   - Preview/check: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
   - Apply/log after review: `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
   - Guardrail: Do not guess analytics values; import only values copied from the platform source.
-  - Impact: priority 2; fields: 4; access: private_analytics; csv rows: 2, 4, 10, 12
+  - Impact: priority 2; fields: 4; access: private_analytics; csv rows: 2, 4, 7, 9
 - **[low] Fill priority 3 metrics: Release depth metrics** (`metrics-priority-3`)
   - Owner: `tod`; status: `needs_values`; category: `manual_metrics`
   - Evidence: 2 pending field(s): spotify.release_streams, spotify.saves.
@@ -121,7 +121,7 @@ Generated: 2026-06-20T06:08:42.173739Z
   - Preview/check: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
   - Apply/log after review: `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
   - Guardrail: Do not guess analytics values; import only values copied from the platform source.
-  - Impact: priority 3; fields: 2; access: private_analytics; csv rows: 7, 8
+  - Impact: priority 3; fields: 2; access: private_analytics; csv rows: 5, 6
 
 ## Guardrails
 - This ledger does not approve posts, post externally, push secrets, or invent metric values.

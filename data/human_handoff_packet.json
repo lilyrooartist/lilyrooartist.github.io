@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T06:08:42.218138Z",
+  "generated_at": "2026-06-20T06:12:26.530476Z",
   "safe_mode": true,
   "source": {
     "promotion_blocker_ledger": "data/promotion_blocker_ledger.json",
@@ -138,7 +138,7 @@
           "blocked_by": [
             "FP-AUTO-264"
           ],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
           "apply_command": "",
           "source_path": "data/backlog_reschedule_preview.json"
         },
@@ -147,18 +147,18 @@
           "phase": "Fill manual metric worksheet",
           "status": "needs_values",
           "owner": "tod",
-          "blockers_resolved": 11,
+          "blockers_resolved": 8,
           "unlocks": [
             "Admin health and weekly reporting can use fresh cross-platform metrics.",
             "Manual metric blockers clear once worksheet values are imported."
           ],
           "blocked_by": [
-            "P1 Audience size snapshot:5",
+            "P1 Audience size snapshot:2",
             "P2 Recent discovery and traffic:4",
             "P3 Release depth metrics:2"
           ],
           "batch_count": 3,
-          "field_count": 11,
+          "field_count": 8,
           "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
           "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
           "source_path": "data/manual_metric_collection_packet.json"
@@ -181,7 +181,7 @@
     "ready_step_count": 3,
     "blocked_step_count": 2,
     "manual_post_count": 2,
-    "manual_metric_field_count": 11,
+    "manual_metric_field_count": 8,
     "first_ready_step": {
       "id": "review-checked-approval-batch",
       "label": "Review checked approval batch",
@@ -457,12 +457,12 @@
           "backlog-reschedule"
         ],
         "blockers_resolved": 1,
-        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
         "apply_command": "",
         "command_sequence": [
           {
             "step": "preview",
-            "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+            "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
             "required_before_apply": true
           },
           {
@@ -792,23 +792,20 @@
           "manual-metrics-priority-2",
           "manual-metrics-priority-3"
         ],
-        "blockers_resolved": 11,
-        "field_count": 11,
+        "blockers_resolved": 8,
+        "field_count": 8,
         "batch_count": 3,
         "batches": [
           {
             "priority": 1,
             "label": "Audience size snapshot",
-            "field_count": 5,
+            "field_count": 2,
             "access_levels": [
               "public_profile"
             ],
             "csv_rows": [
               3,
-              5,
-              6,
-              9,
-              11
+              8
             ]
           },
           {
@@ -821,8 +818,8 @@
             "csv_rows": [
               2,
               4,
-              10,
-              12
+              7,
+              9
             ]
           },
           {
@@ -833,8 +830,8 @@
               "private_analytics"
             ],
             "csv_rows": [
-              7,
-              8
+              5,
+              6
             ]
           }
         ],
@@ -870,12 +867,12 @@
           "backlog-reschedule"
         ],
         "blockers_resolved": 1,
-        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
         "apply_command": "",
         "command_sequence": [
           {
             "step": "preview",
-            "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+            "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
             "required_before_apply": true
           },
           {
@@ -1165,14 +1162,14 @@
       "urgency": "high",
       "status": "blocked",
       "detail": "Known executor/platform blockers must clear before normal apply.",
-      "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+      "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
       "apply_command": "",
       "source_path": "data/backlog_reschedule_preview.json",
       "impact": {
         "approved_backlog_count": 1,
         "blocked_backlog_count": 1,
-        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin"
+        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --apply --refresh-admin",
+        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin"
       },
       "links": [],
       "guardrail": "Normal apply stays hidden until known executor/platform blockers clear."
@@ -1236,20 +1233,18 @@
       "owner": "tod",
       "urgency": "low",
       "status": "needs_values",
-      "detail": "Collect 5 field(s) across instagram, spotify, tiktok, x, fill the worksheet rows, preview import, then refresh Admin.",
+      "detail": "Collect 2 field(s) across instagram, x, fill the worksheet rows, preview import, then refresh Admin.",
       "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
       "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
       "source_path": "data/manual_metric_collection_packet.json",
       "impact": {
         "priority": 1,
         "label": "Audience size snapshot",
-        "field_count": 5,
-        "waiting_count": 5,
+        "field_count": 2,
+        "waiting_count": 2,
         "ready_to_import_count": 0,
         "platforms": [
           "instagram",
-          "spotify",
-          "tiktok",
           "x"
         ],
         "access_levels": [
@@ -1257,22 +1252,13 @@
         ],
         "csv_rows": [
           3,
-          5,
-          6,
-          9,
-          11
+          8
         ],
         "pending_assignments": [
           "instagram.followers",
-          "spotify.artist_followers",
-          "spotify.monthly_listeners",
-          "tiktok.followers",
           "x.followers"
         ],
         "evidence_hints": [
-          "Capture the public follower count from the profile page or account dashboard.",
-          "Capture the public Spotify artist follower count if visible, otherwise use Spotify for Artists.",
-          "Capture the public Spotify monthly listeners count from the artist profile.",
           "Capture the public follower count from the profile page or account dashboard.",
           "Capture the public follower count from the profile page or account dashboard."
         ]
@@ -1309,8 +1295,8 @@
         "csv_rows": [
           2,
           4,
-          10,
-          12
+          7,
+          9
         ],
         "pending_assignments": [
           "facebook.reach_7d",
@@ -1352,8 +1338,8 @@
           "private_analytics"
         ],
         "csv_rows": [
-          7,
-          8
+          5,
+          6
         ],
         "pending_assignments": [
           "spotify.release_streams",

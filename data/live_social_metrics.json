@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "updated_at": "2026-06-20T06:07:43.774Z",
+  "updated_at": "2026-06-20T06:12:06.967Z",
   "platforms": {
     "youtube": {
       "ok": false,
@@ -10,9 +10,11 @@
     },
     "spotify": {
       "ok": true,
-      "source": "spotify-oembed-public",
+      "source": "spotify-public-artist-page",
       "metrics": {
-        "release_verified": 1
+        "release_verified": 1,
+        "monthly_listeners": 2,
+        "artist_followers": 1
       },
       "release_url": "https://open.spotify.com/album/4Al5eYOqGFMKEES5fDWIfI",
       "album_id": "4Al5eYOqGFMKEES5fDWIfI",
@@ -20,22 +22,32 @@
       "provider_name": "Spotify",
       "provider_url": "https://spotify.com",
       "iframe_url": "https://open.spotify.com/embed/album/4Al5eYOqGFMKEES5fDWIfI?utm_source=oembed",
-      "thumbnail_url": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e0287c54a775685e36e4f534ad4",
+      "thumbnail_url": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0287c54a775685e36e4f534ad4",
       "thumbnail_width": 300,
       "thumbnail_height": 300,
       "analytics_status": "Spotify streams, saves, monthly listeners, and artist followers require Spotify for Artists export or a connected analytics source.",
       "credential_ok": false,
-      "profile_url": "https://open.spotify.com/album/4Al5eYOqGFMKEES5fDWIfI"
+      "profile_url": "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a",
+      "http_status": 200,
+      "description": "Artist · 2 monthly listeners.",
+      "public_capture_status": "ok"
     },
     "tiktok": {
-      "ok": false,
+      "ok": true,
       "reason": "TikTok metrics need TikTok OAuth credentials.",
-      "metrics": {},
+      "metrics": {
+        "followers": 0
+      },
       "missing_secrets": [
         "TIKTOK_CLIENT_KEY",
         "TIKTOK_CLIENT_SECRET",
         "TIKTOK_REFRESH_TOKEN"
-      ]
+      ],
+      "source": "tiktok-public-profile-page",
+      "profile_url": "https://www.tiktok.com/@lilyroo930",
+      "http_status": 200,
+      "display_name": "lilyroo930",
+      "public_capture_status": "ok"
     },
     "instagram": {
       "ok": false,
@@ -64,5 +76,33 @@
       ]
     }
   },
-  "capture_status": 200
+  "capture_status": 200,
+  "public_profile_capture": {
+    "status": "ok",
+    "platforms": {
+      "spotify": {
+        "ok": true,
+        "source": "spotify-public-artist-page",
+        "metrics": {
+          "monthly_listeners": 2,
+          "artist_followers": 1
+        },
+        "profile_url": "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a",
+        "http_status": 200,
+        "description": "Artist · 2 monthly listeners.",
+        "public_capture_status": "ok"
+      },
+      "tiktok": {
+        "ok": true,
+        "source": "tiktok-public-profile-page",
+        "metrics": {
+          "followers": 0
+        },
+        "profile_url": "https://www.tiktok.com/@lilyroo930",
+        "http_status": 200,
+        "display_name": "lilyroo930",
+        "public_capture_status": "ok"
+      }
+    }
+  }
 }

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T06:08:42.129931Z",
+  "generated_at": "2026-06-20T06:12:26.472191Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -9,16 +9,16 @@
     "report": "admin/reports/manual-metric-collection.md"
   },
   "summary": {
-    "pending_field_count": 11,
+    "pending_field_count": 8,
     "live_import_available_count": 0,
-    "manual_collection_required_count": 11,
-    "public_profile_manual_required_count": 5,
+    "manual_collection_required_count": 8,
+    "public_profile_manual_required_count": 2,
     "private_analytics_manual_required_count": 6,
     "ready_to_import_count": 0,
     "preserved_new_value_count": 0,
     "platform_count": 5,
     "priority_batch_count": 3,
-    "public_profile_field_count": 5,
+    "public_profile_field_count": 2,
     "private_analytics_field_count": 6,
     "csv_path": "data/manual_metric_collection_template.csv",
     "report_path": "admin/reports/manual-metric-collection.md",
@@ -31,7 +31,7 @@
     "status": "needs_values",
     "platform_count": 5,
     "ready_to_import_count": 0,
-    "waiting_field_count": 11,
+    "waiting_field_count": 8,
     "platform_groups": [
       {
         "platform": "facebook",
@@ -189,53 +189,16 @@
       {
         "platform": "spotify",
         "status": "needs_values",
-        "field_count": 4,
-        "waiting_count": 4,
+        "field_count": 2,
+        "waiting_count": 2,
         "ready_to_import_count": 0,
         "source_hint": "Spotify for Artists > Music/Stats export",
         "collection_url": "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a",
         "reason": "Spotify streams, saves, monthly listeners, and artist followers require Spotify for Artists export or a connected analytics source.",
         "priority_summary": [
-          "Audience size snapshot",
           "Release depth metrics"
         ],
         "fields": [
-          {
-            "field": "artist_followers",
-            "current_value": "pending",
-            "new_value": "",
-            "live_value": "",
-            "collection_mode": "manual_collection_required",
-            "collection_priority": 1,
-            "metric_category": "Audience size snapshot",
-            "access_level": "public_profile",
-            "value_type": "nonnegative_integer",
-            "example_value": "123",
-            "collection_instruction": "Enter the current Spotify artist follower count.",
-            "evidence_hint": "Capture the public Spotify artist follower count if visible, otherwise use Spotify for Artists.",
-            "update_assignment": "spotify.artist_followers=VALUE",
-            "import_effect": "update data/manual_social_stats.json spotify.artist_followers from 'pending' to the filled new_value",
-            "csv_row": 5,
-            "ready_to_import": false
-          },
-          {
-            "field": "monthly_listeners",
-            "current_value": "pending",
-            "new_value": "",
-            "live_value": "",
-            "collection_mode": "manual_collection_required",
-            "collection_priority": 1,
-            "metric_category": "Audience size snapshot",
-            "access_level": "public_profile",
-            "value_type": "nonnegative_integer",
-            "example_value": "123",
-            "collection_instruction": "Enter the current Spotify monthly listener count.",
-            "evidence_hint": "Capture the public Spotify monthly listeners count from the artist profile.",
-            "update_assignment": "spotify.monthly_listeners=VALUE",
-            "import_effect": "update data/manual_social_stats.json spotify.monthly_listeners from 'pending' to the filled new_value",
-            "csv_row": 6,
-            "ready_to_import": false
-          },
           {
             "field": "release_streams",
             "current_value": "pending",
@@ -251,7 +214,7 @@
             "evidence_hint": "Use lifetime streams for the promoted release from Spotify for Artists.",
             "update_assignment": "spotify.release_streams=VALUE",
             "import_effect": "update data/manual_social_stats.json spotify.release_streams from 'pending' to the filled new_value",
-            "csv_row": 7,
+            "csv_row": 5,
             "ready_to_import": false
           },
           {
@@ -269,47 +232,13 @@
             "evidence_hint": "Use lifetime saves for the promoted release from Spotify for Artists.",
             "update_assignment": "spotify.saves=VALUE",
             "import_effect": "update data/manual_social_stats.json spotify.saves from 'pending' to the filled new_value",
-            "csv_row": 8,
+            "csv_row": 6,
             "ready_to_import": false
           }
         ],
         "collection_packets": [
           {
             "csv_row": 5,
-            "field": "artist_followers",
-            "current_value": "pending",
-            "new_value": "",
-            "ready_to_import": false,
-            "collection_mode": "manual_collection_required",
-            "collection_priority": 1,
-            "metric_category": "Audience size snapshot",
-            "access_level": "public_profile",
-            "source_hint": "Spotify for Artists > Music/Stats export",
-            "collection_url": "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a",
-            "collection_instruction": "Enter the current Spotify artist follower count.",
-            "evidence_hint": "Capture the public Spotify artist follower count if visible, otherwise use Spotify for Artists.",
-            "update_assignment": "spotify.artist_followers=VALUE",
-            "import_effect": "update data/manual_social_stats.json spotify.artist_followers from 'pending' to the filled new_value"
-          },
-          {
-            "csv_row": 6,
-            "field": "monthly_listeners",
-            "current_value": "pending",
-            "new_value": "",
-            "ready_to_import": false,
-            "collection_mode": "manual_collection_required",
-            "collection_priority": 1,
-            "metric_category": "Audience size snapshot",
-            "access_level": "public_profile",
-            "source_hint": "Spotify for Artists > Music/Stats export",
-            "collection_url": "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a",
-            "collection_instruction": "Enter the current Spotify monthly listener count.",
-            "evidence_hint": "Capture the public Spotify monthly listeners count from the artist profile.",
-            "update_assignment": "spotify.monthly_listeners=VALUE",
-            "import_effect": "update data/manual_social_stats.json spotify.monthly_listeners from 'pending' to the filled new_value"
-          },
-          {
-            "csv_row": 7,
             "field": "release_streams",
             "current_value": "pending",
             "new_value": "",
@@ -326,7 +255,7 @@
             "import_effect": "update data/manual_social_stats.json spotify.release_streams from 'pending' to the filled new_value"
           },
           {
-            "csv_row": 8,
+            "csv_row": 6,
             "field": "saves",
             "current_value": "pending",
             "new_value": "",
@@ -344,47 +273,26 @@
           }
         ],
         "pending_assignments": [
-          "spotify.artist_followers=VALUE",
-          "spotify.monthly_listeners=VALUE",
           "spotify.release_streams=VALUE",
           "spotify.saves=VALUE"
         ],
-        "platform_update_command": "python3 scripts/update_manual_social_stats.py spotify.artist_followers=VALUE spotify.monthly_listeners=VALUE spotify.release_streams=VALUE spotify.saves=VALUE --refresh-admin",
+        "platform_update_command": "python3 scripts/update_manual_social_stats.py spotify.release_streams=VALUE spotify.saves=VALUE --refresh-admin",
         "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
         "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin"
       },
       {
         "platform": "tiktok",
         "status": "needs_values",
-        "field_count": 2,
-        "waiting_count": 2,
+        "field_count": 1,
+        "waiting_count": 1,
         "ready_to_import_count": 0,
         "source_hint": "TikTok Studio or Creator Center analytics",
-        "collection_url": "https://www.tiktok.com/creator-center/analytics",
+        "collection_url": "https://www.tiktok.com/@lilyroo930",
         "reason": "TikTok metrics need TikTok OAuth credentials.",
         "priority_summary": [
-          "Audience size snapshot",
           "Recent discovery and traffic"
         ],
         "fields": [
-          {
-            "field": "followers",
-            "current_value": "pending",
-            "new_value": "",
-            "live_value": "",
-            "collection_mode": "manual_collection_required",
-            "collection_priority": 1,
-            "metric_category": "Audience size snapshot",
-            "access_level": "public_profile",
-            "value_type": "nonnegative_integer",
-            "example_value": "123",
-            "collection_instruction": "Enter the current public follower count.",
-            "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
-            "update_assignment": "tiktok.followers=VALUE",
-            "import_effect": "update data/manual_social_stats.json tiktok.followers from 'pending' to the filled new_value",
-            "csv_row": 9,
-            "ready_to_import": false
-          },
           {
             "field": "profile_views_7d",
             "current_value": "pending",
@@ -400,30 +308,13 @@
             "evidence_hint": "Use the last-7-days profile views value from TikTok analytics.",
             "update_assignment": "tiktok.profile_views_7d=VALUE",
             "import_effect": "update data/manual_social_stats.json tiktok.profile_views_7d from 'pending' to the filled new_value",
-            "csv_row": 10,
+            "csv_row": 7,
             "ready_to_import": false
           }
         ],
         "collection_packets": [
           {
-            "csv_row": 9,
-            "field": "followers",
-            "current_value": "pending",
-            "new_value": "",
-            "ready_to_import": false,
-            "collection_mode": "manual_collection_required",
-            "collection_priority": 1,
-            "metric_category": "Audience size snapshot",
-            "access_level": "public_profile",
-            "source_hint": "TikTok Studio or Creator Center analytics",
-            "collection_url": "https://www.tiktok.com/creator-center/analytics",
-            "collection_instruction": "Enter the current public follower count.",
-            "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
-            "update_assignment": "tiktok.followers=VALUE",
-            "import_effect": "update data/manual_social_stats.json tiktok.followers from 'pending' to the filled new_value"
-          },
-          {
-            "csv_row": 10,
+            "csv_row": 7,
             "field": "profile_views_7d",
             "current_value": "pending",
             "new_value": "",
@@ -433,7 +324,7 @@
             "metric_category": "Recent discovery and traffic",
             "access_level": "private_analytics",
             "source_hint": "TikTok Studio or Creator Center analytics",
-            "collection_url": "https://www.tiktok.com/creator-center/analytics",
+            "collection_url": "https://www.tiktok.com/@lilyroo930",
             "collection_instruction": "Enter profile views for the last 7 days.",
             "evidence_hint": "Use the last-7-days profile views value from TikTok analytics.",
             "update_assignment": "tiktok.profile_views_7d=VALUE",
@@ -441,10 +332,9 @@
           }
         ],
         "pending_assignments": [
-          "tiktok.followers=VALUE",
           "tiktok.profile_views_7d=VALUE"
         ],
-        "platform_update_command": "python3 scripts/update_manual_social_stats.py tiktok.followers=VALUE tiktok.profile_views_7d=VALUE --refresh-admin",
+        "platform_update_command": "python3 scripts/update_manual_social_stats.py tiktok.profile_views_7d=VALUE --refresh-admin",
         "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
         "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin"
       },
@@ -477,7 +367,7 @@
             "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
             "update_assignment": "x.followers=VALUE",
             "import_effect": "update data/manual_social_stats.json x.followers from 'pending' to the filled new_value",
-            "csv_row": 11,
+            "csv_row": 8,
             "ready_to_import": false
           },
           {
@@ -495,13 +385,13 @@
             "evidence_hint": "Use the last-7-days impressions value from X analytics.",
             "update_assignment": "x.impressions_7d=VALUE",
             "import_effect": "update data/manual_social_stats.json x.impressions_7d from 'pending' to the filled new_value",
-            "csv_row": 12,
+            "csv_row": 9,
             "ready_to_import": false
           }
         ],
         "collection_packets": [
           {
-            "csv_row": 11,
+            "csv_row": 8,
             "field": "followers",
             "current_value": "pending",
             "new_value": "",
@@ -518,7 +408,7 @@
             "import_effect": "update data/manual_social_stats.json x.followers from 'pending' to the filled new_value"
           },
           {
-            "csv_row": 12,
+            "csv_row": 9,
             "field": "impressions_7d",
             "current_value": "pending",
             "new_value": "",
@@ -557,7 +447,7 @@
     "status": "needs_values",
     "csv_path": "data/manual_metric_collection_template.csv",
     "ready_row_count": 0,
-    "waiting_row_count": 11,
+    "waiting_row_count": 8,
     "ready_csv_rows": [],
     "waiting_csv_rows": [
       2,
@@ -567,21 +457,15 @@
       6,
       7,
       8,
-      9,
-      10,
-      11,
-      12
+      9
     ],
     "ready_assignments": [],
     "waiting_assignments": [
       "facebook.reach_7d=VALUE",
       "instagram.followers=VALUE",
       "instagram.profile_visits_7d=VALUE",
-      "spotify.artist_followers=VALUE",
-      "spotify.monthly_listeners=VALUE",
       "spotify.release_streams=VALUE",
       "spotify.saves=VALUE",
-      "tiktok.followers=VALUE",
       "tiktok.profile_views_7d=VALUE",
       "x.followers=VALUE",
       "x.impressions_7d=VALUE"
@@ -641,38 +525,6 @@
       {
         "csv_row": 5,
         "platform": "spotify",
-        "field": "artist_followers",
-        "ready_to_import": false,
-        "new_value": "",
-        "value_type": "nonnegative_integer",
-        "collection_priority": 1,
-        "metric_category": "Audience size snapshot",
-        "access_level": "public_profile",
-        "source_hint": "Spotify for Artists > Music/Stats export",
-        "collection_url": "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a",
-        "evidence_hint": "Capture the public Spotify artist follower count if visible, otherwise use Spotify for Artists.",
-        "update_assignment": "spotify.artist_followers=VALUE",
-        "import_effect": "update data/manual_social_stats.json spotify.artist_followers from 'pending' to the filled new_value"
-      },
-      {
-        "csv_row": 6,
-        "platform": "spotify",
-        "field": "monthly_listeners",
-        "ready_to_import": false,
-        "new_value": "",
-        "value_type": "nonnegative_integer",
-        "collection_priority": 1,
-        "metric_category": "Audience size snapshot",
-        "access_level": "public_profile",
-        "source_hint": "Spotify for Artists > Music/Stats export",
-        "collection_url": "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a",
-        "evidence_hint": "Capture the public Spotify monthly listeners count from the artist profile.",
-        "update_assignment": "spotify.monthly_listeners=VALUE",
-        "import_effect": "update data/manual_social_stats.json spotify.monthly_listeners from 'pending' to the filled new_value"
-      },
-      {
-        "csv_row": 7,
-        "platform": "spotify",
         "field": "release_streams",
         "ready_to_import": false,
         "new_value": "",
@@ -687,7 +539,7 @@
         "import_effect": "update data/manual_social_stats.json spotify.release_streams from 'pending' to the filled new_value"
       },
       {
-        "csv_row": 8,
+        "csv_row": 6,
         "platform": "spotify",
         "field": "saves",
         "ready_to_import": false,
@@ -703,23 +555,7 @@
         "import_effect": "update data/manual_social_stats.json spotify.saves from 'pending' to the filled new_value"
       },
       {
-        "csv_row": 9,
-        "platform": "tiktok",
-        "field": "followers",
-        "ready_to_import": false,
-        "new_value": "",
-        "value_type": "nonnegative_integer",
-        "collection_priority": 1,
-        "metric_category": "Audience size snapshot",
-        "access_level": "public_profile",
-        "source_hint": "TikTok Studio or Creator Center analytics",
-        "collection_url": "https://www.tiktok.com/creator-center/analytics",
-        "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
-        "update_assignment": "tiktok.followers=VALUE",
-        "import_effect": "update data/manual_social_stats.json tiktok.followers from 'pending' to the filled new_value"
-      },
-      {
-        "csv_row": 10,
+        "csv_row": 7,
         "platform": "tiktok",
         "field": "profile_views_7d",
         "ready_to_import": false,
@@ -729,13 +565,13 @@
         "metric_category": "Recent discovery and traffic",
         "access_level": "private_analytics",
         "source_hint": "TikTok Studio or Creator Center analytics",
-        "collection_url": "https://www.tiktok.com/creator-center/analytics",
+        "collection_url": "https://www.tiktok.com/@lilyroo930",
         "evidence_hint": "Use the last-7-days profile views value from TikTok analytics.",
         "update_assignment": "tiktok.profile_views_7d=VALUE",
         "import_effect": "update data/manual_social_stats.json tiktok.profile_views_7d from 'pending' to the filled new_value"
       },
       {
-        "csv_row": 11,
+        "csv_row": 8,
         "platform": "x",
         "field": "followers",
         "ready_to_import": false,
@@ -751,7 +587,7 @@
         "import_effect": "update data/manual_social_stats.json x.followers from 'pending' to the filled new_value"
       },
       {
-        "csv_row": 12,
+        "csv_row": 9,
         "platform": "x",
         "field": "impressions_7d",
         "ready_to_import": false,
@@ -771,7 +607,7 @@
   },
   "public_metric_capture_backlog": {
     "status": "needs_capture_adapter",
-    "field_count": 5,
+    "field_count": 2,
     "fields": [
       {
         "platform": "instagram",
@@ -783,36 +619,9 @@
         "update_assignment": "instagram.followers=VALUE"
       },
       {
-        "platform": "spotify",
-        "field": "artist_followers",
-        "csv_row": 5,
-        "collection_url": "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a",
-        "source_hint": "Spotify for Artists > Music/Stats export",
-        "evidence_hint": "Capture the public Spotify artist follower count if visible, otherwise use Spotify for Artists.",
-        "update_assignment": "spotify.artist_followers=VALUE"
-      },
-      {
-        "platform": "spotify",
-        "field": "monthly_listeners",
-        "csv_row": 6,
-        "collection_url": "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a",
-        "source_hint": "Spotify for Artists > Music/Stats export",
-        "evidence_hint": "Capture the public Spotify monthly listeners count from the artist profile.",
-        "update_assignment": "spotify.monthly_listeners=VALUE"
-      },
-      {
-        "platform": "tiktok",
-        "field": "followers",
-        "csv_row": 9,
-        "collection_url": "https://www.tiktok.com/creator-center/analytics",
-        "source_hint": "TikTok Studio or Creator Center analytics",
-        "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
-        "update_assignment": "tiktok.followers=VALUE"
-      },
-      {
         "platform": "x",
         "field": "followers",
-        "csv_row": 11,
+        "csv_row": 8,
         "collection_url": "https://analytics.x.com/",
         "source_hint": "X Analytics or account profile metrics",
         "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
@@ -827,13 +636,11 @@
       "priority": 1,
       "label": "Audience size snapshot",
       "status": "needs_values",
-      "field_count": 5,
-      "waiting_count": 5,
+      "field_count": 2,
+      "waiting_count": 2,
       "ready_to_import_count": 0,
       "platforms": [
         "instagram",
-        "spotify",
-        "tiktok",
         "x"
       ],
       "access_levels": [
@@ -841,10 +648,7 @@
       ],
       "csv_rows": [
         3,
-        5,
-        6,
-        9,
-        11
+        8
       ],
       "fields": [
         {
@@ -858,39 +662,9 @@
           "update_assignment": "instagram.followers=VALUE"
         },
         {
-          "platform": "spotify",
-          "field": "artist_followers",
-          "csv_row": 5,
-          "ready_to_import": false,
-          "collection_url": "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a",
-          "collection_instruction": "Enter the current Spotify artist follower count.",
-          "evidence_hint": "Capture the public Spotify artist follower count if visible, otherwise use Spotify for Artists.",
-          "update_assignment": "spotify.artist_followers=VALUE"
-        },
-        {
-          "platform": "spotify",
-          "field": "monthly_listeners",
-          "csv_row": 6,
-          "ready_to_import": false,
-          "collection_url": "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a",
-          "collection_instruction": "Enter the current Spotify monthly listener count.",
-          "evidence_hint": "Capture the public Spotify monthly listeners count from the artist profile.",
-          "update_assignment": "spotify.monthly_listeners=VALUE"
-        },
-        {
-          "platform": "tiktok",
-          "field": "followers",
-          "csv_row": 9,
-          "ready_to_import": false,
-          "collection_url": "https://www.tiktok.com/creator-center/analytics",
-          "collection_instruction": "Enter the current public follower count.",
-          "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
-          "update_assignment": "tiktok.followers=VALUE"
-        },
-        {
           "platform": "x",
           "field": "followers",
-          "csv_row": 11,
+          "csv_row": 8,
           "ready_to_import": false,
           "collection_url": "https://analytics.x.com/",
           "collection_instruction": "Enter the current public follower count.",
@@ -920,8 +694,8 @@
       "csv_rows": [
         2,
         4,
-        10,
-        12
+        7,
+        9
       ],
       "fields": [
         {
@@ -947,9 +721,9 @@
         {
           "platform": "tiktok",
           "field": "profile_views_7d",
-          "csv_row": 10,
+          "csv_row": 7,
           "ready_to_import": false,
-          "collection_url": "https://www.tiktok.com/creator-center/analytics",
+          "collection_url": "https://www.tiktok.com/@lilyroo930",
           "collection_instruction": "Enter profile views for the last 7 days.",
           "evidence_hint": "Use the last-7-days profile views value from TikTok analytics.",
           "update_assignment": "tiktok.profile_views_7d=VALUE"
@@ -957,7 +731,7 @@
         {
           "platform": "x",
           "field": "impressions_7d",
-          "csv_row": 12,
+          "csv_row": 9,
           "ready_to_import": false,
           "collection_url": "https://analytics.x.com/",
           "collection_instruction": "Enter impressions for the last 7 days.",
@@ -982,14 +756,14 @@
         "private_analytics"
       ],
       "csv_rows": [
-        7,
-        8
+        5,
+        6
       ],
       "fields": [
         {
           "platform": "spotify",
           "field": "release_streams",
-          "csv_row": 7,
+          "csv_row": 5,
           "ready_to_import": false,
           "collection_url": "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a",
           "collection_instruction": "Enter lifetime streams for the promoted release.",
@@ -999,7 +773,7 @@
         {
           "platform": "spotify",
           "field": "saves",
-          "csv_row": 8,
+          "csv_row": 6,
           "ready_to_import": false,
           "collection_url": "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a",
           "collection_instruction": "Enter lifetime saves for the promoted release.",
@@ -1169,42 +943,6 @@
       "reason": "Spotify streams, saves, monthly listeners, and artist followers require Spotify for Artists export or a connected analytics source.",
       "fields": [
         {
-          "field": "artist_followers",
-          "current_value": "pending",
-          "new_value": "",
-          "live_value": "",
-          "collection_mode": "manual_collection_required",
-          "collection_priority": 1,
-          "metric_category": "Audience size snapshot",
-          "access_level": "public_profile",
-          "value_type": "nonnegative_integer",
-          "example_value": "123",
-          "collection_instruction": "Enter the current Spotify artist follower count.",
-          "evidence_hint": "Capture the public Spotify artist follower count if visible, otherwise use Spotify for Artists.",
-          "update_assignment": "spotify.artist_followers=VALUE",
-          "import_effect": "update data/manual_social_stats.json spotify.artist_followers from 'pending' to the filled new_value",
-          "csv_row": 5,
-          "ready_to_import": false
-        },
-        {
-          "field": "monthly_listeners",
-          "current_value": "pending",
-          "new_value": "",
-          "live_value": "",
-          "collection_mode": "manual_collection_required",
-          "collection_priority": 1,
-          "metric_category": "Audience size snapshot",
-          "access_level": "public_profile",
-          "value_type": "nonnegative_integer",
-          "example_value": "123",
-          "collection_instruction": "Enter the current Spotify monthly listener count.",
-          "evidence_hint": "Capture the public Spotify monthly listeners count from the artist profile.",
-          "update_assignment": "spotify.monthly_listeners=VALUE",
-          "import_effect": "update data/manual_social_stats.json spotify.monthly_listeners from 'pending' to the filled new_value",
-          "csv_row": 6,
-          "ready_to_import": false
-        },
-        {
           "field": "release_streams",
           "current_value": "pending",
           "new_value": "",
@@ -1219,7 +957,7 @@
           "evidence_hint": "Use lifetime streams for the promoted release from Spotify for Artists.",
           "update_assignment": "spotify.release_streams=VALUE",
           "import_effect": "update data/manual_social_stats.json spotify.release_streams from 'pending' to the filled new_value",
-          "csv_row": 7,
+          "csv_row": 5,
           "ready_to_import": false
         },
         {
@@ -1237,54 +975,18 @@
           "evidence_hint": "Use lifetime saves for the promoted release from Spotify for Artists.",
           "update_assignment": "spotify.saves=VALUE",
           "import_effect": "update data/manual_social_stats.json spotify.saves from 'pending' to the filled new_value",
-          "csv_row": 8,
+          "csv_row": 6,
           "ready_to_import": false
         }
       ],
-      "field_count": 4,
+      "field_count": 2,
       "pending_assignments": [
-        "spotify.artist_followers=VALUE",
-        "spotify.monthly_listeners=VALUE",
         "spotify.release_streams=VALUE",
         "spotify.saves=VALUE"
       ],
       "collection_packets": [
         {
           "csv_row": 5,
-          "field": "artist_followers",
-          "current_value": "pending",
-          "new_value": "",
-          "ready_to_import": false,
-          "collection_mode": "manual_collection_required",
-          "collection_priority": 1,
-          "metric_category": "Audience size snapshot",
-          "access_level": "public_profile",
-          "source_hint": "Spotify for Artists > Music/Stats export",
-          "collection_url": "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a",
-          "collection_instruction": "Enter the current Spotify artist follower count.",
-          "evidence_hint": "Capture the public Spotify artist follower count if visible, otherwise use Spotify for Artists.",
-          "update_assignment": "spotify.artist_followers=VALUE",
-          "import_effect": "update data/manual_social_stats.json spotify.artist_followers from 'pending' to the filled new_value"
-        },
-        {
-          "csv_row": 6,
-          "field": "monthly_listeners",
-          "current_value": "pending",
-          "new_value": "",
-          "ready_to_import": false,
-          "collection_mode": "manual_collection_required",
-          "collection_priority": 1,
-          "metric_category": "Audience size snapshot",
-          "access_level": "public_profile",
-          "source_hint": "Spotify for Artists > Music/Stats export",
-          "collection_url": "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a",
-          "collection_instruction": "Enter the current Spotify monthly listener count.",
-          "evidence_hint": "Capture the public Spotify monthly listeners count from the artist profile.",
-          "update_assignment": "spotify.monthly_listeners=VALUE",
-          "import_effect": "update data/manual_social_stats.json spotify.monthly_listeners from 'pending' to the filled new_value"
-        },
-        {
-          "csv_row": 7,
           "field": "release_streams",
           "current_value": "pending",
           "new_value": "",
@@ -1301,7 +1003,7 @@
           "import_effect": "update data/manual_social_stats.json spotify.release_streams from 'pending' to the filled new_value"
         },
         {
-          "csv_row": 8,
+          "csv_row": 6,
           "field": "saves",
           "current_value": "pending",
           "new_value": "",
@@ -1319,9 +1021,9 @@
         }
       ],
       "live_import_available_count": 0,
-      "manual_collection_required_count": 4,
+      "manual_collection_required_count": 2,
       "ready_to_import_count": 0,
-      "platform_update_command": "python3 scripts/update_manual_social_stats.py spotify.artist_followers=VALUE spotify.monthly_listeners=VALUE spotify.release_streams=VALUE spotify.saves=VALUE --refresh-admin",
+      "platform_update_command": "python3 scripts/update_manual_social_stats.py spotify.release_streams=VALUE spotify.saves=VALUE --refresh-admin",
       "live_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-live --dry-run",
       "live_import_command": "python3 scripts/update_manual_social_stats.py --from-live --refresh-admin",
       "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
@@ -1330,27 +1032,9 @@
     {
       "platform": "tiktok",
       "source_hint": "TikTok Studio or Creator Center analytics",
-      "collection_url": "https://www.tiktok.com/creator-center/analytics",
+      "collection_url": "https://www.tiktok.com/@lilyroo930",
       "reason": "TikTok metrics need TikTok OAuth credentials.",
       "fields": [
-        {
-          "field": "followers",
-          "current_value": "pending",
-          "new_value": "",
-          "live_value": "",
-          "collection_mode": "manual_collection_required",
-          "collection_priority": 1,
-          "metric_category": "Audience size snapshot",
-          "access_level": "public_profile",
-          "value_type": "nonnegative_integer",
-          "example_value": "123",
-          "collection_instruction": "Enter the current public follower count.",
-          "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
-          "update_assignment": "tiktok.followers=VALUE",
-          "import_effect": "update data/manual_social_stats.json tiktok.followers from 'pending' to the filled new_value",
-          "csv_row": 9,
-          "ready_to_import": false
-        },
         {
           "field": "profile_views_7d",
           "current_value": "pending",
@@ -1366,35 +1050,17 @@
           "evidence_hint": "Use the last-7-days profile views value from TikTok analytics.",
           "update_assignment": "tiktok.profile_views_7d=VALUE",
           "import_effect": "update data/manual_social_stats.json tiktok.profile_views_7d from 'pending' to the filled new_value",
-          "csv_row": 10,
+          "csv_row": 7,
           "ready_to_import": false
         }
       ],
-      "field_count": 2,
+      "field_count": 1,
       "pending_assignments": [
-        "tiktok.followers=VALUE",
         "tiktok.profile_views_7d=VALUE"
       ],
       "collection_packets": [
         {
-          "csv_row": 9,
-          "field": "followers",
-          "current_value": "pending",
-          "new_value": "",
-          "ready_to_import": false,
-          "collection_mode": "manual_collection_required",
-          "collection_priority": 1,
-          "metric_category": "Audience size snapshot",
-          "access_level": "public_profile",
-          "source_hint": "TikTok Studio or Creator Center analytics",
-          "collection_url": "https://www.tiktok.com/creator-center/analytics",
-          "collection_instruction": "Enter the current public follower count.",
-          "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
-          "update_assignment": "tiktok.followers=VALUE",
-          "import_effect": "update data/manual_social_stats.json tiktok.followers from 'pending' to the filled new_value"
-        },
-        {
-          "csv_row": 10,
+          "csv_row": 7,
           "field": "profile_views_7d",
           "current_value": "pending",
           "new_value": "",
@@ -1404,7 +1070,7 @@
           "metric_category": "Recent discovery and traffic",
           "access_level": "private_analytics",
           "source_hint": "TikTok Studio or Creator Center analytics",
-          "collection_url": "https://www.tiktok.com/creator-center/analytics",
+          "collection_url": "https://www.tiktok.com/@lilyroo930",
           "collection_instruction": "Enter profile views for the last 7 days.",
           "evidence_hint": "Use the last-7-days profile views value from TikTok analytics.",
           "update_assignment": "tiktok.profile_views_7d=VALUE",
@@ -1412,9 +1078,9 @@
         }
       ],
       "live_import_available_count": 0,
-      "manual_collection_required_count": 2,
+      "manual_collection_required_count": 1,
       "ready_to_import_count": 0,
-      "platform_update_command": "python3 scripts/update_manual_social_stats.py tiktok.followers=VALUE tiktok.profile_views_7d=VALUE --refresh-admin",
+      "platform_update_command": "python3 scripts/update_manual_social_stats.py tiktok.profile_views_7d=VALUE --refresh-admin",
       "live_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-live --dry-run",
       "live_import_command": "python3 scripts/update_manual_social_stats.py --from-live --refresh-admin",
       "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
@@ -1441,7 +1107,7 @@
           "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
           "update_assignment": "x.followers=VALUE",
           "import_effect": "update data/manual_social_stats.json x.followers from 'pending' to the filled new_value",
-          "csv_row": 11,
+          "csv_row": 8,
           "ready_to_import": false
         },
         {
@@ -1459,7 +1125,7 @@
           "evidence_hint": "Use the last-7-days impressions value from X analytics.",
           "update_assignment": "x.impressions_7d=VALUE",
           "import_effect": "update data/manual_social_stats.json x.impressions_7d from 'pending' to the filled new_value",
-          "csv_row": 12,
+          "csv_row": 9,
           "ready_to_import": false
         }
       ],
@@ -1470,7 +1136,7 @@
       ],
       "collection_packets": [
         {
-          "csv_row": 11,
+          "csv_row": 8,
           "field": "followers",
           "current_value": "pending",
           "new_value": "",
@@ -1487,7 +1153,7 @@
           "import_effect": "update data/manual_social_stats.json x.followers from 'pending' to the filled new_value"
         },
         {
-          "csv_row": 12,
+          "csv_row": 9,
           "field": "impressions_7d",
           "current_value": "pending",
           "new_value": "",
@@ -1586,52 +1252,6 @@
     },
     {
       "platform": "spotify",
-      "field": "artist_followers",
-      "current_value": "pending",
-      "new_value": "",
-      "live_value": "",
-      "collection_mode": "manual_collection_required",
-      "collection_priority": 1,
-      "metric_category": "Audience size snapshot",
-      "access_level": "public_profile",
-      "value_type": "nonnegative_integer",
-      "example_value": "123",
-      "collection_instruction": "Enter the current Spotify artist follower count.",
-      "evidence_hint": "Capture the public Spotify artist follower count if visible, otherwise use Spotify for Artists.",
-      "source_hint": "Spotify for Artists > Music/Stats export",
-      "collection_url": "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a",
-      "reason": "Spotify streams, saves, monthly listeners, and artist followers require Spotify for Artists export or a connected analytics source.",
-      "update_assignment": "spotify.artist_followers=VALUE",
-      "import_effect": "update data/manual_social_stats.json spotify.artist_followers from 'pending' to the filled new_value",
-      "platform_update_command": "python3 scripts/update_manual_social_stats.py spotify.artist_followers=VALUE spotify.monthly_listeners=VALUE spotify.release_streams=VALUE spotify.saves=VALUE --refresh-admin",
-      "csv_row": 5,
-      "ready_to_import": false
-    },
-    {
-      "platform": "spotify",
-      "field": "monthly_listeners",
-      "current_value": "pending",
-      "new_value": "",
-      "live_value": "",
-      "collection_mode": "manual_collection_required",
-      "collection_priority": 1,
-      "metric_category": "Audience size snapshot",
-      "access_level": "public_profile",
-      "value_type": "nonnegative_integer",
-      "example_value": "123",
-      "collection_instruction": "Enter the current Spotify monthly listener count.",
-      "evidence_hint": "Capture the public Spotify monthly listeners count from the artist profile.",
-      "source_hint": "Spotify for Artists > Music/Stats export",
-      "collection_url": "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a",
-      "reason": "Spotify streams, saves, monthly listeners, and artist followers require Spotify for Artists export or a connected analytics source.",
-      "update_assignment": "spotify.monthly_listeners=VALUE",
-      "import_effect": "update data/manual_social_stats.json spotify.monthly_listeners from 'pending' to the filled new_value",
-      "platform_update_command": "python3 scripts/update_manual_social_stats.py spotify.artist_followers=VALUE spotify.monthly_listeners=VALUE spotify.release_streams=VALUE spotify.saves=VALUE --refresh-admin",
-      "csv_row": 6,
-      "ready_to_import": false
-    },
-    {
-      "platform": "spotify",
       "field": "release_streams",
       "current_value": "pending",
       "new_value": "",
@@ -1649,8 +1269,8 @@
       "reason": "Spotify streams, saves, monthly listeners, and artist followers require Spotify for Artists export or a connected analytics source.",
       "update_assignment": "spotify.release_streams=VALUE",
       "import_effect": "update data/manual_social_stats.json spotify.release_streams from 'pending' to the filled new_value",
-      "platform_update_command": "python3 scripts/update_manual_social_stats.py spotify.artist_followers=VALUE spotify.monthly_listeners=VALUE spotify.release_streams=VALUE spotify.saves=VALUE --refresh-admin",
-      "csv_row": 7,
+      "platform_update_command": "python3 scripts/update_manual_social_stats.py spotify.release_streams=VALUE spotify.saves=VALUE --refresh-admin",
+      "csv_row": 5,
       "ready_to_import": false
     },
     {
@@ -1672,31 +1292,8 @@
       "reason": "Spotify streams, saves, monthly listeners, and artist followers require Spotify for Artists export or a connected analytics source.",
       "update_assignment": "spotify.saves=VALUE",
       "import_effect": "update data/manual_social_stats.json spotify.saves from 'pending' to the filled new_value",
-      "platform_update_command": "python3 scripts/update_manual_social_stats.py spotify.artist_followers=VALUE spotify.monthly_listeners=VALUE spotify.release_streams=VALUE spotify.saves=VALUE --refresh-admin",
-      "csv_row": 8,
-      "ready_to_import": false
-    },
-    {
-      "platform": "tiktok",
-      "field": "followers",
-      "current_value": "pending",
-      "new_value": "",
-      "live_value": "",
-      "collection_mode": "manual_collection_required",
-      "collection_priority": 1,
-      "metric_category": "Audience size snapshot",
-      "access_level": "public_profile",
-      "value_type": "nonnegative_integer",
-      "example_value": "123",
-      "collection_instruction": "Enter the current public follower count.",
-      "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
-      "source_hint": "TikTok Studio or Creator Center analytics",
-      "collection_url": "https://www.tiktok.com/creator-center/analytics",
-      "reason": "TikTok metrics need TikTok OAuth credentials.",
-      "update_assignment": "tiktok.followers=VALUE",
-      "import_effect": "update data/manual_social_stats.json tiktok.followers from 'pending' to the filled new_value",
-      "platform_update_command": "python3 scripts/update_manual_social_stats.py tiktok.followers=VALUE tiktok.profile_views_7d=VALUE --refresh-admin",
-      "csv_row": 9,
+      "platform_update_command": "python3 scripts/update_manual_social_stats.py spotify.release_streams=VALUE spotify.saves=VALUE --refresh-admin",
+      "csv_row": 6,
       "ready_to_import": false
     },
     {
@@ -1714,12 +1311,12 @@
       "collection_instruction": "Enter profile views for the last 7 days.",
       "evidence_hint": "Use the last-7-days profile views value from TikTok analytics.",
       "source_hint": "TikTok Studio or Creator Center analytics",
-      "collection_url": "https://www.tiktok.com/creator-center/analytics",
+      "collection_url": "https://www.tiktok.com/@lilyroo930",
       "reason": "TikTok metrics need TikTok OAuth credentials.",
       "update_assignment": "tiktok.profile_views_7d=VALUE",
       "import_effect": "update data/manual_social_stats.json tiktok.profile_views_7d from 'pending' to the filled new_value",
-      "platform_update_command": "python3 scripts/update_manual_social_stats.py tiktok.followers=VALUE tiktok.profile_views_7d=VALUE --refresh-admin",
-      "csv_row": 10,
+      "platform_update_command": "python3 scripts/update_manual_social_stats.py tiktok.profile_views_7d=VALUE --refresh-admin",
+      "csv_row": 7,
       "ready_to_import": false
     },
     {
@@ -1742,7 +1339,7 @@
       "update_assignment": "x.followers=VALUE",
       "import_effect": "update data/manual_social_stats.json x.followers from 'pending' to the filled new_value",
       "platform_update_command": "python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impressions_7d=VALUE --refresh-admin",
-      "csv_row": 11,
+      "csv_row": 8,
       "ready_to_import": false
     },
     {
@@ -1765,7 +1362,7 @@
       "update_assignment": "x.impressions_7d=VALUE",
       "import_effect": "update data/manual_social_stats.json x.impressions_7d from 'pending' to the filled new_value",
       "platform_update_command": "python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impressions_7d=VALUE --refresh-admin",
-      "csv_row": 12,
+      "csv_row": 9,
       "ready_to_import": false
     }
   ]

@@ -1,6 +1,6 @@
 # Human Handoff Packet - Lily Roo
 
-Generated: 2026-06-20T06:08:42.218138Z
+Generated: 2026-06-20T06:12:26.530476Z
 
 ## Summary
 - Open handoff tasks: **8**
@@ -13,7 +13,7 @@ Generated: 2026-06-20T06:08:42.218138Z
 - Ready steps: **3**
 - Blocked steps: **2**
 - Manual posts packaged: **2**
-- Manual metric fields: **11**
+- Manual metric fields: **8**
 
 - **Review checked approval batch** (`ready_for_review`)
   - Owner: `tod`; tasks: **1**; blockers resolved: **2**
@@ -49,12 +49,12 @@ Generated: 2026-06-20T06:08:42.218138Z
   - Next after apply: Recapture admin state and only then revisit TikTok approval or backlog reschedule rows.
   - Guardrail: Run preflight and confirm local OAuth/public-posting setup before pushing secrets.
 - **Fill and import manual metric worksheet** (`needs_values`)
-  - Owner: `tod`; tasks: **3**; blockers resolved: **11**
-  - Fields: **11**
+  - Owner: `tod`; tasks: **3**; blockers resolved: **8**
+  - Fields: **8**
   - Batches: **3**
-  - Priority 1: Audience size snapshot - **5** field(s) (access: public_profile; rows: 3, 5, 6, 9, 11)
-  - Priority 2: Recent discovery and traffic - **4** field(s) (access: private_analytics; rows: 2, 4, 10, 12)
-  - Priority 3: Release depth metrics - **2** field(s) (access: private_analytics; rows: 7, 8)
+  - Priority 1: Audience size snapshot - **2** field(s) (access: public_profile; rows: 3, 8)
+  - Priority 2: Recent discovery and traffic - **4** field(s) (access: private_analytics; rows: 2, 4, 7, 9)
+  - Priority 3: Release depth metrics - **2** field(s) (access: private_analytics; rows: 5, 6)
   - Preview/check: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
   - Apply after review: `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
   - Sequence preview: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
@@ -65,8 +65,8 @@ Generated: 2026-06-20T06:08:42.218138Z
   - Guardrail: Import only collected numeric values; leave unknown cells blank.
 - **Reschedule approved backlog after blockers clear** (`blocked`)
   - Owner: `external_platform`; tasks: **1**; blockers resolved: **1**
-  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24`
-  - Sequence preview: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24`
+  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24`
+  - Sequence preview: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24`
   - Sequence verify: `python3 scripts/refresh_promo_admin.py`
   - Completion evidence: data/backlog_reschedule_preview.json should show normal_apply_gate clear before any non-override apply command is exposed.
   - Next after apply: Refresh admin and confirm approved past-due posts have future scheduled_at values before relying on the scheduler.
@@ -88,7 +88,7 @@ Generated: 2026-06-20T06:08:42.218138Z
 - **Preview approved backlog reschedule** (`backlog-reschedule`)
   - Phase: `Backlog recovery`; owner: `external_platform`; status: `blocked`; urgency: `high`
   - Detail: Known executor/platform blockers must clear before normal apply.
-  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24`
+  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24`
   - Guardrail: Normal apply stays hidden until known executor/platform blockers clear.
 - **Post Analog Myth to YouTube Community** (`manual-distribution-FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY`)
   - Phase: `Manual distribution`; owner: `tod`; status: `waiting_for_review`; urgency: `medium`
@@ -106,7 +106,7 @@ Generated: 2026-06-20T06:08:42.218138Z
   - Guardrail: Do not log a manual post until a real public URL exists.
 - **Fill priority 1 metrics: Audience size snapshot** (`manual-metrics-priority-1`)
   - Phase: `Manual metrics`; owner: `tod`; status: `needs_values`; urgency: `low`
-  - Detail: Collect 5 field(s) across instagram, spotify, tiktok, x, fill the worksheet rows, preview import, then refresh Admin.
+  - Detail: Collect 2 field(s) across instagram, x, fill the worksheet rows, preview import, then refresh Admin.
   - Preview/check: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
   - Apply after review: `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
   - Guardrail: Only import nonnegative numeric values copied from the named source; leave unknown values blank instead of guessing.
