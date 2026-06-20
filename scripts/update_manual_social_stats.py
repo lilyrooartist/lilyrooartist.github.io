@@ -140,6 +140,9 @@ def main():
     if args.from_live:
         assignments.extend(live_assignments(data, read_live_metrics()))
     if not assignments:
+        if args.from_live and not args.assignments and not args.from_csv:
+            print("No live-covered pending metrics available; manual stats unchanged.")
+            return
         raise SystemExit("No metric assignments supplied. Add platform.metric=value args or fill new_value cells and use --from-csv.")
 
     changes = []

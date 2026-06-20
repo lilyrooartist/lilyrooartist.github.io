@@ -29,6 +29,12 @@ STEPS = [
         "preserve_on_failure": ["data/live_social_metrics.json"],
     },
     {
+        "name": "import_live_manual_metrics",
+        "command": ["python3", "scripts/update_manual_social_stats.py", "--from-live"],
+        "required": False,
+        "preserve_on_failure": ["data/manual_social_stats.json"],
+    },
+    {
         "name": "verify_pending_store_links",
         "command": ["python3", "scripts/verify_pending_store_links.py", "--refresh-admin"],
         "required": False,

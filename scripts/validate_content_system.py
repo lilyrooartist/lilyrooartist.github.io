@@ -581,6 +581,8 @@ def validate_generated_outputs(failures):
             "field",
             "current_value",
             "new_value",
+            "live_value",
+            "collection_mode",
             "source_hint",
             "collection_url",
             "reason",
@@ -605,10 +607,14 @@ def validate_generated_outputs(failures):
         summary = packet.get("summary") or {}
         platforms = packet.get("platforms") or []
         rows = packet.get("rows") or []
+        live_import_rows = [row for row in rows if row.get("collection_mode") == "live_import_available"]
+        manual_rows = [row for row in rows if row.get("collection_mode") != "live_import_available"]
         if (
             packet.get("safe_mode") is True
             and summary.get("pending_field_count") == len(rows)
             and summary.get("platform_count") == len(platforms)
+            and summary.get("live_import_available_count") == len(live_import_rows)
+            and summary.get("manual_collection_required_count") == len(manual_rows)
             and summary.get("csv_path") == "data/manual_metric_collection_template.csv"
             and "--from-live --dry-run" in (summary.get("live_import_preview_command") or "")
             and "--from-live --refresh-admin" in (summary.get("live_import_command") or "")
@@ -618,6 +624,8 @@ def validate_generated_outputs(failures):
                 platform.get("platform")
                 and platform.get("collection_url")
                 and platform.get("field_count") == len(platform.get("fields") or [])
+                and "live_import_available_count" in platform
+                and "manual_collection_required_count" in platform
                 and platform.get("pending_assignments")
                 and platform.get("worksheet_import_preview_command")
                 for platform in platforms
@@ -1154,7 +1162,7 @@ def validate_generated_outputs(failures):
     if MANUAL_METRICS_UPDATER.exists():
         ok("manual social stats updater present")
         updater_text = MANUAL_METRICS_UPDATER.read_text(encoding="utf-8")
-        if "--from-csv" in updater_text and "--from-live" in updater_text and "live_social_metrics.json" in updater_text and "--dry-run" in updater_text and "new_value" in updater_text and "csv.DictReader" in updater_text:
+        if "--from-csv" in updater_text and "--from-live" in updater_text and "live_social_metrics.json" in updater_text and "--dry-run" in updater_text and "new_value" in updater_text and "csv.DictReader" in updater_text and "No live-covered pending metrics available" in updater_text:
             ok("manual social stats updater can import filled CSV values")
         else:
             fail("update_manual_social_stats.py missing filled CSV or live metric import support", failures)
@@ -1221,6 +1229,8 @@ def validate_generated_outputs(failures):
         required_bits = [
             "promo_admin_refresh_run.json",
             "capture_live_metrics.py",
+            "update_manual_social_stats.py",
+            "--from-live",
             "verify_pending_store_links.py",
             "capture_executor_readiness.py",
             "capture_social_executions.py",
@@ -1399,7 +1409,7 @@ def validate_generated_outputs(failures):
         fail("build_backlog_reschedule_preview.py missing", failures)
     if MANUAL_METRIC_COLLECTION_SCRIPT.exists():
         collection_text = MANUAL_METRIC_COLLECTION_SCRIPT.read_text(encoding="utf-8")
-        if "manual_metric_collection_template.csv" in collection_text and "manual_metric_collection_packet.json" in collection_text and "manual-metric-collection.md" in collection_text and "pending_manual_by_platform" in collection_text and "collection_url" in collection_text and "--from-live" in collection_text and "subprocess" not in collection_text:
+        if "manual_metric_collection_template.csv" in collection_text and "manual_metric_collection_packet.json" in collection_text and "manual-metric-collection.md" in collection_text and "pending_manual_by_platform" in collection_text and "collection_url" in collection_text and "--from-live" in collection_text and "collection_mode" in collection_text and "live_import_available_count" in collection_text and "subprocess" not in collection_text:
             ok("manual metric collection builder is review-only")
         else:
             fail("build_manual_metric_collection.py missing worksheet outputs or executes commands", failures)

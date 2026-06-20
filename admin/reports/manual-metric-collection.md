@@ -1,8 +1,11 @@
 # Manual Metric Collection - Lily Roo
 
-Generated: 2026-06-20T01:41:15.714729Z
+Generated: 2026-06-20T01:46:21.273728Z
 
 Pending fields: **11**
+
+Live-importable fields: **0**
+Manual collection required: **11**
 
 Fill `new_value` in `data/manual_metric_collection_template.csv`, then run:
 

@@ -60,6 +60,20 @@ def collection_url(platform: str, manual: dict, live: dict) -> str:
     return DEFAULT_COLLECTION_URLS.get(platform, "")
 
 
+def live_metric_value(live: dict, platform: str, field: str):
+    data = ((live.get("platforms") or {}).get(platform) or {}) if isinstance(live, dict) else {}
+    metrics = data.get("metrics") or {}
+    if field in metrics and metrics.get(field) not in (None, ""):
+        return metrics.get(field)
+    fallback_keys = {
+        ("facebook", "followers"): ["page_likes"],
+    }.get((platform, field), [])
+    for key in fallback_keys:
+        if key in metrics and metrics.get(key) not in (None, ""):
+            return metrics.get(key)
+    return None
+
+
 def build_rows(status: dict, manual: dict, live: dict) -> list[dict]:
     kpi = status.get("kpi") or {}
     pending = kpi.get("pending_manual_by_platform") or {}
@@ -73,11 +87,15 @@ def build_rows(status: dict, manual: dict, live: dict) -> list[dict]:
     for platform, fields in sorted(pending.items()):
         step = steps.get(platform) or {}
         for field in fields:
+            live_value = live_metric_value(live, platform, field)
+            collection_mode = "live_import_available" if live_value is not None else "manual_collection_required"
             rows.append({
                 "platform": platform,
                 "field": field,
                 "current_value": current_value(manual, platform, field),
                 "new_value": "",
+                "live_value": "" if live_value is None else str(live_value),
+                "collection_mode": collection_mode,
                 "source_hint": SOURCE_HINTS.get(platform, "Manual platform export"),
                 "collection_url": collection_url(platform, manual, live),
                 "reason": step.get("reason") or "",
@@ -94,6 +112,8 @@ def write_csv(rows: list[dict]) -> None:
         "field",
         "current_value",
         "new_value",
+        "live_value",
+        "collection_mode",
         "source_hint",
         "collection_url",
         "reason",
@@ -108,6 +128,8 @@ def write_csv(rows: list[dict]) -> None:
 
 def build_packet(rows: list[dict], generated_at: str) -> dict:
     by_platform = {}
+    live_import_rows = [row for row in rows if row.get("collection_mode") == "live_import_available"]
+    manual_rows = [row for row in rows if row.get("collection_mode") != "live_import_available"]
     for row in rows:
         platform = row["platform"]
         group = by_platform.setdefault(platform, {
@@ -118,18 +140,28 @@ def build_packet(rows: list[dict], generated_at: str) -> dict:
             "fields": [],
             "field_count": 0,
             "pending_assignments": [],
+            "live_import_available_count": 0,
+            "manual_collection_required_count": 0,
             "platform_update_command": row.get("platform_update_command") or "",
+            "live_import_preview_command": LIVE_IMPORT_PREVIEW_COMMAND,
+            "live_import_command": LIVE_IMPORT_COMMAND,
             "worksheet_import_preview_command": WORKSHEET_IMPORT_PREVIEW_COMMAND,
             "worksheet_import_command": WORKSHEET_IMPORT_COMMAND,
         })
         group["fields"].append({
-            "field": row["field"],
-            "current_value": row.get("current_value") or "",
-            "new_value": row.get("new_value") or "",
-            "update_assignment": row.get("update_assignment") or "",
-        })
+                "field": row["field"],
+                "current_value": row.get("current_value") or "",
+                "new_value": row.get("new_value") or "",
+                "live_value": row.get("live_value") or "",
+                "collection_mode": row.get("collection_mode") or "manual_collection_required",
+                "update_assignment": row.get("update_assignment") or "",
+            })
         group["pending_assignments"].append(row.get("update_assignment") or "")
         group["field_count"] = len(group["fields"])
+        if row.get("collection_mode") == "live_import_available":
+            group["live_import_available_count"] += 1
+        else:
+            group["manual_collection_required_count"] += 1
     platforms = list(by_platform.values())
     return {
         "generated_at": generated_at,
@@ -143,6 +175,8 @@ def build_packet(rows: list[dict], generated_at: str) -> dict:
         },
         "summary": {
             "pending_field_count": len(rows),
+            "live_import_available_count": len(live_import_rows),
+            "manual_collection_required_count": len(manual_rows),
             "platform_count": len(platforms),
             "csv_path": str(OUT_CSV.relative_to(ROOT)),
             "report_path": str(OUT_MD.relative_to(ROOT)),
@@ -163,6 +197,9 @@ def build_markdown(rows: list[dict], generated_at: str) -> str:
         f"Generated: {generated_at}",
         "",
         f"Pending fields: **{len(rows)}**",
+        "",
+        f"Live-importable fields: **{len([row for row in rows if row.get('collection_mode') == 'live_import_available'])}**",
+        f"Manual collection required: **{len([row for row in rows if row.get('collection_mode') != 'live_import_available'])}**",
         "",
         "Fill `new_value` in `data/manual_metric_collection_template.csv`, then run:",
         "",
@@ -198,7 +235,10 @@ def build_markdown(rows: list[dict], generated_at: str) -> str:
             lines.append(f"Why: {reason}")
         lines.append("")
         for row in platform_rows:
-            lines.append(f"- `{row['field']}` current `{row['current_value']}` -> `VALUE`")
+            if row.get("collection_mode") == "live_import_available":
+                lines.append(f"- `{row['field']}` current `{row['current_value']}` -> live `{row['live_value']}`")
+            else:
+                lines.append(f"- `{row['field']}` current `{row['current_value']}` -> `VALUE`")
         command = platform_rows[0].get("platform_update_command")
         if command:
             lines.append("")
