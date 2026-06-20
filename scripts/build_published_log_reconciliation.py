@@ -73,25 +73,67 @@ def worker_export_packet(executions: dict, existing_ids: set[str]) -> dict:
 
 def manual_log_packet(packet: dict, existing_ids: set[str]) -> dict:
     rows = []
+    approval_docket = packet.get("manual_approval_docket") or {}
+    distribution_docket = packet.get("manual_distribution_docket") or {}
     for item in packet.get("rows") or []:
         post_id = item.get("id") or ""
         logged = bool(item.get("logged")) or post_id in existing_ids
         if logged:
             continue
+        posting = item.get("manual_posting_packet") or {}
+        approval_required = bool(posting.get("approval_required"))
+        postable_now = bool(posting.get("postable_now"))
+        if approval_required:
+            log_gate = "blocked_until_manual_approval"
+            next_step = "Approve the manual row after review, post it in YouTube Studio Community, then log the public URL."
+        elif postable_now:
+            log_gate = "blocked_until_public_url"
+            next_step = "Post manually in YouTube Studio Community, then replace PUBLIC_URL with the real public URL."
+        else:
+            log_gate = "ready_to_log" if item.get("published_url") else "blocked_until_public_url"
+            next_step = "Use the log preview command with the real public URL before applying."
         rows.append({
             "id": post_id,
             "release": item.get("release") or "",
             "platform": item.get("platform") or "",
             "status": item.get("distribution_status") or "",
+            "log_gate": log_gate,
+            "approval_required": approval_required,
+            "postable_now": postable_now,
             "requires_public_url": (item.get("log_effect") or {}).get("requires_public_url", True),
+            "next_step": next_step,
+            "approval_preview_command": item.get("approval_preview_command") or "",
+            "approval_command": item.get("approval_command") or "",
             "log_preview_command": item.get("log_preview_command") or "",
             "log_apply_command": item.get("log_apply_command") or "",
             "public_community_url": (packet.get("summary") or {}).get("public_community_url") or "",
         })
+    gate_counts = {}
+    for row in rows:
+        gate = row.get("log_gate") or "unknown"
+        gate_counts[gate] = gate_counts.get(gate, 0) + 1
     return {
         "unlogged_manual_count": len(rows),
+        "approval_gate": {
+            "status": approval_docket.get("status") or "unknown",
+            "ready_count": approval_docket.get("ready_count") or 0,
+            "blocked_count": approval_docket.get("blocked_count") or 0,
+            "ready_ids": approval_docket.get("ready_ids") or [],
+            "blocked_ids": approval_docket.get("blocked_ids") or [],
+            "preview_command": approval_docket.get("preview_command") or "",
+            "apply_command": approval_docket.get("apply_command") or "",
+            "guardrail": approval_docket.get("guardrail") or "",
+        },
+        "posting_gate": {
+            "status": distribution_docket.get("status") or "unknown",
+            "review_count": distribution_docket.get("review_count") or 0,
+            "postable_count": distribution_docket.get("postable_count") or 0,
+            "logged_count": distribution_docket.get("logged_count") or 0,
+            "public_community_url": distribution_docket.get("public_community_url") or "",
+        },
+        "gate_counts": dict(sorted(gate_counts.items())),
         "rows": rows,
-        "guardrail": "Only log manual distribution after the public post URL exists.",
+        "guardrail": "Only log manual distribution after approval, manual posting, and a real public post URL.",
     }
 
 
@@ -120,12 +162,33 @@ def build_markdown(payload: dict) -> str:
         "## Manual Logging",
         f"- Unlogged manual rows: **{manual['unlogged_manual_count']}**",
         f"- Guardrail: {manual['guardrail']}",
+        "",
+        "### Manual Log Gates",
+        f"- Approval gate: **{(manual.get('approval_gate') or {}).get('status', 'unknown')}**; ready: **{(manual.get('approval_gate') or {}).get('ready_count', 0)}**; blocked: **{(manual.get('approval_gate') or {}).get('blocked_count', 0)}**",
+        f"- Posting gate: **{(manual.get('posting_gate') or {}).get('status', 'unknown')}**; needs review: **{(manual.get('posting_gate') or {}).get('review_count', 0)}**; postable: **{(manual.get('posting_gate') or {}).get('postable_count', 0)}**",
     ]
+    approval_gate = manual.get("approval_gate") or {}
+    if approval_gate.get("ready_ids"):
+        lines.append(f"- Ready approval IDs: `{', '.join(approval_gate['ready_ids'])}`")
+    if approval_gate.get("blocked_ids"):
+        lines.append(f"- Blocked approval IDs: `{', '.join(approval_gate['blocked_ids'])}`")
+    if approval_gate.get("preview_command"):
+        lines.append(f"- Preview approvals: `{approval_gate['preview_command']}`")
+    if approval_gate.get("apply_command"):
+        lines.append(f"- Approve after review: `{approval_gate['apply_command']}`")
+    lines.append("")
+    lines.append("### Manual Rows")
     for row in manual["rows"]:
         lines.append(f"- **{row['release']} {row['platform']}** (`{row['id']}`)")
-        lines.append(f"  - Status: `{row['status']}`")
+        lines.append(f"  - Status: `{row['status']}`; log gate: `{row.get('log_gate', 'unknown')}`")
+        if row.get("next_step"):
+            lines.append(f"  - Next step: {row['next_step']}")
         if row.get("public_community_url"):
             lines.append(f"  - Posting surface: {row['public_community_url']}")
+        if row.get("approval_preview_command"):
+            lines.append(f"  - Preview approval: `{row['approval_preview_command']}`")
+        if row.get("approval_command"):
+            lines.append(f"  - Approve after review: `{row['approval_command']}`")
         if row.get("log_preview_command"):
             lines.append(f"  - Preview URL log: `{row['log_preview_command']}`")
         if row.get("log_apply_command"):
@@ -204,6 +267,8 @@ def main() -> int:
             "latest_entry_url": latest.get("post_id_or_url") or "",
             "unlogged_worker_posts": worker["unlogged_worker_count"],
             "unlogged_manual_posts": manual["unlogged_manual_count"],
+            "manual_log_gate_counts": manual.get("gate_counts") or {},
+            "manual_logging_gate_status": (manual.get("posting_gate") or {}).get("status") or "unknown",
             "reconciliation_needed": reconciliation_needed,
             "next_preview_command": worker["preview_command"],
             "next_apply_command": worker["apply_command"] if worker["unlogged_worker_count"] else "",

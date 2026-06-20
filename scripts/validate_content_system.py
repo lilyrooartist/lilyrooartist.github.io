@@ -539,14 +539,31 @@ def validate_generated_outputs(failures):
         manual = reconciliation.get("manual_logging") or {}
         manual_packet = json.loads(MANUAL_DISTRIBUTION_PACKET.read_text(encoding="utf-8")) if MANUAL_DISTRIBUTION_PACKET.exists() else {}
         expected_unlogged_manual = int((manual_packet.get("summary") or {}).get("unlogged_manual_count") or 0)
+        manual_approval_docket = manual_packet.get("manual_approval_docket") or {}
+        manual_distribution_docket = manual_packet.get("manual_distribution_docket") or {}
+        manual_rows = manual.get("rows") or []
+        gate_counts = {}
+        for row in manual_rows:
+            gate = row.get("log_gate") or "unknown"
+            gate_counts[gate] = gate_counts.get(gate, 0) + 1
+        approval_gate = manual.get("approval_gate") or {}
+        posting_gate = manual.get("posting_gate") or {}
         if (
             reconciliation.get("safe_mode") is True
             and reconciliation_summary.get("published_log_rows") == len(published_rows)
             and reconciliation_summary.get("unlogged_worker_posts") == worker.get("unlogged_worker_count")
             and reconciliation_summary.get("unlogged_manual_posts") == manual.get("unlogged_manual_count") == expected_unlogged_manual
+            and reconciliation_summary.get("manual_log_gate_counts") == dict(sorted(gate_counts.items()))
+            and reconciliation_summary.get("manual_logging_gate_status") == (manual_distribution_docket.get("status") or "unknown")
             and "export_social_executions.py --dry-run" in (worker.get("preview_command") or "")
             and "export_social_executions.py --refresh-admin" in (worker.get("apply_command") or "")
-            and all("PUBLIC_URL" in (row.get("log_preview_command") or "") and "--apply" in (row.get("log_apply_command") or "") for row in manual.get("rows") or [])
+            and approval_gate.get("ready_ids") == (manual_approval_docket.get("ready_ids") or [])
+            and approval_gate.get("blocked_ids") == (manual_approval_docket.get("blocked_ids") or [])
+            and approval_gate.get("preview_command") == (manual_approval_docket.get("preview_command") or "")
+            and approval_gate.get("apply_command") == (manual_approval_docket.get("apply_command") or "")
+            and posting_gate.get("review_count") == (manual_distribution_docket.get("review_count") or 0)
+            and posting_gate.get("postable_count") == (manual_distribution_docket.get("postable_count") or 0)
+            and all(row.get("log_gate") in {"blocked_until_manual_approval", "blocked_until_public_url", "ready_to_log"} and row.get("next_step") and "PUBLIC_URL" in (row.get("log_preview_command") or "") and "--apply" in (row.get("log_apply_command") or "") for row in manual_rows)
             and manual.get("guardrail")
         ):
             ok("published log reconciliation packages Worker export and manual URL logging checks")
@@ -1818,7 +1835,7 @@ def validate_generated_outputs(failures):
         fail("build_promo_operations_packet.py missing", failures)
     if PUBLISHED_LOG_RECONCILIATION_SCRIPT.exists():
         reconciliation_text = PUBLISHED_LOG_RECONCILIATION_SCRIPT.read_text(encoding="utf-8")
-        if "published_log_reconciliation.json" in reconciliation_text and "published-log-reconciliation.md" in reconciliation_text and "export_social_executions.py --dry-run" in reconciliation_text and "manual_distribution_packet.json" in reconciliation_text and "log_preview_command" in reconciliation_text and "subprocess" not in reconciliation_text:
+        if "published_log_reconciliation.json" in reconciliation_text and "published-log-reconciliation.md" in reconciliation_text and "export_social_executions.py --dry-run" in reconciliation_text and "manual_distribution_packet.json" in reconciliation_text and "approval_gate" in reconciliation_text and "log_gate" in reconciliation_text and "log_preview_command" in reconciliation_text and "subprocess" not in reconciliation_text:
             ok("published log reconciliation builder is review-only")
         else:
             fail("build_published_log_reconciliation.py missing safe reconciliation outputs or executes commands", failures)

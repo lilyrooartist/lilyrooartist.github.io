@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T04:34:24.280487Z",
+  "generated_at": "2026-06-20T04:38:49.675552Z",
   "safe_mode": true,
   "source": {
     "published_log": "admin/content/Published_Log.csv",
@@ -16,6 +16,10 @@
     "latest_entry_url": "https://www.facebook.com/903693509504290_122118326547249470",
     "unlogged_worker_posts": 0,
     "unlogged_manual_posts": 2,
+    "manual_log_gate_counts": {
+      "blocked_until_manual_approval": 2
+    },
+    "manual_logging_gate_status": "needs_review",
     "reconciliation_needed": true,
     "next_preview_command": "python3 scripts/export_social_executions.py --dry-run",
     "next_apply_command": ""
@@ -29,13 +33,44 @@
   },
   "manual_logging": {
     "unlogged_manual_count": 2,
+    "approval_gate": {
+      "status": "ready_for_manual_review",
+      "ready_count": 2,
+      "blocked_count": 1,
+      "ready_ids": [
+        "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+        "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
+      ],
+      "blocked_ids": [
+        "FP-PLAN-TWELVE-DOLLARS-TIKTOK"
+      ],
+      "preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
+      "apply_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+      "guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review."
+    },
+    "posting_gate": {
+      "status": "needs_review",
+      "review_count": 2,
+      "postable_count": 0,
+      "logged_count": 0,
+      "public_community_url": "https://www.youtube.com/@lilyroo.artist/community"
+    },
+    "gate_counts": {
+      "blocked_until_manual_approval": 2
+    },
     "rows": [
       {
         "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
         "release": "Twelve Dollars",
         "platform": "YouTube Community",
         "status": "waiting_for_review",
+        "log_gate": "blocked_until_manual_approval",
+        "approval_required": true,
+        "postable_now": false,
         "requires_public_url": true,
+        "next_step": "Approve the manual row after review, post it in YouTube Studio Community, then log the public URL.",
+        "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
+        "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
         "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL",
         "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
         "public_community_url": "https://www.youtube.com/@lilyroo.artist/community"
@@ -45,12 +80,18 @@
         "release": "Analog Myth",
         "platform": "YouTube Community",
         "status": "waiting_for_review",
+        "log_gate": "blocked_until_manual_approval",
+        "approval_required": true,
+        "postable_now": false,
         "requires_public_url": true,
+        "next_step": "Approve the manual row after review, post it in YouTube Studio Community, then log the public URL.",
+        "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --dry-run",
+        "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin",
         "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL",
         "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
         "public_community_url": "https://www.youtube.com/@lilyroo.artist/community"
       }
     ],
-    "guardrail": "Only log manual distribution after the public post URL exists."
+    "guardrail": "Only log manual distribution after approval, manual posting, and a real public post URL."
   }
 }
