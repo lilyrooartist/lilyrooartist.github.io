@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T06:47:46.969598Z",
+  "generated_at": "2026-06-20T06:58:05.641986Z",
   "safe_mode": true,
   "source": {
     "promotion_blocker_ledger": "data/promotion_blocker_ledger.json",
@@ -12,41 +12,41 @@
     "backlog_reschedule": "data/backlog_reschedule_preview.json"
   },
   "summary": {
-    "task_count": 8,
+    "task_count": 7,
     "owner_counts": {
       "external_platform": 1,
-      "tod": 7
+      "tod": 6
     },
     "urgency_counts": {
       "high": 3,
-      "low": 3,
+      "low": 2,
       "medium": 2
     },
     "phase_counts": {
       "Approval": 1,
       "Backlog recovery": 1,
       "Manual distribution": 2,
-      "Manual metrics": 3,
+      "Manual metrics": 2,
       "Platform setup": 1
     },
     "blocker_summary": {
-      "open_blocker_count": 10,
+      "open_blocker_count": 9,
       "urgent_count": 4,
       "owner_counts": {
         "external_platform": 1,
-        "tod": 9
+        "tod": 8
       },
       "category_counts": {
         "approval": 3,
         "backlog_reschedule": 1,
         "manual_distribution": 2,
-        "manual_metrics": 3,
+        "manual_metrics": 2,
         "platform_repair": 1
       },
       "status_counts": {
         "blocked": 2,
         "blocked_by_review_checks": 1,
-        "needs_values": 3,
+        "needs_values": 2,
         "ready_for_reviewed_approval": 2,
         "waiting_for_review": 2
       },
@@ -147,18 +147,17 @@
           "phase": "Fill manual metric worksheet",
           "status": "needs_values",
           "owner": "tod",
-          "blockers_resolved": 8,
+          "blockers_resolved": 6,
           "unlocks": [
             "Admin health and weekly reporting can use fresh cross-platform metrics.",
             "Manual metric blockers clear once worksheet values are imported."
           ],
           "blocked_by": [
-            "P1 Audience size snapshot:2",
             "P2 Recent discovery and traffic:4",
             "P3 Release depth metrics:2"
           ],
-          "batch_count": 3,
-          "field_count": 8,
+          "batch_count": 2,
+          "field_count": 6,
           "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
           "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
           "source_path": "data/manual_metric_collection_packet.json"
@@ -177,11 +176,11 @@
   "action_docket": {
     "source": "data/human_handoff_packet.json",
     "roadmap_step_count": 5,
-    "task_count": 8,
+    "task_count": 7,
     "ready_step_count": 3,
     "blocked_step_count": 2,
     "manual_post_count": 2,
-    "manual_metric_field_count": 8,
+    "manual_metric_field_count": 6,
     "first_ready_step": {
       "id": "review-checked-approval-batch",
       "label": "Review checked approval batch",
@@ -778,26 +777,13 @@
         "state": "needs_values",
         "owner": "tod",
         "task_ids": [
-          "manual-metrics-priority-1",
           "manual-metrics-priority-2",
           "manual-metrics-priority-3"
         ],
-        "blockers_resolved": 8,
-        "field_count": 8,
-        "batch_count": 3,
+        "blockers_resolved": 6,
+        "field_count": 6,
+        "batch_count": 2,
         "batches": [
-          {
-            "priority": 1,
-            "label": "Audience size snapshot",
-            "field_count": 2,
-            "access_levels": [
-              "public_profile"
-            ],
-            "csv_rows": [
-              3,
-              8
-            ]
-          },
           {
             "priority": 2,
             "label": "Recent discovery and traffic",
@@ -807,9 +793,9 @@
             ],
             "csv_rows": [
               2,
-              4,
-              7,
-              9
+              3,
+              6,
+              7
             ]
           },
           {
@@ -820,8 +806,8 @@
               "private_analytics"
             ],
             "csv_rows": [
-              5,
-              6
+              4,
+              5
             ]
           }
         ],
@@ -1217,46 +1203,6 @@
       "guardrail": "Do not log a manual post until a real public URL exists."
     },
     {
-      "id": "manual-metrics-priority-1",
-      "title": "Fill priority 1 metrics: Audience size snapshot",
-      "phase": "Manual metrics",
-      "owner": "tod",
-      "urgency": "low",
-      "status": "needs_values",
-      "detail": "Collect 2 field(s) across instagram, x, fill the worksheet rows, preview import, then refresh Admin.",
-      "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
-      "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
-      "source_path": "data/manual_metric_collection_packet.json",
-      "impact": {
-        "priority": 1,
-        "label": "Audience size snapshot",
-        "field_count": 2,
-        "waiting_count": 2,
-        "ready_to_import_count": 0,
-        "platforms": [
-          "instagram",
-          "x"
-        ],
-        "access_levels": [
-          "public_profile"
-        ],
-        "csv_rows": [
-          3,
-          8
-        ],
-        "pending_assignments": [
-          "instagram.followers",
-          "x.followers"
-        ],
-        "evidence_hints": [
-          "Capture the public follower count from the profile page or account dashboard.",
-          "Capture the public follower count from the profile page or account dashboard."
-        ]
-      },
-      "links": [],
-      "guardrail": "Only import nonnegative numeric values copied from the named source; leave unknown values blank instead of guessing."
-    },
-    {
       "id": "manual-metrics-priority-2",
       "title": "Fill priority 2 metrics: Recent discovery and traffic",
       "phase": "Manual metrics",
@@ -1284,9 +1230,9 @@
         ],
         "csv_rows": [
           2,
-          4,
-          7,
-          9
+          3,
+          6,
+          7
         ],
         "pending_assignments": [
           "facebook.reach_7d",
@@ -1328,8 +1274,8 @@
           "private_analytics"
         ],
         "csv_rows": [
-          5,
-          6
+          4,
+          5
         ],
         "pending_assignments": [
           "spotify.release_streams",

@@ -132,6 +132,18 @@ def build_snapshot(now: datetime) -> dict:
             "release_streams": manual_value(manual, "spotify", "release_streams"),
             "saves": manual_value(manual, "spotify", "saves"),
         },
+        "instagram": {
+            "followers": metric(platforms, "instagram", "followers") or manual_value(manual, "instagram", "followers"),
+            "profile_visits_7d": manual_value(manual, "instagram", "profile_visits_7d"),
+        },
+        "tiktok": {
+            "followers": metric(platforms, "tiktok", "followers") or manual_value(manual, "tiktok", "followers"),
+            "profile_views_7d": manual_value(manual, "tiktok", "profile_views_7d"),
+        },
+        "x": {
+            "followers": metric(platforms, "x", "followers") or manual_value(manual, "x", "followers"),
+            "impressions_7d": manual_value(manual, "x", "impressions_7d"),
+        },
         "publishing": {
             "published_30d": len(published_30d),
             "published_total": len(published_rows),
@@ -151,6 +163,9 @@ def attach_deltas(snapshot: dict, previous: dict | None) -> dict:
         "youtube.video_count",
         "facebook.followers",
         "facebook.page_likes",
+        "instagram.followers",
+        "tiktok.followers",
+        "x.followers",
         "publishing.published_30d",
         "publishing.published_total",
         "queue.approved_upcoming",
@@ -196,6 +211,9 @@ def preserve_same_day_values(snapshot: dict, same_day: dict | None) -> dict:
             "youtube.video_count",
             "facebook.followers",
             "facebook.page_likes",
+            "instagram.followers",
+            "tiktok.followers",
+            "x.followers",
         ],
     )
 

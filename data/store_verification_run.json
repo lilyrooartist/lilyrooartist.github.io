@@ -1,13 +1,13 @@
 {
   "ok": true,
-  "updated_at": "2026-06-20T06:47:43.893035Z",
+  "updated_at": "2026-06-20T06:58:02.896396Z",
   "source": "public-store-link-verification-run",
   "step_timeout_seconds": 25,
   "summary": {
     "checked": 7,
     "ok": 0,
     "not_live_or_failed": 7,
-    "timed_out": 0,
+    "timed_out": 3,
     "failed": 7,
     "admin_update_count": 1,
     "admin_update_ok": true
@@ -17,17 +17,17 @@
     {
       "command": "python3 scripts/search_spotify_release.py --artist Lily Roo --title Twelve Dollars --out data/store-verification/twelve-dollars/spotify_release_snapshot.json",
       "timeout_seconds": 25,
-      "timed_out": false,
-      "duration_seconds": 1.73,
-      "returncode": 1,
-      "stdout": "{\n  \"ok\": false,\n  \"title\": \"\",\n  \"album_id\": \"\",\n  \"release_url\": \"\",\n  \"candidate_count\": 0,\n  \"output\": \"data/store-verification/twelve-dollars/spotify_release_snapshot.json\"\n}",
-      "stderr": ""
+      "timed_out": true,
+      "duration_seconds": 25.01,
+      "returncode": 124,
+      "stdout": "",
+      "stderr": "Timed out after 25 seconds."
     },
     {
       "command": "python3 scripts/capture_apple_music_release.py --artist Lily Roo --title Twelve Dollars --out data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
       "timeout_seconds": 25,
       "timed_out": false,
-      "duration_seconds": 0.13,
+      "duration_seconds": 0.17,
       "returncode": 1,
       "stdout": "{\n  \"ok\": false,\n  \"collection_name\": \"\",\n  \"collection_id\": null,\n  \"release_url\": \"\",\n  \"output\": \"data/store-verification/twelve-dollars/apple_music_release_snapshot.json\"\n}",
       "stderr": ""
@@ -36,7 +36,7 @@
       "command": "python3 scripts/capture_hyperfollow_store_links.py --url https://distrokid.com/hyperfollow/lilyroo/twelve-dollars --out data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
       "timeout_seconds": 25,
       "timed_out": false,
-      "duration_seconds": 0.37,
+      "duration_seconds": 0.36,
       "returncode": 1,
       "stdout": "{\n  \"ok\": false,\n  \"stores\": [],\n  \"amazon_music_available\": false,\n  \"output\": \"data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json\"\n}",
       "stderr": ""
@@ -44,17 +44,17 @@
     {
       "command": "python3 scripts/search_spotify_release.py --artist Lily Roo --title Analog Myth --out data/store-verification/analog-myth/spotify_release_snapshot.json",
       "timeout_seconds": 25,
-      "timed_out": false,
-      "duration_seconds": 1.73,
-      "returncode": 1,
-      "stdout": "{\n  \"ok\": false,\n  \"title\": \"\",\n  \"album_id\": \"\",\n  \"release_url\": \"\",\n  \"candidate_count\": 0,\n  \"output\": \"data/store-verification/analog-myth/spotify_release_snapshot.json\"\n}",
-      "stderr": ""
+      "timed_out": true,
+      "duration_seconds": 25.01,
+      "returncode": 124,
+      "stdout": "",
+      "stderr": "Timed out after 25 seconds."
     },
     {
       "command": "python3 scripts/capture_apple_music_release.py --artist Lily Roo --title Analog Myth --out data/store-verification/analog-myth/apple_music_release_snapshot.json",
       "timeout_seconds": 25,
       "timed_out": false,
-      "duration_seconds": 0.14,
+      "duration_seconds": 0.15,
       "returncode": 1,
       "stdout": "{\n  \"ok\": false,\n  \"collection_name\": \"\",\n  \"collection_id\": null,\n  \"release_url\": \"\",\n  \"output\": \"data/store-verification/analog-myth/apple_music_release_snapshot.json\"\n}",
       "stderr": ""
@@ -62,17 +62,17 @@
     {
       "command": "python3 scripts/search_youtube_music_release.py --artist Lily Roo --title Analog Myth --out data/store-verification/analog-myth/youtube_music_release_snapshot.json",
       "timeout_seconds": 25,
-      "timed_out": false,
-      "duration_seconds": 2.59,
-      "returncode": 1,
-      "stdout": "{\n  \"ok\": false,\n  \"release_url\": \"\",\n  \"public_title\": \"\",\n  \"title_matches_official\": false,\n  \"candidate_count\": 0,\n  \"output\": \"data/store-verification/analog-myth/youtube_music_release_snapshot.json\"\n}",
-      "stderr": ""
+      "timed_out": true,
+      "duration_seconds": 25.01,
+      "returncode": 124,
+      "stdout": "",
+      "stderr": "Timed out after 25 seconds."
     },
     {
       "command": "python3 scripts/capture_hyperfollow_store_links.py --url https://distrokid.com/hyperfollow/lilyroo/analog-myth --out data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
       "timeout_seconds": 25,
       "timed_out": false,
-      "duration_seconds": 0.49,
+      "duration_seconds": 0.47,
       "returncode": 1,
       "stdout": "{\n  \"ok\": false,\n  \"stores\": [],\n  \"amazon_music_available\": false,\n  \"output\": \"data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json\"\n}",
       "stderr": ""

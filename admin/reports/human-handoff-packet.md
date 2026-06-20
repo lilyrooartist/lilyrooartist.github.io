@@ -1,19 +1,19 @@
 # Human Handoff Packet - Lily Roo
 
-Generated: 2026-06-20T06:47:46.969598Z
+Generated: 2026-06-20T06:58:05.641986Z
 
 ## Summary
-- Open handoff tasks: **8**
-- Tod-owned tasks: **7**
+- Open handoff tasks: **7**
+- Tod-owned tasks: **6**
 - External/platform-gated tasks: **1**
 - High urgency tasks: **3**
-- Low urgency tasks: **3**
+- Low urgency tasks: **2**
 
 ## Action Docket
 - Ready steps: **3**
 - Blocked steps: **2**
 - Manual posts packaged: **2**
-- Manual metric fields: **8**
+- Manual metric fields: **6**
 
 - **Review checked approval batch** (`ready_for_review`)
   - Owner: `tod`; tasks: **1**; blockers resolved: **2**
@@ -47,12 +47,11 @@ Generated: 2026-06-20T06:47:46.969598Z
   - Next after apply: Recapture admin state and only then revisit TikTok approval or backlog reschedule rows.
   - Guardrail: Run preflight and confirm local OAuth/public-posting setup before pushing secrets.
 - **Fill and import manual metric worksheet** (`needs_values`)
-  - Owner: `tod`; tasks: **3**; blockers resolved: **8**
-  - Fields: **8**
-  - Batches: **3**
-  - Priority 1: Audience size snapshot - **2** field(s) (access: public_profile; rows: 3, 8)
-  - Priority 2: Recent discovery and traffic - **4** field(s) (access: private_analytics; rows: 2, 4, 7, 9)
-  - Priority 3: Release depth metrics - **2** field(s) (access: private_analytics; rows: 5, 6)
+  - Owner: `tod`; tasks: **2**; blockers resolved: **6**
+  - Fields: **6**
+  - Batches: **2**
+  - Priority 2: Recent discovery and traffic - **4** field(s) (access: private_analytics; rows: 2, 3, 6, 7)
+  - Priority 3: Release depth metrics - **2** field(s) (access: private_analytics; rows: 4, 5)
   - Preview/check: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
   - Apply after review: `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
   - Sequence preview: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
@@ -101,12 +100,6 @@ Generated: 2026-06-20T06:47:46.969598Z
   - Apply after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin`
   - asset: https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg
   - Guardrail: Do not log a manual post until a real public URL exists.
-- **Fill priority 1 metrics: Audience size snapshot** (`manual-metrics-priority-1`)
-  - Phase: `Manual metrics`; owner: `tod`; status: `needs_values`; urgency: `low`
-  - Detail: Collect 2 field(s) across instagram, x, fill the worksheet rows, preview import, then refresh Admin.
-  - Preview/check: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
-  - Apply after review: `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
-  - Guardrail: Only import nonnegative numeric values copied from the named source; leave unknown values blank instead of guessing.
 - **Fill priority 2 metrics: Recent discovery and traffic** (`manual-metrics-priority-2`)
   - Phase: `Manual metrics`; owner: `tod`; status: `needs_values`; urgency: `low`
   - Detail: Collect 4 field(s) across facebook, instagram, tiktok, x, fill the worksheet rows, preview import, then refresh Admin.

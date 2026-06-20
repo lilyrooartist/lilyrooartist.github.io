@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T06:47:47.108640Z",
+  "generated_at": "2026-06-20T06:58:05.778886Z",
   "safe_mode": true,
   "summary": {
     "check_count": 19,
@@ -15,24 +15,24 @@
       "status": "pass",
       "severity": "ok",
       "detail": "Blocker ledger summary should match row count.",
-      "expected": 10,
-      "actual": 10
+      "expected": 9,
+      "actual": 9
     },
     {
       "name": "ledger_category_total_matches_rows",
       "status": "pass",
       "severity": "ok",
       "detail": "Blocker category counts should account for every blocker row.",
-      "expected": 10,
-      "actual": 10
+      "expected": 9,
+      "actual": 9
     },
     {
       "name": "status_open_actions_match_operations",
       "status": "pass",
       "severity": "ok",
       "detail": "Promo status open action count should mirror the operations packet.",
-      "expected": 16,
-      "actual": 16
+      "expected": 15,
+      "actual": 15
     },
     {
       "name": "approval_counts_match",
@@ -135,16 +135,16 @@
       "status": "pass",
       "severity": "ok",
       "detail": "Manual metric priority batch count should match manual metric blockers.",
-      "expected": 3,
-      "actual": 3
+      "expected": 2,
+      "actual": 2
     },
     {
       "name": "manual_metric_handoff_batch_count_matches_packet",
       "status": "pass",
       "severity": "ok",
       "detail": "Human handoff should include every manual metric priority batch.",
-      "expected": 3,
-      "actual": 3
+      "expected": 2,
+      "actual": 2
     },
     {
       "name": "store_checks_match_checked_pending_services",
@@ -159,8 +159,8 @@
       "status": "pass",
       "severity": "ok",
       "detail": "Human handoff blocker summary should be copied from the blocker ledger.",
-      "expected": 10,
-      "actual": 10
+      "expected": 9,
+      "actual": 9
     },
     {
       "name": "handoff_projection_matches_ledger_projection",

@@ -625,7 +625,7 @@
 <script type="text/plain" id="embedded-weekly-report"># Weekly Social Report — Lily Roo
 
 **Period:** 2026-06-14 to 2026-06-20
-**Last updated:** 2026-06-20 03:47 PM JST
+**Last updated:** 2026-06-20 03:58 PM JST
 
 ## KPI Goal
 - Primary growth target: **1,000 YouTube subscribers** (monetization milestone)
@@ -733,12 +733,12 @@
 - Latest post: https://www.tiktok.com/@lilyroo930/video/7611932426557754654
 
 ### Instagram
-- Followers: **pending**
+- Followers: **0**
 - Profile visits (7d): **pending**
 - Latest post: posted
 
 ### X (Twitter)
-- Followers: **pending**
+- Followers: **0**
 - Impressions (7d): **pending**
 - Latest post: https://x.com/i/web/status/2063600780834136468
 
@@ -748,7 +748,7 @@
 - Latest post: https://www.facebook.com/903693509504290_122118326547249470
 
 ## Metrics Snapshot
-- Live API captured: **2026-06-20T06:47:36.517Z**
+- Live API captured: **2026-06-20T06:56:46.518Z**
 - Snapshot file: `data/live_social_metrics.json`
 - YouTube public RSS captured: **2026-06-09T12:08:07.783949Z**
 - YouTube public snapshot file: `data/youtube_public_snapshot.json`
@@ -758,9 +758,9 @@
 - YouTube Music snapshot file: `data/youtube_music_release_snapshot.json`
 - HyperFollow stores captured: **2026-06-07T20:51:14.275569Z**
 - HyperFollow snapshot file: `data/hyperfollow_store_links_snapshot.json`
-- All-release store verification captured: **2026-06-20T06:47:47.032059+00:00**
+- All-release store verification captured: **2026-06-20T06:58:05.702121+00:00**
 - All-release store verification file: `data/store_verification_history.json`
-- Social executor history captured: **2026-06-20T06:47:45.455533Z**
+- Social executor history captured: **2026-06-20T06:58:04.396663Z**
 - Social executor history file: `data/social_execution_snapshot.json`
 - First single alignment audit captured: **2026-06-07T21:39:03.668040Z**
 - First single alignment audit file: `data/first_single_alignment_audit.json`
@@ -1037,7 +1037,7 @@
 }</script>
 
 <script type="application/json" id="embedded-promo-engine-status">{
-  "generated_at": "2026-06-20T06:47:47.170703+00:00",
+  "generated_at": "2026-06-20T06:58:05.840525+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -1106,23 +1106,18 @@
         "Increase weekly subscriber acquisition before the channel can reach 1,000 subscribers within a year."
       ]
     },
-    "live_platform_count": 3,
-    "pending_manual_metric_fields": 8,
+    "live_platform_count": 5,
+    "pending_manual_metric_fields": 6,
     "pending_manual_metric_details": [
       "tiktok.profile_views_7d",
-      "instagram.followers",
       "instagram.profile_visits_7d",
-      "x.followers",
       "x.impressions_7d",
       "facebook.reach_7d",
       "spotify.release_streams",
       "spotify.saves"
     ],
-    "pending_public_profile_metric_fields": 2,
-    "pending_public_profile_metric_details": [
-      "instagram.followers",
-      "x.followers"
-    ],
+    "pending_public_profile_metric_fields": 0,
+    "pending_public_profile_metric_details": [],
     "pending_private_analytics_metric_fields": 6,
     "pending_private_analytics_metric_details": [
       "tiktok.profile_views_7d",
@@ -1133,33 +1128,10 @@
       "spotify.saves"
     ],
     "public_metric_capture_backlog": {
-      "status": "needs_capture_adapter",
-      "field_count": 2,
-      "fields": [
-        {
-          "platform": "instagram",
-          "field": "followers",
-          "csv_row": 3,
-          "collection_url": "https://www.instagram.com/lilyroo.artist/",
-          "source_hint": "Instagram Professional Dashboard > Insights",
-          "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
-          "public_capture_status": "Instagram public profile did not expose a stable follower value without authenticated or cookie-backed access.",
-          "adapter_blocker": "Instagram public profile did not expose a stable follower value without authenticated or cookie-backed access.",
-          "update_assignment": "instagram.followers=VALUE"
-        },
-        {
-          "platform": "x",
-          "field": "followers",
-          "csv_row": 8,
-          "collection_url": "https://x.com/lilyrooartist",
-          "source_hint": "X Analytics or account profile metrics",
-          "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
-          "public_capture_status": "X public profile did not expose a stable numeric follower value; use X API credentials or manual profile review.",
-          "adapter_blocker": "X public profile did not expose a stable numeric follower value; use X API credentials or manual profile review.",
-          "update_assignment": "x.followers=VALUE"
-        }
-      ],
-      "recommended_engine_work": "Add safe public profile capture adapters for these public fields, then route them through data/live_social_metrics.json and scripts/update_manual_social_stats.py --from-live.",
+      "status": "clear",
+      "field_count": 0,
+      "fields": [],
+      "recommended_engine_work": "",
       "guardrail": "Do not treat private analytics fields as public-capture candidates."
     },
     "pending_manual_by_platform": {
@@ -1167,7 +1139,6 @@
         "reach_7d"
       ],
       "instagram": [
-        "followers",
         "profile_visits_7d"
       ],
       "spotify": [
@@ -1178,17 +1149,16 @@
         "profile_views_7d"
       ],
       "x": [
-        "followers",
         "impressions_7d"
       ]
     },
-    "pending_manual_update_command": "python3 scripts/update_manual_social_stats.py tiktok.profile_views_7d=VALUE instagram.followers=VALUE instagram.profile_visits_7d=VALUE x.followers=VALUE x.impressions_7d=VALUE facebook.reach_7d=VALUE spotify.release_streams=VALUE spotify.saves=VALUE --refresh-admin",
+    "pending_manual_update_command": "python3 scripts/update_manual_social_stats.py tiktok.profile_views_7d=VALUE instagram.profile_visits_7d=VALUE x.impressions_7d=VALUE facebook.reach_7d=VALUE spotify.release_streams=VALUE spotify.saves=VALUE --refresh-admin",
     "pending_manual_update_by_platform": {
       "facebook": "python3 scripts/update_manual_social_stats.py facebook.reach_7d=VALUE --refresh-admin",
-      "instagram": "python3 scripts/update_manual_social_stats.py instagram.followers=VALUE instagram.profile_visits_7d=VALUE --refresh-admin",
+      "instagram": "python3 scripts/update_manual_social_stats.py instagram.profile_visits_7d=VALUE --refresh-admin",
       "spotify": "python3 scripts/update_manual_social_stats.py spotify.release_streams=VALUE spotify.saves=VALUE --refresh-admin",
       "tiktok": "python3 scripts/update_manual_social_stats.py tiktok.profile_views_7d=VALUE --refresh-admin",
-      "x": "python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impressions_7d=VALUE --refresh-admin"
+      "x": "python3 scripts/update_manual_social_stats.py x.impressions_7d=VALUE --refresh-admin"
     },
     "auto_covered_manual_metric_fields": [],
     "manual_metric_collection_steps": [
@@ -1209,17 +1179,16 @@
       {
         "platform": "instagram",
         "fields": [
-          "followers",
           "profile_visits_7d"
         ],
-        "summary": "instagram: collect followers, profile_visits_7d",
+        "summary": "instagram: collect profile_visits_7d",
         "reason": "Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page",
         "collection_url": "https://www.instagram.com/lilyroo.artist/",
         "csv_path": "data/manual_metric_collection_template.csv",
         "report_path": "admin/reports/manual-metric-collection.md",
         "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
         "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
-        "command": "python3 scripts/update_manual_social_stats.py instagram.followers=VALUE instagram.profile_visits_7d=VALUE --refresh-admin"
+        "command": "python3 scripts/update_manual_social_stats.py instagram.profile_visits_7d=VALUE --refresh-admin"
       },
       {
         "platform": "spotify",
@@ -1253,24 +1222,23 @@
       {
         "platform": "x",
         "fields": [
-          "followers",
           "impressions_7d"
         ],
-        "summary": "x: collect followers, impressions_7d",
+        "summary": "x: collect impressions_7d",
         "reason": "X metrics need X_USER_ACCESS_TOKEN with user lookup access.",
         "collection_url": "https://x.com/lilyrooartist",
         "csv_path": "data/manual_metric_collection_template.csv",
         "report_path": "admin/reports/manual-metric-collection.md",
         "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
         "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
-        "command": "python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impressions_7d=VALUE --refresh-admin"
+        "command": "python3 scripts/update_manual_social_stats.py x.impressions_7d=VALUE --refresh-admin"
       }
     ],
     "manual_metric_import_manifest": {
       "status": "needs_values",
       "csv_path": "data/manual_metric_collection_template.csv",
       "ready_row_count": 0,
-      "waiting_row_count": 8,
+      "waiting_row_count": 6,
       "ready_csv_rows": [],
       "waiting_csv_rows": [
         2,
@@ -1278,19 +1246,15 @@
         4,
         5,
         6,
-        7,
-        8,
-        9
+        7
       ],
       "ready_assignments": [],
       "waiting_assignments": [
         "facebook.reach_7d=VALUE",
-        "instagram.followers=VALUE",
         "instagram.profile_visits_7d=VALUE",
         "spotify.release_streams=VALUE",
         "spotify.saves=VALUE",
         "tiktok.profile_views_7d=VALUE",
-        "x.followers=VALUE",
         "x.impressions_7d=VALUE"
       ],
       "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
@@ -1316,22 +1280,6 @@
         {
           "csv_row": 3,
           "platform": "instagram",
-          "field": "followers",
-          "ready_to_import": false,
-          "new_value": "",
-          "value_type": "nonnegative_integer",
-          "collection_priority": 1,
-          "metric_category": "Audience size snapshot",
-          "access_level": "public_profile",
-          "source_hint": "Instagram Professional Dashboard > Insights",
-          "collection_url": "https://www.instagram.com/lilyroo.artist/",
-          "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
-          "update_assignment": "instagram.followers=VALUE",
-          "import_effect": "update data/manual_social_stats.json instagram.followers from 'pending' to the filled new_value"
-        },
-        {
-          "csv_row": 4,
-          "platform": "instagram",
           "field": "profile_visits_7d",
           "ready_to_import": false,
           "new_value": "",
@@ -1346,7 +1294,7 @@
           "import_effect": "update data/manual_social_stats.json instagram.profile_visits_7d from 'pending' to the filled new_value"
         },
         {
-          "csv_row": 5,
+          "csv_row": 4,
           "platform": "spotify",
           "field": "release_streams",
           "ready_to_import": false,
@@ -1362,7 +1310,7 @@
           "import_effect": "update data/manual_social_stats.json spotify.release_streams from 'pending' to the filled new_value"
         },
         {
-          "csv_row": 6,
+          "csv_row": 5,
           "platform": "spotify",
           "field": "saves",
           "ready_to_import": false,
@@ -1378,7 +1326,7 @@
           "import_effect": "update data/manual_social_stats.json spotify.saves from 'pending' to the filled new_value"
         },
         {
-          "csv_row": 7,
+          "csv_row": 6,
           "platform": "tiktok",
           "field": "profile_views_7d",
           "ready_to_import": false,
@@ -1394,23 +1342,7 @@
           "import_effect": "update data/manual_social_stats.json tiktok.profile_views_7d from 'pending' to the filled new_value"
         },
         {
-          "csv_row": 8,
-          "platform": "x",
-          "field": "followers",
-          "ready_to_import": false,
-          "new_value": "",
-          "value_type": "nonnegative_integer",
-          "collection_priority": 1,
-          "metric_category": "Audience size snapshot",
-          "access_level": "public_profile",
-          "source_hint": "X Analytics or account profile metrics",
-          "collection_url": "https://x.com/lilyrooartist",
-          "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
-          "update_assignment": "x.followers=VALUE",
-          "import_effect": "update data/manual_social_stats.json x.followers from 'pending' to the filled new_value"
-        },
-        {
-          "csv_row": 9,
+          "csv_row": 7,
           "platform": "x",
           "field": "impressions_7d",
           "ready_to_import": false,
@@ -1428,15 +1360,15 @@
       ],
       "guardrail": "Import only filled nonnegative numeric new_value cells; leave unknown rows blank."
     },
-    "live_metrics_updated_at": "2026-06-20T06:47:36.517Z",
+    "live_metrics_updated_at": "2026-06-20T06:56:46.518Z",
     "metrics_history": {
       "snapshot_count": 11,
-      "updated_at": "2026-06-20T06:47:45.893604Z",
+      "updated_at": "2026-06-20T06:58:04.668896Z",
       "latest_date": "2026-06-20",
       "latest": {
         "date": "2026-06-20",
-        "captured_at": "2026-06-20T06:47:45.893604Z",
-        "live_metrics_updated_at": "2026-06-20T06:47:36.517Z",
+        "captured_at": "2026-06-20T06:58:04.668896Z",
+        "live_metrics_updated_at": "2026-06-20T06:56:46.518Z",
         "youtube": {
           "subscribers": 6,
           "total_views": 251,
@@ -1452,6 +1384,18 @@
           "monthly_listeners": 2,
           "release_streams": null,
           "saves": null
+        },
+        "instagram": {
+          "followers": 0,
+          "profile_visits_7d": null
+        },
+        "tiktok": {
+          "followers": 0,
+          "profile_views_7d": null
+        },
+        "x": {
+          "followers": 0,
+          "impressions_7d": null
         },
         "publishing": {
           "published_30d": 3,
@@ -1472,6 +1416,9 @@
           "youtube.video_count": 0,
           "facebook.followers": 0,
           "facebook.page_likes": 0,
+          "instagram.followers": null,
+          "tiktok.followers": null,
+          "x.followers": null,
           "publishing.published_30d": 0,
           "publishing.published_total": 0,
           "queue.approved_upcoming": 2,
@@ -1486,6 +1433,9 @@
         "youtube.video_count": 0,
         "facebook.followers": 0,
         "facebook.page_likes": 0,
+        "instagram.followers": null,
+        "tiktok.followers": null,
+        "x.followers": null,
         "publishing.published_30d": 0,
         "publishing.published_total": 0,
         "queue.approved_upcoming": 2,
@@ -1540,7 +1490,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T06:47:36.655578Z",
+            "updated_at": "2026-06-20T06:53:48.209108Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
           },
           "action": "Verify Spotify public URL for Twelve Dollars."
@@ -1553,7 +1503,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T06:47:38.472017Z",
+            "updated_at": "2026-06-20T06:57:11.787860Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
           },
           "action": "Verify Apple Music public URL for Twelve Dollars."
@@ -1566,7 +1516,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T06:47:38.832568Z",
+            "updated_at": "2026-06-20T06:57:12.145032Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
           },
           "action": "Verify HyperFollow public URL for Twelve Dollars."
@@ -1579,7 +1529,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T06:47:38.908718Z",
+            "updated_at": "2026-06-20T06:52:46.758961Z",
             "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
           },
           "action": "Verify Spotify public URL for Analog Myth."
@@ -1592,7 +1542,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T06:47:40.712206Z",
+            "updated_at": "2026-06-20T06:57:37.308097Z",
             "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
           },
           "action": "Verify Apple Music public URL for Analog Myth."
@@ -1605,7 +1555,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T06:47:40.770410Z",
+            "updated_at": "2026-06-20T06:52:48.562909Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release."
           },
           "action": "Verify YouTube Music public URL for Analog Myth."
@@ -1618,7 +1568,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T06:47:43.782911Z",
+            "updated_at": "2026-06-20T06:58:02.780829Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
           },
           "action": "Verify HyperFollow public URL for Analog Myth."
@@ -1634,7 +1584,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T06:47:36.655578Z",
+            "updated_at": "2026-06-20T06:53:48.209108Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
           },
           "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed."
@@ -1646,7 +1596,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T06:47:38.472017Z",
+            "updated_at": "2026-06-20T06:57:11.787860Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
           },
           "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json."
@@ -1658,7 +1608,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T06:47:38.832568Z",
+            "updated_at": "2026-06-20T06:57:12.145032Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
           },
           "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug."
@@ -1670,7 +1620,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T06:47:38.908718Z",
+            "updated_at": "2026-06-20T06:52:46.758961Z",
             "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
           },
           "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed."
@@ -1682,7 +1632,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T06:47:40.712206Z",
+            "updated_at": "2026-06-20T06:57:37.308097Z",
             "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
           },
           "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json."
@@ -1694,7 +1644,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T06:47:40.770410Z",
+            "updated_at": "2026-06-20T06:52:48.562909Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release."
           },
           "note": "Searches public web results for YouTube Music watch URLs, then validates the public title."
@@ -1706,7 +1656,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T06:47:43.782911Z",
+            "updated_at": "2026-06-20T06:58:02.780829Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
           },
           "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug."
@@ -1716,23 +1666,23 @@
       "latest_run": {
         "source_path": "data/store_verification_run.json",
         "available": true,
-        "updated_at": "2026-06-20T06:47:43.893035Z",
+        "updated_at": "2026-06-20T06:58:02.896396Z",
         "step_timeout_seconds": 25,
         "checked": 7,
         "ok": 0,
         "not_live_or_failed": 7,
-        "timed_out": 0,
+        "timed_out": 3,
         "failed": 7,
         "admin_update_ok": true,
         "retry_command": "python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25"
       },
-      "last_run_timeout_count": 0,
+      "last_run_timeout_count": 3,
       "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25",
       "apply_found_url_instruction": "When a public URL is verified, copy it into data/distrokid_release_status.json and refresh Admin."
     },
     "social_execution_summary": {
       "ok": true,
-      "updated_at": "2026-06-20T06:47:45.455533Z",
+      "updated_at": "2026-06-20T06:58:04.396663Z",
       "http_status": 200,
       "execution_count": 4,
       "posted_count": 0,
@@ -1861,11 +1811,11 @@
     },
     "social_scheduler_dry_run": {
       "ok": true,
-      "updated_at": "2026-06-20T06:47:45.800506Z",
+      "updated_at": "2026-06-20T06:58:04.584390Z",
       "http_status": 200,
       "auth_method": "bearer",
-      "requested_scheduled_time": "2026-06-20T06:47:45.534178Z",
-      "checked_at": "2026-06-20T06:47:45.534Z",
+      "requested_scheduled_time": "2026-06-20T06:58:04.475254Z",
+      "checked_at": "2026-06-20T06:58:04.475Z",
       "dry_run": true,
       "due_count": 4,
       "result_count": 4,
@@ -1888,7 +1838,7 @@
           "reason": "not_approved",
           "post_type": "",
           "attempts": 0,
-          "updated_at": "2026-06-20T06:47:46.007Z",
+          "updated_at": "2026-06-20T06:58:04.820Z",
           "source": "dry-run",
           "error_summary": ""
         },
@@ -1899,7 +1849,7 @@
           "reason": "not_approved",
           "post_type": "",
           "attempts": 0,
-          "updated_at": "2026-06-20T06:47:46.009Z",
+          "updated_at": "2026-06-20T06:58:04.823Z",
           "source": "dry-run",
           "error_summary": ""
         },
@@ -1910,7 +1860,7 @@
           "reason": "not_approved",
           "post_type": "",
           "attempts": 0,
-          "updated_at": "2026-06-20T06:47:46.012Z",
+          "updated_at": "2026-06-20T06:58:04.827Z",
           "source": "dry-run",
           "error_summary": ""
         },
@@ -1921,7 +1871,7 @@
           "reason": "tiktok_credentials_missing",
           "post_type": "",
           "attempts": 0,
-          "updated_at": "2026-06-20T06:47:46.014Z",
+          "updated_at": "2026-06-20T06:58:04.831Z",
           "source": "dry-run",
           "error_summary": ""
         }
@@ -1934,14 +1884,14 @@
       "safe_mode": true,
       "finalized": true,
       "source_revision": {
-        "commit": "755daa9d26ec6f154436bd255df08dc64d31cf44",
-        "short_commit": "755daa9",
+        "commit": "9be8635de72fef92b0308798e6a3d3cfc9e72950",
+        "short_commit": "9be8635",
         "branch": "main",
-        "committed_at": "2026-06-20T06:46:56Z",
-        "source_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/commit/755daa9d26ec6f154436bd255df08dc64d31cf44"
+        "committed_at": "2026-06-20T15:47:51+09:00",
+        "source_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/commit/9be8635de72fef92b0308798e6a3d3cfc9e72950"
       },
-      "finished_at": "2026-06-20T06:47:47.140048Z",
-      "duration_seconds": 12.94,
+      "finished_at": "2026-06-20T06:58:05.809850Z",
+      "duration_seconds": 81.85,
       "command_count": 28,
       "passed": 28,
       "failed": 0,
@@ -1959,11 +1909,11 @@
       "commits_snapshots": true,
       "safe_refresh_command": "python3 scripts/refresh_promo_admin.py",
       "source_revision": {
-        "commit": "755daa9d26ec6f154436bd255df08dc64d31cf44",
-        "short_commit": "755daa9",
+        "commit": "9be8635de72fef92b0308798e6a3d3cfc9e72950",
+        "short_commit": "9be8635",
         "branch": "main",
-        "committed_at": "2026-06-20T06:46:56Z",
-        "source_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/commit/755daa9d26ec6f154436bd255df08dc64d31cf44"
+        "committed_at": "2026-06-20T15:47:51+09:00",
+        "source_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/commit/9be8635de72fef92b0308798e6a3d3cfc9e72950"
       },
       "latest_run_covers_source_commit": true,
       "latest_run_coverage_basis": "generated_refresh_outputs_only",
@@ -1987,11 +1937,11 @@
         "admin/reports/weekly-social-report.md",
         "data/approval_runway.json",
         "data/backlog_reschedule_preview.json",
+        "data/executor_readiness_snapshot.json",
         "data/human_handoff_packet.json",
         "data/live_social_metrics.json",
         "data/manual_distribution_packet.json",
         "data/manual_metric_collection_packet.json",
-        "data/manual_metric_collection_template.csv",
         "data/metrics_history.json",
         "data/monetization_activation_plan.json",
         "data/platform_repair_status.json",
@@ -2004,10 +1954,10 @@
         "data/promotion_blocker_ledger.json",
         "data/published_log_reconciliation.json",
         "data/scheduled_approval_packet.json",
+        "data/social_execution_snapshot.json",
+        "data/social_scheduler_dry_run.json",
         "data/store-verification/analog-myth/apple_music_release_snapshot.json",
-        "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
-        "data/store-verification/analog-myth/spotify_release_snapshot.json",
-        "data/store-verification/analog-myth/youtube_music_release_snapshot.json"
+        "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json"
       ],
       "uncovered_paths_since_latest_run": [],
       "action_needed": "",
@@ -2323,22 +2273,22 @@
       ]
     },
     "unlock_impact": {
-      "open_blocker_count": 10,
+      "open_blocker_count": 9,
       "urgent_count": 4,
       "owner_counts": {
         "external_platform": 1,
-        "tod": 9
+        "tod": 8
       },
       "category_counts": {
         "approval": 3,
         "backlog_reschedule": 1,
         "manual_distribution": 2,
-        "manual_metrics": 3,
+        "manual_metrics": 2,
         "platform_repair": 1
       },
       "roadmap_step_count": 5,
-      "projected_resolvable_blockers": 14,
-      "user_action_blocker_count": 9,
+      "projected_resolvable_blockers": 12,
+      "user_action_blocker_count": 8,
       "external_blocker_count": 1,
       "next_resolution_projection": {
         "label": "Checked scheduled approval batch",
@@ -2366,9 +2316,8 @@
         "phase": "Fill manual metric worksheet",
         "status": "needs_values",
         "owner": "tod",
-        "blockers_resolved": 8,
+        "blockers_resolved": 6,
         "blocked_by": [
-          "P1 Audience size snapshot:2",
           "P2 Recent discovery and traffic:4",
           "P3 Release depth metrics:2"
         ],
@@ -2436,9 +2385,8 @@
           "phase": "Fill manual metric worksheet",
           "status": "needs_values",
           "owner": "tod",
-          "blockers_resolved": 8,
+          "blockers_resolved": 6,
           "blocked_by": [
-            "P1 Audience size snapshot:2",
             "P2 Recent discovery and traffic:4",
             "P3 Release depth metrics:2"
           ],
@@ -2455,9 +2403,9 @@
       "ready_step_count": 3,
       "blocked_step_count": 2,
       "roadmap_step_count": 5,
-      "task_count": 8,
+      "task_count": 7,
       "manual_post_count": 2,
-      "manual_metric_field_count": 8,
+      "manual_metric_field_count": 6,
       "first_ready_step": {
         "id": "review-checked-approval-batch",
         "label": "Review checked approval batch",
@@ -3054,26 +3002,13 @@
           "state": "needs_values",
           "owner": "tod",
           "task_ids": [
-            "manual-metrics-priority-1",
             "manual-metrics-priority-2",
             "manual-metrics-priority-3"
           ],
-          "blockers_resolved": 8,
-          "field_count": 8,
-          "batch_count": 3,
+          "blockers_resolved": 6,
+          "field_count": 6,
+          "batch_count": 2,
           "batches": [
-            {
-              "priority": 1,
-              "label": "Audience size snapshot",
-              "field_count": 2,
-              "access_levels": [
-                "public_profile"
-              ],
-              "csv_rows": [
-                3,
-                8
-              ]
-            },
             {
               "priority": 2,
               "label": "Recent discovery and traffic",
@@ -3083,9 +3018,9 @@
               ],
               "csv_rows": [
                 2,
-                4,
-                7,
-                9
+                3,
+                6,
+                7
               ]
             },
             {
@@ -3096,8 +3031,8 @@
                 "private_analytics"
               ],
               "csv_rows": [
-                5,
-                6
+                4,
+                5
               ]
             }
           ],
@@ -3346,8 +3281,8 @@
     "score": 0,
     "healthy_releases": 0,
     "tracked_releases": 3,
-    "open_action_count": 16,
-    "status_queue_count": 21,
+    "open_action_count": 15,
+    "status_queue_count": 20,
     "fresh_sources": 12,
     "stale_sources": 0,
     "missing_sources": 0,
@@ -3654,22 +3589,22 @@
       ]
     },
     "unlock_impact": {
-      "open_blocker_count": 10,
+      "open_blocker_count": 9,
       "urgent_count": 4,
       "owner_counts": {
         "external_platform": 1,
-        "tod": 9
+        "tod": 8
       },
       "category_counts": {
         "approval": 3,
         "backlog_reschedule": 1,
         "manual_distribution": 2,
-        "manual_metrics": 3,
+        "manual_metrics": 2,
         "platform_repair": 1
       },
       "roadmap_step_count": 5,
-      "projected_resolvable_blockers": 14,
-      "user_action_blocker_count": 9,
+      "projected_resolvable_blockers": 12,
+      "user_action_blocker_count": 8,
       "external_blocker_count": 1,
       "next_resolution_projection": {
         "label": "Checked scheduled approval batch",
@@ -3697,9 +3632,8 @@
         "phase": "Fill manual metric worksheet",
         "status": "needs_values",
         "owner": "tod",
-        "blockers_resolved": 8,
+        "blockers_resolved": 6,
         "blocked_by": [
-          "P1 Audience size snapshot:2",
           "P2 Recent discovery and traffic:4",
           "P3 Release depth metrics:2"
         ],
@@ -3767,9 +3701,8 @@
           "phase": "Fill manual metric worksheet",
           "status": "needs_values",
           "owner": "tod",
-          "blockers_resolved": 8,
+          "blockers_resolved": 6,
           "blocked_by": [
-            "P1 Audience size snapshot:2",
             "P2 Recent discovery and traffic:4",
             "P3 Release depth metrics:2"
           ],
@@ -3786,9 +3719,9 @@
       "ready_step_count": 3,
       "blocked_step_count": 2,
       "roadmap_step_count": 5,
-      "task_count": 8,
+      "task_count": 7,
       "manual_post_count": 2,
-      "manual_metric_field_count": 8,
+      "manual_metric_field_count": 6,
       "first_ready_step": {
         "id": "review-checked-approval-batch",
         "label": "Review checked approval batch",
@@ -4385,26 +4318,13 @@
           "state": "needs_values",
           "owner": "tod",
           "task_ids": [
-            "manual-metrics-priority-1",
             "manual-metrics-priority-2",
             "manual-metrics-priority-3"
           ],
-          "blockers_resolved": 8,
-          "field_count": 8,
-          "batch_count": 3,
+          "blockers_resolved": 6,
+          "field_count": 6,
+          "batch_count": 2,
           "batches": [
-            {
-              "priority": 1,
-              "label": "Audience size snapshot",
-              "field_count": 2,
-              "access_levels": [
-                "public_profile"
-              ],
-              "csv_rows": [
-                3,
-                8
-              ]
-            },
             {
               "priority": 2,
               "label": "Recent discovery and traffic",
@@ -4414,9 +4334,9 @@
               ],
               "csv_rows": [
                 2,
-                4,
-                7,
-                9
+                3,
+                6,
+                7
               ]
             },
             {
@@ -4427,8 +4347,8 @@
                 "private_analytics"
               ],
               "csv_rows": [
-                5,
-                6
+                4,
+                5
               ]
             }
           ],
@@ -4689,7 +4609,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T06:47:36.655578Z",
+            "updated_at": "2026-06-20T06:53:48.209108Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
           },
           "action": "Verify Spotify public URL for Twelve Dollars."
@@ -4702,7 +4622,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T06:47:38.472017Z",
+            "updated_at": "2026-06-20T06:57:11.787860Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
           },
           "action": "Verify Apple Music public URL for Twelve Dollars."
@@ -4715,7 +4635,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T06:47:38.832568Z",
+            "updated_at": "2026-06-20T06:57:12.145032Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
           },
           "action": "Verify HyperFollow public URL for Twelve Dollars."
@@ -4728,7 +4648,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T06:47:38.908718Z",
+            "updated_at": "2026-06-20T06:52:46.758961Z",
             "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
           },
           "action": "Verify Spotify public URL for Analog Myth."
@@ -4741,7 +4661,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T06:47:40.712206Z",
+            "updated_at": "2026-06-20T06:57:37.308097Z",
             "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
           },
           "action": "Verify Apple Music public URL for Analog Myth."
@@ -4754,7 +4674,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T06:47:40.770410Z",
+            "updated_at": "2026-06-20T06:52:48.562909Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release."
           },
           "action": "Verify YouTube Music public URL for Analog Myth."
@@ -4767,7 +4687,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T06:47:43.782911Z",
+            "updated_at": "2026-06-20T06:58:02.780829Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
           },
           "action": "Verify HyperFollow public URL for Analog Myth."
@@ -4783,7 +4703,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T06:47:36.655578Z",
+            "updated_at": "2026-06-20T06:53:48.209108Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
           },
           "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed."
@@ -4795,7 +4715,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T06:47:38.472017Z",
+            "updated_at": "2026-06-20T06:57:11.787860Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
           },
           "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json."
@@ -4807,7 +4727,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T06:47:38.832568Z",
+            "updated_at": "2026-06-20T06:57:12.145032Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
           },
           "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug."
@@ -4819,7 +4739,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T06:47:38.908718Z",
+            "updated_at": "2026-06-20T06:52:46.758961Z",
             "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
           },
           "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed."
@@ -4831,7 +4751,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T06:47:40.712206Z",
+            "updated_at": "2026-06-20T06:57:37.308097Z",
             "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
           },
           "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json."
@@ -4843,7 +4763,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T06:47:40.770410Z",
+            "updated_at": "2026-06-20T06:52:48.562909Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release."
           },
           "note": "Searches public web results for YouTube Music watch URLs, then validates the public title."
@@ -4855,7 +4775,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T06:47:43.782911Z",
+            "updated_at": "2026-06-20T06:58:02.780829Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
           },
           "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug."
@@ -4865,17 +4785,17 @@
       "latest_run": {
         "source_path": "data/store_verification_run.json",
         "available": true,
-        "updated_at": "2026-06-20T06:47:43.893035Z",
+        "updated_at": "2026-06-20T06:58:02.896396Z",
         "step_timeout_seconds": 25,
         "checked": 7,
         "ok": 0,
         "not_live_or_failed": 7,
-        "timed_out": 0,
+        "timed_out": 3,
         "failed": 7,
         "admin_update_ok": true,
         "retry_command": "python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25"
       },
-      "last_run_timeout_count": 0,
+      "last_run_timeout_count": 3,
       "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25",
       "apply_found_url_instruction": "When a public URL is verified, copy it into data/distrokid_release_status.json and refresh Admin."
     }
@@ -4887,14 +4807,14 @@
       "missing": 0,
       "checked_no_change": 0,
       "gated_manual_pending": 1,
-      "checked_at": "2026-06-20T06:47:47.170703+00:00"
+      "checked_at": "2026-06-20T06:58:05.840525+00:00"
     },
     "sources": [
       {
         "name": "release_status",
         "path": "data/distrokid_release_status.json",
         "status": "fresh",
-        "age_hours": 69.4,
+        "age_hours": 69.6,
         "max_age_hours": 72,
         "timestamp": "2026-06-17T09:25:00+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin; update data/distrokid_release_status.json when a public URL is verified."
@@ -4903,7 +4823,7 @@
         "name": "scheduled_posts",
         "path": "admin/future-posts.json",
         "status": "fresh",
-        "age_hours": 5.3,
+        "age_hours": 5.5,
         "max_age_hours": 72,
         "timestamp": "2026-06-20T01:28:46.696230+00:00",
         "refresh_command": "python3 scripts/sync_future_posts.py"
@@ -4914,14 +4834,14 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T06:47:45.856572+00:00",
+        "timestamp": "2026-06-20T06:58:04.632200+00:00",
         "refresh_command": "python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
         "name": "published_log",
         "path": "admin/content/Published_Log.csv",
         "status": "gated_manual_pending",
-        "age_hours": 306.2,
+        "age_hours": 306.4,
         "max_age_hours": 168,
         "timestamp": "2026-06-07T12:36:37.141276+00:00",
         "refresh_command": "Review and approve the manual YouTube Community rows, post them manually, then log real public URLs; Worker export has no unlogged posted records right now.",
@@ -4946,9 +4866,9 @@
         "name": "manual_metrics",
         "path": "data/manual_social_stats.json",
         "status": "fresh",
-        "age_hours": 0.6,
+        "age_hours": 0.1,
         "max_age_hours": 72,
-        "timestamp": "2026-06-20T06:12:05.458790+00:00",
+        "timestamp": "2026-06-20T06:52:36.456413+00:00",
         "refresh_command": "Update data/manual_social_stats.json with latest manual metrics."
       },
       {
@@ -4957,7 +4877,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T06:47:36.517000+00:00",
+        "timestamp": "2026-06-20T06:56:46.518000+00:00",
         "refresh_command": "python3 scripts/capture_live_metrics.py"
       },
       {
@@ -4966,7 +4886,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T06:47:45.893604+00:00",
+        "timestamp": "2026-06-20T06:58:04.668896+00:00",
         "refresh_command": "python3 scripts/update_metrics_history.py --refresh-admin"
       },
       {
@@ -4975,7 +4895,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T06:47:43.989363+00:00",
+        "timestamp": "2026-06-20T06:58:02.991004+00:00",
         "refresh_command": "python3 scripts/capture_executor_readiness.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -4984,7 +4904,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T06:47:47.170703+00:00",
+        "timestamp": "2026-06-20T06:58:05.840525+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin"
       },
       {
@@ -4993,7 +4913,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T06:47:45.455533+00:00",
+        "timestamp": "2026-06-20T06:58:04.396663+00:00",
         "refresh_command": "python3 scripts/capture_social_executions.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -5002,7 +4922,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T06:47:45.800506+00:00",
+        "timestamp": "2026-06-20T06:58:04.584390+00:00",
         "refresh_command": "python3 scripts/capture_scheduler_dry_run.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -5011,7 +4931,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T06:47:47.140502+00:00",
+        "timestamp": "2026-06-20T06:58:05.810322+00:00",
         "refresh_command": "python3 scripts/refresh_promo_admin.py"
       },
       {
@@ -5020,7 +4940,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T06:47:46.456399+00:00",
+        "timestamp": "2026-06-20T06:58:05.142487+00:00",
         "refresh_command": "python3 scripts/capture_github_workflow_status.py && python3 scripts/update_promo_engine_status.py"
       }
     ],
@@ -5159,7 +5079,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T06:47:36.655578Z",
+            "updated_at": "2026-06-20T06:53:48.209108Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
           }
         },
@@ -5170,7 +5090,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T06:47:38.472017Z",
+            "updated_at": "2026-06-20T06:57:11.787860Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
           }
         },
@@ -5181,7 +5101,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T06:47:38.832568Z",
+            "updated_at": "2026-06-20T06:57:12.145032Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
           }
         }
@@ -5272,7 +5192,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T06:47:38.908718Z",
+            "updated_at": "2026-06-20T06:52:46.758961Z",
             "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
           }
         },
@@ -5283,7 +5203,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T06:47:40.712206Z",
+            "updated_at": "2026-06-20T06:57:37.308097Z",
             "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
           }
         },
@@ -5294,7 +5214,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T06:47:40.770410Z",
+            "updated_at": "2026-06-20T06:52:48.562909Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release."
           }
         },
@@ -5305,7 +5225,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T06:47:43.782911Z",
+            "updated_at": "2026-06-20T06:58:02.780829Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
           }
         }
@@ -5351,12 +5271,12 @@
   "next_actions": [
     "Next operational action: Preview checked scheduled approval batch — python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
     "First handoff step: Review checked approval batch — python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
-    "Re-check checked-pending store links: 7 music site snapshot(s) still have no public URL; run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25.",
+    "Re-check checked-pending store links: 7 music site snapshot(s) still have no public URL; run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25. Last run had 3 timeout(s).",
     "Resolve manual distribution gate: 2 YouTube Community row(s) need review (manual_approval); preview with python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run.",
-    "Automate public profile metrics: 2 public-profile field(s) still need capture adapters; see data/manual_metric_collection_packet.json public_metric_capture_backlog.",
-    "Refresh manual metrics: 8 worksheet row(s) still need new_value entries (blocked_until_new_values_filled); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values.",
+    "Refresh manual metrics: 6 worksheet row(s) still need new_value entries (blocked_until_new_values_filled); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values.",
     "Preview approved backlog reschedule: python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
-    "1 approved unpublished posts are past their scheduled time; repair executor/platform blockers or reschedule them."
+    "1 approved unpublished posts are past their scheduled time; repair executor/platform blockers or reschedule them.",
+    "3 executor records are blocked by approval."
   ]
 }</script>
 
@@ -5436,7 +5356,7 @@
 }</script>
 
 <script type="application/json" id="embedded-promo-queue-plan">{
-  "generated_at": "2026-06-20T02:47:45.856572-04:00",
+  "generated_at": "2026-06-20T02:58:04.632200-04:00",
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
     "release_status": "data/distrokid_release_status.json"
@@ -5515,7 +5435,7 @@
   },
   "readiness_audit": {
     "source": "data/executor_readiness_snapshot.json",
-    "updated_at": "2026-06-20T06:47:43.989363Z",
+    "updated_at": "2026-06-20T06:58:02.991004Z",
     "ok": true,
     "counts": {
       "blocked": 1,
@@ -5632,7 +5552,7 @@
 
 
 <script type="application/json" id="embedded-promo-operations-packet">{
-  "generated_at": "2026-06-20T06:47:46.637003Z",
+  "generated_at": "2026-06-20T06:58:05.313908Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -5945,18 +5865,18 @@
     ]
   },
   "summary": {
-    "action_count": 16,
+    "action_count": 15,
     "user_review": 3,
     "platform_fixes": 1,
     "scheduled_approval_batches": 1,
     "store_checks": 7,
-    "manual_metric_updates": 3,
+    "manual_metric_updates": 2,
     "backlog_reschedules": 1,
     "safe_apply_commands": 0,
     "blocked_review_items": 1,
     "manual_only_review_items": 2,
     "phases": {
-      "Fill manual metrics": 3,
+      "Fill manual metrics": 2,
       "Repair executor": 1,
       "Reschedule approved backlog": 1,
       "Review blocked drafts": 1,
@@ -5967,7 +5887,7 @@
     "urgencies": {
       "blocked": 1,
       "high": 3,
-      "low": 3,
+      "low": 2,
       "medium": 9
     },
     "next_action": {
@@ -6791,11 +6711,11 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "Spotify",
-        "checked_at": "2026-06-20T06:47:36.655578Z",
+        "checked_at": "2026-06-20T06:53:48.209108Z",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T06:47:36.655578Z",
+          "updated_at": "2026-06-20T06:53:48.209108Z",
           "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
         },
         "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -6818,11 +6738,11 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "Apple Music",
-        "checked_at": "2026-06-20T06:47:38.472017Z",
+        "checked_at": "2026-06-20T06:57:11.787860Z",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T06:47:38.472017Z",
+          "updated_at": "2026-06-20T06:57:11.787860Z",
           "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
         },
         "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -6845,11 +6765,11 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "HyperFollow",
-        "checked_at": "2026-06-20T06:47:38.832568Z",
+        "checked_at": "2026-06-20T06:57:12.145032Z",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T06:47:38.832568Z",
+          "updated_at": "2026-06-20T06:57:12.145032Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
         },
         "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -6872,11 +6792,11 @@
       "context": {
         "release": "Analog Myth",
         "service": "Spotify",
-        "checked_at": "2026-06-20T06:47:38.908718Z",
+        "checked_at": "2026-06-20T06:52:46.758961Z",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/spotify_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T06:47:38.908718Z",
+          "updated_at": "2026-06-20T06:52:46.758961Z",
           "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
         },
         "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -6899,11 +6819,11 @@
       "context": {
         "release": "Analog Myth",
         "service": "Apple Music",
-        "checked_at": "2026-06-20T06:47:40.712206Z",
+        "checked_at": "2026-06-20T06:57:37.308097Z",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T06:47:40.712206Z",
+          "updated_at": "2026-06-20T06:57:37.308097Z",
           "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
         },
         "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -6926,11 +6846,11 @@
       "context": {
         "release": "Analog Myth",
         "service": "YouTube Music",
-        "checked_at": "2026-06-20T06:47:40.770410Z",
+        "checked_at": "2026-06-20T06:52:48.562909Z",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T06:47:40.770410Z",
+          "updated_at": "2026-06-20T06:52:48.562909Z",
           "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release."
         },
         "note": "Searches public web results for YouTube Music watch URLs, then validates the public title. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -6953,11 +6873,11 @@
       "context": {
         "release": "Analog Myth",
         "service": "HyperFollow",
-        "checked_at": "2026-06-20T06:47:43.782911Z",
+        "checked_at": "2026-06-20T06:58:02.780829Z",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T06:47:43.782911Z",
+          "updated_at": "2026-06-20T06:58:02.780829Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
         },
         "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -6970,52 +6890,6 @@
         2,
         20,
         12
-      ]
-    },
-    {
-      "label": "Fill priority 1 metrics: Audience size snapshot",
-      "kind": "manual_metrics",
-      "priority": 31,
-      "command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
-      "context": {
-        "priority": 1,
-        "label": "Audience size snapshot",
-        "status": "needs_values",
-        "field_count": 2,
-        "waiting_count": 2,
-        "ready_to_import_count": 0,
-        "platforms": [
-          "instagram",
-          "x"
-        ],
-        "access_levels": [
-          "public_profile"
-        ],
-        "csv_rows": [
-          3,
-          8
-        ],
-        "fields": [
-          "instagram.followers",
-          "x.followers"
-        ],
-        "evidence_hints": [
-          "Capture the public follower count from the profile page or account dashboard.",
-          "Capture the public follower count from the profile page or account dashboard."
-        ],
-        "csv_path": "data/manual_metric_collection_template.csv",
-        "report_path": "admin/reports/manual-metric-collection.md",
-        "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
-        "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin"
-      },
-      "phase": "Fill manual metrics",
-      "urgency": "low",
-      "urgency_reason": "Manual metric gaps affect reporting, not publishing.",
-      "status": "waiting_for_user",
-      "sort_key": [
-        3,
-        31,
-        13
       ]
     },
     {
@@ -7041,9 +6915,9 @@
         ],
         "csv_rows": [
           2,
-          4,
-          7,
-          9
+          3,
+          6,
+          7
         ],
         "fields": [
           "facebook.reach_7d",
@@ -7069,7 +6943,7 @@
       "sort_key": [
         3,
         32,
-        14
+        13
       ]
     },
     {
@@ -7091,8 +6965,8 @@
           "private_analytics"
         ],
         "csv_rows": [
-          5,
-          6
+          4,
+          5
         ],
         "fields": [
           "spotify.release_streams",
@@ -7114,7 +6988,7 @@
       "sort_key": [
         3,
         33,
-        15
+        14
       ]
     }
   ]
@@ -7123,20 +6997,20 @@
 
 <script type="text/plain" id="embedded-promo-operations-report"># Promo Operations Packet - Lily Roo
 
-Generated: 2026-06-20T06:47:46.637003Z
+Generated: 2026-06-20T06:58:05.313908Z
 
 ## Summary
-- Actions: **16**
+- Actions: **15**
 - User review: **3**
 - Platform fixes: **1**
 - Scheduled approval batches: **1**
 - Store checks: **7**
-- Manual metric updates: **3**
+- Manual metric updates: **2**
 - Safe apply commands ready: **0**
-- Urgency: **blocked: 1, high: 3, low: 3, medium: 9**
+- Urgency: **blocked: 1, high: 3, low: 2, medium: 9**
 
 ## Phase Counts
-- Fill manual metrics: **3**
+- Fill manual metrics: **2**
 - Repair executor: **1**
 - Reschedule approved backlog: **1**
 - Review blocked drafts: **1**
@@ -7199,32 +7073,32 @@ Generated: 2026-06-20T06:47:46.637003Z
 - **[medium] Re-check Twelve Dollars on Spotify**
   - Why: Public store links should be checked until DistroKid exposes them.
   - Detail: Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release.
-  - Latest snapshot checked: `2026-06-20T06:47:36.655578Z`
+  - Latest snapshot checked: `2026-06-20T06:53:48.209108Z`
   - Command: `python3 scripts/search_spotify_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/spotify_release_snapshot.json'`
 - **[medium] Re-check Twelve Dollars on Apple Music**
   - Why: Public store links should be checked until DistroKid exposes them.
   - Detail: Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release.
-  - Latest snapshot checked: `2026-06-20T06:47:38.472017Z`
+  - Latest snapshot checked: `2026-06-20T06:57:11.787860Z`
   - Command: `python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/apple_music_release_snapshot.json'`
 - **[medium] Re-check Twelve Dollars on HyperFollow**
   - Why: Public store links should be checked until DistroKid exposes them.
   - Detail: Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release.
-  - Latest snapshot checked: `2026-06-20T06:47:38.832568Z`
+  - Latest snapshot checked: `2026-06-20T06:57:12.145032Z`
   - Command: `python3 scripts/capture_hyperfollow_store_links.py --url 'https://distrokid.com/hyperfollow/lilyroo/twelve-dollars' --out 'data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json'`
 - **[medium] Re-check Analog Myth on Spotify**
   - Why: Public store links should be checked as the July 1 release approaches.
   - Detail: Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release.
-  - Latest snapshot checked: `2026-06-20T06:47:38.908718Z`
+  - Latest snapshot checked: `2026-06-20T06:52:46.758961Z`
   - Command: `python3 scripts/search_spotify_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/spotify_release_snapshot.json'`
 - **[medium] Re-check Analog Myth on Apple Music**
   - Why: Public store links should be checked as the July 1 release approaches.
   - Detail: Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release.
-  - Latest snapshot checked: `2026-06-20T06:47:40.712206Z`
+  - Latest snapshot checked: `2026-06-20T06:57:37.308097Z`
   - Command: `python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/apple_music_release_snapshot.json'`
 - **[medium] Re-check Analog Myth on YouTube Music**
   - Why: Public store links should be checked as the July 1 release approaches.
   - Detail: Searches public web results for YouTube Music watch URLs, then validates the public title. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release.
-  - Latest snapshot checked: `2026-06-20T06:47:40.770410Z`
+  - Latest snapshot checked: `2026-06-20T06:52:48.562909Z`
   - Command: `python3 scripts/search_youtube_music_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/youtube_music_release_snapshot.json'`
 
 ## Guardrails
@@ -7235,12 +7109,12 @@ Generated: 2026-06-20T06:47:46.637003Z
 
 <script type="text/plain" id="embedded-manual-metric-collection"># Manual Metric Collection - Lily Roo
 
-Generated: 2026-06-20T06:47:46.910525Z
+Generated: 2026-06-20T06:58:05.584329Z
 
-Pending fields: **8**
+Pending fields: **6**
 
 Live-importable fields: **0**
-Manual collection required: **8**
+Manual collection required: **6**
 
 Fill `new_value` in `data/manual_metric_collection_template.csv`, then run:
 
@@ -7264,53 +7138,27 @@ You can still run a platform update command directly if you only collect one pla
 
 - Status: **needs_values**
 - Platforms: **5**
-- Waiting fields: **8**
+- Waiting fields: **6**
 - Ready to import: **0**
 - CSV: `data/manual_metric_collection_template.csv`
 - Preview worksheet import: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
 - Apply worksheet import after review: `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
 
-## Public Metric Capture Backlog
-
-- Fields: **2**
-- Status: **needs_capture_adapter**
-- Engine work: Add safe public profile capture adapters for these public fields, then route them through data/live_social_metrics.json and scripts/update_manual_social_stats.py --from-live.
-- Guardrail: Do not treat private analytics fields as public-capture candidates.
-
-- CSV row `3` `instagram.followers`
-  - Public/source URL: https://www.instagram.com/lilyroo.artist/
-  - Evidence: Capture the public follower count from the profile page or account dashboard.
-- CSV row `8` `x.followers`
-  - Public/source URL: https://x.com/lilyrooartist
-  - Evidence: Capture the public follower count from the profile page or account dashboard.
-
-### Priority 1: Audience size snapshot
-- Status: `needs_values`; waiting: **2**; ready: **0**
-- Platforms: `instagram, x`
-- Access: `public_profile`
-- CSV rows: `3, 8`
-- Row `3` `instagram.followers`
-  - Enter the current public follower count.
-  - Evidence: Capture the public follower count from the profile page or account dashboard.
-- Row `8` `x.followers`
-  - Enter the current public follower count.
-  - Evidence: Capture the public follower count from the profile page or account dashboard.
-
 ### Priority 2: Recent discovery and traffic
 - Status: `needs_values`; waiting: **4**; ready: **0**
 - Platforms: `facebook, instagram, tiktok, x`
 - Access: `private_analytics`
-- CSV rows: `2, 4, 7, 9`
+- CSV rows: `2, 3, 6, 7`
 - Row `2` `facebook.reach_7d`
   - Enter reach for the last 7 days.
   - Evidence: Use the last-7-days reach value from Meta insights.
-- Row `4` `instagram.profile_visits_7d`
+- Row `3` `instagram.profile_visits_7d`
   - Enter profile visits for the last 7 days.
   - Evidence: Use the last-7-days profile visits value from the professional dashboard.
-- Row `7` `tiktok.profile_views_7d`
+- Row `6` `tiktok.profile_views_7d`
   - Enter profile views for the last 7 days.
   - Evidence: Use the last-7-days profile views value from TikTok analytics.
-- Row `9` `x.impressions_7d`
+- Row `7` `x.impressions_7d`
   - Enter impressions for the last 7 days.
   - Evidence: Use the last-7-days impressions value from X analytics.
 
@@ -7318,11 +7166,11 @@ You can still run a platform update command directly if you only collect one pla
 - Status: `needs_values`; waiting: **2**; ready: **0**
 - Platforms: `spotify`
 - Access: `private_analytics`
-- CSV rows: `5, 6`
-- Row `5` `spotify.release_streams`
+- CSV rows: `4, 5`
+- Row `4` `spotify.release_streams`
   - Enter lifetime streams for the promoted release.
   - Evidence: Use lifetime streams for the promoted release from Spotify for Artists.
-- Row `6` `spotify.saves`
+- Row `5` `spotify.saves`
   - Enter lifetime saves for the promoted release.
   - Evidence: Use lifetime saves for the promoted release from Spotify for Artists.
 
@@ -7330,7 +7178,7 @@ You can still run a platform update command directly if you only collect one pla
 
 - Status: **needs_values**
 - Ready rows: **0**
-- Waiting rows: **8**
+- Waiting rows: **6**
 - Preview: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
 - Apply after review: `blocked until new_value cells are filled`
 - Apply gate: **blocked_until_new_values_filled**
@@ -7346,25 +7194,22 @@ You can still run a platform update command directly if you only collect one pla
 - Platform command: `python3 scripts/update_manual_social_stats.py facebook.reach_7d=VALUE --refresh-admin`
 
 ### instagram
-- Status: `needs_values`; waiting: **2**; ready: **0**
+- Status: `needs_values`; waiting: **1**; ready: **0**
 - Open: https://www.instagram.com/lilyroo.artist/
 - Why: Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page
-- CSV row `3` `followers` current `pending` -> `nonnegative_integer e.g. 123`
-  - Enter the current public follower count.
-  - Evidence: Capture the public follower count from the profile page or account dashboard.
-- CSV row `4` `profile_visits_7d` current `pending` -> `nonnegative_integer e.g. 12`
+- CSV row `3` `profile_visits_7d` current `pending` -> `nonnegative_integer e.g. 12`
   - Enter profile visits for the last 7 days.
   - Evidence: Use the last-7-days profile visits value from the professional dashboard.
-- Platform command: `python3 scripts/update_manual_social_stats.py instagram.followers=VALUE instagram.profile_visits_7d=VALUE --refresh-admin`
+- Platform command: `python3 scripts/update_manual_social_stats.py instagram.profile_visits_7d=VALUE --refresh-admin`
 
 ### spotify
 - Status: `needs_values`; waiting: **2**; ready: **0**
 - Open: https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a
 - Why: Spotify streams, saves, monthly listeners, and artist followers require Spotify for Artists export or a connected analytics source.
-- CSV row `5` `release_streams` current `pending` -> `nonnegative_integer e.g. 1234`
+- CSV row `4` `release_streams` current `pending` -> `nonnegative_integer e.g. 1234`
   - Enter lifetime streams for the promoted release.
   - Evidence: Use lifetime streams for the promoted release from Spotify for Artists.
-- CSV row `6` `saves` current `pending` -> `nonnegative_integer e.g. 12`
+- CSV row `5` `saves` current `pending` -> `nonnegative_integer e.g. 12`
   - Enter lifetime saves for the promoted release.
   - Evidence: Use lifetime saves for the promoted release from Spotify for Artists.
 - Platform command: `python3 scripts/update_manual_social_stats.py spotify.release_streams=VALUE spotify.saves=VALUE --refresh-admin`
@@ -7373,22 +7218,19 @@ You can still run a platform update command directly if you only collect one pla
 - Status: `needs_values`; waiting: **1**; ready: **0**
 - Open: https://www.tiktok.com/@lilyroo930
 - Why: TikTok metrics need TikTok OAuth credentials.
-- CSV row `7` `profile_views_7d` current `pending` -> `nonnegative_integer e.g. 12`
+- CSV row `6` `profile_views_7d` current `pending` -> `nonnegative_integer e.g. 12`
   - Enter profile views for the last 7 days.
   - Evidence: Use the last-7-days profile views value from TikTok analytics.
 - Platform command: `python3 scripts/update_manual_social_stats.py tiktok.profile_views_7d=VALUE --refresh-admin`
 
 ### x
-- Status: `needs_values`; waiting: **2**; ready: **0**
+- Status: `needs_values`; waiting: **1**; ready: **0**
 - Open: https://x.com/lilyrooartist
 - Why: X metrics need X_USER_ACCESS_TOKEN with user lookup access.
-- CSV row `8` `followers` current `pending` -> `nonnegative_integer e.g. 123`
-  - Enter the current public follower count.
-  - Evidence: Capture the public follower count from the profile page or account dashboard.
-- CSV row `9` `impressions_7d` current `pending` -> `nonnegative_integer e.g. 123`
+- CSV row `7` `impressions_7d` current `pending` -> `nonnegative_integer e.g. 123`
   - Enter impressions for the last 7 days.
   - Evidence: Use the last-7-days impressions value from X analytics.
-- Platform command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impressions_7d=VALUE --refresh-admin`
+- Platform command: `python3 scripts/update_manual_social_stats.py x.impressions_7d=VALUE --refresh-admin`
 
 ## facebook
 
@@ -7408,14 +7250,11 @@ Source: Instagram Professional Dashboard > Insights
 Open: https://www.instagram.com/lilyroo.artist/
 Why: Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page
 
-- CSV row `3` `followers` current `pending` -> `VALUE` (nonnegative_integer; example `123`)
-  - Enter the current public follower count.
-  - Import effect: update data/manual_social_stats.json instagram.followers from 'pending' to the filled new_value
-- CSV row `4` `profile_visits_7d` current `pending` -> `VALUE` (nonnegative_integer; example `12`)
+- CSV row `3` `profile_visits_7d` current `pending` -> `VALUE` (nonnegative_integer; example `12`)
   - Enter profile visits for the last 7 days.
   - Import effect: update data/manual_social_stats.json instagram.profile_visits_7d from 'pending' to the filled new_value
 
-Command: `python3 scripts/update_manual_social_stats.py instagram.followers=VALUE instagram.profile_visits_7d=VALUE --refresh-admin`
+Command: `python3 scripts/update_manual_social_stats.py instagram.profile_visits_7d=VALUE --refresh-admin`
 
 ## spotify
 
@@ -7423,10 +7262,10 @@ Source: Spotify for Artists > Music/Stats export
 Open: https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a
 Why: Spotify streams, saves, monthly listeners, and artist followers require Spotify for Artists export or a connected analytics source.
 
-- CSV row `5` `release_streams` current `pending` -> `VALUE` (nonnegative_integer; example `1234`)
+- CSV row `4` `release_streams` current `pending` -> `VALUE` (nonnegative_integer; example `1234`)
   - Enter lifetime streams for the promoted release.
   - Import effect: update data/manual_social_stats.json spotify.release_streams from 'pending' to the filled new_value
-- CSV row `6` `saves` current `pending` -> `VALUE` (nonnegative_integer; example `12`)
+- CSV row `5` `saves` current `pending` -> `VALUE` (nonnegative_integer; example `12`)
   - Enter lifetime saves for the promoted release.
   - Import effect: update data/manual_social_stats.json spotify.saves from 'pending' to the filled new_value
 
@@ -7438,7 +7277,7 @@ Source: TikTok Studio or Creator Center analytics
 Open: https://www.tiktok.com/@lilyroo930
 Why: TikTok metrics need TikTok OAuth credentials.
 
-- CSV row `7` `profile_views_7d` current `pending` -> `VALUE` (nonnegative_integer; example `12`)
+- CSV row `6` `profile_views_7d` current `pending` -> `VALUE` (nonnegative_integer; example `12`)
   - Enter profile views for the last 7 days.
   - Import effect: update data/manual_social_stats.json tiktok.profile_views_7d from 'pending' to the filled new_value
 
@@ -7450,18 +7289,15 @@ Source: X Analytics or account profile metrics
 Open: https://x.com/lilyrooartist
 Why: X metrics need X_USER_ACCESS_TOKEN with user lookup access.
 
-- CSV row `8` `followers` current `pending` -> `VALUE` (nonnegative_integer; example `123`)
-  - Enter the current public follower count.
-  - Import effect: update data/manual_social_stats.json x.followers from 'pending' to the filled new_value
-- CSV row `9` `impressions_7d` current `pending` -> `VALUE` (nonnegative_integer; example `123`)
+- CSV row `7` `impressions_7d` current `pending` -> `VALUE` (nonnegative_integer; example `123`)
   - Enter impressions for the last 7 days.
   - Import effect: update data/manual_social_stats.json x.impressions_7d from 'pending' to the filled new_value
 
-Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impressions_7d=VALUE --refresh-admin`</script>
+Command: `python3 scripts/update_manual_social_stats.py x.impressions_7d=VALUE --refresh-admin`</script>
 
 
 <script type="application/json" id="embedded-platform-repair-status">{
-  "generated_at": "2026-06-20T06:47:46.856371Z",
+  "generated_at": "2026-06-20T06:58:05.529983Z",
   "safe_mode": true,
   "source": {
     "promo_operations_packet": "data/promo_operations_packet.json",
@@ -7575,7 +7411,7 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
 
 
 <script type="application/json" id="embedded-approval-runway">{
-  "generated_at": "2026-06-20T06:47:46.665067Z",
+  "generated_at": "2026-06-20T06:58:05.342029Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -7687,7 +7523,7 @@ Command: `python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impr
 
 <script type="text/plain" id="embedded-approval-runway-report"># Approval Runway - Lily Roo
 
-Generated: 2026-06-20T06:47:46.665067Z
+Generated: 2026-06-20T06:58:05.342029Z
 
 ## Summary
 - Drafts needing review: **3**
@@ -7733,7 +7569,7 @@ Generated: 2026-06-20T06:47:46.665067Z
 
 
 <script type="application/json" id="embedded-subscriber-cta-audit">{
-  "generated_at": "2026-06-20T06:47:46.719928Z",
+  "generated_at": "2026-06-20T06:58:05.395606Z",
   "safe_mode": true,
   "source": {
     "promo_queue_plan": "data/promo_queue_plan.json",
@@ -7799,7 +7635,7 @@ Generated: 2026-06-20T06:47:46.665067Z
 
 <script type="text/plain" id="embedded-subscriber-cta-audit-report"># Subscriber CTA Audit - Lily Roo
 
-Generated: 2026-06-20T06:47:46.719928Z
+Generated: 2026-06-20T06:58:05.395606Z
 
 ## Summary
 - Draft posts: **3**
@@ -7833,7 +7669,7 @@ Generated: 2026-06-20T06:47:46.719928Z
 
 
 <script type="application/json" id="embedded-monetization-activation-plan">{
-  "generated_at": "2026-06-20T06:47:46.774030Z",
+  "generated_at": "2026-06-20T06:58:05.449001Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -7976,7 +7812,7 @@ Generated: 2026-06-20T06:47:46.719928Z
 
 <script type="text/plain" id="embedded-monetization-activation-report"># Monetization Activation Plan - Lily Roo
 
-Generated: 2026-06-20T06:47:46.774030Z
+Generated: 2026-06-20T06:58:05.449001Z
 
 ## Summary
 - Current subscribers: **6 / 1000**
@@ -8025,7 +7861,7 @@ Generated: 2026-06-20T06:47:46.774030Z
 
 
 <script type="application/json" id="embedded-backlog-reschedule-preview">{
-  "generated_at": "2026-06-20T15:47:46.608111+09:00",
+  "generated_at": "2026-06-20T15:58:05.286765+09:00",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -8082,7 +7918,7 @@ Generated: 2026-06-20T06:47:46.774030Z
 
 <script type="text/plain" id="embedded-backlog-reschedule-preview-report"># Backlog Reschedule Preview - Lily Roo
 
-Generated: 2026-06-20T15:47:46.608111+09:00
+Generated: 2026-06-20T15:58:05.286765+09:00
 
 ## Summary
 - Approved backlog rows: **1**
@@ -8116,7 +7952,7 @@ Generated: 2026-06-20T15:47:46.608111+09:00
 
 <script type="text/plain" id="embedded-platform-repair-report"># Platform Repair Status - Lily Roo
 
-Generated: 2026-06-20T06:47:46.856371Z
+Generated: 2026-06-20T06:58:05.529983Z
 
 ## Summary
 - Platform fixes: **1**
@@ -8153,7 +7989,7 @@ Generated: 2026-06-20T06:47:46.856371Z
 
 
 <script type="application/json" id="embedded-manual-distribution-packet">{
-  "generated_at": "2026-06-20T06:47:46.747391Z",
+  "generated_at": "2026-06-20T06:58:05.422679Z",
   "safe_mode": true,
   "source": {
     "promo_queue_plan": "data/promo_queue_plan.json",
@@ -8447,7 +8283,7 @@ Generated: 2026-06-20T06:47:46.856371Z
 
 <script type="text/plain" id="embedded-manual-distribution-report"># Manual Distribution Packet - Lily Roo
 
-Generated: 2026-06-20T06:47:46.747391Z
+Generated: 2026-06-20T06:58:05.422679Z
 
 ## Summary
 - Manual-ready posts: **2**
@@ -8545,7 +8381,7 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
 
 
 <script type="application/json" id="embedded-manual-metric-collection-packet">{
-  "generated_at": "2026-06-20T06:47:46.910525Z",
+  "generated_at": "2026-06-20T06:58:05.584329Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -8555,16 +8391,16 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
     "report": "admin/reports/manual-metric-collection.md"
   },
   "summary": {
-    "pending_field_count": 8,
+    "pending_field_count": 6,
     "live_import_available_count": 0,
-    "manual_collection_required_count": 8,
-    "public_profile_manual_required_count": 2,
+    "manual_collection_required_count": 6,
+    "public_profile_manual_required_count": 0,
     "private_analytics_manual_required_count": 6,
     "ready_to_import_count": 0,
     "preserved_new_value_count": 0,
     "platform_count": 5,
-    "priority_batch_count": 3,
-    "public_profile_field_count": 2,
+    "priority_batch_count": 2,
+    "public_profile_field_count": 0,
     "private_analytics_field_count": 6,
     "csv_path": "data/manual_metric_collection_template.csv",
     "report_path": "admin/reports/manual-metric-collection.md",
@@ -8577,7 +8413,7 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
     "status": "needs_values",
     "platform_count": 5,
     "ready_to_import_count": 0,
-    "waiting_field_count": 8,
+    "waiting_field_count": 6,
     "platform_groups": [
       {
         "platform": "facebook",
@@ -8644,37 +8480,16 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
       {
         "platform": "instagram",
         "status": "needs_values",
-        "field_count": 2,
-        "waiting_count": 2,
+        "field_count": 1,
+        "waiting_count": 1,
         "ready_to_import_count": 0,
         "source_hint": "Instagram Professional Dashboard > Insights",
         "collection_url": "https://www.instagram.com/lilyroo.artist/",
         "reason": "Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page",
         "priority_summary": [
-          "Audience size snapshot",
           "Recent discovery and traffic"
         ],
         "fields": [
-          {
-            "field": "followers",
-            "current_value": "pending",
-            "new_value": "",
-            "live_value": "",
-            "collection_mode": "manual_collection_required",
-            "collection_priority": 1,
-            "metric_category": "Audience size snapshot",
-            "access_level": "public_profile",
-            "value_type": "nonnegative_integer",
-            "example_value": "123",
-            "collection_instruction": "Enter the current public follower count.",
-            "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
-            "public_capture_status": "Instagram public profile did not expose a stable follower value without authenticated or cookie-backed access.",
-            "adapter_blocker": "Instagram public profile did not expose a stable follower value without authenticated or cookie-backed access.",
-            "update_assignment": "instagram.followers=VALUE",
-            "import_effect": "update data/manual_social_stats.json instagram.followers from 'pending' to the filled new_value",
-            "csv_row": 3,
-            "ready_to_import": false
-          },
           {
             "field": "profile_visits_7d",
             "current_value": "pending",
@@ -8692,32 +8507,13 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
             "adapter_blocker": "",
             "update_assignment": "instagram.profile_visits_7d=VALUE",
             "import_effect": "update data/manual_social_stats.json instagram.profile_visits_7d from 'pending' to the filled new_value",
-            "csv_row": 4,
+            "csv_row": 3,
             "ready_to_import": false
           }
         ],
         "collection_packets": [
           {
             "csv_row": 3,
-            "field": "followers",
-            "current_value": "pending",
-            "new_value": "",
-            "ready_to_import": false,
-            "collection_mode": "manual_collection_required",
-            "collection_priority": 1,
-            "metric_category": "Audience size snapshot",
-            "access_level": "public_profile",
-            "source_hint": "Instagram Professional Dashboard > Insights",
-            "collection_url": "https://www.instagram.com/lilyroo.artist/",
-            "collection_instruction": "Enter the current public follower count.",
-            "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
-            "public_capture_status": "Instagram public profile did not expose a stable follower value without authenticated or cookie-backed access.",
-            "adapter_blocker": "Instagram public profile did not expose a stable follower value without authenticated or cookie-backed access.",
-            "update_assignment": "instagram.followers=VALUE",
-            "import_effect": "update data/manual_social_stats.json instagram.followers from 'pending' to the filled new_value"
-          },
-          {
-            "csv_row": 4,
             "field": "profile_visits_7d",
             "current_value": "pending",
             "new_value": "",
@@ -8737,10 +8533,9 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
           }
         ],
         "pending_assignments": [
-          "instagram.followers=VALUE",
           "instagram.profile_visits_7d=VALUE"
         ],
-        "platform_update_command": "python3 scripts/update_manual_social_stats.py instagram.followers=VALUE instagram.profile_visits_7d=VALUE --refresh-admin",
+        "platform_update_command": "python3 scripts/update_manual_social_stats.py instagram.profile_visits_7d=VALUE --refresh-admin",
         "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
         "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin"
       },
@@ -8774,7 +8569,7 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
             "adapter_blocker": "",
             "update_assignment": "spotify.release_streams=VALUE",
             "import_effect": "update data/manual_social_stats.json spotify.release_streams from 'pending' to the filled new_value",
-            "csv_row": 5,
+            "csv_row": 4,
             "ready_to_import": false
           },
           {
@@ -8794,13 +8589,13 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
             "adapter_blocker": "",
             "update_assignment": "spotify.saves=VALUE",
             "import_effect": "update data/manual_social_stats.json spotify.saves from 'pending' to the filled new_value",
-            "csv_row": 6,
+            "csv_row": 5,
             "ready_to_import": false
           }
         ],
         "collection_packets": [
           {
-            "csv_row": 5,
+            "csv_row": 4,
             "field": "release_streams",
             "current_value": "pending",
             "new_value": "",
@@ -8819,7 +8614,7 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
             "import_effect": "update data/manual_social_stats.json spotify.release_streams from 'pending' to the filled new_value"
           },
           {
-            "csv_row": 6,
+            "csv_row": 5,
             "field": "saves",
             "current_value": "pending",
             "new_value": "",
@@ -8876,13 +8671,13 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
             "adapter_blocker": "",
             "update_assignment": "tiktok.profile_views_7d=VALUE",
             "import_effect": "update data/manual_social_stats.json tiktok.profile_views_7d from 'pending' to the filled new_value",
-            "csv_row": 7,
+            "csv_row": 6,
             "ready_to_import": false
           }
         ],
         "collection_packets": [
           {
-            "csv_row": 7,
+            "csv_row": 6,
             "field": "profile_views_7d",
             "current_value": "pending",
             "new_value": "",
@@ -8911,37 +8706,16 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
       {
         "platform": "x",
         "status": "needs_values",
-        "field_count": 2,
-        "waiting_count": 2,
+        "field_count": 1,
+        "waiting_count": 1,
         "ready_to_import_count": 0,
         "source_hint": "X Analytics or account profile metrics",
         "collection_url": "https://x.com/lilyrooartist",
         "reason": "X metrics need X_USER_ACCESS_TOKEN with user lookup access.",
         "priority_summary": [
-          "Audience size snapshot",
           "Recent discovery and traffic"
         ],
         "fields": [
-          {
-            "field": "followers",
-            "current_value": "pending",
-            "new_value": "",
-            "live_value": "",
-            "collection_mode": "manual_collection_required",
-            "collection_priority": 1,
-            "metric_category": "Audience size snapshot",
-            "access_level": "public_profile",
-            "value_type": "nonnegative_integer",
-            "example_value": "123",
-            "collection_instruction": "Enter the current public follower count.",
-            "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
-            "public_capture_status": "X public profile did not expose a stable numeric follower value; use X API credentials or manual profile review.",
-            "adapter_blocker": "X public profile did not expose a stable numeric follower value; use X API credentials or manual profile review.",
-            "update_assignment": "x.followers=VALUE",
-            "import_effect": "update data/manual_social_stats.json x.followers from 'pending' to the filled new_value",
-            "csv_row": 8,
-            "ready_to_import": false
-          },
           {
             "field": "impressions_7d",
             "current_value": "pending",
@@ -8959,32 +8733,13 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
             "adapter_blocker": "",
             "update_assignment": "x.impressions_7d=VALUE",
             "import_effect": "update data/manual_social_stats.json x.impressions_7d from 'pending' to the filled new_value",
-            "csv_row": 9,
+            "csv_row": 7,
             "ready_to_import": false
           }
         ],
         "collection_packets": [
           {
-            "csv_row": 8,
-            "field": "followers",
-            "current_value": "pending",
-            "new_value": "",
-            "ready_to_import": false,
-            "collection_mode": "manual_collection_required",
-            "collection_priority": 1,
-            "metric_category": "Audience size snapshot",
-            "access_level": "public_profile",
-            "source_hint": "X Analytics or account profile metrics",
-            "collection_url": "https://x.com/lilyrooartist",
-            "collection_instruction": "Enter the current public follower count.",
-            "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
-            "public_capture_status": "X public profile did not expose a stable numeric follower value; use X API credentials or manual profile review.",
-            "adapter_blocker": "X public profile did not expose a stable numeric follower value; use X API credentials or manual profile review.",
-            "update_assignment": "x.followers=VALUE",
-            "import_effect": "update data/manual_social_stats.json x.followers from 'pending' to the filled new_value"
-          },
-          {
-            "csv_row": 9,
+            "csv_row": 7,
             "field": "impressions_7d",
             "current_value": "pending",
             "new_value": "",
@@ -9004,10 +8759,9 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
           }
         ],
         "pending_assignments": [
-          "x.followers=VALUE",
           "x.impressions_7d=VALUE"
         ],
-        "platform_update_command": "python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impressions_7d=VALUE --refresh-admin",
+        "platform_update_command": "python3 scripts/update_manual_social_stats.py x.impressions_7d=VALUE --refresh-admin",
         "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
         "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin"
       }
@@ -9025,7 +8779,7 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
     "status": "needs_values",
     "csv_path": "data/manual_metric_collection_template.csv",
     "ready_row_count": 0,
-    "waiting_row_count": 8,
+    "waiting_row_count": 6,
     "ready_csv_rows": [],
     "waiting_csv_rows": [
       2,
@@ -9033,19 +8787,15 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
       4,
       5,
       6,
-      7,
-      8,
-      9
+      7
     ],
     "ready_assignments": [],
     "waiting_assignments": [
       "facebook.reach_7d=VALUE",
-      "instagram.followers=VALUE",
       "instagram.profile_visits_7d=VALUE",
       "spotify.release_streams=VALUE",
       "spotify.saves=VALUE",
       "tiktok.profile_views_7d=VALUE",
-      "x.followers=VALUE",
       "x.impressions_7d=VALUE"
     ],
     "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
@@ -9071,22 +8821,6 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
       {
         "csv_row": 3,
         "platform": "instagram",
-        "field": "followers",
-        "ready_to_import": false,
-        "new_value": "",
-        "value_type": "nonnegative_integer",
-        "collection_priority": 1,
-        "metric_category": "Audience size snapshot",
-        "access_level": "public_profile",
-        "source_hint": "Instagram Professional Dashboard > Insights",
-        "collection_url": "https://www.instagram.com/lilyroo.artist/",
-        "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
-        "update_assignment": "instagram.followers=VALUE",
-        "import_effect": "update data/manual_social_stats.json instagram.followers from 'pending' to the filled new_value"
-      },
-      {
-        "csv_row": 4,
-        "platform": "instagram",
         "field": "profile_visits_7d",
         "ready_to_import": false,
         "new_value": "",
@@ -9101,7 +8835,7 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
         "import_effect": "update data/manual_social_stats.json instagram.profile_visits_7d from 'pending' to the filled new_value"
       },
       {
-        "csv_row": 5,
+        "csv_row": 4,
         "platform": "spotify",
         "field": "release_streams",
         "ready_to_import": false,
@@ -9117,7 +8851,7 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
         "import_effect": "update data/manual_social_stats.json spotify.release_streams from 'pending' to the filled new_value"
       },
       {
-        "csv_row": 6,
+        "csv_row": 5,
         "platform": "spotify",
         "field": "saves",
         "ready_to_import": false,
@@ -9133,7 +8867,7 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
         "import_effect": "update data/manual_social_stats.json spotify.saves from 'pending' to the filled new_value"
       },
       {
-        "csv_row": 7,
+        "csv_row": 6,
         "platform": "tiktok",
         "field": "profile_views_7d",
         "ready_to_import": false,
@@ -9149,23 +8883,7 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
         "import_effect": "update data/manual_social_stats.json tiktok.profile_views_7d from 'pending' to the filled new_value"
       },
       {
-        "csv_row": 8,
-        "platform": "x",
-        "field": "followers",
-        "ready_to_import": false,
-        "new_value": "",
-        "value_type": "nonnegative_integer",
-        "collection_priority": 1,
-        "metric_category": "Audience size snapshot",
-        "access_level": "public_profile",
-        "source_hint": "X Analytics or account profile metrics",
-        "collection_url": "https://x.com/lilyrooartist",
-        "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
-        "update_assignment": "x.followers=VALUE",
-        "import_effect": "update data/manual_social_stats.json x.followers from 'pending' to the filled new_value"
-      },
-      {
-        "csv_row": 9,
+        "csv_row": 7,
         "platform": "x",
         "field": "impressions_7d",
         "ready_to_import": false,
@@ -9184,79 +8902,13 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
     "guardrail": "Import only filled nonnegative numeric new_value cells; leave unknown rows blank."
   },
   "public_metric_capture_backlog": {
-    "status": "needs_capture_adapter",
-    "field_count": 2,
-    "fields": [
-      {
-        "platform": "instagram",
-        "field": "followers",
-        "csv_row": 3,
-        "collection_url": "https://www.instagram.com/lilyroo.artist/",
-        "source_hint": "Instagram Professional Dashboard > Insights",
-        "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
-        "public_capture_status": "Instagram public profile did not expose a stable follower value without authenticated or cookie-backed access.",
-        "adapter_blocker": "Instagram public profile did not expose a stable follower value without authenticated or cookie-backed access.",
-        "update_assignment": "instagram.followers=VALUE"
-      },
-      {
-        "platform": "x",
-        "field": "followers",
-        "csv_row": 8,
-        "collection_url": "https://x.com/lilyrooartist",
-        "source_hint": "X Analytics or account profile metrics",
-        "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
-        "public_capture_status": "X public profile did not expose a stable numeric follower value; use X API credentials or manual profile review.",
-        "adapter_blocker": "X public profile did not expose a stable numeric follower value; use X API credentials or manual profile review.",
-        "update_assignment": "x.followers=VALUE"
-      }
-    ],
-    "recommended_engine_work": "Add safe public profile capture adapters for these public fields, then route them through data/live_social_metrics.json and scripts/update_manual_social_stats.py --from-live.",
+    "status": "clear",
+    "field_count": 0,
+    "fields": [],
+    "recommended_engine_work": "",
     "guardrail": "Do not treat private analytics fields as public-capture candidates."
   },
   "priority_batches": [
-    {
-      "priority": 1,
-      "label": "Audience size snapshot",
-      "status": "needs_values",
-      "field_count": 2,
-      "waiting_count": 2,
-      "ready_to_import_count": 0,
-      "platforms": [
-        "instagram",
-        "x"
-      ],
-      "access_levels": [
-        "public_profile"
-      ],
-      "csv_rows": [
-        3,
-        8
-      ],
-      "fields": [
-        {
-          "platform": "instagram",
-          "field": "followers",
-          "csv_row": 3,
-          "ready_to_import": false,
-          "collection_url": "https://www.instagram.com/lilyroo.artist/",
-          "collection_instruction": "Enter the current public follower count.",
-          "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
-          "update_assignment": "instagram.followers=VALUE"
-        },
-        {
-          "platform": "x",
-          "field": "followers",
-          "csv_row": 8,
-          "ready_to_import": false,
-          "collection_url": "https://x.com/lilyrooartist",
-          "collection_instruction": "Enter the current public follower count.",
-          "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
-          "update_assignment": "x.followers=VALUE"
-        }
-      ],
-      "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
-      "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin"
-    },
     {
       "priority": 2,
       "label": "Recent discovery and traffic",
@@ -9275,9 +8927,9 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
       ],
       "csv_rows": [
         2,
-        4,
-        7,
-        9
+        3,
+        6,
+        7
       ],
       "fields": [
         {
@@ -9293,7 +8945,7 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
         {
           "platform": "instagram",
           "field": "profile_visits_7d",
-          "csv_row": 4,
+          "csv_row": 3,
           "ready_to_import": false,
           "collection_url": "https://www.instagram.com/lilyroo.artist/",
           "collection_instruction": "Enter profile visits for the last 7 days.",
@@ -9303,7 +8955,7 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
         {
           "platform": "tiktok",
           "field": "profile_views_7d",
-          "csv_row": 7,
+          "csv_row": 6,
           "ready_to_import": false,
           "collection_url": "https://www.tiktok.com/@lilyroo930",
           "collection_instruction": "Enter profile views for the last 7 days.",
@@ -9313,7 +8965,7 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
         {
           "platform": "x",
           "field": "impressions_7d",
-          "csv_row": 9,
+          "csv_row": 7,
           "ready_to_import": false,
           "collection_url": "https://x.com/lilyrooartist",
           "collection_instruction": "Enter impressions for the last 7 days.",
@@ -9338,14 +8990,14 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
         "private_analytics"
       ],
       "csv_rows": [
-        5,
-        6
+        4,
+        5
       ],
       "fields": [
         {
           "platform": "spotify",
           "field": "release_streams",
-          "csv_row": 5,
+          "csv_row": 4,
           "ready_to_import": false,
           "collection_url": "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a",
           "collection_instruction": "Enter lifetime streams for the promoted release.",
@@ -9355,7 +9007,7 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
         {
           "platform": "spotify",
           "field": "saves",
-          "csv_row": 6,
+          "csv_row": 5,
           "ready_to_import": false,
           "collection_url": "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a",
           "collection_instruction": "Enter lifetime saves for the promoted release.",
@@ -9436,26 +9088,6 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
       "reason": "Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page",
       "fields": [
         {
-          "field": "followers",
-          "current_value": "pending",
-          "new_value": "",
-          "live_value": "",
-          "collection_mode": "manual_collection_required",
-          "collection_priority": 1,
-          "metric_category": "Audience size snapshot",
-          "access_level": "public_profile",
-          "value_type": "nonnegative_integer",
-          "example_value": "123",
-          "collection_instruction": "Enter the current public follower count.",
-          "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
-          "public_capture_status": "Instagram public profile did not expose a stable follower value without authenticated or cookie-backed access.",
-          "adapter_blocker": "Instagram public profile did not expose a stable follower value without authenticated or cookie-backed access.",
-          "update_assignment": "instagram.followers=VALUE",
-          "import_effect": "update data/manual_social_stats.json instagram.followers from 'pending' to the filled new_value",
-          "csv_row": 3,
-          "ready_to_import": false
-        },
-        {
           "field": "profile_visits_7d",
           "current_value": "pending",
           "new_value": "",
@@ -9472,37 +9104,17 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
           "adapter_blocker": "",
           "update_assignment": "instagram.profile_visits_7d=VALUE",
           "import_effect": "update data/manual_social_stats.json instagram.profile_visits_7d from 'pending' to the filled new_value",
-          "csv_row": 4,
+          "csv_row": 3,
           "ready_to_import": false
         }
       ],
-      "field_count": 2,
+      "field_count": 1,
       "pending_assignments": [
-        "instagram.followers=VALUE",
         "instagram.profile_visits_7d=VALUE"
       ],
       "collection_packets": [
         {
           "csv_row": 3,
-          "field": "followers",
-          "current_value": "pending",
-          "new_value": "",
-          "ready_to_import": false,
-          "collection_mode": "manual_collection_required",
-          "collection_priority": 1,
-          "metric_category": "Audience size snapshot",
-          "access_level": "public_profile",
-          "source_hint": "Instagram Professional Dashboard > Insights",
-          "collection_url": "https://www.instagram.com/lilyroo.artist/",
-          "collection_instruction": "Enter the current public follower count.",
-          "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
-          "public_capture_status": "Instagram public profile did not expose a stable follower value without authenticated or cookie-backed access.",
-          "adapter_blocker": "Instagram public profile did not expose a stable follower value without authenticated or cookie-backed access.",
-          "update_assignment": "instagram.followers=VALUE",
-          "import_effect": "update data/manual_social_stats.json instagram.followers from 'pending' to the filled new_value"
-        },
-        {
-          "csv_row": 4,
           "field": "profile_visits_7d",
           "current_value": "pending",
           "new_value": "",
@@ -9522,9 +9134,9 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
         }
       ],
       "live_import_available_count": 0,
-      "manual_collection_required_count": 2,
+      "manual_collection_required_count": 1,
       "ready_to_import_count": 0,
-      "platform_update_command": "python3 scripts/update_manual_social_stats.py instagram.followers=VALUE instagram.profile_visits_7d=VALUE --refresh-admin",
+      "platform_update_command": "python3 scripts/update_manual_social_stats.py instagram.profile_visits_7d=VALUE --refresh-admin",
       "live_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-live --dry-run",
       "live_import_command": "python3 scripts/update_manual_social_stats.py --from-live --refresh-admin",
       "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
@@ -9553,7 +9165,7 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
           "adapter_blocker": "",
           "update_assignment": "spotify.release_streams=VALUE",
           "import_effect": "update data/manual_social_stats.json spotify.release_streams from 'pending' to the filled new_value",
-          "csv_row": 5,
+          "csv_row": 4,
           "ready_to_import": false
         },
         {
@@ -9573,7 +9185,7 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
           "adapter_blocker": "",
           "update_assignment": "spotify.saves=VALUE",
           "import_effect": "update data/manual_social_stats.json spotify.saves from 'pending' to the filled new_value",
-          "csv_row": 6,
+          "csv_row": 5,
           "ready_to_import": false
         }
       ],
@@ -9584,7 +9196,7 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
       ],
       "collection_packets": [
         {
-          "csv_row": 5,
+          "csv_row": 4,
           "field": "release_streams",
           "current_value": "pending",
           "new_value": "",
@@ -9603,7 +9215,7 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
           "import_effect": "update data/manual_social_stats.json spotify.release_streams from 'pending' to the filled new_value"
         },
         {
-          "csv_row": 6,
+          "csv_row": 5,
           "field": "saves",
           "current_value": "pending",
           "new_value": "",
@@ -9654,7 +9266,7 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
           "adapter_blocker": "",
           "update_assignment": "tiktok.profile_views_7d=VALUE",
           "import_effect": "update data/manual_social_stats.json tiktok.profile_views_7d from 'pending' to the filled new_value",
-          "csv_row": 7,
+          "csv_row": 6,
           "ready_to_import": false
         }
       ],
@@ -9664,7 +9276,7 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
       ],
       "collection_packets": [
         {
-          "csv_row": 7,
+          "csv_row": 6,
           "field": "profile_views_7d",
           "current_value": "pending",
           "new_value": "",
@@ -9699,26 +9311,6 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
       "reason": "X metrics need X_USER_ACCESS_TOKEN with user lookup access.",
       "fields": [
         {
-          "field": "followers",
-          "current_value": "pending",
-          "new_value": "",
-          "live_value": "",
-          "collection_mode": "manual_collection_required",
-          "collection_priority": 1,
-          "metric_category": "Audience size snapshot",
-          "access_level": "public_profile",
-          "value_type": "nonnegative_integer",
-          "example_value": "123",
-          "collection_instruction": "Enter the current public follower count.",
-          "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
-          "public_capture_status": "X public profile did not expose a stable numeric follower value; use X API credentials or manual profile review.",
-          "adapter_blocker": "X public profile did not expose a stable numeric follower value; use X API credentials or manual profile review.",
-          "update_assignment": "x.followers=VALUE",
-          "import_effect": "update data/manual_social_stats.json x.followers from 'pending' to the filled new_value",
-          "csv_row": 8,
-          "ready_to_import": false
-        },
-        {
           "field": "impressions_7d",
           "current_value": "pending",
           "new_value": "",
@@ -9735,37 +9327,17 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
           "adapter_blocker": "",
           "update_assignment": "x.impressions_7d=VALUE",
           "import_effect": "update data/manual_social_stats.json x.impressions_7d from 'pending' to the filled new_value",
-          "csv_row": 9,
+          "csv_row": 7,
           "ready_to_import": false
         }
       ],
-      "field_count": 2,
+      "field_count": 1,
       "pending_assignments": [
-        "x.followers=VALUE",
         "x.impressions_7d=VALUE"
       ],
       "collection_packets": [
         {
-          "csv_row": 8,
-          "field": "followers",
-          "current_value": "pending",
-          "new_value": "",
-          "ready_to_import": false,
-          "collection_mode": "manual_collection_required",
-          "collection_priority": 1,
-          "metric_category": "Audience size snapshot",
-          "access_level": "public_profile",
-          "source_hint": "X Analytics or account profile metrics",
-          "collection_url": "https://x.com/lilyrooartist",
-          "collection_instruction": "Enter the current public follower count.",
-          "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
-          "public_capture_status": "X public profile did not expose a stable numeric follower value; use X API credentials or manual profile review.",
-          "adapter_blocker": "X public profile did not expose a stable numeric follower value; use X API credentials or manual profile review.",
-          "update_assignment": "x.followers=VALUE",
-          "import_effect": "update data/manual_social_stats.json x.followers from 'pending' to the filled new_value"
-        },
-        {
-          "csv_row": 9,
+          "csv_row": 7,
           "field": "impressions_7d",
           "current_value": "pending",
           "new_value": "",
@@ -9785,9 +9357,9 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
         }
       ],
       "live_import_available_count": 0,
-      "manual_collection_required_count": 2,
+      "manual_collection_required_count": 1,
       "ready_to_import_count": 0,
-      "platform_update_command": "python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impressions_7d=VALUE --refresh-admin",
+      "platform_update_command": "python3 scripts/update_manual_social_stats.py x.impressions_7d=VALUE --refresh-admin",
       "live_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-live --dry-run",
       "live_import_command": "python3 scripts/update_manual_social_stats.py --from-live --refresh-admin",
       "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
@@ -9822,31 +9394,6 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
     },
     {
       "platform": "instagram",
-      "field": "followers",
-      "current_value": "pending",
-      "new_value": "",
-      "live_value": "",
-      "collection_mode": "manual_collection_required",
-      "collection_priority": 1,
-      "metric_category": "Audience size snapshot",
-      "access_level": "public_profile",
-      "value_type": "nonnegative_integer",
-      "example_value": "123",
-      "collection_instruction": "Enter the current public follower count.",
-      "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
-      "source_hint": "Instagram Professional Dashboard > Insights",
-      "collection_url": "https://www.instagram.com/lilyroo.artist/",
-      "public_capture_status": "Instagram public profile did not expose a stable follower value without authenticated or cookie-backed access.",
-      "adapter_blocker": "Instagram public profile did not expose a stable follower value without authenticated or cookie-backed access.",
-      "reason": "Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page",
-      "update_assignment": "instagram.followers=VALUE",
-      "import_effect": "update data/manual_social_stats.json instagram.followers from 'pending' to the filled new_value",
-      "platform_update_command": "python3 scripts/update_manual_social_stats.py instagram.followers=VALUE instagram.profile_visits_7d=VALUE --refresh-admin",
-      "csv_row": 3,
-      "ready_to_import": false
-    },
-    {
-      "platform": "instagram",
       "field": "profile_visits_7d",
       "current_value": "pending",
       "new_value": "",
@@ -9866,8 +9413,8 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
       "reason": "Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page",
       "update_assignment": "instagram.profile_visits_7d=VALUE",
       "import_effect": "update data/manual_social_stats.json instagram.profile_visits_7d from 'pending' to the filled new_value",
-      "platform_update_command": "python3 scripts/update_manual_social_stats.py instagram.followers=VALUE instagram.profile_visits_7d=VALUE --refresh-admin",
-      "csv_row": 4,
+      "platform_update_command": "python3 scripts/update_manual_social_stats.py instagram.profile_visits_7d=VALUE --refresh-admin",
+      "csv_row": 3,
       "ready_to_import": false
     },
     {
@@ -9892,7 +9439,7 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
       "update_assignment": "spotify.release_streams=VALUE",
       "import_effect": "update data/manual_social_stats.json spotify.release_streams from 'pending' to the filled new_value",
       "platform_update_command": "python3 scripts/update_manual_social_stats.py spotify.release_streams=VALUE spotify.saves=VALUE --refresh-admin",
-      "csv_row": 5,
+      "csv_row": 4,
       "ready_to_import": false
     },
     {
@@ -9917,7 +9464,7 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
       "update_assignment": "spotify.saves=VALUE",
       "import_effect": "update data/manual_social_stats.json spotify.saves from 'pending' to the filled new_value",
       "platform_update_command": "python3 scripts/update_manual_social_stats.py spotify.release_streams=VALUE spotify.saves=VALUE --refresh-admin",
-      "csv_row": 6,
+      "csv_row": 5,
       "ready_to_import": false
     },
     {
@@ -9942,32 +9489,7 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
       "update_assignment": "tiktok.profile_views_7d=VALUE",
       "import_effect": "update data/manual_social_stats.json tiktok.profile_views_7d from 'pending' to the filled new_value",
       "platform_update_command": "python3 scripts/update_manual_social_stats.py tiktok.profile_views_7d=VALUE --refresh-admin",
-      "csv_row": 7,
-      "ready_to_import": false
-    },
-    {
-      "platform": "x",
-      "field": "followers",
-      "current_value": "pending",
-      "new_value": "",
-      "live_value": "",
-      "collection_mode": "manual_collection_required",
-      "collection_priority": 1,
-      "metric_category": "Audience size snapshot",
-      "access_level": "public_profile",
-      "value_type": "nonnegative_integer",
-      "example_value": "123",
-      "collection_instruction": "Enter the current public follower count.",
-      "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
-      "source_hint": "X Analytics or account profile metrics",
-      "collection_url": "https://x.com/lilyrooartist",
-      "public_capture_status": "X public profile did not expose a stable numeric follower value; use X API credentials or manual profile review.",
-      "adapter_blocker": "X public profile did not expose a stable numeric follower value; use X API credentials or manual profile review.",
-      "reason": "X metrics need X_USER_ACCESS_TOKEN with user lookup access.",
-      "update_assignment": "x.followers=VALUE",
-      "import_effect": "update data/manual_social_stats.json x.followers from 'pending' to the filled new_value",
-      "platform_update_command": "python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impressions_7d=VALUE --refresh-admin",
-      "csv_row": 8,
+      "csv_row": 6,
       "ready_to_import": false
     },
     {
@@ -9991,8 +9513,8 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
       "reason": "X metrics need X_USER_ACCESS_TOKEN with user lookup access.",
       "update_assignment": "x.impressions_7d=VALUE",
       "import_effect": "update data/manual_social_stats.json x.impressions_7d from 'pending' to the filled new_value",
-      "platform_update_command": "python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impressions_7d=VALUE --refresh-admin",
-      "csv_row": 9,
+      "platform_update_command": "python3 scripts/update_manual_social_stats.py x.impressions_7d=VALUE --refresh-admin",
+      "csv_row": 7,
       "ready_to_import": false
     }
   ]
@@ -10000,7 +9522,7 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
 
 
 <script type="application/json" id="embedded-scheduled-approval-packet">{
-  "generated_at": "2026-06-20T06:47:46.693286Z",
+  "generated_at": "2026-06-20T06:58:05.369539Z",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -10777,7 +10299,7 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
 
 <script type="text/plain" id="embedded-scheduled-approval-report"># Scheduled Approval Packet - Lily Roo
 
-Generated: 2026-06-20T06:47:46.693286Z
+Generated: 2026-06-20T06:58:05.369539Z
 
 ## Summary
 - Approval blockers: **3**
@@ -10895,26 +10417,26 @@ Stream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: htt
 
 
 <script type="application/json" id="embedded-promotion-blocker-ledger">{
-  "generated_at": "2026-06-20T06:47:46.939653Z",
+  "generated_at": "2026-06-20T06:58:05.613873Z",
   "safe_mode": true,
   "summary": {
-    "open_blocker_count": 10,
+    "open_blocker_count": 9,
     "urgent_count": 4,
     "owner_counts": {
       "external_platform": 1,
-      "tod": 9
+      "tod": 8
     },
     "category_counts": {
       "approval": 3,
       "backlog_reschedule": 1,
       "manual_distribution": 2,
-      "manual_metrics": 3,
+      "manual_metrics": 2,
       "platform_repair": 1
     },
     "status_counts": {
       "blocked": 2,
       "blocked_by_review_checks": 1,
-      "needs_values": 3,
+      "needs_values": 2,
       "ready_for_reviewed_approval": 2,
       "waiting_for_review": 2
     },
@@ -11015,18 +10537,17 @@ Stream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: htt
         "phase": "Fill manual metric worksheet",
         "status": "needs_values",
         "owner": "tod",
-        "blockers_resolved": 8,
+        "blockers_resolved": 6,
         "unlocks": [
           "Admin health and weekly reporting can use fresh cross-platform metrics.",
           "Manual metric blockers clear once worksheet values are imported."
         ],
         "blocked_by": [
-          "P1 Audience size snapshot:2",
           "P2 Recent discovery and traffic:4",
           "P3 Release depth metrics:2"
         ],
-        "batch_count": 3,
-        "field_count": 8,
+        "batch_count": 2,
+        "field_count": 6,
         "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
         "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
         "source_path": "data/manual_metric_collection_packet.json"
@@ -11207,43 +10728,6 @@ Stream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: htt
       "impact": {}
     },
     {
-      "id": "metrics-priority-1",
-      "blocker_id": "metrics-priority-1",
-      "title": "Fill priority 1 metrics: Audience size snapshot",
-      "category": "manual_metrics",
-      "owner": "tod",
-      "urgency": "low",
-      "status": "needs_values",
-      "platform": "",
-      "release": "",
-      "evidence": "2 pending field(s): instagram.followers, x.followers.",
-      "next_step": "Collect this priority batch, fill the CSV worksheet rows, preview import, then refresh admin.",
-      "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
-      "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
-      "source_path": "data/manual_metric_collection_packet.json",
-      "external_url": "",
-      "guardrail": "Do not guess analytics values; import only values copied from the platform source.",
-      "impact": {
-        "kind": "manual_metric_batch",
-        "priority": 1,
-        "label": "Audience size snapshot",
-        "field_count": 2,
-        "waiting_count": 2,
-        "ready_to_import_count": 0,
-        "platforms": [
-          "instagram",
-          "x"
-        ],
-        "access_levels": [
-          "public_profile"
-        ],
-        "csv_rows": [
-          3,
-          8
-        ]
-      }
-    },
-    {
       "id": "metrics-priority-2",
       "blocker_id": "metrics-priority-2",
       "title": "Fill priority 2 metrics: Recent discovery and traffic",
@@ -11278,9 +10762,9 @@ Stream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: htt
         ],
         "csv_rows": [
           2,
-          4,
-          7,
-          9
+          3,
+          6,
+          7
         ]
       }
     },
@@ -11315,8 +10799,8 @@ Stream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: htt
           "private_analytics"
         ],
         "csv_rows": [
-          5,
-          6
+          4,
+          5
         ]
       }
     }
@@ -11326,11 +10810,11 @@ Stream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: htt
 
 <script type="text/plain" id="embedded-promotion-blocker-ledger-report"># Promotion Blocker Ledger - Lily Roo
 
-Generated: 2026-06-20T06:47:46.939653Z
+Generated: 2026-06-20T06:58:05.613873Z
 
 ## Summary
-- Open blockers: **10**
-- User-owned: **9**
+- Open blockers: **9**
+- User-owned: **8**
 - External platform-owned: **1**
 - Codex-actionable: **0**
 - High or critical: **4**
@@ -11360,9 +10844,9 @@ Generated: 2026-06-20T06:47:46.939653Z
   - Blocked by: FP-AUTO-264
   - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24`
 - **Fill manual metric worksheet** (`needs_values`)
-  - Owner: `tod`; projected blockers resolved: **8**
+  - Owner: `tod`; projected blockers resolved: **6**
   - Unlocks: Admin health and weekly reporting can use fresh cross-platform metrics.; Manual metric blockers clear once worksheet values are imported.
-  - Blocked by: P1 Audience size snapshot:2, P2 Recent discovery and traffic:4, P3 Release depth metrics:2
+  - Blocked by: P2 Recent discovery and traffic:4, P3 Release depth metrics:2
   - Preview/check: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
   - Apply after review: `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
 
@@ -11425,14 +10909,6 @@ Generated: 2026-06-20T06:47:46.939653Z
   - Preview/check: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --dry-run`
   - Apply/log after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin`
   - Guardrail: Manual posting happens outside this repo; only log the URL after the post is live. URL logging command after posting: python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin
-- **[low] Fill priority 1 metrics: Audience size snapshot** (`metrics-priority-1`)
-  - Owner: `tod`; status: `needs_values`; category: `manual_metrics`
-  - Evidence: 2 pending field(s): instagram.followers, x.followers.
-  - Next step: Collect this priority batch, fill the CSV worksheet rows, preview import, then refresh admin.
-  - Preview/check: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
-  - Apply/log after review: `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
-  - Guardrail: Do not guess analytics values; import only values copied from the platform source.
-  - Impact: priority 1; fields: 2; access: public_profile; csv rows: 3, 8
 - **[low] Fill priority 2 metrics: Recent discovery and traffic** (`metrics-priority-2`)
   - Owner: `tod`; status: `needs_values`; category: `manual_metrics`
   - Evidence: 4 pending field(s): facebook.reach_7d, instagram.profile_visits_7d, tiktok.profile_views_7d, x.impressions_7d.
@@ -11440,7 +10916,7 @@ Generated: 2026-06-20T06:47:46.939653Z
   - Preview/check: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
   - Apply/log after review: `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
   - Guardrail: Do not guess analytics values; import only values copied from the platform source.
-  - Impact: priority 2; fields: 4; access: private_analytics; csv rows: 2, 4, 7, 9
+  - Impact: priority 2; fields: 4; access: private_analytics; csv rows: 2, 3, 6, 7
 - **[low] Fill priority 3 metrics: Release depth metrics** (`metrics-priority-3`)
   - Owner: `tod`; status: `needs_values`; category: `manual_metrics`
   - Evidence: 2 pending field(s): spotify.release_streams, spotify.saves.
@@ -11448,7 +10924,7 @@ Generated: 2026-06-20T06:47:46.939653Z
   - Preview/check: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
   - Apply/log after review: `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
   - Guardrail: Do not guess analytics values; import only values copied from the platform source.
-  - Impact: priority 3; fields: 2; access: private_analytics; csv rows: 5, 6
+  - Impact: priority 3; fields: 2; access: private_analytics; csv rows: 4, 5
 
 ## Guardrails
 - This ledger does not approve posts, post externally, push secrets, or invent metric values.
@@ -11456,7 +10932,7 @@ Generated: 2026-06-20T06:47:46.939653Z
 
 
 <script type="application/json" id="embedded-human-handoff-packet">{
-  "generated_at": "2026-06-20T06:47:46.969598Z",
+  "generated_at": "2026-06-20T06:58:05.641986Z",
   "safe_mode": true,
   "source": {
     "promotion_blocker_ledger": "data/promotion_blocker_ledger.json",
@@ -11469,41 +10945,41 @@ Generated: 2026-06-20T06:47:46.939653Z
     "backlog_reschedule": "data/backlog_reschedule_preview.json"
   },
   "summary": {
-    "task_count": 8,
+    "task_count": 7,
     "owner_counts": {
       "external_platform": 1,
-      "tod": 7
+      "tod": 6
     },
     "urgency_counts": {
       "high": 3,
-      "low": 3,
+      "low": 2,
       "medium": 2
     },
     "phase_counts": {
       "Approval": 1,
       "Backlog recovery": 1,
       "Manual distribution": 2,
-      "Manual metrics": 3,
+      "Manual metrics": 2,
       "Platform setup": 1
     },
     "blocker_summary": {
-      "open_blocker_count": 10,
+      "open_blocker_count": 9,
       "urgent_count": 4,
       "owner_counts": {
         "external_platform": 1,
-        "tod": 9
+        "tod": 8
       },
       "category_counts": {
         "approval": 3,
         "backlog_reschedule": 1,
         "manual_distribution": 2,
-        "manual_metrics": 3,
+        "manual_metrics": 2,
         "platform_repair": 1
       },
       "status_counts": {
         "blocked": 2,
         "blocked_by_review_checks": 1,
-        "needs_values": 3,
+        "needs_values": 2,
         "ready_for_reviewed_approval": 2,
         "waiting_for_review": 2
       },
@@ -11604,18 +11080,17 @@ Generated: 2026-06-20T06:47:46.939653Z
           "phase": "Fill manual metric worksheet",
           "status": "needs_values",
           "owner": "tod",
-          "blockers_resolved": 8,
+          "blockers_resolved": 6,
           "unlocks": [
             "Admin health and weekly reporting can use fresh cross-platform metrics.",
             "Manual metric blockers clear once worksheet values are imported."
           ],
           "blocked_by": [
-            "P1 Audience size snapshot:2",
             "P2 Recent discovery and traffic:4",
             "P3 Release depth metrics:2"
           ],
-          "batch_count": 3,
-          "field_count": 8,
+          "batch_count": 2,
+          "field_count": 6,
           "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
           "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
           "source_path": "data/manual_metric_collection_packet.json"
@@ -11634,11 +11109,11 @@ Generated: 2026-06-20T06:47:46.939653Z
   "action_docket": {
     "source": "data/human_handoff_packet.json",
     "roadmap_step_count": 5,
-    "task_count": 8,
+    "task_count": 7,
     "ready_step_count": 3,
     "blocked_step_count": 2,
     "manual_post_count": 2,
-    "manual_metric_field_count": 8,
+    "manual_metric_field_count": 6,
     "first_ready_step": {
       "id": "review-checked-approval-batch",
       "label": "Review checked approval batch",
@@ -12235,26 +11710,13 @@ Generated: 2026-06-20T06:47:46.939653Z
         "state": "needs_values",
         "owner": "tod",
         "task_ids": [
-          "manual-metrics-priority-1",
           "manual-metrics-priority-2",
           "manual-metrics-priority-3"
         ],
-        "blockers_resolved": 8,
-        "field_count": 8,
-        "batch_count": 3,
+        "blockers_resolved": 6,
+        "field_count": 6,
+        "batch_count": 2,
         "batches": [
-          {
-            "priority": 1,
-            "label": "Audience size snapshot",
-            "field_count": 2,
-            "access_levels": [
-              "public_profile"
-            ],
-            "csv_rows": [
-              3,
-              8
-            ]
-          },
           {
             "priority": 2,
             "label": "Recent discovery and traffic",
@@ -12264,9 +11726,9 @@ Generated: 2026-06-20T06:47:46.939653Z
             ],
             "csv_rows": [
               2,
-              4,
-              7,
-              9
+              3,
+              6,
+              7
             ]
           },
           {
@@ -12277,8 +11739,8 @@ Generated: 2026-06-20T06:47:46.939653Z
               "private_analytics"
             ],
             "csv_rows": [
-              5,
-              6
+              4,
+              5
             ]
           }
         ],
@@ -12674,46 +12136,6 @@ Generated: 2026-06-20T06:47:46.939653Z
       "guardrail": "Do not log a manual post until a real public URL exists."
     },
     {
-      "id": "manual-metrics-priority-1",
-      "title": "Fill priority 1 metrics: Audience size snapshot",
-      "phase": "Manual metrics",
-      "owner": "tod",
-      "urgency": "low",
-      "status": "needs_values",
-      "detail": "Collect 2 field(s) across instagram, x, fill the worksheet rows, preview import, then refresh Admin.",
-      "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
-      "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
-      "source_path": "data/manual_metric_collection_packet.json",
-      "impact": {
-        "priority": 1,
-        "label": "Audience size snapshot",
-        "field_count": 2,
-        "waiting_count": 2,
-        "ready_to_import_count": 0,
-        "platforms": [
-          "instagram",
-          "x"
-        ],
-        "access_levels": [
-          "public_profile"
-        ],
-        "csv_rows": [
-          3,
-          8
-        ],
-        "pending_assignments": [
-          "instagram.followers",
-          "x.followers"
-        ],
-        "evidence_hints": [
-          "Capture the public follower count from the profile page or account dashboard.",
-          "Capture the public follower count from the profile page or account dashboard."
-        ]
-      },
-      "links": [],
-      "guardrail": "Only import nonnegative numeric values copied from the named source; leave unknown values blank instead of guessing."
-    },
-    {
       "id": "manual-metrics-priority-2",
       "title": "Fill priority 2 metrics: Recent discovery and traffic",
       "phase": "Manual metrics",
@@ -12741,9 +12163,9 @@ Generated: 2026-06-20T06:47:46.939653Z
         ],
         "csv_rows": [
           2,
-          4,
-          7,
-          9
+          3,
+          6,
+          7
         ],
         "pending_assignments": [
           "facebook.reach_7d",
@@ -12785,8 +12207,8 @@ Generated: 2026-06-20T06:47:46.939653Z
           "private_analytics"
         ],
         "csv_rows": [
-          5,
-          6
+          4,
+          5
         ],
         "pending_assignments": [
           "spotify.release_streams",
@@ -12806,20 +12228,20 @@ Generated: 2026-06-20T06:47:46.939653Z
 
 <script type="text/plain" id="embedded-human-handoff-report"># Human Handoff Packet - Lily Roo
 
-Generated: 2026-06-20T06:47:46.969598Z
+Generated: 2026-06-20T06:58:05.641986Z
 
 ## Summary
-- Open handoff tasks: **8**
-- Tod-owned tasks: **7**
+- Open handoff tasks: **7**
+- Tod-owned tasks: **6**
 - External/platform-gated tasks: **1**
 - High urgency tasks: **3**
-- Low urgency tasks: **3**
+- Low urgency tasks: **2**
 
 ## Action Docket
 - Ready steps: **3**
 - Blocked steps: **2**
 - Manual posts packaged: **2**
-- Manual metric fields: **8**
+- Manual metric fields: **6**
 
 - **Review checked approval batch** (`ready_for_review`)
   - Owner: `tod`; tasks: **1**; blockers resolved: **2**
@@ -12853,12 +12275,11 @@ Generated: 2026-06-20T06:47:46.969598Z
   - Next after apply: Recapture admin state and only then revisit TikTok approval or backlog reschedule rows.
   - Guardrail: Run preflight and confirm local OAuth/public-posting setup before pushing secrets.
 - **Fill and import manual metric worksheet** (`needs_values`)
-  - Owner: `tod`; tasks: **3**; blockers resolved: **8**
-  - Fields: **8**
-  - Batches: **3**
-  - Priority 1: Audience size snapshot - **2** field(s) (access: public_profile; rows: 3, 8)
-  - Priority 2: Recent discovery and traffic - **4** field(s) (access: private_analytics; rows: 2, 4, 7, 9)
-  - Priority 3: Release depth metrics - **2** field(s) (access: private_analytics; rows: 5, 6)
+  - Owner: `tod`; tasks: **2**; blockers resolved: **6**
+  - Fields: **6**
+  - Batches: **2**
+  - Priority 2: Recent discovery and traffic - **4** field(s) (access: private_analytics; rows: 2, 3, 6, 7)
+  - Priority 3: Release depth metrics - **2** field(s) (access: private_analytics; rows: 4, 5)
   - Preview/check: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
   - Apply after review: `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
   - Sequence preview: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
@@ -12907,12 +12328,6 @@ Generated: 2026-06-20T06:47:46.969598Z
   - Apply after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin`
   - asset: https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg
   - Guardrail: Do not log a manual post until a real public URL exists.
-- **Fill priority 1 metrics: Audience size snapshot** (`manual-metrics-priority-1`)
-  - Phase: `Manual metrics`; owner: `tod`; status: `needs_values`; urgency: `low`
-  - Detail: Collect 2 field(s) across instagram, x, fill the worksheet rows, preview import, then refresh Admin.
-  - Preview/check: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
-  - Apply after review: `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
-  - Guardrail: Only import nonnegative numeric values copied from the named source; leave unknown values blank instead of guessing.
 - **Fill priority 2 metrics: Recent discovery and traffic** (`manual-metrics-priority-2`)
   - Phase: `Manual metrics`; owner: `tod`; status: `needs_values`; urgency: `low`
   - Detail: Collect 4 field(s) across facebook, instagram, tiktok, x, fill the worksheet rows, preview import, then refresh Admin.
@@ -12933,7 +12348,7 @@ Generated: 2026-06-20T06:47:46.969598Z
 
 
 <script type="application/json" id="embedded-promo-consistency-audit">{
-  "generated_at": "2026-06-20T06:47:47.108640Z",
+  "generated_at": "2026-06-20T06:58:05.778886Z",
   "safe_mode": true,
   "summary": {
     "check_count": 19,
@@ -12949,24 +12364,24 @@ Generated: 2026-06-20T06:47:46.969598Z
       "status": "pass",
       "severity": "ok",
       "detail": "Blocker ledger summary should match row count.",
-      "expected": 10,
-      "actual": 10
+      "expected": 9,
+      "actual": 9
     },
     {
       "name": "ledger_category_total_matches_rows",
       "status": "pass",
       "severity": "ok",
       "detail": "Blocker category counts should account for every blocker row.",
-      "expected": 10,
-      "actual": 10
+      "expected": 9,
+      "actual": 9
     },
     {
       "name": "status_open_actions_match_operations",
       "status": "pass",
       "severity": "ok",
       "detail": "Promo status open action count should mirror the operations packet.",
-      "expected": 16,
-      "actual": 16
+      "expected": 15,
+      "actual": 15
     },
     {
       "name": "approval_counts_match",
@@ -13069,16 +12484,16 @@ Generated: 2026-06-20T06:47:46.969598Z
       "status": "pass",
       "severity": "ok",
       "detail": "Manual metric priority batch count should match manual metric blockers.",
-      "expected": 3,
-      "actual": 3
+      "expected": 2,
+      "actual": 2
     },
     {
       "name": "manual_metric_handoff_batch_count_matches_packet",
       "status": "pass",
       "severity": "ok",
       "detail": "Human handoff should include every manual metric priority batch.",
-      "expected": 3,
-      "actual": 3
+      "expected": 2,
+      "actual": 2
     },
     {
       "name": "store_checks_match_checked_pending_services",
@@ -13093,8 +12508,8 @@ Generated: 2026-06-20T06:47:46.969598Z
       "status": "pass",
       "severity": "ok",
       "detail": "Human handoff blocker summary should be copied from the blocker ledger.",
-      "expected": 10,
-      "actual": 10
+      "expected": 9,
+      "actual": 9
     },
     {
       "name": "handoff_projection_matches_ledger_projection",
@@ -13178,7 +12593,7 @@ Generated: 2026-06-20T06:47:46.969598Z
 
 <script type="text/plain" id="embedded-promo-consistency-audit-report"># Promo Consistency Audit - Lily Roo
 
-Generated: 2026-06-20T06:47:47.108640Z
+Generated: 2026-06-20T06:58:05.778886Z
 
 ## Summary
 - Status: **pass**
@@ -13233,7 +12648,7 @@ Generated: 2026-06-20T06:47:47.108640Z
 
 
 <script type="application/json" id="embedded-tiktok-setup-preflight">{
-  "generated_at": "2026-06-20T06:47:46.829375Z",
+  "generated_at": "2026-06-20T06:58:05.502816Z",
   "safe_mode": true,
   "source": {
     "local_secret_source": "secrets/social_api.env",
@@ -13308,7 +12723,7 @@ Generated: 2026-06-20T06:47:47.108640Z
 
 <script type="text/plain" id="embedded-tiktok-setup-preflight-report"># TikTok Setup Preflight - Lily Roo
 
-Generated: 2026-06-20T06:47:46.829375Z
+Generated: 2026-06-20T06:58:05.502816Z
 
 ## Summary
 - Status: **blocked**
@@ -13349,7 +12764,7 @@ Generated: 2026-06-20T06:47:46.829375Z
 
 
 <script type="application/json" id="embedded-tiktok-repair-runbook">{
-  "generated_at": "2026-06-20T06:47:46.882776Z",
+  "generated_at": "2026-06-20T06:58:05.556412Z",
   "safe_mode": true,
   "status": "blocked",
   "source": {
@@ -13484,7 +12899,7 @@ Generated: 2026-06-20T06:47:46.829375Z
 
 <script type="text/plain" id="embedded-tiktok-repair-runbook-report"># TikTok Repair Runbook - Lily Roo
 
-Generated: 2026-06-20T06:47:46.882776Z
+Generated: 2026-06-20T06:58:05.556412Z
 
 ## Summary
 - Status: **blocked**
@@ -13525,7 +12940,7 @@ Generated: 2026-06-20T06:47:46.882776Z
 
 
 <script type="application/json" id="embedded-published-log-reconciliation">{
-  "generated_at": "2026-06-20T06:47:46.998709Z",
+  "generated_at": "2026-06-20T06:58:05.669301Z",
   "safe_mode": true,
   "source": {
     "published_log": "admin/content/Published_Log.csv",
@@ -13627,7 +13042,7 @@ Generated: 2026-06-20T06:47:46.882776Z
 
 <script type="text/plain" id="embedded-published-log-reconciliation-report"># Published Log Reconciliation - Lily Roo
 
-Generated: 2026-06-20T06:47:46.998709Z
+Generated: 2026-06-20T06:58:05.669301Z
 
 ## Summary
 - Published log status: **gated_manual_pending**

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T06:47:46.637003Z",
+  "generated_at": "2026-06-20T06:58:05.313908Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -312,18 +312,18 @@
     ]
   },
   "summary": {
-    "action_count": 16,
+    "action_count": 15,
     "user_review": 3,
     "platform_fixes": 1,
     "scheduled_approval_batches": 1,
     "store_checks": 7,
-    "manual_metric_updates": 3,
+    "manual_metric_updates": 2,
     "backlog_reschedules": 1,
     "safe_apply_commands": 0,
     "blocked_review_items": 1,
     "manual_only_review_items": 2,
     "phases": {
-      "Fill manual metrics": 3,
+      "Fill manual metrics": 2,
       "Repair executor": 1,
       "Reschedule approved backlog": 1,
       "Review blocked drafts": 1,
@@ -334,7 +334,7 @@
     "urgencies": {
       "blocked": 1,
       "high": 3,
-      "low": 3,
+      "low": 2,
       "medium": 9
     },
     "next_action": {
@@ -1158,11 +1158,11 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "Spotify",
-        "checked_at": "2026-06-20T06:47:36.655578Z",
+        "checked_at": "2026-06-20T06:53:48.209108Z",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T06:47:36.655578Z",
+          "updated_at": "2026-06-20T06:53:48.209108Z",
           "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
         },
         "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -1185,11 +1185,11 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "Apple Music",
-        "checked_at": "2026-06-20T06:47:38.472017Z",
+        "checked_at": "2026-06-20T06:57:11.787860Z",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T06:47:38.472017Z",
+          "updated_at": "2026-06-20T06:57:11.787860Z",
           "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
         },
         "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -1212,11 +1212,11 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "HyperFollow",
-        "checked_at": "2026-06-20T06:47:38.832568Z",
+        "checked_at": "2026-06-20T06:57:12.145032Z",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T06:47:38.832568Z",
+          "updated_at": "2026-06-20T06:57:12.145032Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
         },
         "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -1239,11 +1239,11 @@
       "context": {
         "release": "Analog Myth",
         "service": "Spotify",
-        "checked_at": "2026-06-20T06:47:38.908718Z",
+        "checked_at": "2026-06-20T06:52:46.758961Z",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/spotify_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T06:47:38.908718Z",
+          "updated_at": "2026-06-20T06:52:46.758961Z",
           "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
         },
         "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -1266,11 +1266,11 @@
       "context": {
         "release": "Analog Myth",
         "service": "Apple Music",
-        "checked_at": "2026-06-20T06:47:40.712206Z",
+        "checked_at": "2026-06-20T06:57:37.308097Z",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T06:47:40.712206Z",
+          "updated_at": "2026-06-20T06:57:37.308097Z",
           "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
         },
         "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -1293,11 +1293,11 @@
       "context": {
         "release": "Analog Myth",
         "service": "YouTube Music",
-        "checked_at": "2026-06-20T06:47:40.770410Z",
+        "checked_at": "2026-06-20T06:52:48.562909Z",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T06:47:40.770410Z",
+          "updated_at": "2026-06-20T06:52:48.562909Z",
           "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release."
         },
         "note": "Searches public web results for YouTube Music watch URLs, then validates the public title. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -1320,11 +1320,11 @@
       "context": {
         "release": "Analog Myth",
         "service": "HyperFollow",
-        "checked_at": "2026-06-20T06:47:43.782911Z",
+        "checked_at": "2026-06-20T06:58:02.780829Z",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-20T06:47:43.782911Z",
+          "updated_at": "2026-06-20T06:58:02.780829Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
         },
         "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; keep this pending until DistroKid exposes the release."
@@ -1337,52 +1337,6 @@
         2,
         20,
         12
-      ]
-    },
-    {
-      "label": "Fill priority 1 metrics: Audience size snapshot",
-      "kind": "manual_metrics",
-      "priority": 31,
-      "command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
-      "context": {
-        "priority": 1,
-        "label": "Audience size snapshot",
-        "status": "needs_values",
-        "field_count": 2,
-        "waiting_count": 2,
-        "ready_to_import_count": 0,
-        "platforms": [
-          "instagram",
-          "x"
-        ],
-        "access_levels": [
-          "public_profile"
-        ],
-        "csv_rows": [
-          3,
-          8
-        ],
-        "fields": [
-          "instagram.followers",
-          "x.followers"
-        ],
-        "evidence_hints": [
-          "Capture the public follower count from the profile page or account dashboard.",
-          "Capture the public follower count from the profile page or account dashboard."
-        ],
-        "csv_path": "data/manual_metric_collection_template.csv",
-        "report_path": "admin/reports/manual-metric-collection.md",
-        "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
-        "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin"
-      },
-      "phase": "Fill manual metrics",
-      "urgency": "low",
-      "urgency_reason": "Manual metric gaps affect reporting, not publishing.",
-      "status": "waiting_for_user",
-      "sort_key": [
-        3,
-        31,
-        13
       ]
     },
     {
@@ -1408,9 +1362,9 @@
         ],
         "csv_rows": [
           2,
-          4,
-          7,
-          9
+          3,
+          6,
+          7
         ],
         "fields": [
           "facebook.reach_7d",
@@ -1436,7 +1390,7 @@
       "sort_key": [
         3,
         32,
-        14
+        13
       ]
     },
     {
@@ -1458,8 +1412,8 @@
           "private_analytics"
         ],
         "csv_rows": [
-          5,
-          6
+          4,
+          5
         ],
         "fields": [
           "spotify.release_streams",
@@ -1481,7 +1435,7 @@
       "sort_key": [
         3,
         33,
-        15
+        14
       ]
     }
   ]

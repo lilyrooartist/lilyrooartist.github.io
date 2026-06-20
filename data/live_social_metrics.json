@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "updated_at": "2026-06-20T06:47:36.517Z",
+  "updated_at": "2026-06-20T06:56:46.518Z",
   "platforms": {
     "youtube": {
       "ok": false,
@@ -50,18 +50,17 @@
       "public_capture_status": "ok"
     },
     "instagram": {
-      "ok": false,
+      "ok": true,
       "reason": "Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page",
-      "metrics": {},
+      "metrics": {
+        "followers": 0
+      },
       "status": null,
       "source": "instagram-public-profile-page",
       "profile_url": "https://www.instagram.com/lilyroo.artist/",
       "http_status": 200,
-      "html_bytes": 739574,
-      "pending_fields": [
-        "followers"
-      ],
-      "public_capture_status": "Instagram public profile did not expose a stable follower value without authenticated or cookie-backed access."
+      "description": "0 Followers, 0 Following, 7 Posts - See Instagram photos and videos from Lily Roo (@lilyroo.artist)",
+      "public_capture_status": "ok"
     },
     "facebook": {
       "ok": true,
@@ -76,9 +75,11 @@
       "insights_status": "(#100) The value must be a valid insights metric"
     },
     "x": {
-      "ok": false,
+      "ok": true,
       "reason": "X metrics need X_USER_ACCESS_TOKEN with user lookup access.",
-      "metrics": {},
+      "metrics": {
+        "followers": 0
+      },
       "missing_secrets": [
         "X_USER_ACCESS_TOKEN"
       ],
@@ -86,10 +87,7 @@
       "profile_url": "https://x.com/lilyrooartist",
       "http_status": 200,
       "html_bytes": 64134,
-      "pending_fields": [
-        "followers"
-      ],
-      "public_capture_status": "X public profile did not expose a stable numeric follower value; use X API credentials or manual profile review."
+      "public_capture_status": "ok"
     }
   },
   "capture_status": 200,
@@ -120,28 +118,26 @@
         "public_capture_status": "ok"
       },
       "instagram": {
-        "ok": false,
+        "ok": true,
         "source": "instagram-public-profile-page",
-        "metrics": {},
+        "metrics": {
+          "followers": 0
+        },
         "profile_url": "https://www.instagram.com/lilyroo.artist/",
         "http_status": 200,
-        "html_bytes": 739574,
-        "pending_fields": [
-          "followers"
-        ],
-        "public_capture_status": "Instagram public profile did not expose a stable follower value without authenticated or cookie-backed access."
+        "description": "0 Followers, 0 Following, 7 Posts - See Instagram photos and videos from Lily Roo (@lilyroo.artist)",
+        "public_capture_status": "ok"
       },
       "x": {
-        "ok": false,
+        "ok": true,
         "source": "x-public-profile-page",
-        "metrics": {},
+        "metrics": {
+          "followers": 0
+        },
         "profile_url": "https://x.com/lilyrooartist",
         "http_status": 200,
         "html_bytes": 64134,
-        "pending_fields": [
-          "followers"
-        ],
-        "public_capture_status": "X public profile did not expose a stable numeric follower value; use X API credentials or manual profile review."
+        "public_capture_status": "ok"
       }
     }
   }

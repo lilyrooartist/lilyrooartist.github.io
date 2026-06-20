@@ -301,17 +301,19 @@ def validate_generated_outputs(failures):
             fail("live_social_metrics.json missing public Spotify/TikTok profile metric capture", failures)
         instagram_capture = public_capture_platforms.get("instagram") or {}
         x_capture = public_capture_platforms.get("x") or {}
+        instagram_metrics = (((platforms.get("instagram") or {}).get("metrics")) or {})
+        x_metrics = (((platforms.get("x") or {}).get("metrics")) or {})
         if (
             instagram_capture.get("profile_url") == "https://www.instagram.com/lilyroo.artist/"
-            and instagram_capture.get("pending_fields") == ["followers"]
-            and instagram_capture.get("public_capture_status")
+            and instagram_capture.get("public_capture_status") == "ok"
+            and instagram_metrics.get("followers") is not None
             and x_capture.get("profile_url") == "https://x.com/lilyrooartist"
-            and x_capture.get("pending_fields") == ["followers"]
-            and x_capture.get("public_capture_status")
+            and x_capture.get("public_capture_status") == "ok"
+            and x_metrics.get("followers") is not None
         ):
-            ok("live social metrics records unresolved Instagram and X public follower adapter blockers")
+            ok("live social metrics captures public Instagram and X follower metrics")
         else:
-            fail("live_social_metrics.json missing Instagram/X public follower adapter blocker evidence", failures)
+            fail("live_social_metrics.json missing Instagram/X public follower metric capture", failures)
     else:
         fail("live_social_metrics.json missing; run scripts/capture_live_metrics.py", failures)
     if METRICS_HISTORY.exists():
@@ -327,6 +329,16 @@ def validate_generated_outputs(failures):
             ok("metrics history preserves public Spotify profile metrics")
         else:
             fail("metrics_history.json missing public Spotify profile metrics", failures)
+        if (
+            (latest.get("instagram") or {}).get("followers") is not None
+            and (latest.get("tiktok") or {}).get("followers") is not None
+            and (latest.get("x") or {}).get("followers") is not None
+            and "instagram.followers" in (latest.get("delta_from_previous") or {})
+            and "x.followers" in (latest.get("delta_from_previous") or {})
+        ):
+            ok("metrics history preserves public Instagram, TikTok, and X follower metrics")
+        else:
+            fail("metrics_history.json missing public Instagram/TikTok/X follower metrics", failures)
     else:
         fail("metrics_history.json missing; run scripts/update_metrics_history.py", failures)
     if EXECUTOR_READINESS.exists():
@@ -1311,12 +1323,15 @@ def validate_generated_outputs(failures):
         instagram_backlog = public_backlog_lookup.get(("instagram", "followers")) or {}
         x_backlog = public_backlog_lookup.get(("x", "followers")) or {}
         if (
-            instagram_backlog.get("collection_url") == "https://www.instagram.com/lilyroo.artist/"
-            and instagram_backlog.get("adapter_blocker")
-            and x_backlog.get("collection_url") == "https://x.com/lilyrooartist"
-            and x_backlog.get("adapter_blocker")
+            public_backlog.get("field_count") == 0
+            or (
+                instagram_backlog.get("collection_url") == "https://www.instagram.com/lilyroo.artist/"
+                and instagram_backlog.get("adapter_blocker")
+                and x_backlog.get("collection_url") == "https://x.com/lilyrooartist"
+                and x_backlog.get("adapter_blocker")
+            )
         ):
-            ok("manual metric public backlog points to real profile URLs with adapter blockers")
+            ok("manual metric public backlog clears when public followers are live-covered")
         else:
             fail("manual_metric_collection_packet.json missing real public profile URLs or adapter blockers", failures)
     else:
@@ -2127,7 +2142,7 @@ def validate_generated_outputs(failures):
         fail("search_youtube_music_release.py missing", failures)
     if METRICS_HISTORY_UPDATER.exists():
         history_text = METRICS_HISTORY_UPDATER.read_text(encoding="utf-8")
-        if "metrics_history.json" in history_text and "--refresh-admin" in history_text:
+        if "metrics_history.json" in history_text and "--refresh-admin" in history_text and "instagram.followers" in history_text and "x.followers" in history_text:
             ok("metrics history updater can refresh admin")
         else:
             fail("update_metrics_history.py missing history or refresh support", failures)

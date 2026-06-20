@@ -117,6 +117,27 @@ def parse_int(value: str):
         return None
 
 
+def parse_compact_int(value: str):
+    raw = str(value or "").strip().replace(",", "")
+    match = re.fullmatch(r"([0-9]+(?:\.[0-9]+)?)\s*([KMB])?", raw, re.I)
+    if not match:
+        return parse_int(raw)
+    number = float(match.group(1))
+    suffix = (match.group(2) or "").upper()
+    multiplier = {"K": 1_000, "M": 1_000_000, "B": 1_000_000_000}.get(suffix, 1)
+    return int(number * multiplier)
+
+
+def meta_content(html: str, key: str) -> str:
+    pattern = rf'<meta\s+[^>]*(?:property|name)=["\']{re.escape(key)}["\'][^>]*content=["\']([^"\']*)["\'][^>]*>'
+    match = re.search(pattern, html, re.I)
+    if match:
+        return unescape(match.group(1))
+    pattern = rf'<meta\s+[^>]*content=["\']([^"\']*)["\'][^>]*(?:property|name)=["\']{re.escape(key)}["\'][^>]*>'
+    match = re.search(pattern, html, re.I)
+    return unescape(match.group(1)) if match else ""
+
+
 def spotify_public_metrics() -> dict:
     status, html, error = fetch_text(SPOTIFY_ARTIST_URL)
     metrics = {}
@@ -201,23 +222,46 @@ def unresolved_public_profile_metrics(platform: str, url: str, source: str, fiel
 
 
 def instagram_public_metrics() -> dict:
-    return unresolved_public_profile_metrics(
-        "instagram",
-        INSTAGRAM_PROFILE_URL,
-        "instagram-public-profile-page",
-        "followers",
-        "Instagram public profile did not expose a stable follower value without authenticated or cookie-backed access.",
-    )
+    status, html, error = fetch_text(INSTAGRAM_PROFILE_URL)
+    description = meta_content(html, "og:description") or meta_content(html, "description")
+    follower_match = re.search(r"([0-9][0-9,.]*\s*[KMB]?)\s+Followers\b", description, re.I)
+    followers = parse_compact_int(follower_match.group(1)) if follower_match else None
+    metrics = {}
+    if followers is not None:
+        metrics["followers"] = followers
+    return {
+        "ok": bool(metrics),
+        "source": "instagram-public-profile-page",
+        "metrics": metrics,
+        "profile_url": INSTAGRAM_PROFILE_URL,
+        "http_status": status,
+        "description": description,
+        "public_capture_status": "ok" if metrics else (error or "Instagram public profile did not expose a stable follower value without authenticated or cookie-backed access."),
+    }
 
 
 def x_public_metrics() -> dict:
-    return unresolved_public_profile_metrics(
-        "x",
-        X_PROFILE_URL,
-        "x-public-profile-page",
-        "followers",
-        "X public profile did not expose a stable numeric follower value; use X API credentials or manual profile review.",
+    status, html, error = fetch_text(X_PROFILE_URL)
+    follower_match = re.search(
+        r'<a[^>]+href="/lilyrooartist/(?:verified_)?followers"[^>]*>.*?'
+        r'<div[^>]*>\s*([0-9][0-9,.]*\s*[KMB]?)\s*</div>.*?'
+        r'<div[^>]*>\s*Followers\s*</div>',
+        html,
+        re.I | re.S,
     )
+    followers = parse_compact_int(follower_match.group(1)) if follower_match else None
+    metrics = {}
+    if followers is not None:
+        metrics["followers"] = followers
+    return {
+        "ok": bool(metrics),
+        "source": "x-public-profile-page",
+        "metrics": metrics,
+        "profile_url": X_PROFILE_URL,
+        "http_status": status,
+        "html_bytes": len(html or ""),
+        "public_capture_status": "ok" if metrics else (error or "X public profile did not expose a stable numeric follower value; use X API credentials or manual profile review."),
+    }
 
 
 def merge_public_metrics(payload: dict) -> dict:

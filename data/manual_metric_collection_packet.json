@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T06:47:46.910525Z",
+  "generated_at": "2026-06-20T06:58:05.584329Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -9,16 +9,16 @@
     "report": "admin/reports/manual-metric-collection.md"
   },
   "summary": {
-    "pending_field_count": 8,
+    "pending_field_count": 6,
     "live_import_available_count": 0,
-    "manual_collection_required_count": 8,
-    "public_profile_manual_required_count": 2,
+    "manual_collection_required_count": 6,
+    "public_profile_manual_required_count": 0,
     "private_analytics_manual_required_count": 6,
     "ready_to_import_count": 0,
     "preserved_new_value_count": 0,
     "platform_count": 5,
-    "priority_batch_count": 3,
-    "public_profile_field_count": 2,
+    "priority_batch_count": 2,
+    "public_profile_field_count": 0,
     "private_analytics_field_count": 6,
     "csv_path": "data/manual_metric_collection_template.csv",
     "report_path": "admin/reports/manual-metric-collection.md",
@@ -31,7 +31,7 @@
     "status": "needs_values",
     "platform_count": 5,
     "ready_to_import_count": 0,
-    "waiting_field_count": 8,
+    "waiting_field_count": 6,
     "platform_groups": [
       {
         "platform": "facebook",
@@ -98,37 +98,16 @@
       {
         "platform": "instagram",
         "status": "needs_values",
-        "field_count": 2,
-        "waiting_count": 2,
+        "field_count": 1,
+        "waiting_count": 1,
         "ready_to_import_count": 0,
         "source_hint": "Instagram Professional Dashboard > Insights",
         "collection_url": "https://www.instagram.com/lilyroo.artist/",
         "reason": "Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page",
         "priority_summary": [
-          "Audience size snapshot",
           "Recent discovery and traffic"
         ],
         "fields": [
-          {
-            "field": "followers",
-            "current_value": "pending",
-            "new_value": "",
-            "live_value": "",
-            "collection_mode": "manual_collection_required",
-            "collection_priority": 1,
-            "metric_category": "Audience size snapshot",
-            "access_level": "public_profile",
-            "value_type": "nonnegative_integer",
-            "example_value": "123",
-            "collection_instruction": "Enter the current public follower count.",
-            "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
-            "public_capture_status": "Instagram public profile did not expose a stable follower value without authenticated or cookie-backed access.",
-            "adapter_blocker": "Instagram public profile did not expose a stable follower value without authenticated or cookie-backed access.",
-            "update_assignment": "instagram.followers=VALUE",
-            "import_effect": "update data/manual_social_stats.json instagram.followers from 'pending' to the filled new_value",
-            "csv_row": 3,
-            "ready_to_import": false
-          },
           {
             "field": "profile_visits_7d",
             "current_value": "pending",
@@ -146,32 +125,13 @@
             "adapter_blocker": "",
             "update_assignment": "instagram.profile_visits_7d=VALUE",
             "import_effect": "update data/manual_social_stats.json instagram.profile_visits_7d from 'pending' to the filled new_value",
-            "csv_row": 4,
+            "csv_row": 3,
             "ready_to_import": false
           }
         ],
         "collection_packets": [
           {
             "csv_row": 3,
-            "field": "followers",
-            "current_value": "pending",
-            "new_value": "",
-            "ready_to_import": false,
-            "collection_mode": "manual_collection_required",
-            "collection_priority": 1,
-            "metric_category": "Audience size snapshot",
-            "access_level": "public_profile",
-            "source_hint": "Instagram Professional Dashboard > Insights",
-            "collection_url": "https://www.instagram.com/lilyroo.artist/",
-            "collection_instruction": "Enter the current public follower count.",
-            "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
-            "public_capture_status": "Instagram public profile did not expose a stable follower value without authenticated or cookie-backed access.",
-            "adapter_blocker": "Instagram public profile did not expose a stable follower value without authenticated or cookie-backed access.",
-            "update_assignment": "instagram.followers=VALUE",
-            "import_effect": "update data/manual_social_stats.json instagram.followers from 'pending' to the filled new_value"
-          },
-          {
-            "csv_row": 4,
             "field": "profile_visits_7d",
             "current_value": "pending",
             "new_value": "",
@@ -191,10 +151,9 @@
           }
         ],
         "pending_assignments": [
-          "instagram.followers=VALUE",
           "instagram.profile_visits_7d=VALUE"
         ],
-        "platform_update_command": "python3 scripts/update_manual_social_stats.py instagram.followers=VALUE instagram.profile_visits_7d=VALUE --refresh-admin",
+        "platform_update_command": "python3 scripts/update_manual_social_stats.py instagram.profile_visits_7d=VALUE --refresh-admin",
         "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
         "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin"
       },
@@ -228,7 +187,7 @@
             "adapter_blocker": "",
             "update_assignment": "spotify.release_streams=VALUE",
             "import_effect": "update data/manual_social_stats.json spotify.release_streams from 'pending' to the filled new_value",
-            "csv_row": 5,
+            "csv_row": 4,
             "ready_to_import": false
           },
           {
@@ -248,13 +207,13 @@
             "adapter_blocker": "",
             "update_assignment": "spotify.saves=VALUE",
             "import_effect": "update data/manual_social_stats.json spotify.saves from 'pending' to the filled new_value",
-            "csv_row": 6,
+            "csv_row": 5,
             "ready_to_import": false
           }
         ],
         "collection_packets": [
           {
-            "csv_row": 5,
+            "csv_row": 4,
             "field": "release_streams",
             "current_value": "pending",
             "new_value": "",
@@ -273,7 +232,7 @@
             "import_effect": "update data/manual_social_stats.json spotify.release_streams from 'pending' to the filled new_value"
           },
           {
-            "csv_row": 6,
+            "csv_row": 5,
             "field": "saves",
             "current_value": "pending",
             "new_value": "",
@@ -330,13 +289,13 @@
             "adapter_blocker": "",
             "update_assignment": "tiktok.profile_views_7d=VALUE",
             "import_effect": "update data/manual_social_stats.json tiktok.profile_views_7d from 'pending' to the filled new_value",
-            "csv_row": 7,
+            "csv_row": 6,
             "ready_to_import": false
           }
         ],
         "collection_packets": [
           {
-            "csv_row": 7,
+            "csv_row": 6,
             "field": "profile_views_7d",
             "current_value": "pending",
             "new_value": "",
@@ -365,37 +324,16 @@
       {
         "platform": "x",
         "status": "needs_values",
-        "field_count": 2,
-        "waiting_count": 2,
+        "field_count": 1,
+        "waiting_count": 1,
         "ready_to_import_count": 0,
         "source_hint": "X Analytics or account profile metrics",
         "collection_url": "https://x.com/lilyrooartist",
         "reason": "X metrics need X_USER_ACCESS_TOKEN with user lookup access.",
         "priority_summary": [
-          "Audience size snapshot",
           "Recent discovery and traffic"
         ],
         "fields": [
-          {
-            "field": "followers",
-            "current_value": "pending",
-            "new_value": "",
-            "live_value": "",
-            "collection_mode": "manual_collection_required",
-            "collection_priority": 1,
-            "metric_category": "Audience size snapshot",
-            "access_level": "public_profile",
-            "value_type": "nonnegative_integer",
-            "example_value": "123",
-            "collection_instruction": "Enter the current public follower count.",
-            "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
-            "public_capture_status": "X public profile did not expose a stable numeric follower value; use X API credentials or manual profile review.",
-            "adapter_blocker": "X public profile did not expose a stable numeric follower value; use X API credentials or manual profile review.",
-            "update_assignment": "x.followers=VALUE",
-            "import_effect": "update data/manual_social_stats.json x.followers from 'pending' to the filled new_value",
-            "csv_row": 8,
-            "ready_to_import": false
-          },
           {
             "field": "impressions_7d",
             "current_value": "pending",
@@ -413,32 +351,13 @@
             "adapter_blocker": "",
             "update_assignment": "x.impressions_7d=VALUE",
             "import_effect": "update data/manual_social_stats.json x.impressions_7d from 'pending' to the filled new_value",
-            "csv_row": 9,
+            "csv_row": 7,
             "ready_to_import": false
           }
         ],
         "collection_packets": [
           {
-            "csv_row": 8,
-            "field": "followers",
-            "current_value": "pending",
-            "new_value": "",
-            "ready_to_import": false,
-            "collection_mode": "manual_collection_required",
-            "collection_priority": 1,
-            "metric_category": "Audience size snapshot",
-            "access_level": "public_profile",
-            "source_hint": "X Analytics or account profile metrics",
-            "collection_url": "https://x.com/lilyrooartist",
-            "collection_instruction": "Enter the current public follower count.",
-            "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
-            "public_capture_status": "X public profile did not expose a stable numeric follower value; use X API credentials or manual profile review.",
-            "adapter_blocker": "X public profile did not expose a stable numeric follower value; use X API credentials or manual profile review.",
-            "update_assignment": "x.followers=VALUE",
-            "import_effect": "update data/manual_social_stats.json x.followers from 'pending' to the filled new_value"
-          },
-          {
-            "csv_row": 9,
+            "csv_row": 7,
             "field": "impressions_7d",
             "current_value": "pending",
             "new_value": "",
@@ -458,10 +377,9 @@
           }
         ],
         "pending_assignments": [
-          "x.followers=VALUE",
           "x.impressions_7d=VALUE"
         ],
-        "platform_update_command": "python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impressions_7d=VALUE --refresh-admin",
+        "platform_update_command": "python3 scripts/update_manual_social_stats.py x.impressions_7d=VALUE --refresh-admin",
         "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
         "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin"
       }
@@ -479,7 +397,7 @@
     "status": "needs_values",
     "csv_path": "data/manual_metric_collection_template.csv",
     "ready_row_count": 0,
-    "waiting_row_count": 8,
+    "waiting_row_count": 6,
     "ready_csv_rows": [],
     "waiting_csv_rows": [
       2,
@@ -487,19 +405,15 @@
       4,
       5,
       6,
-      7,
-      8,
-      9
+      7
     ],
     "ready_assignments": [],
     "waiting_assignments": [
       "facebook.reach_7d=VALUE",
-      "instagram.followers=VALUE",
       "instagram.profile_visits_7d=VALUE",
       "spotify.release_streams=VALUE",
       "spotify.saves=VALUE",
       "tiktok.profile_views_7d=VALUE",
-      "x.followers=VALUE",
       "x.impressions_7d=VALUE"
     ],
     "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
@@ -525,22 +439,6 @@
       {
         "csv_row": 3,
         "platform": "instagram",
-        "field": "followers",
-        "ready_to_import": false,
-        "new_value": "",
-        "value_type": "nonnegative_integer",
-        "collection_priority": 1,
-        "metric_category": "Audience size snapshot",
-        "access_level": "public_profile",
-        "source_hint": "Instagram Professional Dashboard > Insights",
-        "collection_url": "https://www.instagram.com/lilyroo.artist/",
-        "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
-        "update_assignment": "instagram.followers=VALUE",
-        "import_effect": "update data/manual_social_stats.json instagram.followers from 'pending' to the filled new_value"
-      },
-      {
-        "csv_row": 4,
-        "platform": "instagram",
         "field": "profile_visits_7d",
         "ready_to_import": false,
         "new_value": "",
@@ -555,7 +453,7 @@
         "import_effect": "update data/manual_social_stats.json instagram.profile_visits_7d from 'pending' to the filled new_value"
       },
       {
-        "csv_row": 5,
+        "csv_row": 4,
         "platform": "spotify",
         "field": "release_streams",
         "ready_to_import": false,
@@ -571,7 +469,7 @@
         "import_effect": "update data/manual_social_stats.json spotify.release_streams from 'pending' to the filled new_value"
       },
       {
-        "csv_row": 6,
+        "csv_row": 5,
         "platform": "spotify",
         "field": "saves",
         "ready_to_import": false,
@@ -587,7 +485,7 @@
         "import_effect": "update data/manual_social_stats.json spotify.saves from 'pending' to the filled new_value"
       },
       {
-        "csv_row": 7,
+        "csv_row": 6,
         "platform": "tiktok",
         "field": "profile_views_7d",
         "ready_to_import": false,
@@ -603,23 +501,7 @@
         "import_effect": "update data/manual_social_stats.json tiktok.profile_views_7d from 'pending' to the filled new_value"
       },
       {
-        "csv_row": 8,
-        "platform": "x",
-        "field": "followers",
-        "ready_to_import": false,
-        "new_value": "",
-        "value_type": "nonnegative_integer",
-        "collection_priority": 1,
-        "metric_category": "Audience size snapshot",
-        "access_level": "public_profile",
-        "source_hint": "X Analytics or account profile metrics",
-        "collection_url": "https://x.com/lilyrooartist",
-        "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
-        "update_assignment": "x.followers=VALUE",
-        "import_effect": "update data/manual_social_stats.json x.followers from 'pending' to the filled new_value"
-      },
-      {
-        "csv_row": 9,
+        "csv_row": 7,
         "platform": "x",
         "field": "impressions_7d",
         "ready_to_import": false,
@@ -638,79 +520,13 @@
     "guardrail": "Import only filled nonnegative numeric new_value cells; leave unknown rows blank."
   },
   "public_metric_capture_backlog": {
-    "status": "needs_capture_adapter",
-    "field_count": 2,
-    "fields": [
-      {
-        "platform": "instagram",
-        "field": "followers",
-        "csv_row": 3,
-        "collection_url": "https://www.instagram.com/lilyroo.artist/",
-        "source_hint": "Instagram Professional Dashboard > Insights",
-        "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
-        "public_capture_status": "Instagram public profile did not expose a stable follower value without authenticated or cookie-backed access.",
-        "adapter_blocker": "Instagram public profile did not expose a stable follower value without authenticated or cookie-backed access.",
-        "update_assignment": "instagram.followers=VALUE"
-      },
-      {
-        "platform": "x",
-        "field": "followers",
-        "csv_row": 8,
-        "collection_url": "https://x.com/lilyrooartist",
-        "source_hint": "X Analytics or account profile metrics",
-        "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
-        "public_capture_status": "X public profile did not expose a stable numeric follower value; use X API credentials or manual profile review.",
-        "adapter_blocker": "X public profile did not expose a stable numeric follower value; use X API credentials or manual profile review.",
-        "update_assignment": "x.followers=VALUE"
-      }
-    ],
-    "recommended_engine_work": "Add safe public profile capture adapters for these public fields, then route them through data/live_social_metrics.json and scripts/update_manual_social_stats.py --from-live.",
+    "status": "clear",
+    "field_count": 0,
+    "fields": [],
+    "recommended_engine_work": "",
     "guardrail": "Do not treat private analytics fields as public-capture candidates."
   },
   "priority_batches": [
-    {
-      "priority": 1,
-      "label": "Audience size snapshot",
-      "status": "needs_values",
-      "field_count": 2,
-      "waiting_count": 2,
-      "ready_to_import_count": 0,
-      "platforms": [
-        "instagram",
-        "x"
-      ],
-      "access_levels": [
-        "public_profile"
-      ],
-      "csv_rows": [
-        3,
-        8
-      ],
-      "fields": [
-        {
-          "platform": "instagram",
-          "field": "followers",
-          "csv_row": 3,
-          "ready_to_import": false,
-          "collection_url": "https://www.instagram.com/lilyroo.artist/",
-          "collection_instruction": "Enter the current public follower count.",
-          "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
-          "update_assignment": "instagram.followers=VALUE"
-        },
-        {
-          "platform": "x",
-          "field": "followers",
-          "csv_row": 8,
-          "ready_to_import": false,
-          "collection_url": "https://x.com/lilyrooartist",
-          "collection_instruction": "Enter the current public follower count.",
-          "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
-          "update_assignment": "x.followers=VALUE"
-        }
-      ],
-      "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
-      "worksheet_import_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin"
-    },
     {
       "priority": 2,
       "label": "Recent discovery and traffic",
@@ -729,9 +545,9 @@
       ],
       "csv_rows": [
         2,
-        4,
-        7,
-        9
+        3,
+        6,
+        7
       ],
       "fields": [
         {
@@ -747,7 +563,7 @@
         {
           "platform": "instagram",
           "field": "profile_visits_7d",
-          "csv_row": 4,
+          "csv_row": 3,
           "ready_to_import": false,
           "collection_url": "https://www.instagram.com/lilyroo.artist/",
           "collection_instruction": "Enter profile visits for the last 7 days.",
@@ -757,7 +573,7 @@
         {
           "platform": "tiktok",
           "field": "profile_views_7d",
-          "csv_row": 7,
+          "csv_row": 6,
           "ready_to_import": false,
           "collection_url": "https://www.tiktok.com/@lilyroo930",
           "collection_instruction": "Enter profile views for the last 7 days.",
@@ -767,7 +583,7 @@
         {
           "platform": "x",
           "field": "impressions_7d",
-          "csv_row": 9,
+          "csv_row": 7,
           "ready_to_import": false,
           "collection_url": "https://x.com/lilyrooartist",
           "collection_instruction": "Enter impressions for the last 7 days.",
@@ -792,14 +608,14 @@
         "private_analytics"
       ],
       "csv_rows": [
-        5,
-        6
+        4,
+        5
       ],
       "fields": [
         {
           "platform": "spotify",
           "field": "release_streams",
-          "csv_row": 5,
+          "csv_row": 4,
           "ready_to_import": false,
           "collection_url": "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a",
           "collection_instruction": "Enter lifetime streams for the promoted release.",
@@ -809,7 +625,7 @@
         {
           "platform": "spotify",
           "field": "saves",
-          "csv_row": 6,
+          "csv_row": 5,
           "ready_to_import": false,
           "collection_url": "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a",
           "collection_instruction": "Enter lifetime saves for the promoted release.",
@@ -890,26 +706,6 @@
       "reason": "Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page",
       "fields": [
         {
-          "field": "followers",
-          "current_value": "pending",
-          "new_value": "",
-          "live_value": "",
-          "collection_mode": "manual_collection_required",
-          "collection_priority": 1,
-          "metric_category": "Audience size snapshot",
-          "access_level": "public_profile",
-          "value_type": "nonnegative_integer",
-          "example_value": "123",
-          "collection_instruction": "Enter the current public follower count.",
-          "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
-          "public_capture_status": "Instagram public profile did not expose a stable follower value without authenticated or cookie-backed access.",
-          "adapter_blocker": "Instagram public profile did not expose a stable follower value without authenticated or cookie-backed access.",
-          "update_assignment": "instagram.followers=VALUE",
-          "import_effect": "update data/manual_social_stats.json instagram.followers from 'pending' to the filled new_value",
-          "csv_row": 3,
-          "ready_to_import": false
-        },
-        {
           "field": "profile_visits_7d",
           "current_value": "pending",
           "new_value": "",
@@ -926,37 +722,17 @@
           "adapter_blocker": "",
           "update_assignment": "instagram.profile_visits_7d=VALUE",
           "import_effect": "update data/manual_social_stats.json instagram.profile_visits_7d from 'pending' to the filled new_value",
-          "csv_row": 4,
+          "csv_row": 3,
           "ready_to_import": false
         }
       ],
-      "field_count": 2,
+      "field_count": 1,
       "pending_assignments": [
-        "instagram.followers=VALUE",
         "instagram.profile_visits_7d=VALUE"
       ],
       "collection_packets": [
         {
           "csv_row": 3,
-          "field": "followers",
-          "current_value": "pending",
-          "new_value": "",
-          "ready_to_import": false,
-          "collection_mode": "manual_collection_required",
-          "collection_priority": 1,
-          "metric_category": "Audience size snapshot",
-          "access_level": "public_profile",
-          "source_hint": "Instagram Professional Dashboard > Insights",
-          "collection_url": "https://www.instagram.com/lilyroo.artist/",
-          "collection_instruction": "Enter the current public follower count.",
-          "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
-          "public_capture_status": "Instagram public profile did not expose a stable follower value without authenticated or cookie-backed access.",
-          "adapter_blocker": "Instagram public profile did not expose a stable follower value without authenticated or cookie-backed access.",
-          "update_assignment": "instagram.followers=VALUE",
-          "import_effect": "update data/manual_social_stats.json instagram.followers from 'pending' to the filled new_value"
-        },
-        {
-          "csv_row": 4,
           "field": "profile_visits_7d",
           "current_value": "pending",
           "new_value": "",
@@ -976,9 +752,9 @@
         }
       ],
       "live_import_available_count": 0,
-      "manual_collection_required_count": 2,
+      "manual_collection_required_count": 1,
       "ready_to_import_count": 0,
-      "platform_update_command": "python3 scripts/update_manual_social_stats.py instagram.followers=VALUE instagram.profile_visits_7d=VALUE --refresh-admin",
+      "platform_update_command": "python3 scripts/update_manual_social_stats.py instagram.profile_visits_7d=VALUE --refresh-admin",
       "live_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-live --dry-run",
       "live_import_command": "python3 scripts/update_manual_social_stats.py --from-live --refresh-admin",
       "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
@@ -1007,7 +783,7 @@
           "adapter_blocker": "",
           "update_assignment": "spotify.release_streams=VALUE",
           "import_effect": "update data/manual_social_stats.json spotify.release_streams from 'pending' to the filled new_value",
-          "csv_row": 5,
+          "csv_row": 4,
           "ready_to_import": false
         },
         {
@@ -1027,7 +803,7 @@
           "adapter_blocker": "",
           "update_assignment": "spotify.saves=VALUE",
           "import_effect": "update data/manual_social_stats.json spotify.saves from 'pending' to the filled new_value",
-          "csv_row": 6,
+          "csv_row": 5,
           "ready_to_import": false
         }
       ],
@@ -1038,7 +814,7 @@
       ],
       "collection_packets": [
         {
-          "csv_row": 5,
+          "csv_row": 4,
           "field": "release_streams",
           "current_value": "pending",
           "new_value": "",
@@ -1057,7 +833,7 @@
           "import_effect": "update data/manual_social_stats.json spotify.release_streams from 'pending' to the filled new_value"
         },
         {
-          "csv_row": 6,
+          "csv_row": 5,
           "field": "saves",
           "current_value": "pending",
           "new_value": "",
@@ -1108,7 +884,7 @@
           "adapter_blocker": "",
           "update_assignment": "tiktok.profile_views_7d=VALUE",
           "import_effect": "update data/manual_social_stats.json tiktok.profile_views_7d from 'pending' to the filled new_value",
-          "csv_row": 7,
+          "csv_row": 6,
           "ready_to_import": false
         }
       ],
@@ -1118,7 +894,7 @@
       ],
       "collection_packets": [
         {
-          "csv_row": 7,
+          "csv_row": 6,
           "field": "profile_views_7d",
           "current_value": "pending",
           "new_value": "",
@@ -1153,26 +929,6 @@
       "reason": "X metrics need X_USER_ACCESS_TOKEN with user lookup access.",
       "fields": [
         {
-          "field": "followers",
-          "current_value": "pending",
-          "new_value": "",
-          "live_value": "",
-          "collection_mode": "manual_collection_required",
-          "collection_priority": 1,
-          "metric_category": "Audience size snapshot",
-          "access_level": "public_profile",
-          "value_type": "nonnegative_integer",
-          "example_value": "123",
-          "collection_instruction": "Enter the current public follower count.",
-          "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
-          "public_capture_status": "X public profile did not expose a stable numeric follower value; use X API credentials or manual profile review.",
-          "adapter_blocker": "X public profile did not expose a stable numeric follower value; use X API credentials or manual profile review.",
-          "update_assignment": "x.followers=VALUE",
-          "import_effect": "update data/manual_social_stats.json x.followers from 'pending' to the filled new_value",
-          "csv_row": 8,
-          "ready_to_import": false
-        },
-        {
           "field": "impressions_7d",
           "current_value": "pending",
           "new_value": "",
@@ -1189,37 +945,17 @@
           "adapter_blocker": "",
           "update_assignment": "x.impressions_7d=VALUE",
           "import_effect": "update data/manual_social_stats.json x.impressions_7d from 'pending' to the filled new_value",
-          "csv_row": 9,
+          "csv_row": 7,
           "ready_to_import": false
         }
       ],
-      "field_count": 2,
+      "field_count": 1,
       "pending_assignments": [
-        "x.followers=VALUE",
         "x.impressions_7d=VALUE"
       ],
       "collection_packets": [
         {
-          "csv_row": 8,
-          "field": "followers",
-          "current_value": "pending",
-          "new_value": "",
-          "ready_to_import": false,
-          "collection_mode": "manual_collection_required",
-          "collection_priority": 1,
-          "metric_category": "Audience size snapshot",
-          "access_level": "public_profile",
-          "source_hint": "X Analytics or account profile metrics",
-          "collection_url": "https://x.com/lilyrooartist",
-          "collection_instruction": "Enter the current public follower count.",
-          "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
-          "public_capture_status": "X public profile did not expose a stable numeric follower value; use X API credentials or manual profile review.",
-          "adapter_blocker": "X public profile did not expose a stable numeric follower value; use X API credentials or manual profile review.",
-          "update_assignment": "x.followers=VALUE",
-          "import_effect": "update data/manual_social_stats.json x.followers from 'pending' to the filled new_value"
-        },
-        {
-          "csv_row": 9,
+          "csv_row": 7,
           "field": "impressions_7d",
           "current_value": "pending",
           "new_value": "",
@@ -1239,9 +975,9 @@
         }
       ],
       "live_import_available_count": 0,
-      "manual_collection_required_count": 2,
+      "manual_collection_required_count": 1,
       "ready_to_import_count": 0,
-      "platform_update_command": "python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impressions_7d=VALUE --refresh-admin",
+      "platform_update_command": "python3 scripts/update_manual_social_stats.py x.impressions_7d=VALUE --refresh-admin",
       "live_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-live --dry-run",
       "live_import_command": "python3 scripts/update_manual_social_stats.py --from-live --refresh-admin",
       "worksheet_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
@@ -1276,31 +1012,6 @@
     },
     {
       "platform": "instagram",
-      "field": "followers",
-      "current_value": "pending",
-      "new_value": "",
-      "live_value": "",
-      "collection_mode": "manual_collection_required",
-      "collection_priority": 1,
-      "metric_category": "Audience size snapshot",
-      "access_level": "public_profile",
-      "value_type": "nonnegative_integer",
-      "example_value": "123",
-      "collection_instruction": "Enter the current public follower count.",
-      "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
-      "source_hint": "Instagram Professional Dashboard > Insights",
-      "collection_url": "https://www.instagram.com/lilyroo.artist/",
-      "public_capture_status": "Instagram public profile did not expose a stable follower value without authenticated or cookie-backed access.",
-      "adapter_blocker": "Instagram public profile did not expose a stable follower value without authenticated or cookie-backed access.",
-      "reason": "Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page",
-      "update_assignment": "instagram.followers=VALUE",
-      "import_effect": "update data/manual_social_stats.json instagram.followers from 'pending' to the filled new_value",
-      "platform_update_command": "python3 scripts/update_manual_social_stats.py instagram.followers=VALUE instagram.profile_visits_7d=VALUE --refresh-admin",
-      "csv_row": 3,
-      "ready_to_import": false
-    },
-    {
-      "platform": "instagram",
       "field": "profile_visits_7d",
       "current_value": "pending",
       "new_value": "",
@@ -1320,8 +1031,8 @@
       "reason": "Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page",
       "update_assignment": "instagram.profile_visits_7d=VALUE",
       "import_effect": "update data/manual_social_stats.json instagram.profile_visits_7d from 'pending' to the filled new_value",
-      "platform_update_command": "python3 scripts/update_manual_social_stats.py instagram.followers=VALUE instagram.profile_visits_7d=VALUE --refresh-admin",
-      "csv_row": 4,
+      "platform_update_command": "python3 scripts/update_manual_social_stats.py instagram.profile_visits_7d=VALUE --refresh-admin",
+      "csv_row": 3,
       "ready_to_import": false
     },
     {
@@ -1346,7 +1057,7 @@
       "update_assignment": "spotify.release_streams=VALUE",
       "import_effect": "update data/manual_social_stats.json spotify.release_streams from 'pending' to the filled new_value",
       "platform_update_command": "python3 scripts/update_manual_social_stats.py spotify.release_streams=VALUE spotify.saves=VALUE --refresh-admin",
-      "csv_row": 5,
+      "csv_row": 4,
       "ready_to_import": false
     },
     {
@@ -1371,7 +1082,7 @@
       "update_assignment": "spotify.saves=VALUE",
       "import_effect": "update data/manual_social_stats.json spotify.saves from 'pending' to the filled new_value",
       "platform_update_command": "python3 scripts/update_manual_social_stats.py spotify.release_streams=VALUE spotify.saves=VALUE --refresh-admin",
-      "csv_row": 6,
+      "csv_row": 5,
       "ready_to_import": false
     },
     {
@@ -1396,32 +1107,7 @@
       "update_assignment": "tiktok.profile_views_7d=VALUE",
       "import_effect": "update data/manual_social_stats.json tiktok.profile_views_7d from 'pending' to the filled new_value",
       "platform_update_command": "python3 scripts/update_manual_social_stats.py tiktok.profile_views_7d=VALUE --refresh-admin",
-      "csv_row": 7,
-      "ready_to_import": false
-    },
-    {
-      "platform": "x",
-      "field": "followers",
-      "current_value": "pending",
-      "new_value": "",
-      "live_value": "",
-      "collection_mode": "manual_collection_required",
-      "collection_priority": 1,
-      "metric_category": "Audience size snapshot",
-      "access_level": "public_profile",
-      "value_type": "nonnegative_integer",
-      "example_value": "123",
-      "collection_instruction": "Enter the current public follower count.",
-      "evidence_hint": "Capture the public follower count from the profile page or account dashboard.",
-      "source_hint": "X Analytics or account profile metrics",
-      "collection_url": "https://x.com/lilyrooartist",
-      "public_capture_status": "X public profile did not expose a stable numeric follower value; use X API credentials or manual profile review.",
-      "adapter_blocker": "X public profile did not expose a stable numeric follower value; use X API credentials or manual profile review.",
-      "reason": "X metrics need X_USER_ACCESS_TOKEN with user lookup access.",
-      "update_assignment": "x.followers=VALUE",
-      "import_effect": "update data/manual_social_stats.json x.followers from 'pending' to the filled new_value",
-      "platform_update_command": "python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impressions_7d=VALUE --refresh-admin",
-      "csv_row": 8,
+      "csv_row": 6,
       "ready_to_import": false
     },
     {
@@ -1445,8 +1131,8 @@
       "reason": "X metrics need X_USER_ACCESS_TOKEN with user lookup access.",
       "update_assignment": "x.impressions_7d=VALUE",
       "import_effect": "update data/manual_social_stats.json x.impressions_7d from 'pending' to the filled new_value",
-      "platform_update_command": "python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impressions_7d=VALUE --refresh-admin",
-      "csv_row": 9,
+      "platform_update_command": "python3 scripts/update_manual_social_stats.py x.impressions_7d=VALUE --refresh-admin",
+      "csv_row": 7,
       "ready_to_import": false
     }
   ]
