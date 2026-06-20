@@ -21,6 +21,7 @@ SOCIAL_SCHEDULER_DRY_RUN = ROOT / "data" / "social_scheduler_dry_run.json"
 PROMO_REFRESH_RUN = ROOT / "data" / "promo_admin_refresh_run.json"
 PROMO_REFRESH_WORKFLOW_STATUS = ROOT / "data" / "promo_refresh_workflow_status.json"
 PROMO_OPERATIONS_PACKET = ROOT / "data" / "promo_operations_packet.json"
+PROMOTION_BLOCKER_LEDGER = ROOT / "data" / "promotion_blocker_ledger.json"
 PLATFORM_REPAIR_STATUS = ROOT / "data" / "platform_repair_status.json"
 APPROVAL_RUNWAY = ROOT / "data" / "approval_runway.json"
 SCHEDULED_APPROVAL_PACKET = ROOT / "data" / "scheduled_approval_packet.json"
@@ -59,6 +60,7 @@ PROMO_REFRESH_SCRIPT = ROOT / "scripts" / "refresh_promo_admin.py"
 PROMO_REFRESH_WORKFLOW_CAPTURE = ROOT / "scripts" / "capture_github_workflow_status.py"
 PROMO_REFRESH_WORKFLOW = ROOT / ".github" / "workflows" / "promo-admin-refresh.yml"
 PROMO_OPERATIONS_SCRIPT = ROOT / "scripts" / "build_promo_operations_packet.py"
+PROMOTION_BLOCKER_LEDGER_SCRIPT = ROOT / "scripts" / "build_promotion_blocker_ledger.py"
 PLATFORM_REPAIR_SCRIPT = ROOT / "scripts" / "build_platform_repair_status.py"
 APPROVAL_RUNWAY_SCRIPT = ROOT / "scripts" / "build_approval_runway.py"
 SCHEDULED_APPROVAL_SCRIPT = ROOT / "scripts" / "build_scheduled_approval_packet.py"
@@ -69,6 +71,7 @@ BACKLOG_RESCHEDULE_PREVIEW_SCRIPT = ROOT / "scripts" / "build_backlog_reschedule
 MANUAL_METRIC_COLLECTION_SCRIPT = ROOT / "scripts" / "build_manual_metric_collection.py"
 REPORT = ROOT / "admin" / "reports" / "weekly-social-report.md"
 PROMO_OPERATIONS_REPORT = ROOT / "admin" / "reports" / "promo-operations-packet.md"
+PROMOTION_BLOCKER_LEDGER_REPORT = ROOT / "admin" / "reports" / "promotion-blocker-ledger.md"
 PLATFORM_REPAIR_REPORT = ROOT / "admin" / "reports" / "platform-repair-status.md"
 APPROVAL_RUNWAY_REPORT = ROOT / "admin" / "reports" / "approval-runway.md"
 SCHEDULED_APPROVAL_REPORT = ROOT / "admin" / "reports" / "scheduled-approval-packet.md"
@@ -571,6 +574,35 @@ def validate_generated_outputs(failures):
             fail("manual_metric_collection_packet.json missing safe grouped metric collection data", failures)
     else:
         fail("manual_metric_collection_packet.json missing; run scripts/build_manual_metric_collection.py", failures)
+    if PROMOTION_BLOCKER_LEDGER.exists():
+        ledger = json.loads(PROMOTION_BLOCKER_LEDGER.read_text(encoding="utf-8"))
+        summary = ledger.get("summary") or {}
+        ledger_rows = ledger.get("rows") or []
+        owner_counts = summary.get("owner_counts") or {}
+        category_counts = summary.get("category_counts") or {}
+        if (
+            ledger.get("safe_mode") is True
+            and summary.get("open_blocker_count") == len(ledger_rows)
+            and summary.get("urgent_count") == len([row for row in ledger_rows if row.get("urgency") in {"critical", "high"}])
+            and owner_counts
+            and category_counts
+            and all(
+                row.get("id")
+                and row.get("title")
+                and row.get("category")
+                and row.get("owner") in {"codex", "tod", "external_platform"}
+                and row.get("status")
+                and row.get("evidence")
+                and row.get("next_step")
+                and row.get("source_path")
+                for row in ledger_rows
+            )
+        ):
+            ok(f"promotion blocker ledger tracks {len(ledger_rows)} open blocker(s)")
+        else:
+            fail("promotion_blocker_ledger.json missing safe owner/category blocker rows", failures)
+    else:
+        fail("promotion_blocker_ledger.json missing; run scripts/build_promotion_blocker_ledger.py", failures)
     if MANUAL_METRIC_REPORT.exists():
         report_text = MANUAL_METRIC_REPORT.read_text(encoding="utf-8")
         if "Manual Metric Collection" in report_text and "Pending fields" in report_text and "Open: " in report_text and "--from-csv --refresh-admin" in report_text:
@@ -1122,6 +1154,7 @@ def validate_generated_outputs(failures):
             "build_backlog_reschedule_preview.py",
             "build_platform_repair_status.py",
             "build_manual_metric_collection.py",
+            "build_promotion_blocker_ledger.py",
             "update_weekly_report.py",
             "timeout_seconds",
             "TimeoutExpired",
@@ -1203,6 +1236,14 @@ def validate_generated_outputs(failures):
             fail("build_promo_operations_packet.py missing review packet outputs or executes commands", failures)
     else:
         fail("build_promo_operations_packet.py missing", failures)
+    if PROMOTION_BLOCKER_LEDGER_SCRIPT.exists():
+        ledger_text = PROMOTION_BLOCKER_LEDGER_SCRIPT.read_text(encoding="utf-8")
+        if "promotion_blocker_ledger.json" in ledger_text and "promotion-blocker-ledger.md" in ledger_text and "owner_counts" in ledger_text and "category_counts" in ledger_text and "manual_metric_collection_packet.json" in ledger_text and "subprocess" not in ledger_text:
+            ok("promotion blocker ledger builder is review-only")
+        else:
+            fail("build_promotion_blocker_ledger.py missing ledger outputs or executes commands", failures)
+    else:
+        fail("build_promotion_blocker_ledger.py missing", failures)
     if PLATFORM_REPAIR_SCRIPT.exists():
         repair_text = PLATFORM_REPAIR_SCRIPT.read_text(encoding="utf-8")
         if "platform_repair_status.json" in repair_text and "platform-repair-status.md" in repair_text and "Repair Checklist" in repair_text and "promo_operations_packet.json" in repair_text and "social_execution_snapshot.json" in repair_text and "executor_readiness_snapshot.json" in repair_text and "subprocess" not in repair_text:
@@ -1283,6 +1324,14 @@ def validate_generated_outputs(failures):
             fail("promo operations markdown report missing expected sections", failures)
     else:
         fail("promo-operations-packet.md missing", failures)
+    if PROMOTION_BLOCKER_LEDGER_REPORT.exists():
+        ledger_report_text = PROMOTION_BLOCKER_LEDGER_REPORT.read_text(encoding="utf-8")
+        if "Promotion Blocker Ledger" in ledger_report_text and "Ledger" in ledger_report_text and "Guardrails" in ledger_report_text:
+            ok("promotion blocker ledger markdown report present")
+        else:
+            fail("promotion-blocker-ledger.md missing expected sections", failures)
+    else:
+        fail("promotion-blocker-ledger.md missing", failures)
     if PLATFORM_REPAIR_REPORT.exists():
         repair_report_text = PLATFORM_REPAIR_REPORT.read_text(encoding="utf-8")
         if "Platform Repair Status" in repair_report_text and "Repair Checklist" in repair_report_text and "Guardrails" in repair_report_text:

@@ -1,0 +1,124 @@
+# Promotion Blocker Ledger - Lily Roo
+
+Generated: 2026-06-20T00:27:40.123441Z
+
+## Summary
+- Open blockers: **14**
+- User-owned: **11**
+- External platform-owned: **3**
+- Codex-actionable: **0**
+- High or critical: **6**
+
+## Ledger
+- **[high] Approve scheduled Instagram row** (`approval-FP-AUTO-258`)
+  - Owner: `tod`; status: `waiting_for_review`; category: `approval`
+  - Evidence: FP-AUTO-258 is blocked by not_approved in executor state.
+  - Next step: Review copy, asset, destination links, and platform readiness before approving.
+  - Open: https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg
+  - Preview/check: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 --dry-run`
+  - Apply/log after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 --refresh-admin`
+  - Guardrail: Approval does not guarantee posting if the platform executor is still blocked.
+- **[high] Approve scheduled TikTok row** (`approval-FP-AUTO-259`)
+  - Owner: `tod`; status: `waiting_for_review`; category: `approval`
+  - Evidence: FP-AUTO-259 is blocked by not_approved in executor state.
+  - Next step: Review copy, asset, destination links, and platform readiness before approving.
+  - Open: https://www.lilyroo.com/assets/ig/01_i_learned_it_all_60s.mp4
+  - Preview/check: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --dry-run`
+  - Apply/log after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --refresh-admin`
+  - Guardrail: Approval does not guarantee posting if the platform executor is still blocked.
+- **[high] Repair TikTok executor** (`platform-FP-AUTO-264`)
+  - Owner: `tod`; status: `blocked`; category: `platform_repair`
+  - Evidence: tiktok_credentials_missing Missing secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.
+  - Next step: Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok public posting approval is false. Complete TikTok OAuth/public posting setup, push secrets, then refresh Admin.
+  - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
+  - Apply/log after review: `python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py`
+  - Guardrail: Run retry resets only after the external platform repair is verified.
+- **[high] Reschedule approved past-due backlog** (`backlog-reschedule`)
+  - Owner: `external_platform`; status: `blocked`; category: `backlog_reschedule`
+  - Evidence: 3 approved backlog row(s); 3 still have executor blockers.
+  - Next step: Preview a new schedule. Apply only after known executor blockers clear.
+  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24`
+  - Apply/log after review: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --apply --refresh-admin`
+  - Guardrail: The apply command refuses known blocked rows unless deliberately overridden.
+- **[high] Repair Facebook executor** (`platform-FP-AUTO-265`)
+  - Owner: `external_platform`; status: `blocked`; category: `platform_repair`
+  - Evidence: Facebook retry cap reached; rerun the Facebook dry-run check after identity confirmation.
+  - Next step: Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check. After repair, preview retry reset before applying it.
+  - Preview/check: `python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run`
+  - Apply/log after review: `python3 scripts/reset_social_execution_state.py FP-AUTO-265 --apply`
+  - Guardrail: Run retry resets only after the external platform repair is verified.
+- **[high] Repair Instagram executor** (`platform-FP-AUTO-263`)
+  - Owner: `external_platform`; status: `blocked`; category: `platform_repair`
+  - Evidence: Instagram retry cap reached; verify instagram_business_account repair before resetting execution state.
+  - Next step: Reconnect the Instagram Business/Creator account to the Facebook Page or set IG_BUSINESS_ACCOUNT_ID, then push the worker secret and recapture readiness. After repair, preview retry reset before applying it.
+  - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID`
+  - Apply/log after review: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
+  - Guardrail: Run retry resets only after the external platform repair is verified.
+- **[medium] Approve scheduled YouTube Community row** (`approval-FP-AUTO-261`)
+  - Owner: `tod`; status: `waiting_for_review`; category: `approval`
+  - Evidence: FP-AUTO-261 is blocked by not_approved in executor state.
+  - Next step: Review copy, asset, destination links, and platform readiness before approving.
+  - Open: https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg
+  - Preview/check: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-261 --dry-run`
+  - Apply/log after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-261 --refresh-admin`
+  - Guardrail: Approval does not guarantee posting if the platform executor is still blocked.
+- **[medium] Manually post YouTube Community copy** (`manual-FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY`)
+  - Owner: `tod`; status: `waiting_for_review`; category: `manual_distribution`
+  - Evidence: FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY is packaged for manual distribution.
+  - Next step: Review and approve the copy first, then post manually and log the public URL.
+  - Open: https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg
+  - Preview/check: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run`
+  - Apply/log after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin`
+  - Guardrail: Manual posting happens outside this repo; only log the URL after the post is live. URL logging command after posting: python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin
+- **[medium] Manually post YouTube Community copy** (`manual-FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY`)
+  - Owner: `tod`; status: `waiting_for_review`; category: `manual_distribution`
+  - Evidence: FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY is packaged for manual distribution.
+  - Next step: Review and approve the copy first, then post manually and log the public URL.
+  - Open: https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg
+  - Preview/check: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --dry-run`
+  - Apply/log after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin`
+  - Guardrail: Manual posting happens outside this repo; only log the URL after the post is live. URL logging command after posting: python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin
+- **[low] Fill facebook manual metrics** (`metrics-facebook`)
+  - Owner: `tod`; status: `waiting_for_manual_values`; category: `manual_metrics`
+  - Evidence: 1 pending field(s): reach_7d.
+  - Next step: Open the metric source, fill the CSV worksheet, preview import, then refresh admin.
+  - Open: https://www.facebook.com/903693509504290
+  - Preview/check: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
+  - Apply/log after review: `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
+  - Guardrail: Do not guess analytics values; import only values copied from the platform source.
+- **[low] Fill instagram manual metrics** (`metrics-instagram`)
+  - Owner: `tod`; status: `waiting_for_manual_values`; category: `manual_metrics`
+  - Evidence: 2 pending field(s): followers, profile_visits_7d.
+  - Next step: Open the metric source, fill the CSV worksheet, preview import, then refresh admin.
+  - Open: https://www.instagram.com/professional_dashboard/
+  - Preview/check: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
+  - Apply/log after review: `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
+  - Guardrail: Do not guess analytics values; import only values copied from the platform source.
+- **[low] Fill spotify manual metrics** (`metrics-spotify`)
+  - Owner: `tod`; status: `waiting_for_manual_values`; category: `manual_metrics`
+  - Evidence: 4 pending field(s): artist_followers, monthly_listeners, release_streams, saves.
+  - Next step: Open the metric source, fill the CSV worksheet, preview import, then refresh admin.
+  - Open: https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a
+  - Preview/check: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
+  - Apply/log after review: `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
+  - Guardrail: Do not guess analytics values; import only values copied from the platform source.
+- **[low] Fill tiktok manual metrics** (`metrics-tiktok`)
+  - Owner: `tod`; status: `waiting_for_manual_values`; category: `manual_metrics`
+  - Evidence: 2 pending field(s): followers, profile_views_7d.
+  - Next step: Open the metric source, fill the CSV worksheet, preview import, then refresh admin.
+  - Open: https://www.tiktok.com/creator-center/analytics
+  - Preview/check: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
+  - Apply/log after review: `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
+  - Guardrail: Do not guess analytics values; import only values copied from the platform source.
+- **[low] Fill x manual metrics** (`metrics-x`)
+  - Owner: `tod`; status: `waiting_for_manual_values`; category: `manual_metrics`
+  - Evidence: 2 pending field(s): followers, impressions_7d.
+  - Next step: Open the metric source, fill the CSV worksheet, preview import, then refresh admin.
+  - Open: https://analytics.x.com/
+  - Preview/check: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
+  - Apply/log after review: `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
+  - Guardrail: Do not guess analytics values; import only values copied from the platform source.
+
+## Guardrails
+- This ledger does not approve posts, post externally, push secrets, or invent metric values.
+- Treat external platform repairs and manual values as blockers until fresh admin evidence proves they cleared.
