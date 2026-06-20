@@ -434,7 +434,18 @@ def validate_generated_outputs(failures):
             and repair_summary.get("platform_fix_count") == len(repair_rows) == len(platform_actions)
             and repair_summary.get("preview_command_count") == len([row for row in repair_rows if row.get("preview_command")])
             and repair_summary.get("retry_reset_count") == len([row for row in repair_rows if row.get("retry_reset_preview_command")])
-            and all(row.get("post_id") and row.get("platform") and row.get("priority") and row.get("repair_action") and row.get("preview_command") for row in repair_rows)
+            and repair_summary.get("checklist_item_count") == sum(len(row.get("repair_checklist") or []) for row in repair_rows)
+            and repair_summary.get("checklist_blocked_count") == sum(int(row.get("repair_checklist_blocked_count") or 0) for row in repair_rows)
+            and all(
+                row.get("post_id")
+                and row.get("platform")
+                and row.get("priority")
+                and row.get("repair_action")
+                and row.get("preview_command")
+                and row.get("repair_checklist")
+                and all(item.get("id") and item.get("label") and item.get("status") and item.get("detail") for item in row.get("repair_checklist") or [])
+                for row in repair_rows
+            )
         ):
             ok(f"platform repair status tracks {len(repair_rows)} blocked platform repair(s)")
         else:
@@ -1372,7 +1383,7 @@ def validate_generated_outputs(failures):
         fail("build_promotion_blocker_ledger.py missing", failures)
     if PLATFORM_REPAIR_SCRIPT.exists():
         repair_text = PLATFORM_REPAIR_SCRIPT.read_text(encoding="utf-8")
-        if "platform_repair_status.json" in repair_text and "platform-repair-status.md" in repair_text and "Repair Checklist" in repair_text and "promo_operations_packet.json" in repair_text and "social_execution_snapshot.json" in repair_text and "executor_readiness_snapshot.json" in repair_text and "subprocess" not in repair_text:
+        if "platform_repair_status.json" in repair_text and "platform-repair-status.md" in repair_text and "Repair Checklist" in repair_text and "repair_checklist" in repair_text and "checklist_blocked_count" in repair_text and "promo_operations_packet.json" in repair_text and "social_execution_snapshot.json" in repair_text and "executor_readiness_snapshot.json" in repair_text and "subprocess" not in repair_text:
             ok("platform repair status builder is review-only")
         else:
             fail("build_platform_repair_status.py missing repair status outputs or executes commands", failures)

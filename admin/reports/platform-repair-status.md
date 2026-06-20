@@ -1,12 +1,14 @@
 # Platform Repair Status - Lily Roo
 
-Generated: 2026-06-20T01:59:17.998542Z
+Generated: 2026-06-20T02:02:49.148634Z
 
 ## Summary
 - Platform fixes: **1**
 - Blocked rows: **1**
 - Preview commands: **1**
 - Apply commands: **1**
+- Checklist items: **4**
+- Checklist blocked: **3**
 - Platforms: **TikTok**
 
 ## Repair Checklist
@@ -16,6 +18,11 @@ Generated: 2026-06-20T01:59:17.998542Z
   - Missing secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN
   - Missing locally: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN
   - Local source: `secrets/social_api.env`
+  - Checklist:
+    - `blocked` Worker secrets: Missing remote worker secret(s): TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Command: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
+    - `blocked` Local secret source: secrets/social_api.env is missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.
+    - `blocked` Public posting approval: Platform readiness says public posting approval is false.
+    - `waiting` Refresh verification: After repair, refresh admin so readiness, scheduler, blocker, and backlog state update together. Command: `python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py`
   - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
   - Apply after review: `python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py`
 

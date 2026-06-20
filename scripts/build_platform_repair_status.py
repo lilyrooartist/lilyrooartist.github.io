@@ -89,6 +89,70 @@ def repair_priority(row: dict) -> int:
     return 9
 
 
+def repair_checklist(context: dict, platform_readiness: dict, preview_command: str, apply_command: str) -> list[dict]:
+    missing = context.get("missing_secrets") or platform_readiness.get("missing_secrets") or []
+    local_missing = context.get("local_missing_secrets") or []
+    local_source = context.get("local_secret_source") or ""
+    public_posting = context.get("public_posting_approved", platform_readiness.get("public_posting_approved"))
+    checklist = []
+    if missing:
+        checklist.append({
+            "id": "remote_worker_secrets",
+            "label": "Worker secrets",
+            "status": "blocked",
+            "detail": f"Missing remote worker secret(s): {', '.join(missing)}.",
+            "command": preview_command,
+        })
+    else:
+        checklist.append({
+            "id": "remote_worker_secrets",
+            "label": "Worker secrets",
+            "status": "pass",
+            "detail": "Worker readiness snapshot reports required secrets present.",
+            "command": "",
+        })
+    if local_missing:
+        checklist.append({
+            "id": "local_secret_source",
+            "label": "Local secret source",
+            "status": "blocked",
+            "detail": f"{local_source or 'local secret source'} is missing: {', '.join(local_missing)}.",
+            "command": "",
+        })
+    elif local_source:
+        checklist.append({
+            "id": "local_secret_source",
+            "label": "Local secret source",
+            "status": "pass",
+            "detail": f"{local_source} has the required local value(s).",
+            "command": "",
+        })
+    if public_posting is False:
+        checklist.append({
+            "id": "public_posting_approval",
+            "label": "Public posting approval",
+            "status": "blocked",
+            "detail": "Platform readiness says public posting approval is false.",
+            "command": "",
+        })
+    elif public_posting is True:
+        checklist.append({
+            "id": "public_posting_approval",
+            "label": "Public posting approval",
+            "status": "pass",
+            "detail": "Platform readiness says public posting approval is true.",
+            "command": "",
+        })
+    checklist.append({
+        "id": "refresh_verification",
+        "label": "Refresh verification",
+        "status": "waiting" if apply_command else "review",
+        "detail": "After repair, refresh admin so readiness, scheduler, blocker, and backlog state update together.",
+        "command": apply_command or "python3 scripts/refresh_promo_admin.py",
+    })
+    return checklist
+
+
 def build_markdown(payload: dict) -> str:
     summary = payload["summary"]
     lines = [
@@ -101,6 +165,8 @@ def build_markdown(payload: dict) -> str:
         f"- Blocked rows: **{summary['blocked_count']}**",
         f"- Preview commands: **{summary['preview_command_count']}**",
         f"- Apply commands: **{summary['apply_command_count']}**",
+        f"- Checklist items: **{summary['checklist_item_count']}**",
+        f"- Checklist blocked: **{summary['checklist_blocked_count']}**",
         f"- Platforms: **{', '.join(summary['platforms']) or 'none'}**",
         "",
         "## Repair Checklist",
@@ -118,6 +184,11 @@ def build_markdown(payload: dict) -> str:
             lines.append(f"  - Missing locally: {', '.join(row['local_missing_secrets'])}")
         if row.get("local_secret_source"):
             lines.append(f"  - Local source: `{row['local_secret_source']}`")
+        if row.get("repair_checklist"):
+            lines.append("  - Checklist:")
+            for item in row["repair_checklist"]:
+                command = f" Command: `{item['command']}`" if item.get("command") else ""
+                lines.append(f"    - `{item['status']}` {item['label']}: {item['detail']}{command}")
         if row.get("preview_command"):
             lines.append(f"  - Preview/check: `{row['preview_command']}`")
         if row.get("apply_command"):
@@ -167,6 +238,7 @@ def build_status() -> dict:
         platform_readiness = readiness_for(readiness, platform)
         preview_command = action.get("command") or ""
         apply_command = context.get("repair_apply_command") or ""
+        checklist = repair_checklist(context, platform_readiness, preview_command, apply_command)
         rows.append({
             "post_id": post_id,
             "platform": platform,
@@ -190,6 +262,8 @@ def build_status() -> dict:
             "local_secret_ready": context.get("local_secret_ready"),
             "local_secret_source": context.get("local_secret_source") or "",
             "public_posting_approved": context.get("public_posting_approved", platform_readiness.get("public_posting_approved")),
+            "repair_checklist": checklist,
+            "repair_checklist_blocked_count": sum(1 for item in checklist if item.get("status") == "blocked"),
             "blocked": True,
         })
     rows.sort(key=lambda row: (row.get("priority") or 9, row.get("platform") or "", row.get("post_id") or ""))
@@ -199,6 +273,8 @@ def build_status() -> dict:
         "preview_command_count": sum(1 for row in rows if row.get("preview_command")),
         "apply_command_count": sum(1 for row in rows if row.get("apply_command")),
         "retry_reset_count": sum(1 for row in rows if row.get("retry_reset_preview_command")),
+        "checklist_item_count": sum(len(row.get("repair_checklist") or []) for row in rows),
+        "checklist_blocked_count": sum(int(row.get("repair_checklist_blocked_count") or 0) for row in rows),
         "platforms": sorted({row.get("platform") for row in rows if row.get("platform")}),
     }
     return {
