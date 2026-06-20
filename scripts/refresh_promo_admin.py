@@ -143,6 +143,11 @@ FINALIZE_STEPS = [
         "required": True,
     },
     {
+        "name": "build_human_handoff_packet",
+        "command": ["python3", "scripts/build_human_handoff_packet.py"],
+        "required": True,
+    },
+    {
         "name": "update_weekly_report",
         "command": ["python3", "scripts/update_weekly_report.py"],
         "required": True,

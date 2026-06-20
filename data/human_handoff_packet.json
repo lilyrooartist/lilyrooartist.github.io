@@ -1,0 +1,351 @@
+{
+  "generated_at": "2026-06-20T02:51:41.588402Z",
+  "safe_mode": true,
+  "source": {
+    "promotion_blocker_ledger": "data/promotion_blocker_ledger.json",
+    "scheduled_approval": "data/scheduled_approval_packet.json",
+    "manual_distribution": "data/manual_distribution_packet.json",
+    "manual_metrics": "data/manual_metric_collection_packet.json",
+    "platform_repair": "data/platform_repair_status.json",
+    "backlog_reschedule": "data/backlog_reschedule_preview.json"
+  },
+  "summary": {
+    "task_count": 10,
+    "owner_counts": {
+      "external_platform": 1,
+      "tod": 9
+    },
+    "urgency_counts": {
+      "high": 3,
+      "low": 5,
+      "medium": 2
+    },
+    "phase_counts": {
+      "Approval": 1,
+      "Backlog recovery": 1,
+      "Manual distribution": 2,
+      "Manual metrics": 5,
+      "Platform setup": 1
+    },
+    "blocker_summary": {
+      "open_blocker_count": 12,
+      "urgent_count": 4,
+      "owner_counts": {
+        "external_platform": 1,
+        "tod": 11
+      },
+      "category_counts": {
+        "approval": 3,
+        "backlog_reschedule": 1,
+        "manual_distribution": 2,
+        "manual_metrics": 5,
+        "platform_repair": 1
+      },
+      "status_counts": {
+        "blocked": 2,
+        "blocked_by_review_checks": 1,
+        "ready_for_reviewed_approval": 2,
+        "waiting_for_manual_values": 5,
+        "waiting_for_review": 2
+      },
+      "next_resolution_projection": {
+        "kind": "checked_scheduled_approval_batch",
+        "label": "Checked scheduled approval batch",
+        "checked_ids": [
+          "FP-AUTO-258",
+          "FP-AUTO-261"
+        ],
+        "blocked_ids_retained": [
+          "FP-AUTO-259"
+        ],
+        "blockers_resolved": 2,
+        "approval_blockers_before": 3,
+        "approval_blockers_after": 1,
+        "auto_rows_unblocked": 1,
+        "manual_rows_unblocked": 1,
+        "effect_count": 2,
+        "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+        "apply_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+        "guardrail": "Human review is still required; blocked review IDs stay excluded from the checked batch."
+      },
+      "sources": [
+        "data/backlog_reschedule_preview.json",
+        "data/platform_repair_status.json",
+        "data/scheduled_approval_packet.json",
+        "data/manual_distribution_packet.json",
+        "data/manual_metric_collection_packet.json"
+      ]
+    }
+  },
+  "tasks": [
+    {
+      "id": "approve-checked-scheduled-batch",
+      "title": "Review and approve checked scheduled batch",
+      "phase": "Approval",
+      "owner": "tod",
+      "urgency": "high",
+      "status": "waiting_for_review",
+      "detail": "Review the checked rows, then apply the guarded batch command. Failed review rows stay excluded.",
+      "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+      "apply_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+      "source_path": "data/scheduled_approval_packet.json",
+      "impact": {
+        "checked_ids": [
+          "FP-AUTO-258",
+          "FP-AUTO-261"
+        ],
+        "blocked_ids_retained": [
+          "FP-AUTO-259"
+        ],
+        "blockers_resolved": 2,
+        "change_count": 2,
+        "auto_count": 2,
+        "manual_count": 1
+      },
+      "links": [],
+      "guardrail": "Use --checked-batch so only rows that passed review checks are approved."
+    },
+    {
+      "id": "platform-setup-FP-AUTO-264",
+      "title": "Repair TikTok executor",
+      "phase": "Platform setup",
+      "owner": "tod",
+      "urgency": "high",
+      "status": "blocked",
+      "detail": "Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok public posting approval is false. Local secret source is also missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Complete TikTok OAuth/public posting setup locally, then push secrets and refresh Admin.",
+      "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+      "apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
+      "source_path": "data/platform_repair_status.json",
+      "impact": {
+        "platform": "TikTok",
+        "missing_secrets": [
+          "TIKTOK_CLIENT_KEY",
+          "TIKTOK_CLIENT_SECRET",
+          "TIKTOK_REFRESH_TOKEN"
+        ],
+        "local_missing_secrets": [
+          "TIKTOK_CLIENT_KEY",
+          "TIKTOK_CLIENT_SECRET",
+          "TIKTOK_REFRESH_TOKEN"
+        ],
+        "public_posting_approved": false,
+        "repair_checklist_blocked_count": 3
+      },
+      "links": [],
+      "guardrail": "Push worker secrets only after local OAuth/public posting setup is complete."
+    },
+    {
+      "id": "backlog-reschedule",
+      "title": "Preview approved backlog reschedule",
+      "phase": "Backlog recovery",
+      "owner": "external_platform",
+      "urgency": "high",
+      "status": "blocked",
+      "detail": "Known executor/platform blockers must clear before normal apply.",
+      "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
+      "apply_command": "",
+      "source_path": "data/backlog_reschedule_preview.json",
+      "impact": {
+        "approved_backlog_count": 1,
+        "blocked_backlog_count": 1,
+        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --apply --refresh-admin",
+        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin"
+      },
+      "links": [],
+      "guardrail": "Normal apply stays hidden until known executor/platform blockers clear."
+    },
+    {
+      "id": "manual-distribution-FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+      "title": "Post Analog Myth to YouTube Community",
+      "phase": "Manual distribution",
+      "owner": "tod",
+      "urgency": "medium",
+      "status": "waiting_for_review",
+      "detail": "Review the packaged copy, approve if appropriate, post manually, then log the public URL.",
+      "preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --dry-run",
+      "apply_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin",
+      "source_path": "data/manual_distribution_packet.json",
+      "impact": {
+        "post_id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+        "release": "Analog Myth",
+        "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+        "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
+        "requires_public_url": true
+      },
+      "links": [
+        {
+          "label": "asset",
+          "url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg"
+        }
+      ],
+      "guardrail": "Do not log a manual post until a real public URL exists."
+    },
+    {
+      "id": "manual-distribution-FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+      "title": "Post Twelve Dollars to YouTube Community",
+      "phase": "Manual distribution",
+      "owner": "tod",
+      "urgency": "medium",
+      "status": "waiting_for_review",
+      "detail": "Review the packaged copy, approve if appropriate, post manually, then log the public URL.",
+      "preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
+      "apply_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+      "source_path": "data/manual_distribution_packet.json",
+      "impact": {
+        "post_id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+        "release": "Twelve Dollars",
+        "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+        "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
+        "requires_public_url": true
+      },
+      "links": [
+        {
+          "label": "asset",
+          "url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg"
+        }
+      ],
+      "guardrail": "Do not log a manual post until a real public URL exists."
+    },
+    {
+      "id": "manual-metrics-facebook",
+      "title": "Fill facebook manual metrics",
+      "phase": "Manual metrics",
+      "owner": "tod",
+      "urgency": "low",
+      "status": "waiting_for_manual_values",
+      "detail": "Collect 1 field(s), fill the worksheet, preview import, then refresh Admin.",
+      "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
+      "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
+      "source_path": "data/manual_metric_collection_packet.json",
+      "impact": {
+        "platform": "facebook",
+        "field_count": 1,
+        "pending_assignments": [
+          "facebook.reach_7d=VALUE"
+        ],
+        "platform_update_command": "python3 scripts/update_manual_social_stats.py facebook.reach_7d=VALUE --refresh-admin"
+      },
+      "links": [
+        {
+          "label": "metric source",
+          "url": "https://www.facebook.com/903693509504290"
+        }
+      ],
+      "guardrail": "Only import nonnegative numeric values; leave unknown values blank instead of guessing."
+    },
+    {
+      "id": "manual-metrics-instagram",
+      "title": "Fill instagram manual metrics",
+      "phase": "Manual metrics",
+      "owner": "tod",
+      "urgency": "low",
+      "status": "waiting_for_manual_values",
+      "detail": "Collect 2 field(s), fill the worksheet, preview import, then refresh Admin.",
+      "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
+      "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
+      "source_path": "data/manual_metric_collection_packet.json",
+      "impact": {
+        "platform": "instagram",
+        "field_count": 2,
+        "pending_assignments": [
+          "instagram.followers=VALUE",
+          "instagram.profile_visits_7d=VALUE"
+        ],
+        "platform_update_command": "python3 scripts/update_manual_social_stats.py instagram.followers=VALUE instagram.profile_visits_7d=VALUE --refresh-admin"
+      },
+      "links": [
+        {
+          "label": "metric source",
+          "url": "https://www.instagram.com/professional_dashboard/"
+        }
+      ],
+      "guardrail": "Only import nonnegative numeric values; leave unknown values blank instead of guessing."
+    },
+    {
+      "id": "manual-metrics-spotify",
+      "title": "Fill spotify manual metrics",
+      "phase": "Manual metrics",
+      "owner": "tod",
+      "urgency": "low",
+      "status": "waiting_for_manual_values",
+      "detail": "Collect 4 field(s), fill the worksheet, preview import, then refresh Admin.",
+      "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
+      "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
+      "source_path": "data/manual_metric_collection_packet.json",
+      "impact": {
+        "platform": "spotify",
+        "field_count": 4,
+        "pending_assignments": [
+          "spotify.artist_followers=VALUE",
+          "spotify.monthly_listeners=VALUE",
+          "spotify.release_streams=VALUE",
+          "spotify.saves=VALUE"
+        ],
+        "platform_update_command": "python3 scripts/update_manual_social_stats.py spotify.artist_followers=VALUE spotify.monthly_listeners=VALUE spotify.release_streams=VALUE spotify.saves=VALUE --refresh-admin"
+      },
+      "links": [
+        {
+          "label": "metric source",
+          "url": "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a"
+        }
+      ],
+      "guardrail": "Only import nonnegative numeric values; leave unknown values blank instead of guessing."
+    },
+    {
+      "id": "manual-metrics-tiktok",
+      "title": "Fill tiktok manual metrics",
+      "phase": "Manual metrics",
+      "owner": "tod",
+      "urgency": "low",
+      "status": "waiting_for_manual_values",
+      "detail": "Collect 2 field(s), fill the worksheet, preview import, then refresh Admin.",
+      "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
+      "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
+      "source_path": "data/manual_metric_collection_packet.json",
+      "impact": {
+        "platform": "tiktok",
+        "field_count": 2,
+        "pending_assignments": [
+          "tiktok.followers=VALUE",
+          "tiktok.profile_views_7d=VALUE"
+        ],
+        "platform_update_command": "python3 scripts/update_manual_social_stats.py tiktok.followers=VALUE tiktok.profile_views_7d=VALUE --refresh-admin"
+      },
+      "links": [
+        {
+          "label": "metric source",
+          "url": "https://www.tiktok.com/creator-center/analytics"
+        }
+      ],
+      "guardrail": "Only import nonnegative numeric values; leave unknown values blank instead of guessing."
+    },
+    {
+      "id": "manual-metrics-x",
+      "title": "Fill x manual metrics",
+      "phase": "Manual metrics",
+      "owner": "tod",
+      "urgency": "low",
+      "status": "waiting_for_manual_values",
+      "detail": "Collect 2 field(s), fill the worksheet, preview import, then refresh Admin.",
+      "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
+      "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
+      "source_path": "data/manual_metric_collection_packet.json",
+      "impact": {
+        "platform": "x",
+        "field_count": 2,
+        "pending_assignments": [
+          "x.followers=VALUE",
+          "x.impressions_7d=VALUE"
+        ],
+        "platform_update_command": "python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impressions_7d=VALUE --refresh-admin"
+      },
+      "links": [
+        {
+          "label": "metric source",
+          "url": "https://analytics.x.com/"
+        }
+      ],
+      "guardrail": "Only import nonnegative numeric values; leave unknown values blank instead of guessing."
+    }
+  ]
+}

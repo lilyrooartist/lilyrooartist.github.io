@@ -22,6 +22,7 @@ SOCIAL_SCHEDULER_DRY_RUN = ROOT / "data" / "social_scheduler_dry_run.json"
 PROMO_REFRESH_RUN = ROOT / "data" / "promo_admin_refresh_run.json"
 PROMO_REFRESH_WORKFLOW_STATUS = ROOT / "data" / "promo_refresh_workflow_status.json"
 PROMO_OPERATIONS_PACKET = ROOT / "data" / "promo_operations_packet.json"
+HUMAN_HANDOFF_PACKET = ROOT / "data" / "human_handoff_packet.json"
 PROMOTION_BLOCKER_LEDGER = ROOT / "data" / "promotion_blocker_ledger.json"
 PLATFORM_REPAIR_STATUS = ROOT / "data" / "platform_repair_status.json"
 APPROVAL_RUNWAY = ROOT / "data" / "approval_runway.json"
@@ -63,6 +64,7 @@ PROMO_REFRESH_SCRIPT = ROOT / "scripts" / "refresh_promo_admin.py"
 PROMO_REFRESH_WORKFLOW_CAPTURE = ROOT / "scripts" / "capture_github_workflow_status.py"
 PROMO_REFRESH_WORKFLOW = ROOT / ".github" / "workflows" / "promo-admin-refresh.yml"
 PROMO_OPERATIONS_SCRIPT = ROOT / "scripts" / "build_promo_operations_packet.py"
+HUMAN_HANDOFF_SCRIPT = ROOT / "scripts" / "build_human_handoff_packet.py"
 PROMOTION_BLOCKER_LEDGER_SCRIPT = ROOT / "scripts" / "build_promotion_blocker_ledger.py"
 PLATFORM_REPAIR_SCRIPT = ROOT / "scripts" / "build_platform_repair_status.py"
 APPROVAL_RUNWAY_SCRIPT = ROOT / "scripts" / "build_approval_runway.py"
@@ -74,6 +76,7 @@ BACKLOG_RESCHEDULE_PREVIEW_SCRIPT = ROOT / "scripts" / "build_backlog_reschedule
 MANUAL_METRIC_COLLECTION_SCRIPT = ROOT / "scripts" / "build_manual_metric_collection.py"
 REPORT = ROOT / "admin" / "reports" / "weekly-social-report.md"
 PROMO_OPERATIONS_REPORT = ROOT / "admin" / "reports" / "promo-operations-packet.md"
+HUMAN_HANDOFF_REPORT = ROOT / "admin" / "reports" / "human-handoff-packet.md"
 PROMOTION_BLOCKER_LEDGER_REPORT = ROOT / "admin" / "reports" / "promotion-blocker-ledger.md"
 PLATFORM_REPAIR_REPORT = ROOT / "admin" / "reports" / "platform-repair-status.md"
 APPROVAL_RUNWAY_REPORT = ROOT / "admin" / "reports" / "approval-runway.md"
@@ -431,6 +434,29 @@ def validate_generated_outputs(failures):
             fail("promo_operations_packet.json missing checked store re-check context", failures)
     else:
         fail("promo_operations_packet.json missing; run scripts/build_promo_operations_packet.py", failures)
+    if HUMAN_HANDOFF_PACKET.exists():
+        handoff = json.loads(HUMAN_HANDOFF_PACKET.read_text(encoding="utf-8"))
+        summary = handoff.get("summary") or {}
+        tasks = handoff.get("tasks") or []
+        phases = {task.get("phase") for task in tasks}
+        owners = summary.get("owner_counts") or {}
+        urgencies = summary.get("urgency_counts") or {}
+        if (
+            handoff.get("safe_mode") is True
+            and summary.get("task_count") == len(tasks)
+            and sum(int(value or 0) for value in owners.values()) == len(tasks)
+            and sum(int(value or 0) for value in urgencies.values()) == len(tasks)
+            and {"Approval", "Manual distribution", "Manual metrics", "Platform setup", "Backlog recovery"} <= phases
+            and all(task.get("id") and task.get("title") and task.get("owner") and task.get("urgency") and task.get("status") and task.get("source_path") for task in tasks)
+            and any(task.get("id") == "approve-checked-scheduled-batch" and "--checked-batch" in task.get("apply_command", "") for task in tasks)
+            and any(task.get("phase") == "Manual metrics" and (task.get("impact") or {}).get("pending_assignments") for task in tasks)
+            and any(task.get("phase") == "Platform setup" and (task.get("impact") or {}).get("missing_secrets") for task in tasks)
+        ):
+            ok(f"human handoff packet packages {len(tasks)} human task(s)")
+        else:
+            fail("human_handoff_packet.json missing safe consolidated handoff tasks", failures)
+    else:
+        fail("human_handoff_packet.json missing; run scripts/build_human_handoff_packet.py", failures)
     if PLATFORM_REPAIR_STATUS.exists():
         repair_status = json.loads(PLATFORM_REPAIR_STATUS.read_text(encoding="utf-8"))
         repair_summary = repair_status.get("summary") or {}
@@ -1429,6 +1455,14 @@ def validate_generated_outputs(failures):
             fail("build_promo_operations_packet.py missing review packet outputs or executes commands", failures)
     else:
         fail("build_promo_operations_packet.py missing", failures)
+    if HUMAN_HANDOFF_SCRIPT.exists():
+        handoff_text = HUMAN_HANDOFF_SCRIPT.read_text(encoding="utf-8")
+        if "human_handoff_packet.json" in handoff_text and "human-handoff-packet.md" in handoff_text and "promotion_blocker_ledger.json" in handoff_text and "manual_metric_collection_packet.json" in handoff_text and "manual_distribution_packet.json" in handoff_text and "scheduled_approval_packet.json" in handoff_text and "platform_repair_status.json" in handoff_text and "subprocess" not in handoff_text:
+            ok("human handoff packet builder is review-only")
+        else:
+            fail("build_human_handoff_packet.py missing handoff outputs or executes commands", failures)
+    else:
+        fail("build_human_handoff_packet.py missing", failures)
     if PROMOTION_BLOCKER_LEDGER_SCRIPT.exists():
         ledger_text = PROMOTION_BLOCKER_LEDGER_SCRIPT.read_text(encoding="utf-8")
         if "promotion_blocker_ledger.json" in ledger_text and "promotion-blocker-ledger.md" in ledger_text and "owner_counts" in ledger_text and "category_counts" in ledger_text and "manual_metric_collection_packet.json" in ledger_text and "next_resolution_projection" in ledger_text and "approval_projection" in ledger_text and "subprocess" not in ledger_text:
@@ -1525,6 +1559,14 @@ def validate_generated_outputs(failures):
             fail("promo operations markdown report missing expected sections", failures)
     else:
         fail("promo-operations-packet.md missing", failures)
+    if HUMAN_HANDOFF_REPORT.exists():
+        handoff_report_text = HUMAN_HANDOFF_REPORT.read_text(encoding="utf-8")
+        if "Human Handoff Packet" in handoff_report_text and "Tasks" in handoff_report_text and "Guardrails" in handoff_report_text:
+            ok("human handoff markdown report present")
+        else:
+            fail("human-handoff-packet.md missing expected sections", failures)
+    else:
+        fail("human-handoff-packet.md missing", failures)
     if PROMOTION_BLOCKER_LEDGER_REPORT.exists():
         ledger_report_text = PROMOTION_BLOCKER_LEDGER_REPORT.read_text(encoding="utf-8")
         if "Promotion Blocker Ledger" in ledger_report_text and "Ledger" in ledger_report_text and "Guardrails" in ledger_report_text:
