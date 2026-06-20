@@ -353,7 +353,7 @@ def validate_generated_outputs(failures):
             "recapture_readiness",
             "clear_backlog_gate",
         }
-        required_source = {"tiktok_setup_preflight", "platform_repair_status", "executor_readiness", "wrangler_config"}
+        required_source = {"tiktok_setup_preflight", "platform_repair_status", "executor_readiness", "backlog_reschedule_preview", "wrangler_config"}
         required_phases = {"Collect credentials", "Confirm approval", "Preview push", "Apply push", "Verify repair", "Clear gate"}
         if (
             runbook.get("safe_mode") is True
@@ -365,6 +365,8 @@ def validate_generated_outputs(failures):
             and required_phases <= phases
             and required_source <= set(source)
             and set(summary.get("required_secret_names") or []) == {"TIKTOK_CLIENT_KEY", "TIKTOK_CLIENT_SECRET", "TIKTOK_REFRESH_TOKEN"}
+            and "--approved-backlog" in (summary.get("backlog_preview_command") or "")
+            and "--approved-only" not in json.dumps(runbook)
             and "Secret values" in (runbook.get("redaction") or "")
             and all(step.get("id") and step.get("phase") and step.get("title") and step.get("status") in {"pass", "ready", "waiting", "blocked"} and step.get("detail") for step in steps)
         ):
@@ -1890,7 +1892,7 @@ def validate_generated_outputs(failures):
         fail("build_tiktok_setup_preflight.py missing", failures)
     if TIKTOK_REPAIR_RUNBOOK_SCRIPT.exists():
         runbook_text = TIKTOK_REPAIR_RUNBOOK_SCRIPT.read_text(encoding="utf-8")
-        if "tiktok_repair_runbook.json" in runbook_text and "tiktok-repair-runbook.md" in runbook_text and "Collect credentials" in runbook_text and "blocked_apply_command" in runbook_text and "Secret values" in runbook_text and "subprocess" not in runbook_text:
+        if "tiktok_repair_runbook.json" in runbook_text and "tiktok-repair-runbook.md" in runbook_text and "Collect credentials" in runbook_text and "blocked_apply_command" in runbook_text and "backlog_reschedule_preview.json" in runbook_text and "--approved-backlog" in runbook_text and "--approved-only" not in runbook_text and "Secret values" in runbook_text and "subprocess" not in runbook_text:
             ok("TikTok repair runbook builder is review-only")
         else:
             fail("build_tiktok_repair_runbook.py missing runbook outputs or exposes execution/secrets", failures)

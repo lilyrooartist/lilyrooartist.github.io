@@ -1,11 +1,12 @@
 {
-  "generated_at": "2026-06-20T05:09:05.227162Z",
+  "generated_at": "2026-06-20T05:14:36.257279Z",
   "safe_mode": true,
   "status": "blocked",
   "source": {
     "tiktok_setup_preflight": "data/tiktok_setup_preflight.json",
     "platform_repair_status": "data/platform_repair_status.json",
     "executor_readiness": "data/executor_readiness_snapshot.json",
+    "backlog_reschedule_preview": "data/backlog_reschedule_preview.json",
     "wrangler_config": "workers/social-executor/wrangler.jsonc"
   },
   "summary": {
@@ -41,7 +42,10 @@
     "repair_row_count": 1,
     "repair_post_id": "FP-AUTO-264",
     "blocked_apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
-    "apply_command": ""
+    "apply_command": "",
+    "backlog_preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
+    "backlog_apply_command": "",
+    "backlog_normal_apply_gate": "blocked_until_clearance_steps_complete"
   },
   "steps": [
     {

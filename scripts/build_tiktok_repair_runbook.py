@@ -10,6 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PREFLIGHT = ROOT / "data" / "tiktok_setup_preflight.json"
 PLATFORM_REPAIR = ROOT / "data" / "platform_repair_status.json"
 READINESS = ROOT / "data" / "executor_readiness_snapshot.json"
+BACKLOG_RESCHEDULE = ROOT / "data" / "backlog_reschedule_preview.json"
 WRANGLER_CONFIG = ROOT / "workers" / "social-executor" / "wrangler.jsonc"
 OUT = ROOT / "data" / "tiktok_repair_runbook.json"
 REPORT = ROOT / "admin" / "reports" / "tiktok-repair-runbook.md"
@@ -67,7 +68,9 @@ def build_payload() -> dict:
     preflight = read_json(PREFLIGHT, {})
     repair = read_json(PLATFORM_REPAIR, {})
     readiness = read_json(READINESS, {})
+    backlog = read_json(BACKLOG_RESCHEDULE, {})
     preflight_summary = preflight.get("summary") or {}
+    backlog_summary = backlog.get("summary") or {}
     local_missing = preflight_summary.get("local_missing_secrets") or []
     worker_missing = preflight_summary.get("worker_missing_secrets") or []
     public_posting = preflight_summary.get("public_posting_approved")
@@ -83,6 +86,8 @@ def build_payload() -> dict:
     worker_ready = not worker_missing
     apply_ready = local_ready and public_ready
     verify_ready = worker_ready and public_ready
+    backlog_preview = backlog_summary.get("preview_command") or "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24"
+    backlog_apply = backlog_summary.get("apply_command") or ""
     blocked_ids: list[str] = []
     steps = [
         runbook_step(
@@ -136,7 +141,7 @@ def build_payload() -> dict:
             "ready" if verify_ready else "blocked",
             "Clear TikTok backlog gate",
             "Once readiness is clean, rerun the backlog reschedule preview and apply the approved row only if the gate reports safe apply available.",
-            "python3 scripts/build_backlog_reschedule_preview.py && python3 scripts/reschedule_scheduled_posts.py --approved-only --dry-run" if verify_ready else "",
+            f"python3 scripts/build_backlog_reschedule_preview.py && {backlog_preview}" if verify_ready else "",
             [] if verify_ready else ["worker_refresh_credentials", "public_posting_approval"],
         ),
     ]
@@ -154,6 +159,7 @@ def build_payload() -> dict:
             "tiktok_setup_preflight": str(PREFLIGHT.relative_to(ROOT)),
             "platform_repair_status": str(PLATFORM_REPAIR.relative_to(ROOT)),
             "executor_readiness": str(READINESS.relative_to(ROOT)),
+            "backlog_reschedule_preview": str(BACKLOG_RESCHEDULE.relative_to(ROOT)),
             "wrangler_config": str(WRANGLER_CONFIG.relative_to(ROOT)),
         },
         "summary": {
@@ -171,6 +177,9 @@ def build_payload() -> dict:
             "repair_post_id": repair_row.get("post_id") or "",
             "blocked_apply_command": "" if apply_ready else "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
             "apply_command": push_apply if apply_ready else "",
+            "backlog_preview_command": backlog_preview,
+            "backlog_apply_command": backlog_apply,
+            "backlog_normal_apply_gate": backlog_summary.get("normal_apply_gate") or "unknown",
         },
         "steps": steps,
         "redaction": "Secret values are never written to this runbook; only required names, missing names, and presence-derived readiness are recorded.",
