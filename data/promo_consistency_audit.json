@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-06-20T04:38:49.701275Z",
+  "generated_at": "2026-06-20T04:41:31.326664Z",
   "safe_mode": true,
   "summary": {
     "check_count": 19,
-    "passed": 19,
-    "failed": 0,
-    "high_failed": 0,
+    "passed": 17,
+    "failed": 2,
+    "high_failed": 2,
     "medium_failed": 0,
-    "status": "pass"
+    "status": "fail"
   },
   "checks": [
     {
@@ -28,11 +28,11 @@
     },
     {
       "name": "status_open_actions_match_operations",
-      "status": "pass",
-      "severity": "ok",
+      "status": "fail",
+      "severity": "high",
       "detail": "Promo status open action count should mirror the operations packet.",
       "expected": 18,
-      "actual": 18
+      "actual": 17
     },
     {
       "name": "approval_counts_match",
@@ -210,11 +210,11 @@
     },
     {
       "name": "refresh_run_successful",
-      "status": "pass",
-      "severity": "ok",
+      "status": "fail",
+      "severity": "high",
       "detail": "Latest promo admin refresh should have no required or optional failures.",
       "expected": 0,
-      "actual": 0
+      "actual": 4
     }
   ],
   "source": {
