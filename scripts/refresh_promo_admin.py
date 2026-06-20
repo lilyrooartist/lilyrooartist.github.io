@@ -93,6 +93,11 @@ FINALIZE_STEPS = [
         "required": True,
     },
     {
+        "name": "build_backlog_reschedule_preview",
+        "command": ["python3", "scripts/build_backlog_reschedule_preview.py"],
+        "required": True,
+    },
+    {
         "name": "build_promo_operations_packet",
         "command": ["python3", "scripts/build_promo_operations_packet.py"],
         "required": True,
@@ -120,11 +125,6 @@ FINALIZE_STEPS = [
     {
         "name": "build_monetization_activation_plan",
         "command": ["python3", "scripts/build_monetization_activation_plan.py"],
-        "required": True,
-    },
-    {
-        "name": "build_backlog_reschedule_preview",
-        "command": ["python3", "scripts/build_backlog_reschedule_preview.py"],
         "required": True,
     },
     {

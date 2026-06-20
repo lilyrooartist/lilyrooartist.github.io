@@ -1,6 +1,6 @@
 # Backlog Reschedule Preview - Lily Roo
 
-Generated: 2026-06-20T11:37:48.071096+09:00
+Generated: 2026-06-20T11:45:03.856760+09:00
 
 ## Summary
 - Approved backlog rows: **1**
@@ -18,8 +18,11 @@ Generated: 2026-06-20T11:37:48.071096+09:00
 
 ## Commands
 - Preview: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24`
-- Apply after blockers are cleared: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --apply --refresh-admin`
+- Safe apply: none until blockers clear
+- Blocked apply command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --apply --refresh-admin`
+- Deliberate override command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin`
 
 ## Guardrails
 - This preview does not write schedule changes, approve posts, publish posts, or push secrets.
-- Apply refuses known blocked rows unless `--allow-blocked` is used after deliberate review.
+- The normal apply command is hidden while rows have known executor blockers.
+- The override command includes `--allow-blocked` and is only for deliberate review after accepting the blocker risk.

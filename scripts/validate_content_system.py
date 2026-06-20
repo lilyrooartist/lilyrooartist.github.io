@@ -300,8 +300,19 @@ def validate_generated_outputs(failures):
             if (
                 backlog_actions
                 and all("--apply" not in (action.get("command") or "") for action in backlog_actions)
-                and all((action.get("context") or {}).get("apply_command") for action in backlog_actions)
-                and all("refuses" in ((action.get("context") or {}).get("note") or "") for action in backlog_actions)
+                and all(
+                    (
+                        ((action.get("context") or {}).get("apply_allowed_without_override") and (action.get("context") or {}).get("apply_command"))
+                        or (
+                            not (action.get("context") or {}).get("apply_allowed_without_override")
+                            and not (action.get("context") or {}).get("apply_command")
+                            and (action.get("context") or {}).get("blocked_apply_command")
+                            and (action.get("context") or {}).get("override_apply_command")
+                        )
+                    )
+                    for action in backlog_actions
+                )
+                and all("Normal apply is hidden" in ((action.get("context") or {}).get("note") or "") or "Safe apply is available" in ((action.get("context") or {}).get("note") or "") for action in backlog_actions)
                 and summary.get("backlog_reschedules") == len(backlog_actions)
             ):
                 ok("promo operations packet includes dry-run backlog reschedule action")
@@ -610,6 +621,10 @@ def validate_generated_outputs(failures):
             and summary.get("blocked_backlog_count") == len(blocked)
             and summary.get("clear_to_apply_count") == len(items) - len(blocked)
             and bool(summary.get("apply_allowed_without_override")) == (len(blocked) == 0)
+            and (
+                (not blocked and summary.get("apply_command") and not summary.get("blocked_apply_command") and not summary.get("override_apply_command"))
+                or (blocked and not summary.get("apply_command") and summary.get("blocked_apply_command") and "--allow-blocked" in summary.get("override_apply_command", ""))
+            )
             and all(item.get("id") and item.get("current_scheduled_at") and item.get("proposed_scheduled_at") for item in items)
         ):
             ok(f"backlog reschedule preview checks {len(items)} approved backlog row(s)")
@@ -1480,7 +1495,7 @@ def validate_generated_outputs(failures):
         fail("build_monetization_activation_plan.py missing", failures)
     if BACKLOG_RESCHEDULE_PREVIEW_SCRIPT.exists():
         backlog_text = BACKLOG_RESCHEDULE_PREVIEW_SCRIPT.read_text(encoding="utf-8")
-        if "backlog_reschedule_preview.json" in backlog_text and "backlog-reschedule-preview.md" in backlog_text and "Apply allowed without override" in backlog_text and "subprocess" not in backlog_text:
+        if "backlog_reschedule_preview.json" in backlog_text and "backlog-reschedule-preview.md" in backlog_text and "Apply allowed without override" in backlog_text and "blocked_apply_command" in backlog_text and "override_apply_command" in backlog_text and "subprocess" not in backlog_text:
             ok("backlog reschedule preview builder is review-only")
         else:
             fail("build_backlog_reschedule_preview.py missing preview outputs or executes commands", failures)

@@ -13,6 +13,7 @@ PROMO_PLAN = ROOT / "data" / "promo_queue_plan.json"
 SOCIAL_EXECUTIONS = ROOT / "data" / "social_execution_snapshot.json"
 EXECUTOR_READINESS = ROOT / "data" / "executor_readiness_snapshot.json"
 SCHEDULED_APPROVAL = ROOT / "data" / "scheduled_approval_packet.json"
+BACKLOG_RESCHEDULE = ROOT / "data" / "backlog_reschedule_preview.json"
 OUT = ROOT / "data" / "promo_operations_packet.json"
 REPORT = ROOT / "admin" / "reports" / "promo-operations-packet.md"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
@@ -371,12 +372,17 @@ def scheduled_approval_batch_actions(packet):
     ]
 
 
-def backlog_reschedule_actions(status):
+def backlog_reschedule_actions(status, backlog_preview):
     monetization = (status.get("kpi") or {}).get("monetization") or {}
+    backlog_summary = (backlog_preview.get("summary") or {}) if backlog_preview else {}
     approved_backlog = int(monetization.get("approved_backlog_posts") or 0)
-    preview_command = monetization.get("backlog_reschedule_preview_command") or ""
+    preview_command = backlog_summary.get("preview_command") or monetization.get("backlog_reschedule_preview_command") or ""
     if not approved_backlog or not preview_command:
         return []
+    apply_allowed = bool(backlog_summary.get("apply_allowed_without_override")) if backlog_summary else False
+    note = "Preview first. Safe apply is available because no known executor blockers remain."
+    if not apply_allowed:
+        note = "Preview first. Normal apply is hidden until known executor/platform blockers clear; override requires deliberate review."
     return [
         command_row(
             "Preview reschedule for approved past-due posts",
@@ -386,8 +392,13 @@ def backlog_reschedule_actions(status):
             {
                 "approved_backlog_posts": approved_backlog,
                 "approved_upcoming_posts": int(monetization.get("approved_upcoming_posts") or 0),
-                "apply_command": monetization.get("backlog_reschedule_apply_command") or "",
-                "note": "Preview first. Apply refuses rows with known executor blockers unless blockers are fixed or --allow-blocked is used after deliberate review.",
+                "blocked_backlog_count": int(backlog_summary.get("blocked_backlog_count") or 0),
+                "clear_to_apply_count": int(backlog_summary.get("clear_to_apply_count") or 0),
+                "apply_allowed_without_override": apply_allowed,
+                "apply_command": backlog_summary.get("apply_command") or "",
+                "blocked_apply_command": backlog_summary.get("blocked_apply_command") or "",
+                "override_apply_command": backlog_summary.get("override_apply_command") or "",
+                "note": note,
             },
         )
     ]
@@ -577,9 +588,10 @@ def main() -> int:
     executions = read_json(SOCIAL_EXECUTIONS, {})
     readiness = read_json(EXECUTOR_READINESS, {})
     scheduled_approval = read_json(SCHEDULED_APPROVAL, {})
+    backlog_preview = read_json(BACKLOG_RESCHEDULE, {})
     actions = (
         scheduled_approval_batch_actions(scheduled_approval)
-        + backlog_reschedule_actions(status)
+        + backlog_reschedule_actions(status, backlog_preview)
         + platform_fix_actions(status, executions, readiness)
         + apply_actions(plan)
         + approval_actions(plan, readiness)

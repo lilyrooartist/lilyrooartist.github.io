@@ -75,6 +75,17 @@ def apply_command(status: dict) -> str:
     return monetization.get("backlog_reschedule_apply_command") or ""
 
 
+def override_apply_command(status: dict) -> str:
+    command = apply_command(status)
+    if not command:
+        return ""
+    if " --allow-blocked" in command:
+        return command
+    if " --apply" in command:
+        return command.replace(" --apply", " --allow-blocked --apply", 1)
+    return command + " --allow-blocked"
+
+
 def start_at_from_status(status: dict) -> datetime:
     command = preview_command(status)
     match = re.search(r"--start-at\s+'([^']+)'", command)
@@ -129,6 +140,8 @@ def build_preview() -> dict:
         })
 
     blocked_items = [item for item in items if item["blocked"]]
+    safe_apply_command = apply_command(status) if not blocked_items else ""
+    blocked_apply_command = apply_command(status) if blocked_items else ""
     return {
         "generated_at": datetime.now().astimezone().isoformat(),
         "safe_mode": True,
@@ -145,7 +158,10 @@ def build_preview() -> dict:
             "start_at": start_at.isoformat(),
             "spacing_hours": spacing_hours,
             "preview_command": preview_command(status),
-            "apply_command": apply_command(status),
+            "apply_command": safe_apply_command,
+            "blocked_apply_command": blocked_apply_command,
+            "override_apply_command": override_apply_command(status) if blocked_items else "",
+            "apply_blocked_reason": "Known executor/platform blockers must clear before normal apply." if blocked_items else "",
             "apply_allowed_without_override": len(blocked_items) == 0,
         },
         "items": items,
@@ -206,11 +222,14 @@ def build_markdown(payload: dict) -> str:
         "",
         "## Commands",
         f"- Preview: `{summary['preview_command']}`",
-        f"- Apply after blockers are cleared: `{summary['apply_command']}`",
+        f"- Safe apply: `{summary['apply_command']}`" if summary.get("apply_command") else "- Safe apply: none until blockers clear",
+        f"- Blocked apply command: `{summary['blocked_apply_command']}`" if summary.get("blocked_apply_command") else "- Blocked apply command: none",
+        f"- Deliberate override command: `{summary['override_apply_command']}`" if summary.get("override_apply_command") else "- Deliberate override command: none",
         "",
         "## Guardrails",
         "- This preview does not write schedule changes, approve posts, publish posts, or push secrets.",
-        "- Apply refuses known blocked rows unless `--allow-blocked` is used after deliberate review.",
+        "- The normal apply command is hidden while rows have known executor blockers.",
+        "- The override command includes `--allow-blocked` and is only for deliberate review after accepting the blocker risk.",
         "",
     ])
     return "\n".join(lines)

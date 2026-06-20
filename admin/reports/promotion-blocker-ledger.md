@@ -1,6 +1,6 @@
 # Promotion Blocker Ledger - Lily Roo
 
-Generated: 2026-06-20T02:37:48.148161Z
+Generated: 2026-06-20T02:45:04.095855Z
 
 ## Summary
 - Open blockers: **12**
@@ -38,10 +38,9 @@ Generated: 2026-06-20T02:37:48.148161Z
 - **[high] Reschedule approved past-due backlog** (`backlog-reschedule`)
   - Owner: `external_platform`; status: `blocked`; category: `backlog_reschedule`
   - Evidence: 1 approved backlog row(s); 1 still have executor blockers.
-  - Next step: Preview a new schedule. Apply only after known executor blockers clear.
+  - Next step: Preview a new schedule. Safe apply becomes available after known executor blockers clear.
   - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24`
-  - Apply/log after review: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --apply --refresh-admin`
-  - Guardrail: The apply command refuses known blocked rows unless deliberately overridden.
+  - Guardrail: Normal apply is hidden while rows have known executor blockers.
 - **[medium] Approve scheduled YouTube Community row** (`approval-FP-AUTO-261`)
   - Owner: `tod`; status: `ready_for_reviewed_approval`; category: `approval`
   - Evidence: FP-AUTO-261 is blocked by not_approved in executor state. Automated review checks passed.

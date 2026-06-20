@@ -12,6 +12,7 @@ APPROVAL_RUNWAY = ROOT / "data" / "approval_runway.json"
 SUBSCRIBER_CTA_AUDIT = ROOT / "data" / "subscriber_cta_audit.json"
 PLATFORM_REPAIR = ROOT / "data" / "platform_repair_status.json"
 PROMO_OPERATIONS = ROOT / "data" / "promo_operations_packet.json"
+BACKLOG_RESCHEDULE = ROOT / "data" / "backlog_reschedule_preview.json"
 OUT = ROOT / "data" / "monetization_activation_plan.json"
 REPORT = ROOT / "admin" / "reports" / "monetization-activation-plan.md"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
@@ -43,7 +44,7 @@ def command_action(label: str, phase: str, status: str, detail: str, command: st
     }
 
 
-def build_actions(status: dict, runway: dict, cta_audit: dict, platform_repair: dict, operations: dict) -> list[dict]:
+def build_actions(status: dict, runway: dict, cta_audit: dict, platform_repair: dict, operations: dict, backlog_preview: dict) -> list[dict]:
     actions = []
     cta_by_id = by_id(cta_audit.get("rows") or [])
     recommended_ids = (runway.get("summary") or {}).get("recommended_ids") or []
@@ -71,6 +72,7 @@ def build_actions(status: dict, runway: dict, cta_audit: dict, platform_repair: 
         ))
 
     monetization = (status.get("kpi") or {}).get("monetization") or {}
+    backlog_summary = backlog_preview.get("summary") or {}
     if monetization.get("draft_review_posts"):
         actions.append(command_action(
             "Apply approved plan rows after review",
@@ -86,16 +88,24 @@ def build_actions(status: dict, runway: dict, cta_audit: dict, platform_repair: 
         ))
 
     if monetization.get("approved_backlog_posts") and monetization.get("backlog_reschedule_preview_command"):
+        apply_allowed = bool(backlog_summary.get("apply_allowed_without_override")) if backlog_summary else False
+        detail = "Preview a new schedule for approved past-due posts. Safe apply is available after preview."
+        if not apply_allowed:
+            detail = "Preview a new schedule for approved past-due posts. Normal apply is hidden until known executor/platform blockers clear."
         actions.append(command_action(
             "Preview approved backlog reschedule",
             "Recover stalled approved backlog",
             "preview_first",
-            "Preview a new schedule for approved past-due posts. Apply refuses known blocked executor rows unless deliberately overridden.",
-            monetization.get("backlog_reschedule_preview_command") or "",
-            monetization.get("backlog_reschedule_apply_command") or "",
+            detail,
+            backlog_summary.get("preview_command") or monetization.get("backlog_reschedule_preview_command") or "",
+            backlog_summary.get("apply_command") or "",
             {
                 "approved_backlog_posts": monetization.get("approved_backlog_posts"),
                 "approved_upcoming_posts": monetization.get("approved_upcoming_posts"),
+                "blocked_backlog_count": backlog_summary.get("blocked_backlog_count") or 0,
+                "apply_allowed_without_override": apply_allowed,
+                "blocked_apply_command": backlog_summary.get("blocked_apply_command") or "",
+                "override_apply_command": backlog_summary.get("override_apply_command") or "",
             },
         ))
 
@@ -195,6 +205,10 @@ def build_markdown(payload: dict) -> str:
             lines.append(f"   - Missing locally: `{', '.join(context['local_missing_secrets'])}`")
         if context.get("local_secret_source"):
             lines.append(f"   - Local source: `{context['local_secret_source']}`")
+        if context.get("blocked_apply_command"):
+            lines.append(f"   - Blocked apply command: `{context['blocked_apply_command']}`")
+        if context.get("override_apply_command"):
+            lines.append(f"   - Deliberate override command: `{context['override_apply_command']}`")
         if action.get("command"):
             lines.append(f"   - Preview/check: `{action['command']}`")
         if action.get("after_review_command"):
@@ -224,9 +238,10 @@ def main() -> int:
     cta_audit = read_json(SUBSCRIBER_CTA_AUDIT, {})
     platform_repair = read_json(PLATFORM_REPAIR, {})
     operations = read_json(PROMO_OPERATIONS, {})
+    backlog_preview = read_json(BACKLOG_RESCHEDULE, {})
     monetization = (status.get("kpi") or {}).get("monetization") or {}
     runway_state = monetization.get("runway") or {}
-    actions = build_actions(status, runway, cta_audit, platform_repair, operations)
+    actions = build_actions(status, runway, cta_audit, platform_repair, operations, backlog_preview)
     summary = {
         "target_subscribers": monetization.get("target"),
         "current_subscribers": monetization.get("current_subscribers"),

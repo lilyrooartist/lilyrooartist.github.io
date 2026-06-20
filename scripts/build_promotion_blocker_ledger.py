@@ -254,6 +254,11 @@ def add_backlog(rows: list[dict]) -> None:
     if not approved:
         return
     status = "blocked" if blocked else "ready_to_preview"
+    next_step = "Preview a new schedule. Safe apply becomes available after known executor blockers clear."
+    guardrail = "Normal apply is hidden while rows have known executor blockers."
+    if not blocked:
+        next_step = "Preview the new schedule, then apply the safe reschedule command."
+        guardrail = "The apply command remains dry-run-first through the preview artifact."
     rows.append(row(
         blocker_id="backlog-reschedule",
         title="Reschedule approved past-due backlog",
@@ -262,11 +267,17 @@ def add_backlog(rows: list[dict]) -> None:
         urgency="high",
         status=status,
         evidence=f"{approved} approved backlog row(s); {blocked} still have executor blockers.",
-        next_step="Preview a new schedule. Apply only after known executor blockers clear.",
+        next_step=next_step,
         preview_command=summary.get("preview_command") or "",
         apply_command=summary.get("apply_command") or "",
         source_path=str(BACKLOG_RESCHEDULE.relative_to(ROOT)),
-        guardrail="The apply command refuses known blocked rows unless deliberately overridden.",
+        guardrail=guardrail,
+        impact={
+            "kind": "backlog_reschedule_gate",
+            "apply_allowed_without_override": bool(summary.get("apply_allowed_without_override")),
+            "blocked_apply_command": summary.get("blocked_apply_command") or "",
+            "override_apply_command": summary.get("override_apply_command") or "",
+        },
     ))
 
 
