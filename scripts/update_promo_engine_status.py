@@ -323,7 +323,12 @@ def metric_state(manual, live):
         platform_metrics = (platforms or {}).get(platform) or {}
         fields_display = ", ".join(fields)
         command = pending_update_by_platform.get(platform, "")
-        reason = platform_metrics.get("reason") or platform_metrics.get("analytics_status") or metric_collection_reason(platform)
+        reason = (
+            platform_metrics.get("reason")
+            or platform_metrics.get("analytics_status")
+            or platform_metrics.get("insights_status")
+            or metric_collection_reason(platform)
+        )
         collection_steps.append({
             "platform": platform,
             "fields": fields,

@@ -49,6 +49,7 @@ SCHEDULED_POST_APPROVAL = ROOT / "scripts" / "update_scheduled_post_approval.py"
 SCHEDULED_POST_RESCHEDULE = ROOT / "scripts" / "reschedule_scheduled_posts.py"
 MANUAL_DISTRIBUTION_LOGGER = ROOT / "scripts" / "log_manual_distribution.py"
 MANUAL_METRICS_UPDATER = ROOT / "scripts" / "update_manual_social_stats.py"
+SOCIAL_EXECUTOR_WORKER = ROOT / "workers" / "social-executor" / "src" / "index.js"
 STORE_LINK_VERIFIER = ROOT / "scripts" / "verify_pending_store_links.py"
 SPOTIFY_SEARCH_VERIFIER = ROOT / "scripts" / "search_spotify_release.py"
 YOUTUBE_MUSIC_SEARCH_VERIFIER = ROOT / "scripts" / "search_youtube_music_release.py"
@@ -1323,6 +1324,14 @@ def validate_generated_outputs(failures):
             fail("build_manual_metric_collection.py missing worksheet outputs or executes commands", failures)
     else:
         fail("build_manual_metric_collection.py missing", failures)
+    if SOCIAL_EXECUTOR_WORKER.exists():
+        worker_text = SOCIAL_EXECUTOR_WORKER.read_text(encoding="utf-8")
+        if "page_impressions_unique" in worker_text and "reach_7d" in worker_text and "insights_status" in worker_text:
+            ok("social executor captures Facebook reach when page insights are available")
+        else:
+            fail("social executor missing Facebook reach metric support", failures)
+    else:
+        fail("social executor Worker missing", failures)
     if PROMO_OPERATIONS_REPORT.exists():
         report_text = PROMO_OPERATIONS_REPORT.read_text(encoding="utf-8")
         if "Promo Operations Packet" in report_text and "Top Actions" in report_text:

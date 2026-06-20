@@ -648,13 +648,43 @@ async function facebookMetrics(env) {
     fields: "name,link,followers_count,fan_count",
     access_token: env.META_LONG_LIVED_TOKEN,
   });
-  return availableMetric("meta-graph-page", {
+  const insights = await facebookPageInsights(env);
+  const metrics = {
     followers: numberOrNull(page.followers_count),
     page_likes: numberOrNull(page.fan_count),
-  }, {
+  };
+  if (insights.reach_7d !== null) metrics.reach_7d = insights.reach_7d;
+
+  return availableMetric("meta-graph-page", metrics, {
     page_name: text(page.name),
     profile_url: text(page.link) || `https://www.facebook.com/${env.FB_PAGE_ID}`,
+    insights_period: insights.period,
+    insights_status: insights.status,
   });
+}
+
+async function facebookPageInsights(env) {
+  const period = lastNDaysPeriod(7);
+  try {
+    const payload = await jsonGet(`${metaBase(env)}/${env.FB_PAGE_ID}/insights/page_impressions_unique`, {
+      period: "week",
+      since: period.startDate,
+      until: period.endDate,
+      access_token: env.META_LONG_LIVED_TOKEN,
+    });
+    const reach7d = latestInsightValue(payload);
+    return {
+      reach_7d: reach7d,
+      period: `${period.startDate}..${period.endDate}`,
+      status: reach7d === null ? "No page_impressions_unique values returned" : "ok",
+    };
+  } catch (error) {
+    return {
+      reach_7d: null,
+      period: `${period.startDate}..${period.endDate}`,
+      status: metricErrorMessage(error),
+    };
+  }
 }
 
 async function xMetrics(env) {
@@ -1367,6 +1397,16 @@ function externalIdFromResult(result) {
 function numberOrNull(value) {
   const n = Number(value);
   return Number.isFinite(n) ? n : null;
+}
+
+function latestInsightValue(payload) {
+  const metric = Array.isArray(payload?.data) ? payload.data[0] : null;
+  const values = Array.isArray(metric?.values) ? metric.values : [];
+  for (const item of values.slice().reverse()) {
+    const n = numberOrNull(item?.value);
+    if (n !== null) return n;
+  }
+  return null;
 }
 
 function spotifyAlbumId(value) {

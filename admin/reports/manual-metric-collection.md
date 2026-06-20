@@ -1,6 +1,6 @@
 # Manual Metric Collection - Lily Roo
 
-Generated: 2026-06-20T00:40:48.774635Z
+Generated: 2026-06-20T00:49:26.737446Z
 
 Pending fields: **11**
 
@@ -26,7 +26,7 @@ You can still run a platform update command directly if you only collect one pla
 
 Source: Meta Business Suite > Insights
 Open: https://www.facebook.com/903693509504290
-Why: Facebook reach requires Page insights access or manual Meta Business Suite export.
+Why: (#100) The value must be a valid insights metric
 
 - `reach_7d` current `pending` -> `VALUE`
 

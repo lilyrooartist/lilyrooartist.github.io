@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T00:40:48.774635Z",
+  "generated_at": "2026-06-20T00:49:26.737446Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -23,7 +23,7 @@
       "platform": "facebook",
       "source_hint": "Meta Business Suite > Insights",
       "collection_url": "https://www.facebook.com/903693509504290",
-      "reason": "Facebook reach requires Page insights access or manual Meta Business Suite export.",
+      "reason": "(#100) The value must be a valid insights metric",
       "fields": [
         {
           "field": "reach_7d",
@@ -175,7 +175,7 @@
       "new_value": "",
       "source_hint": "Meta Business Suite > Insights",
       "collection_url": "https://www.facebook.com/903693509504290",
-      "reason": "Facebook reach requires Page insights access or manual Meta Business Suite export.",
+      "reason": "(#100) The value must be a valid insights metric",
       "update_assignment": "facebook.reach_7d=VALUE",
       "platform_update_command": "python3 scripts/update_manual_social_stats.py facebook.reach_7d=VALUE --refresh-admin"
     },
