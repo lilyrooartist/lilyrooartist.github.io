@@ -32,6 +32,49 @@ def by_id(rows: list[dict]) -> dict:
     }
 
 
+def manual_approval_action(runway: dict) -> dict | None:
+    docket = runway.get("manual_approval_docket") or {}
+    ready_ids = docket.get("ready_ids") or []
+    if not ready_ids:
+        return None
+    rows = docket.get("ready_to_review") or docket.get("rows") or []
+    blocked_ids = docket.get("blocked_ids") or []
+    release_names = sorted({row.get("release") for row in rows if row.get("release")})
+    release_text = ", ".join(release_names) if release_names else "the manual YouTube Community docket"
+    detail = (
+        f"Review and approve {len(ready_ids)} manual subscriber-growth YouTube Community row(s) "
+        f"for {release_text}. Approval only moves them into the manual distribution docket; "
+        "it does not publish externally."
+    )
+    if blocked_ids:
+        detail = f"{detail} Blocked rows stay excluded: {', '.join(blocked_ids)}."
+    return command_action(
+        "Approve manual YouTube Community subscriber rows",
+        "Approve manual subscriber rows",
+        docket.get("status") or "ready_for_manual_review",
+        detail,
+        docket.get("preview_command") or "",
+        docket.get("apply_command") or "",
+        {
+            "ready_ids": ready_ids,
+            "blocked_ids": blocked_ids,
+            "ready_count": docket.get("ready_count") or len(ready_ids),
+            "blocked_count": docket.get("blocked_count") or len(blocked_ids),
+            "guardrail": docket.get("guardrail") or "",
+            "rows": [
+                {
+                    "id": row.get("id") or "",
+                    "release": row.get("release") or "",
+                    "platform": row.get("platform") or "",
+                    "subscriber_growth_score": row.get("subscriber_growth_score"),
+                    "readiness_state": row.get("readiness_state") or "",
+                }
+                for row in rows
+            ],
+        },
+    )
+
+
 def command_action(label: str, phase: str, status: str, detail: str, command: str = "", after_review: str = "", context: dict | None = None) -> dict:
     return {
         "label": label,
@@ -46,6 +89,10 @@ def command_action(label: str, phase: str, status: str, detail: str, command: st
 
 def build_actions(status: dict, runway: dict, cta_audit: dict, platform_repair: dict, operations: dict, backlog_preview: dict) -> list[dict]:
     actions = []
+    manual_action = manual_approval_action(runway)
+    if manual_action:
+        actions.append(manual_action)
+
     cta_by_id = by_id(cta_audit.get("rows") or [])
     recommended_ids = (runway.get("summary") or {}).get("recommended_ids") or []
     for post_id in recommended_ids:
@@ -209,6 +256,12 @@ def build_markdown(payload: dict) -> str:
             lines.append(f"   - Blocked apply command: `{context['blocked_apply_command']}`")
         if context.get("override_apply_command"):
             lines.append(f"   - Deliberate override command: `{context['override_apply_command']}`")
+        if context.get("ready_ids"):
+            lines.append(f"   - Ready IDs: `{', '.join(context['ready_ids'])}`")
+        if context.get("blocked_ids"):
+            lines.append(f"   - Blocked IDs: `{', '.join(context['blocked_ids'])}`")
+        if context.get("guardrail"):
+            lines.append(f"   - Guardrail: {context['guardrail']}")
         if action.get("command"):
             lines.append(f"   - Preview/check: `{action['command']}`")
         if action.get("after_review_command"):
@@ -242,6 +295,10 @@ def main() -> int:
     monetization = (status.get("kpi") or {}).get("monetization") or {}
     runway_state = monetization.get("runway") or {}
     actions = build_actions(status, runway, cta_audit, platform_repair, operations, backlog_preview)
+    runway_summary = runway.get("summary") or {}
+    manual_docket = runway.get("manual_approval_docket") or {}
+    manual_ready_ids = manual_docket.get("ready_ids") or []
+    manual_blocked_ids = manual_docket.get("blocked_ids") or []
     summary = {
         "target_subscribers": monetization.get("target"),
         "current_subscribers": monetization.get("current_subscribers"),
@@ -249,7 +306,14 @@ def main() -> int:
         "runway_status": runway_state.get("status") or "",
         "subscribers_per_week": runway_state.get("subscribers_per_week"),
         "required_subscribers_per_week_365": (runway_state.get("required_subscribers_per_week") or {}).get("365_days"),
-        "ready_subscriber_approval_count": len((runway.get("summary") or {}).get("recommended_ids") or []),
+        "ready_subscriber_approval_count": len((runway_summary.get("recommended_ids") or [])) + len(manual_ready_ids),
+        "auto_subscriber_approval_count": len(runway_summary.get("recommended_ids") or []),
+        "manual_subscriber_approval_count": len(manual_ready_ids),
+        "manual_subscriber_approval_ids": manual_ready_ids,
+        "manual_subscriber_blocked_ids": manual_blocked_ids,
+        "manual_subscriber_approval_preview_command": manual_docket.get("preview_command") or "",
+        "manual_subscriber_approval_apply_command": manual_docket.get("apply_command") or "",
+        "manual_subscriber_approval_guardrail": manual_docket.get("guardrail") or "",
         "subscriber_swap_count": (cta_audit.get("summary") or {}).get("subscriber_swap_count", 0),
         "ready_after_approval_swap_count": (cta_audit.get("summary") or {}).get("ready_after_approval_swap_count", 0),
         "platform_fix_count": (platform_repair.get("summary") or {}).get("platform_fix_count", 0),

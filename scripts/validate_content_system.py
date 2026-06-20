@@ -832,11 +832,38 @@ def validate_generated_outputs(failures):
         activation = json.loads(MONETIZATION_ACTIVATION_PLAN.read_text(encoding="utf-8"))
         summary = activation.get("summary") or {}
         actions = activation.get("actions") or []
+        runway = json.loads(APPROVAL_RUNWAY.read_text(encoding="utf-8")) if APPROVAL_RUNWAY.exists() else {}
+        runway_summary = runway.get("summary") or {}
+        manual_docket = runway.get("manual_approval_docket") or {}
+        manual_ready_ids = manual_docket.get("ready_ids") or []
+        auto_ready_ids = runway_summary.get("recommended_ids") or []
+        manual_action = next(
+            (action for action in actions if action.get("phase") == "Approve manual subscriber rows"),
+            None,
+        )
         if (
             activation.get("safe_mode") is True
             and summary.get("action_count") == len(actions)
             and "ready_subscriber_approval_count" in summary
             and "subscriber_swap_count" in summary
+            and summary.get("ready_subscriber_approval_count") == len(auto_ready_ids) + len(manual_ready_ids)
+            and summary.get("manual_subscriber_approval_count") == len(manual_ready_ids)
+            and summary.get("manual_subscriber_approval_ids") == manual_ready_ids
+            and summary.get("manual_subscriber_blocked_ids") == (manual_docket.get("blocked_ids") or [])
+            and summary.get("manual_subscriber_approval_preview_command") == (manual_docket.get("preview_command") or "")
+            and summary.get("manual_subscriber_approval_apply_command") == (manual_docket.get("apply_command") or "")
+            and (
+                (not manual_ready_ids and manual_action is None)
+                or (
+                    manual_ready_ids
+                    and manual_action
+                    and manual_action.get("status") == manual_docket.get("status")
+                    and manual_action.get("command") == manual_docket.get("preview_command")
+                    and manual_action.get("after_review_command") == manual_docket.get("apply_command")
+                    and (manual_action.get("context") or {}).get("ready_ids") == manual_ready_ids
+                    and (manual_action.get("context") or {}).get("guardrail") == manual_docket.get("guardrail")
+                )
+            )
             and all("phase" in action and "status" in action and "label" in action for action in actions)
         ):
             ok(f"monetization activation plan sequences {len(actions)} action(s)")

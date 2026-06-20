@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T04:17:55.317708Z",
+  "generated_at": "2026-06-20T04:24:57.676815Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -15,13 +15,61 @@
     "runway_status": "behind_365_day_pace",
     "subscribers_per_week": 0.64,
     "required_subscribers_per_week_365": 19.06,
-    "ready_subscriber_approval_count": 0,
+    "ready_subscriber_approval_count": 2,
+    "auto_subscriber_approval_count": 0,
+    "manual_subscriber_approval_count": 2,
+    "manual_subscriber_approval_ids": [
+      "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+      "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
+    ],
+    "manual_subscriber_blocked_ids": [
+      "FP-PLAN-TWELVE-DOLLARS-TIKTOK"
+    ],
+    "manual_subscriber_approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
+    "manual_subscriber_approval_apply_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+    "manual_subscriber_approval_guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review.",
     "subscriber_swap_count": 0,
     "ready_after_approval_swap_count": 0,
     "platform_fix_count": 1,
-    "action_count": 4
+    "action_count": 5
   },
   "actions": [
+    {
+      "label": "Approve manual YouTube Community subscriber rows",
+      "phase": "Approve manual subscriber rows",
+      "status": "ready_for_manual_review",
+      "detail": "Review and approve 2 manual subscriber-growth YouTube Community row(s) for Analog Myth, Twelve Dollars. Approval only moves them into the manual distribution docket; it does not publish externally. Blocked rows stay excluded: FP-PLAN-TWELVE-DOLLARS-TIKTOK.",
+      "command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
+      "after_review_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+      "context": {
+        "ready_ids": [
+          "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+          "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
+        ],
+        "blocked_ids": [
+          "FP-PLAN-TWELVE-DOLLARS-TIKTOK"
+        ],
+        "ready_count": 2,
+        "blocked_count": 1,
+        "guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review.",
+        "rows": [
+          {
+            "id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+            "release": "Analog Myth",
+            "platform": "YouTube Community",
+            "subscriber_growth_score": 116,
+            "readiness_state": ""
+          },
+          {
+            "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+            "release": "Twelve Dollars",
+            "platform": "YouTube Community",
+            "subscriber_growth_score": 116,
+            "readiness_state": ""
+          }
+        ]
+      }
+    },
     {
       "label": "Apply approved plan rows after review",
       "phase": "Move approved subscriber posts into queue",
