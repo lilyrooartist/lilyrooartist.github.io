@@ -358,6 +358,7 @@ def build_packet(rows: list[dict], generated_at: str) -> dict:
     platforms = list(by_platform.values())
     docket = build_collection_docket(platforms, ready_rows)
     priority_batches = build_priority_batches(rows)
+    import_manifest = build_import_manifest(rows)
     return {
         "generated_at": generated_at,
         "safe_mode": True,
@@ -392,7 +393,8 @@ def build_packet(rows: list[dict], generated_at: str) -> dict:
             "entry_import_command": ENTRY_IMPORT_COMMAND,
         },
         "metric_collection_docket": docket,
-        "worksheet_import_manifest": build_import_manifest(rows),
+        "worksheet_import_manifest": import_manifest,
+        "metric_completion_manifest": build_completion_manifest(rows, import_manifest, priority_batches),
         "public_metric_capture_backlog": build_public_metric_capture_backlog(public_manual_rows),
         "priority_batches": priority_batches,
         "platforms": platforms,
@@ -568,6 +570,60 @@ def build_import_manifest(rows: list[dict]) -> dict:
     }
 
 
+def build_completion_manifest(rows: list[dict], import_manifest: dict, priority_batches: list[dict]) -> dict:
+    ready_rows = [row for row in rows if row.get("ready_to_import")]
+    waiting_rows = [row for row in rows if not row.get("ready_to_import")]
+    access_counts: dict[str, int] = {}
+    for row in rows:
+        access = row.get("access_level") or "unknown"
+        access_counts[access] = access_counts.get(access, 0) + 1
+    return {
+        "status": import_manifest.get("status") or "needs_values",
+        "entry_csv_path": str(OUT_ENTRY_CSV.relative_to(ROOT)),
+        "detailed_csv_path": str(OUT_CSV.relative_to(ROOT)),
+        "waiting_field_count": len(waiting_rows),
+        "ready_field_count": len(ready_rows),
+        "waiting_csv_rows": [row.get("csv_row") for row in waiting_rows],
+        "ready_csv_rows": [row.get("csv_row") for row in ready_rows],
+        "waiting_assignments": [row.get("update_assignment") for row in waiting_rows if row.get("update_assignment")],
+        "ready_assignments": [row.get("update_assignment") for row in ready_rows if row.get("update_assignment")],
+        "access_level_counts": dict(sorted(access_counts.items())),
+        "priority_order": [
+            {
+                "priority": batch.get("priority"),
+                "label": batch.get("label") or "",
+                "waiting_count": batch.get("waiting_count") or 0,
+                "ready_to_import_count": batch.get("ready_to_import_count") or 0,
+                "csv_rows": batch.get("csv_rows") or [],
+            }
+            for batch in priority_batches
+        ],
+        "preview_command": import_manifest.get("entry_preview_command") or ENTRY_IMPORT_PREVIEW_COMMAND,
+        "apply_command": import_manifest.get("entry_apply_command") or "",
+        "fallback_preview_command": import_manifest.get("preview_command") or WORKSHEET_IMPORT_PREVIEW_COMMAND,
+        "fallback_apply_command": import_manifest.get("apply_command") or "",
+        "apply_gate": import_manifest.get("apply_gate") or "blocked_until_new_values_filled",
+        "operator_checklist": [
+            "Open the short entry CSV and fill only new_value cells for rows with sourced analytics values.",
+            "Add an evidence_note for each filled value when the source UI/export can be named briefly.",
+            "Run the short entry import preview before applying any metric update.",
+            "Apply only when the preview shows the intended nonnegative numeric values.",
+            "Refresh Admin and confirm pending_manual_metric_fields decreases or clears.",
+        ],
+        "completion_evidence": [
+            "data/manual_metric_collection_packet.json shows fewer waiting fields or ready rows imported.",
+            "data/manual_social_stats.json contains the imported platform metric values.",
+            "data/metrics_history.json preserves the imported metrics in the latest snapshot.",
+            "data/promo_engine_status.json and lilyroo.com/admin show updated pending manual metric counts.",
+        ],
+        "guardrails": [
+            "Do not guess private analytics values.",
+            "Leave unknown values blank; blank rows are ignored by the import.",
+            "Import only nonnegative numeric new_value cells from the named analytics source.",
+        ],
+    }
+
+
 def build_markdown(rows: list[dict], generated_at: str, packet: dict) -> str:
     lines = [
         "# Manual Metric Collection - Lily Roo",
@@ -654,6 +710,7 @@ def build_markdown(rows: list[dict], generated_at: str, packet: dict) -> str:
                 lines.append(f"  - Evidence: {field['evidence_hint']}")
         lines.append("")
     manifest = packet.get("worksheet_import_manifest") or {}
+    completion_manifest = packet.get("metric_completion_manifest") or {}
     lines.extend([
         "## Worksheet Import Manifest",
         "",
@@ -668,6 +725,32 @@ def build_markdown(rows: list[dict], generated_at: str, packet: dict) -> str:
         f"- Guardrail: {manifest.get('guardrail') or 'Import only collected values.'}",
         "",
     ])
+    lines.extend([
+        "## Metric Completion Manifest",
+        "",
+        f"- Status: **{completion_manifest.get('status', 'unknown')}**",
+        f"- Waiting fields: **{completion_manifest.get('waiting_field_count', 0)}**",
+        f"- Ready fields: **{completion_manifest.get('ready_field_count', 0)}**",
+        f"- Short entry CSV: `{completion_manifest.get('entry_csv_path') or str(OUT_ENTRY_CSV.relative_to(ROOT))}`",
+        f"- Preview: `{completion_manifest.get('preview_command') or ENTRY_IMPORT_PREVIEW_COMMAND}`",
+        f"- Apply after review: `{completion_manifest.get('apply_command') or 'blocked until new_value cells are filled'}`",
+        f"- Apply gate: **{completion_manifest.get('apply_gate', 'unknown')}**",
+    ])
+    if completion_manifest.get("waiting_assignments"):
+        lines.append(f"- Waiting assignments: `{', '.join(completion_manifest['waiting_assignments'])}`")
+    if completion_manifest.get("operator_checklist"):
+        lines.append("- Operator checklist:")
+        for item in completion_manifest["operator_checklist"]:
+            lines.append(f"  - {item}")
+    if completion_manifest.get("completion_evidence"):
+        lines.append("- Completion evidence:")
+        for item in completion_manifest["completion_evidence"]:
+            lines.append(f"  - {item}")
+    if completion_manifest.get("guardrails"):
+        lines.append("- Guardrails:")
+        for item in completion_manifest["guardrails"]:
+            lines.append(f"  - {item}")
+    lines.append("")
     for group in docket.get("platform_groups") or []:
         lines.append(f"### {group.get('platform')}")
         lines.append(f"- Status: `{group.get('status')}`; waiting: **{group.get('waiting_count', 0)}**; ready: **{group.get('ready_to_import_count', 0)}**")

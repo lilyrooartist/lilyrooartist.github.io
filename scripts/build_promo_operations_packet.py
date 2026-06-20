@@ -454,6 +454,7 @@ def backlog_reschedule_actions(status, backlog_preview):
 
 def manual_metric_actions(packet):
     summary = packet.get("summary") or {}
+    completion_manifest = packet.get("metric_completion_manifest") or {}
     actions = []
     for batch in packet.get("priority_batches") or []:
         fields = batch.get("fields") or []
@@ -479,6 +480,10 @@ def manual_metric_actions(packet):
                 "report_path": summary.get("report_path") or "admin/reports/manual-metric-collection.md",
                 "worksheet_import_preview_command": batch.get("worksheet_import_preview_command") or summary.get("worksheet_import_preview_command") or "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
                 "worksheet_import_command": batch.get("worksheet_import_command") or summary.get("worksheet_import_command") or "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
+                "metric_completion_manifest": completion_manifest,
+                "completion_checklist": completion_manifest.get("operator_checklist") or [],
+                "completion_evidence": completion_manifest.get("completion_evidence") or [],
+                "completion_guardrails": completion_manifest.get("guardrails") or [],
             },
         ))
     return actions

@@ -1,6 +1,6 @@
 # Manual Metric Collection - Lily Roo
 
-Generated: 2026-06-20T08:27:13.626050Z
+Generated: 2026-06-20T08:33:01.865132Z
 
 Pending fields: **6**
 
@@ -87,6 +87,32 @@ You can still run a platform update command directly if you only collect one pla
 - Short entry apply after review: `blocked until new_value cells are filled`
 - Apply gate: **blocked_until_new_values_filled**
 - Guardrail: Import only filled nonnegative numeric new_value cells; leave unknown rows blank.
+
+## Metric Completion Manifest
+
+- Status: **needs_values**
+- Waiting fields: **6**
+- Ready fields: **0**
+- Short entry CSV: `data/manual_metric_entry_template.csv`
+- Preview: `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run`
+- Apply after review: `blocked until new_value cells are filled`
+- Apply gate: **blocked_until_new_values_filled**
+- Waiting assignments: `facebook.reach_7d=VALUE, instagram.profile_visits_7d=VALUE, spotify.release_streams=VALUE, spotify.saves=VALUE, tiktok.profile_views_7d=VALUE, x.impressions_7d=VALUE`
+- Operator checklist:
+  - Open the short entry CSV and fill only new_value cells for rows with sourced analytics values.
+  - Add an evidence_note for each filled value when the source UI/export can be named briefly.
+  - Run the short entry import preview before applying any metric update.
+  - Apply only when the preview shows the intended nonnegative numeric values.
+  - Refresh Admin and confirm pending_manual_metric_fields decreases or clears.
+- Completion evidence:
+  - data/manual_metric_collection_packet.json shows fewer waiting fields or ready rows imported.
+  - data/manual_social_stats.json contains the imported platform metric values.
+  - data/metrics_history.json preserves the imported metrics in the latest snapshot.
+  - data/promo_engine_status.json and lilyroo.com/admin show updated pending manual metric counts.
+- Guardrails:
+  - Do not guess private analytics values.
+  - Leave unknown values blank; blank rows are ignored by the import.
+  - Import only nonnegative numeric new_value cells from the named analytics source.
 
 ### facebook
 - Status: `needs_values`; waiting: **1**; ready: **0**

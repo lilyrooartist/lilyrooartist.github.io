@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T08:27:13.626050Z",
+  "generated_at": "2026-06-20T08:33:01.865132Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -556,6 +556,81 @@
       }
     ],
     "guardrail": "Import only filled nonnegative numeric new_value cells; leave unknown rows blank."
+  },
+  "metric_completion_manifest": {
+    "status": "needs_values",
+    "entry_csv_path": "data/manual_metric_entry_template.csv",
+    "detailed_csv_path": "data/manual_metric_collection_template.csv",
+    "waiting_field_count": 6,
+    "ready_field_count": 0,
+    "waiting_csv_rows": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "ready_csv_rows": [],
+    "waiting_assignments": [
+      "facebook.reach_7d=VALUE",
+      "instagram.profile_visits_7d=VALUE",
+      "spotify.release_streams=VALUE",
+      "spotify.saves=VALUE",
+      "tiktok.profile_views_7d=VALUE",
+      "x.impressions_7d=VALUE"
+    ],
+    "ready_assignments": [],
+    "access_level_counts": {
+      "private_analytics": 6
+    },
+    "priority_order": [
+      {
+        "priority": 2,
+        "label": "Recent discovery and traffic",
+        "waiting_count": 4,
+        "ready_to_import_count": 0,
+        "csv_rows": [
+          2,
+          3,
+          6,
+          7
+        ]
+      },
+      {
+        "priority": 3,
+        "label": "Release depth metrics",
+        "waiting_count": 2,
+        "ready_to_import_count": 0,
+        "csv_rows": [
+          4,
+          5
+        ]
+      }
+    ],
+    "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run",
+    "apply_command": "",
+    "fallback_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
+    "fallback_apply_command": "",
+    "apply_gate": "blocked_until_new_values_filled",
+    "operator_checklist": [
+      "Open the short entry CSV and fill only new_value cells for rows with sourced analytics values.",
+      "Add an evidence_note for each filled value when the source UI/export can be named briefly.",
+      "Run the short entry import preview before applying any metric update.",
+      "Apply only when the preview shows the intended nonnegative numeric values.",
+      "Refresh Admin and confirm pending_manual_metric_fields decreases or clears."
+    ],
+    "completion_evidence": [
+      "data/manual_metric_collection_packet.json shows fewer waiting fields or ready rows imported.",
+      "data/manual_social_stats.json contains the imported platform metric values.",
+      "data/metrics_history.json preserves the imported metrics in the latest snapshot.",
+      "data/promo_engine_status.json and lilyroo.com/admin show updated pending manual metric counts."
+    ],
+    "guardrails": [
+      "Do not guess private analytics values.",
+      "Leave unknown values blank; blank rows are ignored by the import.",
+      "Import only nonnegative numeric new_value cells from the named analytics source."
+    ]
   },
   "public_metric_capture_backlog": {
     "status": "clear",

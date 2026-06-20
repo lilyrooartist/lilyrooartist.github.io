@@ -1847,6 +1847,7 @@ def build_status():
             "auto_covered_manual_metric_fields": metrics["auto_covered_fields"],
             "manual_metric_collection_steps": metrics["manual_metric_collection_steps"],
             "manual_metric_import_manifest": manual_metric_packet.get("worksheet_import_manifest") or {},
+            "manual_metric_completion_manifest": manual_metric_packet.get("metric_completion_manifest") or {},
             "live_metrics_updated_at": metrics["updated_at"],
             "metrics_history": history,
             "music_site_state_counts": dict(sorted(store_state_counts.items())),

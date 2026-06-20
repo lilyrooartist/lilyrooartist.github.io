@@ -150,6 +150,7 @@ def manual_distribution_tasks(packet: dict) -> list[dict]:
 def manual_metric_tasks(packet: dict) -> list[dict]:
     tasks = []
     summary = packet.get("summary") or {}
+    completion_manifest = packet.get("metric_completion_manifest") or {}
     for batch in packet.get("priority_batches") or []:
         fields = batch.get("fields") or []
         priority = int(batch.get("priority") or 4)
@@ -176,6 +177,10 @@ def manual_metric_tasks(packet: dict) -> list[dict]:
                 "csv_rows": batch.get("csv_rows") or [],
                 "pending_assignments": [f"{field.get('platform')}.{field.get('field')}" for field in fields if field.get("platform") and field.get("field")],
                 "evidence_hints": [field.get("evidence_hint") for field in fields if field.get("evidence_hint")],
+                "metric_completion_manifest": completion_manifest,
+                "completion_checklist": completion_manifest.get("operator_checklist") or [],
+                "completion_evidence": completion_manifest.get("completion_evidence") or [],
+                "completion_guardrails": completion_manifest.get("guardrails") or [],
             },
             guardrail="Only import nonnegative numeric values copied from the named source; leave unknown values blank instead of guessing.",
         ))
@@ -300,6 +305,7 @@ def build_action_docket(tasks: list[dict], blocker_summary: dict, approval_runwa
     platform_apply_command = platform_setup[0].get("apply_command") if platform_setup else ""
     metric_preview_command = manual_metrics[0].get("preview_command") if manual_metrics else ""
     metric_apply_command = manual_metrics[0].get("apply_command") if manual_metrics else ""
+    metric_manifest = (manual_metrics[0].get("impact") or {}).get("metric_completion_manifest") if manual_metrics else {}
     backlog_preview_command = backlog.get("preview_command") if backlog else ""
     backlog_apply_command = backlog.get("apply_command") if backlog else ""
     checklist = [
@@ -362,6 +368,9 @@ def build_action_docket(tasks: list[dict], blocker_summary: dict, approval_runwa
             "blockers_resolved": metric_field_count,
             "field_count": metric_field_count,
             "batch_count": len(manual_metrics),
+            "metric_completion_manifest": metric_manifest or {},
+            "completion_checklist": (metric_manifest or {}).get("operator_checklist") or [],
+            "completion_guardrails": (metric_manifest or {}).get("guardrails") or [],
             "batches": [
                 {
                     "priority": (task.get("impact") or {}).get("priority"),

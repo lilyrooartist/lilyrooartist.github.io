@@ -703,6 +703,9 @@ def validate_generated_outputs(failures):
             and (action.get("context") or {}).get("csv_rows")
             and (action.get("context") or {}).get("worksheet_import_preview_command")
             and (action.get("context") or {}).get("worksheet_import_command")
+            and (action.get("context") or {}).get("metric_completion_manifest")
+            and (action.get("context") or {}).get("completion_checklist")
+            and (action.get("context") or {}).get("completion_evidence")
             for action in manual_metric_actions
         ):
             ok("promo operations packet links priority-batched manual metric collection and worksheet import")
@@ -833,7 +836,7 @@ def validate_generated_outputs(failures):
             and manual_posting_step.get("preview_command") == (manual_approval_docket.get("preview_command") or "")
             and manual_posting_step.get("apply_command") == (manual_approval_docket.get("apply_command") or "")
             and manual_approval_docket.get("guardrail") in manual_posting_step.get("guardrail", "")
-            and any(item.get("id") == "manual-metric-worksheet" and item.get("field_count") == metric_task_field_count and "--from-csv --dry-run" in item.get("preview_command", "") for item in docket_checklist)
+            and any(item.get("id") == "manual-metric-worksheet" and item.get("field_count") == metric_task_field_count and "--from-csv --dry-run" in item.get("preview_command", "") and item.get("metric_completion_manifest") and item.get("completion_checklist") and item.get("completion_guardrails") for item in docket_checklist)
             and any(item.get("id") == "platform-repair-gate" and item.get("state") == "blocked" and "push_social_worker_secrets.py --dry-run" in item.get("preview_command", "") for item in docket_checklist)
             and all(
                 item.get("completion_evidence")
@@ -844,7 +847,7 @@ def validate_generated_outputs(failures):
                 for item in docket_checklist
                 if item.get("state") != "clear"
             )
-            and any(task.get("phase") == "Manual metrics" and (task.get("impact") or {}).get("pending_assignments") for task in tasks)
+            and any(task.get("phase") == "Manual metrics" and (task.get("impact") or {}).get("pending_assignments") and (task.get("impact") or {}).get("metric_completion_manifest") and (task.get("impact") or {}).get("completion_checklist") for task in tasks)
             and any(task.get("phase") == "Platform setup" and (task.get("impact") or {}).get("missing_secrets") for task in tasks)
             and any(task.get("phase") == "Platform setup" and (task.get("impact") or {}).get("platform") == "TikTok" and (task.get("impact") or {}).get("preflight_status") and (task.get("impact") or {}).get("preflight_command") and (task.get("impact") or {}).get("preflight_report") for task in tasks)
         ):
@@ -1359,6 +1362,7 @@ def validate_generated_outputs(failures):
         ]
         docket = packet.get("metric_collection_docket") or {}
         import_manifest = packet.get("worksheet_import_manifest") or {}
+        completion_manifest = packet.get("metric_completion_manifest") or {}
         public_backlog = packet.get("public_metric_capture_backlog") or {}
         docket_groups = docket.get("platform_groups") or []
         waiting_count = len([row for row in rows if not row.get("ready_to_import")])
@@ -1412,6 +1416,21 @@ def validate_generated_outputs(failures):
             and (bool(import_manifest.get("entry_apply_command")) is bool(ready_rows))
             and (bool(import_manifest.get("apply_command")) is bool(ready_rows))
             and len(import_manifest.get("rows") or []) == len(rows)
+            and completion_manifest.get("status") == import_manifest.get("status")
+            and completion_manifest.get("entry_csv_path") == "data/manual_metric_entry_template.csv"
+            and completion_manifest.get("detailed_csv_path") == "data/manual_metric_collection_template.csv"
+            and completion_manifest.get("waiting_field_count") == waiting_count
+            and completion_manifest.get("ready_field_count") == len(ready_rows)
+            and completion_manifest.get("waiting_csv_rows") == import_manifest.get("waiting_csv_rows")
+            and completion_manifest.get("ready_csv_rows") == import_manifest.get("ready_csv_rows")
+            and completion_manifest.get("waiting_assignments") == import_manifest.get("waiting_assignments")
+            and completion_manifest.get("ready_assignments") == import_manifest.get("ready_assignments")
+            and completion_manifest.get("preview_command") == import_manifest.get("entry_preview_command")
+            and completion_manifest.get("apply_command") == import_manifest.get("entry_apply_command")
+            and completion_manifest.get("apply_gate") == import_manifest.get("apply_gate")
+            and len(completion_manifest.get("priority_order") or []) == len(priority_batches)
+            and any("Do not guess private analytics values" in item for item in completion_manifest.get("guardrails") or [])
+            and any("metrics_history.json" in item for item in completion_manifest.get("completion_evidence") or [])
             and public_backlog.get("field_count") == len(public_manual_rows)
             and public_backlog.get("status") in {"clear", "needs_capture_adapter"}
             and len(public_backlog.get("fields") or []) == len(public_manual_rows)
@@ -1567,7 +1586,7 @@ def validate_generated_outputs(failures):
         fail("promotion_blocker_ledger.json missing; run scripts/build_promotion_blocker_ledger.py", failures)
     if MANUAL_METRIC_REPORT.exists():
         report_text = MANUAL_METRIC_REPORT.read_text(encoding="utf-8")
-        if "Manual Metric Collection" in report_text and "Metric Collection Docket" in report_text and "Pending fields" in report_text and "Open: " in report_text and "--from-csv --refresh-admin" in report_text and "--from-live --dry-run" in report_text:
+        if "Manual Metric Collection" in report_text and "Metric Collection Docket" in report_text and "Metric Completion Manifest" in report_text and "Pending fields" in report_text and "Open: " in report_text and "--from-csv --refresh-admin" in report_text and "--from-live --dry-run" in report_text:
             ok("manual metric markdown report present")
         else:
             fail("manual-metric-collection.md missing expected sections", failures)
@@ -2097,6 +2116,7 @@ def validate_generated_outputs(failures):
         if (
             pending_count
             and kpi.get("manual_metric_import_manifest") == import_manifest
+            and kpi.get("manual_metric_completion_manifest") == (metric_packet.get("metric_completion_manifest") or {})
             and import_manifest.get("waiting_row_count") == pending_count
             and import_manifest.get("preview_command") in metric_action
             and (
@@ -2484,7 +2504,7 @@ def validate_generated_outputs(failures):
         fail("build_published_log_reconciliation.py missing", failures)
     if HUMAN_HANDOFF_SCRIPT.exists():
         handoff_text = HUMAN_HANDOFF_SCRIPT.read_text(encoding="utf-8")
-        if "human_handoff_packet.json" in handoff_text and "human-handoff-packet.md" in handoff_text and "promotion_blocker_ledger.json" in handoff_text and "manual_metric_collection_packet.json" in handoff_text and "priority_batches" in handoff_text and "batch_count" in handoff_text and "manual_distribution_packet.json" in handoff_text and "approval_runway.json" in handoff_text and "scheduled_approval_packet.json" in handoff_text and "platform_repair_status.json" in handoff_text and "tiktok_setup_preflight.json" in handoff_text and "action_docket" in handoff_text and "approval_decision_manifest" in handoff_text and "approval_review_runbook" in handoff_text and "review_checklist" in handoff_text and "Review runbook" in handoff_text and "decision_ready_ids" in handoff_text and "build_action_docket" in handoff_text and "command_sequence" in handoff_text and "completion_evidence" in handoff_text and "next_step_after_apply" in handoff_text and "subprocess" not in handoff_text:
+        if "human_handoff_packet.json" in handoff_text and "human-handoff-packet.md" in handoff_text and "promotion_blocker_ledger.json" in handoff_text and "manual_metric_collection_packet.json" in handoff_text and "priority_batches" in handoff_text and "batch_count" in handoff_text and "metric_completion_manifest" in handoff_text and "completion_checklist" in handoff_text and "manual_distribution_packet.json" in handoff_text and "approval_runway.json" in handoff_text and "scheduled_approval_packet.json" in handoff_text and "platform_repair_status.json" in handoff_text and "tiktok_setup_preflight.json" in handoff_text and "action_docket" in handoff_text and "approval_decision_manifest" in handoff_text and "approval_review_runbook" in handoff_text and "review_checklist" in handoff_text and "Review runbook" in handoff_text and "decision_ready_ids" in handoff_text and "build_action_docket" in handoff_text and "command_sequence" in handoff_text and "completion_evidence" in handoff_text and "next_step_after_apply" in handoff_text and "subprocess" not in handoff_text:
             ok("human handoff packet builder is review-only")
         else:
             fail("build_human_handoff_packet.py missing handoff outputs or executes commands", failures)
@@ -2564,7 +2584,7 @@ def validate_generated_outputs(failures):
         fail("build_backlog_reschedule_preview.py missing", failures)
     if MANUAL_METRIC_COLLECTION_SCRIPT.exists():
         collection_text = MANUAL_METRIC_COLLECTION_SCRIPT.read_text(encoding="utf-8")
-        if "manual_metric_collection_template.csv" in collection_text and "manual_metric_entry_template.csv" in collection_text and "manual_metric_collection_packet.json" in collection_text and "manual-metric-collection.md" in collection_text and "pending_manual_by_platform" in collection_text and "metric_collection_docket" in collection_text and "worksheet_import_manifest" in collection_text and "platform_groups" in collection_text and "priority_batches" in collection_text and "collection_priority" in collection_text and "metric_category" in collection_text and "access_level" in collection_text and "evidence_hint" in collection_text and "evidence_note" in collection_text and "collection_url" in collection_text and "PUBLIC_PROFILE_COLLECTION_URLS" in collection_text and "adapter_blocker" in collection_text and "--from-live" in collection_text and "collection_mode" in collection_text and "live_import_available_count" in collection_text and "public_metric_capture_backlog" in collection_text and "public_profile_manual_required_count" in collection_text and "ready_to_import_count" in collection_text and "existing_new_values" in collection_text and "value_type" in collection_text and "import_effect" in collection_text and "subprocess" not in collection_text:
+        if "manual_metric_collection_template.csv" in collection_text and "manual_metric_entry_template.csv" in collection_text and "manual_metric_collection_packet.json" in collection_text and "manual-metric-collection.md" in collection_text and "pending_manual_by_platform" in collection_text and "metric_collection_docket" in collection_text and "worksheet_import_manifest" in collection_text and "metric_completion_manifest" in collection_text and "Metric Completion Manifest" in collection_text and "Do not guess private analytics values" in collection_text and "platform_groups" in collection_text and "priority_batches" in collection_text and "collection_priority" in collection_text and "metric_category" in collection_text and "access_level" in collection_text and "evidence_hint" in collection_text and "evidence_note" in collection_text and "collection_url" in collection_text and "PUBLIC_PROFILE_COLLECTION_URLS" in collection_text and "adapter_blocker" in collection_text and "--from-live" in collection_text and "collection_mode" in collection_text and "live_import_available_count" in collection_text and "public_metric_capture_backlog" in collection_text and "public_profile_manual_required_count" in collection_text and "ready_to_import_count" in collection_text and "existing_new_values" in collection_text and "value_type" in collection_text and "import_effect" in collection_text and "subprocess" not in collection_text:
             ok("manual metric collection builder is review-only")
         else:
             fail("build_manual_metric_collection.py missing worksheet outputs or executes commands", failures)
