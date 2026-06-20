@@ -340,6 +340,7 @@ def apply_actions(plan):
 
 def scheduled_approval_batch_actions(packet):
     summary = packet.get("summary") or {}
+    decision_manifest = packet.get("approval_decision_manifest") or {}
     preview_command = summary.get("checked_batch_preview_command") or summary.get("batch_preview_command") or ""
     apply_command = summary.get("checked_batch_apply_command") or summary.get("batch_apply_command") or ""
     blocker_count = int(summary.get("approval_blocker_count") or 0)
@@ -367,6 +368,10 @@ def scheduled_approval_batch_actions(packet):
                 "auto_count": int(summary.get("auto_count") or 0),
                 "manual_count": int(summary.get("manual_count") or 0),
                 "apply_command": apply_command,
+                "approval_decision_manifest": decision_manifest,
+                "decision_ready_ids": decision_manifest.get("ready_ids") or [],
+                "decision_held_ids": decision_manifest.get("held_ids") or [],
+                "decision_guardrail": decision_manifest.get("guardrail") or "",
                 "note": note,
             },
         )
@@ -516,6 +521,12 @@ def build_markdown(packet):
                 lines.append(f"  - Local source: `{context['local_secret_source']}`")
             if context.get("checked_at"):
                 lines.append(f"  - Latest snapshot checked: `{context['checked_at']}`")
+            if context.get("decision_ready_ids") or context.get("decision_held_ids"):
+                ready_ids = ", ".join(context.get("decision_ready_ids") or []) or "none"
+                held_ids = ", ".join(context.get("decision_held_ids") or []) or "none"
+                lines.append(f"  - Decision manifest: ready `{ready_ids}`; held `{held_ids}`")
+            if context.get("decision_guardrail"):
+                lines.append(f"  - Decision guardrail: {context['decision_guardrail']}")
             if "public_posting_approved" in context:
                 lines.append(f"  - Public posting approved: `{context.get('public_posting_approved')}`")
             if action.get("command"):

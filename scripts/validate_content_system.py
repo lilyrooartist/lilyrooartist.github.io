@@ -426,6 +426,7 @@ def validate_generated_outputs(failures):
             if action.get("kind") == "scheduled_approval_batch"
         ]
         scheduled_packet = json.loads(SCHEDULED_APPROVAL_PACKET.read_text(encoding="utf-8")) if SCHEDULED_APPROVAL_PACKET.exists() else {}
+        scheduled_manifest = scheduled_packet.get("approval_decision_manifest") or {}
         if int((scheduled_packet.get("summary") or {}).get("approval_blocker_count") or 0):
             if (
                 scheduled_batch_actions
@@ -435,6 +436,10 @@ def validate_generated_outputs(failures):
                 and all((action.get("context") or {}).get("approval_blocker_count") for action in scheduled_batch_actions)
                 and all((action.get("context") or {}).get("checked_batch_ids") == ((scheduled_packet.get("summary") or {}).get("checked_batch_ids") or []) for action in scheduled_batch_actions)
                 and all((action.get("context") or {}).get("blocked_review_ids") == ((scheduled_packet.get("summary") or {}).get("blocked_review_ids") or []) for action in scheduled_batch_actions)
+                and all((action.get("context") or {}).get("decision_ready_ids") == (scheduled_manifest.get("ready_ids") or []) for action in scheduled_batch_actions)
+                and all((action.get("context") or {}).get("decision_held_ids") == (scheduled_manifest.get("held_ids") or []) for action in scheduled_batch_actions)
+                and all(((action.get("context") or {}).get("approval_decision_manifest") or {}).get("decisions") == (scheduled_manifest.get("decisions") or []) for action in scheduled_batch_actions)
+                and all("--checked-batch" in ((action.get("context") or {}).get("decision_guardrail") or "") for action in scheduled_batch_actions)
                 and all(
                     not int((scheduled_packet.get("summary") or {}).get("review_check_passed_count") or 0)
                     or action.get("command") == (scheduled_packet.get("summary") or {}).get("checked_batch_preview_command")
