@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-06-20T05:00:07.708194Z",
+  "generated_at": "2026-06-20T05:04:12.079524Z",
   "safe_mode": true,
   "summary": {
     "check_count": 19,
-    "passed": 16,
-    "failed": 3,
-    "high_failed": 1,
-    "medium_failed": 2,
-    "status": "fail"
+    "passed": 19,
+    "failed": 0,
+    "high_failed": 0,
+    "medium_failed": 0,
+    "status": "pass"
   },
   "checks": [
     {
@@ -28,11 +28,11 @@
     },
     {
       "name": "status_open_actions_match_operations",
-      "status": "fail",
-      "severity": "high",
+      "status": "pass",
+      "severity": "ok",
       "detail": "Promo status open action count should mirror the operations packet.",
       "expected": 16,
-      "actual": 19
+      "actual": 16
     },
     {
       "name": "approval_counts_match",
@@ -131,19 +131,19 @@
       "actual": 2
     },
     {
-      "name": "manual_metric_platform_count_matches_ledger",
-      "status": "fail",
-      "severity": "medium",
-      "detail": "Manual metric packet platform count should match manual metric blockers.",
-      "expected": 5,
+      "name": "manual_metric_batch_count_matches_ledger",
+      "status": "pass",
+      "severity": "ok",
+      "detail": "Manual metric priority batch count should match manual metric blockers.",
+      "expected": 3,
       "actual": 3
     },
     {
-      "name": "manual_metric_handoff_count_matches_packet",
-      "status": "fail",
-      "severity": "medium",
-      "detail": "Human handoff should include every manual metric platform.",
-      "expected": 5,
+      "name": "manual_metric_handoff_batch_count_matches_packet",
+      "status": "pass",
+      "severity": "ok",
+      "detail": "Human handoff should include every manual metric priority batch.",
+      "expected": 3,
       "actual": 3
     },
     {

@@ -296,13 +296,14 @@ def validate_generated_outputs(failures):
             consistency.get("safe_mode") is True
             and summary.get("check_count") == len(checks)
             and summary.get("passed") + summary.get("failed") == len(checks)
-            and summary.get("status") in {"pass", "fail"}
+            and summary.get("status") == "pass"
+            and summary.get("failed") == 0
             and all(check.get("name") and check.get("status") in {"pass", "fail"} and check.get("detail") for check in checks)
             and {"promo_engine_status", "promo_operations_packet", "promotion_blocker_ledger", "human_handoff_packet", "social_execution_snapshot", "social_scheduler_dry_run", "tiktok_setup_preflight"} <= set(source)
         ):
-            ok(f"promo consistency audit runs {len(checks)} cross-surface check(s)")
+            ok(f"promo consistency audit passes {len(checks)} cross-surface check(s)")
         else:
-            fail("promo_consistency_audit.json missing safe cross-surface checks", failures)
+            fail("promo_consistency_audit.json missing passing safe cross-surface checks", failures)
     else:
         fail("promo_consistency_audit.json missing; run scripts/build_promo_consistency_audit.py", failures)
     if TIKTOK_SETUP_PREFLIGHT.exists():
@@ -1860,7 +1861,7 @@ def validate_generated_outputs(failures):
         fail("check_social_executor_dry_run.py missing", failures)
     if PROMO_CONSISTENCY_SCRIPT.exists():
         consistency_text = PROMO_CONSISTENCY_SCRIPT.read_text(encoding="utf-8")
-        if "promo_consistency_audit.json" in consistency_text and "promo-consistency-audit.md" in consistency_text and "promotion_blocker_ledger.json" in consistency_text and "human_handoff_packet.json" in consistency_text and "social_execution_snapshot.json" in consistency_text and "social_scheduler_dry_run.json" in consistency_text and "tiktok_setup_preflight.json" in consistency_text and "subprocess" not in consistency_text:
+        if "promo_consistency_audit.json" in consistency_text and "promo-consistency-audit.md" in consistency_text and "promotion_blocker_ledger.json" in consistency_text and "human_handoff_packet.json" in consistency_text and "manual_metric_batch_count_matches_ledger" in consistency_text and "priority_batch_count" in consistency_text and "social_execution_snapshot.json" in consistency_text and "social_scheduler_dry_run.json" in consistency_text and "tiktok_setup_preflight.json" in consistency_text and "subprocess" not in consistency_text:
             ok("promo consistency audit builder is review-only")
         else:
             fail("build_promo_consistency_audit.py missing audit outputs or executes commands", failures)

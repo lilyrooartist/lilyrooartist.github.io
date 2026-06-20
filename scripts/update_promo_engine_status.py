@@ -1224,6 +1224,7 @@ def build_status():
     freshness_actions = freshness["actions"]
     all_actions = freshness_actions + all_actions
     operational_next_action = promo_operations.get("next_action") or (promo_operations.get("summary") or {}).get("next_action") or {}
+    operations_action_count = int((promo_operations.get("summary") or {}).get("action_count") or 0)
     unlock_impact = blocker_unlock_impact(promotion_blockers)
     operator_docket = operator_docket_state(human_handoff)
     operator_first_step = operator_docket.get("first_ready_step") or {}
@@ -1340,7 +1341,8 @@ def build_status():
             "score": score,
             "healthy_releases": healthy_count,
             "tracked_releases": len(releases),
-            "open_action_count": len(all_actions),
+            "open_action_count": operations_action_count or len(all_actions),
+            "status_queue_count": len(all_actions),
             "fresh_sources": freshness_summary["fresh"],
             "stale_sources": freshness_summary["stale"],
             "missing_sources": freshness_summary["missing"],

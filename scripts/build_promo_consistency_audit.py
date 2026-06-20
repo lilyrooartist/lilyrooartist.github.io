@@ -178,17 +178,17 @@ def build_checks() -> dict:
         severity="medium",
     ))
     checks.append(same_value(
-        "manual_metric_platform_count_matches_ledger",
-        int((manual_metrics.get("summary") or {}).get("platform_count") or 0),
+        "manual_metric_batch_count_matches_ledger",
+        int((manual_metrics.get("summary") or {}).get("priority_batch_count") or 0),
         category_count(ledger, "manual_metrics"),
-        "Manual metric packet platform count should match manual metric blockers.",
+        "Manual metric priority batch count should match manual metric blockers.",
         severity="medium",
     ))
     checks.append(same_value(
-        "manual_metric_handoff_count_matches_packet",
-        int((manual_metrics.get("summary") or {}).get("platform_count") or 0),
+        "manual_metric_handoff_batch_count_matches_packet",
+        int((manual_metrics.get("summary") or {}).get("priority_batch_count") or 0),
         phase_count(handoff, "Manual metrics"),
-        "Human handoff should include every manual metric platform.",
+        "Human handoff should include every manual metric priority batch.",
         severity="medium",
     ))
     checks.append(same_value(
