@@ -1,6 +1,6 @@
 # Scheduled Approval Packet - Lily Roo
 
-Generated: 2026-06-20T03:32:44.807611Z
+Generated: 2026-06-20T03:39:11.586452Z
 
 ## Summary
 - Approval blockers: **3**
@@ -18,6 +18,38 @@ Generated: 2026-06-20T03:32:44.807611Z
 - Batch preview: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-259 FP-AUTO-261 --dry-run`
 - Batch approve after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-259 FP-AUTO-261 --refresh-admin`
 - Batch effect: **3** row(s) would change approval state
+
+## Approval Docket
+- Status: **ready_for_review**
+- Ready to approve: **2**
+- Held: **1**
+- Checked batch preview: `python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run`
+- Checked batch approve after review: `python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin`
+
+### Ready to Approve
+- **Instagram - I Learned It All in Fifteen Seconds** (`FP-AUTO-258`)
+  - Scheduled: `2026-06-05T15:35:00-04:00`; mode: `auto`; type: `image`
+  - Paste text: The first Lily Roo single is live, and the cover art has been remastered into its proper tiny-room glow.
+
+Listen on Spotify: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4
+  - Asset: https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg
+  - Destination links: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi, https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249, https://music.youtube.com/watch?v=vK0mDIW65o4
+  - Preview: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 --dry-run`
+  - Apply after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 --refresh-admin`
+- **YouTube Community - I Learned It All in Fifteen Seconds** (`FP-AUTO-261`)
+  - Scheduled: `2026-06-06T19:10:00-04:00`; mode: `manual`; type: `community`
+  - Paste text: New transmission: I Learned It All in Fifteen Seconds is live. Remastered cover art, same suspicious amount of feeling.
+
+Stream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube: https://www.youtube.com/@lilyroo.artist | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4
+  - Asset: https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg
+  - Destination links: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi, https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249, https://www.youtube.com/@lilyroo.artist, https://music.youtube.com/watch?v=vK0mDIW65o4
+  - Manual dispatch required after approval.
+  - Preview: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-261 --dry-run`
+  - Apply after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-261 --refresh-admin`
+
+### Held
+- **TikTok - I Learned It All in Fifteen Seconds** (`FP-AUTO-259`)
+  - Held by `platform_readiness`: Executor readiness snapshot marks platform blocked. Missing secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.
 
 ## Review Queue
 - **Instagram - I Learned It All in Fifteen Seconds** (`FP-AUTO-258`)

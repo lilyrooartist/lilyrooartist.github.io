@@ -626,6 +626,9 @@ def validate_generated_outputs(failures):
         batch_effect = summary.get("batch_effect") or {}
         checked_effects = checked_batch_effect.get("effects") or []
         batch_effects = batch_effect.get("effects") or []
+        docket = approval_packet.get("approval_docket") or {}
+        ready_docket = docket.get("ready_to_approve") or []
+        held_docket = docket.get("held") or []
         if (
             approval_packet.get("safe_mode") is True
             and summary.get("approval_blocker_count") == len(rows)
@@ -636,6 +639,16 @@ def validate_generated_outputs(failures):
             and checked_batch_effect.get("row_count") == len(checked_rows)
             and checked_batch_effect.get("ids") == [row.get("id") for row in checked_rows]
             and checked_batch_effect.get("change_count") == len([item for item in checked_effects if (item.get("effect") or {}).get("changed")])
+            and docket.get("status") in {"ready_for_review", "blocked"}
+            and docket.get("ready_count") == len(checked_rows)
+            and docket.get("held_count") == len(blocked_rows)
+            and [item.get("id") for item in ready_docket] == [row.get("id") for row in checked_rows]
+            and [item.get("id") for item in held_docket] == [row.get("id") for row in blocked_rows]
+            and docket.get("checked_batch_preview_command") == summary.get("checked_batch_preview_command")
+            and docket.get("checked_batch_apply_command") == summary.get("checked_batch_apply_command")
+            and (docket.get("checked_batch_effect") or {}).get("ids") == checked_batch_effect.get("ids")
+            and all(item.get("paste_text") and item.get("asset_url") and item.get("destination_links") and item.get("preview_command") and item.get("apply_command") for item in ready_docket)
+            and all(item.get("failed_review_checks") for item in held_docket)
             and batch_effect.get("row_count") == len(rows)
             and batch_effect.get("ids") == [row.get("id") for row in rows]
             and batch_effect.get("change_count") == len([item for item in batch_effects if (item.get("effect") or {}).get("changed")])
@@ -1663,7 +1676,7 @@ def validate_generated_outputs(failures):
         fail("build_approval_runway.py missing", failures)
     if SCHEDULED_APPROVAL_SCRIPT.exists():
         scheduled_approval_text = SCHEDULED_APPROVAL_SCRIPT.read_text(encoding="utf-8")
-        if "scheduled_approval_packet.json" in scheduled_approval_text and "scheduled-approval-packet.md" in scheduled_approval_text and "approval_preview_command" in scheduled_approval_text and "approval_apply_command" in scheduled_approval_text and "batch_preview_command" in scheduled_approval_text and "batch_apply_command" in scheduled_approval_text and "checked_batch_preview_command" in scheduled_approval_text and "checked_batch_apply_command" in scheduled_approval_text and "checked_batch_explicit_preview_command" in scheduled_approval_text and "checked_batch_explicit_apply_command" in scheduled_approval_text and "--checked-batch" in scheduled_approval_text and "review_checks" in scheduled_approval_text and "failed_review_checks" in scheduled_approval_text and "approval_review_status" in scheduled_approval_text and "executor_readiness_snapshot.json" in scheduled_approval_text and "subprocess" not in scheduled_approval_text:
+        if "scheduled_approval_packet.json" in scheduled_approval_text and "scheduled-approval-packet.md" in scheduled_approval_text and "approval_preview_command" in scheduled_approval_text and "approval_apply_command" in scheduled_approval_text and "batch_preview_command" in scheduled_approval_text and "batch_apply_command" in scheduled_approval_text and "checked_batch_preview_command" in scheduled_approval_text and "checked_batch_apply_command" in scheduled_approval_text and "checked_batch_explicit_preview_command" in scheduled_approval_text and "checked_batch_explicit_apply_command" in scheduled_approval_text and "--checked-batch" in scheduled_approval_text and "approval_docket" in scheduled_approval_text and "ready_to_approve" in scheduled_approval_text and "review_checks" in scheduled_approval_text and "failed_review_checks" in scheduled_approval_text and "approval_review_status" in scheduled_approval_text and "executor_readiness_snapshot.json" in scheduled_approval_text and "subprocess" not in scheduled_approval_text:
             ok("scheduled approval packet builder is review-only")
         else:
             fail("build_scheduled_approval_packet.py missing approval packet outputs, batch commands, review checks, or executes commands", failures)
@@ -1791,7 +1804,7 @@ def validate_generated_outputs(failures):
         fail("approval-runway.md missing", failures)
     if SCHEDULED_APPROVAL_REPORT.exists():
         scheduled_approval_report_text = SCHEDULED_APPROVAL_REPORT.read_text(encoding="utf-8")
-        if "Scheduled Approval Packet" in scheduled_approval_report_text and "Review Queue" in scheduled_approval_report_text and "Guardrails" in scheduled_approval_report_text:
+        if "Scheduled Approval Packet" in scheduled_approval_report_text and "Approval Docket" in scheduled_approval_report_text and "Review Queue" in scheduled_approval_report_text and "Guardrails" in scheduled_approval_report_text:
             ok("scheduled approval markdown report present")
         else:
             fail("scheduled-approval-packet.md missing expected sections", failures)

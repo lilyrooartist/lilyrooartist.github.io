@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T03:32:44.807611Z",
+  "generated_at": "2026-06-20T03:39:11.586452Z",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -112,6 +112,147 @@
         }
       ]
     }
+  },
+  "approval_docket": {
+    "status": "ready_for_review",
+    "ready_count": 2,
+    "held_count": 1,
+    "ready_to_approve": [
+      {
+        "id": "FP-AUTO-258",
+        "platform": "Instagram",
+        "song": "I Learned It All in Fifteen Seconds",
+        "scheduled_at": "2026-06-05T15:35:00-04:00",
+        "execution_mode": "auto",
+        "post_type": "image",
+        "review_status": "checked_batch_ready",
+        "checked_batch_member": true,
+        "paste_text": "The first Lily Roo single is live, and the cover art has been remastered into its proper tiny-room glow.\n\nListen on Spotify: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
+        "asset_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
+        "destination_links": [
+          "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+          "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+          "https://music.youtube.com/watch?v=vK0mDIW65o4"
+        ],
+        "failed_review_checks": [],
+        "approval_effect": {
+          "field": "approved",
+          "from": "no",
+          "to": "yes",
+          "changed": true,
+          "summary": "approved 'no' -> 'yes'"
+        },
+        "preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 --dry-run",
+        "apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 --refresh-admin",
+        "manual_dispatch_required": false
+      },
+      {
+        "id": "FP-AUTO-261",
+        "platform": "YouTube Community",
+        "song": "I Learned It All in Fifteen Seconds",
+        "scheduled_at": "2026-06-06T19:10:00-04:00",
+        "execution_mode": "manual",
+        "post_type": "community",
+        "review_status": "checked_batch_ready",
+        "checked_batch_member": true,
+        "paste_text": "New transmission: I Learned It All in Fifteen Seconds is live. Remastered cover art, same suspicious amount of feeling.\n\nStream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube: https://www.youtube.com/@lilyroo.artist | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
+        "asset_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
+        "destination_links": [
+          "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+          "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+          "https://www.youtube.com/@lilyroo.artist",
+          "https://music.youtube.com/watch?v=vK0mDIW65o4"
+        ],
+        "failed_review_checks": [],
+        "approval_effect": {
+          "field": "approved",
+          "from": "no",
+          "to": "yes",
+          "changed": true,
+          "summary": "approved 'no' -> 'yes'"
+        },
+        "preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-261 --dry-run",
+        "apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-261 --refresh-admin",
+        "manual_dispatch_required": true
+      }
+    ],
+    "held": [
+      {
+        "id": "FP-AUTO-259",
+        "platform": "TikTok",
+        "song": "I Learned It All in Fifteen Seconds",
+        "scheduled_at": "2026-06-05T20:40:00-04:00",
+        "execution_mode": "auto",
+        "post_type": "video",
+        "review_status": "held_by_failed_checks",
+        "checked_batch_member": false,
+        "paste_text": "I learned it all in fifteen seconds and somehow still have homework. Streaming now.\n\nListen on Spotify: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
+        "asset_url": "https://www.lilyroo.com/assets/ig/01_i_learned_it_all_60s.mp4",
+        "destination_links": [
+          "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+          "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+          "https://music.youtube.com/watch?v=vK0mDIW65o4"
+        ],
+        "failed_review_checks": [
+          {
+            "name": "platform_readiness",
+            "status": "fail",
+            "detail": "Executor readiness snapshot marks platform blocked. Missing secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN."
+          }
+        ],
+        "approval_effect": {
+          "field": "approved",
+          "from": "no",
+          "to": "yes",
+          "changed": true,
+          "summary": "approved 'no' -> 'yes'"
+        },
+        "preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --dry-run",
+        "apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --refresh-admin",
+        "manual_dispatch_required": false
+      }
+    ],
+    "checked_batch_preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+    "checked_batch_apply_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+    "checked_batch_effect": {
+      "row_count": 2,
+      "change_count": 2,
+      "ids": [
+        "FP-AUTO-258",
+        "FP-AUTO-261"
+      ],
+      "effects": [
+        {
+          "id": "FP-AUTO-258",
+          "platform": "Instagram",
+          "execution_mode": "auto",
+          "effect": {
+            "field": "approved",
+            "from": "no",
+            "to": "yes",
+            "changed": true,
+            "summary": "approved 'no' -> 'yes'"
+          }
+        },
+        {
+          "id": "FP-AUTO-261",
+          "platform": "YouTube Community",
+          "execution_mode": "manual",
+          "effect": {
+            "field": "approved",
+            "from": "no",
+            "to": "yes",
+            "changed": true,
+            "summary": "approved 'no' -> 'yes'"
+          }
+        }
+      ]
+    },
+    "guardrails": [
+      "Review paste text, destination links, media, and platform readiness before applying the checked batch.",
+      "Use --checked-batch so held rows with failed checks stay excluded.",
+      "Manual-dispatch rows still need manual posting and public URL logging after approval."
+    ]
   },
   "rows": [
     {

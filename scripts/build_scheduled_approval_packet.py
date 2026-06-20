@@ -93,6 +93,46 @@ def approval_effect_summary(rows: list[dict]) -> dict:
     }
 
 
+def docket_row(row: dict) -> dict:
+    failed = row.get("failed_review_checks") or []
+    return {
+        "id": row.get("id") or "",
+        "platform": row.get("platform") or "",
+        "song": row.get("song") or "",
+        "scheduled_at": row.get("scheduled_at") or "",
+        "execution_mode": row.get("execution_mode") or "",
+        "post_type": row.get("post_type") or "",
+        "review_status": row.get("approval_review_status") or "",
+        "checked_batch_member": bool(row.get("checked_batch_member")),
+        "paste_text": row.get("copy_block") or "",
+        "asset_url": row.get("asset_url") or "",
+        "destination_links": links_in_text(row.get("copy_block") or ""),
+        "failed_review_checks": failed,
+        "approval_effect": row.get("approval_effect") or {},
+        "preview_command": row.get("approval_preview_command") or "",
+        "apply_command": row.get("approval_apply_command") or "",
+        "manual_dispatch_required": bool(row.get("manual_dispatch")),
+    }
+
+
+def approval_docket(checked_rows: list[dict], blocked_rows: list[dict], summary: dict) -> dict:
+    return {
+        "status": "ready_for_review" if checked_rows else "blocked",
+        "ready_count": len(checked_rows),
+        "held_count": len(blocked_rows),
+        "ready_to_approve": [docket_row(row) for row in checked_rows],
+        "held": [docket_row(row) for row in blocked_rows],
+        "checked_batch_preview_command": summary.get("checked_batch_preview_command") or "",
+        "checked_batch_apply_command": summary.get("checked_batch_apply_command") or "",
+        "checked_batch_effect": summary.get("checked_batch_effect") or {},
+        "guardrails": [
+            "Review paste text, destination links, media, and platform readiness before applying the checked batch.",
+            "Use --checked-batch so held rows with failed checks stay excluded.",
+            "Manual-dispatch rows still need manual posting and public URL logging after approval.",
+        ],
+    }
+
+
 def platform_slug(platform: str) -> str:
     value = str(platform or "").strip().lower()
     return {
@@ -257,8 +297,49 @@ def build_markdown(payload: dict) -> str:
         f"- Batch approve after review: `{summary['batch_apply_command']}`" if summary.get("batch_apply_command") else "- Batch approve after review: none",
         f"- Batch effect: **{summary['batch_effect']['change_count']}** row(s) would change approval state" if summary.get("batch_effect") else "- Batch effect: none",
         "",
-        "## Review Queue",
+        "## Approval Docket",
     ]
+    docket = payload.get("approval_docket") or {}
+    lines.extend([
+        f"- Status: **{docket.get('status', 'unknown')}**",
+        f"- Ready to approve: **{docket.get('ready_count', 0)}**",
+        f"- Held: **{docket.get('held_count', 0)}**",
+        f"- Checked batch preview: `{docket.get('checked_batch_preview_command') or 'none'}`",
+        f"- Checked batch approve after review: `{docket.get('checked_batch_apply_command') or 'none'}`",
+        "",
+        "### Ready to Approve",
+    ])
+    ready_rows = docket.get("ready_to_approve") or []
+    if ready_rows:
+        for item in ready_rows:
+            lines.append(f"- **{item['platform']} - {item['song']}** (`{item['id']}`)")
+            lines.append(f"  - Scheduled: `{item['scheduled_at']}`; mode: `{item['execution_mode']}`; type: `{item['post_type']}`")
+            lines.append(f"  - Paste text: {item['paste_text']}")
+            lines.append(f"  - Asset: {item['asset_url']}")
+            if item.get("destination_links"):
+                lines.append(f"  - Destination links: {', '.join(item['destination_links'])}")
+            if item.get("manual_dispatch_required"):
+                lines.append("  - Manual dispatch required after approval.")
+            lines.append(f"  - Preview: `{item['preview_command']}`")
+            lines.append(f"  - Apply after review: `{item['apply_command']}`")
+    else:
+        lines.append("- None")
+    lines.extend([
+        "",
+        "### Held",
+    ])
+    held_rows = docket.get("held") or []
+    if held_rows:
+        for item in held_rows:
+            lines.append(f"- **{item['platform']} - {item['song']}** (`{item['id']}`)")
+            for failed in item.get("failed_review_checks") or []:
+                lines.append(f"  - Held by `{failed.get('name')}`: {failed.get('detail')}")
+    else:
+        lines.append("- None")
+    lines.extend([
+        "",
+        "## Review Queue",
+    ])
     for row in payload["rows"]:
         lines.append(f"- **{row['platform']} - {row['song']}** (`{row['id']}`)")
         lines.append(f"  - Scheduled: `{row['scheduled_at']}`; mode: `{row['execution_mode']}`; type: `{row['post_type']}`")
@@ -353,6 +434,26 @@ def main() -> int:
     checked_batch_explicit_apply_command = approval_batch_command(checked_rows, dry_run=False)
     checked_batch_effect = approval_effect_summary(checked_rows)
     batch_effect = approval_effect_summary(rows)
+    summary = {
+        "approval_blocker_count": len(rows),
+        "auto_count": sum(1 for row in rows if row.get("execution_mode") == "auto"),
+        "manual_count": sum(1 for row in rows if row.get("execution_mode") == "manual"),
+        "review_check_passed_count": sum(1 for row in rows if row.get("review_check_passed")),
+        "review_check_blocked_count": sum(1 for row in rows if not row.get("review_check_passed")),
+        "checked_batch_ids": [row.get("id") for row in checked_rows if row.get("id")],
+        "blocked_review_ids": [row.get("id") for row in blocked_rows if row.get("id")],
+        "review_check_status_counts": dict(sorted(review_check_status_counts.items())),
+        "checked_batch_preview_command": checked_batch_preview_command,
+        "checked_batch_apply_command": checked_batch_apply_command,
+        "checked_batch_explicit_preview_command": checked_batch_explicit_preview_command,
+        "checked_batch_explicit_apply_command": checked_batch_explicit_apply_command,
+        "checked_batch_effect": checked_batch_effect,
+        "preview_command_count": sum(1 for row in rows if row.get("approval_preview_command")),
+        "apply_command_count": sum(1 for row in rows if row.get("approval_apply_command")),
+        "batch_preview_command": batch_preview_command,
+        "batch_apply_command": batch_apply_command,
+        "batch_effect": batch_effect,
+    }
     payload = {
         "generated_at": now,
         "safe_mode": True,
@@ -361,26 +462,8 @@ def main() -> int:
             "social_execution_snapshot": str(EXECUTIONS.relative_to(ROOT)),
             "executor_readiness": str(EXECUTOR_READINESS.relative_to(ROOT)),
         },
-        "summary": {
-            "approval_blocker_count": len(rows),
-            "auto_count": sum(1 for row in rows if row.get("execution_mode") == "auto"),
-            "manual_count": sum(1 for row in rows if row.get("execution_mode") == "manual"),
-            "review_check_passed_count": sum(1 for row in rows if row.get("review_check_passed")),
-            "review_check_blocked_count": sum(1 for row in rows if not row.get("review_check_passed")),
-            "checked_batch_ids": [row.get("id") for row in checked_rows if row.get("id")],
-            "blocked_review_ids": [row.get("id") for row in blocked_rows if row.get("id")],
-            "review_check_status_counts": dict(sorted(review_check_status_counts.items())),
-            "checked_batch_preview_command": checked_batch_preview_command,
-            "checked_batch_apply_command": checked_batch_apply_command,
-            "checked_batch_explicit_preview_command": checked_batch_explicit_preview_command,
-            "checked_batch_explicit_apply_command": checked_batch_explicit_apply_command,
-            "checked_batch_effect": checked_batch_effect,
-            "preview_command_count": sum(1 for row in rows if row.get("approval_preview_command")),
-            "apply_command_count": sum(1 for row in rows if row.get("approval_apply_command")),
-            "batch_preview_command": batch_preview_command,
-            "batch_apply_command": batch_apply_command,
-            "batch_effect": batch_effect,
-        },
+        "summary": summary,
+        "approval_docket": approval_docket(checked_rows, blocked_rows, summary),
         "rows": rows,
     }
     OUT.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
