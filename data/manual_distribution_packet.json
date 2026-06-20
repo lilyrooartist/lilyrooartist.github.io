@@ -1,10 +1,11 @@
 {
-  "generated_at": "2026-06-20T08:51:29.214723Z",
+  "generated_at": "2026-06-20T08:55:44.609051Z",
   "safe_mode": true,
   "source": {
     "promo_queue_plan": "data/promo_queue_plan.json",
     "approval_runway": "data/approval_runway.json",
     "published_log": "admin/content/Published_Log.csv",
+    "manual_distribution_url_template": "data/manual_distribution_url_template.csv",
     "destination_evidence": [
       "data/distrokid_release_status.json",
       "data/youtube_twelve_dollars_playlist.json",
@@ -441,6 +442,33 @@
     "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
     "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
     "approval_apply_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+    "url_template_path": "data/manual_distribution_url_template.csv",
+    "batch_log_preview_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv",
+    "batch_log_apply_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --apply --refresh-admin",
+    "url_entry_rows": [
+      {
+        "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+        "platform": "YouTube Community",
+        "release": "Twelve Dollars",
+        "distribution_status": "waiting_for_review",
+        "approved": "no",
+        "posting_surface": "YouTube Studio Community",
+        "public_url": "",
+        "notes": "Paste the real public YouTube Community post URL after manual posting."
+      },
+      {
+        "id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+        "platform": "YouTube Community",
+        "release": "Analog Myth",
+        "distribution_status": "waiting_for_review",
+        "approved": "no",
+        "posting_surface": "YouTube Studio Community",
+        "public_url": "",
+        "notes": "Paste the real public YouTube Community post URL after manual posting."
+      }
+    ],
+    "url_entry_row_count": 2,
+    "waiting_public_url_count": 2,
     "review_queue_ids": [
       "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
       "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY"
@@ -468,6 +496,7 @@
       "Run the approval preview command before applying any manual approval.",
       "Post approved rows manually in YouTube Studio Community.",
       "Copy the real public Community post URL after posting.",
+      "Paste public URLs into data/manual_distribution_url_template.csv for batch logging.",
       "Run the log preview command with the real URL, then apply with --apply --refresh-admin."
     ],
     "completion_evidence": [
@@ -479,6 +508,7 @@
     "guardrails": [
       "Manual-only approvals do not auto-post.",
       "Do not log a placeholder URL.",
+      "Do not apply the URL worksheet while any public_url cell is blank.",
       "Do not mark manual distribution complete until a real public YouTube Community URL is logged."
     ]
   }

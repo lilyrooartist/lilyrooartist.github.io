@@ -18,6 +18,7 @@ TWELVE_DOLLARS_PLAYLIST = ROOT / "data" / "youtube_twelve_dollars_playlist.json"
 ANALOG_MYTH_PLAYLIST = ROOT / "data" / "youtube_analog_myth_playlist.json"
 PUBLISHED_LOG = ROOT / "admin" / "content" / "Published_Log.csv"
 OUT = ROOT / "data" / "manual_distribution_packet.json"
+URL_TEMPLATE = ROOT / "data" / "manual_distribution_url_template.csv"
 REPORT = ROOT / "admin" / "reports" / "manual-distribution-packet.md"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
 YOUTUBE_CHANNEL_URL = "https://www.youtube.com/@lilyroo.artist"
@@ -177,6 +178,13 @@ def log_command(post_id: str, apply: bool = False) -> str:
     return command
 
 
+def batch_url_command(apply: bool = False) -> str:
+    command = f"python3 scripts/log_manual_distribution.py --from-csv {URL_TEMPLATE.relative_to(ROOT)}"
+    if apply:
+        command += " --apply --refresh-admin"
+    return command
+
+
 def log_effect(post: dict, published_row: dict) -> dict:
     post_id = post.get("id") or ""
     logged = bool(published_row.get("logged"))
@@ -304,12 +312,19 @@ def manual_completion_manifest(approval_docket: dict, distribution_docket: dict,
         }
         for row in pending_rows
     ]
+    url_rows = manual_url_template_rows(rows)
     return {
         "status": "needs_review" if review_queue else ("ready_to_post_and_log" if postable_now else "clear"),
         "posting_surface": "YouTube Studio Community",
         "public_community_url": distribution_docket.get("public_community_url") or YOUTUBE_COMMUNITY_URL,
         "approval_preview_command": approval_docket.get("preview_command") or "",
         "approval_apply_command": approval_docket.get("apply_command") or "",
+        "url_template_path": str(URL_TEMPLATE.relative_to(ROOT)),
+        "batch_log_preview_command": batch_url_command(False),
+        "batch_log_apply_command": batch_url_command(True),
+        "url_entry_rows": url_rows,
+        "url_entry_row_count": len(url_rows),
+        "waiting_public_url_count": len([row for row in url_rows if not row.get("public_url")]),
         "review_queue_ids": [row.get("id") for row in review_queue if row.get("id")],
         "postable_now_ids": [row.get("id") for row in postable_now if row.get("id")],
         "logged_ids": [row.get("id") for row in rows if row.get("logged") and row.get("id")],
@@ -320,6 +335,7 @@ def manual_completion_manifest(approval_docket: dict, distribution_docket: dict,
             "Run the approval preview command before applying any manual approval.",
             "Post approved rows manually in YouTube Studio Community.",
             "Copy the real public Community post URL after posting.",
+            "Paste public URLs into data/manual_distribution_url_template.csv for batch logging.",
             "Run the log preview command with the real URL, then apply with --apply --refresh-admin.",
         ],
         "completion_evidence": [
@@ -331,9 +347,45 @@ def manual_completion_manifest(approval_docket: dict, distribution_docket: dict,
         "guardrails": [
             "Manual-only approvals do not auto-post.",
             "Do not log a placeholder URL.",
+            "Do not apply the URL worksheet while any public_url cell is blank.",
             "Do not mark manual distribution complete until a real public YouTube Community URL is logged.",
         ],
     }
+
+
+def manual_url_template_rows(rows: list[dict]) -> list[dict]:
+    template_rows = []
+    for row in rows:
+        if row.get("logged"):
+            continue
+        template_rows.append({
+            "id": row.get("id") or "",
+            "platform": row.get("platform") or "",
+            "release": row.get("release") or "",
+            "distribution_status": row.get("distribution_status") or "",
+            "approved": row.get("approved") or "",
+            "posting_surface": "YouTube Studio Community",
+            "public_url": row.get("published_url") or "",
+            "notes": "Paste the real public YouTube Community post URL after manual posting.",
+        })
+    return template_rows
+
+
+def write_url_template(rows: list[dict]) -> None:
+    fieldnames = [
+        "id",
+        "platform",
+        "release",
+        "distribution_status",
+        "approved",
+        "posting_surface",
+        "public_url",
+        "notes",
+    ]
+    with URL_TEMPLATE.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(manual_url_template_rows(rows))
 
 
 def manual_approval_docket(runway: dict, rows: list[dict]) -> dict:
@@ -516,6 +568,11 @@ def build_markdown(payload: dict) -> str:
         lines.append(f"- Approval preview: `{completion_manifest['approval_preview_command']}`")
     if completion_manifest.get("approval_apply_command"):
         lines.append(f"- Approval apply after review: `{completion_manifest['approval_apply_command']}`")
+    if completion_manifest.get("url_template_path"):
+        lines.append(f"- Public URL worksheet: `{completion_manifest['url_template_path']}`")
+        lines.append(f"- Batch URL log preview: `{completion_manifest.get('batch_log_preview_command') or 'none'}`")
+        lines.append(f"- Batch URL log apply after posting: `{completion_manifest.get('batch_log_apply_command') or 'none'}`")
+        lines.append(f"- URL worksheet rows waiting: **{completion_manifest.get('waiting_public_url_count', 0)}**")
     if completion_manifest.get("operator_checklist"):
         lines.append("- Operator checklist:")
         for item in completion_manifest["operator_checklist"]:
@@ -638,6 +695,7 @@ def main() -> int:
     published = published_lookup()
     evidence = destination_evidence_index()
     rows = build_rows(plan, runway, published, evidence)
+    write_url_template(rows)
     hard_cta = [row for row in rows if row.get("selected_cta_strength") in {"hard_subscribe", "hard_goal"}]
     logged_rows = [row for row in rows if row.get("logged")]
     unlogged_rows = [row for row in rows if not row.get("logged")]
@@ -667,6 +725,7 @@ def main() -> int:
             "promo_queue_plan": str(PROMO_PLAN.relative_to(ROOT)),
             "approval_runway": str(APPROVAL_RUNWAY.relative_to(ROOT)),
             "published_log": str(PUBLISHED_LOG.relative_to(ROOT)),
+            "manual_distribution_url_template": str(URL_TEMPLATE.relative_to(ROOT)),
             "destination_evidence": [
                 str(path.relative_to(ROOT))
                 for path in [

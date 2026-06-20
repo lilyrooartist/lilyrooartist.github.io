@@ -1,6 +1,6 @@
 # Manual Distribution Packet - Lily Roo
 
-Generated: 2026-06-20T08:51:29.214723Z
+Generated: 2026-06-20T08:55:44.609051Z
 
 ## Summary
 - Manual-ready posts: **2**
@@ -37,11 +37,16 @@ Generated: 2026-06-20T08:51:29.214723Z
 - Public community URL: https://www.youtube.com/@lilyroo.artist/community
 - Approval preview: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run`
 - Approval apply after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin`
+- Public URL worksheet: `data/manual_distribution_url_template.csv`
+- Batch URL log preview: `python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv`
+- Batch URL log apply after posting: `python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --apply --refresh-admin`
+- URL worksheet rows waiting: **2**
 - Operator checklist:
   - Review the packaged copy, asset, destination link evidence, and subscriber CTA.
   - Run the approval preview command before applying any manual approval.
   - Post approved rows manually in YouTube Studio Community.
   - Copy the real public Community post URL after posting.
+  - Paste public URLs into data/manual_distribution_url_template.csv for batch logging.
   - Run the log preview command with the real URL, then apply with --apply --refresh-admin.
 - Completion evidence:
   - data/manual_distribution_packet.json shows the row as logged or no longer pending.
@@ -51,6 +56,7 @@ Generated: 2026-06-20T08:51:29.214723Z
 - Guardrails:
   - Manual-only approvals do not auto-post.
   - Do not log a placeholder URL.
+  - Do not apply the URL worksheet while any public_url cell is blank.
   - Do not mark manual distribution complete until a real public YouTube Community URL is logged.
 
 ### Needs Review
