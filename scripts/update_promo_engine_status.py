@@ -4,6 +4,7 @@ from __future__ import annotations
 import csv
 import json
 import re
+import subprocess
 from collections import Counter
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -716,6 +717,7 @@ def workflow_status_state(workflow_status: dict) -> dict:
             "workflow_status_ok": False,
             "latest_run_status": "",
             "latest_run_conclusion": "",
+            "latest_run_head_sha": "",
             "latest_run_updated_at": "",
             "latest_run_url": "",
             "workflow_status_action_needed": "Run python3 scripts/capture_github_workflow_status.py.",
@@ -726,6 +728,7 @@ def workflow_status_state(workflow_status: dict) -> dict:
         "workflow_status_ok": bool(workflow_status.get("ok")),
         "latest_run_status": latest.get("status", ""),
         "latest_run_conclusion": latest.get("conclusion", ""),
+        "latest_run_head_sha": latest.get("head_sha", ""),
         "latest_run_updated_at": latest.get("updated_at", ""),
         "latest_run_url": latest.get("html_url", ""),
         "workflow_status_action_needed": workflow_status.get("action_needed", ""),
@@ -733,10 +736,14 @@ def workflow_status_state(workflow_status: dict) -> dict:
 
 
 def refresh_automation_state(workflow_status: dict) -> dict:
+    source_revision = source_revision_state()
     path = str(PROMO_REFRESH_WORKFLOW.relative_to(ROOT))
     source_url = f"{GITHUB_REPO_URL}/blob/main/{path}"
     actions_url = f"{GITHUB_REPO_URL}/actions/workflows/{PROMO_REFRESH_WORKFLOW.name}"
     workflow_state = workflow_status_state(workflow_status)
+    latest_head_sha = workflow_state.get("latest_run_head_sha") or ""
+    source_commit = source_revision.get("commit") or ""
+    latest_covers_source = bool(source_commit and latest_head_sha and source_commit == latest_head_sha)
     if not PROMO_REFRESH_WORKFLOW.exists():
         return {
             "configured": False,
@@ -747,6 +754,8 @@ def refresh_automation_state(workflow_status: dict) -> dict:
             "manual_dispatch": False,
             "commits_snapshots": False,
             "safe_refresh_command": "",
+            "source_revision": source_revision,
+            "latest_run_covers_source_commit": latest_covers_source,
             "action_needed": "Add .github/workflows/promo-admin-refresh.yml.",
             **workflow_state,
         }
@@ -762,8 +771,31 @@ def refresh_automation_state(workflow_status: dict) -> dict:
         "manual_dispatch": "workflow_dispatch:" in text,
         "commits_snapshots": "git add admin data" in text,
         "safe_refresh_command": safe_command if safe_command in text else "",
+        "source_revision": source_revision,
+        "latest_run_covers_source_commit": latest_covers_source,
         "action_needed": "" if safe_command in text and "schedule:" in text else "Review promo admin refresh workflow configuration.",
         **workflow_state,
+    }
+
+
+def git_output(args: list[str]) -> str:
+    try:
+        return subprocess.check_output(["git", *args], cwd=ROOT, text=True, stderr=subprocess.DEVNULL).strip()
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        return ""
+
+
+def source_revision_state() -> dict:
+    commit = git_output(["rev-parse", "HEAD"])
+    short = git_output(["rev-parse", "--short", "HEAD"])
+    branch = git_output(["branch", "--show-current"])
+    commit_time = git_output(["log", "-1", "--format=%cI"])
+    return {
+        "commit": commit,
+        "short_commit": short,
+        "branch": branch,
+        "committed_at": commit_time,
+        "source_url": f"{GITHUB_REPO_URL}/commit/{commit}" if commit else "",
     }
 
 
@@ -1294,6 +1326,20 @@ def store_verification_next_action(state: dict) -> str:
     return ""
 
 
+def refresh_automation_next_action(automation: dict) -> str:
+    if not automation.get("configured"):
+        return automation.get("action_needed") or "Configure promo admin refresh workflow."
+    if automation.get("workflow_status_action_needed"):
+        return f"Repair promo admin refresh workflow: {automation['workflow_status_action_needed']}"
+    if automation.get("workflow_status_available") and not automation.get("latest_run_covers_source_commit"):
+        source = (automation.get("source_revision") or {}).get("short_commit") or "current source"
+        return (
+            f"Refresh automation coverage: latest scheduled run has not covered {source}; "
+            f"dispatch {automation.get('actions_url') or 'the promo admin refresh workflow'} or wait for the next scheduled run."
+        )
+    return ""
+
+
 def manual_metric_next_action(packet: dict) -> str:
     manifest = packet.get("worksheet_import_manifest") if isinstance(packet, dict) else {}
     manifest = manifest or {}
@@ -1477,6 +1523,7 @@ def build_status():
     manual_metric_action = manual_metric_next_action(manual_metric_packet)
     manual_distribution_action = manual_distribution_next_action(manual_distribution, published_log_reconciliation)
     store_verification_action = store_verification_next_action(store_verification)
+    refresh_automation_action = refresh_automation_next_action(refresh_automation)
     if execution_state["platform_fix_needed_count"]:
         platforms = ", ".join(sorted({
             item.get("platform", "Social")
@@ -1504,6 +1551,8 @@ def build_status():
         all_actions.insert(0, manual_distribution_action)
     if store_verification_action and store_verification_action not in all_actions:
         all_actions.insert(0, store_verification_action)
+    if refresh_automation_action and refresh_automation_action not in all_actions:
+        all_actions.insert(0, refresh_automation_action)
     if operational_next_action_text:
         all_actions = [action for action in all_actions if action != operational_next_action_text]
         all_actions.insert(0, operational_next_action_text)

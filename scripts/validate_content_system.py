@@ -1480,11 +1480,28 @@ def validate_generated_outputs(failures):
             and "workflow_status_ok" in automation
             and "latest_run_status" in automation
             and "latest_run_conclusion" in automation
+            and "latest_run_head_sha" in automation
             and "workflow_status_action_needed" in automation
         ):
             ok("promo engine status includes scheduled workflow run health")
         else:
             fail("promo_engine_status.json missing scheduled workflow run health", failures)
+        source_revision = automation.get("source_revision") or {}
+        workflow_status = json.loads(PROMO_REFRESH_WORKFLOW_STATUS.read_text(encoding="utf-8")) if PROMO_REFRESH_WORKFLOW_STATUS.exists() else {}
+        latest_workflow_run = workflow_status.get("latest_run") or {}
+        if (
+            source_revision.get("commit")
+            and source_revision.get("short_commit")
+            and source_revision.get("source_url")
+            and automation.get("latest_run_head_sha") == (latest_workflow_run.get("head_sha") or "")
+            and automation.get("latest_run_covers_source_commit") == (
+                bool(source_revision.get("commit") and latest_workflow_run.get("head_sha"))
+                and source_revision.get("commit") == latest_workflow_run.get("head_sha")
+            )
+        ):
+            ok("promo engine status tracks refresh automation source coverage")
+        else:
+            fail("promo_engine_status.json missing refresh automation source coverage", failures)
         music_site_counts = kpi.get("music_site_state_counts") or {}
         release_services = [
             service
@@ -1611,6 +1628,12 @@ def validate_generated_outputs(failures):
             ok("promo engine status mirrors operational next action")
         else:
             fail("promo_engine_status.json missing top-priority operational next action", failures)
+        if automation.get("workflow_status_available") and not automation.get("latest_run_covers_source_commit"):
+            coverage_action = next((action for action in next_actions if action.startswith("Refresh automation coverage:")), "")
+            if coverage_action and (automation.get("source_revision") or {}).get("short_commit") in coverage_action and (automation.get("actions_url") or "") in coverage_action:
+                ok("promo engine next actions include refresh automation coverage gap")
+            else:
+                fail("promo_engine_status.json missing refresh automation coverage action", failures)
         operator_docket = kpi.get("operator_docket") or {}
         handoff_packet = json.loads(HUMAN_HANDOFF_PACKET.read_text(encoding="utf-8")) if HUMAN_HANDOFF_PACKET.exists() else {}
         handoff_docket = handoff_packet.get("action_docket") or {}
