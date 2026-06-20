@@ -1,10 +1,11 @@
 {
-  "generated_at": "2026-06-20T03:53:28.973233+00:00",
+  "generated_at": "2026-06-20T03:58:26.714935+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
     "promo_queue_plan": "data/promo_queue_plan.json",
     "promo_operations_packet": "data/promo_operations_packet.json",
+    "promotion_blocker_ledger": "data/promotion_blocker_ledger.json",
     "published_log": "admin/content/Published_Log.csv",
     "manual_metrics": "data/manual_social_stats.json",
     "live_metrics": "data/live_social_metrics.json",
@@ -187,15 +188,15 @@
         "command": "python3 scripts/update_manual_social_stats.py x.followers=VALUE x.impressions_7d=VALUE --refresh-admin"
       }
     ],
-    "live_metrics_updated_at": "2026-06-20T03:53:09.907Z",
+    "live_metrics_updated_at": "2026-06-20T03:58:07.410Z",
     "metrics_history": {
       "snapshot_count": 11,
-      "updated_at": "2026-06-20T03:53:28.045433Z",
+      "updated_at": "2026-06-20T03:58:25.706644Z",
       "latest_date": "2026-06-20",
       "latest": {
         "date": "2026-06-20",
-        "captured_at": "2026-06-20T03:53:28.045433Z",
-        "live_metrics_updated_at": "2026-06-20T03:53:09.907Z",
+        "captured_at": "2026-06-20T03:58:25.706644Z",
+        "live_metrics_updated_at": "2026-06-20T03:58:07.410Z",
         "youtube": {
           "subscribers": 6,
           "total_views": 251,
@@ -282,7 +283,7 @@
     },
     "social_execution_summary": {
       "ok": true,
-      "updated_at": "2026-06-20T03:53:27.608837Z",
+      "updated_at": "2026-06-20T03:58:25.236051Z",
       "http_status": 200,
       "execution_count": 4,
       "posted_count": 0,
@@ -411,11 +412,11 @@
     },
     "social_scheduler_dry_run": {
       "ok": true,
-      "updated_at": "2026-06-20T03:53:27.941275Z",
+      "updated_at": "2026-06-20T03:58:25.606385Z",
       "http_status": 200,
       "auth_method": "bearer",
-      "requested_scheduled_time": "2026-06-20T03:53:27.683593Z",
-      "checked_at": "2026-06-20T03:53:27.683Z",
+      "requested_scheduled_time": "2026-06-20T03:58:25.312858Z",
+      "checked_at": "2026-06-20T03:58:25.312Z",
       "dry_run": true,
       "due_count": 4,
       "result_count": 4,
@@ -438,7 +439,7 @@
           "reason": "not_approved",
           "post_type": "",
           "attempts": 0,
-          "updated_at": "2026-06-20T03:53:28.155Z",
+          "updated_at": "2026-06-20T03:58:25.809Z",
           "source": "dry-run",
           "error_summary": ""
         },
@@ -449,7 +450,7 @@
           "reason": "not_approved",
           "post_type": "",
           "attempts": 0,
-          "updated_at": "2026-06-20T03:53:28.157Z",
+          "updated_at": "2026-06-20T03:58:25.813Z",
           "source": "dry-run",
           "error_summary": ""
         },
@@ -460,7 +461,7 @@
           "reason": "not_approved",
           "post_type": "",
           "attempts": 0,
-          "updated_at": "2026-06-20T03:53:28.160Z",
+          "updated_at": "2026-06-20T03:58:25.818Z",
           "source": "dry-run",
           "error_summary": ""
         },
@@ -471,7 +472,7 @@
           "reason": "tiktok_credentials_missing",
           "post_type": "",
           "attempts": 0,
-          "updated_at": "2026-06-20T03:53:28.163Z",
+          "updated_at": "2026-06-20T03:58:25.822Z",
           "source": "dry-run",
           "error_summary": ""
         }
@@ -483,8 +484,8 @@
       "available": true,
       "safe_mode": true,
       "finalized": true,
-      "finished_at": "2026-06-20T03:53:28.947947Z",
-      "duration_seconds": 19.93,
+      "finished_at": "2026-06-20T03:58:26.688773Z",
+      "duration_seconds": 20.87,
       "command_count": 26,
       "passed": 26,
       "failed": 0,
@@ -545,6 +546,137 @@
         0
       ]
     },
+    "unlock_impact": {
+      "open_blocker_count": 12,
+      "urgent_count": 4,
+      "owner_counts": {
+        "external_platform": 1,
+        "tod": 11
+      },
+      "category_counts": {
+        "approval": 3,
+        "backlog_reschedule": 1,
+        "manual_distribution": 2,
+        "manual_metrics": 5,
+        "platform_repair": 1
+      },
+      "roadmap_step_count": 5,
+      "projected_resolvable_blockers": 11,
+      "user_action_blocker_count": 11,
+      "external_blocker_count": 1,
+      "next_resolution_projection": {
+        "label": "Checked scheduled approval batch",
+        "blockers_resolved": 2,
+        "approval_blockers_after": 1,
+        "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+        "apply_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+        "guardrail": "Human review is still required; blocked review IDs stay excluded from the checked batch."
+      },
+      "immediate_unlock": {
+        "id": "unlock-checked-scheduled-approval",
+        "phase": "Approve checked scheduled rows",
+        "status": "ready_for_review",
+        "owner": "tod",
+        "blockers_resolved": 2,
+        "blocked_by": [
+          "FP-AUTO-259"
+        ],
+        "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+        "apply_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+        "source_path": "data/scheduled_approval_packet.json"
+      },
+      "top_unlock": {
+        "id": "unlock-manual-metrics",
+        "phase": "Fill manual metric worksheet",
+        "status": "needs_values",
+        "owner": "tod",
+        "blockers_resolved": 5,
+        "blocked_by": [
+          "facebook:1",
+          "instagram:2",
+          "spotify:4",
+          "tiktok:2",
+          "x:2"
+        ],
+        "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
+        "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
+        "source_path": "data/manual_metric_collection_packet.json"
+      },
+      "lanes": [
+        {
+          "id": "unlock-checked-scheduled-approval",
+          "phase": "Approve checked scheduled rows",
+          "status": "ready_for_review",
+          "owner": "tod",
+          "blockers_resolved": 2,
+          "blocked_by": [
+            "FP-AUTO-259"
+          ],
+          "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+          "apply_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+          "source_path": "data/scheduled_approval_packet.json"
+        },
+        {
+          "id": "unlock-manual-distribution",
+          "phase": "Review and post manual YouTube Community rows",
+          "status": "needs_review",
+          "owner": "tod",
+          "blockers_resolved": 2,
+          "blocked_by": [
+            "manual approval"
+          ],
+          "preview_command": "",
+          "apply_command": "",
+          "source_path": "data/manual_distribution_packet.json"
+        },
+        {
+          "id": "unlock-tiktok-platform-repair",
+          "phase": "Repair TikTok executor",
+          "status": "blocked",
+          "owner": "tod",
+          "blockers_resolved": 1,
+          "blocked_by": [
+            "TIKTOK_CLIENT_KEY",
+            "TIKTOK_CLIENT_SECRET",
+            "TIKTOK_REFRESH_TOKEN"
+          ],
+          "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+          "apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
+          "source_path": "data/platform_repair_status.json"
+        },
+        {
+          "id": "unlock-backlog-reschedule",
+          "phase": "Reschedule approved past-due backlog",
+          "status": "blocked_until_clearance_steps_complete",
+          "owner": "external_platform",
+          "blockers_resolved": 1,
+          "blocked_by": [
+            "FP-AUTO-264"
+          ],
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
+          "apply_command": "",
+          "source_path": "data/backlog_reschedule_preview.json"
+        },
+        {
+          "id": "unlock-manual-metrics",
+          "phase": "Fill manual metric worksheet",
+          "status": "needs_values",
+          "owner": "tod",
+          "blockers_resolved": 5,
+          "blocked_by": [
+            "facebook:1",
+            "instagram:2",
+            "spotify:4",
+            "tiktok:2",
+            "x:2"
+          ],
+          "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
+          "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
+          "source_path": "data/manual_metric_collection_packet.json"
+        }
+      ],
+      "source_path": "data/promotion_blocker_ledger.json"
+    },
     "stale_source_count": 1,
     "missing_source_count": 0
   },
@@ -590,6 +722,137 @@
         -1,
         0
       ]
+    },
+    "unlock_impact": {
+      "open_blocker_count": 12,
+      "urgent_count": 4,
+      "owner_counts": {
+        "external_platform": 1,
+        "tod": 11
+      },
+      "category_counts": {
+        "approval": 3,
+        "backlog_reschedule": 1,
+        "manual_distribution": 2,
+        "manual_metrics": 5,
+        "platform_repair": 1
+      },
+      "roadmap_step_count": 5,
+      "projected_resolvable_blockers": 11,
+      "user_action_blocker_count": 11,
+      "external_blocker_count": 1,
+      "next_resolution_projection": {
+        "label": "Checked scheduled approval batch",
+        "blockers_resolved": 2,
+        "approval_blockers_after": 1,
+        "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+        "apply_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+        "guardrail": "Human review is still required; blocked review IDs stay excluded from the checked batch."
+      },
+      "immediate_unlock": {
+        "id": "unlock-checked-scheduled-approval",
+        "phase": "Approve checked scheduled rows",
+        "status": "ready_for_review",
+        "owner": "tod",
+        "blockers_resolved": 2,
+        "blocked_by": [
+          "FP-AUTO-259"
+        ],
+        "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+        "apply_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+        "source_path": "data/scheduled_approval_packet.json"
+      },
+      "top_unlock": {
+        "id": "unlock-manual-metrics",
+        "phase": "Fill manual metric worksheet",
+        "status": "needs_values",
+        "owner": "tod",
+        "blockers_resolved": 5,
+        "blocked_by": [
+          "facebook:1",
+          "instagram:2",
+          "spotify:4",
+          "tiktok:2",
+          "x:2"
+        ],
+        "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
+        "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
+        "source_path": "data/manual_metric_collection_packet.json"
+      },
+      "lanes": [
+        {
+          "id": "unlock-checked-scheduled-approval",
+          "phase": "Approve checked scheduled rows",
+          "status": "ready_for_review",
+          "owner": "tod",
+          "blockers_resolved": 2,
+          "blocked_by": [
+            "FP-AUTO-259"
+          ],
+          "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+          "apply_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+          "source_path": "data/scheduled_approval_packet.json"
+        },
+        {
+          "id": "unlock-manual-distribution",
+          "phase": "Review and post manual YouTube Community rows",
+          "status": "needs_review",
+          "owner": "tod",
+          "blockers_resolved": 2,
+          "blocked_by": [
+            "manual approval"
+          ],
+          "preview_command": "",
+          "apply_command": "",
+          "source_path": "data/manual_distribution_packet.json"
+        },
+        {
+          "id": "unlock-tiktok-platform-repair",
+          "phase": "Repair TikTok executor",
+          "status": "blocked",
+          "owner": "tod",
+          "blockers_resolved": 1,
+          "blocked_by": [
+            "TIKTOK_CLIENT_KEY",
+            "TIKTOK_CLIENT_SECRET",
+            "TIKTOK_REFRESH_TOKEN"
+          ],
+          "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+          "apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
+          "source_path": "data/platform_repair_status.json"
+        },
+        {
+          "id": "unlock-backlog-reschedule",
+          "phase": "Reschedule approved past-due backlog",
+          "status": "blocked_until_clearance_steps_complete",
+          "owner": "external_platform",
+          "blockers_resolved": 1,
+          "blocked_by": [
+            "FP-AUTO-264"
+          ],
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
+          "apply_command": "",
+          "source_path": "data/backlog_reschedule_preview.json"
+        },
+        {
+          "id": "unlock-manual-metrics",
+          "phase": "Fill manual metric worksheet",
+          "status": "needs_values",
+          "owner": "tod",
+          "blockers_resolved": 5,
+          "blocked_by": [
+            "facebook:1",
+            "instagram:2",
+            "spotify:4",
+            "tiktok:2",
+            "x:2"
+          ],
+          "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
+          "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
+          "source_path": "data/manual_metric_collection_packet.json"
+        }
+      ],
+      "source_path": "data/promotion_blocker_ledger.json"
     }
   },
   "freshness": {
@@ -598,14 +861,14 @@
       "stale": 1,
       "missing": 0,
       "checked_no_change": 0,
-      "checked_at": "2026-06-20T03:53:28.973233+00:00"
+      "checked_at": "2026-06-20T03:58:26.714935+00:00"
     },
     "sources": [
       {
         "name": "release_status",
         "path": "data/distrokid_release_status.json",
         "status": "fresh",
-        "age_hours": 66.5,
+        "age_hours": 66.6,
         "max_age_hours": 72,
         "timestamp": "2026-06-17T09:25:00+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin; update data/distrokid_release_status.json when a public URL is verified."
@@ -614,7 +877,7 @@
         "name": "scheduled_posts",
         "path": "admin/future-posts.json",
         "status": "fresh",
-        "age_hours": 2.4,
+        "age_hours": 2.5,
         "max_age_hours": 72,
         "timestamp": "2026-06-20T01:28:46.696230+00:00",
         "refresh_command": "python3 scripts/sync_future_posts.py"
@@ -625,14 +888,14 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T03:53:28.007189+00:00",
+        "timestamp": "2026-06-20T03:58:25.669020+00:00",
         "refresh_command": "python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
         "name": "published_log",
         "path": "admin/content/Published_Log.csv",
         "status": "stale",
-        "age_hours": 303.3,
+        "age_hours": 303.4,
         "max_age_hours": 168,
         "timestamp": "2026-06-07T12:36:37.141276+00:00",
         "refresh_command": "Preview Worker export with python3 scripts/export_social_executions.py --dry-run; after review run python3 scripts/export_social_executions.py --refresh-admin. For manual posts, log the public URL with scripts/log_manual_distribution.py.",
@@ -661,7 +924,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T03:53:09.907000+00:00",
+        "timestamp": "2026-06-20T03:58:07.410000+00:00",
         "refresh_command": "python3 scripts/capture_live_metrics.py"
       },
       {
@@ -670,7 +933,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T03:53:28.045433+00:00",
+        "timestamp": "2026-06-20T03:58:25.706644+00:00",
         "refresh_command": "python3 scripts/update_metrics_history.py --refresh-admin"
       },
       {
@@ -679,7 +942,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T03:53:26.179937+00:00",
+        "timestamp": "2026-06-20T03:58:23.818916+00:00",
         "refresh_command": "python3 scripts/capture_executor_readiness.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -688,7 +951,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T03:53:28.973233+00:00",
+        "timestamp": "2026-06-20T03:58:26.714935+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin"
       },
       {
@@ -697,7 +960,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T03:53:27.608837+00:00",
+        "timestamp": "2026-06-20T03:58:25.236051+00:00",
         "refresh_command": "python3 scripts/capture_social_executions.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -706,7 +969,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T03:53:27.941275+00:00",
+        "timestamp": "2026-06-20T03:58:25.606385+00:00",
         "refresh_command": "python3 scripts/capture_scheduler_dry_run.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -715,7 +978,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T03:53:28.948406+00:00",
+        "timestamp": "2026-06-20T03:58:26.689197+00:00",
         "refresh_command": "python3 scripts/refresh_promo_admin.py"
       },
       {
@@ -724,7 +987,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-20T03:53:28.508732+00:00",
+        "timestamp": "2026-06-20T03:58:26.193020+00:00",
         "refresh_command": "python3 scripts/capture_github_workflow_status.py && python3 scripts/update_promo_engine_status.py"
       }
     ],
@@ -876,7 +1139,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T03:53:14.990448Z",
+            "updated_at": "2026-06-20T03:58:12.510839Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release."
           }
         },
@@ -887,7 +1150,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T03:53:15.356177Z",
+            "updated_at": "2026-06-20T03:58:12.886690Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
           }
         }
@@ -989,7 +1252,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T03:53:20.580059Z",
+            "updated_at": "2026-06-20T03:58:18.069240Z",
             "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release."
           }
         },
@@ -1011,7 +1274,7 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-20T03:53:26.018734Z",
+            "updated_at": "2026-06-20T03:58:23.648220Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public."
           }
         }

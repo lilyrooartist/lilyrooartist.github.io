@@ -25,6 +25,7 @@ PROMO_REFRESH_WORKFLOW = ROOT / ".github" / "workflows" / "promo-admin-refresh.y
 SCHEDULED = ROOT / "data" / "scheduled_posts.csv"
 PROMO_QUEUE_PLAN = ROOT / "data" / "promo_queue_plan.json"
 PROMO_OPERATIONS_PACKET = ROOT / "data" / "promo_operations_packet.json"
+PROMOTION_BLOCKER_LEDGER = ROOT / "data" / "promotion_blocker_ledger.json"
 PUBLISHED = ROOT / "admin" / "content" / "Published_Log.csv"
 FUTURE_POSTS = ROOT / "admin" / "future-posts.json"
 RESCHEDULE_SCRIPT = ROOT / "scripts" / "reschedule_scheduled_posts.py"
@@ -1015,6 +1016,51 @@ def store_link_action(pending_labels, verification_commands):
     return "Verify public store links for " + labels + "."
 
 
+def blocker_unlock_impact(ledger: dict) -> dict:
+    summary = ledger.get("summary") if isinstance(ledger, dict) else {}
+    roadmap = summary.get("blocker_unlock_roadmap") or []
+    projection = summary.get("next_resolution_projection") or {}
+    lanes = []
+    for item in roadmap:
+        blockers_resolved = int_metric(item.get("blockers_resolved"))
+        lanes.append({
+            "id": item.get("id") or "",
+            "phase": item.get("phase") or "",
+            "status": item.get("status") or "",
+            "owner": item.get("owner") or "",
+            "blockers_resolved": blockers_resolved,
+            "blocked_by": item.get("blocked_by") or [],
+            "preview_command": item.get("preview_command") or "",
+            "apply_command": item.get("apply_command") or "",
+            "source_path": item.get("source_path") or "",
+        })
+    top_unlock = max(lanes, key=lambda lane: lane["blockers_resolved"], default={})
+    immediate_unlock = lanes[0] if lanes else {}
+    projected_after = projection.get("approval_blockers_after")
+    return {
+        "open_blocker_count": int_metric(summary.get("open_blocker_count")),
+        "urgent_count": int_metric(summary.get("urgent_count")),
+        "owner_counts": summary.get("owner_counts") or {},
+        "category_counts": summary.get("category_counts") or {},
+        "roadmap_step_count": len(lanes),
+        "projected_resolvable_blockers": sum(lane["blockers_resolved"] for lane in lanes),
+        "user_action_blocker_count": int_metric((summary.get("owner_counts") or {}).get("tod")),
+        "external_blocker_count": int_metric((summary.get("owner_counts") or {}).get("external_platform")),
+        "next_resolution_projection": {
+            "label": projection.get("label") or "",
+            "blockers_resolved": int_metric(projection.get("blockers_resolved")),
+            "approval_blockers_after": int_metric(projected_after) if projected_after is not None else None,
+            "preview_command": projection.get("preview_command") or "",
+            "apply_command": projection.get("apply_command") or "",
+            "guardrail": projection.get("guardrail") or "",
+        },
+        "immediate_unlock": immediate_unlock,
+        "top_unlock": top_unlock,
+        "lanes": lanes,
+        "source_path": str(PROMOTION_BLOCKER_LEDGER.relative_to(ROOT)),
+    }
+
+
 def plan_rows_for_release(plan, release_title: str, track_lookup: set[str]):
     rows = []
     for post in plan.get("posts") or []:
@@ -1036,6 +1082,7 @@ def build_status():
     promo_refresh_workflow_status = read_json(PROMO_REFRESH_WORKFLOW_STATUS, {})
     promo_plan = read_json(PROMO_QUEUE_PLAN, {})
     promo_operations = read_json(PROMO_OPERATIONS_PACKET, {})
+    promotion_blockers = read_json(PROMOTION_BLOCKER_LEDGER, {})
     future_posts = read_json(FUTURE_POSTS, {})
     store_history = build_store_verification_history(release_status, now)
     scheduled_rows = read_csv(SCHEDULED)
@@ -1145,6 +1192,7 @@ def build_status():
     freshness_actions = freshness["actions"]
     all_actions = freshness_actions + all_actions
     operational_next_action = promo_operations.get("next_action") or (promo_operations.get("summary") or {}).get("next_action") or {}
+    unlock_impact = blocker_unlock_impact(promotion_blockers)
     operational_next_action_text = ""
     if operational_next_action.get("label"):
         command = operational_next_action.get("command") or ""
@@ -1190,6 +1238,7 @@ def build_status():
             "scheduled_posts": str(SCHEDULED.relative_to(ROOT)),
             "promo_queue_plan": str(PROMO_QUEUE_PLAN.relative_to(ROOT)),
             "promo_operations_packet": str(PROMO_OPERATIONS_PACKET.relative_to(ROOT)),
+            "promotion_blocker_ledger": str(PROMOTION_BLOCKER_LEDGER.relative_to(ROOT)),
             "published_log": str(PUBLISHED.relative_to(ROOT)),
             "manual_metrics": str(MANUAL_METRICS.relative_to(ROOT)),
             "live_metrics": str(LIVE_METRICS.relative_to(ROOT)),
@@ -1236,6 +1285,7 @@ def build_status():
             "last_refresh_run": refresh_run,
             "refresh_automation": refresh_automation,
             "operational_next_action": operational_next_action,
+            "unlock_impact": unlock_impact,
             "stale_source_count": freshness_summary["stale"],
             "missing_source_count": freshness_summary["missing"],
         },
@@ -1248,6 +1298,7 @@ def build_status():
             "stale_sources": freshness_summary["stale"],
             "missing_sources": freshness_summary["missing"],
             "operational_next_action": operational_next_action,
+            "unlock_impact": unlock_impact,
         },
         "freshness": freshness,
         "releases": releases,

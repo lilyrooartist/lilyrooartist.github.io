@@ -1350,6 +1350,25 @@ def validate_generated_outputs(failures):
             ok("promo engine status mirrors operational next action")
         else:
             fail("promo_engine_status.json missing top-priority operational next action", failures)
+        unlock_impact = kpi.get("unlock_impact") or {}
+        unlock_lanes = unlock_impact.get("lanes") or []
+        blocker_ledger = json.loads(PROMOTION_BLOCKER_LEDGER.read_text(encoding="utf-8")) if PROMOTION_BLOCKER_LEDGER.exists() else {}
+        blocker_summary = blocker_ledger.get("summary") or {}
+        blocker_roadmap = blocker_summary.get("blocker_unlock_roadmap") or []
+        blocker_projection = blocker_summary.get("next_resolution_projection") or {}
+        expected_top_unlock = max(blocker_roadmap, key=lambda item: item.get("blockers_resolved") or 0, default={})
+        if (
+            unlock_impact.get("open_blocker_count") == blocker_summary.get("open_blocker_count")
+            and unlock_impact.get("roadmap_step_count") == len(unlock_lanes) == len(blocker_roadmap)
+            and unlock_impact.get("projected_resolvable_blockers") == sum(item.get("blockers_resolved") or 0 for item in blocker_roadmap)
+            and unlock_impact.get("next_resolution_projection", {}).get("preview_command") == blocker_projection.get("preview_command")
+            and (unlock_impact.get("immediate_unlock") or {}).get("id") == (blocker_roadmap[0].get("id") if blocker_roadmap else "")
+            and (unlock_impact.get("top_unlock") or {}).get("id") == expected_top_unlock.get("id")
+            and status.get("health", {}).get("unlock_impact") == unlock_impact
+        ):
+            ok("promo engine status summarizes blocker unlock impact")
+        else:
+            fail("promo_engine_status.json missing blocker unlock impact summary", failures)
         if pending_count and any("--from-csv --dry-run" in action for action in next_actions):
             ok("promo engine manual metric next action includes worksheet dry run")
         elif pending_count:
@@ -1927,6 +1946,7 @@ def validate_admin_execution_feedback(failures):
         "workflow run health shown": "Workflow run:" in text and "Open latest refresh run" in text,
         "refresh workflow link shown": "Open refresh workflow runs" in text and "actions/workflows/promo-admin-refresh.yml" in text,
         "scheduler dry-run shown": "Scheduler dry-run:" in text and "social_scheduler_dry_run" in text,
+        "unlock impact shown": "Unlock impact:" in text and "Immediate unlock:" in text and "Largest unlock lane:" in text,
     }
     missing_platform = [label for label, present in platform_checks.items() if not present]
     if missing_platform:
