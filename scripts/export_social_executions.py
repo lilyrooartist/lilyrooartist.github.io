@@ -3,12 +3,15 @@ from __future__ import annotations
 
 import argparse
 import json
+import subprocess
 import urllib.error
 import urllib.request
+from pathlib import Path
 
 from social_exec_common import PUBLISHED_LOG, SOCIAL_ENV, append_published_log, get_row, load_env, song_from_row
 
 DEFAULT_URL = "https://www.lilyroo.com/api/social/executions"
+ROOT = Path(__file__).resolve().parents[1]
 
 
 def auth_headers() -> dict[str, str]:
@@ -59,7 +62,11 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Export posted Worker execution records into Published_Log.csv.")
     parser.add_argument("--url", default=DEFAULT_URL)
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--refresh-admin", action="store_true", help="Refresh admin artifacts after appending posted records. Requires non-dry-run.")
     args = parser.parse_args()
+
+    if args.refresh_admin and args.dry_run:
+        raise SystemExit("--refresh-admin cannot be combined with --dry-run")
 
     existing = logged_content_ids()
     added = 0
@@ -78,6 +85,8 @@ def main() -> int:
             append_published_log(platform, post_url, song_from_row(row), text, notes, content_id=post_id)
         existing.add(post_id)
         added += 1
+    if args.refresh_admin and not args.dry_run:
+        subprocess.run(["python3", "scripts/refresh_promo_admin.py"], cwd=ROOT, check=True)
     print(json.dumps({"ok": True, "added": added, "dry_run": args.dry_run}, indent=2))
     return 0
 

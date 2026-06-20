@@ -56,6 +56,7 @@ YOUTUBE_MUSIC_SEARCH_VERIFIER = ROOT / "scripts" / "search_youtube_music_release
 METRICS_HISTORY_UPDATER = ROOT / "scripts" / "update_metrics_history.py"
 EXECUTOR_READINESS_CAPTURE = ROOT / "scripts" / "capture_executor_readiness.py"
 SOCIAL_EXECUTION_CAPTURE = ROOT / "scripts" / "capture_social_executions.py"
+SOCIAL_EXECUTION_EXPORT = ROOT / "scripts" / "export_social_executions.py"
 SOCIAL_SCHEDULER_CAPTURE = ROOT / "scripts" / "capture_scheduler_dry_run.py"
 SOCIAL_EXECUTION_RESET = ROOT / "scripts" / "reset_social_execution_state.py"
 PROMO_REFRESH_SCRIPT = ROOT / "scripts" / "refresh_promo_admin.py"
@@ -794,6 +795,16 @@ def validate_generated_outputs(failures):
                     fail(f"promo engine freshness source {name} missing {key}", failures)
             if source.get("status") == "checked_no_change" and not str(source.get("evidence") or "").strip():
                 fail(f"promo engine freshness source {name} missing checked-no-change evidence", failures)
+            if source.get("name") == "published_log":
+                if not (
+                    isinstance(source.get("row_count"), int)
+                    and str(source.get("latest_entry_date") or "").strip()
+                    and "export_social_executions.py --dry-run" in (source.get("worker_export_preview_command") or "")
+                    and "export_social_executions.py --refresh-admin" in (source.get("worker_export_apply_command") or "")
+                    and "log_manual_distribution.py" in (source.get("manual_distribution_log_command_template") or "")
+                    and str(source.get("evidence") or "").strip()
+                ):
+                    fail("promo engine published_log freshness source missing export/manual logging diagnostics", failures)
         kpi = status.get("kpi") or {}
         pending_count = kpi.get("pending_manual_metric_fields", 0)
         pending_details = kpi.get("pending_manual_metric_details") or []
@@ -1224,6 +1235,14 @@ def validate_generated_outputs(failures):
             fail("capture_social_executions.py missing execution snapshot or auth header support", failures)
     else:
         fail("capture_social_executions.py missing", failures)
+    if SOCIAL_EXECUTION_EXPORT.exists():
+        export_text = SOCIAL_EXECUTION_EXPORT.read_text(encoding="utf-8")
+        if "PUBLISHED_LOG" in export_text and "--dry-run" in export_text and "--refresh-admin" in export_text and "refresh_promo_admin.py" in export_text and "append_published_log" in export_text:
+            ok("social execution export can refresh published log safely")
+        else:
+            fail("export_social_executions.py missing dry-run published-log export or refresh support", failures)
+    else:
+        fail("export_social_executions.py missing", failures)
     if SOCIAL_SCHEDULER_CAPTURE.exists():
         scheduler_text = SOCIAL_SCHEDULER_CAPTURE.read_text(encoding="utf-8")
         if "social_scheduler_dry_run.json" in scheduler_text and "/scheduler/dry-run" in scheduler_text and "method=\"POST\"" in scheduler_text:

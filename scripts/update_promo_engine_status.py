@@ -140,7 +140,7 @@ def freshness_row(name: str, path: Path, payload, now: datetime):
             "refresh_command": refresh_command(name),
         }
     age_hours = round((now - timestamp).total_seconds() / 3600, 1)
-    return {
+    row = {
         "name": name,
         "path": str(path.relative_to(ROOT)),
         "status": "fresh" if age_hours <= max_age else "stale",
@@ -149,6 +149,35 @@ def freshness_row(name: str, path: Path, payload, now: datetime):
         "timestamp": timestamp.isoformat(),
         "refresh_command": refresh_command(name),
     }
+    if name == "published_log":
+        row.update(published_log_details(path))
+    return row
+
+
+def published_log_details(path: Path) -> dict:
+    rows = read_csv(path)
+    details = {
+        "row_count": len(rows),
+        "worker_export_preview_command": "python3 scripts/export_social_executions.py --dry-run",
+        "worker_export_apply_command": "python3 scripts/export_social_executions.py --refresh-admin",
+        "manual_distribution_log_command_template": "python3 scripts/log_manual_distribution.py --id MANUAL_DISTRIBUTION_ID --url PUBLIC_URL --apply --refresh-admin",
+    }
+    if rows:
+        latest = rows[-1]
+        details.update({
+            "latest_entry_date": latest.get("date") or "",
+            "latest_entry_platform": latest.get("platform") or "",
+            "latest_entry_content_id": latest.get("content_id") or "",
+            "latest_entry_url": latest.get("post_id_or_url") or "",
+        })
+        details["evidence"] = (
+            f"{len(rows)} logged row(s); latest is {latest.get('date') or 'unknown date'} "
+            f"for {latest.get('platform') or 'unknown platform'} "
+            f"({latest.get('content_id') or latest.get('post_id_or_url') or 'no content id'})."
+        )
+    else:
+        details["evidence"] = "Published log exists but contains no rows."
+    return details
 
 
 def release_status_checked_no_change(row: dict, store_history: dict, now: datetime) -> dict:
@@ -182,7 +211,7 @@ def refresh_command(name: str) -> str:
         "release_status": "python3 scripts/verify_pending_store_links.py --refresh-admin; update data/distrokid_release_status.json when a public URL is verified.",
         "scheduled_posts": "python3 scripts/sync_future_posts.py",
         "promo_queue_plan": "python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py",
-        "published_log": "Export or append latest published posts to admin/content/Published_Log.csv.",
+        "published_log": "Preview Worker export with python3 scripts/export_social_executions.py --dry-run; after review run python3 scripts/export_social_executions.py --refresh-admin. For manual posts, log the public URL with scripts/log_manual_distribution.py.",
         "manual_metrics": "Update data/manual_social_stats.json with latest manual metrics.",
         "live_metrics": "python3 scripts/capture_live_metrics.py",
         "metrics_history": "python3 scripts/update_metrics_history.py --refresh-admin",
@@ -232,6 +261,13 @@ def source_freshness(release_status, manual, live, metrics_history, executor_rea
 
 def freshness_action_message(row: dict) -> str:
     name = row["name"].replace("_", " ")
+    if row.get("name") == "published_log":
+        return (
+            "Refresh published log: preview Worker-posted records with "
+            "python3 scripts/export_social_executions.py --dry-run; after review run "
+            "python3 scripts/export_social_executions.py --refresh-admin. For manual distribution, use "
+            "python3 scripts/log_manual_distribution.py --id MANUAL_DISTRIBUTION_ID --url PUBLIC_URL --apply --refresh-admin."
+        )
     if row.get("name") == "manual_metrics":
         return (
             "Refresh manual metrics: fill data/manual_metric_collection_template.csv, "
