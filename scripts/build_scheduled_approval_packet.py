@@ -54,6 +54,37 @@ def approval_batch_command(rows: list[dict], *, dry_run: bool) -> str:
     return "python3 scripts/update_scheduled_post_approval.py " + " ".join(ids) + suffix
 
 
+def approval_effect(row: dict, *, target_value: str = "yes") -> dict:
+    previous = row.get("approved") or ""
+    changed = previous != target_value
+    return {
+        "field": "approved",
+        "from": previous,
+        "to": target_value,
+        "changed": changed,
+        "summary": f"approved {previous!r} -> {target_value!r}",
+    }
+
+
+def approval_effect_summary(rows: list[dict]) -> dict:
+    effects = [
+        {
+            "id": row.get("id") or "",
+            "platform": row.get("platform") or "",
+            "execution_mode": row.get("execution_mode") or "",
+            "effect": row.get("approval_effect") or approval_effect(row),
+        }
+        for row in rows
+        if row.get("id")
+    ]
+    return {
+        "row_count": len(effects),
+        "change_count": sum(1 for item in effects if (item.get("effect") or {}).get("changed")),
+        "ids": [item["id"] for item in effects],
+        "effects": effects,
+    }
+
+
 def platform_slug(platform: str) -> str:
     value = str(platform or "").strip().lower()
     return {
@@ -168,6 +199,7 @@ def build_rows(queue: dict[str, dict[str, str]], executions: dict, readiness: di
             "desired_privacy": row.get("desired_privacy") or "",
             "review_checks": checks,
             "review_check_passed": checks_passed(checks),
+            "approval_effect": approval_effect(row),
             "approval_preview_command": approval_preview_command(post_id),
             "approval_apply_command": approval_apply_command(post_id),
             "recommendation": "Review copy, media, destination links, and platform readiness before approval.",
@@ -193,8 +225,10 @@ def build_markdown(payload: dict) -> str:
         f"- Blocked review IDs: `{', '.join(summary['blocked_review_ids'])}`" if summary.get("blocked_review_ids") else "- Blocked review IDs: none",
         f"- Checked-only preview: `{summary['checked_batch_preview_command']}`" if summary.get("checked_batch_preview_command") else "- Checked-only preview: none",
         f"- Checked-only approve after review: `{summary['checked_batch_apply_command']}`" if summary.get("checked_batch_apply_command") else "- Checked-only approve after review: none",
+        f"- Checked-only effect: **{summary['checked_batch_effect']['change_count']}** row(s) would change approval state" if summary.get("checked_batch_effect") else "- Checked-only effect: none",
         f"- Batch preview: `{summary['batch_preview_command']}`" if summary.get("batch_preview_command") else "- Batch preview: none",
         f"- Batch approve after review: `{summary['batch_apply_command']}`" if summary.get("batch_apply_command") else "- Batch approve after review: none",
+        f"- Batch effect: **{summary['batch_effect']['change_count']}** row(s) would change approval state" if summary.get("batch_effect") else "- Batch effect: none",
         "",
         "## Review Queue",
     ]
@@ -211,6 +245,9 @@ def build_markdown(payload: dict) -> str:
             lines.append("  - Review checks:")
             for item in row["review_checks"]:
                 lines.append(f"    - `{item['status']}` {item['name']}: {item['detail']}")
+        if row.get("approval_effect"):
+            effect = row["approval_effect"]
+            lines.append(f"  - Approval effect: `{effect['summary']}`")
         lines.append(f"  - Preview approval: `{row['approval_preview_command']}`")
         lines.append(f"  - Approve after review: `{row['approval_apply_command']}`")
     lines.extend([
@@ -277,6 +314,8 @@ def main() -> int:
     batch_apply_command = approval_batch_command(rows, dry_run=False)
     checked_batch_preview_command = approval_batch_command(checked_rows, dry_run=True)
     checked_batch_apply_command = approval_batch_command(checked_rows, dry_run=False)
+    checked_batch_effect = approval_effect_summary(checked_rows)
+    batch_effect = approval_effect_summary(rows)
     payload = {
         "generated_at": now,
         "safe_mode": True,
@@ -296,10 +335,12 @@ def main() -> int:
             "review_check_status_counts": dict(sorted(review_check_status_counts.items())),
             "checked_batch_preview_command": checked_batch_preview_command,
             "checked_batch_apply_command": checked_batch_apply_command,
+            "checked_batch_effect": checked_batch_effect,
             "preview_command_count": sum(1 for row in rows if row.get("approval_preview_command")),
             "apply_command_count": sum(1 for row in rows if row.get("approval_apply_command")),
             "batch_preview_command": batch_preview_command,
             "batch_apply_command": batch_apply_command,
+            "batch_effect": batch_effect,
         },
         "rows": rows,
     }

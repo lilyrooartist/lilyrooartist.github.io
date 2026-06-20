@@ -1,6 +1,6 @@
 # Scheduled Approval Packet - Lily Roo
 
-Generated: 2026-06-20T02:08:18.889256Z
+Generated: 2026-06-20T02:14:48.961718Z
 
 ## Summary
 - Approval blockers: **3**
@@ -12,8 +12,10 @@ Generated: 2026-06-20T02:08:18.889256Z
 - Blocked review IDs: `FP-AUTO-259`
 - Checked-only preview: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --dry-run`
 - Checked-only approve after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --refresh-admin`
+- Checked-only effect: **2** row(s) would change approval state
 - Batch preview: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-259 FP-AUTO-261 --dry-run`
 - Batch approve after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-259 FP-AUTO-261 --refresh-admin`
+- Batch effect: **3** row(s) would change approval state
 
 ## Review Queue
 - **Instagram - I Learned It All in Fifteen Seconds** (`FP-AUTO-258`)
@@ -28,6 +30,7 @@ Generated: 2026-06-20T02:08:18.889256Z
     - `pass` asset_file_present: https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg maps to assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg.
     - `pass` executor_blocker_confirmed: Current executor state is blocked / not_approved.
     - `pass` platform_readiness: Executor readiness snapshot marks platform ready.
+  - Approval effect: `approved 'no' -> 'yes'`
   - Preview approval: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 --dry-run`
   - Approve after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 --refresh-admin`
 - **TikTok - I Learned It All in Fifteen Seconds** (`FP-AUTO-259`)
@@ -42,6 +45,7 @@ Generated: 2026-06-20T02:08:18.889256Z
     - `pass` asset_file_present: https://www.lilyroo.com/assets/ig/01_i_learned_it_all_60s.mp4 maps to assets/ig/01_i_learned_it_all_60s.mp4.
     - `pass` executor_blocker_confirmed: Current executor state is blocked / not_approved.
     - `fail` platform_readiness: Executor readiness snapshot marks platform blocked. Missing secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.
+  - Approval effect: `approved 'no' -> 'yes'`
   - Preview approval: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --dry-run`
   - Approve after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --refresh-admin`
 - **YouTube Community - I Learned It All in Fifteen Seconds** (`FP-AUTO-261`)
@@ -56,6 +60,7 @@ Generated: 2026-06-20T02:08:18.889256Z
     - `pass` asset_file_present: https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg maps to assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg.
     - `pass` executor_blocker_confirmed: Current executor state is blocked / not_approved.
     - `pass` platform_readiness: Executor readiness snapshot marks platform ready.
+  - Approval effect: `approved 'no' -> 'yes'`
   - Preview approval: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-261 --dry-run`
   - Approve after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-261 --refresh-admin`
 

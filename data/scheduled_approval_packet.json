@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T02:08:18.889256Z",
+  "generated_at": "2026-06-20T02:14:48.961718Z",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -25,10 +25,91 @@
     },
     "checked_batch_preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --dry-run",
     "checked_batch_apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --refresh-admin",
+    "checked_batch_effect": {
+      "row_count": 2,
+      "change_count": 2,
+      "ids": [
+        "FP-AUTO-258",
+        "FP-AUTO-261"
+      ],
+      "effects": [
+        {
+          "id": "FP-AUTO-258",
+          "platform": "Instagram",
+          "execution_mode": "auto",
+          "effect": {
+            "field": "approved",
+            "from": "no",
+            "to": "yes",
+            "changed": true,
+            "summary": "approved 'no' -> 'yes'"
+          }
+        },
+        {
+          "id": "FP-AUTO-261",
+          "platform": "YouTube Community",
+          "execution_mode": "manual",
+          "effect": {
+            "field": "approved",
+            "from": "no",
+            "to": "yes",
+            "changed": true,
+            "summary": "approved 'no' -> 'yes'"
+          }
+        }
+      ]
+    },
     "preview_command_count": 3,
     "apply_command_count": 3,
     "batch_preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-259 FP-AUTO-261 --dry-run",
-    "batch_apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-259 FP-AUTO-261 --refresh-admin"
+    "batch_apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-259 FP-AUTO-261 --refresh-admin",
+    "batch_effect": {
+      "row_count": 3,
+      "change_count": 3,
+      "ids": [
+        "FP-AUTO-258",
+        "FP-AUTO-259",
+        "FP-AUTO-261"
+      ],
+      "effects": [
+        {
+          "id": "FP-AUTO-258",
+          "platform": "Instagram",
+          "execution_mode": "auto",
+          "effect": {
+            "field": "approved",
+            "from": "no",
+            "to": "yes",
+            "changed": true,
+            "summary": "approved 'no' -> 'yes'"
+          }
+        },
+        {
+          "id": "FP-AUTO-259",
+          "platform": "TikTok",
+          "execution_mode": "auto",
+          "effect": {
+            "field": "approved",
+            "from": "no",
+            "to": "yes",
+            "changed": true,
+            "summary": "approved 'no' -> 'yes'"
+          }
+        },
+        {
+          "id": "FP-AUTO-261",
+          "platform": "YouTube Community",
+          "execution_mode": "manual",
+          "effect": {
+            "field": "approved",
+            "from": "no",
+            "to": "yes",
+            "changed": true,
+            "summary": "approved 'no' -> 'yes'"
+          }
+        }
+      ]
+    }
   },
   "rows": [
     {
@@ -78,6 +159,13 @@
         }
       ],
       "review_check_passed": true,
+      "approval_effect": {
+        "field": "approved",
+        "from": "no",
+        "to": "yes",
+        "changed": true,
+        "summary": "approved 'no' -> 'yes'"
+      },
       "approval_preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 --dry-run",
       "approval_apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 --refresh-admin",
       "recommendation": "Review copy, media, destination links, and platform readiness before approval.",
@@ -130,6 +218,13 @@
         }
       ],
       "review_check_passed": false,
+      "approval_effect": {
+        "field": "approved",
+        "from": "no",
+        "to": "yes",
+        "changed": true,
+        "summary": "approved 'no' -> 'yes'"
+      },
       "approval_preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --dry-run",
       "approval_apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --refresh-admin",
       "recommendation": "Review copy, media, destination links, and platform readiness before approval.",
@@ -182,6 +277,13 @@
         }
       ],
       "review_check_passed": true,
+      "approval_effect": {
+        "field": "approved",
+        "from": "no",
+        "to": "yes",
+        "changed": true,
+        "summary": "approved 'no' -> 'yes'"
+      },
       "approval_preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-261 --dry-run",
       "approval_apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-261 --refresh-admin",
       "recommendation": "Review copy, media, destination links, and platform readiness before approval.",

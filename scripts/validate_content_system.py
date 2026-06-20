@@ -474,6 +474,10 @@ def validate_generated_outputs(failures):
         rows = approval_packet.get("rows") or []
         checked_rows = [row for row in rows if row.get("review_check_passed")]
         blocked_rows = [row for row in rows if not row.get("review_check_passed")]
+        checked_batch_effect = summary.get("checked_batch_effect") or {}
+        batch_effect = summary.get("batch_effect") or {}
+        checked_effects = checked_batch_effect.get("effects") or []
+        batch_effects = batch_effect.get("effects") or []
         if (
             approval_packet.get("safe_mode") is True
             and summary.get("approval_blocker_count") == len(rows)
@@ -481,6 +485,12 @@ def validate_generated_outputs(failures):
             and summary.get("checked_batch_ids") == [row.get("id") for row in checked_rows]
             and summary.get("blocked_review_ids") == [row.get("id") for row in blocked_rows]
             and isinstance(summary.get("review_check_status_counts"), dict)
+            and checked_batch_effect.get("row_count") == len(checked_rows)
+            and checked_batch_effect.get("ids") == [row.get("id") for row in checked_rows]
+            and checked_batch_effect.get("change_count") == len([item for item in checked_effects if (item.get("effect") or {}).get("changed")])
+            and batch_effect.get("row_count") == len(rows)
+            and batch_effect.get("ids") == [row.get("id") for row in rows]
+            and batch_effect.get("change_count") == len([item for item in batch_effects if (item.get("effect") or {}).get("changed")])
             and (
                 not summary.get("review_check_passed_count")
                 or (
@@ -498,6 +508,9 @@ def validate_generated_outputs(failures):
                 and row.get("copy_block")
                 and row.get("asset_url")
                 and row.get("review_checks")
+                and (row.get("approval_effect") or {}).get("field") == "approved"
+                and (row.get("approval_effect") or {}).get("to") == "yes"
+                and isinstance((row.get("approval_effect") or {}).get("changed"), bool)
                 and {"copy_present", "destination_links_present", "asset_file_present", "executor_blocker_confirmed", "platform_readiness"} <= {check.get("name") for check in row.get("review_checks", [])}
                 and "--dry-run" in row.get("approval_preview_command", "")
                 and "--refresh-admin" in row.get("approval_apply_command", "")
