@@ -1,6 +1,6 @@
 # Scheduled Approval Packet - Lily Roo
 
-Generated: 2026-06-20T12:02:02.119284Z
+Generated: 2026-06-20T12:13:00.881885Z
 
 ## Summary
 - Approval blockers: **3**
@@ -14,10 +14,10 @@ Generated: 2026-06-20T12:02:02.119284Z
 - Checked-only approve after review: `python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin`
 - Checked-only explicit preview: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --dry-run`
 - Checked-only explicit approve after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --refresh-admin`
-- Checked-only effect: **2** row(s) would change approval state
+- Checked-only effect: **0** row(s) would change approval state
 - Batch preview: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-259 FP-AUTO-261 --dry-run`
 - Batch approve after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-259 FP-AUTO-261 --refresh-admin`
-- Batch effect: **3** row(s) would change approval state
+- Batch effect: **1** row(s) would change approval state
 
 ## Approval Docket
 - Status: **ready_for_review**
@@ -25,7 +25,7 @@ Generated: 2026-06-20T12:02:02.119284Z
 - Held: **1**
 - Checked batch preview: `python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run`
 - Checked batch approve after review: `python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin`
-- Checked batch dry-run result: **2** change(s), **2** reviewed row(s), no files written
+- Checked batch dry-run result: **0** change(s), **2** reviewed row(s), no files written
 - Decision manifest: **3** reviewed row(s); ready `FP-AUTO-258, FP-AUTO-261`; held `FP-AUTO-259`
 
 ### Approval Apply Manifest
@@ -33,7 +33,7 @@ Generated: 2026-06-20T12:02:02.119284Z
 - Apply scope: **checked_batch**
 - Ready IDs: `FP-AUTO-258, FP-AUTO-261`
 - Held IDs: `FP-AUTO-259`
-- Expected changes: **2**
+- Expected changes: **0**
 - Preview: `python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run`
 - Apply after review: `python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin`
 
@@ -140,7 +140,7 @@ Stream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: htt
   - Approval review status: `checked_batch_ready`
   - Checked batch member: `True`
   - Batch reason: All automated review checks passed.
-  - Approval effect: `approved 'no' -> 'yes'`
+  - Approval effect: `approved 'yes' -> 'yes'`
   - Preview approval: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 --dry-run`
   - Approve after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 --refresh-admin`
 - **TikTok - I Learned It All in Fifteen Seconds** (`FP-AUTO-259`)
@@ -187,7 +187,7 @@ Stream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: htt
   - Approval review status: `checked_batch_ready`
   - Checked batch member: `True`
   - Batch reason: All automated review checks passed.
-  - Approval effect: `approved 'no' -> 'yes'`
+  - Approval effect: `approved 'yes' -> 'yes'`
   - Preview approval: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-261 --dry-run`
   - Approve after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-261 --refresh-admin`
 

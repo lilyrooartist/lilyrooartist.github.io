@@ -1,6 +1,6 @@
 # Human Handoff Packet - Lily Roo
 
-Generated: 2026-06-20T12:02:02.544295Z
+Generated: 2026-06-20T12:13:01.205997Z
 
 ## Summary
 - Open handoff tasks: **7**
@@ -10,13 +10,13 @@ Generated: 2026-06-20T12:02:02.544295Z
 - Low urgency tasks: **2**
 
 ## Action Docket
-- Ready steps: **3**
+- Ready steps: **2**
 - Blocked steps: **2**
 - Manual posts packaged: **2**
 - Manual metric fields: **6**
 - Resolution worksheet: `data/human_handoff_resolution_worksheet.csv` (7 row(s))
 
-- **Review checked approval batch** (`ready_for_review`)
+- **Review checked approval batch** (`clear`)
   - Owner: `tod`; tasks: **1**; blockers resolved: **2**
   - Decision manifest: ready `FP-AUTO-258, FP-AUTO-261`; held `FP-AUTO-259`
   - Review runbook: **5** step(s), **2** checklist row(s)
@@ -63,9 +63,9 @@ Generated: 2026-06-20T12:02:02.544295Z
   - Next after apply: Rebuild the weekly report and confirm lilyroo.com/admin shows fewer pending manual metric fields.
   - Guardrail: Import only collected numeric values; leave unknown cells blank.
 - **Reschedule approved backlog after blockers clear** (`blocked`)
-  - Owner: `external_platform`; tasks: **1**; blockers resolved: **1**
-  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24`
-  - Sequence preview: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24`
+  - Owner: `external_platform`; tasks: **1**; blockers resolved: **3**
+  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24`
+  - Sequence preview: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24`
   - Sequence verify: `python3 scripts/refresh_promo_admin.py`
   - Completion evidence: data/backlog_reschedule_preview.json should show normal_apply_gate clear before any non-override apply command is exposed.
   - Next after apply: Refresh admin and confirm approved past-due posts have future scheduled_at values before relying on the scheduler.
@@ -86,7 +86,7 @@ Generated: 2026-06-20T12:02:02.544295Z
 - **Preview approved backlog reschedule** (`backlog-reschedule`)
   - Phase: `Backlog recovery`; owner: `external_platform`; status: `blocked`; urgency: `high`
   - Detail: Known executor/platform blockers must clear before normal apply.
-  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24`
+  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24`
   - Guardrail: Normal apply stays hidden until known executor/platform blockers clear.
 - **Post Analog Myth to YouTube Community** (`manual-distribution-FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY`)
   - Phase: `Manual distribution`; owner: `tod`; status: `waiting_for_review`; urgency: `medium`

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T12:02:02.243713Z",
+  "generated_at": "2026-06-20T12:13:00.972646Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -87,15 +87,15 @@
       "phase": "Recover stalled approved backlog",
       "status": "preview_first",
       "detail": "Preview a new schedule for approved past-due posts. Normal apply is hidden until known executor/platform blockers clear.",
-      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
       "after_review_command": "",
       "context": {
-        "approved_backlog_posts": 1,
+        "approved_backlog_posts": 3,
         "approved_upcoming_posts": 5,
-        "blocked_backlog_count": 1,
+        "blocked_backlog_count": 3,
         "apply_allowed_without_override": false,
-        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin"
+        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --apply --refresh-admin",
+        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin"
       }
     },
     {
@@ -125,14 +125,14 @@
       }
     },
     {
-      "label": "Current operations next action: Preview checked scheduled approval batch",
+      "label": "Current operations next action: Preview reschedule for approved past-due posts",
       "phase": "Operations packet",
       "status": "waiting_for_user",
-      "detail": "Scheduled executor records are blocked until reviewed approval is applied.",
-      "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
-      "after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+      "detail": "Approved posts are past due; preview a new schedule before any apply step.",
+      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
+      "after_review_command": "",
       "context": {
-        "kind": "scheduled_approval_batch",
+        "kind": "backlog_reschedule",
         "urgency": "high"
       }
     }

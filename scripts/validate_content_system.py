@@ -615,10 +615,12 @@ def validate_generated_outputs(failures):
         scheduled_manifest = scheduled_packet.get("approval_decision_manifest") or {}
         scheduled_apply_manifest = scheduled_packet.get("approval_apply_manifest") or {}
         scheduled_runbook = scheduled_packet.get("approval_review_runbook") or {}
+        scheduled_checked_effect = (scheduled_packet.get("summary") or {}).get("checked_batch_effect") or {}
+        scheduled_checked_change_count = int(scheduled_checked_effect.get("change_count") or 0)
         scheduled_decisions = scheduled_manifest.get("decisions") or []
         ready_decisions = [item for item in scheduled_decisions if item.get("decision") == "ready_to_approve"]
         held_decisions = [item for item in scheduled_decisions if item.get("decision") == "held"]
-        if int((scheduled_packet.get("summary") or {}).get("approval_blocker_count") or 0):
+        if int((scheduled_packet.get("summary") or {}).get("approval_blocker_count") or 0) and scheduled_checked_change_count > 0:
             if (
                 scheduled_batch_actions
                 and summary.get("scheduled_approval_batches") == len(scheduled_batch_actions)
@@ -668,6 +670,11 @@ def validate_generated_outputs(failures):
                 ok("promo operations packet mirrors scheduled approval impact")
             else:
                 fail("promo_operations_packet.json missing scheduled approval impact summary", failures)
+        elif scheduled_checked_change_count == 0:
+            if not scheduled_batch_actions and summary.get("scheduled_approval_batches") == 0:
+                ok("promo operations packet skips completed scheduled approval batch")
+            else:
+                fail("promo_operations_packet.json still surfaces completed scheduled approval batch", failures)
         approval_review_actions = [
             action for action in actions
             if action.get("kind") == "approval_review"
@@ -847,6 +854,7 @@ def validate_generated_outputs(failures):
         scheduled_manifest = scheduled_packet.get("approval_decision_manifest") or {}
         scheduled_apply_manifest = scheduled_packet.get("approval_apply_manifest") or {}
         scheduled_runbook = scheduled_packet.get("approval_review_runbook") or {}
+        scheduled_checked_change_count_for_handoff = int(((scheduled_packet.get("summary") or {}).get("checked_batch_effect") or {}).get("change_count") or 0)
         approval_runway = json.loads(APPROVAL_RUNWAY.read_text(encoding="utf-8")) if APPROVAL_RUNWAY.exists() else {}
         manual_approval_docket = approval_runway.get("manual_approval_docket") or {}
         manual_posting_step = next((item for item in docket_checklist if item.get("id") == "manual-posting-review"), {})
@@ -894,17 +902,26 @@ def validate_generated_outputs(failures):
             and docket.get("roadmap_step_count") == len((summary.get("blocker_summary") or {}).get("blocker_unlock_roadmap") or [])
             and docket.get("ready_step_count") == len([item for item in docket_checklist if item.get("state") in {"ready", "ready_for_review", "needs_review", "needs_values"}])
             and docket.get("blocked_step_count") == len([item for item in docket_checklist if item.get("state") == "blocked"])
-            and first_ready_step.get("id") == "review-checked-approval-batch"
-            and first_ready_step.get("decision_ready_ids") == (scheduled_manifest.get("ready_ids") or [])
-            and first_ready_step.get("decision_held_ids") == (scheduled_manifest.get("held_ids") or [])
-            and (first_ready_step.get("approval_decision_manifest") or {}).get("decisions") == (scheduled_manifest.get("decisions") or [])
-            and first_ready_step.get("approval_apply_manifest") == scheduled_apply_manifest
-            and first_ready_step.get("pre_apply_checklist") == (scheduled_apply_manifest.get("pre_apply_checklist") or [])
-            and first_ready_step.get("post_apply_evidence") == (scheduled_apply_manifest.get("post_apply_evidence") or [])
-            and first_ready_step.get("apply_guardrails") == (scheduled_apply_manifest.get("guardrails") or [])
-            and (first_ready_step.get("approval_review_runbook") or {}).get("steps") == (scheduled_runbook.get("steps") or [])
-            and first_ready_step.get("review_runbook_steps") == (scheduled_runbook.get("steps") or [])
-            and first_ready_step.get("review_checklist") == (scheduled_runbook.get("review_checklist") or [])
+	            and (
+	                (
+	                    scheduled_checked_change_count_for_handoff
+	                    and first_ready_step.get("id") == "review-checked-approval-batch"
+	                    and first_ready_step.get("decision_ready_ids") == (scheduled_manifest.get("ready_ids") or [])
+	                    and first_ready_step.get("decision_held_ids") == (scheduled_manifest.get("held_ids") or [])
+	                    and (first_ready_step.get("approval_decision_manifest") or {}).get("decisions") == (scheduled_manifest.get("decisions") or [])
+	                    and first_ready_step.get("approval_apply_manifest") == scheduled_apply_manifest
+	                    and first_ready_step.get("pre_apply_checklist") == (scheduled_apply_manifest.get("pre_apply_checklist") or [])
+	                    and first_ready_step.get("post_apply_evidence") == (scheduled_apply_manifest.get("post_apply_evidence") or [])
+	                    and first_ready_step.get("apply_guardrails") == (scheduled_apply_manifest.get("guardrails") or [])
+	                    and (first_ready_step.get("approval_review_runbook") or {}).get("steps") == (scheduled_runbook.get("steps") or [])
+	                    and first_ready_step.get("review_runbook_steps") == (scheduled_runbook.get("steps") or [])
+	                    and first_ready_step.get("review_checklist") == (scheduled_runbook.get("review_checklist") or [])
+	                )
+	                or (
+	                    not scheduled_checked_change_count_for_handoff
+	                    and first_ready_step.get("id") == "manual-posting-review"
+	                )
+	            )
             and manual_posting_step
             and manual_posting_step.get("ready_ids") == (manual_approval_docket.get("ready_ids") or [])
             and manual_posting_step.get("blocked_ids") == (manual_approval_docket.get("blocked_ids") or [])
@@ -982,8 +999,8 @@ def validate_generated_outputs(failures):
         if (
             unlock_sequence.get("safe_mode") is True
             and unlock_summary.get("step_count") == len(unlock_steps) == len(ledger_roadmap)
-            and unlock_summary.get("current_step_id") == "unlock-checked-scheduled-approval"
-            and unlock_summary.get("current_gate_state") == "ready_for_human_review"
+            and unlock_summary.get("current_step_id") in {"unlock-checked-scheduled-approval", "unlock-manual-distribution"}
+            and unlock_summary.get("current_gate_state") in {"ready_for_human_review", "completed"}
             and unlock_summary.get("open_blocker_count") == ledger_open_count
             and [step.get("id") for step in unlock_steps] == [item.get("id") for item in ledger_roadmap]
             and any(step.get("gate_state") == "blocked_until_input" for step in unlock_steps)

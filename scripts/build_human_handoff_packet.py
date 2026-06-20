@@ -404,6 +404,10 @@ def build_action_docket(tasks: list[dict], blocker_summary: dict, approval_runwa
     approval_preview_command = approval.get("preview_command") or projection.get("preview_command") or ""
     approval_apply_command = approval.get("apply_command") or projection.get("apply_command") or ""
     approval_impact = approval.get("impact") or {}
+    approval_change_count = int((approval_impact.get("expected_effect") or {}).get("change_count") or approval_impact.get("change_count") or 0)
+    approval_state = "ready_for_review" if approval else "not_available"
+    if approval and approval_change_count == 0:
+        approval_state = "clear"
     platform_preview_command = platform_setup[0].get("preview_command") if platform_setup else ""
     platform_apply_command = platform_setup[0].get("apply_command") if platform_setup else ""
     metric_preview_command = manual_metrics[0].get("preview_command") if manual_metrics else ""
@@ -416,7 +420,7 @@ def build_action_docket(tasks: list[dict], blocker_summary: dict, approval_runwa
         {
             "id": "review-checked-approval-batch",
             "label": "Review checked approval batch",
-            "state": "ready_for_review" if approval else "not_available",
+            "state": approval_state,
             "owner": "tod",
             "task_ids": [approval.get("id")] if approval else [],
             "blockers_resolved": projection.get("blockers_resolved") or 0,

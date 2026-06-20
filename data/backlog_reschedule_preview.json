@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T12:02:01.983938+00:00",
+  "generated_at": "2026-06-20T21:13:00.794373+09:00",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -9,22 +9,25 @@
     "promo_engine_status": "data/promo_engine_status.json"
   },
   "summary": {
-    "approved_backlog_count": 1,
-    "blocked_backlog_count": 1,
+    "approved_backlog_count": 3,
+    "blocked_backlog_count": 3,
     "clear_to_apply_count": 0,
-    "start_at": "2026-06-21T10:00:00+00:00",
+    "start_at": "2026-06-21T10:00:00+09:00",
     "spacing_hours": 24,
-    "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+    "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
     "apply_command": "",
-    "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-    "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
+    "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --apply --refresh-admin",
+    "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
     "apply_blocked_reason": "Known executor/platform blockers must clear before normal apply.",
     "apply_allowed_without_override": false,
     "blocked_ids": [
+      "FP-AUTO-258",
+      "FP-AUTO-261",
       "FP-AUTO-264"
     ],
     "normal_apply_gate": "blocked_until_clearance_steps_complete",
     "clearance_steps": [
+      "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply.",
       "Add local TikTok OAuth credentials, then push worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
       "Confirm TikTok public posting approval before treating auto-posting as ready.",
       "Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair."
@@ -32,31 +35,56 @@
   },
   "backlog_clearance_manifest": {
     "status": "blocked_until_clearance_steps_complete",
-    "approved_backlog_count": 1,
-    "blocked_backlog_count": 1,
+    "approved_backlog_count": 3,
+    "blocked_backlog_count": 3,
     "clear_to_apply_count": 0,
     "blocked_ids": [
+      "FP-AUTO-258",
+      "FP-AUTO-261",
       "FP-AUTO-264"
     ],
-    "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+    "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
     "safe_apply_command": "",
-    "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-    "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
+    "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --apply --refresh-admin",
+    "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
     "apply_allowed_without_override": false,
     "apply_gate": "blocked_until_clearance_steps_complete",
     "clearance_steps": [
+      "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply.",
       "Add local TikTok OAuth credentials, then push worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
       "Confirm TikTok public posting approval before treating auto-posting as ready.",
       "Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair."
     ],
     "blocked_items": [
       {
+        "id": "FP-AUTO-258",
+        "platform": "Instagram",
+        "song": "I Learned It All in Fifteen Seconds",
+        "blocker_kind": "not_approved",
+        "blocker_reason": "not_approved",
+        "proposed_scheduled_at": "2026-06-21T10:00:00+09:00",
+        "clearance_steps": [
+          "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+        ]
+      },
+      {
+        "id": "FP-AUTO-261",
+        "platform": "YouTube Community",
+        "song": "I Learned It All in Fifteen Seconds",
+        "blocker_kind": "not_approved",
+        "blocker_reason": "not_approved",
+        "proposed_scheduled_at": "2026-06-22T10:00:00+09:00",
+        "clearance_steps": [
+          "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+        ]
+      },
+      {
         "id": "FP-AUTO-264",
         "platform": "TikTok",
         "song": "I Learned It All in Fifteen Seconds",
         "blocker_kind": "tiktok_credentials_missing",
         "blocker_reason": "tiktok_credentials_missing",
-        "proposed_scheduled_at": "2026-06-21T10:00:00+00:00",
+        "proposed_scheduled_at": "2026-06-23T10:00:00+09:00",
         "clearance_steps": [
           "Add local TikTok OAuth credentials, then push worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
           "Confirm TikTok public posting approval before treating auto-posting as ready.",
@@ -85,11 +113,45 @@
   },
   "items": [
     {
+      "id": "FP-AUTO-258",
+      "platform": "Instagram",
+      "song": "I Learned It All in Fifteen Seconds",
+      "current_scheduled_at": "2026-06-05T15:35:00-04:00",
+      "proposed_scheduled_at": "2026-06-21T10:00:00+09:00",
+      "blocked": true,
+      "blocker_reason": "not_approved",
+      "blocker_status": "blocked",
+      "blocker_source": "cron",
+      "blocker_kind": "not_approved",
+      "blocks_normal_apply": true,
+      "safe_apply_available": false,
+      "clearance_steps": [
+        "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+      ]
+    },
+    {
+      "id": "FP-AUTO-261",
+      "platform": "YouTube Community",
+      "song": "I Learned It All in Fifteen Seconds",
+      "current_scheduled_at": "2026-06-06T19:10:00-04:00",
+      "proposed_scheduled_at": "2026-06-22T10:00:00+09:00",
+      "blocked": true,
+      "blocker_reason": "not_approved",
+      "blocker_status": "blocked",
+      "blocker_source": "cron",
+      "blocker_kind": "not_approved",
+      "blocks_normal_apply": true,
+      "safe_apply_available": false,
+      "clearance_steps": [
+        "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+      ]
+    },
+    {
       "id": "FP-AUTO-264",
       "platform": "TikTok",
       "song": "I Learned It All in Fifteen Seconds",
       "current_scheduled_at": "2026-06-09T21:25:00-04:00",
-      "proposed_scheduled_at": "2026-06-21T10:00:00+00:00",
+      "proposed_scheduled_at": "2026-06-23T10:00:00+09:00",
       "blocked": true,
       "blocker_reason": "tiktok_credentials_missing",
       "blocker_status": "blocked",

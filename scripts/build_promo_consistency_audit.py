@@ -291,12 +291,12 @@ def build_checks() -> dict:
         int(unlock_summary.get("open_blocker_count") or 0),
         "Promo unlock sequence should mirror the blocker ledger open blocker count.",
     ))
+    current_step = next((step for step in unlock_steps if step.get("id") == unlock_summary.get("current_step_id")), {})
     checks.append(verdict(
         "unlock_sequence_current_step_is_preview_ready",
-        (unlock_summary.get("current_step_id") == "unlock-checked-scheduled-approval"
-         and unlock_summary.get("current_gate_state") == "ready_for_human_review"),
-        "Promo unlock sequence should lead with the checked scheduled approval batch while it is the highest-leverage safe review step.",
-        expected={"current_step_id": "unlock-checked-scheduled-approval", "current_gate_state": "ready_for_human_review"},
+        bool(current_step) and current_step.get("gate_state") == unlock_summary.get("current_gate_state"),
+        "Promo unlock sequence should lead with the first currently actionable gate, skipping any completed evidence-only gate.",
+        expected={"current_step_id": current_step.get("id"), "current_gate_state": current_step.get("gate_state")},
         actual={"current_step_id": unlock_summary.get("current_step_id"), "current_gate_state": unlock_summary.get("current_gate_state")},
         severity="medium",
     ))

@@ -324,6 +324,14 @@ def build_unlock_roadmap(rows: list[dict], projection: dict) -> list[dict]:
     manual_docket = manual_distribution.get("manual_distribution_docket") or {}
     approval_runway = read_json(APPROVAL_RUNWAY, {})
     approval_docket = approval_runway.get("manual_approval_docket") or {}
+    scheduled_approval = read_json(SCHEDULED_APPROVAL, {})
+    scheduled_summary = scheduled_approval.get("summary") or {}
+    checked_effect = scheduled_summary.get("checked_batch_effect") or {}
+    checked_change_count = int(checked_effect.get("change_count") or 0)
+    checked_ids = projection.get("checked_ids") or scheduled_summary.get("checked_batch_ids") or []
+    approval_status = "ready_for_review" if checked_ids else "blocked"
+    if checked_ids and checked_change_count == 0:
+        approval_status = "completed"
     platform_repair = read_json(PLATFORM_REPAIR, {})
     backlog = read_json(BACKLOG_RESCHEDULE, {})
     metrics = read_json(MANUAL_METRICS, {})
@@ -337,9 +345,9 @@ def build_unlock_roadmap(rows: list[dict], projection: dict) -> list[dict]:
         {
             "id": "unlock-checked-scheduled-approval",
             "phase": "Approve checked scheduled rows",
-            "status": "ready_for_review" if projection.get("checked_ids") else "blocked",
+            "status": approval_status,
             "owner": "tod",
-            "blockers_resolved": int(projection.get("blockers_resolved") or 0),
+            "blockers_resolved": 0 if approval_status == "completed" else int(projection.get("blockers_resolved") or 0),
             "unlocks": [
                 "Instagram executor row can become publish-eligible after approval.",
                 "One scheduled YouTube Community row can move into manual distribution after approval.",

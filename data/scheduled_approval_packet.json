@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T12:02:02.119284Z",
+  "generated_at": "2026-06-20T12:13:00.881885Z",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -36,7 +36,7 @@
     "checked_batch_explicit_apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-261 --refresh-admin",
     "checked_batch_effect": {
       "row_count": 2,
-      "change_count": 2,
+      "change_count": 0,
       "ids": [
         "FP-AUTO-258",
         "FP-AUTO-261"
@@ -48,10 +48,10 @@
           "execution_mode": "auto",
           "effect": {
             "field": "approved",
-            "from": "no",
+            "from": "yes",
             "to": "yes",
-            "changed": true,
-            "summary": "approved 'no' -> 'yes'"
+            "changed": false,
+            "summary": "approved 'yes' -> 'yes'"
           }
         },
         {
@@ -60,10 +60,10 @@
           "execution_mode": "manual",
           "effect": {
             "field": "approved",
-            "from": "no",
+            "from": "yes",
             "to": "yes",
-            "changed": true,
-            "summary": "approved 'no' -> 'yes'"
+            "changed": false,
+            "summary": "approved 'yes' -> 'yes'"
           }
         }
       ]
@@ -74,7 +74,7 @@
     "batch_apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 FP-AUTO-259 FP-AUTO-261 --refresh-admin",
     "batch_effect": {
       "row_count": 3,
-      "change_count": 3,
+      "change_count": 1,
       "ids": [
         "FP-AUTO-258",
         "FP-AUTO-259",
@@ -87,10 +87,10 @@
           "execution_mode": "auto",
           "effect": {
             "field": "approved",
-            "from": "no",
+            "from": "yes",
             "to": "yes",
-            "changed": true,
-            "summary": "approved 'no' -> 'yes'"
+            "changed": false,
+            "summary": "approved 'yes' -> 'yes'"
           }
         },
         {
@@ -111,10 +111,10 @@
           "execution_mode": "manual",
           "effect": {
             "field": "approved",
-            "from": "no",
+            "from": "yes",
             "to": "yes",
-            "changed": true,
-            "summary": "approved 'no' -> 'yes'"
+            "changed": false,
+            "summary": "approved 'yes' -> 'yes'"
           }
         }
       ]
@@ -135,10 +135,10 @@
       ],
       "unchecked_ids": [],
       "row_count": 2,
-      "change_count": 2,
+      "change_count": 0,
       "expected_effect": {
         "row_count": 2,
-        "change_count": 2,
+        "change_count": 0,
         "ids": [
           "FP-AUTO-258",
           "FP-AUTO-261"
@@ -150,10 +150,10 @@
             "execution_mode": "auto",
             "effect": {
               "field": "approved",
-              "from": "no",
+              "from": "yes",
               "to": "yes",
-              "changed": true,
-              "summary": "approved 'no' -> 'yes'"
+              "changed": false,
+              "summary": "approved 'yes' -> 'yes'"
             }
           },
           {
@@ -162,18 +162,18 @@
             "execution_mode": "manual",
             "effect": {
               "field": "approved",
-              "from": "no",
+              "from": "yes",
               "to": "yes",
-              "changed": true,
-              "summary": "approved 'no' -> 'yes'"
+              "changed": false,
+              "summary": "approved 'yes' -> 'yes'"
             }
           }
         ]
       },
       "output_lines": [
-        "FP-AUTO-258: approved 'no' -> 'yes'",
-        "FP-AUTO-261: approved 'no' -> 'yes'",
-        "Checked batch guard: 2 checked id(s); 2 requested; 0 unchecked; 2 change(s).",
+        "FP-AUTO-258: approved 'yes' -> 'yes'",
+        "FP-AUTO-261: approved 'yes' -> 'yes'",
+        "Checked batch guard: 2 checked id(s); 2 requested; 0 unchecked; 0 change(s).",
         "Dry run only; did not update data/scheduled_posts.csv"
       ],
       "post_apply_verification": [
@@ -282,10 +282,10 @@
         "failed_review_checks": [],
         "approval_effect": {
           "field": "approved",
-          "from": "no",
+          "from": "yes",
           "to": "yes",
-          "changed": true,
-          "summary": "approved 'no' -> 'yes'"
+          "changed": false,
+          "summary": "approved 'yes' -> 'yes'"
         },
         "preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 --dry-run",
         "apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 --refresh-admin",
@@ -400,10 +400,10 @@
         "failed_review_checks": [],
         "approval_effect": {
           "field": "approved",
-          "from": "no",
+          "from": "yes",
           "to": "yes",
-          "changed": true,
-          "summary": "approved 'no' -> 'yes'"
+          "changed": false,
+          "summary": "approved 'yes' -> 'yes'"
         },
         "preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-261 --dry-run",
         "apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-261 --refresh-admin",
@@ -539,10 +539,10 @@
       ],
       "unchecked_ids": [],
       "row_count": 2,
-      "change_count": 2,
+      "change_count": 0,
       "expected_effect": {
         "row_count": 2,
-        "change_count": 2,
+        "change_count": 0,
         "ids": [
           "FP-AUTO-258",
           "FP-AUTO-261"
@@ -554,10 +554,10 @@
             "execution_mode": "auto",
             "effect": {
               "field": "approved",
-              "from": "no",
+              "from": "yes",
               "to": "yes",
-              "changed": true,
-              "summary": "approved 'no' -> 'yes'"
+              "changed": false,
+              "summary": "approved 'yes' -> 'yes'"
             }
           },
           {
@@ -566,18 +566,18 @@
             "execution_mode": "manual",
             "effect": {
               "field": "approved",
-              "from": "no",
+              "from": "yes",
               "to": "yes",
-              "changed": true,
-              "summary": "approved 'no' -> 'yes'"
+              "changed": false,
+              "summary": "approved 'yes' -> 'yes'"
             }
           }
         ]
       },
       "output_lines": [
-        "FP-AUTO-258: approved 'no' -> 'yes'",
-        "FP-AUTO-261: approved 'no' -> 'yes'",
-        "Checked batch guard: 2 checked id(s); 2 requested; 0 unchecked; 2 change(s).",
+        "FP-AUTO-258: approved 'yes' -> 'yes'",
+        "FP-AUTO-261: approved 'yes' -> 'yes'",
+        "Checked batch guard: 2 checked id(s); 2 requested; 0 unchecked; 0 change(s).",
         "Dry run only; did not update data/scheduled_posts.csv"
       ],
       "post_apply_verification": [
@@ -588,7 +588,7 @@
     },
     "checked_batch_effect": {
       "row_count": 2,
-      "change_count": 2,
+      "change_count": 0,
       "ids": [
         "FP-AUTO-258",
         "FP-AUTO-261"
@@ -600,10 +600,10 @@
           "execution_mode": "auto",
           "effect": {
             "field": "approved",
-            "from": "no",
+            "from": "yes",
             "to": "yes",
-            "changed": true,
-            "summary": "approved 'no' -> 'yes'"
+            "changed": false,
+            "summary": "approved 'yes' -> 'yes'"
           }
         },
         {
@@ -612,10 +612,10 @@
           "execution_mode": "manual",
           "effect": {
             "field": "approved",
-            "from": "no",
+            "from": "yes",
             "to": "yes",
-            "changed": true,
-            "summary": "approved 'no' -> 'yes'"
+            "changed": false,
+            "summary": "approved 'yes' -> 'yes'"
           }
         }
       ]
@@ -646,10 +646,10 @@
         "checked_batch_member": true,
         "approval_effect": {
           "field": "approved",
-          "from": "no",
+          "from": "yes",
           "to": "yes",
-          "changed": true,
-          "summary": "approved 'no' -> 'yes'"
+          "changed": false,
+          "summary": "approved 'yes' -> 'yes'"
         },
         "passed_check_names": [
           "copy_present",
@@ -673,10 +673,10 @@
         "checked_batch_member": true,
         "approval_effect": {
           "field": "approved",
-          "from": "no",
+          "from": "yes",
           "to": "yes",
-          "changed": true,
-          "summary": "approved 'no' -> 'yes'"
+          "changed": false,
+          "summary": "approved 'yes' -> 'yes'"
         },
         "passed_check_names": [
           "copy_present",
@@ -721,7 +721,7 @@
     ],
     "expected_checked_batch_effect": {
       "row_count": 2,
-      "change_count": 2,
+      "change_count": 0,
       "ids": [
         "FP-AUTO-258",
         "FP-AUTO-261"
@@ -733,10 +733,10 @@
           "execution_mode": "auto",
           "effect": {
             "field": "approved",
-            "from": "no",
+            "from": "yes",
             "to": "yes",
-            "changed": true,
-            "summary": "approved 'no' -> 'yes'"
+            "changed": false,
+            "summary": "approved 'yes' -> 'yes'"
           }
         },
         {
@@ -745,10 +745,10 @@
           "execution_mode": "manual",
           "effect": {
             "field": "approved",
-            "from": "no",
+            "from": "yes",
             "to": "yes",
-            "changed": true,
-            "summary": "approved 'no' -> 'yes'"
+            "changed": false,
+            "summary": "approved 'yes' -> 'yes'"
           }
         }
       ]
@@ -769,10 +769,10 @@
       ],
       "unchecked_ids": [],
       "row_count": 2,
-      "change_count": 2,
+      "change_count": 0,
       "expected_effect": {
         "row_count": 2,
-        "change_count": 2,
+        "change_count": 0,
         "ids": [
           "FP-AUTO-258",
           "FP-AUTO-261"
@@ -784,10 +784,10 @@
             "execution_mode": "auto",
             "effect": {
               "field": "approved",
-              "from": "no",
+              "from": "yes",
               "to": "yes",
-              "changed": true,
-              "summary": "approved 'no' -> 'yes'"
+              "changed": false,
+              "summary": "approved 'yes' -> 'yes'"
             }
           },
           {
@@ -796,18 +796,18 @@
             "execution_mode": "manual",
             "effect": {
               "field": "approved",
-              "from": "no",
+              "from": "yes",
               "to": "yes",
-              "changed": true,
-              "summary": "approved 'no' -> 'yes'"
+              "changed": false,
+              "summary": "approved 'yes' -> 'yes'"
             }
           }
         ]
       },
       "output_lines": [
-        "FP-AUTO-258: approved 'no' -> 'yes'",
-        "FP-AUTO-261: approved 'no' -> 'yes'",
-        "Checked batch guard: 2 checked id(s); 2 requested; 0 unchecked; 2 change(s).",
+        "FP-AUTO-258: approved 'yes' -> 'yes'",
+        "FP-AUTO-261: approved 'yes' -> 'yes'",
+        "Checked batch guard: 2 checked id(s); 2 requested; 0 unchecked; 0 change(s).",
         "Dry run only; did not update data/scheduled_posts.csv"
       ],
       "post_apply_verification": [
@@ -832,10 +832,10 @@
     "apply_scope": "checked_batch",
     "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
     "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
-    "expected_change_count": 2,
+    "expected_change_count": 0,
     "expected_effect": {
       "row_count": 2,
-      "change_count": 2,
+      "change_count": 0,
       "ids": [
         "FP-AUTO-258",
         "FP-AUTO-261"
@@ -847,10 +847,10 @@
           "execution_mode": "auto",
           "effect": {
             "field": "approved",
-            "from": "no",
+            "from": "yes",
             "to": "yes",
-            "changed": true,
-            "summary": "approved 'no' -> 'yes'"
+            "changed": false,
+            "summary": "approved 'yes' -> 'yes'"
           }
         },
         {
@@ -859,10 +859,10 @@
           "execution_mode": "manual",
           "effect": {
             "field": "approved",
-            "from": "no",
+            "from": "yes",
             "to": "yes",
-            "changed": true,
-            "summary": "approved 'no' -> 'yes'"
+            "changed": false,
+            "summary": "approved 'yes' -> 'yes'"
           }
         }
       ]
@@ -1097,7 +1097,7 @@
       "scheduled_at": "2026-06-05T15:35:00-04:00",
       "execution_mode": "auto",
       "post_type": "image",
-      "approved": "no",
+      "approved": "yes",
       "status": "blocked",
       "reason": "not_approved",
       "attempts": 0,
@@ -1223,10 +1223,10 @@
       "approval_batch_reason": "All automated review checks passed.",
       "approval_effect": {
         "field": "approved",
-        "from": "no",
+        "from": "yes",
         "to": "yes",
-        "changed": true,
-        "summary": "approved 'no' -> 'yes'"
+        "changed": false,
+        "summary": "approved 'yes' -> 'yes'"
       },
       "approval_preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 --dry-run",
       "approval_apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 --refresh-admin",
@@ -1389,7 +1389,7 @@
       "scheduled_at": "2026-06-06T19:10:00-04:00",
       "execution_mode": "manual",
       "post_type": "community",
-      "approved": "no",
+      "approved": "yes",
       "status": "blocked",
       "reason": "not_approved",
       "attempts": 0,
@@ -1530,10 +1530,10 @@
       "approval_batch_reason": "All automated review checks passed.",
       "approval_effect": {
         "field": "approved",
-        "from": "no",
+        "from": "yes",
         "to": "yes",
-        "changed": true,
-        "summary": "approved 'no' -> 'yes'"
+        "changed": false,
+        "summary": "approved 'yes' -> 'yes'"
       },
       "approval_preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-261 --dry-run",
       "approval_apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-261 --refresh-admin",

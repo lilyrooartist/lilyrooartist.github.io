@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T12:02:02.544295Z",
+  "generated_at": "2026-06-20T12:13:01.205997Z",
   "safe_mode": true,
   "source": {
     "promotion_blocker_ledger": "data/promotion_blocker_ledger.json",
@@ -75,9 +75,9 @@
         {
           "id": "unlock-checked-scheduled-approval",
           "phase": "Approve checked scheduled rows",
-          "status": "ready_for_review",
+          "status": "completed",
           "owner": "tod",
-          "blockers_resolved": 2,
+          "blockers_resolved": 0,
           "unlocks": [
             "Instagram executor row can become publish-eligible after approval.",
             "One scheduled YouTube Community row can move into manual distribution after approval."
@@ -132,14 +132,16 @@
           "phase": "Reschedule approved past-due backlog",
           "status": "blocked_until_clearance_steps_complete",
           "owner": "external_platform",
-          "blockers_resolved": 1,
+          "blockers_resolved": 3,
           "unlocks": [
             "Approved past-due queue rows get a fresh schedule after executor blockers clear."
           ],
           "blocked_by": [
+            "FP-AUTO-258",
+            "FP-AUTO-261",
             "FP-AUTO-264"
           ],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
           "apply_command": "",
           "source_path": "data/backlog_reschedule_preview.json"
         },
@@ -178,667 +180,38 @@
     "source": "data/human_handoff_packet.json",
     "roadmap_step_count": 5,
     "task_count": 7,
-    "ready_step_count": 3,
+    "ready_step_count": 2,
     "blocked_step_count": 2,
     "manual_post_count": 2,
     "manual_metric_field_count": 6,
     "first_ready_step": {
-      "id": "review-checked-approval-batch",
-      "label": "Review checked approval batch",
-      "state": "ready_for_review",
+      "id": "manual-posting-review",
+      "label": "Review and post manual distribution rows",
+      "state": "needs_review",
       "owner": "tod",
       "task_ids": [
-        "approve-checked-scheduled-batch"
+        "manual-distribution-FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+        "manual-distribution-FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
       ],
       "blockers_resolved": 2,
-      "decision_ready_ids": [
-        "FP-AUTO-258",
-        "FP-AUTO-261"
+      "ready_ids": [
+        "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+        "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
       ],
-      "decision_held_ids": [
-        "FP-AUTO-259"
+      "blocked_ids": [
+        "FP-PLAN-TWELVE-DOLLARS-TIKTOK"
       ],
-      "approval_decision_manifest": {
-        "status": "ready_for_review",
-        "ready_ids": [
-          "FP-AUTO-258",
-          "FP-AUTO-261"
-        ],
-        "held_ids": [
-          "FP-AUTO-259"
-        ],
-        "decisions": [
-          {
-            "id": "FP-AUTO-258",
-            "decision": "ready_to_approve",
-            "platform": "Instagram",
-            "song": "I Learned It All in Fifteen Seconds",
-            "execution_mode": "auto",
-            "scheduled_at": "2026-06-05T15:35:00-04:00",
-            "checked_batch_member": true,
-            "approval_effect": {
-              "field": "approved",
-              "from": "no",
-              "to": "yes",
-              "changed": true,
-              "summary": "approved 'no' -> 'yes'"
-            },
-            "passed_check_names": [
-              "copy_present",
-              "destination_links_present",
-              "asset_file_present",
-              "executor_blocker_confirmed",
-              "platform_readiness"
-            ],
-            "failed_check_names": [],
-            "decision_reason": "All automated review checks passed.",
-            "post_approval_next_step": "Apply through --checked-batch after human copy/media/link review.",
-            "manual_dispatch_required": false
-          },
-          {
-            "id": "FP-AUTO-261",
-            "decision": "ready_to_approve",
-            "platform": "YouTube Community",
-            "song": "I Learned It All in Fifteen Seconds",
-            "execution_mode": "manual",
-            "scheduled_at": "2026-06-06T19:10:00-04:00",
-            "checked_batch_member": true,
-            "approval_effect": {
-              "field": "approved",
-              "from": "no",
-              "to": "yes",
-              "changed": true,
-              "summary": "approved 'no' -> 'yes'"
-            },
-            "passed_check_names": [
-              "copy_present",
-              "destination_links_present",
-              "asset_file_present",
-              "executor_blocker_confirmed",
-              "platform_readiness"
-            ],
-            "failed_check_names": [],
-            "decision_reason": "All automated review checks passed.",
-            "post_approval_next_step": "Apply through --checked-batch, then post manually and log the public URL.",
-            "manual_dispatch_required": true
-          },
-          {
-            "id": "FP-AUTO-259",
-            "decision": "held",
-            "platform": "TikTok",
-            "song": "I Learned It All in Fifteen Seconds",
-            "execution_mode": "auto",
-            "scheduled_at": "2026-06-05T20:40:00-04:00",
-            "checked_batch_member": false,
-            "approval_effect": {
-              "field": "approved",
-              "from": "no",
-              "to": "yes",
-              "changed": true,
-              "summary": "approved 'no' -> 'yes'"
-            },
-            "passed_check_names": [
-              "copy_present",
-              "destination_links_present",
-              "asset_file_present",
-              "executor_blocker_confirmed"
-            ],
-            "failed_check_names": [
-              "platform_readiness"
-            ],
-            "decision_reason": "Held outside checked batch until failed/review checks clear.",
-            "post_approval_next_step": "Repair failed checks before including this row in an approval batch.",
-            "manual_dispatch_required": false
-          }
-        ],
-        "expected_checked_batch_effect": {
-          "row_count": 2,
-          "change_count": 2,
-          "ids": [
-            "FP-AUTO-258",
-            "FP-AUTO-261"
-          ],
-          "effects": [
-            {
-              "id": "FP-AUTO-258",
-              "platform": "Instagram",
-              "execution_mode": "auto",
-              "effect": {
-                "field": "approved",
-                "from": "no",
-                "to": "yes",
-                "changed": true,
-                "summary": "approved 'no' -> 'yes'"
-              }
-            },
-            {
-              "id": "FP-AUTO-261",
-              "platform": "YouTube Community",
-              "execution_mode": "manual",
-              "effect": {
-                "field": "approved",
-                "from": "no",
-                "to": "yes",
-                "changed": true,
-                "summary": "approved 'no' -> 'yes'"
-              }
-            }
-          ]
-        },
-        "checked_batch_dry_run_preview": {
-          "status": "ready_for_review",
-          "dry_run": true,
-          "would_write_files": false,
-          "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
-          "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
-          "checked_batch_ids": [
-            "FP-AUTO-258",
-            "FP-AUTO-261"
-          ],
-          "requested_ids": [
-            "FP-AUTO-258",
-            "FP-AUTO-261"
-          ],
-          "unchecked_ids": [],
-          "row_count": 2,
-          "change_count": 2,
-          "expected_effect": {
-            "row_count": 2,
-            "change_count": 2,
-            "ids": [
-              "FP-AUTO-258",
-              "FP-AUTO-261"
-            ],
-            "effects": [
-              {
-                "id": "FP-AUTO-258",
-                "platform": "Instagram",
-                "execution_mode": "auto",
-                "effect": {
-                  "field": "approved",
-                  "from": "no",
-                  "to": "yes",
-                  "changed": true,
-                  "summary": "approved 'no' -> 'yes'"
-                }
-              },
-              {
-                "id": "FP-AUTO-261",
-                "platform": "YouTube Community",
-                "execution_mode": "manual",
-                "effect": {
-                  "field": "approved",
-                  "from": "no",
-                  "to": "yes",
-                  "changed": true,
-                  "summary": "approved 'no' -> 'yes'"
-                }
-              }
-            ]
-          },
-          "output_lines": [
-            "FP-AUTO-258: approved 'no' -> 'yes'",
-            "FP-AUTO-261: approved 'no' -> 'yes'",
-            "Checked batch guard: 2 checked id(s); 2 requested; 0 unchecked; 2 change(s).",
-            "Dry run only; did not update data/scheduled_posts.csv"
-          ],
-          "post_apply_verification": [
-            "python3 scripts/refresh_promo_admin.py",
-            "python3 scripts/validate_content_system.py"
-          ],
-          "guardrail": "This is a computed dry-run preview; approval still requires human review and the --checked-batch apply command."
-        },
-        "review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
-        "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
-        "guardrail": "Only ready_to_approve decisions may be applied through --checked-batch; held rows require repair first."
-      },
-      "approval_apply_manifest": {
-        "status": "ready_for_human_review",
-        "ready_ids": [
-          "FP-AUTO-258",
-          "FP-AUTO-261"
-        ],
-        "held_ids": [
-          "FP-AUTO-259"
-        ],
-        "apply_scope": "checked_batch",
-        "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
-        "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
-        "expected_change_count": 2,
-        "expected_effect": {
-          "row_count": 2,
-          "change_count": 2,
-          "ids": [
-            "FP-AUTO-258",
-            "FP-AUTO-261"
-          ],
-          "effects": [
-            {
-              "id": "FP-AUTO-258",
-              "platform": "Instagram",
-              "execution_mode": "auto",
-              "effect": {
-                "field": "approved",
-                "from": "no",
-                "to": "yes",
-                "changed": true,
-                "summary": "approved 'no' -> 'yes'"
-              }
-            },
-            {
-              "id": "FP-AUTO-261",
-              "platform": "YouTube Community",
-              "execution_mode": "manual",
-              "effect": {
-                "field": "approved",
-                "from": "no",
-                "to": "yes",
-                "changed": true,
-                "summary": "approved 'no' -> 'yes'"
-              }
-            }
-          ]
-        },
-        "ready_rows": [
-          {
-            "id": "FP-AUTO-258",
-            "platform": "Instagram",
-            "song": "I Learned It All in Fifteen Seconds",
-            "execution_mode": "auto",
-            "manual_dispatch_required": false,
-            "post_approval_next_step": "Refresh Admin and let the executor retry after approval is visible.",
-            "required_review": [
-              "copy",
-              "destination_links",
-              "media_asset",
-              "platform_readiness"
-            ]
-          },
-          {
-            "id": "FP-AUTO-261",
-            "platform": "YouTube Community",
-            "song": "I Learned It All in Fifteen Seconds",
-            "execution_mode": "manual",
-            "manual_dispatch_required": true,
-            "post_approval_next_step": "Post manually and log the public URL after approval.",
-            "required_review": [
-              "copy",
-              "destination_links",
-              "media_asset",
-              "platform_readiness"
-            ]
-          }
-        ],
-        "held_rows": [
-          {
-            "id": "FP-AUTO-259",
-            "platform": "TikTok",
-            "song": "I Learned It All in Fifteen Seconds",
-            "failed_check_names": [
-              "platform_readiness"
-            ]
-          }
-        ],
-        "pre_apply_checklist": [
-          "Review copy, links, and media for every ready row.",
-          "Run the preview command and confirm it lists only ready_ids.",
-          "Confirm held_ids are excluded from the checked batch.",
-          "Apply only with --checked-batch after human review passes."
-        ],
-        "post_apply_evidence": [
-          "data/scheduled_posts.csv shows ready_ids changed from approved=no to approved=yes.",
-          "data/scheduled_approval_packet.json reports fewer approval blockers after refresh.",
-          "data/social_scheduler_dry_run.json no longer blocks the approved Instagram row on not_approved.",
-          "Manual-dispatch ready rows remain in the manual posting/logging workflow until a real public URL exists."
-        ],
-        "guardrails": [
-          "This manifest does not approve, publish, post, or log anything.",
-          "Do not use the full batch command while held_ids are present.",
-          "Do not approve held rows until failed review checks clear.",
-          "Manual dispatch remains separate from approval."
-        ]
-      },
-      "approval_review_runbook": {
-        "status": "ready_for_review",
-        "ready_ids": [
-          "FP-AUTO-258",
-          "FP-AUTO-261"
-        ],
-        "blocked_ids": [
-          "FP-AUTO-259"
-        ],
-        "ready_count": 2,
-        "blocked_count": 1,
-        "manual_dispatch_ready_count": 1,
-        "review_checklist": [
-          {
-            "id": "FP-AUTO-258",
-            "platform": "Instagram",
-            "song": "I Learned It All in Fifteen Seconds",
-            "execution_mode": "auto",
-            "scheduled_at": "2026-06-05T15:35:00-04:00",
-            "checked_batch_member": true,
-            "copy_block": "The first Lily Roo single is live, and the cover art has been remastered into its proper tiny-room glow.\n\nListen on Spotify: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
-            "asset_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
-            "destination_links": [
-              "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
-              "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
-              "https://music.youtube.com/watch?v=vK0mDIW65o4"
-            ],
-            "human_review_required": true,
-            "checklist": [
-              {
-                "item": "copy",
-                "status": "ready_for_human_review",
-                "evidence": "104 primary-copy character(s)"
-              },
-              {
-                "item": "destination_links",
-                "status": "ready_for_human_review",
-                "evidence": "3/3 link(s) have local evidence"
-              },
-              {
-                "item": "media_asset",
-                "status": "ready_for_human_review",
-                "evidence": "assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg"
-              },
-              {
-                "item": "platform_readiness",
-                "status": "ready_for_human_review",
-                "evidence": "All automated review checks passed."
-              }
-            ],
-            "preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 --dry-run",
-            "post_approval_next_step": "Approve with the checked batch; executor can retry once approval is visible."
-          },
-          {
-            "id": "FP-AUTO-261",
-            "platform": "YouTube Community",
-            "song": "I Learned It All in Fifteen Seconds",
-            "execution_mode": "manual",
-            "scheduled_at": "2026-06-06T19:10:00-04:00",
-            "checked_batch_member": true,
-            "copy_block": "New transmission: I Learned It All in Fifteen Seconds is live. Remastered cover art, same suspicious amount of feeling.\n\nStream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube: https://www.youtube.com/@lilyroo.artist | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
-            "asset_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
-            "destination_links": [
-              "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
-              "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
-              "https://www.youtube.com/@lilyroo.artist",
-              "https://music.youtube.com/watch?v=vK0mDIW65o4"
-            ],
-            "human_review_required": true,
-            "checklist": [
-              {
-                "item": "copy",
-                "status": "ready_for_human_review",
-                "evidence": "119 primary-copy character(s)"
-              },
-              {
-                "item": "destination_links",
-                "status": "ready_for_human_review",
-                "evidence": "4/4 link(s) have local evidence"
-              },
-              {
-                "item": "media_asset",
-                "status": "ready_for_human_review",
-                "evidence": "assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg"
-              },
-              {
-                "item": "platform_readiness",
-                "status": "ready_for_human_review",
-                "evidence": "All automated review checks passed."
-              },
-              {
-                "item": "manual_dispatch",
-                "status": "required_after_approval",
-                "evidence": "Post manually and log the public URL after the checked approval batch is applied."
-              }
-            ],
-            "preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-261 --dry-run",
-            "post_approval_next_step": "Approve with the checked batch, then post manually and log the public URL."
-          }
-        ],
-        "steps": [
-          {
-            "order": 1,
-            "title": "Review ready checked-batch rows",
-            "owner": "tod",
-            "status": "ready_for_review",
-            "command": "",
-            "evidence": "Review copy_block, destination_links, asset_url, and checklist for each ready row.",
-            "applies_to_ids": [
-              "FP-AUTO-258",
-              "FP-AUTO-261"
-            ]
-          },
-          {
-            "order": 2,
-            "title": "Preview the guarded checked batch",
-            "owner": "tod",
-            "status": "ready_for_review",
-            "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
-            "evidence": "Dry run must report no file writes and only the checked IDs.",
-            "applies_to_ids": [
-              "FP-AUTO-258",
-              "FP-AUTO-261"
-            ]
-          },
-          {
-            "order": 3,
-            "title": "Apply after human review",
-            "owner": "tod",
-            "status": "ready_after_review",
-            "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
-            "evidence": "Apply only after human copy/media/link review passes.",
-            "applies_to_ids": [
-              "FP-AUTO-258",
-              "FP-AUTO-261"
-            ]
-          },
-          {
-            "order": 4,
-            "title": "Refresh and validate admin state",
-            "owner": "codex",
-            "status": "ready_after_apply",
-            "command": "python3 scripts/refresh_promo_admin.py && python3 scripts/validate_content_system.py",
-            "evidence": "Admin should show fewer approval blockers and fresh execution state.",
-            "applies_to_ids": [
-              "FP-AUTO-258",
-              "FP-AUTO-261"
-            ]
-          },
-          {
-            "order": 5,
-            "title": "Post and log manual rows",
-            "owner": "tod",
-            "status": "required_after_apply",
-            "command": "python3 scripts/log_manual_distribution.py --dry-run",
-            "evidence": "Manual YouTube Community rows need real public post URLs before logging.",
-            "applies_to_ids": [
-              "FP-AUTO-261"
-            ]
-          }
-        ],
-        "guardrail": "This runbook is review-only; it does not approve, publish, post, or log anything."
-      },
-      "pre_apply_checklist": [
-        "Review copy, links, and media for every ready row.",
-        "Run the preview command and confirm it lists only ready_ids.",
-        "Confirm held_ids are excluded from the checked batch.",
-        "Apply only with --checked-batch after human review passes."
-      ],
-      "post_apply_evidence": [
-        "data/scheduled_posts.csv shows ready_ids changed from approved=no to approved=yes.",
-        "data/scheduled_approval_packet.json reports fewer approval blockers after refresh.",
-        "data/social_scheduler_dry_run.json no longer blocks the approved Instagram row on not_approved.",
-        "Manual-dispatch ready rows remain in the manual posting/logging workflow until a real public URL exists."
-      ],
-      "apply_guardrails": [
-        "This manifest does not approve, publish, post, or log anything.",
-        "Do not use the full batch command while held_ids are present.",
-        "Do not approve held rows until failed review checks clear.",
-        "Manual dispatch remains separate from approval."
-      ],
-      "review_runbook_steps": [
-        {
-          "order": 1,
-          "title": "Review ready checked-batch rows",
-          "owner": "tod",
-          "status": "ready_for_review",
-          "command": "",
-          "evidence": "Review copy_block, destination_links, asset_url, and checklist for each ready row.",
-          "applies_to_ids": [
-            "FP-AUTO-258",
-            "FP-AUTO-261"
-          ]
-        },
-        {
-          "order": 2,
-          "title": "Preview the guarded checked batch",
-          "owner": "tod",
-          "status": "ready_for_review",
-          "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
-          "evidence": "Dry run must report no file writes and only the checked IDs.",
-          "applies_to_ids": [
-            "FP-AUTO-258",
-            "FP-AUTO-261"
-          ]
-        },
-        {
-          "order": 3,
-          "title": "Apply after human review",
-          "owner": "tod",
-          "status": "ready_after_review",
-          "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
-          "evidence": "Apply only after human copy/media/link review passes.",
-          "applies_to_ids": [
-            "FP-AUTO-258",
-            "FP-AUTO-261"
-          ]
-        },
-        {
-          "order": 4,
-          "title": "Refresh and validate admin state",
-          "owner": "codex",
-          "status": "ready_after_apply",
-          "command": "python3 scripts/refresh_promo_admin.py && python3 scripts/validate_content_system.py",
-          "evidence": "Admin should show fewer approval blockers and fresh execution state.",
-          "applies_to_ids": [
-            "FP-AUTO-258",
-            "FP-AUTO-261"
-          ]
-        },
-        {
-          "order": 5,
-          "title": "Post and log manual rows",
-          "owner": "tod",
-          "status": "required_after_apply",
-          "command": "python3 scripts/log_manual_distribution.py --dry-run",
-          "evidence": "Manual YouTube Community rows need real public post URLs before logging.",
-          "applies_to_ids": [
-            "FP-AUTO-261"
-          ]
-        }
-      ],
-      "review_checklist": [
-        {
-          "id": "FP-AUTO-258",
-          "platform": "Instagram",
-          "song": "I Learned It All in Fifteen Seconds",
-          "execution_mode": "auto",
-          "scheduled_at": "2026-06-05T15:35:00-04:00",
-          "checked_batch_member": true,
-          "copy_block": "The first Lily Roo single is live, and the cover art has been remastered into its proper tiny-room glow.\n\nListen on Spotify: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
-          "asset_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
-          "destination_links": [
-            "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
-            "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
-            "https://music.youtube.com/watch?v=vK0mDIW65o4"
-          ],
-          "human_review_required": true,
-          "checklist": [
-            {
-              "item": "copy",
-              "status": "ready_for_human_review",
-              "evidence": "104 primary-copy character(s)"
-            },
-            {
-              "item": "destination_links",
-              "status": "ready_for_human_review",
-              "evidence": "3/3 link(s) have local evidence"
-            },
-            {
-              "item": "media_asset",
-              "status": "ready_for_human_review",
-              "evidence": "assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg"
-            },
-            {
-              "item": "platform_readiness",
-              "status": "ready_for_human_review",
-              "evidence": "All automated review checks passed."
-            }
-          ],
-          "preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-258 --dry-run",
-          "post_approval_next_step": "Approve with the checked batch; executor can retry once approval is visible."
-        },
-        {
-          "id": "FP-AUTO-261",
-          "platform": "YouTube Community",
-          "song": "I Learned It All in Fifteen Seconds",
-          "execution_mode": "manual",
-          "scheduled_at": "2026-06-06T19:10:00-04:00",
-          "checked_batch_member": true,
-          "copy_block": "New transmission: I Learned It All in Fifteen Seconds is live. Remastered cover art, same suspicious amount of feeling.\n\nStream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube: https://www.youtube.com/@lilyroo.artist | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
-          "asset_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
-          "destination_links": [
-            "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
-            "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
-            "https://www.youtube.com/@lilyroo.artist",
-            "https://music.youtube.com/watch?v=vK0mDIW65o4"
-          ],
-          "human_review_required": true,
-          "checklist": [
-            {
-              "item": "copy",
-              "status": "ready_for_human_review",
-              "evidence": "119 primary-copy character(s)"
-            },
-            {
-              "item": "destination_links",
-              "status": "ready_for_human_review",
-              "evidence": "4/4 link(s) have local evidence"
-            },
-            {
-              "item": "media_asset",
-              "status": "ready_for_human_review",
-              "evidence": "assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg"
-            },
-            {
-              "item": "platform_readiness",
-              "status": "ready_for_human_review",
-              "evidence": "All automated review checks passed."
-            },
-            {
-              "item": "manual_dispatch",
-              "status": "required_after_approval",
-              "evidence": "Post manually and log the public URL after the checked approval batch is applied."
-            }
-          ],
-          "preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-261 --dry-run",
-          "post_approval_next_step": "Approve with the checked batch, then post manually and log the public URL."
-        }
-      ],
-      "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
-      "apply_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+      "preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
+      "apply_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
       "command_sequence": [
         {
           "step": "preview",
-          "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+          "command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
           "required_before_apply": true
         },
         {
           "step": "apply_after_review",
-          "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+          "command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
           "required_before_apply": false
         },
         {
@@ -847,9 +220,9 @@
           "required_before_apply": false
         }
       ],
-      "completion_evidence": "data/scheduled_approval_packet.json should show fewer approval blockers, and data/social_scheduler_dry_run.json should no longer block the approved Instagram row on not_approved.",
-      "next_step_after_apply": "Run the safe admin refresh, then manually post/log any newly approved YouTube Community row before treating the published log as current.",
-      "guardrail": "Use --checked-batch so only rows that passed review checks are approved."
+      "completion_evidence": "data/manual_distribution_packet.json should move approved rows from review_queue toward postable manual distribution, and data/published_log_reconciliation.json should remain gated until public URLs are logged.",
+      "next_step_after_apply": "Post each approved YouTube Community row manually, then log its public URL with scripts/log_manual_distribution.py.",
+      "guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review. Post manually first, then log only real public URLs."
     },
     "blocked_steps": [
       {
@@ -887,34 +260,59 @@
         "task_ids": [
           "backlog-reschedule"
         ],
-        "blockers_resolved": 1,
+        "blockers_resolved": 3,
         "backlog_clearance_manifest": {
           "status": "blocked_until_clearance_steps_complete",
-          "approved_backlog_count": 1,
-          "blocked_backlog_count": 1,
+          "approved_backlog_count": 3,
+          "blocked_backlog_count": 3,
           "clear_to_apply_count": 0,
           "blocked_ids": [
+            "FP-AUTO-258",
+            "FP-AUTO-261",
             "FP-AUTO-264"
           ],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
           "safe_apply_command": "",
-          "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-          "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
+          "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --apply --refresh-admin",
+          "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
           "apply_allowed_without_override": false,
           "apply_gate": "blocked_until_clearance_steps_complete",
           "clearance_steps": [
+            "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply.",
             "Add local TikTok OAuth credentials, then push worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
             "Confirm TikTok public posting approval before treating auto-posting as ready.",
             "Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair."
           ],
           "blocked_items": [
             {
+              "id": "FP-AUTO-258",
+              "platform": "Instagram",
+              "song": "I Learned It All in Fifteen Seconds",
+              "blocker_kind": "not_approved",
+              "blocker_reason": "not_approved",
+              "proposed_scheduled_at": "2026-06-21T10:00:00+09:00",
+              "clearance_steps": [
+                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+              ]
+            },
+            {
+              "id": "FP-AUTO-261",
+              "platform": "YouTube Community",
+              "song": "I Learned It All in Fifteen Seconds",
+              "blocker_kind": "not_approved",
+              "blocker_reason": "not_approved",
+              "proposed_scheduled_at": "2026-06-22T10:00:00+09:00",
+              "clearance_steps": [
+                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+              ]
+            },
+            {
               "id": "FP-AUTO-264",
               "platform": "TikTok",
               "song": "I Learned It All in Fifteen Seconds",
               "blocker_kind": "tiktok_credentials_missing",
               "blocker_reason": "tiktok_credentials_missing",
-              "proposed_scheduled_at": "2026-06-21T10:00:00+00:00",
+              "proposed_scheduled_at": "2026-06-23T10:00:00+09:00",
               "clearance_steps": [
                 "Add local TikTok OAuth credentials, then push worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
                 "Confirm TikTok public posting approval before treating auto-posting as ready.",
@@ -953,12 +351,12 @@
           "Do not use the override command unless accepting the blocked executor risk deliberately.",
           "A reschedule does not publish, approve, or repair platform credentials by itself."
         ],
-        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
         "apply_command": "",
         "command_sequence": [
           {
             "step": "preview",
-            "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+            "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
             "required_before_apply": true
           },
           {
@@ -976,7 +374,7 @@
       {
         "id": "review-checked-approval-batch",
         "label": "Review checked approval batch",
-        "state": "ready_for_review",
+        "state": "clear",
         "owner": "tod",
         "task_ids": [
           "approve-checked-scheduled-batch"
@@ -1009,10 +407,10 @@
               "checked_batch_member": true,
               "approval_effect": {
                 "field": "approved",
-                "from": "no",
+                "from": "yes",
                 "to": "yes",
-                "changed": true,
-                "summary": "approved 'no' -> 'yes'"
+                "changed": false,
+                "summary": "approved 'yes' -> 'yes'"
               },
               "passed_check_names": [
                 "copy_present",
@@ -1036,10 +434,10 @@
               "checked_batch_member": true,
               "approval_effect": {
                 "field": "approved",
-                "from": "no",
+                "from": "yes",
                 "to": "yes",
-                "changed": true,
-                "summary": "approved 'no' -> 'yes'"
+                "changed": false,
+                "summary": "approved 'yes' -> 'yes'"
               },
               "passed_check_names": [
                 "copy_present",
@@ -1084,7 +482,7 @@
           ],
           "expected_checked_batch_effect": {
             "row_count": 2,
-            "change_count": 2,
+            "change_count": 0,
             "ids": [
               "FP-AUTO-258",
               "FP-AUTO-261"
@@ -1096,10 +494,10 @@
                 "execution_mode": "auto",
                 "effect": {
                   "field": "approved",
-                  "from": "no",
+                  "from": "yes",
                   "to": "yes",
-                  "changed": true,
-                  "summary": "approved 'no' -> 'yes'"
+                  "changed": false,
+                  "summary": "approved 'yes' -> 'yes'"
                 }
               },
               {
@@ -1108,10 +506,10 @@
                 "execution_mode": "manual",
                 "effect": {
                   "field": "approved",
-                  "from": "no",
+                  "from": "yes",
                   "to": "yes",
-                  "changed": true,
-                  "summary": "approved 'no' -> 'yes'"
+                  "changed": false,
+                  "summary": "approved 'yes' -> 'yes'"
                 }
               }
             ]
@@ -1132,10 +530,10 @@
             ],
             "unchecked_ids": [],
             "row_count": 2,
-            "change_count": 2,
+            "change_count": 0,
             "expected_effect": {
               "row_count": 2,
-              "change_count": 2,
+              "change_count": 0,
               "ids": [
                 "FP-AUTO-258",
                 "FP-AUTO-261"
@@ -1147,10 +545,10 @@
                   "execution_mode": "auto",
                   "effect": {
                     "field": "approved",
-                    "from": "no",
+                    "from": "yes",
                     "to": "yes",
-                    "changed": true,
-                    "summary": "approved 'no' -> 'yes'"
+                    "changed": false,
+                    "summary": "approved 'yes' -> 'yes'"
                   }
                 },
                 {
@@ -1159,18 +557,18 @@
                   "execution_mode": "manual",
                   "effect": {
                     "field": "approved",
-                    "from": "no",
+                    "from": "yes",
                     "to": "yes",
-                    "changed": true,
-                    "summary": "approved 'no' -> 'yes'"
+                    "changed": false,
+                    "summary": "approved 'yes' -> 'yes'"
                   }
                 }
               ]
             },
             "output_lines": [
-              "FP-AUTO-258: approved 'no' -> 'yes'",
-              "FP-AUTO-261: approved 'no' -> 'yes'",
-              "Checked batch guard: 2 checked id(s); 2 requested; 0 unchecked; 2 change(s).",
+              "FP-AUTO-258: approved 'yes' -> 'yes'",
+              "FP-AUTO-261: approved 'yes' -> 'yes'",
+              "Checked batch guard: 2 checked id(s); 2 requested; 0 unchecked; 0 change(s).",
               "Dry run only; did not update data/scheduled_posts.csv"
             ],
             "post_apply_verification": [
@@ -1195,10 +593,10 @@
           "apply_scope": "checked_batch",
           "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
           "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
-          "expected_change_count": 2,
+          "expected_change_count": 0,
           "expected_effect": {
             "row_count": 2,
-            "change_count": 2,
+            "change_count": 0,
             "ids": [
               "FP-AUTO-258",
               "FP-AUTO-261"
@@ -1210,10 +608,10 @@
                 "execution_mode": "auto",
                 "effect": {
                   "field": "approved",
-                  "from": "no",
+                  "from": "yes",
                   "to": "yes",
-                  "changed": true,
-                  "summary": "approved 'no' -> 'yes'"
+                  "changed": false,
+                  "summary": "approved 'yes' -> 'yes'"
                 }
               },
               {
@@ -1222,10 +620,10 @@
                 "execution_mode": "manual",
                 "effect": {
                   "field": "approved",
-                  "from": "no",
+                  "from": "yes",
                   "to": "yes",
-                  "changed": true,
-                  "summary": "approved 'no' -> 'yes'"
+                  "changed": false,
+                  "summary": "approved 'yes' -> 'yes'"
                 }
               }
             ]
@@ -1867,34 +1265,59 @@
         "task_ids": [
           "backlog-reschedule"
         ],
-        "blockers_resolved": 1,
+        "blockers_resolved": 3,
         "backlog_clearance_manifest": {
           "status": "blocked_until_clearance_steps_complete",
-          "approved_backlog_count": 1,
-          "blocked_backlog_count": 1,
+          "approved_backlog_count": 3,
+          "blocked_backlog_count": 3,
           "clear_to_apply_count": 0,
           "blocked_ids": [
+            "FP-AUTO-258",
+            "FP-AUTO-261",
             "FP-AUTO-264"
           ],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
           "safe_apply_command": "",
-          "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-          "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
+          "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --apply --refresh-admin",
+          "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
           "apply_allowed_without_override": false,
           "apply_gate": "blocked_until_clearance_steps_complete",
           "clearance_steps": [
+            "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply.",
             "Add local TikTok OAuth credentials, then push worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
             "Confirm TikTok public posting approval before treating auto-posting as ready.",
             "Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair."
           ],
           "blocked_items": [
             {
+              "id": "FP-AUTO-258",
+              "platform": "Instagram",
+              "song": "I Learned It All in Fifteen Seconds",
+              "blocker_kind": "not_approved",
+              "blocker_reason": "not_approved",
+              "proposed_scheduled_at": "2026-06-21T10:00:00+09:00",
+              "clearance_steps": [
+                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+              ]
+            },
+            {
+              "id": "FP-AUTO-261",
+              "platform": "YouTube Community",
+              "song": "I Learned It All in Fifteen Seconds",
+              "blocker_kind": "not_approved",
+              "blocker_reason": "not_approved",
+              "proposed_scheduled_at": "2026-06-22T10:00:00+09:00",
+              "clearance_steps": [
+                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+              ]
+            },
+            {
               "id": "FP-AUTO-264",
               "platform": "TikTok",
               "song": "I Learned It All in Fifteen Seconds",
               "blocker_kind": "tiktok_credentials_missing",
               "blocker_reason": "tiktok_credentials_missing",
-              "proposed_scheduled_at": "2026-06-21T10:00:00+00:00",
+              "proposed_scheduled_at": "2026-06-23T10:00:00+09:00",
               "clearance_steps": [
                 "Add local TikTok OAuth credentials, then push worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
                 "Confirm TikTok public posting approval before treating auto-posting as ready.",
@@ -1933,12 +1356,12 @@
           "Do not use the override command unless accepting the blocked executor risk deliberately.",
           "A reschedule does not publish, approve, or repair platform credentials by itself."
         ],
-        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
         "apply_command": "",
         "command_sequence": [
           {
             "step": "preview",
-            "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+            "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
             "required_before_apply": true
           },
           {
@@ -1997,7 +1420,7 @@
         "blockers_resolved": 2,
         "approval_blockers_before": 3,
         "approval_blockers_after": 1,
-        "change_count": 2,
+        "change_count": 0,
         "auto_rows_unblocked": 1,
         "manual_rows_unblocked": 1,
         "approval_decision_manifest": {
@@ -2020,10 +1443,10 @@
               "checked_batch_member": true,
               "approval_effect": {
                 "field": "approved",
-                "from": "no",
+                "from": "yes",
                 "to": "yes",
-                "changed": true,
-                "summary": "approved 'no' -> 'yes'"
+                "changed": false,
+                "summary": "approved 'yes' -> 'yes'"
               },
               "passed_check_names": [
                 "copy_present",
@@ -2047,10 +1470,10 @@
               "checked_batch_member": true,
               "approval_effect": {
                 "field": "approved",
-                "from": "no",
+                "from": "yes",
                 "to": "yes",
-                "changed": true,
-                "summary": "approved 'no' -> 'yes'"
+                "changed": false,
+                "summary": "approved 'yes' -> 'yes'"
               },
               "passed_check_names": [
                 "copy_present",
@@ -2095,7 +1518,7 @@
           ],
           "expected_checked_batch_effect": {
             "row_count": 2,
-            "change_count": 2,
+            "change_count": 0,
             "ids": [
               "FP-AUTO-258",
               "FP-AUTO-261"
@@ -2107,10 +1530,10 @@
                 "execution_mode": "auto",
                 "effect": {
                   "field": "approved",
-                  "from": "no",
+                  "from": "yes",
                   "to": "yes",
-                  "changed": true,
-                  "summary": "approved 'no' -> 'yes'"
+                  "changed": false,
+                  "summary": "approved 'yes' -> 'yes'"
                 }
               },
               {
@@ -2119,10 +1542,10 @@
                 "execution_mode": "manual",
                 "effect": {
                   "field": "approved",
-                  "from": "no",
+                  "from": "yes",
                   "to": "yes",
-                  "changed": true,
-                  "summary": "approved 'no' -> 'yes'"
+                  "changed": false,
+                  "summary": "approved 'yes' -> 'yes'"
                 }
               }
             ]
@@ -2143,10 +1566,10 @@
             ],
             "unchecked_ids": [],
             "row_count": 2,
-            "change_count": 2,
+            "change_count": 0,
             "expected_effect": {
               "row_count": 2,
-              "change_count": 2,
+              "change_count": 0,
               "ids": [
                 "FP-AUTO-258",
                 "FP-AUTO-261"
@@ -2158,10 +1581,10 @@
                   "execution_mode": "auto",
                   "effect": {
                     "field": "approved",
-                    "from": "no",
+                    "from": "yes",
                     "to": "yes",
-                    "changed": true,
-                    "summary": "approved 'no' -> 'yes'"
+                    "changed": false,
+                    "summary": "approved 'yes' -> 'yes'"
                   }
                 },
                 {
@@ -2170,18 +1593,18 @@
                   "execution_mode": "manual",
                   "effect": {
                     "field": "approved",
-                    "from": "no",
+                    "from": "yes",
                     "to": "yes",
-                    "changed": true,
-                    "summary": "approved 'no' -> 'yes'"
+                    "changed": false,
+                    "summary": "approved 'yes' -> 'yes'"
                   }
                 }
               ]
             },
             "output_lines": [
-              "FP-AUTO-258: approved 'no' -> 'yes'",
-              "FP-AUTO-261: approved 'no' -> 'yes'",
-              "Checked batch guard: 2 checked id(s); 2 requested; 0 unchecked; 2 change(s).",
+              "FP-AUTO-258: approved 'yes' -> 'yes'",
+              "FP-AUTO-261: approved 'yes' -> 'yes'",
+              "Checked batch guard: 2 checked id(s); 2 requested; 0 unchecked; 0 change(s).",
               "Dry run only; did not update data/scheduled_posts.csv"
             ],
             "post_apply_verification": [
@@ -2206,10 +1629,10 @@
           "apply_scope": "checked_batch",
           "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
           "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
-          "expected_change_count": 2,
+          "expected_change_count": 0,
           "expected_effect": {
             "row_count": 2,
-            "change_count": 2,
+            "change_count": 0,
             "ids": [
               "FP-AUTO-258",
               "FP-AUTO-261"
@@ -2221,10 +1644,10 @@
                 "execution_mode": "auto",
                 "effect": {
                   "field": "approved",
-                  "from": "no",
+                  "from": "yes",
                   "to": "yes",
-                  "changed": true,
-                  "summary": "approved 'no' -> 'yes'"
+                  "changed": false,
+                  "summary": "approved 'yes' -> 'yes'"
                 }
               },
               {
@@ -2233,10 +1656,10 @@
                 "execution_mode": "manual",
                 "effect": {
                   "field": "approved",
-                  "from": "no",
+                  "from": "yes",
                   "to": "yes",
-                  "changed": true,
-                  "summary": "approved 'no' -> 'yes'"
+                  "changed": false,
+                  "summary": "approved 'yes' -> 'yes'"
                 }
               }
             ]
@@ -2685,41 +2108,66 @@
       "urgency": "high",
       "status": "blocked",
       "detail": "Known executor/platform blockers must clear before normal apply.",
-      "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+      "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
       "apply_command": "",
       "source_path": "data/backlog_reschedule_preview.json",
       "impact": {
-        "approved_backlog_count": 1,
-        "blocked_backlog_count": 1,
-        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
+        "approved_backlog_count": 3,
+        "blocked_backlog_count": 3,
+        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --apply --refresh-admin",
+        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
         "backlog_clearance_manifest": {
           "status": "blocked_until_clearance_steps_complete",
-          "approved_backlog_count": 1,
-          "blocked_backlog_count": 1,
+          "approved_backlog_count": 3,
+          "blocked_backlog_count": 3,
           "clear_to_apply_count": 0,
           "blocked_ids": [
+            "FP-AUTO-258",
+            "FP-AUTO-261",
             "FP-AUTO-264"
           ],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
           "safe_apply_command": "",
-          "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-          "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
+          "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --apply --refresh-admin",
+          "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
           "apply_allowed_without_override": false,
           "apply_gate": "blocked_until_clearance_steps_complete",
           "clearance_steps": [
+            "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply.",
             "Add local TikTok OAuth credentials, then push worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
             "Confirm TikTok public posting approval before treating auto-posting as ready.",
             "Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair."
           ],
           "blocked_items": [
             {
+              "id": "FP-AUTO-258",
+              "platform": "Instagram",
+              "song": "I Learned It All in Fifteen Seconds",
+              "blocker_kind": "not_approved",
+              "blocker_reason": "not_approved",
+              "proposed_scheduled_at": "2026-06-21T10:00:00+09:00",
+              "clearance_steps": [
+                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+              ]
+            },
+            {
+              "id": "FP-AUTO-261",
+              "platform": "YouTube Community",
+              "song": "I Learned It All in Fifteen Seconds",
+              "blocker_kind": "not_approved",
+              "blocker_reason": "not_approved",
+              "proposed_scheduled_at": "2026-06-22T10:00:00+09:00",
+              "clearance_steps": [
+                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+              ]
+            },
+            {
               "id": "FP-AUTO-264",
               "platform": "TikTok",
               "song": "I Learned It All in Fifteen Seconds",
               "blocker_kind": "tiktok_credentials_missing",
               "blocker_reason": "tiktok_credentials_missing",
-              "proposed_scheduled_at": "2026-06-21T10:00:00+00:00",
+              "proposed_scheduled_at": "2026-06-23T10:00:00+09:00",
               "clearance_steps": [
                 "Add local TikTok OAuth credentials, then push worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
                 "Confirm TikTok public posting approval before treating auto-posting as ready.",

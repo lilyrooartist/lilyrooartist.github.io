@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-06-20T12:02:02.897809Z",
+  "generated_at": "2026-06-20T12:13:01.535345Z",
   "safe_mode": true,
   "summary": {
     "step_count": 5,
-    "ready_for_human_review_count": 2,
+    "ready_for_human_review_count": 1,
     "blocked_or_warning_count": 3,
     "total_projected_resolution_units": 12,
-    "current_step_id": "unlock-checked-scheduled-approval",
+    "current_step_id": "unlock-manual-distribution",
     "current_gate_state": "ready_for_human_review",
     "open_blocker_count": 9
   },
@@ -19,14 +19,14 @@
     "rule": "Run preview commands first; run apply commands only after the named human, platform, URL, secret, or metric input is complete."
   },
   "current_next_actions": [
-    "Next operational action: Preview checked scheduled approval batch — python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+    "Next operational action: Preview reschedule for approved past-due posts — python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
     "First handoff step: Review checked approval batch — python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
-    "Current unlock gate: Approve checked scheduled rows (ready_for_human_review); 2 ready, 3 blocked/warning; preview python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run; see data/promo_unlock_sequence.json.",
+    "Current unlock gate: Review and post manual YouTube Community rows (ready_for_human_review); 1 ready, 3 blocked/warning; preview python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run; see data/promo_unlock_sequence.json.",
     "Review handoff preview health: 3 preview-clean, 3 missing input, 1 warning; see data/human_handoff_resolution_preview.json.",
-    "Re-check checked-pending store links: 7 music site snapshot(s) still have no public URL; next recommended re-check after 2026-06-21T12:01:56.273860+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 then.",
+    "Re-check checked-pending store links: 7 music site snapshot(s) still have no public URL; next recommended re-check after 2026-06-21T12:12:51.254874+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 then.",
     "Resolve manual distribution gate: 2 YouTube Community row(s) need review (manual_approval); preview with python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run.",
     "Refresh manual metrics: 6 worksheet row(s) still need new_value entries (blocked_until_new_values_filled); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values.",
-    "Preview approved backlog reschedule: python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24"
+    "Preview approved backlog reschedule: python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24"
   ],
   "steps": [
     {
@@ -34,9 +34,9 @@
       "id": "unlock-checked-scheduled-approval",
       "phase": "Approve checked scheduled rows",
       "owner": "tod",
-      "gate_state": "ready_for_human_review",
-      "reason": "Preview ran cleanly; this gate is waiting for human review or external completion.",
-      "blockers_resolved": 2,
+      "gate_state": "completed",
+      "reason": "This gate is already applied; it is kept here as evidence, not as a pending task.",
+      "blockers_resolved": 0,
       "blocked_by": [
         "FP-AUTO-259"
       ],
@@ -160,8 +160,10 @@
       "owner": "external_platform",
       "gate_state": "preview_ready_with_blocker_warning",
       "reason": "Preview ran, but the output still names a known blocker.",
-      "blockers_resolved": 1,
+      "blockers_resolved": 3,
       "blocked_by": [
+        "FP-AUTO-258",
+        "FP-AUTO-261",
         "FP-AUTO-264"
       ],
       "unlocks": [
@@ -178,7 +180,7 @@
       "commands": [
         {
           "step": "preview",
-          "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+          "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
           "safe_to_run": true,
           "status": "preview_ok_with_warning",
           "returncodes": [

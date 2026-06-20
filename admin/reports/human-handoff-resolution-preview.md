@@ -1,6 +1,6 @@
 # Human Handoff Resolution Preview - Lily Roo
 
-Generated: 2026-06-20T12:02:02.852501Z
+Generated: 2026-06-20T12:13:01.503140Z
 
 ## Summary
 - Worksheet rows: **7**
@@ -15,7 +15,7 @@ Generated: 2026-06-20T12:02:02.852501Z
   - Phase: `Approval`; input needed: `human_review_decision`
   - Safety: `safe_preview` (dry_run_command)
   - Command: `python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run`
-  - Output: FP-AUTO-258: approved 'no' -> 'yes' | FP-AUTO-261: approved 'no' -> 'yes' | Checked batch guard: 2 checked id(s); 2 requested; 0 unchecked; 2 change(s). | Dry run only; did not update data/scheduled_posts.csv
+  - Output: FP-AUTO-258: approved 'yes' -> 'yes' | FP-AUTO-261: approved 'yes' -> 'yes' | Checked batch guard: 2 checked id(s); 2 requested; 0 unchecked; 0 change(s). | Dry run only; did not update data/scheduled_posts.csv
   - Guardrail: Use --checked-batch so only rows that passed review checks are approved.
 - **platform-setup-FP-AUTO-264** (`input_missing`)
   - Phase: `Platform setup`; input needed: `local_secret_presence_and_public_posting_approval`
@@ -26,8 +26,8 @@ Generated: 2026-06-20T12:02:02.852501Z
 - **backlog-reschedule** (`preview_ok_with_warning`)
   - Phase: `Backlog recovery`; input needed: `clearance_confirmation`
   - Safety: `safe_preview` (reschedule_preview_command)
-  - Command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24`
-  - Output: Rows selected: 1 | - FP-AUTO-264 TikTok I Learned It All in Fifteen Seconds: 2026-06-09T21:25:00-04:00 -> 2026-06-21T10:00:00+00:00 |   WARNING: known blocker: tiktok_credentials_missing | Dry run only. Re-run with --apply to write the schedule.
+  - Command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24`
+  - Output: Rows selected: 3 | - FP-AUTO-258 Instagram I Learned It All in Fifteen Seconds: 2026-06-05T15:35:00-04:00 -> 2026-06-21T10:00:00+09:00 |   WARNING: known blocker: not_approved | - FP-AUTO-261 YouTube Community I Learned It All in Fifteen Seconds: 2026-06-06T19:10:00-04:00 -> 2026-06-22T10:00:00+09:00 |   WARNING: known blocker: not_approved | - FP-AUTO-264 TikTok I Learned It All in Fifteen Seconds: 2026-06-09T21:25:00-04:00 -> 2026-06-23T10:00:00+09:00 |   WARNING: known blocker: tiktok_credentials_missing | Dry run only. Re-run with --apply to write the schedule.
   - Guardrail: Normal apply stays hidden until known executor/platform blockers clear.
 - **manual-distribution-FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY** (`preview_ok`)
   - Phase: `Manual distribution`; input needed: `manual_post_review_and_public_url`

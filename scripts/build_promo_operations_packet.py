@@ -364,6 +364,10 @@ def scheduled_approval_batch_actions(packet):
     blocker_count = int(summary.get("approval_blocker_count") or 0)
     if not blocker_count or not preview_command:
         return []
+    checked_effect = summary.get("checked_batch_effect") or {}
+    checked_change_count = int(checked_effect.get("change_count") or 0)
+    if summary.get("checked_batch_ids") and checked_change_count == 0:
+        return []
     checked_count = int(summary.get("review_check_passed_count") or 0)
     blocked_count = int(summary.get("review_check_blocked_count") or 0)
     label = "Preview checked scheduled approval batch" if checked_count else "Preview scheduled approval batch"
@@ -378,8 +382,8 @@ def scheduled_approval_batch_actions(packet):
         "held_ids": decision_manifest.get("held_ids") or [],
         "checked_batch_ids": summary.get("checked_batch_ids") or [],
         "blocked_review_ids": summary.get("blocked_review_ids") or [],
-        "expected_effect": decision_manifest.get("expected_checked_batch_effect") or {},
-        "change_count": int((decision_manifest.get("expected_checked_batch_effect") or {}).get("change_count") or 0),
+        "expected_effect": decision_manifest.get("expected_checked_batch_effect") or checked_effect,
+        "change_count": checked_change_count,
         "auto_rows_unblocked": sum(1 for item in ready_decisions if item.get("execution_mode") == "auto"),
         "manual_rows_unblocked": sum(1 for item in ready_decisions if item.get("execution_mode") == "manual"),
         "manual_dispatch_ids": [post_id for post_id in manual_dispatch_ids if post_id],
