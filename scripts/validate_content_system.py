@@ -766,6 +766,8 @@ def validate_generated_outputs(failures):
             "update_assignment",
             "import_effect",
             "platform_update_command",
+            "csv_row",
+            "ready_to_import",
         }
         if rows and set(rows[0].keys()) >= required:
             ok(f"manual metric CSV template has {len(rows)} pending field(s)")
@@ -787,12 +789,15 @@ def validate_generated_outputs(failures):
         rows = packet.get("rows") or []
         live_import_rows = [row for row in rows if row.get("collection_mode") == "live_import_available"]
         manual_rows = [row for row in rows if row.get("collection_mode") != "live_import_available"]
+        ready_rows = [row for row in rows if row.get("ready_to_import")]
         if (
             packet.get("safe_mode") is True
             and summary.get("pending_field_count") == len(rows)
             and summary.get("platform_count") == len(platforms)
             and summary.get("live_import_available_count") == len(live_import_rows)
             and summary.get("manual_collection_required_count") == len(manual_rows)
+            and summary.get("ready_to_import_count") == len(ready_rows)
+            and summary.get("preserved_new_value_count") == len(ready_rows)
             and summary.get("csv_path") == "data/manual_metric_collection_template.csv"
             and "--from-live --dry-run" in (summary.get("live_import_preview_command") or "")
             and "--from-live --refresh-admin" in (summary.get("live_import_command") or "")
@@ -804,8 +809,11 @@ def validate_generated_outputs(failures):
                 and platform.get("field_count") == len(platform.get("fields") or [])
                 and "live_import_available_count" in platform
                 and "manual_collection_required_count" in platform
+                and platform.get("ready_to_import_count") == len([field for field in platform.get("fields") or [] if field.get("ready_to_import")])
+                and len(platform.get("collection_packets") or []) == len(platform.get("fields") or [])
                 and platform.get("pending_assignments")
-                and all(field.get("value_type") and field.get("example_value") and field.get("collection_instruction") and field.get("import_effect") for field in platform.get("fields") or [])
+                and all(field.get("value_type") and field.get("example_value") and field.get("collection_instruction") and field.get("import_effect") and field.get("csv_row") for field in platform.get("fields") or [])
+                and all(packet.get("csv_row") and "ready_to_import" in packet and packet.get("update_assignment") and packet.get("import_effect") for packet in platform.get("collection_packets") or [])
                 and platform.get("worksheet_import_preview_command")
                 for platform in platforms
             )
@@ -1644,7 +1652,7 @@ def validate_generated_outputs(failures):
         fail("build_backlog_reschedule_preview.py missing", failures)
     if MANUAL_METRIC_COLLECTION_SCRIPT.exists():
         collection_text = MANUAL_METRIC_COLLECTION_SCRIPT.read_text(encoding="utf-8")
-        if "manual_metric_collection_template.csv" in collection_text and "manual_metric_collection_packet.json" in collection_text and "manual-metric-collection.md" in collection_text and "pending_manual_by_platform" in collection_text and "collection_url" in collection_text and "--from-live" in collection_text and "collection_mode" in collection_text and "live_import_available_count" in collection_text and "value_type" in collection_text and "import_effect" in collection_text and "subprocess" not in collection_text:
+        if "manual_metric_collection_template.csv" in collection_text and "manual_metric_collection_packet.json" in collection_text and "manual-metric-collection.md" in collection_text and "pending_manual_by_platform" in collection_text and "collection_url" in collection_text and "--from-live" in collection_text and "collection_mode" in collection_text and "live_import_available_count" in collection_text and "ready_to_import_count" in collection_text and "existing_new_values" in collection_text and "value_type" in collection_text and "import_effect" in collection_text and "subprocess" not in collection_text:
             ok("manual metric collection builder is review-only")
         else:
             fail("build_manual_metric_collection.py missing worksheet outputs or executes commands", failures)

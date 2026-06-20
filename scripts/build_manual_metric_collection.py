@@ -58,6 +58,21 @@ def read_json(path: Path, fallback):
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def existing_new_values() -> dict[tuple[str, str], str]:
+    if not OUT_CSV.exists():
+        return {}
+    values = {}
+    with OUT_CSV.open(newline="", encoding="utf-8") as handle:
+        reader = csv.DictReader(handle)
+        for row in reader:
+            platform = str(row.get("platform") or "").strip()
+            field = str(row.get("field") or "").strip()
+            new_value = str(row.get("new_value") or "").strip()
+            if platform and field and new_value:
+                values[(platform, field)] = new_value
+    return values
+
+
 def current_value(manual: dict, platform: str, field: str) -> str:
     return str(((manual.get(platform) or {}).get(field)) or "")
 
@@ -94,7 +109,7 @@ def import_effect(platform: str, field: str, current: str) -> str:
     return f"update data/manual_social_stats.json {platform}.{field} from {current!r} to the filled new_value"
 
 
-def build_rows(status: dict, manual: dict, live: dict) -> list[dict]:
+def build_rows(status: dict, manual: dict, live: dict, preserved_values: dict[tuple[str, str], str]) -> list[dict]:
     kpi = status.get("kpi") or {}
     pending = kpi.get("pending_manual_by_platform") or {}
     commands = kpi.get("pending_manual_update_by_platform") or {}
@@ -115,7 +130,7 @@ def build_rows(status: dict, manual: dict, live: dict) -> list[dict]:
                 "platform": platform,
                 "field": field,
                 "current_value": current,
-                "new_value": "",
+                "new_value": preserved_values.get((platform, field), ""),
                 "live_value": "" if live_value is None else str(live_value),
                 "collection_mode": collection_mode,
                 "value_type": value_type,
@@ -128,6 +143,9 @@ def build_rows(status: dict, manual: dict, live: dict) -> list[dict]:
                 "import_effect": import_effect(platform, field, current),
                 "platform_update_command": commands.get(platform, ""),
             })
+    for index, row in enumerate(rows, start=2):
+        row["csv_row"] = index
+        row["ready_to_import"] = bool(str(row.get("new_value") or "").strip())
     return rows
 
 
@@ -149,6 +167,8 @@ def write_csv(rows: list[dict]) -> None:
         "update_assignment",
         "import_effect",
         "platform_update_command",
+        "csv_row",
+        "ready_to_import",
     ]
     with OUT_CSV.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="\n")
@@ -160,6 +180,7 @@ def build_packet(rows: list[dict], generated_at: str) -> dict:
     by_platform = {}
     live_import_rows = [row for row in rows if row.get("collection_mode") == "live_import_available"]
     manual_rows = [row for row in rows if row.get("collection_mode") != "live_import_available"]
+    ready_rows = [row for row in rows if row.get("ready_to_import")]
     for row in rows:
         platform = row["platform"]
         group = by_platform.setdefault(platform, {
@@ -170,8 +191,10 @@ def build_packet(rows: list[dict], generated_at: str) -> dict:
             "fields": [],
             "field_count": 0,
             "pending_assignments": [],
+            "collection_packets": [],
             "live_import_available_count": 0,
             "manual_collection_required_count": 0,
+            "ready_to_import_count": 0,
             "platform_update_command": row.get("platform_update_command") or "",
             "live_import_preview_command": LIVE_IMPORT_PREVIEW_COMMAND,
             "live_import_command": LIVE_IMPORT_COMMAND,
@@ -189,13 +212,30 @@ def build_packet(rows: list[dict], generated_at: str) -> dict:
                 "collection_instruction": row.get("collection_instruction") or "",
                 "update_assignment": row.get("update_assignment") or "",
                 "import_effect": row.get("import_effect") or "",
+                "csv_row": row.get("csv_row"),
+                "ready_to_import": bool(row.get("ready_to_import")),
             })
+        group["collection_packets"].append({
+            "csv_row": row.get("csv_row"),
+            "field": row["field"],
+            "current_value": row.get("current_value") or "",
+            "new_value": row.get("new_value") or "",
+            "ready_to_import": bool(row.get("ready_to_import")),
+            "collection_mode": row.get("collection_mode") or "manual_collection_required",
+            "source_hint": row.get("source_hint") or "",
+            "collection_url": row.get("collection_url") or "",
+            "collection_instruction": row.get("collection_instruction") or "",
+            "update_assignment": row.get("update_assignment") or "",
+            "import_effect": row.get("import_effect") or "",
+        })
         group["pending_assignments"].append(row.get("update_assignment") or "")
         group["field_count"] = len(group["fields"])
         if row.get("collection_mode") == "live_import_available":
             group["live_import_available_count"] += 1
         else:
             group["manual_collection_required_count"] += 1
+        if row.get("ready_to_import"):
+            group["ready_to_import_count"] += 1
     platforms = list(by_platform.values())
     return {
         "generated_at": generated_at,
@@ -211,6 +251,8 @@ def build_packet(rows: list[dict], generated_at: str) -> dict:
             "pending_field_count": len(rows),
             "live_import_available_count": len(live_import_rows),
             "manual_collection_required_count": len(manual_rows),
+            "ready_to_import_count": len(ready_rows),
+            "preserved_new_value_count": len(ready_rows),
             "platform_count": len(platforms),
             "csv_path": str(OUT_CSV.relative_to(ROOT)),
             "report_path": str(OUT_MD.relative_to(ROOT)),
@@ -270,9 +312,12 @@ def build_markdown(rows: list[dict], generated_at: str) -> str:
         lines.append("")
         for row in platform_rows:
             if row.get("collection_mode") == "live_import_available":
-                lines.append(f"- `{row['field']}` current `{row['current_value']}` -> live `{row['live_value']}`")
+                lines.append(f"- CSV row `{row.get('csv_row')}` `{row['field']}` current `{row['current_value']}` -> live `{row['live_value']}`")
             else:
-                lines.append(f"- `{row['field']}` current `{row['current_value']}` -> `VALUE` ({row.get('value_type')}; example `{row.get('example_value')}`)")
+                target = row.get("new_value") or "VALUE"
+                lines.append(f"- CSV row `{row.get('csv_row')}` `{row['field']}` current `{row['current_value']}` -> `{target}` ({row.get('value_type')}; example `{row.get('example_value')}`)")
+            if row.get("ready_to_import"):
+                lines.append("  - Ready to import from worksheet new_value.")
             if row.get("collection_instruction"):
                 lines.append(f"  - {row['collection_instruction']}")
             if row.get("import_effect"):
@@ -331,7 +376,7 @@ def main() -> int:
     status = read_json(PROMO_STATUS, {})
     manual = read_json(MANUAL_STATS, {})
     live = read_json(LIVE_METRICS, {})
-    rows = build_rows(status, manual, live)
+    rows = build_rows(status, manual, live, existing_new_values())
     write_csv(rows)
     packet = build_packet(rows, generated_at)
     OUT_JSON.write_text(json.dumps(packet, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
