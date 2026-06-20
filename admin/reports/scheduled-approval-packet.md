@@ -1,6 +1,6 @@
 # Scheduled Approval Packet - Lily Roo
 
-Generated: 2026-06-20T07:58:51.787347Z
+Generated: 2026-06-20T08:03:44.150069Z
 
 ## Summary
 - Approval blockers: **3**
@@ -27,6 +27,37 @@ Generated: 2026-06-20T07:58:51.787347Z
 - Checked batch approve after review: `python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin`
 - Checked batch dry-run result: **2** change(s), **2** reviewed row(s), no files written
 - Decision manifest: **3** reviewed row(s); ready `FP-AUTO-258, FP-AUTO-261`; held `FP-AUTO-259`
+
+### Approval Review Runbook
+- Status: **ready_for_review**
+- Ready IDs: `FP-AUTO-258, FP-AUTO-261`
+- Blocked IDs: `FP-AUTO-259`
+- Manual dispatch ready after approval: **1**
+- 1. Review ready checked-batch rows - `ready_for_review`
+  - Evidence: Review copy_block, destination_links, asset_url, and checklist for each ready row.
+- 2. Preview the guarded checked batch - `ready_for_review`; command: `python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run`
+  - Evidence: Dry run must report no file writes and only the checked IDs.
+- 3. Apply after human review - `ready_after_review`; command: `python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin`
+  - Evidence: Apply only after human copy/media/link review passes.
+- 4. Refresh and validate admin state - `ready_after_apply`; command: `python3 scripts/refresh_promo_admin.py && python3 scripts/validate_content_system.py`
+  - Evidence: Admin should show fewer approval blockers and fresh execution state.
+- 5. Post and log manual rows - `required_after_apply`; command: `python3 scripts/log_manual_distribution.py --dry-run`
+  - Evidence: Manual YouTube Community rows need real public post URLs before logging.
+
+### Ready Row Checklist
+- **Instagram - I Learned It All in Fifteen Seconds** (`FP-AUTO-258`)
+  - `ready_for_human_review` copy: 104 primary-copy character(s)
+  - `ready_for_human_review` destination_links: 3/3 link(s) have local evidence
+  - `ready_for_human_review` media_asset: assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg
+  - `ready_for_human_review` platform_readiness: All automated review checks passed.
+  - Next: Approve with the checked batch; executor can retry once approval is visible.
+- **YouTube Community - I Learned It All in Fifteen Seconds** (`FP-AUTO-261`)
+  - `ready_for_human_review` copy: 119 primary-copy character(s)
+  - `ready_for_human_review` destination_links: 4/4 link(s) have local evidence
+  - `ready_for_human_review` media_asset: assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg
+  - `ready_for_human_review` platform_readiness: All automated review checks passed.
+  - `required_after_approval` manual_dispatch: Post manually and log the public URL after the checked approval batch is applied.
+  - Next: Approve with the checked batch, then post manually and log the public URL.
 
 ### Ready to Approve
 - **Instagram - I Learned It All in Fifteen Seconds** (`FP-AUTO-258`)

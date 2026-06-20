@@ -221,6 +221,125 @@ def approval_decision_manifest(checked_rows: list[dict], blocked_rows: list[dict
     }
 
 
+def approval_review_checklist_row(row: dict) -> dict:
+    link_summary = row.get("destination_link_audit_summary") or {}
+    local_asset = local_public_path(row.get("asset_url") or "")
+    checks = [
+        {
+            "item": "copy",
+            "status": "ready_for_human_review" if row.get("text") else "blocked",
+            "evidence": f"{len(row.get('text') or '')} primary-copy character(s)",
+        },
+        {
+            "item": "destination_links",
+            "status": "ready_for_human_review" if link_summary.get("all_links_have_local_evidence") else "needs_manual_review",
+            "evidence": (
+                f"{link_summary.get('verified_local_evidence_count') or 0}/"
+                f"{link_summary.get('link_count') or 0} link(s) have local evidence"
+            ),
+        },
+        {
+            "item": "media_asset",
+            "status": "ready_for_human_review" if row.get("asset_url") else "blocked",
+            "evidence": str(local_asset.relative_to(ROOT)) if local_asset and local_asset.exists() else (row.get("asset_url") or "missing"),
+        },
+        {
+            "item": "platform_readiness",
+            "status": "ready_for_human_review" if row.get("review_check_passed") else "blocked",
+            "evidence": row.get("approval_batch_reason") or "",
+        },
+    ]
+    if row.get("manual_dispatch"):
+        checks.append({
+            "item": "manual_dispatch",
+            "status": "required_after_approval",
+            "evidence": "Post manually and log the public URL after the checked approval batch is applied.",
+        })
+    return {
+        "id": row.get("id") or "",
+        "platform": row.get("platform") or "",
+        "song": row.get("song") or "",
+        "execution_mode": row.get("execution_mode") or "",
+        "scheduled_at": row.get("scheduled_at") or "",
+        "checked_batch_member": bool(row.get("checked_batch_member")),
+        "copy_block": row.get("copy_block") or "",
+        "asset_url": row.get("asset_url") or "",
+        "destination_links": row.get("destination_links") or [],
+        "human_review_required": True,
+        "checklist": checks,
+        "preview_command": row.get("approval_preview_command") or "",
+        "post_approval_next_step": (
+            "Approve with the checked batch, then post manually and log the public URL."
+            if row.get("manual_dispatch")
+            else "Approve with the checked batch; executor can retry once approval is visible."
+        ),
+    }
+
+
+def approval_review_runbook(checked_rows: list[dict], blocked_rows: list[dict], summary: dict) -> dict:
+    manual_rows = [row for row in checked_rows if row.get("manual_dispatch")]
+    ready_ids = [row.get("id") for row in checked_rows if row.get("id")]
+    blocked_ids = [row.get("id") for row in blocked_rows if row.get("id")]
+    steps = [
+        {
+            "order": 1,
+            "title": "Review ready checked-batch rows",
+            "owner": "tod",
+            "status": "ready_for_review" if ready_ids else "blocked",
+            "command": "",
+            "evidence": "Review copy_block, destination_links, asset_url, and checklist for each ready row.",
+            "applies_to_ids": ready_ids,
+        },
+        {
+            "order": 2,
+            "title": "Preview the guarded checked batch",
+            "owner": "tod",
+            "status": "ready_for_review" if summary.get("checked_batch_preview_command") else "blocked",
+            "command": summary.get("checked_batch_preview_command") or "",
+            "evidence": "Dry run must report no file writes and only the checked IDs.",
+            "applies_to_ids": ready_ids,
+        },
+        {
+            "order": 3,
+            "title": "Apply after human review",
+            "owner": "tod",
+            "status": "ready_after_review" if summary.get("checked_batch_apply_command") else "blocked",
+            "command": summary.get("checked_batch_apply_command") or "",
+            "evidence": "Apply only after human copy/media/link review passes.",
+            "applies_to_ids": ready_ids,
+        },
+        {
+            "order": 4,
+            "title": "Refresh and validate admin state",
+            "owner": "codex",
+            "status": "ready_after_apply",
+            "command": "python3 scripts/refresh_promo_admin.py && python3 scripts/validate_content_system.py",
+            "evidence": "Admin should show fewer approval blockers and fresh execution state.",
+            "applies_to_ids": ready_ids,
+        },
+        {
+            "order": 5,
+            "title": "Post and log manual rows",
+            "owner": "tod",
+            "status": "required_after_apply" if manual_rows else "not_applicable",
+            "command": "python3 scripts/log_manual_distribution.py --dry-run",
+            "evidence": "Manual YouTube Community rows need real public post URLs before logging.",
+            "applies_to_ids": [row.get("id") for row in manual_rows if row.get("id")],
+        },
+    ]
+    return {
+        "status": "ready_for_review" if ready_ids else "blocked",
+        "ready_ids": ready_ids,
+        "blocked_ids": blocked_ids,
+        "ready_count": len(ready_ids),
+        "blocked_count": len(blocked_ids),
+        "manual_dispatch_ready_count": len(manual_rows),
+        "review_checklist": [approval_review_checklist_row(row) for row in checked_rows],
+        "steps": steps,
+        "guardrail": "This runbook is review-only; it does not approve, publish, post, or log anything.",
+    }
+
+
 def platform_slug(platform: str) -> str:
     value = str(platform or "").strip().lower()
     return {
@@ -527,6 +646,28 @@ def build_markdown(payload: dict) -> str:
         f"- Checked batch approve after review: `{docket.get('checked_batch_apply_command') or 'none'}`",
         f"- Checked batch dry-run result: **{(docket.get('checked_batch_dry_run_preview') or {}).get('change_count', 0)}** change(s), **{(docket.get('checked_batch_dry_run_preview') or {}).get('row_count', 0)}** reviewed row(s), no files written",
         f"- Decision manifest: **{len(decision_manifest.get('decisions') or [])}** reviewed row(s); ready `{', '.join(decision_manifest.get('ready_ids') or []) or 'none'}`; held `{', '.join(decision_manifest.get('held_ids') or []) or 'none'}`",
+    ])
+    runbook = payload.get("approval_review_runbook") or {}
+    lines.extend([
+        "",
+        "### Approval Review Runbook",
+        f"- Status: **{runbook.get('status', 'unknown')}**",
+        f"- Ready IDs: `{', '.join(runbook.get('ready_ids') or []) or 'none'}`",
+        f"- Blocked IDs: `{', '.join(runbook.get('blocked_ids') or []) or 'none'}`",
+        f"- Manual dispatch ready after approval: **{runbook.get('manual_dispatch_ready_count', 0)}**",
+    ])
+    for step in runbook.get("steps") or []:
+        command = f"; command: `{step.get('command')}`" if step.get("command") else ""
+        lines.append(f"- {step.get('order')}. {step.get('title')} - `{step.get('status')}`{command}")
+        lines.append(f"  - Evidence: {step.get('evidence')}")
+    if runbook.get("review_checklist"):
+        lines.extend(["", "### Ready Row Checklist"])
+        for item in runbook["review_checklist"]:
+            lines.append(f"- **{item.get('platform')} - {item.get('song')}** (`{item.get('id')}`)")
+            for check_item in item.get("checklist") or []:
+                lines.append(f"  - `{check_item.get('status')}` {check_item.get('item')}: {check_item.get('evidence')}")
+            lines.append(f"  - Next: {item.get('post_approval_next_step')}")
+    lines.extend([
         "",
         "### Ready to Approve",
     ])
@@ -706,6 +847,7 @@ def main() -> int:
         "summary": summary,
         "approval_docket": approval_docket(checked_rows, blocked_rows, summary),
         "approval_decision_manifest": approval_decision_manifest(checked_rows, blocked_rows, summary),
+        "approval_review_runbook": approval_review_runbook(checked_rows, blocked_rows, summary),
         "rows": rows,
     }
     OUT.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
