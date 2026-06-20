@@ -1,8 +1,9 @@
 {
-  "generated_at": "2026-06-20T08:56:45.196346Z",
+  "generated_at": "2026-06-20T09:00:20.459669Z",
   "safe_mode": true,
   "source": {
     "local_secret_source": "secrets/social_api.env",
+    "handoff_template": "data/tiktok_secret_handoff_template.env",
     "executor_readiness": "data/executor_readiness_snapshot.json",
     "platform_repair_status": "data/platform_repair_status.json",
     "wrangler_config": "workers/social-executor/wrangler.jsonc"
@@ -41,6 +42,14 @@
       "TIKTOK_ACCESS_TOKEN"
     ],
     "local_secret_source": "secrets/social_api.env",
+    "handoff_template_path": "data/tiktok_secret_handoff_template.env",
+    "handoff_template_required_names": [
+      "TIKTOK_CLIENT_KEY",
+      "TIKTOK_CLIENT_SECRET",
+      "TIKTOK_REFRESH_TOKEN",
+      "TIKTOK_PUBLIC_POSTING_APPROVED",
+      "TIKTOK_DEFAULT_PRIVACY"
+    ],
     "local_missing_secrets": [
       "TIKTOK_CLIENT_KEY",
       "TIKTOK_CLIENT_SECRET",

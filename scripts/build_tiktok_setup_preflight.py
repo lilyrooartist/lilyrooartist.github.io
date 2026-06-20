@@ -13,12 +13,29 @@ ROOT = REPO_ROOT
 READINESS = ROOT / "data" / "executor_readiness_snapshot.json"
 PLATFORM_REPAIR = ROOT / "data" / "platform_repair_status.json"
 WRANGLER_CONFIG = ROOT / "workers" / "social-executor" / "wrangler.jsonc"
+HANDOFF_TEMPLATE = ROOT / "data" / "tiktok_secret_handoff_template.env"
 OUT = ROOT / "data" / "tiktok_setup_preflight.json"
 REPORT = ROOT / "admin" / "reports" / "tiktok-setup-preflight.md"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
 
 REQUIRED_REFRESH_SECRETS = ["TIKTOK_CLIENT_KEY", "TIKTOK_CLIENT_SECRET", "TIKTOK_REFRESH_TOKEN"]
 OPTIONAL_ACCESS_TOKEN = "TIKTOK_ACCESS_TOKEN"
+
+
+def write_handoff_template() -> None:
+    lines = [
+        "# Lily Roo TikTok secret handoff template",
+        "# Fill values locally in secrets/social_api.env, not in this generated file.",
+        "# Keep TIKTOK_PUBLIC_POSTING_APPROVED=false until public posting approval is confirmed.",
+        "TIKTOK_CLIENT_KEY=",
+        "TIKTOK_CLIENT_SECRET=",
+        "TIKTOK_REFRESH_TOKEN=",
+        "TIKTOK_ACCESS_TOKEN=",
+        "TIKTOK_PUBLIC_POSTING_APPROVED=false",
+        "TIKTOK_DEFAULT_PRIVACY=PUBLIC_TO_EVERYONE",
+        "",
+    ]
+    HANDOFF_TEMPLATE.write_text("\n".join(lines), encoding="utf-8")
 
 
 def read_json(path: Path, fallback):
@@ -51,6 +68,7 @@ def local_secret_presence() -> dict:
 
 
 def build_payload() -> dict:
+    write_handoff_template()
     readiness = read_json(READINESS, {})
     platform_repair = read_json(PLATFORM_REPAIR, {})
     tiktok_readiness = (((readiness.get("payload") or {}).get("platforms") or {}).get("tiktok") or {})
@@ -116,6 +134,8 @@ def build_payload() -> dict:
         "required_secret_names": REQUIRED_REFRESH_SECRETS,
         "optional_secret_names": [OPTIONAL_ACCESS_TOKEN],
         "local_secret_source": str(SOCIAL_ENV.relative_to(ROOT.parent)),
+        "handoff_template_path": str(HANDOFF_TEMPLATE.relative_to(ROOT)),
+        "handoff_template_required_names": REQUIRED_REFRESH_SECRETS + ["TIKTOK_PUBLIC_POSTING_APPROVED", "TIKTOK_DEFAULT_PRIVACY"],
         "local_missing_secrets": local_missing,
         "worker_missing_secrets": worker_missing,
         "public_posting_approved": public_posting,
@@ -139,6 +159,7 @@ def build_payload() -> dict:
         "safe_mode": True,
         "source": {
             "local_secret_source": str(SOCIAL_ENV.relative_to(ROOT.parent)),
+            "handoff_template": str(HANDOFF_TEMPLATE.relative_to(ROOT)),
             "executor_readiness": str(READINESS.relative_to(ROOT)),
             "platform_repair_status": str(PLATFORM_REPAIR.relative_to(ROOT)),
             "wrangler_config": str(WRANGLER_CONFIG.relative_to(ROOT)),
@@ -183,6 +204,7 @@ def build_markdown(payload: dict) -> str:
         "## Credential Handoff",
         f"- Status: **{payload['credential_handoff']['status']}**",
         f"- Required names: `{', '.join(payload['credential_handoff']['required_secret_names'])}`",
+        f"- Handoff template: `{payload['credential_handoff']['handoff_template_path']}`",
         f"- Missing locally: `{', '.join(payload['credential_handoff']['local_missing_secrets']) or 'none'}`",
         f"- Missing in worker: `{', '.join(payload['credential_handoff']['worker_missing_secrets']) or 'none'}`",
         f"- Dry-run first: `{payload['credential_handoff']['dry_run_first_command']}`",

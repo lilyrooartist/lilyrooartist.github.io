@@ -1,6 +1,6 @@
 # TikTok Repair Runbook - Lily Roo
 
-Generated: 2026-06-20T08:56:45.257908Z
+Generated: 2026-06-20T09:00:20.512726Z
 
 ## Summary
 - Status: **blocked**
@@ -8,12 +8,13 @@ Generated: 2026-06-20T08:56:45.257908Z
 - Steps: **6**
 - Blocked steps: **6**
 - Public posting approved: **False**
+- Handoff template: `data/tiktok_secret_handoff_template.env`
 - Ready to apply worker secrets: **False**
 - Ready to clear backlog gate: **False**
 
 ## Sequence
 - **Collect credentials - Add TikTok OAuth credentials locally**: `blocked`
-  - Populate the local social API env file with the required TikTok refresh credential names. Values stay local and are never written to generated reports.
+  - Use the redacted TikTok handoff template to populate the local social API env file with the required TikTok refresh credential names. Values stay local and are never written to generated reports.
   - Blocked by: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN
 - **Confirm approval - Confirm public posting approval**: `blocked`
   - Set TikTok public posting approval only after Lily Roo is approved for public TikTok posting and PUBLIC_TO_EVERYONE is intentionally allowed.

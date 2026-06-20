@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-20T08:56:45.257908Z",
+  "generated_at": "2026-06-20T09:00:20.512726Z",
   "safe_mode": true,
   "status": "blocked",
   "source": {
@@ -26,6 +26,7 @@
       "TIKTOK_CLIENT_SECRET",
       "TIKTOK_REFRESH_TOKEN"
     ],
+    "handoff_template_path": "data/tiktok_secret_handoff_template.env",
     "local_missing_secrets": [
       "TIKTOK_CLIENT_KEY",
       "TIKTOK_CLIENT_SECRET",
@@ -43,7 +44,7 @@
     "repair_post_id": "FP-AUTO-264",
     "blocked_apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
     "apply_command": "",
-    "backlog_preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+00:00' --spacing-hours 24",
+    "backlog_preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24",
     "backlog_apply_command": "",
     "backlog_normal_apply_gate": "blocked_until_clearance_steps_complete"
   },
@@ -53,7 +54,7 @@
       "phase": "Collect credentials",
       "status": "blocked",
       "title": "Add TikTok OAuth credentials locally",
-      "detail": "Populate the local social API env file with the required TikTok refresh credential names. Values stay local and are never written to generated reports.",
+      "detail": "Use the redacted TikTok handoff template to populate the local social API env file with the required TikTok refresh credential names. Values stay local and are never written to generated reports.",
       "command": "",
       "blocked_by": [
         "TIKTOK_CLIENT_KEY",

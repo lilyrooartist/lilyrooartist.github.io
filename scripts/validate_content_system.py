@@ -26,6 +26,7 @@ PROMO_REFRESH_WORKFLOW_STATUS = ROOT / "data" / "promo_refresh_workflow_status.j
 PROMO_CONSISTENCY_AUDIT = ROOT / "data" / "promo_consistency_audit.json"
 TIKTOK_SETUP_PREFLIGHT = ROOT / "data" / "tiktok_setup_preflight.json"
 TIKTOK_REPAIR_RUNBOOK = ROOT / "data" / "tiktok_repair_runbook.json"
+TIKTOK_SECRET_HANDOFF_TEMPLATE = ROOT / "data" / "tiktok_secret_handoff_template.env"
 PROMO_OPERATIONS_PACKET = ROOT / "data" / "promo_operations_packet.json"
 PUBLISHED_LOG_RECONCILIATION = ROOT / "data" / "published_log_reconciliation.json"
 HUMAN_HANDOFF_PACKET = ROOT / "data" / "human_handoff_packet.json"
@@ -469,7 +470,8 @@ def validate_generated_outputs(failures):
             "default_privacy",
             "admin_refresh_after_repair",
         }
-        required_source = {"local_secret_source", "executor_readiness", "platform_repair_status", "wrangler_config"}
+        template_text = TIKTOK_SECRET_HANDOFF_TEMPLATE.read_text(encoding="utf-8") if TIKTOK_SECRET_HANDOFF_TEMPLATE.exists() else ""
+        required_source = {"local_secret_source", "handoff_template", "executor_readiness", "platform_repair_status", "wrangler_config"}
         if (
             preflight.get("safe_mode") is True
             and summary.get("status") in {"ready", "blocked"}
@@ -480,6 +482,14 @@ def validate_generated_outputs(failures):
             and credential_handoff.get("status") in {"ready_to_push", "needs_local_values"}
             and credential_handoff.get("required_secret_names") == ["TIKTOK_CLIENT_KEY", "TIKTOK_CLIENT_SECRET", "TIKTOK_REFRESH_TOKEN"]
             and credential_handoff.get("local_secret_source") == source.get("local_secret_source")
+            and credential_handoff.get("handoff_template_path") == "data/tiktok_secret_handoff_template.env"
+            and set(credential_handoff.get("handoff_template_required_names") or []) >= {"TIKTOK_CLIENT_KEY", "TIKTOK_CLIENT_SECRET", "TIKTOK_REFRESH_TOKEN", "TIKTOK_PUBLIC_POSTING_APPROVED", "TIKTOK_DEFAULT_PRIVACY"}
+            and TIKTOK_SECRET_HANDOFF_TEMPLATE.exists()
+            and "TIKTOK_CLIENT_KEY=" in template_text
+            and "TIKTOK_CLIENT_SECRET=" in template_text
+            and "TIKTOK_REFRESH_TOKEN=" in template_text
+            and "TIKTOK_PUBLIC_POSTING_APPROVED=false" in template_text
+            and "TIKTOK_DEFAULT_PRIVACY=PUBLIC_TO_EVERYONE" in template_text
             and credential_handoff.get("local_missing_secrets") == (summary.get("local_missing_secrets") or [])
             and credential_handoff.get("worker_missing_secrets") == (summary.get("worker_missing_secrets") or [])
             and "--dry-run" in (credential_handoff.get("dry_run_first_command") or "")
@@ -524,6 +534,7 @@ def validate_generated_outputs(failures):
             and required_phases <= phases
             and required_source <= set(source)
             and set(summary.get("required_secret_names") or []) == {"TIKTOK_CLIENT_KEY", "TIKTOK_CLIENT_SECRET", "TIKTOK_REFRESH_TOKEN"}
+            and summary.get("handoff_template_path") == "data/tiktok_secret_handoff_template.env"
             and "--approved-backlog" in (summary.get("backlog_preview_command") or "")
             and "--approved-only" not in json.dumps(runbook)
             and "Secret values" in (runbook.get("redaction") or "")
@@ -2559,7 +2570,7 @@ def validate_generated_outputs(failures):
         fail("build_promo_consistency_audit.py missing", failures)
     if TIKTOK_SETUP_PREFLIGHT_SCRIPT.exists():
         preflight_text = TIKTOK_SETUP_PREFLIGHT_SCRIPT.read_text(encoding="utf-8")
-        if "tiktok_setup_preflight.json" in preflight_text and "tiktok-setup-preflight.md" in preflight_text and "credential_handoff" in preflight_text and "completion_evidence" in preflight_text and "TIKTOK_CLIENT_KEY" in preflight_text and "TIKTOK_PUBLIC_POSTING_APPROVED" in preflight_text and "Secret values" in preflight_text and "subprocess" not in preflight_text:
+        if "tiktok_setup_preflight.json" in preflight_text and "tiktok-setup-preflight.md" in preflight_text and "tiktok_secret_handoff_template.env" in preflight_text and "credential_handoff" in preflight_text and "completion_evidence" in preflight_text and "TIKTOK_CLIENT_KEY" in preflight_text and "TIKTOK_PUBLIC_POSTING_APPROVED" in preflight_text and "Secret values" in preflight_text and "subprocess" not in preflight_text:
             ok("TikTok setup preflight builder is review-only")
         else:
             fail("build_tiktok_setup_preflight.py missing preflight outputs or exposes execution/secrets", failures)
@@ -2567,7 +2578,7 @@ def validate_generated_outputs(failures):
         fail("build_tiktok_setup_preflight.py missing", failures)
     if TIKTOK_REPAIR_RUNBOOK_SCRIPT.exists():
         runbook_text = TIKTOK_REPAIR_RUNBOOK_SCRIPT.read_text(encoding="utf-8")
-        if "tiktok_repair_runbook.json" in runbook_text and "tiktok-repair-runbook.md" in runbook_text and "Collect credentials" in runbook_text and "blocked_apply_command" in runbook_text and "backlog_reschedule_preview.json" in runbook_text and "--approved-backlog" in runbook_text and "--approved-only" not in runbook_text and "Secret values" in runbook_text and "subprocess" not in runbook_text:
+        if "tiktok_repair_runbook.json" in runbook_text and "tiktok-repair-runbook.md" in runbook_text and "handoff_template_path" in runbook_text and "Collect credentials" in runbook_text and "blocked_apply_command" in runbook_text and "backlog_reschedule_preview.json" in runbook_text and "--approved-backlog" in runbook_text and "--approved-only" not in runbook_text and "Secret values" in runbook_text and "subprocess" not in runbook_text:
             ok("TikTok repair runbook builder is review-only")
         else:
             fail("build_tiktok_repair_runbook.py missing runbook outputs or exposes execution/secrets", failures)

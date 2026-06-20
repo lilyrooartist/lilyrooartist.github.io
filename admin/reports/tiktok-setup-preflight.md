@@ -1,6 +1,6 @@
 # TikTok Setup Preflight - Lily Roo
 
-Generated: 2026-06-20T08:56:45.196346Z
+Generated: 2026-06-20T09:00:20.459669Z
 
 ## Summary
 - Status: **blocked**
@@ -14,6 +14,7 @@ Generated: 2026-06-20T08:56:45.196346Z
 ## Credential Handoff
 - Status: **needs_local_values**
 - Required names: `TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN`
+- Handoff template: `data/tiktok_secret_handoff_template.env`
 - Missing locally: `TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN`
 - Missing in worker: `TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN`
 - Dry-run first: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`

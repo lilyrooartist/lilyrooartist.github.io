@@ -70,6 +70,7 @@ def build_payload() -> dict:
     readiness = read_json(READINESS, {})
     backlog = read_json(BACKLOG_RESCHEDULE, {})
     preflight_summary = preflight.get("summary") or {}
+    credential_handoff = preflight.get("credential_handoff") or {}
     backlog_summary = backlog.get("summary") or {}
     local_missing = preflight_summary.get("local_missing_secrets") or []
     worker_missing = preflight_summary.get("worker_missing_secrets") or []
@@ -95,7 +96,7 @@ def build_payload() -> dict:
             "Collect credentials",
             "pass" if local_ready else "blocked",
             "Add TikTok OAuth credentials locally",
-            "Populate the local social API env file with the required TikTok refresh credential names. Values stay local and are never written to generated reports.",
+            "Use the redacted TikTok handoff template to populate the local social API env file with the required TikTok refresh credential names. Values stay local and are never written to generated reports.",
             "",
             local_missing,
         ),
@@ -168,6 +169,7 @@ def build_payload() -> dict:
             "blocked_step_count": len(blocked_ids),
             "blocked_step_ids": blocked_ids,
             "required_secret_names": REQUIRED_SECRETS,
+            "handoff_template_path": credential_handoff.get("handoff_template_path") or "",
             "local_missing_secrets": local_missing,
             "worker_missing_secrets": worker_missing,
             "public_posting_approved": public_posting,
@@ -204,6 +206,7 @@ def build_markdown(payload: dict) -> str:
         f"- Steps: **{summary['step_count']}**",
         f"- Blocked steps: **{summary['blocked_step_count']}**",
         f"- Public posting approved: **{summary['public_posting_approved']}**",
+        f"- Handoff template: `{summary.get('handoff_template_path') or 'none'}`",
         f"- Ready to apply worker secrets: **{summary['ready_to_apply_worker_secrets']}**",
         f"- Ready to clear backlog gate: **{summary['ready_to_clear_backlog_gate']}**",
         "",
