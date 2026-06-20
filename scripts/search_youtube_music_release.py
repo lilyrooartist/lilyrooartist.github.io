@@ -10,6 +10,7 @@ import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
+from time import monotonic
 
 from capture_youtube_music_release import MetaParser, fetch_page
 
@@ -20,15 +21,17 @@ SEARCH_ENDPOINTS = [
     "https://lite.duckduckgo.com/lite/",
     "https://html.duckduckgo.com/html/",
 ]
+REQUEST_TIMEOUT_SECONDS = 4
+SEARCH_DEADLINE_SECONDS = 22
 
 
-def request_text(url: str) -> tuple[int, str, str]:
+def request_text(url: str, timeout_seconds: float = REQUEST_TIMEOUT_SECONDS) -> tuple[int, str, str]:
     request = urllib.request.Request(url, headers={
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
         "User-Agent": "LilyRooYouTubeMusicStoreVerifier/1.0",
     })
     try:
-        with urllib.request.urlopen(request, timeout=25) as response:
+        with urllib.request.urlopen(request, timeout=max(1, timeout_seconds)) as response:
             return response.status, response.read().decode("utf-8", errors="replace"), ""
     except urllib.error.HTTPError as exc:
         return exc.code, exc.read().decode("utf-8", errors="replace"), f"HTTP {exc.code}: {exc.reason}"
@@ -63,10 +66,24 @@ def search_urls(artist: str, title: str) -> tuple[list[str], list[dict]]:
     ]
     found: set[str] = set()
     attempts = []
+    deadline = monotonic() + SEARCH_DEADLINE_SECONDS
     for query in queries:
         for endpoint in SEARCH_ENDPOINTS:
+            remaining = deadline - monotonic()
+            if remaining <= 1:
+                attempts.append({
+                    "query": query,
+                    "endpoint": endpoint,
+                    "http_status": 0,
+                    "error": f"Skipped because search deadline {SEARCH_DEADLINE_SECONDS}s was reached.",
+                    "candidate_count": 0,
+                    "request_timeout_seconds": 0,
+                    "skipped_due_to_deadline": True,
+                })
+                continue
             url = endpoint + "?" + urllib.parse.urlencode({"q": query})
-            status, body, error = request_text(url)
+            request_timeout = min(REQUEST_TIMEOUT_SECONDS, remaining)
+            status, body, error = request_text(url, request_timeout)
             urls = youtube_music_urls(body)
             found.update(urls)
             attempts.append({
@@ -75,6 +92,7 @@ def search_urls(artist: str, title: str) -> tuple[list[str], list[dict]]:
                 "http_status": status,
                 "error": error,
                 "candidate_count": len(urls),
+                "request_timeout_seconds": round(request_timeout, 2),
             })
     return sorted(found), attempts
 
@@ -117,6 +135,13 @@ def choose_match(candidates: list[dict]) -> dict | None:
         if candidate.get("ok") and candidate.get("title_matches_official"):
             return candidate
     return None
+
+
+def display_path(path: Path) -> str:
+    try:
+        return str(path.relative_to(REPO_ROOT))
+    except ValueError:
+        return str(path)
 
 
 def main() -> int:
@@ -172,7 +197,7 @@ def main() -> int:
         "public_title": snapshot.get("public_title", ""),
         "title_matches_official": snapshot.get("title_matches_official", False),
         "candidate_count": snapshot.get("candidate_count", 0),
-        "output": str(out.relative_to(REPO_ROOT)),
+        "output": display_path(out),
     }, indent=2))
     return 0 if snapshot["ok"] else 1
 

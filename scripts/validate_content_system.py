@@ -2126,18 +2126,18 @@ def validate_generated_outputs(failures):
         fail("verify_pending_store_links.py missing", failures)
     if SPOTIFY_SEARCH_VERIFIER.exists():
         spotify_search_text = SPOTIFY_SEARCH_VERIFIER.read_text(encoding="utf-8")
-        if "public-web-search-plus-spotify-oembed" in spotify_search_text and "fetch_oembed" in spotify_search_text and "open.spotify.com/album" in spotify_search_text:
+        if "public-web-search-plus-spotify-oembed" in spotify_search_text and "fetch_oembed" in spotify_search_text and "open.spotify.com/album" in spotify_search_text and "REQUEST_TIMEOUT_SECONDS" in spotify_search_text and "SEARCH_DEADLINE_SECONDS" in spotify_search_text and "request_timeout_seconds" in spotify_search_text:
             ok("Spotify public search verifier validates candidates with oEmbed")
         else:
-            fail("search_spotify_release.py missing public search or oEmbed validation", failures)
+            fail("search_spotify_release.py missing public search, oEmbed validation, or bounded request deadlines", failures)
     else:
         fail("search_spotify_release.py missing", failures)
     if YOUTUBE_MUSIC_SEARCH_VERIFIER.exists():
         youtube_music_search_text = YOUTUBE_MUSIC_SEARCH_VERIFIER.read_text(encoding="utf-8")
-        if "public-web-search-plus-youtube-music-html" in youtube_music_search_text and "music.youtube.com/watch" in youtube_music_search_text and "title_matches_official" in youtube_music_search_text:
+        if "public-web-search-plus-youtube-music-html" in youtube_music_search_text and "music.youtube.com/watch" in youtube_music_search_text and "title_matches_official" in youtube_music_search_text and "REQUEST_TIMEOUT_SECONDS" in youtube_music_search_text and "SEARCH_DEADLINE_SECONDS" in youtube_music_search_text and "request_timeout_seconds" in youtube_music_search_text:
             ok("YouTube Music public search verifier validates candidate titles")
         else:
-            fail("search_youtube_music_release.py missing public search or title validation", failures)
+            fail("search_youtube_music_release.py missing public search, title validation, or bounded request deadlines", failures)
     else:
         fail("search_youtube_music_release.py missing", failures)
     if METRICS_HISTORY_UPDATER.exists():
