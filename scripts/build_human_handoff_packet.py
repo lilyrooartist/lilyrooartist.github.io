@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import csv
 import json
 from datetime import datetime, timezone
 from pathlib import Path
@@ -16,8 +17,25 @@ PLATFORM_REPAIR = ROOT / "data" / "platform_repair_status.json"
 TIKTOK_PREFLIGHT = ROOT / "data" / "tiktok_setup_preflight.json"
 BACKLOG_RESCHEDULE = ROOT / "data" / "backlog_reschedule_preview.json"
 OUT = ROOT / "data" / "human_handoff_packet.json"
+WORKSHEET = ROOT / "data" / "human_handoff_resolution_worksheet.csv"
 REPORT = ROOT / "admin" / "reports" / "human-handoff-packet.md"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
+
+WORKSHEET_FIELDS = [
+    "task_id",
+    "phase",
+    "owner",
+    "urgency",
+    "status",
+    "title",
+    "input_needed",
+    "worksheet_reference",
+    "source_path",
+    "preview_command",
+    "apply_after_review_command",
+    "completion_evidence",
+    "guardrail",
+]
 
 
 def read_json(path: Path, fallback):
@@ -293,6 +311,81 @@ def command_sequence(preview_command: str = "", apply_command: str = "", verify_
     return sequence
 
 
+def task_input_needed(task: dict) -> tuple[str, str]:
+    phase = task.get("phase") or ""
+    impact = task.get("impact") or {}
+    if phase == "Approval":
+        ids = impact.get("checked_ids") or []
+        return (
+            "human_review_decision",
+            f"review checked scheduled ids: {', '.join(ids)}" if ids else "review checked scheduled batch",
+        )
+    if phase == "Manual distribution":
+        post_id = impact.get("post_id") or task.get("id") or ""
+        if task.get("status") == "ready_for_manual_post":
+            return ("public_post_url", f"paste public URL for {post_id} into data/manual_distribution_url_template.csv")
+        return (
+            "manual_post_review_and_public_url",
+            f"approve/post {post_id}, then paste public URL into data/manual_distribution_url_template.csv",
+        )
+    if phase == "Manual metrics":
+        rows = impact.get("csv_rows") or []
+        row_text = ", ".join(str(row) for row in rows)
+        return (
+            "private_metric_values",
+            f"fill data/manual_metric_entry_template.csv rows: {row_text}" if row_text else "fill data/manual_metric_entry_template.csv",
+        )
+    if phase == "Platform setup":
+        missing = impact.get("missing_secrets") or impact.get("local_missing_secrets") or []
+        secret_names = ", ".join(missing)
+        return (
+            "local_secret_presence_and_public_posting_approval",
+            f"populate local env from data/tiktok_secret_handoff_template.env for names: {secret_names}" if secret_names else "complete platform setup preflight",
+        )
+    if phase == "Backlog recovery":
+        return (
+            "clearance_confirmation",
+            "complete backlog clearance checklist in data/backlog_reschedule_preview.json",
+        )
+    return ("operator_review", task.get("source_path") or "")
+
+
+def build_resolution_rows(tasks: list[dict], action_docket: dict) -> list[dict]:
+    evidence_by_task: dict[str, str] = {}
+    for item in action_docket.get("checklist") or []:
+        evidence = item.get("completion_evidence") or ""
+        for task_id in item.get("task_ids") or []:
+            if task_id:
+                evidence_by_task[task_id] = evidence
+    rows = []
+    for task in tasks:
+        input_needed, worksheet_reference = task_input_needed(task)
+        task_id = task.get("id") or ""
+        rows.append({
+            "task_id": task_id,
+            "phase": task.get("phase") or "",
+            "owner": task.get("owner") or "",
+            "urgency": task.get("urgency") or "",
+            "status": task.get("status") or "",
+            "title": task.get("title") or "",
+            "input_needed": input_needed,
+            "worksheet_reference": worksheet_reference,
+            "source_path": task.get("source_path") or "",
+            "preview_command": task.get("preview_command") or "",
+            "apply_after_review_command": task.get("apply_command") or "",
+            "completion_evidence": evidence_by_task.get(task_id) or "",
+            "guardrail": task.get("guardrail") or "",
+        })
+    return rows
+
+
+def write_resolution_worksheet(rows: list[dict]) -> None:
+    with WORKSHEET.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=WORKSHEET_FIELDS, lineterminator="\n")
+        writer.writeheader()
+        writer.writerows(rows)
+
+
 def build_action_docket(tasks: list[dict], blocker_summary: dict, approval_runway: dict) -> dict:
     projection = blocker_summary.get("next_resolution_projection") or {}
     roadmap = blocker_summary.get("blocker_unlock_roadmap") or []
@@ -440,6 +533,7 @@ def build_action_docket(tasks: list[dict], blocker_summary: dict, approval_runwa
 def build_markdown(payload: dict) -> str:
     summary = payload["summary"]
     docket = payload.get("action_docket") or {}
+    worksheet = payload.get("resolution_worksheet") or {}
     lines = [
         "# Human Handoff Packet - Lily Roo",
         "",
@@ -457,6 +551,7 @@ def build_markdown(payload: dict) -> str:
         f"- Blocked steps: **{docket.get('blocked_step_count', 0)}**",
         f"- Manual posts packaged: **{docket.get('manual_post_count', 0)}**",
         f"- Manual metric fields: **{docket.get('manual_metric_field_count', 0)}**",
+        f"- Resolution worksheet: `{worksheet.get('path') or str(WORKSHEET.relative_to(ROOT))}` ({worksheet.get('row_count', 0)} row(s))",
         "",
     ]
     for item in docket.get("checklist") or []:
@@ -585,6 +680,8 @@ def main() -> int:
         urgency_counts[task["urgency"]] = urgency_counts.get(task["urgency"], 0) + 1
         phase_counts[task["phase"]] = phase_counts.get(task["phase"], 0) + 1
     action_docket = build_action_docket(tasks, blocker_summary, approval_runway)
+    resolution_rows = build_resolution_rows(tasks, action_docket)
+    write_resolution_worksheet(resolution_rows)
     payload = {
         "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "safe_mode": True,
@@ -597,6 +694,7 @@ def main() -> int:
             "platform_repair": str(PLATFORM_REPAIR.relative_to(ROOT)),
             "tiktok_setup_preflight": str(TIKTOK_PREFLIGHT.relative_to(ROOT)),
             "backlog_reschedule": str(BACKLOG_RESCHEDULE.relative_to(ROOT)),
+            "resolution_worksheet": str(WORKSHEET.relative_to(ROOT)),
         },
         "summary": {
             "task_count": len(tasks),
@@ -606,6 +704,13 @@ def main() -> int:
             "blocker_summary": blocker_summary,
         },
         "action_docket": action_docket,
+        "resolution_worksheet": {
+            "path": str(WORKSHEET.relative_to(ROOT)),
+            "row_count": len(resolution_rows),
+            "fieldnames": WORKSHEET_FIELDS,
+            "safe_mode": True,
+            "redaction": "Worksheet rows collect prompts, commands, and evidence targets only; private metric values, public URLs, approval decisions, and secret values stay out of generated reports.",
+        },
         "tasks": tasks,
     }
     OUT.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")

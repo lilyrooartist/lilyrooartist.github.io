@@ -30,6 +30,7 @@ TIKTOK_SECRET_HANDOFF_TEMPLATE = ROOT / "data" / "tiktok_secret_handoff_template
 PROMO_OPERATIONS_PACKET = ROOT / "data" / "promo_operations_packet.json"
 PUBLISHED_LOG_RECONCILIATION = ROOT / "data" / "published_log_reconciliation.json"
 HUMAN_HANDOFF_PACKET = ROOT / "data" / "human_handoff_packet.json"
+HUMAN_HANDOFF_RESOLUTION_WORKSHEET = ROOT / "data" / "human_handoff_resolution_worksheet.csv"
 PROMOTION_BLOCKER_LEDGER = ROOT / "data" / "promotion_blocker_ledger.json"
 PLATFORM_REPAIR_STATUS = ROOT / "data" / "platform_repair_status.json"
 APPROVAL_RUNWAY = ROOT / "data" / "approval_runway.json"
@@ -127,6 +128,7 @@ GENERATED_REFRESH_PATHS = {
     "data/backlog_reschedule_preview.json",
     "data/executor_readiness_snapshot.json",
     "data/human_handoff_packet.json",
+    "data/human_handoff_resolution_worksheet.csv",
     "data/live_social_metrics.json",
     "data/manual_distribution_packet.json",
     "data/manual_metric_collection_packet.json",
@@ -806,6 +808,24 @@ def validate_generated_outputs(failures):
         tasks = handoff.get("tasks") or []
         docket = handoff.get("action_docket") or {}
         docket_checklist = docket.get("checklist") or []
+        resolution_worksheet = handoff.get("resolution_worksheet") or {}
+        resolution_rows = read_csv(HUMAN_HANDOFF_RESOLUTION_WORKSHEET) if HUMAN_HANDOFF_RESOLUTION_WORKSHEET.exists() else []
+        resolution_task_ids = [row.get("task_id") for row in resolution_rows]
+        worksheet_required_fields = {
+            "task_id",
+            "phase",
+            "owner",
+            "urgency",
+            "status",
+            "title",
+            "input_needed",
+            "worksheet_reference",
+            "source_path",
+            "preview_command",
+            "apply_after_review_command",
+            "completion_evidence",
+            "guardrail",
+        }
         phases = {task.get("phase") for task in tasks}
         owners = summary.get("owner_counts") or {}
         urgencies = summary.get("urgency_counts") or {}
@@ -824,6 +844,17 @@ def validate_generated_outputs(failures):
         if (
             handoff.get("safe_mode") is True
             and summary.get("task_count") == len(tasks)
+            and resolution_worksheet.get("path") == "data/human_handoff_resolution_worksheet.csv"
+            and resolution_worksheet.get("row_count") == len(tasks) == len(resolution_rows)
+            and set(resolution_worksheet.get("fieldnames") or []) >= worksheet_required_fields
+            and set(resolution_rows[0].keys() if resolution_rows else []) >= worksheet_required_fields
+            and resolution_task_ids == [task.get("id") for task in tasks]
+            and all(row.get("input_needed") and row.get("worksheet_reference") and row.get("guardrail") for row in resolution_rows)
+            and any(row.get("input_needed") == "private_metric_values" and "manual_metric_entry_template.csv" in row.get("worksheet_reference", "") for row in resolution_rows)
+            and any(row.get("input_needed") == "manual_post_review_and_public_url" and "manual_distribution_url_template.csv" in row.get("worksheet_reference", "") for row in resolution_rows)
+            and any(row.get("input_needed") == "local_secret_presence_and_public_posting_approval" and "tiktok_secret_handoff_template.env" in row.get("worksheet_reference", "") for row in resolution_rows)
+            and all("TIKTOK_CLIENT_KEY=" not in row.get("worksheet_reference", "") and "PUBLIC_URL" not in row.get("worksheet_reference", "") for row in resolution_rows)
+            and "private metric values" in (resolution_worksheet.get("redaction") or "")
             and sum(int(value or 0) for value in owners.values()) == len(tasks)
             and sum(int(value or 0) for value in urgencies.values()) == len(tasks)
             and {"Approval", "Manual distribution", "Manual metrics", "Platform setup", "Backlog recovery"} <= phases
