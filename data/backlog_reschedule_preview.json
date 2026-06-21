@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-21T14:33:47.231698+00:00",
+  "generated_at": "2026-06-21T20:04:00.323852+00:00",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -9,9 +9,9 @@
     "promo_engine_status": "data/promo_engine_status.json"
   },
   "summary": {
-    "approved_backlog_count": 5,
+    "approved_backlog_count": 6,
     "blocked_backlog_count": 3,
-    "clear_to_apply_count": 2,
+    "clear_to_apply_count": 3,
     "start_at": "2026-06-22T10:00:00+00:00",
     "spacing_hours": 24,
     "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-22T10:00:00+00:00' --spacing-hours 24",
@@ -35,9 +35,9 @@
   },
   "backlog_clearance_manifest": {
     "status": "blocked_until_clearance_steps_complete",
-    "approved_backlog_count": 5,
+    "approved_backlog_count": 6,
     "blocked_backlog_count": 3,
-    "clear_to_apply_count": 2,
+    "clear_to_apply_count": 3,
     "blocked_ids": [
       "FP-AUTO-258",
       "FP-AUTO-261",
@@ -186,6 +186,21 @@
       "song": "I Learned It All in Fifteen Seconds",
       "current_scheduled_at": "2026-06-21T10:00:00+09:00",
       "proposed_scheduled_at": "2026-06-26T10:00:00+00:00",
+      "blocked": false,
+      "blocker_reason": "",
+      "blocker_status": "",
+      "blocker_source": "",
+      "blocker_kind": "",
+      "blocks_normal_apply": false,
+      "safe_apply_available": true,
+      "clearance_steps": []
+    },
+    {
+      "id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+      "platform": "Instagram",
+      "song": "Twelve Dollars",
+      "current_scheduled_at": "2026-06-21T14:05:00-04:00",
+      "proposed_scheduled_at": "2026-06-27T10:00:00+00:00",
       "blocked": false,
       "blocker_reason": "",
       "blocker_status": "",

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-21T14:33:47.782105Z",
+  "generated_at": "2026-06-21T20:04:00.881066Z",
   "safe_mode": true,
   "source": {
     "promotion_blocker_ledger": "data/promotion_blocker_ledger.json",
@@ -132,7 +132,7 @@
           "phase": "Reschedule approved past-due backlog",
           "status": "blocked_until_clearance_steps_complete",
           "owner": "external_platform",
-          "blockers_resolved": 5,
+          "blockers_resolved": 6,
           "unlocks": [
             "Approved past-due queue rows get a fresh schedule after executor blockers clear."
           ],
@@ -260,12 +260,12 @@
         "task_ids": [
           "backlog-reschedule"
         ],
-        "blockers_resolved": 5,
+        "blockers_resolved": 6,
         "backlog_clearance_manifest": {
           "status": "blocked_until_clearance_steps_complete",
-          "approved_backlog_count": 5,
+          "approved_backlog_count": 6,
           "blocked_backlog_count": 3,
-          "clear_to_apply_count": 2,
+          "clear_to_apply_count": 3,
           "blocked_ids": [
             "FP-AUTO-258",
             "FP-AUTO-261",
@@ -1265,12 +1265,12 @@
         "task_ids": [
           "backlog-reschedule"
         ],
-        "blockers_resolved": 5,
+        "blockers_resolved": 6,
         "backlog_clearance_manifest": {
           "status": "blocked_until_clearance_steps_complete",
-          "approved_backlog_count": 5,
+          "approved_backlog_count": 6,
           "blocked_backlog_count": 3,
-          "clear_to_apply_count": 2,
+          "clear_to_apply_count": 3,
           "blocked_ids": [
             "FP-AUTO-258",
             "FP-AUTO-261",
@@ -2112,15 +2112,15 @@
       "apply_command": "",
       "source_path": "data/backlog_reschedule_preview.json",
       "impact": {
-        "approved_backlog_count": 5,
+        "approved_backlog_count": 6,
         "blocked_backlog_count": 3,
         "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-22T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
         "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-22T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
         "backlog_clearance_manifest": {
           "status": "blocked_until_clearance_steps_complete",
-          "approved_backlog_count": 5,
+          "approved_backlog_count": 6,
           "blocked_backlog_count": 3,
-          "clear_to_apply_count": 2,
+          "clear_to_apply_count": 3,
           "blocked_ids": [
             "FP-AUTO-258",
             "FP-AUTO-261",

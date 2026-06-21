@@ -1,11 +1,11 @@
 # Backlog Reschedule Preview - Lily Roo
 
-Generated: 2026-06-21T14:33:47.231698+00:00
+Generated: 2026-06-21T20:04:00.323852+00:00
 
 ## Summary
-- Approved backlog rows: **5**
+- Approved backlog rows: **6**
 - Rows with known blockers: **3**
-- Clear to apply without override: **2**
+- Clear to apply without override: **3**
 - Start at: **2026-06-22T10:00:00+00:00**
 - Spacing hours: **24**
 - Apply allowed without override: **False**
@@ -35,6 +35,9 @@ Generated: 2026-06-21T14:33:47.231698+00:00
 - **Instagram - I Learned It All in Fifteen Seconds** (`FP-AUTO-263`)
   - Current: `2026-06-21T10:00:00+09:00`
   - Proposed: `2026-06-26T10:00:00+00:00`
+- **Instagram - Twelve Dollars** (`FP-PLAN-TWELVE-DOLLARS-INSTAGRAM`)
+  - Current: `2026-06-21T14:05:00-04:00`
+  - Proposed: `2026-06-27T10:00:00+00:00`
 
 ## Clearance Manifest
 - Status: **blocked_until_clearance_steps_complete**
