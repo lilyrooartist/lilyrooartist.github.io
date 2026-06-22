@@ -1,6 +1,6 @@
 # Promotion Blocker Ledger - Lily Roo
 
-Generated: 2026-06-21T20:04:00.832610Z
+Generated: 2026-06-22T05:32:18.292244Z
 
 ## Summary
 - Open blockers: **9**
@@ -29,10 +29,10 @@ Generated: 2026-06-21T20:04:00.832610Z
   - Blocked by: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN
   - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
 - **Reschedule approved past-due backlog** (`blocked_until_clearance_steps_complete`)
-  - Owner: `external_platform`; projected blockers resolved: **6**
+  - Owner: `external_platform`; projected blockers resolved: **7**
   - Unlocks: Approved past-due queue rows get a fresh schedule after executor blockers clear.
   - Blocked by: FP-AUTO-258, FP-AUTO-261, FP-AUTO-264
-  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-22T10:00:00+00:00' --spacing-hours 24`
+  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24`
 - **Fill manual metric worksheet** (`needs_values`)
   - Owner: `tod`; projected blockers resolved: **6**
   - Unlocks: Admin health and weekly reporting can use fresh cross-platform metrics.; Manual metric blockers clear once worksheet values are imported.
@@ -69,11 +69,11 @@ Generated: 2026-06-21T20:04:00.832610Z
   - Impact: apply blocked by: local_secret_source_missing:TIKTOK_CLIENT_KEY,TIKTOK_CLIENT_SECRET,TIKTOK_REFRESH_TOKEN, public_posting_approval_not_confirmed
 - **[high] Reschedule approved past-due backlog** (`backlog-reschedule`)
   - Owner: `external_platform`; status: `blocked`; category: `backlog_reschedule`
-  - Evidence: 6 approved backlog row(s); 3 still have executor blockers.
+  - Evidence: 7 approved backlog row(s); 3 still have executor blockers.
   - Next step: Preview a new schedule. Safe apply becomes available after known executor blockers clear.
-  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-22T10:00:00+00:00' --spacing-hours 24`
+  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24`
   - Guardrail: Normal apply is hidden while rows have known executor blockers.
-  - Blocked apply command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-22T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin`
+  - Blocked apply command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin`
 - **[medium] Approve scheduled YouTube Community row** (`approval-FP-AUTO-261`)
   - Owner: `tod`; status: `ready_for_reviewed_approval`; category: `approval`
   - Evidence: FP-AUTO-261 is blocked by not_approved in executor state. Automated review checks passed.

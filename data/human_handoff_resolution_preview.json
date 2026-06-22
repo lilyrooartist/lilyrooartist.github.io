@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-21T20:04:01.191726Z",
+  "generated_at": "2026-06-22T05:32:18.656139Z",
   "safe_mode": true,
   "source": {
     "resolution_worksheet": "data/human_handoff_resolution_worksheet.csv",
@@ -59,12 +59,12 @@
       "phase": "Backlog recovery",
       "status": "blocked",
       "input_needed": "clearance_confirmation",
-      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-22T10:00:00+00:00' --spacing-hours 24",
+      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24",
       "safety": "safe_preview",
       "safety_reason": "reschedule_preview_command",
       "returncode": 0,
       "preview_status": "preview_ok_with_warning",
-      "output_excerpt": "Rows selected: 6\n- FP-AUTO-258 Instagram I Learned It All in Fifteen Seconds: 2026-06-05T15:35:00-04:00 -> 2026-06-22T10:00:00+00:00\n  WARNING: known blocker: not_approved\n- FP-AUTO-261 YouTube Community I Learned It All in Fifteen Seconds: 2026-06-06T19:10:00-04:00 -> 2026-06-23T10:00:00+00:00\n  WARNING: known blocker: not_approved\n- FP-AUTO-264 TikTok I Learned It All in Fifteen Seconds: 2026-06-09T21:25:00-04:00 -> 2026-06-24T10:00:00+00:00\n  WARNING: known blocker: tiktok_credentials_missing\n- FP-PLAN-TWELVE-DOLLARS-X X Twelve Dollars: 2026-06-20T10:15:00-04:00 -> 2026-06-25T10:00:00+00:00\n- FP-AUTO-263 Instagram I Learned It All in Fifteen Seconds: 2026-06-21T10:00:00+09:00 -> 2026-06-26T10:00:00+00:00\n- FP-PLAN-TWELVE-DOLLARS-INSTAGRAM Instagram Twelve Dollars: 2026-06-21T14:05:00-04:00 -> 2026-06-27T10:00:00+00:00\nDry run only. Re-run with --apply to write the schedule.",
+      "output_excerpt": "Rows selected: 7\n- FP-AUTO-258 Instagram I Learned It All in Fifteen Seconds: 2026-06-05T15:35:00-04:00 -> 2026-06-23T10:00:00+00:00\n  WARNING: known blocker: not_approved\n- FP-AUTO-261 YouTube Community I Learned It All in Fifteen Seconds: 2026-06-06T19:10:00-04:00 -> 2026-06-24T10:00:00+00:00\n  WARNING: known blocker: not_approved\n- FP-AUTO-264 TikTok I Learned It All in Fifteen Seconds: 2026-06-09T21:25:00-04:00 -> 2026-06-25T10:00:00+00:00\n  WARNING: known blocker: tiktok_credentials_missing\n- FP-PLAN-TWELVE-DOLLARS-X X Twelve Dollars: 2026-06-20T10:15:00-04:00 -> 2026-06-26T10:00:00+00:00\n- FP-AUTO-263 Instagram I Learned It All in Fifteen Seconds: 2026-06-21T10:00:00+09:00 -> 2026-06-27T10:00:00+00:00\n- FP-PLAN-TWELVE-DOLLARS-INSTAGRAM Instagram Twelve Dollars: 2026-06-21T14:05:00-04:00 -> 2026-06-28T10:00:00+00:00\n- FP-AUTO-265 Facebook I Learned It All in Fifteen Seconds: 2026-06-22T10:00:00+09:00 -> 2026-06-29T10:00:00+00:00\nDry run only. Re-run with --apply to write the schedule.",
       "completion_evidence": "data/backlog_reschedule_preview.json should show normal_apply_gate clear before any non-override apply command is exposed.",
       "guardrail": "Normal apply stays hidden until known executor/platform blockers clear."
     },

@@ -1,12 +1,12 @@
 # Backlog Reschedule Preview - Lily Roo
 
-Generated: 2026-06-21T20:04:00.323852+00:00
+Generated: 2026-06-22T05:32:17.776375+00:00
 
 ## Summary
-- Approved backlog rows: **6**
+- Approved backlog rows: **7**
 - Rows with known blockers: **3**
-- Clear to apply without override: **3**
-- Start at: **2026-06-22T10:00:00+00:00**
+- Clear to apply without override: **4**
+- Start at: **2026-06-23T10:00:00+00:00**
 - Spacing hours: **24**
 - Apply allowed without override: **False**
 - Normal apply gate: **blocked_until_clearance_steps_complete**
@@ -14,30 +14,33 @@ Generated: 2026-06-21T20:04:00.323852+00:00
 ## Proposed Reschedule
 - **Instagram - I Learned It All in Fifteen Seconds** (`FP-AUTO-258`)
   - Current: `2026-06-05T15:35:00-04:00`
-  - Proposed: `2026-06-22T10:00:00+00:00`
+  - Proposed: `2026-06-23T10:00:00+00:00`
   - Blocker: not_approved
   - Clearance: Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply.
 - **YouTube Community - I Learned It All in Fifteen Seconds** (`FP-AUTO-261`)
   - Current: `2026-06-06T19:10:00-04:00`
-  - Proposed: `2026-06-23T10:00:00+00:00`
+  - Proposed: `2026-06-24T10:00:00+00:00`
   - Blocker: not_approved
   - Clearance: Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply.
 - **TikTok - I Learned It All in Fifteen Seconds** (`FP-AUTO-264`)
   - Current: `2026-06-09T21:25:00-04:00`
-  - Proposed: `2026-06-24T10:00:00+00:00`
+  - Proposed: `2026-06-25T10:00:00+00:00`
   - Blocker: tiktok_credentials_missing
   - Clearance: Add local TikTok OAuth credentials, then push worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.
   - Clearance: Confirm TikTok public posting approval before treating auto-posting as ready.
   - Clearance: Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair.
 - **X - Twelve Dollars** (`FP-PLAN-TWELVE-DOLLARS-X`)
   - Current: `2026-06-20T10:15:00-04:00`
-  - Proposed: `2026-06-25T10:00:00+00:00`
+  - Proposed: `2026-06-26T10:00:00+00:00`
 - **Instagram - I Learned It All in Fifteen Seconds** (`FP-AUTO-263`)
   - Current: `2026-06-21T10:00:00+09:00`
-  - Proposed: `2026-06-26T10:00:00+00:00`
+  - Proposed: `2026-06-27T10:00:00+00:00`
 - **Instagram - Twelve Dollars** (`FP-PLAN-TWELVE-DOLLARS-INSTAGRAM`)
   - Current: `2026-06-21T14:05:00-04:00`
-  - Proposed: `2026-06-27T10:00:00+00:00`
+  - Proposed: `2026-06-28T10:00:00+00:00`
+- **Facebook - I Learned It All in Fifteen Seconds** (`FP-AUTO-265`)
+  - Current: `2026-06-22T10:00:00+09:00`
+  - Proposed: `2026-06-29T10:00:00+00:00`
 
 ## Clearance Manifest
 - Status: **blocked_until_clearance_steps_complete**
@@ -64,10 +67,10 @@ Generated: 2026-06-21T20:04:00.323852+00:00
 - A reschedule does not publish, approve, or repair platform credentials by itself.
 
 ## Commands
-- Preview: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-22T10:00:00+00:00' --spacing-hours 24`
+- Preview: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24`
 - Safe apply: none until blockers clear
-- Blocked apply command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-22T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin`
-- Deliberate override command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-22T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin`
+- Blocked apply command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin`
+- Deliberate override command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin`
 
 ## Guardrails
 - This preview does not write schedule changes, approve posts, publish posts, or push secrets.

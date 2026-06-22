@@ -1,6 +1,6 @@
 # Manual Distribution Packet - Lily Roo
 
-Generated: 2026-06-21T20:04:00.539403Z
+Generated: 2026-06-22T05:32:17.998663Z
 
 ## Summary
 - Manual-ready posts: **2**
@@ -88,7 +88,7 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
 
 ## Manual Posting Queue
 - **YouTube Community - Twelve Dollars** (`FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY`)
-  - Scheduled target: `2026-06-23T18:30:00-04:00`
+  - Scheduled target: `2026-06-24T18:30:00-04:00`
   - Distribution status: `waiting_for_review`
   - Readiness: `manual_only`; CTA: `hard_goal`
   - Copy: Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.
@@ -111,7 +111,7 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
   - Preview public URL log: `python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL`
   - Apply public URL log after posting: `python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin`
 - **YouTube Community - Analog Myth** (`FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY`)
-  - Scheduled target: `2026-06-24T18:30:00-04:00`
+  - Scheduled target: `2026-06-25T18:30:00-04:00`
   - Distribution status: `waiting_for_review`
   - Readiness: `manual_only`; CTA: `hard_goal`
   - Copy: Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-21T20:04:00.740902Z",
+  "generated_at": "2026-06-22T05:32:18.201570Z",
   "safe_mode": true,
   "status": "blocked",
   "source": {
@@ -46,7 +46,7 @@
     "repair_post_id": "FP-AUTO-264",
     "blocked_apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
     "apply_command": "",
-    "backlog_preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-22T10:00:00+00:00' --spacing-hours 24",
+    "backlog_preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24",
     "backlog_apply_command": "",
     "backlog_normal_apply_gate": "blocked_until_clearance_steps_complete"
   },
