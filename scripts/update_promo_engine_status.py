@@ -609,11 +609,22 @@ def experiment_format_key(row: dict) -> str:
     winner_format = str(row.get("winner_format") or "").strip()
     if winner_format:
         return winner_format
+    row_id = str(row.get("id") or row.get("content_id") or "").strip().upper()
+    imagery = str(row.get("imagery") or "").strip().lower()
     platform = platform_bucket(row.get("platform") or "")
     has_clip = bool(str(row.get("clip_url") or "").strip())
     has_image = bool(str(row.get("imagery_url") or row.get("media_key") or row.get("imagery") or "").strip())
     cta = str(row.get("selected_cta_strength") or row.get("cta_type") or row.get("selected_copy_strategy") or "").strip().lower()
     hard_cta = "hard" in cta or "subscribe" in cta or "youtube" in cta
+    if (
+        platform == "YouTube"
+        and (
+            row_id.endswith("-YOUTUBE-COMMUNITY")
+            or "community" in imagery
+            or "promo coverage" in imagery
+        )
+    ):
+        return "YouTube Community archive/playlist CTA"
     if has_clip:
         return "Short video clip + platform-native CTA"
     if platform == "YouTube Community":

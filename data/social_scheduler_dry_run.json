@@ -1,57 +1,28 @@
 {
-  "ok": true,
-  "updated_at": "2026-06-22T11:24:39.007464Z",
+  "ok": false,
+  "updated_at": "2026-06-22T23:46:26.718685Z",
   "source": "lilyroo-social-scheduler-dry-run",
   "url": "https://www.lilyroo.com/api/social/scheduler/dry-run",
-  "http_status": 200,
-  "error": null,
-  "auth_method": "bearer",
-  "requested_scheduled_time": "2026-06-22T11:24:38.560873Z",
+  "http_status": 401,
+  "error": "HTTP 401: Unauthorized",
+  "auth_method": "none",
+  "requested_scheduled_time": "2026-06-22T23:46:26.342146Z",
   "dry_run": true,
-  "checked_at": "2026-06-22T11:24:38.560Z",
+  "checked_at": "",
   "summary": {
-    "due_count": 2,
-    "result_count": 2,
+    "due_count": 0,
+    "result_count": 0,
     "would_post_count": 0,
-    "blocked_count": 2,
-    "status_counts": {
-      "blocked": 1,
-      "skipped": 1
-    },
-    "platform_counts": {
-      "TikTok": 1,
-      "YouTube Community": 1
-    },
+    "blocked_count": 0,
+    "status_counts": {},
+    "platform_counts": {},
     "would_post": [],
-    "blocked": [
-      {
-        "post_id": "FP-AUTO-259",
-        "platform": "TikTok",
-        "status": "blocked",
-        "reason": "not_approved",
-        "post_type": "",
-        "attempts": 0,
-        "updated_at": "2026-06-22T11:24:39.382Z",
-        "source": "dry-run",
-        "error_summary": ""
-      },
-      {
-        "post_id": "FP-AUTO-261",
-        "platform": "YouTube Community",
-        "status": "skipped",
-        "reason": "manual_only",
-        "post_type": "",
-        "attempts": 0,
-        "updated_at": "2026-06-22T11:24:39.388Z",
-        "source": "dry-run",
-        "error_summary": ""
-      }
-    ]
+    "blocked": []
   },
   "payload": {
-    "ok": true,
-    "due_count": 2,
-    "result_count": 2
+    "ok": false,
+    "due_count": 0,
+    "result_count": 0
   },
-  "action_needed": ""
+  "action_needed": "Set LILYROO_ADMIN_PASSWORD or LILYROO_EXECUTOR_BEARER_TOKEN and rerun to capture scheduler dry-run state."
 }

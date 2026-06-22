@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T21:14:42.319206Z",
+  "generated_at": "2026-06-22T23:51:49.300419Z",
   "safe_mode": true,
   "summary": {
     "check_count": 30,
@@ -15,24 +15,24 @@
       "status": "pass",
       "severity": "ok",
       "detail": "Blocker ledger summary should match row count.",
-      "expected": 11,
-      "actual": 11
+      "expected": 8,
+      "actual": 8
     },
     {
       "name": "ledger_category_total_matches_rows",
       "status": "pass",
       "severity": "ok",
       "detail": "Blocker category counts should account for every blocker row.",
-      "expected": 11,
-      "actual": 11
+      "expected": 8,
+      "actual": 8
     },
     {
       "name": "status_open_actions_match_operations",
       "status": "pass",
       "severity": "ok",
       "detail": "Promo status open action count should mirror the operations packet.",
-      "expected": 17,
-      "actual": 17
+      "expected": 16,
+      "actual": 16
     },
     {
       "name": "approval_counts_match",
@@ -111,10 +111,7 @@
       "status": "pass",
       "severity": "ok",
       "detail": "Scheduler dry-run blockers should be represented in current scheduler detail or executor attention; executor history may include stale rows that are now would-post.",
-      "expected": [
-        "FP-AUTO-259",
-        "FP-AUTO-261"
-      ],
+      "expected": [],
       "actual": [
         "FP-AUTO-258",
         "FP-AUTO-259",
@@ -130,16 +127,16 @@
       "status": "pass",
       "severity": "ok",
       "detail": "Manual distribution packet should match manual distribution blockers in the ledger.",
-      "expected": 3,
-      "actual": 3
+      "expected": 0,
+      "actual": 0
     },
     {
       "name": "manual_distribution_handoff_count_matches_packet",
       "status": "pass",
       "severity": "ok",
       "detail": "Human handoff should include every unlogged manual distribution row.",
-      "expected": 3,
-      "actual": 3
+      "expected": 0,
+      "actual": 0
     },
     {
       "name": "manual_metric_batch_count_matches_ledger",
@@ -170,8 +167,8 @@
       "status": "pass",
       "severity": "ok",
       "detail": "Human handoff blocker summary should be copied from the blocker ledger.",
-      "expected": 11,
-      "actual": 11
+      "expected": 8,
+      "actual": 8
     },
     {
       "name": "handoff_projection_matches_ledger_projection",
@@ -219,9 +216,6 @@
       "severity": "ok",
       "detail": "Human handoff preview should include one preview row for every handoff task.",
       "expected": [
-        "manual-distribution-FP-AUTO-261",
-        "manual-distribution-FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-        "manual-distribution-FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
         "manual-metrics-priority-2",
         "manual-metrics-priority-3",
         "platform-setup-FP-AUTO-258",
@@ -231,9 +225,6 @@
         "platform-setup-FP-PLAN-TWELVE-DOLLARS-INSTAGRAM"
       ],
       "actual": [
-        "manual-distribution-FP-AUTO-261",
-        "manual-distribution-FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-        "manual-distribution-FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
         "manual-metrics-priority-2",
         "manual-metrics-priority-3",
         "platform-setup-FP-AUTO-258",
@@ -248,8 +239,8 @@
       "status": "pass",
       "severity": "ok",
       "detail": "Human handoff preview worksheet row count should match the handoff packet worksheet summary.",
-      "expected": 10,
-      "actual": 10
+      "expected": 7,
+      "actual": 7
     },
     {
       "name": "handoff_preview_status_matches_status_kpi",
@@ -258,11 +249,11 @@
       "detail": "Promo status handoff preview KPI should mirror preview status counts.",
       "expected": {
         "input_missing": 3,
-        "skipped": 7
+        "skipped": 4
       },
       "actual": {
         "input_missing": 3,
-        "skipped": 7
+        "skipped": 4
       }
     },
     {
@@ -271,16 +262,16 @@
       "severity": "ok",
       "detail": "Promo status handoff preview KPI should mirror preview summary counts.",
       "expected": {
-        "worksheet_row_count": 10,
-        "preview_count": 10,
+        "worksheet_row_count": 7,
+        "preview_count": 7,
         "executed_preview_count": 3,
-        "skipped_preview_count": 7
+        "skipped_preview_count": 4
       },
       "actual": {
-        "worksheet_row_count": 10,
-        "preview_count": 10,
+        "worksheet_row_count": 7,
+        "preview_count": 7,
         "executed_preview_count": 3,
-        "skipped_preview_count": 7
+        "skipped_preview_count": 4
       }
     },
     {
@@ -290,18 +281,18 @@
       "detail": "Promo status next actions should expose the handoff preview health summary.",
       "expected": "Review handoff preview health: 3 missing input; see data/human_handoff_resolution_preview.json.",
       "actual": [
-        "Next operational action: Post YouTube Community manual cards",
-        "First handoff step: Post manual distribution rows",
+        "Next operational action: Fix Instagram executor — python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+        "First handoff step: Fill and import manual metric worksheet — python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
         "30-day growth goal: Publish or approve the next platform-native rows, then refresh manual/public metrics to rank formats by results.",
-        "Resolve manual distribution gate: 3 approved YouTube Community row(s) need manual posting and public URL logging; open https://www.youtube.com/@lilyroo.artist/community. Use admin/reports/manual-posting-clipboard.md.",
-        "Publish runway: 3 approved manual row(s) are ready to post and log from data/experiment_publish_runway.json.",
+        "Current unlock gate: Repair TikTok executor (blocked_until_input); 0 ready, 3 blocked/warning; preview python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN; see data/promo_unlock_sequence.json.",
+        "Review handoff preview health: 3 missing input; see data/human_handoff_resolution_preview.json.",
         "Refresh manual metrics: 6 worksheet row(s) still need new_value entries (blocked_until_new_values_filled); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values.",
         "Collect experiment results: 5 post-result field(s) need new_value plus evidence_note; use admin/reports/experiment-result-clipboard.md; first priority: measure FP-AUTO-260 on Facebook. Direct preview template: python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run. Direct apply template after review: python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin. Then preview import with python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run after filling data/experiment_result_entry_wide_template.csv.",
-        "Re-check checked-pending store links: 7 music site snapshot(s) still have no public URL; next recommended re-check after 2026-06-23T21:14:34.487009+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 then.",
-        "Current unlock gate: Post manual YouTube Community rows (blocked_until_input); 0 ready, 4 blocked/warning; preview python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL'; see data/promo_unlock_sequence.json.",
-        "Review handoff preview health: 3 missing input; see data/human_handoff_resolution_preview.json.",
+        "Re-check checked-pending store links: 7 music site snapshot(s) still have no public URL; next recommended re-check after 2026-06-23T23:42:54.523197+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 then.",
         "1 executor records are blocked by approval.",
-        "5 executor records need platform repair before they can publish."
+        "5 executor records need platform repair before they can publish.",
+        "Increase weekly subscriber acquisition before the channel can reach 1,000 subscribers within a year.",
+        "Review approval blockers for 1 queued executor records."
       ]
     },
     {
@@ -337,8 +328,8 @@
       "status": "pass",
       "severity": "ok",
       "detail": "Promo unlock sequence should mirror the blocker ledger open blocker count.",
-      "expected": 11,
-      "actual": 11
+      "expected": 8,
+      "actual": 8
     },
     {
       "name": "unlock_sequence_current_step_is_preview_ready",
@@ -346,11 +337,11 @@
       "severity": "ok",
       "detail": "Promo unlock sequence should lead with the first currently actionable gate, skipping any completed evidence-only gate.",
       "expected": {
-        "current_step_id": "unlock-manual-distribution",
+        "current_step_id": "unlock-tiktok-platform-repair",
         "current_gate_state": "blocked_until_input"
       },
       "actual": {
-        "current_step_id": "unlock-manual-distribution",
+        "current_step_id": "unlock-tiktok-platform-repair",
         "current_gate_state": "blocked_until_input"
       }
     },
@@ -362,18 +353,18 @@
       "expected": {
         "step_count": 5,
         "ready_for_human_review_count": 0,
-        "blocked_or_warning_count": 4,
-        "current_step_id": "unlock-manual-distribution",
+        "blocked_or_warning_count": 3,
+        "current_step_id": "unlock-tiktok-platform-repair",
         "current_gate_state": "blocked_until_input",
-        "open_blocker_count": 11
+        "open_blocker_count": 8
       },
       "actual": {
         "step_count": 5,
         "ready_for_human_review_count": 0,
-        "blocked_or_warning_count": 4,
-        "current_step_id": "unlock-manual-distribution",
+        "blocked_or_warning_count": 3,
+        "current_step_id": "unlock-tiktok-platform-repair",
         "current_gate_state": "blocked_until_input",
-        "open_blocker_count": 11
+        "open_blocker_count": 8
       }
     },
     {
@@ -383,18 +374,18 @@
       "detail": "Promo status next actions should expose the current unlock sequence gate.",
       "expected": "Current unlock gate action includes data/promo_unlock_sequence.json",
       "actual": [
-        "Next operational action: Post YouTube Community manual cards",
-        "First handoff step: Post manual distribution rows",
+        "Next operational action: Fix Instagram executor — python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+        "First handoff step: Fill and import manual metric worksheet — python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
         "30-day growth goal: Publish or approve the next platform-native rows, then refresh manual/public metrics to rank formats by results.",
-        "Resolve manual distribution gate: 3 approved YouTube Community row(s) need manual posting and public URL logging; open https://www.youtube.com/@lilyroo.artist/community. Use admin/reports/manual-posting-clipboard.md.",
-        "Publish runway: 3 approved manual row(s) are ready to post and log from data/experiment_publish_runway.json.",
+        "Current unlock gate: Repair TikTok executor (blocked_until_input); 0 ready, 3 blocked/warning; preview python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN; see data/promo_unlock_sequence.json.",
+        "Review handoff preview health: 3 missing input; see data/human_handoff_resolution_preview.json.",
         "Refresh manual metrics: 6 worksheet row(s) still need new_value entries (blocked_until_new_values_filled); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values.",
         "Collect experiment results: 5 post-result field(s) need new_value plus evidence_note; use admin/reports/experiment-result-clipboard.md; first priority: measure FP-AUTO-260 on Facebook. Direct preview template: python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run. Direct apply template after review: python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin. Then preview import with python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run after filling data/experiment_result_entry_wide_template.csv.",
-        "Re-check checked-pending store links: 7 music site snapshot(s) still have no public URL; next recommended re-check after 2026-06-23T21:14:34.487009+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 then.",
-        "Current unlock gate: Post manual YouTube Community rows (blocked_until_input); 0 ready, 4 blocked/warning; preview python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL'; see data/promo_unlock_sequence.json.",
-        "Review handoff preview health: 3 missing input; see data/human_handoff_resolution_preview.json.",
+        "Re-check checked-pending store links: 7 music site snapshot(s) still have no public URL; next recommended re-check after 2026-06-23T23:42:54.523197+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 then.",
         "1 executor records are blocked by approval.",
-        "5 executor records need platform repair before they can publish."
+        "5 executor records need platform repair before they can publish.",
+        "Increase weekly subscriber acquisition before the channel can reach 1,000 subscribers within a year.",
+        "Review approval blockers for 1 queued executor records."
       ]
     },
     {

@@ -1,20 +1,20 @@
 # Human Handoff Packet - Lily Roo
 
-Generated: 2026-06-22T21:14:41.765122Z
+Generated: 2026-06-22T23:51:49.072508Z
 
 ## Summary
-- Open handoff tasks: **10**
-- Tod-owned tasks: **10**
+- Open handoff tasks: **7**
+- Tod-owned tasks: **7**
 - External/platform-gated tasks: **0**
 - High urgency tasks: **5**
 - Low urgency tasks: **2**
 
 ## Action Docket
-- Ready steps: **2**
+- Ready steps: **1**
 - Blocked steps: **1**
-- Manual posts packaged: **3**
+- Manual posts packaged: **0**
 - Manual metric fields: **6**
-- Resolution worksheet: `data/human_handoff_resolution_worksheet.csv` (10 row(s))
+- Resolution worksheet: `data/human_handoff_resolution_worksheet.csv` (7 row(s))
 
 - **Review checked approval batch** (`not_available`)
   - Owner: `tod`; tasks: **0**; blockers resolved: **0**
@@ -23,11 +23,11 @@ Generated: 2026-06-22T21:14:41.765122Z
   - Completion evidence: data/scheduled_approval_packet.json should show fewer approval blockers, and data/social_scheduler_dry_run.json should no longer block the approved Instagram row on not_approved.
   - Next after apply: Run the safe admin refresh, then manually post/log any newly approved YouTube Community row before treating the published log as current.
   - Guardrail: Human review is still required; blocked review IDs stay excluded from the checked batch.
-- **Post manual distribution rows** (`ready_for_manual_post`)
-  - Owner: `tod`; tasks: **3**; blockers resolved: **3**
+- **Review and post manual distribution rows** (`clear`)
+  - Owner: `tod`; tasks: **0**; blockers resolved: **0**
   - Blocked IDs: `FP-PLAN-TWELVE-DOLLARS-TIKTOK`
   - Sequence verify: `python3 scripts/refresh_promo_admin.py`
-  - Completion evidence: data/published_log_reconciliation.json should stay waiting for real public URLs until the postable manual rows are published and logged.
+  - Completion evidence: data/manual_distribution_packet.json should move approved rows from review_queue toward postable manual distribution, and data/published_log_reconciliation.json should remain gated until public URLs are logged.
   - Next after apply: Post each approved YouTube Community row manually, then log its public URL with scripts/log_manual_distribution.py.
   - Guardrail: Manual-only approvals do not auto-post; posting and public URL logging remain separate after review. Post manually first, then log only real public URLs.
 - **Repair blocked platform executor setup** (`blocked`)
@@ -85,24 +85,6 @@ Generated: 2026-06-22T21:14:41.765122Z
   - Detail: Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.
   - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM`
   - Guardrail: Push worker secrets only after local platform setup is complete.
-- **Post I Learned It All in Fifteen Seconds to YouTube Community** (`manual-distribution-FP-AUTO-261`)
-  - Phase: `Manual distribution`; owner: `tod`; status: `ready_for_manual_post`; urgency: `medium`
-  - Detail: Post manually in YouTube Studio Community, then log the real public URL before marking distribution complete.
-  - Preview/check: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL'`
-  - asset: https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg
-  - Guardrail: Do not log a manual post until a real public URL exists.
-- **Post Analog Myth to YouTube Community** (`manual-distribution-FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY`)
-  - Phase: `Manual distribution`; owner: `tod`; status: `ready_for_manual_post`; urgency: `medium`
-  - Detail: Post manually in YouTube Studio Community, then log the real public URL before marking distribution complete.
-  - Preview/check: `python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url 'PUBLIC_URL'`
-  - asset: https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg
-  - Guardrail: Do not log a manual post until a real public URL exists.
-- **Post Twelve Dollars to YouTube Community** (`manual-distribution-FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY`)
-  - Phase: `Manual distribution`; owner: `tod`; status: `ready_for_manual_post`; urgency: `medium`
-  - Detail: Post manually in YouTube Studio Community, then log the real public URL before marking distribution complete.
-  - Preview/check: `python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url 'PUBLIC_URL'`
-  - asset: https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg
-  - Guardrail: Do not log a manual post until a real public URL exists.
 - **Fill priority 2 metrics: Recent discovery and traffic** (`manual-metrics-priority-2`)
   - Phase: `Manual metrics`; owner: `tod`; status: `needs_values`; urgency: `low`
   - Detail: Collect 4 field(s) across facebook, instagram, tiktok, x, fill the worksheet rows, preview import, then refresh Admin.

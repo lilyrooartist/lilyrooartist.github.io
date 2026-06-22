@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T21:14:41.765122Z",
+  "generated_at": "2026-06-22T23:51:49.072508Z",
   "safe_mode": true,
   "source": {
     "promotion_blocker_ledger": "data/promotion_blocker_ledger.json",
@@ -13,38 +13,34 @@
     "resolution_worksheet": "data/human_handoff_resolution_worksheet.csv"
   },
   "summary": {
-    "task_count": 10,
+    "task_count": 7,
     "owner_counts": {
-      "tod": 10
+      "tod": 7
     },
     "urgency_counts": {
       "high": 5,
-      "low": 2,
-      "medium": 3
+      "low": 2
     },
     "phase_counts": {
-      "Manual distribution": 3,
       "Manual metrics": 2,
       "Platform setup": 5
     },
     "blocker_summary": {
-      "open_blocker_count": 11,
+      "open_blocker_count": 8,
       "urgent_count": 6,
       "owner_counts": {
         "external_platform": 4,
-        "tod": 7
+        "tod": 4
       },
       "category_counts": {
         "approval": 1,
-        "manual_distribution": 3,
         "manual_metrics": 2,
         "platform_repair": 5
       },
       "status_counts": {
         "blocked": 5,
         "blocked_by_review_checks": 1,
-        "needs_values": 2,
-        "ready_for_manual_post": 3
+        "needs_values": 2
       },
       "next_resolution_projection": {
         "kind": "checked_scheduled_approval_batch",
@@ -83,10 +79,10 @@
         },
         {
           "id": "unlock-manual-distribution",
-          "phase": "Post manual YouTube Community rows",
+          "phase": "Review and post manual YouTube Community rows",
           "status": "clear",
           "owner": "tod",
-          "blockers_resolved": 3,
+          "blockers_resolved": 0,
           "unlocks": [
             "Manual YouTube Community promotion can publish without waiting for broken auto executors.",
             "Published_Log.csv can be updated after public URLs exist."
@@ -129,8 +125,8 @@
             "Approved past-due queue rows get a fresh schedule after executor blockers clear."
           ],
           "blocked_by": [],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24",
-          "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+08:00' --spacing-hours 24",
+          "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
           "source_path": "data/backlog_reschedule_preview.json"
         },
         {
@@ -167,78 +163,160 @@
   "action_docket": {
     "source": "data/human_handoff_packet.json",
     "roadmap_step_count": 5,
-    "task_count": 10,
-    "ready_step_count": 2,
+    "task_count": 7,
+    "ready_step_count": 1,
     "blocked_step_count": 1,
-    "manual_post_count": 3,
+    "manual_post_count": 0,
     "manual_metric_field_count": 6,
     "first_ready_step": {
-      "id": "manual-posting-review",
-      "label": "Post manual distribution rows",
-      "state": "ready_for_manual_post",
+      "id": "manual-metric-worksheet",
+      "label": "Fill and import manual metric worksheet",
+      "state": "needs_values",
       "owner": "tod",
       "task_ids": [
-        "manual-distribution-FP-AUTO-261",
-        "manual-distribution-FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-        "manual-distribution-FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
+        "manual-metrics-priority-2",
+        "manual-metrics-priority-3"
       ],
-      "blockers_resolved": 3,
-      "ready_ids": [],
-      "blocked_ids": [
-        "FP-PLAN-TWELVE-DOLLARS-TIKTOK"
+      "blockers_resolved": 6,
+      "field_count": 6,
+      "batch_count": 2,
+      "metric_completion_manifest": {
+        "status": "needs_values",
+        "entry_csv_path": "data/manual_metric_entry_template.csv",
+        "detailed_csv_path": "data/manual_metric_collection_template.csv",
+        "waiting_field_count": 6,
+        "ready_field_count": 0,
+        "waiting_csv_rows": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "ready_csv_rows": [],
+        "waiting_assignments": [
+          "facebook.reach_7d=VALUE",
+          "instagram.profile_visits_7d=VALUE",
+          "spotify.release_streams=VALUE",
+          "spotify.saves=VALUE",
+          "tiktok.profile_views_7d=VALUE",
+          "x.impressions_7d=VALUE"
+        ],
+        "ready_assignments": [],
+        "access_level_counts": {
+          "private_analytics": 6
+        },
+        "priority_order": [
+          {
+            "priority": 2,
+            "label": "Recent discovery and traffic",
+            "waiting_count": 4,
+            "ready_to_import_count": 0,
+            "csv_rows": [
+              2,
+              3,
+              6,
+              7
+            ]
+          },
+          {
+            "priority": 3,
+            "label": "Release depth metrics",
+            "waiting_count": 2,
+            "ready_to_import_count": 0,
+            "csv_rows": [
+              4,
+              5
+            ]
+          }
+        ],
+        "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run",
+        "apply_command": "",
+        "fallback_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
+        "fallback_apply_command": "",
+        "apply_gate": "blocked_until_new_values_filled",
+        "operator_checklist": [
+          "Open the short entry CSV and fill only new_value cells for rows with sourced analytics values.",
+          "Add an evidence_note for each filled value when the source UI/export can be named briefly.",
+          "Run the short entry import preview before applying any metric update.",
+          "Apply only when the preview shows the intended nonnegative numeric values.",
+          "Refresh Admin and confirm pending_manual_metric_fields decreases or clears."
+        ],
+        "completion_evidence": [
+          "data/manual_metric_collection_packet.json shows fewer waiting fields or ready rows imported.",
+          "data/manual_social_stats.json contains the imported platform metric values.",
+          "data/metrics_history.json preserves the imported metrics in the latest snapshot.",
+          "data/promo_engine_status.json and lilyroo.com/admin show updated pending manual metric counts."
+        ],
+        "guardrails": [
+          "Do not guess private analytics values.",
+          "Leave unknown values blank; blank rows are ignored by the import.",
+          "Import only nonnegative numeric new_value cells from the named analytics source."
+        ]
+      },
+      "completion_checklist": [
+        "Open the short entry CSV and fill only new_value cells for rows with sourced analytics values.",
+        "Add an evidence_note for each filled value when the source UI/export can be named briefly.",
+        "Run the short entry import preview before applying any metric update.",
+        "Apply only when the preview shows the intended nonnegative numeric values.",
+        "Refresh Admin and confirm pending_manual_metric_fields decreases or clears."
       ],
-      "postable_ids": [
-        "FP-AUTO-261",
-        "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-        "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
+      "completion_guardrails": [
+        "Do not guess private analytics values.",
+        "Leave unknown values blank; blank rows are ignored by the import.",
+        "Import only nonnegative numeric new_value cells from the named analytics source."
       ],
-      "posting_packets": [
+      "batches": [
         {
-          "post_id": "FP-AUTO-261",
-          "release": "I Learned It All in Fifteen Seconds",
-          "paste_text": "New transmission: I Learned It All in Fifteen Seconds is live. Remastered cover art, same suspicious amount of feeling.\n\nStream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube: https://www.youtube.com/@lilyroo.artist | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
-          "asset_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
-          "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
-          "postable_now": true,
-          "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL'",
-          "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL' --apply --refresh-admin",
-          "requires_public_url": true
+          "priority": 2,
+          "label": "Recent discovery and traffic",
+          "field_count": 4,
+          "access_levels": [
+            "private_analytics"
+          ],
+          "csv_rows": [
+            2,
+            3,
+            6,
+            7
+          ]
         },
         {
-          "post_id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-          "release": "Analog Myth",
-          "paste_text": "Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
-          "asset_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
-          "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
-          "postable_now": true,
-          "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url 'PUBLIC_URL'",
-          "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url 'PUBLIC_URL' --apply --refresh-admin",
-          "requires_public_url": true
-        },
-        {
-          "post_id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
-          "release": "Twelve Dollars",
-          "paste_text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-          "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
-          "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
-          "postable_now": true,
-          "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url 'PUBLIC_URL'",
-          "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url 'PUBLIC_URL' --apply --refresh-admin",
-          "requires_public_url": true
+          "priority": 3,
+          "label": "Release depth metrics",
+          "field_count": 2,
+          "access_levels": [
+            "private_analytics"
+          ],
+          "csv_rows": [
+            4,
+            5
+          ]
         }
       ],
-      "preview_command": "",
-      "apply_command": "",
+      "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
+      "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
       "command_sequence": [
+        {
+          "step": "preview",
+          "command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
+          "required_before_apply": true
+        },
+        {
+          "step": "apply_after_review",
+          "command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
+          "required_before_apply": false
+        },
         {
           "step": "verify",
           "command": "python3 scripts/refresh_promo_admin.py",
           "required_before_apply": false
         }
       ],
-      "completion_evidence": "data/published_log_reconciliation.json should stay waiting for real public URLs until the postable manual rows are published and logged.",
-      "next_step_after_apply": "Post each approved YouTube Community row manually, then log its public URL with scripts/log_manual_distribution.py.",
-      "guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review. Post manually first, then log only real public URLs."
+      "completion_evidence": "data/manual_metric_collection_packet.json should reduce pending_field_count, and data/metrics_history.json should preserve the imported metrics in the latest snapshot.",
+      "next_step_after_apply": "Rebuild the weekly report and confirm lilyroo.com/admin shows fewer pending manual metric fields.",
+      "guardrail": "Import only collected numeric values; leave unknown cells blank."
     },
     "blocked_steps": [
       {
@@ -306,59 +384,17 @@
       },
       {
         "id": "manual-posting-review",
-        "label": "Post manual distribution rows",
-        "state": "ready_for_manual_post",
+        "label": "Review and post manual distribution rows",
+        "state": "clear",
         "owner": "tod",
-        "task_ids": [
-          "manual-distribution-FP-AUTO-261",
-          "manual-distribution-FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-          "manual-distribution-FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
-        ],
-        "blockers_resolved": 3,
+        "task_ids": [],
+        "blockers_resolved": 0,
         "ready_ids": [],
         "blocked_ids": [
           "FP-PLAN-TWELVE-DOLLARS-TIKTOK"
         ],
-        "postable_ids": [
-          "FP-AUTO-261",
-          "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-          "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
-        ],
-        "posting_packets": [
-          {
-            "post_id": "FP-AUTO-261",
-            "release": "I Learned It All in Fifteen Seconds",
-            "paste_text": "New transmission: I Learned It All in Fifteen Seconds is live. Remastered cover art, same suspicious amount of feeling.\n\nStream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube: https://www.youtube.com/@lilyroo.artist | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
-            "asset_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
-            "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
-            "postable_now": true,
-            "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL'",
-            "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL' --apply --refresh-admin",
-            "requires_public_url": true
-          },
-          {
-            "post_id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-            "release": "Analog Myth",
-            "paste_text": "Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
-            "asset_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
-            "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
-            "postable_now": true,
-            "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url 'PUBLIC_URL'",
-            "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url 'PUBLIC_URL' --apply --refresh-admin",
-            "requires_public_url": true
-          },
-          {
-            "post_id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
-            "release": "Twelve Dollars",
-            "paste_text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-            "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
-            "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
-            "postable_now": true,
-            "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url 'PUBLIC_URL'",
-            "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url 'PUBLIC_URL' --apply --refresh-admin",
-            "requires_public_url": true
-          }
-        ],
+        "postable_ids": [],
+        "posting_packets": [],
         "preview_command": "",
         "apply_command": "",
         "command_sequence": [
@@ -368,7 +404,7 @@
             "required_before_apply": false
           }
         ],
-        "completion_evidence": "data/published_log_reconciliation.json should stay waiting for real public URLs until the postable manual rows are published and logged.",
+        "completion_evidence": "data/manual_distribution_packet.json should move approved rows from review_queue toward postable manual distribution, and data/published_log_reconciliation.json should remain gated until public URLs are logged.",
         "next_step_after_apply": "Post each approved YouTube Community row manually, then log its public URL with scripts/log_manual_distribution.py.",
         "guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review. Post manually first, then log only real public URLs."
       },
@@ -580,7 +616,7 @@
   },
   "resolution_worksheet": {
     "path": "data/human_handoff_resolution_worksheet.csv",
-    "row_count": 10,
+    "row_count": 7,
     "fieldnames": [
       "task_id",
       "phase",
@@ -725,96 +761,6 @@
       },
       "links": [],
       "guardrail": "Push worker secrets only after local platform setup is complete."
-    },
-    {
-      "id": "manual-distribution-FP-AUTO-261",
-      "title": "Post I Learned It All in Fifteen Seconds to YouTube Community",
-      "phase": "Manual distribution",
-      "owner": "tod",
-      "urgency": "medium",
-      "status": "ready_for_manual_post",
-      "detail": "Post manually in YouTube Studio Community, then log the real public URL before marking distribution complete.",
-      "preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL'",
-      "apply_command": "",
-      "source_path": "data/manual_distribution_packet.json",
-      "impact": {
-        "post_id": "FP-AUTO-261",
-        "release": "I Learned It All in Fifteen Seconds",
-        "paste_text": "New transmission: I Learned It All in Fifteen Seconds is live. Remastered cover art, same suspicious amount of feeling.\n\nStream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube: https://www.youtube.com/@lilyroo.artist | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
-        "asset_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
-        "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
-        "postable_now": true,
-        "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL'",
-        "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL' --apply --refresh-admin",
-        "requires_public_url": true
-      },
-      "links": [
-        {
-          "label": "asset",
-          "url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg"
-        }
-      ],
-      "guardrail": "Do not log a manual post until a real public URL exists."
-    },
-    {
-      "id": "manual-distribution-FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-      "title": "Post Analog Myth to YouTube Community",
-      "phase": "Manual distribution",
-      "owner": "tod",
-      "urgency": "medium",
-      "status": "ready_for_manual_post",
-      "detail": "Post manually in YouTube Studio Community, then log the real public URL before marking distribution complete.",
-      "preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url 'PUBLIC_URL'",
-      "apply_command": "",
-      "source_path": "data/manual_distribution_packet.json",
-      "impact": {
-        "post_id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-        "release": "Analog Myth",
-        "paste_text": "Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
-        "asset_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
-        "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
-        "postable_now": true,
-        "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url 'PUBLIC_URL'",
-        "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url 'PUBLIC_URL' --apply --refresh-admin",
-        "requires_public_url": true
-      },
-      "links": [
-        {
-          "label": "asset",
-          "url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg"
-        }
-      ],
-      "guardrail": "Do not log a manual post until a real public URL exists."
-    },
-    {
-      "id": "manual-distribution-FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
-      "title": "Post Twelve Dollars to YouTube Community",
-      "phase": "Manual distribution",
-      "owner": "tod",
-      "urgency": "medium",
-      "status": "ready_for_manual_post",
-      "detail": "Post manually in YouTube Studio Community, then log the real public URL before marking distribution complete.",
-      "preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url 'PUBLIC_URL'",
-      "apply_command": "",
-      "source_path": "data/manual_distribution_packet.json",
-      "impact": {
-        "post_id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
-        "release": "Twelve Dollars",
-        "paste_text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-        "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
-        "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
-        "postable_now": true,
-        "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url 'PUBLIC_URL'",
-        "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url 'PUBLIC_URL' --apply --refresh-admin",
-        "requires_public_url": true
-      },
-      "links": [
-        {
-          "label": "asset",
-          "url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg"
-        }
-      ],
-      "guardrail": "Do not log a manual post until a real public URL exists."
     },
     {
       "id": "manual-metrics-priority-2",

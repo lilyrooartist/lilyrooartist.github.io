@@ -605,14 +605,15 @@ def build_markdown(payload: dict) -> str:
         lines.append("- Handoff sequence:")
         for item in handoff["handoff_sequence"]:
             lines.append(f"  - {item}")
-    if handoff.get("rows"):
-        lines.append("- Handoff rows:")
-        for row in handoff["rows"]:
-            lines.append(f"  - `{row.get('sequence')}` `{row.get('post_id')}` {row.get('platform')} - collect `{', '.join(row.get('fields_to_collect') or [])}` {row.get('first_measurement_due_after_hours')}h after `{row.get('public_url')}` is real.")
-            if row.get("first_measurement_timing"):
-                lines.append(f"    - Timing: {row['first_measurement_timing']}")
-            if row.get("log_preview_command"):
-                lines.append(f"    - Log preview: `{row['log_preview_command']}`")
+    lines.append("- Handoff rows:")
+    if not handoff.get("rows"):
+        lines.append("  - None.")
+    for row in handoff.get("rows") or []:
+        lines.append(f"  - `{row.get('sequence')}` `{row.get('post_id')}` {row.get('platform')} - collect `{', '.join(row.get('fields_to_collect') or [])}` {row.get('first_measurement_due_after_hours')}h after `{row.get('public_url')}` is real.")
+        if row.get("first_measurement_timing"):
+            lines.append(f"    - Timing: {row['first_measurement_timing']}")
+        if row.get("log_preview_command"):
+            lines.append(f"    - Log preview: `{row['log_preview_command']}`")
     if handoff.get("completion_evidence"):
         lines.append("- Completion evidence:")
         for item in handoff["completion_evidence"]:

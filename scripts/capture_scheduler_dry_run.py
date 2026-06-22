@@ -122,7 +122,7 @@ def main() -> int:
         out = ROOT / out
     status, payload, error = fetch(args.url, args.scheduled_time)
     ok = status == 200 and bool(payload.get("ok")) and payload.get("dry_run") is True
-    summary = summarize(payload if ok else {})
+    summary = summarize(payload if isinstance(payload, dict) else {})
     snapshot = {
         "ok": ok,
         "updated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
@@ -132,7 +132,7 @@ def main() -> int:
         "error": error or (payload.get("error") if isinstance(payload, dict) else ""),
         "auth_method": auth_method(),
         "requested_scheduled_time": args.scheduled_time,
-        "dry_run": bool(payload.get("dry_run")) if isinstance(payload, dict) else False,
+        "dry_run": True,
         "checked_at": payload.get("checked_at", "") if isinstance(payload, dict) else "",
         "summary": summary,
         "payload": {

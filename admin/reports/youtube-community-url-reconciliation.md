@@ -1,12 +1,12 @@
 # YouTube Community URL Reconciliation - Lily Roo
 
-Generated: 2026-06-22T21:14:41.329764Z
+Generated: 2026-06-22T23:43:01.762761Z
 
 ## Summary
 - Status: **waiting_for_public_posts**
 - Public posts found: **0**
 - Matches ready: **0**
-- Waiting: **3**
+- Waiting: **0**
 - Apply command: `not available`
 - Next action: Post the manual YouTube Community cards, then rerun this reconciliation.
 
@@ -14,9 +14,6 @@ Generated: 2026-06-22T21:14:41.329764Z
 - No confident public URL matches yet.
 
 ## Waiting
-- `FP-AUTO-261`: waiting_for_public_match (no_public_posts_found, 0)
-- `FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY`: waiting_for_public_match (no_public_posts_found, 0)
-- `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY`: waiting_for_public_match (no_public_posts_found, 0)
 
 ## Guardrails
 - Dry run only unless --apply is provided.

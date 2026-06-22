@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-06-22T21:14:41.983787Z",
+  "generated_at": "2026-06-22T23:51:49.268067Z",
   "safe_mode": true,
   "summary": {
     "step_count": 5,
     "ready_for_human_review_count": 0,
-    "blocked_or_warning_count": 4,
-    "total_projected_resolution_units": 10,
-    "current_step_id": "unlock-manual-distribution",
+    "blocked_or_warning_count": 3,
+    "total_projected_resolution_units": 7,
+    "current_step_id": "unlock-tiktok-platform-repair",
     "current_gate_state": "blocked_until_input",
-    "open_blocker_count": 11
+    "open_blocker_count": 8
   },
   "operator_contract": {
     "review_only": true,
@@ -19,18 +19,18 @@
     "rule": "Run preview commands first; run apply commands only after the named human, platform, URL, secret, or metric input is complete."
   },
   "current_next_actions": [
-    "Next operational action: Post YouTube Community manual cards",
-    "First handoff step: Post manual distribution rows",
+    "Next operational action: Fix Instagram executor — python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+    "First handoff step: Fill and import manual metric worksheet — python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
     "30-day growth goal: Publish or approve the next platform-native rows, then refresh manual/public metrics to rank formats by results.",
-    "Resolve manual distribution gate: 3 approved YouTube Community row(s) need manual posting and public URL logging; open https://www.youtube.com/@lilyroo.artist/community. Use admin/reports/manual-posting-clipboard.md.",
-    "Publish runway: 3 approved manual row(s) are ready to post and log from data/experiment_publish_runway.json.",
+    "Current unlock gate: Repair TikTok executor (blocked_until_input); 0 ready, 3 blocked/warning; preview python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN; see data/promo_unlock_sequence.json.",
+    "Review handoff preview health: 3 missing input; see data/human_handoff_resolution_preview.json.",
     "Refresh manual metrics: 6 worksheet row(s) still need new_value entries (blocked_until_new_values_filled); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values.",
     "Collect experiment results: 5 post-result field(s) need new_value plus evidence_note; use admin/reports/experiment-result-clipboard.md; first priority: measure FP-AUTO-260 on Facebook. Direct preview template: python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run. Direct apply template after review: python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin. Then preview import with python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run after filling data/experiment_result_entry_wide_template.csv.",
-    "Re-check checked-pending store links: 7 music site snapshot(s) still have no public URL; next recommended re-check after 2026-06-23T21:14:34.487009+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 then.",
-    "Current unlock gate: Post manual YouTube Community rows (blocked_until_input); 0 ready, 4 blocked/warning; preview python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL'; see data/promo_unlock_sequence.json.",
-    "Review handoff preview health: 3 missing input; see data/human_handoff_resolution_preview.json.",
+    "Re-check checked-pending store links: 7 music site snapshot(s) still have no public URL; next recommended re-check after 2026-06-23T23:42:54.523197+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 then.",
     "1 executor records are blocked by approval.",
-    "5 executor records need platform repair before they can publish."
+    "5 executor records need platform repair before they can publish.",
+    "Increase weekly subscriber acquisition before the channel can reach 1,000 subscribers within a year.",
+    "Review approval blockers for 1 queued executor records."
   ],
   "steps": [
     {
@@ -60,11 +60,11 @@
     {
       "order": 2,
       "id": "unlock-manual-distribution",
-      "phase": "Post manual YouTube Community rows",
+      "phase": "Review and post manual YouTube Community rows",
       "owner": "tod",
-      "gate_state": "blocked_until_input",
-      "reason": "Waiting for public_post_url before this clear gate can produce completion evidence.",
-      "blockers_resolved": 3,
+      "gate_state": "clear",
+      "reason": "No action is needed for this gate.",
+      "blockers_resolved": 0,
       "blocked_by": [
         "FP-PLAN-TWELVE-DOLLARS-TIKTOK"
       ],
@@ -73,24 +73,12 @@
         "Published_Log.csv can be updated after public URLs exist."
       ],
       "source_path": "data/manual_distribution_packet.json",
-      "preview_status": "skipped",
-      "preview_task_ids": [
-        "manual-distribution-FP-AUTO-261",
-        "manual-distribution-FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-        "manual-distribution-FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
-      ],
-      "input_needed": "public_post_url",
-      "completion_evidence": "data/published_log_reconciliation.json should stay waiting for real public URLs until the postable manual rows are published and logged.",
+      "preview_status": "",
+      "preview_task_ids": [],
+      "input_needed": "",
+      "completion_evidence": "",
       "guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review.",
-      "commands": [
-        {
-          "step": "preview",
-          "command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL'",
-          "safe_to_run": true,
-          "status": "skipped",
-          "returncodes": []
-        }
-      ],
+      "commands": [],
       "next_after_apply": ""
     },
     {
@@ -152,14 +140,14 @@
       "commands": [
         {
           "step": "preview",
-          "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24",
+          "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+08:00' --spacing-hours 24",
           "safe_to_run": true,
           "status": "not_previewed",
           "returncodes": []
         },
         {
           "step": "apply_after_review",
-          "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+          "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
           "safe_to_run": false,
           "requires": "Human review, required input, or external platform repair must be complete first."
         }

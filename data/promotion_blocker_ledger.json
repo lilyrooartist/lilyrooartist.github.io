@@ -1,24 +1,22 @@
 {
-  "generated_at": "2026-06-22T21:14:41.714356Z",
+  "generated_at": "2026-06-22T23:43:02.053536Z",
   "safe_mode": true,
   "summary": {
-    "open_blocker_count": 11,
+    "open_blocker_count": 8,
     "urgent_count": 6,
     "owner_counts": {
       "external_platform": 4,
-      "tod": 7
+      "tod": 4
     },
     "category_counts": {
       "approval": 1,
-      "manual_distribution": 3,
       "manual_metrics": 2,
       "platform_repair": 5
     },
     "status_counts": {
       "blocked": 5,
       "blocked_by_review_checks": 1,
-      "needs_values": 2,
-      "ready_for_manual_post": 3
+      "needs_values": 2
     },
     "next_resolution_projection": {
       "kind": "checked_scheduled_approval_batch",
@@ -57,10 +55,10 @@
       },
       {
         "id": "unlock-manual-distribution",
-        "phase": "Post manual YouTube Community rows",
+        "phase": "Review and post manual YouTube Community rows",
         "status": "clear",
         "owner": "tod",
-        "blockers_resolved": 3,
+        "blockers_resolved": 0,
         "unlocks": [
           "Manual YouTube Community promotion can publish without waiting for broken auto executors.",
           "Published_Log.csv can be updated after public URLs exist."
@@ -103,8 +101,8 @@
           "Approved past-due queue rows get a fresh schedule after executor blockers clear."
         ],
         "blocked_by": [],
-        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24",
-        "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+08:00' --spacing-hours 24",
+        "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
         "source_path": "data/backlog_reschedule_preview.json"
       },
       {
@@ -284,63 +282,6 @@
           "local_secret_source_missing:IG_BUSINESS_ACCOUNT_ID"
         ]
       }
-    },
-    {
-      "id": "manual-FP-AUTO-261",
-      "blocker_id": "manual-FP-AUTO-261",
-      "title": "Manually post YouTube Community copy",
-      "category": "manual_distribution",
-      "owner": "tod",
-      "urgency": "medium",
-      "status": "ready_for_manual_post",
-      "platform": "YouTube Community",
-      "release": "I Learned It All in Fifteen Seconds",
-      "evidence": "FP-AUTO-261 is packaged for manual distribution.",
-      "next_step": "Post manually, then log the public URL so admin status can stop treating the row as pending.",
-      "preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL'",
-      "apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL' --apply --refresh-admin",
-      "source_path": "data/manual_distribution_packet.json",
-      "external_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
-      "guardrail": "Manual posting happens outside this repo; only log the URL after the post is live.",
-      "impact": {}
-    },
-    {
-      "id": "manual-FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
-      "blocker_id": "manual-FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
-      "title": "Manually post YouTube Community copy",
-      "category": "manual_distribution",
-      "owner": "tod",
-      "urgency": "medium",
-      "status": "ready_for_manual_post",
-      "platform": "YouTube Community",
-      "release": "Twelve Dollars",
-      "evidence": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY is packaged for manual distribution.",
-      "next_step": "Post manually, then log the public URL so admin status can stop treating the row as pending.",
-      "preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url 'PUBLIC_URL'",
-      "apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url 'PUBLIC_URL' --apply --refresh-admin",
-      "source_path": "data/manual_distribution_packet.json",
-      "external_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
-      "guardrail": "Manual posting happens outside this repo; only log the URL after the post is live.",
-      "impact": {}
-    },
-    {
-      "id": "manual-FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-      "blocker_id": "manual-FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-      "title": "Manually post YouTube Community copy",
-      "category": "manual_distribution",
-      "owner": "tod",
-      "urgency": "medium",
-      "status": "ready_for_manual_post",
-      "platform": "YouTube Community",
-      "release": "Analog Myth",
-      "evidence": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY is packaged for manual distribution.",
-      "next_step": "Post manually, then log the public URL so admin status can stop treating the row as pending.",
-      "preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url 'PUBLIC_URL'",
-      "apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url 'PUBLIC_URL' --apply --refresh-admin",
-      "source_path": "data/manual_distribution_packet.json",
-      "external_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
-      "guardrail": "Manual posting happens outside this repo; only log the URL after the post is live.",
-      "impact": {}
     },
     {
       "id": "metrics-priority-2",

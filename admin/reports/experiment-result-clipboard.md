@@ -1,13 +1,13 @@
 # Experiment Result Clipboard - Lily Roo
 
-Generated: 2026-06-22T21:14:42.228060Z
+Generated: 2026-06-22T23:51:48.858942Z
 
 ## Summary
 - Status: **needs_values**
 - Metric cards: **3**
 - Missing public URLs: **13**
 - Measurement priorities: **12**
-- Post-log handoff rows: **3**
+- Post-log handoff rows: **0**
 - Pending result fields: **5**
 - Ready to import: **0**
 - Wide rows ready to import: **0**
@@ -114,30 +114,18 @@ Generated: 2026-06-22T21:14:42.228060Z
 - **Collect metrics** `FP-AUTO-262` X / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 3 logged post(s), 8 missing URL(s) in this format.
   - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-262 --source-row 17 --subs-delta VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
   - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-262 --source-row 17 --subs-delta VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
-- **Post and log public URL** `FP-AUTO-261` YouTube Community / YouTube Community archive/playlist CTA: Postable now in the Manual Posting Clipboard; publish it and log the public URL so metrics can start. 0 logged post(s), 3 missing URL(s) in this format.
-  - Paste file: `data/manual-posting-cards/fp-auto-261.txt`
-  - Community surface: https://www.youtube.com/@lilyroo.artist/community
-  - Log preview after posting: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL'`
-  - Log apply after posting: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL' --apply --refresh-admin`
-- **Post and log public URL** `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY` YouTube Community / YouTube Community archive/playlist CTA: Postable now in the Manual Posting Clipboard; publish it and log the public URL so metrics can start. 0 logged post(s), 3 missing URL(s) in this format.
-  - Paste file: `data/manual-posting-cards/fp-plan-analog-myth-youtube-community.txt`
-  - Community surface: https://www.youtube.com/@lilyroo.artist/community
-  - Log preview after posting: `python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url 'PUBLIC_URL'`
-  - Log apply after posting: `python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url 'PUBLIC_URL' --apply --refresh-admin`
-- **Post and log public URL** `FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY` YouTube Community / YouTube Community archive/playlist CTA: Postable now in the Manual Posting Clipboard; publish it and log the public URL so metrics can start. 0 logged post(s), 3 missing URL(s) in this format.
-  - Paste file: `data/manual-posting-cards/fp-plan-twelve-dollars-youtube-community.txt`
-  - Community surface: https://www.youtube.com/@lilyroo.artist/community
-  - Log preview after posting: `python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url 'PUBLIC_URL'`
-  - Log apply after posting: `python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url 'PUBLIC_URL' --apply --refresh-admin`
 - **Log public URL** `FP-PLAN-TWELVE-DOLLARS-FACEBOOK` Facebook / Release-art image + story hook: Cannot collect metrics until the public URL is logged. 3 logged post(s), 8 missing URL(s) in this format.
 - **Log public URL** `FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK` Facebook / Release-art image + story hook: Cannot collect metrics until the public URL is logged. 3 logged post(s), 8 missing URL(s) in this format.
 - **Log public URL** `FP-PLAN-TWELVE-DOLLARS-X` X / Release-art image + story hook: Cannot collect metrics until the public URL is logged. 3 logged post(s), 8 missing URL(s) in this format.
 - **Log public URL** `FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK` X / Release-art image + story hook: Cannot collect metrics until the public URL is logged. 3 logged post(s), 8 missing URL(s) in this format.
+- **Log public URL** `FP-AUTO-261` YouTube / YouTube Community archive/playlist CTA: Cannot collect metrics until the public URL is logged. 0 logged post(s), 3 missing URL(s) in this format.
+- **Log public URL** `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY` YouTube / YouTube Community archive/playlist CTA: Cannot collect metrics until the public URL is logged. 0 logged post(s), 3 missing URL(s) in this format.
+- **Log public URL** `FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY` YouTube / YouTube Community archive/playlist CTA: Cannot collect metrics until the public URL is logged. 0 logged post(s), 3 missing URL(s) in this format.
 - **Clear platform blocker** `FP-AUTO-265` Facebook / Release-art image + story hook: Platform work is blocked; clear the platform repair gate before URL logging can produce metrics. 3 logged post(s), 8 missing URL(s) in this format.
 - **Clear platform blocker** `FP-AUTO-264` TikTok / Short video clip + platform-native CTA: Platform work is blocked; clear the platform repair gate before URL logging can produce metrics. 0 logged post(s), 2 missing URL(s) in this format.
 
 ## Post-Log Measurement Handoff
-- Status: **waiting_for_public_urls**
+- Status: **clear**
 - Source session: YouTube Community manual posting batch
 - Manual posting report: `admin/reports/manual-posting-clipboard.md`
 - Wide entry CSV after URL logging: `data/experiment_result_entry_wide_template.csv`
@@ -151,15 +139,7 @@ Generated: 2026-06-22T21:14:42.228060Z
   - Fill one wide entry CSV row per logged Community post.
   - Run the wide result import preview before applying metrics.
 - Handoff rows:
-  - `1` `FP-AUTO-261` YouTube Community - collect `views, likes, comments, shares, saves, subs_delta` 24h after `PUBLIC_URL` is real.
-    - Timing: Collect first visible metrics 24 hours after the public URL is logged.
-    - Log preview: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL'`
-  - `2` `FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY` YouTube Community - collect `views, likes, comments, shares, saves, subs_delta` 24h after `PUBLIC_URL` is real.
-    - Timing: Collect first visible metrics 24 hours after the public URL is logged.
-    - Log preview: `python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url 'PUBLIC_URL'`
-  - `3` `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY` YouTube Community - collect `views, likes, comments, shares, saves, subs_delta` 24h after `PUBLIC_URL` is real.
-    - Timing: Collect first visible metrics 24 hours after the public URL is logged.
-    - Log preview: `python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url 'PUBLIC_URL'`
+  - None.
 - Completion evidence:
   - Published_Log.csv contains the manual-session post URL.
   - data/experiment_result_clipboard.json shows the post as a metric card instead of a missing-public-url card.
@@ -175,9 +155,9 @@ Generated: 2026-06-22T21:14:42.228060Z
 - `FP-PLAN-TWELVE-DOLLARS-FACEBOOK` Facebook / Release-art image + story hook: Publish or log the public URL before result metrics can be collected.
 - `FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK` X / Release-art image + story hook: Publish or log the public URL before result metrics can be collected.
 - `FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK` Facebook / Release-art image + story hook: Publish or log the public URL before result metrics can be collected.
-- `FP-AUTO-261` YouTube Community / YouTube Community archive/playlist CTA: Publish or log the public URL before result metrics can be collected.
-- `FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY` YouTube Community / YouTube Community archive/playlist CTA: Publish or log the public URL before result metrics can be collected.
-- `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY` YouTube Community / YouTube Community archive/playlist CTA: Publish or log the public URL before result metrics can be collected.
+- `FP-AUTO-261` YouTube / YouTube Community archive/playlist CTA: Publish or log the public URL before result metrics can be collected.
+- `FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY` YouTube / YouTube Community archive/playlist CTA: Publish or log the public URL before result metrics can be collected.
+- `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY` YouTube / YouTube Community archive/playlist CTA: Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-264` TikTok / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.
 - `FP-PLAN-TWELVE-DOLLARS-TIKTOK` TikTok / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.
 

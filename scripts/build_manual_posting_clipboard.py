@@ -714,10 +714,12 @@ def build_markdown(payload: dict) -> str:
                 )
                 lines.append(f"    - Next: {row.get('next_action')}")
     next_post = summary.get("next_post_now") or {}
+    lines.extend([
+        "",
+        "## Post Now",
+    ])
     if next_post:
         lines.extend([
-            "",
-            "## Post Now",
             f"- First card: `{next_post.get('id')}` ({next_post.get('release')})",
             f"- Surface: {next_post.get('surface_url') or 'not set'}",
             f"- Copy source: `{next_post.get('copy_source') or 'not available'}`",
@@ -731,6 +733,8 @@ def build_markdown(payload: dict) -> str:
             lines.append("- Completion evidence:")
             for item in next_post["completion_evidence"]:
                 lines.append(f"  - {item}")
+    else:
+        lines.append("- No manual post is waiting; API automation has replaced the manual posting lane.")
     if runbook:
         lines.extend([
             "",
@@ -806,12 +810,21 @@ def build_markdown(payload: dict) -> str:
         lines.append("- Session rows:")
         for row in session["rows"]:
             lines.append(f"  - `{row.get('sequence')}` `{row.get('id')}` `{row.get('status')}` first measurement `{row.get('first_measurement_due_after_hours')}h` copy `{row.get('copy_source')}` asset `{row.get('asset_source')}`")
+    else:
+        lines.append("- Session rows: none; API automation has replaced the manual posting lane.")
     lines.extend([
         "",
         "## Cards",
     ])
     if not payload["post_cards"]:
         lines.append("- No approved manual posts are currently waiting.")
+        lines.extend([
+            "- Posting bundle: not applicable while the manual lane is empty.",
+            "- Paste text: not applicable while the manual lane is empty.",
+            "- Log preview after posting: not applicable while the manual lane is empty.",
+            "- Bundle result trigger: not applicable while the manual lane is empty.",
+            "- After posting checklist: no manual posting checklist is active.",
+        ])
     for index, card in enumerate(payload["post_cards"], start=1):
         lines.extend([
             f"### {index}. {card['release']} - {card['platform']}",

@@ -1080,7 +1080,10 @@ def validate_generated_outputs(failures):
         metric_task_field_count = sum(int((task.get("impact") or {}).get("field_count") or 0) for task in tasks if task.get("phase") == "Manual metrics")
         backlog_packet_for_handoff = json.loads(BACKLOG_RESCHEDULE_PREVIEW.read_text(encoding="utf-8")) if BACKLOG_RESCHEDULE_PREVIEW.exists() else {}
         backlog_count_for_handoff = int(((backlog_packet_for_handoff.get("summary") or {}).get("approved_backlog_count")) or 0)
-        required_phases = {"Manual distribution", "Manual metrics", "Platform setup"}
+        manual_distribution_required = any(task.get("phase") == "Manual distribution" for task in tasks)
+        required_phases = {"Manual metrics", "Platform setup"}
+        if manual_distribution_required:
+            required_phases.add("Manual distribution")
         if backlog_count_for_handoff:
             required_phases.add("Backlog recovery")
         if (
@@ -1093,7 +1096,10 @@ def validate_generated_outputs(failures):
             and resolution_task_ids == [task.get("id") for task in tasks]
             and all(row.get("input_needed") and row.get("worksheet_reference") and row.get("guardrail") for row in resolution_rows)
             and any(row.get("input_needed") == "private_metric_values" and "manual_metric_entry_template.csv" in row.get("worksheet_reference", "") for row in resolution_rows)
-            and any(row.get("input_needed") in {"manual_post_review_and_public_url", "public_post_url"} and "manual_distribution_url_template.csv" in row.get("worksheet_reference", "") for row in resolution_rows)
+            and (
+                not manual_distribution_required
+                or any(row.get("input_needed") in {"manual_post_review_and_public_url", "public_post_url"} and "manual_distribution_url_template.csv" in row.get("worksheet_reference", "") for row in resolution_rows)
+            )
             and any(row.get("input_needed") == "local_secret_presence_and_public_posting_approval" and "tiktok_secret_handoff_template.env" in row.get("worksheet_reference", "") for row in resolution_rows)
             and any(row.get("input_needed") == "local_secret_presence_and_public_posting_approval" and "public posting approval is only needed for direct public posting" in row.get("worksheet_reference", "") for row in resolution_rows)
             and all("TIKTOK_CLIENT_KEY=" not in row.get("worksheet_reference", "") and "PUBLIC_URL" not in row.get("worksheet_reference", "") for row in resolution_rows)
@@ -1151,23 +1157,34 @@ def validate_generated_outputs(failures):
                     not scheduled_checked_change_count_for_handoff
                     and first_ready_step.get("id") == "manual-posting-review"
                 )
+                or (
+                    not scheduled_checked_change_count_for_handoff
+                    and not manual_distribution_required
+                    and first_ready_step.get("id") == "manual-metric-worksheet"
+                )
             )
-            and manual_posting_step
+            and (manual_posting_step or not manual_distribution_required)
             and (
+                not manual_distribution_required
+                or
                 not manual_posting_has_cards
                 or manual_posting_step.get("label") == "Post manual distribution rows"
             )
-            and manual_posting_step.get("ready_ids") == (manual_approval_docket.get("ready_ids") or [])
-            and manual_posting_step.get("blocked_ids") == (manual_approval_docket.get("blocked_ids") or [])
+            and (not manual_distribution_required or manual_posting_step.get("ready_ids") == (manual_approval_docket.get("ready_ids") or []))
+            and (not manual_distribution_required or manual_posting_step.get("blocked_ids") == (manual_approval_docket.get("blocked_ids") or []))
             and (
+                not manual_distribution_required
+                or
                 manual_posting_has_cards
                 or manual_posting_step.get("preview_command") == (manual_approval_docket.get("preview_command") or "")
             )
             and (
+                not manual_distribution_required
+                or
                 manual_posting_has_cards
                 or manual_posting_step.get("apply_command") == (manual_approval_docket.get("apply_command") or "")
             )
-            and manual_approval_docket.get("guardrail") in manual_posting_step.get("guardrail", "")
+            and (not manual_distribution_required or manual_approval_docket.get("guardrail") in manual_posting_step.get("guardrail", ""))
             and any(item.get("id") == "manual-metric-worksheet" and item.get("field_count") == metric_task_field_count and "--from-csv --dry-run" in item.get("preview_command", "") and item.get("metric_completion_manifest") and item.get("completion_checklist") and item.get("completion_guardrails") for item in docket_checklist)
             and (
                 not backlog_count_for_handoff
@@ -1244,6 +1261,11 @@ def validate_generated_outputs(failures):
             and (
                 any(item.get("preview_status") in {"preview_ok", "preview_ok_with_warning"} and item.get("phase") in {"Approval", "Manual distribution"} for item in previews)
                 or any(item.get("phase") == "Manual distribution" and item.get("preview_status") == "skipped" and item.get("input_needed") == "public_post_url" for item in previews)
+                or (
+                    not manual_distribution_required
+                    and any(item.get("preview_status") == "input_missing" and item.get("phase") == "Platform setup" for item in previews)
+                    and any(item.get("preview_status") == "input_missing" and item.get("phase") == "Manual metrics" for item in previews)
+                )
             )
             and (
                 backlog_preview_count == 0
@@ -1273,7 +1295,7 @@ def validate_generated_outputs(failures):
         if (
             unlock_sequence.get("safe_mode") is True
             and unlock_summary.get("step_count") == len(unlock_steps) == len(ledger_roadmap)
-            and unlock_summary.get("current_step_id") in {"unlock-checked-scheduled-approval", "unlock-manual-distribution"}
+            and unlock_summary.get("current_step_id") in {"unlock-checked-scheduled-approval", "unlock-manual-distribution", "unlock-tiktok-platform-repair", "unlock-manual-metrics"}
             and unlock_summary.get("current_gate_state") in {"ready_for_human_review", "completed", "blocked", "blocked_until_input"}
             and unlock_summary.get("open_blocker_count") == ledger_open_count
             and [step.get("id") for step in unlock_steps] == [item.get("id") for item in ledger_roadmap]
@@ -2197,7 +2219,7 @@ def validate_generated_outputs(failures):
             and any("24 hours" in item for item in handoff.get("handoff_sequence") or [])
             and any("Published_Log.csv" in item for item in handoff.get("completion_evidence") or [])
             and "real public URL" in (handoff.get("guardrail") or "")
-            and any(item.get("action") == "post_and_log_public_url" for item in priority_cards)
+            and (not (manual_session.get("rows") or []) or any(item.get("action") == "post_and_log_public_url" for item in priority_cards))
             and any(item.get("action") == "clear_platform_blocker" for item in priority_cards)
             and any("does not fetch private analytics" in item for item in clipboard.get("guardrails") or [])
         ):
@@ -2736,7 +2758,11 @@ def validate_generated_outputs(failures):
             and all("needed_measured_posts" in candidate and "decision_note" in candidate and "unmeasured_published_count" in candidate and "mapped_active_post_ids" in candidate for candidate in top_candidates)
             and all((candidate.get("decision_unblock") or {}).get("next_action") and "measurement_ready_count" in (candidate.get("decision_unblock") or {}) and "post_and_log_count" in (candidate.get("decision_unblock") or {}) and "blocked_count" in (candidate.get("decision_unblock") or {}) and (candidate.get("decision_unblock") or {}).get("report_path") for candidate in top_candidates)
             and any((candidate.get("decision_unblock") or {}).get("measurement_ready_count") for candidate in top_candidates)
-            and any((candidate.get("decision_unblock") or {}).get("post_and_log_count") for candidate in top_candidates)
+            and any(
+                (candidate.get("decision_unblock") or {}).get("post_and_log_count")
+                or (candidate.get("decision_unblock") or {}).get("log_url_count")
+                for candidate in top_candidates
+            )
             and winner_readiness.get("winner_count_target") == 3
             and winner_readiness.get("minimum_measured_posts_per_format") == 2
             and winner_readiness.get("status") in {"needs_more_result_evidence", "ready_to_name_winners"}
@@ -2749,7 +2775,19 @@ def validate_generated_outputs(failures):
             and {step.get("format") for step in ladder_steps} == top_candidate_formats
             and all(step.get("rank") and step.get("status") and step.get("next_action") and step.get("report_path") and "measured_post_count" in step and "needed_measured_posts" in step for step in ladder_steps)
             and any(step.get("status") == "winner_ready" for step in ladder_steps)
-            and any(step.get("first_action") == "post_and_log_public_url" and step.get("first_post_id") == "FP-AUTO-261" and "log_manual_distribution.py" in (step.get("preview_command") or "") for step in ladder_steps)
+            and any(
+                (
+                    step.get("first_action") == "post_and_log_public_url"
+                    and step.get("first_post_id") == "FP-AUTO-261"
+                    and "log_manual_distribution.py" in (step.get("preview_command") or "")
+                )
+                or (
+                    step.get("first_action") == "log_public_url"
+                    and step.get("first_post_id") == "FP-AUTO-261"
+                    and step.get("first_platform") == "YouTube"
+                )
+                for step in ladder_steps
+            )
             and any(step.get("first_action") == "clear_platform_blocker" and step.get("first_platform") == "TikTok" for step in ladder_steps)
             and "scheduled, postable, or blocked rows are not format evidence" in (format_ladder.get("guardrail") or "")
             and next_format_runbook.get("status") in {"needs_more_result_evidence", "ready_to_name_winners", "clear"}

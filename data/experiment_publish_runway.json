@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T21:14:42.274537Z",
+  "generated_at": "2026-06-22T23:51:48.892951Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -10,16 +10,16 @@
   },
   "summary": {
     "review_ready_manual_count": 0,
-    "postable_now_count": 3,
-    "public_url_log_needed_count": 3,
-    "waiting_public_url_count": 3,
+    "postable_now_count": 0,
+    "public_url_log_needed_count": 0,
+    "waiting_public_url_count": 0,
     "pending_result_field_count": 5,
     "winner_ready_candidate_count": 1,
     "winner_count_target": 3,
     "blocked_platform_count": 5,
     "approved_backlog_count": 0,
     "blocked_backlog_count": 0,
-    "next_publish_action": "Post manual YouTube Community cards, copy real public URLs, then log them."
+    "next_publish_action": "Collect experiment results when public URLs and measurement values are available."
   },
   "manual_review_rows": [],
   "blocked_platform_rows": [
@@ -98,12 +98,8 @@
     },
     {
       "id": "post_manual_youtube_community",
-      "status": "postable_now",
-      "post_ids": [
-        "FP-AUTO-261",
-        "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
-        "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY"
-      ],
+      "status": "waiting_for_review_or_queue",
+      "post_ids": [],
       "surface": "YouTube Studio Community",
       "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
       "guardrail": "Post manually using the reviewed copy and local asset evidence; do not log placeholder URLs.",
@@ -111,12 +107,8 @@
     },
     {
       "id": "log_public_urls",
-      "status": "waiting_for_manual_post",
-      "post_ids": [
-        "FP-AUTO-261",
-        "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
-        "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY"
-      ],
+      "status": "waiting_for_public_urls",
+      "post_ids": [],
       "preview_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv",
       "apply_after_review_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --apply --refresh-admin",
       "guardrail": "Every CSV row must contain a real public_url before apply.",

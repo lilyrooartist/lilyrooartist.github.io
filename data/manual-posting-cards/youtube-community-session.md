@@ -1,6 +1,6 @@
 # YouTube Community Manual Posting Session
 
-Generated: 2026-06-22T21:14:41.385722Z
+Generated: 2026-06-22T23:51:48.666485Z
 Surface: https://www.youtube.com/@lilyroo.artist/community
 URL worksheet: data/manual_distribution_url_template.csv
 Partial apply: python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --allow-partial --apply --refresh-admin
@@ -13,78 +13,34 @@ Partial apply: python3 scripts/log_manual_distribution.py --from-csv data/manual
 - After logging, collect the first 24-hour metrics from the result handoff report.
 
 ## First Post Runbook
-- Status: ready_to_post_and_log
-- Post: FP-AUTO-261
-- Copy file: data/manual-posting-cards/fp-auto-261.txt
-- Asset: assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg
-- URL worksheet: data/manual_distribution_url_template.csv
-- Worksheet update: Paste the real public URL into data/manual_distribution_url_template.csv public_url for FP-AUTO-261.
-- Preview: python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL'
-- Apply: python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL' --apply --refresh-admin
-- Partial apply: python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --allow-partial --apply --refresh-admin
-- Measurement trigger: after real public URL is logged
+- Status: clear
+- Post: not available
+- Copy file: not available
+- Asset: not available
+- URL worksheet: not available
+- Worksheet update: not available
+- Preview: not available
+- Apply: not available
+- Partial apply: not available
+- Measurement trigger: not available
 
 ## First URL Acceleration
-- Status: ready_after_first_public_url
-- First post: FP-AUTO-261
-- Why: Logging the first public URL immediately lets that post enter the 24-hour result-collection queue without waiting for the full batch.
-- Preview: python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL'
-- Partial apply: python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --allow-partial --apply --refresh-admin
-- Measurement report: admin/reports/experiment-result-clipboard.md
+- Status: clear
+- First post: not available
+- Why: not available
+- Preview: not available
+- Partial apply: not available
+- Measurement report: not available
 
 ## Tracking Lifecycle
 - Status: active
-- Posted: 0/3
-- Public URLs logged: 0/3
-- Results recorded: 0/3
-- Primary gap: manual_posting
-- FP-AUTO-261: waiting_for_manual_post -> Publish the Community card, copy the real public post URL, then log it.
-- FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY: waiting_for_manual_post -> Publish the Community card, copy the real public post URL, then log it.
-- FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY: waiting_for_manual_post -> Publish the Community card, copy the real public post URL, then log it.
+- Posted: 0/0
+- Public URLs logged: 0/0
+- Results recorded: 0/0
+- Primary gap: complete
 
 ## Posts
-### 1. FP-AUTO-261 - I Learned It All in Fifteen Seconds
-- Copy file: data/manual-posting-cards/fp-auto-261.txt
-- Asset: assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg
-- Preview after public URL exists: python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL'
-- Apply after preview passes: python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL' --apply --refresh-admin
-
-```text
-New transmission: I Learned It All in Fifteen Seconds is live. Remastered cover art, same suspicious amount of feeling.
-
-Stream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube: https://www.youtube.com/@lilyroo.artist | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4
-```
-
-Public URL:
-
-### 2. FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY - Twelve Dollars
-- Copy file: data/manual-posting-cards/fp-plan-twelve-dollars-youtube-community.txt
-- Asset: assets/albums/twelve-dollars/art/04-twelve-dollars.jpg
-- Preview after public URL exists: python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url 'PUBLIC_URL'
-- Apply after preview passes: python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url 'PUBLIC_URL' --apply --refresh-admin
-
-```text
-Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.
-
-Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
-```
-
-Public URL:
-
-### 3. FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY - Analog Myth
-- Copy file: data/manual-posting-cards/fp-plan-analog-myth-youtube-community.txt
-- Asset: assets/albums/analog-myth/art/03-analog-myth.jpg
-- Preview after public URL exists: python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url 'PUBLIC_URL'
-- Apply after preview passes: python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url 'PUBLIC_URL' --apply --refresh-admin
-
-```text
-Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.
-
-Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0
-```
-
-Public URL:
-
+- No manual posts are currently waiting.
 ## Completion Evidence
 - Each session row has a real public YouTube Community URL.
 - The URL worksheet has no remaining blank public_url cells for these IDs.

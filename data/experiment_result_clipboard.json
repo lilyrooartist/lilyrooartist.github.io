@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T21:14:42.228060Z",
+  "generated_at": "2026-06-22T23:51:48.858942Z",
   "safe_mode": true,
   "source": {
     "experiment_result_collection_packet": "data/experiment_result_collection_packet.json",
@@ -13,7 +13,7 @@
     "metric_card_count": 3,
     "missing_public_url_count": 13,
     "measurement_priority_count": 12,
-    "post_log_measurement_handoff_count": 3,
+    "post_log_measurement_handoff_count": 0,
     "pending_result_field_count": 5,
     "ready_to_import_count": 0,
     "wide_ready_to_import_count": 0,
@@ -293,7 +293,7 @@
     {
       "post_id": "FP-AUTO-261",
       "experiment_format": "YouTube Community archive/playlist CTA",
-      "platform": "YouTube Community",
+      "platform": "YouTube",
       "song": "I Learned It All in Fifteen Seconds",
       "status": "not_in_published_log",
       "next_action": "Publish or log the public URL before result metrics can be collected."
@@ -301,7 +301,7 @@
     {
       "post_id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
       "experiment_format": "YouTube Community archive/playlist CTA",
-      "platform": "YouTube Community",
+      "platform": "YouTube",
       "song": "Twelve Dollars",
       "status": "not_in_published_log",
       "next_action": "Publish or log the public URL before result metrics can be collected."
@@ -309,7 +309,7 @@
     {
       "post_id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
       "experiment_format": "YouTube Community archive/playlist CTA",
-      "platform": "YouTube Community",
+      "platform": "YouTube",
       "song": "Analog Myth",
       "status": "not_in_published_log",
       "next_action": "Publish or log the public URL before result metrics can be collected."
@@ -381,63 +381,6 @@
       "direct_preview_command_template": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-262 --source-row 17 --subs-delta VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run",
       "direct_apply_command_template": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-262 --source-row 17 --subs-delta VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin",
       "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 3 logged post(s), 8 missing URL(s) in this format."
-    },
-    {
-      "action": "post_and_log_public_url",
-      "priority": 2,
-      "post_id": "FP-AUTO-261",
-      "platform": "YouTube Community",
-      "song": "I Learned It All in Fifteen Seconds",
-      "experiment_format": "YouTube Community archive/playlist CTA",
-      "post_url": "",
-      "source_row": "",
-      "pending_fields": [],
-      "direct_preview_command_template": "",
-      "direct_apply_command_template": "",
-      "manual_posting_report": "admin/reports/manual-posting-clipboard.md",
-      "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
-      "paste_text_path": "data/manual-posting-cards/fp-auto-261.txt",
-      "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL'",
-      "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL' --apply --refresh-admin",
-      "reason": "Postable now in the Manual Posting Clipboard; publish it and log the public URL so metrics can start. 0 logged post(s), 3 missing URL(s) in this format."
-    },
-    {
-      "action": "post_and_log_public_url",
-      "priority": 2,
-      "post_id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-      "platform": "YouTube Community",
-      "song": "Analog Myth",
-      "experiment_format": "YouTube Community archive/playlist CTA",
-      "post_url": "",
-      "source_row": "",
-      "pending_fields": [],
-      "direct_preview_command_template": "",
-      "direct_apply_command_template": "",
-      "manual_posting_report": "admin/reports/manual-posting-clipboard.md",
-      "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
-      "paste_text_path": "data/manual-posting-cards/fp-plan-analog-myth-youtube-community.txt",
-      "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url 'PUBLIC_URL'",
-      "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url 'PUBLIC_URL' --apply --refresh-admin",
-      "reason": "Postable now in the Manual Posting Clipboard; publish it and log the public URL so metrics can start. 0 logged post(s), 3 missing URL(s) in this format."
-    },
-    {
-      "action": "post_and_log_public_url",
-      "priority": 2,
-      "post_id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
-      "platform": "YouTube Community",
-      "song": "Twelve Dollars",
-      "experiment_format": "YouTube Community archive/playlist CTA",
-      "post_url": "",
-      "source_row": "",
-      "pending_fields": [],
-      "direct_preview_command_template": "",
-      "direct_apply_command_template": "",
-      "manual_posting_report": "admin/reports/manual-posting-clipboard.md",
-      "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
-      "paste_text_path": "data/manual-posting-cards/fp-plan-twelve-dollars-youtube-community.txt",
-      "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url 'PUBLIC_URL'",
-      "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url 'PUBLIC_URL' --apply --refresh-admin",
-      "reason": "Postable now in the Manual Posting Clipboard; publish it and log the public URL so metrics can start. 0 logged post(s), 3 missing URL(s) in this format."
     },
     {
       "action": "log_public_url",
@@ -514,6 +457,63 @@
       "log_preview_command": "",
       "log_apply_command": "",
       "reason": "Cannot collect metrics until the public URL is logged. 3 logged post(s), 8 missing URL(s) in this format."
+    },
+    {
+      "action": "log_public_url",
+      "priority": 3,
+      "post_id": "FP-AUTO-261",
+      "platform": "YouTube",
+      "song": "I Learned It All in Fifteen Seconds",
+      "experiment_format": "YouTube Community archive/playlist CTA",
+      "post_url": "",
+      "source_row": "",
+      "pending_fields": [],
+      "direct_preview_command_template": "",
+      "direct_apply_command_template": "",
+      "manual_posting_report": "",
+      "public_community_url": "",
+      "paste_text_path": "",
+      "log_preview_command": "",
+      "log_apply_command": "",
+      "reason": "Cannot collect metrics until the public URL is logged. 0 logged post(s), 3 missing URL(s) in this format."
+    },
+    {
+      "action": "log_public_url",
+      "priority": 3,
+      "post_id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+      "platform": "YouTube",
+      "song": "Analog Myth",
+      "experiment_format": "YouTube Community archive/playlist CTA",
+      "post_url": "",
+      "source_row": "",
+      "pending_fields": [],
+      "direct_preview_command_template": "",
+      "direct_apply_command_template": "",
+      "manual_posting_report": "",
+      "public_community_url": "",
+      "paste_text_path": "",
+      "log_preview_command": "",
+      "log_apply_command": "",
+      "reason": "Cannot collect metrics until the public URL is logged. 0 logged post(s), 3 missing URL(s) in this format."
+    },
+    {
+      "action": "log_public_url",
+      "priority": 3,
+      "post_id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+      "platform": "YouTube",
+      "song": "Twelve Dollars",
+      "experiment_format": "YouTube Community archive/playlist CTA",
+      "post_url": "",
+      "source_row": "",
+      "pending_fields": [],
+      "direct_preview_command_template": "",
+      "direct_apply_command_template": "",
+      "manual_posting_report": "",
+      "public_community_url": "",
+      "paste_text_path": "",
+      "log_preview_command": "",
+      "log_apply_command": "",
+      "reason": "Cannot collect metrics until the public URL is logged. 0 logged post(s), 3 missing URL(s) in this format."
     },
     {
       "action": "clear_platform_blocker",
@@ -605,182 +605,18 @@
     "guardrail": "Do not guess metrics; leave unknown values blank and never apply without an evidence_note."
   },
   "post_log_measurement_handoff": {
-    "status": "waiting_for_public_urls",
+    "status": "clear",
     "source_session": "YouTube Community manual posting batch",
     "manual_posting_report": "admin/reports/manual-posting-clipboard.md",
     "entry_csv_path": "data/experiment_result_entry_template.csv",
     "wide_entry_csv_path": "data/experiment_result_entry_wide_template.csv",
     "field_count_per_post": 6,
     "first_measurement_due_after_hours": 24,
-    "handoff_row_count": 3,
-    "pending_post_ids": [
-      "FP-AUTO-261",
-      "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
-      "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY"
-    ],
+    "handoff_row_count": 0,
+    "pending_post_ids": [],
     "wide_import_preview_command": "python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run",
     "wide_import_apply_command": "",
-    "rows": [
-      {
-        "sequence": 1,
-        "post_id": "FP-AUTO-261",
-        "platform": "YouTube Community",
-        "song": "I Learned It All in Fifteen Seconds",
-        "experiment_format": "YouTube Community archive/playlist CTA",
-        "status": "waiting_for_public_url",
-        "public_url": "PUBLIC_URL",
-        "source_row": "after Published_Log.csv append",
-        "fields_to_collect": [
-          "views",
-          "likes",
-          "comments",
-          "shares",
-          "saves",
-          "subs_delta"
-        ],
-        "first_measurement_due_after_hours": 24,
-        "first_measurement_timing": "Collect first visible metrics 24 hours after the public URL is logged.",
-        "wide_entry_template": {
-          "experiment_format": "YouTube Community archive/playlist CTA",
-          "post_id": "FP-AUTO-261",
-          "platform": "YouTube Community",
-          "song": "I Learned It All in Fifteen Seconds",
-          "post_url": "PUBLIC_URL",
-          "published_date": "YYYY-MM-DD",
-          "source_row": "PUBLISHED_LOG_ROW",
-          "views": "",
-          "likes": "",
-          "comments": "",
-          "shares": "",
-          "saves": "",
-          "subs_delta": "",
-          "evidence_note": "YouTube Studio Community analytics YYYY-MM-DD"
-        },
-        "evidence_sources": [
-          {
-            "label": "Logged public post",
-            "url": "PUBLIC_URL",
-            "instruction": "Open the public post to confirm the URL and visible engagement before entering metrics."
-          },
-          {
-            "label": "YouTube Studio analytics",
-            "url": "https://studio.youtube.com/",
-            "instruction": "Open the matching Community post analytics and copy available public-performance values."
-          }
-        ],
-        "preview_after_logging": "python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run",
-        "apply_after_logging": "",
-        "manual_posting_report": "admin/reports/manual-posting-clipboard.md",
-        "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL'",
-        "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL' --apply --refresh-admin"
-      },
-      {
-        "sequence": 2,
-        "post_id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
-        "platform": "YouTube Community",
-        "song": "Twelve Dollars",
-        "experiment_format": "YouTube Community archive/playlist CTA",
-        "status": "waiting_for_public_url",
-        "public_url": "PUBLIC_URL",
-        "source_row": "after Published_Log.csv append",
-        "fields_to_collect": [
-          "views",
-          "likes",
-          "comments",
-          "shares",
-          "saves",
-          "subs_delta"
-        ],
-        "first_measurement_due_after_hours": 24,
-        "first_measurement_timing": "Collect first visible metrics 24 hours after the public URL is logged.",
-        "wide_entry_template": {
-          "experiment_format": "YouTube Community archive/playlist CTA",
-          "post_id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
-          "platform": "YouTube Community",
-          "song": "Twelve Dollars",
-          "post_url": "PUBLIC_URL",
-          "published_date": "YYYY-MM-DD",
-          "source_row": "PUBLISHED_LOG_ROW",
-          "views": "",
-          "likes": "",
-          "comments": "",
-          "shares": "",
-          "saves": "",
-          "subs_delta": "",
-          "evidence_note": "YouTube Studio Community analytics YYYY-MM-DD"
-        },
-        "evidence_sources": [
-          {
-            "label": "Logged public post",
-            "url": "PUBLIC_URL",
-            "instruction": "Open the public post to confirm the URL and visible engagement before entering metrics."
-          },
-          {
-            "label": "YouTube Studio analytics",
-            "url": "https://studio.youtube.com/",
-            "instruction": "Open the matching Community post analytics and copy available public-performance values."
-          }
-        ],
-        "preview_after_logging": "python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run",
-        "apply_after_logging": "",
-        "manual_posting_report": "admin/reports/manual-posting-clipboard.md",
-        "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url 'PUBLIC_URL'",
-        "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url 'PUBLIC_URL' --apply --refresh-admin"
-      },
-      {
-        "sequence": 3,
-        "post_id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-        "platform": "YouTube Community",
-        "song": "Analog Myth",
-        "experiment_format": "YouTube Community archive/playlist CTA",
-        "status": "waiting_for_public_url",
-        "public_url": "PUBLIC_URL",
-        "source_row": "after Published_Log.csv append",
-        "fields_to_collect": [
-          "views",
-          "likes",
-          "comments",
-          "shares",
-          "saves",
-          "subs_delta"
-        ],
-        "first_measurement_due_after_hours": 24,
-        "first_measurement_timing": "Collect first visible metrics 24 hours after the public URL is logged.",
-        "wide_entry_template": {
-          "experiment_format": "YouTube Community archive/playlist CTA",
-          "post_id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-          "platform": "YouTube Community",
-          "song": "Analog Myth",
-          "post_url": "PUBLIC_URL",
-          "published_date": "YYYY-MM-DD",
-          "source_row": "PUBLISHED_LOG_ROW",
-          "views": "",
-          "likes": "",
-          "comments": "",
-          "shares": "",
-          "saves": "",
-          "subs_delta": "",
-          "evidence_note": "YouTube Studio Community analytics YYYY-MM-DD"
-        },
-        "evidence_sources": [
-          {
-            "label": "Logged public post",
-            "url": "PUBLIC_URL",
-            "instruction": "Open the public post to confirm the URL and visible engagement before entering metrics."
-          },
-          {
-            "label": "YouTube Studio analytics",
-            "url": "https://studio.youtube.com/",
-            "instruction": "Open the matching Community post analytics and copy available public-performance values."
-          }
-        ],
-        "preview_after_logging": "python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run",
-        "apply_after_logging": "",
-        "manual_posting_report": "admin/reports/manual-posting-clipboard.md",
-        "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url 'PUBLIC_URL'",
-        "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url 'PUBLIC_URL' --apply --refresh-admin"
-      }
-    ],
+    "rows": [],
     "handoff_sequence": [
       "Post each manual-session card and log the real public URL.",
       "Refresh Admin so Published_Log.csv rows become experiment result cards.",

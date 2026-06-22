@@ -1,21 +1,20 @@
 {
-  "generated_at": "2026-06-22T21:14:41.936789Z",
+  "generated_at": "2026-06-22T23:51:49.231936Z",
   "safe_mode": true,
   "source": {
     "resolution_worksheet": "data/human_handoff_resolution_worksheet.csv",
     "human_handoff_packet": "data/human_handoff_packet.json"
   },
   "summary": {
-    "worksheet_row_count": 10,
-    "preview_count": 10,
+    "worksheet_row_count": 7,
+    "preview_count": 7,
     "executed_preview_count": 3,
-    "skipped_preview_count": 7,
+    "skipped_preview_count": 4,
     "status_counts": {
       "input_missing": 3,
-      "skipped": 7
+      "skipped": 4
     },
     "phase_counts": {
-      "Manual distribution": 3,
       "Manual metrics": 2,
       "Platform setup": 5
     },
@@ -94,48 +93,6 @@
       "guardrail": "Push worker secrets only after local platform setup is complete."
     },
     {
-      "task_id": "manual-distribution-FP-AUTO-261",
-      "phase": "Manual distribution",
-      "status": "ready_for_manual_post",
-      "input_needed": "public_post_url",
-      "command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL'",
-      "safety": "skipped",
-      "safety_reason": "placeholder_public_url",
-      "returncode": null,
-      "preview_status": "skipped",
-      "output_excerpt": "",
-      "completion_evidence": "data/published_log_reconciliation.json should stay waiting for real public URLs until the postable manual rows are published and logged.",
-      "guardrail": "Do not log a manual post until a real public URL exists."
-    },
-    {
-      "task_id": "manual-distribution-FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-      "phase": "Manual distribution",
-      "status": "ready_for_manual_post",
-      "input_needed": "public_post_url",
-      "command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url 'PUBLIC_URL'",
-      "safety": "skipped",
-      "safety_reason": "placeholder_public_url",
-      "returncode": null,
-      "preview_status": "skipped",
-      "output_excerpt": "",
-      "completion_evidence": "data/published_log_reconciliation.json should stay waiting for real public URLs until the postable manual rows are published and logged.",
-      "guardrail": "Do not log a manual post until a real public URL exists."
-    },
-    {
-      "task_id": "manual-distribution-FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
-      "phase": "Manual distribution",
-      "status": "ready_for_manual_post",
-      "input_needed": "public_post_url",
-      "command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url 'PUBLIC_URL'",
-      "safety": "skipped",
-      "safety_reason": "placeholder_public_url",
-      "returncode": null,
-      "preview_status": "skipped",
-      "output_excerpt": "",
-      "completion_evidence": "data/published_log_reconciliation.json should stay waiting for real public URLs until the postable manual rows are published and logged.",
-      "guardrail": "Do not log a manual post until a real public URL exists."
-    },
-    {
       "task_id": "manual-metrics-priority-2",
       "phase": "Manual metrics",
       "status": "needs_values",
@@ -166,7 +123,7 @@
   ],
   "handoff_resolution_summary": {
     "path": "data/human_handoff_resolution_worksheet.csv",
-    "row_count": 10,
+    "row_count": 7,
     "fieldnames": [
       "task_id",
       "phase",

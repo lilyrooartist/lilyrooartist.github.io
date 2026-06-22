@@ -1,12 +1,12 @@
 # Human Handoff Resolution Preview - Lily Roo
 
-Generated: 2026-06-22T21:14:41.936789Z
+Generated: 2026-06-22T23:51:49.231936Z
 
 ## Summary
-- Worksheet rows: **10**
+- Worksheet rows: **7**
 - Executed previews: **3**
-- Skipped previews: **7**
-- Status counts: `{"input_missing": 3, "skipped": 7}`
+- Skipped previews: **4**
+- Status counts: `{"input_missing": 3, "skipped": 4}`
 - Policy: Only python3 scripts/* commands with --dry-run, or reschedule previews without --apply, are executed.
 - Guardrail: This preview runner never executes apply, refresh-admin, PUBLIC_URL placeholder, non-python, or unsupported commands.
 
@@ -37,21 +37,6 @@ Generated: 2026-06-22T21:14:41.936789Z
   - Safety: `skipped` (not_marked_preview_safe)
   - Command: `python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM`
   - Guardrail: Push worker secrets only after local platform setup is complete.
-- **manual-distribution-FP-AUTO-261** (`skipped`)
-  - Phase: `Manual distribution`; input needed: `public_post_url`
-  - Safety: `skipped` (placeholder_public_url)
-  - Command: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL'`
-  - Guardrail: Do not log a manual post until a real public URL exists.
-- **manual-distribution-FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY** (`skipped`)
-  - Phase: `Manual distribution`; input needed: `public_post_url`
-  - Safety: `skipped` (placeholder_public_url)
-  - Command: `python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url 'PUBLIC_URL'`
-  - Guardrail: Do not log a manual post until a real public URL exists.
-- **manual-distribution-FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY** (`skipped`)
-  - Phase: `Manual distribution`; input needed: `public_post_url`
-  - Safety: `skipped` (placeholder_public_url)
-  - Command: `python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url 'PUBLIC_URL'`
-  - Guardrail: Do not log a manual post until a real public URL exists.
 - **manual-metrics-priority-2** (`input_missing`)
   - Phase: `Manual metrics`; input needed: `private_metric_values`
   - Safety: `safe_preview` (dry_run_command)

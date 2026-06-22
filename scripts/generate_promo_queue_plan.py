@@ -19,13 +19,13 @@ SCHEDULED = ROOT / "data" / "scheduled_posts.csv"
 EXECUTOR_READINESS = ROOT / "data" / "executor_readiness_snapshot.json"
 
 TZ = ZoneInfo("America/New_York")
-PLATFORM_ORDER = ["X", "Instagram", "TikTok", "Facebook", "YouTube Community"]
+PLATFORM_ORDER = ["X", "Instagram", "TikTok", "Facebook", "YouTube"]
 TIME_WINDOWS = {
     "X": (10, 15),
     "Instagram": (14, 5),
     "TikTok": (20, 40),
     "Facebook": (11, 20),
-    "YouTube Community": (18, 30),
+    "YouTube": (18, 30),
 }
 
 HARD_CTA_TERMS = ("subscribe", "subscribers", "1,000", "1000")
@@ -59,6 +59,7 @@ COPY_MAP = {
         "instagram": "Twelve Dollars is live on YouTube: stage lights, scattered bills, impossible shoes, and one very stubborn little signal.",
         "tiktok": "Twelve Dollars is what happens when the joke walks on stage wearing impossible shoes. Full album playlist is live.",
         "facebook": "Twelve Dollars is live in the Lily Roo archive. The remastered videos are up, the playlist is public, and the stage finally has the right kind of trouble on it.",
+        "youtube": "Twelve Dollars is live in the Lily Roo archive. Subscribe and help the signal climb toward 1,000.",
         "community": "New album transmission: Twelve Dollars. Remastered videos, updated art, full playlist live now.",
     },
     "Analog Myth": {
@@ -67,6 +68,7 @@ COPY_MAP = {
         "instagram": "Analog Myth is a little archive of broken clocks, exposed throws, and songs that keep arriving late on purpose.",
         "tiktok": "Time broke. The songs kept moving. Analog Myth is live in the archive.",
         "facebook": "Analog Myth is live on YouTube now, with remastered videos and the album order finally lined up the way the transmission wants it.",
+        "youtube": "Analog Myth is live in the Lily Roo archive. Subscribe and help the signal climb toward 1,000.",
         "community": "Analog Myth transmission is live: 13, Girls Camp, Analog Myth, Spilling the Tea, No Mortgage, Guards Down, Slow Walk, The Power of Light.",
     },
 }
@@ -186,20 +188,18 @@ def cta_text(release):
 
 
 def post_type(platform):
-    if platform == "YouTube Community":
-        return "community"
-    if platform == "TikTok":
+    if platform in {"TikTok", "YouTube"}:
         return "video"
     return "image"
 
 
 def execution_mode(platform):
-    return "manual" if platform == "YouTube Community" else "auto"
+    return "auto"
 
 
 def copy_for(title, platform):
     copy = COPY_MAP.get(title, {})
-    key = "community" if platform == "YouTube Community" else platform.lower()
+    key = platform.lower()
     return copy.get(key) or f"{title} is live in the Lily Roo archive."
 
 
@@ -283,7 +283,7 @@ def winner_platforms(format_name: str, readiness: dict) -> list[str]:
     if format_name == "Release-art image + story hook":
         return [platform for platform in ("X", "Facebook", "Instagram") if platform in ready]
     if format_name == "YouTube Community archive/playlist CTA":
-        return ["YouTube Community"] if "YouTube Community" in ready else []
+        return ["YouTube"] if "YouTube" in ready or "YouTube Community" in ready else []
     return []
 
 
@@ -312,12 +312,12 @@ def winner_followup_posts(*, promo: dict, releases: dict, readiness: dict, sched
             assets = ASSET_MAP.get(title, {})
             release = releases.get(title, {"title": title})
             for platform in winner_platforms(format_name, readiness):
-                kind = "image"
+                kind = post_type(platform)
                 key = (title.lower(), platform.lower(), kind)
                 if key in scheduled_keys or key in planned_keys:
                     continue
-                media_url = assets.get("image", "")
-                media_key = assets.get("media_key", "")
+                media_url = assets.get("video" if kind == "video" else "image", "")
+                media_key = assets.get("video_key" if kind == "video" else "media_key", "")
                 if not media_url and not media_key:
                     continue
                 draft_id = winner_plan_id(title, platform, format_name)
@@ -335,8 +335,8 @@ def winner_followup_posts(*, promo: dict, releases: dict, readiness: dict, sched
                     "platform": platform,
                     "song": title,
                     "imagery": f"{title} winner-format follow-up",
-                    "imagery_url": media_url,
-                    "clip_url": "",
+                    "imagery_url": assets.get("image", "") if kind == "video" else media_url,
+                    "clip_url": media_url if kind == "video" else "",
                     "text": selected_text,
                     "drafts": drafts,
                     "reply_text": cta_text(release),
@@ -351,7 +351,7 @@ def winner_followup_posts(*, promo: dict, releases: dict, readiness: dict, sched
                     "approved": "no",
                     "execution_mode": execution_mode(platform),
                     "post_type": kind,
-                    "desired_privacy": "",
+                    "desired_privacy": "public" if platform == "YouTube" else "",
                     "reason": f"Replicate winner-ready format '{format_name}' on a ready platform while blocked channels stay visible.",
                     "approval_command": approval_command(draft_id),
                 }
@@ -415,7 +415,7 @@ def readiness_for_platform(readiness, platform: str) -> dict:
         return {
             "state": "manual_only",
             "ready": False,
-            "message": "YouTube Community posts are copy-ready manual workflow.",
+            "message": "Legacy YouTube Community rows should be converted to API-postable YouTube video rows.",
         }
     if not readiness:
         return {
