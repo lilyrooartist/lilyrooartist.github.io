@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T10:39:28.203378Z",
+  "generated_at": "2026-06-22T10:40:24.965389Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -27,8 +27,8 @@
     "manual_subscriber_approval_guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review.",
     "subscriber_swap_count": 0,
     "ready_after_approval_swap_count": 0,
-    "platform_fix_count": 4,
-    "action_count": 7
+    "platform_fix_count": 5,
+    "action_count": 8
   },
   "actions": [
     {
@@ -48,8 +48,8 @@
       "phase": "Recover stalled approved backlog",
       "status": "preview_first",
       "detail": "Preview a new schedule for approved past-due posts. Safe apply is available after preview.",
-      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
-      "after_review_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
+      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24",
+      "after_review_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
       "context": {
         "approved_backlog_posts": 1,
         "approved_upcoming_posts": 11,
@@ -57,6 +57,26 @@
         "apply_allowed_without_override": true,
         "blocked_apply_command": "",
         "override_apply_command": ""
+      }
+    },
+    {
+      "label": "Repair Instagram executor",
+      "phase": "Clear platform blockers",
+      "status": "needs_platform_fix",
+      "detail": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
+      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-258",
+      "after_review_command": "",
+      "context": {
+        "post_id": "FP-AUTO-258",
+        "platform": "Instagram",
+        "reason": "max_attempts_exceeded",
+        "missing_secrets": [],
+        "local_missing_secrets": [
+          "IG_BUSINESS_ACCOUNT_ID"
+        ],
+        "local_secret_source": "secrets/social_api.env",
+        "local_secret_ready": false,
+        "public_posting_approved": null
       }
     },
     {
