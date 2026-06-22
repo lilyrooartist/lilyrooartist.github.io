@@ -191,6 +191,7 @@ GENERATED_REFRESH_PATHS = {
 
 GENERATED_REFRESH_PREFIXES = (
     "admin/reports/",
+    "data/manual-posting-cards/",
     "data/store-verification/",
 )
 
@@ -2750,6 +2751,8 @@ def validate_generated_outputs(failures):
             and "latest_run_conclusion" in automation
             and "latest_run_head_sha" in automation
             and "workflow_status_action_needed" in automation
+            and "current_run_capture_in_progress" in automation
+            and "current_run_capture_note" in automation
         ):
             ok("promo engine status includes scheduled workflow run health")
         else:
@@ -2770,6 +2773,12 @@ def validate_generated_outputs(failures):
             and automation.get("latest_run_coverage_basis") == expected_basis
             and automation.get("changed_paths_since_latest_run") == expected_changed
             and automation.get("uncovered_paths_since_latest_run") == expected_uncovered
+            and automation.get("current_run_capture_in_progress") == (
+                expected_covered
+                and expected_basis == "exact_source_commit"
+                and automation.get("latest_run_status") in {"queued", "in_progress"}
+                and not automation.get("latest_run_conclusion")
+            )
         ):
             ok("promo engine status tracks refresh automation source coverage")
         else:

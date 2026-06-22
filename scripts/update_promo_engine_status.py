@@ -1320,6 +1320,7 @@ GENERATED_REFRESH_PATHS = {
 
 GENERATED_REFRESH_PREFIXES = (
     "admin/reports/",
+    "data/manual-posting-cards/",
     "data/store-verification/",
 )
 
@@ -1370,6 +1371,18 @@ def refresh_automation_state(workflow_status: dict) -> dict:
     source_commit = source_revision.get("commit") or ""
     coverage = refresh_coverage_state(source_commit, latest_head_sha)
     latest_covers_source = bool(coverage.get("covered"))
+    current_run_capture_in_progress = (
+        latest_covers_source
+        and coverage.get("basis") == "exact_source_commit"
+        and workflow_state.get("latest_run_status") in {"queued", "in_progress"}
+        and not workflow_state.get("latest_run_conclusion")
+    )
+    current_run_capture_note = (
+        "The workflow status snapshot was captured while the exact source refresh run was still active; "
+        "use GitHub Actions as the completion authority after the run exits."
+        if current_run_capture_in_progress
+        else ""
+    )
     if not PROMO_REFRESH_WORKFLOW.exists():
         return {
             "configured": False,
@@ -1385,6 +1398,8 @@ def refresh_automation_state(workflow_status: dict) -> dict:
             "latest_run_coverage_basis": coverage.get("basis", ""),
             "changed_paths_since_latest_run": coverage.get("changed_paths_since_latest_run", []),
             "uncovered_paths_since_latest_run": coverage.get("uncovered_paths_since_latest_run", []),
+            "current_run_capture_in_progress": current_run_capture_in_progress,
+            "current_run_capture_note": current_run_capture_note,
             "action_needed": "Add .github/workflows/promo-admin-refresh.yml.",
             **workflow_state,
         }
@@ -1405,6 +1420,8 @@ def refresh_automation_state(workflow_status: dict) -> dict:
         "latest_run_coverage_basis": coverage.get("basis", ""),
         "changed_paths_since_latest_run": coverage.get("changed_paths_since_latest_run", []),
         "uncovered_paths_since_latest_run": coverage.get("uncovered_paths_since_latest_run", []),
+        "current_run_capture_in_progress": current_run_capture_in_progress,
+        "current_run_capture_note": current_run_capture_note,
         "action_needed": "" if safe_command in text and "schedule:" in text else "Review promo admin refresh workflow configuration.",
         **workflow_state,
     }
