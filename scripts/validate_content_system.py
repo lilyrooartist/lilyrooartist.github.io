@@ -1597,6 +1597,13 @@ def validate_generated_outputs(failures):
         ]
         cards = clipboard.get("post_cards") or []
         summary = clipboard.get("summary") or {}
+        paste_text_files = summary.get("paste_text_files") or []
+        paste_file_contents_match = all(
+            card.get("paste_text_path")
+            and (ROOT / card["paste_text_path"]).exists()
+            and (ROOT / card["paste_text_path"]).read_text(encoding="utf-8").rstrip("\n") == (card.get("paste_text") or "").rstrip()
+            for card in cards
+        )
         if (
             clipboard.get("safe_mode") is True
             and summary.get("status") in {"ready_to_post", "empty"}
@@ -1604,6 +1611,10 @@ def validate_generated_outputs(failures):
             and [card.get("id") for card in cards] == [row.get("id") for row in postable_rows]
             and summary.get("public_community_url") == "https://www.youtube.com/@lilyroo.artist/community"
             and summary.get("url_template_path") == ((manual_packet.get("manual_completion_manifest") or {}).get("url_template_path") or "")
+            and summary.get("paste_text_dir") == "data/manual-posting-cards"
+            and summary.get("paste_text_file_count") == len(cards)
+            and paste_text_files == [card.get("paste_text_path") for card in cards]
+            and paste_file_contents_match
             and "log_manual_distribution.py" in (summary.get("batch_log_preview_command") or "")
             and "--apply --refresh-admin" in (summary.get("batch_log_apply_command") or "")
             and "--allow-partial --apply --refresh-admin" in (summary.get("batch_log_partial_apply_command") or "")
@@ -1612,6 +1623,7 @@ def validate_generated_outputs(failures):
             and "public_url_reconciliation_match_count" in summary
             and all(
                 card.get("paste_text")
+                and card.get("paste_text_path")
                 and card.get("asset_url")
                 and card.get("asset_status") == "local_asset_present"
                 and card.get("destination_links")
@@ -3612,7 +3624,7 @@ def validate_generated_outputs(failures):
         fail("build_manual_distribution_packet.py missing", failures)
     if MANUAL_POSTING_CLIPBOARD_SCRIPT.exists():
         clipboard_text = MANUAL_POSTING_CLIPBOARD_SCRIPT.read_text(encoding="utf-8")
-        if "manual_posting_clipboard.json" in clipboard_text and "manual-posting-clipboard.md" in clipboard_text and "manual_distribution_packet.json" in clipboard_text and "youtube_community_url_reconciliation.json" in clipboard_text and "public_url_reconciliation_command" in clipboard_text and "batch_log_partial_apply_command" in clipboard_text and "--allow-partial --apply --refresh-admin" in clipboard_text and "post_cards" in clipboard_text and "paste_text" in clipboard_text and "PUBLIC_URL" in clipboard_text and "log_manual_distribution.py" in clipboard_text and "This clipboard does not approve" in clipboard_text and "subprocess" not in clipboard_text:
+        if "manual_posting_clipboard.json" in clipboard_text and "manual-posting-clipboard.md" in clipboard_text and "manual_distribution_packet.json" in clipboard_text and "youtube_community_url_reconciliation.json" in clipboard_text and "public_url_reconciliation_command" in clipboard_text and "batch_log_partial_apply_command" in clipboard_text and "--allow-partial --apply --refresh-admin" in clipboard_text and "post_cards" in clipboard_text and "paste_text" in clipboard_text and "paste_text_path" in clipboard_text and "manual-posting-cards" in clipboard_text and "write_paste_files" in clipboard_text and "PUBLIC_URL" in clipboard_text and "log_manual_distribution.py" in clipboard_text and "This clipboard does not approve" in clipboard_text and "subprocess" not in clipboard_text:
             ok("manual posting clipboard builder is review-only")
         else:
             fail("build_manual_posting_clipboard.py missing review-only clipboard outputs", failures)

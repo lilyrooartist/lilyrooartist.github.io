@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T06:35:43.723502Z",
+  "generated_at": "2026-06-22T06:39:55.681893Z",
   "safe_mode": true,
   "source": {
     "manual_distribution_packet": "data/manual_distribution_packet.json",
@@ -19,6 +19,13 @@
       "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY"
     ],
     "url_template_path": "data/manual_distribution_url_template.csv",
+    "paste_text_dir": "data/manual-posting-cards",
+    "paste_text_file_count": 3,
+    "paste_text_files": [
+      "data/manual-posting-cards/fp-auto-261.txt",
+      "data/manual-posting-cards/fp-plan-twelve-dollars-youtube-community.txt",
+      "data/manual-posting-cards/fp-plan-analog-myth-youtube-community.txt"
+    ],
     "batch_log_preview_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv",
     "batch_log_apply_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --apply --refresh-admin",
     "batch_log_partial_apply_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --allow-partial --apply --refresh-admin",
@@ -37,6 +44,7 @@
       "posting_surface": "YouTube Studio Community",
       "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
       "paste_text": "New transmission: I Learned It All in Fifteen Seconds is live. Remastered cover art, same suspicious amount of feeling.\n\nStream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube: https://www.youtube.com/@lilyroo.artist | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
+      "paste_text_path": "data/manual-posting-cards/fp-auto-261.txt",
       "asset_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
       "asset_status": "local_asset_present",
       "asset_local_path": "assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
@@ -102,6 +110,7 @@
       "posting_surface": "YouTube Studio Community",
       "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
       "paste_text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+      "paste_text_path": "data/manual-posting-cards/fp-plan-twelve-dollars-youtube-community.txt",
       "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
       "asset_status": "local_asset_present",
       "asset_local_path": "assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
@@ -151,6 +160,7 @@
       "posting_surface": "YouTube Studio Community",
       "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
       "paste_text": "Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+      "paste_text_path": "data/manual-posting-cards/fp-plan-analog-myth-youtube-community.txt",
       "asset_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
       "asset_status": "local_asset_present",
       "asset_local_path": "assets/albums/analog-myth/art/03-analog-myth.jpg",

@@ -1,6 +1,6 @@
 # Manual Posting Clipboard - Lily Roo
 
-Generated: 2026-06-22T06:35:43.723502Z
+Generated: 2026-06-22T06:39:55.681893Z
 
 ## Summary
 - Status: **ready_to_post**
@@ -9,6 +9,7 @@ Generated: 2026-06-22T06:35:43.723502Z
 - Postable cards: **3**
 - Waiting public URLs: **3**
 - URL worksheet: `data/manual_distribution_url_template.csv`
+- Paste text files: `data/manual-posting-cards` (3 file(s))
 - Batch log preview: `python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv`
 - Batch log apply after posting: `python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --apply --refresh-admin`
 - Partial batch apply after first URL: `python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --allow-partial --apply --refresh-admin`
@@ -22,6 +23,7 @@ Generated: 2026-06-22T06:35:43.723502Z
 - ID: `FP-AUTO-261`
 - Status: `ready_for_manual_post`
 - Open: https://www.youtube.com/@lilyroo.artist/community
+- Paste file: `data/manual-posting-cards/fp-auto-261.txt`
 - Paste text:
 ```text
 New transmission: I Learned It All in Fifteen Seconds is live. Remastered cover art, same suspicious amount of feeling.
@@ -44,6 +46,7 @@ Stream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: htt
 - ID: `FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY`
 - Status: `ready_for_manual_post`
 - Open: https://www.youtube.com/@lilyroo.artist/community
+- Paste file: `data/manual-posting-cards/fp-plan-twelve-dollars-youtube-community.txt`
 - Paste text:
 ```text
 Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.
@@ -63,6 +66,7 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNT
 - ID: `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY`
 - Status: `ready_for_manual_post`
 - Open: https://www.youtube.com/@lilyroo.artist/community
+- Paste file: `data/manual-posting-cards/fp-plan-analog-myth-youtube-community.txt`
 - Paste text:
 ```text
 Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.

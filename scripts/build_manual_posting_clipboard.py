@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import re
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -9,6 +10,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 MANUAL_DISTRIBUTION = ROOT / "data" / "manual_distribution_packet.json"
 YOUTUBE_RECONCILIATION = ROOT / "data" / "youtube_community_url_reconciliation.json"
+PASTE_CARD_DIR = ROOT / "data" / "manual-posting-cards"
 OUT = ROOT / "data" / "manual_posting_clipboard.json"
 REPORT = ROOT / "admin" / "reports" / "manual-posting-clipboard.md"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
@@ -47,17 +49,25 @@ def replace_text_embed(html: str, block_id: str, content: str) -> str:
     return html[:start_content] + content.rstrip() + html[end:]
 
 
+def slug(value: str) -> str:
+    slugged = re.sub(r"[^A-Za-z0-9_-]+", "-", value.strip()).strip("-").lower()
+    return slugged or "manual-post"
+
+
 def post_card(row: dict) -> dict:
     posting = row.get("manual_posting_packet") or {}
     log_effect = row.get("log_effect") or {}
+    post_id = row.get("id") or ""
+    paste_text_path = PASTE_CARD_DIR / f"{slug(post_id)}.txt"
     return {
-        "id": row.get("id") or "",
+        "id": post_id,
         "release": row.get("release") or "",
         "platform": row.get("platform") or "",
         "status": row.get("distribution_status") or "",
         "posting_surface": posting.get("posting_surface") or "YouTube Studio Community",
         "public_community_url": posting.get("public_community_url") or "",
         "paste_text": posting.get("paste_text") or row.get("copy_block") or "",
+        "paste_text_path": str(paste_text_path.relative_to(ROOT)),
         "asset_url": posting.get("asset_url") or row.get("asset_download_url") or "",
         "asset_status": (row.get("asset_audit") or {}).get("status") or "",
         "asset_local_path": (row.get("asset_audit") or {}).get("local_path") or "",
@@ -91,6 +101,7 @@ def build_payload() -> dict:
         if (row.get("manual_posting_packet") or {}).get("postable_now") and not row.get("logged")
     ]
     cards = [post_card(row) for row in postable_rows]
+    paste_text_files = [card.get("paste_text_path") for card in cards if card.get("paste_text_path")]
     url_template_path = completion.get("url_template_path") or ""
     partial_apply_command = (
         f"python3 scripts/log_manual_distribution.py --from-csv {url_template_path} --allow-partial --apply --refresh-admin"
@@ -114,6 +125,9 @@ def build_payload() -> dict:
             "waiting_public_url_count": completion.get("waiting_public_url_count") or len(cards),
             "pending_log_ids": completion.get("pending_log_ids") or [card["id"] for card in cards],
             "url_template_path": completion.get("url_template_path") or "",
+            "paste_text_dir": str(PASTE_CARD_DIR.relative_to(ROOT)),
+            "paste_text_file_count": len(paste_text_files),
+            "paste_text_files": paste_text_files,
             "batch_log_preview_command": completion.get("batch_log_preview_command") or "",
             "batch_log_apply_command": completion.get("batch_log_apply_command") or "",
             "batch_log_partial_apply_command": partial_apply_command,
@@ -154,6 +168,21 @@ def audit_sources_line(audit: dict) -> str:
     return "; ".join(f"{item.get('label')} ({item.get('source')})" for item in evidence)
 
 
+def write_paste_files(cards: list[dict]) -> None:
+    PASTE_CARD_DIR.mkdir(parents=True, exist_ok=True)
+    wanted = {card.get("paste_text_path") for card in cards if card.get("paste_text_path")}
+    for existing in PASTE_CARD_DIR.glob("*.txt"):
+        relative = str(existing.relative_to(ROOT))
+        if relative not in wanted:
+            existing.unlink()
+    for card in cards:
+        relative_path = card.get("paste_text_path") or ""
+        if not relative_path:
+            continue
+        path = ROOT / relative_path
+        path.write_text((card.get("paste_text") or "").rstrip() + "\n", encoding="utf-8")
+
+
 def build_markdown(payload: dict) -> str:
     summary = payload["summary"]
     lines = [
@@ -168,6 +197,7 @@ def build_markdown(payload: dict) -> str:
         f"- Postable cards: **{summary['postable_count']}**",
         f"- Waiting public URLs: **{summary['waiting_public_url_count']}**",
         f"- URL worksheet: `{summary.get('url_template_path') or 'not available'}`",
+        f"- Paste text files: `{summary.get('paste_text_dir') or 'not available'}` ({summary.get('paste_text_file_count', 0)} file(s))",
         f"- Batch log preview: `{summary.get('batch_log_preview_command') or 'not available'}`",
         f"- Batch log apply after posting: `{summary.get('batch_log_apply_command') or 'not available'}`",
         f"- Partial batch apply after first URL: `{summary.get('batch_log_partial_apply_command') or 'not available'}`",
@@ -186,6 +216,7 @@ def build_markdown(payload: dict) -> str:
             f"- ID: `{card['id']}`",
             f"- Status: `{card['status']}`",
             f"- Open: {card.get('public_community_url') or 'not set'}",
+            f"- Paste file: `{card.get('paste_text_path') or 'not available'}`",
             "- Paste text:",
             "```text",
             card.get("paste_text") or "",
@@ -230,6 +261,7 @@ def sync_admin(payload: dict, markdown: str) -> None:
 
 def main() -> int:
     payload = build_payload()
+    write_paste_files(payload["post_cards"])
     OUT.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     markdown = build_markdown(payload)
     REPORT.write_text(markdown, encoding="utf-8")
