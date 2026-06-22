@@ -1,0 +1,80 @@
+# Experiment Result Clipboard - Lily Roo
+
+Generated: 2026-06-22T06:02:36.951423Z
+
+## Summary
+- Status: **needs_values**
+- Metric cards: **3**
+- Missing public URLs: **6**
+- Measurement priorities: **8**
+- Pending result fields: **18**
+- Ready to import: **0**
+- Entry CSV: `data/experiment_result_entry_template.csv`
+- Wide entry CSV: `data/experiment_result_entry_wide_template.csv`
+- Preview import: `python3 scripts/update_experiment_results.py --from-csv data/experiment_result_entry_template.csv --dry-run`
+- Preview wide import: `python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run`
+- Apply after review: `blocked until values/evidence are filled`
+
+## Metric Cards
+### X - I Learned It All in Fifteen Seconds (`FP-AUTO-257`)
+- Format: Release-art image + story hook
+- URL: https://x.com/i/web/status/2062920257577029712
+- Published: 2026-06-05; Published_Log row: `16`
+- Pending fields: `views, likes, comments, shares, saves, subs_delta`
+  - `views`: Open X analytics for https://x.com/i/web/status/2062920257577029712 and record views.
+  - `likes`: Open X analytics for https://x.com/i/web/status/2062920257577029712 and record likes.
+  - `comments`: Open X analytics for https://x.com/i/web/status/2062920257577029712 and record comments.
+  - `shares`: Open X analytics for https://x.com/i/web/status/2062920257577029712 and record shares.
+  - `saves`: Open X analytics for https://x.com/i/web/status/2062920257577029712 and record saves.
+  - `subs_delta`: Open X analytics for https://x.com/i/web/status/2062920257577029712 and record subs_delta.
+### Facebook - I Learned It All in Fifteen Seconds (`FP-AUTO-260`)
+- Format: Release-art image + story hook
+- URL: https://www.facebook.com/903693509504290_122118326547249470
+- Published: 2026-06-07; Published_Log row: `18`
+- Pending fields: `views, likes, comments, shares, saves, subs_delta`
+  - `views`: Open Meta Business Suite for https://www.facebook.com/903693509504290_122118326547249470 and record views.
+  - `likes`: Open Meta Business Suite for https://www.facebook.com/903693509504290_122118326547249470 and record likes.
+  - `comments`: Open Meta Business Suite for https://www.facebook.com/903693509504290_122118326547249470 and record comments.
+  - `shares`: Open Meta Business Suite for https://www.facebook.com/903693509504290_122118326547249470 and record shares.
+  - `saves`: Open Meta Business Suite for https://www.facebook.com/903693509504290_122118326547249470 and record saves.
+  - `subs_delta`: Open Meta Business Suite for https://www.facebook.com/903693509504290_122118326547249470 and record subs_delta.
+### X - I Learned It All in Fifteen Seconds (`FP-AUTO-262`)
+- Format: Release-art image + story hook
+- URL: https://x.com/i/web/status/2063600780834136468
+- Published: 2026-06-07; Published_Log row: `17`
+- Pending fields: `views, likes, comments, shares, saves, subs_delta`
+  - `views`: Open X analytics for https://x.com/i/web/status/2063600780834136468 and record views.
+  - `likes`: Open X analytics for https://x.com/i/web/status/2063600780834136468 and record likes.
+  - `comments`: Open X analytics for https://x.com/i/web/status/2063600780834136468 and record comments.
+  - `shares`: Open X analytics for https://x.com/i/web/status/2063600780834136468 and record shares.
+  - `saves`: Open X analytics for https://x.com/i/web/status/2063600780834136468 and record saves.
+  - `subs_delta`: Open X analytics for https://x.com/i/web/status/2063600780834136468 and record subs_delta.
+
+## Measurement Priorities
+- **Collect metrics** `FP-AUTO-260` Facebook / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 3 logged post(s), 1 missing URL(s) in this format.
+  - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
+  - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
+- **Collect metrics** `FP-AUTO-257` X / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 3 logged post(s), 1 missing URL(s) in this format.
+  - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-257 --source-row 16 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
+  - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-257 --source-row 16 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
+- **Collect metrics** `FP-AUTO-262` X / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 3 logged post(s), 1 missing URL(s) in this format.
+  - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-262 --source-row 17 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
+  - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-262 --source-row 17 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
+- **Post and log public URL** `FP-AUTO-261` YouTube Community / YouTube Community archive/playlist CTA: Postable now in the Manual Posting Clipboard; publish it and log the public URL so metrics can start. 0 logged post(s), 3 missing URL(s) in this format.
+- **Log public URL** `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY` YouTube Community / YouTube Community archive/playlist CTA: Cannot collect metrics until the public URL is logged. 0 logged post(s), 3 missing URL(s) in this format.
+- **Log public URL** `FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY` YouTube Community / YouTube Community archive/playlist CTA: Cannot collect metrics until the public URL is logged. 0 logged post(s), 3 missing URL(s) in this format.
+- **Clear platform blocker** `FP-AUTO-258` Instagram / Release-art image + story hook: Platform work is blocked; clear the platform repair gate before URL logging can produce metrics. 3 logged post(s), 1 missing URL(s) in this format.
+- **Clear platform blocker** `FP-AUTO-264` TikTok / Short video clip + platform-native CTA: Platform work is blocked; clear the platform repair gate before URL logging can produce metrics. 0 logged post(s), 2 missing URL(s) in this format.
+
+## Missing Public URLs
+- `FP-AUTO-258` Instagram / Release-art image + story hook: Publish or log the public URL before result metrics can be collected.
+- `FP-AUTO-261` YouTube Community / YouTube Community archive/playlist CTA: Publish or log the public URL before result metrics can be collected.
+- `FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY` YouTube Community / YouTube Community archive/playlist CTA: Publish or log the public URL before result metrics can be collected.
+- `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY` YouTube Community / YouTube Community archive/playlist CTA: Publish or log the public URL before result metrics can be collected.
+- `FP-AUTO-264` TikTok / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.
+- `FP-PLAN-TWELVE-DOLLARS-TIKTOK` TikTok / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.
+
+## Guardrails
+- This clipboard does not fetch private analytics or write metrics.
+- Do not use guessed result values.
+- Posts without public URLs must be published or logged before result metrics can be collected.

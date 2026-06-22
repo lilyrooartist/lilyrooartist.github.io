@@ -1,99 +1,115 @@
 {
-  "generated_at": "2026-06-22T05:32:17.776375+00:00",
+  "generated_at": "2026-06-22T14:02:35.687914+08:00",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
     "published_log": "admin/content/Published_Log.csv",
     "social_execution_snapshot": "data/social_execution_snapshot.json",
     "executor_readiness": "data/executor_readiness_snapshot.json",
-    "promo_engine_status": "data/promo_engine_status.json"
+    "promo_engine_status": "data/promo_engine_status.json",
+    "manual_posting_clipboard": "data/manual_posting_clipboard.json"
   },
   "summary": {
-    "approved_backlog_count": 7,
+    "approved_backlog_count": 4,
     "blocked_backlog_count": 3,
-    "clear_to_apply_count": 4,
-    "start_at": "2026-06-23T10:00:00+00:00",
+    "clear_to_apply_count": 1,
+    "partial_clear_apply_available": true,
+    "partial_clear_apply_count": 1,
+    "start_at": "2026-06-23T10:00:00+08:00",
     "spacing_hours": 24,
-    "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24",
+    "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
     "apply_command": "",
-    "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-    "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
+    "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
+    "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
     "apply_blocked_reason": "Known executor/platform blockers must clear before normal apply.",
     "apply_allowed_without_override": false,
     "blocked_ids": [
-      "FP-AUTO-258",
-      "FP-AUTO-261",
-      "FP-AUTO-264"
+      "FP-AUTO-264",
+      "FP-AUTO-263",
+      "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM"
     ],
     "normal_apply_gate": "blocked_until_clearance_steps_complete",
     "clearance_steps": [
-      "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply.",
       "Add local TikTok OAuth credentials, then push worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
       "Confirm TikTok public posting approval before treating auto-posting as ready.",
-      "Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair."
+      "Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair.",
+      "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+    ],
+    "partial_clear_preview_commands": [
+      "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24"
+    ],
+    "partial_clear_apply_commands": [
+      "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin"
+    ],
+    "manual_handoff_count": 1,
+    "manual_handoff_ids": [
+      "FP-AUTO-261"
     ]
   },
   "backlog_clearance_manifest": {
     "status": "blocked_until_clearance_steps_complete",
-    "approved_backlog_count": 7,
+    "approved_backlog_count": 4,
     "blocked_backlog_count": 3,
-    "clear_to_apply_count": 4,
+    "clear_to_apply_count": 1,
+    "partial_clear_apply_available": true,
+    "partial_clear_apply_count": 1,
     "blocked_ids": [
-      "FP-AUTO-258",
-      "FP-AUTO-261",
-      "FP-AUTO-264"
+      "FP-AUTO-264",
+      "FP-AUTO-263",
+      "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM"
     ],
-    "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24",
+    "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
     "safe_apply_command": "",
-    "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-    "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
+    "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
+    "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
     "apply_allowed_without_override": false,
     "apply_gate": "blocked_until_clearance_steps_complete",
     "clearance_steps": [
-      "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply.",
       "Add local TikTok OAuth credentials, then push worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
       "Confirm TikTok public posting approval before treating auto-posting as ready.",
-      "Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair."
+      "Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair.",
+      "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
     ],
     "blocked_items": [
-      {
-        "id": "FP-AUTO-258",
-        "platform": "Instagram",
-        "song": "I Learned It All in Fifteen Seconds",
-        "blocker_kind": "not_approved",
-        "blocker_reason": "not_approved",
-        "proposed_scheduled_at": "2026-06-23T10:00:00+00:00",
-        "clearance_steps": [
-          "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
-        ]
-      },
-      {
-        "id": "FP-AUTO-261",
-        "platform": "YouTube Community",
-        "song": "I Learned It All in Fifteen Seconds",
-        "blocker_kind": "not_approved",
-        "blocker_reason": "not_approved",
-        "proposed_scheduled_at": "2026-06-24T10:00:00+00:00",
-        "clearance_steps": [
-          "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
-        ]
-      },
       {
         "id": "FP-AUTO-264",
         "platform": "TikTok",
         "song": "I Learned It All in Fifteen Seconds",
         "blocker_kind": "tiktok_credentials_missing",
         "blocker_reason": "tiktok_credentials_missing",
-        "proposed_scheduled_at": "2026-06-25T10:00:00+00:00",
+        "proposed_scheduled_at": "2026-06-24T10:00:00+08:00",
         "clearance_steps": [
           "Add local TikTok OAuth credentials, then push worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
           "Confirm TikTok public posting approval before treating auto-posting as ready.",
           "Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair."
         ]
+      },
+      {
+        "id": "FP-AUTO-263",
+        "platform": "Instagram",
+        "song": "I Learned It All in Fifteen Seconds",
+        "blocker_kind": "max_attempts_exceeded",
+        "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
+        "proposed_scheduled_at": "2026-06-25T10:00:00+08:00",
+        "clearance_steps": [
+          "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+        ]
+      },
+      {
+        "id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+        "platform": "Instagram",
+        "song": "Twelve Dollars",
+        "blocker_kind": "max_attempts_exceeded",
+        "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
+        "proposed_scheduled_at": "2026-06-26T10:00:00+08:00",
+        "clearance_steps": [
+          "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+        ]
       }
     ],
     "operator_checklist": [
       "Run the preview command and confirm it proposes only approved unpublished backlog rows.",
+      "If partial_clear_apply_available is true, use the scoped partial-clear commands for unblocked rows while blocked rows are repaired.",
       "Complete every listed platform/executor clearance step before normal apply.",
       "Refresh Admin and confirm the normal apply gate is clear.",
       "Apply only when safe_apply_command is populated without --allow-blocked.",
@@ -111,47 +127,75 @@
       "A reschedule does not publish, approve, or repair platform credentials by itself."
     ]
   },
+  "partial_clear_apply_manifest": {
+    "status": "ready",
+    "clear_to_apply_count": 1,
+    "blocked_backlog_count": 3,
+    "clear_ids": [
+      "FP-AUTO-258"
+    ],
+    "blocked_ids_retained": [
+      "FP-AUTO-264",
+      "FP-AUTO-263",
+      "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM"
+    ],
+    "preview_commands": [
+      "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24"
+    ],
+    "apply_commands": [
+      "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin"
+    ],
+    "recommended_next_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
+    "recommended_apply_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
+    "operator_checklist": [
+      "Preview each clear row before applying it.",
+      "Apply only rows listed in clear_ids; do not use --allow-blocked for this partial-clear path.",
+      "Refresh Admin after each apply command, then rebuild this preview before applying the next clear row.",
+      "Leave blocked_ids_retained unchanged until their platform or executor clearance steps are complete."
+    ],
+    "completion_evidence": [
+      "The applied clear row has a future scheduled_at value in data/scheduled_posts.csv.",
+      "data/backlog_reschedule_preview.json shows one fewer clear-to-apply past-due row after refresh.",
+      "Blocked rows remain listed in blocked_ids_retained until their clearance steps are complete."
+    ],
+    "guardrails": [
+      "Partial clear commands are scoped with --id and never include --allow-blocked.",
+      "This path reschedules only unblocked approved rows; it does not approve, publish, or repair executors."
+    ]
+  },
+  "manual_handoff_items": [
+    {
+      "id": "FP-AUTO-261",
+      "platform": "YouTube Community",
+      "song": "I Learned It All in Fifteen Seconds",
+      "current_scheduled_at": "2026-06-06T19:10:00-04:00",
+      "handoff_status": "manual_posting_clipboard",
+      "handoff_report": "admin/reports/manual-posting-clipboard.md",
+      "reason": "Manual/community row is ready for manual posting and public URL logging; it is excluded from auto-reschedule commands."
+    }
+  ],
   "items": [
     {
       "id": "FP-AUTO-258",
       "platform": "Instagram",
       "song": "I Learned It All in Fifteen Seconds",
       "current_scheduled_at": "2026-06-05T15:35:00-04:00",
-      "proposed_scheduled_at": "2026-06-23T10:00:00+00:00",
-      "blocked": true,
-      "blocker_reason": "not_approved",
-      "blocker_status": "blocked",
-      "blocker_source": "cron",
-      "blocker_kind": "not_approved",
-      "blocks_normal_apply": true,
-      "safe_apply_available": false,
-      "clearance_steps": [
-        "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
-      ]
-    },
-    {
-      "id": "FP-AUTO-261",
-      "platform": "YouTube Community",
-      "song": "I Learned It All in Fifteen Seconds",
-      "current_scheduled_at": "2026-06-06T19:10:00-04:00",
-      "proposed_scheduled_at": "2026-06-24T10:00:00+00:00",
-      "blocked": true,
-      "blocker_reason": "not_approved",
-      "blocker_status": "blocked",
-      "blocker_source": "cron",
-      "blocker_kind": "not_approved",
-      "blocks_normal_apply": true,
-      "safe_apply_available": false,
-      "clearance_steps": [
-        "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
-      ]
+      "proposed_scheduled_at": "2026-06-23T10:00:00+08:00",
+      "blocked": false,
+      "blocker_reason": "",
+      "blocker_status": "",
+      "blocker_source": "",
+      "blocker_kind": "",
+      "blocks_normal_apply": false,
+      "safe_apply_available": true,
+      "clearance_steps": []
     },
     {
       "id": "FP-AUTO-264",
       "platform": "TikTok",
       "song": "I Learned It All in Fifteen Seconds",
       "current_scheduled_at": "2026-06-09T21:25:00-04:00",
-      "proposed_scheduled_at": "2026-06-25T10:00:00+00:00",
+      "proposed_scheduled_at": "2026-06-24T10:00:00+08:00",
       "blocked": true,
       "blocker_reason": "tiktok_credentials_missing",
       "blocker_status": "blocked",
@@ -166,64 +210,38 @@
       ]
     },
     {
-      "id": "FP-PLAN-TWELVE-DOLLARS-X",
-      "platform": "X",
-      "song": "Twelve Dollars",
-      "current_scheduled_at": "2026-06-20T10:15:00-04:00",
-      "proposed_scheduled_at": "2026-06-26T10:00:00+00:00",
-      "blocked": false,
-      "blocker_reason": "",
-      "blocker_status": "",
-      "blocker_source": "",
-      "blocker_kind": "",
-      "blocks_normal_apply": false,
-      "safe_apply_available": true,
-      "clearance_steps": []
-    },
-    {
       "id": "FP-AUTO-263",
       "platform": "Instagram",
       "song": "I Learned It All in Fifteen Seconds",
       "current_scheduled_at": "2026-06-21T10:00:00+09:00",
-      "proposed_scheduled_at": "2026-06-27T10:00:00+00:00",
-      "blocked": false,
-      "blocker_reason": "",
-      "blocker_status": "",
-      "blocker_source": "",
-      "blocker_kind": "",
-      "blocks_normal_apply": false,
-      "safe_apply_available": true,
-      "clearance_steps": []
+      "proposed_scheduled_at": "2026-06-25T10:00:00+08:00",
+      "blocked": true,
+      "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
+      "blocker_status": "failed",
+      "blocker_source": "cron",
+      "blocker_kind": "max_attempts_exceeded",
+      "blocks_normal_apply": true,
+      "safe_apply_available": false,
+      "clearance_steps": [
+        "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+      ]
     },
     {
       "id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
       "platform": "Instagram",
       "song": "Twelve Dollars",
       "current_scheduled_at": "2026-06-21T14:05:00-04:00",
-      "proposed_scheduled_at": "2026-06-28T10:00:00+00:00",
-      "blocked": false,
-      "blocker_reason": "",
-      "blocker_status": "",
-      "blocker_source": "",
-      "blocker_kind": "",
-      "blocks_normal_apply": false,
-      "safe_apply_available": true,
-      "clearance_steps": []
-    },
-    {
-      "id": "FP-AUTO-265",
-      "platform": "Facebook",
-      "song": "I Learned It All in Fifteen Seconds",
-      "current_scheduled_at": "2026-06-22T10:00:00+09:00",
-      "proposed_scheduled_at": "2026-06-29T10:00:00+00:00",
-      "blocked": false,
-      "blocker_reason": "",
-      "blocker_status": "",
-      "blocker_source": "",
-      "blocker_kind": "",
-      "blocks_normal_apply": false,
-      "safe_apply_available": true,
-      "clearance_steps": []
+      "proposed_scheduled_at": "2026-06-26T10:00:00+08:00",
+      "blocked": true,
+      "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
+      "blocker_status": "failed",
+      "blocker_source": "cron",
+      "blocker_kind": "max_attempts_exceeded",
+      "blocks_normal_apply": true,
+      "safe_apply_available": false,
+      "clearance_steps": [
+        "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+      ]
     }
   ]
 }

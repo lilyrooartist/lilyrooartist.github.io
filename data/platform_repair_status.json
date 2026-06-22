@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T05:32:18.163938Z",
+  "generated_at": "2026-06-22T06:02:36.443661Z",
   "safe_mode": true,
   "source": {
     "promo_operations_packet": "data/promo_operations_packet.json",
@@ -8,18 +8,174 @@
     "tiktok_setup_preflight": "data/tiktok_setup_preflight.json"
   },
   "summary": {
-    "platform_fix_count": 1,
-    "blocked_count": 1,
-    "preview_command_count": 1,
-    "apply_command_count": 0,
-    "retry_reset_count": 0,
-    "checklist_item_count": 4,
+    "platform_fix_count": 4,
+    "blocked_count": 4,
+    "preview_command_count": 4,
+    "apply_command_count": 2,
+    "retry_reset_count": 2,
+    "checklist_item_count": 10,
     "checklist_blocked_count": 3,
     "platforms": [
+      "Facebook",
+      "Instagram",
       "TikTok"
     ]
   },
   "rows": [
+    {
+      "post_id": "FP-AUTO-263",
+      "platform": "Instagram",
+      "priority": 1,
+      "status": "failed",
+      "reason": "max_attempts_exceeded",
+      "attempts": 3,
+      "updated_at": "2026-06-22T06:00:12.004Z",
+      "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
+      "repair_action": "Reconnect the Instagram Business/Creator account to the Facebook Page or set IG_BUSINESS_ACCOUNT_ID, then push the worker secret and recapture readiness.",
+      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263",
+      "apply_command": "python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py",
+      "blocked_apply_command": "",
+      "blocked_apply_reasons": [],
+      "retry_reset_verification_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263",
+      "retry_reset_preview_command": "python3 scripts/reset_social_execution_state.py FP-AUTO-263",
+      "retry_reset_apply_command": "python3 scripts/reset_social_execution_state.py FP-AUTO-263 --apply",
+      "retry_reset_note": "Run the dry-run verification command first. Apply the retry reset only when the worker reports the row is executable.",
+      "readiness": {
+        "ready": true,
+        "api": "facebook-login",
+        "account_id_source": "FB_PAGE_ID"
+      },
+      "missing_secrets": [],
+      "local_missing_secrets": [],
+      "local_secret_presence": {},
+      "local_secret_ready": null,
+      "local_secret_source": "",
+      "public_posting_approved": null,
+      "preflight_status": "",
+      "preflight_blocked_count": null,
+      "preflight_command": "",
+      "preflight_report": "",
+      "repair_checklist": [
+        {
+          "id": "remote_worker_secrets",
+          "label": "Worker secrets",
+          "status": "pass",
+          "detail": "Worker readiness snapshot reports required secrets present.",
+          "command": ""
+        },
+        {
+          "id": "refresh_verification",
+          "label": "Refresh verification",
+          "status": "waiting",
+          "detail": "After repair, refresh admin so readiness, scheduler, blocker, and backlog state update together.",
+          "command": "python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py"
+        }
+      ],
+      "repair_checklist_blocked_count": 0,
+      "blocked": true
+    },
+    {
+      "post_id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+      "platform": "Instagram",
+      "priority": 1,
+      "status": "failed",
+      "reason": "max_attempts_exceeded",
+      "attempts": 3,
+      "updated_at": "2026-06-22T06:00:12.060Z",
+      "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
+      "repair_action": "Reconnect the Instagram Business/Creator account to the Facebook Page or set IG_BUSINESS_ACCOUNT_ID, then push the worker secret and recapture readiness.",
+      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+      "apply_command": "python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py",
+      "blocked_apply_command": "",
+      "blocked_apply_reasons": [],
+      "retry_reset_verification_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+      "retry_reset_preview_command": "python3 scripts/reset_social_execution_state.py FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+      "retry_reset_apply_command": "python3 scripts/reset_social_execution_state.py FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --apply",
+      "retry_reset_note": "Run the dry-run verification command first. Apply the retry reset only when the worker reports the row is executable.",
+      "readiness": {
+        "ready": true,
+        "api": "facebook-login",
+        "account_id_source": "FB_PAGE_ID"
+      },
+      "missing_secrets": [],
+      "local_missing_secrets": [],
+      "local_secret_presence": {},
+      "local_secret_ready": null,
+      "local_secret_source": "",
+      "public_posting_approved": null,
+      "preflight_status": "",
+      "preflight_blocked_count": null,
+      "preflight_command": "",
+      "preflight_report": "",
+      "repair_checklist": [
+        {
+          "id": "remote_worker_secrets",
+          "label": "Worker secrets",
+          "status": "pass",
+          "detail": "Worker readiness snapshot reports required secrets present.",
+          "command": ""
+        },
+        {
+          "id": "refresh_verification",
+          "label": "Refresh verification",
+          "status": "waiting",
+          "detail": "After repair, refresh admin so readiness, scheduler, blocker, and backlog state update together.",
+          "command": "python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py"
+        }
+      ],
+      "repair_checklist_blocked_count": 0,
+      "blocked": true
+    },
+    {
+      "post_id": "FP-AUTO-265",
+      "platform": "Facebook",
+      "priority": 2,
+      "status": "failed",
+      "reason": "",
+      "attempts": 2,
+      "updated_at": "2026-06-22T06:00:17.558Z",
+      "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
+      "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
+      "preview_command": "python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run",
+      "apply_command": "",
+      "blocked_apply_command": "",
+      "blocked_apply_reasons": [],
+      "retry_reset_verification_command": "",
+      "retry_reset_preview_command": "",
+      "retry_reset_apply_command": "",
+      "retry_reset_note": "",
+      "readiness": {
+        "ready": true
+      },
+      "missing_secrets": [],
+      "local_missing_secrets": [],
+      "local_secret_presence": {},
+      "local_secret_ready": null,
+      "local_secret_source": "",
+      "public_posting_approved": null,
+      "preflight_status": "",
+      "preflight_blocked_count": null,
+      "preflight_command": "",
+      "preflight_report": "",
+      "repair_checklist": [
+        {
+          "id": "remote_worker_secrets",
+          "label": "Worker secrets",
+          "status": "pass",
+          "detail": "Worker readiness snapshot reports required secrets present.",
+          "command": ""
+        },
+        {
+          "id": "refresh_verification",
+          "label": "Refresh verification",
+          "status": "review",
+          "detail": "After repair, refresh admin so readiness, scheduler, blocker, and backlog state update together.",
+          "command": "python3 scripts/refresh_promo_admin.py"
+        }
+      ],
+      "repair_checklist_blocked_count": 0,
+      "blocked": true
+    },
     {
       "post_id": "FP-AUTO-264",
       "platform": "TikTok",
@@ -27,7 +183,7 @@
       "status": "blocked",
       "reason": "tiktok_credentials_missing",
       "attempts": 0,
-      "updated_at": "2026-06-20T12:15:10.712Z",
+      "updated_at": "2026-06-22T06:00:11.912Z",
       "error_summary": "",
       "repair_action": "Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok public posting approval is false. Local secret source is also missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Complete TikTok OAuth/public posting setup locally, then push secrets and refresh Admin.",
       "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
@@ -43,6 +199,9 @@
       "retry_reset_note": "",
       "readiness": {
         "ready": false,
+        "posting_mode": "upload",
+        "upload_ready": false,
+        "direct_public_ready": false,
         "access_token_present": false,
         "refresh_config_present": false,
         "missing_secrets": [
@@ -51,7 +210,10 @@
           "TIKTOK_REFRESH_TOKEN"
         ],
         "public_posting_approved": false,
-        "default_privacy": "PUBLIC_TO_EVERYONE"
+        "default_privacy": "PUBLIC_TO_EVERYONE",
+        "brand_content_toggle": false,
+        "brand_organic_toggle": true,
+        "aigc_label_enabled": true
       },
       "missing_secrets": [
         "TIKTOK_CLIENT_KEY",
@@ -72,7 +234,7 @@
       "local_secret_source": "secrets/social_api.env",
       "public_posting_approved": false,
       "preflight_status": "blocked",
-      "preflight_blocked_count": 4,
+      "preflight_blocked_count": 7,
       "preflight_command": "python3 scripts/build_tiktok_setup_preflight.py",
       "preflight_report": "admin/reports/tiktok-setup-preflight.md",
       "repair_checklist": [

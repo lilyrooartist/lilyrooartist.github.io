@@ -7,17 +7,24 @@
 - **Reprises:** My Second Room Has No Light Switch
 
 ## Core narrative seed
-The Power of Light is the answer-back to My Second Room Has No Light Switch. The original song sits inside the small helplessness of a room you cannot quite control; the reprise turns toward agency, illumination, and the moment when the missing switch becomes a different kind of power.
+The Power of Light is the answer-back to My Second Room Has No Light Switch. The original song sits inside the small helplessness of a room you cannot quite control; the reprise returns to the same room with a workaround.
+
+The actual backstory is practical and very specific: Da wired a traditional light switch for the room, then realized the wiring he needed was not available in the wall where the switch was. The normal switch did not solve the problem, so he added a separate push button that actually controlled the lights.
+
+The instruction became the whole emotional object: ignore the wall switch and use the button. The room is still strange. The solution is not elegant. But the light works if you know the ritual.
 
 ## Emotional thesis
-This is not just "the light comes on." It is the discovery that light can be chosen, carried, borrowed, remembered, or made. The song should feel like returning to the same room with a new nervous system.
+This is not just "the light comes on." It is not generic inspiration and not a clean fix. It is the discovery that agency can look like an ugly little button that works.
+
+The power is not that the room becomes normal. The power is that Lily stops arriving empty-handed. Same weird room, different ritual.
 
 ## Anecdote hooks (starter)
 1. The first song was about the inconvenience that reveals a loneliness.
 2. The reprise is about realizing the room was never the whole story.
-3. A missing switch becomes a portable light: same object-world, changed meaning.
-4. The taped-over button/switch visual matters because it is not elegant. It is a workaround that becomes a tiny ritual of control.
+3. A nonworking wall switch becomes a separate working push button: same object-world, changed meaning.
+4. The button/switch visual matters because it is not elegant. It is a workaround that becomes a tiny ritual of control.
 5. The emotional turn is not "fixed forever." It is "I brought something with me this time."
+6. "Button supremacy, unfortunately" is the dry Lily voice version of the whole reprise.
 
 ## Lyric backstory placeholders
 - Add canonical lyric excerpt(s) to `11_LYRIC_BACKSTORY_INDEX.csv` once the final lyrics are available.

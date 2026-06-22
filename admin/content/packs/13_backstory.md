@@ -26,6 +26,10 @@ Out to eat, she orders for herself. At the grocery store, she leaves the cart an
 
 To anyone watching, these moments might look like nothing. But for Lily, they matter. They are the first little signs that she can be seen and still be safe.
 
+The podcast transcript sharpens the grocery-store scene: one aisle over is not far unless your nervous system is narrating, in which case it becomes international travel. The classroom moment is not about showing off either. It is Lily answering partly because the teacher needs someone to relieve the room.
+
+The track also has a more exposed sound than the earliest Lily Roo songs. The vocals are still breathless and intimate, but they are carrying more of the room, and the couch-practiced guitar solo becomes its own little act of stepping out.
+
 This is not a song about becoming someone else.
 
 It is a song about Lily Roo becoming a little less hidden.
@@ -38,6 +42,7 @@ This is not a transformation song. It is a small-visibility song: still quiet, s
 2. Leaving the cart to go one aisle over at the grocery store.
 3. Raising her hand in class when everyone else waits.
 4. The first tiny signs of being visible without disappearing afterward.
+5. Practicing guitar from the couch: not alarming the furniture, but still stepping further into the sound.
 
 ## Lyric backstory placeholders
 - "13. Small jump. / Not brave. Just enough." is the central thesis: tiny independence, not transformation.

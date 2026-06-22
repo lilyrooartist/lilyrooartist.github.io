@@ -1,14 +1,14 @@
 # Monetization Activation Plan - Lily Roo
 
-Generated: 2026-06-22T05:32:18.040098Z
+Generated: 2026-06-22T06:02:36.358106Z
 
 ## Summary
 - Current subscribers: **6 / 1000**
 - Runway status: **behind_365_day_pace**
 - Ready subscriber CTA approvals: **2**
 - Subscriber CTA swaps available: **0**
-- Platform fixes: **1**
-- Activation actions: **5**
+- Platform fixes: **4**
+- Activation actions: **8**
 
 ## Activation Sequence
 1. **Approve manual YouTube Community subscriber rows**
@@ -26,20 +26,34 @@ Generated: 2026-06-22T05:32:18.040098Z
 3. **Preview approved backlog reschedule**
    - Phase: `Recover stalled approved backlog`; status: `preview_first`
    - Detail: Preview a new schedule for approved past-due posts. Normal apply is hidden until known executor/platform blockers clear.
-   - Blocked apply command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin`
-   - Deliberate override command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin`
-   - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24`
-4. **Repair TikTok executor**
+   - Blocked apply command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin`
+   - Deliberate override command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin`
+   - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24`
+4. **Repair Instagram executor**
+   - Phase: `Clear platform blockers`; status: `needs_platform_fix`
+   - Detail: Reconnect the Instagram Business/Creator account to the Facebook Page or set IG_BUSINESS_ACCOUNT_ID, then push the worker secret and recapture readiness.
+   - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263`
+   - After review: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
+5. **Repair Instagram executor**
+   - Phase: `Clear platform blockers`; status: `needs_platform_fix`
+   - Detail: Reconnect the Instagram Business/Creator account to the Facebook Page or set IG_BUSINESS_ACCOUNT_ID, then push the worker secret and recapture readiness.
+   - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM`
+   - After review: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
+6. **Repair Facebook executor**
+   - Phase: `Clear platform blockers`; status: `needs_platform_fix`
+   - Detail: Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.
+   - Preview/check: `python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run`
+7. **Repair TikTok executor**
    - Phase: `Clear platform blockers`; status: `needs_platform_fix`
    - Detail: Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok public posting approval is false. Local secret source is also missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Complete TikTok OAuth/public posting setup locally, then push secrets and refresh Admin.
    - Missing secrets: `TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN`
    - Missing locally: `TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN`
    - Local source: `secrets/social_api.env`
    - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
-5. **Current operations next action: Preview reschedule for approved past-due posts**
+8. **Current operations next action: Preview clear approved backlog row**
    - Phase: `Operations packet`; status: `waiting_for_user`
    - Detail: Approved posts are past due; preview a new schedule before any apply step.
-   - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24`
+   - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24`
 
 ## Guardrails
 - This plan does not approve, apply, publish, or post anything.

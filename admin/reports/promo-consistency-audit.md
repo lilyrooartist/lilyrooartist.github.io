@@ -1,6 +1,6 @@
 # Promo Consistency Audit - Lily Roo
 
-Generated: 2026-06-22T05:32:18.871071Z
+Generated: 2026-06-22T06:02:37.004282Z
 
 ## Summary
 - Status: **pass**
@@ -23,7 +23,7 @@ Generated: 2026-06-22T05:32:18.871071Z
 - **platform_repair_count_matches_ledger**: `pass`
   - Platform repair packet should match platform repair blockers in the ledger.
 - **executor_platform_fix_count_matches_platform_packet**: `pass`
-  - Executor platform-fix count should match the platform repair packet.
+  - Executor platform-fix count should match the platform repair packet after excluding manual-only handoff rows.
 - **tiktok_preflight_status_matches_platform_repair**: `pass`
   - TikTok platform repair row should mirror the setup preflight status.
 - **tiktok_preflight_local_missing_matches_platform_repair**: `pass`
@@ -31,7 +31,7 @@ Generated: 2026-06-22T05:32:18.871071Z
 - **tiktok_preflight_worker_missing_matches_platform_repair**: `pass`
   - TikTok preflight worker missing secrets should match the platform repair row.
 - **scheduler_blocked_ids_present_in_executor_attention**: `pass`
-  - Scheduler dry-run blockers should be represented in executor attention; executor history may include stale rows that are now would-post.
+  - Scheduler dry-run blockers should be represented in current scheduler detail or executor attention; executor history may include stale rows that are now would-post.
 - **manual_distribution_count_matches_ledger**: `pass`
   - Manual distribution packet should match manual distribution blockers in the ledger.
 - **manual_distribution_handoff_count_matches_packet**: `pass`

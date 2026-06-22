@@ -1,34 +1,48 @@
 # Human Handoff Resolution Preview - Lily Roo
 
-Generated: 2026-06-22T05:32:18.656139Z
+Generated: 2026-06-22T06:02:36.758228Z
 
 ## Summary
-- Worksheet rows: **7**
-- Executed previews: **7**
-- Skipped previews: **0**
-- Status counts: `{"input_missing": 3, "preview_ok": 3, "preview_ok_with_warning": 1}`
+- Worksheet rows: **10**
+- Executed previews: **6**
+- Skipped previews: **4**
+- Status counts: `{"input_missing": 3, "preview_ok": 2, "preview_ok_with_warning": 1, "skipped": 4}`
 - Policy: Only python3 scripts/* commands with --dry-run, or reschedule previews without --apply, are executed.
 - Guardrail: This preview runner never executes apply, refresh-admin, PUBLIC_URL placeholder, non-python, or unsupported commands.
 
 ## Previews
-- **approve-checked-scheduled-batch** (`preview_ok`)
-  - Phase: `Approval`; input needed: `human_review_decision`
-  - Safety: `safe_preview` (dry_run_command)
-  - Command: `python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run`
-  - Output: FP-AUTO-258: approved 'yes' -> 'yes' | FP-AUTO-261: approved 'yes' -> 'yes' | Checked batch guard: 2 checked id(s); 2 requested; 0 unchecked; 0 change(s). | Dry run only; did not update data/scheduled_posts.csv
-  - Guardrail: Use --checked-batch so only rows that passed review checks are approved.
+- **platform-setup-FP-AUTO-263** (`skipped`)
+  - Phase: `Platform setup`; input needed: `local_secret_presence_and_public_posting_approval`
+  - Safety: `skipped` (not_marked_preview_safe)
+  - Command: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263`
+  - Guardrail: Push worker secrets only after local OAuth/public posting setup is complete.
 - **platform-setup-FP-AUTO-264** (`input_missing`)
   - Phase: `Platform setup`; input needed: `local_secret_presence_and_public_posting_approval`
   - Safety: `safe_preview` (dry_run_command)
   - Command: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
   - Output: ERROR: TIKTOK_CLIENT_KEY is missing from secrets/social_api.env | ERROR: TIKTOK_CLIENT_SECRET is missing from secrets/social_api.env | ERROR: TIKTOK_REFRESH_TOKEN is missing from secrets/social_api.env
   - Guardrail: Run the TikTok preflight before pushing secrets; push worker secrets only after local OAuth/public posting setup is complete.
+- **platform-setup-FP-AUTO-265** (`skipped`)
+  - Phase: `Platform setup`; input needed: `local_secret_presence_and_public_posting_approval`
+  - Safety: `skipped` (not_marked_preview_safe)
+  - Command: `python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run`
+  - Guardrail: Push worker secrets only after local OAuth/public posting setup is complete.
+- **platform-setup-FP-PLAN-TWELVE-DOLLARS-INSTAGRAM** (`skipped`)
+  - Phase: `Platform setup`; input needed: `local_secret_presence_and_public_posting_approval`
+  - Safety: `skipped` (not_marked_preview_safe)
+  - Command: `python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM`
+  - Guardrail: Push worker secrets only after local OAuth/public posting setup is complete.
 - **backlog-reschedule** (`preview_ok_with_warning`)
   - Phase: `Backlog recovery`; input needed: `clearance_confirmation`
   - Safety: `safe_preview` (reschedule_preview_command)
-  - Command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24`
-  - Output: Rows selected: 7 | - FP-AUTO-258 Instagram I Learned It All in Fifteen Seconds: 2026-06-05T15:35:00-04:00 -> 2026-06-23T10:00:00+00:00 |   WARNING: known blocker: not_approved | - FP-AUTO-261 YouTube Community I Learned It All in Fifteen Seconds: 2026-06-06T19:10:00-04:00 -> 2026-06-24T10:00:00+00:00 |   WARNING: known blocker: not_approved | - FP-AUTO-264 TikTok I Learned It All in Fifteen Seconds: 2026-06-09T21:25:00-04:00 -> 2026-06-25T10:00:00+00:00 |   WARNING: known blocker: tiktok_credentials_missing | - FP-PLAN-TWELVE-DOLLARS-X X Twelve Dollars: 2026-06-20T10:15:00-04:00 -> 2026-06-26T10:00:00+00:00 | - FP-AUTO-263 Instagram I Learned It All in Fifteen Seconds: 2026-06-21T10:00:00+09:00 -> 2026-06-27T10:00:00+00:00 | - FP-PLAN-TWELVE-DOLLARS-INSTAGRAM Instagram Twelve Dollars: 2026-06-21T14:05:00-04:00 -> 2026-06-28T10:00:00+00:00 | - FP-AUTO-265 Facebook I Learned It All in Fifteen Seconds: 2026-06-22T10:00:00+09:00 -> 2026-06-29T10:00:00+00:00 | Dry run only. Re-run with --apply to write the schedule.
+  - Command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24`
+  - Output: Rows selected: 4 | - FP-AUTO-258 Instagram I Learned It All in Fifteen Seconds: 2026-06-05T15:35:00-04:00 -> 2026-06-23T10:00:00+08:00 | - FP-AUTO-264 TikTok I Learned It All in Fifteen Seconds: 2026-06-09T21:25:00-04:00 -> 2026-06-24T10:00:00+08:00 |   WARNING: known blocker: tiktok_credentials_missing | - FP-AUTO-263 Instagram I Learned It All in Fifteen Seconds: 2026-06-21T10:00:00+09:00 -> 2026-06-25T10:00:00+08:00 |   WARNING: known blocker: Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID. | - FP-PLAN-TWELVE-DOLLARS-INSTAGRAM Instagram Twelve Dollars: 2026-06-21T14:05:00-04:00 -> 2026-06-26T10:00:00+08:00 |   WARNING: known blocker: Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID. | Dry run only. Re-run with --apply to write the schedule.
   - Guardrail: Normal apply stays hidden until known executor/platform blockers clear.
+- **manual-distribution-FP-AUTO-261** (`skipped`)
+  - Phase: `Manual distribution`; input needed: `public_post_url`
+  - Safety: `skipped` (placeholder_public_url)
+  - Command: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL`
+  - Guardrail: Do not log a manual post until a real public URL exists.
 - **manual-distribution-FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY** (`preview_ok`)
   - Phase: `Manual distribution`; input needed: `manual_post_review_and_public_url`
   - Safety: `safe_preview` (dry_run_command)

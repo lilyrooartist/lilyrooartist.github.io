@@ -366,7 +366,7 @@ def scheduled_approval_batch_actions(packet):
         return []
     checked_effect = summary.get("checked_batch_effect") or {}
     checked_change_count = int(checked_effect.get("change_count") or 0)
-    if summary.get("checked_batch_ids") and checked_change_count == 0:
+    if checked_change_count == 0:
         return []
     checked_count = int(summary.get("review_check_passed_count") or 0)
     blocked_count = int(summary.get("review_check_blocked_count") or 0)
@@ -437,18 +437,26 @@ def backlog_reschedule_actions(status, backlog_preview):
     monetization = (status.get("kpi") or {}).get("monetization") or {}
     backlog_summary = (backlog_preview.get("summary") or {}) if backlog_preview else {}
     clearance_manifest = (backlog_preview.get("backlog_clearance_manifest") or {}) if backlog_preview else {}
+    partial_manifest = (backlog_preview.get("partial_clear_apply_manifest") or {}) if backlog_preview else {}
     approved_backlog = int(monetization.get("approved_backlog_posts") or 0)
     preview_command = backlog_summary.get("preview_command") or monetization.get("backlog_reschedule_preview_command") or ""
     if not approved_backlog or not preview_command:
         return []
     apply_allowed = bool(backlog_summary.get("apply_allowed_without_override")) if backlog_summary else False
+    partial_command = partial_manifest.get("recommended_next_command") or ""
+    label = "Preview reschedule for approved past-due posts"
+    command = preview_command
     note = "Preview first. Safe apply is available because no known executor blockers remain."
     if not apply_allowed:
         note = "Preview first. Normal apply is hidden until known executor/platform blockers clear; override requires deliberate review."
+    if partial_command:
+        label = "Preview clear approved backlog row"
+        command = partial_command
+        note = "Preview the first unblocked approved backlog row; blocked rows stay held behind their repair gates."
     return [
         command_row(
-            "Preview reschedule for approved past-due posts",
-            preview_command,
+            label,
+            command,
             "backlog_reschedule",
             0,
             {
@@ -460,6 +468,9 @@ def backlog_reschedule_actions(status, backlog_preview):
                 "apply_command": backlog_summary.get("apply_command") or "",
                 "blocked_apply_command": backlog_summary.get("blocked_apply_command") or "",
                 "override_apply_command": backlog_summary.get("override_apply_command") or "",
+                "partial_clear_apply_manifest": partial_manifest,
+                "partial_clear_preview_command": partial_command,
+                "partial_clear_apply_command": partial_manifest.get("recommended_apply_command") or "",
                 "backlog_clearance_manifest": clearance_manifest,
                 "clearance_checklist": clearance_manifest.get("operator_checklist") or [],
                 "completion_evidence": clearance_manifest.get("completion_evidence") or [],

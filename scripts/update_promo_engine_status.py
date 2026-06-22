@@ -34,8 +34,12 @@ HUMAN_HANDOFF_RESOLUTION_PREVIEW = ROOT / "data" / "human_handoff_resolution_pre
 PROMO_UNLOCK_SEQUENCE = ROOT / "data" / "promo_unlock_sequence.json"
 SCHEDULED_APPROVAL_PACKET = ROOT / "data" / "scheduled_approval_packet.json"
 MANUAL_DISTRIBUTION_PACKET = ROOT / "data" / "manual_distribution_packet.json"
+MANUAL_POSTING_CLIPBOARD = ROOT / "data" / "manual_posting_clipboard.json"
 PUBLISHED_LOG_RECONCILIATION = ROOT / "data" / "published_log_reconciliation.json"
 BACKLOG_RESCHEDULE_PREVIEW = ROOT / "data" / "backlog_reschedule_preview.json"
+EXPERIMENT_RESULT_COLLECTION = ROOT / "data" / "experiment_result_collection_packet.json"
+EXPERIMENT_RESULT_CLIPBOARD = ROOT / "data" / "experiment_result_clipboard.json"
+EXPERIMENT_PUBLISH_RUNWAY = ROOT / "data" / "experiment_publish_runway.json"
 PUBLISHED = ROOT / "admin" / "content" / "Published_Log.csv"
 FUTURE_POSTS = ROOT / "admin" / "future-posts.json"
 RESCHEDULE_SCRIPT = ROOT / "scripts" / "reschedule_scheduled_posts.py"
@@ -44,6 +48,11 @@ ADMIN_INDEX = ROOT / "admin" / "index.html"
 
 PROMO_PLATFORMS = ["X", "Instagram", "TikTok", "Facebook", "YouTube Community"]
 YOUTUBE_MONETIZATION_SUBSCRIBER_TARGET = 1000
+GROWTH_GOAL_START_DATE = "2026-06-22"
+GROWTH_GOAL_DAYS = 30
+GROWTH_GOAL_LIFT = 0.25
+FORMAT_WINNER_COUNT = 3
+MIN_MEASURED_POSTS_PER_WINNING_FORMAT = 2
 STORE_RECHECK_INTERVAL_HOURS = 24
 STORE_SERVICES = [
     ("Spotify", "spotify_url"),
@@ -542,6 +551,360 @@ def int_metric(value, default=0):
         return default
 
 
+def numeric_metric(value):
+    if value in (None, "", "pending"):
+        return None
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return None
+
+
+def total_plays_views(snapshot: dict | None):
+    if not isinstance(snapshot, dict):
+        return None
+    values = [
+        (snapshot.get("youtube") or {}).get("total_views"),
+        (snapshot.get("spotify") or {}).get("release_streams"),
+        (snapshot.get("instagram") or {}).get("profile_visits_7d"),
+        (snapshot.get("tiktok") or {}).get("profile_views_7d"),
+        (snapshot.get("x") or {}).get("impressions_7d"),
+        (snapshot.get("facebook") or {}).get("reach_7d"),
+    ]
+    numeric_values = [value for value in (numeric_metric(item) for item in values) if value is not None]
+    if not numeric_values:
+        return None
+    return int(round(sum(numeric_values)))
+
+
+def row_metric_total(row: dict) -> int:
+    total = 0
+    for key in ("views", "likes", "comments", "shares", "saves", "subs_delta"):
+        value = numeric_metric(row.get(key))
+        if value is not None:
+            total += int(value)
+    return total
+
+
+def format_key(row: dict) -> str:
+    platform = str(row.get("platform") or "Unknown platform").strip() or "Unknown platform"
+    post_type = str(row.get("post_type") or "").strip()
+    if not post_type:
+        has_clip = bool(str(row.get("clip_url") or "").strip())
+        has_image = bool(str(row.get("imagery_url") or row.get("media_key") or row.get("imagery") or "").strip())
+        if platform.lower() == "youtube community":
+            post_type = "community"
+        elif has_clip:
+            post_type = "video"
+        elif has_image:
+            post_type = "image"
+        else:
+            post_type = "text"
+    cta = str(row.get("cta_type") or row.get("selected_copy_strategy") or row.get("selected_cta_strength") or "").strip()
+    return " + ".join(part for part in (platform, post_type, cta) if part)
+
+
+def experiment_format_key(row: dict) -> str:
+    platform = platform_bucket(row.get("platform") or "")
+    has_clip = bool(str(row.get("clip_url") or "").strip())
+    has_image = bool(str(row.get("imagery_url") or row.get("media_key") or row.get("imagery") or "").strip())
+    cta = str(row.get("selected_cta_strength") or row.get("cta_type") or row.get("selected_copy_strategy") or "").strip().lower()
+    hard_cta = "hard" in cta or "subscribe" in cta or "youtube" in cta
+    if has_clip:
+        return "Short video clip + platform-native CTA"
+    if platform == "YouTube Community":
+        return "YouTube Community archive/playlist CTA"
+    if has_image:
+        return "Release-art image + growth CTA" if hard_cta else "Release-art image + story hook"
+    return "Text story hook + link CTA"
+
+
+def top_format_candidates(published_rows: list[dict], scheduled_rows: list[dict], promo_plan: dict) -> list[dict]:
+    candidates: dict[str, dict] = {}
+
+    def bucket(row: dict, source: str):
+        key = format_key(row)
+        candidate = candidates.setdefault(key, {
+            "format": key,
+            "published_count": 0,
+            "scheduled_count": 0,
+            "planned_count": 0,
+            "measured_result_total": 0,
+            "measured_post_count": 0,
+            "example_hooks": [],
+        })
+        if source == "published":
+            candidate["published_count"] += 1
+            metric_total = row_metric_total(row)
+            if metric_total:
+                candidate["measured_result_total"] += metric_total
+                candidate["measured_post_count"] += 1
+        elif source == "scheduled":
+            candidate["scheduled_count"] += 1
+        else:
+            candidate["planned_count"] += 1
+        hook = str(row.get("hook") or row.get("text") or row.get("imagery") or "").strip()
+        if hook and hook not in candidate["example_hooks"] and len(candidate["example_hooks"]) < 2:
+            candidate["example_hooks"].append(hook[:160])
+
+    for row in published_rows:
+        bucket(row, "published")
+    for row in scheduled_rows:
+        bucket(row, "scheduled")
+    for row in promo_plan.get("posts") or []:
+        bucket(row, "planned")
+
+    ranked = []
+    for candidate in candidates.values():
+        measured = candidate["measured_post_count"]
+        candidate["minimum_measured_posts"] = MIN_MEASURED_POSTS_PER_WINNING_FORMAT
+        candidate["needed_measured_posts"] = max(MIN_MEASURED_POSTS_PER_WINNING_FORMAT - measured, 0)
+        candidate["evidence_status"] = (
+            "winner_ready"
+            if measured >= MIN_MEASURED_POSTS_PER_WINNING_FORMAT
+            else "partially_measured"
+            if measured
+            else "needs_result_metrics"
+        )
+        candidate["average_result_per_measured_post"] = (
+            round(candidate["measured_result_total"] / measured, 2)
+            if measured else 0
+        )
+        candidate["decision_note"] = (
+            "Enough measured posts to compare as a repeatable format."
+            if candidate["evidence_status"] == "winner_ready"
+            else f"Need {candidate['needed_measured_posts']} more measured post(s) before this can be called a winning format."
+        )
+        candidate["score"] = (
+            candidate["measured_result_total"] * 10
+            + candidate["published_count"] * 3
+            + candidate["scheduled_count"] * 2
+            + candidate["planned_count"]
+        )
+        ranked.append(candidate)
+    ranked.sort(key=lambda item: (-item["score"], item["format"]))
+    return ranked[:3]
+
+
+def format_winner_readiness(candidates: list[dict], result_collection: dict) -> dict:
+    ready_candidates = [
+        candidate for candidate in candidates
+        if candidate.get("measured_post_count", 0) >= MIN_MEASURED_POSTS_PER_WINNING_FORMAT
+    ]
+    pending_summary = (result_collection.get("summary") or {}) if isinstance(result_collection, dict) else {}
+    missing_count = int_metric(pending_summary.get("missing_published_log_count"))
+    pending_fields = int_metric(pending_summary.get("pending_result_field_count"))
+    ready_imports = int_metric(pending_summary.get("ready_to_import_count"))
+    blockers = []
+    if len(ready_candidates) < FORMAT_WINNER_COUNT:
+        blockers.append(
+            f"{FORMAT_WINNER_COUNT - len(ready_candidates)} more format candidate(s) need at least "
+            f"{MIN_MEASURED_POSTS_PER_WINNING_FORMAT} measured posts."
+        )
+    if pending_fields:
+        blockers.append(f"{pending_fields} post-result field(s) still need collected values.")
+    if missing_count:
+        blockers.append(f"{missing_count} experiment post(s) still need public URLs in Published_Log.csv.")
+    return {
+        "status": "ready_to_name_winners" if len(ready_candidates) >= FORMAT_WINNER_COUNT else "needs_more_result_evidence",
+        "winner_count_target": FORMAT_WINNER_COUNT,
+        "minimum_measured_posts_per_format": MIN_MEASURED_POSTS_PER_WINNING_FORMAT,
+        "ready_candidate_count": len(ready_candidates),
+        "ready_candidates": [candidate.get("format") for candidate in ready_candidates[:FORMAT_WINNER_COUNT]],
+        "pending_result_field_count": pending_fields,
+        "ready_to_import_count": ready_imports,
+        "missing_published_log_count": missing_count,
+        "blockers": blockers,
+        "next_action": (
+            "Name the top 3 repeatable formats from measured results."
+            if len(ready_candidates) >= FORMAT_WINNER_COUNT
+            else "Collect/import post results and log missing public URLs before declaring the top 3 formats."
+        ),
+    }
+
+
+def tracking_fields_for_platform(platform: str) -> list[str]:
+    normalized = platform_bucket(platform).lower()
+    if normalized == "youtube community" or normalized == "youtube":
+        return ["views", "likes", "comments", "shares", "subs_delta", "youtube.total_views", "youtube.subscribers"]
+    if normalized == "tiktok":
+        return ["views", "likes", "comments", "shares", "saves", "tiktok.followers", "tiktok.profile_views_7d"]
+    if normalized == "instagram":
+        return ["views", "likes", "comments", "shares", "saves", "instagram.followers", "instagram.profile_visits_7d"]
+    if normalized == "facebook":
+        return ["views", "likes", "comments", "shares", "facebook.followers", "facebook.reach_7d"]
+    if normalized == "x":
+        return ["views", "likes", "comments", "shares", "x.followers", "x.impressions_7d"]
+    return ["views", "likes", "comments", "shares", "saves", "subs_delta"]
+
+
+def experiment_asset(row: dict) -> dict:
+    return {
+        "id": row.get("id") or row.get("post_id_or_url") or "",
+        "platform": row.get("platform") or "",
+        "song": row.get("song") or row.get("song_era") or "",
+        "post_type": row.get("post_type") or ("video" if row.get("clip_url") else "image" if row.get("imagery_url") else "text"),
+        "scheduled_at": row.get("scheduled_at") or row.get("date") or "",
+        "approved": row.get("approved") or "",
+        "execution_mode": row.get("execution_mode") or "",
+        "imagery_url": row.get("imagery_url") or "",
+        "clip_url": row.get("clip_url") or "",
+        "copy": (row.get("text") or row.get("hook") or "")[:220],
+        "approval_command": row.get("approval_command") or "",
+    }
+
+
+def active_format_experiments(scheduled_rows: list[dict], promo_plan: dict, now: datetime) -> list[dict]:
+    experiments: dict[str, dict] = {}
+
+    def add_row(row: dict, source: str):
+        key = experiment_format_key(row)
+        platform = row.get("platform") or ""
+        experiment = experiments.setdefault(key, {
+            "format": key,
+            "hypothesis": f"{key} can turn existing Lily Roo release assets into measurable plays/views growth across the platforms where it fits.",
+            "status": "queued_or_planned",
+            "scheduled_count": 0,
+            "planned_count": 0,
+            "approved_count": 0,
+            "blocked_count": 0,
+            "platforms": [],
+            "known_blockers": [],
+            "assets": [],
+            "tracking_fields": tracking_fields_for_platform(platform),
+            "measurement_window_days": 7,
+            "result_destination": "admin/content/Published_Log.csv plus data/manual_social_stats.json",
+            "next_action": "",
+        })
+        bucketed_platform = platform_bucket(platform)
+        if bucketed_platform and bucketed_platform not in experiment["platforms"]:
+            experiment["platforms"].append(bucketed_platform)
+        if source == "scheduled":
+            experiment["scheduled_count"] += 1
+        else:
+            experiment["planned_count"] += 1
+        if str(row.get("approved") or "").lower() == "yes":
+            experiment["approved_count"] += 1
+        else:
+            experiment["blocked_count"] += 1
+            if bucketed_platform == "TikTok":
+                for blocker in ("TIKTOK_CLIENT_KEY", "TIKTOK_CLIENT_SECRET", "TIKTOK_REFRESH_TOKEN", "TIKTOK_PUBLIC_POSTING_APPROVED"):
+                    if blocker not in experiment["known_blockers"]:
+                        experiment["known_blockers"].append(blocker)
+            elif row.get("approval_command"):
+                blocker = "manual approval"
+                if blocker not in experiment["known_blockers"]:
+                    experiment["known_blockers"].append(blocker)
+        if len(experiment["assets"]) < 4:
+            experiment["assets"].append(experiment_asset(row))
+        experiment["tracking_fields"] = sorted(set(experiment["tracking_fields"]) | set(tracking_fields_for_platform(platform)))
+
+    for row in scheduled_rows:
+        scheduled_at = parse_datetime(row.get("scheduled_at"))
+        approved = str(row.get("approved") or "").lower() == "yes"
+        if approved or (scheduled_at and scheduled_at >= now - timedelta(days=7)):
+            add_row(row, "scheduled")
+    for row in promo_plan.get("posts") or []:
+        add_row(row, "planned")
+
+    ranked = []
+    for experiment in experiments.values():
+        experiment["platforms"] = sorted(experiment["platforms"])
+        if experiment["approved_count"] and experiment["blocked_count"]:
+            command = next((asset["approval_command"] for asset in experiment["assets"] if asset.get("approval_command")), "")
+            experiment["next_action"] = (
+                "Measure approved rows now; "
+                + (f"review blocked variant with {command}." if command else "keep blocked variants visible until their approval/platform gate clears.")
+            )
+            experiment["status"] = "partially_ready"
+        elif experiment["planned_count"] and experiment["blocked_count"]:
+            command = next((asset["approval_command"] for asset in experiment["assets"] if asset.get("approval_command")), "")
+            experiment["next_action"] = command or "Review and approve the planned row, then refresh the admin status."
+            experiment["status"] = "needs_review"
+        elif experiment["scheduled_count"] and experiment["approved_count"]:
+            experiment["next_action"] = "Publish or confirm the scheduled row, then log public URL and 7-day result metrics."
+            experiment["status"] = "ready_to_measure"
+        else:
+            experiment["next_action"] = "Keep this format in the experiment backlog until a publishable row exists."
+            experiment["status"] = "backlog"
+        experiment["score"] = (
+            experiment["approved_count"] * 5
+            + experiment["scheduled_count"] * 3
+            + experiment["planned_count"] * 2
+            - experiment["blocked_count"]
+        )
+        ranked.append(experiment)
+    ranked.sort(key=lambda item: (-item["score"], item["format"]))
+    return ranked[:3]
+
+
+def growth_goal_state(metrics_history: dict, published_rows: list[dict], scheduled_rows: list[dict], promo_plan: dict, now: datetime, result_collection: dict | None = None) -> dict:
+    snapshots = metrics_history.get("snapshots") if isinstance(metrics_history, dict) else []
+    snapshots = snapshots or []
+    latest = snapshots[-1] if snapshots else {}
+    goal_start = date_value(GROWTH_GOAL_START_DATE)
+    baseline_snapshot = None
+    for snapshot in snapshots:
+        snapshot_date = date_value(snapshot.get("date") or snapshot.get("captured_at"))
+        if goal_start and snapshot_date and snapshot_date >= goal_start:
+            baseline_snapshot = snapshot
+            break
+    baseline_policy = "first_snapshot_on_or_after_goal_start"
+    if baseline_snapshot is None and snapshots:
+        baseline_snapshot = latest
+        baseline_policy = "latest_available_snapshot_until_goal_start_capture"
+    baseline_total = total_plays_views(baseline_snapshot)
+    current_total = total_plays_views(latest)
+    target_total = int(round(baseline_total * (1 + GROWTH_GOAL_LIFT))) if baseline_total is not None else None
+    delta = current_total - baseline_total if current_total is not None and baseline_total is not None else None
+    percent_to_target = round((current_total / target_total) * 100, 2) if current_total is not None and target_total else None
+    lift_percent = round((delta / baseline_total) * 100, 2) if delta is not None and baseline_total else None
+    goal_end = (goal_start + timedelta(days=GROWTH_GOAL_DAYS)).isoformat() if goal_start else ""
+    days_remaining = max(((goal_start + timedelta(days=GROWTH_GOAL_DAYS)) - now.date()).days, 0) if goal_start else None
+    if baseline_total is None or current_total is None:
+        status = "needs_baseline_metrics"
+        action_needed = "Capture or import plays/views metrics so the 30-day growth target has a baseline."
+    elif current_total >= target_total:
+        status = "target_reached"
+        action_needed = "Keep publishing and identify the winning repeatable formats from measured post results."
+    elif not published_rows and not (promo_plan.get("posts") or []):
+        status = "needs_distribution"
+        action_needed = "Create and approve platform-native posts so the growth goal has active distribution."
+    else:
+        status = "in_progress"
+        action_needed = "Publish or approve the next platform-native rows, then refresh manual/public metrics to rank formats by results."
+    candidates = top_format_candidates(published_rows, scheduled_rows, promo_plan)
+    return {
+        "primary": "Grow total plays/views by 25% in 30 days",
+        "goal_start_date": GROWTH_GOAL_START_DATE,
+        "goal_end_date": goal_end,
+        "goal_days": GROWTH_GOAL_DAYS,
+        "target_lift_percent": round(GROWTH_GOAL_LIFT * 100, 2),
+        "baseline_total_plays_views": baseline_total,
+        "baseline_snapshot_date": (baseline_snapshot or {}).get("date", ""),
+        "baseline_policy": baseline_policy,
+        "current_total_plays_views": current_total,
+        "target_total_plays_views": target_total,
+        "delta_plays_views": delta,
+        "lift_percent": lift_percent,
+        "percent_to_target": percent_to_target,
+        "days_remaining": days_remaining,
+        "status": status,
+        "action_needed": action_needed,
+        "top_repeatable_format_candidates": candidates,
+        "format_winner_readiness": format_winner_readiness(candidates, result_collection or {}),
+        "active_format_experiments": active_format_experiments(scheduled_rows, promo_plan, now),
+        "metric_sources": [
+            "youtube.total_views",
+            "spotify.release_streams",
+            "instagram.profile_visits_7d",
+            "tiktok.profile_views_7d",
+            "x.impressions_7d",
+            "facebook.reach_7d",
+        ],
+    }
+
+
 def latest_youtube_subscribers(metrics: dict, history: dict) -> int:
     latest = history.get("latest") or {}
     latest_youtube = latest.get("youtube") or {}
@@ -673,7 +1036,7 @@ def monetization_state(metrics: dict, history: dict, metrics_history: dict, prom
     approval_blockers = int_metric(execution_state.get("approval_needed_count"))
     platform_fix_blockers = int_metric(execution_state.get("platform_fix_needed_count"))
     reschedule_start = (datetime.now().astimezone() + timedelta(days=1)).replace(hour=10, minute=0, second=0, microsecond=0).isoformat()
-    reschedule_preview_command = f"python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at {shell_quote(reschedule_start)} --spacing-hours 24"
+    reschedule_preview_command = f"python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at {shell_quote(reschedule_start)} --spacing-hours 24"
     reschedule_apply_command = reschedule_preview_command + " --apply --refresh-admin"
     next_pressure = []
     if approved_upcoming <= 0 and review_posts > 0:
@@ -941,6 +1304,7 @@ def social_execution_state(snapshot, scheduled_rows=None):
     source_rows = categorized_attention or attention
     approval_needed = []
     platform_fix_needed = []
+    manual_handoff_needed = []
     for item in source_rows:
         queue_row = scheduled.get(item.get("post_id"), {})
         enriched = {
@@ -952,6 +1316,14 @@ def social_execution_state(snapshot, scheduled_rows=None):
             enriched["repair_action"] = "Review this queued post, set approved=yes only if it should publish, then refresh the admin queue."
             enriched["repair_command"] = f"python3 scripts/update_scheduled_post_approval.py {shell_quote(item.get('post_id', ''))} --refresh-admin"
             approval_needed.append(enriched)
+        elif (
+            item.get("reason") == "manual_only"
+            or queue_row.get("execution_mode") == "manual"
+            or queue_row.get("post_type") == "community"
+        ):
+            enriched["repair_action"] = "Post this row through the manual posting clipboard, then log the public URL."
+            enriched["repair_command"] = "Open admin/reports/manual-posting-clipboard.md"
+            manual_handoff_needed.append(enriched)
         else:
             guidance = social_platform_repair_guidance(item)
             enriched.update(guidance)
@@ -965,11 +1337,13 @@ def social_execution_state(snapshot, scheduled_rows=None):
         "attention_count": int(summary.get("attention_count") or 0),
         "approval_needed_count": len(approval_needed),
         "platform_fix_needed_count": len(platform_fix_needed),
+        "manual_handoff_needed_count": len(manual_handoff_needed),
         "status_counts": summary.get("status_counts") or {},
         "platform_counts": summary.get("platform_counts") or {},
         "latest_attention": attention,
         "approval_needed": approval_needed,
         "platform_fix_needed": platform_fix_needed,
+        "manual_handoff_needed": manual_handoff_needed,
         "action_needed": snapshot.get("action_needed", "") if isinstance(snapshot, dict) else "Run scripts/capture_social_executions.py.",
     }
 
@@ -1500,6 +1874,29 @@ def manual_distribution_state(packet: dict) -> dict:
     }
 
 
+def manual_posting_clipboard_state(packet: dict) -> dict:
+    summary = packet.get("summary") if isinstance(packet, dict) else {}
+    summary = summary or {}
+    return {
+        "source_path": str(MANUAL_POSTING_CLIPBOARD.relative_to(ROOT)),
+        "report_path": "admin/reports/manual-posting-clipboard.md",
+        "available": bool(packet),
+        "status": summary.get("status") or "unknown",
+        "postable_count": int_metric(summary.get("postable_count")),
+        "waiting_public_url_count": int_metric(summary.get("waiting_public_url_count")),
+        "public_community_url": summary.get("public_community_url") or "",
+        "batch_log_preview_command": summary.get("batch_log_preview_command") or "",
+        "batch_log_apply_command": summary.get("batch_log_apply_command") or "",
+        "batch_log_partial_apply_command": summary.get("batch_log_partial_apply_command") or "",
+        "public_url_reconciliation_status": summary.get("public_url_reconciliation_status") or "not_run",
+        "public_url_reconciliation_match_count": int_metric(summary.get("public_url_reconciliation_match_count")),
+        "public_url_reconciliation_command": summary.get("public_url_reconciliation_command") or "",
+        "public_url_reconciliation_apply_command": summary.get("public_url_reconciliation_apply_command") or "",
+        "pending_log_ids": summary.get("pending_log_ids") or [],
+        "post_cards": packet.get("post_cards") or [],
+    }
+
+
 def published_log_reconciliation_state(packet: dict) -> dict:
     summary = packet.get("summary") if isinstance(packet, dict) else {}
     summary = summary or {}
@@ -1526,7 +1923,7 @@ def published_log_reconciliation_state(packet: dict) -> dict:
     }
 
 
-def manual_distribution_next_action(distribution: dict, reconciliation: dict) -> str:
+def manual_distribution_next_action(distribution: dict, reconciliation: dict, clipboard: dict | None = None) -> str:
     if not distribution.get("available") and not reconciliation.get("available"):
         return ""
     unlogged_manual = int_metric(reconciliation.get("unlogged_manual_posts")) or int_metric(distribution.get("unlogged_manual_count"))
@@ -1542,9 +1939,12 @@ def manual_distribution_next_action(distribution: dict, reconciliation: dict) ->
             f"({gate}); preview with {preview}."
         )
     if postable_count:
+        clipboard_path = (clipboard or {}).get("report_path") or (clipboard or {}).get("source_path") or ""
+        suffix = f" Use {clipboard_path}." if clipboard_path else ""
         return (
             f"Resolve manual distribution gate: {postable_count} approved YouTube Community row(s) need manual posting "
             f"and public URL logging; open {distribution.get('public_community_url') or 'the YouTube Community page'}."
+            + suffix
         )
     return (
         f"Resolve published-log reconciliation: {unlogged_manual} manual row(s) remain gated "
@@ -1717,6 +2117,69 @@ def public_metric_capture_next_action(metrics: dict, packet: dict) -> str:
     )
 
 
+def experiment_result_next_action(packet: dict, clipboard: dict | None = None) -> str:
+    summary = packet.get("summary") if isinstance(packet, dict) else {}
+    summary = summary or {}
+    pending = int_metric(summary.get("pending_result_field_count"))
+    ready = int_metric(summary.get("ready_to_import_count"))
+    wide_ready = int_metric(summary.get("wide_ready_to_import_count"))
+    long_preview = summary.get("result_import_preview_command") or "python3 scripts/update_experiment_results.py --from-csv data/experiment_result_entry_template.csv --dry-run"
+    wide_preview = summary.get("wide_result_import_preview_command") or "python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run"
+    if ready:
+        apply_command = summary.get("result_import_apply_command") or "python3 scripts/update_experiment_results.py --from-csv data/experiment_result_entry_template.csv --apply --refresh-admin"
+        return (
+            f"Import experiment results: {ready} filled result row(s) ready; "
+            f"preview with {long_preview}, then apply with {apply_command}."
+        )
+    if wide_ready:
+        apply_command = summary.get("wide_result_import_apply_command") or "python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --apply --refresh-admin"
+        return (
+            f"Import experiment results: {wide_ready} filled post result row(s) ready; "
+            f"preview with {wide_preview}, then apply with {apply_command}."
+        )
+    if pending:
+        report = ((clipboard or {}).get("summary") or {}).get("report_path") or "admin/reports/experiment-result-clipboard.md"
+        wide_csv = summary.get("wide_entry_csv_path") or "data/experiment_result_entry_wide_template.csv"
+        priority = next(iter(((clipboard or {}).get("measurement_priority_cards") or [])), {})
+        if priority:
+            labels = {
+                "collect_metrics": "measure",
+                "post_and_log_public_url": "post and log",
+                "log_public_url": "log public URL for",
+                "clear_platform_blocker": "clear blocker for",
+            }
+            priority_label = labels.get(priority.get("action"), priority.get("action") or "work on")
+            priority_text = (
+                f" first priority: {priority_label} {priority.get('post_id') or 'the top post'} "
+                f"on {priority.get('platform') or 'its platform'}."
+            )
+            if priority.get("direct_preview_command_template"):
+                priority_text += f" Direct preview template: {priority['direct_preview_command_template']}."
+            if priority.get("direct_apply_command_template"):
+                priority_text += f" Direct apply template after review: {priority['direct_apply_command_template']}."
+        else:
+            priority_text = ""
+        return (
+            f"Collect experiment results: {pending} post-result field(s) need new_value plus evidence_note; "
+            f"use {report};{priority_text} Then preview import with {wide_preview} after filling {wide_csv}."
+        )
+    return ""
+
+
+def experiment_publish_next_action(packet: dict) -> str:
+    summary = packet.get("summary") if isinstance(packet, dict) else {}
+    summary = summary or {}
+    review_ready = int_metric(summary.get("review_ready_manual_count"))
+    postable = int_metric(summary.get("postable_now_count"))
+    if review_ready:
+        step = next((item for item in packet.get("steps") or [] if item.get("id") == "review_manual_youtube_community"), {})
+        command = step.get("preview_command") or "python3 scripts/approve_promo_queue_plan.py --dry-run"
+        return f"Publish runway: {review_ready} manual YouTube Community experiment row(s) need review; preview with {command}."
+    if postable:
+        return f"Publish runway: {postable} approved manual row(s) are ready to post and log from data/experiment_publish_runway.json."
+    return ""
+
+
 def plan_rows_for_release(plan, release_title: str, track_lookup: set[str]):
     rows = []
     for post in plan.get("posts") or []:
@@ -1744,8 +2207,12 @@ def build_status():
     promo_unlock_sequence = read_json(PROMO_UNLOCK_SEQUENCE, {})
     scheduled_approval = read_json(SCHEDULED_APPROVAL_PACKET, {})
     manual_distribution = read_json(MANUAL_DISTRIBUTION_PACKET, {})
+    manual_posting_clipboard = read_json(MANUAL_POSTING_CLIPBOARD, {})
     published_log_reconciliation = read_json(PUBLISHED_LOG_RECONCILIATION, {})
     backlog_reschedule_preview = read_json(BACKLOG_RESCHEDULE_PREVIEW, {})
+    experiment_result_collection = read_json(EXPERIMENT_RESULT_COLLECTION, {})
+    experiment_result_clipboard = read_json(EXPERIMENT_RESULT_CLIPBOARD, {})
+    experiment_publish_runway = read_json(EXPERIMENT_PUBLISH_RUNWAY, {})
     manual_metric_packet = read_json(MANUAL_METRIC_PACKET, {})
     store_verification_run = read_json(STORE_VERIFICATION_RUN, {})
     future_posts = read_json(FUTURE_POSTS, {})
@@ -1759,6 +2226,7 @@ def build_status():
     execution_state = social_execution_state(social_executions, scheduled_rows)
     scheduler_state = social_scheduler_dry_run_state(social_scheduler_dry_run)
     monetization = monetization_state(live, history, metrics_history, promo_plan, future_posts, execution_state, now)
+    growth_goal = growth_goal_state(metrics_history, published_rows, scheduled_rows, promo_plan, now, experiment_result_collection)
     freshness = source_freshness(release_status, manual, live, metrics_history, executor_readiness, store_history, social_executions, social_scheduler_dry_run, promo_refresh_run, promo_refresh_workflow_status, promo_plan, future_posts, manual_distribution, now)
 
     releases = []
@@ -1864,6 +2332,7 @@ def build_status():
     handoff_preview = handoff_resolution_preview_state(handoff_resolution_preview)
     unlock_sequence = promo_unlock_sequence_state(promo_unlock_sequence)
     manual_distribution = manual_distribution_state(manual_distribution)
+    manual_posting_clipboard = manual_posting_clipboard_state(manual_posting_clipboard)
     published_log_reconciliation = published_log_reconciliation_state(published_log_reconciliation)
     operator_first_step = operator_docket.get("first_ready_step") or {}
     operator_first_step_text = ""
@@ -1881,8 +2350,10 @@ def build_status():
             + (f" — {command}" if command else "")
         )
     manual_metric_action = manual_metric_next_action(manual_metric_packet)
+    experiment_publish_action = experiment_publish_next_action(experiment_publish_runway)
+    experiment_result_action = experiment_result_next_action(experiment_result_collection, experiment_result_clipboard)
     public_metric_capture_action = public_metric_capture_next_action(metrics, manual_metric_packet)
-    manual_distribution_action = manual_distribution_next_action(manual_distribution, published_log_reconciliation)
+    manual_distribution_action = manual_distribution_next_action(manual_distribution, published_log_reconciliation, manual_posting_clipboard)
     store_verification_action = store_verification_next_action(store_verification)
     refresh_automation_action = refresh_automation_next_action(refresh_automation)
     handoff_preview_action = handoff_resolution_preview_next_action(handoff_preview)
@@ -1906,7 +2377,15 @@ def build_status():
     for pressure in reversed(monetization["next_pressure"]):
         if pressure not in all_actions:
             all_actions.insert(0, pressure)
-    if monetization.get("approved_backlog_posts") and monetization.get("backlog_reschedule_preview_command"):
+    growth_goal_action = ""
+    if growth_goal.get("action_needed") and growth_goal.get("status") != "target_reached":
+        growth_goal_action = f"30-day growth goal: {growth_goal['action_needed']}"
+        all_actions.insert(0, growth_goal_action)
+    partial_clear = (backlog_reschedule_preview.get("partial_clear_apply_manifest") or {}) if backlog_reschedule_preview else {}
+    partial_clear_preview = partial_clear.get("recommended_next_command") or ""
+    if partial_clear_preview:
+        all_actions.insert(0, f"Preview clear approved backlog row: {partial_clear_preview}")
+    elif monetization.get("approved_backlog_posts") and monetization.get("backlog_reschedule_preview_command"):
         all_actions.insert(0, f"Preview approved backlog reschedule: {monetization['backlog_reschedule_preview_command']}")
     if metrics["pending_manual_fields"] and not any("--from-csv --dry-run" in action for action in all_actions[:8]):
         all_actions.insert(0, manual_metric_action)
@@ -1929,6 +2408,30 @@ def build_status():
         all_actions = [action for action in all_actions if action != operator_first_step_text]
         insert_at = 1 if operational_next_action_text and all_actions[:1] == [operational_next_action_text] else 0
         all_actions.insert(insert_at, operator_first_step_text)
+    if growth_goal_action:
+        all_actions = [action for action in all_actions if action != growth_goal_action]
+        insert_at = 2 if len(all_actions) >= 2 else len(all_actions)
+        all_actions.insert(insert_at, growth_goal_action)
+    if manual_distribution_action:
+        all_actions = [action for action in all_actions if action != manual_distribution_action]
+        insert_at = 3 if len(all_actions) >= 3 else len(all_actions)
+        all_actions.insert(insert_at, manual_distribution_action)
+    if experiment_publish_action:
+        all_actions = [action for action in all_actions if action != experiment_publish_action]
+        insert_at = 4 if len(all_actions) >= 4 else len(all_actions)
+        all_actions.insert(insert_at, experiment_publish_action)
+    if metrics["pending_manual_fields"]:
+        all_actions = [action for action in all_actions if action != manual_metric_action]
+        insert_at = 5 if len(all_actions) >= 5 else len(all_actions)
+        all_actions.insert(insert_at, manual_metric_action)
+    if experiment_result_action:
+        all_actions = [action for action in all_actions if action != experiment_result_action]
+        insert_at = 6 if len(all_actions) >= 6 else len(all_actions)
+        all_actions.insert(insert_at, experiment_result_action)
+    if store_verification_action:
+        all_actions = [action for action in all_actions if action != store_verification_action]
+        insert_at = 7 if len(all_actions) >= 7 else len(all_actions)
+        all_actions.insert(insert_at, store_verification_action)
     return {
         "generated_at": now.isoformat(),
         "source": {
@@ -1941,7 +2444,11 @@ def build_status():
             "human_handoff_resolution_preview": str(HUMAN_HANDOFF_RESOLUTION_PREVIEW.relative_to(ROOT)),
             "promo_unlock_sequence": str(PROMO_UNLOCK_SEQUENCE.relative_to(ROOT)),
             "manual_distribution_packet": str(MANUAL_DISTRIBUTION_PACKET.relative_to(ROOT)),
+            "manual_posting_clipboard": str(MANUAL_POSTING_CLIPBOARD.relative_to(ROOT)),
             "published_log_reconciliation": str(PUBLISHED_LOG_RECONCILIATION.relative_to(ROOT)),
+            "experiment_result_collection": str(EXPERIMENT_RESULT_COLLECTION.relative_to(ROOT)),
+            "experiment_result_clipboard": str(EXPERIMENT_RESULT_CLIPBOARD.relative_to(ROOT)),
+            "experiment_publish_runway": str(EXPERIMENT_PUBLISH_RUNWAY.relative_to(ROOT)),
             "published_log": str(PUBLISHED.relative_to(ROOT)),
             "manual_metrics": str(MANUAL_METRICS.relative_to(ROOT)),
             "manual_metric_packet": str(MANUAL_METRIC_PACKET.relative_to(ROOT)),
@@ -1955,9 +2462,11 @@ def build_status():
             "promo_refresh_run": str(PROMO_REFRESH_RUN.relative_to(ROOT)),
             "promo_refresh_workflow_status": str(PROMO_REFRESH_WORKFLOW_STATUS.relative_to(ROOT)),
         },
-        "objective": "Promote Lily Roo releases, keep lilyroo.com/admin status and metrics current, and drive YouTube monetization progress.",
+        "objective": "Build a repeatable Lily Roo promotion engine that turns every release, clip, and story asset into measurable audience growth.",
         "kpi": {
-            "primary": "Reach 1,000 YouTube subscribers",
+            "primary": growth_goal["primary"],
+            "growth_goal": growth_goal,
+            "secondary": "Reach 1,000 YouTube subscribers",
             "monetization": monetization,
             "live_platform_count": metrics["live_platform_count"],
             "pending_manual_metric_fields": len(metrics["pending_manual_fields"]),
@@ -1980,6 +2489,34 @@ def build_status():
             "manual_metric_completion_manifest": manual_metric_packet.get("metric_completion_manifest") or {},
             "live_metrics_updated_at": metrics["updated_at"],
             "metrics_history": history,
+            "experiment_results": {
+                "available": bool(experiment_result_collection),
+                "source_path": str(EXPERIMENT_RESULT_COLLECTION.relative_to(ROOT)),
+                "summary": experiment_result_collection.get("summary") or {},
+                "pending_result_field_count": (experiment_result_collection.get("summary") or {}).get("pending_result_field_count", 0),
+                "ready_to_import_count": (experiment_result_collection.get("summary") or {}).get("ready_to_import_count", 0),
+                "missing_published_log_count": (experiment_result_collection.get("summary") or {}).get("missing_published_log_count", 0),
+                "entry_csv_path": (experiment_result_collection.get("summary") or {}).get("entry_csv_path", ""),
+                "wide_entry_csv_path": (experiment_result_collection.get("summary") or {}).get("wide_entry_csv_path", ""),
+                "result_import_preview_command": (experiment_result_collection.get("summary") or {}).get("result_import_preview_command", ""),
+                "wide_result_import_preview_command": (experiment_result_collection.get("summary") or {}).get("wide_result_import_preview_command", ""),
+                "result_import_apply_command": (experiment_result_collection.get("summary") or {}).get("result_import_apply_command", ""),
+                "wide_result_import_apply_command": (experiment_result_collection.get("summary") or {}).get("wide_result_import_apply_command", ""),
+            },
+            "experiment_result_clipboard": {
+                "available": bool(experiment_result_clipboard),
+                "source_path": str(EXPERIMENT_RESULT_CLIPBOARD.relative_to(ROOT)),
+                "summary": experiment_result_clipboard.get("summary") or {},
+                "metric_cards": experiment_result_clipboard.get("metric_cards") or [],
+                "missing_public_url_cards": experiment_result_clipboard.get("missing_public_url_cards") or [],
+                "measurement_priority_cards": experiment_result_clipboard.get("measurement_priority_cards") or [],
+            },
+            "experiment_publish_runway": {
+                "available": bool(experiment_publish_runway),
+                "source_path": str(EXPERIMENT_PUBLISH_RUNWAY.relative_to(ROOT)),
+                "summary": experiment_publish_runway.get("summary") or {},
+                "steps": experiment_publish_runway.get("steps") or [],
+            },
             "music_site_state_counts": dict(sorted(store_state_counts.items())),
             "music_site_verification_state_counts": {
                 "Live": store_history_summary.get("live", 0),
@@ -2015,12 +2552,14 @@ def build_status():
                 "approval_review_runbook": scheduled_approval.get("approval_review_runbook") or {},
             },
             "manual_distribution": manual_distribution,
+            "manual_posting_clipboard": manual_posting_clipboard,
             "published_log_reconciliation": published_log_reconciliation,
             "backlog_reschedule": {
                 "source_path": str(BACKLOG_RESCHEDULE_PREVIEW.relative_to(ROOT)),
                 "available": bool(backlog_reschedule_preview),
                 "summary": backlog_reschedule_preview.get("summary") or {},
                 "backlog_clearance_manifest": backlog_reschedule_preview.get("backlog_clearance_manifest") or {},
+                "partial_clear_apply_manifest": backlog_reschedule_preview.get("partial_clear_apply_manifest") or {},
             },
             "stale_source_count": freshness_summary["stale"],
             "missing_source_count": freshness_summary["missing"],
@@ -2040,12 +2579,13 @@ def build_status():
             "operator_docket": operator_docket,
             "handoff_resolution_preview": handoff_preview,
             "manual_distribution": manual_distribution,
+            "manual_posting_clipboard": manual_posting_clipboard,
             "published_log_reconciliation": published_log_reconciliation,
             "store_verification": store_verification,
         },
         "freshness": freshness,
         "releases": releases,
-        "next_actions": all_actions[:8],
+        "next_actions": all_actions[:12],
     }
 
 

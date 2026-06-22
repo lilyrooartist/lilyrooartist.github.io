@@ -1,0 +1,35 @@
+{
+  "generated_at": "2026-06-22T06:02:36.298122Z",
+  "safe_mode": true,
+  "source": {
+    "manual_posting_clipboard": "data/manual_posting_clipboard.json",
+    "community_url": "https://www.youtube.com/@lilyroo.artist/community",
+    "fetched_url": "https://www.youtube.com/@lilyroo.artist/community",
+    "published_log_target": "admin/content/Published_Log.csv"
+  },
+  "summary": {
+    "status": "waiting_for_public_posts",
+    "apply": false,
+    "public_post_count": 0,
+    "match_count": 0,
+    "waiting_count": 1,
+    "fetch_error": "",
+    "apply_command": "",
+    "next_action": "Post the manual YouTube Community cards, then rerun this reconciliation."
+  },
+  "matches": [],
+  "waiting": [
+    {
+      "id": "FP-AUTO-261",
+      "status": "waiting_for_public_match",
+      "best_confidence": 0,
+      "match_reason": "no_public_posts_found"
+    }
+  ],
+  "public_posts": [],
+  "guardrails": [
+    "Dry run only unless --apply is provided.",
+    "Only matches with confidence >= 90 are loggable.",
+    "This script reads the public YouTube Community page; it does not publish posts."
+  ]
+}

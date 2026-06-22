@@ -1,10 +1,12 @@
 {
-  "generated_at": "2026-06-22T05:32:18.126003Z",
+  "generated_at": "2026-06-22T06:02:36.415520Z",
   "safe_mode": true,
   "source": {
     "local_secret_source": "secrets/social_api.env",
     "api_strategy": "data/tiktok_api_strategy.json",
     "handoff_template": "data/tiktok_secret_handoff_template.env",
+    "oauth_handoff_script": "scripts/tiktok_oauth_handoff.py",
+    "local_posting_helper": "scripts/post_tiktok_from_queue.py",
     "executor_readiness": "data/executor_readiness_snapshot.json",
     "platform_repair_status": "data/platform_repair_status.json",
     "wrangler_config": "workers/social-executor/wrangler.jsonc"
@@ -13,14 +15,27 @@
     "status": "blocked",
     "posting_mode": "api",
     "api_strategy_confirmed": true,
-    "check_count": 6,
-    "blocked_count": 4,
+    "check_count": 11,
+    "blocked_count": 7,
     "ready_to_push_worker_secrets": false,
     "ready_to_post_publicly": false,
+    "local_posting_helper_uses_refresh_token": true,
+    "local_post_preview_command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --dry-run",
+    "local_upload_preview_command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run",
+    "earliest_tiktok_api_path": "video.upload inbox draft; final public URL still requires human publish and URL logging.",
     "local_missing_secrets": [
       "TIKTOK_CLIENT_KEY",
       "TIKTOK_CLIENT_SECRET",
       "TIKTOK_REFRESH_TOKEN"
+    ],
+    "oauth_authorization_url_missing": [
+      "TIKTOK_CLIENT_KEY",
+      "TIKTOK_REDIRECT_URI"
+    ],
+    "oauth_token_exchange_missing": [
+      "TIKTOK_CLIENT_KEY",
+      "TIKTOK_CLIENT_SECRET",
+      "TIKTOK_REDIRECT_URI"
     ],
     "worker_missing_secrets": [
       "TIKTOK_CLIENT_KEY",
@@ -28,10 +43,21 @@
       "TIKTOK_REFRESH_TOKEN"
     ],
     "public_posting_approved": false,
+    "local_public_posting_approval_confirmed": false,
     "default_privacy": "PUBLIC_TO_EVERYONE",
+    "worker_posting_mode": "upload",
+    "brand_content_toggle": false,
+    "brand_organic_toggle": true,
+    "aigc_label_enabled": true,
     "push_preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
     "push_apply_command": "",
+    "public_posting_preview_command": "python3 scripts/set_tiktok_public_posting_approval.py --approved",
+    "public_posting_apply_command": "",
+    "public_posting_deploy_command": "",
     "refresh_command": "python3 scripts/refresh_promo_admin.py",
+    "oauth_preview_command": "python3 scripts/tiktok_oauth_handoff.py",
+    "oauth_authorization_url_command": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url",
+    "oauth_exchange_command": "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply",
     "platform_repair_rows": 1
   },
   "credential_handoff": {
@@ -50,6 +76,7 @@
       "TIKTOK_CLIENT_KEY",
       "TIKTOK_CLIENT_SECRET",
       "TIKTOK_REFRESH_TOKEN",
+      "TIKTOK_REDIRECT_URI",
       "TIKTOK_PUBLIC_POSTING_APPROVED",
       "TIKTOK_DEFAULT_PRIVACY"
     ],
@@ -58,15 +85,41 @@
       "TIKTOK_CLIENT_SECRET",
       "TIKTOK_REFRESH_TOKEN"
     ],
+    "oauth_authorization_url_missing": [
+      "TIKTOK_CLIENT_KEY",
+      "TIKTOK_REDIRECT_URI"
+    ],
+    "oauth_token_exchange_missing": [
+      "TIKTOK_CLIENT_KEY",
+      "TIKTOK_CLIENT_SECRET",
+      "TIKTOK_REDIRECT_URI"
+    ],
     "worker_missing_secrets": [
       "TIKTOK_CLIENT_KEY",
       "TIKTOK_CLIENT_SECRET",
       "TIKTOK_REFRESH_TOKEN"
     ],
+    "oauth_handoff_script": "scripts/tiktok_oauth_handoff.py",
+    "requested_oauth_scopes": [
+      "user.info.basic",
+      "video.upload",
+      "video.publish"
+    ],
+    "oauth_preview_command": "python3 scripts/tiktok_oauth_handoff.py",
+    "oauth_authorization_url_command": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url",
+    "oauth_exchange_command": "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply",
+    "local_public_posting_approval_confirmed": false,
     "public_posting_approved": false,
     "default_privacy": "PUBLIC_TO_EVERYONE",
+    "worker_posting_mode": "upload",
+    "brand_content_toggle": false,
+    "brand_organic_toggle": true,
+    "aigc_label_enabled": true,
     "dry_run_first_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
     "apply_command": "",
+    "public_posting_preview_command": "python3 scripts/set_tiktok_public_posting_approval.py --approved",
+    "public_posting_apply_command": "",
+    "public_posting_deploy_command": "",
     "post_apply_verification_commands": [
       "python3 scripts/capture_executor_readiness.py",
       "python3 scripts/refresh_promo_admin.py",
@@ -82,10 +135,16 @@
   "api_strategy": {
     "posting_mode": "api",
     "decision_source": "user_confirmed",
-    "decision_note": "TikTok posting should be connected through APIs, not handled as manual-only or deferred.",
+    "decision_note": "TikTok posting should be connected through APIs, with video.upload inbox drafts as the earliest usable lane and video.publish direct public posting gated by approval.",
     "public_posting_approval_confirmed": false,
     "credential_values_present": false,
+    "earliest_usable_api_lane": "video.upload inbox draft",
     "required_before_posting": [
+      "TIKTOK_CLIENT_KEY",
+      "TIKTOK_CLIENT_SECRET",
+      "TIKTOK_REFRESH_TOKEN"
+    ],
+    "required_before_direct_public_posting": [
       "TIKTOK_CLIENT_KEY",
       "TIKTOK_CLIENT_SECRET",
       "TIKTOK_REFRESH_TOKEN",
@@ -95,10 +154,28 @@
   },
   "checks": [
     {
+      "name": "oauth_authorization_url",
+      "status": "blocked",
+      "detail": "secrets/social_api.env is missing auth URL values: TIKTOK_CLIENT_KEY, TIKTOK_REDIRECT_URI.",
+      "command": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url"
+    },
+    {
+      "name": "oauth_token_exchange",
+      "status": "blocked",
+      "detail": "secrets/social_api.env is missing token exchange values: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REDIRECT_URI.",
+      "command": "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply"
+    },
+    {
       "name": "local_refresh_credentials",
       "status": "blocked",
       "detail": "secrets/social_api.env is missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
       "command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN"
+    },
+    {
+      "name": "local_posting_token_path",
+      "status": "blocked",
+      "detail": "Local TikTok posting helper needs TIKTOK_ACCESS_TOKEN or refresh credentials.",
+      "command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --dry-run"
     },
     {
       "name": "worker_refresh_credentials",
@@ -116,12 +193,24 @@
       "name": "public_posting_approval",
       "status": "blocked",
       "detail": "TikTok public posting approval is not enabled.",
-      "command": ""
+      "command": "python3 scripts/set_tiktok_public_posting_approval.py --approved"
     },
     {
       "name": "default_privacy",
       "status": "pass",
       "detail": "TikTok default privacy is PUBLIC_TO_EVERYONE.",
+      "command": ""
+    },
+    {
+      "name": "commercial_disclosure_defaults",
+      "status": "pass",
+      "detail": "TikTok disclosure defaults are brand_content_toggle=False, brand_organic_toggle=True.",
+      "command": ""
+    },
+    {
+      "name": "aigc_label_default",
+      "status": "pass",
+      "detail": "TikTok AI-generated-content label default is True.",
       "command": ""
     },
     {

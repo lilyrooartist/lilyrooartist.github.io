@@ -1,20 +1,20 @@
 # Manual Distribution Packet - Lily Roo
 
-Generated: 2026-06-22T05:32:17.998663Z
+Generated: 2026-06-22T06:02:35.823819Z
 
 ## Summary
-- Manual-ready posts: **2**
-- YouTube Community posts: **2**
+- Manual-ready posts: **3**
+- YouTube Community posts: **3**
 - Hard subscriber CTAs: **2**
-- Approved manual posts: **0**
+- Approved manual posts: **1**
 - Logged manual posts: **0**
-- Unlogged manual posts: **2**
-- Public URL logs still needed: **2**
+- Unlogged manual posts: **3**
+- Public URL logs still needed: **3**
 
 ## Manual Posting Docket
-- Status: **needs_review**
+- Status: **postable_now**
 - Needs review: **2**
-- Postable now: **0**
+- Postable now: **1**
 - Logged: **0**
 - Public community surface: https://www.youtube.com/@lilyroo.artist/community
 
@@ -31,8 +31,8 @@ Generated: 2026-06-22T05:32:17.998663Z
 ### Completion Manifest
 - Status: **needs_review**
 - Review queue IDs: `FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY, FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY`
-- Postable now IDs: `none`
-- Pending log IDs: `FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY, FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY`
+- Postable now IDs: `FP-AUTO-261`
+- Pending log IDs: `FP-AUTO-261, FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY, FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY`
 - Posting surface: YouTube Studio Community
 - Public community URL: https://www.youtube.com/@lilyroo.artist/community
 - Approval preview: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run`
@@ -40,7 +40,7 @@ Generated: 2026-06-22T05:32:17.998663Z
 - Public URL worksheet: `data/manual_distribution_url_template.csv`
 - Batch URL log preview: `python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv`
 - Batch URL log apply after posting: `python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --apply --refresh-admin`
-- URL worksheet rows waiting: **2**
+- URL worksheet rows waiting: **3**
 - Operator checklist:
   - Review the packaged copy, asset, destination link evidence, and subscriber CTA.
   - Run the approval preview command before applying any manual approval.
@@ -84,9 +84,39 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
   - Approve after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin`
 
 ### Postable Now
-- None
+- **YouTube Community - I Learned It All in Fifteen Seconds** (`FP-AUTO-261`)
+  - Paste text: New transmission: I Learned It All in Fifteen Seconds is live. Remastered cover art, same suspicious amount of feeling.
+
+Stream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube: https://www.youtube.com/@lilyroo.artist | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4
+  - Asset: https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg
+  - Log preview after posting: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL`
+  - Log apply after posting: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL --apply --refresh-admin`
 
 ## Manual Posting Queue
+- **YouTube Community - I Learned It All in Fifteen Seconds** (`FP-AUTO-261`)
+  - Scheduled target: `2026-06-06T19:10:00-04:00`
+  - Distribution status: `ready_for_manual_post`
+  - Readiness: ``; CTA: ``
+  - Copy: New transmission: I Learned It All in Fifteen Seconds is live. Remastered cover art, same suspicious amount of feeling.
+  - Link/reply: Stream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube: https://www.youtube.com/@lilyroo.artist | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4
+  - Paste block:
+    New transmission: I Learned It All in Fifteen Seconds is live. Remastered cover art, same suspicious amount of feeling.
+
+    Stream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube: https://www.youtube.com/@lilyroo.artist | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4
+  - Asset: https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg
+  - Asset evidence: `local_asset_present` assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg
+  - Destination link evidence:
+    - `needs_manual_review` https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi: no local evidence
+    - `needs_manual_review` https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249: no local evidence
+    - `needs_manual_review` https://www.youtube.com/@lilyroo.artist: no local evidence
+    - `needs_manual_review` https://music.youtube.com/watch?v=vK0mDIW65o4: no local evidence
+  - Next manual action: `post_manually_then_log_url`
+  - Postable now: `True`; approval required: `False`; logging required: `True`
+  - Public community surface: https://www.youtube.com/@lilyroo.artist/community
+  - Next command: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL`
+  - Log effect: append Published_Log.csv content_id=FP-AUTO-261 after public URL is available
+  - Preview public URL log: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL`
+  - Apply public URL log after posting: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL --apply --refresh-admin`
 - **YouTube Community - Twelve Dollars** (`FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY`)
   - Scheduled target: `2026-06-24T18:30:00-04:00`
   - Distribution status: `waiting_for_review`
@@ -95,7 +125,7 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
   - Link/reply: Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
   - Paste block:
     Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.
-    
+
     Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
   - Asset: https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg
   - Asset evidence: `local_asset_present` assets/albums/twelve-dollars/art/04-twelve-dollars.jpg
@@ -118,7 +148,7 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
   - Link/reply: Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0
   - Paste block:
     Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.
-    
+
     Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0
   - Asset: https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg
   - Asset evidence: `local_asset_present` assets/albums/analog-myth/art/03-analog-myth.jpg

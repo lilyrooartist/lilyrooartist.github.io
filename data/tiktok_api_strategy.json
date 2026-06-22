@@ -1,10 +1,16 @@
 {
   "posting_mode": "api",
   "decision_source": "user_confirmed",
-  "decision_note": "TikTok posting should be connected through APIs, not handled as manual-only or deferred.",
+  "decision_note": "TikTok posting should be connected through APIs, with video.upload inbox drafts as the earliest usable lane and video.publish direct public posting gated by approval.",
   "public_posting_approval_confirmed": false,
   "credential_values_present": false,
+  "earliest_usable_api_lane": "video.upload inbox draft",
   "required_before_posting": [
+    "TIKTOK_CLIENT_KEY",
+    "TIKTOK_CLIENT_SECRET",
+    "TIKTOK_REFRESH_TOKEN"
+  ],
+  "required_before_direct_public_posting": [
     "TIKTOK_CLIENT_KEY",
     "TIKTOK_CLIENT_SECRET",
     "TIKTOK_REFRESH_TOKEN",

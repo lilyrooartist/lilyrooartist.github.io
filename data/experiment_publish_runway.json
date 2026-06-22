@@ -1,0 +1,160 @@
+{
+  "generated_at": "2026-06-22T06:02:36.977989Z",
+  "safe_mode": true,
+  "source": {
+    "promo_engine_status": "data/promo_engine_status.json",
+    "approval_runway": "data/approval_runway.json",
+    "manual_distribution_packet": "data/manual_distribution_packet.json",
+    "backlog_reschedule_preview": "data/backlog_reschedule_preview.json",
+    "platform_repair_status": "data/platform_repair_status.json"
+  },
+  "summary": {
+    "review_ready_manual_count": 2,
+    "postable_now_count": 1,
+    "public_url_log_needed_count": 3,
+    "pending_result_field_count": 18,
+    "winner_ready_candidate_count": 0,
+    "winner_count_target": 3,
+    "blocked_platform_count": 4,
+    "approved_backlog_count": 4,
+    "blocked_backlog_count": 3,
+    "next_publish_action": "Review and approve manual YouTube Community experiment rows."
+  },
+  "manual_review_rows": [
+    {
+      "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+      "release": "Twelve Dollars",
+      "platform": "YouTube Community",
+      "scheduled_at": "2026-06-24T18:30:00-04:00",
+      "copy_block": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+      "asset_download_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
+      "destination_links": [
+        "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n"
+      ],
+      "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
+      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+      "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL"
+    },
+    {
+      "id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+      "release": "Analog Myth",
+      "platform": "YouTube Community",
+      "scheduled_at": "2026-06-25T18:30:00-04:00",
+      "copy_block": "Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+      "asset_download_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
+      "destination_links": [
+        "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0"
+      ],
+      "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --dry-run",
+      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin",
+      "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL"
+    }
+  ],
+  "blocked_platform_rows": [
+    {
+      "post_id": "FP-AUTO-263",
+      "platform": "Instagram",
+      "reason": "max_attempts_exceeded",
+      "status": "failed",
+      "repair_action": "Reconnect the Instagram Business/Creator account to the Facebook Page or set IG_BUSINESS_ACCOUNT_ID, then push the worker secret and recapture readiness.",
+      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263",
+      "blocked_apply_reasons": []
+    },
+    {
+      "post_id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+      "platform": "Instagram",
+      "reason": "max_attempts_exceeded",
+      "status": "failed",
+      "repair_action": "Reconnect the Instagram Business/Creator account to the Facebook Page or set IG_BUSINESS_ACCOUNT_ID, then push the worker secret and recapture readiness.",
+      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+      "blocked_apply_reasons": []
+    },
+    {
+      "post_id": "FP-AUTO-265",
+      "platform": "Facebook",
+      "reason": "",
+      "status": "failed",
+      "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
+      "preview_command": "python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run",
+      "blocked_apply_reasons": []
+    },
+    {
+      "post_id": "FP-AUTO-264",
+      "platform": "TikTok",
+      "reason": "tiktok_credentials_missing",
+      "status": "blocked",
+      "repair_action": "Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok public posting approval is false. Local secret source is also missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Complete TikTok OAuth/public posting setup locally, then push secrets and refresh Admin.",
+      "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+      "blocked_apply_reasons": [
+        "local_secret_source_missing:TIKTOK_CLIENT_KEY,TIKTOK_CLIENT_SECRET,TIKTOK_REFRESH_TOKEN",
+        "public_posting_approval_not_confirmed"
+      ]
+    }
+  ],
+  "steps": [
+    {
+      "id": "review_manual_youtube_community",
+      "status": "ready_for_review",
+      "post_ids": [
+        "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+        "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY"
+      ],
+      "preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
+      "apply_after_review_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+      "guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate.",
+      "completion_evidence": "data/manual_distribution_packet.json should move rows from waiting_for_review toward postable manual distribution."
+    },
+    {
+      "id": "queue_approved_manual_rows",
+      "status": "ready_after_approval",
+      "post_ids": [
+        "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+        "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY"
+      ],
+      "preview_command": "python3 scripts/apply_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY ",
+      "apply_after_review_command": "python3 scripts/apply_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --apply --refresh-admin",
+      "guardrail": "Apply only after the matching promo plan rows have approved=yes.",
+      "completion_evidence": "data/scheduled_posts.csv contains the approved manual YouTube Community row ids."
+    },
+    {
+      "id": "post_manual_youtube_community",
+      "status": "postable_now",
+      "post_ids": [
+        "FP-AUTO-261"
+      ],
+      "surface": "YouTube Studio Community",
+      "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
+      "guardrail": "Post manually using the reviewed copy and local asset evidence; do not log placeholder URLs.",
+      "completion_evidence": "A real public YouTube Community URL exists for each posted row."
+    },
+    {
+      "id": "log_public_urls",
+      "status": "ready_after_manual_post",
+      "post_ids": [
+        "FP-AUTO-261"
+      ],
+      "preview_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv",
+      "apply_after_review_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --apply --refresh-admin",
+      "guardrail": "Every CSV row must contain a real public_url before apply.",
+      "completion_evidence": "admin/content/Published_Log.csv contains real public URLs for the manual community rows."
+    },
+    {
+      "id": "collect_results",
+      "status": "waiting_for_measurement_window",
+      "post_ids": [
+        "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+        "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY"
+      ],
+      "preview_command": "python3 scripts/update_experiment_results.py --from-csv data/experiment_result_entry_template.csv --dry-run",
+      "apply_after_review_command": "",
+      "guardrail": "Fill only visible platform analytics values with evidence notes.",
+      "completion_evidence": "data/promo_engine_status.json shows fewer pending result fields and more measured posts per candidate format."
+    }
+  ],
+  "guardrails": [
+    "Review-only packet; it does not approve, schedule, post, or log URLs.",
+    "Manual YouTube Community rows must be reviewed before approval.",
+    "TikTok stays blocked until OAuth credentials and public-posting approval are present.",
+    "Do not declare winning formats until the winner-readiness gate is satisfied."
+  ]
+}

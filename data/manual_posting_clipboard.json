@@ -1,0 +1,114 @@
+{
+  "generated_at": "2026-06-22T06:02:36.331191Z",
+  "safe_mode": true,
+  "source": {
+    "manual_distribution_packet": "data/manual_distribution_packet.json",
+    "manual_distribution_url_template": "data/manual_distribution_url_template.csv",
+    "youtube_community_url_reconciliation": "data/youtube_community_url_reconciliation.json",
+    "published_log_target": "admin/content/Published_Log.csv"
+  },
+  "summary": {
+    "status": "ready_to_post",
+    "posting_surface": "YouTube Studio Community",
+    "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
+    "postable_count": 1,
+    "waiting_public_url_count": 3,
+    "pending_log_ids": [
+      "FP-AUTO-261",
+      "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+      "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY"
+    ],
+    "url_template_path": "data/manual_distribution_url_template.csv",
+    "batch_log_preview_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv",
+    "batch_log_apply_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --apply --refresh-admin",
+    "batch_log_partial_apply_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --allow-partial --apply --refresh-admin",
+    "public_url_reconciliation_status": "waiting_for_public_posts",
+    "public_url_reconciliation_match_count": 0,
+    "public_url_reconciliation_command": "python3 scripts/reconcile_youtube_community_urls.py",
+    "public_url_reconciliation_apply_command": "",
+    "next_action": "Post each card in YouTube Community, copy the real public URL, then log it."
+  },
+  "post_cards": [
+    {
+      "id": "FP-AUTO-261",
+      "release": "I Learned It All in Fifteen Seconds",
+      "platform": "YouTube Community",
+      "status": "ready_for_manual_post",
+      "posting_surface": "YouTube Studio Community",
+      "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
+      "paste_text": "New transmission: I Learned It All in Fifteen Seconds is live. Remastered cover art, same suspicious amount of feeling.\n\nStream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube: https://www.youtube.com/@lilyroo.artist | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
+      "asset_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
+      "asset_status": "local_asset_present",
+      "asset_local_path": "assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
+      "destination_links": [
+        "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+        "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+        "https://www.youtube.com/@lilyroo.artist",
+        "https://music.youtube.com/watch?v=vK0mDIW65o4"
+      ],
+      "destination_link_audit": [
+        {
+          "url": "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+          "canonical_url": "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+          "status": "needs_manual_review",
+          "evidence": [],
+          "evidence_count": 0,
+          "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
+        },
+        {
+          "url": "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+          "canonical_url": "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+          "status": "needs_manual_review",
+          "evidence": [],
+          "evidence_count": 0,
+          "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
+        },
+        {
+          "url": "https://www.youtube.com/@lilyroo.artist",
+          "canonical_url": "https://www.youtube.com/@lilyroo.artist",
+          "status": "needs_manual_review",
+          "evidence": [],
+          "evidence_count": 0,
+          "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
+        },
+        {
+          "url": "https://music.youtube.com/watch?v=vK0mDIW65o4",
+          "canonical_url": "https://music.youtube.com/watch?v=vK0mDIW65o4",
+          "status": "needs_manual_review",
+          "evidence": [],
+          "evidence_count": 0,
+          "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
+        }
+      ],
+      "selected_cta_strength": "",
+      "postable_now": true,
+      "logging_required": true,
+      "public_url": "",
+      "public_url_placeholder": "PUBLIC_URL",
+      "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL",
+      "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL --apply --refresh-admin",
+      "log_notes": "manual_distribution_id=FP-AUTO-261; source=data/manual_distribution_packet.json",
+      "completion_evidence": [
+        "A real public YouTube Community post URL exists.",
+        "The URL is logged with scripts/log_manual_distribution.py.",
+        "admin/content/Published_Log.csv contains this manual_distribution_id."
+      ]
+    }
+  ],
+  "operator_steps": [
+    "Open the YouTube Community surface.",
+    "For each card, paste the text exactly as shown.",
+    "Attach the listed asset URL or download/open the local asset path if needed.",
+    "Publish manually in YouTube Studio Community.",
+    "Copy the real public post URL.",
+    "Run the preview logging command with the real URL, then run the apply command.",
+    "Or rerun the public URL reconciliation command after posting to auto-detect confident public URLs.",
+    "If only one public URL is ready, use the partial batch apply command so that post can start accumulating measurable evidence immediately."
+  ],
+  "guardrails": [
+    "This clipboard does not approve, schedule, publish, or log posts.",
+    "Do not use PUBLIC_URL in an apply command.",
+    "Use --allow-partial only after at least one worksheet row has a real public_url; blank rows remain waiting.",
+    "Do not mark a row complete until a real public YouTube Community URL is logged."
+  ]
+}

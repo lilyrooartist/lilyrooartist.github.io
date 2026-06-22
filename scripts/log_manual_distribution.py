@@ -85,7 +85,7 @@ def read_csv_entries(path: Path) -> list[dict]:
         ]
 
 
-def log_from_csv(path: Path, *, apply: bool, refresh: bool) -> dict:
+def log_from_csv(path: Path, *, apply: bool, refresh: bool, allow_partial: bool) -> dict:
     if not path.exists():
         raise SystemExit(f"{path} does not exist")
     entries = read_csv_entries(path)
@@ -121,8 +121,10 @@ def log_from_csv(path: Path, *, apply: bool, refresh: bool) -> dict:
         ready.append(payload_for_row(row, public_url))
     if duplicates:
         raise SystemExit(f"Duplicate manual distribution id(s) in {path}: {', '.join(duplicates)}")
-    if apply and waiting:
+    if apply and waiting and not allow_partial:
         raise SystemExit("Every CSV row needs a real public_url before --apply.")
+    if apply and not ready:
+        raise SystemExit("No ready manual URL rows found to apply.")
     if apply:
         for payload in ready:
             append_payload(payload)
@@ -131,6 +133,7 @@ def log_from_csv(path: Path, *, apply: bool, refresh: bool) -> dict:
     return {
         "ok": True,
         "dry_run": not apply,
+        "allow_partial": allow_partial,
         "source_csv": str(path.relative_to(ROOT) if path.is_relative_to(ROOT) else path),
         "row_count": len(entries),
         "ready_count": len(ready),
@@ -141,6 +144,10 @@ def log_from_csv(path: Path, *, apply: bool, refresh: bool) -> dict:
         "entries": ready,
         "target": str(PUBLISHED_LOG.relative_to(ROOT)),
         "action": "appended_published_log_rows" if apply else "would_append_published_log_rows",
+        "post_apply_verification": [
+            "python3 scripts/refresh_promo_admin.py",
+            "python3 scripts/validate_content_system.py",
+        ],
     }
 
 
@@ -149,6 +156,7 @@ def main() -> int:
     parser.add_argument("--id", help="Manual distribution row id, for example FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY.")
     parser.add_argument("--url", help="Public URL of the manually posted item.")
     parser.add_argument("--from-csv", help="CSV with id and public_url columns for batch manual URL logging.")
+    parser.add_argument("--allow-partial", action="store_true", help="With --from-csv --apply, log rows that have real public_url values and leave blank rows waiting.")
     parser.add_argument("--apply", action="store_true", help="Append to Published_Log.csv. Default is dry-run.")
     parser.add_argument("--refresh-admin", action="store_true", help="Refresh admin artifacts after appending. Requires --apply.")
     args = parser.parse_args()
@@ -157,8 +165,10 @@ def main() -> int:
         raise SystemExit("--refresh-admin requires --apply")
     if args.from_csv and (args.id or args.url):
         raise SystemExit("--from-csv cannot be combined with --id/--url")
+    if args.allow_partial and not args.from_csv:
+        raise SystemExit("--allow-partial requires --from-csv")
     if args.from_csv:
-        print(json.dumps(log_from_csv(Path(args.from_csv), apply=args.apply, refresh=args.refresh_admin), indent=2, ensure_ascii=False))
+        print(json.dumps(log_from_csv(Path(args.from_csv), apply=args.apply, refresh=args.refresh_admin, allow_partial=args.allow_partial), indent=2, ensure_ascii=False))
         return 0
     if not args.id or not args.url:
         raise SystemExit("Provide --id and --url, or use --from-csv.")

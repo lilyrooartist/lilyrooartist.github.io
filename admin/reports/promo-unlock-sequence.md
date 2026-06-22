@@ -1,27 +1,23 @@
 # Promo Unlock Sequence - Lily Roo
 
-Generated: 2026-06-22T05:32:18.700119Z
+Generated: 2026-06-22T06:02:36.786076Z
 
 ## Summary
 - Steps: **5**
-- Ready for human review: **1**
-- Blocked or warning: **3**
-- Projected resolution units across sequence: **16**
-- Current step: `unlock-manual-distribution` (`ready_for_human_review`)
-- Open blockers still tracked: **9**
+- Ready for human review: **0**
+- Blocked or warning: **4**
+- Projected resolution units across sequence: **13**
+- Current step: `unlock-checked-scheduled-approval` (`blocked`)
+- Open blockers still tracked: **11**
 
 ## Sequence
 1. **Approve checked scheduled rows** - `unlock-checked-scheduled-approval`
-   - State: `completed`; owner: `tod`
-   - Reason: This gate is already applied; it is kept here as evidence, not as a pending task.
+   - State: `blocked`; owner: `tod`
+   - Reason: Blocked by: FP-AUTO-259.
    - Unlocks: Instagram executor row can become publish-eligible after approval.; One scheduled YouTube Community row can move into manual distribution after approval.
-   - preview (preview-safe): `python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run`
-   - apply_after_review (after-review only): `python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin`
-   - Completion evidence: data/scheduled_approval_packet.json should show fewer approval blockers, and data/social_scheduler_dry_run.json should no longer block the approved Instagram row on not_approved.
-   - Guardrail: Use --checked-batch so only rows that passed review checks are approved.
 2. **Review and post manual YouTube Community rows** - `unlock-manual-distribution`
-   - State: `ready_for_human_review`; owner: `tod`
-   - Reason: Preview ran cleanly; this gate is waiting for human review or external completion.
+   - State: `ready_for_manual_review`; owner: `tod`
+   - Reason: Blocked by: FP-PLAN-TWELVE-DOLLARS-TIKTOK.
    - Unlocks: Manual YouTube Community promotion can publish without waiting for broken auto executors.; Published_Log.csv can be updated after public URLs exist.
    - preview (preview-safe): `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run`
    - apply_after_review (after-review only): `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin`
@@ -38,7 +34,7 @@ Generated: 2026-06-22T05:32:18.700119Z
    - State: `preview_ready_with_blocker_warning`; owner: `external_platform`
    - Reason: Preview ran, but the output still names a known blocker.
    - Unlocks: Approved past-due queue rows get a fresh schedule after executor blockers clear.
-   - preview (preview-safe): `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24`
+   - preview (preview-safe): `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24`
    - Completion evidence: data/backlog_reschedule_preview.json should show normal_apply_gate clear before any non-override apply command is exposed.
    - Guardrail: Normal apply stays hidden until known executor/platform blockers clear.
 5. **Fill manual metric worksheet** - `unlock-manual-metrics`

@@ -1,0 +1,403 @@
+{
+  "generated_at": "2026-06-22T06:02:36.951423Z",
+  "safe_mode": true,
+  "source": {
+    "experiment_result_collection_packet": "data/experiment_result_collection_packet.json",
+    "manual_posting_clipboard": "data/manual_posting_clipboard.json",
+    "platform_repair_status": "data/platform_repair_status.json",
+    "entry_csv_path": "data/experiment_result_entry_template.csv",
+    "wide_entry_csv_path": "data/experiment_result_entry_wide_template.csv"
+  },
+  "summary": {
+    "status": "needs_values",
+    "metric_card_count": 3,
+    "missing_public_url_count": 6,
+    "measurement_priority_count": 8,
+    "pending_result_field_count": 18,
+    "ready_to_import_count": 0,
+    "wide_ready_to_import_count": 0,
+    "entry_csv_path": "data/experiment_result_entry_template.csv",
+    "wide_entry_csv_path": "data/experiment_result_entry_wide_template.csv",
+    "report_path": "admin/reports/experiment-result-clipboard.md",
+    "result_import_preview_command": "python3 scripts/update_experiment_results.py --from-csv data/experiment_result_entry_template.csv --dry-run",
+    "wide_result_import_preview_command": "python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run",
+    "result_import_apply_command": "",
+    "wide_result_import_apply_command": "",
+    "apply_gate": "blocked_until_new_values_and_evidence_filled"
+  },
+  "metric_cards": [
+    {
+      "post_id": "FP-AUTO-257",
+      "experiment_format": "Release-art image + story hook",
+      "platform": "X",
+      "song": "I Learned It All in Fifteen Seconds",
+      "post_url": "https://x.com/i/web/status/2062920257577029712",
+      "published_date": "2026-06-05",
+      "source_row": "16",
+      "pending_field_count": 6,
+      "ready_field_count": 0,
+      "pending_fields": [
+        "views",
+        "likes",
+        "comments",
+        "shares",
+        "saves",
+        "subs_delta"
+      ],
+      "ready_fields": [],
+      "fields": [
+        {
+          "field": "views",
+          "new_value": "",
+          "evidence_note": "",
+          "collection_hint": "Open X analytics for https://x.com/i/web/status/2062920257577029712 and record views."
+        },
+        {
+          "field": "likes",
+          "new_value": "",
+          "evidence_note": "",
+          "collection_hint": "Open X analytics for https://x.com/i/web/status/2062920257577029712 and record likes."
+        },
+        {
+          "field": "comments",
+          "new_value": "",
+          "evidence_note": "",
+          "collection_hint": "Open X analytics for https://x.com/i/web/status/2062920257577029712 and record comments."
+        },
+        {
+          "field": "shares",
+          "new_value": "",
+          "evidence_note": "",
+          "collection_hint": "Open X analytics for https://x.com/i/web/status/2062920257577029712 and record shares."
+        },
+        {
+          "field": "saves",
+          "new_value": "",
+          "evidence_note": "",
+          "collection_hint": "Open X analytics for https://x.com/i/web/status/2062920257577029712 and record saves."
+        },
+        {
+          "field": "subs_delta",
+          "new_value": "",
+          "evidence_note": "",
+          "collection_hint": "Open X analytics for https://x.com/i/web/status/2062920257577029712 and record subs_delta."
+        }
+      ]
+    },
+    {
+      "post_id": "FP-AUTO-260",
+      "experiment_format": "Release-art image + story hook",
+      "platform": "Facebook",
+      "song": "I Learned It All in Fifteen Seconds",
+      "post_url": "https://www.facebook.com/903693509504290_122118326547249470",
+      "published_date": "2026-06-07",
+      "source_row": "18",
+      "pending_field_count": 6,
+      "ready_field_count": 0,
+      "pending_fields": [
+        "views",
+        "likes",
+        "comments",
+        "shares",
+        "saves",
+        "subs_delta"
+      ],
+      "ready_fields": [],
+      "fields": [
+        {
+          "field": "views",
+          "new_value": "",
+          "evidence_note": "",
+          "collection_hint": "Open Meta Business Suite for https://www.facebook.com/903693509504290_122118326547249470 and record views."
+        },
+        {
+          "field": "likes",
+          "new_value": "",
+          "evidence_note": "",
+          "collection_hint": "Open Meta Business Suite for https://www.facebook.com/903693509504290_122118326547249470 and record likes."
+        },
+        {
+          "field": "comments",
+          "new_value": "",
+          "evidence_note": "",
+          "collection_hint": "Open Meta Business Suite for https://www.facebook.com/903693509504290_122118326547249470 and record comments."
+        },
+        {
+          "field": "shares",
+          "new_value": "",
+          "evidence_note": "",
+          "collection_hint": "Open Meta Business Suite for https://www.facebook.com/903693509504290_122118326547249470 and record shares."
+        },
+        {
+          "field": "saves",
+          "new_value": "",
+          "evidence_note": "",
+          "collection_hint": "Open Meta Business Suite for https://www.facebook.com/903693509504290_122118326547249470 and record saves."
+        },
+        {
+          "field": "subs_delta",
+          "new_value": "",
+          "evidence_note": "",
+          "collection_hint": "Open Meta Business Suite for https://www.facebook.com/903693509504290_122118326547249470 and record subs_delta."
+        }
+      ]
+    },
+    {
+      "post_id": "FP-AUTO-262",
+      "experiment_format": "Release-art image + story hook",
+      "platform": "X",
+      "song": "I Learned It All in Fifteen Seconds",
+      "post_url": "https://x.com/i/web/status/2063600780834136468",
+      "published_date": "2026-06-07",
+      "source_row": "17",
+      "pending_field_count": 6,
+      "ready_field_count": 0,
+      "pending_fields": [
+        "views",
+        "likes",
+        "comments",
+        "shares",
+        "saves",
+        "subs_delta"
+      ],
+      "ready_fields": [],
+      "fields": [
+        {
+          "field": "views",
+          "new_value": "",
+          "evidence_note": "",
+          "collection_hint": "Open X analytics for https://x.com/i/web/status/2063600780834136468 and record views."
+        },
+        {
+          "field": "likes",
+          "new_value": "",
+          "evidence_note": "",
+          "collection_hint": "Open X analytics for https://x.com/i/web/status/2063600780834136468 and record likes."
+        },
+        {
+          "field": "comments",
+          "new_value": "",
+          "evidence_note": "",
+          "collection_hint": "Open X analytics for https://x.com/i/web/status/2063600780834136468 and record comments."
+        },
+        {
+          "field": "shares",
+          "new_value": "",
+          "evidence_note": "",
+          "collection_hint": "Open X analytics for https://x.com/i/web/status/2063600780834136468 and record shares."
+        },
+        {
+          "field": "saves",
+          "new_value": "",
+          "evidence_note": "",
+          "collection_hint": "Open X analytics for https://x.com/i/web/status/2063600780834136468 and record saves."
+        },
+        {
+          "field": "subs_delta",
+          "new_value": "",
+          "evidence_note": "",
+          "collection_hint": "Open X analytics for https://x.com/i/web/status/2063600780834136468 and record subs_delta."
+        }
+      ]
+    }
+  ],
+  "missing_public_url_cards": [
+    {
+      "post_id": "FP-AUTO-258",
+      "experiment_format": "Release-art image + story hook",
+      "platform": "Instagram",
+      "song": "I Learned It All in Fifteen Seconds",
+      "status": "not_in_published_log",
+      "next_action": "Publish or log the public URL before result metrics can be collected."
+    },
+    {
+      "post_id": "FP-AUTO-261",
+      "experiment_format": "YouTube Community archive/playlist CTA",
+      "platform": "YouTube Community",
+      "song": "I Learned It All in Fifteen Seconds",
+      "status": "not_in_published_log",
+      "next_action": "Publish or log the public URL before result metrics can be collected."
+    },
+    {
+      "post_id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+      "experiment_format": "YouTube Community archive/playlist CTA",
+      "platform": "YouTube Community",
+      "song": "Twelve Dollars",
+      "status": "not_in_published_log",
+      "next_action": "Publish or log the public URL before result metrics can be collected."
+    },
+    {
+      "post_id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+      "experiment_format": "YouTube Community archive/playlist CTA",
+      "platform": "YouTube Community",
+      "song": "Analog Myth",
+      "status": "not_in_published_log",
+      "next_action": "Publish or log the public URL before result metrics can be collected."
+    },
+    {
+      "post_id": "FP-AUTO-264",
+      "experiment_format": "Short video clip + platform-native CTA",
+      "platform": "TikTok",
+      "song": "I Learned It All in Fifteen Seconds",
+      "status": "not_in_published_log",
+      "next_action": "Publish or log the public URL before result metrics can be collected."
+    },
+    {
+      "post_id": "FP-PLAN-TWELVE-DOLLARS-TIKTOK",
+      "experiment_format": "Short video clip + platform-native CTA",
+      "platform": "TikTok",
+      "song": "Twelve Dollars",
+      "status": "not_in_published_log",
+      "next_action": "Publish or log the public URL before result metrics can be collected."
+    }
+  ],
+  "measurement_priority_cards": [
+    {
+      "action": "collect_metrics",
+      "priority": 1,
+      "post_id": "FP-AUTO-260",
+      "platform": "Facebook",
+      "song": "I Learned It All in Fifteen Seconds",
+      "experiment_format": "Release-art image + story hook",
+      "post_url": "https://www.facebook.com/903693509504290_122118326547249470",
+      "source_row": "18",
+      "pending_fields": [
+        "views",
+        "likes",
+        "comments",
+        "shares",
+        "saves",
+        "subs_delta"
+      ],
+      "direct_preview_command_template": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run",
+      "direct_apply_command_template": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin",
+      "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 3 logged post(s), 1 missing URL(s) in this format."
+    },
+    {
+      "action": "collect_metrics",
+      "priority": 1,
+      "post_id": "FP-AUTO-257",
+      "platform": "X",
+      "song": "I Learned It All in Fifteen Seconds",
+      "experiment_format": "Release-art image + story hook",
+      "post_url": "https://x.com/i/web/status/2062920257577029712",
+      "source_row": "16",
+      "pending_fields": [
+        "views",
+        "likes",
+        "comments",
+        "shares",
+        "saves",
+        "subs_delta"
+      ],
+      "direct_preview_command_template": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-257 --source-row 16 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run",
+      "direct_apply_command_template": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-257 --source-row 16 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin",
+      "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 3 logged post(s), 1 missing URL(s) in this format."
+    },
+    {
+      "action": "collect_metrics",
+      "priority": 1,
+      "post_id": "FP-AUTO-262",
+      "platform": "X",
+      "song": "I Learned It All in Fifteen Seconds",
+      "experiment_format": "Release-art image + story hook",
+      "post_url": "https://x.com/i/web/status/2063600780834136468",
+      "source_row": "17",
+      "pending_fields": [
+        "views",
+        "likes",
+        "comments",
+        "shares",
+        "saves",
+        "subs_delta"
+      ],
+      "direct_preview_command_template": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-262 --source-row 17 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run",
+      "direct_apply_command_template": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-262 --source-row 17 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin",
+      "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 3 logged post(s), 1 missing URL(s) in this format."
+    },
+    {
+      "action": "post_and_log_public_url",
+      "priority": 2,
+      "post_id": "FP-AUTO-261",
+      "platform": "YouTube Community",
+      "song": "I Learned It All in Fifteen Seconds",
+      "experiment_format": "YouTube Community archive/playlist CTA",
+      "post_url": "",
+      "source_row": "",
+      "pending_fields": [],
+      "direct_preview_command_template": "",
+      "direct_apply_command_template": "",
+      "reason": "Postable now in the Manual Posting Clipboard; publish it and log the public URL so metrics can start. 0 logged post(s), 3 missing URL(s) in this format."
+    },
+    {
+      "action": "log_public_url",
+      "priority": 3,
+      "post_id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+      "platform": "YouTube Community",
+      "song": "Analog Myth",
+      "experiment_format": "YouTube Community archive/playlist CTA",
+      "post_url": "",
+      "source_row": "",
+      "pending_fields": [],
+      "direct_preview_command_template": "",
+      "direct_apply_command_template": "",
+      "reason": "Cannot collect metrics until the public URL is logged. 0 logged post(s), 3 missing URL(s) in this format."
+    },
+    {
+      "action": "log_public_url",
+      "priority": 3,
+      "post_id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+      "platform": "YouTube Community",
+      "song": "Twelve Dollars",
+      "experiment_format": "YouTube Community archive/playlist CTA",
+      "post_url": "",
+      "source_row": "",
+      "pending_fields": [],
+      "direct_preview_command_template": "",
+      "direct_apply_command_template": "",
+      "reason": "Cannot collect metrics until the public URL is logged. 0 logged post(s), 3 missing URL(s) in this format."
+    },
+    {
+      "action": "clear_platform_blocker",
+      "priority": 4,
+      "post_id": "FP-AUTO-258",
+      "platform": "Instagram",
+      "song": "I Learned It All in Fifteen Seconds",
+      "experiment_format": "Release-art image + story hook",
+      "post_url": "",
+      "source_row": "",
+      "pending_fields": [],
+      "direct_preview_command_template": "",
+      "direct_apply_command_template": "",
+      "reason": "Platform work is blocked; clear the platform repair gate before URL logging can produce metrics. 3 logged post(s), 1 missing URL(s) in this format."
+    },
+    {
+      "action": "clear_platform_blocker",
+      "priority": 4,
+      "post_id": "FP-AUTO-264",
+      "platform": "TikTok",
+      "song": "I Learned It All in Fifteen Seconds",
+      "experiment_format": "Short video clip + platform-native CTA",
+      "post_url": "",
+      "source_row": "",
+      "pending_fields": [],
+      "direct_preview_command_template": "",
+      "direct_apply_command_template": "",
+      "reason": "Platform work is blocked; clear the platform repair gate before URL logging can produce metrics. 0 logged post(s), 2 missing URL(s) in this format."
+    }
+  ],
+  "operator_steps": [
+    "Open each post URL or platform analytics surface.",
+    "Start with measurement_priority_cards; they are ordered to unlock repeatable-format evidence fastest.",
+    "Preferred: fill one row per post in the wide entry CSV, including evidence_note.",
+    "Alternative: fill new_value and evidence_note for every pending field in the long entry CSV.",
+    "Leave unknown values blank; do not guess metrics.",
+    "Run the result import preview command.",
+    "Apply only after preview confirms the intended rows."
+  ],
+  "guardrails": [
+    "This clipboard does not fetch private analytics or write metrics.",
+    "Do not use guessed result values.",
+    "Posts without public URLs must be published or logged before result metrics can be collected."
+  ]
+}

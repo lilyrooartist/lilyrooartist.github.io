@@ -4,6 +4,7 @@ const X_USER_LOOKUP_URL = "https://api.x.com/2/users/me";
 const X_MEDIA_UPLOAD_URL = "https://upload.twitter.com/1.1/media/upload.json";
 const TIKTOK_CREATOR_INFO_URL = "https://open.tiktokapis.com/v2/post/publish/creator_info/query/";
 const TIKTOK_INIT_URL = "https://open.tiktokapis.com/v2/post/publish/video/init/";
+const TIKTOK_UPLOAD_INIT_URL = "https://open.tiktokapis.com/v2/post/publish/inbox/video/init/";
 const TIKTOK_STATUS_URL = "https://open.tiktokapis.com/v2/post/publish/status/fetch/";
 const TIKTOK_OAUTH_TOKEN_URL = "https://open.tiktokapis.com/v2/oauth/token/";
 const GOOGLE_TOKEN_URL = "https://oauth2.googleapis.com/token";
@@ -137,6 +138,7 @@ async function executeAndRecord(payload, env, options = {}) {
       post_id: normalized.postId,
       post_type: normalized.postType,
       execution_mode: normalized.executionMode,
+      tiktok_posting_mode: tiktokPostingMode(normalized, env),
       media_url: mediaUrl(normalized, env),
       media_key: normalized.mediaKey,
     };
@@ -147,7 +149,7 @@ async function executeAndRecord(payload, env, options = {}) {
   }
 
   const existing = normalized.postId ? await executionState(env, normalized.postId) : null;
-  if (existing?.status === "posted") {
+  if (isTerminalExecutionStatus(existing?.status)) {
     return {
       ok: true,
       duplicate: true,
@@ -178,7 +180,7 @@ async function executeAndRecord(payload, env, options = {}) {
       await writeExecutionState(env, normalized.postId, {
         post_id: normalized.postId,
         platform: result.platform || normalized.platform,
-        status: "posted",
+        status: executionStatusFromResult(result),
         attempts: attempt,
         post_url: postUrlFromResult(result),
         external_id: externalIdFromResult(result),
@@ -288,7 +290,11 @@ async function runScheduledPosts(env, options = {}) {
 
     try {
       const result = await executeAndRecord(payload, env, { source: options.source || "cron" });
-      results.push({ post_id: payload.postId, status: "posted", post_url: postUrlFromResult(result) });
+      results.push({
+        post_id: payload.postId,
+        status: executionStatusFromResult(result),
+        post_url: postUrlFromResult(result),
+      });
     } catch (error) {
       results.push({ post_id: payload.postId, status: "failed", error: error.message || "Unknown error" });
     }
@@ -329,6 +335,7 @@ function queueRowPayload(row) {
     executionMode: row.execution_mode || row.executionMode,
     postType: row.post_type || row.postType,
     desiredPrivacy: row.desired_privacy || row.desiredPrivacy,
+    tiktokPostingMode: row.tiktok_posting_mode || row.tiktokPostingMode,
   };
 }
 
@@ -349,6 +356,7 @@ function normalizePostPayload(payload) {
     executionMode: text(payload.executionMode || payload.execution_mode),
     postType: text(payload.postType || payload.post_type),
     desiredPrivacy: text(payload.desiredPrivacy || payload.desired_privacy),
+    tiktokPostingMode: text(payload.tiktokPostingMode || payload.tiktok_posting_mode),
   };
   if (!normalized.executionMode) {
     normalized.executionMode = inferPostType(normalized).postType === "community" ? "manual" : "auto";
@@ -400,7 +408,8 @@ async function validateExecutablePost(payload, env, options = {}) {
   if (platform.includes("tiktok")) {
     if (!tiktokCredentialsReady(env)) return blocked("blocked", "tiktok_credentials_missing");
     if (!video || !isHttpUrl(video) || !isVideoUrl(video)) return blocked("blocked", "tiktok_public_video_required");
-    if (source === "cron") {
+    const postingMode = tiktokPostingMode(payload, env);
+    if (postingMode === "direct" && source === "cron") {
       if (env.TIKTOK_PUBLIC_POSTING_APPROVED !== "true") return blocked("blocked", "tiktok_public_posting_not_approved");
       const creator = await tiktokCreatorInfo(env);
       const optionsList = creator?.data?.privacy_level_options || [];
@@ -855,25 +864,36 @@ async function postTikTok(payload, env) {
     throw new Error("TikTok posting from the website needs a public clipUrl video URL");
   }
 
-  const creator = await tiktokCreatorInfo(env);
-  const options = creator?.data?.privacy_level_options || [];
-  const desired = tiktokDesiredPrivacy(payload, env);
-  const privacy = options.includes(desired) ? desired : (options.includes("SELF_ONLY") ? "SELF_ONLY" : (options[0] || "SELF_ONLY"));
+  const postingMode = tiktokPostingMode(payload, env);
+  const sourceInfo = {
+    source: "PULL_FROM_URL",
+    video_url: url,
+  };
+  const initPayload = {
+    source_info: {
+      ...sourceInfo,
+    },
+  };
 
-  const init = await jsonPost(TIKTOK_INIT_URL, {
-    post_info: {
+  if (postingMode === "direct") {
+    const creator = await tiktokCreatorInfo(env);
+    const options = creator?.data?.privacy_level_options || [];
+    const desired = tiktokDesiredPrivacy(payload, env);
+    const privacy = options.includes(desired) ? desired : (options.includes("SELF_ONLY") ? "SELF_ONLY" : (options[0] || "SELF_ONLY"));
+    const disclosure = tiktokDisclosure(payload, env);
+    initPayload.post_info = {
       title: text(payload.text),
       privacy_level: privacy,
       disable_comment: false,
       disable_duet: false,
       disable_stitch: false,
+      brand_content_toggle: disclosure.brandContent,
+      brand_organic_toggle: disclosure.brandOrganic,
       is_aigc: env.TIKTOK_IS_AIGC !== "false",
-    },
-    source_info: {
-      source: "PULL_FROM_URL",
-      video_url: url,
-    },
-  }, {
+    };
+  }
+
+  const init = await jsonPost(postingMode === "upload" ? TIKTOK_UPLOAD_INIT_URL : TIKTOK_INIT_URL, initPayload, {
     Authorization: await tiktokAuthorization(env),
   });
 
@@ -887,10 +907,13 @@ async function postTikTok(payload, env) {
   return {
     ok: true,
     platform: "TikTok",
+    tiktok_posting_mode: postingMode,
     publish_id: publishId,
     status: tiktokStatusValue(publishStatus) || "submitted_for_processing",
+    execution_status: postingMode === "upload" ? "draft_uploaded" : "posted",
     publish_status: publishStatus,
-    post_url: tiktokPostUrl(publishStatus),
+    post_url: postingMode === "upload" ? "" : tiktokPostUrl(publishStatus),
+    next_action: postingMode === "upload" ? "Open TikTok inbox notification, finish review, publish, then log the public URL." : "Check TikTok status and public URL after processing.",
     raw: init,
   };
 }
@@ -1235,11 +1258,17 @@ function readiness(env) {
       },
       tiktok: {
         ready: tiktokCredentialsReady(env),
+        posting_mode: tiktokPostingMode({}, env),
+        upload_ready: tiktokCredentialsReady(env),
+        direct_public_ready: tiktokCredentialsReady(env) && env.TIKTOK_PUBLIC_POSTING_APPROVED === "true",
         access_token_present: Boolean(env.TIKTOK_ACCESS_TOKEN),
         refresh_config_present: Boolean(env.TIKTOK_CLIENT_KEY && env.TIKTOK_CLIENT_SECRET && env.TIKTOK_REFRESH_TOKEN),
         missing_secrets: tiktokMissingCredentials(env),
         public_posting_approved: env.TIKTOK_PUBLIC_POSTING_APPROVED === "true",
         default_privacy: text(env.TIKTOK_DEFAULT_PRIVACY) || "PUBLIC_TO_EVERYONE",
+        brand_content_toggle: boolish(env.TIKTOK_BRAND_CONTENT, false),
+        brand_organic_toggle: boolish(env.TIKTOK_BRAND_ORGANIC, true),
+        aigc_label_enabled: env.TIKTOK_IS_AIGC !== "false",
       },
       youtube: {
         ready: youtubeMissing.length === 0,
@@ -1272,6 +1301,12 @@ function mediaUrlFromMap(payload, env = {}) {
 
 function text(value) {
   return String(value ?? "").trim();
+}
+
+function boolish(value, fallback = false) {
+  const clean = text(value).toLowerCase();
+  if (!clean) return fallback;
+  return ["1", "true", "yes", "on"].includes(clean);
 }
 
 function isHttpUrl(value) {
@@ -1372,8 +1407,20 @@ function tiktokMissingCredentials(env) {
   return ["TIKTOK_CLIENT_KEY", "TIKTOK_CLIENT_SECRET", "TIKTOK_REFRESH_TOKEN"].filter((name) => !env[name]);
 }
 
+function tiktokPostingMode(payload, env) {
+  const mode = text(payload.tiktokPostingMode || payload.tiktok_posting_mode || env.TIKTOK_POSTING_MODE || "direct").toLowerCase();
+  return mode === "upload" || mode === "draft" || mode === "inbox" ? "upload" : "direct";
+}
+
 function tiktokDesiredPrivacy(payload, env) {
   return text(payload.desiredPrivacy) || text(env.TIKTOK_DEFAULT_PRIVACY) || "PUBLIC_TO_EVERYONE";
+}
+
+function tiktokDisclosure(payload, env) {
+  return {
+    brandContent: boolish(payload.brandContent ?? env.TIKTOK_BRAND_CONTENT, false),
+    brandOrganic: boolish(payload.brandOrganic ?? env.TIKTOK_BRAND_ORGANIC, true),
+  };
 }
 
 function tiktokStatusValue(statusPayload) {
@@ -1392,6 +1439,14 @@ function postUrlFromResult(result) {
 
 function externalIdFromResult(result) {
   return text(result.post_id || result.tweet_id || result.video_id || result.media_id || result.publish_id || result.creation_id);
+}
+
+function executionStatusFromResult(result) {
+  return text(result.execution_status) || "posted";
+}
+
+function isTerminalExecutionStatus(status) {
+  return ["posted", "draft_uploaded"].includes(text(status));
 }
 
 function numberOrNull(value) {

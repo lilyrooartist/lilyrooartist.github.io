@@ -1,44 +1,44 @@
 {
-  "generated_at": "2026-06-22T05:32:18.656139Z",
+  "generated_at": "2026-06-22T06:02:36.758228Z",
   "safe_mode": true,
   "source": {
     "resolution_worksheet": "data/human_handoff_resolution_worksheet.csv",
     "human_handoff_packet": "data/human_handoff_packet.json"
   },
   "summary": {
-    "worksheet_row_count": 7,
-    "preview_count": 7,
-    "executed_preview_count": 7,
-    "skipped_preview_count": 0,
+    "worksheet_row_count": 10,
+    "preview_count": 10,
+    "executed_preview_count": 6,
+    "skipped_preview_count": 4,
     "status_counts": {
       "input_missing": 3,
-      "preview_ok": 3,
-      "preview_ok_with_warning": 1
+      "preview_ok": 2,
+      "preview_ok_with_warning": 1,
+      "skipped": 4
     },
     "phase_counts": {
-      "Approval": 1,
       "Backlog recovery": 1,
-      "Manual distribution": 2,
+      "Manual distribution": 3,
       "Manual metrics": 2,
-      "Platform setup": 1
+      "Platform setup": 4
     },
     "safe_command_policy": "Only python3 scripts/* commands with --dry-run, or reschedule previews without --apply, are executed.",
     "mutation_guardrail": "This preview runner never executes apply, refresh-admin, PUBLIC_URL placeholder, non-python, or unsupported commands."
   },
   "previews": [
     {
-      "task_id": "approve-checked-scheduled-batch",
-      "phase": "Approval",
-      "status": "waiting_for_review",
-      "input_needed": "human_review_decision",
-      "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
-      "safety": "safe_preview",
-      "safety_reason": "dry_run_command",
-      "returncode": 0,
-      "preview_status": "preview_ok",
-      "output_excerpt": "FP-AUTO-258: approved 'yes' -> 'yes'\nFP-AUTO-261: approved 'yes' -> 'yes'\nChecked batch guard: 2 checked id(s); 2 requested; 0 unchecked; 0 change(s).\nDry run only; did not update data/scheduled_posts.csv",
-      "completion_evidence": "data/scheduled_approval_packet.json should show fewer approval blockers, and data/social_scheduler_dry_run.json should no longer block the approved Instagram row on not_approved.",
-      "guardrail": "Use --checked-batch so only rows that passed review checks are approved."
+      "task_id": "platform-setup-FP-AUTO-263",
+      "phase": "Platform setup",
+      "status": "failed",
+      "input_needed": "local_secret_presence_and_public_posting_approval",
+      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263",
+      "safety": "skipped",
+      "safety_reason": "not_marked_preview_safe",
+      "returncode": null,
+      "preview_status": "skipped",
+      "output_excerpt": "",
+      "completion_evidence": "data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_post_publicly before TikTok backlog work is allowed.",
+      "guardrail": "Push worker secrets only after local OAuth/public posting setup is complete."
     },
     {
       "task_id": "platform-setup-FP-AUTO-264",
@@ -55,18 +55,60 @@
       "guardrail": "Run the TikTok preflight before pushing secrets; push worker secrets only after local OAuth/public posting setup is complete."
     },
     {
+      "task_id": "platform-setup-FP-AUTO-265",
+      "phase": "Platform setup",
+      "status": "failed",
+      "input_needed": "local_secret_presence_and_public_posting_approval",
+      "command": "python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run",
+      "safety": "skipped",
+      "safety_reason": "not_marked_preview_safe",
+      "returncode": null,
+      "preview_status": "skipped",
+      "output_excerpt": "",
+      "completion_evidence": "data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_post_publicly before TikTok backlog work is allowed.",
+      "guardrail": "Push worker secrets only after local OAuth/public posting setup is complete."
+    },
+    {
+      "task_id": "platform-setup-FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+      "phase": "Platform setup",
+      "status": "failed",
+      "input_needed": "local_secret_presence_and_public_posting_approval",
+      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+      "safety": "skipped",
+      "safety_reason": "not_marked_preview_safe",
+      "returncode": null,
+      "preview_status": "skipped",
+      "output_excerpt": "",
+      "completion_evidence": "data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_post_publicly before TikTok backlog work is allowed.",
+      "guardrail": "Push worker secrets only after local OAuth/public posting setup is complete."
+    },
+    {
       "task_id": "backlog-reschedule",
       "phase": "Backlog recovery",
       "status": "blocked",
       "input_needed": "clearance_confirmation",
-      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24",
+      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
       "safety": "safe_preview",
       "safety_reason": "reschedule_preview_command",
       "returncode": 0,
       "preview_status": "preview_ok_with_warning",
-      "output_excerpt": "Rows selected: 7\n- FP-AUTO-258 Instagram I Learned It All in Fifteen Seconds: 2026-06-05T15:35:00-04:00 -> 2026-06-23T10:00:00+00:00\n  WARNING: known blocker: not_approved\n- FP-AUTO-261 YouTube Community I Learned It All in Fifteen Seconds: 2026-06-06T19:10:00-04:00 -> 2026-06-24T10:00:00+00:00\n  WARNING: known blocker: not_approved\n- FP-AUTO-264 TikTok I Learned It All in Fifteen Seconds: 2026-06-09T21:25:00-04:00 -> 2026-06-25T10:00:00+00:00\n  WARNING: known blocker: tiktok_credentials_missing\n- FP-PLAN-TWELVE-DOLLARS-X X Twelve Dollars: 2026-06-20T10:15:00-04:00 -> 2026-06-26T10:00:00+00:00\n- FP-AUTO-263 Instagram I Learned It All in Fifteen Seconds: 2026-06-21T10:00:00+09:00 -> 2026-06-27T10:00:00+00:00\n- FP-PLAN-TWELVE-DOLLARS-INSTAGRAM Instagram Twelve Dollars: 2026-06-21T14:05:00-04:00 -> 2026-06-28T10:00:00+00:00\n- FP-AUTO-265 Facebook I Learned It All in Fifteen Seconds: 2026-06-22T10:00:00+09:00 -> 2026-06-29T10:00:00+00:00\nDry run only. Re-run with --apply to write the schedule.",
+      "output_excerpt": "Rows selected: 4\n- FP-AUTO-258 Instagram I Learned It All in Fifteen Seconds: 2026-06-05T15:35:00-04:00 -> 2026-06-23T10:00:00+08:00\n- FP-AUTO-264 TikTok I Learned It All in Fifteen Seconds: 2026-06-09T21:25:00-04:00 -> 2026-06-24T10:00:00+08:00\n  WARNING: known blocker: tiktok_credentials_missing\n- FP-AUTO-263 Instagram I Learned It All in Fifteen Seconds: 2026-06-21T10:00:00+09:00 -> 2026-06-25T10:00:00+08:00\n  WARNING: known blocker: Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.\n- FP-PLAN-TWELVE-DOLLARS-INSTAGRAM Instagram Twelve Dollars: 2026-06-21T14:05:00-04:00 -> 2026-06-26T10:00:00+08:00\n  WARNING: known blocker: Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.\nDry run only. Re-run with --apply to write the schedule.",
       "completion_evidence": "data/backlog_reschedule_preview.json should show normal_apply_gate clear before any non-override apply command is exposed.",
       "guardrail": "Normal apply stays hidden until known executor/platform blockers clear."
+    },
+    {
+      "task_id": "manual-distribution-FP-AUTO-261",
+      "phase": "Manual distribution",
+      "status": "ready_for_manual_post",
+      "input_needed": "public_post_url",
+      "command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL",
+      "safety": "skipped",
+      "safety_reason": "placeholder_public_url",
+      "returncode": null,
+      "preview_status": "skipped",
+      "output_excerpt": "",
+      "completion_evidence": "data/manual_distribution_packet.json should move approved rows from review_queue toward postable manual distribution, and data/published_log_reconciliation.json should remain gated until public URLs are logged.",
+      "guardrail": "Do not log a manual post until a real public URL exists."
     },
     {
       "task_id": "manual-distribution-FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
@@ -127,7 +169,7 @@
   ],
   "handoff_resolution_summary": {
     "path": "data/human_handoff_resolution_worksheet.csv",
-    "row_count": 7,
+    "row_count": 10,
     "fieldnames": [
       "task_id",
       "phase",

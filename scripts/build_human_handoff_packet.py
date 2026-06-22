@@ -143,6 +143,15 @@ def manual_distribution_tasks(packet: dict) -> list[dict]:
         status = row.get("distribution_status") or ""
         if row.get("logged"):
             continue
+        posting_packet = row.get("manual_posting_packet") or {}
+        is_postable = bool(posting_packet.get("postable_now"))
+        preview_command = row.get("approval_preview_command") or ""
+        apply_command = row.get("approval_command") or ""
+        detail = "Review the packaged copy, approve if appropriate, post manually, then log the public URL."
+        if is_postable:
+            preview_command = row.get("log_preview_command") or ""
+            apply_command = ""
+            detail = "Post manually in YouTube Studio Community, then log the real public URL before marking distribution complete."
         links = []
         if row.get("asset_download_url"):
             links.append({"label": "asset", "url": row.get("asset_download_url")})
@@ -153,13 +162,17 @@ def manual_distribution_tasks(packet: dict) -> list[dict]:
             "tod",
             "medium",
             status or "waiting_for_review",
-            "Review the packaged copy, approve if appropriate, post manually, then log the public URL.",
-            row.get("approval_preview_command") or "",
-            row.get("approval_command") or "",
+            detail,
+            preview_command,
+            apply_command,
             str(MANUAL_DISTRIBUTION.relative_to(ROOT)),
             {
                 "post_id": row.get("id") or "",
                 "release": row.get("release") or "",
+                "paste_text": row.get("copy_block") or "",
+                "asset_url": row.get("asset_download_url") or row.get("imagery_url") or "",
+                "public_community_url": posting_packet.get("public_community_url") or "",
+                "postable_now": is_postable,
                 "log_preview_command": row.get("log_preview_command") or "",
                 "log_apply_command": row.get("log_apply_command") or "",
                 "requires_public_url": (row.get("log_effect") or {}).get("requires_public_url", True),
@@ -391,6 +404,7 @@ def build_action_docket(tasks: list[dict], blocker_summary: dict, approval_runwa
     roadmap = blocker_summary.get("blocker_unlock_roadmap") or []
     manual_approval_docket = approval_runway.get("manual_approval_docket") or {}
     manual_distribution = tasks_for_phase(tasks, "Manual distribution")
+    manual_postable = [task for task in manual_distribution if (task.get("impact") or {}).get("postable_now")]
     manual_metrics = tasks_for_phase(tasks, "Manual metrics")
     platform_setup = tasks_for_phase(tasks, "Platform setup")
     backlog = first_task(tasks, "Backlog recovery")
@@ -400,6 +414,9 @@ def build_action_docket(tasks: list[dict], blocker_summary: dict, approval_runwa
     blocked_platform_count = len([task for task in platform_setup if task.get("status") == "blocked"])
     manual_preview_command = manual_approval_docket.get("preview_command") or (manual_distribution[0].get("preview_command") if manual_distribution else "")
     manual_apply_command = manual_approval_docket.get("apply_command") or (manual_distribution[0].get("apply_command") if manual_distribution else "")
+    if manual_postable:
+        manual_preview_command = ""
+        manual_apply_command = ""
     manual_guardrail = manual_approval_docket.get("guardrail") or "Post manually first, then log only real public URLs."
     approval_preview_command = approval.get("preview_command") or projection.get("preview_command") or ""
     approval_apply_command = approval.get("apply_command") or projection.get("apply_command") or ""
@@ -444,12 +461,14 @@ def build_action_docket(tasks: list[dict], blocker_summary: dict, approval_runwa
         {
             "id": "manual-posting-review",
             "label": "Review and post manual distribution rows",
-            "state": "needs_review" if manual_distribution else "clear",
+            "state": "ready_for_manual_post" if manual_postable else ("needs_review" if manual_distribution else "clear"),
             "owner": "tod",
             "task_ids": [task["id"] for task in manual_distribution],
             "blockers_resolved": manual_post_count,
             "ready_ids": manual_approval_docket.get("ready_ids") or [],
             "blocked_ids": manual_approval_docket.get("blocked_ids") or [],
+            "postable_ids": [(task.get("impact") or {}).get("post_id") for task in manual_postable],
+            "posting_packets": [task.get("impact") or {} for task in manual_postable],
             "preview_command": manual_preview_command,
             "apply_command": manual_apply_command,
             "command_sequence": command_sequence(manual_preview_command, manual_apply_command, "python3 scripts/refresh_promo_admin.py"),
@@ -518,7 +537,7 @@ def build_action_docket(tasks: list[dict], blocker_summary: dict, approval_runwa
             "guardrail": backlog.get("guardrail") or "Do not apply blocked backlog reschedules without clearing platform readiness.",
         },
     ]
-    ready = [item for item in checklist if item["state"] in {"ready", "ready_for_review", "needs_review", "needs_values"}]
+    ready = [item for item in checklist if item["state"] in {"ready", "ready_for_review", "ready_for_manual_post", "needs_review", "needs_values"}]
     blocked = [item for item in checklist if item["state"] == "blocked"]
     return {
         "source": "data/human_handoff_packet.json",

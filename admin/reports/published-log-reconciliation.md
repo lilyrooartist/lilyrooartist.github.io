@@ -1,12 +1,12 @@
 # Published Log Reconciliation - Lily Roo
 
-Generated: 2026-06-22T05:32:18.742387Z
+Generated: 2026-06-22T06:02:36.812641Z
 
 ## Summary
-- Published log status: **fresh**
+- Published log status: **stale**
 - Published log rows: **17**
 - Unlogged Worker posts: **0**
-- Unlogged manual posts: **2**
+- Unlogged manual posts: **3**
 - Reconciliation needed: **True**
 
 ## Worker Export
@@ -16,18 +16,24 @@ Generated: 2026-06-22T05:32:18.742387Z
 - Apply after review: `python3 scripts/export_social_executions.py --refresh-admin`
 
 ## Manual Logging
-- Unlogged manual rows: **2**
+- Unlogged manual rows: **3**
 - Guardrail: Only log manual distribution after approval, manual posting, and a real public post URL.
 
 ### Manual Log Gates
 - Approval gate: **ready_for_manual_review**; ready: **2**; blocked: **1**
-- Posting gate: **needs_review**; needs review: **2**; postable: **0**
+- Posting gate: **postable_now**; needs review: **2**; postable: **1**
 - Ready approval IDs: `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY, FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY`
 - Blocked approval IDs: `FP-PLAN-TWELVE-DOLLARS-TIKTOK`
 - Preview approvals: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run`
 - Approve after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin`
 
 ### Manual Rows
+- **I Learned It All in Fifteen Seconds YouTube Community** (`FP-AUTO-261`)
+  - Status: `ready_for_manual_post`; log gate: `blocked_until_public_url`
+  - Next step: Post manually in YouTube Studio Community, then replace PUBLIC_URL with the real public URL.
+  - Posting surface: https://www.youtube.com/@lilyroo.artist/community
+  - Preview URL log: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL`
+  - Apply URL log after posting: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL --apply --refresh-admin`
 - **Twelve Dollars YouTube Community** (`FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY`)
   - Status: `waiting_for_review`; log gate: `blocked_until_manual_approval`
   - Next step: Approve the manual row after review, post it in YouTube Studio Community, then log the public URL.

@@ -77,8 +77,23 @@ def build_payload() -> dict:
     local_missing = preflight_summary.get("local_missing_secrets") or []
     worker_missing = preflight_summary.get("worker_missing_secrets") or []
     public_posting = preflight_summary.get("public_posting_approved")
+    worker_posting_mode = preflight_summary.get("worker_posting_mode") or "direct"
+    local_public_posting = bool(preflight_summary.get("local_public_posting_approval_confirmed"))
+    public_posting_apply = preflight_summary.get("public_posting_apply_command") or ""
+    public_posting_deploy = preflight_summary.get("public_posting_deploy_command") or ""
+    brand_content = bool(preflight_summary.get("brand_content_toggle"))
+    brand_organic = bool(preflight_summary.get("brand_organic_toggle"))
+    aigc_label = bool(preflight_summary.get("aigc_label_enabled"))
     push_preview = preflight_summary.get("push_preview_command") or "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN"
     push_apply = preflight_summary.get("push_apply_command") or ""
+    local_post_preview = preflight_summary.get("local_post_preview_command") or "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --dry-run"
+    local_upload_preview = preflight_summary.get("local_upload_preview_command") or "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run"
+    local_post_refresh_ready = bool(preflight_summary.get("local_posting_helper_uses_refresh_token"))
+    oauth_preview = credential_handoff.get("oauth_preview_command") or "python3 scripts/tiktok_oauth_handoff.py"
+    oauth_url_command = credential_handoff.get("oauth_authorization_url_command") or "python3 scripts/tiktok_oauth_handoff.py --print-auth-url"
+    oauth_exchange_command = credential_handoff.get("oauth_exchange_command") or "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply"
+    oauth_url_missing = credential_handoff.get("oauth_authorization_url_missing") or []
+    oauth_exchange_missing = credential_handoff.get("oauth_token_exchange_missing") or []
     repair_rows = [
         row for row in repair.get("rows") or []
         if str(row.get("platform") or "").lower() == "tiktok"
@@ -98,18 +113,36 @@ def build_payload() -> dict:
             "Collect credentials",
             "pass" if local_ready else "blocked",
             "Add TikTok OAuth credentials locally",
-            "Use the redacted TikTok handoff template to populate the local social API env file with the required TikTok refresh credential names. Values stay local and are never written to generated reports.",
-            "",
+            "Use the redacted TikTok handoff template to populate the local social API env file with the TikTok client key, client secret, redirect URI, and refresh-token path. Values stay local and are never written to generated reports.",
+            oauth_preview,
             local_missing,
+        ),
+        runbook_step(
+            "generate_oauth_authorization_url",
+            "Authorize account",
+            "ready" if not oauth_url_missing else "blocked",
+            "Generate TikTok authorization URL",
+            "Create the TikTok authorization URL, open it, and sign in as the Lily Roo TikTok account. The returned code is short-lived and should be exchanged immediately.",
+            oauth_url_command,
+            oauth_url_missing,
+        ),
+        runbook_step(
+            "exchange_oauth_code",
+            "Authorize account",
+            "ready" if not oauth_exchange_missing else "blocked",
+            "Exchange authorization code",
+            "Exchange the returned TikTok authorization code for local access and refresh tokens. The helper writes token values only with --apply and never prints them.",
+            oauth_exchange_command,
+            oauth_exchange_missing,
         ),
         runbook_step(
             "confirm_public_posting_approval",
             "Confirm approval",
             "pass" if public_ready else "blocked",
             "Confirm public posting approval",
-            "Set TikTok public posting approval only after Lily Roo is approved for public TikTok posting and PUBLIC_TO_EVERYONE is intentionally allowed.",
-            "",
-            [] if public_ready else ["TIKTOK_PUBLIC_POSTING_APPROVED"],
+            "Set TikTok public posting approval only after Lily Roo is approved for public TikTok posting and PUBLIC_TO_EVERYONE is intentionally allowed. If approval is confirmed locally, apply and deploy the guarded Worker var update.",
+            public_posting_deploy or public_posting_apply,
+            [] if public_ready else (["worker_var_not_deployed"] if local_public_posting else ["TIKTOK_PUBLIC_POSTING_APPROVED"]),
         ),
         runbook_step(
             "preview_worker_secret_push",
@@ -121,13 +154,35 @@ def build_payload() -> dict:
             local_missing,
         ),
         runbook_step(
+            "preview_local_tiktok_post",
+            "Preview local post",
+            "ready" if local_ready and local_post_refresh_ready else "blocked",
+            "Dry-run local TikTok post helper",
+            "Confirm the local posting helper can resolve media and use refresh credentials without requiring a manually copied access token.",
+            local_post_preview,
+            [] if local_ready and local_post_refresh_ready else local_missing,
+        ),
+        runbook_step(
+            "preview_local_tiktok_draft_upload",
+            "Preview draft upload",
+            "ready" if local_ready and local_post_refresh_ready else "blocked",
+            "Dry-run TikTok inbox draft upload",
+            "Confirm the safer video.upload path can prepare a TikTok inbox draft before public direct-posting approval is available.",
+            local_upload_preview,
+            [] if local_ready and local_post_refresh_ready else local_missing,
+        ),
+        runbook_step(
             "apply_worker_secret_push",
             "Apply push",
             "ready" if apply_ready else "blocked",
             "Push worker secrets after review",
             "Run the apply command only after local credentials exist and public posting approval is confirmed.",
             push_apply if apply_ready else "",
-            ([] if apply_ready else local_missing + ([] if public_ready else ["TIKTOK_PUBLIC_POSTING_APPROVED"])),
+            (
+                []
+                if apply_ready
+                else local_missing + ([] if public_ready else (["worker_var_not_deployed"] if local_public_posting else ["TIKTOK_PUBLIC_POSTING_APPROVED"]))
+            ),
         ),
         runbook_step(
             "recapture_readiness",
@@ -174,15 +229,32 @@ def build_payload() -> dict:
             "blocked_step_ids": blocked_ids,
             "required_secret_names": REQUIRED_SECRETS,
             "handoff_template_path": credential_handoff.get("handoff_template_path") or "",
+            "oauth_handoff_script": credential_handoff.get("oauth_handoff_script") or "scripts/tiktok_oauth_handoff.py",
+            "oauth_preview_command": oauth_preview,
+            "oauth_authorization_url_command": oauth_url_command,
+            "oauth_exchange_command": oauth_exchange_command,
+            "local_post_preview_command": local_post_preview,
+            "local_upload_preview_command": local_upload_preview,
+            "earliest_tiktok_api_path": preflight_summary.get("earliest_tiktok_api_path") or "video.upload inbox draft; final public URL still requires human publish and URL logging.",
+            "local_posting_helper_uses_refresh_token": local_post_refresh_ready,
+            "oauth_authorization_url_missing": oauth_url_missing,
+            "oauth_token_exchange_missing": oauth_exchange_missing,
             "local_missing_secrets": local_missing,
             "worker_missing_secrets": worker_missing,
             "public_posting_approved": public_posting,
+            "worker_posting_mode": worker_posting_mode,
+            "local_public_posting_approval_confirmed": local_public_posting,
+            "brand_content_toggle": brand_content,
+            "brand_organic_toggle": brand_organic,
+            "aigc_label_enabled": aigc_label,
             "ready_to_apply_worker_secrets": apply_ready,
             "ready_to_clear_backlog_gate": verify_ready,
             "repair_row_count": len(repair_rows),
             "repair_post_id": repair_row.get("post_id") or "",
             "blocked_apply_command": "" if apply_ready else "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
             "apply_command": push_apply if apply_ready else "",
+            "public_posting_apply_command": public_posting_apply,
+            "public_posting_deploy_command": public_posting_deploy,
             "backlog_preview_command": backlog_preview,
             "backlog_apply_command": backlog_apply,
             "backlog_normal_apply_gate": backlog_summary.get("normal_apply_gate") or "unknown",
@@ -211,10 +283,21 @@ def build_markdown(payload: dict) -> str:
         f"- Phases: **{summary['phase_count']}**",
         f"- Steps: **{summary['step_count']}**",
         f"- Blocked steps: **{summary['blocked_step_count']}**",
+        f"- Local public posting approval confirmed: **{summary['local_public_posting_approval_confirmed']}**",
         f"- Public posting approved: **{summary['public_posting_approved']}**",
+        f"- Worker posting mode: **{summary['worker_posting_mode']}**",
+        f"- Brand content disclosure: **{summary['brand_content_toggle']}**",
+        f"- Brand organic disclosure: **{summary['brand_organic_toggle']}**",
+        f"- AIGC label enabled: **{summary['aigc_label_enabled']}**",
+        f"- Local posting helper uses refresh token: **{summary['local_posting_helper_uses_refresh_token']}**",
+        f"- Local post preview: `{summary['local_post_preview_command']}`",
+        f"- Local draft upload preview: `{summary['local_upload_preview_command']}`",
+        f"- Earliest TikTok API path: {summary['earliest_tiktok_api_path']}",
         f"- Handoff template: `{summary.get('handoff_template_path') or 'none'}`",
         f"- Ready to apply worker secrets: **{summary['ready_to_apply_worker_secrets']}**",
         f"- Ready to clear backlog gate: **{summary['ready_to_clear_backlog_gate']}**",
+        f"- Public posting approval apply: `{summary.get('public_posting_apply_command') or 'not available until local approval is confirmed'}`",
+        f"- Public posting approval deploy: `{summary.get('public_posting_deploy_command') or 'not available until local approval is confirmed'}`",
         "",
         "## Sequence",
     ]

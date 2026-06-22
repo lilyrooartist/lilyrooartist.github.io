@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "updated_at": "2026-06-20T12:22:16.483671Z",
+  "updated_at": "2026-06-22T06:02:32.539685Z",
   "source": "lilyroo-social-executor-readiness",
   "url": "https://www.lilyroo.com/api/social/readiness",
   "http_status": 200,
@@ -51,6 +51,9 @@
       },
       "tiktok": {
         "ready": false,
+        "posting_mode": "upload",
+        "upload_ready": false,
+        "direct_public_ready": false,
         "access_token_present": false,
         "refresh_config_present": false,
         "missing_secrets": [
@@ -59,7 +62,10 @@
           "TIKTOK_REFRESH_TOKEN"
         ],
         "public_posting_approved": false,
-        "default_privacy": "PUBLIC_TO_EVERYONE"
+        "default_privacy": "PUBLIC_TO_EVERYONE",
+        "brand_content_toggle": false,
+        "brand_organic_toggle": true,
+        "aigc_label_enabled": true
       },
       "youtube": {
         "ready": true,

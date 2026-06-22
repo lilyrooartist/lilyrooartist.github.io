@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T05:32:18.201570Z",
+  "generated_at": "2026-06-22T06:02:36.474881Z",
   "safe_mode": true,
   "status": "blocked",
   "source": {
@@ -12,13 +12,17 @@
   "summary": {
     "posting_mode": "api",
     "api_strategy_confirmed": true,
-    "phase_count": 6,
-    "step_count": 6,
-    "blocked_step_count": 6,
+    "phase_count": 9,
+    "step_count": 10,
+    "blocked_step_count": 10,
     "blocked_step_ids": [
       "collect_local_oauth_credentials",
+      "generate_oauth_authorization_url",
+      "exchange_oauth_code",
       "confirm_public_posting_approval",
       "preview_worker_secret_push",
+      "preview_local_tiktok_post",
+      "preview_local_tiktok_draft_upload",
       "apply_worker_secret_push",
       "recapture_readiness",
       "clear_backlog_gate"
@@ -29,6 +33,23 @@
       "TIKTOK_REFRESH_TOKEN"
     ],
     "handoff_template_path": "data/tiktok_secret_handoff_template.env",
+    "oauth_handoff_script": "scripts/tiktok_oauth_handoff.py",
+    "oauth_preview_command": "python3 scripts/tiktok_oauth_handoff.py",
+    "oauth_authorization_url_command": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url",
+    "oauth_exchange_command": "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply",
+    "local_post_preview_command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --dry-run",
+    "local_upload_preview_command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run",
+    "earliest_tiktok_api_path": "video.upload inbox draft; final public URL still requires human publish and URL logging.",
+    "local_posting_helper_uses_refresh_token": true,
+    "oauth_authorization_url_missing": [
+      "TIKTOK_CLIENT_KEY",
+      "TIKTOK_REDIRECT_URI"
+    ],
+    "oauth_token_exchange_missing": [
+      "TIKTOK_CLIENT_KEY",
+      "TIKTOK_CLIENT_SECRET",
+      "TIKTOK_REDIRECT_URI"
+    ],
     "local_missing_secrets": [
       "TIKTOK_CLIENT_KEY",
       "TIKTOK_CLIENT_SECRET",
@@ -40,13 +61,20 @@
       "TIKTOK_REFRESH_TOKEN"
     ],
     "public_posting_approved": false,
+    "worker_posting_mode": "upload",
+    "local_public_posting_approval_confirmed": false,
+    "brand_content_toggle": false,
+    "brand_organic_toggle": true,
+    "aigc_label_enabled": true,
     "ready_to_apply_worker_secrets": false,
     "ready_to_clear_backlog_gate": false,
     "repair_row_count": 1,
     "repair_post_id": "FP-AUTO-264",
     "blocked_apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
     "apply_command": "",
-    "backlog_preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24",
+    "public_posting_apply_command": "",
+    "public_posting_deploy_command": "",
+    "backlog_preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
     "backlog_apply_command": "",
     "backlog_normal_apply_gate": "blocked_until_clearance_steps_complete"
   },
@@ -56,8 +84,8 @@
       "phase": "Collect credentials",
       "status": "blocked",
       "title": "Add TikTok OAuth credentials locally",
-      "detail": "Use the redacted TikTok handoff template to populate the local social API env file with the required TikTok refresh credential names. Values stay local and are never written to generated reports.",
-      "command": "",
+      "detail": "Use the redacted TikTok handoff template to populate the local social API env file with the TikTok client key, client secret, redirect URI, and refresh-token path. Values stay local and are never written to generated reports.",
+      "command": "python3 scripts/tiktok_oauth_handoff.py",
       "blocked_by": [
         "TIKTOK_CLIENT_KEY",
         "TIKTOK_CLIENT_SECRET",
@@ -65,11 +93,36 @@
       ]
     },
     {
+      "id": "generate_oauth_authorization_url",
+      "phase": "Authorize account",
+      "status": "blocked",
+      "title": "Generate TikTok authorization URL",
+      "detail": "Create the TikTok authorization URL, open it, and sign in as the Lily Roo TikTok account. The returned code is short-lived and should be exchanged immediately.",
+      "command": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url",
+      "blocked_by": [
+        "TIKTOK_CLIENT_KEY",
+        "TIKTOK_REDIRECT_URI"
+      ]
+    },
+    {
+      "id": "exchange_oauth_code",
+      "phase": "Authorize account",
+      "status": "blocked",
+      "title": "Exchange authorization code",
+      "detail": "Exchange the returned TikTok authorization code for local access and refresh tokens. The helper writes token values only with --apply and never prints them.",
+      "command": "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply",
+      "blocked_by": [
+        "TIKTOK_CLIENT_KEY",
+        "TIKTOK_CLIENT_SECRET",
+        "TIKTOK_REDIRECT_URI"
+      ]
+    },
+    {
       "id": "confirm_public_posting_approval",
       "phase": "Confirm approval",
       "status": "blocked",
       "title": "Confirm public posting approval",
-      "detail": "Set TikTok public posting approval only after Lily Roo is approved for public TikTok posting and PUBLIC_TO_EVERYONE is intentionally allowed.",
+      "detail": "Set TikTok public posting approval only after Lily Roo is approved for public TikTok posting and PUBLIC_TO_EVERYONE is intentionally allowed. If approval is confirmed locally, apply and deploy the guarded Worker var update.",
       "command": "",
       "blocked_by": [
         "TIKTOK_PUBLIC_POSTING_APPROVED"
@@ -82,6 +135,32 @@
       "title": "Dry-run worker secret push",
       "detail": "Preview the exact secret names that would be pushed to the worker before any apply command is available.",
       "command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+      "blocked_by": [
+        "TIKTOK_CLIENT_KEY",
+        "TIKTOK_CLIENT_SECRET",
+        "TIKTOK_REFRESH_TOKEN"
+      ]
+    },
+    {
+      "id": "preview_local_tiktok_post",
+      "phase": "Preview local post",
+      "status": "blocked",
+      "title": "Dry-run local TikTok post helper",
+      "detail": "Confirm the local posting helper can resolve media and use refresh credentials without requiring a manually copied access token.",
+      "command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --dry-run",
+      "blocked_by": [
+        "TIKTOK_CLIENT_KEY",
+        "TIKTOK_CLIENT_SECRET",
+        "TIKTOK_REFRESH_TOKEN"
+      ]
+    },
+    {
+      "id": "preview_local_tiktok_draft_upload",
+      "phase": "Preview draft upload",
+      "status": "blocked",
+      "title": "Dry-run TikTok inbox draft upload",
+      "detail": "Confirm the safer video.upload path can prepare a TikTok inbox draft before public direct-posting approval is available.",
+      "command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run",
       "blocked_by": [
         "TIKTOK_CLIENT_KEY",
         "TIKTOK_CLIENT_SECRET",

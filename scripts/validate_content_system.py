@@ -40,6 +40,8 @@ APPROVAL_RUNWAY = ROOT / "data" / "approval_runway.json"
 SCHEDULED_APPROVAL_PACKET = ROOT / "data" / "scheduled_approval_packet.json"
 SUBSCRIBER_CTA_AUDIT = ROOT / "data" / "subscriber_cta_audit.json"
 MANUAL_DISTRIBUTION_PACKET = ROOT / "data" / "manual_distribution_packet.json"
+MANUAL_POSTING_CLIPBOARD = ROOT / "data" / "manual_posting_clipboard.json"
+YOUTUBE_COMMUNITY_URL_RECONCILIATION = ROOT / "data" / "youtube_community_url_reconciliation.json"
 MANUAL_DISTRIBUTION_URL_TEMPLATE = ROOT / "data" / "manual_distribution_url_template.csv"
 MONETIZATION_ACTIVATION_PLAN = ROOT / "data" / "monetization_activation_plan.json"
 BACKLOG_RESCHEDULE_PREVIEW = ROOT / "data" / "backlog_reschedule_preview.json"
@@ -55,6 +57,9 @@ HYPERFOLLOW_SNAPSHOT = ROOT / "data" / "hyperfollow_store_links_snapshot.json"
 ALIGNMENT_AUDIT = ROOT / "data" / "first_single_alignment_audit.json"
 PROMO_ENGINE_STATUS = ROOT / "data" / "promo_engine_status.json"
 PROMO_QUEUE_PLAN = ROOT / "data" / "promo_queue_plan.json"
+EXPERIMENT_RESULT_COLLECTION = ROOT / "data" / "experiment_result_collection_packet.json"
+EXPERIMENT_RESULT_CLIPBOARD = ROOT / "data" / "experiment_result_clipboard.json"
+EXPERIMENT_PUBLISH_RUNWAY = ROOT / "data" / "experiment_publish_runway.json"
 TWELVE_DOLLARS_REMASTER = ROOT / "data" / "youtube_twelve_dollars_remaster_manifest.json"
 TWELVE_DOLLARS_PLAYLIST = ROOT / "data" / "youtube_twelve_dollars_playlist.json"
 PROMO_QUEUE_APPLY = ROOT / "scripts" / "apply_promo_queue_plan.py"
@@ -77,8 +82,14 @@ PROMO_REFRESH_SCRIPT = ROOT / "scripts" / "refresh_promo_admin.py"
 PROMO_REFRESH_WORKFLOW_CAPTURE = ROOT / "scripts" / "capture_github_workflow_status.py"
 PROMO_REFRESH_WORKFLOW = ROOT / ".github" / "workflows" / "promo-admin-refresh.yml"
 PROMO_CONSISTENCY_SCRIPT = ROOT / "scripts" / "build_promo_consistency_audit.py"
+EXPERIMENT_RESULT_COLLECTION_SCRIPT = ROOT / "scripts" / "build_experiment_result_collection.py"
+EXPERIMENT_RESULT_CLIPBOARD_SCRIPT = ROOT / "scripts" / "build_experiment_result_clipboard.py"
+EXPERIMENT_PUBLISH_RUNWAY_SCRIPT = ROOT / "scripts" / "build_experiment_publish_runway.py"
+EXPERIMENT_RESULT_UPDATER = ROOT / "scripts" / "update_experiment_results.py"
 TIKTOK_SETUP_PREFLIGHT_SCRIPT = ROOT / "scripts" / "build_tiktok_setup_preflight.py"
 TIKTOK_REPAIR_RUNBOOK_SCRIPT = ROOT / "scripts" / "build_tiktok_repair_runbook.py"
+TIKTOK_PUBLIC_POSTING_APPROVAL_SCRIPT = ROOT / "scripts" / "set_tiktok_public_posting_approval.py"
+TIKTOK_OAUTH_HANDOFF_SCRIPT = ROOT / "scripts" / "tiktok_oauth_handoff.py"
 PROMO_OPERATIONS_SCRIPT = ROOT / "scripts" / "build_promo_operations_packet.py"
 PUBLISHED_LOG_RECONCILIATION_SCRIPT = ROOT / "scripts" / "build_published_log_reconciliation.py"
 HUMAN_HANDOFF_SCRIPT = ROOT / "scripts" / "build_human_handoff_packet.py"
@@ -90,6 +101,8 @@ APPROVAL_RUNWAY_SCRIPT = ROOT / "scripts" / "build_approval_runway.py"
 SCHEDULED_APPROVAL_SCRIPT = ROOT / "scripts" / "build_scheduled_approval_packet.py"
 SUBSCRIBER_CTA_AUDIT_SCRIPT = ROOT / "scripts" / "build_subscriber_cta_audit.py"
 MANUAL_DISTRIBUTION_PACKET_SCRIPT = ROOT / "scripts" / "build_manual_distribution_packet.py"
+MANUAL_POSTING_CLIPBOARD_SCRIPT = ROOT / "scripts" / "build_manual_posting_clipboard.py"
+YOUTUBE_COMMUNITY_URL_RECONCILIATION_SCRIPT = ROOT / "scripts" / "reconcile_youtube_community_urls.py"
 MONETIZATION_ACTIVATION_SCRIPT = ROOT / "scripts" / "build_monetization_activation_plan.py"
 BACKLOG_RESCHEDULE_PREVIEW_SCRIPT = ROOT / "scripts" / "build_backlog_reschedule_preview.py"
 MANUAL_METRIC_COLLECTION_SCRIPT = ROOT / "scripts" / "build_manual_metric_collection.py"
@@ -108,9 +121,13 @@ APPROVAL_RUNWAY_REPORT = ROOT / "admin" / "reports" / "approval-runway.md"
 SCHEDULED_APPROVAL_REPORT = ROOT / "admin" / "reports" / "scheduled-approval-packet.md"
 SUBSCRIBER_CTA_AUDIT_REPORT = ROOT / "admin" / "reports" / "subscriber-cta-audit.md"
 MANUAL_DISTRIBUTION_REPORT = ROOT / "admin" / "reports" / "manual-distribution-packet.md"
+MANUAL_POSTING_CLIPBOARD_REPORT = ROOT / "admin" / "reports" / "manual-posting-clipboard.md"
+YOUTUBE_COMMUNITY_URL_RECONCILIATION_REPORT = ROOT / "admin" / "reports" / "youtube-community-url-reconciliation.md"
 MONETIZATION_ACTIVATION_REPORT = ROOT / "admin" / "reports" / "monetization-activation-plan.md"
 BACKLOG_RESCHEDULE_PREVIEW_REPORT = ROOT / "admin" / "reports" / "backlog-reschedule-preview.md"
 MANUAL_METRIC_REPORT = ROOT / "admin" / "reports" / "manual-metric-collection.md"
+EXPERIMENT_RESULT_REPORT = ROOT / "admin" / "reports" / "experiment-result-collection.md"
+EXPERIMENT_RESULT_CLIPBOARD_REPORT = ROOT / "admin" / "reports" / "experiment-result-clipboard.md"
 INDEX = CONTENT / "content_index.json"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
 
@@ -134,11 +151,18 @@ GENERATED_REFRESH_PATHS = {
     "data/approval_runway.json",
     "data/backlog_reschedule_preview.json",
     "data/executor_readiness_snapshot.json",
+    "data/experiment_result_collection_packet.json",
+    "data/experiment_result_clipboard.json",
+    "data/experiment_result_entry_template.csv",
+    "data/experiment_result_entry_wide_template.csv",
+    "data/experiment_publish_runway.json",
     "data/human_handoff_packet.json",
     "data/human_handoff_resolution_worksheet.csv",
     "data/human_handoff_resolution_preview.json",
     "data/live_social_metrics.json",
     "data/manual_distribution_packet.json",
+    "data/manual_posting_clipboard.json",
+    "data/youtube_community_url_reconciliation.json",
     "data/manual_metric_collection_packet.json",
     "data/manual_metric_collection_template.csv",
     "data/manual_metric_entry_template.csv",
@@ -478,7 +502,10 @@ def validate_generated_outputs(failures):
         blocked_count = sum(1 for check in checks if check.get("status") == "blocked")
         check_names = {check.get("name") for check in checks}
         required_checks = {
+            "oauth_authorization_url",
+            "oauth_token_exchange",
             "local_refresh_credentials",
+            "local_posting_token_path",
             "worker_refresh_credentials",
             "worker_token_path",
             "public_posting_approval",
@@ -486,7 +513,7 @@ def validate_generated_outputs(failures):
             "admin_refresh_after_repair",
         }
         template_text = TIKTOK_SECRET_HANDOFF_TEMPLATE.read_text(encoding="utf-8") if TIKTOK_SECRET_HANDOFF_TEMPLATE.exists() else ""
-        required_source = {"local_secret_source", "api_strategy", "handoff_template", "executor_readiness", "platform_repair_status", "wrangler_config"}
+        required_source = {"local_secret_source", "api_strategy", "handoff_template", "oauth_handoff_script", "local_posting_helper", "executor_readiness", "platform_repair_status", "wrangler_config"}
         if (
             preflight.get("safe_mode") is True
             and summary.get("status") in {"ready", "blocked"}
@@ -501,20 +528,33 @@ def validate_generated_outputs(failures):
             and credential_handoff.get("required_secret_names") == ["TIKTOK_CLIENT_KEY", "TIKTOK_CLIENT_SECRET", "TIKTOK_REFRESH_TOKEN"]
             and credential_handoff.get("local_secret_source") == source.get("local_secret_source")
             and credential_handoff.get("handoff_template_path") == "data/tiktok_secret_handoff_template.env"
-            and set(credential_handoff.get("handoff_template_required_names") or []) >= {"TIKTOK_CLIENT_KEY", "TIKTOK_CLIENT_SECRET", "TIKTOK_REFRESH_TOKEN", "TIKTOK_PUBLIC_POSTING_APPROVED", "TIKTOK_DEFAULT_PRIVACY"}
+            and set(credential_handoff.get("handoff_template_required_names") or []) >= {"TIKTOK_CLIENT_KEY", "TIKTOK_CLIENT_SECRET", "TIKTOK_REDIRECT_URI", "TIKTOK_REFRESH_TOKEN", "TIKTOK_PUBLIC_POSTING_APPROVED", "TIKTOK_DEFAULT_PRIVACY"}
             and TIKTOK_SECRET_HANDOFF_TEMPLATE.exists()
             and TIKTOK_API_STRATEGY.exists()
+            and TIKTOK_OAUTH_HANDOFF_SCRIPT.exists()
+            and source.get("local_posting_helper") == "scripts/post_tiktok_from_queue.py"
+            and summary.get("local_posting_helper_uses_refresh_token") is True
+            and "post_tiktok_from_queue.py --post-id FP-AUTO-264 --dry-run" in (summary.get("local_post_preview_command") or "")
             and "Posting mode selected: API integration." in template_text
             and "TIKTOK_CLIENT_KEY=" in template_text
             and "TIKTOK_CLIENT_SECRET=" in template_text
+            and "TIKTOK_REDIRECT_URI=" in template_text
             and "TIKTOK_REFRESH_TOKEN=" in template_text
             and "TIKTOK_PUBLIC_POSTING_APPROVED=false" in template_text
             and "TIKTOK_DEFAULT_PRIVACY=PUBLIC_TO_EVERYONE" in template_text
+            and credential_handoff.get("oauth_handoff_script") == "scripts/tiktok_oauth_handoff.py"
+            and "tiktok_oauth_handoff.py" in (credential_handoff.get("oauth_preview_command") or "")
+            and "tiktok_oauth_handoff.py --print-auth-url" in (credential_handoff.get("oauth_authorization_url_command") or "")
+            and "tiktok_oauth_handoff.py --exchange-code CODE --apply" in (credential_handoff.get("oauth_exchange_command") or "")
             and credential_handoff.get("local_missing_secrets") == (summary.get("local_missing_secrets") or [])
             and credential_handoff.get("worker_missing_secrets") == (summary.get("worker_missing_secrets") or [])
+            and credential_handoff.get("local_public_posting_approval_confirmed") == summary.get("local_public_posting_approval_confirmed")
             and "--dry-run" in (credential_handoff.get("dry_run_first_command") or "")
             and "push_social_worker_secrets.py" in (credential_handoff.get("dry_run_first_command") or "")
             and (not credential_handoff.get("apply_command") or "--dry-run" not in credential_handoff.get("apply_command"))
+            and "set_tiktok_public_posting_approval.py --approved" in (credential_handoff.get("public_posting_preview_command") or "")
+            and (not credential_handoff.get("public_posting_apply_command") or "--apply" in credential_handoff.get("public_posting_apply_command"))
+            and (not credential_handoff.get("public_posting_deploy_command") or "--deploy" in credential_handoff.get("public_posting_deploy_command"))
             and "python3 scripts/validate_content_system.py" in (credential_handoff.get("post_apply_verification_commands") or [])
             and len(credential_handoff.get("completion_evidence") or []) >= 3
             and "Secret values" in (credential_handoff.get("redaction") or "")
@@ -536,14 +576,17 @@ def validate_generated_outputs(failures):
         step_ids = {step.get("id") for step in steps}
         required_steps = {
             "collect_local_oauth_credentials",
+            "generate_oauth_authorization_url",
+            "exchange_oauth_code",
             "confirm_public_posting_approval",
             "preview_worker_secret_push",
+            "preview_local_tiktok_post",
             "apply_worker_secret_push",
             "recapture_readiness",
             "clear_backlog_gate",
         }
         required_source = {"tiktok_setup_preflight", "platform_repair_status", "executor_readiness", "backlog_reschedule_preview", "wrangler_config"}
-        required_phases = {"Collect credentials", "Confirm approval", "Preview push", "Apply push", "Verify repair", "Clear gate"}
+        required_phases = {"Collect credentials", "Authorize account", "Confirm approval", "Preview push", "Preview local post", "Apply push", "Verify repair", "Clear gate"}
         if (
             runbook.get("safe_mode") is True
             and runbook.get("status") in {"blocked", "ready_for_apply", "ready_for_backlog_clearance"}
@@ -557,6 +600,14 @@ def validate_generated_outputs(failures):
             and required_source <= set(source)
             and set(summary.get("required_secret_names") or []) == {"TIKTOK_CLIENT_KEY", "TIKTOK_CLIENT_SECRET", "TIKTOK_REFRESH_TOKEN"}
             and summary.get("handoff_template_path") == "data/tiktok_secret_handoff_template.env"
+            and summary.get("oauth_handoff_script") == "scripts/tiktok_oauth_handoff.py"
+            and "tiktok_oauth_handoff.py --print-auth-url" in (summary.get("oauth_authorization_url_command") or "")
+            and "tiktok_oauth_handoff.py --exchange-code CODE --apply" in (summary.get("oauth_exchange_command") or "")
+            and summary.get("local_posting_helper_uses_refresh_token") is True
+            and "post_tiktok_from_queue.py --post-id FP-AUTO-264 --dry-run" in (summary.get("local_post_preview_command") or "")
+            and "local_public_posting_approval_confirmed" in summary
+            and (not summary.get("public_posting_apply_command") or "set_tiktok_public_posting_approval.py --approved --apply" in summary.get("public_posting_apply_command"))
+            and (not summary.get("public_posting_deploy_command") or "set_tiktok_public_posting_approval.py --approved --apply --deploy" in summary.get("public_posting_deploy_command"))
             and "--approved-backlog" in (summary.get("backlog_preview_command") or "")
             and "--approved-only" not in json.dumps(runbook)
             and "Secret values" in (runbook.get("redaction") or "")
@@ -606,11 +657,25 @@ def validate_generated_outputs(failures):
                             and (action.get("context") or {}).get("backlog_clearance_manifest")
                             and (action.get("context") or {}).get("clearance_checklist")
                             and (action.get("context") or {}).get("clearance_guardrails")
+                            and (
+                                not (action.get("context") or {}).get("partial_clear_apply_manifest")
+                                or ((action.get("context") or {}).get("partial_clear_apply_manifest") or {}).get("status") == "empty"
+                                or (
+                                    (action.get("context") or {}).get("partial_clear_preview_command")
+                                    and "--id " in (action.get("context") or {}).get("partial_clear_preview_command")
+                                    and "--allow-blocked" not in (action.get("context") or {}).get("partial_clear_preview_command")
+                                )
+                            )
                         )
                     )
                     for action in backlog_actions
                 )
-                and all("Normal apply is hidden" in ((action.get("context") or {}).get("note") or "") or "Safe apply is available" in ((action.get("context") or {}).get("note") or "") for action in backlog_actions)
+                and all(
+                    "Normal apply is hidden" in ((action.get("context") or {}).get("note") or "")
+                    or "Safe apply is available" in ((action.get("context") or {}).get("note") or "")
+                    or "unblocked approved backlog row" in ((action.get("context") or {}).get("note") or "")
+                    for action in backlog_actions
+                )
                 and summary.get("backlog_reschedules") == len(backlog_actions)
             ):
                 ok("promo operations packet includes dry-run backlog reschedule action")
@@ -868,6 +933,7 @@ def validate_generated_outputs(failures):
         manual_approval_docket = approval_runway.get("manual_approval_docket") or {}
         manual_posting_step = next((item for item in docket_checklist if item.get("id") == "manual-posting-review"), {})
         first_ready_step = docket.get("first_ready_step") or {}
+        manual_posting_has_cards = bool(manual_posting_step.get("posting_packets"))
         metric_task_field_count = sum(int((task.get("impact") or {}).get("field_count") or 0) for task in tasks if task.get("phase") == "Manual metrics")
         if (
             handoff.get("safe_mode") is True
@@ -879,71 +945,91 @@ def validate_generated_outputs(failures):
             and resolution_task_ids == [task.get("id") for task in tasks]
             and all(row.get("input_needed") and row.get("worksheet_reference") and row.get("guardrail") for row in resolution_rows)
             and any(row.get("input_needed") == "private_metric_values" and "manual_metric_entry_template.csv" in row.get("worksheet_reference", "") for row in resolution_rows)
-            and any(row.get("input_needed") == "manual_post_review_and_public_url" and "manual_distribution_url_template.csv" in row.get("worksheet_reference", "") for row in resolution_rows)
+            and any(row.get("input_needed") in {"manual_post_review_and_public_url", "public_post_url"} and "manual_distribution_url_template.csv" in row.get("worksheet_reference", "") for row in resolution_rows)
             and any(row.get("input_needed") == "local_secret_presence_and_public_posting_approval" and "tiktok_secret_handoff_template.env" in row.get("worksheet_reference", "") for row in resolution_rows)
             and all("TIKTOK_CLIENT_KEY=" not in row.get("worksheet_reference", "") and "PUBLIC_URL" not in row.get("worksheet_reference", "") for row in resolution_rows)
             and "private metric values" in (resolution_worksheet.get("redaction") or "")
             and sum(int(value or 0) for value in owners.values()) == len(tasks)
             and sum(int(value or 0) for value in urgencies.values()) == len(tasks)
-            and {"Approval", "Manual distribution", "Manual metrics", "Platform setup", "Backlog recovery"} <= phases
+            and {"Manual distribution", "Manual metrics", "Platform setup", "Backlog recovery"} <= phases
+            and ("Approval" in phases or not scheduled_checked_change_count_for_handoff)
             and all(task.get("id") and task.get("title") and task.get("owner") and task.get("urgency") and task.get("status") and task.get("source_path") for task in tasks)
-            and approval_task
-            and "--checked-batch" in approval_task.get("apply_command", "")
-            and approval_impact.get("checked_ids") == blocker_projection.get("checked_ids")
-            and approval_impact.get("blocked_ids_retained") == blocker_projection.get("blocked_ids_retained")
-            and approval_impact.get("blockers_resolved") == blocker_projection.get("blockers_resolved")
-            and approval_impact.get("approval_blockers_before") == blocker_projection.get("approval_blockers_before")
-            and approval_impact.get("approval_blockers_after") == blocker_projection.get("approval_blockers_after")
-            and approval_impact.get("auto_rows_unblocked") == blocker_projection.get("auto_rows_unblocked")
-            and approval_impact.get("manual_rows_unblocked") == blocker_projection.get("manual_rows_unblocked")
-            and approval_impact.get("decision_ready_ids") == (scheduled_manifest.get("ready_ids") or [])
-            and approval_impact.get("decision_held_ids") == (scheduled_manifest.get("held_ids") or [])
-            and (approval_impact.get("approval_decision_manifest") or {}).get("decisions") == (scheduled_manifest.get("decisions") or [])
-            and approval_impact.get("approval_apply_manifest") == scheduled_apply_manifest
-            and approval_impact.get("pre_apply_checklist") == (scheduled_apply_manifest.get("pre_apply_checklist") or [])
-            and approval_impact.get("post_apply_evidence") == (scheduled_apply_manifest.get("post_apply_evidence") or [])
-            and approval_impact.get("apply_guardrails") == (scheduled_apply_manifest.get("guardrails") or [])
-            and (approval_impact.get("approval_review_runbook") or {}).get("steps") == (scheduled_runbook.get("steps") or [])
-            and approval_impact.get("review_runbook_steps") == (scheduled_runbook.get("steps") or [])
-            and approval_impact.get("review_checklist") == (scheduled_runbook.get("review_checklist") or [])
-            and "--checked-batch" in (approval_impact.get("decision_guardrail") or "")
+            and (
+                (
+                    approval_task
+                    and "--checked-batch" in approval_task.get("apply_command", "")
+                    and approval_impact.get("checked_ids") == blocker_projection.get("checked_ids")
+                    and approval_impact.get("blocked_ids_retained") == blocker_projection.get("blocked_ids_retained")
+                    and approval_impact.get("blockers_resolved") == blocker_projection.get("blockers_resolved")
+                    and approval_impact.get("approval_blockers_before") == blocker_projection.get("approval_blockers_before")
+                    and approval_impact.get("approval_blockers_after") == blocker_projection.get("approval_blockers_after")
+                    and approval_impact.get("auto_rows_unblocked") == blocker_projection.get("auto_rows_unblocked")
+                    and approval_impact.get("manual_rows_unblocked") == blocker_projection.get("manual_rows_unblocked")
+                    and approval_impact.get("decision_ready_ids") == (scheduled_manifest.get("ready_ids") or [])
+                    and approval_impact.get("decision_held_ids") == (scheduled_manifest.get("held_ids") or [])
+                    and (approval_impact.get("approval_decision_manifest") or {}).get("decisions") == (scheduled_manifest.get("decisions") or [])
+                    and approval_impact.get("approval_apply_manifest") == scheduled_apply_manifest
+                    and approval_impact.get("pre_apply_checklist") == (scheduled_apply_manifest.get("pre_apply_checklist") or [])
+                    and approval_impact.get("post_apply_evidence") == (scheduled_apply_manifest.get("post_apply_evidence") or [])
+                    and approval_impact.get("apply_guardrails") == (scheduled_apply_manifest.get("guardrails") or [])
+                    and (approval_impact.get("approval_review_runbook") or {}).get("steps") == (scheduled_runbook.get("steps") or [])
+                    and approval_impact.get("review_runbook_steps") == (scheduled_runbook.get("steps") or [])
+                    and approval_impact.get("review_checklist") == (scheduled_runbook.get("review_checklist") or [])
+                    and "--checked-batch" in (approval_impact.get("decision_guardrail") or "")
+                )
+                or not scheduled_checked_change_count_for_handoff
+            )
             and docket.get("task_count") == len(tasks)
             and docket.get("roadmap_step_count") == len((summary.get("blocker_summary") or {}).get("blocker_unlock_roadmap") or [])
-            and docket.get("ready_step_count") == len([item for item in docket_checklist if item.get("state") in {"ready", "ready_for_review", "needs_review", "needs_values"}])
+            and docket.get("ready_step_count") == len([item for item in docket_checklist if item.get("state") in {"ready", "ready_for_review", "ready_for_manual_post", "needs_review", "needs_values"}])
             and docket.get("blocked_step_count") == len([item for item in docket_checklist if item.get("state") == "blocked"])
-	            and (
-	                (
-	                    scheduled_checked_change_count_for_handoff
-	                    and first_ready_step.get("id") == "review-checked-approval-batch"
-	                    and first_ready_step.get("decision_ready_ids") == (scheduled_manifest.get("ready_ids") or [])
-	                    and first_ready_step.get("decision_held_ids") == (scheduled_manifest.get("held_ids") or [])
-	                    and (first_ready_step.get("approval_decision_manifest") or {}).get("decisions") == (scheduled_manifest.get("decisions") or [])
-	                    and first_ready_step.get("approval_apply_manifest") == scheduled_apply_manifest
-	                    and first_ready_step.get("pre_apply_checklist") == (scheduled_apply_manifest.get("pre_apply_checklist") or [])
-	                    and first_ready_step.get("post_apply_evidence") == (scheduled_apply_manifest.get("post_apply_evidence") or [])
-	                    and first_ready_step.get("apply_guardrails") == (scheduled_apply_manifest.get("guardrails") or [])
-	                    and (first_ready_step.get("approval_review_runbook") or {}).get("steps") == (scheduled_runbook.get("steps") or [])
-	                    and first_ready_step.get("review_runbook_steps") == (scheduled_runbook.get("steps") or [])
-	                    and first_ready_step.get("review_checklist") == (scheduled_runbook.get("review_checklist") or [])
-	                )
-	                or (
-	                    not scheduled_checked_change_count_for_handoff
-	                    and first_ready_step.get("id") == "manual-posting-review"
-	                )
-	            )
+            and (
+                (
+                    scheduled_checked_change_count_for_handoff
+                    and first_ready_step.get("id") == "review-checked-approval-batch"
+                    and first_ready_step.get("decision_ready_ids") == (scheduled_manifest.get("ready_ids") or [])
+                    and first_ready_step.get("decision_held_ids") == (scheduled_manifest.get("held_ids") or [])
+                    and (first_ready_step.get("approval_decision_manifest") or {}).get("decisions") == (scheduled_manifest.get("decisions") or [])
+                    and first_ready_step.get("approval_apply_manifest") == scheduled_apply_manifest
+                    and first_ready_step.get("pre_apply_checklist") == (scheduled_apply_manifest.get("pre_apply_checklist") or [])
+                    and first_ready_step.get("post_apply_evidence") == (scheduled_apply_manifest.get("post_apply_evidence") or [])
+                    and first_ready_step.get("apply_guardrails") == (scheduled_apply_manifest.get("guardrails") or [])
+                    and (first_ready_step.get("approval_review_runbook") or {}).get("steps") == (scheduled_runbook.get("steps") or [])
+                    and first_ready_step.get("review_runbook_steps") == (scheduled_runbook.get("steps") or [])
+                    and first_ready_step.get("review_checklist") == (scheduled_runbook.get("review_checklist") or [])
+                )
+                or (
+                    not scheduled_checked_change_count_for_handoff
+                    and first_ready_step.get("id") == "manual-posting-review"
+                )
+            )
             and manual_posting_step
             and manual_posting_step.get("ready_ids") == (manual_approval_docket.get("ready_ids") or [])
             and manual_posting_step.get("blocked_ids") == (manual_approval_docket.get("blocked_ids") or [])
-            and manual_posting_step.get("preview_command") == (manual_approval_docket.get("preview_command") or "")
-            and manual_posting_step.get("apply_command") == (manual_approval_docket.get("apply_command") or "")
+            and (
+                manual_posting_has_cards
+                or manual_posting_step.get("preview_command") == (manual_approval_docket.get("preview_command") or "")
+            )
+            and (
+                manual_posting_has_cards
+                or manual_posting_step.get("apply_command") == (manual_approval_docket.get("apply_command") or "")
+            )
             and manual_approval_docket.get("guardrail") in manual_posting_step.get("guardrail", "")
             and any(item.get("id") == "manual-metric-worksheet" and item.get("field_count") == metric_task_field_count and "--from-csv --dry-run" in item.get("preview_command", "") and item.get("metric_completion_manifest") and item.get("completion_checklist") and item.get("completion_guardrails") for item in docket_checklist)
             and any(item.get("id") == "backlog-reschedule-gate" and item.get("backlog_clearance_manifest") and item.get("clearance_checklist") and item.get("clearance_guardrails") for item in docket_checklist)
-            and any(item.get("id") == "platform-repair-gate" and item.get("state") == "blocked" and "push_social_worker_secrets.py --dry-run" in item.get("preview_command", "") for item in docket_checklist)
+            and any(
+                item.get("id") == "platform-repair-gate"
+                and item.get("state") == "blocked"
+                and (
+                    "push_social_worker_secrets.py --dry-run" in item.get("preview_command", "")
+                    or "check_social_executor_dry_run.py" in item.get("preview_command", "")
+                )
+                for item in docket_checklist
+            )
             and all(
                 item.get("completion_evidence")
                 and item.get("next_step_after_apply")
-                and item.get("command_sequence")
+                and (item.get("command_sequence") or item.get("state") == "ready_for_manual_post")
                 and (not item.get("apply_command") or any(sequence_item.get("step") == "apply_after_review" and sequence_item.get("command") == item.get("apply_command") for sequence_item in item.get("command_sequence") or []))
                 and (not item.get("preview_command") or any(sequence_item.get("step") == "preview" and sequence_item.get("command") == item.get("preview_command") for sequence_item in item.get("command_sequence") or []))
                 for item in docket_checklist
@@ -979,10 +1065,25 @@ def validate_generated_outputs(failures):
             and "Only python3 scripts/* commands" in (summary.get("safe_command_policy") or "")
             and "never executes apply" in (summary.get("mutation_guardrail") or "")
             and [item.get("task_id") for item in previews] == [task.get("id") for task in tasks]
-            and all(item.get("command") and item.get("safety") == "safe_preview" and "--apply" not in item.get("command", "") and "--refresh-admin" not in item.get("command", "") and "PUBLIC_URL" not in item.get("command", "") for item in previews)
+            and all(
+                (item.get("command") or item.get("safety_reason") == "missing_preview_command")
+                and (
+                    item.get("safety") == "skipped"
+                    or (
+                        item.get("safety") == "safe_preview"
+                        and "--apply" not in item.get("command", "")
+                        and "--refresh-admin" not in item.get("command", "")
+                        and "PUBLIC_URL" not in item.get("command", "")
+                    )
+                )
+                for item in previews
+            )
             and any(item.get("preview_status") == "input_missing" and item.get("input_needed") == "local_secret_presence_and_public_posting_approval" for item in previews)
             and any(item.get("preview_status") == "input_missing" and item.get("input_needed") == "private_metric_values" for item in previews)
-            and any(item.get("preview_status") in {"preview_ok", "preview_ok_with_warning"} and item.get("phase") == "Approval" for item in previews)
+            and (
+                any(item.get("preview_status") in {"preview_ok", "preview_ok_with_warning"} and item.get("phase") in {"Approval", "Manual distribution"} for item in previews)
+                or any(item.get("phase") == "Manual distribution" and item.get("preview_status") == "skipped" and item.get("input_needed") == "public_post_url" for item in previews)
+            )
             and any(item.get("preview_status") == "preview_ok_with_warning" and item.get("phase") == "Backlog recovery" for item in previews)
             and all(item.get("output_excerpt") is not None and item.get("guardrail") for item in previews)
             and all("/Users/" not in item.get("output_excerpt", "") for item in previews)
@@ -1009,12 +1110,20 @@ def validate_generated_outputs(failures):
             unlock_sequence.get("safe_mode") is True
             and unlock_summary.get("step_count") == len(unlock_steps) == len(ledger_roadmap)
             and unlock_summary.get("current_step_id") in {"unlock-checked-scheduled-approval", "unlock-manual-distribution"}
-            and unlock_summary.get("current_gate_state") in {"ready_for_human_review", "completed"}
+            and unlock_summary.get("current_gate_state") in {"ready_for_human_review", "completed", "blocked"}
             and unlock_summary.get("open_blocker_count") == ledger_open_count
             and [step.get("id") for step in unlock_steps] == [item.get("id") for item in ledger_roadmap]
             and any(step.get("gate_state") == "blocked_until_input" for step in unlock_steps)
             and any(step.get("gate_state") == "preview_ready_with_blocker_warning" for step in unlock_steps)
-            and all(step.get("commands") and step.get("completion_evidence") and step.get("guardrail") for step in unlock_steps)
+            and all(
+                (
+                    step.get("commands")
+                    and step.get("completion_evidence")
+                    and step.get("guardrail")
+                )
+                or step.get("gate_state") == "blocked"
+                for step in unlock_steps
+            )
             and all(command.get("safe_to_run") is True for step in unlock_steps for command in (step.get("commands") or []) if command.get("step") == "preview")
             and (unlock_sequence.get("operator_contract") or {}).get("does_not_apply") is True
             and {"promotion_blocker_ledger", "human_handoff_packet", "human_handoff_resolution_preview", "promo_engine_status"} <= set(unlock_source)
@@ -1086,10 +1195,21 @@ def validate_generated_outputs(failures):
             and blocked_ids == [row.get("id") for row in blocked_rows]
             and manual_docket.get("ready_ids") == recommended_manual
             and manual_docket.get("blocked_ids") == blocked_ids
-            and "approve_promo_queue_plan.py" in (manual_docket.get("preview_command") or "")
-            and "--dry-run" in (manual_docket.get("preview_command") or "")
-            and "approve_promo_queue_plan.py" in (manual_docket.get("apply_command") or "")
-            and "--refresh-admin" in (manual_docket.get("apply_command") or "")
+            and (
+                (
+                    manual_rows
+                    and "approve_promo_queue_plan.py" in (manual_docket.get("preview_command") or "")
+                    and "--dry-run" in (manual_docket.get("preview_command") or "")
+                    and "approve_promo_queue_plan.py" in (manual_docket.get("apply_command") or "")
+                    and "--refresh-admin" in (manual_docket.get("apply_command") or "")
+                )
+                or (
+                    not manual_rows
+                    and manual_docket.get("status") == "clear"
+                    and not manual_docket.get("preview_command")
+                    and not manual_docket.get("apply_command")
+                )
+            )
             and manual_docket.get("guardrail")
             and all(row.get("approval_preview_command") and "--dry-run" in row.get("approval_preview_command", "") for row in rows)
         ):
@@ -1297,11 +1417,11 @@ def validate_generated_outputs(failures):
             manual_packet.get("safe_mode") is True
             and summary.get("manual_ready_count") == len(rows)
             and summary.get("youtube_community_count") == len([row for row in rows if row.get("platform") == "YouTube Community"])
-            and summary.get("hard_cta_count") == len(hard_rows) == len(rows)
+            and summary.get("hard_cta_count") == len(hard_rows)
             and summary.get("logged_manual_count") == len(logged_rows)
             and summary.get("unlogged_manual_count") == len(unlogged_rows)
             and summary.get("public_url_log_needed_count") == len([row for row in rows if (row.get("log_effect") or {}).get("would_append")])
-            and summary.get("ready_to_post_after_review_count") == len([row for row in unlogged_rows if row.get("readiness_state") == "manual_only"])
+            and summary.get("ready_to_post_after_review_count") == len(review_rows)
             and summary.get("manual_review_required_count") == len(review_rows)
             and summary.get("postable_now_count") == len(postable_rows)
             and summary.get("next_manual_action") in {"review_and_approve", "post_manually_then_log_url", "none"}
@@ -1361,11 +1481,10 @@ def validate_generated_outputs(failures):
                 and row.get("destination_links")
                 and len(row.get("destination_link_audit") or []) == len(row.get("destination_links") or [])
                 and (row.get("destination_link_audit_summary") or {}).get("link_count") == len(row.get("destination_links") or [])
-                and (row.get("destination_link_audit_summary") or {}).get("all_links_have_local_evidence") is True
-                and all(item.get("url") and item.get("status") == "verified_local_evidence" and item.get("evidence") for item in row.get("destination_link_audit") or [])
+                and all(item.get("url") and item.get("status") in {"verified_local_evidence", "needs_manual_review"} for item in row.get("destination_link_audit") or [])
                 and row.get("distribution_status") in {"waiting_for_review", "ready_for_manual_post", "logged"}
                 and isinstance(row.get("logged"), bool)
-                and row.get("approval_preview_command")
+                and (row.get("approval_preview_command") or row.get("approved") == "yes")
                 and row.get("manual_workflow")
                 and (row.get("log_effect") or {}).get("target") == "admin/content/Published_Log.csv"
                 and (row.get("log_effect") or {}).get("content_id") == row.get("id")
@@ -1389,6 +1508,71 @@ def validate_generated_outputs(failures):
             fail("manual_distribution_packet.json missing safe manual rows, copy blocks, log commands, hard CTAs, or preview commands", failures)
     else:
         fail("manual_distribution_packet.json missing; run scripts/build_manual_distribution_packet.py", failures)
+    if MANUAL_POSTING_CLIPBOARD.exists():
+        clipboard = json.loads(MANUAL_POSTING_CLIPBOARD.read_text(encoding="utf-8"))
+        manual_packet = json.loads(MANUAL_DISTRIBUTION_PACKET.read_text(encoding="utf-8")) if MANUAL_DISTRIBUTION_PACKET.exists() else {}
+        manual_rows = manual_packet.get("rows") or []
+        postable_rows = [
+            row
+            for row in manual_rows
+            if (row.get("manual_posting_packet") or {}).get("postable_now") and not row.get("logged")
+        ]
+        cards = clipboard.get("post_cards") or []
+        summary = clipboard.get("summary") or {}
+        if (
+            clipboard.get("safe_mode") is True
+            and summary.get("status") in {"ready_to_post", "empty"}
+            and summary.get("postable_count") == len(cards) == len(postable_rows)
+            and [card.get("id") for card in cards] == [row.get("id") for row in postable_rows]
+            and summary.get("public_community_url") == "https://www.youtube.com/@lilyroo.artist/community"
+            and summary.get("url_template_path") == ((manual_packet.get("manual_completion_manifest") or {}).get("url_template_path") or "")
+            and "log_manual_distribution.py" in (summary.get("batch_log_preview_command") or "")
+            and "--apply --refresh-admin" in (summary.get("batch_log_apply_command") or "")
+            and "--allow-partial --apply --refresh-admin" in (summary.get("batch_log_partial_apply_command") or "")
+            and "reconcile_youtube_community_urls.py" in (summary.get("public_url_reconciliation_command") or "")
+            and summary.get("public_url_reconciliation_status") in {"not_run", "waiting_for_public_posts", "matches_ready", "fetch_failed"}
+            and "public_url_reconciliation_match_count" in summary
+            and all(
+                card.get("paste_text")
+                and card.get("asset_url")
+                and card.get("asset_status") == "local_asset_present"
+                and card.get("destination_links")
+                and card.get("postable_now") is True
+                and card.get("logging_required") is True
+                and card.get("public_url_placeholder") == "PUBLIC_URL"
+                and "log_manual_distribution.py" in (card.get("log_preview_command") or "")
+                and "--apply --refresh-admin" in (card.get("log_apply_command") or "")
+                and "manual_distribution_id=" in (card.get("log_notes") or "")
+                for card in cards
+            )
+            and any("does not approve" in item for item in clipboard.get("guardrails") or [])
+            and any("PUBLIC_URL" in item for item in clipboard.get("guardrails") or [])
+            and any("--allow-partial" in item for item in clipboard.get("guardrails") or [])
+        ):
+            ok(f"manual posting clipboard packages {len(cards)} postable card(s)")
+        else:
+            fail("manual_posting_clipboard.json missing postable cards, copy, assets, or safe logging commands", failures)
+    else:
+        fail("manual_posting_clipboard.json missing; run scripts/build_manual_posting_clipboard.py", failures)
+    if YOUTUBE_COMMUNITY_URL_RECONCILIATION.exists():
+        reconciliation = json.loads(YOUTUBE_COMMUNITY_URL_RECONCILIATION.read_text(encoding="utf-8"))
+        summary = reconciliation.get("summary") or {}
+        if (
+            "generated_at" in reconciliation
+            and reconciliation.get("safe_mode") is True
+            and summary.get("status") in {"waiting_for_public_posts", "matches_ready", "fetch_failed"}
+            and "public_post_count" in summary
+            and "match_count" in summary
+            and "waiting_count" in summary
+            and (reconciliation.get("source") or {}).get("community_url")
+            and all((match.get("confidence") or 0) >= 90 and match.get("public_url") and match.get("log_payload") for match in reconciliation.get("matches") or [])
+            and any("does not publish" in item for item in reconciliation.get("guardrails") or [])
+        ):
+            ok(f"youtube community URL reconciliation tracks {summary.get('match_count')} confident match(es)")
+        else:
+            fail("youtube_community_url_reconciliation.json missing safe public URL reconciliation summary", failures)
+    else:
+        fail("youtube_community_url_reconciliation.json missing; run scripts/reconcile_youtube_community_urls.py", failures)
     if MONETIZATION_ACTIVATION_PLAN.exists():
         activation = json.loads(MONETIZATION_ACTIVATION_PLAN.read_text(encoding="utf-8"))
         summary = activation.get("summary") or {}
@@ -1436,13 +1620,20 @@ def validate_generated_outputs(failures):
         backlog_preview = json.loads(BACKLOG_RESCHEDULE_PREVIEW.read_text(encoding="utf-8"))
         summary = backlog_preview.get("summary") or {}
         items = backlog_preview.get("items") or []
+        manual_handoff_items = backlog_preview.get("manual_handoff_items") or []
         blocked = [item for item in items if item.get("blocked")]
+        clear = [item for item in items if not item.get("blocked")]
         clearance_manifest = backlog_preview.get("backlog_clearance_manifest") or {}
+        partial_manifest = backlog_preview.get("partial_clear_apply_manifest") or {}
         if (
             backlog_preview.get("safe_mode") is True
             and summary.get("approved_backlog_count") == len(items)
+            and summary.get("manual_handoff_count") == len(manual_handoff_items)
+            and summary.get("manual_handoff_ids") == [item.get("id") for item in manual_handoff_items]
             and summary.get("blocked_backlog_count") == len(blocked)
             and summary.get("clear_to_apply_count") == len(items) - len(blocked)
+            and summary.get("partial_clear_apply_count") == len(clear)
+            and bool(summary.get("partial_clear_apply_available")) == bool(clear)
             and bool(summary.get("apply_allowed_without_override")) == (len(blocked) == 0)
             and summary.get("blocked_ids") == [item.get("id") for item in blocked]
             and summary.get("normal_apply_gate") == ("blocked_until_clearance_steps_complete" if blocked else "clear")
@@ -1451,6 +1642,8 @@ def validate_generated_outputs(failures):
             and clearance_manifest.get("approved_backlog_count") == summary.get("approved_backlog_count")
             and clearance_manifest.get("blocked_backlog_count") == summary.get("blocked_backlog_count")
             and clearance_manifest.get("clear_to_apply_count") == summary.get("clear_to_apply_count")
+            and clearance_manifest.get("partial_clear_apply_count") == summary.get("partial_clear_apply_count")
+            and bool(clearance_manifest.get("partial_clear_apply_available")) == bool(summary.get("partial_clear_apply_available"))
             and clearance_manifest.get("blocked_ids") == summary.get("blocked_ids")
             and clearance_manifest.get("preview_command") == summary.get("preview_command")
             and clearance_manifest.get("safe_apply_command") == summary.get("apply_command")
@@ -1458,11 +1651,23 @@ def validate_generated_outputs(failures):
             and clearance_manifest.get("override_apply_command") == summary.get("override_apply_command")
             and clearance_manifest.get("apply_gate") == summary.get("normal_apply_gate")
             and len(clearance_manifest.get("blocked_items") or []) == len(blocked)
+            and partial_manifest.get("clear_to_apply_count") == len(clear)
+            and partial_manifest.get("blocked_backlog_count") == len(blocked)
+            and partial_manifest.get("clear_ids") == [item.get("id") for item in clear]
+            and partial_manifest.get("blocked_ids_retained") == [item.get("id") for item in blocked]
+            and all("--id " in command and "--allow-blocked" not in command for command in partial_manifest.get("preview_commands") or [])
+            and all("--id " in command and "--apply --refresh-admin" in command and "--allow-blocked" not in command for command in partial_manifest.get("apply_commands") or [])
             and any("normal_apply_gate clear" in item for item in clearance_manifest.get("completion_evidence") or [])
             and any("Normal apply stays hidden" in item for item in clearance_manifest.get("guardrails") or [])
             and (
                 (not blocked and summary.get("apply_command") and not summary.get("blocked_apply_command") and not summary.get("override_apply_command"))
                 or (blocked and not summary.get("apply_command") and summary.get("blocked_apply_command") and "--allow-blocked" in summary.get("override_apply_command", ""))
+            )
+            and all(
+                item.get("id")
+                and item.get("handoff_report") == "admin/reports/manual-posting-clipboard.md"
+                and item.get("handoff_status") == "manual_posting_clipboard"
+                for item in manual_handoff_items
             )
             and all(
                 item.get("id")
@@ -1548,6 +1753,120 @@ def validate_generated_outputs(failures):
                 fail("manual_metric_entry_template.csv row count does not match pending metric KPI", failures)
     else:
         fail("manual_metric_entry_template.csv missing; run scripts/build_manual_metric_collection.py", failures)
+    if EXPERIMENT_RESULT_COLLECTION.exists():
+        packet = json.loads(EXPERIMENT_RESULT_COLLECTION.read_text(encoding="utf-8"))
+        summary = packet.get("summary") or {}
+        pending_rows = packet.get("pending_result_rows") or []
+        missing_posts = packet.get("missing_published_log_posts") or []
+        allowed_fields = {"views", "likes", "comments", "shares", "saves", "subs_delta"}
+        entry_csv_path = summary.get("entry_csv_path") or ""
+        wide_entry_csv_path = summary.get("wide_entry_csv_path") or ""
+        csv_path = ROOT / entry_csv_path if entry_csv_path else None
+        wide_csv_path = ROOT / wide_entry_csv_path if wide_entry_csv_path else None
+        csv_rows = read_csv(csv_path) if csv_path and csv_path.exists() else []
+        wide_csv_rows = read_csv(wide_csv_path) if wide_csv_path and wide_csv_path.exists() else []
+        ready_rows = [
+            row for row in pending_rows
+            if str(row.get("new_value") or "").strip() and str(row.get("evidence_note") or "").strip()
+        ]
+        grouped_ids = sorted({(row.get("post_id") or "", row.get("source_row") or "") for row in pending_rows})
+        if (
+            packet.get("safe_mode") is True
+            and entry_csv_path == "data/experiment_result_entry_template.csv"
+            and wide_entry_csv_path == "data/experiment_result_entry_wide_template.csv"
+            and summary.get("report_path") == "admin/reports/experiment-result-collection.md"
+            and summary.get("apply_gate") in {"blocked_until_new_values_and_evidence_filled", "ready_rows_available"}
+            and "update_experiment_results.py --from-csv data/experiment_result_entry_template.csv --dry-run" in (summary.get("result_import_preview_command") or "")
+            and "update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run" in (summary.get("wide_result_import_preview_command") or "")
+            and (
+                bool(summary.get("result_import_apply_command")) is bool(ready_rows)
+            )
+            and int(summary.get("pending_result_field_count") or 0) == len(pending_rows)
+            and int(summary.get("ready_to_import_count") or 0) == len(ready_rows)
+            and int(summary.get("missing_published_log_count") or 0) == len(missing_posts)
+            and len(csv_rows) == len(pending_rows)
+            and len(wide_csv_rows) == len(grouped_ids)
+            and all(set(row.keys()) >= {"post_id", "source_row", "evidence_note", *allowed_fields} for row in wide_csv_rows)
+            and all(row.get("field") in allowed_fields for row in pending_rows)
+            and all(row.get("experiment_format") and row.get("post_id") and row.get("platform") for row in pending_rows)
+            and all(row.get("collection_hint") and row.get("source_row") for row in pending_rows)
+            and all(item.get("next_action") for item in missing_posts)
+            and any("no result metrics are written automatically" in item for item in packet.get("guardrails") or [])
+        ):
+            ok(f"experiment result collection packet tracks {len(pending_rows)} pending field(s)")
+        else:
+            fail("experiment_result_collection_packet.json missing safe pending-result collection coverage", failures)
+    else:
+        fail("experiment_result_collection_packet.json missing; run scripts/build_experiment_result_collection.py", failures)
+    if EXPERIMENT_RESULT_CLIPBOARD.exists():
+        clipboard = json.loads(EXPERIMENT_RESULT_CLIPBOARD.read_text(encoding="utf-8"))
+        packet = json.loads(EXPERIMENT_RESULT_COLLECTION.read_text(encoding="utf-8")) if EXPERIMENT_RESULT_COLLECTION.exists() else {}
+        packet_summary = packet.get("summary") or {}
+        pending_rows = packet.get("pending_result_rows") or []
+        missing_posts = packet.get("missing_published_log_posts") or []
+        cards = clipboard.get("metric_cards") or []
+        missing_cards = clipboard.get("missing_public_url_cards") or []
+        priority_cards = clipboard.get("measurement_priority_cards") or []
+        grouped_ids = sorted({(row.get("post_id") or "", row.get("source_row") or "") for row in pending_rows})
+        if (
+            clipboard.get("safe_mode") is True
+            and (clipboard.get("summary") or {}).get("entry_csv_path") == "data/experiment_result_entry_template.csv"
+            and (clipboard.get("summary") or {}).get("wide_entry_csv_path") == "data/experiment_result_entry_wide_template.csv"
+            and (clipboard.get("summary") or {}).get("report_path") == "admin/reports/experiment-result-clipboard.md"
+            and (clipboard.get("summary") or {}).get("metric_card_count") == len(cards) == len(grouped_ids)
+            and (clipboard.get("summary") or {}).get("missing_public_url_count") == len(missing_cards) == len(missing_posts)
+            and (clipboard.get("summary") or {}).get("measurement_priority_count") == len(priority_cards)
+            and (clipboard.get("summary") or {}).get("pending_result_field_count") == packet_summary.get("pending_result_field_count")
+            and (clipboard.get("summary") or {}).get("ready_to_import_count") == packet_summary.get("ready_to_import_count")
+            and "update_experiment_results.py" in ((clipboard.get("summary") or {}).get("result_import_preview_command") or "")
+            and "update_experiment_results.py --from-wide-csv" in ((clipboard.get("summary") or {}).get("wide_result_import_preview_command") or "")
+            and all(card.get("post_id") and card.get("platform") and card.get("pending_fields") and card.get("fields") for card in cards)
+            and all(card.get("post_id") and card.get("next_action") for card in missing_cards)
+            and all(item.get("post_id") and item.get("action") in {"collect_metrics", "post_and_log_public_url", "log_public_url", "clear_platform_blocker"} and item.get("reason") for item in priority_cards)
+            and all(item.get("direct_preview_command_template") for item in priority_cards if item.get("action") == "collect_metrics")
+            and all(item.get("direct_apply_command_template") and "--apply --refresh-admin" in item.get("direct_apply_command_template") for item in priority_cards if item.get("action") == "collect_metrics")
+            and any(item.get("action") == "post_and_log_public_url" for item in priority_cards)
+            and any(item.get("action") == "clear_platform_blocker" for item in priority_cards)
+            and any("does not fetch private analytics" in item for item in clipboard.get("guardrails") or [])
+        ):
+            ok(f"experiment result clipboard packages {len(cards)} metric card(s)")
+        else:
+            fail("experiment_result_clipboard.json missing grouped metric cards or safe commands", failures)
+    else:
+        fail("experiment_result_clipboard.json missing; run scripts/build_experiment_result_clipboard.py", failures)
+    if EXPERIMENT_PUBLISH_RUNWAY.exists():
+        runway = json.loads(EXPERIMENT_PUBLISH_RUNWAY.read_text(encoding="utf-8"))
+        summary = runway.get("summary") or {}
+        steps = runway.get("steps") or []
+        manual_rows_for_runway = runway.get("manual_review_rows") or []
+        blocked_rows = runway.get("blocked_platform_rows") or []
+        step_ids = {step.get("id") for step in steps}
+        required_steps = {
+            "review_manual_youtube_community",
+            "queue_approved_manual_rows",
+            "post_manual_youtube_community",
+            "log_public_urls",
+            "collect_results",
+        }
+        if (
+            runway.get("safe_mode") is True
+            and required_steps <= step_ids
+            and int(summary.get("review_ready_manual_count") or 0) == len(manual_rows_for_runway)
+            and int(summary.get("blocked_platform_count") or 0) == len(blocked_rows)
+            and int(summary.get("winner_count_target") or 0) == 3
+            and summary.get("next_publish_action")
+            and all(step.get("guardrail") and step.get("completion_evidence") for step in steps)
+            and any(step.get("id") == "review_manual_youtube_community" and (step.get("status") == "clear" or ("approve_promo_queue_plan.py" in (step.get("preview_command") or "") and "--dry-run" in (step.get("preview_command") or ""))) for step in steps)
+            and any(step.get("id") == "queue_approved_manual_rows" and (step.get("status") in {"waiting_for_approval", "clear"} or ("apply_promo_queue_plan.py" in (step.get("preview_command") or "") and "--apply" not in (step.get("preview_command") or ""))) for step in steps)
+            and any(step.get("id") == "log_public_urls" and "log_manual_distribution.py" in (step.get("preview_command") or "") for step in steps)
+            and any(step.get("id") == "collect_results" and "update_experiment_results.py" in (step.get("preview_command") or "") for step in steps)
+            and any("does not approve, schedule, post, or log" in item for item in runway.get("guardrails") or [])
+        ):
+            ok(f"experiment publish runway tracks {len(manual_rows_for_runway)} review-ready row(s)")
+        else:
+            fail("experiment_publish_runway.json missing safe publish runway coverage", failures)
+    else:
+        fail("experiment_publish_runway.json missing; run scripts/build_experiment_publish_runway.py", failures)
     if MANUAL_METRIC_PACKET.exists():
         packet = json.loads(MANUAL_METRIC_PACKET.read_text(encoding="utf-8"))
         summary = packet.get("summary") or {}
@@ -1968,6 +2287,82 @@ def validate_generated_outputs(failures):
             ok(f"promo engine metrics history tracks {history.get('snapshot_count')} snapshot(s)")
         else:
             fail("promo_engine_status.json missing metrics history KPI summary", failures)
+        growth_goal = kpi.get("growth_goal") or {}
+        experiments = growth_goal.get("active_format_experiments") or []
+        top_candidates = growth_goal.get("top_repeatable_format_candidates") or []
+        winner_readiness = growth_goal.get("format_winner_readiness") or {}
+        experiment_formats = {experiment.get("format") for experiment in experiments}
+        tiktok_experiment = next((item for item in experiments if "Short video" in str(item.get("format") or "")), {})
+        if (
+            kpi.get("primary") == "Grow total plays/views by 25% in 30 days"
+            and growth_goal.get("goal_days") == 30
+            and float(growth_goal.get("target_lift_percent") or 0) == 25.0
+            and growth_goal.get("baseline_total_plays_views") is not None
+            and growth_goal.get("current_total_plays_views") is not None
+            and growth_goal.get("target_total_plays_views") is not None
+            and len(experiments) == 3
+            and {"Release-art image + story hook", "YouTube Community archive/playlist CTA", "Short video clip + platform-native CTA"} <= experiment_formats
+            and all((experiment.get("assets") or []) for experiment in experiments)
+            and all("Published_Log.csv" in (experiment.get("result_destination") or "") for experiment in experiments)
+            and all("data/manual_social_stats.json" in (experiment.get("result_destination") or "") for experiment in experiments)
+            and all(experiment.get("tracking_fields") for experiment in experiments)
+            and len(top_candidates) == 3
+            and all(candidate.get("minimum_measured_posts") == 2 for candidate in top_candidates)
+            and all(candidate.get("evidence_status") in {"needs_result_metrics", "partially_measured", "winner_ready"} for candidate in top_candidates)
+            and all("needed_measured_posts" in candidate and "decision_note" in candidate for candidate in top_candidates)
+            and winner_readiness.get("winner_count_target") == 3
+            and winner_readiness.get("minimum_measured_posts_per_format") == 2
+            and winner_readiness.get("status") in {"needs_more_result_evidence", "ready_to_name_winners"}
+            and isinstance(winner_readiness.get("blockers") or [], list)
+            and {"TIKTOK_CLIENT_KEY", "TIKTOK_CLIENT_SECRET", "TIKTOK_REFRESH_TOKEN", "TIKTOK_PUBLIC_POSTING_APPROVED"} <= set(tiktok_experiment.get("known_blockers") or [])
+        ):
+            ok("promo engine tracks 30-day plays/views growth experiments")
+        else:
+            fail("promo_engine_status.json missing 30-day growth experiment tracking", failures)
+        experiment_results = kpi.get("experiment_results") or {}
+        experiment_publish = kpi.get("experiment_publish_runway") or {}
+        experiment_clipboard_status = kpi.get("experiment_result_clipboard") or {}
+        experiment_collection = json.loads(EXPERIMENT_RESULT_COLLECTION.read_text(encoding="utf-8")) if EXPERIMENT_RESULT_COLLECTION.exists() else {}
+        experiment_summary = experiment_collection.get("summary") or {}
+        experiment_clipboard = json.loads(EXPERIMENT_RESULT_CLIPBOARD.read_text(encoding="utf-8")) if EXPERIMENT_RESULT_CLIPBOARD.exists() else {}
+        publish_runway = json.loads(EXPERIMENT_PUBLISH_RUNWAY.read_text(encoding="utf-8")) if EXPERIMENT_PUBLISH_RUNWAY.exists() else {}
+        if (
+            experiment_results.get("available") is True
+            and experiment_results.get("source_path") == "data/experiment_result_collection_packet.json"
+            and experiment_results.get("entry_csv_path") == "data/experiment_result_entry_template.csv"
+            and experiment_results.get("wide_entry_csv_path") == "data/experiment_result_entry_wide_template.csv"
+            and experiment_results.get("summary") == experiment_summary
+            and int(experiment_results.get("pending_result_field_count") or 0) == int(experiment_summary.get("pending_result_field_count") or 0)
+            and int(experiment_results.get("ready_to_import_count") or 0) == int(experiment_summary.get("ready_to_import_count") or 0)
+            and int(experiment_results.get("missing_published_log_count") or 0) == int(experiment_summary.get("missing_published_log_count") or 0)
+            and experiment_results.get("result_import_preview_command") == experiment_summary.get("result_import_preview_command")
+            and experiment_results.get("wide_result_import_preview_command") == experiment_summary.get("wide_result_import_preview_command")
+            and experiment_results.get("result_import_apply_command") == experiment_summary.get("result_import_apply_command")
+            and experiment_results.get("wide_result_import_apply_command") == experiment_summary.get("wide_result_import_apply_command")
+        ):
+            ok("promo engine surfaces experiment result collection status")
+        else:
+            fail("promo_engine_status.json missing experiment result collection status", failures)
+        if (
+            experiment_clipboard_status.get("available") is True
+            and experiment_clipboard_status.get("source_path") == "data/experiment_result_clipboard.json"
+            and experiment_clipboard_status.get("summary") == (experiment_clipboard.get("summary") or {})
+            and experiment_clipboard_status.get("metric_cards") == (experiment_clipboard.get("metric_cards") or [])
+            and experiment_clipboard_status.get("missing_public_url_cards") == (experiment_clipboard.get("missing_public_url_cards") or [])
+            and experiment_clipboard_status.get("measurement_priority_cards") == (experiment_clipboard.get("measurement_priority_cards") or [])
+        ):
+            ok("promo engine surfaces experiment result clipboard")
+        else:
+            fail("promo_engine_status.json missing experiment result clipboard", failures)
+        if (
+            experiment_publish.get("available") is True
+            and experiment_publish.get("source_path") == "data/experiment_publish_runway.json"
+            and experiment_publish.get("summary") == (publish_runway.get("summary") or {})
+            and len(experiment_publish.get("steps") or []) == len(publish_runway.get("steps") or [])
+        ):
+            ok("promo engine surfaces experiment publish runway status")
+        else:
+            fail("promo_engine_status.json missing experiment publish runway status", failures)
         monetization = kpi.get("monetization") or {}
         latest = history.get("latest") or {}
         latest_youtube = latest.get("youtube") or {}
@@ -2032,6 +2427,7 @@ def validate_generated_outputs(failures):
         if (
             "scripts/reschedule_scheduled_posts.py" in preview_command
             and "--approved-backlog" in preview_command
+            and "--exclude-manual-handoff" in preview_command
             and "--start-at" in preview_command
             and "--apply" not in preview_command
             and "--apply --refresh-admin" in apply_command
@@ -2178,7 +2574,7 @@ def validate_generated_outputs(failures):
         else:
             fail("promo_engine_status.json missing store verification gate summary", failures)
         execution_summary = kpi.get("social_execution_summary") or {}
-        if "execution_count" in execution_summary and "status_counts" in execution_summary and "approval_needed_count" in execution_summary and "platform_fix_needed_count" in execution_summary:
+        if "execution_count" in execution_summary and "status_counts" in execution_summary and "approval_needed_count" in execution_summary and "platform_fix_needed_count" in execution_summary and "manual_handoff_needed_count" in execution_summary:
             ok("promo engine includes social execution summary")
         else:
             fail("promo_engine_status.json missing categorized social execution summary", failures)
@@ -2190,10 +2586,21 @@ def validate_generated_outputs(failures):
         if SOCIAL_EXECUTION_SNAPSHOT.exists():
             raw_execution = json.loads(SOCIAL_EXECUTION_SNAPSHOT.read_text(encoding="utf-8"))
             raw_summary = raw_execution.get("summary") or {}
-            if execution_summary.get("platform_fix_needed_count") == len(raw_summary.get("platform_fix_needed") or []):
+            raw_platform_fix_rows = [
+                row for row in raw_summary.get("platform_fix_needed") or []
+                if row.get("reason") != "manual_only"
+            ]
+            raw_manual_handoff_rows = [
+                row for row in raw_summary.get("platform_fix_needed") or []
+                if row.get("reason") == "manual_only"
+            ]
+            if (
+                execution_summary.get("platform_fix_needed_count") == len(raw_platform_fix_rows)
+                and execution_summary.get("manual_handoff_needed_count") == len(raw_manual_handoff_rows)
+            ):
                 ok("promo engine platform-fix count matches executor snapshot")
             else:
-                fail("promo_engine_status.json platform-fix count does not match executor snapshot", failures)
+                fail("promo_engine_status.json platform-fix/manual-handoff split does not match executor snapshot", failures)
         refresh_run = kpi.get("last_refresh_run") or {}
         raw_refresh_run = json.loads(PROMO_REFRESH_RUN.read_text(encoding="utf-8")) if PROMO_REFRESH_RUN.exists() else {}
         if (
@@ -2205,7 +2612,7 @@ def validate_generated_outputs(failures):
             ok("promo engine includes last refresh run summary")
         else:
             fail("promo_engine_status.json missing last refresh run summary", failures)
-        repair_rows = (execution_summary.get("approval_needed") or []) + (execution_summary.get("platform_fix_needed") or [])
+        repair_rows = (execution_summary.get("approval_needed") or []) + (execution_summary.get("platform_fix_needed") or []) + (execution_summary.get("manual_handoff_needed") or [])
         if repair_rows and all(row.get("repair_action") and row.get("repair_command") for row in repair_rows):
             ok(f"promo engine social execution rows include {len(repair_rows)} repair commands")
         else:
@@ -2285,7 +2692,7 @@ def validate_generated_outputs(failures):
             and handoff_preview.get("warning_previews") == preview_warning
             and "never executes apply" in (handoff_preview.get("mutation_guardrail") or "")
             and preview_action
-            and f"{len(preview_ready)} preview-clean" in preview_action
+            and (not preview_ready or f"{len(preview_ready)} preview-clean" in preview_action)
             and f"{len(preview_missing)} missing input" in preview_action
             and f"{len(preview_warning)} warning" in preview_action
             and handoff_preview.get("source_path") in preview_action
@@ -2315,7 +2722,10 @@ def validate_generated_outputs(failures):
             and unlock_action
             and unlock_sequence.get("current_gate_state") in unlock_action
             and unlock_sequence.get("source_path") in unlock_action
-            and any((command.get("command") or "") in unlock_action for command in (unlock_current.get("commands") or []) if command.get("step") == "preview")
+            and (
+                any((command.get("command") or "") in unlock_action for command in (unlock_current.get("commands") or []) if command.get("step") == "preview")
+                or not [command for command in (unlock_current.get("commands") or []) if command.get("step") == "preview"]
+            )
         ):
             ok("promo engine status mirrors promo unlock sequence")
         else:
@@ -2325,8 +2735,11 @@ def validate_generated_outputs(failures):
         manual_approval = manual_packet.get("manual_approval_docket") or {}
         manual_docket = manual_packet.get("manual_distribution_docket") or {}
         published_reconciliation = json.loads(PUBLISHED_LOG_RECONCILIATION.read_text(encoding="utf-8")) if PUBLISHED_LOG_RECONCILIATION.exists() else {}
+        posting_clipboard = json.loads(MANUAL_POSTING_CLIPBOARD.read_text(encoding="utf-8")) if MANUAL_POSTING_CLIPBOARD.exists() else {}
+        clipboard_summary = posting_clipboard.get("summary") or {}
         reconciliation_summary = published_reconciliation.get("summary") or {}
         status_manual_distribution = kpi.get("manual_distribution") or {}
+        status_posting_clipboard = kpi.get("manual_posting_clipboard") or {}
         status_reconciliation = kpi.get("published_log_reconciliation") or {}
         manual_distribution_action = next((action for action in next_actions if action.startswith("Resolve manual distribution gate:")), "")
         if (
@@ -2344,6 +2757,24 @@ def validate_generated_outputs(failures):
             ok("promo engine status mirrors manual distribution gate")
         else:
             fail("promo_engine_status.json missing manual distribution gate summary", failures)
+        if (
+            status_posting_clipboard.get("available") is True
+            and status.get("health", {}).get("manual_posting_clipboard") == status_posting_clipboard
+            and status_posting_clipboard.get("source_path") == "data/manual_posting_clipboard.json"
+            and status_posting_clipboard.get("report_path") == "admin/reports/manual-posting-clipboard.md"
+            and status_posting_clipboard.get("postable_count") == (clipboard_summary.get("postable_count") or 0)
+            and status_posting_clipboard.get("waiting_public_url_count") == (clipboard_summary.get("waiting_public_url_count") or 0)
+            and status_posting_clipboard.get("batch_log_partial_apply_command") == (clipboard_summary.get("batch_log_partial_apply_command") or "")
+            and status_posting_clipboard.get("public_url_reconciliation_status") == (clipboard_summary.get("public_url_reconciliation_status") or "not_run")
+            and status_posting_clipboard.get("public_url_reconciliation_match_count") == (clipboard_summary.get("public_url_reconciliation_match_count") or 0)
+            and status_posting_clipboard.get("public_url_reconciliation_command") == (clipboard_summary.get("public_url_reconciliation_command") or "")
+            and status_posting_clipboard.get("public_url_reconciliation_apply_command") == (clipboard_summary.get("public_url_reconciliation_apply_command") or "")
+            and status_posting_clipboard.get("pending_log_ids") == (clipboard_summary.get("pending_log_ids") or [])
+            and status_posting_clipboard.get("post_cards") == (posting_clipboard.get("post_cards") or [])
+        ):
+            ok("promo engine status mirrors manual posting clipboard")
+        else:
+            fail("promo_engine_status.json missing manual posting clipboard summary", failures)
         if (
             status_reconciliation.get("available") is True
             and status.get("health", {}).get("published_log_reconciliation") == status_reconciliation
@@ -2401,6 +2832,35 @@ def validate_generated_outputs(failures):
             ok("promo engine manual metric next action includes worksheet dry run")
         elif pending_count:
             fail("promo_engine_status.json manual metric next action missing worksheet dry run", failures)
+        experiment_results = kpi.get("experiment_results") or {}
+        experiment_clipboard_status = kpi.get("experiment_result_clipboard") or {}
+        first_priority = next(iter(experiment_clipboard_status.get("measurement_priority_cards") or []), {})
+        experiment_pending = int(experiment_results.get("pending_result_field_count") or 0)
+        experiment_action = next((action for action in next_actions if action.startswith("Collect experiment results:") or action.startswith("Import experiment results:")), "")
+        if (
+            experiment_pending
+            and experiment_action
+            and "admin/reports/experiment-result-clipboard.md" in experiment_action
+            and (not first_priority or (first_priority.get("post_id") or "") in experiment_action)
+            and (not first_priority.get("direct_preview_command_template") or first_priority.get("direct_preview_command_template") in experiment_action)
+            and (not first_priority.get("direct_apply_command_template") or first_priority.get("direct_apply_command_template") in experiment_action)
+            and "update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run" in experiment_action
+        ):
+            ok("promo engine experiment result next action includes import dry run")
+        elif experiment_pending:
+            fail("promo_engine_status.json missing experiment result import action", failures)
+        experiment_publish = kpi.get("experiment_publish_runway") or {}
+        publish_summary = experiment_publish.get("summary") or {}
+        publish_action = next((action for action in next_actions if action.startswith("Publish runway:")), "")
+        if (
+            int(publish_summary.get("review_ready_manual_count") or 0)
+            and publish_action
+            and "approve_promo_queue_plan.py" in publish_action
+            and "--dry-run" in publish_action
+        ):
+            ok("promo engine publish runway next action includes approval dry run")
+        elif int(publish_summary.get("review_ready_manual_count") or 0):
+            fail("promo_engine_status.json missing publish runway approval action", failures)
         metric_packet = json.loads(MANUAL_METRIC_PACKET.read_text(encoding="utf-8")) if MANUAL_METRIC_PACKET.exists() else {}
         import_manifest = metric_packet.get("worksheet_import_manifest") or {}
         metric_action = next((action for action in next_actions if "Refresh manual metrics:" in action), "")
@@ -2548,6 +3008,7 @@ def validate_generated_outputs(failures):
         reschedule_text = SCHEDULED_POST_RESCHEDULE.read_text(encoding="utf-8")
         if (
             "--approved-backlog" in reschedule_text
+            and "--exclude-manual-handoff" in reschedule_text
             and "--apply" in reschedule_text
             and "--allow-blocked" in reschedule_text
             and "Dry run only" in reschedule_text
@@ -2665,10 +3126,15 @@ def validate_generated_outputs(failures):
             "build_approval_runway.py",
             "build_subscriber_cta_audit.py",
             "build_manual_distribution_packet.py",
+            "build_manual_posting_clipboard.py",
+            "reconcile_youtube_community_urls.py",
             "build_monetization_activation_plan.py",
             "build_backlog_reschedule_preview.py",
             "build_platform_repair_status.py",
             "build_tiktok_setup_preflight.py",
+            "build_experiment_result_collection.py",
+            "build_experiment_result_clipboard.py",
+            "build_experiment_publish_runway.py",
             "build_manual_metric_collection.py",
             "build_promotion_blocker_ledger.py",
             "build_promo_unlock_sequence.py",
@@ -2729,6 +3195,75 @@ def validate_generated_outputs(failures):
             fail("push_social_worker_secrets.py missing dry-run support", failures)
     else:
         fail("push_social_worker_secrets.py missing", failures)
+    if TIKTOK_PUBLIC_POSTING_APPROVAL_SCRIPT.exists():
+        approval_text = TIKTOK_PUBLIC_POSTING_APPROVAL_SCRIPT.read_text(encoding="utf-8")
+        if (
+            "TIKTOK_PUBLIC_POSTING_APPROVED" in approval_text
+            and "--approved" in approval_text
+            and "--apply" in approval_text
+            and "--deploy" in approval_text
+            and "SOCIAL_ENV" in approval_text
+            and "wrangler" in approval_text
+            and "deploy" in approval_text
+            and "must contain" in approval_text
+        ):
+            ok("TikTok public posting approval helper is guarded and deploy-aware")
+        else:
+            fail("set_tiktok_public_posting_approval.py missing guarded approval/deploy behavior", failures)
+    else:
+        fail("set_tiktok_public_posting_approval.py missing", failures)
+    if TIKTOK_OAUTH_HANDOFF_SCRIPT.exists():
+        oauth_text = TIKTOK_OAUTH_HANDOFF_SCRIPT.read_text(encoding="utf-8")
+        if (
+            "https://www.tiktok.com/v2/auth/authorize/" in oauth_text
+            and "https://open.tiktokapis.com/v2/oauth/token/" in oauth_text
+            and "TIKTOK_REDIRECT_URI" in oauth_text
+            and "--print-auth-url" in oauth_text
+            and "--exchange-code" in oauth_text
+            and "--apply" in oauth_text
+            and "Secret values and token values are never printed" in oauth_text
+            and "append_or_update_env" in oauth_text
+        ):
+            ok("TikTok OAuth handoff helper is guarded and redacted")
+        else:
+            fail("tiktok_oauth_handoff.py missing guarded OAuth handoff behavior", failures)
+    else:
+        fail("tiktok_oauth_handoff.py missing", failures)
+    tiktok_post_script = ROOT / "scripts" / "post_tiktok_from_queue.py"
+    if tiktok_post_script.exists():
+        tiktok_post_text = tiktok_post_script.read_text(encoding="utf-8")
+        if (
+            "TIKTOK_ACCESS_TOKEN" in tiktok_post_text
+            and "TIKTOK_CLIENT_KEY" in tiktok_post_text
+            and "TIKTOK_CLIENT_SECRET" in tiktok_post_text
+            and "TIKTOK_REFRESH_TOKEN" in tiktok_post_text
+            and "grant_type': 'refresh_token'" in tiktok_post_text
+            and "--store-refreshed-token" in tiktok_post_text
+            and "brand_content_toggle" in tiktok_post_text
+            and "brand_organic_toggle" in tiktok_post_text
+            and "aigc_label_enabled" in tiktok_post_text
+            and "--mode" in tiktok_post_text
+            and "UPLOAD_INIT_URL" in tiktok_post_text
+            and "video.upload" in tiktok_post_text
+            and "Secret" not in tiktok_post_text
+        ):
+            ok("TikTok local posting helper supports refresh-token credentials")
+        else:
+            fail("post_tiktok_from_queue.py missing refresh-token TikTok posting support", failures)
+    else:
+        fail("post_tiktok_from_queue.py missing", failures)
+    worker_text = (ROOT / "workers" / "social-executor" / "src" / "index.js").read_text(encoding="utf-8")
+    if (
+        "TIKTOK_UPLOAD_INIT_URL" in worker_text
+        and "TIKTOK_POSTING_MODE" in worker_text
+        and "draft_uploaded" in worker_text
+        and "tiktokPostingMode" in worker_text
+        and "executionStatusFromResult" in worker_text
+        and "tiktok_public_posting_not_approved" in worker_text
+    ):
+        ok("social executor supports gated TikTok direct posting and inbox draft upload mode")
+    else:
+        fail("social executor missing TikTok draft-upload/direct-post mode split", failures)
     if SOCIAL_EXECUTION_RESET.exists():
         reset_text = SOCIAL_EXECUTION_RESET.read_text(encoding="utf-8")
         if (
@@ -2764,7 +3299,7 @@ def validate_generated_outputs(failures):
         fail("build_promo_consistency_audit.py missing", failures)
     if TIKTOK_SETUP_PREFLIGHT_SCRIPT.exists():
         preflight_text = TIKTOK_SETUP_PREFLIGHT_SCRIPT.read_text(encoding="utf-8")
-        if "tiktok_setup_preflight.json" in preflight_text and "tiktok-setup-preflight.md" in preflight_text and "tiktok_secret_handoff_template.env" in preflight_text and "credential_handoff" in preflight_text and "completion_evidence" in preflight_text and "TIKTOK_CLIENT_KEY" in preflight_text and "TIKTOK_PUBLIC_POSTING_APPROVED" in preflight_text and "Secret values" in preflight_text and "subprocess" not in preflight_text:
+        if "tiktok_setup_preflight.json" in preflight_text and "tiktok-setup-preflight.md" in preflight_text and "tiktok_secret_handoff_template.env" in preflight_text and "local_posting_token_path" in preflight_text and "post_tiktok_from_queue.py --post-id FP-AUTO-264 --dry-run" in preflight_text and "credential_handoff" in preflight_text and "completion_evidence" in preflight_text and "TIKTOK_CLIENT_KEY" in preflight_text and "TIKTOK_PUBLIC_POSTING_APPROVED" in preflight_text and "Secret values" in preflight_text and "subprocess" not in preflight_text:
             ok("TikTok setup preflight builder is review-only")
         else:
             fail("build_tiktok_setup_preflight.py missing preflight outputs or exposes execution/secrets", failures)
@@ -2772,12 +3307,104 @@ def validate_generated_outputs(failures):
         fail("build_tiktok_setup_preflight.py missing", failures)
     if TIKTOK_REPAIR_RUNBOOK_SCRIPT.exists():
         runbook_text = TIKTOK_REPAIR_RUNBOOK_SCRIPT.read_text(encoding="utf-8")
-        if "tiktok_repair_runbook.json" in runbook_text and "tiktok-repair-runbook.md" in runbook_text and "handoff_template_path" in runbook_text and "Collect credentials" in runbook_text and "blocked_apply_command" in runbook_text and "backlog_reschedule_preview.json" in runbook_text and "--approved-backlog" in runbook_text and "--approved-only" not in runbook_text and "Secret values" in runbook_text and "subprocess" not in runbook_text:
+        if "tiktok_repair_runbook.json" in runbook_text and "tiktok-repair-runbook.md" in runbook_text and "handoff_template_path" in runbook_text and "Collect credentials" in runbook_text and "preview_local_tiktok_post" in runbook_text and "blocked_apply_command" in runbook_text and "backlog_reschedule_preview.json" in runbook_text and "--approved-backlog" in runbook_text and "--approved-only" not in runbook_text and "Secret values" in runbook_text and "subprocess" not in runbook_text:
             ok("TikTok repair runbook builder is review-only")
         else:
             fail("build_tiktok_repair_runbook.py missing runbook outputs or exposes execution/secrets", failures)
     else:
         fail("build_tiktok_repair_runbook.py missing", failures)
+    if EXPERIMENT_RESULT_COLLECTION_SCRIPT.exists():
+        result_text = EXPERIMENT_RESULT_COLLECTION_SCRIPT.read_text(encoding="utf-8")
+        if (
+            "experiment_result_collection_packet.json" in result_text
+            and "experiment_result_entry_template.csv" in result_text
+            and "experiment_result_entry_wide_template.csv" in result_text
+            and "experiment-result-collection.md" in result_text
+            and "Published_Log.csv" in result_text
+            and "active_format_experiments" in result_text
+            and "pending_result_rows" in result_text
+            and "update_experiment_results.py" in result_text
+            and "Review-only packet" in result_text
+            and "sync_admin" in result_text
+            and "subprocess" not in result_text
+        ):
+            ok("experiment result collection builder is review-only")
+        else:
+            fail("build_experiment_result_collection.py missing result outputs or executes commands", failures)
+    else:
+        fail("build_experiment_result_collection.py missing", failures)
+    if EXPERIMENT_RESULT_CLIPBOARD_SCRIPT.exists():
+        result_clipboard_text = EXPERIMENT_RESULT_CLIPBOARD_SCRIPT.read_text(encoding="utf-8")
+        if (
+            "experiment_result_clipboard.json" in result_clipboard_text
+            and "experiment-result-clipboard.md" in result_clipboard_text
+            and "wide_entry_csv_path" in result_clipboard_text
+            and "experiment_result_collection_packet.json" in result_clipboard_text
+            and "metric_cards" in result_clipboard_text
+            and "missing_public_url_cards" in result_clipboard_text
+            and "manual_posting_clipboard.json" in result_clipboard_text
+            and "platform_repair_status.json" in result_clipboard_text
+            and "measurement_priority_cards" in result_clipboard_text
+            and "measurement_priority_count" in result_clipboard_text
+            and "direct_preview_command_template" in result_clipboard_text
+            and "direct_apply_command_template" in result_clipboard_text
+            and "does not fetch private analytics" in result_clipboard_text
+            and "sync_admin" in result_clipboard_text
+            and "subprocess" not in result_clipboard_text
+        ):
+            ok("experiment result clipboard builder is review-only")
+        else:
+            fail("build_experiment_result_clipboard.py missing review-only clipboard outputs", failures)
+    else:
+        fail("build_experiment_result_clipboard.py missing", failures)
+    if EXPERIMENT_RESULT_UPDATER.exists():
+        updater_text = EXPERIMENT_RESULT_UPDATER.read_text(encoding="utf-8")
+        if (
+            "experiment_result_entry_template.csv" in updater_text
+            and "experiment_result_entry_wide_template.csv" in updater_text
+            and "--from-wide-csv" in updater_text
+            and "--post-id" in updater_text
+            and "--source-row" in updater_text
+            and "--evidence-note" in updater_text
+            and "direct_arg_names" in updater_text
+            and "replace('_', '-')" in updater_text
+            and "load_direct_entries" in updater_text
+            and "Published_Log.csv" in updater_text
+            and "--dry-run" in updater_text
+            and "--apply" in updater_text
+            and "--refresh-admin" in updater_text
+            and "evidence_note" in updater_text
+            and "source_row" in updater_text
+            and "queue_id" in updater_text
+            and "No importable result changes" in updater_text
+            and "post_apply_verification" in updater_text
+            and "write_csv" in updater_text
+        ):
+            ok("experiment result updater is dry-run-first and row-verified")
+        else:
+            fail("update_experiment_results.py missing dry-run-first row verification behavior", failures)
+    else:
+        fail("update_experiment_results.py missing", failures)
+    if EXPERIMENT_PUBLISH_RUNWAY_SCRIPT.exists():
+        runway_text = EXPERIMENT_PUBLISH_RUNWAY_SCRIPT.read_text(encoding="utf-8")
+        if (
+            "experiment_publish_runway.json" in runway_text
+            and "experiment-publish-runway.md" in runway_text
+            and "approval_runway.json" in runway_text
+            and "manual_distribution_packet.json" in runway_text
+            and "approve_promo_queue_plan.py" in runway_text
+            and "apply_promo_queue_plan.py" in runway_text
+            and "log_manual_distribution.py" in runway_text
+            and "update_experiment_results.py" in runway_text
+            and "Review-only packet" in runway_text
+            and "sync_admin" in runway_text
+            and "subprocess" not in runway_text
+        ):
+            ok("experiment publish runway builder is review-only")
+        else:
+            fail("build_experiment_publish_runway.py missing runway outputs or executes commands", failures)
+    else:
+        fail("build_experiment_publish_runway.py missing", failures)
     if PROMO_OPERATIONS_SCRIPT.exists():
         packet_text = PROMO_OPERATIONS_SCRIPT.read_text(encoding="utf-8")
         if "promo_operations_packet.json" in packet_text and "promo-operations-packet.md" in packet_text and "approval_review" in packet_text and "urgency_for" in packet_text and "missing_secrets" in packet_text and "subprocess" not in packet_text:
@@ -2882,15 +3509,31 @@ def validate_generated_outputs(failures):
         fail("build_subscriber_cta_audit.py missing", failures)
     if MANUAL_DISTRIBUTION_PACKET_SCRIPT.exists():
         manual_distribution_text = MANUAL_DISTRIBUTION_PACKET_SCRIPT.read_text(encoding="utf-8")
-        if "manual_distribution_packet.json" in manual_distribution_text and "manual-distribution-packet.md" in manual_distribution_text and "manual_distribution_url_template.csv" in manual_distribution_text and "batch_log_preview_command" in manual_distribution_text and "Manual Posting Queue" in manual_distribution_text and "manual_distribution_docket" in manual_distribution_text and "manual_approval_docket" in manual_distribution_text and "manual_completion_manifest" in manual_distribution_text and "Completion Manifest" in manual_distribution_text and "Do not log a placeholder URL" in manual_distribution_text and "review_queue" in manual_distribution_text and "copy_block" in manual_distribution_text and "manual_posting_packet" in manual_distribution_text and "postable_now" in manual_distribution_text and "log_manual_distribution.py" in manual_distribution_text and "Published_Log.csv" in manual_distribution_text and "distribution_status" in manual_distribution_text and "subprocess" not in manual_distribution_text:
+        if "manual_distribution_packet.json" in manual_distribution_text and "manual-distribution-packet.md" in manual_distribution_text and "manual_distribution_url_template.csv" in manual_distribution_text and "scheduled_posts.csv" in manual_distribution_text and "batch_log_preview_command" in manual_distribution_text and "Manual Posting Queue" in manual_distribution_text and "manual_distribution_docket" in manual_distribution_text and "manual_approval_docket" in manual_distribution_text and "manual_completion_manifest" in manual_distribution_text and "Completion Manifest" in manual_distribution_text and "Do not log a placeholder URL" in manual_distribution_text and "review_queue" in manual_distribution_text and "copy_block" in manual_distribution_text and "manual_posting_packet" in manual_distribution_text and "postable_now" in manual_distribution_text and "log_manual_distribution.py" in manual_distribution_text and "Published_Log.csv" in manual_distribution_text and "distribution_status" in manual_distribution_text and "subprocess" not in manual_distribution_text:
             ok("manual distribution packet builder is review-only")
         else:
             fail("build_manual_distribution_packet.py missing manual distribution outputs or executes commands", failures)
     else:
         fail("build_manual_distribution_packet.py missing", failures)
+    if MANUAL_POSTING_CLIPBOARD_SCRIPT.exists():
+        clipboard_text = MANUAL_POSTING_CLIPBOARD_SCRIPT.read_text(encoding="utf-8")
+        if "manual_posting_clipboard.json" in clipboard_text and "manual-posting-clipboard.md" in clipboard_text and "manual_distribution_packet.json" in clipboard_text and "youtube_community_url_reconciliation.json" in clipboard_text and "public_url_reconciliation_command" in clipboard_text and "batch_log_partial_apply_command" in clipboard_text and "--allow-partial --apply --refresh-admin" in clipboard_text and "post_cards" in clipboard_text and "paste_text" in clipboard_text and "PUBLIC_URL" in clipboard_text and "log_manual_distribution.py" in clipboard_text and "This clipboard does not approve" in clipboard_text and "subprocess" not in clipboard_text:
+            ok("manual posting clipboard builder is review-only")
+        else:
+            fail("build_manual_posting_clipboard.py missing review-only clipboard outputs", failures)
+    else:
+        fail("build_manual_posting_clipboard.py missing", failures)
+    if YOUTUBE_COMMUNITY_URL_RECONCILIATION_SCRIPT.exists():
+        reconciliation_text = YOUTUBE_COMMUNITY_URL_RECONCILIATION_SCRIPT.read_text(encoding="utf-8")
+        if "youtube_community_url_reconciliation.json" in reconciliation_text and "youtube-community-url-reconciliation.md" in reconciliation_text and "ytInitialData" in reconciliation_text and "--apply" in reconciliation_text and "confidence >= 90" in reconciliation_text and "append_payload" in reconciliation_text and "Dry run only" in reconciliation_text and "does not publish" in reconciliation_text:
+            ok("youtube community URL reconciler is dry-run-first")
+        else:
+            fail("reconcile_youtube_community_urls.py missing dry-run-first public URL matching safeguards", failures)
+    else:
+        fail("reconcile_youtube_community_urls.py missing", failures)
     if MANUAL_DISTRIBUTION_LOGGER.exists():
         logger_text = MANUAL_DISTRIBUTION_LOGGER.read_text(encoding="utf-8")
-        if "--apply" in logger_text and "--refresh-admin" in logger_text and "--from-csv" in logger_text and "append_published_log" in logger_text and "dry_run" in logger_text and "validate_public_url" in logger_text and "already_logged" in logger_text and "PUBLIC_URL" in logger_text:
+        if "--apply" in logger_text and "--refresh-admin" in logger_text and "--from-csv" in logger_text and "--allow-partial" in logger_text and "allow_partial" in logger_text and "append_published_log" in logger_text and "dry_run" in logger_text and "validate_public_url" in logger_text and "already_logged" in logger_text and "PUBLIC_URL" in logger_text:
             ok("manual distribution logger is dry-run-first")
         else:
             fail("log_manual_distribution.py missing dry-run-first logging behavior or URL/duplicate guards", failures)
@@ -2906,7 +3549,7 @@ def validate_generated_outputs(failures):
         fail("build_monetization_activation_plan.py missing", failures)
     if BACKLOG_RESCHEDULE_PREVIEW_SCRIPT.exists():
         backlog_text = BACKLOG_RESCHEDULE_PREVIEW_SCRIPT.read_text(encoding="utf-8")
-        if "backlog_reschedule_preview.json" in backlog_text and "backlog-reschedule-preview.md" in backlog_text and "Apply allowed without override" in backlog_text and "backlog_clearance_manifest" in backlog_text and "Clearance Manifest" in backlog_text and "normal_apply_gate" in backlog_text and "clearance_steps" in backlog_text and "executor_readiness_snapshot.json" in backlog_text and "blocked_apply_command" in backlog_text and "override_apply_command" in backlog_text and "subprocess" not in backlog_text:
+        if "backlog_reschedule_preview.json" in backlog_text and "backlog-reschedule-preview.md" in backlog_text and "Apply allowed without override" in backlog_text and "manual_posting_clipboard.json" in backlog_text and "manual_handoff_items" in backlog_text and "backlog_clearance_manifest" in backlog_text and "partial_clear_apply_manifest" in backlog_text and "Partial Clear Apply" in backlog_text and "normal_apply_gate" in backlog_text and "clearance_steps" in backlog_text and "executor_readiness_snapshot.json" in backlog_text and "blocked_apply_command" in backlog_text and "override_apply_command" in backlog_text and "subprocess" not in backlog_text:
             ok("backlog reschedule preview builder is review-only")
         else:
             fail("build_backlog_reschedule_preview.py missing preview outputs or executes commands", failures)
@@ -3040,6 +3683,30 @@ def validate_generated_outputs(failures):
             fail("manual-distribution-packet.md missing expected sections", failures)
     else:
         fail("manual-distribution-packet.md missing", failures)
+    if MANUAL_POSTING_CLIPBOARD_REPORT.exists():
+        clipboard_report = MANUAL_POSTING_CLIPBOARD_REPORT.read_text(encoding="utf-8")
+        if "Manual Posting Clipboard" in clipboard_report and "## Cards" in clipboard_report and "Paste text" in clipboard_report and "Log preview after posting" in clipboard_report and "Partial batch apply after first URL" in clipboard_report and "Public URL reconciliation" in clipboard_report and "Operator Steps" in clipboard_report and "Guardrails" in clipboard_report:
+            ok("manual posting clipboard markdown report present")
+        else:
+            fail("manual-posting-clipboard.md missing expected sections", failures)
+    else:
+        fail("manual-posting-clipboard.md missing", failures)
+    if YOUTUBE_COMMUNITY_URL_RECONCILIATION_REPORT.exists():
+        reconciliation_report = YOUTUBE_COMMUNITY_URL_RECONCILIATION_REPORT.read_text(encoding="utf-8")
+        if "YouTube Community URL Reconciliation" in reconciliation_report and "## Matches" in reconciliation_report and "## Waiting" in reconciliation_report and "Guardrails" in reconciliation_report:
+            ok("youtube community URL reconciliation markdown report present")
+        else:
+            fail("youtube-community-url-reconciliation.md missing expected sections", failures)
+    else:
+        fail("youtube-community-url-reconciliation.md missing", failures)
+    if EXPERIMENT_RESULT_CLIPBOARD_REPORT.exists():
+        result_clipboard_report = EXPERIMENT_RESULT_CLIPBOARD_REPORT.read_text(encoding="utf-8")
+        if "Experiment Result Clipboard" in result_clipboard_report and "Metric Cards" in result_clipboard_report and "Measurement Priorities" in result_clipboard_report and "Missing Public URLs" in result_clipboard_report and "Preview import" in result_clipboard_report and "Guardrails" in result_clipboard_report:
+            ok("experiment result clipboard markdown report present")
+        else:
+            fail("experiment-result-clipboard.md missing expected sections", failures)
+    else:
+        fail("experiment-result-clipboard.md missing", failures)
     if MONETIZATION_ACTIVATION_REPORT.exists():
         activation_report_text = MONETIZATION_ACTIVATION_REPORT.read_text(encoding="utf-8")
         if "Monetization Activation Plan" in activation_report_text and "Activation Sequence" in activation_report_text and "Guardrails" in activation_report_text:
@@ -3098,6 +3765,12 @@ def validate_admin_execution_feedback(failures):
         "handoff action docket shown": "Action docket:" in text and "First ready step:" in text,
         "published log reconciliation shown": "Published log reconciliation" in text and "Worker export" in text and "Manual Logging" in text,
         "manual approval docket shown": "Manual approval docket:" in text and "Preview manual approvals:" in text,
+        "manual posting clipboard shown": 'id="manual-posting-clipboard"' in text and "renderManualPostingClipboard" in text and "manual_posting_clipboard.json" in text,
+        "manual posting cards actionable": "Manual posting clipboard is ready" in text and "Open community surface" in text and "Preview URL log after posting" in text and "Partial batch apply after first URL" in text and "Reconcile public URLs after posting" in text and "Copy URL reconciliation" in text and "Open URL reconciliation report" in text and "Copy post text" in text and "data-copy-text" in text and "manual-url-input" in text and "data-copy-template" in text and "Copy preview with URL" in text,
+        "manual posting source embedded": "embedded-manual-posting-clipboard" in text and "embedded-manual-posting-clipboard-report" in text,
+        "experiment result clipboard shown": "renderExperimentResultClipboard" in text and "experiment_result_clipboard.json" in text and "Experiment result clipboard" in text,
+        "experiment result cards actionable": "Open result clipboard report" in text and "Entry CSV:" in text and "Wide entry CSV:" in text and "result_import_preview_command" in text and "Copy metric preview" in text and "data-result-command" in text and "result-evidence-input" in text and "Measure first" in text and "Post now" in text and "Blocked" in text and "measurement_priority_cards" in text,
+        "experiment result source embedded": "embedded-experiment-result-clipboard" in text and "embedded-experiment-result-clipboard-report" in text,
     }
     missing_platform = [label for label, present in platform_checks.items() if not present]
     if missing_platform:

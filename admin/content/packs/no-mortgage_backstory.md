@@ -12,11 +12,16 @@ The emotional center is dry, stubborn, and self-contained. Lily is not selling f
 
 The song turns money pressure into a blunt mantra: no mortgage, no rent, no split. The point is not abundance. The point is fewer hooks in the skin.
 
+In the podcast transcript, Lily frames the fantasy as freedom without obligations: no financial obligations, no people obligations, no institution with its hands in her pockets. The dream keeps shrinking until it stops lying. Food, Internet, space. Nothing fancy.
+
+The spaciousness in the track matters too. The song sounds like it found cheap land and refused to overbuild. The arrangement leaves room around the idea, which is the whole point.
+
 ## Anecdote hooks (canonical starters)
 1. No Mortgage is about downsizing the dream until it finally stops lying.
 2. The song treats cheap land and a tiny house as emotional armor, not aesthetic branding.
 3. The Wi-Fi stays on, the social performance turns off, and the silence starts to feel useful.
 4. It is a relocation song, but the real move is away from obligations pretending to be identity.
+5. "Ramen run once a week" is not lifestyle branding; it is the practical math of keeping the dream small enough to hold.
 
 ## Lyric backstory anchors
 - "No mortgage. That's it."

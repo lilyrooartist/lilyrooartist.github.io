@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T05:32:18.742387Z",
+  "generated_at": "2026-06-22T06:02:36.812641Z",
   "safe_mode": true,
   "source": {
     "published_log": "admin/content/Published_Log.csv",
@@ -8,23 +8,24 @@
     "manual_distribution_packet": "data/manual_distribution_packet.json"
   },
   "summary": {
-    "published_log_status": "fresh",
+    "published_log_status": "stale",
     "published_log_rows": 17,
     "latest_entry_date": "2026-06-07",
     "latest_entry_platform": "Facebook",
     "latest_entry_content_id": "FP-AUTO-260",
     "latest_entry_url": "https://www.facebook.com/903693509504290_122118326547249470",
     "unlogged_worker_posts": 0,
-    "unlogged_manual_posts": 2,
+    "unlogged_manual_posts": 3,
     "manual_log_gate_counts": {
-      "blocked_until_manual_approval": 2
+      "blocked_until_manual_approval": 2,
+      "blocked_until_public_url": 1
     },
-    "manual_logging_gate_status": "needs_review",
+    "manual_logging_gate_status": "postable_now",
     "reconciliation_needed": true,
     "next_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
     "next_apply_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
     "next_gate": "manual_approval",
-    "posting_gate_status": "needs_review"
+    "posting_gate_status": "postable_now"
   },
   "worker_export": {
     "posted_worker_count": 0,
@@ -34,7 +35,7 @@
     "apply_command": "python3 scripts/export_social_executions.py --refresh-admin"
   },
   "manual_logging": {
-    "unlogged_manual_count": 2,
+    "unlogged_manual_count": 3,
     "approval_gate": {
       "status": "ready_for_manual_review",
       "ready_count": 2,
@@ -51,16 +52,33 @@
       "guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review."
     },
     "posting_gate": {
-      "status": "needs_review",
+      "status": "postable_now",
       "review_count": 2,
-      "postable_count": 0,
+      "postable_count": 1,
       "logged_count": 0,
       "public_community_url": "https://www.youtube.com/@lilyroo.artist/community"
     },
     "gate_counts": {
-      "blocked_until_manual_approval": 2
+      "blocked_until_manual_approval": 2,
+      "blocked_until_public_url": 1
     },
     "rows": [
+      {
+        "id": "FP-AUTO-261",
+        "release": "I Learned It All in Fifteen Seconds",
+        "platform": "YouTube Community",
+        "status": "ready_for_manual_post",
+        "log_gate": "blocked_until_public_url",
+        "approval_required": false,
+        "postable_now": true,
+        "requires_public_url": true,
+        "next_step": "Post manually in YouTube Studio Community, then replace PUBLIC_URL with the real public URL.",
+        "approval_preview_command": "",
+        "approval_command": "",
+        "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL",
+        "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL --apply --refresh-admin",
+        "public_community_url": "https://www.youtube.com/@lilyroo.artist/community"
+      },
       {
         "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
         "release": "Twelve Dollars",

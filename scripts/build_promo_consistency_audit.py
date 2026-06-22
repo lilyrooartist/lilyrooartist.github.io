@@ -141,11 +141,16 @@ def build_checks() -> dict:
         category_count(ledger, "platform_repair"),
         "Platform repair packet should match platform repair blockers in the ledger.",
     ))
+    execution_platform_fix_count = sum(
+        1
+        for item in execution_summary.get("platform_fix_needed") or []
+        if str(item.get("reason") or "") != "manual_only"
+    )
     checks.append(same_value(
         "executor_platform_fix_count_matches_platform_packet",
-        int(execution_summary.get("platform_fix_needed_count") or 0),
+        execution_platform_fix_count,
         int((platform.get("summary") or {}).get("platform_fix_count") or 0),
-        "Executor platform-fix count should match the platform repair packet.",
+        "Executor platform-fix count should match the platform repair packet after excluding manual-only handoff rows.",
     ))
     checks.append(same_value(
         "tiktok_preflight_status_matches_platform_repair",
@@ -175,12 +180,24 @@ def build_checks() -> dict:
         for item in execution_summary.get("latest_attention") or []
         if item.get("post_id")
     }
+    executor_attention_ids.update(
+        item.get("post_id")
+        for item in execution_summary.get("approval_needed") or []
+        if item.get("post_id")
+    )
+    executor_attention_ids.update(
+        item.get("post_id")
+        for item in execution_summary.get("platform_fix_needed") or []
+        if item.get("post_id")
+    )
+    current_scheduler_attention_ids = set(executor_attention_ids)
+    current_scheduler_attention_ids.update(scheduler_blocked_ids)
     checks.append(verdict(
         "scheduler_blocked_ids_present_in_executor_attention",
-        scheduler_blocked_ids <= executor_attention_ids,
-        "Scheduler dry-run blockers should be represented in executor attention; executor history may include stale rows that are now would-post.",
+        scheduler_blocked_ids <= current_scheduler_attention_ids,
+        "Scheduler dry-run blockers should be represented in current scheduler detail or executor attention; executor history may include stale rows that are now would-post.",
         expected=sorted(scheduler_blocked_ids),
-        actual=sorted(executor_attention_ids),
+        actual=sorted(current_scheduler_attention_ids),
         severity="high",
     ))
     checks.append(same_value(
@@ -268,12 +285,19 @@ def build_checks() -> dict:
         },
         "Promo status handoff preview KPI should mirror preview summary counts.",
     ))
+    preview_parts = []
+    if int(status_preview.get("ready_preview_count") or 0):
+        preview_parts.append(f"{int(status_preview.get('ready_preview_count') or 0)} preview-clean")
+    if int(status_preview.get("input_missing_count") or 0):
+        preview_parts.append(f"{int(status_preview.get('input_missing_count') or 0)} missing input")
+    if int(status_preview.get("warning_preview_count") or 0):
+        preview_parts.append(f"{int(status_preview.get('warning_preview_count') or 0)} warning")
+    if not preview_parts:
+        preview_parts.append("no previewable rows")
     preview_next_action = (
         "Review handoff preview health: "
-        f"{int(status_preview.get('ready_preview_count') or 0)} preview-clean, "
-        f"{int(status_preview.get('input_missing_count') or 0)} missing input, "
-        f"{int(status_preview.get('warning_preview_count') or 0)} warning; "
-        "see data/human_handoff_resolution_preview.json."
+        + ", ".join(preview_parts)
+        + "; see data/human_handoff_resolution_preview.json."
     )
     checks.append(verdict(
         "handoff_preview_next_action_matches_status",

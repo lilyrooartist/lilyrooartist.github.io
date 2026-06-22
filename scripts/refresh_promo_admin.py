@@ -124,6 +124,22 @@ FINALIZE_STEPS = [
         "required": True,
     },
     {
+        "name": "build_manual_posting_clipboard",
+        "command": ["python3", "scripts/build_manual_posting_clipboard.py"],
+        "required": True,
+    },
+    {
+        "name": "reconcile_youtube_community_urls",
+        "command": ["python3", "scripts/reconcile_youtube_community_urls.py"],
+        "required": False,
+        "preserve_on_failure": ["data/youtube_community_url_reconciliation.json"],
+    },
+    {
+        "name": "build_manual_posting_clipboard_with_reconciliation",
+        "command": ["python3", "scripts/build_manual_posting_clipboard.py"],
+        "required": True,
+    },
+    {
         "name": "build_monetization_activation_plan",
         "command": ["python3", "scripts/build_monetization_activation_plan.py"],
         "required": True,
@@ -181,6 +197,21 @@ FINALIZE_STEPS = [
     {
         "name": "update_promo_engine_status_with_handoff",
         "command": ["python3", "scripts/update_promo_engine_status.py"],
+        "required": True,
+    },
+    {
+        "name": "build_experiment_result_collection",
+        "command": ["python3", "scripts/build_experiment_result_collection.py"],
+        "required": True,
+    },
+    {
+        "name": "build_experiment_result_clipboard",
+        "command": ["python3", "scripts/build_experiment_result_clipboard.py"],
+        "required": True,
+    },
+    {
+        "name": "build_experiment_publish_runway",
+        "command": ["python3", "scripts/build_experiment_publish_runway.py"],
         "required": True,
     },
     {

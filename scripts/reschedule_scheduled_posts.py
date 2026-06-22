@@ -94,6 +94,12 @@ def selected_rows(rows: list[dict[str, str]], args) -> list[dict[str, str]]:
             continue
         scheduled_at = parse_datetime(row.get("scheduled_at", ""))
         is_approved = str(row.get("approved") or "").strip().lower() == "yes"
+        is_manual_handoff = (
+            str(row.get("execution_mode") or "").strip().lower() == "manual"
+            or str(row.get("post_type") or "").strip().lower() == "community"
+        )
+        if args.exclude_manual_handoff and is_manual_handoff:
+            continue
         if wanted and row_id in wanted:
             selected.append(row)
         elif args.approved_backlog and is_approved and scheduled_at < now:
@@ -114,6 +120,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Preview or apply new scheduled_at values for scheduled post rows.")
     parser.add_argument("--id", action="append", default=[], help="Specific scheduled post id to reschedule. Repeatable.")
     parser.add_argument("--approved-backlog", action="store_true", help="Select approved rows whose scheduled_at is already in the past.")
+    parser.add_argument("--exclude-manual-handoff", action="store_true", help="Exclude manual/community rows that should move through the manual posting clipboard instead of auto-reschedule.")
     parser.add_argument("--include-published", action="store_true", help="Allow rows already recorded in admin/content/Published_Log.csv.")
     parser.add_argument("--start-at", required=True, help="First replacement ISO datetime, for example 2026-06-15T10:00:00-04:00.")
     parser.add_argument("--spacing-hours", type=int, default=24, help="Hours between selected rows. Default: 24.")

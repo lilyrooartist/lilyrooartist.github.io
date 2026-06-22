@@ -12,11 +12,16 @@ The emotional center is controlled, cool, and deliberate. The groove moves slowl
 
 Slow Walk turns patience into posture. It is not laziness, avoidance, or drift. It is a decision to move at the speed that feels true, even when the room treats urgency like proof of worth.
 
+The transcript gives the song a very Lily-specific behavior: she will get out in front and slow down to force the group to walk slower. It is funny, tiny, and controlling in the exact way the song understands control. The protest is not dramatic. It is pace as self-defense.
+
+The vocals matter here too. They are gentle and melodic, lifting the song forward while the lyric refuses to hurry.
+
 ## Anecdote hooks (canonical starters)
 1. Slow Walk is about setting your own pace while everybody else rushes toward the same place.
 2. The song takes the time anxiety of Analog Myth and answers it with cool refusal instead of panic.
 3. The groove is intentionally sparse and deliberate, built to feel like confidence instead of hurry.
 4. The emotional posture is simple: if it comes, it is mine. If it does not, still fine.
+5. The canonical anecdote is Lily walking in front and slowing down so everyone else has to stop treating speed like virtue.
 
 ## Lyric backstory anchors
 - "Slow walk. Set the pace."

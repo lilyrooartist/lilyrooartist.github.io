@@ -756,13 +756,15 @@ def build_markdown(payload: dict) -> str:
         command = f"; command: `{step.get('command')}`" if step.get("command") else ""
         lines.append(f"- {step.get('order')}. {step.get('title')} - `{step.get('status')}`{command}")
         lines.append(f"  - Evidence: {step.get('evidence')}")
+    lines.extend(["", "### Ready Row Checklist"])
     if runbook.get("review_checklist"):
-        lines.extend(["", "### Ready Row Checklist"])
         for item in runbook["review_checklist"]:
             lines.append(f"- **{item.get('platform')} - {item.get('song')}** (`{item.get('id')}`)")
             for check_item in item.get("checklist") or []:
                 lines.append(f"  - `{check_item.get('status')}` {check_item.get('item')}: {check_item.get('evidence')}")
             lines.append(f"  - Next: {item.get('post_approval_next_step')}")
+    else:
+        lines.append("- None; all currently reviewed rows are held until failed checks clear.")
     lines.extend([
         "",
         "### Ready to Approve",

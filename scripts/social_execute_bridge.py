@@ -65,6 +65,7 @@ class Handler(BaseHTTPRequestHandler):
             text = (payload.get('text') or '').strip()
             reply_text = (payload.get('replyText') or '').strip()
             media_key = (payload.get('mediaKey') or '').strip()
+            tiktok_mode = (payload.get('tiktokPostingMode') or payload.get('tiktok_posting_mode') or '').strip()
             dry_run = bool(payload.get('dryRun'))
             if not post_id:
                 raise ValueError('postId is required')
@@ -101,6 +102,8 @@ class Handler(BaseHTTPRequestHandler):
                     cmd += ['--text', text]
                 if media_key or row.get('media_key'):
                     cmd += ['--media-key', media_key or row.get('media_key', '')]
+                if tiktok_mode:
+                    cmd += ['--mode', tiktok_mode]
                 if dry_run:
                     cmd += ['--dry-run']
             else:

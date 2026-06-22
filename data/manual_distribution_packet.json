@@ -1,9 +1,10 @@
 {
-  "generated_at": "2026-06-22T05:32:17.998663Z",
+  "generated_at": "2026-06-22T06:02:35.823819Z",
   "safe_mode": true,
   "source": {
     "promo_queue_plan": "data/promo_queue_plan.json",
     "approval_runway": "data/approval_runway.json",
+    "scheduled_posts": "data/scheduled_posts.csv",
     "published_log": "admin/content/Published_Log.csv",
     "manual_distribution_url_template": "data/manual_distribution_url_template.csv",
     "destination_evidence": [
@@ -13,22 +14,141 @@
     ]
   },
   "summary": {
-    "manual_ready_count": 2,
-    "youtube_community_count": 2,
+    "manual_ready_count": 3,
+    "youtube_community_count": 3,
     "hard_cta_count": 2,
-    "approved_manual_count": 0,
+    "approved_manual_count": 1,
     "logged_manual_count": 0,
-    "unlogged_manual_count": 2,
-    "public_url_log_needed_count": 2,
+    "unlogged_manual_count": 3,
+    "public_url_log_needed_count": 3,
     "ready_to_post_after_review_count": 2,
-    "ready_for_manual_post_count": 0,
+    "ready_for_manual_post_count": 1,
     "waiting_for_review_count": 2,
     "manual_review_required_count": 2,
-    "postable_now_count": 0,
+    "postable_now_count": 1,
     "next_manual_action": "review_and_approve",
     "public_community_url": "https://www.youtube.com/@lilyroo.artist/community"
   },
   "rows": [
+    {
+      "id": "FP-AUTO-261",
+      "platform": "YouTube Community",
+      "release": "I Learned It All in Fifteen Seconds",
+      "scheduled_at": "2026-06-06T19:10:00-04:00",
+      "post_type": "community",
+      "approved": "yes",
+      "distribution_status": "ready_for_manual_post",
+      "logged": false,
+      "logged_at": "",
+      "published_url": "",
+      "published_log_content_id": "",
+      "readiness_state": "",
+      "readiness_message": "",
+      "subscriber_growth_score": null,
+      "selected_cta_strength": "",
+      "text": "New transmission: I Learned It All in Fifteen Seconds is live. Remastered cover art, same suspicious amount of feeling.",
+      "reply_text": "Stream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube: https://www.youtube.com/@lilyroo.artist | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
+      "copy_block": "New transmission: I Learned It All in Fifteen Seconds is live. Remastered cover art, same suspicious amount of feeling.\n\nStream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube: https://www.youtube.com/@lilyroo.artist | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
+      "imagery_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
+      "clip_url": "",
+      "asset_download_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
+      "destination_links": [
+        "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+        "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+        "https://www.youtube.com/@lilyroo.artist",
+        "https://music.youtube.com/watch?v=vK0mDIW65o4"
+      ],
+      "destination_link_audit": [
+        {
+          "url": "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+          "canonical_url": "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+          "status": "needs_manual_review",
+          "evidence": [],
+          "evidence_count": 0,
+          "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
+        },
+        {
+          "url": "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+          "canonical_url": "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+          "status": "needs_manual_review",
+          "evidence": [],
+          "evidence_count": 0,
+          "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
+        },
+        {
+          "url": "https://www.youtube.com/@lilyroo.artist",
+          "canonical_url": "https://www.youtube.com/@lilyroo.artist",
+          "status": "needs_manual_review",
+          "evidence": [],
+          "evidence_count": 0,
+          "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
+        },
+        {
+          "url": "https://music.youtube.com/watch?v=vK0mDIW65o4",
+          "canonical_url": "https://music.youtube.com/watch?v=vK0mDIW65o4",
+          "status": "needs_manual_review",
+          "evidence": [],
+          "evidence_count": 0,
+          "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
+        }
+      ],
+      "destination_link_audit_summary": {
+        "link_count": 4,
+        "verified_local_evidence_count": 0,
+        "needs_manual_review_count": 4,
+        "all_links_have_local_evidence": false
+      },
+      "asset_audit": {
+        "url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
+        "status": "local_asset_present",
+        "local_path": "assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
+        "exists": true,
+        "guardrail": "Local file check only; no posting or live network check was performed."
+      },
+      "media_key": "i-learned-cover",
+      "approval_preview_command": "",
+      "approval_command": "",
+      "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL",
+      "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL --apply --refresh-admin",
+      "log_effect": {
+        "target": "admin/content/Published_Log.csv",
+        "content_id": "FP-AUTO-261",
+        "platform": "YouTube Community",
+        "release": "I Learned It All in Fifteen Seconds",
+        "requires_public_url": true,
+        "url_placeholder": "PUBLIC_URL",
+        "duplicate_checked_by": [
+          "content_id",
+          "manual_distribution_id"
+        ],
+        "notes": "manual_distribution_id=FP-AUTO-261; source=data/manual_distribution_packet.json",
+        "would_append": true,
+        "summary": "append Published_Log.csv content_id=FP-AUTO-261 after public URL is available"
+      },
+      "source_kind": "scheduled_posts",
+      "manual_posting_packet": {
+        "posting_surface": "YouTube Studio Community",
+        "public_channel_url": "https://www.youtube.com/@lilyroo.artist",
+        "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
+        "paste_text": "New transmission: I Learned It All in Fifteen Seconds is live. Remastered cover art, same suspicious amount of feeling.\n\nStream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube: https://www.youtube.com/@lilyroo.artist | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
+        "asset_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
+        "approval_required": false,
+        "postable_now": true,
+        "logging_required": true,
+        "logged": false,
+        "published_url": "",
+        "distribution_status": "ready_for_manual_post",
+        "next_action": "post_manually_then_log_url",
+        "next_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL"
+      },
+      "manual_workflow": [
+        "Review the copy and linked playlist.",
+        "Approve only after human review if it should become the current manual posting candidate.",
+        "Post manually in YouTube Studio Community using the copy and asset below.",
+        "After posting, run the log preview command with the public URL, then run the apply command to update Published_Log.csv and refresh Admin.",
+        "Rows already found in Published_Log.csv are marked logged and should not be treated as pending manual work."
+      ]
+    },
     {
       "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
       "platform": "YouTube Community",
@@ -108,6 +228,7 @@
         "would_append": true,
         "summary": "append Published_Log.csv content_id=FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY after public URL is available"
       },
+      "source_kind": "promo_queue_plan",
       "manual_posting_packet": {
         "posting_surface": "YouTube Studio Community",
         "public_channel_url": "https://www.youtube.com/@lilyroo.artist",
@@ -210,6 +331,7 @@
         "would_append": true,
         "summary": "append Published_Log.csv content_id=FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY after public URL is available"
       },
+      "source_kind": "promo_queue_plan",
       "manual_posting_packet": {
         "posting_surface": "YouTube Studio Community",
         "public_channel_url": "https://www.youtube.com/@lilyroo.artist",
@@ -268,9 +390,9 @@
     ]
   },
   "manual_distribution_docket": {
-    "status": "needs_review",
+    "status": "postable_now",
     "review_count": 2,
-    "postable_count": 0,
+    "postable_count": 1,
     "logged_count": 0,
     "review_queue": [
       {
@@ -426,7 +548,100 @@
         }
       }
     ],
-    "postable_now": [],
+    "postable_now": [
+      {
+        "id": "FP-AUTO-261",
+        "platform": "YouTube Community",
+        "release": "I Learned It All in Fifteen Seconds",
+        "scheduled_at": "2026-06-06T19:10:00-04:00",
+        "distribution_status": "ready_for_manual_post",
+        "subscriber_growth_score": null,
+        "selected_cta_strength": "",
+        "posting_surface": "YouTube Studio Community",
+        "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
+        "paste_text": "New transmission: I Learned It All in Fifteen Seconds is live. Remastered cover art, same suspicious amount of feeling.\n\nStream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube: https://www.youtube.com/@lilyroo.artist | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
+        "asset_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
+        "destination_links": [
+          "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+          "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+          "https://www.youtube.com/@lilyroo.artist",
+          "https://music.youtube.com/watch?v=vK0mDIW65o4"
+        ],
+        "destination_link_audit": [
+          {
+            "url": "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+            "canonical_url": "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+            "status": "needs_manual_review",
+            "evidence": [],
+            "evidence_count": 0,
+            "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
+          },
+          {
+            "url": "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+            "canonical_url": "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+            "status": "needs_manual_review",
+            "evidence": [],
+            "evidence_count": 0,
+            "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
+          },
+          {
+            "url": "https://www.youtube.com/@lilyroo.artist",
+            "canonical_url": "https://www.youtube.com/@lilyroo.artist",
+            "status": "needs_manual_review",
+            "evidence": [],
+            "evidence_count": 0,
+            "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
+          },
+          {
+            "url": "https://music.youtube.com/watch?v=vK0mDIW65o4",
+            "canonical_url": "https://music.youtube.com/watch?v=vK0mDIW65o4",
+            "status": "needs_manual_review",
+            "evidence": [],
+            "evidence_count": 0,
+            "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
+          }
+        ],
+        "destination_link_audit_summary": {
+          "link_count": 4,
+          "verified_local_evidence_count": 0,
+          "needs_manual_review_count": 4,
+          "all_links_have_local_evidence": false
+        },
+        "asset_audit": {
+          "url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
+          "status": "local_asset_present",
+          "local_path": "assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
+          "exists": true,
+          "guardrail": "Local file check only; no posting or live network check was performed."
+        },
+        "approval_required": false,
+        "postable_now": true,
+        "logging_required": true,
+        "logged": false,
+        "published_url": "",
+        "next_action": "post_manually_then_log_url",
+        "next_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL",
+        "approval_preview_command": "",
+        "approval_command": "",
+        "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL",
+        "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL --apply --refresh-admin",
+        "log_effect": {
+          "target": "admin/content/Published_Log.csv",
+          "content_id": "FP-AUTO-261",
+          "platform": "YouTube Community",
+          "release": "I Learned It All in Fifteen Seconds",
+          "requires_public_url": true,
+          "url_placeholder": "PUBLIC_URL",
+          "duplicate_checked_by": [
+            "content_id",
+            "manual_distribution_id"
+          ],
+          "notes": "manual_distribution_id=FP-AUTO-261; source=data/manual_distribution_packet.json",
+          "would_append": true,
+          "summary": "append Published_Log.csv content_id=FP-AUTO-261 after public URL is available"
+        }
+      }
+    ],
     "logged": [],
     "next_manual_action": "review_and_approve",
     "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
@@ -446,6 +661,16 @@
     "batch_log_preview_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv",
     "batch_log_apply_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --apply --refresh-admin",
     "url_entry_rows": [
+      {
+        "id": "FP-AUTO-261",
+        "platform": "YouTube Community",
+        "release": "I Learned It All in Fifteen Seconds",
+        "distribution_status": "ready_for_manual_post",
+        "approved": "yes",
+        "posting_surface": "YouTube Studio Community",
+        "public_url": "",
+        "notes": "Paste the real public YouTube Community post URL after manual posting."
+      },
       {
         "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
         "platform": "YouTube Community",
@@ -467,19 +692,27 @@
         "notes": "Paste the real public YouTube Community post URL after manual posting."
       }
     ],
-    "url_entry_row_count": 2,
-    "waiting_public_url_count": 2,
+    "url_entry_row_count": 3,
+    "waiting_public_url_count": 3,
     "review_queue_ids": [
       "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
       "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY"
     ],
-    "postable_now_ids": [],
+    "postable_now_ids": [
+      "FP-AUTO-261"
+    ],
     "logged_ids": [],
     "pending_log_ids": [
+      "FP-AUTO-261",
       "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
       "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY"
     ],
     "log_commands": [
+      {
+        "id": "FP-AUTO-261",
+        "preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL",
+        "apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL --apply --refresh-admin"
+      },
       {
         "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
         "preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL",

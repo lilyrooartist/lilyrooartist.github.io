@@ -13,6 +13,7 @@ from urllib.parse import urlparse
 ROOT = Path(__file__).resolve().parents[1]
 PROMO_PLAN = ROOT / "data" / "promo_queue_plan.json"
 APPROVAL_RUNWAY = ROOT / "data" / "approval_runway.json"
+SCHEDULED_POSTS = ROOT / "data" / "scheduled_posts.csv"
 DISTROKID_RELEASE_STATUS = ROOT / "data" / "distrokid_release_status.json"
 TWELVE_DOLLARS_PLAYLIST = ROOT / "data" / "youtube_twelve_dollars_playlist.json"
 ANALOG_MYTH_PLAYLIST = ROOT / "data" / "youtube_analog_myth_playlist.json"
@@ -30,6 +31,16 @@ def read_json(path: Path, fallback):
     if not path.exists():
         return fallback
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def read_csv_rows(path: Path) -> list[dict[str, str]]:
+    if not path.exists():
+        return []
+    with path.open(newline="", encoding="utf-8") as handle:
+        return [
+            {key: (value or "").strip() for key, value in row.items()}
+            for row in csv.DictReader(handle)
+        ]
 
 
 def runway_lookup(runway: dict) -> dict[str, dict]:
@@ -422,7 +433,18 @@ def manual_approval_docket(runway: dict, rows: list[dict]) -> dict:
 def build_rows(plan: dict, runway: dict, published: dict[str, dict], evidence: dict[str, list[dict]]) -> list[dict]:
     runway_by_id = runway_lookup(runway)
     rows = []
-    for post in plan.get("posts") or []:
+    plan_posts = [dict(post, source_kind="promo_queue_plan") for post in plan.get("posts") or []]
+    plan_ids = {post.get("id") for post in plan_posts if post.get("id")}
+    scheduled_manual_posts = [
+        dict(row, source_kind="scheduled_posts")
+        for row in read_csv_rows(SCHEDULED_POSTS)
+        if row.get("id")
+        and row.get("id") not in plan_ids
+        and (row.get("execution_mode") or "").lower() == "manual"
+        and (row.get("post_type") or "").lower() == "community"
+        and "youtube" in (row.get("platform") or "").lower()
+    ]
+    for post in plan_posts + scheduled_manual_posts:
         if post.get("execution_mode") != "manual":
             continue
         review = runway_by_id.get(post.get("id")) or {}
@@ -472,6 +494,7 @@ def build_rows(plan: dict, runway: dict, published: dict[str, dict], evidence: d
             "log_preview_command": log_command(post.get("id") or ""),
             "log_apply_command": log_command(post.get("id") or "", apply=True),
             "log_effect": log_effect(post, published_row),
+            "source_kind": post.get("source_kind") or "",
             "manual_posting_packet": posting_packet,
             "manual_workflow": [
                 "Review the copy and linked playlist.",
@@ -724,6 +747,7 @@ def main() -> int:
         "source": {
             "promo_queue_plan": str(PROMO_PLAN.relative_to(ROOT)),
             "approval_runway": str(APPROVAL_RUNWAY.relative_to(ROOT)),
+            "scheduled_posts": str(SCHEDULED_POSTS.relative_to(ROOT)),
             "published_log": str(PUBLISHED_LOG.relative_to(ROOT)),
             "manual_distribution_url_template": str(URL_TEMPLATE.relative_to(ROOT)),
             "destination_evidence": [

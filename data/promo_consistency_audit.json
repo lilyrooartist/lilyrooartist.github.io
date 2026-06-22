@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T05:32:18.871071Z",
+  "generated_at": "2026-06-22T06:02:37.004282Z",
   "safe_mode": true,
   "summary": {
     "check_count": 30,
@@ -15,56 +15,56 @@
       "status": "pass",
       "severity": "ok",
       "detail": "Blocker ledger summary should match row count.",
-      "expected": 9,
-      "actual": 9
+      "expected": 11,
+      "actual": 11
     },
     {
       "name": "ledger_category_total_matches_rows",
       "status": "pass",
       "severity": "ok",
       "detail": "Blocker category counts should account for every blocker row.",
-      "expected": 9,
-      "actual": 9
+      "expected": 11,
+      "actual": 11
     },
     {
       "name": "status_open_actions_match_operations",
       "status": "pass",
       "severity": "ok",
       "detail": "Promo status open action count should mirror the operations packet.",
-      "expected": 14,
-      "actual": 14
+      "expected": 17,
+      "actual": 17
     },
     {
       "name": "approval_counts_match",
       "status": "pass",
       "severity": "ok",
       "detail": "Scheduled approval packet should match approval blockers in the ledger.",
-      "expected": 3,
-      "actual": 3
+      "expected": 1,
+      "actual": 1
     },
     {
       "name": "executor_approval_count_matches_scheduled_packet",
       "status": "pass",
       "severity": "ok",
       "detail": "Executor approval-needed count should match the scheduled approval packet.",
-      "expected": 3,
-      "actual": 3
+      "expected": 1,
+      "actual": 1
     },
     {
       "name": "platform_repair_count_matches_ledger",
       "status": "pass",
       "severity": "ok",
       "detail": "Platform repair packet should match platform repair blockers in the ledger.",
-      "expected": 1,
-      "actual": 1
+      "expected": 4,
+      "actual": 4
     },
     {
       "name": "executor_platform_fix_count_matches_platform_packet",
       "status": "pass",
       "severity": "ok",
-      "detail": "Executor platform-fix count should match the platform repair packet.",
-      "expected": 1,
-      "actual": 1
+      "detail": "Executor platform-fix count should match the platform repair packet after excluding manual-only handoff rows.",
+      "expected": 4,
+      "actual": 4
     },
     {
       "name": "tiktok_preflight_status_matches_platform_repair",
@@ -110,17 +110,23 @@
       "name": "scheduler_blocked_ids_present_in_executor_attention",
       "status": "pass",
       "severity": "ok",
-      "detail": "Scheduler dry-run blockers should be represented in executor attention; executor history may include stale rows that are now would-post.",
+      "detail": "Scheduler dry-run blockers should be represented in current scheduler detail or executor attention; executor history may include stale rows that are now would-post.",
       "expected": [
+        "FP-AUTO-258",
         "FP-AUTO-259",
         "FP-AUTO-261",
-        "FP-AUTO-264"
+        "FP-AUTO-263",
+        "FP-AUTO-264",
+        "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM"
       ],
       "actual": [
         "FP-AUTO-258",
         "FP-AUTO-259",
         "FP-AUTO-261",
-        "FP-AUTO-264"
+        "FP-AUTO-263",
+        "FP-AUTO-264",
+        "FP-AUTO-265",
+        "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM"
       ]
     },
     {
@@ -128,16 +134,16 @@
       "status": "pass",
       "severity": "ok",
       "detail": "Manual distribution packet should match manual distribution blockers in the ledger.",
-      "expected": 2,
-      "actual": 2
+      "expected": 3,
+      "actual": 3
     },
     {
       "name": "manual_distribution_handoff_count_matches_packet",
       "status": "pass",
       "severity": "ok",
       "detail": "Human handoff should include every unlogged manual distribution row.",
-      "expected": 2,
-      "actual": 2
+      "expected": 3,
+      "actual": 3
     },
     {
       "name": "manual_metric_batch_count_matches_ledger",
@@ -168,8 +174,8 @@
       "status": "pass",
       "severity": "ok",
       "detail": "Human handoff blocker summary should be copied from the blocker ledger.",
-      "expected": 9,
-      "actual": 9
+      "expected": 11,
+      "actual": 11
     },
     {
       "name": "handoff_projection_matches_ledger_projection",
@@ -179,41 +185,35 @@
       "expected": {
         "kind": "checked_scheduled_approval_batch",
         "label": "Checked scheduled approval batch",
-        "checked_ids": [
-          "FP-AUTO-258",
-          "FP-AUTO-261"
-        ],
+        "checked_ids": [],
         "blocked_ids_retained": [
           "FP-AUTO-259"
         ],
-        "blockers_resolved": 2,
-        "approval_blockers_before": 3,
+        "blockers_resolved": 0,
+        "approval_blockers_before": 1,
         "approval_blockers_after": 1,
-        "auto_rows_unblocked": 1,
-        "manual_rows_unblocked": 1,
-        "effect_count": 2,
-        "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
-        "apply_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+        "auto_rows_unblocked": 0,
+        "manual_rows_unblocked": 0,
+        "effect_count": 0,
+        "preview_command": "",
+        "apply_command": "",
         "guardrail": "Human review is still required; blocked review IDs stay excluded from the checked batch."
       },
       "actual": {
         "kind": "checked_scheduled_approval_batch",
         "label": "Checked scheduled approval batch",
-        "checked_ids": [
-          "FP-AUTO-258",
-          "FP-AUTO-261"
-        ],
+        "checked_ids": [],
         "blocked_ids_retained": [
           "FP-AUTO-259"
         ],
-        "blockers_resolved": 2,
-        "approval_blockers_before": 3,
+        "blockers_resolved": 0,
+        "approval_blockers_before": 1,
         "approval_blockers_after": 1,
-        "auto_rows_unblocked": 1,
-        "manual_rows_unblocked": 1,
-        "effect_count": 2,
-        "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
-        "apply_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+        "auto_rows_unblocked": 0,
+        "manual_rows_unblocked": 0,
+        "effect_count": 0,
+        "preview_command": "",
+        "apply_command": "",
         "guardrail": "Human review is still required; blocked review IDs stay excluded from the checked batch."
       }
     },
@@ -223,22 +223,28 @@
       "severity": "ok",
       "detail": "Human handoff preview should include one preview row for every handoff task.",
       "expected": [
-        "approve-checked-scheduled-batch",
         "backlog-reschedule",
+        "manual-distribution-FP-AUTO-261",
         "manual-distribution-FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
         "manual-distribution-FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
         "manual-metrics-priority-2",
         "manual-metrics-priority-3",
-        "platform-setup-FP-AUTO-264"
+        "platform-setup-FP-AUTO-263",
+        "platform-setup-FP-AUTO-264",
+        "platform-setup-FP-AUTO-265",
+        "platform-setup-FP-PLAN-TWELVE-DOLLARS-INSTAGRAM"
       ],
       "actual": [
-        "approve-checked-scheduled-batch",
         "backlog-reschedule",
+        "manual-distribution-FP-AUTO-261",
         "manual-distribution-FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
         "manual-distribution-FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
         "manual-metrics-priority-2",
         "manual-metrics-priority-3",
-        "platform-setup-FP-AUTO-264"
+        "platform-setup-FP-AUTO-263",
+        "platform-setup-FP-AUTO-264",
+        "platform-setup-FP-AUTO-265",
+        "platform-setup-FP-PLAN-TWELVE-DOLLARS-INSTAGRAM"
       ]
     },
     {
@@ -246,8 +252,8 @@
       "status": "pass",
       "severity": "ok",
       "detail": "Human handoff preview worksheet row count should match the handoff packet worksheet summary.",
-      "expected": 7,
-      "actual": 7
+      "expected": 10,
+      "actual": 10
     },
     {
       "name": "handoff_preview_status_matches_status_kpi",
@@ -256,13 +262,15 @@
       "detail": "Promo status handoff preview KPI should mirror preview status counts.",
       "expected": {
         "input_missing": 3,
-        "preview_ok": 3,
-        "preview_ok_with_warning": 1
+        "preview_ok": 2,
+        "preview_ok_with_warning": 1,
+        "skipped": 4
       },
       "actual": {
         "input_missing": 3,
-        "preview_ok": 3,
-        "preview_ok_with_warning": 1
+        "preview_ok": 2,
+        "preview_ok_with_warning": 1,
+        "skipped": 4
       }
     },
     {
@@ -271,16 +279,16 @@
       "severity": "ok",
       "detail": "Promo status handoff preview KPI should mirror preview summary counts.",
       "expected": {
-        "worksheet_row_count": 7,
-        "preview_count": 7,
-        "executed_preview_count": 7,
-        "skipped_preview_count": 0
+        "worksheet_row_count": 10,
+        "preview_count": 10,
+        "executed_preview_count": 6,
+        "skipped_preview_count": 4
       },
       "actual": {
-        "worksheet_row_count": 7,
-        "preview_count": 7,
-        "executed_preview_count": 7,
-        "skipped_preview_count": 0
+        "worksheet_row_count": 10,
+        "preview_count": 10,
+        "executed_preview_count": 6,
+        "skipped_preview_count": 4
       }
     },
     {
@@ -288,16 +296,20 @@
       "status": "pass",
       "severity": "ok",
       "detail": "Promo status next actions should expose the handoff preview health summary.",
-      "expected": "Review handoff preview health: 3 preview-clean, 3 missing input, 1 warning; see data/human_handoff_resolution_preview.json.",
+      "expected": "Review handoff preview health: 2 preview-clean, 3 missing input, 1 warning; see data/human_handoff_resolution_preview.json.",
       "actual": [
-        "Next operational action: Preview reschedule for approved past-due posts — python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24",
-        "First handoff step: Review and post manual distribution rows — python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
-        "Current unlock gate: Review and post manual YouTube Community rows (ready_for_human_review); 1 ready, 3 blocked/warning; preview python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run; see data/promo_unlock_sequence.json.",
-        "Review handoff preview health: 3 preview-clean, 3 missing input, 1 warning; see data/human_handoff_resolution_preview.json.",
-        "Re-check checked-pending store links: 7 music site snapshot(s) still have no public URL; next recommended re-check after 2026-06-23T05:32:12.525718+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 then.",
+        "Next operational action: Preview clear approved backlog row — python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
+        "First handoff step: Review and post manual distribution rows",
+        "30-day growth goal: Publish or approve the next platform-native rows, then refresh manual/public metrics to rank formats by results.",
         "Resolve manual distribution gate: 2 YouTube Community row(s) need review (manual_approval); preview with python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run.",
+        "Publish runway: 2 manual YouTube Community experiment row(s) need review; preview with python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run.",
         "Refresh manual metrics: 6 worksheet row(s) still need new_value entries (blocked_until_new_values_filled); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values.",
-        "Preview approved backlog reschedule: python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24"
+        "Collect experiment results: 18 post-result field(s) need new_value plus evidence_note; use admin/reports/experiment-result-clipboard.md; first priority: measure FP-AUTO-260 on Facebook. Direct preview template: python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run. Direct apply template after review: python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin. Then preview import with python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run after filling data/experiment_result_entry_wide_template.csv.",
+        "Re-check checked-pending store links: 7 music site snapshot(s) still have no public URL; next recommended re-check after 2026-06-23T06:01:28.759862+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 then.",
+        "Current unlock gate: Approve checked scheduled rows (blocked); 0 ready, 4 blocked/warning; see data/promo_unlock_sequence.json.",
+        "Review handoff preview health: 2 preview-clean, 3 missing input, 1 warning; see data/human_handoff_resolution_preview.json.",
+        "Preview clear approved backlog row: python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
+        "5 approved unpublished posts are past their scheduled time; repair executor/platform blockers or reschedule them."
       ]
     },
     {
@@ -333,8 +345,8 @@
       "status": "pass",
       "severity": "ok",
       "detail": "Promo unlock sequence should mirror the blocker ledger open blocker count.",
-      "expected": 9,
-      "actual": 9
+      "expected": 11,
+      "actual": 11
     },
     {
       "name": "unlock_sequence_current_step_is_preview_ready",
@@ -342,12 +354,12 @@
       "severity": "ok",
       "detail": "Promo unlock sequence should lead with the first currently actionable gate, skipping any completed evidence-only gate.",
       "expected": {
-        "current_step_id": "unlock-manual-distribution",
-        "current_gate_state": "ready_for_human_review"
+        "current_step_id": "unlock-checked-scheduled-approval",
+        "current_gate_state": "blocked"
       },
       "actual": {
-        "current_step_id": "unlock-manual-distribution",
-        "current_gate_state": "ready_for_human_review"
+        "current_step_id": "unlock-checked-scheduled-approval",
+        "current_gate_state": "blocked"
       }
     },
     {
@@ -357,19 +369,19 @@
       "detail": "Promo status should mirror the unlock sequence summary.",
       "expected": {
         "step_count": 5,
-        "ready_for_human_review_count": 1,
-        "blocked_or_warning_count": 3,
-        "current_step_id": "unlock-manual-distribution",
-        "current_gate_state": "ready_for_human_review",
-        "open_blocker_count": 9
+        "ready_for_human_review_count": 0,
+        "blocked_or_warning_count": 4,
+        "current_step_id": "unlock-checked-scheduled-approval",
+        "current_gate_state": "blocked",
+        "open_blocker_count": 11
       },
       "actual": {
         "step_count": 5,
-        "ready_for_human_review_count": 1,
-        "blocked_or_warning_count": 3,
-        "current_step_id": "unlock-manual-distribution",
-        "current_gate_state": "ready_for_human_review",
-        "open_blocker_count": 9
+        "ready_for_human_review_count": 0,
+        "blocked_or_warning_count": 4,
+        "current_step_id": "unlock-checked-scheduled-approval",
+        "current_gate_state": "blocked",
+        "open_blocker_count": 11
       }
     },
     {
@@ -379,14 +391,18 @@
       "detail": "Promo status next actions should expose the current unlock sequence gate.",
       "expected": "Current unlock gate action includes data/promo_unlock_sequence.json",
       "actual": [
-        "Next operational action: Preview reschedule for approved past-due posts — python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24",
-        "First handoff step: Review and post manual distribution rows — python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
-        "Current unlock gate: Review and post manual YouTube Community rows (ready_for_human_review); 1 ready, 3 blocked/warning; preview python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run; see data/promo_unlock_sequence.json.",
-        "Review handoff preview health: 3 preview-clean, 3 missing input, 1 warning; see data/human_handoff_resolution_preview.json.",
-        "Re-check checked-pending store links: 7 music site snapshot(s) still have no public URL; next recommended re-check after 2026-06-23T05:32:12.525718+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 then.",
+        "Next operational action: Preview clear approved backlog row — python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
+        "First handoff step: Review and post manual distribution rows",
+        "30-day growth goal: Publish or approve the next platform-native rows, then refresh manual/public metrics to rank formats by results.",
         "Resolve manual distribution gate: 2 YouTube Community row(s) need review (manual_approval); preview with python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run.",
+        "Publish runway: 2 manual YouTube Community experiment row(s) need review; preview with python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run.",
         "Refresh manual metrics: 6 worksheet row(s) still need new_value entries (blocked_until_new_values_filled); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values.",
-        "Preview approved backlog reschedule: python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24"
+        "Collect experiment results: 18 post-result field(s) need new_value plus evidence_note; use admin/reports/experiment-result-clipboard.md; first priority: measure FP-AUTO-260 on Facebook. Direct preview template: python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run. Direct apply template after review: python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin. Then preview import with python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run after filling data/experiment_result_entry_wide_template.csv.",
+        "Re-check checked-pending store links: 7 music site snapshot(s) still have no public URL; next recommended re-check after 2026-06-23T06:01:28.759862+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 then.",
+        "Current unlock gate: Approve checked scheduled rows (blocked); 0 ready, 4 blocked/warning; see data/promo_unlock_sequence.json.",
+        "Review handoff preview health: 2 preview-clean, 3 missing input, 1 warning; see data/human_handoff_resolution_preview.json.",
+        "Preview clear approved backlog row: python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
+        "5 approved unpublished posts are past their scheduled time; repair executor/platform blockers or reschedule them."
       ]
     },
     {
@@ -400,8 +416,8 @@
       },
       "actual": {
         "required_failed": 0,
-        "optional_failed": 3,
-        "allowed_failures": 3
+        "optional_failed": 0,
+        "allowed_failures": 0
       }
     }
   ],

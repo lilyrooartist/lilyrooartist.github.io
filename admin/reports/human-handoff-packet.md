@@ -1,49 +1,42 @@
 # Human Handoff Packet - Lily Roo
 
-Generated: 2026-06-22T05:32:18.340239Z
+Generated: 2026-06-22T06:02:36.562970Z
 
 ## Summary
-- Open handoff tasks: **7**
-- Tod-owned tasks: **6**
+- Open handoff tasks: **10**
+- Tod-owned tasks: **9**
 - External/platform-gated tasks: **1**
-- High urgency tasks: **3**
+- High urgency tasks: **5**
 - Low urgency tasks: **2**
 
 ## Action Docket
 - Ready steps: **2**
 - Blocked steps: **2**
-- Manual posts packaged: **2**
+- Manual posts packaged: **3**
 - Manual metric fields: **6**
-- Resolution worksheet: `data/human_handoff_resolution_worksheet.csv` (7 row(s))
+- Resolution worksheet: `data/human_handoff_resolution_worksheet.csv` (10 row(s))
 
-- **Review checked approval batch** (`clear`)
-  - Owner: `tod`; tasks: **1**; blockers resolved: **2**
-  - Decision manifest: ready `FP-AUTO-258, FP-AUTO-261`; held `FP-AUTO-259`
-  - Review runbook: **5** step(s), **2** checklist row(s)
-  - Preview/check: `python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run`
-  - Apply after review: `python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin`
-  - Sequence preview: `python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run`
-  - Sequence apply_after_review: `python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin`
+- **Review checked approval batch** (`not_available`)
+  - Owner: `tod`; tasks: **0**; blockers resolved: **0**
+  - Review runbook: **0** step(s), **0** checklist row(s)
   - Sequence verify: `python3 scripts/refresh_promo_admin.py`
   - Completion evidence: data/scheduled_approval_packet.json should show fewer approval blockers, and data/social_scheduler_dry_run.json should no longer block the approved Instagram row on not_approved.
   - Next after apply: Run the safe admin refresh, then manually post/log any newly approved YouTube Community row before treating the published log as current.
-  - Guardrail: Use --checked-batch so only rows that passed review checks are approved.
-- **Review and post manual distribution rows** (`needs_review`)
-  - Owner: `tod`; tasks: **2**; blockers resolved: **2**
+  - Guardrail: Human review is still required; blocked review IDs stay excluded from the checked batch.
+- **Review and post manual distribution rows** (`ready_for_manual_post`)
+  - Owner: `tod`; tasks: **3**; blockers resolved: **3**
   - Ready IDs: `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY, FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY`
   - Blocked IDs: `FP-PLAN-TWELVE-DOLLARS-TIKTOK`
-  - Preview/check: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run`
-  - Apply after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin`
-  - Sequence preview: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run`
-  - Sequence apply_after_review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin`
   - Sequence verify: `python3 scripts/refresh_promo_admin.py`
   - Completion evidence: data/manual_distribution_packet.json should move approved rows from review_queue toward postable manual distribution, and data/published_log_reconciliation.json should remain gated until public URLs are logged.
   - Next after apply: Post each approved YouTube Community row manually, then log its public URL with scripts/log_manual_distribution.py.
   - Guardrail: Manual-only approvals do not auto-post; posting and public URL logging remain separate after review. Post manually first, then log only real public URLs.
 - **Repair blocked platform executor setup** (`blocked`)
-  - Owner: `tod`; tasks: **1**; blockers resolved: **1**
-  - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
-  - Sequence preview: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
+  - Owner: `tod`; tasks: **4**; blockers resolved: **1**
+  - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263`
+  - Apply after review: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
+  - Sequence preview: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263`
+  - Sequence apply_after_review: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
   - Sequence verify: `python3 scripts/refresh_promo_admin.py`
   - Completion evidence: data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_post_publicly before TikTok backlog work is allowed.
   - Next after apply: Recapture admin state and only then revisit TikTok approval or backlog reschedule rows.
@@ -63,31 +56,48 @@ Generated: 2026-06-22T05:32:18.340239Z
   - Next after apply: Rebuild the weekly report and confirm lilyroo.com/admin shows fewer pending manual metric fields.
   - Guardrail: Import only collected numeric values; leave unknown cells blank.
 - **Reschedule approved backlog after blockers clear** (`blocked`)
-  - Owner: `external_platform`; tasks: **1**; blockers resolved: **7**
-  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24`
-  - Sequence preview: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24`
+  - Owner: `external_platform`; tasks: **1**; blockers resolved: **4**
+  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24`
+  - Sequence preview: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24`
   - Sequence verify: `python3 scripts/refresh_promo_admin.py`
   - Completion evidence: data/backlog_reschedule_preview.json should show normal_apply_gate clear before any non-override apply command is exposed.
   - Next after apply: Refresh admin and confirm approved past-due posts have future scheduled_at values before relying on the scheduler.
   - Guardrail: Normal apply stays hidden until known executor/platform blockers clear.
 
 ## Tasks
-- **Review and approve checked scheduled batch** (`approve-checked-scheduled-batch`)
-  - Phase: `Approval`; owner: `tod`; status: `waiting_for_review`; urgency: `high`
-  - Detail: Review the checked rows, then apply the guarded batch command. Failed review rows stay excluded.
-  - Preview/check: `python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run`
-  - Apply after review: `python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin`
-  - Guardrail: Use --checked-batch so only rows that passed review checks are approved.
+- **Repair Instagram executor** (`platform-setup-FP-AUTO-263`)
+  - Phase: `Platform setup`; owner: `tod`; status: `failed`; urgency: `high`
+  - Detail: Reconnect the Instagram Business/Creator account to the Facebook Page or set IG_BUSINESS_ACCOUNT_ID, then push the worker secret and recapture readiness.
+  - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263`
+  - Apply after review: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
+  - Guardrail: Push worker secrets only after local OAuth/public posting setup is complete.
 - **Repair TikTok executor** (`platform-setup-FP-AUTO-264`)
   - Phase: `Platform setup`; owner: `tod`; status: `blocked`; urgency: `high`
   - Detail: Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok public posting approval is false. Local secret source is also missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Complete TikTok OAuth/public posting setup locally, then push secrets and refresh Admin.
   - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
   - Guardrail: Run the TikTok preflight before pushing secrets; push worker secrets only after local OAuth/public posting setup is complete.
+- **Repair Facebook executor** (`platform-setup-FP-AUTO-265`)
+  - Phase: `Platform setup`; owner: `tod`; status: `failed`; urgency: `high`
+  - Detail: Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.
+  - Preview/check: `python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run`
+  - Guardrail: Push worker secrets only after local OAuth/public posting setup is complete.
+- **Repair Instagram executor** (`platform-setup-FP-PLAN-TWELVE-DOLLARS-INSTAGRAM`)
+  - Phase: `Platform setup`; owner: `tod`; status: `failed`; urgency: `high`
+  - Detail: Reconnect the Instagram Business/Creator account to the Facebook Page or set IG_BUSINESS_ACCOUNT_ID, then push the worker secret and recapture readiness.
+  - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM`
+  - Apply after review: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
+  - Guardrail: Push worker secrets only after local OAuth/public posting setup is complete.
 - **Preview approved backlog reschedule** (`backlog-reschedule`)
   - Phase: `Backlog recovery`; owner: `external_platform`; status: `blocked`; urgency: `high`
   - Detail: Known executor/platform blockers must clear before normal apply.
-  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24`
+  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24`
   - Guardrail: Normal apply stays hidden until known executor/platform blockers clear.
+- **Post I Learned It All in Fifteen Seconds to YouTube Community** (`manual-distribution-FP-AUTO-261`)
+  - Phase: `Manual distribution`; owner: `tod`; status: `ready_for_manual_post`; urgency: `medium`
+  - Detail: Post manually in YouTube Studio Community, then log the real public URL before marking distribution complete.
+  - Preview/check: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL`
+  - asset: https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg
+  - Guardrail: Do not log a manual post until a real public URL exists.
 - **Post Analog Myth to YouTube Community** (`manual-distribution-FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY`)
   - Phase: `Manual distribution`; owner: `tod`; status: `waiting_for_review`; urgency: `medium`
   - Detail: Review the packaged copy, approve if appropriate, post manually, then log the public URL.
