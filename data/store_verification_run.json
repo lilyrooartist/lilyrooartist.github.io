@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "updated_at": "2026-06-22T09:26:06.477026Z",
+  "updated_at": "2026-06-22T09:29:46.712884Z",
   "source": "public-store-link-verification-run",
   "step_timeout_seconds": 25,
   "summary": {
@@ -18,7 +18,7 @@
       "command": "python3 scripts/search_spotify_release.py --artist Lily Roo --title Twelve Dollars --out data/store-verification/twelve-dollars/spotify_release_snapshot.json",
       "timeout_seconds": 25,
       "timed_out": false,
-      "duration_seconds": 1.59,
+      "duration_seconds": 2.5,
       "returncode": 1,
       "stdout": "{\n  \"ok\": false,\n  \"title\": \"\",\n  \"album_id\": \"\",\n  \"release_url\": \"\",\n  \"candidate_count\": 0,\n  \"output\": \"data/store-verification/twelve-dollars/spotify_release_snapshot.json\"\n}",
       "stderr": ""
@@ -27,7 +27,7 @@
       "command": "python3 scripts/capture_apple_music_release.py --artist Lily Roo --title Twelve Dollars --out data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
       "timeout_seconds": 25,
       "timed_out": false,
-      "duration_seconds": 0.11,
+      "duration_seconds": 0.2,
       "returncode": 1,
       "stdout": "{\n  \"ok\": false,\n  \"collection_name\": \"\",\n  \"collection_id\": null,\n  \"release_url\": \"\",\n  \"output\": \"data/store-verification/twelve-dollars/apple_music_release_snapshot.json\"\n}",
       "stderr": ""
@@ -36,7 +36,7 @@
       "command": "python3 scripts/capture_hyperfollow_store_links.py --url https://distrokid.com/hyperfollow/lilyroo/twelve-dollars --out data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
       "timeout_seconds": 25,
       "timed_out": false,
-      "duration_seconds": 0.2,
+      "duration_seconds": 0.91,
       "returncode": 1,
       "stdout": "{\n  \"ok\": false,\n  \"stores\": [],\n  \"amazon_music_available\": false,\n  \"output\": \"data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json\"\n}",
       "stderr": ""
@@ -45,7 +45,7 @@
       "command": "python3 scripts/search_spotify_release.py --artist Lily Roo --title Analog Myth --out data/store-verification/analog-myth/spotify_release_snapshot.json",
       "timeout_seconds": 25,
       "timed_out": false,
-      "duration_seconds": 0.39,
+      "duration_seconds": 3.36,
       "returncode": 1,
       "stdout": "{\n  \"ok\": false,\n  \"title\": \"\",\n  \"album_id\": \"\",\n  \"release_url\": \"\",\n  \"candidate_count\": 0,\n  \"output\": \"data/store-verification/analog-myth/spotify_release_snapshot.json\"\n}",
       "stderr": ""
@@ -54,7 +54,7 @@
       "command": "python3 scripts/capture_apple_music_release.py --artist Lily Roo --title Analog Myth --out data/store-verification/analog-myth/apple_music_release_snapshot.json",
       "timeout_seconds": 25,
       "timed_out": false,
-      "duration_seconds": 0.09,
+      "duration_seconds": 0.95,
       "returncode": 1,
       "stdout": "{\n  \"ok\": false,\n  \"collection_name\": \"\",\n  \"collection_id\": null,\n  \"release_url\": \"\",\n  \"output\": \"data/store-verification/analog-myth/apple_music_release_snapshot.json\"\n}",
       "stderr": ""
@@ -63,7 +63,7 @@
       "command": "python3 scripts/search_youtube_music_release.py --artist Lily Roo --title Analog Myth --out data/store-verification/analog-myth/youtube_music_release_snapshot.json",
       "timeout_seconds": 25,
       "timed_out": false,
-      "duration_seconds": 0.49,
+      "duration_seconds": 19.61,
       "returncode": 1,
       "stdout": "{\n  \"ok\": false,\n  \"release_url\": \"\",\n  \"public_title\": \"\",\n  \"title_matches_official\": false,\n  \"candidate_count\": 0,\n  \"output\": \"data/store-verification/analog-myth/youtube_music_release_snapshot.json\"\n}",
       "stderr": ""
@@ -72,7 +72,7 @@
       "command": "python3 scripts/capture_hyperfollow_store_links.py --url https://distrokid.com/hyperfollow/lilyroo/analog-myth --out data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
       "timeout_seconds": 25,
       "timed_out": false,
-      "duration_seconds": 0.19,
+      "duration_seconds": 0.63,
       "returncode": 1,
       "stdout": "{\n  \"ok\": false,\n  \"stores\": [],\n  \"amazon_music_available\": false,\n  \"output\": \"data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json\"\n}",
       "stderr": ""
@@ -83,7 +83,7 @@
       "timed_out": false,
       "duration_seconds": 0.1,
       "returncode": 0,
-      "stdout": "Wrote /home/runner/work/lilyrooartist.github.io/lilyrooartist.github.io/data/promo_engine_status.json with 3 releases",
+      "stdout": "Wrote /Users/tod.famous/Documents/New project/lilyrooartist.github.io/data/promo_engine_status.json with 3 releases",
       "stderr": ""
     }
   ]
