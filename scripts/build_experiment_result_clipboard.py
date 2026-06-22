@@ -275,7 +275,7 @@ def measurement_priority_cards(metric_cards: list[dict], missing_cards: list[dic
             ),
         })
     priority.sort(key=lambda item: (item["priority"], item["experiment_format"], item["platform"], item["post_id"]))
-    return priority[:8]
+    return priority[:12]
 
 
 def post_log_measurement_handoff(manual_posting: dict, summary: dict) -> dict:

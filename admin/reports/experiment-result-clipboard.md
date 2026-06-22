@@ -1,12 +1,12 @@
 # Experiment Result Clipboard - Lily Roo
 
-Generated: 2026-06-22T08:40:10.919897Z
+Generated: 2026-06-22T08:45:25.207309Z
 
 ## Summary
 - Status: **needs_values**
 - Metric cards: **3**
-- Missing public URLs: **6**
-- Measurement priorities: **8**
+- Missing public URLs: **13**
+- Measurement priorities: **12**
 - Post-log handoff rows: **3**
 - Pending result fields: **5**
 - Ready to import: **0**
@@ -76,13 +76,13 @@ Generated: 2026-06-22T08:40:10.919897Z
   - `subs_delta`: Open X analytics for https://x.com/i/web/status/2063600780834136468 and record subs_delta.
 
 ## Measurement Priorities
-- **Collect metrics** `FP-AUTO-260` Facebook / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 3 logged post(s), 1 missing URL(s) in this format.
+- **Collect metrics** `FP-AUTO-260` Facebook / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 3 logged post(s), 8 missing URL(s) in this format.
   - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
   - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
-- **Collect metrics** `FP-AUTO-257` X / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 3 logged post(s), 1 missing URL(s) in this format.
+- **Collect metrics** `FP-AUTO-257` X / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 3 logged post(s), 8 missing URL(s) in this format.
   - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-257 --source-row 16 --subs-delta VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
   - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-257 --source-row 16 --subs-delta VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
-- **Collect metrics** `FP-AUTO-262` X / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 3 logged post(s), 1 missing URL(s) in this format.
+- **Collect metrics** `FP-AUTO-262` X / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 3 logged post(s), 8 missing URL(s) in this format.
   - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-262 --source-row 17 --subs-delta VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
   - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-262 --source-row 17 --subs-delta VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
 - **Post and log public URL** `FP-AUTO-261` YouTube Community / YouTube Community archive/playlist CTA: Postable now in the Manual Posting Clipboard; publish it and log the public URL so metrics can start. 0 logged post(s), 3 missing URL(s) in this format.
@@ -100,8 +100,12 @@ Generated: 2026-06-22T08:40:10.919897Z
   - Community surface: https://www.youtube.com/@lilyroo.artist/community
   - Log preview after posting: `python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL`
   - Log apply after posting: `python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin`
-- **Clear platform blocker** `FP-AUTO-258` Instagram / Release-art image + story hook: Platform work is blocked; clear the platform repair gate before URL logging can produce metrics. 3 logged post(s), 1 missing URL(s) in this format.
-- **Clear platform blocker** `FP-AUTO-264` TikTok / Short video clip + platform-native CTA: Platform work is blocked; clear the platform repair gate before URL logging can produce metrics. 0 logged post(s), 2 missing URL(s) in this format.
+- **Log public URL** `FP-PLAN-TWELVE-DOLLARS-FACEBOOK` Facebook / Release-art image + story hook: Cannot collect metrics until the public URL is logged. 3 logged post(s), 8 missing URL(s) in this format.
+- **Log public URL** `FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK` Facebook / Release-art image + story hook: Cannot collect metrics until the public URL is logged. 3 logged post(s), 8 missing URL(s) in this format.
+- **Log public URL** `FP-PLAN-TWELVE-DOLLARS-X` X / Release-art image + story hook: Cannot collect metrics until the public URL is logged. 3 logged post(s), 8 missing URL(s) in this format.
+- **Log public URL** `FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK` X / Release-art image + story hook: Cannot collect metrics until the public URL is logged. 3 logged post(s), 8 missing URL(s) in this format.
+- **Clear platform blocker** `FP-AUTO-265` Facebook / Release-art image + story hook: Platform work is blocked; clear the platform repair gate before URL logging can produce metrics. 3 logged post(s), 8 missing URL(s) in this format.
+- **Clear platform blocker** `FP-AUTO-258` Instagram / Release-art image + story hook: Platform work is blocked; clear the platform repair gate before URL logging can produce metrics. 3 logged post(s), 8 missing URL(s) in this format.
 
 ## Post-Log Measurement Handoff
 - Status: **waiting_for_public_urls**
@@ -131,6 +135,13 @@ Generated: 2026-06-22T08:40:10.919897Z
 
 ## Missing Public URLs
 - `FP-AUTO-258` Instagram / Release-art image + story hook: Publish or log the public URL before result metrics can be collected.
+- `FP-AUTO-263` Instagram / Release-art image + story hook: Publish or log the public URL before result metrics can be collected.
+- `FP-AUTO-265` Facebook / Release-art image + story hook: Publish or log the public URL before result metrics can be collected.
+- `FP-PLAN-TWELVE-DOLLARS-X` X / Release-art image + story hook: Publish or log the public URL before result metrics can be collected.
+- `FP-PLAN-TWELVE-DOLLARS-INSTAGRAM` Instagram / Release-art image + story hook: Publish or log the public URL before result metrics can be collected.
+- `FP-PLAN-TWELVE-DOLLARS-FACEBOOK` Facebook / Release-art image + story hook: Publish or log the public URL before result metrics can be collected.
+- `FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK` X / Release-art image + story hook: Publish or log the public URL before result metrics can be collected.
+- `FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK` Facebook / Release-art image + story hook: Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-261` YouTube Community / YouTube Community archive/playlist CTA: Publish or log the public URL before result metrics can be collected.
 - `FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY` YouTube Community / YouTube Community archive/playlist CTA: Publish or log the public URL before result metrics can be collected.
 - `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY` YouTube Community / YouTube Community archive/playlist CTA: Publish or log the public URL before result metrics can be collected.

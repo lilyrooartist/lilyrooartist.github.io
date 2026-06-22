@@ -1,11 +1,11 @@
 # Experiment Result Collection - Lily Roo
 
-Generated: 2026-06-22T08:40:10.885052Z
+Generated: 2026-06-22T08:44:45.297291Z
 
 ## Summary
 - Experiment count: **3**
 - Published experiment posts: **3**
-- Missing published log posts: **6**
+- Missing published log posts: **13**
 - Pending result fields: **5**
 - Ready to import: **0**
 - Entry CSV: `data/experiment_result_entry_template.csv`
@@ -25,6 +25,13 @@ Generated: 2026-06-22T08:40:10.885052Z
 
 ## Missing Published Log Rows
 - `FP-AUTO-258` (Release-art image + story hook): Publish or log the public URL before result metrics can be collected.
+- `FP-AUTO-263` (Release-art image + story hook): Publish or log the public URL before result metrics can be collected.
+- `FP-AUTO-265` (Release-art image + story hook): Publish or log the public URL before result metrics can be collected.
+- `FP-PLAN-TWELVE-DOLLARS-X` (Release-art image + story hook): Publish or log the public URL before result metrics can be collected.
+- `FP-PLAN-TWELVE-DOLLARS-INSTAGRAM` (Release-art image + story hook): Publish or log the public URL before result metrics can be collected.
+- `FP-PLAN-TWELVE-DOLLARS-FACEBOOK` (Release-art image + story hook): Publish or log the public URL before result metrics can be collected.
+- `FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK` (Release-art image + story hook): Publish or log the public URL before result metrics can be collected.
+- `FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK` (Release-art image + story hook): Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-261` (YouTube Community archive/playlist CTA): Publish or log the public URL before result metrics can be collected.
 - `FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY` (YouTube Community archive/playlist CTA): Publish or log the public URL before result metrics can be collected.
 - `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY` (YouTube Community archive/playlist CTA): Publish or log the public URL before result metrics can be collected.

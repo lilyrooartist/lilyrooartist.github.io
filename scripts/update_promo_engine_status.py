@@ -53,6 +53,7 @@ GROWTH_GOAL_DAYS = 30
 GROWTH_GOAL_LIFT = 0.25
 FORMAT_WINNER_COUNT = 3
 MIN_MEASURED_POSTS_PER_WINNING_FORMAT = 2
+MAX_EXPERIMENT_ASSETS_PER_FORMAT = 16
 STORE_RECHECK_INTERVAL_HOURS = 24
 STORE_SERVICES = [
     ("Spotify", "spotify_url"),
@@ -925,7 +926,7 @@ def active_format_experiments(scheduled_rows: list[dict], promo_plan: dict, now:
                 blocker = "manual approval"
                 if blocker not in experiment["known_blockers"]:
                     experiment["known_blockers"].append(blocker)
-        if len(experiment["assets"]) < 4:
+        if len(experiment["assets"]) < MAX_EXPERIMENT_ASSETS_PER_FORMAT:
             experiment["assets"].append(experiment_asset(row))
         experiment["tracking_fields"] = sorted(set(experiment["tracking_fields"]) | set(tracking_fields_for_platform(platform)))
 
