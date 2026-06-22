@@ -2555,6 +2555,9 @@ def validate_generated_outputs(failures):
             and all(candidate.get("minimum_measured_posts") == 2 for candidate in top_candidates)
             and all(candidate.get("evidence_status") in {"needs_result_metrics", "partially_measured", "winner_ready"} for candidate in top_candidates)
             and all("needed_measured_posts" in candidate and "decision_note" in candidate and "unmeasured_published_count" in candidate and "mapped_active_post_ids" in candidate for candidate in top_candidates)
+            and all((candidate.get("decision_unblock") or {}).get("next_action") and "measurement_ready_count" in (candidate.get("decision_unblock") or {}) and "post_and_log_count" in (candidate.get("decision_unblock") or {}) and "blocked_count" in (candidate.get("decision_unblock") or {}) and (candidate.get("decision_unblock") or {}).get("report_path") for candidate in top_candidates)
+            and any((candidate.get("decision_unblock") or {}).get("measurement_ready_count") for candidate in top_candidates)
+            and any((candidate.get("decision_unblock") or {}).get("post_and_log_count") for candidate in top_candidates)
             and winner_readiness.get("winner_count_target") == 3
             and winner_readiness.get("minimum_measured_posts_per_format") == 2
             and winner_readiness.get("status") in {"needs_more_result_evidence", "ready_to_name_winners"}
@@ -4045,7 +4048,7 @@ def validate_admin_execution_feedback(failures):
         "experiment result clipboard shown": "renderExperimentResultClipboard" in text and "experiment_result_clipboard.json" in text and "Experiment result clipboard" in text,
         "experiment result cards actionable": "Open result clipboard report" in text and "Entry CSV:" in text and "Wide entry CSV:" in text and "result_import_preview_command" in text and "Copy metric preview" in text and "data-result-command" in text and "result-evidence-input" in text and "Measure first" in text and "Post now" in text and "Blocked" in text and "measurement_priority_cards" in text and "Post-log measurement handoff" in text and "Post-log measurement" in text and "Open manual paste file" in text and "log_manual_distribution.py" in text,
         "experiment result source embedded": "embedded-experiment-result-clipboard" in text and "embedded-experiment-result-clipboard-report" in text,
-        "format candidate evidence gaps shown": "Top format candidates" in text and "published unmeasured" in text and "format_winner_readiness" in text and "Metric confidence" in text,
+        "format candidate evidence gaps shown": "Top format candidates" in text and "published unmeasured" in text and "format_winner_readiness" in text and "Metric confidence" in text and "Next evidence action:" in text and "measure-ready" in text and "post+log" in text,
     }
     missing_platform = [label for label, present in platform_checks.items() if not present]
     if missing_platform:

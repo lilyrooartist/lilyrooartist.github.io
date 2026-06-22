@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T08:06:54.542121+00:00",
+  "generated_at": "2026-06-22T08:09:16.789725+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -74,7 +74,28 @@
           "evidence_status": "needs_result_metrics",
           "average_result_per_measured_post": 0,
           "decision_note": "Need 2 more measured post(s) before this can be called a winning format; 3 published post(s) in this format still need result metrics.",
-          "score": 27
+          "score": 27,
+          "decision_unblock": {
+            "status": "needs_evidence",
+            "next_action": "Collect result metrics for logged posts.",
+            "first_action": "collect_metrics",
+            "first_post_id": "FP-AUTO-260",
+            "first_platform": "Facebook",
+            "measurement_ready_count": 3,
+            "post_and_log_count": 0,
+            "log_url_count": 0,
+            "blocked_count": 1,
+            "post_log_handoff_count": 0,
+            "candidate_post_ids": [
+              "FP-AUTO-260",
+              "FP-AUTO-257",
+              "FP-AUTO-262",
+              "FP-AUTO-258"
+            ],
+            "preview_command": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run",
+            "apply_command": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin",
+            "report_path": "admin/reports/experiment-result-clipboard.md"
+          }
         },
         {
           "format": "YouTube Community archive/playlist CTA",
@@ -99,7 +120,29 @@
           "evidence_status": "needs_result_metrics",
           "average_result_per_measured_post": 0,
           "decision_note": "Need 2 more measured post(s) before this can be called a winning format; 0 published post(s) in this format still need result metrics.",
-          "score": 6
+          "score": 6,
+          "decision_unblock": {
+            "status": "needs_evidence",
+            "next_action": "Publish manual posts and log real public URLs.",
+            "first_action": "post_and_log_public_url",
+            "first_post_id": "FP-AUTO-261",
+            "first_platform": "YouTube Community",
+            "measurement_ready_count": 0,
+            "post_and_log_count": 3,
+            "log_url_count": 0,
+            "blocked_count": 0,
+            "post_log_handoff_count": 3,
+            "candidate_post_ids": [
+              "FP-AUTO-261",
+              "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+              "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
+            ],
+            "preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL",
+            "apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL --apply --refresh-admin",
+            "report_path": "admin/reports/manual-posting-clipboard.md",
+            "handoff_report": "admin/reports/experiment-result-clipboard.md",
+            "handoff_note": "Post-log measurement rows are prebuilt once public URLs are logged."
+          }
         },
         {
           "format": "Short video clip + platform-native CTA",
@@ -124,7 +167,25 @@
           "evidence_status": "needs_result_metrics",
           "average_result_per_measured_post": 0,
           "decision_note": "Need 2 more measured post(s) before this can be called a winning format; 0 published post(s) in this format still need result metrics.",
-          "score": 5
+          "score": 5,
+          "decision_unblock": {
+            "status": "needs_evidence",
+            "next_action": "Clear platform blocker before this format can produce evidence.",
+            "first_action": "clear_platform_blocker",
+            "first_post_id": "FP-AUTO-264",
+            "first_platform": "TikTok",
+            "measurement_ready_count": 0,
+            "post_and_log_count": 0,
+            "log_url_count": 0,
+            "blocked_count": 1,
+            "post_log_handoff_count": 0,
+            "candidate_post_ids": [
+              "FP-AUTO-264"
+            ],
+            "preview_command": "",
+            "apply_command": "",
+            "report_path": "admin/reports/experiment-result-clipboard.md"
+          }
         }
       ],
       "format_winner_readiness": {
@@ -2209,11 +2270,11 @@
       "commits_snapshots": true,
       "safe_refresh_command": "python3 scripts/refresh_promo_admin.py",
       "source_revision": {
-        "commit": "121f92d3de74ea248bc984351cf7e29b7af58755",
-        "short_commit": "121f92d",
+        "commit": "30b61e4d8a9dc6398f7d41733b5f50fda49b020e",
+        "short_commit": "30b61e4",
         "branch": "main",
-        "committed_at": "2026-06-22T08:06:32Z",
-        "source_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/commit/121f92d3de74ea248bc984351cf7e29b7af58755"
+        "committed_at": "2026-06-22T16:07:05+08:00",
+        "source_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/commit/30b61e4d8a9dc6398f7d41733b5f50fda49b020e"
       },
       "latest_run_covers_source_commit": true,
       "latest_run_coverage_basis": "generated_refresh_outputs_only",
@@ -2263,10 +2324,10 @@
       "action_needed": "",
       "workflow_status_available": true,
       "workflow_status_ok": true,
-      "latest_run_status": "in_progress",
-      "latest_run_conclusion": "",
+      "latest_run_status": "completed",
+      "latest_run_conclusion": "success",
       "latest_run_head_sha": "ec6df334b79724ad126053aa4ee7099cb79a321d",
-      "latest_run_updated_at": "2026-06-22T08:06:16Z",
+      "latest_run_updated_at": "2026-06-22T08:06:39Z",
       "latest_run_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/27938476821",
       "workflow_status_action_needed": ""
     },
@@ -6183,7 +6244,7 @@
       "missing": 0,
       "checked_no_change": 1,
       "gated_manual_pending": 0,
-      "checked_at": "2026-06-22T08:06:54.542121+00:00"
+      "checked_at": "2026-06-22T08:09:16.789725+00:00"
     },
     "sources": [
       {
@@ -6194,7 +6255,7 @@
         "max_age_hours": 72,
         "timestamp": "2026-06-17T09:25:00+00:00",
         "refresh_command": "Store checks are current; update data/distrokid_release_status.json when a verified public URL appears.",
-        "checked_at": "2026-06-22T08:06:54.542121+00:00",
+        "checked_at": "2026-06-22T08:09:16.789725+00:00",
         "checked_age_hours": 0.0,
         "evidence": "7 pending store links checked; no new public URLs found."
       },
@@ -6238,7 +6299,7 @@
         "name": "manual_metrics",
         "path": "data/manual_social_stats.json",
         "status": "fresh",
-        "age_hours": 49.2,
+        "age_hours": 49.3,
         "max_age_hours": 72,
         "timestamp": "2026-06-20T06:52:36.456413+00:00",
         "refresh_command": "Update data/manual_social_stats.json with latest manual metrics."
@@ -6276,7 +6337,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-22T08:06:54.542121+00:00",
+        "timestamp": "2026-06-22T08:09:16.789725+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin"
       },
       {
@@ -6312,7 +6373,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-22T08:06:29.179361+00:00",
+        "timestamp": "2026-06-22T08:06:55.083070+00:00",
         "refresh_command": "python3 scripts/capture_github_workflow_status.py && python3 scripts/update_promo_engine_status.py"
       }
     ],

@@ -760,6 +760,61 @@ def format_winner_readiness(candidates: list[dict], result_collection: dict) -> 
     }
 
 
+def enrich_format_decision_paths(candidates: list[dict], result_clipboard: dict) -> list[dict]:
+    priorities = result_clipboard.get("measurement_priority_cards") or []
+    handoff = result_clipboard.get("post_log_measurement_handoff") or {}
+    handoff_ids = set(handoff.get("pending_post_ids") or [])
+    by_format: dict[str, list[dict]] = {}
+    for item in priorities:
+        fmt = item.get("experiment_format") or "Unknown format"
+        by_format.setdefault(fmt, []).append(item)
+    enriched = []
+    for candidate in candidates:
+        item = dict(candidate)
+        fmt = item.get("format") or "Unknown format"
+        format_priorities = by_format.get(fmt, [])
+        collect = [row for row in format_priorities if row.get("action") == "collect_metrics"]
+        post_and_log = [row for row in format_priorities if row.get("action") == "post_and_log_public_url"]
+        log_url = [row for row in format_priorities if row.get("action") == "log_public_url"]
+        blocked = [row for row in format_priorities if row.get("action") == "clear_platform_blocker"]
+        first = next(iter(collect or post_and_log or log_url or blocked), {})
+        if collect:
+            next_action = "Collect result metrics for logged posts."
+        elif post_and_log:
+            next_action = "Publish manual posts and log real public URLs."
+        elif log_url:
+            next_action = "Log public URLs for already-published posts."
+        elif blocked:
+            next_action = "Clear platform blocker before this format can produce evidence."
+        else:
+            next_action = "Keep publishing and refresh result collection."
+        item["decision_unblock"] = {
+            "status": "winner_ready" if item.get("evidence_status") == "winner_ready" else "needs_evidence",
+            "next_action": next_action,
+            "first_action": first.get("action") or "",
+            "first_post_id": first.get("post_id") or "",
+            "first_platform": first.get("platform") or "",
+            "measurement_ready_count": len(collect),
+            "post_and_log_count": len(post_and_log),
+            "log_url_count": len(log_url),
+            "blocked_count": len(blocked),
+            "post_log_handoff_count": len([row for row in post_and_log if row.get("post_id") in handoff_ids]),
+            "candidate_post_ids": [row.get("post_id") for row in format_priorities if row.get("post_id")],
+            "preview_command": first.get("direct_preview_command_template") or first.get("log_preview_command") or "",
+            "apply_command": first.get("direct_apply_command_template") or first.get("log_apply_command") or "",
+            "report_path": (
+                "admin/reports/experiment-result-clipboard.md"
+                if collect or log_url or blocked
+                else first.get("manual_posting_report") or "admin/reports/experiment-result-clipboard.md"
+            ),
+        }
+        if item["decision_unblock"]["post_log_handoff_count"]:
+            item["decision_unblock"]["handoff_report"] = "admin/reports/experiment-result-clipboard.md"
+            item["decision_unblock"]["handoff_note"] = "Post-log measurement rows are prebuilt once public URLs are logged."
+        enriched.append(item)
+    return enriched
+
+
 def metric_confidence_state(metrics: dict, freshness: dict) -> dict:
     summary = freshness.get("summary") or {}
     pending_manual = metrics.get("pending_manual_fields") or []
@@ -910,7 +965,7 @@ def active_format_experiments(scheduled_rows: list[dict], promo_plan: dict, now:
     return ranked[:3]
 
 
-def growth_goal_state(metrics_history: dict, published_rows: list[dict], scheduled_rows: list[dict], promo_plan: dict, now: datetime, result_collection: dict | None = None, metric_confidence: dict | None = None) -> dict:
+def growth_goal_state(metrics_history: dict, published_rows: list[dict], scheduled_rows: list[dict], promo_plan: dict, now: datetime, result_collection: dict | None = None, result_clipboard: dict | None = None, metric_confidence: dict | None = None) -> dict:
     snapshots = metrics_history.get("snapshots") if isinstance(metrics_history, dict) else []
     snapshots = snapshots or []
     latest = snapshots[-1] if snapshots else {}
@@ -945,7 +1000,10 @@ def growth_goal_state(metrics_history: dict, published_rows: list[dict], schedul
     else:
         status = "in_progress"
         action_needed = "Publish or approve the next platform-native rows, then refresh manual/public metrics to rank formats by results."
-    candidates = top_format_candidates(published_rows, scheduled_rows, promo_plan)
+    candidates = enrich_format_decision_paths(
+        top_format_candidates(published_rows, scheduled_rows, promo_plan),
+        result_clipboard or {},
+    )
     return {
         "primary": "Grow total plays/views by 25% in 30 days",
         "goal_start_date": GROWTH_GOAL_START_DATE,
@@ -2309,7 +2367,7 @@ def build_status():
     monetization = monetization_state(live, history, metrics_history, promo_plan, future_posts, execution_state, now)
     freshness = source_freshness(release_status, manual, live, metrics_history, executor_readiness, store_history, social_executions, social_scheduler_dry_run, promo_refresh_run, promo_refresh_workflow_status, promo_plan, future_posts, manual_distribution, now)
     metric_confidence = metric_confidence_state(metrics, freshness)
-    growth_goal = growth_goal_state(metrics_history, published_rows, scheduled_rows, promo_plan, now, experiment_result_collection, metric_confidence)
+    growth_goal = growth_goal_state(metrics_history, published_rows, scheduled_rows, promo_plan, now, experiment_result_collection, experiment_result_clipboard, metric_confidence)
 
     releases = []
     all_actions = []
