@@ -9214,7 +9214,7 @@ Generated: 2026-06-22T07:51:46.204814Z
 
 <script type="text/plain" id="embedded-manual-metric-collection"># Manual Metric Collection - Lily Roo
 
-Generated: 2026-06-22T07:51:47.041241Z
+Generated: 2026-06-22T07:56:01.911213Z
 
 Pending fields: **6**
 
@@ -9259,6 +9259,98 @@ You can still run a platform update command directly if you only collect one pla
 - Apply worksheet import after review: `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
 - Preview short entry import: `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run`
 - Apply short entry import after review: `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin`
+
+## Source Collection Bundles
+
+Use these bundles when collecting values from one analytics surface at a time.
+
+### facebook - Meta Business Suite > Insights
+- Status: `needs_values`; waiting: **1**; ready: **0**
+- Open: https://www.facebook.com/903693509504290
+- Entry CSV: `data/manual_metric_entry_template.csv`
+- Preview: `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run`
+- Apply after review: `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin`
+- Evidence note template: `Meta Business Suite > Insights 2026-06-22`
+- Collection sequence:
+  - Open https://www.facebook.com/903693509504290.
+  - Collect the listed metric fields from the named analytics surface.
+  - Enter each value in data/manual_metric_entry_template.csv and add a short evidence_note.
+  - Preview with `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run`.
+  - Apply with `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin` only after the preview matches the collected values.
+- Row `2` `facebook.reach_7d` current `pending` -> `nonnegative_integer e.g. 123`
+  - Enter reach for the last 7 days.
+  - Evidence: Use the last-7-days reach value from Meta insights.
+
+### instagram - Instagram Professional Dashboard > Insights
+- Status: `needs_values`; waiting: **1**; ready: **0**
+- Open: https://www.instagram.com/lilyroo.artist/
+- Entry CSV: `data/manual_metric_entry_template.csv`
+- Preview: `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run`
+- Apply after review: `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin`
+- Evidence note template: `Instagram Professional Dashboard > Insights 2026-06-22`
+- Collection sequence:
+  - Open https://www.instagram.com/lilyroo.artist/.
+  - Collect the listed metric fields from the named analytics surface.
+  - Enter each value in data/manual_metric_entry_template.csv and add a short evidence_note.
+  - Preview with `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run`.
+  - Apply with `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin` only after the preview matches the collected values.
+- Row `3` `instagram.profile_visits_7d` current `pending` -> `nonnegative_integer e.g. 12`
+  - Enter profile visits for the last 7 days.
+  - Evidence: Use the last-7-days profile visits value from the professional dashboard.
+
+### spotify - Spotify for Artists > Music/Stats export
+- Status: `needs_values`; waiting: **2**; ready: **0**
+- Open: https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a
+- Entry CSV: `data/manual_metric_entry_template.csv`
+- Preview: `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run`
+- Apply after review: `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin`
+- Evidence note template: `Spotify for Artists > Music/Stats export 2026-06-22`
+- Collection sequence:
+  - Open https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a.
+  - Collect the listed metric fields from the named analytics surface.
+  - Enter each value in data/manual_metric_entry_template.csv and add a short evidence_note.
+  - Preview with `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run`.
+  - Apply with `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin` only after the preview matches the collected values.
+- Row `4` `spotify.release_streams` current `pending` -> `nonnegative_integer e.g. 1234`
+  - Enter lifetime streams for the promoted release.
+  - Evidence: Use lifetime streams for the promoted release from Spotify for Artists.
+- Row `5` `spotify.saves` current `pending` -> `nonnegative_integer e.g. 12`
+  - Enter lifetime saves for the promoted release.
+  - Evidence: Use lifetime saves for the promoted release from Spotify for Artists.
+
+### tiktok - TikTok Studio or Creator Center analytics
+- Status: `needs_values`; waiting: **1**; ready: **0**
+- Open: https://www.tiktok.com/@lilyroo930
+- Entry CSV: `data/manual_metric_entry_template.csv`
+- Preview: `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run`
+- Apply after review: `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin`
+- Evidence note template: `TikTok Studio or Creator Center analytics 2026-06-22`
+- Collection sequence:
+  - Open https://www.tiktok.com/@lilyroo930.
+  - Collect the listed metric fields from the named analytics surface.
+  - Enter each value in data/manual_metric_entry_template.csv and add a short evidence_note.
+  - Preview with `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run`.
+  - Apply with `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin` only after the preview matches the collected values.
+- Row `6` `tiktok.profile_views_7d` current `pending` -> `nonnegative_integer e.g. 12`
+  - Enter profile views for the last 7 days.
+  - Evidence: Use the last-7-days profile views value from TikTok analytics.
+
+### x - X Analytics or account profile metrics
+- Status: `needs_values`; waiting: **1**; ready: **0**
+- Open: https://x.com/lilyrooartist
+- Entry CSV: `data/manual_metric_entry_template.csv`
+- Preview: `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run`
+- Apply after review: `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin`
+- Evidence note template: `X Analytics or account profile metrics 2026-06-22`
+- Collection sequence:
+  - Open https://x.com/lilyrooartist.
+  - Collect the listed metric fields from the named analytics surface.
+  - Enter each value in data/manual_metric_entry_template.csv and add a short evidence_note.
+  - Preview with `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run`.
+  - Apply with `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin` only after the preview matches the collected values.
+- Row `7` `x.impressions_7d` current `pending` -> `nonnegative_integer e.g. 123`
+  - Enter impressions for the last 7 days.
+  - Evidence: Use the last-7-days impressions value from X analytics.
 
 ### Priority 2: Recent discovery and traffic
 - Status: `needs_values`; waiting: **4**; ready: **0**
@@ -11269,7 +11361,7 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
 
 
 <script type="application/json" id="embedded-manual-metric-collection-packet">{
-  "generated_at": "2026-06-22T07:51:47.041241Z",
+  "generated_at": "2026-06-22T07:56:01.911213Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -11289,6 +11381,8 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
     "preserved_new_value_count": 0,
     "platform_count": 5,
     "priority_batch_count": 2,
+    "source_collection_bundle_count": 5,
+    "source_collection_bundle_field_count": 6,
     "public_profile_field_count": 0,
     "private_analytics_field_count": 6,
     "csv_path": "data/manual_metric_collection_template.csv",
@@ -11692,6 +11786,277 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
       "Keep metric values nonnegative and source them from the linked platform analytics surfaces."
     ]
   },
+  "source_collection_bundles": [
+    {
+      "platform": "facebook",
+      "source_hint": "Meta Business Suite > Insights",
+      "collection_url": "https://www.facebook.com/903693509504290",
+      "status": "needs_values",
+      "access_level": "private_analytics",
+      "metric_categories": [
+        "Recent discovery and traffic"
+      ],
+      "field_count": 1,
+      "waiting_count": 1,
+      "ready_to_import_count": 0,
+      "csv_rows": [
+        2
+      ],
+      "fields": [
+        {
+          "platform": "facebook",
+          "field": "reach_7d",
+          "csv_row": 2,
+          "current_value": "pending",
+          "new_value": "",
+          "ready_to_import": false,
+          "value_type": "nonnegative_integer",
+          "example_value": "123",
+          "metric_category": "Recent discovery and traffic",
+          "access_level": "private_analytics",
+          "collection_instruction": "Enter reach for the last 7 days.",
+          "evidence_hint": "Use the last-7-days reach value from Meta insights.",
+          "evidence_note": "",
+          "update_assignment": "facebook.reach_7d=VALUE",
+          "import_effect": "update data/manual_social_stats.json facebook.reach_7d from 'pending' to the filled new_value"
+        }
+      ],
+      "update_assignments": [
+        "facebook.reach_7d=VALUE"
+      ],
+      "worksheet_csv_path": "data/manual_metric_collection_template.csv",
+      "entry_csv_path": "data/manual_metric_entry_template.csv",
+      "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run",
+      "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin",
+      "evidence_note_template": "Meta Business Suite > Insights 2026-06-22",
+      "collection_sequence": [
+        "Open https://www.facebook.com/903693509504290.",
+        "Collect the listed metric fields from the named analytics surface.",
+        "Enter each value in data/manual_metric_entry_template.csv and add a short evidence_note.",
+        "Preview with `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run`.",
+        "Apply with `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin` only after the preview matches the collected values."
+      ]
+    },
+    {
+      "platform": "instagram",
+      "source_hint": "Instagram Professional Dashboard > Insights",
+      "collection_url": "https://www.instagram.com/lilyroo.artist/",
+      "status": "needs_values",
+      "access_level": "private_analytics",
+      "metric_categories": [
+        "Recent discovery and traffic"
+      ],
+      "field_count": 1,
+      "waiting_count": 1,
+      "ready_to_import_count": 0,
+      "csv_rows": [
+        3
+      ],
+      "fields": [
+        {
+          "platform": "instagram",
+          "field": "profile_visits_7d",
+          "csv_row": 3,
+          "current_value": "pending",
+          "new_value": "",
+          "ready_to_import": false,
+          "value_type": "nonnegative_integer",
+          "example_value": "12",
+          "metric_category": "Recent discovery and traffic",
+          "access_level": "private_analytics",
+          "collection_instruction": "Enter profile visits for the last 7 days.",
+          "evidence_hint": "Use the last-7-days profile visits value from the professional dashboard.",
+          "evidence_note": "",
+          "update_assignment": "instagram.profile_visits_7d=VALUE",
+          "import_effect": "update data/manual_social_stats.json instagram.profile_visits_7d from 'pending' to the filled new_value"
+        }
+      ],
+      "update_assignments": [
+        "instagram.profile_visits_7d=VALUE"
+      ],
+      "worksheet_csv_path": "data/manual_metric_collection_template.csv",
+      "entry_csv_path": "data/manual_metric_entry_template.csv",
+      "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run",
+      "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin",
+      "evidence_note_template": "Instagram Professional Dashboard > Insights 2026-06-22",
+      "collection_sequence": [
+        "Open https://www.instagram.com/lilyroo.artist/.",
+        "Collect the listed metric fields from the named analytics surface.",
+        "Enter each value in data/manual_metric_entry_template.csv and add a short evidence_note.",
+        "Preview with `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run`.",
+        "Apply with `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin` only after the preview matches the collected values."
+      ]
+    },
+    {
+      "platform": "spotify",
+      "source_hint": "Spotify for Artists > Music/Stats export",
+      "collection_url": "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a",
+      "status": "needs_values",
+      "access_level": "private_analytics",
+      "metric_categories": [
+        "Release depth metrics"
+      ],
+      "field_count": 2,
+      "waiting_count": 2,
+      "ready_to_import_count": 0,
+      "csv_rows": [
+        4,
+        5
+      ],
+      "fields": [
+        {
+          "platform": "spotify",
+          "field": "release_streams",
+          "csv_row": 4,
+          "current_value": "pending",
+          "new_value": "",
+          "ready_to_import": false,
+          "value_type": "nonnegative_integer",
+          "example_value": "1234",
+          "metric_category": "Release depth metrics",
+          "access_level": "private_analytics",
+          "collection_instruction": "Enter lifetime streams for the promoted release.",
+          "evidence_hint": "Use lifetime streams for the promoted release from Spotify for Artists.",
+          "evidence_note": "",
+          "update_assignment": "spotify.release_streams=VALUE",
+          "import_effect": "update data/manual_social_stats.json spotify.release_streams from 'pending' to the filled new_value"
+        },
+        {
+          "platform": "spotify",
+          "field": "saves",
+          "csv_row": 5,
+          "current_value": "pending",
+          "new_value": "",
+          "ready_to_import": false,
+          "value_type": "nonnegative_integer",
+          "example_value": "12",
+          "metric_category": "Release depth metrics",
+          "access_level": "private_analytics",
+          "collection_instruction": "Enter lifetime saves for the promoted release.",
+          "evidence_hint": "Use lifetime saves for the promoted release from Spotify for Artists.",
+          "evidence_note": "",
+          "update_assignment": "spotify.saves=VALUE",
+          "import_effect": "update data/manual_social_stats.json spotify.saves from 'pending' to the filled new_value"
+        }
+      ],
+      "update_assignments": [
+        "spotify.release_streams=VALUE",
+        "spotify.saves=VALUE"
+      ],
+      "worksheet_csv_path": "data/manual_metric_collection_template.csv",
+      "entry_csv_path": "data/manual_metric_entry_template.csv",
+      "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run",
+      "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin",
+      "evidence_note_template": "Spotify for Artists > Music/Stats export 2026-06-22",
+      "collection_sequence": [
+        "Open https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a.",
+        "Collect the listed metric fields from the named analytics surface.",
+        "Enter each value in data/manual_metric_entry_template.csv and add a short evidence_note.",
+        "Preview with `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run`.",
+        "Apply with `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin` only after the preview matches the collected values."
+      ]
+    },
+    {
+      "platform": "tiktok",
+      "source_hint": "TikTok Studio or Creator Center analytics",
+      "collection_url": "https://www.tiktok.com/@lilyroo930",
+      "status": "needs_values",
+      "access_level": "private_analytics",
+      "metric_categories": [
+        "Recent discovery and traffic"
+      ],
+      "field_count": 1,
+      "waiting_count": 1,
+      "ready_to_import_count": 0,
+      "csv_rows": [
+        6
+      ],
+      "fields": [
+        {
+          "platform": "tiktok",
+          "field": "profile_views_7d",
+          "csv_row": 6,
+          "current_value": "pending",
+          "new_value": "",
+          "ready_to_import": false,
+          "value_type": "nonnegative_integer",
+          "example_value": "12",
+          "metric_category": "Recent discovery and traffic",
+          "access_level": "private_analytics",
+          "collection_instruction": "Enter profile views for the last 7 days.",
+          "evidence_hint": "Use the last-7-days profile views value from TikTok analytics.",
+          "evidence_note": "",
+          "update_assignment": "tiktok.profile_views_7d=VALUE",
+          "import_effect": "update data/manual_social_stats.json tiktok.profile_views_7d from 'pending' to the filled new_value"
+        }
+      ],
+      "update_assignments": [
+        "tiktok.profile_views_7d=VALUE"
+      ],
+      "worksheet_csv_path": "data/manual_metric_collection_template.csv",
+      "entry_csv_path": "data/manual_metric_entry_template.csv",
+      "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run",
+      "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin",
+      "evidence_note_template": "TikTok Studio or Creator Center analytics 2026-06-22",
+      "collection_sequence": [
+        "Open https://www.tiktok.com/@lilyroo930.",
+        "Collect the listed metric fields from the named analytics surface.",
+        "Enter each value in data/manual_metric_entry_template.csv and add a short evidence_note.",
+        "Preview with `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run`.",
+        "Apply with `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin` only after the preview matches the collected values."
+      ]
+    },
+    {
+      "platform": "x",
+      "source_hint": "X Analytics or account profile metrics",
+      "collection_url": "https://x.com/lilyrooartist",
+      "status": "needs_values",
+      "access_level": "private_analytics",
+      "metric_categories": [
+        "Recent discovery and traffic"
+      ],
+      "field_count": 1,
+      "waiting_count": 1,
+      "ready_to_import_count": 0,
+      "csv_rows": [
+        7
+      ],
+      "fields": [
+        {
+          "platform": "x",
+          "field": "impressions_7d",
+          "csv_row": 7,
+          "current_value": "pending",
+          "new_value": "",
+          "ready_to_import": false,
+          "value_type": "nonnegative_integer",
+          "example_value": "123",
+          "metric_category": "Recent discovery and traffic",
+          "access_level": "private_analytics",
+          "collection_instruction": "Enter impressions for the last 7 days.",
+          "evidence_hint": "Use the last-7-days impressions value from X analytics.",
+          "evidence_note": "",
+          "update_assignment": "x.impressions_7d=VALUE",
+          "import_effect": "update data/manual_social_stats.json x.impressions_7d from 'pending' to the filled new_value"
+        }
+      ],
+      "update_assignments": [
+        "x.impressions_7d=VALUE"
+      ],
+      "worksheet_csv_path": "data/manual_metric_collection_template.csv",
+      "entry_csv_path": "data/manual_metric_entry_template.csv",
+      "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run",
+      "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin",
+      "evidence_note_template": "X Analytics or account profile metrics 2026-06-22",
+      "collection_sequence": [
+        "Open https://x.com/lilyrooartist.",
+        "Collect the listed metric fields from the named analytics surface.",
+        "Enter each value in data/manual_metric_entry_template.csv and add a short evidence_note.",
+        "Preview with `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run`.",
+        "Apply with `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin` only after the preview matches the collected values."
+      ]
+    }
+  ],
   "worksheet_import_manifest": {
     "status": "needs_values",
     "csv_path": "data/manual_metric_collection_template.csv",

@@ -359,6 +359,7 @@ def build_packet(rows: list[dict], generated_at: str) -> dict:
     docket = build_collection_docket(platforms, ready_rows)
     priority_batches = build_priority_batches(rows)
     import_manifest = build_import_manifest(rows)
+    source_bundles = build_source_collection_bundles(manual_rows)
     return {
         "generated_at": generated_at,
         "safe_mode": True,
@@ -380,6 +381,8 @@ def build_packet(rows: list[dict], generated_at: str) -> dict:
             "preserved_new_value_count": len(ready_rows),
             "platform_count": len(platforms),
             "priority_batch_count": len(priority_batches),
+            "source_collection_bundle_count": len(source_bundles),
+            "source_collection_bundle_field_count": sum(bundle.get("field_count", 0) for bundle in source_bundles),
             "public_profile_field_count": len([row for row in rows if row.get("access_level") == "public_profile"]),
             "private_analytics_field_count": len([row for row in rows if row.get("access_level") == "private_analytics"]),
             "csv_path": str(OUT_CSV.relative_to(ROOT)),
@@ -393,6 +396,7 @@ def build_packet(rows: list[dict], generated_at: str) -> dict:
             "entry_import_command": ENTRY_IMPORT_COMMAND,
         },
         "metric_collection_docket": docket,
+        "source_collection_bundles": source_bundles,
         "worksheet_import_manifest": import_manifest,
         "metric_completion_manifest": build_completion_manifest(rows, import_manifest, priority_batches),
         "public_metric_capture_backlog": build_public_metric_capture_backlog(public_manual_rows),
@@ -400,6 +404,85 @@ def build_packet(rows: list[dict], generated_at: str) -> dict:
         "platforms": platforms,
         "rows": rows,
     }
+
+
+def build_source_collection_bundles(rows: list[dict]) -> list[dict]:
+    bundles: dict[tuple[str, str, str], dict] = {}
+    for row in rows:
+        key = (
+            row.get("platform") or "",
+            row.get("source_hint") or "",
+            row.get("collection_url") or "",
+        )
+        bundle = bundles.setdefault(key, {
+            "platform": row.get("platform") or "",
+            "source_hint": row.get("source_hint") or "",
+            "collection_url": row.get("collection_url") or "",
+            "status": "ready_to_import" if row.get("ready_to_import") else "needs_values",
+            "access_level": row.get("access_level") or "",
+            "metric_categories": [],
+            "field_count": 0,
+            "waiting_count": 0,
+            "ready_to_import_count": 0,
+            "csv_rows": [],
+            "fields": [],
+            "update_assignments": [],
+            "worksheet_csv_path": str(OUT_CSV.relative_to(ROOT)),
+            "entry_csv_path": str(OUT_ENTRY_CSV.relative_to(ROOT)),
+            "preview_command": ENTRY_IMPORT_PREVIEW_COMMAND,
+            "apply_command": ENTRY_IMPORT_COMMAND,
+            "evidence_note_template": f"{row.get('source_hint') or 'Manual analytics source'} {datetime.now(timezone.utc).date().isoformat()}",
+            "collection_sequence": [
+                f"Open {row.get('collection_url') or 'the linked analytics source'}.",
+                "Collect the listed metric fields from the named analytics surface.",
+                f"Enter each value in {OUT_ENTRY_CSV.relative_to(ROOT)} and add a short evidence_note.",
+                f"Preview with `{ENTRY_IMPORT_PREVIEW_COMMAND}`.",
+                f"Apply with `{ENTRY_IMPORT_COMMAND}` only after the preview matches the collected values.",
+            ],
+        })
+        category = row.get("metric_category") or ""
+        if category and category not in bundle["metric_categories"]:
+            bundle["metric_categories"].append(category)
+        if row.get("access_level") and row.get("access_level") not in str(bundle.get("access_level") or ""):
+            bundle["access_level"] = "mixed"
+        field = {
+            "platform": row.get("platform") or "",
+            "field": row.get("field") or "",
+            "csv_row": row.get("csv_row"),
+            "current_value": row.get("current_value") or "",
+            "new_value": row.get("new_value") or "",
+            "ready_to_import": bool(row.get("ready_to_import")),
+            "value_type": row.get("value_type") or "nonnegative_number",
+            "example_value": row.get("example_value") or "",
+            "metric_category": row.get("metric_category") or "",
+            "access_level": row.get("access_level") or "",
+            "collection_instruction": row.get("collection_instruction") or "",
+            "evidence_hint": row.get("evidence_hint") or "",
+            "evidence_note": row.get("evidence_note") or "",
+            "update_assignment": row.get("update_assignment") or "",
+            "import_effect": row.get("import_effect") or "",
+        }
+        bundle["fields"].append(field)
+        bundle["csv_rows"].append(row.get("csv_row"))
+        if row.get("update_assignment"):
+            bundle["update_assignments"].append(row.get("update_assignment"))
+        bundle["field_count"] = len(bundle["fields"])
+        bundle["waiting_count"] = len([item for item in bundle["fields"] if not item.get("ready_to_import")])
+        bundle["ready_to_import_count"] = len([item for item in bundle["fields"] if item.get("ready_to_import")])
+        if bundle["ready_to_import_count"] and not bundle["waiting_count"]:
+            bundle["status"] = "ready_to_import"
+        elif bundle["ready_to_import_count"]:
+            bundle["status"] = "partial"
+        else:
+            bundle["status"] = "needs_values"
+    return sorted(
+        bundles.values(),
+        key=lambda item: (
+            min(item.get("csv_rows") or [999]),
+            item.get("platform") or "",
+            item.get("source_hint") or "",
+        ),
+    )
 
 
 def build_public_metric_capture_backlog(rows: list[dict]) -> dict:
@@ -696,6 +779,35 @@ def build_markdown(rows: list[dict], generated_at: str, packet: dict) -> str:
             if field.get("evidence_hint"):
                 lines.append(f"  - Evidence: {field['evidence_hint']}")
         lines.append("")
+    source_bundles = packet.get("source_collection_bundles") or []
+    if source_bundles:
+        lines.extend([
+            "## Source Collection Bundles",
+            "",
+            "Use these bundles when collecting values from one analytics surface at a time.",
+            "",
+        ])
+        for bundle in source_bundles:
+            lines.append(f"### {bundle.get('platform')} - {bundle.get('source_hint')}")
+            lines.append(f"- Status: `{bundle.get('status')}`; waiting: **{bundle.get('waiting_count', 0)}**; ready: **{bundle.get('ready_to_import_count', 0)}**")
+            if bundle.get("collection_url"):
+                lines.append(f"- Open: {bundle['collection_url']}")
+            lines.append(f"- Entry CSV: `{bundle.get('entry_csv_path') or str(OUT_ENTRY_CSV.relative_to(ROOT))}`")
+            lines.append(f"- Preview: `{bundle.get('preview_command') or ENTRY_IMPORT_PREVIEW_COMMAND}`")
+            lines.append(f"- Apply after review: `{bundle.get('apply_command') or ENTRY_IMPORT_COMMAND}`")
+            lines.append(f"- Evidence note template: `{bundle.get('evidence_note_template') or ''}`")
+            if bundle.get("collection_sequence"):
+                lines.append("- Collection sequence:")
+                for item in bundle["collection_sequence"]:
+                    lines.append(f"  - {item}")
+            for field in bundle.get("fields") or []:
+                target = field.get("new_value") if field.get("ready_to_import") else f"{field.get('value_type', 'value')} e.g. {field.get('example_value', '')}".strip()
+                lines.append(f"- Row `{field.get('csv_row')}` `{field.get('platform')}.{field.get('field')}` current `{field.get('current_value')}` -> `{target}`")
+                if field.get("collection_instruction"):
+                    lines.append(f"  - {field['collection_instruction']}")
+                if field.get("evidence_hint"):
+                    lines.append(f"  - Evidence: {field['evidence_hint']}")
+            lines.append("")
     for batch in packet.get("priority_batches") or []:
         lines.append(f"### Priority {batch.get('priority')}: {batch.get('label')}")
         lines.append(f"- Status: `{batch.get('status')}`; waiting: **{batch.get('waiting_count', 0)}**; ready: **{batch.get('ready_to_import_count', 0)}**")

@@ -2048,6 +2048,7 @@ def validate_generated_outputs(failures):
         platforms = packet.get("platforms") or []
         rows = packet.get("rows") or []
         priority_batches = packet.get("priority_batches") or []
+        source_bundles = packet.get("source_collection_bundles") or []
         live_import_rows = [row for row in rows if row.get("collection_mode") == "live_import_available"]
         manual_rows = [row for row in rows if row.get("collection_mode") != "live_import_available"]
         ready_rows = [row for row in rows if row.get("ready_to_import")]
@@ -2072,11 +2073,20 @@ def validate_generated_outputs(failures):
             for batch in priority_batches
             for field in (batch.get("fields") or [])
         ]
+        source_bundle_fields = [
+            field
+            for bundle in source_bundles
+            for field in (bundle.get("fields") or [])
+        ]
+        manual_row_keys = sorted((row.get("platform"), row.get("field"), row.get("csv_row")) for row in manual_rows)
+        source_bundle_field_keys = sorted((field.get("platform"), field.get("field"), field.get("csv_row")) for field in source_bundle_fields)
         if (
             packet.get("safe_mode") is True
             and summary.get("pending_field_count") == len(rows)
             and summary.get("platform_count") == len(platforms)
             and summary.get("priority_batch_count") == len(priority_batches)
+            and summary.get("source_collection_bundle_count") == len(source_bundles)
+            and summary.get("source_collection_bundle_field_count") == len(source_bundle_fields)
             and summary.get("public_profile_field_count") == len(public_profile_rows)
             and summary.get("private_analytics_field_count") == len(private_analytics_rows)
             and summary.get("public_profile_manual_required_count") == len(public_manual_rows)
@@ -2154,6 +2164,24 @@ def validate_generated_outputs(failures):
             and priority_batches
             and [batch.get("priority") for batch in priority_batches] == sorted(batch.get("priority") for batch in priority_batches)
             and len(batch_fields) == len(rows)
+            and len(source_bundle_fields) == len(manual_rows)
+            and source_bundle_field_keys == manual_row_keys
+            and all(
+                bundle.get("platform")
+                and bundle.get("source_hint")
+                and bundle.get("collection_url")
+                and bundle.get("field_count") == len(bundle.get("fields") or [])
+                and bundle.get("waiting_count") == len([field for field in bundle.get("fields") or [] if not field.get("ready_to_import")])
+                and bundle.get("ready_to_import_count") == len([field for field in bundle.get("fields") or [] if field.get("ready_to_import")])
+                and bundle.get("worksheet_csv_path") == "data/manual_metric_collection_template.csv"
+                and bundle.get("entry_csv_path") == "data/manual_metric_entry_template.csv"
+                and bundle.get("preview_command") == summary.get("entry_import_preview_command")
+                and bundle.get("apply_command") == summary.get("entry_import_command")
+                and bundle.get("evidence_note_template")
+                and any(str(item).startswith("Open ") for item in bundle.get("collection_sequence") or [])
+                and all(field.get("platform") and field.get("field") and field.get("csv_row") and field.get("update_assignment") and field.get("import_effect") and field.get("evidence_hint") for field in bundle.get("fields") or [])
+                for bundle in source_bundles
+            )
             and all(
                 batch.get("label")
                 and batch.get("field_count") == len(batch.get("fields") or [])
@@ -2287,7 +2315,7 @@ def validate_generated_outputs(failures):
         fail("promotion_blocker_ledger.json missing; run scripts/build_promotion_blocker_ledger.py", failures)
     if MANUAL_METRIC_REPORT.exists():
         report_text = MANUAL_METRIC_REPORT.read_text(encoding="utf-8")
-        if "Manual Metric Collection" in report_text and "Metric Collection Docket" in report_text and "Metric Completion Manifest" in report_text and "Pending fields" in report_text and "Open: " in report_text and "--from-csv --refresh-admin" in report_text and "--from-live --dry-run" in report_text:
+        if "Manual Metric Collection" in report_text and "Metric Collection Docket" in report_text and "Source Collection Bundles" in report_text and "Metric Completion Manifest" in report_text and "Pending fields" in report_text and "Open: " in report_text and "--from-csv --refresh-admin" in report_text and "--from-live --dry-run" in report_text:
             ok("manual metric markdown report present")
         else:
             fail("manual-metric-collection.md missing expected sections", failures)
@@ -3761,7 +3789,7 @@ def validate_generated_outputs(failures):
         fail("build_backlog_reschedule_preview.py missing", failures)
     if MANUAL_METRIC_COLLECTION_SCRIPT.exists():
         collection_text = MANUAL_METRIC_COLLECTION_SCRIPT.read_text(encoding="utf-8")
-        if "manual_metric_collection_template.csv" in collection_text and "manual_metric_entry_template.csv" in collection_text and "manual_metric_collection_packet.json" in collection_text and "manual-metric-collection.md" in collection_text and "pending_manual_by_platform" in collection_text and "metric_collection_docket" in collection_text and "worksheet_import_manifest" in collection_text and "metric_completion_manifest" in collection_text and "Metric Completion Manifest" in collection_text and "Do not guess private analytics values" in collection_text and "platform_groups" in collection_text and "priority_batches" in collection_text and "collection_priority" in collection_text and "metric_category" in collection_text and "access_level" in collection_text and "evidence_hint" in collection_text and "evidence_note" in collection_text and "collection_url" in collection_text and "PUBLIC_PROFILE_COLLECTION_URLS" in collection_text and "adapter_blocker" in collection_text and "--from-live" in collection_text and "collection_mode" in collection_text and "live_import_available_count" in collection_text and "public_metric_capture_backlog" in collection_text and "public_profile_manual_required_count" in collection_text and "ready_to_import_count" in collection_text and "existing_new_values" in collection_text and "value_type" in collection_text and "import_effect" in collection_text and "subprocess" not in collection_text:
+        if "manual_metric_collection_template.csv" in collection_text and "manual_metric_entry_template.csv" in collection_text and "manual_metric_collection_packet.json" in collection_text and "manual-metric-collection.md" in collection_text and "pending_manual_by_platform" in collection_text and "metric_collection_docket" in collection_text and "source_collection_bundles" in collection_text and "build_source_collection_bundles" in collection_text and "Source Collection Bundles" in collection_text and "evidence_note_template" in collection_text and "worksheet_import_manifest" in collection_text and "metric_completion_manifest" in collection_text and "Metric Completion Manifest" in collection_text and "Do not guess private analytics values" in collection_text and "platform_groups" in collection_text and "priority_batches" in collection_text and "collection_priority" in collection_text and "metric_category" in collection_text and "access_level" in collection_text and "evidence_hint" in collection_text and "evidence_note" in collection_text and "collection_url" in collection_text and "PUBLIC_PROFILE_COLLECTION_URLS" in collection_text and "adapter_blocker" in collection_text and "--from-live" in collection_text and "collection_mode" in collection_text and "live_import_available_count" in collection_text and "public_metric_capture_backlog" in collection_text and "public_profile_manual_required_count" in collection_text and "ready_to_import_count" in collection_text and "existing_new_values" in collection_text and "value_type" in collection_text and "import_effect" in collection_text and "subprocess" not in collection_text:
             ok("manual metric collection builder is review-only")
         else:
             fail("build_manual_metric_collection.py missing worksheet outputs or executes commands", failures)
