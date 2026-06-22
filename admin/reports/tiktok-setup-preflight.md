@@ -1,6 +1,6 @@
 # TikTok Setup Preflight - Lily Roo
 
-Generated: 2026-06-22T11:39:39.410660Z
+Generated: 2026-06-22T11:48:32.063379Z
 
 ## Summary
 - Status: **blocked**
@@ -61,7 +61,9 @@ Generated: 2026-06-22T11:39:39.410660Z
 - Direct post OAuth scopes: `user.info.basic, video.upload, video.publish`
 - Scope strategy: Request only video.upload for the first inbox-draft connector path; add video.publish only after direct public posting approval exists.
 - Local secret env: `secrets/social_api.env`
-- Local secret env exists: **True**
+- Local secret env prepared: **True**
+- Runtime local env file exists: **True**
+- Local handoff marker: `data/tiktok_local_handoff_status.json`
 - Initialize local secret env: `not needed`
 - Missing locally: `TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN`
 - Missing for auth URL: `TIKTOK_CLIENT_KEY, TIKTOK_REDIRECT_URI`

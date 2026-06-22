@@ -1,9 +1,10 @@
 {
-  "generated_at": "2026-06-22T11:39:39.410660Z",
+  "generated_at": "2026-06-22T11:48:32.063379Z",
   "safe_mode": true,
   "source": {
     "local_secret_source": "secrets/social_api.env",
     "api_strategy": "data/tiktok_api_strategy.json",
+    "local_secret_handoff_status": "data/tiktok_local_handoff_status.json",
     "handoff_template": "data/tiktok_secret_handoff_template.env",
     "oauth_handoff_script": "scripts/tiktok_oauth_handoff.py",
     "local_posting_helper": "scripts/post_tiktok_from_queue.py",
@@ -52,6 +53,9 @@
     ],
     "local_secret_dir_exists": true,
     "local_secret_env_exists": true,
+    "local_secret_env_runtime_exists": true,
+    "local_secret_handoff_prepared": true,
+    "local_secret_handoff_status_path": "data/tiktok_local_handoff_status.json",
     "initialize_local_secret_env_command": "",
     "oauth_authorization_url_missing": [
       "TIKTOK_CLIENT_KEY",
@@ -99,6 +103,24 @@
     "local_secret_dir_path": "secrets",
     "local_secret_dir_exists": true,
     "local_secret_env_exists": true,
+    "local_secret_env_runtime_exists": true,
+    "local_secret_handoff_prepared": true,
+    "local_secret_handoff_status_path": "data/tiktok_local_handoff_status.json",
+    "local_secret_handoff_status": {
+      "safe_mode": true,
+      "status": "prepared",
+      "local_secret_env_initialized": true,
+      "local_secret_source": "secrets/social_api.env",
+      "prepared_at": "2026-06-22",
+      "required_secret_names": [
+        "TIKTOK_CLIENT_KEY",
+        "TIKTOK_CLIENT_SECRET",
+        "TIKTOK_REDIRECT_URI",
+        "TIKTOK_REFRESH_TOKEN"
+      ],
+      "posting_mode": "upload",
+      "redaction": "This marker contains no secret values; it only records that the local handoff file was initialized."
+    },
     "initialize_local_secret_env_command": "",
     "handoff_template_path": "data/tiktok_secret_handoff_template.env",
     "handoff_template_required_names": [

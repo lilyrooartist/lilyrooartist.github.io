@@ -517,7 +517,9 @@ def validate_generated_outputs(failures):
             "admin_refresh_after_repair",
         }
         template_text = TIKTOK_SECRET_HANDOFF_TEMPLATE.read_text(encoding="utf-8") if TIKTOK_SECRET_HANDOFF_TEMPLATE.exists() else ""
-        required_source = {"local_secret_source", "api_strategy", "handoff_template", "oauth_handoff_script", "local_posting_helper", "executor_readiness", "platform_repair_status", "wrangler_config"}
+        required_source = {"local_secret_source", "api_strategy", "local_secret_handoff_status", "handoff_template", "oauth_handoff_script", "local_posting_helper", "executor_readiness", "platform_repair_status", "wrangler_config"}
+        handoff_status_path = ROOT / "data" / "tiktok_local_handoff_status.json"
+        handoff_status = json.loads(handoff_status_path.read_text(encoding="utf-8")) if handoff_status_path.exists() else {}
         if (
             preflight.get("safe_mode") is True
             and summary.get("status") in {"ready", "blocked"}
@@ -543,11 +545,22 @@ def validate_generated_outputs(failures):
             and credential_handoff.get("local_secret_dir_path") == "secrets"
             and isinstance(credential_handoff.get("local_secret_dir_exists"), bool)
             and isinstance(credential_handoff.get("local_secret_env_exists"), bool)
+            and isinstance(credential_handoff.get("local_secret_env_runtime_exists"), bool)
+            and credential_handoff.get("local_secret_handoff_prepared") is True
+            and credential_handoff.get("local_secret_handoff_status_path") == "data/tiktok_local_handoff_status.json"
+            and credential_handoff.get("local_secret_handoff_status") == handoff_status
             and isinstance(summary.get("local_secret_env_exists"), bool)
+            and isinstance(summary.get("local_secret_env_runtime_exists"), bool)
+            and summary.get("local_secret_handoff_prepared") is True
+            and summary.get("local_secret_handoff_status_path") == "data/tiktok_local_handoff_status.json"
             and (
                 credential_handoff.get("local_secret_env_exists")
                 or "cp data/tiktok_secret_handoff_template.env ../secrets/social_api.env" in (credential_handoff.get("initialize_local_secret_env_command") or "")
             )
+            and handoff_status.get("safe_mode") is True
+            and handoff_status.get("local_secret_env_initialized") is True
+            and handoff_status.get("local_secret_source") == "secrets/social_api.env"
+            and "Secret values" not in json.dumps(handoff_status)
             and credential_handoff.get("handoff_template_path") == "data/tiktok_secret_handoff_template.env"
             and set(credential_handoff.get("handoff_template_required_names") or []) >= {"TIKTOK_CLIENT_KEY", "TIKTOK_CLIENT_SECRET", "TIKTOK_REDIRECT_URI", "TIKTOK_REFRESH_TOKEN", "TIKTOK_PUBLIC_POSTING_APPROVED", "TIKTOK_DEFAULT_PRIVACY"}
             and TIKTOK_SECRET_HANDOFF_TEMPLATE.exists()
