@@ -14,6 +14,8 @@ from social_exec_common import append_published_log
 ROOT = Path(__file__).resolve().parents[1]
 PACKET = ROOT / "data" / "manual_distribution_packet.json"
 PUBLISHED_LOG = ROOT / "admin" / "content" / "Published_Log.csv"
+RESULT_CLIPBOARD = ROOT / "admin" / "reports" / "experiment-result-clipboard.md"
+WIDE_RESULT_ENTRY = ROOT / "data" / "experiment_result_entry_wide_template.csv"
 
 
 def read_packet() -> dict:
@@ -63,6 +65,15 @@ def payload_for_row(row: dict, public_url: str) -> dict:
         "text": row.get("text") or "",
         "notes": notes,
         "target": str(PUBLISHED_LOG.relative_to(ROOT)),
+        "measurement_handoff": {
+            "status": "ready_after_url_logging",
+            "result_clipboard_report": str(RESULT_CLIPBOARD.relative_to(ROOT)),
+            "wide_entry_csv": str(WIDE_RESULT_ENTRY.relative_to(ROOT)),
+            "first_measurement_fields": ["views", "likes", "comments", "shares", "saves", "subs_delta"],
+            "next_step": "After the public URL is logged and the post has accumulated first engagement, refresh Admin and collect metrics through the experiment result clipboard.",
+            "preview_import_command": "python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run",
+            "apply_import_command": "python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --apply --refresh-admin",
+        },
     }
 
 
@@ -146,6 +157,7 @@ def log_from_csv(path: Path, *, apply: bool, refresh: bool, allow_partial: bool)
         "action": "appended_published_log_rows" if apply else "would_append_published_log_rows",
         "post_apply_verification": [
             "python3 scripts/refresh_promo_admin.py",
+            "Open admin/reports/experiment-result-clipboard.md and collect first metrics when available.",
             "python3 scripts/validate_content_system.py",
         ],
     }

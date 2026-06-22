@@ -3727,7 +3727,7 @@ def validate_generated_outputs(failures):
         fail("reconcile_youtube_community_urls.py missing", failures)
     if MANUAL_DISTRIBUTION_LOGGER.exists():
         logger_text = MANUAL_DISTRIBUTION_LOGGER.read_text(encoding="utf-8")
-        if "--apply" in logger_text and "--refresh-admin" in logger_text and "--from-csv" in logger_text and "--allow-partial" in logger_text and "allow_partial" in logger_text and "append_published_log" in logger_text and "dry_run" in logger_text and "validate_public_url" in logger_text and "already_logged" in logger_text and "PUBLIC_URL" in logger_text:
+        if "--apply" in logger_text and "--refresh-admin" in logger_text and "--from-csv" in logger_text and "--allow-partial" in logger_text and "allow_partial" in logger_text and "append_published_log" in logger_text and "dry_run" in logger_text and "validate_public_url" in logger_text and "already_logged" in logger_text and "PUBLIC_URL" in logger_text and "measurement_handoff" in logger_text and "experiment-result-clipboard.md" in logger_text and "experiment_result_entry_wide_template.csv" in logger_text:
             ok("manual distribution logger is dry-run-first")
         else:
             fail("log_manual_distribution.py missing dry-run-first logging behavior or URL/duplicate guards", failures)
