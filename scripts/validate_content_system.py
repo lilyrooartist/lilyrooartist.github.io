@@ -3565,11 +3565,12 @@ def validate_generated_outputs(failures):
             and "brand_organic_toggle" in tiktok_post_text
             and "aigc_label_enabled" in tiktok_post_text
             and "--mode" in tiktok_post_text
+            and "default='upload'" in tiktok_post_text
             and "UPLOAD_INIT_URL" in tiktok_post_text
             and "video.upload" in tiktok_post_text
             and "Secret" not in tiktok_post_text
         ):
-            ok("TikTok local posting helper supports refresh-token credentials")
+            ok("TikTok local posting helper supports refresh-token credentials and upload-mode default")
         else:
             fail("post_tiktok_from_queue.py missing refresh-token TikTok posting support", failures)
     else:
@@ -3580,10 +3581,11 @@ def validate_generated_outputs(failures):
         and "TIKTOK_POSTING_MODE" in worker_text
         and "draft_uploaded" in worker_text
         and "tiktokPostingMode" in worker_text
+        and 'env.TIKTOK_POSTING_MODE || "upload"' in worker_text
         and "executionStatusFromResult" in worker_text
         and "tiktok_public_posting_not_approved" in worker_text
     ):
-        ok("social executor supports gated TikTok direct posting and inbox draft upload mode")
+        ok("social executor supports gated TikTok direct posting and inbox draft upload mode by default")
     else:
         fail("social executor missing TikTok draft-upload/direct-post mode split", failures)
     if (

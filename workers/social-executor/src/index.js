@@ -1437,7 +1437,7 @@ function tiktokMissingCredentials(env) {
 }
 
 function tiktokPostingMode(payload, env) {
-  const mode = text(payload.tiktokPostingMode || payload.tiktok_posting_mode || env.TIKTOK_POSTING_MODE || "direct").toLowerCase();
+  const mode = text(payload.tiktokPostingMode || payload.tiktok_posting_mode || env.TIKTOK_POSTING_MODE || "upload").toLowerCase();
   return mode === "upload" || mode === "draft" || mode === "inbox" ? "upload" : "direct";
 }
 

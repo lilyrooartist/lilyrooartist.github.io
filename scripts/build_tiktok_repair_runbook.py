@@ -77,7 +77,7 @@ def build_payload() -> dict:
     local_missing = preflight_summary.get("local_missing_secrets") or []
     worker_missing = preflight_summary.get("worker_missing_secrets") or []
     public_posting = preflight_summary.get("public_posting_approved")
-    worker_posting_mode = preflight_summary.get("worker_posting_mode") or "direct"
+    worker_posting_mode = preflight_summary.get("worker_posting_mode") or "upload"
     local_public_posting = bool(preflight_summary.get("local_public_posting_approval_confirmed"))
     public_posting_apply = preflight_summary.get("public_posting_apply_command") or ""
     public_posting_deploy = preflight_summary.get("public_posting_deploy_command") or ""

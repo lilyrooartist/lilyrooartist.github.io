@@ -272,7 +272,7 @@ def build_payload() -> dict:
     brand_content = bool(tiktok_readiness.get("brand_content_toggle")) if "brand_content_toggle" in tiktok_readiness else flag_value(BRAND_CONTENT, False)
     brand_organic = bool(tiktok_readiness.get("brand_organic_toggle")) if "brand_organic_toggle" in tiktok_readiness else flag_value(BRAND_ORGANIC, True)
     aigc_label = bool(tiktok_readiness.get("aigc_label_enabled")) if "aigc_label_enabled" in tiktok_readiness else flag_value(AIGC_LABEL, True)
-    worker_posting_mode = tiktok_readiness.get("posting_mode") or wrangler_var(POSTING_MODE) or "direct"
+    worker_posting_mode = tiktok_readiness.get("posting_mode") or wrangler_var(POSTING_MODE) or "upload"
     refresh_config_present = bool(tiktok_readiness.get("refresh_config_present"))
     access_token_present = bool(tiktok_readiness.get("access_token_present"))
     local_access_token_present = bool(presence.get(OPTIONAL_ACCESS_TOKEN))

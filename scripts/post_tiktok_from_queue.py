@@ -139,7 +139,7 @@ def main() -> int:
     parser.add_argument(
         '--mode',
         choices=['direct', 'upload'],
-        default='direct',
+        default='upload',
         help='direct publishes through video.publish; upload sends an inbox draft through video.upload for final review in TikTok.',
     )
     parser.add_argument('--dry-run', action='store_true')
