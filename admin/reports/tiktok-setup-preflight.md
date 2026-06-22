@@ -1,6 +1,6 @@
 # TikTok Setup Preflight - Lily Roo
 
-Generated: 2026-06-22T09:44:56.917494Z
+Generated: 2026-06-22T09:49:57.950617Z
 
 ## Summary
 - Status: **blocked**
@@ -12,6 +12,7 @@ Generated: 2026-06-22T09:44:56.917494Z
 - Ready to upload inbox drafts: **False**
 - Ready to post publicly: **False**
 - Local posting helper uses refresh token: **True**
+- First TikTok asset ready for upload mode: **True** (`FP-AUTO-264`)
 - Local post preview: `python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --dry-run`
 - Local draft upload preview: `python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run`
 - Earliest TikTok API path: video.upload inbox draft; final public URL still requires human publish and URL logging.
@@ -60,8 +61,8 @@ Generated: 2026-06-22T09:44:56.917494Z
 - Direct post OAuth scopes: `user.info.basic, video.upload, video.publish`
 - Scope strategy: Request only video.upload for the first inbox-draft connector path; add video.publish only after direct public posting approval exists.
 - Local secret env: `secrets/social_api.env`
-- Local secret env exists: **False**
-- Initialize local secret env: `mkdir -p ../secrets && test -f ../secrets/social_api.env || cp data/tiktok_secret_handoff_template.env ../secrets/social_api.env`
+- Local secret env exists: **True**
+- Initialize local secret env: `not needed`
 - Missing locally: `TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN`
 - Missing for auth URL: `TIKTOK_CLIENT_KEY, TIKTOK_REDIRECT_URI`
 - Missing for token exchange: `TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REDIRECT_URI`
@@ -85,13 +86,13 @@ Generated: 2026-06-22T09:44:56.917494Z
 - Completion evidence:
   - data/tiktok_setup_preflight.json reports ready_to_push_worker_secrets true.
   - data/executor_readiness_snapshot.json reports TikTok refresh configuration present.
+  - data/tiktok_setup_preflight.json reports first_tiktok_asset.ready_for_upload_mode true.
   - data/tiktok_setup_preflight.json reports ready_to_upload_drafts true for the upload-mode connector path.
   - data/platform_repair_status.json no longer lists TikTok as blocked by missing credentials.
 
 ## Checks
-- **local_secret_env_file**: `waiting`
-  - Initialize secrets/social_api.env from the blank handoff template before adding TikTok app values.
-  - Command: `mkdir -p ../secrets && test -f ../secrets/social_api.env || cp data/tiktok_secret_handoff_template.env ../secrets/social_api.env`
+- **local_secret_env_file**: `pass`
+  - Local secret env exists at secrets/social_api.env.
 - **oauth_authorization_url**: `blocked`
   - secrets/social_api.env is missing auth URL values: TIKTOK_CLIENT_KEY, TIKTOK_REDIRECT_URI.
   - Command: `python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload`

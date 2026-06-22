@@ -6,7 +6,7 @@ import re
 from datetime import datetime, timezone
 from pathlib import Path
 
-from social_exec_common import REPO_ROOT, SOCIAL_ENV, load_env
+from social_exec_common import REPO_ROOT, SOCIAL_ENV, get_row, load_env
 
 
 ROOT = REPO_ROOT
@@ -28,6 +28,7 @@ BRAND_CONTENT = "TIKTOK_BRAND_CONTENT"
 BRAND_ORGANIC = "TIKTOK_BRAND_ORGANIC"
 AIGC_LABEL = "TIKTOK_IS_AIGC"
 POSTING_MODE = "TIKTOK_POSTING_MODE"
+FIRST_TIKTOK_POST_ID = "FP-AUTO-264"
 PUBLIC_POSTING_PREVIEW = "python3 scripts/set_tiktok_public_posting_approval.py --approved"
 PUBLIC_POSTING_APPLY = "python3 scripts/set_tiktok_public_posting_approval.py --approved --apply"
 PUBLIC_POSTING_DEPLOY = "python3 scripts/set_tiktok_public_posting_approval.py --approved --apply --deploy"
@@ -90,6 +91,62 @@ def check(name: str, status: str, detail: str, command: str = "") -> dict:
         "status": status,
         "detail": detail,
         "command": command,
+    }
+
+
+def is_http_url(value: str) -> bool:
+    return value.startswith("https://") or value.startswith("http://")
+
+
+def is_video_url(value: str) -> bool:
+    return bool(re.search(r"\.(mp4|mov|m4v|webm)(\?|$)", value, re.IGNORECASE))
+
+
+def first_tiktok_asset_readiness() -> dict:
+    try:
+        row = get_row(FIRST_TIKTOK_POST_ID)
+    except Exception as exc:
+        return {
+            "post_id": FIRST_TIKTOK_POST_ID,
+            "status": "missing_queue_row",
+            "ready_for_upload_mode": False,
+            "reason": str(exc),
+        }
+    clip_url = (row.get("clip_url") or "").strip()
+    text = (row.get("text") or "").strip()
+    platform = (row.get("platform") or "").strip()
+    post_type = (row.get("post_type") or "").strip()
+    approved = (row.get("approved") or "").strip().lower() == "yes"
+    media_ready = is_http_url(clip_url) and is_video_url(clip_url)
+    text_ready = bool(text)
+    ready = bool(platform.lower() == "tiktok" and post_type == "video" and approved and media_ready and text_ready)
+    blockers = []
+    if platform.lower() != "tiktok":
+        blockers.append("platform_not_tiktok")
+    if post_type != "video":
+        blockers.append("post_type_not_video")
+    if not approved:
+        blockers.append("row_not_approved")
+    if not media_ready:
+        blockers.append("public_video_url_missing_or_unsupported")
+    if not text_ready:
+        blockers.append("text_missing")
+    return {
+        "post_id": FIRST_TIKTOK_POST_ID,
+        "status": "ready_for_upload_mode" if ready else "blocked",
+        "ready_for_upload_mode": ready,
+        "platform": platform,
+        "song": row.get("song") or "",
+        "post_type": post_type,
+        "approved": approved,
+        "clip_url": clip_url,
+        "media_ready": media_ready,
+        "text_ready": text_ready,
+        "media_key": row.get("media_key") or "",
+        "dry_run_command": f"python3 scripts/post_tiktok_from_queue.py --post-id {FIRST_TIKTOK_POST_ID} --mode upload --dry-run",
+        "blockers": blockers,
+        "credential_blockers": REQUIRED_REFRESH_SECRETS,
+        "next_after_credentials": f"python3 scripts/post_tiktok_from_queue.py --post-id {FIRST_TIKTOK_POST_ID} --mode upload --dry-run",
     }
 
 
@@ -322,6 +379,7 @@ def build_payload() -> dict:
         row for row in platform_repair.get("rows") or []
         if str(row.get("platform") or "").lower() == "tiktok"
     ]
+    first_tiktok_asset = first_tiktok_asset_readiness()
     push_preview = "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN"
     push_apply = "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py"
     oauth_preview = "python3 scripts/tiktok_oauth_handoff.py"
@@ -372,6 +430,7 @@ def build_payload() -> dict:
         "completion_evidence": [
             "data/tiktok_setup_preflight.json reports ready_to_push_worker_secrets true.",
             "data/executor_readiness_snapshot.json reports TikTok refresh configuration present.",
+            "data/tiktok_setup_preflight.json reports first_tiktok_asset.ready_for_upload_mode true.",
             "data/tiktok_setup_preflight.json reports ready_to_upload_drafts true for the upload-mode connector path.",
             "data/platform_repair_status.json no longer lists TikTok as blocked by missing credentials.",
         ],
@@ -387,6 +446,7 @@ def build_payload() -> dict:
         "ready_to_upload_drafts": ready_to_upload_drafts,
         "ready_to_post_publicly": ready_to_post,
         "local_posting_helper_uses_refresh_token": True,
+        "first_tiktok_asset": first_tiktok_asset,
         "local_post_preview_command": local_post_preview,
         "local_upload_preview_command": local_upload_preview,
         "earliest_tiktok_api_path": "video.upload inbox draft; final public URL still requires human publish and URL logging.",
@@ -454,6 +514,7 @@ def build_markdown(payload: dict) -> str:
         f"- Ready to upload inbox drafts: **{summary['ready_to_upload_drafts']}**",
         f"- Ready to post publicly: **{summary['ready_to_post_publicly']}**",
         f"- Local posting helper uses refresh token: **{summary['local_posting_helper_uses_refresh_token']}**",
+        f"- First TikTok asset ready for upload mode: **{summary['first_tiktok_asset']['ready_for_upload_mode']}** (`{summary['first_tiktok_asset']['post_id']}`)",
         f"- Local post preview: `{summary['local_post_preview_command']}`",
         f"- Local draft upload preview: `{summary['local_upload_preview_command']}`",
         f"- Earliest TikTok API path: {summary['earliest_tiktok_api_path']}",

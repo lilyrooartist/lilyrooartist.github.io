@@ -554,6 +554,10 @@ def validate_generated_outputs(failures):
             and TIKTOK_OAUTH_HANDOFF_SCRIPT.exists()
             and source.get("local_posting_helper") == "scripts/post_tiktok_from_queue.py"
             and summary.get("local_posting_helper_uses_refresh_token") is True
+            and (summary.get("first_tiktok_asset") or {}).get("post_id") == "FP-AUTO-264"
+            and (summary.get("first_tiktok_asset") or {}).get("ready_for_upload_mode") is True
+            and (summary.get("first_tiktok_asset") or {}).get("media_ready") is True
+            and "post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run" in ((summary.get("first_tiktok_asset") or {}).get("dry_run_command") or "")
             and "post_tiktok_from_queue.py --post-id FP-AUTO-264 --dry-run" in (summary.get("local_post_preview_command") or "")
             and "post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run" in (summary.get("local_upload_preview_command") or "")
             and "Posting mode selected: API integration." in template_text
@@ -3596,7 +3600,7 @@ def validate_generated_outputs(failures):
         fail("build_promo_consistency_audit.py missing", failures)
     if TIKTOK_SETUP_PREFLIGHT_SCRIPT.exists():
         preflight_text = TIKTOK_SETUP_PREFLIGHT_SCRIPT.read_text(encoding="utf-8")
-        if "tiktok_setup_preflight.json" in preflight_text and "tiktok-setup-preflight.md" in preflight_text and "tiktok_secret_handoff_template.env" in preflight_text and "local_secret_env_file" in preflight_text and "initialize_local_secret_env_command" in preflight_text and "local_posting_token_path" in preflight_text and "post_tiktok_from_queue.py --post-id FP-AUTO-264 --dry-run" in preflight_text and "credential_handoff" in preflight_text and "completion_evidence" in preflight_text and "TIKTOK_CLIENT_KEY" in preflight_text and "TIKTOK_PUBLIC_POSTING_APPROVED" in preflight_text and "Secret values" in preflight_text and "subprocess" not in preflight_text:
+        if "tiktok_setup_preflight.json" in preflight_text and "tiktok-setup-preflight.md" in preflight_text and "tiktok_secret_handoff_template.env" in preflight_text and "local_secret_env_file" in preflight_text and "initialize_local_secret_env_command" in preflight_text and "local_posting_token_path" in preflight_text and "first_tiktok_asset_readiness" in preflight_text and "post_tiktok_from_queue.py --post-id FP-AUTO-264 --dry-run" in preflight_text and "credential_handoff" in preflight_text and "completion_evidence" in preflight_text and "TIKTOK_CLIENT_KEY" in preflight_text and "TIKTOK_PUBLIC_POSTING_APPROVED" in preflight_text and "Secret values" in preflight_text and "subprocess" not in preflight_text:
             ok("TikTok setup preflight builder is review-only")
         else:
             fail("build_tiktok_setup_preflight.py missing preflight outputs or exposes execution/secrets", failures)
