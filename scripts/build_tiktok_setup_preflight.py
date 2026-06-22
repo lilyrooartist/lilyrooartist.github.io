@@ -42,7 +42,8 @@ def write_handoff_template() -> None:
     lines = [
         "# Lily Roo TikTok secret handoff template",
         "# Posting mode selected: API integration.",
-        "# OAuth scopes should include user.info.basic, video.upload, and video.publish.",
+        "# OAuth scopes for the first connector pass should include user.info.basic and video.upload.",
+        "# Add video.publish only after direct public posting approval is confirmed.",
         "# Fill values locally in secrets/social_api.env, not in this generated file.",
         "# Keep TIKTOK_PUBLIC_POSTING_APPROVED=false until public posting approval is confirmed.",
         "TIKTOK_CLIENT_KEY=",
@@ -231,7 +232,7 @@ def build_payload() -> dict:
             "TikTok OAuth authorization URL can be generated locally."
             if not oauth_url_missing
             else f"{SOCIAL_ENV.relative_to(ROOT.parent)} is missing auth URL values: {', '.join(oauth_url_missing)}.",
-            "python3 scripts/tiktok_oauth_handoff.py --print-auth-url",
+            "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload",
         ),
         check(
             "oauth_token_exchange",
@@ -239,7 +240,7 @@ def build_payload() -> dict:
             "TikTok OAuth authorization codes can be exchanged locally."
             if not oauth_exchange_missing
             else f"{SOCIAL_ENV.relative_to(ROOT.parent)} is missing token exchange values: {', '.join(oauth_exchange_missing)}.",
-            "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply",
+            "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode upload",
         ),
         check(
             "local_refresh_credentials",
@@ -318,8 +319,8 @@ def build_payload() -> dict:
     push_preview = "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN"
     push_apply = "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py"
     oauth_preview = "python3 scripts/tiktok_oauth_handoff.py"
-    oauth_url_command = "python3 scripts/tiktok_oauth_handoff.py --print-auth-url"
-    oauth_exchange_command = "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply"
+    oauth_url_command = "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload"
+    oauth_exchange_command = "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode upload"
     refresh_command = "python3 scripts/refresh_promo_admin.py"
     local_post_preview = "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --dry-run"
     local_upload_preview = "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run"
@@ -339,7 +340,9 @@ def build_payload() -> dict:
         "oauth_token_exchange_missing": oauth_exchange_missing,
         "worker_missing_secrets": worker_missing,
         "oauth_handoff_script": str(OAUTH_HANDOFF_SCRIPT.relative_to(ROOT)),
-        "requested_oauth_scopes": ["user.info.basic", "video.upload", "video.publish"],
+        "requested_oauth_scopes": ["user.info.basic", "video.upload"],
+        "direct_post_oauth_scopes": ["user.info.basic", "video.upload", "video.publish"],
+        "scope_strategy": "Request only video.upload for the first inbox-draft connector path; add video.publish only after direct public posting approval exists.",
         "oauth_preview_command": oauth_preview,
         "oauth_authorization_url_command": oauth_url_command,
         "oauth_exchange_command": oauth_exchange_command,
@@ -479,6 +482,8 @@ def build_markdown(payload: dict) -> str:
         f"- Handoff template: `{payload['credential_handoff']['handoff_template_path']}`",
         f"- OAuth helper: `{payload['credential_handoff']['oauth_handoff_script']}`",
         f"- Requested OAuth scopes: `{', '.join(payload['credential_handoff']['requested_oauth_scopes'])}`",
+        f"- Direct post OAuth scopes: `{', '.join(payload['credential_handoff']['direct_post_oauth_scopes'])}`",
+        f"- Scope strategy: {payload['credential_handoff']['scope_strategy']}",
         f"- Local secret env: `{payload['credential_handoff']['local_secret_source']}`",
         f"- Local secret env exists: **{payload['credential_handoff']['local_secret_env_exists']}**",
         f"- Initialize local secret env: `{payload['credential_handoff']['initialize_local_secret_env_command'] or 'not needed'}`",

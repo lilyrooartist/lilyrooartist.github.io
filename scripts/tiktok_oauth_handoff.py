@@ -13,7 +13,8 @@ from social_exec_common import REPO_ROOT, SOCIAL_ENV, load_env
 
 AUTH_URL = "https://www.tiktok.com/v2/auth/authorize/"
 TOKEN_URL = "https://open.tiktokapis.com/v2/oauth/token/"
-DEFAULT_SCOPES = "user.info.basic,video.upload,video.publish"
+UPLOAD_SCOPES = ["user.info.basic", "video.upload"]
+DIRECT_SCOPES = UPLOAD_SCOPES + ["video.publish"]
 REQUIRED_BASE = ["TIKTOK_CLIENT_KEY", "TIKTOK_CLIENT_SECRET", "TIKTOK_REDIRECT_URI"]
 TOKEN_NAMES = ["TIKTOK_REFRESH_TOKEN", "TIKTOK_ACCESS_TOKEN"]
 
@@ -40,6 +41,12 @@ def append_or_update_env(path: Path, updates: dict[str, str]) -> None:
         if key not in seen:
             out.append(f"{key}={value}")
     path.write_text("\n".join(out).rstrip() + "\n", encoding="utf-8")
+
+
+def scope_string(posting_mode: str, scopes: str) -> str:
+    if scopes:
+        return scopes
+    return ",".join(DIRECT_SCOPES if posting_mode == "direct" else UPLOAD_SCOPES)
 
 
 def auth_url(env: dict[str, str], scopes: str, state: str) -> str:
@@ -86,12 +93,17 @@ def main() -> int:
     parser.add_argument("--print-auth-url", action="store_true", help="Print the TikTok authorization URL.")
     parser.add_argument("--exchange-code", help="Exchange a TikTok authorization code for tokens.")
     parser.add_argument("--apply", action="store_true", help="Write returned tokens to secrets/social_api.env.")
-    parser.add_argument("--scopes", default=DEFAULT_SCOPES, help="Comma-separated TikTok OAuth scopes.")
+    parser.add_argument("--posting-mode", choices=["upload", "direct"], default="", help="Choose the minimum TikTok scope bundle for inbox draft upload or direct public posting.")
+    parser.add_argument("--scopes", default="", help="Comma-separated TikTok OAuth scopes. Overrides --posting-mode when supplied.")
     parser.add_argument("--state", help="OAuth anti-forgery state. Generated when omitted.")
     parser.add_argument("--timeout-seconds", type=int, default=30)
     args = parser.parse_args()
 
     env = load_env(SOCIAL_ENV)
+    posting_mode = args.posting_mode or str(env.get("TIKTOK_POSTING_MODE") or "upload").strip().lower()
+    if posting_mode not in {"upload", "direct"}:
+        posting_mode = "upload"
+    requested_scopes = scope_string(posting_mode, args.scopes.strip())
     missing_base = [name for name in REQUIRED_BASE if not str(env.get(name) or "").strip()]
     state = args.state or secrets.token_urlsafe(24)
     payload = {
@@ -104,7 +116,10 @@ def main() -> int:
         "requirements": {
             "required_before_auth_url": ["TIKTOK_CLIENT_KEY", "TIKTOK_REDIRECT_URI"],
             "required_before_exchange": REQUIRED_BASE,
-            "requested_scopes": args.scopes,
+            "posting_mode": posting_mode,
+            "requested_scopes": requested_scopes,
+            "upload_scope_bundle": ",".join(UPLOAD_SCOPES),
+            "direct_scope_bundle": ",".join(DIRECT_SCOPES),
         },
         "presence": redacted_presence(env, REQUIRED_BASE + TOKEN_NAMES),
         "missing_base": missing_base,
@@ -115,7 +130,7 @@ def main() -> int:
         missing_for_url = [name for name in ["TIKTOK_CLIENT_KEY", "TIKTOK_REDIRECT_URI"] if not str(env.get(name) or "").strip()]
         if missing_for_url:
             return fail(f"Missing local values for auth URL: {', '.join(missing_for_url)}")
-        payload["auth_url"] = auth_url(env, args.scopes, state)
+        payload["auth_url"] = auth_url(env, requested_scopes, state)
         payload["state"] = state
 
     if args.exchange_code:
@@ -151,8 +166,9 @@ def main() -> int:
     if not args.print_auth_url and not args.exchange_code:
         payload["next_actions"] = [
             "Add TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, and TIKTOK_REDIRECT_URI to secrets/social_api.env.",
-            "Run python3 scripts/tiktok_oauth_handoff.py --print-auth-url.",
-            "Authorize video.upload and video.publish with the Lily Roo TikTok account, then exchange the returned code with --exchange-code CODE --apply.",
+            "Run python3 scripts/tiktok_oauth_handoff.py --posting-mode upload --print-auth-url for the first inbox-draft connector path.",
+            "Authorize video.upload with the Lily Roo TikTok account, then exchange the returned code with --exchange-code CODE --apply.",
+            "Use --posting-mode direct only after the app has video.publish approval and public posting is intentionally enabled.",
         ]
 
     print(json.dumps(payload, indent=2))

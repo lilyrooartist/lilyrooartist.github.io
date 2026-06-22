@@ -1,6 +1,6 @@
 # TikTok Setup Preflight - Lily Roo
 
-Generated: 2026-06-22T08:40:10.281081Z
+Generated: 2026-06-22T08:54:16.467159Z
 
 ## Summary
 - Status: **blocked**
@@ -33,12 +33,12 @@ Generated: 2026-06-22T08:40:10.281081Z
   - Values needed: `TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REDIRECT_URI, TIKTOK_REFRESH_TOKEN`
   - Safe storage: `secrets/social_api.env`
   - Why: The connector cannot generate an OAuth URL, exchange a code, or refresh TikTok access without these app values.
-  - Next command: `python3 scripts/tiktok_oauth_handoff.py --print-auth-url`
+  - Next command: `python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload`
 - **Authorize the Lily Roo TikTok account after the OAuth URL is generated.** (`authorize_lily_roo_tiktok_account`)
   - Values needed: `short-lived TikTok authorization code`
   - Safe storage: `secrets/social_api.env`
   - Why: The refresh token is created only after the Lily Roo account authorizes the app with the requested scopes.
-  - Next command: `python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply`
+  - Next command: `python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode upload`
 - **Confirm whether Lily Roo TikTok has public Content Posting API approval and PUBLIC_TO_EVERYONE posting is allowed.** (`public_posting_approval`)
   - Values needed: `TIKTOK_PUBLIC_POSTING_APPROVED=true confirmation`
   - Safe storage: `Worker variable via guarded approval helper`
@@ -55,7 +55,9 @@ Generated: 2026-06-22T08:40:10.281081Z
 - Required names: `TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN`
 - Handoff template: `data/tiktok_secret_handoff_template.env`
 - OAuth helper: `scripts/tiktok_oauth_handoff.py`
-- Requested OAuth scopes: `user.info.basic, video.upload, video.publish`
+- Requested OAuth scopes: `user.info.basic, video.upload`
+- Direct post OAuth scopes: `user.info.basic, video.upload, video.publish`
+- Scope strategy: Request only video.upload for the first inbox-draft connector path; add video.publish only after direct public posting approval exists.
 - Local secret env: `secrets/social_api.env`
 - Local secret env exists: **True**
 - Initialize local secret env: `not needed`
@@ -68,8 +70,8 @@ Generated: 2026-06-22T08:40:10.281081Z
 - Brand organic disclosure: **True**
 - AIGC label enabled: **True**
 - OAuth preview: `python3 scripts/tiktok_oauth_handoff.py`
-- OAuth auth URL: `python3 scripts/tiktok_oauth_handoff.py --print-auth-url`
-- OAuth code exchange: `python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply`
+- OAuth auth URL: `python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload`
+- OAuth code exchange: `python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode upload`
 - Dry-run first: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
 - Apply after review: `not available until local secrets exist`
 - Public posting approval preview: `python3 scripts/set_tiktok_public_posting_approval.py --approved`
@@ -89,10 +91,10 @@ Generated: 2026-06-22T08:40:10.281081Z
   - Local secret env exists at secrets/social_api.env.
 - **oauth_authorization_url**: `blocked`
   - secrets/social_api.env is missing auth URL values: TIKTOK_CLIENT_KEY, TIKTOK_REDIRECT_URI.
-  - Command: `python3 scripts/tiktok_oauth_handoff.py --print-auth-url`
+  - Command: `python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload`
 - **oauth_token_exchange**: `blocked`
   - secrets/social_api.env is missing token exchange values: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REDIRECT_URI.
-  - Command: `python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply`
+  - Command: `python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode upload`
 - **local_refresh_credentials**: `blocked`
   - secrets/social_api.env is missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.
   - Command: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
@@ -120,8 +122,8 @@ Generated: 2026-06-22T08:40:10.281081Z
 
 ## Commands
 - Preview OAuth handoff: `python3 scripts/tiktok_oauth_handoff.py`
-- Generate OAuth auth URL: `python3 scripts/tiktok_oauth_handoff.py --print-auth-url`
-- Exchange OAuth code after authorization: `python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply`
+- Generate OAuth auth URL: `python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload`
+- Exchange OAuth code after authorization: `python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode upload`
 - Preview local secrets: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
 - Preview inbox draft upload: `python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run`
 - Push after local credentials are present: `not available until local secrets exist`

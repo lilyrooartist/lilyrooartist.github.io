@@ -92,8 +92,8 @@ def build_payload() -> dict:
     local_upload_preview = preflight_summary.get("local_upload_preview_command") or "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run"
     local_post_refresh_ready = bool(preflight_summary.get("local_posting_helper_uses_refresh_token"))
     oauth_preview = credential_handoff.get("oauth_preview_command") or "python3 scripts/tiktok_oauth_handoff.py"
-    oauth_url_command = credential_handoff.get("oauth_authorization_url_command") or "python3 scripts/tiktok_oauth_handoff.py --print-auth-url"
-    oauth_exchange_command = credential_handoff.get("oauth_exchange_command") or "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply"
+    oauth_url_command = credential_handoff.get("oauth_authorization_url_command") or "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload"
+    oauth_exchange_command = credential_handoff.get("oauth_exchange_command") or "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode upload"
     oauth_url_missing = credential_handoff.get("oauth_authorization_url_missing") or []
     oauth_exchange_missing = credential_handoff.get("oauth_token_exchange_missing") or []
     repair_rows = [
@@ -133,7 +133,7 @@ def build_payload() -> dict:
             "Authorize account",
             "ready" if not oauth_url_missing else "blocked",
             "Generate TikTok authorization URL",
-            "Create the TikTok authorization URL, open it, and sign in as the Lily Roo TikTok account. The returned code is short-lived and should be exchanged immediately.",
+            "Create the TikTok authorization URL for the upload-draft scope bundle, open it, and sign in as the Lily Roo TikTok account. The returned code is short-lived and should be exchanged immediately.",
             oauth_url_command,
             oauth_url_missing,
         ),
@@ -142,7 +142,7 @@ def build_payload() -> dict:
             "Authorize account",
             "ready" if not oauth_exchange_missing else "blocked",
             "Exchange authorization code",
-            "Exchange the returned TikTok authorization code for local access and refresh tokens. The helper writes token values only with --apply and never prints them.",
+            "Exchange the returned TikTok authorization code for local access and refresh tokens using the same upload-mode scope path. The helper writes token values only with --apply and never prints them.",
             oauth_exchange_command,
             oauth_exchange_missing,
         ),

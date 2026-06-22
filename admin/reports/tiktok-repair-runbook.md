@@ -1,6 +1,6 @@
 # TikTok Repair Runbook - Lily Roo
 
-Generated: 2026-06-22T08:40:10.349641Z
+Generated: 2026-06-22T08:54:16.498124Z
 
 ## Summary
 - Status: **blocked**
@@ -35,13 +35,13 @@ Generated: 2026-06-22T08:40:10.349641Z
   - Blocked by: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN
   - Command: `python3 scripts/tiktok_oauth_handoff.py`
 - **Authorize account - Generate TikTok authorization URL**: `blocked`
-  - Create the TikTok authorization URL, open it, and sign in as the Lily Roo TikTok account. The returned code is short-lived and should be exchanged immediately.
+  - Create the TikTok authorization URL for the upload-draft scope bundle, open it, and sign in as the Lily Roo TikTok account. The returned code is short-lived and should be exchanged immediately.
   - Blocked by: TIKTOK_CLIENT_KEY, TIKTOK_REDIRECT_URI
-  - Command: `python3 scripts/tiktok_oauth_handoff.py --print-auth-url`
+  - Command: `python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload`
 - **Authorize account - Exchange authorization code**: `blocked`
-  - Exchange the returned TikTok authorization code for local access and refresh tokens. The helper writes token values only with --apply and never prints them.
+  - Exchange the returned TikTok authorization code for local access and refresh tokens using the same upload-mode scope path. The helper writes token values only with --apply and never prints them.
   - Blocked by: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REDIRECT_URI
-  - Command: `python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply`
+  - Command: `python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode upload`
 - **Confirm approval - Confirm public posting approval**: `blocked`
   - Set TikTok public posting approval only after Lily Roo is approved for public TikTok posting and PUBLIC_TO_EVERYONE is intentionally allowed. If approval is confirmed locally, apply and deploy the guarded Worker var update.
   - Blocked by: TIKTOK_PUBLIC_POSTING_APPROVED

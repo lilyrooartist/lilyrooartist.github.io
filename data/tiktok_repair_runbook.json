@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T08:40:10.349641Z",
+  "generated_at": "2026-06-22T08:54:16.498124Z",
   "safe_mode": true,
   "status": "blocked",
   "source": {
@@ -37,8 +37,8 @@
     "local_secret_env_exists": true,
     "initialize_local_secret_env_command": "",
     "oauth_preview_command": "python3 scripts/tiktok_oauth_handoff.py",
-    "oauth_authorization_url_command": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url",
-    "oauth_exchange_command": "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply",
+    "oauth_authorization_url_command": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload",
+    "oauth_exchange_command": "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode upload",
     "local_post_preview_command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --dry-run",
     "local_upload_preview_command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run",
     "earliest_tiktok_api_path": "video.upload inbox draft; final public URL still requires human publish and URL logging.",
@@ -108,8 +108,8 @@
       "phase": "Authorize account",
       "status": "blocked",
       "title": "Generate TikTok authorization URL",
-      "detail": "Create the TikTok authorization URL, open it, and sign in as the Lily Roo TikTok account. The returned code is short-lived and should be exchanged immediately.",
-      "command": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url",
+      "detail": "Create the TikTok authorization URL for the upload-draft scope bundle, open it, and sign in as the Lily Roo TikTok account. The returned code is short-lived and should be exchanged immediately.",
+      "command": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload",
       "blocked_by": [
         "TIKTOK_CLIENT_KEY",
         "TIKTOK_REDIRECT_URI"
@@ -120,8 +120,8 @@
       "phase": "Authorize account",
       "status": "blocked",
       "title": "Exchange authorization code",
-      "detail": "Exchange the returned TikTok authorization code for local access and refresh tokens. The helper writes token values only with --apply and never prints them.",
-      "command": "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply",
+      "detail": "Exchange the returned TikTok authorization code for local access and refresh tokens using the same upload-mode scope path. The helper writes token values only with --apply and never prints them.",
+      "command": "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode upload",
       "blocked_by": [
         "TIKTOK_CLIENT_KEY",
         "TIKTOK_CLIENT_SECRET",

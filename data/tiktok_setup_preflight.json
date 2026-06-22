@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T08:40:10.281081Z",
+  "generated_at": "2026-06-22T08:54:16.467159Z",
   "safe_mode": true,
   "source": {
     "local_secret_source": "secrets/social_api.env",
@@ -59,8 +59,8 @@
     "public_posting_deploy_command": "",
     "refresh_command": "python3 scripts/refresh_promo_admin.py",
     "oauth_preview_command": "python3 scripts/tiktok_oauth_handoff.py",
-    "oauth_authorization_url_command": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url",
-    "oauth_exchange_command": "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply",
+    "oauth_authorization_url_command": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload",
+    "oauth_exchange_command": "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode upload",
     "platform_repair_rows": 1
   },
   "credential_handoff": {
@@ -109,12 +109,17 @@
     "oauth_handoff_script": "scripts/tiktok_oauth_handoff.py",
     "requested_oauth_scopes": [
       "user.info.basic",
+      "video.upload"
+    ],
+    "direct_post_oauth_scopes": [
+      "user.info.basic",
       "video.upload",
       "video.publish"
     ],
+    "scope_strategy": "Request only video.upload for the first inbox-draft connector path; add video.publish only after direct public posting approval exists.",
     "oauth_preview_command": "python3 scripts/tiktok_oauth_handoff.py",
-    "oauth_authorization_url_command": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url",
-    "oauth_exchange_command": "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply",
+    "oauth_authorization_url_command": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload",
+    "oauth_exchange_command": "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode upload",
     "local_public_posting_approval_confirmed": false,
     "public_posting_approved": false,
     "default_privacy": "PUBLIC_TO_EVERYONE",
@@ -158,7 +163,7 @@
         ],
         "safe_storage": "secrets/social_api.env",
         "why": "The connector cannot generate an OAuth URL, exchange a code, or refresh TikTok access without these app values.",
-        "next_command_after_input": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url"
+        "next_command_after_input": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload"
       },
       {
         "id": "authorize_lily_roo_tiktok_account",
@@ -170,7 +175,7 @@
         ],
         "safe_storage": "secrets/social_api.env",
         "why": "The refresh token is created only after the Lily Roo account authorizes the app with the requested scopes.",
-        "next_command_after_input": "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply"
+        "next_command_after_input": "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode upload"
       },
       {
         "id": "public_posting_approval",
@@ -234,13 +239,13 @@
       "name": "oauth_authorization_url",
       "status": "blocked",
       "detail": "secrets/social_api.env is missing auth URL values: TIKTOK_CLIENT_KEY, TIKTOK_REDIRECT_URI.",
-      "command": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url"
+      "command": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload"
     },
     {
       "name": "oauth_token_exchange",
       "status": "blocked",
       "detail": "secrets/social_api.env is missing token exchange values: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REDIRECT_URI.",
-      "command": "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply"
+      "command": "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode upload"
     },
     {
       "name": "local_refresh_credentials",
