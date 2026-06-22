@@ -14,6 +14,7 @@ PLATFORM_REPAIR = ROOT / "data" / "platform_repair_status.json"
 OUT = ROOT / "data" / "experiment_result_clipboard.json"
 REPORT = ROOT / "admin" / "reports" / "experiment-result-clipboard.md"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
+RESULT_FIELDS = ["views", "likes", "comments", "shares", "saves", "subs_delta"]
 
 
 def read_json(path: Path, fallback):
@@ -49,6 +50,48 @@ def replace_text_embed(html: str, block_id: str, content: str) -> str:
     return html[:start_content] + content.rstrip() + html[end:]
 
 
+def evidence_sources(platform: str, post_url: str) -> list[dict]:
+    platform_lower = platform.lower()
+    sources = []
+    if post_url:
+        sources.append({
+            "label": "Logged public post",
+            "url": post_url,
+            "instruction": "Open the public post to confirm the URL and visible engagement before entering metrics.",
+        })
+    if platform_lower == "x":
+        sources.append({
+            "label": "X Analytics",
+            "url": "https://analytics.x.com/",
+            "instruction": "Use the logged post URL or post ID to find the post and copy visible analytics values.",
+        })
+    elif platform_lower == "facebook":
+        sources.append({
+            "label": "Meta Business Suite",
+            "url": "https://business.facebook.com/latest/insights",
+            "instruction": "Open post insights for the Lily Roo page post and copy the available result values.",
+        })
+    elif platform_lower == "instagram":
+        sources.append({
+            "label": "Instagram Insights",
+            "url": "https://business.facebook.com/latest/insights",
+            "instruction": "Open Instagram content insights and copy values only for the matching post.",
+        })
+    elif platform_lower == "tiktok":
+        sources.append({
+            "label": "TikTok Studio analytics",
+            "url": "https://www.tiktok.com/creator-center/analytics",
+            "instruction": "Open the post in TikTok Studio analytics and copy values only after the public URL is logged.",
+        })
+    elif "youtube" in platform_lower:
+        sources.append({
+            "label": "YouTube Studio analytics",
+            "url": "https://studio.youtube.com/",
+            "instruction": "Open the matching Community post analytics and copy available public-performance values.",
+        })
+    return sources
+
+
 def metric_cards(rows: list[dict]) -> list[dict]:
     grouped: dict[tuple[str, str], list[dict]] = defaultdict(list)
     for row in rows:
@@ -78,6 +121,26 @@ def metric_cards(rows: list[dict]) -> list[dict]:
             "ready_field_count": len(ready_fields),
             "pending_fields": pending_fields,
             "ready_fields": ready_fields,
+            "wide_entry_row": {
+                "experiment_format": first.get("experiment_format") or "",
+                "post_id": post_id,
+                "platform": first.get("platform") or "",
+                "song": first.get("song") or "",
+                "post_url": first.get("post_url") or "",
+                "published_date": first.get("published_date") or "",
+                "source_row": source_row,
+                **{field: next((row.get("new_value") or "" for row in group_rows if row.get("field") == field), "") for field in RESULT_FIELDS},
+                "evidence_note": next((row.get("evidence_note") or "" for row in group_rows if row.get("evidence_note")), ""),
+            },
+            "wide_entry_instruction": "Fill one wide entry CSV row in data/experiment_result_entry_wide_template.csv for this post; keep unknown metrics blank and include one evidence_note.",
+            "evidence_sources": evidence_sources(first.get("platform") or "", first.get("post_url") or ""),
+            "collection_checklist": [
+                "Open the logged public post and confirm it matches this post_id.",
+                "Open the platform analytics or insights source listed for this card.",
+                "Copy only numeric values that are visible in the source.",
+                "Enter values in the wide entry CSV row for this post_id and source_row.",
+                "Add an evidence_note with source and collection date before import preview.",
+            ],
             "fields": [
                 {
                     "field": row.get("field") or "",
@@ -289,7 +352,20 @@ def build_markdown(payload: dict) -> str:
             f"- URL: {card['post_url'] or 'not logged'}",
             f"- Published: {card['published_date'] or 'unknown'}; Published_Log row: `{card['source_row']}`",
             f"- Pending fields: `{', '.join(card['pending_fields']) or 'none'}`",
+            f"- Wide entry instruction: {card.get('wide_entry_instruction')}",
         ])
+        wide_entry = card.get("wide_entry_row") or {}
+        if wide_entry:
+            fillable = ", ".join(field for field in RESULT_FIELDS if field in card.get("pending_fields", []))
+            lines.append(f"- Wide CSV target: post_id `{wide_entry.get('post_id')}`, source_row `{wide_entry.get('source_row')}`, fill `{fillable or 'none'}`.")
+        if card.get("evidence_sources"):
+            lines.append("- Evidence sources:")
+            for source in card["evidence_sources"]:
+                lines.append(f"  - {source.get('label')}: {source.get('url')} - {source.get('instruction')}")
+        if card.get("collection_checklist"):
+            lines.append("- Collection checklist:")
+            for item in card["collection_checklist"]:
+                lines.append(f"  - {item}")
         for field in card["fields"]:
             lines.append(f"  - `{field['field']}`: {field['collection_hint']}")
     lines.extend(["", "## Measurement Priorities"])

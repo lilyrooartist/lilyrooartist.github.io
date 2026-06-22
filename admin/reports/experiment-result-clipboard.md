@@ -1,6 +1,6 @@
 # Experiment Result Clipboard - Lily Roo
 
-Generated: 2026-06-22T07:15:28.970739Z
+Generated: 2026-06-22T07:19:37.248674Z
 
 ## Summary
 - Status: **needs_values**
@@ -21,6 +21,17 @@ Generated: 2026-06-22T07:15:28.970739Z
 - URL: https://x.com/i/web/status/2062920257577029712
 - Published: 2026-06-05; Published_Log row: `16`
 - Pending fields: `views, likes, comments, shares, saves, subs_delta`
+- Wide entry instruction: Fill one wide entry CSV row in data/experiment_result_entry_wide_template.csv for this post; keep unknown metrics blank and include one evidence_note.
+- Wide CSV target: post_id `FP-AUTO-257`, source_row `16`, fill `views, likes, comments, shares, saves, subs_delta`.
+- Evidence sources:
+  - Logged public post: https://x.com/i/web/status/2062920257577029712 - Open the public post to confirm the URL and visible engagement before entering metrics.
+  - X Analytics: https://analytics.x.com/ - Use the logged post URL or post ID to find the post and copy visible analytics values.
+- Collection checklist:
+  - Open the logged public post and confirm it matches this post_id.
+  - Open the platform analytics or insights source listed for this card.
+  - Copy only numeric values that are visible in the source.
+  - Enter values in the wide entry CSV row for this post_id and source_row.
+  - Add an evidence_note with source and collection date before import preview.
   - `views`: Open X analytics for https://x.com/i/web/status/2062920257577029712 and record views.
   - `likes`: Open X analytics for https://x.com/i/web/status/2062920257577029712 and record likes.
   - `comments`: Open X analytics for https://x.com/i/web/status/2062920257577029712 and record comments.
@@ -32,6 +43,17 @@ Generated: 2026-06-22T07:15:28.970739Z
 - URL: https://www.facebook.com/903693509504290_122118326547249470
 - Published: 2026-06-07; Published_Log row: `18`
 - Pending fields: `views, likes, comments, shares, saves, subs_delta`
+- Wide entry instruction: Fill one wide entry CSV row in data/experiment_result_entry_wide_template.csv for this post; keep unknown metrics blank and include one evidence_note.
+- Wide CSV target: post_id `FP-AUTO-260`, source_row `18`, fill `views, likes, comments, shares, saves, subs_delta`.
+- Evidence sources:
+  - Logged public post: https://www.facebook.com/903693509504290_122118326547249470 - Open the public post to confirm the URL and visible engagement before entering metrics.
+  - Meta Business Suite: https://business.facebook.com/latest/insights - Open post insights for the Lily Roo page post and copy the available result values.
+- Collection checklist:
+  - Open the logged public post and confirm it matches this post_id.
+  - Open the platform analytics or insights source listed for this card.
+  - Copy only numeric values that are visible in the source.
+  - Enter values in the wide entry CSV row for this post_id and source_row.
+  - Add an evidence_note with source and collection date before import preview.
   - `views`: Open Meta Business Suite for https://www.facebook.com/903693509504290_122118326547249470 and record views.
   - `likes`: Open Meta Business Suite for https://www.facebook.com/903693509504290_122118326547249470 and record likes.
   - `comments`: Open Meta Business Suite for https://www.facebook.com/903693509504290_122118326547249470 and record comments.
@@ -43,6 +65,17 @@ Generated: 2026-06-22T07:15:28.970739Z
 - URL: https://x.com/i/web/status/2063600780834136468
 - Published: 2026-06-07; Published_Log row: `17`
 - Pending fields: `views, likes, comments, shares, saves, subs_delta`
+- Wide entry instruction: Fill one wide entry CSV row in data/experiment_result_entry_wide_template.csv for this post; keep unknown metrics blank and include one evidence_note.
+- Wide CSV target: post_id `FP-AUTO-262`, source_row `17`, fill `views, likes, comments, shares, saves, subs_delta`.
+- Evidence sources:
+  - Logged public post: https://x.com/i/web/status/2063600780834136468 - Open the public post to confirm the URL and visible engagement before entering metrics.
+  - X Analytics: https://analytics.x.com/ - Use the logged post URL or post ID to find the post and copy visible analytics values.
+- Collection checklist:
+  - Open the logged public post and confirm it matches this post_id.
+  - Open the platform analytics or insights source listed for this card.
+  - Copy only numeric values that are visible in the source.
+  - Enter values in the wide entry CSV row for this post_id and source_row.
+  - Add an evidence_note with source and collection date before import preview.
   - `views`: Open X analytics for https://x.com/i/web/status/2063600780834136468 and record views.
   - `likes`: Open X analytics for https://x.com/i/web/status/2063600780834136468 and record likes.
   - `comments`: Open X analytics for https://x.com/i/web/status/2063600780834136468 and record comments.

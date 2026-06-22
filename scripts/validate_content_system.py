@@ -1945,6 +1945,10 @@ def validate_generated_outputs(failures):
             and "update_experiment_results.py" in ((clipboard.get("summary") or {}).get("result_import_preview_command") or "")
             and "update_experiment_results.py --from-wide-csv" in ((clipboard.get("summary") or {}).get("wide_result_import_preview_command") or "")
             and all(card.get("post_id") and card.get("platform") and card.get("pending_fields") and card.get("fields") for card in cards)
+            and all((card.get("wide_entry_row") or {}).get("post_id") == card.get("post_id") and (card.get("wide_entry_row") or {}).get("source_row") == card.get("source_row") for card in cards)
+            and all(card.get("wide_entry_instruction") and "wide entry CSV" in card.get("wide_entry_instruction") for card in cards)
+            and all(card.get("evidence_sources") and all(source.get("label") and source.get("url") and source.get("instruction") for source in card.get("evidence_sources") or []) for card in cards)
+            and all(any("evidence_note" in item for item in card.get("collection_checklist") or []) for card in cards)
             and all(card.get("post_id") and card.get("next_action") for card in missing_cards)
             and all(item.get("post_id") and item.get("action") in {"collect_metrics", "post_and_log_public_url", "log_public_url", "clear_platform_blocker"} and item.get("reason") for item in priority_cards)
             and all(item.get("direct_preview_command_template") for item in priority_cards if item.get("action") == "collect_metrics")
@@ -3845,7 +3849,7 @@ def validate_generated_outputs(failures):
         fail("youtube-community-url-reconciliation.md missing", failures)
     if EXPERIMENT_RESULT_CLIPBOARD_REPORT.exists():
         result_clipboard_report = EXPERIMENT_RESULT_CLIPBOARD_REPORT.read_text(encoding="utf-8")
-        if "Experiment Result Clipboard" in result_clipboard_report and "Metric Cards" in result_clipboard_report and "Measurement Priorities" in result_clipboard_report and "Missing Public URLs" in result_clipboard_report and "Preview import" in result_clipboard_report and "Guardrails" in result_clipboard_report:
+        if "Experiment Result Clipboard" in result_clipboard_report and "Metric Cards" in result_clipboard_report and "Measurement Priorities" in result_clipboard_report and "Missing Public URLs" in result_clipboard_report and "Preview import" in result_clipboard_report and "Wide entry instruction" in result_clipboard_report and "Evidence sources" in result_clipboard_report and "Collection checklist" in result_clipboard_report and "Guardrails" in result_clipboard_report:
             ok("experiment result clipboard markdown report present")
         else:
             fail("experiment-result-clipboard.md missing expected sections", failures)
