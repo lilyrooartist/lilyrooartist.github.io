@@ -11,6 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 MANUAL_DISTRIBUTION = ROOT / "data" / "manual_distribution_packet.json"
 YOUTUBE_RECONCILIATION = ROOT / "data" / "youtube_community_url_reconciliation.json"
 PASTE_CARD_DIR = ROOT / "data" / "manual-posting-cards"
+SESSION_FILE = PASTE_CARD_DIR / "youtube-community-session.md"
 OUT = ROOT / "data" / "manual_posting_clipboard.json"
 REPORT = ROOT / "admin" / "reports" / "manual-posting-clipboard.md"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
@@ -214,6 +215,7 @@ def build_payload() -> dict:
         "posting_bundle_count": sum(1 for card in cards if card.get("posting_bundle")),
         "url_template_path": completion.get("url_template_path") or "",
         "paste_text_dir": str(PASTE_CARD_DIR.relative_to(ROOT)),
+        "session_file_path": str(SESSION_FILE.relative_to(ROOT)),
         "paste_text_file_count": len(paste_text_files),
         "paste_text_files": paste_text_files,
         "batch_log_preview_command": completion.get("batch_log_preview_command") or "",
@@ -283,6 +285,52 @@ def write_paste_files(cards: list[dict]) -> None:
         path.write_text((card.get("paste_text") or "").rstrip() + "\n", encoding="utf-8")
 
 
+def write_session_file(payload: dict) -> None:
+    summary = payload.get("summary") or {}
+    session = payload.get("session_manifest") or {}
+    lines = [
+        "# YouTube Community Manual Posting Session",
+        "",
+        f"Generated: {payload.get('generated_at')}",
+        f"Surface: {summary.get('public_community_url') or session.get('surface_url') or 'not set'}",
+        f"URL worksheet: {summary.get('url_template_path') or 'not available'}",
+        f"Partial apply: {summary.get('batch_log_partial_apply_command') or 'not available'}",
+        "",
+        "## Steps",
+    ]
+    for step in session.get("posting_sequence") or []:
+        lines.append(f"- {step}")
+    lines.extend([
+        "",
+        "## Posts",
+    ])
+    if not payload.get("post_cards"):
+        lines.append("- No manual posts are currently waiting.")
+    for index, card in enumerate(payload.get("post_cards") or [], start=1):
+        bundle = card.get("posting_bundle") or {}
+        lines.extend([
+            f"### {index}. {card.get('id')} - {card.get('release')}",
+            f"- Copy file: {card.get('paste_text_path') or 'not available'}",
+            f"- Asset: {bundle.get('asset_source') or card.get('asset_url') or 'not available'}",
+            f"- Preview after public URL exists: {card.get('log_preview_command') or 'not available'}",
+            f"- Apply after preview passes: {card.get('log_apply_command') or 'not available'}",
+            "",
+            "```text",
+            (card.get("paste_text") or "").rstrip(),
+            "```",
+            "",
+            "Public URL:",
+            "",
+        ])
+    lines.extend([
+        "## Completion Evidence",
+    ])
+    for item in session.get("completion_evidence") or []:
+        lines.append(f"- {item}")
+    lines.append("")
+    SESSION_FILE.write_text("\n".join(lines), encoding="utf-8")
+
+
 def build_markdown(payload: dict) -> str:
     summary = payload["summary"]
     lines = [
@@ -297,6 +345,7 @@ def build_markdown(payload: dict) -> str:
         f"- Postable cards: **{summary['postable_count']}**",
         f"- Waiting public URLs: **{summary['waiting_public_url_count']}**",
         f"- URL worksheet: `{summary.get('url_template_path') or 'not available'}`",
+        f"- Session file: `{summary.get('session_file_path') or 'not available'}`",
         f"- Paste text files: `{summary.get('paste_text_dir') or 'not available'}` ({summary.get('paste_text_file_count', 0)} file(s))",
         f"- Batch log preview: `{summary.get('batch_log_preview_command') or 'not available'}`",
         f"- Batch log apply after posting: `{summary.get('batch_log_apply_command') or 'not available'}`",
@@ -414,6 +463,7 @@ def sync_admin(payload: dict, markdown: str) -> None:
 def main() -> int:
     payload = build_payload()
     write_paste_files(payload["post_cards"])
+    write_session_file(payload)
     OUT.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     markdown = build_markdown(payload)
     REPORT.write_text(markdown, encoding="utf-8")

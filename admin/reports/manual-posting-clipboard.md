@@ -1,6 +1,6 @@
 # Manual Posting Clipboard - Lily Roo
 
-Generated: 2026-06-22T08:40:10.169106Z
+Generated: 2026-06-22T08:42:27.136306Z
 
 ## Summary
 - Status: **ready_to_post**
@@ -9,6 +9,7 @@ Generated: 2026-06-22T08:40:10.169106Z
 - Postable cards: **3**
 - Waiting public URLs: **3**
 - URL worksheet: `data/manual_distribution_url_template.csv`
+- Session file: `data/manual-posting-cards/youtube-community-session.md`
 - Paste text files: `data/manual-posting-cards` (3 file(s))
 - Batch log preview: `python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv`
 - Batch log apply after posting: `python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --apply --refresh-admin`
