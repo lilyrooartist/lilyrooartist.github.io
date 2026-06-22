@@ -1,6 +1,6 @@
 # YouTube Community Manual Posting Session
 
-Generated: 2026-06-22T09:03:30.176974Z
+Generated: 2026-06-22T09:24:01.121024Z
 Surface: https://www.youtube.com/@lilyroo.artist/community
 URL worksheet: data/manual_distribution_url_template.csv
 Partial apply: python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --allow-partial --apply --refresh-admin
@@ -11,6 +11,14 @@ Partial apply: python3 scripts/log_manual_distribution.py --from-csv data/manual
 - After each publish, copy the real public URL into the URL worksheet.
 - Run the batch preview command; use partial apply if only some rows have public URLs.
 - After logging, collect first metrics from the result handoff report.
+
+## First URL Acceleration
+- Status: ready_after_first_public_url
+- First post: FP-AUTO-261
+- Why: Logging the first public URL immediately lets that post enter the result-collection queue without waiting for the full batch.
+- Preview: python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL
+- Partial apply: python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --allow-partial --apply --refresh-admin
+- Measurement report: admin/reports/experiment-result-clipboard.md
 
 ## Posts
 ### 1. FP-AUTO-261 - I Learned It All in Fifteen Seconds

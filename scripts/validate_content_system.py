@@ -1662,6 +1662,7 @@ def validate_generated_outputs(failures):
         cards = clipboard.get("post_cards") or []
         summary = clipboard.get("summary") or {}
         session = clipboard.get("session_manifest") or {}
+        first_url = clipboard.get("first_url_acceleration") or {}
         session_rows = session.get("rows") or []
         paste_text_files = summary.get("paste_text_files") or []
         paste_file_contents_match = all(
@@ -1704,6 +1705,17 @@ def validate_generated_outputs(failures):
             and session.get("batch_log_partial_apply_command") == summary.get("batch_log_partial_apply_command")
             and session.get("public_url_reconciliation_command") == summary.get("public_url_reconciliation_command")
             and session.get("result_handoff_report") == summary.get("result_handoff_report")
+            and first_url.get("status") in {"ready_after_first_public_url", "clear"}
+            and (
+                not cards
+                or (
+                    first_url.get("first_post_id") == cards[0].get("id")
+                    and first_url.get("single_preview_command") == cards[0].get("log_preview_command")
+                    and first_url.get("partial_batch_apply_command") == summary.get("batch_log_partial_apply_command")
+                    and first_url.get("measurement_report") == summary.get("result_handoff_report")
+                    and "real public YouTube Community post URL" in (first_url.get("guardrail") or "")
+                )
+            )
             and any("Open the YouTube Community surface once" in item for item in session.get("posting_sequence") or [])
             and any("Published_Log.csv" in item for item in session.get("completion_evidence") or [])
             and "real public URL" in (session.get("guardrail") or "")
@@ -3801,7 +3813,33 @@ def validate_generated_outputs(failures):
         fail("build_manual_distribution_packet.py missing", failures)
     if MANUAL_POSTING_CLIPBOARD_SCRIPT.exists():
         clipboard_text = MANUAL_POSTING_CLIPBOARD_SCRIPT.read_text(encoding="utf-8")
-        if "manual_posting_clipboard.json" in clipboard_text and "manual-posting-clipboard.md" in clipboard_text and "manual_distribution_packet.json" in clipboard_text and "youtube_community_url_reconciliation.json" in clipboard_text and "session_manifest" in clipboard_text and "build_session_manifest" in clipboard_text and "Session Manifest" in clipboard_text and "posting_sequence" in clipboard_text and "public_url_reconciliation_command" in clipboard_text and "batch_log_partial_apply_command" in clipboard_text and "--allow-partial --apply --refresh-admin" in clipboard_text and "post_cards" in clipboard_text and "posting_bundle" in clipboard_text and "operator_sequence" in clipboard_text and "result_collection_trigger" in clipboard_text and "paste_text" in clipboard_text and "paste_text_path" in clipboard_text and "manual-posting-cards" in clipboard_text and "write_paste_files" in clipboard_text and "PUBLIC_URL" in clipboard_text and "log_manual_distribution.py" in clipboard_text and "This clipboard does not approve" in clipboard_text and "subprocess" not in clipboard_text:
+        clipboard_required = [
+            "manual_posting_clipboard.json",
+            "manual-posting-clipboard.md",
+            "manual_distribution_packet.json",
+            "youtube_community_url_reconciliation.json",
+            "session_manifest",
+            "build_session_manifest",
+            "first_url_acceleration",
+            "First URL Acceleration",
+            "Session Manifest",
+            "posting_sequence",
+            "public_url_reconciliation_command",
+            "batch_log_partial_apply_command",
+            "--allow-partial --apply --refresh-admin",
+            "post_cards",
+            "posting_bundle",
+            "operator_sequence",
+            "result_collection_trigger",
+            "paste_text",
+            "paste_text_path",
+            "manual-posting-cards",
+            "write_paste_files",
+            "PUBLIC_URL",
+            "log_manual_distribution.py",
+            "This clipboard does not approve",
+        ]
+        if all(item in clipboard_text for item in clipboard_required) and "subprocess" not in clipboard_text:
             ok("manual posting clipboard builder is review-only")
         else:
             fail("build_manual_posting_clipboard.py missing review-only clipboard outputs", failures)
@@ -3969,7 +4007,24 @@ def validate_generated_outputs(failures):
         fail("manual-distribution-packet.md missing", failures)
     if MANUAL_POSTING_CLIPBOARD_REPORT.exists():
         clipboard_report = MANUAL_POSTING_CLIPBOARD_REPORT.read_text(encoding="utf-8")
-        if "Manual Posting Clipboard" in clipboard_report and "Session Manifest" in clipboard_report and "Session rows" in clipboard_report and "## Cards" in clipboard_report and "Posting bundle" in clipboard_report and "Bundle result trigger" in clipboard_report and "Paste text" in clipboard_report and "Log preview after posting" in clipboard_report and "Partial batch apply after first URL" in clipboard_report and "Public URL reconciliation" in clipboard_report and "Result handoff after URL logging" in clipboard_report and "After posting checklist" in clipboard_report and "Operator Steps" in clipboard_report and "Guardrails" in clipboard_report:
+        clipboard_report_required = [
+            "Manual Posting Clipboard",
+            "First URL Acceleration",
+            "Session Manifest",
+            "Session rows",
+            "## Cards",
+            "Posting bundle",
+            "Bundle result trigger",
+            "Paste text",
+            "Log preview after posting",
+            "Partial batch apply after first URL",
+            "Public URL reconciliation",
+            "Result handoff after URL logging",
+            "After posting checklist",
+            "Operator Steps",
+            "Guardrails",
+        ]
+        if all(item in clipboard_report for item in clipboard_report_required):
             ok("manual posting clipboard markdown report present")
         else:
             fail("manual-posting-clipboard.md missing expected sections", failures)

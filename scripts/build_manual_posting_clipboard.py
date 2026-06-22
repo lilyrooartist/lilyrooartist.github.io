@@ -186,6 +186,34 @@ def build_session_manifest(cards: list[dict], summary: dict) -> dict:
     }
 
 
+def first_url_acceleration(cards: list[dict], summary: dict) -> dict:
+    waiting = [card for card in cards if not (card.get("public_url") or "").strip()]
+    if not waiting:
+        return {
+            "status": "clear",
+            "first_post_id": "",
+            "next_action": "All manual post URLs are already logged.",
+            "guardrail": "No placeholder URLs are accepted.",
+        }
+    first = waiting[0]
+    return {
+        "status": "ready_after_first_public_url",
+        "first_post_id": first.get("id") or "",
+        "first_release": first.get("release") or "",
+        "surface_url": first.get("public_community_url") or summary.get("public_community_url") or "",
+        "copy_source": first.get("paste_text_path") or "",
+        "asset_source": (first.get("posting_bundle") or {}).get("asset_source") or first.get("asset_url") or "",
+        "single_preview_command": first.get("log_preview_command") or "",
+        "single_apply_command": first.get("log_apply_command") or "",
+        "partial_batch_apply_command": summary.get("batch_log_partial_apply_command") or "",
+        "measurement_report": summary.get("result_handoff_report") or "admin/reports/experiment-result-clipboard.md",
+        "measurement_preview_command": "python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run",
+        "why": "Logging the first public URL immediately lets that post enter the result-collection queue without waiting for the full batch.",
+        "next_action": "Post the first card, paste its real public URL into the worksheet, run the preview, then apply with --allow-partial.",
+        "guardrail": "Use only a real public YouTube Community post URL; never apply PUBLIC_URL or blank worksheet rows.",
+    }
+
+
 def build_payload() -> dict:
     packet = read_json(MANUAL_DISTRIBUTION, {})
     reconciliation = read_json(YOUTUBE_RECONCILIATION, {})
@@ -232,6 +260,7 @@ def build_payload() -> dict:
             else "No approved manual posts are currently waiting."
         ),
     }
+    acceleration = first_url_acceleration(cards, summary)
     return {
         "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "safe_mode": True,
@@ -242,6 +271,7 @@ def build_payload() -> dict:
             "published_log_target": "admin/content/Published_Log.csv",
         },
         "summary": summary,
+        "first_url_acceleration": acceleration,
         "session_manifest": build_session_manifest(cards, summary),
         "post_cards": cards,
         "operator_steps": [
@@ -251,6 +281,7 @@ def build_payload() -> dict:
             "Publish manually in YouTube Studio Community.",
             "Copy the real public post URL.",
             "Run the preview logging command with the real URL, then run the apply command.",
+            "After the first public URL exists, use the first-url acceleration command so that post can enter result collection immediately.",
             "Or rerun the public URL reconciliation command after posting to auto-detect confident public URLs.",
             "If only one public URL is ready, use the partial batch apply command so that post can start accumulating measurable evidence immediately.",
         ],
@@ -288,6 +319,7 @@ def write_paste_files(cards: list[dict]) -> None:
 def write_session_file(payload: dict) -> None:
     summary = payload.get("summary") or {}
     session = payload.get("session_manifest") or {}
+    acceleration = payload.get("first_url_acceleration") or {}
     lines = [
         "# YouTube Community Manual Posting Session",
         "",
@@ -300,6 +332,16 @@ def write_session_file(payload: dict) -> None:
     ]
     for step in session.get("posting_sequence") or []:
         lines.append(f"- {step}")
+    lines.extend([
+        "",
+        "## First URL Acceleration",
+        f"- Status: {acceleration.get('status') or 'unknown'}",
+        f"- First post: {acceleration.get('first_post_id') or 'not available'}",
+        f"- Why: {acceleration.get('why') or 'not available'}",
+        f"- Preview: {acceleration.get('single_preview_command') or 'not available'}",
+        f"- Partial apply: {acceleration.get('partial_batch_apply_command') or 'not available'}",
+        f"- Measurement report: {acceleration.get('measurement_report') or 'not available'}",
+    ])
     lines.extend([
         "",
         "## Posts",
@@ -333,6 +375,7 @@ def write_session_file(payload: dict) -> None:
 
 def build_markdown(payload: dict) -> str:
     summary = payload["summary"]
+    acceleration = payload.get("first_url_acceleration") or {}
     lines = [
         "# Manual Posting Clipboard - Lily Roo",
         "",
@@ -355,6 +398,18 @@ def build_markdown(payload: dict) -> str:
         f"- Reconciliation apply if matches exist: `{summary.get('public_url_reconciliation_apply_command') or 'not available'}`",
         f"- Result handoff after URL logging: `{summary.get('result_handoff_report') or 'not available'}`",
         f"- Next action: {summary['next_action']}",
+        "",
+        "## First URL Acceleration",
+        f"- Status: **{acceleration.get('status', 'unknown')}**",
+        f"- First post: `{acceleration.get('first_post_id') or 'not available'}` ({acceleration.get('first_release') or 'unknown release'})",
+        f"- Copy file: `{acceleration.get('copy_source') or 'not available'}`",
+        f"- Asset: `{acceleration.get('asset_source') or 'not available'}`",
+        f"- Preview first URL: `{acceleration.get('single_preview_command') or 'not available'}`",
+        f"- Apply first URL with partial batch: `{acceleration.get('partial_batch_apply_command') or 'not available'}`",
+        f"- Measurement report: `{acceleration.get('measurement_report') or 'not available'}`",
+        f"- Measurement preview: `{acceleration.get('measurement_preview_command') or 'not available'}`",
+        f"- Why: {acceleration.get('why') or 'not available'}",
+        f"- Guardrail: {acceleration.get('guardrail') or 'Use only real public URLs.'}",
         "",
         "## Session Manifest",
     ]

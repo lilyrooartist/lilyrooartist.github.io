@@ -1,6 +1,6 @@
 # Manual Posting Clipboard - Lily Roo
 
-Generated: 2026-06-22T09:03:30.176974Z
+Generated: 2026-06-22T09:24:01.121024Z
 
 ## Summary
 - Status: **ready_to_post**
@@ -19,6 +19,18 @@ Generated: 2026-06-22T09:03:30.176974Z
 - Reconciliation apply if matches exist: `not available`
 - Result handoff after URL logging: `admin/reports/experiment-result-clipboard.md`
 - Next action: Post each card in YouTube Community, copy the real public URL, then log it.
+
+## First URL Acceleration
+- Status: **ready_after_first_public_url**
+- First post: `FP-AUTO-261` (I Learned It All in Fifteen Seconds)
+- Copy file: `data/manual-posting-cards/fp-auto-261.txt`
+- Asset: `assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg`
+- Preview first URL: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL`
+- Apply first URL with partial batch: `python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --allow-partial --apply --refresh-admin`
+- Measurement report: `admin/reports/experiment-result-clipboard.md`
+- Measurement preview: `python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run`
+- Why: Logging the first public URL immediately lets that post enter the result-collection queue without waiting for the full batch.
+- Guardrail: Use only a real public YouTube Community post URL; never apply PUBLIC_URL or blank worksheet rows.
 
 ## Session Manifest
 - Status: **ready_to_post**
@@ -159,6 +171,7 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
 - Publish manually in YouTube Studio Community.
 - Copy the real public post URL.
 - Run the preview logging command with the real URL, then run the apply command.
+- After the first public URL exists, use the first-url acceleration command so that post can enter result collection immediately.
 - Or rerun the public URL reconciliation command after posting to auto-detect confident public URLs.
 - If only one public URL is ready, use the partial batch apply command so that post can start accumulating measurable evidence immediately.
 

@@ -2036,6 +2036,7 @@ def manual_posting_clipboard_state(packet: dict) -> dict:
         "public_url_reconciliation_command": summary.get("public_url_reconciliation_command") or "",
         "public_url_reconciliation_apply_command": summary.get("public_url_reconciliation_apply_command") or "",
         "pending_log_ids": summary.get("pending_log_ids") or [],
+        "first_url_acceleration": packet.get("first_url_acceleration") or {},
         "post_cards": packet.get("post_cards") or [],
     }
 

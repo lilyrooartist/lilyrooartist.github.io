@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T09:03:30.176974Z",
+  "generated_at": "2026-06-22T09:24:01.121024Z",
   "safe_mode": true,
   "source": {
     "manual_distribution_packet": "data/manual_distribution_packet.json",
@@ -37,6 +37,22 @@
     "public_url_reconciliation_apply_command": "",
     "result_handoff_report": "admin/reports/experiment-result-clipboard.md",
     "next_action": "Post each card in YouTube Community, copy the real public URL, then log it."
+  },
+  "first_url_acceleration": {
+    "status": "ready_after_first_public_url",
+    "first_post_id": "FP-AUTO-261",
+    "first_release": "I Learned It All in Fifteen Seconds",
+    "surface_url": "https://www.youtube.com/@lilyroo.artist/community",
+    "copy_source": "data/manual-posting-cards/fp-auto-261.txt",
+    "asset_source": "assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
+    "single_preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL",
+    "single_apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL --apply --refresh-admin",
+    "partial_batch_apply_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --allow-partial --apply --refresh-admin",
+    "measurement_report": "admin/reports/experiment-result-clipboard.md",
+    "measurement_preview_command": "python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run",
+    "why": "Logging the first public URL immediately lets that post enter the result-collection queue without waiting for the full batch.",
+    "next_action": "Post the first card, paste its real public URL into the worksheet, run the preview, then apply with --allow-partial.",
+    "guardrail": "Use only a real public YouTube Community post URL; never apply PUBLIC_URL or blank worksheet rows."
   },
   "session_manifest": {
     "status": "ready_to_post",
@@ -423,6 +439,7 @@
     "Publish manually in YouTube Studio Community.",
     "Copy the real public post URL.",
     "Run the preview logging command with the real URL, then run the apply command.",
+    "After the first public URL exists, use the first-url acceleration command so that post can enter result collection immediately.",
     "Or rerun the public URL reconciliation command after posting to auto-detect confident public URLs.",
     "If only one public URL is ready, use the partial batch apply command so that post can start accumulating measurable evidence immediately."
   ],
