@@ -633,10 +633,38 @@ def validate_generated_outputs(failures):
             fail("promo_operations_packet.json missing phase or urgency summary", failures)
         action_kinds = {action.get("kind") for action in actions}
         required_kinds = {"approval_review", "store_verification", "manual_metrics", "platform_fix"}
+        clipboard_for_operations = json.loads(MANUAL_POSTING_CLIPBOARD.read_text(encoding="utf-8")) if MANUAL_POSTING_CLIPBOARD.exists() else {}
+        clipboard_summary_for_operations = clipboard_for_operations.get("summary") or {}
+        if int(clipboard_summary_for_operations.get("postable_count") or 0):
+            required_kinds.add("manual_distribution")
         if required_kinds <= action_kinds and all("command" in action and "label" in action and "phase" in action and "urgency" in action for action in actions):
             ok("promo operations packet groups approval, store, metric, and platform work")
         else:
             fail("promo_operations_packet.json missing required action groups", failures)
+        manual_distribution_actions = [
+            action for action in actions
+            if action.get("kind") == "manual_distribution"
+        ]
+        if int(clipboard_summary_for_operations.get("postable_count") or 0):
+            if (
+                manual_distribution_actions
+                and summary.get("manual_distribution_actions") == len(manual_distribution_actions)
+                and all(action.get("phase") == "Publish manual posts" for action in manual_distribution_actions)
+                and all(action.get("urgency") == "high" for action in manual_distribution_actions)
+                and all((action.get("context") or {}).get("postable_count") == clipboard_summary_for_operations.get("postable_count") for action in manual_distribution_actions)
+                and all((action.get("context") or {}).get("pending_log_ids") == (clipboard_summary_for_operations.get("pending_log_ids") or []) for action in manual_distribution_actions)
+                and all((action.get("context") or {}).get("public_community_url") == (clipboard_summary_for_operations.get("public_community_url") or "") for action in manual_distribution_actions)
+                and all((action.get("context") or {}).get("batch_log_preview_command") == (clipboard_summary_for_operations.get("batch_log_preview_command") or "") for action in manual_distribution_actions)
+                and all((action.get("context") or {}).get("batch_log_apply_command") == (clipboard_summary_for_operations.get("batch_log_apply_command") or "") for action in manual_distribution_actions)
+                and all((action.get("context") or {}).get("report_path") == "admin/reports/manual-posting-clipboard.md" for action in manual_distribution_actions)
+            ):
+                ok("promo operations packet surfaces ready manual distribution")
+            else:
+                fail("promo_operations_packet.json missing ready manual distribution action", failures)
+        elif not manual_distribution_actions and summary.get("manual_distribution_actions") == 0:
+            ok("promo operations packet has no manual distribution action without postable cards")
+        else:
+            fail("promo_operations_packet.json surfaces manual distribution with no postable cards", failures)
         status = json.loads(PROMO_ENGINE_STATUS.read_text(encoding="utf-8")) if PROMO_ENGINE_STATUS.exists() else {}
         monetization = (status.get("kpi") or {}).get("monetization") or {}
         backlog_packet_for_operations = json.loads(BACKLOG_RESCHEDULE_PREVIEW.read_text(encoding="utf-8")) if BACKLOG_RESCHEDULE_PREVIEW.exists() else {}

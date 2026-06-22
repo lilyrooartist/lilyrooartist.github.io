@@ -1,19 +1,21 @@
 # Promo Operations Packet - Lily Roo
 
-Generated: 2026-06-22T06:29:52.368592Z
+Generated: 2026-06-22T06:34:36.923185Z
 
 ## Summary
-- Actions: **14**
+- Actions: **15**
 - User review: **1**
 - Platform fixes: **4**
 - Scheduled approval batches: **0**
+- Manual distribution actions: **1**
 - Store checks: **7**
 - Manual metric updates: **2**
 - Safe apply commands ready: **0**
-- Urgency: **blocked: 1, high: 4, low: 2, medium: 7**
+- Urgency: **blocked: 1, high: 5, low: 2, medium: 7**
 
 ## Phase Counts
 - Fill manual metrics: **2**
+- Publish manual posts: **1**
 - Repair executor: **4**
 - Review blocked drafts: **1**
 - Verify music sites: **7**
@@ -28,6 +30,17 @@ Generated: 2026-06-22T06:29:52.368592Z
   - Public posting approved: `False`
   - Command: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --dry-run`
   - Approve after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --refresh-admin`
+
+### Publish manual posts
+- **[high] Post YouTube Community manual cards**
+  - Why: 3 approved manual post(s) can publish now without waiting for broken auto executors.
+  - Detail: Post each approved card manually, copy the real public URL, then log it with the manual distribution logger.
+  - Open: https://www.youtube.com/@lilyroo.artist/community
+  - Packet: `admin/reports/manual-posting-clipboard.md`
+  - Postable cards: **3**
+  - Pending URL logs: `FP-AUTO-261, FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY, FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY`
+  - Preview URL logging: `python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv`
+  - Apply URL logging after real URLs exist: `python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --apply --refresh-admin`
 
 ### Repair executor
 - **[high] Fix Instagram executor**
@@ -65,13 +78,13 @@ Generated: 2026-06-22T06:29:52.368592Z
 ### Verify music sites
 - **[medium] Re-check Twelve Dollars on Spotify**
   - Why: Public store links should be checked until DistroKid exposes them.
-  - Detail: Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-06-23T06:29:47.345978+00:00. Status: waiting_for_release_propagation.
-  - Latest snapshot checked: `2026-06-22T06:29:47.345978+00:00`
+  - Detail: Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-06-23T06:33:04.870219+00:00. Status: waiting_for_release_propagation.
+  - Latest snapshot checked: `2026-06-22T06:33:04.870219+00:00`
   - Command: `python3 scripts/search_spotify_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/spotify_release_snapshot.json'`
 - **[medium] Re-check Twelve Dollars on Apple Music**
   - Why: Public store links should be checked until DistroKid exposes them.
-  - Detail: Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-06-23T06:29:48.953472+00:00. Status: waiting_for_release_propagation.
-  - Latest snapshot checked: `2026-06-22T06:29:48.953472+00:00`
+  - Detail: Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-06-23T06:33:25.024443+00:00. Status: waiting_for_release_propagation.
+  - Latest snapshot checked: `2026-06-22T06:33:25.024443+00:00`
   - Command: `python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/apple_music_release_snapshot.json'`
 - **[medium] Re-check Twelve Dollars on HyperFollow**
   - Why: Public store links should be checked until DistroKid exposes them.
@@ -80,24 +93,19 @@ Generated: 2026-06-22T06:29:52.368592Z
   - Command: `python3 scripts/capture_hyperfollow_store_links.py --url 'https://distrokid.com/hyperfollow/lilyroo/twelve-dollars' --out 'data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json'`
 - **[medium] Re-check Analog Myth on Spotify**
   - Why: Public store links should be checked as the July 1 release approaches.
-  - Detail: Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-06-23T06:29:49.143849+00:00. Status: waiting_for_release_propagation.
-  - Latest snapshot checked: `2026-06-22T06:29:49.143849+00:00`
+  - Detail: Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-06-23T06:33:50.102318+00:00. Status: waiting_for_release_propagation.
+  - Latest snapshot checked: `2026-06-22T06:33:50.102318+00:00`
   - Command: `python3 scripts/search_spotify_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/spotify_release_snapshot.json'`
 - **[medium] Re-check Analog Myth on Apple Music**
   - Why: Public store links should be checked as the July 1 release approaches.
-  - Detail: Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-06-23T06:29:49.886946+00:00. Status: waiting_for_release_propagation.
-  - Latest snapshot checked: `2026-06-22T06:29:49.886946+00:00`
+  - Detail: Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-06-23T06:34:10.281569+00:00. Status: waiting_for_release_propagation.
+  - Latest snapshot checked: `2026-06-22T06:34:10.281569+00:00`
   - Command: `python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/apple_music_release_snapshot.json'`
 - **[medium] Re-check Analog Myth on YouTube Music**
   - Why: Public store links should be checked as the July 1 release approaches.
-  - Detail: Searches public web results for YouTube Music watch URLs, then validates the public title. Latest snapshot found no public URL; next recommended re-check after 2026-06-23T06:29:49.957946+00:00. Status: waiting_for_release_propagation.
-  - Latest snapshot checked: `2026-06-22T06:29:49.957946+00:00`
+  - Detail: Searches public web results for YouTube Music watch URLs, then validates the public title. Latest snapshot found no public URL; next recommended re-check after 2026-06-23T06:34:10.339442+00:00. Status: waiting_for_release_propagation.
+  - Latest snapshot checked: `2026-06-22T06:34:10.339442+00:00`
   - Command: `python3 scripts/search_youtube_music_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/youtube_music_release_snapshot.json'`
-- **[medium] Re-check Analog Myth on HyperFollow**
-  - Why: Public store links should be checked as the July 1 release approaches.
-  - Detail: Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; next recommended re-check after 2026-06-23T06:29:50.965234+00:00. Status: waiting_for_release_propagation.
-  - Latest snapshot checked: `2026-06-22T06:29:50.965234+00:00`
-  - Command: `python3 scripts/capture_hyperfollow_store_links.py --url 'https://distrokid.com/hyperfollow/lilyroo/analog-myth' --out 'data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json'`
 
 ## Guardrails
 - This packet does not publish, approve, apply, or post anything.

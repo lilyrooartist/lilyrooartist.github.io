@@ -15,6 +15,8 @@ EXECUTOR_READINESS = ROOT / "data" / "executor_readiness_snapshot.json"
 SCHEDULED_APPROVAL = ROOT / "data" / "scheduled_approval_packet.json"
 BACKLOG_RESCHEDULE = ROOT / "data" / "backlog_reschedule_preview.json"
 MANUAL_METRICS = ROOT / "data" / "manual_metric_collection_packet.json"
+MANUAL_DISTRIBUTION = ROOT / "data" / "manual_distribution_packet.json"
+MANUAL_POSTING_CLIPBOARD = ROOT / "data" / "manual_posting_clipboard.json"
 OUT = ROOT / "data" / "promo_operations_packet.json"
 REPORT = ROOT / "admin" / "reports" / "promo-operations-packet.md"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
@@ -74,6 +76,8 @@ def phase_for(action: dict) -> str:
         return "Review scheduled approvals"
     if kind == "platform_fix":
         return "Repair executor"
+    if kind == "manual_distribution":
+        return "Publish manual posts"
     if kind == "apply_approved":
         return "Apply approved"
     if kind == "approval_review":
@@ -97,6 +101,9 @@ def urgency_for(action: dict, now: datetime) -> tuple[str, str]:
         return "high", "Scheduled executor records are blocked until reviewed approval is applied."
     if kind == "platform_fix":
         return "high", "Platform executor needs repair before queued auto posts can publish."
+    if kind == "manual_distribution":
+        count = int(context.get("postable_count") or 0)
+        return "high", f"{count} approved manual post(s) can publish now without waiting for broken auto executors."
     if kind == "apply_approved":
         return "high", "Approved rows are ready to move into the live queue."
     if kind == "approval_review":
@@ -540,6 +547,50 @@ def manual_metric_actions(packet):
     return actions
 
 
+def manual_distribution_actions(distribution_packet, posting_clipboard):
+    distribution_summary = distribution_packet.get("summary") or {}
+    clipboard_summary = posting_clipboard.get("summary") or {}
+    post_cards = posting_clipboard.get("post_cards") or []
+    postable_count = int(clipboard_summary.get("postable_count") or distribution_summary.get("postable_now_count") or 0)
+    waiting_url_count = int(clipboard_summary.get("waiting_public_url_count") or distribution_summary.get("public_url_log_needed_count") or 0)
+    if postable_count <= 0:
+        return []
+    public_url = clipboard_summary.get("public_community_url") or distribution_summary.get("public_community_url") or ""
+    return [
+        command_row(
+            "Post YouTube Community manual cards",
+            "",
+            "manual_distribution",
+            0,
+            {
+                "platform": "YouTube Community",
+                "status": clipboard_summary.get("status") or distribution_summary.get("next_manual_action") or "",
+                "postable_count": postable_count,
+                "waiting_public_url_count": waiting_url_count,
+                "pending_log_ids": clipboard_summary.get("pending_log_ids") or [],
+                "public_community_url": public_url,
+                "posting_surface": clipboard_summary.get("posting_surface") or "YouTube Studio Community",
+                "report_path": "admin/reports/manual-posting-clipboard.md",
+                "url_template_path": clipboard_summary.get("url_template_path") or "data/manual_distribution_url_template.csv",
+                "batch_log_preview_command": clipboard_summary.get("batch_log_preview_command") or "",
+                "batch_log_apply_command": clipboard_summary.get("batch_log_apply_command") or "",
+                "batch_log_partial_apply_command": clipboard_summary.get("batch_log_partial_apply_command") or "",
+                "post_cards": [
+                    {
+                        "id": card.get("id") or "",
+                        "release": card.get("release") or "",
+                        "asset_url": card.get("asset_url") or "",
+                        "asset_status": card.get("asset_status") or "",
+                        "public_community_url": card.get("public_community_url") or public_url,
+                    }
+                    for card in post_cards
+                ],
+                "note": "Post each approved card manually, copy the real public URL, then log it with the manual distribution logger.",
+            },
+        )
+    ]
+
+
 def platform_fix_actions(status, executions, readiness):
     summary = status.get("kpi", {}).get("social_execution_summary") or {}
     rows = summary.get("platform_fix_needed") or (executions.get("summary") or {}).get("platform_fix_needed") or []
@@ -583,6 +634,7 @@ def build_markdown(packet):
         f"- User review: **{packet['summary']['user_review']}**",
         f"- Platform fixes: **{packet['summary']['platform_fixes']}**",
         f"- Scheduled approval batches: **{packet['summary']['scheduled_approval_batches']}**",
+        f"- Manual distribution actions: **{packet['summary']['manual_distribution_actions']}**",
         f"- Store checks: **{packet['summary']['store_checks']}**",
         f"- Manual metric updates: **{packet['summary']['manual_metric_updates']}**",
         f"- Safe apply commands ready: **{packet['summary']['safe_apply_commands']}**",
@@ -655,6 +707,18 @@ def build_markdown(packet):
                 lines.append(f"  - Approve after review: `{context['approval_command']}`")
             if context.get("collection_url"):
                 lines.append(f"  - Open: {context['collection_url']}")
+            if context.get("public_community_url"):
+                lines.append(f"  - Open: {context['public_community_url']}")
+            if context.get("report_path"):
+                lines.append(f"  - Packet: `{context['report_path']}`")
+            if context.get("postable_count"):
+                lines.append(f"  - Postable cards: **{context['postable_count']}**")
+            if context.get("pending_log_ids"):
+                lines.append(f"  - Pending URL logs: `{', '.join(context['pending_log_ids'])}`")
+            if context.get("batch_log_preview_command"):
+                lines.append(f"  - Preview URL logging: `{context['batch_log_preview_command']}`")
+            if context.get("batch_log_apply_command"):
+                lines.append(f"  - Apply URL logging after real URLs exist: `{context['batch_log_apply_command']}`")
             if context.get("access_levels"):
                 lines.append(f"  - Access: `{', '.join(context['access_levels'])}`")
             if context.get("csv_rows"):
@@ -723,9 +787,12 @@ def main() -> int:
     scheduled_approval = read_json(SCHEDULED_APPROVAL, {})
     backlog_preview = read_json(BACKLOG_RESCHEDULE, {})
     manual_metrics = read_json(MANUAL_METRICS, {})
+    manual_distribution = read_json(MANUAL_DISTRIBUTION, {})
+    manual_posting_clipboard = read_json(MANUAL_POSTING_CLIPBOARD, {})
     actions = (
         scheduled_approval_batch_actions(scheduled_approval)
         + backlog_reschedule_actions(status, backlog_preview)
+        + manual_distribution_actions(manual_distribution, manual_posting_clipboard)
         + platform_fix_actions(status, executions, readiness)
         + apply_actions(plan)
         + approval_actions(plan, readiness)
@@ -740,6 +807,7 @@ def main() -> int:
         "scheduled_approval_batches": sum(1 for action in actions if action["kind"] == "scheduled_approval_batch"),
         "store_checks": sum(1 for action in actions if action["kind"] == "store_verification"),
         "manual_metric_updates": sum(1 for action in actions if action["kind"] == "manual_metrics"),
+        "manual_distribution_actions": sum(1 for action in actions if action["kind"] == "manual_distribution"),
         "backlog_reschedules": sum(1 for action in actions if action["kind"] == "backlog_reschedule"),
         "safe_apply_commands": sum(1 for action in actions if action["kind"] == "apply_approved"),
         "blocked_review_items": sum(1 for action in actions if action["context"].get("readiness_state") == "blocked"),
@@ -759,6 +827,8 @@ def main() -> int:
             "executor_readiness": str(EXECUTOR_READINESS.relative_to(ROOT)),
             "scheduled_approval": str(SCHEDULED_APPROVAL.relative_to(ROOT)),
             "manual_metrics": str(MANUAL_METRICS.relative_to(ROOT)),
+            "manual_distribution": str(MANUAL_DISTRIBUTION.relative_to(ROOT)),
+            "manual_posting_clipboard": str(MANUAL_POSTING_CLIPBOARD.relative_to(ROOT)),
         },
         "next_action": next_action,
         "summary": summary,

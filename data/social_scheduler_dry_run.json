@@ -1,27 +1,25 @@
 {
   "ok": true,
-  "updated_at": "2026-06-22T06:28:07.502635Z",
+  "updated_at": "2026-06-22T06:34:36.096373Z",
   "source": "lilyroo-social-scheduler-dry-run",
   "url": "https://www.lilyroo.com/api/social/scheduler/dry-run",
   "http_status": 200,
   "error": null,
   "auth_method": "bearer",
-  "requested_scheduled_time": "2026-06-22T06:28:07.018077Z",
+  "requested_scheduled_time": "2026-06-22T06:34:35.657096Z",
   "dry_run": true,
-  "checked_at": "2026-06-22T06:28:07.018Z",
+  "checked_at": "2026-06-22T06:34:35.657Z",
   "summary": {
-    "due_count": 5,
-    "result_count": 5,
+    "due_count": 2,
+    "result_count": 2,
     "would_post_count": 0,
-    "blocked_count": 5,
+    "blocked_count": 2,
     "status_counts": {
-      "blocked": 2,
-      "failed": 2,
+      "blocked": 1,
       "skipped": 1
     },
     "platform_counts": {
-      "Instagram": 2,
-      "TikTok": 2,
+      "TikTok": 1,
       "YouTube Community": 1
     },
     "would_post": [],
@@ -33,7 +31,7 @@
         "reason": "not_approved",
         "post_type": "",
         "attempts": 0,
-        "updated_at": "2026-06-22T06:28:07.675Z",
+        "updated_at": "2026-06-22T06:34:36.302Z",
         "source": "dry-run",
         "error_summary": ""
       },
@@ -44,49 +42,16 @@
         "reason": "manual_only",
         "post_type": "",
         "attempts": 0,
-        "updated_at": "2026-06-22T06:28:07.681Z",
+        "updated_at": "2026-06-22T06:34:36.315Z",
         "source": "dry-run",
         "error_summary": ""
-      },
-      {
-        "post_id": "FP-AUTO-264",
-        "platform": "TikTok",
-        "status": "blocked",
-        "reason": "tiktok_credentials_missing",
-        "post_type": "",
-        "attempts": 0,
-        "updated_at": "2026-06-22T06:28:07.688Z",
-        "source": "dry-run",
-        "error_summary": ""
-      },
-      {
-        "post_id": "FP-AUTO-263",
-        "platform": "Instagram",
-        "status": "failed",
-        "reason": "max_attempts_exceeded",
-        "post_type": "",
-        "attempts": 3,
-        "updated_at": "2026-06-22T06:28:07.696Z",
-        "source": "dry-run",
-        "error_summary": "Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page"
-      },
-      {
-        "post_id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
-        "platform": "Instagram",
-        "status": "failed",
-        "reason": "max_attempts_exceeded",
-        "post_type": "",
-        "attempts": 3,
-        "updated_at": "2026-06-22T06:28:07.704Z",
-        "source": "dry-run",
-        "error_summary": "Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page"
       }
     ]
   },
   "payload": {
     "ok": true,
-    "due_count": 5,
-    "result_count": 5
+    "due_count": 2,
+    "result_count": 2
   },
   "action_needed": ""
 }
