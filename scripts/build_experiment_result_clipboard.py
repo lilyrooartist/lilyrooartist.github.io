@@ -278,6 +278,70 @@ def measurement_priority_cards(metric_cards: list[dict], missing_cards: list[dic
     return priority[:8]
 
 
+def post_log_measurement_handoff(manual_posting: dict, summary: dict) -> dict:
+    session = manual_posting.get("session_manifest") or {}
+    session_rows = session.get("rows") or []
+    handoff_rows = []
+    for row in session_rows:
+        post_id = row.get("id") or ""
+        platform = row.get("platform") or "YouTube Community"
+        release = row.get("release") or ""
+        handoff_rows.append({
+            "sequence": row.get("sequence"),
+            "post_id": post_id,
+            "platform": platform,
+            "song": release,
+            "status": "waiting_for_public_url",
+            "public_url": row.get("public_url") or "PUBLIC_URL",
+            "source_row": "after Published_Log.csv append",
+            "fields_to_collect": RESULT_FIELDS,
+            "wide_entry_template": {
+                "experiment_format": "Release-art image + story hook",
+                "post_id": post_id,
+                "platform": platform,
+                "song": release,
+                "post_url": "PUBLIC_URL",
+                "published_date": "YYYY-MM-DD",
+                "source_row": "PUBLISHED_LOG_ROW",
+                **{field: "" for field in RESULT_FIELDS},
+                "evidence_note": "YouTube Studio Community analytics YYYY-MM-DD",
+            },
+            "evidence_sources": evidence_sources(platform, "PUBLIC_URL"),
+            "preview_after_logging": summary.get("wide_result_import_preview_command") or "",
+            "apply_after_logging": summary.get("wide_result_import_apply_command") or "",
+            "manual_posting_report": "admin/reports/manual-posting-clipboard.md",
+            "log_preview_command": row.get("preview_command_template") or "",
+            "log_apply_command": row.get("apply_command_template") or "",
+        })
+    return {
+        "status": "waiting_for_public_urls" if handoff_rows else "clear",
+        "source_session": session.get("session_name") or "",
+        "manual_posting_report": "admin/reports/manual-posting-clipboard.md",
+        "entry_csv_path": summary.get("entry_csv_path") or "",
+        "wide_entry_csv_path": summary.get("wide_entry_csv_path") or "",
+        "field_count_per_post": len(RESULT_FIELDS),
+        "handoff_row_count": len(handoff_rows),
+        "pending_post_ids": [row.get("post_id") for row in handoff_rows],
+        "wide_import_preview_command": summary.get("wide_result_import_preview_command") or "",
+        "wide_import_apply_command": summary.get("wide_result_import_apply_command") or "",
+        "rows": handoff_rows,
+        "handoff_sequence": [
+            "Post each manual-session card and log the real public URL.",
+            "Refresh Admin so Published_Log.csv rows become experiment result cards.",
+            "Collect first visible metrics from YouTube Studio Community analytics.",
+            "Fill one wide entry CSV row per logged Community post.",
+            "Run the wide result import preview before applying metrics.",
+        ],
+        "completion_evidence": [
+            "Published_Log.csv contains the manual-session post URL.",
+            "data/experiment_result_clipboard.json shows the post as a metric card instead of a missing-public-url card.",
+            "data/experiment_result_entry_wide_template.csv has values plus evidence_note for the post.",
+            "The wide import preview reports only the intended metric updates.",
+        ],
+        "guardrail": "This handoff is a template; do not import metrics until a real public URL and source_row exist.",
+    }
+
+
 def build_payload() -> dict:
     packet = read_json(RESULT_PACKET, {})
     manual_posting = read_json(MANUAL_POSTING, {})
@@ -286,6 +350,7 @@ def build_payload() -> dict:
     cards = metric_cards(packet.get("pending_result_rows") or [], packet.get("wide_entry_rows") or [])
     missing_cards = missing_log_cards(packet.get("missing_published_log_posts") or [])
     priority_cards = measurement_priority_cards(cards, missing_cards, manual_posting, platform_repair)
+    handoff = post_log_measurement_handoff(manual_posting, summary)
     return {
         "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "safe_mode": True,
@@ -301,6 +366,7 @@ def build_payload() -> dict:
             "metric_card_count": len(cards),
             "missing_public_url_count": len(missing_cards),
             "measurement_priority_count": len(priority_cards),
+            "post_log_measurement_handoff_count": handoff.get("handoff_row_count") or 0,
             "pending_result_field_count": summary.get("pending_result_field_count") or 0,
             "ready_to_import_count": summary.get("ready_to_import_count") or 0,
             "wide_ready_to_import_count": summary.get("wide_ready_to_import_count") or 0,
@@ -316,6 +382,7 @@ def build_payload() -> dict:
         "metric_cards": cards,
         "missing_public_url_cards": missing_cards,
         "measurement_priority_cards": priority_cards,
+        "post_log_measurement_handoff": handoff,
         "operator_steps": [
             "Open each post URL or platform analytics surface.",
             "Start with measurement_priority_cards; they are ordered to unlock repeatable-format evidence fastest.",
@@ -329,6 +396,7 @@ def build_payload() -> dict:
             "This clipboard does not fetch private analytics or write metrics.",
             "Do not use guessed result values.",
             "Posts without public URLs must be published or logged before result metrics can be collected.",
+            "The post-log measurement handoff is only usable after real public URLs are logged.",
         ],
     }
 
@@ -345,6 +413,7 @@ def build_markdown(payload: dict) -> str:
         f"- Metric cards: **{summary['metric_card_count']}**",
         f"- Missing public URLs: **{summary['missing_public_url_count']}**",
         f"- Measurement priorities: **{summary.get('measurement_priority_count') or 0}**",
+        f"- Post-log handoff rows: **{summary.get('post_log_measurement_handoff_count') or 0}**",
         f"- Pending result fields: **{summary['pending_result_field_count']}**",
         f"- Ready to import: **{summary['ready_to_import_count']}**",
         f"- Wide rows ready to import: **{summary.get('wide_ready_to_import_count') or 0}**",
@@ -406,6 +475,28 @@ def build_markdown(payload: dict) -> str:
             lines.append(f"  - Log preview after posting: `{item['log_preview_command']}`")
         if item.get("log_apply_command"):
             lines.append(f"  - Log apply after posting: `{item['log_apply_command']}`")
+    handoff = payload.get("post_log_measurement_handoff") or {}
+    lines.extend(["", "## Post-Log Measurement Handoff"])
+    lines.append(f"- Status: **{handoff.get('status', 'unknown')}**")
+    lines.append(f"- Source session: {handoff.get('source_session') or 'not available'}")
+    lines.append(f"- Manual posting report: `{handoff.get('manual_posting_report') or 'not available'}`")
+    lines.append(f"- Wide entry CSV after URL logging: `{handoff.get('wide_entry_csv_path') or 'not available'}`")
+    lines.append(f"- Wide import preview after logging: `{handoff.get('wide_import_preview_command') or 'not available'}`")
+    lines.append(f"- Guardrail: {handoff.get('guardrail') or 'Wait for real public URLs.'}")
+    if handoff.get("handoff_sequence"):
+        lines.append("- Handoff sequence:")
+        for item in handoff["handoff_sequence"]:
+            lines.append(f"  - {item}")
+    if handoff.get("rows"):
+        lines.append("- Handoff rows:")
+        for row in handoff["rows"]:
+            lines.append(f"  - `{row.get('sequence')}` `{row.get('post_id')}` {row.get('platform')} - collect `{', '.join(row.get('fields_to_collect') or [])}` after `{row.get('public_url')}` is real.")
+            if row.get("log_preview_command"):
+                lines.append(f"    - Log preview: `{row['log_preview_command']}`")
+    if handoff.get("completion_evidence"):
+        lines.append("- Completion evidence:")
+        for item in handoff["completion_evidence"]:
+            lines.append(f"  - {item}")
     lines.extend(["", "## Missing Public URLs"])
     if not payload["missing_public_url_cards"]:
         lines.append("- None.")

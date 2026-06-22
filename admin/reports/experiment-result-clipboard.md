@@ -1,12 +1,13 @@
 # Experiment Result Clipboard - Lily Roo
 
-Generated: 2026-06-22T08:02:11.531548Z
+Generated: 2026-06-22T08:05:13.617711Z
 
 ## Summary
 - Status: **needs_values**
 - Metric cards: **3**
 - Missing public URLs: **6**
 - Measurement priorities: **8**
+- Post-log handoff rows: **3**
 - Pending result fields: **18**
 - Ready to import: **0**
 - Wide rows ready to import: **0**
@@ -115,6 +116,32 @@ Generated: 2026-06-22T08:02:11.531548Z
 - **Clear platform blocker** `FP-AUTO-258` Instagram / Release-art image + story hook: Platform work is blocked; clear the platform repair gate before URL logging can produce metrics. 3 logged post(s), 1 missing URL(s) in this format.
 - **Clear platform blocker** `FP-AUTO-264` TikTok / Short video clip + platform-native CTA: Platform work is blocked; clear the platform repair gate before URL logging can produce metrics. 0 logged post(s), 2 missing URL(s) in this format.
 
+## Post-Log Measurement Handoff
+- Status: **waiting_for_public_urls**
+- Source session: YouTube Community manual posting batch
+- Manual posting report: `admin/reports/manual-posting-clipboard.md`
+- Wide entry CSV after URL logging: `data/experiment_result_entry_wide_template.csv`
+- Wide import preview after logging: `python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run`
+- Guardrail: This handoff is a template; do not import metrics until a real public URL and source_row exist.
+- Handoff sequence:
+  - Post each manual-session card and log the real public URL.
+  - Refresh Admin so Published_Log.csv rows become experiment result cards.
+  - Collect first visible metrics from YouTube Studio Community analytics.
+  - Fill one wide entry CSV row per logged Community post.
+  - Run the wide result import preview before applying metrics.
+- Handoff rows:
+  - `1` `FP-AUTO-261` YouTube Community - collect `views, likes, comments, shares, saves, subs_delta` after `PUBLIC_URL` is real.
+    - Log preview: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL`
+  - `2` `FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY` YouTube Community - collect `views, likes, comments, shares, saves, subs_delta` after `PUBLIC_URL` is real.
+    - Log preview: `python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL`
+  - `3` `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY` YouTube Community - collect `views, likes, comments, shares, saves, subs_delta` after `PUBLIC_URL` is real.
+    - Log preview: `python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL`
+- Completion evidence:
+  - Published_Log.csv contains the manual-session post URL.
+  - data/experiment_result_clipboard.json shows the post as a metric card instead of a missing-public-url card.
+  - data/experiment_result_entry_wide_template.csv has values plus evidence_note for the post.
+  - The wide import preview reports only the intended metric updates.
+
 ## Missing Public URLs
 - `FP-AUTO-258` Instagram / Release-art image + story hook: Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-261` YouTube Community / YouTube Community archive/playlist CTA: Publish or log the public URL before result metrics can be collected.
@@ -127,3 +154,4 @@ Generated: 2026-06-22T08:02:11.531548Z
 - This clipboard does not fetch private analytics or write metrics.
 - Do not use guessed result values.
 - Posts without public URLs must be published or logged before result metrics can be collected.
+- The post-log measurement handoff is only usable after real public URLs are logged.
