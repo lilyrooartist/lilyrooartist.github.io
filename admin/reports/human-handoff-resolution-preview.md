@@ -1,6 +1,6 @@
 # Human Handoff Resolution Preview - Lily Roo
 
-Generated: 2026-06-22T11:00:53.747828Z
+Generated: 2026-06-22T11:05:48.491616Z
 
 ## Summary
 - Worksheet rows: **10**
@@ -40,17 +40,17 @@ Generated: 2026-06-22T11:00:53.747828Z
 - **manual-distribution-FP-AUTO-261** (`skipped`)
   - Phase: `Manual distribution`; input needed: `public_post_url`
   - Safety: `skipped` (placeholder_public_url)
-  - Command: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL`
+  - Command: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL'`
   - Guardrail: Do not log a manual post until a real public URL exists.
 - **manual-distribution-FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY** (`skipped`)
   - Phase: `Manual distribution`; input needed: `public_post_url`
   - Safety: `skipped` (placeholder_public_url)
-  - Command: `python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL`
+  - Command: `python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url 'PUBLIC_URL'`
   - Guardrail: Do not log a manual post until a real public URL exists.
 - **manual-distribution-FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY** (`skipped`)
   - Phase: `Manual distribution`; input needed: `public_post_url`
   - Safety: `skipped` (placeholder_public_url)
-  - Command: `python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL`
+  - Command: `python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url 'PUBLIC_URL'`
   - Guardrail: Do not log a manual post until a real public URL exists.
 - **manual-metrics-priority-2** (`input_missing`)
   - Phase: `Manual metrics`; input needed: `private_metric_values`

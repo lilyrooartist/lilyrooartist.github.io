@@ -1,6 +1,6 @@
 # Published Log Reconciliation - Lily Roo
 
-Generated: 2026-06-22T11:00:53.831499Z
+Generated: 2026-06-22T11:05:48.547051Z
 
 ## Summary
 - Published log status: **fresh**
@@ -33,20 +33,20 @@ Generated: 2026-06-22T11:00:53.831499Z
   - Status: `ready_for_manual_post`; log gate: `blocked_until_public_url`
   - Next step: Post manually in YouTube Studio Community, then replace PUBLIC_URL with the real public URL.
   - Posting surface: https://www.youtube.com/@lilyroo.artist/community
-  - Preview URL log: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL`
-  - Apply URL log after posting: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL --apply --refresh-admin`
+  - Preview URL log: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL'`
+  - Apply URL log after posting: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL' --apply --refresh-admin`
 - **Twelve Dollars YouTube Community** (`FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY`)
   - Status: `ready_for_manual_post`; log gate: `blocked_until_public_url`
   - Next step: Post manually in YouTube Studio Community, then replace PUBLIC_URL with the real public URL.
   - Posting surface: https://www.youtube.com/@lilyroo.artist/community
-  - Preview URL log: `python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL`
-  - Apply URL log after posting: `python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin`
+  - Preview URL log: `python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url 'PUBLIC_URL'`
+  - Apply URL log after posting: `python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url 'PUBLIC_URL' --apply --refresh-admin`
 - **Analog Myth YouTube Community** (`FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY`)
   - Status: `ready_for_manual_post`; log gate: `blocked_until_public_url`
   - Next step: Post manually in YouTube Studio Community, then replace PUBLIC_URL with the real public URL.
   - Posting surface: https://www.youtube.com/@lilyroo.artist/community
-  - Preview URL log: `python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL`
-  - Apply URL log after posting: `python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin`
+  - Preview URL log: `python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url 'PUBLIC_URL'`
+  - Apply URL log after posting: `python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url 'PUBLIC_URL' --apply --refresh-admin`
 
 ## Guardrails
 - This reconciliation is review-only and does not export, append, post, or publish.

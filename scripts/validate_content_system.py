@@ -1603,7 +1603,7 @@ def validate_generated_outputs(failures):
             and completion_manifest.get("review_queue_ids") == [row.get("id") for row in docket_review]
             and completion_manifest.get("postable_now_ids") == [row.get("id") for row in docket_postable]
             and completion_manifest.get("pending_log_ids") == [row.get("id") for row in unlogged_rows]
-            and all("PUBLIC_URL" in (item.get("preview_command") or "") and "--apply --refresh-admin" in (item.get("apply_command") or "") for item in completion_manifest.get("log_commands") or [])
+            and all("--url 'PUBLIC_URL'" in (item.get("preview_command") or "") and "--apply --refresh-admin" in (item.get("apply_command") or "") and "--url 'PUBLIC_URL'" in (item.get("apply_command") or "") for item in completion_manifest.get("log_commands") or [])
             and any("Do not log a placeholder URL" in item for item in completion_manifest.get("guardrails") or [])
             and any("https://www.youtube.com/post/" in item for item in completion_manifest.get("guardrails") or [])
             and any("public_url cell is blank" in item for item in completion_manifest.get("guardrails") or [])
@@ -1654,7 +1654,9 @@ def validate_generated_outputs(failures):
                 and isinstance((row.get("manual_posting_packet") or {}).get("logging_required"), bool)
                 and (row.get("manual_posting_packet") or {}).get("next_action") in {"review_and_approve", "post_manually_then_log_url", "already_logged"}
                 and "log_manual_distribution.py" in row.get("log_preview_command", "")
+                and "--url 'PUBLIC_URL'" in row.get("log_preview_command", "")
                 and "--apply" not in row.get("log_preview_command", "")
+                and "--url 'PUBLIC_URL'" in row.get("log_apply_command", "")
                 and "--apply --refresh-admin" in row.get("log_apply_command", "")
                 for row in rows
             )
@@ -3849,7 +3851,7 @@ def validate_generated_outputs(failures):
         fail("build_subscriber_cta_audit.py missing", failures)
     if MANUAL_DISTRIBUTION_PACKET_SCRIPT.exists():
         manual_distribution_text = MANUAL_DISTRIBUTION_PACKET_SCRIPT.read_text(encoding="utf-8")
-        if "manual_distribution_packet.json" in manual_distribution_text and "manual-distribution-packet.md" in manual_distribution_text and "manual_distribution_url_template.csv" in manual_distribution_text and "scheduled_posts.csv" in manual_distribution_text and "batch_log_preview_command" in manual_distribution_text and "Manual Posting Queue" in manual_distribution_text and "manual_distribution_docket" in manual_distribution_text and "manual_approval_docket" in manual_distribution_text and "manual_completion_manifest" in manual_distribution_text and "Completion Manifest" in manual_distribution_text and "Do not log a placeholder URL" in manual_distribution_text and "review_queue" in manual_distribution_text and "copy_block" in manual_distribution_text and "manual_posting_packet" in manual_distribution_text and "postable_now" in manual_distribution_text and "log_manual_distribution.py" in manual_distribution_text and "Published_Log.csv" in manual_distribution_text and "distribution_status" in manual_distribution_text and "existing_url_by_id" in manual_distribution_text and "url_template_preservation" in manual_distribution_text and "HYPERFOLLOW_STORE_LINKS_SNAPSHOT" in manual_distribution_text and "YOUTUBE_TITLE_TRACK_SNAPSHOT" in manual_distribution_text and "APPLE_MUSIC_RELEASE_SNAPSHOT" in manual_distribution_text and "YOUTUBE_MUSIC_RELEASE_SNAPSHOT" in manual_distribution_text and "subprocess" not in manual_distribution_text:
+        if "manual_distribution_packet.json" in manual_distribution_text and "manual-distribution-packet.md" in manual_distribution_text and "manual_distribution_url_template.csv" in manual_distribution_text and "scheduled_posts.csv" in manual_distribution_text and "batch_log_preview_command" in manual_distribution_text and "Manual Posting Queue" in manual_distribution_text and "manual_distribution_docket" in manual_distribution_text and "manual_approval_docket" in manual_distribution_text and "manual_completion_manifest" in manual_distribution_text and "Completion Manifest" in manual_distribution_text and "Do not log a placeholder URL" in manual_distribution_text and "review_queue" in manual_distribution_text and "copy_block" in manual_distribution_text and "manual_posting_packet" in manual_distribution_text and "postable_now" in manual_distribution_text and "log_manual_distribution.py" in manual_distribution_text and "--url 'PUBLIC_URL'" in manual_distribution_text and "Published_Log.csv" in manual_distribution_text and "distribution_status" in manual_distribution_text and "existing_url_by_id" in manual_distribution_text and "url_template_preservation" in manual_distribution_text and "HYPERFOLLOW_STORE_LINKS_SNAPSHOT" in manual_distribution_text and "YOUTUBE_TITLE_TRACK_SNAPSHOT" in manual_distribution_text and "APPLE_MUSIC_RELEASE_SNAPSHOT" in manual_distribution_text and "YOUTUBE_MUSIC_RELEASE_SNAPSHOT" in manual_distribution_text and "subprocess" not in manual_distribution_text:
             ok("manual distribution packet builder is review-only")
         else:
             fail("build_manual_distribution_packet.py missing manual distribution outputs or executes commands", failures)

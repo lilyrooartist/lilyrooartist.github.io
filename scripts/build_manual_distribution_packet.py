@@ -245,7 +245,7 @@ def audit_sources_line(audit: dict) -> str:
 
 
 def log_command(post_id: str, apply: bool = False) -> str:
-    command = f"python3 scripts/log_manual_distribution.py --id {shlex.quote(post_id)} --url PUBLIC_URL"
+    command = f"python3 scripts/log_manual_distribution.py --id {shlex.quote(post_id)} --url 'PUBLIC_URL'"
     if apply:
         command += " --apply --refresh-admin"
     return command

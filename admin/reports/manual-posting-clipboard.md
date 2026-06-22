@@ -1,6 +1,6 @@
 # Manual Posting Clipboard - Lily Roo
 
-Generated: 2026-06-22T11:00:53.243653Z
+Generated: 2026-06-22T11:05:48.155540Z
 
 ## Summary
 - Status: **ready_to_post**
@@ -25,8 +25,8 @@ Generated: 2026-06-22T11:00:53.243653Z
 - Surface: https://www.youtube.com/@lilyroo.artist/community
 - Copy source: `data/manual-posting-cards/fp-auto-261.txt`
 - Asset source: `assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg`
-- Preview URL log: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL`
-- Apply URL log: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL --apply --refresh-admin`
+- Preview URL log: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL'`
+- Apply URL log: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL' --apply --refresh-admin`
 - Result handoff: `admin/reports/experiment-result-clipboard.md`
 - Completion evidence:
   - The YouTube Community post is published from the listed text and asset.
@@ -38,7 +38,7 @@ Generated: 2026-06-22T11:00:53.243653Z
 - First post: `FP-AUTO-261` (I Learned It All in Fifteen Seconds)
 - Copy file: `data/manual-posting-cards/fp-auto-261.txt`
 - Asset: `assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg`
-- Preview first URL: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL`
+- Preview first URL: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL'`
 - Apply first URL with partial batch: `python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --allow-partial --apply --refresh-admin`
 - Measurement report: `admin/reports/experiment-result-clipboard.md`
 - Measurement preview: `python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run`
@@ -98,18 +98,18 @@ Stream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: htt
   - `verified_local_evidence` https://www.youtube.com/@lilyroo.artist: YouTube channel author URL (data/youtube_title_track_snapshot.json)
   - `verified_local_evidence` https://music.youtube.com/watch?v=vK0mDIW65o4: I Learned It All in Fifteen Seconds YouTube Music URL (data/distrokid_release_status.json); YouTube Music public snapshot: release (data/youtube_music_release_snapshot.json)
 - Public URL slot: `PUBLIC_URL`
-- Log preview after posting: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL`
-- Log apply after posting: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL --apply --refresh-admin`
+- Log preview after posting: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL'`
+- Log apply after posting: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL' --apply --refresh-admin`
 - Log notes: `manual_distribution_id=FP-AUTO-261; source=data/manual_distribution_packet.json`
-- Bundle preview command template: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL`
-- Bundle apply command template: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL --apply --refresh-admin`
+- Bundle preview command template: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL'`
+- Bundle apply command template: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL' --apply --refresh-admin`
 - Bundle result trigger: Log the public URL, then use admin/reports/experiment-result-clipboard.md after the post has accumulated first metrics.
 - Result handoff: `blocked_until_public_url_logged` via `admin/reports/experiment-result-clipboard.md`
 - Result handoff reason: Experiment result collection starts after the real public URL is logged in Published_Log.csv.
 - After posting checklist:
   - Copy the real public YouTube Community post URL.
-  - Run the log preview command: python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL
-  - Run the log apply command after preview passes: python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL --apply --refresh-admin
+  - Run the log preview command: python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL'
+  - Run the log apply command after preview passes: python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL' --apply --refresh-admin
   - Refresh Admin and confirm this card moves out of the manual posting queue.
   - Open the experiment result clipboard when first metrics are available.
 ### 2. Twelve Dollars - YouTube Community
@@ -130,18 +130,18 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNT
 - Destination evidence:
   - `verified_local_evidence` https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n: Twelve Dollars YouTube playlist URL (data/distrokid_release_status.json); Twelve Dollars YouTube playlist URL (data/distrokid_release_status.json); Twelve Dollars verified items: 8 (data/youtube_twelve_dollars_playlist.json)
 - Public URL slot: `PUBLIC_URL`
-- Log preview after posting: `python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL`
-- Log apply after posting: `python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin`
+- Log preview after posting: `python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url 'PUBLIC_URL'`
+- Log apply after posting: `python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url 'PUBLIC_URL' --apply --refresh-admin`
 - Log notes: `manual_distribution_id=FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY; source=data/manual_distribution_packet.json`
-- Bundle preview command template: `python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL`
-- Bundle apply command template: `python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin`
+- Bundle preview command template: `python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url 'PUBLIC_URL'`
+- Bundle apply command template: `python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url 'PUBLIC_URL' --apply --refresh-admin`
 - Bundle result trigger: Log the public URL, then use admin/reports/experiment-result-clipboard.md after the post has accumulated first metrics.
 - Result handoff: `blocked_until_public_url_logged` via `admin/reports/experiment-result-clipboard.md`
 - Result handoff reason: Experiment result collection starts after the real public URL is logged in Published_Log.csv.
 - After posting checklist:
   - Copy the real public YouTube Community post URL.
-  - Run the log preview command: python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL
-  - Run the log apply command after preview passes: python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin
+  - Run the log preview command: python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url 'PUBLIC_URL'
+  - Run the log apply command after preview passes: python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url 'PUBLIC_URL' --apply --refresh-admin
   - Refresh Admin and confirm this card moves out of the manual posting queue.
   - Open the experiment result clipboard when first metrics are available.
 ### 3. Analog Myth - YouTube Community
@@ -162,18 +162,18 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
 - Destination evidence:
   - `verified_local_evidence` https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0: Analog Myth YouTube playlist URL (data/distrokid_release_status.json); Analog Myth YouTube playlist URL (data/distrokid_release_status.json); Analog Myth - Lily Roo verified items: 8 (data/youtube_analog_myth_playlist.json)
 - Public URL slot: `PUBLIC_URL`
-- Log preview after posting: `python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL`
-- Log apply after posting: `python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin`
+- Log preview after posting: `python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url 'PUBLIC_URL'`
+- Log apply after posting: `python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url 'PUBLIC_URL' --apply --refresh-admin`
 - Log notes: `manual_distribution_id=FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY; source=data/manual_distribution_packet.json`
-- Bundle preview command template: `python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL`
-- Bundle apply command template: `python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin`
+- Bundle preview command template: `python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url 'PUBLIC_URL'`
+- Bundle apply command template: `python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url 'PUBLIC_URL' --apply --refresh-admin`
 - Bundle result trigger: Log the public URL, then use admin/reports/experiment-result-clipboard.md after the post has accumulated first metrics.
 - Result handoff: `blocked_until_public_url_logged` via `admin/reports/experiment-result-clipboard.md`
 - Result handoff reason: Experiment result collection starts after the real public URL is logged in Published_Log.csv.
 - After posting checklist:
   - Copy the real public YouTube Community post URL.
-  - Run the log preview command: python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL
-  - Run the log apply command after preview passes: python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin
+  - Run the log preview command: python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url 'PUBLIC_URL'
+  - Run the log apply command after preview passes: python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url 'PUBLIC_URL' --apply --refresh-admin
   - Refresh Admin and confirm this card moves out of the manual posting queue.
   - Open the experiment result clipboard when first metrics are available.
 

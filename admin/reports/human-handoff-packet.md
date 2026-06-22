@@ -1,6 +1,6 @@
 # Human Handoff Packet - Lily Roo
 
-Generated: 2026-06-22T11:00:53.592833Z
+Generated: 2026-06-22T11:05:48.377649Z
 
 ## Summary
 - Open handoff tasks: **10**
@@ -88,19 +88,19 @@ Generated: 2026-06-22T11:00:53.592833Z
 - **Post I Learned It All in Fifteen Seconds to YouTube Community** (`manual-distribution-FP-AUTO-261`)
   - Phase: `Manual distribution`; owner: `tod`; status: `ready_for_manual_post`; urgency: `medium`
   - Detail: Post manually in YouTube Studio Community, then log the real public URL before marking distribution complete.
-  - Preview/check: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL`
+  - Preview/check: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL'`
   - asset: https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg
   - Guardrail: Do not log a manual post until a real public URL exists.
 - **Post Analog Myth to YouTube Community** (`manual-distribution-FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY`)
   - Phase: `Manual distribution`; owner: `tod`; status: `ready_for_manual_post`; urgency: `medium`
   - Detail: Post manually in YouTube Studio Community, then log the real public URL before marking distribution complete.
-  - Preview/check: `python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL`
+  - Preview/check: `python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url 'PUBLIC_URL'`
   - asset: https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg
   - Guardrail: Do not log a manual post until a real public URL exists.
 - **Post Twelve Dollars to YouTube Community** (`manual-distribution-FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY`)
   - Phase: `Manual distribution`; owner: `tod`; status: `ready_for_manual_post`; urgency: `medium`
   - Detail: Post manually in YouTube Studio Community, then log the real public URL before marking distribution complete.
-  - Preview/check: `python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL`
+  - Preview/check: `python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url 'PUBLIC_URL'`
   - asset: https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg
   - Guardrail: Do not log a manual post until a real public URL exists.
 - **Fill priority 2 metrics: Recent discovery and traffic** (`manual-metrics-priority-2`)
