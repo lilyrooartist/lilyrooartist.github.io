@@ -1,6 +1,6 @@
 # Monetization Activation Plan - Lily Roo
 
-Generated: 2026-06-22T06:56:07.784120Z
+Generated: 2026-06-22T07:01:04.978451Z
 
 ## Summary
 - Current subscribers: **6 / 1000**
@@ -18,8 +18,8 @@ Generated: 2026-06-22T06:56:07.784120Z
 2. **Preview approved backlog reschedule**
    - Phase: `Recover stalled approved backlog`; status: `preview_first`
    - Detail: Preview a new schedule for approved past-due posts. Safe apply is available after preview.
-   - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24`
-   - After review: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin`
+   - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24`
+   - After review: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin`
 3. **Repair Instagram executor**
    - Phase: `Clear platform blockers`; status: `needs_platform_fix`
    - Detail: Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.

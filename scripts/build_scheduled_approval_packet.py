@@ -13,6 +13,8 @@ ROOT = Path(__file__).resolve().parents[1]
 QUEUE = ROOT / "data" / "scheduled_posts.csv"
 EXECUTIONS = ROOT / "data" / "social_execution_snapshot.json"
 EXECUTOR_READINESS = ROOT / "data" / "executor_readiness_snapshot.json"
+TIKTOK_PREFLIGHT = ROOT / "data" / "tiktok_setup_preflight.json"
+TIKTOK_RUNBOOK = ROOT / "data" / "tiktok_repair_runbook.json"
 HYPERFOLLOW_SNAPSHOT = ROOT / "data" / "hyperfollow_store_links_snapshot.json"
 ALIGNMENT_AUDIT = ROOT / "data" / "first_single_alignment_audit.json"
 APPLE_MUSIC_SNAPSHOT = ROOT / "data" / "apple_music_release_snapshot.json"
@@ -557,8 +559,35 @@ def local_public_path(url: str) -> Path | None:
     return ROOT / parsed.path.lstrip("/")
 
 
-def check(name: str, status: str, detail: str) -> dict:
-    return {"name": name, "status": status, "detail": detail}
+def check(name: str, status: str, detail: str, **extra) -> dict:
+    payload = {"name": name, "status": status, "detail": detail}
+    payload.update({key: value for key, value in extra.items() if value not in (None, "", [])})
+    return payload
+
+
+def platform_repair_hint(platform: str) -> dict:
+    if platform_slug(platform) != "tiktok":
+        return {}
+    preflight = read_json(TIKTOK_PREFLIGHT, {})
+    runbook = read_json(TIKTOK_RUNBOOK, {})
+    summary = preflight.get("summary") or {}
+    runbook_summary = runbook.get("summary") or {}
+    return {
+        "repair_report": "admin/reports/tiktok-setup-preflight.md",
+        "repair_runbook": "admin/reports/tiktok-repair-runbook.md",
+        "repair_command": summary.get("oauth_preview_command") or "python3 scripts/tiktok_oauth_handoff.py",
+        "repair_preview_command": summary.get("push_preview_command") or "",
+        "repair_gate": "blocked_until_tiktok_credentials_and_public_posting_approval",
+        "repair_blockers": list(dict.fromkeys(
+            (summary.get("local_missing_secrets") or [])
+            + (summary.get("worker_missing_secrets") or [])
+            + ([] if summary.get("public_posting_approved") else ["TIKTOK_PUBLIC_POSTING_APPROVED"])
+        )),
+        "repair_next_step": (
+            "Complete the TikTok setup preflight before approving this row; approval alone would not make the executor publishable."
+        ),
+        "repair_apply_command": runbook_summary.get("apply_command") or "",
+    }
 
 
 def review_checks(row: dict[str, str], item: dict, readiness: dict) -> list[dict]:
@@ -609,7 +638,9 @@ def review_checks(row: dict[str, str], item: dict, readiness: dict) -> list[dict
     else:
         readiness_detail = "Platform readiness is absent from the snapshot."
         readiness_status = "review"
-    checks.append(check("platform_readiness", readiness_status, readiness_detail))
+    checks.append(check("platform_readiness", readiness_status, readiness_detail, **(
+        platform_repair_hint(platform) if readiness_status == "fail" else {}
+    )))
     return checks
 
 
@@ -798,6 +829,14 @@ def build_markdown(payload: dict) -> str:
             lines.append(f"- **{item['platform']} - {item['song']}** (`{item['id']}`)")
             for failed in item.get("failed_review_checks") or []:
                 lines.append(f"  - Held by `{failed.get('name')}`: {failed.get('detail')}")
+                if failed.get("repair_next_step"):
+                    lines.append(f"    - Repair next step: {failed.get('repair_next_step')}")
+                if failed.get("repair_report"):
+                    lines.append(f"    - Repair report: `{failed.get('repair_report')}`")
+                if failed.get("repair_runbook"):
+                    lines.append(f"    - Repair runbook: `{failed.get('repair_runbook')}`")
+                if failed.get("repair_command"):
+                    lines.append(f"    - Repair command: `{failed.get('repair_command')}`")
     else:
         lines.append("- None")
     lines.extend([
@@ -827,6 +866,14 @@ def build_markdown(payload: dict) -> str:
             lines.append("  - Failed checks holding this row:")
             for item in row["failed_review_checks"]:
                 lines.append(f"    - `{item['name']}`: {item['detail']}")
+                if item.get("repair_next_step"):
+                    lines.append(f"      - Repair next step: {item.get('repair_next_step')}")
+                if item.get("repair_report"):
+                    lines.append(f"      - Repair report: `{item.get('repair_report')}`")
+                if item.get("repair_runbook"):
+                    lines.append(f"      - Repair runbook: `{item.get('repair_runbook')}`")
+                if item.get("repair_command"):
+                    lines.append(f"      - Repair command: `{item.get('repair_command')}`")
         if row.get("approval_batch_reason"):
             lines.append(f"  - Batch reason: {row['approval_batch_reason']}")
         if row.get("approval_effect"):

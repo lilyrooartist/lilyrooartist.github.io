@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T06:56:07.279101Z",
+  "generated_at": "2026-06-22T07:01:04.497561Z",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -191,7 +191,19 @@
           {
             "name": "platform_readiness",
             "status": "fail",
-            "detail": "Executor readiness snapshot marks platform blocked. Missing secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN."
+            "detail": "Executor readiness snapshot marks platform blocked. Missing secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
+            "repair_report": "admin/reports/tiktok-setup-preflight.md",
+            "repair_runbook": "admin/reports/tiktok-repair-runbook.md",
+            "repair_command": "python3 scripts/tiktok_oauth_handoff.py",
+            "repair_preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+            "repair_gate": "blocked_until_tiktok_credentials_and_public_posting_approval",
+            "repair_blockers": [
+              "TIKTOK_CLIENT_KEY",
+              "TIKTOK_CLIENT_SECRET",
+              "TIKTOK_REFRESH_TOKEN",
+              "TIKTOK_PUBLIC_POSTING_APPROVED"
+            ],
+            "repair_next_step": "Complete the TikTok setup preflight before approving this row; approval alone would not make the executor publishable."
           }
         ],
         "approval_effect": {
@@ -549,7 +561,19 @@
         {
           "name": "platform_readiness",
           "status": "fail",
-          "detail": "Executor readiness snapshot marks platform blocked. Missing secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN."
+          "detail": "Executor readiness snapshot marks platform blocked. Missing secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
+          "repair_report": "admin/reports/tiktok-setup-preflight.md",
+          "repair_runbook": "admin/reports/tiktok-repair-runbook.md",
+          "repair_command": "python3 scripts/tiktok_oauth_handoff.py",
+          "repair_preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+          "repair_gate": "blocked_until_tiktok_credentials_and_public_posting_approval",
+          "repair_blockers": [
+            "TIKTOK_CLIENT_KEY",
+            "TIKTOK_CLIENT_SECRET",
+            "TIKTOK_REFRESH_TOKEN",
+            "TIKTOK_PUBLIC_POSTING_APPROVED"
+          ],
+          "repair_next_step": "Complete the TikTok setup preflight before approving this row; approval alone would not make the executor publishable."
         }
       ],
       "review_check_passed": false,
@@ -557,7 +581,19 @@
         {
           "name": "platform_readiness",
           "status": "fail",
-          "detail": "Executor readiness snapshot marks platform blocked. Missing secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN."
+          "detail": "Executor readiness snapshot marks platform blocked. Missing secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
+          "repair_report": "admin/reports/tiktok-setup-preflight.md",
+          "repair_runbook": "admin/reports/tiktok-repair-runbook.md",
+          "repair_command": "python3 scripts/tiktok_oauth_handoff.py",
+          "repair_preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+          "repair_gate": "blocked_until_tiktok_credentials_and_public_posting_approval",
+          "repair_blockers": [
+            "TIKTOK_CLIENT_KEY",
+            "TIKTOK_CLIENT_SECRET",
+            "TIKTOK_REFRESH_TOKEN",
+            "TIKTOK_PUBLIC_POSTING_APPROVED"
+          ],
+          "repair_next_step": "Complete the TikTok setup preflight before approving this row; approval alone would not make the executor publishable."
         }
       ],
       "approval_review_status": "held_by_failed_checks",

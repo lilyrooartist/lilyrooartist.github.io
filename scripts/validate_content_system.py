@@ -1462,6 +1462,17 @@ def validate_generated_outputs(failures):
                 and isinstance(row.get("failed_review_checks"), list)
                 and row.get("approval_batch_reason")
                 and (row.get("approval_review_status") != "held_by_failed_checks" or row.get("failed_review_checks"))
+                and (
+                    row.get("platform") != "TikTok"
+                    or row.get("approval_review_status") != "held_by_failed_checks"
+                    or any(
+                        check.get("name") == "platform_readiness"
+                        and check.get("repair_report") == "admin/reports/tiktok-setup-preflight.md"
+                        and check.get("repair_runbook") == "admin/reports/tiktok-repair-runbook.md"
+                        and "tiktok_oauth_handoff.py" in (check.get("repair_command") or "")
+                        for check in row.get("failed_review_checks") or []
+                    )
+                )
                 and {"copy_present", "destination_links_present", "asset_file_present", "executor_blocker_confirmed", "platform_readiness"} <= {check.get("name") for check in row.get("review_checks", [])}
                 and "--dry-run" in row.get("approval_preview_command", "")
                 and "--refresh-admin" in row.get("approval_apply_command", "")
@@ -3618,7 +3629,7 @@ def validate_generated_outputs(failures):
         fail("build_approval_runway.py missing", failures)
     if SCHEDULED_APPROVAL_SCRIPT.exists():
         scheduled_approval_text = SCHEDULED_APPROVAL_SCRIPT.read_text(encoding="utf-8")
-        if "scheduled_approval_packet.json" in scheduled_approval_text and "scheduled-approval-packet.md" in scheduled_approval_text and "approval_preview_command" in scheduled_approval_text and "approval_apply_command" in scheduled_approval_text and "batch_preview_command" in scheduled_approval_text and "batch_apply_command" in scheduled_approval_text and "checked_batch_preview_command" in scheduled_approval_text and "checked_batch_apply_command" in scheduled_approval_text and "checked_batch_explicit_preview_command" in scheduled_approval_text and "checked_batch_explicit_apply_command" in scheduled_approval_text and "checked_batch_dry_run_preview" in scheduled_approval_text and "--checked-batch" in scheduled_approval_text and "approval_docket" in scheduled_approval_text and "approval_decision_manifest" in scheduled_approval_text and "approval_apply_manifest" in scheduled_approval_text and "Approval Apply Manifest" in scheduled_approval_text and "pre_apply_checklist" in scheduled_approval_text and "post_apply_evidence" in scheduled_approval_text and "approval_review_runbook" in scheduled_approval_text and "approval_review_checklist_row" in scheduled_approval_text and "ready_to_approve" in scheduled_approval_text and "review_checks" in scheduled_approval_text and "failed_review_checks" in scheduled_approval_text and "approval_review_status" in scheduled_approval_text and "executor_readiness_snapshot.json" in scheduled_approval_text and "subprocess" not in scheduled_approval_text:
+        if "scheduled_approval_packet.json" in scheduled_approval_text and "scheduled-approval-packet.md" in scheduled_approval_text and "approval_preview_command" in scheduled_approval_text and "approval_apply_command" in scheduled_approval_text and "batch_preview_command" in scheduled_approval_text and "batch_apply_command" in scheduled_approval_text and "checked_batch_preview_command" in scheduled_approval_text and "checked_batch_apply_command" in scheduled_approval_text and "checked_batch_explicit_preview_command" in scheduled_approval_text and "checked_batch_explicit_apply_command" in scheduled_approval_text and "checked_batch_dry_run_preview" in scheduled_approval_text and "--checked-batch" in scheduled_approval_text and "approval_docket" in scheduled_approval_text and "approval_decision_manifest" in scheduled_approval_text and "approval_apply_manifest" in scheduled_approval_text and "Approval Apply Manifest" in scheduled_approval_text and "pre_apply_checklist" in scheduled_approval_text and "post_apply_evidence" in scheduled_approval_text and "approval_review_runbook" in scheduled_approval_text and "approval_review_checklist_row" in scheduled_approval_text and "ready_to_approve" in scheduled_approval_text and "review_checks" in scheduled_approval_text and "failed_review_checks" in scheduled_approval_text and "approval_review_status" in scheduled_approval_text and "repair_report" in scheduled_approval_text and "tiktok-setup-preflight.md" in scheduled_approval_text and "executor_readiness_snapshot.json" in scheduled_approval_text and "subprocess" not in scheduled_approval_text:
             ok("scheduled approval packet builder is review-only")
         else:
             fail("build_scheduled_approval_packet.py missing approval packet outputs, batch commands, review checks, or executes commands", failures)
@@ -3887,6 +3898,7 @@ def validate_admin_execution_feedback(failures):
         "unlock sequence card shown": 'id="promo-unlock-sequence"' in text and "renderPromoUnlockSequence" in text,
         "unlock sequence links shown": "promo-unlock-sequence.md" in text and "promo_unlock_sequence.json" in text,
         "current unlock gate shown": "Current unlock gate" in text and "ready_for_human_review" in text,
+        "scheduled approval repair hints shown": "Open repair report" in text and "Open repair runbook" in text and "Repair blockers:" in text and "tiktok-setup-preflight.md" in text,
         "handoff action docket shown": "Action docket:" in text and "First ready step:" in text,
         "published log reconciliation shown": "Published log reconciliation" in text and "Worker export" in text and "Manual Logging" in text,
         "manual approval docket shown": "Manual approval docket:" in text and "Preview manual approvals:" in text,
