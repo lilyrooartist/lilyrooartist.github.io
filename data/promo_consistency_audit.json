@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T08:58:30.971866Z",
+  "generated_at": "2026-06-22T09:03:31.070467Z",
   "safe_mode": true,
   "summary": {
     "check_count": 30,
@@ -294,11 +294,11 @@
         "Publish runway: 3 approved manual row(s) are ready to post and log from data/experiment_publish_runway.json.",
         "Refresh manual metrics: 6 worksheet row(s) still need new_value entries (blocked_until_new_values_filled); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values.",
         "Collect experiment results: 5 post-result field(s) need new_value plus evidence_note; use admin/reports/experiment-result-clipboard.md; first priority: measure FP-AUTO-260 on Facebook. Direct preview template: python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run. Direct apply template after review: python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin. Then preview import with python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run after filling data/experiment_result_entry_wide_template.csv.",
-        "Re-check checked-pending store links: 7 music site snapshot(s) still have no public URL; next recommended re-check after 2026-06-23T08:58:20.507749+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 then.",
-        "Current unlock gate: Approve checked scheduled rows (blocked); 0 ready, 3 blocked/warning; see data/promo_unlock_sequence.json.",
+        "Re-check checked-pending store links: 7 music site snapshot(s) still have no public URL; next recommended re-check after 2026-06-23T09:03:25.079726+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 then.",
+        "Current unlock gate: Review and post manual YouTube Community rows (blocked_until_input); 0 ready, 4 blocked/warning; preview python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL; see data/promo_unlock_sequence.json.",
         "Review handoff preview health: 3 missing input; see data/human_handoff_resolution_preview.json.",
-        "Refresh automation coverage: latest scheduled run has not covered 8e34186; dispatch https://github.com/lilyrooartist/lilyrooartist.github.io/actions/workflows/promo-admin-refresh.yml or wait for the next scheduled run.",
-        "Preview approved backlog reschedule: python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24"
+        "Preview approved backlog reschedule: python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24",
+        "1 approved unpublished posts are past their scheduled time; repair executor/platform blockers or reschedule them."
       ]
     },
     {
@@ -343,12 +343,12 @@
       "severity": "ok",
       "detail": "Promo unlock sequence should lead with the first currently actionable gate, skipping any completed evidence-only gate.",
       "expected": {
-        "current_step_id": "unlock-checked-scheduled-approval",
-        "current_gate_state": "blocked"
+        "current_step_id": "unlock-manual-distribution",
+        "current_gate_state": "blocked_until_input"
       },
       "actual": {
-        "current_step_id": "unlock-checked-scheduled-approval",
-        "current_gate_state": "blocked"
+        "current_step_id": "unlock-manual-distribution",
+        "current_gate_state": "blocked_until_input"
       }
     },
     {
@@ -359,17 +359,17 @@
       "expected": {
         "step_count": 5,
         "ready_for_human_review_count": 0,
-        "blocked_or_warning_count": 3,
-        "current_step_id": "unlock-checked-scheduled-approval",
-        "current_gate_state": "blocked",
+        "blocked_or_warning_count": 4,
+        "current_step_id": "unlock-manual-distribution",
+        "current_gate_state": "blocked_until_input",
         "open_blocker_count": 10
       },
       "actual": {
         "step_count": 5,
         "ready_for_human_review_count": 0,
-        "blocked_or_warning_count": 3,
-        "current_step_id": "unlock-checked-scheduled-approval",
-        "current_gate_state": "blocked",
+        "blocked_or_warning_count": 4,
+        "current_step_id": "unlock-manual-distribution",
+        "current_gate_state": "blocked_until_input",
         "open_blocker_count": 10
       }
     },
@@ -387,11 +387,11 @@
         "Publish runway: 3 approved manual row(s) are ready to post and log from data/experiment_publish_runway.json.",
         "Refresh manual metrics: 6 worksheet row(s) still need new_value entries (blocked_until_new_values_filled); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values.",
         "Collect experiment results: 5 post-result field(s) need new_value plus evidence_note; use admin/reports/experiment-result-clipboard.md; first priority: measure FP-AUTO-260 on Facebook. Direct preview template: python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run. Direct apply template after review: python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin. Then preview import with python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run after filling data/experiment_result_entry_wide_template.csv.",
-        "Re-check checked-pending store links: 7 music site snapshot(s) still have no public URL; next recommended re-check after 2026-06-23T08:58:20.507749+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 then.",
-        "Current unlock gate: Approve checked scheduled rows (blocked); 0 ready, 3 blocked/warning; see data/promo_unlock_sequence.json.",
+        "Re-check checked-pending store links: 7 music site snapshot(s) still have no public URL; next recommended re-check after 2026-06-23T09:03:25.079726+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 then.",
+        "Current unlock gate: Review and post manual YouTube Community rows (blocked_until_input); 0 ready, 4 blocked/warning; preview python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL; see data/promo_unlock_sequence.json.",
         "Review handoff preview health: 3 missing input; see data/human_handoff_resolution_preview.json.",
-        "Refresh automation coverage: latest scheduled run has not covered 8e34186; dispatch https://github.com/lilyrooartist/lilyrooartist.github.io/actions/workflows/promo-admin-refresh.yml or wait for the next scheduled run.",
-        "Preview approved backlog reschedule: python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24"
+        "Preview approved backlog reschedule: python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24",
+        "1 approved unpublished posts are past their scheduled time; repair executor/platform blockers or reschedule them."
       ]
     },
     {
@@ -405,8 +405,8 @@
       },
       "actual": {
         "required_failed": 0,
-        "optional_failed": 0,
-        "allowed_failures": 0
+        "optional_failed": 3,
+        "allowed_failures": 3
       }
     }
   ],
