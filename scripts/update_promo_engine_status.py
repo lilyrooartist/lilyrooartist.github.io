@@ -2557,7 +2557,7 @@ def build_status():
     partial_clear_preview = partial_clear.get("recommended_next_command") or ""
     if partial_clear_preview:
         all_actions.insert(0, f"Preview clear approved backlog row: {partial_clear_preview}")
-    elif monetization.get("approved_backlog_posts") and monetization.get("backlog_reschedule_preview_command"):
+    elif monetization.get("actionable_backlog_posts") and monetization.get("backlog_reschedule_preview_command"):
         all_actions.insert(0, f"Preview approved backlog reschedule: {monetization['backlog_reschedule_preview_command']}")
     if metrics["pending_manual_fields"] and not any("--from-csv --dry-run" in action for action in all_actions[:8]):
         all_actions.insert(0, manual_metric_action)

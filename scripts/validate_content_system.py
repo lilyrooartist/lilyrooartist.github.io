@@ -2752,6 +2752,12 @@ def validate_generated_outputs(failures):
             ok("promo engine status mirrors backlog reschedule clearance manifest")
         else:
             fail("promo_engine_status.json missing backlog reschedule clearance manifest", failures)
+        actionable_backlog = int(monetization.get("actionable_backlog_posts") or 0)
+        has_backlog_next_action = any(action.startswith("Preview approved backlog reschedule:") for action in status.get("next_actions") or [])
+        if (actionable_backlog and has_backlog_next_action) or (not actionable_backlog and not has_backlog_next_action):
+            ok("promo engine backlog next action follows actionable backlog count")
+        else:
+            fail("promo_engine_status.json backlog next action does not match actionable backlog count", failures)
         automation = kpi.get("refresh_automation") or {}
         if (
             automation.get("configured") is True
