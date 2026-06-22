@@ -1155,6 +1155,7 @@ GENERATED_REFRESH_PATHS = {
     "data/human_handoff_resolution_worksheet.csv",
     "data/live_social_metrics.json",
     "data/manual_distribution_packet.json",
+    "data/manual_distribution_url_template.csv",
     "data/manual_posting_clipboard.json",
     "data/youtube_community_url_reconciliation.json",
     "data/manual_metric_collection_packet.json",
