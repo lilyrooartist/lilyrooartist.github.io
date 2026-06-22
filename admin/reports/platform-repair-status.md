@@ -1,26 +1,30 @@
 # Platform Repair Status - Lily Roo
 
-Generated: 2026-06-22T06:14:29.439420Z
+Generated: 2026-06-22T06:17:54.253465Z
 
 ## Summary
 - Platform fixes: **4**
 - Blocked rows: **4**
 - Preview commands: **4**
-- Apply commands: **2**
-- Checklist items: **10**
-- Checklist blocked: **3**
+- Apply commands: **0**
+- Checklist items: **12**
+- Checklist blocked: **5**
 - Platforms: **Facebook, Instagram, TikTok**
 
 ## Repair Checklist
 - **Instagram** (`FP-AUTO-263`)
   - Status: `failed`; reason: `max_attempts_exceeded`
   - Error: Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.
-  - Repair: Reconnect the Instagram Business/Creator account to the Facebook Page or set IG_BUSINESS_ACCOUNT_ID, then push the worker secret and recapture readiness.
+  - Repair: Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.
+  - Missing locally: IG_BUSINESS_ACCOUNT_ID
+  - Local source: `secrets/social_api.env`
   - Checklist:
     - `pass` Worker secrets: Worker readiness snapshot reports required secrets present.
-    - `waiting` Refresh verification: After repair, refresh admin so readiness, scheduler, blocker, and backlog state update together. Command: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
+    - `blocked` Local secret source: secrets/social_api.env is missing: IG_BUSINESS_ACCOUNT_ID.
+    - `review` Refresh verification: After repair, refresh admin so readiness, scheduler, blocker, and backlog state update together. Command: `python3 scripts/refresh_promo_admin.py`
   - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263`
-  - Apply after review: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
+  - Blocked apply command: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
+  - Apply blocked by: local_secret_source_missing:IG_BUSINESS_ACCOUNT_ID
   - Verify before retry reset: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263`
   - Preview retry reset after platform repair: `python3 scripts/reset_social_execution_state.py FP-AUTO-263`
   - Apply retry reset after platform repair: `python3 scripts/reset_social_execution_state.py FP-AUTO-263 --apply`
@@ -28,12 +32,16 @@ Generated: 2026-06-22T06:14:29.439420Z
 - **Instagram** (`FP-PLAN-TWELVE-DOLLARS-INSTAGRAM`)
   - Status: `failed`; reason: `max_attempts_exceeded`
   - Error: Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.
-  - Repair: Reconnect the Instagram Business/Creator account to the Facebook Page or set IG_BUSINESS_ACCOUNT_ID, then push the worker secret and recapture readiness.
+  - Repair: Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.
+  - Missing locally: IG_BUSINESS_ACCOUNT_ID
+  - Local source: `secrets/social_api.env`
   - Checklist:
     - `pass` Worker secrets: Worker readiness snapshot reports required secrets present.
-    - `waiting` Refresh verification: After repair, refresh admin so readiness, scheduler, blocker, and backlog state update together. Command: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
+    - `blocked` Local secret source: secrets/social_api.env is missing: IG_BUSINESS_ACCOUNT_ID.
+    - `review` Refresh verification: After repair, refresh admin so readiness, scheduler, blocker, and backlog state update together. Command: `python3 scripts/refresh_promo_admin.py`
   - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM`
-  - Apply after review: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
+  - Blocked apply command: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
+  - Apply blocked by: local_secret_source_missing:IG_BUSINESS_ACCOUNT_ID
   - Verify before retry reset: `python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM`
   - Preview retry reset after platform repair: `python3 scripts/reset_social_execution_state.py FP-PLAN-TWELVE-DOLLARS-INSTAGRAM`
   - Apply retry reset after platform repair: `python3 scripts/reset_social_execution_state.py FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --apply`

@@ -810,6 +810,20 @@ def validate_generated_outputs(failures):
             ok("promo operations packet includes TikTok remote and local missing-secret diagnostics")
         else:
             fail("promo_operations_packet.json missing TikTok remote/local missing-secret diagnostics", failures)
+        instagram_actions = [
+            action for action in actions
+            if (action.get("context") or {}).get("platform") == "Instagram"
+        ]
+        if instagram_actions and all(
+            (action.get("context") or {}).get("account_resolution_reason") == "instagram_business_account_unresolved"
+            and "IG_BUSINESS_ACCOUNT_ID" in ((action.get("context") or {}).get("local_missing_secrets") or [])
+            and (action.get("context") or {}).get("local_secret_source")
+            and "instagram_business_account" in ((action.get("context") or {}).get("repair_action") or "")
+            for action in instagram_actions
+        ):
+            ok("promo operations packet includes Instagram account-resolution diagnostics")
+        else:
+            fail("promo_operations_packet.json missing Instagram account-resolution diagnostics", failures)
         manual_metric_actions = [
             action for action in actions
             if action.get("kind") == "manual_metrics"
@@ -1147,6 +1161,10 @@ def validate_generated_outputs(failures):
             row for row in repair_rows
             if str(row.get("platform") or "").lower() == "tiktok"
         ]
+        instagram_rows = [
+            row for row in repair_rows
+            if str(row.get("platform") or "").lower() == "instagram"
+        ]
         blocked_apply_rows = [
             row for row in repair_rows
             if row.get("blocked_apply_reasons")
@@ -1171,6 +1189,12 @@ def validate_generated_outputs(failures):
             )
             and all(row.get("blocked_apply_command") and not row.get("apply_command") for row in blocked_apply_rows)
             and all(row.get("preflight_status") and row.get("preflight_command") and row.get("preflight_report") for row in tiktok_rows)
+            and all(
+                (row.get("readiness") or {}).get("account_resolution_reason") == "instagram_business_account_unresolved"
+                and "IG_BUSINESS_ACCOUNT_ID" in (row.get("local_missing_secrets") or [])
+                and any(item.get("id") == "local_secret_source" and item.get("status") == "blocked" for item in row.get("repair_checklist") or [])
+                for row in instagram_rows
+            )
         ):
             ok(f"platform repair status tracks {len(repair_rows)} blocked platform repair(s)")
         else:

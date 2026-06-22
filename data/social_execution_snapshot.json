@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "updated_at": "2026-06-22T06:13:23.447639Z",
+  "updated_at": "2026-06-22T06:17:51.975853Z",
   "source": "lilyroo-social-executor-executions",
   "url": "https://www.lilyroo.com/api/social/executions",
   "http_status": 200,
@@ -46,7 +46,7 @@
         "status": "blocked",
         "reason": "not_approved",
         "attempts": 0,
-        "updated_at": "2026-06-22T06:00:11.767Z",
+        "updated_at": "2026-06-22T06:15:24.202Z",
         "source": "cron",
         "post_url": "",
         "error_summary": ""
@@ -54,23 +54,12 @@
     ],
     "platform_fix_needed": [
       {
-        "post_id": "FP-AUTO-265",
-        "platform": "Facebook",
-        "status": "failed",
-        "reason": "",
-        "attempts": 2,
-        "updated_at": "2026-06-22T06:00:17.558Z",
-        "source": "cron",
-        "post_url": "",
-        "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app."
-      },
-      {
         "post_id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
         "platform": "Instagram",
         "status": "failed",
         "reason": "max_attempts_exceeded",
         "attempts": 3,
-        "updated_at": "2026-06-22T06:00:12.060Z",
+        "updated_at": "2026-06-22T06:15:25.025Z",
         "source": "cron",
         "post_url": "",
         "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID."
@@ -81,7 +70,7 @@
         "status": "failed",
         "reason": "max_attempts_exceeded",
         "attempts": 3,
-        "updated_at": "2026-06-22T06:00:12.004Z",
+        "updated_at": "2026-06-22T06:15:24.850Z",
         "source": "cron",
         "post_url": "",
         "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID."
@@ -92,7 +81,7 @@
         "status": "blocked",
         "reason": "tiktok_credentials_missing",
         "attempts": 0,
-        "updated_at": "2026-06-22T06:00:11.912Z",
+        "updated_at": "2026-06-22T06:15:24.662Z",
         "source": "cron",
         "post_url": "",
         "error_summary": ""
@@ -103,31 +92,31 @@
         "status": "skipped",
         "reason": "manual_only",
         "attempts": 0,
-        "updated_at": "2026-06-22T06:00:11.854Z",
+        "updated_at": "2026-06-22T06:15:24.444Z",
         "source": "cron",
         "post_url": "",
         "error_summary": ""
+      },
+      {
+        "post_id": "FP-AUTO-265",
+        "platform": "Facebook",
+        "status": "failed",
+        "reason": "",
+        "attempts": 2,
+        "updated_at": "2026-06-22T06:00:17.558Z",
+        "source": "cron",
+        "post_url": "",
+        "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app."
       }
     ],
     "latest_attention": [
       {
-        "post_id": "FP-AUTO-265",
-        "platform": "Facebook",
-        "status": "failed",
-        "reason": "",
-        "attempts": 2,
-        "updated_at": "2026-06-22T06:00:17.558Z",
-        "source": "cron",
-        "post_url": "",
-        "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app."
-      },
-      {
         "post_id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
         "platform": "Instagram",
         "status": "failed",
         "reason": "max_attempts_exceeded",
         "attempts": 3,
-        "updated_at": "2026-06-22T06:00:12.060Z",
+        "updated_at": "2026-06-22T06:15:25.025Z",
         "source": "cron",
         "post_url": "",
         "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID."
@@ -138,7 +127,7 @@
         "status": "failed",
         "reason": "max_attempts_exceeded",
         "attempts": 3,
-        "updated_at": "2026-06-22T06:00:12.004Z",
+        "updated_at": "2026-06-22T06:15:24.850Z",
         "source": "cron",
         "post_url": "",
         "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID."
@@ -149,7 +138,7 @@
         "status": "blocked",
         "reason": "tiktok_credentials_missing",
         "attempts": 0,
-        "updated_at": "2026-06-22T06:00:11.912Z",
+        "updated_at": "2026-06-22T06:15:24.662Z",
         "source": "cron",
         "post_url": "",
         "error_summary": ""
@@ -160,7 +149,18 @@
         "status": "skipped",
         "reason": "manual_only",
         "attempts": 0,
-        "updated_at": "2026-06-22T06:00:11.854Z",
+        "updated_at": "2026-06-22T06:15:24.444Z",
+        "source": "cron",
+        "post_url": "",
+        "error_summary": ""
+      },
+      {
+        "post_id": "FP-AUTO-259",
+        "platform": "TikTok",
+        "status": "blocked",
+        "reason": "not_approved",
+        "attempts": 0,
+        "updated_at": "2026-06-22T06:15:24.202Z",
         "source": "cron",
         "post_url": "",
         "error_summary": ""

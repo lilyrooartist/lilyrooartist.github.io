@@ -221,6 +221,9 @@ def readiness_diagnostics(readiness: dict, platform: str) -> dict:
         "public_posting_approved": platform_data.get("public_posting_approved"),
         "refresh_config_present": platform_data.get("refresh_config_present"),
         "access_token_present": platform_data.get("access_token_present"),
+        "account_resolved": platform_data.get("account_resolved"),
+        "account_resolution_reason": platform_data.get("account_resolution_reason"),
+        "account_id_source": platform_data.get("account_id_source"),
         "default_privacy": platform_data.get("default_privacy"),
     }
     return {key: value for key, value in diagnostics.items() if value not in (None, "", [])}
@@ -228,7 +231,11 @@ def readiness_diagnostics(readiness: dict, platform: str) -> dict:
 
 def local_secret_diagnostics(platform: str, missing_secrets: list[str]) -> dict:
     names = list(missing_secrets or [])
-    if platform_slug(platform) != "tiktok" or not names:
+    if platform_slug(platform) == "instagram":
+        names = ["IG_BUSINESS_ACCOUNT_ID"]
+    if platform_slug(platform) != "tiktok" and platform_slug(platform) != "instagram":
+        return {}
+    if not names:
         return {}
     present = read_env_presence(SOCIAL_ENV, names)
     missing_local = [name for name in names if not present.get(name)]
@@ -275,6 +282,18 @@ def repair_action_for(platform: str, fallback: str, diagnostics: dict) -> str:
             pieces.append("Complete TikTok OAuth/public posting setup locally, then push secrets and refresh Admin.")
         else:
             pieces.append("Complete TikTok OAuth/public posting setup, push secrets, then refresh Admin.")
+        return " ".join(pieces)
+    if platform_slug(platform) == "instagram":
+        reason = diagnostics.get("account_resolution_reason") or ""
+        pieces = []
+        if reason == "instagram_business_account_unresolved":
+            pieces.append("Worker cannot resolve instagram_business_account from FB_PAGE_ID.")
+        local_missing = ", ".join(diagnostics.get("local_missing_secrets") or [])
+        if local_missing:
+            pieces.append(f"Local secret source is missing: {local_missing}.")
+            pieces.append("Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.")
+        else:
+            pieces.append("Push IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page, then recapture readiness.")
         return " ".join(pieces)
     return fallback
 
