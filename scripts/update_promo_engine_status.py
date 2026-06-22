@@ -2690,6 +2690,7 @@ def build_status():
                 "metric_cards": experiment_result_clipboard.get("metric_cards") or [],
                 "missing_public_url_cards": experiment_result_clipboard.get("missing_public_url_cards") or [],
                 "measurement_priority_cards": experiment_result_clipboard.get("measurement_priority_cards") or [],
+                "first_measurement_runbook": experiment_result_clipboard.get("first_measurement_runbook") or {},
             },
             "experiment_publish_runway": {
                 "available": bool(experiment_publish_runway),

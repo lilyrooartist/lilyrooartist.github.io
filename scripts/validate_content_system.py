@@ -2107,6 +2107,7 @@ def validate_generated_outputs(failures):
         cards = clipboard.get("metric_cards") or []
         missing_cards = clipboard.get("missing_public_url_cards") or []
         priority_cards = clipboard.get("measurement_priority_cards") or []
+        first_runbook = clipboard.get("first_measurement_runbook") or {}
         handoff = clipboard.get("post_log_measurement_handoff") or {}
         handoff_rows = handoff.get("rows") or []
         missing_format_by_post_id = {
@@ -2117,6 +2118,7 @@ def validate_generated_outputs(failures):
         manual_posting = json.loads(MANUAL_POSTING_CLIPBOARD.read_text(encoding="utf-8")) if MANUAL_POSTING_CLIPBOARD.exists() else {}
         manual_session = manual_posting.get("session_manifest") or {}
         grouped_ids = sorted({(row.get("post_id") or "", row.get("source_row") or "") for row in pending_rows})
+        first_collect_priority = next((item for item in priority_cards if item.get("action") == "collect_metrics"), {})
         if (
             clipboard.get("safe_mode") is True
             and (clipboard.get("summary") or {}).get("entry_csv_path") == "data/experiment_result_entry_template.csv"
@@ -2143,6 +2145,21 @@ def validate_generated_outputs(failures):
             and all(item.get("direct_preview_command_template") for item in priority_cards if item.get("action") == "collect_metrics")
             and all(item.get("direct_apply_command_template") and "--apply --refresh-admin" in item.get("direct_apply_command_template") for item in priority_cards if item.get("action") == "collect_metrics")
             and all(item.get("paste_text_path") and item.get("manual_posting_report") == "admin/reports/manual-posting-clipboard.md" and "log_manual_distribution.py" in (item.get("log_preview_command") or "") and "--apply --refresh-admin" in (item.get("log_apply_command") or "") for item in priority_cards if item.get("action") == "post_and_log_public_url")
+            and first_runbook.get("status") in {"ready_to_collect_metrics", "clear"}
+            and (
+                not first_collect_priority
+                or (
+                    first_runbook.get("post_id") == first_collect_priority.get("post_id")
+                    and first_runbook.get("source_row") == first_collect_priority.get("source_row")
+                    and first_runbook.get("direct_preview_command_template") == first_collect_priority.get("direct_preview_command_template")
+                    and first_runbook.get("direct_apply_command_template") == first_collect_priority.get("direct_apply_command_template")
+                    and first_runbook.get("wide_entry_csv_path") == (clipboard.get("summary") or {}).get("wide_entry_csv_path")
+                    and first_runbook.get("evidence_sources")
+                    and any("evidence_note" in item for item in first_runbook.get("collection_checklist") or [])
+                    and any("Published_Log.csv" in item for item in first_runbook.get("completion_evidence") or [])
+                    and "Do not guess metrics" in (first_runbook.get("guardrail") or "")
+                )
+            )
             and handoff.get("status") in {"waiting_for_public_urls", "clear"}
             and handoff.get("source_session") == (manual_session.get("session_name") or "")
             and handoff.get("manual_posting_report") == "admin/reports/manual-posting-clipboard.md"
@@ -2740,6 +2757,7 @@ def validate_generated_outputs(failures):
             and experiment_clipboard_status.get("metric_cards") == (experiment_clipboard.get("metric_cards") or [])
             and experiment_clipboard_status.get("missing_public_url_cards") == (experiment_clipboard.get("missing_public_url_cards") or [])
             and experiment_clipboard_status.get("measurement_priority_cards") == (experiment_clipboard.get("measurement_priority_cards") or [])
+            and experiment_clipboard_status.get("first_measurement_runbook") == (experiment_clipboard.get("first_measurement_runbook") or {})
         ):
             ok("promo engine surfaces experiment result clipboard")
         else:
@@ -3764,6 +3782,8 @@ def validate_generated_outputs(failures):
             and "platform_repair_status.json" in result_clipboard_text
             and "measurement_priority_cards" in result_clipboard_text
             and "measurement_priority_count" in result_clipboard_text
+            and "first_measurement_runbook" in result_clipboard_text
+            and "First Measurement Runbook" in result_clipboard_text
             and "post_log_measurement_handoff" in result_clipboard_text
             and "Post-Log Measurement Handoff" in result_clipboard_text
             and "wide_entry_template" in result_clipboard_text
@@ -4238,7 +4258,7 @@ def validate_admin_execution_feedback(failures):
         "manual posting cards actionable": "Manual posting clipboard is ready" in text and "Session manifest:" in text and "Session rows:" in text and "Session steps:" in text and "Open community surface" in text and "Paste files:" in text and "Paste file:" in text and "manual-posting-cards" in text and "Posting bundle:" in text and "Bundle steps:" in text and "Result trigger:" in text and "Preview URL log after posting" in text and "Partial batch apply after first URL" in text and "Reconcile public URLs after posting" in text and "Copy URL reconciliation" in text and "Open URL reconciliation report" in text and "Copy post text" in text and "data-copy-text" in text and "manual-url-input" in text and "data-copy-template" in text and "Copy preview with URL" in text,
         "manual posting source embedded": "embedded-manual-posting-clipboard" in text and "embedded-manual-posting-clipboard-report" in text,
         "experiment result clipboard shown": "renderExperimentResultClipboard" in text and "experiment_result_clipboard.json" in text and "Experiment result clipboard" in text,
-        "experiment result cards actionable": "Open result clipboard report" in text and "Entry CSV:" in text and "Wide entry CSV:" in text and "result_import_preview_command" in text and "Copy metric preview" in text and "data-result-command" in text and "result-evidence-input" in text and "Measure first" in text and "Post now" in text and "Blocked" in text and "measurement_priority_cards" in text and "Post-log measurement handoff" in text and "Post-log measurement" in text and "Open manual paste file" in text and "log_manual_distribution.py" in text,
+        "experiment result cards actionable": "Open result clipboard report" in text and "Entry CSV:" in text and "Wide entry CSV:" in text and "result_import_preview_command" in text and "Copy metric preview" in text and "data-result-command" in text and "result-evidence-input" in text and "Measure first" in text and "Post now" in text and "Blocked" in text and "measurement_priority_cards" in text and "First measurement runbook" in text and "Copy first preview" in text and "Post-log measurement handoff" in text and "Post-log measurement" in text and "Open manual paste file" in text and "log_manual_distribution.py" in text,
         "experiment result source embedded": "embedded-experiment-result-clipboard" in text and "embedded-experiment-result-clipboard-report" in text,
         "format candidate evidence gaps shown": "Top format candidates" in text and "published unmeasured" in text and "format_winner_readiness" in text and "Metric confidence" in text and "Next evidence action:" in text and "measure-ready" in text and "post+log" in text,
     }

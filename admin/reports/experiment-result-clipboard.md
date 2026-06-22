@@ -1,6 +1,6 @@
 # Experiment Result Clipboard - Lily Roo
 
-Generated: 2026-06-22T11:59:31.551385Z
+Generated: 2026-06-22T12:06:41.204939Z
 
 ## Summary
 - Status: **needs_values**
@@ -16,6 +16,35 @@ Generated: 2026-06-22T11:59:31.551385Z
 - Preview import: `python3 scripts/update_experiment_results.py --from-csv data/experiment_result_entry_template.csv --dry-run`
 - Preview wide import: `python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run`
 - Apply after review: `blocked until values/evidence are filled`
+
+## First Measurement Runbook
+- Status: **ready_to_collect_metrics**
+- Post: `FP-AUTO-260` Facebook / Release-art image + story hook
+- URL: https://www.facebook.com/903693509504290_122118326547249470
+- Published_Log row: `18`
+- Pending fields: `views, saves, subs_delta`
+- Wide entry CSV: `data/experiment_result_entry_wide_template.csv`
+- Evidence note template: `Facebook analytics YYYY-MM-DD`
+- Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
+- Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
+- Wide import preview: `python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run`
+- Why: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 3 logged post(s), 8 missing URL(s) in this format.
+- Guardrail: Do not guess metrics; leave unknown values blank and never apply without an evidence_note.
+- Evidence sources:
+  - Logged public post: https://www.facebook.com/903693509504290_122118326547249470 - Open the public post to confirm the URL and visible engagement before entering metrics.
+  - Meta Business Suite: https://business.facebook.com/latest/insights - Open post insights for the Lily Roo page post and copy the available result values.
+- Checklist:
+  - Open the logged public post and confirm it matches this post_id.
+  - Open the listed platform analytics or insights source.
+  - Copy only visible numeric values for pending_fields.
+  - Enter the values and evidence_note in the wide entry CSV row for this post_id and source_row.
+  - Run the direct preview command for the first filled field, or the wide import preview for the filled worksheet.
+  - Apply only after preview shows the intended Published_Log.csv update.
+- Completion evidence:
+  - The wide entry CSV has at least one numeric value for this post_id plus an evidence_note.
+  - The dry-run preview reports only this post/source_row or the intended worksheet rows.
+  - Published_Log.csv contains the imported result values and result_evidence notes after apply.
+  - The growth dashboard refreshes with a lower pending_result_field_count.
 
 ## Metric Cards
 ### X - I Learned It All in Fifteen Seconds (`FP-AUTO-257`)

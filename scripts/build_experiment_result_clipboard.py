@@ -375,6 +375,58 @@ def post_log_measurement_handoff(manual_posting: dict, summary: dict, missing_ca
     }
 
 
+def first_measurement_runbook(priority_cards: list[dict], cards: list[dict], summary: dict) -> dict:
+    first_priority = next((item for item in priority_cards if item.get("action") == "collect_metrics"), {})
+    if not first_priority:
+        return {
+            "status": "clear",
+            "post_id": "",
+            "next_action": "No published experiment result card is waiting for values.",
+            "guardrail": "Do not invent metric values.",
+        }
+    card_by_id = {card.get("post_id") or "": card for card in cards}
+    card = card_by_id.get(first_priority.get("post_id") or "") or {}
+    pending_fields = card.get("pending_fields") or first_priority.get("pending_fields") or []
+    return {
+        "status": "ready_to_collect_metrics",
+        "post_id": first_priority.get("post_id") or "",
+        "platform": first_priority.get("platform") or "",
+        "song": first_priority.get("song") or card.get("song") or "",
+        "experiment_format": first_priority.get("experiment_format") or card.get("experiment_format") or "",
+        "post_url": first_priority.get("post_url") or card.get("post_url") or "",
+        "source_row": first_priority.get("source_row") or card.get("source_row") or "",
+        "pending_fields": pending_fields,
+        "wide_entry_csv_path": summary.get("wide_entry_csv_path") or "data/experiment_result_entry_wide_template.csv",
+        "entry_csv_path": summary.get("entry_csv_path") or "data/experiment_result_entry_template.csv",
+        "direct_preview_command_template": first_priority.get("direct_preview_command_template") or "",
+        "direct_apply_command_template": first_priority.get("direct_apply_command_template") or "",
+        "wide_import_preview_command": summary.get("wide_result_import_preview_command") or "",
+        "wide_import_apply_command": summary.get("wide_result_import_apply_command") or "",
+        "evidence_note_template": f"{first_priority.get('platform') or card.get('platform') or 'Platform'} analytics YYYY-MM-DD",
+        "wide_entry_instruction": (
+            "Fill only visible numeric values for this post in the wide entry CSV; "
+            "leave unknown fields blank and include one evidence_note."
+        ),
+        "evidence_sources": card.get("evidence_sources") or evidence_sources(first_priority.get("platform") or "", first_priority.get("post_url") or ""),
+        "collection_checklist": [
+            "Open the logged public post and confirm it matches this post_id.",
+            "Open the listed platform analytics or insights source.",
+            "Copy only visible numeric values for pending_fields.",
+            "Enter the values and evidence_note in the wide entry CSV row for this post_id and source_row.",
+            "Run the direct preview command for the first filled field, or the wide import preview for the filled worksheet.",
+            "Apply only after preview shows the intended Published_Log.csv update.",
+        ],
+        "completion_evidence": [
+            "The wide entry CSV has at least one numeric value for this post_id plus an evidence_note.",
+            "The dry-run preview reports only this post/source_row or the intended worksheet rows.",
+            "Published_Log.csv contains the imported result values and result_evidence notes after apply.",
+            "The growth dashboard refreshes with a lower pending_result_field_count.",
+        ],
+        "why": first_priority.get("reason") or "This is the top published/logged post that can improve repeatable-format evidence.",
+        "guardrail": "Do not guess metrics; leave unknown values blank and never apply without an evidence_note.",
+    }
+
+
 def build_payload() -> dict:
     packet = read_json(RESULT_PACKET, {})
     manual_posting = read_json(MANUAL_POSTING, {})
@@ -384,6 +436,7 @@ def build_payload() -> dict:
     missing_cards = missing_log_cards(packet.get("missing_published_log_posts") or [])
     priority_cards = measurement_priority_cards(cards, missing_cards, manual_posting, platform_repair)
     handoff = post_log_measurement_handoff(manual_posting, summary, missing_cards)
+    runbook = first_measurement_runbook(priority_cards, cards, summary)
     return {
         "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "safe_mode": True,
@@ -415,9 +468,11 @@ def build_payload() -> dict:
         "metric_cards": cards,
         "missing_public_url_cards": missing_cards,
         "measurement_priority_cards": priority_cards,
+        "first_measurement_runbook": runbook,
         "post_log_measurement_handoff": handoff,
         "operator_steps": [
             "Open each post URL or platform analytics surface.",
+            "Start with the first-measurement runbook when it is ready.",
             "Start with measurement_priority_cards; they are ordered to unlock repeatable-format evidence fastest.",
             "Preferred: fill one row per post in the wide entry CSV, including evidence_note.",
             "Alternative: fill new_value and evidence_note for every pending field in the long entry CSV.",
@@ -436,6 +491,7 @@ def build_payload() -> dict:
 
 def build_markdown(payload: dict) -> str:
     summary = payload["summary"]
+    runbook = payload.get("first_measurement_runbook") or {}
     lines = [
         "# Experiment Result Clipboard - Lily Roo",
         "",
@@ -456,8 +512,36 @@ def build_markdown(payload: dict) -> str:
         f"- Preview wide import: `{summary.get('wide_result_import_preview_command') or 'not available'}`",
         f"- Apply after review: `{summary.get('result_import_apply_command') or 'blocked until values/evidence are filled'}`",
         "",
-        "## Metric Cards",
+        "## First Measurement Runbook",
+        f"- Status: **{runbook.get('status', 'unknown')}**",
+        f"- Post: `{runbook.get('post_id') or 'not available'}` {runbook.get('platform') or ''} / {runbook.get('experiment_format') or 'unknown format'}",
+        f"- URL: {runbook.get('post_url') or 'not logged'}",
+        f"- Published_Log row: `{runbook.get('source_row') or 'not available'}`",
+        f"- Pending fields: `{', '.join(runbook.get('pending_fields') or []) or 'none'}`",
+        f"- Wide entry CSV: `{runbook.get('wide_entry_csv_path') or 'not available'}`",
+        f"- Evidence note template: `{runbook.get('evidence_note_template') or 'SOURCE analytics YYYY-MM-DD'}`",
+        f"- Direct preview template: `{runbook.get('direct_preview_command_template') or 'not available'}`",
+        f"- Direct apply template: `{runbook.get('direct_apply_command_template') or 'not available'}`",
+        f"- Wide import preview: `{runbook.get('wide_import_preview_command') or 'not available'}`",
+        f"- Why: {runbook.get('why') or 'not available'}",
+        f"- Guardrail: {runbook.get('guardrail') or 'Do not guess metrics.'}",
     ]
+    if runbook.get("evidence_sources"):
+        lines.append("- Evidence sources:")
+        for source in runbook["evidence_sources"]:
+            lines.append(f"  - {source.get('label')}: {source.get('url')} - {source.get('instruction')}")
+    if runbook.get("collection_checklist"):
+        lines.append("- Checklist:")
+        for item in runbook["collection_checklist"]:
+            lines.append(f"  - {item}")
+    if runbook.get("completion_evidence"):
+        lines.append("- Completion evidence:")
+        for item in runbook["completion_evidence"]:
+            lines.append(f"  - {item}")
+    lines.extend([
+        "",
+        "## Metric Cards",
+    ])
     if not payload["metric_cards"]:
         lines.append("- No published experiment posts are waiting for metric values.")
     for card in payload["metric_cards"]:

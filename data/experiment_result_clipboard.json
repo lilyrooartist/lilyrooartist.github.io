@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T11:59:31.551385Z",
+  "generated_at": "2026-06-22T12:06:41.204939Z",
   "safe_mode": true,
   "source": {
     "experiment_result_collection_packet": "data/experiment_result_collection_packet.json",
@@ -554,6 +554,56 @@
       "reason": "Platform work is blocked; clear the platform repair gate before URL logging can produce metrics. 0 logged post(s), 2 missing URL(s) in this format."
     }
   ],
+  "first_measurement_runbook": {
+    "status": "ready_to_collect_metrics",
+    "post_id": "FP-AUTO-260",
+    "platform": "Facebook",
+    "song": "I Learned It All in Fifteen Seconds",
+    "experiment_format": "Release-art image + story hook",
+    "post_url": "https://www.facebook.com/903693509504290_122118326547249470",
+    "source_row": "18",
+    "pending_fields": [
+      "views",
+      "saves",
+      "subs_delta"
+    ],
+    "wide_entry_csv_path": "data/experiment_result_entry_wide_template.csv",
+    "entry_csv_path": "data/experiment_result_entry_template.csv",
+    "direct_preview_command_template": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run",
+    "direct_apply_command_template": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin",
+    "wide_import_preview_command": "python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run",
+    "wide_import_apply_command": "",
+    "evidence_note_template": "Facebook analytics YYYY-MM-DD",
+    "wide_entry_instruction": "Fill only visible numeric values for this post in the wide entry CSV; leave unknown fields blank and include one evidence_note.",
+    "evidence_sources": [
+      {
+        "label": "Logged public post",
+        "url": "https://www.facebook.com/903693509504290_122118326547249470",
+        "instruction": "Open the public post to confirm the URL and visible engagement before entering metrics."
+      },
+      {
+        "label": "Meta Business Suite",
+        "url": "https://business.facebook.com/latest/insights",
+        "instruction": "Open post insights for the Lily Roo page post and copy the available result values."
+      }
+    ],
+    "collection_checklist": [
+      "Open the logged public post and confirm it matches this post_id.",
+      "Open the listed platform analytics or insights source.",
+      "Copy only visible numeric values for pending_fields.",
+      "Enter the values and evidence_note in the wide entry CSV row for this post_id and source_row.",
+      "Run the direct preview command for the first filled field, or the wide import preview for the filled worksheet.",
+      "Apply only after preview shows the intended Published_Log.csv update."
+    ],
+    "completion_evidence": [
+      "The wide entry CSV has at least one numeric value for this post_id plus an evidence_note.",
+      "The dry-run preview reports only this post/source_row or the intended worksheet rows.",
+      "Published_Log.csv contains the imported result values and result_evidence notes after apply.",
+      "The growth dashboard refreshes with a lower pending_result_field_count."
+    ],
+    "why": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 3 logged post(s), 8 missing URL(s) in this format.",
+    "guardrail": "Do not guess metrics; leave unknown values blank and never apply without an evidence_note."
+  },
   "post_log_measurement_handoff": {
     "status": "waiting_for_public_urls",
     "source_session": "YouTube Community manual posting batch",
@@ -748,6 +798,7 @@
   },
   "operator_steps": [
     "Open each post URL or platform analytics surface.",
+    "Start with the first-measurement runbook when it is ready.",
     "Start with measurement_priority_cards; they are ordered to unlock repeatable-format evidence fastest.",
     "Preferred: fill one row per post in the wide entry CSV, including evidence_note.",
     "Alternative: fill new_value and evidence_note for every pending field in the long entry CSV.",
