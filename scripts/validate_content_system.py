@@ -1121,6 +1121,10 @@ def validate_generated_outputs(failures):
                 )
             )
             and manual_posting_step
+            and (
+                not manual_posting_has_cards
+                or manual_posting_step.get("label") == "Post manual distribution rows"
+            )
             and manual_posting_step.get("ready_ids") == (manual_approval_docket.get("ready_ids") or [])
             and manual_posting_step.get("blocked_ids") == (manual_approval_docket.get("blocked_ids") or [])
             and (
@@ -2347,6 +2351,8 @@ def validate_generated_outputs(failures):
         roadmap_ids = {item.get("id") for item in roadmap}
         approval_runway = json.loads(APPROVAL_RUNWAY.read_text(encoding="utf-8")) if APPROVAL_RUNWAY.exists() else {}
         manual_approval_docket = approval_runway.get("manual_approval_docket") or {}
+        manual_distribution_packet = json.loads(MANUAL_DISTRIBUTION_PACKET.read_text(encoding="utf-8")) if MANUAL_DISTRIBUTION_PACKET.exists() else {}
+        manual_distribution_docket = manual_distribution_packet.get("manual_distribution_docket") or {}
         manual_roadmap = next((item for item in roadmap if item.get("id") == "unlock-manual-distribution"), {})
         if (
             ledger.get("safe_mode") is True
@@ -2370,6 +2376,10 @@ def validate_generated_outputs(failures):
             )
             and any(item.get("id") == "unlock-checked-scheduled-approval" and item.get("preview_command") == projection.get("preview_command") and item.get("apply_command") == projection.get("apply_command") for item in roadmap)
             and manual_roadmap
+            and (
+                not int(manual_distribution_docket.get("postable_count") or 0)
+                or manual_roadmap.get("phase") == "Post manual YouTube Community rows"
+            )
             and manual_roadmap.get("preview_command") == (manual_approval_docket.get("preview_command") or "")
             and manual_roadmap.get("apply_command") == (manual_approval_docket.get("apply_command") or "")
             and manual_roadmap.get("blocked_by") == (manual_approval_docket.get("blocked_ids") or [])

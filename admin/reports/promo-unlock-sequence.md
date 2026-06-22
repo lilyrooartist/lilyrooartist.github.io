@@ -1,6 +1,6 @@
 # Promo Unlock Sequence - Lily Roo
 
-Generated: 2026-06-22T11:12:51.830275Z
+Generated: 2026-06-22T11:18:14.722655Z
 
 ## Summary
 - Steps: **5**
@@ -15,12 +15,12 @@ Generated: 2026-06-22T11:12:51.830275Z
    - State: `blocked`; owner: `tod`
    - Reason: Blocked by: FP-AUTO-259.
    - Unlocks: Instagram executor row can become publish-eligible after approval.; One scheduled YouTube Community row can move into manual distribution after approval.
-2. **Review and post manual YouTube Community rows** - `unlock-manual-distribution`
+2. **Post manual YouTube Community rows** - `unlock-manual-distribution`
    - State: `blocked_until_input`; owner: `tod`
    - Reason: Waiting for public_post_url before this clear gate can produce completion evidence.
    - Unlocks: Manual YouTube Community promotion can publish without waiting for broken auto executors.; Published_Log.csv can be updated after public URLs exist.
    - preview (preview-safe): `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL'`
-   - Completion evidence: data/manual_distribution_packet.json should move approved rows from review_queue toward postable manual distribution, and data/published_log_reconciliation.json should remain gated until public URLs are logged.
+   - Completion evidence: data/published_log_reconciliation.json should stay waiting for real public URLs until the postable manual rows are published and logged.
    - Guardrail: Manual-only approvals do not auto-post; posting and public URL logging remain separate after review.
 3. **Repair TikTok executor** - `unlock-tiktok-platform-repair`
    - State: `blocked_until_input`; owner: `tod`
@@ -33,8 +33,8 @@ Generated: 2026-06-22T11:12:51.830275Z
    - State: `clear`; owner: `tod`
    - Reason: No action is needed for this gate.
    - Unlocks: Approved past-due queue rows get a fresh schedule after executor blockers clear.
-   - preview (preview-safe): `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24`
-   - apply_after_review (after-review only): `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin`
+   - preview (preview-safe): `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24`
+   - apply_after_review (after-review only): `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin`
 5. **Fill manual metric worksheet** - `unlock-manual-metrics`
    - State: `blocked_until_input`; owner: `tod`
    - Reason: private_metric_values

@@ -341,6 +341,7 @@ def build_unlock_roadmap(rows: list[dict], projection: dict) -> list[dict]:
     platform_rows = platform_repair.get("rows") or []
     tiktok_rows = [item for item in platform_rows if str(item.get("platform") or "").lower() == "tiktok"]
     backlog_summary = backlog.get("summary") or {}
+    manual_phase = "Post manual YouTube Community rows" if int(manual_docket.get("postable_count") or 0) else "Review and post manual YouTube Community rows"
     roadmap = [
         {
             "id": "unlock-checked-scheduled-approval",
@@ -359,7 +360,7 @@ def build_unlock_roadmap(rows: list[dict], projection: dict) -> list[dict]:
         },
         {
             "id": "unlock-manual-distribution",
-            "phase": "Review and post manual YouTube Community rows",
+            "phase": manual_phase,
             "status": approval_docket.get("status") or manual_docket.get("status") or "unknown",
             "owner": "tod",
             "blockers_resolved": int(approval_docket.get("ready_count") or 0) or int(manual_docket.get("review_count") or 0) + int(manual_docket.get("postable_count") or 0),

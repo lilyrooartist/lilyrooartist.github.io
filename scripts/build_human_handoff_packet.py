@@ -425,9 +425,13 @@ def build_action_docket(tasks: list[dict], blocker_summary: dict, approval_runwa
     blocked_platform_count = len([task for task in platform_setup if task.get("status") == "blocked"])
     manual_preview_command = manual_approval_docket.get("preview_command") or (manual_distribution[0].get("preview_command") if manual_distribution else "")
     manual_apply_command = manual_approval_docket.get("apply_command") or (manual_distribution[0].get("apply_command") if manual_distribution else "")
+    manual_label = "Review and post manual distribution rows"
+    manual_completion_evidence = "data/manual_distribution_packet.json should move approved rows from review_queue toward postable manual distribution, and data/published_log_reconciliation.json should remain gated until public URLs are logged."
     if manual_postable:
         manual_preview_command = ""
         manual_apply_command = ""
+        manual_label = "Post manual distribution rows"
+        manual_completion_evidence = "data/published_log_reconciliation.json should stay waiting for real public URLs until the postable manual rows are published and logged."
     manual_guardrail = manual_approval_docket.get("guardrail") or "Post manually first, then log only real public URLs."
     approval_preview_command = approval.get("preview_command") or projection.get("preview_command") or ""
     approval_apply_command = approval.get("apply_command") or projection.get("apply_command") or ""
@@ -471,7 +475,7 @@ def build_action_docket(tasks: list[dict], blocker_summary: dict, approval_runwa
         },
         {
             "id": "manual-posting-review",
-            "label": "Review and post manual distribution rows",
+            "label": manual_label,
             "state": "ready_for_manual_post" if manual_postable else ("needs_review" if manual_distribution else "clear"),
             "owner": "tod",
             "task_ids": [task["id"] for task in manual_distribution],
@@ -483,7 +487,7 @@ def build_action_docket(tasks: list[dict], blocker_summary: dict, approval_runwa
             "preview_command": manual_preview_command,
             "apply_command": manual_apply_command,
             "command_sequence": command_sequence(manual_preview_command, manual_apply_command, "python3 scripts/refresh_promo_admin.py"),
-            "completion_evidence": "data/manual_distribution_packet.json should move approved rows from review_queue toward postable manual distribution, and data/published_log_reconciliation.json should remain gated until public URLs are logged.",
+            "completion_evidence": manual_completion_evidence,
             "next_step_after_apply": "Post each approved YouTube Community row manually, then log its public URL with scripts/log_manual_distribution.py.",
             "guardrail": f"{manual_guardrail} Post manually first, then log only real public URLs.",
         },

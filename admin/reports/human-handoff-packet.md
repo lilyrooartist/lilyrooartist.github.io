@@ -1,6 +1,6 @@
 # Human Handoff Packet - Lily Roo
 
-Generated: 2026-06-22T11:12:51.627737Z
+Generated: 2026-06-22T11:18:14.570868Z
 
 ## Summary
 - Open handoff tasks: **10**
@@ -23,11 +23,11 @@ Generated: 2026-06-22T11:12:51.627737Z
   - Completion evidence: data/scheduled_approval_packet.json should show fewer approval blockers, and data/social_scheduler_dry_run.json should no longer block the approved Instagram row on not_approved.
   - Next after apply: Run the safe admin refresh, then manually post/log any newly approved YouTube Community row before treating the published log as current.
   - Guardrail: Human review is still required; blocked review IDs stay excluded from the checked batch.
-- **Review and post manual distribution rows** (`ready_for_manual_post`)
+- **Post manual distribution rows** (`ready_for_manual_post`)
   - Owner: `tod`; tasks: **3**; blockers resolved: **3**
   - Blocked IDs: `FP-PLAN-TWELVE-DOLLARS-TIKTOK`
   - Sequence verify: `python3 scripts/refresh_promo_admin.py`
-  - Completion evidence: data/manual_distribution_packet.json should move approved rows from review_queue toward postable manual distribution, and data/published_log_reconciliation.json should remain gated until public URLs are logged.
+  - Completion evidence: data/published_log_reconciliation.json should stay waiting for real public URLs until the postable manual rows are published and logged.
   - Next after apply: Post each approved YouTube Community row manually, then log its public URL with scripts/log_manual_distribution.py.
   - Guardrail: Manual-only approvals do not auto-post; posting and public URL logging remain separate after review. Post manually first, then log only real public URLs.
 - **Repair blocked platform executor setup** (`blocked`)

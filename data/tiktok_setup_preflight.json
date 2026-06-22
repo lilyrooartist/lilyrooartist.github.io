@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T11:12:51.409158Z",
+  "generated_at": "2026-06-22T11:18:14.422920Z",
   "safe_mode": true,
   "source": {
     "local_secret_source": "secrets/social_api.env",
@@ -50,9 +50,9 @@
       "TIKTOK_CLIENT_SECRET",
       "TIKTOK_REFRESH_TOKEN"
     ],
-    "local_secret_dir_exists": false,
-    "local_secret_env_exists": false,
-    "initialize_local_secret_env_command": "mkdir -p ../secrets && test -f ../secrets/social_api.env || cp data/tiktok_secret_handoff_template.env ../secrets/social_api.env",
+    "local_secret_dir_exists": true,
+    "local_secret_env_exists": true,
+    "initialize_local_secret_env_command": "",
     "oauth_authorization_url_missing": [
       "TIKTOK_CLIENT_KEY",
       "TIKTOK_REDIRECT_URI"
@@ -97,9 +97,9 @@
     ],
     "local_secret_source": "secrets/social_api.env",
     "local_secret_dir_path": "secrets",
-    "local_secret_dir_exists": false,
-    "local_secret_env_exists": false,
-    "initialize_local_secret_env_command": "mkdir -p ../secrets && test -f ../secrets/social_api.env || cp data/tiktok_secret_handoff_template.env ../secrets/social_api.env",
+    "local_secret_dir_exists": true,
+    "local_secret_env_exists": true,
+    "initialize_local_secret_env_command": "",
     "handoff_template_path": "data/tiktok_secret_handoff_template.env",
     "handoff_template_required_names": [
       "TIKTOK_CLIENT_KEY",
@@ -256,9 +256,9 @@
   "checks": [
     {
       "name": "local_secret_env_file",
-      "status": "waiting",
-      "detail": "Initialize secrets/social_api.env from the blank handoff template before adding TikTok app values.",
-      "command": "mkdir -p ../secrets && test -f ../secrets/social_api.env || cp data/tiktok_secret_handoff_template.env ../secrets/social_api.env"
+      "status": "pass",
+      "detail": "Local secret env exists at secrets/social_api.env.",
+      "command": ""
     },
     {
       "name": "oauth_authorization_url",

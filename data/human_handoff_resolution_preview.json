@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T11:12:51.788013Z",
+  "generated_at": "2026-06-22T11:18:14.693699Z",
   "safe_mode": true,
   "source": {
     "resolution_worksheet": "data/human_handoff_resolution_worksheet.csv",
@@ -104,7 +104,7 @@
       "returncode": null,
       "preview_status": "skipped",
       "output_excerpt": "",
-      "completion_evidence": "data/manual_distribution_packet.json should move approved rows from review_queue toward postable manual distribution, and data/published_log_reconciliation.json should remain gated until public URLs are logged.",
+      "completion_evidence": "data/published_log_reconciliation.json should stay waiting for real public URLs until the postable manual rows are published and logged.",
       "guardrail": "Do not log a manual post until a real public URL exists."
     },
     {
@@ -118,7 +118,7 @@
       "returncode": null,
       "preview_status": "skipped",
       "output_excerpt": "",
-      "completion_evidence": "data/manual_distribution_packet.json should move approved rows from review_queue toward postable manual distribution, and data/published_log_reconciliation.json should remain gated until public URLs are logged.",
+      "completion_evidence": "data/published_log_reconciliation.json should stay waiting for real public URLs until the postable manual rows are published and logged.",
       "guardrail": "Do not log a manual post until a real public URL exists."
     },
     {
@@ -132,7 +132,7 @@
       "returncode": null,
       "preview_status": "skipped",
       "output_excerpt": "",
-      "completion_evidence": "data/manual_distribution_packet.json should move approved rows from review_queue toward postable manual distribution, and data/published_log_reconciliation.json should remain gated until public URLs are logged.",
+      "completion_evidence": "data/published_log_reconciliation.json should stay waiting for real public URLs until the postable manual rows are published and logged.",
       "guardrail": "Do not log a manual post until a real public URL exists."
     },
     {

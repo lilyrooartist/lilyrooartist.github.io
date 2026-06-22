@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T11:12:51.627737Z",
+  "generated_at": "2026-06-22T11:18:14.570868Z",
   "safe_mode": true,
   "source": {
     "promotion_blocker_ledger": "data/promotion_blocker_ledger.json",
@@ -83,7 +83,7 @@
         },
         {
           "id": "unlock-manual-distribution",
-          "phase": "Review and post manual YouTube Community rows",
+          "phase": "Post manual YouTube Community rows",
           "status": "clear",
           "owner": "tod",
           "blockers_resolved": 3,
@@ -129,8 +129,8 @@
             "Approved past-due queue rows get a fresh schedule after executor blockers clear."
           ],
           "blocked_by": [],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24",
-          "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
+          "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
           "source_path": "data/backlog_reschedule_preview.json"
         },
         {
@@ -174,7 +174,7 @@
     "manual_metric_field_count": 6,
     "first_ready_step": {
       "id": "manual-posting-review",
-      "label": "Review and post manual distribution rows",
+      "label": "Post manual distribution rows",
       "state": "ready_for_manual_post",
       "owner": "tod",
       "task_ids": [
@@ -236,7 +236,7 @@
           "required_before_apply": false
         }
       ],
-      "completion_evidence": "data/manual_distribution_packet.json should move approved rows from review_queue toward postable manual distribution, and data/published_log_reconciliation.json should remain gated until public URLs are logged.",
+      "completion_evidence": "data/published_log_reconciliation.json should stay waiting for real public URLs until the postable manual rows are published and logged.",
       "next_step_after_apply": "Post each approved YouTube Community row manually, then log its public URL with scripts/log_manual_distribution.py.",
       "guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review. Post manually first, then log only real public URLs."
     },
@@ -306,7 +306,7 @@
       },
       {
         "id": "manual-posting-review",
-        "label": "Review and post manual distribution rows",
+        "label": "Post manual distribution rows",
         "state": "ready_for_manual_post",
         "owner": "tod",
         "task_ids": [
@@ -368,7 +368,7 @@
             "required_before_apply": false
           }
         ],
-        "completion_evidence": "data/manual_distribution_packet.json should move approved rows from review_queue toward postable manual distribution, and data/published_log_reconciliation.json should remain gated until public URLs are logged.",
+        "completion_evidence": "data/published_log_reconciliation.json should stay waiting for real public URLs until the postable manual rows are published and logged.",
         "next_step_after_apply": "Post each approved YouTube Community row manually, then log its public URL with scripts/log_manual_distribution.py.",
         "guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review. Post manually first, then log only real public URLs."
       },
