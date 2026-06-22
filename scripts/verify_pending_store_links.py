@@ -21,7 +21,18 @@ def slugify(value: str) -> str:
 
 def trim(value: str, limit: int = 3000) -> str:
     value = (value or "").strip()
+    value = sanitize_output(value)
     return value if len(value) <= limit else value[:limit] + "\n...[truncated]"
+
+
+def sanitize_output(value: str) -> str:
+    text = value or ""
+    for src, dst in (
+        (str(ROOT), "<repo>"),
+        (str(ROOT.parent), "<workspace>"),
+    ):
+        text = text.replace(src, dst)
+    return text
 
 
 def run(command: list[str], *, timeout_seconds: int) -> dict:

@@ -230,8 +230,18 @@ FINALIZE_STEPS = [
 def trim(value: str, limit: int = 4000) -> str:
     if isinstance(value, bytes):
         value = value.decode("utf-8", errors="replace")
-    value = value.strip()
+    value = sanitize_output(value.strip())
     return value if len(value) <= limit else value[:limit] + "\n...[truncated]"
+
+
+def sanitize_output(value: str) -> str:
+    text = value or ""
+    for src, dst in (
+        (str(ROOT), "<repo>"),
+        (str(ROOT.parent), "<workspace>"),
+    ):
+        text = text.replace(src, dst)
+    return text
 
 
 def command_text(command: list[str]) -> str:

@@ -61,5 +61,6 @@ jobs:
           else
             git add admin data
             git commit -m "Refresh promo admin snapshots"
+            git pull --rebase origin main
             git push
           fi
