@@ -21540,6 +21540,9 @@ Generated: 2026-06-22T12:17:14.724532Z
 	    const manualUrlCount=Number(manualSummary.public_url_log_needed_count||0);
 	    const blockedReviewIds=scheduledSummary.blocked_review_ids||[];
 	    const nextAction=(promoOps?.summary||{}).next_action||{};
+	    const nextContext=nextAction.context||{};
+	    const postableManualCount=Number(nextContext.postable_count||manualSummary.postable_now_count||manualSummary.postable_count||0);
+	    const waitingManualUrls=Number(nextContext.waiting_public_url_count||manualUrlCount||0);
 
 	    if(manualReviewCount){
 	      setHtml('today-next-title', `${manualReviewCount} YouTube Community post${manualReviewCount===1?'':'s'} need review`);
@@ -21547,6 +21550,14 @@ Generated: 2026-06-22T12:17:14.724532Z
 	      setHtml('today-next-actions', [
 	        actionButton('Open manual distribution', 'reports/manual-distribution-packet.md'),
 	        actionButton('Open YouTube Community', manualSummary.public_community_url || 'https://www.youtube.com/@lilyroo.artist/community')
+	      ].join(''));
+	    }else if(nextAction.kind==='manual_distribution' && postableManualCount){
+	      setHtml('today-next-title', `Post ${postableManualCount} YouTube Community card${postableManualCount===1?'':'s'}`);
+	      setHtml('today-next-copy', `Cards are approved and ready. Publish them on YouTube Community, copy the real public URL${waitingManualUrls===1?'':'s'}, then log ${waitingManualUrls||postableManualCount} URL${(waitingManualUrls||postableManualCount)===1?'':'s'} so measurement can start.`);
+	      setHtml('today-next-actions', [
+	        actionButton('Open manual posting clipboard', nextContext.report_path || 'reports/manual-posting-clipboard.md'),
+	        actionButton('Open YouTube Community', nextContext.public_community_url || manualSummary.public_community_url || 'https://www.youtube.com/@lilyroo.artist/community'),
+	        actionButton('Open URL worksheet', nextContext.url_template_path || '../data/manual_distribution_url_template.csv')
 	      ].join(''));
 	    }else if(nextAction.label){
 	      setHtml('today-next-title', escapeHtml(nextAction.label));
