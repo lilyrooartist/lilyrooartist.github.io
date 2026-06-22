@@ -113,6 +113,10 @@ def measurement_priority_cards(metric_cards: list[dict], missing_cards: list[dic
         for card in manual_posting.get("post_cards") or []
         if card.get("postable_now")
     }
+    manual_cards_by_id = {
+        card.get("id") or "": card
+        for card in manual_posting.get("post_cards") or []
+    }
     blocked_ids = {
         row.get("post_id") or ""
         for row in platform_repair.get("rows") or []
@@ -172,6 +176,7 @@ def measurement_priority_cards(metric_cards: list[dict], missing_cards: list[dic
             action = "log_public_url"
             priority_value = 3
             reason_prefix = "Cannot collect metrics until the public URL is logged."
+        manual_card = manual_cards_by_id.get(post_id) or {}
         priority.append({
             "action": action,
             "priority": priority_value,
@@ -184,6 +189,11 @@ def measurement_priority_cards(metric_cards: list[dict], missing_cards: list[dic
             "pending_fields": [],
             "direct_preview_command_template": "",
             "direct_apply_command_template": "",
+            "manual_posting_report": "admin/reports/manual-posting-clipboard.md" if manual_card else "",
+            "public_community_url": manual_card.get("public_community_url") or "",
+            "paste_text_path": manual_card.get("paste_text_path") or "",
+            "log_preview_command": manual_card.get("log_preview_command") or "",
+            "log_apply_command": manual_card.get("log_apply_command") or "",
             "reason": (
                 f"{reason_prefix} "
                 f"{counts['measurable']} logged post(s), {counts['missing']} missing URL(s) in this format."
@@ -298,6 +308,14 @@ def build_markdown(payload: dict) -> str:
             lines.append(f"  - Direct preview template: `{item['direct_preview_command_template']}`")
         if item.get("direct_apply_command_template"):
             lines.append(f"  - Direct apply template: `{item['direct_apply_command_template']}`")
+        if item.get("paste_text_path"):
+            lines.append(f"  - Paste file: `{item['paste_text_path']}`")
+        if item.get("public_community_url"):
+            lines.append(f"  - Community surface: {item['public_community_url']}")
+        if item.get("log_preview_command"):
+            lines.append(f"  - Log preview after posting: `{item['log_preview_command']}`")
+        if item.get("log_apply_command"):
+            lines.append(f"  - Log apply after posting: `{item['log_apply_command']}`")
     lines.extend(["", "## Missing Public URLs"])
     if not payload["missing_public_url_cards"]:
         lines.append("- None.")

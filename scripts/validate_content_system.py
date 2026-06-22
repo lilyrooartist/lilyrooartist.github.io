@@ -1930,6 +1930,7 @@ def validate_generated_outputs(failures):
             and all(item.get("post_id") and item.get("action") in {"collect_metrics", "post_and_log_public_url", "log_public_url", "clear_platform_blocker"} and item.get("reason") for item in priority_cards)
             and all(item.get("direct_preview_command_template") for item in priority_cards if item.get("action") == "collect_metrics")
             and all(item.get("direct_apply_command_template") and "--apply --refresh-admin" in item.get("direct_apply_command_template") for item in priority_cards if item.get("action") == "collect_metrics")
+            and all(item.get("paste_text_path") and item.get("manual_posting_report") == "admin/reports/manual-posting-clipboard.md" and "log_manual_distribution.py" in (item.get("log_preview_command") or "") and "--apply --refresh-admin" in (item.get("log_apply_command") or "") for item in priority_cards if item.get("action") == "post_and_log_public_url")
             and any(item.get("action") == "post_and_log_public_url" for item in priority_cards)
             and any(item.get("action") == "clear_platform_blocker" for item in priority_cards)
             and any("does not fetch private analytics" in item for item in clipboard.get("guardrails") or [])
@@ -3468,6 +3469,8 @@ def validate_generated_outputs(failures):
             and "platform_repair_status.json" in result_clipboard_text
             and "measurement_priority_cards" in result_clipboard_text
             and "measurement_priority_count" in result_clipboard_text
+            and "paste_text_path" in result_clipboard_text
+            and "log_apply_command" in result_clipboard_text
             and "direct_preview_command_template" in result_clipboard_text
             and "direct_apply_command_template" in result_clipboard_text
             and "does not fetch private analytics" in result_clipboard_text
@@ -3891,7 +3894,7 @@ def validate_admin_execution_feedback(failures):
         "manual posting cards actionable": "Manual posting clipboard is ready" in text and "Open community surface" in text and "Paste files:" in text and "Paste file:" in text and "manual-posting-cards" in text and "Preview URL log after posting" in text and "Partial batch apply after first URL" in text and "Reconcile public URLs after posting" in text and "Copy URL reconciliation" in text and "Open URL reconciliation report" in text and "Copy post text" in text and "data-copy-text" in text and "manual-url-input" in text and "data-copy-template" in text and "Copy preview with URL" in text,
         "manual posting source embedded": "embedded-manual-posting-clipboard" in text and "embedded-manual-posting-clipboard-report" in text,
         "experiment result clipboard shown": "renderExperimentResultClipboard" in text and "experiment_result_clipboard.json" in text and "Experiment result clipboard" in text,
-        "experiment result cards actionable": "Open result clipboard report" in text and "Entry CSV:" in text and "Wide entry CSV:" in text and "result_import_preview_command" in text and "Copy metric preview" in text and "data-result-command" in text and "result-evidence-input" in text and "Measure first" in text and "Post now" in text and "Blocked" in text and "measurement_priority_cards" in text,
+        "experiment result cards actionable": "Open result clipboard report" in text and "Entry CSV:" in text and "Wide entry CSV:" in text and "result_import_preview_command" in text and "Copy metric preview" in text and "data-result-command" in text and "result-evidence-input" in text and "Measure first" in text and "Post now" in text and "Blocked" in text and "measurement_priority_cards" in text and "Open manual paste file" in text and "log_manual_distribution.py" in text,
         "experiment result source embedded": "embedded-experiment-result-clipboard" in text and "embedded-experiment-result-clipboard-report" in text,
     }
     missing_platform = [label for label, present in platform_checks.items() if not present]
