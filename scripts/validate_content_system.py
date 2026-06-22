@@ -1908,6 +1908,8 @@ def validate_generated_outputs(failures):
         packet = json.loads(EXPERIMENT_RESULT_COLLECTION.read_text(encoding="utf-8"))
         summary = packet.get("summary") or {}
         pending_rows = packet.get("pending_result_rows") or []
+        packet_wide_rows = packet.get("wide_entry_rows") or []
+        packet_wide_ready_rows = packet.get("wide_ready_rows") or []
         missing_posts = packet.get("missing_published_log_posts") or []
         allowed_fields = {"views", "likes", "comments", "shares", "saves", "subs_delta"}
         entry_csv_path = summary.get("entry_csv_path") or ""
@@ -1934,10 +1936,17 @@ def validate_generated_outputs(failures):
             )
             and int(summary.get("pending_result_field_count") or 0) == len(pending_rows)
             and int(summary.get("ready_to_import_count") or 0) == len(ready_rows)
+            and int(summary.get("wide_ready_to_import_count") or 0) == len(packet_wide_ready_rows)
             and int(summary.get("missing_published_log_count") or 0) == len(missing_posts)
             and len(csv_rows) == len(pending_rows)
             and len(wide_csv_rows) == len(grouped_ids)
+            and packet_wide_rows == wide_csv_rows
             and all(set(row.keys()) >= {"post_id", "source_row", "evidence_note", *allowed_fields} for row in wide_csv_rows)
+            and all(
+                any(str(row.get(field) or "").strip() for field in allowed_fields)
+                and str(row.get("evidence_note") or "").strip()
+                for row in packet_wide_ready_rows
+            )
             and all(row.get("field") in allowed_fields for row in pending_rows)
             and all(row.get("experiment_format") and row.get("post_id") and row.get("platform") for row in pending_rows)
             and all(row.get("collection_hint") and row.get("source_row") for row in pending_rows)
@@ -1969,9 +1978,12 @@ def validate_generated_outputs(failures):
             and (clipboard.get("summary") or {}).get("measurement_priority_count") == len(priority_cards)
             and (clipboard.get("summary") or {}).get("pending_result_field_count") == packet_summary.get("pending_result_field_count")
             and (clipboard.get("summary") or {}).get("ready_to_import_count") == packet_summary.get("ready_to_import_count")
+            and (clipboard.get("summary") or {}).get("wide_ready_to_import_count") == packet_summary.get("wide_ready_to_import_count")
             and "update_experiment_results.py" in ((clipboard.get("summary") or {}).get("result_import_preview_command") or "")
             and "update_experiment_results.py --from-wide-csv" in ((clipboard.get("summary") or {}).get("wide_result_import_preview_command") or "")
             and all(card.get("post_id") and card.get("platform") and card.get("pending_fields") and card.get("fields") for card in cards)
+            and all("wide_ready_fields" in card and "wide_ready_field_count" in card for card in cards)
+            and all(card.get("wide_ready_field_count") == len(card.get("wide_ready_fields") or []) for card in cards)
             and all((card.get("wide_entry_row") or {}).get("post_id") == card.get("post_id") and (card.get("wide_entry_row") or {}).get("source_row") == card.get("source_row") for card in cards)
             and all(card.get("wide_entry_instruction") and "wide entry CSV" in card.get("wide_entry_instruction") for card in cards)
             and all(card.get("evidence_sources") and all(source.get("label") and source.get("url") and source.get("instruction") for source in card.get("evidence_sources") or []) for card in cards)
@@ -3876,7 +3888,7 @@ def validate_generated_outputs(failures):
         fail("youtube-community-url-reconciliation.md missing", failures)
     if EXPERIMENT_RESULT_CLIPBOARD_REPORT.exists():
         result_clipboard_report = EXPERIMENT_RESULT_CLIPBOARD_REPORT.read_text(encoding="utf-8")
-        if "Experiment Result Clipboard" in result_clipboard_report and "Metric Cards" in result_clipboard_report and "Measurement Priorities" in result_clipboard_report and "Missing Public URLs" in result_clipboard_report and "Preview import" in result_clipboard_report and "Wide entry instruction" in result_clipboard_report and "Evidence sources" in result_clipboard_report and "Collection checklist" in result_clipboard_report and "Guardrails" in result_clipboard_report:
+        if "Experiment Result Clipboard" in result_clipboard_report and "Metric Cards" in result_clipboard_report and "Measurement Priorities" in result_clipboard_report and "Missing Public URLs" in result_clipboard_report and "Preview import" in result_clipboard_report and "Wide rows ready to import" in result_clipboard_report and "Wide entry instruction" in result_clipboard_report and "Wide-ready fields" in result_clipboard_report and "Evidence sources" in result_clipboard_report and "Collection checklist" in result_clipboard_report and "Guardrails" in result_clipboard_report:
             ok("experiment result clipboard markdown report present")
         else:
             fail("experiment-result-clipboard.md missing expected sections", failures)

@@ -1,6 +1,6 @@
 # Experiment Result Clipboard - Lily Roo
 
-Generated: 2026-06-22T07:26:17.965707Z
+Generated: 2026-06-22T07:32:14.401816Z
 
 ## Summary
 - Status: **needs_values**
@@ -9,6 +9,7 @@ Generated: 2026-06-22T07:26:17.965707Z
 - Measurement priorities: **8**
 - Pending result fields: **18**
 - Ready to import: **0**
+- Wide rows ready to import: **0**
 - Entry CSV: `data/experiment_result_entry_template.csv`
 - Wide entry CSV: `data/experiment_result_entry_wide_template.csv`
 - Preview import: `python3 scripts/update_experiment_results.py --from-csv data/experiment_result_entry_template.csv --dry-run`
@@ -21,6 +22,7 @@ Generated: 2026-06-22T07:26:17.965707Z
 - URL: https://x.com/i/web/status/2062920257577029712
 - Published: 2026-06-05; Published_Log row: `16`
 - Pending fields: `views, likes, comments, shares, saves, subs_delta`
+- Wide-ready fields: `none`
 - Wide entry instruction: Fill one wide entry CSV row in data/experiment_result_entry_wide_template.csv for this post; keep unknown metrics blank and include one evidence_note.
 - Wide CSV target: post_id `FP-AUTO-257`, source_row `16`, fill `views, likes, comments, shares, saves, subs_delta`.
 - Evidence sources:
@@ -43,6 +45,7 @@ Generated: 2026-06-22T07:26:17.965707Z
 - URL: https://www.facebook.com/903693509504290_122118326547249470
 - Published: 2026-06-07; Published_Log row: `18`
 - Pending fields: `views, likes, comments, shares, saves, subs_delta`
+- Wide-ready fields: `none`
 - Wide entry instruction: Fill one wide entry CSV row in data/experiment_result_entry_wide_template.csv for this post; keep unknown metrics blank and include one evidence_note.
 - Wide CSV target: post_id `FP-AUTO-260`, source_row `18`, fill `views, likes, comments, shares, saves, subs_delta`.
 - Evidence sources:
@@ -65,6 +68,7 @@ Generated: 2026-06-22T07:26:17.965707Z
 - URL: https://x.com/i/web/status/2063600780834136468
 - Published: 2026-06-07; Published_Log row: `17`
 - Pending fields: `views, likes, comments, shares, saves, subs_delta`
+- Wide-ready fields: `none`
 - Wide entry instruction: Fill one wide entry CSV row in data/experiment_result_entry_wide_template.csv for this post; keep unknown metrics blank and include one evidence_note.
 - Wide CSV target: post_id `FP-AUTO-262`, source_row `17`, fill `views, likes, comments, shares, saves, subs_delta`.
 - Evidence sources:

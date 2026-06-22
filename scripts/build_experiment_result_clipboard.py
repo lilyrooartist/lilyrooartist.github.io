@@ -92,17 +92,27 @@ def evidence_sources(platform: str, post_url: str) -> list[dict]:
     return sources
 
 
-def metric_cards(rows: list[dict]) -> list[dict]:
+def metric_cards(rows: list[dict], wide_rows: list[dict]) -> list[dict]:
     grouped: dict[tuple[str, str], list[dict]] = defaultdict(list)
     for row in rows:
         grouped[(row.get("post_id") or "", row.get("source_row") or "")].append(row)
+    wide_by_key = {
+        (row.get("post_id") or "", row.get("source_row") or ""): row
+        for row in wide_rows
+    }
     cards = []
     for (post_id, source_row), group_rows in sorted(grouped.items(), key=lambda item: (item[1][0].get("published_date") or "", item[0][0])):
         first = group_rows[0]
+        wide_row = wide_by_key.get((post_id, source_row)) or {}
         ready_fields = [
             row.get("field") or ""
             for row in group_rows
             if str(row.get("new_value") or "").strip() and str(row.get("evidence_note") or "").strip()
+        ]
+        wide_ready_fields = [
+            field
+            for field in RESULT_FIELDS
+            if str(wide_row.get(field) or "").strip() and str(wide_row.get("evidence_note") or "").strip()
         ]
         pending_fields = [
             row.get("field") or ""
@@ -119,8 +129,10 @@ def metric_cards(rows: list[dict]) -> list[dict]:
             "source_row": source_row,
             "pending_field_count": len(pending_fields),
             "ready_field_count": len(ready_fields),
+            "wide_ready_field_count": len(wide_ready_fields),
             "pending_fields": pending_fields,
             "ready_fields": ready_fields,
+            "wide_ready_fields": wide_ready_fields,
             "wide_entry_row": {
                 "experiment_format": first.get("experiment_format") or "",
                 "post_id": post_id,
@@ -129,8 +141,8 @@ def metric_cards(rows: list[dict]) -> list[dict]:
                 "post_url": first.get("post_url") or "",
                 "published_date": first.get("published_date") or "",
                 "source_row": source_row,
-                **{field: next((row.get("new_value") or "" for row in group_rows if row.get("field") == field), "") for field in RESULT_FIELDS},
-                "evidence_note": next((row.get("evidence_note") or "" for row in group_rows if row.get("evidence_note")), ""),
+                **{field: str(wide_row.get(field) or next((row.get("new_value") or "" for row in group_rows if row.get("field") == field), "")).strip() for field in RESULT_FIELDS},
+                "evidence_note": str(wide_row.get("evidence_note") or next((row.get("evidence_note") or "" for row in group_rows if row.get("evidence_note")), "")).strip(),
             },
             "wide_entry_instruction": "Fill one wide entry CSV row in data/experiment_result_entry_wide_template.csv for this post; keep unknown metrics blank and include one evidence_note.",
             "evidence_sources": evidence_sources(first.get("platform") or "", first.get("post_url") or ""),
@@ -271,7 +283,7 @@ def build_payload() -> dict:
     manual_posting = read_json(MANUAL_POSTING, {})
     platform_repair = read_json(PLATFORM_REPAIR, {})
     summary = packet.get("summary") or {}
-    cards = metric_cards(packet.get("pending_result_rows") or [])
+    cards = metric_cards(packet.get("pending_result_rows") or [], packet.get("wide_entry_rows") or [])
     missing_cards = missing_log_cards(packet.get("missing_published_log_posts") or [])
     priority_cards = measurement_priority_cards(cards, missing_cards, manual_posting, platform_repair)
     return {
@@ -335,6 +347,7 @@ def build_markdown(payload: dict) -> str:
         f"- Measurement priorities: **{summary.get('measurement_priority_count') or 0}**",
         f"- Pending result fields: **{summary['pending_result_field_count']}**",
         f"- Ready to import: **{summary['ready_to_import_count']}**",
+        f"- Wide rows ready to import: **{summary.get('wide_ready_to_import_count') or 0}**",
         f"- Entry CSV: `{summary.get('entry_csv_path') or 'not available'}`",
         f"- Wide entry CSV: `{summary.get('wide_entry_csv_path') or 'not available'}`",
         f"- Preview import: `{summary.get('result_import_preview_command') or 'not available'}`",
@@ -352,6 +365,7 @@ def build_markdown(payload: dict) -> str:
             f"- URL: {card['post_url'] or 'not logged'}",
             f"- Published: {card['published_date'] or 'unknown'}; Published_Log row: `{card['source_row']}`",
             f"- Pending fields: `{', '.join(card['pending_fields']) or 'none'}`",
+            f"- Wide-ready fields: `{', '.join(card.get('wide_ready_fields') or []) or 'none'}`",
             f"- Wide entry instruction: {card.get('wide_entry_instruction')}",
         ])
         wide_entry = card.get("wide_entry_row") or {}

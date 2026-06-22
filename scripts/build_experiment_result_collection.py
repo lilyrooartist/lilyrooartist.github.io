@@ -346,6 +346,8 @@ def main() -> int:
             "apply_gate": "ready_rows_available" if ready_rows or ready_wide_rows else "blocked_until_new_values_and_evidence_filled",
         },
         "pending_result_rows": rows,
+        "wide_entry_rows": wide_rows,
+        "wide_ready_rows": ready_wide_rows,
         "missing_published_log_posts": missing_posts,
         "guardrails": [
             "Review-only packet; no result metrics are written automatically.",

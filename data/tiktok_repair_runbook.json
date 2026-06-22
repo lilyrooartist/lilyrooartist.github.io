@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T07:26:17.424543Z",
+  "generated_at": "2026-06-22T07:32:13.968670Z",
   "safe_mode": true,
   "status": "blocked",
   "source": {
@@ -34,8 +34,8 @@
     ],
     "handoff_template_path": "data/tiktok_secret_handoff_template.env",
     "oauth_handoff_script": "scripts/tiktok_oauth_handoff.py",
-    "local_secret_env_exists": false,
-    "initialize_local_secret_env_command": "mkdir -p ../secrets && test -f ../secrets/social_api.env || cp data/tiktok_secret_handoff_template.env ../secrets/social_api.env",
+    "local_secret_env_exists": true,
+    "initialize_local_secret_env_command": "",
     "oauth_preview_command": "python3 scripts/tiktok_oauth_handoff.py",
     "oauth_authorization_url_command": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url",
     "oauth_exchange_command": "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply",
@@ -76,18 +76,18 @@
     "apply_command": "",
     "public_posting_apply_command": "",
     "public_posting_deploy_command": "",
-    "backlog_preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24",
-    "backlog_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+    "backlog_preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
+    "backlog_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
     "backlog_normal_apply_gate": "clear"
   },
   "steps": [
     {
       "id": "initialize_local_secret_env",
       "phase": "Prepare local env",
-      "status": "ready",
+      "status": "pass",
       "title": "Create the local TikTok secret env file",
       "detail": "Create the local social API env file from the blank TikTok handoff template before adding TikTok app values. The command is non-overwriting, so an existing env file is preserved.",
-      "command": "mkdir -p ../secrets && test -f ../secrets/social_api.env || cp data/tiktok_secret_handoff_template.env ../secrets/social_api.env",
+      "command": "",
       "blocked_by": []
     },
     {
