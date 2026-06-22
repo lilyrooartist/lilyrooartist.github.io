@@ -1716,6 +1716,13 @@ def validate_generated_outputs(failures):
         session = clipboard.get("session_manifest") or {}
         first_runbook = clipboard.get("first_post_runbook") or {}
         first_url = clipboard.get("first_url_acceleration") or {}
+        lifecycle = clipboard.get("tracking_lifecycle") or {}
+        lifecycle_rows = lifecycle.get("rows") or []
+        manual_lifecycle_rows = [
+            row
+            for row in manual_rows
+            if (row.get("manual_posting_packet") or {}).get("postable_now") or row.get("logged")
+        ]
         session_rows = session.get("rows") or []
         paste_text_files = summary.get("paste_text_files") or []
         paste_file_contents_match = all(
@@ -1795,6 +1802,21 @@ def validate_generated_outputs(failures):
             and any("Published_Log.csv" in item for item in session.get("completion_evidence") or [])
             and "real public URL" in (session.get("guardrail") or "")
             and all(row.get("sequence") and row.get("id") and row.get("copy_source") and row.get("asset_source") and row.get("public_url_required") is True and row.get("first_measurement_due_after_hours") == 24 and "log_manual_distribution.py" in (row.get("preview_command_template") or "") and "--apply --refresh-admin" in (row.get("apply_command_template") or "") for row in session_rows)
+            and lifecycle.get("status") in {"active", "complete"}
+            and lifecycle.get("total_count") == len(manual_lifecycle_rows) == len(lifecycle_rows)
+            and lifecycle.get("posted_count") == len([row for row in lifecycle_rows if row.get("posted")])
+            and lifecycle.get("public_url_logged_count") == len([row for row in lifecycle_rows if row.get("public_url_logged")])
+            and lifecycle.get("result_recorded_count") == len([row for row in lifecycle_rows if row.get("result_recorded")])
+            and lifecycle.get("primary_gap") in {"manual_posting", "result_measurement", "complete"}
+            and "completion evidence" in (lifecycle.get("guardrail") or "")
+            and all(
+                row.get("id")
+                and row.get("stage") in {"waiting_for_manual_post", "public_url_ready_to_log", "measurement_waiting_24h", "ready_for_first_measurement", "result_recorded"}
+                and row.get("result_handoff_report") == "admin/reports/experiment-result-clipboard.md"
+                and row.get("next_action")
+                and any("Published_Log.csv" in item for item in row.get("completion_evidence") or [])
+                for row in lifecycle_rows
+            )
             and all(
                 card.get("paste_text")
                 and card.get("paste_text_path")
@@ -4286,7 +4308,7 @@ def validate_admin_execution_feedback(failures):
         "published log reconciliation shown": "Published log reconciliation" in text and "Worker export" in text and "Manual Logging" in text,
         "manual approval docket shown": "Manual approval docket:" in text and "Preview manual approvals:" in text,
         "manual posting clipboard shown": 'id="manual-posting-clipboard"' in text and "renderManualPostingClipboard" in text and "manual_posting_clipboard.json" in text,
-        "manual posting cards actionable": "Manual posting clipboard is ready" in text and "Session manifest:" in text and "Session rows:" in text and "Session steps:" in text and "Open community surface" in text and "Paste files:" in text and "Paste file:" in text and "manual-posting-cards" in text and "Posting bundle:" in text and "Bundle steps:" in text and "Result trigger:" in text and "Preview URL log after posting" in text and "Partial batch apply after first URL" in text and "Reconcile public URLs after posting" in text and "Copy URL reconciliation" in text and "Open URL reconciliation report" in text and "Copy post text" in text and "data-copy-text" in text and "manual-url-input" in text and "data-copy-template" in text and "Copy preview with URL" in text and "manualCommunityUrlStatus" in text and "Need /post/ URL" in text and "youtube.com/post/..." in text and "Copy apply with URL" in text,
+        "manual posting cards actionable": "Manual posting clipboard is ready" in text and "Session manifest:" in text and "Session rows:" in text and "Session steps:" in text and "Open community surface" in text and "Paste files:" in text and "Paste file:" in text and "manual-posting-cards" in text and "Posting bundle:" in text and "Bundle steps:" in text and "Result trigger:" in text and "Preview URL log after posting" in text and "Partial batch apply after first URL" in text and "Reconcile public URLs after posting" in text and "Copy URL reconciliation" in text and "Open URL reconciliation report" in text and "Copy post text" in text and "data-copy-text" in text and "manual-url-input" in text and "data-copy-template" in text and "Copy preview with URL" in text and "manualCommunityUrlStatus" in text and "Need /post/ URL" in text and "youtube.com/post/..." in text and "Copy apply with URL" in text and "tracking_lifecycle" in text and "Post-to-result tracker" in text and "Primary gap:" in text,
         "today manual posting action directs to clipboard": "nextAction.kind==='manual_distribution'" in text and "Post ${postableManualCount} YouTube Community card" in text and "Cards are approved and ready" in text and "Open manual posting clipboard" in text and "Open URL worksheet" in text,
         "today first manual card is actionable": "firstManualPost=clipboardSummary.next_post_now" in text and "Copy first post text" in text and "Open first asset" in text and "Copy URL preview" in text and "Copy URL apply" in text,
         "manual URL copy template avoids double quoting": "template.includes(\"'PUBLIC_URL'\")" in text and "template.replaceAll(\"'PUBLIC_URL'\", shellQuote(url))" in text,

@@ -1,6 +1,6 @@
 # Manual Posting Clipboard - Lily Roo
 
-Generated: 2026-06-22T12:38:13.235383Z
+Generated: 2026-06-22T13:02:12.444169Z
 
 ## Summary
 - Status: **ready_to_post**
@@ -20,6 +20,22 @@ Generated: 2026-06-22T12:38:13.235383Z
 - Result handoff after URL logging: `admin/reports/experiment-result-clipboard.md`
 - First measurement due: **24 hours after public URL logging**
 - Next action: Post each card in YouTube Community, copy the real public URL, then log it.
+
+## Tracking Lifecycle
+- Status: **active**
+- Posted: **0/3**
+- Public URLs logged: **0/3**
+- Results recorded: **0/3**
+- Ready for measurement: **0**
+- Primary gap: `manual_posting`
+- Guardrail: Do not advance a lifecycle stage without the listed completion evidence.
+- Lifecycle rows:
+  - `FP-AUTO-261` `waiting_for_manual_post` posted `False` logged `False` measured `False` due `after URL logging`
+    - Next: Publish the Community card, copy the real public post URL, then log it.
+  - `FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY` `waiting_for_manual_post` posted `False` logged `False` measured `False` due `after URL logging`
+    - Next: Publish the Community card, copy the real public post URL, then log it.
+  - `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY` `waiting_for_manual_post` posted `False` logged `False` measured `False` due `after URL logging`
+    - Next: Publish the Community card, copy the real public post URL, then log it.
 
 ## Post Now
 - First card: `FP-AUTO-261` (I Learned It All in Fifteen Seconds)

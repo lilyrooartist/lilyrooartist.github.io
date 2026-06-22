@@ -1,6 +1,6 @@
 # YouTube Community Manual Posting Session
 
-Generated: 2026-06-22T12:38:13.235383Z
+Generated: 2026-06-22T13:02:12.444169Z
 Surface: https://www.youtube.com/@lilyroo.artist/community
 URL worksheet: data/manual_distribution_url_template.csv
 Partial apply: python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --allow-partial --apply --refresh-admin
@@ -31,6 +31,16 @@ Partial apply: python3 scripts/log_manual_distribution.py --from-csv data/manual
 - Preview: python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL'
 - Partial apply: python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --allow-partial --apply --refresh-admin
 - Measurement report: admin/reports/experiment-result-clipboard.md
+
+## Tracking Lifecycle
+- Status: active
+- Posted: 0/3
+- Public URLs logged: 0/3
+- Results recorded: 0/3
+- Primary gap: manual_posting
+- FP-AUTO-261: waiting_for_manual_post -> Publish the Community card, copy the real public post URL, then log it.
+- FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY: waiting_for_manual_post -> Publish the Community card, copy the real public post URL, then log it.
+- FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY: waiting_for_manual_post -> Publish the Community card, copy the real public post URL, then log it.
 
 ## Posts
 ### 1. FP-AUTO-261 - I Learned It All in Fifteen Seconds

@@ -2,8 +2,9 @@
 from __future__ import annotations
 
 import json
+import csv
 import re
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 
@@ -15,6 +16,7 @@ SESSION_FILE = PASTE_CARD_DIR / "youtube-community-session.md"
 OUT = ROOT / "data" / "manual_posting_clipboard.json"
 REPORT = ROOT / "admin" / "reports" / "manual-posting-clipboard.md"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
+PUBLISHED_LOG = ROOT / "admin" / "content" / "Published_Log.csv"
 FIRST_MEASUREMENT_DUE_AFTER_HOURS = 24
 
 
@@ -22,6 +24,47 @@ def read_json(path: Path, fallback):
     if not path.exists():
         return fallback
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def read_published_log() -> list[dict]:
+    if not PUBLISHED_LOG.exists():
+        return []
+    with PUBLISHED_LOG.open(newline="", encoding="utf-8") as handle:
+        return [
+            {key: (value or "").strip() for key, value in row.items()}
+            for row in csv.DictReader(handle)
+        ]
+
+
+def parse_log_date(value: str) -> datetime | None:
+    if not value:
+        return None
+    try:
+        return datetime.strptime(value, "%Y-%m-%d").replace(tzinfo=timezone.utc)
+    except ValueError:
+        return None
+
+
+def has_result_values(row: dict) -> bool:
+    metric_fields = ["views", "likes", "comments", "shares", "saves", "subs_delta"]
+    has_metric = any((row.get(field) or "").strip() for field in metric_fields)
+    notes = row.get("notes") or ""
+    return has_metric and "result_evidence:" in notes
+
+
+def published_log_by_id(rows: list[dict]) -> dict[str, dict]:
+    result = {}
+    for row in rows:
+        content_id = (row.get("content_id") or "").strip()
+        notes = row.get("notes") or ""
+        ids = [content_id]
+        match = re.search(r"manual_distribution_id=([^;]+)", notes)
+        if match:
+            ids.append(match.group(1).strip())
+        for post_id in ids:
+            if post_id:
+                result[post_id] = row
+    return result
 
 
 def replace_json_embed(html: str, block_id: str, payload) -> str:
@@ -273,15 +316,105 @@ def first_post_runbook(cards: list[dict], summary: dict) -> dict:
     }
 
 
+def lifecycle_stage(row: dict, log_row: dict | None) -> str:
+    if log_row and has_result_values(log_row):
+        return "result_recorded"
+    if log_row:
+        log_date = parse_log_date(log_row.get("date") or "")
+        if log_date and datetime.now(timezone.utc) >= log_date + timedelta(hours=FIRST_MEASUREMENT_DUE_AFTER_HOURS):
+            return "ready_for_first_measurement"
+        return "measurement_waiting_24h"
+    if row.get("published_url"):
+        return "public_url_ready_to_log"
+    return "waiting_for_manual_post"
+
+
+def lifecycle_next_action(stage: str, row: dict, log_row: dict | None) -> str:
+    post_id = row.get("id") or ""
+    if stage == "result_recorded":
+        return "Result values and evidence are already recorded in Published_Log.csv."
+    if stage == "ready_for_first_measurement":
+        return f"Collect first 24-hour metrics for {post_id} in admin/reports/experiment-result-clipboard.md."
+    if stage == "measurement_waiting_24h":
+        return "Wait until the first 24-hour measurement window, then collect visible metrics."
+    if stage == "public_url_ready_to_log":
+        return f"Preview and apply URL logging for {post_id} with scripts/log_manual_distribution.py."
+    return "Publish the Community card, copy the real public post URL, then log it."
+
+
+def build_tracking_lifecycle(manual_rows: list[dict]) -> dict:
+    published_rows = read_published_log()
+    log_by_id = published_log_by_id(published_rows)
+    stages = []
+    rows = []
+    now = datetime.now(timezone.utc)
+    for row in manual_rows:
+        post_id = row.get("id") or ""
+        log_row = log_by_id.get(post_id)
+        log_date = parse_log_date((log_row or {}).get("date") or "")
+        measurement_due_at = (
+            (log_date + timedelta(hours=FIRST_MEASUREMENT_DUE_AFTER_HOURS)).isoformat()
+            if log_date
+            else ""
+        )
+        stage = lifecycle_stage(row, log_row)
+        stages.append(stage)
+        rows.append({
+            "id": post_id,
+            "release": row.get("release") or "",
+            "platform": row.get("platform") or "",
+            "stage": stage,
+            "posted": bool(row.get("published_url") or log_row),
+            "public_url_logged": bool(log_row),
+            "result_recorded": bool(log_row and has_result_values(log_row)),
+            "public_url": (log_row or {}).get("post_id_or_url") or row.get("published_url") or "",
+            "logged_at": (log_row or {}).get("date") or "",
+            "measurement_due_at": measurement_due_at,
+            "measurement_due": bool(measurement_due_at and now >= (log_date + timedelta(hours=FIRST_MEASUREMENT_DUE_AFTER_HOURS))),
+            "result_handoff_report": "admin/reports/experiment-result-clipboard.md",
+            "next_action": lifecycle_next_action(stage, row, log_row),
+            "completion_evidence": [
+                "A real public YouTube Community post URL exists.",
+                "Published_Log.csv contains this manual_distribution_id or content_id.",
+                "The first measurement has at least one numeric value plus a result_evidence note.",
+            ],
+        })
+    counts = {stage: stages.count(stage) for stage in sorted(set(stages))}
+    return {
+        "status": "complete" if rows and all(row["result_recorded"] for row in rows) else "active",
+        "total_count": len(rows),
+        "posted_count": sum(1 for row in rows if row["posted"]),
+        "public_url_logged_count": sum(1 for row in rows if row["public_url_logged"]),
+        "result_recorded_count": sum(1 for row in rows if row["result_recorded"]),
+        "waiting_manual_post_count": counts.get("waiting_for_manual_post", 0),
+        "ready_for_measurement_count": counts.get("ready_for_first_measurement", 0),
+        "stage_counts": counts,
+        "primary_gap": (
+            "manual_posting"
+            if counts.get("waiting_for_manual_post", 0)
+            else "result_measurement"
+            if any(stage in {"measurement_waiting_24h", "ready_for_first_measurement"} for stage in stages)
+            else "complete"
+        ),
+        "rows": rows,
+        "guardrail": "Do not advance a lifecycle stage without the listed completion evidence.",
+    }
+
+
 def build_payload() -> dict:
     packet = read_json(MANUAL_DISTRIBUTION, {})
     reconciliation = read_json(YOUTUBE_RECONCILIATION, {})
     reconciliation_summary = reconciliation.get("summary") or {}
     distribution = packet.get("manual_distribution_docket") or {}
     completion = packet.get("manual_completion_manifest") or {}
-    postable_rows = [
+    manual_rows = [
         row
         for row in packet.get("rows") or []
+        if (row.get("manual_posting_packet") or {}).get("postable_now") or row.get("logged")
+    ]
+    postable_rows = [
+        row
+        for row in manual_rows
         if (row.get("manual_posting_packet") or {}).get("postable_now") and not row.get("logged")
     ]
     cards = [post_card(row) for row in postable_rows]
@@ -343,6 +476,7 @@ def build_payload() -> dict:
         }
     acceleration = first_url_acceleration(cards, summary)
     runbook = first_post_runbook(cards, summary)
+    tracking_lifecycle = build_tracking_lifecycle(manual_rows)
     return {
         "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "safe_mode": True,
@@ -355,6 +489,7 @@ def build_payload() -> dict:
         "summary": summary,
         "first_post_runbook": runbook,
         "first_url_acceleration": acceleration,
+        "tracking_lifecycle": tracking_lifecycle,
         "session_manifest": build_session_manifest(cards, summary),
         "post_cards": cards,
         "operator_steps": [
@@ -405,6 +540,7 @@ def write_session_file(payload: dict) -> None:
     session = payload.get("session_manifest") or {}
     runbook = payload.get("first_post_runbook") or {}
     acceleration = payload.get("first_url_acceleration") or {}
+    lifecycle = payload.get("tracking_lifecycle") or {}
     lines = [
         "# YouTube Community Manual Posting Session",
         "",
@@ -441,6 +577,17 @@ def write_session_file(payload: dict) -> None:
     ])
     lines.extend([
         "",
+        "## Tracking Lifecycle",
+        f"- Status: {lifecycle.get('status') or 'unknown'}",
+        f"- Posted: {lifecycle.get('posted_count', 0)}/{lifecycle.get('total_count', 0)}",
+        f"- Public URLs logged: {lifecycle.get('public_url_logged_count', 0)}/{lifecycle.get('total_count', 0)}",
+        f"- Results recorded: {lifecycle.get('result_recorded_count', 0)}/{lifecycle.get('total_count', 0)}",
+        f"- Primary gap: {lifecycle.get('primary_gap') or 'unknown'}",
+    ])
+    for row in lifecycle.get("rows") or []:
+        lines.append(f"- {row.get('id')}: {row.get('stage')} -> {row.get('next_action')}")
+    lines.extend([
+        "",
         "## Posts",
     ])
     if not payload.get("post_cards"):
@@ -474,6 +621,7 @@ def build_markdown(payload: dict) -> str:
     summary = payload["summary"]
     runbook = payload.get("first_post_runbook") or {}
     acceleration = payload.get("first_url_acceleration") or {}
+    lifecycle = payload.get("tracking_lifecycle") or {}
     lines = [
         "# Manual Posting Clipboard - Lily Roo",
         "",
@@ -498,6 +646,27 @@ def build_markdown(payload: dict) -> str:
         f"- First measurement due: **{summary.get('first_measurement_due_after_hours')} hours after public URL logging**",
         f"- Next action: {summary['next_action']}",
     ]
+    if lifecycle:
+        lines.extend([
+            "",
+            "## Tracking Lifecycle",
+            f"- Status: **{lifecycle.get('status', 'unknown')}**",
+            f"- Posted: **{lifecycle.get('posted_count', 0)}/{lifecycle.get('total_count', 0)}**",
+            f"- Public URLs logged: **{lifecycle.get('public_url_logged_count', 0)}/{lifecycle.get('total_count', 0)}**",
+            f"- Results recorded: **{lifecycle.get('result_recorded_count', 0)}/{lifecycle.get('total_count', 0)}**",
+            f"- Ready for measurement: **{lifecycle.get('ready_for_measurement_count', 0)}**",
+            f"- Primary gap: `{lifecycle.get('primary_gap', 'unknown')}`",
+            f"- Guardrail: {lifecycle.get('guardrail') or 'Do not advance without evidence.'}",
+        ])
+        if lifecycle.get("rows"):
+            lines.append("- Lifecycle rows:")
+            for row in lifecycle["rows"]:
+                lines.append(
+                    f"  - `{row.get('id')}` `{row.get('stage')}` posted `{row.get('posted')}` "
+                    f"logged `{row.get('public_url_logged')}` measured `{row.get('result_recorded')}` "
+                    f"due `{row.get('measurement_due_at') or 'after URL logging'}`"
+                )
+                lines.append(f"    - Next: {row.get('next_action')}")
     next_post = summary.get("next_post_now") or {}
     if next_post:
         lines.extend([

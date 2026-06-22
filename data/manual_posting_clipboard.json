@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T12:38:13.235383Z",
+  "generated_at": "2026-06-22T13:02:12.444169Z",
   "safe_mode": true,
   "source": {
     "manual_distribution_packet": "data/manual_distribution_packet.json",
@@ -112,6 +112,82 @@
     "why": "Logging the first public URL immediately lets that post enter the 24-hour result-collection queue without waiting for the full batch.",
     "next_action": "Post the first card, paste its real public URL into the worksheet, run the preview, then apply with --allow-partial.",
     "guardrail": "Use only a real public YouTube Community post URL; never apply PUBLIC_URL or blank worksheet rows."
+  },
+  "tracking_lifecycle": {
+    "status": "active",
+    "total_count": 3,
+    "posted_count": 0,
+    "public_url_logged_count": 0,
+    "result_recorded_count": 0,
+    "waiting_manual_post_count": 3,
+    "ready_for_measurement_count": 0,
+    "stage_counts": {
+      "waiting_for_manual_post": 3
+    },
+    "primary_gap": "manual_posting",
+    "rows": [
+      {
+        "id": "FP-AUTO-261",
+        "release": "I Learned It All in Fifteen Seconds",
+        "platform": "YouTube Community",
+        "stage": "waiting_for_manual_post",
+        "posted": false,
+        "public_url_logged": false,
+        "result_recorded": false,
+        "public_url": "",
+        "logged_at": "",
+        "measurement_due_at": "",
+        "measurement_due": false,
+        "result_handoff_report": "admin/reports/experiment-result-clipboard.md",
+        "next_action": "Publish the Community card, copy the real public post URL, then log it.",
+        "completion_evidence": [
+          "A real public YouTube Community post URL exists.",
+          "Published_Log.csv contains this manual_distribution_id or content_id.",
+          "The first measurement has at least one numeric value plus a result_evidence note."
+        ]
+      },
+      {
+        "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+        "release": "Twelve Dollars",
+        "platform": "YouTube Community",
+        "stage": "waiting_for_manual_post",
+        "posted": false,
+        "public_url_logged": false,
+        "result_recorded": false,
+        "public_url": "",
+        "logged_at": "",
+        "measurement_due_at": "",
+        "measurement_due": false,
+        "result_handoff_report": "admin/reports/experiment-result-clipboard.md",
+        "next_action": "Publish the Community card, copy the real public post URL, then log it.",
+        "completion_evidence": [
+          "A real public YouTube Community post URL exists.",
+          "Published_Log.csv contains this manual_distribution_id or content_id.",
+          "The first measurement has at least one numeric value plus a result_evidence note."
+        ]
+      },
+      {
+        "id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+        "release": "Analog Myth",
+        "platform": "YouTube Community",
+        "stage": "waiting_for_manual_post",
+        "posted": false,
+        "public_url_logged": false,
+        "result_recorded": false,
+        "public_url": "",
+        "logged_at": "",
+        "measurement_due_at": "",
+        "measurement_due": false,
+        "result_handoff_report": "admin/reports/experiment-result-clipboard.md",
+        "next_action": "Publish the Community card, copy the real public post URL, then log it.",
+        "completion_evidence": [
+          "A real public YouTube Community post URL exists.",
+          "Published_Log.csv contains this manual_distribution_id or content_id.",
+          "The first measurement has at least one numeric value plus a result_evidence note."
+        ]
+      }
+    ],
+    "guardrail": "Do not advance a lifecycle stage without the listed completion evidence."
   },
   "session_manifest": {
     "status": "ready_to_post",
