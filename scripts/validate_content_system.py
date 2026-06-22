@@ -1799,6 +1799,13 @@ def validate_generated_outputs(failures):
             (action for action in actions if action.get("phase") == "Approve manual subscriber rows"),
             None,
         )
+        backlog_preview_for_activation = json.loads(BACKLOG_RESCHEDULE_PREVIEW.read_text(encoding="utf-8")) if BACKLOG_RESCHEDULE_PREVIEW.exists() else {}
+        backlog_summary_for_activation = backlog_preview_for_activation.get("summary") or {}
+        actionable_backlog_count = int(backlog_summary_for_activation.get("approved_backlog_count") or 0)
+        backlog_actions = [
+            action for action in actions
+            if action.get("phase") == "Recover stalled approved backlog"
+        ]
         if (
             activation.get("safe_mode") is True
             and summary.get("action_count") == len(actions)
@@ -1820,6 +1827,14 @@ def validate_generated_outputs(failures):
                     and manual_action.get("after_review_command") == manual_docket.get("apply_command")
                     and (manual_action.get("context") or {}).get("ready_ids") == manual_ready_ids
                     and (manual_action.get("context") or {}).get("guardrail") == manual_docket.get("guardrail")
+                )
+            )
+            and (
+                (actionable_backlog_count == 0 and not backlog_actions)
+                or (
+                    actionable_backlog_count > 0
+                    and backlog_actions
+                    and all((action.get("context") or {}).get("approved_backlog_posts") == actionable_backlog_count for action in backlog_actions)
                 )
             )
             and all("phase" in action and "status" in action and "label" in action for action in actions)

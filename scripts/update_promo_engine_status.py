@@ -1170,14 +1170,16 @@ def monetization_state(metrics: dict, history: dict, metrics_history: dict, prom
     ready_to_apply = int_metric(apply_preview.get("ready_to_apply_posts"))
     approval_blockers = int_metric(execution_state.get("approval_needed_count"))
     platform_fix_blockers = int_metric(execution_state.get("platform_fix_needed_count"))
+    manual_handoff_backlog = int_metric(execution_state.get("manual_handoff_needed_count"))
+    actionable_backlog_posts = max(queue_counts["approved_backlog_posts"] - manual_handoff_backlog, 0)
     reschedule_start = (datetime.now().astimezone() + timedelta(days=1)).replace(hour=10, minute=0, second=0, microsecond=0).isoformat()
     reschedule_preview_command = f"python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at {shell_quote(reschedule_start)} --spacing-hours 24"
     reschedule_apply_command = reschedule_preview_command + " --apply --refresh-admin"
     next_pressure = []
     if approved_upcoming <= 0 and review_posts > 0:
         next_pressure.append("No approved upcoming posts; review draft promo queue rows to restart subscriber-growth distribution.")
-    if queue_counts["approved_backlog_posts"]:
-        next_pressure.append(f"{queue_counts['approved_backlog_posts']} approved unpublished posts are past their scheduled time; repair executor/platform blockers or reschedule them.")
+    if actionable_backlog_posts:
+        next_pressure.append(f"{actionable_backlog_posts} approved unpublished auto posts are past their scheduled time; repair executor/platform blockers or reschedule them.")
     if approval_blockers:
         next_pressure.append(f"{approval_blockers} executor records are blocked by approval.")
     if platform_fix_blockers:
@@ -1193,6 +1195,8 @@ def monetization_state(metrics: dict, history: dict, metrics_history: dict, prom
         "runway": runway,
         "approved_upcoming_posts": approved_upcoming,
         "approved_backlog_posts": queue_counts["approved_backlog_posts"],
+        "manual_handoff_backlog_posts": manual_handoff_backlog,
+        "actionable_backlog_posts": actionable_backlog_posts,
         "review_upcoming_posts": queue_counts["review_upcoming_posts"],
         "review_backlog_posts": queue_counts["review_backlog_posts"],
         "draft_review_posts": review_posts,

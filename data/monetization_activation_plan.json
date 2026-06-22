@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T10:40:24.965389Z",
+  "generated_at": "2026-06-22T10:44:56.527456Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -28,7 +28,7 @@
     "subscriber_swap_count": 0,
     "ready_after_approval_swap_count": 0,
     "platform_fix_count": 5,
-    "action_count": 8
+    "action_count": 7
   },
   "actions": [
     {
@@ -41,22 +41,6 @@
       "context": {
         "approved_plan_posts": 0,
         "ready_to_apply_posts": 0
-      }
-    },
-    {
-      "label": "Preview approved backlog reschedule",
-      "phase": "Recover stalled approved backlog",
-      "status": "preview_first",
-      "detail": "Preview a new schedule for approved past-due posts. Safe apply is available after preview.",
-      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24",
-      "after_review_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-      "context": {
-        "approved_backlog_posts": 1,
-        "approved_upcoming_posts": 11,
-        "blocked_backlog_count": 0,
-        "apply_allowed_without_override": true,
-        "blocked_apply_command": "",
-        "override_apply_command": ""
       }
     },
     {

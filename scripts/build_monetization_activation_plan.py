@@ -134,7 +134,8 @@ def build_actions(status: dict, runway: dict, cta_audit: dict, platform_repair: 
             },
         ))
 
-    if monetization.get("approved_backlog_posts") and monetization.get("backlog_reschedule_preview_command"):
+    actionable_backlog_count = int(backlog_summary.get("approved_backlog_count") or monetization.get("actionable_backlog_posts") or 0)
+    if actionable_backlog_count and monetization.get("backlog_reschedule_preview_command"):
         apply_allowed = bool(backlog_summary.get("apply_allowed_without_override")) if backlog_summary else False
         detail = "Preview a new schedule for approved past-due posts. Safe apply is available after preview."
         if not apply_allowed:
@@ -147,7 +148,9 @@ def build_actions(status: dict, runway: dict, cta_audit: dict, platform_repair: 
             backlog_summary.get("preview_command") or monetization.get("backlog_reschedule_preview_command") or "",
             backlog_summary.get("apply_command") or "",
             {
-                "approved_backlog_posts": monetization.get("approved_backlog_posts"),
+                "approved_backlog_posts": actionable_backlog_count,
+                "raw_approved_backlog_posts": monetization.get("approved_backlog_posts"),
+                "manual_handoff_backlog_posts": monetization.get("manual_handoff_backlog_posts"),
                 "approved_upcoming_posts": monetization.get("approved_upcoming_posts"),
                 "blocked_backlog_count": backlog_summary.get("blocked_backlog_count") or 0,
                 "apply_allowed_without_override": apply_allowed,
