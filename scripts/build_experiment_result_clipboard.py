@@ -298,25 +298,32 @@ def measurement_priority_cards(metric_cards: list[dict], missing_cards: list[dic
     return selected
 
 
-def post_log_measurement_handoff(manual_posting: dict, summary: dict) -> dict:
+def post_log_measurement_handoff(manual_posting: dict, summary: dict, missing_cards: list[dict]) -> dict:
     session = manual_posting.get("session_manifest") or {}
     session_rows = session.get("rows") or []
+    format_by_post_id = {
+        card.get("post_id") or "": card.get("experiment_format") or ""
+        for card in missing_cards
+        if card.get("post_id")
+    }
     handoff_rows = []
     for row in session_rows:
         post_id = row.get("id") or ""
         platform = row.get("platform") or "YouTube Community"
         release = row.get("release") or ""
+        experiment_format = format_by_post_id.get(post_id) or "Unknown format"
         handoff_rows.append({
             "sequence": row.get("sequence"),
             "post_id": post_id,
             "platform": platform,
             "song": release,
+            "experiment_format": experiment_format,
             "status": "waiting_for_public_url",
             "public_url": row.get("public_url") or "PUBLIC_URL",
             "source_row": "after Published_Log.csv append",
             "fields_to_collect": RESULT_FIELDS,
             "wide_entry_template": {
-                "experiment_format": "Release-art image + story hook",
+                "experiment_format": experiment_format,
                 "post_id": post_id,
                 "platform": platform,
                 "song": release,
@@ -370,7 +377,7 @@ def build_payload() -> dict:
     cards = metric_cards(packet.get("pending_result_rows") or [], packet.get("wide_entry_rows") or [])
     missing_cards = missing_log_cards(packet.get("missing_published_log_posts") or [])
     priority_cards = measurement_priority_cards(cards, missing_cards, manual_posting, platform_repair)
-    handoff = post_log_measurement_handoff(manual_posting, summary)
+    handoff = post_log_measurement_handoff(manual_posting, summary, missing_cards)
     return {
         "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "safe_mode": True,

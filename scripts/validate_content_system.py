@@ -2031,6 +2031,11 @@ def validate_generated_outputs(failures):
         priority_cards = clipboard.get("measurement_priority_cards") or []
         handoff = clipboard.get("post_log_measurement_handoff") or {}
         handoff_rows = handoff.get("rows") or []
+        missing_format_by_post_id = {
+            card.get("post_id") or "": card.get("experiment_format") or ""
+            for card in missing_cards
+            if card.get("post_id")
+        }
         manual_posting = json.loads(MANUAL_POSTING_CLIPBOARD.read_text(encoding="utf-8")) if MANUAL_POSTING_CLIPBOARD.exists() else {}
         manual_session = manual_posting.get("session_manifest") or {}
         grouped_ids = sorted({(row.get("post_id") or "", row.get("source_row") or "") for row in pending_rows})
@@ -2068,7 +2073,7 @@ def validate_generated_outputs(failures):
             and handoff.get("pending_post_ids") == [row.get("post_id") for row in handoff_rows]
             and handoff.get("wide_import_preview_command") == (clipboard.get("summary") or {}).get("wide_result_import_preview_command")
             and len(handoff_rows) == len(manual_session.get("rows") or [])
-            and all(row.get("post_id") and row.get("platform") and row.get("public_url") == "PUBLIC_URL" and row.get("fields_to_collect") == ["views", "likes", "comments", "shares", "saves", "subs_delta"] and (row.get("wide_entry_template") or {}).get("post_url") == "PUBLIC_URL" and "log_manual_distribution.py" in (row.get("log_preview_command") or "") for row in handoff_rows)
+            and all(row.get("post_id") and row.get("platform") and row.get("public_url") == "PUBLIC_URL" and row.get("fields_to_collect") == ["views", "likes", "comments", "shares", "saves", "subs_delta"] and row.get("experiment_format") == missing_format_by_post_id.get(row.get("post_id") or "") and (row.get("wide_entry_template") or {}).get("experiment_format") == row.get("experiment_format") and (row.get("wide_entry_template") or {}).get("post_url") == "PUBLIC_URL" and "log_manual_distribution.py" in (row.get("log_preview_command") or "") for row in handoff_rows)
             and any("wide entry CSV" in item for item in handoff.get("handoff_sequence") or [])
             and any("Published_Log.csv" in item for item in handoff.get("completion_evidence") or [])
             and "real public URL" in (handoff.get("guardrail") or "")
