@@ -226,6 +226,18 @@ def build_markdown(payload: dict) -> str:
     return "\n".join(lines)
 
 
+def next_reconciliation_gate(worker: dict, manual: dict) -> str:
+    if worker["unlogged_worker_count"]:
+        return "worker_export"
+    if not manual["unlogged_manual_count"]:
+        return "clear"
+    url_logging = manual.get("url_logging") or {}
+    posting_gate = manual.get("posting_gate") or {}
+    if url_logging.get("status") == "waiting_for_public_urls" and posting_gate.get("postable_count", 0) > 0:
+        return "manual_public_url_logging"
+    return "manual_approval"
+
+
 def replace_json_embed(html: str, block_id: str, payload) -> str:
     marker = f'<script type="application/json" id="{block_id}">'
     end_marker = "</script>"
@@ -287,6 +299,7 @@ def main() -> int:
         if manual["unlogged_manual_count"]
         else "clear"
     )
+    next_gate = next_reconciliation_gate(worker, manual)
     payload = {
         "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "safe_mode": True,
@@ -310,7 +323,7 @@ def main() -> int:
             "reconciliation_needed": reconciliation_needed,
             "next_preview_command": next_preview_command,
             "next_apply_command": next_apply_command,
-            "next_gate": "worker_export" if worker["unlogged_worker_count"] else ("manual_approval" if manual["unlogged_manual_count"] else "clear"),
+            "next_gate": next_gate,
             "next_manual_gate": next_manual_gate,
             "url_logging_status": url_logging.get("status") or "unknown",
             "url_logging_session_file": url_logging.get("session_file_path") or "",

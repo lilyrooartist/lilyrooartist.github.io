@@ -976,6 +976,16 @@ def validate_generated_outputs(failures):
             gate_counts[gate] = gate_counts.get(gate, 0) + 1
         approval_gate = manual.get("approval_gate") or {}
         posting_gate = manual.get("posting_gate") or {}
+        expected_reconciliation_gate = "worker_export"
+        if not worker.get("unlogged_worker_count"):
+            if manual.get("unlogged_manual_count"):
+                expected_reconciliation_gate = (
+                    "manual_public_url_logging"
+                    if gate_counts.get("blocked_until_public_url", 0) > 0 and posting_gate.get("postable_count", 0) > 0
+                    else "manual_approval"
+                )
+            else:
+                expected_reconciliation_gate = "clear"
         if (
             reconciliation.get("safe_mode") is True
             and reconciliation_summary.get("published_log_rows") == len(published_rows)
@@ -983,8 +993,17 @@ def validate_generated_outputs(failures):
             and reconciliation_summary.get("unlogged_manual_posts") == manual.get("unlogged_manual_count") == expected_unlogged_manual
             and reconciliation_summary.get("manual_log_gate_counts") == dict(sorted(gate_counts.items()))
             and reconciliation_summary.get("manual_logging_gate_status") == (manual_distribution_docket.get("status") or "unknown")
-            and reconciliation_summary.get("next_gate") in {"worker_export", "manual_approval", "clear"}
+            and reconciliation_summary.get("next_gate") in {"worker_export", "manual_approval", "manual_public_url_logging", "clear"}
+            and reconciliation_summary.get("next_gate") == expected_reconciliation_gate
             and reconciliation_summary.get("posting_gate_status") == (posting_gate.get("status") or "unknown")
+            and (
+                reconciliation_summary.get("next_gate") != "manual_public_url_logging"
+                or (
+                    reconciliation_summary.get("next_manual_gate") == "public_url_logging"
+                    and reconciliation_summary.get("url_logging_status") == "waiting_for_public_urls"
+                    and reconciliation_summary.get("posting_gate_status") == "postable_now"
+                )
+            )
             and "export_social_executions.py --dry-run" in (worker.get("preview_command") or "")
             and "export_social_executions.py --refresh-admin" in (worker.get("apply_command") or "")
             and (
