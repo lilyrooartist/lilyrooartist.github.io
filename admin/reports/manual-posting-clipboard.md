@@ -1,6 +1,6 @@
 # Manual Posting Clipboard - Lily Roo
 
-Generated: 2026-06-22T07:57:08.257716Z
+Generated: 2026-06-22T08:01:15.472222Z
 
 ## Summary
 - Status: **ready_to_post**
@@ -18,6 +18,37 @@ Generated: 2026-06-22T07:57:08.257716Z
 - Reconciliation apply if matches exist: `not available`
 - Result handoff after URL logging: `admin/reports/experiment-result-clipboard.md`
 - Next action: Post each card in YouTube Community, copy the real public URL, then log it.
+
+## Session Manifest
+- Status: **ready_to_post**
+- Session: **YouTube Community manual posting batch**
+- Surface: https://www.youtube.com/@lilyroo.artist/community
+- Postable rows: **3**
+- Waiting public URLs: **3**
+- Logged rows: **0**
+- URL worksheet: `data/manual_distribution_url_template.csv`
+- Batch preview: `python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv`
+- Batch apply: `python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --apply --refresh-admin`
+- Partial apply: `python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --allow-partial --apply --refresh-admin`
+- URL reconciliation: `python3 scripts/reconcile_youtube_community_urls.py`
+- Result handoff: `admin/reports/experiment-result-clipboard.md`
+- Guardrail: Do not mark the session complete until every row has a real public URL logged.
+
+- Posting sequence:
+  - Open the YouTube Community surface once.
+  - Post each session row in sequence using its copy_source and asset_source.
+  - After each publish, copy the real public URL into the URL worksheet.
+  - Run the batch preview command; use partial apply if only some rows have public URLs.
+  - After logging, collect first metrics from the result handoff report.
+- Completion evidence:
+  - Each session row has a real public YouTube Community URL.
+  - The URL worksheet has no remaining blank public_url cells for these IDs.
+  - Published_Log.csv contains each session ID with a manual_distribution_id note.
+  - The experiment result clipboard lists the logged posts for first measurement collection.
+- Session rows:
+  - `1` `FP-AUTO-261` `waiting_for_post_and_public_url` copy `data/manual-posting-cards/fp-auto-261.txt` asset `assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg`
+  - `2` `FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY` `waiting_for_post_and_public_url` copy `data/manual-posting-cards/fp-plan-twelve-dollars-youtube-community.txt` asset `assets/albums/twelve-dollars/art/04-twelve-dollars.jpg`
+  - `3` `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY` `waiting_for_post_and_public_url` copy `data/manual-posting-cards/fp-plan-analog-myth-youtube-community.txt` asset `assets/albums/analog-myth/art/03-analog-myth.jpg`
 
 ## Cards
 ### 1. I Learned It All in Fifteen Seconds - YouTube Community

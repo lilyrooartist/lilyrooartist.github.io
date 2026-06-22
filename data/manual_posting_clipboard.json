@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T07:57:08.257716Z",
+  "generated_at": "2026-06-22T08:01:15.472222Z",
   "safe_mode": true,
   "source": {
     "manual_distribution_packet": "data/manual_distribution_packet.json",
@@ -36,6 +36,114 @@
     "public_url_reconciliation_apply_command": "",
     "result_handoff_report": "admin/reports/experiment-result-clipboard.md",
     "next_action": "Post each card in YouTube Community, copy the real public URL, then log it."
+  },
+  "session_manifest": {
+    "status": "ready_to_post",
+    "session_name": "YouTube Community manual posting batch",
+    "surface_url": "https://www.youtube.com/@lilyroo.artist/community",
+    "postable_count": 3,
+    "waiting_public_url_count": 3,
+    "logged_count": 0,
+    "sequence_ids": [
+      "FP-AUTO-261",
+      "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+      "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY"
+    ],
+    "copy_sources": [
+      "data/manual-posting-cards/fp-auto-261.txt",
+      "data/manual-posting-cards/fp-plan-twelve-dollars-youtube-community.txt",
+      "data/manual-posting-cards/fp-plan-analog-myth-youtube-community.txt"
+    ],
+    "asset_sources": [
+      "assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
+      "assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
+      "assets/albums/analog-myth/art/03-analog-myth.jpg"
+    ],
+    "url_template_path": "data/manual_distribution_url_template.csv",
+    "batch_log_preview_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv",
+    "batch_log_apply_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --apply --refresh-admin",
+    "batch_log_partial_apply_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --allow-partial --apply --refresh-admin",
+    "public_url_reconciliation_command": "python3 scripts/reconcile_youtube_community_urls.py",
+    "result_handoff_report": "admin/reports/experiment-result-clipboard.md",
+    "rows": [
+      {
+        "sequence": 1,
+        "id": "FP-AUTO-261",
+        "release": "I Learned It All in Fifteen Seconds",
+        "platform": "YouTube Community",
+        "status": "waiting_for_post_and_public_url",
+        "copy_source": "data/manual-posting-cards/fp-auto-261.txt",
+        "asset_source": "assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
+        "surface_url": "https://www.youtube.com/@lilyroo.artist/community",
+        "public_url": "",
+        "public_url_required": true,
+        "preview_command_template": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL",
+        "apply_command_template": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL --apply --refresh-admin",
+        "result_collection_trigger": "Log the public URL, then use admin/reports/experiment-result-clipboard.md after the post has accumulated first metrics.",
+        "completion_evidence": [
+          "A real public YouTube Community post URL exists.",
+          "The URL is logged with scripts/log_manual_distribution.py.",
+          "admin/content/Published_Log.csv contains this manual_distribution_id.",
+          "The experiment result clipboard can request first measurement values for this post."
+        ]
+      },
+      {
+        "sequence": 2,
+        "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+        "release": "Twelve Dollars",
+        "platform": "YouTube Community",
+        "status": "waiting_for_post_and_public_url",
+        "copy_source": "data/manual-posting-cards/fp-plan-twelve-dollars-youtube-community.txt",
+        "asset_source": "assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
+        "surface_url": "https://www.youtube.com/@lilyroo.artist/community",
+        "public_url": "",
+        "public_url_required": true,
+        "preview_command_template": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+        "apply_command_template": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
+        "result_collection_trigger": "Log the public URL, then use admin/reports/experiment-result-clipboard.md after the post has accumulated first metrics.",
+        "completion_evidence": [
+          "A real public YouTube Community post URL exists.",
+          "The URL is logged with scripts/log_manual_distribution.py.",
+          "admin/content/Published_Log.csv contains this manual_distribution_id.",
+          "The experiment result clipboard can request first measurement values for this post."
+        ]
+      },
+      {
+        "sequence": 3,
+        "id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+        "release": "Analog Myth",
+        "platform": "YouTube Community",
+        "status": "waiting_for_post_and_public_url",
+        "copy_source": "data/manual-posting-cards/fp-plan-analog-myth-youtube-community.txt",
+        "asset_source": "assets/albums/analog-myth/art/03-analog-myth.jpg",
+        "surface_url": "https://www.youtube.com/@lilyroo.artist/community",
+        "public_url": "",
+        "public_url_required": true,
+        "preview_command_template": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+        "apply_command_template": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
+        "result_collection_trigger": "Log the public URL, then use admin/reports/experiment-result-clipboard.md after the post has accumulated first metrics.",
+        "completion_evidence": [
+          "A real public YouTube Community post URL exists.",
+          "The URL is logged with scripts/log_manual_distribution.py.",
+          "admin/content/Published_Log.csv contains this manual_distribution_id.",
+          "The experiment result clipboard can request first measurement values for this post."
+        ]
+      }
+    ],
+    "posting_sequence": [
+      "Open the YouTube Community surface once.",
+      "Post each session row in sequence using its copy_source and asset_source.",
+      "After each publish, copy the real public URL into the URL worksheet.",
+      "Run the batch preview command; use partial apply if only some rows have public URLs.",
+      "After logging, collect first metrics from the result handoff report."
+    ],
+    "completion_evidence": [
+      "Each session row has a real public YouTube Community URL.",
+      "The URL worksheet has no remaining blank public_url cells for these IDs.",
+      "Published_Log.csv contains each session ID with a manual_distribution_id note.",
+      "The experiment result clipboard lists the logged posts for first measurement collection."
+    ],
+    "guardrail": "Do not mark the session complete until every row has a real public URL logged."
   },
   "post_cards": [
     {

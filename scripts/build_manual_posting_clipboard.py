@@ -129,6 +129,62 @@ def post_card(row: dict) -> dict:
     }
 
 
+def build_session_manifest(cards: list[dict], summary: dict) -> dict:
+    rows = []
+    for index, card in enumerate(cards, start=1):
+        public_url = (card.get("public_url") or "").strip()
+        posted = bool(public_url)
+        rows.append({
+            "sequence": index,
+            "id": card.get("id") or "",
+            "release": card.get("release") or "",
+            "platform": card.get("platform") or "",
+            "status": "logged" if posted else "waiting_for_post_and_public_url",
+            "copy_source": card.get("paste_text_path") or "",
+            "asset_source": (card.get("posting_bundle") or {}).get("asset_source") or "",
+            "surface_url": card.get("public_community_url") or "",
+            "public_url": public_url,
+            "public_url_required": not posted,
+            "preview_command_template": card.get("log_preview_command") or "",
+            "apply_command_template": card.get("log_apply_command") or "",
+            "result_collection_trigger": (card.get("posting_bundle") or {}).get("result_collection_trigger") or "",
+            "completion_evidence": card.get("completion_evidence") or [],
+        })
+    waiting = [row for row in rows if row.get("public_url_required")]
+    return {
+        "status": "ready_to_post" if waiting else "complete",
+        "session_name": "YouTube Community manual posting batch",
+        "surface_url": summary.get("public_community_url") or "",
+        "postable_count": len(cards),
+        "waiting_public_url_count": len(waiting),
+        "logged_count": len(rows) - len(waiting),
+        "sequence_ids": [row.get("id") for row in rows],
+        "copy_sources": [row.get("copy_source") for row in rows if row.get("copy_source")],
+        "asset_sources": [row.get("asset_source") for row in rows if row.get("asset_source")],
+        "url_template_path": summary.get("url_template_path") or "",
+        "batch_log_preview_command": summary.get("batch_log_preview_command") or "",
+        "batch_log_apply_command": summary.get("batch_log_apply_command") or "",
+        "batch_log_partial_apply_command": summary.get("batch_log_partial_apply_command") or "",
+        "public_url_reconciliation_command": summary.get("public_url_reconciliation_command") or "",
+        "result_handoff_report": summary.get("result_handoff_report") or "admin/reports/experiment-result-clipboard.md",
+        "rows": rows,
+        "posting_sequence": [
+            "Open the YouTube Community surface once.",
+            "Post each session row in sequence using its copy_source and asset_source.",
+            "After each publish, copy the real public URL into the URL worksheet.",
+            "Run the batch preview command; use partial apply if only some rows have public URLs.",
+            "After logging, collect first metrics from the result handoff report.",
+        ],
+        "completion_evidence": [
+            "Each session row has a real public YouTube Community URL.",
+            "The URL worksheet has no remaining blank public_url cells for these IDs.",
+            "Published_Log.csv contains each session ID with a manual_distribution_id note.",
+            "The experiment result clipboard lists the logged posts for first measurement collection.",
+        ],
+        "guardrail": "Do not mark the session complete until every row has a real public URL logged.",
+    }
+
+
 def build_payload() -> dict:
     packet = read_json(MANUAL_DISTRIBUTION, {})
     reconciliation = read_json(YOUTUBE_RECONCILIATION, {})
@@ -148,6 +204,32 @@ def build_payload() -> dict:
         if url_template_path
         else ""
     )
+    summary = {
+        "status": "ready_to_post" if cards else "empty",
+        "posting_surface": completion.get("posting_surface") or "YouTube Studio Community",
+        "public_community_url": completion.get("public_community_url") or distribution.get("public_community_url") or "",
+        "postable_count": len(cards),
+        "waiting_public_url_count": completion.get("waiting_public_url_count") or len(cards),
+        "pending_log_ids": completion.get("pending_log_ids") or [card["id"] for card in cards],
+        "posting_bundle_count": sum(1 for card in cards if card.get("posting_bundle")),
+        "url_template_path": completion.get("url_template_path") or "",
+        "paste_text_dir": str(PASTE_CARD_DIR.relative_to(ROOT)),
+        "paste_text_file_count": len(paste_text_files),
+        "paste_text_files": paste_text_files,
+        "batch_log_preview_command": completion.get("batch_log_preview_command") or "",
+        "batch_log_apply_command": completion.get("batch_log_apply_command") or "",
+        "batch_log_partial_apply_command": partial_apply_command,
+        "public_url_reconciliation_status": reconciliation_summary.get("status") or "not_run",
+        "public_url_reconciliation_match_count": reconciliation_summary.get("match_count") or 0,
+        "public_url_reconciliation_command": "python3 scripts/reconcile_youtube_community_urls.py",
+        "public_url_reconciliation_apply_command": reconciliation_summary.get("apply_command") or "",
+        "result_handoff_report": "admin/reports/experiment-result-clipboard.md",
+        "next_action": (
+            "Post each card in YouTube Community, copy the real public URL, then log it."
+            if cards
+            else "No approved manual posts are currently waiting."
+        ),
+    }
     return {
         "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "safe_mode": True,
@@ -157,32 +239,8 @@ def build_payload() -> dict:
             "youtube_community_url_reconciliation": str(YOUTUBE_RECONCILIATION.relative_to(ROOT)) if YOUTUBE_RECONCILIATION.exists() else "",
             "published_log_target": "admin/content/Published_Log.csv",
         },
-        "summary": {
-            "status": "ready_to_post" if cards else "empty",
-            "posting_surface": completion.get("posting_surface") or "YouTube Studio Community",
-            "public_community_url": completion.get("public_community_url") or distribution.get("public_community_url") or "",
-            "postable_count": len(cards),
-            "waiting_public_url_count": completion.get("waiting_public_url_count") or len(cards),
-            "pending_log_ids": completion.get("pending_log_ids") or [card["id"] for card in cards],
-            "posting_bundle_count": sum(1 for card in cards if card.get("posting_bundle")),
-            "url_template_path": completion.get("url_template_path") or "",
-            "paste_text_dir": str(PASTE_CARD_DIR.relative_to(ROOT)),
-            "paste_text_file_count": len(paste_text_files),
-            "paste_text_files": paste_text_files,
-            "batch_log_preview_command": completion.get("batch_log_preview_command") or "",
-            "batch_log_apply_command": completion.get("batch_log_apply_command") or "",
-            "batch_log_partial_apply_command": partial_apply_command,
-            "public_url_reconciliation_status": reconciliation_summary.get("status") or "not_run",
-            "public_url_reconciliation_match_count": reconciliation_summary.get("match_count") or 0,
-            "public_url_reconciliation_command": "python3 scripts/reconcile_youtube_community_urls.py",
-            "public_url_reconciliation_apply_command": reconciliation_summary.get("apply_command") or "",
-            "result_handoff_report": "admin/reports/experiment-result-clipboard.md",
-            "next_action": (
-                "Post each card in YouTube Community, copy the real public URL, then log it."
-                if cards
-                else "No approved manual posts are currently waiting."
-            ),
-        },
+        "summary": summary,
+        "session_manifest": build_session_manifest(cards, summary),
         "post_cards": cards,
         "operator_steps": [
             "Open the YouTube Community surface.",
@@ -249,8 +307,41 @@ def build_markdown(payload: dict) -> str:
         f"- Result handoff after URL logging: `{summary.get('result_handoff_report') or 'not available'}`",
         f"- Next action: {summary['next_action']}",
         "",
-        "## Cards",
+        "## Session Manifest",
     ]
+    session = payload.get("session_manifest") or {}
+    lines.extend([
+        f"- Status: **{session.get('status', 'unknown')}**",
+        f"- Session: **{session.get('session_name', 'manual posting session')}**",
+        f"- Surface: {session.get('surface_url') or 'not set'}",
+        f"- Postable rows: **{session.get('postable_count', 0)}**",
+        f"- Waiting public URLs: **{session.get('waiting_public_url_count', 0)}**",
+        f"- Logged rows: **{session.get('logged_count', 0)}**",
+        f"- URL worksheet: `{session.get('url_template_path') or 'not available'}`",
+        f"- Batch preview: `{session.get('batch_log_preview_command') or 'not available'}`",
+        f"- Batch apply: `{session.get('batch_log_apply_command') or 'not available'}`",
+        f"- Partial apply: `{session.get('batch_log_partial_apply_command') or 'not available'}`",
+        f"- URL reconciliation: `{session.get('public_url_reconciliation_command') or 'not available'}`",
+        f"- Result handoff: `{session.get('result_handoff_report') or 'not available'}`",
+        f"- Guardrail: {session.get('guardrail') or 'Do not complete without public URLs.'}",
+        "",
+    ])
+    if session.get("posting_sequence"):
+        lines.append("- Posting sequence:")
+        for item in session["posting_sequence"]:
+            lines.append(f"  - {item}")
+    if session.get("completion_evidence"):
+        lines.append("- Completion evidence:")
+        for item in session["completion_evidence"]:
+            lines.append(f"  - {item}")
+    if session.get("rows"):
+        lines.append("- Session rows:")
+        for row in session["rows"]:
+            lines.append(f"  - `{row.get('sequence')}` `{row.get('id')}` `{row.get('status')}` copy `{row.get('copy_source')}` asset `{row.get('asset_source')}`")
+    lines.extend([
+        "",
+        "## Cards",
+    ])
     if not payload["post_cards"]:
         lines.append("- No approved manual posts are currently waiting.")
     for index, card in enumerate(payload["post_cards"], start=1):

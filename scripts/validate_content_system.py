@@ -1653,6 +1653,8 @@ def validate_generated_outputs(failures):
         ]
         cards = clipboard.get("post_cards") or []
         summary = clipboard.get("summary") or {}
+        session = clipboard.get("session_manifest") or {}
+        session_rows = session.get("rows") or []
         paste_text_files = summary.get("paste_text_files") or []
         paste_file_contents_match = all(
             card.get("paste_text_path")
@@ -1679,6 +1681,25 @@ def validate_generated_outputs(failures):
             and "reconcile_youtube_community_urls.py" in (summary.get("public_url_reconciliation_command") or "")
             and summary.get("public_url_reconciliation_status") in {"not_run", "waiting_for_public_posts", "matches_ready", "fetch_failed"}
             and "public_url_reconciliation_match_count" in summary
+            and session.get("status") in {"ready_to_post", "complete"}
+            and session.get("session_name") == "YouTube Community manual posting batch"
+            and session.get("surface_url") == summary.get("public_community_url")
+            and session.get("postable_count") == len(cards)
+            and session.get("waiting_public_url_count") == len([row for row in session_rows if row.get("public_url_required")])
+            and session.get("logged_count") == len([row for row in session_rows if not row.get("public_url_required")])
+            and session.get("sequence_ids") == [card.get("id") for card in cards]
+            and session.get("copy_sources") == [card.get("paste_text_path") for card in cards]
+            and len(session_rows) == len(cards)
+            and session.get("url_template_path") == summary.get("url_template_path")
+            and session.get("batch_log_preview_command") == summary.get("batch_log_preview_command")
+            and session.get("batch_log_apply_command") == summary.get("batch_log_apply_command")
+            and session.get("batch_log_partial_apply_command") == summary.get("batch_log_partial_apply_command")
+            and session.get("public_url_reconciliation_command") == summary.get("public_url_reconciliation_command")
+            and session.get("result_handoff_report") == summary.get("result_handoff_report")
+            and any("Open the YouTube Community surface once" in item for item in session.get("posting_sequence") or [])
+            and any("Published_Log.csv" in item for item in session.get("completion_evidence") or [])
+            and "real public URL" in (session.get("guardrail") or "")
+            and all(row.get("sequence") and row.get("id") and row.get("copy_source") and row.get("asset_source") and row.get("public_url_required") is True and "log_manual_distribution.py" in (row.get("preview_command_template") or "") and "--apply --refresh-admin" in (row.get("apply_command_template") or "") for row in session_rows)
             and all(
                 card.get("paste_text")
                 and card.get("paste_text_path")
@@ -3749,7 +3770,7 @@ def validate_generated_outputs(failures):
         fail("build_manual_distribution_packet.py missing", failures)
     if MANUAL_POSTING_CLIPBOARD_SCRIPT.exists():
         clipboard_text = MANUAL_POSTING_CLIPBOARD_SCRIPT.read_text(encoding="utf-8")
-        if "manual_posting_clipboard.json" in clipboard_text and "manual-posting-clipboard.md" in clipboard_text and "manual_distribution_packet.json" in clipboard_text and "youtube_community_url_reconciliation.json" in clipboard_text and "public_url_reconciliation_command" in clipboard_text and "batch_log_partial_apply_command" in clipboard_text and "--allow-partial --apply --refresh-admin" in clipboard_text and "post_cards" in clipboard_text and "posting_bundle" in clipboard_text and "operator_sequence" in clipboard_text and "result_collection_trigger" in clipboard_text and "paste_text" in clipboard_text and "paste_text_path" in clipboard_text and "manual-posting-cards" in clipboard_text and "write_paste_files" in clipboard_text and "PUBLIC_URL" in clipboard_text and "log_manual_distribution.py" in clipboard_text and "This clipboard does not approve" in clipboard_text and "subprocess" not in clipboard_text:
+        if "manual_posting_clipboard.json" in clipboard_text and "manual-posting-clipboard.md" in clipboard_text and "manual_distribution_packet.json" in clipboard_text and "youtube_community_url_reconciliation.json" in clipboard_text and "session_manifest" in clipboard_text and "build_session_manifest" in clipboard_text and "Session Manifest" in clipboard_text and "posting_sequence" in clipboard_text and "public_url_reconciliation_command" in clipboard_text and "batch_log_partial_apply_command" in clipboard_text and "--allow-partial --apply --refresh-admin" in clipboard_text and "post_cards" in clipboard_text and "posting_bundle" in clipboard_text and "operator_sequence" in clipboard_text and "result_collection_trigger" in clipboard_text and "paste_text" in clipboard_text and "paste_text_path" in clipboard_text and "manual-posting-cards" in clipboard_text and "write_paste_files" in clipboard_text and "PUBLIC_URL" in clipboard_text and "log_manual_distribution.py" in clipboard_text and "This clipboard does not approve" in clipboard_text and "subprocess" not in clipboard_text:
             ok("manual posting clipboard builder is review-only")
         else:
             fail("build_manual_posting_clipboard.py missing review-only clipboard outputs", failures)
@@ -3917,7 +3938,7 @@ def validate_generated_outputs(failures):
         fail("manual-distribution-packet.md missing", failures)
     if MANUAL_POSTING_CLIPBOARD_REPORT.exists():
         clipboard_report = MANUAL_POSTING_CLIPBOARD_REPORT.read_text(encoding="utf-8")
-        if "Manual Posting Clipboard" in clipboard_report and "## Cards" in clipboard_report and "Posting bundle" in clipboard_report and "Bundle result trigger" in clipboard_report and "Paste text" in clipboard_report and "Log preview after posting" in clipboard_report and "Partial batch apply after first URL" in clipboard_report and "Public URL reconciliation" in clipboard_report and "Result handoff after URL logging" in clipboard_report and "After posting checklist" in clipboard_report and "Operator Steps" in clipboard_report and "Guardrails" in clipboard_report:
+        if "Manual Posting Clipboard" in clipboard_report and "Session Manifest" in clipboard_report and "Session rows" in clipboard_report and "## Cards" in clipboard_report and "Posting bundle" in clipboard_report and "Bundle result trigger" in clipboard_report and "Paste text" in clipboard_report and "Log preview after posting" in clipboard_report and "Partial batch apply after first URL" in clipboard_report and "Public URL reconciliation" in clipboard_report and "Result handoff after URL logging" in clipboard_report and "After posting checklist" in clipboard_report and "Operator Steps" in clipboard_report and "Guardrails" in clipboard_report:
             ok("manual posting clipboard markdown report present")
         else:
             fail("manual-posting-clipboard.md missing expected sections", failures)
@@ -3999,7 +4020,7 @@ def validate_admin_execution_feedback(failures):
         "published log reconciliation shown": "Published log reconciliation" in text and "Worker export" in text and "Manual Logging" in text,
         "manual approval docket shown": "Manual approval docket:" in text and "Preview manual approvals:" in text,
         "manual posting clipboard shown": 'id="manual-posting-clipboard"' in text and "renderManualPostingClipboard" in text and "manual_posting_clipboard.json" in text,
-        "manual posting cards actionable": "Manual posting clipboard is ready" in text and "Open community surface" in text and "Paste files:" in text and "Paste file:" in text and "manual-posting-cards" in text and "Posting bundle:" in text and "Bundle steps:" in text and "Result trigger:" in text and "Preview URL log after posting" in text and "Partial batch apply after first URL" in text and "Reconcile public URLs after posting" in text and "Copy URL reconciliation" in text and "Open URL reconciliation report" in text and "Copy post text" in text and "data-copy-text" in text and "manual-url-input" in text and "data-copy-template" in text and "Copy preview with URL" in text,
+        "manual posting cards actionable": "Manual posting clipboard is ready" in text and "Session manifest:" in text and "Session rows:" in text and "Session steps:" in text and "Open community surface" in text and "Paste files:" in text and "Paste file:" in text and "manual-posting-cards" in text and "Posting bundle:" in text and "Bundle steps:" in text and "Result trigger:" in text and "Preview URL log after posting" in text and "Partial batch apply after first URL" in text and "Reconcile public URLs after posting" in text and "Copy URL reconciliation" in text and "Open URL reconciliation report" in text and "Copy post text" in text and "data-copy-text" in text and "manual-url-input" in text and "data-copy-template" in text and "Copy preview with URL" in text,
         "manual posting source embedded": "embedded-manual-posting-clipboard" in text and "embedded-manual-posting-clipboard-report" in text,
         "experiment result clipboard shown": "renderExperimentResultClipboard" in text and "experiment_result_clipboard.json" in text and "Experiment result clipboard" in text,
         "experiment result cards actionable": "Open result clipboard report" in text and "Entry CSV:" in text and "Wide entry CSV:" in text and "result_import_preview_command" in text and "Copy metric preview" in text and "data-result-command" in text and "result-evidence-input" in text and "Measure first" in text and "Post now" in text and "Blocked" in text and "measurement_priority_cards" in text and "Open manual paste file" in text and "log_manual_distribution.py" in text,
