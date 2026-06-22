@@ -1,13 +1,13 @@
 # Promo Unlock Sequence - Lily Roo
 
-Generated: 2026-06-22T08:58:30.738726Z
+Generated: 2026-06-22T09:01:04.333271Z
 
 ## Summary
 - Steps: **5**
 - Ready for human review: **0**
-- Blocked or warning: **3**
+- Blocked or warning: **4**
 - Projected resolution units across sequence: **10**
-- Current step: `unlock-checked-scheduled-approval` (`blocked`)
+- Current step: `unlock-manual-distribution` (`blocked_until_input`)
 - Open blockers still tracked: **10**
 
 ## Sequence
@@ -16,8 +16,8 @@ Generated: 2026-06-22T08:58:30.738726Z
    - Reason: Blocked by: FP-AUTO-259.
    - Unlocks: Instagram executor row can become publish-eligible after approval.; One scheduled YouTube Community row can move into manual distribution after approval.
 2. **Review and post manual YouTube Community rows** - `unlock-manual-distribution`
-   - State: `clear`; owner: `tod`
-   - Reason: No action is needed for this gate.
+   - State: `blocked_until_input`; owner: `tod`
+   - Reason: Waiting for public_post_url before this clear gate can produce completion evidence.
    - Unlocks: Manual YouTube Community promotion can publish without waiting for broken auto executors.; Published_Log.csv can be updated after public URLs exist.
    - preview (preview-safe): `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL`
    - Completion evidence: data/manual_distribution_packet.json should move approved rows from review_queue toward postable manual distribution, and data/published_log_reconciliation.json should remain gated until public URLs are logged.

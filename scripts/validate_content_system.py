@@ -1225,7 +1225,7 @@ def validate_generated_outputs(failures):
             unlock_sequence.get("safe_mode") is True
             and unlock_summary.get("step_count") == len(unlock_steps) == len(ledger_roadmap)
             and unlock_summary.get("current_step_id") in {"unlock-checked-scheduled-approval", "unlock-manual-distribution"}
-            and unlock_summary.get("current_gate_state") in {"ready_for_human_review", "completed", "blocked"}
+            and unlock_summary.get("current_gate_state") in {"ready_for_human_review", "completed", "blocked", "blocked_until_input"}
             and unlock_summary.get("open_blocker_count") == ledger_open_count
             and [step.get("id") for step in unlock_steps] == [item.get("id") for item in ledger_roadmap]
             and any(step.get("gate_state") == "blocked_until_input" for step in unlock_steps)

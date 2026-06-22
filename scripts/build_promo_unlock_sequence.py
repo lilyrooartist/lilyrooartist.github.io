@@ -62,10 +62,19 @@ def joined_unique(values: list[str]) -> str:
     return " ".join(seen)
 
 
+def has_skipped_input(preview_rows: list[dict]) -> bool:
+    return any(
+        row.get("preview_status") == "skipped" and row.get("input_needed")
+        for row in preview_rows
+    )
+
+
 def gate_state(roadmap: dict, preview_rows: list[dict]) -> str:
     preview_status = aggregate_preview_status(preview_rows)
     roadmap_status = roadmap.get("status") or ""
     if roadmap_status in {"completed", "clear"}:
+        if roadmap_status == "clear" and has_skipped_input(preview_rows):
+            return "blocked_until_input"
         return roadmap_status
     if preview_status == "preview_ok":
         return "ready_for_human_review"
@@ -83,6 +92,9 @@ def gate_reason(roadmap: dict, preview_rows: list[dict]) -> str:
     roadmap_status = roadmap.get("status") or ""
     if roadmap_status == "completed":
         return "This gate is already applied; it is kept here as evidence, not as a pending task."
+    if roadmap_status == "clear" and has_skipped_input(preview_rows):
+        missing = joined_unique([row.get("input_needed") or "" for row in preview_rows if row.get("input_needed")])
+        return f"Waiting for {missing} before this clear gate can produce completion evidence." if missing else "Input is missing before this clear gate can produce completion evidence."
     if roadmap_status == "clear":
         return "No action is needed for this gate."
     if preview_status == "input_missing":
@@ -155,8 +167,9 @@ def build_payload() -> dict:
         })
 
     ready = [step for step in steps if step.get("gate_state") == "ready_for_human_review"]
+    input_needed = [step for step in steps if step.get("gate_state") == "blocked_until_input"]
     blocked = [step for step in steps if step.get("gate_state") in {"blocked", "blocked_until_input", "preview_ready_with_blocker_warning"}]
-    current = ready[0] if ready else (blocked[0] if blocked else (steps[0] if steps else {}))
+    current = ready[0] if ready else (input_needed[0] if input_needed else (blocked[0] if blocked else (steps[0] if steps else {})))
     summary = {
         "step_count": len(steps),
         "ready_for_human_review_count": len(ready),

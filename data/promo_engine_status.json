@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T08:58:31.040214+00:00",
+  "generated_at": "2026-06-22T09:01:04.371646+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -2376,11 +2376,11 @@
       "commits_snapshots": true,
       "safe_refresh_command": "python3 scripts/refresh_promo_admin.py",
       "source_revision": {
-        "commit": "8e341861925611a14afd594b16db2ce53a358542",
-        "short_commit": "8e34186",
+        "commit": "3676f818e4d6212d896e2bc67bcd45564180a700",
+        "short_commit": "3676f81",
         "branch": "main",
-        "committed_at": "2026-06-22T16:54:36+08:00",
-        "source_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/commit/8e341861925611a14afd594b16db2ce53a358542"
+        "committed_at": "2026-06-22T16:58:52+08:00",
+        "source_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/commit/3676f818e4d6212d896e2bc67bcd45564180a700"
       },
       "latest_run_covers_source_commit": false,
       "latest_run_coverage_basis": "source_changed_after_latest_run",
@@ -2640,33 +2640,45 @@
       "available": true,
       "step_count": 5,
       "ready_for_human_review_count": 0,
-      "blocked_or_warning_count": 3,
+      "blocked_or_warning_count": 4,
       "total_projected_resolution_units": 10,
       "open_blocker_count": 10,
-      "current_step_id": "unlock-checked-scheduled-approval",
-      "current_gate_state": "blocked",
+      "current_step_id": "unlock-manual-distribution",
+      "current_gate_state": "blocked_until_input",
       "current_step": {
-        "order": 1,
-        "id": "unlock-checked-scheduled-approval",
-        "phase": "Approve checked scheduled rows",
+        "order": 2,
+        "id": "unlock-manual-distribution",
+        "phase": "Review and post manual YouTube Community rows",
         "owner": "tod",
-        "gate_state": "blocked",
-        "reason": "Blocked by: FP-AUTO-259.",
-        "blockers_resolved": 0,
+        "gate_state": "blocked_until_input",
+        "reason": "Waiting for public_post_url before this clear gate can produce completion evidence.",
+        "blockers_resolved": 3,
         "blocked_by": [
-          "FP-AUTO-259"
+          "FP-PLAN-TWELVE-DOLLARS-TIKTOK"
         ],
         "unlocks": [
-          "Instagram executor row can become publish-eligible after approval.",
-          "One scheduled YouTube Community row can move into manual distribution after approval."
+          "Manual YouTube Community promotion can publish without waiting for broken auto executors.",
+          "Published_Log.csv can be updated after public URLs exist."
         ],
-        "source_path": "data/scheduled_approval_packet.json",
-        "preview_status": "",
-        "preview_task_ids": [],
-        "input_needed": "",
-        "completion_evidence": "",
-        "guardrail": "",
-        "commands": [],
+        "source_path": "data/manual_distribution_packet.json",
+        "preview_status": "skipped",
+        "preview_task_ids": [
+          "manual-distribution-FP-AUTO-261",
+          "manual-distribution-FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+          "manual-distribution-FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
+        ],
+        "input_needed": "public_post_url",
+        "completion_evidence": "data/manual_distribution_packet.json should move approved rows from review_queue toward postable manual distribution, and data/published_log_reconciliation.json should remain gated until public URLs are logged.",
+        "guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review.",
+        "commands": [
+          {
+            "step": "preview",
+            "command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL",
+            "safe_to_run": true,
+            "status": "skipped",
+            "returncodes": []
+          }
+        ],
         "next_after_apply": ""
       },
       "ready_steps": [],
@@ -2693,6 +2705,42 @@
           "completion_evidence": "",
           "guardrail": "",
           "commands": [],
+          "next_after_apply": ""
+        },
+        {
+          "order": 2,
+          "id": "unlock-manual-distribution",
+          "phase": "Review and post manual YouTube Community rows",
+          "owner": "tod",
+          "gate_state": "blocked_until_input",
+          "reason": "Waiting for public_post_url before this clear gate can produce completion evidence.",
+          "blockers_resolved": 3,
+          "blocked_by": [
+            "FP-PLAN-TWELVE-DOLLARS-TIKTOK"
+          ],
+          "unlocks": [
+            "Manual YouTube Community promotion can publish without waiting for broken auto executors.",
+            "Published_Log.csv can be updated after public URLs exist."
+          ],
+          "source_path": "data/manual_distribution_packet.json",
+          "preview_status": "skipped",
+          "preview_task_ids": [
+            "manual-distribution-FP-AUTO-261",
+            "manual-distribution-FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+            "manual-distribution-FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
+          ],
+          "input_needed": "public_post_url",
+          "completion_evidence": "data/manual_distribution_packet.json should move approved rows from review_queue toward postable manual distribution, and data/published_log_reconciliation.json should remain gated until public URLs are logged.",
+          "guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review.",
+          "commands": [
+            {
+              "step": "preview",
+              "command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL",
+              "safe_to_run": true,
+              "status": "skipped",
+              "returncodes": []
+            }
+          ],
           "next_after_apply": ""
         },
         {
@@ -4561,33 +4609,45 @@
       "available": true,
       "step_count": 5,
       "ready_for_human_review_count": 0,
-      "blocked_or_warning_count": 3,
+      "blocked_or_warning_count": 4,
       "total_projected_resolution_units": 10,
       "open_blocker_count": 10,
-      "current_step_id": "unlock-checked-scheduled-approval",
-      "current_gate_state": "blocked",
+      "current_step_id": "unlock-manual-distribution",
+      "current_gate_state": "blocked_until_input",
       "current_step": {
-        "order": 1,
-        "id": "unlock-checked-scheduled-approval",
-        "phase": "Approve checked scheduled rows",
+        "order": 2,
+        "id": "unlock-manual-distribution",
+        "phase": "Review and post manual YouTube Community rows",
         "owner": "tod",
-        "gate_state": "blocked",
-        "reason": "Blocked by: FP-AUTO-259.",
-        "blockers_resolved": 0,
+        "gate_state": "blocked_until_input",
+        "reason": "Waiting for public_post_url before this clear gate can produce completion evidence.",
+        "blockers_resolved": 3,
         "blocked_by": [
-          "FP-AUTO-259"
+          "FP-PLAN-TWELVE-DOLLARS-TIKTOK"
         ],
         "unlocks": [
-          "Instagram executor row can become publish-eligible after approval.",
-          "One scheduled YouTube Community row can move into manual distribution after approval."
+          "Manual YouTube Community promotion can publish without waiting for broken auto executors.",
+          "Published_Log.csv can be updated after public URLs exist."
         ],
-        "source_path": "data/scheduled_approval_packet.json",
-        "preview_status": "",
-        "preview_task_ids": [],
-        "input_needed": "",
-        "completion_evidence": "",
-        "guardrail": "",
-        "commands": [],
+        "source_path": "data/manual_distribution_packet.json",
+        "preview_status": "skipped",
+        "preview_task_ids": [
+          "manual-distribution-FP-AUTO-261",
+          "manual-distribution-FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+          "manual-distribution-FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
+        ],
+        "input_needed": "public_post_url",
+        "completion_evidence": "data/manual_distribution_packet.json should move approved rows from review_queue toward postable manual distribution, and data/published_log_reconciliation.json should remain gated until public URLs are logged.",
+        "guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review.",
+        "commands": [
+          {
+            "step": "preview",
+            "command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL",
+            "safe_to_run": true,
+            "status": "skipped",
+            "returncodes": []
+          }
+        ],
         "next_after_apply": ""
       },
       "ready_steps": [],
@@ -4614,6 +4674,42 @@
           "completion_evidence": "",
           "guardrail": "",
           "commands": [],
+          "next_after_apply": ""
+        },
+        {
+          "order": 2,
+          "id": "unlock-manual-distribution",
+          "phase": "Review and post manual YouTube Community rows",
+          "owner": "tod",
+          "gate_state": "blocked_until_input",
+          "reason": "Waiting for public_post_url before this clear gate can produce completion evidence.",
+          "blockers_resolved": 3,
+          "blocked_by": [
+            "FP-PLAN-TWELVE-DOLLARS-TIKTOK"
+          ],
+          "unlocks": [
+            "Manual YouTube Community promotion can publish without waiting for broken auto executors.",
+            "Published_Log.csv can be updated after public URLs exist."
+          ],
+          "source_path": "data/manual_distribution_packet.json",
+          "preview_status": "skipped",
+          "preview_task_ids": [
+            "manual-distribution-FP-AUTO-261",
+            "manual-distribution-FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+            "manual-distribution-FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
+          ],
+          "input_needed": "public_post_url",
+          "completion_evidence": "data/manual_distribution_packet.json should move approved rows from review_queue toward postable manual distribution, and data/published_log_reconciliation.json should remain gated until public URLs are logged.",
+          "guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review.",
+          "commands": [
+            {
+              "step": "preview",
+              "command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL",
+              "safe_to_run": true,
+              "status": "skipped",
+              "returncodes": []
+            }
+          ],
           "next_after_apply": ""
         },
         {
@@ -6379,7 +6475,7 @@
       "missing": 0,
       "checked_no_change": 1,
       "gated_manual_pending": 0,
-      "checked_at": "2026-06-22T08:58:31.040214+00:00"
+      "checked_at": "2026-06-22T09:01:04.371646+00:00"
     },
     "sources": [
       {
@@ -6390,7 +6486,7 @@
         "max_age_hours": 72,
         "timestamp": "2026-06-17T09:25:00+00:00",
         "refresh_command": "Store checks are current; update data/distrokid_release_status.json when a verified public URL appears.",
-        "checked_at": "2026-06-22T08:58:31.040214+00:00",
+        "checked_at": "2026-06-22T09:01:04.371646+00:00",
         "checked_age_hours": 0.0,
         "evidence": "7 pending store links checked; no new public URLs found."
       },
@@ -6398,7 +6494,7 @@
         "name": "scheduled_posts",
         "path": "admin/future-posts.json",
         "status": "fresh",
-        "age_hours": 0.3,
+        "age_hours": 0.4,
         "max_age_hours": 72,
         "timestamp": "2026-06-22T08:37:42.638724+00:00",
         "refresh_command": "python3 scripts/sync_future_posts.py"
@@ -6416,7 +6512,7 @@
         "name": "published_log",
         "path": "admin/content/Published_Log.csv",
         "status": "fresh",
-        "age_hours": 0.5,
+        "age_hours": 0.6,
         "max_age_hours": 168,
         "timestamp": "2026-06-22T08:27:53.436018+00:00",
         "refresh_command": "Preview Worker export with python3 scripts/export_social_executions.py --dry-run; after review run python3 scripts/export_social_executions.py --refresh-admin. For manual posts, log the public URL with scripts/log_manual_distribution.py.",
@@ -6472,7 +6568,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-22T08:58:31.040214+00:00",
+        "timestamp": "2026-06-22T09:01:04.371646+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin"
       },
       {
@@ -6881,9 +6977,9 @@
     "Refresh manual metrics: 6 worksheet row(s) still need new_value entries (blocked_until_new_values_filled); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values.",
     "Collect experiment results: 5 post-result field(s) need new_value plus evidence_note; use admin/reports/experiment-result-clipboard.md; first priority: measure FP-AUTO-260 on Facebook. Direct preview template: python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run. Direct apply template after review: python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin. Then preview import with python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run after filling data/experiment_result_entry_wide_template.csv.",
     "Re-check checked-pending store links: 7 music site snapshot(s) still have no public URL; next recommended re-check after 2026-06-23T08:58:20.507749+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 then.",
-    "Current unlock gate: Approve checked scheduled rows (blocked); 0 ready, 3 blocked/warning; see data/promo_unlock_sequence.json.",
+    "Current unlock gate: Review and post manual YouTube Community rows (blocked_until_input); 0 ready, 4 blocked/warning; preview python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL; see data/promo_unlock_sequence.json.",
     "Review handoff preview health: 3 missing input; see data/human_handoff_resolution_preview.json.",
-    "Refresh automation coverage: latest scheduled run has not covered 8e34186; dispatch https://github.com/lilyrooartist/lilyrooartist.github.io/actions/workflows/promo-admin-refresh.yml or wait for the next scheduled run.",
+    "Refresh automation coverage: latest scheduled run has not covered 3676f81; dispatch https://github.com/lilyrooartist/lilyrooartist.github.io/actions/workflows/promo-admin-refresh.yml or wait for the next scheduled run.",
     "Preview approved backlog reschedule: python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24"
   ]
 }
