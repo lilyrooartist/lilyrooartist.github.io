@@ -1714,6 +1714,7 @@ def validate_generated_outputs(failures):
         cards = clipboard.get("post_cards") or []
         summary = clipboard.get("summary") or {}
         session = clipboard.get("session_manifest") or {}
+        first_runbook = clipboard.get("first_post_runbook") or {}
         first_url = clipboard.get("first_url_acceleration") or {}
         session_rows = session.get("rows") or []
         paste_text_files = summary.get("paste_text_files") or []
@@ -1759,6 +1760,25 @@ def validate_generated_outputs(failures):
             and session.get("result_handoff_report") == summary.get("result_handoff_report")
             and summary.get("first_measurement_due_after_hours") == 24
             and session.get("first_measurement_due_after_hours") == summary.get("first_measurement_due_after_hours")
+            and first_runbook.get("status") in {"ready_to_post_and_log", "clear"}
+            and (
+                not cards
+                or (
+                    first_runbook.get("post_id") == cards[0].get("id")
+                    and first_runbook.get("copy_source") == cards[0].get("paste_text_path")
+                    and first_runbook.get("public_url_slot") == "PUBLIC_URL"
+                    and first_runbook.get("url_worksheet_path") == summary.get("url_template_path")
+                    and first_runbook.get("log_preview_command_template") == cards[0].get("log_preview_command")
+                    and first_runbook.get("log_apply_command_template") == cards[0].get("log_apply_command")
+                    and first_runbook.get("partial_batch_apply_command") == summary.get("batch_log_partial_apply_command")
+                    and first_runbook.get("result_handoff_report") == summary.get("result_handoff_report")
+                    and first_runbook.get("first_measurement_due_after_hours") == summary.get("first_measurement_due_after_hours")
+                    and "real public URL" in (first_runbook.get("worksheet_update_instruction") or "")
+                    and "PUBLIC_URL" in (first_runbook.get("guardrail") or "")
+                    and any("Publish the Community post manually" in item for item in first_runbook.get("post_completion_checklist") or [])
+                    and any("Published_Log.csv" in item for item in first_runbook.get("completion_evidence") or [])
+                )
+            )
             and first_url.get("status") in {"ready_after_first_public_url", "clear"}
             and (
                 not cards
@@ -3154,6 +3174,7 @@ def validate_generated_outputs(failures):
             and status_posting_clipboard.get("public_url_reconciliation_command") == (clipboard_summary.get("public_url_reconciliation_command") or "")
             and status_posting_clipboard.get("public_url_reconciliation_apply_command") == (clipboard_summary.get("public_url_reconciliation_apply_command") or "")
             and status_posting_clipboard.get("pending_log_ids") == (clipboard_summary.get("pending_log_ids") or [])
+            and status_posting_clipboard.get("first_post_runbook") == (posting_clipboard.get("first_post_runbook") or {})
             and status_posting_clipboard.get("post_cards") == (posting_clipboard.get("post_cards") or [])
         ):
             ok("promo engine status mirrors manual posting clipboard")
@@ -3926,6 +3947,8 @@ def validate_generated_outputs(failures):
             "youtube_community_url_reconciliation.json",
             "session_manifest",
             "build_session_manifest",
+            "first_post_runbook",
+            "First Post Runbook",
             "first_url_acceleration",
             "First URL Acceleration",
             "Session Manifest",

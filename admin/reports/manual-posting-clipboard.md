@@ -1,6 +1,6 @@
 # Manual Posting Clipboard - Lily Roo
 
-Generated: 2026-06-22T11:51:05.501215Z
+Generated: 2026-06-22T11:59:31.005228Z
 
 ## Summary
 - Status: **ready_to_post**
@@ -34,6 +34,38 @@ Generated: 2026-06-22T11:51:05.501215Z
   - The YouTube Community post is published from the listed text and asset.
   - A real public YouTube Community URL replaces PUBLIC_URL in the logging command.
   - The post appears in Published_Log.csv with this manual distribution ID.
+
+## First Post Runbook
+- Status: **ready_to_post_and_log**
+- Post: `FP-AUTO-261` (I Learned It All in Fifteen Seconds)
+- Surface: https://www.youtube.com/@lilyroo.artist/community
+- Copy file: `data/manual-posting-cards/fp-auto-261.txt`
+- Asset: `assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg`
+- Public URL slot: `PUBLIC_URL`
+- URL worksheet: `data/manual_distribution_url_template.csv`
+- Worksheet update: Paste the real public URL into data/manual_distribution_url_template.csv public_url for FP-AUTO-261.
+- Preview URL log: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL'`
+- Apply URL log: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL' --apply --refresh-admin`
+- Partial batch apply: `python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --allow-partial --apply --refresh-admin`
+- Result handoff: `admin/reports/experiment-result-clipboard.md`
+- First measurement trigger: **after real public URL is logged**
+- First measurement due: **24 hours after URL logging**
+- Guardrail: Do not run an apply command with PUBLIC_URL, a blank URL, or a private/non-public post URL.
+- Checklist:
+  - Open the YouTube Community surface.
+  - Paste the copy exactly from copy_source.
+  - Attach the listed asset_source or asset_url.
+  - Publish the Community post manually.
+  - Copy the real public YouTube Community post URL.
+  - Run the preview command with the real URL.
+  - Run the apply command only after preview confirms the real URL.
+  - Confirm Published_Log.csv contains this manual distribution ID.
+  - Collect first visible metrics 24 hours after the public URL is logged.
+- Completion evidence:
+  - A real public YouTube Community post URL exists.
+  - The URL has replaced PUBLIC_URL in the preview/apply command or worksheet.
+  - Published_Log.csv contains this manual_distribution_id.
+  - The experiment result clipboard lists this post for its 24-hour measurement.
 
 ## First URL Acceleration
 - Status: **ready_after_first_public_url**
@@ -190,6 +222,7 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
 - Attach the listed asset URL or download/open the local asset path if needed.
 - Publish manually in YouTube Studio Community.
 - Copy the real public post URL.
+- Use the first-post runbook to preview and apply the first real public URL.
 - Run the preview logging command with the real URL, then run the apply command.
 - After the first public URL exists, use the first-url acceleration command so that post can enter result collection immediately.
 - Or rerun the public URL reconciliation command after posting to auto-detect confident public URLs.

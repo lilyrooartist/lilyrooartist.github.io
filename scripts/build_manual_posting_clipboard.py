@@ -220,6 +220,59 @@ def first_url_acceleration(cards: list[dict], summary: dict) -> dict:
     }
 
 
+def first_post_runbook(cards: list[dict], summary: dict) -> dict:
+    waiting = [card for card in cards if not (card.get("public_url") or "").strip()]
+    if not waiting:
+        return {
+            "status": "clear",
+            "post_id": "",
+            "next_action": "All manual post URLs are already logged.",
+            "guardrail": "No placeholder URLs are accepted.",
+        }
+    first = waiting[0]
+    bundle = first.get("posting_bundle") or {}
+    worksheet_path = summary.get("url_template_path") or "data/manual_distribution_url_template.csv"
+    return {
+        "status": "ready_to_post_and_log",
+        "post_id": first.get("id") or "",
+        "release": first.get("release") or "",
+        "platform": first.get("platform") or "",
+        "posting_surface": first.get("posting_surface") or summary.get("posting_surface") or "YouTube Studio Community",
+        "surface_url": first.get("public_community_url") or summary.get("public_community_url") or "",
+        "copy_source": first.get("paste_text_path") or "",
+        "asset_source": bundle.get("asset_source") or first.get("asset_local_path") or first.get("asset_url") or "",
+        "asset_url": first.get("asset_url") or "",
+        "paste_text": first.get("paste_text") or "",
+        "public_url_slot": "PUBLIC_URL",
+        "url_worksheet_path": worksheet_path,
+        "worksheet_update_instruction": f"Paste the real public URL into {worksheet_path} public_url for {first.get('id') or 'the first manual post'}.",
+        "log_preview_command_template": first.get("log_preview_command") or "",
+        "log_apply_command_template": first.get("log_apply_command") or "",
+        "partial_batch_apply_command": summary.get("batch_log_partial_apply_command") or "",
+        "result_handoff_report": summary.get("result_handoff_report") or "admin/reports/experiment-result-clipboard.md",
+        "first_measurement_due_after_hours": FIRST_MEASUREMENT_DUE_AFTER_HOURS,
+        "first_measurement_trigger": "after real public URL is logged",
+        "post_completion_checklist": [
+            "Open the YouTube Community surface.",
+            "Paste the copy exactly from copy_source.",
+            "Attach the listed asset_source or asset_url.",
+            "Publish the Community post manually.",
+            "Copy the real public YouTube Community post URL.",
+            "Run the preview command with the real URL.",
+            "Run the apply command only after preview confirms the real URL.",
+            "Confirm Published_Log.csv contains this manual distribution ID.",
+            "Collect first visible metrics 24 hours after the public URL is logged.",
+        ],
+        "completion_evidence": [
+            "A real public YouTube Community post URL exists.",
+            "The URL has replaced PUBLIC_URL in the preview/apply command or worksheet.",
+            "Published_Log.csv contains this manual_distribution_id.",
+            "The experiment result clipboard lists this post for its 24-hour measurement.",
+        ],
+        "guardrail": "Do not run an apply command with PUBLIC_URL, a blank URL, or a private/non-public post URL.",
+    }
+
+
 def build_payload() -> dict:
     packet = read_json(MANUAL_DISTRIBUTION, {})
     reconciliation = read_json(YOUTUBE_RECONCILIATION, {})
@@ -289,6 +342,7 @@ def build_payload() -> dict:
             ],
         }
     acceleration = first_url_acceleration(cards, summary)
+    runbook = first_post_runbook(cards, summary)
     return {
         "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "safe_mode": True,
@@ -299,6 +353,7 @@ def build_payload() -> dict:
             "published_log_target": "admin/content/Published_Log.csv",
         },
         "summary": summary,
+        "first_post_runbook": runbook,
         "first_url_acceleration": acceleration,
         "session_manifest": build_session_manifest(cards, summary),
         "post_cards": cards,
@@ -308,6 +363,7 @@ def build_payload() -> dict:
             "Attach the listed asset URL or download/open the local asset path if needed.",
             "Publish manually in YouTube Studio Community.",
             "Copy the real public post URL.",
+            "Use the first-post runbook to preview and apply the first real public URL.",
             "Run the preview logging command with the real URL, then run the apply command.",
             "After the first public URL exists, use the first-url acceleration command so that post can enter result collection immediately.",
             "Or rerun the public URL reconciliation command after posting to auto-detect confident public URLs.",
@@ -347,6 +403,7 @@ def write_paste_files(cards: list[dict]) -> None:
 def write_session_file(payload: dict) -> None:
     summary = payload.get("summary") or {}
     session = payload.get("session_manifest") or {}
+    runbook = payload.get("first_post_runbook") or {}
     acceleration = payload.get("first_url_acceleration") or {}
     lines = [
         "# YouTube Community Manual Posting Session",
@@ -361,6 +418,18 @@ def write_session_file(payload: dict) -> None:
     for step in session.get("posting_sequence") or []:
         lines.append(f"- {step}")
     lines.extend([
+        "",
+        "## First Post Runbook",
+        f"- Status: {runbook.get('status') or 'unknown'}",
+        f"- Post: {runbook.get('post_id') or 'not available'}",
+        f"- Copy file: {runbook.get('copy_source') or 'not available'}",
+        f"- Asset: {runbook.get('asset_source') or 'not available'}",
+        f"- URL worksheet: {runbook.get('url_worksheet_path') or 'not available'}",
+        f"- Worksheet update: {runbook.get('worksheet_update_instruction') or 'not available'}",
+        f"- Preview: {runbook.get('log_preview_command_template') or 'not available'}",
+        f"- Apply: {runbook.get('log_apply_command_template') or 'not available'}",
+        f"- Partial apply: {runbook.get('partial_batch_apply_command') or 'not available'}",
+        f"- Measurement trigger: {runbook.get('first_measurement_trigger') or 'not available'}",
         "",
         "## First URL Acceleration",
         f"- Status: {acceleration.get('status') or 'unknown'}",
@@ -403,6 +472,7 @@ def write_session_file(payload: dict) -> None:
 
 def build_markdown(payload: dict) -> str:
     summary = payload["summary"]
+    runbook = payload.get("first_post_runbook") or {}
     acceleration = payload.get("first_url_acceleration") or {}
     lines = [
         "# Manual Posting Clipboard - Lily Roo",
@@ -445,6 +515,34 @@ def build_markdown(payload: dict) -> str:
         if next_post.get("completion_evidence"):
             lines.append("- Completion evidence:")
             for item in next_post["completion_evidence"]:
+                lines.append(f"  - {item}")
+    if runbook:
+        lines.extend([
+            "",
+            "## First Post Runbook",
+            f"- Status: **{runbook.get('status', 'unknown')}**",
+            f"- Post: `{runbook.get('post_id') or 'not available'}` ({runbook.get('release') or 'unknown release'})",
+            f"- Surface: {runbook.get('surface_url') or 'not set'}",
+            f"- Copy file: `{runbook.get('copy_source') or 'not available'}`",
+            f"- Asset: `{runbook.get('asset_source') or 'not available'}`",
+            f"- Public URL slot: `{runbook.get('public_url_slot') or 'PUBLIC_URL'}`",
+            f"- URL worksheet: `{runbook.get('url_worksheet_path') or 'not available'}`",
+            f"- Worksheet update: {runbook.get('worksheet_update_instruction') or 'not available'}",
+            f"- Preview URL log: `{runbook.get('log_preview_command_template') or 'not available'}`",
+            f"- Apply URL log: `{runbook.get('log_apply_command_template') or 'not available'}`",
+            f"- Partial batch apply: `{runbook.get('partial_batch_apply_command') or 'not available'}`",
+            f"- Result handoff: `{runbook.get('result_handoff_report') or 'not available'}`",
+            f"- First measurement trigger: **{runbook.get('first_measurement_trigger') or 'after URL logging'}**",
+            f"- First measurement due: **{runbook.get('first_measurement_due_after_hours') or summary.get('first_measurement_due_after_hours')} hours after URL logging**",
+            f"- Guardrail: {runbook.get('guardrail') or 'Use only real public URLs.'}",
+        ])
+        if runbook.get("post_completion_checklist"):
+            lines.append("- Checklist:")
+            for item in runbook["post_completion_checklist"]:
+                lines.append(f"  - {item}")
+        if runbook.get("completion_evidence"):
+            lines.append("- Completion evidence:")
+            for item in runbook["completion_evidence"]:
                 lines.append(f"  - {item}")
     lines.extend([
         "",

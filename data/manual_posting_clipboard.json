@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T11:51:05.501215Z",
+  "generated_at": "2026-06-22T11:59:31.005228Z",
   "safe_mode": true,
   "source": {
     "manual_distribution_packet": "data/manual_distribution_packet.json",
@@ -56,6 +56,45 @@
         "The post appears in Published_Log.csv with this manual distribution ID."
       ]
     }
+  },
+  "first_post_runbook": {
+    "status": "ready_to_post_and_log",
+    "post_id": "FP-AUTO-261",
+    "release": "I Learned It All in Fifteen Seconds",
+    "platform": "YouTube Community",
+    "posting_surface": "YouTube Studio Community",
+    "surface_url": "https://www.youtube.com/@lilyroo.artist/community",
+    "copy_source": "data/manual-posting-cards/fp-auto-261.txt",
+    "asset_source": "assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
+    "asset_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
+    "paste_text": "New transmission: I Learned It All in Fifteen Seconds is live. Remastered cover art, same suspicious amount of feeling.\n\nStream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube: https://www.youtube.com/@lilyroo.artist | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
+    "public_url_slot": "PUBLIC_URL",
+    "url_worksheet_path": "data/manual_distribution_url_template.csv",
+    "worksheet_update_instruction": "Paste the real public URL into data/manual_distribution_url_template.csv public_url for FP-AUTO-261.",
+    "log_preview_command_template": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL'",
+    "log_apply_command_template": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL' --apply --refresh-admin",
+    "partial_batch_apply_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --allow-partial --apply --refresh-admin",
+    "result_handoff_report": "admin/reports/experiment-result-clipboard.md",
+    "first_measurement_due_after_hours": 24,
+    "first_measurement_trigger": "after real public URL is logged",
+    "post_completion_checklist": [
+      "Open the YouTube Community surface.",
+      "Paste the copy exactly from copy_source.",
+      "Attach the listed asset_source or asset_url.",
+      "Publish the Community post manually.",
+      "Copy the real public YouTube Community post URL.",
+      "Run the preview command with the real URL.",
+      "Run the apply command only after preview confirms the real URL.",
+      "Confirm Published_Log.csv contains this manual distribution ID.",
+      "Collect first visible metrics 24 hours after the public URL is logged."
+    ],
+    "completion_evidence": [
+      "A real public YouTube Community post URL exists.",
+      "The URL has replaced PUBLIC_URL in the preview/apply command or worksheet.",
+      "Published_Log.csv contains this manual_distribution_id.",
+      "The experiment result clipboard lists this post for its 24-hour measurement."
+    ],
+    "guardrail": "Do not run an apply command with PUBLIC_URL, a blank URL, or a private/non-public post URL."
   },
   "first_url_acceleration": {
     "status": "ready_after_first_public_url",
@@ -507,6 +546,7 @@
     "Attach the listed asset URL or download/open the local asset path if needed.",
     "Publish manually in YouTube Studio Community.",
     "Copy the real public post URL.",
+    "Use the first-post runbook to preview and apply the first real public URL.",
     "Run the preview logging command with the real URL, then run the apply command.",
     "After the first public URL exists, use the first-url acceleration command so that post can enter result collection immediately.",
     "Or rerun the public URL reconciliation command after posting to auto-detect confident public URLs.",

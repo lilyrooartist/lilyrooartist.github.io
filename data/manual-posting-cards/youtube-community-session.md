@@ -1,6 +1,6 @@
 # YouTube Community Manual Posting Session
 
-Generated: 2026-06-22T11:51:05.501215Z
+Generated: 2026-06-22T11:59:31.005228Z
 Surface: https://www.youtube.com/@lilyroo.artist/community
 URL worksheet: data/manual_distribution_url_template.csv
 Partial apply: python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --allow-partial --apply --refresh-admin
@@ -11,6 +11,18 @@ Partial apply: python3 scripts/log_manual_distribution.py --from-csv data/manual
 - After each publish, copy the real public URL into the URL worksheet.
 - Run the batch preview command; use partial apply if only some rows have public URLs.
 - After logging, collect the first 24-hour metrics from the result handoff report.
+
+## First Post Runbook
+- Status: ready_to_post_and_log
+- Post: FP-AUTO-261
+- Copy file: data/manual-posting-cards/fp-auto-261.txt
+- Asset: assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg
+- URL worksheet: data/manual_distribution_url_template.csv
+- Worksheet update: Paste the real public URL into data/manual_distribution_url_template.csv public_url for FP-AUTO-261.
+- Preview: python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL'
+- Apply: python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL' --apply --refresh-admin
+- Partial apply: python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --allow-partial --apply --refresh-admin
+- Measurement trigger: after real public URL is logged
 
 ## First URL Acceleration
 - Status: ready_after_first_public_url
