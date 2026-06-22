@@ -1,6 +1,6 @@
 # TikTok Repair Runbook - Lily Roo
 
-Generated: 2026-06-22T07:01:05.094324Z
+Generated: 2026-06-22T07:01:53.831663Z
 
 ## Summary
 - Status: **blocked**
@@ -20,16 +20,17 @@ Generated: 2026-06-22T07:01:05.094324Z
 - Local draft upload preview: `python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run`
 - Earliest TikTok API path: video.upload inbox draft; final public URL still requires human publish and URL logging.
 - Handoff template: `data/tiktok_secret_handoff_template.env`
-- Local secret env exists: **True**
-- Initialize local secret env: `not needed`
+- Local secret env exists: **False**
+- Initialize local secret env: `mkdir -p ../secrets && test -f ../secrets/social_api.env || cp data/tiktok_secret_handoff_template.env ../secrets/social_api.env`
 - Ready to apply worker secrets: **False**
 - Ready to clear backlog gate: **False**
 - Public posting approval apply: `not available until local approval is confirmed`
 - Public posting approval deploy: `not available until local approval is confirmed`
 
 ## Sequence
-- **Prepare local env - Create the local TikTok secret env file**: `pass`
+- **Prepare local env - Create the local TikTok secret env file**: `ready`
   - Create the local social API env file from the blank TikTok handoff template before adding TikTok app values. The command is non-overwriting, so an existing env file is preserved.
+  - Command: `mkdir -p ../secrets && test -f ../secrets/social_api.env || cp data/tiktok_secret_handoff_template.env ../secrets/social_api.env`
 - **Collect credentials - Add TikTok OAuth credentials locally**: `blocked`
   - Use the redacted TikTok handoff template to populate the local social API env file with the TikTok client key, client secret, redirect URI, and refresh-token path. Values stay local and are never written to generated reports.
   - Blocked by: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN
