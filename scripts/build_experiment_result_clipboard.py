@@ -15,6 +15,7 @@ OUT = ROOT / "data" / "experiment_result_clipboard.json"
 REPORT = ROOT / "admin" / "reports" / "experiment-result-clipboard.md"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
 RESULT_FIELDS = ["views", "likes", "comments", "shares", "saves", "subs_delta"]
+DEFAULT_FIRST_MEASUREMENT_DUE_AFTER_HOURS = 24
 
 
 def read_json(path: Path, fallback):
@@ -301,6 +302,7 @@ def measurement_priority_cards(metric_cards: list[dict], missing_cards: list[dic
 def post_log_measurement_handoff(manual_posting: dict, summary: dict, missing_cards: list[dict]) -> dict:
     session = manual_posting.get("session_manifest") or {}
     session_rows = session.get("rows") or []
+    default_due_after_hours = session.get("first_measurement_due_after_hours") or DEFAULT_FIRST_MEASUREMENT_DUE_AFTER_HOURS
     format_by_post_id = {
         card.get("post_id") or "": card.get("experiment_format") or ""
         for card in missing_cards
@@ -312,6 +314,7 @@ def post_log_measurement_handoff(manual_posting: dict, summary: dict, missing_ca
         platform = row.get("platform") or "YouTube Community"
         release = row.get("release") or ""
         experiment_format = format_by_post_id.get(post_id) or "Unknown format"
+        due_after_hours = row.get("first_measurement_due_after_hours") or default_due_after_hours
         handoff_rows.append({
             "sequence": row.get("sequence"),
             "post_id": post_id,
@@ -322,6 +325,8 @@ def post_log_measurement_handoff(manual_posting: dict, summary: dict, missing_ca
             "public_url": row.get("public_url") or "PUBLIC_URL",
             "source_row": "after Published_Log.csv append",
             "fields_to_collect": RESULT_FIELDS,
+            "first_measurement_due_after_hours": due_after_hours,
+            "first_measurement_timing": f"Collect first visible metrics {due_after_hours} hours after the public URL is logged.",
             "wide_entry_template": {
                 "experiment_format": experiment_format,
                 "post_id": post_id,
@@ -347,6 +352,7 @@ def post_log_measurement_handoff(manual_posting: dict, summary: dict, missing_ca
         "entry_csv_path": summary.get("entry_csv_path") or "",
         "wide_entry_csv_path": summary.get("wide_entry_csv_path") or "",
         "field_count_per_post": len(RESULT_FIELDS),
+        "first_measurement_due_after_hours": default_due_after_hours,
         "handoff_row_count": len(handoff_rows),
         "pending_post_ids": [row.get("post_id") for row in handoff_rows],
         "wide_import_preview_command": summary.get("wide_result_import_preview_command") or "",
@@ -355,14 +361,14 @@ def post_log_measurement_handoff(manual_posting: dict, summary: dict, missing_ca
         "handoff_sequence": [
             "Post each manual-session card and log the real public URL.",
             "Refresh Admin so Published_Log.csv rows become experiment result cards.",
-            "Collect first visible metrics from YouTube Studio Community analytics.",
+            f"Collect first visible metrics from YouTube Studio Community analytics {default_due_after_hours} hours after URL logging.",
             "Fill one wide entry CSV row per logged Community post.",
             "Run the wide result import preview before applying metrics.",
         ],
         "completion_evidence": [
             "Published_Log.csv contains the manual-session post URL.",
             "data/experiment_result_clipboard.json shows the post as a metric card instead of a missing-public-url card.",
-            "data/experiment_result_entry_wide_template.csv has values plus evidence_note for the post.",
+            "data/experiment_result_entry_wide_template.csv has first-measurement values plus evidence_note for the post.",
             "The wide import preview reports only the intended metric updates.",
         ],
         "guardrail": "This handoff is a template; do not import metrics until a real public URL and source_row exist.",
@@ -509,6 +515,7 @@ def build_markdown(payload: dict) -> str:
     lines.append(f"- Manual posting report: `{handoff.get('manual_posting_report') or 'not available'}`")
     lines.append(f"- Wide entry CSV after URL logging: `{handoff.get('wide_entry_csv_path') or 'not available'}`")
     lines.append(f"- Wide import preview after logging: `{handoff.get('wide_import_preview_command') or 'not available'}`")
+    lines.append(f"- First measurement due: **{handoff.get('first_measurement_due_after_hours') or DEFAULT_FIRST_MEASUREMENT_DUE_AFTER_HOURS} hours after URL logging**")
     lines.append(f"- Guardrail: {handoff.get('guardrail') or 'Wait for real public URLs.'}")
     if handoff.get("handoff_sequence"):
         lines.append("- Handoff sequence:")
@@ -517,7 +524,9 @@ def build_markdown(payload: dict) -> str:
     if handoff.get("rows"):
         lines.append("- Handoff rows:")
         for row in handoff["rows"]:
-            lines.append(f"  - `{row.get('sequence')}` `{row.get('post_id')}` {row.get('platform')} - collect `{', '.join(row.get('fields_to_collect') or [])}` after `{row.get('public_url')}` is real.")
+            lines.append(f"  - `{row.get('sequence')}` `{row.get('post_id')}` {row.get('platform')} - collect `{', '.join(row.get('fields_to_collect') or [])}` {row.get('first_measurement_due_after_hours')}h after `{row.get('public_url')}` is real.")
+            if row.get("first_measurement_timing"):
+                lines.append(f"    - Timing: {row['first_measurement_timing']}")
             if row.get("log_preview_command"):
                 lines.append(f"    - Log preview: `{row['log_preview_command']}`")
     if handoff.get("completion_evidence"):

@@ -1,6 +1,6 @@
 # YouTube Community Manual Posting Session
 
-Generated: 2026-06-22T11:31:16.511150Z
+Generated: 2026-06-22T11:39:39.315291Z
 Surface: https://www.youtube.com/@lilyroo.artist/community
 URL worksheet: data/manual_distribution_url_template.csv
 Partial apply: python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --allow-partial --apply --refresh-admin
@@ -10,12 +10,12 @@ Partial apply: python3 scripts/log_manual_distribution.py --from-csv data/manual
 - Post each session row in sequence using its copy_source and asset_source.
 - After each publish, copy the real public URL into the URL worksheet.
 - Run the batch preview command; use partial apply if only some rows have public URLs.
-- After logging, collect first metrics from the result handoff report.
+- After logging, collect the first 24-hour metrics from the result handoff report.
 
 ## First URL Acceleration
 - Status: ready_after_first_public_url
 - First post: FP-AUTO-261
-- Why: Logging the first public URL immediately lets that post enter the result-collection queue without waiting for the full batch.
+- Why: Logging the first public URL immediately lets that post enter the 24-hour result-collection queue without waiting for the full batch.
 - Preview: python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL'
 - Partial apply: python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --allow-partial --apply --refresh-admin
 - Measurement report: admin/reports/experiment-result-clipboard.md
@@ -67,4 +67,4 @@ Public URL:
 - Each session row has a real public YouTube Community URL.
 - The URL worksheet has no remaining blank public_url cells for these IDs.
 - Published_Log.csv contains each session ID with a manual_distribution_id note.
-- The experiment result clipboard lists the logged posts for first measurement collection.
+- The experiment result clipboard lists the logged posts for first 24-hour measurement collection.

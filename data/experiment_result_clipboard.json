@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T11:31:17.057011Z",
+  "generated_at": "2026-06-22T11:39:39.893179Z",
   "safe_mode": true,
   "source": {
     "experiment_result_collection_packet": "data/experiment_result_collection_packet.json",
@@ -561,6 +561,7 @@
     "entry_csv_path": "data/experiment_result_entry_template.csv",
     "wide_entry_csv_path": "data/experiment_result_entry_wide_template.csv",
     "field_count_per_post": 6,
+    "first_measurement_due_after_hours": 24,
     "handoff_row_count": 3,
     "pending_post_ids": [
       "FP-AUTO-261",
@@ -587,6 +588,8 @@
           "saves",
           "subs_delta"
         ],
+        "first_measurement_due_after_hours": 24,
+        "first_measurement_timing": "Collect first visible metrics 24 hours after the public URL is logged.",
         "wide_entry_template": {
           "experiment_format": "YouTube Community archive/playlist CTA",
           "post_id": "FP-AUTO-261",
@@ -638,6 +641,8 @@
           "saves",
           "subs_delta"
         ],
+        "first_measurement_due_after_hours": 24,
+        "first_measurement_timing": "Collect first visible metrics 24 hours after the public URL is logged.",
         "wide_entry_template": {
           "experiment_format": "YouTube Community archive/playlist CTA",
           "post_id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
@@ -689,6 +694,8 @@
           "saves",
           "subs_delta"
         ],
+        "first_measurement_due_after_hours": 24,
+        "first_measurement_timing": "Collect first visible metrics 24 hours after the public URL is logged.",
         "wide_entry_template": {
           "experiment_format": "YouTube Community archive/playlist CTA",
           "post_id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
@@ -727,14 +734,14 @@
     "handoff_sequence": [
       "Post each manual-session card and log the real public URL.",
       "Refresh Admin so Published_Log.csv rows become experiment result cards.",
-      "Collect first visible metrics from YouTube Studio Community analytics.",
+      "Collect first visible metrics from YouTube Studio Community analytics 24 hours after URL logging.",
       "Fill one wide entry CSV row per logged Community post.",
       "Run the wide result import preview before applying metrics."
     ],
     "completion_evidence": [
       "Published_Log.csv contains the manual-session post URL.",
       "data/experiment_result_clipboard.json shows the post as a metric card instead of a missing-public-url card.",
-      "data/experiment_result_entry_wide_template.csv has values plus evidence_note for the post.",
+      "data/experiment_result_entry_wide_template.csv has first-measurement values plus evidence_note for the post.",
       "The wide import preview reports only the intended metric updates."
     ],
     "guardrail": "This handoff is a template; do not import metrics until a real public URL and source_row exist."

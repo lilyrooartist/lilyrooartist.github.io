@@ -1744,6 +1744,8 @@ def validate_generated_outputs(failures):
             and session.get("batch_log_partial_apply_command") == summary.get("batch_log_partial_apply_command")
             and session.get("public_url_reconciliation_command") == summary.get("public_url_reconciliation_command")
             and session.get("result_handoff_report") == summary.get("result_handoff_report")
+            and summary.get("first_measurement_due_after_hours") == 24
+            and session.get("first_measurement_due_after_hours") == summary.get("first_measurement_due_after_hours")
             and first_url.get("status") in {"ready_after_first_public_url", "clear"}
             and (
                 not cards
@@ -1752,13 +1754,14 @@ def validate_generated_outputs(failures):
                     and first_url.get("single_preview_command") == cards[0].get("log_preview_command")
                     and first_url.get("partial_batch_apply_command") == summary.get("batch_log_partial_apply_command")
                     and first_url.get("measurement_report") == summary.get("result_handoff_report")
+                    and first_url.get("first_measurement_due_after_hours") == summary.get("first_measurement_due_after_hours")
                     and "real public YouTube Community post URL" in (first_url.get("guardrail") or "")
                 )
             )
             and any("Open the YouTube Community surface once" in item for item in session.get("posting_sequence") or [])
             and any("Published_Log.csv" in item for item in session.get("completion_evidence") or [])
             and "real public URL" in (session.get("guardrail") or "")
-            and all(row.get("sequence") and row.get("id") and row.get("copy_source") and row.get("asset_source") and row.get("public_url_required") is True and "log_manual_distribution.py" in (row.get("preview_command_template") or "") and "--apply --refresh-admin" in (row.get("apply_command_template") or "") for row in session_rows)
+            and all(row.get("sequence") and row.get("id") and row.get("copy_source") and row.get("asset_source") and row.get("public_url_required") is True and row.get("first_measurement_due_after_hours") == 24 and "log_manual_distribution.py" in (row.get("preview_command_template") or "") and "--apply --refresh-admin" in (row.get("apply_command_template") or "") for row in session_rows)
             and all(
                 card.get("paste_text")
                 and card.get("paste_text_path")
@@ -1773,9 +1776,11 @@ def validate_generated_outputs(failures):
                 and "manual_distribution_id=" in (card.get("log_notes") or "")
                 and (card.get("result_handoff") or {}).get("status") == "blocked_until_public_url_logged"
                 and (card.get("result_handoff") or {}).get("source_report") == "admin/reports/experiment-result-clipboard.md"
+                and (card.get("result_handoff") or {}).get("first_measurement_due_after_hours") == 24
                 and (card.get("posting_bundle") or {}).get("copy_source") == card.get("paste_text_path")
                 and (card.get("posting_bundle") or {}).get("asset_source")
                 and (card.get("posting_bundle") or {}).get("public_url_required") is True
+                and (card.get("posting_bundle") or {}).get("first_measurement_due_after_hours") == 24
                 and "log_manual_distribution.py" in ((card.get("posting_bundle") or {}).get("preview_command_template") or "")
                 and "--apply --refresh-admin" in ((card.get("posting_bundle") or {}).get("apply_command_template") or "")
                 and any("real public Community post URL" in item for item in (card.get("posting_bundle") or {}).get("operator_sequence") or [])
@@ -2110,11 +2115,13 @@ def validate_generated_outputs(failures):
             and handoff.get("manual_posting_report") == "admin/reports/manual-posting-clipboard.md"
             and handoff.get("wide_entry_csv_path") == (clipboard.get("summary") or {}).get("wide_entry_csv_path")
             and handoff.get("field_count_per_post") == 6
+            and handoff.get("first_measurement_due_after_hours") == 24
             and handoff.get("pending_post_ids") == [row.get("post_id") for row in handoff_rows]
             and handoff.get("wide_import_preview_command") == (clipboard.get("summary") or {}).get("wide_result_import_preview_command")
             and len(handoff_rows) == len(manual_session.get("rows") or [])
-            and all(row.get("post_id") and row.get("platform") and row.get("public_url") == "PUBLIC_URL" and row.get("fields_to_collect") == ["views", "likes", "comments", "shares", "saves", "subs_delta"] and row.get("experiment_format") == missing_format_by_post_id.get(row.get("post_id") or "") and (row.get("wide_entry_template") or {}).get("experiment_format") == row.get("experiment_format") and (row.get("wide_entry_template") or {}).get("post_url") == "PUBLIC_URL" and "log_manual_distribution.py" in (row.get("log_preview_command") or "") for row in handoff_rows)
+            and all(row.get("post_id") and row.get("platform") and row.get("public_url") == "PUBLIC_URL" and row.get("fields_to_collect") == ["views", "likes", "comments", "shares", "saves", "subs_delta"] and row.get("first_measurement_due_after_hours") == 24 and "24 hours" in (row.get("first_measurement_timing") or "") and row.get("experiment_format") == missing_format_by_post_id.get(row.get("post_id") or "") and (row.get("wide_entry_template") or {}).get("experiment_format") == row.get("experiment_format") and (row.get("wide_entry_template") or {}).get("post_url") == "PUBLIC_URL" and "log_manual_distribution.py" in (row.get("log_preview_command") or "") for row in handoff_rows)
             and any("wide entry CSV" in item for item in handoff.get("handoff_sequence") or [])
+            and any("24 hours" in item for item in handoff.get("handoff_sequence") or [])
             and any("Published_Log.csv" in item for item in handoff.get("completion_evidence") or [])
             and "real public URL" in (handoff.get("guardrail") or "")
             and any(item.get("action") == "post_and_log_public_url" for item in priority_cards)

@@ -15,6 +15,7 @@ SESSION_FILE = PASTE_CARD_DIR / "youtube-community-session.md"
 OUT = ROOT / "data" / "manual_posting_clipboard.json"
 REPORT = ROOT / "admin" / "reports" / "manual-posting-clipboard.md"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
+FIRST_MEASUREMENT_DUE_AFTER_HOURS = 24
 
 
 def read_json(path: Path, fallback):
@@ -66,7 +67,8 @@ def post_card(row: dict) -> dict:
         "status": "blocked_until_public_url_logged",
         "source_report": "admin/reports/experiment-result-clipboard.md",
         "reason": "Experiment result collection starts after the real public URL is logged in Published_Log.csv.",
-        "first_measurement_window": "Collect first public performance values after the post has had time to accumulate views.",
+        "first_measurement_due_after_hours": FIRST_MEASUREMENT_DUE_AFTER_HOURS,
+        "first_measurement_window": "Collect first public performance values 24 hours after the public URL is logged.",
     }
     paste_text = posting.get("paste_text") or row.get("copy_block") or ""
     asset_url = posting.get("asset_url") or row.get("asset_download_url") or ""
@@ -103,7 +105,8 @@ def post_card(row: dict) -> dict:
             "url_placeholder": log_effect.get("url_placeholder") or "PUBLIC_URL",
             "preview_command_template": log_preview_command,
             "apply_command_template": log_apply_command,
-            "result_collection_trigger": "Log the public URL, then use admin/reports/experiment-result-clipboard.md after the post has accumulated first metrics.",
+            "result_collection_trigger": "Log the public URL, then use admin/reports/experiment-result-clipboard.md for the first 24-hour measurement.",
+            "first_measurement_due_after_hours": FIRST_MEASUREMENT_DUE_AFTER_HOURS,
             "operator_sequence": [
                 "Open the YouTube Community surface.",
                 "Paste the copy from copy_source.",
@@ -119,13 +122,13 @@ def post_card(row: dict) -> dict:
             f"Run the log preview command: {log_preview_command}",
             f"Run the log apply command after preview passes: {log_apply_command}",
             "Refresh Admin and confirm this card moves out of the manual posting queue.",
-            "Open the experiment result clipboard when first metrics are available.",
+            "Open the experiment result clipboard 24 hours after URL logging for the first measurement.",
         ],
         "completion_evidence": [
             "A real public YouTube Community post URL exists.",
             "The URL is logged with scripts/log_manual_distribution.py.",
             "admin/content/Published_Log.csv contains this manual_distribution_id.",
-            "The experiment result clipboard can request first measurement values for this post.",
+            "The experiment result clipboard can request first measurement values at the 24-hour readout for this post.",
         ],
     }
 
@@ -149,6 +152,7 @@ def build_session_manifest(cards: list[dict], summary: dict) -> dict:
             "preview_command_template": card.get("log_preview_command") or "",
             "apply_command_template": card.get("log_apply_command") or "",
             "result_collection_trigger": (card.get("posting_bundle") or {}).get("result_collection_trigger") or "",
+            "first_measurement_due_after_hours": (card.get("posting_bundle") or {}).get("first_measurement_due_after_hours") or FIRST_MEASUREMENT_DUE_AFTER_HOURS,
             "completion_evidence": card.get("completion_evidence") or [],
         })
     waiting = [row for row in rows if row.get("public_url_required")]
@@ -168,19 +172,20 @@ def build_session_manifest(cards: list[dict], summary: dict) -> dict:
         "batch_log_partial_apply_command": summary.get("batch_log_partial_apply_command") or "",
         "public_url_reconciliation_command": summary.get("public_url_reconciliation_command") or "",
         "result_handoff_report": summary.get("result_handoff_report") or "admin/reports/experiment-result-clipboard.md",
+        "first_measurement_due_after_hours": FIRST_MEASUREMENT_DUE_AFTER_HOURS,
         "rows": rows,
         "posting_sequence": [
             "Open the YouTube Community surface once.",
             "Post each session row in sequence using its copy_source and asset_source.",
             "After each publish, copy the real public URL into the URL worksheet.",
             "Run the batch preview command; use partial apply if only some rows have public URLs.",
-            "After logging, collect first metrics from the result handoff report.",
+            "After logging, collect the first 24-hour metrics from the result handoff report.",
         ],
         "completion_evidence": [
             "Each session row has a real public YouTube Community URL.",
             "The URL worksheet has no remaining blank public_url cells for these IDs.",
             "Published_Log.csv contains each session ID with a manual_distribution_id note.",
-            "The experiment result clipboard lists the logged posts for first measurement collection.",
+            "The experiment result clipboard lists the logged posts for first 24-hour measurement collection.",
         ],
         "guardrail": "Do not mark the session complete until every row has a real public URL logged.",
     }
@@ -208,7 +213,8 @@ def first_url_acceleration(cards: list[dict], summary: dict) -> dict:
         "partial_batch_apply_command": summary.get("batch_log_partial_apply_command") or "",
         "measurement_report": summary.get("result_handoff_report") or "admin/reports/experiment-result-clipboard.md",
         "measurement_preview_command": "python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run",
-        "why": "Logging the first public URL immediately lets that post enter the result-collection queue without waiting for the full batch.",
+        "first_measurement_due_after_hours": FIRST_MEASUREMENT_DUE_AFTER_HOURS,
+        "why": "Logging the first public URL immediately lets that post enter the 24-hour result-collection queue without waiting for the full batch.",
         "next_action": "Post the first card, paste its real public URL into the worksheet, run the preview, then apply with --allow-partial.",
         "guardrail": "Use only a real public YouTube Community post URL; never apply PUBLIC_URL or blank worksheet rows.",
     }
@@ -254,6 +260,7 @@ def build_payload() -> dict:
         "public_url_reconciliation_command": "python3 scripts/reconcile_youtube_community_urls.py",
         "public_url_reconciliation_apply_command": reconciliation_summary.get("apply_command") or "",
         "result_handoff_report": "admin/reports/experiment-result-clipboard.md",
+        "first_measurement_due_after_hours": FIRST_MEASUREMENT_DUE_AFTER_HOURS,
         "next_action": (
             "Post each card in YouTube Community, copy the real public URL, then log it."
             if cards
@@ -418,6 +425,7 @@ def build_markdown(payload: dict) -> str:
         f"- Reconciliation status: **{summary.get('public_url_reconciliation_status')}** ({summary.get('public_url_reconciliation_match_count')} match(es))",
         f"- Reconciliation apply if matches exist: `{summary.get('public_url_reconciliation_apply_command') or 'not available'}`",
         f"- Result handoff after URL logging: `{summary.get('result_handoff_report') or 'not available'}`",
+        f"- First measurement due: **{summary.get('first_measurement_due_after_hours')} hours after public URL logging**",
         f"- Next action: {summary['next_action']}",
     ]
     next_post = summary.get("next_post_now") or {}
@@ -432,6 +440,7 @@ def build_markdown(payload: dict) -> str:
             f"- Preview URL log: `{next_post.get('log_preview_command') or 'not available'}`",
             f"- Apply URL log: `{next_post.get('log_apply_command') or 'not available'}`",
             f"- Result handoff: `{next_post.get('result_handoff_report') or 'not available'}`",
+            f"- First measurement due: **{summary.get('first_measurement_due_after_hours')} hours after URL logging**",
         ])
         if next_post.get("completion_evidence"):
             lines.append("- Completion evidence:")
@@ -448,6 +457,7 @@ def build_markdown(payload: dict) -> str:
         f"- Apply first URL with partial batch: `{acceleration.get('partial_batch_apply_command') or 'not available'}`",
         f"- Measurement report: `{acceleration.get('measurement_report') or 'not available'}`",
         f"- Measurement preview: `{acceleration.get('measurement_preview_command') or 'not available'}`",
+        f"- First measurement due: **{acceleration.get('first_measurement_due_after_hours') or summary.get('first_measurement_due_after_hours')} hours after URL logging**",
         f"- Why: {acceleration.get('why') or 'not available'}",
         f"- Guardrail: {acceleration.get('guardrail') or 'Use only real public URLs.'}",
         "",
@@ -467,6 +477,7 @@ def build_markdown(payload: dict) -> str:
         f"- Partial apply: `{session.get('batch_log_partial_apply_command') or 'not available'}`",
         f"- URL reconciliation: `{session.get('public_url_reconciliation_command') or 'not available'}`",
         f"- Result handoff: `{session.get('result_handoff_report') or 'not available'}`",
+        f"- First measurement due: **{session.get('first_measurement_due_after_hours') or summary.get('first_measurement_due_after_hours')} hours after URL logging**",
         f"- Guardrail: {session.get('guardrail') or 'Do not complete without public URLs.'}",
         "",
     ])
@@ -481,7 +492,7 @@ def build_markdown(payload: dict) -> str:
     if session.get("rows"):
         lines.append("- Session rows:")
         for row in session["rows"]:
-            lines.append(f"  - `{row.get('sequence')}` `{row.get('id')}` `{row.get('status')}` copy `{row.get('copy_source')}` asset `{row.get('asset_source')}`")
+            lines.append(f"  - `{row.get('sequence')}` `{row.get('id')}` `{row.get('status')}` first measurement `{row.get('first_measurement_due_after_hours')}h` copy `{row.get('copy_source')}` asset `{row.get('asset_source')}`")
     lines.extend([
         "",
         "## Cards",
@@ -527,6 +538,7 @@ def build_markdown(payload: dict) -> str:
             lines.extend([
                 f"- Result handoff: `{result_handoff.get('status')}` via `{result_handoff.get('source_report')}`",
                 f"- Result handoff reason: {result_handoff.get('reason')}",
+                f"- First measurement due: **{result_handoff.get('first_measurement_due_after_hours')} hours after URL logging**",
             ])
         if card.get("after_posting_checklist"):
             lines.append("- After posting checklist:")

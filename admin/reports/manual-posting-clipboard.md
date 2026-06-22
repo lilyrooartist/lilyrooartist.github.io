@@ -1,6 +1,6 @@
 # Manual Posting Clipboard - Lily Roo
 
-Generated: 2026-06-22T11:31:16.511150Z
+Generated: 2026-06-22T11:39:39.315291Z
 
 ## Summary
 - Status: **ready_to_post**
@@ -18,6 +18,7 @@ Generated: 2026-06-22T11:31:16.511150Z
 - Reconciliation status: **waiting_for_public_posts** (0 match(es))
 - Reconciliation apply if matches exist: `not available`
 - Result handoff after URL logging: `admin/reports/experiment-result-clipboard.md`
+- First measurement due: **24 hours after public URL logging**
 - Next action: Post each card in YouTube Community, copy the real public URL, then log it.
 
 ## Post Now
@@ -28,6 +29,7 @@ Generated: 2026-06-22T11:31:16.511150Z
 - Preview URL log: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL'`
 - Apply URL log: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL' --apply --refresh-admin`
 - Result handoff: `admin/reports/experiment-result-clipboard.md`
+- First measurement due: **24 hours after URL logging**
 - Completion evidence:
   - The YouTube Community post is published from the listed text and asset.
   - A real public YouTube Community URL replaces PUBLIC_URL in the logging command.
@@ -42,7 +44,8 @@ Generated: 2026-06-22T11:31:16.511150Z
 - Apply first URL with partial batch: `python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --allow-partial --apply --refresh-admin`
 - Measurement report: `admin/reports/experiment-result-clipboard.md`
 - Measurement preview: `python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run`
-- Why: Logging the first public URL immediately lets that post enter the result-collection queue without waiting for the full batch.
+- First measurement due: **24 hours after URL logging**
+- Why: Logging the first public URL immediately lets that post enter the 24-hour result-collection queue without waiting for the full batch.
 - Guardrail: Use only a real public YouTube Community post URL; never apply PUBLIC_URL or blank worksheet rows.
 
 ## Session Manifest
@@ -58,6 +61,7 @@ Generated: 2026-06-22T11:31:16.511150Z
 - Partial apply: `python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --allow-partial --apply --refresh-admin`
 - URL reconciliation: `python3 scripts/reconcile_youtube_community_urls.py`
 - Result handoff: `admin/reports/experiment-result-clipboard.md`
+- First measurement due: **24 hours after URL logging**
 - Guardrail: Do not mark the session complete until every row has a real public URL logged.
 
 - Posting sequence:
@@ -65,16 +69,16 @@ Generated: 2026-06-22T11:31:16.511150Z
   - Post each session row in sequence using its copy_source and asset_source.
   - After each publish, copy the real public URL into the URL worksheet.
   - Run the batch preview command; use partial apply if only some rows have public URLs.
-  - After logging, collect first metrics from the result handoff report.
+  - After logging, collect the first 24-hour metrics from the result handoff report.
 - Completion evidence:
   - Each session row has a real public YouTube Community URL.
   - The URL worksheet has no remaining blank public_url cells for these IDs.
   - Published_Log.csv contains each session ID with a manual_distribution_id note.
-  - The experiment result clipboard lists the logged posts for first measurement collection.
+  - The experiment result clipboard lists the logged posts for first 24-hour measurement collection.
 - Session rows:
-  - `1` `FP-AUTO-261` `waiting_for_post_and_public_url` copy `data/manual-posting-cards/fp-auto-261.txt` asset `assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg`
-  - `2` `FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY` `waiting_for_post_and_public_url` copy `data/manual-posting-cards/fp-plan-twelve-dollars-youtube-community.txt` asset `assets/albums/twelve-dollars/art/04-twelve-dollars.jpg`
-  - `3` `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY` `waiting_for_post_and_public_url` copy `data/manual-posting-cards/fp-plan-analog-myth-youtube-community.txt` asset `assets/albums/analog-myth/art/03-analog-myth.jpg`
+  - `1` `FP-AUTO-261` `waiting_for_post_and_public_url` first measurement `24h` copy `data/manual-posting-cards/fp-auto-261.txt` asset `assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg`
+  - `2` `FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY` `waiting_for_post_and_public_url` first measurement `24h` copy `data/manual-posting-cards/fp-plan-twelve-dollars-youtube-community.txt` asset `assets/albums/twelve-dollars/art/04-twelve-dollars.jpg`
+  - `3` `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY` `waiting_for_post_and_public_url` first measurement `24h` copy `data/manual-posting-cards/fp-plan-analog-myth-youtube-community.txt` asset `assets/albums/analog-myth/art/03-analog-myth.jpg`
 
 ## Cards
 ### 1. I Learned It All in Fifteen Seconds - YouTube Community
@@ -103,15 +107,16 @@ Stream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: htt
 - Log notes: `manual_distribution_id=FP-AUTO-261; source=data/manual_distribution_packet.json`
 - Bundle preview command template: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL'`
 - Bundle apply command template: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL' --apply --refresh-admin`
-- Bundle result trigger: Log the public URL, then use admin/reports/experiment-result-clipboard.md after the post has accumulated first metrics.
+- Bundle result trigger: Log the public URL, then use admin/reports/experiment-result-clipboard.md for the first 24-hour measurement.
 - Result handoff: `blocked_until_public_url_logged` via `admin/reports/experiment-result-clipboard.md`
 - Result handoff reason: Experiment result collection starts after the real public URL is logged in Published_Log.csv.
+- First measurement due: **24 hours after URL logging**
 - After posting checklist:
   - Copy the real public YouTube Community post URL.
   - Run the log preview command: python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL'
   - Run the log apply command after preview passes: python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL' --apply --refresh-admin
   - Refresh Admin and confirm this card moves out of the manual posting queue.
-  - Open the experiment result clipboard when first metrics are available.
+  - Open the experiment result clipboard 24 hours after URL logging for the first measurement.
 ### 2. Twelve Dollars - YouTube Community
 - ID: `FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY`
 - Status: `ready_for_manual_post`
@@ -135,15 +140,16 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNT
 - Log notes: `manual_distribution_id=FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY; source=data/manual_distribution_packet.json`
 - Bundle preview command template: `python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url 'PUBLIC_URL'`
 - Bundle apply command template: `python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url 'PUBLIC_URL' --apply --refresh-admin`
-- Bundle result trigger: Log the public URL, then use admin/reports/experiment-result-clipboard.md after the post has accumulated first metrics.
+- Bundle result trigger: Log the public URL, then use admin/reports/experiment-result-clipboard.md for the first 24-hour measurement.
 - Result handoff: `blocked_until_public_url_logged` via `admin/reports/experiment-result-clipboard.md`
 - Result handoff reason: Experiment result collection starts after the real public URL is logged in Published_Log.csv.
+- First measurement due: **24 hours after URL logging**
 - After posting checklist:
   - Copy the real public YouTube Community post URL.
   - Run the log preview command: python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url 'PUBLIC_URL'
   - Run the log apply command after preview passes: python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url 'PUBLIC_URL' --apply --refresh-admin
   - Refresh Admin and confirm this card moves out of the manual posting queue.
-  - Open the experiment result clipboard when first metrics are available.
+  - Open the experiment result clipboard 24 hours after URL logging for the first measurement.
 ### 3. Analog Myth - YouTube Community
 - ID: `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY`
 - Status: `ready_for_manual_post`
@@ -167,15 +173,16 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
 - Log notes: `manual_distribution_id=FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY; source=data/manual_distribution_packet.json`
 - Bundle preview command template: `python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url 'PUBLIC_URL'`
 - Bundle apply command template: `python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url 'PUBLIC_URL' --apply --refresh-admin`
-- Bundle result trigger: Log the public URL, then use admin/reports/experiment-result-clipboard.md after the post has accumulated first metrics.
+- Bundle result trigger: Log the public URL, then use admin/reports/experiment-result-clipboard.md for the first 24-hour measurement.
 - Result handoff: `blocked_until_public_url_logged` via `admin/reports/experiment-result-clipboard.md`
 - Result handoff reason: Experiment result collection starts after the real public URL is logged in Published_Log.csv.
+- First measurement due: **24 hours after URL logging**
 - After posting checklist:
   - Copy the real public YouTube Community post URL.
   - Run the log preview command: python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url 'PUBLIC_URL'
   - Run the log apply command after preview passes: python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url 'PUBLIC_URL' --apply --refresh-admin
   - Refresh Admin and confirm this card moves out of the manual posting queue.
-  - Open the experiment result clipboard when first metrics are available.
+  - Open the experiment result clipboard 24 hours after URL logging for the first measurement.
 
 ## Operator Steps
 - Open the YouTube Community surface.

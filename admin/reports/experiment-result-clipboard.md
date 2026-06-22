@@ -1,6 +1,6 @@
 # Experiment Result Clipboard - Lily Roo
 
-Generated: 2026-06-22T11:31:17.057011Z
+Generated: 2026-06-22T11:39:39.893179Z
 
 ## Summary
 - Status: **needs_values**
@@ -113,24 +113,28 @@ Generated: 2026-06-22T11:31:17.057011Z
 - Manual posting report: `admin/reports/manual-posting-clipboard.md`
 - Wide entry CSV after URL logging: `data/experiment_result_entry_wide_template.csv`
 - Wide import preview after logging: `python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run`
+- First measurement due: **24 hours after URL logging**
 - Guardrail: This handoff is a template; do not import metrics until a real public URL and source_row exist.
 - Handoff sequence:
   - Post each manual-session card and log the real public URL.
   - Refresh Admin so Published_Log.csv rows become experiment result cards.
-  - Collect first visible metrics from YouTube Studio Community analytics.
+  - Collect first visible metrics from YouTube Studio Community analytics 24 hours after URL logging.
   - Fill one wide entry CSV row per logged Community post.
   - Run the wide result import preview before applying metrics.
 - Handoff rows:
-  - `1` `FP-AUTO-261` YouTube Community - collect `views, likes, comments, shares, saves, subs_delta` after `PUBLIC_URL` is real.
+  - `1` `FP-AUTO-261` YouTube Community - collect `views, likes, comments, shares, saves, subs_delta` 24h after `PUBLIC_URL` is real.
+    - Timing: Collect first visible metrics 24 hours after the public URL is logged.
     - Log preview: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url 'PUBLIC_URL'`
-  - `2` `FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY` YouTube Community - collect `views, likes, comments, shares, saves, subs_delta` after `PUBLIC_URL` is real.
+  - `2` `FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY` YouTube Community - collect `views, likes, comments, shares, saves, subs_delta` 24h after `PUBLIC_URL` is real.
+    - Timing: Collect first visible metrics 24 hours after the public URL is logged.
     - Log preview: `python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url 'PUBLIC_URL'`
-  - `3` `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY` YouTube Community - collect `views, likes, comments, shares, saves, subs_delta` after `PUBLIC_URL` is real.
+  - `3` `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY` YouTube Community - collect `views, likes, comments, shares, saves, subs_delta` 24h after `PUBLIC_URL` is real.
+    - Timing: Collect first visible metrics 24 hours after the public URL is logged.
     - Log preview: `python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url 'PUBLIC_URL'`
 - Completion evidence:
   - Published_Log.csv contains the manual-session post URL.
   - data/experiment_result_clipboard.json shows the post as a metric card instead of a missing-public-url card.
-  - data/experiment_result_entry_wide_template.csv has values plus evidence_note for the post.
+  - data/experiment_result_entry_wide_template.csv has first-measurement values plus evidence_note for the post.
   - The wide import preview reports only the intended metric updates.
 
 ## Missing Public URLs
