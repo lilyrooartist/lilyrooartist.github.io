@@ -619,18 +619,48 @@ def experiment_format_key(row: dict) -> str:
     return "Text story hook + link CTA"
 
 
+def candidate_row_id(row: dict) -> str:
+    content_id = str(row.get("content_id") or row.get("id") or "").strip()
+    if content_id:
+        return content_id
+    notes = str(row.get("notes") or "")
+    for part in notes.replace(";", " ").split():
+        if part.startswith("manual_distribution_id=") or part.startswith("queue_id="):
+            return part.split("=", 1)[1].strip()
+    return str(row.get("post_id_or_url") or "").strip()
+
+
 def top_format_candidates(published_rows: list[dict], scheduled_rows: list[dict], promo_plan: dict) -> list[dict]:
     candidates: dict[str, dict] = {}
+    active_rows = list(scheduled_rows) + list(promo_plan.get("posts") or [])
+    active_rows_by_id = {
+        candidate_row_id(row): row
+        for row in active_rows
+        if candidate_row_id(row)
+    }
+    active_formats = {
+        experiment_format_key(row)
+        for row in active_rows
+    }
 
     def bucket(row: dict, source: str):
-        key = format_key(row)
+        basis_row = row
+        row_id = candidate_row_id(row)
+        if source == "published" and row_id in active_rows_by_id:
+            basis_row = active_rows_by_id[row_id]
+        key = experiment_format_key(basis_row)
+        if active_formats and key not in active_formats:
+            return
         candidate = candidates.setdefault(key, {
             "format": key,
+            "format_basis": "experiment_format",
             "published_count": 0,
             "scheduled_count": 0,
             "planned_count": 0,
             "measured_result_total": 0,
             "measured_post_count": 0,
+            "unmeasured_published_count": 0,
+            "mapped_active_post_ids": [],
             "example_hooks": [],
         })
         if source == "published":
@@ -639,20 +669,24 @@ def top_format_candidates(published_rows: list[dict], scheduled_rows: list[dict]
             if metric_total:
                 candidate["measured_result_total"] += metric_total
                 candidate["measured_post_count"] += 1
+            else:
+                candidate["unmeasured_published_count"] += 1
         elif source == "scheduled":
             candidate["scheduled_count"] += 1
         else:
             candidate["planned_count"] += 1
-        hook = str(row.get("hook") or row.get("text") or row.get("imagery") or "").strip()
+        if row_id and row_id not in candidate["mapped_active_post_ids"] and len(candidate["mapped_active_post_ids"]) < 5:
+            candidate["mapped_active_post_ids"].append(row_id)
+        hook = str(basis_row.get("hook") or basis_row.get("text") or basis_row.get("imagery") or row.get("hook") or row.get("text") or "").strip()
         if hook and hook not in candidate["example_hooks"] and len(candidate["example_hooks"]) < 2:
             candidate["example_hooks"].append(hook[:160])
 
-    for row in published_rows:
-        bucket(row, "published")
     for row in scheduled_rows:
         bucket(row, "scheduled")
     for row in promo_plan.get("posts") or []:
         bucket(row, "planned")
+    for row in published_rows:
+        bucket(row, "published")
 
     ranked = []
     for candidate in candidates.values():
@@ -673,7 +707,10 @@ def top_format_candidates(published_rows: list[dict], scheduled_rows: list[dict]
         candidate["decision_note"] = (
             "Enough measured posts to compare as a repeatable format."
             if candidate["evidence_status"] == "winner_ready"
-            else f"Need {candidate['needed_measured_posts']} more measured post(s) before this can be called a winning format."
+            else (
+                f"Need {candidate['needed_measured_posts']} more measured post(s) before this can be called a winning format; "
+                f"{candidate['unmeasured_published_count']} published post(s) in this format still need result metrics."
+            )
         )
         candidate["score"] = (
             candidate["measured_result_total"] * 10
