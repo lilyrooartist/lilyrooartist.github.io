@@ -1,42 +1,31 @@
 {
   "ok": true,
-  "updated_at": "2026-06-22T06:04:46.844258Z",
+  "updated_at": "2026-06-22T06:13:23.764054Z",
   "source": "lilyroo-social-scheduler-dry-run",
   "url": "https://www.lilyroo.com/api/social/scheduler/dry-run",
   "http_status": 200,
   "error": null,
   "auth_method": "bearer",
-  "requested_scheduled_time": "2026-06-22T06:04:46.392954Z",
+  "requested_scheduled_time": "2026-06-22T06:13:23.523497Z",
   "dry_run": true,
-  "checked_at": "2026-06-22T06:04:46.392Z",
+  "checked_at": "2026-06-22T06:13:23.523Z",
   "summary": {
-    "due_count": 6,
-    "result_count": 6,
+    "due_count": 5,
+    "result_count": 5,
     "would_post_count": 0,
-    "blocked_count": 6,
+    "blocked_count": 5,
     "status_counts": {
       "blocked": 2,
-      "failed": 3,
+      "failed": 2,
       "skipped": 1
     },
     "platform_counts": {
-      "Instagram": 3,
+      "Instagram": 2,
       "TikTok": 2,
       "YouTube Community": 1
     },
     "would_post": [],
     "blocked": [
-      {
-        "post_id": "FP-AUTO-258",
-        "platform": "Instagram",
-        "status": "failed",
-        "reason": "max_attempts_exceeded",
-        "post_type": "",
-        "attempts": 3,
-        "updated_at": "2026-06-22T06:04:47.010Z",
-        "source": "dry-run",
-        "error_summary": "Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page"
-      },
       {
         "post_id": "FP-AUTO-259",
         "platform": "TikTok",
@@ -44,7 +33,7 @@
         "reason": "not_approved",
         "post_type": "",
         "attempts": 0,
-        "updated_at": "2026-06-22T06:04:47.014Z",
+        "updated_at": "2026-06-22T06:13:23.924Z",
         "source": "dry-run",
         "error_summary": ""
       },
@@ -55,7 +44,7 @@
         "reason": "manual_only",
         "post_type": "",
         "attempts": 0,
-        "updated_at": "2026-06-22T06:04:47.020Z",
+        "updated_at": "2026-06-22T06:13:23.936Z",
         "source": "dry-run",
         "error_summary": ""
       },
@@ -66,7 +55,7 @@
         "reason": "tiktok_credentials_missing",
         "post_type": "",
         "attempts": 0,
-        "updated_at": "2026-06-22T06:04:47.024Z",
+        "updated_at": "2026-06-22T06:13:23.943Z",
         "source": "dry-run",
         "error_summary": ""
       },
@@ -77,7 +66,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-06-22T06:04:47.029Z",
+        "updated_at": "2026-06-22T06:13:23.949Z",
         "source": "dry-run",
         "error_summary": "Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page"
       },
@@ -88,7 +77,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-06-22T06:04:47.035Z",
+        "updated_at": "2026-06-22T06:13:23.957Z",
         "source": "dry-run",
         "error_summary": "Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page"
       }
@@ -96,8 +85,8 @@
   },
   "payload": {
     "ok": true,
-    "due_count": 6,
-    "result_count": 6
+    "due_count": 5,
+    "result_count": 5
   },
   "action_needed": ""
 }

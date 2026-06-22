@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T06:08:20.751469Z",
+  "generated_at": "2026-06-22T06:13:25.425557Z",
   "safe_mode": true,
   "source": {
     "promo_operations_packet": "data/promo_operations_packet.json",
@@ -41,9 +41,11 @@
       "retry_reset_apply_command": "python3 scripts/reset_social_execution_state.py FP-AUTO-263 --apply",
       "retry_reset_note": "Run the dry-run verification command first. Apply the retry reset only when the worker reports the row is executable.",
       "readiness": {
-        "ready": true,
+        "ready": false,
         "api": "facebook-login",
-        "account_id_source": "FB_PAGE_ID"
+        "account_id_source": "FB_PAGE_ID",
+        "account_resolved": false,
+        "account_resolution_reason": "instagram_business_account_unresolved"
       },
       "missing_secrets": [],
       "local_missing_secrets": [],
@@ -93,9 +95,11 @@
       "retry_reset_apply_command": "python3 scripts/reset_social_execution_state.py FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --apply",
       "retry_reset_note": "Run the dry-run verification command first. Apply the retry reset only when the worker reports the row is executable.",
       "readiness": {
-        "ready": true,
+        "ready": false,
         "api": "facebook-login",
-        "account_id_source": "FB_PAGE_ID"
+        "account_id_source": "FB_PAGE_ID",
+        "account_resolved": false,
+        "account_resolution_reason": "instagram_business_account_unresolved"
       },
       "missing_secrets": [],
       "local_missing_secrets": [],

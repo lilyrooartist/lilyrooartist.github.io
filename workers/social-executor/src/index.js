@@ -60,7 +60,7 @@ async function handleRequest(request, env) {
       return jsonResponse({ ok: false, error: authError.message }, authError.status, request, env);
     }
 
-    return jsonResponse(readiness(env), 200, request, env);
+    return jsonResponse(await readiness(env), 200, request, env);
   }
 
   if (url.pathname === "/api/social/metrics" && request.method === "GET") {
@@ -399,9 +399,12 @@ async function validateExecutablePost(payload, env, options = {}) {
   }
 
   if (platform.includes("instagram")) {
-    if (!instagramAccessToken(env)) return blocked("blocked", "instagram_credentials_missing");
+    const accessToken = instagramAccessToken(env);
+    if (!accessToken) return blocked("blocked", "instagram_credentials_missing");
     if (!url) return blocked("blocked", "instagram_media_required");
     if (!isImageUrl(url) && !isVideoUrl(url)) return blocked("blocked", "instagram_media_type_unsupported");
+    const account = await instagramAccountValidation(env, accessToken);
+    if (!account.ok) return blocked("blocked", account.reason);
     return executable();
   }
 
@@ -858,6 +861,27 @@ async function instagramBusinessAccountId(env, accessToken) {
   return id;
 }
 
+async function instagramAccountValidation(env, accessToken) {
+  if (isInstagramLoginToken(accessToken)) {
+    return { ok: true, account_id_source: text(env.IG_BUSINESS_ACCOUNT_ID) ? "IG_BUSINESS_ACCOUNT_ID" : "me" };
+  }
+  if (text(env.IG_BUSINESS_ACCOUNT_ID)) {
+    return { ok: true, account_id_source: "IG_BUSINESS_ACCOUNT_ID" };
+  }
+  if (!text(env.FB_PAGE_ID)) {
+    return { ok: false, reason: "instagram_account_id_missing" };
+  }
+  try {
+    await instagramBusinessAccountId(env, accessToken);
+    return { ok: true, account_id_source: "FB_PAGE_ID" };
+  } catch (error) {
+    if (/instagram_business_account/i.test(error?.message || "")) {
+      return { ok: false, reason: "instagram_business_account_unresolved" };
+    }
+    return { ok: false, reason: "instagram_account_validation_failed" };
+  }
+}
+
 async function postTikTok(payload, env) {
   const url = videoUrl(payload, env);
   if (!url || !isHttpUrl(url)) {
@@ -1223,7 +1247,7 @@ function requireOAuth1(env, label) {
   requireEnv(env, ["X_API_KEY", "X_API_SECRET", "X_ACCESS_TOKEN", "X_ACCESS_TOKEN_SECRET"], label);
 }
 
-function readiness(env) {
+async function readiness(env) {
   const xOAuth1 = ["X_API_KEY", "X_API_SECRET", "X_ACCESS_TOKEN", "X_ACCESS_TOKEN_SECRET"];
   const xOAuth1Present = xOAuth1.every((name) => Boolean(env[name]));
   const xTextPostingReady = Boolean(env.X_USER_ACCESS_TOKEN) || xOAuth1Present;
@@ -1231,6 +1255,9 @@ function readiness(env) {
   const youtubeMissing = youtubeRequired.filter((name) => !env[name]);
   const igToken = instagramAccessToken(env);
   const instagramUsesLoginApi = isInstagramLoginToken(igToken);
+  const instagramAccount = igToken
+    ? await instagramAccountValidation(env, igToken)
+    : { ok: false, reason: "instagram_credentials_missing" };
 
   return {
     ok: true,
@@ -1252,9 +1279,11 @@ function readiness(env) {
         ready: Boolean(env.META_LONG_LIVED_TOKEN && env.FB_PAGE_ID),
       },
       instagram: {
-        ready: Boolean(igToken && (instagramUsesLoginApi || env.IG_BUSINESS_ACCOUNT_ID || env.FB_PAGE_ID)),
+        ready: Boolean(igToken && instagramAccount.ok),
         api: instagramUsesLoginApi ? "instagram-login" : "facebook-login",
         account_id_source: env.IG_BUSINESS_ACCOUNT_ID ? "IG_BUSINESS_ACCOUNT_ID" : (instagramUsesLoginApi ? "me" : (env.FB_PAGE_ID ? "FB_PAGE_ID" : "")),
+        account_resolved: Boolean(instagramAccount.ok),
+        account_resolution_reason: instagramAccount.ok ? "" : instagramAccount.reason,
       },
       tiktok: {
         ready: tiktokCredentialsReady(env),

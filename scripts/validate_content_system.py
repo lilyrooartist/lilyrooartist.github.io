@@ -3265,6 +3265,17 @@ def validate_generated_outputs(failures):
         ok("social executor supports gated TikTok direct posting and inbox draft upload mode")
     else:
         fail("social executor missing TikTok draft-upload/direct-post mode split", failures)
+    if (
+        "instagramAccountValidation" in worker_text
+        and "instagram_business_account_unresolved" in worker_text
+        and "instagram_account_id_missing" in worker_text
+        and "account_resolved" in worker_text
+        and "account_resolution_reason" in worker_text
+        and "await instagramBusinessAccountId(env, accessToken)" in worker_text
+    ):
+        ok("social executor validates Instagram account resolution before retry-ready dry runs")
+    else:
+        fail("social executor missing Instagram account-resolution dry-run guard", failures)
     if SOCIAL_EXECUTION_RESET.exists():
         reset_text = SOCIAL_EXECUTION_RESET.read_text(encoding="utf-8")
         if (

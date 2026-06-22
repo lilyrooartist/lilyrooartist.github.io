@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "updated_at": "2026-06-22T06:04:44.338052Z",
+  "updated_at": "2026-06-22T06:13:22.357384Z",
   "source": "lilyroo-social-executor-readiness",
   "url": "https://www.lilyroo.com/api/social/readiness",
   "http_status": 200,
@@ -10,16 +10,16 @@
   "summary": {
     "ready_platforms": [
       "X",
-      "Instagram",
       "Facebook",
       "YouTube Community"
     ],
     "blocked_platforms": [
+      "Instagram",
       "TikTok"
     ],
     "platforms": {
       "X": true,
-      "Instagram": true,
+      "Instagram": false,
       "TikTok": false,
       "Facebook": true,
       "YouTube Community": true
@@ -45,9 +45,11 @@
         "ready": true
       },
       "instagram": {
-        "ready": true,
+        "ready": false,
         "api": "facebook-login",
-        "account_id_source": "FB_PAGE_ID"
+        "account_id_source": "FB_PAGE_ID",
+        "account_resolved": false,
+        "account_resolution_reason": "instagram_business_account_unresolved"
       },
       "tiktok": {
         "ready": false,
