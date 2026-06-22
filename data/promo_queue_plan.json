@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T04:29:32.482263-04:00",
+  "generated_at": "2026-06-22T04:35:54.127128-04:00",
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
     "release_status": "data/distrokid_release_status.json"
@@ -11,29 +11,44 @@
   "approval_commands": {
     "all_review": "python3 scripts/approve_promo_queue_plan.py --all --refresh-admin",
     "by_release": {
+      "Analog Myth": "python3 scripts/approve_promo_queue_plan.py --release \"Analog Myth\" --refresh-admin",
       "Twelve Dollars": "python3 scripts/approve_promo_queue_plan.py --release \"Twelve Dollars\" --refresh-admin"
     },
     "by_platform": {
-      "TikTok": "python3 scripts/approve_promo_queue_plan.py --platform \"TikTok\" --refresh-admin"
+      "Facebook": "python3 scripts/approve_promo_queue_plan.py --platform \"Facebook\" --refresh-admin",
+      "TikTok": "python3 scripts/approve_promo_queue_plan.py --platform \"TikTok\" --refresh-admin",
+      "X": "python3 scripts/approve_promo_queue_plan.py --platform \"X\" --refresh-admin"
     }
   },
   "apply_commands": {
     "all_approved": "python3 scripts/apply_promo_queue_plan.py --apply --refresh-admin",
     "by_release": {
+      "Analog Myth": "python3 scripts/apply_promo_queue_plan.py --apply --release \"Analog Myth\" --refresh-admin",
       "Twelve Dollars": "python3 scripts/apply_promo_queue_plan.py --apply --release \"Twelve Dollars\" --refresh-admin"
     },
     "by_platform": {
-      "TikTok": "python3 scripts/apply_promo_queue_plan.py --apply --platform \"TikTok\" --refresh-admin"
+      "Facebook": "python3 scripts/apply_promo_queue_plan.py --apply --platform \"Facebook\" --refresh-admin",
+      "TikTok": "python3 scripts/apply_promo_queue_plan.py --apply --platform \"TikTok\" --refresh-admin",
+      "X": "python3 scripts/apply_promo_queue_plan.py --apply --platform \"X\" --refresh-admin"
     }
   },
   "summary": {
-    "draft_posts": 1,
+    "draft_posts": 3,
     "approved_posts": 0,
-    "review_posts": 1,
-    "auto_posts": 1,
+    "review_posts": 3,
+    "auto_posts": 3,
     "manual_posts": 0,
-    "selected_hard_cta_posts": 1,
+    "selected_hard_cta_posts": 3,
     "releases": {
+      "Analog Myth": {
+        "draft_posts": 2,
+        "approved_posts": 0,
+        "review_posts": 2,
+        "platforms": [
+          "Facebook",
+          "X"
+        ]
+      },
       "Twelve Dollars": {
         "draft_posts": 1,
         "approved_posts": 0,
@@ -44,7 +59,17 @@
       }
     },
     "platforms": {
+      "Facebook": {
+        "draft_posts": 1,
+        "approved_posts": 0,
+        "review_posts": 1
+      },
       "TikTok": {
+        "draft_posts": 1,
+        "approved_posts": 0,
+        "review_posts": 1
+      },
+      "X": {
         "draft_posts": 1,
         "approved_posts": 0,
         "review_posts": 1
@@ -53,7 +78,7 @@
   },
   "apply_preview": {
     "ready_to_apply_posts": 0,
-    "review_posts": 1,
+    "review_posts": 3,
     "scheduled_duplicate_posts": 0,
     "ready_ids": [],
     "scheduled_duplicate_ids": []
@@ -63,7 +88,8 @@
     "updated_at": "2026-06-22T08:29:29.962036Z",
     "ok": true,
     "counts": {
-      "blocked": 1
+      "blocked": 1,
+      "ready_after_approval": 2
     },
     "rows": [
       {
@@ -73,6 +99,22 @@
         "approved": "no",
         "state": "blocked",
         "message": "Executor credentials or platform setup are not ready."
+      },
+      {
+        "id": "FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK",
+        "platform": "X",
+        "execution_mode": "auto",
+        "approved": "no",
+        "state": "ready_after_approval",
+        "message": "Ready after approval."
+      },
+      {
+        "id": "FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK",
+        "platform": "Facebook",
+        "execution_mode": "auto",
+        "approved": "no",
+        "state": "ready_after_approval",
+        "message": "Ready after approval."
       }
     ]
   },
@@ -102,6 +144,66 @@
       "desired_privacy": "PUBLIC_TO_EVERYONE",
       "reason": "Promo health flagged missing TikTok coverage for Twelve Dollars.",
       "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --refresh-admin"
+    },
+    {
+      "id": "FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK",
+      "scheduled_at": "2026-06-24T10:15:00-04:00",
+      "platform": "X",
+      "song": "Analog Myth",
+      "imagery": "Analog Myth winner-format follow-up",
+      "imagery_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
+      "clip_url": "",
+      "text": "Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
+      "drafts": [
+        "Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
+        "Analog Myth is the clock lying politely while the songs keep receipts. Full remastered playlist is live.",
+        "Time broke, so Lily Roo made an album out of the pieces. The archive version is live now."
+      ],
+      "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+      "selected_cta_strength": "hard_goal",
+      "selected_copy_strategy": "growth_first_subscriber_cta",
+      "winner_format": "Release-art image + story hook",
+      "winner_format_replication_note": "The row reuses release-art imagery from the measured winner while preserving the queue-wide subscriber-growth CTA gate.",
+      "winner_format_evidence_status": "winner_ready",
+      "winner_format_average_result": 5.0,
+      "x_media_key": "",
+      "media_key": "analog-myth-cover",
+      "approved": "no",
+      "execution_mode": "auto",
+      "post_type": "image",
+      "desired_privacy": "",
+      "reason": "Replicate winner-ready format 'Release-art image + story hook' on a ready platform while blocked channels stay visible.",
+      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --refresh-admin"
+    },
+    {
+      "id": "FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK",
+      "scheduled_at": "2026-06-25T11:20:00-04:00",
+      "platform": "Facebook",
+      "song": "Analog Myth",
+      "imagery": "Analog Myth winner-format follow-up",
+      "imagery_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
+      "clip_url": "",
+      "text": "Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
+      "drafts": [
+        "Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
+        "Analog Myth is live on YouTube now, with remastered videos and the album order finally lined up the way the transmission wants it.",
+        "Time broke, so Lily Roo made an album out of the pieces. The archive version is live now."
+      ],
+      "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+      "selected_cta_strength": "hard_goal",
+      "selected_copy_strategy": "growth_first_subscriber_cta",
+      "winner_format": "Release-art image + story hook",
+      "winner_format_replication_note": "The row reuses release-art imagery from the measured winner while preserving the queue-wide subscriber-growth CTA gate.",
+      "winner_format_evidence_status": "winner_ready",
+      "winner_format_average_result": 5.0,
+      "x_media_key": "",
+      "media_key": "analog-myth-cover",
+      "approved": "no",
+      "execution_mode": "auto",
+      "post_type": "image",
+      "desired_privacy": "",
+      "reason": "Replicate winner-ready format 'Release-art image + story hook' on a ready platform while blocked channels stay visible.",
+      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK --refresh-admin"
     }
   ]
 }

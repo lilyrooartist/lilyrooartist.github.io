@@ -605,6 +605,9 @@ def format_key(row: dict) -> str:
 
 
 def experiment_format_key(row: dict) -> str:
+    winner_format = str(row.get("winner_format") or "").strip()
+    if winner_format:
+        return winner_format
     platform = platform_bucket(row.get("platform") or "")
     has_clip = bool(str(row.get("clip_url") or "").strip())
     has_image = bool(str(row.get("imagery_url") or row.get("media_key") or row.get("imagery") or "").strip())

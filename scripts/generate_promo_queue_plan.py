@@ -94,6 +94,10 @@ def plan_id(title: str, platform: str) -> str:
     return f"FP-PLAN-{slug(title).upper()}-{slug(platform).upper()}"
 
 
+def winner_plan_id(title: str, platform: str, format_name: str) -> str:
+    return f"FP-WIN-{slug(title).upper()}-{slug(platform).upper()}-{slug(format_name).upper()}"
+
+
 def approval_command(post_id: str) -> str:
     return f"python3 scripts/approve_promo_queue_plan.py --id {post_id} --refresh-admin"
 
@@ -199,6 +203,17 @@ def copy_for(title, platform):
     return copy.get(key) or f"{title} is live in the Lily Roo archive."
 
 
+def winner_story_copy(title: str, platform: str) -> str:
+    copy = COPY_MAP.get(title, {})
+    if platform == "X":
+        return copy.get("x") or copy.get("hook") or f"{title} is live in the Lily Roo archive."
+    if platform == "Facebook":
+        return copy.get("facebook") or copy.get("hook") or f"{title} is live in the Lily Roo archive."
+    if platform == "Instagram":
+        return copy.get("instagram") or copy.get("hook") or f"{title} is live in the Lily Roo archive."
+    return copy_for(title, platform)
+
+
 def draft_variants(title, platform):
     copy = COPY_MAP.get(title, {})
     base = copy_for(title, platform)
@@ -246,6 +261,106 @@ def selected_growth_copy(variants: list[str]) -> tuple[str, str]:
     if best_text:
         return best_text, best_strength
     return "", "missing"
+
+
+def winner_ready_formats(promo: dict) -> list[dict]:
+    candidates = (((promo.get("kpi") or {}).get("growth_goal") or {}).get("top_repeatable_format_candidates") or [])
+    return [
+        candidate
+        for candidate in candidates
+        if candidate.get("evidence_status") == "winner_ready"
+    ]
+
+
+def ready_platforms(readiness: dict) -> set[str]:
+    summary = readiness.get("summary") or {}
+    platform_map = summary.get("platforms") or {}
+    return {platform for platform, ready in platform_map.items() if ready}
+
+
+def winner_platforms(format_name: str, readiness: dict) -> list[str]:
+    ready = ready_platforms(readiness)
+    if format_name == "Release-art image + story hook":
+        return [platform for platform in ("X", "Facebook", "Instagram") if platform in ready]
+    if format_name == "YouTube Community archive/playlist CTA":
+        return ["YouTube Community"] if "YouTube Community" in ready else []
+    return []
+
+
+def release_platform_type_key(row: dict) -> tuple[str, str, str]:
+    return (
+        str(row.get("song") or "").strip().lower(),
+        str(row.get("platform") or "").strip().lower(),
+        str(row.get("post_type") or "").strip().lower(),
+    )
+
+
+def scheduled_release_platform_type_keys(rows: list[dict]) -> set[tuple[str, str, str]]:
+    return {release_platform_type_key(row) for row in rows}
+
+
+def winner_followup_posts(*, promo: dict, releases: dict, readiness: dict, scheduled_rows: list[dict], existing_posts: list[dict], start_index: int, prior_by_id: dict, prior_by_slot: dict) -> list[dict]:
+    scheduled_keys = scheduled_release_platform_type_keys(scheduled_rows)
+    planned_keys = scheduled_release_platform_type_keys(existing_posts)
+    posts = []
+    post_index = start_index
+    release_titles = [title for title in ("Twelve Dollars", "Analog Myth", "I Learned It All in Fifteen Seconds") if title in releases]
+
+    for candidate in winner_ready_formats(promo):
+        format_name = candidate.get("format") or ""
+        for title in release_titles:
+            assets = ASSET_MAP.get(title, {})
+            release = releases.get(title, {"title": title})
+            for platform in winner_platforms(format_name, readiness):
+                kind = "image"
+                key = (title.lower(), platform.lower(), kind)
+                if key in scheduled_keys or key in planned_keys:
+                    continue
+                media_url = assets.get("image", "")
+                media_key = assets.get("media_key", "")
+                if not media_url and not media_key:
+                    continue
+                draft_id = winner_plan_id(title, platform, format_name)
+                base = winner_story_copy(title, platform)
+                hook = (COPY_MAP.get(title, {}) or {}).get("hook", f"{title} is live in the archive.")
+                selected_text = f"{title} is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers."
+                drafts = [
+                    selected_text,
+                    base,
+                    f"{hook} The archive version is live now.",
+                ]
+                post = {
+                    "id": draft_id,
+                    "scheduled_at": first_future_slot(post_index, platform),
+                    "platform": platform,
+                    "song": title,
+                    "imagery": f"{title} winner-format follow-up",
+                    "imagery_url": media_url,
+                    "clip_url": "",
+                    "text": selected_text,
+                    "drafts": drafts,
+                    "reply_text": cta_text(release),
+                    "selected_cta_strength": "hard_goal",
+                    "selected_copy_strategy": "growth_first_subscriber_cta",
+                    "winner_format": format_name,
+                    "winner_format_replication_note": "The row reuses release-art imagery from the measured winner while preserving the queue-wide subscriber-growth CTA gate.",
+                    "winner_format_evidence_status": candidate.get("evidence_status") or "",
+                    "winner_format_average_result": candidate.get("average_result_per_measured_post", 0),
+                    "x_media_key": "",
+                    "media_key": media_key,
+                    "approved": "no",
+                    "execution_mode": execution_mode(platform),
+                    "post_type": kind,
+                    "desired_privacy": "",
+                    "reason": f"Replicate winner-ready format '{format_name}' on a ready platform while blocked channels stay visible.",
+                    "approval_command": approval_command(draft_id),
+                }
+                post["approved"] = preserved_approval(prior_by_id, prior_by_slot, post)
+                posts.append(post)
+                planned_keys.add(key)
+                post_index += 1
+    return posts
+
 
 
 def plan_summary(posts):
@@ -438,6 +553,17 @@ def build_plan():
             post["approved"] = preserved_approval(prior_by_id, prior_by_slot, post)
             posts.append(post)
             post_index += 1
+
+    posts.extend(winner_followup_posts(
+        promo=promo,
+        releases=releases,
+        readiness=readiness,
+        scheduled_rows=scheduled_rows,
+        existing_posts=posts,
+        start_index=post_index,
+        prior_by_id=prior_by_id,
+        prior_by_slot=prior_by_slot,
+    ))
 
     return {
         "generated_at": datetime.now(TZ).isoformat(),
