@@ -1,9 +1,9 @@
 # Published Log Reconciliation - Lily Roo
 
-Generated: 2026-06-22T07:40:59.770696Z
+Generated: 2026-06-22T07:41:47.805205Z
 
 ## Summary
-- Published log status: **stale**
+- Published log status: **fresh**
 - Published log rows: **17**
 - Unlogged Worker posts: **0**
 - Unlogged manual posts: **3**
