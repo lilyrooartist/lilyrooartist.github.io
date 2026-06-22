@@ -1,0 +1,78 @@
+{
+  "generated_at": "2026-06-22T08:28:20.047937Z",
+  "safe_mode": true,
+  "source": {
+    "published_log": "admin/content/Published_Log.csv",
+    "local_secret_source": "secrets/social_api.env",
+    "graph_version": "v20.0"
+  },
+  "summary": {
+    "status": "no_open_facebook_result_fields",
+    "captured_post_count": 2,
+    "fillable_post_count": 0,
+    "fillable_result_field_count": 0,
+    "post_ids": [
+      "FP-AUTO-210",
+      "FP-AUTO-260"
+    ],
+    "result_fields": [
+      "likes",
+      "comments",
+      "shares"
+    ],
+    "apply_command": "python3 scripts/capture_facebook_post_results.py --apply-results --refresh-admin",
+    "report_path": "admin/reports/facebook-post-results.md"
+  },
+  "rows": [
+    {
+      "post_id": "FP-AUTO-210",
+      "source_row": 7,
+      "facebook_object_id": "903693509504290_122113878687249470",
+      "url": "https://www.facebook.com/903693509504290_122113878687249470",
+      "existing_values": {
+        "likes": "0",
+        "comments": "0",
+        "shares": "0"
+      },
+      "created_time": "2026-04-26T01:38:27+0000",
+      "permalink_url": "https://www.facebook.com/122119767927249470/posts/122113878687249470",
+      "lookup_status": "ok",
+      "metrics": {
+        "likes": 0,
+        "comments": 0,
+        "shares": 0
+      },
+      "post_clicks_not_imported_as_views": 0,
+      "fillable_results": {},
+      "filled_field_count": 0,
+      "evidence_note": "Facebook Graph post metrics 2026-06-22",
+      "direct_apply_command": ""
+    },
+    {
+      "post_id": "FP-AUTO-260",
+      "source_row": 18,
+      "facebook_object_id": "903693509504290_122118326547249470",
+      "url": "https://www.facebook.com/903693509504290_122118326547249470",
+      "existing_values": {
+        "likes": "0",
+        "comments": "0",
+        "shares": "0"
+      },
+      "created_time": "2026-06-07T12:35:58+0000",
+      "permalink_url": "https://www.facebook.com/122119767927249470/posts/122118326547249470",
+      "lookup_status": "ok",
+      "metrics": {
+        "likes": 0,
+        "comments": 0,
+        "shares": 0
+      },
+      "post_clicks_not_imported_as_views": 0,
+      "fillable_results": {},
+      "filled_field_count": 0,
+      "evidence_note": "Facebook Graph post metrics 2026-06-22",
+      "direct_apply_command": ""
+    }
+  ],
+  "redaction": "Secret values are never written here; Meta credentials stay in the local secret source.",
+  "views_guardrail": "Post clicks are captured for context but are not imported as views."
+}

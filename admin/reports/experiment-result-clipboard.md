@@ -1,6 +1,6 @@
 # Experiment Result Clipboard - Lily Roo
 
-Generated: 2026-06-22T08:24:52.174384Z
+Generated: 2026-06-22T08:28:07.697766Z
 
 ## Summary
 - Status: **needs_values**
@@ -8,7 +8,7 @@ Generated: 2026-06-22T08:24:52.174384Z
 - Missing public URLs: **6**
 - Measurement priorities: **8**
 - Post-log handoff rows: **3**
-- Pending result fields: **8**
+- Pending result fields: **5**
 - Ready to import: **0**
 - Wide rows ready to import: **0**
 - Entry CSV: `data/experiment_result_entry_template.csv`
@@ -40,10 +40,10 @@ Generated: 2026-06-22T08:24:52.174384Z
 - Format: Release-art image + story hook
 - URL: https://www.facebook.com/903693509504290_122118326547249470
 - Published: 2026-06-07; Published_Log row: `18`
-- Pending fields: `views, likes, comments, shares, saves, subs_delta`
+- Pending fields: `views, saves, subs_delta`
 - Wide-ready fields: `none`
 - Wide entry instruction: Fill one wide entry CSV row in data/experiment_result_entry_wide_template.csv for this post; keep unknown metrics blank and include one evidence_note.
-- Wide CSV target: post_id `FP-AUTO-260`, source_row `18`, fill `views, likes, comments, shares, saves, subs_delta`.
+- Wide CSV target: post_id `FP-AUTO-260`, source_row `18`, fill `views, saves, subs_delta`.
 - Evidence sources:
   - Logged public post: https://www.facebook.com/903693509504290_122118326547249470 - Open the public post to confirm the URL and visible engagement before entering metrics.
   - Meta Business Suite: https://business.facebook.com/latest/insights - Open post insights for the Lily Roo page post and copy the available result values.
@@ -54,9 +54,6 @@ Generated: 2026-06-22T08:24:52.174384Z
   - Enter values in the wide entry CSV row for this post_id and source_row.
   - Add an evidence_note with source and collection date before import preview.
   - `views`: Open Meta Business Suite for https://www.facebook.com/903693509504290_122118326547249470 and record views.
-  - `likes`: Open Meta Business Suite for https://www.facebook.com/903693509504290_122118326547249470 and record likes.
-  - `comments`: Open Meta Business Suite for https://www.facebook.com/903693509504290_122118326547249470 and record comments.
-  - `shares`: Open Meta Business Suite for https://www.facebook.com/903693509504290_122118326547249470 and record shares.
   - `saves`: Open Meta Business Suite for https://www.facebook.com/903693509504290_122118326547249470 and record saves.
   - `subs_delta`: Open Meta Business Suite for https://www.facebook.com/903693509504290_122118326547249470 and record subs_delta.
 ### X - I Learned It All in Fifteen Seconds (`FP-AUTO-262`)
