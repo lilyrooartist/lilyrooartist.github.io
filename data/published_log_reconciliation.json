@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T08:40:10.687762Z",
+  "generated_at": "2026-06-22T08:50:01.038155Z",
   "safe_mode": true,
   "source": {
     "published_log": "admin/content/Published_Log.csv",
@@ -24,6 +24,11 @@
     "next_preview_command": "",
     "next_apply_command": "",
     "next_gate": "manual_approval",
+    "next_manual_gate": "public_url_logging",
+    "url_logging_status": "waiting_for_public_urls",
+    "url_logging_session_file": "data/manual-posting-cards/youtube-community-session.md",
+    "url_logging_worksheet": "data/manual_distribution_url_template.csv",
+    "url_logging_partial_apply_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --allow-partial --apply --refresh-admin",
     "posting_gate_status": "postable_now"
   },
   "worker_export": {
@@ -107,6 +112,20 @@
         "public_community_url": "https://www.youtube.com/@lilyroo.artist/community"
       }
     ],
+    "url_logging": {
+      "status": "waiting_for_public_urls",
+      "worksheet_path": "data/manual_distribution_url_template.csv",
+      "session_file_path": "data/manual-posting-cards/youtube-community-session.md",
+      "batch_preview_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv",
+      "batch_apply_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --apply --refresh-admin",
+      "partial_apply_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --allow-partial --apply --refresh-admin",
+      "pending_ids": [
+        "FP-AUTO-261",
+        "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+        "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY"
+      ],
+      "guardrail": "Use only real public YouTube Community URLs; never apply rows containing PUBLIC_URL or blanks."
+    },
     "guardrail": "Only log manual distribution after approval, manual posting, and a real public post URL."
   }
 }

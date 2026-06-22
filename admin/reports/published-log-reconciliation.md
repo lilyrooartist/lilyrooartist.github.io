@@ -1,6 +1,6 @@
 # Published Log Reconciliation - Lily Roo
 
-Generated: 2026-06-22T08:40:10.687762Z
+Generated: 2026-06-22T08:50:01.038155Z
 
 ## Summary
 - Published log status: **fresh**
@@ -22,6 +22,10 @@ Generated: 2026-06-22T08:40:10.687762Z
 ### Manual Log Gates
 - Approval gate: **clear**; ready: **0**; blocked: **1**
 - Posting gate: **postable_now**; needs review: **0**; postable: **3**
+- URL logging gate: **waiting_for_public_urls**
+- Posting session: `data/manual-posting-cards/youtube-community-session.md`
+- URL worksheet: `data/manual_distribution_url_template.csv`
+- Partial URL apply: `python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --allow-partial --apply --refresh-admin`
 - Blocked approval IDs: `FP-PLAN-TWELVE-DOLLARS-TIKTOK`
 
 ### Manual Rows

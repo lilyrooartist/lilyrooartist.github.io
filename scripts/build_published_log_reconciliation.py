@@ -133,6 +133,20 @@ def manual_log_packet(packet: dict, existing_ids: set[str]) -> dict:
         },
         "gate_counts": dict(sorted(gate_counts.items())),
         "rows": rows,
+        "url_logging": {
+            "status": "waiting_for_public_urls" if any(row.get("log_gate") == "blocked_until_public_url" for row in rows) else "clear",
+            "worksheet_path": (packet.get("manual_completion_manifest") or {}).get("url_template_path") or "",
+            "session_file_path": "data/manual-posting-cards/youtube-community-session.md",
+            "batch_preview_command": (packet.get("manual_completion_manifest") or {}).get("batch_log_preview_command") or "",
+            "batch_apply_command": (packet.get("manual_completion_manifest") or {}).get("batch_log_apply_command") or "",
+            "partial_apply_command": (
+                f"python3 scripts/log_manual_distribution.py --from-csv {(packet.get('manual_completion_manifest') or {}).get('url_template_path')} --allow-partial --apply --refresh-admin"
+                if (packet.get("manual_completion_manifest") or {}).get("url_template_path")
+                else ""
+            ),
+            "pending_ids": [row.get("id") for row in rows if row.get("log_gate") == "blocked_until_public_url"],
+            "guardrail": "Use only real public YouTube Community URLs; never apply rows containing PUBLIC_URL or blanks.",
+        },
         "guardrail": "Only log manual distribution after approval, manual posting, and a real public post URL.",
     }
 
@@ -141,6 +155,7 @@ def build_markdown(payload: dict) -> str:
     summary = payload["summary"]
     worker = payload["worker_export"]
     manual = payload["manual_logging"]
+    url_logging = manual.get("url_logging") or {}
     lines = [
         "# Published Log Reconciliation - Lily Roo",
         "",
@@ -166,7 +181,14 @@ def build_markdown(payload: dict) -> str:
         "### Manual Log Gates",
         f"- Approval gate: **{(manual.get('approval_gate') or {}).get('status', 'unknown')}**; ready: **{(manual.get('approval_gate') or {}).get('ready_count', 0)}**; blocked: **{(manual.get('approval_gate') or {}).get('blocked_count', 0)}**",
         f"- Posting gate: **{(manual.get('posting_gate') or {}).get('status', 'unknown')}**; needs review: **{(manual.get('posting_gate') or {}).get('review_count', 0)}**; postable: **{(manual.get('posting_gate') or {}).get('postable_count', 0)}**",
+        f"- URL logging gate: **{url_logging.get('status', 'unknown')}**",
     ]
+    if url_logging.get("session_file_path"):
+        lines.append(f"- Posting session: `{url_logging['session_file_path']}`")
+    if url_logging.get("worksheet_path"):
+        lines.append(f"- URL worksheet: `{url_logging['worksheet_path']}`")
+    if url_logging.get("partial_apply_command"):
+        lines.append(f"- Partial URL apply: `{url_logging['partial_apply_command']}`")
     approval_gate = manual.get("approval_gate") or {}
     if approval_gate.get("ready_ids"):
         lines.append(f"- Ready approval IDs: `{', '.join(approval_gate['ready_ids'])}`")
@@ -257,6 +279,14 @@ def main() -> int:
         next_apply_command = worker["apply_command"]
     elif manual["unlogged_manual_count"]:
         next_apply_command = approval_gate.get("apply_command") or ""
+    url_logging = manual.get("url_logging") or {}
+    next_manual_gate = (
+        "public_url_logging"
+        if manual["unlogged_manual_count"] and url_logging.get("status") == "waiting_for_public_urls"
+        else "manual_approval"
+        if manual["unlogged_manual_count"]
+        else "clear"
+    )
     payload = {
         "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "safe_mode": True,
@@ -281,6 +311,11 @@ def main() -> int:
             "next_preview_command": next_preview_command,
             "next_apply_command": next_apply_command,
             "next_gate": "worker_export" if worker["unlogged_worker_count"] else ("manual_approval" if manual["unlogged_manual_count"] else "clear"),
+            "next_manual_gate": next_manual_gate,
+            "url_logging_status": url_logging.get("status") or "unknown",
+            "url_logging_session_file": url_logging.get("session_file_path") or "",
+            "url_logging_worksheet": url_logging.get("worksheet_path") or "",
+            "url_logging_partial_apply_command": url_logging.get("partial_apply_command") or "",
             "posting_gate_status": posting_gate.get("status") or "unknown",
         },
         "worker_export": worker,
