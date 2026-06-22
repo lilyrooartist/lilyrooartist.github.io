@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T11:48:32.063379Z",
+  "generated_at": "2026-06-22T11:51:05.631926Z",
   "safe_mode": true,
   "source": {
     "local_secret_source": "secrets/social_api.env",
@@ -51,9 +51,9 @@
       "TIKTOK_CLIENT_SECRET",
       "TIKTOK_REFRESH_TOKEN"
     ],
-    "local_secret_dir_exists": true,
+    "local_secret_dir_exists": false,
     "local_secret_env_exists": true,
-    "local_secret_env_runtime_exists": true,
+    "local_secret_env_runtime_exists": false,
     "local_secret_handoff_prepared": true,
     "local_secret_handoff_status_path": "data/tiktok_local_handoff_status.json",
     "initialize_local_secret_env_command": "",
@@ -101,9 +101,9 @@
     ],
     "local_secret_source": "secrets/social_api.env",
     "local_secret_dir_path": "secrets",
-    "local_secret_dir_exists": true,
+    "local_secret_dir_exists": false,
     "local_secret_env_exists": true,
-    "local_secret_env_runtime_exists": true,
+    "local_secret_env_runtime_exists": false,
     "local_secret_handoff_prepared": true,
     "local_secret_handoff_status_path": "data/tiktok_local_handoff_status.json",
     "local_secret_handoff_status": {
@@ -279,7 +279,7 @@
     {
       "name": "local_secret_env_file",
       "status": "pass",
-      "detail": "Local secret env exists at secrets/social_api.env.",
+      "detail": "Local secret env handoff is initialized at secrets/social_api.env; this runtime cannot inspect the local file.",
       "command": ""
     },
     {
