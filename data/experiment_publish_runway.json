@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T10:34:41.951845Z",
+  "generated_at": "2026-06-22T10:39:28.780542Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -15,13 +15,24 @@
     "pending_result_field_count": 5,
     "winner_ready_candidate_count": 1,
     "winner_count_target": 3,
-    "blocked_platform_count": 4,
+    "blocked_platform_count": 5,
     "approved_backlog_count": 0,
     "blocked_backlog_count": 0,
     "next_publish_action": "Log public URLs and collect experiment results."
   },
   "manual_review_rows": [],
   "blocked_platform_rows": [
+    {
+      "post_id": "FP-AUTO-258",
+      "platform": "Instagram",
+      "reason": "max_attempts_exceeded",
+      "status": "failed",
+      "repair_action": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
+      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-258",
+      "blocked_apply_reasons": [
+        "local_secret_source_missing:IG_BUSINESS_ACCOUNT_ID"
+      ]
+    },
     {
       "post_id": "FP-AUTO-263",
       "platform": "Instagram",

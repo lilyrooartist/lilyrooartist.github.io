@@ -1,28 +1,42 @@
 {
-  "generated_at": "2026-06-22T10:34:41.681830Z",
+  "generated_at": "2026-06-22T10:39:28.537941Z",
   "safe_mode": true,
   "source": {
     "resolution_worksheet": "data/human_handoff_resolution_worksheet.csv",
     "human_handoff_packet": "data/human_handoff_packet.json"
   },
   "summary": {
-    "worksheet_row_count": 9,
-    "preview_count": 9,
+    "worksheet_row_count": 10,
+    "preview_count": 10,
     "executed_preview_count": 3,
-    "skipped_preview_count": 6,
+    "skipped_preview_count": 7,
     "status_counts": {
       "input_missing": 3,
-      "skipped": 6
+      "skipped": 7
     },
     "phase_counts": {
       "Manual distribution": 3,
       "Manual metrics": 2,
-      "Platform setup": 4
+      "Platform setup": 5
     },
     "safe_command_policy": "Only python3 scripts/* commands with --dry-run, or reschedule previews without --apply, are executed.",
     "mutation_guardrail": "This preview runner never executes apply, refresh-admin, PUBLIC_URL placeholder, non-python, or unsupported commands."
   },
   "previews": [
+    {
+      "task_id": "platform-setup-FP-AUTO-258",
+      "phase": "Platform setup",
+      "status": "failed",
+      "input_needed": "local_secret_presence_and_public_posting_approval",
+      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-258",
+      "safety": "skipped",
+      "safety_reason": "not_marked_preview_safe",
+      "returncode": null,
+      "preview_status": "skipped",
+      "output_excerpt": "",
+      "completion_evidence": "data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_upload_drafts before TikTok upload-mode backlog work is allowed.",
+      "guardrail": "Push worker secrets only after local platform setup is complete."
+    },
     {
       "task_id": "platform-setup-FP-AUTO-263",
       "phase": "Platform setup",
@@ -152,7 +166,7 @@
   ],
   "handoff_resolution_summary": {
     "path": "data/human_handoff_resolution_worksheet.csv",
-    "row_count": 9,
+    "row_count": 10,
     "fieldnames": [
       "task_id",
       "phase",

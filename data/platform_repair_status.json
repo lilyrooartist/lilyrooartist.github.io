@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T10:34:41.389127Z",
+  "generated_at": "2026-06-22T10:39:28.291386Z",
   "safe_mode": true,
   "source": {
     "promo_operations_packet": "data/promo_operations_packet.json",
@@ -8,13 +8,13 @@
     "tiktok_setup_preflight": "data/tiktok_setup_preflight.json"
   },
   "summary": {
-    "platform_fix_count": 4,
-    "blocked_count": 4,
-    "preview_command_count": 4,
+    "platform_fix_count": 5,
+    "blocked_count": 5,
+    "preview_command_count": 5,
     "apply_command_count": 0,
-    "retry_reset_count": 2,
-    "checklist_item_count": 12,
-    "checklist_blocked_count": 5,
+    "retry_reset_count": 3,
+    "checklist_item_count": 15,
+    "checklist_blocked_count": 6,
     "platforms": [
       "Facebook",
       "Instagram",
@@ -22,6 +22,73 @@
     ]
   },
   "rows": [
+    {
+      "post_id": "FP-AUTO-258",
+      "platform": "Instagram",
+      "priority": 1,
+      "status": "failed",
+      "reason": "max_attempts_exceeded",
+      "attempts": 3,
+      "updated_at": "2026-06-22T06:00:11.699Z",
+      "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
+      "repair_action": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
+      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-258",
+      "apply_command": "",
+      "blocked_apply_command": "python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py",
+      "blocked_apply_reasons": [
+        "local_secret_source_missing:IG_BUSINESS_ACCOUNT_ID"
+      ],
+      "retry_reset_verification_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-258",
+      "retry_reset_preview_command": "python3 scripts/reset_social_execution_state.py FP-AUTO-258",
+      "retry_reset_apply_command": "python3 scripts/reset_social_execution_state.py FP-AUTO-258 --apply",
+      "retry_reset_note": "Run the dry-run verification command first. Apply the retry reset only when the worker reports the row is executable.",
+      "readiness": {
+        "ready": false,
+        "api": "facebook-login",
+        "account_id_source": "FB_PAGE_ID",
+        "account_resolved": false,
+        "account_resolution_reason": "instagram_business_account_unresolved"
+      },
+      "missing_secrets": [],
+      "local_missing_secrets": [
+        "IG_BUSINESS_ACCOUNT_ID"
+      ],
+      "local_secret_presence": {
+        "IG_BUSINESS_ACCOUNT_ID": false
+      },
+      "local_secret_ready": false,
+      "local_secret_source": "secrets/social_api.env",
+      "public_posting_approved": null,
+      "preflight_status": "",
+      "preflight_blocked_count": null,
+      "preflight_command": "",
+      "preflight_report": "",
+      "repair_checklist": [
+        {
+          "id": "remote_worker_secrets",
+          "label": "Worker secrets",
+          "status": "pass",
+          "detail": "Worker readiness snapshot reports required secrets present.",
+          "command": ""
+        },
+        {
+          "id": "local_secret_source",
+          "label": "Local secret source",
+          "status": "blocked",
+          "detail": "secrets/social_api.env is missing: IG_BUSINESS_ACCOUNT_ID.",
+          "command": ""
+        },
+        {
+          "id": "refresh_verification",
+          "label": "Refresh verification",
+          "status": "review",
+          "detail": "After repair, refresh admin so readiness, scheduler, blocker, and backlog state update together.",
+          "command": "python3 scripts/refresh_promo_admin.py"
+        }
+      ],
+      "repair_checklist_blocked_count": 1,
+      "blocked": true
+    },
     {
       "post_id": "FP-AUTO-263",
       "platform": "Instagram",

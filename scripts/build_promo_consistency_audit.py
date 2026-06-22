@@ -141,11 +141,7 @@ def build_checks() -> dict:
         category_count(ledger, "platform_repair"),
         "Platform repair packet should match platform repair blockers in the ledger.",
     ))
-    execution_platform_fix_count = sum(
-        1
-        for item in execution_summary.get("platform_fix_needed") or []
-        if str(item.get("reason") or "") != "manual_only"
-    )
+    execution_platform_fix_count = len(execution_summary.get("platform_fix_needed") or [])
     checks.append(same_value(
         "executor_platform_fix_count_matches_platform_packet",
         execution_platform_fix_count,
@@ -188,6 +184,11 @@ def build_checks() -> dict:
     executor_attention_ids.update(
         item.get("post_id")
         for item in execution_summary.get("platform_fix_needed") or []
+        if item.get("post_id")
+    )
+    executor_attention_ids.update(
+        item.get("post_id")
+        for item in execution_summary.get("manual_handoff_needed") or []
         if item.get("post_id")
     )
     current_scheduler_attention_ids = set(executor_attention_ids)

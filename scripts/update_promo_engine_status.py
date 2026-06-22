@@ -1460,6 +1460,7 @@ def social_execution_state(snapshot, scheduled_rows=None):
     categorized_attention = dedupe_execution_rows(
         (summary.get("approval_needed") or [])
         + (summary.get("platform_fix_needed") or [])
+        + (summary.get("manual_handoff_needed") or [])
     )
     source_rows = categorized_attention or attention
     approval_needed = []

@@ -1,13 +1,13 @@
 # Promotion Blocker Ledger - Lily Roo
 
-Generated: 2026-06-22T10:34:41.500977Z
+Generated: 2026-06-22T10:39:28.380918Z
 
 ## Summary
-- Open blockers: **10**
+- Open blockers: **11**
 - User-owned: **7**
-- External platform-owned: **3**
+- External platform-owned: **4**
 - Codex-actionable: **0**
-- High or critical: **5**
+- High or critical: **6**
 
 ## Unlock Roadmap
 - **Approve checked scheduled rows** (`blocked`)
@@ -27,8 +27,8 @@ Generated: 2026-06-22T10:34:41.500977Z
 - **Reschedule approved past-due backlog** (`clear`)
   - Owner: `tod`; projected blockers resolved: **0**
   - Unlocks: Approved past-due queue rows get a fresh schedule after executor blockers clear.
-  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24`
-  - Apply after review: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin`
+  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24`
+  - Apply after review: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin`
 - **Fill manual metric worksheet** (`needs_values`)
   - Owner: `tod`; projected blockers resolved: **6**
   - Unlocks: Admin health and weekly reporting can use fresh cross-platform metrics.; Manual metric blockers clear once worksheet values are imported.
@@ -60,6 +60,15 @@ Generated: 2026-06-22T10:34:41.500977Z
   - Next step: Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.
   - Preview/check: `python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run`
   - Guardrail: Run retry resets only after the external platform repair is verified.
+- **[high] Repair Instagram executor** (`platform-FP-AUTO-258`)
+  - Owner: `external_platform`; status: `blocked`; category: `platform_repair`
+  - Evidence: Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID.
+  - Next step: Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness. Run `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-258` before any retry reset; only reset if the worker reports executable.
+  - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-258`
+  - Apply/log after review: `python3 scripts/reset_social_execution_state.py FP-AUTO-258 --apply`
+  - Guardrail: Run retry resets only after the external platform repair is verified.
+  - Blocked apply command: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
+  - Impact: apply blocked by: local_secret_source_missing:IG_BUSINESS_ACCOUNT_ID
 - **[high] Repair Instagram executor** (`platform-FP-AUTO-263`)
   - Owner: `external_platform`; status: `blocked`; category: `platform_repair`
   - Evidence: Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID.

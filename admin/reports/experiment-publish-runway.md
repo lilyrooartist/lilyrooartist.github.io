@@ -1,6 +1,6 @@
 # Experiment Publish Runway - Lily Roo
 
-Generated: 2026-06-22T10:34:41.951845Z
+Generated: 2026-06-22T10:39:28.780542Z
 
 ## Summary
 - Manual rows ready for review: **0**
@@ -8,7 +8,7 @@ Generated: 2026-06-22T10:34:41.951845Z
 - Public URLs needed: **3**
 - Pending result fields: **5**
 - Winner-ready formats: **1 / 3**
-- Blocked platform rows: **4**
+- Blocked platform rows: **5**
 
 ## Next Publish Action
 - Log public URLs and collect experiment results.
@@ -32,6 +32,7 @@ Generated: 2026-06-22T10:34:41.951845Z
   - Guardrail: Fill only visible platform analytics values with evidence notes.
 
 ## Blocked Platform Rows
+- `FP-AUTO-258` Instagram - max_attempts_exceeded
 - `FP-AUTO-263` Instagram - max_attempts_exceeded
 - `FP-PLAN-TWELVE-DOLLARS-INSTAGRAM` Instagram - max_attempts_exceeded
 - `FP-AUTO-265` Facebook - failed

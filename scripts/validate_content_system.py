@@ -430,7 +430,7 @@ def validate_generated_outputs(failures):
     if SOCIAL_EXECUTION_SNAPSHOT.exists():
         execution_snapshot = json.loads(SOCIAL_EXECUTION_SNAPSHOT.read_text(encoding="utf-8"))
         summary = execution_snapshot.get("summary") or {}
-        if "updated_at" in execution_snapshot and execution_snapshot.get("auth_method") in {"bearer", "admin_password", "none"} and "execution_count" in summary and "approval_needed_count" in summary and "platform_fix_needed_count" in summary:
+        if "updated_at" in execution_snapshot and execution_snapshot.get("auth_method") in {"bearer", "admin_password", "none"} and "execution_count" in summary and "approval_needed_count" in summary and "platform_fix_needed_count" in summary and "manual_handoff_needed_count" in summary:
             ok(f"social execution snapshot tracks {summary.get('execution_count')} executor records")
         else:
             fail("social_execution_snapshot.json missing categorized summary, timestamp, or auth method", failures)
@@ -2887,14 +2887,8 @@ def validate_generated_outputs(failures):
         if SOCIAL_EXECUTION_SNAPSHOT.exists():
             raw_execution = json.loads(SOCIAL_EXECUTION_SNAPSHOT.read_text(encoding="utf-8"))
             raw_summary = raw_execution.get("summary") or {}
-            raw_platform_fix_rows = [
-                row for row in raw_summary.get("platform_fix_needed") or []
-                if row.get("reason") != "manual_only"
-            ]
-            raw_manual_handoff_rows = [
-                row for row in raw_summary.get("platform_fix_needed") or []
-                if row.get("reason") == "manual_only"
-            ]
+            raw_platform_fix_rows = raw_summary.get("platform_fix_needed") or []
+            raw_manual_handoff_rows = raw_summary.get("manual_handoff_needed") or []
             if (
                 execution_summary.get("platform_fix_needed_count") == len(raw_platform_fix_rows)
                 and execution_summary.get("manual_handoff_needed_count") == len(raw_manual_handoff_rows)

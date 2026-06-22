@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T10:34:41.542605Z",
+  "generated_at": "2026-06-22T10:39:28.413421Z",
   "safe_mode": true,
   "source": {
     "promotion_blocker_ledger": "data/promotion_blocker_ledger.json",
@@ -13,35 +13,35 @@
     "resolution_worksheet": "data/human_handoff_resolution_worksheet.csv"
   },
   "summary": {
-    "task_count": 9,
+    "task_count": 10,
     "owner_counts": {
-      "tod": 9
+      "tod": 10
     },
     "urgency_counts": {
-      "high": 4,
+      "high": 5,
       "low": 2,
       "medium": 3
     },
     "phase_counts": {
       "Manual distribution": 3,
       "Manual metrics": 2,
-      "Platform setup": 4
+      "Platform setup": 5
     },
     "blocker_summary": {
-      "open_blocker_count": 10,
-      "urgent_count": 5,
+      "open_blocker_count": 11,
+      "urgent_count": 6,
       "owner_counts": {
-        "external_platform": 3,
+        "external_platform": 4,
         "tod": 7
       },
       "category_counts": {
         "approval": 1,
         "manual_distribution": 3,
         "manual_metrics": 2,
-        "platform_repair": 4
+        "platform_repair": 5
       },
       "status_counts": {
-        "blocked": 4,
+        "blocked": 5,
         "blocked_by_review_checks": 1,
         "needs_values": 2,
         "ready_for_manual_post": 3
@@ -129,8 +129,8 @@
             "Approved past-due queue rows get a fresh schedule after executor blockers clear."
           ],
           "blocked_by": [],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24",
-          "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
+          "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
           "source_path": "data/backlog_reschedule_preview.json"
         },
         {
@@ -167,7 +167,7 @@
   "action_docket": {
     "source": "data/human_handoff_packet.json",
     "roadmap_step_count": 5,
-    "task_count": 9,
+    "task_count": 10,
     "ready_step_count": 2,
     "blocked_step_count": 1,
     "manual_post_count": 3,
@@ -247,18 +247,19 @@
         "state": "blocked",
         "owner": "tod",
         "task_ids": [
+          "platform-setup-FP-AUTO-258",
           "platform-setup-FP-AUTO-263",
           "platform-setup-FP-AUTO-264",
           "platform-setup-FP-AUTO-265",
           "platform-setup-FP-PLAN-TWELVE-DOLLARS-INSTAGRAM"
         ],
         "blockers_resolved": 1,
-        "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263",
+        "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-258",
         "apply_command": "",
         "command_sequence": [
           {
             "step": "preview",
-            "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263",
+            "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-258",
             "required_before_apply": true
           },
           {
@@ -377,18 +378,19 @@
         "state": "blocked",
         "owner": "tod",
         "task_ids": [
+          "platform-setup-FP-AUTO-258",
           "platform-setup-FP-AUTO-263",
           "platform-setup-FP-AUTO-264",
           "platform-setup-FP-AUTO-265",
           "platform-setup-FP-PLAN-TWELVE-DOLLARS-INSTAGRAM"
         ],
         "blockers_resolved": 1,
-        "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263",
+        "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-258",
         "apply_command": "",
         "command_sequence": [
           {
             "step": "preview",
-            "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263",
+            "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-258",
             "required_before_apply": true
           },
           {
@@ -578,7 +580,7 @@
   },
   "resolution_worksheet": {
     "path": "data/human_handoff_resolution_worksheet.csv",
-    "row_count": 9,
+    "row_count": 10,
     "fieldnames": [
       "task_id",
       "phase",
@@ -598,6 +600,29 @@
     "redaction": "Worksheet rows collect prompts, commands, and evidence targets only; private metric values, public URLs, approval decisions, and secret values stay out of generated reports."
   },
   "tasks": [
+    {
+      "id": "platform-setup-FP-AUTO-258",
+      "title": "Repair Instagram executor",
+      "phase": "Platform setup",
+      "owner": "tod",
+      "urgency": "high",
+      "status": "failed",
+      "detail": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
+      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-258",
+      "apply_command": "",
+      "source_path": "data/platform_repair_status.json",
+      "impact": {
+        "platform": "Instagram",
+        "missing_secrets": [],
+        "local_missing_secrets": [
+          "IG_BUSINESS_ACCOUNT_ID"
+        ],
+        "public_posting_approved": null,
+        "repair_checklist_blocked_count": 1
+      },
+      "links": [],
+      "guardrail": "Push worker secrets only after local platform setup is complete."
+    },
     {
       "id": "platform-setup-FP-AUTO-263",
       "title": "Repair Instagram executor",

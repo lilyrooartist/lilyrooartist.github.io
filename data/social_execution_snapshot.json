@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "updated_at": "2026-06-22T10:33:30.523530Z",
+  "updated_at": "2026-06-22T10:39:26.055475Z",
   "source": "lilyroo-social-executor-executions",
   "url": "https://www.lilyroo.com/api/social/executions",
   "http_status": 200,
@@ -12,7 +12,8 @@
     "posted_count": 1,
     "attention_count": 7,
     "approval_needed_count": 1,
-    "platform_fix_needed_count": 6,
+    "platform_fix_needed_count": 5,
+    "manual_handoff_needed_count": 1,
     "status_counts": {
       "blocked": 2,
       "failed": 4,
@@ -53,17 +54,6 @@
       }
     ],
     "platform_fix_needed": [
-      {
-        "post_id": "FP-AUTO-261",
-        "platform": "YouTube Community",
-        "status": "skipped",
-        "reason": "manual_only",
-        "attempts": 0,
-        "updated_at": "2026-06-22T10:30:24.442Z",
-        "source": "cron",
-        "post_url": "",
-        "error_summary": ""
-      },
       {
         "post_id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
         "platform": "Instagram",
@@ -107,6 +97,30 @@
         "source": "cron",
         "post_url": "",
         "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app."
+      },
+      {
+        "post_id": "FP-AUTO-258",
+        "platform": "Instagram",
+        "status": "failed",
+        "reason": "max_attempts_exceeded",
+        "attempts": 3,
+        "updated_at": "2026-06-22T06:00:11.699Z",
+        "source": "cron",
+        "post_url": "",
+        "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID."
+      }
+    ],
+    "manual_handoff_needed": [
+      {
+        "post_id": "FP-AUTO-261",
+        "platform": "YouTube Community",
+        "status": "skipped",
+        "reason": "manual_only",
+        "attempts": 0,
+        "updated_at": "2026-06-22T10:30:24.442Z",
+        "source": "cron",
+        "post_url": "",
+        "error_summary": ""
       }
     ],
     "latest_attention": [

@@ -1,16 +1,21 @@
 # Human Handoff Resolution Preview - Lily Roo
 
-Generated: 2026-06-22T10:34:41.681830Z
+Generated: 2026-06-22T10:39:28.537941Z
 
 ## Summary
-- Worksheet rows: **9**
+- Worksheet rows: **10**
 - Executed previews: **3**
-- Skipped previews: **6**
-- Status counts: `{"input_missing": 3, "skipped": 6}`
+- Skipped previews: **7**
+- Status counts: `{"input_missing": 3, "skipped": 7}`
 - Policy: Only python3 scripts/* commands with --dry-run, or reschedule previews without --apply, are executed.
 - Guardrail: This preview runner never executes apply, refresh-admin, PUBLIC_URL placeholder, non-python, or unsupported commands.
 
 ## Previews
+- **platform-setup-FP-AUTO-258** (`skipped`)
+  - Phase: `Platform setup`; input needed: `local_secret_presence_and_public_posting_approval`
+  - Safety: `skipped` (not_marked_preview_safe)
+  - Command: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-258`
+  - Guardrail: Push worker secrets only after local platform setup is complete.
 - **platform-setup-FP-AUTO-263** (`skipped`)
   - Phase: `Platform setup`; input needed: `local_secret_presence_and_public_posting_approval`
   - Safety: `skipped` (not_marked_preview_safe)

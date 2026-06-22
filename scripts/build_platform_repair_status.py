@@ -36,7 +36,7 @@ def platform_slug(platform: str) -> str:
 def execution_rows(snapshot: dict) -> dict[str, dict]:
     summary = snapshot.get("summary") or {}
     rows = {}
-    for key in ("platform_fix_needed", "approval_needed", "latest_attention"):
+    for key in ("platform_fix_needed", "approval_needed", "manual_handoff_needed", "latest_attention"):
         for row in summary.get(key) or []:
             post_id = row.get("post_id")
             if post_id and post_id not in rows:

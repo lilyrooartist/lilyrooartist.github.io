@@ -56,7 +56,7 @@ def load_execution_blockers() -> dict[str, dict]:
     snapshot = read_json(SOCIAL_EXECUTIONS, {})
     summary = snapshot.get("summary") or {}
     blockers = {}
-    for key in ("platform_fix_needed", "approval_needed", "latest_attention"):
+    for key in ("platform_fix_needed", "approval_needed", "manual_handoff_needed", "latest_attention"):
         for row in summary.get(key) or []:
             post_id = row.get("post_id")
             if post_id and post_id not in blockers:

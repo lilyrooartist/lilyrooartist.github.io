@@ -1,21 +1,21 @@
 {
-  "generated_at": "2026-06-22T10:34:41.500977Z",
+  "generated_at": "2026-06-22T10:39:28.380918Z",
   "safe_mode": true,
   "summary": {
-    "open_blocker_count": 10,
-    "urgent_count": 5,
+    "open_blocker_count": 11,
+    "urgent_count": 6,
     "owner_counts": {
-      "external_platform": 3,
+      "external_platform": 4,
       "tod": 7
     },
     "category_counts": {
       "approval": 1,
       "manual_distribution": 3,
       "manual_metrics": 2,
-      "platform_repair": 4
+      "platform_repair": 5
     },
     "status_counts": {
-      "blocked": 4,
+      "blocked": 5,
       "blocked_by_review_checks": 1,
       "needs_values": 2,
       "ready_for_manual_post": 3
@@ -103,8 +103,8 @@
           "Approved past-due queue rows get a fresh schedule after executor blockers clear."
         ],
         "blocked_by": [],
-        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24",
-        "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
+        "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
         "source_path": "data/backlog_reschedule_preview.json"
       },
       {
@@ -208,6 +208,31 @@
         "kind": "platform_repair_gate",
         "blocked_apply_command": "",
         "blocked_apply_reasons": []
+      }
+    },
+    {
+      "id": "platform-FP-AUTO-258",
+      "blocker_id": "platform-FP-AUTO-258",
+      "title": "Repair Instagram executor",
+      "category": "platform_repair",
+      "owner": "external_platform",
+      "urgency": "high",
+      "status": "blocked",
+      "platform": "Instagram",
+      "release": "",
+      "evidence": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID.",
+      "next_step": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness. Run `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-258` before any retry reset; only reset if the worker reports executable.",
+      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-258",
+      "apply_command": "python3 scripts/reset_social_execution_state.py FP-AUTO-258 --apply",
+      "source_path": "data/platform_repair_status.json",
+      "external_url": "",
+      "guardrail": "Run retry resets only after the external platform repair is verified.",
+      "impact": {
+        "kind": "platform_repair_gate",
+        "blocked_apply_command": "python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py",
+        "blocked_apply_reasons": [
+          "local_secret_source_missing:IG_BUSINESS_ACCOUNT_ID"
+        ]
       }
     },
     {

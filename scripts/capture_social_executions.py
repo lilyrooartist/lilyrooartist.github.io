@@ -128,9 +128,13 @@ def summarize(payload: dict) -> dict:
         item for item in failed
         if item.get("reason") == "not_approved"
     ]
+    manual_handoff_needed = [
+        item for item in failed
+        if item.get("reason") == "manual_only"
+    ]
     platform_fix_needed = [
         item for item in failed
-        if item.get("reason") != "not_approved"
+        if item.get("reason") not in {"not_approved", "manual_only"}
     ]
     return {
         "execution_count": len(executions),
@@ -138,11 +142,13 @@ def summarize(payload: dict) -> dict:
         "attention_count": len(failed),
         "approval_needed_count": len(approval_needed),
         "platform_fix_needed_count": len(platform_fix_needed),
+        "manual_handoff_needed_count": len(manual_handoff_needed),
         "status_counts": dict(sorted(status_counts.items())),
         "platform_counts": dict(sorted(platform_counts.items())),
         "latest_posted": [safe_execution(item) for item in posted[:5]],
         "approval_needed": [safe_execution(item) for item in approval_needed[:5]],
         "platform_fix_needed": [safe_execution(item) for item in platform_fix_needed[:5]],
+        "manual_handoff_needed": [safe_execution(item) for item in manual_handoff_needed[:5]],
         "latest_attention": [safe_execution(item) for item in failed[:5]],
     }
 

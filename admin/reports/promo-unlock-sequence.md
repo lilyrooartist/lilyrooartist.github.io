@@ -1,6 +1,6 @@
 # Promo Unlock Sequence - Lily Roo
 
-Generated: 2026-06-22T10:34:41.719320Z
+Generated: 2026-06-22T10:39:28.568953Z
 
 ## Summary
 - Steps: **5**
@@ -8,7 +8,7 @@ Generated: 2026-06-22T10:34:41.719320Z
 - Blocked or warning: **4**
 - Projected resolution units across sequence: **10**
 - Current step: `unlock-manual-distribution` (`blocked_until_input`)
-- Open blockers still tracked: **10**
+- Open blockers still tracked: **11**
 
 ## Sequence
 1. **Approve checked scheduled rows** - `unlock-checked-scheduled-approval`
@@ -33,8 +33,8 @@ Generated: 2026-06-22T10:34:41.719320Z
    - State: `clear`; owner: `tod`
    - Reason: No action is needed for this gate.
    - Unlocks: Approved past-due queue rows get a fresh schedule after executor blockers clear.
-   - preview (preview-safe): `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24`
-   - apply_after_review (after-review only): `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin`
+   - preview (preview-safe): `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24`
+   - apply_after_review (after-review only): `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin`
 5. **Fill manual metric worksheet** - `unlock-manual-metrics`
    - State: `blocked_until_input`; owner: `tod`
    - Reason: private_metric_values

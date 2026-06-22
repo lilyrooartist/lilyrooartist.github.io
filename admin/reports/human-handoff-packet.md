@@ -1,12 +1,12 @@
 # Human Handoff Packet - Lily Roo
 
-Generated: 2026-06-22T10:34:41.542605Z
+Generated: 2026-06-22T10:39:28.413421Z
 
 ## Summary
-- Open handoff tasks: **9**
-- Tod-owned tasks: **9**
+- Open handoff tasks: **10**
+- Tod-owned tasks: **10**
 - External/platform-gated tasks: **0**
-- High urgency tasks: **4**
+- High urgency tasks: **5**
 - Low urgency tasks: **2**
 
 ## Action Docket
@@ -14,7 +14,7 @@ Generated: 2026-06-22T10:34:41.542605Z
 - Blocked steps: **1**
 - Manual posts packaged: **3**
 - Manual metric fields: **6**
-- Resolution worksheet: `data/human_handoff_resolution_worksheet.csv` (9 row(s))
+- Resolution worksheet: `data/human_handoff_resolution_worksheet.csv` (10 row(s))
 
 - **Review checked approval batch** (`not_available`)
   - Owner: `tod`; tasks: **0**; blockers resolved: **0**
@@ -31,9 +31,9 @@ Generated: 2026-06-22T10:34:41.542605Z
   - Next after apply: Post each approved YouTube Community row manually, then log its public URL with scripts/log_manual_distribution.py.
   - Guardrail: Manual-only approvals do not auto-post; posting and public URL logging remain separate after review. Post manually first, then log only real public URLs.
 - **Repair blocked platform executor setup** (`blocked`)
-  - Owner: `tod`; tasks: **4**; blockers resolved: **1**
-  - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263`
-  - Sequence preview: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263`
+  - Owner: `tod`; tasks: **5**; blockers resolved: **1**
+  - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-258`
+  - Sequence preview: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-258`
   - Sequence verify: `python3 scripts/refresh_promo_admin.py`
   - Completion evidence: data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_upload_drafts before TikTok upload-mode backlog work is allowed.
   - Next after apply: Recapture admin state and only then revisit TikTok approval or backlog reschedule rows.
@@ -60,6 +60,11 @@ Generated: 2026-06-22T10:34:41.542605Z
   - Guardrail: Do not apply blocked backlog reschedules without clearing platform readiness.
 
 ## Tasks
+- **Repair Instagram executor** (`platform-setup-FP-AUTO-258`)
+  - Phase: `Platform setup`; owner: `tod`; status: `failed`; urgency: `high`
+  - Detail: Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.
+  - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-258`
+  - Guardrail: Push worker secrets only after local platform setup is complete.
 - **Repair Instagram executor** (`platform-setup-FP-AUTO-263`)
   - Phase: `Platform setup`; owner: `tod`; status: `failed`; urgency: `high`
   - Detail: Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.

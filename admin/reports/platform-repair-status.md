@@ -1,17 +1,34 @@
 # Platform Repair Status - Lily Roo
 
-Generated: 2026-06-22T10:34:41.389127Z
+Generated: 2026-06-22T10:39:28.291386Z
 
 ## Summary
-- Platform fixes: **4**
-- Blocked rows: **4**
-- Preview commands: **4**
+- Platform fixes: **5**
+- Blocked rows: **5**
+- Preview commands: **5**
 - Apply commands: **0**
-- Checklist items: **12**
-- Checklist blocked: **5**
+- Checklist items: **15**
+- Checklist blocked: **6**
 - Platforms: **Facebook, Instagram, TikTok**
 
 ## Repair Checklist
+- **Instagram** (`FP-AUTO-258`)
+  - Status: `failed`; reason: `max_attempts_exceeded`
+  - Error: Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.
+  - Repair: Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.
+  - Missing locally: IG_BUSINESS_ACCOUNT_ID
+  - Local source: `secrets/social_api.env`
+  - Checklist:
+    - `pass` Worker secrets: Worker readiness snapshot reports required secrets present.
+    - `blocked` Local secret source: secrets/social_api.env is missing: IG_BUSINESS_ACCOUNT_ID.
+    - `review` Refresh verification: After repair, refresh admin so readiness, scheduler, blocker, and backlog state update together. Command: `python3 scripts/refresh_promo_admin.py`
+  - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-258`
+  - Blocked apply command: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
+  - Apply blocked by: local_secret_source_missing:IG_BUSINESS_ACCOUNT_ID
+  - Verify before retry reset: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-258`
+  - Preview retry reset after platform repair: `python3 scripts/reset_social_execution_state.py FP-AUTO-258`
+  - Apply retry reset after platform repair: `python3 scripts/reset_social_execution_state.py FP-AUTO-258 --apply`
+  - Retry reset note: Run the dry-run verification command first. Apply the retry reset only when the worker reports the row is executable.
 - **Instagram** (`FP-AUTO-263`)
   - Status: `failed`; reason: `max_attempts_exceeded`
   - Error: Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.
