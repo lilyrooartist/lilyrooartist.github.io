@@ -1,6 +1,6 @@
 # TikTok Repair Runbook - Lily Roo
 
-Generated: 2026-06-22T09:35:46.087965Z
+Generated: 2026-06-22T09:43:31.208096Z
 
 ## Summary
 - Status: **blocked**
@@ -20,17 +20,18 @@ Generated: 2026-06-22T09:35:46.087965Z
 - Local draft upload preview: `python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run`
 - Earliest TikTok API path: video.upload inbox draft; final public URL still requires human publish and URL logging.
 - Handoff template: `data/tiktok_secret_handoff_template.env`
-- Local secret env exists: **False**
-- Initialize local secret env: `mkdir -p ../secrets && test -f ../secrets/social_api.env || cp data/tiktok_secret_handoff_template.env ../secrets/social_api.env`
+- Local secret env exists: **True**
+- Initialize local secret env: `not needed`
 - Ready to apply worker secrets: **False**
+- Ready to upload inbox drafts: **False**
+- Ready for direct public posting: **False**
 - Ready to clear backlog gate: **False**
 - Public posting approval apply: `not available until local approval is confirmed`
 - Public posting approval deploy: `not available until local approval is confirmed`
 
 ## Sequence
-- **Prepare local env - Create the local TikTok secret env file**: `ready`
+- **Prepare local env - Create the local TikTok secret env file**: `pass`
   - Create the local social API env file from the blank TikTok handoff template before adding TikTok app values. The command is non-overwriting, so an existing env file is preserved.
-  - Command: `mkdir -p ../secrets && test -f ../secrets/social_api.env || cp data/tiktok_secret_handoff_template.env ../secrets/social_api.env`
 - **Collect credentials - Add TikTok OAuth credentials locally**: `blocked`
   - Use the redacted TikTok handoff template to populate the local social API env file with the TikTok client key, client secret, redirect URI, and refresh-token path. Values stay local and are never written to generated reports.
   - Blocked by: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN
@@ -58,19 +59,20 @@ Generated: 2026-06-22T09:35:46.087965Z
   - Confirm the safer video.upload path can prepare a TikTok inbox draft before public direct-posting approval is available.
   - Blocked by: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN
   - Command: `python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run`
-- **Apply push - Push worker secrets after review**: `blocked`
-  - Run the apply command only after local credentials exist and public posting approval is confirmed.
-  - Blocked by: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN, TIKTOK_PUBLIC_POSTING_APPROVED
+- **Apply push - Push upload-mode worker secrets after review**: `blocked`
+  - Run the apply command after local refresh credentials exist and the dry-run is reviewed. Public-posting approval is a separate direct-posting gate.
+  - Blocked by: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN
 - **Verify repair - Recapture executor readiness**: `blocked`
   - After applying secrets, recapture worker readiness and rebuild the admin packets so platform repair, blocker, handoff, and backlog state agree.
   - Blocked by: apply_worker_secret_push
   - Command: `python3 scripts/refresh_promo_admin.py`
 - **Clear gate - Clear TikTok backlog gate**: `blocked`
-  - Once readiness is clean, rerun the backlog reschedule preview and apply the approved row only if the gate reports safe apply available.
-  - Blocked by: worker_refresh_credentials, public_posting_approval
+  - Once worker readiness is clean, rerun the backlog reschedule preview and apply the approved row only if the gate reports safe apply available. Upload mode creates an inbox draft that still needs human publish and URL logging.
+  - Blocked by: worker_refresh_credentials
 
 ## Guardrails
 - This runbook does not push secrets, approve public posting, publish posts, or clear backlog rows.
 - Use the dry-run secret push before any apply command.
-- Do not run a TikTok backlog apply until fresh admin evidence shows TikTok readiness is clean.
+- Do not run a TikTok backlog apply until fresh admin evidence shows TikTok upload readiness is clean.
+- Public-posting approval is required only for direct public TikTok posting; upload mode still requires human review, publish, and URL logging.
 - Secret values are never written to this runbook; only required names, missing names, and presence-derived readiness are recorded.

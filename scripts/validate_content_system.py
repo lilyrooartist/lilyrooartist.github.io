@@ -527,6 +527,8 @@ def validate_generated_outputs(failures):
             and summary.get("blocked_count") == blocked_count
             and required_checks <= check_names
             and required_source <= set(source)
+            and isinstance(summary.get("ready_to_upload_drafts"), bool)
+            and "upload" in (summary.get("worker_posting_mode") or "")
             and credential_handoff.get("status") in {"ready_to_push", "needs_local_values"}
             and owner_handoff.get("status") in {"blocked_until_user_input", "ready_for_secret_push_preview"}
             and owner_handoff.get("needed_input_count") == len(owner_handoff.get("needed_inputs") or [])
@@ -553,6 +555,7 @@ def validate_generated_outputs(failures):
             and source.get("local_posting_helper") == "scripts/post_tiktok_from_queue.py"
             and summary.get("local_posting_helper_uses_refresh_token") is True
             and "post_tiktok_from_queue.py --post-id FP-AUTO-264 --dry-run" in (summary.get("local_post_preview_command") or "")
+            and "post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run" in (summary.get("local_upload_preview_command") or "")
             and "Posting mode selected: API integration." in template_text
             and "TIKTOK_CLIENT_KEY=" in template_text
             and "TIKTOK_CLIENT_SECRET=" in template_text
@@ -630,6 +633,9 @@ def validate_generated_outputs(failures):
             and summary.get("local_posting_helper_uses_refresh_token") is True
             and "post_tiktok_from_queue.py --post-id FP-AUTO-264 --dry-run" in (summary.get("local_post_preview_command") or "")
             and "local_public_posting_approval_confirmed" in summary
+            and isinstance(summary.get("ready_to_upload_drafts"), bool)
+            and isinstance(summary.get("ready_for_direct_public_posting"), bool)
+            and summary.get("ready_for_direct_public_posting") == (not summary.get("worker_missing_secrets") and summary.get("public_posting_approved") is True)
             and (not summary.get("public_posting_apply_command") or "set_tiktok_public_posting_approval.py --approved --apply" in summary.get("public_posting_apply_command"))
             and (not summary.get("public_posting_deploy_command") or "set_tiktok_public_posting_approval.py --approved --apply --deploy" in summary.get("public_posting_deploy_command"))
             and "--approved-backlog" in (summary.get("backlog_preview_command") or "")

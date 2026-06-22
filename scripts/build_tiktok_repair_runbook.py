@@ -104,8 +104,10 @@ def build_payload() -> dict:
     local_ready = not local_missing
     public_ready = public_posting is True
     worker_ready = not worker_missing
-    apply_ready = local_ready and public_ready
-    verify_ready = worker_ready and public_ready
+    upload_draft_ready = bool(preflight_summary.get("ready_to_upload_drafts"))
+    apply_ready = local_ready
+    verify_ready = worker_ready
+    direct_public_ready = worker_ready and public_ready
     backlog_preview = backlog_summary.get("preview_command") or "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --start-at '2026-06-21T10:00:00+09:00' --spacing-hours 24"
     backlog_apply = backlog_summary.get("apply_command") or ""
     blocked_ids: list[str] = []
@@ -186,14 +188,10 @@ def build_payload() -> dict:
             "apply_worker_secret_push",
             "Apply push",
             "ready" if apply_ready else "blocked",
-            "Push worker secrets after review",
-            "Run the apply command only after local credentials exist and public posting approval is confirmed.",
+            "Push upload-mode worker secrets after review",
+            "Run the apply command after local refresh credentials exist and the dry-run is reviewed. Public-posting approval is a separate direct-posting gate.",
             push_apply if apply_ready else "",
-            (
-                []
-                if apply_ready
-                else local_missing + ([] if public_ready else (["worker_var_not_deployed"] if local_public_posting else ["TIKTOK_PUBLIC_POSTING_APPROVED"]))
-            ),
+            [] if apply_ready else local_missing,
         ),
         runbook_step(
             "recapture_readiness",
@@ -209,9 +207,9 @@ def build_payload() -> dict:
             "Clear gate",
             "ready" if verify_ready else "blocked",
             "Clear TikTok backlog gate",
-            "Once readiness is clean, rerun the backlog reschedule preview and apply the approved row only if the gate reports safe apply available.",
+            "Once worker readiness is clean, rerun the backlog reschedule preview and apply the approved row only if the gate reports safe apply available. Upload mode creates an inbox draft that still needs human publish and URL logging.",
             f"python3 scripts/build_backlog_reschedule_preview.py && {backlog_preview}" if verify_ready else "",
-            [] if verify_ready else ["worker_refresh_credentials", "public_posting_approval"],
+            [] if verify_ready else ["worker_refresh_credentials"],
         ),
     ]
     for step in steps:
@@ -261,6 +259,8 @@ def build_payload() -> dict:
             "brand_organic_toggle": brand_organic,
             "aigc_label_enabled": aigc_label,
             "ready_to_apply_worker_secrets": apply_ready,
+            "ready_to_upload_drafts": upload_draft_ready,
+            "ready_for_direct_public_posting": direct_public_ready,
             "ready_to_clear_backlog_gate": verify_ready,
             "repair_row_count": len(repair_rows),
             "repair_post_id": repair_row.get("post_id") or "",
@@ -277,7 +277,8 @@ def build_payload() -> dict:
         "guardrails": [
             "This runbook does not push secrets, approve public posting, publish posts, or clear backlog rows.",
             "Use the dry-run secret push before any apply command.",
-            "Do not run a TikTok backlog apply until fresh admin evidence shows TikTok readiness is clean.",
+            "Do not run a TikTok backlog apply until fresh admin evidence shows TikTok upload readiness is clean.",
+            "Public-posting approval is required only for direct public TikTok posting; upload mode still requires human review, publish, and URL logging.",
         ],
     }
 
@@ -310,6 +311,8 @@ def build_markdown(payload: dict) -> str:
         f"- Local secret env exists: **{summary['local_secret_env_exists']}**",
         f"- Initialize local secret env: `{summary.get('initialize_local_secret_env_command') or 'not needed'}`",
         f"- Ready to apply worker secrets: **{summary['ready_to_apply_worker_secrets']}**",
+        f"- Ready to upload inbox drafts: **{summary['ready_to_upload_drafts']}**",
+        f"- Ready for direct public posting: **{summary['ready_for_direct_public_posting']}**",
         f"- Ready to clear backlog gate: **{summary['ready_to_clear_backlog_gate']}**",
         f"- Public posting approval apply: `{summary.get('public_posting_apply_command') or 'not available until local approval is confirmed'}`",
         f"- Public posting approval deploy: `{summary.get('public_posting_deploy_command') or 'not available until local approval is confirmed'}`",

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T09:35:46.087965Z",
+  "generated_at": "2026-06-22T09:43:31.208096Z",
   "safe_mode": true,
   "status": "blocked",
   "source": {
@@ -34,8 +34,8 @@
     ],
     "handoff_template_path": "data/tiktok_secret_handoff_template.env",
     "oauth_handoff_script": "scripts/tiktok_oauth_handoff.py",
-    "local_secret_env_exists": false,
-    "initialize_local_secret_env_command": "mkdir -p ../secrets && test -f ../secrets/social_api.env || cp data/tiktok_secret_handoff_template.env ../secrets/social_api.env",
+    "local_secret_env_exists": true,
+    "initialize_local_secret_env_command": "",
     "oauth_preview_command": "python3 scripts/tiktok_oauth_handoff.py",
     "oauth_authorization_url_command": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload",
     "oauth_exchange_command": "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode upload",
@@ -69,6 +69,8 @@
     "brand_organic_toggle": true,
     "aigc_label_enabled": true,
     "ready_to_apply_worker_secrets": false,
+    "ready_to_upload_drafts": false,
+    "ready_for_direct_public_posting": false,
     "ready_to_clear_backlog_gate": false,
     "repair_row_count": 1,
     "repair_post_id": "FP-AUTO-264",
@@ -76,18 +78,18 @@
     "apply_command": "",
     "public_posting_apply_command": "",
     "public_posting_deploy_command": "",
-    "backlog_preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24",
-    "backlog_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+    "backlog_preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
+    "backlog_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
     "backlog_normal_apply_gate": "clear"
   },
   "steps": [
     {
       "id": "initialize_local_secret_env",
       "phase": "Prepare local env",
-      "status": "ready",
+      "status": "pass",
       "title": "Create the local TikTok secret env file",
       "detail": "Create the local social API env file from the blank TikTok handoff template before adding TikTok app values. The command is non-overwriting, so an existing env file is preserved.",
-      "command": "mkdir -p ../secrets && test -f ../secrets/social_api.env || cp data/tiktok_secret_handoff_template.env ../secrets/social_api.env",
+      "command": "",
       "blocked_by": []
     },
     {
@@ -182,14 +184,13 @@
       "id": "apply_worker_secret_push",
       "phase": "Apply push",
       "status": "blocked",
-      "title": "Push worker secrets after review",
-      "detail": "Run the apply command only after local credentials exist and public posting approval is confirmed.",
+      "title": "Push upload-mode worker secrets after review",
+      "detail": "Run the apply command after local refresh credentials exist and the dry-run is reviewed. Public-posting approval is a separate direct-posting gate.",
       "command": "",
       "blocked_by": [
         "TIKTOK_CLIENT_KEY",
         "TIKTOK_CLIENT_SECRET",
-        "TIKTOK_REFRESH_TOKEN",
-        "TIKTOK_PUBLIC_POSTING_APPROVED"
+        "TIKTOK_REFRESH_TOKEN"
       ]
     },
     {
@@ -208,11 +209,10 @@
       "phase": "Clear gate",
       "status": "blocked",
       "title": "Clear TikTok backlog gate",
-      "detail": "Once readiness is clean, rerun the backlog reschedule preview and apply the approved row only if the gate reports safe apply available.",
+      "detail": "Once worker readiness is clean, rerun the backlog reschedule preview and apply the approved row only if the gate reports safe apply available. Upload mode creates an inbox draft that still needs human publish and URL logging.",
       "command": "",
       "blocked_by": [
-        "worker_refresh_credentials",
-        "public_posting_approval"
+        "worker_refresh_credentials"
       ]
     }
   ],
@@ -220,6 +220,7 @@
   "guardrails": [
     "This runbook does not push secrets, approve public posting, publish posts, or clear backlog rows.",
     "Use the dry-run secret push before any apply command.",
-    "Do not run a TikTok backlog apply until fresh admin evidence shows TikTok readiness is clean."
+    "Do not run a TikTok backlog apply until fresh admin evidence shows TikTok upload readiness is clean.",
+    "Public-posting approval is required only for direct public TikTok posting; upload mode still requires human review, publish, and URL logging."
   ]
 }
