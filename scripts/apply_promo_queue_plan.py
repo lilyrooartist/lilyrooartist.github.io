@@ -94,7 +94,7 @@ def validate_rows(rows):
 
 def write_queue(existing, additions):
     with QUEUE.open("w", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=QUEUE_FIELDS)
+        writer = csv.DictWriter(handle, fieldnames=QUEUE_FIELDS, lineterminator="\n")
         writer.writeheader()
         writer.writerows(existing)
         writer.writerows(additions)
