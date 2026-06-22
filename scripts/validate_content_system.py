@@ -499,6 +499,7 @@ def validate_generated_outputs(failures):
         checks = preflight.get("checks") or []
         source = preflight.get("source") or {}
         credential_handoff = preflight.get("credential_handoff") or {}
+        owner_handoff = preflight.get("owner_handoff") or {}
         api_strategy = preflight.get("api_strategy") or {}
         blocked_count = sum(1 for check in checks if check.get("status") == "blocked")
         check_names = {check.get("name") for check in checks}
@@ -527,6 +528,13 @@ def validate_generated_outputs(failures):
             and required_checks <= check_names
             and required_source <= set(source)
             and credential_handoff.get("status") in {"ready_to_push", "needs_local_values"}
+            and owner_handoff.get("status") in {"blocked_until_user_input", "ready_for_secret_push_preview"}
+            and owner_handoff.get("needed_input_count") == len(owner_handoff.get("needed_inputs") or [])
+            and owner_handoff.get("first_growth_row_unblocked") == "FP-AUTO-264"
+            and owner_handoff.get("format_unblocked") == "Short video clip + platform-native CTA"
+            and "TikTok connector" in (owner_handoff.get("question_answer") or "")
+            and "Secret values" not in json.dumps(owner_handoff)
+            and all(item.get("id") and item.get("request") and item.get("values_needed") and item.get("next_command_after_input") for item in owner_handoff.get("needed_inputs") or [])
             and credential_handoff.get("required_secret_names") == ["TIKTOK_CLIENT_KEY", "TIKTOK_CLIENT_SECRET", "TIKTOK_REFRESH_TOKEN"]
             and credential_handoff.get("local_secret_source") == source.get("local_secret_source")
             and credential_handoff.get("local_secret_dir_path") == "secrets"

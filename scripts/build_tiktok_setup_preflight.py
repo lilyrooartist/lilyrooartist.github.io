@@ -112,6 +112,83 @@ def local_public_posting_approved(presence: dict) -> bool:
     return str(load_env(SOCIAL_ENV).get(PUBLIC_POSTING_APPROVAL, "")).strip().lower() == "true"
 
 
+def owner_handoff(summary: dict, credential_handoff: dict) -> dict:
+    needed_inputs = []
+    local_missing = credential_handoff.get("local_missing_secrets") or []
+    auth_url_missing = credential_handoff.get("oauth_authorization_url_missing") or []
+    token_exchange_missing = credential_handoff.get("oauth_token_exchange_missing") or []
+    public_posting_approved = summary.get("public_posting_approved") is True
+    local_public_approval = summary.get("local_public_posting_approval_confirmed") is True
+
+    if local_missing or auth_url_missing or token_exchange_missing:
+        needed_inputs.append({
+            "id": "tiktok_developer_app_credentials",
+            "owner": "tod",
+            "status": "needed",
+            "request": "Add Lily Roo TikTok developer app values locally.",
+            "values_needed": sorted(set(local_missing + auth_url_missing + token_exchange_missing + ["TIKTOK_REDIRECT_URI"])),
+            "safe_storage": credential_handoff.get("local_secret_source") or "secrets/social_api.env",
+            "why": "The connector cannot generate an OAuth URL, exchange a code, or refresh TikTok access without these app values.",
+            "next_command_after_input": credential_handoff.get("oauth_authorization_url_command") or "python3 scripts/tiktok_oauth_handoff.py --print-auth-url",
+        })
+
+    if "TIKTOK_REFRESH_TOKEN" in local_missing:
+        needed_inputs.append({
+            "id": "authorize_lily_roo_tiktok_account",
+            "owner": "tod",
+            "status": "needed",
+            "request": "Authorize the Lily Roo TikTok account after the OAuth URL is generated.",
+            "values_needed": ["short-lived TikTok authorization code"],
+            "safe_storage": credential_handoff.get("local_secret_source") or "secrets/social_api.env",
+            "why": "The refresh token is created only after the Lily Roo account authorizes the app with the requested scopes.",
+            "next_command_after_input": credential_handoff.get("oauth_exchange_command") or "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply",
+        })
+
+    if not public_posting_approved:
+        needed_inputs.append({
+            "id": "public_posting_approval",
+            "owner": "tod",
+            "status": "needed" if not local_public_approval else "ready_to_deploy",
+            "request": "Confirm whether Lily Roo TikTok has public Content Posting API approval and PUBLIC_TO_EVERYONE posting is allowed.",
+            "values_needed": ["TIKTOK_PUBLIC_POSTING_APPROVED=true confirmation"],
+            "safe_storage": "Worker variable via guarded approval helper",
+            "why": "Direct public TikTok publishing must stay blocked until this approval is explicit.",
+            "next_command_after_input": credential_handoff.get("public_posting_deploy_command") or credential_handoff.get("public_posting_preview_command") or "python3 scripts/set_tiktok_public_posting_approval.py --approved",
+        })
+
+    if local_missing:
+        next_safe_action = summary.get("oauth_preview_command") or "python3 scripts/tiktok_oauth_handoff.py"
+    elif not public_posting_approved:
+        next_safe_action = summary.get("public_posting_preview_command") or "python3 scripts/set_tiktok_public_posting_approval.py --approved"
+    else:
+        next_safe_action = summary.get("push_preview_command") or "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN"
+
+    return {
+        "status": "blocked_until_user_input" if needed_inputs else "ready_for_secret_push_preview",
+        "question_answer": "Yes, fix the TikTok connector after the current manual YouTube evidence loop; it unlocks the short-video growth format.",
+        "next_safe_action": next_safe_action,
+        "needed_input_count": len(needed_inputs),
+        "needed_inputs": needed_inputs,
+        "codex_can_do_without_more_input": [
+            "Keep TikTok blockers visible in admin/status output.",
+            "Run safe preflight and dry-run helpers.",
+            "Push secrets only after local TikTok values exist and the dry-run is reviewed.",
+            "Refresh admin and validation after the connector state changes.",
+        ],
+        "unlock_sequence": [
+            "Add TikTok app credentials and redirect URI locally.",
+            "Generate the OAuth URL and authorize the Lily Roo TikTok account.",
+            "Exchange the authorization code for a refresh token.",
+            "Dry-run the Worker secret push.",
+            "Confirm and deploy public-posting approval only after it is actually approved.",
+            "Refresh Admin, then retry or reschedule the TikTok row.",
+        ],
+        "first_growth_row_unblocked": "FP-AUTO-264",
+        "format_unblocked": "Short video clip + platform-native CTA",
+        "guardrail": "This handoff never includes secret values and does not approve or publish TikTok posts.",
+    }
+
+
 def build_payload() -> dict:
     write_handoff_template()
     readiness = read_json(READINESS, {})
@@ -290,6 +367,43 @@ def build_payload() -> dict:
         ],
         "redaction": "Secret values are never written here; only required names, missing names, and presence booleans are recorded.",
     }
+    summary = {
+        "status": "ready" if ready_to_post else "blocked",
+        "posting_mode": posting_mode,
+        "api_strategy_confirmed": posting_mode == "api",
+        "check_count": len(preflight_checks),
+        "blocked_count": len(blocked),
+        "ready_to_push_worker_secrets": ready_to_push,
+        "ready_to_post_publicly": ready_to_post,
+        "local_posting_helper_uses_refresh_token": True,
+        "local_post_preview_command": local_post_preview,
+        "local_upload_preview_command": local_upload_preview,
+        "earliest_tiktok_api_path": "video.upload inbox draft; final public URL still requires human publish and URL logging.",
+        "local_missing_secrets": local_missing,
+        "local_secret_dir_exists": local_secret_dir_exists,
+        "local_secret_env_exists": local_secret_env_exists,
+        "initialize_local_secret_env_command": INIT_LOCAL_SECRET_ENV if not local_secret_env_exists else "",
+        "oauth_authorization_url_missing": oauth_url_missing,
+        "oauth_token_exchange_missing": oauth_exchange_missing,
+        "worker_missing_secrets": worker_missing,
+        "public_posting_approved": public_posting,
+        "local_public_posting_approval_confirmed": local_public_approval,
+        "default_privacy": default_privacy,
+        "worker_posting_mode": worker_posting_mode,
+        "brand_content_toggle": brand_content,
+        "brand_organic_toggle": brand_organic,
+        "aigc_label_enabled": aigc_label,
+        "push_preview_command": push_preview,
+        "push_apply_command": push_apply if ready_to_push else "",
+        "public_posting_preview_command": PUBLIC_POSTING_PREVIEW,
+        "public_posting_apply_command": PUBLIC_POSTING_APPLY if local_public_approval else "",
+        "public_posting_deploy_command": PUBLIC_POSTING_DEPLOY if local_public_approval else "",
+        "refresh_command": refresh_command,
+        "oauth_preview_command": oauth_preview,
+        "oauth_authorization_url_command": oauth_url_command,
+        "oauth_exchange_command": oauth_exchange_command,
+        "platform_repair_rows": len(repair_rows),
+    }
     return {
         "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "safe_mode": True,
@@ -303,44 +417,9 @@ def build_payload() -> dict:
             "platform_repair_status": str(PLATFORM_REPAIR.relative_to(ROOT)),
             "wrangler_config": str(WRANGLER_CONFIG.relative_to(ROOT)),
         },
-        "summary": {
-            "status": "ready" if ready_to_post else "blocked",
-            "posting_mode": posting_mode,
-            "api_strategy_confirmed": posting_mode == "api",
-            "check_count": len(preflight_checks),
-            "blocked_count": len(blocked),
-            "ready_to_push_worker_secrets": ready_to_push,
-            "ready_to_post_publicly": ready_to_post,
-            "local_posting_helper_uses_refresh_token": True,
-            "local_post_preview_command": local_post_preview,
-            "local_upload_preview_command": local_upload_preview,
-            "earliest_tiktok_api_path": "video.upload inbox draft; final public URL still requires human publish and URL logging.",
-            "local_missing_secrets": local_missing,
-            "local_secret_dir_exists": local_secret_dir_exists,
-            "local_secret_env_exists": local_secret_env_exists,
-            "initialize_local_secret_env_command": INIT_LOCAL_SECRET_ENV if not local_secret_env_exists else "",
-            "oauth_authorization_url_missing": oauth_url_missing,
-            "oauth_token_exchange_missing": oauth_exchange_missing,
-            "worker_missing_secrets": worker_missing,
-            "public_posting_approved": public_posting,
-            "local_public_posting_approval_confirmed": local_public_approval,
-            "default_privacy": default_privacy,
-            "worker_posting_mode": worker_posting_mode,
-            "brand_content_toggle": brand_content,
-            "brand_organic_toggle": brand_organic,
-            "aigc_label_enabled": aigc_label,
-            "push_preview_command": push_preview,
-            "push_apply_command": push_apply if ready_to_push else "",
-            "public_posting_preview_command": PUBLIC_POSTING_PREVIEW,
-            "public_posting_apply_command": PUBLIC_POSTING_APPLY if local_public_approval else "",
-            "public_posting_deploy_command": PUBLIC_POSTING_DEPLOY if local_public_approval else "",
-            "refresh_command": refresh_command,
-            "oauth_preview_command": oauth_preview,
-            "oauth_authorization_url_command": oauth_url_command,
-            "oauth_exchange_command": oauth_exchange_command,
-            "platform_repair_rows": len(repair_rows),
-        },
+        "summary": summary,
         "credential_handoff": credential_handoff,
+        "owner_handoff": owner_handoff(summary, credential_handoff),
         "api_strategy": strategy,
         "checks": preflight_checks,
         "redaction": "Secret values are never written to this preflight; only presence booleans are recorded.",
@@ -374,6 +453,26 @@ def build_markdown(payload: dict) -> str:
         f"- Brand organic disclosure: **{summary['brand_organic_toggle']}**",
         f"- AIGC label enabled: **{summary['aigc_label_enabled']}**",
         "",
+        "## What We Need From Tod",
+        f"- Status: **{payload['owner_handoff']['status']}**",
+        f"- Answer: {payload['owner_handoff']['question_answer']}",
+        f"- Needed inputs: **{payload['owner_handoff']['needed_input_count']}**",
+        f"- Next safe action: `{payload['owner_handoff']['next_safe_action']}`",
+        f"- First growth row unblocked: `{payload['owner_handoff']['first_growth_row_unblocked']}`",
+        f"- Format unblocked: {payload['owner_handoff']['format_unblocked']}",
+    ]
+    for item in payload["owner_handoff"]["needed_inputs"]:
+        lines.append(f"- **{item['request']}** (`{item['id']}`)")
+        lines.append(f"  - Values needed: `{', '.join(item['values_needed'])}`")
+        lines.append(f"  - Safe storage: `{item['safe_storage']}`")
+        lines.append(f"  - Why: {item['why']}")
+        lines.append(f"  - Next command: `{item['next_command_after_input']}`")
+    lines.extend([
+        "- Codex can do now:",
+    ])
+    lines.extend(f"  - {item}" for item in payload["owner_handoff"]["codex_can_do_without_more_input"])
+    lines.extend([
+        "",
         "## Credential Handoff",
         f"- Status: **{payload['credential_handoff']['status']}**",
         f"- Required names: `{', '.join(payload['credential_handoff']['required_secret_names'])}`",
@@ -400,7 +499,7 @@ def build_markdown(payload: dict) -> str:
         f"- Public posting approval apply: `{payload['credential_handoff']['public_posting_apply_command'] or 'not available until local approval is confirmed'}`",
         f"- Public posting approval deploy: `{payload['credential_handoff']['public_posting_deploy_command'] or 'not available until local approval is confirmed'}`",
         "- Post-apply verification:",
-    ]
+    ])
     lines.extend(f"  - `{command}`" for command in payload["credential_handoff"]["post_apply_verification_commands"])
     lines.extend([
         "- Completion evidence:",

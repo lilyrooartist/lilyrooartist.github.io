@@ -1,6 +1,6 @@
 # TikTok Setup Preflight - Lily Roo
 
-Generated: 2026-06-22T08:10:14.086597Z
+Generated: 2026-06-22T08:14:23.455598Z
 
 ## Summary
 - Status: **blocked**
@@ -22,6 +22,34 @@ Generated: 2026-06-22T08:10:14.086597Z
 - Brand organic disclosure: **True**
 - AIGC label enabled: **True**
 
+## What We Need From Tod
+- Status: **blocked_until_user_input**
+- Answer: Yes, fix the TikTok connector after the current manual YouTube evidence loop; it unlocks the short-video growth format.
+- Needed inputs: **3**
+- Next safe action: `python3 scripts/tiktok_oauth_handoff.py`
+- First growth row unblocked: `FP-AUTO-264`
+- Format unblocked: Short video clip + platform-native CTA
+- **Add Lily Roo TikTok developer app values locally.** (`tiktok_developer_app_credentials`)
+  - Values needed: `TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REDIRECT_URI, TIKTOK_REFRESH_TOKEN`
+  - Safe storage: `secrets/social_api.env`
+  - Why: The connector cannot generate an OAuth URL, exchange a code, or refresh TikTok access without these app values.
+  - Next command: `python3 scripts/tiktok_oauth_handoff.py --print-auth-url`
+- **Authorize the Lily Roo TikTok account after the OAuth URL is generated.** (`authorize_lily_roo_tiktok_account`)
+  - Values needed: `short-lived TikTok authorization code`
+  - Safe storage: `secrets/social_api.env`
+  - Why: The refresh token is created only after the Lily Roo account authorizes the app with the requested scopes.
+  - Next command: `python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply`
+- **Confirm whether Lily Roo TikTok has public Content Posting API approval and PUBLIC_TO_EVERYONE posting is allowed.** (`public_posting_approval`)
+  - Values needed: `TIKTOK_PUBLIC_POSTING_APPROVED=true confirmation`
+  - Safe storage: `Worker variable via guarded approval helper`
+  - Why: Direct public TikTok publishing must stay blocked until this approval is explicit.
+  - Next command: `python3 scripts/set_tiktok_public_posting_approval.py --approved`
+- Codex can do now:
+  - Keep TikTok blockers visible in admin/status output.
+  - Run safe preflight and dry-run helpers.
+  - Push secrets only after local TikTok values exist and the dry-run is reviewed.
+  - Refresh admin and validation after the connector state changes.
+
 ## Credential Handoff
 - Status: **needs_local_values**
 - Required names: `TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN`
@@ -29,8 +57,8 @@ Generated: 2026-06-22T08:10:14.086597Z
 - OAuth helper: `scripts/tiktok_oauth_handoff.py`
 - Requested OAuth scopes: `user.info.basic, video.upload, video.publish`
 - Local secret env: `secrets/social_api.env`
-- Local secret env exists: **False**
-- Initialize local secret env: `mkdir -p ../secrets && test -f ../secrets/social_api.env || cp data/tiktok_secret_handoff_template.env ../secrets/social_api.env`
+- Local secret env exists: **True**
+- Initialize local secret env: `not needed`
 - Missing locally: `TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN`
 - Missing for auth URL: `TIKTOK_CLIENT_KEY, TIKTOK_REDIRECT_URI`
 - Missing for token exchange: `TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REDIRECT_URI`
@@ -57,9 +85,8 @@ Generated: 2026-06-22T08:10:14.086597Z
   - data/platform_repair_status.json no longer lists TikTok as blocked by missing credentials.
 
 ## Checks
-- **local_secret_env_file**: `waiting`
-  - Initialize secrets/social_api.env from the blank handoff template before adding TikTok app values.
-  - Command: `mkdir -p ../secrets && test -f ../secrets/social_api.env || cp data/tiktok_secret_handoff_template.env ../secrets/social_api.env`
+- **local_secret_env_file**: `pass`
+  - Local secret env exists at secrets/social_api.env.
 - **oauth_authorization_url**: `blocked`
   - secrets/social_api.env is missing auth URL values: TIKTOK_CLIENT_KEY, TIKTOK_REDIRECT_URI.
   - Command: `python3 scripts/tiktok_oauth_handoff.py --print-auth-url`
