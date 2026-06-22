@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "updated_at": "2026-06-22T10:49:16.071Z",
+  "updated_at": "2026-06-22T10:55:37.444Z",
   "platforms": {
     "youtube": {
       "ok": false,
@@ -46,7 +46,7 @@
       "source": "tiktok-public-profile-page",
       "profile_url": "https://www.tiktok.com/@lilyroo930",
       "http_status": 200,
-      "display_name": "",
+      "display_name": "lilyroo930",
       "public_capture_status": "ok",
       "preserved_previous_public_metrics": true,
       "latest_capture_status": "No public TikTok follower value found."
@@ -60,9 +60,11 @@
       "status": null,
       "source": "instagram-public-profile-page",
       "profile_url": "https://www.instagram.com/lilyroo.artist/",
-      "http_status": 200,
-      "description": "0 Followers, 0 Following, 7 Posts - See Instagram photos and videos from Lily Roo (@lilyroo.artist)",
-      "public_capture_status": "ok"
+      "http_status": 429,
+      "description": "",
+      "public_capture_status": "ok",
+      "preserved_previous_public_metrics": true,
+      "latest_capture_status": "HTTP Error 429: Too Many Requests"
     },
     "facebook": {
       "ok": true,
@@ -88,7 +90,7 @@
       "source": "x-public-profile-page",
       "profile_url": "https://x.com/lilyrooartist",
       "http_status": 200,
-      "html_bytes": 73523,
+      "html_bytes": 73657,
       "public_capture_status": "ok"
     }
   },
@@ -116,10 +118,8 @@
         },
         "profile_url": "https://www.tiktok.com/@lilyroo930",
         "http_status": 200,
-        "display_name": "",
-        "public_capture_status": "ok",
-        "preserved_previous_public_metrics": true,
-        "latest_capture_status": "No public TikTok follower value found."
+        "display_name": "lilyroo930",
+        "public_capture_status": "ok"
       },
       "instagram": {
         "ok": true,
@@ -128,9 +128,11 @@
           "followers": 0
         },
         "profile_url": "https://www.instagram.com/lilyroo.artist/",
-        "http_status": 200,
-        "description": "0 Followers, 0 Following, 7 Posts - See Instagram photos and videos from Lily Roo (@lilyroo.artist)",
-        "public_capture_status": "ok"
+        "http_status": 429,
+        "description": "",
+        "public_capture_status": "ok",
+        "preserved_previous_public_metrics": true,
+        "latest_capture_status": "HTTP Error 429: Too Many Requests"
       },
       "x": {
         "ok": true,
@@ -140,9 +142,11 @@
         },
         "profile_url": "https://x.com/lilyrooartist",
         "http_status": 200,
-        "html_bytes": 73523,
+        "html_bytes": 73657,
         "public_capture_status": "ok"
       }
     }
-  }
+  },
+  "authenticated_capture_error": "Unauthorized",
+  "authenticated_capture_status": 401
 }
