@@ -3080,7 +3080,11 @@ def validate_generated_outputs(failures):
                 ok("promo engine next actions include refresh automation repair action")
             else:
                 fail("promo_engine_status.json missing refresh automation repair action", failures)
-        elif automation.get("workflow_status_available") and not automation.get("latest_run_covers_source_commit"):
+        elif (
+            automation.get("workflow_status_available")
+            and not automation.get("latest_run_covers_source_commit")
+            and automation.get("latest_run_coverage_basis") != "generated_snapshot_changed_after_latest_run"
+        ):
             coverage_action = next((action for action in next_actions if action.startswith("Refresh automation coverage:")), "")
             if coverage_action and (automation.get("source_revision") or {}).get("short_commit") in coverage_action and (automation.get("actions_url") or "") in coverage_action:
                 ok("promo engine next actions include refresh automation coverage gap")

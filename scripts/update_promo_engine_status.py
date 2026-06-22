@@ -2335,7 +2335,11 @@ def refresh_automation_next_action(automation: dict) -> str:
         return automation.get("action_needed") or "Configure promo admin refresh workflow."
     if automation.get("workflow_status_action_needed"):
         return f"Repair promo admin refresh workflow: {automation['workflow_status_action_needed']}"
-    if automation.get("workflow_status_available") and not automation.get("latest_run_covers_source_commit"):
+    if (
+        automation.get("workflow_status_available")
+        and not automation.get("latest_run_covers_source_commit")
+        and automation.get("latest_run_coverage_basis") != "generated_snapshot_changed_after_latest_run"
+    ):
         source = (automation.get("source_revision") or {}).get("short_commit") or "current source"
         return (
             f"Refresh automation coverage: latest scheduled run has not covered {source}; "
