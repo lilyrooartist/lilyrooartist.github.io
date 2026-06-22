@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T07:01:53.678172Z",
+  "generated_at": "2026-06-22T07:07:57.467305Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -48,8 +48,8 @@
       "phase": "Recover stalled approved backlog",
       "status": "preview_first",
       "detail": "Preview a new schedule for approved past-due posts. Safe apply is available after preview.",
-      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24",
-      "after_review_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
+      "after_review_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
       "context": {
         "approved_backlog_posts": 1,
         "approved_upcoming_posts": 9,

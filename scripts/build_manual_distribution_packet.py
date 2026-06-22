@@ -311,7 +311,7 @@ def manual_distribution_docket(rows: list[dict], summary: dict) -> dict:
     }
 
 
-def manual_completion_manifest(approval_docket: dict, distribution_docket: dict, rows: list[dict]) -> dict:
+def manual_completion_manifest(approval_docket: dict, distribution_docket: dict, rows: list[dict], url_rows: list[dict]) -> dict:
     review_queue = distribution_docket.get("review_queue") or []
     postable_now = distribution_docket.get("postable_now") or []
     pending_rows = [row for row in rows if not row.get("logged")]
@@ -323,7 +323,7 @@ def manual_completion_manifest(approval_docket: dict, distribution_docket: dict,
         }
         for row in pending_rows
     ]
-    url_rows = manual_url_template_rows(rows)
+    preserved_public_url_count = len([row for row in url_rows if (row.get("public_url") or "").strip()])
     return {
         "status": "needs_review" if review_queue else ("ready_to_post_and_log" if postable_now else "clear"),
         "posting_surface": "YouTube Studio Community",
@@ -336,6 +336,8 @@ def manual_completion_manifest(approval_docket: dict, distribution_docket: dict,
         "url_entry_rows": url_rows,
         "url_entry_row_count": len(url_rows),
         "waiting_public_url_count": len([row for row in url_rows if not row.get("public_url")]),
+        "preserved_public_url_count": preserved_public_url_count,
+        "url_template_preservation": "Existing valid http(s) public_url cells are preserved by id across refreshes until logged.",
         "review_queue_ids": [row.get("id") for row in review_queue if row.get("id")],
         "postable_now_ids": [row.get("id") for row in postable_now if row.get("id")],
         "logged_ids": [row.get("id") for row in rows if row.get("logged") and row.get("id")],
@@ -364,25 +366,40 @@ def manual_completion_manifest(approval_docket: dict, distribution_docket: dict,
     }
 
 
-def manual_url_template_rows(rows: list[dict]) -> list[dict]:
+def existing_url_by_id(path: Path) -> dict[str, str]:
+    preserved: dict[str, str] = {}
+    for row in read_csv_rows(path):
+        post_id = row.get("id") or row.get("manual_distribution_id") or ""
+        public_url = (row.get("public_url") or row.get("url") or "").strip()
+        parsed = urlparse(public_url)
+        if post_id and public_url != "PUBLIC_URL" and parsed.scheme in {"http", "https"} and parsed.netloc:
+            preserved[post_id] = public_url
+    return preserved
+
+
+def manual_url_template_rows(rows: list[dict], preserved_urls: dict[str, str] | None = None) -> list[dict]:
+    preserved_urls = preserved_urls or {}
     template_rows = []
     for row in rows:
         if row.get("logged"):
             continue
+        post_id = row.get("id") or ""
         template_rows.append({
-            "id": row.get("id") or "",
+            "id": post_id,
             "platform": row.get("platform") or "",
             "release": row.get("release") or "",
             "distribution_status": row.get("distribution_status") or "",
             "approved": row.get("approved") or "",
             "posting_surface": "YouTube Studio Community",
-            "public_url": row.get("published_url") or "",
+            "public_url": row.get("published_url") or preserved_urls.get(post_id, ""),
             "notes": "Paste the real public YouTube Community post URL after manual posting.",
         })
     return template_rows
 
 
-def write_url_template(rows: list[dict]) -> None:
+def write_url_template(rows: list[dict]) -> list[dict]:
+    preserved_urls = existing_url_by_id(URL_TEMPLATE)
+    url_rows = manual_url_template_rows(rows, preserved_urls)
     fieldnames = [
         "id",
         "platform",
@@ -396,7 +413,8 @@ def write_url_template(rows: list[dict]) -> None:
     with URL_TEMPLATE.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=fieldnames)
         writer.writeheader()
-        writer.writerows(manual_url_template_rows(rows))
+        writer.writerows(url_rows)
+    return url_rows
 
 
 def manual_approval_docket(runway: dict, rows: list[dict]) -> dict:
@@ -718,7 +736,7 @@ def main() -> int:
     published = published_lookup()
     evidence = destination_evidence_index()
     rows = build_rows(plan, runway, published, evidence)
-    write_url_template(rows)
+    url_rows = write_url_template(rows)
     hard_cta = [row for row in rows if row.get("selected_cta_strength") in {"hard_subscribe", "hard_goal"}]
     logged_rows = [row for row in rows if row.get("logged")]
     unlogged_rows = [row for row in rows if not row.get("logged")]
@@ -768,6 +786,7 @@ def main() -> int:
         payload["manual_approval_docket"],
         payload["manual_distribution_docket"],
         rows,
+        url_rows,
     )
     OUT.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     markdown = build_markdown(payload)
