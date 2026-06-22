@@ -1,13 +1,13 @@
 # Promotion Blocker Ledger - Lily Roo
 
-Generated: 2026-06-22T06:17:54.346876Z
+Generated: 2026-06-22T06:28:09.229161Z
 
 ## Summary
-- Open blockers: **11**
+- Open blockers: **10**
 - User-owned: **7**
-- External platform-owned: **4**
+- External platform-owned: **3**
 - Codex-actionable: **0**
-- High or critical: **6**
+- High or critical: **5**
 
 ## Unlock Roadmap
 - **Approve checked scheduled rows** (`blocked`)
@@ -24,11 +24,11 @@ Generated: 2026-06-22T06:17:54.346876Z
   - Unlocks: Held TikTok approval rows can pass platform-readiness review.; Approved TikTok backlog can become safe to reschedule and publish.
   - Blocked by: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN
   - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
-- **Reschedule approved past-due backlog** (`blocked_until_clearance_steps_complete`)
-  - Owner: `external_platform`; projected blockers resolved: **3**
+- **Reschedule approved past-due backlog** (`clear`)
+  - Owner: `tod`; projected blockers resolved: **0**
   - Unlocks: Approved past-due queue rows get a fresh schedule after executor blockers clear.
-  - Blocked by: FP-AUTO-264, FP-AUTO-263, FP-PLAN-TWELVE-DOLLARS-INSTAGRAM
   - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24`
+  - Apply after review: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin`
 - **Fill manual metric worksheet** (`needs_values`)
   - Owner: `tod`; projected blockers resolved: **6**
   - Unlocks: Admin health and weekly reporting can use fresh cross-platform metrics.; Manual metric blockers clear once worksheet values are imported.
@@ -54,13 +54,6 @@ Generated: 2026-06-22T06:17:54.346876Z
   - Guardrail: Run retry resets only after the external platform repair is verified.
   - Blocked apply command: `python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py`
   - Impact: apply blocked by: local_secret_source_missing:TIKTOK_CLIENT_KEY,TIKTOK_CLIENT_SECRET,TIKTOK_REFRESH_TOKEN, public_posting_approval_not_confirmed
-- **[high] Reschedule approved past-due backlog** (`backlog-reschedule`)
-  - Owner: `external_platform`; status: `blocked`; category: `backlog_reschedule`
-  - Evidence: 3 approved backlog row(s); 3 still have executor blockers.
-  - Next step: Preview a new schedule. Safe apply becomes available after known executor blockers clear.
-  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24`
-  - Guardrail: Normal apply is hidden while rows have known executor blockers.
-  - Blocked apply command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin`
 - **[high] Repair Facebook executor** (`platform-FP-AUTO-265`)
   - Owner: `external_platform`; status: `blocked`; category: `platform_repair`
   - Evidence: Facebook blocked Page publishing until identity is confirmed in the Facebook app.

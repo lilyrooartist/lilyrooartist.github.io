@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T06:17:54.165428Z",
+  "generated_at": "2026-06-22T06:28:09.053797Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -47,33 +47,35 @@
       "label": "Preview approved backlog reschedule",
       "phase": "Recover stalled approved backlog",
       "status": "preview_first",
-      "detail": "Preview a new schedule for approved past-due posts. Normal apply is hidden until known executor/platform blockers clear.",
+      "detail": "Preview a new schedule for approved past-due posts. Safe apply is available after preview.",
       "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
-      "after_review_command": "",
+      "after_review_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
       "context": {
-        "approved_backlog_posts": 4,
-        "approved_upcoming_posts": 6,
-        "blocked_backlog_count": 3,
-        "apply_allowed_without_override": false,
-        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
-        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin"
+        "approved_backlog_posts": 1,
+        "approved_upcoming_posts": 9,
+        "blocked_backlog_count": 0,
+        "apply_allowed_without_override": true,
+        "blocked_apply_command": "",
+        "override_apply_command": ""
       }
     },
     {
       "label": "Repair Instagram executor",
       "phase": "Clear platform blockers",
       "status": "needs_platform_fix",
-      "detail": "Reconnect the Instagram Business/Creator account to the Facebook Page or set IG_BUSINESS_ACCOUNT_ID, then push the worker secret and recapture readiness.",
+      "detail": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
       "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263",
-      "after_review_command": "python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py",
+      "after_review_command": "",
       "context": {
         "post_id": "FP-AUTO-263",
         "platform": "Instagram",
         "reason": "max_attempts_exceeded",
         "missing_secrets": [],
-        "local_missing_secrets": [],
-        "local_secret_source": "",
-        "local_secret_ready": null,
+        "local_missing_secrets": [
+          "IG_BUSINESS_ACCOUNT_ID"
+        ],
+        "local_secret_source": "secrets/social_api.env",
+        "local_secret_ready": false,
         "public_posting_approved": null
       }
     },
@@ -81,17 +83,19 @@
       "label": "Repair Instagram executor",
       "phase": "Clear platform blockers",
       "status": "needs_platform_fix",
-      "detail": "Reconnect the Instagram Business/Creator account to the Facebook Page or set IG_BUSINESS_ACCOUNT_ID, then push the worker secret and recapture readiness.",
+      "detail": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
       "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
-      "after_review_command": "python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py",
+      "after_review_command": "",
       "context": {
         "post_id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
         "platform": "Instagram",
         "reason": "max_attempts_exceeded",
         "missing_secrets": [],
-        "local_missing_secrets": [],
-        "local_secret_source": "",
-        "local_secret_ready": null,
+        "local_missing_secrets": [
+          "IG_BUSINESS_ACCOUNT_ID"
+        ],
+        "local_secret_source": "secrets/social_api.env",
+        "local_secret_ready": false,
         "public_posting_approved": null
       }
     },
@@ -140,14 +144,14 @@
       }
     },
     {
-      "label": "Current operations next action: Preview reschedule for approved past-due posts",
+      "label": "Current operations next action: Fix Instagram executor",
       "phase": "Operations packet",
-      "status": "waiting_for_user",
-      "detail": "Approved posts are past due; preview a new schedule before any apply step.",
-      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
+      "status": "needs_fix",
+      "detail": "Platform executor needs repair before queued auto posts can publish.",
+      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
       "after_review_command": "",
       "context": {
-        "kind": "backlog_reschedule",
+        "kind": "platform_fix",
         "urgency": "high"
       }
     }

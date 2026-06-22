@@ -457,7 +457,10 @@ def backlog_reschedule_actions(status, backlog_preview):
     backlog_summary = (backlog_preview.get("summary") or {}) if backlog_preview else {}
     clearance_manifest = (backlog_preview.get("backlog_clearance_manifest") or {}) if backlog_preview else {}
     partial_manifest = (backlog_preview.get("partial_clear_apply_manifest") or {}) if backlog_preview else {}
-    approved_backlog = int(monetization.get("approved_backlog_posts") or 0)
+    if backlog_summary:
+        approved_backlog = int(backlog_summary.get("approved_backlog_count") or 0)
+    else:
+        approved_backlog = int(monetization.get("approved_backlog_posts") or 0)
     preview_command = backlog_summary.get("preview_command") or monetization.get("backlog_reschedule_preview_command") or ""
     if not approved_backlog or not preview_command:
         return []

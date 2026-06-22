@@ -1,12 +1,12 @@
 # Human Handoff Resolution Preview - Lily Roo
 
-Generated: 2026-06-22T06:17:54.540625Z
+Generated: 2026-06-22T06:28:09.380364Z
 
 ## Summary
-- Worksheet rows: **10**
-- Executed previews: **4**
+- Worksheet rows: **9**
+- Executed previews: **3**
 - Skipped previews: **6**
-- Status counts: `{"input_missing": 3, "preview_ok_with_warning": 1, "skipped": 6}`
+- Status counts: `{"input_missing": 3, "skipped": 6}`
 - Policy: Only python3 scripts/* commands with --dry-run, or reschedule previews without --apply, are executed.
 - Guardrail: This preview runner never executes apply, refresh-admin, PUBLIC_URL placeholder, non-python, or unsupported commands.
 
@@ -32,12 +32,6 @@ Generated: 2026-06-22T06:17:54.540625Z
   - Safety: `skipped` (not_marked_preview_safe)
   - Command: `python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM`
   - Guardrail: Push worker secrets only after local OAuth/public posting setup is complete.
-- **backlog-reschedule** (`preview_ok_with_warning`)
-  - Phase: `Backlog recovery`; input needed: `clearance_confirmation`
-  - Safety: `safe_preview` (reschedule_preview_command)
-  - Command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24`
-  - Output: Rows selected: 3 | - FP-AUTO-264 TikTok I Learned It All in Fifteen Seconds: 2026-06-09T21:25:00-04:00 -> 2026-06-23T10:00:00+08:00 |   WARNING: known blocker: tiktok_credentials_missing | - FP-AUTO-263 Instagram I Learned It All in Fifteen Seconds: 2026-06-21T10:00:00+09:00 -> 2026-06-24T10:00:00+08:00 |   WARNING: known blocker: Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID. | - FP-PLAN-TWELVE-DOLLARS-INSTAGRAM Instagram Twelve Dollars: 2026-06-21T14:05:00-04:00 -> 2026-06-25T10:00:00+08:00 |   WARNING: known blocker: Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID. | Dry run only. Re-run with --apply to write the schedule.
-  - Guardrail: Normal apply stays hidden until known executor/platform blockers clear.
 - **manual-distribution-FP-AUTO-261** (`skipped`)
   - Phase: `Manual distribution`; input needed: `public_post_url`
   - Safety: `skipped` (placeholder_public_url)

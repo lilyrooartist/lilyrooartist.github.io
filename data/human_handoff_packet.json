@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T06:17:54.383779Z",
+  "generated_at": "2026-06-22T06:28:09.260577Z",
   "safe_mode": true,
   "source": {
     "promotion_blocker_ledger": "data/promotion_blocker_ledger.json",
@@ -13,38 +13,35 @@
     "resolution_worksheet": "data/human_handoff_resolution_worksheet.csv"
   },
   "summary": {
-    "task_count": 10,
+    "task_count": 9,
     "owner_counts": {
-      "external_platform": 1,
       "tod": 9
     },
     "urgency_counts": {
-      "high": 5,
+      "high": 4,
       "low": 2,
       "medium": 3
     },
     "phase_counts": {
-      "Backlog recovery": 1,
       "Manual distribution": 3,
       "Manual metrics": 2,
       "Platform setup": 4
     },
     "blocker_summary": {
-      "open_blocker_count": 11,
-      "urgent_count": 6,
+      "open_blocker_count": 10,
+      "urgent_count": 5,
       "owner_counts": {
-        "external_platform": 4,
+        "external_platform": 3,
         "tod": 7
       },
       "category_counts": {
         "approval": 1,
-        "backlog_reschedule": 1,
         "manual_distribution": 3,
         "manual_metrics": 2,
         "platform_repair": 4
       },
       "status_counts": {
-        "blocked": 5,
+        "blocked": 4,
         "blocked_by_review_checks": 1,
         "needs_values": 2,
         "ready_for_manual_post": 3
@@ -125,19 +122,15 @@
         {
           "id": "unlock-backlog-reschedule",
           "phase": "Reschedule approved past-due backlog",
-          "status": "blocked_until_clearance_steps_complete",
-          "owner": "external_platform",
-          "blockers_resolved": 3,
+          "status": "clear",
+          "owner": "tod",
+          "blockers_resolved": 0,
           "unlocks": [
             "Approved past-due queue rows get a fresh schedule after executor blockers clear."
           ],
-          "blocked_by": [
-            "FP-AUTO-264",
-            "FP-AUTO-263",
-            "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM"
-          ],
+          "blocked_by": [],
           "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
-          "apply_command": "",
+          "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
           "source_path": "data/backlog_reschedule_preview.json"
         },
         {
@@ -174,9 +167,9 @@
   "action_docket": {
     "source": "data/human_handoff_packet.json",
     "roadmap_step_count": 5,
-    "task_count": 10,
+    "task_count": 9,
     "ready_step_count": 2,
-    "blocked_step_count": 2,
+    "blocked_step_count": 1,
     "manual_post_count": 3,
     "manual_metric_field_count": 6,
     "first_ready_step": {
@@ -277,127 +270,6 @@
         "completion_evidence": "data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_post_publicly before TikTok backlog work is allowed.",
         "next_step_after_apply": "Recapture admin state and only then revisit TikTok approval or backlog reschedule rows.",
         "guardrail": "Run preflight and confirm local OAuth/public-posting setup before pushing secrets."
-      },
-      {
-        "id": "backlog-reschedule-gate",
-        "label": "Reschedule approved backlog after blockers clear",
-        "state": "blocked",
-        "owner": "external_platform",
-        "task_ids": [
-          "backlog-reschedule"
-        ],
-        "blockers_resolved": 3,
-        "backlog_clearance_manifest": {
-          "status": "blocked_until_clearance_steps_complete",
-          "approved_backlog_count": 3,
-          "blocked_backlog_count": 3,
-          "clear_to_apply_count": 0,
-          "partial_clear_apply_available": false,
-          "partial_clear_apply_count": 0,
-          "blocked_ids": [
-            "FP-AUTO-264",
-            "FP-AUTO-263",
-            "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM"
-          ],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
-          "safe_apply_command": "",
-          "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
-          "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
-          "apply_allowed_without_override": false,
-          "apply_gate": "blocked_until_clearance_steps_complete",
-          "clearance_steps": [
-            "Add local TikTok OAuth credentials, then push worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
-            "Confirm TikTok public posting approval before treating auto-posting as ready.",
-            "Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair.",
-            "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
-          ],
-          "blocked_items": [
-            {
-              "id": "FP-AUTO-264",
-              "platform": "TikTok",
-              "song": "I Learned It All in Fifteen Seconds",
-              "blocker_kind": "tiktok_credentials_missing",
-              "blocker_reason": "tiktok_credentials_missing",
-              "proposed_scheduled_at": "2026-06-23T10:00:00+08:00",
-              "clearance_steps": [
-                "Add local TikTok OAuth credentials, then push worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
-                "Confirm TikTok public posting approval before treating auto-posting as ready.",
-                "Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair."
-              ]
-            },
-            {
-              "id": "FP-AUTO-263",
-              "platform": "Instagram",
-              "song": "I Learned It All in Fifteen Seconds",
-              "blocker_kind": "max_attempts_exceeded",
-              "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
-              "proposed_scheduled_at": "2026-06-24T10:00:00+08:00",
-              "clearance_steps": [
-                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
-              ]
-            },
-            {
-              "id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
-              "platform": "Instagram",
-              "song": "Twelve Dollars",
-              "blocker_kind": "max_attempts_exceeded",
-              "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
-              "proposed_scheduled_at": "2026-06-25T10:00:00+08:00",
-              "clearance_steps": [
-                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
-              ]
-            }
-          ],
-          "operator_checklist": [
-            "Run the preview command and confirm it proposes only approved unpublished backlog rows.",
-            "If partial_clear_apply_available is true, use the scoped partial-clear commands for unblocked rows while blocked rows are repaired.",
-            "Complete every listed platform/executor clearance step before normal apply.",
-            "Refresh Admin and confirm the normal apply gate is clear.",
-            "Apply only when safe_apply_command is populated without --allow-blocked.",
-            "After apply, refresh Admin and confirm the backlog rows have future scheduled_at values."
-          ],
-          "completion_evidence": [
-            "data/backlog_reschedule_preview.json shows normal_apply_gate clear.",
-            "data/platform_repair_status.json shows the affected platform repair gate clear.",
-            "data/social_execution_snapshot.json no longer reports the row as blocked by executor/platform repair.",
-            "data/promo_engine_status.json and lilyroo.com/admin expose a safe apply command or no approved past-due backlog."
-          ],
-          "guardrails": [
-            "Normal apply stays hidden while blocked_ids are present.",
-            "Do not use the override command unless accepting the blocked executor risk deliberately.",
-            "A reschedule does not publish, approve, or repair platform credentials by itself."
-          ]
-        },
-        "clearance_checklist": [
-          "Run the preview command and confirm it proposes only approved unpublished backlog rows.",
-          "If partial_clear_apply_available is true, use the scoped partial-clear commands for unblocked rows while blocked rows are repaired.",
-          "Complete every listed platform/executor clearance step before normal apply.",
-          "Refresh Admin and confirm the normal apply gate is clear.",
-          "Apply only when safe_apply_command is populated without --allow-blocked.",
-          "After apply, refresh Admin and confirm the backlog rows have future scheduled_at values."
-        ],
-        "clearance_guardrails": [
-          "Normal apply stays hidden while blocked_ids are present.",
-          "Do not use the override command unless accepting the blocked executor risk deliberately.",
-          "A reschedule does not publish, approve, or repair platform credentials by itself."
-        ],
-        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
-        "apply_command": "",
-        "command_sequence": [
-          {
-            "step": "preview",
-            "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
-            "required_before_apply": true
-          },
-          {
-            "step": "verify",
-            "command": "python3 scripts/refresh_promo_admin.py",
-            "required_before_apply": false
-          }
-        ],
-        "completion_evidence": "data/backlog_reschedule_preview.json should show normal_apply_gate clear before any non-override apply command is exposed.",
-        "next_step_after_apply": "Refresh admin and confirm approved past-due posts have future scheduled_at values before relying on the scheduler.",
-        "guardrail": "Normal apply stays hidden until known executor/platform blockers clear."
       }
     ],
     "checklist": [
@@ -682,114 +554,16 @@
       {
         "id": "backlog-reschedule-gate",
         "label": "Reschedule approved backlog after blockers clear",
-        "state": "blocked",
-        "owner": "external_platform",
-        "task_ids": [
-          "backlog-reschedule"
-        ],
-        "blockers_resolved": 3,
-        "backlog_clearance_manifest": {
-          "status": "blocked_until_clearance_steps_complete",
-          "approved_backlog_count": 3,
-          "blocked_backlog_count": 3,
-          "clear_to_apply_count": 0,
-          "partial_clear_apply_available": false,
-          "partial_clear_apply_count": 0,
-          "blocked_ids": [
-            "FP-AUTO-264",
-            "FP-AUTO-263",
-            "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM"
-          ],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
-          "safe_apply_command": "",
-          "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
-          "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
-          "apply_allowed_without_override": false,
-          "apply_gate": "blocked_until_clearance_steps_complete",
-          "clearance_steps": [
-            "Add local TikTok OAuth credentials, then push worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
-            "Confirm TikTok public posting approval before treating auto-posting as ready.",
-            "Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair.",
-            "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
-          ],
-          "blocked_items": [
-            {
-              "id": "FP-AUTO-264",
-              "platform": "TikTok",
-              "song": "I Learned It All in Fifteen Seconds",
-              "blocker_kind": "tiktok_credentials_missing",
-              "blocker_reason": "tiktok_credentials_missing",
-              "proposed_scheduled_at": "2026-06-23T10:00:00+08:00",
-              "clearance_steps": [
-                "Add local TikTok OAuth credentials, then push worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
-                "Confirm TikTok public posting approval before treating auto-posting as ready.",
-                "Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair."
-              ]
-            },
-            {
-              "id": "FP-AUTO-263",
-              "platform": "Instagram",
-              "song": "I Learned It All in Fifteen Seconds",
-              "blocker_kind": "max_attempts_exceeded",
-              "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
-              "proposed_scheduled_at": "2026-06-24T10:00:00+08:00",
-              "clearance_steps": [
-                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
-              ]
-            },
-            {
-              "id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
-              "platform": "Instagram",
-              "song": "Twelve Dollars",
-              "blocker_kind": "max_attempts_exceeded",
-              "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
-              "proposed_scheduled_at": "2026-06-25T10:00:00+08:00",
-              "clearance_steps": [
-                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
-              ]
-            }
-          ],
-          "operator_checklist": [
-            "Run the preview command and confirm it proposes only approved unpublished backlog rows.",
-            "If partial_clear_apply_available is true, use the scoped partial-clear commands for unblocked rows while blocked rows are repaired.",
-            "Complete every listed platform/executor clearance step before normal apply.",
-            "Refresh Admin and confirm the normal apply gate is clear.",
-            "Apply only when safe_apply_command is populated without --allow-blocked.",
-            "After apply, refresh Admin and confirm the backlog rows have future scheduled_at values."
-          ],
-          "completion_evidence": [
-            "data/backlog_reschedule_preview.json shows normal_apply_gate clear.",
-            "data/platform_repair_status.json shows the affected platform repair gate clear.",
-            "data/social_execution_snapshot.json no longer reports the row as blocked by executor/platform repair.",
-            "data/promo_engine_status.json and lilyroo.com/admin expose a safe apply command or no approved past-due backlog."
-          ],
-          "guardrails": [
-            "Normal apply stays hidden while blocked_ids are present.",
-            "Do not use the override command unless accepting the blocked executor risk deliberately.",
-            "A reschedule does not publish, approve, or repair platform credentials by itself."
-          ]
-        },
-        "clearance_checklist": [
-          "Run the preview command and confirm it proposes only approved unpublished backlog rows.",
-          "If partial_clear_apply_available is true, use the scoped partial-clear commands for unblocked rows while blocked rows are repaired.",
-          "Complete every listed platform/executor clearance step before normal apply.",
-          "Refresh Admin and confirm the normal apply gate is clear.",
-          "Apply only when safe_apply_command is populated without --allow-blocked.",
-          "After apply, refresh Admin and confirm the backlog rows have future scheduled_at values."
-        ],
-        "clearance_guardrails": [
-          "Normal apply stays hidden while blocked_ids are present.",
-          "Do not use the override command unless accepting the blocked executor risk deliberately.",
-          "A reschedule does not publish, approve, or repair platform credentials by itself."
-        ],
-        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
+        "state": "clear",
+        "owner": "tod",
+        "task_ids": [],
+        "blockers_resolved": 0,
+        "backlog_clearance_manifest": {},
+        "clearance_checklist": [],
+        "clearance_guardrails": [],
+        "preview_command": "",
         "apply_command": "",
         "command_sequence": [
-          {
-            "step": "preview",
-            "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
-            "required_before_apply": true
-          },
           {
             "step": "verify",
             "command": "python3 scripts/refresh_promo_admin.py",
@@ -798,13 +572,13 @@
         ],
         "completion_evidence": "data/backlog_reschedule_preview.json should show normal_apply_gate clear before any non-override apply command is exposed.",
         "next_step_after_apply": "Refresh admin and confirm approved past-due posts have future scheduled_at values before relying on the scheduler.",
-        "guardrail": "Normal apply stays hidden until known executor/platform blockers clear."
+        "guardrail": "Do not apply blocked backlog reschedules without clearing platform readiness."
       }
     ]
   },
   "resolution_worksheet": {
     "path": "data/human_handoff_resolution_worksheet.csv",
-    "row_count": 10,
+    "row_count": 9,
     "fieldnames": [
       "task_id",
       "phase",
@@ -925,126 +699,6 @@
       },
       "links": [],
       "guardrail": "Push worker secrets only after local OAuth/public posting setup is complete."
-    },
-    {
-      "id": "backlog-reschedule",
-      "title": "Preview approved backlog reschedule",
-      "phase": "Backlog recovery",
-      "owner": "external_platform",
-      "urgency": "high",
-      "status": "blocked",
-      "detail": "Known executor/platform blockers must clear before normal apply.",
-      "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
-      "apply_command": "",
-      "source_path": "data/backlog_reschedule_preview.json",
-      "impact": {
-        "approved_backlog_count": 3,
-        "blocked_backlog_count": 3,
-        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
-        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
-        "backlog_clearance_manifest": {
-          "status": "blocked_until_clearance_steps_complete",
-          "approved_backlog_count": 3,
-          "blocked_backlog_count": 3,
-          "clear_to_apply_count": 0,
-          "partial_clear_apply_available": false,
-          "partial_clear_apply_count": 0,
-          "blocked_ids": [
-            "FP-AUTO-264",
-            "FP-AUTO-263",
-            "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM"
-          ],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
-          "safe_apply_command": "",
-          "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
-          "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
-          "apply_allowed_without_override": false,
-          "apply_gate": "blocked_until_clearance_steps_complete",
-          "clearance_steps": [
-            "Add local TikTok OAuth credentials, then push worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
-            "Confirm TikTok public posting approval before treating auto-posting as ready.",
-            "Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair.",
-            "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
-          ],
-          "blocked_items": [
-            {
-              "id": "FP-AUTO-264",
-              "platform": "TikTok",
-              "song": "I Learned It All in Fifteen Seconds",
-              "blocker_kind": "tiktok_credentials_missing",
-              "blocker_reason": "tiktok_credentials_missing",
-              "proposed_scheduled_at": "2026-06-23T10:00:00+08:00",
-              "clearance_steps": [
-                "Add local TikTok OAuth credentials, then push worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
-                "Confirm TikTok public posting approval before treating auto-posting as ready.",
-                "Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair."
-              ]
-            },
-            {
-              "id": "FP-AUTO-263",
-              "platform": "Instagram",
-              "song": "I Learned It All in Fifteen Seconds",
-              "blocker_kind": "max_attempts_exceeded",
-              "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
-              "proposed_scheduled_at": "2026-06-24T10:00:00+08:00",
-              "clearance_steps": [
-                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
-              ]
-            },
-            {
-              "id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
-              "platform": "Instagram",
-              "song": "Twelve Dollars",
-              "blocker_kind": "max_attempts_exceeded",
-              "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
-              "proposed_scheduled_at": "2026-06-25T10:00:00+08:00",
-              "clearance_steps": [
-                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
-              ]
-            }
-          ],
-          "operator_checklist": [
-            "Run the preview command and confirm it proposes only approved unpublished backlog rows.",
-            "If partial_clear_apply_available is true, use the scoped partial-clear commands for unblocked rows while blocked rows are repaired.",
-            "Complete every listed platform/executor clearance step before normal apply.",
-            "Refresh Admin and confirm the normal apply gate is clear.",
-            "Apply only when safe_apply_command is populated without --allow-blocked.",
-            "After apply, refresh Admin and confirm the backlog rows have future scheduled_at values."
-          ],
-          "completion_evidence": [
-            "data/backlog_reschedule_preview.json shows normal_apply_gate clear.",
-            "data/platform_repair_status.json shows the affected platform repair gate clear.",
-            "data/social_execution_snapshot.json no longer reports the row as blocked by executor/platform repair.",
-            "data/promo_engine_status.json and lilyroo.com/admin expose a safe apply command or no approved past-due backlog."
-          ],
-          "guardrails": [
-            "Normal apply stays hidden while blocked_ids are present.",
-            "Do not use the override command unless accepting the blocked executor risk deliberately.",
-            "A reschedule does not publish, approve, or repair platform credentials by itself."
-          ]
-        },
-        "clearance_checklist": [
-          "Run the preview command and confirm it proposes only approved unpublished backlog rows.",
-          "If partial_clear_apply_available is true, use the scoped partial-clear commands for unblocked rows while blocked rows are repaired.",
-          "Complete every listed platform/executor clearance step before normal apply.",
-          "Refresh Admin and confirm the normal apply gate is clear.",
-          "Apply only when safe_apply_command is populated without --allow-blocked.",
-          "After apply, refresh Admin and confirm the backlog rows have future scheduled_at values."
-        ],
-        "completion_evidence": [
-          "data/backlog_reschedule_preview.json shows normal_apply_gate clear.",
-          "data/platform_repair_status.json shows the affected platform repair gate clear.",
-          "data/social_execution_snapshot.json no longer reports the row as blocked by executor/platform repair.",
-          "data/promo_engine_status.json and lilyroo.com/admin expose a safe apply command or no approved past-due backlog."
-        ],
-        "clearance_guardrails": [
-          "Normal apply stays hidden while blocked_ids are present.",
-          "Do not use the override command unless accepting the blocked executor risk deliberately.",
-          "A reschedule does not publish, approve, or repair platform credentials by itself."
-        ]
-      },
-      "links": [],
-      "guardrail": "Normal apply stays hidden until known executor/platform blockers clear."
     },
     {
       "id": "manual-distribution-FP-AUTO-261",

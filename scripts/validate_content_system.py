@@ -639,11 +639,13 @@ def validate_generated_outputs(failures):
             fail("promo_operations_packet.json missing required action groups", failures)
         status = json.loads(PROMO_ENGINE_STATUS.read_text(encoding="utf-8")) if PROMO_ENGINE_STATUS.exists() else {}
         monetization = (status.get("kpi") or {}).get("monetization") or {}
+        backlog_packet_for_operations = json.loads(BACKLOG_RESCHEDULE_PREVIEW.read_text(encoding="utf-8")) if BACKLOG_RESCHEDULE_PREVIEW.exists() else {}
+        backlog_count_for_operations = int(((backlog_packet_for_operations.get("summary") or {}).get("approved_backlog_count")) or 0)
         backlog_actions = [
             action for action in actions
             if action.get("kind") == "backlog_reschedule"
         ]
-        if int(monetization.get("approved_backlog_posts") or 0):
+        if backlog_count_for_operations:
             if (
                 backlog_actions
                 and all("--apply" not in (action.get("command") or "") for action in backlog_actions)
@@ -682,6 +684,10 @@ def validate_generated_outputs(failures):
                 ok("promo operations packet includes dry-run backlog reschedule action")
             else:
                 fail("promo_operations_packet.json missing dry-run backlog reschedule action", failures)
+        elif not backlog_actions and summary.get("backlog_reschedules") == 0:
+            ok("promo operations packet has no backlog reschedule action after backlog clears")
+        else:
+            fail("promo_operations_packet.json still surfaces cleared backlog reschedule action", failures)
         scheduled_batch_actions = [
             action for action in actions
             if action.get("kind") == "scheduled_approval_batch"
@@ -950,6 +956,11 @@ def validate_generated_outputs(failures):
         first_ready_step = docket.get("first_ready_step") or {}
         manual_posting_has_cards = bool(manual_posting_step.get("posting_packets"))
         metric_task_field_count = sum(int((task.get("impact") or {}).get("field_count") or 0) for task in tasks if task.get("phase") == "Manual metrics")
+        backlog_packet_for_handoff = json.loads(BACKLOG_RESCHEDULE_PREVIEW.read_text(encoding="utf-8")) if BACKLOG_RESCHEDULE_PREVIEW.exists() else {}
+        backlog_count_for_handoff = int(((backlog_packet_for_handoff.get("summary") or {}).get("approved_backlog_count")) or 0)
+        required_phases = {"Manual distribution", "Manual metrics", "Platform setup"}
+        if backlog_count_for_handoff:
+            required_phases.add("Backlog recovery")
         if (
             handoff.get("safe_mode") is True
             and summary.get("task_count") == len(tasks)
@@ -966,7 +977,7 @@ def validate_generated_outputs(failures):
             and "private metric values" in (resolution_worksheet.get("redaction") or "")
             and sum(int(value or 0) for value in owners.values()) == len(tasks)
             and sum(int(value or 0) for value in urgencies.values()) == len(tasks)
-            and {"Manual distribution", "Manual metrics", "Platform setup", "Backlog recovery"} <= phases
+            and required_phases <= phases
             and ("Approval" in phases or not scheduled_checked_change_count_for_handoff)
             and all(task.get("id") and task.get("title") and task.get("owner") and task.get("urgency") and task.get("status") and task.get("source_path") for task in tasks)
             and (
@@ -1031,7 +1042,10 @@ def validate_generated_outputs(failures):
             )
             and manual_approval_docket.get("guardrail") in manual_posting_step.get("guardrail", "")
             and any(item.get("id") == "manual-metric-worksheet" and item.get("field_count") == metric_task_field_count and "--from-csv --dry-run" in item.get("preview_command", "") and item.get("metric_completion_manifest") and item.get("completion_checklist") and item.get("completion_guardrails") for item in docket_checklist)
-            and any(item.get("id") == "backlog-reschedule-gate" and item.get("backlog_clearance_manifest") and item.get("clearance_checklist") and item.get("clearance_guardrails") for item in docket_checklist)
+            and (
+                not backlog_count_for_handoff
+                or any(item.get("id") == "backlog-reschedule-gate" and item.get("backlog_clearance_manifest") and item.get("clearance_checklist") and item.get("clearance_guardrails") for item in docket_checklist)
+            )
             and any(
                 item.get("id") == "platform-repair-gate"
                 and item.get("state") == "blocked"
@@ -1051,7 +1065,10 @@ def validate_generated_outputs(failures):
                 if item.get("state") != "clear"
             )
             and any(task.get("phase") == "Manual metrics" and (task.get("impact") or {}).get("pending_assignments") and (task.get("impact") or {}).get("metric_completion_manifest") and (task.get("impact") or {}).get("completion_checklist") for task in tasks)
-            and any(task.get("phase") == "Backlog recovery" and (task.get("impact") or {}).get("backlog_clearance_manifest") and (task.get("impact") or {}).get("clearance_checklist") for task in tasks)
+            and (
+                not backlog_count_for_handoff
+                or any(task.get("phase") == "Backlog recovery" and (task.get("impact") or {}).get("backlog_clearance_manifest") and (task.get("impact") or {}).get("clearance_checklist") for task in tasks)
+            )
             and any(task.get("phase") == "Platform setup" and (task.get("impact") or {}).get("missing_secrets") for task in tasks)
             and any(task.get("phase") == "Platform setup" and (task.get("impact") or {}).get("platform") == "TikTok" and (task.get("impact") or {}).get("preflight_status") and (task.get("impact") or {}).get("preflight_command") and (task.get("impact") or {}).get("preflight_report") for task in tasks)
         ):
@@ -1066,6 +1083,8 @@ def validate_generated_outputs(failures):
         previews = preview.get("previews") or []
         handoff = json.loads(HUMAN_HANDOFF_PACKET.read_text(encoding="utf-8")) if HUMAN_HANDOFF_PACKET.exists() else {}
         tasks = handoff.get("tasks") or []
+        backlog_packet_for_preview = json.loads(BACKLOG_RESCHEDULE_PREVIEW.read_text(encoding="utf-8")) if BACKLOG_RESCHEDULE_PREVIEW.exists() else {}
+        backlog_preview_count = int(((backlog_packet_for_preview.get("summary") or {}).get("approved_backlog_count")) or 0)
         worksheet_rows = read_csv(HUMAN_HANDOFF_RESOLUTION_WORKSHEET) if HUMAN_HANDOFF_RESOLUTION_WORKSHEET.exists() else []
         status_counts = summary.get("status_counts") or {}
         if (
@@ -1099,7 +1118,10 @@ def validate_generated_outputs(failures):
                 any(item.get("preview_status") in {"preview_ok", "preview_ok_with_warning"} and item.get("phase") in {"Approval", "Manual distribution"} for item in previews)
                 or any(item.get("phase") == "Manual distribution" and item.get("preview_status") == "skipped" and item.get("input_needed") == "public_post_url" for item in previews)
             )
-            and any(item.get("preview_status") == "preview_ok_with_warning" and item.get("phase") == "Backlog recovery" for item in previews)
+            and (
+                backlog_preview_count == 0
+                or any(item.get("preview_status") == "preview_ok_with_warning" and item.get("phase") == "Backlog recovery" for item in previews)
+            )
             and all(item.get("output_excerpt") is not None and item.get("guardrail") for item in previews)
             and all("/Users/" not in item.get("output_excerpt", "") for item in previews)
             and (preview.get("handoff_resolution_summary") or {}).get("path") == "data/human_handoff_resolution_worksheet.csv"
@@ -1129,14 +1151,17 @@ def validate_generated_outputs(failures):
             and unlock_summary.get("open_blocker_count") == ledger_open_count
             and [step.get("id") for step in unlock_steps] == [item.get("id") for item in ledger_roadmap]
             and any(step.get("gate_state") == "blocked_until_input" for step in unlock_steps)
-            and any(step.get("gate_state") == "preview_ready_with_blocker_warning" for step in unlock_steps)
+            and (
+                any(step.get("gate_state") == "preview_ready_with_blocker_warning" for step in unlock_steps)
+                or any(step.get("id") == "unlock-backlog-reschedule" and step.get("gate_state") == "clear" for step in unlock_steps)
+            )
             and all(
                 (
                     step.get("commands")
                     and step.get("completion_evidence")
                     and step.get("guardrail")
                 )
-                or step.get("gate_state") == "blocked"
+                or step.get("gate_state") in {"blocked", "clear"}
                 for step in unlock_steps
             )
             and all(command.get("safe_to_run") is True for step in unlock_steps for command in (step.get("commands") or []) if command.get("step") == "preview")
@@ -2669,7 +2694,13 @@ def validate_generated_outputs(failures):
             ok("promo engine status mirrors operational next action")
         else:
             fail("promo_engine_status.json missing top-priority operational next action", failures)
-        if automation.get("workflow_status_available") and not automation.get("latest_run_covers_source_commit"):
+        if automation.get("workflow_status_available") and automation.get("workflow_status_ok") is False:
+            repair_action = next((action for action in next_actions if action.startswith("Repair promo admin refresh workflow:")), "")
+            if repair_action and automation.get("workflow_status_action_needed", "") in repair_action:
+                ok("promo engine next actions include refresh automation repair action")
+            else:
+                fail("promo_engine_status.json missing refresh automation repair action", failures)
+        elif automation.get("workflow_status_available") and not automation.get("latest_run_covers_source_commit"):
             coverage_action = next((action for action in next_actions if action.startswith("Refresh automation coverage:")), "")
             if coverage_action and (automation.get("source_revision") or {}).get("short_commit") in coverage_action and (automation.get("actions_url") or "") in coverage_action:
                 ok("promo engine next actions include refresh automation coverage gap")
@@ -2719,7 +2750,7 @@ def validate_generated_outputs(failures):
             and preview_action
             and (not preview_ready or f"{len(preview_ready)} preview-clean" in preview_action)
             and f"{len(preview_missing)} missing input" in preview_action
-            and f"{len(preview_warning)} warning" in preview_action
+            and (not preview_warning or f"{len(preview_warning)} warning" in preview_action)
             and handoff_preview.get("source_path") in preview_action
         ):
             ok("promo engine status mirrors handoff resolution preview health")
