@@ -1,6 +1,6 @@
 # Experiment Result Clipboard - Lily Roo
 
-Generated: 2026-06-22T08:15:29.346428Z
+Generated: 2026-06-22T08:21:20.478757Z
 
 ## Summary
 - Status: **needs_values**
@@ -8,7 +8,7 @@ Generated: 2026-06-22T08:15:29.346428Z
 - Missing public URLs: **6**
 - Measurement priorities: **8**
 - Post-log handoff rows: **3**
-- Pending result fields: **18**
+- Pending result fields: **8**
 - Ready to import: **0**
 - Wide rows ready to import: **0**
 - Entry CSV: `data/experiment_result_entry_template.csv`
@@ -22,10 +22,10 @@ Generated: 2026-06-22T08:15:29.346428Z
 - Format: Release-art image + story hook
 - URL: https://x.com/i/web/status/2062920257577029712
 - Published: 2026-06-05; Published_Log row: `16`
-- Pending fields: `views, likes, comments, shares, saves, subs_delta`
+- Pending fields: `subs_delta`
 - Wide-ready fields: `none`
 - Wide entry instruction: Fill one wide entry CSV row in data/experiment_result_entry_wide_template.csv for this post; keep unknown metrics blank and include one evidence_note.
-- Wide CSV target: post_id `FP-AUTO-257`, source_row `16`, fill `views, likes, comments, shares, saves, subs_delta`.
+- Wide CSV target: post_id `FP-AUTO-257`, source_row `16`, fill `subs_delta`.
 - Evidence sources:
   - Logged public post: https://x.com/i/web/status/2062920257577029712 - Open the public post to confirm the URL and visible engagement before entering metrics.
   - X Analytics: https://analytics.x.com/ - Use the logged post URL or post ID to find the post and copy visible analytics values.
@@ -35,11 +35,6 @@ Generated: 2026-06-22T08:15:29.346428Z
   - Copy only numeric values that are visible in the source.
   - Enter values in the wide entry CSV row for this post_id and source_row.
   - Add an evidence_note with source and collection date before import preview.
-  - `views`: Open X analytics for https://x.com/i/web/status/2062920257577029712 and record views.
-  - `likes`: Open X analytics for https://x.com/i/web/status/2062920257577029712 and record likes.
-  - `comments`: Open X analytics for https://x.com/i/web/status/2062920257577029712 and record comments.
-  - `shares`: Open X analytics for https://x.com/i/web/status/2062920257577029712 and record shares.
-  - `saves`: Open X analytics for https://x.com/i/web/status/2062920257577029712 and record saves.
   - `subs_delta`: Open X analytics for https://x.com/i/web/status/2062920257577029712 and record subs_delta.
 ### Facebook - I Learned It All in Fifteen Seconds (`FP-AUTO-260`)
 - Format: Release-art image + story hook
@@ -68,10 +63,10 @@ Generated: 2026-06-22T08:15:29.346428Z
 - Format: Release-art image + story hook
 - URL: https://x.com/i/web/status/2063600780834136468
 - Published: 2026-06-07; Published_Log row: `17`
-- Pending fields: `views, likes, comments, shares, saves, subs_delta`
+- Pending fields: `subs_delta`
 - Wide-ready fields: `none`
 - Wide entry instruction: Fill one wide entry CSV row in data/experiment_result_entry_wide_template.csv for this post; keep unknown metrics blank and include one evidence_note.
-- Wide CSV target: post_id `FP-AUTO-262`, source_row `17`, fill `views, likes, comments, shares, saves, subs_delta`.
+- Wide CSV target: post_id `FP-AUTO-262`, source_row `17`, fill `subs_delta`.
 - Evidence sources:
   - Logged public post: https://x.com/i/web/status/2063600780834136468 - Open the public post to confirm the URL and visible engagement before entering metrics.
   - X Analytics: https://analytics.x.com/ - Use the logged post URL or post ID to find the post and copy visible analytics values.
@@ -81,11 +76,6 @@ Generated: 2026-06-22T08:15:29.346428Z
   - Copy only numeric values that are visible in the source.
   - Enter values in the wide entry CSV row for this post_id and source_row.
   - Add an evidence_note with source and collection date before import preview.
-  - `views`: Open X analytics for https://x.com/i/web/status/2063600780834136468 and record views.
-  - `likes`: Open X analytics for https://x.com/i/web/status/2063600780834136468 and record likes.
-  - `comments`: Open X analytics for https://x.com/i/web/status/2063600780834136468 and record comments.
-  - `shares`: Open X analytics for https://x.com/i/web/status/2063600780834136468 and record shares.
-  - `saves`: Open X analytics for https://x.com/i/web/status/2063600780834136468 and record saves.
   - `subs_delta`: Open X analytics for https://x.com/i/web/status/2063600780834136468 and record subs_delta.
 
 ## Measurement Priorities
@@ -93,11 +83,11 @@ Generated: 2026-06-22T08:15:29.346428Z
   - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
   - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
 - **Collect metrics** `FP-AUTO-257` X / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 3 logged post(s), 1 missing URL(s) in this format.
-  - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-257 --source-row 16 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
-  - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-257 --source-row 16 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
+  - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-257 --source-row 16 --subs-delta VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
+  - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-257 --source-row 16 --subs-delta VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
 - **Collect metrics** `FP-AUTO-262` X / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 3 logged post(s), 1 missing URL(s) in this format.
-  - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-262 --source-row 17 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
-  - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-262 --source-row 17 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
+  - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-262 --source-row 17 --subs-delta VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
+  - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-262 --source-row 17 --subs-delta VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
 - **Post and log public URL** `FP-AUTO-261` YouTube Community / YouTube Community archive/playlist CTA: Postable now in the Manual Posting Clipboard; publish it and log the public URL so metrics can start. 0 logged post(s), 3 missing URL(s) in this format.
   - Paste file: `data/manual-posting-cards/fp-auto-261.txt`
   - Community surface: https://www.youtube.com/@lilyroo.artist/community

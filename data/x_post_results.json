@@ -1,0 +1,158 @@
+{
+  "generated_at": "2026-06-22T08:21:34.100125Z",
+  "safe_mode": true,
+  "source": {
+    "published_log": "admin/content/Published_Log.csv",
+    "local_secret_source": "secrets/social_api.env",
+    "x_endpoint": "https://api.x.com/2/tweets"
+  },
+  "summary": {
+    "status": "no_open_x_result_fields",
+    "captured_post_count": 5,
+    "fillable_post_count": 0,
+    "fillable_result_field_count": 0,
+    "post_ids": [
+      "LR-ANEC-001",
+      "FP-AUTO-208",
+      "FP-AUTO-213",
+      "FP-AUTO-257",
+      "FP-AUTO-262"
+    ],
+    "result_fields": [
+      "views",
+      "likes",
+      "comments",
+      "shares",
+      "saves"
+    ],
+    "apply_command": "python3 scripts/capture_x_post_results.py --apply-results --refresh-admin",
+    "report_path": "admin/reports/x-post-results.md"
+  },
+  "rows": [
+    {
+      "post_id": "LR-ANEC-001",
+      "source_row": 5,
+      "tweet_id": "2027750321322148009",
+      "url": "https://x.com/lilyrooartist/status/2027750321322148009",
+      "existing_values": {
+        "views": "",
+        "likes": "",
+        "comments": "",
+        "shares": "",
+        "saves": ""
+      },
+      "created_at": "",
+      "lookup_status": "missing_from_x_api_response",
+      "metrics": {},
+      "fillable_results": {},
+      "filled_field_count": 0,
+      "evidence_note": "X API tweet metrics 2026-06-22",
+      "direct_apply_command": ""
+    },
+    {
+      "post_id": "FP-AUTO-208",
+      "source_row": 10,
+      "tweet_id": "2047879043295420822",
+      "url": "https://x.com/i/web/status/2047879043295420822",
+      "existing_values": {
+        "views": "2",
+        "likes": "0",
+        "comments": "0",
+        "shares": "0",
+        "saves": "0"
+      },
+      "created_at": "2026-04-25T03:23:06.000Z",
+      "lookup_status": "ok",
+      "metrics": {
+        "views": 2,
+        "likes": 0,
+        "comments": 0,
+        "shares": 0,
+        "saves": 0
+      },
+      "fillable_results": {},
+      "filled_field_count": 0,
+      "evidence_note": "X API tweet metrics 2026-06-22",
+      "direct_apply_command": ""
+    },
+    {
+      "post_id": "FP-AUTO-213",
+      "source_row": 11,
+      "tweet_id": "2048245628736622826",
+      "url": "https://x.com/i/web/status/2048245628736622826",
+      "existing_values": {
+        "views": "2",
+        "likes": "0",
+        "comments": "1",
+        "shares": "0",
+        "saves": "0"
+      },
+      "created_at": "2026-04-26T03:39:47.000Z",
+      "lookup_status": "ok",
+      "metrics": {
+        "views": 2,
+        "likes": 0,
+        "comments": 1,
+        "shares": 0,
+        "saves": 0
+      },
+      "fillable_results": {},
+      "filled_field_count": 0,
+      "evidence_note": "X API tweet metrics 2026-06-22",
+      "direct_apply_command": ""
+    },
+    {
+      "post_id": "FP-AUTO-257",
+      "source_row": 16,
+      "tweet_id": "2062920257577029712",
+      "url": "https://x.com/i/web/status/2062920257577029712",
+      "existing_values": {
+        "views": "4",
+        "likes": "0",
+        "comments": "1",
+        "shares": "0",
+        "saves": "0"
+      },
+      "created_at": "2026-06-05T15:31:31.000Z",
+      "lookup_status": "ok",
+      "metrics": {
+        "views": 4,
+        "likes": 0,
+        "comments": 1,
+        "shares": 0,
+        "saves": 0
+      },
+      "fillable_results": {},
+      "filled_field_count": 0,
+      "evidence_note": "X API tweet metrics 2026-06-22",
+      "direct_apply_command": ""
+    },
+    {
+      "post_id": "FP-AUTO-262",
+      "source_row": 17,
+      "tweet_id": "2063600780834136468",
+      "url": "https://x.com/i/web/status/2063600780834136468",
+      "existing_values": {
+        "views": "5",
+        "likes": "0",
+        "comments": "0",
+        "shares": "0",
+        "saves": "0"
+      },
+      "created_at": "2026-06-07T12:35:40.000Z",
+      "lookup_status": "ok",
+      "metrics": {
+        "views": 5,
+        "likes": 0,
+        "comments": 0,
+        "shares": 0,
+        "saves": 0
+      },
+      "fillable_results": {},
+      "filled_field_count": 0,
+      "evidence_note": "X API tweet metrics 2026-06-22",
+      "direct_apply_command": ""
+    }
+  ],
+  "redaction": "Secret values are never written here; X OAuth credentials stay in the local secret source."
+}

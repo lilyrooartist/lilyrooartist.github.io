@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T08:15:29.346428Z",
+  "generated_at": "2026-06-22T08:21:20.478757Z",
   "safe_mode": true,
   "source": {
     "experiment_result_collection_packet": "data/experiment_result_collection_packet.json",
@@ -14,7 +14,7 @@
     "missing_public_url_count": 6,
     "measurement_priority_count": 8,
     "post_log_measurement_handoff_count": 3,
-    "pending_result_field_count": 18,
+    "pending_result_field_count": 8,
     "ready_to_import_count": 0,
     "wide_ready_to_import_count": 0,
     "entry_csv_path": "data/experiment_result_entry_template.csv",
@@ -35,15 +35,10 @@
       "post_url": "https://x.com/i/web/status/2062920257577029712",
       "published_date": "2026-06-05",
       "source_row": "16",
-      "pending_field_count": 6,
+      "pending_field_count": 1,
       "ready_field_count": 0,
       "wide_ready_field_count": 0,
       "pending_fields": [
-        "views",
-        "likes",
-        "comments",
-        "shares",
-        "saves",
         "subs_delta"
       ],
       "ready_fields": [],
@@ -85,36 +80,6 @@
         "Add an evidence_note with source and collection date before import preview."
       ],
       "fields": [
-        {
-          "field": "views",
-          "new_value": "",
-          "evidence_note": "",
-          "collection_hint": "Open X analytics for https://x.com/i/web/status/2062920257577029712 and record views."
-        },
-        {
-          "field": "likes",
-          "new_value": "",
-          "evidence_note": "",
-          "collection_hint": "Open X analytics for https://x.com/i/web/status/2062920257577029712 and record likes."
-        },
-        {
-          "field": "comments",
-          "new_value": "",
-          "evidence_note": "",
-          "collection_hint": "Open X analytics for https://x.com/i/web/status/2062920257577029712 and record comments."
-        },
-        {
-          "field": "shares",
-          "new_value": "",
-          "evidence_note": "",
-          "collection_hint": "Open X analytics for https://x.com/i/web/status/2062920257577029712 and record shares."
-        },
-        {
-          "field": "saves",
-          "new_value": "",
-          "evidence_note": "",
-          "collection_hint": "Open X analytics for https://x.com/i/web/status/2062920257577029712 and record saves."
-        },
         {
           "field": "subs_delta",
           "new_value": "",
@@ -227,15 +192,10 @@
       "post_url": "https://x.com/i/web/status/2063600780834136468",
       "published_date": "2026-06-07",
       "source_row": "17",
-      "pending_field_count": 6,
+      "pending_field_count": 1,
       "ready_field_count": 0,
       "wide_ready_field_count": 0,
       "pending_fields": [
-        "views",
-        "likes",
-        "comments",
-        "shares",
-        "saves",
         "subs_delta"
       ],
       "ready_fields": [],
@@ -277,36 +237,6 @@
         "Add an evidence_note with source and collection date before import preview."
       ],
       "fields": [
-        {
-          "field": "views",
-          "new_value": "",
-          "evidence_note": "",
-          "collection_hint": "Open X analytics for https://x.com/i/web/status/2063600780834136468 and record views."
-        },
-        {
-          "field": "likes",
-          "new_value": "",
-          "evidence_note": "",
-          "collection_hint": "Open X analytics for https://x.com/i/web/status/2063600780834136468 and record likes."
-        },
-        {
-          "field": "comments",
-          "new_value": "",
-          "evidence_note": "",
-          "collection_hint": "Open X analytics for https://x.com/i/web/status/2063600780834136468 and record comments."
-        },
-        {
-          "field": "shares",
-          "new_value": "",
-          "evidence_note": "",
-          "collection_hint": "Open X analytics for https://x.com/i/web/status/2063600780834136468 and record shares."
-        },
-        {
-          "field": "saves",
-          "new_value": "",
-          "evidence_note": "",
-          "collection_hint": "Open X analytics for https://x.com/i/web/status/2063600780834136468 and record saves."
-        },
         {
           "field": "subs_delta",
           "new_value": "",
@@ -398,15 +328,10 @@
       "post_url": "https://x.com/i/web/status/2062920257577029712",
       "source_row": "16",
       "pending_fields": [
-        "views",
-        "likes",
-        "comments",
-        "shares",
-        "saves",
         "subs_delta"
       ],
-      "direct_preview_command_template": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-257 --source-row 16 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run",
-      "direct_apply_command_template": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-257 --source-row 16 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin",
+      "direct_preview_command_template": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-257 --source-row 16 --subs-delta VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run",
+      "direct_apply_command_template": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-257 --source-row 16 --subs-delta VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin",
       "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 3 logged post(s), 1 missing URL(s) in this format."
     },
     {
@@ -419,15 +344,10 @@
       "post_url": "https://x.com/i/web/status/2063600780834136468",
       "source_row": "17",
       "pending_fields": [
-        "views",
-        "likes",
-        "comments",
-        "shares",
-        "saves",
         "subs_delta"
       ],
-      "direct_preview_command_template": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-262 --source-row 17 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run",
-      "direct_apply_command_template": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-262 --source-row 17 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin",
+      "direct_preview_command_template": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-262 --source-row 17 --subs-delta VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run",
+      "direct_apply_command_template": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-262 --source-row 17 --subs-delta VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin",
       "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 3 logged post(s), 1 missing URL(s) in this format."
     },
     {
