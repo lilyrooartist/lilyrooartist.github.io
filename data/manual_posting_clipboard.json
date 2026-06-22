@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T10:02:54.566275Z",
+  "generated_at": "2026-06-22T10:09:43.313748Z",
   "safe_mode": true,
   "source": {
     "manual_distribution_packet": "data/manual_distribution_packet.json",
@@ -36,7 +36,25 @@
     "public_url_reconciliation_command": "python3 scripts/reconcile_youtube_community_urls.py",
     "public_url_reconciliation_apply_command": "",
     "result_handoff_report": "admin/reports/experiment-result-clipboard.md",
-    "next_action": "Post each card in YouTube Community, copy the real public URL, then log it."
+    "next_action": "Post each card in YouTube Community, copy the real public URL, then log it.",
+    "next_post_now": {
+      "id": "FP-AUTO-261",
+      "release": "I Learned It All in Fifteen Seconds",
+      "platform": "YouTube Community",
+      "surface_url": "https://www.youtube.com/@lilyroo.artist/community",
+      "copy_source": "data/manual-posting-cards/fp-auto-261.txt",
+      "asset_source": "assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
+      "asset_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
+      "paste_text": "New transmission: I Learned It All in Fifteen Seconds is live. Remastered cover art, same suspicious amount of feeling.\n\nStream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube: https://www.youtube.com/@lilyroo.artist | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
+      "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL",
+      "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL --apply --refresh-admin",
+      "result_handoff_report": "admin/reports/experiment-result-clipboard.md",
+      "completion_evidence": [
+        "The YouTube Community post is published from the listed text and asset.",
+        "A real public YouTube Community URL replaces PUBLIC_URL in the logging command.",
+        "The post appears in Published_Log.csv with this manual distribution ID."
+      ]
+    }
   },
   "first_url_acceleration": {
     "status": "ready_after_first_public_url",

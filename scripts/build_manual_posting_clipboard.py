@@ -260,6 +260,27 @@ def build_payload() -> dict:
             else "No approved manual posts are currently waiting."
         ),
     }
+    if cards:
+        first_card = cards[0]
+        first_bundle = first_card.get("posting_bundle") or {}
+        summary["next_post_now"] = {
+            "id": first_card.get("id") or "",
+            "release": first_card.get("release") or "",
+            "platform": first_card.get("platform") or "",
+            "surface_url": first_card.get("public_community_url") or summary.get("public_community_url") or "",
+            "copy_source": first_card.get("paste_text_path") or "",
+            "asset_source": first_bundle.get("asset_source") or first_card.get("asset_local_path") or first_card.get("asset_url") or "",
+            "asset_url": first_card.get("asset_url") or "",
+            "paste_text": first_card.get("paste_text") or "",
+            "log_preview_command": first_card.get("log_preview_command") or "",
+            "log_apply_command": first_card.get("log_apply_command") or "",
+            "result_handoff_report": "admin/reports/experiment-result-clipboard.md",
+            "completion_evidence": [
+                "The YouTube Community post is published from the listed text and asset.",
+                "A real public YouTube Community URL replaces PUBLIC_URL in the logging command.",
+                "The post appears in Published_Log.csv with this manual distribution ID.",
+            ],
+        }
     acceleration = first_url_acceleration(cards, summary)
     return {
         "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
@@ -398,6 +419,25 @@ def build_markdown(payload: dict) -> str:
         f"- Reconciliation apply if matches exist: `{summary.get('public_url_reconciliation_apply_command') or 'not available'}`",
         f"- Result handoff after URL logging: `{summary.get('result_handoff_report') or 'not available'}`",
         f"- Next action: {summary['next_action']}",
+    ]
+    next_post = summary.get("next_post_now") or {}
+    if next_post:
+        lines.extend([
+            "",
+            "## Post Now",
+            f"- First card: `{next_post.get('id')}` ({next_post.get('release')})",
+            f"- Surface: {next_post.get('surface_url') or 'not set'}",
+            f"- Copy source: `{next_post.get('copy_source') or 'not available'}`",
+            f"- Asset source: `{next_post.get('asset_source') or 'not available'}`",
+            f"- Preview URL log: `{next_post.get('log_preview_command') or 'not available'}`",
+            f"- Apply URL log: `{next_post.get('log_apply_command') or 'not available'}`",
+            f"- Result handoff: `{next_post.get('result_handoff_report') or 'not available'}`",
+        ])
+        if next_post.get("completion_evidence"):
+            lines.append("- Completion evidence:")
+            for item in next_post["completion_evidence"]:
+                lines.append(f"  - {item}")
+    lines.extend([
         "",
         "## First URL Acceleration",
         f"- Status: **{acceleration.get('status', 'unknown')}**",
@@ -412,7 +452,7 @@ def build_markdown(payload: dict) -> str:
         f"- Guardrail: {acceleration.get('guardrail') or 'Use only real public URLs.'}",
         "",
         "## Session Manifest",
-    ]
+    ])
     session = payload.get("session_manifest") or {}
     lines.extend([
         f"- Status: **{session.get('status', 'unknown')}**",

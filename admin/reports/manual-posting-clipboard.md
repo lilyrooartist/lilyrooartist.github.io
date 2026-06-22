@@ -1,6 +1,6 @@
 # Manual Posting Clipboard - Lily Roo
 
-Generated: 2026-06-22T10:02:54.566275Z
+Generated: 2026-06-22T10:09:43.313748Z
 
 ## Summary
 - Status: **ready_to_post**
@@ -19,6 +19,19 @@ Generated: 2026-06-22T10:02:54.566275Z
 - Reconciliation apply if matches exist: `not available`
 - Result handoff after URL logging: `admin/reports/experiment-result-clipboard.md`
 - Next action: Post each card in YouTube Community, copy the real public URL, then log it.
+
+## Post Now
+- First card: `FP-AUTO-261` (I Learned It All in Fifteen Seconds)
+- Surface: https://www.youtube.com/@lilyroo.artist/community
+- Copy source: `data/manual-posting-cards/fp-auto-261.txt`
+- Asset source: `assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg`
+- Preview URL log: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL`
+- Apply URL log: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL --apply --refresh-admin`
+- Result handoff: `admin/reports/experiment-result-clipboard.md`
+- Completion evidence:
+  - The YouTube Community post is published from the listed text and asset.
+  - A real public YouTube Community URL replaces PUBLIC_URL in the logging command.
+  - The post appears in Published_Log.csv with this manual distribution ID.
 
 ## First URL Acceleration
 - Status: **ready_after_first_public_url**
