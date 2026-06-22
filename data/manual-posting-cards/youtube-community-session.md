@@ -1,6 +1,6 @@
 # YouTube Community Manual Posting Session
 
-Generated: 2026-06-22T09:26:08.059707Z
+Generated: 2026-06-22T09:35:45.887299Z
 Surface: https://www.youtube.com/@lilyroo.artist/community
 URL worksheet: data/manual_distribution_url_template.csv
 Partial apply: python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --allow-partial --apply --refresh-admin
