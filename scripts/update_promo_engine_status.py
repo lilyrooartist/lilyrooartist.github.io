@@ -1357,9 +1357,16 @@ def refresh_coverage_state(source_commit: str, latest_head_sha: str) -> dict:
         }
     changed = changed_paths_since(latest_head_sha)
     uncovered = [path for path in changed if not generated_refresh_path(path)]
+    if changed and not uncovered:
+        return {
+            "covered": False,
+            "basis": "generated_snapshot_changed_after_latest_run",
+            "changed_paths_since_latest_run": changed[:40],
+            "uncovered_paths_since_latest_run": [],
+        }
     return {
-        "covered": bool(changed and not uncovered),
-        "basis": "generated_refresh_outputs_only" if changed and not uncovered else "source_changed_after_latest_run",
+        "covered": False,
+        "basis": "source_changed_after_latest_run",
         "changed_paths_since_latest_run": changed[:40],
         "uncovered_paths_since_latest_run": uncovered[:20],
     }
