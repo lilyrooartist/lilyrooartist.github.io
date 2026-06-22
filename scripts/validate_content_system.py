@@ -650,12 +650,39 @@ def validate_generated_outputs(failures):
         required_kinds = {"approval_review", "store_verification", "manual_metrics", "platform_fix"}
         clipboard_for_operations = json.loads(MANUAL_POSTING_CLIPBOARD.read_text(encoding="utf-8")) if MANUAL_POSTING_CLIPBOARD.exists() else {}
         clipboard_summary_for_operations = clipboard_for_operations.get("summary") or {}
+        result_clipboard_for_operations = json.loads(EXPERIMENT_RESULT_CLIPBOARD.read_text(encoding="utf-8")) if EXPERIMENT_RESULT_CLIPBOARD.exists() else {}
+        result_clipboard_summary_for_operations = result_clipboard_for_operations.get("summary") or {}
         if int(clipboard_summary_for_operations.get("postable_count") or 0):
             required_kinds.add("manual_distribution")
+        if int(result_clipboard_summary_for_operations.get("metric_card_count") or 0):
+            required_kinds.add("experiment_results")
         if required_kinds <= action_kinds and all("command" in action and "label" in action and "phase" in action and "urgency" in action for action in actions):
             ok("promo operations packet groups approval, store, metric, and platform work")
         else:
             fail("promo_operations_packet.json missing required action groups", failures)
+        experiment_result_actions = [
+            action for action in actions
+            if action.get("kind") == "experiment_results"
+        ]
+        if int(result_clipboard_summary_for_operations.get("metric_card_count") or 0):
+            if (
+                experiment_result_actions
+                and summary.get("experiment_result_actions") == len(experiment_result_actions)
+                and all(action.get("phase") == "Collect experiment results" for action in experiment_result_actions)
+                and all(action.get("urgency") == "high" for action in experiment_result_actions)
+                and all((action.get("context") or {}).get("metric_card_count") == result_clipboard_summary_for_operations.get("metric_card_count") for action in experiment_result_actions)
+                and all((action.get("context") or {}).get("pending_result_field_count") == result_clipboard_summary_for_operations.get("pending_result_field_count") for action in experiment_result_actions)
+                and all((action.get("context") or {}).get("wide_entry_csv_path") == "data/experiment_result_entry_wide_template.csv" for action in experiment_result_actions)
+                and all("update_experiment_results.py --from-wide-csv" in ((action.get("context") or {}).get("wide_result_import_preview_command") or "") for action in experiment_result_actions)
+                and all((action.get("context") or {}).get("report_path") == "admin/reports/experiment-result-clipboard.md" for action in experiment_result_actions)
+            ):
+                ok("promo operations packet surfaces experiment result collection")
+            else:
+                fail("promo_operations_packet.json missing experiment result collection action", failures)
+        elif not experiment_result_actions and summary.get("experiment_result_actions") == 0:
+            ok("promo operations packet has no experiment result action without metric cards")
+        else:
+            fail("promo_operations_packet.json surfaces experiment results with no metric cards", failures)
         manual_distribution_actions = [
             action for action in actions
             if action.get("kind") == "manual_distribution"

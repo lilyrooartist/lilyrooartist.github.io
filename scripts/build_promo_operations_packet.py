@@ -17,6 +17,7 @@ BACKLOG_RESCHEDULE = ROOT / "data" / "backlog_reschedule_preview.json"
 MANUAL_METRICS = ROOT / "data" / "manual_metric_collection_packet.json"
 MANUAL_DISTRIBUTION = ROOT / "data" / "manual_distribution_packet.json"
 MANUAL_POSTING_CLIPBOARD = ROOT / "data" / "manual_posting_clipboard.json"
+EXPERIMENT_RESULT_CLIPBOARD = ROOT / "data" / "experiment_result_clipboard.json"
 OUT = ROOT / "data" / "promo_operations_packet.json"
 REPORT = ROOT / "admin" / "reports" / "promo-operations-packet.md"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
@@ -78,6 +79,8 @@ def phase_for(action: dict) -> str:
         return "Repair executor"
     if kind == "manual_distribution":
         return "Publish manual posts"
+    if kind == "experiment_results":
+        return "Collect experiment results"
     if kind == "apply_approved":
         return "Apply approved"
     if kind == "approval_review":
@@ -104,6 +107,10 @@ def urgency_for(action: dict, now: datetime) -> tuple[str, str]:
     if kind == "manual_distribution":
         count = int(context.get("postable_count") or 0)
         return "high", f"{count} approved manual post(s) can publish now without waiting for broken auto executors."
+    if kind == "experiment_results":
+        pending = int(context.get("pending_result_field_count") or 0)
+        cards = int(context.get("metric_card_count") or 0)
+        return "high", f"{cards} logged experiment post(s) have {pending} result field(s) waiting; these results rank repeatable formats."
     if kind == "apply_approved":
         return "high", "Approved rows are ready to move into the live queue."
     if kind == "approval_review":
@@ -142,7 +149,7 @@ def enrich_actions(actions: list[dict], now: datetime) -> list[dict]:
         item["urgency_reason"] = reason
         if urgency == "blocked":
             item["status"] = "blocked"
-        elif action.get("kind") in {"approval_review", "manual_metrics", "backlog_reschedule", "scheduled_approval_batch"}:
+        elif action.get("kind") in {"approval_review", "manual_metrics", "experiment_results", "backlog_reschedule", "scheduled_approval_batch"}:
             item["status"] = "waiting_for_user"
         elif action.get("kind") == "platform_fix":
             item["status"] = "needs_fix"
@@ -591,6 +598,51 @@ def manual_distribution_actions(distribution_packet, posting_clipboard):
     ]
 
 
+def experiment_result_actions(result_clipboard):
+    summary = result_clipboard.get("summary") or {}
+    metric_card_count = int(summary.get("metric_card_count") or 0)
+    pending_count = int(summary.get("pending_result_field_count") or 0)
+    priority_cards = result_clipboard.get("measurement_priority_cards") or []
+    if metric_card_count <= 0 and pending_count <= 0:
+        return []
+    return [
+        command_row(
+            "Collect experiment result metrics",
+            summary.get("wide_result_import_preview_command") or summary.get("result_import_preview_command") or "",
+            "experiment_results",
+            5,
+            {
+                "status": summary.get("status") or "",
+                "metric_card_count": metric_card_count,
+                "pending_result_field_count": pending_count,
+                "ready_to_import_count": summary.get("ready_to_import_count") or 0,
+                "wide_ready_to_import_count": summary.get("wide_ready_to_import_count") or 0,
+                "missing_public_url_count": summary.get("missing_public_url_count") or 0,
+                "measurement_priority_count": summary.get("measurement_priority_count") or len(priority_cards),
+                "entry_csv_path": summary.get("entry_csv_path") or "data/experiment_result_entry_template.csv",
+                "wide_entry_csv_path": summary.get("wide_entry_csv_path") or "data/experiment_result_entry_wide_template.csv",
+                "report_path": summary.get("report_path") or "admin/reports/experiment-result-clipboard.md",
+                "result_import_preview_command": summary.get("result_import_preview_command") or "",
+                "wide_result_import_preview_command": summary.get("wide_result_import_preview_command") or "",
+                "result_import_apply_command": summary.get("result_import_apply_command") or "",
+                "wide_result_import_apply_command": summary.get("wide_result_import_apply_command") or "",
+                "apply_gate": summary.get("apply_gate") or "",
+                "priority_cards": [
+                    {
+                        "action": card.get("action") or "",
+                        "post_id": card.get("post_id") or "",
+                        "platform": card.get("platform") or "",
+                        "experiment_format": card.get("experiment_format") or "",
+                        "reason": card.get("reason") or "",
+                    }
+                    for card in priority_cards[:5]
+                ],
+                "note": "Fill measured result values with evidence notes, preview the import, then apply only after review.",
+            },
+        )
+    ]
+
+
 def platform_fix_actions(status, executions, readiness):
     summary = status.get("kpi", {}).get("social_execution_summary") or {}
     rows = summary.get("platform_fix_needed") or (executions.get("summary") or {}).get("platform_fix_needed") or []
@@ -635,6 +687,7 @@ def build_markdown(packet):
         f"- Platform fixes: **{packet['summary']['platform_fixes']}**",
         f"- Scheduled approval batches: **{packet['summary']['scheduled_approval_batches']}**",
         f"- Manual distribution actions: **{packet['summary']['manual_distribution_actions']}**",
+        f"- Experiment result actions: **{packet['summary']['experiment_result_actions']}**",
         f"- Store checks: **{packet['summary']['store_checks']}**",
         f"- Manual metric updates: **{packet['summary']['manual_metric_updates']}**",
         f"- Safe apply commands ready: **{packet['summary']['safe_apply_commands']}**",
@@ -713,6 +766,12 @@ def build_markdown(packet):
                 lines.append(f"  - Packet: `{context['report_path']}`")
             if context.get("postable_count"):
                 lines.append(f"  - Postable cards: **{context['postable_count']}**")
+            if context.get("metric_card_count"):
+                lines.append(f"  - Metric cards: **{context['metric_card_count']}**; pending fields: **{context.get('pending_result_field_count', 0)}**")
+            if context.get("measurement_priority_count"):
+                lines.append(f"  - Measurement priorities: **{context['measurement_priority_count']}**")
+            if context.get("wide_entry_csv_path"):
+                lines.append(f"  - Wide entry CSV: `{context['wide_entry_csv_path']}`")
             if context.get("pending_log_ids"):
                 lines.append(f"  - Pending URL logs: `{', '.join(context['pending_log_ids'])}`")
             if context.get("batch_log_preview_command"):
@@ -725,6 +784,10 @@ def build_markdown(packet):
                 lines.append(f"  - CSV rows: `{', '.join(str(item) for item in context['csv_rows'])}`")
             if context.get("worksheet_import_command"):
                 lines.append(f"  - Import filled worksheet: `{context['worksheet_import_command']}`")
+            if context.get("wide_result_import_preview_command"):
+                lines.append(f"  - Preview result import: `{context['wide_result_import_preview_command']}`")
+            if context.get("wide_result_import_apply_command"):
+                lines.append(f"  - Apply result import after review: `{context['wide_result_import_apply_command']}`")
             if context.get("direct_update_command"):
                 lines.append(f"  - Direct update fallback: `{context['direct_update_command']}`")
             if context.get("apply_command"):
@@ -789,10 +852,12 @@ def main() -> int:
     manual_metrics = read_json(MANUAL_METRICS, {})
     manual_distribution = read_json(MANUAL_DISTRIBUTION, {})
     manual_posting_clipboard = read_json(MANUAL_POSTING_CLIPBOARD, {})
+    experiment_result_clipboard = read_json(EXPERIMENT_RESULT_CLIPBOARD, {})
     actions = (
         scheduled_approval_batch_actions(scheduled_approval)
         + backlog_reschedule_actions(status, backlog_preview)
         + manual_distribution_actions(manual_distribution, manual_posting_clipboard)
+        + experiment_result_actions(experiment_result_clipboard)
         + platform_fix_actions(status, executions, readiness)
         + apply_actions(plan)
         + approval_actions(plan, readiness)
@@ -808,6 +873,7 @@ def main() -> int:
         "store_checks": sum(1 for action in actions if action["kind"] == "store_verification"),
         "manual_metric_updates": sum(1 for action in actions if action["kind"] == "manual_metrics"),
         "manual_distribution_actions": sum(1 for action in actions if action["kind"] == "manual_distribution"),
+        "experiment_result_actions": sum(1 for action in actions if action["kind"] == "experiment_results"),
         "backlog_reschedules": sum(1 for action in actions if action["kind"] == "backlog_reschedule"),
         "safe_apply_commands": sum(1 for action in actions if action["kind"] == "apply_approved"),
         "blocked_review_items": sum(1 for action in actions if action["context"].get("readiness_state") == "blocked"),
@@ -829,6 +895,7 @@ def main() -> int:
             "manual_metrics": str(MANUAL_METRICS.relative_to(ROOT)),
             "manual_distribution": str(MANUAL_DISTRIBUTION.relative_to(ROOT)),
             "manual_posting_clipboard": str(MANUAL_POSTING_CLIPBOARD.relative_to(ROOT)),
+            "experiment_result_clipboard": str(EXPERIMENT_RESULT_CLIPBOARD.relative_to(ROOT)),
         },
         "next_action": next_action,
         "summary": summary,
