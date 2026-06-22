@@ -1,13 +1,13 @@
 # Backlog Reschedule Preview - Lily Roo
 
-Generated: 2026-06-22T19:24:39.909160+08:00
+Generated: 2026-06-22T11:25:36.269204+00:00
 
 ## Summary
 - Approved backlog rows: **0**
 - Rows with known blockers: **0**
 - Clear to apply without override: **0**
 - Manual handoff rows excluded from auto-reschedule: **1**
-- Start at: **2026-06-23T10:00:00+08:00**
+- Start at: **2026-06-23T10:00:00+00:00**
 - Spacing hours: **24**
 - Apply allowed without override: **True**
 - Normal apply gate: **clear**
@@ -23,7 +23,7 @@ Generated: 2026-06-22T19:24:39.909160+08:00
 ## Clearance Manifest
 - Status: **clear**
 - Blocked IDs: `none`
-- Safe apply command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin`
+- Safe apply command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin`
 - Partial clear apply available: **False**
 - Partial clear apply count: **0**
 - Apply gate: **clear**
@@ -64,10 +64,10 @@ Generated: 2026-06-22T19:24:39.909160+08:00
 - A reschedule does not publish, approve, or repair platform credentials by itself.
 
 ## Commands
-- Preview: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24`
+- Preview: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24`
 - Partial clear preview: `none`
 - Partial clear apply: `none`
-- Safe apply: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin`
+- Safe apply: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin`
 - Blocked apply command: none
 - Deliberate override command: none
 
