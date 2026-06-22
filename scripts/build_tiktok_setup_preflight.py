@@ -31,6 +31,11 @@ POSTING_MODE = "TIKTOK_POSTING_MODE"
 PUBLIC_POSTING_PREVIEW = "python3 scripts/set_tiktok_public_posting_approval.py --approved"
 PUBLIC_POSTING_APPLY = "python3 scripts/set_tiktok_public_posting_approval.py --approved --apply"
 PUBLIC_POSTING_DEPLOY = "python3 scripts/set_tiktok_public_posting_approval.py --approved --apply --deploy"
+INIT_LOCAL_SECRET_ENV = (
+    "mkdir -p ../secrets && "
+    "test -f ../secrets/social_api.env || "
+    "cp data/tiktok_secret_handoff_template.env ../secrets/social_api.env"
+)
 
 
 def write_handoff_template() -> None:
@@ -115,6 +120,8 @@ def build_payload() -> dict:
     tiktok_readiness = (((readiness.get("payload") or {}).get("platforms") or {}).get("tiktok") or {})
     posting_mode = strategy.get("posting_mode") or "api"
     presence = local_secret_presence()
+    local_secret_dir_exists = SOCIAL_ENV.parent.exists()
+    local_secret_env_exists = SOCIAL_ENV.exists()
     local_public_approval = local_public_posting_approved(presence)
     local_missing = [name for name in REQUIRED_REFRESH_SECRETS if not presence.get(name)]
     worker_missing = tiktok_readiness.get("missing_secrets") or []
@@ -133,6 +140,14 @@ def build_payload() -> dict:
     oauth_url_missing = [name for name in ["TIKTOK_CLIENT_KEY", "TIKTOK_REDIRECT_URI"] if not presence.get(name)]
     oauth_exchange_missing = [name for name in ["TIKTOK_CLIENT_KEY", "TIKTOK_CLIENT_SECRET", "TIKTOK_REDIRECT_URI"] if not presence.get(name)]
     preflight_checks = [
+        check(
+            "local_secret_env_file",
+            "pass" if local_secret_env_exists else "waiting",
+            f"Local secret env exists at {SOCIAL_ENV.relative_to(ROOT.parent)}."
+            if local_secret_env_exists
+            else f"Initialize {SOCIAL_ENV.relative_to(ROOT.parent)} from the blank handoff template before adding TikTok app values.",
+            "" if local_secret_env_exists else INIT_LOCAL_SECRET_ENV,
+        ),
         check(
             "oauth_authorization_url",
             "pass" if not oauth_url_missing else "blocked",
@@ -236,6 +251,10 @@ def build_payload() -> dict:
         "required_secret_names": REQUIRED_REFRESH_SECRETS,
         "optional_secret_names": [OPTIONAL_ACCESS_TOKEN],
         "local_secret_source": str(SOCIAL_ENV.relative_to(ROOT.parent)),
+        "local_secret_dir_path": str(SOCIAL_ENV.parent.relative_to(ROOT.parent)),
+        "local_secret_dir_exists": local_secret_dir_exists,
+        "local_secret_env_exists": local_secret_env_exists,
+        "initialize_local_secret_env_command": INIT_LOCAL_SECRET_ENV if not local_secret_env_exists else "",
         "handoff_template_path": str(HANDOFF_TEMPLATE.relative_to(ROOT)),
         "handoff_template_required_names": REQUIRED_REFRESH_SECRETS + ["TIKTOK_REDIRECT_URI", "TIKTOK_PUBLIC_POSTING_APPROVED", "TIKTOK_DEFAULT_PRIVACY"],
         "local_missing_secrets": local_missing,
@@ -297,6 +316,9 @@ def build_payload() -> dict:
             "local_upload_preview_command": local_upload_preview,
             "earliest_tiktok_api_path": "video.upload inbox draft; final public URL still requires human publish and URL logging.",
             "local_missing_secrets": local_missing,
+            "local_secret_dir_exists": local_secret_dir_exists,
+            "local_secret_env_exists": local_secret_env_exists,
+            "initialize_local_secret_env_command": INIT_LOCAL_SECRET_ENV if not local_secret_env_exists else "",
             "oauth_authorization_url_missing": oauth_url_missing,
             "oauth_token_exchange_missing": oauth_exchange_missing,
             "worker_missing_secrets": worker_missing,
@@ -358,6 +380,9 @@ def build_markdown(payload: dict) -> str:
         f"- Handoff template: `{payload['credential_handoff']['handoff_template_path']}`",
         f"- OAuth helper: `{payload['credential_handoff']['oauth_handoff_script']}`",
         f"- Requested OAuth scopes: `{', '.join(payload['credential_handoff']['requested_oauth_scopes'])}`",
+        f"- Local secret env: `{payload['credential_handoff']['local_secret_source']}`",
+        f"- Local secret env exists: **{payload['credential_handoff']['local_secret_env_exists']}**",
+        f"- Initialize local secret env: `{payload['credential_handoff']['initialize_local_secret_env_command'] or 'not needed'}`",
         f"- Missing locally: `{', '.join(payload['credential_handoff']['local_missing_secrets']) or 'none'}`",
         f"- Missing for auth URL: `{', '.join(payload['credential_handoff']['oauth_authorization_url_missing']) or 'none'}`",
         f"- Missing for token exchange: `{', '.join(payload['credential_handoff']['oauth_token_exchange_missing']) or 'none'}`",

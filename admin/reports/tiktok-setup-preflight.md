@@ -1,12 +1,12 @@
 # TikTok Setup Preflight - Lily Roo
 
-Generated: 2026-06-22T06:45:28.275309Z
+Generated: 2026-06-22T06:50:10.577422Z
 
 ## Summary
 - Status: **blocked**
 - Posting mode: **api**
 - API strategy confirmed: **True**
-- Checks: **11**
+- Checks: **12**
 - Blocked checks: **7**
 - Ready to push worker secrets: **False**
 - Ready to post publicly: **False**
@@ -28,6 +28,9 @@ Generated: 2026-06-22T06:45:28.275309Z
 - Handoff template: `data/tiktok_secret_handoff_template.env`
 - OAuth helper: `scripts/tiktok_oauth_handoff.py`
 - Requested OAuth scopes: `user.info.basic, video.upload, video.publish`
+- Local secret env: `secrets/social_api.env`
+- Local secret env exists: **True**
+- Initialize local secret env: `not needed`
 - Missing locally: `TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN`
 - Missing for auth URL: `TIKTOK_CLIENT_KEY, TIKTOK_REDIRECT_URI`
 - Missing for token exchange: `TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REDIRECT_URI`
@@ -54,6 +57,8 @@ Generated: 2026-06-22T06:45:28.275309Z
   - data/platform_repair_status.json no longer lists TikTok as blocked by missing credentials.
 
 ## Checks
+- **local_secret_env_file**: `pass`
+  - Local secret env exists at secrets/social_api.env.
 - **oauth_authorization_url**: `blocked`
   - secrets/social_api.env is missing auth URL values: TIKTOK_CLIENT_KEY, TIKTOK_REDIRECT_URI.
   - Command: `python3 scripts/tiktok_oauth_handoff.py --print-auth-url`

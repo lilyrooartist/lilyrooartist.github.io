@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T06:45:28.275309Z",
+  "generated_at": "2026-06-22T06:50:10.577422Z",
   "safe_mode": true,
   "source": {
     "local_secret_source": "secrets/social_api.env",
@@ -15,7 +15,7 @@
     "status": "blocked",
     "posting_mode": "api",
     "api_strategy_confirmed": true,
-    "check_count": 11,
+    "check_count": 12,
     "blocked_count": 7,
     "ready_to_push_worker_secrets": false,
     "ready_to_post_publicly": false,
@@ -28,6 +28,9 @@
       "TIKTOK_CLIENT_SECRET",
       "TIKTOK_REFRESH_TOKEN"
     ],
+    "local_secret_dir_exists": true,
+    "local_secret_env_exists": true,
+    "initialize_local_secret_env_command": "",
     "oauth_authorization_url_missing": [
       "TIKTOK_CLIENT_KEY",
       "TIKTOK_REDIRECT_URI"
@@ -71,6 +74,10 @@
       "TIKTOK_ACCESS_TOKEN"
     ],
     "local_secret_source": "secrets/social_api.env",
+    "local_secret_dir_path": "secrets",
+    "local_secret_dir_exists": true,
+    "local_secret_env_exists": true,
+    "initialize_local_secret_env_command": "",
     "handoff_template_path": "data/tiktok_secret_handoff_template.env",
     "handoff_template_required_names": [
       "TIKTOK_CLIENT_KEY",
@@ -153,6 +160,12 @@
     "guardrail": "This records the chosen integration path only; it does not contain secrets, approve public posting, or allow TikTok posts to publish."
   },
   "checks": [
+    {
+      "name": "local_secret_env_file",
+      "status": "pass",
+      "detail": "Local secret env exists at secrets/social_api.env.",
+      "command": ""
+    },
     {
       "name": "oauth_authorization_url",
       "status": "blocked",

@@ -81,6 +81,8 @@ def build_payload() -> dict:
     local_public_posting = bool(preflight_summary.get("local_public_posting_approval_confirmed"))
     public_posting_apply = preflight_summary.get("public_posting_apply_command") or ""
     public_posting_deploy = preflight_summary.get("public_posting_deploy_command") or ""
+    local_secret_env_exists = bool(preflight_summary.get("local_secret_env_exists"))
+    init_local_secret_env = preflight_summary.get("initialize_local_secret_env_command") or ""
     brand_content = bool(preflight_summary.get("brand_content_toggle"))
     brand_organic = bool(preflight_summary.get("brand_organic_toggle"))
     aigc_label = bool(preflight_summary.get("aigc_label_enabled"))
@@ -108,6 +110,15 @@ def build_payload() -> dict:
     backlog_apply = backlog_summary.get("apply_command") or ""
     blocked_ids: list[str] = []
     steps = [
+        runbook_step(
+            "initialize_local_secret_env",
+            "Prepare local env",
+            "pass" if local_secret_env_exists else "ready",
+            "Create the local TikTok secret env file",
+            "Create the local social API env file from the blank TikTok handoff template before adding TikTok app values. The command is non-overwriting, so an existing env file is preserved.",
+            "" if local_secret_env_exists else init_local_secret_env,
+            [],
+        ),
         runbook_step(
             "collect_local_oauth_credentials",
             "Collect credentials",
@@ -230,6 +241,8 @@ def build_payload() -> dict:
             "required_secret_names": REQUIRED_SECRETS,
             "handoff_template_path": credential_handoff.get("handoff_template_path") or "",
             "oauth_handoff_script": credential_handoff.get("oauth_handoff_script") or "scripts/tiktok_oauth_handoff.py",
+            "local_secret_env_exists": local_secret_env_exists,
+            "initialize_local_secret_env_command": init_local_secret_env,
             "oauth_preview_command": oauth_preview,
             "oauth_authorization_url_command": oauth_url_command,
             "oauth_exchange_command": oauth_exchange_command,
@@ -294,6 +307,8 @@ def build_markdown(payload: dict) -> str:
         f"- Local draft upload preview: `{summary['local_upload_preview_command']}`",
         f"- Earliest TikTok API path: {summary['earliest_tiktok_api_path']}",
         f"- Handoff template: `{summary.get('handoff_template_path') or 'none'}`",
+        f"- Local secret env exists: **{summary['local_secret_env_exists']}**",
+        f"- Initialize local secret env: `{summary.get('initialize_local_secret_env_command') or 'not needed'}`",
         f"- Ready to apply worker secrets: **{summary['ready_to_apply_worker_secrets']}**",
         f"- Ready to clear backlog gate: **{summary['ready_to_clear_backlog_gate']}**",
         f"- Public posting approval apply: `{summary.get('public_posting_apply_command') or 'not available until local approval is confirmed'}`",

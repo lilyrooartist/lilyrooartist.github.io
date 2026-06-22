@@ -503,6 +503,7 @@ def validate_generated_outputs(failures):
         blocked_count = sum(1 for check in checks if check.get("status") == "blocked")
         check_names = {check.get("name") for check in checks}
         required_checks = {
+            "local_secret_env_file",
             "oauth_authorization_url",
             "oauth_token_exchange",
             "local_refresh_credentials",
@@ -528,6 +529,14 @@ def validate_generated_outputs(failures):
             and credential_handoff.get("status") in {"ready_to_push", "needs_local_values"}
             and credential_handoff.get("required_secret_names") == ["TIKTOK_CLIENT_KEY", "TIKTOK_CLIENT_SECRET", "TIKTOK_REFRESH_TOKEN"]
             and credential_handoff.get("local_secret_source") == source.get("local_secret_source")
+            and credential_handoff.get("local_secret_dir_path") == "secrets"
+            and isinstance(credential_handoff.get("local_secret_dir_exists"), bool)
+            and isinstance(credential_handoff.get("local_secret_env_exists"), bool)
+            and isinstance(summary.get("local_secret_env_exists"), bool)
+            and (
+                credential_handoff.get("local_secret_env_exists")
+                or "cp data/tiktok_secret_handoff_template.env ../secrets/social_api.env" in (credential_handoff.get("initialize_local_secret_env_command") or "")
+            )
             and credential_handoff.get("handoff_template_path") == "data/tiktok_secret_handoff_template.env"
             and set(credential_handoff.get("handoff_template_required_names") or []) >= {"TIKTOK_CLIENT_KEY", "TIKTOK_CLIENT_SECRET", "TIKTOK_REDIRECT_URI", "TIKTOK_REFRESH_TOKEN", "TIKTOK_PUBLIC_POSTING_APPROVED", "TIKTOK_DEFAULT_PRIVACY"}
             and TIKTOK_SECRET_HANDOFF_TEMPLATE.exists()
@@ -576,6 +585,7 @@ def validate_generated_outputs(failures):
         phases = {step.get("phase") for step in steps}
         step_ids = {step.get("id") for step in steps}
         required_steps = {
+            "initialize_local_secret_env",
             "collect_local_oauth_credentials",
             "generate_oauth_authorization_url",
             "exchange_oauth_code",
@@ -587,7 +597,7 @@ def validate_generated_outputs(failures):
             "clear_backlog_gate",
         }
         required_source = {"tiktok_setup_preflight", "platform_repair_status", "executor_readiness", "backlog_reschedule_preview", "wrangler_config"}
-        required_phases = {"Collect credentials", "Authorize account", "Confirm approval", "Preview push", "Preview local post", "Apply push", "Verify repair", "Clear gate"}
+        required_phases = {"Prepare local env", "Collect credentials", "Authorize account", "Confirm approval", "Preview push", "Preview local post", "Apply push", "Verify repair", "Clear gate"}
         if (
             runbook.get("safe_mode") is True
             and runbook.get("status") in {"blocked", "ready_for_apply", "ready_for_backlog_clearance"}
@@ -601,6 +611,11 @@ def validate_generated_outputs(failures):
             and required_source <= set(source)
             and set(summary.get("required_secret_names") or []) == {"TIKTOK_CLIENT_KEY", "TIKTOK_CLIENT_SECRET", "TIKTOK_REFRESH_TOKEN"}
             and summary.get("handoff_template_path") == "data/tiktok_secret_handoff_template.env"
+            and isinstance(summary.get("local_secret_env_exists"), bool)
+            and (
+                summary.get("local_secret_env_exists")
+                or "cp data/tiktok_secret_handoff_template.env ../secrets/social_api.env" in (summary.get("initialize_local_secret_env_command") or "")
+            )
             and summary.get("oauth_handoff_script") == "scripts/tiktok_oauth_handoff.py"
             and "tiktok_oauth_handoff.py --print-auth-url" in (summary.get("oauth_authorization_url_command") or "")
             and "tiktok_oauth_handoff.py --exchange-code CODE --apply" in (summary.get("oauth_exchange_command") or "")
@@ -3406,7 +3421,7 @@ def validate_generated_outputs(failures):
         fail("build_promo_consistency_audit.py missing", failures)
     if TIKTOK_SETUP_PREFLIGHT_SCRIPT.exists():
         preflight_text = TIKTOK_SETUP_PREFLIGHT_SCRIPT.read_text(encoding="utf-8")
-        if "tiktok_setup_preflight.json" in preflight_text and "tiktok-setup-preflight.md" in preflight_text and "tiktok_secret_handoff_template.env" in preflight_text and "local_posting_token_path" in preflight_text and "post_tiktok_from_queue.py --post-id FP-AUTO-264 --dry-run" in preflight_text and "credential_handoff" in preflight_text and "completion_evidence" in preflight_text and "TIKTOK_CLIENT_KEY" in preflight_text and "TIKTOK_PUBLIC_POSTING_APPROVED" in preflight_text and "Secret values" in preflight_text and "subprocess" not in preflight_text:
+        if "tiktok_setup_preflight.json" in preflight_text and "tiktok-setup-preflight.md" in preflight_text and "tiktok_secret_handoff_template.env" in preflight_text and "local_secret_env_file" in preflight_text and "initialize_local_secret_env_command" in preflight_text and "local_posting_token_path" in preflight_text and "post_tiktok_from_queue.py --post-id FP-AUTO-264 --dry-run" in preflight_text and "credential_handoff" in preflight_text and "completion_evidence" in preflight_text and "TIKTOK_CLIENT_KEY" in preflight_text and "TIKTOK_PUBLIC_POSTING_APPROVED" in preflight_text and "Secret values" in preflight_text and "subprocess" not in preflight_text:
             ok("TikTok setup preflight builder is review-only")
         else:
             fail("build_tiktok_setup_preflight.py missing preflight outputs or exposes execution/secrets", failures)
@@ -3414,7 +3429,7 @@ def validate_generated_outputs(failures):
         fail("build_tiktok_setup_preflight.py missing", failures)
     if TIKTOK_REPAIR_RUNBOOK_SCRIPT.exists():
         runbook_text = TIKTOK_REPAIR_RUNBOOK_SCRIPT.read_text(encoding="utf-8")
-        if "tiktok_repair_runbook.json" in runbook_text and "tiktok-repair-runbook.md" in runbook_text and "handoff_template_path" in runbook_text and "Collect credentials" in runbook_text and "preview_local_tiktok_post" in runbook_text and "blocked_apply_command" in runbook_text and "backlog_reschedule_preview.json" in runbook_text and "--approved-backlog" in runbook_text and "--approved-only" not in runbook_text and "Secret values" in runbook_text and "subprocess" not in runbook_text:
+        if "tiktok_repair_runbook.json" in runbook_text and "tiktok-repair-runbook.md" in runbook_text and "handoff_template_path" in runbook_text and "initialize_local_secret_env" in runbook_text and "Prepare local env" in runbook_text and "Collect credentials" in runbook_text and "preview_local_tiktok_post" in runbook_text and "blocked_apply_command" in runbook_text and "backlog_reschedule_preview.json" in runbook_text and "--approved-backlog" in runbook_text and "--approved-only" not in runbook_text and "Secret values" in runbook_text and "subprocess" not in runbook_text:
             ok("TikTok repair runbook builder is review-only")
         else:
             fail("build_tiktok_repair_runbook.py missing runbook outputs or exposes execution/secrets", failures)
