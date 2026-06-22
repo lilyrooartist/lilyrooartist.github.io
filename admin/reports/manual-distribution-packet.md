@@ -1,6 +1,6 @@
 # Manual Distribution Packet - Lily Roo
 
-Generated: 2026-06-22T10:21:55.420110Z
+Generated: 2026-06-22T10:28:07.875554Z
 
 ## Summary
 - Manual-ready posts: **3**
@@ -95,10 +95,10 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
   - Asset: https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg
   - Asset evidence: `local_asset_present` assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg
   - Destination link evidence:
-    - `needs_manual_review` https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi: no local evidence
-    - `needs_manual_review` https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249: no local evidence
-    - `needs_manual_review` https://www.youtube.com/@lilyroo.artist: no local evidence
-    - `needs_manual_review` https://music.youtube.com/watch?v=vK0mDIW65o4: no local evidence
+    - `verified_local_evidence` https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi: HyperFollow public store link: spotify (data/hyperfollow_store_links_snapshot.json)
+    - `verified_local_evidence` https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249: Apple Music public snapshot: release (data/apple_music_release_snapshot.json)
+    - `verified_local_evidence` https://www.youtube.com/@lilyroo.artist: YouTube channel author URL (data/youtube_title_track_snapshot.json)
+    - `verified_local_evidence` https://music.youtube.com/watch?v=vK0mDIW65o4: I Learned It All in Fifteen Seconds YouTube Music URL (data/distrokid_release_status.json); YouTube Music public snapshot: release (data/youtube_music_release_snapshot.json)
   - Next manual action: `post_manually_then_log_url`
   - Postable now: `True`; approval required: `False`; logging required: `True`
   - Public community surface: https://www.youtube.com/@lilyroo.artist/community
@@ -119,7 +119,7 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
   - Asset: https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg
   - Asset evidence: `local_asset_present` assets/albums/twelve-dollars/art/04-twelve-dollars.jpg
   - Destination link evidence:
-    - `verified_local_evidence` https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n: Twelve Dollars YouTube playlist URL (data/distrokid_release_status.json); Twelve Dollars verified items: 8 (data/youtube_twelve_dollars_playlist.json)
+    - `verified_local_evidence` https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n: Twelve Dollars YouTube playlist URL (data/distrokid_release_status.json); Twelve Dollars YouTube playlist URL (data/distrokid_release_status.json); Twelve Dollars verified items: 8 (data/youtube_twelve_dollars_playlist.json)
   - Next manual action: `post_manually_then_log_url`
   - Postable now: `True`; approval required: `False`; logging required: `True`
   - Public community surface: https://www.youtube.com/@lilyroo.artist/community
@@ -140,7 +140,7 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
   - Asset: https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg
   - Asset evidence: `local_asset_present` assets/albums/analog-myth/art/03-analog-myth.jpg
   - Destination link evidence:
-    - `verified_local_evidence` https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0: Analog Myth YouTube playlist URL (data/distrokid_release_status.json); Analog Myth - Lily Roo verified items: 8 (data/youtube_analog_myth_playlist.json)
+    - `verified_local_evidence` https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0: Analog Myth YouTube playlist URL (data/distrokid_release_status.json); Analog Myth YouTube playlist URL (data/distrokid_release_status.json); Analog Myth - Lily Roo verified items: 8 (data/youtube_analog_myth_playlist.json)
   - Next manual action: `post_manually_then_log_url`
   - Postable now: `True`; approval required: `False`; logging required: `True`
   - Public community surface: https://www.youtube.com/@lilyroo.artist/community

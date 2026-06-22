@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T10:21:55.773970Z",
+  "generated_at": "2026-06-22T10:28:09.340544Z",
   "safe_mode": true,
   "source": {
     "manual_distribution_packet": "data/manual_distribution_packet.json",
@@ -203,33 +203,62 @@
         {
           "url": "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
           "canonical_url": "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
-          "status": "needs_manual_review",
-          "evidence": [],
-          "evidence_count": 0,
+          "status": "verified_local_evidence",
+          "evidence": [
+            {
+              "source": "data/hyperfollow_store_links_snapshot.json",
+              "label": "HyperFollow public store link: spotify",
+              "status": "known_public_snapshot"
+            }
+          ],
+          "evidence_count": 1,
           "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
         },
         {
           "url": "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
           "canonical_url": "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
-          "status": "needs_manual_review",
-          "evidence": [],
-          "evidence_count": 0,
+          "status": "verified_local_evidence",
+          "evidence": [
+            {
+              "source": "data/apple_music_release_snapshot.json",
+              "label": "Apple Music public snapshot: release",
+              "status": "known_public_snapshot"
+            }
+          ],
+          "evidence_count": 1,
           "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
         },
         {
           "url": "https://www.youtube.com/@lilyroo.artist",
           "canonical_url": "https://www.youtube.com/@lilyroo.artist",
-          "status": "needs_manual_review",
-          "evidence": [],
-          "evidence_count": 0,
+          "status": "verified_local_evidence",
+          "evidence": [
+            {
+              "source": "data/youtube_title_track_snapshot.json",
+              "label": "YouTube channel author URL",
+              "status": "known_public_snapshot"
+            }
+          ],
+          "evidence_count": 1,
           "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
         },
         {
           "url": "https://music.youtube.com/watch?v=vK0mDIW65o4",
           "canonical_url": "https://music.youtube.com/watch?v=vK0mDIW65o4",
-          "status": "needs_manual_review",
-          "evidence": [],
-          "evidence_count": 0,
+          "status": "verified_local_evidence",
+          "evidence": [
+            {
+              "source": "data/distrokid_release_status.json",
+              "label": "I Learned It All in Fifteen Seconds YouTube Music URL",
+              "status": "known_release_link"
+            },
+            {
+              "source": "data/youtube_music_release_snapshot.json",
+              "label": "YouTube Music public snapshot: release",
+              "status": "known_public_snapshot"
+            }
+          ],
+          "evidence_count": 2,
           "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
         }
       ],
@@ -305,6 +334,11 @@
             {
               "source": "data/distrokid_release_status.json",
               "label": "Twelve Dollars YouTube playlist URL",
+              "status": "known_release_link"
+            },
+            {
+              "source": "data/distrokid_release_status.json",
+              "label": "Twelve Dollars YouTube playlist URL",
               "status": "known_release_playlist"
             },
             {
@@ -313,7 +347,7 @@
               "status": "known_playlist_snapshot"
             }
           ],
-          "evidence_count": 2,
+          "evidence_count": 3,
           "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
         }
       ],
@@ -389,6 +423,11 @@
             {
               "source": "data/distrokid_release_status.json",
               "label": "Analog Myth YouTube playlist URL",
+              "status": "known_release_link"
+            },
+            {
+              "source": "data/distrokid_release_status.json",
+              "label": "Analog Myth YouTube playlist URL",
               "status": "known_release_playlist"
             },
             {
@@ -397,7 +436,7 @@
               "status": "known_playlist_snapshot"
             }
           ],
-          "evidence_count": 2,
+          "evidence_count": 3,
           "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
         }
       ],

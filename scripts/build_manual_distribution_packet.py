@@ -15,6 +15,12 @@ PROMO_PLAN = ROOT / "data" / "promo_queue_plan.json"
 APPROVAL_RUNWAY = ROOT / "data" / "approval_runway.json"
 SCHEDULED_POSTS = ROOT / "data" / "scheduled_posts.csv"
 DISTROKID_RELEASE_STATUS = ROOT / "data" / "distrokid_release_status.json"
+SPOTIFY_RELEASE_SNAPSHOT = ROOT / "data" / "spotify_release_snapshot.json"
+APPLE_MUSIC_RELEASE_SNAPSHOT = ROOT / "data" / "apple_music_release_snapshot.json"
+YOUTUBE_MUSIC_RELEASE_SNAPSHOT = ROOT / "data" / "youtube_music_release_snapshot.json"
+YOUTUBE_TITLE_TRACK_SNAPSHOT = ROOT / "data" / "youtube_title_track_snapshot.json"
+HYPERFOLLOW_STORE_LINKS_SNAPSHOT = ROOT / "data" / "hyperfollow_store_links_snapshot.json"
+FIRST_ALBUM_PLAYLIST = ROOT / "data" / "youtube_first_album_playlist.json"
 TWELVE_DOLLARS_PLAYLIST = ROOT / "data" / "youtube_twelve_dollars_playlist.json"
 ANALOG_MYTH_PLAYLIST = ROOT / "data" / "youtube_analog_myth_playlist.json"
 PUBLISHED_LOG = ROOT / "admin" / "content" / "Published_Log.csv"
@@ -119,6 +125,21 @@ def destination_evidence_index() -> dict[str, list[dict]]:
     evidence: dict[str, list[dict]] = {}
     release_status = read_json(DISTROKID_RELEASE_STATUS, {})
     for release in release_status.get("releases") or []:
+        release_title = release.get("title") or "release"
+        for key, label in [
+            ("spotify_url", "Spotify URL"),
+            ("apple_music_url", "Apple Music URL"),
+            ("youtube_music_url", "YouTube Music URL"),
+            ("hyperfollow_url", "HyperFollow URL"),
+            ("youtube_playlist_url", "YouTube playlist URL"),
+        ]:
+            add_evidence(
+                evidence,
+                release.get(key) or "",
+                source=str(DISTROKID_RELEASE_STATUS.relative_to(ROOT)),
+                label=f"{release_title} {label}",
+                status="known_release_link",
+            )
         add_evidence(
             evidence,
             release.get("youtube_playlist_url") or "",
@@ -126,7 +147,48 @@ def destination_evidence_index() -> dict[str, list[dict]]:
             label=f"{release.get('title') or 'release'} YouTube playlist URL",
             status="known_release_playlist",
         )
-    for path in [TWELVE_DOLLARS_PLAYLIST, ANALOG_MYTH_PLAYLIST]:
+    spotify = read_json(SPOTIFY_RELEASE_SNAPSHOT, {})
+    add_evidence(
+        evidence,
+        spotify.get("release_url") or "",
+        source=str(SPOTIFY_RELEASE_SNAPSHOT.relative_to(ROOT)),
+        label=f"Spotify public snapshot: {spotify.get('title') or 'release'}",
+        status="known_public_snapshot",
+    )
+    apple = read_json(APPLE_MUSIC_RELEASE_SNAPSHOT, {})
+    add_evidence(
+        evidence,
+        apple.get("release_url") or "",
+        source=str(APPLE_MUSIC_RELEASE_SNAPSHOT.relative_to(ROOT)),
+        label=f"Apple Music public snapshot: {apple.get('title') or 'release'}",
+        status="known_public_snapshot",
+    )
+    youtube_music = read_json(YOUTUBE_MUSIC_RELEASE_SNAPSHOT, {})
+    add_evidence(
+        evidence,
+        youtube_music.get("canonical_url") or youtube_music.get("release_url") or "",
+        source=str(YOUTUBE_MUSIC_RELEASE_SNAPSHOT.relative_to(ROOT)),
+        label=f"YouTube Music public snapshot: {youtube_music.get('title') or 'release'}",
+        status="known_public_snapshot",
+    )
+    title_track = read_json(YOUTUBE_TITLE_TRACK_SNAPSHOT, {})
+    add_evidence(
+        evidence,
+        title_track.get("author_url") or "",
+        source=str(YOUTUBE_TITLE_TRACK_SNAPSHOT.relative_to(ROOT)),
+        label="YouTube channel author URL",
+        status="known_public_snapshot",
+    )
+    hyperfollow = read_json(HYPERFOLLOW_STORE_LINKS_SNAPSHOT, {})
+    for link in hyperfollow.get("links") or []:
+        add_evidence(
+            evidence,
+            link.get("url") or "",
+            source=str(HYPERFOLLOW_STORE_LINKS_SNAPSHOT.relative_to(ROOT)),
+            label=f"HyperFollow public store link: {link.get('store') or 'store'}",
+            status="known_public_snapshot",
+        )
+    for path in [FIRST_ALBUM_PLAYLIST, TWELVE_DOLLARS_PLAYLIST, ANALOG_MYTH_PLAYLIST]:
         playlist = read_json(path, {})
         add_evidence(
             evidence,
