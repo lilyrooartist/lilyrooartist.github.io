@@ -1,6 +1,6 @@
 # Manual Posting Clipboard - Lily Roo
 
-Generated: 2026-06-22T07:10:36.825330Z
+Generated: 2026-06-22T07:14:42.789011Z
 
 ## Summary
 - Status: **ready_to_post**
@@ -16,6 +16,7 @@ Generated: 2026-06-22T07:10:36.825330Z
 - Public URL reconciliation: `python3 scripts/reconcile_youtube_community_urls.py`
 - Reconciliation status: **waiting_for_public_posts** (0 match(es))
 - Reconciliation apply if matches exist: `not available`
+- Result handoff after URL logging: `admin/reports/experiment-result-clipboard.md`
 - Next action: Post each card in YouTube Community, copy the real public URL, then log it.
 
 ## Cards
@@ -42,6 +43,14 @@ Stream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: htt
 - Log preview after posting: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL`
 - Log apply after posting: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL --apply --refresh-admin`
 - Log notes: `manual_distribution_id=FP-AUTO-261; source=data/manual_distribution_packet.json`
+- Result handoff: `blocked_until_public_url_logged` via `admin/reports/experiment-result-clipboard.md`
+- Result handoff reason: Experiment result collection starts after the real public URL is logged in Published_Log.csv.
+- After posting checklist:
+  - Copy the real public YouTube Community post URL.
+  - Run the log preview command: python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL
+  - Run the log apply command after preview passes: python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL --apply --refresh-admin
+  - Refresh Admin and confirm this card moves out of the manual posting queue.
+  - Open the experiment result clipboard when first metrics are available.
 ### 2. Twelve Dollars - YouTube Community
 - ID: `FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY`
 - Status: `ready_for_manual_post`
@@ -62,6 +71,14 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNT
 - Log preview after posting: `python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL`
 - Log apply after posting: `python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin`
 - Log notes: `manual_distribution_id=FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY; source=data/manual_distribution_packet.json`
+- Result handoff: `blocked_until_public_url_logged` via `admin/reports/experiment-result-clipboard.md`
+- Result handoff reason: Experiment result collection starts after the real public URL is logged in Published_Log.csv.
+- After posting checklist:
+  - Copy the real public YouTube Community post URL.
+  - Run the log preview command: python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL
+  - Run the log apply command after preview passes: python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin
+  - Refresh Admin and confirm this card moves out of the manual posting queue.
+  - Open the experiment result clipboard when first metrics are available.
 ### 3. Analog Myth - YouTube Community
 - ID: `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY`
 - Status: `ready_for_manual_post`
@@ -82,6 +99,14 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
 - Log preview after posting: `python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL`
 - Log apply after posting: `python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin`
 - Log notes: `manual_distribution_id=FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY; source=data/manual_distribution_packet.json`
+- Result handoff: `blocked_until_public_url_logged` via `admin/reports/experiment-result-clipboard.md`
+- Result handoff reason: Experiment result collection starts after the real public URL is logged in Published_Log.csv.
+- After posting checklist:
+  - Copy the real public YouTube Community post URL.
+  - Run the log preview command: python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL
+  - Run the log apply command after preview passes: python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin
+  - Refresh Admin and confirm this card moves out of the manual posting queue.
+  - Open the experiment result clipboard when first metrics are available.
 
 ## Operator Steps
 - Open the YouTube Community surface.

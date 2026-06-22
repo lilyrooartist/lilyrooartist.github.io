@@ -59,6 +59,14 @@ def post_card(row: dict) -> dict:
     log_effect = row.get("log_effect") or {}
     post_id = row.get("id") or ""
     paste_text_path = PASTE_CARD_DIR / f"{slug(post_id)}.txt"
+    log_preview_command = row.get("log_preview_command") or ""
+    log_apply_command = row.get("log_apply_command") or ""
+    result_handoff = {
+        "status": "blocked_until_public_url_logged",
+        "source_report": "admin/reports/experiment-result-clipboard.md",
+        "reason": "Experiment result collection starts after the real public URL is logged in Published_Log.csv.",
+        "first_measurement_window": "Collect first public performance values after the post has had time to accumulate views.",
+    }
     return {
         "id": post_id,
         "release": row.get("release") or "",
@@ -78,13 +86,22 @@ def post_card(row: dict) -> dict:
         "logging_required": bool(posting.get("logging_required")),
         "public_url": row.get("published_url") or "",
         "public_url_placeholder": log_effect.get("url_placeholder") or "PUBLIC_URL",
-        "log_preview_command": row.get("log_preview_command") or "",
-        "log_apply_command": row.get("log_apply_command") or "",
+        "log_preview_command": log_preview_command,
+        "log_apply_command": log_apply_command,
         "log_notes": log_effect.get("notes") or "",
+        "result_handoff": result_handoff,
+        "after_posting_checklist": [
+            "Copy the real public YouTube Community post URL.",
+            f"Run the log preview command: {log_preview_command}",
+            f"Run the log apply command after preview passes: {log_apply_command}",
+            "Refresh Admin and confirm this card moves out of the manual posting queue.",
+            "Open the experiment result clipboard when first metrics are available.",
+        ],
         "completion_evidence": [
             "A real public YouTube Community post URL exists.",
             "The URL is logged with scripts/log_manual_distribution.py.",
             "admin/content/Published_Log.csv contains this manual_distribution_id.",
+            "The experiment result clipboard can request first measurement values for this post.",
         ],
     }
 
@@ -135,6 +152,7 @@ def build_payload() -> dict:
             "public_url_reconciliation_match_count": reconciliation_summary.get("match_count") or 0,
             "public_url_reconciliation_command": "python3 scripts/reconcile_youtube_community_urls.py",
             "public_url_reconciliation_apply_command": reconciliation_summary.get("apply_command") or "",
+            "result_handoff_report": "admin/reports/experiment-result-clipboard.md",
             "next_action": (
                 "Post each card in YouTube Community, copy the real public URL, then log it."
                 if cards
@@ -204,6 +222,7 @@ def build_markdown(payload: dict) -> str:
         f"- Public URL reconciliation: `{summary.get('public_url_reconciliation_command') or 'not available'}`",
         f"- Reconciliation status: **{summary.get('public_url_reconciliation_status')}** ({summary.get('public_url_reconciliation_match_count')} match(es))",
         f"- Reconciliation apply if matches exist: `{summary.get('public_url_reconciliation_apply_command') or 'not available'}`",
+        f"- Result handoff after URL logging: `{summary.get('result_handoff_report') or 'not available'}`",
         f"- Next action: {summary['next_action']}",
         "",
         "## Cards",
@@ -236,6 +255,16 @@ def build_markdown(payload: dict) -> str:
             f"- Log apply after posting: `{card.get('log_apply_command') or 'not available'}`",
             f"- Log notes: `{card.get('log_notes') or 'not available'}`",
         ])
+        result_handoff = card.get("result_handoff") or {}
+        if result_handoff:
+            lines.extend([
+                f"- Result handoff: `{result_handoff.get('status')}` via `{result_handoff.get('source_report')}`",
+                f"- Result handoff reason: {result_handoff.get('reason')}",
+            ])
+        if card.get("after_posting_checklist"):
+            lines.append("- After posting checklist:")
+            for item in card["after_posting_checklist"]:
+                lines.append(f"  - {item}")
     lines.extend([
         "",
         "## Operator Steps",

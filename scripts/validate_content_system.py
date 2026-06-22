@@ -1647,6 +1647,7 @@ def validate_generated_outputs(failures):
             and "log_manual_distribution.py" in (summary.get("batch_log_preview_command") or "")
             and "--apply --refresh-admin" in (summary.get("batch_log_apply_command") or "")
             and "--allow-partial --apply --refresh-admin" in (summary.get("batch_log_partial_apply_command") or "")
+            and summary.get("result_handoff_report") == "admin/reports/experiment-result-clipboard.md"
             and "reconcile_youtube_community_urls.py" in (summary.get("public_url_reconciliation_command") or "")
             and summary.get("public_url_reconciliation_status") in {"not_run", "waiting_for_public_posts", "matches_ready", "fetch_failed"}
             and "public_url_reconciliation_match_count" in summary
@@ -1662,6 +1663,10 @@ def validate_generated_outputs(failures):
                 and "log_manual_distribution.py" in (card.get("log_preview_command") or "")
                 and "--apply --refresh-admin" in (card.get("log_apply_command") or "")
                 and "manual_distribution_id=" in (card.get("log_notes") or "")
+                and (card.get("result_handoff") or {}).get("status") == "blocked_until_public_url_logged"
+                and (card.get("result_handoff") or {}).get("source_report") == "admin/reports/experiment-result-clipboard.md"
+                and any("experiment result clipboard" in item for item in card.get("after_posting_checklist") or [])
+                and any("first measurement" in item for item in card.get("completion_evidence") or [])
                 for card in cards
             )
             and any("does not approve" in item for item in clipboard.get("guardrails") or [])
@@ -3824,7 +3829,7 @@ def validate_generated_outputs(failures):
         fail("manual-distribution-packet.md missing", failures)
     if MANUAL_POSTING_CLIPBOARD_REPORT.exists():
         clipboard_report = MANUAL_POSTING_CLIPBOARD_REPORT.read_text(encoding="utf-8")
-        if "Manual Posting Clipboard" in clipboard_report and "## Cards" in clipboard_report and "Paste text" in clipboard_report and "Log preview after posting" in clipboard_report and "Partial batch apply after first URL" in clipboard_report and "Public URL reconciliation" in clipboard_report and "Operator Steps" in clipboard_report and "Guardrails" in clipboard_report:
+        if "Manual Posting Clipboard" in clipboard_report and "## Cards" in clipboard_report and "Paste text" in clipboard_report and "Log preview after posting" in clipboard_report and "Partial batch apply after first URL" in clipboard_report and "Public URL reconciliation" in clipboard_report and "Result handoff after URL logging" in clipboard_report and "After posting checklist" in clipboard_report and "Operator Steps" in clipboard_report and "Guardrails" in clipboard_report:
             ok("manual posting clipboard markdown report present")
         else:
             fail("manual-posting-clipboard.md missing expected sections", failures)

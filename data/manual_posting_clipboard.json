@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T07:10:36.825330Z",
+  "generated_at": "2026-06-22T07:14:42.789011Z",
   "safe_mode": true,
   "source": {
     "manual_distribution_packet": "data/manual_distribution_packet.json",
@@ -33,6 +33,7 @@
     "public_url_reconciliation_match_count": 0,
     "public_url_reconciliation_command": "python3 scripts/reconcile_youtube_community_urls.py",
     "public_url_reconciliation_apply_command": "",
+    "result_handoff_report": "admin/reports/experiment-result-clipboard.md",
     "next_action": "Post each card in YouTube Community, copy the real public URL, then log it."
   },
   "post_cards": [
@@ -96,10 +97,24 @@
       "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL",
       "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL --apply --refresh-admin",
       "log_notes": "manual_distribution_id=FP-AUTO-261; source=data/manual_distribution_packet.json",
+      "result_handoff": {
+        "status": "blocked_until_public_url_logged",
+        "source_report": "admin/reports/experiment-result-clipboard.md",
+        "reason": "Experiment result collection starts after the real public URL is logged in Published_Log.csv.",
+        "first_measurement_window": "Collect first public performance values after the post has had time to accumulate views."
+      },
+      "after_posting_checklist": [
+        "Copy the real public YouTube Community post URL.",
+        "Run the log preview command: python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL",
+        "Run the log apply command after preview passes: python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL --apply --refresh-admin",
+        "Refresh Admin and confirm this card moves out of the manual posting queue.",
+        "Open the experiment result clipboard when first metrics are available."
+      ],
       "completion_evidence": [
         "A real public YouTube Community post URL exists.",
         "The URL is logged with scripts/log_manual_distribution.py.",
-        "admin/content/Published_Log.csv contains this manual_distribution_id."
+        "admin/content/Published_Log.csv contains this manual_distribution_id.",
+        "The experiment result clipboard can request first measurement values for this post."
       ]
     },
     {
@@ -146,10 +161,24 @@
       "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL",
       "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
       "log_notes": "manual_distribution_id=FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY; source=data/manual_distribution_packet.json",
+      "result_handoff": {
+        "status": "blocked_until_public_url_logged",
+        "source_report": "admin/reports/experiment-result-clipboard.md",
+        "reason": "Experiment result collection starts after the real public URL is logged in Published_Log.csv.",
+        "first_measurement_window": "Collect first public performance values after the post has had time to accumulate views."
+      },
+      "after_posting_checklist": [
+        "Copy the real public YouTube Community post URL.",
+        "Run the log preview command: python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+        "Run the log apply command after preview passes: python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
+        "Refresh Admin and confirm this card moves out of the manual posting queue.",
+        "Open the experiment result clipboard when first metrics are available."
+      ],
       "completion_evidence": [
         "A real public YouTube Community post URL exists.",
         "The URL is logged with scripts/log_manual_distribution.py.",
-        "admin/content/Published_Log.csv contains this manual_distribution_id."
+        "admin/content/Published_Log.csv contains this manual_distribution_id.",
+        "The experiment result clipboard can request first measurement values for this post."
       ]
     },
     {
@@ -196,10 +225,24 @@
       "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL",
       "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
       "log_notes": "manual_distribution_id=FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY; source=data/manual_distribution_packet.json",
+      "result_handoff": {
+        "status": "blocked_until_public_url_logged",
+        "source_report": "admin/reports/experiment-result-clipboard.md",
+        "reason": "Experiment result collection starts after the real public URL is logged in Published_Log.csv.",
+        "first_measurement_window": "Collect first public performance values after the post has had time to accumulate views."
+      },
+      "after_posting_checklist": [
+        "Copy the real public YouTube Community post URL.",
+        "Run the log preview command: python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+        "Run the log apply command after preview passes: python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
+        "Refresh Admin and confirm this card moves out of the manual posting queue.",
+        "Open the experiment result clipboard when first metrics are available."
+      ],
       "completion_evidence": [
         "A real public YouTube Community post URL exists.",
         "The URL is logged with scripts/log_manual_distribution.py.",
-        "admin/content/Published_Log.csv contains this manual_distribution_id."
+        "admin/content/Published_Log.csv contains this manual_distribution_id.",
+        "The experiment result clipboard can request first measurement values for this post."
       ]
     }
   ],
