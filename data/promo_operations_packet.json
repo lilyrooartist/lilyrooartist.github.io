@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T06:02:35.714861Z",
+  "generated_at": "2026-06-22T06:04:47.837377Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -10,39 +10,33 @@
     "manual_metrics": "data/manual_metric_collection_packet.json"
   },
   "next_action": {
-    "label": "Preview clear approved backlog row",
+    "label": "Preview reschedule for approved past-due posts",
     "kind": "backlog_reschedule",
     "priority": 0,
-    "command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
+    "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
     "context": {
-      "approved_backlog_posts": 5,
-      "approved_upcoming_posts": 3,
+      "approved_backlog_posts": 4,
+      "approved_upcoming_posts": 6,
       "blocked_backlog_count": 3,
-      "clear_to_apply_count": 1,
+      "clear_to_apply_count": 0,
       "apply_allowed_without_override": false,
       "apply_command": "",
       "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
       "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
       "partial_clear_apply_manifest": {
-        "status": "ready",
-        "clear_to_apply_count": 1,
+        "status": "empty",
+        "clear_to_apply_count": 0,
         "blocked_backlog_count": 3,
-        "clear_ids": [
-          "FP-AUTO-258"
-        ],
+        "clear_ids": [],
         "blocked_ids_retained": [
           "FP-AUTO-264",
           "FP-AUTO-263",
           "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM"
         ],
-        "preview_commands": [
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24"
-        ],
-        "apply_commands": [
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin"
-        ],
-        "recommended_next_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
-        "recommended_apply_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
+        "preview_commands": [],
+        "apply_commands": [],
+        "recommended_next_command": "",
+        "recommended_apply_command": "",
         "operator_checklist": [
           "Preview each clear row before applying it.",
           "Apply only rows listed in clear_ids; do not use --allow-blocked for this partial-clear path.",
@@ -59,15 +53,15 @@
           "This path reschedules only unblocked approved rows; it does not approve, publish, or repair executors."
         ]
       },
-      "partial_clear_preview_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
-      "partial_clear_apply_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
+      "partial_clear_preview_command": "",
+      "partial_clear_apply_command": "",
       "backlog_clearance_manifest": {
         "status": "blocked_until_clearance_steps_complete",
-        "approved_backlog_count": 4,
+        "approved_backlog_count": 3,
         "blocked_backlog_count": 3,
-        "clear_to_apply_count": 1,
-        "partial_clear_apply_available": true,
-        "partial_clear_apply_count": 1,
+        "clear_to_apply_count": 0,
+        "partial_clear_apply_available": false,
+        "partial_clear_apply_count": 0,
         "blocked_ids": [
           "FP-AUTO-264",
           "FP-AUTO-263",
@@ -92,7 +86,7 @@
             "song": "I Learned It All in Fifteen Seconds",
             "blocker_kind": "tiktok_credentials_missing",
             "blocker_reason": "tiktok_credentials_missing",
-            "proposed_scheduled_at": "2026-06-24T10:00:00+08:00",
+            "proposed_scheduled_at": "2026-06-23T10:00:00+08:00",
             "clearance_steps": [
               "Add local TikTok OAuth credentials, then push worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
               "Confirm TikTok public posting approval before treating auto-posting as ready.",
@@ -105,7 +99,7 @@
             "song": "I Learned It All in Fifteen Seconds",
             "blocker_kind": "max_attempts_exceeded",
             "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
-            "proposed_scheduled_at": "2026-06-25T10:00:00+08:00",
+            "proposed_scheduled_at": "2026-06-24T10:00:00+08:00",
             "clearance_steps": [
               "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
             ]
@@ -116,7 +110,7 @@
             "song": "Twelve Dollars",
             "blocker_kind": "max_attempts_exceeded",
             "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
-            "proposed_scheduled_at": "2026-06-26T10:00:00+08:00",
+            "proposed_scheduled_at": "2026-06-25T10:00:00+08:00",
             "clearance_steps": [
               "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
             ]
@@ -161,7 +155,7 @@
         "Do not use the override command unless accepting the blocked executor risk deliberately.",
         "A reschedule does not publish, approve, or repair platform credentials by itself."
       ],
-      "note": "Preview the first unblocked approved backlog row; blocked rows stay held behind their repair gates."
+      "note": "Preview first. Normal apply is hidden until known executor/platform blockers clear; override requires deliberate review."
     },
     "phase": "Reschedule approved backlog",
     "urgency": "high",
@@ -174,8 +168,8 @@
     ]
   },
   "summary": {
-    "action_count": 17,
-    "user_review": 3,
+    "action_count": 15,
+    "user_review": 1,
     "platform_fixes": 4,
     "scheduled_approval_batches": 0,
     "store_checks": 7,
@@ -183,55 +177,48 @@
     "backlog_reschedules": 1,
     "safe_apply_commands": 0,
     "blocked_review_items": 1,
-    "manual_only_review_items": 2,
+    "manual_only_review_items": 0,
     "phases": {
       "Fill manual metrics": 2,
       "Repair executor": 4,
       "Reschedule approved backlog": 1,
       "Review blocked drafts": 1,
-      "Review draft posts": 2,
       "Verify music sites": 7
     },
     "urgencies": {
       "blocked": 1,
       "high": 5,
       "low": 2,
-      "medium": 9
+      "medium": 7
     },
     "next_action": {
-      "label": "Preview clear approved backlog row",
+      "label": "Preview reschedule for approved past-due posts",
       "kind": "backlog_reschedule",
       "priority": 0,
-      "command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
+      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
       "context": {
-        "approved_backlog_posts": 5,
-        "approved_upcoming_posts": 3,
+        "approved_backlog_posts": 4,
+        "approved_upcoming_posts": 6,
         "blocked_backlog_count": 3,
-        "clear_to_apply_count": 1,
+        "clear_to_apply_count": 0,
         "apply_allowed_without_override": false,
         "apply_command": "",
         "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
         "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
         "partial_clear_apply_manifest": {
-          "status": "ready",
-          "clear_to_apply_count": 1,
+          "status": "empty",
+          "clear_to_apply_count": 0,
           "blocked_backlog_count": 3,
-          "clear_ids": [
-            "FP-AUTO-258"
-          ],
+          "clear_ids": [],
           "blocked_ids_retained": [
             "FP-AUTO-264",
             "FP-AUTO-263",
             "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM"
           ],
-          "preview_commands": [
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24"
-          ],
-          "apply_commands": [
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin"
-          ],
-          "recommended_next_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
-          "recommended_apply_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
+          "preview_commands": [],
+          "apply_commands": [],
+          "recommended_next_command": "",
+          "recommended_apply_command": "",
           "operator_checklist": [
             "Preview each clear row before applying it.",
             "Apply only rows listed in clear_ids; do not use --allow-blocked for this partial-clear path.",
@@ -248,15 +235,15 @@
             "This path reschedules only unblocked approved rows; it does not approve, publish, or repair executors."
           ]
         },
-        "partial_clear_preview_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
-        "partial_clear_apply_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
+        "partial_clear_preview_command": "",
+        "partial_clear_apply_command": "",
         "backlog_clearance_manifest": {
           "status": "blocked_until_clearance_steps_complete",
-          "approved_backlog_count": 4,
+          "approved_backlog_count": 3,
           "blocked_backlog_count": 3,
-          "clear_to_apply_count": 1,
-          "partial_clear_apply_available": true,
-          "partial_clear_apply_count": 1,
+          "clear_to_apply_count": 0,
+          "partial_clear_apply_available": false,
+          "partial_clear_apply_count": 0,
           "blocked_ids": [
             "FP-AUTO-264",
             "FP-AUTO-263",
@@ -281,7 +268,7 @@
               "song": "I Learned It All in Fifteen Seconds",
               "blocker_kind": "tiktok_credentials_missing",
               "blocker_reason": "tiktok_credentials_missing",
-              "proposed_scheduled_at": "2026-06-24T10:00:00+08:00",
+              "proposed_scheduled_at": "2026-06-23T10:00:00+08:00",
               "clearance_steps": [
                 "Add local TikTok OAuth credentials, then push worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
                 "Confirm TikTok public posting approval before treating auto-posting as ready.",
@@ -294,7 +281,7 @@
               "song": "I Learned It All in Fifteen Seconds",
               "blocker_kind": "max_attempts_exceeded",
               "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
-              "proposed_scheduled_at": "2026-06-25T10:00:00+08:00",
+              "proposed_scheduled_at": "2026-06-24T10:00:00+08:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]
@@ -305,7 +292,7 @@
               "song": "Twelve Dollars",
               "blocker_kind": "max_attempts_exceeded",
               "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
-              "proposed_scheduled_at": "2026-06-26T10:00:00+08:00",
+              "proposed_scheduled_at": "2026-06-25T10:00:00+08:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]
@@ -350,7 +337,7 @@
           "Do not use the override command unless accepting the blocked executor risk deliberately.",
           "A reschedule does not publish, approve, or repair platform credentials by itself."
         ],
-        "note": "Preview the first unblocked approved backlog row; blocked rows stay held behind their repair gates."
+        "note": "Preview first. Normal apply is hidden until known executor/platform blockers clear; override requires deliberate review."
       },
       "phase": "Reschedule approved backlog",
       "urgency": "high",
@@ -422,39 +409,33 @@
       ]
     },
     {
-      "label": "Preview clear approved backlog row",
+      "label": "Preview reschedule for approved past-due posts",
       "kind": "backlog_reschedule",
       "priority": 0,
-      "command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
+      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
       "context": {
-        "approved_backlog_posts": 5,
-        "approved_upcoming_posts": 3,
+        "approved_backlog_posts": 4,
+        "approved_upcoming_posts": 6,
         "blocked_backlog_count": 3,
-        "clear_to_apply_count": 1,
+        "clear_to_apply_count": 0,
         "apply_allowed_without_override": false,
         "apply_command": "",
         "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
         "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
         "partial_clear_apply_manifest": {
-          "status": "ready",
-          "clear_to_apply_count": 1,
+          "status": "empty",
+          "clear_to_apply_count": 0,
           "blocked_backlog_count": 3,
-          "clear_ids": [
-            "FP-AUTO-258"
-          ],
+          "clear_ids": [],
           "blocked_ids_retained": [
             "FP-AUTO-264",
             "FP-AUTO-263",
             "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM"
           ],
-          "preview_commands": [
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24"
-          ],
-          "apply_commands": [
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin"
-          ],
-          "recommended_next_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
-          "recommended_apply_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
+          "preview_commands": [],
+          "apply_commands": [],
+          "recommended_next_command": "",
+          "recommended_apply_command": "",
           "operator_checklist": [
             "Preview each clear row before applying it.",
             "Apply only rows listed in clear_ids; do not use --allow-blocked for this partial-clear path.",
@@ -471,15 +452,15 @@
             "This path reschedules only unblocked approved rows; it does not approve, publish, or repair executors."
           ]
         },
-        "partial_clear_preview_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
-        "partial_clear_apply_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
+        "partial_clear_preview_command": "",
+        "partial_clear_apply_command": "",
         "backlog_clearance_manifest": {
           "status": "blocked_until_clearance_steps_complete",
-          "approved_backlog_count": 4,
+          "approved_backlog_count": 3,
           "blocked_backlog_count": 3,
-          "clear_to_apply_count": 1,
-          "partial_clear_apply_available": true,
-          "partial_clear_apply_count": 1,
+          "clear_to_apply_count": 0,
+          "partial_clear_apply_available": false,
+          "partial_clear_apply_count": 0,
           "blocked_ids": [
             "FP-AUTO-264",
             "FP-AUTO-263",
@@ -504,7 +485,7 @@
               "song": "I Learned It All in Fifteen Seconds",
               "blocker_kind": "tiktok_credentials_missing",
               "blocker_reason": "tiktok_credentials_missing",
-              "proposed_scheduled_at": "2026-06-24T10:00:00+08:00",
+              "proposed_scheduled_at": "2026-06-23T10:00:00+08:00",
               "clearance_steps": [
                 "Add local TikTok OAuth credentials, then push worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
                 "Confirm TikTok public posting approval before treating auto-posting as ready.",
@@ -517,7 +498,7 @@
               "song": "I Learned It All in Fifteen Seconds",
               "blocker_kind": "max_attempts_exceeded",
               "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
-              "proposed_scheduled_at": "2026-06-25T10:00:00+08:00",
+              "proposed_scheduled_at": "2026-06-24T10:00:00+08:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]
@@ -528,7 +509,7 @@
               "song": "Twelve Dollars",
               "blocker_kind": "max_attempts_exceeded",
               "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
-              "proposed_scheduled_at": "2026-06-26T10:00:00+08:00",
+              "proposed_scheduled_at": "2026-06-25T10:00:00+08:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]
@@ -573,7 +554,7 @@
           "Do not use the override command unless accepting the blocked executor risk deliberately.",
           "A reschedule does not publish, approve, or repair platform credentials by itself."
         ],
-        "note": "Preview the first unblocked approved backlog row; blocked rows stay held behind their repair gates."
+        "note": "Preview first. Normal apply is hidden until known executor/platform blockers clear; override requires deliberate review."
       },
       "phase": "Reschedule approved backlog",
       "urgency": "high",
@@ -738,80 +719,6 @@
       ]
     },
     {
-      "label": "Review YouTube Community draft for Twelve Dollars",
-      "kind": "approval_review",
-      "priority": 15,
-      "command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
-      "context": {
-        "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
-        "release": "Twelve Dollars",
-        "platform": "YouTube Community",
-        "scheduled_at": "2026-06-24T18:30:00-04:00",
-        "execution_mode": "manual",
-        "post_type": "community",
-        "readiness_state": "manual_only",
-        "readiness_message": "YouTube Community posts are copy-ready manual workflow.",
-        "text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
-        "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-        "media_key": "twelve-dollars-cover",
-        "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
-        "preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
-        "readiness": {
-          "ready": true,
-          "missing_secrets": [],
-          "client_secret_present": true,
-          "media_map_present": true,
-          "privacy_status": "public"
-        }
-      },
-      "phase": "Review draft posts",
-      "urgency": "medium",
-      "urgency_reason": "Draft is scheduled within 72 hours.",
-      "status": "waiting_for_user",
-      "sort_key": [
-        2,
-        15,
-        6
-      ]
-    },
-    {
-      "label": "Review YouTube Community draft for Analog Myth",
-      "kind": "approval_review",
-      "priority": 15,
-      "command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --dry-run",
-      "context": {
-        "id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-        "release": "Analog Myth",
-        "platform": "YouTube Community",
-        "scheduled_at": "2026-06-25T18:30:00-04:00",
-        "execution_mode": "manual",
-        "post_type": "community",
-        "readiness_state": "manual_only",
-        "readiness_message": "YouTube Community posts are copy-ready manual workflow.",
-        "text": "Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
-        "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
-        "media_key": "analog-myth-cover",
-        "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin",
-        "preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --dry-run",
-        "readiness": {
-          "ready": true,
-          "missing_secrets": [],
-          "client_secret_present": true,
-          "media_map_present": true,
-          "privacy_status": "public"
-        }
-      },
-      "phase": "Review draft posts",
-      "urgency": "medium",
-      "urgency_reason": "Manual copy is ready for human posting workflow.",
-      "status": "waiting_for_user",
-      "sort_key": [
-        2,
-        15,
-        7
-      ]
-    },
-    {
       "label": "Re-check Twelve Dollars on Spotify",
       "kind": "store_verification",
       "priority": 20,
@@ -819,25 +726,101 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "Spotify",
-        "checked_at": "2026-06-22T06:01:28.759862+00:00",
+        "checked_at": "2026-06-22T06:04:39.607182+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-06-23T06:01:28.759862+00:00",
+        "next_recheck_at": "2026-06-23T06:04:39.607182+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-22T06:01:28.759862Z",
+          "updated_at": "2026-06-22T06:04:39.607182Z",
           "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-          "checked_at": "2026-06-22T06:01:28.759862+00:00",
+          "checked_at": "2026-06-22T06:04:39.607182+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-06-23T06:01:28.759862+00:00",
+          "next_recheck_at": "2026-06-23T06:04:39.607182+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-06-23T06:01:28.759862+00:00. Status: waiting_for_release_propagation."
+        "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-06-23T06:04:39.607182+00:00. Status: waiting_for_release_propagation."
+      },
+      "phase": "Verify music sites",
+      "urgency": "medium",
+      "urgency_reason": "Public store links should be checked until DistroKid exposes them.",
+      "status": "ready",
+      "sort_key": [
+        2,
+        20,
+        6
+      ]
+    },
+    {
+      "label": "Re-check Twelve Dollars on Apple Music",
+      "kind": "store_verification",
+      "priority": 20,
+      "command": "python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/apple_music_release_snapshot.json'",
+      "context": {
+        "release": "Twelve Dollars",
+        "service": "Apple Music",
+        "checked_at": "2026-06-22T06:04:40.922050+00:00",
+        "checked_age_hours": 0.0,
+        "recheck_interval_hours": 24,
+        "next_recheck_at": "2026-06-23T06:04:40.922050+00:00",
+        "recheck_due": false,
+        "recheck_status": "waiting_for_release_propagation",
+        "latest_snapshot": {
+          "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
+          "ok": false,
+          "updated_at": "2026-06-22T06:04:40.922050Z",
+          "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
+          "checked_at": "2026-06-22T06:04:40.922050+00:00",
+          "checked_age_hours": 0.0,
+          "recheck_interval_hours": 24,
+          "next_recheck_at": "2026-06-23T06:04:40.922050+00:00",
+          "recheck_due": false,
+          "recheck_status": "waiting_for_release_propagation"
+        },
+        "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-06-23T06:04:40.922050+00:00. Status: waiting_for_release_propagation."
+      },
+      "phase": "Verify music sites",
+      "urgency": "medium",
+      "urgency_reason": "Public store links should be checked until DistroKid exposes them.",
+      "status": "ready",
+      "sort_key": [
+        2,
+        20,
+        7
+      ]
+    },
+    {
+      "label": "Re-check Twelve Dollars on HyperFollow",
+      "kind": "store_verification",
+      "priority": 20,
+      "command": "python3 scripts/capture_hyperfollow_store_links.py --url 'https://distrokid.com/hyperfollow/lilyroo/twelve-dollars' --out 'data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json'",
+      "context": {
+        "release": "Twelve Dollars",
+        "service": "HyperFollow",
+        "checked_at": "2026-06-22T06:04:41.470593+00:00",
+        "checked_age_hours": 0.0,
+        "recheck_interval_hours": 24,
+        "next_recheck_at": "2026-06-23T06:04:41.470593+00:00",
+        "recheck_due": false,
+        "recheck_status": "waiting_for_release_propagation",
+        "latest_snapshot": {
+          "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
+          "ok": false,
+          "updated_at": "2026-06-22T06:04:41.470593Z",
+          "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
+          "checked_at": "2026-06-22T06:04:41.470593+00:00",
+          "checked_age_hours": 0.0,
+          "recheck_interval_hours": 24,
+          "next_recheck_at": "2026-06-23T06:04:41.470593+00:00",
+          "recheck_due": false,
+          "recheck_status": "waiting_for_release_propagation"
+        },
+        "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; next recommended re-check after 2026-06-23T06:04:41.470593+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -850,36 +833,36 @@
       ]
     },
     {
-      "label": "Re-check Twelve Dollars on Apple Music",
+      "label": "Re-check Analog Myth on Spotify",
       "kind": "store_verification",
       "priority": 20,
-      "command": "python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/apple_music_release_snapshot.json'",
+      "command": "python3 scripts/search_spotify_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/spotify_release_snapshot.json'",
       "context": {
-        "release": "Twelve Dollars",
-        "service": "Apple Music",
-        "checked_at": "2026-06-22T06:01:48.902322+00:00",
+        "release": "Analog Myth",
+        "service": "Spotify",
+        "checked_at": "2026-06-22T06:04:41.527407+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-06-23T06:01:48.902322+00:00",
+        "next_recheck_at": "2026-06-23T06:04:41.527407+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
-          "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
+          "path": "data/store-verification/analog-myth/spotify_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-22T06:01:48.902322Z",
-          "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-          "checked_at": "2026-06-22T06:01:48.902322+00:00",
+          "updated_at": "2026-06-22T06:04:41.527407Z",
+          "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
+          "checked_at": "2026-06-22T06:04:41.527407+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-06-23T06:01:48.902322+00:00",
+          "next_recheck_at": "2026-06-23T06:04:41.527407+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-06-23T06:01:48.902322+00:00. Status: waiting_for_release_propagation."
+        "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-06-23T06:04:41.527407+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
-      "urgency_reason": "Public store links should be checked until DistroKid exposes them.",
+      "urgency_reason": "Public store links should be checked as the July 1 release approaches.",
       "status": "ready",
       "sort_key": [
         2,
@@ -888,36 +871,36 @@
       ]
     },
     {
-      "label": "Re-check Twelve Dollars on HyperFollow",
+      "label": "Re-check Analog Myth on Apple Music",
       "kind": "store_verification",
       "priority": 20,
-      "command": "python3 scripts/capture_hyperfollow_store_links.py --url 'https://distrokid.com/hyperfollow/lilyroo/twelve-dollars' --out 'data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json'",
+      "command": "python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/apple_music_release_snapshot.json'",
       "context": {
-        "release": "Twelve Dollars",
-        "service": "HyperFollow",
-        "checked_at": "2026-06-22T06:01:49.425726+00:00",
+        "release": "Analog Myth",
+        "service": "Apple Music",
+        "checked_at": "2026-06-22T06:04:42.656449+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-06-23T06:01:49.425726+00:00",
+        "next_recheck_at": "2026-06-23T06:04:42.656449+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
-          "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
+          "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-22T06:01:49.425726Z",
-          "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-          "checked_at": "2026-06-22T06:01:49.425726+00:00",
+          "updated_at": "2026-06-22T06:04:42.656449Z",
+          "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
+          "checked_at": "2026-06-22T06:04:42.656449+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-06-23T06:01:49.425726+00:00",
+          "next_recheck_at": "2026-06-23T06:04:42.656449+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; next recommended re-check after 2026-06-23T06:01:49.425726+00:00. Status: waiting_for_release_propagation."
+        "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-06-23T06:04:42.656449+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
-      "urgency_reason": "Public store links should be checked until DistroKid exposes them.",
+      "urgency_reason": "Public store links should be checked as the July 1 release approaches.",
       "status": "ready",
       "sort_key": [
         2,
@@ -926,32 +909,32 @@
       ]
     },
     {
-      "label": "Re-check Analog Myth on Spotify",
+      "label": "Re-check Analog Myth on YouTube Music",
       "kind": "store_verification",
       "priority": 20,
-      "command": "python3 scripts/search_spotify_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/spotify_release_snapshot.json'",
+      "command": "python3 scripts/search_youtube_music_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/youtube_music_release_snapshot.json'",
       "context": {
         "release": "Analog Myth",
-        "service": "Spotify",
-        "checked_at": "2026-06-22T06:01:49.497095+00:00",
+        "service": "YouTube Music",
+        "checked_at": "2026-06-22T06:04:42.713715+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-06-23T06:01:49.497095+00:00",
+        "next_recheck_at": "2026-06-23T06:04:42.713715+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
-          "path": "data/store-verification/analog-myth/spotify_release_snapshot.json",
+          "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-22T06:01:49.497095Z",
-          "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
-          "checked_at": "2026-06-22T06:01:49.497095+00:00",
+          "updated_at": "2026-06-22T06:04:42.713715Z",
+          "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
+          "checked_at": "2026-06-22T06:04:42.713715+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-06-23T06:01:49.497095+00:00",
+          "next_recheck_at": "2026-06-23T06:04:42.713715+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-06-23T06:01:49.497095+00:00. Status: waiting_for_release_propagation."
+        "note": "Searches public web results for YouTube Music watch URLs, then validates the public title. Latest snapshot found no public URL; next recommended re-check after 2026-06-23T06:04:42.713715+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -964,32 +947,32 @@
       ]
     },
     {
-      "label": "Re-check Analog Myth on Apple Music",
+      "label": "Re-check Analog Myth on HyperFollow",
       "kind": "store_verification",
       "priority": 20,
-      "command": "python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/apple_music_release_snapshot.json'",
+      "command": "python3 scripts/capture_hyperfollow_store_links.py --url 'https://distrokid.com/hyperfollow/lilyroo/analog-myth' --out 'data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json'",
       "context": {
         "release": "Analog Myth",
-        "service": "Apple Music",
-        "checked_at": "2026-06-22T06:02:09.664946+00:00",
+        "service": "HyperFollow",
+        "checked_at": "2026-06-22T06:04:44.040835+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-06-23T06:02:09.664946+00:00",
+        "next_recheck_at": "2026-06-23T06:04:44.040835+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
-          "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
+          "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-22T06:02:09.664946Z",
-          "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
-          "checked_at": "2026-06-22T06:02:09.664946+00:00",
+          "updated_at": "2026-06-22T06:04:44.040835Z",
+          "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
+          "checked_at": "2026-06-22T06:04:44.040835+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-06-23T06:02:09.664946+00:00",
+          "next_recheck_at": "2026-06-23T06:04:44.040835+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-06-23T06:02:09.664946+00:00. Status: waiting_for_release_propagation."
+        "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; next recommended re-check after 2026-06-23T06:04:44.040835+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -999,82 +982,6 @@
         2,
         20,
         12
-      ]
-    },
-    {
-      "label": "Re-check Analog Myth on YouTube Music",
-      "kind": "store_verification",
-      "priority": 20,
-      "command": "python3 scripts/search_youtube_music_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/youtube_music_release_snapshot.json'",
-      "context": {
-        "release": "Analog Myth",
-        "service": "YouTube Music",
-        "checked_at": "2026-06-22T06:02:09.720967+00:00",
-        "checked_age_hours": 0.0,
-        "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-06-23T06:02:09.720967+00:00",
-        "recheck_due": false,
-        "recheck_status": "waiting_for_release_propagation",
-        "latest_snapshot": {
-          "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
-          "ok": false,
-          "updated_at": "2026-06-22T06:02:09.720967Z",
-          "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-          "checked_at": "2026-06-22T06:02:09.720967+00:00",
-          "checked_age_hours": 0.0,
-          "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-06-23T06:02:09.720967+00:00",
-          "recheck_due": false,
-          "recheck_status": "waiting_for_release_propagation"
-        },
-        "note": "Searches public web results for YouTube Music watch URLs, then validates the public title. Latest snapshot found no public URL; next recommended re-check after 2026-06-23T06:02:09.720967+00:00. Status: waiting_for_release_propagation."
-      },
-      "phase": "Verify music sites",
-      "urgency": "medium",
-      "urgency_reason": "Public store links should be checked as the July 1 release approaches.",
-      "status": "ready",
-      "sort_key": [
-        2,
-        20,
-        13
-      ]
-    },
-    {
-      "label": "Re-check Analog Myth on HyperFollow",
-      "kind": "store_verification",
-      "priority": 20,
-      "command": "python3 scripts/capture_hyperfollow_store_links.py --url 'https://distrokid.com/hyperfollow/lilyroo/analog-myth' --out 'data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json'",
-      "context": {
-        "release": "Analog Myth",
-        "service": "HyperFollow",
-        "checked_at": "2026-06-22T06:02:32.245908+00:00",
-        "checked_age_hours": 0.0,
-        "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-06-23T06:02:32.245908+00:00",
-        "recheck_due": false,
-        "recheck_status": "waiting_for_release_propagation",
-        "latest_snapshot": {
-          "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
-          "ok": false,
-          "updated_at": "2026-06-22T06:02:32.245908Z",
-          "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-          "checked_at": "2026-06-22T06:02:32.245908+00:00",
-          "checked_age_hours": 0.0,
-          "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-06-23T06:02:32.245908+00:00",
-          "recheck_due": false,
-          "recheck_status": "waiting_for_release_propagation"
-        },
-        "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; next recommended re-check after 2026-06-23T06:02:32.245908+00:00. Status: waiting_for_release_propagation."
-      },
-      "phase": "Verify music sites",
-      "urgency": "medium",
-      "urgency_reason": "Public store links should be checked as the July 1 release approaches.",
-      "status": "ready",
-      "sort_key": [
-        2,
-        20,
-        14
       ]
     },
     {
@@ -1221,7 +1128,7 @@
       "sort_key": [
         3,
         32,
-        15
+        13
       ]
     },
     {
@@ -1359,7 +1266,7 @@
       "sort_key": [
         3,
         33,
-        16
+        14
       ]
     }
   ]

@@ -1,22 +1,19 @@
 {
-  "generated_at": "2026-06-22T06:02:35.742601Z",
+  "generated_at": "2026-06-22T06:04:47.878145Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
     "promo_queue_plan": "data/promo_queue_plan.json"
   },
   "summary": {
-    "review_count": 3,
+    "review_count": 1,
     "ready_after_approval": 0,
-    "manual_only": 2,
+    "manual_only": 0,
     "blocked": 1,
-    "recommended_approval_count": 2,
-    "recommended_manual_approval_count": 2,
+    "recommended_approval_count": 0,
+    "recommended_manual_approval_count": 0,
     "recommended_ids": [],
-    "recommended_manual_ids": [
-      "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-      "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
-    ],
+    "recommended_manual_ids": [],
     "blocked_ids": [
       "FP-PLAN-TWELVE-DOLLARS-TIKTOK"
     ],
@@ -27,69 +24,19 @@
     "all_review_approval_command": "python3 scripts/approve_promo_queue_plan.py --all --refresh-admin"
   },
   "manual_approval_docket": {
-    "status": "ready_for_manual_review",
-    "ready_count": 2,
+    "status": "clear",
+    "ready_count": 0,
     "blocked_count": 1,
-    "ready_ids": [
-      "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-      "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
-    ],
+    "ready_ids": [],
     "blocked_ids": [
       "FP-PLAN-TWELVE-DOLLARS-TIKTOK"
     ],
-    "preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
-    "apply_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+    "preview_command": "",
+    "apply_command": "",
     "guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review.",
-    "ready_to_review": [
-      {
-        "id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-        "release": "Analog Myth",
-        "platform": "YouTube Community",
-        "subscriber_growth_score": 116,
-        "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --dry-run",
-        "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin"
-      },
-      {
-        "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
-        "release": "Twelve Dollars",
-        "platform": "YouTube Community",
-        "subscriber_growth_score": 116,
-        "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
-        "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin"
-      }
-    ]
+    "ready_to_review": []
   },
   "rows": [
-    {
-      "id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-      "release": "Analog Myth",
-      "platform": "YouTube Community",
-      "scheduled_at": "2026-06-25T18:30:00-04:00",
-      "execution_mode": "manual",
-      "post_type": "community",
-      "readiness_state": "manual_only",
-      "readiness_message": "YouTube Community posts are copy-ready manual workflow.",
-      "text": "Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
-      "subscriber_growth_score": 116,
-      "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --dry-run",
-      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin",
-      "recommendation": "Review copy and use the manual posting workflow; approval will not auto-post this row."
-    },
-    {
-      "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
-      "release": "Twelve Dollars",
-      "platform": "YouTube Community",
-      "scheduled_at": "2026-06-24T18:30:00-04:00",
-      "execution_mode": "manual",
-      "post_type": "community",
-      "readiness_state": "manual_only",
-      "readiness_message": "YouTube Community posts are copy-ready manual workflow.",
-      "text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
-      "subscriber_growth_score": 116,
-      "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
-      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
-      "recommendation": "Review copy and use the manual posting workflow; approval will not auto-post this row."
-    },
     {
       "id": "FP-PLAN-TWELVE-DOLLARS-TIKTOK",
       "release": "Twelve Dollars",

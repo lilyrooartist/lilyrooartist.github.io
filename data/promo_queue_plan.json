@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T02:02:34.926181-04:00",
+  "generated_at": "2026-06-22T02:04:46.900712-04:00",
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
     "release_status": "data/distrokid_release_status.json"
@@ -11,48 +11,35 @@
   "approval_commands": {
     "all_review": "python3 scripts/approve_promo_queue_plan.py --all --refresh-admin",
     "by_release": {
-      "Analog Myth": "python3 scripts/approve_promo_queue_plan.py --release \"Analog Myth\" --refresh-admin",
       "Twelve Dollars": "python3 scripts/approve_promo_queue_plan.py --release \"Twelve Dollars\" --refresh-admin"
     },
     "by_platform": {
-      "TikTok": "python3 scripts/approve_promo_queue_plan.py --platform \"TikTok\" --refresh-admin",
-      "YouTube Community": "python3 scripts/approve_promo_queue_plan.py --platform \"YouTube Community\" --refresh-admin"
+      "TikTok": "python3 scripts/approve_promo_queue_plan.py --platform \"TikTok\" --refresh-admin"
     }
   },
   "apply_commands": {
     "all_approved": "python3 scripts/apply_promo_queue_plan.py --apply --refresh-admin",
     "by_release": {
-      "Analog Myth": "python3 scripts/apply_promo_queue_plan.py --apply --release \"Analog Myth\" --refresh-admin",
       "Twelve Dollars": "python3 scripts/apply_promo_queue_plan.py --apply --release \"Twelve Dollars\" --refresh-admin"
     },
     "by_platform": {
-      "TikTok": "python3 scripts/apply_promo_queue_plan.py --apply --platform \"TikTok\" --refresh-admin",
-      "YouTube Community": "python3 scripts/apply_promo_queue_plan.py --apply --platform \"YouTube Community\" --refresh-admin"
+      "TikTok": "python3 scripts/apply_promo_queue_plan.py --apply --platform \"TikTok\" --refresh-admin"
     }
   },
   "summary": {
-    "draft_posts": 3,
+    "draft_posts": 1,
     "approved_posts": 0,
-    "review_posts": 3,
+    "review_posts": 1,
     "auto_posts": 1,
-    "manual_posts": 2,
-    "selected_hard_cta_posts": 3,
+    "manual_posts": 0,
+    "selected_hard_cta_posts": 1,
     "releases": {
-      "Analog Myth": {
+      "Twelve Dollars": {
         "draft_posts": 1,
         "approved_posts": 0,
         "review_posts": 1,
         "platforms": [
-          "YouTube Community"
-        ]
-      },
-      "Twelve Dollars": {
-        "draft_posts": 2,
-        "approved_posts": 0,
-        "review_posts": 2,
-        "platforms": [
-          "TikTok",
-          "YouTube Community"
+          "TikTok"
         ]
       }
     },
@@ -61,28 +48,22 @@
         "draft_posts": 1,
         "approved_posts": 0,
         "review_posts": 1
-      },
-      "YouTube Community": {
-        "draft_posts": 2,
-        "approved_posts": 0,
-        "review_posts": 2
       }
     }
   },
   "apply_preview": {
     "ready_to_apply_posts": 0,
-    "review_posts": 3,
+    "review_posts": 1,
     "scheduled_duplicate_posts": 0,
     "ready_ids": [],
     "scheduled_duplicate_ids": []
   },
   "readiness_audit": {
     "source": "data/executor_readiness_snapshot.json",
-    "updated_at": "2026-06-22T06:02:32.539685Z",
+    "updated_at": "2026-06-22T06:04:44.338052Z",
     "ok": true,
     "counts": {
-      "blocked": 1,
-      "manual_only": 2
+      "blocked": 1
     },
     "rows": [
       {
@@ -92,22 +73,6 @@
         "approved": "no",
         "state": "blocked",
         "message": "Executor credentials or platform setup are not ready."
-      },
-      {
-        "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
-        "platform": "YouTube Community",
-        "execution_mode": "manual",
-        "approved": "no",
-        "state": "manual_only",
-        "message": "YouTube Community posts are copy-ready manual workflow."
-      },
-      {
-        "id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-        "platform": "YouTube Community",
-        "execution_mode": "manual",
-        "approved": "no",
-        "state": "manual_only",
-        "message": "YouTube Community posts are copy-ready manual workflow."
       }
     ]
   },
@@ -137,58 +102,6 @@
       "desired_privacy": "PUBLIC_TO_EVERYONE",
       "reason": "Promo health flagged missing TikTok coverage for Twelve Dollars.",
       "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --refresh-admin"
-    },
-    {
-      "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
-      "scheduled_at": "2026-06-24T18:30:00-04:00",
-      "platform": "YouTube Community",
-      "song": "Twelve Dollars",
-      "imagery": "Twelve Dollars promo coverage",
-      "imagery_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
-      "clip_url": "",
-      "text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
-      "drafts": [
-        "New album transmission: Twelve Dollars. Remastered videos, updated art, full playlist live now.",
-        "A small amount of money, a large amount of stage light. Full signal on YouTube.",
-        "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers."
-      ],
-      "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-      "selected_cta_strength": "hard_goal",
-      "selected_copy_strategy": "growth_first_subscriber_cta",
-      "x_media_key": "",
-      "media_key": "twelve-dollars-cover",
-      "approved": "no",
-      "execution_mode": "manual",
-      "post_type": "community",
-      "desired_privacy": "",
-      "reason": "Promo health flagged missing YouTube Community coverage for Twelve Dollars.",
-      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin"
-    },
-    {
-      "id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-      "scheduled_at": "2026-06-25T18:30:00-04:00",
-      "platform": "YouTube Community",
-      "song": "Analog Myth",
-      "imagery": "Analog Myth promo coverage",
-      "imagery_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
-      "clip_url": "",
-      "text": "Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
-      "drafts": [
-        "Analog Myth transmission is live: 13, Girls Camp, Analog Myth, Spilling the Tea, No Mortgage, Guards Down, Slow Walk, The Power of Light.",
-        "Time broke, so Lily Roo made an album out of the pieces. Full signal on YouTube.",
-        "Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers."
-      ],
-      "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
-      "selected_cta_strength": "hard_goal",
-      "selected_copy_strategy": "growth_first_subscriber_cta",
-      "x_media_key": "",
-      "media_key": "analog-myth-cover",
-      "approved": "no",
-      "execution_mode": "manual",
-      "post_type": "community",
-      "desired_privacy": "",
-      "reason": "Promo health flagged missing YouTube Community coverage for Analog Myth.",
-      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin"
     }
   ]
 }

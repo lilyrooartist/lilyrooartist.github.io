@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T06:02:37.077435+00:00",
+  "generated_at": "2026-06-22T06:06:32.925082+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -154,7 +154,7 @@
               "platform": "Instagram",
               "song": "I Learned It All in Fifteen Seconds",
               "post_type": "image",
-              "scheduled_at": "2026-06-05T15:35:00-04:00",
+              "scheduled_at": "2026-06-23T10:00:00+08:00",
               "approved": "yes",
               "execution_mode": "auto",
               "imagery_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
@@ -210,17 +210,15 @@
         {
           "format": "YouTube Community archive/playlist CTA",
           "hypothesis": "YouTube Community archive/playlist CTA can turn existing Lily Roo release assets into measurable plays/views growth across the platforms where it fits.",
-          "status": "partially_ready",
-          "scheduled_count": 1,
-          "planned_count": 2,
-          "approved_count": 1,
-          "blocked_count": 2,
+          "status": "ready_to_measure",
+          "scheduled_count": 3,
+          "planned_count": 0,
+          "approved_count": 3,
+          "blocked_count": 0,
           "platforms": [
             "YouTube Community"
           ],
-          "known_blockers": [
-            "manual approval"
-          ],
+          "known_blockers": [],
           "assets": [
             {
               "id": "FP-AUTO-261",
@@ -241,12 +239,12 @@
               "song": "Twelve Dollars",
               "post_type": "community",
               "scheduled_at": "2026-06-24T18:30:00-04:00",
-              "approved": "no",
+              "approved": "yes",
               "execution_mode": "manual",
               "imagery_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
               "clip_url": "",
               "copy": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
-              "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin"
+              "approval_command": ""
             },
             {
               "id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
@@ -254,12 +252,12 @@
               "song": "Analog Myth",
               "post_type": "community",
               "scheduled_at": "2026-06-25T18:30:00-04:00",
-              "approved": "no",
+              "approved": "yes",
               "execution_mode": "manual",
               "imagery_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
               "clip_url": "",
               "copy": "Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
-              "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin"
+              "approval_command": ""
             }
           ],
           "tracking_fields": [
@@ -273,8 +271,8 @@
           ],
           "measurement_window_days": 7,
           "result_destination": "admin/content/Published_Log.csv plus data/manual_social_stats.json",
-          "next_action": "Measure approved rows now; review blocked variant with python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin.",
-          "score": 10
+          "next_action": "Publish or confirm the scheduled row, then log public URL and 7-day result metrics.",
+          "score": 24
         },
         {
           "format": "Short video clip + platform-native CTA",
@@ -370,12 +368,12 @@
         },
         "action_needed": "Increase weekly subscriber acquisition before the channel can reach 1,000 subscribers within a year."
       },
-      "approved_upcoming_posts": 3,
-      "approved_backlog_posts": 5,
+      "approved_upcoming_posts": 6,
+      "approved_backlog_posts": 4,
       "review_upcoming_posts": 0,
       "review_backlog_posts": 1,
-      "draft_review_posts": 3,
-      "draft_posts": 3,
+      "draft_review_posts": 1,
+      "draft_posts": 1,
       "approved_plan_posts": 0,
       "ready_to_apply_posts": 0,
       "approval_blockers": 1,
@@ -383,7 +381,7 @@
       "backlog_reschedule_preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
       "backlog_reschedule_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
       "next_pressure": [
-        "5 approved unpublished posts are past their scheduled time; repair executor/platform blockers or reschedule them.",
+        "4 approved unpublished posts are past their scheduled time; repair executor/platform blockers or reschedule them.",
         "1 executor records are blocked by approval.",
         "4 executor records need platform repair before they can publish.",
         "Increase weekly subscriber acquisition before the channel can reach 1,000 subscribers within a year."
@@ -727,15 +725,15 @@
         "Import only nonnegative numeric new_value cells from the named analytics source."
       ]
     },
-    "live_metrics_updated_at": "2026-06-22T06:01:28.623Z",
+    "live_metrics_updated_at": "2026-06-22T06:04:39.468Z",
     "metrics_history": {
       "snapshot_count": 13,
-      "updated_at": "2026-06-22T06:02:34.961866Z",
+      "updated_at": "2026-06-22T06:04:46.937207Z",
       "latest_date": "2026-06-22",
       "latest": {
         "date": "2026-06-22",
-        "captured_at": "2026-06-22T06:02:34.961866Z",
-        "live_metrics_updated_at": "2026-06-22T06:01:28.623Z",
+        "captured_at": "2026-06-22T06:04:46.937207Z",
+        "live_metrics_updated_at": "2026-06-22T06:04:39.468Z",
         "youtube": {
           "subscribers": 6,
           "total_views": 251,
@@ -769,9 +767,9 @@
           "published_total": 17
         },
         "queue": {
-          "approved_upcoming": 3,
-          "approved_total": 11,
-          "scheduled_total": 12
+          "approved_upcoming": 6,
+          "approved_total": 13,
+          "scheduled_total": 14
         },
         "preserved_from_same_day_snapshot": [
           "youtube.total_views",
@@ -788,9 +786,9 @@
           "x.followers": 0,
           "publishing.published_30d": 0,
           "publishing.published_total": 0,
-          "queue.approved_upcoming": 1,
-          "queue.approved_total": 0,
-          "queue.scheduled_total": 0
+          "queue.approved_upcoming": 4,
+          "queue.approved_total": 2,
+          "queue.scheduled_total": 2
         }
       },
       "previous_date": "2026-06-21",
@@ -805,9 +803,9 @@
         "x.followers": 0,
         "publishing.published_30d": 0,
         "publishing.published_total": 0,
-        "queue.approved_upcoming": 1,
-        "queue.approved_total": 0,
-        "queue.scheduled_total": 0
+        "queue.approved_upcoming": 4,
+        "queue.approved_total": 2,
+        "queue.scheduled_total": 2
       }
     },
     "experiment_results": {
@@ -1164,8 +1162,8 @@
           "reason": "Postable now in the Manual Posting Clipboard; publish it and log the public URL so metrics can start. 0 logged post(s), 3 missing URL(s) in this format."
         },
         {
-          "action": "log_public_url",
-          "priority": 3,
+          "action": "post_and_log_public_url",
+          "priority": 2,
           "post_id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
           "platform": "YouTube Community",
           "song": "Analog Myth",
@@ -1175,11 +1173,11 @@
           "pending_fields": [],
           "direct_preview_command_template": "",
           "direct_apply_command_template": "",
-          "reason": "Cannot collect metrics until the public URL is logged. 0 logged post(s), 3 missing URL(s) in this format."
+          "reason": "Postable now in the Manual Posting Clipboard; publish it and log the public URL so metrics can start. 0 logged post(s), 3 missing URL(s) in this format."
         },
         {
-          "action": "log_public_url",
-          "priority": 3,
+          "action": "post_and_log_public_url",
+          "priority": 2,
           "post_id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
           "platform": "YouTube Community",
           "song": "Twelve Dollars",
@@ -1189,7 +1187,7 @@
           "pending_fields": [],
           "direct_preview_command_template": "",
           "direct_apply_command_template": "",
-          "reason": "Cannot collect metrics until the public URL is logged. 0 logged post(s), 3 missing URL(s) in this format."
+          "reason": "Postable now in the Manual Posting Clipboard; publish it and log the public URL so metrics can start. 0 logged post(s), 3 missing URL(s) in this format."
         },
         {
           "action": "clear_platform_blocker",
@@ -1225,39 +1223,33 @@
       "available": true,
       "source_path": "data/experiment_publish_runway.json",
       "summary": {
-        "review_ready_manual_count": 2,
-        "postable_now_count": 1,
+        "review_ready_manual_count": 0,
+        "postable_now_count": 3,
         "public_url_log_needed_count": 3,
         "pending_result_field_count": 18,
         "winner_ready_candidate_count": 0,
         "winner_count_target": 3,
         "blocked_platform_count": 4,
-        "approved_backlog_count": 4,
+        "approved_backlog_count": 3,
         "blocked_backlog_count": 3,
-        "next_publish_action": "Review and approve manual YouTube Community experiment rows."
+        "next_publish_action": "Log public URLs and collect experiment results."
       },
       "steps": [
         {
           "id": "review_manual_youtube_community",
-          "status": "ready_for_review",
-          "post_ids": [
-            "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
-            "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY"
-          ],
-          "preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
-          "apply_after_review_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+          "status": "clear",
+          "post_ids": [],
+          "preview_command": "",
+          "apply_after_review_command": "",
           "guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate.",
           "completion_evidence": "data/manual_distribution_packet.json should move rows from waiting_for_review toward postable manual distribution."
         },
         {
           "id": "queue_approved_manual_rows",
-          "status": "ready_after_approval",
-          "post_ids": [
-            "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
-            "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY"
-          ],
-          "preview_command": "python3 scripts/apply_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY ",
-          "apply_after_review_command": "python3 scripts/apply_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --apply --refresh-admin",
+          "status": "waiting_for_approval",
+          "post_ids": [],
+          "preview_command": "",
+          "apply_after_review_command": "",
           "guardrail": "Apply only after the matching promo plan rows have approved=yes.",
           "completion_evidence": "data/scheduled_posts.csv contains the approved manual YouTube Community row ids."
         },
@@ -1265,7 +1257,9 @@
           "id": "post_manual_youtube_community",
           "status": "postable_now",
           "post_ids": [
-            "FP-AUTO-261"
+            "FP-AUTO-261",
+            "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+            "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY"
           ],
           "surface": "YouTube Studio Community",
           "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
@@ -1276,7 +1270,9 @@
           "id": "log_public_urls",
           "status": "ready_after_manual_post",
           "post_ids": [
-            "FP-AUTO-261"
+            "FP-AUTO-261",
+            "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+            "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY"
           ],
           "preview_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv",
           "apply_after_review_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --apply --refresh-admin",
@@ -1286,10 +1282,7 @@
         {
           "id": "collect_results",
           "status": "waiting_for_measurement_window",
-          "post_ids": [
-            "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
-            "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY"
-          ],
+          "post_ids": [],
           "preview_command": "python3 scripts/update_experiment_results.py --from-csv data/experiment_result_entry_template.csv --dry-run",
           "apply_after_review_command": "",
           "guardrail": "Fill only visible platform analytics values with evidence notes.",
@@ -1328,7 +1321,7 @@
       "recheck_due": 0,
       "waiting_for_next_recheck": 7,
       "oldest_checked_pending_age_hours": 0.0,
-      "next_recheck_at": "2026-06-23T06:01:28.759862+00:00"
+      "next_recheck_at": "2026-06-23T06:04:39.607182+00:00"
     },
     "store_verification": {
       "source_path": "data/store_verification_history.json",
@@ -1349,12 +1342,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:01:28.759862Z",
+            "updated_at": "2026-06-22T06:04:39.607182Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T06:01:28.759862+00:00",
+            "checked_at": "2026-06-22T06:04:39.607182+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:01:28.759862+00:00",
+            "next_recheck_at": "2026-06-23T06:04:39.607182+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -1368,12 +1361,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:01:48.902322Z",
+            "updated_at": "2026-06-22T06:04:40.922050Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T06:01:48.902322+00:00",
+            "checked_at": "2026-06-22T06:04:40.922050+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:01:48.902322+00:00",
+            "next_recheck_at": "2026-06-23T06:04:40.922050+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -1387,12 +1380,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:01:49.425726Z",
+            "updated_at": "2026-06-22T06:04:41.470593Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-06-22T06:01:49.425726+00:00",
+            "checked_at": "2026-06-22T06:04:41.470593+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:01:49.425726+00:00",
+            "next_recheck_at": "2026-06-23T06:04:41.470593+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -1406,12 +1399,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:01:49.497095Z",
+            "updated_at": "2026-06-22T06:04:41.527407Z",
             "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T06:01:49.497095+00:00",
+            "checked_at": "2026-06-22T06:04:41.527407+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:01:49.497095+00:00",
+            "next_recheck_at": "2026-06-23T06:04:41.527407+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -1425,12 +1418,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:02:09.664946Z",
+            "updated_at": "2026-06-22T06:04:42.656449Z",
             "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T06:02:09.664946+00:00",
+            "checked_at": "2026-06-22T06:04:42.656449+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:02:09.664946+00:00",
+            "next_recheck_at": "2026-06-23T06:04:42.656449+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -1444,12 +1437,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:02:09.720967Z",
+            "updated_at": "2026-06-22T06:04:42.713715Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-            "checked_at": "2026-06-22T06:02:09.720967+00:00",
+            "checked_at": "2026-06-22T06:04:42.713715+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:02:09.720967+00:00",
+            "next_recheck_at": "2026-06-23T06:04:42.713715+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -1463,12 +1456,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:02:32.245908Z",
+            "updated_at": "2026-06-22T06:04:44.040835Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-06-22T06:02:32.245908+00:00",
+            "checked_at": "2026-06-22T06:04:44.040835+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:02:32.245908+00:00",
+            "next_recheck_at": "2026-06-23T06:04:44.040835+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -1485,12 +1478,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:01:28.759862Z",
+            "updated_at": "2026-06-22T06:04:39.607182Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T06:01:28.759862+00:00",
+            "checked_at": "2026-06-22T06:04:39.607182+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:01:28.759862+00:00",
+            "next_recheck_at": "2026-06-23T06:04:39.607182+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -1503,12 +1496,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:01:48.902322Z",
+            "updated_at": "2026-06-22T06:04:40.922050Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T06:01:48.902322+00:00",
+            "checked_at": "2026-06-22T06:04:40.922050+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:01:48.902322+00:00",
+            "next_recheck_at": "2026-06-23T06:04:40.922050+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -1521,12 +1514,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:01:49.425726Z",
+            "updated_at": "2026-06-22T06:04:41.470593Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-06-22T06:01:49.425726+00:00",
+            "checked_at": "2026-06-22T06:04:41.470593+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:01:49.425726+00:00",
+            "next_recheck_at": "2026-06-23T06:04:41.470593+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -1539,12 +1532,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:01:49.497095Z",
+            "updated_at": "2026-06-22T06:04:41.527407Z",
             "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T06:01:49.497095+00:00",
+            "checked_at": "2026-06-22T06:04:41.527407+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:01:49.497095+00:00",
+            "next_recheck_at": "2026-06-23T06:04:41.527407+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -1557,12 +1550,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:02:09.664946Z",
+            "updated_at": "2026-06-22T06:04:42.656449Z",
             "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T06:02:09.664946+00:00",
+            "checked_at": "2026-06-22T06:04:42.656449+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:02:09.664946+00:00",
+            "next_recheck_at": "2026-06-23T06:04:42.656449+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -1575,12 +1568,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:02:09.720967Z",
+            "updated_at": "2026-06-22T06:04:42.713715Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-            "checked_at": "2026-06-22T06:02:09.720967+00:00",
+            "checked_at": "2026-06-22T06:04:42.713715+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:02:09.720967+00:00",
+            "next_recheck_at": "2026-06-23T06:04:42.713715+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -1593,12 +1586,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:02:32.245908Z",
+            "updated_at": "2026-06-22T06:04:44.040835Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-06-22T06:02:32.245908+00:00",
+            "checked_at": "2026-06-22T06:04:44.040835+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:02:32.245908+00:00",
+            "next_recheck_at": "2026-06-23T06:04:44.040835+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -1610,7 +1603,7 @@
       "recheck_due_count": 0,
       "waiting_for_next_recheck_count": 7,
       "oldest_checked_pending_age_hours": 0.0,
-      "next_recheck_at": "2026-06-23T06:01:28.759862+00:00",
+      "next_recheck_at": "2026-06-23T06:04:39.607182+00:00",
       "recheck_due_rows": [],
       "waiting_recheck_rows": [
         {
@@ -1621,12 +1614,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:01:28.759862Z",
+            "updated_at": "2026-06-22T06:04:39.607182Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T06:01:28.759862+00:00",
+            "checked_at": "2026-06-22T06:04:39.607182+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:01:28.759862+00:00",
+            "next_recheck_at": "2026-06-23T06:04:39.607182+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -1640,12 +1633,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:01:48.902322Z",
+            "updated_at": "2026-06-22T06:04:40.922050Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T06:01:48.902322+00:00",
+            "checked_at": "2026-06-22T06:04:40.922050+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:01:48.902322+00:00",
+            "next_recheck_at": "2026-06-23T06:04:40.922050+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -1659,12 +1652,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:01:49.425726Z",
+            "updated_at": "2026-06-22T06:04:41.470593Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-06-22T06:01:49.425726+00:00",
+            "checked_at": "2026-06-22T06:04:41.470593+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:01:49.425726+00:00",
+            "next_recheck_at": "2026-06-23T06:04:41.470593+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -1678,12 +1671,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:01:49.497095Z",
+            "updated_at": "2026-06-22T06:04:41.527407Z",
             "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T06:01:49.497095+00:00",
+            "checked_at": "2026-06-22T06:04:41.527407+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:01:49.497095+00:00",
+            "next_recheck_at": "2026-06-23T06:04:41.527407+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -1697,12 +1690,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:02:09.664946Z",
+            "updated_at": "2026-06-22T06:04:42.656449Z",
             "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T06:02:09.664946+00:00",
+            "checked_at": "2026-06-22T06:04:42.656449+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:02:09.664946+00:00",
+            "next_recheck_at": "2026-06-23T06:04:42.656449+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -1716,12 +1709,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:02:09.720967Z",
+            "updated_at": "2026-06-22T06:04:42.713715Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-            "checked_at": "2026-06-22T06:02:09.720967+00:00",
+            "checked_at": "2026-06-22T06:04:42.713715+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:02:09.720967+00:00",
+            "next_recheck_at": "2026-06-23T06:04:42.713715+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -1735,12 +1728,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:02:32.245908Z",
+            "updated_at": "2026-06-22T06:04:44.040835Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-06-22T06:02:32.245908+00:00",
+            "checked_at": "2026-06-22T06:04:44.040835+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:02:32.245908+00:00",
+            "next_recheck_at": "2026-06-23T06:04:44.040835+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -1750,7 +1743,7 @@
       "latest_run": {
         "source_path": "data/store_verification_run.json",
         "available": true,
-        "updated_at": "2026-06-22T06:02:32.381009Z",
+        "updated_at": "2026-06-22T06:04:44.144170Z",
         "step_timeout_seconds": 25,
         "checked": 7,
         "ok": 0,
@@ -1766,7 +1759,7 @@
     },
     "social_execution_summary": {
       "ok": true,
-      "updated_at": "2026-06-22T06:02:34.464424Z",
+      "updated_at": "2026-06-22T06:04:46.315991Z",
       "http_status": 200,
       "execution_count": 8,
       "posted_count": 1,
@@ -1944,43 +1937,27 @@
     },
     "social_scheduler_dry_run": {
       "ok": true,
-      "updated_at": "2026-06-22T06:02:34.863136Z",
+      "updated_at": "2026-06-22T06:04:46.844258Z",
       "http_status": 200,
       "auth_method": "bearer",
-      "requested_scheduled_time": "2026-06-22T06:02:34.537696Z",
-      "checked_at": "2026-06-22T06:02:34.537Z",
+      "requested_scheduled_time": "2026-06-22T06:04:46.392954Z",
+      "checked_at": "2026-06-22T06:04:46.392Z",
       "dry_run": true,
-      "due_count": 8,
-      "result_count": 8,
-      "would_post_count": 1,
+      "due_count": 6,
+      "result_count": 6,
+      "would_post_count": 0,
       "blocked_count": 6,
       "status_counts": {
         "blocked": 2,
         "failed": 3,
-        "posted": 1,
-        "skipped": 1,
-        "would_post": 1
+        "skipped": 1
       },
       "platform_counts": {
-        "Facebook": 1,
         "Instagram": 3,
         "TikTok": 2,
-        "Unknown": 1,
         "YouTube Community": 1
       },
-      "would_post": [
-        {
-          "post_id": "FP-AUTO-265",
-          "platform": "Facebook",
-          "status": "would_post",
-          "reason": "",
-          "post_type": "image",
-          "attempts": 0,
-          "updated_at": "",
-          "source": "",
-          "error_summary": ""
-        }
-      ],
+      "would_post": [],
       "blocked": [
         {
           "post_id": "FP-AUTO-258",
@@ -1989,7 +1966,7 @@
           "reason": "max_attempts_exceeded",
           "post_type": "",
           "attempts": 3,
-          "updated_at": "2026-06-22T06:02:35.055Z",
+          "updated_at": "2026-06-22T06:04:47.010Z",
           "source": "dry-run",
           "error_summary": "Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page"
         },
@@ -2000,7 +1977,7 @@
           "reason": "not_approved",
           "post_type": "",
           "attempts": 0,
-          "updated_at": "2026-06-22T06:02:35.059Z",
+          "updated_at": "2026-06-22T06:04:47.014Z",
           "source": "dry-run",
           "error_summary": ""
         },
@@ -2011,7 +1988,7 @@
           "reason": "manual_only",
           "post_type": "",
           "attempts": 0,
-          "updated_at": "2026-06-22T06:02:35.065Z",
+          "updated_at": "2026-06-22T06:04:47.020Z",
           "source": "dry-run",
           "error_summary": ""
         },
@@ -2022,7 +1999,7 @@
           "reason": "tiktok_credentials_missing",
           "post_type": "",
           "attempts": 0,
-          "updated_at": "2026-06-22T06:02:35.071Z",
+          "updated_at": "2026-06-22T06:04:47.024Z",
           "source": "dry-run",
           "error_summary": ""
         },
@@ -2033,7 +2010,7 @@
           "reason": "max_attempts_exceeded",
           "post_type": "",
           "attempts": 3,
-          "updated_at": "2026-06-22T06:02:35.080Z",
+          "updated_at": "2026-06-22T06:04:47.029Z",
           "source": "dry-run",
           "error_summary": "Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page"
         },
@@ -2044,7 +2021,7 @@
           "reason": "max_attempts_exceeded",
           "post_type": "",
           "attempts": 3,
-          "updated_at": "2026-06-22T06:02:35.085Z",
+          "updated_at": "2026-06-22T06:04:47.035Z",
           "source": "dry-run",
           "error_summary": "Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page"
         }
@@ -2057,14 +2034,14 @@
       "safe_mode": true,
       "finalized": true,
       "source_revision": {
-        "commit": "ac16fc09d3cc5d46a6563bd47667281bc80a2710",
-        "short_commit": "ac16fc0",
-        "branch": "",
-        "committed_at": "2026-06-22T05:32:19Z",
-        "source_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/commit/ac16fc09d3cc5d46a6563bd47667281bc80a2710"
+        "commit": "f46ecdd08db4a734b67c689b62371e0f9d5d98f5",
+        "short_commit": "f46ecdd",
+        "branch": "main",
+        "committed_at": "2026-06-22T14:02:49+08:00",
+        "source_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/commit/f46ecdd08db4a734b67c689b62371e0f9d5d98f5"
       },
-      "finished_at": "2026-06-22T06:02:37.039784Z",
-      "duration_seconds": 72.0,
+      "finished_at": "2026-06-22T06:04:49.071547Z",
+      "duration_seconds": 12.68,
       "command_count": 36,
       "passed": 36,
       "failed": 0,
@@ -2082,22 +2059,37 @@
       "commits_snapshots": true,
       "safe_refresh_command": "python3 scripts/refresh_promo_admin.py",
       "source_revision": {
-        "commit": "ac16fc09d3cc5d46a6563bd47667281bc80a2710",
-        "short_commit": "ac16fc0",
-        "branch": "",
-        "committed_at": "2026-06-22T05:32:19Z",
-        "source_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/commit/ac16fc09d3cc5d46a6563bd47667281bc80a2710"
+        "commit": "f46ecdd08db4a734b67c689b62371e0f9d5d98f5",
+        "short_commit": "f46ecdd",
+        "branch": "main",
+        "committed_at": "2026-06-22T14:02:49+08:00",
+        "source_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/commit/f46ecdd08db4a734b67c689b62371e0f9d5d98f5"
       },
-      "latest_run_covers_source_commit": true,
-      "latest_run_coverage_basis": "generated_refresh_outputs_only",
+      "latest_run_covers_source_commit": false,
+      "latest_run_coverage_basis": "source_changed_after_latest_run",
       "changed_paths_since_latest_run": [
+        ".github/workflows/promo-admin-refresh.yml",
+        "admin/backstory/backstory.json",
+        "admin/content/packs/13_backstory.md",
+        "admin/content/packs/analog-myth_backstory.md",
+        "admin/content/packs/girls-camp_backstory.md",
+        "admin/content/packs/guards-down_backstory.md",
+        "admin/content/packs/no-mortgage_backstory.md",
+        "admin/content/packs/slow-walk_backstory.md",
+        "admin/content/packs/spilling-the-tea_backstory.md",
+        "admin/content/packs/the-power-of-light_backstory.md",
+        "admin/future-posts.json",
         "admin/index.html",
         "admin/reports/approval-runway.md",
         "admin/reports/backlog-reschedule-preview.md",
+        "admin/reports/experiment-publish-runway.md",
+        "admin/reports/experiment-result-clipboard.md",
+        "admin/reports/experiment-result-collection.md",
         "admin/reports/human-handoff-packet.md",
         "admin/reports/human-handoff-resolution-preview.md",
         "admin/reports/manual-distribution-packet.md",
         "admin/reports/manual-metric-collection.md",
+        "admin/reports/manual-posting-clipboard.md",
         "admin/reports/monetization-activation-plan.md",
         "admin/reports/platform-repair-status.md",
         "admin/reports/promo-consistency-audit.md",
@@ -2110,29 +2102,35 @@
         "admin/reports/tiktok-repair-runbook.md",
         "admin/reports/tiktok-setup-preflight.md",
         "admin/reports/weekly-social-report.md",
+        "admin/reports/youtube-community-url-reconciliation.md",
         "data/approval_runway.json",
         "data/backlog_reschedule_preview.json",
-        "data/human_handoff_packet.json",
-        "data/human_handoff_resolution_preview.json",
-        "data/human_handoff_resolution_worksheet.csv",
-        "data/live_social_metrics.json",
-        "data/manual_distribution_packet.json",
-        "data/manual_metric_collection_packet.json",
-        "data/metrics_history.json",
-        "data/monetization_activation_plan.json",
-        "data/platform_repair_status.json",
-        "data/promo_admin_refresh_run.json",
-        "data/promo_consistency_audit.json",
-        "data/promo_engine_status.json",
-        "data/promo_operations_packet.json",
-        "data/promo_queue_plan.json",
-        "data/promo_refresh_workflow_status.json",
-        "data/promo_unlock_sequence.json",
-        "data/promotion_blocker_ledger.json",
-        "data/published_log_reconciliation.json",
-        "data/scheduled_approval_packet.json"
+        "data/executor_readiness_snapshot.json",
+        "data/experiment_publish_runway.json",
+        "data/experiment_result_clipboard.json"
       ],
-      "uncovered_paths_since_latest_run": [],
+      "uncovered_paths_since_latest_run": [
+        ".github/workflows/promo-admin-refresh.yml",
+        "admin/backstory/backstory.json",
+        "admin/content/packs/13_backstory.md",
+        "admin/content/packs/analog-myth_backstory.md",
+        "admin/content/packs/girls-camp_backstory.md",
+        "admin/content/packs/guards-down_backstory.md",
+        "admin/content/packs/no-mortgage_backstory.md",
+        "admin/content/packs/slow-walk_backstory.md",
+        "admin/content/packs/spilling-the-tea_backstory.md",
+        "admin/content/packs/the-power-of-light_backstory.md",
+        "admin/future-posts.json",
+        "data/manual_distribution_url_template.csv",
+        "data/scheduled_posts.csv",
+        "data/tiktok_api_strategy.json",
+        "data/tiktok_secret_handoff_template.env",
+        "scripts/build_backlog_reschedule_preview.py",
+        "scripts/build_experiment_publish_runway.py",
+        "scripts/build_experiment_result_clipboard.py",
+        "scripts/build_experiment_result_collection.py",
+        "scripts/build_human_handoff_packet.py"
+      ],
       "action_needed": "",
       "workflow_status_available": true,
       "workflow_status_ok": true,
@@ -2144,39 +2142,33 @@
       "workflow_status_action_needed": ""
     },
     "operational_next_action": {
-      "label": "Preview clear approved backlog row",
+      "label": "Preview reschedule for approved past-due posts",
       "kind": "backlog_reschedule",
       "priority": 0,
-      "command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
+      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
       "context": {
-        "approved_backlog_posts": 5,
-        "approved_upcoming_posts": 3,
+        "approved_backlog_posts": 4,
+        "approved_upcoming_posts": 6,
         "blocked_backlog_count": 3,
-        "clear_to_apply_count": 1,
+        "clear_to_apply_count": 0,
         "apply_allowed_without_override": false,
         "apply_command": "",
         "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
         "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
         "partial_clear_apply_manifest": {
-          "status": "ready",
-          "clear_to_apply_count": 1,
+          "status": "empty",
+          "clear_to_apply_count": 0,
           "blocked_backlog_count": 3,
-          "clear_ids": [
-            "FP-AUTO-258"
-          ],
+          "clear_ids": [],
           "blocked_ids_retained": [
             "FP-AUTO-264",
             "FP-AUTO-263",
             "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM"
           ],
-          "preview_commands": [
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24"
-          ],
-          "apply_commands": [
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin"
-          ],
-          "recommended_next_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
-          "recommended_apply_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
+          "preview_commands": [],
+          "apply_commands": [],
+          "recommended_next_command": "",
+          "recommended_apply_command": "",
           "operator_checklist": [
             "Preview each clear row before applying it.",
             "Apply only rows listed in clear_ids; do not use --allow-blocked for this partial-clear path.",
@@ -2193,15 +2185,15 @@
             "This path reschedules only unblocked approved rows; it does not approve, publish, or repair executors."
           ]
         },
-        "partial_clear_preview_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
-        "partial_clear_apply_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
+        "partial_clear_preview_command": "",
+        "partial_clear_apply_command": "",
         "backlog_clearance_manifest": {
           "status": "blocked_until_clearance_steps_complete",
-          "approved_backlog_count": 4,
+          "approved_backlog_count": 3,
           "blocked_backlog_count": 3,
-          "clear_to_apply_count": 1,
-          "partial_clear_apply_available": true,
-          "partial_clear_apply_count": 1,
+          "clear_to_apply_count": 0,
+          "partial_clear_apply_available": false,
+          "partial_clear_apply_count": 0,
           "blocked_ids": [
             "FP-AUTO-264",
             "FP-AUTO-263",
@@ -2226,7 +2218,7 @@
               "song": "I Learned It All in Fifteen Seconds",
               "blocker_kind": "tiktok_credentials_missing",
               "blocker_reason": "tiktok_credentials_missing",
-              "proposed_scheduled_at": "2026-06-24T10:00:00+08:00",
+              "proposed_scheduled_at": "2026-06-23T10:00:00+08:00",
               "clearance_steps": [
                 "Add local TikTok OAuth credentials, then push worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
                 "Confirm TikTok public posting approval before treating auto-posting as ready.",
@@ -2239,7 +2231,7 @@
               "song": "I Learned It All in Fifteen Seconds",
               "blocker_kind": "max_attempts_exceeded",
               "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
-              "proposed_scheduled_at": "2026-06-25T10:00:00+08:00",
+              "proposed_scheduled_at": "2026-06-24T10:00:00+08:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]
@@ -2250,7 +2242,7 @@
               "song": "Twelve Dollars",
               "blocker_kind": "max_attempts_exceeded",
               "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
-              "proposed_scheduled_at": "2026-06-26T10:00:00+08:00",
+              "proposed_scheduled_at": "2026-06-25T10:00:00+08:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]
@@ -2295,7 +2287,7 @@
           "Do not use the override command unless accepting the blocked executor risk deliberately.",
           "A reschedule does not publish, approve, or repair platform credentials by itself."
         ],
-        "note": "Preview the first unblocked approved backlog row; blocked rows stay held behind their repair gates."
+        "note": "Preview first. Normal apply is hidden until known executor/platform blockers clear; override requires deliberate review."
       },
       "phase": "Reschedule approved backlog",
       "urgency": "high",
@@ -2377,14 +2369,14 @@
         {
           "id": "unlock-manual-distribution",
           "phase": "Review and post manual YouTube Community rows",
-          "status": "ready_for_manual_review",
+          "status": "clear",
           "owner": "tod",
-          "blockers_resolved": 2,
+          "blockers_resolved": 3,
           "blocked_by": [
             "FP-PLAN-TWELVE-DOLLARS-TIKTOK"
           ],
-          "preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
-          "apply_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+          "preview_command": "",
+          "apply_command": "",
           "source_path": "data/manual_distribution_packet.json"
         },
         {
@@ -2407,7 +2399,7 @@
           "phase": "Reschedule approved past-due backlog",
           "status": "blocked_until_clearance_steps_complete",
           "owner": "external_platform",
-          "blockers_resolved": 4,
+          "blockers_resolved": 3,
           "blocked_by": [
             "FP-AUTO-264",
             "FP-AUTO-263",
@@ -2539,7 +2531,7 @@
           "owner": "external_platform",
           "gate_state": "preview_ready_with_blocker_warning",
           "reason": "Preview ran, but the output still names a known blocker.",
-          "blockers_resolved": 4,
+          "blockers_resolved": 3,
           "blocked_by": [
             "FP-AUTO-264",
             "FP-AUTO-263",
@@ -2644,15 +2636,14 @@
           "manual-distribution-FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
         ],
         "blockers_resolved": 3,
-        "ready_ids": [
-          "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-          "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
-        ],
+        "ready_ids": [],
         "blocked_ids": [
           "FP-PLAN-TWELVE-DOLLARS-TIKTOK"
         ],
         "postable_ids": [
-          "FP-AUTO-261"
+          "FP-AUTO-261",
+          "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+          "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
         ],
         "posting_packets": [
           {
@@ -2664,6 +2655,28 @@
             "postable_now": true,
             "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL",
             "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL --apply --refresh-admin",
+            "requires_public_url": true
+          },
+          {
+            "post_id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+            "release": "Analog Myth",
+            "paste_text": "Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+            "asset_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
+            "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
+            "postable_now": true,
+            "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+            "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
+            "requires_public_url": true
+          },
+          {
+            "post_id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+            "release": "Twelve Dollars",
+            "paste_text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+            "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
+            "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
+            "postable_now": true,
+            "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+            "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
             "requires_public_url": true
           }
         ],
@@ -2724,14 +2737,14 @@
           "task_ids": [
             "backlog-reschedule"
           ],
-          "blockers_resolved": 4,
+          "blockers_resolved": 3,
           "backlog_clearance_manifest": {
             "status": "blocked_until_clearance_steps_complete",
-            "approved_backlog_count": 4,
+            "approved_backlog_count": 3,
             "blocked_backlog_count": 3,
-            "clear_to_apply_count": 1,
-            "partial_clear_apply_available": true,
-            "partial_clear_apply_count": 1,
+            "clear_to_apply_count": 0,
+            "partial_clear_apply_available": false,
+            "partial_clear_apply_count": 0,
             "blocked_ids": [
               "FP-AUTO-264",
               "FP-AUTO-263",
@@ -2756,7 +2769,7 @@
                 "song": "I Learned It All in Fifteen Seconds",
                 "blocker_kind": "tiktok_credentials_missing",
                 "blocker_reason": "tiktok_credentials_missing",
-                "proposed_scheduled_at": "2026-06-24T10:00:00+08:00",
+                "proposed_scheduled_at": "2026-06-23T10:00:00+08:00",
                 "clearance_steps": [
                   "Add local TikTok OAuth credentials, then push worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
                   "Confirm TikTok public posting approval before treating auto-posting as ready.",
@@ -2769,7 +2782,7 @@
                 "song": "I Learned It All in Fifteen Seconds",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
-                "proposed_scheduled_at": "2026-06-25T10:00:00+08:00",
+                "proposed_scheduled_at": "2026-06-24T10:00:00+08:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -2780,7 +2793,7 @@
                 "song": "Twelve Dollars",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
-                "proposed_scheduled_at": "2026-06-26T10:00:00+08:00",
+                "proposed_scheduled_at": "2026-06-25T10:00:00+08:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -2880,15 +2893,14 @@
             "manual-distribution-FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
           ],
           "blockers_resolved": 3,
-          "ready_ids": [
-            "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-            "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
-          ],
+          "ready_ids": [],
           "blocked_ids": [
             "FP-PLAN-TWELVE-DOLLARS-TIKTOK"
           ],
           "postable_ids": [
-            "FP-AUTO-261"
+            "FP-AUTO-261",
+            "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+            "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
           ],
           "posting_packets": [
             {
@@ -2900,6 +2912,28 @@
               "postable_now": true,
               "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL",
               "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL --apply --refresh-admin",
+              "requires_public_url": true
+            },
+            {
+              "post_id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+              "release": "Analog Myth",
+              "paste_text": "Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+              "asset_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
+              "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
+              "postable_now": true,
+              "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+              "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
+              "requires_public_url": true
+            },
+            {
+              "post_id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+              "release": "Twelve Dollars",
+              "paste_text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+              "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
+              "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
+              "postable_now": true,
+              "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+              "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
               "requires_public_url": true
             }
           ],
@@ -3109,14 +3143,14 @@
           "task_ids": [
             "backlog-reschedule"
           ],
-          "blockers_resolved": 4,
+          "blockers_resolved": 3,
           "backlog_clearance_manifest": {
             "status": "blocked_until_clearance_steps_complete",
-            "approved_backlog_count": 4,
+            "approved_backlog_count": 3,
             "blocked_backlog_count": 3,
-            "clear_to_apply_count": 1,
-            "partial_clear_apply_available": true,
-            "partial_clear_apply_count": 1,
+            "clear_to_apply_count": 0,
+            "partial_clear_apply_available": false,
+            "partial_clear_apply_count": 0,
             "blocked_ids": [
               "FP-AUTO-264",
               "FP-AUTO-263",
@@ -3141,7 +3175,7 @@
                 "song": "I Learned It All in Fifteen Seconds",
                 "blocker_kind": "tiktok_credentials_missing",
                 "blocker_reason": "tiktok_credentials_missing",
-                "proposed_scheduled_at": "2026-06-24T10:00:00+08:00",
+                "proposed_scheduled_at": "2026-06-23T10:00:00+08:00",
                 "clearance_steps": [
                   "Add local TikTok OAuth credentials, then push worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
                   "Confirm TikTok public posting approval before treating auto-posting as ready.",
@@ -3154,7 +3188,7 @@
                 "song": "I Learned It All in Fifteen Seconds",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
-                "proposed_scheduled_at": "2026-06-25T10:00:00+08:00",
+                "proposed_scheduled_at": "2026-06-24T10:00:00+08:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -3165,7 +3199,7 @@
                 "song": "Twelve Dollars",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
-                "proposed_scheduled_at": "2026-06-26T10:00:00+08:00",
+                "proposed_scheduled_at": "2026-06-25T10:00:00+08:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -3229,13 +3263,12 @@
       "available": true,
       "worksheet_row_count": 10,
       "preview_count": 10,
-      "executed_preview_count": 6,
-      "skipped_preview_count": 4,
+      "executed_preview_count": 4,
+      "skipped_preview_count": 6,
       "status_counts": {
         "input_missing": 3,
-        "preview_ok": 2,
         "preview_ok_with_warning": 1,
-        "skipped": 4
+        "skipped": 6
       },
       "phase_counts": {
         "Backlog recovery": 1,
@@ -3243,39 +3276,10 @@
         "Manual metrics": 2,
         "Platform setup": 4
       },
-      "ready_preview_count": 2,
+      "ready_preview_count": 0,
       "input_missing_count": 3,
       "warning_preview_count": 1,
-      "ready_previews": [
-        {
-          "task_id": "manual-distribution-FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-          "phase": "Manual distribution",
-          "status": "waiting_for_review",
-          "input_needed": "manual_post_review_and_public_url",
-          "command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --dry-run",
-          "safety": "safe_preview",
-          "safety_reason": "dry_run_command",
-          "returncode": 0,
-          "preview_status": "preview_ok",
-          "output_excerpt": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY: approved 'no' -> 'yes'\nDry run only; no changes written to data/promo_queue_plan.json",
-          "completion_evidence": "data/manual_distribution_packet.json should move approved rows from review_queue toward postable manual distribution, and data/published_log_reconciliation.json should remain gated until public URLs are logged.",
-          "guardrail": "Do not log a manual post until a real public URL exists."
-        },
-        {
-          "task_id": "manual-distribution-FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
-          "phase": "Manual distribution",
-          "status": "waiting_for_review",
-          "input_needed": "manual_post_review_and_public_url",
-          "command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
-          "safety": "safe_preview",
-          "safety_reason": "dry_run_command",
-          "returncode": 0,
-          "preview_status": "preview_ok",
-          "output_excerpt": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY: approved 'no' -> 'yes'\nDry run only; no changes written to data/promo_queue_plan.json",
-          "completion_evidence": "data/manual_distribution_packet.json should move approved rows from review_queue toward postable manual distribution, and data/published_log_reconciliation.json should remain gated until public URLs are logged.",
-          "guardrail": "Do not log a manual post until a real public URL exists."
-        }
-      ],
+      "ready_previews": [],
       "input_missing_previews": [
         {
           "task_id": "platform-setup-FP-AUTO-264",
@@ -3331,7 +3335,7 @@
           "safety_reason": "reschedule_preview_command",
           "returncode": 0,
           "preview_status": "preview_ok_with_warning",
-          "output_excerpt": "Rows selected: 4\n- FP-AUTO-258 Instagram I Learned It All in Fifteen Seconds: 2026-06-05T15:35:00-04:00 -> 2026-06-23T10:00:00+08:00\n- FP-AUTO-264 TikTok I Learned It All in Fifteen Seconds: 2026-06-09T21:25:00-04:00 -> 2026-06-24T10:00:00+08:00\n  WARNING: known blocker: tiktok_credentials_missing\n- FP-AUTO-263 Instagram I Learned It All in Fifteen Seconds: 2026-06-21T10:00:00+09:00 -> 2026-06-25T10:00:00+08:00\n  WARNING: known blocker: Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.\n- FP-PLAN-TWELVE-DOLLARS-INSTAGRAM Instagram Twelve Dollars: 2026-06-21T14:05:00-04:00 -> 2026-06-26T10:00:00+08:00\n  WARNING: known blocker: Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.\nDry run only. Re-run with --apply to write the schedule.",
+          "output_excerpt": "Rows selected: 3\n- FP-AUTO-264 TikTok I Learned It All in Fifteen Seconds: 2026-06-09T21:25:00-04:00 -> 2026-06-23T10:00:00+08:00\n  WARNING: known blocker: tiktok_credentials_missing\n- FP-AUTO-263 Instagram I Learned It All in Fifteen Seconds: 2026-06-21T10:00:00+09:00 -> 2026-06-24T10:00:00+08:00\n  WARNING: known blocker: Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.\n- FP-PLAN-TWELVE-DOLLARS-INSTAGRAM Instagram Twelve Dollars: 2026-06-21T14:05:00-04:00 -> 2026-06-25T10:00:00+08:00\n  WARNING: known blocker: Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.\nDry run only. Re-run with --apply to write the schedule.",
           "completion_evidence": "data/backlog_reschedule_preview.json should show normal_apply_gate clear before any non-override apply command is exposed.",
           "guardrail": "Normal apply stays hidden until known executor/platform blockers clear."
         }
@@ -3603,176 +3607,20 @@
       "available": true,
       "status": "postable_now",
       "manual_ready_count": 3,
-      "review_count": 2,
-      "postable_count": 1,
+      "review_count": 0,
+      "postable_count": 3,
       "logged_count": 0,
       "unlogged_manual_count": 3,
-      "approval_ready_count": 2,
+      "approval_ready_count": 0,
       "approval_blocked_count": 1,
-      "approval_ready_ids": [
-        "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-        "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
-      ],
+      "approval_ready_ids": [],
       "approval_blocked_ids": [
         "FP-PLAN-TWELVE-DOLLARS-TIKTOK"
       ],
-      "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
-      "approval_apply_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+      "approval_preview_command": "",
+      "approval_apply_command": "",
       "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
-      "review_queue": [
-        {
-          "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
-          "platform": "YouTube Community",
-          "release": "Twelve Dollars",
-          "scheduled_at": "2026-06-24T18:30:00-04:00",
-          "distribution_status": "waiting_for_review",
-          "subscriber_growth_score": 116,
-          "selected_cta_strength": "hard_goal",
-          "posting_surface": "YouTube Studio Community",
-          "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
-          "paste_text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-          "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
-          "destination_links": [
-            "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n"
-          ],
-          "destination_link_audit": [
-            {
-              "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-              "canonical_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-              "status": "verified_local_evidence",
-              "evidence": [
-                {
-                  "source": "data/distrokid_release_status.json",
-                  "label": "Twelve Dollars YouTube playlist URL",
-                  "status": "known_release_playlist"
-                },
-                {
-                  "source": "data/youtube_twelve_dollars_playlist.json",
-                  "label": "Twelve Dollars verified items: 8",
-                  "status": "known_playlist_snapshot"
-                }
-              ],
-              "evidence_count": 2,
-              "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
-            }
-          ],
-          "destination_link_audit_summary": {
-            "link_count": 1,
-            "verified_local_evidence_count": 1,
-            "needs_manual_review_count": 0,
-            "all_links_have_local_evidence": true
-          },
-          "asset_audit": {
-            "url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
-            "status": "local_asset_present",
-            "local_path": "assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
-            "exists": true,
-            "guardrail": "Local file check only; no posting or live network check was performed."
-          },
-          "approval_required": true,
-          "postable_now": false,
-          "logging_required": true,
-          "logged": false,
-          "published_url": "",
-          "next_action": "review_and_approve",
-          "next_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
-          "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
-          "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
-          "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL",
-          "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
-          "log_effect": {
-            "target": "admin/content/Published_Log.csv",
-            "content_id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
-            "platform": "YouTube Community",
-            "release": "Twelve Dollars",
-            "requires_public_url": true,
-            "url_placeholder": "PUBLIC_URL",
-            "duplicate_checked_by": [
-              "content_id",
-              "manual_distribution_id"
-            ],
-            "notes": "manual_distribution_id=FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY; source=data/manual_distribution_packet.json",
-            "would_append": true,
-            "summary": "append Published_Log.csv content_id=FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY after public URL is available"
-          }
-        },
-        {
-          "id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-          "platform": "YouTube Community",
-          "release": "Analog Myth",
-          "scheduled_at": "2026-06-25T18:30:00-04:00",
-          "distribution_status": "waiting_for_review",
-          "subscriber_growth_score": 116,
-          "selected_cta_strength": "hard_goal",
-          "posting_surface": "YouTube Studio Community",
-          "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
-          "paste_text": "Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
-          "asset_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
-          "destination_links": [
-            "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0"
-          ],
-          "destination_link_audit": [
-            {
-              "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
-              "canonical_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
-              "status": "verified_local_evidence",
-              "evidence": [
-                {
-                  "source": "data/distrokid_release_status.json",
-                  "label": "Analog Myth YouTube playlist URL",
-                  "status": "known_release_playlist"
-                },
-                {
-                  "source": "data/youtube_analog_myth_playlist.json",
-                  "label": "Analog Myth - Lily Roo verified items: 8",
-                  "status": "known_playlist_snapshot"
-                }
-              ],
-              "evidence_count": 2,
-              "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
-            }
-          ],
-          "destination_link_audit_summary": {
-            "link_count": 1,
-            "verified_local_evidence_count": 1,
-            "needs_manual_review_count": 0,
-            "all_links_have_local_evidence": true
-          },
-          "asset_audit": {
-            "url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
-            "status": "local_asset_present",
-            "local_path": "assets/albums/analog-myth/art/03-analog-myth.jpg",
-            "exists": true,
-            "guardrail": "Local file check only; no posting or live network check was performed."
-          },
-          "approval_required": true,
-          "postable_now": false,
-          "logging_required": true,
-          "logged": false,
-          "published_url": "",
-          "next_action": "review_and_approve",
-          "next_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin",
-          "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --dry-run",
-          "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin",
-          "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL",
-          "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
-          "log_effect": {
-            "target": "admin/content/Published_Log.csv",
-            "content_id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-            "platform": "YouTube Community",
-            "release": "Analog Myth",
-            "requires_public_url": true,
-            "url_placeholder": "PUBLIC_URL",
-            "duplicate_checked_by": [
-              "content_id",
-              "manual_distribution_id"
-            ],
-            "notes": "manual_distribution_id=FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY; source=data/manual_distribution_packet.json",
-            "would_append": true,
-            "summary": "append Published_Log.csv content_id=FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY after public URL is available"
-          }
-        }
-      ],
+      "review_queue": [],
       "postable_now": [
         {
           "id": "FP-AUTO-261",
@@ -3865,14 +3713,166 @@
             "would_append": true,
             "summary": "append Published_Log.csv content_id=FP-AUTO-261 after public URL is available"
           }
+        },
+        {
+          "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+          "platform": "YouTube Community",
+          "release": "Twelve Dollars",
+          "scheduled_at": "2026-06-24T18:30:00-04:00",
+          "distribution_status": "ready_for_manual_post",
+          "subscriber_growth_score": null,
+          "selected_cta_strength": "",
+          "posting_surface": "YouTube Studio Community",
+          "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
+          "paste_text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+          "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
+          "destination_links": [
+            "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n"
+          ],
+          "destination_link_audit": [
+            {
+              "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+              "canonical_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+              "status": "verified_local_evidence",
+              "evidence": [
+                {
+                  "source": "data/distrokid_release_status.json",
+                  "label": "Twelve Dollars YouTube playlist URL",
+                  "status": "known_release_playlist"
+                },
+                {
+                  "source": "data/youtube_twelve_dollars_playlist.json",
+                  "label": "Twelve Dollars verified items: 8",
+                  "status": "known_playlist_snapshot"
+                }
+              ],
+              "evidence_count": 2,
+              "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
+            }
+          ],
+          "destination_link_audit_summary": {
+            "link_count": 1,
+            "verified_local_evidence_count": 1,
+            "needs_manual_review_count": 0,
+            "all_links_have_local_evidence": true
+          },
+          "asset_audit": {
+            "url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
+            "status": "local_asset_present",
+            "local_path": "assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
+            "exists": true,
+            "guardrail": "Local file check only; no posting or live network check was performed."
+          },
+          "approval_required": false,
+          "postable_now": true,
+          "logging_required": true,
+          "logged": false,
+          "published_url": "",
+          "next_action": "post_manually_then_log_url",
+          "next_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+          "approval_preview_command": "",
+          "approval_command": "",
+          "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+          "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
+          "log_effect": {
+            "target": "admin/content/Published_Log.csv",
+            "content_id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+            "platform": "YouTube Community",
+            "release": "Twelve Dollars",
+            "requires_public_url": true,
+            "url_placeholder": "PUBLIC_URL",
+            "duplicate_checked_by": [
+              "content_id",
+              "manual_distribution_id"
+            ],
+            "notes": "manual_distribution_id=FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY; source=data/manual_distribution_packet.json",
+            "would_append": true,
+            "summary": "append Published_Log.csv content_id=FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY after public URL is available"
+          }
+        },
+        {
+          "id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+          "platform": "YouTube Community",
+          "release": "Analog Myth",
+          "scheduled_at": "2026-06-25T18:30:00-04:00",
+          "distribution_status": "ready_for_manual_post",
+          "subscriber_growth_score": null,
+          "selected_cta_strength": "",
+          "posting_surface": "YouTube Studio Community",
+          "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
+          "paste_text": "Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+          "asset_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
+          "destination_links": [
+            "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0"
+          ],
+          "destination_link_audit": [
+            {
+              "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+              "canonical_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+              "status": "verified_local_evidence",
+              "evidence": [
+                {
+                  "source": "data/distrokid_release_status.json",
+                  "label": "Analog Myth YouTube playlist URL",
+                  "status": "known_release_playlist"
+                },
+                {
+                  "source": "data/youtube_analog_myth_playlist.json",
+                  "label": "Analog Myth - Lily Roo verified items: 8",
+                  "status": "known_playlist_snapshot"
+                }
+              ],
+              "evidence_count": 2,
+              "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
+            }
+          ],
+          "destination_link_audit_summary": {
+            "link_count": 1,
+            "verified_local_evidence_count": 1,
+            "needs_manual_review_count": 0,
+            "all_links_have_local_evidence": true
+          },
+          "asset_audit": {
+            "url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
+            "status": "local_asset_present",
+            "local_path": "assets/albums/analog-myth/art/03-analog-myth.jpg",
+            "exists": true,
+            "guardrail": "Local file check only; no posting or live network check was performed."
+          },
+          "approval_required": false,
+          "postable_now": true,
+          "logging_required": true,
+          "logged": false,
+          "published_url": "",
+          "next_action": "post_manually_then_log_url",
+          "next_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+          "approval_preview_command": "",
+          "approval_command": "",
+          "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+          "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
+          "log_effect": {
+            "target": "admin/content/Published_Log.csv",
+            "content_id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+            "platform": "YouTube Community",
+            "release": "Analog Myth",
+            "requires_public_url": true,
+            "url_placeholder": "PUBLIC_URL",
+            "duplicate_checked_by": [
+              "content_id",
+              "manual_distribution_id"
+            ],
+            "notes": "manual_distribution_id=FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY; source=data/manual_distribution_packet.json",
+            "would_append": true,
+            "summary": "append Published_Log.csv content_id=FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY after public URL is available"
+          }
         }
       ],
       "manual_completion_manifest": {
-        "status": "needs_review",
+        "status": "ready_to_post_and_log",
         "posting_surface": "YouTube Studio Community",
         "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
-        "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
-        "approval_apply_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+        "approval_preview_command": "",
+        "approval_apply_command": "",
         "url_template_path": "data/manual_distribution_url_template.csv",
         "batch_log_preview_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv",
         "batch_log_apply_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --apply --refresh-admin",
@@ -3891,8 +3891,8 @@
             "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
             "platform": "YouTube Community",
             "release": "Twelve Dollars",
-            "distribution_status": "waiting_for_review",
-            "approved": "no",
+            "distribution_status": "ready_for_manual_post",
+            "approved": "yes",
             "posting_surface": "YouTube Studio Community",
             "public_url": "",
             "notes": "Paste the real public YouTube Community post URL after manual posting."
@@ -3901,8 +3901,8 @@
             "id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
             "platform": "YouTube Community",
             "release": "Analog Myth",
-            "distribution_status": "waiting_for_review",
-            "approved": "no",
+            "distribution_status": "ready_for_manual_post",
+            "approved": "yes",
             "posting_surface": "YouTube Studio Community",
             "public_url": "",
             "notes": "Paste the real public YouTube Community post URL after manual posting."
@@ -3910,12 +3910,11 @@
         ],
         "url_entry_row_count": 3,
         "waiting_public_url_count": 3,
-        "review_queue_ids": [
+        "review_queue_ids": [],
+        "postable_now_ids": [
+          "FP-AUTO-261",
           "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
           "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY"
-        ],
-        "postable_now_ids": [
-          "FP-AUTO-261"
         ],
         "logged_ids": [],
         "pending_log_ids": [
@@ -3972,7 +3971,7 @@
       "report_path": "admin/reports/manual-posting-clipboard.md",
       "available": true,
       "status": "ready_to_post",
-      "postable_count": 1,
+      "postable_count": 3,
       "waiting_public_url_count": 3,
       "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
       "batch_log_preview_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv",
@@ -4052,6 +4051,104 @@
             "The URL is logged with scripts/log_manual_distribution.py.",
             "admin/content/Published_Log.csv contains this manual_distribution_id."
           ]
+        },
+        {
+          "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+          "release": "Twelve Dollars",
+          "platform": "YouTube Community",
+          "status": "ready_for_manual_post",
+          "posting_surface": "YouTube Studio Community",
+          "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
+          "paste_text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+          "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
+          "asset_status": "local_asset_present",
+          "asset_local_path": "assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
+          "destination_links": [
+            "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n"
+          ],
+          "destination_link_audit": [
+            {
+              "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+              "canonical_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+              "status": "verified_local_evidence",
+              "evidence": [
+                {
+                  "source": "data/distrokid_release_status.json",
+                  "label": "Twelve Dollars YouTube playlist URL",
+                  "status": "known_release_playlist"
+                },
+                {
+                  "source": "data/youtube_twelve_dollars_playlist.json",
+                  "label": "Twelve Dollars verified items: 8",
+                  "status": "known_playlist_snapshot"
+                }
+              ],
+              "evidence_count": 2,
+              "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
+            }
+          ],
+          "selected_cta_strength": "",
+          "postable_now": true,
+          "logging_required": true,
+          "public_url": "",
+          "public_url_placeholder": "PUBLIC_URL",
+          "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+          "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
+          "log_notes": "manual_distribution_id=FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY; source=data/manual_distribution_packet.json",
+          "completion_evidence": [
+            "A real public YouTube Community post URL exists.",
+            "The URL is logged with scripts/log_manual_distribution.py.",
+            "admin/content/Published_Log.csv contains this manual_distribution_id."
+          ]
+        },
+        {
+          "id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+          "release": "Analog Myth",
+          "platform": "YouTube Community",
+          "status": "ready_for_manual_post",
+          "posting_surface": "YouTube Studio Community",
+          "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
+          "paste_text": "Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+          "asset_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
+          "asset_status": "local_asset_present",
+          "asset_local_path": "assets/albums/analog-myth/art/03-analog-myth.jpg",
+          "destination_links": [
+            "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0"
+          ],
+          "destination_link_audit": [
+            {
+              "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+              "canonical_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+              "status": "verified_local_evidence",
+              "evidence": [
+                {
+                  "source": "data/distrokid_release_status.json",
+                  "label": "Analog Myth YouTube playlist URL",
+                  "status": "known_release_playlist"
+                },
+                {
+                  "source": "data/youtube_analog_myth_playlist.json",
+                  "label": "Analog Myth - Lily Roo verified items: 8",
+                  "status": "known_playlist_snapshot"
+                }
+              ],
+              "evidence_count": 2,
+              "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
+            }
+          ],
+          "selected_cta_strength": "",
+          "postable_now": true,
+          "logging_required": true,
+          "public_url": "",
+          "public_url_placeholder": "PUBLIC_URL",
+          "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+          "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
+          "log_notes": "manual_distribution_id=FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY; source=data/manual_distribution_packet.json",
+          "completion_evidence": [
+            "A real public YouTube Community post URL exists.",
+            "The URL is logged with scripts/log_manual_distribution.py.",
+            "admin/content/Published_Log.csv contains this manual_distribution_id."
+          ]
         }
       ]
     },
@@ -4063,32 +4160,28 @@
       "unlogged_worker_posts": 0,
       "unlogged_manual_posts": 3,
       "manual_log_gate_counts": {
-        "blocked_until_manual_approval": 2,
-        "blocked_until_public_url": 1
+        "blocked_until_public_url": 3
       },
       "manual_logging_gate_status": "postable_now",
       "next_gate": "manual_approval",
-      "next_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
-      "next_apply_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+      "next_preview_command": "",
+      "next_apply_command": "",
       "approval_gate": {
-        "status": "ready_for_manual_review",
-        "ready_count": 2,
+        "status": "clear",
+        "ready_count": 0,
         "blocked_count": 1,
-        "ready_ids": [
-          "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-          "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
-        ],
+        "ready_ids": [],
         "blocked_ids": [
           "FP-PLAN-TWELVE-DOLLARS-TIKTOK"
         ],
-        "preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
-        "apply_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+        "preview_command": "",
+        "apply_command": "",
         "guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review."
       },
       "posting_gate": {
         "status": "postable_now",
-        "review_count": 2,
-        "postable_count": 1,
+        "review_count": 0,
+        "postable_count": 3,
         "logged_count": 0,
         "public_community_url": "https://www.youtube.com/@lilyroo.artist/community"
       },
@@ -4113,14 +4206,14 @@
           "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
           "release": "Twelve Dollars",
           "platform": "YouTube Community",
-          "status": "waiting_for_review",
-          "log_gate": "blocked_until_manual_approval",
-          "approval_required": true,
-          "postable_now": false,
+          "status": "ready_for_manual_post",
+          "log_gate": "blocked_until_public_url",
+          "approval_required": false,
+          "postable_now": true,
           "requires_public_url": true,
-          "next_step": "Approve the manual row after review, post it in YouTube Studio Community, then log the public URL.",
-          "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
-          "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+          "next_step": "Post manually in YouTube Studio Community, then replace PUBLIC_URL with the real public URL.",
+          "approval_preview_command": "",
+          "approval_command": "",
           "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL",
           "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
           "public_community_url": "https://www.youtube.com/@lilyroo.artist/community"
@@ -4129,14 +4222,14 @@
           "id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
           "release": "Analog Myth",
           "platform": "YouTube Community",
-          "status": "waiting_for_review",
-          "log_gate": "blocked_until_manual_approval",
-          "approval_required": true,
-          "postable_now": false,
+          "status": "ready_for_manual_post",
+          "log_gate": "blocked_until_public_url",
+          "approval_required": false,
+          "postable_now": true,
           "requires_public_url": true,
-          "next_step": "Approve the manual row after review, post it in YouTube Studio Community, then log the public URL.",
-          "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --dry-run",
-          "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin",
+          "next_step": "Post manually in YouTube Studio Community, then replace PUBLIC_URL with the real public URL.",
+          "approval_preview_command": "",
+          "approval_command": "",
           "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL",
           "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
           "public_community_url": "https://www.youtube.com/@lilyroo.artist/community"
@@ -4148,11 +4241,11 @@
       "source_path": "data/backlog_reschedule_preview.json",
       "available": true,
       "summary": {
-        "approved_backlog_count": 4,
+        "approved_backlog_count": 3,
         "blocked_backlog_count": 3,
-        "clear_to_apply_count": 1,
-        "partial_clear_apply_available": true,
-        "partial_clear_apply_count": 1,
+        "clear_to_apply_count": 0,
+        "partial_clear_apply_available": false,
+        "partial_clear_apply_count": 0,
         "start_at": "2026-06-23T10:00:00+08:00",
         "spacing_hours": 24,
         "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
@@ -4173,12 +4266,8 @@
           "Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair.",
           "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
         ],
-        "partial_clear_preview_commands": [
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24"
-        ],
-        "partial_clear_apply_commands": [
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin"
-        ],
+        "partial_clear_preview_commands": [],
+        "partial_clear_apply_commands": [],
         "manual_handoff_count": 1,
         "manual_handoff_ids": [
           "FP-AUTO-261"
@@ -4186,11 +4275,11 @@
       },
       "backlog_clearance_manifest": {
         "status": "blocked_until_clearance_steps_complete",
-        "approved_backlog_count": 4,
+        "approved_backlog_count": 3,
         "blocked_backlog_count": 3,
-        "clear_to_apply_count": 1,
-        "partial_clear_apply_available": true,
-        "partial_clear_apply_count": 1,
+        "clear_to_apply_count": 0,
+        "partial_clear_apply_available": false,
+        "partial_clear_apply_count": 0,
         "blocked_ids": [
           "FP-AUTO-264",
           "FP-AUTO-263",
@@ -4215,7 +4304,7 @@
             "song": "I Learned It All in Fifteen Seconds",
             "blocker_kind": "tiktok_credentials_missing",
             "blocker_reason": "tiktok_credentials_missing",
-            "proposed_scheduled_at": "2026-06-24T10:00:00+08:00",
+            "proposed_scheduled_at": "2026-06-23T10:00:00+08:00",
             "clearance_steps": [
               "Add local TikTok OAuth credentials, then push worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
               "Confirm TikTok public posting approval before treating auto-posting as ready.",
@@ -4228,7 +4317,7 @@
             "song": "I Learned It All in Fifteen Seconds",
             "blocker_kind": "max_attempts_exceeded",
             "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
-            "proposed_scheduled_at": "2026-06-25T10:00:00+08:00",
+            "proposed_scheduled_at": "2026-06-24T10:00:00+08:00",
             "clearance_steps": [
               "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
             ]
@@ -4239,7 +4328,7 @@
             "song": "Twelve Dollars",
             "blocker_kind": "max_attempts_exceeded",
             "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
-            "proposed_scheduled_at": "2026-06-26T10:00:00+08:00",
+            "proposed_scheduled_at": "2026-06-25T10:00:00+08:00",
             "clearance_steps": [
               "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
             ]
@@ -4266,25 +4355,19 @@
         ]
       },
       "partial_clear_apply_manifest": {
-        "status": "ready",
-        "clear_to_apply_count": 1,
+        "status": "empty",
+        "clear_to_apply_count": 0,
         "blocked_backlog_count": 3,
-        "clear_ids": [
-          "FP-AUTO-258"
-        ],
+        "clear_ids": [],
         "blocked_ids_retained": [
           "FP-AUTO-264",
           "FP-AUTO-263",
           "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM"
         ],
-        "preview_commands": [
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24"
-        ],
-        "apply_commands": [
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin"
-        ],
-        "recommended_next_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
-        "recommended_apply_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
+        "preview_commands": [],
+        "apply_commands": [],
+        "recommended_next_command": "",
+        "recommended_apply_command": "",
         "operator_checklist": [
           "Preview each clear row before applying it.",
           "Apply only rows listed in clear_ids; do not use --allow-blocked for this partial-clear path.",
@@ -4309,45 +4392,39 @@
     "score": 0,
     "healthy_releases": 0,
     "tracked_releases": 3,
-    "open_action_count": 17,
-    "status_queue_count": 26,
+    "open_action_count": 15,
+    "status_queue_count": 25,
     "fresh_sources": 11,
     "stale_sources": 1,
     "missing_sources": 0,
     "operational_next_action": {
-      "label": "Preview clear approved backlog row",
+      "label": "Preview reschedule for approved past-due posts",
       "kind": "backlog_reschedule",
       "priority": 0,
-      "command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
+      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
       "context": {
-        "approved_backlog_posts": 5,
-        "approved_upcoming_posts": 3,
+        "approved_backlog_posts": 4,
+        "approved_upcoming_posts": 6,
         "blocked_backlog_count": 3,
-        "clear_to_apply_count": 1,
+        "clear_to_apply_count": 0,
         "apply_allowed_without_override": false,
         "apply_command": "",
         "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
         "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
         "partial_clear_apply_manifest": {
-          "status": "ready",
-          "clear_to_apply_count": 1,
+          "status": "empty",
+          "clear_to_apply_count": 0,
           "blocked_backlog_count": 3,
-          "clear_ids": [
-            "FP-AUTO-258"
-          ],
+          "clear_ids": [],
           "blocked_ids_retained": [
             "FP-AUTO-264",
             "FP-AUTO-263",
             "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM"
           ],
-          "preview_commands": [
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24"
-          ],
-          "apply_commands": [
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin"
-          ],
-          "recommended_next_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
-          "recommended_apply_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
+          "preview_commands": [],
+          "apply_commands": [],
+          "recommended_next_command": "",
+          "recommended_apply_command": "",
           "operator_checklist": [
             "Preview each clear row before applying it.",
             "Apply only rows listed in clear_ids; do not use --allow-blocked for this partial-clear path.",
@@ -4364,15 +4441,15 @@
             "This path reschedules only unblocked approved rows; it does not approve, publish, or repair executors."
           ]
         },
-        "partial_clear_preview_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
-        "partial_clear_apply_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
+        "partial_clear_preview_command": "",
+        "partial_clear_apply_command": "",
         "backlog_clearance_manifest": {
           "status": "blocked_until_clearance_steps_complete",
-          "approved_backlog_count": 4,
+          "approved_backlog_count": 3,
           "blocked_backlog_count": 3,
-          "clear_to_apply_count": 1,
-          "partial_clear_apply_available": true,
-          "partial_clear_apply_count": 1,
+          "clear_to_apply_count": 0,
+          "partial_clear_apply_available": false,
+          "partial_clear_apply_count": 0,
           "blocked_ids": [
             "FP-AUTO-264",
             "FP-AUTO-263",
@@ -4397,7 +4474,7 @@
               "song": "I Learned It All in Fifteen Seconds",
               "blocker_kind": "tiktok_credentials_missing",
               "blocker_reason": "tiktok_credentials_missing",
-              "proposed_scheduled_at": "2026-06-24T10:00:00+08:00",
+              "proposed_scheduled_at": "2026-06-23T10:00:00+08:00",
               "clearance_steps": [
                 "Add local TikTok OAuth credentials, then push worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
                 "Confirm TikTok public posting approval before treating auto-posting as ready.",
@@ -4410,7 +4487,7 @@
               "song": "I Learned It All in Fifteen Seconds",
               "blocker_kind": "max_attempts_exceeded",
               "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
-              "proposed_scheduled_at": "2026-06-25T10:00:00+08:00",
+              "proposed_scheduled_at": "2026-06-24T10:00:00+08:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]
@@ -4421,7 +4498,7 @@
               "song": "Twelve Dollars",
               "blocker_kind": "max_attempts_exceeded",
               "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
-              "proposed_scheduled_at": "2026-06-26T10:00:00+08:00",
+              "proposed_scheduled_at": "2026-06-25T10:00:00+08:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]
@@ -4466,7 +4543,7 @@
           "Do not use the override command unless accepting the blocked executor risk deliberately.",
           "A reschedule does not publish, approve, or repair platform credentials by itself."
         ],
-        "note": "Preview the first unblocked approved backlog row; blocked rows stay held behind their repair gates."
+        "note": "Preview first. Normal apply is hidden until known executor/platform blockers clear; override requires deliberate review."
       },
       "phase": "Reschedule approved backlog",
       "urgency": "high",
@@ -4548,14 +4625,14 @@
         {
           "id": "unlock-manual-distribution",
           "phase": "Review and post manual YouTube Community rows",
-          "status": "ready_for_manual_review",
+          "status": "clear",
           "owner": "tod",
-          "blockers_resolved": 2,
+          "blockers_resolved": 3,
           "blocked_by": [
             "FP-PLAN-TWELVE-DOLLARS-TIKTOK"
           ],
-          "preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
-          "apply_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+          "preview_command": "",
+          "apply_command": "",
           "source_path": "data/manual_distribution_packet.json"
         },
         {
@@ -4578,7 +4655,7 @@
           "phase": "Reschedule approved past-due backlog",
           "status": "blocked_until_clearance_steps_complete",
           "owner": "external_platform",
-          "blockers_resolved": 4,
+          "blockers_resolved": 3,
           "blocked_by": [
             "FP-AUTO-264",
             "FP-AUTO-263",
@@ -4710,7 +4787,7 @@
           "owner": "external_platform",
           "gate_state": "preview_ready_with_blocker_warning",
           "reason": "Preview ran, but the output still names a known blocker.",
-          "blockers_resolved": 4,
+          "blockers_resolved": 3,
           "blocked_by": [
             "FP-AUTO-264",
             "FP-AUTO-263",
@@ -4815,15 +4892,14 @@
           "manual-distribution-FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
         ],
         "blockers_resolved": 3,
-        "ready_ids": [
-          "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-          "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
-        ],
+        "ready_ids": [],
         "blocked_ids": [
           "FP-PLAN-TWELVE-DOLLARS-TIKTOK"
         ],
         "postable_ids": [
-          "FP-AUTO-261"
+          "FP-AUTO-261",
+          "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+          "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
         ],
         "posting_packets": [
           {
@@ -4835,6 +4911,28 @@
             "postable_now": true,
             "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL",
             "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL --apply --refresh-admin",
+            "requires_public_url": true
+          },
+          {
+            "post_id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+            "release": "Analog Myth",
+            "paste_text": "Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+            "asset_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
+            "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
+            "postable_now": true,
+            "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+            "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
+            "requires_public_url": true
+          },
+          {
+            "post_id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+            "release": "Twelve Dollars",
+            "paste_text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+            "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
+            "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
+            "postable_now": true,
+            "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+            "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
             "requires_public_url": true
           }
         ],
@@ -4895,14 +4993,14 @@
           "task_ids": [
             "backlog-reschedule"
           ],
-          "blockers_resolved": 4,
+          "blockers_resolved": 3,
           "backlog_clearance_manifest": {
             "status": "blocked_until_clearance_steps_complete",
-            "approved_backlog_count": 4,
+            "approved_backlog_count": 3,
             "blocked_backlog_count": 3,
-            "clear_to_apply_count": 1,
-            "partial_clear_apply_available": true,
-            "partial_clear_apply_count": 1,
+            "clear_to_apply_count": 0,
+            "partial_clear_apply_available": false,
+            "partial_clear_apply_count": 0,
             "blocked_ids": [
               "FP-AUTO-264",
               "FP-AUTO-263",
@@ -4927,7 +5025,7 @@
                 "song": "I Learned It All in Fifteen Seconds",
                 "blocker_kind": "tiktok_credentials_missing",
                 "blocker_reason": "tiktok_credentials_missing",
-                "proposed_scheduled_at": "2026-06-24T10:00:00+08:00",
+                "proposed_scheduled_at": "2026-06-23T10:00:00+08:00",
                 "clearance_steps": [
                   "Add local TikTok OAuth credentials, then push worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
                   "Confirm TikTok public posting approval before treating auto-posting as ready.",
@@ -4940,7 +5038,7 @@
                 "song": "I Learned It All in Fifteen Seconds",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
-                "proposed_scheduled_at": "2026-06-25T10:00:00+08:00",
+                "proposed_scheduled_at": "2026-06-24T10:00:00+08:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -4951,7 +5049,7 @@
                 "song": "Twelve Dollars",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
-                "proposed_scheduled_at": "2026-06-26T10:00:00+08:00",
+                "proposed_scheduled_at": "2026-06-25T10:00:00+08:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -5051,15 +5149,14 @@
             "manual-distribution-FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
           ],
           "blockers_resolved": 3,
-          "ready_ids": [
-            "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-            "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
-          ],
+          "ready_ids": [],
           "blocked_ids": [
             "FP-PLAN-TWELVE-DOLLARS-TIKTOK"
           ],
           "postable_ids": [
-            "FP-AUTO-261"
+            "FP-AUTO-261",
+            "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+            "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
           ],
           "posting_packets": [
             {
@@ -5071,6 +5168,28 @@
               "postable_now": true,
               "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL",
               "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL --apply --refresh-admin",
+              "requires_public_url": true
+            },
+            {
+              "post_id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+              "release": "Analog Myth",
+              "paste_text": "Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+              "asset_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
+              "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
+              "postable_now": true,
+              "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+              "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
+              "requires_public_url": true
+            },
+            {
+              "post_id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+              "release": "Twelve Dollars",
+              "paste_text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+              "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
+              "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
+              "postable_now": true,
+              "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+              "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
               "requires_public_url": true
             }
           ],
@@ -5280,14 +5399,14 @@
           "task_ids": [
             "backlog-reschedule"
           ],
-          "blockers_resolved": 4,
+          "blockers_resolved": 3,
           "backlog_clearance_manifest": {
             "status": "blocked_until_clearance_steps_complete",
-            "approved_backlog_count": 4,
+            "approved_backlog_count": 3,
             "blocked_backlog_count": 3,
-            "clear_to_apply_count": 1,
-            "partial_clear_apply_available": true,
-            "partial_clear_apply_count": 1,
+            "clear_to_apply_count": 0,
+            "partial_clear_apply_available": false,
+            "partial_clear_apply_count": 0,
             "blocked_ids": [
               "FP-AUTO-264",
               "FP-AUTO-263",
@@ -5312,7 +5431,7 @@
                 "song": "I Learned It All in Fifteen Seconds",
                 "blocker_kind": "tiktok_credentials_missing",
                 "blocker_reason": "tiktok_credentials_missing",
-                "proposed_scheduled_at": "2026-06-24T10:00:00+08:00",
+                "proposed_scheduled_at": "2026-06-23T10:00:00+08:00",
                 "clearance_steps": [
                   "Add local TikTok OAuth credentials, then push worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
                   "Confirm TikTok public posting approval before treating auto-posting as ready.",
@@ -5325,7 +5444,7 @@
                 "song": "I Learned It All in Fifteen Seconds",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
-                "proposed_scheduled_at": "2026-06-25T10:00:00+08:00",
+                "proposed_scheduled_at": "2026-06-24T10:00:00+08:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -5336,7 +5455,7 @@
                 "song": "Twelve Dollars",
                 "blocker_kind": "max_attempts_exceeded",
                 "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
-                "proposed_scheduled_at": "2026-06-26T10:00:00+08:00",
+                "proposed_scheduled_at": "2026-06-25T10:00:00+08:00",
                 "clearance_steps": [
                   "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
                 ]
@@ -5400,13 +5519,12 @@
       "available": true,
       "worksheet_row_count": 10,
       "preview_count": 10,
-      "executed_preview_count": 6,
-      "skipped_preview_count": 4,
+      "executed_preview_count": 4,
+      "skipped_preview_count": 6,
       "status_counts": {
         "input_missing": 3,
-        "preview_ok": 2,
         "preview_ok_with_warning": 1,
-        "skipped": 4
+        "skipped": 6
       },
       "phase_counts": {
         "Backlog recovery": 1,
@@ -5414,39 +5532,10 @@
         "Manual metrics": 2,
         "Platform setup": 4
       },
-      "ready_preview_count": 2,
+      "ready_preview_count": 0,
       "input_missing_count": 3,
       "warning_preview_count": 1,
-      "ready_previews": [
-        {
-          "task_id": "manual-distribution-FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-          "phase": "Manual distribution",
-          "status": "waiting_for_review",
-          "input_needed": "manual_post_review_and_public_url",
-          "command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --dry-run",
-          "safety": "safe_preview",
-          "safety_reason": "dry_run_command",
-          "returncode": 0,
-          "preview_status": "preview_ok",
-          "output_excerpt": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY: approved 'no' -> 'yes'\nDry run only; no changes written to data/promo_queue_plan.json",
-          "completion_evidence": "data/manual_distribution_packet.json should move approved rows from review_queue toward postable manual distribution, and data/published_log_reconciliation.json should remain gated until public URLs are logged.",
-          "guardrail": "Do not log a manual post until a real public URL exists."
-        },
-        {
-          "task_id": "manual-distribution-FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
-          "phase": "Manual distribution",
-          "status": "waiting_for_review",
-          "input_needed": "manual_post_review_and_public_url",
-          "command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
-          "safety": "safe_preview",
-          "safety_reason": "dry_run_command",
-          "returncode": 0,
-          "preview_status": "preview_ok",
-          "output_excerpt": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY: approved 'no' -> 'yes'\nDry run only; no changes written to data/promo_queue_plan.json",
-          "completion_evidence": "data/manual_distribution_packet.json should move approved rows from review_queue toward postable manual distribution, and data/published_log_reconciliation.json should remain gated until public URLs are logged.",
-          "guardrail": "Do not log a manual post until a real public URL exists."
-        }
-      ],
+      "ready_previews": [],
       "input_missing_previews": [
         {
           "task_id": "platform-setup-FP-AUTO-264",
@@ -5502,7 +5591,7 @@
           "safety_reason": "reschedule_preview_command",
           "returncode": 0,
           "preview_status": "preview_ok_with_warning",
-          "output_excerpt": "Rows selected: 4\n- FP-AUTO-258 Instagram I Learned It All in Fifteen Seconds: 2026-06-05T15:35:00-04:00 -> 2026-06-23T10:00:00+08:00\n- FP-AUTO-264 TikTok I Learned It All in Fifteen Seconds: 2026-06-09T21:25:00-04:00 -> 2026-06-24T10:00:00+08:00\n  WARNING: known blocker: tiktok_credentials_missing\n- FP-AUTO-263 Instagram I Learned It All in Fifteen Seconds: 2026-06-21T10:00:00+09:00 -> 2026-06-25T10:00:00+08:00\n  WARNING: known blocker: Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.\n- FP-PLAN-TWELVE-DOLLARS-INSTAGRAM Instagram Twelve Dollars: 2026-06-21T14:05:00-04:00 -> 2026-06-26T10:00:00+08:00\n  WARNING: known blocker: Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.\nDry run only. Re-run with --apply to write the schedule.",
+          "output_excerpt": "Rows selected: 3\n- FP-AUTO-264 TikTok I Learned It All in Fifteen Seconds: 2026-06-09T21:25:00-04:00 -> 2026-06-23T10:00:00+08:00\n  WARNING: known blocker: tiktok_credentials_missing\n- FP-AUTO-263 Instagram I Learned It All in Fifteen Seconds: 2026-06-21T10:00:00+09:00 -> 2026-06-24T10:00:00+08:00\n  WARNING: known blocker: Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.\n- FP-PLAN-TWELVE-DOLLARS-INSTAGRAM Instagram Twelve Dollars: 2026-06-21T14:05:00-04:00 -> 2026-06-25T10:00:00+08:00\n  WARNING: known blocker: Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.\nDry run only. Re-run with --apply to write the schedule.",
           "completion_evidence": "data/backlog_reschedule_preview.json should show normal_apply_gate clear before any non-override apply command is exposed.",
           "guardrail": "Normal apply stays hidden until known executor/platform blockers clear."
         }
@@ -5515,176 +5604,20 @@
       "available": true,
       "status": "postable_now",
       "manual_ready_count": 3,
-      "review_count": 2,
-      "postable_count": 1,
+      "review_count": 0,
+      "postable_count": 3,
       "logged_count": 0,
       "unlogged_manual_count": 3,
-      "approval_ready_count": 2,
+      "approval_ready_count": 0,
       "approval_blocked_count": 1,
-      "approval_ready_ids": [
-        "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-        "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
-      ],
+      "approval_ready_ids": [],
       "approval_blocked_ids": [
         "FP-PLAN-TWELVE-DOLLARS-TIKTOK"
       ],
-      "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
-      "approval_apply_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+      "approval_preview_command": "",
+      "approval_apply_command": "",
       "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
-      "review_queue": [
-        {
-          "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
-          "platform": "YouTube Community",
-          "release": "Twelve Dollars",
-          "scheduled_at": "2026-06-24T18:30:00-04:00",
-          "distribution_status": "waiting_for_review",
-          "subscriber_growth_score": 116,
-          "selected_cta_strength": "hard_goal",
-          "posting_surface": "YouTube Studio Community",
-          "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
-          "paste_text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-          "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
-          "destination_links": [
-            "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n"
-          ],
-          "destination_link_audit": [
-            {
-              "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-              "canonical_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-              "status": "verified_local_evidence",
-              "evidence": [
-                {
-                  "source": "data/distrokid_release_status.json",
-                  "label": "Twelve Dollars YouTube playlist URL",
-                  "status": "known_release_playlist"
-                },
-                {
-                  "source": "data/youtube_twelve_dollars_playlist.json",
-                  "label": "Twelve Dollars verified items: 8",
-                  "status": "known_playlist_snapshot"
-                }
-              ],
-              "evidence_count": 2,
-              "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
-            }
-          ],
-          "destination_link_audit_summary": {
-            "link_count": 1,
-            "verified_local_evidence_count": 1,
-            "needs_manual_review_count": 0,
-            "all_links_have_local_evidence": true
-          },
-          "asset_audit": {
-            "url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
-            "status": "local_asset_present",
-            "local_path": "assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
-            "exists": true,
-            "guardrail": "Local file check only; no posting or live network check was performed."
-          },
-          "approval_required": true,
-          "postable_now": false,
-          "logging_required": true,
-          "logged": false,
-          "published_url": "",
-          "next_action": "review_and_approve",
-          "next_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
-          "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
-          "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
-          "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL",
-          "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
-          "log_effect": {
-            "target": "admin/content/Published_Log.csv",
-            "content_id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
-            "platform": "YouTube Community",
-            "release": "Twelve Dollars",
-            "requires_public_url": true,
-            "url_placeholder": "PUBLIC_URL",
-            "duplicate_checked_by": [
-              "content_id",
-              "manual_distribution_id"
-            ],
-            "notes": "manual_distribution_id=FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY; source=data/manual_distribution_packet.json",
-            "would_append": true,
-            "summary": "append Published_Log.csv content_id=FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY after public URL is available"
-          }
-        },
-        {
-          "id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-          "platform": "YouTube Community",
-          "release": "Analog Myth",
-          "scheduled_at": "2026-06-25T18:30:00-04:00",
-          "distribution_status": "waiting_for_review",
-          "subscriber_growth_score": 116,
-          "selected_cta_strength": "hard_goal",
-          "posting_surface": "YouTube Studio Community",
-          "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
-          "paste_text": "Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
-          "asset_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
-          "destination_links": [
-            "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0"
-          ],
-          "destination_link_audit": [
-            {
-              "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
-              "canonical_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
-              "status": "verified_local_evidence",
-              "evidence": [
-                {
-                  "source": "data/distrokid_release_status.json",
-                  "label": "Analog Myth YouTube playlist URL",
-                  "status": "known_release_playlist"
-                },
-                {
-                  "source": "data/youtube_analog_myth_playlist.json",
-                  "label": "Analog Myth - Lily Roo verified items: 8",
-                  "status": "known_playlist_snapshot"
-                }
-              ],
-              "evidence_count": 2,
-              "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
-            }
-          ],
-          "destination_link_audit_summary": {
-            "link_count": 1,
-            "verified_local_evidence_count": 1,
-            "needs_manual_review_count": 0,
-            "all_links_have_local_evidence": true
-          },
-          "asset_audit": {
-            "url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
-            "status": "local_asset_present",
-            "local_path": "assets/albums/analog-myth/art/03-analog-myth.jpg",
-            "exists": true,
-            "guardrail": "Local file check only; no posting or live network check was performed."
-          },
-          "approval_required": true,
-          "postable_now": false,
-          "logging_required": true,
-          "logged": false,
-          "published_url": "",
-          "next_action": "review_and_approve",
-          "next_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin",
-          "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --dry-run",
-          "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin",
-          "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL",
-          "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
-          "log_effect": {
-            "target": "admin/content/Published_Log.csv",
-            "content_id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-            "platform": "YouTube Community",
-            "release": "Analog Myth",
-            "requires_public_url": true,
-            "url_placeholder": "PUBLIC_URL",
-            "duplicate_checked_by": [
-              "content_id",
-              "manual_distribution_id"
-            ],
-            "notes": "manual_distribution_id=FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY; source=data/manual_distribution_packet.json",
-            "would_append": true,
-            "summary": "append Published_Log.csv content_id=FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY after public URL is available"
-          }
-        }
-      ],
+      "review_queue": [],
       "postable_now": [
         {
           "id": "FP-AUTO-261",
@@ -5777,14 +5710,166 @@
             "would_append": true,
             "summary": "append Published_Log.csv content_id=FP-AUTO-261 after public URL is available"
           }
+        },
+        {
+          "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+          "platform": "YouTube Community",
+          "release": "Twelve Dollars",
+          "scheduled_at": "2026-06-24T18:30:00-04:00",
+          "distribution_status": "ready_for_manual_post",
+          "subscriber_growth_score": null,
+          "selected_cta_strength": "",
+          "posting_surface": "YouTube Studio Community",
+          "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
+          "paste_text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+          "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
+          "destination_links": [
+            "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n"
+          ],
+          "destination_link_audit": [
+            {
+              "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+              "canonical_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+              "status": "verified_local_evidence",
+              "evidence": [
+                {
+                  "source": "data/distrokid_release_status.json",
+                  "label": "Twelve Dollars YouTube playlist URL",
+                  "status": "known_release_playlist"
+                },
+                {
+                  "source": "data/youtube_twelve_dollars_playlist.json",
+                  "label": "Twelve Dollars verified items: 8",
+                  "status": "known_playlist_snapshot"
+                }
+              ],
+              "evidence_count": 2,
+              "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
+            }
+          ],
+          "destination_link_audit_summary": {
+            "link_count": 1,
+            "verified_local_evidence_count": 1,
+            "needs_manual_review_count": 0,
+            "all_links_have_local_evidence": true
+          },
+          "asset_audit": {
+            "url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
+            "status": "local_asset_present",
+            "local_path": "assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
+            "exists": true,
+            "guardrail": "Local file check only; no posting or live network check was performed."
+          },
+          "approval_required": false,
+          "postable_now": true,
+          "logging_required": true,
+          "logged": false,
+          "published_url": "",
+          "next_action": "post_manually_then_log_url",
+          "next_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+          "approval_preview_command": "",
+          "approval_command": "",
+          "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+          "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
+          "log_effect": {
+            "target": "admin/content/Published_Log.csv",
+            "content_id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+            "platform": "YouTube Community",
+            "release": "Twelve Dollars",
+            "requires_public_url": true,
+            "url_placeholder": "PUBLIC_URL",
+            "duplicate_checked_by": [
+              "content_id",
+              "manual_distribution_id"
+            ],
+            "notes": "manual_distribution_id=FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY; source=data/manual_distribution_packet.json",
+            "would_append": true,
+            "summary": "append Published_Log.csv content_id=FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY after public URL is available"
+          }
+        },
+        {
+          "id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+          "platform": "YouTube Community",
+          "release": "Analog Myth",
+          "scheduled_at": "2026-06-25T18:30:00-04:00",
+          "distribution_status": "ready_for_manual_post",
+          "subscriber_growth_score": null,
+          "selected_cta_strength": "",
+          "posting_surface": "YouTube Studio Community",
+          "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
+          "paste_text": "Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+          "asset_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
+          "destination_links": [
+            "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0"
+          ],
+          "destination_link_audit": [
+            {
+              "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+              "canonical_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+              "status": "verified_local_evidence",
+              "evidence": [
+                {
+                  "source": "data/distrokid_release_status.json",
+                  "label": "Analog Myth YouTube playlist URL",
+                  "status": "known_release_playlist"
+                },
+                {
+                  "source": "data/youtube_analog_myth_playlist.json",
+                  "label": "Analog Myth - Lily Roo verified items: 8",
+                  "status": "known_playlist_snapshot"
+                }
+              ],
+              "evidence_count": 2,
+              "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
+            }
+          ],
+          "destination_link_audit_summary": {
+            "link_count": 1,
+            "verified_local_evidence_count": 1,
+            "needs_manual_review_count": 0,
+            "all_links_have_local_evidence": true
+          },
+          "asset_audit": {
+            "url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
+            "status": "local_asset_present",
+            "local_path": "assets/albums/analog-myth/art/03-analog-myth.jpg",
+            "exists": true,
+            "guardrail": "Local file check only; no posting or live network check was performed."
+          },
+          "approval_required": false,
+          "postable_now": true,
+          "logging_required": true,
+          "logged": false,
+          "published_url": "",
+          "next_action": "post_manually_then_log_url",
+          "next_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+          "approval_preview_command": "",
+          "approval_command": "",
+          "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+          "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
+          "log_effect": {
+            "target": "admin/content/Published_Log.csv",
+            "content_id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+            "platform": "YouTube Community",
+            "release": "Analog Myth",
+            "requires_public_url": true,
+            "url_placeholder": "PUBLIC_URL",
+            "duplicate_checked_by": [
+              "content_id",
+              "manual_distribution_id"
+            ],
+            "notes": "manual_distribution_id=FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY; source=data/manual_distribution_packet.json",
+            "would_append": true,
+            "summary": "append Published_Log.csv content_id=FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY after public URL is available"
+          }
         }
       ],
       "manual_completion_manifest": {
-        "status": "needs_review",
+        "status": "ready_to_post_and_log",
         "posting_surface": "YouTube Studio Community",
         "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
-        "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
-        "approval_apply_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+        "approval_preview_command": "",
+        "approval_apply_command": "",
         "url_template_path": "data/manual_distribution_url_template.csv",
         "batch_log_preview_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv",
         "batch_log_apply_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --apply --refresh-admin",
@@ -5803,8 +5888,8 @@
             "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
             "platform": "YouTube Community",
             "release": "Twelve Dollars",
-            "distribution_status": "waiting_for_review",
-            "approved": "no",
+            "distribution_status": "ready_for_manual_post",
+            "approved": "yes",
             "posting_surface": "YouTube Studio Community",
             "public_url": "",
             "notes": "Paste the real public YouTube Community post URL after manual posting."
@@ -5813,8 +5898,8 @@
             "id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
             "platform": "YouTube Community",
             "release": "Analog Myth",
-            "distribution_status": "waiting_for_review",
-            "approved": "no",
+            "distribution_status": "ready_for_manual_post",
+            "approved": "yes",
             "posting_surface": "YouTube Studio Community",
             "public_url": "",
             "notes": "Paste the real public YouTube Community post URL after manual posting."
@@ -5822,12 +5907,11 @@
         ],
         "url_entry_row_count": 3,
         "waiting_public_url_count": 3,
-        "review_queue_ids": [
+        "review_queue_ids": [],
+        "postable_now_ids": [
+          "FP-AUTO-261",
           "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
           "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY"
-        ],
-        "postable_now_ids": [
-          "FP-AUTO-261"
         ],
         "logged_ids": [],
         "pending_log_ids": [
@@ -5884,7 +5968,7 @@
       "report_path": "admin/reports/manual-posting-clipboard.md",
       "available": true,
       "status": "ready_to_post",
-      "postable_count": 1,
+      "postable_count": 3,
       "waiting_public_url_count": 3,
       "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
       "batch_log_preview_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv",
@@ -5964,6 +6048,104 @@
             "The URL is logged with scripts/log_manual_distribution.py.",
             "admin/content/Published_Log.csv contains this manual_distribution_id."
           ]
+        },
+        {
+          "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+          "release": "Twelve Dollars",
+          "platform": "YouTube Community",
+          "status": "ready_for_manual_post",
+          "posting_surface": "YouTube Studio Community",
+          "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
+          "paste_text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+          "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
+          "asset_status": "local_asset_present",
+          "asset_local_path": "assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
+          "destination_links": [
+            "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n"
+          ],
+          "destination_link_audit": [
+            {
+              "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+              "canonical_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+              "status": "verified_local_evidence",
+              "evidence": [
+                {
+                  "source": "data/distrokid_release_status.json",
+                  "label": "Twelve Dollars YouTube playlist URL",
+                  "status": "known_release_playlist"
+                },
+                {
+                  "source": "data/youtube_twelve_dollars_playlist.json",
+                  "label": "Twelve Dollars verified items: 8",
+                  "status": "known_playlist_snapshot"
+                }
+              ],
+              "evidence_count": 2,
+              "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
+            }
+          ],
+          "selected_cta_strength": "",
+          "postable_now": true,
+          "logging_required": true,
+          "public_url": "",
+          "public_url_placeholder": "PUBLIC_URL",
+          "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+          "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
+          "log_notes": "manual_distribution_id=FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY; source=data/manual_distribution_packet.json",
+          "completion_evidence": [
+            "A real public YouTube Community post URL exists.",
+            "The URL is logged with scripts/log_manual_distribution.py.",
+            "admin/content/Published_Log.csv contains this manual_distribution_id."
+          ]
+        },
+        {
+          "id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+          "release": "Analog Myth",
+          "platform": "YouTube Community",
+          "status": "ready_for_manual_post",
+          "posting_surface": "YouTube Studio Community",
+          "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
+          "paste_text": "Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+          "asset_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
+          "asset_status": "local_asset_present",
+          "asset_local_path": "assets/albums/analog-myth/art/03-analog-myth.jpg",
+          "destination_links": [
+            "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0"
+          ],
+          "destination_link_audit": [
+            {
+              "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+              "canonical_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+              "status": "verified_local_evidence",
+              "evidence": [
+                {
+                  "source": "data/distrokid_release_status.json",
+                  "label": "Analog Myth YouTube playlist URL",
+                  "status": "known_release_playlist"
+                },
+                {
+                  "source": "data/youtube_analog_myth_playlist.json",
+                  "label": "Analog Myth - Lily Roo verified items: 8",
+                  "status": "known_playlist_snapshot"
+                }
+              ],
+              "evidence_count": 2,
+              "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
+            }
+          ],
+          "selected_cta_strength": "",
+          "postable_now": true,
+          "logging_required": true,
+          "public_url": "",
+          "public_url_placeholder": "PUBLIC_URL",
+          "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+          "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
+          "log_notes": "manual_distribution_id=FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY; source=data/manual_distribution_packet.json",
+          "completion_evidence": [
+            "A real public YouTube Community post URL exists.",
+            "The URL is logged with scripts/log_manual_distribution.py.",
+            "admin/content/Published_Log.csv contains this manual_distribution_id."
+          ]
         }
       ]
     },
@@ -5975,32 +6157,28 @@
       "unlogged_worker_posts": 0,
       "unlogged_manual_posts": 3,
       "manual_log_gate_counts": {
-        "blocked_until_manual_approval": 2,
-        "blocked_until_public_url": 1
+        "blocked_until_public_url": 3
       },
       "manual_logging_gate_status": "postable_now",
       "next_gate": "manual_approval",
-      "next_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
-      "next_apply_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+      "next_preview_command": "",
+      "next_apply_command": "",
       "approval_gate": {
-        "status": "ready_for_manual_review",
-        "ready_count": 2,
+        "status": "clear",
+        "ready_count": 0,
         "blocked_count": 1,
-        "ready_ids": [
-          "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-          "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
-        ],
+        "ready_ids": [],
         "blocked_ids": [
           "FP-PLAN-TWELVE-DOLLARS-TIKTOK"
         ],
-        "preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
-        "apply_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+        "preview_command": "",
+        "apply_command": "",
         "guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review."
       },
       "posting_gate": {
         "status": "postable_now",
-        "review_count": 2,
-        "postable_count": 1,
+        "review_count": 0,
+        "postable_count": 3,
         "logged_count": 0,
         "public_community_url": "https://www.youtube.com/@lilyroo.artist/community"
       },
@@ -6025,14 +6203,14 @@
           "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
           "release": "Twelve Dollars",
           "platform": "YouTube Community",
-          "status": "waiting_for_review",
-          "log_gate": "blocked_until_manual_approval",
-          "approval_required": true,
-          "postable_now": false,
+          "status": "ready_for_manual_post",
+          "log_gate": "blocked_until_public_url",
+          "approval_required": false,
+          "postable_now": true,
           "requires_public_url": true,
-          "next_step": "Approve the manual row after review, post it in YouTube Studio Community, then log the public URL.",
-          "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
-          "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+          "next_step": "Post manually in YouTube Studio Community, then replace PUBLIC_URL with the real public URL.",
+          "approval_preview_command": "",
+          "approval_command": "",
           "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL",
           "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
           "public_community_url": "https://www.youtube.com/@lilyroo.artist/community"
@@ -6041,14 +6219,14 @@
           "id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
           "release": "Analog Myth",
           "platform": "YouTube Community",
-          "status": "waiting_for_review",
-          "log_gate": "blocked_until_manual_approval",
-          "approval_required": true,
-          "postable_now": false,
+          "status": "ready_for_manual_post",
+          "log_gate": "blocked_until_public_url",
+          "approval_required": false,
+          "postable_now": true,
           "requires_public_url": true,
-          "next_step": "Approve the manual row after review, post it in YouTube Studio Community, then log the public URL.",
-          "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --dry-run",
-          "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin",
+          "next_step": "Post manually in YouTube Studio Community, then replace PUBLIC_URL with the real public URL.",
+          "approval_preview_command": "",
+          "approval_command": "",
           "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL",
           "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
           "public_community_url": "https://www.youtube.com/@lilyroo.artist/community"
@@ -6075,12 +6253,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:01:28.759862Z",
+            "updated_at": "2026-06-22T06:04:39.607182Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T06:01:28.759862+00:00",
+            "checked_at": "2026-06-22T06:04:39.607182+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:01:28.759862+00:00",
+            "next_recheck_at": "2026-06-23T06:04:39.607182+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -6094,12 +6272,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:01:48.902322Z",
+            "updated_at": "2026-06-22T06:04:40.922050Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T06:01:48.902322+00:00",
+            "checked_at": "2026-06-22T06:04:40.922050+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:01:48.902322+00:00",
+            "next_recheck_at": "2026-06-23T06:04:40.922050+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -6113,12 +6291,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:01:49.425726Z",
+            "updated_at": "2026-06-22T06:04:41.470593Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-06-22T06:01:49.425726+00:00",
+            "checked_at": "2026-06-22T06:04:41.470593+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:01:49.425726+00:00",
+            "next_recheck_at": "2026-06-23T06:04:41.470593+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -6132,12 +6310,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:01:49.497095Z",
+            "updated_at": "2026-06-22T06:04:41.527407Z",
             "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T06:01:49.497095+00:00",
+            "checked_at": "2026-06-22T06:04:41.527407+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:01:49.497095+00:00",
+            "next_recheck_at": "2026-06-23T06:04:41.527407+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -6151,12 +6329,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:02:09.664946Z",
+            "updated_at": "2026-06-22T06:04:42.656449Z",
             "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T06:02:09.664946+00:00",
+            "checked_at": "2026-06-22T06:04:42.656449+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:02:09.664946+00:00",
+            "next_recheck_at": "2026-06-23T06:04:42.656449+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -6170,12 +6348,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:02:09.720967Z",
+            "updated_at": "2026-06-22T06:04:42.713715Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-            "checked_at": "2026-06-22T06:02:09.720967+00:00",
+            "checked_at": "2026-06-22T06:04:42.713715+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:02:09.720967+00:00",
+            "next_recheck_at": "2026-06-23T06:04:42.713715+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -6189,12 +6367,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:02:32.245908Z",
+            "updated_at": "2026-06-22T06:04:44.040835Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-06-22T06:02:32.245908+00:00",
+            "checked_at": "2026-06-22T06:04:44.040835+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:02:32.245908+00:00",
+            "next_recheck_at": "2026-06-23T06:04:44.040835+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -6211,12 +6389,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:01:28.759862Z",
+            "updated_at": "2026-06-22T06:04:39.607182Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T06:01:28.759862+00:00",
+            "checked_at": "2026-06-22T06:04:39.607182+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:01:28.759862+00:00",
+            "next_recheck_at": "2026-06-23T06:04:39.607182+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -6229,12 +6407,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:01:48.902322Z",
+            "updated_at": "2026-06-22T06:04:40.922050Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T06:01:48.902322+00:00",
+            "checked_at": "2026-06-22T06:04:40.922050+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:01:48.902322+00:00",
+            "next_recheck_at": "2026-06-23T06:04:40.922050+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -6247,12 +6425,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:01:49.425726Z",
+            "updated_at": "2026-06-22T06:04:41.470593Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-06-22T06:01:49.425726+00:00",
+            "checked_at": "2026-06-22T06:04:41.470593+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:01:49.425726+00:00",
+            "next_recheck_at": "2026-06-23T06:04:41.470593+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -6265,12 +6443,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:01:49.497095Z",
+            "updated_at": "2026-06-22T06:04:41.527407Z",
             "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T06:01:49.497095+00:00",
+            "checked_at": "2026-06-22T06:04:41.527407+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:01:49.497095+00:00",
+            "next_recheck_at": "2026-06-23T06:04:41.527407+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -6283,12 +6461,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:02:09.664946Z",
+            "updated_at": "2026-06-22T06:04:42.656449Z",
             "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T06:02:09.664946+00:00",
+            "checked_at": "2026-06-22T06:04:42.656449+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:02:09.664946+00:00",
+            "next_recheck_at": "2026-06-23T06:04:42.656449+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -6301,12 +6479,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:02:09.720967Z",
+            "updated_at": "2026-06-22T06:04:42.713715Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-            "checked_at": "2026-06-22T06:02:09.720967+00:00",
+            "checked_at": "2026-06-22T06:04:42.713715+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:02:09.720967+00:00",
+            "next_recheck_at": "2026-06-23T06:04:42.713715+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -6319,12 +6497,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:02:32.245908Z",
+            "updated_at": "2026-06-22T06:04:44.040835Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-06-22T06:02:32.245908+00:00",
+            "checked_at": "2026-06-22T06:04:44.040835+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:02:32.245908+00:00",
+            "next_recheck_at": "2026-06-23T06:04:44.040835+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -6336,7 +6514,7 @@
       "recheck_due_count": 0,
       "waiting_for_next_recheck_count": 7,
       "oldest_checked_pending_age_hours": 0.0,
-      "next_recheck_at": "2026-06-23T06:01:28.759862+00:00",
+      "next_recheck_at": "2026-06-23T06:04:39.607182+00:00",
       "recheck_due_rows": [],
       "waiting_recheck_rows": [
         {
@@ -6347,12 +6525,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:01:28.759862Z",
+            "updated_at": "2026-06-22T06:04:39.607182Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T06:01:28.759862+00:00",
+            "checked_at": "2026-06-22T06:04:39.607182+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:01:28.759862+00:00",
+            "next_recheck_at": "2026-06-23T06:04:39.607182+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -6366,12 +6544,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:01:48.902322Z",
+            "updated_at": "2026-06-22T06:04:40.922050Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T06:01:48.902322+00:00",
+            "checked_at": "2026-06-22T06:04:40.922050+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:01:48.902322+00:00",
+            "next_recheck_at": "2026-06-23T06:04:40.922050+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -6385,12 +6563,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:01:49.425726Z",
+            "updated_at": "2026-06-22T06:04:41.470593Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-06-22T06:01:49.425726+00:00",
+            "checked_at": "2026-06-22T06:04:41.470593+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:01:49.425726+00:00",
+            "next_recheck_at": "2026-06-23T06:04:41.470593+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -6404,12 +6582,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:01:49.497095Z",
+            "updated_at": "2026-06-22T06:04:41.527407Z",
             "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T06:01:49.497095+00:00",
+            "checked_at": "2026-06-22T06:04:41.527407+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:01:49.497095+00:00",
+            "next_recheck_at": "2026-06-23T06:04:41.527407+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -6423,12 +6601,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:02:09.664946Z",
+            "updated_at": "2026-06-22T06:04:42.656449Z",
             "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T06:02:09.664946+00:00",
+            "checked_at": "2026-06-22T06:04:42.656449+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:02:09.664946+00:00",
+            "next_recheck_at": "2026-06-23T06:04:42.656449+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -6442,12 +6620,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:02:09.720967Z",
+            "updated_at": "2026-06-22T06:04:42.713715Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-            "checked_at": "2026-06-22T06:02:09.720967+00:00",
+            "checked_at": "2026-06-22T06:04:42.713715+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:02:09.720967+00:00",
+            "next_recheck_at": "2026-06-23T06:04:42.713715+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -6461,12 +6639,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:02:32.245908Z",
+            "updated_at": "2026-06-22T06:04:44.040835Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-06-22T06:02:32.245908+00:00",
+            "checked_at": "2026-06-22T06:04:44.040835+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:02:32.245908+00:00",
+            "next_recheck_at": "2026-06-23T06:04:44.040835+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -6476,7 +6654,7 @@
       "latest_run": {
         "source_path": "data/store_verification_run.json",
         "available": true,
-        "updated_at": "2026-06-22T06:02:32.381009Z",
+        "updated_at": "2026-06-22T06:04:44.144170Z",
         "step_timeout_seconds": 25,
         "checked": 7,
         "ok": 0,
@@ -6498,18 +6676,18 @@
       "missing": 0,
       "checked_no_change": 1,
       "gated_manual_pending": 0,
-      "checked_at": "2026-06-22T06:02:37.077435+00:00"
+      "checked_at": "2026-06-22T06:06:32.925082+00:00"
     },
     "sources": [
       {
         "name": "release_status",
         "path": "data/distrokid_release_status.json",
         "status": "checked_no_change",
-        "age_hours": 116.6,
+        "age_hours": 116.7,
         "max_age_hours": 72,
         "timestamp": "2026-06-17T09:25:00+00:00",
         "refresh_command": "Store checks are current; update data/distrokid_release_status.json when a verified public URL appears.",
-        "checked_at": "2026-06-22T06:02:37.077435+00:00",
+        "checked_at": "2026-06-22T06:06:32.925082+00:00",
         "checked_age_hours": 0.0,
         "evidence": "7 pending store links checked; no new public URLs found."
       },
@@ -6517,9 +6695,9 @@
         "name": "scheduled_posts",
         "path": "admin/future-posts.json",
         "status": "fresh",
-        "age_hours": 0.1,
+        "age_hours": 0.0,
         "max_age_hours": 72,
-        "timestamp": "2026-06-22T05:57:33.857964+00:00",
+        "timestamp": "2026-06-22T06:04:31.396425+00:00",
         "refresh_command": "python3 scripts/sync_future_posts.py"
       },
       {
@@ -6528,14 +6706,14 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-22T06:02:34.926181+00:00",
+        "timestamp": "2026-06-22T06:04:46.900712+00:00",
         "refresh_command": "python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
         "name": "published_log",
         "path": "admin/content/Published_Log.csv",
         "status": "stale",
-        "age_hours": 353.4,
+        "age_hours": 353.5,
         "max_age_hours": 168,
         "timestamp": "2026-06-07T12:36:37.141276+00:00",
         "refresh_command": "Preview Worker export with python3 scripts/export_social_executions.py --dry-run; after review run python3 scripts/export_social_executions.py --refresh-admin. For manual posts, log the public URL with scripts/log_manual_distribution.py.",
@@ -6564,7 +6742,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-22T06:01:28.623000+00:00",
+        "timestamp": "2026-06-22T06:04:39.468000+00:00",
         "refresh_command": "python3 scripts/capture_live_metrics.py"
       },
       {
@@ -6573,7 +6751,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-22T06:02:34.961866+00:00",
+        "timestamp": "2026-06-22T06:04:46.937207+00:00",
         "refresh_command": "python3 scripts/update_metrics_history.py --refresh-admin"
       },
       {
@@ -6582,7 +6760,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-22T06:02:32.539685+00:00",
+        "timestamp": "2026-06-22T06:04:44.338052+00:00",
         "refresh_command": "python3 scripts/capture_executor_readiness.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -6591,7 +6769,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-22T06:02:37.077435+00:00",
+        "timestamp": "2026-06-22T06:06:32.925082+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin"
       },
       {
@@ -6600,7 +6778,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-22T06:02:34.464424+00:00",
+        "timestamp": "2026-06-22T06:04:46.315991+00:00",
         "refresh_command": "python3 scripts/capture_social_executions.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -6609,7 +6787,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-22T06:02:34.863136+00:00",
+        "timestamp": "2026-06-22T06:04:46.844258+00:00",
         "refresh_command": "python3 scripts/capture_scheduler_dry_run.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -6618,7 +6796,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-22T06:02:37.040465+00:00",
+        "timestamp": "2026-06-22T06:04:49.072075+00:00",
         "refresh_command": "python3 scripts/refresh_promo_admin.py"
       },
       {
@@ -6627,7 +6805,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-22T06:02:35.559068+00:00",
+        "timestamp": "2026-06-22T06:04:47.649099+00:00",
         "refresh_command": "python3 scripts/capture_github_workflow_status.py && python3 scripts/update_promo_engine_status.py"
       }
     ],
@@ -6768,12 +6946,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:01:28.759862Z",
+            "updated_at": "2026-06-22T06:04:39.607182Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T06:01:28.759862+00:00",
+            "checked_at": "2026-06-22T06:04:39.607182+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:01:28.759862+00:00",
+            "next_recheck_at": "2026-06-23T06:04:39.607182+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           }
@@ -6785,12 +6963,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:01:48.902322Z",
+            "updated_at": "2026-06-22T06:04:40.922050Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T06:01:48.902322+00:00",
+            "checked_at": "2026-06-22T06:04:40.922050+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:01:48.902322+00:00",
+            "next_recheck_at": "2026-06-23T06:04:40.922050+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           }
@@ -6802,45 +6980,43 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:01:49.425726Z",
+            "updated_at": "2026-06-22T06:04:41.470593Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-06-22T06:01:49.425726+00:00",
+            "checked_at": "2026-06-22T06:04:41.470593+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:01:49.425726+00:00",
+            "next_recheck_at": "2026-06-23T06:04:41.470593+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           }
         }
       ],
-      "queued_posts": 3,
-      "planned_posts": 2,
+      "queued_posts": 4,
+      "planned_posts": 1,
       "published_posts": 0,
       "latest_published": "",
       "queued_platforms": [
         "Facebook",
         "Instagram",
-        "X"
+        "X",
+        "YouTube Community"
       ],
       "planned_platforms": [
-        "TikTok",
-        "YouTube Community"
+        "TikTok"
       ],
       "approved_plan_platforms": [],
       "published_platforms": [],
       "published_platform_counts": {},
       "missing_platforms": [
-        "TikTok",
-        "YouTube Community"
+        "TikTok"
       ],
       "planned_missing_platforms": [
-        "TikTok",
-        "YouTube Community"
+        "TikTok"
       ],
       "unplanned_missing_platforms": [],
       "actions": [
         "Re-check checked-pending store links for Spotify, Apple Music, HyperFollow; no public URLs were found in the latest snapshots.",
-        "Approve planned promo coverage for TikTok, YouTube Community.",
+        "Approve planned promo coverage for TikTok.",
         "Fill manual metric worksheet and import it before weekly reporting."
       ]
     },
@@ -6899,12 +7075,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:01:49.497095Z",
+            "updated_at": "2026-06-22T06:04:41.527407Z",
             "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T06:01:49.497095+00:00",
+            "checked_at": "2026-06-22T06:04:41.527407+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:01:49.497095+00:00",
+            "next_recheck_at": "2026-06-23T06:04:41.527407+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           }
@@ -6916,12 +7092,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:02:09.664946Z",
+            "updated_at": "2026-06-22T06:04:42.656449Z",
             "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T06:02:09.664946+00:00",
+            "checked_at": "2026-06-22T06:04:42.656449+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:02:09.664946+00:00",
+            "next_recheck_at": "2026-06-23T06:04:42.656449+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           }
@@ -6933,12 +7109,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:02:09.720967Z",
+            "updated_at": "2026-06-22T06:04:42.713715Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-            "checked_at": "2026-06-22T06:02:09.720967+00:00",
+            "checked_at": "2026-06-22T06:04:42.713715+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:02:09.720967+00:00",
+            "next_recheck_at": "2026-06-23T06:04:42.713715+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           }
@@ -6950,25 +7126,25 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T06:02:32.245908Z",
+            "updated_at": "2026-06-22T06:04:44.040835Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-06-22T06:02:32.245908+00:00",
+            "checked_at": "2026-06-22T06:04:44.040835+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T06:02:32.245908+00:00",
+            "next_recheck_at": "2026-06-23T06:04:44.040835+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           }
         }
       ],
-      "queued_posts": 0,
-      "planned_posts": 1,
+      "queued_posts": 1,
+      "planned_posts": 0,
       "published_posts": 13,
       "latest_published": "2026-05-09",
-      "queued_platforms": [],
-      "planned_platforms": [
+      "queued_platforms": [
         "YouTube Community"
       ],
+      "planned_platforms": [],
       "approved_plan_platforms": [],
       "published_platforms": [
         "Facebook",
@@ -6984,33 +7160,27 @@
         "X": 3,
         "YouTube": 4
       },
-      "missing_platforms": [
-        "YouTube Community"
-      ],
-      "planned_missing_platforms": [
-        "YouTube Community"
-      ],
+      "missing_platforms": [],
+      "planned_missing_platforms": [],
       "unplanned_missing_platforms": [],
       "actions": [
         "Re-check checked-pending store links for Spotify, Apple Music, YouTube Music, HyperFollow; no public URLs were found in the latest snapshots.",
-        "Review and approve draft promo queue rows for this release.",
-        "Approve planned promo coverage for YouTube Community.",
         "Fill manual metric worksheet and import it before weekly reporting."
       ]
     }
   ],
   "next_actions": [
-    "Next operational action: Preview clear approved backlog row — python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
+    "Next operational action: Preview reschedule for approved past-due posts — python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
     "First handoff step: Review and post manual distribution rows",
     "30-day growth goal: Publish or approve the next platform-native rows, then refresh manual/public metrics to rank formats by results.",
-    "Resolve manual distribution gate: 2 YouTube Community row(s) need review (manual_approval); preview with python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run.",
-    "Publish runway: 2 manual YouTube Community experiment row(s) need review; preview with python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run.",
+    "Resolve manual distribution gate: 3 approved YouTube Community row(s) need manual posting and public URL logging; open https://www.youtube.com/@lilyroo.artist/community. Use admin/reports/manual-posting-clipboard.md.",
+    "Publish runway: 3 approved manual row(s) are ready to post and log from data/experiment_publish_runway.json.",
     "Refresh manual metrics: 6 worksheet row(s) still need new_value entries (blocked_until_new_values_filled); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values.",
     "Collect experiment results: 18 post-result field(s) need new_value plus evidence_note; use admin/reports/experiment-result-clipboard.md; first priority: measure FP-AUTO-260 on Facebook. Direct preview template: python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run. Direct apply template after review: python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin. Then preview import with python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run after filling data/experiment_result_entry_wide_template.csv.",
-    "Re-check checked-pending store links: 7 music site snapshot(s) still have no public URL; next recommended re-check after 2026-06-23T06:01:28.759862+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 then.",
+    "Re-check checked-pending store links: 7 music site snapshot(s) still have no public URL; next recommended re-check after 2026-06-23T06:04:39.607182+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 then.",
     "Current unlock gate: Approve checked scheduled rows (blocked); 0 ready, 4 blocked/warning; see data/promo_unlock_sequence.json.",
-    "Review handoff preview health: 2 preview-clean, 3 missing input, 1 warning; see data/human_handoff_resolution_preview.json.",
-    "Preview clear approved backlog row: python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
-    "5 approved unpublished posts are past their scheduled time; repair executor/platform blockers or reschedule them."
+    "Review handoff preview health: 3 missing input, 1 warning; see data/human_handoff_resolution_preview.json.",
+    "Refresh automation coverage: latest scheduled run has not covered f46ecdd; dispatch https://github.com/lilyrooartist/lilyrooartist.github.io/actions/workflows/promo-admin-refresh.yml or wait for the next scheduled run.",
+    "Preview approved backlog reschedule: python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24"
   ]
 }

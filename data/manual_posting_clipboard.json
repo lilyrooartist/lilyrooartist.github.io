@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T06:02:36.331191Z",
+  "generated_at": "2026-06-22T06:04:48.429636Z",
   "safe_mode": true,
   "source": {
     "manual_distribution_packet": "data/manual_distribution_packet.json",
@@ -11,7 +11,7 @@
     "status": "ready_to_post",
     "posting_surface": "YouTube Studio Community",
     "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
-    "postable_count": 1,
+    "postable_count": 3,
     "waiting_public_url_count": 3,
     "pending_log_ids": [
       "FP-AUTO-261",
@@ -88,6 +88,104 @@
       "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL",
       "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL --apply --refresh-admin",
       "log_notes": "manual_distribution_id=FP-AUTO-261; source=data/manual_distribution_packet.json",
+      "completion_evidence": [
+        "A real public YouTube Community post URL exists.",
+        "The URL is logged with scripts/log_manual_distribution.py.",
+        "admin/content/Published_Log.csv contains this manual_distribution_id."
+      ]
+    },
+    {
+      "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+      "release": "Twelve Dollars",
+      "platform": "YouTube Community",
+      "status": "ready_for_manual_post",
+      "posting_surface": "YouTube Studio Community",
+      "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
+      "paste_text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+      "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
+      "asset_status": "local_asset_present",
+      "asset_local_path": "assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
+      "destination_links": [
+        "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n"
+      ],
+      "destination_link_audit": [
+        {
+          "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+          "canonical_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+          "status": "verified_local_evidence",
+          "evidence": [
+            {
+              "source": "data/distrokid_release_status.json",
+              "label": "Twelve Dollars YouTube playlist URL",
+              "status": "known_release_playlist"
+            },
+            {
+              "source": "data/youtube_twelve_dollars_playlist.json",
+              "label": "Twelve Dollars verified items: 8",
+              "status": "known_playlist_snapshot"
+            }
+          ],
+          "evidence_count": 2,
+          "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
+        }
+      ],
+      "selected_cta_strength": "",
+      "postable_now": true,
+      "logging_required": true,
+      "public_url": "",
+      "public_url_placeholder": "PUBLIC_URL",
+      "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+      "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
+      "log_notes": "manual_distribution_id=FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY; source=data/manual_distribution_packet.json",
+      "completion_evidence": [
+        "A real public YouTube Community post URL exists.",
+        "The URL is logged with scripts/log_manual_distribution.py.",
+        "admin/content/Published_Log.csv contains this manual_distribution_id."
+      ]
+    },
+    {
+      "id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+      "release": "Analog Myth",
+      "platform": "YouTube Community",
+      "status": "ready_for_manual_post",
+      "posting_surface": "YouTube Studio Community",
+      "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
+      "paste_text": "Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+      "asset_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
+      "asset_status": "local_asset_present",
+      "asset_local_path": "assets/albums/analog-myth/art/03-analog-myth.jpg",
+      "destination_links": [
+        "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0"
+      ],
+      "destination_link_audit": [
+        {
+          "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+          "canonical_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+          "status": "verified_local_evidence",
+          "evidence": [
+            {
+              "source": "data/distrokid_release_status.json",
+              "label": "Analog Myth YouTube playlist URL",
+              "status": "known_release_playlist"
+            },
+            {
+              "source": "data/youtube_analog_myth_playlist.json",
+              "label": "Analog Myth - Lily Roo verified items: 8",
+              "status": "known_playlist_snapshot"
+            }
+          ],
+          "evidence_count": 2,
+          "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
+        }
+      ],
+      "selected_cta_strength": "",
+      "postable_now": true,
+      "logging_required": true,
+      "public_url": "",
+      "public_url_placeholder": "PUBLIC_URL",
+      "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+      "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
+      "log_notes": "manual_distribution_id=FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY; source=data/manual_distribution_packet.json",
       "completion_evidence": [
         "A real public YouTube Community post URL exists.",
         "The URL is logged with scripts/log_manual_distribution.py.",

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T06:02:36.786076Z",
+  "generated_at": "2026-06-22T06:04:48.821987Z",
   "safe_mode": true,
   "summary": {
     "step_count": 5,
@@ -26,11 +26,11 @@
     "Publish runway: 2 manual YouTube Community experiment row(s) need review; preview with python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run.",
     "Refresh manual metrics: 6 worksheet row(s) still need new_value entries (blocked_until_new_values_filled); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values.",
     "Collect experiment results: 18 post-result field(s) need new_value plus evidence_note; use admin/reports/experiment-result-clipboard.md; first priority: measure FP-AUTO-260 on Facebook. Direct preview template: python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run. Direct apply template after review: python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin. Then preview import with python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run after filling data/experiment_result_entry_wide_template.csv.",
-    "Re-check checked-pending store links: 7 music site snapshot(s) still have no public URL; next recommended re-check after 2026-06-23T06:01:28.759862+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 then.",
+    "Re-check checked-pending store links: 7 music site snapshot(s) still have no public URL; next recommended re-check after 2026-06-23T06:04:39.607182+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 then.",
     "Current unlock gate: Approve checked scheduled rows (blocked); 0 ready, 4 blocked/warning; see data/promo_unlock_sequence.json.",
     "Review handoff preview health: 2 preview-clean, 3 missing input, 1 warning; see data/human_handoff_resolution_preview.json.",
-    "Preview clear approved backlog row: python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
-    "5 approved unpublished posts are past their scheduled time; repair executor/platform blockers or reschedule them."
+    "Refresh automation coverage: latest scheduled run has not covered f46ecdd; dispatch https://github.com/lilyrooartist/lilyrooartist.github.io/actions/workflows/promo-admin-refresh.yml or wait for the next scheduled run.",
+    "Preview clear approved backlog row: python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24"
   ],
   "steps": [
     {
@@ -62,9 +62,9 @@
       "id": "unlock-manual-distribution",
       "phase": "Review and post manual YouTube Community rows",
       "owner": "tod",
-      "gate_state": "ready_for_manual_review",
-      "reason": "Blocked by: FP-PLAN-TWELVE-DOLLARS-TIKTOK.",
-      "blockers_resolved": 2,
+      "gate_state": "clear",
+      "reason": "No action is needed for this gate.",
+      "blockers_resolved": 3,
       "blocked_by": [
         "FP-PLAN-TWELVE-DOLLARS-TIKTOK"
       ],
@@ -79,25 +79,16 @@
         "manual-distribution-FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
         "manual-distribution-FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
       ],
-      "input_needed": "public_post_url manual_post_review_and_public_url",
+      "input_needed": "public_post_url",
       "completion_evidence": "data/manual_distribution_packet.json should move approved rows from review_queue toward postable manual distribution, and data/published_log_reconciliation.json should remain gated until public URLs are logged.",
       "guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review.",
       "commands": [
         {
           "step": "preview",
-          "command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
+          "command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL",
           "safe_to_run": true,
           "status": "skipped",
-          "returncodes": [
-            0,
-            0
-          ]
-        },
-        {
-          "step": "apply_after_review",
-          "command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
-          "safe_to_run": false,
-          "requires": "Human review, required input, or external platform repair must be complete first."
+          "returncodes": []
         }
       ],
       "next_after_apply": ""
@@ -147,7 +138,7 @@
       "owner": "external_platform",
       "gate_state": "preview_ready_with_blocker_warning",
       "reason": "Preview ran, but the output still names a known blocker.",
-      "blockers_resolved": 4,
+      "blockers_resolved": 3,
       "blocked_by": [
         "FP-AUTO-264",
         "FP-AUTO-263",

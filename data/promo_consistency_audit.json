@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T06:02:37.004282Z",
+  "generated_at": "2026-06-22T06:04:49.039791Z",
   "safe_mode": true,
   "summary": {
     "check_count": 30,
@@ -31,8 +31,8 @@
       "status": "pass",
       "severity": "ok",
       "detail": "Promo status open action count should mirror the operations packet.",
-      "expected": 17,
-      "actual": 17
+      "expected": 15,
+      "actual": 15
     },
     {
       "name": "approval_counts_match",
@@ -262,15 +262,13 @@
       "detail": "Promo status handoff preview KPI should mirror preview status counts.",
       "expected": {
         "input_missing": 3,
-        "preview_ok": 2,
         "preview_ok_with_warning": 1,
-        "skipped": 4
+        "skipped": 6
       },
       "actual": {
         "input_missing": 3,
-        "preview_ok": 2,
         "preview_ok_with_warning": 1,
-        "skipped": 4
+        "skipped": 6
       }
     },
     {
@@ -281,14 +279,14 @@
       "expected": {
         "worksheet_row_count": 10,
         "preview_count": 10,
-        "executed_preview_count": 6,
-        "skipped_preview_count": 4
+        "executed_preview_count": 4,
+        "skipped_preview_count": 6
       },
       "actual": {
         "worksheet_row_count": 10,
         "preview_count": 10,
-        "executed_preview_count": 6,
-        "skipped_preview_count": 4
+        "executed_preview_count": 4,
+        "skipped_preview_count": 6
       }
     },
     {
@@ -296,20 +294,20 @@
       "status": "pass",
       "severity": "ok",
       "detail": "Promo status next actions should expose the handoff preview health summary.",
-      "expected": "Review handoff preview health: 2 preview-clean, 3 missing input, 1 warning; see data/human_handoff_resolution_preview.json.",
+      "expected": "Review handoff preview health: 3 missing input, 1 warning; see data/human_handoff_resolution_preview.json.",
       "actual": [
-        "Next operational action: Preview clear approved backlog row — python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
+        "Next operational action: Preview reschedule for approved past-due posts — python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
         "First handoff step: Review and post manual distribution rows",
         "30-day growth goal: Publish or approve the next platform-native rows, then refresh manual/public metrics to rank formats by results.",
-        "Resolve manual distribution gate: 2 YouTube Community row(s) need review (manual_approval); preview with python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run.",
+        "Resolve manual distribution gate: 3 approved YouTube Community row(s) need manual posting and public URL logging; open https://www.youtube.com/@lilyroo.artist/community. Use admin/reports/manual-posting-clipboard.md.",
         "Publish runway: 2 manual YouTube Community experiment row(s) need review; preview with python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run.",
         "Refresh manual metrics: 6 worksheet row(s) still need new_value entries (blocked_until_new_values_filled); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values.",
         "Collect experiment results: 18 post-result field(s) need new_value plus evidence_note; use admin/reports/experiment-result-clipboard.md; first priority: measure FP-AUTO-260 on Facebook. Direct preview template: python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run. Direct apply template after review: python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin. Then preview import with python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run after filling data/experiment_result_entry_wide_template.csv.",
-        "Re-check checked-pending store links: 7 music site snapshot(s) still have no public URL; next recommended re-check after 2026-06-23T06:01:28.759862+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 then.",
+        "Re-check checked-pending store links: 7 music site snapshot(s) still have no public URL; next recommended re-check after 2026-06-23T06:04:39.607182+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 then.",
         "Current unlock gate: Approve checked scheduled rows (blocked); 0 ready, 4 blocked/warning; see data/promo_unlock_sequence.json.",
-        "Review handoff preview health: 2 preview-clean, 3 missing input, 1 warning; see data/human_handoff_resolution_preview.json.",
-        "Preview clear approved backlog row: python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
-        "5 approved unpublished posts are past their scheduled time; repair executor/platform blockers or reschedule them."
+        "Review handoff preview health: 3 missing input, 1 warning; see data/human_handoff_resolution_preview.json.",
+        "Refresh automation coverage: latest scheduled run has not covered f46ecdd; dispatch https://github.com/lilyrooartist/lilyrooartist.github.io/actions/workflows/promo-admin-refresh.yml or wait for the next scheduled run.",
+        "Preview approved backlog reschedule: python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24"
       ]
     },
     {
@@ -391,18 +389,18 @@
       "detail": "Promo status next actions should expose the current unlock sequence gate.",
       "expected": "Current unlock gate action includes data/promo_unlock_sequence.json",
       "actual": [
-        "Next operational action: Preview clear approved backlog row — python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
+        "Next operational action: Preview reschedule for approved past-due posts — python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
         "First handoff step: Review and post manual distribution rows",
         "30-day growth goal: Publish or approve the next platform-native rows, then refresh manual/public metrics to rank formats by results.",
-        "Resolve manual distribution gate: 2 YouTube Community row(s) need review (manual_approval); preview with python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run.",
+        "Resolve manual distribution gate: 3 approved YouTube Community row(s) need manual posting and public URL logging; open https://www.youtube.com/@lilyroo.artist/community. Use admin/reports/manual-posting-clipboard.md.",
         "Publish runway: 2 manual YouTube Community experiment row(s) need review; preview with python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run.",
         "Refresh manual metrics: 6 worksheet row(s) still need new_value entries (blocked_until_new_values_filled); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values.",
         "Collect experiment results: 18 post-result field(s) need new_value plus evidence_note; use admin/reports/experiment-result-clipboard.md; first priority: measure FP-AUTO-260 on Facebook. Direct preview template: python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run. Direct apply template after review: python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin. Then preview import with python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run after filling data/experiment_result_entry_wide_template.csv.",
-        "Re-check checked-pending store links: 7 music site snapshot(s) still have no public URL; next recommended re-check after 2026-06-23T06:01:28.759862+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 then.",
+        "Re-check checked-pending store links: 7 music site snapshot(s) still have no public URL; next recommended re-check after 2026-06-23T06:04:39.607182+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 then.",
         "Current unlock gate: Approve checked scheduled rows (blocked); 0 ready, 4 blocked/warning; see data/promo_unlock_sequence.json.",
-        "Review handoff preview health: 2 preview-clean, 3 missing input, 1 warning; see data/human_handoff_resolution_preview.json.",
-        "Preview clear approved backlog row: python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
-        "5 approved unpublished posts are past their scheduled time; repair executor/platform blockers or reschedule them."
+        "Review handoff preview health: 3 missing input, 1 warning; see data/human_handoff_resolution_preview.json.",
+        "Refresh automation coverage: latest scheduled run has not covered f46ecdd; dispatch https://github.com/lilyrooartist/lilyrooartist.github.io/actions/workflows/promo-admin-refresh.yml or wait for the next scheduled run.",
+        "Preview approved backlog reschedule: python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24"
       ]
     },
     {

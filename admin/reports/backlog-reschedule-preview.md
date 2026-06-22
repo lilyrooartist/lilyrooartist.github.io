@@ -1,11 +1,11 @@
 # Backlog Reschedule Preview - Lily Roo
 
-Generated: 2026-06-22T14:02:35.687914+08:00
+Generated: 2026-06-22T14:04:47.810888+08:00
 
 ## Summary
-- Approved backlog rows: **4**
+- Approved backlog rows: **3**
 - Rows with known blockers: **3**
-- Clear to apply without override: **1**
+- Clear to apply without override: **0**
 - Manual handoff rows excluded from auto-reschedule: **1**
 - Start at: **2026-06-23T10:00:00+08:00**
 - Spacing hours: **24**
@@ -19,24 +19,21 @@ Generated: 2026-06-22T14:02:35.687914+08:00
   - Reason: Manual/community row is ready for manual posting and public URL logging; it is excluded from auto-reschedule commands.
 
 ## Proposed Reschedule
-- **Instagram - I Learned It All in Fifteen Seconds** (`FP-AUTO-258`)
-  - Current: `2026-06-05T15:35:00-04:00`
-  - Proposed: `2026-06-23T10:00:00+08:00`
 - **TikTok - I Learned It All in Fifteen Seconds** (`FP-AUTO-264`)
   - Current: `2026-06-09T21:25:00-04:00`
-  - Proposed: `2026-06-24T10:00:00+08:00`
+  - Proposed: `2026-06-23T10:00:00+08:00`
   - Blocker: tiktok_credentials_missing
   - Clearance: Add local TikTok OAuth credentials, then push worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.
   - Clearance: Confirm TikTok public posting approval before treating auto-posting as ready.
   - Clearance: Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair.
 - **Instagram - I Learned It All in Fifteen Seconds** (`FP-AUTO-263`)
   - Current: `2026-06-21T10:00:00+09:00`
-  - Proposed: `2026-06-25T10:00:00+08:00`
+  - Proposed: `2026-06-24T10:00:00+08:00`
   - Blocker: Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.
   - Clearance: Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply.
 - **Instagram - Twelve Dollars** (`FP-PLAN-TWELVE-DOLLARS-INSTAGRAM`)
   - Current: `2026-06-21T14:05:00-04:00`
-  - Proposed: `2026-06-26T10:00:00+08:00`
+  - Proposed: `2026-06-25T10:00:00+08:00`
   - Blocker: Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.
   - Clearance: Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply.
 
@@ -44,17 +41,16 @@ Generated: 2026-06-22T14:02:35.687914+08:00
 - Status: **blocked_until_clearance_steps_complete**
 - Blocked IDs: `FP-AUTO-264, FP-AUTO-263, FP-PLAN-TWELVE-DOLLARS-INSTAGRAM`
 - Safe apply command: `blocked until clearance steps complete`
-- Partial clear apply available: **True**
-- Partial clear apply count: **1**
+- Partial clear apply available: **False**
+- Partial clear apply count: **0**
 - Apply gate: **blocked_until_clearance_steps_complete**
 
 ## Partial Clear Apply
-- Status: **ready**
-- Clear IDs: `FP-AUTO-258`
+- Status: **empty**
+- Clear IDs: `none`
 - Blocked IDs retained: `FP-AUTO-264, FP-AUTO-263, FP-PLAN-TWELVE-DOLLARS-INSTAGRAM`
-- Recommended preview: `python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24`
-- Recommended apply: `python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin`
-- Preview clear row: `python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24`
+- Recommended preview: `none`
+- Recommended apply: `none`
 
 ### Operator Checklist
 - Preview each clear row before applying it.
@@ -86,8 +82,8 @@ Generated: 2026-06-22T14:02:35.687914+08:00
 
 ## Commands
 - Preview: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24`
-- Partial clear preview: `python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24`
-- Partial clear apply: `python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin`
+- Partial clear preview: `none`
+- Partial clear apply: `none`
 - Safe apply: none until blockers clear
 - Blocked apply command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin`
 - Deliberate override command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin`

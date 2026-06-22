@@ -1,6 +1,6 @@
 # Experiment Result Clipboard - Lily Roo
 
-Generated: 2026-06-22T06:02:36.951423Z
+Generated: 2026-06-22T06:04:48.987968Z
 
 ## Summary
 - Status: **needs_values**
@@ -61,8 +61,8 @@ Generated: 2026-06-22T06:02:36.951423Z
   - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-262 --source-row 17 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
   - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-262 --source-row 17 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
 - **Post and log public URL** `FP-AUTO-261` YouTube Community / YouTube Community archive/playlist CTA: Postable now in the Manual Posting Clipboard; publish it and log the public URL so metrics can start. 0 logged post(s), 3 missing URL(s) in this format.
-- **Log public URL** `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY` YouTube Community / YouTube Community archive/playlist CTA: Cannot collect metrics until the public URL is logged. 0 logged post(s), 3 missing URL(s) in this format.
-- **Log public URL** `FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY` YouTube Community / YouTube Community archive/playlist CTA: Cannot collect metrics until the public URL is logged. 0 logged post(s), 3 missing URL(s) in this format.
+- **Post and log public URL** `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY` YouTube Community / YouTube Community archive/playlist CTA: Postable now in the Manual Posting Clipboard; publish it and log the public URL so metrics can start. 0 logged post(s), 3 missing URL(s) in this format.
+- **Post and log public URL** `FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY` YouTube Community / YouTube Community archive/playlist CTA: Postable now in the Manual Posting Clipboard; publish it and log the public URL so metrics can start. 0 logged post(s), 3 missing URL(s) in this format.
 - **Clear platform blocker** `FP-AUTO-258` Instagram / Release-art image + story hook: Platform work is blocked; clear the platform repair gate before URL logging can produce metrics. 3 logged post(s), 1 missing URL(s) in this format.
 - **Clear platform blocker** `FP-AUTO-264` TikTok / Short video clip + platform-native CTA: Platform work is blocked; clear the platform repair gate before URL logging can produce metrics. 0 logged post(s), 2 missing URL(s) in this format.
 

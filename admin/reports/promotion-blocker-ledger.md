@@ -1,6 +1,6 @@
 # Promotion Blocker Ledger - Lily Roo
 
-Generated: 2026-06-22T06:02:36.533369Z
+Generated: 2026-06-22T06:04:48.625045Z
 
 ## Summary
 - Open blockers: **11**
@@ -14,12 +14,10 @@ Generated: 2026-06-22T06:02:36.533369Z
   - Owner: `tod`; projected blockers resolved: **0**
   - Unlocks: Instagram executor row can become publish-eligible after approval.; One scheduled YouTube Community row can move into manual distribution after approval.
   - Blocked by: FP-AUTO-259
-- **Review and post manual YouTube Community rows** (`ready_for_manual_review`)
-  - Owner: `tod`; projected blockers resolved: **2**
+- **Review and post manual YouTube Community rows** (`clear`)
+  - Owner: `tod`; projected blockers resolved: **3**
   - Unlocks: Manual YouTube Community promotion can publish without waiting for broken auto executors.; Published_Log.csv can be updated after public URLs exist.
   - Blocked by: FP-PLAN-TWELVE-DOLLARS-TIKTOK
-  - Preview/check: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run`
-  - Apply after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin`
   - Guardrail: Manual-only approvals do not auto-post; posting and public URL logging remain separate after review.
 - **Repair TikTok executor** (`blocked`)
   - Owner: `tod`; projected blockers resolved: **1**
@@ -27,7 +25,7 @@ Generated: 2026-06-22T06:02:36.533369Z
   - Blocked by: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN
   - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
 - **Reschedule approved past-due backlog** (`blocked_until_clearance_steps_complete`)
-  - Owner: `external_platform`; projected blockers resolved: **4**
+  - Owner: `external_platform`; projected blockers resolved: **3**
   - Unlocks: Approved past-due queue rows get a fresh schedule after executor blockers clear.
   - Blocked by: FP-AUTO-264, FP-AUTO-263, FP-PLAN-TWELVE-DOLLARS-INSTAGRAM
   - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24`
@@ -58,7 +56,7 @@ Generated: 2026-06-22T06:02:36.533369Z
   - Impact: apply blocked by: local_secret_source_missing:TIKTOK_CLIENT_KEY,TIKTOK_CLIENT_SECRET,TIKTOK_REFRESH_TOKEN, public_posting_approval_not_confirmed
 - **[high] Reschedule approved past-due backlog** (`backlog-reschedule`)
   - Owner: `external_platform`; status: `blocked`; category: `backlog_reschedule`
-  - Evidence: 4 approved backlog row(s); 3 still have executor blockers.
+  - Evidence: 3 approved backlog row(s); 3 still have executor blockers.
   - Next step: Preview a new schedule. Safe apply becomes available after known executor blockers clear.
   - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24`
   - Guardrail: Normal apply is hidden while rows have known executor blockers.
@@ -92,21 +90,21 @@ Generated: 2026-06-22T06:02:36.533369Z
   - Apply/log after review: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL --apply --refresh-admin`
   - Guardrail: Manual posting happens outside this repo; only log the URL after the post is live.
 - **[medium] Manually post YouTube Community copy** (`manual-FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY`)
-  - Owner: `tod`; status: `waiting_for_review`; category: `manual_distribution`
+  - Owner: `tod`; status: `ready_for_manual_post`; category: `manual_distribution`
   - Evidence: FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY is packaged for manual distribution.
-  - Next step: Review and approve the copy first, then post manually and log the public URL.
+  - Next step: Post manually, then log the public URL so admin status can stop treating the row as pending.
   - Open: https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg
-  - Preview/check: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run`
-  - Apply/log after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin`
-  - Guardrail: Manual posting happens outside this repo; only log the URL after the post is live. URL logging command after posting: python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin
+  - Preview/check: `python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL`
+  - Apply/log after review: `python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin`
+  - Guardrail: Manual posting happens outside this repo; only log the URL after the post is live.
 - **[medium] Manually post YouTube Community copy** (`manual-FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY`)
-  - Owner: `tod`; status: `waiting_for_review`; category: `manual_distribution`
+  - Owner: `tod`; status: `ready_for_manual_post`; category: `manual_distribution`
   - Evidence: FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY is packaged for manual distribution.
-  - Next step: Review and approve the copy first, then post manually and log the public URL.
+  - Next step: Post manually, then log the public URL so admin status can stop treating the row as pending.
   - Open: https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg
-  - Preview/check: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --dry-run`
-  - Apply/log after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin`
-  - Guardrail: Manual posting happens outside this repo; only log the URL after the post is live. URL logging command after posting: python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin
+  - Preview/check: `python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL`
+  - Apply/log after review: `python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin`
+  - Guardrail: Manual posting happens outside this repo; only log the URL after the post is live.
 - **[low] Fill priority 2 metrics: Recent discovery and traffic** (`metrics-priority-2`)
   - Owner: `tod`; status: `needs_values`; category: `manual_metrics`
   - Evidence: 4 pending field(s): facebook.reach_7d, instagram.profile_visits_7d, tiktok.profile_views_7d, x.impressions_7d.

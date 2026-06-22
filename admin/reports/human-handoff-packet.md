@@ -1,6 +1,6 @@
 # Human Handoff Packet - Lily Roo
 
-Generated: 2026-06-22T06:02:36.562970Z
+Generated: 2026-06-22T06:04:48.654081Z
 
 ## Summary
 - Open handoff tasks: **10**
@@ -25,7 +25,6 @@ Generated: 2026-06-22T06:02:36.562970Z
   - Guardrail: Human review is still required; blocked review IDs stay excluded from the checked batch.
 - **Review and post manual distribution rows** (`ready_for_manual_post`)
   - Owner: `tod`; tasks: **3**; blockers resolved: **3**
-  - Ready IDs: `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY, FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY`
   - Blocked IDs: `FP-PLAN-TWELVE-DOLLARS-TIKTOK`
   - Sequence verify: `python3 scripts/refresh_promo_admin.py`
   - Completion evidence: data/manual_distribution_packet.json should move approved rows from review_queue toward postable manual distribution, and data/published_log_reconciliation.json should remain gated until public URLs are logged.
@@ -56,7 +55,7 @@ Generated: 2026-06-22T06:02:36.562970Z
   - Next after apply: Rebuild the weekly report and confirm lilyroo.com/admin shows fewer pending manual metric fields.
   - Guardrail: Import only collected numeric values; leave unknown cells blank.
 - **Reschedule approved backlog after blockers clear** (`blocked`)
-  - Owner: `external_platform`; tasks: **1**; blockers resolved: **4**
+  - Owner: `external_platform`; tasks: **1**; blockers resolved: **3**
   - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24`
   - Sequence preview: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24`
   - Sequence verify: `python3 scripts/refresh_promo_admin.py`
@@ -99,17 +98,15 @@ Generated: 2026-06-22T06:02:36.562970Z
   - asset: https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg
   - Guardrail: Do not log a manual post until a real public URL exists.
 - **Post Analog Myth to YouTube Community** (`manual-distribution-FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY`)
-  - Phase: `Manual distribution`; owner: `tod`; status: `waiting_for_review`; urgency: `medium`
-  - Detail: Review the packaged copy, approve if appropriate, post manually, then log the public URL.
-  - Preview/check: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --dry-run`
-  - Apply after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin`
+  - Phase: `Manual distribution`; owner: `tod`; status: `ready_for_manual_post`; urgency: `medium`
+  - Detail: Post manually in YouTube Studio Community, then log the real public URL before marking distribution complete.
+  - Preview/check: `python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL`
   - asset: https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg
   - Guardrail: Do not log a manual post until a real public URL exists.
 - **Post Twelve Dollars to YouTube Community** (`manual-distribution-FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY`)
-  - Phase: `Manual distribution`; owner: `tod`; status: `waiting_for_review`; urgency: `medium`
-  - Detail: Review the packaged copy, approve if appropriate, post manually, then log the public URL.
-  - Preview/check: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run`
-  - Apply after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin`
+  - Phase: `Manual distribution`; owner: `tod`; status: `ready_for_manual_post`; urgency: `medium`
+  - Detail: Post manually in YouTube Studio Community, then log the real public URL before marking distribution complete.
+  - Preview/check: `python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL`
   - asset: https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg
   - Guardrail: Do not log a manual post until a real public URL exists.
 - **Fill priority 2 metrics: Recent discovery and traffic** (`manual-metrics-priority-2`)

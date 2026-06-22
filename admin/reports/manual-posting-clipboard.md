@@ -1,12 +1,12 @@
 # Manual Posting Clipboard - Lily Roo
 
-Generated: 2026-06-22T06:02:36.331191Z
+Generated: 2026-06-22T06:04:48.429636Z
 
 ## Summary
 - Status: **ready_to_post**
 - Posting surface: **YouTube Studio Community**
 - Public Community URL: https://www.youtube.com/@lilyroo.artist/community
-- Postable cards: **1**
+- Postable cards: **3**
 - Waiting public URLs: **3**
 - URL worksheet: `data/manual_distribution_url_template.csv`
 - Batch log preview: `python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv`
@@ -40,6 +40,44 @@ Stream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: htt
 - Log preview after posting: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL`
 - Log apply after posting: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL --apply --refresh-admin`
 - Log notes: `manual_distribution_id=FP-AUTO-261; source=data/manual_distribution_packet.json`
+### 2. Twelve Dollars - YouTube Community
+- ID: `FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY`
+- Status: `ready_for_manual_post`
+- Open: https://www.youtube.com/@lilyroo.artist/community
+- Paste text:
+```text
+Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.
+
+Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
+```
+- Asset: https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg
+- Asset evidence: `local_asset_present` assets/albums/twelve-dollars/art/04-twelve-dollars.jpg
+- Destination links: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
+- Destination evidence:
+  - `verified_local_evidence` https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n: Twelve Dollars YouTube playlist URL (data/distrokid_release_status.json); Twelve Dollars verified items: 8 (data/youtube_twelve_dollars_playlist.json)
+- Public URL slot: `PUBLIC_URL`
+- Log preview after posting: `python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL`
+- Log apply after posting: `python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin`
+- Log notes: `manual_distribution_id=FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY; source=data/manual_distribution_packet.json`
+### 3. Analog Myth - YouTube Community
+- ID: `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY`
+- Status: `ready_for_manual_post`
+- Open: https://www.youtube.com/@lilyroo.artist/community
+- Paste text:
+```text
+Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.
+
+Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0
+```
+- Asset: https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg
+- Asset evidence: `local_asset_present` assets/albums/analog-myth/art/03-analog-myth.jpg
+- Destination links: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0
+- Destination evidence:
+  - `verified_local_evidence` https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0: Analog Myth YouTube playlist URL (data/distrokid_release_status.json); Analog Myth - Lily Roo verified items: 8 (data/youtube_analog_myth_playlist.json)
+- Public URL slot: `PUBLIC_URL`
+- Log preview after posting: `python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL`
+- Log apply after posting: `python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin`
+- Log notes: `manual_distribution_id=FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY; source=data/manual_distribution_packet.json`
 
 ## Operator Steps
 - Open the YouTube Community surface.

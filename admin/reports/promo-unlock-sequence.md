@@ -1,6 +1,6 @@
 # Promo Unlock Sequence - Lily Roo
 
-Generated: 2026-06-22T06:02:36.786076Z
+Generated: 2026-06-22T06:04:48.821987Z
 
 ## Summary
 - Steps: **5**
@@ -16,11 +16,10 @@ Generated: 2026-06-22T06:02:36.786076Z
    - Reason: Blocked by: FP-AUTO-259.
    - Unlocks: Instagram executor row can become publish-eligible after approval.; One scheduled YouTube Community row can move into manual distribution after approval.
 2. **Review and post manual YouTube Community rows** - `unlock-manual-distribution`
-   - State: `ready_for_manual_review`; owner: `tod`
-   - Reason: Blocked by: FP-PLAN-TWELVE-DOLLARS-TIKTOK.
+   - State: `clear`; owner: `tod`
+   - Reason: No action is needed for this gate.
    - Unlocks: Manual YouTube Community promotion can publish without waiting for broken auto executors.; Published_Log.csv can be updated after public URLs exist.
-   - preview (preview-safe): `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run`
-   - apply_after_review (after-review only): `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin`
+   - preview (preview-safe): `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL`
    - Completion evidence: data/manual_distribution_packet.json should move approved rows from review_queue toward postable manual distribution, and data/published_log_reconciliation.json should remain gated until public URLs are logged.
    - Guardrail: Manual-only approvals do not auto-post; posting and public URL logging remain separate after review.
 3. **Repair TikTok executor** - `unlock-tiktok-platform-repair`

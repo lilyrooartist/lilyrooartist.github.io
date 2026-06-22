@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T06:02:36.562970Z",
+  "generated_at": "2026-06-22T06:04:48.654081Z",
   "safe_mode": true,
   "source": {
     "promotion_blocker_ledger": "data/promotion_blocker_ledger.json",
@@ -47,8 +47,7 @@
         "blocked": 5,
         "blocked_by_review_checks": 1,
         "needs_values": 2,
-        "ready_for_manual_post": 1,
-        "waiting_for_review": 2
+        "ready_for_manual_post": 3
       },
       "next_resolution_projection": {
         "kind": "checked_scheduled_approval_batch",
@@ -88,9 +87,9 @@
         {
           "id": "unlock-manual-distribution",
           "phase": "Review and post manual YouTube Community rows",
-          "status": "ready_for_manual_review",
+          "status": "clear",
           "owner": "tod",
-          "blockers_resolved": 2,
+          "blockers_resolved": 3,
           "unlocks": [
             "Manual YouTube Community promotion can publish without waiting for broken auto executors.",
             "Published_Log.csv can be updated after public URLs exist."
@@ -98,8 +97,8 @@
           "blocked_by": [
             "FP-PLAN-TWELVE-DOLLARS-TIKTOK"
           ],
-          "preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
-          "apply_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+          "preview_command": "",
+          "apply_command": "",
           "source_path": "data/manual_distribution_packet.json",
           "command_source_path": "data/approval_runway.json",
           "guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review."
@@ -128,7 +127,7 @@
           "phase": "Reschedule approved past-due backlog",
           "status": "blocked_until_clearance_steps_complete",
           "owner": "external_platform",
-          "blockers_resolved": 4,
+          "blockers_resolved": 3,
           "unlocks": [
             "Approved past-due queue rows get a fresh schedule after executor blockers clear."
           ],
@@ -191,15 +190,14 @@
         "manual-distribution-FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
       ],
       "blockers_resolved": 3,
-      "ready_ids": [
-        "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-        "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
-      ],
+      "ready_ids": [],
       "blocked_ids": [
         "FP-PLAN-TWELVE-DOLLARS-TIKTOK"
       ],
       "postable_ids": [
-        "FP-AUTO-261"
+        "FP-AUTO-261",
+        "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+        "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
       ],
       "posting_packets": [
         {
@@ -211,6 +209,28 @@
           "postable_now": true,
           "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL",
           "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL --apply --refresh-admin",
+          "requires_public_url": true
+        },
+        {
+          "post_id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+          "release": "Analog Myth",
+          "paste_text": "Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+          "asset_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
+          "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
+          "postable_now": true,
+          "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+          "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
+          "requires_public_url": true
+        },
+        {
+          "post_id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+          "release": "Twelve Dollars",
+          "paste_text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+          "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
+          "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
+          "postable_now": true,
+          "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+          "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
           "requires_public_url": true
         }
       ],
@@ -271,14 +291,14 @@
         "task_ids": [
           "backlog-reschedule"
         ],
-        "blockers_resolved": 4,
+        "blockers_resolved": 3,
         "backlog_clearance_manifest": {
           "status": "blocked_until_clearance_steps_complete",
-          "approved_backlog_count": 4,
+          "approved_backlog_count": 3,
           "blocked_backlog_count": 3,
-          "clear_to_apply_count": 1,
-          "partial_clear_apply_available": true,
-          "partial_clear_apply_count": 1,
+          "clear_to_apply_count": 0,
+          "partial_clear_apply_available": false,
+          "partial_clear_apply_count": 0,
           "blocked_ids": [
             "FP-AUTO-264",
             "FP-AUTO-263",
@@ -303,7 +323,7 @@
               "song": "I Learned It All in Fifteen Seconds",
               "blocker_kind": "tiktok_credentials_missing",
               "blocker_reason": "tiktok_credentials_missing",
-              "proposed_scheduled_at": "2026-06-24T10:00:00+08:00",
+              "proposed_scheduled_at": "2026-06-23T10:00:00+08:00",
               "clearance_steps": [
                 "Add local TikTok OAuth credentials, then push worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
                 "Confirm TikTok public posting approval before treating auto-posting as ready.",
@@ -316,7 +336,7 @@
               "song": "I Learned It All in Fifteen Seconds",
               "blocker_kind": "max_attempts_exceeded",
               "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
-              "proposed_scheduled_at": "2026-06-25T10:00:00+08:00",
+              "proposed_scheduled_at": "2026-06-24T10:00:00+08:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]
@@ -327,7 +347,7 @@
               "song": "Twelve Dollars",
               "blocker_kind": "max_attempts_exceeded",
               "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
-              "proposed_scheduled_at": "2026-06-26T10:00:00+08:00",
+              "proposed_scheduled_at": "2026-06-25T10:00:00+08:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]
@@ -427,15 +447,14 @@
           "manual-distribution-FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
         ],
         "blockers_resolved": 3,
-        "ready_ids": [
-          "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-          "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
-        ],
+        "ready_ids": [],
         "blocked_ids": [
           "FP-PLAN-TWELVE-DOLLARS-TIKTOK"
         ],
         "postable_ids": [
-          "FP-AUTO-261"
+          "FP-AUTO-261",
+          "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+          "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
         ],
         "posting_packets": [
           {
@@ -447,6 +466,28 @@
             "postable_now": true,
             "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL",
             "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL --apply --refresh-admin",
+            "requires_public_url": true
+          },
+          {
+            "post_id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+            "release": "Analog Myth",
+            "paste_text": "Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+            "asset_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
+            "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
+            "postable_now": true,
+            "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+            "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
+            "requires_public_url": true
+          },
+          {
+            "post_id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+            "release": "Twelve Dollars",
+            "paste_text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+            "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
+            "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
+            "postable_now": true,
+            "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+            "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
             "requires_public_url": true
           }
         ],
@@ -656,14 +697,14 @@
         "task_ids": [
           "backlog-reschedule"
         ],
-        "blockers_resolved": 4,
+        "blockers_resolved": 3,
         "backlog_clearance_manifest": {
           "status": "blocked_until_clearance_steps_complete",
-          "approved_backlog_count": 4,
+          "approved_backlog_count": 3,
           "blocked_backlog_count": 3,
-          "clear_to_apply_count": 1,
-          "partial_clear_apply_available": true,
-          "partial_clear_apply_count": 1,
+          "clear_to_apply_count": 0,
+          "partial_clear_apply_available": false,
+          "partial_clear_apply_count": 0,
           "blocked_ids": [
             "FP-AUTO-264",
             "FP-AUTO-263",
@@ -688,7 +729,7 @@
               "song": "I Learned It All in Fifteen Seconds",
               "blocker_kind": "tiktok_credentials_missing",
               "blocker_reason": "tiktok_credentials_missing",
-              "proposed_scheduled_at": "2026-06-24T10:00:00+08:00",
+              "proposed_scheduled_at": "2026-06-23T10:00:00+08:00",
               "clearance_steps": [
                 "Add local TikTok OAuth credentials, then push worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
                 "Confirm TikTok public posting approval before treating auto-posting as ready.",
@@ -701,7 +742,7 @@
               "song": "I Learned It All in Fifteen Seconds",
               "blocker_kind": "max_attempts_exceeded",
               "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
-              "proposed_scheduled_at": "2026-06-25T10:00:00+08:00",
+              "proposed_scheduled_at": "2026-06-24T10:00:00+08:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]
@@ -712,7 +753,7 @@
               "song": "Twelve Dollars",
               "blocker_kind": "max_attempts_exceeded",
               "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
-              "proposed_scheduled_at": "2026-06-26T10:00:00+08:00",
+              "proposed_scheduled_at": "2026-06-25T10:00:00+08:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]
@@ -903,17 +944,17 @@
       "apply_command": "",
       "source_path": "data/backlog_reschedule_preview.json",
       "impact": {
-        "approved_backlog_count": 4,
+        "approved_backlog_count": 3,
         "blocked_backlog_count": 3,
         "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
         "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
         "backlog_clearance_manifest": {
           "status": "blocked_until_clearance_steps_complete",
-          "approved_backlog_count": 4,
+          "approved_backlog_count": 3,
           "blocked_backlog_count": 3,
-          "clear_to_apply_count": 1,
-          "partial_clear_apply_available": true,
-          "partial_clear_apply_count": 1,
+          "clear_to_apply_count": 0,
+          "partial_clear_apply_available": false,
+          "partial_clear_apply_count": 0,
           "blocked_ids": [
             "FP-AUTO-264",
             "FP-AUTO-263",
@@ -938,7 +979,7 @@
               "song": "I Learned It All in Fifteen Seconds",
               "blocker_kind": "tiktok_credentials_missing",
               "blocker_reason": "tiktok_credentials_missing",
-              "proposed_scheduled_at": "2026-06-24T10:00:00+08:00",
+              "proposed_scheduled_at": "2026-06-23T10:00:00+08:00",
               "clearance_steps": [
                 "Add local TikTok OAuth credentials, then push worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
                 "Confirm TikTok public posting approval before treating auto-posting as ready.",
@@ -951,7 +992,7 @@
               "song": "I Learned It All in Fifteen Seconds",
               "blocker_kind": "max_attempts_exceeded",
               "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
-              "proposed_scheduled_at": "2026-06-25T10:00:00+08:00",
+              "proposed_scheduled_at": "2026-06-24T10:00:00+08:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]
@@ -962,7 +1003,7 @@
               "song": "Twelve Dollars",
               "blocker_kind": "max_attempts_exceeded",
               "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
-              "proposed_scheduled_at": "2026-06-26T10:00:00+08:00",
+              "proposed_scheduled_at": "2026-06-25T10:00:00+08:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]
@@ -1047,10 +1088,10 @@
       "phase": "Manual distribution",
       "owner": "tod",
       "urgency": "medium",
-      "status": "waiting_for_review",
-      "detail": "Review the packaged copy, approve if appropriate, post manually, then log the public URL.",
-      "preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --dry-run",
-      "apply_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin",
+      "status": "ready_for_manual_post",
+      "detail": "Post manually in YouTube Studio Community, then log the real public URL before marking distribution complete.",
+      "preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+      "apply_command": "",
       "source_path": "data/manual_distribution_packet.json",
       "impact": {
         "post_id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
@@ -1058,7 +1099,7 @@
         "paste_text": "Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
         "asset_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
         "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
-        "postable_now": false,
+        "postable_now": true,
         "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL",
         "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
         "requires_public_url": true
@@ -1077,10 +1118,10 @@
       "phase": "Manual distribution",
       "owner": "tod",
       "urgency": "medium",
-      "status": "waiting_for_review",
-      "detail": "Review the packaged copy, approve if appropriate, post manually, then log the public URL.",
-      "preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
-      "apply_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+      "status": "ready_for_manual_post",
+      "detail": "Post manually in YouTube Studio Community, then log the real public URL before marking distribution complete.",
+      "preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+      "apply_command": "",
       "source_path": "data/manual_distribution_packet.json",
       "impact": {
         "post_id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
@@ -1088,7 +1129,7 @@
         "paste_text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
         "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
         "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
-        "postable_now": false,
+        "postable_now": true,
         "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL",
         "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
         "requires_public_url": true

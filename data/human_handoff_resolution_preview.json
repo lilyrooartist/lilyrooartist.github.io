@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T06:02:36.758228Z",
+  "generated_at": "2026-06-22T06:04:48.794982Z",
   "safe_mode": true,
   "source": {
     "resolution_worksheet": "data/human_handoff_resolution_worksheet.csv",
@@ -8,13 +8,12 @@
   "summary": {
     "worksheet_row_count": 10,
     "preview_count": 10,
-    "executed_preview_count": 6,
-    "skipped_preview_count": 4,
+    "executed_preview_count": 4,
+    "skipped_preview_count": 6,
     "status_counts": {
       "input_missing": 3,
-      "preview_ok": 2,
       "preview_ok_with_warning": 1,
-      "skipped": 4
+      "skipped": 6
     },
     "phase_counts": {
       "Backlog recovery": 1,
@@ -92,7 +91,7 @@
       "safety_reason": "reschedule_preview_command",
       "returncode": 0,
       "preview_status": "preview_ok_with_warning",
-      "output_excerpt": "Rows selected: 4\n- FP-AUTO-258 Instagram I Learned It All in Fifteen Seconds: 2026-06-05T15:35:00-04:00 -> 2026-06-23T10:00:00+08:00\n- FP-AUTO-264 TikTok I Learned It All in Fifteen Seconds: 2026-06-09T21:25:00-04:00 -> 2026-06-24T10:00:00+08:00\n  WARNING: known blocker: tiktok_credentials_missing\n- FP-AUTO-263 Instagram I Learned It All in Fifteen Seconds: 2026-06-21T10:00:00+09:00 -> 2026-06-25T10:00:00+08:00\n  WARNING: known blocker: Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.\n- FP-PLAN-TWELVE-DOLLARS-INSTAGRAM Instagram Twelve Dollars: 2026-06-21T14:05:00-04:00 -> 2026-06-26T10:00:00+08:00\n  WARNING: known blocker: Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.\nDry run only. Re-run with --apply to write the schedule.",
+      "output_excerpt": "Rows selected: 3\n- FP-AUTO-264 TikTok I Learned It All in Fifteen Seconds: 2026-06-09T21:25:00-04:00 -> 2026-06-23T10:00:00+08:00\n  WARNING: known blocker: tiktok_credentials_missing\n- FP-AUTO-263 Instagram I Learned It All in Fifteen Seconds: 2026-06-21T10:00:00+09:00 -> 2026-06-24T10:00:00+08:00\n  WARNING: known blocker: Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.\n- FP-PLAN-TWELVE-DOLLARS-INSTAGRAM Instagram Twelve Dollars: 2026-06-21T14:05:00-04:00 -> 2026-06-25T10:00:00+08:00\n  WARNING: known blocker: Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.\nDry run only. Re-run with --apply to write the schedule.",
       "completion_evidence": "data/backlog_reschedule_preview.json should show normal_apply_gate clear before any non-override apply command is exposed.",
       "guardrail": "Normal apply stays hidden until known executor/platform blockers clear."
     },
@@ -113,28 +112,28 @@
     {
       "task_id": "manual-distribution-FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
       "phase": "Manual distribution",
-      "status": "waiting_for_review",
-      "input_needed": "manual_post_review_and_public_url",
-      "command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --dry-run",
-      "safety": "safe_preview",
-      "safety_reason": "dry_run_command",
-      "returncode": 0,
-      "preview_status": "preview_ok",
-      "output_excerpt": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY: approved 'no' -> 'yes'\nDry run only; no changes written to data/promo_queue_plan.json",
+      "status": "ready_for_manual_post",
+      "input_needed": "public_post_url",
+      "command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+      "safety": "skipped",
+      "safety_reason": "placeholder_public_url",
+      "returncode": null,
+      "preview_status": "skipped",
+      "output_excerpt": "",
       "completion_evidence": "data/manual_distribution_packet.json should move approved rows from review_queue toward postable manual distribution, and data/published_log_reconciliation.json should remain gated until public URLs are logged.",
       "guardrail": "Do not log a manual post until a real public URL exists."
     },
     {
       "task_id": "manual-distribution-FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
       "phase": "Manual distribution",
-      "status": "waiting_for_review",
-      "input_needed": "manual_post_review_and_public_url",
-      "command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
-      "safety": "safe_preview",
-      "safety_reason": "dry_run_command",
-      "returncode": 0,
-      "preview_status": "preview_ok",
-      "output_excerpt": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY: approved 'no' -> 'yes'\nDry run only; no changes written to data/promo_queue_plan.json",
+      "status": "ready_for_manual_post",
+      "input_needed": "public_post_url",
+      "command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+      "safety": "skipped",
+      "safety_reason": "placeholder_public_url",
+      "returncode": null,
+      "preview_status": "skipped",
+      "output_excerpt": "",
       "completion_evidence": "data/manual_distribution_packet.json should move approved rows from review_queue toward postable manual distribution, and data/published_log_reconciliation.json should remain gated until public URLs are logged.",
       "guardrail": "Do not log a manual post until a real public URL exists."
     },

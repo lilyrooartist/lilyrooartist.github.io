@@ -1,34 +1,25 @@
 # Experiment Publish Runway - Lily Roo
 
-Generated: 2026-06-22T06:02:36.977989Z
+Generated: 2026-06-22T06:04:49.014252Z
 
 ## Summary
-- Manual rows ready for review: **2**
-- Postable now: **1**
+- Manual rows ready for review: **0**
+- Postable now: **3**
 - Public URLs needed: **3**
 - Pending result fields: **18**
 - Winner-ready formats: **0 / 3**
 - Blocked platform rows: **4**
 
 ## Next Publish Action
-- Review and approve manual YouTube Community experiment rows.
+- Log public URLs and collect experiment results.
 
 ## Manual Review Rows
-- `FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY` Twelve Dollars on YouTube Community
-  - Preview: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run`
-  - Apply after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin`
-- `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY` Analog Myth on YouTube Community
-  - Preview: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --dry-run`
-  - Apply after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin`
+- None.
 
 ## Runway Steps
-- **review_manual_youtube_community** - `ready_for_review`
-  - Preview: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run`
-  - Apply after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin`
+- **review_manual_youtube_community** - `clear`
   - Guardrail: Manual-only approvals do not auto-post; posting and public URL logging remain separate.
-- **queue_approved_manual_rows** - `ready_after_approval`
-  - Preview: `python3 scripts/apply_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY `
-  - Apply after review: `python3 scripts/apply_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --apply --refresh-admin`
+- **queue_approved_manual_rows** - `waiting_for_approval`
   - Guardrail: Apply only after the matching promo plan rows have approved=yes.
 - **post_manual_youtube_community** - `postable_now`
   - Guardrail: Post manually using the reviewed copy and local asset evidence; do not log placeholder URLs.

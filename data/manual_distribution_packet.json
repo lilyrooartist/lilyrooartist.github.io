@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T06:02:35.823819Z",
+  "generated_at": "2026-06-22T06:04:47.971772Z",
   "safe_mode": true,
   "source": {
     "promo_queue_plan": "data/promo_queue_plan.json",
@@ -16,17 +16,17 @@
   "summary": {
     "manual_ready_count": 3,
     "youtube_community_count": 3,
-    "hard_cta_count": 2,
-    "approved_manual_count": 1,
+    "hard_cta_count": 0,
+    "approved_manual_count": 3,
     "logged_manual_count": 0,
     "unlogged_manual_count": 3,
     "public_url_log_needed_count": 3,
-    "ready_to_post_after_review_count": 2,
-    "ready_for_manual_post_count": 1,
-    "waiting_for_review_count": 2,
-    "manual_review_required_count": 2,
-    "postable_now_count": 1,
-    "next_manual_action": "review_and_approve",
+    "ready_to_post_after_review_count": 0,
+    "ready_for_manual_post_count": 3,
+    "waiting_for_review_count": 0,
+    "manual_review_required_count": 0,
+    "postable_now_count": 3,
+    "next_manual_action": "post_manually_then_log_url",
     "public_community_url": "https://www.youtube.com/@lilyroo.artist/community"
   },
   "rows": [
@@ -155,16 +155,16 @@
       "release": "Twelve Dollars",
       "scheduled_at": "2026-06-24T18:30:00-04:00",
       "post_type": "community",
-      "approved": "no",
-      "distribution_status": "waiting_for_review",
+      "approved": "yes",
+      "distribution_status": "ready_for_manual_post",
       "logged": false,
       "logged_at": "",
       "published_url": "",
       "published_log_content_id": "",
-      "readiness_state": "manual_only",
-      "readiness_message": "YouTube Community posts are copy-ready manual workflow.",
-      "subscriber_growth_score": 116,
-      "selected_cta_strength": "hard_goal",
+      "readiness_state": "",
+      "readiness_message": "",
+      "subscriber_growth_score": null,
+      "selected_cta_strength": "",
       "text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
       "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
       "copy_block": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
@@ -209,8 +209,8 @@
         "guardrail": "Local file check only; no posting or live network check was performed."
       },
       "media_key": "twelve-dollars-cover",
-      "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
-      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+      "approval_preview_command": "",
+      "approval_command": "",
       "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL",
       "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
       "log_effect": {
@@ -228,21 +228,21 @@
         "would_append": true,
         "summary": "append Published_Log.csv content_id=FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY after public URL is available"
       },
-      "source_kind": "promo_queue_plan",
+      "source_kind": "scheduled_posts",
       "manual_posting_packet": {
         "posting_surface": "YouTube Studio Community",
         "public_channel_url": "https://www.youtube.com/@lilyroo.artist",
         "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
         "paste_text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
         "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
-        "approval_required": true,
-        "postable_now": false,
+        "approval_required": false,
+        "postable_now": true,
         "logging_required": true,
         "logged": false,
         "published_url": "",
-        "distribution_status": "waiting_for_review",
-        "next_action": "review_and_approve",
-        "next_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin"
+        "distribution_status": "ready_for_manual_post",
+        "next_action": "post_manually_then_log_url",
+        "next_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL"
       },
       "manual_workflow": [
         "Review the copy and linked playlist.",
@@ -258,16 +258,16 @@
       "release": "Analog Myth",
       "scheduled_at": "2026-06-25T18:30:00-04:00",
       "post_type": "community",
-      "approved": "no",
-      "distribution_status": "waiting_for_review",
+      "approved": "yes",
+      "distribution_status": "ready_for_manual_post",
       "logged": false,
       "logged_at": "",
       "published_url": "",
       "published_log_content_id": "",
-      "readiness_state": "manual_only",
-      "readiness_message": "YouTube Community posts are copy-ready manual workflow.",
-      "subscriber_growth_score": 116,
-      "selected_cta_strength": "hard_goal",
+      "readiness_state": "",
+      "readiness_message": "",
+      "subscriber_growth_score": null,
+      "selected_cta_strength": "",
       "text": "Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
       "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
       "copy_block": "Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
@@ -312,8 +312,8 @@
         "guardrail": "Local file check only; no posting or live network check was performed."
       },
       "media_key": "analog-myth-cover",
-      "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --dry-run",
-      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin",
+      "approval_preview_command": "",
+      "approval_command": "",
       "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL",
       "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
       "log_effect": {
@@ -331,21 +331,21 @@
         "would_append": true,
         "summary": "append Published_Log.csv content_id=FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY after public URL is available"
       },
-      "source_kind": "promo_queue_plan",
+      "source_kind": "scheduled_posts",
       "manual_posting_packet": {
         "posting_surface": "YouTube Studio Community",
         "public_channel_url": "https://www.youtube.com/@lilyroo.artist",
         "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
         "paste_text": "Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
         "asset_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
-        "approval_required": true,
-        "postable_now": false,
+        "approval_required": false,
+        "postable_now": true,
         "logging_required": true,
         "logged": false,
         "published_url": "",
-        "distribution_status": "waiting_for_review",
-        "next_action": "review_and_approve",
-        "next_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin"
+        "distribution_status": "ready_for_manual_post",
+        "next_action": "post_manually_then_log_url",
+        "next_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL"
       },
       "manual_workflow": [
         "Review the copy and linked playlist.",
@@ -357,197 +357,24 @@
     }
   ],
   "manual_approval_docket": {
-    "status": "ready_for_manual_review",
-    "ready_count": 2,
+    "status": "clear",
+    "ready_count": 0,
     "blocked_count": 1,
-    "ready_ids": [
-      "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-      "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
-    ],
+    "ready_ids": [],
     "blocked_ids": [
       "FP-PLAN-TWELVE-DOLLARS-TIKTOK"
     ],
-    "preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
-    "apply_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+    "preview_command": "",
+    "apply_command": "",
     "guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review.",
-    "ready_to_review": [
-      {
-        "id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-        "release": "Analog Myth",
-        "platform": "YouTube Community",
-        "distribution_status": "waiting_for_review",
-        "subscriber_growth_score": 116,
-        "postable_after_approval": true
-      },
-      {
-        "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
-        "release": "Twelve Dollars",
-        "platform": "YouTube Community",
-        "distribution_status": "waiting_for_review",
-        "subscriber_growth_score": 116,
-        "postable_after_approval": true
-      }
-    ]
+    "ready_to_review": []
   },
   "manual_distribution_docket": {
     "status": "postable_now",
-    "review_count": 2,
-    "postable_count": 1,
+    "review_count": 0,
+    "postable_count": 3,
     "logged_count": 0,
-    "review_queue": [
-      {
-        "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
-        "platform": "YouTube Community",
-        "release": "Twelve Dollars",
-        "scheduled_at": "2026-06-24T18:30:00-04:00",
-        "distribution_status": "waiting_for_review",
-        "subscriber_growth_score": 116,
-        "selected_cta_strength": "hard_goal",
-        "posting_surface": "YouTube Studio Community",
-        "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
-        "paste_text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-        "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
-        "destination_links": [
-          "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n"
-        ],
-        "destination_link_audit": [
-          {
-            "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-            "canonical_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-            "status": "verified_local_evidence",
-            "evidence": [
-              {
-                "source": "data/distrokid_release_status.json",
-                "label": "Twelve Dollars YouTube playlist URL",
-                "status": "known_release_playlist"
-              },
-              {
-                "source": "data/youtube_twelve_dollars_playlist.json",
-                "label": "Twelve Dollars verified items: 8",
-                "status": "known_playlist_snapshot"
-              }
-            ],
-            "evidence_count": 2,
-            "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
-          }
-        ],
-        "destination_link_audit_summary": {
-          "link_count": 1,
-          "verified_local_evidence_count": 1,
-          "needs_manual_review_count": 0,
-          "all_links_have_local_evidence": true
-        },
-        "asset_audit": {
-          "url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
-          "status": "local_asset_present",
-          "local_path": "assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
-          "exists": true,
-          "guardrail": "Local file check only; no posting or live network check was performed."
-        },
-        "approval_required": true,
-        "postable_now": false,
-        "logging_required": true,
-        "logged": false,
-        "published_url": "",
-        "next_action": "review_and_approve",
-        "next_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
-        "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
-        "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
-        "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL",
-        "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
-        "log_effect": {
-          "target": "admin/content/Published_Log.csv",
-          "content_id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
-          "platform": "YouTube Community",
-          "release": "Twelve Dollars",
-          "requires_public_url": true,
-          "url_placeholder": "PUBLIC_URL",
-          "duplicate_checked_by": [
-            "content_id",
-            "manual_distribution_id"
-          ],
-          "notes": "manual_distribution_id=FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY; source=data/manual_distribution_packet.json",
-          "would_append": true,
-          "summary": "append Published_Log.csv content_id=FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY after public URL is available"
-        }
-      },
-      {
-        "id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-        "platform": "YouTube Community",
-        "release": "Analog Myth",
-        "scheduled_at": "2026-06-25T18:30:00-04:00",
-        "distribution_status": "waiting_for_review",
-        "subscriber_growth_score": 116,
-        "selected_cta_strength": "hard_goal",
-        "posting_surface": "YouTube Studio Community",
-        "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
-        "paste_text": "Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
-        "asset_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
-        "destination_links": [
-          "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0"
-        ],
-        "destination_link_audit": [
-          {
-            "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
-            "canonical_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
-            "status": "verified_local_evidence",
-            "evidence": [
-              {
-                "source": "data/distrokid_release_status.json",
-                "label": "Analog Myth YouTube playlist URL",
-                "status": "known_release_playlist"
-              },
-              {
-                "source": "data/youtube_analog_myth_playlist.json",
-                "label": "Analog Myth - Lily Roo verified items: 8",
-                "status": "known_playlist_snapshot"
-              }
-            ],
-            "evidence_count": 2,
-            "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
-          }
-        ],
-        "destination_link_audit_summary": {
-          "link_count": 1,
-          "verified_local_evidence_count": 1,
-          "needs_manual_review_count": 0,
-          "all_links_have_local_evidence": true
-        },
-        "asset_audit": {
-          "url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
-          "status": "local_asset_present",
-          "local_path": "assets/albums/analog-myth/art/03-analog-myth.jpg",
-          "exists": true,
-          "guardrail": "Local file check only; no posting or live network check was performed."
-        },
-        "approval_required": true,
-        "postable_now": false,
-        "logging_required": true,
-        "logged": false,
-        "published_url": "",
-        "next_action": "review_and_approve",
-        "next_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin",
-        "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --dry-run",
-        "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin",
-        "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL",
-        "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
-        "log_effect": {
-          "target": "admin/content/Published_Log.csv",
-          "content_id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-          "platform": "YouTube Community",
-          "release": "Analog Myth",
-          "requires_public_url": true,
-          "url_placeholder": "PUBLIC_URL",
-          "duplicate_checked_by": [
-            "content_id",
-            "manual_distribution_id"
-          ],
-          "notes": "manual_distribution_id=FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY; source=data/manual_distribution_packet.json",
-          "would_append": true,
-          "summary": "append Published_Log.csv content_id=FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY after public URL is available"
-        }
-      }
-    ],
+    "review_queue": [],
     "postable_now": [
       {
         "id": "FP-AUTO-261",
@@ -640,10 +467,162 @@
           "would_append": true,
           "summary": "append Published_Log.csv content_id=FP-AUTO-261 after public URL is available"
         }
+      },
+      {
+        "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+        "platform": "YouTube Community",
+        "release": "Twelve Dollars",
+        "scheduled_at": "2026-06-24T18:30:00-04:00",
+        "distribution_status": "ready_for_manual_post",
+        "subscriber_growth_score": null,
+        "selected_cta_strength": "",
+        "posting_surface": "YouTube Studio Community",
+        "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
+        "paste_text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+        "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
+        "destination_links": [
+          "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n"
+        ],
+        "destination_link_audit": [
+          {
+            "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+            "canonical_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+            "status": "verified_local_evidence",
+            "evidence": [
+              {
+                "source": "data/distrokid_release_status.json",
+                "label": "Twelve Dollars YouTube playlist URL",
+                "status": "known_release_playlist"
+              },
+              {
+                "source": "data/youtube_twelve_dollars_playlist.json",
+                "label": "Twelve Dollars verified items: 8",
+                "status": "known_playlist_snapshot"
+              }
+            ],
+            "evidence_count": 2,
+            "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
+          }
+        ],
+        "destination_link_audit_summary": {
+          "link_count": 1,
+          "verified_local_evidence_count": 1,
+          "needs_manual_review_count": 0,
+          "all_links_have_local_evidence": true
+        },
+        "asset_audit": {
+          "url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
+          "status": "local_asset_present",
+          "local_path": "assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
+          "exists": true,
+          "guardrail": "Local file check only; no posting or live network check was performed."
+        },
+        "approval_required": false,
+        "postable_now": true,
+        "logging_required": true,
+        "logged": false,
+        "published_url": "",
+        "next_action": "post_manually_then_log_url",
+        "next_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+        "approval_preview_command": "",
+        "approval_command": "",
+        "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+        "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
+        "log_effect": {
+          "target": "admin/content/Published_Log.csv",
+          "content_id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+          "platform": "YouTube Community",
+          "release": "Twelve Dollars",
+          "requires_public_url": true,
+          "url_placeholder": "PUBLIC_URL",
+          "duplicate_checked_by": [
+            "content_id",
+            "manual_distribution_id"
+          ],
+          "notes": "manual_distribution_id=FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY; source=data/manual_distribution_packet.json",
+          "would_append": true,
+          "summary": "append Published_Log.csv content_id=FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY after public URL is available"
+        }
+      },
+      {
+        "id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+        "platform": "YouTube Community",
+        "release": "Analog Myth",
+        "scheduled_at": "2026-06-25T18:30:00-04:00",
+        "distribution_status": "ready_for_manual_post",
+        "subscriber_growth_score": null,
+        "selected_cta_strength": "",
+        "posting_surface": "YouTube Studio Community",
+        "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
+        "paste_text": "Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.\n\nFull playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+        "asset_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
+        "destination_links": [
+          "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0"
+        ],
+        "destination_link_audit": [
+          {
+            "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+            "canonical_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+            "status": "verified_local_evidence",
+            "evidence": [
+              {
+                "source": "data/distrokid_release_status.json",
+                "label": "Analog Myth YouTube playlist URL",
+                "status": "known_release_playlist"
+              },
+              {
+                "source": "data/youtube_analog_myth_playlist.json",
+                "label": "Analog Myth - Lily Roo verified items: 8",
+                "status": "known_playlist_snapshot"
+              }
+            ],
+            "evidence_count": 2,
+            "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
+          }
+        ],
+        "destination_link_audit_summary": {
+          "link_count": 1,
+          "verified_local_evidence_count": 1,
+          "needs_manual_review_count": 0,
+          "all_links_have_local_evidence": true
+        },
+        "asset_audit": {
+          "url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
+          "status": "local_asset_present",
+          "local_path": "assets/albums/analog-myth/art/03-analog-myth.jpg",
+          "exists": true,
+          "guardrail": "Local file check only; no posting or live network check was performed."
+        },
+        "approval_required": false,
+        "postable_now": true,
+        "logging_required": true,
+        "logged": false,
+        "published_url": "",
+        "next_action": "post_manually_then_log_url",
+        "next_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+        "approval_preview_command": "",
+        "approval_command": "",
+        "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+        "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
+        "log_effect": {
+          "target": "admin/content/Published_Log.csv",
+          "content_id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+          "platform": "YouTube Community",
+          "release": "Analog Myth",
+          "requires_public_url": true,
+          "url_placeholder": "PUBLIC_URL",
+          "duplicate_checked_by": [
+            "content_id",
+            "manual_distribution_id"
+          ],
+          "notes": "manual_distribution_id=FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY; source=data/manual_distribution_packet.json",
+          "would_append": true,
+          "summary": "append Published_Log.csv content_id=FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY after public URL is available"
+        }
       }
     ],
     "logged": [],
-    "next_manual_action": "review_and_approve",
+    "next_manual_action": "post_manually_then_log_url",
     "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
     "guardrails": [
       "Manual posting happens in YouTube Studio Community, outside this repository.",
@@ -652,11 +631,11 @@
     ]
   },
   "manual_completion_manifest": {
-    "status": "needs_review",
+    "status": "ready_to_post_and_log",
     "posting_surface": "YouTube Studio Community",
     "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
-    "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
-    "approval_apply_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+    "approval_preview_command": "",
+    "approval_apply_command": "",
     "url_template_path": "data/manual_distribution_url_template.csv",
     "batch_log_preview_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv",
     "batch_log_apply_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --apply --refresh-admin",
@@ -675,8 +654,8 @@
         "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
         "platform": "YouTube Community",
         "release": "Twelve Dollars",
-        "distribution_status": "waiting_for_review",
-        "approved": "no",
+        "distribution_status": "ready_for_manual_post",
+        "approved": "yes",
         "posting_surface": "YouTube Studio Community",
         "public_url": "",
         "notes": "Paste the real public YouTube Community post URL after manual posting."
@@ -685,8 +664,8 @@
         "id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
         "platform": "YouTube Community",
         "release": "Analog Myth",
-        "distribution_status": "waiting_for_review",
-        "approved": "no",
+        "distribution_status": "ready_for_manual_post",
+        "approved": "yes",
         "posting_surface": "YouTube Studio Community",
         "public_url": "",
         "notes": "Paste the real public YouTube Community post URL after manual posting."
@@ -694,12 +673,11 @@
     ],
     "url_entry_row_count": 3,
     "waiting_public_url_count": 3,
-    "review_queue_ids": [
+    "review_queue_ids": [],
+    "postable_now_ids": [
+      "FP-AUTO-261",
       "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
       "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY"
-    ],
-    "postable_now_ids": [
-      "FP-AUTO-261"
     ],
     "logged_ids": [],
     "pending_log_ids": [

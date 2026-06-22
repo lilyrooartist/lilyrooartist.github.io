@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T06:02:36.812641Z",
+  "generated_at": "2026-06-22T06:04:48.848603Z",
   "safe_mode": true,
   "source": {
     "published_log": "admin/content/Published_Log.csv",
@@ -17,13 +17,12 @@
     "unlogged_worker_posts": 0,
     "unlogged_manual_posts": 3,
     "manual_log_gate_counts": {
-      "blocked_until_manual_approval": 2,
-      "blocked_until_public_url": 1
+      "blocked_until_public_url": 3
     },
     "manual_logging_gate_status": "postable_now",
     "reconciliation_needed": true,
-    "next_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
-    "next_apply_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+    "next_preview_command": "",
+    "next_apply_command": "",
     "next_gate": "manual_approval",
     "posting_gate_status": "postable_now"
   },
@@ -37,30 +36,26 @@
   "manual_logging": {
     "unlogged_manual_count": 3,
     "approval_gate": {
-      "status": "ready_for_manual_review",
-      "ready_count": 2,
+      "status": "clear",
+      "ready_count": 0,
       "blocked_count": 1,
-      "ready_ids": [
-        "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-        "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
-      ],
+      "ready_ids": [],
       "blocked_ids": [
         "FP-PLAN-TWELVE-DOLLARS-TIKTOK"
       ],
-      "preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
-      "apply_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+      "preview_command": "",
+      "apply_command": "",
       "guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review."
     },
     "posting_gate": {
       "status": "postable_now",
-      "review_count": 2,
-      "postable_count": 1,
+      "review_count": 0,
+      "postable_count": 3,
       "logged_count": 0,
       "public_community_url": "https://www.youtube.com/@lilyroo.artist/community"
     },
     "gate_counts": {
-      "blocked_until_manual_approval": 2,
-      "blocked_until_public_url": 1
+      "blocked_until_public_url": 3
     },
     "rows": [
       {
@@ -83,14 +78,14 @@
         "id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
         "release": "Twelve Dollars",
         "platform": "YouTube Community",
-        "status": "waiting_for_review",
-        "log_gate": "blocked_until_manual_approval",
-        "approval_required": true,
-        "postable_now": false,
+        "status": "ready_for_manual_post",
+        "log_gate": "blocked_until_public_url",
+        "approval_required": false,
+        "postable_now": true,
         "requires_public_url": true,
-        "next_step": "Approve the manual row after review, post it in YouTube Studio Community, then log the public URL.",
-        "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --dry-run",
-        "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --refresh-admin",
+        "next_step": "Post manually in YouTube Studio Community, then replace PUBLIC_URL with the real public URL.",
+        "approval_preview_command": "",
+        "approval_command": "",
         "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL",
         "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
         "public_community_url": "https://www.youtube.com/@lilyroo.artist/community"
@@ -99,14 +94,14 @@
         "id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
         "release": "Analog Myth",
         "platform": "YouTube Community",
-        "status": "waiting_for_review",
-        "log_gate": "blocked_until_manual_approval",
-        "approval_required": true,
-        "postable_now": false,
+        "status": "ready_for_manual_post",
+        "log_gate": "blocked_until_public_url",
+        "approval_required": false,
+        "postable_now": true,
         "requires_public_url": true,
-        "next_step": "Approve the manual row after review, post it in YouTube Studio Community, then log the public URL.",
-        "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --dry-run",
-        "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --refresh-admin",
+        "next_step": "Post manually in YouTube Studio Community, then replace PUBLIC_URL with the real public URL.",
+        "approval_preview_command": "",
+        "approval_command": "",
         "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL",
         "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
         "public_community_url": "https://www.youtube.com/@lilyroo.artist/community"
