@@ -900,6 +900,54 @@ def next_format_evidence_runbook(candidates: list[dict], readiness: dict) -> dic
     }
 
 
+def repeatable_format_ladder(candidates: list[dict], readiness: dict) -> dict:
+    steps = []
+    for index, candidate in enumerate(candidates, start=1):
+        unblock = candidate.get("decision_unblock") or {}
+        winner_ready = candidate.get("evidence_status") == "winner_ready"
+        first_action = unblock.get("first_action") or ""
+        status = "winner_ready" if winner_ready else first_action or "needs_evidence"
+        if winner_ready:
+            next_action = "Keep as a repeatable winner and collect any pending logged-post metrics."
+        else:
+            next_action = unblock.get("next_action") or candidate.get("decision_note") or "Collect more measured result evidence."
+        steps.append({
+            "rank": index,
+            "format": candidate.get("format") or "",
+            "status": status,
+            "evidence_status": candidate.get("evidence_status") or "",
+            "measured_post_count": candidate.get("measured_post_count") or 0,
+            "minimum_measured_posts": candidate.get("minimum_measured_posts") or MIN_MEASURED_POSTS_PER_WINNING_FORMAT,
+            "needed_measured_posts": candidate.get("needed_measured_posts") or 0,
+            "first_action": first_action,
+            "first_post_id": unblock.get("first_post_id") or "",
+            "first_platform": unblock.get("first_platform") or "",
+            "measurement_ready_count": unblock.get("measurement_ready_count") or 0,
+            "post_and_log_count": unblock.get("post_and_log_count") or 0,
+            "blocked_count": unblock.get("blocked_count") or 0,
+            "report_path": unblock.get("report_path") or "admin/reports/experiment-result-clipboard.md",
+            "preview_command": unblock.get("preview_command") or "",
+            "apply_command": unblock.get("apply_command") or "",
+            "next_action": next_action,
+        })
+    ready_count = int_metric(readiness.get("ready_candidate_count"))
+    target = int_metric(readiness.get("winner_count_target")) or FORMAT_WINNER_COUNT
+    return {
+        "status": "ready_to_name_winners" if ready_count >= target else "needs_more_winners",
+        "ready_count": ready_count,
+        "winner_count_target": target,
+        "needed_winner_count": max(target - ready_count, 0),
+        "minimum_measured_posts_per_format": readiness.get("minimum_measured_posts_per_format") or MIN_MEASURED_POSTS_PER_WINNING_FORMAT,
+        "steps": steps,
+        "next_action": (
+            "Name the top 3 repeatable formats from measured results."
+            if ready_count >= target
+            else "Advance the first non-winner ladder step until two more formats have measured evidence."
+        ),
+        "guardrail": "Only winner-ready formats count toward the top 3; scheduled, postable, or blocked rows are not format evidence until public URLs and measured results exist.",
+    }
+
+
 def metric_confidence_state(metrics: dict, freshness: dict) -> dict:
     summary = freshness.get("summary") or {}
     pending_manual = metrics.get("pending_manual_fields") or []
@@ -1110,6 +1158,7 @@ def growth_goal_state(metrics_history: dict, published_rows: list[dict], schedul
         "top_repeatable_format_candidates": candidates,
         "format_winner_readiness": readiness,
         "next_format_evidence_runbook": next_format_evidence_runbook(candidates, readiness),
+        "repeatable_format_ladder": repeatable_format_ladder(candidates, readiness),
         "active_format_experiments": active_format_experiments(scheduled_rows, promo_plan, now),
         "metric_confidence": metric_confidence or {},
         "metric_sources": [
