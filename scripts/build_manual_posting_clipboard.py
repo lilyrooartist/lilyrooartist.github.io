@@ -45,6 +45,46 @@ def parse_log_date(value: str) -> datetime | None:
         return None
 
 
+def note_value(notes: str, key: str) -> str:
+    marker = f"{key}="
+    for part in (notes or "").split(";"):
+        part = part.strip()
+        if part.startswith(marker):
+            return part[len(marker):].strip()
+    return ""
+
+
+def parse_iso_timestamp(value: str) -> datetime | None:
+    if not value:
+        return None
+    try:
+        return datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError:
+        return None
+
+
+def manual_logged_at(row: dict) -> datetime | None:
+    notes = row.get("notes") or ""
+    return parse_iso_timestamp(note_value(notes, "manual_logged_at")) or parse_log_date(row.get("date") or "")
+
+
+def first_measurement_due_at(row: dict) -> datetime | None:
+    notes = row.get("notes") or ""
+    explicit = parse_iso_timestamp(note_value(notes, "first_measurement_due_at"))
+    if explicit:
+        return explicit
+    logged_at = manual_logged_at(row)
+    if logged_at:
+        return logged_at + timedelta(hours=FIRST_MEASUREMENT_DUE_AFTER_HOURS)
+    return None
+
+
+def iso_z(value: datetime | None) -> str:
+    if not value:
+        return ""
+    return value.astimezone(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+
+
 def has_result_values(row: dict) -> bool:
     metric_fields = ["views", "likes", "comments", "shares", "saves", "subs_delta"]
     has_metric = any((row.get(field) or "").strip() for field in metric_fields)
@@ -320,8 +360,8 @@ def lifecycle_stage(row: dict, log_row: dict | None) -> str:
     if log_row and has_result_values(log_row):
         return "result_recorded"
     if log_row:
-        log_date = parse_log_date(log_row.get("date") or "")
-        if log_date and datetime.now(timezone.utc) >= log_date + timedelta(hours=FIRST_MEASUREMENT_DUE_AFTER_HOURS):
+        due_at = first_measurement_due_at(log_row)
+        if due_at and datetime.now(timezone.utc) >= due_at:
             return "ready_for_first_measurement"
         return "measurement_waiting_24h"
     if row.get("published_url"):
@@ -351,12 +391,8 @@ def build_tracking_lifecycle(manual_rows: list[dict]) -> dict:
     for row in manual_rows:
         post_id = row.get("id") or ""
         log_row = log_by_id.get(post_id)
-        log_date = parse_log_date((log_row or {}).get("date") or "")
-        measurement_due_at = (
-            (log_date + timedelta(hours=FIRST_MEASUREMENT_DUE_AFTER_HOURS)).isoformat()
-            if log_date
-            else ""
-        )
+        logged_at = manual_logged_at(log_row or {})
+        due_at = first_measurement_due_at(log_row or {})
         stage = lifecycle_stage(row, log_row)
         stages.append(stage)
         rows.append({
@@ -368,9 +404,19 @@ def build_tracking_lifecycle(manual_rows: list[dict]) -> dict:
             "public_url_logged": bool(log_row),
             "result_recorded": bool(log_row and has_result_values(log_row)),
             "public_url": (log_row or {}).get("post_id_or_url") or row.get("published_url") or "",
-            "logged_at": (log_row or {}).get("date") or "",
-            "measurement_due_at": measurement_due_at,
-            "measurement_due": bool(measurement_due_at and now >= (log_date + timedelta(hours=FIRST_MEASUREMENT_DUE_AFTER_HOURS))),
+            "logged_at": iso_z(logged_at),
+            "logged_date": (log_row or {}).get("date") or "",
+            "measurement_due_at": iso_z(due_at),
+            "measurement_due": bool(due_at and now >= due_at),
+            "measurement_due_source": (
+                "first_measurement_due_at_note"
+                if note_value((log_row or {}).get("notes") or "", "first_measurement_due_at")
+                else "manual_logged_at_note"
+                if note_value((log_row or {}).get("notes") or "", "manual_logged_at")
+                else "published_log_date_fallback"
+                if log_row
+                else "after_url_logging"
+            ),
             "result_handoff_report": "admin/reports/experiment-result-clipboard.md",
             "next_action": lifecycle_next_action(stage, row, log_row),
             "completion_evidence": [

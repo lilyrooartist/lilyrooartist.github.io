@@ -5,6 +5,7 @@ import argparse
 import csv
 import json
 import subprocess
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -16,6 +17,7 @@ PACKET = ROOT / "data" / "manual_distribution_packet.json"
 PUBLISHED_LOG = ROOT / "admin" / "content" / "Published_Log.csv"
 RESULT_CLIPBOARD = ROOT / "admin" / "reports" / "experiment-result-clipboard.md"
 WIDE_RESULT_ENTRY = ROOT / "data" / "experiment_result_entry_wide_template.csv"
+FIRST_MEASUREMENT_DUE_AFTER_HOURS = 24
 
 
 def read_packet() -> dict:
@@ -73,8 +75,24 @@ def refresh_admin() -> None:
     subprocess.run(["python3", "scripts/refresh_promo_admin.py"], cwd=ROOT, check=True)
 
 
+def utc_timestamp() -> str:
+    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+
+
+def due_timestamp(logged_at: str) -> str:
+    logged = datetime.fromisoformat(logged_at.replace("Z", "+00:00"))
+    return (logged + timedelta(hours=FIRST_MEASUREMENT_DUE_AFTER_HOURS)).isoformat().replace("+00:00", "Z")
+
+
 def payload_for_row(row: dict, public_url: str) -> dict:
-    notes = f"manual_distribution_id={row.get('id')}; source=data/manual_distribution_packet.json"
+    logged_at = utc_timestamp()
+    measurement_due_at = due_timestamp(logged_at)
+    notes = (
+        f"manual_distribution_id={row.get('id')}; "
+        f"source=data/manual_distribution_packet.json; "
+        f"manual_logged_at={logged_at}; "
+        f"first_measurement_due_at={measurement_due_at}"
+    )
     return {
         "post_id": row.get("id") or "",
         "platform": row.get("platform") or "Manual",
@@ -94,10 +112,13 @@ def payload_for_row(row: dict, public_url: str) -> dict:
         },
         "measurement_handoff": {
             "status": "ready_after_url_logging",
+            "manual_logged_at": logged_at,
+            "first_measurement_due_at": measurement_due_at,
+            "first_measurement_due_after_hours": FIRST_MEASUREMENT_DUE_AFTER_HOURS,
             "result_clipboard_report": str(RESULT_CLIPBOARD.relative_to(ROOT)),
             "wide_entry_csv": str(WIDE_RESULT_ENTRY.relative_to(ROOT)),
             "first_measurement_fields": ["views", "likes", "comments", "shares", "saves", "subs_delta"],
-            "next_step": "After the public URL is logged and the post has accumulated first engagement, refresh Admin and collect metrics through the experiment result clipboard.",
+            "next_step": "After the public URL is logged and the post reaches first_measurement_due_at, refresh Admin and collect metrics through the experiment result clipboard.",
             "preview_import_command": "python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run",
             "apply_import_command": "python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --apply --refresh-admin",
         },

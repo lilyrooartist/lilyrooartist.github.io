@@ -1813,6 +1813,7 @@ def validate_generated_outputs(failures):
                 row.get("id")
                 and row.get("stage") in {"waiting_for_manual_post", "public_url_ready_to_log", "measurement_waiting_24h", "ready_for_first_measurement", "result_recorded"}
                 and row.get("result_handoff_report") == "admin/reports/experiment-result-clipboard.md"
+                and row.get("measurement_due_source") in {"first_measurement_due_at_note", "manual_logged_at_note", "published_log_date_fallback", "after_url_logging"}
                 and row.get("next_action")
                 and any("Published_Log.csv" in item for item in row.get("completion_evidence") or [])
                 for row in lifecycle_rows
@@ -4057,7 +4058,7 @@ def validate_generated_outputs(failures):
         fail("reconcile_youtube_community_urls.py missing", failures)
     if MANUAL_DISTRIBUTION_LOGGER.exists():
         logger_text = MANUAL_DISTRIBUTION_LOGGER.read_text(encoding="utf-8")
-        if "--apply" in logger_text and "--refresh-admin" in logger_text and "--from-csv" in logger_text and "--allow-partial" in logger_text and "allow_partial" in logger_text and "append_published_log" in logger_text and "dry_run" in logger_text and "validate_public_url_for_row" in logger_text and "YOUTUBE_HOSTS" in logger_text and "/post/" in logger_text and "already_logged" in logger_text and "PUBLIC_URL" in logger_text and "measurement_handoff" in logger_text and "experiment-result-clipboard.md" in logger_text and "experiment_result_entry_wide_template.csv" in logger_text:
+        if "--apply" in logger_text and "--refresh-admin" in logger_text and "--from-csv" in logger_text and "--allow-partial" in logger_text and "allow_partial" in logger_text and "append_published_log" in logger_text and "dry_run" in logger_text and "validate_public_url_for_row" in logger_text and "YOUTUBE_HOSTS" in logger_text and "/post/" in logger_text and "already_logged" in logger_text and "PUBLIC_URL" in logger_text and "measurement_handoff" in logger_text and "experiment-result-clipboard.md" in logger_text and "experiment_result_entry_wide_template.csv" in logger_text and "manual_logged_at=" in logger_text and "first_measurement_due_at=" in logger_text and "FIRST_MEASUREMENT_DUE_AFTER_HOURS" in logger_text:
             ok("manual distribution logger is dry-run-first")
         else:
             fail("log_manual_distribution.py missing dry-run-first logging behavior or URL/duplicate guards", failures)
