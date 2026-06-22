@@ -760,6 +760,41 @@ def format_winner_readiness(candidates: list[dict], result_collection: dict) -> 
     }
 
 
+def metric_confidence_state(metrics: dict, freshness: dict) -> dict:
+    summary = freshness.get("summary") or {}
+    pending_manual = metrics.get("pending_manual_fields") or []
+    pending_public = metrics.get("pending_public_metric_fields") or []
+    pending_private = metrics.get("pending_private_metric_fields") or []
+    stale_count = int(summary.get("stale") or 0)
+    gated_manual_count = int(summary.get("gated_manual_pending") or 0)
+    if pending_private:
+        status = "needs_private_analytics"
+        note = "Growth totals include the latest available values, but private analytics fields still need manual collection."
+    elif pending_public:
+        status = "needs_public_metric_capture"
+        note = "Growth totals include the latest available values, but public profile metrics still need capture or import."
+    elif stale_count or gated_manual_count:
+        status = "source_freshness_attention"
+        note = "Growth totals are available, but at least one source is stale or gated by manual URL logging."
+    else:
+        status = "current"
+        note = "Growth totals are backed by current source snapshots and no pending manual metric fields."
+    return {
+        "status": status,
+        "pending_manual_metric_fields": len(pending_manual),
+        "pending_public_metric_fields": len(pending_public),
+        "pending_private_metric_fields": len(pending_private),
+        "stale_source_count": stale_count,
+        "gated_manual_source_count": gated_manual_count,
+        "live_platform_count": metrics.get("live_platform_count", 0),
+        "manual_metric_collection_report": "admin/reports/manual-metric-collection.md",
+        "manual_metric_collection_template": "data/manual_metric_collection_template.csv",
+        "manual_metric_import_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
+        "manual_metric_import_apply_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
+        "confidence_note": note,
+    }
+
+
 def tracking_fields_for_platform(platform: str) -> list[str]:
     normalized = platform_bucket(platform).lower()
     if normalized == "youtube community" or normalized == "youtube":
@@ -875,7 +910,7 @@ def active_format_experiments(scheduled_rows: list[dict], promo_plan: dict, now:
     return ranked[:3]
 
 
-def growth_goal_state(metrics_history: dict, published_rows: list[dict], scheduled_rows: list[dict], promo_plan: dict, now: datetime, result_collection: dict | None = None) -> dict:
+def growth_goal_state(metrics_history: dict, published_rows: list[dict], scheduled_rows: list[dict], promo_plan: dict, now: datetime, result_collection: dict | None = None, metric_confidence: dict | None = None) -> dict:
     snapshots = metrics_history.get("snapshots") if isinstance(metrics_history, dict) else []
     snapshots = snapshots or []
     latest = snapshots[-1] if snapshots else {}
@@ -931,6 +966,7 @@ def growth_goal_state(metrics_history: dict, published_rows: list[dict], schedul
         "top_repeatable_format_candidates": candidates,
         "format_winner_readiness": format_winner_readiness(candidates, result_collection or {}),
         "active_format_experiments": active_format_experiments(scheduled_rows, promo_plan, now),
+        "metric_confidence": metric_confidence or {},
         "metric_sources": [
             "youtube.total_views",
             "spotify.release_streams",
@@ -2271,8 +2307,9 @@ def build_status():
     execution_state = social_execution_state(social_executions, scheduled_rows)
     scheduler_state = social_scheduler_dry_run_state(social_scheduler_dry_run)
     monetization = monetization_state(live, history, metrics_history, promo_plan, future_posts, execution_state, now)
-    growth_goal = growth_goal_state(metrics_history, published_rows, scheduled_rows, promo_plan, now, experiment_result_collection)
     freshness = source_freshness(release_status, manual, live, metrics_history, executor_readiness, store_history, social_executions, social_scheduler_dry_run, promo_refresh_run, promo_refresh_workflow_status, promo_plan, future_posts, manual_distribution, now)
+    metric_confidence = metric_confidence_state(metrics, freshness)
+    growth_goal = growth_goal_state(metrics_history, published_rows, scheduled_rows, promo_plan, now, experiment_result_collection, metric_confidence)
 
     releases = []
     all_actions = []
