@@ -819,6 +819,87 @@ def enrich_format_decision_paths(candidates: list[dict], result_clipboard: dict)
     return enriched
 
 
+def next_format_evidence_runbook(candidates: list[dict], readiness: dict) -> dict:
+    if readiness.get("status") == "ready_to_name_winners":
+        return {
+            "status": "ready_to_name_winners",
+            "next_action": "Name the top 3 repeatable formats from measured results.",
+            "ready_candidate_count": readiness.get("ready_candidate_count") or 0,
+            "winner_count_target": readiness.get("winner_count_target") or FORMAT_WINNER_COUNT,
+            "ready_candidates": readiness.get("ready_candidates") or [],
+            "guardrail": "Use measured result evidence only; do not rank formats from scheduled volume alone.",
+        }
+    actionable = [
+        candidate
+        for candidate in candidates
+        if candidate.get("evidence_status") != "winner_ready"
+    ]
+
+    def action_rank(candidate: dict) -> tuple[int, int, int, str]:
+        unblock = candidate.get("decision_unblock") or {}
+        ranks = {
+            "collect_metrics": 1,
+            "post_and_log_public_url": 2,
+            "log_public_url": 3,
+            "clear_platform_blocker": 4,
+        }
+        return (
+            ranks.get(unblock.get("first_action") or "", 9),
+            int(candidate.get("needed_measured_posts") or 0),
+            -int(candidate.get("score") or 0),
+            candidate.get("format") or "",
+        )
+
+    selected = min(actionable, key=action_rank) if actionable else {}
+    if not selected:
+        return {
+            "status": "clear",
+            "next_action": "No format-evidence gap is currently visible.",
+            "guardrail": "Refresh result collection before declaring the goal complete.",
+        }
+    unblock = selected.get("decision_unblock") or {}
+    first_action = unblock.get("first_action") or ""
+    action_labels = {
+        "collect_metrics": "Collect result metrics for the first logged post in this format.",
+        "post_and_log_public_url": "Publish the first ready post in this format and log its real public URL.",
+        "log_public_url": "Log the real public URL for the first already-published post in this format.",
+        "clear_platform_blocker": "Clear the platform blocker before this format can produce measurable posts.",
+    }
+    return {
+        "status": "needs_more_result_evidence",
+        "ready_candidate_count": readiness.get("ready_candidate_count") or 0,
+        "winner_count_target": readiness.get("winner_count_target") or FORMAT_WINNER_COUNT,
+        "needed_winner_candidates": max((readiness.get("winner_count_target") or FORMAT_WINNER_COUNT) - (readiness.get("ready_candidate_count") or 0), 0),
+        "next_format": selected.get("format") or "",
+        "evidence_status": selected.get("evidence_status") or "",
+        "measured_post_count": selected.get("measured_post_count") or 0,
+        "minimum_measured_posts": selected.get("minimum_measured_posts") or MIN_MEASURED_POSTS_PER_WINNING_FORMAT,
+        "needed_measured_posts": selected.get("needed_measured_posts") or 0,
+        "scheduled_count": selected.get("scheduled_count") or 0,
+        "published_count": selected.get("published_count") or 0,
+        "first_action": first_action,
+        "next_action": action_labels.get(first_action) or unblock.get("next_action") or "Collect more result evidence for this format.",
+        "first_post_id": unblock.get("first_post_id") or "",
+        "first_platform": unblock.get("first_platform") or "",
+        "preview_command": unblock.get("preview_command") or "",
+        "apply_command": unblock.get("apply_command") or "",
+        "report_path": unblock.get("report_path") or "admin/reports/experiment-result-clipboard.md",
+        "handoff_report": unblock.get("handoff_report") or "",
+        "handoff_note": unblock.get("handoff_note") or "",
+        "measurement_ready_count": unblock.get("measurement_ready_count") or 0,
+        "post_and_log_count": unblock.get("post_and_log_count") or 0,
+        "blocked_count": unblock.get("blocked_count") or 0,
+        "candidate_post_ids": unblock.get("candidate_post_ids") or [],
+        "decision_note": selected.get("decision_note") or "",
+        "why": (
+            f"Moving {selected.get('format') or 'this format'} from {selected.get('measured_post_count') or 0} "
+            f"to {selected.get('minimum_measured_posts') or MIN_MEASURED_POSTS_PER_WINNING_FORMAT} measured posts is the next step toward "
+            f"{readiness.get('winner_count_target') or FORMAT_WINNER_COUNT} repeatable formats."
+        ),
+        "guardrail": "Use only real public URLs and measured result values; scheduled or postable rows are not winner evidence until logged and measured.",
+    }
+
+
 def metric_confidence_state(metrics: dict, freshness: dict) -> dict:
     summary = freshness.get("summary") or {}
     pending_manual = metrics.get("pending_manual_fields") or []
@@ -1008,6 +1089,7 @@ def growth_goal_state(metrics_history: dict, published_rows: list[dict], schedul
         top_format_candidates(published_rows, scheduled_rows, promo_plan),
         result_clipboard or {},
     )
+    readiness = format_winner_readiness(candidates, result_collection or {})
     return {
         "primary": "Grow total plays/views by 25% in 30 days",
         "goal_start_date": GROWTH_GOAL_START_DATE,
@@ -1026,7 +1108,8 @@ def growth_goal_state(metrics_history: dict, published_rows: list[dict], schedul
         "status": status,
         "action_needed": action_needed,
         "top_repeatable_format_candidates": candidates,
-        "format_winner_readiness": format_winner_readiness(candidates, result_collection or {}),
+        "format_winner_readiness": readiness,
+        "next_format_evidence_runbook": next_format_evidence_runbook(candidates, readiness),
         "active_format_experiments": active_format_experiments(scheduled_rows, promo_plan, now),
         "metric_confidence": metric_confidence or {},
         "metric_sources": [

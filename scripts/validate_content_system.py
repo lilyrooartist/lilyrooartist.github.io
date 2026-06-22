@@ -2685,6 +2685,7 @@ def validate_generated_outputs(failures):
         experiments = growth_goal.get("active_format_experiments") or []
         top_candidates = growth_goal.get("top_repeatable_format_candidates") or []
         winner_readiness = growth_goal.get("format_winner_readiness") or {}
+        next_format_runbook = growth_goal.get("next_format_evidence_runbook") or {}
         metric_confidence = growth_goal.get("metric_confidence") or {}
         experiment_formats = {experiment.get("format") for experiment in experiments}
         top_candidate_formats = {candidate.get("format") for candidate in top_candidates}
@@ -2715,6 +2716,19 @@ def validate_generated_outputs(failures):
             and winner_readiness.get("minimum_measured_posts_per_format") == 2
             and winner_readiness.get("status") in {"needs_more_result_evidence", "ready_to_name_winners"}
             and isinstance(winner_readiness.get("blockers") or [], list)
+            and next_format_runbook.get("status") in {"needs_more_result_evidence", "ready_to_name_winners", "clear"}
+            and next_format_runbook.get("winner_count_target") == winner_readiness.get("winner_count_target")
+            and (
+                winner_readiness.get("status") == "ready_to_name_winners"
+                or (
+                    next_format_runbook.get("next_format") in top_candidate_formats
+                    and next_format_runbook.get("first_action") in {"collect_metrics", "post_and_log_public_url", "log_public_url", "clear_platform_blocker"}
+                    and next_format_runbook.get("next_action")
+                    and next_format_runbook.get("report_path")
+                    and "real public URLs" in (next_format_runbook.get("guardrail") or "")
+                    and "measured result values" in (next_format_runbook.get("guardrail") or "")
+                )
+            )
             and metric_confidence.get("status") in {"current", "needs_private_analytics", "needs_public_metric_capture", "source_freshness_attention"}
             and metric_confidence.get("pending_manual_metric_fields") == kpi.get("pending_manual_metric_fields")
             and metric_confidence.get("pending_private_metric_fields") == kpi.get("pending_private_analytics_metric_fields")
@@ -4260,7 +4274,7 @@ def validate_admin_execution_feedback(failures):
         "experiment result clipboard shown": "renderExperimentResultClipboard" in text and "experiment_result_clipboard.json" in text and "Experiment result clipboard" in text,
         "experiment result cards actionable": "Open result clipboard report" in text and "Entry CSV:" in text and "Wide entry CSV:" in text and "result_import_preview_command" in text and "Copy metric preview" in text and "data-result-command" in text and "result-evidence-input" in text and "Measure first" in text and "Post now" in text and "Blocked" in text and "measurement_priority_cards" in text and "First measurement runbook" in text and "Copy first preview" in text and "Post-log measurement handoff" in text and "Post-log measurement" in text and "Open manual paste file" in text and "log_manual_distribution.py" in text,
         "experiment result source embedded": "embedded-experiment-result-clipboard" in text and "embedded-experiment-result-clipboard-report" in text,
-        "format candidate evidence gaps shown": "Top format candidates" in text and "published unmeasured" in text and "format_winner_readiness" in text and "Metric confidence" in text and "Next evidence action:" in text and "measure-ready" in text and "post+log" in text,
+        "format candidate evidence gaps shown": "Top format candidates" in text and "published unmeasured" in text and "format_winner_readiness" in text and "next_format_evidence_runbook" in text and "Next format evidence:" in text and "Format guardrail:" in text and "Metric confidence" in text and "Next evidence action:" in text and "measure-ready" in text and "post+log" in text,
     }
     missing_platform = [label for label, present in platform_checks.items() if not present]
     if missing_platform:
