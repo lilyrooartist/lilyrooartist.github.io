@@ -1550,7 +1550,7 @@ def social_platform_repair_guidance(item: dict) -> dict:
         }
     if "tiktok" in platform:
         return {
-            "repair_action": "Add TikTok OAuth credentials and confirm public posting approval, then push TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, and TIKTOK_REFRESH_TOKEN to the worker.",
+            "repair_action": "Add TikTok OAuth credentials, then push TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, and TIKTOK_REFRESH_TOKEN for upload-draft mode. Confirm public posting approval separately before direct public posting.",
             "repair_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
         }
     return {

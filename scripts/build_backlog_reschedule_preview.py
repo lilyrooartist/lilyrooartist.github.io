@@ -72,9 +72,9 @@ def clearance_steps(blocker: dict, readiness: dict) -> list[str]:
     steps = []
     if reason == "tiktok_credentials_missing" or platform == "tiktok":
         if missing:
-            steps.append("Add local TikTok OAuth credentials, then push worker secrets: " + ", ".join(missing) + ".")
+            steps.append("Add local TikTok OAuth credentials, then push upload-mode worker secrets: " + ", ".join(missing) + ".")
         if platform_payload.get("public_posting_approved") is False:
-            steps.append("Confirm TikTok public posting approval before treating auto-posting as ready.")
+            steps.append("Keep direct public posting blocked until TikTok public-posting approval is confirmed; upload mode can still create inbox drafts after credentials.")
         steps.append("Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair.")
     elif blocker:
         steps.append("Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply.")

@@ -1,6 +1,6 @@
 # Human Handoff Packet - Lily Roo
 
-Generated: 2026-06-22T09:50:45.909376Z
+Generated: 2026-06-22T09:59:02.809383Z
 
 ## Summary
 - Open handoff tasks: **9**
@@ -35,9 +35,9 @@ Generated: 2026-06-22T09:50:45.909376Z
   - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263`
   - Sequence preview: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263`
   - Sequence verify: `python3 scripts/refresh_promo_admin.py`
-  - Completion evidence: data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_post_publicly before TikTok backlog work is allowed.
+  - Completion evidence: data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_upload_drafts before TikTok upload-mode backlog work is allowed.
   - Next after apply: Recapture admin state and only then revisit TikTok approval or backlog reschedule rows.
-  - Guardrail: Run preflight and confirm local OAuth/public-posting setup before pushing secrets.
+  - Guardrail: Run preflight and confirm local OAuth setup before pushing upload-mode secrets; direct public posting remains separately approval-gated.
 - **Fill and import manual metric worksheet** (`needs_values`)
   - Owner: `tod`; tasks: **2**; blockers resolved: **6**
   - Fields: **6**
@@ -64,22 +64,22 @@ Generated: 2026-06-22T09:50:45.909376Z
   - Phase: `Platform setup`; owner: `tod`; status: `failed`; urgency: `high`
   - Detail: Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.
   - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263`
-  - Guardrail: Push worker secrets only after local OAuth/public posting setup is complete.
+  - Guardrail: Push worker secrets only after local platform setup is complete.
 - **Repair TikTok executor** (`platform-setup-FP-AUTO-264`)
   - Phase: `Platform setup`; owner: `tod`; status: `blocked`; urgency: `high`
-  - Detail: Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok public posting approval is false. Local secret source is also missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Complete TikTok OAuth/public posting setup locally, then push secrets and refresh Admin.
+  - Detail: Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok direct public posting approval is false, but upload-draft mode can proceed after credentials. Local secret source is also missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Complete TikTok OAuth setup locally, then push upload-mode secrets and refresh Admin.
   - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
-  - Guardrail: Run the TikTok preflight before pushing secrets; push worker secrets only after local OAuth/public posting setup is complete.
+  - Guardrail: Run the TikTok preflight before pushing secrets; push upload-mode secrets only after local OAuth setup is complete. Keep direct public posting blocked until approval is confirmed.
 - **Repair Facebook executor** (`platform-setup-FP-AUTO-265`)
   - Phase: `Platform setup`; owner: `tod`; status: `failed`; urgency: `high`
   - Detail: Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.
   - Preview/check: `python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run`
-  - Guardrail: Push worker secrets only after local OAuth/public posting setup is complete.
+  - Guardrail: Push worker secrets only after local platform setup is complete.
 - **Repair Instagram executor** (`platform-setup-FP-PLAN-TWELVE-DOLLARS-INSTAGRAM`)
   - Phase: `Platform setup`; owner: `tod`; status: `failed`; urgency: `high`
   - Detail: Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.
   - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM`
-  - Guardrail: Push worker secrets only after local OAuth/public posting setup is complete.
+  - Guardrail: Push worker secrets only after local platform setup is complete.
 - **Post I Learned It All in Fifteen Seconds to YouTube Community** (`manual-distribution-FP-AUTO-261`)
   - Phase: `Manual distribution`; owner: `tod`; status: `ready_for_manual_post`; urgency: `medium`
   - Detail: Post manually in YouTube Studio Community, then log the real public URL before marking distribution complete.

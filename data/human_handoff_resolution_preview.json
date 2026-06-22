@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T09:50:46.075324Z",
+  "generated_at": "2026-06-22T09:59:02.929607Z",
   "safe_mode": true,
   "source": {
     "resolution_worksheet": "data/human_handoff_resolution_worksheet.csv",
@@ -34,8 +34,8 @@
       "returncode": null,
       "preview_status": "skipped",
       "output_excerpt": "",
-      "completion_evidence": "data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_post_publicly before TikTok backlog work is allowed.",
-      "guardrail": "Push worker secrets only after local OAuth/public posting setup is complete."
+      "completion_evidence": "data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_upload_drafts before TikTok upload-mode backlog work is allowed.",
+      "guardrail": "Push worker secrets only after local platform setup is complete."
     },
     {
       "task_id": "platform-setup-FP-AUTO-264",
@@ -48,8 +48,8 @@
       "returncode": 1,
       "preview_status": "input_missing",
       "output_excerpt": "ERROR: TIKTOK_CLIENT_KEY is missing from secrets/social_api.env\nERROR: TIKTOK_CLIENT_SECRET is missing from secrets/social_api.env\nERROR: TIKTOK_REFRESH_TOKEN is missing from secrets/social_api.env",
-      "completion_evidence": "data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_post_publicly before TikTok backlog work is allowed.",
-      "guardrail": "Run the TikTok preflight before pushing secrets; push worker secrets only after local OAuth/public posting setup is complete."
+      "completion_evidence": "data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_upload_drafts before TikTok upload-mode backlog work is allowed.",
+      "guardrail": "Run the TikTok preflight before pushing secrets; push upload-mode secrets only after local OAuth setup is complete. Keep direct public posting blocked until approval is confirmed."
     },
     {
       "task_id": "platform-setup-FP-AUTO-265",
@@ -62,8 +62,8 @@
       "returncode": null,
       "preview_status": "skipped",
       "output_excerpt": "",
-      "completion_evidence": "data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_post_publicly before TikTok backlog work is allowed.",
-      "guardrail": "Push worker secrets only after local OAuth/public posting setup is complete."
+      "completion_evidence": "data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_upload_drafts before TikTok upload-mode backlog work is allowed.",
+      "guardrail": "Push worker secrets only after local platform setup is complete."
     },
     {
       "task_id": "platform-setup-FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
@@ -76,8 +76,8 @@
       "returncode": null,
       "preview_status": "skipped",
       "output_excerpt": "",
-      "completion_evidence": "data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_post_publicly before TikTok backlog work is allowed.",
-      "guardrail": "Push worker secrets only after local OAuth/public posting setup is complete."
+      "completion_evidence": "data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_upload_drafts before TikTok upload-mode backlog work is allowed.",
+      "guardrail": "Push worker secrets only after local platform setup is complete."
     },
     {
       "task_id": "manual-distribution-FP-AUTO-261",

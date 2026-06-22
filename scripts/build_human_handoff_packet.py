@@ -240,6 +240,7 @@ def platform_setup_tasks(packet: dict, tiktok_preflight: dict) -> list[dict]:
                 "preflight_status": preflight_summary.get("status") or row.get("preflight_status") or "",
                 "preflight_blocked_count": preflight_summary.get("blocked_count") if preflight_summary.get("blocked_count") is not None else row.get("preflight_blocked_count"),
                 "ready_to_push_worker_secrets": preflight_summary.get("ready_to_push_worker_secrets"),
+                "ready_to_upload_drafts": preflight_summary.get("ready_to_upload_drafts"),
                 "ready_to_post_publicly": preflight_summary.get("ready_to_post_publicly"),
                 "preflight_report": str((ROOT / "admin" / "reports" / "tiktok-setup-preflight.md").relative_to(ROOT)),
                 "preflight_command": "python3 scripts/build_tiktok_setup_preflight.py",
@@ -256,7 +257,7 @@ def platform_setup_tasks(packet: dict, tiktok_preflight: dict) -> list[dict]:
             row.get("apply_command") or "",
             str(PLATFORM_REPAIR.relative_to(ROOT)),
             impact,
-            guardrail="Run the TikTok preflight before pushing secrets; push worker secrets only after local OAuth/public posting setup is complete." if is_tiktok else "Push worker secrets only after local OAuth/public posting setup is complete.",
+            guardrail="Run the TikTok preflight before pushing secrets; push upload-mode secrets only after local OAuth setup is complete. Keep direct public posting blocked until approval is confirmed." if is_tiktok else "Push worker secrets only after local platform setup is complete.",
         ))
     return tasks
 
@@ -351,6 +352,16 @@ def task_input_needed(task: dict) -> tuple[str, str]:
     if phase == "Platform setup":
         missing = impact.get("missing_secrets") or impact.get("local_missing_secrets") or []
         secret_names = ", ".join(missing)
+        if str((impact.get("platform") or "")).lower() == "tiktok":
+            return (
+                "local_secret_presence_and_public_posting_approval",
+                (
+                    f"populate local env from data/tiktok_secret_handoff_template.env for upload-mode names: {secret_names}; "
+                    "public posting approval is only needed for direct public posting"
+                    if secret_names
+                    else "complete TikTok upload-mode preflight; direct public posting remains separately approval-gated"
+                ),
+            )
         return (
             "local_secret_presence_and_public_posting_approval",
             f"populate local env from data/tiktok_secret_handoff_template.env for names: {secret_names}" if secret_names else "complete platform setup preflight",
@@ -486,9 +497,9 @@ def build_action_docket(tasks: list[dict], blocker_summary: dict, approval_runwa
             "preview_command": platform_preview_command,
             "apply_command": platform_apply_command,
             "command_sequence": command_sequence(platform_preview_command, platform_apply_command, "python3 scripts/refresh_promo_admin.py"),
-            "completion_evidence": "data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_post_publicly before TikTok backlog work is allowed.",
+            "completion_evidence": "data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_upload_drafts before TikTok upload-mode backlog work is allowed.",
             "next_step_after_apply": "Recapture admin state and only then revisit TikTok approval or backlog reschedule rows.",
-            "guardrail": "Run preflight and confirm local OAuth/public-posting setup before pushing secrets.",
+            "guardrail": "Run preflight and confirm local OAuth setup before pushing upload-mode secrets; direct public posting remains separately approval-gated.",
         },
         {
             "id": "manual-metric-worksheet",

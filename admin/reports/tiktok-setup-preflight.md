@@ -1,6 +1,6 @@
 # TikTok Setup Preflight - Lily Roo
 
-Generated: 2026-06-22T09:50:45.679689Z
+Generated: 2026-06-22T09:59:02.660275Z
 
 ## Summary
 - Status: **blocked**
@@ -61,8 +61,8 @@ Generated: 2026-06-22T09:50:45.679689Z
 - Direct post OAuth scopes: `user.info.basic, video.upload, video.publish`
 - Scope strategy: Request only video.upload for the first inbox-draft connector path; add video.publish only after direct public posting approval exists.
 - Local secret env: `secrets/social_api.env`
-- Local secret env exists: **False**
-- Initialize local secret env: `mkdir -p ../secrets && test -f ../secrets/social_api.env || cp data/tiktok_secret_handoff_template.env ../secrets/social_api.env`
+- Local secret env exists: **True**
+- Initialize local secret env: `not needed`
 - Missing locally: `TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN`
 - Missing for auth URL: `TIKTOK_CLIENT_KEY, TIKTOK_REDIRECT_URI`
 - Missing for token exchange: `TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REDIRECT_URI`
@@ -91,9 +91,8 @@ Generated: 2026-06-22T09:50:45.679689Z
   - data/platform_repair_status.json no longer lists TikTok as blocked by missing credentials.
 
 ## Checks
-- **local_secret_env_file**: `waiting`
-  - Initialize secrets/social_api.env from the blank handoff template before adding TikTok app values.
-  - Command: `mkdir -p ../secrets && test -f ../secrets/social_api.env || cp data/tiktok_secret_handoff_template.env ../secrets/social_api.env`
+- **local_secret_env_file**: `pass`
+  - Local secret env exists at secrets/social_api.env.
 - **oauth_authorization_url**: `blocked`
   - secrets/social_api.env is missing auth URL values: TIKTOK_CLIENT_KEY, TIKTOK_REDIRECT_URI.
   - Command: `python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload`

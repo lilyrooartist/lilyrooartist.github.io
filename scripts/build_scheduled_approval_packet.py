@@ -577,14 +577,13 @@ def platform_repair_hint(platform: str) -> dict:
         "repair_runbook": "admin/reports/tiktok-repair-runbook.md",
         "repair_command": summary.get("oauth_preview_command") or "python3 scripts/tiktok_oauth_handoff.py",
         "repair_preview_command": summary.get("push_preview_command") or "",
-        "repair_gate": "blocked_until_tiktok_credentials_and_public_posting_approval",
+        "repair_gate": "blocked_until_tiktok_upload_credentials",
         "repair_blockers": list(dict.fromkeys(
             (summary.get("local_missing_secrets") or [])
             + (summary.get("worker_missing_secrets") or [])
-            + ([] if summary.get("public_posting_approved") else ["TIKTOK_PUBLIC_POSTING_APPROVED"])
         )),
         "repair_next_step": (
-            "Complete the TikTok setup preflight before approving this row; approval alone would not make the executor publishable."
+            "Complete the TikTok upload-mode setup preflight before approving this row; direct public posting remains separately approval-gated."
         ),
         "repair_apply_command": runbook_summary.get("apply_command") or "",
     }

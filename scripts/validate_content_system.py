@@ -899,6 +899,7 @@ def validate_generated_outputs(failures):
             (action.get("context") or {}).get("missing_secrets")
             and (action.get("context") or {}).get("local_missing_secrets")
             and (action.get("context") or {}).get("local_secret_source")
+            and "upload" in ((action.get("context") or {}).get("repair_action") or "").lower()
             for action in tiktok_actions
         ):
             ok("promo operations packet includes TikTok remote and local missing-secret diagnostics")
@@ -1061,6 +1062,7 @@ def validate_generated_outputs(failures):
             and any(row.get("input_needed") == "private_metric_values" and "manual_metric_entry_template.csv" in row.get("worksheet_reference", "") for row in resolution_rows)
             and any(row.get("input_needed") in {"manual_post_review_and_public_url", "public_post_url"} and "manual_distribution_url_template.csv" in row.get("worksheet_reference", "") for row in resolution_rows)
             and any(row.get("input_needed") == "local_secret_presence_and_public_posting_approval" and "tiktok_secret_handoff_template.env" in row.get("worksheet_reference", "") for row in resolution_rows)
+            and any(row.get("input_needed") == "local_secret_presence_and_public_posting_approval" and "public posting approval is only needed for direct public posting" in row.get("worksheet_reference", "") for row in resolution_rows)
             and all("TIKTOK_CLIENT_KEY=" not in row.get("worksheet_reference", "") and "PUBLIC_URL" not in row.get("worksheet_reference", "") for row in resolution_rows)
             and "private metric values" in (resolution_worksheet.get("redaction") or "")
             and sum(int(value or 0) for value in owners.values()) == len(tasks)

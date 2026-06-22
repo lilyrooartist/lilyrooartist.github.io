@@ -382,7 +382,7 @@ def build_unlock_roadmap(rows: list[dict], projection: dict) -> list[dict]:
             "blockers_resolved": len(tiktok_rows),
             "unlocks": [
                 "Held TikTok approval rows can pass platform-readiness review.",
-                "Approved TikTok backlog can become safe to reschedule and publish.",
+                "Approved TikTok backlog can become safe to reschedule into upload-draft creation.",
             ],
             "blocked_by": unique_values((tiktok_rows[0].get("missing_secrets") or []) + (tiktok_rows[0].get("local_missing_secrets") or [])) if tiktok_rows else [],
             "preview_command": (tiktok_rows[0].get("preview_command") or "") if tiktok_rows else "",

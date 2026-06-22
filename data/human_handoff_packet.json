@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T09:50:45.909376Z",
+  "generated_at": "2026-06-22T09:59:02.809383Z",
   "safe_mode": true,
   "source": {
     "promotion_blocker_ledger": "data/promotion_blocker_ledger.json",
@@ -108,7 +108,7 @@
           "blockers_resolved": 1,
           "unlocks": [
             "Held TikTok approval rows can pass platform-readiness review.",
-            "Approved TikTok backlog can become safe to reschedule and publish."
+            "Approved TikTok backlog can become safe to reschedule into upload-draft creation."
           ],
           "blocked_by": [
             "TIKTOK_CLIENT_KEY",
@@ -129,8 +129,8 @@
             "Approved past-due queue rows get a fresh schedule after executor blockers clear."
           ],
           "blocked_by": [],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24",
-          "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
+          "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
           "source_path": "data/backlog_reschedule_preview.json"
         },
         {
@@ -267,9 +267,9 @@
             "required_before_apply": false
           }
         ],
-        "completion_evidence": "data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_post_publicly before TikTok backlog work is allowed.",
+        "completion_evidence": "data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_upload_drafts before TikTok upload-mode backlog work is allowed.",
         "next_step_after_apply": "Recapture admin state and only then revisit TikTok approval or backlog reschedule rows.",
-        "guardrail": "Run preflight and confirm local OAuth/public-posting setup before pushing secrets."
+        "guardrail": "Run preflight and confirm local OAuth setup before pushing upload-mode secrets; direct public posting remains separately approval-gated."
       }
     ],
     "checklist": [
@@ -397,9 +397,9 @@
             "required_before_apply": false
           }
         ],
-        "completion_evidence": "data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_post_publicly before TikTok backlog work is allowed.",
+        "completion_evidence": "data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_upload_drafts before TikTok upload-mode backlog work is allowed.",
         "next_step_after_apply": "Recapture admin state and only then revisit TikTok approval or backlog reschedule rows.",
-        "guardrail": "Run preflight and confirm local OAuth/public-posting setup before pushing secrets."
+        "guardrail": "Run preflight and confirm local OAuth setup before pushing upload-mode secrets; direct public posting remains separately approval-gated."
       },
       {
         "id": "manual-metric-worksheet",
@@ -619,7 +619,7 @@
         "repair_checklist_blocked_count": 1
       },
       "links": [],
-      "guardrail": "Push worker secrets only after local OAuth/public posting setup is complete."
+      "guardrail": "Push worker secrets only after local platform setup is complete."
     },
     {
       "id": "platform-setup-FP-AUTO-264",
@@ -628,7 +628,7 @@
       "owner": "tod",
       "urgency": "high",
       "status": "blocked",
-      "detail": "Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok public posting approval is false. Local secret source is also missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Complete TikTok OAuth/public posting setup locally, then push secrets and refresh Admin.",
+      "detail": "Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok direct public posting approval is false, but upload-draft mode can proceed after credentials. Local secret source is also missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Complete TikTok OAuth setup locally, then push upload-mode secrets and refresh Admin.",
       "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
       "apply_command": "",
       "source_path": "data/platform_repair_status.json",
@@ -649,12 +649,13 @@
         "preflight_status": "blocked",
         "preflight_blocked_count": 7,
         "ready_to_push_worker_secrets": false,
+        "ready_to_upload_drafts": false,
         "ready_to_post_publicly": false,
         "preflight_report": "admin/reports/tiktok-setup-preflight.md",
         "preflight_command": "python3 scripts/build_tiktok_setup_preflight.py"
       },
       "links": [],
-      "guardrail": "Run the TikTok preflight before pushing secrets; push worker secrets only after local OAuth/public posting setup is complete."
+      "guardrail": "Run the TikTok preflight before pushing secrets; push upload-mode secrets only after local OAuth setup is complete. Keep direct public posting blocked until approval is confirmed."
     },
     {
       "id": "platform-setup-FP-AUTO-265",
@@ -675,7 +676,7 @@
         "repair_checklist_blocked_count": 0
       },
       "links": [],
-      "guardrail": "Push worker secrets only after local OAuth/public posting setup is complete."
+      "guardrail": "Push worker secrets only after local platform setup is complete."
     },
     {
       "id": "platform-setup-FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
@@ -698,7 +699,7 @@
         "repair_checklist_blocked_count": 1
       },
       "links": [],
-      "guardrail": "Push worker secrets only after local OAuth/public posting setup is complete."
+      "guardrail": "Push worker secrets only after local platform setup is complete."
     },
     {
       "id": "manual-distribution-FP-AUTO-261",

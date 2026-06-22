@@ -1,6 +1,6 @@
 # Scheduled Approval Packet - Lily Roo
 
-Generated: 2026-06-22T09:50:45.084102Z
+Generated: 2026-06-22T09:59:01.514900Z
 
 ## Summary
 - Approval blockers: **1**
@@ -80,7 +80,7 @@ Generated: 2026-06-22T09:50:45.084102Z
 ### Held
 - **TikTok - I Learned It All in Fifteen Seconds** (`FP-AUTO-259`)
   - Held by `platform_readiness`: Executor readiness snapshot marks platform blocked. Missing secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.
-    - Repair next step: Complete the TikTok setup preflight before approving this row; approval alone would not make the executor publishable.
+    - Repair next step: Complete the TikTok upload-mode setup preflight before approving this row; direct public posting remains separately approval-gated.
     - Repair report: `admin/reports/tiktok-setup-preflight.md`
     - Repair runbook: `admin/reports/tiktok-repair-runbook.md`
     - Repair command: `python3 scripts/tiktok_oauth_handoff.py`
@@ -106,7 +106,7 @@ Generated: 2026-06-22T09:50:45.084102Z
   - Checked batch member: `False`
   - Failed checks holding this row:
     - `platform_readiness`: Executor readiness snapshot marks platform blocked. Missing secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.
-      - Repair next step: Complete the TikTok setup preflight before approving this row; approval alone would not make the executor publishable.
+      - Repair next step: Complete the TikTok upload-mode setup preflight before approving this row; direct public posting remains separately approval-gated.
       - Repair report: `admin/reports/tiktok-setup-preflight.md`
       - Repair runbook: `admin/reports/tiktok-repair-runbook.md`
       - Repair command: `python3 scripts/tiktok_oauth_handoff.py`

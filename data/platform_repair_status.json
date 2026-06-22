@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T09:50:45.720947Z",
+  "generated_at": "2026-06-22T09:59:02.686820Z",
   "safe_mode": true,
   "source": {
     "promo_operations_packet": "data/promo_operations_packet.json",
@@ -215,13 +215,12 @@
       "attempts": 0,
       "updated_at": "2026-06-22T06:15:24.662Z",
       "error_summary": "",
-      "repair_action": "Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok public posting approval is false. Local secret source is also missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Complete TikTok OAuth/public posting setup locally, then push secrets and refresh Admin.",
+      "repair_action": "Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok direct public posting approval is false, but upload-draft mode can proceed after credentials. Local secret source is also missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Complete TikTok OAuth setup locally, then push upload-mode secrets and refresh Admin.",
       "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
       "apply_command": "",
       "blocked_apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
       "blocked_apply_reasons": [
-        "local_secret_source_missing:TIKTOK_CLIENT_KEY,TIKTOK_CLIENT_SECRET,TIKTOK_REFRESH_TOKEN",
-        "public_posting_approval_not_confirmed"
+        "local_secret_source_missing:TIKTOK_CLIENT_KEY,TIKTOK_CLIENT_SECRET,TIKTOK_REFRESH_TOKEN"
       ],
       "retry_reset_verification_command": "",
       "retry_reset_preview_command": "",
@@ -284,9 +283,9 @@
         },
         {
           "id": "public_posting_approval",
-          "label": "Public posting approval",
+          "label": "Direct public posting approval",
           "status": "blocked",
-          "detail": "Platform readiness says public posting approval is false.",
+          "detail": "Direct public posting approval is false; TikTok upload-draft mode can still proceed after credentials.",
           "command": ""
         },
         {

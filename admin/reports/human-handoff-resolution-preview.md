@@ -1,6 +1,6 @@
 # Human Handoff Resolution Preview - Lily Roo
 
-Generated: 2026-06-22T09:50:46.075324Z
+Generated: 2026-06-22T09:59:02.929607Z
 
 ## Summary
 - Worksheet rows: **9**
@@ -15,23 +15,23 @@ Generated: 2026-06-22T09:50:46.075324Z
   - Phase: `Platform setup`; input needed: `local_secret_presence_and_public_posting_approval`
   - Safety: `skipped` (not_marked_preview_safe)
   - Command: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263`
-  - Guardrail: Push worker secrets only after local OAuth/public posting setup is complete.
+  - Guardrail: Push worker secrets only after local platform setup is complete.
 - **platform-setup-FP-AUTO-264** (`input_missing`)
   - Phase: `Platform setup`; input needed: `local_secret_presence_and_public_posting_approval`
   - Safety: `safe_preview` (dry_run_command)
   - Command: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
   - Output: ERROR: TIKTOK_CLIENT_KEY is missing from secrets/social_api.env | ERROR: TIKTOK_CLIENT_SECRET is missing from secrets/social_api.env | ERROR: TIKTOK_REFRESH_TOKEN is missing from secrets/social_api.env
-  - Guardrail: Run the TikTok preflight before pushing secrets; push worker secrets only after local OAuth/public posting setup is complete.
+  - Guardrail: Run the TikTok preflight before pushing secrets; push upload-mode secrets only after local OAuth setup is complete. Keep direct public posting blocked until approval is confirmed.
 - **platform-setup-FP-AUTO-265** (`skipped`)
   - Phase: `Platform setup`; input needed: `local_secret_presence_and_public_posting_approval`
   - Safety: `skipped` (not_marked_preview_safe)
   - Command: `python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run`
-  - Guardrail: Push worker secrets only after local OAuth/public posting setup is complete.
+  - Guardrail: Push worker secrets only after local platform setup is complete.
 - **platform-setup-FP-PLAN-TWELVE-DOLLARS-INSTAGRAM** (`skipped`)
   - Phase: `Platform setup`; input needed: `local_secret_presence_and_public_posting_approval`
   - Safety: `skipped` (not_marked_preview_safe)
   - Command: `python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM`
-  - Guardrail: Push worker secrets only after local OAuth/public posting setup is complete.
+  - Guardrail: Push worker secrets only after local platform setup is complete.
 - **manual-distribution-FP-AUTO-261** (`skipped`)
   - Phase: `Manual distribution`; input needed: `public_post_url`
   - Safety: `skipped` (placeholder_public_url)

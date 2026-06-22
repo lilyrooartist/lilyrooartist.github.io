@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T09:50:46.396677Z",
+  "generated_at": "2026-06-22T09:59:03.168950Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -58,11 +58,10 @@
       "platform": "TikTok",
       "reason": "tiktok_credentials_missing",
       "status": "blocked",
-      "repair_action": "Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok public posting approval is false. Local secret source is also missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Complete TikTok OAuth/public posting setup locally, then push secrets and refresh Admin.",
+      "repair_action": "Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok direct public posting approval is false, but upload-draft mode can proceed after credentials. Local secret source is also missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Complete TikTok OAuth setup locally, then push upload-mode secrets and refresh Admin.",
       "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
       "blocked_apply_reasons": [
-        "local_secret_source_missing:TIKTOK_CLIENT_KEY,TIKTOK_CLIENT_SECRET,TIKTOK_REFRESH_TOKEN",
-        "public_posting_approval_not_confirmed"
+        "local_secret_source_missing:TIKTOK_CLIENT_KEY,TIKTOK_CLIENT_SECRET,TIKTOK_REFRESH_TOKEN"
       ]
     }
   ],
@@ -124,7 +123,7 @@
   "guardrails": [
     "Review-only packet; it does not approve, schedule, post, or log URLs.",
     "Manual YouTube Community rows must be reviewed before approval.",
-    "TikTok stays blocked until OAuth credentials and public-posting approval are present.",
+    "TikTok upload-draft mode stays blocked until OAuth credentials are present; direct public posting also requires public-posting approval.",
     "Do not declare winning formats until the winner-readiness gate is satisfied."
   ]
 }

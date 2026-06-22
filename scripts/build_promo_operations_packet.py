@@ -289,13 +289,13 @@ def repair_action_for(platform: str, fallback: str, diagnostics: dict) -> str:
         if missing:
             pieces.append(f"Missing worker secrets: {missing}.")
         if approval is False:
-            pieces.append("TikTok public posting approval is false.")
+            pieces.append("TikTok direct public posting approval is false, but upload-draft mode can proceed after credentials.")
         local_missing = ", ".join(diagnostics.get("local_missing_secrets") or [])
         if local_missing:
             pieces.append(f"Local secret source is also missing: {local_missing}.")
-            pieces.append("Complete TikTok OAuth/public posting setup locally, then push secrets and refresh Admin.")
+            pieces.append("Complete TikTok OAuth setup locally, then push upload-mode secrets and refresh Admin.")
         else:
-            pieces.append("Complete TikTok OAuth/public posting setup, push secrets, then refresh Admin.")
+            pieces.append("Complete TikTok OAuth setup, push upload-mode secrets, then refresh Admin.")
         return " ".join(pieces)
     if platform_slug(platform) == "instagram":
         reason = diagnostics.get("account_resolution_reason") or ""

@@ -166,7 +166,7 @@ def build_packet() -> dict:
         "guardrails": [
             "Review-only packet; it does not approve, schedule, post, or log URLs.",
             "Manual YouTube Community rows must be reviewed before approval.",
-            "TikTok stays blocked until OAuth credentials and public-posting approval are present.",
+            "TikTok upload-draft mode stays blocked until OAuth credentials are present; direct public posting also requires public-posting approval.",
             "Do not declare winning formats until the winner-readiness gate is satisfied.",
         ],
     }

@@ -131,17 +131,17 @@ def repair_checklist(context: dict, platform_readiness: dict, preview_command: s
     if public_posting is False:
         checklist.append({
             "id": "public_posting_approval",
-            "label": "Public posting approval",
+            "label": "Direct public posting approval",
             "status": "blocked",
-            "detail": "Platform readiness says public posting approval is false.",
+            "detail": "Direct public posting approval is false; TikTok upload-draft mode can still proceed after credentials.",
             "command": "",
         })
     elif public_posting is True:
         checklist.append({
             "id": "public_posting_approval",
-            "label": "Public posting approval",
+            "label": "Direct public posting approval",
             "status": "pass",
-            "detail": "Platform readiness says public posting approval is true.",
+            "detail": "Direct public posting approval is true.",
             "command": "",
         })
     checklist.append({
@@ -258,7 +258,9 @@ def build_status() -> dict:
         if local_missing:
             blocked_apply_reasons.append(f"local_secret_source_missing:{','.join(local_missing)}")
         if platform_slug(platform) == "tiktok" and public_posting_approved is not True:
-            blocked_apply_reasons.append("public_posting_approval_not_confirmed")
+            direct_mode = str(preflight_summary.get("worker_posting_mode") or "").lower() == "direct"
+            if direct_mode:
+                blocked_apply_reasons.append("public_posting_approval_not_confirmed_for_direct_posting")
         apply_command = "" if blocked_apply_reasons else raw_apply_command
         checklist = repair_checklist(context, platform_readiness, preview_command, apply_command)
         rows.append({
