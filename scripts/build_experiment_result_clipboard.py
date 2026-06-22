@@ -275,7 +275,27 @@ def measurement_priority_cards(metric_cards: list[dict], missing_cards: list[dic
             ),
         })
     priority.sort(key=lambda item: (item["priority"], item["experiment_format"], item["platform"], item["post_id"]))
-    return priority[:12]
+    selected = []
+    selected_keys = set()
+    covered_formats = set()
+    for item in priority:
+        fmt = item.get("experiment_format") or "Unknown format"
+        key = (item.get("action"), item.get("post_id"), fmt)
+        if fmt in covered_formats:
+            continue
+        selected.append(item)
+        selected_keys.add(key)
+        covered_formats.add(fmt)
+    for item in priority:
+        if len(selected) >= 12:
+            break
+        key = (item.get("action"), item.get("post_id"), item.get("experiment_format") or "Unknown format")
+        if key in selected_keys:
+            continue
+        selected.append(item)
+        selected_keys.add(key)
+    selected.sort(key=lambda item: (item["priority"], item["experiment_format"], item["platform"], item["post_id"]))
+    return selected
 
 
 def post_log_measurement_handoff(manual_posting: dict, summary: dict) -> dict:

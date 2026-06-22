@@ -1183,7 +1183,7 @@
 }</script>
 
 <script type="application/json" id="embedded-promo-engine-status">{
-  "generated_at": "2026-06-22T08:45:25.250318+00:00",
+  "generated_at": "2026-06-22T08:47:02.440000+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -1268,7 +1268,7 @@
             "measurement_ready_count": 3,
             "post_and_log_count": 0,
             "log_url_count": 4,
-            "blocked_count": 2,
+            "blocked_count": 1,
             "post_log_handoff_count": 0,
             "candidate_post_ids": [
               "FP-AUTO-260",
@@ -1278,8 +1278,7 @@
               "FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK",
               "FP-PLAN-TWELVE-DOLLARS-X",
               "FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK",
-              "FP-AUTO-265",
-              "FP-AUTO-258"
+              "FP-AUTO-265"
             ],
             "preview_command": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run",
             "apply_command": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin",
@@ -1359,16 +1358,18 @@
           "score": 5,
           "decision_unblock": {
             "status": "needs_evidence",
-            "next_action": "Keep publishing and refresh result collection.",
-            "first_action": "",
-            "first_post_id": "",
-            "first_platform": "",
+            "next_action": "Clear platform blocker before this format can produce evidence.",
+            "first_action": "clear_platform_blocker",
+            "first_post_id": "FP-AUTO-264",
+            "first_platform": "TikTok",
             "measurement_ready_count": 0,
             "post_and_log_count": 0,
             "log_url_count": 0,
-            "blocked_count": 0,
+            "blocked_count": 1,
             "post_log_handoff_count": 0,
-            "candidate_post_ids": [],
+            "candidate_post_ids": [
+              "FP-AUTO-264"
+            ],
             "preview_command": "",
             "apply_command": "",
             "report_path": "admin/reports/experiment-result-clipboard.md"
@@ -2747,10 +2748,10 @@
         {
           "action": "clear_platform_blocker",
           "priority": 4,
-          "post_id": "FP-AUTO-258",
-          "platform": "Instagram",
+          "post_id": "FP-AUTO-264",
+          "platform": "TikTok",
           "song": "I Learned It All in Fifteen Seconds",
-          "experiment_format": "Release-art image + story hook",
+          "experiment_format": "Short video clip + platform-native CTA",
           "post_url": "",
           "source_row": "",
           "pending_fields": [],
@@ -2761,7 +2762,7 @@
           "paste_text_path": "",
           "log_preview_command": "",
           "log_apply_command": "",
-          "reason": "Platform work is blocked; clear the platform repair gate before URL logging can produce metrics. 3 logged post(s), 8 missing URL(s) in this format."
+          "reason": "Platform work is blocked; clear the platform repair gate before URL logging can produce metrics. 0 logged post(s), 2 missing URL(s) in this format."
         }
       ]
     },
@@ -3559,11 +3560,11 @@
       "commits_snapshots": true,
       "safe_refresh_command": "python3 scripts/refresh_promo_admin.py",
       "source_revision": {
-        "commit": "0aba43c9e1b67cb3897d92154593e8bb634c36eb",
-        "short_commit": "0aba43c",
+        "commit": "1298100a9af17aed817f0b86307d4e0acd5bc061",
+        "short_commit": "1298100",
         "branch": "main",
-        "committed_at": "2026-06-22T16:42:55+08:00",
-        "source_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/commit/0aba43c9e1b67cb3897d92154593e8bb634c36eb"
+        "committed_at": "2026-06-22T16:45:50+08:00",
+        "source_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/commit/1298100a9af17aed817f0b86307d4e0acd5bc061"
       },
       "latest_run_covers_source_commit": false,
       "latest_run_coverage_basis": "source_changed_after_latest_run",
@@ -3617,6 +3618,7 @@
         "data/scheduled_posts.csv",
         "data/x_post_results.json",
         "scripts/apply_promo_queue_plan.py",
+        "scripts/build_experiment_result_clipboard.py",
         "scripts/build_manual_posting_clipboard.py",
         "scripts/capture_facebook_post_results.py",
         "scripts/capture_x_post_results.py",
@@ -7546,18 +7548,18 @@
       "missing": 0,
       "checked_no_change": 1,
       "gated_manual_pending": 0,
-      "checked_at": "2026-06-22T08:45:25.250318+00:00"
+      "checked_at": "2026-06-22T08:47:02.440000+00:00"
     },
     "sources": [
       {
         "name": "release_status",
         "path": "data/distrokid_release_status.json",
         "status": "checked_no_change",
-        "age_hours": 119.3,
+        "age_hours": 119.4,
         "max_age_hours": 72,
         "timestamp": "2026-06-17T09:25:00+00:00",
         "refresh_command": "Store checks are current; update data/distrokid_release_status.json when a verified public URL appears.",
-        "checked_at": "2026-06-22T08:45:25.250318+00:00",
+        "checked_at": "2026-06-22T08:47:02.440000+00:00",
         "checked_age_hours": 0.0,
         "evidence": "7 pending store links checked; no new public URLs found."
       },
@@ -7565,7 +7567,7 @@
         "name": "scheduled_posts",
         "path": "admin/future-posts.json",
         "status": "fresh",
-        "age_hours": 0.1,
+        "age_hours": 0.2,
         "max_age_hours": 72,
         "timestamp": "2026-06-22T08:37:42.638724+00:00",
         "refresh_command": "python3 scripts/sync_future_posts.py"
@@ -7639,7 +7641,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-22T08:45:25.250318+00:00",
+        "timestamp": "2026-06-22T08:47:02.440000+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin"
       },
       {
@@ -8050,7 +8052,7 @@
     "Re-check checked-pending store links: 7 music site snapshot(s) still have no public URL; next recommended re-check after 2026-06-23T08:40:02.958866+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 then.",
     "Current unlock gate: Approve checked scheduled rows (blocked); 0 ready, 3 blocked/warning; see data/promo_unlock_sequence.json.",
     "Review handoff preview health: 3 missing input; see data/human_handoff_resolution_preview.json.",
-    "Refresh automation coverage: latest scheduled run has not covered 0aba43c; dispatch https://github.com/lilyrooartist/lilyrooartist.github.io/actions/workflows/promo-admin-refresh.yml or wait for the next scheduled run.",
+    "Refresh automation coverage: latest scheduled run has not covered 1298100; dispatch https://github.com/lilyrooartist/lilyrooartist.github.io/actions/workflows/promo-admin-refresh.yml or wait for the next scheduled run.",
     "Preview approved backlog reschedule: python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24"
   ]
 }</script>
@@ -18636,7 +18638,7 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
 
 
 <script type="application/json" id="embedded-experiment-result-clipboard">{
-  "generated_at": "2026-06-22T08:45:25.207309Z",
+  "generated_at": "2026-06-22T08:47:02.396665Z",
   "safe_mode": true,
   "source": {
     "experiment_result_collection_packet": "data/experiment_result_collection_packet.json",
@@ -19174,10 +19176,10 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
     {
       "action": "clear_platform_blocker",
       "priority": 4,
-      "post_id": "FP-AUTO-258",
-      "platform": "Instagram",
+      "post_id": "FP-AUTO-264",
+      "platform": "TikTok",
       "song": "I Learned It All in Fifteen Seconds",
-      "experiment_format": "Release-art image + story hook",
+      "experiment_format": "Short video clip + platform-native CTA",
       "post_url": "",
       "source_row": "",
       "pending_fields": [],
@@ -19188,7 +19190,7 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
       "paste_text_path": "",
       "log_preview_command": "",
       "log_apply_command": "",
-      "reason": "Platform work is blocked; clear the platform repair gate before URL logging can produce metrics. 3 logged post(s), 8 missing URL(s) in this format."
+      "reason": "Platform work is blocked; clear the platform repair gate before URL logging can produce metrics. 0 logged post(s), 2 missing URL(s) in this format."
     }
   ],
   "post_log_measurement_handoff": {
@@ -19393,7 +19395,7 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
 
 <script type="text/plain" id="embedded-experiment-result-clipboard-report"># Experiment Result Clipboard - Lily Roo
 
-Generated: 2026-06-22T08:45:25.207309Z
+Generated: 2026-06-22T08:47:02.396665Z
 
 ## Summary
 - Status: **needs_values**
@@ -19498,7 +19500,7 @@ Generated: 2026-06-22T08:45:25.207309Z
 - **Log public URL** `FP-PLAN-TWELVE-DOLLARS-X` X / Release-art image + story hook: Cannot collect metrics until the public URL is logged. 3 logged post(s), 8 missing URL(s) in this format.
 - **Log public URL** `FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK` X / Release-art image + story hook: Cannot collect metrics until the public URL is logged. 3 logged post(s), 8 missing URL(s) in this format.
 - **Clear platform blocker** `FP-AUTO-265` Facebook / Release-art image + story hook: Platform work is blocked; clear the platform repair gate before URL logging can produce metrics. 3 logged post(s), 8 missing URL(s) in this format.
-- **Clear platform blocker** `FP-AUTO-258` Instagram / Release-art image + story hook: Platform work is blocked; clear the platform repair gate before URL logging can produce metrics. 3 logged post(s), 8 missing URL(s) in this format.
+- **Clear platform blocker** `FP-AUTO-264` TikTok / Short video clip + platform-native CTA: Platform work is blocked; clear the platform repair gate before URL logging can produce metrics. 0 logged post(s), 2 missing URL(s) in this format.
 
 ## Post-Log Measurement Handoff
 - Status: **waiting_for_public_urls**

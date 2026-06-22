@@ -1,6 +1,6 @@
 # Experiment Result Clipboard - Lily Roo
 
-Generated: 2026-06-22T08:45:25.207309Z
+Generated: 2026-06-22T08:47:02.396665Z
 
 ## Summary
 - Status: **needs_values**
@@ -105,7 +105,7 @@ Generated: 2026-06-22T08:45:25.207309Z
 - **Log public URL** `FP-PLAN-TWELVE-DOLLARS-X` X / Release-art image + story hook: Cannot collect metrics until the public URL is logged. 3 logged post(s), 8 missing URL(s) in this format.
 - **Log public URL** `FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK` X / Release-art image + story hook: Cannot collect metrics until the public URL is logged. 3 logged post(s), 8 missing URL(s) in this format.
 - **Clear platform blocker** `FP-AUTO-265` Facebook / Release-art image + story hook: Platform work is blocked; clear the platform repair gate before URL logging can produce metrics. 3 logged post(s), 8 missing URL(s) in this format.
-- **Clear platform blocker** `FP-AUTO-258` Instagram / Release-art image + story hook: Platform work is blocked; clear the platform repair gate before URL logging can produce metrics. 3 logged post(s), 8 missing URL(s) in this format.
+- **Clear platform blocker** `FP-AUTO-264` TikTok / Short video clip + platform-native CTA: Platform work is blocked; clear the platform repair gate before URL logging can produce metrics. 0 logged post(s), 2 missing URL(s) in this format.
 
 ## Post-Log Measurement Handoff
 - Status: **waiting_for_public_urls**
