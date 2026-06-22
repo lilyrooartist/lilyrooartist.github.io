@@ -67,6 +67,9 @@ def post_card(row: dict) -> dict:
         "reason": "Experiment result collection starts after the real public URL is logged in Published_Log.csv.",
         "first_measurement_window": "Collect first public performance values after the post has had time to accumulate views.",
     }
+    paste_text = posting.get("paste_text") or row.get("copy_block") or ""
+    asset_url = posting.get("asset_url") or row.get("asset_download_url") or ""
+    asset_local_path = (row.get("asset_audit") or {}).get("local_path") or ""
     return {
         "id": post_id,
         "release": row.get("release") or "",
@@ -74,11 +77,11 @@ def post_card(row: dict) -> dict:
         "status": row.get("distribution_status") or "",
         "posting_surface": posting.get("posting_surface") or "YouTube Studio Community",
         "public_community_url": posting.get("public_community_url") or "",
-        "paste_text": posting.get("paste_text") or row.get("copy_block") or "",
+        "paste_text": paste_text,
         "paste_text_path": str(paste_text_path.relative_to(ROOT)),
-        "asset_url": posting.get("asset_url") or row.get("asset_download_url") or "",
+        "asset_url": asset_url,
         "asset_status": (row.get("asset_audit") or {}).get("status") or "",
-        "asset_local_path": (row.get("asset_audit") or {}).get("local_path") or "",
+        "asset_local_path": asset_local_path,
         "destination_links": row.get("destination_links") or [],
         "destination_link_audit": row.get("destination_link_audit") or [],
         "selected_cta_strength": row.get("selected_cta_strength") or "",
@@ -90,6 +93,26 @@ def post_card(row: dict) -> dict:
         "log_apply_command": log_apply_command,
         "log_notes": log_effect.get("notes") or "",
         "result_handoff": result_handoff,
+        "posting_bundle": {
+            "surface_url": posting.get("public_community_url") or "",
+            "copy_source": str(paste_text_path.relative_to(ROOT)),
+            "asset_source": asset_local_path or asset_url,
+            "asset_url": asset_url,
+            "public_url_required": True,
+            "url_placeholder": log_effect.get("url_placeholder") or "PUBLIC_URL",
+            "preview_command_template": log_preview_command,
+            "apply_command_template": log_apply_command,
+            "result_collection_trigger": "Log the public URL, then use admin/reports/experiment-result-clipboard.md after the post has accumulated first metrics.",
+            "operator_sequence": [
+                "Open the YouTube Community surface.",
+                "Paste the copy from copy_source.",
+                "Attach the asset from asset_source.",
+                "Publish the Community post.",
+                "Copy the real public Community post URL.",
+                "Run the preview command with the real URL.",
+                "Run the apply command after the preview passes.",
+            ],
+        },
         "after_posting_checklist": [
             "Copy the real public YouTube Community post URL.",
             f"Run the log preview command: {log_preview_command}",
@@ -141,6 +164,7 @@ def build_payload() -> dict:
             "postable_count": len(cards),
             "waiting_public_url_count": completion.get("waiting_public_url_count") or len(cards),
             "pending_log_ids": completion.get("pending_log_ids") or [card["id"] for card in cards],
+            "posting_bundle_count": sum(1 for card in cards if card.get("posting_bundle")),
             "url_template_path": completion.get("url_template_path") or "",
             "paste_text_dir": str(PASTE_CARD_DIR.relative_to(ROOT)),
             "paste_text_file_count": len(paste_text_files),
@@ -236,6 +260,7 @@ def build_markdown(payload: dict) -> str:
             f"- Status: `{card['status']}`",
             f"- Open: {card.get('public_community_url') or 'not set'}",
             f"- Paste file: `{card.get('paste_text_path') or 'not available'}`",
+            f"- Posting bundle: copy `{(card.get('posting_bundle') or {}).get('copy_source') or 'not available'}`, asset `{(card.get('posting_bundle') or {}).get('asset_source') or 'not available'}`",
             "- Paste text:",
             "```text",
             card.get("paste_text") or "",
@@ -255,6 +280,13 @@ def build_markdown(payload: dict) -> str:
             f"- Log apply after posting: `{card.get('log_apply_command') or 'not available'}`",
             f"- Log notes: `{card.get('log_notes') or 'not available'}`",
         ])
+        bundle = card.get("posting_bundle") or {}
+        if bundle:
+            lines.extend([
+                f"- Bundle preview command template: `{bundle.get('preview_command_template') or 'not available'}`",
+                f"- Bundle apply command template: `{bundle.get('apply_command_template') or 'not available'}`",
+                f"- Bundle result trigger: {bundle.get('result_collection_trigger')}",
+            ])
         result_handoff = card.get("result_handoff") or {}
         if result_handoff:
             lines.extend([

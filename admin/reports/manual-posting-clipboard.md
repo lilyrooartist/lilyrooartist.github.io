@@ -1,6 +1,6 @@
 # Manual Posting Clipboard - Lily Roo
 
-Generated: 2026-06-22T07:33:12.050584Z
+Generated: 2026-06-22T07:37:16.631168Z
 
 ## Summary
 - Status: **ready_to_post**
@@ -25,6 +25,7 @@ Generated: 2026-06-22T07:33:12.050584Z
 - Status: `ready_for_manual_post`
 - Open: https://www.youtube.com/@lilyroo.artist/community
 - Paste file: `data/manual-posting-cards/fp-auto-261.txt`
+- Posting bundle: copy `data/manual-posting-cards/fp-auto-261.txt`, asset `assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg`
 - Paste text:
 ```text
 New transmission: I Learned It All in Fifteen Seconds is live. Remastered cover art, same suspicious amount of feeling.
@@ -43,6 +44,9 @@ Stream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: htt
 - Log preview after posting: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL`
 - Log apply after posting: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL --apply --refresh-admin`
 - Log notes: `manual_distribution_id=FP-AUTO-261; source=data/manual_distribution_packet.json`
+- Bundle preview command template: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL`
+- Bundle apply command template: `python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL --apply --refresh-admin`
+- Bundle result trigger: Log the public URL, then use admin/reports/experiment-result-clipboard.md after the post has accumulated first metrics.
 - Result handoff: `blocked_until_public_url_logged` via `admin/reports/experiment-result-clipboard.md`
 - Result handoff reason: Experiment result collection starts after the real public URL is logged in Published_Log.csv.
 - After posting checklist:
@@ -56,6 +60,7 @@ Stream: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: htt
 - Status: `ready_for_manual_post`
 - Open: https://www.youtube.com/@lilyroo.artist/community
 - Paste file: `data/manual-posting-cards/fp-plan-twelve-dollars-youtube-community.txt`
+- Posting bundle: copy `data/manual-posting-cards/fp-plan-twelve-dollars-youtube-community.txt`, asset `assets/albums/twelve-dollars/art/04-twelve-dollars.jpg`
 - Paste text:
 ```text
 Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.
@@ -71,6 +76,9 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNT
 - Log preview after posting: `python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL`
 - Log apply after posting: `python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin`
 - Log notes: `manual_distribution_id=FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY; source=data/manual_distribution_packet.json`
+- Bundle preview command template: `python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL`
+- Bundle apply command template: `python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin`
+- Bundle result trigger: Log the public URL, then use admin/reports/experiment-result-clipboard.md after the post has accumulated first metrics.
 - Result handoff: `blocked_until_public_url_logged` via `admin/reports/experiment-result-clipboard.md`
 - Result handoff reason: Experiment result collection starts after the real public URL is logged in Published_Log.csv.
 - After posting checklist:
@@ -84,6 +92,7 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNT
 - Status: `ready_for_manual_post`
 - Open: https://www.youtube.com/@lilyroo.artist/community
 - Paste file: `data/manual-posting-cards/fp-plan-analog-myth-youtube-community.txt`
+- Posting bundle: copy `data/manual-posting-cards/fp-plan-analog-myth-youtube-community.txt`, asset `assets/albums/analog-myth/art/03-analog-myth.jpg`
 - Paste text:
 ```text
 Analog Myth is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.
@@ -99,6 +108,9 @@ Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQd
 - Log preview after posting: `python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL`
 - Log apply after posting: `python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin`
 - Log notes: `manual_distribution_id=FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY; source=data/manual_distribution_packet.json`
+- Bundle preview command template: `python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL`
+- Bundle apply command template: `python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin`
+- Bundle result trigger: Log the public URL, then use admin/reports/experiment-result-clipboard.md after the post has accumulated first metrics.
 - Result handoff: `blocked_until_public_url_logged` via `admin/reports/experiment-result-clipboard.md`
 - Result handoff reason: Experiment result collection starts after the real public URL is logged in Published_Log.csv.
 - After posting checklist:

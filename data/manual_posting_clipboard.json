@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T07:33:12.050584Z",
+  "generated_at": "2026-06-22T07:37:16.631168Z",
   "safe_mode": true,
   "source": {
     "manual_distribution_packet": "data/manual_distribution_packet.json",
@@ -18,6 +18,7 @@
       "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
       "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY"
     ],
+    "posting_bundle_count": 3,
     "url_template_path": "data/manual_distribution_url_template.csv",
     "paste_text_dir": "data/manual-posting-cards",
     "paste_text_file_count": 3,
@@ -103,6 +104,26 @@
         "reason": "Experiment result collection starts after the real public URL is logged in Published_Log.csv.",
         "first_measurement_window": "Collect first public performance values after the post has had time to accumulate views."
       },
+      "posting_bundle": {
+        "surface_url": "https://www.youtube.com/@lilyroo.artist/community",
+        "copy_source": "data/manual-posting-cards/fp-auto-261.txt",
+        "asset_source": "assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
+        "asset_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
+        "public_url_required": true,
+        "url_placeholder": "PUBLIC_URL",
+        "preview_command_template": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL",
+        "apply_command_template": "python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL --apply --refresh-admin",
+        "result_collection_trigger": "Log the public URL, then use admin/reports/experiment-result-clipboard.md after the post has accumulated first metrics.",
+        "operator_sequence": [
+          "Open the YouTube Community surface.",
+          "Paste the copy from copy_source.",
+          "Attach the asset from asset_source.",
+          "Publish the Community post.",
+          "Copy the real public Community post URL.",
+          "Run the preview command with the real URL.",
+          "Run the apply command after the preview passes."
+        ]
+      },
       "after_posting_checklist": [
         "Copy the real public YouTube Community post URL.",
         "Run the log preview command: python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL",
@@ -167,6 +188,26 @@
         "reason": "Experiment result collection starts after the real public URL is logged in Published_Log.csv.",
         "first_measurement_window": "Collect first public performance values after the post has had time to accumulate views."
       },
+      "posting_bundle": {
+        "surface_url": "https://www.youtube.com/@lilyroo.artist/community",
+        "copy_source": "data/manual-posting-cards/fp-plan-twelve-dollars-youtube-community.txt",
+        "asset_source": "assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
+        "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
+        "public_url_required": true,
+        "url_placeholder": "PUBLIC_URL",
+        "preview_command_template": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+        "apply_command_template": "python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
+        "result_collection_trigger": "Log the public URL, then use admin/reports/experiment-result-clipboard.md after the post has accumulated first metrics.",
+        "operator_sequence": [
+          "Open the YouTube Community surface.",
+          "Paste the copy from copy_source.",
+          "Attach the asset from asset_source.",
+          "Publish the Community post.",
+          "Copy the real public Community post URL.",
+          "Run the preview command with the real URL.",
+          "Run the apply command after the preview passes."
+        ]
+      },
       "after_posting_checklist": [
         "Copy the real public YouTube Community post URL.",
         "Run the log preview command: python3 scripts/log_manual_distribution.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --url PUBLIC_URL",
@@ -230,6 +271,26 @@
         "source_report": "admin/reports/experiment-result-clipboard.md",
         "reason": "Experiment result collection starts after the real public URL is logged in Published_Log.csv.",
         "first_measurement_window": "Collect first public performance values after the post has had time to accumulate views."
+      },
+      "posting_bundle": {
+        "surface_url": "https://www.youtube.com/@lilyroo.artist/community",
+        "copy_source": "data/manual-posting-cards/fp-plan-analog-myth-youtube-community.txt",
+        "asset_source": "assets/albums/analog-myth/art/03-analog-myth.jpg",
+        "asset_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
+        "public_url_required": true,
+        "url_placeholder": "PUBLIC_URL",
+        "preview_command_template": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL",
+        "apply_command_template": "python3 scripts/log_manual_distribution.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --url PUBLIC_URL --apply --refresh-admin",
+        "result_collection_trigger": "Log the public URL, then use admin/reports/experiment-result-clipboard.md after the post has accumulated first metrics.",
+        "operator_sequence": [
+          "Open the YouTube Community surface.",
+          "Paste the copy from copy_source.",
+          "Attach the asset from asset_source.",
+          "Publish the Community post.",
+          "Copy the real public Community post URL.",
+          "Run the preview command with the real URL.",
+          "Run the apply command after the preview passes."
+        ]
       },
       "after_posting_checklist": [
         "Copy the real public YouTube Community post URL.",
