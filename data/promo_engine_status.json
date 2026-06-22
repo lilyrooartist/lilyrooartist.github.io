@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T10:15:41.592398+00:00",
+  "generated_at": "2026-06-22T10:20:30.685865+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -573,8 +573,8 @@
       "ready_to_apply_posts": 0,
       "approval_blockers": 1,
       "platform_fix_blockers": 4,
-      "backlog_reschedule_preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24",
-      "backlog_reschedule_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+      "backlog_reschedule_preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
+      "backlog_reschedule_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
       "next_pressure": [
         "1 approved unpublished posts are past their scheduled time; repair executor/platform blockers or reschedule them.",
         "1 executor records are blocked by approval.",
@@ -920,15 +920,15 @@
         "Import only nonnegative numeric new_value cells from the named analytics source."
       ]
     },
-    "live_metrics_updated_at": "2026-06-22T10:15:35.448Z",
+    "live_metrics_updated_at": "2026-06-22T10:19:19.898Z",
     "metrics_history": {
       "snapshot_count": 13,
-      "updated_at": "2026-06-22T10:15:39.676292Z",
+      "updated_at": "2026-06-22T10:20:27.814249Z",
       "latest_date": "2026-06-22",
       "latest": {
         "date": "2026-06-22",
-        "captured_at": "2026-06-22T10:15:39.676292Z",
-        "live_metrics_updated_at": "2026-06-22T10:15:35.448Z",
+        "captured_at": "2026-06-22T10:20:27.814249Z",
+        "live_metrics_updated_at": "2026-06-22T10:19:19.898Z",
         "youtube": {
           "subscribers": 6,
           "total_views": 251,
@@ -1684,7 +1684,7 @@
       "recheck_due": 0,
       "waiting_for_next_recheck": 7,
       "oldest_checked_pending_age_hours": 0.0,
-      "next_recheck_at": "2026-06-23T10:15:35.567888+00:00"
+      "next_recheck_at": "2026-06-23T10:19:20.040505+00:00"
     },
     "store_verification": {
       "source_path": "data/store_verification_history.json",
@@ -1705,12 +1705,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:35.567888Z",
+            "updated_at": "2026-06-22T10:19:20.040505Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T10:15:35.567888+00:00",
+            "checked_at": "2026-06-22T10:19:20.040505+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:35.567888+00:00",
+            "next_recheck_at": "2026-06-23T10:19:20.040505+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -1724,12 +1724,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:37.295404Z",
+            "updated_at": "2026-06-22T10:19:40.266412Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T10:15:37.295404+00:00",
+            "checked_at": "2026-06-22T10:19:40.266412+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:37.295404+00:00",
+            "next_recheck_at": "2026-06-23T10:19:40.266412+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -1743,12 +1743,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:37.434590Z",
+            "updated_at": "2026-06-22T10:19:41.166607Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-06-22T10:15:37.434590+00:00",
+            "checked_at": "2026-06-22T10:19:41.166607+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:37.434590+00:00",
+            "next_recheck_at": "2026-06-23T10:19:41.166607+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -1762,12 +1762,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:37.486949Z",
+            "updated_at": "2026-06-22T10:19:41.243177Z",
             "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T10:15:37.486949+00:00",
+            "checked_at": "2026-06-22T10:19:41.243177+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:37.486949+00:00",
+            "next_recheck_at": "2026-06-23T10:19:41.243177+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -1781,12 +1781,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:38.066912Z",
+            "updated_at": "2026-06-22T10:20:01.408379Z",
             "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T10:15:38.066912+00:00",
+            "checked_at": "2026-06-22T10:20:01.408379+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:38.066912+00:00",
+            "next_recheck_at": "2026-06-23T10:20:01.408379+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -1800,12 +1800,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:38.122558Z",
+            "updated_at": "2026-06-22T10:20:01.453212Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-            "checked_at": "2026-06-22T10:15:38.122558+00:00",
+            "checked_at": "2026-06-22T10:20:01.453212+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:38.122558+00:00",
+            "next_recheck_at": "2026-06-23T10:20:01.453212+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -1819,12 +1819,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:39.085030Z",
+            "updated_at": "2026-06-22T10:20:24.059601Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-06-22T10:15:39.085030+00:00",
+            "checked_at": "2026-06-22T10:20:24.059601+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:39.085030+00:00",
+            "next_recheck_at": "2026-06-23T10:20:24.059601+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -1841,12 +1841,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:35.567888Z",
+            "updated_at": "2026-06-22T10:19:20.040505Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T10:15:35.567888+00:00",
+            "checked_at": "2026-06-22T10:19:20.040505+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:35.567888+00:00",
+            "next_recheck_at": "2026-06-23T10:19:20.040505+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -1859,12 +1859,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:37.295404Z",
+            "updated_at": "2026-06-22T10:19:40.266412Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T10:15:37.295404+00:00",
+            "checked_at": "2026-06-22T10:19:40.266412+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:37.295404+00:00",
+            "next_recheck_at": "2026-06-23T10:19:40.266412+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -1877,12 +1877,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:37.434590Z",
+            "updated_at": "2026-06-22T10:19:41.166607Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-06-22T10:15:37.434590+00:00",
+            "checked_at": "2026-06-22T10:19:41.166607+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:37.434590+00:00",
+            "next_recheck_at": "2026-06-23T10:19:41.166607+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -1895,12 +1895,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:37.486949Z",
+            "updated_at": "2026-06-22T10:19:41.243177Z",
             "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T10:15:37.486949+00:00",
+            "checked_at": "2026-06-22T10:19:41.243177+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:37.486949+00:00",
+            "next_recheck_at": "2026-06-23T10:19:41.243177+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -1913,12 +1913,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:38.066912Z",
+            "updated_at": "2026-06-22T10:20:01.408379Z",
             "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T10:15:38.066912+00:00",
+            "checked_at": "2026-06-22T10:20:01.408379+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:38.066912+00:00",
+            "next_recheck_at": "2026-06-23T10:20:01.408379+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -1931,12 +1931,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:38.122558Z",
+            "updated_at": "2026-06-22T10:20:01.453212Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-            "checked_at": "2026-06-22T10:15:38.122558+00:00",
+            "checked_at": "2026-06-22T10:20:01.453212+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:38.122558+00:00",
+            "next_recheck_at": "2026-06-23T10:20:01.453212+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -1949,12 +1949,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:39.085030Z",
+            "updated_at": "2026-06-22T10:20:24.059601Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-06-22T10:15:39.085030+00:00",
+            "checked_at": "2026-06-22T10:20:24.059601+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:39.085030+00:00",
+            "next_recheck_at": "2026-06-23T10:20:24.059601+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -1966,7 +1966,7 @@
       "recheck_due_count": 0,
       "waiting_for_next_recheck_count": 7,
       "oldest_checked_pending_age_hours": 0.0,
-      "next_recheck_at": "2026-06-23T10:15:35.567888+00:00",
+      "next_recheck_at": "2026-06-23T10:19:20.040505+00:00",
       "recheck_due_rows": [],
       "waiting_recheck_rows": [
         {
@@ -1977,12 +1977,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:35.567888Z",
+            "updated_at": "2026-06-22T10:19:20.040505Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T10:15:35.567888+00:00",
+            "checked_at": "2026-06-22T10:19:20.040505+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:35.567888+00:00",
+            "next_recheck_at": "2026-06-23T10:19:20.040505+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -1996,12 +1996,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:37.295404Z",
+            "updated_at": "2026-06-22T10:19:40.266412Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T10:15:37.295404+00:00",
+            "checked_at": "2026-06-22T10:19:40.266412+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:37.295404+00:00",
+            "next_recheck_at": "2026-06-23T10:19:40.266412+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -2015,12 +2015,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:37.434590Z",
+            "updated_at": "2026-06-22T10:19:41.166607Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-06-22T10:15:37.434590+00:00",
+            "checked_at": "2026-06-22T10:19:41.166607+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:37.434590+00:00",
+            "next_recheck_at": "2026-06-23T10:19:41.166607+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -2034,12 +2034,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:37.486949Z",
+            "updated_at": "2026-06-22T10:19:41.243177Z",
             "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T10:15:37.486949+00:00",
+            "checked_at": "2026-06-22T10:19:41.243177+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:37.486949+00:00",
+            "next_recheck_at": "2026-06-23T10:19:41.243177+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -2053,12 +2053,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:38.066912Z",
+            "updated_at": "2026-06-22T10:20:01.408379Z",
             "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T10:15:38.066912+00:00",
+            "checked_at": "2026-06-22T10:20:01.408379+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:38.066912+00:00",
+            "next_recheck_at": "2026-06-23T10:20:01.408379+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -2072,12 +2072,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:38.122558Z",
+            "updated_at": "2026-06-22T10:20:01.453212Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-            "checked_at": "2026-06-22T10:15:38.122558+00:00",
+            "checked_at": "2026-06-22T10:20:01.453212+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:38.122558+00:00",
+            "next_recheck_at": "2026-06-23T10:20:01.453212+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -2091,12 +2091,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:39.085030Z",
+            "updated_at": "2026-06-22T10:20:24.059601Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-06-22T10:15:39.085030+00:00",
+            "checked_at": "2026-06-22T10:20:24.059601+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:39.085030+00:00",
+            "next_recheck_at": "2026-06-23T10:20:24.059601+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -2106,7 +2106,7 @@
       "latest_run": {
         "source_path": "data/store_verification_run.json",
         "available": true,
-        "updated_at": "2026-06-22T10:15:39.179945Z",
+        "updated_at": "2026-06-22T10:20:24.174245Z",
         "step_timeout_seconds": 25,
         "checked": 7,
         "ok": 0,
@@ -2122,7 +2122,7 @@
     },
     "social_execution_summary": {
       "ok": true,
-      "updated_at": "2026-06-22T10:09:40.592074Z",
+      "updated_at": "2026-06-22T10:20:26.895422Z",
       "http_status": 200,
       "execution_count": 8,
       "posted_count": 1,
@@ -2150,7 +2150,7 @@
           "status": "skipped",
           "reason": "manual_only",
           "attempts": 0,
-          "updated_at": "2026-06-22T10:00:24.414Z",
+          "updated_at": "2026-06-22T10:15:24.473Z",
           "source": "cron",
           "post_url": "",
           "error_summary": ""
@@ -2161,7 +2161,7 @@
           "status": "blocked",
           "reason": "not_approved",
           "attempts": 0,
-          "updated_at": "2026-06-22T10:00:24.197Z",
+          "updated_at": "2026-06-22T10:15:24.171Z",
           "source": "cron",
           "post_url": "",
           "error_summary": ""
@@ -2207,7 +2207,7 @@
           "status": "blocked",
           "reason": "not_approved",
           "attempts": 0,
-          "updated_at": "2026-06-22T10:00:24.197Z",
+          "updated_at": "2026-06-22T10:15:24.171Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "",
@@ -2286,7 +2286,7 @@
           "status": "skipped",
           "reason": "manual_only",
           "attempts": 0,
-          "updated_at": "2026-06-22T10:00:24.414Z",
+          "updated_at": "2026-06-22T10:15:24.473Z",
           "source": "cron",
           "post_url": "",
           "error_summary": "",
@@ -2300,11 +2300,11 @@
     },
     "social_scheduler_dry_run": {
       "ok": true,
-      "updated_at": "2026-06-22T10:09:41.126777Z",
+      "updated_at": "2026-06-22T10:20:27.723554Z",
       "http_status": 200,
       "auth_method": "bearer",
-      "requested_scheduled_time": "2026-06-22T10:09:40.668002Z",
-      "checked_at": "2026-06-22T10:09:40.668Z",
+      "requested_scheduled_time": "2026-06-22T10:20:26.964090Z",
+      "checked_at": "2026-06-22T10:20:26.964Z",
       "dry_run": true,
       "due_count": 2,
       "result_count": 2,
@@ -2327,7 +2327,7 @@
           "reason": "not_approved",
           "post_type": "",
           "attempts": 0,
-          "updated_at": "2026-06-22T10:09:41.311Z",
+          "updated_at": "2026-06-22T10:20:28.000Z",
           "source": "dry-run",
           "error_summary": ""
         },
@@ -2338,7 +2338,7 @@
           "reason": "manual_only",
           "post_type": "",
           "attempts": 0,
-          "updated_at": "2026-06-22T10:09:41.317Z",
+          "updated_at": "2026-06-22T10:20:28.006Z",
           "source": "dry-run",
           "error_summary": ""
         }
@@ -2351,38 +2351,19 @@
       "safe_mode": true,
       "finalized": true,
       "source_revision": {
-        "commit": "db5d5f5fdf528d734f1eefdb4094eb53b08123c9",
-        "short_commit": "db5d5f5f",
+        "commit": "eb0a8ae1357c7785369a5493df3993f626976f01",
+        "short_commit": "eb0a8ae1",
         "branch": "main",
-        "committed_at": "2026-06-22T18:15:02+08:00",
-        "source_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/commit/db5d5f5fdf528d734f1eefdb4094eb53b08123c9"
+        "committed_at": "2026-06-22T10:15:42Z",
+        "source_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/commit/eb0a8ae1357c7785369a5493df3993f626976f01"
       },
-      "finished_at": "2026-06-22T10:15:41.548198Z",
-      "duration_seconds": 7.43,
+      "finished_at": "2026-06-22T10:20:30.651802Z",
+      "duration_seconds": 73.97,
       "command_count": 36,
-      "passed": 33,
-      "failed": 3,
-      "allowed_failures": 3,
-      "failed_commands": [
-        {
-          "name": "capture_executor_readiness",
-          "required": false,
-          "returncode": 1,
-          "stderr_tail": ""
-        },
-        {
-          "name": "capture_social_executions",
-          "required": false,
-          "returncode": 1,
-          "stderr_tail": ""
-        },
-        {
-          "name": "capture_scheduler_dry_run",
-          "required": false,
-          "returncode": 1,
-          "stderr_tail": ""
-        }
-      ],
+      "passed": 36,
+      "failed": 0,
+      "allowed_failures": 0,
+      "failed_commands": [],
       "action_needed": ""
     },
     "refresh_automation": {
@@ -2395,25 +2376,66 @@
       "commits_snapshots": true,
       "safe_refresh_command": "python3 scripts/refresh_promo_admin.py",
       "source_revision": {
-        "commit": "db5d5f5fdf528d734f1eefdb4094eb53b08123c9",
-        "short_commit": "db5d5f5f",
+        "commit": "eb0a8ae1357c7785369a5493df3993f626976f01",
+        "short_commit": "eb0a8ae1",
         "branch": "main",
-        "committed_at": "2026-06-22T18:15:02+08:00",
-        "source_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/commit/db5d5f5fdf528d734f1eefdb4094eb53b08123c9"
+        "committed_at": "2026-06-22T10:15:42Z",
+        "source_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/commit/eb0a8ae1357c7785369a5493df3993f626976f01"
       },
       "latest_run_covers_source_commit": true,
-      "latest_run_coverage_basis": "exact_source_commit",
-      "changed_paths_since_latest_run": [],
+      "latest_run_coverage_basis": "generated_refresh_outputs_only",
+      "changed_paths_since_latest_run": [
+        "admin/index.html",
+        "admin/reports/approval-runway.md",
+        "admin/reports/backlog-reschedule-preview.md",
+        "admin/reports/experiment-publish-runway.md",
+        "admin/reports/experiment-result-clipboard.md",
+        "admin/reports/experiment-result-collection.md",
+        "admin/reports/human-handoff-packet.md",
+        "admin/reports/human-handoff-resolution-preview.md",
+        "admin/reports/manual-distribution-packet.md",
+        "admin/reports/manual-metric-collection.md",
+        "admin/reports/manual-posting-clipboard.md",
+        "admin/reports/monetization-activation-plan.md",
+        "admin/reports/platform-repair-status.md",
+        "admin/reports/promo-consistency-audit.md",
+        "admin/reports/promo-operations-packet.md",
+        "admin/reports/promo-unlock-sequence.md",
+        "admin/reports/promotion-blocker-ledger.md",
+        "admin/reports/published-log-reconciliation.md",
+        "admin/reports/scheduled-approval-packet.md",
+        "admin/reports/subscriber-cta-audit.md",
+        "admin/reports/tiktok-repair-runbook.md",
+        "admin/reports/tiktok-setup-preflight.md",
+        "admin/reports/weekly-social-report.md",
+        "admin/reports/youtube-community-url-reconciliation.md",
+        "data/approval_runway.json",
+        "data/backlog_reschedule_preview.json",
+        "data/experiment_publish_runway.json",
+        "data/experiment_result_clipboard.json",
+        "data/experiment_result_collection_packet.json",
+        "data/human_handoff_packet.json",
+        "data/human_handoff_resolution_preview.json",
+        "data/live_social_metrics.json",
+        "data/manual-posting-cards/youtube-community-session.md",
+        "data/manual_distribution_packet.json",
+        "data/manual_metric_collection_packet.json",
+        "data/manual_posting_clipboard.json",
+        "data/metrics_history.json",
+        "data/monetization_activation_plan.json",
+        "data/platform_repair_status.json",
+        "data/promo_admin_refresh_run.json"
+      ],
       "uncovered_paths_since_latest_run": [],
-      "current_run_capture_in_progress": true,
-      "current_run_capture_note": "The workflow status snapshot was captured while the exact source refresh run was still active; use GitHub Actions as the completion authority after the run exits.",
+      "current_run_capture_in_progress": false,
+      "current_run_capture_note": "",
       "action_needed": "",
       "workflow_status_available": true,
       "workflow_status_ok": true,
-      "latest_run_status": "in_progress",
-      "latest_run_conclusion": "",
+      "latest_run_status": "completed",
+      "latest_run_conclusion": "success",
       "latest_run_head_sha": "db5d5f5fdf528d734f1eefdb4094eb53b08123c9",
-      "latest_run_updated_at": "2026-06-22T10:15:29Z",
+      "latest_run_updated_at": "2026-06-22T10:15:47Z",
       "latest_run_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/27945585506",
       "workflow_status_action_needed": ""
     },
@@ -2575,8 +2597,8 @@
           "owner": "tod",
           "blockers_resolved": 0,
           "blocked_by": [],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24",
-          "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
+          "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
           "source_path": "data/backlog_reschedule_preview.json"
         },
         {
@@ -3880,7 +3902,7 @@
           "Review the packaged copy, asset, destination link evidence, and subscriber CTA.",
           "Run the approval preview command before applying any manual approval.",
           "Post approved rows manually in YouTube Studio Community.",
-          "Copy the real public Community post URL after posting.",
+          "Copy the real individual public Community post URL after posting; it should look like https://www.youtube.com/post/...",
           "Paste public URLs into data/manual_distribution_url_template.csv for batch logging.",
           "Run the log preview command with the real URL, then apply with --apply --refresh-admin."
         ],
@@ -3893,6 +3915,7 @@
         "guardrails": [
           "Manual-only approvals do not auto-post.",
           "Do not log a placeholder URL.",
+          "For YouTube Community rows, log an individual https://www.youtube.com/post/... URL, not the channel, playlist, video, or Community tab URL.",
           "Do not apply the URL worksheet while any public_url cell is blank.",
           "Do not mark manual distribution complete until a real public YouTube Community URL is logged."
         ]
@@ -4309,10 +4332,10 @@
         "clear_to_apply_count": 0,
         "partial_clear_apply_available": false,
         "partial_clear_apply_count": 0,
-        "start_at": "2026-06-23T10:00:00+00:00",
+        "start_at": "2026-06-23T10:00:00+08:00",
         "spacing_hours": 24,
-        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24",
-        "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
+        "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
         "blocked_apply_command": "",
         "override_apply_command": "",
         "apply_blocked_reason": "",
@@ -4335,8 +4358,8 @@
         "partial_clear_apply_available": false,
         "partial_clear_apply_count": 0,
         "blocked_ids": [],
-        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24",
-        "safe_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
+        "safe_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
         "blocked_apply_command": "",
         "override_apply_command": "",
         "apply_allowed_without_override": true,
@@ -4560,8 +4583,8 @@
           "owner": "tod",
           "blockers_resolved": 0,
           "blocked_by": [],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24",
-          "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
+          "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
           "source_path": "data/backlog_reschedule_preview.json"
         },
         {
@@ -5606,7 +5629,7 @@
           "Review the packaged copy, asset, destination link evidence, and subscriber CTA.",
           "Run the approval preview command before applying any manual approval.",
           "Post approved rows manually in YouTube Studio Community.",
-          "Copy the real public Community post URL after posting.",
+          "Copy the real individual public Community post URL after posting; it should look like https://www.youtube.com/post/...",
           "Paste public URLs into data/manual_distribution_url_template.csv for batch logging.",
           "Run the log preview command with the real URL, then apply with --apply --refresh-admin."
         ],
@@ -5619,6 +5642,7 @@
         "guardrails": [
           "Manual-only approvals do not auto-post.",
           "Do not log a placeholder URL.",
+          "For YouTube Community rows, log an individual https://www.youtube.com/post/... URL, not the channel, playlist, video, or Community tab URL.",
           "Do not apply the URL worksheet while any public_url cell is blank.",
           "Do not mark manual distribution complete until a real public YouTube Community URL is logged."
         ]
@@ -6045,12 +6069,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:35.567888Z",
+            "updated_at": "2026-06-22T10:19:20.040505Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T10:15:35.567888+00:00",
+            "checked_at": "2026-06-22T10:19:20.040505+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:35.567888+00:00",
+            "next_recheck_at": "2026-06-23T10:19:20.040505+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -6064,12 +6088,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:37.295404Z",
+            "updated_at": "2026-06-22T10:19:40.266412Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T10:15:37.295404+00:00",
+            "checked_at": "2026-06-22T10:19:40.266412+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:37.295404+00:00",
+            "next_recheck_at": "2026-06-23T10:19:40.266412+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -6083,12 +6107,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:37.434590Z",
+            "updated_at": "2026-06-22T10:19:41.166607Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-06-22T10:15:37.434590+00:00",
+            "checked_at": "2026-06-22T10:19:41.166607+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:37.434590+00:00",
+            "next_recheck_at": "2026-06-23T10:19:41.166607+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -6102,12 +6126,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:37.486949Z",
+            "updated_at": "2026-06-22T10:19:41.243177Z",
             "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T10:15:37.486949+00:00",
+            "checked_at": "2026-06-22T10:19:41.243177+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:37.486949+00:00",
+            "next_recheck_at": "2026-06-23T10:19:41.243177+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -6121,12 +6145,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:38.066912Z",
+            "updated_at": "2026-06-22T10:20:01.408379Z",
             "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T10:15:38.066912+00:00",
+            "checked_at": "2026-06-22T10:20:01.408379+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:38.066912+00:00",
+            "next_recheck_at": "2026-06-23T10:20:01.408379+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -6140,12 +6164,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:38.122558Z",
+            "updated_at": "2026-06-22T10:20:01.453212Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-            "checked_at": "2026-06-22T10:15:38.122558+00:00",
+            "checked_at": "2026-06-22T10:20:01.453212+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:38.122558+00:00",
+            "next_recheck_at": "2026-06-23T10:20:01.453212+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -6159,12 +6183,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:39.085030Z",
+            "updated_at": "2026-06-22T10:20:24.059601Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-06-22T10:15:39.085030+00:00",
+            "checked_at": "2026-06-22T10:20:24.059601+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:39.085030+00:00",
+            "next_recheck_at": "2026-06-23T10:20:24.059601+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -6181,12 +6205,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:35.567888Z",
+            "updated_at": "2026-06-22T10:19:20.040505Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T10:15:35.567888+00:00",
+            "checked_at": "2026-06-22T10:19:20.040505+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:35.567888+00:00",
+            "next_recheck_at": "2026-06-23T10:19:20.040505+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -6199,12 +6223,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:37.295404Z",
+            "updated_at": "2026-06-22T10:19:40.266412Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T10:15:37.295404+00:00",
+            "checked_at": "2026-06-22T10:19:40.266412+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:37.295404+00:00",
+            "next_recheck_at": "2026-06-23T10:19:40.266412+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -6217,12 +6241,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:37.434590Z",
+            "updated_at": "2026-06-22T10:19:41.166607Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-06-22T10:15:37.434590+00:00",
+            "checked_at": "2026-06-22T10:19:41.166607+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:37.434590+00:00",
+            "next_recheck_at": "2026-06-23T10:19:41.166607+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -6235,12 +6259,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:37.486949Z",
+            "updated_at": "2026-06-22T10:19:41.243177Z",
             "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T10:15:37.486949+00:00",
+            "checked_at": "2026-06-22T10:19:41.243177+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:37.486949+00:00",
+            "next_recheck_at": "2026-06-23T10:19:41.243177+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -6253,12 +6277,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:38.066912Z",
+            "updated_at": "2026-06-22T10:20:01.408379Z",
             "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T10:15:38.066912+00:00",
+            "checked_at": "2026-06-22T10:20:01.408379+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:38.066912+00:00",
+            "next_recheck_at": "2026-06-23T10:20:01.408379+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -6271,12 +6295,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:38.122558Z",
+            "updated_at": "2026-06-22T10:20:01.453212Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-            "checked_at": "2026-06-22T10:15:38.122558+00:00",
+            "checked_at": "2026-06-22T10:20:01.453212+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:38.122558+00:00",
+            "next_recheck_at": "2026-06-23T10:20:01.453212+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -6289,12 +6313,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:39.085030Z",
+            "updated_at": "2026-06-22T10:20:24.059601Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-06-22T10:15:39.085030+00:00",
+            "checked_at": "2026-06-22T10:20:24.059601+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:39.085030+00:00",
+            "next_recheck_at": "2026-06-23T10:20:24.059601+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -6306,7 +6330,7 @@
       "recheck_due_count": 0,
       "waiting_for_next_recheck_count": 7,
       "oldest_checked_pending_age_hours": 0.0,
-      "next_recheck_at": "2026-06-23T10:15:35.567888+00:00",
+      "next_recheck_at": "2026-06-23T10:19:20.040505+00:00",
       "recheck_due_rows": [],
       "waiting_recheck_rows": [
         {
@@ -6317,12 +6341,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:35.567888Z",
+            "updated_at": "2026-06-22T10:19:20.040505Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T10:15:35.567888+00:00",
+            "checked_at": "2026-06-22T10:19:20.040505+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:35.567888+00:00",
+            "next_recheck_at": "2026-06-23T10:19:20.040505+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -6336,12 +6360,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:37.295404Z",
+            "updated_at": "2026-06-22T10:19:40.266412Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T10:15:37.295404+00:00",
+            "checked_at": "2026-06-22T10:19:40.266412+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:37.295404+00:00",
+            "next_recheck_at": "2026-06-23T10:19:40.266412+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -6355,12 +6379,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:37.434590Z",
+            "updated_at": "2026-06-22T10:19:41.166607Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-06-22T10:15:37.434590+00:00",
+            "checked_at": "2026-06-22T10:19:41.166607+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:37.434590+00:00",
+            "next_recheck_at": "2026-06-23T10:19:41.166607+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -6374,12 +6398,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:37.486949Z",
+            "updated_at": "2026-06-22T10:19:41.243177Z",
             "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T10:15:37.486949+00:00",
+            "checked_at": "2026-06-22T10:19:41.243177+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:37.486949+00:00",
+            "next_recheck_at": "2026-06-23T10:19:41.243177+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -6393,12 +6417,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:38.066912Z",
+            "updated_at": "2026-06-22T10:20:01.408379Z",
             "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T10:15:38.066912+00:00",
+            "checked_at": "2026-06-22T10:20:01.408379+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:38.066912+00:00",
+            "next_recheck_at": "2026-06-23T10:20:01.408379+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -6412,12 +6436,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:38.122558Z",
+            "updated_at": "2026-06-22T10:20:01.453212Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-            "checked_at": "2026-06-22T10:15:38.122558+00:00",
+            "checked_at": "2026-06-22T10:20:01.453212+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:38.122558+00:00",
+            "next_recheck_at": "2026-06-23T10:20:01.453212+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -6431,12 +6455,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:39.085030Z",
+            "updated_at": "2026-06-22T10:20:24.059601Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-06-22T10:15:39.085030+00:00",
+            "checked_at": "2026-06-22T10:20:24.059601+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:39.085030+00:00",
+            "next_recheck_at": "2026-06-23T10:20:24.059601+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           },
@@ -6446,7 +6470,7 @@
       "latest_run": {
         "source_path": "data/store_verification_run.json",
         "available": true,
-        "updated_at": "2026-06-22T10:15:39.179945Z",
+        "updated_at": "2026-06-22T10:20:24.174245Z",
         "step_timeout_seconds": 25,
         "checked": 7,
         "ok": 0,
@@ -6468,18 +6492,18 @@
       "missing": 0,
       "checked_no_change": 1,
       "gated_manual_pending": 0,
-      "checked_at": "2026-06-22T10:15:41.592398+00:00"
+      "checked_at": "2026-06-22T10:20:30.685865+00:00"
     },
     "sources": [
       {
         "name": "release_status",
         "path": "data/distrokid_release_status.json",
         "status": "checked_no_change",
-        "age_hours": 120.8,
+        "age_hours": 120.9,
         "max_age_hours": 72,
         "timestamp": "2026-06-17T09:25:00+00:00",
         "refresh_command": "Store checks are current; update data/distrokid_release_status.json when a verified public URL appears.",
-        "checked_at": "2026-06-22T10:15:41.592398+00:00",
+        "checked_at": "2026-06-22T10:20:30.685865+00:00",
         "checked_age_hours": 0.0,
         "evidence": "7 pending store links checked; no new public URLs found."
       },
@@ -6487,9 +6511,9 @@
         "name": "scheduled_posts",
         "path": "admin/future-posts.json",
         "status": "fresh",
-        "age_hours": 0.0,
+        "age_hours": 1.7,
         "max_age_hours": 72,
-        "timestamp": "2026-06-22T10:15:33.713901+00:00",
+        "timestamp": "2026-06-22T08:37:42.638724+00:00",
         "refresh_command": "python3 scripts/sync_future_posts.py"
       },
       {
@@ -6498,16 +6522,16 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-22T10:15:39.635995+00:00",
+        "timestamp": "2026-06-22T10:20:27.774996+00:00",
         "refresh_command": "python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
         "name": "published_log",
         "path": "admin/content/Published_Log.csv",
         "status": "fresh",
-        "age_hours": 0.0,
+        "age_hours": 1.9,
         "max_age_hours": 168,
-        "timestamp": "2026-06-22T10:15:33.712533+00:00",
+        "timestamp": "2026-06-22T08:27:53.436018+00:00",
         "refresh_command": "Preview Worker export with python3 scripts/export_social_executions.py --dry-run; after review run python3 scripts/export_social_executions.py --refresh-admin. For manual posts, log the public URL with scripts/log_manual_distribution.py.",
         "row_count": 17,
         "worker_export_preview_command": "python3 scripts/export_social_executions.py --dry-run",
@@ -6523,9 +6547,9 @@
         "name": "manual_metrics",
         "path": "data/manual_social_stats.json",
         "status": "fresh",
-        "age_hours": 0.0,
+        "age_hours": 51.5,
         "max_age_hours": 72,
-        "timestamp": "2026-06-22T10:15:33.808429+00:00",
+        "timestamp": "2026-06-20T06:52:36.456413+00:00",
         "refresh_command": "Update data/manual_social_stats.json with latest manual metrics."
       },
       {
@@ -6534,7 +6558,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-22T10:15:35.448000+00:00",
+        "timestamp": "2026-06-22T10:19:19.898000+00:00",
         "refresh_command": "python3 scripts/capture_live_metrics.py"
       },
       {
@@ -6543,16 +6567,16 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-22T10:15:39.676292+00:00",
+        "timestamp": "2026-06-22T10:20:27.814249+00:00",
         "refresh_command": "python3 scripts/update_metrics_history.py --refresh-admin"
       },
       {
         "name": "executor_readiness",
         "path": "data/executor_readiness_snapshot.json",
         "status": "fresh",
-        "age_hours": 0.1,
+        "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-22T10:09:38.581738+00:00",
+        "timestamp": "2026-06-22T10:20:24.836549+00:00",
         "refresh_command": "python3 scripts/capture_executor_readiness.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -6561,25 +6585,25 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-22T10:15:41.592398+00:00",
+        "timestamp": "2026-06-22T10:20:30.685865+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin"
       },
       {
         "name": "social_executions",
         "path": "data/social_execution_snapshot.json",
         "status": "fresh",
-        "age_hours": 0.1,
+        "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-22T10:09:40.592074+00:00",
+        "timestamp": "2026-06-22T10:20:26.895422+00:00",
         "refresh_command": "python3 scripts/capture_social_executions.py && python3 scripts/update_promo_engine_status.py"
       },
       {
         "name": "social_scheduler_dry_run",
         "path": "data/social_scheduler_dry_run.json",
         "status": "fresh",
-        "age_hours": 0.1,
+        "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-22T10:09:41.126777+00:00",
+        "timestamp": "2026-06-22T10:20:27.723554+00:00",
         "refresh_command": "python3 scripts/capture_scheduler_dry_run.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -6588,7 +6612,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-22T10:15:41.549429+00:00",
+        "timestamp": "2026-06-22T10:20:30.652377+00:00",
         "refresh_command": "python3 scripts/refresh_promo_admin.py"
       },
       {
@@ -6597,7 +6621,7 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-22T10:15:40.091344+00:00",
+        "timestamp": "2026-06-22T10:20:28.490790+00:00",
         "refresh_command": "python3 scripts/capture_github_workflow_status.py && python3 scripts/update_promo_engine_status.py"
       }
     ],
@@ -6736,12 +6760,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:35.567888Z",
+            "updated_at": "2026-06-22T10:19:20.040505Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T10:15:35.567888+00:00",
+            "checked_at": "2026-06-22T10:19:20.040505+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:35.567888+00:00",
+            "next_recheck_at": "2026-06-23T10:19:20.040505+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           }
@@ -6753,12 +6777,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:37.295404Z",
+            "updated_at": "2026-06-22T10:19:40.266412Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T10:15:37.295404+00:00",
+            "checked_at": "2026-06-22T10:19:40.266412+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:37.295404+00:00",
+            "next_recheck_at": "2026-06-23T10:19:40.266412+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           }
@@ -6770,12 +6794,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:37.434590Z",
+            "updated_at": "2026-06-22T10:19:41.166607Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-06-22T10:15:37.434590+00:00",
+            "checked_at": "2026-06-22T10:19:41.166607+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:37.434590+00:00",
+            "next_recheck_at": "2026-06-23T10:19:41.166607+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           }
@@ -6865,12 +6889,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/spotify_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:37.486949Z",
+            "updated_at": "2026-06-22T10:19:41.243177Z",
             "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T10:15:37.486949+00:00",
+            "checked_at": "2026-06-22T10:19:41.243177+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:37.486949+00:00",
+            "next_recheck_at": "2026-06-23T10:19:41.243177+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           }
@@ -6882,12 +6906,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:38.066912Z",
+            "updated_at": "2026-06-22T10:20:01.408379Z",
             "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
-            "checked_at": "2026-06-22T10:15:38.066912+00:00",
+            "checked_at": "2026-06-22T10:20:01.408379+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:38.066912+00:00",
+            "next_recheck_at": "2026-06-23T10:20:01.408379+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           }
@@ -6899,12 +6923,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:38.122558Z",
+            "updated_at": "2026-06-22T10:20:01.453212Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-            "checked_at": "2026-06-22T10:15:38.122558+00:00",
+            "checked_at": "2026-06-22T10:20:01.453212+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:38.122558+00:00",
+            "next_recheck_at": "2026-06-23T10:20:01.453212+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           }
@@ -6916,12 +6940,12 @@
           "latest_snapshot": {
             "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
             "ok": false,
-            "updated_at": "2026-06-22T10:15:39.085030Z",
+            "updated_at": "2026-06-22T10:20:24.059601Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-            "checked_at": "2026-06-22T10:15:39.085030+00:00",
+            "checked_at": "2026-06-22T10:20:24.059601+00:00",
             "checked_age_hours": 0.0,
             "recheck_interval_hours": 24,
-            "next_recheck_at": "2026-06-23T10:15:39.085030+00:00",
+            "next_recheck_at": "2026-06-23T10:20:24.059601+00:00",
             "recheck_due": false,
             "recheck_status": "waiting_for_release_propagation"
           }
@@ -6969,10 +6993,10 @@
     "Publish runway: 3 approved manual row(s) are ready to post and log from data/experiment_publish_runway.json.",
     "Refresh manual metrics: 6 worksheet row(s) still need new_value entries (blocked_until_new_values_filled); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values.",
     "Collect experiment results: 5 post-result field(s) need new_value plus evidence_note; use admin/reports/experiment-result-clipboard.md; first priority: measure FP-AUTO-260 on Facebook. Direct preview template: python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run. Direct apply template after review: python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin. Then preview import with python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run after filling data/experiment_result_entry_wide_template.csv.",
-    "Re-check checked-pending store links: 7 music site snapshot(s) still have no public URL; next recommended re-check after 2026-06-23T10:15:35.567888+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 then.",
+    "Re-check checked-pending store links: 7 music site snapshot(s) still have no public URL; next recommended re-check after 2026-06-23T10:19:20.040505+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 then.",
     "Current unlock gate: Review and post manual YouTube Community rows (blocked_until_input); 0 ready, 4 blocked/warning; preview python3 scripts/log_manual_distribution.py --id FP-AUTO-261 --url PUBLIC_URL; see data/promo_unlock_sequence.json.",
     "Review handoff preview health: 3 missing input; see data/human_handoff_resolution_preview.json.",
-    "Preview approved backlog reschedule: python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24",
+    "Preview approved backlog reschedule: python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
     "1 approved unpublished posts are past their scheduled time; repair executor/platform blockers or reschedule them."
   ]
 }

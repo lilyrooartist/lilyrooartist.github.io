@@ -31,11 +31,29 @@ def find_row(post_id: str) -> dict:
     raise RuntimeError(f"manual distribution row not found: {post_id}")
 
 
+YOUTUBE_HOSTS = {"youtube.com", "www.youtube.com", "m.youtube.com"}
+
+
 def validate_public_url(value: str) -> str:
     url = (value or "").strip()
     parsed = urlparse(url)
     if url == "PUBLIC_URL" or not parsed.scheme or not parsed.netloc or parsed.scheme not in {"http", "https"}:
         raise SystemExit("--url must be the public http(s) URL of the posted manual item, not PUBLIC_URL.")
+    return url
+
+
+def validate_public_url_for_row(row: dict, value: str) -> str:
+    url = validate_public_url(value)
+    platform = str(row.get("platform") or "").lower()
+    parsed = urlparse(url)
+    host = parsed.netloc.lower()
+    path = parsed.path.rstrip("/")
+    if "youtube community" in platform:
+        if host not in YOUTUBE_HOSTS or not path.startswith("/post/"):
+            raise SystemExit(
+                "YouTube Community manual rows require a real public YouTube Community post URL "
+                "like https://www.youtube.com/post/..., not a channel, playlist, video, or unrelated URL."
+            )
     return url
 
 
@@ -65,6 +83,15 @@ def payload_for_row(row: dict, public_url: str) -> dict:
         "text": row.get("text") or "",
         "notes": notes,
         "target": str(PUBLISHED_LOG.relative_to(ROOT)),
+        "url_requirements": {
+            "placeholder_rejected": "PUBLIC_URL",
+            "requires_http_url": True,
+            "platform_rule": (
+                "YouTube Community rows must use an individual https://www.youtube.com/post/... URL."
+                if "youtube community" in str(row.get("platform") or "").lower()
+                else "Use the public URL of the manually posted item."
+            ),
+        },
         "measurement_handoff": {
             "status": "ready_after_url_logging",
             "result_clipboard_report": str(RESULT_CLIPBOARD.relative_to(ROOT)),
@@ -121,7 +148,7 @@ def log_from_csv(path: Path, *, apply: bool, refresh: bool, allow_partial: bool)
             waiting.append({"id": post_id, "reason": "missing_public_url"})
             continue
         row = find_row(post_id)
-        public_url = validate_public_url(url)
+        public_url = validate_public_url_for_row(row, url)
         logged_row = already_logged(post_id)
         if logged_row:
             already.append({
@@ -186,7 +213,7 @@ def main() -> int:
         raise SystemExit("Provide --id and --url, or use --from-csv.")
 
     row = find_row(args.id)
-    public_url = validate_public_url(args.url)
+    public_url = validate_public_url_for_row(row, args.url)
     logged_row = already_logged(args.id)
     if logged_row:
         raise SystemExit(
