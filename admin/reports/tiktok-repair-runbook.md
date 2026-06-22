@@ -1,6 +1,6 @@
 # TikTok Repair Runbook - Lily Roo
 
-Generated: 2026-06-22T12:38:13.443626Z
+Generated: 2026-06-22T13:20:45.716540Z
 
 ## Summary
 - Status: **blocked**
@@ -19,6 +19,8 @@ Generated: 2026-06-22T12:38:13.443626Z
 - Local post preview: `python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --dry-run`
 - Local draft upload preview: `python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run`
 - Earliest TikTok API path: video.upload inbox draft; final public URL still requires human publish and URL logging.
+- Upload-mode lane: **ready_after_credentials**
+- Direct public lane: **deferred_until_tiktok_approval**
 - Handoff template: `data/tiktok_secret_handoff_template.env`
 - Local secret env exists: **True**
 - Initialize local secret env: `not needed`
@@ -28,6 +30,20 @@ Generated: 2026-06-22T12:38:13.443626Z
 - Ready to clear backlog gate: **False**
 - Public posting approval apply: `not available until local approval is confirmed`
 - Public posting approval deploy: `not available until local approval is confirmed`
+
+## Upload-Mode Repair Ladder
+- First row: `FP-AUTO-264`
+- First asset ready: **True**
+- Public posting approval required for upload mode: **False**
+- Human finish required: **True**
+- Handoff: TikTok API creates an inbox draft; Lily Roo reviews/publishes in TikTok, then the public URL is logged back into the promo engine.
+- Direct public guardrail: Do not treat direct public TikTok publishing as ready until TikTok approval is explicit and the guarded Worker flag is deployed.
+- After-input command sequence:
+  - `generate_oauth_url`: after TIKTOK_CLIENT_KEY and TIKTOK_REDIRECT_URI are present locally -> `python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload`
+  - `exchange_authorization_code`: immediately after Lily Roo authorizes the TikTok OAuth URL -> `python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode upload`
+  - `preview_worker_secret_push`: after local refresh credentials exist -> `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
+  - `preview_first_upload_draft`: after the secret push dry-run is reviewed and credentials are available to the helper -> `python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run`
+  - `refresh_admin_evidence`: after credentials or Worker state changes -> `python3 scripts/refresh_promo_admin.py`
 
 ## Sequence
 - **Prepare local env - Create the local TikTok secret env file**: `pass`

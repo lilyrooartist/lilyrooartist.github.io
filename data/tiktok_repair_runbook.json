@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T12:38:13.443626Z",
+  "generated_at": "2026-06-22T13:20:45.716540Z",
   "safe_mode": true,
   "status": "blocked",
   "source": {
@@ -42,6 +42,68 @@
     "local_post_preview_command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --dry-run",
     "local_upload_preview_command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run",
     "earliest_tiktok_api_path": "video.upload inbox draft; final public URL still requires human publish and URL logging.",
+    "upload_mode_lane": {
+      "status": "ready_after_credentials",
+      "posting_mode": "upload",
+      "oauth_scopes": [
+        "user.info.basic",
+        "video.upload"
+      ],
+      "first_post_id": "FP-AUTO-264",
+      "first_asset_ready": true,
+      "credential_names_needed": [
+        "TIKTOK_CLIENT_KEY",
+        "TIKTOK_CLIENT_SECRET",
+        "TIKTOK_REFRESH_TOKEN"
+      ],
+      "public_posting_approval_required": false,
+      "human_finish_required": true,
+      "post_publish_handoff": "TikTok API creates an inbox draft; Lily Roo reviews/publishes in TikTok, then the public URL is logged back into the promo engine.",
+      "dry_run_command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run",
+      "completion_evidence": "data/tiktok_setup_preflight.json ready_to_upload_drafts=true and FP-AUTO-264 upload dry-run succeeds before backlog apply."
+    },
+    "direct_public_lane": {
+      "status": "deferred_until_tiktok_approval",
+      "posting_mode": "direct",
+      "oauth_scopes": [
+        "user.info.basic",
+        "video.upload",
+        "video.publish"
+      ],
+      "public_posting_approval_required": true,
+      "approval_flag": "TIKTOK_PUBLIC_POSTING_APPROVED",
+      "guardrail": "Do not treat direct public TikTok publishing as ready until TikTok approval is explicit and the guarded Worker flag is deployed.",
+      "preview_command": "python3 scripts/set_tiktok_public_posting_approval.py --approved",
+      "apply_command": "",
+      "deploy_command": ""
+    },
+    "after_input_command_sequence": [
+      {
+        "step": "generate_oauth_url",
+        "when": "after TIKTOK_CLIENT_KEY and TIKTOK_REDIRECT_URI are present locally",
+        "command": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload"
+      },
+      {
+        "step": "exchange_authorization_code",
+        "when": "immediately after Lily Roo authorizes the TikTok OAuth URL",
+        "command": "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode upload"
+      },
+      {
+        "step": "preview_worker_secret_push",
+        "when": "after local refresh credentials exist",
+        "command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN"
+      },
+      {
+        "step": "preview_first_upload_draft",
+        "when": "after the secret push dry-run is reviewed and credentials are available to the helper",
+        "command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run"
+      },
+      {
+        "step": "refresh_admin_evidence",
+        "when": "after credentials or Worker state changes",
+        "command": "python3 scripts/refresh_promo_admin.py"
+      }
+    ],
     "local_posting_helper_uses_refresh_token": true,
     "oauth_authorization_url_missing": [
       "TIKTOK_CLIENT_KEY",
@@ -78,8 +140,8 @@
     "apply_command": "",
     "public_posting_apply_command": "",
     "public_posting_deploy_command": "",
-    "backlog_preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24",
-    "backlog_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+    "backlog_preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24",
+    "backlog_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-23T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
     "backlog_normal_apply_gate": "clear"
   },
   "steps": [

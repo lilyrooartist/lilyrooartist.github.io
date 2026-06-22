@@ -1,6 +1,6 @@
 # TikTok Setup Preflight - Lily Roo
 
-Generated: 2026-06-22T12:38:13.363940Z
+Generated: 2026-06-22T13:20:45.653123Z
 
 ## Summary
 - Status: **blocked**
@@ -16,6 +16,8 @@ Generated: 2026-06-22T12:38:13.363940Z
 - Local post preview: `python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --dry-run`
 - Local draft upload preview: `python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run`
 - Earliest TikTok API path: video.upload inbox draft; final public URL still requires human publish and URL logging.
+- Upload-mode lane: **ready_after_credentials**; public approval required: **False**
+- Direct public lane: **deferred_until_tiktok_approval**; public approval required: **True**
 - Local public posting approval confirmed: **False**
 - Public posting approved: **False**
 - Default privacy: **PUBLIC_TO_EVERYONE**
@@ -52,6 +54,22 @@ Generated: 2026-06-22T12:38:13.363940Z
   - Push upload-mode connector secrets after local TikTok values exist and the dry-run is reviewed.
   - Refresh admin and validation after the connector state changes.
 
+## Upload-Mode Repair Ladder
+- Immediate lane status: **ready_after_credentials**
+- First post ID: `FP-AUTO-264`
+- Scopes: `user.info.basic, video.upload`
+- Public posting approval required now: **False**
+- Human finish required: **True**
+- Handoff: TikTok API creates an inbox draft; Lily Roo reviews/publishes in TikTok, then the public URL is logged back into the promo engine.
+- Direct public lane: **deferred_until_tiktok_approval**
+- Direct public guardrail: Do not treat direct public TikTok publishing as ready until TikTok approval is explicit and the guarded Worker flag is deployed.
+- After-input command sequence:
+  - `generate_oauth_url`: after TIKTOK_CLIENT_KEY and TIKTOK_REDIRECT_URI are present locally -> `python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload`
+  - `exchange_authorization_code`: immediately after Lily Roo authorizes the TikTok OAuth URL -> `python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode upload`
+  - `preview_worker_secret_push`: after local refresh credentials exist -> `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
+  - `preview_first_upload_draft`: after the secret push dry-run is reviewed and credentials are available to the helper -> `python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run`
+  - `refresh_admin_evidence`: after credentials or Worker state changes -> `python3 scripts/refresh_promo_admin.py`
+
 ## Credential Handoff
 - Status: **needs_local_values**
 - Required names: `TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN`
@@ -62,7 +80,7 @@ Generated: 2026-06-22T12:38:13.363940Z
 - Scope strategy: Request only video.upload for the first inbox-draft connector path; add video.publish only after direct public posting approval exists.
 - Local secret env: `secrets/social_api.env`
 - Local secret env prepared: **True**
-- Runtime local env file exists: **False**
+- Runtime local env file exists: **True**
 - Local handoff marker: `data/tiktok_local_handoff_status.json`
 - Initialize local secret env: `not needed`
 - Missing locally: `TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN`
@@ -94,7 +112,7 @@ Generated: 2026-06-22T12:38:13.363940Z
 
 ## Checks
 - **local_secret_env_file**: `pass`
-  - Local secret env handoff is initialized at secrets/social_api.env; this runtime cannot inspect the local file.
+  - Local secret env exists at secrets/social_api.env.
 - **oauth_authorization_url**: `blocked`
   - secrets/social_api.env is missing auth URL values: TIKTOK_CLIENT_KEY, TIKTOK_REDIRECT_URI.
   - Command: `python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload`

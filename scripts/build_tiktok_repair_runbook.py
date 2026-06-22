@@ -96,6 +96,9 @@ def build_payload() -> dict:
     oauth_exchange_command = credential_handoff.get("oauth_exchange_command") or "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode upload"
     oauth_url_missing = credential_handoff.get("oauth_authorization_url_missing") or []
     oauth_exchange_missing = credential_handoff.get("oauth_token_exchange_missing") or []
+    upload_mode_lane = credential_handoff.get("upload_mode_lane") or {}
+    direct_public_lane = credential_handoff.get("direct_public_lane") or {}
+    after_input_command_sequence = credential_handoff.get("after_input_command_sequence") or []
     repair_rows = [
         row for row in repair.get("rows") or []
         if str(row.get("platform") or "").lower() == "tiktok"
@@ -247,6 +250,9 @@ def build_payload() -> dict:
             "local_post_preview_command": local_post_preview,
             "local_upload_preview_command": local_upload_preview,
             "earliest_tiktok_api_path": preflight_summary.get("earliest_tiktok_api_path") or "video.upload inbox draft; final public URL still requires human publish and URL logging.",
+            "upload_mode_lane": upload_mode_lane,
+            "direct_public_lane": direct_public_lane,
+            "after_input_command_sequence": after_input_command_sequence,
             "local_posting_helper_uses_refresh_token": local_post_refresh_ready,
             "oauth_authorization_url_missing": oauth_url_missing,
             "oauth_token_exchange_missing": oauth_exchange_missing,
@@ -307,6 +313,8 @@ def build_markdown(payload: dict) -> str:
         f"- Local post preview: `{summary['local_post_preview_command']}`",
         f"- Local draft upload preview: `{summary['local_upload_preview_command']}`",
         f"- Earliest TikTok API path: {summary['earliest_tiktok_api_path']}",
+        f"- Upload-mode lane: **{summary.get('upload_mode_lane', {}).get('status', 'unknown')}**",
+        f"- Direct public lane: **{summary.get('direct_public_lane', {}).get('status', 'unknown')}**",
         f"- Handoff template: `{summary.get('handoff_template_path') or 'none'}`",
         f"- Local secret env exists: **{summary['local_secret_env_exists']}**",
         f"- Initialize local secret env: `{summary.get('initialize_local_secret_env_command') or 'not needed'}`",
@@ -317,8 +325,24 @@ def build_markdown(payload: dict) -> str:
         f"- Public posting approval apply: `{summary.get('public_posting_apply_command') or 'not available until local approval is confirmed'}`",
         f"- Public posting approval deploy: `{summary.get('public_posting_deploy_command') or 'not available until local approval is confirmed'}`",
         "",
+        "## Upload-Mode Repair Ladder",
+        f"- First row: `{summary.get('upload_mode_lane', {}).get('first_post_id', summary.get('repair_post_id') or 'unknown')}`",
+        f"- First asset ready: **{summary.get('upload_mode_lane', {}).get('first_asset_ready', False)}**",
+        f"- Public posting approval required for upload mode: **{summary.get('upload_mode_lane', {}).get('public_posting_approval_required', False)}**",
+        f"- Human finish required: **{summary.get('upload_mode_lane', {}).get('human_finish_required', True)}**",
+        f"- Handoff: {summary.get('upload_mode_lane', {}).get('post_publish_handoff', 'Upload mode creates an inbox draft that still needs human review, publish, and URL logging.')}",
+        f"- Direct public guardrail: {summary.get('direct_public_lane', {}).get('guardrail', 'Direct public posting remains gated until approval is explicit.')}",
+        "- After-input command sequence:",
+    ]
+    lines.extend(
+        f"  - `{item.get('step', 'step')}`: {item.get('when', 'after prerequisite input')} -> `{item.get('command', '')}`"
+        for item in summary.get("after_input_command_sequence") or []
+    )
+    lines.extend([
+        "",
         "## Sequence",
     ]
+    )
     for step in payload["steps"]:
         lines.append(f"- **{step['phase']} - {step['title']}**: `{step['status']}`")
         lines.append(f"  - {step['detail']}")
