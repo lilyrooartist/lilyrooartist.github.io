@@ -1,6 +1,6 @@
 # Experiment Publish Runway - Lily Roo
 
-Generated: 2026-06-22T11:07:36.270393Z
+Generated: 2026-06-22T11:11:51.810855Z
 
 ## Summary
 - Manual rows ready for review: **0**
@@ -11,7 +11,7 @@ Generated: 2026-06-22T11:07:36.270393Z
 - Blocked platform rows: **5**
 
 ## Next Publish Action
-- Log public URLs and collect experiment results.
+- Post manual YouTube Community cards, copy real public URLs, then log them.
 
 ## Manual Review Rows
 - None.
@@ -23,7 +23,7 @@ Generated: 2026-06-22T11:07:36.270393Z
   - Guardrail: Apply only after the matching promo plan rows have approved=yes.
 - **post_manual_youtube_community** - `postable_now`
   - Guardrail: Post manually using the reviewed copy and local asset evidence; do not log placeholder URLs.
-- **log_public_urls** - `ready_after_manual_post`
+- **log_public_urls** - `waiting_for_manual_post`
   - Preview: `python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv`
   - Apply after review: `python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --apply --refresh-admin`
   - Guardrail: Every CSV row must contain a real public_url before apply.

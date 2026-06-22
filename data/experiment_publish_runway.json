@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T11:07:36.270393Z",
+  "generated_at": "2026-06-22T11:11:51.810855Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -12,13 +12,14 @@
     "review_ready_manual_count": 0,
     "postable_now_count": 3,
     "public_url_log_needed_count": 3,
+    "waiting_public_url_count": 3,
     "pending_result_field_count": 5,
     "winner_ready_candidate_count": 1,
     "winner_count_target": 3,
     "blocked_platform_count": 5,
     "approved_backlog_count": 0,
     "blocked_backlog_count": 0,
-    "next_publish_action": "Log public URLs and collect experiment results."
+    "next_publish_action": "Post manual YouTube Community cards, copy real public URLs, then log them."
   },
   "manual_review_rows": [],
   "blocked_platform_rows": [
@@ -110,7 +111,7 @@
     },
     {
       "id": "log_public_urls",
-      "status": "ready_after_manual_post",
+      "status": "waiting_for_manual_post",
       "post_ids": [
         "FP-AUTO-261",
         "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",

@@ -73,10 +73,20 @@ def build_packet() -> dict:
     review_ids = [row.get("id") for row in review_ready if row.get("id")]
     postable_ids = [row.get("id") for row in postable_now if row.get("id")]
     logging_ids = [row.get("id") for row in needs_logging if row.get("id")]
+    public_url_log_needed = int((manual.get("summary") or {}).get("public_url_log_needed_count") or 0)
+    waiting_public_url_count = int((manual.get("summary") or {}).get("waiting_public_url_count") or public_url_log_needed)
     manual_docket = approval.get("manual_approval_docket") or {}
     blocked_platform = blocked_platform_rows(platform)
     approved_backlog = (backlog.get("summary") or {}).get("approved_backlog_count") or 0
     blocked_backlog = (backlog.get("summary") or {}).get("blocked_backlog_count") or 0
+    if review_ids:
+        next_publish_action = "Review and approve manual YouTube Community experiment rows."
+    elif postable_ids:
+        next_publish_action = "Post manual YouTube Community cards, copy real public URLs, then log them."
+    elif logging_ids and waiting_public_url_count == 0:
+        next_publish_action = "Log public URLs and collect experiment results."
+    else:
+        next_publish_action = "Collect experiment results when public URLs and measurement values are available."
     steps = [
         {
             "id": "review_manual_youtube_community",
@@ -107,7 +117,7 @@ def build_packet() -> dict:
         },
         {
             "id": "log_public_urls",
-            "status": "ready_after_manual_post" if logging_ids else "waiting_for_public_urls",
+            "status": "waiting_for_manual_post" if waiting_public_url_count else ("ready_after_manual_post" if logging_ids else "waiting_for_public_urls"),
             "post_ids": logging_ids or review_ids,
             "preview_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv",
             "apply_after_review_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --apply --refresh-admin",
@@ -137,14 +147,15 @@ def build_packet() -> dict:
         "summary": {
             "review_ready_manual_count": len(review_ready),
             "postable_now_count": len(postable_now),
-            "public_url_log_needed_count": int((manual.get("summary") or {}).get("public_url_log_needed_count") or 0),
+            "public_url_log_needed_count": public_url_log_needed,
+            "waiting_public_url_count": waiting_public_url_count,
             "pending_result_field_count": int(readiness.get("pending_result_field_count") or 0),
             "winner_ready_candidate_count": int(readiness.get("ready_candidate_count") or 0),
             "winner_count_target": int(readiness.get("winner_count_target") or 3),
             "blocked_platform_count": len(blocked_platform),
             "approved_backlog_count": int(approved_backlog or 0),
             "blocked_backlog_count": int(blocked_backlog or 0),
-            "next_publish_action": "Review and approve manual YouTube Community experiment rows." if review_ids else "Log public URLs and collect experiment results.",
+            "next_publish_action": next_publish_action,
         },
         "manual_review_rows": [
             {

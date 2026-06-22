@@ -2110,6 +2110,8 @@ def validate_generated_outputs(failures):
         manual_rows_for_runway = runway.get("manual_review_rows") or []
         blocked_rows = runway.get("blocked_platform_rows") or []
         step_ids = {step.get("id") for step in steps}
+        post_manual_step = next((step for step in steps if step.get("id") == "post_manual_youtube_community"), {})
+        log_urls_step = next((step for step in steps if step.get("id") == "log_public_urls"), {})
         required_steps = {
             "review_manual_youtube_community",
             "queue_approved_manual_rows",
@@ -2124,6 +2126,15 @@ def validate_generated_outputs(failures):
             and int(summary.get("blocked_platform_count") or 0) == len(blocked_rows)
             and int(summary.get("winner_count_target") or 0) == 3
             and summary.get("next_publish_action")
+            and isinstance(summary.get("waiting_public_url_count"), int)
+            and (
+                not (int(summary.get("postable_now_count") or 0) and int(summary.get("waiting_public_url_count") or 0))
+                or (
+                    "Post manual YouTube Community cards" in (summary.get("next_publish_action") or "")
+                    and post_manual_step.get("status") == "postable_now"
+                    and log_urls_step.get("status") == "waiting_for_manual_post"
+                )
+            )
             and all(step.get("guardrail") and step.get("completion_evidence") for step in steps)
             and any(step.get("id") == "review_manual_youtube_community" and (step.get("status") == "clear" or ("approve_promo_queue_plan.py" in (step.get("preview_command") or "") and "--dry-run" in (step.get("preview_command") or ""))) for step in steps)
             and any(step.get("id") == "queue_approved_manual_rows" and (step.get("status") in {"waiting_for_approval", "clear"} or ("apply_promo_queue_plan.py" in (step.get("preview_command") or "") and "--apply" not in (step.get("preview_command") or ""))) for step in steps)
