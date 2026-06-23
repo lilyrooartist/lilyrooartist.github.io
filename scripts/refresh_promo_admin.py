@@ -90,6 +90,12 @@ STEPS = [
         "command": ["python3", "scripts/capture_github_workflow_status.py"],
         "required": False,
     },
+    {
+        "name": "capture_github_actions_secret_presence",
+        "command": ["python3", "scripts/capture_github_actions_secret_presence.py"],
+        "required": False,
+        "preserve_on_failure": ["data/github_actions_secret_presence.json"],
+    },
 ]
 
 FINALIZE_STEPS = [

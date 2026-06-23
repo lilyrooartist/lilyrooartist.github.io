@@ -1459,6 +1459,7 @@ GENERATED_REFRESH_PATHS = {
     "data/manual_distribution_url_template.csv",
     "data/manual_posting_clipboard.json",
     "data/youtube_community_url_reconciliation.json",
+    "data/github_actions_secret_presence.json",
     "data/manual_metric_collection_packet.json",
     "data/manual_metric_collection_template.csv",
     "data/manual_metric_entry_template.csv",

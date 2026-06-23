@@ -1,10 +1,11 @@
 {
-  "generated_at": "2026-06-23T07:17:49.726193Z",
+  "generated_at": "2026-06-23T08:49:10.080561Z",
   "safe_mode": true,
   "redaction": "Only key presence is reported; secret values are never written to generated files.",
   "source": {
     "local_secret_source": "secrets/social_api.env",
-    "template": "data/social_blocker_secret_template.env"
+    "template": "data/social_blocker_secret_template.env",
+    "github_actions_secret_presence": "data/github_actions_secret_presence.json"
   },
   "summary": {
     "status": "missing_local_input",
@@ -12,6 +13,8 @@
     "ready_count": 0,
     "missing_local_input_count": 4,
     "external_action_needed_count": 1,
+    "github_actions_missing_secret_count": 2,
+    "github_actions_secret_presence_status": "missing_required_secrets",
     "local_secret_env_exists": true,
     "template_path": "data/social_blocker_secret_template.env",
     "next_action": "Add one of LILYROO_EXECUTOR_BEARER_TOKEN, EXECUTOR_BEARER_TOKEN, LILYROO_ADMIN_PASSWORD, ADMIN_PASSWORD to /Users/tod.famous/Documents/New project/secrets/social_api.env."
@@ -32,6 +35,18 @@
         "LILYROO_EXECUTOR_BEARER_TOKEN",
         "LILYROO_ADMIN_PASSWORD"
       ],
+      "github_actions_secret_status": {
+        "status": "missing",
+        "presence": {
+          "LILYROO_EXECUTOR_BEARER_TOKEN": false,
+          "LILYROO_ADMIN_PASSWORD": false
+        },
+        "missing": [
+          "LILYROO_EXECUTOR_BEARER_TOKEN",
+          "LILYROO_ADMIN_PASSWORD"
+        ],
+        "source_status": "missing_required_secrets"
+      },
       "presence": {
         "ADMIN_PASSWORD": false,
         "EXECUTOR_BEARER_TOKEN": false,
@@ -54,6 +69,11 @@
       ],
       "required_any": [],
       "github_actions_secrets": [],
+      "github_actions_secret_status": {
+        "status": "not_required",
+        "presence": {},
+        "missing": []
+      },
       "presence": {
         "IG_BUSINESS_ACCOUNT_ID": false
       },
@@ -77,6 +97,11 @@
       ],
       "required_any": [],
       "github_actions_secrets": [],
+      "github_actions_secret_status": {
+        "status": "not_required",
+        "presence": {},
+        "missing": []
+      },
       "presence": {
         "TIKTOK_CLIENT_KEY": false,
         "TIKTOK_CLIENT_SECRET": false,
@@ -104,6 +129,11 @@
       ],
       "required_any": [],
       "github_actions_secrets": [],
+      "github_actions_secret_status": {
+        "status": "not_required",
+        "presence": {},
+        "missing": []
+      },
       "presence": {
         "TIKTOK_CLIENT_KEY": false,
         "TIKTOK_CLIENT_SECRET": false,
@@ -127,6 +157,11 @@
       "required_all": [],
       "required_any": [],
       "github_actions_secrets": [],
+      "github_actions_secret_status": {
+        "status": "not_required",
+        "presence": {},
+        "missing": []
+      },
       "presence": {},
       "missing_all": [],
       "any_present": true,

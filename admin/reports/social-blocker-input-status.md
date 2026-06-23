@@ -1,12 +1,13 @@
 # Social Blocker Input Status - Lily Roo
 
-Generated: 2026-06-23T07:17:49.726193Z
+Generated: 2026-06-23T08:49:10.080561Z
 
 ## Summary
 - Status: **missing_local_input**
 - Ready groups: **0 / 5**
 - Missing local input: **4**
 - External action needed: **1**
+- GitHub Actions missing secrets: **2**
 - Local secret env exists: **True**
 - Template: `data/social_blocker_secret_template.env`
 - Next action: Add one of LILYROO_EXECUTOR_BEARER_TOKEN, EXECUTOR_BEARER_TOKEN, LILYROO_ADMIN_PASSWORD, ADMIN_PASSWORD to /Users/tod.famous/Documents/New project/secrets/social_api.env.
@@ -15,6 +16,7 @@ Generated: 2026-06-23T07:17:49.726193Z
 - **Scheduler and executor auth** - `missing_local_input`
   - Required one of: LILYROO_EXECUTOR_BEARER_TOKEN, EXECUTOR_BEARER_TOKEN, LILYROO_ADMIN_PASSWORD, ADMIN_PASSWORD
   - GitHub Actions secrets: LILYROO_EXECUTOR_BEARER_TOKEN, LILYROO_ADMIN_PASSWORD
+  - GitHub Actions status: missing
   - Unblocks: Scheduler dry-run, executor readiness capture, and execution history capture.
   - Verify: `python3 scripts/capture_scheduler_dry_run.py && python3 scripts/capture_social_executions.py`
   - Next: Add one of LILYROO_EXECUTOR_BEARER_TOKEN, EXECUTOR_BEARER_TOKEN, LILYROO_ADMIN_PASSWORD, ADMIN_PASSWORD to /Users/tod.famous/Documents/New project/secrets/social_api.env.

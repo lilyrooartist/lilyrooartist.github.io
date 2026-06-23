@@ -11,6 +11,7 @@ from social_exec_common import REPO_ROOT, SOCIAL_ENV, load_env
 OUT = REPO_ROOT / "data" / "social_blocker_input_status.json"
 REPORT = REPO_ROOT / "admin" / "reports" / "social-blocker-input-status.md"
 TEMPLATE = REPO_ROOT / "data" / "social_blocker_secret_template.env"
+GITHUB_SECRET_PRESENCE = REPO_ROOT / "data" / "github_actions_secret_presence.json"
 ADMIN_INDEX = REPO_ROOT / "admin" / "index.html"
 
 
@@ -110,11 +111,38 @@ def present(env: dict[str, str], name: str) -> bool:
     return bool(str(env.get(name) or "").strip())
 
 
-def build_group(group: dict, env: dict[str, str]) -> dict:
+def read_json(path: Path) -> dict:
+    if not path.exists():
+        return {}
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return {}
+
+
+def github_secret_status(secret_names: list[str], github_presence: dict) -> dict:
+    presence = github_presence.get("presence") or {}
+    if not secret_names:
+        return {"status": "not_required", "presence": {}, "missing": []}
+    if not github_presence:
+        return {"status": "unknown", "presence": {name: False for name in secret_names}, "missing": secret_names}
+    result = {name: bool(presence.get(name)) for name in secret_names}
+    missing = [name for name, is_present in result.items() if not is_present]
+    return {
+        "status": "ready" if not missing else "missing",
+        "presence": result,
+        "missing": missing,
+        "source_status": (github_presence.get("summary") or {}).get("status") or "unknown",
+    }
+
+
+def build_group(group: dict, env: dict[str, str], github_presence: dict) -> dict:
     required_all = group.get("required_all") or []
     required_any = group.get("required_any") or []
+    github_secrets = group.get("github_actions_secrets") or []
     missing_all = [name for name in required_all if not present(env, name)]
     any_present = any(present(env, name) for name in required_any) if required_any else True
+    github_status = github_secret_status(github_secrets, github_presence)
     status = "external_action_needed" if group.get("external_only") else "ready"
     if missing_all or not any_present:
         status = "missing_local_input"
@@ -132,7 +160,8 @@ def build_group(group: dict, env: dict[str, str]) -> dict:
         "status": status,
         "required_all": required_all,
         "required_any": required_any,
-        "github_actions_secrets": group.get("github_actions_secrets") or [],
+        "github_actions_secrets": github_secrets,
+        "github_actions_secret_status": github_status,
         "presence": {name: present(env, name) for name in sorted(set(required_all + required_any))},
         "missing_all": missing_all,
         "any_present": any_present,
@@ -146,10 +175,16 @@ def build_group(group: dict, env: dict[str, str]) -> dict:
 def build_packet() -> dict:
     write_template()
     env = load_env(SOCIAL_ENV)
-    groups = [build_group(group, env) for group in GROUPS]
+    github_presence = read_json(GITHUB_SECRET_PRESENCE)
+    groups = [build_group(group, env, github_presence) for group in GROUPS]
     missing = [group for group in groups if group["status"] == "missing_local_input"]
     external = [group for group in groups if group["status"] == "external_action_needed"]
     ready = [group for group in groups if group["status"] == "ready"]
+    github_missing = [
+        secret
+        for group in groups
+        for secret in (group.get("github_actions_secret_status") or {}).get("missing", [])
+    ]
     return {
         "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "safe_mode": True,
@@ -157,6 +192,7 @@ def build_packet() -> dict:
         "source": {
             "local_secret_source": str(SOCIAL_ENV.relative_to(REPO_ROOT.parent)),
             "template": str(TEMPLATE.relative_to(REPO_ROOT)),
+            "github_actions_secret_presence": str(GITHUB_SECRET_PRESENCE.relative_to(REPO_ROOT)),
         },
         "summary": {
             "status": "missing_local_input" if missing else "external_action_needed" if external else "ready",
@@ -164,6 +200,8 @@ def build_packet() -> dict:
             "ready_count": len(ready),
             "missing_local_input_count": len(missing),
             "external_action_needed_count": len(external),
+            "github_actions_missing_secret_count": len(set(github_missing)),
+            "github_actions_secret_presence_status": (github_presence.get("summary") or {}).get("status") or "unknown",
             "local_secret_env_exists": SOCIAL_ENV.exists(),
             "template_path": str(TEMPLATE.relative_to(REPO_ROOT)),
             "next_action": (missing[0]["next_action"] if missing else external[0]["next_action"] if external else "Run verification commands and refresh the admin dashboard."),
@@ -184,6 +222,7 @@ def build_markdown(packet: dict) -> str:
         f"- Ready groups: **{summary['ready_count']} / {summary['group_count']}**",
         f"- Missing local input: **{summary['missing_local_input_count']}**",
         f"- External action needed: **{summary['external_action_needed_count']}**",
+        f"- GitHub Actions missing secrets: **{summary['github_actions_missing_secret_count']}**",
         f"- Local secret env exists: **{summary['local_secret_env_exists']}**",
         f"- Template: `{summary['template_path']}`",
         f"- Next action: {summary['next_action']}",
@@ -198,6 +237,7 @@ def build_markdown(packet: dict) -> str:
             lines.append(f"  - Required one of: {', '.join(group['required_any'])}")
         if group.get("github_actions_secrets"):
             lines.append(f"  - GitHub Actions secrets: {', '.join(group['github_actions_secrets'])}")
+            lines.append(f"  - GitHub Actions status: {group['github_actions_secret_status']['status']}")
         lines.append(f"  - Unblocks: {group['unblocks']}")
         lines.append(f"  - Verify: `{group['verification_command']}`")
         lines.append(f"  - Next: {group['next_action']}")
