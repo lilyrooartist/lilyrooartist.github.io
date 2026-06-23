@@ -1,21 +1,20 @@
 # Posting Automation Status - Lily Roo
 
-Generated: 2026-06-23T09:03:55.766333Z
+Generated: 2026-06-23T09:17:01.485612Z
 
 ## Summary
 - Status: **blocked**
-- Lanes ready: **4 / 8**
+- Lanes ready: **5 / 8**
 - Blocked lanes: **3**
-- Needs attention: **1**
+- Needs attention: **0**
 - Story posts tracked: **6**
 - Help-needed items: **5**
 - Next action: Resolve the platform repair checklist before expecting full auto-post coverage.
 
 ## Automation Lanes
-- **Scheduled refresh workflow** - `needs_attention`
-  - Detail: 17 */6 * * *; latest run unknown / pending
-  - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/workflows/promo-admin-refresh.yml
-  - Next: Confirm the GitHub Actions workflow is enabled and has a successful run.
+- **Scheduled refresh workflow** - `ready`
+  - Detail: 17 */6 * * *; latest run completed / success
+  - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28002303668
 - **Safe admin refresh** - `ready`
   - Detail: 41 refresh commands captured at 2026-06-23T08:58:46.140472Z
   - Evidence: data/promo_admin_refresh_run.json

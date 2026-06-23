@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-23T09:03:55.766333Z",
+  "generated_at": "2026-06-23T09:17:01.485612Z",
   "safe_mode": true,
   "source": {
     "workflow": ".github/workflows/promo-admin-refresh.yml",
@@ -15,9 +15,9 @@
   },
   "summary": {
     "status": "blocked",
-    "ready_lane_count": 4,
+    "ready_lane_count": 5,
     "blocked_lane_count": 3,
-    "attention_lane_count": 1,
+    "attention_lane_count": 0,
     "lane_count": 8,
     "workflow_crons": [
       "17 */6 * * *"
@@ -40,10 +40,10 @@
   "lanes": [
     {
       "label": "Scheduled refresh workflow",
-      "status": "needs_attention",
-      "detail": "17 */6 * * *; latest run unknown / pending",
-      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/workflows/promo-admin-refresh.yml",
-      "next_action": "Confirm the GitHub Actions workflow is enabled and has a successful run."
+      "status": "ready",
+      "detail": "17 */6 * * *; latest run completed / success",
+      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28002303668",
+      "next_action": ""
     },
     {
       "label": "Safe admin refresh",
