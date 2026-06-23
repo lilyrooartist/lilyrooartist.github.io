@@ -2191,10 +2191,11 @@ def validate_generated_outputs(failures):
             and all(card.get("evidence_sources") and all(source.get("label") and source.get("url") and source.get("instruction") for source in card.get("evidence_sources") or []) for card in cards)
             and all(any("evidence_note" in item for item in card.get("collection_checklist") or []) for card in cards)
             and all(card.get("post_id") and card.get("next_action") for card in missing_cards)
-            and all(item.get("post_id") and item.get("action") in {"collect_metrics", "post_and_log_public_url", "log_public_url", "clear_platform_blocker"} and item.get("reason") for item in priority_cards)
+            and all(item.get("post_id") and item.get("action") in {"collect_metrics", "post_and_log_public_url", "await_scheduled_auto_post", "log_public_url", "clear_platform_blocker"} and item.get("reason") for item in priority_cards)
             and all(item.get("direct_preview_command_template") for item in priority_cards if item.get("action") == "collect_metrics")
             and all(item.get("direct_apply_command_template") and "--apply --refresh-admin" in item.get("direct_apply_command_template") for item in priority_cards if item.get("action") == "collect_metrics")
             and all(item.get("paste_text_path") and item.get("manual_posting_report") == "admin/reports/manual-posting-clipboard.md" and "log_manual_distribution.py" in (item.get("log_preview_command") or "") and "--apply --refresh-admin" in (item.get("log_apply_command") or "") for item in priority_cards if item.get("action") == "post_and_log_public_url")
+            and all(item.get("scheduled_at") and item.get("scheduler_status") == "future_auto_ready" for item in priority_cards if item.get("action") == "await_scheduled_auto_post")
             and first_runbook.get("status") in {"ready_to_collect_metrics", "clear"}
             and (
                 not first_collect_priority
@@ -2225,7 +2226,7 @@ def validate_generated_outputs(failures):
             and any("Published_Log.csv" in item for item in handoff.get("completion_evidence") or [])
             and "real public URL" in (handoff.get("guardrail") or "")
             and (not (manual_session.get("rows") or []) or any(item.get("action") == "post_and_log_public_url" for item in priority_cards))
-            and any(item.get("action") == "clear_platform_blocker" for item in priority_cards)
+            and any(item.get("action") in {"await_scheduled_auto_post", "clear_platform_blocker"} for item in priority_cards)
             and any("does not fetch private analytics" in item for item in clipboard.get("guardrails") or [])
         ):
             ok(f"experiment result clipboard packages {len(cards)} metric card(s)")
@@ -2765,6 +2766,7 @@ def validate_generated_outputs(failures):
             and any((candidate.get("decision_unblock") or {}).get("measurement_ready_count") for candidate in top_candidates)
             and any(
                 (candidate.get("decision_unblock") or {}).get("post_and_log_count")
+                or (candidate.get("decision_unblock") or {}).get("await_scheduled_count")
                 or (candidate.get("decision_unblock") or {}).get("log_url_count")
                 for candidate in top_candidates
             )
@@ -2787,13 +2789,29 @@ def validate_generated_outputs(failures):
                     and "log_manual_distribution.py" in (step.get("preview_command") or "")
                 )
                 or (
+                    step.get("first_action") == "await_scheduled_auto_post"
+                    and step.get("first_post_id") == "FP-AUTO-261"
+                    and step.get("first_platform") == "YouTube"
+                )
+                or (
                     step.get("first_action") == "log_public_url"
                     and step.get("first_post_id") == "FP-AUTO-261"
                     and step.get("first_platform") == "YouTube"
                 )
                 for step in ladder_steps
             )
-            and any(step.get("first_action") == "clear_platform_blocker" and step.get("first_platform") == "TikTok" for step in ladder_steps)
+            and any(
+                (
+                    step.get("first_action") == "clear_platform_blocker"
+                    and step.get("first_platform") == "TikTok"
+                )
+                or (
+                    step.get("first_action") == "await_scheduled_auto_post"
+                    and step.get("first_platform") == "YouTube"
+                    and "Short video" in str(step.get("format") or "")
+                )
+                for step in ladder_steps
+            )
             and "scheduled, postable, or blocked rows are not format evidence" in (format_ladder.get("guardrail") or "")
             and next_format_runbook.get("status") in {"needs_more_result_evidence", "ready_to_name_winners", "clear"}
             and next_format_runbook.get("winner_count_target") == winner_readiness.get("winner_count_target")
@@ -2801,7 +2819,7 @@ def validate_generated_outputs(failures):
                 winner_readiness.get("status") == "ready_to_name_winners"
                 or (
                     next_format_runbook.get("next_format") in top_candidate_formats
-                    and next_format_runbook.get("first_action") in {"collect_metrics", "post_and_log_public_url", "log_public_url", "clear_platform_blocker"}
+                    and next_format_runbook.get("first_action") in {"collect_metrics", "post_and_log_public_url", "await_scheduled_auto_post", "log_public_url", "clear_platform_blocker"}
                     and next_format_runbook.get("next_action")
                     and next_format_runbook.get("report_path")
                     and "real public URLs" in (next_format_runbook.get("guardrail") or "")

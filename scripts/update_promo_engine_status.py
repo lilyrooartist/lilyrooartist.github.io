@@ -805,13 +805,16 @@ def enrich_format_decision_paths(candidates: list[dict], result_clipboard: dict)
         format_priorities = by_format.get(fmt, [])
         collect = [row for row in format_priorities if row.get("action") == "collect_metrics"]
         post_and_log = [row for row in format_priorities if row.get("action") == "post_and_log_public_url"]
+        await_scheduled = [row for row in format_priorities if row.get("action") == "await_scheduled_auto_post"]
         log_url = [row for row in format_priorities if row.get("action") == "log_public_url"]
         blocked = [row for row in format_priorities if row.get("action") == "clear_platform_blocker"]
-        first = next(iter(collect or post_and_log or log_url or blocked), {})
+        first = next(iter(collect or post_and_log or await_scheduled or log_url or blocked), {})
         if collect:
             next_action = "Collect result metrics for logged posts."
         elif post_and_log:
             next_action = "Publish manual posts and log real public URLs."
+        elif await_scheduled:
+            next_action = "Await scheduled auto posts, then log public URLs and measure results."
         elif log_url:
             next_action = "Log public URLs for already-published posts."
         elif blocked:
@@ -826,6 +829,7 @@ def enrich_format_decision_paths(candidates: list[dict], result_clipboard: dict)
             "first_platform": first.get("platform") or "",
             "measurement_ready_count": len(collect),
             "post_and_log_count": len(post_and_log),
+            "await_scheduled_count": len(await_scheduled),
             "log_url_count": len(log_url),
             "blocked_count": len(blocked),
             "post_log_handoff_count": len([row for row in post_and_log if row.get("post_id") in handoff_ids]),
@@ -866,6 +870,7 @@ def next_format_evidence_runbook(candidates: list[dict], readiness: dict) -> dic
         ranks = {
             "collect_metrics": 1,
             "post_and_log_public_url": 2,
+            "await_scheduled_auto_post": 2,
             "log_public_url": 3,
             "clear_platform_blocker": 4,
         }
@@ -888,6 +893,7 @@ def next_format_evidence_runbook(candidates: list[dict], readiness: dict) -> dic
     action_labels = {
         "collect_metrics": "Collect result metrics for the first logged post in this format.",
         "post_and_log_public_url": "Publish the first ready post in this format and log its real public URL.",
+        "await_scheduled_auto_post": "Let the approved auto row publish on schedule, then log the real public URL and collect metrics.",
         "log_public_url": "Log the real public URL for the first already-published post in this format.",
         "clear_platform_blocker": "Clear the platform blocker before this format can produce measurable posts.",
     }
@@ -914,6 +920,7 @@ def next_format_evidence_runbook(candidates: list[dict], readiness: dict) -> dic
         "handoff_note": unblock.get("handoff_note") or "",
         "measurement_ready_count": unblock.get("measurement_ready_count") or 0,
         "post_and_log_count": unblock.get("post_and_log_count") or 0,
+        "await_scheduled_count": unblock.get("await_scheduled_count") or 0,
         "blocked_count": unblock.get("blocked_count") or 0,
         "candidate_post_ids": unblock.get("candidate_post_ids") or [],
         "decision_note": selected.get("decision_note") or "",
@@ -950,6 +957,7 @@ def repeatable_format_ladder(candidates: list[dict], readiness: dict) -> dict:
             "first_platform": unblock.get("first_platform") or "",
             "measurement_ready_count": unblock.get("measurement_ready_count") or 0,
             "post_and_log_count": unblock.get("post_and_log_count") or 0,
+            "await_scheduled_count": unblock.get("await_scheduled_count") or 0,
             "blocked_count": unblock.get("blocked_count") or 0,
             "report_path": unblock.get("report_path") or "admin/reports/experiment-result-clipboard.md",
             "preview_command": unblock.get("preview_command") or "",
@@ -2497,6 +2505,7 @@ def experiment_result_next_action(packet: dict, clipboard: dict | None = None) -
             labels = {
                 "collect_metrics": "measure",
                 "post_and_log_public_url": "post and log",
+                "await_scheduled_auto_post": "await scheduled auto post for",
                 "log_public_url": "log public URL for",
                 "clear_platform_blocker": "clear blocker for",
             }

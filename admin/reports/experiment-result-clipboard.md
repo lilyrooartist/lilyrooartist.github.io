@@ -1,11 +1,11 @@
 # Experiment Result Clipboard - Lily Roo
 
-Generated: 2026-06-23T08:58:45.919295Z
+Generated: 2026-06-23T09:36:19.310500Z
 
 ## Summary
 - Status: **needs_values**
 - Metric cards: **3**
-- Missing public URLs: **13**
+- Missing public URLs: **15**
 - Measurement priorities: **12**
 - Post-log handoff rows: **0**
 - Pending result fields: **5**
@@ -114,15 +114,15 @@ Generated: 2026-06-23T08:58:45.919295Z
 - **Collect metrics** `FP-AUTO-262` X / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 3 logged post(s), 8 missing URL(s) in this format.
   - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-262 --source-row 17 --subs-delta VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
   - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-262 --source-row 17 --subs-delta VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
-- **Log public URL** `FP-PLAN-TWELVE-DOLLARS-FACEBOOK` Facebook / Release-art image + story hook: Cannot collect metrics until the public URL is logged. 3 logged post(s), 8 missing URL(s) in this format.
-- **Log public URL** `FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK` Facebook / Release-art image + story hook: Cannot collect metrics until the public URL is logged. 3 logged post(s), 8 missing URL(s) in this format.
-- **Log public URL** `FP-PLAN-TWELVE-DOLLARS-X` X / Release-art image + story hook: Cannot collect metrics until the public URL is logged. 3 logged post(s), 8 missing URL(s) in this format.
-- **Log public URL** `FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK` X / Release-art image + story hook: Cannot collect metrics until the public URL is logged. 3 logged post(s), 8 missing URL(s) in this format.
-- **Log public URL** `FP-AUTO-261` YouTube / YouTube Community archive/playlist CTA: Cannot collect metrics until the public URL is logged. 0 logged post(s), 3 missing URL(s) in this format.
-- **Log public URL** `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY` YouTube / YouTube Community archive/playlist CTA: Cannot collect metrics until the public URL is logged. 0 logged post(s), 3 missing URL(s) in this format.
-- **Log public URL** `FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY` YouTube / YouTube Community archive/playlist CTA: Cannot collect metrics until the public URL is logged. 0 logged post(s), 3 missing URL(s) in this format.
-- **Clear platform blocker** `FP-AUTO-265` Facebook / Release-art image + story hook: Platform work is blocked; clear the platform repair gate before URL logging can produce metrics. 3 logged post(s), 8 missing URL(s) in this format.
-- **Clear platform blocker** `FP-AUTO-264` TikTok / Short video clip + platform-native CTA: Platform work is blocked; clear the platform repair gate before URL logging can produce metrics. 0 logged post(s), 2 missing URL(s) in this format.
+- **Await scheduled auto post** `FP-PLAN-TWELVE-DOLLARS-FACEBOOK` Facebook / Release-art image + story hook: Approved auto row is scheduled for 2026-06-23T11:20:00-04:00; wait for the scheduler, then log the public URL and measure it. 3 logged post(s), 8 missing URL(s) in this format.
+- **Await scheduled auto post** `FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK` Facebook / Release-art image + story hook: Approved auto row is scheduled for 2026-06-25T11:20:00-04:00; wait for the scheduler, then log the public URL and measure it. 3 logged post(s), 8 missing URL(s) in this format.
+- **Await scheduled auto post** `FP-PLAN-TWELVE-DOLLARS-X` X / Release-art image + story hook: Approved auto row is scheduled for 2026-06-26T10:00:00+08:00; wait for the scheduler, then log the public URL and measure it. 3 logged post(s), 8 missing URL(s) in this format.
+- **Await scheduled auto post** `FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK` X / Release-art image + story hook: Approved auto row is scheduled for 2026-06-24T10:15:00-04:00; wait for the scheduler, then log the public URL and measure it. 3 logged post(s), 8 missing URL(s) in this format.
+- **Await scheduled auto post** `FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA` YouTube / Short video clip + platform-native CTA: Approved auto row is scheduled for 2026-06-28T18:30:00+08:00; wait for the scheduler, then log the public URL and measure it. 0 logged post(s), 4 missing URL(s) in this format.
+- **Await scheduled auto post** `FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA` YouTube / Short video clip + platform-native CTA: Approved auto row is scheduled for 2026-06-27T18:30:00+08:00; wait for the scheduler, then log the public URL and measure it. 0 logged post(s), 4 missing URL(s) in this format.
+- **Await scheduled auto post** `FP-AUTO-261` YouTube / YouTube Community archive/playlist CTA: Approved auto row is scheduled for 2026-06-24T10:00:00+08:00; wait for the scheduler, then log the public URL and measure it. 0 logged post(s), 3 missing URL(s) in this format.
+- **Await scheduled auto post** `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY` YouTube / YouTube Community archive/playlist CTA: Approved auto row is scheduled for 2026-06-25T18:30:00-04:00; wait for the scheduler, then log the public URL and measure it. 0 logged post(s), 3 missing URL(s) in this format.
+- **Await scheduled auto post** `FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY` YouTube / YouTube Community archive/playlist CTA: Approved auto row is scheduled for 2026-06-24T18:30:00-04:00; wait for the scheduler, then log the public URL and measure it. 0 logged post(s), 3 missing URL(s) in this format.
 
 ## Post-Log Measurement Handoff
 - Status: **clear**
@@ -155,11 +155,13 @@ Generated: 2026-06-23T08:58:45.919295Z
 - `FP-PLAN-TWELVE-DOLLARS-FACEBOOK` Facebook / Release-art image + story hook: Publish or log the public URL before result metrics can be collected.
 - `FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK` X / Release-art image + story hook: Publish or log the public URL before result metrics can be collected.
 - `FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK` Facebook / Release-art image + story hook: Publish or log the public URL before result metrics can be collected.
+- `FP-AUTO-264` TikTok / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.
+- `FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA` YouTube / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.
+- `FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA` YouTube / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.
+- `FP-PLAN-TWELVE-DOLLARS-TIKTOK` TikTok / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-261` YouTube / YouTube Community archive/playlist CTA: Publish or log the public URL before result metrics can be collected.
 - `FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY` YouTube / YouTube Community archive/playlist CTA: Publish or log the public URL before result metrics can be collected.
 - `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY` YouTube / YouTube Community archive/playlist CTA: Publish or log the public URL before result metrics can be collected.
-- `FP-AUTO-264` TikTok / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.
-- `FP-PLAN-TWELVE-DOLLARS-TIKTOK` TikTok / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.
 
 ## Guardrails
 - This clipboard does not fetch private analytics or write metrics.

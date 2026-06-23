@@ -1,11 +1,11 @@
 # Experiment Result Collection - Lily Roo
 
-Generated: 2026-06-23T08:58:45.877924Z
+Generated: 2026-06-23T09:34:02.482035Z
 
 ## Summary
 - Experiment count: **3**
 - Published experiment posts: **3**
-- Missing published log posts: **13**
+- Missing published log posts: **15**
 - Pending result fields: **5**
 - Ready to import: **0**
 - Entry CSV: `data/experiment_result_entry_template.csv`
@@ -32,11 +32,13 @@ Generated: 2026-06-23T08:58:45.877924Z
 - `FP-PLAN-TWELVE-DOLLARS-FACEBOOK` (Release-art image + story hook): Publish or log the public URL before result metrics can be collected.
 - `FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK` (Release-art image + story hook): Publish or log the public URL before result metrics can be collected.
 - `FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK` (Release-art image + story hook): Publish or log the public URL before result metrics can be collected.
+- `FP-AUTO-264` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
+- `FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
+- `FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
+- `FP-PLAN-TWELVE-DOLLARS-TIKTOK` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-261` (YouTube Community archive/playlist CTA): Publish or log the public URL before result metrics can be collected.
 - `FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY` (YouTube Community archive/playlist CTA): Publish or log the public URL before result metrics can be collected.
 - `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY` (YouTube Community archive/playlist CTA): Publish or log the public URL before result metrics can be collected.
-- `FP-AUTO-264` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
-- `FP-PLAN-TWELVE-DOLLARS-TIKTOK` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
 
 ## Pending Result Fields
 - `FP-AUTO-257` X `subs_delta` from row 16: Open X analytics for https://x.com/i/web/status/2062920257577029712 and record subs_delta.

@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import csv
 from collections import defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
@@ -11,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 RESULT_PACKET = ROOT / "data" / "experiment_result_collection_packet.json"
 MANUAL_POSTING = ROOT / "data" / "manual_posting_clipboard.json"
 PLATFORM_REPAIR = ROOT / "data" / "platform_repair_status.json"
+SCHEDULED_POSTS = ROOT / "data" / "scheduled_posts.csv"
 OUT = ROOT / "data" / "experiment_result_clipboard.json"
 REPORT = ROOT / "admin" / "reports" / "experiment-result-clipboard.md"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
@@ -22,6 +24,28 @@ def read_json(path: Path, fallback):
     if not path.exists():
         return fallback
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def read_csv(path: Path) -> list[dict]:
+    if not path.exists():
+        return []
+    with path.open(newline="", encoding="utf-8") as handle:
+        return list(csv.DictReader(handle))
+
+
+def parse_datetime(value: str | None):
+    raw = str(value or "").strip()
+    if not raw:
+        return None
+    if raw.endswith("Z"):
+        raw = raw[:-1] + "+00:00"
+    try:
+        parsed = datetime.fromisoformat(raw)
+    except ValueError:
+        return None
+    if parsed.tzinfo is None:
+        return parsed.replace(tzinfo=timezone.utc)
+    return parsed.astimezone(timezone.utc)
 
 
 def replace_json_embed(html: str, block_id: str, payload) -> str:
@@ -181,8 +205,35 @@ def missing_log_cards(rows: list[dict]) -> list[dict]:
     ]
 
 
+def scheduled_lookup() -> dict[str, dict]:
+    return {
+        str(row.get("id") or "").strip(): row
+        for row in read_csv(SCHEDULED_POSTS)
+        if str(row.get("id") or "").strip()
+    }
+
+
+def scheduled_auto_status(row: dict, now: datetime) -> dict:
+    scheduled_at = parse_datetime(row.get("scheduled_at"))
+    approved = str(row.get("approved") or "").strip().lower() == "yes"
+    execution_mode = str(row.get("execution_mode") or "").strip().lower()
+    platform = str(row.get("platform") or "").strip()
+    return {
+        "scheduled_at": row.get("scheduled_at") or "",
+        "scheduled_at_utc": scheduled_at.isoformat() if scheduled_at else "",
+        "approved": approved,
+        "execution_mode": execution_mode,
+        "platform": platform,
+        "is_auto": execution_mode == "auto",
+        "is_future": bool(scheduled_at and scheduled_at > now),
+        "is_ready_platform": platform.lower() in {"x", "facebook", "youtube"},
+    }
+
+
 def measurement_priority_cards(metric_cards: list[dict], missing_cards: list[dict], manual_posting: dict, platform_repair: dict) -> list[dict]:
+    now = datetime.now(timezone.utc)
     priority = []
+    scheduled_by_id = scheduled_lookup()
     format_counts: dict[str, dict] = defaultdict(lambda: {"measurable": 0, "missing": 0})
     postable_manual_ids = {
         card.get("id") or ""
@@ -248,11 +299,22 @@ def measurement_priority_cards(metric_cards: list[dict], missing_cards: list[dic
             action = "clear_platform_blocker"
             priority_value = 4
             reason_prefix = "Platform work is blocked; clear the platform repair gate before URL logging can produce metrics."
+        elif post_id in scheduled_by_id:
+            scheduled_status = scheduled_auto_status(scheduled_by_id[post_id], now)
+            if scheduled_status["approved"] and scheduled_status["is_auto"] and scheduled_status["is_ready_platform"] and scheduled_status["is_future"]:
+                action = "await_scheduled_auto_post"
+                priority_value = 2
+                reason_prefix = f"Approved auto row is scheduled for {scheduled_status['scheduled_at']}; wait for the scheduler, then log the public URL and measure it."
+            else:
+                action = "log_public_url"
+                priority_value = 3
+                reason_prefix = "Scheduled row is not yet logged; confirm publication and log the real public URL before metrics."
         else:
             action = "log_public_url"
             priority_value = 3
             reason_prefix = "Cannot collect metrics until the public URL is logged."
         manual_card = manual_cards_by_id.get(post_id) or {}
+        scheduled_status = scheduled_auto_status(scheduled_by_id.get(post_id) or {}, now) if post_id in scheduled_by_id else {}
         priority.append({
             "action": action,
             "priority": priority_value,
@@ -270,6 +332,9 @@ def measurement_priority_cards(metric_cards: list[dict], missing_cards: list[dic
             "paste_text_path": manual_card.get("paste_text_path") or "",
             "log_preview_command": manual_card.get("log_preview_command") or "",
             "log_apply_command": manual_card.get("log_apply_command") or "",
+            "scheduled_at": scheduled_status.get("scheduled_at", ""),
+            "scheduled_at_utc": scheduled_status.get("scheduled_at_utc", ""),
+            "scheduler_status": "future_auto_ready" if action == "await_scheduled_auto_post" else "",
             "reason": (
                 f"{reason_prefix} "
                 f"{counts['measurable']} logged post(s), {counts['missing']} missing URL(s) in this format."
@@ -575,6 +640,7 @@ def build_markdown(payload: dict) -> str:
         action_labels = {
             "collect_metrics": "Collect metrics",
             "post_and_log_public_url": "Post and log public URL",
+            "await_scheduled_auto_post": "Await scheduled auto post",
             "log_public_url": "Log public URL",
             "clear_platform_blocker": "Clear platform blocker",
         }

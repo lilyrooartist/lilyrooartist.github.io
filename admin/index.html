@@ -897,7 +897,7 @@
 2026-06-07,Facebook,https://www.facebook.com/903693509504290_122118326547249470,FP-AUTO-260,I Learned It All in Fifteen Seconds,"I Learned It All in Fifteen Seconds is live. Presave, stream, follow, and send the tiny-room signal onward: https://distrokid.com/hyperfollo",hyperfollow_link,no,no,,0,0,0,,,posted via Meta Graph API; result_evidence:comments=Facebook Graph post metrics 2026-06-22; result_evidence:likes=Facebook Graph post metrics 2026-06-22; result_evidence:shares=Facebook Graph post metrics 2026-06-22</script>
 
 <script type="application/json" id="embedded-future-posts">{
-  "last_synced": "2026-06-23T06:03:53.679951+00:00",
+  "last_synced": "2026-06-23T09:36:26.071719+00:00",
   "source": "data/scheduled_posts.csv",
   "published_log": "admin/content/Published_Log.csv",
   "excluded_published_ids": [
@@ -1223,6 +1223,28 @@
       "desired_privacy": ""
     },
     {
+      "id": "FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA",
+      "scheduled_at": "2026-06-27T18:30:00+08:00",
+      "platform": "YouTube",
+      "song": "Twelve Dollars",
+      "imagery": "Twelve Dollars Shorts CTA",
+      "imagery_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
+      "clip_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/video/04-twelve-dollars-youtube-remaster.mp4",
+      "text": "Twelve Dollars, remastered and refusing to leave the stage. Full Lily Roo playlist is live. #Shorts",
+      "drafts": [
+        "Twelve Dollars, remastered and refusing to leave the stage. Full Lily Roo playlist is live. #Shorts",
+        "A small amount of money, a large amount of stage light, and one archive signal asking for another view. #Shorts",
+        "Twelve Dollars is live in the Lily Roo archive. Watch the remaster, then send one more play into the signal. #Shorts"
+      ],
+      "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+      "x_media_key": "",
+      "media_key": "twelve-dollars-video",
+      "approved": "yes",
+      "execution_mode": "auto",
+      "post_type": "video",
+      "desired_privacy": "public"
+    },
+    {
       "id": "FP-AUTO-265",
       "scheduled_at": "2026-06-28T10:00:00+08:00",
       "platform": "Facebook",
@@ -1265,6 +1287,28 @@
       "execution_mode": "auto",
       "post_type": "text",
       "desired_privacy": ""
+    },
+    {
+      "id": "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
+      "scheduled_at": "2026-06-28T18:30:00+08:00",
+      "platform": "YouTube",
+      "song": "Analog Myth",
+      "imagery": "Analog Myth Shorts CTA",
+      "imagery_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
+      "clip_url": "https://www.lilyroo.com/assets/albums/analog-myth/video/03-analog-myth-youtube-remaster.mp4",
+      "text": "Analog Myth, remastered for anyone who likes time travel with receipts. Full Lily Roo playlist is live. #Shorts",
+      "drafts": [
+        "Analog Myth, remastered for anyone who likes time travel with receipts. Full Lily Roo playlist is live. #Shorts",
+        "Time broke, so Lily Roo made an album out of the pieces. Watch the remaster and send one more view into the signal. #Shorts",
+        "Analog Myth is live in the Lily Roo archive. The clock is lying politely. The playlist is not. #Shorts"
+      ],
+      "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+      "x_media_key": "",
+      "media_key": "analog-myth-video",
+      "approved": "yes",
+      "execution_mode": "auto",
+      "post_type": "video",
+      "desired_privacy": "public"
     },
     {
       "id": "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA",
@@ -1336,7 +1380,7 @@
 }</script>
 
 <script type="application/json" id="embedded-promo-engine-status">{
-  "generated_at": "2026-06-23T09:17:12.137916+00:00",
+  "generated_at": "2026-06-23T09:36:19.310401+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -1421,8 +1465,9 @@
             "first_platform": "Facebook",
             "measurement_ready_count": 3,
             "post_and_log_count": 0,
-            "log_url_count": 4,
-            "blocked_count": 1,
+            "await_scheduled_count": 4,
+            "log_url_count": 0,
+            "blocked_count": 0,
             "post_log_handoff_count": 0,
             "candidate_post_ids": [
               "FP-AUTO-260",
@@ -1431,11 +1476,57 @@
               "FP-PLAN-TWELVE-DOLLARS-FACEBOOK",
               "FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK",
               "FP-PLAN-TWELVE-DOLLARS-X",
-              "FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK",
-              "FP-AUTO-265"
+              "FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK"
             ],
             "preview_command": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run",
             "apply_command": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin",
+            "report_path": "admin/reports/experiment-result-clipboard.md"
+          }
+        },
+        {
+          "format": "Short video clip + platform-native CTA",
+          "format_basis": "experiment_format",
+          "published_count": 0,
+          "scheduled_count": 4,
+          "planned_count": 1,
+          "measured_result_total": 0,
+          "measured_post_count": 0,
+          "unmeasured_published_count": 0,
+          "mapped_active_post_ids": [
+            "FP-AUTO-259",
+            "FP-AUTO-264",
+            "FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA",
+            "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
+            "FP-PLAN-TWELVE-DOLLARS-TIKTOK"
+          ],
+          "example_hooks": [
+            "I learned it all in fifteen seconds and somehow still have homework. Streaming now.",
+            "Swipe away before the pain sets in. Cute system we built. Streaming now."
+          ],
+          "minimum_measured_posts": 2,
+          "needed_measured_posts": 2,
+          "evidence_status": "needs_result_metrics",
+          "average_result_per_measured_post": 0,
+          "decision_note": "Need 2 more measured post(s) before this can be called a winning format; 0 published post(s) in this format still need result metrics.",
+          "score": 9,
+          "decision_unblock": {
+            "status": "needs_evidence",
+            "next_action": "Await scheduled auto posts, then log public URLs and measure results.",
+            "first_action": "await_scheduled_auto_post",
+            "first_post_id": "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
+            "first_platform": "YouTube",
+            "measurement_ready_count": 0,
+            "post_and_log_count": 0,
+            "await_scheduled_count": 2,
+            "log_url_count": 0,
+            "blocked_count": 0,
+            "post_log_handoff_count": 0,
+            "candidate_post_ids": [
+              "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
+              "FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA"
+            ],
+            "preview_command": "",
+            "apply_command": "",
             "report_path": "admin/reports/experiment-result-clipboard.md"
           }
         },
@@ -1465,62 +1556,20 @@
           "score": 6,
           "decision_unblock": {
             "status": "needs_evidence",
-            "next_action": "Log public URLs for already-published posts.",
-            "first_action": "log_public_url",
+            "next_action": "Await scheduled auto posts, then log public URLs and measure results.",
+            "first_action": "await_scheduled_auto_post",
             "first_post_id": "FP-AUTO-261",
             "first_platform": "YouTube",
             "measurement_ready_count": 0,
             "post_and_log_count": 0,
-            "log_url_count": 3,
+            "await_scheduled_count": 3,
+            "log_url_count": 0,
             "blocked_count": 0,
             "post_log_handoff_count": 0,
             "candidate_post_ids": [
               "FP-AUTO-261",
               "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
               "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
-            ],
-            "preview_command": "",
-            "apply_command": "",
-            "report_path": "admin/reports/experiment-result-clipboard.md"
-          }
-        },
-        {
-          "format": "Short video clip + platform-native CTA",
-          "format_basis": "experiment_format",
-          "published_count": 0,
-          "scheduled_count": 2,
-          "planned_count": 1,
-          "measured_result_total": 0,
-          "measured_post_count": 0,
-          "unmeasured_published_count": 0,
-          "mapped_active_post_ids": [
-            "FP-AUTO-259",
-            "FP-AUTO-264",
-            "FP-PLAN-TWELVE-DOLLARS-TIKTOK"
-          ],
-          "example_hooks": [
-            "I learned it all in fifteen seconds and somehow still have homework. Streaming now.",
-            "Swipe away before the pain sets in. Cute system we built. Streaming now."
-          ],
-          "minimum_measured_posts": 2,
-          "needed_measured_posts": 2,
-          "evidence_status": "needs_result_metrics",
-          "average_result_per_measured_post": 0,
-          "decision_note": "Need 2 more measured post(s) before this can be called a winning format; 0 published post(s) in this format still need result metrics.",
-          "score": 5,
-          "decision_unblock": {
-            "status": "needs_evidence",
-            "next_action": "Clear platform blocker before this format can produce evidence.",
-            "first_action": "clear_platform_blocker",
-            "first_post_id": "FP-AUTO-264",
-            "first_platform": "TikTok",
-            "measurement_ready_count": 0,
-            "post_and_log_count": 0,
-            "log_url_count": 0,
-            "blocked_count": 1,
-            "post_log_handoff_count": 0,
-            "candidate_post_ids": [
-              "FP-AUTO-264"
             ],
             "preview_command": "",
             "apply_command": "",
@@ -1538,11 +1587,11 @@
         ],
         "pending_result_field_count": 5,
         "ready_to_import_count": 0,
-        "missing_published_log_count": 13,
+        "missing_published_log_count": 15,
         "blockers": [
           "2 more format candidate(s) need at least 2 measured posts.",
           "5 post-result field(s) still need collected values.",
-          "13 experiment post(s) still need public URLs in Published_Log.csv."
+          "15 experiment post(s) still need public URLs in Published_Log.csv."
         ],
         "next_action": "Collect/import post results and log missing public URLs before declaring the top 3 formats."
       },
@@ -1551,16 +1600,16 @@
         "ready_candidate_count": 1,
         "winner_count_target": 3,
         "needed_winner_candidates": 2,
-        "next_format": "YouTube Community archive/playlist CTA",
+        "next_format": "Short video clip + platform-native CTA",
         "evidence_status": "needs_result_metrics",
         "measured_post_count": 0,
         "minimum_measured_posts": 2,
         "needed_measured_posts": 2,
-        "scheduled_count": 3,
+        "scheduled_count": 4,
         "published_count": 0,
-        "first_action": "log_public_url",
-        "next_action": "Log the real public URL for the first already-published post in this format.",
-        "first_post_id": "FP-AUTO-261",
+        "first_action": "await_scheduled_auto_post",
+        "next_action": "Let the approved auto row publish on schedule, then log the real public URL and collect metrics.",
+        "first_post_id": "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
         "first_platform": "YouTube",
         "preview_command": "",
         "apply_command": "",
@@ -1569,14 +1618,14 @@
         "handoff_note": "",
         "measurement_ready_count": 0,
         "post_and_log_count": 0,
+        "await_scheduled_count": 2,
         "blocked_count": 0,
         "candidate_post_ids": [
-          "FP-AUTO-261",
-          "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-          "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY"
+          "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
+          "FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA"
         ],
         "decision_note": "Need 2 more measured post(s) before this can be called a winning format; 0 published post(s) in this format still need result metrics.",
-        "why": "Moving YouTube Community archive/playlist CTA from 0 to 2 measured posts is the next step toward 3 repeatable formats.",
+        "why": "Moving Short video clip + platform-native CTA from 0 to 2 measured posts is the next step toward 3 repeatable formats.",
         "guardrail": "Use only real public URLs and measured result values; scheduled or postable rows are not winner evidence until logged and measured."
       },
       "repeatable_format_ladder": {
@@ -1599,7 +1648,8 @@
             "first_platform": "Facebook",
             "measurement_ready_count": 3,
             "post_and_log_count": 0,
-            "blocked_count": 1,
+            "await_scheduled_count": 4,
+            "blocked_count": 0,
             "report_path": "admin/reports/experiment-result-clipboard.md",
             "preview_command": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run",
             "apply_command": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin",
@@ -1607,41 +1657,43 @@
           },
           {
             "rank": 2,
-            "format": "YouTube Community archive/playlist CTA",
-            "status": "log_public_url",
+            "format": "Short video clip + platform-native CTA",
+            "status": "await_scheduled_auto_post",
             "evidence_status": "needs_result_metrics",
             "measured_post_count": 0,
             "minimum_measured_posts": 2,
             "needed_measured_posts": 2,
-            "first_action": "log_public_url",
-            "first_post_id": "FP-AUTO-261",
+            "first_action": "await_scheduled_auto_post",
+            "first_post_id": "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
             "first_platform": "YouTube",
             "measurement_ready_count": 0,
             "post_and_log_count": 0,
+            "await_scheduled_count": 2,
             "blocked_count": 0,
             "report_path": "admin/reports/experiment-result-clipboard.md",
             "preview_command": "",
             "apply_command": "",
-            "next_action": "Log public URLs for already-published posts."
+            "next_action": "Await scheduled auto posts, then log public URLs and measure results."
           },
           {
             "rank": 3,
-            "format": "Short video clip + platform-native CTA",
-            "status": "clear_platform_blocker",
+            "format": "YouTube Community archive/playlist CTA",
+            "status": "await_scheduled_auto_post",
             "evidence_status": "needs_result_metrics",
             "measured_post_count": 0,
             "minimum_measured_posts": 2,
             "needed_measured_posts": 2,
-            "first_action": "clear_platform_blocker",
-            "first_post_id": "FP-AUTO-264",
-            "first_platform": "TikTok",
+            "first_action": "await_scheduled_auto_post",
+            "first_post_id": "FP-AUTO-261",
+            "first_platform": "YouTube",
             "measurement_ready_count": 0,
             "post_and_log_count": 0,
-            "blocked_count": 1,
+            "await_scheduled_count": 3,
+            "blocked_count": 0,
             "report_path": "admin/reports/experiment-result-clipboard.md",
             "preview_command": "",
             "apply_command": "",
-            "next_action": "Clear platform blocker before this format can produce evidence."
+            "next_action": "Await scheduled auto posts, then log public URLs and measure results."
           }
         ],
         "next_action": "Advance the first non-winner ladder step until two more formats have measured evidence.",
@@ -1826,6 +1878,95 @@
           "score": 88
         },
         {
+          "format": "Short video clip + platform-native CTA",
+          "hypothesis": "Short video clip + platform-native CTA can turn existing Lily Roo release assets into measurable plays/views growth across the platforms where it fits.",
+          "status": "partially_ready",
+          "scheduled_count": 3,
+          "planned_count": 1,
+          "approved_count": 3,
+          "blocked_count": 1,
+          "platforms": [
+            "TikTok",
+            "YouTube"
+          ],
+          "known_blockers": [
+            "TIKTOK_CLIENT_KEY",
+            "TIKTOK_CLIENT_SECRET",
+            "TIKTOK_REFRESH_TOKEN",
+            "TIKTOK_PUBLIC_POSTING_APPROVED"
+          ],
+          "assets": [
+            {
+              "id": "FP-AUTO-264",
+              "platform": "TikTok",
+              "song": "I Learned It All in Fifteen Seconds",
+              "post_type": "video",
+              "scheduled_at": "2026-06-23T10:00:00+08:00",
+              "approved": "yes",
+              "execution_mode": "auto",
+              "imagery_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
+              "clip_url": "https://www.lilyroo.com/assets/ig/01_i_learned_it_all_60s.mp4",
+              "copy": "Swipe away before the pain sets in. Cute system we built. Streaming now.",
+              "approval_command": ""
+            },
+            {
+              "id": "FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA",
+              "platform": "YouTube",
+              "song": "Twelve Dollars",
+              "post_type": "video",
+              "scheduled_at": "2026-06-27T18:30:00+08:00",
+              "approved": "yes",
+              "execution_mode": "auto",
+              "imagery_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
+              "clip_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/video/04-twelve-dollars-youtube-remaster.mp4",
+              "copy": "Twelve Dollars, remastered and refusing to leave the stage. Full Lily Roo playlist is live. #Shorts",
+              "approval_command": ""
+            },
+            {
+              "id": "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
+              "platform": "YouTube",
+              "song": "Analog Myth",
+              "post_type": "video",
+              "scheduled_at": "2026-06-28T18:30:00+08:00",
+              "approved": "yes",
+              "execution_mode": "auto",
+              "imagery_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
+              "clip_url": "https://www.lilyroo.com/assets/albums/analog-myth/video/03-analog-myth-youtube-remaster.mp4",
+              "copy": "Analog Myth, remastered for anyone who likes time travel with receipts. Full Lily Roo playlist is live. #Shorts",
+              "approval_command": ""
+            },
+            {
+              "id": "FP-PLAN-TWELVE-DOLLARS-TIKTOK",
+              "platform": "TikTok",
+              "song": "Twelve Dollars",
+              "post_type": "video",
+              "scheduled_at": "2026-06-24T20:40:00-04:00",
+              "approved": "no",
+              "execution_mode": "auto",
+              "imagery_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
+              "clip_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/video/04-twelve-dollars-youtube-remaster.mp4",
+              "copy": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
+              "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --refresh-admin"
+            }
+          ],
+          "tracking_fields": [
+            "comments",
+            "likes",
+            "saves",
+            "shares",
+            "subs_delta",
+            "tiktok.followers",
+            "tiktok.profile_views_7d",
+            "views",
+            "youtube.subscribers",
+            "youtube.total_views"
+          ],
+          "measurement_window_days": 7,
+          "result_destination": "admin/content/Published_Log.csv plus data/manual_social_stats.json",
+          "next_action": "Measure approved rows now; review blocked variant with python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --refresh-admin.",
+          "score": 25
+        },
+        {
           "format": "YouTube Community archive/playlist CTA",
           "hypothesis": "YouTube Community archive/playlist CTA can turn existing Lily Roo release assets into measurable plays/views growth across the platforms where it fits.",
           "status": "ready_to_measure",
@@ -1891,65 +2032,6 @@
           "result_destination": "admin/content/Published_Log.csv plus data/manual_social_stats.json",
           "next_action": "Publish or confirm the scheduled row, then log public URL and 7-day result metrics.",
           "score": 24
-        },
-        {
-          "format": "Short video clip + platform-native CTA",
-          "hypothesis": "Short video clip + platform-native CTA can turn existing Lily Roo release assets into measurable plays/views growth across the platforms where it fits.",
-          "status": "partially_ready",
-          "scheduled_count": 1,
-          "planned_count": 1,
-          "approved_count": 1,
-          "blocked_count": 1,
-          "platforms": [
-            "TikTok"
-          ],
-          "known_blockers": [
-            "TIKTOK_CLIENT_KEY",
-            "TIKTOK_CLIENT_SECRET",
-            "TIKTOK_REFRESH_TOKEN",
-            "TIKTOK_PUBLIC_POSTING_APPROVED"
-          ],
-          "assets": [
-            {
-              "id": "FP-AUTO-264",
-              "platform": "TikTok",
-              "song": "I Learned It All in Fifteen Seconds",
-              "post_type": "video",
-              "scheduled_at": "2026-06-23T10:00:00+08:00",
-              "approved": "yes",
-              "execution_mode": "auto",
-              "imagery_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
-              "clip_url": "https://www.lilyroo.com/assets/ig/01_i_learned_it_all_60s.mp4",
-              "copy": "Swipe away before the pain sets in. Cute system we built. Streaming now.",
-              "approval_command": ""
-            },
-            {
-              "id": "FP-PLAN-TWELVE-DOLLARS-TIKTOK",
-              "platform": "TikTok",
-              "song": "Twelve Dollars",
-              "post_type": "video",
-              "scheduled_at": "2026-06-24T20:40:00-04:00",
-              "approved": "no",
-              "execution_mode": "auto",
-              "imagery_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
-              "clip_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/video/04-twelve-dollars-youtube-remaster.mp4",
-              "copy": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
-              "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --refresh-admin"
-            }
-          ],
-          "tracking_fields": [
-            "comments",
-            "likes",
-            "saves",
-            "shares",
-            "tiktok.followers",
-            "tiktok.profile_views_7d",
-            "views"
-          ],
-          "measurement_window_days": 7,
-          "result_destination": "admin/content/Published_Log.csv plus data/manual_social_stats.json",
-          "next_action": "Measure approved rows now; review blocked variant with python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --refresh-admin.",
-          "score": 9
         }
       ],
       "metric_confidence": {
@@ -2000,7 +2082,7 @@
         },
         "action_needed": "Increase weekly subscriber acquisition before the channel can reach 1,000 subscribers within a year."
       },
-      "approved_upcoming_posts": 16,
+      "approved_upcoming_posts": 18,
       "approved_backlog_posts": 2,
       "manual_handoff_backlog_posts": 0,
       "actionable_backlog_posts": 2,
@@ -2448,7 +2530,7 @@
       "summary": {
         "experiment_count": 3,
         "published_experiment_post_count": 3,
-        "missing_published_log_count": 13,
+        "missing_published_log_count": 15,
         "pending_result_field_count": 5,
         "ready_to_import_count": 0,
         "wide_ready_to_import_count": 0,
@@ -2463,7 +2545,7 @@
       },
       "pending_result_field_count": 5,
       "ready_to_import_count": 0,
-      "missing_published_log_count": 13,
+      "missing_published_log_count": 15,
       "entry_csv_path": "data/experiment_result_entry_template.csv",
       "wide_entry_csv_path": "data/experiment_result_entry_wide_template.csv",
       "result_import_preview_command": "python3 scripts/update_experiment_results.py --from-csv data/experiment_result_entry_template.csv --dry-run",
@@ -2477,7 +2559,7 @@
       "summary": {
         "status": "needs_values",
         "metric_card_count": 3,
-        "missing_public_url_count": 13,
+        "missing_public_url_count": 15,
         "measurement_priority_count": 12,
         "post_log_measurement_handoff_count": 0,
         "pending_result_field_count": 5,
@@ -2757,6 +2839,38 @@
           "next_action": "Publish or log the public URL before result metrics can be collected."
         },
         {
+          "post_id": "FP-AUTO-264",
+          "experiment_format": "Short video clip + platform-native CTA",
+          "platform": "TikTok",
+          "song": "I Learned It All in Fifteen Seconds",
+          "status": "not_in_published_log",
+          "next_action": "Publish or log the public URL before result metrics can be collected."
+        },
+        {
+          "post_id": "FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA",
+          "experiment_format": "Short video clip + platform-native CTA",
+          "platform": "YouTube",
+          "song": "Twelve Dollars",
+          "status": "not_in_published_log",
+          "next_action": "Publish or log the public URL before result metrics can be collected."
+        },
+        {
+          "post_id": "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
+          "experiment_format": "Short video clip + platform-native CTA",
+          "platform": "YouTube",
+          "song": "Analog Myth",
+          "status": "not_in_published_log",
+          "next_action": "Publish or log the public URL before result metrics can be collected."
+        },
+        {
+          "post_id": "FP-PLAN-TWELVE-DOLLARS-TIKTOK",
+          "experiment_format": "Short video clip + platform-native CTA",
+          "platform": "TikTok",
+          "song": "Twelve Dollars",
+          "status": "not_in_published_log",
+          "next_action": "Publish or log the public URL before result metrics can be collected."
+        },
+        {
           "post_id": "FP-AUTO-261",
           "experiment_format": "YouTube Community archive/playlist CTA",
           "platform": "YouTube",
@@ -2777,22 +2891,6 @@
           "experiment_format": "YouTube Community archive/playlist CTA",
           "platform": "YouTube",
           "song": "Analog Myth",
-          "status": "not_in_published_log",
-          "next_action": "Publish or log the public URL before result metrics can be collected."
-        },
-        {
-          "post_id": "FP-AUTO-264",
-          "experiment_format": "Short video clip + platform-native CTA",
-          "platform": "TikTok",
-          "song": "I Learned It All in Fifteen Seconds",
-          "status": "not_in_published_log",
-          "next_action": "Publish or log the public URL before result metrics can be collected."
-        },
-        {
-          "post_id": "FP-PLAN-TWELVE-DOLLARS-TIKTOK",
-          "experiment_format": "Short video clip + platform-native CTA",
-          "platform": "TikTok",
-          "song": "Twelve Dollars",
           "status": "not_in_published_log",
           "next_action": "Publish or log the public URL before result metrics can be collected."
         }
@@ -2849,8 +2947,8 @@
           "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 3 logged post(s), 8 missing URL(s) in this format."
         },
         {
-          "action": "log_public_url",
-          "priority": 3,
+          "action": "await_scheduled_auto_post",
+          "priority": 2,
           "post_id": "FP-PLAN-TWELVE-DOLLARS-FACEBOOK",
           "platform": "Facebook",
           "song": "Twelve Dollars",
@@ -2865,11 +2963,14 @@
           "paste_text_path": "",
           "log_preview_command": "",
           "log_apply_command": "",
-          "reason": "Cannot collect metrics until the public URL is logged. 3 logged post(s), 8 missing URL(s) in this format."
+          "scheduled_at": "2026-06-23T11:20:00-04:00",
+          "scheduled_at_utc": "2026-06-23T15:20:00+00:00",
+          "scheduler_status": "future_auto_ready",
+          "reason": "Approved auto row is scheduled for 2026-06-23T11:20:00-04:00; wait for the scheduler, then log the public URL and measure it. 3 logged post(s), 8 missing URL(s) in this format."
         },
         {
-          "action": "log_public_url",
-          "priority": 3,
+          "action": "await_scheduled_auto_post",
+          "priority": 2,
           "post_id": "FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK",
           "platform": "Facebook",
           "song": "Analog Myth",
@@ -2884,11 +2985,14 @@
           "paste_text_path": "",
           "log_preview_command": "",
           "log_apply_command": "",
-          "reason": "Cannot collect metrics until the public URL is logged. 3 logged post(s), 8 missing URL(s) in this format."
+          "scheduled_at": "2026-06-25T11:20:00-04:00",
+          "scheduled_at_utc": "2026-06-25T15:20:00+00:00",
+          "scheduler_status": "future_auto_ready",
+          "reason": "Approved auto row is scheduled for 2026-06-25T11:20:00-04:00; wait for the scheduler, then log the public URL and measure it. 3 logged post(s), 8 missing URL(s) in this format."
         },
         {
-          "action": "log_public_url",
-          "priority": 3,
+          "action": "await_scheduled_auto_post",
+          "priority": 2,
           "post_id": "FP-PLAN-TWELVE-DOLLARS-X",
           "platform": "X",
           "song": "Twelve Dollars",
@@ -2903,11 +3007,14 @@
           "paste_text_path": "",
           "log_preview_command": "",
           "log_apply_command": "",
-          "reason": "Cannot collect metrics until the public URL is logged. 3 logged post(s), 8 missing URL(s) in this format."
+          "scheduled_at": "2026-06-26T10:00:00+08:00",
+          "scheduled_at_utc": "2026-06-26T02:00:00+00:00",
+          "scheduler_status": "future_auto_ready",
+          "reason": "Approved auto row is scheduled for 2026-06-26T10:00:00+08:00; wait for the scheduler, then log the public URL and measure it. 3 logged post(s), 8 missing URL(s) in this format."
         },
         {
-          "action": "log_public_url",
-          "priority": 3,
+          "action": "await_scheduled_auto_post",
+          "priority": 2,
           "post_id": "FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK",
           "platform": "X",
           "song": "Analog Myth",
@@ -2922,11 +3029,58 @@
           "paste_text_path": "",
           "log_preview_command": "",
           "log_apply_command": "",
-          "reason": "Cannot collect metrics until the public URL is logged. 3 logged post(s), 8 missing URL(s) in this format."
+          "scheduled_at": "2026-06-24T10:15:00-04:00",
+          "scheduled_at_utc": "2026-06-24T14:15:00+00:00",
+          "scheduler_status": "future_auto_ready",
+          "reason": "Approved auto row is scheduled for 2026-06-24T10:15:00-04:00; wait for the scheduler, then log the public URL and measure it. 3 logged post(s), 8 missing URL(s) in this format."
         },
         {
-          "action": "log_public_url",
-          "priority": 3,
+          "action": "await_scheduled_auto_post",
+          "priority": 2,
+          "post_id": "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
+          "platform": "YouTube",
+          "song": "Analog Myth",
+          "experiment_format": "Short video clip + platform-native CTA",
+          "post_url": "",
+          "source_row": "",
+          "pending_fields": [],
+          "direct_preview_command_template": "",
+          "direct_apply_command_template": "",
+          "manual_posting_report": "",
+          "public_community_url": "",
+          "paste_text_path": "",
+          "log_preview_command": "",
+          "log_apply_command": "",
+          "scheduled_at": "2026-06-28T18:30:00+08:00",
+          "scheduled_at_utc": "2026-06-28T10:30:00+00:00",
+          "scheduler_status": "future_auto_ready",
+          "reason": "Approved auto row is scheduled for 2026-06-28T18:30:00+08:00; wait for the scheduler, then log the public URL and measure it. 0 logged post(s), 4 missing URL(s) in this format."
+        },
+        {
+          "action": "await_scheduled_auto_post",
+          "priority": 2,
+          "post_id": "FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA",
+          "platform": "YouTube",
+          "song": "Twelve Dollars",
+          "experiment_format": "Short video clip + platform-native CTA",
+          "post_url": "",
+          "source_row": "",
+          "pending_fields": [],
+          "direct_preview_command_template": "",
+          "direct_apply_command_template": "",
+          "manual_posting_report": "",
+          "public_community_url": "",
+          "paste_text_path": "",
+          "log_preview_command": "",
+          "log_apply_command": "",
+          "scheduled_at": "2026-06-27T18:30:00+08:00",
+          "scheduled_at_utc": "2026-06-27T10:30:00+00:00",
+          "scheduler_status": "future_auto_ready",
+          "reason": "Approved auto row is scheduled for 2026-06-27T18:30:00+08:00; wait for the scheduler, then log the public URL and measure it. 0 logged post(s), 4 missing URL(s) in this format."
+        },
+        {
+          "action": "await_scheduled_auto_post",
+          "priority": 2,
           "post_id": "FP-AUTO-261",
           "platform": "YouTube",
           "song": "I Learned It All in Fifteen Seconds",
@@ -2941,11 +3095,14 @@
           "paste_text_path": "",
           "log_preview_command": "",
           "log_apply_command": "",
-          "reason": "Cannot collect metrics until the public URL is logged. 0 logged post(s), 3 missing URL(s) in this format."
+          "scheduled_at": "2026-06-24T10:00:00+08:00",
+          "scheduled_at_utc": "2026-06-24T02:00:00+00:00",
+          "scheduler_status": "future_auto_ready",
+          "reason": "Approved auto row is scheduled for 2026-06-24T10:00:00+08:00; wait for the scheduler, then log the public URL and measure it. 0 logged post(s), 3 missing URL(s) in this format."
         },
         {
-          "action": "log_public_url",
-          "priority": 3,
+          "action": "await_scheduled_auto_post",
+          "priority": 2,
           "post_id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
           "platform": "YouTube",
           "song": "Analog Myth",
@@ -2960,11 +3117,14 @@
           "paste_text_path": "",
           "log_preview_command": "",
           "log_apply_command": "",
-          "reason": "Cannot collect metrics until the public URL is logged. 0 logged post(s), 3 missing URL(s) in this format."
+          "scheduled_at": "2026-06-25T18:30:00-04:00",
+          "scheduled_at_utc": "2026-06-25T22:30:00+00:00",
+          "scheduler_status": "future_auto_ready",
+          "reason": "Approved auto row is scheduled for 2026-06-25T18:30:00-04:00; wait for the scheduler, then log the public URL and measure it. 0 logged post(s), 3 missing URL(s) in this format."
         },
         {
-          "action": "log_public_url",
-          "priority": 3,
+          "action": "await_scheduled_auto_post",
+          "priority": 2,
           "post_id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
           "platform": "YouTube",
           "song": "Twelve Dollars",
@@ -2979,45 +3139,10 @@
           "paste_text_path": "",
           "log_preview_command": "",
           "log_apply_command": "",
-          "reason": "Cannot collect metrics until the public URL is logged. 0 logged post(s), 3 missing URL(s) in this format."
-        },
-        {
-          "action": "clear_platform_blocker",
-          "priority": 4,
-          "post_id": "FP-AUTO-265",
-          "platform": "Facebook",
-          "song": "I Learned It All in Fifteen Seconds",
-          "experiment_format": "Release-art image + story hook",
-          "post_url": "",
-          "source_row": "",
-          "pending_fields": [],
-          "direct_preview_command_template": "",
-          "direct_apply_command_template": "",
-          "manual_posting_report": "",
-          "public_community_url": "",
-          "paste_text_path": "",
-          "log_preview_command": "",
-          "log_apply_command": "",
-          "reason": "Platform work is blocked; clear the platform repair gate before URL logging can produce metrics. 3 logged post(s), 8 missing URL(s) in this format."
-        },
-        {
-          "action": "clear_platform_blocker",
-          "priority": 4,
-          "post_id": "FP-AUTO-264",
-          "platform": "TikTok",
-          "song": "I Learned It All in Fifteen Seconds",
-          "experiment_format": "Short video clip + platform-native CTA",
-          "post_url": "",
-          "source_row": "",
-          "pending_fields": [],
-          "direct_preview_command_template": "",
-          "direct_apply_command_template": "",
-          "manual_posting_report": "",
-          "public_community_url": "",
-          "paste_text_path": "",
-          "log_preview_command": "",
-          "log_apply_command": "",
-          "reason": "Platform work is blocked; clear the platform repair gate before URL logging can produce metrics. 0 logged post(s), 2 missing URL(s) in this format."
+          "scheduled_at": "2026-06-24T18:30:00-04:00",
+          "scheduled_at_utc": "2026-06-24T22:30:00+00:00",
+          "scheduler_status": "future_auto_ready",
+          "reason": "Approved auto row is scheduled for 2026-06-24T18:30:00-04:00; wait for the scheduler, then log the public URL and measure it. 0 logged post(s), 3 missing URL(s) in this format."
         }
       ],
       "first_measurement_runbook": {
@@ -3165,7 +3290,7 @@
       "recheck_interval_hours": 24,
       "recheck_due": 0,
       "waiting_for_next_recheck": 7,
-      "oldest_checked_pending_age_hours": 0.3,
+      "oldest_checked_pending_age_hours": 0.6,
       "next_recheck_at": "2026-06-24T08:58:36.482600+00:00"
     },
     "store_verification": {
@@ -3190,7 +3315,7 @@
             "updated_at": "2026-06-23T08:58:36.482600Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
             "checked_at": "2026-06-23T08:58:36.482600+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:36.482600+00:00",
             "recheck_due": false,
@@ -3209,7 +3334,7 @@
             "updated_at": "2026-06-23T08:58:38.981367Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
             "checked_at": "2026-06-23T08:58:38.981367+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:38.981367+00:00",
             "recheck_due": false,
@@ -3228,7 +3353,7 @@
             "updated_at": "2026-06-23T08:58:39.624071Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
             "checked_at": "2026-06-23T08:58:39.624071+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:39.624071+00:00",
             "recheck_due": false,
@@ -3247,7 +3372,7 @@
             "updated_at": "2026-06-23T08:58:39.676136Z",
             "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
             "checked_at": "2026-06-23T08:58:39.676136+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:39.676136+00:00",
             "recheck_due": false,
@@ -3266,7 +3391,7 @@
             "updated_at": "2026-06-23T08:58:40.262040Z",
             "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
             "checked_at": "2026-06-23T08:58:40.262040+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:40.262040+00:00",
             "recheck_due": false,
@@ -3285,7 +3410,7 @@
             "updated_at": "2026-06-23T08:58:40.315090Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
             "checked_at": "2026-06-23T08:58:40.315090+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:40.315090+00:00",
             "recheck_due": false,
@@ -3304,7 +3429,7 @@
             "updated_at": "2026-06-23T08:58:41.682423Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
             "checked_at": "2026-06-23T08:58:41.682423+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:41.682423+00:00",
             "recheck_due": false,
@@ -3326,7 +3451,7 @@
             "updated_at": "2026-06-23T08:58:36.482600Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
             "checked_at": "2026-06-23T08:58:36.482600+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:36.482600+00:00",
             "recheck_due": false,
@@ -3344,7 +3469,7 @@
             "updated_at": "2026-06-23T08:58:38.981367Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
             "checked_at": "2026-06-23T08:58:38.981367+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:38.981367+00:00",
             "recheck_due": false,
@@ -3362,7 +3487,7 @@
             "updated_at": "2026-06-23T08:58:39.624071Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
             "checked_at": "2026-06-23T08:58:39.624071+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:39.624071+00:00",
             "recheck_due": false,
@@ -3380,7 +3505,7 @@
             "updated_at": "2026-06-23T08:58:39.676136Z",
             "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
             "checked_at": "2026-06-23T08:58:39.676136+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:39.676136+00:00",
             "recheck_due": false,
@@ -3398,7 +3523,7 @@
             "updated_at": "2026-06-23T08:58:40.262040Z",
             "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
             "checked_at": "2026-06-23T08:58:40.262040+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:40.262040+00:00",
             "recheck_due": false,
@@ -3416,7 +3541,7 @@
             "updated_at": "2026-06-23T08:58:40.315090Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
             "checked_at": "2026-06-23T08:58:40.315090+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:40.315090+00:00",
             "recheck_due": false,
@@ -3434,7 +3559,7 @@
             "updated_at": "2026-06-23T08:58:41.682423Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
             "checked_at": "2026-06-23T08:58:41.682423+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:41.682423+00:00",
             "recheck_due": false,
@@ -3447,7 +3572,7 @@
       "recheck_interval_hours": 24,
       "recheck_due_count": 0,
       "waiting_for_next_recheck_count": 7,
-      "oldest_checked_pending_age_hours": 0.3,
+      "oldest_checked_pending_age_hours": 0.6,
       "next_recheck_at": "2026-06-24T08:58:36.482600+00:00",
       "recheck_due_rows": [],
       "waiting_recheck_rows": [
@@ -3462,7 +3587,7 @@
             "updated_at": "2026-06-23T08:58:36.482600Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
             "checked_at": "2026-06-23T08:58:36.482600+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:36.482600+00:00",
             "recheck_due": false,
@@ -3481,7 +3606,7 @@
             "updated_at": "2026-06-23T08:58:38.981367Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
             "checked_at": "2026-06-23T08:58:38.981367+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:38.981367+00:00",
             "recheck_due": false,
@@ -3500,7 +3625,7 @@
             "updated_at": "2026-06-23T08:58:39.624071Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
             "checked_at": "2026-06-23T08:58:39.624071+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:39.624071+00:00",
             "recheck_due": false,
@@ -3519,7 +3644,7 @@
             "updated_at": "2026-06-23T08:58:39.676136Z",
             "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
             "checked_at": "2026-06-23T08:58:39.676136+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:39.676136+00:00",
             "recheck_due": false,
@@ -3538,7 +3663,7 @@
             "updated_at": "2026-06-23T08:58:40.262040Z",
             "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
             "checked_at": "2026-06-23T08:58:40.262040+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:40.262040+00:00",
             "recheck_due": false,
@@ -3557,7 +3682,7 @@
             "updated_at": "2026-06-23T08:58:40.315090Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
             "checked_at": "2026-06-23T08:58:40.315090+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:40.315090+00:00",
             "recheck_due": false,
@@ -3576,7 +3701,7 @@
             "updated_at": "2026-06-23T08:58:41.682423Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
             "checked_at": "2026-06-23T08:58:41.682423+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:41.682423+00:00",
             "recheck_due": false,
@@ -3876,11 +4001,11 @@
       "commits_snapshots": true,
       "safe_refresh_command": "python3 scripts/refresh_promo_admin.py",
       "source_revision": {
-        "commit": "b0061a494bce65f28ef6f74f68d03c055262bcd2",
-        "short_commit": "b0061a49",
+        "commit": "12880852a0e8ad49883a0c8edbcfef340435391d",
+        "short_commit": "12880852",
         "branch": "main",
-        "committed_at": "2026-06-23T17:14:50+08:00",
-        "source_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/commit/b0061a494bce65f28ef6f74f68d03c055262bcd2"
+        "committed_at": "2026-06-23T17:17:46+08:00",
+        "source_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/commit/12880852a0e8ad49883a0c8edbcfef340435391d"
       },
       "latest_run_covers_source_commit": false,
       "latest_run_coverage_basis": "source_changed_after_latest_run",
@@ -6898,7 +7023,7 @@
             "updated_at": "2026-06-23T08:58:36.482600Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
             "checked_at": "2026-06-23T08:58:36.482600+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:36.482600+00:00",
             "recheck_due": false,
@@ -6917,7 +7042,7 @@
             "updated_at": "2026-06-23T08:58:38.981367Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
             "checked_at": "2026-06-23T08:58:38.981367+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:38.981367+00:00",
             "recheck_due": false,
@@ -6936,7 +7061,7 @@
             "updated_at": "2026-06-23T08:58:39.624071Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
             "checked_at": "2026-06-23T08:58:39.624071+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:39.624071+00:00",
             "recheck_due": false,
@@ -6955,7 +7080,7 @@
             "updated_at": "2026-06-23T08:58:39.676136Z",
             "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
             "checked_at": "2026-06-23T08:58:39.676136+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:39.676136+00:00",
             "recheck_due": false,
@@ -6974,7 +7099,7 @@
             "updated_at": "2026-06-23T08:58:40.262040Z",
             "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
             "checked_at": "2026-06-23T08:58:40.262040+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:40.262040+00:00",
             "recheck_due": false,
@@ -6993,7 +7118,7 @@
             "updated_at": "2026-06-23T08:58:40.315090Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
             "checked_at": "2026-06-23T08:58:40.315090+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:40.315090+00:00",
             "recheck_due": false,
@@ -7012,7 +7137,7 @@
             "updated_at": "2026-06-23T08:58:41.682423Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
             "checked_at": "2026-06-23T08:58:41.682423+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:41.682423+00:00",
             "recheck_due": false,
@@ -7034,7 +7159,7 @@
             "updated_at": "2026-06-23T08:58:36.482600Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
             "checked_at": "2026-06-23T08:58:36.482600+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:36.482600+00:00",
             "recheck_due": false,
@@ -7052,7 +7177,7 @@
             "updated_at": "2026-06-23T08:58:38.981367Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
             "checked_at": "2026-06-23T08:58:38.981367+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:38.981367+00:00",
             "recheck_due": false,
@@ -7070,7 +7195,7 @@
             "updated_at": "2026-06-23T08:58:39.624071Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
             "checked_at": "2026-06-23T08:58:39.624071+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:39.624071+00:00",
             "recheck_due": false,
@@ -7088,7 +7213,7 @@
             "updated_at": "2026-06-23T08:58:39.676136Z",
             "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
             "checked_at": "2026-06-23T08:58:39.676136+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:39.676136+00:00",
             "recheck_due": false,
@@ -7106,7 +7231,7 @@
             "updated_at": "2026-06-23T08:58:40.262040Z",
             "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
             "checked_at": "2026-06-23T08:58:40.262040+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:40.262040+00:00",
             "recheck_due": false,
@@ -7124,7 +7249,7 @@
             "updated_at": "2026-06-23T08:58:40.315090Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
             "checked_at": "2026-06-23T08:58:40.315090+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:40.315090+00:00",
             "recheck_due": false,
@@ -7142,7 +7267,7 @@
             "updated_at": "2026-06-23T08:58:41.682423Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
             "checked_at": "2026-06-23T08:58:41.682423+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:41.682423+00:00",
             "recheck_due": false,
@@ -7155,7 +7280,7 @@
       "recheck_interval_hours": 24,
       "recheck_due_count": 0,
       "waiting_for_next_recheck_count": 7,
-      "oldest_checked_pending_age_hours": 0.3,
+      "oldest_checked_pending_age_hours": 0.6,
       "next_recheck_at": "2026-06-24T08:58:36.482600+00:00",
       "recheck_due_rows": [],
       "waiting_recheck_rows": [
@@ -7170,7 +7295,7 @@
             "updated_at": "2026-06-23T08:58:36.482600Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
             "checked_at": "2026-06-23T08:58:36.482600+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:36.482600+00:00",
             "recheck_due": false,
@@ -7189,7 +7314,7 @@
             "updated_at": "2026-06-23T08:58:38.981367Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
             "checked_at": "2026-06-23T08:58:38.981367+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:38.981367+00:00",
             "recheck_due": false,
@@ -7208,7 +7333,7 @@
             "updated_at": "2026-06-23T08:58:39.624071Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
             "checked_at": "2026-06-23T08:58:39.624071+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:39.624071+00:00",
             "recheck_due": false,
@@ -7227,7 +7352,7 @@
             "updated_at": "2026-06-23T08:58:39.676136Z",
             "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
             "checked_at": "2026-06-23T08:58:39.676136+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:39.676136+00:00",
             "recheck_due": false,
@@ -7246,7 +7371,7 @@
             "updated_at": "2026-06-23T08:58:40.262040Z",
             "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
             "checked_at": "2026-06-23T08:58:40.262040+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:40.262040+00:00",
             "recheck_due": false,
@@ -7265,7 +7390,7 @@
             "updated_at": "2026-06-23T08:58:40.315090Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
             "checked_at": "2026-06-23T08:58:40.315090+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:40.315090+00:00",
             "recheck_due": false,
@@ -7284,7 +7409,7 @@
             "updated_at": "2026-06-23T08:58:41.682423Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
             "checked_at": "2026-06-23T08:58:41.682423+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:41.682423+00:00",
             "recheck_due": false,
@@ -7318,18 +7443,18 @@
       "missing": 0,
       "checked_no_change": 1,
       "gated_manual_pending": 0,
-      "checked_at": "2026-06-23T09:17:12.137916+00:00"
+      "checked_at": "2026-06-23T09:36:19.310401+00:00"
     },
     "sources": [
       {
         "name": "release_status",
         "path": "data/distrokid_release_status.json",
         "status": "checked_no_change",
-        "age_hours": 143.9,
+        "age_hours": 144.2,
         "max_age_hours": 72,
         "timestamp": "2026-06-17T09:25:00+00:00",
         "refresh_command": "Store checks are current; update data/distrokid_release_status.json when a verified public URL appears.",
-        "checked_at": "2026-06-23T09:17:12.137916+00:00",
+        "checked_at": "2026-06-23T09:36:19.310401+00:00",
         "checked_age_hours": 0.0,
         "evidence": "7 pending store links checked; no new public URLs found."
       },
@@ -7337,25 +7462,25 @@
         "name": "scheduled_posts",
         "path": "admin/future-posts.json",
         "status": "fresh",
-        "age_hours": 3.2,
+        "age_hours": 0.1,
         "max_age_hours": 72,
-        "timestamp": "2026-06-23T06:03:53.680430+00:00",
+        "timestamp": "2026-06-23T09:31:46.851797+00:00",
         "refresh_command": "python3 scripts/sync_future_posts.py"
       },
       {
         "name": "promo_queue_plan",
         "path": "data/promo_queue_plan.json",
         "status": "fresh",
-        "age_hours": 0.3,
+        "age_hours": 0.1,
         "max_age_hours": 24,
-        "timestamp": "2026-06-23T08:58:43.664330+00:00",
+        "timestamp": "2026-06-23T09:31:40.060117+00:00",
         "refresh_command": "python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
       },
       {
         "name": "published_log",
         "path": "admin/content/Published_Log.csv",
         "status": "fresh",
-        "age_hours": 24.8,
+        "age_hours": 25.1,
         "max_age_hours": 168,
         "timestamp": "2026-06-22T08:27:53.436018+00:00",
         "refresh_command": "Preview Worker export with python3 scripts/export_social_executions.py --dry-run; after review run python3 scripts/export_social_executions.py --refresh-admin. For manual posts, log the public URL with scripts/log_manual_distribution.py.",
@@ -7373,7 +7498,7 @@
         "name": "manual_metrics",
         "path": "data/manual_social_stats.json",
         "status": "stale",
-        "age_hours": 74.4,
+        "age_hours": 74.7,
         "max_age_hours": 72,
         "timestamp": "2026-06-20T06:52:36.456413+00:00",
         "refresh_command": "Update data/manual_social_stats.json with latest manual metrics."
@@ -7382,7 +7507,7 @@
         "name": "live_metrics",
         "path": "data/live_social_metrics.json",
         "status": "fresh",
-        "age_hours": 0.3,
+        "age_hours": 0.6,
         "max_age_hours": 24,
         "timestamp": "2026-06-23T08:58:36.326000+00:00",
         "refresh_command": "python3 scripts/capture_live_metrics.py"
@@ -7391,7 +7516,7 @@
         "name": "metrics_history",
         "path": "data/metrics_history.json",
         "status": "fresh",
-        "age_hours": 0.3,
+        "age_hours": 0.6,
         "max_age_hours": 24,
         "timestamp": "2026-06-23T08:58:43.703401+00:00",
         "refresh_command": "python3 scripts/update_metrics_history.py --refresh-admin"
@@ -7400,7 +7525,7 @@
         "name": "executor_readiness",
         "path": "data/executor_readiness_snapshot.json",
         "status": "fresh",
-        "age_hours": 0.3,
+        "age_hours": 0.6,
         "max_age_hours": 24,
         "timestamp": "2026-06-23T08:58:42.524424+00:00",
         "refresh_command": "python3 scripts/capture_executor_readiness.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
@@ -7411,14 +7536,14 @@
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-06-23T09:17:12.137916+00:00",
+        "timestamp": "2026-06-23T09:36:19.310401+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin"
       },
       {
         "name": "social_executions",
         "path": "data/social_execution_snapshot.json",
         "status": "fresh",
-        "age_hours": 0.3,
+        "age_hours": 0.6,
         "max_age_hours": 24,
         "timestamp": "2026-06-23T08:58:43.020021+00:00",
         "refresh_command": "python3 scripts/capture_social_executions.py && python3 scripts/update_promo_engine_status.py"
@@ -7427,7 +7552,7 @@
         "name": "social_scheduler_dry_run",
         "path": "data/social_scheduler_dry_run.json",
         "status": "fresh",
-        "age_hours": 0.3,
+        "age_hours": 0.6,
         "max_age_hours": 24,
         "timestamp": "2026-06-23T08:58:43.599786+00:00",
         "refresh_command": "python3 scripts/capture_scheduler_dry_run.py && python3 scripts/update_promo_engine_status.py"
@@ -7436,7 +7561,7 @@
         "name": "social_blocker_input_status",
         "path": "data/social_blocker_input_status.json",
         "status": "fresh",
-        "age_hours": 0.1,
+        "age_hours": 0.4,
         "max_age_hours": 24,
         "timestamp": "2026-06-23T09:12:43.384281+00:00",
         "refresh_command": "python3 scripts/build_social_blocker_input_status.py && python3 scripts/update_promo_engine_status.py"
@@ -7445,7 +7570,7 @@
         "name": "promo_refresh_run",
         "path": "data/promo_admin_refresh_run.json",
         "status": "fresh",
-        "age_hours": 0.1,
+        "age_hours": 0.4,
         "max_age_hours": 24,
         "timestamp": "2026-06-23T09:12:08.854159+00:00",
         "refresh_command": "python3 scripts/refresh_promo_admin.py"
@@ -7454,7 +7579,7 @@
         "name": "promo_refresh_workflow_status",
         "path": "data/promo_refresh_workflow_status.json",
         "status": "fresh",
-        "age_hours": 0.0,
+        "age_hours": 0.3,
         "max_age_hours": 24,
         "timestamp": "2026-06-23T09:16:05.825810+00:00",
         "refresh_command": "python3 scripts/capture_github_workflow_status.py && python3 scripts/update_promo_engine_status.py"
@@ -7605,7 +7730,7 @@
             "updated_at": "2026-06-23T08:58:36.482600Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
             "checked_at": "2026-06-23T08:58:36.482600+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:36.482600+00:00",
             "recheck_due": false,
@@ -7622,7 +7747,7 @@
             "updated_at": "2026-06-23T08:58:38.981367Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
             "checked_at": "2026-06-23T08:58:38.981367+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:38.981367+00:00",
             "recheck_due": false,
@@ -7639,7 +7764,7 @@
             "updated_at": "2026-06-23T08:58:39.624071Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
             "checked_at": "2026-06-23T08:58:39.624071+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:39.624071+00:00",
             "recheck_due": false,
@@ -7647,7 +7772,7 @@
           }
         }
       ],
-      "queued_posts": 6,
+      "queued_posts": 7,
       "planned_posts": 1,
       "published_posts": 0,
       "latest_published": "",
@@ -7738,7 +7863,7 @@
             "updated_at": "2026-06-23T08:58:39.676136Z",
             "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
             "checked_at": "2026-06-23T08:58:39.676136+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:39.676136+00:00",
             "recheck_due": false,
@@ -7755,7 +7880,7 @@
             "updated_at": "2026-06-23T08:58:40.262040Z",
             "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
             "checked_at": "2026-06-23T08:58:40.262040+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:40.262040+00:00",
             "recheck_due": false,
@@ -7772,7 +7897,7 @@
             "updated_at": "2026-06-23T08:58:40.315090Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
             "checked_at": "2026-06-23T08:58:40.315090+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:40.315090+00:00",
             "recheck_due": false,
@@ -7789,7 +7914,7 @@
             "updated_at": "2026-06-23T08:58:41.682423Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
             "checked_at": "2026-06-23T08:58:41.682423+00:00",
-            "checked_age_hours": 0.3,
+            "checked_age_hours": 0.6,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-06-24T08:58:41.682423+00:00",
             "recheck_due": false,
@@ -7797,7 +7922,7 @@
           }
         }
       ],
-      "queued_posts": 5,
+      "queued_posts": 6,
       "planned_posts": 0,
       "published_posts": 13,
       "latest_published": "2026-05-09",
@@ -7845,7 +7970,7 @@
     "Refresh manual metrics: 6 worksheet row(s) still need new_value entries (blocked_until_new_values_filled); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values.",
     "Collect experiment results: 5 post-result field(s) need new_value plus evidence_note; use admin/reports/experiment-result-clipboard.md; first priority: measure FP-AUTO-260 on Facebook. Direct preview template: python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run. Direct apply template after review: python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin. Then preview import with python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run after filling data/experiment_result_entry_wide_template.csv.",
     "Re-check checked-pending store links: 7 music site snapshot(s) still have no public URL; next recommended re-check after 2026-06-24T08:58:36.482600+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 then.",
-    "Refresh automation coverage: latest scheduled run has not covered b0061a49; dispatch https://github.com/lilyrooartist/lilyrooartist.github.io/actions/workflows/promo-admin-refresh.yml or wait for the next scheduled run.",
+    "Refresh automation coverage: latest scheduled run has not covered 12880852; dispatch https://github.com/lilyrooartist/lilyrooartist.github.io/actions/workflows/promo-admin-refresh.yml or wait for the next scheduled run.",
     "Preview approved backlog reschedule: python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+08:00' --spacing-hours 24",
     "2 approved unpublished auto posts are past their scheduled time; repair executor/platform blockers or reschedule them.",
     "1 executor records are blocked by approval."
@@ -7928,7 +8053,7 @@
 }</script>
 
 <script type="application/json" id="embedded-promo-queue-plan">{
-  "generated_at": "2026-06-23T04:58:43.664330-04:00",
+  "generated_at": "2026-06-23T05:31:40.060117-04:00",
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
     "release_status": "data/distrokid_release_status.json"
@@ -8037,7 +8162,7 @@
 
 
 <script type="application/json" id="embedded-promo-operations-packet">{
-  "generated_at": "2026-06-23T08:58:44.567784Z",
+  "generated_at": "2026-06-23T09:36:19.385603Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -8210,7 +8335,7 @@
       "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+08:00' --spacing-hours 24",
       "context": {
         "approved_backlog_posts": 2,
-        "approved_upcoming_posts": 16,
+        "approved_upcoming_posts": 18,
         "blocked_backlog_count": 2,
         "clear_to_apply_count": 0,
         "apply_allowed_without_override": false,
@@ -8639,7 +8764,7 @@
         "pending_result_field_count": 5,
         "ready_to_import_count": 0,
         "wide_ready_to_import_count": 0,
-        "missing_public_url_count": 13,
+        "missing_public_url_count": 15,
         "measurement_priority_count": 12,
         "entry_csv_path": "data/experiment_result_entry_template.csv",
         "wide_entry_csv_path": "data/experiment_result_entry_wide_template.csv",
@@ -8672,18 +8797,18 @@
             "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 3 logged post(s), 8 missing URL(s) in this format."
           },
           {
-            "action": "log_public_url",
+            "action": "await_scheduled_auto_post",
             "post_id": "FP-PLAN-TWELVE-DOLLARS-FACEBOOK",
             "platform": "Facebook",
             "experiment_format": "Release-art image + story hook",
-            "reason": "Cannot collect metrics until the public URL is logged. 3 logged post(s), 8 missing URL(s) in this format."
+            "reason": "Approved auto row is scheduled for 2026-06-23T11:20:00-04:00; wait for the scheduler, then log the public URL and measure it. 3 logged post(s), 8 missing URL(s) in this format."
           },
           {
-            "action": "log_public_url",
+            "action": "await_scheduled_auto_post",
             "post_id": "FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK",
             "platform": "Facebook",
             "experiment_format": "Release-art image + story hook",
-            "reason": "Cannot collect metrics until the public URL is logged. 3 logged post(s), 8 missing URL(s) in this format."
+            "reason": "Approved auto row is scheduled for 2026-06-25T11:20:00-04:00; wait for the scheduler, then log the public URL and measure it. 3 logged post(s), 8 missing URL(s) in this format."
           }
         ],
         "note": "Fill measured result values with evidence notes, preview the import, then apply only after review."
@@ -8707,7 +8832,7 @@
         "release": "Twelve Dollars",
         "service": "Spotify",
         "checked_at": "2026-06-23T08:58:36.482600+00:00",
-        "checked_age_hours": 0.0,
+        "checked_age_hours": 0.6,
         "recheck_interval_hours": 24,
         "next_recheck_at": "2026-06-24T08:58:36.482600+00:00",
         "recheck_due": false,
@@ -8718,7 +8843,7 @@
           "updated_at": "2026-06-23T08:58:36.482600Z",
           "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
           "checked_at": "2026-06-23T08:58:36.482600+00:00",
-          "checked_age_hours": 0.0,
+          "checked_age_hours": 0.6,
           "recheck_interval_hours": 24,
           "next_recheck_at": "2026-06-24T08:58:36.482600+00:00",
           "recheck_due": false,
@@ -8745,7 +8870,7 @@
         "release": "Twelve Dollars",
         "service": "Apple Music",
         "checked_at": "2026-06-23T08:58:38.981367+00:00",
-        "checked_age_hours": 0.0,
+        "checked_age_hours": 0.6,
         "recheck_interval_hours": 24,
         "next_recheck_at": "2026-06-24T08:58:38.981367+00:00",
         "recheck_due": false,
@@ -8756,7 +8881,7 @@
           "updated_at": "2026-06-23T08:58:38.981367Z",
           "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
           "checked_at": "2026-06-23T08:58:38.981367+00:00",
-          "checked_age_hours": 0.0,
+          "checked_age_hours": 0.6,
           "recheck_interval_hours": 24,
           "next_recheck_at": "2026-06-24T08:58:38.981367+00:00",
           "recheck_due": false,
@@ -8783,7 +8908,7 @@
         "release": "Twelve Dollars",
         "service": "HyperFollow",
         "checked_at": "2026-06-23T08:58:39.624071+00:00",
-        "checked_age_hours": 0.0,
+        "checked_age_hours": 0.6,
         "recheck_interval_hours": 24,
         "next_recheck_at": "2026-06-24T08:58:39.624071+00:00",
         "recheck_due": false,
@@ -8794,7 +8919,7 @@
           "updated_at": "2026-06-23T08:58:39.624071Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
           "checked_at": "2026-06-23T08:58:39.624071+00:00",
-          "checked_age_hours": 0.0,
+          "checked_age_hours": 0.6,
           "recheck_interval_hours": 24,
           "next_recheck_at": "2026-06-24T08:58:39.624071+00:00",
           "recheck_due": false,
@@ -8821,7 +8946,7 @@
         "release": "Analog Myth",
         "service": "Spotify",
         "checked_at": "2026-06-23T08:58:39.676136+00:00",
-        "checked_age_hours": 0.0,
+        "checked_age_hours": 0.6,
         "recheck_interval_hours": 24,
         "next_recheck_at": "2026-06-24T08:58:39.676136+00:00",
         "recheck_due": false,
@@ -8832,7 +8957,7 @@
           "updated_at": "2026-06-23T08:58:39.676136Z",
           "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
           "checked_at": "2026-06-23T08:58:39.676136+00:00",
-          "checked_age_hours": 0.0,
+          "checked_age_hours": 0.6,
           "recheck_interval_hours": 24,
           "next_recheck_at": "2026-06-24T08:58:39.676136+00:00",
           "recheck_due": false,
@@ -8859,7 +8984,7 @@
         "release": "Analog Myth",
         "service": "Apple Music",
         "checked_at": "2026-06-23T08:58:40.262040+00:00",
-        "checked_age_hours": 0.0,
+        "checked_age_hours": 0.6,
         "recheck_interval_hours": 24,
         "next_recheck_at": "2026-06-24T08:58:40.262040+00:00",
         "recheck_due": false,
@@ -8870,7 +8995,7 @@
           "updated_at": "2026-06-23T08:58:40.262040Z",
           "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
           "checked_at": "2026-06-23T08:58:40.262040+00:00",
-          "checked_age_hours": 0.0,
+          "checked_age_hours": 0.6,
           "recheck_interval_hours": 24,
           "next_recheck_at": "2026-06-24T08:58:40.262040+00:00",
           "recheck_due": false,
@@ -8897,7 +9022,7 @@
         "release": "Analog Myth",
         "service": "YouTube Music",
         "checked_at": "2026-06-23T08:58:40.315090+00:00",
-        "checked_age_hours": 0.0,
+        "checked_age_hours": 0.6,
         "recheck_interval_hours": 24,
         "next_recheck_at": "2026-06-24T08:58:40.315090+00:00",
         "recheck_due": false,
@@ -8908,7 +9033,7 @@
           "updated_at": "2026-06-23T08:58:40.315090Z",
           "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
           "checked_at": "2026-06-23T08:58:40.315090+00:00",
-          "checked_age_hours": 0.0,
+          "checked_age_hours": 0.6,
           "recheck_interval_hours": 24,
           "next_recheck_at": "2026-06-24T08:58:40.315090+00:00",
           "recheck_due": false,
@@ -8935,7 +9060,7 @@
         "release": "Analog Myth",
         "service": "HyperFollow",
         "checked_at": "2026-06-23T08:58:41.682423+00:00",
-        "checked_age_hours": 0.0,
+        "checked_age_hours": 0.6,
         "recheck_interval_hours": 24,
         "next_recheck_at": "2026-06-24T08:58:41.682423+00:00",
         "recheck_due": false,
@@ -8946,7 +9071,7 @@
           "updated_at": "2026-06-23T08:58:41.682423Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
           "checked_at": "2026-06-23T08:58:41.682423+00:00",
-          "checked_age_hours": 0.0,
+          "checked_age_hours": 0.6,
           "recheck_interval_hours": 24,
           "next_recheck_at": "2026-06-24T08:58:41.682423+00:00",
           "recheck_due": false,
@@ -9255,7 +9380,7 @@
 
 <script type="text/plain" id="embedded-promo-operations-report"># Promo Operations Packet - Lily Roo
 
-Generated: 2026-06-23T08:58:44.567784Z
+Generated: 2026-06-23T09:36:19.385603Z
 
 ## Summary
 - Actions: **17**
@@ -17557,7 +17682,7 @@ Generated: 2026-06-23T08:58:45.656267Z
 
 
 <script type="application/json" id="embedded-experiment-result-collection">{
-  "generated_at": "2026-06-23T08:58:45.877924Z",
+  "generated_at": "2026-06-23T09:34:02.482035Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -17566,7 +17691,7 @@ Generated: 2026-06-23T08:58:45.656267Z
   "summary": {
     "experiment_count": 3,
     "published_experiment_post_count": 3,
-    "missing_published_log_count": 13,
+    "missing_published_log_count": 15,
     "pending_result_field_count": 5,
     "ready_to_import_count": 0,
     "wide_ready_to_import_count": 0,
@@ -17768,6 +17893,38 @@ Generated: 2026-06-23T08:58:45.656267Z
       "next_action": "Publish or log the public URL before result metrics can be collected."
     },
     {
+      "experiment_format": "Short video clip + platform-native CTA",
+      "post_id": "FP-AUTO-264",
+      "platform": "TikTok",
+      "song": "I Learned It All in Fifteen Seconds",
+      "status": "not_in_published_log",
+      "next_action": "Publish or log the public URL before result metrics can be collected."
+    },
+    {
+      "experiment_format": "Short video clip + platform-native CTA",
+      "post_id": "FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA",
+      "platform": "YouTube",
+      "song": "Twelve Dollars",
+      "status": "not_in_published_log",
+      "next_action": "Publish or log the public URL before result metrics can be collected."
+    },
+    {
+      "experiment_format": "Short video clip + platform-native CTA",
+      "post_id": "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
+      "platform": "YouTube",
+      "song": "Analog Myth",
+      "status": "not_in_published_log",
+      "next_action": "Publish or log the public URL before result metrics can be collected."
+    },
+    {
+      "experiment_format": "Short video clip + platform-native CTA",
+      "post_id": "FP-PLAN-TWELVE-DOLLARS-TIKTOK",
+      "platform": "TikTok",
+      "song": "Twelve Dollars",
+      "status": "not_in_published_log",
+      "next_action": "Publish or log the public URL before result metrics can be collected."
+    },
+    {
       "experiment_format": "YouTube Community archive/playlist CTA",
       "post_id": "FP-AUTO-261",
       "platform": "YouTube",
@@ -17790,22 +17947,6 @@ Generated: 2026-06-23T08:58:45.656267Z
       "song": "Analog Myth",
       "status": "not_in_published_log",
       "next_action": "Publish or log the public URL before result metrics can be collected."
-    },
-    {
-      "experiment_format": "Short video clip + platform-native CTA",
-      "post_id": "FP-AUTO-264",
-      "platform": "TikTok",
-      "song": "I Learned It All in Fifteen Seconds",
-      "status": "not_in_published_log",
-      "next_action": "Publish or log the public URL before result metrics can be collected."
-    },
-    {
-      "experiment_format": "Short video clip + platform-native CTA",
-      "post_id": "FP-PLAN-TWELVE-DOLLARS-TIKTOK",
-      "platform": "TikTok",
-      "song": "Twelve Dollars",
-      "status": "not_in_published_log",
-      "next_action": "Publish or log the public URL before result metrics can be collected."
     }
   ],
   "guardrails": [
@@ -17818,12 +17959,12 @@ Generated: 2026-06-23T08:58:45.656267Z
 
 <script type="text/plain" id="embedded-experiment-result-collection-report"># Experiment Result Collection - Lily Roo
 
-Generated: 2026-06-23T08:58:45.877924Z
+Generated: 2026-06-23T09:34:02.482035Z
 
 ## Summary
 - Experiment count: **3**
 - Published experiment posts: **3**
-- Missing published log posts: **13**
+- Missing published log posts: **15**
 - Pending result fields: **5**
 - Ready to import: **0**
 - Entry CSV: `data/experiment_result_entry_template.csv`
@@ -17850,11 +17991,13 @@ Generated: 2026-06-23T08:58:45.877924Z
 - `FP-PLAN-TWELVE-DOLLARS-FACEBOOK` (Release-art image + story hook): Publish or log the public URL before result metrics can be collected.
 - `FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK` (Release-art image + story hook): Publish or log the public URL before result metrics can be collected.
 - `FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK` (Release-art image + story hook): Publish or log the public URL before result metrics can be collected.
+- `FP-AUTO-264` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
+- `FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
+- `FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
+- `FP-PLAN-TWELVE-DOLLARS-TIKTOK` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-261` (YouTube Community archive/playlist CTA): Publish or log the public URL before result metrics can be collected.
 - `FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY` (YouTube Community archive/playlist CTA): Publish or log the public URL before result metrics can be collected.
 - `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY` (YouTube Community archive/playlist CTA): Publish or log the public URL before result metrics can be collected.
-- `FP-AUTO-264` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
-- `FP-PLAN-TWELVE-DOLLARS-TIKTOK` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
 
 ## Pending Result Fields
 - `FP-AUTO-257` X `subs_delta` from row 16: Open X analytics for https://x.com/i/web/status/2062920257577029712 and record subs_delta.
@@ -17865,7 +18008,7 @@ Generated: 2026-06-23T08:58:45.877924Z
 
 
 <script type="application/json" id="embedded-experiment-publish-runway">{
-  "generated_at": "2026-06-23T08:58:46.066466Z",
+  "generated_at": "2026-06-23T09:36:19.330998Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -18001,7 +18144,7 @@ Generated: 2026-06-23T08:58:45.877924Z
 
 <script type="text/plain" id="embedded-experiment-publish-runway-report"># Experiment Publish Runway - Lily Roo
 
-Generated: 2026-06-23T08:58:46.066466Z
+Generated: 2026-06-23T09:36:19.330998Z
 
 ## Summary
 - Manual rows ready for review: **0**
@@ -18275,7 +18418,7 @@ Generated: 2026-06-23T08:58:45.164498Z
 
 
 <script type="application/json" id="embedded-experiment-result-clipboard">{
-  "generated_at": "2026-06-23T08:58:45.919295Z",
+  "generated_at": "2026-06-23T09:36:19.310500Z",
   "safe_mode": true,
   "source": {
     "experiment_result_collection_packet": "data/experiment_result_collection_packet.json",
@@ -18287,7 +18430,7 @@ Generated: 2026-06-23T08:58:45.164498Z
   "summary": {
     "status": "needs_values",
     "metric_card_count": 3,
-    "missing_public_url_count": 13,
+    "missing_public_url_count": 15,
     "measurement_priority_count": 12,
     "post_log_measurement_handoff_count": 0,
     "pending_result_field_count": 5,
@@ -18567,6 +18710,38 @@ Generated: 2026-06-23T08:58:45.164498Z
       "next_action": "Publish or log the public URL before result metrics can be collected."
     },
     {
+      "post_id": "FP-AUTO-264",
+      "experiment_format": "Short video clip + platform-native CTA",
+      "platform": "TikTok",
+      "song": "I Learned It All in Fifteen Seconds",
+      "status": "not_in_published_log",
+      "next_action": "Publish or log the public URL before result metrics can be collected."
+    },
+    {
+      "post_id": "FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA",
+      "experiment_format": "Short video clip + platform-native CTA",
+      "platform": "YouTube",
+      "song": "Twelve Dollars",
+      "status": "not_in_published_log",
+      "next_action": "Publish or log the public URL before result metrics can be collected."
+    },
+    {
+      "post_id": "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
+      "experiment_format": "Short video clip + platform-native CTA",
+      "platform": "YouTube",
+      "song": "Analog Myth",
+      "status": "not_in_published_log",
+      "next_action": "Publish or log the public URL before result metrics can be collected."
+    },
+    {
+      "post_id": "FP-PLAN-TWELVE-DOLLARS-TIKTOK",
+      "experiment_format": "Short video clip + platform-native CTA",
+      "platform": "TikTok",
+      "song": "Twelve Dollars",
+      "status": "not_in_published_log",
+      "next_action": "Publish or log the public URL before result metrics can be collected."
+    },
+    {
       "post_id": "FP-AUTO-261",
       "experiment_format": "YouTube Community archive/playlist CTA",
       "platform": "YouTube",
@@ -18587,22 +18762,6 @@ Generated: 2026-06-23T08:58:45.164498Z
       "experiment_format": "YouTube Community archive/playlist CTA",
       "platform": "YouTube",
       "song": "Analog Myth",
-      "status": "not_in_published_log",
-      "next_action": "Publish or log the public URL before result metrics can be collected."
-    },
-    {
-      "post_id": "FP-AUTO-264",
-      "experiment_format": "Short video clip + platform-native CTA",
-      "platform": "TikTok",
-      "song": "I Learned It All in Fifteen Seconds",
-      "status": "not_in_published_log",
-      "next_action": "Publish or log the public URL before result metrics can be collected."
-    },
-    {
-      "post_id": "FP-PLAN-TWELVE-DOLLARS-TIKTOK",
-      "experiment_format": "Short video clip + platform-native CTA",
-      "platform": "TikTok",
-      "song": "Twelve Dollars",
       "status": "not_in_published_log",
       "next_action": "Publish or log the public URL before result metrics can be collected."
     }
@@ -18659,8 +18818,8 @@ Generated: 2026-06-23T08:58:45.164498Z
       "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 3 logged post(s), 8 missing URL(s) in this format."
     },
     {
-      "action": "log_public_url",
-      "priority": 3,
+      "action": "await_scheduled_auto_post",
+      "priority": 2,
       "post_id": "FP-PLAN-TWELVE-DOLLARS-FACEBOOK",
       "platform": "Facebook",
       "song": "Twelve Dollars",
@@ -18675,11 +18834,14 @@ Generated: 2026-06-23T08:58:45.164498Z
       "paste_text_path": "",
       "log_preview_command": "",
       "log_apply_command": "",
-      "reason": "Cannot collect metrics until the public URL is logged. 3 logged post(s), 8 missing URL(s) in this format."
+      "scheduled_at": "2026-06-23T11:20:00-04:00",
+      "scheduled_at_utc": "2026-06-23T15:20:00+00:00",
+      "scheduler_status": "future_auto_ready",
+      "reason": "Approved auto row is scheduled for 2026-06-23T11:20:00-04:00; wait for the scheduler, then log the public URL and measure it. 3 logged post(s), 8 missing URL(s) in this format."
     },
     {
-      "action": "log_public_url",
-      "priority": 3,
+      "action": "await_scheduled_auto_post",
+      "priority": 2,
       "post_id": "FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK",
       "platform": "Facebook",
       "song": "Analog Myth",
@@ -18694,11 +18856,14 @@ Generated: 2026-06-23T08:58:45.164498Z
       "paste_text_path": "",
       "log_preview_command": "",
       "log_apply_command": "",
-      "reason": "Cannot collect metrics until the public URL is logged. 3 logged post(s), 8 missing URL(s) in this format."
+      "scheduled_at": "2026-06-25T11:20:00-04:00",
+      "scheduled_at_utc": "2026-06-25T15:20:00+00:00",
+      "scheduler_status": "future_auto_ready",
+      "reason": "Approved auto row is scheduled for 2026-06-25T11:20:00-04:00; wait for the scheduler, then log the public URL and measure it. 3 logged post(s), 8 missing URL(s) in this format."
     },
     {
-      "action": "log_public_url",
-      "priority": 3,
+      "action": "await_scheduled_auto_post",
+      "priority": 2,
       "post_id": "FP-PLAN-TWELVE-DOLLARS-X",
       "platform": "X",
       "song": "Twelve Dollars",
@@ -18713,11 +18878,14 @@ Generated: 2026-06-23T08:58:45.164498Z
       "paste_text_path": "",
       "log_preview_command": "",
       "log_apply_command": "",
-      "reason": "Cannot collect metrics until the public URL is logged. 3 logged post(s), 8 missing URL(s) in this format."
+      "scheduled_at": "2026-06-26T10:00:00+08:00",
+      "scheduled_at_utc": "2026-06-26T02:00:00+00:00",
+      "scheduler_status": "future_auto_ready",
+      "reason": "Approved auto row is scheduled for 2026-06-26T10:00:00+08:00; wait for the scheduler, then log the public URL and measure it. 3 logged post(s), 8 missing URL(s) in this format."
     },
     {
-      "action": "log_public_url",
-      "priority": 3,
+      "action": "await_scheduled_auto_post",
+      "priority": 2,
       "post_id": "FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK",
       "platform": "X",
       "song": "Analog Myth",
@@ -18732,11 +18900,58 @@ Generated: 2026-06-23T08:58:45.164498Z
       "paste_text_path": "",
       "log_preview_command": "",
       "log_apply_command": "",
-      "reason": "Cannot collect metrics until the public URL is logged. 3 logged post(s), 8 missing URL(s) in this format."
+      "scheduled_at": "2026-06-24T10:15:00-04:00",
+      "scheduled_at_utc": "2026-06-24T14:15:00+00:00",
+      "scheduler_status": "future_auto_ready",
+      "reason": "Approved auto row is scheduled for 2026-06-24T10:15:00-04:00; wait for the scheduler, then log the public URL and measure it. 3 logged post(s), 8 missing URL(s) in this format."
     },
     {
-      "action": "log_public_url",
-      "priority": 3,
+      "action": "await_scheduled_auto_post",
+      "priority": 2,
+      "post_id": "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
+      "platform": "YouTube",
+      "song": "Analog Myth",
+      "experiment_format": "Short video clip + platform-native CTA",
+      "post_url": "",
+      "source_row": "",
+      "pending_fields": [],
+      "direct_preview_command_template": "",
+      "direct_apply_command_template": "",
+      "manual_posting_report": "",
+      "public_community_url": "",
+      "paste_text_path": "",
+      "log_preview_command": "",
+      "log_apply_command": "",
+      "scheduled_at": "2026-06-28T18:30:00+08:00",
+      "scheduled_at_utc": "2026-06-28T10:30:00+00:00",
+      "scheduler_status": "future_auto_ready",
+      "reason": "Approved auto row is scheduled for 2026-06-28T18:30:00+08:00; wait for the scheduler, then log the public URL and measure it. 0 logged post(s), 4 missing URL(s) in this format."
+    },
+    {
+      "action": "await_scheduled_auto_post",
+      "priority": 2,
+      "post_id": "FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA",
+      "platform": "YouTube",
+      "song": "Twelve Dollars",
+      "experiment_format": "Short video clip + platform-native CTA",
+      "post_url": "",
+      "source_row": "",
+      "pending_fields": [],
+      "direct_preview_command_template": "",
+      "direct_apply_command_template": "",
+      "manual_posting_report": "",
+      "public_community_url": "",
+      "paste_text_path": "",
+      "log_preview_command": "",
+      "log_apply_command": "",
+      "scheduled_at": "2026-06-27T18:30:00+08:00",
+      "scheduled_at_utc": "2026-06-27T10:30:00+00:00",
+      "scheduler_status": "future_auto_ready",
+      "reason": "Approved auto row is scheduled for 2026-06-27T18:30:00+08:00; wait for the scheduler, then log the public URL and measure it. 0 logged post(s), 4 missing URL(s) in this format."
+    },
+    {
+      "action": "await_scheduled_auto_post",
+      "priority": 2,
       "post_id": "FP-AUTO-261",
       "platform": "YouTube",
       "song": "I Learned It All in Fifteen Seconds",
@@ -18751,11 +18966,14 @@ Generated: 2026-06-23T08:58:45.164498Z
       "paste_text_path": "",
       "log_preview_command": "",
       "log_apply_command": "",
-      "reason": "Cannot collect metrics until the public URL is logged. 0 logged post(s), 3 missing URL(s) in this format."
+      "scheduled_at": "2026-06-24T10:00:00+08:00",
+      "scheduled_at_utc": "2026-06-24T02:00:00+00:00",
+      "scheduler_status": "future_auto_ready",
+      "reason": "Approved auto row is scheduled for 2026-06-24T10:00:00+08:00; wait for the scheduler, then log the public URL and measure it. 0 logged post(s), 3 missing URL(s) in this format."
     },
     {
-      "action": "log_public_url",
-      "priority": 3,
+      "action": "await_scheduled_auto_post",
+      "priority": 2,
       "post_id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
       "platform": "YouTube",
       "song": "Analog Myth",
@@ -18770,11 +18988,14 @@ Generated: 2026-06-23T08:58:45.164498Z
       "paste_text_path": "",
       "log_preview_command": "",
       "log_apply_command": "",
-      "reason": "Cannot collect metrics until the public URL is logged. 0 logged post(s), 3 missing URL(s) in this format."
+      "scheduled_at": "2026-06-25T18:30:00-04:00",
+      "scheduled_at_utc": "2026-06-25T22:30:00+00:00",
+      "scheduler_status": "future_auto_ready",
+      "reason": "Approved auto row is scheduled for 2026-06-25T18:30:00-04:00; wait for the scheduler, then log the public URL and measure it. 0 logged post(s), 3 missing URL(s) in this format."
     },
     {
-      "action": "log_public_url",
-      "priority": 3,
+      "action": "await_scheduled_auto_post",
+      "priority": 2,
       "post_id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
       "platform": "YouTube",
       "song": "Twelve Dollars",
@@ -18789,45 +19010,10 @@ Generated: 2026-06-23T08:58:45.164498Z
       "paste_text_path": "",
       "log_preview_command": "",
       "log_apply_command": "",
-      "reason": "Cannot collect metrics until the public URL is logged. 0 logged post(s), 3 missing URL(s) in this format."
-    },
-    {
-      "action": "clear_platform_blocker",
-      "priority": 4,
-      "post_id": "FP-AUTO-265",
-      "platform": "Facebook",
-      "song": "I Learned It All in Fifteen Seconds",
-      "experiment_format": "Release-art image + story hook",
-      "post_url": "",
-      "source_row": "",
-      "pending_fields": [],
-      "direct_preview_command_template": "",
-      "direct_apply_command_template": "",
-      "manual_posting_report": "",
-      "public_community_url": "",
-      "paste_text_path": "",
-      "log_preview_command": "",
-      "log_apply_command": "",
-      "reason": "Platform work is blocked; clear the platform repair gate before URL logging can produce metrics. 3 logged post(s), 8 missing URL(s) in this format."
-    },
-    {
-      "action": "clear_platform_blocker",
-      "priority": 4,
-      "post_id": "FP-AUTO-264",
-      "platform": "TikTok",
-      "song": "I Learned It All in Fifteen Seconds",
-      "experiment_format": "Short video clip + platform-native CTA",
-      "post_url": "",
-      "source_row": "",
-      "pending_fields": [],
-      "direct_preview_command_template": "",
-      "direct_apply_command_template": "",
-      "manual_posting_report": "",
-      "public_community_url": "",
-      "paste_text_path": "",
-      "log_preview_command": "",
-      "log_apply_command": "",
-      "reason": "Platform work is blocked; clear the platform repair gate before URL logging can produce metrics. 0 logged post(s), 2 missing URL(s) in this format."
+      "scheduled_at": "2026-06-24T18:30:00-04:00",
+      "scheduled_at_utc": "2026-06-24T22:30:00+00:00",
+      "scheduler_status": "future_auto_ready",
+      "reason": "Approved auto row is scheduled for 2026-06-24T18:30:00-04:00; wait for the scheduler, then log the public URL and measure it. 0 logged post(s), 3 missing URL(s) in this format."
     }
   ],
   "first_measurement_runbook": {
@@ -18929,12 +19115,12 @@ Generated: 2026-06-23T08:58:45.164498Z
 
 <script type="text/plain" id="embedded-experiment-result-clipboard-report"># Experiment Result Clipboard - Lily Roo
 
-Generated: 2026-06-23T08:58:45.919295Z
+Generated: 2026-06-23T09:36:19.310500Z
 
 ## Summary
 - Status: **needs_values**
 - Metric cards: **3**
-- Missing public URLs: **13**
+- Missing public URLs: **15**
 - Measurement priorities: **12**
 - Post-log handoff rows: **0**
 - Pending result fields: **5**
@@ -19043,15 +19229,15 @@ Generated: 2026-06-23T08:58:45.919295Z
 - **Collect metrics** `FP-AUTO-262` X / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 3 logged post(s), 8 missing URL(s) in this format.
   - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-262 --source-row 17 --subs-delta VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
   - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-262 --source-row 17 --subs-delta VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
-- **Log public URL** `FP-PLAN-TWELVE-DOLLARS-FACEBOOK` Facebook / Release-art image + story hook: Cannot collect metrics until the public URL is logged. 3 logged post(s), 8 missing URL(s) in this format.
-- **Log public URL** `FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK` Facebook / Release-art image + story hook: Cannot collect metrics until the public URL is logged. 3 logged post(s), 8 missing URL(s) in this format.
-- **Log public URL** `FP-PLAN-TWELVE-DOLLARS-X` X / Release-art image + story hook: Cannot collect metrics until the public URL is logged. 3 logged post(s), 8 missing URL(s) in this format.
-- **Log public URL** `FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK` X / Release-art image + story hook: Cannot collect metrics until the public URL is logged. 3 logged post(s), 8 missing URL(s) in this format.
-- **Log public URL** `FP-AUTO-261` YouTube / YouTube Community archive/playlist CTA: Cannot collect metrics until the public URL is logged. 0 logged post(s), 3 missing URL(s) in this format.
-- **Log public URL** `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY` YouTube / YouTube Community archive/playlist CTA: Cannot collect metrics until the public URL is logged. 0 logged post(s), 3 missing URL(s) in this format.
-- **Log public URL** `FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY` YouTube / YouTube Community archive/playlist CTA: Cannot collect metrics until the public URL is logged. 0 logged post(s), 3 missing URL(s) in this format.
-- **Clear platform blocker** `FP-AUTO-265` Facebook / Release-art image + story hook: Platform work is blocked; clear the platform repair gate before URL logging can produce metrics. 3 logged post(s), 8 missing URL(s) in this format.
-- **Clear platform blocker** `FP-AUTO-264` TikTok / Short video clip + platform-native CTA: Platform work is blocked; clear the platform repair gate before URL logging can produce metrics. 0 logged post(s), 2 missing URL(s) in this format.
+- **Await scheduled auto post** `FP-PLAN-TWELVE-DOLLARS-FACEBOOK` Facebook / Release-art image + story hook: Approved auto row is scheduled for 2026-06-23T11:20:00-04:00; wait for the scheduler, then log the public URL and measure it. 3 logged post(s), 8 missing URL(s) in this format.
+- **Await scheduled auto post** `FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK` Facebook / Release-art image + story hook: Approved auto row is scheduled for 2026-06-25T11:20:00-04:00; wait for the scheduler, then log the public URL and measure it. 3 logged post(s), 8 missing URL(s) in this format.
+- **Await scheduled auto post** `FP-PLAN-TWELVE-DOLLARS-X` X / Release-art image + story hook: Approved auto row is scheduled for 2026-06-26T10:00:00+08:00; wait for the scheduler, then log the public URL and measure it. 3 logged post(s), 8 missing URL(s) in this format.
+- **Await scheduled auto post** `FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK` X / Release-art image + story hook: Approved auto row is scheduled for 2026-06-24T10:15:00-04:00; wait for the scheduler, then log the public URL and measure it. 3 logged post(s), 8 missing URL(s) in this format.
+- **Await scheduled auto post** `FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA` YouTube / Short video clip + platform-native CTA: Approved auto row is scheduled for 2026-06-28T18:30:00+08:00; wait for the scheduler, then log the public URL and measure it. 0 logged post(s), 4 missing URL(s) in this format.
+- **Await scheduled auto post** `FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA` YouTube / Short video clip + platform-native CTA: Approved auto row is scheduled for 2026-06-27T18:30:00+08:00; wait for the scheduler, then log the public URL and measure it. 0 logged post(s), 4 missing URL(s) in this format.
+- **Await scheduled auto post** `FP-AUTO-261` YouTube / YouTube Community archive/playlist CTA: Approved auto row is scheduled for 2026-06-24T10:00:00+08:00; wait for the scheduler, then log the public URL and measure it. 0 logged post(s), 3 missing URL(s) in this format.
+- **Await scheduled auto post** `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY` YouTube / YouTube Community archive/playlist CTA: Approved auto row is scheduled for 2026-06-25T18:30:00-04:00; wait for the scheduler, then log the public URL and measure it. 0 logged post(s), 3 missing URL(s) in this format.
+- **Await scheduled auto post** `FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY` YouTube / YouTube Community archive/playlist CTA: Approved auto row is scheduled for 2026-06-24T18:30:00-04:00; wait for the scheduler, then log the public URL and measure it. 0 logged post(s), 3 missing URL(s) in this format.
 
 ## Post-Log Measurement Handoff
 - Status: **clear**
@@ -19084,11 +19270,13 @@ Generated: 2026-06-23T08:58:45.919295Z
 - `FP-PLAN-TWELVE-DOLLARS-FACEBOOK` Facebook / Release-art image + story hook: Publish or log the public URL before result metrics can be collected.
 - `FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK` X / Release-art image + story hook: Publish or log the public URL before result metrics can be collected.
 - `FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK` Facebook / Release-art image + story hook: Publish or log the public URL before result metrics can be collected.
+- `FP-AUTO-264` TikTok / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.
+- `FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA` YouTube / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.
+- `FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA` YouTube / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.
+- `FP-PLAN-TWELVE-DOLLARS-TIKTOK` TikTok / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-261` YouTube / YouTube Community archive/playlist CTA: Publish or log the public URL before result metrics can be collected.
 - `FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY` YouTube / YouTube Community archive/playlist CTA: Publish or log the public URL before result metrics can be collected.
 - `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY` YouTube / YouTube Community archive/playlist CTA: Publish or log the public URL before result metrics can be collected.
-- `FP-AUTO-264` TikTok / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.
-- `FP-PLAN-TWELVE-DOLLARS-TIKTOK` TikTok / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.
 
 ## Guardrails
 - This clipboard does not fetch private analytics or write metrics.
@@ -19151,7 +19339,7 @@ Generated: 2026-06-23T08:58:45.108204Z
 
 
 <script type="application/json" id="embedded-story-throughput-tracking">{
-  "generated_at": "2026-06-23T08:58:45.965309Z",
+  "generated_at": "2026-06-23T09:36:26.140535Z",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -19263,7 +19451,7 @@ Generated: 2026-06-23T08:58:45.108204Z
 
 <script type="text/plain" id="embedded-story-throughput-tracking-report"># Story Throughput Tracking - Lily Roo
 
-Generated: 2026-06-23T08:58:45.965309Z
+Generated: 2026-06-23T09:36:26.140535Z
 
 ## Summary
 - Story posts scheduled: **6**
@@ -19311,7 +19499,7 @@ Generated: 2026-06-23T08:58:45.965309Z
 
 
 <script type="application/json" id="embedded-posting-automation-status">{
-  "generated_at": "2026-06-23T09:17:01.485612Z",
+  "generated_at": "2026-06-23T09:36:26.103529Z",
   "safe_mode": true,
   "source": {
     "workflow": ".github/workflows/promo-admin-refresh.yml",
@@ -19444,7 +19632,7 @@ Generated: 2026-06-23T08:58:45.965309Z
 
 <script type="text/plain" id="embedded-posting-automation-status-report"># Posting Automation Status - Lily Roo
 
-Generated: 2026-06-23T09:17:01.485612Z
+Generated: 2026-06-23T09:36:26.103529Z
 
 ## Summary
 - Status: **blocked**
