@@ -97,12 +97,15 @@ def reconcile(snapshot: dict) -> tuple[dict, dict]:
 def main() -> int:
     parser = argparse.ArgumentParser(description="Reconcile captured social execution history against the current queue without contacting APIs.")
     parser.add_argument("--apply", action="store_true")
+    parser.add_argument("--write-snapshot", action="store_true")
     args = parser.parse_args()
 
     snapshot = read_json(SNAPSHOT, {})
     output, report = reconcile(snapshot)
+    should_write = bool(args.apply or args.write_snapshot)
     report["apply"] = bool(args.apply)
-    if args.apply:
+    report["write_snapshot"] = bool(args.write_snapshot)
+    if should_write:
         SNAPSHOT.write_text(json.dumps(output, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
         report["output"] = str(SNAPSHOT.relative_to(ROOT))
     print(json.dumps(report, indent=2, ensure_ascii=False))

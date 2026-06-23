@@ -134,7 +134,10 @@ def build_actions(status: dict, runway: dict, cta_audit: dict, platform_repair: 
             },
         ))
 
-    actionable_backlog_count = int(backlog_summary.get("approved_backlog_count") or monetization.get("actionable_backlog_posts") or 0)
+    if "approved_backlog_count" in backlog_summary:
+        actionable_backlog_count = int(backlog_summary.get("approved_backlog_count") or 0)
+    else:
+        actionable_backlog_count = int(monetization.get("actionable_backlog_posts") or 0)
     if actionable_backlog_count and monetization.get("backlog_reschedule_preview_command"):
         apply_allowed = bool(backlog_summary.get("apply_allowed_without_override")) if backlog_summary else False
         detail = "Preview a new schedule for approved past-due posts. Safe apply is available after preview."

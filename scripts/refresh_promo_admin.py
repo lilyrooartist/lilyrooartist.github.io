@@ -65,7 +65,7 @@ STEPS = [
     },
     {
         "name": "reconcile_social_execution_snapshot",
-        "command": ["python3", "scripts/reconcile_social_execution_snapshot.py", "--apply"],
+        "command": ["python3", "scripts/reconcile_social_execution_snapshot.py", "--write-snapshot"],
         "required": True,
     },
     {
