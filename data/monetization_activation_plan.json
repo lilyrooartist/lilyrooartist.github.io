@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T23:43:01.851047Z",
+  "generated_at": "2026-06-23T01:08:06.674498Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -13,7 +13,7 @@
     "current_subscribers": 6,
     "remaining_subscribers": 994,
     "runway_status": "behind_365_day_pace",
-    "subscribers_per_week": 0.54,
+    "subscribers_per_week": 0.5,
     "required_subscribers_per_week_365": 19.06,
     "ready_subscriber_approval_count": 0,
     "auto_subscriber_approval_count": 0,
@@ -148,14 +148,14 @@
       }
     },
     {
-      "label": "Current operations next action: Post YouTube Community manual cards",
+      "label": "Current operations next action: Fix Instagram executor",
       "phase": "Operations packet",
-      "status": "ready",
-      "detail": "3 approved manual post(s) can publish now without waiting for broken auto executors.",
-      "command": "",
+      "status": "needs_fix",
+      "detail": "Platform executor needs repair before queued auto posts can publish.",
+      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
       "after_review_command": "",
       "context": {
-        "kind": "manual_distribution",
+        "kind": "platform_fix",
         "urgency": "high"
       }
     }

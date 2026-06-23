@@ -11,12 +11,18 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 try:
-    from social_exec_common import SOCIAL_ENV, load_env
+    from social_exec_common import SOCIAL_ENV, current_execution_rows, load_env, queue_index
 except ImportError:
     SOCIAL_ENV = None
 
     def load_env(_path):
         return {}
+
+    def queue_index():
+        return {}
+
+    def current_execution_rows(rows, _scheduled=None):
+        return rows, []
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -114,15 +120,17 @@ def fetch(url: str, password: str) -> tuple[int, dict, str]:
 def summarize(payload: dict) -> dict:
     executions = payload.get("executions") if isinstance(payload, dict) else []
     executions = executions if isinstance(executions, list) else []
-    status_counts = Counter(str(item.get("status") or "unknown") for item in executions if isinstance(item, dict))
-    platform_counts = Counter(str(item.get("platform") or "Unknown") for item in executions if isinstance(item, dict))
+    scheduled = queue_index()
+    current_executions, superseded = current_execution_rows([item for item in executions if isinstance(item, dict)], scheduled)
+    status_counts = Counter(str(item.get("status") or "unknown") for item in current_executions)
+    platform_counts = Counter(str(item.get("platform") or "Unknown") for item in current_executions)
     posted = [
-        item for item in executions
-        if isinstance(item, dict) and item.get("status") == "posted"
+        item for item in current_executions
+        if item.get("status") == "posted"
     ]
     failed = [
-        item for item in executions
-        if isinstance(item, dict) and item.get("status") in {"failed", "blocked", "skipped"}
+        item for item in current_executions
+        if item.get("status") in {"failed", "blocked", "skipped"}
     ]
     approval_needed = [
         item for item in failed
@@ -138,6 +146,9 @@ def summarize(payload: dict) -> dict:
     ]
     return {
         "execution_count": len(executions),
+        "current_execution_count": len(current_executions),
+        "superseded_execution_count": len(superseded),
+        "superseded_executions": [safe_execution(item) | {"superseded_reason": item.get("superseded_reason", "")} for item in superseded[:5]],
         "posted_count": len(posted),
         "attention_count": len(failed),
         "approval_needed_count": len(approval_needed),

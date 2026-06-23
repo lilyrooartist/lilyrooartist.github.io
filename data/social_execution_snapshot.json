@@ -10,22 +10,20 @@
   "summary": {
     "execution_count": 8,
     "posted_count": 1,
-    "attention_count": 7,
+    "attention_count": 6,
     "approval_needed_count": 1,
     "platform_fix_needed_count": 5,
-    "manual_handoff_needed_count": 1,
+    "manual_handoff_needed_count": 0,
     "status_counts": {
       "blocked": 2,
       "failed": 4,
-      "posted": 1,
-      "skipped": 1
+      "posted": 1
     },
     "platform_counts": {
       "Facebook": 1,
       "Instagram": 3,
       "TikTok": 2,
-      "X": 1,
-      "YouTube Community": 1
+      "X": 1
     },
     "latest_posted": [
       {
@@ -110,31 +108,8 @@
         "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID."
       }
     ],
-    "manual_handoff_needed": [
-      {
-        "post_id": "FP-AUTO-261",
-        "platform": "YouTube Community",
-        "status": "skipped",
-        "reason": "manual_only",
-        "attempts": 0,
-        "updated_at": "2026-06-22T11:15:24.407Z",
-        "source": "cron",
-        "post_url": "",
-        "error_summary": ""
-      }
-    ],
+    "manual_handoff_needed": [],
     "latest_attention": [
-      {
-        "post_id": "FP-AUTO-261",
-        "platform": "YouTube Community",
-        "status": "skipped",
-        "reason": "manual_only",
-        "attempts": 0,
-        "updated_at": "2026-06-22T11:15:24.407Z",
-        "source": "cron",
-        "post_url": "",
-        "error_summary": ""
-      },
       {
         "post_id": "FP-AUTO-259",
         "platform": "TikTok",
@@ -179,11 +154,20 @@
         "post_url": "",
         "error_summary": ""
       }
-    ]
+    ],
+    "current_execution_count": 7,
+    "superseded_execution_count": 0,
+    "superseded_executions": []
   },
   "payload": {
     "ok": true,
     "execution_count": 8
   },
-  "action_needed": ""
+  "action_needed": "",
+  "reconciled_at": "2026-06-23T01:08:06.166998Z",
+  "reconciliation": {
+    "source": "current scheduled_posts.csv",
+    "superseded_execution_count": 0,
+    "guardrail": "Rows are only removed from active attention lists when their post_id is gone from the queue or the queue platform/type has superseded the captured execution."
+  }
 }

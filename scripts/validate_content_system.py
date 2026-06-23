@@ -1269,7 +1269,7 @@ def validate_generated_outputs(failures):
             )
             and (
                 backlog_preview_count == 0
-                or any(item.get("preview_status") == "preview_ok_with_warning" and item.get("phase") == "Backlog recovery" for item in previews)
+                or any(item.get("preview_status") in {"preview_ok", "preview_ok_with_warning"} and item.get("phase") == "Backlog recovery" for item in previews)
             )
             and all(item.get("output_excerpt") is not None and item.get("guardrail") for item in previews)
             and all("/Users/" not in item.get("output_excerpt", "") for item in previews)
@@ -2941,7 +2941,11 @@ def validate_generated_outputs(failures):
         else:
             fail("promo_engine_status.json missing backlog reschedule clearance manifest", failures)
         actionable_backlog = int(monetization.get("actionable_backlog_posts") or 0)
-        has_backlog_next_action = any(action.startswith("Preview approved backlog reschedule:") for action in status.get("next_actions") or [])
+        has_backlog_next_action = any(
+            action.startswith("Preview approved backlog reschedule:")
+            or action.startswith("Next operational action: Preview clear approved backlog row")
+            for action in status.get("next_actions") or []
+        )
         if (actionable_backlog and has_backlog_next_action) or (not actionable_backlog and not has_backlog_next_action):
             ok("promo engine backlog next action follows actionable backlog count")
         else:

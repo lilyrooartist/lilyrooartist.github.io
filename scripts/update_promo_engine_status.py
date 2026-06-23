@@ -9,6 +9,8 @@ from collections import Counter
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
+from social_exec_common import current_execution_rows, queue_index
+
 
 ROOT = Path(__file__).resolve().parent.parent
 GITHUB_REPO_URL = "https://github.com/lilyrooartist/lilyrooartist.github.io"
@@ -1605,18 +1607,17 @@ def source_revision_state() -> dict:
 def social_execution_state(snapshot, scheduled_rows=None):
     summary = snapshot.get("summary") if isinstance(snapshot, dict) else {}
     summary = summary or {}
-    scheduled = {
-        row.get("id"): row
-        for row in (scheduled_rows or [])
-        if row.get("id")
-    }
+    scheduled = queue_index(scheduled_rows or [])
     attention = summary.get("latest_attention") or []
-    categorized_attention = dedupe_execution_rows(
+    categorized_attention_raw = dedupe_execution_rows(
         (summary.get("approval_needed") or [])
         + (summary.get("platform_fix_needed") or [])
         + (summary.get("manual_handoff_needed") or [])
     )
-    source_rows = categorized_attention or attention
+    source_rows_raw = categorized_attention_raw or attention
+    source_rows, superseded_rows = current_execution_rows(source_rows_raw, scheduled)
+    current_attention, superseded_attention = current_execution_rows(attention, scheduled)
+    superseded_rows = dedupe_execution_rows(superseded_rows + superseded_attention)
     approval_needed = []
     platform_fix_needed = []
     manual_handoff_needed = []
@@ -1648,14 +1649,17 @@ def social_execution_state(snapshot, scheduled_rows=None):
         "updated_at": snapshot.get("updated_at", "") if isinstance(snapshot, dict) else "",
         "http_status": snapshot.get("http_status", "") if isinstance(snapshot, dict) else "",
         "execution_count": int(summary.get("execution_count") or 0),
+        "current_execution_count": int(summary.get("current_execution_count") or 0) or max(int(summary.get("execution_count") or 0) - len(superseded_rows), 0),
+        "superseded_execution_count": int(summary.get("superseded_execution_count") or 0) or len(superseded_rows),
+        "superseded_executions": superseded_rows[:5],
         "posted_count": int(summary.get("posted_count") or 0),
-        "attention_count": int(summary.get("attention_count") or 0),
+        "attention_count": len(source_rows),
         "approval_needed_count": len(approval_needed),
         "platform_fix_needed_count": len(platform_fix_needed),
         "manual_handoff_needed_count": len(manual_handoff_needed),
         "status_counts": summary.get("status_counts") or {},
         "platform_counts": summary.get("platform_counts") or {},
-        "latest_attention": attention,
+        "latest_attention": current_attention,
         "approval_needed": approval_needed,
         "platform_fix_needed": platform_fix_needed,
         "manual_handoff_needed": manual_handoff_needed,

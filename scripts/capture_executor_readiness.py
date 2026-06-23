@@ -77,7 +77,7 @@ def platform_summary(payload: dict) -> dict:
         "Instagram": bool((platforms.get("instagram") or {}).get("ready")),
         "TikTok": bool((platforms.get("tiktok") or {}).get("ready")),
         "Facebook": bool((platforms.get("facebook") or {}).get("ready")),
-        "YouTube Community": bool((platforms.get("youtube") or {}).get("ready")),
+        "YouTube": bool((platforms.get("youtube") or {}).get("ready")),
     }
     return {
         "ready_platforms": [platform for platform, ready in checks.items() if ready],

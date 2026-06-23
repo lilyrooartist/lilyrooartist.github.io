@@ -1,6 +1,6 @@
 # Monetization Activation Plan - Lily Roo
 
-Generated: 2026-06-22T23:43:01.851047Z
+Generated: 2026-06-23T01:08:06.674498Z
 
 ## Summary
 - Current subscribers: **6 / 1000**
@@ -44,9 +44,10 @@ Generated: 2026-06-22T23:43:01.851047Z
    - Missing locally: `TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN`
    - Local source: `secrets/social_api.env`
    - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
-7. **Current operations next action: Post YouTube Community manual cards**
-   - Phase: `Operations packet`; status: `ready`
-   - Detail: 3 approved manual post(s) can publish now without waiting for broken auto executors.
+7. **Current operations next action: Fix Instagram executor**
+   - Phase: `Operations packet`; status: `needs_fix`
+   - Detail: Platform executor needs repair before queued auto posts can publish.
+   - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM`
 
 ## Guardrails
 - This plan does not approve, apply, publish, or post anything.

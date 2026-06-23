@@ -5,6 +5,8 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 
+from social_exec_common import current_execution_rows, queue_index
+
 
 ROOT = Path(__file__).resolve().parents[1]
 OPERATIONS = ROOT / "data" / "promo_operations_packet.json"
@@ -36,8 +38,10 @@ def platform_slug(platform: str) -> str:
 def execution_rows(snapshot: dict) -> dict[str, dict]:
     summary = snapshot.get("summary") or {}
     rows = {}
+    scheduled = queue_index()
     for key in ("platform_fix_needed", "approval_needed", "manual_handoff_needed", "latest_attention"):
-        for row in summary.get(key) or []:
+        current_rows, _superseded = current_execution_rows(summary.get(key) or [], scheduled)
+        for row in current_rows:
             post_id = row.get("post_id")
             if post_id and post_id not in rows:
                 rows[post_id] = row

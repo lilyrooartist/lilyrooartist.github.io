@@ -1,22 +1,16 @@
 # Backlog Reschedule Preview - Lily Roo
 
-Generated: 2026-06-23T07:43:01.160522+08:00
+Generated: 2026-06-23T09:08:06.343024+08:00
 
 ## Summary
 - Approved backlog rows: **0**
 - Rows with known blockers: **0**
 - Clear to apply without override: **0**
-- Manual handoff rows excluded from auto-reschedule: **1**
+- Manual handoff rows excluded from auto-reschedule: **0**
 - Start at: **2026-06-24T10:00:00+08:00**
 - Spacing hours: **24**
 - Apply allowed without override: **True**
 - Normal apply gate: **clear**
-
-## Manual Handoff Rows
-- **YouTube - I Learned It All in Fifteen Seconds** (`FP-AUTO-261`)
-  - Current: `2026-06-06T19:10:00-04:00`
-  - Handoff: `admin/reports/manual-posting-clipboard.md`
-  - Reason: Manual/community row is ready for manual posting and public URL logging; it is excluded from auto-reschedule commands.
 
 ## Proposed Reschedule
 

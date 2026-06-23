@@ -55,6 +55,60 @@ def load_queue_rows() -> list[dict[str, str]]:
         return list(csv.DictReader(f))
 
 
+def platform_slug(platform: str = '') -> str:
+    value = str(platform or '').strip().lower()
+    return {
+        'youtube community': 'youtube',
+        'youtube': 'youtube',
+        'x': 'x',
+        'twitter': 'x',
+        'instagram': 'instagram',
+        'tiktok': 'tiktok',
+        'facebook': 'facebook',
+    }.get(value, value)
+
+
+def queue_index(rows: list[dict[str, str]] | None = None) -> dict[str, dict[str, str]]:
+    source_rows = rows if rows is not None else load_queue_rows()
+    return {
+        str(row.get('id') or '').strip(): {key: (value or '').strip() for key, value in row.items()}
+        for row in source_rows
+        if str(row.get('id') or '').strip()
+    }
+
+
+def execution_superseded_reason(item: dict[str, Any], scheduled: dict[str, dict[str, str]] | None = None) -> str:
+    post_id = str(item.get('post_id') or item.get('id') or '').strip()
+    if not post_id:
+        return ''
+    scheduled = scheduled if scheduled is not None else queue_index()
+    queue_row = scheduled.get(post_id)
+    if not queue_row:
+        return 'post_id_not_in_current_queue' if post_id.startswith('FP-') else ''
+    execution_platform = platform_slug(str(item.get('platform') or ''))
+    queue_platform = platform_slug(queue_row.get('platform') or '')
+    if execution_platform and queue_platform and execution_platform != queue_platform:
+        return f"platform_changed_to_{queue_row.get('platform') or 'current_queue'}"
+    if item.get('reason') == 'manual_only' and queue_row.get('execution_mode') != 'manual' and queue_row.get('post_type') != 'community':
+        return 'manual_execution_replaced_by_auto_queue_row'
+    return ''
+
+
+def current_execution_rows(rows: list[dict[str, Any]], scheduled: dict[str, dict[str, str]] | None = None) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    scheduled = scheduled if scheduled is not None else queue_index()
+    current = []
+    superseded = []
+    for row in rows:
+        reason = execution_superseded_reason(row, scheduled)
+        if reason:
+            item = dict(row)
+            item['superseded_reason'] = reason
+            superseded.append(item)
+        else:
+            current.append(row)
+    return current, superseded
+
+
 def get_row(post_id: str) -> dict[str, str]:
     post_id = (post_id or '').strip()
     for row in load_queue_rows():

@@ -64,6 +64,11 @@ STEPS = [
         "preserve_on_failure": ["data/social_execution_snapshot.json"],
     },
     {
+        "name": "reconcile_social_execution_snapshot",
+        "command": ["python3", "scripts/reconcile_social_execution_snapshot.py", "--apply"],
+        "required": True,
+    },
+    {
         "name": "capture_scheduler_dry_run",
         "command": ["python3", "scripts/capture_scheduler_dry_run.py"],
         "required": False,

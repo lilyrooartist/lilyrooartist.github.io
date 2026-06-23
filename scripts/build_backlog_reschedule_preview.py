@@ -7,6 +7,8 @@ import re
 from datetime import datetime, timedelta
 from pathlib import Path
 
+from social_exec_common import current_execution_rows, queue_index
+
 
 ROOT = Path(__file__).resolve().parents[1]
 QUEUE = ROOT / "data" / "scheduled_posts.csv"
@@ -56,8 +58,10 @@ def load_execution_blockers() -> dict[str, dict]:
     snapshot = read_json(SOCIAL_EXECUTIONS, {})
     summary = snapshot.get("summary") or {}
     blockers = {}
+    scheduled = queue_index(read_csv(QUEUE))
     for key in ("platform_fix_needed", "approval_needed", "manual_handoff_needed", "latest_attention"):
-        for row in summary.get(key) or []:
+        current_rows, _superseded = current_execution_rows(summary.get(key) or [], scheduled)
+        for row in current_rows:
             post_id = row.get("post_id")
             if post_id and post_id not in blockers:
                 blockers[post_id] = row
