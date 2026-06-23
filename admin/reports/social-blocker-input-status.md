@@ -1,6 +1,6 @@
 # Social Blocker Input Status - Lily Roo
 
-Generated: 2026-06-23T09:03:55.734468Z
+Generated: 2026-06-23T09:12:43.384281Z
 
 ## Summary
 - Status: **missing_local_input**
@@ -20,6 +20,13 @@ Generated: 2026-06-23T09:03:55.734468Z
   - Preview GitHub secret push: `python3 scripts/push_github_actions_secrets.py`
   - Apply GitHub secret push: `python3 scripts/push_github_actions_secrets.py --apply`
   - Unblocks: Scheduler dry-run, executor readiness capture, and execution history capture.
+  - Credential priority: cleared
+  - How to clear: Scheduler auth is already present locally and in GitHub Actions; keep it as the known-good auth lane.
+  - Where to get it: Generated locally by the promotion automation helper.
+  - After values are added:
+    - `python3 scripts/capture_scheduler_dry_run.py`
+    - `python3 scripts/capture_social_executions.py`
+    - `python3 scripts/refresh_promo_admin.py`
   - Verify: `python3 scripts/capture_scheduler_dry_run.py && python3 scripts/capture_social_executions.py`
   - Next: Run the verification command and refresh admin evidence.
 - **Instagram business account** - `missing_local_input`
@@ -27,20 +34,69 @@ Generated: 2026-06-23T09:03:55.734468Z
   - Unblocks: Instagram executor rows after the Worker secret is pushed and readiness is recaptured.
   - Resolve preview: `python3 scripts/resolve_instagram_business_account.py`
   - Resolve apply: `python3 scripts/resolve_instagram_business_account.py --apply`
+  - Credential priority: next
+  - How to clear: Fastest automation unlock: collect Meta token and Page ID, then let the resolver write IG_BUSINESS_ACCOUNT_ID.
+  - Where to get it: Meta Developer Dashboard or Graph API Explorer while signed in as a Lily Roo Facebook Page admin.
+  - Portal: https://developers.facebook.com/tools/explorer/
+  - Docs: https://developers.facebook.com/docs/instagram-platform/instagram-api-with-facebook-login/get-started
+  - Values to collect: META_LONG_LIVED_TOKEN, FB_PAGE_ID
+  - Permission/scope hint: pages_show_list, pages_read_engagement, pages_manage_posts, instagram_basic, instagram_content_publish
+  - Safe handling: Paste only into ../secrets/social_api.env; do not paste Meta tokens into chat or committed files.
+  - After values are added:
+    - `python3 scripts/resolve_instagram_business_account.py --apply`
+    - `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID`
+    - `python3 scripts/capture_executor_readiness.py`
+    - `python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM`
+    - `python3 scripts/refresh_promo_admin.py`
+  - If it fails: Connect the Lily Roo Instagram Business/Creator account to the Lily Roo Facebook Page, then rerun the resolver.
   - Verify: `python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM`
   - Next: Add META_LONG_LIVED_TOKEN, FB_PAGE_ID to /Users/tod.famous/Documents/New project/secrets/social_api.env, then run python3 scripts/resolve_instagram_business_account.py.
 - **TikTok OAuth app values** - `missing_local_input`
   - Required all: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REDIRECT_URI
   - Unblocks: TikTok OAuth authorization URL generation and authorization-code exchange.
+  - Credential priority: second
+  - How to clear: Collect TikTok app OAuth values so the helper can generate the Lily Roo authorization URL.
+  - Where to get it: TikTok for Developers app dashboard for the Lily Roo app.
+  - Portal: https://developers.tiktok.com/
+  - Docs: https://developers.tiktok.com/doc/login-kit-web
+  - Values to collect: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REDIRECT_URI
+  - Permission/scope hint: user.info.basic, video.upload
+  - Safe handling: Use an HTTPS redirect URI registered exactly in TikTok; paste app secrets only into ../secrets/social_api.env.
+  - After values are added:
+    - `python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload`
+  - If it fails: If TikTok rejects the redirect, update either the developer portal or TIKTOK_REDIRECT_URI so both strings match exactly.
   - Verify: `python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload`
   - Next: Add TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REDIRECT_URI to /Users/tod.famous/Documents/New project/secrets/social_api.env.
 - **TikTok upload-mode worker secrets** - `missing_local_input`
   - Required all: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN
   - Unblocks: TikTok upload-draft automation for the first ready TikTok asset.
+  - Credential priority: after_oauth
+  - How to clear: Authorize the generated TikTok URL as Lily Roo, exchange the returned code, then push upload-mode Worker secrets.
+  - Where to get it: The OAuth callback URL after authorizing the generated TikTok authorization link.
+  - Portal: https://developers.tiktok.com/
+  - Docs: https://developers.tiktok.com/doc/content-posting-api-get-started
+  - Values to collect: authorization code from the TikTok redirect URL
+  - Permission/scope hint: user.info.basic, video.upload
+  - Safe handling: The helper writes returned token values locally with --apply and never prints them.
+  - After values are added:
+    - `python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode upload`
+    - `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
+    - `python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
+    - `python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run`
+    - `python3 scripts/refresh_promo_admin.py`
+  - If it fails: Regenerate the authorization URL and exchange the code immediately; TikTok authorization codes are short-lived.
   - Verify: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
   - Next: Add TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN to /Users/tod.famous/Documents/New project/secrets/social_api.env.
 - **Facebook Page identity checkpoint** - `external_action_needed`
   - Unblocks: The Facebook executor row blocked by Meta identity confirmation.
+  - Credential priority: manual_checkpoint
+  - How to clear: Confirm the Meta token belongs to the intended Lily Roo Page before allowing Facebook posting rows to run.
+  - Where to get it: Meta Business Suite/Page settings and the Facebook Page identity shown by the verification command.
+  - Portal: https://business.facebook.com/
+  - Safe handling: Use the verification output to confirm page identity; do not expose token values.
+  - After values are added:
+    - `python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run`
+    - `python3 scripts/refresh_promo_admin.py`
   - Verify: `python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run`
   - Next: Complete the external platform checkpoint, then rerun the verification command.
 

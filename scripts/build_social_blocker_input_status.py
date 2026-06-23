@@ -69,6 +69,123 @@ GROUPS = [
     },
 ]
 
+CREDENTIAL_GUIDES = {
+    "scheduler_auth": {
+        "priority": "cleared",
+        "operator_summary": "Scheduler auth is already present locally and in GitHub Actions; keep it as the known-good auth lane.",
+        "where_to_get": "Generated locally by the promotion automation helper.",
+        "portal_url": "",
+        "values_to_collect": [],
+        "local_env_keys": ["EXECUTOR_BEARER_TOKEN"],
+        "after_values_commands": [
+            "python3 scripts/capture_scheduler_dry_run.py",
+            "python3 scripts/capture_social_executions.py",
+            "python3 scripts/refresh_promo_admin.py",
+        ],
+    },
+    "instagram_business": {
+        "priority": "next",
+        "operator_summary": "Fastest automation unlock: collect Meta token and Page ID, then let the resolver write IG_BUSINESS_ACCOUNT_ID.",
+        "where_to_get": "Meta Developer Dashboard or Graph API Explorer while signed in as a Lily Roo Facebook Page admin.",
+        "portal_url": "https://developers.facebook.com/tools/explorer/",
+        "docs_url": "https://developers.facebook.com/docs/instagram-platform/instagram-api-with-facebook-login/get-started",
+        "values_to_collect": [
+            "META_LONG_LIVED_TOKEN",
+            "FB_PAGE_ID",
+        ],
+        "local_env_keys": [
+            "META_LONG_LIVED_TOKEN",
+            "FB_PAGE_ID",
+            "IG_BUSINESS_ACCOUNT_ID",
+        ],
+        "permissions_hint": [
+            "pages_show_list",
+            "pages_read_engagement",
+            "pages_manage_posts",
+            "instagram_basic",
+            "instagram_content_publish",
+        ],
+        "safe_handling": "Paste only into ../secrets/social_api.env; do not paste Meta tokens into chat or committed files.",
+        "after_values_commands": [
+            "python3 scripts/resolve_instagram_business_account.py --apply",
+            "python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID",
+            "python3 scripts/capture_executor_readiness.py",
+            "python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+            "python3 scripts/refresh_promo_admin.py",
+        ],
+        "fallback_if_resolution_fails": "Connect the Lily Roo Instagram Business/Creator account to the Lily Roo Facebook Page, then rerun the resolver.",
+    },
+    "tiktok_oauth_base": {
+        "priority": "second",
+        "operator_summary": "Collect TikTok app OAuth values so the helper can generate the Lily Roo authorization URL.",
+        "where_to_get": "TikTok for Developers app dashboard for the Lily Roo app.",
+        "portal_url": "https://developers.tiktok.com/",
+        "docs_url": "https://developers.tiktok.com/doc/login-kit-web",
+        "values_to_collect": [
+            "TIKTOK_CLIENT_KEY",
+            "TIKTOK_CLIENT_SECRET",
+            "TIKTOK_REDIRECT_URI",
+        ],
+        "local_env_keys": [
+            "TIKTOK_CLIENT_KEY",
+            "TIKTOK_CLIENT_SECRET",
+            "TIKTOK_REDIRECT_URI",
+        ],
+        "permissions_hint": [
+            "user.info.basic",
+            "video.upload",
+        ],
+        "safe_handling": "Use an HTTPS redirect URI registered exactly in TikTok; paste app secrets only into ../secrets/social_api.env.",
+        "after_values_commands": [
+            "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload",
+        ],
+        "fallback_if_resolution_fails": "If TikTok rejects the redirect, update either the developer portal or TIKTOK_REDIRECT_URI so both strings match exactly.",
+    },
+    "tiktok_upload_tokens": {
+        "priority": "after_oauth",
+        "operator_summary": "Authorize the generated TikTok URL as Lily Roo, exchange the returned code, then push upload-mode Worker secrets.",
+        "where_to_get": "The OAuth callback URL after authorizing the generated TikTok authorization link.",
+        "portal_url": "https://developers.tiktok.com/",
+        "docs_url": "https://developers.tiktok.com/doc/content-posting-api-get-started",
+        "values_to_collect": [
+            "authorization code from the TikTok redirect URL",
+        ],
+        "local_env_keys": [
+            "TIKTOK_REFRESH_TOKEN",
+            "TIKTOK_ACCESS_TOKEN",
+        ],
+        "permissions_hint": [
+            "user.info.basic",
+            "video.upload",
+        ],
+        "safe_handling": "The helper writes returned token values locally with --apply and never prints them.",
+        "after_values_commands": [
+            "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode upload",
+            "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+            "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+            "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run",
+            "python3 scripts/refresh_promo_admin.py",
+        ],
+        "fallback_if_resolution_fails": "Regenerate the authorization URL and exchange the code immediately; TikTok authorization codes are short-lived.",
+    },
+    "facebook_identity": {
+        "priority": "manual_checkpoint",
+        "operator_summary": "Confirm the Meta token belongs to the intended Lily Roo Page before allowing Facebook posting rows to run.",
+        "where_to_get": "Meta Business Suite/Page settings and the Facebook Page identity shown by the verification command.",
+        "portal_url": "https://business.facebook.com/",
+        "values_to_collect": [],
+        "local_env_keys": [
+            "META_LONG_LIVED_TOKEN",
+            "FB_PAGE_ID",
+        ],
+        "safe_handling": "Use the verification output to confirm page identity; do not expose token values.",
+        "after_values_commands": [
+            "python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run",
+            "python3 scripts/refresh_promo_admin.py",
+        ],
+    },
+}
+
 
 TEMPLATE_KEYS = [
     ("# Scheduler/admin capture auth. At least one auth path must be filled locally and in GitHub Actions secrets.", ""),
@@ -167,6 +284,7 @@ def build_group(group: dict, env: dict[str, str], github_presence: dict, instagr
         missing_resolution = resolution_summary.get("missing_local_input") or []
         if missing_resolution:
             next_action = f"Add {', '.join(missing_resolution)} to {SOCIAL_ENV}, then run {group.get('credential_resolution_preview')}."
+    guide = CREDENTIAL_GUIDES.get(group["id"], {})
     return {
         "id": group["id"],
         "label": group["label"],
@@ -187,6 +305,7 @@ def build_group(group: dict, env: dict[str, str], github_presence: dict, instagr
         "unblocks": group["unblocks"],
         "verification_command": group["verify"],
         "next_action": next_action,
+        "credential_guide": guide,
     }
 
 
@@ -271,6 +390,29 @@ def build_markdown(packet: dict) -> str:
             lines.append(f"  - Resolve preview: `{group['credential_resolution_preview']}`")
         if group.get("credential_resolution_apply"):
             lines.append(f"  - Resolve apply: `{group['credential_resolution_apply']}`")
+        guide = group.get("credential_guide") or {}
+        if guide:
+            lines.append(f"  - Credential priority: {guide.get('priority', '')}")
+            if guide.get("operator_summary"):
+                lines.append(f"  - How to clear: {guide['operator_summary']}")
+            if guide.get("where_to_get"):
+                lines.append(f"  - Where to get it: {guide['where_to_get']}")
+            if guide.get("portal_url"):
+                lines.append(f"  - Portal: {guide['portal_url']}")
+            if guide.get("docs_url"):
+                lines.append(f"  - Docs: {guide['docs_url']}")
+            if guide.get("values_to_collect"):
+                lines.append(f"  - Values to collect: {', '.join(guide['values_to_collect'])}")
+            if guide.get("permissions_hint"):
+                lines.append(f"  - Permission/scope hint: {', '.join(guide['permissions_hint'])}")
+            if guide.get("safe_handling"):
+                lines.append(f"  - Safe handling: {guide['safe_handling']}")
+            if guide.get("after_values_commands"):
+                lines.append("  - After values are added:")
+                for command in guide["after_values_commands"]:
+                    lines.append(f"    - `{command}`")
+            if guide.get("fallback_if_resolution_fails"):
+                lines.append(f"  - If it fails: {guide['fallback_if_resolution_fails']}")
         lines.append(f"  - Verify: `{group['verification_command']}`")
         lines.append(f"  - Next: {group['next_action']}")
     lines.extend([
