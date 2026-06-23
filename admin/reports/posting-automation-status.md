@@ -1,27 +1,27 @@
 # Posting Automation Status - Lily Roo
 
-Generated: 2026-06-23T08:54:01.035582Z
+Generated: 2026-06-23T09:00:05.848516Z
 
 ## Summary
 - Status: **blocked**
 - Lanes ready: **4 / 8**
-- Blocked lanes: **4**
-- Needs attention: **0**
+- Blocked lanes: **3**
+- Needs attention: **1**
 - Story posts tracked: **6**
 - Help-needed items: **5**
-- Next action: Set LILYROO_ADMIN_PASSWORD or LILYROO_EXECUTOR_BEARER_TOKEN and rerun to capture scheduler dry-run state.
+- Next action: Resolve the platform repair checklist before expecting full auto-post coverage.
 
 ## Automation Lanes
-- **Scheduled refresh workflow** - `ready`
-  - Detail: 17 */6 * * *; latest run completed / success
-  - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28002303668
+- **Scheduled refresh workflow** - `needs_attention`
+  - Detail: 17 */6 * * *; latest run unknown / pending
+  - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/workflows/promo-admin-refresh.yml
+  - Next: Confirm the GitHub Actions workflow is enabled and has a successful run.
 - **Safe admin refresh** - `ready`
-  - Detail: 41 refresh commands captured at 2026-06-23T08:49:10.219739Z
+  - Detail: 41 refresh commands captured at 2026-06-23T08:58:46.140472Z
   - Evidence: data/promo_admin_refresh_run.json
-- **Scheduler dry-run authentication** - `blocked`
-  - Detail: HTTP 401 using none auth; due=0 would_post=0
+- **Scheduler dry-run authentication** - `ready`
+  - Detail: HTTP 200 using bearer auth; due=3 would_post=0
   - Evidence: data/social_scheduler_dry_run.json
-  - Next: Set LILYROO_ADMIN_PASSWORD or LILYROO_EXECUTOR_BEARER_TOKEN and rerun to capture scheduler dry-run state.
 - **Execution capture** - `ready`
   - Detail: posted=1 attention=6 platform_fix_needed=5
   - Evidence: data/social_execution_snapshot.json
@@ -34,9 +34,9 @@ Generated: 2026-06-23T08:54:01.035582Z
   - Evidence: data/tiktok_setup_preflight.json
   - Next: Add TikTok OAuth credentials and rerun the upload-mode dry run.
 - **Blocker input readiness** - `blocked`
-  - Detail: 0 ready; 4 missing local input; 1 external action needed
+  - Detail: 1 ready; 3 missing local input; 1 external action needed
   - Evidence: data/social_blocker_input_status.json
-  - Next: Add one of LILYROO_EXECUTOR_BEARER_TOKEN, EXECUTOR_BEARER_TOKEN, LILYROO_ADMIN_PASSWORD, ADMIN_PASSWORD to /Users/tod.famous/Documents/New project/secrets/social_api.env.
+  - Next: Add IG_BUSINESS_ACCOUNT_ID to /Users/tod.famous/Documents/New project/secrets/social_api.env.
 - **Story throughput** - `ready`
   - Detail: 6 tracked; 6 queued; 0 past due without URL
   - Evidence: data/story_throughput_tracking.json

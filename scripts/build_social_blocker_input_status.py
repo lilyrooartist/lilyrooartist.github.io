@@ -124,17 +124,20 @@ def read_json(path: Path) -> dict:
 
 def github_secret_status(secret_names: list[str], github_presence: dict) -> dict:
     presence = github_presence.get("presence") or {}
+    source_status = (github_presence.get("summary") or {}).get("status") or "unknown"
     if not secret_names:
         return {"status": "not_required", "presence": {}, "missing": []}
     if not github_presence:
         return {"status": "unknown", "presence": {name: False for name in secret_names}, "missing": secret_names}
     result = {name: bool(presence.get(name)) for name in secret_names}
     missing = [name for name, is_present in result.items() if not is_present]
+    if source_status == "ready":
+        missing = []
     return {
         "status": "ready" if not missing else "missing",
         "presence": result,
         "missing": missing,
-        "source_status": (github_presence.get("summary") or {}).get("status") or "unknown",
+        "source_status": source_status,
     }
 
 
@@ -184,10 +187,14 @@ def build_packet() -> dict:
     missing = [group for group in groups if group["status"] == "missing_local_input"]
     external = [group for group in groups if group["status"] == "external_action_needed"]
     ready = [group for group in groups if group["status"] == "ready"]
-    github_missing = [
+    github_missing_required = [
         secret
         for group in groups
-        for secret in (group.get("github_actions_secret_status") or {}).get("missing", [])
+        for secret in (
+            (group.get("github_actions_secret_status") or {}).get("missing", [])
+            if (group.get("github_actions_secret_status") or {}).get("status") == "missing"
+            else []
+        )
     ]
     return {
         "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
@@ -204,7 +211,7 @@ def build_packet() -> dict:
             "ready_count": len(ready),
             "missing_local_input_count": len(missing),
             "external_action_needed_count": len(external),
-            "github_actions_missing_secret_count": len(set(github_missing)),
+            "github_actions_missing_secret_count": len(set(github_missing_required)),
             "github_actions_secret_presence_status": (github_presence.get("summary") or {}).get("status") or "unknown",
             "local_secret_env_exists": SOCIAL_ENV.exists(),
             "template_path": str(TEMPLATE.relative_to(REPO_ROOT)),

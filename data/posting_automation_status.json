@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-23T08:54:01.035582Z",
+  "generated_at": "2026-06-23T09:00:05.848516Z",
   "safe_mode": true,
   "source": {
     "workflow": ".github/workflows/promo-admin-refresh.yml",
@@ -16,15 +16,15 @@
   "summary": {
     "status": "blocked",
     "ready_lane_count": 4,
-    "blocked_lane_count": 4,
-    "attention_lane_count": 0,
+    "blocked_lane_count": 3,
+    "attention_lane_count": 1,
     "lane_count": 8,
     "workflow_crons": [
       "17 */6 * * *"
     ],
-    "scheduler_http_status": 401,
-    "scheduler_auth_method": "none",
-    "scheduler_refresh_step_ok": false,
+    "scheduler_http_status": 200,
+    "scheduler_auth_method": "bearer",
+    "scheduler_refresh_step_ok": true,
     "posted_count": 1,
     "attention_count": 6,
     "platform_fix_needed_count": 5,
@@ -32,32 +32,32 @@
     "story_queued_future_count": 6,
     "platform_repair_blocked_count": 5,
     "blocker_input_status": "missing_local_input",
-    "blocker_input_missing_count": 4,
+    "blocker_input_missing_count": 3,
     "blocker_input_external_action_count": 1,
     "help_needed_count": 5,
-    "next_action": "Set LILYROO_ADMIN_PASSWORD or LILYROO_EXECUTOR_BEARER_TOKEN and rerun to capture scheduler dry-run state."
+    "next_action": "Resolve the platform repair checklist before expecting full auto-post coverage."
   },
   "lanes": [
     {
       "label": "Scheduled refresh workflow",
-      "status": "ready",
-      "detail": "17 */6 * * *; latest run completed / success",
-      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28002303668",
-      "next_action": ""
+      "status": "needs_attention",
+      "detail": "17 */6 * * *; latest run unknown / pending",
+      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/workflows/promo-admin-refresh.yml",
+      "next_action": "Confirm the GitHub Actions workflow is enabled and has a successful run."
     },
     {
       "label": "Safe admin refresh",
       "status": "ready",
-      "detail": "41 refresh commands captured at 2026-06-23T08:49:10.219739Z",
+      "detail": "41 refresh commands captured at 2026-06-23T08:58:46.140472Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": ""
     },
     {
       "label": "Scheduler dry-run authentication",
-      "status": "blocked",
-      "detail": "HTTP 401 using none auth; due=0 would_post=0",
+      "status": "ready",
+      "detail": "HTTP 200 using bearer auth; due=3 would_post=0",
       "evidence": "data/social_scheduler_dry_run.json",
-      "next_action": "Set LILYROO_ADMIN_PASSWORD or LILYROO_EXECUTOR_BEARER_TOKEN and rerun to capture scheduler dry-run state."
+      "next_action": ""
     },
     {
       "label": "Execution capture",
@@ -83,9 +83,9 @@
     {
       "label": "Blocker input readiness",
       "status": "blocked",
-      "detail": "0 ready; 4 missing local input; 1 external action needed",
+      "detail": "1 ready; 3 missing local input; 1 external action needed",
       "evidence": "data/social_blocker_input_status.json",
-      "next_action": "Add one of LILYROO_EXECUTOR_BEARER_TOKEN, EXECUTOR_BEARER_TOKEN, LILYROO_ADMIN_PASSWORD, ADMIN_PASSWORD to /Users/tod.famous/Documents/New project/secrets/social_api.env."
+      "next_action": "Add IG_BUSINESS_ACCOUNT_ID to /Users/tod.famous/Documents/New project/secrets/social_api.env."
     },
     {
       "label": "Story throughput",

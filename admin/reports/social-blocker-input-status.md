@@ -1,27 +1,27 @@
 # Social Blocker Input Status - Lily Roo
 
-Generated: 2026-06-23T08:54:01.003126Z
+Generated: 2026-06-23T09:00:05.817161Z
 
 ## Summary
 - Status: **missing_local_input**
-- Ready groups: **0 / 5**
-- Missing local input: **4**
+- Ready groups: **1 / 5**
+- Missing local input: **3**
 - External action needed: **1**
-- GitHub Actions missing secrets: **2**
+- GitHub Actions missing secrets: **0**
 - Local secret env exists: **True**
 - Template: `data/social_blocker_secret_template.env`
-- Next action: Add one of LILYROO_EXECUTOR_BEARER_TOKEN, EXECUTOR_BEARER_TOKEN, LILYROO_ADMIN_PASSWORD, ADMIN_PASSWORD to /Users/tod.famous/Documents/New project/secrets/social_api.env.
+- Next action: Add IG_BUSINESS_ACCOUNT_ID to /Users/tod.famous/Documents/New project/secrets/social_api.env.
 
 ## Groups
-- **Scheduler and executor auth** - `missing_local_input`
+- **Scheduler and executor auth** - `ready`
   - Required one of: LILYROO_EXECUTOR_BEARER_TOKEN, EXECUTOR_BEARER_TOKEN, LILYROO_ADMIN_PASSWORD, ADMIN_PASSWORD
   - GitHub Actions secrets: LILYROO_EXECUTOR_BEARER_TOKEN, LILYROO_ADMIN_PASSWORD
-  - GitHub Actions status: missing
+  - GitHub Actions status: ready
   - Preview GitHub secret push: `python3 scripts/push_github_actions_secrets.py`
   - Apply GitHub secret push: `python3 scripts/push_github_actions_secrets.py --apply`
   - Unblocks: Scheduler dry-run, executor readiness capture, and execution history capture.
   - Verify: `python3 scripts/capture_scheduler_dry_run.py && python3 scripts/capture_social_executions.py`
-  - Next: Add one of LILYROO_EXECUTOR_BEARER_TOKEN, EXECUTOR_BEARER_TOKEN, LILYROO_ADMIN_PASSWORD, ADMIN_PASSWORD to /Users/tod.famous/Documents/New project/secrets/social_api.env.
+  - Next: Run the verification command and refresh admin evidence.
 - **Instagram business account** - `missing_local_input`
   - Required all: IG_BUSINESS_ACCOUNT_ID
   - Unblocks: Instagram executor rows after the Worker secret is pushed and readiness is recaptured.

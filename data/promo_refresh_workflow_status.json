@@ -1,80 +1,14 @@
 {
-  "ok": true,
-  "updated_at": "2026-06-23T08:49:07.776588Z",
+  "ok": false,
+  "updated_at": "2026-06-23T08:58:43.867100Z",
   "source": "github-actions-workflow-runs",
   "repo": "lilyrooartist/lilyrooartist.github.io",
   "workflow": "promo-admin-refresh.yml",
   "api_url": "https://api.github.com/repos/lilyrooartist/lilyrooartist.github.io/actions/workflows/promo-admin-refresh.yml/runs?per_page=5",
   "actions_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/workflows/promo-admin-refresh.yml",
-  "http_status": 200,
-  "error": "",
-  "latest_run": {
-    "id": 28002303668,
-    "status": "completed",
-    "conclusion": "success",
-    "event": "schedule",
-    "created_at": "2026-06-23T04:30:53Z",
-    "updated_at": "2026-06-23T04:31:22Z",
-    "html_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28002303668",
-    "head_branch": "main",
-    "head_sha": "d5cf141eb8bc2034edeaa68305080afc9aca3624"
-  },
-  "recent_runs": [
-    {
-      "id": 28002303668,
-      "status": "completed",
-      "conclusion": "success",
-      "event": "schedule",
-      "created_at": "2026-06-23T04:30:53Z",
-      "updated_at": "2026-06-23T04:31:22Z",
-      "html_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28002303668",
-      "head_branch": "main",
-      "head_sha": "d5cf141eb8bc2034edeaa68305080afc9aca3624"
-    },
-    {
-      "id": 27998498389,
-      "status": "completed",
-      "conclusion": "success",
-      "event": "workflow_dispatch",
-      "created_at": "2026-06-23T02:42:39Z",
-      "updated_at": "2026-06-23T02:43:08Z",
-      "html_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/27998498389",
-      "head_branch": "main",
-      "head_sha": "5ad42448846d07d6cb6490cbae32814e4d55a779"
-    },
-    {
-      "id": 27995204333,
-      "status": "completed",
-      "conclusion": "failure",
-      "event": "workflow_dispatch",
-      "created_at": "2026-06-23T01:11:51Z",
-      "updated_at": "2026-06-23T01:12:02Z",
-      "html_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/27995204333",
-      "head_branch": "main",
-      "head_sha": "31ec2a5e18a0c3582634dbed82e867b9215d9838"
-    },
-    {
-      "id": 27984472939,
-      "status": "completed",
-      "conclusion": "success",
-      "event": "schedule",
-      "created_at": "2026-06-22T21:14:20Z",
-      "updated_at": "2026-06-22T21:14:49Z",
-      "html_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/27984472939",
-      "head_branch": "main",
-      "head_sha": "a240bcc412513fe0f3d6b27d67d58fa3223180a6"
-    },
-    {
-      "id": 27953183428,
-      "status": "completed",
-      "conclusion": "success",
-      "event": "workflow_dispatch",
-      "created_at": "2026-06-22T12:37:50Z",
-      "updated_at": "2026-06-22T12:38:21Z",
-      "html_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/27953183428",
-      "head_branch": "main",
-      "head_sha": "74f61bd679300463546b995c94a7f163ad33fe9c"
-    }
-  ],
-  "action_needed": ""
+  "http_status": 403,
+  "error": "{\"message\":\"API rate limit exceeded for 180.74.64.36. (But here's the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details.)\",\"documentation_url\":\"https://docs.github.com/rest/overview/resources-in-the-rest-api#rate-limiting\"}\n",
+  "latest_run": {},
+  "recent_runs": [],
+  "action_needed": "Review GitHub Actions API access, then rerun workflow status capture."
 }

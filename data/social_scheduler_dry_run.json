@@ -1,28 +1,68 @@
 {
-  "ok": false,
-  "updated_at": "2026-06-22T23:46:26.718685Z",
+  "ok": true,
+  "updated_at": "2026-06-23T08:58:43.599786Z",
   "source": "lilyroo-social-scheduler-dry-run",
   "url": "https://www.lilyroo.com/api/social/scheduler/dry-run",
-  "http_status": 401,
-  "error": "HTTP 401: Unauthorized",
-  "auth_method": "none",
-  "requested_scheduled_time": "2026-06-22T23:46:26.342146Z",
+  "http_status": 200,
+  "error": null,
+  "auth_method": "bearer",
+  "requested_scheduled_time": "2026-06-23T08:58:43.135492Z",
   "dry_run": true,
-  "checked_at": "",
+  "checked_at": "2026-06-23T08:58:43.135Z",
   "summary": {
-    "due_count": 0,
-    "result_count": 0,
+    "due_count": 3,
+    "result_count": 3,
     "would_post_count": 0,
-    "blocked_count": 0,
-    "status_counts": {},
-    "platform_counts": {},
+    "blocked_count": 3,
+    "status_counts": {
+      "blocked": 2,
+      "failed": 1
+    },
+    "platform_counts": {
+      "Instagram": 1,
+      "TikTok": 2
+    },
     "would_post": [],
-    "blocked": []
+    "blocked": [
+      {
+        "post_id": "FP-AUTO-259",
+        "platform": "TikTok",
+        "status": "blocked",
+        "reason": "not_approved",
+        "post_type": "",
+        "attempts": 0,
+        "updated_at": "2026-06-23T08:58:43.779Z",
+        "source": "dry-run",
+        "error_summary": ""
+      },
+      {
+        "post_id": "FP-AUTO-258",
+        "platform": "Instagram",
+        "status": "failed",
+        "reason": "max_attempts_exceeded",
+        "post_type": "",
+        "attempts": 3,
+        "updated_at": "2026-06-23T08:58:43.784Z",
+        "source": "dry-run",
+        "error_summary": "Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page"
+      },
+      {
+        "post_id": "FP-AUTO-264",
+        "platform": "TikTok",
+        "status": "blocked",
+        "reason": "tiktok_credentials_missing",
+        "post_type": "",
+        "attempts": 0,
+        "updated_at": "2026-06-23T08:58:43.790Z",
+        "source": "dry-run",
+        "error_summary": ""
+      }
+    ]
   },
   "payload": {
-    "ok": false,
-    "due_count": 0,
-    "result_count": 0
+    "ok": true,
+    "due_count": 3,
+    "result_count": 3
   },
-  "action_needed": "Set LILYROO_ADMIN_PASSWORD or LILYROO_EXECUTOR_BEARER_TOKEN and rerun to capture scheduler dry-run state."
+  "action_needed": ""
 }

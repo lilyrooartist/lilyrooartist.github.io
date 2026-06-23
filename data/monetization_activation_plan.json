@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-23T08:49:09.317668Z",
+  "generated_at": "2026-06-23T08:58:45.199387Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -166,11 +166,11 @@
       }
     },
     {
-      "label": "Current operations next action: Fix Instagram executor",
+      "label": "Current operations next action: Fix TikTok executor",
       "phase": "Operations packet",
       "status": "needs_fix",
       "detail": "Platform executor needs repair before queued auto posts can publish.",
-      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+      "command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
       "after_review_command": "",
       "context": {
         "kind": "platform_fix",

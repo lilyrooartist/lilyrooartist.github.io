@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "updated_at": "2026-06-22T11:24:38.498693Z",
+  "updated_at": "2026-06-23T08:58:43.020021Z",
   "source": "lilyroo-social-executor-executions",
   "url": "https://www.lilyroo.com/api/social/executions",
   "http_status": 200,
@@ -9,6 +9,9 @@
   "auth_method": "bearer",
   "summary": {
     "execution_count": 8,
+    "current_execution_count": 7,
+    "superseded_execution_count": 0,
+    "superseded_executions": [],
     "posted_count": 1,
     "attention_count": 6,
     "approval_needed_count": 1,
@@ -45,13 +48,35 @@
         "status": "blocked",
         "reason": "not_approved",
         "attempts": 0,
-        "updated_at": "2026-06-22T11:15:24.179Z",
+        "updated_at": "2026-06-23T08:45:24.288Z",
         "source": "cron",
         "post_url": "",
         "error_summary": ""
       }
     ],
     "platform_fix_needed": [
+      {
+        "post_id": "FP-AUTO-264",
+        "platform": "TikTok",
+        "status": "blocked",
+        "reason": "tiktok_credentials_missing",
+        "attempts": 0,
+        "updated_at": "2026-06-23T08:45:24.801Z",
+        "source": "cron",
+        "post_url": "",
+        "error_summary": ""
+      },
+      {
+        "post_id": "FP-AUTO-258",
+        "platform": "Instagram",
+        "status": "failed",
+        "reason": "max_attempts_exceeded",
+        "attempts": 3,
+        "updated_at": "2026-06-23T08:45:24.544Z",
+        "source": "cron",
+        "post_url": "",
+        "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID."
+      },
       {
         "post_id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
         "platform": "Instagram",
@@ -73,17 +98,6 @@
         "source": "cron",
         "post_url": "",
         "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID."
-      },
-      {
-        "post_id": "FP-AUTO-264",
-        "platform": "TikTok",
-        "status": "blocked",
-        "reason": "tiktok_credentials_missing",
-        "attempts": 0,
-        "updated_at": "2026-06-22T06:15:24.662Z",
-        "source": "cron",
-        "post_url": "",
-        "error_summary": ""
       },
       {
         "post_id": "FP-AUTO-265",
@@ -95,6 +109,20 @@
         "source": "cron",
         "post_url": "",
         "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app."
+      }
+    ],
+    "manual_handoff_needed": [],
+    "latest_attention": [
+      {
+        "post_id": "FP-AUTO-264",
+        "platform": "TikTok",
+        "status": "blocked",
+        "reason": "tiktok_credentials_missing",
+        "attempts": 0,
+        "updated_at": "2026-06-23T08:45:24.801Z",
+        "source": "cron",
+        "post_url": "",
+        "error_summary": ""
       },
       {
         "post_id": "FP-AUTO-258",
@@ -102,21 +130,18 @@
         "status": "failed",
         "reason": "max_attempts_exceeded",
         "attempts": 3,
-        "updated_at": "2026-06-22T06:00:11.699Z",
+        "updated_at": "2026-06-23T08:45:24.544Z",
         "source": "cron",
         "post_url": "",
         "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID."
-      }
-    ],
-    "manual_handoff_needed": [],
-    "latest_attention": [
+      },
       {
         "post_id": "FP-AUTO-259",
         "platform": "TikTok",
         "status": "blocked",
         "reason": "not_approved",
         "attempts": 0,
-        "updated_at": "2026-06-22T11:15:24.179Z",
+        "updated_at": "2026-06-23T08:45:24.288Z",
         "source": "cron",
         "post_url": "",
         "error_summary": ""
@@ -142,29 +167,15 @@
         "source": "cron",
         "post_url": "",
         "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID."
-      },
-      {
-        "post_id": "FP-AUTO-264",
-        "platform": "TikTok",
-        "status": "blocked",
-        "reason": "tiktok_credentials_missing",
-        "attempts": 0,
-        "updated_at": "2026-06-22T06:15:24.662Z",
-        "source": "cron",
-        "post_url": "",
-        "error_summary": ""
       }
-    ],
-    "current_execution_count": 7,
-    "superseded_execution_count": 0,
-    "superseded_executions": []
+    ]
   },
   "payload": {
     "ok": true,
     "execution_count": 8
   },
   "action_needed": "",
-  "reconciled_at": "2026-06-23T08:49:06.883796Z",
+  "reconciled_at": "2026-06-23T08:58:43.081769Z",
   "reconciliation": {
     "source": "current scheduled_posts.csv",
     "superseded_execution_count": 0,

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-23T08:49:09.425422Z",
+  "generated_at": "2026-06-23T08:58:45.301737Z",
   "safe_mode": true,
   "source": {
     "promo_operations_packet": "data/promo_operations_packet.json",
@@ -29,7 +29,7 @@
       "status": "failed",
       "reason": "max_attempts_exceeded",
       "attempts": 3,
-      "updated_at": "2026-06-22T06:00:11.699Z",
+      "updated_at": "2026-06-23T08:45:24.544Z",
       "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
       "repair_action": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
       "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-258",
@@ -280,7 +280,7 @@
       "status": "blocked",
       "reason": "tiktok_credentials_missing",
       "attempts": 0,
-      "updated_at": "2026-06-22T06:15:24.662Z",
+      "updated_at": "2026-06-23T08:45:24.801Z",
       "error_summary": "",
       "repair_action": "Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok direct public posting approval is false, but upload-draft mode can proceed after credentials. Local secret source is also missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Complete TikTok OAuth setup locally, then push upload-mode secrets and refresh Admin.",
       "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
