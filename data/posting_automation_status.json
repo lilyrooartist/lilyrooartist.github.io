@@ -1,0 +1,119 @@
+{
+  "generated_at": "2026-06-23T06:57:16.655460Z",
+  "safe_mode": true,
+  "source": {
+    "workflow": ".github/workflows/promo-admin-refresh.yml",
+    "refresh_run": "data/promo_admin_refresh_run.json",
+    "workflow_status": "data/promo_refresh_workflow_status.json",
+    "scheduler": "data/social_scheduler_dry_run.json",
+    "executions": "data/social_execution_snapshot.json",
+    "readiness": "data/executor_readiness_snapshot.json",
+    "tiktok_preflight": "data/tiktok_setup_preflight.json",
+    "story_tracking": "data/story_throughput_tracking.json",
+    "platform_repair": "data/platform_repair_status.json"
+  },
+  "summary": {
+    "status": "blocked",
+    "ready_lane_count": 4,
+    "blocked_lane_count": 3,
+    "attention_lane_count": 0,
+    "lane_count": 7,
+    "workflow_crons": [
+      "17 */6 * * *"
+    ],
+    "scheduler_http_status": 401,
+    "scheduler_auth_method": "none",
+    "scheduler_refresh_step_ok": false,
+    "posted_count": 1,
+    "attention_count": 6,
+    "platform_fix_needed_count": 5,
+    "story_post_count": 6,
+    "story_queued_future_count": 6,
+    "platform_repair_blocked_count": 5,
+    "help_needed_count": 5,
+    "next_action": "Set LILYROO_ADMIN_PASSWORD or LILYROO_EXECUTOR_BEARER_TOKEN and rerun to capture scheduler dry-run state."
+  },
+  "lanes": [
+    {
+      "label": "Scheduled refresh workflow",
+      "status": "ready",
+      "detail": "17 */6 * * *; latest run completed / success",
+      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28002303668",
+      "next_action": ""
+    },
+    {
+      "label": "Safe admin refresh",
+      "status": "ready",
+      "detail": "39 refresh commands captured at 2026-06-23T06:55:55.023118Z",
+      "evidence": "data/promo_admin_refresh_run.json",
+      "next_action": ""
+    },
+    {
+      "label": "Scheduler dry-run authentication",
+      "status": "blocked",
+      "detail": "HTTP 401 using none auth; due=0 would_post=0",
+      "evidence": "data/social_scheduler_dry_run.json",
+      "next_action": "Set LILYROO_ADMIN_PASSWORD or LILYROO_EXECUTOR_BEARER_TOKEN and rerun to capture scheduler dry-run state."
+    },
+    {
+      "label": "Execution capture",
+      "status": "ready",
+      "detail": "posted=1 attention=6 platform_fix_needed=5",
+      "evidence": "data/social_execution_snapshot.json",
+      "next_action": ""
+    },
+    {
+      "label": "Platform readiness",
+      "status": "blocked",
+      "detail": "ready=X, Facebook, YouTube; blocked=Instagram, TikTok",
+      "evidence": "data/executor_readiness_snapshot.json",
+      "next_action": "Resolve the platform repair checklist before expecting full auto-post coverage."
+    },
+    {
+      "label": "TikTok API lane",
+      "status": "blocked",
+      "detail": "blocked; upload_ready=False; public_ready=False",
+      "evidence": "data/tiktok_setup_preflight.json",
+      "next_action": "Add TikTok OAuth credentials and rerun the upload-mode dry run."
+    },
+    {
+      "label": "Story throughput",
+      "status": "ready",
+      "detail": "6 tracked; 6 queued; 0 past due without URL",
+      "evidence": "data/story_throughput_tracking.json",
+      "next_action": "Export social executions after scheduled post times, then log public URLs and results."
+    }
+  ],
+  "help_needed": [
+    {
+      "label": "Scheduler and executor auth",
+      "need": "Confirm LILYROO_EXECUTOR_BEARER_TOKEN or LILYROO_ADMIN_PASSWORD is available locally and as a GitHub Actions secret.",
+      "unblocks": "Scheduler dry-run, executor readiness capture, and execution history capture.",
+      "verification_command": "python3 scripts/capture_scheduler_dry_run.py && python3 scripts/capture_social_executions.py"
+    },
+    {
+      "label": "Instagram business account ID",
+      "need": "Provide IG_BUSINESS_ACCOUNT_ID for the Instagram account connected to the Lily Roo Facebook Page.",
+      "unblocks": "Instagram executor rows after the secret is pushed and readiness is recaptured.",
+      "verification_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM"
+    },
+    {
+      "label": "TikTok OAuth app values",
+      "need": "Provide TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, and TIKTOK_REDIRECT_URI, then authorize the generated TikTok OAuth URL so TIKTOK_REFRESH_TOKEN can be created.",
+      "unblocks": "TikTok upload-draft automation for the first ready TikTok asset.",
+      "verification_command": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload"
+    },
+    {
+      "label": "TikTok public-posting approval",
+      "need": "Confirm whether TikTok has approved direct public posting for Lily Roo.",
+      "unblocks": "Direct public TikTok posting; without approval, upload-draft mode remains the safest automated path.",
+      "verification_command": "python3 scripts/set_tiktok_public_posting_approval.py --approved"
+    },
+    {
+      "label": "Facebook identity confirmation",
+      "need": "Confirm identity in Facebook/Meta for Page publishing if Meta still shows the Page publishing checkpoint.",
+      "unblocks": "The blocked Facebook executor row that hit the identity confirmation checkpoint.",
+      "verification_command": "python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run"
+    }
+  ]
+}
