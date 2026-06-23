@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-23T03:37:13.323514Z",
+  "generated_at": "2026-06-23T04:17:23.241828Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -13,148 +13,48 @@
     "experiment_result_clipboard": "data/experiment_result_clipboard.json"
   },
   "next_action": {
-    "label": "Preview reschedule for approved past-due posts",
-    "kind": "backlog_reschedule",
-    "priority": 0,
-    "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+00:00' --spacing-hours 24",
+    "label": "Fix Instagram executor",
+    "kind": "platform_fix",
+    "priority": 1,
+    "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
     "context": {
-      "approved_backlog_posts": 2,
-      "approved_upcoming_posts": 10,
-      "blocked_backlog_count": 2,
-      "clear_to_apply_count": 0,
-      "apply_allowed_without_override": false,
-      "apply_command": "",
-      "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-      "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
-      "partial_clear_apply_manifest": {
-        "status": "empty",
-        "clear_to_apply_count": 0,
-        "blocked_backlog_count": 2,
-        "clear_ids": [],
-        "blocked_ids_retained": [
-          "FP-AUTO-258",
-          "FP-AUTO-264"
-        ],
-        "preview_commands": [],
-        "apply_commands": [],
-        "recommended_next_command": "",
-        "recommended_apply_command": "",
-        "operator_checklist": [
-          "Preview each clear row before applying it.",
-          "Apply only rows listed in clear_ids; do not use --allow-blocked for this partial-clear path.",
-          "Refresh Admin after each apply command, then rebuild this preview before applying the next clear row.",
-          "Leave blocked_ids_retained unchanged until their platform or executor clearance steps are complete."
-        ],
-        "completion_evidence": [
-          "The applied clear row has a future scheduled_at value in data/scheduled_posts.csv.",
-          "data/backlog_reschedule_preview.json shows one fewer clear-to-apply past-due row after refresh.",
-          "Blocked rows remain listed in blocked_ids_retained until their clearance steps are complete."
-        ],
-        "guardrails": [
-          "Partial clear commands are scoped with --id and never include --allow-blocked.",
-          "This path reschedules only unblocked approved rows; it does not approve, publish, or repair executors."
-        ]
+      "post_id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+      "platform": "Instagram",
+      "reason": "max_attempts_exceeded",
+      "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
+      "repair_action": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
+      "repair_apply_command": "python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py",
+      "retry_reset_verification_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+      "retry_reset_preview_command": "python3 scripts/reset_social_execution_state.py FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+      "retry_reset_apply_command": "python3 scripts/reset_social_execution_state.py FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --apply",
+      "retry_reset_note": "Run the dry-run verification command first. Apply the retry reset only when the worker reports the row is executable.",
+      "readiness": {
+        "ready": false,
+        "api": "facebook-login",
+        "account_id_source": "FB_PAGE_ID",
+        "account_resolved": false,
+        "account_resolution_reason": "instagram_business_account_unresolved"
       },
-      "partial_clear_preview_command": "",
-      "partial_clear_apply_command": "",
-      "backlog_clearance_manifest": {
-        "status": "blocked_until_clearance_steps_complete",
-        "approved_backlog_count": 2,
-        "blocked_backlog_count": 2,
-        "clear_to_apply_count": 0,
-        "partial_clear_apply_available": false,
-        "partial_clear_apply_count": 0,
-        "blocked_ids": [
-          "FP-AUTO-258",
-          "FP-AUTO-264"
-        ],
-        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+00:00' --spacing-hours 24",
-        "safe_apply_command": "",
-        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
-        "apply_allowed_without_override": false,
-        "apply_gate": "blocked_until_clearance_steps_complete",
-        "clearance_steps": [
-          "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply.",
-          "Add local TikTok OAuth credentials, then push upload-mode worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
-          "Keep direct public posting blocked until TikTok public-posting approval is confirmed; upload mode can still create inbox drafts after credentials.",
-          "Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair."
-        ],
-        "blocked_items": [
-          {
-            "id": "FP-AUTO-258",
-            "platform": "Instagram",
-            "song": "I Learned It All in Fifteen Seconds",
-            "blocker_kind": "max_attempts_exceeded",
-            "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
-            "proposed_scheduled_at": "2026-06-24T10:00:00+00:00",
-            "clearance_steps": [
-              "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
-            ]
-          },
-          {
-            "id": "FP-AUTO-264",
-            "platform": "TikTok",
-            "song": "I Learned It All in Fifteen Seconds",
-            "blocker_kind": "tiktok_credentials_missing",
-            "blocker_reason": "tiktok_credentials_missing",
-            "proposed_scheduled_at": "2026-06-25T10:00:00+00:00",
-            "clearance_steps": [
-              "Add local TikTok OAuth credentials, then push upload-mode worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
-              "Keep direct public posting blocked until TikTok public-posting approval is confirmed; upload mode can still create inbox drafts after credentials.",
-              "Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair."
-            ]
-          }
-        ],
-        "operator_checklist": [
-          "Run the preview command and confirm it proposes only approved unpublished backlog rows.",
-          "If partial_clear_apply_available is true, use the scoped partial-clear commands for unblocked rows while blocked rows are repaired.",
-          "Complete every listed platform/executor clearance step before normal apply.",
-          "Refresh Admin and confirm the normal apply gate is clear.",
-          "Apply only when safe_apply_command is populated without --allow-blocked.",
-          "After apply, refresh Admin and confirm the backlog rows have future scheduled_at values."
-        ],
-        "completion_evidence": [
-          "data/backlog_reschedule_preview.json shows normal_apply_gate clear.",
-          "data/platform_repair_status.json shows the affected platform repair gate clear.",
-          "data/social_execution_snapshot.json no longer reports the row as blocked by executor/platform repair.",
-          "data/promo_engine_status.json and lilyroo.com/admin expose a safe apply command or no approved past-due backlog."
-        ],
-        "guardrails": [
-          "Normal apply stays hidden while blocked_ids are present.",
-          "Do not use the override command unless accepting the blocked executor risk deliberately.",
-          "A reschedule does not publish, approve, or repair platform credentials by itself."
-        ]
+      "account_resolved": false,
+      "account_resolution_reason": "instagram_business_account_unresolved",
+      "account_id_source": "FB_PAGE_ID",
+      "local_secret_source": "secrets/social_api.env",
+      "local_secret_presence": {
+        "IG_BUSINESS_ACCOUNT_ID": false
       },
-      "clearance_checklist": [
-        "Run the preview command and confirm it proposes only approved unpublished backlog rows.",
-        "If partial_clear_apply_available is true, use the scoped partial-clear commands for unblocked rows while blocked rows are repaired.",
-        "Complete every listed platform/executor clearance step before normal apply.",
-        "Refresh Admin and confirm the normal apply gate is clear.",
-        "Apply only when safe_apply_command is populated without --allow-blocked.",
-        "After apply, refresh Admin and confirm the backlog rows have future scheduled_at values."
+      "local_missing_secrets": [
+        "IG_BUSINESS_ACCOUNT_ID"
       ],
-      "completion_evidence": [
-        "data/backlog_reschedule_preview.json shows normal_apply_gate clear.",
-        "data/platform_repair_status.json shows the affected platform repair gate clear.",
-        "data/social_execution_snapshot.json no longer reports the row as blocked by executor/platform repair.",
-        "data/promo_engine_status.json and lilyroo.com/admin expose a safe apply command or no approved past-due backlog."
-      ],
-      "clearance_guardrails": [
-        "Normal apply stays hidden while blocked_ids are present.",
-        "Do not use the override command unless accepting the blocked executor risk deliberately.",
-        "A reschedule does not publish, approve, or repair platform credentials by itself."
-      ],
-      "note": "Preview first. Normal apply is hidden until known executor/platform blockers clear; override requires deliberate review."
+      "local_secret_ready": false
     },
-    "phase": "Reschedule approved backlog",
+    "phase": "Repair executor",
     "urgency": "high",
-    "urgency_reason": "Approved posts are past due; preview a new schedule before any apply step.",
-    "status": "waiting_for_user",
+    "urgency_reason": "Platform executor needs repair before queued auto posts can publish.",
+    "status": "needs_fix",
     "sort_key": [
       1,
-      0,
-      0
+      1,
+      2
     ]
   },
   "summary": {
@@ -179,12 +79,59 @@
       "Verify music sites": 7
     },
     "urgencies": {
-      "blocked": 1,
-      "high": 7,
+      "blocked": 2,
+      "high": 6,
       "low": 2,
       "medium": 7
     },
     "next_action": {
+      "label": "Fix Instagram executor",
+      "kind": "platform_fix",
+      "priority": 1,
+      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+      "context": {
+        "post_id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+        "platform": "Instagram",
+        "reason": "max_attempts_exceeded",
+        "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
+        "repair_action": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
+        "repair_apply_command": "python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py",
+        "retry_reset_verification_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+        "retry_reset_preview_command": "python3 scripts/reset_social_execution_state.py FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+        "retry_reset_apply_command": "python3 scripts/reset_social_execution_state.py FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --apply",
+        "retry_reset_note": "Run the dry-run verification command first. Apply the retry reset only when the worker reports the row is executable.",
+        "readiness": {
+          "ready": false,
+          "api": "facebook-login",
+          "account_id_source": "FB_PAGE_ID",
+          "account_resolved": false,
+          "account_resolution_reason": "instagram_business_account_unresolved"
+        },
+        "account_resolved": false,
+        "account_resolution_reason": "instagram_business_account_unresolved",
+        "account_id_source": "FB_PAGE_ID",
+        "local_secret_source": "secrets/social_api.env",
+        "local_secret_presence": {
+          "IG_BUSINESS_ACCOUNT_ID": false
+        },
+        "local_missing_secrets": [
+          "IG_BUSINESS_ACCOUNT_ID"
+        ],
+        "local_secret_ready": false
+      },
+      "phase": "Repair executor",
+      "urgency": "high",
+      "urgency_reason": "Platform executor needs repair before queued auto posts can publish.",
+      "status": "needs_fix",
+      "sort_key": [
+        1,
+        1,
+        2
+      ]
+    }
+  },
+  "actions": [
+    {
       "label": "Preview reschedule for approved past-due posts",
       "kind": "backlog_reschedule",
       "priority": 0,
@@ -320,17 +267,15 @@
         "note": "Preview first. Normal apply is hidden until known executor/platform blockers clear; override requires deliberate review."
       },
       "phase": "Reschedule approved backlog",
-      "urgency": "high",
-      "urgency_reason": "Approved posts are past due; preview a new schedule before any apply step.",
-      "status": "waiting_for_user",
+      "urgency": "blocked",
+      "urgency_reason": "All approved past-due posts are behind executor/platform repair gates; fix those before rescheduling.",
+      "status": "blocked",
       "sort_key": [
-        1,
+        0,
         0,
         0
       ]
-    }
-  },
-  "actions": [
+    },
     {
       "label": "Review TikTok draft for Twelve Dollars",
       "kind": "approval_review",
@@ -386,151 +331,6 @@
         0,
         40,
         7
-      ]
-    },
-    {
-      "label": "Preview reschedule for approved past-due posts",
-      "kind": "backlog_reschedule",
-      "priority": 0,
-      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+00:00' --spacing-hours 24",
-      "context": {
-        "approved_backlog_posts": 2,
-        "approved_upcoming_posts": 10,
-        "blocked_backlog_count": 2,
-        "clear_to_apply_count": 0,
-        "apply_allowed_without_override": false,
-        "apply_command": "",
-        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
-        "partial_clear_apply_manifest": {
-          "status": "empty",
-          "clear_to_apply_count": 0,
-          "blocked_backlog_count": 2,
-          "clear_ids": [],
-          "blocked_ids_retained": [
-            "FP-AUTO-258",
-            "FP-AUTO-264"
-          ],
-          "preview_commands": [],
-          "apply_commands": [],
-          "recommended_next_command": "",
-          "recommended_apply_command": "",
-          "operator_checklist": [
-            "Preview each clear row before applying it.",
-            "Apply only rows listed in clear_ids; do not use --allow-blocked for this partial-clear path.",
-            "Refresh Admin after each apply command, then rebuild this preview before applying the next clear row.",
-            "Leave blocked_ids_retained unchanged until their platform or executor clearance steps are complete."
-          ],
-          "completion_evidence": [
-            "The applied clear row has a future scheduled_at value in data/scheduled_posts.csv.",
-            "data/backlog_reschedule_preview.json shows one fewer clear-to-apply past-due row after refresh.",
-            "Blocked rows remain listed in blocked_ids_retained until their clearance steps are complete."
-          ],
-          "guardrails": [
-            "Partial clear commands are scoped with --id and never include --allow-blocked.",
-            "This path reschedules only unblocked approved rows; it does not approve, publish, or repair executors."
-          ]
-        },
-        "partial_clear_preview_command": "",
-        "partial_clear_apply_command": "",
-        "backlog_clearance_manifest": {
-          "status": "blocked_until_clearance_steps_complete",
-          "approved_backlog_count": 2,
-          "blocked_backlog_count": 2,
-          "clear_to_apply_count": 0,
-          "partial_clear_apply_available": false,
-          "partial_clear_apply_count": 0,
-          "blocked_ids": [
-            "FP-AUTO-258",
-            "FP-AUTO-264"
-          ],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+00:00' --spacing-hours 24",
-          "safe_apply_command": "",
-          "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-          "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
-          "apply_allowed_without_override": false,
-          "apply_gate": "blocked_until_clearance_steps_complete",
-          "clearance_steps": [
-            "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply.",
-            "Add local TikTok OAuth credentials, then push upload-mode worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
-            "Keep direct public posting blocked until TikTok public-posting approval is confirmed; upload mode can still create inbox drafts after credentials.",
-            "Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair."
-          ],
-          "blocked_items": [
-            {
-              "id": "FP-AUTO-258",
-              "platform": "Instagram",
-              "song": "I Learned It All in Fifteen Seconds",
-              "blocker_kind": "max_attempts_exceeded",
-              "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
-              "proposed_scheduled_at": "2026-06-24T10:00:00+00:00",
-              "clearance_steps": [
-                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
-              ]
-            },
-            {
-              "id": "FP-AUTO-264",
-              "platform": "TikTok",
-              "song": "I Learned It All in Fifteen Seconds",
-              "blocker_kind": "tiktok_credentials_missing",
-              "blocker_reason": "tiktok_credentials_missing",
-              "proposed_scheduled_at": "2026-06-25T10:00:00+00:00",
-              "clearance_steps": [
-                "Add local TikTok OAuth credentials, then push upload-mode worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
-                "Keep direct public posting blocked until TikTok public-posting approval is confirmed; upload mode can still create inbox drafts after credentials.",
-                "Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair."
-              ]
-            }
-          ],
-          "operator_checklist": [
-            "Run the preview command and confirm it proposes only approved unpublished backlog rows.",
-            "If partial_clear_apply_available is true, use the scoped partial-clear commands for unblocked rows while blocked rows are repaired.",
-            "Complete every listed platform/executor clearance step before normal apply.",
-            "Refresh Admin and confirm the normal apply gate is clear.",
-            "Apply only when safe_apply_command is populated without --allow-blocked.",
-            "After apply, refresh Admin and confirm the backlog rows have future scheduled_at values."
-          ],
-          "completion_evidence": [
-            "data/backlog_reschedule_preview.json shows normal_apply_gate clear.",
-            "data/platform_repair_status.json shows the affected platform repair gate clear.",
-            "data/social_execution_snapshot.json no longer reports the row as blocked by executor/platform repair.",
-            "data/promo_engine_status.json and lilyroo.com/admin expose a safe apply command or no approved past-due backlog."
-          ],
-          "guardrails": [
-            "Normal apply stays hidden while blocked_ids are present.",
-            "Do not use the override command unless accepting the blocked executor risk deliberately.",
-            "A reschedule does not publish, approve, or repair platform credentials by itself."
-          ]
-        },
-        "clearance_checklist": [
-          "Run the preview command and confirm it proposes only approved unpublished backlog rows.",
-          "If partial_clear_apply_available is true, use the scoped partial-clear commands for unblocked rows while blocked rows are repaired.",
-          "Complete every listed platform/executor clearance step before normal apply.",
-          "Refresh Admin and confirm the normal apply gate is clear.",
-          "Apply only when safe_apply_command is populated without --allow-blocked.",
-          "After apply, refresh Admin and confirm the backlog rows have future scheduled_at values."
-        ],
-        "completion_evidence": [
-          "data/backlog_reschedule_preview.json shows normal_apply_gate clear.",
-          "data/platform_repair_status.json shows the affected platform repair gate clear.",
-          "data/social_execution_snapshot.json no longer reports the row as blocked by executor/platform repair.",
-          "data/promo_engine_status.json and lilyroo.com/admin expose a safe apply command or no approved past-due backlog."
-        ],
-        "clearance_guardrails": [
-          "Normal apply stays hidden while blocked_ids are present.",
-          "Do not use the override command unless accepting the blocked executor risk deliberately.",
-          "A reschedule does not publish, approve, or repair platform credentials by itself."
-        ],
-        "note": "Preview first. Normal apply is hidden until known executor/platform blockers clear; override requires deliberate review."
-      },
-      "phase": "Reschedule approved backlog",
-      "urgency": "high",
-      "urgency_reason": "Approved posts are past due; preview a new schedule before any apply step.",
-      "status": "waiting_for_user",
-      "sort_key": [
-        1,
-        0,
-        0
       ]
     },
     {
@@ -835,7 +635,7 @@
         "release": "Twelve Dollars",
         "service": "Spotify",
         "checked_at": "2026-06-23T02:42:53.381641+00:00",
-        "checked_age_hours": 0.9,
+        "checked_age_hours": 1.6,
         "recheck_interval_hours": 24,
         "next_recheck_at": "2026-06-24T02:42:53.381641+00:00",
         "recheck_due": false,
@@ -846,7 +646,7 @@
           "updated_at": "2026-06-23T02:42:53.381641Z",
           "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
           "checked_at": "2026-06-23T02:42:53.381641+00:00",
-          "checked_age_hours": 0.9,
+          "checked_age_hours": 1.6,
           "recheck_interval_hours": 24,
           "next_recheck_at": "2026-06-24T02:42:53.381641+00:00",
           "recheck_due": false,
@@ -873,7 +673,7 @@
         "release": "Twelve Dollars",
         "service": "Apple Music",
         "checked_at": "2026-06-23T02:42:55.338278+00:00",
-        "checked_age_hours": 0.9,
+        "checked_age_hours": 1.6,
         "recheck_interval_hours": 24,
         "next_recheck_at": "2026-06-24T02:42:55.338278+00:00",
         "recheck_due": false,
@@ -884,7 +684,7 @@
           "updated_at": "2026-06-23T02:42:55.338278Z",
           "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
           "checked_at": "2026-06-23T02:42:55.338278+00:00",
-          "checked_age_hours": 0.9,
+          "checked_age_hours": 1.6,
           "recheck_interval_hours": 24,
           "next_recheck_at": "2026-06-24T02:42:55.338278+00:00",
           "recheck_due": false,
@@ -911,7 +711,7 @@
         "release": "Twelve Dollars",
         "service": "HyperFollow",
         "checked_at": "2026-06-23T02:42:55.528500+00:00",
-        "checked_age_hours": 0.9,
+        "checked_age_hours": 1.6,
         "recheck_interval_hours": 24,
         "next_recheck_at": "2026-06-24T02:42:55.528500+00:00",
         "recheck_due": false,
@@ -922,7 +722,7 @@
           "updated_at": "2026-06-23T02:42:55.528500Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
           "checked_at": "2026-06-23T02:42:55.528500+00:00",
-          "checked_age_hours": 0.9,
+          "checked_age_hours": 1.6,
           "recheck_interval_hours": 24,
           "next_recheck_at": "2026-06-24T02:42:55.528500+00:00",
           "recheck_due": false,
@@ -949,7 +749,7 @@
         "release": "Analog Myth",
         "service": "Spotify",
         "checked_at": "2026-06-23T02:42:55.583563+00:00",
-        "checked_age_hours": 0.9,
+        "checked_age_hours": 1.6,
         "recheck_interval_hours": 24,
         "next_recheck_at": "2026-06-24T02:42:55.583563+00:00",
         "recheck_due": false,
@@ -960,7 +760,7 @@
           "updated_at": "2026-06-23T02:42:55.583563Z",
           "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
           "checked_at": "2026-06-23T02:42:55.583563+00:00",
-          "checked_age_hours": 0.9,
+          "checked_age_hours": 1.6,
           "recheck_interval_hours": 24,
           "next_recheck_at": "2026-06-24T02:42:55.583563+00:00",
           "recheck_due": false,
@@ -987,7 +787,7 @@
         "release": "Analog Myth",
         "service": "Apple Music",
         "checked_at": "2026-06-23T02:42:56.420240+00:00",
-        "checked_age_hours": 0.9,
+        "checked_age_hours": 1.6,
         "recheck_interval_hours": 24,
         "next_recheck_at": "2026-06-24T02:42:56.420240+00:00",
         "recheck_due": false,
@@ -998,7 +798,7 @@
           "updated_at": "2026-06-23T02:42:56.420240Z",
           "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
           "checked_at": "2026-06-23T02:42:56.420240+00:00",
-          "checked_age_hours": 0.9,
+          "checked_age_hours": 1.6,
           "recheck_interval_hours": 24,
           "next_recheck_at": "2026-06-24T02:42:56.420240+00:00",
           "recheck_due": false,
@@ -1025,7 +825,7 @@
         "release": "Analog Myth",
         "service": "YouTube Music",
         "checked_at": "2026-06-23T02:42:56.487347+00:00",
-        "checked_age_hours": 0.9,
+        "checked_age_hours": 1.6,
         "recheck_interval_hours": 24,
         "next_recheck_at": "2026-06-24T02:42:56.487347+00:00",
         "recheck_due": false,
@@ -1036,7 +836,7 @@
           "updated_at": "2026-06-23T02:42:56.487347Z",
           "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
           "checked_at": "2026-06-23T02:42:56.487347+00:00",
-          "checked_age_hours": 0.9,
+          "checked_age_hours": 1.6,
           "recheck_interval_hours": 24,
           "next_recheck_at": "2026-06-24T02:42:56.487347+00:00",
           "recheck_due": false,
@@ -1063,7 +863,7 @@
         "release": "Analog Myth",
         "service": "HyperFollow",
         "checked_at": "2026-06-23T02:42:57.735789+00:00",
-        "checked_age_hours": 0.9,
+        "checked_age_hours": 1.6,
         "recheck_interval_hours": 24,
         "next_recheck_at": "2026-06-24T02:42:57.735789+00:00",
         "recheck_due": false,
@@ -1074,7 +874,7 @@
           "updated_at": "2026-06-23T02:42:57.735789Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
           "checked_at": "2026-06-23T02:42:57.735789+00:00",
-          "checked_age_hours": 0.9,
+          "checked_age_hours": 1.6,
           "recheck_interval_hours": 24,
           "next_recheck_at": "2026-06-24T02:42:57.735789+00:00",
           "recheck_due": false,

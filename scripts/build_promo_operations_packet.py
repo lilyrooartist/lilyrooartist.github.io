@@ -99,6 +99,10 @@ def urgency_for(action: dict, now: datetime) -> tuple[str, str]:
     kind = action.get("kind")
     context = action.get("context") or {}
     if kind == "backlog_reschedule":
+        blocked_count = int(context.get("blocked_backlog_count") or 0)
+        clear_count = int(context.get("clear_to_apply_count") or 0)
+        if blocked_count and clear_count == 0:
+            return "blocked", "All approved past-due posts are behind executor/platform repair gates; fix those before rescheduling."
         return "high", "Approved posts are past due; preview a new schedule before any apply step."
     if kind == "scheduled_approval_batch":
         return "high", "Scheduled executor records are blocked until reviewed approval is applied."

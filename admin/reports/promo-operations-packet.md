@@ -1,6 +1,6 @@
 # Promo Operations Packet - Lily Roo
 
-Generated: 2026-06-23T03:37:13.323514Z
+Generated: 2026-06-23T04:17:23.241828Z
 
 ## Summary
 - Actions: **17**
@@ -12,7 +12,7 @@ Generated: 2026-06-23T03:37:13.323514Z
 - Store checks: **7**
 - Manual metric updates: **2**
 - Safe apply commands ready: **0**
-- Urgency: **blocked: 1, high: 7, low: 2, medium: 7**
+- Urgency: **blocked: 2, high: 6, low: 2, medium: 7**
 
 ## Phase Counts
 - Collect experiment results: **1**
@@ -24,6 +24,12 @@ Generated: 2026-06-23T03:37:13.323514Z
 
 ## Top Actions
 
+### Reschedule approved backlog
+- **[blocked] Preview reschedule for approved past-due posts**
+  - Why: All approved past-due posts are behind executor/platform repair gates; fix those before rescheduling.
+  - Detail: Preview first. Normal apply is hidden until known executor/platform blockers clear; override requires deliberate review.
+  - Command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+00:00' --spacing-hours 24`
+
 ### Review blocked drafts
 - **[blocked] Review TikTok draft for Twelve Dollars**
   - Why: Executor setup is not ready for this draft.
@@ -32,12 +38,6 @@ Generated: 2026-06-23T03:37:13.323514Z
   - Public posting approved: `False`
   - Command: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --dry-run`
   - Approve after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --refresh-admin`
-
-### Reschedule approved backlog
-- **[high] Preview reschedule for approved past-due posts**
-  - Why: Approved posts are past due; preview a new schedule before any apply step.
-  - Detail: Preview first. Normal apply is hidden until known executor/platform blockers clear; override requires deliberate review.
-  - Command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+00:00' --spacing-hours 24`
 
 ### Repair executor
 - **[high] Fix Instagram executor**

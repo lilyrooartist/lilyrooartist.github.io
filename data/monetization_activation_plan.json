@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-23T03:37:14.547335Z",
+  "generated_at": "2026-06-23T04:18:28.798540Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -166,14 +166,14 @@
       }
     },
     {
-      "label": "Current operations next action: Preview reschedule for approved past-due posts",
+      "label": "Current operations next action: Fix Instagram executor",
       "phase": "Operations packet",
-      "status": "waiting_for_user",
-      "detail": "Approved posts are past due; preview a new schedule before any apply step.",
-      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+00:00' --spacing-hours 24",
+      "status": "needs_fix",
+      "detail": "Platform executor needs repair before queued auto posts can publish.",
+      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
       "after_review_command": "",
       "context": {
-        "kind": "backlog_reschedule",
+        "kind": "platform_fix",
         "urgency": "high"
       }
     }
