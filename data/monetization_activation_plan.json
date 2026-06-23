@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-23T04:31:13.925091Z",
+  "generated_at": "2026-06-23T05:56:59.786793Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -15,8 +15,8 @@
     "runway_status": "behind_365_day_pace",
     "subscribers_per_week": 0.5,
     "required_subscribers_per_week_365": 19.06,
-    "ready_subscriber_approval_count": 6,
-    "auto_subscriber_approval_count": 6,
+    "ready_subscriber_approval_count": 0,
+    "auto_subscriber_approval_count": 0,
     "manual_subscriber_approval_count": 0,
     "manual_subscriber_approval_ids": [],
     "manual_subscriber_blocked_ids": [
@@ -28,99 +28,9 @@
     "subscriber_swap_count": 0,
     "ready_after_approval_swap_count": 0,
     "platform_fix_count": 5,
-    "action_count": 14
+    "action_count": 8
   },
   "actions": [
-    {
-      "label": "Review subscriber CTA for Facebook",
-      "phase": "Tighten subscriber CTA",
-      "status": "waiting_for_review",
-      "detail": "Selected copy already has a hard subscriber CTA. Recommended copy: Time broke, so Lily Roo made an album out of the pieces. Subscribe on YouTube and help Lily Roo push this signal toward 1,000.",
-      "command": "python3 scripts/approve_promo_queue_plan.py --id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA --dry-run",
-      "after_review_command": "python3 scripts/approve_promo_queue_plan.py --id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA --refresh-admin",
-      "context": {
-        "post_id": "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA",
-        "release": "Analog Myth",
-        "selected_strength": "hard_subscribe",
-        "recommended_strength": "hard_subscribe",
-        "readiness_state": "ready_after_approval"
-      }
-    },
-    {
-      "label": "Review subscriber CTA for Facebook",
-      "phase": "Tighten subscriber CTA",
-      "status": "waiting_for_review",
-      "detail": "Selected copy already has a hard subscriber CTA. Recommended copy: I Learned It All in Fifteen Seconds is live in the Lily Roo archive. Subscribe on YouTube and help Lily Roo push this signal toward 1,000.",
-      "command": "python3 scripts/approve_promo_queue_plan.py --id FP-STORY-I-LEARNED-IT-ALL-IN-FIFTEEN-SECONDS-FACEBOOK-ARCHIVE-CTA --dry-run",
-      "after_review_command": "python3 scripts/approve_promo_queue_plan.py --id FP-STORY-I-LEARNED-IT-ALL-IN-FIFTEEN-SECONDS-FACEBOOK-ARCHIVE-CTA --refresh-admin",
-      "context": {
-        "post_id": "FP-STORY-I-LEARNED-IT-ALL-IN-FIFTEEN-SECONDS-FACEBOOK-ARCHIVE-CTA",
-        "release": "I Learned It All in Fifteen Seconds",
-        "selected_strength": "hard_subscribe",
-        "recommended_strength": "hard_subscribe",
-        "readiness_state": "ready_after_approval"
-      }
-    },
-    {
-      "label": "Review subscriber CTA for Facebook",
-      "phase": "Tighten subscriber CTA",
-      "status": "waiting_for_review",
-      "detail": "Selected copy already has a hard subscriber CTA. Recommended copy: A small amount of money, a large amount of stage light. Subscribe on YouTube and help Lily Roo push this signal toward 1,000.",
-      "command": "python3 scripts/approve_promo_queue_plan.py --id FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA --dry-run",
-      "after_review_command": "python3 scripts/approve_promo_queue_plan.py --id FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA --refresh-admin",
-      "context": {
-        "post_id": "FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA",
-        "release": "Twelve Dollars",
-        "selected_strength": "hard_subscribe",
-        "recommended_strength": "hard_subscribe",
-        "readiness_state": "ready_after_approval"
-      }
-    },
-    {
-      "label": "Review subscriber CTA for X",
-      "phase": "Tighten subscriber CTA",
-      "status": "waiting_for_review",
-      "detail": "Selected copy already has a hard subscriber CTA. Recommended copy: Time broke, so Lily Roo made an album out of the pieces. Subscribe on YouTube and help Lily Roo push this signal toward 1,000.",
-      "command": "python3 scripts/approve_promo_queue_plan.py --id FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA --dry-run",
-      "after_review_command": "python3 scripts/approve_promo_queue_plan.py --id FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA --refresh-admin",
-      "context": {
-        "post_id": "FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA",
-        "release": "Analog Myth",
-        "selected_strength": "hard_subscribe",
-        "recommended_strength": "hard_subscribe",
-        "readiness_state": "ready_after_approval"
-      }
-    },
-    {
-      "label": "Review subscriber CTA for X",
-      "phase": "Tighten subscriber CTA",
-      "status": "waiting_for_review",
-      "detail": "Selected copy already has a hard subscriber CTA. Recommended copy: I Learned It All in Fifteen Seconds is live in the Lily Roo archive. Subscribe on YouTube and help Lily Roo push this signal toward 1,000.",
-      "command": "python3 scripts/approve_promo_queue_plan.py --id FP-STORY-I-LEARNED-IT-ALL-IN-FIFTEEN-SECONDS-X-ARCHIVE-CTA --dry-run",
-      "after_review_command": "python3 scripts/approve_promo_queue_plan.py --id FP-STORY-I-LEARNED-IT-ALL-IN-FIFTEEN-SECONDS-X-ARCHIVE-CTA --refresh-admin",
-      "context": {
-        "post_id": "FP-STORY-I-LEARNED-IT-ALL-IN-FIFTEEN-SECONDS-X-ARCHIVE-CTA",
-        "release": "I Learned It All in Fifteen Seconds",
-        "selected_strength": "hard_subscribe",
-        "recommended_strength": "hard_subscribe",
-        "readiness_state": "ready_after_approval"
-      }
-    },
-    {
-      "label": "Review subscriber CTA for X",
-      "phase": "Tighten subscriber CTA",
-      "status": "waiting_for_review",
-      "detail": "Selected copy already has a hard subscriber CTA. Recommended copy: A small amount of money, a large amount of stage light. Subscribe on YouTube and help Lily Roo push this signal toward 1,000.",
-      "command": "python3 scripts/approve_promo_queue_plan.py --id FP-STORY-TWELVE-DOLLARS-X-ARCHIVE-CTA --dry-run",
-      "after_review_command": "python3 scripts/approve_promo_queue_plan.py --id FP-STORY-TWELVE-DOLLARS-X-ARCHIVE-CTA --refresh-admin",
-      "context": {
-        "post_id": "FP-STORY-TWELVE-DOLLARS-X-ARCHIVE-CTA",
-        "release": "Twelve Dollars",
-        "selected_strength": "hard_subscribe",
-        "recommended_strength": "hard_subscribe",
-        "readiness_state": "ready_after_approval"
-      }
-    },
     {
       "label": "Apply approved plan rows after review",
       "phase": "Move approved subscriber posts into queue",
@@ -138,17 +48,17 @@
       "phase": "Recover stalled approved backlog",
       "status": "preview_first",
       "detail": "Preview a new schedule for approved past-due posts. Normal apply is hidden until known executor/platform blockers clear.",
-      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+00:00' --spacing-hours 24",
+      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+08:00' --spacing-hours 24",
       "after_review_command": "",
       "context": {
         "approved_backlog_posts": 2,
         "raw_approved_backlog_posts": 2,
         "manual_handoff_backlog_posts": 0,
-        "approved_upcoming_posts": 10,
+        "approved_upcoming_posts": 16,
         "blocked_backlog_count": 2,
         "apply_allowed_without_override": false,
-        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin"
+        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
+        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+08:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin"
       }
     },
     {

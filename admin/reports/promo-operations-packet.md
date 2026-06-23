@@ -1,10 +1,10 @@
 # Promo Operations Packet - Lily Roo
 
-Generated: 2026-06-23T04:31:13.168797Z
+Generated: 2026-06-23T05:56:59.631515Z
 
 ## Summary
-- Actions: **23**
-- User review: **7**
+- Actions: **17**
+- User review: **1**
 - Platform fixes: **5**
 - Scheduled approval batches: **0**
 - Manual distribution actions: **0**
@@ -12,7 +12,7 @@ Generated: 2026-06-23T04:31:13.168797Z
 - Store checks: **7**
 - Manual metric updates: **2**
 - Safe apply commands ready: **0**
-- Urgency: **blocked: 2, high: 6, low: 2, medium: 13**
+- Urgency: **blocked: 2, high: 6, low: 2, medium: 7**
 
 ## Phase Counts
 - Collect experiment results: **1**
@@ -20,7 +20,6 @@ Generated: 2026-06-23T04:31:13.168797Z
 - Repair executor: **5**
 - Reschedule approved backlog: **1**
 - Review blocked drafts: **1**
-- Review draft posts: **6**
 - Verify music sites: **7**
 
 ## Top Actions
@@ -29,7 +28,7 @@ Generated: 2026-06-23T04:31:13.168797Z
 - **[blocked] Preview reschedule for approved past-due posts**
   - Why: All approved past-due posts are behind executor/platform repair gates; fix those before rescheduling.
   - Detail: Preview first. Normal apply is hidden until known executor/platform blockers clear; override requires deliberate review.
-  - Command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+00:00' --spacing-hours 24`
+  - Command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+08:00' --spacing-hours 24`
 
 ### Review blocked drafts
 - **[blocked] Review TikTok draft for Twelve Dollars**
@@ -93,27 +92,27 @@ Generated: 2026-06-23T04:31:13.168797Z
   - Wide entry CSV: `data/experiment_result_entry_wide_template.csv`
   - Preview result import: `python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run`
 
-### Review draft posts
-- **[medium] Review X draft for Twelve Dollars**
-  - Why: Auto draft is ready once reviewed and approved.
-  - Detail: Ready after approval.
-  - Command: `python3 scripts/approve_promo_queue_plan.py --id FP-STORY-TWELVE-DOLLARS-X-ARCHIVE-CTA --dry-run`
-  - Approve after review: `python3 scripts/approve_promo_queue_plan.py --id FP-STORY-TWELVE-DOLLARS-X-ARCHIVE-CTA --refresh-admin`
-- **[medium] Review Facebook draft for Twelve Dollars**
-  - Why: Auto draft is ready once reviewed and approved.
-  - Detail: Ready after approval.
-  - Command: `python3 scripts/approve_promo_queue_plan.py --id FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA --dry-run`
-  - Approve after review: `python3 scripts/approve_promo_queue_plan.py --id FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA --refresh-admin`
-- **[medium] Review X draft for Analog Myth**
-  - Why: Auto draft is ready once reviewed and approved.
-  - Detail: Ready after approval.
-  - Command: `python3 scripts/approve_promo_queue_plan.py --id FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA --dry-run`
-  - Approve after review: `python3 scripts/approve_promo_queue_plan.py --id FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA --refresh-admin`
-- **[medium] Review Facebook draft for Analog Myth**
-  - Why: Auto draft is ready once reviewed and approved.
-  - Detail: Ready after approval.
-  - Command: `python3 scripts/approve_promo_queue_plan.py --id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA --dry-run`
-  - Approve after review: `python3 scripts/approve_promo_queue_plan.py --id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA --refresh-admin`
+### Verify music sites
+- **[medium] Re-check Twelve Dollars on Spotify**
+  - Why: Public store links should be checked until DistroKid exposes them.
+  - Detail: Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-06-24T04:31:07.002849+00:00. Status: waiting_for_release_propagation.
+  - Latest snapshot checked: `2026-06-23T04:31:07.002849+00:00`
+  - Command: `python3 scripts/search_spotify_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/spotify_release_snapshot.json'`
+- **[medium] Re-check Twelve Dollars on Apple Music**
+  - Why: Public store links should be checked until DistroKid exposes them.
+  - Detail: Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-06-24T04:31:08.983351+00:00. Status: waiting_for_release_propagation.
+  - Latest snapshot checked: `2026-06-23T04:31:08.983351+00:00`
+  - Command: `python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/apple_music_release_snapshot.json'`
+- **[medium] Re-check Twelve Dollars on HyperFollow**
+  - Why: Public store links should be checked until DistroKid exposes them.
+  - Detail: Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; next recommended re-check after 2026-06-24T04:31:09.246892+00:00. Status: waiting_for_release_propagation.
+  - Latest snapshot checked: `2026-06-23T04:31:09.246892+00:00`
+  - Command: `python3 scripts/capture_hyperfollow_store_links.py --url 'https://distrokid.com/hyperfollow/lilyroo/twelve-dollars' --out 'data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json'`
+- **[medium] Re-check Analog Myth on Spotify**
+  - Why: Public store links should be checked as the July 1 release approaches.
+  - Detail: Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-06-24T04:31:09.309546+00:00. Status: waiting_for_release_propagation.
+  - Latest snapshot checked: `2026-06-23T04:31:09.309546+00:00`
+  - Command: `python3 scripts/search_spotify_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/spotify_release_snapshot.json'`
 
 ## Guardrails
 - This packet does not publish, approve, apply, or post anything.

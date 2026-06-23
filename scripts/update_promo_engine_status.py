@@ -647,12 +647,17 @@ def candidate_row_id(row: dict) -> str:
     return str(row.get("post_id_or_url") or "").strip()
 
 
+def is_throughput_buffer_row(row: dict) -> bool:
+    row_id = candidate_row_id(row).upper()
+    return row.get("format_candidate_role") == "throughput_buffer" or row_id.startswith("FP-STORY-")
+
+
 def top_format_candidates(published_rows: list[dict], scheduled_rows: list[dict], promo_plan: dict) -> list[dict]:
     candidates: dict[str, dict] = {}
-    active_rows = list(scheduled_rows) + [
+    active_rows = [row for row in scheduled_rows if not is_throughput_buffer_row(row)] + [
         row
         for row in promo_plan.get("posts") or []
-        if row.get("format_candidate_role") != "throughput_buffer"
+        if not is_throughput_buffer_row(row)
     ]
     active_rows_by_id = {
         candidate_row_id(row): row
@@ -1077,12 +1082,14 @@ def active_format_experiments(scheduled_rows: list[dict], promo_plan: dict, now:
         experiment["tracking_fields"] = sorted(set(experiment["tracking_fields"]) | set(tracking_fields_for_platform(platform)))
 
     for row in scheduled_rows:
+        if is_throughput_buffer_row(row):
+            continue
         scheduled_at = parse_datetime(row.get("scheduled_at"))
         approved = str(row.get("approved") or "").lower() == "yes"
         if approved or (scheduled_at and scheduled_at >= now - timedelta(days=7)):
             add_row(row, "scheduled")
     for row in promo_plan.get("posts") or []:
-        if row.get("format_candidate_role") == "throughput_buffer":
+        if is_throughput_buffer_row(row):
             continue
         add_row(row, "planned")
 

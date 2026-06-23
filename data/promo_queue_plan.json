@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-23T00:31:12.324302-04:00",
+  "generated_at": "2026-06-23T01:56:59.170369-04:00",
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
     "release_status": "data/distrokid_release_status.json"
@@ -11,87 +11,49 @@
   "approval_commands": {
     "all_review": "python3 scripts/approve_promo_queue_plan.py --all --refresh-admin",
     "by_release": {
-      "Analog Myth": "python3 scripts/approve_promo_queue_plan.py --release \"Analog Myth\" --refresh-admin",
-      "I Learned It All in Fifteen Seconds": "python3 scripts/approve_promo_queue_plan.py --release \"I Learned It All in Fifteen Seconds\" --refresh-admin",
       "Twelve Dollars": "python3 scripts/approve_promo_queue_plan.py --release \"Twelve Dollars\" --refresh-admin"
     },
     "by_platform": {
-      "Facebook": "python3 scripts/approve_promo_queue_plan.py --platform \"Facebook\" --refresh-admin",
-      "TikTok": "python3 scripts/approve_promo_queue_plan.py --platform \"TikTok\" --refresh-admin",
-      "X": "python3 scripts/approve_promo_queue_plan.py --platform \"X\" --refresh-admin"
+      "TikTok": "python3 scripts/approve_promo_queue_plan.py --platform \"TikTok\" --refresh-admin"
     }
   },
   "apply_commands": {
     "all_approved": "python3 scripts/apply_promo_queue_plan.py --apply --refresh-admin",
     "by_release": {
-      "Analog Myth": "python3 scripts/apply_promo_queue_plan.py --apply --release \"Analog Myth\" --refresh-admin",
-      "I Learned It All in Fifteen Seconds": "python3 scripts/apply_promo_queue_plan.py --apply --release \"I Learned It All in Fifteen Seconds\" --refresh-admin",
       "Twelve Dollars": "python3 scripts/apply_promo_queue_plan.py --apply --release \"Twelve Dollars\" --refresh-admin"
     },
     "by_platform": {
-      "Facebook": "python3 scripts/apply_promo_queue_plan.py --apply --platform \"Facebook\" --refresh-admin",
-      "TikTok": "python3 scripts/apply_promo_queue_plan.py --apply --platform \"TikTok\" --refresh-admin",
-      "X": "python3 scripts/apply_promo_queue_plan.py --apply --platform \"X\" --refresh-admin"
+      "TikTok": "python3 scripts/apply_promo_queue_plan.py --apply --platform \"TikTok\" --refresh-admin"
     }
   },
   "summary": {
-    "draft_posts": 7,
+    "draft_posts": 1,
     "approved_posts": 0,
-    "review_posts": 7,
-    "auto_posts": 7,
+    "review_posts": 1,
+    "auto_posts": 1,
     "manual_posts": 0,
-    "selected_hard_cta_posts": 7,
+    "selected_hard_cta_posts": 1,
     "releases": {
-      "Analog Myth": {
-        "draft_posts": 2,
-        "approved_posts": 0,
-        "review_posts": 2,
-        "platforms": [
-          "Facebook",
-          "X"
-        ]
-      },
-      "I Learned It All in Fifteen Seconds": {
-        "draft_posts": 2,
-        "approved_posts": 0,
-        "review_posts": 2,
-        "platforms": [
-          "Facebook",
-          "X"
-        ]
-      },
       "Twelve Dollars": {
-        "draft_posts": 3,
+        "draft_posts": 1,
         "approved_posts": 0,
-        "review_posts": 3,
+        "review_posts": 1,
         "platforms": [
-          "Facebook",
-          "TikTok",
-          "X"
+          "TikTok"
         ]
       }
     },
     "platforms": {
-      "Facebook": {
-        "draft_posts": 3,
-        "approved_posts": 0,
-        "review_posts": 3
-      },
       "TikTok": {
         "draft_posts": 1,
         "approved_posts": 0,
         "review_posts": 1
-      },
-      "X": {
-        "draft_posts": 3,
-        "approved_posts": 0,
-        "review_posts": 3
       }
     }
   },
   "apply_preview": {
     "ready_to_apply_posts": 0,
-    "review_posts": 7,
+    "review_posts": 1,
     "scheduled_duplicate_posts": 0,
     "ready_ids": [],
     "scheduled_duplicate_ids": []
@@ -101,8 +63,7 @@
     "updated_at": "2026-06-22T11:24:35.777000Z",
     "ok": true,
     "counts": {
-      "blocked": 1,
-      "ready_after_approval": 6
+      "blocked": 1
     },
     "rows": [
       {
@@ -112,54 +73,6 @@
         "approved": "no",
         "state": "blocked",
         "message": "Executor credentials or platform setup are not ready."
-      },
-      {
-        "id": "FP-STORY-TWELVE-DOLLARS-X-ARCHIVE-CTA",
-        "platform": "X",
-        "execution_mode": "auto",
-        "approved": "no",
-        "state": "ready_after_approval",
-        "message": "Ready after approval."
-      },
-      {
-        "id": "FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA",
-        "platform": "Facebook",
-        "execution_mode": "auto",
-        "approved": "no",
-        "state": "ready_after_approval",
-        "message": "Ready after approval."
-      },
-      {
-        "id": "FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA",
-        "platform": "X",
-        "execution_mode": "auto",
-        "approved": "no",
-        "state": "ready_after_approval",
-        "message": "Ready after approval."
-      },
-      {
-        "id": "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA",
-        "platform": "Facebook",
-        "execution_mode": "auto",
-        "approved": "no",
-        "state": "ready_after_approval",
-        "message": "Ready after approval."
-      },
-      {
-        "id": "FP-STORY-I-LEARNED-IT-ALL-IN-FIFTEEN-SECONDS-X-ARCHIVE-CTA",
-        "platform": "X",
-        "execution_mode": "auto",
-        "approved": "no",
-        "state": "ready_after_approval",
-        "message": "Ready after approval."
-      },
-      {
-        "id": "FP-STORY-I-LEARNED-IT-ALL-IN-FIFTEEN-SECONDS-FACEBOOK-ARCHIVE-CTA",
-        "platform": "Facebook",
-        "execution_mode": "auto",
-        "approved": "no",
-        "state": "ready_after_approval",
-        "message": "Ready after approval."
       }
     ]
   },
@@ -189,168 +102,6 @@
       "desired_privacy": "PUBLIC_TO_EVERYONE",
       "reason": "Promo health flagged missing TikTok coverage for Twelve Dollars.",
       "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --refresh-admin"
-    },
-    {
-      "id": "FP-STORY-TWELVE-DOLLARS-X-ARCHIVE-CTA",
-      "scheduled_at": "2026-06-26T10:15:00-04:00",
-      "platform": "X",
-      "song": "Twelve Dollars",
-      "imagery": "",
-      "imagery_url": "",
-      "clip_url": "",
-      "text": "A small amount of money, a large amount of stage light. Subscribe on YouTube and help Lily Roo push this signal toward 1,000.",
-      "drafts": [
-        "A small amount of money, a large amount of stage light. Subscribe on YouTube and help Lily Roo push this signal toward 1,000.",
-        "Twelve Dollars is the part where the stage gets too bright and the joke gets honest. Full album playlist is live. Subscribe on YouTube and help the signal climb toward 1,000.",
-        "Twelve Dollars is part of the Lily Roo archive now. If this found you, send one more play/view into the signal."
-      ],
-      "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-      "selected_cta_strength": "hard_subscribe",
-      "selected_copy_strategy": "growth_first_subscriber_cta",
-      "format_candidate_role": "throughput_buffer",
-      "x_media_key": "",
-      "media_key": "",
-      "approved": "no",
-      "execution_mode": "auto",
-      "post_type": "text",
-      "desired_privacy": "",
-      "reason": "Create a ready-platform text/story variant from existing Lily Roo release copy while blocked media channels are repaired.",
-      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-STORY-TWELVE-DOLLARS-X-ARCHIVE-CTA --refresh-admin"
-    },
-    {
-      "id": "FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA",
-      "scheduled_at": "2026-06-27T11:20:00-04:00",
-      "platform": "Facebook",
-      "song": "Twelve Dollars",
-      "imagery": "",
-      "imagery_url": "",
-      "clip_url": "",
-      "text": "A small amount of money, a large amount of stage light. Subscribe on YouTube and help Lily Roo push this signal toward 1,000.",
-      "drafts": [
-        "A small amount of money, a large amount of stage light. Subscribe on YouTube and help Lily Roo push this signal toward 1,000.",
-        "Twelve Dollars is live in the Lily Roo archive. The remastered videos are up, the playlist is public, and the stage finally has the right kind of trouble on it. Subscribe on YouTube and help the signal climb toward 1,000.",
-        "Twelve Dollars is part of the Lily Roo archive now. If this found you, send one more play/view into the signal."
-      ],
-      "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-      "selected_cta_strength": "hard_subscribe",
-      "selected_copy_strategy": "growth_first_subscriber_cta",
-      "format_candidate_role": "throughput_buffer",
-      "x_media_key": "",
-      "media_key": "",
-      "approved": "no",
-      "execution_mode": "auto",
-      "post_type": "text",
-      "desired_privacy": "",
-      "reason": "Create a ready-platform text/story variant from existing Lily Roo release copy while blocked media channels are repaired.",
-      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA --refresh-admin"
-    },
-    {
-      "id": "FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA",
-      "scheduled_at": "2026-06-28T10:15:00-04:00",
-      "platform": "X",
-      "song": "Analog Myth",
-      "imagery": "",
-      "imagery_url": "",
-      "clip_url": "",
-      "text": "Time broke, so Lily Roo made an album out of the pieces. Subscribe on YouTube and help Lily Roo push this signal toward 1,000.",
-      "drafts": [
-        "Time broke, so Lily Roo made an album out of the pieces. Subscribe on YouTube and help Lily Roo push this signal toward 1,000.",
-        "Analog Myth is the clock lying politely while the songs keep receipts. Full remastered playlist is live. Subscribe on YouTube and help the signal climb toward 1,000.",
-        "Analog Myth is part of the Lily Roo archive now. If this found you, send one more play/view into the signal."
-      ],
-      "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
-      "selected_cta_strength": "hard_subscribe",
-      "selected_copy_strategy": "growth_first_subscriber_cta",
-      "format_candidate_role": "throughput_buffer",
-      "x_media_key": "",
-      "media_key": "",
-      "approved": "no",
-      "execution_mode": "auto",
-      "post_type": "text",
-      "desired_privacy": "",
-      "reason": "Create a ready-platform text/story variant from existing Lily Roo release copy while blocked media channels are repaired.",
-      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA --refresh-admin"
-    },
-    {
-      "id": "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA",
-      "scheduled_at": "2026-06-29T11:20:00-04:00",
-      "platform": "Facebook",
-      "song": "Analog Myth",
-      "imagery": "",
-      "imagery_url": "",
-      "clip_url": "",
-      "text": "Time broke, so Lily Roo made an album out of the pieces. Subscribe on YouTube and help Lily Roo push this signal toward 1,000.",
-      "drafts": [
-        "Time broke, so Lily Roo made an album out of the pieces. Subscribe on YouTube and help Lily Roo push this signal toward 1,000.",
-        "Analog Myth is live on YouTube now, with remastered videos and the album order finally lined up the way the transmission wants it. Subscribe on YouTube and help the signal climb toward 1,000.",
-        "Analog Myth is part of the Lily Roo archive now. If this found you, send one more play/view into the signal."
-      ],
-      "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
-      "selected_cta_strength": "hard_subscribe",
-      "selected_copy_strategy": "growth_first_subscriber_cta",
-      "format_candidate_role": "throughput_buffer",
-      "x_media_key": "",
-      "media_key": "",
-      "approved": "no",
-      "execution_mode": "auto",
-      "post_type": "text",
-      "desired_privacy": "",
-      "reason": "Create a ready-platform text/story variant from existing Lily Roo release copy while blocked media channels are repaired.",
-      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA --refresh-admin"
-    },
-    {
-      "id": "FP-STORY-I-LEARNED-IT-ALL-IN-FIFTEEN-SECONDS-X-ARCHIVE-CTA",
-      "scheduled_at": "2026-06-30T10:15:00-04:00",
-      "platform": "X",
-      "song": "I Learned It All in Fifteen Seconds",
-      "imagery": "",
-      "imagery_url": "",
-      "clip_url": "",
-      "text": "I Learned It All in Fifteen Seconds is live in the Lily Roo archive. Subscribe on YouTube and help Lily Roo push this signal toward 1,000.",
-      "drafts": [
-        "I Learned It All in Fifteen Seconds is live in the Lily Roo archive. Subscribe on YouTube and help Lily Roo push this signal toward 1,000.",
-        "I Learned It All in Fifteen Seconds is live in the Lily Roo archive. Subscribe on YouTube and help the signal climb toward 1,000.",
-        "I Learned It All in Fifteen Seconds is part of the Lily Roo archive now. If this found you, send one more play/view into the signal."
-      ],
-      "reply_text": "Stream: https://open.spotify.com/album/4Al5eYOqGFMKEES5fDWIfI",
-      "selected_cta_strength": "hard_subscribe",
-      "selected_copy_strategy": "growth_first_subscriber_cta",
-      "format_candidate_role": "throughput_buffer",
-      "x_media_key": "",
-      "media_key": "",
-      "approved": "no",
-      "execution_mode": "auto",
-      "post_type": "text",
-      "desired_privacy": "",
-      "reason": "Create a ready-platform text/story variant from existing Lily Roo release copy while blocked media channels are repaired.",
-      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-STORY-I-LEARNED-IT-ALL-IN-FIFTEEN-SECONDS-X-ARCHIVE-CTA --refresh-admin"
-    },
-    {
-      "id": "FP-STORY-I-LEARNED-IT-ALL-IN-FIFTEEN-SECONDS-FACEBOOK-ARCHIVE-CTA",
-      "scheduled_at": "2026-07-01T11:20:00-04:00",
-      "platform": "Facebook",
-      "song": "I Learned It All in Fifteen Seconds",
-      "imagery": "",
-      "imagery_url": "",
-      "clip_url": "",
-      "text": "I Learned It All in Fifteen Seconds is live in the Lily Roo archive. Subscribe on YouTube and help Lily Roo push this signal toward 1,000.",
-      "drafts": [
-        "I Learned It All in Fifteen Seconds is live in the Lily Roo archive. Subscribe on YouTube and help Lily Roo push this signal toward 1,000.",
-        "I Learned It All in Fifteen Seconds is live in the Lily Roo archive. Subscribe on YouTube and help the signal climb toward 1,000.",
-        "I Learned It All in Fifteen Seconds is part of the Lily Roo archive now. If this found you, send one more play/view into the signal."
-      ],
-      "reply_text": "Stream: https://open.spotify.com/album/4Al5eYOqGFMKEES5fDWIfI",
-      "selected_cta_strength": "hard_subscribe",
-      "selected_copy_strategy": "growth_first_subscriber_cta",
-      "format_candidate_role": "throughput_buffer",
-      "x_media_key": "",
-      "media_key": "",
-      "approved": "no",
-      "execution_mode": "auto",
-      "post_type": "text",
-      "desired_privacy": "",
-      "reason": "Create a ready-platform text/story variant from existing Lily Roo release copy while blocked media channels are repaired.",
-      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-STORY-I-LEARNED-IT-ALL-IN-FIFTEEN-SECONDS-FACEBOOK-ARCHIVE-CTA --refresh-admin"
     }
   ]
 }

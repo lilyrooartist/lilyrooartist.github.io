@@ -1,6 +1,6 @@
 # Human Handoff Resolution Preview - Lily Roo
 
-Generated: 2026-06-23T04:31:14.490619Z
+Generated: 2026-06-23T05:56:59.573762Z
 
 ## Summary
 - Worksheet rows: **8**
@@ -40,8 +40,8 @@ Generated: 2026-06-23T04:31:14.490619Z
 - **backlog-reschedule** (`preview_ok_with_warning`)
   - Phase: `Backlog recovery`; input needed: `clearance_confirmation`
   - Safety: `safe_preview` (reschedule_preview_command)
-  - Command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+00:00' --spacing-hours 24`
-  - Output: Rows selected: 2 | - FP-AUTO-258 Instagram I Learned It All in Fifteen Seconds: 2026-06-23T10:00:00+08:00 -> 2026-06-24T10:00:00+00:00 |   WARNING: known blocker: Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID. | - FP-AUTO-264 TikTok I Learned It All in Fifteen Seconds: 2026-06-23T10:00:00+08:00 -> 2026-06-25T10:00:00+00:00 |   WARNING: known blocker: tiktok_credentials_missing | Dry run only. Re-run with --apply to write the schedule.
+  - Command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+08:00' --spacing-hours 24`
+  - Output: Rows selected: 2 | - FP-AUTO-258 Instagram I Learned It All in Fifteen Seconds: 2026-06-23T10:00:00+08:00 -> 2026-06-24T10:00:00+08:00 |   WARNING: known blocker: Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID. | - FP-AUTO-264 TikTok I Learned It All in Fifteen Seconds: 2026-06-23T10:00:00+08:00 -> 2026-06-25T10:00:00+08:00 |   WARNING: known blocker: tiktok_credentials_missing | Dry run only. Re-run with --apply to write the schedule.
   - Guardrail: Normal apply stays hidden until known executor/platform blockers clear.
 - **manual-metrics-priority-2** (`input_missing`)
   - Phase: `Manual metrics`; input needed: `private_metric_values`

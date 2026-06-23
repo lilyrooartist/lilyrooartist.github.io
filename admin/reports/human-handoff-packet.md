@@ -1,6 +1,6 @@
 # Human Handoff Packet - Lily Roo
 
-Generated: 2026-06-23T04:31:14.275862Z
+Generated: 2026-06-23T05:56:59.426353Z
 
 ## Summary
 - Open handoff tasks: **8**
@@ -54,8 +54,8 @@ Generated: 2026-06-23T04:31:14.275862Z
   - Guardrail: Import only collected numeric values; leave unknown cells blank.
 - **Reschedule approved backlog after blockers clear** (`blocked`)
   - Owner: `external_platform`; tasks: **1**; blockers resolved: **2**
-  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+00:00' --spacing-hours 24`
-  - Sequence preview: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+00:00' --spacing-hours 24`
+  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+08:00' --spacing-hours 24`
+  - Sequence preview: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+08:00' --spacing-hours 24`
   - Sequence verify: `python3 scripts/refresh_promo_admin.py`
   - Completion evidence: data/backlog_reschedule_preview.json should show normal_apply_gate clear before any non-override apply command is exposed.
   - Next after apply: Refresh admin and confirm approved past-due posts have future scheduled_at values before relying on the scheduler.
@@ -90,7 +90,7 @@ Generated: 2026-06-23T04:31:14.275862Z
 - **Preview approved backlog reschedule** (`backlog-reschedule`)
   - Phase: `Backlog recovery`; owner: `external_platform`; status: `blocked`; urgency: `high`
   - Detail: Known executor/platform blockers must clear before normal apply.
-  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+00:00' --spacing-hours 24`
+  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+08:00' --spacing-hours 24`
   - Guardrail: Normal apply stays hidden until known executor/platform blockers clear.
 - **Fill priority 2 metrics: Recent discovery and traffic** (`manual-metrics-priority-2`)
   - Phase: `Manual metrics`; owner: `tod`; status: `needs_values`; urgency: `low`
