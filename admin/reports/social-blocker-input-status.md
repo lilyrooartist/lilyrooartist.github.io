@@ -1,6 +1,6 @@
 # Social Blocker Input Status - Lily Roo
 
-Generated: 2026-06-23T09:00:05.817161Z
+Generated: 2026-06-23T09:03:55.734468Z
 
 ## Summary
 - Status: **missing_local_input**
@@ -10,7 +10,7 @@ Generated: 2026-06-23T09:00:05.817161Z
 - GitHub Actions missing secrets: **0**
 - Local secret env exists: **True**
 - Template: `data/social_blocker_secret_template.env`
-- Next action: Add IG_BUSINESS_ACCOUNT_ID to /Users/tod.famous/Documents/New project/secrets/social_api.env.
+- Next action: Add META_LONG_LIVED_TOKEN, FB_PAGE_ID to /Users/tod.famous/Documents/New project/secrets/social_api.env, then run python3 scripts/resolve_instagram_business_account.py.
 
 ## Groups
 - **Scheduler and executor auth** - `ready`
@@ -25,8 +25,10 @@ Generated: 2026-06-23T09:00:05.817161Z
 - **Instagram business account** - `missing_local_input`
   - Required all: IG_BUSINESS_ACCOUNT_ID
   - Unblocks: Instagram executor rows after the Worker secret is pushed and readiness is recaptured.
+  - Resolve preview: `python3 scripts/resolve_instagram_business_account.py`
+  - Resolve apply: `python3 scripts/resolve_instagram_business_account.py --apply`
   - Verify: `python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM`
-  - Next: Add IG_BUSINESS_ACCOUNT_ID to /Users/tod.famous/Documents/New project/secrets/social_api.env.
+  - Next: Add META_LONG_LIVED_TOKEN, FB_PAGE_ID to /Users/tod.famous/Documents/New project/secrets/social_api.env, then run python3 scripts/resolve_instagram_business_account.py.
 - **TikTok OAuth app values** - `missing_local_input`
   - Required all: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REDIRECT_URI
   - Unblocks: TikTok OAuth authorization URL generation and authorization-code exchange.

@@ -12,6 +12,7 @@ OUT = REPO_ROOT / "data" / "social_blocker_input_status.json"
 REPORT = REPO_ROOT / "admin" / "reports" / "social-blocker-input-status.md"
 TEMPLATE = REPO_ROOT / "data" / "social_blocker_secret_template.env"
 GITHUB_SECRET_PRESENCE = REPO_ROOT / "data" / "github_actions_secret_presence.json"
+INSTAGRAM_RESOLUTION = REPO_ROOT / "data" / "instagram_business_account_resolution.json"
 ADMIN_INDEX = REPO_ROOT / "admin" / "index.html"
 
 
@@ -33,6 +34,8 @@ GROUPS = [
         "required_any": [],
         "required_all": ["IG_BUSINESS_ACCOUNT_ID"],
         "github_actions_secrets": [],
+        "credential_resolution_preview": "python3 scripts/resolve_instagram_business_account.py",
+        "credential_resolution_apply": "python3 scripts/resolve_instagram_business_account.py --apply",
         "unblocks": "Instagram executor rows after the Worker secret is pushed and readiness is recaptured.",
         "verify": "python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
     },
@@ -141,7 +144,7 @@ def github_secret_status(secret_names: list[str], github_presence: dict) -> dict
     }
 
 
-def build_group(group: dict, env: dict[str, str], github_presence: dict) -> dict:
+def build_group(group: dict, env: dict[str, str], github_presence: dict, instagram_resolution: dict) -> dict:
     required_all = group.get("required_all") or []
     required_any = group.get("required_any") or []
     github_secrets = group.get("github_actions_secrets") or []
@@ -159,6 +162,11 @@ def build_group(group: dict, env: dict[str, str], github_presence: dict) -> dict
         next_action = f"Add {', '.join(missing_all)} to {SOCIAL_ENV}."
     else:
         next_action = f"Add one of {', '.join(required_any)} to {SOCIAL_ENV}."
+    resolution_summary = instagram_resolution.get("summary") or {}
+    if group["id"] == "instagram_business" and resolution_summary.get("status") == "missing_local_input":
+        missing_resolution = resolution_summary.get("missing_local_input") or []
+        if missing_resolution:
+            next_action = f"Add {', '.join(missing_resolution)} to {SOCIAL_ENV}, then run {group.get('credential_resolution_preview')}."
     return {
         "id": group["id"],
         "label": group["label"],
@@ -169,6 +177,9 @@ def build_group(group: dict, env: dict[str, str], github_presence: dict) -> dict
         "github_actions_secret_status": github_status,
         "github_actions_push_preview": group.get("github_actions_push_preview") or "",
         "github_actions_push_apply": group.get("github_actions_push_apply") or "",
+        "credential_resolution_preview": group.get("credential_resolution_preview") or "",
+        "credential_resolution_apply": group.get("credential_resolution_apply") or "",
+        "credential_resolution_status": resolution_summary if group["id"] == "instagram_business" else {},
         "presence": {name: present(env, name) for name in sorted(set(required_all + required_any))},
         "missing_all": missing_all,
         "any_present": any_present,
@@ -183,7 +194,8 @@ def build_packet() -> dict:
     write_template()
     env = load_env(SOCIAL_ENV)
     github_presence = read_json(GITHUB_SECRET_PRESENCE)
-    groups = [build_group(group, env, github_presence) for group in GROUPS]
+    instagram_resolution = read_json(INSTAGRAM_RESOLUTION)
+    groups = [build_group(group, env, github_presence, instagram_resolution) for group in GROUPS]
     missing = [group for group in groups if group["status"] == "missing_local_input"]
     external = [group for group in groups if group["status"] == "external_action_needed"]
     ready = [group for group in groups if group["status"] == "ready"]
@@ -204,6 +216,7 @@ def build_packet() -> dict:
             "local_secret_source": str(SOCIAL_ENV.relative_to(REPO_ROOT.parent)),
             "template": str(TEMPLATE.relative_to(REPO_ROOT)),
             "github_actions_secret_presence": str(GITHUB_SECRET_PRESENCE.relative_to(REPO_ROOT)),
+            "instagram_business_account_resolution": str(INSTAGRAM_RESOLUTION.relative_to(REPO_ROOT)),
         },
         "summary": {
             "status": "missing_local_input" if missing else "external_action_needed" if external else "ready",
@@ -254,6 +267,10 @@ def build_markdown(packet: dict) -> str:
             if group.get("github_actions_push_apply"):
                 lines.append(f"  - Apply GitHub secret push: `{group['github_actions_push_apply']}`")
         lines.append(f"  - Unblocks: {group['unblocks']}")
+        if group.get("credential_resolution_preview"):
+            lines.append(f"  - Resolve preview: `{group['credential_resolution_preview']}`")
+        if group.get("credential_resolution_apply"):
+            lines.append(f"  - Resolve apply: `{group['credential_resolution_apply']}`")
         lines.append(f"  - Verify: `{group['verification_command']}`")
         lines.append(f"  - Next: {group['next_action']}")
     lines.extend([

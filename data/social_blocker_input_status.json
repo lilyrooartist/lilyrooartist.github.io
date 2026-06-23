@@ -1,11 +1,12 @@
 {
-  "generated_at": "2026-06-23T09:00:05.817161Z",
+  "generated_at": "2026-06-23T09:03:55.734468Z",
   "safe_mode": true,
   "redaction": "Only key presence is reported; secret values are never written to generated files.",
   "source": {
     "local_secret_source": "secrets/social_api.env",
     "template": "data/social_blocker_secret_template.env",
-    "github_actions_secret_presence": "data/github_actions_secret_presence.json"
+    "github_actions_secret_presence": "data/github_actions_secret_presence.json",
+    "instagram_business_account_resolution": "data/instagram_business_account_resolution.json"
   },
   "summary": {
     "status": "missing_local_input",
@@ -17,7 +18,7 @@
     "github_actions_secret_presence_status": "ready",
     "local_secret_env_exists": true,
     "template_path": "data/social_blocker_secret_template.env",
-    "next_action": "Add IG_BUSINESS_ACCOUNT_ID to /Users/tod.famous/Documents/New project/secrets/social_api.env."
+    "next_action": "Add META_LONG_LIVED_TOKEN, FB_PAGE_ID to /Users/tod.famous/Documents/New project/secrets/social_api.env, then run python3 scripts/resolve_instagram_business_account.py."
   },
   "groups": [
     {
@@ -46,6 +47,9 @@
       },
       "github_actions_push_preview": "python3 scripts/push_github_actions_secrets.py",
       "github_actions_push_apply": "python3 scripts/push_github_actions_secrets.py --apply",
+      "credential_resolution_preview": "",
+      "credential_resolution_apply": "",
+      "credential_resolution_status": {},
       "presence": {
         "ADMIN_PASSWORD": false,
         "EXECUTOR_BEARER_TOKEN": true,
@@ -75,6 +79,19 @@
       },
       "github_actions_push_preview": "",
       "github_actions_push_apply": "",
+      "credential_resolution_preview": "python3 scripts/resolve_instagram_business_account.py",
+      "credential_resolution_apply": "python3 scripts/resolve_instagram_business_account.py --apply",
+      "credential_resolution_status": {
+        "status": "missing_local_input",
+        "missing_local_input": [
+          "META_LONG_LIVED_TOKEN",
+          "FB_PAGE_ID"
+        ],
+        "existing_ig_business_account_id_present": false,
+        "resolved": false,
+        "applied": false,
+        "next_action": "Add META_LONG_LIVED_TOKEN, FB_PAGE_ID to /Users/tod.famous/Documents/New project/secrets/social_api.env."
+      },
       "presence": {
         "IG_BUSINESS_ACCOUNT_ID": false
       },
@@ -85,7 +102,7 @@
       "external_only": false,
       "unblocks": "Instagram executor rows after the Worker secret is pushed and readiness is recaptured.",
       "verification_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
-      "next_action": "Add IG_BUSINESS_ACCOUNT_ID to /Users/tod.famous/Documents/New project/secrets/social_api.env."
+      "next_action": "Add META_LONG_LIVED_TOKEN, FB_PAGE_ID to /Users/tod.famous/Documents/New project/secrets/social_api.env, then run python3 scripts/resolve_instagram_business_account.py."
     },
     {
       "id": "tiktok_oauth_base",
@@ -105,6 +122,9 @@
       },
       "github_actions_push_preview": "",
       "github_actions_push_apply": "",
+      "credential_resolution_preview": "",
+      "credential_resolution_apply": "",
+      "credential_resolution_status": {},
       "presence": {
         "TIKTOK_CLIENT_KEY": false,
         "TIKTOK_CLIENT_SECRET": false,
@@ -139,6 +159,9 @@
       },
       "github_actions_push_preview": "",
       "github_actions_push_apply": "",
+      "credential_resolution_preview": "",
+      "credential_resolution_apply": "",
+      "credential_resolution_status": {},
       "presence": {
         "TIKTOK_CLIENT_KEY": false,
         "TIKTOK_CLIENT_SECRET": false,
@@ -169,6 +192,9 @@
       },
       "github_actions_push_preview": "",
       "github_actions_push_apply": "",
+      "credential_resolution_preview": "",
+      "credential_resolution_apply": "",
+      "credential_resolution_status": {},
       "presence": {},
       "missing_all": [],
       "any_present": true,

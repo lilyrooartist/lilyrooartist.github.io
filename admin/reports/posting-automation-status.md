@@ -1,6 +1,6 @@
 # Posting Automation Status - Lily Roo
 
-Generated: 2026-06-23T09:00:05.848516Z
+Generated: 2026-06-23T09:03:55.766333Z
 
 ## Summary
 - Status: **blocked**
@@ -36,7 +36,7 @@ Generated: 2026-06-23T09:00:05.848516Z
 - **Blocker input readiness** - `blocked`
   - Detail: 1 ready; 3 missing local input; 1 external action needed
   - Evidence: data/social_blocker_input_status.json
-  - Next: Add IG_BUSINESS_ACCOUNT_ID to /Users/tod.famous/Documents/New project/secrets/social_api.env.
+  - Next: Add META_LONG_LIVED_TOKEN, FB_PAGE_ID to /Users/tod.famous/Documents/New project/secrets/social_api.env, then run python3 scripts/resolve_instagram_business_account.py.
 - **Story throughput** - `ready`
   - Detail: 6 tracked; 6 queued; 0 past due without URL
   - Evidence: data/story_throughput_tracking.json

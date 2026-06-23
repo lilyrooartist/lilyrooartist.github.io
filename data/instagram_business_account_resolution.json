@@ -1,0 +1,22 @@
+{
+  "generated_at": "2026-06-23T09:03:25.217170Z",
+  "safe_mode": true,
+  "apply": false,
+  "redaction": "Meta token values are never printed. The resolved Instagram account id is safe to store as a local secret.",
+  "source": {
+    "local_secret_source": "secrets/social_api.env",
+    "graph_version": "v25.0",
+    "output": "data/instagram_business_account_resolution.json"
+  },
+  "summary": {
+    "status": "missing_local_input",
+    "missing_local_input": [
+      "META_LONG_LIVED_TOKEN",
+      "FB_PAGE_ID"
+    ],
+    "existing_ig_business_account_id_present": false,
+    "resolved": false,
+    "applied": false,
+    "next_action": "Add META_LONG_LIVED_TOKEN, FB_PAGE_ID to /Users/tod.famous/Documents/New project/secrets/social_api.env."
+  }
+}

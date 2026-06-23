@@ -159,6 +159,7 @@ GENERATED_REFRESH_PATHS = {
     "data/human_handoff_packet.json",
     "data/human_handoff_resolution_worksheet.csv",
     "data/human_handoff_resolution_preview.json",
+    "data/instagram_business_account_resolution.json",
     "data/live_social_metrics.json",
     "data/manual_distribution_packet.json",
     "data/manual_distribution_url_template.csv",

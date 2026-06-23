@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-23T09:00:05.848516Z",
+  "generated_at": "2026-06-23T09:03:55.766333Z",
   "safe_mode": true,
   "source": {
     "workflow": ".github/workflows/promo-admin-refresh.yml",
@@ -85,7 +85,7 @@
       "status": "blocked",
       "detail": "1 ready; 3 missing local input; 1 external action needed",
       "evidence": "data/social_blocker_input_status.json",
-      "next_action": "Add IG_BUSINESS_ACCOUNT_ID to /Users/tod.famous/Documents/New project/secrets/social_api.env."
+      "next_action": "Add META_LONG_LIVED_TOKEN, FB_PAGE_ID to /Users/tod.famous/Documents/New project/secrets/social_api.env, then run python3 scripts/resolve_instagram_business_account.py."
     },
     {
       "label": "Story throughput",
