@@ -100,6 +100,10 @@ def winner_plan_id(title: str, platform: str, format_name: str) -> str:
     return f"FP-WIN-{slug(title).upper()}-{slug(platform).upper()}-{slug(format_name).upper()}"
 
 
+def story_plan_id(title: str, platform: str) -> str:
+    return f"FP-STORY-{slug(title).upper()}-{slug(platform).upper()}-ARCHIVE-CTA"
+
+
 def approval_command(post_id: str) -> str:
     return f"python3 scripts/approve_promo_queue_plan.py --id {post_id} --refresh-admin"
 
@@ -362,6 +366,63 @@ def winner_followup_posts(*, promo: dict, releases: dict, readiness: dict, sched
     return posts
 
 
+def story_text_followup_posts(*, releases: dict, readiness: dict, scheduled_rows: list[dict], existing_posts: list[dict], start_index: int, prior_by_id: dict, prior_by_slot: dict) -> list[dict]:
+    ready = ready_platforms(readiness)
+    platforms = [platform for platform in ("X", "Facebook") if platform in ready]
+    if not platforms:
+        return []
+    scheduled_keys = scheduled_release_platform_type_keys(scheduled_rows)
+    planned_keys = scheduled_release_platform_type_keys(existing_posts)
+    posts = []
+    post_index = start_index
+    release_titles = [title for title in ("Twelve Dollars", "Analog Myth", "I Learned It All in Fifteen Seconds") if title in releases]
+
+    for title in release_titles:
+        release = releases.get(title, {"title": title})
+        copy = COPY_MAP.get(title, {})
+        hook = copy.get("hook") or f"{title} is live in the Lily Roo archive."
+        for platform in platforms:
+            key = (title.lower(), platform.lower(), "text")
+            if key in scheduled_keys or key in planned_keys:
+                continue
+            draft_id = story_plan_id(title, platform)
+            platform_copy = winner_story_copy(title, platform)
+            selected_text = f"{hook} Subscribe on YouTube and help Lily Roo push this signal toward 1,000."
+            drafts = [
+                selected_text,
+                f"{platform_copy} Subscribe on YouTube and help the signal climb toward 1,000.",
+                f"{title} is part of the Lily Roo archive now. If this found you, send one more play/view into the signal.",
+            ]
+            post = {
+                "id": draft_id,
+                "scheduled_at": first_future_slot(post_index, platform),
+                "platform": platform,
+                "song": title,
+                "imagery": "",
+                "imagery_url": "",
+                "clip_url": "",
+                "text": selected_text,
+                "drafts": drafts,
+                "reply_text": cta_text(release),
+                "selected_cta_strength": "hard_subscribe",
+                "selected_copy_strategy": "growth_first_subscriber_cta",
+                "format_candidate_role": "throughput_buffer",
+                "x_media_key": "",
+                "media_key": "",
+                "approved": "no",
+                "execution_mode": execution_mode(platform),
+                "post_type": "text",
+                "desired_privacy": "",
+                "reason": "Create a ready-platform text/story variant from existing Lily Roo release copy while blocked media channels are repaired.",
+                "approval_command": approval_command(draft_id),
+            }
+            post["approved"] = preserved_approval(prior_by_id, prior_by_slot, post)
+            posts.append(post)
+            planned_keys.add(key)
+            post_index += 1
+    return posts
+
+
 
 def plan_summary(posts):
     counts = Counter("approved" if post.get("approved") == "yes" else "review" for post in posts)
@@ -561,6 +622,15 @@ def build_plan():
         scheduled_rows=scheduled_rows,
         existing_posts=posts,
         start_index=post_index,
+        prior_by_id=prior_by_id,
+        prior_by_slot=prior_by_slot,
+    ))
+    posts.extend(story_text_followup_posts(
+        releases=releases,
+        readiness=readiness,
+        scheduled_rows=scheduled_rows,
+        existing_posts=posts,
+        start_index=len(posts) + post_index,
         prior_by_id=prior_by_id,
         prior_by_slot=prior_by_slot,
     ))

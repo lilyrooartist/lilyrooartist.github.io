@@ -649,7 +649,11 @@ def candidate_row_id(row: dict) -> str:
 
 def top_format_candidates(published_rows: list[dict], scheduled_rows: list[dict], promo_plan: dict) -> list[dict]:
     candidates: dict[str, dict] = {}
-    active_rows = list(scheduled_rows) + list(promo_plan.get("posts") or [])
+    active_rows = list(scheduled_rows) + [
+        row
+        for row in promo_plan.get("posts") or []
+        if row.get("format_candidate_role") != "throughput_buffer"
+    ]
     active_rows_by_id = {
         candidate_row_id(row): row
         for row in active_rows
@@ -1078,6 +1082,8 @@ def active_format_experiments(scheduled_rows: list[dict], promo_plan: dict, now:
         if approved or (scheduled_at and scheduled_at >= now - timedelta(days=7)):
             add_row(row, "scheduled")
     for row in promo_plan.get("posts") or []:
+        if row.get("format_candidate_role") == "throughput_buffer":
+            continue
         add_row(row, "planned")
 
     ranked = []

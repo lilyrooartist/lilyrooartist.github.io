@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-23T04:17:23.241828Z",
+  "generated_at": "2026-06-23T04:29:19.549011Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -58,8 +58,8 @@
     ]
   },
   "summary": {
-    "action_count": 17,
-    "user_review": 1,
+    "action_count": 23,
+    "user_review": 7,
     "platform_fixes": 5,
     "scheduled_approval_batches": 0,
     "store_checks": 7,
@@ -76,13 +76,14 @@
       "Repair executor": 5,
       "Reschedule approved backlog": 1,
       "Review blocked drafts": 1,
+      "Review draft posts": 6,
       "Verify music sites": 7
     },
     "urgencies": {
       "blocked": 2,
       "high": 6,
       "low": 2,
-      "medium": 7
+      "medium": 13
     },
     "next_action": {
       "label": "Fix Instagram executor",
@@ -285,7 +286,7 @@
         "id": "FP-PLAN-TWELVE-DOLLARS-TIKTOK",
         "release": "Twelve Dollars",
         "platform": "TikTok",
-        "scheduled_at": "2026-06-23T20:40:00-04:00",
+        "scheduled_at": "2026-06-24T20:40:00-04:00",
         "execution_mode": "auto",
         "post_type": "video",
         "readiness_state": "blocked",
@@ -627,6 +628,213 @@
       ]
     },
     {
+      "label": "Review X draft for Twelve Dollars",
+      "kind": "approval_review",
+      "priority": 10,
+      "command": "python3 scripts/approve_promo_queue_plan.py --id FP-STORY-TWELVE-DOLLARS-X-ARCHIVE-CTA --dry-run",
+      "context": {
+        "id": "FP-STORY-TWELVE-DOLLARS-X-ARCHIVE-CTA",
+        "release": "Twelve Dollars",
+        "platform": "X",
+        "scheduled_at": "2026-06-26T10:15:00-04:00",
+        "execution_mode": "auto",
+        "post_type": "text",
+        "readiness_state": "ready_after_approval",
+        "readiness_message": "Ready after approval.",
+        "text": "A small amount of money, a large amount of stage light. Subscribe on YouTube and help Lily Roo push this signal toward 1,000.",
+        "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+        "media_key": "",
+        "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-STORY-TWELVE-DOLLARS-X-ARCHIVE-CTA --refresh-admin",
+        "preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-STORY-TWELVE-DOLLARS-X-ARCHIVE-CTA --dry-run",
+        "readiness": {
+          "text_posting_ready": true,
+          "oauth2_user_token_present": false,
+          "oauth1_complete": true,
+          "media_map_present": false
+        }
+      },
+      "phase": "Review draft posts",
+      "urgency": "medium",
+      "urgency_reason": "Auto draft is ready once reviewed and approved.",
+      "status": "waiting_for_user",
+      "sort_key": [
+        2,
+        10,
+        8
+      ]
+    },
+    {
+      "label": "Review Facebook draft for Twelve Dollars",
+      "kind": "approval_review",
+      "priority": 10,
+      "command": "python3 scripts/approve_promo_queue_plan.py --id FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA --dry-run",
+      "context": {
+        "id": "FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA",
+        "release": "Twelve Dollars",
+        "platform": "Facebook",
+        "scheduled_at": "2026-06-27T11:20:00-04:00",
+        "execution_mode": "auto",
+        "post_type": "text",
+        "readiness_state": "ready_after_approval",
+        "readiness_message": "Ready after approval.",
+        "text": "A small amount of money, a large amount of stage light. Subscribe on YouTube and help Lily Roo push this signal toward 1,000.",
+        "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+        "media_key": "",
+        "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA --refresh-admin",
+        "preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA --dry-run",
+        "readiness": {
+          "ready": true
+        }
+      },
+      "phase": "Review draft posts",
+      "urgency": "medium",
+      "urgency_reason": "Auto draft is ready once reviewed and approved.",
+      "status": "waiting_for_user",
+      "sort_key": [
+        2,
+        10,
+        9
+      ]
+    },
+    {
+      "label": "Review X draft for Analog Myth",
+      "kind": "approval_review",
+      "priority": 10,
+      "command": "python3 scripts/approve_promo_queue_plan.py --id FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA --dry-run",
+      "context": {
+        "id": "FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA",
+        "release": "Analog Myth",
+        "platform": "X",
+        "scheduled_at": "2026-06-28T10:15:00-04:00",
+        "execution_mode": "auto",
+        "post_type": "text",
+        "readiness_state": "ready_after_approval",
+        "readiness_message": "Ready after approval.",
+        "text": "Time broke, so Lily Roo made an album out of the pieces. Subscribe on YouTube and help Lily Roo push this signal toward 1,000.",
+        "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+        "media_key": "",
+        "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA --refresh-admin",
+        "preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA --dry-run",
+        "readiness": {
+          "text_posting_ready": true,
+          "oauth2_user_token_present": false,
+          "oauth1_complete": true,
+          "media_map_present": false
+        }
+      },
+      "phase": "Review draft posts",
+      "urgency": "medium",
+      "urgency_reason": "Auto draft is ready once reviewed and approved.",
+      "status": "waiting_for_user",
+      "sort_key": [
+        2,
+        10,
+        10
+      ]
+    },
+    {
+      "label": "Review Facebook draft for Analog Myth",
+      "kind": "approval_review",
+      "priority": 10,
+      "command": "python3 scripts/approve_promo_queue_plan.py --id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA --dry-run",
+      "context": {
+        "id": "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA",
+        "release": "Analog Myth",
+        "platform": "Facebook",
+        "scheduled_at": "2026-06-29T11:20:00-04:00",
+        "execution_mode": "auto",
+        "post_type": "text",
+        "readiness_state": "ready_after_approval",
+        "readiness_message": "Ready after approval.",
+        "text": "Time broke, so Lily Roo made an album out of the pieces. Subscribe on YouTube and help Lily Roo push this signal toward 1,000.",
+        "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+        "media_key": "",
+        "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA --refresh-admin",
+        "preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA --dry-run",
+        "readiness": {
+          "ready": true
+        }
+      },
+      "phase": "Review draft posts",
+      "urgency": "medium",
+      "urgency_reason": "Auto draft is ready once reviewed and approved.",
+      "status": "waiting_for_user",
+      "sort_key": [
+        2,
+        10,
+        11
+      ]
+    },
+    {
+      "label": "Review X draft for I Learned It All in Fifteen Seconds",
+      "kind": "approval_review",
+      "priority": 10,
+      "command": "python3 scripts/approve_promo_queue_plan.py --id FP-STORY-I-LEARNED-IT-ALL-IN-FIFTEEN-SECONDS-X-ARCHIVE-CTA --dry-run",
+      "context": {
+        "id": "FP-STORY-I-LEARNED-IT-ALL-IN-FIFTEEN-SECONDS-X-ARCHIVE-CTA",
+        "release": "I Learned It All in Fifteen Seconds",
+        "platform": "X",
+        "scheduled_at": "2026-06-30T10:15:00-04:00",
+        "execution_mode": "auto",
+        "post_type": "text",
+        "readiness_state": "ready_after_approval",
+        "readiness_message": "Ready after approval.",
+        "text": "I Learned It All in Fifteen Seconds is live in the Lily Roo archive. Subscribe on YouTube and help Lily Roo push this signal toward 1,000.",
+        "reply_text": "Stream: https://open.spotify.com/album/4Al5eYOqGFMKEES5fDWIfI",
+        "media_key": "",
+        "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-STORY-I-LEARNED-IT-ALL-IN-FIFTEEN-SECONDS-X-ARCHIVE-CTA --refresh-admin",
+        "preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-STORY-I-LEARNED-IT-ALL-IN-FIFTEEN-SECONDS-X-ARCHIVE-CTA --dry-run",
+        "readiness": {
+          "text_posting_ready": true,
+          "oauth2_user_token_present": false,
+          "oauth1_complete": true,
+          "media_map_present": false
+        }
+      },
+      "phase": "Review draft posts",
+      "urgency": "medium",
+      "urgency_reason": "Auto draft is ready once reviewed and approved.",
+      "status": "waiting_for_user",
+      "sort_key": [
+        2,
+        10,
+        12
+      ]
+    },
+    {
+      "label": "Review Facebook draft for I Learned It All in Fifteen Seconds",
+      "kind": "approval_review",
+      "priority": 10,
+      "command": "python3 scripts/approve_promo_queue_plan.py --id FP-STORY-I-LEARNED-IT-ALL-IN-FIFTEEN-SECONDS-FACEBOOK-ARCHIVE-CTA --dry-run",
+      "context": {
+        "id": "FP-STORY-I-LEARNED-IT-ALL-IN-FIFTEEN-SECONDS-FACEBOOK-ARCHIVE-CTA",
+        "release": "I Learned It All in Fifteen Seconds",
+        "platform": "Facebook",
+        "scheduled_at": "2026-07-01T11:20:00-04:00",
+        "execution_mode": "auto",
+        "post_type": "text",
+        "readiness_state": "ready_after_approval",
+        "readiness_message": "Ready after approval.",
+        "text": "I Learned It All in Fifteen Seconds is live in the Lily Roo archive. Subscribe on YouTube and help Lily Roo push this signal toward 1,000.",
+        "reply_text": "Stream: https://open.spotify.com/album/4Al5eYOqGFMKEES5fDWIfI",
+        "media_key": "",
+        "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-STORY-I-LEARNED-IT-ALL-IN-FIFTEEN-SECONDS-FACEBOOK-ARCHIVE-CTA --refresh-admin",
+        "preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-STORY-I-LEARNED-IT-ALL-IN-FIFTEEN-SECONDS-FACEBOOK-ARCHIVE-CTA --dry-run",
+        "readiness": {
+          "ready": true
+        }
+      },
+      "phase": "Review draft posts",
+      "urgency": "medium",
+      "urgency_reason": "Auto draft is ready once reviewed and approved.",
+      "status": "waiting_for_user",
+      "sort_key": [
+        2,
+        10,
+        13
+      ]
+    },
+    {
       "label": "Re-check Twelve Dollars on Spotify",
       "kind": "store_verification",
       "priority": 20,
@@ -635,7 +843,7 @@
         "release": "Twelve Dollars",
         "service": "Spotify",
         "checked_at": "2026-06-23T02:42:53.381641+00:00",
-        "checked_age_hours": 1.6,
+        "checked_age_hours": 1.8,
         "recheck_interval_hours": 24,
         "next_recheck_at": "2026-06-24T02:42:53.381641+00:00",
         "recheck_due": false,
@@ -646,7 +854,7 @@
           "updated_at": "2026-06-23T02:42:53.381641Z",
           "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
           "checked_at": "2026-06-23T02:42:53.381641+00:00",
-          "checked_age_hours": 1.6,
+          "checked_age_hours": 1.8,
           "recheck_interval_hours": 24,
           "next_recheck_at": "2026-06-24T02:42:53.381641+00:00",
           "recheck_due": false,
@@ -661,7 +869,7 @@
       "sort_key": [
         2,
         20,
-        8
+        14
       ]
     },
     {
@@ -673,7 +881,7 @@
         "release": "Twelve Dollars",
         "service": "Apple Music",
         "checked_at": "2026-06-23T02:42:55.338278+00:00",
-        "checked_age_hours": 1.6,
+        "checked_age_hours": 1.8,
         "recheck_interval_hours": 24,
         "next_recheck_at": "2026-06-24T02:42:55.338278+00:00",
         "recheck_due": false,
@@ -684,7 +892,7 @@
           "updated_at": "2026-06-23T02:42:55.338278Z",
           "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
           "checked_at": "2026-06-23T02:42:55.338278+00:00",
-          "checked_age_hours": 1.6,
+          "checked_age_hours": 1.8,
           "recheck_interval_hours": 24,
           "next_recheck_at": "2026-06-24T02:42:55.338278+00:00",
           "recheck_due": false,
@@ -699,7 +907,7 @@
       "sort_key": [
         2,
         20,
-        9
+        15
       ]
     },
     {
@@ -711,7 +919,7 @@
         "release": "Twelve Dollars",
         "service": "HyperFollow",
         "checked_at": "2026-06-23T02:42:55.528500+00:00",
-        "checked_age_hours": 1.6,
+        "checked_age_hours": 1.8,
         "recheck_interval_hours": 24,
         "next_recheck_at": "2026-06-24T02:42:55.528500+00:00",
         "recheck_due": false,
@@ -722,7 +930,7 @@
           "updated_at": "2026-06-23T02:42:55.528500Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
           "checked_at": "2026-06-23T02:42:55.528500+00:00",
-          "checked_age_hours": 1.6,
+          "checked_age_hours": 1.8,
           "recheck_interval_hours": 24,
           "next_recheck_at": "2026-06-24T02:42:55.528500+00:00",
           "recheck_due": false,
@@ -737,7 +945,7 @@
       "sort_key": [
         2,
         20,
-        10
+        16
       ]
     },
     {
@@ -749,7 +957,7 @@
         "release": "Analog Myth",
         "service": "Spotify",
         "checked_at": "2026-06-23T02:42:55.583563+00:00",
-        "checked_age_hours": 1.6,
+        "checked_age_hours": 1.8,
         "recheck_interval_hours": 24,
         "next_recheck_at": "2026-06-24T02:42:55.583563+00:00",
         "recheck_due": false,
@@ -760,7 +968,7 @@
           "updated_at": "2026-06-23T02:42:55.583563Z",
           "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
           "checked_at": "2026-06-23T02:42:55.583563+00:00",
-          "checked_age_hours": 1.6,
+          "checked_age_hours": 1.8,
           "recheck_interval_hours": 24,
           "next_recheck_at": "2026-06-24T02:42:55.583563+00:00",
           "recheck_due": false,
@@ -775,7 +983,7 @@
       "sort_key": [
         2,
         20,
-        11
+        17
       ]
     },
     {
@@ -787,7 +995,7 @@
         "release": "Analog Myth",
         "service": "Apple Music",
         "checked_at": "2026-06-23T02:42:56.420240+00:00",
-        "checked_age_hours": 1.6,
+        "checked_age_hours": 1.8,
         "recheck_interval_hours": 24,
         "next_recheck_at": "2026-06-24T02:42:56.420240+00:00",
         "recheck_due": false,
@@ -798,7 +1006,7 @@
           "updated_at": "2026-06-23T02:42:56.420240Z",
           "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
           "checked_at": "2026-06-23T02:42:56.420240+00:00",
-          "checked_age_hours": 1.6,
+          "checked_age_hours": 1.8,
           "recheck_interval_hours": 24,
           "next_recheck_at": "2026-06-24T02:42:56.420240+00:00",
           "recheck_due": false,
@@ -813,7 +1021,7 @@
       "sort_key": [
         2,
         20,
-        12
+        18
       ]
     },
     {
@@ -825,7 +1033,7 @@
         "release": "Analog Myth",
         "service": "YouTube Music",
         "checked_at": "2026-06-23T02:42:56.487347+00:00",
-        "checked_age_hours": 1.6,
+        "checked_age_hours": 1.8,
         "recheck_interval_hours": 24,
         "next_recheck_at": "2026-06-24T02:42:56.487347+00:00",
         "recheck_due": false,
@@ -836,7 +1044,7 @@
           "updated_at": "2026-06-23T02:42:56.487347Z",
           "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
           "checked_at": "2026-06-23T02:42:56.487347+00:00",
-          "checked_age_hours": 1.6,
+          "checked_age_hours": 1.8,
           "recheck_interval_hours": 24,
           "next_recheck_at": "2026-06-24T02:42:56.487347+00:00",
           "recheck_due": false,
@@ -851,7 +1059,7 @@
       "sort_key": [
         2,
         20,
-        13
+        19
       ]
     },
     {
@@ -863,7 +1071,7 @@
         "release": "Analog Myth",
         "service": "HyperFollow",
         "checked_at": "2026-06-23T02:42:57.735789+00:00",
-        "checked_age_hours": 1.6,
+        "checked_age_hours": 1.8,
         "recheck_interval_hours": 24,
         "next_recheck_at": "2026-06-24T02:42:57.735789+00:00",
         "recheck_due": false,
@@ -874,7 +1082,7 @@
           "updated_at": "2026-06-23T02:42:57.735789Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
           "checked_at": "2026-06-23T02:42:57.735789+00:00",
-          "checked_age_hours": 1.6,
+          "checked_age_hours": 1.8,
           "recheck_interval_hours": 24,
           "next_recheck_at": "2026-06-24T02:42:57.735789+00:00",
           "recheck_due": false,
@@ -889,7 +1097,7 @@
       "sort_key": [
         2,
         20,
-        14
+        20
       ]
     },
     {
@@ -1036,7 +1244,7 @@
       "sort_key": [
         3,
         32,
-        15
+        21
       ]
     },
     {
@@ -1174,7 +1382,7 @@
       "sort_key": [
         3,
         33,
-        16
+        22
       ]
     }
   ]
