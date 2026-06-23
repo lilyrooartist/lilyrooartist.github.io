@@ -1,12 +1,12 @@
 # Human Handoff Resolution Preview - Lily Roo
 
-Generated: 2026-06-23T02:19:09.722559Z
+Generated: 2026-06-23T02:43:00.391213Z
 
 ## Summary
-- Worksheet rows: **7**
-- Executed previews: **3**
+- Worksheet rows: **8**
+- Executed previews: **4**
 - Skipped previews: **4**
-- Status counts: `{"input_missing": 3, "skipped": 4}`
+- Status counts: `{"input_missing": 3, "preview_ok_with_warning": 1, "skipped": 4}`
 - Policy: Only python3 scripts/* commands with --dry-run, or reschedule previews without --apply, are executed.
 - Guardrail: This preview runner never executes apply, refresh-admin, PUBLIC_URL placeholder, non-python, or unsupported commands.
 
@@ -37,6 +37,12 @@ Generated: 2026-06-23T02:19:09.722559Z
   - Safety: `skipped` (not_marked_preview_safe)
   - Command: `python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM`
   - Guardrail: Push worker secrets only after local platform setup is complete.
+- **backlog-reschedule** (`preview_ok_with_warning`)
+  - Phase: `Backlog recovery`; input needed: `clearance_confirmation`
+  - Safety: `safe_preview` (reschedule_preview_command)
+  - Command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+00:00' --spacing-hours 24`
+  - Output: Rows selected: 2 | - FP-AUTO-258 Instagram I Learned It All in Fifteen Seconds: 2026-06-23T10:00:00+08:00 -> 2026-06-24T10:00:00+00:00 |   WARNING: known blocker: Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID. | - FP-AUTO-264 TikTok I Learned It All in Fifteen Seconds: 2026-06-23T10:00:00+08:00 -> 2026-06-25T10:00:00+00:00 |   WARNING: known blocker: tiktok_credentials_missing | Dry run only. Re-run with --apply to write the schedule.
+  - Guardrail: Normal apply stays hidden until known executor/platform blockers clear.
 - **manual-metrics-priority-2** (`input_missing`)
   - Phase: `Manual metrics`; input needed: `private_metric_values`
   - Safety: `safe_preview` (dry_run_command)

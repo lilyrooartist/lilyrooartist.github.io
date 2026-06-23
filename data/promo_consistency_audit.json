@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-23T02:19:09.859668Z",
+  "generated_at": "2026-06-23T02:43:00.714913Z",
   "safe_mode": true,
   "summary": {
     "check_count": 30,
@@ -15,24 +15,24 @@
       "status": "pass",
       "severity": "ok",
       "detail": "Blocker ledger summary should match row count.",
-      "expected": 8,
-      "actual": 8
+      "expected": 9,
+      "actual": 9
     },
     {
       "name": "ledger_category_total_matches_rows",
       "status": "pass",
       "severity": "ok",
       "detail": "Blocker category counts should account for every blocker row.",
-      "expected": 8,
-      "actual": 8
+      "expected": 9,
+      "actual": 9
     },
     {
       "name": "status_open_actions_match_operations",
       "status": "pass",
       "severity": "ok",
       "detail": "Promo status open action count should mirror the operations packet.",
-      "expected": 16,
-      "actual": 16
+      "expected": 17,
+      "actual": 17
     },
     {
       "name": "approval_counts_match",
@@ -166,8 +166,8 @@
       "status": "pass",
       "severity": "ok",
       "detail": "Human handoff blocker summary should be copied from the blocker ledger.",
-      "expected": 8,
-      "actual": 8
+      "expected": 9,
+      "actual": 9
     },
     {
       "name": "handoff_projection_matches_ledger_projection",
@@ -215,6 +215,7 @@
       "severity": "ok",
       "detail": "Human handoff preview should include one preview row for every handoff task.",
       "expected": [
+        "backlog-reschedule",
         "manual-metrics-priority-2",
         "manual-metrics-priority-3",
         "platform-setup-FP-AUTO-258",
@@ -224,6 +225,7 @@
         "platform-setup-FP-PLAN-TWELVE-DOLLARS-INSTAGRAM"
       ],
       "actual": [
+        "backlog-reschedule",
         "manual-metrics-priority-2",
         "manual-metrics-priority-3",
         "platform-setup-FP-AUTO-258",
@@ -238,8 +240,8 @@
       "status": "pass",
       "severity": "ok",
       "detail": "Human handoff preview worksheet row count should match the handoff packet worksheet summary.",
-      "expected": 7,
-      "actual": 7
+      "expected": 8,
+      "actual": 8
     },
     {
       "name": "handoff_preview_status_matches_status_kpi",
@@ -248,10 +250,12 @@
       "detail": "Promo status handoff preview KPI should mirror preview status counts.",
       "expected": {
         "input_missing": 3,
+        "preview_ok_with_warning": 1,
         "skipped": 4
       },
       "actual": {
         "input_missing": 3,
+        "preview_ok_with_warning": 1,
         "skipped": 4
       }
     },
@@ -261,15 +265,15 @@
       "severity": "ok",
       "detail": "Promo status handoff preview KPI should mirror preview summary counts.",
       "expected": {
-        "worksheet_row_count": 7,
-        "preview_count": 7,
-        "executed_preview_count": 3,
+        "worksheet_row_count": 8,
+        "preview_count": 8,
+        "executed_preview_count": 4,
         "skipped_preview_count": 4
       },
       "actual": {
-        "worksheet_row_count": 7,
-        "preview_count": 7,
-        "executed_preview_count": 3,
+        "worksheet_row_count": 8,
+        "preview_count": 8,
+        "executed_preview_count": 4,
         "skipped_preview_count": 4
       }
     },
@@ -278,20 +282,20 @@
       "status": "pass",
       "severity": "ok",
       "detail": "Promo status next actions should expose the handoff preview health summary.",
-      "expected": "Review handoff preview health: 3 missing input; see data/human_handoff_resolution_preview.json.",
+      "expected": "Review handoff preview health: 3 missing input, 1 warning; see data/human_handoff_resolution_preview.json.",
       "actual": [
-        "Next operational action: Fix Instagram executor — python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+        "Next operational action: Preview reschedule for approved past-due posts — python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+00:00' --spacing-hours 24",
         "First handoff step: Fill and import manual metric worksheet — python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
         "30-day growth goal: Publish or approve the next platform-native rows, then refresh manual/public metrics to rank formats by results.",
-        "Current unlock gate: Repair TikTok executor (blocked_until_input); 0 ready, 3 blocked/warning; preview python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN; see data/promo_unlock_sequence.json.",
-        "Review handoff preview health: 3 missing input; see data/human_handoff_resolution_preview.json.",
+        "Current unlock gate: Repair TikTok executor (blocked_until_input); 0 ready, 4 blocked/warning; preview python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN; see data/promo_unlock_sequence.json.",
+        "Review handoff preview health: 3 missing input, 1 warning; see data/human_handoff_resolution_preview.json.",
         "Refresh manual metrics: 6 worksheet row(s) still need new_value entries (blocked_until_new_values_filled); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values.",
         "Collect experiment results: 5 post-result field(s) need new_value plus evidence_note; use admin/reports/experiment-result-clipboard.md; first priority: measure FP-AUTO-260 on Facebook. Direct preview template: python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run. Direct apply template after review: python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin. Then preview import with python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run after filling data/experiment_result_entry_wide_template.csv.",
-        "Re-check checked-pending store links: 7 music site snapshot(s) still have no public URL; next recommended re-check after 2026-06-23T23:42:54.523197+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 then.",
-        "Repair promo admin refresh workflow: Open the latest promo admin refresh workflow run and fix the failure result.",
-        "Preview approved backlog reschedule: python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+08:00' --spacing-hours 24",
+        "Re-check checked-pending store links: 7 music site snapshot(s) still have no public URL; next recommended re-check after 2026-06-24T02:42:53.381641+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 then.",
+        "Preview approved backlog reschedule: python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+00:00' --spacing-hours 24",
         "2 approved unpublished auto posts are past their scheduled time; repair executor/platform blockers or reschedule them.",
-        "1 executor records are blocked by approval."
+        "1 executor records are blocked by approval.",
+        "5 executor records need platform repair before they can publish."
       ]
     },
     {
@@ -327,8 +331,8 @@
       "status": "pass",
       "severity": "ok",
       "detail": "Promo unlock sequence should mirror the blocker ledger open blocker count.",
-      "expected": 8,
-      "actual": 8
+      "expected": 9,
+      "actual": 9
     },
     {
       "name": "unlock_sequence_current_step_is_preview_ready",
@@ -352,18 +356,18 @@
       "expected": {
         "step_count": 5,
         "ready_for_human_review_count": 0,
-        "blocked_or_warning_count": 3,
+        "blocked_or_warning_count": 4,
         "current_step_id": "unlock-tiktok-platform-repair",
         "current_gate_state": "blocked_until_input",
-        "open_blocker_count": 8
+        "open_blocker_count": 9
       },
       "actual": {
         "step_count": 5,
         "ready_for_human_review_count": 0,
-        "blocked_or_warning_count": 3,
+        "blocked_or_warning_count": 4,
         "current_step_id": "unlock-tiktok-platform-repair",
         "current_gate_state": "blocked_until_input",
-        "open_blocker_count": 8
+        "open_blocker_count": 9
       }
     },
     {
@@ -373,18 +377,18 @@
       "detail": "Promo status next actions should expose the current unlock sequence gate.",
       "expected": "Current unlock gate action includes data/promo_unlock_sequence.json",
       "actual": [
-        "Next operational action: Fix Instagram executor — python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+        "Next operational action: Preview reschedule for approved past-due posts — python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+00:00' --spacing-hours 24",
         "First handoff step: Fill and import manual metric worksheet — python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
         "30-day growth goal: Publish or approve the next platform-native rows, then refresh manual/public metrics to rank formats by results.",
-        "Current unlock gate: Repair TikTok executor (blocked_until_input); 0 ready, 3 blocked/warning; preview python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN; see data/promo_unlock_sequence.json.",
-        "Review handoff preview health: 3 missing input; see data/human_handoff_resolution_preview.json.",
+        "Current unlock gate: Repair TikTok executor (blocked_until_input); 0 ready, 4 blocked/warning; preview python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN; see data/promo_unlock_sequence.json.",
+        "Review handoff preview health: 3 missing input, 1 warning; see data/human_handoff_resolution_preview.json.",
         "Refresh manual metrics: 6 worksheet row(s) still need new_value entries (blocked_until_new_values_filled); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values.",
         "Collect experiment results: 5 post-result field(s) need new_value plus evidence_note; use admin/reports/experiment-result-clipboard.md; first priority: measure FP-AUTO-260 on Facebook. Direct preview template: python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run. Direct apply template after review: python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin. Then preview import with python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run after filling data/experiment_result_entry_wide_template.csv.",
-        "Re-check checked-pending store links: 7 music site snapshot(s) still have no public URL; next recommended re-check after 2026-06-23T23:42:54.523197+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 then.",
-        "Repair promo admin refresh workflow: Open the latest promo admin refresh workflow run and fix the failure result.",
-        "Preview approved backlog reschedule: python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+08:00' --spacing-hours 24",
+        "Re-check checked-pending store links: 7 music site snapshot(s) still have no public URL; next recommended re-check after 2026-06-24T02:42:53.381641+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 then.",
+        "Preview approved backlog reschedule: python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+00:00' --spacing-hours 24",
         "2 approved unpublished auto posts are past their scheduled time; repair executor/platform blockers or reschedule them.",
-        "1 executor records are blocked by approval."
+        "1 executor records are blocked by approval.",
+        "5 executor records need platform repair before they can publish."
       ]
     },
     {

@@ -1,20 +1,22 @@
 {
-  "generated_at": "2026-06-23T02:19:09.722559Z",
+  "generated_at": "2026-06-23T02:43:00.391213Z",
   "safe_mode": true,
   "source": {
     "resolution_worksheet": "data/human_handoff_resolution_worksheet.csv",
     "human_handoff_packet": "data/human_handoff_packet.json"
   },
   "summary": {
-    "worksheet_row_count": 7,
-    "preview_count": 7,
-    "executed_preview_count": 3,
+    "worksheet_row_count": 8,
+    "preview_count": 8,
+    "executed_preview_count": 4,
     "skipped_preview_count": 4,
     "status_counts": {
       "input_missing": 3,
+      "preview_ok_with_warning": 1,
       "skipped": 4
     },
     "phase_counts": {
+      "Backlog recovery": 1,
       "Manual metrics": 2,
       "Platform setup": 5
     },
@@ -93,6 +95,20 @@
       "guardrail": "Push worker secrets only after local platform setup is complete."
     },
     {
+      "task_id": "backlog-reschedule",
+      "phase": "Backlog recovery",
+      "status": "blocked",
+      "input_needed": "clearance_confirmation",
+      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+00:00' --spacing-hours 24",
+      "safety": "safe_preview",
+      "safety_reason": "reschedule_preview_command",
+      "returncode": 0,
+      "preview_status": "preview_ok_with_warning",
+      "output_excerpt": "Rows selected: 2\n- FP-AUTO-258 Instagram I Learned It All in Fifteen Seconds: 2026-06-23T10:00:00+08:00 -> 2026-06-24T10:00:00+00:00\n  WARNING: known blocker: Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.\n- FP-AUTO-264 TikTok I Learned It All in Fifteen Seconds: 2026-06-23T10:00:00+08:00 -> 2026-06-25T10:00:00+00:00\n  WARNING: known blocker: tiktok_credentials_missing\nDry run only. Re-run with --apply to write the schedule.",
+      "completion_evidence": "data/backlog_reschedule_preview.json should show normal_apply_gate clear before any non-override apply command is exposed.",
+      "guardrail": "Normal apply stays hidden until known executor/platform blockers clear."
+    },
+    {
       "task_id": "manual-metrics-priority-2",
       "phase": "Manual metrics",
       "status": "needs_values",
@@ -123,7 +139,7 @@
   ],
   "handoff_resolution_summary": {
     "path": "data/human_handoff_resolution_worksheet.csv",
-    "row_count": 7,
+    "row_count": 8,
     "fieldnames": [
       "task_id",
       "phase",

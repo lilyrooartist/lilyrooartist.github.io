@@ -1,6 +1,6 @@
 # Approval Runway - Lily Roo
 
-Generated: 2026-06-22T23:43:01.231912Z
+Generated: 2026-06-23T02:42:59.255290Z
 
 ## Summary
 - Drafts needing review: **1**
@@ -9,7 +9,7 @@ Generated: 2026-06-22T23:43:01.231912Z
 - Blocked drafts: **1**
 - Recommended approvals: **0**
 - Recommended manual approvals: **0**
-- Monetization runway: **behind_365_day_pace**, 0.54 subs/week observed, 19.06 subs/week needed for 365 days
+- Monetization runway: **behind_365_day_pace**, 0.5 subs/week observed, 19.06 subs/week needed for 365 days
 
 ## Manual Approval Docket
 - Status: **clear**

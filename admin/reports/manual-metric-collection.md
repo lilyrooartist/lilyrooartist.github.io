@@ -1,6 +1,6 @@
 # Manual Metric Collection - Lily Roo
 
-Generated: 2026-06-22T23:43:02.017376Z
+Generated: 2026-06-23T02:43:00.126243Z
 
 Pending fields: **6**
 
@@ -56,7 +56,7 @@ Use these bundles when collecting values from one analytics surface at a time.
 - Entry CSV: `data/manual_metric_entry_template.csv`
 - Preview: `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run`
 - Apply after review: `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin`
-- Evidence note template: `Meta Business Suite > Insights 2026-06-22`
+- Evidence note template: `Meta Business Suite > Insights 2026-06-23`
 - Collection sequence:
   - Open https://www.facebook.com/903693509504290.
   - Collect the listed metric fields from the named analytics surface.
@@ -73,7 +73,7 @@ Use these bundles when collecting values from one analytics surface at a time.
 - Entry CSV: `data/manual_metric_entry_template.csv`
 - Preview: `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run`
 - Apply after review: `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin`
-- Evidence note template: `Instagram Professional Dashboard > Insights 2026-06-22`
+- Evidence note template: `Instagram Professional Dashboard > Insights 2026-06-23`
 - Collection sequence:
   - Open https://www.instagram.com/lilyroo.artist/.
   - Collect the listed metric fields from the named analytics surface.
@@ -90,7 +90,7 @@ Use these bundles when collecting values from one analytics surface at a time.
 - Entry CSV: `data/manual_metric_entry_template.csv`
 - Preview: `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run`
 - Apply after review: `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin`
-- Evidence note template: `Spotify for Artists > Music/Stats export 2026-06-22`
+- Evidence note template: `Spotify for Artists > Music/Stats export 2026-06-23`
 - Collection sequence:
   - Open https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a.
   - Collect the listed metric fields from the named analytics surface.
@@ -110,7 +110,7 @@ Use these bundles when collecting values from one analytics surface at a time.
 - Entry CSV: `data/manual_metric_entry_template.csv`
 - Preview: `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run`
 - Apply after review: `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin`
-- Evidence note template: `TikTok Studio or Creator Center analytics 2026-06-22`
+- Evidence note template: `TikTok Studio or Creator Center analytics 2026-06-23`
 - Collection sequence:
   - Open https://www.tiktok.com/@lilyroo930.
   - Collect the listed metric fields from the named analytics surface.
@@ -127,7 +127,7 @@ Use these bundles when collecting values from one analytics surface at a time.
 - Entry CSV: `data/manual_metric_entry_template.csv`
 - Preview: `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run`
 - Apply after review: `python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin`
-- Evidence note template: `X Analytics or account profile metrics 2026-06-22`
+- Evidence note template: `X Analytics or account profile metrics 2026-06-23`
 - Collection sequence:
   - Open https://x.com/lilyrooartist.
   - Collect the listed metric fields from the named analytics surface.
