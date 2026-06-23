@@ -1,0 +1,109 @@
+{
+  "generated_at": "2026-06-23T06:03:53.919746Z",
+  "safe_mode": true,
+  "source": {
+    "scheduled_posts": "data/scheduled_posts.csv",
+    "published_log": "admin/content/Published_Log.csv"
+  },
+  "summary": {
+    "story_post_count": 6,
+    "queued_future_count": 6,
+    "past_due_unlogged_count": 0,
+    "logged_waiting_results_count": 0,
+    "measured_count": 0,
+    "platforms": [
+      "Facebook",
+      "X"
+    ],
+    "measurement_window_hours": 24,
+    "export_preview_command": "python3 scripts/export_social_executions.py --dry-run",
+    "export_apply_command": "python3 scripts/export_social_executions.py --refresh-admin",
+    "result_collection_report": "admin/reports/experiment-result-clipboard.md"
+  },
+  "rows": [
+    {
+      "id": "FP-STORY-TWELVE-DOLLARS-X-ARCHIVE-CTA",
+      "platform": "X",
+      "song": "Twelve Dollars",
+      "scheduled_at": "2026-06-26T10:15:00-04:00",
+      "post_type": "text",
+      "status": "queued_future",
+      "public_url": "",
+      "published_log_row": "",
+      "measurement_due_at": "2026-06-27T14:15:00+00:00",
+      "result_values": {},
+      "next_action": "Wait for the scheduler to publish the row, then export social executions and log the public URL.",
+      "copy": "A small amount of money, a large amount of stage light. Subscribe on YouTube and help Lily Roo push this signal toward 1,000."
+    },
+    {
+      "id": "FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA",
+      "platform": "Facebook",
+      "song": "Twelve Dollars",
+      "scheduled_at": "2026-06-27T11:20:00-04:00",
+      "post_type": "text",
+      "status": "queued_future",
+      "public_url": "",
+      "published_log_row": "",
+      "measurement_due_at": "2026-06-28T15:20:00+00:00",
+      "result_values": {},
+      "next_action": "Wait for the scheduler to publish the row, then export social executions and log the public URL.",
+      "copy": "A small amount of money, a large amount of stage light. Subscribe on YouTube and help Lily Roo push this signal toward 1,000."
+    },
+    {
+      "id": "FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA",
+      "platform": "X",
+      "song": "Analog Myth",
+      "scheduled_at": "2026-06-28T10:15:00-04:00",
+      "post_type": "text",
+      "status": "queued_future",
+      "public_url": "",
+      "published_log_row": "",
+      "measurement_due_at": "2026-06-29T14:15:00+00:00",
+      "result_values": {},
+      "next_action": "Wait for the scheduler to publish the row, then export social executions and log the public URL.",
+      "copy": "Time broke, so Lily Roo made an album out of the pieces. Subscribe on YouTube and help Lily Roo push this signal toward 1,000."
+    },
+    {
+      "id": "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA",
+      "platform": "Facebook",
+      "song": "Analog Myth",
+      "scheduled_at": "2026-06-29T11:20:00-04:00",
+      "post_type": "text",
+      "status": "queued_future",
+      "public_url": "",
+      "published_log_row": "",
+      "measurement_due_at": "2026-06-30T15:20:00+00:00",
+      "result_values": {},
+      "next_action": "Wait for the scheduler to publish the row, then export social executions and log the public URL.",
+      "copy": "Time broke, so Lily Roo made an album out of the pieces. Subscribe on YouTube and help Lily Roo push this signal toward 1,000."
+    },
+    {
+      "id": "FP-STORY-I-LEARNED-IT-ALL-IN-FIFTEEN-SECONDS-X-ARCHIVE-CTA",
+      "platform": "X",
+      "song": "I Learned It All in Fifteen Seconds",
+      "scheduled_at": "2026-06-30T10:15:00-04:00",
+      "post_type": "text",
+      "status": "queued_future",
+      "public_url": "",
+      "published_log_row": "",
+      "measurement_due_at": "2026-07-01T14:15:00+00:00",
+      "result_values": {},
+      "next_action": "Wait for the scheduler to publish the row, then export social executions and log the public URL.",
+      "copy": "I Learned It All in Fifteen Seconds is live in the Lily Roo archive. Subscribe on YouTube and help Lily Roo push this signal toward 1,000."
+    },
+    {
+      "id": "FP-STORY-I-LEARNED-IT-ALL-IN-FIFTEEN-SECONDS-FACEBOOK-ARCHIVE-CTA",
+      "platform": "Facebook",
+      "song": "I Learned It All in Fifteen Seconds",
+      "scheduled_at": "2026-07-01T11:20:00-04:00",
+      "post_type": "text",
+      "status": "queued_future",
+      "public_url": "",
+      "published_log_row": "",
+      "measurement_due_at": "2026-07-02T15:20:00+00:00",
+      "result_values": {},
+      "next_action": "Wait for the scheduler to publish the row, then export social executions and log the public URL.",
+      "copy": "I Learned It All in Fifteen Seconds is live in the Lily Roo archive. Subscribe on YouTube and help Lily Roo push this signal toward 1,000."
+    }
+  ]
+}
