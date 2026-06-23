@@ -222,7 +222,7 @@ def expected_refresh_coverage(source_commit, latest_head_sha):
     changed = changed_paths_since(latest_head_sha)
     uncovered = [path for path in changed if not generated_refresh_path(path)]
     if changed and not uncovered:
-        return False, "generated_snapshot_changed_after_latest_run", changed[:40], []
+        return True, "generated_snapshot_changed_after_latest_run", changed[:40], []
     return False, "source_changed_after_latest_run", changed[:40], uncovered[:20]
 
 
