@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "updated_at": "2026-06-23T08:58:43.020021Z",
+  "updated_at": "2026-06-23T13:14:36.287561Z",
   "source": "lilyroo-social-executor-executions",
   "url": "https://www.lilyroo.com/api/social/executions",
   "http_status": 200,
@@ -10,15 +10,32 @@
   "summary": {
     "execution_count": 8,
     "current_execution_count": 7,
-    "superseded_execution_count": 0,
-    "superseded_executions": [],
+    "superseded_execution_count": 1,
+    "superseded_executions": [
+      {
+        "post_id": "FP-AUTO-261",
+        "platform": "YouTube Community",
+        "status": "skipped",
+        "reason": "manual_only",
+        "attempts": 0,
+        "updated_at": "2026-06-23T01:00:24.494Z",
+        "source": "cron",
+        "post_url": "",
+        "external_id": "",
+        "next_action": "",
+        "error_summary": "",
+        "superseded_reason": "manual_execution_replaced_by_auto_queue_row"
+      }
+    ],
     "posted_count": 1,
-    "attention_count": 6,
+    "draft_uploaded_count": 1,
+    "attention_count": 5,
     "approval_needed_count": 1,
-    "platform_fix_needed_count": 5,
+    "platform_fix_needed_count": 4,
     "manual_handoff_needed_count": 0,
     "status_counts": {
-      "blocked": 2,
+      "blocked": 1,
+      "draft_uploaded": 1,
       "failed": 4,
       "posted": 1
     },
@@ -38,6 +55,23 @@
         "updated_at": "2026-06-20T14:15:13.442Z",
         "source": "cron",
         "post_url": "https://x.com/i/web/status/2068336870803587325",
+        "external_id": "2068336870803587325",
+        "next_action": "",
+        "error_summary": ""
+      }
+    ],
+    "latest_draft_uploaded": [
+      {
+        "post_id": "FP-AUTO-264",
+        "platform": "TikTok",
+        "status": "draft_uploaded",
+        "reason": "",
+        "attempts": 1,
+        "updated_at": "2026-06-23T13:13:27.909Z",
+        "source": "manual",
+        "post_url": "",
+        "external_id": "v_inbox_url~v2.7654577601957480479",
+        "next_action": "Open TikTok inbox notification, finish review, publish, then log the public URL.",
         "error_summary": ""
       }
     ],
@@ -48,33 +82,26 @@
         "status": "blocked",
         "reason": "not_approved",
         "attempts": 0,
-        "updated_at": "2026-06-23T08:45:24.288Z",
+        "updated_at": "2026-06-23T13:00:24.200Z",
         "source": "cron",
         "post_url": "",
+        "external_id": "",
+        "next_action": "",
         "error_summary": ""
       }
     ],
     "platform_fix_needed": [
-      {
-        "post_id": "FP-AUTO-264",
-        "platform": "TikTok",
-        "status": "blocked",
-        "reason": "tiktok_credentials_missing",
-        "attempts": 0,
-        "updated_at": "2026-06-23T08:45:24.801Z",
-        "source": "cron",
-        "post_url": "",
-        "error_summary": ""
-      },
       {
         "post_id": "FP-AUTO-258",
         "platform": "Instagram",
         "status": "failed",
         "reason": "max_attempts_exceeded",
         "attempts": 3,
-        "updated_at": "2026-06-23T08:45:24.544Z",
+        "updated_at": "2026-06-23T13:00:24.471Z",
         "source": "cron",
         "post_url": "",
+        "external_id": "",
+        "next_action": "",
         "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID."
       },
       {
@@ -86,6 +113,8 @@
         "updated_at": "2026-06-22T06:15:25.025Z",
         "source": "cron",
         "post_url": "",
+        "external_id": "",
+        "next_action": "",
         "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID."
       },
       {
@@ -97,6 +126,8 @@
         "updated_at": "2026-06-22T06:15:24.850Z",
         "source": "cron",
         "post_url": "",
+        "external_id": "",
+        "next_action": "",
         "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID."
       },
       {
@@ -108,31 +139,24 @@
         "updated_at": "2026-06-22T06:00:17.558Z",
         "source": "cron",
         "post_url": "",
+        "external_id": "",
+        "next_action": "",
         "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app."
       }
     ],
     "manual_handoff_needed": [],
     "latest_attention": [
       {
-        "post_id": "FP-AUTO-264",
-        "platform": "TikTok",
-        "status": "blocked",
-        "reason": "tiktok_credentials_missing",
-        "attempts": 0,
-        "updated_at": "2026-06-23T08:45:24.801Z",
-        "source": "cron",
-        "post_url": "",
-        "error_summary": ""
-      },
-      {
         "post_id": "FP-AUTO-258",
         "platform": "Instagram",
         "status": "failed",
         "reason": "max_attempts_exceeded",
         "attempts": 3,
-        "updated_at": "2026-06-23T08:45:24.544Z",
+        "updated_at": "2026-06-23T13:00:24.471Z",
         "source": "cron",
         "post_url": "",
+        "external_id": "",
+        "next_action": "",
         "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID."
       },
       {
@@ -141,9 +165,11 @@
         "status": "blocked",
         "reason": "not_approved",
         "attempts": 0,
-        "updated_at": "2026-06-23T08:45:24.288Z",
+        "updated_at": "2026-06-23T13:00:24.200Z",
         "source": "cron",
         "post_url": "",
+        "external_id": "",
+        "next_action": "",
         "error_summary": ""
       },
       {
@@ -155,6 +181,8 @@
         "updated_at": "2026-06-22T06:15:25.025Z",
         "source": "cron",
         "post_url": "",
+        "external_id": "",
+        "next_action": "",
         "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID."
       },
       {
@@ -166,7 +194,22 @@
         "updated_at": "2026-06-22T06:15:24.850Z",
         "source": "cron",
         "post_url": "",
+        "external_id": "",
+        "next_action": "",
         "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID."
+      },
+      {
+        "post_id": "FP-AUTO-265",
+        "platform": "Facebook",
+        "status": "failed",
+        "reason": "",
+        "attempts": 2,
+        "updated_at": "2026-06-22T06:00:17.558Z",
+        "source": "cron",
+        "post_url": "",
+        "external_id": "",
+        "next_action": "",
+        "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app."
       }
     ]
   },
@@ -174,11 +217,5 @@
     "ok": true,
     "execution_count": 8
   },
-  "action_needed": "",
-  "reconciled_at": "2026-06-23T08:58:43.081769Z",
-  "reconciliation": {
-    "source": "current scheduled_posts.csv",
-    "superseded_execution_count": 0,
-    "guardrail": "Rows are only removed from active attention lists when their post_id is gone from the queue or the queue platform/type has superseded the captured execution."
-  }
+  "action_needed": ""
 }

@@ -1,26 +1,28 @@
 {
   "ok": true,
-  "updated_at": "2026-06-23T08:58:43.599786Z",
+  "updated_at": "2026-06-23T13:14:37.087804Z",
   "source": "lilyroo-social-scheduler-dry-run",
   "url": "https://www.lilyroo.com/api/social/scheduler/dry-run",
   "http_status": 200,
   "error": null,
   "auth_method": "bearer",
-  "requested_scheduled_time": "2026-06-23T08:58:43.135492Z",
+  "requested_scheduled_time": "2026-06-23T13:14:36.378994Z",
   "dry_run": true,
-  "checked_at": "2026-06-23T08:58:43.135Z",
+  "checked_at": "2026-06-23T13:14:36.378Z",
   "summary": {
     "due_count": 3,
     "result_count": 3,
     "would_post_count": 0,
-    "blocked_count": 3,
+    "blocked_count": 2,
     "status_counts": {
-      "blocked": 2,
+      "blocked": 1,
+      "draft_uploaded": 1,
       "failed": 1
     },
     "platform_counts": {
       "Instagram": 1,
-      "TikTok": 2
+      "TikTok": 1,
+      "Unknown": 1
     },
     "would_post": [],
     "blocked": [
@@ -31,7 +33,7 @@
         "reason": "not_approved",
         "post_type": "",
         "attempts": 0,
-        "updated_at": "2026-06-23T08:58:43.779Z",
+        "updated_at": "2026-06-23T13:14:37.272Z",
         "source": "dry-run",
         "error_summary": ""
       },
@@ -42,20 +44,9 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-06-23T08:58:43.784Z",
+        "updated_at": "2026-06-23T13:14:37.278Z",
         "source": "dry-run",
         "error_summary": "Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page"
-      },
-      {
-        "post_id": "FP-AUTO-264",
-        "platform": "TikTok",
-        "status": "blocked",
-        "reason": "tiktok_credentials_missing",
-        "post_type": "",
-        "attempts": 0,
-        "updated_at": "2026-06-23T08:58:43.790Z",
-        "source": "dry-run",
-        "error_summary": ""
       }
     ]
   },
