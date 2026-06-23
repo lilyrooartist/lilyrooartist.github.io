@@ -220,6 +220,11 @@ FINALIZE_STEPS = [
         "required": True,
     },
     {
+        "name": "build_social_blocker_input_status",
+        "command": ["python3", "scripts/build_social_blocker_input_status.py"],
+        "required": True,
+    },
+    {
         "name": "build_posting_automation_status",
         "command": ["python3", "scripts/build_posting_automation_status.py"],
         "required": True,

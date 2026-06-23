@@ -1,11 +1,11 @@
 # Posting Automation Status - Lily Roo
 
-Generated: 2026-06-23T06:57:16.655460Z
+Generated: 2026-06-23T07:17:49.756810Z
 
 ## Summary
 - Status: **blocked**
-- Lanes ready: **4 / 7**
-- Blocked lanes: **3**
+- Lanes ready: **4 / 8**
+- Blocked lanes: **4**
 - Needs attention: **0**
 - Story posts tracked: **6**
 - Help-needed items: **5**
@@ -16,7 +16,7 @@ Generated: 2026-06-23T06:57:16.655460Z
   - Detail: 17 */6 * * *; latest run completed / success
   - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28002303668
 - **Safe admin refresh** - `ready`
-  - Detail: 39 refresh commands captured at 2026-06-23T06:55:55.023118Z
+  - Detail: 40 refresh commands captured at 2026-06-23T07:12:17.563506Z
   - Evidence: data/promo_admin_refresh_run.json
 - **Scheduler dry-run authentication** - `blocked`
   - Detail: HTTP 401 using none auth; due=0 would_post=0
@@ -33,6 +33,10 @@ Generated: 2026-06-23T06:57:16.655460Z
   - Detail: blocked; upload_ready=False; public_ready=False
   - Evidence: data/tiktok_setup_preflight.json
   - Next: Add TikTok OAuth credentials and rerun the upload-mode dry run.
+- **Blocker input readiness** - `blocked`
+  - Detail: 0 ready; 4 missing local input; 1 external action needed
+  - Evidence: data/social_blocker_input_status.json
+  - Next: Add one of LILYROO_EXECUTOR_BEARER_TOKEN, EXECUTOR_BEARER_TOKEN, LILYROO_ADMIN_PASSWORD, ADMIN_PASSWORD to /Users/tod.famous/Documents/New project/secrets/social_api.env.
 - **Story throughput** - `ready`
   - Detail: 6 tracked; 6 queued; 0 past due without URL
   - Evidence: data/story_throughput_tracking.json

@@ -1,0 +1,139 @@
+{
+  "generated_at": "2026-06-23T07:17:49.726193Z",
+  "safe_mode": true,
+  "redaction": "Only key presence is reported; secret values are never written to generated files.",
+  "source": {
+    "local_secret_source": "secrets/social_api.env",
+    "template": "data/social_blocker_secret_template.env"
+  },
+  "summary": {
+    "status": "missing_local_input",
+    "group_count": 5,
+    "ready_count": 0,
+    "missing_local_input_count": 4,
+    "external_action_needed_count": 1,
+    "local_secret_env_exists": true,
+    "template_path": "data/social_blocker_secret_template.env",
+    "next_action": "Add one of LILYROO_EXECUTOR_BEARER_TOKEN, EXECUTOR_BEARER_TOKEN, LILYROO_ADMIN_PASSWORD, ADMIN_PASSWORD to /Users/tod.famous/Documents/New project/secrets/social_api.env."
+  },
+  "groups": [
+    {
+      "id": "scheduler_auth",
+      "label": "Scheduler and executor auth",
+      "status": "missing_local_input",
+      "required_all": [],
+      "required_any": [
+        "LILYROO_EXECUTOR_BEARER_TOKEN",
+        "EXECUTOR_BEARER_TOKEN",
+        "LILYROO_ADMIN_PASSWORD",
+        "ADMIN_PASSWORD"
+      ],
+      "github_actions_secrets": [
+        "LILYROO_EXECUTOR_BEARER_TOKEN",
+        "LILYROO_ADMIN_PASSWORD"
+      ],
+      "presence": {
+        "ADMIN_PASSWORD": false,
+        "EXECUTOR_BEARER_TOKEN": false,
+        "LILYROO_ADMIN_PASSWORD": false,
+        "LILYROO_EXECUTOR_BEARER_TOKEN": false
+      },
+      "missing_all": [],
+      "any_present": false,
+      "external_only": false,
+      "unblocks": "Scheduler dry-run, executor readiness capture, and execution history capture.",
+      "verification_command": "python3 scripts/capture_scheduler_dry_run.py && python3 scripts/capture_social_executions.py",
+      "next_action": "Add one of LILYROO_EXECUTOR_BEARER_TOKEN, EXECUTOR_BEARER_TOKEN, LILYROO_ADMIN_PASSWORD, ADMIN_PASSWORD to /Users/tod.famous/Documents/New project/secrets/social_api.env."
+    },
+    {
+      "id": "instagram_business",
+      "label": "Instagram business account",
+      "status": "missing_local_input",
+      "required_all": [
+        "IG_BUSINESS_ACCOUNT_ID"
+      ],
+      "required_any": [],
+      "github_actions_secrets": [],
+      "presence": {
+        "IG_BUSINESS_ACCOUNT_ID": false
+      },
+      "missing_all": [
+        "IG_BUSINESS_ACCOUNT_ID"
+      ],
+      "any_present": true,
+      "external_only": false,
+      "unblocks": "Instagram executor rows after the Worker secret is pushed and readiness is recaptured.",
+      "verification_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+      "next_action": "Add IG_BUSINESS_ACCOUNT_ID to /Users/tod.famous/Documents/New project/secrets/social_api.env."
+    },
+    {
+      "id": "tiktok_oauth_base",
+      "label": "TikTok OAuth app values",
+      "status": "missing_local_input",
+      "required_all": [
+        "TIKTOK_CLIENT_KEY",
+        "TIKTOK_CLIENT_SECRET",
+        "TIKTOK_REDIRECT_URI"
+      ],
+      "required_any": [],
+      "github_actions_secrets": [],
+      "presence": {
+        "TIKTOK_CLIENT_KEY": false,
+        "TIKTOK_CLIENT_SECRET": false,
+        "TIKTOK_REDIRECT_URI": false
+      },
+      "missing_all": [
+        "TIKTOK_CLIENT_KEY",
+        "TIKTOK_CLIENT_SECRET",
+        "TIKTOK_REDIRECT_URI"
+      ],
+      "any_present": true,
+      "external_only": false,
+      "unblocks": "TikTok OAuth authorization URL generation and authorization-code exchange.",
+      "verification_command": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload",
+      "next_action": "Add TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REDIRECT_URI to /Users/tod.famous/Documents/New project/secrets/social_api.env."
+    },
+    {
+      "id": "tiktok_upload_tokens",
+      "label": "TikTok upload-mode worker secrets",
+      "status": "missing_local_input",
+      "required_all": [
+        "TIKTOK_CLIENT_KEY",
+        "TIKTOK_CLIENT_SECRET",
+        "TIKTOK_REFRESH_TOKEN"
+      ],
+      "required_any": [],
+      "github_actions_secrets": [],
+      "presence": {
+        "TIKTOK_CLIENT_KEY": false,
+        "TIKTOK_CLIENT_SECRET": false,
+        "TIKTOK_REFRESH_TOKEN": false
+      },
+      "missing_all": [
+        "TIKTOK_CLIENT_KEY",
+        "TIKTOK_CLIENT_SECRET",
+        "TIKTOK_REFRESH_TOKEN"
+      ],
+      "any_present": true,
+      "external_only": false,
+      "unblocks": "TikTok upload-draft automation for the first ready TikTok asset.",
+      "verification_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+      "next_action": "Add TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN to /Users/tod.famous/Documents/New project/secrets/social_api.env."
+    },
+    {
+      "id": "facebook_identity",
+      "label": "Facebook Page identity checkpoint",
+      "status": "external_action_needed",
+      "required_all": [],
+      "required_any": [],
+      "github_actions_secrets": [],
+      "presence": {},
+      "missing_all": [],
+      "any_present": true,
+      "external_only": true,
+      "unblocks": "The Facebook executor row blocked by Meta identity confirmation.",
+      "verification_command": "python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run",
+      "next_action": "Complete the external platform checkpoint, then rerun the verification command."
+    }
+  ]
+}

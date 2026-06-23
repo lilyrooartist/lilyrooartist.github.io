@@ -17,6 +17,7 @@ READINESS = ROOT / "data" / "executor_readiness_snapshot.json"
 TIKTOK_PREFLIGHT = ROOT / "data" / "tiktok_setup_preflight.json"
 STORY_TRACKING = ROOT / "data" / "story_throughput_tracking.json"
 PLATFORM_REPAIR = ROOT / "data" / "platform_repair_status.json"
+SOCIAL_INPUTS = ROOT / "data" / "social_blocker_input_status.json"
 OUT = ROOT / "data" / "posting_automation_status.json"
 REPORT = ROOT / "admin" / "reports" / "posting-automation-status.md"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
@@ -76,6 +77,7 @@ def build_packet() -> dict:
     tiktok = read_json(TIKTOK_PREFLIGHT)
     stories = read_json(STORY_TRACKING)
     repairs = read_json(PLATFORM_REPAIR)
+    social_inputs = read_json(SOCIAL_INPUTS)
     refresh_steps = step_map(refresh)
 
     workflow_latest = workflow_status.get("latest_run") or {}
@@ -90,6 +92,7 @@ def build_packet() -> dict:
     tiktok_summary = tiktok.get("summary") or {}
     story_summary = stories.get("summary") or {}
     repair_summary = repairs.get("summary") or {}
+    input_summary = social_inputs.get("summary") or {}
     refresh_summary = refresh.get("summary") or {}
 
     lanes = [
@@ -134,6 +137,13 @@ def build_packet() -> dict:
             f"{tiktok_summary.get('status') or 'unknown'}; upload_ready={bool(tiktok_summary.get('ready_to_upload_drafts'))}; public_ready={bool(tiktok_summary.get('ready_to_post_publicly'))}",
             "data/tiktok_setup_preflight.json",
             "Add TikTok OAuth credentials and rerun the upload-mode dry run." if not tiktok_summary.get("ready_to_upload_drafts") else "",
+        ),
+        lane_status(
+            "Blocker input readiness",
+            "ready" if input_summary.get("status") == "ready" else "blocked",
+            f"{input_summary.get('ready_count', 0)} ready; {input_summary.get('missing_local_input_count', 0)} missing local input; {input_summary.get('external_action_needed_count', 0)} external action needed",
+            "data/social_blocker_input_status.json",
+            input_summary.get("next_action") or "Fill missing local inputs, then rerun the verification commands.",
         ),
         lane_status(
             "Story throughput",
@@ -204,6 +214,9 @@ def build_packet() -> dict:
         "story_post_count": story_summary.get("story_post_count", 0),
         "story_queued_future_count": story_summary.get("queued_future_count", 0),
         "platform_repair_blocked_count": repair_summary.get("blocked_count", 0),
+        "blocker_input_status": input_summary.get("status", "unknown"),
+        "blocker_input_missing_count": input_summary.get("missing_local_input_count", 0),
+        "blocker_input_external_action_count": input_summary.get("external_action_needed_count", 0),
         "help_needed_count": len(help_needed),
         "next_action": next_action,
     }
@@ -220,6 +233,7 @@ def build_packet() -> dict:
             "tiktok_preflight": str(TIKTOK_PREFLIGHT.relative_to(ROOT)),
             "story_tracking": str(STORY_TRACKING.relative_to(ROOT)),
             "platform_repair": str(PLATFORM_REPAIR.relative_to(ROOT)),
+            "social_inputs": str(SOCIAL_INPUTS.relative_to(ROOT)),
         },
         "summary": summary,
         "lanes": lanes,

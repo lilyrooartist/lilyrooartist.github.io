@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-23T06:57:16.655460Z",
+  "generated_at": "2026-06-23T07:17:49.756810Z",
   "safe_mode": true,
   "source": {
     "workflow": ".github/workflows/promo-admin-refresh.yml",
@@ -10,14 +10,15 @@
     "readiness": "data/executor_readiness_snapshot.json",
     "tiktok_preflight": "data/tiktok_setup_preflight.json",
     "story_tracking": "data/story_throughput_tracking.json",
-    "platform_repair": "data/platform_repair_status.json"
+    "platform_repair": "data/platform_repair_status.json",
+    "social_inputs": "data/social_blocker_input_status.json"
   },
   "summary": {
     "status": "blocked",
     "ready_lane_count": 4,
-    "blocked_lane_count": 3,
+    "blocked_lane_count": 4,
     "attention_lane_count": 0,
-    "lane_count": 7,
+    "lane_count": 8,
     "workflow_crons": [
       "17 */6 * * *"
     ],
@@ -30,6 +31,9 @@
     "story_post_count": 6,
     "story_queued_future_count": 6,
     "platform_repair_blocked_count": 5,
+    "blocker_input_status": "missing_local_input",
+    "blocker_input_missing_count": 4,
+    "blocker_input_external_action_count": 1,
     "help_needed_count": 5,
     "next_action": "Set LILYROO_ADMIN_PASSWORD or LILYROO_EXECUTOR_BEARER_TOKEN and rerun to capture scheduler dry-run state."
   },
@@ -44,7 +48,7 @@
     {
       "label": "Safe admin refresh",
       "status": "ready",
-      "detail": "39 refresh commands captured at 2026-06-23T06:55:55.023118Z",
+      "detail": "40 refresh commands captured at 2026-06-23T07:12:17.563506Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": ""
     },
@@ -75,6 +79,13 @@
       "detail": "blocked; upload_ready=False; public_ready=False",
       "evidence": "data/tiktok_setup_preflight.json",
       "next_action": "Add TikTok OAuth credentials and rerun the upload-mode dry run."
+    },
+    {
+      "label": "Blocker input readiness",
+      "status": "blocked",
+      "detail": "0 ready; 4 missing local input; 1 external action needed",
+      "evidence": "data/social_blocker_input_status.json",
+      "next_action": "Add one of LILYROO_EXECUTOR_BEARER_TOKEN, EXECUTOR_BEARER_TOKEN, LILYROO_ADMIN_PASSWORD, ADMIN_PASSWORD to /Users/tod.famous/Documents/New project/secrets/social_api.env."
     },
     {
       "label": "Story throughput",

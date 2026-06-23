@@ -24,6 +24,7 @@ STORE_VERIFICATION_HISTORY = ROOT / "data" / "store_verification_history.json"
 STORE_VERIFICATION_RUN = ROOT / "data" / "store_verification_run.json"
 SOCIAL_EXECUTIONS = ROOT / "data" / "social_execution_snapshot.json"
 SOCIAL_SCHEDULER_DRY_RUN = ROOT / "data" / "social_scheduler_dry_run.json"
+SOCIAL_BLOCKER_INPUT_STATUS = ROOT / "data" / "social_blocker_input_status.json"
 PROMO_REFRESH_RUN = ROOT / "data" / "promo_admin_refresh_run.json"
 PROMO_REFRESH_WORKFLOW_STATUS = ROOT / "data" / "promo_refresh_workflow_status.json"
 PROMO_REFRESH_WORKFLOW = ROOT / ".github" / "workflows" / "promo-admin-refresh.yml"
@@ -77,6 +78,7 @@ SOURCE_MAX_AGE_HOURS = {
     "store_verification_history": 24,
     "social_executions": 24,
     "social_scheduler_dry_run": 24,
+    "social_blocker_input_status": 24,
     "promo_refresh_run": 24,
     "promo_refresh_workflow_status": 24,
 }
@@ -280,12 +282,13 @@ def refresh_command(name: str) -> str:
         "store_verification_history": "python3 scripts/verify_pending_store_links.py --refresh-admin",
         "social_executions": "python3 scripts/capture_social_executions.py && python3 scripts/update_promo_engine_status.py",
         "social_scheduler_dry_run": "python3 scripts/capture_scheduler_dry_run.py && python3 scripts/update_promo_engine_status.py",
+        "social_blocker_input_status": "python3 scripts/build_social_blocker_input_status.py && python3 scripts/update_promo_engine_status.py",
         "promo_refresh_run": "python3 scripts/refresh_promo_admin.py",
         "promo_refresh_workflow_status": "python3 scripts/capture_github_workflow_status.py && python3 scripts/update_promo_engine_status.py",
     }.get(name, "")
 
 
-def source_freshness(release_status, manual, live, metrics_history, executor_readiness, store_history, social_executions, social_scheduler_dry_run, promo_refresh_run, promo_refresh_workflow_status, promo_plan, future_posts, manual_distribution, now: datetime):
+def source_freshness(release_status, manual, live, metrics_history, executor_readiness, store_history, social_executions, social_scheduler_dry_run, social_blocker_input_status, promo_refresh_run, promo_refresh_workflow_status, promo_plan, future_posts, manual_distribution, now: datetime):
     rows = [
         release_status_checked_no_change(freshness_row("release_status", RELEASE_STATUS, release_status, now), store_history, now),
         freshness_row("scheduled_posts", FUTURE_POSTS, future_posts, now),
@@ -298,6 +301,7 @@ def source_freshness(release_status, manual, live, metrics_history, executor_rea
         freshness_row("store_verification_history", STORE_VERIFICATION_HISTORY, store_history, now),
         freshness_row("social_executions", SOCIAL_EXECUTIONS, social_executions, now),
         freshness_row("social_scheduler_dry_run", SOCIAL_SCHEDULER_DRY_RUN, social_scheduler_dry_run, now),
+        freshness_row("social_blocker_input_status", SOCIAL_BLOCKER_INPUT_STATUS, social_blocker_input_status, now),
         freshness_row("promo_refresh_run", PROMO_REFRESH_RUN, promo_refresh_run, now),
         freshness_row("promo_refresh_workflow_status", PROMO_REFRESH_WORKFLOW_STATUS, promo_refresh_workflow_status, now),
     ]
@@ -1474,6 +1478,7 @@ GENERATED_REFRESH_PATHS = {
     "data/scheduled_approval_packet.json",
     "data/social_execution_snapshot.json",
     "data/social_scheduler_dry_run.json",
+    "data/social_blocker_input_status.json",
     "data/story_throughput_tracking.json",
     "data/store_verification_history.json",
     "data/store_verification_run.json",
@@ -2542,6 +2547,7 @@ def build_status():
     executor_readiness = read_json(EXECUTOR_READINESS, {})
     social_executions = read_json(SOCIAL_EXECUTIONS, {})
     social_scheduler_dry_run = read_json(SOCIAL_SCHEDULER_DRY_RUN, {})
+    social_blocker_input_status = read_json(SOCIAL_BLOCKER_INPUT_STATUS, {})
     promo_refresh_run = read_json(PROMO_REFRESH_RUN, {})
     promo_refresh_workflow_status = read_json(PROMO_REFRESH_WORKFLOW_STATUS, {})
     promo_plan = read_json(PROMO_QUEUE_PLAN, {})
@@ -2571,7 +2577,7 @@ def build_status():
     execution_state = social_execution_state(social_executions, scheduled_rows)
     scheduler_state = social_scheduler_dry_run_state(social_scheduler_dry_run)
     monetization = monetization_state(live, history, metrics_history, promo_plan, future_posts, execution_state, now)
-    freshness = source_freshness(release_status, manual, live, metrics_history, executor_readiness, store_history, social_executions, social_scheduler_dry_run, promo_refresh_run, promo_refresh_workflow_status, promo_plan, future_posts, manual_distribution, now)
+    freshness = source_freshness(release_status, manual, live, metrics_history, executor_readiness, store_history, social_executions, social_scheduler_dry_run, social_blocker_input_status, promo_refresh_run, promo_refresh_workflow_status, promo_plan, future_posts, manual_distribution, now)
     metric_confidence = metric_confidence_state(metrics, freshness)
     growth_goal = growth_goal_state(metrics_history, published_rows, scheduled_rows, promo_plan, now, experiment_result_collection, experiment_result_clipboard, metric_confidence)
 
@@ -2805,6 +2811,7 @@ def build_status():
             "store_verification_run": str(STORE_VERIFICATION_RUN.relative_to(ROOT)),
             "social_executions": str(SOCIAL_EXECUTIONS.relative_to(ROOT)),
             "social_scheduler_dry_run": str(SOCIAL_SCHEDULER_DRY_RUN.relative_to(ROOT)),
+            "social_blocker_input_status": str(SOCIAL_BLOCKER_INPUT_STATUS.relative_to(ROOT)),
             "promo_refresh_run": str(PROMO_REFRESH_RUN.relative_to(ROOT)),
             "promo_refresh_workflow_status": str(PROMO_REFRESH_WORKFLOW_STATUS.relative_to(ROOT)),
         },

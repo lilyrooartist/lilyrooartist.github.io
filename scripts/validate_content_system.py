@@ -183,6 +183,7 @@ GENERATED_REFRESH_PATHS = {
     "data/scheduled_approval_packet.json",
     "data/social_execution_snapshot.json",
     "data/social_scheduler_dry_run.json",
+    "data/social_blocker_input_status.json",
     "data/story_throughput_tracking.json",
     "data/store_verification_history.json",
     "data/store_verification_run.json",
