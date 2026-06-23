@@ -11,7 +11,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "data" / "github_actions_secret_presence.json"
 DEFAULT_REPO = "lilyrooartist/lilyrooartist.github.io"
-REQUIRED_SECRETS = [
+AUTH_SECRET_OPTIONS = [
     "LILYROO_EXECUTOR_BEARER_TOKEN",
     "LILYROO_ADMIN_PASSWORD",
 ]
@@ -46,9 +46,11 @@ def build_packet(repo: str, timeout: int) -> dict:
     except (subprocess.SubprocessError, FileNotFoundError) as exc:
         returncode, stdout, stderr = 1, "", str(exc)
     names = parse_secret_names(stdout) if returncode == 0 else []
-    presence = {name: name in names for name in REQUIRED_SECRETS}
-    missing = [name for name, is_present in presence.items() if not is_present]
+    presence = {name: name in names for name in AUTH_SECRET_OPTIONS}
+    present_auth = [name for name, is_present in presence.items() if is_present]
+    missing_options = [name for name, is_present in presence.items() if not is_present]
     ok = returncode == 0
+    ready = ok and bool(present_auth)
     return {
         "generated_at": generated_at,
         "safe_mode": True,
@@ -61,21 +63,25 @@ def build_packet(repo: str, timeout: int) -> dict:
         "returncode": returncode,
         "error": "" if ok else (stderr or stdout).strip()[:500],
         "summary": {
-            "status": "ready" if ok and not missing else "missing_required_secrets" if ok else "unknown",
-            "required_count": len(REQUIRED_SECRETS),
+            "status": "ready" if ready else "missing_auth_secret" if ok else "unknown",
+            "auth_option_count": len(AUTH_SECRET_OPTIONS),
+            "auth_present_count": len(present_auth),
             "present_required_count": sum(1 for is_present in presence.values() if is_present),
-            "missing_required_count": len(missing),
+            "missing_required_count": 0 if present_auth else len(missing_options),
             "checked_secret_count": len(names),
-            "missing_required_secrets": missing,
+            "present_auth_secrets": present_auth,
+            "missing_auth_options": missing_options,
+            "missing_required_secrets": [] if present_auth else missing_options,
             "next_action": (
-                "GitHub Actions has the required scheduler auth secrets."
-                if ok and not missing
-                else f"Add GitHub Actions repo secrets: {', '.join(missing)}."
+                "GitHub Actions has a scheduler auth secret."
+                if ready
+                else f"Add one GitHub Actions repo secret: {' or '.join(missing_options)}."
                 if ok
                 else "Run gh auth status, then rerun this secret presence capture locally."
             ),
         },
-        "required_secrets": REQUIRED_SECRETS,
+        "auth_secret_options": AUTH_SECRET_OPTIONS,
+        "required_secrets": AUTH_SECRET_OPTIONS,
         "presence": presence,
     }
 

@@ -22,6 +22,8 @@ GROUPS = [
         "required_any": ["LILYROO_EXECUTOR_BEARER_TOKEN", "EXECUTOR_BEARER_TOKEN", "LILYROO_ADMIN_PASSWORD", "ADMIN_PASSWORD"],
         "required_all": [],
         "github_actions_secrets": ["LILYROO_EXECUTOR_BEARER_TOKEN", "LILYROO_ADMIN_PASSWORD"],
+        "github_actions_push_preview": "python3 scripts/push_github_actions_secrets.py",
+        "github_actions_push_apply": "python3 scripts/push_github_actions_secrets.py --apply",
         "unblocks": "Scheduler dry-run, executor readiness capture, and execution history capture.",
         "verify": "python3 scripts/capture_scheduler_dry_run.py && python3 scripts/capture_social_executions.py",
     },
@@ -162,6 +164,8 @@ def build_group(group: dict, env: dict[str, str], github_presence: dict) -> dict
         "required_any": required_any,
         "github_actions_secrets": github_secrets,
         "github_actions_secret_status": github_status,
+        "github_actions_push_preview": group.get("github_actions_push_preview") or "",
+        "github_actions_push_apply": group.get("github_actions_push_apply") or "",
         "presence": {name: present(env, name) for name in sorted(set(required_all + required_any))},
         "missing_all": missing_all,
         "any_present": any_present,
@@ -238,6 +242,10 @@ def build_markdown(packet: dict) -> str:
         if group.get("github_actions_secrets"):
             lines.append(f"  - GitHub Actions secrets: {', '.join(group['github_actions_secrets'])}")
             lines.append(f"  - GitHub Actions status: {group['github_actions_secret_status']['status']}")
+            if group.get("github_actions_push_preview"):
+                lines.append(f"  - Preview GitHub secret push: `{group['github_actions_push_preview']}`")
+            if group.get("github_actions_push_apply"):
+                lines.append(f"  - Apply GitHub secret push: `{group['github_actions_push_apply']}`")
         lines.append(f"  - Unblocks: {group['unblocks']}")
         lines.append(f"  - Verify: `{group['verification_command']}`")
         lines.append(f"  - Next: {group['next_action']}")
