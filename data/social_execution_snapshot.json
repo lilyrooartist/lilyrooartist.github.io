@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "updated_at": "2026-06-23T13:14:36.287561Z",
+  "updated_at": "2026-06-24T06:12:17.371382Z",
   "source": "lilyroo-social-executor-executions",
   "url": "https://www.lilyroo.com/api/social/executions",
   "http_status": 200,
@@ -8,42 +8,27 @@
   "password_supplied": false,
   "auth_method": "bearer",
   "summary": {
-    "execution_count": 8,
-    "current_execution_count": 7,
-    "superseded_execution_count": 1,
-    "superseded_executions": [
-      {
-        "post_id": "FP-AUTO-261",
-        "platform": "YouTube Community",
-        "status": "skipped",
-        "reason": "manual_only",
-        "attempts": 0,
-        "updated_at": "2026-06-23T01:00:24.494Z",
-        "source": "cron",
-        "post_url": "",
-        "external_id": "",
-        "next_action": "",
-        "error_summary": "",
-        "superseded_reason": "manual_execution_replaced_by_auto_queue_row"
-      }
-    ],
+    "execution_count": 9,
+    "current_execution_count": 9,
+    "superseded_execution_count": 0,
+    "superseded_executions": [],
     "posted_count": 1,
-    "draft_uploaded_count": 1,
-    "attention_count": 5,
+    "draft_uploaded_count": 0,
+    "attention_count": 8,
     "approval_needed_count": 1,
-    "platform_fix_needed_count": 4,
+    "platform_fix_needed_count": 7,
     "manual_handoff_needed_count": 0,
     "status_counts": {
       "blocked": 1,
-      "draft_uploaded": 1,
-      "failed": 4,
+      "failed": 7,
       "posted": 1
     },
     "platform_counts": {
-      "Facebook": 1,
+      "Facebook": 2,
       "Instagram": 3,
       "TikTok": 2,
-      "X": 1
+      "X": 1,
+      "YouTube": 1
     },
     "latest_posted": [
       {
@@ -60,21 +45,7 @@
         "error_summary": ""
       }
     ],
-    "latest_draft_uploaded": [
-      {
-        "post_id": "FP-AUTO-264",
-        "platform": "TikTok",
-        "status": "draft_uploaded",
-        "reason": "",
-        "attempts": 1,
-        "updated_at": "2026-06-23T13:13:27.909Z",
-        "source": "manual",
-        "post_url": "",
-        "external_id": "v_inbox_url~v2.7654577601957480479",
-        "next_action": "Open TikTok inbox notification, finish review, publish, then log the public URL.",
-        "error_summary": ""
-      }
-    ],
+    "latest_draft_uploaded": [],
     "approval_needed": [
       {
         "post_id": "FP-AUTO-259",
@@ -82,7 +53,7 @@
         "status": "blocked",
         "reason": "not_approved",
         "attempts": 0,
-        "updated_at": "2026-06-23T13:00:24.200Z",
+        "updated_at": "2026-06-24T06:00:24.215Z",
         "source": "cron",
         "post_url": "",
         "external_id": "",
@@ -92,30 +63,17 @@
     ],
     "platform_fix_needed": [
       {
-        "post_id": "FP-AUTO-258",
-        "platform": "Instagram",
+        "post_id": "FP-AUTO-264",
+        "platform": "TikTok",
         "status": "failed",
-        "reason": "max_attempts_exceeded",
-        "attempts": 3,
-        "updated_at": "2026-06-23T13:00:24.471Z",
-        "source": "cron",
+        "reason": "",
+        "attempts": 1,
+        "updated_at": "2026-06-24T06:11:53.117Z",
+        "source": "manual",
         "post_url": "",
         "external_id": "",
         "next_action": "",
-        "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID."
-      },
-      {
-        "post_id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
-        "platform": "Instagram",
-        "status": "failed",
-        "reason": "max_attempts_exceeded",
-        "attempts": 3,
-        "updated_at": "2026-06-22T06:15:25.025Z",
-        "source": "cron",
-        "post_url": "",
-        "external_id": "",
-        "next_action": "",
-        "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID."
+        "error_summary": "API request failed (403): {\"error\":{\"code\":\"unaudited_client_can_only_post_to_private_accounts\",\"message\":\"Please review our integration guidelines at https://developers.tiktok.com/doc/content-sharing-guidelines/\",\"log_id\":\"2026062406115293"
       },
       {
         "post_id": "FP-AUTO-263",
@@ -123,7 +81,7 @@
         "status": "failed",
         "reason": "max_attempts_exceeded",
         "attempts": 3,
-        "updated_at": "2026-06-22T06:15:24.850Z",
+        "updated_at": "2026-06-24T06:00:25.412Z",
         "source": "cron",
         "post_url": "",
         "external_id": "",
@@ -131,59 +89,59 @@
         "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID."
       },
       {
-        "post_id": "FP-AUTO-265",
+        "post_id": "FP-AUTO-261",
+        "platform": "YouTube",
+        "status": "failed",
+        "reason": "max_attempts_exceeded",
+        "attempts": 3,
+        "updated_at": "2026-06-24T06:00:25.184Z",
+        "source": "cron",
+        "post_url": "",
+        "external_id": "",
+        "next_action": "",
+        "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}"
+      },
+      {
+        "post_id": "FP-PLAN-TWELVE-DOLLARS-FACEBOOK",
         "platform": "Facebook",
         "status": "failed",
-        "reason": "",
-        "attempts": 2,
-        "updated_at": "2026-06-22T06:00:17.558Z",
+        "reason": "max_attempts_exceeded",
+        "attempts": 3,
+        "updated_at": "2026-06-24T06:00:24.854Z",
         "source": "cron",
         "post_url": "",
         "external_id": "",
         "next_action": "",
         "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app."
+      },
+      {
+        "post_id": "FP-AUTO-258",
+        "platform": "Instagram",
+        "status": "failed",
+        "reason": "max_attempts_exceeded",
+        "attempts": 3,
+        "updated_at": "2026-06-24T06:00:24.450Z",
+        "source": "cron",
+        "post_url": "",
+        "external_id": "",
+        "next_action": "",
+        "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID."
       }
     ],
     "manual_handoff_needed": [],
     "latest_attention": [
       {
-        "post_id": "FP-AUTO-258",
-        "platform": "Instagram",
-        "status": "failed",
-        "reason": "max_attempts_exceeded",
-        "attempts": 3,
-        "updated_at": "2026-06-23T13:00:24.471Z",
-        "source": "cron",
-        "post_url": "",
-        "external_id": "",
-        "next_action": "",
-        "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID."
-      },
-      {
-        "post_id": "FP-AUTO-259",
+        "post_id": "FP-AUTO-264",
         "platform": "TikTok",
-        "status": "blocked",
-        "reason": "not_approved",
-        "attempts": 0,
-        "updated_at": "2026-06-23T13:00:24.200Z",
-        "source": "cron",
-        "post_url": "",
-        "external_id": "",
-        "next_action": "",
-        "error_summary": ""
-      },
-      {
-        "post_id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
-        "platform": "Instagram",
         "status": "failed",
-        "reason": "max_attempts_exceeded",
-        "attempts": 3,
-        "updated_at": "2026-06-22T06:15:25.025Z",
-        "source": "cron",
+        "reason": "",
+        "attempts": 1,
+        "updated_at": "2026-06-24T06:11:53.117Z",
+        "source": "manual",
         "post_url": "",
         "external_id": "",
         "next_action": "",
-        "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID."
+        "error_summary": "API request failed (403): {\"error\":{\"code\":\"unaudited_client_can_only_post_to_private_accounts\",\"message\":\"Please review our integration guidelines at https://developers.tiktok.com/doc/content-sharing-guidelines/\",\"log_id\":\"2026062406115293"
       },
       {
         "post_id": "FP-AUTO-263",
@@ -191,7 +149,7 @@
         "status": "failed",
         "reason": "max_attempts_exceeded",
         "attempts": 3,
-        "updated_at": "2026-06-22T06:15:24.850Z",
+        "updated_at": "2026-06-24T06:00:25.412Z",
         "source": "cron",
         "post_url": "",
         "external_id": "",
@@ -199,23 +157,49 @@
         "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID."
       },
       {
-        "post_id": "FP-AUTO-265",
+        "post_id": "FP-AUTO-261",
+        "platform": "YouTube",
+        "status": "failed",
+        "reason": "max_attempts_exceeded",
+        "attempts": 3,
+        "updated_at": "2026-06-24T06:00:25.184Z",
+        "source": "cron",
+        "post_url": "",
+        "external_id": "",
+        "next_action": "",
+        "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}"
+      },
+      {
+        "post_id": "FP-PLAN-TWELVE-DOLLARS-FACEBOOK",
         "platform": "Facebook",
         "status": "failed",
-        "reason": "",
-        "attempts": 2,
-        "updated_at": "2026-06-22T06:00:17.558Z",
+        "reason": "max_attempts_exceeded",
+        "attempts": 3,
+        "updated_at": "2026-06-24T06:00:24.854Z",
         "source": "cron",
         "post_url": "",
         "external_id": "",
         "next_action": "",
         "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app."
+      },
+      {
+        "post_id": "FP-AUTO-258",
+        "platform": "Instagram",
+        "status": "failed",
+        "reason": "max_attempts_exceeded",
+        "attempts": 3,
+        "updated_at": "2026-06-24T06:00:24.450Z",
+        "source": "cron",
+        "post_url": "",
+        "external_id": "",
+        "next_action": "",
+        "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID."
       }
     ]
   },
   "payload": {
     "ok": true,
-    "execution_count": 8
+    "execution_count": 9
   },
   "action_needed": ""
 }

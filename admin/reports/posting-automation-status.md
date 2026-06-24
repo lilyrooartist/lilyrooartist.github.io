@@ -1,6 +1,6 @@
 # Posting Automation Status - Lily Roo
 
-Generated: 2026-06-23T09:36:26.103529Z
+Generated: 2026-06-24T06:12:54.512080Z
 
 ## Summary
 - Status: **blocked**
@@ -19,13 +19,13 @@ Generated: 2026-06-23T09:36:26.103529Z
   - Detail: 41 refresh commands captured at 2026-06-23T08:58:46.140472Z
   - Evidence: data/promo_admin_refresh_run.json
 - **Scheduler dry-run authentication** - `ready`
-  - Detail: HTTP 200 using bearer auth; due=3 would_post=0
+  - Detail: HTTP 200 using bearer auth; due=6 would_post=0
   - Evidence: data/social_scheduler_dry_run.json
 - **Execution capture** - `ready`
-  - Detail: posted=1 attention=6 platform_fix_needed=5
+  - Detail: posted=1 attention=8 platform_fix_needed=7
   - Evidence: data/social_execution_snapshot.json
 - **Platform readiness** - `blocked`
-  - Detail: ready=X, Facebook, YouTube; blocked=Instagram, TikTok
+  - Detail: ready=X, TikTok, Facebook, YouTube; blocked=Instagram
   - Evidence: data/executor_readiness_snapshot.json
   - Next: Resolve the platform repair checklist before expecting full auto-post coverage.
 - **TikTok API lane** - `blocked`

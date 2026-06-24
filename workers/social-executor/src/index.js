@@ -250,8 +250,13 @@ async function runScheduledPosts(env, options = {}) {
     if (!payload.postId) continue;
 
     const existing = await executionState(env, payload.postId);
-    if (existing?.status === "posted") {
-      results.push({ post_id: payload.postId, status: "posted", duplicate: true });
+    if (isTerminalExecutionStatus(existing?.status)) {
+      results.push({
+        post_id: payload.postId,
+        status: existing.status,
+        post_url: existing.post_url || "",
+        duplicate: true,
+      });
       continue;
     }
 

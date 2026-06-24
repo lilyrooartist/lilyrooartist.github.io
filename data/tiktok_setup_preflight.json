@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-23T08:58:45.269077Z",
+  "generated_at": "2026-06-24T06:12:54.442874Z",
   "safe_mode": true,
   "source": {
     "local_secret_source": "secrets/social_api.env",
@@ -17,8 +17,8 @@
     "posting_mode": "api",
     "api_strategy_confirmed": true,
     "check_count": 12,
-    "blocked_count": 7,
-    "ready_to_push_worker_secrets": false,
+    "blocked_count": 1,
+    "ready_to_push_worker_secrets": true,
     "ready_to_upload_drafts": false,
     "ready_to_post_publicly": false,
     "local_posting_helper_uses_refresh_token": true,
@@ -30,7 +30,7 @@
       "song": "I Learned It All in Fifteen Seconds",
       "post_type": "video",
       "approved": true,
-      "clip_url": "https://www.lilyroo.com/assets/ig/01_i_learned_it_all_60s.mp4",
+      "clip_url": "https://www.lilyroo.com/assets/media/01_i_learned_it_all_60s_tiktok.mp4?fresh=6cb3941d2",
       "media_ready": true,
       "text_ready": true,
       "media_key": "i-learned-60s",
@@ -108,40 +108,25 @@
         "command": "python3 scripts/refresh_promo_admin.py"
       }
     ],
-    "local_missing_secrets": [
-      "TIKTOK_CLIENT_KEY",
-      "TIKTOK_CLIENT_SECRET",
-      "TIKTOK_REFRESH_TOKEN"
-    ],
+    "local_missing_secrets": [],
     "local_secret_dir_exists": true,
     "local_secret_env_exists": true,
     "local_secret_env_runtime_exists": true,
     "local_secret_handoff_prepared": true,
     "local_secret_handoff_status_path": "data/tiktok_local_handoff_status.json",
     "initialize_local_secret_env_command": "",
-    "oauth_authorization_url_missing": [
-      "TIKTOK_CLIENT_KEY",
-      "TIKTOK_REDIRECT_URI"
-    ],
-    "oauth_token_exchange_missing": [
-      "TIKTOK_CLIENT_KEY",
-      "TIKTOK_CLIENT_SECRET",
-      "TIKTOK_REDIRECT_URI"
-    ],
-    "worker_missing_secrets": [
-      "TIKTOK_CLIENT_KEY",
-      "TIKTOK_CLIENT_SECRET",
-      "TIKTOK_REFRESH_TOKEN"
-    ],
+    "oauth_authorization_url_missing": [],
+    "oauth_token_exchange_missing": [],
+    "worker_missing_secrets": [],
     "public_posting_approved": false,
     "local_public_posting_approval_confirmed": false,
     "default_privacy": "PUBLIC_TO_EVERYONE",
-    "worker_posting_mode": "upload",
+    "worker_posting_mode": "direct",
     "brand_content_toggle": false,
     "brand_organic_toggle": true,
     "aigc_label_enabled": true,
     "push_preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
-    "push_apply_command": "",
+    "push_apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
     "public_posting_preview_command": "python3 scripts/set_tiktok_public_posting_approval.py --approved",
     "public_posting_apply_command": "",
     "public_posting_deploy_command": "",
@@ -149,10 +134,10 @@
     "oauth_preview_command": "python3 scripts/tiktok_oauth_handoff.py",
     "oauth_authorization_url_command": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload",
     "oauth_exchange_command": "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode upload",
-    "platform_repair_rows": 1
+    "platform_repair_rows": 0
   },
   "credential_handoff": {
-    "status": "needs_local_values",
+    "status": "ready_to_push",
     "required_secret_names": [
       "TIKTOK_CLIENT_KEY",
       "TIKTOK_CLIENT_SECRET",
@@ -193,25 +178,10 @@
       "TIKTOK_PUBLIC_POSTING_APPROVED",
       "TIKTOK_DEFAULT_PRIVACY"
     ],
-    "local_missing_secrets": [
-      "TIKTOK_CLIENT_KEY",
-      "TIKTOK_CLIENT_SECRET",
-      "TIKTOK_REFRESH_TOKEN"
-    ],
-    "oauth_authorization_url_missing": [
-      "TIKTOK_CLIENT_KEY",
-      "TIKTOK_REDIRECT_URI"
-    ],
-    "oauth_token_exchange_missing": [
-      "TIKTOK_CLIENT_KEY",
-      "TIKTOK_CLIENT_SECRET",
-      "TIKTOK_REDIRECT_URI"
-    ],
-    "worker_missing_secrets": [
-      "TIKTOK_CLIENT_KEY",
-      "TIKTOK_CLIENT_SECRET",
-      "TIKTOK_REFRESH_TOKEN"
-    ],
+    "local_missing_secrets": [],
+    "oauth_authorization_url_missing": [],
+    "oauth_token_exchange_missing": [],
+    "worker_missing_secrets": [],
     "oauth_handoff_script": "scripts/tiktok_oauth_handoff.py",
     "requested_oauth_scopes": [
       "user.info.basic",
@@ -229,12 +199,12 @@
     "local_public_posting_approval_confirmed": false,
     "public_posting_approved": false,
     "default_privacy": "PUBLIC_TO_EVERYONE",
-    "worker_posting_mode": "upload",
+    "worker_posting_mode": "direct",
     "brand_content_toggle": false,
     "brand_organic_toggle": true,
     "aigc_label_enabled": true,
     "dry_run_first_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
-    "apply_command": "",
+    "apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
     "public_posting_preview_command": "python3 scripts/set_tiktok_public_posting_approval.py --approved",
     "public_posting_apply_command": "",
     "public_posting_deploy_command": "",
@@ -317,36 +287,9 @@
   "owner_handoff": {
     "status": "blocked_until_user_input",
     "question_answer": "Yes, fix the TikTok connector after the current manual YouTube evidence loop; it unlocks the short-video growth format.",
-    "next_safe_action": "python3 scripts/tiktok_oauth_handoff.py",
-    "needed_input_count": 3,
+    "next_safe_action": "python3 scripts/set_tiktok_public_posting_approval.py --approved",
+    "needed_input_count": 1,
     "needed_inputs": [
-      {
-        "id": "tiktok_developer_app_credentials",
-        "owner": "tod",
-        "status": "needed",
-        "request": "Add Lily Roo TikTok developer app values locally.",
-        "values_needed": [
-          "TIKTOK_CLIENT_KEY",
-          "TIKTOK_CLIENT_SECRET",
-          "TIKTOK_REDIRECT_URI",
-          "TIKTOK_REFRESH_TOKEN"
-        ],
-        "safe_storage": "secrets/social_api.env",
-        "why": "The connector cannot generate an OAuth URL, exchange a code, or refresh TikTok access without these app values.",
-        "next_command_after_input": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload"
-      },
-      {
-        "id": "authorize_lily_roo_tiktok_account",
-        "owner": "tod",
-        "status": "needed",
-        "request": "Authorize the Lily Roo TikTok account after the OAuth URL is generated.",
-        "values_needed": [
-          "short-lived TikTok authorization code"
-        ],
-        "safe_storage": "secrets/social_api.env",
-        "why": "The refresh token is created only after the Lily Roo account authorizes the app with the requested scopes.",
-        "next_command_after_input": "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode upload"
-      },
       {
         "id": "public_posting_approval",
         "owner": "tod",
@@ -470,38 +413,38 @@
     },
     {
       "name": "oauth_authorization_url",
-      "status": "blocked",
-      "detail": "secrets/social_api.env is missing auth URL values: TIKTOK_CLIENT_KEY, TIKTOK_REDIRECT_URI.",
+      "status": "pass",
+      "detail": "TikTok OAuth authorization URL can be generated locally.",
       "command": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload"
     },
     {
       "name": "oauth_token_exchange",
-      "status": "blocked",
-      "detail": "secrets/social_api.env is missing token exchange values: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REDIRECT_URI.",
+      "status": "pass",
+      "detail": "TikTok OAuth authorization codes can be exchanged locally.",
       "command": "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode upload"
     },
     {
       "name": "local_refresh_credentials",
-      "status": "blocked",
-      "detail": "secrets/social_api.env is missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
+      "status": "pass",
+      "detail": "Local refresh credentials are present.",
       "command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN"
     },
     {
       "name": "local_posting_token_path",
-      "status": "blocked",
-      "detail": "Local TikTok posting helper needs TIKTOK_ACCESS_TOKEN or refresh credentials.",
+      "status": "pass",
+      "detail": "Local TikTok posting helper can use an existing access token.",
       "command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --dry-run"
     },
     {
       "name": "worker_refresh_credentials",
-      "status": "blocked",
-      "detail": "Worker readiness reports missing secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
+      "status": "pass",
+      "detail": "Worker readiness reports TikTok refresh credentials present.",
       "command": "python3 scripts/capture_executor_readiness.py"
     },
     {
       "name": "worker_token_path",
-      "status": "blocked",
-      "detail": "Worker has neither access token nor refresh credentials.",
+      "status": "pass",
+      "detail": "Worker has either an access token or refresh credentials available.",
       "command": "python3 scripts/capture_executor_readiness.py"
     },
     {

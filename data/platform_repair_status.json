@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-23T08:58:45.301737Z",
+  "generated_at": "2026-06-24T06:12:54.403594Z",
   "safe_mode": true,
   "source": {
     "promo_operations_packet": "data/promo_operations_packet.json",
@@ -8,17 +8,16 @@
     "tiktok_setup_preflight": "data/tiktok_setup_preflight.json"
   },
   "summary": {
-    "platform_fix_count": 5,
-    "blocked_count": 5,
-    "preview_command_count": 5,
+    "platform_fix_count": 4,
+    "blocked_count": 4,
+    "preview_command_count": 4,
     "apply_command_count": 0,
     "retry_reset_count": 3,
-    "checklist_item_count": 15,
-    "checklist_blocked_count": 6,
+    "checklist_item_count": 11,
+    "checklist_blocked_count": 3,
     "platforms": [
       "Facebook",
-      "Instagram",
-      "TikTok"
+      "Instagram"
     ]
   },
   "rows": [
@@ -29,7 +28,7 @@
       "status": "failed",
       "reason": "max_attempts_exceeded",
       "attempts": 3,
-      "updated_at": "2026-06-23T08:45:24.544Z",
+      "updated_at": "2026-06-24T06:00:24.450Z",
       "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
       "repair_action": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
       "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-258",
@@ -96,7 +95,7 @@
       "status": "failed",
       "reason": "max_attempts_exceeded",
       "attempts": 3,
-      "updated_at": "2026-06-22T06:15:24.850Z",
+      "updated_at": "2026-06-24T06:00:25.412Z",
       "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
       "repair_action": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
       "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263",
@@ -160,10 +159,10 @@
       "post_id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
       "platform": "Instagram",
       "priority": 1,
-      "status": "failed",
+      "status": "needs_fix",
       "reason": "max_attempts_exceeded",
-      "attempts": 3,
-      "updated_at": "2026-06-22T06:15:25.025Z",
+      "attempts": null,
+      "updated_at": "",
       "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
       "repair_action": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
       "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
@@ -227,10 +226,10 @@
       "post_id": "FP-AUTO-265",
       "platform": "Facebook",
       "priority": 2,
-      "status": "failed",
+      "status": "needs_fix",
       "reason": "",
-      "attempts": 2,
-      "updated_at": "2026-06-22T06:00:17.558Z",
+      "attempts": null,
+      "updated_at": "",
       "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
       "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
       "preview_command": "python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run",
@@ -271,99 +270,6 @@
         }
       ],
       "repair_checklist_blocked_count": 0,
-      "blocked": true
-    },
-    {
-      "post_id": "FP-AUTO-264",
-      "platform": "TikTok",
-      "priority": 3,
-      "status": "blocked",
-      "reason": "tiktok_credentials_missing",
-      "attempts": 0,
-      "updated_at": "2026-06-23T08:45:24.801Z",
-      "error_summary": "",
-      "repair_action": "Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok direct public posting approval is false, but upload-draft mode can proceed after credentials. Local secret source is also missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Complete TikTok OAuth setup locally, then push upload-mode secrets and refresh Admin.",
-      "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
-      "apply_command": "",
-      "blocked_apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
-      "blocked_apply_reasons": [
-        "local_secret_source_missing:TIKTOK_CLIENT_KEY,TIKTOK_CLIENT_SECRET,TIKTOK_REFRESH_TOKEN"
-      ],
-      "retry_reset_verification_command": "",
-      "retry_reset_preview_command": "",
-      "retry_reset_apply_command": "",
-      "retry_reset_note": "",
-      "readiness": {
-        "ready": false,
-        "posting_mode": "upload",
-        "upload_ready": false,
-        "direct_public_ready": false,
-        "access_token_present": false,
-        "refresh_config_present": false,
-        "missing_secrets": [
-          "TIKTOK_CLIENT_KEY",
-          "TIKTOK_CLIENT_SECRET",
-          "TIKTOK_REFRESH_TOKEN"
-        ],
-        "public_posting_approved": false,
-        "default_privacy": "PUBLIC_TO_EVERYONE",
-        "brand_content_toggle": false,
-        "brand_organic_toggle": true,
-        "aigc_label_enabled": true
-      },
-      "missing_secrets": [
-        "TIKTOK_CLIENT_KEY",
-        "TIKTOK_CLIENT_SECRET",
-        "TIKTOK_REFRESH_TOKEN"
-      ],
-      "local_missing_secrets": [
-        "TIKTOK_CLIENT_KEY",
-        "TIKTOK_CLIENT_SECRET",
-        "TIKTOK_REFRESH_TOKEN"
-      ],
-      "local_secret_presence": {
-        "TIKTOK_CLIENT_KEY": false,
-        "TIKTOK_CLIENT_SECRET": false,
-        "TIKTOK_REFRESH_TOKEN": false
-      },
-      "local_secret_ready": false,
-      "local_secret_source": "secrets/social_api.env",
-      "public_posting_approved": false,
-      "preflight_status": "blocked",
-      "preflight_blocked_count": 7,
-      "preflight_command": "python3 scripts/build_tiktok_setup_preflight.py",
-      "preflight_report": "admin/reports/tiktok-setup-preflight.md",
-      "repair_checklist": [
-        {
-          "id": "remote_worker_secrets",
-          "label": "Worker secrets",
-          "status": "blocked",
-          "detail": "Missing remote worker secret(s): TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
-          "command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN"
-        },
-        {
-          "id": "local_secret_source",
-          "label": "Local secret source",
-          "status": "blocked",
-          "detail": "secrets/social_api.env is missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
-          "command": ""
-        },
-        {
-          "id": "public_posting_approval",
-          "label": "Direct public posting approval",
-          "status": "blocked",
-          "detail": "Direct public posting approval is false; TikTok upload-draft mode can still proceed after credentials.",
-          "command": ""
-        },
-        {
-          "id": "refresh_verification",
-          "label": "Refresh verification",
-          "status": "review",
-          "detail": "After repair, refresh admin so readiness, scheduler, blocker, and backlog state update together.",
-          "command": "python3 scripts/refresh_promo_admin.py"
-        }
-      ],
-      "repair_checklist_blocked_count": 3,
       "blocked": true
     }
   ]

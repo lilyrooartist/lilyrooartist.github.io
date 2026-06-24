@@ -536,7 +536,7 @@ def validate_generated_outputs(failures):
             and required_checks <= check_names
             and required_source <= set(source)
             and isinstance(summary.get("ready_to_upload_drafts"), bool)
-            and "upload" in (summary.get("worker_posting_mode") or "")
+            and (summary.get("worker_posting_mode") or "") in {"upload", "direct"}
             and credential_handoff.get("status") in {"ready_to_push", "needs_local_values"}
             and owner_handoff.get("status") in {"blocked_until_user_input", "ready_for_secret_push_preview"}
             and owner_handoff.get("needed_input_count") == len(owner_handoff.get("needed_inputs") or [])
@@ -882,8 +882,13 @@ def validate_generated_outputs(failures):
             and (action.get("context") or {}).get("repair_apply_command")
             and (action.get("context") or {}).get("reason") != "max_attempts_exceeded"
         ]
-        if secret_platform_fix_actions and all(
-            "--dry-run" in (action.get("command") or "")
+        if not secret_platform_fix_actions:
+            ok("promo operations packet has no secret repair preview rows")
+        elif all(
+            (
+                "--dry-run" in (action.get("command") or "")
+                or "--check-worker-dry-run" in (action.get("command") or "")
+            )
             and "--dry-run" not in ((action.get("context") or {}).get("repair_apply_command") or "")
             for action in secret_platform_fix_actions
         ):
@@ -911,7 +916,8 @@ def validate_generated_outputs(failures):
             ok("promo operations packet has no max-attempt retry reset rows")
         tiktok_actions = [
             action for action in actions
-            if (action.get("context") or {}).get("platform") == "TikTok"
+            if action.get("kind") == "platform_fix"
+            and (action.get("context") or {}).get("platform") == "TikTok"
             and action.get("urgency") in {"blocked", "high"}
         ]
         if tiktok_actions and any(
@@ -922,6 +928,25 @@ def validate_generated_outputs(failures):
             for action in tiktok_actions
         ):
             ok("promo operations packet includes TikTok remote and local missing-secret diagnostics")
+        elif not tiktok_actions:
+            tiktok_preflight = json.loads(TIKTOK_SETUP_PREFLIGHT.read_text(encoding="utf-8")) if TIKTOK_SETUP_PREFLIGHT.exists() else {}
+            tiktok_summary = tiktok_preflight.get("summary") or {}
+            if (
+                (
+                    tiktok_summary.get("ready_to_upload_drafts") is True
+                    or (
+                        tiktok_summary.get("worker_posting_mode") == "direct"
+                        and tiktok_summary.get("ready_to_post_publicly") is False
+                        and tiktok_summary.get("public_posting_approved") is False
+                    )
+                )
+                and not tiktok_summary.get("worker_missing_secrets")
+                and not tiktok_summary.get("local_missing_secrets")
+                and int(tiktok_summary.get("platform_repair_rows") or 0) == 0
+            ):
+                ok("promo operations packet has no TikTok missing-secret diagnostics after credential repair")
+            else:
+                fail("promo_operations_packet.json missing TikTok remote/local missing-secret diagnostics", failures)
         else:
             fail("promo_operations_packet.json missing TikTok remote/local missing-secret diagnostics", failures)
         instagram_actions = [

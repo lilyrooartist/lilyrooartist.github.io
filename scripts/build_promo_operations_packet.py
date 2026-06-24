@@ -316,6 +316,21 @@ def repair_action_for(platform: str, fallback: str, diagnostics: dict) -> str:
     return fallback
 
 
+def platform_fix_still_needed(platform: str, diagnostics: dict) -> bool:
+    if platform_slug(platform) != "tiktok":
+        return True
+    readiness = diagnostics.get("readiness") or {}
+    posting_mode = str(readiness.get("posting_mode") or "").strip().lower()
+    missing = diagnostics.get("missing_secrets") or []
+    if missing:
+        return True
+    if posting_mode == "upload":
+        return not bool(readiness.get("upload_ready"))
+    if posting_mode == "direct":
+        return not bool(readiness.get("direct_public_ready"))
+    return not bool(readiness.get("ready"))
+
+
 def retry_reset_context(row: dict) -> dict:
     post_id = row.get("post_id") or ""
     if row.get("reason") != "max_attempts_exceeded" or not post_id:
@@ -655,6 +670,8 @@ def platform_fix_actions(status, executions, readiness):
         platform = row.get("platform") or ""
         diagnostics = readiness_diagnostics(readiness, platform)
         diagnostics.update(local_secret_diagnostics(platform, diagnostics.get("missing_secrets") or []))
+        if not platform_fix_still_needed(platform, diagnostics):
+            continue
         fallback_action = row.get("repair_action") or ""
         fallback_command = row.get("repair_command") or "python3 scripts/refresh_promo_admin.py"
         command = repair_command_for(platform, fallback_command, row)

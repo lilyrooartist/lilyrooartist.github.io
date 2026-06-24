@@ -1,28 +1,28 @@
 {
   "ok": true,
-  "updated_at": "2026-06-23T13:14:37.087804Z",
+  "updated_at": "2026-06-24T06:12:54.325051Z",
   "source": "lilyroo-social-scheduler-dry-run",
   "url": "https://www.lilyroo.com/api/social/scheduler/dry-run",
   "http_status": 200,
   "error": null,
   "auth_method": "bearer",
-  "requested_scheduled_time": "2026-06-23T13:14:36.378994Z",
+  "requested_scheduled_time": "2026-06-24T06:12:53.705175Z",
   "dry_run": true,
-  "checked_at": "2026-06-23T13:14:36.378Z",
+  "checked_at": "2026-06-24T06:12:53.705Z",
   "summary": {
-    "due_count": 3,
-    "result_count": 3,
+    "due_count": 6,
+    "result_count": 6,
     "would_post_count": 0,
-    "blocked_count": 2,
+    "blocked_count": 6,
     "status_counts": {
-      "blocked": 1,
-      "draft_uploaded": 1,
-      "failed": 1
+      "blocked": 2,
+      "failed": 4
     },
     "platform_counts": {
-      "Instagram": 1,
-      "TikTok": 1,
-      "Unknown": 1
+      "Facebook": 1,
+      "Instagram": 2,
+      "TikTok": 2,
+      "YouTube": 1
     },
     "would_post": [],
     "blocked": [
@@ -33,7 +33,7 @@
         "reason": "not_approved",
         "post_type": "",
         "attempts": 0,
-        "updated_at": "2026-06-23T13:14:37.272Z",
+        "updated_at": "2026-06-24T06:12:54.551Z",
         "source": "dry-run",
         "error_summary": ""
       },
@@ -44,7 +44,51 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-06-23T13:14:37.278Z",
+        "updated_at": "2026-06-24T06:12:54.556Z",
+        "source": "dry-run",
+        "error_summary": "Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page"
+      },
+      {
+        "post_id": "FP-AUTO-264",
+        "platform": "TikTok",
+        "status": "blocked",
+        "reason": "tiktok_public_posting_not_approved",
+        "post_type": "",
+        "attempts": 1,
+        "updated_at": "2026-06-24T06:12:54.740Z",
+        "source": "dry-run",
+        "error_summary": ""
+      },
+      {
+        "post_id": "FP-PLAN-TWELVE-DOLLARS-FACEBOOK",
+        "platform": "Facebook",
+        "status": "failed",
+        "reason": "max_attempts_exceeded",
+        "post_type": "",
+        "attempts": 3,
+        "updated_at": "2026-06-24T06:12:54.748Z",
+        "source": "dry-run",
+        "error_summary": "API request failed (400): {\"error\":{\"message\":\"Confirm your identity before you can publish as this Page. Open the Facebook app on your phone and follow the instructions.\",\"type\":\"OAuthException\",\"code\":368,\"error_data\":{\"sentry_block_data\""
+      },
+      {
+        "post_id": "FP-AUTO-261",
+        "platform": "YouTube",
+        "status": "failed",
+        "reason": "max_attempts_exceeded",
+        "post_type": "",
+        "attempts": 3,
+        "updated_at": "2026-06-24T06:12:54.757Z",
+        "source": "dry-run",
+        "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}"
+      },
+      {
+        "post_id": "FP-AUTO-263",
+        "platform": "Instagram",
+        "status": "failed",
+        "reason": "max_attempts_exceeded",
+        "post_type": "",
+        "attempts": 3,
+        "updated_at": "2026-06-24T06:12:54.762Z",
         "source": "dry-run",
         "error_summary": "Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page"
       }
@@ -52,8 +96,8 @@
   },
   "payload": {
     "ok": true,
-    "due_count": 3,
-    "result_count": 3
+    "due_count": 6,
+    "result_count": 6
   },
   "action_needed": ""
 }

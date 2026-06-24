@@ -1,23 +1,23 @@
 # Promo Operations Packet - Lily Roo
 
-Generated: 2026-06-23T09:36:19.385603Z
+Generated: 2026-06-24T06:12:54.363086Z
 
 ## Summary
-- Actions: **17**
+- Actions: **16**
 - User review: **1**
-- Platform fixes: **5**
+- Platform fixes: **4**
 - Scheduled approval batches: **0**
 - Manual distribution actions: **0**
 - Experiment result actions: **1**
 - Store checks: **7**
 - Manual metric updates: **2**
 - Safe apply commands ready: **0**
-- Urgency: **blocked: 2, high: 6, low: 2, medium: 7**
+- Urgency: **blocked: 2, high: 5, low: 2, medium: 7**
 
 ## Phase Counts
 - Collect experiment results: **1**
 - Fill manual metrics: **2**
-- Repair executor: **5**
+- Repair executor: **4**
 - Reschedule approved backlog: **1**
 - Review blocked drafts: **1**
 - Verify music sites: **7**
@@ -34,21 +34,11 @@ Generated: 2026-06-23T09:36:19.385603Z
 - **[blocked] Review TikTok draft for Twelve Dollars**
   - Why: Executor setup is not ready for this draft.
   - Detail: Executor credentials or platform setup are not ready.
-  - Missing secrets: `TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN`
   - Public posting approved: `False`
   - Command: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --dry-run`
   - Approve after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --refresh-admin`
 
 ### Repair executor
-- **[high] Fix TikTok executor**
-  - Why: Platform executor needs repair before queued auto posts can publish.
-  - Detail: Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok direct public posting approval is false, but upload-draft mode can proceed after credentials. Local secret source is also missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Complete TikTok OAuth setup locally, then push upload-mode secrets and refresh Admin.
-  - Missing secrets: `TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN`
-  - Missing locally: `TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN`
-  - Local source: `secrets/social_api.env`
-  - Public posting approved: `False`
-  - Command: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
-  - Apply repair after preview: `python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py`
 - **[high] Fix Instagram executor**
   - Why: Platform executor needs repair before queued auto posts can publish.
   - Detail: Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.
@@ -113,6 +103,11 @@ Generated: 2026-06-23T09:36:19.385603Z
   - Detail: Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-06-24T08:58:39.676136+00:00. Status: waiting_for_release_propagation.
   - Latest snapshot checked: `2026-06-23T08:58:39.676136+00:00`
   - Command: `python3 scripts/search_spotify_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/spotify_release_snapshot.json'`
+- **[medium] Re-check Analog Myth on Apple Music**
+  - Why: Public store links should be checked as the July 1 release approaches.
+  - Detail: Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-06-24T08:58:40.262040+00:00. Status: waiting_for_release_propagation.
+  - Latest snapshot checked: `2026-06-23T08:58:40.262040+00:00`
+  - Command: `python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/apple_music_release_snapshot.json'`
 
 ## Guardrails
 - This packet does not publish, approve, apply, or post anything.

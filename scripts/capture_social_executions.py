@@ -67,6 +67,8 @@ def safe_execution(item: dict) -> dict:
         "updated_at": item.get("updated_at", ""),
         "source": item.get("source", ""),
         "post_url": item.get("post_url", ""),
+        "external_id": item.get("external_id", ""),
+        "next_action": ((item.get("result") or {}).get("next_action") or ""),
         "error_summary": execution_summary(item),
     }
 
@@ -128,6 +130,10 @@ def summarize(payload: dict) -> dict:
         item for item in current_executions
         if item.get("status") == "posted"
     ]
+    draft_uploaded = [
+        item for item in current_executions
+        if item.get("status") == "draft_uploaded"
+    ]
     failed = [
         item for item in current_executions
         if item.get("status") in {"failed", "blocked", "skipped"}
@@ -150,6 +156,7 @@ def summarize(payload: dict) -> dict:
         "superseded_execution_count": len(superseded),
         "superseded_executions": [safe_execution(item) | {"superseded_reason": item.get("superseded_reason", "")} for item in superseded[:5]],
         "posted_count": len(posted),
+        "draft_uploaded_count": len(draft_uploaded),
         "attention_count": len(failed),
         "approval_needed_count": len(approval_needed),
         "platform_fix_needed_count": len(platform_fix_needed),
@@ -157,6 +164,7 @@ def summarize(payload: dict) -> dict:
         "status_counts": dict(sorted(status_counts.items())),
         "platform_counts": dict(sorted(platform_counts.items())),
         "latest_posted": [safe_execution(item) for item in posted[:5]],
+        "latest_draft_uploaded": [safe_execution(item) for item in draft_uploaded[:5]],
         "approval_needed": [safe_execution(item) for item in approval_needed[:5]],
         "platform_fix_needed": [safe_execution(item) for item in platform_fix_needed[:5]],
         "manual_handoff_needed": [safe_execution(item) for item in manual_handoff_needed[:5]],

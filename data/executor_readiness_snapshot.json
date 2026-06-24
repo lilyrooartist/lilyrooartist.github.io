@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "updated_at": "2026-06-23T08:58:42.524424Z",
+  "updated_at": "2026-06-24T06:12:53.641674Z",
   "source": "lilyroo-social-executor-readiness",
   "url": "https://www.lilyroo.com/api/social/readiness",
   "http_status": 200,
@@ -10,17 +10,17 @@
   "summary": {
     "ready_platforms": [
       "X",
+      "TikTok",
       "Facebook",
       "YouTube"
     ],
     "blocked_platforms": [
-      "Instagram",
-      "TikTok"
+      "Instagram"
     ],
     "platforms": {
       "X": true,
       "Instagram": false,
-      "TikTok": false,
+      "TikTok": true,
       "Facebook": true,
       "YouTube": true
     }
@@ -52,17 +52,13 @@
         "account_resolution_reason": "instagram_business_account_unresolved"
       },
       "tiktok": {
-        "ready": false,
-        "posting_mode": "upload",
-        "upload_ready": false,
+        "ready": true,
+        "posting_mode": "direct",
+        "upload_ready": true,
         "direct_public_ready": false,
-        "access_token_present": false,
-        "refresh_config_present": false,
-        "missing_secrets": [
-          "TIKTOK_CLIENT_KEY",
-          "TIKTOK_CLIENT_SECRET",
-          "TIKTOK_REFRESH_TOKEN"
-        ],
+        "access_token_present": true,
+        "refresh_config_present": true,
+        "missing_secrets": [],
         "public_posting_approved": false,
         "default_privacy": "PUBLIC_TO_EVERYONE",
         "brand_content_toggle": false,

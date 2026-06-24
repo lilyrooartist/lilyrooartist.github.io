@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-23T09:36:26.103529Z",
+  "generated_at": "2026-06-24T06:12:54.512080Z",
   "safe_mode": true,
   "source": {
     "workflow": ".github/workflows/promo-admin-refresh.yml",
@@ -26,11 +26,11 @@
     "scheduler_auth_method": "bearer",
     "scheduler_refresh_step_ok": true,
     "posted_count": 1,
-    "attention_count": 6,
-    "platform_fix_needed_count": 5,
+    "attention_count": 8,
+    "platform_fix_needed_count": 7,
     "story_post_count": 6,
     "story_queued_future_count": 6,
-    "platform_repair_blocked_count": 5,
+    "platform_repair_blocked_count": 4,
     "blocker_input_status": "missing_local_input",
     "blocker_input_missing_count": 3,
     "blocker_input_external_action_count": 1,
@@ -55,21 +55,21 @@
     {
       "label": "Scheduler dry-run authentication",
       "status": "ready",
-      "detail": "HTTP 200 using bearer auth; due=3 would_post=0",
+      "detail": "HTTP 200 using bearer auth; due=6 would_post=0",
       "evidence": "data/social_scheduler_dry_run.json",
       "next_action": ""
     },
     {
       "label": "Execution capture",
       "status": "ready",
-      "detail": "posted=1 attention=6 platform_fix_needed=5",
+      "detail": "posted=1 attention=8 platform_fix_needed=7",
       "evidence": "data/social_execution_snapshot.json",
       "next_action": ""
     },
     {
       "label": "Platform readiness",
       "status": "blocked",
-      "detail": "ready=X, Facebook, YouTube; blocked=Instagram, TikTok",
+      "detail": "ready=X, TikTok, Facebook, YouTube; blocked=Instagram",
       "evidence": "data/executor_readiness_snapshot.json",
       "next_action": "Resolve the platform repair checklist before expecting full auto-post coverage."
     },
