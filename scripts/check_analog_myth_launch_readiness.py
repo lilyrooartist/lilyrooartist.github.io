@@ -172,6 +172,43 @@ def jpeg_dimensions(path: Path) -> tuple[int, int]:
     return 0, 0
 
 
+def itunes_duration_seconds(value: str) -> int | None:
+    if not value:
+        return None
+    parts = value.strip().split(":")
+    if not all(part.isdigit() for part in parts):
+        return None
+    numbers = [int(part) for part in parts]
+    if len(numbers) == 1:
+        return numbers[0]
+    if len(numbers) == 2:
+        minutes, seconds = numbers
+        return minutes * 60 + seconds
+    if len(numbers) == 3:
+        hours, minutes, seconds = numbers
+        return hours * 3600 + minutes * 60 + seconds
+    return None
+
+
+def mp4_duration_seconds(path: Path) -> float:
+    data = path.read_bytes()
+    marker = data.find(b"mvhd")
+    if marker < 4:
+        return 0.0
+    version = data[marker + 4]
+    if version == 0:
+        timescale = int.from_bytes(data[marker + 16:marker + 20], "big")
+        duration = int.from_bytes(data[marker + 20:marker + 24], "big")
+    elif version == 1:
+        timescale = int.from_bytes(data[marker + 28:marker + 32], "big")
+        duration = int.from_bytes(data[marker + 32:marker + 40], "big")
+    else:
+        return 0.0
+    if not timescale:
+        return 0.0
+    return duration / timescale
+
+
 def local_path_for_url(url: str, page: Path) -> Path | None:
     parsed = urllib.parse.urlparse(url)
     if parsed.scheme in {"http", "https"}:
@@ -287,6 +324,14 @@ def check_feed(results: list[dict]) -> None:
     item_image = item.find(f"{ITUNES_NS}image") if item is not None else None
     add_result(results, "Podcast feed item title is Analog Myth episode", item is not None and item.findtext("title") == "Analog Myth: The Clock Cannot Explain This", item.findtext("title") if item is not None else "")
     add_result(results, "Podcast feed item duration is 12:11", duration == "12:11", duration or "")
+    feed_duration_seconds = itunes_duration_seconds(duration)
+    audio_duration_seconds = mp4_duration_seconds(PODCAST_AUDIO) if PODCAST_AUDIO.exists() else 0.0
+    add_result(
+        results,
+        "Podcast feed item duration matches audio file",
+        feed_duration_seconds is not None and audio_duration_seconds > 0 and abs(audio_duration_seconds - feed_duration_seconds) <= 2,
+        f"feed={duration} audio={audio_duration_seconds:.2f}s",
+    )
     add_result(results, "Podcast feed item episode type is full", episode_type == "full", episode_type or "")
     add_result(results, "Podcast feed item explicit flag is false", item_explicit == "false", item_explicit or "")
     add_result(results, "Podcast feed item summary mentions Analog Myth", "Analog Myth" in (summary or ""), summary or "")

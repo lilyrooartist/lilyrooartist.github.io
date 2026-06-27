@@ -38,6 +38,19 @@ def write_pages(root: Path, *, omit_spotify_from: str = "") -> None:
 
 
 class AnalogMythReadinessTest(unittest.TestCase):
+    def test_itunes_duration_parser_accepts_common_formats(self) -> None:
+        self.assertEqual(readiness.itunes_duration_seconds("12:11"), 731)
+        self.assertEqual(readiness.itunes_duration_seconds("01:02:03"), 3723)
+        self.assertEqual(readiness.itunes_duration_seconds("731"), 731)
+        self.assertIsNone(readiness.itunes_duration_seconds("12 minutes"))
+
+    def test_podcast_audio_duration_matches_feed_tolerance(self) -> None:
+        actual_seconds = readiness.mp4_duration_seconds(readiness.PODCAST_AUDIO)
+        feed_seconds = readiness.itunes_duration_seconds("12:11")
+        self.assertIsNotNone(feed_seconds)
+        self.assertGreater(actual_seconds, 0)
+        self.assertLessEqual(abs(actual_seconds - feed_seconds), 2)
+
     def test_applied_store_links_pass_when_urls_are_in_expected_files(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             tmp_root = Path(tmp)
