@@ -39,6 +39,26 @@ LIVE_URLS = [
     "https://www.lilyroo.com/podcasts/analog-myth.html",
     "https://www.lilyroo.com/podcasts/feed.xml",
 ]
+LIVE_ASSETS = [
+    (
+        "Live podcast audio",
+        "https://www.lilyroo.com/assets/podcasts/analog-myth/analog-myth-the-clock-cannot-explain-this.m4a",
+        PODCAST_AUDIO,
+        "audio/",
+    ),
+    (
+        "Live podcast poster",
+        "https://www.lilyroo.com/assets/podcasts/analog-myth/analog-myth-podcast-poster.jpg",
+        PODCAST_POSTER,
+        "image/",
+    ),
+    (
+        "Live Analog Myth cover",
+        "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
+        ALBUM_COVER,
+        "image/",
+    ),
+]
 REQUIRED_SITEMAP_URLS = {
     "https://www.lilyroo.com/",
     "https://www.lilyroo.com/analog-myth.html",
@@ -207,10 +227,45 @@ def live_status(url: str, timeout_seconds: int) -> tuple[int, str]:
         return 0, str(exc.reason)
 
 
+def live_asset_status(url: str, timeout_seconds: int) -> tuple[int, str, int | None, str]:
+    request = urllib.request.Request(
+        url,
+        method="HEAD",
+        headers={"User-Agent": "LilyRooAnalogMythLaunchReadiness/1.0"},
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=timeout_seconds) as response:
+            content_length = response.headers.get("Content-Length")
+            return response.status, response.geturl(), int(content_length) if content_length else None, response.headers.get("Content-Type", "")
+    except urllib.error.HTTPError as exc:
+        return exc.code, url, None, ""
+    except urllib.error.URLError as exc:
+        return 0, str(exc.reason), None, ""
+
+
 def check_live_urls(results: list[dict], timeout_seconds: int) -> None:
     for url in LIVE_URLS:
         status, final_url = live_status(url, timeout_seconds)
         add_result(results, f"Live URL returns 200: {url}", status == 200, f"{status} {final_url}")
+
+
+def check_live_assets(results: list[dict], timeout_seconds: int) -> None:
+    for label, url, local_path, content_type_prefix in LIVE_ASSETS:
+        status, final_url, content_length, content_type = live_asset_status(url, timeout_seconds)
+        expected_size = local_path.stat().st_size if local_path.exists() else 0
+        add_result(results, f"{label} returns 200", status == 200, f"{status} {final_url}")
+        add_result(
+            results,
+            f"{label} content length matches local file",
+            content_length == expected_size,
+            f"remote={content_length} local={expected_size}",
+        )
+        add_result(
+            results,
+            f"{label} content type is expected",
+            content_type.startswith(content_type_prefix),
+            content_type,
+        )
 
 
 def main() -> int:
@@ -230,6 +285,7 @@ def main() -> int:
     check_store_run(results, args.require_store_links)
     if args.live:
         check_live_urls(results, args.timeout_seconds)
+        check_live_assets(results, args.timeout_seconds)
 
     failures = [result for result in results if not result["ok"]]
     output = {
