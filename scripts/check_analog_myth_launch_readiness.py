@@ -366,7 +366,7 @@ def live_status(url: str, timeout_seconds: int) -> tuple[int, str]:
         return 0, str(exc.reason)
 
 
-def live_asset_status(url: str, timeout_seconds: int) -> tuple[int, str, int | None, str]:
+def live_asset_status(url: str, timeout_seconds: int) -> tuple[int, str, int | None, str, str]:
     request = urllib.request.Request(
         url,
         method="HEAD",
@@ -375,11 +375,34 @@ def live_asset_status(url: str, timeout_seconds: int) -> tuple[int, str, int | N
     try:
         with urllib.request.urlopen(request, timeout=timeout_seconds) as response:
             content_length = response.headers.get("Content-Length")
-            return response.status, response.geturl(), int(content_length) if content_length else None, response.headers.get("Content-Type", "")
+            return (
+                response.status,
+                response.geturl(),
+                int(content_length) if content_length else None,
+                response.headers.get("Content-Type", ""),
+                response.headers.get("Accept-Ranges", ""),
+            )
     except urllib.error.HTTPError as exc:
-        return exc.code, url, None, ""
+        return exc.code, url, None, "", ""
     except urllib.error.URLError as exc:
-        return 0, str(exc.reason), None, ""
+        return 0, str(exc.reason), None, "", ""
+
+
+def live_range_status(url: str, timeout_seconds: int) -> tuple[int, int, str]:
+    request = urllib.request.Request(
+        url,
+        headers={
+            "User-Agent": "LilyRooAnalogMythLaunchReadiness/1.0",
+            "Range": "bytes=0-1",
+        },
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=timeout_seconds) as response:
+            return response.status, len(response.read()), response.headers.get("Content-Range", "")
+    except urllib.error.HTTPError as exc:
+        return exc.code, 0, ""
+    except urllib.error.URLError as exc:
+        return 0, 0, str(exc.reason)
 
 
 def check_live_urls(results: list[dict], timeout_seconds: int) -> None:
@@ -390,7 +413,7 @@ def check_live_urls(results: list[dict], timeout_seconds: int) -> None:
 
 def check_live_assets(results: list[dict], timeout_seconds: int) -> None:
     for label, url, local_path, content_type_prefix in LIVE_ASSETS:
-        status, final_url, content_length, content_type = live_asset_status(url, timeout_seconds)
+        status, final_url, content_length, content_type, accept_ranges = live_asset_status(url, timeout_seconds)
         expected_size = local_path.stat().st_size if local_path.exists() else 0
         add_result(results, f"{label} returns 200", status == 200, f"{status} {final_url}")
         add_result(
@@ -404,6 +427,14 @@ def check_live_assets(results: list[dict], timeout_seconds: int) -> None:
             f"{label} content type is expected",
             content_type.startswith(content_type_prefix),
             content_type,
+        )
+        add_result(results, f"{label} advertises byte ranges", "bytes" in accept_ranges.lower(), accept_ranges)
+        range_status, range_length, content_range = live_range_status(url, timeout_seconds)
+        add_result(
+            results,
+            f"{label} supports byte range requests",
+            range_status == 206 and range_length == 2,
+            f"{range_status} length={range_length} {content_range}",
         )
 
 
