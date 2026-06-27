@@ -81,6 +81,10 @@ class AnalogMythLaunchRunnerTest(unittest.TestCase):
         output = json.loads(stdout.getvalue())
         self.assertEqual(code, 0)
         self.assertTrue(output["launch_ready"])
+        self.assertTrue(output["local_launch_ready"])
+        self.assertFalse(output["public_launch_ready"])
+        self.assertIn("GitHub Pages", output["public_launch_ready_reason"])
+        self.assertEqual(output["post_deploy_live_check"], "python3 scripts/check_analog_myth_launch_readiness.py --require-store-links --live")
         self.assertEqual(output["next_commands"], ["python3 scripts/check_analog_myth_launch_readiness.py --require-store-links --live"])
 
     def test_prelaunch_output_includes_next_store_check_command(self) -> None:

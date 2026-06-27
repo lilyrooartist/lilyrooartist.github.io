@@ -174,7 +174,7 @@ def main() -> int:
         "next_commands": launch_next_commands(launch_ready, args.apply),
         "steps": steps,
     }
-    if args.apply and args.live:
+    if args.apply:
         output["post_deploy_live_check"] = "python3 scripts/check_analog_myth_launch_readiness.py --require-store-links --live"
         output["local_launch_ready"] = launch_ready
         output["public_launch_ready"] = False
