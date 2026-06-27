@@ -4,6 +4,8 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import shlex
+import sys
 import subprocess
 from time import monotonic
 from pathlib import Path
@@ -13,6 +15,10 @@ ROOT = Path(__file__).resolve().parents[1]
 RELEASE_STATUS = ROOT / "data" / "distrokid_release_status.json"
 OUT = ROOT / "data" / "store_verification_run.json"
 DEFAULT_STEP_TIMEOUT_SECONDS = 5
+
+
+def norm_title(value: str) -> str:
+    return " ".join(str(value or "").casefold().split())
 
 
 def slugify(value: str) -> str:
@@ -59,7 +65,7 @@ def run(command: list[str], *, timeout_seconds: int) -> dict:
     }
 
 
-def write_run_snapshot(results: list[dict], step_timeout_seconds: int, out: Path) -> dict:
+def write_run_snapshot(results: list[dict], step_timeout_seconds: int, out: Path, retry_command: str) -> dict:
     lookup_results = [
         result for result in results
         if "scripts/update_promo_engine_status.py" not in result.get("command", "")
@@ -86,7 +92,8 @@ def write_run_snapshot(results: list[dict], step_timeout_seconds: int, out: Path
             "admin_update_count": len(admin_update_results),
             "admin_update_ok": admin_update_ok,
         },
-        "retry_command": f"python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds {step_timeout_seconds}",
+        "all_public_links_verified": len(lookup_results) > 0 and ok_count == len(lookup_results),
+        "retry_command": retry_command,
         "results": results,
     }
     out.parent.mkdir(parents=True, exist_ok=True)
@@ -100,29 +107,70 @@ def datetime_now() -> str:
     return datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
 
 
+def display_path(path: Path) -> str:
+    try:
+        return str(path.relative_to(ROOT))
+    except ValueError:
+        return str(path)
+
+
 def hyperfollow_url(title: str) -> str:
     return f"https://distrokid.com/hyperfollow/lilyroo/{slugify(title)}"
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Capture public evidence for automatable pending store links.")
-    parser.add_argument("--release", default="", help="Optional release title to verify.")
+    parser.add_argument("--release", default="", help="Optional release title to verify, case-insensitive.")
     parser.add_argument("--out", default=str(OUT.relative_to(ROOT)), help="Output run JSON path, relative to repo root or absolute.")
+    parser.add_argument("--snapshot-root", default="data/store-verification", help="Directory for per-store snapshots, relative to repo root or absolute.")
     parser.add_argument("--refresh-admin", action="store_true", help="Regenerate promo engine status/admin embeds after checks.")
     parser.add_argument("--step-timeout-seconds", type=int, default=DEFAULT_STEP_TIMEOUT_SECONDS, help="Maximum seconds for each public store lookup subprocess.")
     args = parser.parse_args()
     out = Path(args.out)
     if not out.is_absolute():
         out = ROOT / out
+    snapshot_root = Path(args.snapshot_root)
+    if not snapshot_root.is_absolute():
+        snapshot_root = ROOT / snapshot_root
+
+    retry_parts = [
+        "python3",
+        "scripts/verify_pending_store_links.py",
+        "--step-timeout-seconds",
+        str(args.step_timeout_seconds),
+        "--out",
+        display_path(out),
+        "--snapshot-root",
+        display_path(snapshot_root),
+    ]
+    if args.release:
+        retry_parts.extend(["--release", args.release])
+    if args.refresh_admin:
+        retry_parts.append("--refresh-admin")
+    retry_command = shlex.join(retry_parts)
 
     status = json.loads(RELEASE_STATUS.read_text(encoding="utf-8"))
+    releases = status.get("releases", [])
+    if args.release:
+        wanted = norm_title(args.release)
+        releases = [release for release in releases if norm_title(release.get("title") or "") == wanted]
+        if not releases:
+            print(json.dumps({
+                "ok": False,
+                "error": f"Release not found in {RELEASE_STATUS.relative_to(ROOT)}: {args.release}",
+                "available_releases": [release.get("title", "") for release in status.get("releases", [])],
+            }, indent=2), file=sys.stderr)
+            return 2
+
     results = []
-    for release in status.get("releases", []):
+    for release in releases:
         title = release.get("title") or ""
-        if args.release and title != args.release:
-            continue
         slug = slugify(title)
-        output_root = Path("data") / "store-verification" / slug
+        output_root = snapshot_root / slug
+        spotify_out = output_root / "spotify_release_snapshot.json"
+        apple_music_out = output_root / "apple_music_release_snapshot.json"
+        youtube_music_out = output_root / "youtube_music_release_snapshot.json"
+        hyperfollow_out = output_root / "hyperfollow_store_links_snapshot.json"
         if not release.get("spotify_url"):
             results.append(run([
                 "python3",
@@ -132,7 +180,7 @@ def main() -> int:
                 "--title",
                 title,
                 "--out",
-                str(output_root / "spotify_release_snapshot.json"),
+                display_path(spotify_out),
             ], timeout_seconds=args.step_timeout_seconds))
         if not release.get("apple_music_url"):
             results.append(run([
@@ -143,7 +191,7 @@ def main() -> int:
                 "--title",
                 title,
                 "--out",
-                str(output_root / "apple_music_release_snapshot.json"),
+                display_path(apple_music_out),
             ], timeout_seconds=args.step_timeout_seconds))
         if not release.get("youtube_music_url"):
             results.append(run([
@@ -154,7 +202,7 @@ def main() -> int:
                 "--title",
                 title,
                 "--out",
-                str(output_root / "youtube_music_release_snapshot.json"),
+                display_path(youtube_music_out),
             ], timeout_seconds=args.step_timeout_seconds))
         if not release.get("hyperfollow_url"):
             results.append(run([
@@ -163,15 +211,15 @@ def main() -> int:
                 "--url",
                 hyperfollow_url(title),
                 "--out",
-                str(output_root / "hyperfollow_store_links_snapshot.json"),
+                display_path(hyperfollow_out),
             ], timeout_seconds=args.step_timeout_seconds))
 
-    snapshot = write_run_snapshot(results, args.step_timeout_seconds, out)
+    snapshot = write_run_snapshot(results, args.step_timeout_seconds, out, retry_command)
 
     if args.refresh_admin:
         update_result = run(["python3", "scripts/update_promo_engine_status.py"], timeout_seconds=args.step_timeout_seconds)
         results.append(update_result)
-        snapshot = write_run_snapshot(results, args.step_timeout_seconds, out)
+        snapshot = write_run_snapshot(results, args.step_timeout_seconds, out, retry_command)
 
     summary = snapshot["summary"]
     print(json.dumps({
