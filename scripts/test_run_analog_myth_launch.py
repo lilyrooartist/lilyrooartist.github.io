@@ -19,6 +19,31 @@ SPEC.loader.exec_module(launch_runner)
 
 
 class AnalogMythLaunchRunnerTest(unittest.TestCase):
+    def test_run_step_shell_quotes_logged_command(self) -> None:
+        class FakeCompleted:
+            returncode = 0
+            stdout = ""
+            stderr = ""
+
+        with mock.patch.object(launch_runner.subprocess, "run", return_value=FakeCompleted()):
+            step = launch_runner.run_step("quoted_command", [
+                "python3",
+                "script.py",
+                "--youtube-music-url",
+                "https://music.youtube.com/watch?v=AnalogMyth123&list=Launch",
+            ])
+
+        self.assertEqual(
+            shlex.split(step["command"]),
+            [
+                "python3",
+                "script.py",
+                "--youtube-music-url",
+                "https://music.youtube.com/watch?v=AnalogMyth123&list=Launch",
+            ],
+        )
+        self.assertIn("'https://music.youtube.com/watch?v=AnalogMyth123&list=Launch'", step["command"])
+
     def test_apply_live_defers_live_final_readiness_until_after_deploy(self) -> None:
         steps: list[dict] = []
 

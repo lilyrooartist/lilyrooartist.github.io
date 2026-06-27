@@ -50,7 +50,7 @@ def run_step(name: str, command: list[str]) -> dict:
     proc = subprocess.run(command, cwd=ROOT, text=True, capture_output=True)
     step = {
         "name": name,
-        "command": " ".join(command),
+        "command": shlex.join(command),
         "returncode": proc.returncode,
         "stderr": proc.stderr.strip(),
     }
