@@ -23,7 +23,7 @@ BUILD_DATE = "Wed, 01 Jul 2026 04:05:06 GMT"
 
 
 class AnalogMythLaunchLinksTest(unittest.TestCase):
-    def spotify_oembed_response(self, title: str):
+    def spotify_response(self, body: str):
         class Response:
             status = 200
 
@@ -34,9 +34,15 @@ class AnalogMythLaunchLinksTest(unittest.TestCase):
                 return None
 
             def read(self) -> bytes:
-                return f'{{"title": "{title}"}}'.encode("utf-8")
+                return body.encode("utf-8")
 
         return Response()
+
+    def spotify_oembed_response(self, title: str):
+        return self.spotify_response(f'{{"title": "{title}"}}')
+
+    def spotify_page_response(self, page_title: str):
+        return self.spotify_response(f"<!doctype html><title>{page_title}</title>")
 
     def test_dry_run_targets_every_launch_surface(self) -> None:
         changed = launch_links.apply_updates(SPOTIFY_URL, APPLE_MUSIC_URL, YOUTUBE_MUSIC_URL, BUILD_DATE)
@@ -82,15 +88,28 @@ class AnalogMythLaunchLinksTest(unittest.TestCase):
             launch_links.validate_url("Spotify URL", "https://example.com/not-spotify", r"^https://open\.spotify\.com/album/[A-Za-z0-9]+")
 
     def test_manual_spotify_url_title_validation_accepts_analog_myth(self) -> None:
-        with mock.patch.object(launch_links.urllib.request, "urlopen", return_value=self.spotify_oembed_response("Analog Myth")):
+        with mock.patch.object(launch_links.urllib.request, "urlopen", side_effect=[
+            self.spotify_oembed_response("Analog Myth"),
+            self.spotify_page_response("Analog Myth - Album by Lily Roo | Spotify"),
+        ]):
             validation = launch_links.validate_manual_spotify_url(SPOTIFY_URL)
 
         self.assertTrue(validation["ok"])
         self.assertEqual(validation["title"], "Analog Myth")
+        self.assertEqual(validation["page_title"], "Analog Myth - Album by Lily Roo | Spotify")
+        self.assertEqual(validation["expected_artist"], "Lily Roo")
 
     def test_manual_spotify_url_title_validation_rejects_wrong_album(self) -> None:
         with mock.patch.object(launch_links.urllib.request, "urlopen", return_value=self.spotify_oembed_response("Another Album")):
             with self.assertRaisesRegex(ValueError, "expected Analog Myth, got Another Album"):
+                launch_links.validate_manual_spotify_url(SPOTIFY_URL)
+
+    def test_manual_spotify_url_artist_validation_rejects_wrong_artist(self) -> None:
+        with mock.patch.object(launch_links.urllib.request, "urlopen", side_effect=[
+            self.spotify_oembed_response("Analog Myth"),
+            self.spotify_page_response("Analog Myth - Album by Another Artist | Spotify"),
+        ]):
+            with self.assertRaisesRegex(ValueError, "expected Lily Roo"):
                 launch_links.validate_manual_spotify_url(SPOTIFY_URL)
 
 

@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 from datetime import datetime, timezone
 from email.utils import format_datetime
+import html
 import json
 import re
 import sys
@@ -17,6 +18,7 @@ RELEASE_HUB_URL = "https://distrokid.com/hyperfollow/lilyroo/analog-myth"
 YOUTUBE_PLAYLIST_URL = "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0"
 ALBUM_PAGE_URL = "https://www.lilyroo.com/analog-myth.html"
 EXPECTED_SPOTIFY_TITLE = "Analog Myth"
+EXPECTED_SPOTIFY_ARTIST = "Lily Roo"
 SPOTIFY_OEMBED_URL = "https://open.spotify.com/oembed"
 EXPECTED_FILES = {
     "index.html",
@@ -64,15 +66,34 @@ def fetch_spotify_oembed_title(url: str) -> str:
     return str(payload.get("title", ""))
 
 
+def fetch_spotify_page_title(url: str) -> str:
+    request = urllib.request.Request(url, headers={
+        "Accept": "text/html",
+        "User-Agent": "LilyRooAnalogMythLaunchLinks/1.0",
+    })
+    with urllib.request.urlopen(request, timeout=25) as response:
+        body = response.read().decode("utf-8", errors="replace")
+    match = re.search(r"<title>(.*?)</title>", body, flags=re.IGNORECASE | re.DOTALL)
+    return html.unescape(match.group(1)).strip() if match else ""
+
+
 def validate_manual_spotify_url(url: str) -> dict:
     title = fetch_spotify_oembed_title(url)
     if normalize_title(title) != normalize_title(EXPECTED_SPOTIFY_TITLE):
         raise ValueError(f"Manual Spotify URL title mismatch: expected {EXPECTED_SPOTIFY_TITLE}, got {title or 'empty title'}.")
+    page_title = fetch_spotify_page_title(url)
+    expected_artist_phrase = f" by {EXPECTED_SPOTIFY_ARTIST} | Spotify"
+    if expected_artist_phrase not in page_title:
+        raise ValueError(
+            f"Manual Spotify URL artist mismatch: expected {EXPECTED_SPOTIFY_ARTIST} in Spotify page title, got {page_title or 'empty title'}."
+        )
     return {
         "ok": True,
         "source": "spotify-oembed-public",
         "title": title,
         "expected_title": EXPECTED_SPOTIFY_TITLE,
+        "page_title": page_title,
+        "expected_artist": EXPECTED_SPOTIFY_ARTIST,
     }
 
 
