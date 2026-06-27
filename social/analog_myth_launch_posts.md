@@ -123,8 +123,8 @@ TBD_VERIFIED_SPOTIFY_ALBUM_URL
 ## Launch-Day Operator Checklist
 
 1. Run `python3 scripts/run_analog_myth_launch.py --live`.
-2. If store links verify, run `python3 scripts/run_analog_myth_launch.py --apply --live`.
-3. Confirm the runner reports `launch_ready: true`, `local_launch_ready: true`, `public_launch_ready: false`, and prints `post_deploy_live_check`.
+2. Follow the runner's `next_commands`; if store links verify, it should point to `python3 scripts/run_analog_myth_launch.py --apply --live`.
+3. Confirm the apply runner reports `launch_ready: true`, `local_launch_ready: true`, `public_launch_ready: false`, and prints both `next_commands` and `post_deploy_live_check`.
 4. Commit and push the launch-link changes.
 5. After GitHub Pages deploys, run `python3 scripts/check_analog_myth_launch_readiness.py --require-store-links --live`.
 6. Confirm the post-deploy live check returns zero failures; that is the public launch-ready proof.

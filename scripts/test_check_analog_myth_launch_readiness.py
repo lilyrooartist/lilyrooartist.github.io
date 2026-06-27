@@ -59,6 +59,7 @@ def write_social_pack(path: Path, spotify_text: str) -> None:
             "Podcast RSS: https://www.lilyroo.com/podcasts/feed.xml",
             "Do not publish a Spotify-specific CTA until the post-deploy live check returns zero failures after the launch-link deploy.",
             "python3 scripts/run_analog_myth_launch.py --apply --live",
+            "next_commands",
             "post_deploy_live_check",
             "local_launch_ready",
             "public_launch_ready",
