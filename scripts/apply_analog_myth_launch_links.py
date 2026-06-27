@@ -71,7 +71,24 @@ def add_optional_button(anchor: str, button_html: str, text: str) -> str:
     return text.replace(anchor, f"{button_html}\n{anchor}", 1)
 
 
+def replace_all(text: str, replacements: list[tuple[str, str]]) -> str:
+    for old, new in replacements:
+        text = text.replace(old, new)
+    return text
+
+
 def update_index(text: str, spotify_url: str, apple_music_url: str, youtube_music_url: str) -> str:
+    text = replace_all(text, [
+        (
+            'content="Analog Myth, the new Lily Roo album, arrives July 1, 2026. Listen to the podcast and watch the remastered album playlist now."',
+            'content="Analog Myth, the new Lily Roo album, is live now. Listen on Spotify, hear the podcast, and watch the remastered album playlist."',
+        ),
+        (
+            'content="Analog Myth arrives July 1, 2026. Listen to the podcast and watch the remastered album playlist now."',
+            'content="Analog Myth is live now. Listen on Spotify, hear the podcast, and watch the remastered album playlist."',
+        ),
+        ("<h2>Analog Myth arrives July 1</h2>", "<h2>Analog Myth is live</h2>"),
+    ])
     text = text.replace(
         '"sameAs": [\n        "https://distrokid.com/hyperfollow/lilyroo/analog-myth",\n        "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0"\n      ]',
         same_as_block(spotify_url, apple_music_url, youtube_music_url),
@@ -106,6 +123,10 @@ def update_index(text: str, spotify_url: str, apple_music_url: str, youtube_musi
 
 def update_album_page(text: str, spotify_url: str, apple_music_url: str, youtube_music_url: str) -> str:
     text = text.replace(
+        'content="Analog Myth, the eight-track Lily Roo album, arrives July 1, 2026. Listen through the release hub, album playlist, and Echo Thread podcast."',
+        'content="Analog Myth, the eight-track Lily Roo album, is live now. Listen on Spotify, watch the album playlist, and hear the Echo Thread podcast."',
+    )
+    text = text.replace(
         '"sameAs": [\n        "https://distrokid.com/hyperfollow/lilyroo/analog-myth",\n        "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0"\n      ]',
         same_as_block(spotify_url, apple_music_url, youtube_music_url),
     )
@@ -128,6 +149,10 @@ def update_album_page(text: str, spotify_url: str, apple_music_url: str, youtube
 
 
 def update_music(text: str, spotify_url: str, apple_music_url: str, youtube_music_url: str) -> str:
+    text = text.replace(
+        '<p class="album-sub">Album launch: July 1, 2026</p>',
+        '<p class="album-sub">Album released: July 1, 2026</p>',
+    )
     text = text.replace(
         f'<a class="btn btn-ghost" href="{RELEASE_HUB_URL}" target="_blank" rel="noreferrer">Release hub</a>',
         f'<a class="btn btn-ghost" href="{spotify_url}" target="_blank" rel="noreferrer">Listen on Spotify</a>',
@@ -154,6 +179,20 @@ def update_press(text: str, spotify_url: str, apple_music_url: str, youtube_musi
 
 
 def update_podcast_pages(text: str, spotify_url: str) -> str:
+    text = replace_all(text, [
+        (
+            "Jasper Fields sits down with Lily Roo for a track-by-track talk-through of Analog Myth, the eight-song album arriving July 1, 2026.",
+            "Jasper Fields sits down with Lily Roo for a track-by-track talk-through of Analog Myth, the eight-song album that is live now.",
+        ),
+        (
+            "<em>Analog Myth</em>, the eight-song album arriving July 1, 2026.",
+            "<em>Analog Myth</em>, the eight-song album that is live now.",
+        ),
+        (
+            "album arriving July 1, 2026.",
+            "album that is live now.",
+        ),
+    ])
     return text.replace(
         f'<a class="btn btn-ghost" href="{RELEASE_HUB_URL}" target="_blank" rel="noopener">Release Hub</a>',
         f'<a class="btn btn-ghost" href="{spotify_url}" target="_blank" rel="noopener">Listen on Spotify</a>',
@@ -161,6 +200,16 @@ def update_podcast_pages(text: str, spotify_url: str) -> str:
 
 
 def update_feed(text: str, spotify_url: str, apple_music_url: str, youtube_music_url: str) -> str:
+    text = replace_all(text, [
+        (
+            "Jasper Fields sits down with Lily Roo for a track-by-track talk-through of Analog Myth, the eight-song album arriving July 1, 2026.",
+            "Jasper Fields sits down with Lily Roo for a track-by-track talk-through of Analog Myth, the eight-song album that is live now.",
+        ),
+        (
+            "Jasper Fields sits down with Lily Roo for a track-by-track talk-through of <em>Analog Myth</em>, the eight-song album arriving July 1, 2026.",
+            "Jasper Fields sits down with Lily Roo for a track-by-track talk-through of <em>Analog Myth</em>, the eight-song album that is live now.",
+        ),
+    ])
     if "Spotify: <a" in text:
         return text
     lines = [f'        <p>Spotify: <a href="{spotify_url}">{spotify_url}</a></p>']

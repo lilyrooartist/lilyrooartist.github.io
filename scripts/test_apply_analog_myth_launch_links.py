@@ -28,6 +28,13 @@ class AnalogMythLaunchLinksTest(unittest.TestCase):
         self.assertIn(SPOTIFY_URL, changed["index.html"])
         self.assertIn(APPLE_MUSIC_URL, changed["press.html"])
         self.assertIn(YOUTUBE_MUSIC_URL, changed["analog-myth.html"])
+        combined = "\n".join(changed.values())
+        self.assertIn("Analog Myth is live", changed["index.html"])
+        self.assertIn("the eight-song album that is live now", changed["podcasts/feed.xml"])
+        self.assertNotIn("arrives July 1", combined)
+        self.assertNotIn("arriving July 1", combined)
+        self.assertNotIn("Store links will be added", combined)
+        self.assertNotIn("release propagates", combined)
 
     def test_missing_marker_fails_loudly(self) -> None:
         original = copy.copy(launch_links.ROOT)

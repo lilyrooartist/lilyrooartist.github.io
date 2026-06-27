@@ -69,6 +69,12 @@ REQUIRED_SITEMAP_URLS = {
     "https://www.lilyroo.com/podcasts/analog-myth.html",
     "https://www.lilyroo.com/podcasts/feed.xml",
 }
+PRELAUNCH_PHRASES = (
+    "arrives July 1",
+    "arriving July 1",
+    "Store links will be added",
+    "release propagates",
+)
 
 
 class LinkCollector(HTMLParser):
@@ -246,6 +252,16 @@ def check_store_run(results: list[dict], require_store_links: bool) -> None:
     )
 
 
+def check_live_state_copy(results: list[dict]) -> None:
+    stale = []
+    for relative in [*HTML_PAGES, "podcasts/feed.xml"]:
+        text = (ROOT / relative).read_text(encoding="utf-8")
+        for phrase in PRELAUNCH_PHRASES:
+            if phrase in text:
+                stale.append(f"{relative}: {phrase}")
+    add_result(results, "Launch copy uses live-state language", not stale, "; ".join(stale[:10]))
+
+
 def live_status(url: str, timeout_seconds: int) -> tuple[int, str]:
     request = urllib.request.Request(url, headers={"User-Agent": "LilyRooAnalogMythLaunchReadiness/1.0"})
     try:
@@ -313,6 +329,8 @@ def main() -> int:
     check_feed(results)
     check_sitemap(results)
     check_store_run(results, args.require_store_links)
+    if args.require_store_links:
+        check_live_state_copy(results)
     if args.live:
         check_live_urls(results, args.timeout_seconds)
         check_live_assets(results, args.timeout_seconds)
