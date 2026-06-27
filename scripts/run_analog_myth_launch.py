@@ -206,6 +206,8 @@ def main() -> int:
     else:
         output["local_launch_ready"] = launch_ready
         output["public_launch_ready"] = launch_ready
+        if not launch_ready:
+            output["public_launch_ready_reason"] = reason
     print(json.dumps(output, indent=2))
     if launch_ready or args.allow_prelaunch:
         return 0

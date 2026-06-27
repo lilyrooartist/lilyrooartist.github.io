@@ -202,6 +202,8 @@ class AnalogMythLaunchRunnerTest(unittest.TestCase):
         output = json.loads(stdout.getvalue())
         self.assertEqual(code, 0)
         self.assertFalse(output["launch_ready"])
+        self.assertFalse(output["public_launch_ready"])
+        self.assertEqual(output["public_launch_ready_reason"], "No verified Spotify album URL found.")
         self.assertEqual(output["next_commands"], ["python3 scripts/run_analog_myth_launch.py --live"])
 
     def test_apply_before_store_links_does_not_emit_post_deploy_check(self) -> None:
