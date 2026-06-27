@@ -16,7 +16,7 @@ PUBLIC_BASE_URL = "https://www.lilyroo.com"
 RELEASE_HUB_URL = "https://distrokid.com/hyperfollow/lilyroo/analog-myth"
 PODCAST_AUDIO = ROOT / "assets/podcasts/analog-myth/analog-myth-the-clock-cannot-explain-this.m4a"
 PODCAST_POSTER = ROOT / "assets/podcasts/analog-myth/analog-myth-podcast-poster.jpg"
-PODCAST_FEED_ART = ROOT / "assets/podcasts/analog-myth/analog-myth-podcast-feed-art-3000.jpg"
+PODCAST_FEED_ART = ROOT / "assets/podcasts/analog-myth/analog-myth-podcast-directory-art-3000.jpg"
 ALBUM_COVER = ROOT / "assets/albums/analog-myth/art/03-analog-myth.jpg"
 STORE_RUN = ROOT / "output/launch-audit/analog-myth-store-verification-run.json"
 STORE_SNAPSHOT_ROOT = ROOT / "output/launch-audit/store-verification/analog-myth"
@@ -57,7 +57,7 @@ LIVE_ASSETS = [
     ),
     (
         "Live podcast feed art",
-        "https://www.lilyroo.com/assets/podcasts/analog-myth/analog-myth-podcast-feed-art-3000.jpg",
+        "https://www.lilyroo.com/assets/podcasts/analog-myth/analog-myth-podcast-directory-art-3000.jpg",
         PODCAST_FEED_ART,
         "image/",
     ),
@@ -265,7 +265,7 @@ def check_feed(results: list[dict]) -> None:
     add_result(
         results,
         "Podcast feed channel image points to feed art",
-        channel_image is not None and channel_image.attrib.get("href", "").endswith("/assets/podcasts/analog-myth/analog-myth-podcast-feed-art-3000.jpg"),
+        channel_image is not None and channel_image.attrib.get("href", "").endswith("/assets/podcasts/analog-myth/analog-myth-podcast-directory-art-3000.jpg"),
         channel_image.attrib.get("href", "") if channel_image is not None else "",
     )
     enclosure = root.find("./channel/item/enclosure")
@@ -286,7 +286,7 @@ def check_feed(results: list[dict]) -> None:
     add_result(
         results,
         "Podcast feed item image points to feed art",
-        item_image is not None and item_image.attrib.get("href", "").endswith("/assets/podcasts/analog-myth/analog-myth-podcast-feed-art-3000.jpg"),
+        item_image is not None and item_image.attrib.get("href", "").endswith("/assets/podcasts/analog-myth/analog-myth-podcast-directory-art-3000.jpg"),
         item_image.attrib.get("href", "") if item_image is not None else "",
     )
     enclosure_url = enclosure.attrib.get("url", "")
