@@ -69,6 +69,7 @@ def write_social_pack(path: Path, spotify_text: str) -> None:
             "artist `Lily Roo`",
             "Apple Music or YouTube Music URLs",
             "validated as `Analog Myth` by `Lily Roo`",
+            "optional URL arguments are preserved",
             "python3 scripts/check_analog_myth_launch_readiness.py --require-store-links --live",
             spotify_text,
         ]),
