@@ -86,14 +86,12 @@ def store_summary() -> dict:
     }
 
 
-def launch_next_commands(launch_ready: bool, apply_requested: bool, live_requested: bool) -> list[str]:
+def launch_next_commands(launch_ready: bool, apply_requested: bool) -> list[str]:
     if not launch_ready:
         return ["python3 scripts/run_analog_myth_launch.py --live"]
     if not apply_requested:
         return ["python3 scripts/run_analog_myth_launch.py --apply --live"]
-    if live_requested:
-        return ["python3 scripts/check_analog_myth_launch_readiness.py --require-store-links --live"]
-    return []
+    return ["python3 scripts/check_analog_myth_launch_readiness.py --require-store-links --live"]
 
 
 def main() -> int:
@@ -173,7 +171,7 @@ def main() -> int:
         "allow_prelaunch": args.allow_prelaunch,
         "reason": reason,
         "store_summary": summary,
-        "next_commands": launch_next_commands(launch_ready, args.apply, args.live),
+        "next_commands": launch_next_commands(launch_ready, args.apply),
         "steps": steps,
     }
     if args.apply and args.live:
