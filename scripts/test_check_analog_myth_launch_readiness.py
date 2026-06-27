@@ -181,13 +181,15 @@ class AnalogMythReadinessTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             tmp_root = Path(tmp)
             page = tmp_root / "press.html"
-            page.write_text("Quick assets, more coming. The YouTube version can be added here once its final URL exists.", encoding="utf-8")
+            page.write_text("Quick assets, More Coming. Todo: replace placeholder when the final url exists.", encoding="utf-8")
             with mock.patch.object(readiness, "ROOT", tmp_root), mock.patch.object(readiness, "PUBLIC_COPY_FILES", ["press.html"]):
                 results: list[dict] = []
                 readiness.check_public_copy_placeholders(results)
         self.assertFalse(results[0]["ok"])
         self.assertIn("final URL exists", results[0]["detail"])
         self.assertIn("more coming", results[0]["detail"])
+        self.assertIn("TODO", results[0]["detail"])
+        self.assertIn("PLACEHOLDER", results[0]["detail"])
 
     def test_store_run_requires_launch_audit_retry_command(self) -> None:
         valid_retry = (

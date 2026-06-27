@@ -518,8 +518,9 @@ def check_public_copy_placeholders(results: list[dict]) -> None:
     placeholders = []
     for relative in PUBLIC_COPY_FILES:
         text = (ROOT / relative).read_text(encoding="utf-8")
+        folded = text.casefold()
         for phrase in PUBLIC_PLACEHOLDER_PHRASES:
-            if phrase in text:
+            if phrase.casefold() in folded:
                 placeholders.append(f"{relative}: {phrase}")
     add_result(results, "Public launch copy avoids unresolved placeholders", not placeholders, "; ".join(placeholders[:10]))
 
