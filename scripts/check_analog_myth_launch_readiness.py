@@ -259,7 +259,12 @@ def check_feed(results: list[dict]) -> None:
     owner_email = owner.findtext(f"{ITUNES_NS}email") if owner is not None else ""
     category = channel.find(f"{ITUNES_NS}category")
     channel_image = channel.find(f"{ITUNES_NS}image")
+    channel_summary = channel.findtext(f"{ITUNES_NS}summary") or ""
+    channel_type = channel.findtext(f"{ITUNES_NS}type") or ""
     add_result(results, "Podcast feed channel title is Echo Thread", channel.findtext("title") == "Echo Thread Podcast", channel.findtext("title") or "")
+    add_result(results, "Podcast feed channel description mentions Analog Myth", "Analog Myth" in (channel.findtext("description") or ""), channel.findtext("description") or "")
+    add_result(results, "Podcast feed channel summary mentions Analog Myth", "Analog Myth" in channel_summary, channel_summary)
+    add_result(results, "Podcast feed channel type is episodic", channel_type == "episodic", channel_type)
     add_result(results, "Podcast feed language is en-us", channel.findtext("language") == "en-us", channel.findtext("language") or "")
     add_result(results, "Podcast feed owner email is present", owner_email == "lilyroo.artist@aol.com", owner_email or "")
     add_result(results, "Podcast feed category is Music", category is not None and category.attrib.get("text") == "Music", category.attrib.get("text", "") if category is not None else "")
