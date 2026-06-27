@@ -48,6 +48,8 @@ def write_social_pack(path: Path, spotify_text: str) -> None:
             "Do not publish a Spotify-specific CTA until verified.",
             "python3 scripts/run_analog_myth_launch.py --apply --live",
             "post_deploy_live_check",
+            "local_launch_ready",
+            "public_launch_ready",
             "python3 scripts/check_analog_myth_launch_readiness.py --require-store-links --live",
             spotify_text,
         ]),

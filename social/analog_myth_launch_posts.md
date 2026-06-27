@@ -124,9 +124,9 @@ TBD_VERIFIED_SPOTIFY_ALBUM_URL
 
 1. Run `python3 scripts/run_analog_myth_launch.py --live`.
 2. If store links verify, run `python3 scripts/run_analog_myth_launch.py --apply --live`.
-3. Confirm the runner reports `launch_ready: true` and prints `post_deploy_live_check`.
+3. Confirm the runner reports `launch_ready: true`, `local_launch_ready: true`, `public_launch_ready: false`, and prints `post_deploy_live_check`.
 4. Commit and push the launch-link changes.
 5. After GitHub Pages deploys, run `python3 scripts/check_analog_myth_launch_readiness.py --require-store-links --live`.
-6. Confirm the post-deploy live check returns zero failures.
+6. Confirm the post-deploy live check returns zero failures; that is the public launch-ready proof.
 7. Publish Spotify-specific captions only after the post-deploy live check passes.
 8. Replace `TBD_VERIFIED_SPOTIFY_ALBUM_URL` in any copied captions before using Spotify-specific variants.
