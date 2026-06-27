@@ -274,8 +274,8 @@ def update_social_launch_pack(text: str, spotify_url: str) -> str:
             "is live",
         ),
         (
-            "5. Replace `TBD_VERIFIED_SPOTIFY_ALBUM_URL` in this pack or copied captions before using Spotify-specific variants.",
-            f"5. Confirm Spotify-specific variants contain `{spotify_url}` before posting.",
+            "8. Replace `TBD_VERIFIED_SPOTIFY_ALBUM_URL` in any copied captions before using Spotify-specific variants.",
+            f"8. Confirm Spotify-specific variants contain `{spotify_url}` before posting.",
         ),
     ])
     return text.replace("TBD_VERIFIED_SPOTIFY_ALBUM_URL", spotify_url)

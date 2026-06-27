@@ -436,6 +436,8 @@ def check_social_launch_pack(results: list[dict], require_store_links: bool) -> 
     add_result(results, "Launch promo pack links podcast episode", "https://www.lilyroo.com/podcasts/analog-myth.html" in text)
     add_result(results, "Launch promo pack links podcast RSS", "https://www.lilyroo.com/podcasts/feed.xml" in text)
     add_result(results, "Launch promo pack includes apply command", "python3 scripts/run_analog_myth_launch.py --apply --live" in text)
+    add_result(results, "Launch promo pack includes post-deploy live check", "python3 scripts/check_analog_myth_launch_readiness.py --require-store-links --live" in text)
+    add_result(results, "Launch promo pack mentions post-deploy runner output", "post_deploy_live_check" in text)
     add_result(results, "Launch promo pack avoids old first-single Spotify URL", "5TBsbgE68DTPlAFsPsLEhi" not in text)
     spotify_url = verified_release_url("spotify_release_snapshot.json")
     if require_store_links:
