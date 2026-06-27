@@ -1,0 +1,249 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import json
+import urllib.error
+import urllib.parse
+import urllib.request
+import xml.etree.ElementTree as ET
+from html.parser import HTMLParser
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+PUBLIC_BASE_URL = "https://www.lilyroo.com"
+RELEASE_HUB_URL = "https://distrokid.com/hyperfollow/lilyroo/analog-myth"
+PODCAST_AUDIO = ROOT / "assets/podcasts/analog-myth/analog-myth-the-clock-cannot-explain-this.m4a"
+PODCAST_POSTER = ROOT / "assets/podcasts/analog-myth/analog-myth-podcast-poster.jpg"
+ALBUM_COVER = ROOT / "assets/albums/analog-myth/art/03-analog-myth.jpg"
+STORE_RUN = ROOT / "output/launch-audit/analog-myth-store-verification-run.json"
+
+HTML_PAGES = [
+    "index.html",
+    "analog-myth.html",
+    "music.html",
+    "press.html",
+    "podcasts/index.html",
+    "podcasts/analog-myth.html",
+    "404.html",
+]
+XML_FILES = ["sitemap.xml", "podcasts/feed.xml"]
+JSON_LD_REQUIRED = {"index.html", "analog-myth.html", "podcasts/index.html", "podcasts/analog-myth.html"}
+LIVE_URLS = [
+    "https://www.lilyroo.com/",
+    "https://www.lilyroo.com/analog-myth.html",
+    "https://www.lilyroo.com/music.html",
+    "https://www.lilyroo.com/press.html",
+    "https://www.lilyroo.com/podcasts/",
+    "https://www.lilyroo.com/podcasts/analog-myth.html",
+    "https://www.lilyroo.com/podcasts/feed.xml",
+]
+REQUIRED_SITEMAP_URLS = {
+    "https://www.lilyroo.com/",
+    "https://www.lilyroo.com/analog-myth.html",
+    "https://www.lilyroo.com/music.html",
+    "https://www.lilyroo.com/press.html",
+    "https://www.lilyroo.com/podcasts/",
+    "https://www.lilyroo.com/podcasts/analog-myth.html",
+    "https://www.lilyroo.com/podcasts/feed.xml",
+}
+
+
+class LinkCollector(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__()
+        self.refs: list[tuple[str, str, str]] = []
+        self.scripts: list[tuple[str, str]] = []
+        self._script_type = ""
+        self._script_chunks: list[str] = []
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        attr_map = {key: value or "" for key, value in attrs}
+        for key in ("href", "src"):
+            value = attr_map.get(key, "")
+            if value:
+                self.refs.append((tag, key, value))
+        if tag == "script":
+            self._script_type = attr_map.get("type", "")
+            self._script_chunks = []
+
+    def handle_data(self, data: str) -> None:
+        if self._script_type:
+            self._script_chunks.append(data)
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag == "script" and self._script_type:
+            self.scripts.append((self._script_type, "".join(self._script_chunks).strip()))
+            self._script_type = ""
+            self._script_chunks = []
+
+
+def add_result(results: list[dict], name: str, ok: bool, detail: str = "") -> None:
+    results.append({"name": name, "ok": ok, "detail": detail})
+
+
+def local_path_for_url(url: str, page: Path) -> Path | None:
+    parsed = urllib.parse.urlparse(url)
+    if parsed.scheme in {"http", "https"}:
+        if parsed.netloc != "www.lilyroo.com":
+            return None
+        candidate = parsed.path
+    elif parsed.scheme or url.startswith(("mailto:", "tel:", "#")):
+        return None
+    else:
+        candidate = parsed.path or url
+    if not candidate or candidate == "/":
+        return ROOT / "index.html"
+    if candidate.startswith("/"):
+        relative = candidate.lstrip("/")
+        if relative.endswith("/"):
+            relative += "index.html"
+        return ROOT / relative
+    relative_url = candidate
+    if relative_url.endswith("/"):
+        relative_url += "index.html"
+    return (page.parent / relative_url).resolve()
+
+
+def parse_html_page(relative: str, results: list[dict]) -> LinkCollector:
+    path = ROOT / relative
+    text = path.read_text(encoding="utf-8")
+    parser = LinkCollector()
+    parser.feed(text)
+    add_result(results, f"{relative} parses as HTML", True)
+    broken = []
+    for tag, attr, value in parser.refs:
+        target = local_path_for_url(value, path)
+        if target and not target.exists():
+            broken.append(f"{tag}[{attr}]={value}")
+    add_result(results, f"{relative} local links/assets exist", not broken, "; ".join(broken[:10]))
+    return parser
+
+
+def parse_xml_file(relative: str, results: list[dict]) -> ET.ElementTree:
+    path = ROOT / relative
+    tree = ET.parse(path)
+    add_result(results, f"{relative} parses as XML", True)
+    return tree
+
+
+def check_json_ld(relative: str, parser: LinkCollector, results: list[dict]) -> None:
+    payloads = []
+    for script_type, body in parser.scripts:
+        if script_type == "application/ld+json" and body:
+            payloads.append(json.loads(body))
+    if relative not in JSON_LD_REQUIRED:
+        return
+    add_result(results, f"{relative} has JSON-LD", bool(payloads))
+    if relative == "analog-myth.html":
+        album_payload = next((item for item in payloads if item.get("@type") == "MusicAlbum"), {})
+        add_result(results, "Analog Myth JSON-LD release date is July 1", album_payload.get("datePublished") == "2026-07-01", str(album_payload.get("datePublished", "")))
+        add_result(results, "Analog Myth JSON-LD includes UPC", album_payload.get("identifier") == "UPC 883306680431", str(album_payload.get("identifier", "")))
+        same_as = album_payload.get("sameAs") or []
+        add_result(results, "Analog Myth JSON-LD includes release hub", RELEASE_HUB_URL in same_as)
+
+
+def check_required_assets(results: list[dict]) -> None:
+    for label, path in (
+        ("Podcast audio", PODCAST_AUDIO),
+        ("Podcast poster", PODCAST_POSTER),
+        ("Analog Myth cover", ALBUM_COVER),
+    ):
+        add_result(results, f"{label} exists", path.exists(), str(path.relative_to(ROOT)))
+        add_result(results, f"{label} is nonempty", path.exists() and path.stat().st_size > 0, str(path.stat().st_size if path.exists() else 0))
+
+
+def check_feed(results: list[dict]) -> None:
+    tree = parse_xml_file("podcasts/feed.xml", results)
+    root = tree.getroot()
+    enclosure = root.find("./channel/item/enclosure")
+    add_result(results, "Podcast feed has enclosure", enclosure is not None)
+    if enclosure is None:
+        return
+    enclosure_url = enclosure.attrib.get("url", "")
+    enclosure_length = enclosure.attrib.get("length", "")
+    enclosure_type = enclosure.attrib.get("type", "")
+    add_result(results, "Podcast feed enclosure points to audio", enclosure_url.endswith("/assets/podcasts/analog-myth/analog-myth-the-clock-cannot-explain-this.m4a"), enclosure_url)
+    add_result(results, "Podcast feed enclosure type is audio/mp4", enclosure_type == "audio/mp4", enclosure_type)
+    expected_length = str(PODCAST_AUDIO.stat().st_size) if PODCAST_AUDIO.exists() else ""
+    add_result(results, "Podcast feed enclosure length matches file", enclosure_length == expected_length, f"feed={enclosure_length} file={expected_length}")
+
+
+def check_sitemap(results: list[dict]) -> None:
+    tree = parse_xml_file("sitemap.xml", results)
+    urls = {element.text or "" for element in tree.findall(".//{http://www.sitemaps.org/schemas/sitemap/0.9}loc")}
+    missing = sorted(REQUIRED_SITEMAP_URLS - urls)
+    add_result(results, "Sitemap includes launch URLs", not missing, ", ".join(missing))
+
+
+def check_store_run(results: list[dict], require_store_links: bool) -> None:
+    if not STORE_RUN.exists():
+        add_result(results, "Analog Myth store verification snapshot exists", False, str(STORE_RUN.relative_to(ROOT)))
+        return
+    payload = json.loads(STORE_RUN.read_text(encoding="utf-8"))
+    summary = payload.get("summary", {})
+    checked = summary.get("checked")
+    verified = summary.get("ok")
+    all_verified = bool(payload.get("all_public_links_verified"))
+    add_result(results, "Analog Myth store verification checked four services", checked == 4, f"checked={checked}")
+    add_result(results, "Analog Myth store verification has no timeouts", summary.get("timed_out") == 0, f"timed_out={summary.get('timed_out')}")
+    add_result(
+        results,
+        "Analog Myth public store links verified",
+        all_verified or not require_store_links,
+        f"verified={verified}/{checked}; required={require_store_links}",
+    )
+
+
+def live_status(url: str, timeout_seconds: int) -> tuple[int, str]:
+    request = urllib.request.Request(url, headers={"User-Agent": "LilyRooAnalogMythLaunchReadiness/1.0"})
+    try:
+        with urllib.request.urlopen(request, timeout=timeout_seconds) as response:
+            return response.status, response.geturl()
+    except urllib.error.HTTPError as exc:
+        return exc.code, url
+    except urllib.error.URLError as exc:
+        return 0, str(exc.reason)
+
+
+def check_live_urls(results: list[dict], timeout_seconds: int) -> None:
+    for url in LIVE_URLS:
+        status, final_url = live_status(url, timeout_seconds)
+        add_result(results, f"Live URL returns 200: {url}", status == 200, f"{status} {final_url}")
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description="Check the public Analog Myth album and podcast launch package.")
+    parser.add_argument("--live", action="store_true", help="Also check live lilyroo.com launch URLs.")
+    parser.add_argument("--require-store-links", action="store_true", help="Fail unless public store links have all verified.")
+    parser.add_argument("--timeout-seconds", type=int, default=10, help="Timeout for each live URL check.")
+    args = parser.parse_args()
+
+    results: list[dict] = []
+    check_required_assets(results)
+    for relative in HTML_PAGES:
+        parser_obj = parse_html_page(relative, results)
+        check_json_ld(relative, parser_obj, results)
+    check_feed(results)
+    check_sitemap(results)
+    check_store_run(results, args.require_store_links)
+    if args.live:
+        check_live_urls(results, args.timeout_seconds)
+
+    failures = [result for result in results if not result["ok"]]
+    output = {
+        "ok": not failures,
+        "checked": len(results),
+        "failed": len(failures),
+        "require_store_links": args.require_store_links,
+        "live_checked": args.live,
+        "failures": failures,
+        "results": results,
+    }
+    print(json.dumps(output, indent=2))
+    return 0 if not failures else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
