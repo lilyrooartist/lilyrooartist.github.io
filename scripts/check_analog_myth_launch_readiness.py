@@ -16,6 +16,7 @@ PUBLIC_BASE_URL = "https://www.lilyroo.com"
 RELEASE_HUB_URL = "https://distrokid.com/hyperfollow/lilyroo/analog-myth"
 PODCAST_AUDIO = ROOT / "assets/podcasts/analog-myth/analog-myth-the-clock-cannot-explain-this.m4a"
 PODCAST_POSTER = ROOT / "assets/podcasts/analog-myth/analog-myth-podcast-poster.jpg"
+PODCAST_FEED_ART = ROOT / "assets/podcasts/analog-myth/analog-myth-podcast-feed-art.jpg"
 ALBUM_COVER = ROOT / "assets/albums/analog-myth/art/03-analog-myth.jpg"
 STORE_RUN = ROOT / "output/launch-audit/analog-myth-store-verification-run.json"
 STORE_SNAPSHOT_ROOT = ROOT / "output/launch-audit/store-verification/analog-myth"
@@ -52,6 +53,12 @@ LIVE_ASSETS = [
         "Live podcast poster",
         "https://www.lilyroo.com/assets/podcasts/analog-myth/analog-myth-podcast-poster.jpg",
         PODCAST_POSTER,
+        "image/",
+    ),
+    (
+        "Live podcast feed art",
+        "https://www.lilyroo.com/assets/podcasts/analog-myth/analog-myth-podcast-feed-art.jpg",
+        PODCAST_FEED_ART,
         "image/",
     ),
     (
@@ -141,6 +148,28 @@ def verified_release_url(snapshot_name: str) -> str:
     return ""
 
 
+def jpeg_dimensions(path: Path) -> tuple[int, int]:
+    data = path.read_bytes()
+    index = 2
+    while index < len(data):
+        if data[index] != 0xFF:
+            index += 1
+            continue
+        marker = data[index + 1]
+        index += 2
+        if marker in {0xD8, 0xD9}:
+            continue
+        if index + 2 > len(data):
+            break
+        segment_length = int.from_bytes(data[index:index + 2], "big")
+        if marker in {0xC0, 0xC1, 0xC2, 0xC3, 0xC5, 0xC6, 0xC7, 0xC9, 0xCA, 0xCB, 0xCD, 0xCE, 0xCF}:
+            height = int.from_bytes(data[index + 3:index + 5], "big")
+            width = int.from_bytes(data[index + 5:index + 7], "big")
+            return width, height
+        index += segment_length
+    return 0, 0
+
+
 def local_path_for_url(url: str, page: Path) -> Path | None:
     parsed = urllib.parse.urlparse(url)
     if parsed.scheme in {"http", "https"}:
@@ -206,10 +235,15 @@ def check_required_assets(results: list[dict]) -> None:
     for label, path in (
         ("Podcast audio", PODCAST_AUDIO),
         ("Podcast poster", PODCAST_POSTER),
+        ("Podcast feed art", PODCAST_FEED_ART),
         ("Analog Myth cover", ALBUM_COVER),
     ):
         add_result(results, f"{label} exists", path.exists(), str(path.relative_to(ROOT)))
         add_result(results, f"{label} is nonempty", path.exists() and path.stat().st_size > 0, str(path.stat().st_size if path.exists() else 0))
+    if PODCAST_FEED_ART.exists():
+        width, height = jpeg_dimensions(PODCAST_FEED_ART)
+        add_result(results, "Podcast feed art is square", width == height, f"{width}x{height}")
+        add_result(results, "Podcast feed art is directory sized", 1400 <= width <= 3000 and 1400 <= height <= 3000, f"{width}x{height}")
 
 
 def check_feed(results: list[dict]) -> None:
@@ -230,8 +264,8 @@ def check_feed(results: list[dict]) -> None:
     add_result(results, "Podcast feed explicit flag is false", channel.findtext(f"{ITUNES_NS}explicit") == "false", channel.findtext(f"{ITUNES_NS}explicit") or "")
     add_result(
         results,
-        "Podcast feed channel image points to poster",
-        channel_image is not None and channel_image.attrib.get("href", "").endswith("/assets/podcasts/analog-myth/analog-myth-podcast-poster.jpg"),
+        "Podcast feed channel image points to feed art",
+        channel_image is not None and channel_image.attrib.get("href", "").endswith("/assets/podcasts/analog-myth/analog-myth-podcast-feed-art.jpg"),
         channel_image.attrib.get("href", "") if channel_image is not None else "",
     )
     enclosure = root.find("./channel/item/enclosure")
@@ -243,11 +277,18 @@ def check_feed(results: list[dict]) -> None:
     episode_type = item.findtext(f"{ITUNES_NS}episodeType") if item is not None else ""
     item_explicit = item.findtext(f"{ITUNES_NS}explicit") if item is not None else ""
     summary = item.findtext(f"{ITUNES_NS}summary") if item is not None else ""
+    item_image = item.find(f"{ITUNES_NS}image") if item is not None else None
     add_result(results, "Podcast feed item title is Analog Myth episode", item is not None and item.findtext("title") == "Analog Myth: The Clock Cannot Explain This", item.findtext("title") if item is not None else "")
     add_result(results, "Podcast feed item duration is 12:11", duration == "12:11", duration or "")
     add_result(results, "Podcast feed item episode type is full", episode_type == "full", episode_type or "")
     add_result(results, "Podcast feed item explicit flag is false", item_explicit == "false", item_explicit or "")
     add_result(results, "Podcast feed item summary mentions Analog Myth", "Analog Myth" in (summary or ""), summary or "")
+    add_result(
+        results,
+        "Podcast feed item image points to feed art",
+        item_image is not None and item_image.attrib.get("href", "").endswith("/assets/podcasts/analog-myth/analog-myth-podcast-feed-art.jpg"),
+        item_image.attrib.get("href", "") if item_image is not None else "",
+    )
     enclosure_url = enclosure.attrib.get("url", "")
     enclosure_length = enclosure.attrib.get("length", "")
     enclosure_type = enclosure.attrib.get("type", "")
