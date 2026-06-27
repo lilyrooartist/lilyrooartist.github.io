@@ -50,6 +50,32 @@ LIVE_URLS = [
     "https://www.lilyroo.com/podcasts/analog-myth.html",
     "https://www.lilyroo.com/podcasts/feed.xml",
 ]
+LIVE_HTML_MARKERS = {
+    "https://www.lilyroo.com/": (
+        ("Homepage launch stylesheet", "style.css?v=20260627-analog-myth-launch"),
+        ("Homepage album CTA", "/analog-myth.html"),
+        ("Homepage podcast CTA", "/podcasts/analog-myth.html"),
+        ("Homepage podcast audio", "assets/podcasts/analog-myth/analog-myth-the-clock-cannot-explain-this.m4a"),
+    ),
+    "https://www.lilyroo.com/analog-myth.html": (
+        ("Album page launch stylesheet", "style.css?v=20260627-analog-myth-launch"),
+        ("Album page release hub", "https://distrokid.com/hyperfollow/lilyroo/analog-myth"),
+        ("Album page podcast CTA", "/podcasts/analog-myth.html"),
+        ("Album page podcast audio", "assets/podcasts/analog-myth/analog-myth-the-clock-cannot-explain-this.m4a"),
+    ),
+    "https://www.lilyroo.com/podcasts/": (
+        ("Podcast hub title", "Echo Thread Podcast"),
+        ("Podcast hub RSS link", "/podcasts/feed.xml"),
+        ("Podcast hub episode link", "/podcasts/analog-myth.html"),
+        ("Podcast hub directory art metadata", "analog-myth-podcast-directory-art-3000.jpg"),
+    ),
+    "https://www.lilyroo.com/podcasts/analog-myth.html": (
+        ("Podcast episode JSON-LD type", '"@type": "PodcastEpisode"'),
+        ("Podcast episode media URL", "analog-myth-the-clock-cannot-explain-this.m4a"),
+        ("Podcast episode RSS link", "/podcasts/feed.xml"),
+        ("Podcast episode directory art metadata", "analog-myth-podcast-directory-art-3000.jpg"),
+    ),
+}
 LIVE_ASSETS = [
     (
         "Live podcast audio",
@@ -561,6 +587,16 @@ def check_live_feed_content(results: list[dict], timeout_seconds: int) -> None:
     )
 
 
+def check_live_html_markers(results: list[dict], timeout_seconds: int) -> None:
+    for url, markers in LIVE_HTML_MARKERS.items():
+        status, final_url, text = live_text(url, timeout_seconds)
+        add_result(results, f"Live HTML content returns 200: {url}", status == 200, f"{status} {final_url}")
+        if status != 200:
+            continue
+        for label, marker in markers:
+            add_result(results, f"{label} is deployed", marker in text, marker)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Check the public Analog Myth album and podcast launch package.")
     parser.add_argument("--live", action="store_true", help="Also check live lilyroo.com launch URLs.")
@@ -583,6 +619,7 @@ def main() -> int:
         check_live_urls(results, args.timeout_seconds)
         check_live_assets(results, args.timeout_seconds)
         check_live_feed_content(results, args.timeout_seconds)
+        check_live_html_markers(results, args.timeout_seconds)
 
     failures = [result for result in results if not result["ok"]]
     output = {
