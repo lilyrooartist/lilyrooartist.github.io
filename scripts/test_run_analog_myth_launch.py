@@ -4,6 +4,7 @@ from __future__ import annotations
 import importlib.util
 import io
 import json
+import shlex
 import sys
 import unittest
 from pathlib import Path
@@ -86,6 +87,71 @@ class AnalogMythLaunchRunnerTest(unittest.TestCase):
         self.assertIn("GitHub Pages", output["public_launch_ready_reason"])
         self.assertEqual(output["post_deploy_live_check"], "python3 scripts/check_analog_myth_launch_readiness.py --require-store-links --live")
         self.assertEqual(output["next_commands"], ["python3 scripts/check_analog_myth_launch_readiness.py --require-store-links --live"])
+
+    def test_manual_verified_urls_are_forwarded_and_preserved_in_next_command(self) -> None:
+        steps: list[dict] = []
+        spotify_url = "https://open.spotify.com/album/AnalogMythManual123"
+        apple_music_url = "https://music.apple.com/us/album/analog-myth/123456789"
+        youtube_music_url = "https://music.youtube.com/watch?v=AnalogMyth123"
+
+        def fake_run_step(name: str, command: list[str]) -> dict:
+            step = {
+                "name": name,
+                "command": " ".join(command),
+                "returncode": 0,
+                "stderr": "",
+            }
+            if name == "dry_run_apply_links":
+                step["stdout_summary"] = {"ok": True, "changed_files": ["index.html"]}
+            steps.append(step)
+            return step
+
+        with (
+            mock.patch.object(sys, "argv", [
+                "run_analog_myth_launch.py",
+                "--live",
+                "--spotify-url",
+                spotify_url,
+                "--apple-music-url",
+                apple_music_url,
+                "--youtube-music-url",
+                youtube_music_url,
+            ]),
+            mock.patch.object(launch_runner, "run_step", side_effect=fake_run_step),
+            mock.patch.object(launch_runner, "store_summary", return_value={"checked": 4, "verified": 0, "all_public_links_verified": False}),
+            mock.patch("sys.stdout", new_callable=io.StringIO) as stdout,
+        ):
+            code = launch_runner.main()
+
+        output = json.loads(stdout.getvalue())
+        self.assertEqual(code, 0)
+        self.assertTrue(output["launch_ready"])
+        self.assertEqual(output["manual_url_args"], [
+            "--spotify-url",
+            spotify_url,
+            "--apple-music-url",
+            apple_music_url,
+            "--youtube-music-url",
+            youtube_music_url,
+        ])
+        dry_run_apply = next(step for step in steps if step["name"] == "dry_run_apply_links")
+        self.assertIn(f"--spotify-url {spotify_url}", dry_run_apply["command"])
+        self.assertIn(f"--apple-music-url {apple_music_url}", dry_run_apply["command"])
+        self.assertIn(f"--youtube-music-url {youtube_music_url}", dry_run_apply["command"])
+        next_command = output["next_commands"][0]
+        self.assertIn("--apply --live", next_command)
+        self.assertEqual(shlex.split(next_command), [
+            "python3",
+            "scripts/run_analog_myth_launch.py",
+            "--apply",
+            "--live",
+            "--spotify-url",
+            spotify_url,
+            "--apple-music-url",
+            apple_music_url,
+            "--youtube-music-url",
+            youtube_music_url,
+        ])
 
     def test_prelaunch_output_includes_next_store_check_command(self) -> None:
         def fake_run_step(name: str, command: list[str]) -> dict:

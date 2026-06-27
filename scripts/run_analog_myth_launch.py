@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import shlex
 import subprocess
 import sys
 from pathlib import Path
@@ -86,11 +87,24 @@ def store_summary() -> dict:
     }
 
 
-def launch_next_commands(launch_ready: bool, apply_requested: bool) -> list[str]:
+def launch_url_args(args: argparse.Namespace) -> list[str]:
+    url_args: list[str] = []
+    for option, value in (
+        ("--spotify-url", args.spotify_url),
+        ("--apple-music-url", args.apple_music_url),
+        ("--youtube-music-url", args.youtube_music_url),
+    ):
+        if value:
+            url_args.extend([option, value])
+    return url_args
+
+
+def launch_next_commands(launch_ready: bool, apply_requested: bool, url_args: list[str] | None = None) -> list[str]:
     if not launch_ready:
         return ["python3 scripts/run_analog_myth_launch.py --live"]
     if not apply_requested:
-        return ["python3 scripts/run_analog_myth_launch.py --apply --live"]
+        command = ["python3", "scripts/run_analog_myth_launch.py", "--apply", "--live", *(url_args or [])]
+        return [shlex.join(command)]
     return ["python3 scripts/check_analog_myth_launch_readiness.py --require-store-links --live"]
 
 
@@ -100,7 +114,11 @@ def main() -> int:
     parser.add_argument("--allow-prelaunch", action="store_true", help="Exit 0 when the package is healthy but store links are not public yet.")
     parser.add_argument("--live", action="store_true", help="Check live lilyroo.com launch URLs in readiness steps.")
     parser.add_argument("--step-timeout-seconds", type=int, default=25, help="Timeout for each public store lookup subprocess.")
+    parser.add_argument("--spotify-url", default="", help="Manually verified Spotify album URL to use if public search has not found it yet.")
+    parser.add_argument("--apple-music-url", default="", help="Manually verified Apple Music album URL to add alongside Spotify.")
+    parser.add_argument("--youtube-music-url", default="", help="Manually verified YouTube Music album URL to add alongside Spotify.")
     args = parser.parse_args()
+    url_args = launch_url_args(args)
 
     readiness_command = ["python3", "scripts/check_analog_myth_launch_readiness.py"]
     if args.live:
@@ -146,6 +164,7 @@ def main() -> int:
         "scripts/apply_analog_myth_launch_links.py",
         "--verification-root",
         display_path(APPLY_VERIFICATION_ROOT),
+        *url_args,
     ]
     steps.append(run_step("dry_run_apply_links", apply_command))
     dry_run_payload = parse_json_stdout(steps[-1])
@@ -171,7 +190,8 @@ def main() -> int:
         "allow_prelaunch": args.allow_prelaunch,
         "reason": reason,
         "store_summary": summary,
-        "next_commands": launch_next_commands(launch_ready, args.apply),
+        "manual_url_args": url_args,
+        "next_commands": launch_next_commands(launch_ready, args.apply, url_args),
         "steps": steps,
     }
     if args.apply:
