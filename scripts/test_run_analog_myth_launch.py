@@ -139,7 +139,16 @@ class AnalogMythLaunchRunnerTest(unittest.TestCase):
                 "stderr": "",
             }
             if name == "dry_run_apply_links":
-                step["stdout_summary"] = {"ok": True, "changed_files": ["index.html"]}
+                step["stdout_summary"] = {
+                    "ok": True,
+                    "changed_files": ["index.html"],
+                    "manual_spotify_validation": {
+                        "ok": True,
+                        "source": "spotify-oembed-public",
+                        "title": "Analog Myth",
+                        "expected_title": "Analog Myth",
+                    },
+                }
             steps.append(step)
             return step
 
@@ -176,6 +185,10 @@ class AnalogMythLaunchRunnerTest(unittest.TestCase):
         self.assertIn(f"--spotify-url {spotify_url}", dry_run_apply["command"])
         self.assertIn(f"--apple-music-url {apple_music_url}", dry_run_apply["command"])
         self.assertIn(f"--youtube-music-url {youtube_music_url}", dry_run_apply["command"])
+        self.assertEqual(
+            dry_run_apply["stdout_summary"]["manual_spotify_validation"]["title"],
+            "Analog Myth",
+        )
         next_command = output["next_commands"][0]
         self.assertIn("--apply --live", next_command)
         self.assertEqual(shlex.split(next_command), [

@@ -39,6 +39,10 @@ def summarize_payload(payload: dict) -> dict:
         "not_live_or_failed",
         "timed_out",
         "output",
+        "spotify_url",
+        "apple_music_url",
+        "youtube_music_url",
+        "manual_spotify_validation",
     )
     summary = {key: payload[key] for key in keys if key in payload}
     if "summary" in payload and isinstance(payload["summary"], dict):
