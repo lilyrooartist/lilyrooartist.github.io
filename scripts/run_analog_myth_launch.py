@@ -142,8 +142,6 @@ def main() -> int:
         applied = steps[-1]["returncode"] == 0
         launch_ready = applied
         final_readiness_command = ["python3", "scripts/check_analog_myth_launch_readiness.py", "--require-store-links"]
-        if args.live:
-            final_readiness_command.append("--live")
         steps.append(run_step("final_readiness", final_readiness_command))
         launch_ready = launch_ready and steps[-1]["returncode"] == 0
 
@@ -160,6 +158,8 @@ def main() -> int:
         "store_summary": summary,
         "steps": steps,
     }
+    if args.apply and args.live:
+        output["post_deploy_live_check"] = "python3 scripts/check_analog_myth_launch_readiness.py --require-store-links --live"
     print(json.dumps(output, indent=2))
     if launch_ready or args.allow_prelaunch:
         return 0

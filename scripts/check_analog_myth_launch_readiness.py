@@ -135,6 +135,22 @@ OPTIONAL_STORE_LINK_FILES = [
     "press.html",
     "podcasts/feed.xml",
 ]
+LIVE_SPOTIFY_LINK_URLS = [
+    "https://www.lilyroo.com/",
+    "https://www.lilyroo.com/analog-myth.html",
+    "https://www.lilyroo.com/music.html",
+    "https://www.lilyroo.com/press.html",
+    "https://www.lilyroo.com/podcasts/",
+    "https://www.lilyroo.com/podcasts/analog-myth.html",
+    "https://www.lilyroo.com/podcasts/feed.xml",
+]
+LIVE_OPTIONAL_STORE_LINK_URLS = [
+    "https://www.lilyroo.com/",
+    "https://www.lilyroo.com/analog-myth.html",
+    "https://www.lilyroo.com/music.html",
+    "https://www.lilyroo.com/press.html",
+    "https://www.lilyroo.com/podcasts/feed.xml",
+]
 
 
 class LinkCollector(HTMLParser):
@@ -648,6 +664,31 @@ def check_live_discovery_files(results: list[dict], timeout_seconds: int) -> Non
     add_result(results, "Live sitemap includes launch URLs", not missing, ", ".join(missing))
 
 
+def check_live_url_present(results: list[dict], label: str, url: str, live_urls: list[str], timeout_seconds: int) -> None:
+    if not url:
+        add_result(results, f"{label} verified URL is available for live check", False)
+        return
+    missing = []
+    for live_url in live_urls:
+        status, final_url, text = live_text(live_url, timeout_seconds)
+        if status != 200:
+            missing.append(f"{live_url}: {status} {final_url}")
+        elif url not in text:
+            missing.append(live_url)
+    add_result(results, f"{label} URL appears in live launch surfaces", not missing, ", ".join(missing[:10]))
+
+
+def check_live_applied_store_links(results: list[dict], timeout_seconds: int) -> None:
+    spotify_url = verified_release_url("spotify_release_snapshot.json")
+    apple_music_url = verified_release_url("apple_music_release_snapshot.json")
+    youtube_music_url = verified_release_url("youtube_music_release_snapshot.json")
+    check_live_url_present(results, "Spotify", spotify_url, LIVE_SPOTIFY_LINK_URLS, timeout_seconds)
+    if apple_music_url:
+        check_live_url_present(results, "Apple Music", apple_music_url, LIVE_OPTIONAL_STORE_LINK_URLS, timeout_seconds)
+    if youtube_music_url:
+        check_live_url_present(results, "YouTube Music", youtube_music_url, LIVE_OPTIONAL_STORE_LINK_URLS, timeout_seconds)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Check the public Analog Myth album and podcast launch package.")
     parser.add_argument("--live", action="store_true", help="Also check live lilyroo.com launch URLs.")
@@ -674,6 +715,8 @@ def main() -> int:
         check_live_feed_content(results, args.timeout_seconds)
         check_live_html_markers(results, args.timeout_seconds)
         check_live_discovery_files(results, args.timeout_seconds)
+        if args.require_store_links:
+            check_live_applied_store_links(results, args.timeout_seconds)
 
     failures = [result for result in results if not result["ok"]]
     output = {
