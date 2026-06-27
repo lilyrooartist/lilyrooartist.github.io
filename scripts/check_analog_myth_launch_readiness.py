@@ -438,6 +438,17 @@ def live_asset_status(url: str, timeout_seconds: int) -> tuple[int, str, int | N
         return 0, str(exc.reason), None, "", ""
 
 
+def live_text(url: str, timeout_seconds: int) -> tuple[int, str, str]:
+    request = urllib.request.Request(url, headers={"User-Agent": "LilyRooAnalogMythLaunchReadiness/1.0"})
+    try:
+        with urllib.request.urlopen(request, timeout=timeout_seconds) as response:
+            return response.status, response.geturl(), response.read().decode("utf-8")
+    except urllib.error.HTTPError as exc:
+        return exc.code, url, ""
+    except urllib.error.URLError as exc:
+        return 0, str(exc.reason), ""
+
+
 def live_range_status(url: str, timeout_seconds: int) -> tuple[int, int, str]:
     request = urllib.request.Request(
         url,
@@ -488,6 +499,47 @@ def check_live_assets(results: list[dict], timeout_seconds: int) -> None:
         )
 
 
+def check_live_feed_content(results: list[dict], timeout_seconds: int) -> None:
+    url = "https://www.lilyroo.com/podcasts/feed.xml"
+    status, final_url, text = live_text(url, timeout_seconds)
+    local_text = (ROOT / "podcasts/feed.xml").read_text(encoding="utf-8")
+    add_result(results, "Live podcast feed content returns 200", status == 200, f"{status} {final_url}")
+    if status != 200:
+        return
+    add_result(results, "Live podcast feed matches local feed", text == local_text, f"remote={len(text)} local={len(local_text)}")
+    try:
+        root = ET.fromstring(text)
+    except ET.ParseError as exc:
+        add_result(results, "Live podcast feed parses as XML", False, str(exc))
+        return
+    add_result(results, "Live podcast feed parses as XML", True)
+    channel = root.find("channel")
+    item = root.find("./channel/item")
+    enclosure = item.find("enclosure") if item is not None else None
+    channel_image = channel.find(f"{ITUNES_NS}image") if channel is not None else None
+    item_image = item.find(f"{ITUNES_NS}image") if item is not None else None
+    add_result(results, "Live podcast feed title is Echo Thread", channel is not None and channel.findtext("title") == "Echo Thread Podcast")
+    add_result(results, "Live podcast feed has Analog Myth episode", item is not None and item.findtext("title") == "Analog Myth: The Clock Cannot Explain This")
+    add_result(
+        results,
+        "Live podcast feed enclosure points to audio",
+        enclosure is not None and enclosure.attrib.get("url", "").endswith("/assets/podcasts/analog-myth/analog-myth-the-clock-cannot-explain-this.m4a"),
+        enclosure.attrib.get("url", "") if enclosure is not None else "",
+    )
+    add_result(
+        results,
+        "Live podcast feed channel image points to directory art",
+        channel_image is not None and channel_image.attrib.get("href", "").endswith("/assets/podcasts/analog-myth/analog-myth-podcast-directory-art-3000.jpg"),
+        channel_image.attrib.get("href", "") if channel_image is not None else "",
+    )
+    add_result(
+        results,
+        "Live podcast feed item image points to directory art",
+        item_image is not None and item_image.attrib.get("href", "").endswith("/assets/podcasts/analog-myth/analog-myth-podcast-directory-art-3000.jpg"),
+        item_image.attrib.get("href", "") if item_image is not None else "",
+    )
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Check the public Analog Myth album and podcast launch package.")
     parser.add_argument("--live", action="store_true", help="Also check live lilyroo.com launch URLs.")
@@ -509,6 +561,7 @@ def main() -> int:
     if args.live:
         check_live_urls(results, args.timeout_seconds)
         check_live_assets(results, args.timeout_seconds)
+        check_live_feed_content(results, args.timeout_seconds)
 
     failures = [result for result in results if not result["ok"]]
     output = {

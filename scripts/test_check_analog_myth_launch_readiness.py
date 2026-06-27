@@ -5,6 +5,7 @@ import importlib.util
 import json
 import tempfile
 import unittest
+import urllib.error
 from pathlib import Path
 from unittest import mock
 
@@ -38,6 +39,36 @@ def write_pages(root: Path, *, omit_spotify_from: str = "") -> None:
 
 
 class AnalogMythReadinessTest(unittest.TestCase):
+    def test_live_text_reads_utf8_response(self) -> None:
+        class Response:
+            status = 200
+
+            def __enter__(self) -> "Response":
+                return self
+
+            def __exit__(self, *_args: object) -> None:
+                return None
+
+            def geturl(self) -> str:
+                return "https://www.lilyroo.com/podcasts/feed.xml"
+
+            def read(self) -> bytes:
+                return "Echo Thread".encode("utf-8")
+
+        with mock.patch.object(readiness.urllib.request, "urlopen", return_value=Response()):
+            status, final_url, text = readiness.live_text("https://example.test/feed.xml", 5)
+        self.assertEqual(status, 200)
+        self.assertEqual(final_url, "https://www.lilyroo.com/podcasts/feed.xml")
+        self.assertEqual(text, "Echo Thread")
+
+    def test_live_text_reports_http_error(self) -> None:
+        error = urllib.error.HTTPError("https://example.test/feed.xml", 404, "Not Found", hdrs=None, fp=None)
+        with mock.patch.object(readiness.urllib.request, "urlopen", side_effect=error):
+            status, final_url, text = readiness.live_text("https://example.test/feed.xml", 5)
+        self.assertEqual(status, 404)
+        self.assertEqual(final_url, "https://example.test/feed.xml")
+        self.assertEqual(text, "")
+
     def test_itunes_duration_parser_accepts_common_formats(self) -> None:
         self.assertEqual(readiness.itunes_duration_seconds("12:11"), 731)
         self.assertEqual(readiness.itunes_duration_seconds("01:02:03"), 3723)
