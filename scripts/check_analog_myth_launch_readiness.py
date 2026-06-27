@@ -132,6 +132,16 @@ PRELAUNCH_PHRASES = (
     "Store links will be added",
     "release propagates",
 )
+PUBLIC_PLACEHOLDER_PHRASES = (
+    "can be added here once",
+    "final URL exists",
+    "TODO",
+    "PLACEHOLDER",
+)
+PUBLIC_COPY_FILES = [
+    *HTML_PAGES,
+    "podcasts/feed.xml",
+]
 SPOTIFY_LINK_FILES = [
     "index.html",
     "analog-myth.html",
@@ -495,12 +505,22 @@ def check_store_run(results: list[dict], require_store_links: bool) -> None:
 
 def check_live_state_copy(results: list[dict]) -> None:
     stale = []
-    for relative in [*HTML_PAGES, "podcasts/feed.xml"]:
+    for relative in PUBLIC_COPY_FILES:
         text = (ROOT / relative).read_text(encoding="utf-8")
         for phrase in PRELAUNCH_PHRASES:
             if phrase in text:
                 stale.append(f"{relative}: {phrase}")
     add_result(results, "Launch copy uses live-state language", not stale, "; ".join(stale[:10]))
+
+
+def check_public_copy_placeholders(results: list[dict]) -> None:
+    placeholders = []
+    for relative in PUBLIC_COPY_FILES:
+        text = (ROOT / relative).read_text(encoding="utf-8")
+        for phrase in PUBLIC_PLACEHOLDER_PHRASES:
+            if phrase in text:
+                placeholders.append(f"{relative}: {phrase}")
+    add_result(results, "Public launch copy avoids unresolved placeholders", not placeholders, "; ".join(placeholders[:10]))
 
 
 def check_url_present(results: list[dict], label: str, url: str, files: list[str]) -> None:
@@ -733,6 +753,7 @@ def main() -> int:
     check_robots(results)
     check_social_launch_pack(results, args.require_store_links)
     check_store_run(results, args.require_store_links)
+    check_public_copy_placeholders(results)
     if args.require_store_links:
         check_live_state_copy(results)
         check_applied_store_links(results)
