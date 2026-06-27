@@ -413,6 +413,17 @@ main {
   gap: clamp(0.9rem, 1.5vw, 1.2rem);
 }
 
+.podcast-card {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.podcast-card audio,
+.podcast-inline-player audio,
+.podcast-player-card audio {
+  width: 100%;
+}
+
 .archive-page .item {
   display: grid;
   grid-template-columns: 92px minmax(0, 1fr);
@@ -661,6 +672,64 @@ main {
   grid-template-columns: 1fr 1.1fr;
 }
 
+.panel-podcast {
+  grid-template-columns: 1fr minmax(280px, 0.72fr);
+}
+
+.podcast-inline-player,
+.podcast-player-card {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.podcast-inline-player img,
+.podcast-player-card img {
+  width: 100%;
+  min-height: 0;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border: 1px solid var(--line);
+}
+
+.podcast-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 420px);
+  gap: clamp(1.1rem, 2.5vw, 2rem);
+  align-items: end;
+  padding: clamp(2.2rem, 6vw, 5rem) 0 1.7rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.podcast-hero h1 {
+  margin: 0.4rem 0 0.75rem;
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 0.07em;
+  font-size: clamp(3rem, 8vw, 6.8rem);
+  line-height: 0.9;
+}
+
+.podcast-hero p {
+  max-width: 720px;
+  color: var(--muted);
+  font-size: clamp(1.05rem, 1.8vw, 1.32rem);
+  line-height: 1.35;
+}
+
+.podcast-player-card {
+  padding: clamp(0.8rem, 1.5vw, 1rem);
+  border: 1px solid rgba(203, 168, 111, 0.34);
+  background: rgba(7, 7, 9, 0.72);
+}
+
+.track-list {
+  columns: 2;
+  margin: 0.5rem 0 0;
+  padding-left: 1.25rem;
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
 .show-list {
   list-style: none;
   margin: 0;
@@ -860,15 +929,23 @@ main {
   color: var(--muted);
 }
 
-.reveal {
-  opacity: 0;
-  transform: translateY(18px);
+.js-enabled .reveal {
+  opacity: 1;
+  transform: none;
   transition: opacity 500ms ease, transform 500ms ease;
 }
 
-.reveal.visible {
+.js-enabled .reveal.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js-enabled .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 @media (max-width: 900px) {
@@ -893,6 +970,8 @@ main {
   .panel-video,
   .panel-launch,
   .panel-now-playing,
+  .panel-podcast,
+  .podcast-hero,
   .panel-support,
   .sponsor-banner {
     grid-template-columns: 1fr;
@@ -917,6 +996,10 @@ main {
 
   .media-list {
     grid-template-columns: 1fr;
+  }
+
+  .track-list {
+    columns: 1;
   }
 
   .archive-page .album-head {
