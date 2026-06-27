@@ -44,6 +44,18 @@ class AnalogMythLaunchRunnerTest(unittest.TestCase):
         )
         self.assertIn("'https://music.youtube.com/watch?v=AnalogMyth123&list=Launch'", step["command"])
 
+    def test_run_step_parses_json_stderr_summary(self) -> None:
+        class FakeCompleted:
+            returncode = 2
+            stdout = ""
+            stderr = '{"ok": false, "error": "Manual Spotify URL title mismatch."}'
+
+        with mock.patch.object(launch_runner.subprocess, "run", return_value=FakeCompleted()):
+            step = launch_runner.run_step("failed_json", ["python3", "script.py"])
+
+        self.assertEqual(step["stderr_summary"]["error"], "Manual Spotify URL title mismatch.")
+        self.assertEqual(launch_runner.parse_json_stdout(step)["error"], "Manual Spotify URL title mismatch.")
+
     def test_apply_live_defers_live_final_readiness_until_after_deploy(self) -> None:
         steps: list[dict] = []
 

@@ -60,11 +60,16 @@ def run_step(name: str, command: list[str]) -> dict:
             step["stdout_summary"] = summarize_payload(json.loads(stdout))
         except json.JSONDecodeError:
             step["stdout"] = stdout[:2000]
+    if step["stderr"]:
+        try:
+            step["stderr_summary"] = summarize_payload(json.loads(step["stderr"]))
+        except json.JSONDecodeError:
+            pass
     return step
 
 
 def parse_json_stdout(step: dict) -> dict:
-    return step.get("stdout_summary") or {}
+    return step.get("stdout_summary") or step.get("stderr_summary") or {}
 
 
 def store_summary() -> dict:

@@ -23,6 +23,21 @@ BUILD_DATE = "Wed, 01 Jul 2026 04:05:06 GMT"
 
 
 class AnalogMythLaunchLinksTest(unittest.TestCase):
+    def spotify_oembed_response(self, title: str):
+        class Response:
+            status = 200
+
+            def __enter__(self) -> "Response":
+                return self
+
+            def __exit__(self, *args: object) -> None:
+                return None
+
+            def read(self) -> bytes:
+                return f'{{"title": "{title}"}}'.encode("utf-8")
+
+        return Response()
+
     def test_dry_run_targets_every_launch_surface(self) -> None:
         changed = launch_links.apply_updates(SPOTIFY_URL, APPLE_MUSIC_URL, YOUTUBE_MUSIC_URL, BUILD_DATE)
         self.assertEqual(set(changed), launch_links.EXPECTED_FILES)
@@ -65,6 +80,18 @@ class AnalogMythLaunchLinksTest(unittest.TestCase):
     def test_invalid_spotify_url_is_rejected(self) -> None:
         with self.assertRaises(ValueError):
             launch_links.validate_url("Spotify URL", "https://example.com/not-spotify", r"^https://open\.spotify\.com/album/[A-Za-z0-9]+")
+
+    def test_manual_spotify_url_title_validation_accepts_analog_myth(self) -> None:
+        with mock.patch.object(launch_links.urllib.request, "urlopen", return_value=self.spotify_oembed_response("Analog Myth")):
+            validation = launch_links.validate_manual_spotify_url(SPOTIFY_URL)
+
+        self.assertTrue(validation["ok"])
+        self.assertEqual(validation["title"], "Analog Myth")
+
+    def test_manual_spotify_url_title_validation_rejects_wrong_album(self) -> None:
+        with mock.patch.object(launch_links.urllib.request, "urlopen", return_value=self.spotify_oembed_response("Another Album")):
+            with self.assertRaisesRegex(ValueError, "expected Analog Myth, got Another Album"):
+                launch_links.validate_manual_spotify_url(SPOTIFY_URL)
 
 
 if __name__ == "__main__":

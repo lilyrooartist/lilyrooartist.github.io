@@ -7,6 +7,8 @@ from email.utils import format_datetime
 import json
 import re
 import sys
+import urllib.parse
+import urllib.request
 from pathlib import Path
 
 
@@ -14,6 +16,8 @@ ROOT = Path(__file__).resolve().parents[1]
 RELEASE_HUB_URL = "https://distrokid.com/hyperfollow/lilyroo/analog-myth"
 YOUTUBE_PLAYLIST_URL = "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0"
 ALBUM_PAGE_URL = "https://www.lilyroo.com/analog-myth.html"
+EXPECTED_SPOTIFY_TITLE = "Analog Myth"
+SPOTIFY_OEMBED_URL = "https://open.spotify.com/oembed"
 EXPECTED_FILES = {
     "index.html",
     "analog-myth.html",
@@ -43,6 +47,33 @@ def snapshot_release_url(path: Path) -> str:
 def validate_url(label: str, url: str, pattern: str) -> None:
     if url and not re.match(pattern, url):
         raise ValueError(f"{label} does not look like an expected URL: {url}")
+
+
+def normalize_title(value: str) -> str:
+    return " ".join(str(value or "").casefold().split())
+
+
+def fetch_spotify_oembed_title(url: str) -> str:
+    endpoint = SPOTIFY_OEMBED_URL + "?" + urllib.parse.urlencode({"url": url})
+    request = urllib.request.Request(endpoint, headers={
+        "Accept": "application/json",
+        "User-Agent": "LilyRooAnalogMythLaunchLinks/1.0",
+    })
+    with urllib.request.urlopen(request, timeout=25) as response:
+        payload = json.loads(response.read().decode("utf-8"))
+    return str(payload.get("title", ""))
+
+
+def validate_manual_spotify_url(url: str) -> dict:
+    title = fetch_spotify_oembed_title(url)
+    if normalize_title(title) != normalize_title(EXPECTED_SPOTIFY_TITLE):
+        raise ValueError(f"Manual Spotify URL title mismatch: expected {EXPECTED_SPOTIFY_TITLE}, got {title or 'empty title'}.")
+    return {
+        "ok": True,
+        "source": "spotify-oembed-public",
+        "title": title,
+        "expected_title": EXPECTED_SPOTIFY_TITLE,
+    }
 
 
 def html_store_buttons(spotify_url: str, apple_music_url: str, youtube_music_url: str, *, solid_spotify: bool = False) -> str:
@@ -323,6 +354,7 @@ def main() -> int:
     if not verification_root.is_absolute():
         verification_root = ROOT / verification_root
 
+    manual_spotify_url = bool(args.spotify_url)
     spotify_url = args.spotify_url or snapshot_release_url(verification_root / "spotify_release_snapshot.json")
     apple_music_url = args.apple_music_url or snapshot_release_url(verification_root / "apple_music_release_snapshot.json")
     youtube_music_url = args.youtube_music_url or snapshot_release_url(verification_root / "youtube_music_release_snapshot.json")
@@ -337,6 +369,7 @@ def main() -> int:
             "verification_root": str(verification_root.relative_to(ROOT) if verification_root.is_relative_to(ROOT) else verification_root),
         }, indent=2))
         return 1
+    manual_spotify_validation = validate_manual_spotify_url(spotify_url) if manual_spotify_url else {}
 
     changed = apply_updates(spotify_url, apple_music_url, youtube_music_url)
     if args.apply:
@@ -348,6 +381,7 @@ def main() -> int:
         "spotify_url": spotify_url,
         "apple_music_url": apple_music_url,
         "youtube_music_url": youtube_music_url,
+        "manual_spotify_validation": manual_spotify_validation,
         "changed_files": sorted(changed),
     }, indent=2))
     return 0
