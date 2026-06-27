@@ -86,6 +86,16 @@ def store_summary() -> dict:
     }
 
 
+def launch_next_commands(launch_ready: bool, apply_requested: bool, live_requested: bool) -> list[str]:
+    if not launch_ready:
+        return ["python3 scripts/run_analog_myth_launch.py --live"]
+    if not apply_requested:
+        return ["python3 scripts/run_analog_myth_launch.py --apply --live"]
+    if live_requested:
+        return ["python3 scripts/check_analog_myth_launch_readiness.py --require-store-links --live"]
+    return []
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Run the Analog Myth July 1 launch sequence.")
     parser.add_argument("--apply", action="store_true", help="Apply verified launch links after a successful dry run.")
@@ -163,6 +173,7 @@ def main() -> int:
         "allow_prelaunch": args.allow_prelaunch,
         "reason": reason,
         "store_summary": summary,
+        "next_commands": launch_next_commands(launch_ready, args.apply, args.live),
         "steps": steps,
     }
     if args.apply and args.live:
