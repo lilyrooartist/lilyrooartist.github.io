@@ -18,6 +18,7 @@ PODCAST_AUDIO = ROOT / "assets/podcasts/analog-myth/analog-myth-the-clock-cannot
 PODCAST_POSTER = ROOT / "assets/podcasts/analog-myth/analog-myth-podcast-poster.jpg"
 ALBUM_COVER = ROOT / "assets/albums/analog-myth/art/03-analog-myth.jpg"
 STORE_RUN = ROOT / "output/launch-audit/analog-myth-store-verification-run.json"
+ITUNES_NS = "{http://www.itunes.com/dtds/podcast-1.0.dtd}"
 
 HTML_PAGES = [
     "index.html",
@@ -177,10 +178,39 @@ def check_required_assets(results: list[dict]) -> None:
 def check_feed(results: list[dict]) -> None:
     tree = parse_xml_file("podcasts/feed.xml", results)
     root = tree.getroot()
+    channel = root.find("./channel")
+    add_result(results, "Podcast feed has channel", channel is not None)
+    if channel is None:
+        return
+    owner = channel.find(f"{ITUNES_NS}owner")
+    owner_email = owner.findtext(f"{ITUNES_NS}email") if owner is not None else ""
+    category = channel.find(f"{ITUNES_NS}category")
+    channel_image = channel.find(f"{ITUNES_NS}image")
+    add_result(results, "Podcast feed channel title is Echo Thread", channel.findtext("title") == "Echo Thread Podcast", channel.findtext("title") or "")
+    add_result(results, "Podcast feed language is en-us", channel.findtext("language") == "en-us", channel.findtext("language") or "")
+    add_result(results, "Podcast feed owner email is present", owner_email == "lilyroo.artist@aol.com", owner_email or "")
+    add_result(results, "Podcast feed category is Music", category is not None and category.attrib.get("text") == "Music", category.attrib.get("text", "") if category is not None else "")
+    add_result(results, "Podcast feed explicit flag is false", channel.findtext(f"{ITUNES_NS}explicit") == "false", channel.findtext(f"{ITUNES_NS}explicit") or "")
+    add_result(
+        results,
+        "Podcast feed channel image points to poster",
+        channel_image is not None and channel_image.attrib.get("href", "").endswith("/assets/podcasts/analog-myth/analog-myth-podcast-poster.jpg"),
+        channel_image.attrib.get("href", "") if channel_image is not None else "",
+    )
     enclosure = root.find("./channel/item/enclosure")
     add_result(results, "Podcast feed has enclosure", enclosure is not None)
     if enclosure is None:
         return
+    item = root.find("./channel/item")
+    duration = item.findtext(f"{ITUNES_NS}duration") if item is not None else ""
+    episode_type = item.findtext(f"{ITUNES_NS}episodeType") if item is not None else ""
+    item_explicit = item.findtext(f"{ITUNES_NS}explicit") if item is not None else ""
+    summary = item.findtext(f"{ITUNES_NS}summary") if item is not None else ""
+    add_result(results, "Podcast feed item title is Analog Myth episode", item is not None and item.findtext("title") == "Analog Myth: The Clock Cannot Explain This", item.findtext("title") if item is not None else "")
+    add_result(results, "Podcast feed item duration is 12:11", duration == "12:11", duration or "")
+    add_result(results, "Podcast feed item episode type is full", episode_type == "full", episode_type or "")
+    add_result(results, "Podcast feed item explicit flag is false", item_explicit == "false", item_explicit or "")
+    add_result(results, "Podcast feed item summary mentions Analog Myth", "Analog Myth" in (summary or ""), summary or "")
     enclosure_url = enclosure.attrib.get("url", "")
     enclosure_length = enclosure.attrib.get("length", "")
     enclosure_type = enclosure.attrib.get("type", "")
