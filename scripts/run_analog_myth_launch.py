@@ -11,6 +11,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 STORE_RUN = ROOT / "output/launch-audit/analog-myth-store-verification-run.json"
 STORE_SNAPSHOT_ROOT = ROOT / "output/launch-audit/store-verification"
+APPLY_VERIFICATION_ROOT = STORE_SNAPSHOT_ROOT / "analog-myth"
 
 
 def display_path(path: Path) -> str:
@@ -132,13 +133,19 @@ def main() -> int:
         print(json.dumps(output, indent=2))
         return 1
 
-    steps.append(run_step("dry_run_apply_links", ["python3", "scripts/apply_analog_myth_launch_links.py"]))
+    apply_command = [
+        "python3",
+        "scripts/apply_analog_myth_launch_links.py",
+        "--verification-root",
+        display_path(APPLY_VERIFICATION_ROOT),
+    ]
+    steps.append(run_step("dry_run_apply_links", apply_command))
     dry_run_payload = parse_json_stdout(steps[-1])
     launch_ready = steps[-1]["returncode"] == 0
     applied = False
 
     if args.apply and launch_ready:
-        steps.append(run_step("apply_links", ["python3", "scripts/apply_analog_myth_launch_links.py", "--apply"]))
+        steps.append(run_step("apply_links", [*apply_command, "--apply"]))
         applied = steps[-1]["returncode"] == 0
         launch_ready = applied
         final_readiness_command = ["python3", "scripts/check_analog_myth_launch_readiness.py", "--require-store-links"]
