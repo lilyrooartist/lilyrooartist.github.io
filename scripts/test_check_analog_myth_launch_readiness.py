@@ -101,6 +101,11 @@ class AnalogMythReadinessTest(unittest.TestCase):
         self.assertGreater(actual_seconds, 0)
         self.assertLessEqual(abs(actual_seconds - feed_seconds), 2)
 
+    def test_analog_myth_pretty_route_is_checked(self) -> None:
+        self.assertIn("analog-myth/index.html", readiness.HTML_PAGES)
+        self.assertIn("https://www.lilyroo.com/analog-myth/", readiness.LIVE_URLS)
+        self.assertIn("https://www.lilyroo.com/analog-myth/", readiness.LIVE_HTML_MARKERS)
+
     def test_social_launch_pack_allows_prelaunch_placeholder(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             tmp_root = Path(tmp)

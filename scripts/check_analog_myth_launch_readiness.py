@@ -28,6 +28,7 @@ HTML_PAGES = [
     "album.html",
     "album/index.html",
     "analog-myth.html",
+    "analog-myth/index.html",
     "music.html",
     "press.html",
     "podcast.html",
@@ -43,6 +44,7 @@ LIVE_URLS = [
     "https://www.lilyroo.com/album.html",
     "https://www.lilyroo.com/album/",
     "https://www.lilyroo.com/analog-myth.html",
+    "https://www.lilyroo.com/analog-myth/",
     "https://www.lilyroo.com/music.html",
     "https://www.lilyroo.com/press.html",
     "https://www.lilyroo.com/podcast.html",
@@ -63,6 +65,10 @@ LIVE_HTML_MARKERS = {
         ("Album page release hub", "https://distrokid.com/hyperfollow/lilyroo/analog-myth"),
         ("Album page podcast CTA", "/podcasts/analog-myth.html"),
         ("Album page podcast audio", "assets/podcasts/analog-myth/analog-myth-the-clock-cannot-explain-this.m4a"),
+    ),
+    "https://www.lilyroo.com/analog-myth/": (
+        ("Analog Myth pretty route canonical", "https://www.lilyroo.com/analog-myth.html"),
+        ("Analog Myth pretty route refresh", "url=/analog-myth.html"),
     ),
     "https://www.lilyroo.com/podcasts/": (
         ("Podcast hub title", "Echo Thread Podcast"),
