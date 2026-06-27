@@ -175,10 +175,14 @@ def main() -> int:
         "steps": steps,
     }
     if args.apply:
-        output["post_deploy_live_check"] = "python3 scripts/check_analog_myth_launch_readiness.py --require-store-links --live"
         output["local_launch_ready"] = launch_ready
         output["public_launch_ready"] = False
-        output["public_launch_ready_reason"] = "Run post_deploy_live_check after committing, pushing, and waiting for GitHub Pages deploy."
+        if applied:
+            output["post_deploy_live_check"] = "python3 scripts/check_analog_myth_launch_readiness.py --require-store-links --live"
+            output["public_launch_ready_reason"] = "Run post_deploy_live_check after committing, pushing, and waiting for GitHub Pages deploy."
+        else:
+            output["post_deploy_live_check"] = None
+            output["public_launch_ready_reason"] = "No launch-link changes were applied; resolve the runner reason before committing."
     else:
         output["local_launch_ready"] = launch_ready
         output["public_launch_ready"] = launch_ready

@@ -113,6 +113,36 @@ class AnalogMythLaunchRunnerTest(unittest.TestCase):
         self.assertFalse(output["launch_ready"])
         self.assertEqual(output["next_commands"], ["python3 scripts/run_analog_myth_launch.py --live"])
 
+    def test_apply_before_store_links_does_not_emit_post_deploy_check(self) -> None:
+        def fake_run_step(name: str, command: list[str]) -> dict:
+            step = {
+                "name": name,
+                "command": " ".join(command),
+                "returncode": 0,
+                "stderr": "",
+            }
+            if name == "dry_run_apply_links":
+                step["returncode"] = 1
+                step["stdout_summary"] = {"ok": False, "error": "No verified Spotify album URL found."}
+            return step
+
+        with (
+            mock.patch.object(sys, "argv", ["run_analog_myth_launch.py", "--apply", "--allow-prelaunch", "--live"]),
+            mock.patch.object(launch_runner, "run_step", side_effect=fake_run_step),
+            mock.patch.object(launch_runner, "store_summary", return_value={"checked": 4, "verified": 0, "all_public_links_verified": False}),
+            mock.patch("sys.stdout", new_callable=io.StringIO) as stdout,
+        ):
+            code = launch_runner.main()
+
+        output = json.loads(stdout.getvalue())
+        self.assertEqual(code, 0)
+        self.assertFalse(output["launch_ready"])
+        self.assertFalse(output["applied"])
+        self.assertFalse(output["public_launch_ready"])
+        self.assertIsNone(output["post_deploy_live_check"])
+        self.assertIn("No launch-link changes were applied", output["public_launch_ready_reason"])
+        self.assertEqual(output["next_commands"], ["python3 scripts/run_analog_myth_launch.py --live"])
+
 
 if __name__ == "__main__":
     unittest.main()
