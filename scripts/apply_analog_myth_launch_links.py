@@ -2,6 +2,8 @@
 from __future__ import annotations
 
 import argparse
+from datetime import datetime, timezone
+from email.utils import format_datetime
 import json
 import re
 import sys
@@ -75,6 +77,10 @@ def replace_all(text: str, replacements: list[tuple[str, str]]) -> str:
     for old, new in replacements:
         text = text.replace(old, new)
     return text
+
+
+def rfc2822_now() -> str:
+    return format_datetime(datetime.now(timezone.utc), usegmt=True)
 
 
 def update_index(text: str, spotify_url: str, apple_music_url: str, youtube_music_url: str) -> str:
@@ -199,7 +205,7 @@ def update_podcast_pages(text: str, spotify_url: str) -> str:
     )
 
 
-def update_feed(text: str, spotify_url: str, apple_music_url: str, youtube_music_url: str) -> str:
+def update_feed(text: str, spotify_url: str, apple_music_url: str, youtube_music_url: str, build_date: str | None = None) -> str:
     text = replace_all(text, [
         (
             "Jasper Fields sits down with Lily Roo for a track-by-track talk-through of Analog Myth, the eight-song album arriving July 1, 2026.",
@@ -210,6 +216,12 @@ def update_feed(text: str, spotify_url: str, apple_music_url: str, youtube_music
             "Jasper Fields sits down with Lily Roo for a track-by-track talk-through of <em>Analog Myth</em>, the eight-song album that is live now.",
         ),
     ])
+    text = re.sub(
+        r"<lastBuildDate>[^<]+</lastBuildDate>",
+        f"<lastBuildDate>{build_date or rfc2822_now()}</lastBuildDate>",
+        text,
+        count=1,
+    )
     if "Spotify: <a" in text:
         return text
     lines = [f'        <p>Spotify: <a href="{spotify_url}">{spotify_url}</a></p>']
@@ -230,7 +242,7 @@ def update_404(text: str, spotify_url: str) -> str:
     )
 
 
-def apply_updates(spotify_url: str, apple_music_url: str, youtube_music_url: str) -> dict[str, str]:
+def apply_updates(spotify_url: str, apple_music_url: str, youtube_music_url: str, build_date: str | None = None) -> dict[str, str]:
     updates = {
         "index.html": update_index,
         "analog-myth.html": update_album_page,
@@ -238,7 +250,7 @@ def apply_updates(spotify_url: str, apple_music_url: str, youtube_music_url: str
         "press.html": update_press,
         "podcasts/index.html": lambda text, spotify, apple, youtube: update_podcast_pages(text, spotify),
         "podcasts/analog-myth.html": lambda text, spotify, apple, youtube: update_podcast_pages(text, spotify),
-        "podcasts/feed.xml": update_feed,
+        "podcasts/feed.xml": lambda text, spotify, apple, youtube: update_feed(text, spotify, apple, youtube, build_date),
         "404.html": lambda text, spotify, apple, youtube: update_404(text, spotify),
     }
     changed = {}

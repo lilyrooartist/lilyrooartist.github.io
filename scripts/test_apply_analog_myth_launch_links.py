@@ -19,11 +19,12 @@ SPEC.loader.exec_module(launch_links)
 SPOTIFY_URL = "https://open.spotify.com/album/4Al5eYOqGFMKEES5fDWIfI"
 APPLE_MUSIC_URL = "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds/6777735762"
 YOUTUBE_MUSIC_URL = "https://music.youtube.com/watch?v=vK0mDIW65o4"
+BUILD_DATE = "Wed, 01 Jul 2026 04:05:06 GMT"
 
 
 class AnalogMythLaunchLinksTest(unittest.TestCase):
     def test_dry_run_targets_every_public_launch_surface(self) -> None:
-        changed = launch_links.apply_updates(SPOTIFY_URL, APPLE_MUSIC_URL, YOUTUBE_MUSIC_URL)
+        changed = launch_links.apply_updates(SPOTIFY_URL, APPLE_MUSIC_URL, YOUTUBE_MUSIC_URL, BUILD_DATE)
         self.assertEqual(set(changed), launch_links.EXPECTED_FILES)
         self.assertIn(SPOTIFY_URL, changed["index.html"])
         self.assertIn(APPLE_MUSIC_URL, changed["press.html"])
@@ -31,6 +32,8 @@ class AnalogMythLaunchLinksTest(unittest.TestCase):
         combined = "\n".join(changed.values())
         self.assertIn("Analog Myth is live", changed["index.html"])
         self.assertIn("the eight-song album that is live now", changed["podcasts/feed.xml"])
+        self.assertIn(f"<lastBuildDate>{BUILD_DATE}</lastBuildDate>", changed["podcasts/feed.xml"])
+        self.assertIn("<pubDate>Sat, 27 Jun 2026 14:35:00 GMT</pubDate>", changed["podcasts/feed.xml"])
         self.assertNotIn("arrives July 1", combined)
         self.assertNotIn("arriving July 1", combined)
         self.assertNotIn("Store links will be added", combined)
