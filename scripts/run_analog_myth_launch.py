@@ -108,6 +108,27 @@ def launch_next_commands(launch_ready: bool, apply_requested: bool, url_args: li
     return ["python3 scripts/check_analog_myth_launch_readiness.py --require-store-links --live"]
 
 
+def manual_url_fallback_commands(launch_ready: bool, url_args: list[str]) -> list[str]:
+    if launch_ready or url_args:
+        return []
+    check_command = [
+        "python3",
+        "scripts/run_analog_myth_launch.py",
+        "--live",
+        "--spotify-url",
+        "VERIFIED_SPOTIFY_ALBUM_URL",
+    ]
+    apply_command = [
+        "python3",
+        "scripts/run_analog_myth_launch.py",
+        "--apply",
+        "--live",
+        "--spotify-url",
+        "VERIFIED_SPOTIFY_ALBUM_URL",
+    ]
+    return [shlex.join(check_command), shlex.join(apply_command)]
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Run the Analog Myth July 1 launch sequence.")
     parser.add_argument("--apply", action="store_true", help="Apply verified launch links after a successful dry run.")
@@ -191,6 +212,7 @@ def main() -> int:
         "reason": reason,
         "store_summary": summary,
         "manual_url_args": url_args,
+        "manual_url_fallback_commands": manual_url_fallback_commands(launch_ready, url_args),
         "next_commands": launch_next_commands(launch_ready, args.apply, url_args),
         "steps": steps,
     }
