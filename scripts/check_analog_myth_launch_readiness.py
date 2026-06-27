@@ -474,8 +474,17 @@ def check_store_run(results: list[dict], require_store_links: bool) -> None:
     checked = summary.get("checked")
     verified = summary.get("ok")
     all_verified = bool(payload.get("all_public_links_verified"))
+    retry_command = payload.get("retry_command") or ""
     add_result(results, "Analog Myth store verification checked four services", checked == 4, f"checked={checked}")
     add_result(results, "Analog Myth store verification has no timeouts", summary.get("timed_out") == 0, f"timed_out={summary.get('timed_out')}")
+    add_result(
+        results,
+        "Analog Myth store verification uses launch-audit snapshots",
+        "--release 'Analog Myth'" in retry_command
+        and "--out output/launch-audit/analog-myth-store-verification-run.json" in retry_command
+        and "--snapshot-root output/launch-audit/store-verification" in retry_command,
+        retry_command,
+    )
     add_result(
         results,
         "Analog Myth public store links verified",

@@ -27,6 +27,18 @@ def write_snapshot(root: Path, name: str, url: str) -> None:
     (root / name).write_text(json.dumps({"ok": True, "release_url": url}), encoding="utf-8")
 
 
+def write_store_run(path: Path, retry_command: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        json.dumps({
+            "summary": {"checked": 4, "ok": 0, "not_live_or_failed": 4, "timed_out": 0},
+            "all_public_links_verified": False,
+            "retry_command": retry_command,
+        }),
+        encoding="utf-8",
+    )
+
+
 def write_pages(root: Path, *, omit_spotify_from: str = "") -> None:
     for relative in readiness.SPOTIFY_LINK_FILES:
         page = root / relative
@@ -164,6 +176,31 @@ class AnalogMythReadinessTest(unittest.TestCase):
                 readiness.check_applied_store_links(results)
         self.assertFalse(results[0]["ok"])
         self.assertIn("404.html", results[0]["detail"])
+
+    def test_store_run_requires_launch_audit_retry_command(self) -> None:
+        valid_retry = (
+            "python3 scripts/verify_pending_store_links.py --step-timeout-seconds 25 "
+            "--out output/launch-audit/analog-myth-store-verification-run.json "
+            "--snapshot-root output/launch-audit/store-verification --release 'Analog Myth'"
+        )
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_root = Path(tmp)
+            store_run = tmp_root / "analog-myth-store-verification-run.json"
+            write_store_run(store_run, valid_retry)
+            with mock.patch.object(readiness, "ROOT", tmp_root), mock.patch.object(readiness, "STORE_RUN", store_run):
+                results: list[dict] = []
+                readiness.check_store_run(results, require_store_links=False)
+        self.assertTrue(all(result["ok"] for result in results), results)
+
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_root = Path(tmp)
+            store_run = tmp_root / "store_verification_run.json"
+            write_store_run(store_run, "python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25")
+            with mock.patch.object(readiness, "ROOT", tmp_root), mock.patch.object(readiness, "STORE_RUN", store_run):
+                results = []
+                readiness.check_store_run(results, require_store_links=False)
+        provenance = next(result for result in results if result["name"] == "Analog Myth store verification uses launch-audit snapshots")
+        self.assertFalse(provenance["ok"])
 
 
 if __name__ == "__main__":
