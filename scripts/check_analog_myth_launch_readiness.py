@@ -18,6 +18,7 @@ PODCAST_AUDIO = ROOT / "assets/podcasts/analog-myth/analog-myth-the-clock-cannot
 PODCAST_POSTER = ROOT / "assets/podcasts/analog-myth/analog-myth-podcast-poster.jpg"
 PODCAST_FEED_ART = ROOT / "assets/podcasts/analog-myth/analog-myth-podcast-directory-art-3000.jpg"
 ALBUM_COVER = ROOT / "assets/albums/analog-myth/art/03-analog-myth.jpg"
+SOCIAL_LAUNCH_PACK = ROOT / "social/analog_myth_launch_posts.md"
 STORE_RUN = ROOT / "output/launch-audit/analog-myth-store-verification-run.json"
 STORE_SNAPSHOT_ROOT = ROOT / "output/launch-audit/store-verification/analog-myth"
 ITUNES_NS = "{http://www.itunes.com/dtds/podcast-1.0.dtd}"
@@ -410,6 +411,19 @@ def check_robots(results: list[dict]) -> None:
     add_result(results, "robots.txt allows crawling", "Allow: /" in text)
 
 
+def check_social_launch_pack(results: list[dict]) -> None:
+    add_result(results, "Analog Myth launch promo pack exists", SOCIAL_LAUNCH_PACK.exists(), str(SOCIAL_LAUNCH_PACK.relative_to(ROOT)))
+    if not SOCIAL_LAUNCH_PACK.exists():
+        return
+    text = SOCIAL_LAUNCH_PACK.read_text(encoding="utf-8")
+    add_result(results, "Launch promo pack links album page", "https://www.lilyroo.com/analog-myth.html" in text)
+    add_result(results, "Launch promo pack links podcast episode", "https://www.lilyroo.com/podcasts/analog-myth.html" in text)
+    add_result(results, "Launch promo pack links podcast RSS", "https://www.lilyroo.com/podcasts/feed.xml" in text)
+    add_result(results, "Launch promo pack gates Spotify URL", "TBD_VERIFIED_SPOTIFY_ALBUM_URL" in text and "Do not publish a Spotify-specific CTA" in text)
+    add_result(results, "Launch promo pack includes apply command", "python3 scripts/run_analog_myth_launch.py --apply --live" in text)
+    add_result(results, "Launch promo pack avoids old first-single Spotify URL", "5TBsbgE68DTPlAFsPsLEhi" not in text)
+
+
 def check_store_run(results: list[dict], require_store_links: bool) -> None:
     if not STORE_RUN.exists():
         add_result(results, "Analog Myth store verification snapshot exists", False, str(STORE_RUN.relative_to(ROOT)))
@@ -642,6 +656,7 @@ def main() -> int:
     check_feed(results)
     check_sitemap(results)
     check_robots(results)
+    check_social_launch_pack(results)
     check_store_run(results, args.require_store_links)
     if args.require_store_links:
         check_live_state_copy(results)
