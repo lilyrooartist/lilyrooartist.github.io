@@ -38,6 +38,21 @@ def write_pages(root: Path, *, omit_spotify_from: str = "") -> None:
         page.write_text(f"{existing}\n{APPLE_MUSIC_URL}\n{YOUTUBE_MUSIC_URL}", encoding="utf-8")
 
 
+def write_social_pack(path: Path, spotify_text: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(
+        "\n".join([
+            "Album page: https://www.lilyroo.com/analog-myth.html",
+            "Podcast episode: https://www.lilyroo.com/podcasts/analog-myth.html",
+            "Podcast RSS: https://www.lilyroo.com/podcasts/feed.xml",
+            "Do not publish a Spotify-specific CTA until verified.",
+            "python3 scripts/run_analog_myth_launch.py --apply --live",
+            spotify_text,
+        ]),
+        encoding="utf-8",
+    )
+
+
 class AnalogMythReadinessTest(unittest.TestCase):
     def test_live_text_reads_utf8_response(self) -> None:
         class Response:
@@ -81,6 +96,32 @@ class AnalogMythReadinessTest(unittest.TestCase):
         self.assertIsNotNone(feed_seconds)
         self.assertGreater(actual_seconds, 0)
         self.assertLessEqual(abs(actual_seconds - feed_seconds), 2)
+
+    def test_social_launch_pack_allows_prelaunch_placeholder(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_root = Path(tmp)
+            pack = tmp_root / "social/analog_myth_launch_posts.md"
+            write_social_pack(pack, "TBD_VERIFIED_SPOTIFY_ALBUM_URL")
+            with mock.patch.object(readiness, "ROOT", tmp_root), mock.patch.object(readiness, "SOCIAL_LAUNCH_PACK", pack):
+                results: list[dict] = []
+                readiness.check_social_launch_pack(results, require_store_links=False)
+        self.assertTrue(all(result["ok"] for result in results), results)
+
+    def test_social_launch_pack_requires_verified_spotify_after_launch(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_root = Path(tmp)
+            pack = tmp_root / "social/analog_myth_launch_posts.md"
+            snapshot_root = tmp_root / "snapshots"
+            write_social_pack(pack, SPOTIFY_URL)
+            write_snapshot(snapshot_root, "spotify_release_snapshot.json", SPOTIFY_URL)
+            with (
+                mock.patch.object(readiness, "ROOT", tmp_root),
+                mock.patch.object(readiness, "SOCIAL_LAUNCH_PACK", pack),
+                mock.patch.object(readiness, "STORE_SNAPSHOT_ROOT", snapshot_root),
+            ):
+                results: list[dict] = []
+                readiness.check_social_launch_pack(results, require_store_links=True)
+        self.assertTrue(all(result["ok"] for result in results), results)
 
     def test_applied_store_links_pass_when_urls_are_in_expected_files(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

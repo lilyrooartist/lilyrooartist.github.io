@@ -23,10 +23,12 @@ BUILD_DATE = "Wed, 01 Jul 2026 04:05:06 GMT"
 
 
 class AnalogMythLaunchLinksTest(unittest.TestCase):
-    def test_dry_run_targets_every_public_launch_surface(self) -> None:
+    def test_dry_run_targets_every_launch_surface(self) -> None:
         changed = launch_links.apply_updates(SPOTIFY_URL, APPLE_MUSIC_URL, YOUTUBE_MUSIC_URL, BUILD_DATE)
         self.assertEqual(set(changed), launch_links.EXPECTED_FILES)
         self.assertIn(SPOTIFY_URL, changed["index.html"])
+        self.assertIn(SPOTIFY_URL, changed["social/analog_myth_launch_posts.md"])
+        self.assertNotIn("TBD_VERIFIED_SPOTIFY_ALBUM_URL", changed["social/analog_myth_launch_posts.md"])
         self.assertIn(APPLE_MUSIC_URL, changed["press.html"])
         self.assertIn(YOUTUBE_MUSIC_URL, changed["analog-myth.html"])
         combined = "\n".join(changed.values())

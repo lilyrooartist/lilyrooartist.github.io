@@ -411,7 +411,7 @@ def check_robots(results: list[dict]) -> None:
     add_result(results, "robots.txt allows crawling", "Allow: /" in text)
 
 
-def check_social_launch_pack(results: list[dict]) -> None:
+def check_social_launch_pack(results: list[dict], require_store_links: bool) -> None:
     add_result(results, "Analog Myth launch promo pack exists", SOCIAL_LAUNCH_PACK.exists(), str(SOCIAL_LAUNCH_PACK.relative_to(ROOT)))
     if not SOCIAL_LAUNCH_PACK.exists():
         return
@@ -419,9 +419,16 @@ def check_social_launch_pack(results: list[dict]) -> None:
     add_result(results, "Launch promo pack links album page", "https://www.lilyroo.com/analog-myth.html" in text)
     add_result(results, "Launch promo pack links podcast episode", "https://www.lilyroo.com/podcasts/analog-myth.html" in text)
     add_result(results, "Launch promo pack links podcast RSS", "https://www.lilyroo.com/podcasts/feed.xml" in text)
-    add_result(results, "Launch promo pack gates Spotify URL", "TBD_VERIFIED_SPOTIFY_ALBUM_URL" in text and "Do not publish a Spotify-specific CTA" in text)
     add_result(results, "Launch promo pack includes apply command", "python3 scripts/run_analog_myth_launch.py --apply --live" in text)
     add_result(results, "Launch promo pack avoids old first-single Spotify URL", "5TBsbgE68DTPlAFsPsLEhi" not in text)
+    spotify_url = verified_release_url("spotify_release_snapshot.json")
+    if require_store_links:
+        add_result(results, "Launch promo pack Spotify placeholder is replaced", "TBD_VERIFIED_SPOTIFY_ALBUM_URL" not in text)
+        add_result(results, "Launch promo pack includes verified Spotify URL", bool(spotify_url) and spotify_url in text, spotify_url)
+    else:
+        has_prelaunch_gate = "TBD_VERIFIED_SPOTIFY_ALBUM_URL" in text and "Do not publish a Spotify-specific CTA" in text
+        has_verified_url = bool(spotify_url) and spotify_url in text
+        add_result(results, "Launch promo pack gates or includes Spotify URL", has_prelaunch_gate or has_verified_url)
 
 
 def check_store_run(results: list[dict], require_store_links: bool) -> None:
@@ -656,7 +663,7 @@ def main() -> int:
     check_feed(results)
     check_sitemap(results)
     check_robots(results)
-    check_social_launch_pack(results)
+    check_social_launch_pack(results, args.require_store_links)
     check_store_run(results, args.require_store_links)
     if args.require_store_links:
         check_live_state_copy(results)

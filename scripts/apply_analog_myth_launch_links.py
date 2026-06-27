@@ -23,6 +23,7 @@ EXPECTED_FILES = {
     "podcasts/analog-myth.html",
     "podcasts/feed.xml",
     "404.html",
+    "social/analog_myth_launch_posts.md",
 }
 
 
@@ -242,6 +243,44 @@ def update_404(text: str, spotify_url: str) -> str:
     )
 
 
+def update_social_launch_pack(text: str, spotify_url: str) -> str:
+    text = replace_all(text, [
+        (
+            "Primary streaming CTA: add verified Spotify album URL after `python3 scripts/run_analog_myth_launch.py --apply --live` succeeds.",
+            f"Primary streaming CTA: {spotify_url}",
+        ),
+        (
+            "Use these only after the verified Spotify URL replaces `TBD_VERIFIED_SPOTIFY_ALBUM_URL`.",
+            "Use these after the verified Spotify URL has been applied by the launch runner.",
+        ),
+        (
+            "Analog Myth goes live July 1",
+            "Analog Myth is live",
+        ),
+        (
+            "Analog Myth arrives July 1",
+            "Analog Myth is live",
+        ),
+        (
+            "Analog Myth is live July 1",
+            "Analog Myth is live",
+        ),
+        (
+            "goes live July 1",
+            "is live",
+        ),
+        (
+            "arrives July 1",
+            "is live",
+        ),
+        (
+            "5. Replace `TBD_VERIFIED_SPOTIFY_ALBUM_URL` in this pack or copied captions before using Spotify-specific variants.",
+            f"5. Confirm Spotify-specific variants contain `{spotify_url}` before posting.",
+        ),
+    ])
+    return text.replace("TBD_VERIFIED_SPOTIFY_ALBUM_URL", spotify_url)
+
+
 def apply_updates(spotify_url: str, apple_music_url: str, youtube_music_url: str, build_date: str | None = None) -> dict[str, str]:
     updates = {
         "index.html": update_index,
@@ -252,6 +291,7 @@ def apply_updates(spotify_url: str, apple_music_url: str, youtube_music_url: str
         "podcasts/analog-myth.html": lambda text, spotify, apple, youtube: update_podcast_pages(text, spotify),
         "podcasts/feed.xml": lambda text, spotify, apple, youtube: update_feed(text, spotify, apple, youtube, build_date),
         "404.html": lambda text, spotify, apple, youtube: update_404(text, spotify),
+        "social/analog_myth_launch_posts.md": lambda text, spotify, apple, youtube: update_social_launch_pack(text, spotify),
     }
     changed = {}
     missing = []
