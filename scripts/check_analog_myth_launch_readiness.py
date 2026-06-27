@@ -135,6 +135,7 @@ PRELAUNCH_PHRASES = (
 PUBLIC_PLACEHOLDER_PHRASES = (
     "can be added here once",
     "final URL exists",
+    "more coming",
     "TODO",
     "PLACEHOLDER",
 )
