@@ -126,6 +126,7 @@ TBD_VERIFIED_SPOTIFY_ALBUM_URL
 2. Follow the runner's `next_commands`; if store links verify, it should point to `python3 scripts/run_analog_myth_launch.py --apply --live`.
    If the store search lags but a real public Spotify album URL is visible, run `python3 scripts/run_analog_myth_launch.py --live --spotify-url VERIFIED_SPOTIFY_ALBUM_URL`; the runner will preserve that URL in its apply command.
    The manual URL check must validate Spotify title `Analog Myth` and artist `Lily Roo`; do not use the apply command if it reports any title or artist mismatch.
+   If adding optional Apple Music or YouTube Music URLs manually, include `--apple-music-url` or `--youtube-music-url` in the same runner command and require those links to be validated as `Analog Myth` by `Lily Roo`.
    If that manual-URL check reports `launch_ready: true`, the direct apply command is `python3 scripts/run_analog_myth_launch.py --apply --live --spotify-url VERIFIED_SPOTIFY_ALBUM_URL`.
 3. Confirm the apply runner reports `launch_ready: true`, `local_launch_ready: true`, `public_launch_ready: false`, and prints both `next_commands` and `post_deploy_live_check`. Treat any apply run as local-only until the post-deploy live check passes.
 4. Commit and push the launch-link changes.

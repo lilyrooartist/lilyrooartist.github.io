@@ -472,6 +472,7 @@ def check_social_launch_pack(results: list[dict], require_store_links: bool) -> 
     )
     add_result(results, "Launch promo pack separates local and public readiness", "local_launch_ready" in text and "public_launch_ready" in text)
     add_result(results, "Launch promo pack documents manual Spotify title and artist validation", "Spotify title `Analog Myth`" in text and "artist `Lily Roo`" in text)
+    add_result(results, "Launch promo pack documents optional Apple and YouTube Music validation", "Apple Music or YouTube Music URLs" in text and "validated as `Analog Myth` by `Lily Roo`" in text)
     add_result(results, "Launch promo pack gates Spotify copy on post-deploy proof", "Spotify-specific CTA" in text and "returns zero failures after the launch-link deploy" in text)
     add_result(results, "Launch promo pack avoids old first-single Spotify URL", "5TBsbgE68DTPlAFsPsLEhi" not in text)
     spotify_url = verified_release_url("spotify_release_snapshot.json")
