@@ -404,6 +404,12 @@ def check_sitemap(results: list[dict]) -> None:
     add_result(results, "Sitemap includes launch URLs", not missing, ", ".join(missing))
 
 
+def check_robots(results: list[dict]) -> None:
+    text = (ROOT / "robots.txt").read_text(encoding="utf-8")
+    add_result(results, "robots.txt points to sitemap", "Sitemap: https://www.lilyroo.com/sitemap.xml" in text)
+    add_result(results, "robots.txt allows crawling", "Allow: /" in text)
+
+
 def check_store_run(results: list[dict], require_store_links: bool) -> None:
     if not STORE_RUN.exists():
         add_result(results, "Analog Myth store verification snapshot exists", False, str(STORE_RUN.relative_to(ROOT)))
@@ -597,6 +603,30 @@ def check_live_html_markers(results: list[dict], timeout_seconds: int) -> None:
             add_result(results, f"{label} is deployed", marker in text, marker)
 
 
+def check_live_discovery_files(results: list[dict], timeout_seconds: int) -> None:
+    robots_status, robots_final_url, robots_text = live_text("https://www.lilyroo.com/robots.txt", timeout_seconds)
+    add_result(results, "Live robots.txt returns 200", robots_status == 200, f"{robots_status} {robots_final_url}")
+    if robots_status == 200:
+        add_result(results, "Live robots.txt points to sitemap", "Sitemap: https://www.lilyroo.com/sitemap.xml" in robots_text)
+        add_result(results, "Live robots.txt allows crawling", "Allow: /" in robots_text)
+
+    sitemap_status, sitemap_final_url, sitemap_text = live_text("https://www.lilyroo.com/sitemap.xml", timeout_seconds)
+    add_result(results, "Live sitemap returns 200", sitemap_status == 200, f"{sitemap_status} {sitemap_final_url}")
+    if sitemap_status != 200:
+        return
+    local_sitemap = (ROOT / "sitemap.xml").read_text(encoding="utf-8")
+    add_result(results, "Live sitemap matches local sitemap", sitemap_text == local_sitemap, f"remote={len(sitemap_text)} local={len(local_sitemap)}")
+    try:
+        root = ET.fromstring(sitemap_text)
+    except ET.ParseError as exc:
+        add_result(results, "Live sitemap parses as XML", False, str(exc))
+        return
+    add_result(results, "Live sitemap parses as XML", True)
+    urls = {element.text or "" for element in root.findall(".//{http://www.sitemaps.org/schemas/sitemap/0.9}loc")}
+    missing = sorted(REQUIRED_SITEMAP_URLS - urls)
+    add_result(results, "Live sitemap includes launch URLs", not missing, ", ".join(missing))
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Check the public Analog Myth album and podcast launch package.")
     parser.add_argument("--live", action="store_true", help="Also check live lilyroo.com launch URLs.")
@@ -611,6 +641,7 @@ def main() -> int:
         check_json_ld(relative, parser_obj, results)
     check_feed(results)
     check_sitemap(results)
+    check_robots(results)
     check_store_run(results, args.require_store_links)
     if args.require_store_links:
         check_live_state_copy(results)
@@ -620,6 +651,7 @@ def main() -> int:
         check_live_assets(results, args.timeout_seconds)
         check_live_feed_content(results, args.timeout_seconds)
         check_live_html_markers(results, args.timeout_seconds)
+        check_live_discovery_files(results, args.timeout_seconds)
 
     failures = [result for result in results if not result["ok"]]
     output = {
