@@ -18,6 +18,7 @@ PODCAST_AUDIO = ROOT / "assets/podcasts/analog-myth/analog-myth-the-clock-cannot
 PODCAST_POSTER = ROOT / "assets/podcasts/analog-myth/analog-myth-podcast-poster.jpg"
 ALBUM_COVER = ROOT / "assets/albums/analog-myth/art/03-analog-myth.jpg"
 STORE_RUN = ROOT / "output/launch-audit/analog-myth-store-verification-run.json"
+STORE_SNAPSHOT_ROOT = ROOT / "output/launch-audit/store-verification/analog-myth"
 ITUNES_NS = "{http://www.itunes.com/dtds/podcast-1.0.dtd}"
 
 HTML_PAGES = [
@@ -75,6 +76,23 @@ PRELAUNCH_PHRASES = (
     "Store links will be added",
     "release propagates",
 )
+SPOTIFY_LINK_FILES = [
+    "index.html",
+    "analog-myth.html",
+    "music.html",
+    "press.html",
+    "podcasts/index.html",
+    "podcasts/analog-myth.html",
+    "podcasts/feed.xml",
+    "404.html",
+]
+OPTIONAL_STORE_LINK_FILES = [
+    "index.html",
+    "analog-myth.html",
+    "music.html",
+    "press.html",
+    "podcasts/feed.xml",
+]
 
 
 class LinkCollector(HTMLParser):
@@ -108,6 +126,19 @@ class LinkCollector(HTMLParser):
 
 def add_result(results: list[dict], name: str, ok: bool, detail: str = "") -> None:
     results.append({"name": name, "ok": ok, "detail": detail})
+
+
+def read_json(path: Path) -> dict:
+    if not path.exists():
+        return {}
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def verified_release_url(snapshot_name: str) -> str:
+    payload = read_json(STORE_SNAPSHOT_ROOT / snapshot_name)
+    if payload.get("ok") and payload.get("release_url"):
+        return str(payload["release_url"])
+    return ""
 
 
 def local_path_for_url(url: str, page: Path) -> Path | None:
@@ -262,6 +293,25 @@ def check_live_state_copy(results: list[dict]) -> None:
     add_result(results, "Launch copy uses live-state language", not stale, "; ".join(stale[:10]))
 
 
+def check_url_present(results: list[dict], label: str, url: str, files: list[str]) -> None:
+    if not url:
+        add_result(results, f"{label} verified URL is available", False)
+        return
+    missing = [relative for relative in files if url not in (ROOT / relative).read_text(encoding="utf-8")]
+    add_result(results, f"{label} URL appears in expected launch files", not missing, ", ".join(missing))
+
+
+def check_applied_store_links(results: list[dict]) -> None:
+    spotify_url = verified_release_url("spotify_release_snapshot.json")
+    apple_music_url = verified_release_url("apple_music_release_snapshot.json")
+    youtube_music_url = verified_release_url("youtube_music_release_snapshot.json")
+    check_url_present(results, "Spotify", spotify_url, SPOTIFY_LINK_FILES)
+    if apple_music_url:
+        check_url_present(results, "Apple Music", apple_music_url, OPTIONAL_STORE_LINK_FILES)
+    if youtube_music_url:
+        check_url_present(results, "YouTube Music", youtube_music_url, OPTIONAL_STORE_LINK_FILES)
+
+
 def live_status(url: str, timeout_seconds: int) -> tuple[int, str]:
     request = urllib.request.Request(url, headers={"User-Agent": "LilyRooAnalogMythLaunchReadiness/1.0"})
     try:
@@ -331,6 +381,7 @@ def main() -> int:
     check_store_run(results, args.require_store_links)
     if args.require_store_links:
         check_live_state_copy(results)
+        check_applied_store_links(results)
     if args.live:
         check_live_urls(results, args.timeout_seconds)
         check_live_assets(results, args.timeout_seconds)
