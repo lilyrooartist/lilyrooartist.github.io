@@ -160,6 +160,12 @@ def main() -> int:
     }
     if args.apply and args.live:
         output["post_deploy_live_check"] = "python3 scripts/check_analog_myth_launch_readiness.py --require-store-links --live"
+        output["local_launch_ready"] = launch_ready
+        output["public_launch_ready"] = False
+        output["public_launch_ready_reason"] = "Run post_deploy_live_check after committing, pushing, and waiting for GitHub Pages deploy."
+    else:
+        output["local_launch_ready"] = launch_ready
+        output["public_launch_ready"] = launch_ready
     print(json.dumps(output, indent=2))
     if launch_ready or args.allow_prelaunch:
         return 0
