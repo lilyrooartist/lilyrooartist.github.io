@@ -268,6 +268,21 @@ def check_json_ld(relative: str, parser: LinkCollector, results: list[dict]) -> 
         add_result(results, "Analog Myth JSON-LD includes UPC", album_payload.get("identifier") == "UPC 883306680431", str(album_payload.get("identifier", "")))
         same_as = album_payload.get("sameAs") or []
         add_result(results, "Analog Myth JSON-LD includes release hub", RELEASE_HUB_URL in same_as)
+    if relative == "podcasts/index.html":
+        series_payload = next((item for item in payloads if item.get("@type") == "PodcastSeries"), {})
+        series_image = series_payload.get("image") or {}
+        add_result(results, "Podcast series JSON-LD includes feed", series_payload.get("webFeed") == "https://www.lilyroo.com/podcasts/feed.xml", str(series_payload.get("webFeed", "")))
+        add_result(results, "Podcast series JSON-LD uses directory art", series_image.get("url") == "https://www.lilyroo.com/assets/podcasts/analog-myth/analog-myth-podcast-directory-art-3000.jpg", str(series_image.get("url", "")))
+        add_result(results, "Podcast series JSON-LD image is square", series_image.get("width") == 3000 and series_image.get("height") == 3000, f"{series_image.get('width')}x{series_image.get('height')}")
+    if relative == "podcasts/analog-myth.html":
+        episode_payload = next((item for item in payloads if item.get("@type") == "PodcastEpisode"), {})
+        associated_media = episode_payload.get("associatedMedia") or {}
+        part_of_series = episode_payload.get("partOfSeries") or {}
+        series_image = part_of_series.get("image") or {}
+        add_result(results, "Podcast episode JSON-LD duration is set", episode_payload.get("duration") == "PT12M11S", str(episode_payload.get("duration", "")))
+        add_result(results, "Podcast episode JSON-LD media points to audio", associated_media.get("contentUrl") == "https://www.lilyroo.com/assets/podcasts/analog-myth/analog-myth-the-clock-cannot-explain-this.m4a", str(associated_media.get("contentUrl", "")))
+        add_result(results, "Podcast episode JSON-LD series includes feed", part_of_series.get("webFeed") == "https://www.lilyroo.com/podcasts/feed.xml", str(part_of_series.get("webFeed", "")))
+        add_result(results, "Podcast episode JSON-LD series uses directory art", series_image.get("url") == "https://www.lilyroo.com/assets/podcasts/analog-myth/analog-myth-podcast-directory-art-3000.jpg", str(series_image.get("url", "")))
 
 
 def check_required_assets(results: list[dict]) -> None:
