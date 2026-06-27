@@ -5,6 +5,7 @@ import argparse
 from datetime import datetime, timezone
 from email.utils import format_datetime
 import html
+from html.parser import HTMLParser
 import json
 import re
 import sys
@@ -19,6 +20,8 @@ YOUTUBE_PLAYLIST_URL = "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtu
 ALBUM_PAGE_URL = "https://www.lilyroo.com/analog-myth.html"
 EXPECTED_SPOTIFY_TITLE = "Analog Myth"
 EXPECTED_SPOTIFY_ARTIST = "Lily Roo"
+EXPECTED_RELEASE_TITLE = "Analog Myth"
+EXPECTED_ARTIST = "Lily Roo"
 SPOTIFY_OEMBED_URL = "https://open.spotify.com/oembed"
 EXPECTED_FILES = {
     "index.html",
@@ -66,22 +69,55 @@ def fetch_spotify_oembed_title(url: str) -> str:
     return str(payload.get("title", ""))
 
 
-def fetch_spotify_page_title(url: str) -> str:
+class MetaParser(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__()
+        self.title = ""
+        self.meta: dict[str, str] = {}
+        self._in_title = False
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        if tag.lower() == "title":
+            self._in_title = True
+            return
+        if tag.lower() != "meta":
+            return
+        values = {key.lower(): value or "" for key, value in attrs}
+        key = values.get("property") or values.get("name")
+        value = values.get("content")
+        if key and value:
+            self.meta[key] = html.unescape(value)
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag.lower() == "title":
+            self._in_title = False
+
+    def handle_data(self, data: str) -> None:
+        if self._in_title:
+            self.title += data
+
+
+def fetch_html_metadata(url: str) -> dict[str, str]:
     request = urllib.request.Request(url, headers={
         "Accept": "text/html",
         "User-Agent": "LilyRooAnalogMythLaunchLinks/1.0",
     })
     with urllib.request.urlopen(request, timeout=25) as response:
         body = response.read().decode("utf-8", errors="replace")
-    match = re.search(r"<title>(.*?)</title>", body, flags=re.IGNORECASE | re.DOTALL)
-    return html.unescape(match.group(1)).strip() if match else ""
+    parser = MetaParser()
+    parser.feed(body)
+    return {
+        "title": parser.title.strip(),
+        "og_title": parser.meta.get("og:title", "").strip(),
+        "description": (parser.meta.get("og:description") or parser.meta.get("description") or "").strip(),
+    }
 
 
 def validate_manual_spotify_url(url: str) -> dict:
     title = fetch_spotify_oembed_title(url)
     if normalize_title(title) != normalize_title(EXPECTED_SPOTIFY_TITLE):
         raise ValueError(f"Manual Spotify URL title mismatch: expected {EXPECTED_SPOTIFY_TITLE}, got {title or 'empty title'}.")
-    page_title = fetch_spotify_page_title(url)
+    page_title = fetch_html_metadata(url)["title"]
     expected_artist_phrase = f" by {EXPECTED_SPOTIFY_ARTIST} | Spotify"
     if expected_artist_phrase not in page_title:
         raise ValueError(
@@ -94,6 +130,47 @@ def validate_manual_spotify_url(url: str) -> dict:
         "expected_title": EXPECTED_SPOTIFY_TITLE,
         "page_title": page_title,
         "expected_artist": EXPECTED_SPOTIFY_ARTIST,
+    }
+
+
+def validate_manual_apple_music_url(url: str) -> dict:
+    metadata = fetch_html_metadata(url)
+    page_title = metadata["title"]
+    normalized = normalize_title(page_title)
+    if normalize_title(EXPECTED_RELEASE_TITLE) not in normalized or normalize_title(EXPECTED_ARTIST) not in normalized:
+        raise ValueError(
+            f"Manual Apple Music URL mismatch: expected {EXPECTED_RELEASE_TITLE} by {EXPECTED_ARTIST}, got {page_title or 'empty title'}."
+        )
+    return {
+        "ok": True,
+        "source": "apple-music-public-html",
+        "page_title": page_title,
+        "expected_title": EXPECTED_RELEASE_TITLE,
+        "expected_artist": EXPECTED_ARTIST,
+    }
+
+
+def validate_manual_youtube_music_url(url: str) -> dict:
+    metadata = fetch_html_metadata(url)
+    public_title = metadata["og_title"] or metadata["title"]
+    description = metadata["description"]
+    normalized_title = normalize_title(public_title)
+    valid_titles = {
+        normalize_title(EXPECTED_RELEASE_TITLE),
+        normalize_title(f"{EXPECTED_RELEASE_TITLE} - {EXPECTED_ARTIST}"),
+    }
+    artist_seen = normalize_title(EXPECTED_ARTIST) in normalize_title(description) or normalize_title(EXPECTED_ARTIST) in normalized_title
+    if normalized_title not in valid_titles or not artist_seen:
+        raise ValueError(
+            f"Manual YouTube Music URL mismatch: expected {EXPECTED_RELEASE_TITLE} by {EXPECTED_ARTIST}, got title {public_title or 'empty title'}."
+        )
+    return {
+        "ok": True,
+        "source": "youtube-music-public-html",
+        "public_title": public_title,
+        "description_mentions_artist": artist_seen,
+        "expected_title": EXPECTED_RELEASE_TITLE,
+        "expected_artist": EXPECTED_ARTIST,
     }
 
 
@@ -376,6 +453,8 @@ def main() -> int:
         verification_root = ROOT / verification_root
 
     manual_spotify_url = bool(args.spotify_url)
+    manual_apple_music_url = bool(args.apple_music_url)
+    manual_youtube_music_url = bool(args.youtube_music_url)
     spotify_url = args.spotify_url or snapshot_release_url(verification_root / "spotify_release_snapshot.json")
     apple_music_url = args.apple_music_url or snapshot_release_url(verification_root / "apple_music_release_snapshot.json")
     youtube_music_url = args.youtube_music_url or snapshot_release_url(verification_root / "youtube_music_release_snapshot.json")
@@ -391,6 +470,8 @@ def main() -> int:
         }, indent=2))
         return 1
     manual_spotify_validation = validate_manual_spotify_url(spotify_url) if manual_spotify_url else {}
+    manual_apple_music_validation = validate_manual_apple_music_url(apple_music_url) if manual_apple_music_url else {}
+    manual_youtube_music_validation = validate_manual_youtube_music_url(youtube_music_url) if manual_youtube_music_url else {}
 
     changed = apply_updates(spotify_url, apple_music_url, youtube_music_url)
     if args.apply:
@@ -403,6 +484,8 @@ def main() -> int:
         "apple_music_url": apple_music_url,
         "youtube_music_url": youtube_music_url,
         "manual_spotify_validation": manual_spotify_validation,
+        "manual_apple_music_validation": manual_apple_music_validation,
+        "manual_youtube_music_validation": manual_youtube_music_validation,
         "changed_files": sorted(changed),
     }, indent=2))
     return 0

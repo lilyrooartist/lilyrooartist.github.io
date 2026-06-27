@@ -44,6 +44,16 @@ class AnalogMythLaunchLinksTest(unittest.TestCase):
     def spotify_page_response(self, page_title: str):
         return self.spotify_response(f"<!doctype html><title>{page_title}</title>")
 
+    def metadata_response(self, *, title: str = "", og_title: str = "", description: str = ""):
+        return self.spotify_response(
+            "\n".join([
+                "<!doctype html>",
+                f"<title>{title}</title>",
+                f'<meta property="og:title" content="{og_title}">',
+                f'<meta property="og:description" content="{description}">',
+            ])
+        )
+
     def test_dry_run_targets_every_launch_surface(self) -> None:
         changed = launch_links.apply_updates(SPOTIFY_URL, APPLE_MUSIC_URL, YOUTUBE_MUSIC_URL, BUILD_DATE)
         self.assertEqual(set(changed), launch_links.EXPECTED_FILES)
@@ -111,6 +121,44 @@ class AnalogMythLaunchLinksTest(unittest.TestCase):
         ]):
             with self.assertRaisesRegex(ValueError, "expected Lily Roo"):
                 launch_links.validate_manual_spotify_url(SPOTIFY_URL)
+
+    def test_manual_apple_music_url_validation_accepts_analog_myth_by_lily_roo(self) -> None:
+        with mock.patch.object(launch_links.urllib.request, "urlopen", return_value=self.metadata_response(
+            title="Analog Myth - Album by Lily Roo - Apple Music",
+        )):
+            validation = launch_links.validate_manual_apple_music_url(APPLE_MUSIC_URL)
+
+        self.assertTrue(validation["ok"])
+        self.assertEqual(validation["expected_title"], "Analog Myth")
+        self.assertEqual(validation["expected_artist"], "Lily Roo")
+
+    def test_manual_apple_music_url_validation_rejects_wrong_album(self) -> None:
+        with mock.patch.object(launch_links.urllib.request, "urlopen", return_value=self.metadata_response(
+            title="Another Album - Album by Lily Roo - Apple Music",
+        )):
+            with self.assertRaisesRegex(ValueError, "expected Analog Myth by Lily Roo"):
+                launch_links.validate_manual_apple_music_url(APPLE_MUSIC_URL)
+
+    def test_manual_youtube_music_url_validation_accepts_analog_myth_by_lily_roo(self) -> None:
+        with mock.patch.object(launch_links.urllib.request, "urlopen", return_value=self.metadata_response(
+            title="Your browser is deprecated. Please upgrade.",
+            og_title="Analog Myth - Lily Roo",
+            description="Analog Myth by Lily Roo",
+        )):
+            validation = launch_links.validate_manual_youtube_music_url(YOUTUBE_MUSIC_URL)
+
+        self.assertTrue(validation["ok"])
+        self.assertEqual(validation["public_title"], "Analog Myth - Lily Roo")
+        self.assertTrue(validation["description_mentions_artist"])
+
+    def test_manual_youtube_music_url_validation_rejects_missing_artist(self) -> None:
+        with mock.patch.object(launch_links.urllib.request, "urlopen", return_value=self.metadata_response(
+            title="Your browser is deprecated. Please upgrade.",
+            og_title="Analog Myth",
+            description="Official audio",
+        )):
+            with self.assertRaisesRegex(ValueError, "expected Analog Myth by Lily Roo"):
+                launch_links.validate_manual_youtube_music_url(YOUTUBE_MUSIC_URL)
 
 
 if __name__ == "__main__":
