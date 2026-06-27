@@ -70,6 +70,14 @@ LIVE_HTML_MARKERS = {
         ("Analog Myth pretty route canonical", "https://www.lilyroo.com/analog-myth.html"),
         ("Analog Myth pretty route refresh", "url=/analog-myth.html"),
     ),
+    "https://www.lilyroo.com/podcast.html": (
+        ("Podcast legacy file route canonical", "https://www.lilyroo.com/podcasts/"),
+        ("Podcast legacy file route refresh", "url=/podcasts/"),
+    ),
+    "https://www.lilyroo.com/podcast/": (
+        ("Podcast legacy directory route canonical", "https://www.lilyroo.com/podcasts/"),
+        ("Podcast legacy directory route refresh", "url=/podcasts/"),
+    ),
     "https://www.lilyroo.com/podcasts/": (
         ("Podcast hub title", "Echo Thread Podcast"),
         ("Podcast hub RSS link", "/podcasts/feed.xml"),

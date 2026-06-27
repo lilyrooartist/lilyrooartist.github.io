@@ -106,6 +106,14 @@ class AnalogMythReadinessTest(unittest.TestCase):
         self.assertIn("https://www.lilyroo.com/analog-myth/", readiness.LIVE_URLS)
         self.assertIn("https://www.lilyroo.com/analog-myth/", readiness.LIVE_HTML_MARKERS)
 
+    def test_podcast_legacy_routes_are_checked(self) -> None:
+        self.assertIn("podcast.html", readiness.HTML_PAGES)
+        self.assertIn("podcast/index.html", readiness.HTML_PAGES)
+        self.assertIn("https://www.lilyroo.com/podcast.html", readiness.LIVE_URLS)
+        self.assertIn("https://www.lilyroo.com/podcast/", readiness.LIVE_URLS)
+        self.assertIn("https://www.lilyroo.com/podcast.html", readiness.LIVE_HTML_MARKERS)
+        self.assertIn("https://www.lilyroo.com/podcast/", readiness.LIVE_HTML_MARKERS)
+
     def test_social_launch_pack_allows_prelaunch_placeholder(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             tmp_root = Path(tmp)
