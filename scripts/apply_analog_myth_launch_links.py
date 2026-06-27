@@ -12,6 +12,16 @@ ROOT = Path(__file__).resolve().parents[1]
 RELEASE_HUB_URL = "https://distrokid.com/hyperfollow/lilyroo/analog-myth"
 YOUTUBE_PLAYLIST_URL = "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0"
 ALBUM_PAGE_URL = "https://www.lilyroo.com/analog-myth.html"
+EXPECTED_FILES = {
+    "index.html",
+    "analog-myth.html",
+    "music.html",
+    "press.html",
+    "podcasts/index.html",
+    "podcasts/analog-myth.html",
+    "podcasts/feed.xml",
+    "404.html",
+}
 
 
 def read_json(path: Path) -> dict:
@@ -183,12 +193,19 @@ def apply_updates(spotify_url: str, apple_music_url: str, youtube_music_url: str
         "404.html": lambda text, spotify, apple, youtube: update_404(text, spotify),
     }
     changed = {}
+    missing = []
     for relative, updater in updates.items():
         path = ROOT / relative
         before = path.read_text(encoding="utf-8")
         after = updater(before, spotify_url, apple_music_url, youtube_music_url)
         if before != after:
             changed[relative] = after
+        elif spotify_url not in before:
+            missing.append(relative)
+    if missing:
+        raise RuntimeError("No launch-link update marker found in: " + ", ".join(sorted(missing)))
+    if set(updates) != EXPECTED_FILES:
+        raise RuntimeError("Launch updater file map does not match EXPECTED_FILES.")
     return changed
 
 
@@ -238,6 +255,6 @@ def main() -> int:
 if __name__ == "__main__":
     try:
         raise SystemExit(main())
-    except ValueError as exc:
+    except (RuntimeError, ValueError) as exc:
         print(json.dumps({"ok": False, "error": str(exc)}, indent=2), file=sys.stderr)
         raise SystemExit(2)
