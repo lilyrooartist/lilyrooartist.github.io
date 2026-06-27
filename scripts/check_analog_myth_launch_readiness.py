@@ -453,6 +453,7 @@ def check_social_launch_pack(results: list[dict], require_store_links: bool) -> 
     add_result(results, "Launch promo pack includes post-deploy live check", "python3 scripts/check_analog_myth_launch_readiness.py --require-store-links --live" in text)
     add_result(results, "Launch promo pack mentions post-deploy runner output", "post_deploy_live_check" in text)
     add_result(results, "Launch promo pack separates local and public readiness", "local_launch_ready" in text and "public_launch_ready" in text)
+    add_result(results, "Launch promo pack gates Spotify copy on post-deploy proof", "Spotify-specific CTA" in text and "returns zero failures after the launch-link deploy" in text)
     add_result(results, "Launch promo pack avoids old first-single Spotify URL", "5TBsbgE68DTPlAFsPsLEhi" not in text)
     spotify_url = verified_release_url("spotify_release_snapshot.json")
     if require_store_links:

@@ -7,11 +7,11 @@ Podcast episode: https://www.lilyroo.com/podcasts/analog-myth.html
 Podcast RSS: https://www.lilyroo.com/podcasts/feed.xml  
 Playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0  
 Release hub: https://distrokid.com/hyperfollow/lilyroo/analog-myth  
-Primary streaming CTA: add verified Spotify album URL after `python3 scripts/run_analog_myth_launch.py --apply --live` succeeds.
+Primary streaming CTA: add the verified Spotify album URL with `python3 scripts/run_analog_myth_launch.py --apply --live`; publish Spotify-specific copy only after the post-deploy live check passes.
 
 ## Launch Gate
 
-Do not publish a Spotify-specific CTA until the launch runner reports `launch_ready: true` and the public site has been updated with the verified store link.
+Do not publish a Spotify-specific CTA until `python3 scripts/check_analog_myth_launch_readiness.py --require-store-links --live` returns zero failures after the launch-link deploy.
 
 Pre-store-link CTA:
 

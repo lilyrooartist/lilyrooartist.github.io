@@ -246,7 +246,7 @@ def update_404(text: str, spotify_url: str) -> str:
 def update_social_launch_pack(text: str, spotify_url: str) -> str:
     text = replace_all(text, [
         (
-            "Primary streaming CTA: add verified Spotify album URL after `python3 scripts/run_analog_myth_launch.py --apply --live` succeeds.",
+            "Primary streaming CTA: add the verified Spotify album URL with `python3 scripts/run_analog_myth_launch.py --apply --live`; publish Spotify-specific copy only after the post-deploy live check passes.",
             f"Primary streaming CTA: {spotify_url}",
         ),
         (
