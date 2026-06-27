@@ -24,9 +24,12 @@ ITUNES_NS = "{http://www.itunes.com/dtds/podcast-1.0.dtd}"
 
 HTML_PAGES = [
     "index.html",
+    "album.html",
+    "album/index.html",
     "analog-myth.html",
     "music.html",
     "press.html",
+    "podcast.html",
     "podcast/index.html",
     "podcasts/index.html",
     "podcasts/analog-myth.html",
@@ -36,9 +39,12 @@ XML_FILES = ["sitemap.xml", "podcasts/feed.xml"]
 JSON_LD_REQUIRED = {"index.html", "analog-myth.html", "podcasts/index.html", "podcasts/analog-myth.html"}
 LIVE_URLS = [
     "https://www.lilyroo.com/",
+    "https://www.lilyroo.com/album.html",
+    "https://www.lilyroo.com/album/",
     "https://www.lilyroo.com/analog-myth.html",
     "https://www.lilyroo.com/music.html",
     "https://www.lilyroo.com/press.html",
+    "https://www.lilyroo.com/podcast.html",
     "https://www.lilyroo.com/podcast/",
     "https://www.lilyroo.com/podcasts/",
     "https://www.lilyroo.com/podcasts/analog-myth.html",
