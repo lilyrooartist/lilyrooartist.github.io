@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-23T08:58:44.709516Z",
+  "generated_at": "2026-06-28T00:52:27.142201Z",
   "safe_mode": true,
   "source": {
     "promo_queue_plan": "data/promo_queue_plan.json",
@@ -14,22 +14,491 @@
     ]
   },
   "summary": {
-    "manual_ready_count": 0,
-    "youtube_community_count": 0,
+    "manual_ready_count": 4,
+    "youtube_community_count": 4,
     "hard_cta_count": 0,
-    "approved_manual_count": 0,
+    "approved_manual_count": 4,
     "logged_manual_count": 0,
-    "unlogged_manual_count": 0,
-    "public_url_log_needed_count": 0,
+    "unlogged_manual_count": 4,
+    "public_url_log_needed_count": 4,
     "ready_to_post_after_review_count": 0,
-    "ready_for_manual_post_count": 0,
+    "ready_for_manual_post_count": 4,
     "waiting_for_review_count": 0,
     "manual_review_required_count": 0,
-    "postable_now_count": 0,
-    "next_manual_action": "none",
+    "postable_now_count": 4,
+    "next_manual_action": "post_manually_then_log_url",
     "public_community_url": "https://www.youtube.com/@lilyroo.artist/community"
   },
-  "rows": [],
+  "rows": [
+    {
+      "id": "FP-AUTO-270",
+      "platform": "YouTube Community",
+      "release": "Brain Rot",
+      "scheduled_at": "2026-06-27T22:35:00-04:00",
+      "post_type": "community",
+      "approved": "yes",
+      "distribution_status": "ready_for_manual_post",
+      "logged": false,
+      "logged_at": "",
+      "published_url": "",
+      "published_log_content_id": "",
+      "readiness_state": "",
+      "readiness_message": "",
+      "subscriber_growth_score": null,
+      "selected_cta_strength": "",
+      "text": "The phone is melting politely. Brain Rot is tonight's Twelve Dollars signal. Watch the remastered video and help push Lily Roo toward 1,000 YouTube subscribers.",
+      "reply_text": "Watch Brain Rot: https://youtu.be/U7aczBSruAY | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+      "copy_block": "The phone is melting politely. Brain Rot is tonight's Twelve Dollars signal. Watch the remastered video and help push Lily Roo toward 1,000 YouTube subscribers.\n\nWatch Brain Rot: https://youtu.be/U7aczBSruAY | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+      "imagery_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/01-brain-rot-youtube-thumbnail.jpg",
+      "clip_url": "",
+      "asset_download_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/01-brain-rot-youtube-thumbnail.jpg",
+      "destination_links": [
+        "https://youtu.be/U7aczBSruAY",
+        "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n"
+      ],
+      "destination_link_audit": [
+        {
+          "url": "https://youtu.be/U7aczBSruAY",
+          "canonical_url": "https://youtu.be/U7aczBSruAY",
+          "status": "needs_manual_review",
+          "evidence": [],
+          "evidence_count": 0,
+          "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+          "canonical_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+          "status": "verified_local_evidence",
+          "evidence": [
+            {
+              "source": "data/distrokid_release_status.json",
+              "label": "Twelve Dollars YouTube playlist URL",
+              "status": "known_release_link"
+            },
+            {
+              "source": "data/distrokid_release_status.json",
+              "label": "Twelve Dollars YouTube playlist URL",
+              "status": "known_release_playlist"
+            },
+            {
+              "source": "data/youtube_twelve_dollars_playlist.json",
+              "label": "Twelve Dollars verified items: 8",
+              "status": "known_playlist_snapshot"
+            }
+          ],
+          "evidence_count": 3,
+          "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
+        }
+      ],
+      "destination_link_audit_summary": {
+        "link_count": 2,
+        "verified_local_evidence_count": 1,
+        "needs_manual_review_count": 1,
+        "all_links_have_local_evidence": false
+      },
+      "asset_audit": {
+        "url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/01-brain-rot-youtube-thumbnail.jpg",
+        "status": "local_asset_present",
+        "local_path": "assets/albums/twelve-dollars/art/01-brain-rot-youtube-thumbnail.jpg",
+        "exists": true,
+        "guardrail": "Local file check only; no posting or live network check was performed."
+      },
+      "media_key": "twelve-dollars-brain-rot-cover",
+      "approval_preview_command": "",
+      "approval_command": "",
+      "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL'",
+      "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL' --apply --refresh-admin",
+      "log_effect": {
+        "target": "admin/content/Published_Log.csv",
+        "content_id": "FP-AUTO-270",
+        "platform": "YouTube Community",
+        "release": "Brain Rot",
+        "requires_public_url": true,
+        "url_placeholder": "PUBLIC_URL",
+        "duplicate_checked_by": [
+          "content_id",
+          "manual_distribution_id"
+        ],
+        "notes": "manual_distribution_id=FP-AUTO-270; source=data/manual_distribution_packet.json",
+        "would_append": true,
+        "summary": "append Published_Log.csv content_id=FP-AUTO-270 after public URL is available"
+      },
+      "source_kind": "scheduled_posts",
+      "manual_posting_packet": {
+        "posting_surface": "YouTube Studio Community",
+        "public_channel_url": "https://www.youtube.com/@lilyroo.artist",
+        "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
+        "paste_text": "The phone is melting politely. Brain Rot is tonight's Twelve Dollars signal. Watch the remastered video and help push Lily Roo toward 1,000 YouTube subscribers.\n\nWatch Brain Rot: https://youtu.be/U7aczBSruAY | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+        "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/01-brain-rot-youtube-thumbnail.jpg",
+        "approval_required": false,
+        "postable_now": true,
+        "logging_required": true,
+        "logged": false,
+        "published_url": "",
+        "distribution_status": "ready_for_manual_post",
+        "next_action": "post_manually_then_log_url",
+        "next_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL'"
+      },
+      "manual_workflow": [
+        "Review the copy and linked playlist.",
+        "Approve only after human review if it should become the current manual posting candidate.",
+        "Post manually in YouTube Studio Community using the copy and asset below.",
+        "After posting, run the log preview command with the public URL, then run the apply command to update Published_Log.csv and refresh Admin.",
+        "Rows already found in Published_Log.csv are marked logged and should not be treated as pending manual work."
+      ]
+    },
+    {
+      "id": "FP-AUTO-275",
+      "platform": "YouTube Community",
+      "release": "Every Pearl in Carmel",
+      "scheduled_at": "2026-06-28T22:35:00-04:00",
+      "post_type": "community",
+      "approved": "yes",
+      "distribution_status": "ready_for_manual_post",
+      "logged": false,
+      "logged_at": "",
+      "published_url": "",
+      "published_log_content_id": "",
+      "readiness_state": "",
+      "readiness_message": "",
+      "subscriber_growth_score": null,
+      "selected_cta_strength": "",
+      "text": "Every Pearl in Carmel is the pretty souvenir that still knows what it cost. Watch the remastered video and help push Lily Roo toward 1,000 YouTube subscribers.",
+      "reply_text": "Watch Every Pearl in Carmel: https://youtu.be/QodRYnvTVZc | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+      "copy_block": "Every Pearl in Carmel is the pretty souvenir that still knows what it cost. Watch the remastered video and help push Lily Roo toward 1,000 YouTube subscribers.\n\nWatch Every Pearl in Carmel: https://youtu.be/QodRYnvTVZc | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+      "imagery_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/02-every-pearl-in-carmel-youtube-thumbnail.jpg",
+      "clip_url": "",
+      "asset_download_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/02-every-pearl-in-carmel-youtube-thumbnail.jpg",
+      "destination_links": [
+        "https://youtu.be/QodRYnvTVZc",
+        "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n"
+      ],
+      "destination_link_audit": [
+        {
+          "url": "https://youtu.be/QodRYnvTVZc",
+          "canonical_url": "https://youtu.be/QodRYnvTVZc",
+          "status": "needs_manual_review",
+          "evidence": [],
+          "evidence_count": 0,
+          "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+          "canonical_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+          "status": "verified_local_evidence",
+          "evidence": [
+            {
+              "source": "data/distrokid_release_status.json",
+              "label": "Twelve Dollars YouTube playlist URL",
+              "status": "known_release_link"
+            },
+            {
+              "source": "data/distrokid_release_status.json",
+              "label": "Twelve Dollars YouTube playlist URL",
+              "status": "known_release_playlist"
+            },
+            {
+              "source": "data/youtube_twelve_dollars_playlist.json",
+              "label": "Twelve Dollars verified items: 8",
+              "status": "known_playlist_snapshot"
+            }
+          ],
+          "evidence_count": 3,
+          "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
+        }
+      ],
+      "destination_link_audit_summary": {
+        "link_count": 2,
+        "verified_local_evidence_count": 1,
+        "needs_manual_review_count": 1,
+        "all_links_have_local_evidence": false
+      },
+      "asset_audit": {
+        "url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/02-every-pearl-in-carmel-youtube-thumbnail.jpg",
+        "status": "local_asset_present",
+        "local_path": "assets/albums/twelve-dollars/art/02-every-pearl-in-carmel-youtube-thumbnail.jpg",
+        "exists": true,
+        "guardrail": "Local file check only; no posting or live network check was performed."
+      },
+      "media_key": "twelve-dollars-every-pearl-in-carmel-cover",
+      "approval_preview_command": "",
+      "approval_command": "",
+      "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-275 --url 'PUBLIC_URL'",
+      "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-275 --url 'PUBLIC_URL' --apply --refresh-admin",
+      "log_effect": {
+        "target": "admin/content/Published_Log.csv",
+        "content_id": "FP-AUTO-275",
+        "platform": "YouTube Community",
+        "release": "Every Pearl in Carmel",
+        "requires_public_url": true,
+        "url_placeholder": "PUBLIC_URL",
+        "duplicate_checked_by": [
+          "content_id",
+          "manual_distribution_id"
+        ],
+        "notes": "manual_distribution_id=FP-AUTO-275; source=data/manual_distribution_packet.json",
+        "would_append": true,
+        "summary": "append Published_Log.csv content_id=FP-AUTO-275 after public URL is available"
+      },
+      "source_kind": "scheduled_posts",
+      "manual_posting_packet": {
+        "posting_surface": "YouTube Studio Community",
+        "public_channel_url": "https://www.youtube.com/@lilyroo.artist",
+        "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
+        "paste_text": "Every Pearl in Carmel is the pretty souvenir that still knows what it cost. Watch the remastered video and help push Lily Roo toward 1,000 YouTube subscribers.\n\nWatch Every Pearl in Carmel: https://youtu.be/QodRYnvTVZc | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+        "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/02-every-pearl-in-carmel-youtube-thumbnail.jpg",
+        "approval_required": false,
+        "postable_now": true,
+        "logging_required": true,
+        "logged": false,
+        "published_url": "",
+        "distribution_status": "ready_for_manual_post",
+        "next_action": "post_manually_then_log_url",
+        "next_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-275 --url 'PUBLIC_URL'"
+      },
+      "manual_workflow": [
+        "Review the copy and linked playlist.",
+        "Approve only after human review if it should become the current manual posting candidate.",
+        "Post manually in YouTube Studio Community using the copy and asset below.",
+        "After posting, run the log preview command with the public URL, then run the apply command to update Published_Log.csv and refresh Admin.",
+        "Rows already found in Published_Log.csv are marked logged and should not be treated as pending manual work."
+      ]
+    },
+    {
+      "id": "FP-AUTO-280",
+      "platform": "YouTube Community",
+      "release": "The Other One's Charging",
+      "scheduled_at": "2026-06-29T22:35:00-04:00",
+      "post_type": "community",
+      "approved": "yes",
+      "distribution_status": "ready_for_manual_post",
+      "logged": false,
+      "logged_at": "",
+      "published_url": "",
+      "published_log_content_id": "",
+      "readiness_state": "",
+      "readiness_message": "",
+      "subscriber_growth_score": null,
+      "selected_cta_strength": "",
+      "text": "The Other One's Charging is domestic chaos with a battery icon. Watch the remastered video and help push Lily Roo toward 1,000 YouTube subscribers.",
+      "reply_text": "Watch The Other One's Charging: https://youtu.be/EprgLKHp-lE | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+      "copy_block": "The Other One's Charging is domestic chaos with a battery icon. Watch the remastered video and help push Lily Roo toward 1,000 YouTube subscribers.\n\nWatch The Other One's Charging: https://youtu.be/EprgLKHp-lE | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+      "imagery_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/03-the-other-ones-charging-youtube-thumbnail.jpg",
+      "clip_url": "",
+      "asset_download_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/03-the-other-ones-charging-youtube-thumbnail.jpg",
+      "destination_links": [
+        "https://youtu.be/EprgLKHp-lE",
+        "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n"
+      ],
+      "destination_link_audit": [
+        {
+          "url": "https://youtu.be/EprgLKHp-lE",
+          "canonical_url": "https://youtu.be/EprgLKHp-lE",
+          "status": "needs_manual_review",
+          "evidence": [],
+          "evidence_count": 0,
+          "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+          "canonical_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+          "status": "verified_local_evidence",
+          "evidence": [
+            {
+              "source": "data/distrokid_release_status.json",
+              "label": "Twelve Dollars YouTube playlist URL",
+              "status": "known_release_link"
+            },
+            {
+              "source": "data/distrokid_release_status.json",
+              "label": "Twelve Dollars YouTube playlist URL",
+              "status": "known_release_playlist"
+            },
+            {
+              "source": "data/youtube_twelve_dollars_playlist.json",
+              "label": "Twelve Dollars verified items: 8",
+              "status": "known_playlist_snapshot"
+            }
+          ],
+          "evidence_count": 3,
+          "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
+        }
+      ],
+      "destination_link_audit_summary": {
+        "link_count": 2,
+        "verified_local_evidence_count": 1,
+        "needs_manual_review_count": 1,
+        "all_links_have_local_evidence": false
+      },
+      "asset_audit": {
+        "url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/03-the-other-ones-charging-youtube-thumbnail.jpg",
+        "status": "local_asset_present",
+        "local_path": "assets/albums/twelve-dollars/art/03-the-other-ones-charging-youtube-thumbnail.jpg",
+        "exists": true,
+        "guardrail": "Local file check only; no posting or live network check was performed."
+      },
+      "media_key": "twelve-dollars-the-other-ones-charging-cover",
+      "approval_preview_command": "",
+      "approval_command": "",
+      "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-280 --url 'PUBLIC_URL'",
+      "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-280 --url 'PUBLIC_URL' --apply --refresh-admin",
+      "log_effect": {
+        "target": "admin/content/Published_Log.csv",
+        "content_id": "FP-AUTO-280",
+        "platform": "YouTube Community",
+        "release": "The Other One's Charging",
+        "requires_public_url": true,
+        "url_placeholder": "PUBLIC_URL",
+        "duplicate_checked_by": [
+          "content_id",
+          "manual_distribution_id"
+        ],
+        "notes": "manual_distribution_id=FP-AUTO-280; source=data/manual_distribution_packet.json",
+        "would_append": true,
+        "summary": "append Published_Log.csv content_id=FP-AUTO-280 after public URL is available"
+      },
+      "source_kind": "scheduled_posts",
+      "manual_posting_packet": {
+        "posting_surface": "YouTube Studio Community",
+        "public_channel_url": "https://www.youtube.com/@lilyroo.artist",
+        "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
+        "paste_text": "The Other One's Charging is domestic chaos with a battery icon. Watch the remastered video and help push Lily Roo toward 1,000 YouTube subscribers.\n\nWatch The Other One's Charging: https://youtu.be/EprgLKHp-lE | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+        "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/03-the-other-ones-charging-youtube-thumbnail.jpg",
+        "approval_required": false,
+        "postable_now": true,
+        "logging_required": true,
+        "logged": false,
+        "published_url": "",
+        "distribution_status": "ready_for_manual_post",
+        "next_action": "post_manually_then_log_url",
+        "next_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-280 --url 'PUBLIC_URL'"
+      },
+      "manual_workflow": [
+        "Review the copy and linked playlist.",
+        "Approve only after human review if it should become the current manual posting candidate.",
+        "Post manually in YouTube Studio Community using the copy and asset below.",
+        "After posting, run the log preview command with the public URL, then run the apply command to update Published_Log.csv and refresh Admin.",
+        "Rows already found in Published_Log.csv are marked logged and should not be treated as pending manual work."
+      ]
+    },
+    {
+      "id": "FP-AUTO-285",
+      "platform": "YouTube Community",
+      "release": "Twelve Dollars",
+      "scheduled_at": "2026-06-30T22:35:00-04:00",
+      "post_type": "community",
+      "approved": "yes",
+      "distribution_status": "ready_for_manual_post",
+      "logged": false,
+      "logged_at": "",
+      "published_url": "",
+      "published_log_content_id": "",
+      "readiness_state": "",
+      "readiness_message": "",
+      "subscriber_growth_score": null,
+      "selected_cta_strength": "",
+      "text": "Twelve Dollars is the stage light, the joke, and the receipt. Watch the remastered video and help push Lily Roo toward 1,000 YouTube subscribers.",
+      "reply_text": "Watch Twelve Dollars: https://youtu.be/G2RlCwZKOsk | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+      "copy_block": "Twelve Dollars is the stage light, the joke, and the receipt. Watch the remastered video and help push Lily Roo toward 1,000 YouTube subscribers.\n\nWatch Twelve Dollars: https://youtu.be/G2RlCwZKOsk | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+      "imagery_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars-youtube-thumbnail.jpg",
+      "clip_url": "",
+      "asset_download_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars-youtube-thumbnail.jpg",
+      "destination_links": [
+        "https://youtu.be/G2RlCwZKOsk",
+        "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n"
+      ],
+      "destination_link_audit": [
+        {
+          "url": "https://youtu.be/G2RlCwZKOsk",
+          "canonical_url": "https://youtu.be/G2RlCwZKOsk",
+          "status": "needs_manual_review",
+          "evidence": [],
+          "evidence_count": 0,
+          "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+          "canonical_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+          "status": "verified_local_evidence",
+          "evidence": [
+            {
+              "source": "data/distrokid_release_status.json",
+              "label": "Twelve Dollars YouTube playlist URL",
+              "status": "known_release_link"
+            },
+            {
+              "source": "data/distrokid_release_status.json",
+              "label": "Twelve Dollars YouTube playlist URL",
+              "status": "known_release_playlist"
+            },
+            {
+              "source": "data/youtube_twelve_dollars_playlist.json",
+              "label": "Twelve Dollars verified items: 8",
+              "status": "known_playlist_snapshot"
+            }
+          ],
+          "evidence_count": 3,
+          "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
+        }
+      ],
+      "destination_link_audit_summary": {
+        "link_count": 2,
+        "verified_local_evidence_count": 1,
+        "needs_manual_review_count": 1,
+        "all_links_have_local_evidence": false
+      },
+      "asset_audit": {
+        "url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars-youtube-thumbnail.jpg",
+        "status": "local_asset_present",
+        "local_path": "assets/albums/twelve-dollars/art/04-twelve-dollars-youtube-thumbnail.jpg",
+        "exists": true,
+        "guardrail": "Local file check only; no posting or live network check was performed."
+      },
+      "media_key": "twelve-dollars-twelve-dollars-cover",
+      "approval_preview_command": "",
+      "approval_command": "",
+      "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-285 --url 'PUBLIC_URL'",
+      "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-285 --url 'PUBLIC_URL' --apply --refresh-admin",
+      "log_effect": {
+        "target": "admin/content/Published_Log.csv",
+        "content_id": "FP-AUTO-285",
+        "platform": "YouTube Community",
+        "release": "Twelve Dollars",
+        "requires_public_url": true,
+        "url_placeholder": "PUBLIC_URL",
+        "duplicate_checked_by": [
+          "content_id",
+          "manual_distribution_id"
+        ],
+        "notes": "manual_distribution_id=FP-AUTO-285; source=data/manual_distribution_packet.json",
+        "would_append": true,
+        "summary": "append Published_Log.csv content_id=FP-AUTO-285 after public URL is available"
+      },
+      "source_kind": "scheduled_posts",
+      "manual_posting_packet": {
+        "posting_surface": "YouTube Studio Community",
+        "public_channel_url": "https://www.youtube.com/@lilyroo.artist",
+        "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
+        "paste_text": "Twelve Dollars is the stage light, the joke, and the receipt. Watch the remastered video and help push Lily Roo toward 1,000 YouTube subscribers.\n\nWatch Twelve Dollars: https://youtu.be/G2RlCwZKOsk | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+        "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars-youtube-thumbnail.jpg",
+        "approval_required": false,
+        "postable_now": true,
+        "logging_required": true,
+        "logged": false,
+        "published_url": "",
+        "distribution_status": "ready_for_manual_post",
+        "next_action": "post_manually_then_log_url",
+        "next_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-285 --url 'PUBLIC_URL'"
+      },
+      "manual_workflow": [
+        "Review the copy and linked playlist.",
+        "Approve only after human review if it should become the current manual posting candidate.",
+        "Post manually in YouTube Studio Community using the copy and asset below.",
+        "After posting, run the log preview command with the public URL, then run the apply command to update Published_Log.csv and refresh Admin.",
+        "Rows already found in Published_Log.csv are marked logged and should not be treated as pending manual work."
+      ]
+    }
+  ],
   "manual_approval_docket": {
     "status": "clear",
     "ready_count": 0,
@@ -44,14 +513,375 @@
     "ready_to_review": []
   },
   "manual_distribution_docket": {
-    "status": "empty",
+    "status": "postable_now",
     "review_count": 0,
-    "postable_count": 0,
+    "postable_count": 4,
     "logged_count": 0,
     "review_queue": [],
-    "postable_now": [],
+    "postable_now": [
+      {
+        "id": "FP-AUTO-270",
+        "platform": "YouTube Community",
+        "release": "Brain Rot",
+        "scheduled_at": "2026-06-27T22:35:00-04:00",
+        "distribution_status": "ready_for_manual_post",
+        "subscriber_growth_score": null,
+        "selected_cta_strength": "",
+        "posting_surface": "YouTube Studio Community",
+        "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
+        "paste_text": "The phone is melting politely. Brain Rot is tonight's Twelve Dollars signal. Watch the remastered video and help push Lily Roo toward 1,000 YouTube subscribers.\n\nWatch Brain Rot: https://youtu.be/U7aczBSruAY | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+        "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/01-brain-rot-youtube-thumbnail.jpg",
+        "destination_links": [
+          "https://youtu.be/U7aczBSruAY",
+          "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n"
+        ],
+        "destination_link_audit": [
+          {
+            "url": "https://youtu.be/U7aczBSruAY",
+            "canonical_url": "https://youtu.be/U7aczBSruAY",
+            "status": "needs_manual_review",
+            "evidence": [],
+            "evidence_count": 0,
+            "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
+          },
+          {
+            "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+            "canonical_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+            "status": "verified_local_evidence",
+            "evidence": [
+              {
+                "source": "data/distrokid_release_status.json",
+                "label": "Twelve Dollars YouTube playlist URL",
+                "status": "known_release_link"
+              },
+              {
+                "source": "data/distrokid_release_status.json",
+                "label": "Twelve Dollars YouTube playlist URL",
+                "status": "known_release_playlist"
+              },
+              {
+                "source": "data/youtube_twelve_dollars_playlist.json",
+                "label": "Twelve Dollars verified items: 8",
+                "status": "known_playlist_snapshot"
+              }
+            ],
+            "evidence_count": 3,
+            "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
+          }
+        ],
+        "destination_link_audit_summary": {
+          "link_count": 2,
+          "verified_local_evidence_count": 1,
+          "needs_manual_review_count": 1,
+          "all_links_have_local_evidence": false
+        },
+        "asset_audit": {
+          "url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/01-brain-rot-youtube-thumbnail.jpg",
+          "status": "local_asset_present",
+          "local_path": "assets/albums/twelve-dollars/art/01-brain-rot-youtube-thumbnail.jpg",
+          "exists": true,
+          "guardrail": "Local file check only; no posting or live network check was performed."
+        },
+        "approval_required": false,
+        "postable_now": true,
+        "logging_required": true,
+        "logged": false,
+        "published_url": "",
+        "next_action": "post_manually_then_log_url",
+        "next_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL'",
+        "approval_preview_command": "",
+        "approval_command": "",
+        "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL'",
+        "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL' --apply --refresh-admin",
+        "log_effect": {
+          "target": "admin/content/Published_Log.csv",
+          "content_id": "FP-AUTO-270",
+          "platform": "YouTube Community",
+          "release": "Brain Rot",
+          "requires_public_url": true,
+          "url_placeholder": "PUBLIC_URL",
+          "duplicate_checked_by": [
+            "content_id",
+            "manual_distribution_id"
+          ],
+          "notes": "manual_distribution_id=FP-AUTO-270; source=data/manual_distribution_packet.json",
+          "would_append": true,
+          "summary": "append Published_Log.csv content_id=FP-AUTO-270 after public URL is available"
+        }
+      },
+      {
+        "id": "FP-AUTO-275",
+        "platform": "YouTube Community",
+        "release": "Every Pearl in Carmel",
+        "scheduled_at": "2026-06-28T22:35:00-04:00",
+        "distribution_status": "ready_for_manual_post",
+        "subscriber_growth_score": null,
+        "selected_cta_strength": "",
+        "posting_surface": "YouTube Studio Community",
+        "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
+        "paste_text": "Every Pearl in Carmel is the pretty souvenir that still knows what it cost. Watch the remastered video and help push Lily Roo toward 1,000 YouTube subscribers.\n\nWatch Every Pearl in Carmel: https://youtu.be/QodRYnvTVZc | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+        "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/02-every-pearl-in-carmel-youtube-thumbnail.jpg",
+        "destination_links": [
+          "https://youtu.be/QodRYnvTVZc",
+          "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n"
+        ],
+        "destination_link_audit": [
+          {
+            "url": "https://youtu.be/QodRYnvTVZc",
+            "canonical_url": "https://youtu.be/QodRYnvTVZc",
+            "status": "needs_manual_review",
+            "evidence": [],
+            "evidence_count": 0,
+            "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
+          },
+          {
+            "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+            "canonical_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+            "status": "verified_local_evidence",
+            "evidence": [
+              {
+                "source": "data/distrokid_release_status.json",
+                "label": "Twelve Dollars YouTube playlist URL",
+                "status": "known_release_link"
+              },
+              {
+                "source": "data/distrokid_release_status.json",
+                "label": "Twelve Dollars YouTube playlist URL",
+                "status": "known_release_playlist"
+              },
+              {
+                "source": "data/youtube_twelve_dollars_playlist.json",
+                "label": "Twelve Dollars verified items: 8",
+                "status": "known_playlist_snapshot"
+              }
+            ],
+            "evidence_count": 3,
+            "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
+          }
+        ],
+        "destination_link_audit_summary": {
+          "link_count": 2,
+          "verified_local_evidence_count": 1,
+          "needs_manual_review_count": 1,
+          "all_links_have_local_evidence": false
+        },
+        "asset_audit": {
+          "url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/02-every-pearl-in-carmel-youtube-thumbnail.jpg",
+          "status": "local_asset_present",
+          "local_path": "assets/albums/twelve-dollars/art/02-every-pearl-in-carmel-youtube-thumbnail.jpg",
+          "exists": true,
+          "guardrail": "Local file check only; no posting or live network check was performed."
+        },
+        "approval_required": false,
+        "postable_now": true,
+        "logging_required": true,
+        "logged": false,
+        "published_url": "",
+        "next_action": "post_manually_then_log_url",
+        "next_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-275 --url 'PUBLIC_URL'",
+        "approval_preview_command": "",
+        "approval_command": "",
+        "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-275 --url 'PUBLIC_URL'",
+        "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-275 --url 'PUBLIC_URL' --apply --refresh-admin",
+        "log_effect": {
+          "target": "admin/content/Published_Log.csv",
+          "content_id": "FP-AUTO-275",
+          "platform": "YouTube Community",
+          "release": "Every Pearl in Carmel",
+          "requires_public_url": true,
+          "url_placeholder": "PUBLIC_URL",
+          "duplicate_checked_by": [
+            "content_id",
+            "manual_distribution_id"
+          ],
+          "notes": "manual_distribution_id=FP-AUTO-275; source=data/manual_distribution_packet.json",
+          "would_append": true,
+          "summary": "append Published_Log.csv content_id=FP-AUTO-275 after public URL is available"
+        }
+      },
+      {
+        "id": "FP-AUTO-280",
+        "platform": "YouTube Community",
+        "release": "The Other One's Charging",
+        "scheduled_at": "2026-06-29T22:35:00-04:00",
+        "distribution_status": "ready_for_manual_post",
+        "subscriber_growth_score": null,
+        "selected_cta_strength": "",
+        "posting_surface": "YouTube Studio Community",
+        "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
+        "paste_text": "The Other One's Charging is domestic chaos with a battery icon. Watch the remastered video and help push Lily Roo toward 1,000 YouTube subscribers.\n\nWatch The Other One's Charging: https://youtu.be/EprgLKHp-lE | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+        "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/03-the-other-ones-charging-youtube-thumbnail.jpg",
+        "destination_links": [
+          "https://youtu.be/EprgLKHp-lE",
+          "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n"
+        ],
+        "destination_link_audit": [
+          {
+            "url": "https://youtu.be/EprgLKHp-lE",
+            "canonical_url": "https://youtu.be/EprgLKHp-lE",
+            "status": "needs_manual_review",
+            "evidence": [],
+            "evidence_count": 0,
+            "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
+          },
+          {
+            "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+            "canonical_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+            "status": "verified_local_evidence",
+            "evidence": [
+              {
+                "source": "data/distrokid_release_status.json",
+                "label": "Twelve Dollars YouTube playlist URL",
+                "status": "known_release_link"
+              },
+              {
+                "source": "data/distrokid_release_status.json",
+                "label": "Twelve Dollars YouTube playlist URL",
+                "status": "known_release_playlist"
+              },
+              {
+                "source": "data/youtube_twelve_dollars_playlist.json",
+                "label": "Twelve Dollars verified items: 8",
+                "status": "known_playlist_snapshot"
+              }
+            ],
+            "evidence_count": 3,
+            "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
+          }
+        ],
+        "destination_link_audit_summary": {
+          "link_count": 2,
+          "verified_local_evidence_count": 1,
+          "needs_manual_review_count": 1,
+          "all_links_have_local_evidence": false
+        },
+        "asset_audit": {
+          "url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/03-the-other-ones-charging-youtube-thumbnail.jpg",
+          "status": "local_asset_present",
+          "local_path": "assets/albums/twelve-dollars/art/03-the-other-ones-charging-youtube-thumbnail.jpg",
+          "exists": true,
+          "guardrail": "Local file check only; no posting or live network check was performed."
+        },
+        "approval_required": false,
+        "postable_now": true,
+        "logging_required": true,
+        "logged": false,
+        "published_url": "",
+        "next_action": "post_manually_then_log_url",
+        "next_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-280 --url 'PUBLIC_URL'",
+        "approval_preview_command": "",
+        "approval_command": "",
+        "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-280 --url 'PUBLIC_URL'",
+        "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-280 --url 'PUBLIC_URL' --apply --refresh-admin",
+        "log_effect": {
+          "target": "admin/content/Published_Log.csv",
+          "content_id": "FP-AUTO-280",
+          "platform": "YouTube Community",
+          "release": "The Other One's Charging",
+          "requires_public_url": true,
+          "url_placeholder": "PUBLIC_URL",
+          "duplicate_checked_by": [
+            "content_id",
+            "manual_distribution_id"
+          ],
+          "notes": "manual_distribution_id=FP-AUTO-280; source=data/manual_distribution_packet.json",
+          "would_append": true,
+          "summary": "append Published_Log.csv content_id=FP-AUTO-280 after public URL is available"
+        }
+      },
+      {
+        "id": "FP-AUTO-285",
+        "platform": "YouTube Community",
+        "release": "Twelve Dollars",
+        "scheduled_at": "2026-06-30T22:35:00-04:00",
+        "distribution_status": "ready_for_manual_post",
+        "subscriber_growth_score": null,
+        "selected_cta_strength": "",
+        "posting_surface": "YouTube Studio Community",
+        "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
+        "paste_text": "Twelve Dollars is the stage light, the joke, and the receipt. Watch the remastered video and help push Lily Roo toward 1,000 YouTube subscribers.\n\nWatch Twelve Dollars: https://youtu.be/G2RlCwZKOsk | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+        "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars-youtube-thumbnail.jpg",
+        "destination_links": [
+          "https://youtu.be/G2RlCwZKOsk",
+          "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n"
+        ],
+        "destination_link_audit": [
+          {
+            "url": "https://youtu.be/G2RlCwZKOsk",
+            "canonical_url": "https://youtu.be/G2RlCwZKOsk",
+            "status": "needs_manual_review",
+            "evidence": [],
+            "evidence_count": 0,
+            "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
+          },
+          {
+            "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+            "canonical_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+            "status": "verified_local_evidence",
+            "evidence": [
+              {
+                "source": "data/distrokid_release_status.json",
+                "label": "Twelve Dollars YouTube playlist URL",
+                "status": "known_release_link"
+              },
+              {
+                "source": "data/distrokid_release_status.json",
+                "label": "Twelve Dollars YouTube playlist URL",
+                "status": "known_release_playlist"
+              },
+              {
+                "source": "data/youtube_twelve_dollars_playlist.json",
+                "label": "Twelve Dollars verified items: 8",
+                "status": "known_playlist_snapshot"
+              }
+            ],
+            "evidence_count": 3,
+            "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
+          }
+        ],
+        "destination_link_audit_summary": {
+          "link_count": 2,
+          "verified_local_evidence_count": 1,
+          "needs_manual_review_count": 1,
+          "all_links_have_local_evidence": false
+        },
+        "asset_audit": {
+          "url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars-youtube-thumbnail.jpg",
+          "status": "local_asset_present",
+          "local_path": "assets/albums/twelve-dollars/art/04-twelve-dollars-youtube-thumbnail.jpg",
+          "exists": true,
+          "guardrail": "Local file check only; no posting or live network check was performed."
+        },
+        "approval_required": false,
+        "postable_now": true,
+        "logging_required": true,
+        "logged": false,
+        "published_url": "",
+        "next_action": "post_manually_then_log_url",
+        "next_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-285 --url 'PUBLIC_URL'",
+        "approval_preview_command": "",
+        "approval_command": "",
+        "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-285 --url 'PUBLIC_URL'",
+        "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-285 --url 'PUBLIC_URL' --apply --refresh-admin",
+        "log_effect": {
+          "target": "admin/content/Published_Log.csv",
+          "content_id": "FP-AUTO-285",
+          "platform": "YouTube Community",
+          "release": "Twelve Dollars",
+          "requires_public_url": true,
+          "url_placeholder": "PUBLIC_URL",
+          "duplicate_checked_by": [
+            "content_id",
+            "manual_distribution_id"
+          ],
+          "notes": "manual_distribution_id=FP-AUTO-285; source=data/manual_distribution_packet.json",
+          "would_append": true,
+          "summary": "append Published_Log.csv content_id=FP-AUTO-285 after public URL is available"
+        }
+      }
+    ],
     "logged": [],
-    "next_manual_action": "none",
+    "next_manual_action": "post_manually_then_log_url",
     "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
     "guardrails": [
       "Manual posting happens in YouTube Studio Community, outside this repository.",
@@ -60,7 +890,7 @@
     ]
   },
   "manual_completion_manifest": {
-    "status": "clear",
+    "status": "ready_to_post_and_log",
     "posting_surface": "YouTube Studio Community",
     "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
     "approval_preview_command": "",
@@ -68,16 +898,88 @@
     "url_template_path": "data/manual_distribution_url_template.csv",
     "batch_log_preview_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv",
     "batch_log_apply_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --apply --refresh-admin",
-    "url_entry_rows": [],
-    "url_entry_row_count": 0,
-    "waiting_public_url_count": 0,
+    "url_entry_rows": [
+      {
+        "id": "FP-AUTO-270",
+        "platform": "YouTube Community",
+        "release": "Brain Rot",
+        "distribution_status": "ready_for_manual_post",
+        "approved": "yes",
+        "posting_surface": "YouTube Studio Community",
+        "public_url": "",
+        "notes": "Paste the real public YouTube Community post URL after manual posting."
+      },
+      {
+        "id": "FP-AUTO-275",
+        "platform": "YouTube Community",
+        "release": "Every Pearl in Carmel",
+        "distribution_status": "ready_for_manual_post",
+        "approved": "yes",
+        "posting_surface": "YouTube Studio Community",
+        "public_url": "",
+        "notes": "Paste the real public YouTube Community post URL after manual posting."
+      },
+      {
+        "id": "FP-AUTO-280",
+        "platform": "YouTube Community",
+        "release": "The Other One's Charging",
+        "distribution_status": "ready_for_manual_post",
+        "approved": "yes",
+        "posting_surface": "YouTube Studio Community",
+        "public_url": "",
+        "notes": "Paste the real public YouTube Community post URL after manual posting."
+      },
+      {
+        "id": "FP-AUTO-285",
+        "platform": "YouTube Community",
+        "release": "Twelve Dollars",
+        "distribution_status": "ready_for_manual_post",
+        "approved": "yes",
+        "posting_surface": "YouTube Studio Community",
+        "public_url": "",
+        "notes": "Paste the real public YouTube Community post URL after manual posting."
+      }
+    ],
+    "url_entry_row_count": 4,
+    "waiting_public_url_count": 4,
     "preserved_public_url_count": 0,
     "url_template_preservation": "Existing valid http(s) public_url cells are preserved by id across refreshes until logged.",
     "review_queue_ids": [],
-    "postable_now_ids": [],
+    "postable_now_ids": [
+      "FP-AUTO-270",
+      "FP-AUTO-275",
+      "FP-AUTO-280",
+      "FP-AUTO-285"
+    ],
     "logged_ids": [],
-    "pending_log_ids": [],
-    "log_commands": [],
+    "pending_log_ids": [
+      "FP-AUTO-270",
+      "FP-AUTO-275",
+      "FP-AUTO-280",
+      "FP-AUTO-285"
+    ],
+    "log_commands": [
+      {
+        "id": "FP-AUTO-270",
+        "preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL'",
+        "apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL' --apply --refresh-admin"
+      },
+      {
+        "id": "FP-AUTO-275",
+        "preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-275 --url 'PUBLIC_URL'",
+        "apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-275 --url 'PUBLIC_URL' --apply --refresh-admin"
+      },
+      {
+        "id": "FP-AUTO-280",
+        "preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-280 --url 'PUBLIC_URL'",
+        "apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-280 --url 'PUBLIC_URL' --apply --refresh-admin"
+      },
+      {
+        "id": "FP-AUTO-285",
+        "preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-285 --url 'PUBLIC_URL'",
+        "apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-285 --url 'PUBLIC_URL' --apply --refresh-admin"
+      }
+    ],
     "operator_checklist": [
       "Review the packaged copy, asset, destination link evidence, and subscriber CTA.",
       "Run the approval preview command before applying any manual approval.",

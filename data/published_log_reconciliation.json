@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-23T08:58:45.694938Z",
+  "generated_at": "2026-06-28T00:52:27.221199Z",
   "safe_mode": true,
   "source": {
     "published_log": "admin/content/Published_Log.csv",
@@ -15,19 +15,21 @@
     "latest_entry_content_id": "FP-AUTO-260",
     "latest_entry_url": "https://www.facebook.com/903693509504290_122118326547249470",
     "unlogged_worker_posts": 0,
-    "unlogged_manual_posts": 0,
-    "manual_log_gate_counts": {},
-    "manual_logging_gate_status": "empty",
-    "reconciliation_needed": false,
+    "unlogged_manual_posts": 4,
+    "manual_log_gate_counts": {
+      "blocked_until_public_url": 4
+    },
+    "manual_logging_gate_status": "postable_now",
+    "reconciliation_needed": true,
     "next_preview_command": "",
     "next_apply_command": "",
-    "next_gate": "clear",
-    "next_manual_gate": "clear",
-    "url_logging_status": "clear",
+    "next_gate": "manual_public_url_logging",
+    "next_manual_gate": "public_url_logging",
+    "url_logging_status": "waiting_for_public_urls",
     "url_logging_session_file": "data/manual-posting-cards/youtube-community-session.md",
     "url_logging_worksheet": "data/manual_distribution_url_template.csv",
     "url_logging_partial_apply_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --allow-partial --apply --refresh-admin",
-    "posting_gate_status": "empty"
+    "posting_gate_status": "postable_now"
   },
   "worker_export": {
     "posted_worker_count": 0,
@@ -37,7 +39,7 @@
     "apply_command": "python3 scripts/export_social_executions.py --refresh-admin"
   },
   "manual_logging": {
-    "unlogged_manual_count": 0,
+    "unlogged_manual_count": 4,
     "approval_gate": {
       "status": "clear",
       "ready_count": 0,
@@ -51,22 +53,94 @@
       "guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review."
     },
     "posting_gate": {
-      "status": "empty",
+      "status": "postable_now",
       "review_count": 0,
-      "postable_count": 0,
+      "postable_count": 4,
       "logged_count": 0,
       "public_community_url": "https://www.youtube.com/@lilyroo.artist/community"
     },
-    "gate_counts": {},
-    "rows": [],
+    "gate_counts": {
+      "blocked_until_public_url": 4
+    },
+    "rows": [
+      {
+        "id": "FP-AUTO-270",
+        "release": "Brain Rot",
+        "platform": "YouTube Community",
+        "status": "ready_for_manual_post",
+        "log_gate": "blocked_until_public_url",
+        "approval_required": false,
+        "postable_now": true,
+        "requires_public_url": true,
+        "next_step": "Post manually in YouTube Studio Community, then replace PUBLIC_URL with the real public URL.",
+        "approval_preview_command": "",
+        "approval_command": "",
+        "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL'",
+        "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL' --apply --refresh-admin",
+        "public_community_url": "https://www.youtube.com/@lilyroo.artist/community"
+      },
+      {
+        "id": "FP-AUTO-275",
+        "release": "Every Pearl in Carmel",
+        "platform": "YouTube Community",
+        "status": "ready_for_manual_post",
+        "log_gate": "blocked_until_public_url",
+        "approval_required": false,
+        "postable_now": true,
+        "requires_public_url": true,
+        "next_step": "Post manually in YouTube Studio Community, then replace PUBLIC_URL with the real public URL.",
+        "approval_preview_command": "",
+        "approval_command": "",
+        "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-275 --url 'PUBLIC_URL'",
+        "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-275 --url 'PUBLIC_URL' --apply --refresh-admin",
+        "public_community_url": "https://www.youtube.com/@lilyroo.artist/community"
+      },
+      {
+        "id": "FP-AUTO-280",
+        "release": "The Other One's Charging",
+        "platform": "YouTube Community",
+        "status": "ready_for_manual_post",
+        "log_gate": "blocked_until_public_url",
+        "approval_required": false,
+        "postable_now": true,
+        "requires_public_url": true,
+        "next_step": "Post manually in YouTube Studio Community, then replace PUBLIC_URL with the real public URL.",
+        "approval_preview_command": "",
+        "approval_command": "",
+        "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-280 --url 'PUBLIC_URL'",
+        "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-280 --url 'PUBLIC_URL' --apply --refresh-admin",
+        "public_community_url": "https://www.youtube.com/@lilyroo.artist/community"
+      },
+      {
+        "id": "FP-AUTO-285",
+        "release": "Twelve Dollars",
+        "platform": "YouTube Community",
+        "status": "ready_for_manual_post",
+        "log_gate": "blocked_until_public_url",
+        "approval_required": false,
+        "postable_now": true,
+        "requires_public_url": true,
+        "next_step": "Post manually in YouTube Studio Community, then replace PUBLIC_URL with the real public URL.",
+        "approval_preview_command": "",
+        "approval_command": "",
+        "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-285 --url 'PUBLIC_URL'",
+        "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-285 --url 'PUBLIC_URL' --apply --refresh-admin",
+        "public_community_url": "https://www.youtube.com/@lilyroo.artist/community"
+      }
+    ],
     "url_logging": {
-      "status": "clear",
+      "status": "waiting_for_public_urls",
       "worksheet_path": "data/manual_distribution_url_template.csv",
       "session_file_path": "data/manual-posting-cards/youtube-community-session.md",
       "batch_preview_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv",
       "batch_apply_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --apply --refresh-admin",
       "partial_apply_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --allow-partial --apply --refresh-admin",
-      "pending_ids": [],
+      "pending_ids": [
+        "FP-AUTO-270",
+        "FP-AUTO-275",
+        "FP-AUTO-280",
+        "FP-AUTO-285"
+      ],
       "guardrail": "Use only real public YouTube Community URLs; never apply rows containing PUBLIC_URL or blanks."
     },
     "guardrail": "Only log manual distribution after approval, manual posting, and a real public post URL."

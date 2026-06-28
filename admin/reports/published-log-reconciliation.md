@@ -1,13 +1,13 @@
 # Published Log Reconciliation - Lily Roo
 
-Generated: 2026-06-23T08:58:45.694938Z
+Generated: 2026-06-28T00:52:27.221199Z
 
 ## Summary
 - Published log status: **fresh**
 - Published log rows: **17**
 - Unlogged Worker posts: **0**
-- Unlogged manual posts: **0**
-- Reconciliation needed: **False**
+- Unlogged manual posts: **4**
+- Reconciliation needed: **True**
 
 ## Worker Export
 - Posted Worker records: **0**
@@ -16,19 +16,43 @@ Generated: 2026-06-23T08:58:45.694938Z
 - Apply after review: `python3 scripts/export_social_executions.py --refresh-admin`
 
 ## Manual Logging
-- Unlogged manual rows: **0**
+- Unlogged manual rows: **4**
 - Guardrail: Only log manual distribution after approval, manual posting, and a real public post URL.
 
 ### Manual Log Gates
 - Approval gate: **clear**; ready: **0**; blocked: **1**
-- Posting gate: **empty**; needs review: **0**; postable: **0**
-- URL logging gate: **clear**
+- Posting gate: **postable_now**; needs review: **0**; postable: **4**
+- URL logging gate: **waiting_for_public_urls**
 - Posting session: `data/manual-posting-cards/youtube-community-session.md`
 - URL worksheet: `data/manual_distribution_url_template.csv`
 - Partial URL apply: `python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --allow-partial --apply --refresh-admin`
 - Blocked approval IDs: `FP-PLAN-TWELVE-DOLLARS-TIKTOK`
 
 ### Manual Rows
+- **Brain Rot YouTube Community** (`FP-AUTO-270`)
+  - Status: `ready_for_manual_post`; log gate: `blocked_until_public_url`
+  - Next step: Post manually in YouTube Studio Community, then replace PUBLIC_URL with the real public URL.
+  - Posting surface: https://www.youtube.com/@lilyroo.artist/community
+  - Preview URL log: `python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL'`
+  - Apply URL log after posting: `python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL' --apply --refresh-admin`
+- **Every Pearl in Carmel YouTube Community** (`FP-AUTO-275`)
+  - Status: `ready_for_manual_post`; log gate: `blocked_until_public_url`
+  - Next step: Post manually in YouTube Studio Community, then replace PUBLIC_URL with the real public URL.
+  - Posting surface: https://www.youtube.com/@lilyroo.artist/community
+  - Preview URL log: `python3 scripts/log_manual_distribution.py --id FP-AUTO-275 --url 'PUBLIC_URL'`
+  - Apply URL log after posting: `python3 scripts/log_manual_distribution.py --id FP-AUTO-275 --url 'PUBLIC_URL' --apply --refresh-admin`
+- **The Other One's Charging YouTube Community** (`FP-AUTO-280`)
+  - Status: `ready_for_manual_post`; log gate: `blocked_until_public_url`
+  - Next step: Post manually in YouTube Studio Community, then replace PUBLIC_URL with the real public URL.
+  - Posting surface: https://www.youtube.com/@lilyroo.artist/community
+  - Preview URL log: `python3 scripts/log_manual_distribution.py --id FP-AUTO-280 --url 'PUBLIC_URL'`
+  - Apply URL log after posting: `python3 scripts/log_manual_distribution.py --id FP-AUTO-280 --url 'PUBLIC_URL' --apply --refresh-admin`
+- **Twelve Dollars YouTube Community** (`FP-AUTO-285`)
+  - Status: `ready_for_manual_post`; log gate: `blocked_until_public_url`
+  - Next step: Post manually in YouTube Studio Community, then replace PUBLIC_URL with the real public URL.
+  - Posting surface: https://www.youtube.com/@lilyroo.artist/community
+  - Preview URL log: `python3 scripts/log_manual_distribution.py --id FP-AUTO-285 --url 'PUBLIC_URL'`
+  - Apply URL log after posting: `python3 scripts/log_manual_distribution.py --id FP-AUTO-285 --url 'PUBLIC_URL' --apply --refresh-admin`
 
 ## Guardrails
 - This reconciliation is review-only and does not export, append, post, or publish.

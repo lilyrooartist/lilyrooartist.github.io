@@ -2810,7 +2810,7 @@ def validate_generated_outputs(failures):
             and any(
                 (
                     step.get("first_action") == "post_and_log_public_url"
-                    and step.get("first_post_id") == "FP-AUTO-261"
+                    and str(step.get("first_platform") or "").lower() == "youtube community"
                     and "log_manual_distribution.py" in (step.get("preview_command") or "")
                 )
                 or (

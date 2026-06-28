@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-23T09:36:19.330998Z",
+  "generated_at": "2026-06-28T00:52:27.297655Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -10,16 +10,16 @@
   },
   "summary": {
     "review_ready_manual_count": 0,
-    "postable_now_count": 0,
-    "public_url_log_needed_count": 0,
-    "waiting_public_url_count": 0,
+    "postable_now_count": 4,
+    "public_url_log_needed_count": 4,
+    "waiting_public_url_count": 4,
     "pending_result_field_count": 5,
     "winner_ready_candidate_count": 1,
     "winner_count_target": 3,
-    "blocked_platform_count": 5,
+    "blocked_platform_count": 4,
     "approved_backlog_count": 2,
     "blocked_backlog_count": 2,
-    "next_publish_action": "Collect experiment results when public URLs and measurement values are available."
+    "next_publish_action": "Post manual YouTube Community cards, copy real public URLs, then log them."
   },
   "manual_review_rows": [],
   "blocked_platform_rows": [
@@ -49,7 +49,7 @@
       "post_id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
       "platform": "Instagram",
       "reason": "max_attempts_exceeded",
-      "status": "failed",
+      "status": "needs_fix",
       "repair_action": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
       "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
       "blocked_apply_reasons": [
@@ -60,21 +60,10 @@
       "post_id": "FP-AUTO-265",
       "platform": "Facebook",
       "reason": "",
-      "status": "failed",
+      "status": "needs_fix",
       "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
       "preview_command": "python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run",
       "blocked_apply_reasons": []
-    },
-    {
-      "post_id": "FP-AUTO-264",
-      "platform": "TikTok",
-      "reason": "tiktok_credentials_missing",
-      "status": "blocked",
-      "repair_action": "Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok direct public posting approval is false, but upload-draft mode can proceed after credentials. Local secret source is also missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Complete TikTok OAuth setup locally, then push upload-mode secrets and refresh Admin.",
-      "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
-      "blocked_apply_reasons": [
-        "local_secret_source_missing:TIKTOK_CLIENT_KEY,TIKTOK_CLIENT_SECRET,TIKTOK_REFRESH_TOKEN"
-      ]
     }
   ],
   "steps": [
@@ -98,8 +87,13 @@
     },
     {
       "id": "post_manual_youtube_community",
-      "status": "waiting_for_review_or_queue",
-      "post_ids": [],
+      "status": "postable_now",
+      "post_ids": [
+        "FP-AUTO-270",
+        "FP-AUTO-275",
+        "FP-AUTO-280",
+        "FP-AUTO-285"
+      ],
       "surface": "YouTube Studio Community",
       "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
       "guardrail": "Post manually using the reviewed copy and local asset evidence; do not log placeholder URLs.",
@@ -107,8 +101,13 @@
     },
     {
       "id": "log_public_urls",
-      "status": "waiting_for_public_urls",
-      "post_ids": [],
+      "status": "waiting_for_manual_post",
+      "post_ids": [
+        "FP-AUTO-270",
+        "FP-AUTO-275",
+        "FP-AUTO-280",
+        "FP-AUTO-285"
+      ],
       "preview_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv",
       "apply_after_review_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --apply --refresh-admin",
       "guardrail": "Every CSV row must contain a real public_url before apply.",

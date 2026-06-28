@@ -1,29 +1,27 @@
 # Promotion Blocker Ledger - Lily Roo
 
-Generated: 2026-06-23T08:58:45.400419Z
+Generated: 2026-06-28T00:52:27.451401Z
 
 ## Summary
-- Open blockers: **9**
-- User-owned: **4**
+- Open blockers: **12**
+- User-owned: **7**
 - External platform-owned: **5**
 - Codex-actionable: **0**
-- High or critical: **7**
+- High or critical: **6**
 
 ## Unlock Roadmap
 - **Approve checked scheduled rows** (`blocked`)
   - Owner: `tod`; projected blockers resolved: **0**
   - Unlocks: Instagram executor row can become publish-eligible after approval.; One scheduled YouTube Community row can move into manual distribution after approval.
   - Blocked by: FP-AUTO-259
-- **Review and post manual YouTube Community rows** (`clear`)
-  - Owner: `tod`; projected blockers resolved: **0**
+- **Post manual YouTube Community rows** (`clear`)
+  - Owner: `tod`; projected blockers resolved: **4**
   - Unlocks: Manual YouTube Community promotion can publish without waiting for broken auto executors.; Published_Log.csv can be updated after public URLs exist.
   - Blocked by: FP-PLAN-TWELVE-DOLLARS-TIKTOK
   - Guardrail: Manual-only approvals do not auto-post; posting and public URL logging remain separate after review.
-- **Repair TikTok executor** (`blocked`)
-  - Owner: `tod`; projected blockers resolved: **1**
+- **Repair TikTok executor** (`ready`)
+  - Owner: `tod`; projected blockers resolved: **0**
   - Unlocks: Held TikTok approval rows can pass platform-readiness review.; Approved TikTok backlog can become safe to reschedule into upload-draft creation.
-  - Blocked by: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN
-  - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
 - **Reschedule approved past-due backlog** (`blocked_until_clearance_steps_complete`)
   - Owner: `external_platform`; projected blockers resolved: **2**
   - Unlocks: Approved past-due queue rows get a fresh schedule after executor blockers clear.
@@ -46,14 +44,6 @@ Generated: 2026-06-23T08:58:45.400419Z
   - Apply/log after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --refresh-admin`
   - Guardrail: Approval does not guarantee posting if the platform executor is still blocked.
   - Impact: resolves blocker: False
-- **[high] Repair TikTok executor** (`platform-FP-AUTO-264`)
-  - Owner: `tod`; status: `blocked`; category: `platform_repair`
-  - Evidence: tiktok_credentials_missing Missing secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Local secret source is missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.
-  - Next step: Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok direct public posting approval is false, but upload-draft mode can proceed after credentials. Local secret source is also missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Complete TikTok OAuth setup locally, then push upload-mode secrets and refresh Admin.
-  - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
-  - Guardrail: Run retry resets only after the external platform repair is verified.
-  - Blocked apply command: `python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py`
-  - Impact: apply blocked by: local_secret_source_missing:TIKTOK_CLIENT_KEY,TIKTOK_CLIENT_SECRET,TIKTOK_REFRESH_TOKEN
 - **[high] Reschedule approved past-due backlog** (`backlog-reschedule`)
   - Owner: `external_platform`; status: `blocked`; category: `backlog_reschedule`
   - Evidence: 2 approved backlog row(s); 2 still have executor blockers.
@@ -94,6 +84,38 @@ Generated: 2026-06-23T08:58:45.400419Z
   - Guardrail: Run retry resets only after the external platform repair is verified.
   - Blocked apply command: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
   - Impact: apply blocked by: local_secret_source_missing:IG_BUSINESS_ACCOUNT_ID
+- **[medium] Manually post YouTube Community copy** (`manual-FP-AUTO-270`)
+  - Owner: `tod`; status: `ready_for_manual_post`; category: `manual_distribution`
+  - Evidence: FP-AUTO-270 is packaged for manual distribution.
+  - Next step: Post manually, then log the public URL so admin status can stop treating the row as pending.
+  - Open: https://www.lilyroo.com/assets/albums/twelve-dollars/art/01-brain-rot-youtube-thumbnail.jpg
+  - Preview/check: `python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL'`
+  - Apply/log after review: `python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL' --apply --refresh-admin`
+  - Guardrail: Manual posting happens outside this repo; only log the URL after the post is live.
+- **[medium] Manually post YouTube Community copy** (`manual-FP-AUTO-275`)
+  - Owner: `tod`; status: `ready_for_manual_post`; category: `manual_distribution`
+  - Evidence: FP-AUTO-275 is packaged for manual distribution.
+  - Next step: Post manually, then log the public URL so admin status can stop treating the row as pending.
+  - Open: https://www.lilyroo.com/assets/albums/twelve-dollars/art/02-every-pearl-in-carmel-youtube-thumbnail.jpg
+  - Preview/check: `python3 scripts/log_manual_distribution.py --id FP-AUTO-275 --url 'PUBLIC_URL'`
+  - Apply/log after review: `python3 scripts/log_manual_distribution.py --id FP-AUTO-275 --url 'PUBLIC_URL' --apply --refresh-admin`
+  - Guardrail: Manual posting happens outside this repo; only log the URL after the post is live.
+- **[medium] Manually post YouTube Community copy** (`manual-FP-AUTO-280`)
+  - Owner: `tod`; status: `ready_for_manual_post`; category: `manual_distribution`
+  - Evidence: FP-AUTO-280 is packaged for manual distribution.
+  - Next step: Post manually, then log the public URL so admin status can stop treating the row as pending.
+  - Open: https://www.lilyroo.com/assets/albums/twelve-dollars/art/03-the-other-ones-charging-youtube-thumbnail.jpg
+  - Preview/check: `python3 scripts/log_manual_distribution.py --id FP-AUTO-280 --url 'PUBLIC_URL'`
+  - Apply/log after review: `python3 scripts/log_manual_distribution.py --id FP-AUTO-280 --url 'PUBLIC_URL' --apply --refresh-admin`
+  - Guardrail: Manual posting happens outside this repo; only log the URL after the post is live.
+- **[medium] Manually post YouTube Community copy** (`manual-FP-AUTO-285`)
+  - Owner: `tod`; status: `ready_for_manual_post`; category: `manual_distribution`
+  - Evidence: FP-AUTO-285 is packaged for manual distribution.
+  - Next step: Post manually, then log the public URL so admin status can stop treating the row as pending.
+  - Open: https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars-youtube-thumbnail.jpg
+  - Preview/check: `python3 scripts/log_manual_distribution.py --id FP-AUTO-285 --url 'PUBLIC_URL'`
+  - Apply/log after review: `python3 scripts/log_manual_distribution.py --id FP-AUTO-285 --url 'PUBLIC_URL' --apply --refresh-admin`
+  - Guardrail: Manual posting happens outside this repo; only log the URL after the post is live.
 - **[low] Fill priority 2 metrics: Recent discovery and traffic** (`metrics-priority-2`)
   - Owner: `tod`; status: `needs_values`; category: `manual_metrics`
   - Evidence: 4 pending field(s): facebook.reach_7d, instagram.profile_visits_7d, tiktok.profile_views_7d, x.impressions_7d.

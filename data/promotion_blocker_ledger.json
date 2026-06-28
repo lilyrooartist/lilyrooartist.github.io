@@ -1,23 +1,25 @@
 {
-  "generated_at": "2026-06-23T08:58:45.400419Z",
+  "generated_at": "2026-06-28T00:52:27.451401Z",
   "safe_mode": true,
   "summary": {
-    "open_blocker_count": 9,
-    "urgent_count": 7,
+    "open_blocker_count": 12,
+    "urgent_count": 6,
     "owner_counts": {
       "external_platform": 5,
-      "tod": 4
+      "tod": 7
     },
     "category_counts": {
       "approval": 1,
       "backlog_reschedule": 1,
+      "manual_distribution": 4,
       "manual_metrics": 2,
-      "platform_repair": 5
+      "platform_repair": 4
     },
     "status_counts": {
-      "blocked": 6,
+      "blocked": 5,
       "blocked_by_review_checks": 1,
-      "needs_values": 2
+      "needs_values": 2,
+      "ready_for_manual_post": 4
     },
     "next_resolution_projection": {
       "kind": "checked_scheduled_approval_batch",
@@ -56,10 +58,10 @@
       },
       {
         "id": "unlock-manual-distribution",
-        "phase": "Review and post manual YouTube Community rows",
+        "phase": "Post manual YouTube Community rows",
         "status": "clear",
         "owner": "tod",
-        "blockers_resolved": 0,
+        "blockers_resolved": 4,
         "unlocks": [
           "Manual YouTube Community promotion can publish without waiting for broken auto executors.",
           "Published_Log.csv can be updated after public URLs exist."
@@ -76,19 +78,15 @@
       {
         "id": "unlock-tiktok-platform-repair",
         "phase": "Repair TikTok executor",
-        "status": "blocked",
+        "status": "ready",
         "owner": "tod",
-        "blockers_resolved": 1,
+        "blockers_resolved": 0,
         "unlocks": [
           "Held TikTok approval rows can pass platform-readiness review.",
           "Approved TikTok backlog can become safe to reschedule into upload-draft creation."
         ],
-        "blocked_by": [
-          "TIKTOK_CLIENT_KEY",
-          "TIKTOK_CLIENT_SECRET",
-          "TIKTOK_REFRESH_TOKEN"
-        ],
-        "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+        "blocked_by": [],
+        "preview_command": "",
         "apply_command": "",
         "source_path": "data/platform_repair_status.json"
       },
@@ -162,31 +160,6 @@
         "resolves_blocker": false,
         "checked_batch_member": false,
         "reason": "Review checks failed; this row remains excluded from the checked batch."
-      }
-    },
-    {
-      "id": "platform-FP-AUTO-264",
-      "blocker_id": "platform-FP-AUTO-264",
-      "title": "Repair TikTok executor",
-      "category": "platform_repair",
-      "owner": "tod",
-      "urgency": "high",
-      "status": "blocked",
-      "platform": "TikTok",
-      "release": "",
-      "evidence": "tiktok_credentials_missing Missing secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Local secret source is missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
-      "next_step": "Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok direct public posting approval is false, but upload-draft mode can proceed after credentials. Local secret source is also missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Complete TikTok OAuth setup locally, then push upload-mode secrets and refresh Admin.",
-      "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
-      "apply_command": "",
-      "source_path": "data/platform_repair_status.json",
-      "external_url": "",
-      "guardrail": "Run retry resets only after the external platform repair is verified.",
-      "impact": {
-        "kind": "platform_repair_gate",
-        "blocked_apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
-        "blocked_apply_reasons": [
-          "local_secret_source_missing:TIKTOK_CLIENT_KEY,TIKTOK_CLIENT_SECRET,TIKTOK_REFRESH_TOKEN"
-        ]
       }
     },
     {
@@ -379,6 +352,82 @@
           "local_secret_source_missing:IG_BUSINESS_ACCOUNT_ID"
         ]
       }
+    },
+    {
+      "id": "manual-FP-AUTO-270",
+      "blocker_id": "manual-FP-AUTO-270",
+      "title": "Manually post YouTube Community copy",
+      "category": "manual_distribution",
+      "owner": "tod",
+      "urgency": "medium",
+      "status": "ready_for_manual_post",
+      "platform": "YouTube Community",
+      "release": "Brain Rot",
+      "evidence": "FP-AUTO-270 is packaged for manual distribution.",
+      "next_step": "Post manually, then log the public URL so admin status can stop treating the row as pending.",
+      "preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL'",
+      "apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL' --apply --refresh-admin",
+      "source_path": "data/manual_distribution_packet.json",
+      "external_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/01-brain-rot-youtube-thumbnail.jpg",
+      "guardrail": "Manual posting happens outside this repo; only log the URL after the post is live.",
+      "impact": {}
+    },
+    {
+      "id": "manual-FP-AUTO-275",
+      "blocker_id": "manual-FP-AUTO-275",
+      "title": "Manually post YouTube Community copy",
+      "category": "manual_distribution",
+      "owner": "tod",
+      "urgency": "medium",
+      "status": "ready_for_manual_post",
+      "platform": "YouTube Community",
+      "release": "Every Pearl in Carmel",
+      "evidence": "FP-AUTO-275 is packaged for manual distribution.",
+      "next_step": "Post manually, then log the public URL so admin status can stop treating the row as pending.",
+      "preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-275 --url 'PUBLIC_URL'",
+      "apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-275 --url 'PUBLIC_URL' --apply --refresh-admin",
+      "source_path": "data/manual_distribution_packet.json",
+      "external_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/02-every-pearl-in-carmel-youtube-thumbnail.jpg",
+      "guardrail": "Manual posting happens outside this repo; only log the URL after the post is live.",
+      "impact": {}
+    },
+    {
+      "id": "manual-FP-AUTO-280",
+      "blocker_id": "manual-FP-AUTO-280",
+      "title": "Manually post YouTube Community copy",
+      "category": "manual_distribution",
+      "owner": "tod",
+      "urgency": "medium",
+      "status": "ready_for_manual_post",
+      "platform": "YouTube Community",
+      "release": "The Other One's Charging",
+      "evidence": "FP-AUTO-280 is packaged for manual distribution.",
+      "next_step": "Post manually, then log the public URL so admin status can stop treating the row as pending.",
+      "preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-280 --url 'PUBLIC_URL'",
+      "apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-280 --url 'PUBLIC_URL' --apply --refresh-admin",
+      "source_path": "data/manual_distribution_packet.json",
+      "external_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/03-the-other-ones-charging-youtube-thumbnail.jpg",
+      "guardrail": "Manual posting happens outside this repo; only log the URL after the post is live.",
+      "impact": {}
+    },
+    {
+      "id": "manual-FP-AUTO-285",
+      "blocker_id": "manual-FP-AUTO-285",
+      "title": "Manually post YouTube Community copy",
+      "category": "manual_distribution",
+      "owner": "tod",
+      "urgency": "medium",
+      "status": "ready_for_manual_post",
+      "platform": "YouTube Community",
+      "release": "Twelve Dollars",
+      "evidence": "FP-AUTO-285 is packaged for manual distribution.",
+      "next_step": "Post manually, then log the public URL so admin status can stop treating the row as pending.",
+      "preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-285 --url 'PUBLIC_URL'",
+      "apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-285 --url 'PUBLIC_URL' --apply --refresh-admin",
+      "source_path": "data/manual_distribution_packet.json",
+      "external_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars-youtube-thumbnail.jpg",
+      "guardrail": "Manual posting happens outside this repo; only log the URL after the post is live.",
+      "impact": {}
     },
     {
       "id": "metrics-priority-2",
