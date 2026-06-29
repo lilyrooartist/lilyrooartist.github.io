@@ -1,12 +1,12 @@
 # Experiment Result Collection - Lily Roo
 
-Generated: 2026-06-29T20:48:40.169873Z
+Generated: 2026-06-29T21:10:06.186510Z
 
 ## Summary
 - Experiment count: **3**
-- Published experiment posts: **7**
-- Missing published log posts: **19**
-- Pending result fields: **29**
+- Published experiment posts: **8**
+- Missing published log posts: **18**
+- Pending result fields: **35**
 - Ready to import: **0**
 - Entry CSV: `data/experiment_result_entry_template.csv`
 - Wide entry CSV: `data/experiment_result_entry_wide_template.csv`
@@ -40,7 +40,6 @@ Generated: 2026-06-29T20:48:40.169873Z
 - `FP-AUTO-274` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-279` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-284` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
-- `FP-AUTO-261` (YouTube Community archive/playlist CTA): Publish or log the public URL before result metrics can be collected.
 - `FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY` (YouTube Community archive/playlist CTA): Publish or log the public URL before result metrics can be collected.
 - `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY` (YouTube Community archive/playlist CTA): Publish or log the public URL before result metrics can be collected.
 
@@ -70,4 +69,4 @@ Generated: 2026-06-29T20:48:40.169873Z
 - `FP-AUTO-266` X `subs_delta` from row 21: Open X analytics for https://x.com/i/web/status/2071039677357003221 and record subs_delta.
 - `FP-AUTO-271` X `views` from row 19: Open X analytics for https://x.com/i/web/status/2071402084403118566 and record views.
 - `FP-AUTO-271` X `likes` from row 19: Open X analytics for https://x.com/i/web/status/2071402084403118566 and record likes.
-- ...and 4 more rows in `data/experiment_result_entry_template.csv`.
+- ...and 10 more rows in `data/experiment_result_entry_template.csv`.

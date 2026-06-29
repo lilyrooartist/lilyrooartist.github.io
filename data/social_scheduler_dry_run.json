@@ -1,45 +1,34 @@
 {
   "ok": true,
-  "updated_at": "2026-06-29T20:48:37.506864Z",
+  "updated_at": "2026-06-29T21:10:03.699623Z",
   "source": "lilyroo-social-scheduler-dry-run",
   "url": "https://www.lilyroo.com/api/social/scheduler/dry-run",
   "http_status": 200,
   "error": null,
   "auth_method": "bearer",
-  "requested_scheduled_time": "2026-06-29T20:48:36.690286Z",
+  "requested_scheduled_time": "2026-06-29T21:10:02.940744Z",
   "dry_run": true,
-  "checked_at": "2026-06-29T20:48:36.690Z",
+  "checked_at": "2026-06-29T21:10:02.940Z",
   "summary": {
     "due_count": 25,
     "result_count": 25,
-    "would_post_count": 5,
+    "would_post_count": 4,
     "blocked_count": 13,
     "status_counts": {
       "blocked": 3,
       "draft_uploaded": 3,
       "failed": 10,
-      "posted": 4,
-      "would_post": 5
+      "posted": 5,
+      "would_post": 4
     },
     "platform_counts": {
       "Facebook": 7,
       "Instagram": 5,
       "TikTok": 1,
-      "Unknown": 7,
-      "YouTube": 5
+      "Unknown": 8,
+      "YouTube": 4
     },
     "would_post": [
-      {
-        "post_id": "FP-AUTO-261",
-        "platform": "YouTube",
-        "status": "would_post",
-        "reason": "",
-        "post_type": "video",
-        "attempts": 0,
-        "updated_at": "",
-        "source": "",
-        "error_summary": ""
-      },
       {
         "post_id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
         "platform": "YouTube",
@@ -93,7 +82,7 @@
         "reason": "not_approved",
         "post_type": "",
         "attempts": 0,
-        "updated_at": "2026-06-29T20:48:37.029Z",
+        "updated_at": "2026-06-29T21:10:03.248Z",
         "source": "dry-run",
         "error_summary": ""
       },
@@ -104,7 +93,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-06-29T20:48:37.031Z",
+        "updated_at": "2026-06-29T21:10:03.250Z",
         "source": "dry-run",
         "error_summary": "Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page"
       },
@@ -115,7 +104,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-06-29T20:48:37.036Z",
+        "updated_at": "2026-06-29T21:10:03.255Z",
         "source": "dry-run",
         "error_summary": "API request failed (400): {\"error\":{\"message\":\"Confirm your identity before you can publish as this Page. Open the Facebook app on your phone and follow the instructions.\",\"type\":\"OAuthException\",\"code\":368,\"error_data\":{\"sentry_block_data\""
       },
@@ -126,7 +115,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-06-29T20:48:37.041Z",
+        "updated_at": "2026-06-29T21:10:03.260Z",
         "source": "dry-run",
         "error_summary": "Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page"
       },
@@ -137,7 +126,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-06-29T20:48:37.047Z",
+        "updated_at": "2026-06-29T21:10:03.266Z",
         "source": "dry-run",
         "error_summary": "Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page"
       },
@@ -148,7 +137,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-06-29T20:48:37.050Z",
+        "updated_at": "2026-06-29T21:10:03.269Z",
         "source": "dry-run",
         "error_summary": "API request failed (400): {\"error\":{\"message\":\"Confirm your identity before you can publish as this Page. Open the Facebook app on your phone and follow the instructions.\",\"type\":\"OAuthException\",\"code\":368,\"error_data\":{\"sentry_block_data\""
       },
@@ -159,7 +148,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-06-29T20:48:37.060Z",
+        "updated_at": "2026-06-29T21:10:03.278Z",
         "source": "dry-run",
         "error_summary": "API request failed (400): {\"error\":{\"message\":\"Confirm your identity before you can publish as this Page. Open the Facebook app on your phone and follow the instructions.\",\"type\":\"OAuthException\",\"code\":368,\"error_data\":{\"sentry_block_data\""
       },
@@ -170,7 +159,7 @@
         "reason": "instagram_business_account_unresolved",
         "post_type": "",
         "attempts": 0,
-        "updated_at": "2026-06-29T20:48:37.351Z",
+        "updated_at": "2026-06-29T21:10:03.530Z",
         "source": "dry-run",
         "error_summary": ""
       },
@@ -181,7 +170,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-06-29T20:48:37.352Z",
+        "updated_at": "2026-06-29T21:10:03.532Z",
         "source": "dry-run",
         "error_summary": "API request failed (400): {\"error\":{\"message\":\"Confirm your identity before you can publish as this Page. Open the Facebook app on your phone and follow the instructions.\",\"type\":\"OAuthException\",\"code\":368,\"error_data\":{\"sentry_block_data\""
       },
@@ -192,7 +181,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-06-29T20:48:37.356Z",
+        "updated_at": "2026-06-29T21:10:03.538Z",
         "source": "dry-run",
         "error_summary": "API request failed (400): {\"error\":{\"message\":\"Confirm your identity before you can publish as this Page. Open the Facebook app on your phone and follow the instructions.\",\"type\":\"OAuthException\",\"code\":368,\"error_data\":{\"sentry_block_data\""
       },
@@ -203,7 +192,7 @@
         "reason": "instagram_business_account_unresolved",
         "post_type": "",
         "attempts": 0,
-        "updated_at": "2026-06-29T20:48:37.601Z",
+        "updated_at": "2026-06-29T21:10:03.819Z",
         "source": "dry-run",
         "error_summary": ""
       },
@@ -214,7 +203,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-06-29T20:48:37.662Z",
+        "updated_at": "2026-06-29T21:10:03.822Z",
         "source": "dry-run",
         "error_summary": "API request failed (400): {\"error\":{\"message\":\"Confirm your identity before you can publish as this Page. Open the Facebook app on your phone and follow the instructions.\",\"type\":\"OAuthException\",\"code\":368,\"error_data\":{\"sentry_block_data\""
       },
@@ -225,7 +214,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-06-29T20:48:37.666Z",
+        "updated_at": "2026-06-29T21:10:03.827Z",
         "source": "dry-run",
         "error_summary": "API request failed (400): {\"error\":{\"message\":\"Confirm your identity before you can publish as this Page. Open the Facebook app on your phone and follow the instructions.\",\"type\":\"OAuthException\",\"code\":368,\"error_data\":{\"sentry_block_data\""
       }

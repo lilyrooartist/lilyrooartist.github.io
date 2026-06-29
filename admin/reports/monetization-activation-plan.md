@@ -1,6 +1,6 @@
 # Monetization Activation Plan - Lily Roo
 
-Generated: 2026-06-29T20:48:39.526695Z
+Generated: 2026-06-29T21:10:05.614338Z
 
 ## Summary
 - Current subscribers: **5 / 1000**
@@ -30,15 +30,15 @@ Generated: 2026-06-29T20:48:39.526695Z
 4. **Repair Facebook executor**
    - Phase: `Clear platform blockers`; status: `needs_platform_fix`
    - Detail: Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.
-   - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-273`
+   - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-268`
 5. **Repair Facebook executor**
    - Phase: `Clear platform blockers`; status: `needs_platform_fix`
    - Detail: Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.
-   - Preview/check: `python3 scripts/check_facebook_publishing.py --post-id 'FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA' --check-worker-dry-run`
-6. **Repair YouTube executor**
+   - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-273`
+6. **Repair Facebook executor**
    - Phase: `Clear platform blockers`; status: `needs_platform_fix`
-   - Detail: Review platform credentials/readiness, then rerun the social execution capture.
-   - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA`
+   - Detail: Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.
+   - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA`
 7. **Current operations next action: Preview clear approved backlog row**
    - Phase: `Operations packet`; status: `waiting_for_user`
    - Detail: Approved posts are past due; preview a new schedule before any apply step.

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T20:48:39.526695Z",
+  "generated_at": "2026-06-29T21:10:05.614338Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -37,7 +37,7 @@
       "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24",
       "after_review_command": "",
       "context": {
-        "approved_backlog_posts": 24,
+        "approved_backlog_posts": 23,
         "raw_approved_backlog_posts": 24,
         "manual_handoff_backlog_posts": 0,
         "approved_upcoming_posts": 10,
@@ -90,6 +90,24 @@
       "phase": "Clear platform blockers",
       "status": "needs_platform_fix",
       "detail": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
+      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-268",
+      "after_review_command": "",
+      "context": {
+        "post_id": "FP-AUTO-268",
+        "platform": "Facebook",
+        "reason": "max_attempts_exceeded",
+        "missing_secrets": [],
+        "local_missing_secrets": [],
+        "local_secret_source": "",
+        "local_secret_ready": null,
+        "public_posting_approved": null
+      }
+    },
+    {
+      "label": "Repair Facebook executor",
+      "phase": "Clear platform blockers",
+      "status": "needs_platform_fix",
+      "detail": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
       "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-273",
       "after_review_command": "",
       "context": {
@@ -108,29 +126,11 @@
       "phase": "Clear platform blockers",
       "status": "needs_platform_fix",
       "detail": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
-      "command": "python3 scripts/check_facebook_publishing.py --post-id 'FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA' --check-worker-dry-run",
+      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA",
       "after_review_command": "",
       "context": {
         "post_id": "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA",
         "platform": "Facebook",
-        "reason": "",
-        "missing_secrets": [],
-        "local_missing_secrets": [],
-        "local_secret_source": "",
-        "local_secret_ready": null,
-        "public_posting_approved": null
-      }
-    },
-    {
-      "label": "Repair YouTube executor",
-      "phase": "Clear platform blockers",
-      "status": "needs_platform_fix",
-      "detail": "Review platform credentials/readiness, then rerun the social execution capture.",
-      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
-      "after_review_command": "",
-      "context": {
-        "post_id": "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
-        "platform": "YouTube",
         "reason": "max_attempts_exceeded",
         "missing_secrets": [],
         "local_missing_secrets": [],

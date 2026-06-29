@@ -1,14 +1,14 @@
 # Experiment Result Clipboard - Lily Roo
 
-Generated: 2026-06-29T20:48:40.204591Z
+Generated: 2026-06-29T21:10:06.218965Z
 
 ## Summary
 - Status: **needs_values**
-- Metric cards: **7**
-- Missing public URLs: **19**
+- Metric cards: **8**
+- Missing public URLs: **18**
 - Measurement priorities: **12**
 - Post-log handoff rows: **0**
-- Pending result fields: **29**
+- Pending result fields: **35**
 - Ready to import: **0**
 - Wide rows ready to import: **0**
 - Entry CSV: `data/experiment_result_entry_template.csv`
@@ -103,6 +103,29 @@ Generated: 2026-06-29T20:48:40.204591Z
   - Enter values in the wide entry CSV row for this post_id and source_row.
   - Add an evidence_note with source and collection date before import preview.
   - `subs_delta`: Open X analytics for https://x.com/i/web/status/2063600780834136468 and record subs_delta.
+### YouTube - I Learned It All in Fifteen Seconds (`FP-AUTO-261`)
+- Format: YouTube Community archive/playlist CTA
+- URL: https://youtu.be/zY8LQmuf4e4
+- Published: 2026-06-29; Published_Log row: `25`
+- Pending fields: `views, likes, comments, shares, saves, subs_delta`
+- Wide-ready fields: `none`
+- Wide entry instruction: Fill one wide entry CSV row in data/experiment_result_entry_wide_template.csv for this post; keep unknown metrics blank and include one evidence_note.
+- Wide CSV target: post_id `FP-AUTO-261`, source_row `25`, fill `views, likes, comments, shares, saves, subs_delta`.
+- Evidence sources:
+  - Logged public post: https://youtu.be/zY8LQmuf4e4 - Open the public post to confirm the URL and visible engagement before entering metrics.
+  - YouTube Studio analytics: https://studio.youtube.com/ - Open the matching Community post analytics and copy available public-performance values.
+- Collection checklist:
+  - Open the logged public post and confirm it matches this post_id.
+  - Open the platform analytics or insights source listed for this card.
+  - Copy only numeric values that are visible in the source.
+  - Enter values in the wide entry CSV row for this post_id and source_row.
+  - Add an evidence_note with source and collection date before import preview.
+  - `views`: Open YouTube Studio analytics for https://youtu.be/zY8LQmuf4e4 and record views.
+  - `likes`: Open YouTube Studio analytics for https://youtu.be/zY8LQmuf4e4 and record likes.
+  - `comments`: Open YouTube Studio analytics for https://youtu.be/zY8LQmuf4e4 and record comments.
+  - `shares`: Open YouTube Studio analytics for https://youtu.be/zY8LQmuf4e4 and record shares.
+  - `saves`: Open YouTube Studio analytics for https://youtu.be/zY8LQmuf4e4 and record saves.
+  - `subs_delta`: Open YouTube Studio analytics for https://youtu.be/zY8LQmuf4e4 and record subs_delta.
 ### X - Brain Rot (`FP-AUTO-266`)
 - Format: Release-art image + story hook
 - URL: https://x.com/i/web/status/2071039677357003221
@@ -218,11 +241,13 @@ Generated: 2026-06-29T20:48:40.204591Z
 - **Collect metrics** `FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK` X / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 7 logged post(s), 9 missing URL(s) in this format.
   - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --source-row 23 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
   - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --source-row 23 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
+- **Collect metrics** `FP-AUTO-261` YouTube / YouTube Community archive/playlist CTA: Already published and logged; measuring it reduces the YouTube Community archive/playlist CTA evidence gap. 1 logged post(s), 2 missing URL(s) in this format.
+  - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-261 --source-row 25 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
+  - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-261 --source-row 25 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
 - **Log public URL** `FP-PLAN-TWELVE-DOLLARS-FACEBOOK` Facebook / Release-art image + story hook: Scheduled row is not yet logged; confirm publication and log the real public URL before metrics. 7 logged post(s), 9 missing URL(s) in this format.
 - **Log public URL** `FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK` Facebook / Release-art image + story hook: Scheduled row is not yet logged; confirm publication and log the real public URL before metrics. 7 logged post(s), 9 missing URL(s) in this format.
 - **Log public URL** `FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA` YouTube / Short video clip + platform-native CTA: Scheduled row is not yet logged; confirm publication and log the real public URL before metrics. 0 logged post(s), 7 missing URL(s) in this format.
 - **Log public URL** `FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA` YouTube / Short video clip + platform-native CTA: Scheduled row is not yet logged; confirm publication and log the real public URL before metrics. 0 logged post(s), 7 missing URL(s) in this format.
-- **Log public URL** `FP-AUTO-261` YouTube / YouTube Community archive/playlist CTA: Scheduled row is not yet logged; confirm publication and log the real public URL before metrics. 0 logged post(s), 3 missing URL(s) in this format.
 
 ## Post-Log Measurement Handoff
 - Status: **clear**
@@ -263,7 +288,6 @@ Generated: 2026-06-29T20:48:40.204591Z
 - `FP-AUTO-274` TikTok / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-279` TikTok / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-284` TikTok / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.
-- `FP-AUTO-261` YouTube / YouTube Community archive/playlist CTA: Publish or log the public URL before result metrics can be collected.
 - `FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY` YouTube / YouTube Community archive/playlist CTA: Publish or log the public URL before result metrics can be collected.
 - `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY` YouTube / YouTube Community archive/playlist CTA: Publish or log the public URL before result metrics can be collected.
 

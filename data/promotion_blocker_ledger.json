@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T20:48:39.744885Z",
+  "generated_at": "2026-06-29T21:10:05.804394Z",
   "safe_mode": true,
   "summary": {
     "open_blocker_count": 9,
@@ -73,7 +73,7 @@
         "phase": "Reschedule approved past-due backlog",
         "status": "blocked_until_clearance_steps_complete",
         "owner": "external_platform",
-        "blockers_resolved": 24,
+        "blockers_resolved": 23,
         "unlocks": [
           "Approved past-due queue rows get a fresh schedule after executor blockers clear."
         ],
@@ -153,7 +153,7 @@
       "status": "blocked",
       "platform": "",
       "release": "",
-      "evidence": "24 approved backlog row(s); 5 still have executor blockers.",
+      "evidence": "23 approved backlog row(s); 5 still have executor blockers.",
       "next_step": "Preview a new schedule. Safe apply becomes available after known executor blockers clear.",
       "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24",
       "apply_command": "",
@@ -167,11 +167,11 @@
         "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
         "backlog_clearance_manifest": {
           "status": "blocked_until_clearance_steps_complete",
-          "approved_backlog_count": 24,
+          "approved_backlog_count": 23,
           "blocked_backlog_count": 5,
-          "clear_to_apply_count": 19,
+          "clear_to_apply_count": 18,
           "partial_clear_apply_available": true,
-          "partial_clear_apply_count": 19,
+          "partial_clear_apply_count": 18,
           "blocked_ids": [
             "FP-AUTO-268",
             "FP-AUTO-265",
@@ -195,7 +195,7 @@
               "song": "Brain Rot",
               "blocker_kind": "max_attempts_exceeded",
               "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
-              "proposed_scheduled_at": "2026-07-15T10:00:00-04:00",
+              "proposed_scheduled_at": "2026-07-14T10:00:00-04:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]
@@ -206,7 +206,7 @@
               "song": "I Learned It All in Fifteen Seconds",
               "blocker_kind": "max_attempts_exceeded",
               "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
-              "proposed_scheduled_at": "2026-07-17T10:00:00-04:00",
+              "proposed_scheduled_at": "2026-07-16T10:00:00-04:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]
@@ -217,7 +217,7 @@
               "song": "Every Pearl in Carmel",
               "blocker_kind": "instagram_business_account_unresolved",
               "blocker_reason": "instagram_business_account_unresolved",
-              "proposed_scheduled_at": "2026-07-20T10:00:00-04:00",
+              "proposed_scheduled_at": "2026-07-19T10:00:00-04:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]
@@ -228,7 +228,7 @@
               "song": "Every Pearl in Carmel",
               "blocker_kind": "max_attempts_exceeded",
               "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
-              "proposed_scheduled_at": "2026-07-21T10:00:00-04:00",
+              "proposed_scheduled_at": "2026-07-20T10:00:00-04:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]
@@ -239,7 +239,7 @@
               "song": "Analog Myth",
               "blocker_kind": "max_attempts_exceeded",
               "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
-              "proposed_scheduled_at": "2026-07-23T10:00:00-04:00",
+              "proposed_scheduled_at": "2026-07-22T10:00:00-04:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]
