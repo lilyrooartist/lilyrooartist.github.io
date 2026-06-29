@@ -1,14 +1,14 @@
 # Experiment Result Clipboard - Lily Roo
 
-Generated: 2026-06-29T21:10:06.218965Z
+Generated: 2026-06-29T21:20:06.851714Z
 
 ## Summary
 - Status: **needs_values**
-- Metric cards: **8**
-- Missing public URLs: **18**
+- Metric cards: **12**
+- Missing public URLs: **14**
 - Measurement priorities: **12**
 - Post-log handoff rows: **0**
-- Pending result fields: **35**
+- Pending result fields: **59**
 - Ready to import: **0**
 - Wide rows ready to import: **0**
 - Entry CSV: `data/experiment_result_entry_template.csv`
@@ -172,6 +172,29 @@ Generated: 2026-06-29T21:10:06.218965Z
   - `shares`: Open X analytics for https://x.com/i/web/status/2071402084403118566 and record shares.
   - `saves`: Open X analytics for https://x.com/i/web/status/2071402084403118566 and record saves.
   - `subs_delta`: Open X analytics for https://x.com/i/web/status/2071402084403118566 and record subs_delta.
+### YouTube - Analog Myth (`FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY`)
+- Format: YouTube Community archive/playlist CTA
+- URL: https://youtu.be/404PvtuXnqY
+- Published: 2026-06-29; Published_Log row: `28`
+- Pending fields: `views, likes, comments, shares, saves, subs_delta`
+- Wide-ready fields: `none`
+- Wide entry instruction: Fill one wide entry CSV row in data/experiment_result_entry_wide_template.csv for this post; keep unknown metrics blank and include one evidence_note.
+- Wide CSV target: post_id `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY`, source_row `28`, fill `views, likes, comments, shares, saves, subs_delta`.
+- Evidence sources:
+  - Logged public post: https://youtu.be/404PvtuXnqY - Open the public post to confirm the URL and visible engagement before entering metrics.
+  - YouTube Studio analytics: https://studio.youtube.com/ - Open the matching Community post analytics and copy available public-performance values.
+- Collection checklist:
+  - Open the logged public post and confirm it matches this post_id.
+  - Open the platform analytics or insights source listed for this card.
+  - Copy only numeric values that are visible in the source.
+  - Enter values in the wide entry CSV row for this post_id and source_row.
+  - Add an evidence_note with source and collection date before import preview.
+  - `views`: Open YouTube Studio analytics for https://youtu.be/404PvtuXnqY and record views.
+  - `likes`: Open YouTube Studio analytics for https://youtu.be/404PvtuXnqY and record likes.
+  - `comments`: Open YouTube Studio analytics for https://youtu.be/404PvtuXnqY and record comments.
+  - `shares`: Open YouTube Studio analytics for https://youtu.be/404PvtuXnqY and record shares.
+  - `saves`: Open YouTube Studio analytics for https://youtu.be/404PvtuXnqY and record saves.
+  - `subs_delta`: Open YouTube Studio analytics for https://youtu.be/404PvtuXnqY and record subs_delta.
 ### X - Twelve Dollars (`FP-PLAN-TWELVE-DOLLARS-X`)
 - Format: Release-art image + story hook
 - URL: https://x.com/i/web/status/2068336870803587325
@@ -195,6 +218,75 @@ Generated: 2026-06-29T21:10:06.218965Z
   - `shares`: Open X analytics for https://x.com/i/web/status/2068336870803587325 and record shares.
   - `saves`: Open X analytics for https://x.com/i/web/status/2068336870803587325 and record saves.
   - `subs_delta`: Open X analytics for https://x.com/i/web/status/2068336870803587325 and record subs_delta.
+### YouTube - Twelve Dollars (`FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY`)
+- Format: YouTube Community archive/playlist CTA
+- URL: https://youtu.be/0GOYOFTMAKw
+- Published: 2026-06-29; Published_Log row: `29`
+- Pending fields: `views, likes, comments, shares, saves, subs_delta`
+- Wide-ready fields: `none`
+- Wide entry instruction: Fill one wide entry CSV row in data/experiment_result_entry_wide_template.csv for this post; keep unknown metrics blank and include one evidence_note.
+- Wide CSV target: post_id `FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY`, source_row `29`, fill `views, likes, comments, shares, saves, subs_delta`.
+- Evidence sources:
+  - Logged public post: https://youtu.be/0GOYOFTMAKw - Open the public post to confirm the URL and visible engagement before entering metrics.
+  - YouTube Studio analytics: https://studio.youtube.com/ - Open the matching Community post analytics and copy available public-performance values.
+- Collection checklist:
+  - Open the logged public post and confirm it matches this post_id.
+  - Open the platform analytics or insights source listed for this card.
+  - Copy only numeric values that are visible in the source.
+  - Enter values in the wide entry CSV row for this post_id and source_row.
+  - Add an evidence_note with source and collection date before import preview.
+  - `views`: Open YouTube Studio analytics for https://youtu.be/0GOYOFTMAKw and record views.
+  - `likes`: Open YouTube Studio analytics for https://youtu.be/0GOYOFTMAKw and record likes.
+  - `comments`: Open YouTube Studio analytics for https://youtu.be/0GOYOFTMAKw and record comments.
+  - `shares`: Open YouTube Studio analytics for https://youtu.be/0GOYOFTMAKw and record shares.
+  - `saves`: Open YouTube Studio analytics for https://youtu.be/0GOYOFTMAKw and record saves.
+  - `subs_delta`: Open YouTube Studio analytics for https://youtu.be/0GOYOFTMAKw and record subs_delta.
+### YouTube - Analog Myth (`FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA`)
+- Format: Short video clip + platform-native CTA
+- URL: https://youtu.be/lbT4adNE-cE
+- Published: 2026-06-29; Published_Log row: `26`
+- Pending fields: `views, likes, comments, shares, saves, subs_delta`
+- Wide-ready fields: `none`
+- Wide entry instruction: Fill one wide entry CSV row in data/experiment_result_entry_wide_template.csv for this post; keep unknown metrics blank and include one evidence_note.
+- Wide CSV target: post_id `FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA`, source_row `26`, fill `views, likes, comments, shares, saves, subs_delta`.
+- Evidence sources:
+  - Logged public post: https://youtu.be/lbT4adNE-cE - Open the public post to confirm the URL and visible engagement before entering metrics.
+  - YouTube Studio analytics: https://studio.youtube.com/ - Open the matching Community post analytics and copy available public-performance values.
+- Collection checklist:
+  - Open the logged public post and confirm it matches this post_id.
+  - Open the platform analytics or insights source listed for this card.
+  - Copy only numeric values that are visible in the source.
+  - Enter values in the wide entry CSV row for this post_id and source_row.
+  - Add an evidence_note with source and collection date before import preview.
+  - `views`: Open YouTube Studio analytics for https://youtu.be/lbT4adNE-cE and record views.
+  - `likes`: Open YouTube Studio analytics for https://youtu.be/lbT4adNE-cE and record likes.
+  - `comments`: Open YouTube Studio analytics for https://youtu.be/lbT4adNE-cE and record comments.
+  - `shares`: Open YouTube Studio analytics for https://youtu.be/lbT4adNE-cE and record shares.
+  - `saves`: Open YouTube Studio analytics for https://youtu.be/lbT4adNE-cE and record saves.
+  - `subs_delta`: Open YouTube Studio analytics for https://youtu.be/lbT4adNE-cE and record subs_delta.
+### YouTube - Twelve Dollars (`FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA`)
+- Format: Short video clip + platform-native CTA
+- URL: https://youtu.be/0d0PXb_h4FY
+- Published: 2026-06-29; Published_Log row: `27`
+- Pending fields: `views, likes, comments, shares, saves, subs_delta`
+- Wide-ready fields: `none`
+- Wide entry instruction: Fill one wide entry CSV row in data/experiment_result_entry_wide_template.csv for this post; keep unknown metrics blank and include one evidence_note.
+- Wide CSV target: post_id `FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA`, source_row `27`, fill `views, likes, comments, shares, saves, subs_delta`.
+- Evidence sources:
+  - Logged public post: https://youtu.be/0d0PXb_h4FY - Open the public post to confirm the URL and visible engagement before entering metrics.
+  - YouTube Studio analytics: https://studio.youtube.com/ - Open the matching Community post analytics and copy available public-performance values.
+- Collection checklist:
+  - Open the logged public post and confirm it matches this post_id.
+  - Open the platform analytics or insights source listed for this card.
+  - Copy only numeric values that are visible in the source.
+  - Enter values in the wide entry CSV row for this post_id and source_row.
+  - Add an evidence_note with source and collection date before import preview.
+  - `views`: Open YouTube Studio analytics for https://youtu.be/0d0PXb_h4FY and record views.
+  - `likes`: Open YouTube Studio analytics for https://youtu.be/0d0PXb_h4FY and record likes.
+  - `comments`: Open YouTube Studio analytics for https://youtu.be/0d0PXb_h4FY and record comments.
+  - `shares`: Open YouTube Studio analytics for https://youtu.be/0d0PXb_h4FY and record shares.
+  - `saves`: Open YouTube Studio analytics for https://youtu.be/0d0PXb_h4FY and record saves.
+  - `subs_delta`: Open YouTube Studio analytics for https://youtu.be/0d0PXb_h4FY and record subs_delta.
 ### X - Analog Myth (`FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK`)
 - Format: Release-art image + story hook
 - URL: https://x.com/i/web/status/2069786481556635841
@@ -241,13 +333,21 @@ Generated: 2026-06-29T21:10:06.218965Z
 - **Collect metrics** `FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK` X / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 7 logged post(s), 9 missing URL(s) in this format.
   - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --source-row 23 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
   - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --source-row 23 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
-- **Collect metrics** `FP-AUTO-261` YouTube / YouTube Community archive/playlist CTA: Already published and logged; measuring it reduces the YouTube Community archive/playlist CTA evidence gap. 1 logged post(s), 2 missing URL(s) in this format.
+- **Collect metrics** `FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA` YouTube / Short video clip + platform-native CTA: Already published and logged; measuring it reduces the Short video clip + platform-native CTA evidence gap. 2 logged post(s), 5 missing URL(s) in this format.
+  - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --source-row 26 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
+  - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --source-row 26 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
+- **Collect metrics** `FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA` YouTube / Short video clip + platform-native CTA: Already published and logged; measuring it reduces the Short video clip + platform-native CTA evidence gap. 2 logged post(s), 5 missing URL(s) in this format.
+  - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA --source-row 27 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
+  - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA --source-row 27 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
+- **Collect metrics** `FP-AUTO-261` YouTube / YouTube Community archive/playlist CTA: Already published and logged; measuring it reduces the YouTube Community archive/playlist CTA evidence gap. 3 logged post(s), 0 missing URL(s) in this format.
   - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-261 --source-row 25 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
   - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-261 --source-row 25 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
-- **Log public URL** `FP-PLAN-TWELVE-DOLLARS-FACEBOOK` Facebook / Release-art image + story hook: Scheduled row is not yet logged; confirm publication and log the real public URL before metrics. 7 logged post(s), 9 missing URL(s) in this format.
-- **Log public URL** `FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK` Facebook / Release-art image + story hook: Scheduled row is not yet logged; confirm publication and log the real public URL before metrics. 7 logged post(s), 9 missing URL(s) in this format.
-- **Log public URL** `FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA` YouTube / Short video clip + platform-native CTA: Scheduled row is not yet logged; confirm publication and log the real public URL before metrics. 0 logged post(s), 7 missing URL(s) in this format.
-- **Log public URL** `FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA` YouTube / Short video clip + platform-native CTA: Scheduled row is not yet logged; confirm publication and log the real public URL before metrics. 0 logged post(s), 7 missing URL(s) in this format.
+- **Collect metrics** `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY` YouTube / YouTube Community archive/playlist CTA: Already published and logged; measuring it reduces the YouTube Community archive/playlist CTA evidence gap. 3 logged post(s), 0 missing URL(s) in this format.
+  - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --source-row 28 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
+  - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --source-row 28 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
+- **Collect metrics** `FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY` YouTube / YouTube Community archive/playlist CTA: Already published and logged; measuring it reduces the YouTube Community archive/playlist CTA evidence gap. 3 logged post(s), 0 missing URL(s) in this format.
+  - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --source-row 29 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
+  - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --source-row 29 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
 
 ## Post-Log Measurement Handoff
 - Status: **clear**
@@ -282,14 +382,10 @@ Generated: 2026-06-29T21:10:06.218965Z
 - `FP-AUTO-268` Facebook / Release-art image + story hook: Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-272` Instagram / Release-art image + story hook: Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-264` TikTok / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.
-- `FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA` YouTube / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.
-- `FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA` YouTube / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-269` TikTok / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-274` TikTok / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-279` TikTok / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-284` TikTok / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.
-- `FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY` YouTube / YouTube Community archive/playlist CTA: Publish or log the public URL before result metrics can be collected.
-- `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY` YouTube / YouTube Community archive/playlist CTA: Publish or log the public URL before result metrics can be collected.
 
 ## Guardrails
 - This clipboard does not fetch private analytics or write metrics.

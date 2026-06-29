@@ -1,6 +1,6 @@
 # Promo Operations Packet - Lily Roo
 
-Generated: 2026-06-29T21:10:04.910661Z
+Generated: 2026-06-29T21:20:05.443898Z
 
 ## Summary
 - Actions: **16**
@@ -64,11 +64,11 @@ Generated: 2026-06-29T21:10:04.910661Z
 
 ### Collect experiment results
 - **[high] Collect experiment result metrics**
-  - Why: 7 logged experiment post(s) have 29 result field(s) waiting; these results rank repeatable formats.
+  - Why: 8 logged experiment post(s) have 35 result field(s) waiting; these results rank repeatable formats.
   - Detail: Fill measured result values with evidence notes, preview the import, then apply only after review.
   - Command: `python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run`
   - Packet: `admin/reports/experiment-result-clipboard.md`
-  - Metric cards: **7**; pending fields: **29**
+  - Metric cards: **8**; pending fields: **35**
   - Measurement priorities: **12**
   - Wide entry CSV: `data/experiment_result_entry_wide_template.csv`
   - Preview result import: `python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run`
@@ -76,28 +76,28 @@ Generated: 2026-06-29T21:10:04.910661Z
 ### Verify music sites
 - **[medium] Re-check Twelve Dollars on Spotify**
   - Why: Public store links should be checked until DistroKid exposes them.
-  - Detail: Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T21:09:52.140753+00:00. Status: waiting_for_release_propagation.
-  - Latest snapshot checked: `2026-06-29T21:09:52.140753+00:00`
+  - Detail: Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T21:19:56.260278+00:00. Status: waiting_for_release_propagation.
+  - Latest snapshot checked: `2026-06-29T21:19:56.260278+00:00`
   - Command: `python3 scripts/search_spotify_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/spotify_release_snapshot.json'`
 - **[medium] Re-check Twelve Dollars on Apple Music**
   - Why: Public store links should be checked until DistroKid exposes them.
-  - Detail: Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T21:09:54.468689+00:00. Status: waiting_for_release_propagation.
-  - Latest snapshot checked: `2026-06-29T21:09:54.468689+00:00`
+  - Detail: Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T21:19:57.523860+00:00. Status: waiting_for_release_propagation.
+  - Latest snapshot checked: `2026-06-29T21:19:57.523860+00:00`
   - Command: `python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/apple_music_release_snapshot.json'`
 - **[medium] Re-check Twelve Dollars on HyperFollow**
   - Why: Public store links should be checked until DistroKid exposes them.
-  - Detail: Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T21:09:55.359232+00:00. Status: waiting_for_release_propagation.
-  - Latest snapshot checked: `2026-06-29T21:09:55.359232+00:00`
+  - Detail: Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T21:19:57.955067+00:00. Status: waiting_for_release_propagation.
+  - Latest snapshot checked: `2026-06-29T21:19:57.955067+00:00`
   - Command: `python3 scripts/capture_hyperfollow_store_links.py --url 'https://distrokid.com/hyperfollow/lilyroo/twelve-dollars' --out 'data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json'`
 - **[medium] Re-check Analog Myth on Spotify**
   - Why: Public store links should be checked as the July 1 release approaches.
-  - Detail: Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T21:09:55.440561+00:00. Status: waiting_for_release_propagation.
-  - Latest snapshot checked: `2026-06-29T21:09:55.440561+00:00`
+  - Detail: Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T21:19:58.033825+00:00. Status: waiting_for_release_propagation.
+  - Latest snapshot checked: `2026-06-29T21:19:58.033825+00:00`
   - Command: `python3 scripts/search_spotify_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/spotify_release_snapshot.json'`
 - **[medium] Re-check Analog Myth on Apple Music**
   - Why: Public store links should be checked as the July 1 release approaches.
-  - Detail: Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T21:09:57.310826+00:00. Status: waiting_for_release_propagation.
-  - Latest snapshot checked: `2026-06-29T21:09:57.310826+00:00`
+  - Detail: Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T21:19:59.201982+00:00. Status: waiting_for_release_propagation.
+  - Latest snapshot checked: `2026-06-29T21:19:59.201982+00:00`
   - Command: `python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/apple_music_release_snapshot.json'`
 
 ## Guardrails

@@ -1,12 +1,12 @@
 # Experiment Result Collection - Lily Roo
 
-Generated: 2026-06-29T21:10:06.186510Z
+Generated: 2026-06-29T21:20:06.820485Z
 
 ## Summary
 - Experiment count: **3**
-- Published experiment posts: **8**
-- Missing published log posts: **18**
-- Pending result fields: **35**
+- Published experiment posts: **12**
+- Missing published log posts: **14**
+- Pending result fields: **59**
 - Ready to import: **0**
 - Entry CSV: `data/experiment_result_entry_template.csv`
 - Wide entry CSV: `data/experiment_result_entry_wide_template.csv`
@@ -34,14 +34,10 @@ Generated: 2026-06-29T21:10:06.186510Z
 - `FP-AUTO-268` (Release-art image + story hook): Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-272` (Release-art image + story hook): Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-264` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
-- `FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
-- `FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-269` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-274` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-279` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-284` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
-- `FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY` (YouTube Community archive/playlist CTA): Publish or log the public URL before result metrics can be collected.
-- `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY` (YouTube Community archive/playlist CTA): Publish or log the public URL before result metrics can be collected.
 
 ## Pending Result Fields
 - `FP-AUTO-257` X `subs_delta` from row 16: Open X analytics for https://x.com/i/web/status/2062920257577029712 and record subs_delta.
@@ -69,4 +65,4 @@ Generated: 2026-06-29T21:10:06.186510Z
 - `FP-AUTO-266` X `subs_delta` from row 21: Open X analytics for https://x.com/i/web/status/2071039677357003221 and record subs_delta.
 - `FP-AUTO-271` X `views` from row 19: Open X analytics for https://x.com/i/web/status/2071402084403118566 and record views.
 - `FP-AUTO-271` X `likes` from row 19: Open X analytics for https://x.com/i/web/status/2071402084403118566 and record likes.
-- ...and 10 more rows in `data/experiment_result_entry_template.csv`.
+- ...and 34 more rows in `data/experiment_result_entry_template.csv`.
