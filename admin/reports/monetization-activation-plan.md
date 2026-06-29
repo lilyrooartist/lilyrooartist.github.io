@@ -1,6 +1,6 @@
 # Monetization Activation Plan - Lily Roo
 
-Generated: 2026-06-29T15:13:34.717078Z
+Generated: 2026-06-29T16:13:10.263766Z
 
 ## Summary
 - Current subscribers: **6 / 1000**
@@ -39,11 +39,10 @@ Generated: 2026-06-29T15:13:34.717078Z
    - Phase: `Clear platform blockers`; status: `needs_platform_fix`
    - Detail: Review platform credentials/readiness, then rerun the social execution capture.
    - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA`
-7. **Current operations next action: Preview checked scheduled approval batch**
+7. **Current operations next action: Preview clear approved backlog row**
    - Phase: `Operations packet`; status: `waiting_for_user`
-   - Detail: Scheduled executor records are blocked until reviewed approval is applied.
-   - Preview/check: `python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run`
-   - After review: `python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin`
+   - Detail: Approved posts are past due; preview a new schedule before any apply step.
+   - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24`
 
 ## Guardrails
 - This plan does not approve, apply, publish, or post anything.

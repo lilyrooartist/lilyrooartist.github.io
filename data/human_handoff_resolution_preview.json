@@ -1,23 +1,21 @@
 {
-  "generated_at": "2026-06-29T15:13:35.125428Z",
+  "generated_at": "2026-06-29T16:13:10.650247Z",
   "safe_mode": true,
   "source": {
     "resolution_worksheet": "data/human_handoff_resolution_worksheet.csv",
     "human_handoff_packet": "data/human_handoff_packet.json"
   },
   "summary": {
-    "worksheet_row_count": 9,
-    "preview_count": 9,
-    "executed_preview_count": 5,
+    "worksheet_row_count": 8,
+    "preview_count": 8,
+    "executed_preview_count": 4,
     "skipped_preview_count": 4,
     "status_counts": {
       "input_missing": 3,
-      "preview_ok": 1,
       "preview_ok_with_warning": 1,
       "skipped": 4
     },
     "phase_counts": {
-      "Approval": 1,
       "Backlog recovery": 1,
       "Manual metrics": 2,
       "Platform setup": 5
@@ -26,20 +24,6 @@
     "mutation_guardrail": "This preview runner never executes apply, refresh-admin, PUBLIC_URL placeholder, non-python, or unsupported commands."
   },
   "previews": [
-    {
-      "task_id": "approve-checked-scheduled-batch",
-      "phase": "Approval",
-      "status": "waiting_for_review",
-      "input_needed": "human_review_decision",
-      "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
-      "safety": "safe_preview",
-      "safety_reason": "dry_run_command",
-      "returncode": 0,
-      "preview_status": "preview_ok",
-      "output_excerpt": "FP-AUTO-259: approved 'no' -> 'yes'\nChecked batch guard: 1 checked id(s); 1 requested; 0 unchecked; 1 change(s).\nDry run only; did not update data/scheduled_posts.csv",
-      "completion_evidence": "data/scheduled_approval_packet.json should show fewer approval blockers, and data/social_scheduler_dry_run.json should no longer block the approved Instagram row on not_approved.",
-      "guardrail": "Use --checked-batch so only rows that passed review checks are approved."
-    },
     {
       "task_id": "platform-setup-FP-AUTO-265",
       "phase": "Platform setup",
@@ -120,7 +104,7 @@
       "safety_reason": "reschedule_preview_command",
       "returncode": 0,
       "preview_status": "preview_ok_with_warning",
-      "output_excerpt": "Rows selected: 23\n- FP-AUTO-258 Instagram I Learned It All in Fifteen Seconds: 2026-06-23T10:00:00+08:00 -> 2026-06-30T10:00:00-04:00\n- FP-AUTO-264 TikTok I Learned It All in Fifteen Seconds: 2026-06-23T10:00:00+08:00 -> 2026-07-01T10:00:00-04:00\n- FP-PLAN-TWELVE-DOLLARS-FACEBOOK Facebook Twelve Dollars: 2026-06-23T11:20:00-04:00 -> 2026-07-02T10:00:00-04:00\n- FP-AUTO-261 YouTube I Learned It All in Fifteen Seconds: 2026-06-24T10:00:00+08:00 -> 2026-07-03T10:00:00-04:00\n- FP-AUTO-263 Instagram I Learned It All in Fifteen Seconds: 2026-06-24T10:00:00+08:00 -> 2026-07-04T10:00:00-04:00\n- FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK X Analog Myth: 2026-06-24T10:15:00-04:00 -> 2026-07-05T10:00:00-04:00\n- FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY YouTube Twelve Dollars: 2026-06-24T18:30:00-04:00 -> 2026-07-06T10:00:00-04:00\n- FP-PLAN-TWELVE-DOLLARS-INSTAGRAM Instagram Twelve Dollars: 2026-06-25T10:00:00+08:00 -> 2026-07-07T10:00:00-04:00\n- FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK Facebook Analog Myth: 2026-06-25T11:20:00-04:00 -> 2026-07-08T10:00:00-04:00\n- FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY YouTube Analog Myth: 2026-06-25T18:30:00-04:00 -> 2026-07-09T10:00:00-04:00\n- FP-PLAN-TWELVE-DOLLARS-X X Twelve Dollars: 2026-06-26T10:00:00+08:00 -> 2026-07-10T10:00:00-04:00\n- FP-STORY-TWELVE-DOLLARS-X-ARCHIVE-CTA X Twelve Dollars: 2026-06-26T10:15:00-04:00 -> 2026-07-11T10:00:00-04:00\n- FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA Facebook Twelve Dollars: 2026-06-27T11:20:00-04:00 -> 2026-07-12T10:00:00-04:00\n- FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA YouTube Twelve Dollars: 2026-06-27T18:30:00+08:00 -> 2026-07-13T10:00:00-04:00\n- FP-AUTO-267 Instagram Brain Rot: 2026-06-27T21:35:00-04:00 -> 2026-07-14T10:00:00-04:00\n- FP-AUTO-268 Facebook Brain Rot: 2026-06-27T21:55:00-04:00 -> 2026-07-15T10:00:00-04:00\n  WARNING: known blocker: Facebook blocked Page publishing until identity is confirmed in the Facebook app.\n- FP-AUTO-269 TikTok Brain Rot: 2026-06-27T22:",
+      "output_excerpt": "Rows selected: 24\n- FP-AUTO-258 Instagram I Learned It All in Fifteen Seconds: 2026-06-23T10:00:00+08:00 -> 2026-06-30T10:00:00-04:00\n- FP-AUTO-264 TikTok I Learned It All in Fifteen Seconds: 2026-06-23T10:00:00+08:00 -> 2026-07-01T10:00:00-04:00\n- FP-PLAN-TWELVE-DOLLARS-FACEBOOK Facebook Twelve Dollars: 2026-06-23T11:20:00-04:00 -> 2026-07-02T10:00:00-04:00\n- FP-AUTO-261 YouTube I Learned It All in Fifteen Seconds: 2026-06-24T10:00:00+08:00 -> 2026-07-03T10:00:00-04:00\n- FP-AUTO-263 Instagram I Learned It All in Fifteen Seconds: 2026-06-24T10:00:00+08:00 -> 2026-07-04T10:00:00-04:00\n- FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK X Analog Myth: 2026-06-24T10:15:00-04:00 -> 2026-07-05T10:00:00-04:00\n- FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY YouTube Twelve Dollars: 2026-06-24T18:30:00-04:00 -> 2026-07-06T10:00:00-04:00\n- FP-PLAN-TWELVE-DOLLARS-INSTAGRAM Instagram Twelve Dollars: 2026-06-25T10:00:00+08:00 -> 2026-07-07T10:00:00-04:00\n- FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK Facebook Analog Myth: 2026-06-25T11:20:00-04:00 -> 2026-07-08T10:00:00-04:00\n- FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY YouTube Analog Myth: 2026-06-25T18:30:00-04:00 -> 2026-07-09T10:00:00-04:00\n- FP-PLAN-TWELVE-DOLLARS-X X Twelve Dollars: 2026-06-26T10:00:00+08:00 -> 2026-07-10T10:00:00-04:00\n- FP-STORY-TWELVE-DOLLARS-X-ARCHIVE-CTA X Twelve Dollars: 2026-06-26T10:15:00-04:00 -> 2026-07-11T10:00:00-04:00\n- FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA Facebook Twelve Dollars: 2026-06-27T11:20:00-04:00 -> 2026-07-12T10:00:00-04:00\n- FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA YouTube Twelve Dollars: 2026-06-27T18:30:00+08:00 -> 2026-07-13T10:00:00-04:00\n- FP-AUTO-267 Instagram Brain Rot: 2026-06-27T21:35:00-04:00 -> 2026-07-14T10:00:00-04:00\n- FP-AUTO-268 Facebook Brain Rot: 2026-06-27T21:55:00-04:00 -> 2026-07-15T10:00:00-04:00\n  WARNING: known blocker: Facebook blocked Page publishing until identity is confirmed in the Facebook app.\n- FP-AUTO-269 TikTok Brain Rot: 2026-06-27T22:",
       "completion_evidence": "data/backlog_reschedule_preview.json should show normal_apply_gate clear before any non-override apply command is exposed.",
       "guardrail": "Normal apply stays hidden until known executor/platform blockers clear."
     },
@@ -155,7 +139,7 @@
   ],
   "handoff_resolution_summary": {
     "path": "data/human_handoff_resolution_worksheet.csv",
-    "row_count": 9,
+    "row_count": 8,
     "fieldnames": [
       "task_id",
       "phase",

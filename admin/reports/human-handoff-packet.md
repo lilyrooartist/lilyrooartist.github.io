@@ -1,33 +1,28 @@
 # Human Handoff Packet - Lily Roo
 
-Generated: 2026-06-29T15:13:34.939931Z
+Generated: 2026-06-29T16:13:10.490436Z
 
 ## Summary
-- Open handoff tasks: **9**
-- Tod-owned tasks: **8**
+- Open handoff tasks: **8**
+- Tod-owned tasks: **7**
 - External/platform-gated tasks: **1**
-- High urgency tasks: **7**
+- High urgency tasks: **6**
 - Low urgency tasks: **2**
 
 ## Action Docket
-- Ready steps: **2**
+- Ready steps: **1**
 - Blocked steps: **2**
 - Manual posts packaged: **0**
 - Manual metric fields: **6**
-- Resolution worksheet: `data/human_handoff_resolution_worksheet.csv` (9 row(s))
+- Resolution worksheet: `data/human_handoff_resolution_worksheet.csv` (8 row(s))
 
-- **Review checked approval batch** (`ready_for_review`)
-  - Owner: `tod`; tasks: **1**; blockers resolved: **1**
-  - Decision manifest: ready `FP-AUTO-259`; held `none`
-  - Review runbook: **4** step(s), **1** checklist row(s)
-  - Preview/check: `python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run`
-  - Apply after review: `python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin`
-  - Sequence preview: `python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run`
-  - Sequence apply_after_review: `python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin`
+- **Review checked approval batch** (`not_available`)
+  - Owner: `tod`; tasks: **0**; blockers resolved: **0**
+  - Review runbook: **0** step(s), **0** checklist row(s)
   - Sequence verify: `python3 scripts/refresh_promo_admin.py`
   - Completion evidence: data/scheduled_approval_packet.json should show fewer approval blockers, and data/social_scheduler_dry_run.json should no longer block the approved Instagram row on not_approved.
   - Next after apply: Run the safe admin refresh, then manually post/log any newly approved YouTube Community row before treating the published log as current.
-  - Guardrail: Use --checked-batch so only rows that passed review checks are approved.
+  - Guardrail: Human review is still required; blocked review IDs stay excluded from the checked batch.
 - **Review and post manual distribution rows** (`clear`)
   - Owner: `tod`; tasks: **0**; blockers resolved: **0**
   - Sequence verify: `python3 scripts/refresh_promo_admin.py`
@@ -57,7 +52,7 @@ Generated: 2026-06-29T15:13:34.939931Z
   - Next after apply: Rebuild the weekly report and confirm lilyroo.com/admin shows fewer pending manual metric fields.
   - Guardrail: Import only collected numeric values; leave unknown cells blank.
 - **Reschedule approved backlog after blockers clear** (`blocked`)
-  - Owner: `external_platform`; tasks: **1**; blockers resolved: **23**
+  - Owner: `external_platform`; tasks: **1**; blockers resolved: **24**
   - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24`
   - Sequence preview: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24`
   - Sequence verify: `python3 scripts/refresh_promo_admin.py`
@@ -66,12 +61,6 @@ Generated: 2026-06-29T15:13:34.939931Z
   - Guardrail: Normal apply stays hidden until known executor/platform blockers clear.
 
 ## Tasks
-- **Review and approve checked scheduled batch** (`approve-checked-scheduled-batch`)
-  - Phase: `Approval`; owner: `tod`; status: `waiting_for_review`; urgency: `high`
-  - Detail: Review the checked rows, then apply the guarded batch command. Failed review rows stay excluded.
-  - Preview/check: `python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run`
-  - Apply after review: `python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin`
-  - Guardrail: Use --checked-batch so only rows that passed review checks are approved.
 - **Repair Facebook executor** (`platform-setup-FP-AUTO-265`)
   - Phase: `Platform setup`; owner: `tod`; status: `failed`; urgency: `high`
   - Detail: Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.

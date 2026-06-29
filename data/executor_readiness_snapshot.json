@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "updated_at": "2026-06-29T15:13:31.909084Z",
+  "updated_at": "2026-06-29T16:13:04.264925Z",
   "source": "lilyroo-social-executor-readiness",
   "url": "https://www.lilyroo.com/api/social/readiness",
   "http_status": 200,
@@ -10,19 +10,19 @@
   "summary": {
     "ready_platforms": [
       "X",
-      "TikTok",
-      "Facebook",
-      "YouTube"
+      "Facebook"
     ],
     "blocked_platforms": [
-      "Instagram"
+      "Instagram",
+      "TikTok",
+      "YouTube"
     ],
     "platforms": {
       "X": true,
       "Instagram": false,
-      "TikTok": true,
+      "TikTok": false,
       "Facebook": true,
-      "YouTube": true
+      "YouTube": false
     }
   },
   "payload": {
@@ -52,8 +52,8 @@
         "account_resolution_reason": "instagram_business_account_unresolved"
       },
       "tiktok": {
-        "ready": true,
-        "posting_mode": "upload",
+        "ready": false,
+        "posting_mode": "direct",
         "upload_ready": true,
         "direct_public_ready": false,
         "access_token_present": true,
@@ -66,8 +66,10 @@
         "aigc_label_enabled": true
       },
       "youtube": {
-        "ready": true,
+        "ready": false,
         "missing_secrets": [],
+        "refresh_token_valid": false,
+        "token_resolution_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Bad Request\"}",
         "client_secret_present": true,
         "media_map_present": true,
         "privacy_status": "public"

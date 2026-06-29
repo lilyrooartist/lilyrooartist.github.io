@@ -1,6 +1,6 @@
 # Experiment Result Clipboard - Lily Roo
 
-Generated: 2026-06-29T15:13:35.347529Z
+Generated: 2026-06-29T16:13:10.867061Z
 
 ## Summary
 - Status: **needs_values**
@@ -226,7 +226,7 @@ Generated: 2026-06-29T15:13:35.347529Z
 
 ## Post-Log Measurement Handoff
 - Status: **clear**
-- Source session: YouTube Community manual posting batch
+- Source session: No manual posting session
 - Manual posting report: `admin/reports/manual-posting-clipboard.md`
 - Wide entry CSV after URL logging: `data/experiment_result_entry_wide_template.csv`
 - Wide import preview after logging: `python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run`

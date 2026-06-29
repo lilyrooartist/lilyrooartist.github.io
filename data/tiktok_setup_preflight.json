@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T15:13:34.785162Z",
+  "generated_at": "2026-06-29T16:13:10.332544Z",
   "safe_mode": true,
   "source": {
     "local_secret_source": "secrets/social_api.env",
@@ -19,7 +19,7 @@
     "check_count": 12,
     "blocked_count": 1,
     "ready_to_push_worker_secrets": true,
-    "ready_to_upload_drafts": true,
+    "ready_to_upload_drafts": false,
     "ready_to_post_publicly": false,
     "local_posting_helper_uses_refresh_token": true,
     "first_tiktok_asset": {
@@ -121,7 +121,7 @@
     "public_posting_approved": false,
     "local_public_posting_approval_confirmed": false,
     "default_privacy": "PUBLIC_TO_EVERYONE",
-    "worker_posting_mode": "upload",
+    "worker_posting_mode": "direct",
     "brand_content_toggle": false,
     "brand_organic_toggle": true,
     "aigc_label_enabled": true,
@@ -199,7 +199,7 @@
     "local_public_posting_approval_confirmed": false,
     "public_posting_approved": false,
     "default_privacy": "PUBLIC_TO_EVERYONE",
-    "worker_posting_mode": "upload",
+    "worker_posting_mode": "direct",
     "brand_content_toggle": false,
     "brand_organic_toggle": true,
     "aigc_label_enabled": true,
@@ -287,7 +287,7 @@
   "owner_handoff": {
     "status": "blocked_until_user_input",
     "question_answer": "Yes, fix the TikTok connector after the current manual YouTube evidence loop; it unlocks the short-video growth format.",
-    "next_safe_action": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run",
+    "next_safe_action": "python3 scripts/set_tiktok_public_posting_approval.py --approved",
     "needed_input_count": 1,
     "needed_inputs": [
       {

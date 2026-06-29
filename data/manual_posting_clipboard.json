@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T15:13:34.685757Z",
+  "generated_at": "2026-06-29T16:13:10.229442Z",
   "safe_mode": true,
   "source": {
     "manual_distribution_packet": "data/manual_distribution_packet.json",
@@ -57,51 +57,29 @@
     "guardrail": "Do not advance a lifecycle stage without the listed completion evidence."
   },
   "session_manifest": {
-    "status": "complete",
-    "session_name": "YouTube Community manual posting batch",
-    "surface_url": "https://www.youtube.com/@lilyroo.artist/community",
+    "status": "not_active",
+    "session_name": "No manual posting session",
+    "surface_url": "",
     "postable_count": 0,
     "waiting_public_url_count": 0,
     "logged_count": 0,
     "sequence_ids": [],
     "copy_sources": [],
     "asset_sources": [],
-    "url_template_path": "data/manual_distribution_url_template.csv",
-    "batch_log_preview_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv",
-    "batch_log_apply_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --apply --refresh-admin",
-    "batch_log_partial_apply_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --allow-partial --apply --refresh-admin",
-    "public_url_reconciliation_command": "python3 scripts/reconcile_youtube_community_urls.py",
-    "result_handoff_report": "admin/reports/experiment-result-clipboard.md",
+    "url_template_path": "",
+    "batch_log_preview_command": "",
+    "batch_log_apply_command": "",
+    "batch_log_partial_apply_command": "",
+    "public_url_reconciliation_command": "",
+    "result_handoff_report": "",
     "first_measurement_due_after_hours": 24,
     "rows": [],
-    "posting_sequence": [
-      "Open the YouTube Community surface once.",
-      "Post each session row in sequence using its copy_source and asset_source.",
-      "After each publish, copy the real public URL into the URL worksheet.",
-      "Run the batch preview command; use partial apply if only some rows have public URLs.",
-      "After logging, collect the first 24-hour metrics from the result handoff report."
-    ],
-    "completion_evidence": [
-      "Each session row has a real public YouTube Community URL.",
-      "The URL worksheet has no remaining blank public_url cells for these IDs.",
-      "Published_Log.csv contains each session ID with a manual_distribution_id note.",
-      "The experiment result clipboard lists the logged posts for first 24-hour measurement collection."
-    ],
-    "guardrail": "Do not mark the session complete until every row has a real public URL logged."
+    "posting_sequence": [],
+    "completion_evidence": [],
+    "guardrail": "No manual posting rows are active."
   },
   "post_cards": [],
-  "operator_steps": [
-    "Open the YouTube Community surface.",
-    "For each card, paste the text exactly as shown.",
-    "Attach the listed asset URL or download/open the local asset path if needed.",
-    "Publish manually in YouTube Studio Community.",
-    "Copy the real public post URL.",
-    "Use the first-post runbook to preview and apply the first real public URL.",
-    "Run the preview logging command with the real URL, then run the apply command.",
-    "After the first public URL exists, use the first-url acceleration command so that post can enter result collection immediately.",
-    "Or rerun the public URL reconciliation command after posting to auto-detect confident public URLs.",
-    "If only one public URL is ready, use the partial batch apply command so that post can start accumulating measurable evidence immediately."
-  ],
+  "operator_steps": [],
   "guardrails": [
     "This clipboard does not approve, schedule, publish, or log posts.",
     "Do not use PUBLIC_URL in an apply command.",

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T15:13:35.434742Z",
+  "generated_at": "2026-06-29T16:13:10.954750Z",
   "safe_mode": true,
   "source": {
     "workflow": ".github/workflows/promo-admin-refresh.yml",
@@ -15,8 +15,8 @@
   },
   "summary": {
     "status": "blocked",
-    "ready_lane_count": 5,
-    "blocked_lane_count": 2,
+    "ready_lane_count": 4,
+    "blocked_lane_count": 3,
     "attention_lane_count": 1,
     "lane_count": 8,
     "workflow_crons": [
@@ -29,7 +29,7 @@
     "attention_count": 6,
     "platform_fix_needed_count": 5,
     "story_post_count": 6,
-    "story_queued_future_count": 3,
+    "story_queued_future_count": 2,
     "platform_repair_blocked_count": 5,
     "blocker_input_status": "missing_local_input",
     "blocker_input_missing_count": 1,
@@ -42,20 +42,20 @@
       "label": "Scheduled refresh workflow",
       "status": "needs_attention",
       "detail": "17 */6 * * *; latest run completed / failure",
-      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28368479772",
+      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28386154050",
       "next_action": "Confirm the GitHub Actions workflow is enabled and has a successful run."
     },
     {
       "label": "Safe admin refresh",
       "status": "ready",
-      "detail": "11 refresh commands captured at 2026-06-29T15:13:33.899858Z",
+      "detail": "11 refresh commands captured at 2026-06-29T16:13:09.425827Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": ""
     },
     {
       "label": "Scheduler dry-run authentication",
       "status": "ready",
-      "detail": "HTTP 200 using bearer auth; due=24 would_post=0",
+      "detail": "HTTP 200 using bearer auth; due=25 would_post=2",
       "evidence": "data/social_scheduler_dry_run.json",
       "next_action": ""
     },
@@ -69,16 +69,16 @@
     {
       "label": "Platform readiness",
       "status": "blocked",
-      "detail": "ready=X, TikTok, Facebook, YouTube; blocked=Instagram",
+      "detail": "ready=X, Facebook; blocked=Instagram, TikTok, YouTube",
       "evidence": "data/executor_readiness_snapshot.json",
       "next_action": "Resolve the platform repair checklist before expecting full auto-post coverage."
     },
     {
       "label": "TikTok API lane",
-      "status": "ready",
-      "detail": "blocked; upload_ready=True; public_ready=False",
+      "status": "blocked",
+      "detail": "blocked; upload_ready=False; public_ready=False",
       "evidence": "data/tiktok_setup_preflight.json",
-      "next_action": ""
+      "next_action": "Add TikTok OAuth credentials and rerun the upload-mode dry run."
     },
     {
       "label": "Blocker input readiness",
@@ -90,7 +90,7 @@
     {
       "label": "Story throughput",
       "status": "ready",
-      "detail": "6 tracked; 3 queued; 1 past due without URL",
+      "detail": "6 tracked; 2 queued; 2 past due without URL",
       "evidence": "data/story_throughput_tracking.json",
       "next_action": "Export social executions after scheduled post times, then log public URLs and results."
     }

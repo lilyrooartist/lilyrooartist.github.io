@@ -1,6 +1,6 @@
 # Manual Posting Clipboard - Lily Roo
 
-Generated: 2026-06-29T15:13:34.685757Z
+Generated: 2026-06-29T16:13:10.229442Z
 
 ## Summary
 - Status: **empty**
@@ -64,32 +64,21 @@ Generated: 2026-06-29T15:13:34.685757Z
 - Guardrail: No placeholder URLs are accepted.
 
 ## Session Manifest
-- Status: **complete**
-- Session: **YouTube Community manual posting batch**
-- Surface: https://www.youtube.com/@lilyroo.artist/community
+- Status: **not_active**
+- Session: **No manual posting session**
+- Surface: not set
 - Postable rows: **0**
 - Waiting public URLs: **0**
 - Logged rows: **0**
-- URL worksheet: `data/manual_distribution_url_template.csv`
-- Batch preview: `python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv`
-- Batch apply: `python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --apply --refresh-admin`
-- Partial apply: `python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --allow-partial --apply --refresh-admin`
-- URL reconciliation: `python3 scripts/reconcile_youtube_community_urls.py`
-- Result handoff: `admin/reports/experiment-result-clipboard.md`
+- URL worksheet: `not available`
+- Batch preview: `not available`
+- Batch apply: `not available`
+- Partial apply: `not available`
+- URL reconciliation: `not available`
+- Result handoff: `not available`
 - First measurement due: **24 hours after URL logging**
-- Guardrail: Do not mark the session complete until every row has a real public URL logged.
+- Guardrail: No manual posting rows are active.
 
-- Posting sequence:
-  - Open the YouTube Community surface once.
-  - Post each session row in sequence using its copy_source and asset_source.
-  - After each publish, copy the real public URL into the URL worksheet.
-  - Run the batch preview command; use partial apply if only some rows have public URLs.
-  - After logging, collect the first 24-hour metrics from the result handoff report.
-- Completion evidence:
-  - Each session row has a real public YouTube Community URL.
-  - The URL worksheet has no remaining blank public_url cells for these IDs.
-  - Published_Log.csv contains each session ID with a manual_distribution_id note.
-  - The experiment result clipboard lists the logged posts for first 24-hour measurement collection.
 - Session rows: none; API automation has replaced the manual posting lane.
 
 ## Cards
@@ -101,16 +90,6 @@ Generated: 2026-06-29T15:13:34.685757Z
 - After posting checklist: no manual posting checklist is active.
 
 ## Operator Steps
-- Open the YouTube Community surface.
-- For each card, paste the text exactly as shown.
-- Attach the listed asset URL or download/open the local asset path if needed.
-- Publish manually in YouTube Studio Community.
-- Copy the real public post URL.
-- Use the first-post runbook to preview and apply the first real public URL.
-- Run the preview logging command with the real URL, then run the apply command.
-- After the first public URL exists, use the first-url acceleration command so that post can enter result collection immediately.
-- Or rerun the public URL reconciliation command after posting to auto-detect confident public URLs.
-- If only one public URL is ready, use the partial batch apply command so that post can start accumulating measurable evidence immediately.
 
 ## Guardrails
 - This clipboard does not approve, schedule, publish, or log posts.

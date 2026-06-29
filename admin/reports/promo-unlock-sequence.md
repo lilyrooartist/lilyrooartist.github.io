@@ -1,24 +1,20 @@
 # Promo Unlock Sequence - Lily Roo
 
-Generated: 2026-06-29T15:13:35.155873Z
+Generated: 2026-06-29T16:13:10.681473Z
 
 ## Summary
 - Steps: **4**
-- Ready for human review: **1**
-- Blocked or warning: **2**
+- Ready for human review: **0**
+- Blocked or warning: **3**
 - Projected resolution units across sequence: **30**
-- Current step: `unlock-checked-scheduled-approval` (`ready_for_human_review`)
+- Current step: `unlock-manual-metrics` (`blocked_until_input`)
 - Open blockers still tracked: **9**
 
 ## Sequence
 1. **Approve checked scheduled rows** - `unlock-checked-scheduled-approval`
-   - State: `ready_for_human_review`; owner: `tod`
-   - Reason: Preview ran cleanly; this gate is waiting for human review or external completion.
+   - State: `blocked`; owner: `tod`
+   - Reason: Blocked by: FP-AUTO-259.
    - Unlocks: Instagram executor row can become publish-eligible after approval.
-   - preview (preview-safe): `python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run`
-   - apply_after_review (after-review only): `python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin`
-   - Completion evidence: data/scheduled_approval_packet.json should show fewer approval blockers, and data/social_scheduler_dry_run.json should no longer block the approved Instagram row on not_approved.
-   - Guardrail: Use --checked-batch so only rows that passed review checks are approved.
 2. **Repair TikTok executor** - `unlock-tiktok-platform-repair`
    - State: `ready`; owner: `tod`
    - Reason: ready

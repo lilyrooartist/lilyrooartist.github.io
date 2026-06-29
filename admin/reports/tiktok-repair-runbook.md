@@ -1,6 +1,6 @@
 # TikTok Repair Runbook - Lily Roo
 
-Generated: 2026-06-29T15:13:34.844838Z
+Generated: 2026-06-29T16:13:10.393800Z
 
 ## Summary
 - Status: **ready_for_backlog_clearance**
@@ -11,7 +11,7 @@ Generated: 2026-06-29T15:13:34.844838Z
 - Blocked steps: **1**
 - Local public posting approval confirmed: **False**
 - Public posting approved: **False**
-- Worker posting mode: **upload**
+- Worker posting mode: **direct**
 - Brand content disclosure: **False**
 - Brand organic disclosure: **True**
 - AIGC label enabled: **True**
@@ -25,7 +25,7 @@ Generated: 2026-06-29T15:13:34.844838Z
 - Local secret env exists: **True**
 - Initialize local secret env: `not needed`
 - Ready to apply worker secrets: **True**
-- Ready to upload inbox drafts: **True**
+- Ready to upload inbox drafts: **False**
 - Ready for direct public posting: **False**
 - Ready to clear backlog gate: **True**
 - Public posting approval apply: `not available until local approval is confirmed`

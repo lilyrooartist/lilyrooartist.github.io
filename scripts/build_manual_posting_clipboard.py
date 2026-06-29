@@ -217,6 +217,29 @@ def post_card(row: dict) -> dict:
 
 
 def build_session_manifest(cards: list[dict], summary: dict) -> dict:
+    if not cards:
+        return {
+            "status": "not_active",
+            "session_name": "No manual posting session",
+            "surface_url": "",
+            "postable_count": 0,
+            "waiting_public_url_count": 0,
+            "logged_count": 0,
+            "sequence_ids": [],
+            "copy_sources": [],
+            "asset_sources": [],
+            "url_template_path": "",
+            "batch_log_preview_command": "",
+            "batch_log_apply_command": "",
+            "batch_log_partial_apply_command": "",
+            "public_url_reconciliation_command": "",
+            "result_handoff_report": "",
+            "first_measurement_due_after_hours": FIRST_MEASUREMENT_DUE_AFTER_HOURS,
+            "rows": [],
+            "posting_sequence": [],
+            "completion_evidence": [],
+            "guardrail": "No manual posting rows are active.",
+        }
     rows = []
     for index, card in enumerate(cards, start=1):
         public_url = (card.get("public_url") or "").strip()
@@ -549,7 +572,7 @@ def build_payload() -> dict:
             "After the first public URL exists, use the first-url acceleration command so that post can enter result collection immediately.",
             "Or rerun the public URL reconciliation command after posting to auto-detect confident public URLs.",
             "If only one public URL is ready, use the partial batch apply command so that post can start accumulating measurable evidence immediately.",
-        ],
+        ] if cards else [],
         "guardrails": [
             "This clipboard does not approve, schedule, publish, or log posts.",
             "Do not use PUBLIC_URL in an apply command.",
@@ -587,6 +610,17 @@ def write_session_file(payload: dict) -> None:
     runbook = payload.get("first_post_runbook") or {}
     acceleration = payload.get("first_url_acceleration") or {}
     lifecycle = payload.get("tracking_lifecycle") or {}
+    if not payload.get("post_cards"):
+        lines = [
+            "# No Manual Posting Session",
+            "",
+            f"Generated: {payload.get('generated_at')}",
+            "",
+            "No manual posts are currently waiting. API automation has replaced the manual posting lane.",
+            "",
+        ]
+        SESSION_FILE.write_text("\n".join(lines), encoding="utf-8")
+        return
     lines = [
         "# YouTube Community Manual Posting Session",
         "",

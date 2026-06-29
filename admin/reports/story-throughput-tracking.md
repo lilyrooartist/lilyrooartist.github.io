@@ -1,11 +1,11 @@
 # Story Throughput Tracking - Lily Roo
 
-Generated: 2026-06-29T15:13:35.375760Z
+Generated: 2026-06-29T16:13:10.896333Z
 
 ## Summary
 - Story posts scheduled: **6**
-- Queued future: **3**
-- Past due without public URL: **1**
+- Queued future: **2**
+- Past due without public URL: **2**
 - Logged, waiting results: **2**
 - Measured: **0**
 - Platforms: **Facebook, X**
@@ -31,9 +31,9 @@ Generated: 2026-06-29T15:13:35.375760Z
   - First measurement due: `2026-06-30T00:00:00+00:00`
   - Next: Collect first result metrics after the measurement window and import them with evidence notes.
 - **FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA** - Facebook / Analog Myth
-  - Status: `queued_future`; scheduled: `2026-06-29T11:20:00-04:00`
+  - Status: `past_due_unlogged`; scheduled: `2026-06-29T11:20:00-04:00`
   - First measurement due: `2026-06-30T15:20:00+00:00`
-  - Next: Wait for the scheduler to publish the row, then export social executions and log the public URL.
+  - Next: Run social execution capture/export to confirm whether the post published and log the public URL.
 - **FP-STORY-I-LEARNED-IT-ALL-IN-FIFTEEN-SECONDS-X-ARCHIVE-CTA** - X / I Learned It All in Fifteen Seconds
   - Status: `queued_future`; scheduled: `2026-06-30T10:15:00-04:00`
   - First measurement due: `2026-07-01T14:15:00+00:00`

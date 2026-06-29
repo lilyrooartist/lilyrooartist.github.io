@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T15:13:34.717078Z",
+  "generated_at": "2026-06-29T16:13:10.263766Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -37,10 +37,10 @@
       "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24",
       "after_review_command": "",
       "context": {
-        "approved_backlog_posts": 23,
-        "raw_approved_backlog_posts": 23,
+        "approved_backlog_posts": 24,
+        "raw_approved_backlog_posts": 24,
         "manual_handoff_backlog_posts": 0,
-        "approved_upcoming_posts": 11,
+        "approved_upcoming_posts": 10,
         "blocked_backlog_count": 5,
         "apply_allowed_without_override": false,
         "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
@@ -140,14 +140,14 @@
       }
     },
     {
-      "label": "Current operations next action: Preview checked scheduled approval batch",
+      "label": "Current operations next action: Preview clear approved backlog row",
       "phase": "Operations packet",
       "status": "waiting_for_user",
-      "detail": "Scheduled executor records are blocked until reviewed approval is applied.",
-      "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
-      "after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+      "detail": "Approved posts are past due; preview a new schedule before any apply step.",
+      "command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24",
+      "after_review_command": "",
       "context": {
-        "kind": "scheduled_approval_batch",
+        "kind": "backlog_reschedule",
         "urgency": "high"
       }
     }

@@ -1,6 +1,6 @@
 # Promotion Blocker Ledger - Lily Roo
 
-Generated: 2026-06-29T15:13:34.908145Z
+Generated: 2026-06-29T16:13:10.459048Z
 
 ## Summary
 - Open blockers: **9**
@@ -10,16 +10,15 @@ Generated: 2026-06-29T15:13:34.908145Z
 - High or critical: **7**
 
 ## Unlock Roadmap
-- **Approve checked scheduled rows** (`ready_for_review`)
-  - Owner: `tod`; projected blockers resolved: **1**
+- **Approve checked scheduled rows** (`blocked`)
+  - Owner: `tod`; projected blockers resolved: **0**
   - Unlocks: Instagram executor row can become publish-eligible after approval.
-  - Preview/check: `python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run`
-  - Apply after review: `python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin`
+  - Blocked by: FP-AUTO-259
 - **Repair TikTok executor** (`ready`)
   - Owner: `tod`; projected blockers resolved: **0**
   - Unlocks: Held TikTok approval rows can pass platform-readiness review.; Approved TikTok backlog can become safe to reschedule into upload-draft creation.
 - **Reschedule approved past-due backlog** (`blocked_until_clearance_steps_complete`)
-  - Owner: `external_platform`; projected blockers resolved: **23**
+  - Owner: `external_platform`; projected blockers resolved: **24**
   - Unlocks: Approved past-due queue rows get a fresh schedule after executor blockers clear.
   - Blocked by: FP-AUTO-268, FP-AUTO-265, FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA, FP-AUTO-272, FP-AUTO-273
   - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24`
@@ -32,14 +31,14 @@ Generated: 2026-06-29T15:13:34.908145Z
 
 ## Ledger
 - **[high] Approve scheduled TikTok row** (`approval-FP-AUTO-259`)
-  - Owner: `tod`; status: `ready_for_reviewed_approval`; category: `approval`
-  - Evidence: FP-AUTO-259 is blocked by not_approved in executor state. Automated review checks passed.
-  - Next step: Use the checked batch after human review: preview `python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run`, then apply `python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin`.
+  - Owner: `tod`; status: `blocked_by_review_checks`; category: `approval`
+  - Evidence: FP-AUTO-259 is blocked by not_approved in executor state. Failed review checks: platform_readiness: Executor readiness snapshot marks platform blocked.
+  - Next step: Resolve failed review checks before approving this scheduled row.
   - Open: https://www.lilyroo.com/assets/ig/01_i_learned_it_all_60s.mp4
   - Preview/check: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --dry-run`
   - Apply/log after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --refresh-admin`
   - Guardrail: Approval does not guarantee posting if the platform executor is still blocked.
-  - Impact: resolves blocker: True; downstream: auto executor eligible after approval; checked batch resolves 1 blocker(s)
+  - Impact: resolves blocker: False
 - **[high] Repair YouTube executor** (`platform-FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA`)
   - Owner: `tod`; status: `blocked`; category: `platform_repair`
   - Evidence: API request failed (400): {"error":"invalid_grant","error_description":"Bad Request"}
@@ -49,7 +48,7 @@ Generated: 2026-06-29T15:13:34.908145Z
   - Guardrail: Run retry resets only after the external platform repair is verified.
 - **[high] Reschedule approved past-due backlog** (`backlog-reschedule`)
   - Owner: `external_platform`; status: `blocked`; category: `backlog_reschedule`
-  - Evidence: 23 approved backlog row(s); 5 still have executor blockers.
+  - Evidence: 24 approved backlog row(s); 5 still have executor blockers.
   - Next step: Preview a new schedule. Safe apply becomes available after known executor blockers clear.
   - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24`
   - Guardrail: Normal apply is hidden while rows have known executor blockers.

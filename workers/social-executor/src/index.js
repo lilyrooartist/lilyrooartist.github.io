@@ -743,8 +743,8 @@ async function postFacebook(payload, env) {
     params.caption = appendCta(text(payload.text), text(payload.replyText));
     params.published = "true";
   } else {
-    params.message = text(payload.text);
-    if (payload.replyText) params.link = text(payload.replyText);
+    params.message = appendCta(text(payload.text), forceLink ? "" : text(payload.replyText));
+    if (forceLink && payload.replyText) params.link = firstUrl(text(payload.replyText)) || text(payload.replyText);
   }
   const data = await formPost(endpoint, params);
   const postId = data.post_id || data.id || "";
@@ -1263,6 +1263,10 @@ async function readiness(env) {
   const instagramAccount = igToken
     ? await instagramAccountValidation(env, igToken)
     : { ok: false, reason: "instagram_credentials_missing" };
+  const tiktokMode = tiktokPostingMode({}, env);
+  const tiktokUploadReady = tiktokCredentialsReady(env);
+  const tiktokDirectPublicReady = tiktokUploadReady && env.TIKTOK_PUBLIC_POSTING_APPROVED === "true";
+  const youtubeTokenCheck = await youtubeRefreshCheck(env, youtubeMissing);
 
   return {
     ok: true,
@@ -1291,10 +1295,10 @@ async function readiness(env) {
         account_resolution_reason: instagramAccount.ok ? "" : instagramAccount.reason,
       },
       tiktok: {
-        ready: tiktokCredentialsReady(env),
-        posting_mode: tiktokPostingMode({}, env),
-        upload_ready: tiktokCredentialsReady(env),
-        direct_public_ready: tiktokCredentialsReady(env) && env.TIKTOK_PUBLIC_POSTING_APPROVED === "true",
+        ready: tiktokMode === "direct" ? tiktokDirectPublicReady : tiktokUploadReady,
+        posting_mode: tiktokMode,
+        upload_ready: tiktokUploadReady,
+        direct_public_ready: tiktokDirectPublicReady,
         access_token_present: Boolean(env.TIKTOK_ACCESS_TOKEN),
         refresh_config_present: Boolean(env.TIKTOK_CLIENT_KEY && env.TIKTOK_CLIENT_SECRET && env.TIKTOK_REFRESH_TOKEN),
         missing_secrets: tiktokMissingCredentials(env),
@@ -1305,8 +1309,10 @@ async function readiness(env) {
         aigc_label_enabled: env.TIKTOK_IS_AIGC !== "false",
       },
       youtube: {
-        ready: youtubeMissing.length === 0,
+        ready: youtubeMissing.length === 0 && youtubeTokenCheck.ok,
         missing_secrets: youtubeMissing,
+        refresh_token_valid: youtubeTokenCheck.ok,
+        token_resolution_reason: youtubeTokenCheck.reason,
         client_secret_present: Boolean(env.GOOGLE_CLIENT_SECRET),
         media_map_present: Boolean(env.SOCIAL_MEDIA_MAP_JSON),
         privacy_status: text(env.YOUTUBE_PRIVACY_STATUS) || "public",
@@ -1444,6 +1450,21 @@ function tiktokMissingCredentials(env) {
 function tiktokPostingMode(payload, env) {
   const mode = text(payload.tiktokPostingMode || payload.tiktok_posting_mode || env.TIKTOK_POSTING_MODE || "upload").toLowerCase();
   return mode === "upload" || mode === "draft" || mode === "inbox" ? "upload" : "direct";
+}
+
+async function youtubeRefreshCheck(env, missing = []) {
+  if (missing.length) return { ok: false, reason: `${missing.join(", ")}_missing` };
+  try {
+    await googleAccessToken(env);
+    return { ok: true, reason: "" };
+  } catch (error) {
+    return { ok: false, reason: metricErrorMessage(error) };
+  }
+}
+
+function firstUrl(value) {
+  const match = text(value).match(/https?:\/\/\S+/);
+  return match ? match[0] : "";
 }
 
 function tiktokDesiredPrivacy(payload, env) {
