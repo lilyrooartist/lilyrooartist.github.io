@@ -1,32 +1,28 @@
 # Promotion Blocker Ledger - Lily Roo
 
-Generated: 2026-06-28T00:52:27.451401Z
+Generated: 2026-06-29T15:09:59.386738Z
 
 ## Summary
-- Open blockers: **12**
-- User-owned: **7**
+- Open blockers: **9**
+- User-owned: **4**
 - External platform-owned: **5**
 - Codex-actionable: **0**
-- High or critical: **6**
+- High or critical: **7**
 
 ## Unlock Roadmap
-- **Approve checked scheduled rows** (`blocked`)
-  - Owner: `tod`; projected blockers resolved: **0**
-  - Unlocks: Instagram executor row can become publish-eligible after approval.; One scheduled YouTube Community row can move into manual distribution after approval.
-  - Blocked by: FP-AUTO-259
-- **Post manual YouTube Community rows** (`clear`)
-  - Owner: `tod`; projected blockers resolved: **4**
-  - Unlocks: Manual YouTube Community promotion can publish without waiting for broken auto executors.; Published_Log.csv can be updated after public URLs exist.
-  - Blocked by: FP-PLAN-TWELVE-DOLLARS-TIKTOK
-  - Guardrail: Manual-only approvals do not auto-post; posting and public URL logging remain separate after review.
+- **Approve checked scheduled rows** (`ready_for_review`)
+  - Owner: `tod`; projected blockers resolved: **1**
+  - Unlocks: Instagram executor row can become publish-eligible after approval.
+  - Preview/check: `python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run`
+  - Apply after review: `python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin`
 - **Repair TikTok executor** (`ready`)
   - Owner: `tod`; projected blockers resolved: **0**
   - Unlocks: Held TikTok approval rows can pass platform-readiness review.; Approved TikTok backlog can become safe to reschedule into upload-draft creation.
 - **Reschedule approved past-due backlog** (`blocked_until_clearance_steps_complete`)
-  - Owner: `external_platform`; projected blockers resolved: **2**
+  - Owner: `external_platform`; projected blockers resolved: **23**
   - Unlocks: Approved past-due queue rows get a fresh schedule after executor blockers clear.
-  - Blocked by: FP-AUTO-258, FP-AUTO-264
-  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+08:00' --spacing-hours 24`
+  - Blocked by: FP-AUTO-268, FP-AUTO-265, FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA, FP-AUTO-272, FP-AUTO-273
+  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24`
 - **Fill manual metric worksheet** (`needs_values`)
   - Owner: `tod`; projected blockers resolved: **6**
   - Unlocks: Admin health and weekly reporting can use fresh cross-platform metrics.; Manual metric blockers clear once worksheet values are imported.
@@ -36,86 +32,57 @@ Generated: 2026-06-28T00:52:27.451401Z
 
 ## Ledger
 - **[high] Approve scheduled TikTok row** (`approval-FP-AUTO-259`)
-  - Owner: `tod`; status: `blocked_by_review_checks`; category: `approval`
-  - Evidence: FP-AUTO-259 is blocked by not_approved in executor state. Failed review checks: platform_readiness: Executor readiness snapshot marks platform blocked. Missing secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.
-  - Next step: Resolve failed review checks before approving this scheduled row.
+  - Owner: `tod`; status: `ready_for_reviewed_approval`; category: `approval`
+  - Evidence: FP-AUTO-259 is blocked by not_approved in executor state. Automated review checks passed.
+  - Next step: Use the checked batch after human review: preview `python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run`, then apply `python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin`.
   - Open: https://www.lilyroo.com/assets/ig/01_i_learned_it_all_60s.mp4
   - Preview/check: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --dry-run`
   - Apply/log after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --refresh-admin`
   - Guardrail: Approval does not guarantee posting if the platform executor is still blocked.
-  - Impact: resolves blocker: False
+  - Impact: resolves blocker: True; downstream: auto executor eligible after approval; checked batch resolves 1 blocker(s)
+- **[high] Repair YouTube executor** (`platform-FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA`)
+  - Owner: `tod`; status: `blocked`; category: `platform_repair`
+  - Evidence: API request failed (400): {"error":"invalid_grant","error_description":"Bad Request"}
+  - Next step: Review platform credentials/readiness, then rerun the social execution capture. Run `python3 scripts/check_social_executor_dry_run.py --post-id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA` before any retry reset; only reset if the worker reports executable.
+  - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA`
+  - Apply/log after review: `python3 scripts/reset_social_execution_state.py FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --apply`
+  - Guardrail: Run retry resets only after the external platform repair is verified.
 - **[high] Reschedule approved past-due backlog** (`backlog-reschedule`)
   - Owner: `external_platform`; status: `blocked`; category: `backlog_reschedule`
-  - Evidence: 2 approved backlog row(s); 2 still have executor blockers.
+  - Evidence: 23 approved backlog row(s); 5 still have executor blockers.
   - Next step: Preview a new schedule. Safe apply becomes available after known executor blockers clear.
-  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+08:00' --spacing-hours 24`
+  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24`
   - Guardrail: Normal apply is hidden while rows have known executor blockers.
-  - Blocked apply command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin`
+  - Blocked apply command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin`
 - **[high] Repair Facebook executor** (`platform-FP-AUTO-265`)
   - Owner: `external_platform`; status: `blocked`; category: `platform_repair`
   - Evidence: Facebook blocked Page publishing until identity is confirmed in the Facebook app.
-  - Next step: Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.
-  - Preview/check: `python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run`
+  - Next step: Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check. Run `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-265` before any retry reset; only reset if the worker reports executable.
+  - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-265`
+  - Apply/log after review: `python3 scripts/reset_social_execution_state.py FP-AUTO-265 --apply`
   - Guardrail: Run retry resets only after the external platform repair is verified.
-- **[high] Repair Instagram executor** (`platform-FP-AUTO-258`)
+- **[high] Repair Facebook executor** (`platform-FP-AUTO-268`)
   - Owner: `external_platform`; status: `blocked`; category: `platform_repair`
-  - Evidence: Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID.
-  - Next step: Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness. Run `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-258` before any retry reset; only reset if the worker reports executable.
-  - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-258`
-  - Apply/log after review: `python3 scripts/reset_social_execution_state.py FP-AUTO-258 --apply`
+  - Evidence: Facebook blocked Page publishing until identity is confirmed in the Facebook app.
+  - Next step: Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check. Run `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-268` before any retry reset; only reset if the worker reports executable.
+  - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-268`
+  - Apply/log after review: `python3 scripts/reset_social_execution_state.py FP-AUTO-268 --apply`
+  - Guardrail: Run retry resets only after the external platform repair is verified.
+- **[high] Repair Facebook executor** (`platform-FP-AUTO-273`)
+  - Owner: `external_platform`; status: `blocked`; category: `platform_repair`
+  - Evidence: Facebook blocked Page publishing until identity is confirmed in the Facebook app.
+  - Next step: Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check. Run `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-273` before any retry reset; only reset if the worker reports executable.
+  - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-273`
+  - Apply/log after review: `python3 scripts/reset_social_execution_state.py FP-AUTO-273 --apply`
+  - Guardrail: Run retry resets only after the external platform repair is verified.
+- **[high] Repair Instagram executor** (`platform-FP-AUTO-272`)
+  - Owner: `external_platform`; status: `blocked`; category: `platform_repair`
+  - Evidence: instagram_business_account_unresolved Local secret source is missing: IG_BUSINESS_ACCOUNT_ID.
+  - Next step: Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.
+  - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID`
   - Guardrail: Run retry resets only after the external platform repair is verified.
   - Blocked apply command: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
   - Impact: apply blocked by: local_secret_source_missing:IG_BUSINESS_ACCOUNT_ID
-- **[high] Repair Instagram executor** (`platform-FP-AUTO-263`)
-  - Owner: `external_platform`; status: `blocked`; category: `platform_repair`
-  - Evidence: Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID.
-  - Next step: Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness. Run `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263` before any retry reset; only reset if the worker reports executable.
-  - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263`
-  - Apply/log after review: `python3 scripts/reset_social_execution_state.py FP-AUTO-263 --apply`
-  - Guardrail: Run retry resets only after the external platform repair is verified.
-  - Blocked apply command: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
-  - Impact: apply blocked by: local_secret_source_missing:IG_BUSINESS_ACCOUNT_ID
-- **[high] Repair Instagram executor** (`platform-FP-PLAN-TWELVE-DOLLARS-INSTAGRAM`)
-  - Owner: `external_platform`; status: `blocked`; category: `platform_repair`
-  - Evidence: Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID.
-  - Next step: Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness. Run `python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM` before any retry reset; only reset if the worker reports executable.
-  - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM`
-  - Apply/log after review: `python3 scripts/reset_social_execution_state.py FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --apply`
-  - Guardrail: Run retry resets only after the external platform repair is verified.
-  - Blocked apply command: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
-  - Impact: apply blocked by: local_secret_source_missing:IG_BUSINESS_ACCOUNT_ID
-- **[medium] Manually post YouTube Community copy** (`manual-FP-AUTO-270`)
-  - Owner: `tod`; status: `ready_for_manual_post`; category: `manual_distribution`
-  - Evidence: FP-AUTO-270 is packaged for manual distribution.
-  - Next step: Post manually, then log the public URL so admin status can stop treating the row as pending.
-  - Open: https://www.lilyroo.com/assets/albums/twelve-dollars/art/01-brain-rot-youtube-thumbnail.jpg
-  - Preview/check: `python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL'`
-  - Apply/log after review: `python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL' --apply --refresh-admin`
-  - Guardrail: Manual posting happens outside this repo; only log the URL after the post is live.
-- **[medium] Manually post YouTube Community copy** (`manual-FP-AUTO-275`)
-  - Owner: `tod`; status: `ready_for_manual_post`; category: `manual_distribution`
-  - Evidence: FP-AUTO-275 is packaged for manual distribution.
-  - Next step: Post manually, then log the public URL so admin status can stop treating the row as pending.
-  - Open: https://www.lilyroo.com/assets/albums/twelve-dollars/art/02-every-pearl-in-carmel-youtube-thumbnail.jpg
-  - Preview/check: `python3 scripts/log_manual_distribution.py --id FP-AUTO-275 --url 'PUBLIC_URL'`
-  - Apply/log after review: `python3 scripts/log_manual_distribution.py --id FP-AUTO-275 --url 'PUBLIC_URL' --apply --refresh-admin`
-  - Guardrail: Manual posting happens outside this repo; only log the URL after the post is live.
-- **[medium] Manually post YouTube Community copy** (`manual-FP-AUTO-280`)
-  - Owner: `tod`; status: `ready_for_manual_post`; category: `manual_distribution`
-  - Evidence: FP-AUTO-280 is packaged for manual distribution.
-  - Next step: Post manually, then log the public URL so admin status can stop treating the row as pending.
-  - Open: https://www.lilyroo.com/assets/albums/twelve-dollars/art/03-the-other-ones-charging-youtube-thumbnail.jpg
-  - Preview/check: `python3 scripts/log_manual_distribution.py --id FP-AUTO-280 --url 'PUBLIC_URL'`
-  - Apply/log after review: `python3 scripts/log_manual_distribution.py --id FP-AUTO-280 --url 'PUBLIC_URL' --apply --refresh-admin`
-  - Guardrail: Manual posting happens outside this repo; only log the URL after the post is live.
-- **[medium] Manually post YouTube Community copy** (`manual-FP-AUTO-285`)
-  - Owner: `tod`; status: `ready_for_manual_post`; category: `manual_distribution`
-  - Evidence: FP-AUTO-285 is packaged for manual distribution.
-  - Next step: Post manually, then log the public URL so admin status can stop treating the row as pending.
-  - Open: https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars-youtube-thumbnail.jpg
-  - Preview/check: `python3 scripts/log_manual_distribution.py --id FP-AUTO-285 --url 'PUBLIC_URL'`
-  - Apply/log after review: `python3 scripts/log_manual_distribution.py --id FP-AUTO-285 --url 'PUBLIC_URL' --apply --refresh-admin`
-  - Guardrail: Manual posting happens outside this repo; only log the URL after the post is live.
 - **[low] Fill priority 2 metrics: Recent discovery and traffic** (`metrics-priority-2`)
   - Owner: `tod`; status: `needs_values`; category: `manual_metrics`
   - Evidence: 4 pending field(s): facebook.reach_7d, instagram.profile_visits_7d, tiktok.profile_views_7d, x.impressions_7d.

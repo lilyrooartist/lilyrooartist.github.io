@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-28T00:52:27.297655Z",
+  "generated_at": "2026-06-29T15:09:59.934560Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -10,48 +10,26 @@
   },
   "summary": {
     "review_ready_manual_count": 0,
-    "postable_now_count": 4,
-    "public_url_log_needed_count": 4,
-    "waiting_public_url_count": 4,
-    "pending_result_field_count": 5,
+    "postable_now_count": 0,
+    "public_url_log_needed_count": 0,
+    "waiting_public_url_count": 0,
+    "pending_result_field_count": 29,
     "winner_ready_candidate_count": 1,
     "winner_count_target": 3,
-    "blocked_platform_count": 4,
-    "approved_backlog_count": 2,
-    "blocked_backlog_count": 2,
-    "next_publish_action": "Post manual YouTube Community cards, copy real public URLs, then log them."
+    "blocked_platform_count": 5,
+    "approved_backlog_count": 23,
+    "blocked_backlog_count": 5,
+    "next_publish_action": "Collect experiment results when public URLs and measurement values are available."
   },
   "manual_review_rows": [],
   "blocked_platform_rows": [
     {
-      "post_id": "FP-AUTO-258",
+      "post_id": "FP-AUTO-272",
       "platform": "Instagram",
-      "reason": "max_attempts_exceeded",
-      "status": "failed",
+      "reason": "instagram_business_account_unresolved",
+      "status": "blocked",
       "repair_action": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
-      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-258",
-      "blocked_apply_reasons": [
-        "local_secret_source_missing:IG_BUSINESS_ACCOUNT_ID"
-      ]
-    },
-    {
-      "post_id": "FP-AUTO-263",
-      "platform": "Instagram",
-      "reason": "max_attempts_exceeded",
-      "status": "failed",
-      "repair_action": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
-      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263",
-      "blocked_apply_reasons": [
-        "local_secret_source_missing:IG_BUSINESS_ACCOUNT_ID"
-      ]
-    },
-    {
-      "post_id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
-      "platform": "Instagram",
-      "reason": "max_attempts_exceeded",
-      "status": "needs_fix",
-      "repair_action": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
-      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+      "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
       "blocked_apply_reasons": [
         "local_secret_source_missing:IG_BUSINESS_ACCOUNT_ID"
       ]
@@ -59,60 +37,41 @@
     {
       "post_id": "FP-AUTO-265",
       "platform": "Facebook",
-      "reason": "",
-      "status": "needs_fix",
+      "reason": "max_attempts_exceeded",
+      "status": "failed",
       "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
-      "preview_command": "python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run",
+      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-265",
+      "blocked_apply_reasons": []
+    },
+    {
+      "post_id": "FP-AUTO-268",
+      "platform": "Facebook",
+      "reason": "max_attempts_exceeded",
+      "status": "failed",
+      "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
+      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-268",
+      "blocked_apply_reasons": []
+    },
+    {
+      "post_id": "FP-AUTO-273",
+      "platform": "Facebook",
+      "reason": "max_attempts_exceeded",
+      "status": "failed",
+      "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
+      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-273",
+      "blocked_apply_reasons": []
+    },
+    {
+      "post_id": "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
+      "platform": "YouTube",
+      "reason": "max_attempts_exceeded",
+      "status": "failed",
+      "repair_action": "Review platform credentials/readiness, then rerun the social execution capture.",
+      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
       "blocked_apply_reasons": []
     }
   ],
   "steps": [
-    {
-      "id": "review_manual_youtube_community",
-      "status": "clear",
-      "post_ids": [],
-      "preview_command": "",
-      "apply_after_review_command": "",
-      "guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate.",
-      "completion_evidence": "data/manual_distribution_packet.json should move rows from waiting_for_review toward postable manual distribution."
-    },
-    {
-      "id": "queue_approved_manual_rows",
-      "status": "waiting_for_approval",
-      "post_ids": [],
-      "preview_command": "",
-      "apply_after_review_command": "",
-      "guardrail": "Apply only after the matching promo plan rows have approved=yes.",
-      "completion_evidence": "data/scheduled_posts.csv contains the approved manual YouTube Community row ids."
-    },
-    {
-      "id": "post_manual_youtube_community",
-      "status": "postable_now",
-      "post_ids": [
-        "FP-AUTO-270",
-        "FP-AUTO-275",
-        "FP-AUTO-280",
-        "FP-AUTO-285"
-      ],
-      "surface": "YouTube Studio Community",
-      "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
-      "guardrail": "Post manually using the reviewed copy and local asset evidence; do not log placeholder URLs.",
-      "completion_evidence": "A real public YouTube Community URL exists for each posted row."
-    },
-    {
-      "id": "log_public_urls",
-      "status": "waiting_for_manual_post",
-      "post_ids": [
-        "FP-AUTO-270",
-        "FP-AUTO-275",
-        "FP-AUTO-280",
-        "FP-AUTO-285"
-      ],
-      "preview_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv",
-      "apply_after_review_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --apply --refresh-admin",
-      "guardrail": "Every CSV row must contain a real public_url before apply.",
-      "completion_evidence": "admin/content/Published_Log.csv contains real public URLs for the manual community rows."
-    },
     {
       "id": "collect_results",
       "status": "waiting_for_measurement_window",

@@ -219,7 +219,11 @@ def build_payload(*, apply: bool, timeout: int) -> dict:
             "next_action": (
                 "Review matches, then run the apply command to log public URLs."
                 if matches and not apply
-                else "Post the manual YouTube Community cards, then rerun this reconciliation."
+                else (
+                    "No manual YouTube Community rows are in the active plan."
+                    if not waiting
+                    else "Manual YouTube Community posting is removed from the active plan; remove or convert the waiting rows instead of posting them manually."
+                )
             ),
         },
         "matches": matches,

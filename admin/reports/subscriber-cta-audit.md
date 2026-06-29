@@ -1,9 +1,9 @@
 # Solicitation Copy Audit - Lily Roo
 
-Generated: 2026-06-29T12:35:10.259086Z
+Generated: 2026-06-29T15:09:58.632677Z
 
 ## Summary
-- Draft posts: **1**
+- Draft posts: **0**
 - Selected solicitation-style CTAs: **0**
 - Non-soliciting swaps available: **0**
 - Ready-after-approval rewrites: **0**

@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-06-28T00:52:27.413714Z",
+  "generated_at": "2026-06-29T15:09:59.630277Z",
   "safe_mode": true,
   "summary": {
-    "step_count": 5,
-    "ready_for_human_review_count": 0,
-    "blocked_or_warning_count": 4,
-    "total_projected_resolution_units": 9,
-    "current_step_id": "unlock-tiktok-platform-repair",
-    "current_gate_state": "blocked_until_input",
+    "step_count": 4,
+    "ready_for_human_review_count": 1,
+    "blocked_or_warning_count": 2,
+    "total_projected_resolution_units": 30,
+    "current_step_id": "unlock-checked-scheduled-approval",
+    "current_gate_state": "ready_for_human_review",
     "open_blocker_count": 9
   },
   "operator_contract": {
@@ -19,17 +19,17 @@
     "rule": "Run preview commands first; run apply commands only after the named human, platform, URL, secret, or metric input is complete."
   },
   "current_next_actions": [
-    "Next operational action: Fix Instagram executor — python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-258",
-    "First handoff step: Fill and import manual metric worksheet — python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
+    "Next operational action: Preview checked scheduled approval batch — python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+    "First handoff step: Review checked approval batch — python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
     "30-day growth goal: Publish or approve the next platform-native rows, then refresh manual/public metrics to rank formats by results.",
-    "Current unlock gate: Repair TikTok executor (blocked_until_input); 0 ready, 4 blocked/warning; preview python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN; see data/promo_unlock_sequence.json.",
-    "Review handoff preview health: 3 missing input, 1 warning; see data/human_handoff_resolution_preview.json.",
+    "Current unlock gate: Approve checked scheduled rows (ready_for_human_review); 1 ready, 2 blocked/warning; preview python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run; see data/promo_unlock_sequence.json.",
+    "Review handoff preview health: 1 preview-clean, 3 missing input, 1 warning; see data/human_handoff_resolution_preview.json.",
     "Refresh manual metrics: 6 worksheet row(s) still need new_value entries (blocked_until_new_values_filled); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values.",
-    "Collect experiment results: 5 post-result field(s) need new_value plus evidence_note; use admin/reports/experiment-result-clipboard.md; first priority: measure FP-AUTO-260 on Facebook. Direct preview template: python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run. Direct apply template after review: python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin. Then preview import with python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run after filling data/experiment_result_entry_wide_template.csv.",
-    "Re-check checked-pending store links: 7 music site snapshot(s) still have no public URL; next recommended re-check after 2026-06-24T08:58:36.482600+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 then.",
-    "Refresh automation coverage: latest scheduled run has not covered 5e714f2c; dispatch https://github.com/lilyrooartist/lilyrooartist.github.io/actions/workflows/promo-admin-refresh.yml or wait for the next scheduled run.",
-    "Preview approved backlog reschedule: python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-25T10:00:00+08:00' --spacing-hours 24",
-    "5 approved unpublished auto posts are past their scheduled time; repair executor/platform blockers or reschedule them.",
+    "Collect experiment results: 29 post-result field(s) need new_value plus evidence_note; use admin/reports/experiment-result-clipboard.md; first priority: measure FP-AUTO-260 on Facebook. Direct preview template: python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run. Direct apply template after review: python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin. Then preview import with python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run after filling data/experiment_result_entry_wide_template.csv.",
+    "Re-check checked-pending store links: 7 music site snapshot(s) still have no public URL; next recommended re-check after 2026-06-30T15:09:48.795544+00:00. Run python3 scripts/verify_pending_store_links.py --step-timeout-seconds 25 --out data/store_verification_run.json --snapshot-root data/store-verification --refresh-admin then.",
+    "Repair promo admin refresh workflow: Open the latest promo admin refresh workflow run and fix the failure result.",
+    "Preview clear approved backlog row: python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24",
+    "23 approved unpublished auto posts are past their scheduled time; repair executor/platform blockers or reschedule them.",
     "1 executor records are blocked by approval."
   ],
   "steps": [
@@ -38,17 +38,54 @@
       "id": "unlock-checked-scheduled-approval",
       "phase": "Approve checked scheduled rows",
       "owner": "tod",
-      "gate_state": "blocked",
-      "reason": "Blocked by: FP-AUTO-259.",
-      "blockers_resolved": 0,
-      "blocked_by": [
-        "FP-AUTO-259"
-      ],
+      "gate_state": "ready_for_human_review",
+      "reason": "Preview ran cleanly; this gate is waiting for human review or external completion.",
+      "blockers_resolved": 1,
+      "blocked_by": [],
       "unlocks": [
-        "Instagram executor row can become publish-eligible after approval.",
-        "One scheduled YouTube Community row can move into manual distribution after approval."
+        "Instagram executor row can become publish-eligible after approval."
       ],
       "source_path": "data/scheduled_approval_packet.json",
+      "preview_status": "preview_ok",
+      "preview_task_ids": [
+        "approve-checked-scheduled-batch"
+      ],
+      "input_needed": "human_review_decision",
+      "completion_evidence": "data/scheduled_approval_packet.json should show fewer approval blockers, and data/social_scheduler_dry_run.json should no longer block the approved Instagram row on not_approved.",
+      "guardrail": "Use --checked-batch so only rows that passed review checks are approved.",
+      "commands": [
+        {
+          "step": "preview",
+          "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+          "safe_to_run": true,
+          "status": "preview_ok",
+          "returncodes": [
+            0
+          ]
+        },
+        {
+          "step": "apply_after_review",
+          "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+          "safe_to_run": false,
+          "requires": "Human review, required input, or external platform repair must be complete first."
+        }
+      ],
+      "next_after_apply": ""
+    },
+    {
+      "order": 2,
+      "id": "unlock-tiktok-platform-repair",
+      "phase": "Repair TikTok executor",
+      "owner": "tod",
+      "gate_state": "ready",
+      "reason": "ready",
+      "blockers_resolved": 0,
+      "blocked_by": [],
+      "unlocks": [
+        "Held TikTok approval rows can pass platform-readiness review.",
+        "Approved TikTok backlog can become safe to reschedule into upload-draft creation."
+      ],
+      "source_path": "data/platform_repair_status.json",
       "preview_status": "",
       "preview_task_ids": [],
       "input_needed": "",
@@ -58,78 +95,19 @@
       "next_after_apply": ""
     },
     {
-      "order": 2,
-      "id": "unlock-manual-distribution",
-      "phase": "Review and post manual YouTube Community rows",
-      "owner": "tod",
-      "gate_state": "clear",
-      "reason": "No action is needed for this gate.",
-      "blockers_resolved": 0,
-      "blocked_by": [
-        "FP-PLAN-TWELVE-DOLLARS-TIKTOK"
-      ],
-      "unlocks": [
-        "Manual YouTube Community promotion can publish without waiting for broken auto executors.",
-        "Published_Log.csv can be updated after public URLs exist."
-      ],
-      "source_path": "data/manual_distribution_packet.json",
-      "preview_status": "",
-      "preview_task_ids": [],
-      "input_needed": "",
-      "completion_evidence": "",
-      "guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review.",
-      "commands": [],
-      "next_after_apply": ""
-    },
-    {
       "order": 3,
-      "id": "unlock-tiktok-platform-repair",
-      "phase": "Repair TikTok executor",
-      "owner": "tod",
-      "gate_state": "blocked_until_input",
-      "reason": "local_secret_presence_and_public_posting_approval",
-      "blockers_resolved": 1,
-      "blocked_by": [
-        "TIKTOK_CLIENT_KEY",
-        "TIKTOK_CLIENT_SECRET",
-        "TIKTOK_REFRESH_TOKEN"
-      ],
-      "unlocks": [
-        "Held TikTok approval rows can pass platform-readiness review.",
-        "Approved TikTok backlog can become safe to reschedule into upload-draft creation."
-      ],
-      "source_path": "data/platform_repair_status.json",
-      "preview_status": "input_missing",
-      "preview_task_ids": [
-        "platform-setup-FP-AUTO-264"
-      ],
-      "input_needed": "local_secret_presence_and_public_posting_approval",
-      "completion_evidence": "data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_upload_drafts before TikTok upload-mode backlog work is allowed.",
-      "guardrail": "Run the TikTok preflight before pushing secrets; push upload-mode secrets only after local OAuth setup is complete. Keep direct public posting blocked until approval is confirmed.",
-      "commands": [
-        {
-          "step": "preview",
-          "command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
-          "safe_to_run": true,
-          "status": "input_missing",
-          "returncodes": [
-            1
-          ]
-        }
-      ],
-      "next_after_apply": ""
-    },
-    {
-      "order": 4,
       "id": "unlock-backlog-reschedule",
       "phase": "Reschedule approved past-due backlog",
       "owner": "external_platform",
       "gate_state": "preview_ready_with_blocker_warning",
       "reason": "Preview ran, but the output still names a known blocker.",
-      "blockers_resolved": 2,
+      "blockers_resolved": 23,
       "blocked_by": [
-        "FP-AUTO-258",
-        "FP-AUTO-264"
+        "FP-AUTO-268",
+        "FP-AUTO-265",
+        "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
+        "FP-AUTO-272",
+        "FP-AUTO-273"
       ],
       "unlocks": [
         "Approved past-due queue rows get a fresh schedule after executor blockers clear."
@@ -145,7 +123,7 @@
       "commands": [
         {
           "step": "preview",
-          "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+08:00' --spacing-hours 24",
+          "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24",
           "safe_to_run": true,
           "status": "preview_ok_with_warning",
           "returncodes": [
@@ -156,7 +134,7 @@
       "next_after_apply": ""
     },
     {
-      "order": 5,
+      "order": 4,
       "id": "unlock-manual-metrics",
       "phase": "Fill manual metric worksheet",
       "owner": "tod",

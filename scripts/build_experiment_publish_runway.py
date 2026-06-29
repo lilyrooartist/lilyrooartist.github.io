@@ -87,43 +87,47 @@ def build_packet() -> dict:
         next_publish_action = "Log public URLs and collect experiment results."
     else:
         next_publish_action = "Collect experiment results when public URLs and measurement values are available."
-    steps = [
-        {
-            "id": "review_manual_youtube_community",
-            "status": "ready_for_review" if review_ids else "clear",
-            "post_ids": review_ids,
-            "preview_command": manual_docket.get("preview_command") or command_for_ids("scripts/approve_promo_queue_plan.py", review_ids, "--dry-run"),
-            "apply_after_review_command": manual_docket.get("apply_command") or command_for_ids("scripts/approve_promo_queue_plan.py", review_ids, "--refresh-admin"),
-            "guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate.",
-            "completion_evidence": "data/manual_distribution_packet.json should move rows from waiting_for_review toward postable manual distribution.",
-        },
-        {
-            "id": "queue_approved_manual_rows",
-            "status": "ready_after_approval" if review_ids else "waiting_for_approval",
-            "post_ids": review_ids,
-            "preview_command": command_for_ids("scripts/apply_promo_queue_plan.py", review_ids, ""),
-            "apply_after_review_command": command_for_ids("scripts/apply_promo_queue_plan.py", review_ids, "--apply --refresh-admin"),
-            "guardrail": "Apply only after the matching promo plan rows have approved=yes.",
-            "completion_evidence": "data/scheduled_posts.csv contains the approved manual YouTube Community row ids.",
-        },
-        {
-            "id": "post_manual_youtube_community",
-            "status": "postable_now" if postable_ids else "waiting_for_review_or_queue",
-            "post_ids": postable_ids or review_ids,
-            "surface": "YouTube Studio Community",
-            "public_community_url": (manual.get("summary") or {}).get("public_community_url") or "",
-            "guardrail": "Post manually using the reviewed copy and local asset evidence; do not log placeholder URLs.",
-            "completion_evidence": "A real public YouTube Community URL exists for each posted row.",
-        },
-        {
-            "id": "log_public_urls",
-            "status": "waiting_for_manual_post" if waiting_public_url_count else ("ready_after_manual_post" if logging_ids else "waiting_for_public_urls"),
-            "post_ids": logging_ids or review_ids,
-            "preview_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv",
-            "apply_after_review_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --apply --refresh-admin",
-            "guardrail": "Every CSV row must contain a real public_url before apply.",
-            "completion_evidence": "admin/content/Published_Log.csv contains real public URLs for the manual community rows.",
-        },
+    steps = []
+    if review_ids or postable_ids or logging_ids:
+        steps.extend([
+            {
+                "id": "review_manual_youtube_community",
+                "status": "ready_for_review" if review_ids else "clear",
+                "post_ids": review_ids,
+                "preview_command": manual_docket.get("preview_command") or command_for_ids("scripts/approve_promo_queue_plan.py", review_ids, "--dry-run"),
+                "apply_after_review_command": manual_docket.get("apply_command") or command_for_ids("scripts/approve_promo_queue_plan.py", review_ids, "--refresh-admin"),
+                "guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate.",
+                "completion_evidence": "data/manual_distribution_packet.json should move rows from waiting_for_review toward postable manual distribution.",
+            },
+            {
+                "id": "queue_approved_manual_rows",
+                "status": "ready_after_approval" if review_ids else "waiting_for_approval",
+                "post_ids": review_ids,
+                "preview_command": command_for_ids("scripts/apply_promo_queue_plan.py", review_ids, ""),
+                "apply_after_review_command": command_for_ids("scripts/apply_promo_queue_plan.py", review_ids, "--apply --refresh-admin"),
+                "guardrail": "Apply only after the matching promo plan rows have approved=yes.",
+                "completion_evidence": "data/scheduled_posts.csv contains the approved manual YouTube Community row ids.",
+            },
+            {
+                "id": "post_manual_youtube_community",
+                "status": "postable_now" if postable_ids else "waiting_for_review_or_queue",
+                "post_ids": postable_ids or review_ids,
+                "surface": "YouTube Studio Community",
+                "public_community_url": (manual.get("summary") or {}).get("public_community_url") or "",
+                "guardrail": "Post manually using the reviewed copy and local asset evidence; do not log placeholder URLs.",
+                "completion_evidence": "A real public YouTube Community URL exists for each posted row.",
+            },
+            {
+                "id": "log_public_urls",
+                "status": "waiting_for_manual_post" if waiting_public_url_count else ("ready_after_manual_post" if logging_ids else "waiting_for_public_urls"),
+                "post_ids": logging_ids or review_ids,
+                "preview_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv",
+                "apply_after_review_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --apply --refresh-admin",
+                "guardrail": "Every CSV row must contain a real public_url before apply.",
+                "completion_evidence": "admin/content/Published_Log.csv contains real public URLs for the manual community rows.",
+            },
+        ])
+    steps.append(
         {
             "id": "collect_results",
             "status": "waiting_for_measurement_window",
@@ -133,7 +137,7 @@ def build_packet() -> dict:
             "guardrail": "Fill only visible platform analytics values with evidence notes.",
             "completion_evidence": "data/promo_engine_status.json shows fewer pending result fields and more measured posts per candidate format.",
         },
-    ]
+    )
     packet = {
         "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "safe_mode": True,

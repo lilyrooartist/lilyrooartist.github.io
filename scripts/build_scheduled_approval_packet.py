@@ -162,6 +162,12 @@ def docket_row(row: dict) -> dict:
 
 
 def approval_docket(checked_rows: list[dict], blocked_rows: list[dict], summary: dict) -> dict:
+    guardrails = [
+        "Review paste text, destination links, media, and platform readiness before applying the checked batch.",
+        "Use --checked-batch so held rows with failed checks stay excluded.",
+    ]
+    if any(row.get("manual_dispatch") for row in checked_rows + blocked_rows):
+        guardrails.append("Manual-dispatch rows still need manual posting and public URL logging after approval.")
     return {
         "status": "ready_for_review" if checked_rows else "blocked",
         "ready_count": len(checked_rows),
@@ -172,11 +178,7 @@ def approval_docket(checked_rows: list[dict], blocked_rows: list[dict], summary:
         "checked_batch_apply_command": summary.get("checked_batch_apply_command") or "",
         "checked_batch_dry_run_preview": summary.get("checked_batch_dry_run_preview") or {},
         "checked_batch_effect": summary.get("checked_batch_effect") or {},
-        "guardrails": [
-            "Review paste text, destination links, media, and platform readiness before applying the checked batch.",
-            "Use --checked-batch so held rows with failed checks stay excluded.",
-            "Manual-dispatch rows still need manual posting and public URL logging after approval.",
-        ],
+        "guardrails": guardrails,
     }
 
 
@@ -227,6 +229,20 @@ def approval_apply_manifest(checked_rows: list[dict], blocked_rows: list[dict], 
     ready_ids = [row.get("id") for row in checked_rows if row.get("id")]
     held_ids = [row.get("id") for row in blocked_rows if row.get("id")]
     expected_effect = summary.get("checked_batch_effect") or {}
+    has_manual_dispatch = any(row.get("manual_dispatch") for row in checked_rows + blocked_rows)
+    post_apply_evidence = [
+        "data/scheduled_posts.csv shows ready_ids changed from approved=no to approved=yes.",
+        "data/scheduled_approval_packet.json reports fewer approval blockers after refresh.",
+        "data/social_scheduler_dry_run.json no longer blocks the approved row on not_approved.",
+    ]
+    guardrails = [
+        "This manifest does not approve, publish, post, or log anything.",
+        "Do not use the full batch command while held_ids are present.",
+        "Do not approve held rows until failed review checks clear.",
+    ]
+    if has_manual_dispatch:
+        post_apply_evidence.append("Manual-dispatch ready rows remain in the manual posting/logging workflow until a real public URL exists.")
+        guardrails.append("Manual dispatch remains separate from approval.")
     return {
         "status": "ready_for_human_review" if ready_ids else "blocked",
         "ready_ids": ready_ids,
@@ -276,18 +292,8 @@ def approval_apply_manifest(checked_rows: list[dict], blocked_rows: list[dict], 
             "Confirm held_ids are excluded from the checked batch.",
             "Apply only with --checked-batch after human review passes.",
         ],
-        "post_apply_evidence": [
-            "data/scheduled_posts.csv shows ready_ids changed from approved=no to approved=yes.",
-            "data/scheduled_approval_packet.json reports fewer approval blockers after refresh.",
-            "data/social_scheduler_dry_run.json no longer blocks the approved Instagram row on not_approved.",
-            "Manual-dispatch ready rows remain in the manual posting/logging workflow until a real public URL exists.",
-        ],
-        "guardrails": [
-            "This manifest does not approve, publish, post, or log anything.",
-            "Do not use the full batch command while held_ids are present.",
-            "Do not approve held rows until failed review checks clear.",
-            "Manual dispatch remains separate from approval.",
-        ],
+        "post_apply_evidence": post_apply_evidence,
+        "guardrails": guardrails,
     }
 
 
@@ -387,16 +393,17 @@ def approval_review_runbook(checked_rows: list[dict], blocked_rows: list[dict], 
             "evidence": "Admin should show fewer approval blockers and fresh execution state.",
             "applies_to_ids": ready_ids,
         },
-        {
+    ]
+    if manual_rows:
+        steps.append({
             "order": 5,
             "title": "Post and log manual rows",
             "owner": "tod",
-            "status": "required_after_apply" if manual_rows else "not_applicable",
+            "status": "required_after_apply",
             "command": "python3 scripts/log_manual_distribution.py --dry-run",
-            "evidence": "Manual YouTube Community rows need real public post URLs before logging.",
+            "evidence": "Manual YouTube Community rows need real public URLs before logging.",
             "applies_to_ids": [row.get("id") for row in manual_rows if row.get("id")],
-        },
-    ]
+        })
     return {
         "status": "ready_for_review" if ready_ids else "blocked",
         "ready_ids": ready_ids,

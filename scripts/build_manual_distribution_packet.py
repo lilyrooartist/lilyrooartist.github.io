@@ -776,10 +776,15 @@ def build_markdown(payload: dict) -> str:
         "",
         "## Guardrails",
         "- This packet does not approve, schedule, publish, or post anything.",
-        "- Use it as a human posting checklist for manual YouTube Community distribution.",
-        "- Log the public post URL after manual posting so metrics and admin state stay accurate.",
-        "",
     ])
+    if summary.get("manual_ready_count"):
+        lines.extend([
+            "- Use it as a human posting checklist for manual YouTube Community distribution.",
+            "- Log the public post URL after manual posting so metrics and admin state stay accurate.",
+        ])
+    else:
+        lines.append("- No manual posting checklist is active; manual-only rows have been removed from the plan.")
+    lines.append("")
     return "\n".join(lines)
 
 

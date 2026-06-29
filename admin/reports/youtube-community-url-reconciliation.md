@@ -1,6 +1,6 @@
 # YouTube Community URL Reconciliation - Lily Roo
 
-Generated: 2026-06-23T08:58:45.108204Z
+Generated: 2026-06-29T15:09:59.101453Z
 
 ## Summary
 - Status: **waiting_for_public_posts**
@@ -8,7 +8,7 @@ Generated: 2026-06-23T08:58:45.108204Z
 - Matches ready: **0**
 - Waiting: **0**
 - Apply command: `not available`
-- Next action: Post the manual YouTube Community cards, then rerun this reconciliation.
+- Next action: No manual YouTube Community rows are in the active plan.
 
 ## Matches
 - No confident public URL matches yet.

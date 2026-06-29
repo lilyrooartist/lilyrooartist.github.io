@@ -49,7 +49,7 @@ RESCHEDULE_SCRIPT = ROOT / "scripts" / "reschedule_scheduled_posts.py"
 OUT = ROOT / "data" / "promo_engine_status.json"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
 
-PROMO_PLATFORMS = ["X", "Instagram", "TikTok", "Facebook", "YouTube Community"]
+PROMO_PLATFORMS = ["X", "Instagram", "TikTok", "Facebook", "YouTube"]
 YOUTUBE_MONETIZATION_SUBSCRIBER_TARGET = 1000
 GROWTH_GOAL_START_DATE = "2026-06-22"
 GROWTH_GOAL_DAYS = 30

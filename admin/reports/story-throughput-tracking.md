@@ -1,12 +1,12 @@
 # Story Throughput Tracking - Lily Roo
 
-Generated: 2026-06-23T09:36:26.140535Z
+Generated: 2026-06-29T15:09:59.847444Z
 
 ## Summary
 - Story posts scheduled: **6**
-- Queued future: **6**
-- Past due without public URL: **0**
-- Logged, waiting results: **0**
+- Queued future: **3**
+- Past due without public URL: **1**
+- Logged, waiting results: **2**
 - Measured: **0**
 - Platforms: **Facebook, X**
 
@@ -17,17 +17,19 @@ Generated: 2026-06-23T09:36:26.140535Z
 
 ## Rows
 - **FP-STORY-TWELVE-DOLLARS-X-ARCHIVE-CTA** - X / Twelve Dollars
-  - Status: `queued_future`; scheduled: `2026-06-26T10:15:00-04:00`
-  - First measurement due: `2026-06-27T14:15:00+00:00`
-  - Next: Wait for the scheduler to publish the row, then export social executions and log the public URL.
+  - Status: `logged_waiting_results`; scheduled: `2026-06-26T10:15:00-04:00`
+  - Public URL: https://x.com/i/web/status/2070511391048405318
+  - First measurement due: `2026-06-30T00:00:00+00:00`
+  - Next: Collect first result metrics after the measurement window and import them with evidence notes.
 - **FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA** - Facebook / Twelve Dollars
-  - Status: `queued_future`; scheduled: `2026-06-27T11:20:00-04:00`
+  - Status: `past_due_unlogged`; scheduled: `2026-06-27T11:20:00-04:00`
   - First measurement due: `2026-06-28T15:20:00+00:00`
-  - Next: Wait for the scheduler to publish the row, then export social executions and log the public URL.
+  - Next: Run social execution capture/export to confirm whether the post published and log the public URL.
 - **FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA** - X / Analog Myth
-  - Status: `queued_future`; scheduled: `2026-06-28T10:15:00-04:00`
-  - First measurement due: `2026-06-29T14:15:00+00:00`
-  - Next: Wait for the scheduler to publish the row, then export social executions and log the public URL.
+  - Status: `logged_waiting_results`; scheduled: `2026-06-28T10:15:00-04:00`
+  - Public URL: https://x.com/i/web/status/2071236124497080380
+  - First measurement due: `2026-06-30T00:00:00+00:00`
+  - Next: Collect first result metrics after the measurement window and import them with evidence notes.
 - **FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA** - Facebook / Analog Myth
   - Status: `queued_future`; scheduled: `2026-06-29T11:20:00-04:00`
   - First measurement due: `2026-06-30T15:20:00+00:00`

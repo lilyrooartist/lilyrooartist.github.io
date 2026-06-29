@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-23T05:31:40.060117-04:00",
+  "generated_at": "2026-06-29T11:09:57.441007-04:00",
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
     "release_status": "data/distrokid_release_status.json"
@@ -9,99 +9,38 @@
   "apply_note": "Mark reviewed rows approved=yes, then apply approved rows into the live schedule.",
   "apply_command": "python3 scripts/apply_promo_queue_plan.py --apply --refresh-admin",
   "approval_commands": {
-    "all_review": "python3 scripts/approve_promo_queue_plan.py --all --refresh-admin",
-    "by_release": {
-      "Twelve Dollars": "python3 scripts/approve_promo_queue_plan.py --release \"Twelve Dollars\" --refresh-admin"
-    },
-    "by_platform": {
-      "TikTok": "python3 scripts/approve_promo_queue_plan.py --platform \"TikTok\" --refresh-admin"
-    }
+    "all_review": "",
+    "by_release": {},
+    "by_platform": {}
   },
   "apply_commands": {
     "all_approved": "python3 scripts/apply_promo_queue_plan.py --apply --refresh-admin",
-    "by_release": {
-      "Twelve Dollars": "python3 scripts/apply_promo_queue_plan.py --apply --release \"Twelve Dollars\" --refresh-admin"
-    },
-    "by_platform": {
-      "TikTok": "python3 scripts/apply_promo_queue_plan.py --apply --platform \"TikTok\" --refresh-admin"
-    }
+    "by_release": {},
+    "by_platform": {}
   },
   "summary": {
-    "draft_posts": 1,
+    "draft_posts": 0,
     "approved_posts": 0,
-    "review_posts": 1,
-    "auto_posts": 1,
+    "review_posts": 0,
+    "auto_posts": 0,
     "manual_posts": 0,
-    "releases": {
-      "Twelve Dollars": {
-        "draft_posts": 1,
-        "approved_posts": 0,
-        "review_posts": 1,
-        "platforms": [
-          "TikTok"
-        ]
-      }
-    },
-    "platforms": {
-      "TikTok": {
-        "draft_posts": 1,
-        "approved_posts": 0,
-        "review_posts": 1
-      }
-    },
-    "selected_solicitation_posts": 0
+    "selected_solicitation_posts": 0,
+    "releases": {},
+    "platforms": {}
   },
   "apply_preview": {
     "ready_to_apply_posts": 0,
-    "review_posts": 1,
+    "review_posts": 0,
     "scheduled_duplicate_posts": 0,
     "ready_ids": [],
     "scheduled_duplicate_ids": []
   },
   "readiness_audit": {
     "source": "data/executor_readiness_snapshot.json",
-    "updated_at": "2026-06-23T08:58:42.524424Z",
+    "updated_at": "2026-06-29T15:09:53.347030Z",
     "ok": true,
-    "counts": {
-      "blocked": 1
-    },
-    "rows": [
-      {
-        "id": "FP-PLAN-TWELVE-DOLLARS-TIKTOK",
-        "platform": "TikTok",
-        "execution_mode": "auto",
-        "approved": "no",
-        "state": "blocked",
-        "message": "Executor credentials or platform setup are not ready."
-      }
-    ]
+    "counts": {},
+    "rows": []
   },
-  "posts": [
-    {
-      "id": "FP-PLAN-TWELVE-DOLLARS-TIKTOK",
-      "scheduled_at": "2026-06-24T20:40:00-04:00",
-      "platform": "TikTok",
-      "song": "Twelve Dollars",
-      "imagery": "Twelve Dollars promo coverage",
-      "imagery_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars.jpg",
-      "clip_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/video/04-twelve-dollars-youtube-remaster.mp4",
-      "text": "Twelve Dollars is what happens when the joke walks on stage wearing impossible shoes. Full album playlist is live.",
-      "drafts": [
-        "Twelve Dollars is what happens when the joke walks on stage wearing impossible shoes. Full album playlist is live.",
-        "A small amount of money, a large amount of stage light. Full remastered playlist is live.",
-        "Twelve Dollars is what happens when the joke walks on stage wearing impossible shoes. Full album playlist is live."
-      ],
-      "reply_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-      "selected_cta_strength": "soft_listen",
-      "selected_copy_strategy": "song_first_archive_copy",
-      "x_media_key": "",
-      "media_key": "twelve-dollars-video",
-      "approved": "no",
-      "execution_mode": "auto",
-      "post_type": "video",
-      "desired_privacy": "PUBLIC_TO_EVERYONE",
-      "reason": "Promo health flagged missing TikTok coverage for Twelve Dollars.",
-      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --refresh-admin"
-    }
-  ]
+  "posts": []
 }

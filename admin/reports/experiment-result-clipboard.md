@@ -1,14 +1,14 @@
 # Experiment Result Clipboard - Lily Roo
 
-Generated: 2026-06-28T00:52:27.336519Z
+Generated: 2026-06-29T15:09:59.819672Z
 
 ## Summary
 - Status: **needs_values**
-- Metric cards: **3**
-- Missing public URLs: **15**
+- Metric cards: **7**
+- Missing public URLs: **19**
 - Measurement priorities: **12**
-- Post-log handoff rows: **4**
-- Pending result fields: **5**
+- Post-log handoff rows: **0**
+- Pending result fields: **29**
 - Ready to import: **0**
 - Wide rows ready to import: **0**
 - Entry CSV: `data/experiment_result_entry_template.csv`
@@ -28,7 +28,7 @@ Generated: 2026-06-28T00:52:27.336519Z
 - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
 - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
 - Wide import preview: `python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run`
-- Why: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 3 logged post(s), 8 missing URL(s) in this format.
+- Why: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 7 logged post(s), 9 missing URL(s) in this format.
 - Guardrail: Do not guess metrics; leave unknown values blank and never apply without an evidence_note.
 - Evidence sources:
   - Logged public post: https://www.facebook.com/903693509504290_122118326547249470 - Open the public post to confirm the URL and visible engagement before entering metrics.
@@ -103,29 +103,129 @@ Generated: 2026-06-28T00:52:27.336519Z
   - Enter values in the wide entry CSV row for this post_id and source_row.
   - Add an evidence_note with source and collection date before import preview.
   - `subs_delta`: Open X analytics for https://x.com/i/web/status/2063600780834136468 and record subs_delta.
+### X - Brain Rot (`FP-AUTO-266`)
+- Format: Release-art image + story hook
+- URL: https://x.com/i/web/status/2071039677357003221
+- Published: 2026-06-29; Published_Log row: `21`
+- Pending fields: `views, likes, comments, shares, saves, subs_delta`
+- Wide-ready fields: `none`
+- Wide entry instruction: Fill one wide entry CSV row in data/experiment_result_entry_wide_template.csv for this post; keep unknown metrics blank and include one evidence_note.
+- Wide CSV target: post_id `FP-AUTO-266`, source_row `21`, fill `views, likes, comments, shares, saves, subs_delta`.
+- Evidence sources:
+  - Logged public post: https://x.com/i/web/status/2071039677357003221 - Open the public post to confirm the URL and visible engagement before entering metrics.
+  - X Analytics: https://analytics.x.com/ - Use the logged post URL or post ID to find the post and copy visible analytics values.
+- Collection checklist:
+  - Open the logged public post and confirm it matches this post_id.
+  - Open the platform analytics or insights source listed for this card.
+  - Copy only numeric values that are visible in the source.
+  - Enter values in the wide entry CSV row for this post_id and source_row.
+  - Add an evidence_note with source and collection date before import preview.
+  - `views`: Open X analytics for https://x.com/i/web/status/2071039677357003221 and record views.
+  - `likes`: Open X analytics for https://x.com/i/web/status/2071039677357003221 and record likes.
+  - `comments`: Open X analytics for https://x.com/i/web/status/2071039677357003221 and record comments.
+  - `shares`: Open X analytics for https://x.com/i/web/status/2071039677357003221 and record shares.
+  - `saves`: Open X analytics for https://x.com/i/web/status/2071039677357003221 and record saves.
+  - `subs_delta`: Open X analytics for https://x.com/i/web/status/2071039677357003221 and record subs_delta.
+### X - Every Pearl in Carmel (`FP-AUTO-271`)
+- Format: Release-art image + story hook
+- URL: https://x.com/i/web/status/2071402084403118566
+- Published: 2026-06-29; Published_Log row: `19`
+- Pending fields: `views, likes, comments, shares, saves, subs_delta`
+- Wide-ready fields: `none`
+- Wide entry instruction: Fill one wide entry CSV row in data/experiment_result_entry_wide_template.csv for this post; keep unknown metrics blank and include one evidence_note.
+- Wide CSV target: post_id `FP-AUTO-271`, source_row `19`, fill `views, likes, comments, shares, saves, subs_delta`.
+- Evidence sources:
+  - Logged public post: https://x.com/i/web/status/2071402084403118566 - Open the public post to confirm the URL and visible engagement before entering metrics.
+  - X Analytics: https://analytics.x.com/ - Use the logged post URL or post ID to find the post and copy visible analytics values.
+- Collection checklist:
+  - Open the logged public post and confirm it matches this post_id.
+  - Open the platform analytics or insights source listed for this card.
+  - Copy only numeric values that are visible in the source.
+  - Enter values in the wide entry CSV row for this post_id and source_row.
+  - Add an evidence_note with source and collection date before import preview.
+  - `views`: Open X analytics for https://x.com/i/web/status/2071402084403118566 and record views.
+  - `likes`: Open X analytics for https://x.com/i/web/status/2071402084403118566 and record likes.
+  - `comments`: Open X analytics for https://x.com/i/web/status/2071402084403118566 and record comments.
+  - `shares`: Open X analytics for https://x.com/i/web/status/2071402084403118566 and record shares.
+  - `saves`: Open X analytics for https://x.com/i/web/status/2071402084403118566 and record saves.
+  - `subs_delta`: Open X analytics for https://x.com/i/web/status/2071402084403118566 and record subs_delta.
+### X - Twelve Dollars (`FP-PLAN-TWELVE-DOLLARS-X`)
+- Format: Release-art image + story hook
+- URL: https://x.com/i/web/status/2068336870803587325
+- Published: 2026-06-29; Published_Log row: `24`
+- Pending fields: `views, likes, comments, shares, saves, subs_delta`
+- Wide-ready fields: `none`
+- Wide entry instruction: Fill one wide entry CSV row in data/experiment_result_entry_wide_template.csv for this post; keep unknown metrics blank and include one evidence_note.
+- Wide CSV target: post_id `FP-PLAN-TWELVE-DOLLARS-X`, source_row `24`, fill `views, likes, comments, shares, saves, subs_delta`.
+- Evidence sources:
+  - Logged public post: https://x.com/i/web/status/2068336870803587325 - Open the public post to confirm the URL and visible engagement before entering metrics.
+  - X Analytics: https://analytics.x.com/ - Use the logged post URL or post ID to find the post and copy visible analytics values.
+- Collection checklist:
+  - Open the logged public post and confirm it matches this post_id.
+  - Open the platform analytics or insights source listed for this card.
+  - Copy only numeric values that are visible in the source.
+  - Enter values in the wide entry CSV row for this post_id and source_row.
+  - Add an evidence_note with source and collection date before import preview.
+  - `views`: Open X analytics for https://x.com/i/web/status/2068336870803587325 and record views.
+  - `likes`: Open X analytics for https://x.com/i/web/status/2068336870803587325 and record likes.
+  - `comments`: Open X analytics for https://x.com/i/web/status/2068336870803587325 and record comments.
+  - `shares`: Open X analytics for https://x.com/i/web/status/2068336870803587325 and record shares.
+  - `saves`: Open X analytics for https://x.com/i/web/status/2068336870803587325 and record saves.
+  - `subs_delta`: Open X analytics for https://x.com/i/web/status/2068336870803587325 and record subs_delta.
+### X - Analog Myth (`FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK`)
+- Format: Release-art image + story hook
+- URL: https://x.com/i/web/status/2069786481556635841
+- Published: 2026-06-29; Published_Log row: `23`
+- Pending fields: `views, likes, comments, shares, saves, subs_delta`
+- Wide-ready fields: `none`
+- Wide entry instruction: Fill one wide entry CSV row in data/experiment_result_entry_wide_template.csv for this post; keep unknown metrics blank and include one evidence_note.
+- Wide CSV target: post_id `FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK`, source_row `23`, fill `views, likes, comments, shares, saves, subs_delta`.
+- Evidence sources:
+  - Logged public post: https://x.com/i/web/status/2069786481556635841 - Open the public post to confirm the URL and visible engagement before entering metrics.
+  - X Analytics: https://analytics.x.com/ - Use the logged post URL or post ID to find the post and copy visible analytics values.
+- Collection checklist:
+  - Open the logged public post and confirm it matches this post_id.
+  - Open the platform analytics or insights source listed for this card.
+  - Copy only numeric values that are visible in the source.
+  - Enter values in the wide entry CSV row for this post_id and source_row.
+  - Add an evidence_note with source and collection date before import preview.
+  - `views`: Open X analytics for https://x.com/i/web/status/2069786481556635841 and record views.
+  - `likes`: Open X analytics for https://x.com/i/web/status/2069786481556635841 and record likes.
+  - `comments`: Open X analytics for https://x.com/i/web/status/2069786481556635841 and record comments.
+  - `shares`: Open X analytics for https://x.com/i/web/status/2069786481556635841 and record shares.
+  - `saves`: Open X analytics for https://x.com/i/web/status/2069786481556635841 and record saves.
+  - `subs_delta`: Open X analytics for https://x.com/i/web/status/2069786481556635841 and record subs_delta.
 
 ## Measurement Priorities
-- **Collect metrics** `FP-AUTO-260` Facebook / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 3 logged post(s), 8 missing URL(s) in this format.
+- **Collect metrics** `FP-AUTO-260` Facebook / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 7 logged post(s), 9 missing URL(s) in this format.
   - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
   - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
-- **Collect metrics** `FP-AUTO-257` X / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 3 logged post(s), 8 missing URL(s) in this format.
+- **Collect metrics** `FP-AUTO-257` X / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 7 logged post(s), 9 missing URL(s) in this format.
   - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-257 --source-row 16 --subs-delta VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
   - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-257 --source-row 16 --subs-delta VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
-- **Collect metrics** `FP-AUTO-262` X / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 3 logged post(s), 8 missing URL(s) in this format.
+- **Collect metrics** `FP-AUTO-262` X / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 7 logged post(s), 9 missing URL(s) in this format.
   - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-262 --source-row 17 --subs-delta VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
   - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-262 --source-row 17 --subs-delta VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
-- **Await scheduled auto post** `FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA` YouTube / Short video clip + platform-native CTA: Approved auto row is scheduled for 2026-06-28T18:30:00+08:00; wait for the scheduler, then log the public URL and measure it. 0 logged post(s), 4 missing URL(s) in this format.
-- **Log public URL** `FP-PLAN-TWELVE-DOLLARS-FACEBOOK` Facebook / Release-art image + story hook: Scheduled row is not yet logged; confirm publication and log the real public URL before metrics. 3 logged post(s), 8 missing URL(s) in this format.
-- **Log public URL** `FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK` Facebook / Release-art image + story hook: Scheduled row is not yet logged; confirm publication and log the real public URL before metrics. 3 logged post(s), 8 missing URL(s) in this format.
-- **Log public URL** `FP-PLAN-TWELVE-DOLLARS-X` X / Release-art image + story hook: Scheduled row is not yet logged; confirm publication and log the real public URL before metrics. 3 logged post(s), 8 missing URL(s) in this format.
-- **Log public URL** `FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK` X / Release-art image + story hook: Scheduled row is not yet logged; confirm publication and log the real public URL before metrics. 3 logged post(s), 8 missing URL(s) in this format.
-- **Log public URL** `FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA` YouTube / Short video clip + platform-native CTA: Scheduled row is not yet logged; confirm publication and log the real public URL before metrics. 0 logged post(s), 4 missing URL(s) in this format.
+- **Collect metrics** `FP-AUTO-266` X / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 7 logged post(s), 9 missing URL(s) in this format.
+  - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-266 --source-row 21 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
+  - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-266 --source-row 21 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
+- **Collect metrics** `FP-AUTO-271` X / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 7 logged post(s), 9 missing URL(s) in this format.
+  - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-271 --source-row 19 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
+  - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-271 --source-row 19 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
+- **Collect metrics** `FP-PLAN-TWELVE-DOLLARS-X` X / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 7 logged post(s), 9 missing URL(s) in this format.
+  - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-PLAN-TWELVE-DOLLARS-X --source-row 24 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
+  - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-PLAN-TWELVE-DOLLARS-X --source-row 24 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
+- **Collect metrics** `FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK` X / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 7 logged post(s), 9 missing URL(s) in this format.
+  - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --source-row 23 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
+  - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --source-row 23 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
+- **Log public URL** `FP-PLAN-TWELVE-DOLLARS-FACEBOOK` Facebook / Release-art image + story hook: Scheduled row is not yet logged; confirm publication and log the real public URL before metrics. 7 logged post(s), 9 missing URL(s) in this format.
+- **Log public URL** `FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK` Facebook / Release-art image + story hook: Scheduled row is not yet logged; confirm publication and log the real public URL before metrics. 7 logged post(s), 9 missing URL(s) in this format.
+- **Log public URL** `FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA` YouTube / Short video clip + platform-native CTA: Scheduled row is not yet logged; confirm publication and log the real public URL before metrics. 0 logged post(s), 7 missing URL(s) in this format.
 - **Log public URL** `FP-AUTO-261` YouTube / YouTube Community archive/playlist CTA: Scheduled row is not yet logged; confirm publication and log the real public URL before metrics. 0 logged post(s), 3 missing URL(s) in this format.
 - **Log public URL** `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY` YouTube / YouTube Community archive/playlist CTA: Scheduled row is not yet logged; confirm publication and log the real public URL before metrics. 0 logged post(s), 3 missing URL(s) in this format.
-- **Log public URL** `FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY` YouTube / YouTube Community archive/playlist CTA: Scheduled row is not yet logged; confirm publication and log the real public URL before metrics. 0 logged post(s), 3 missing URL(s) in this format.
 
 ## Post-Log Measurement Handoff
-- Status: **waiting_for_public_urls**
+- Status: **clear**
 - Source session: YouTube Community manual posting batch
 - Manual posting report: `admin/reports/manual-posting-clipboard.md`
 - Wide entry CSV after URL logging: `data/experiment_result_entry_wide_template.csv`
@@ -139,18 +239,7 @@ Generated: 2026-06-28T00:52:27.336519Z
   - Fill one wide entry CSV row per logged Community post.
   - Run the wide result import preview before applying metrics.
 - Handoff rows:
-  - `1` `FP-AUTO-270` YouTube Community - collect `views, likes, comments, shares, saves, subs_delta` 24h after `PUBLIC_URL` is real.
-    - Timing: Collect first visible metrics 24 hours after the public URL is logged.
-    - Log preview: `python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL'`
-  - `2` `FP-AUTO-275` YouTube Community - collect `views, likes, comments, shares, saves, subs_delta` 24h after `PUBLIC_URL` is real.
-    - Timing: Collect first visible metrics 24 hours after the public URL is logged.
-    - Log preview: `python3 scripts/log_manual_distribution.py --id FP-AUTO-275 --url 'PUBLIC_URL'`
-  - `3` `FP-AUTO-280` YouTube Community - collect `views, likes, comments, shares, saves, subs_delta` 24h after `PUBLIC_URL` is real.
-    - Timing: Collect first visible metrics 24 hours after the public URL is logged.
-    - Log preview: `python3 scripts/log_manual_distribution.py --id FP-AUTO-280 --url 'PUBLIC_URL'`
-  - `4` `FP-AUTO-285` YouTube Community - collect `views, likes, comments, shares, saves, subs_delta` 24h after `PUBLIC_URL` is real.
-    - Timing: Collect first visible metrics 24 hours after the public URL is logged.
-    - Log preview: `python3 scripts/log_manual_distribution.py --id FP-AUTO-285 --url 'PUBLIC_URL'`
+  - None.
 - Completion evidence:
   - Published_Log.csv contains the manual-session post URL.
   - data/experiment_result_clipboard.json shows the post as a metric card instead of a missing-public-url card.
@@ -161,15 +250,19 @@ Generated: 2026-06-28T00:52:27.336519Z
 - `FP-AUTO-258` Instagram / Release-art image + story hook: Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-263` Instagram / Release-art image + story hook: Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-265` Facebook / Release-art image + story hook: Publish or log the public URL before result metrics can be collected.
-- `FP-PLAN-TWELVE-DOLLARS-X` X / Release-art image + story hook: Publish or log the public URL before result metrics can be collected.
 - `FP-PLAN-TWELVE-DOLLARS-INSTAGRAM` Instagram / Release-art image + story hook: Publish or log the public URL before result metrics can be collected.
 - `FP-PLAN-TWELVE-DOLLARS-FACEBOOK` Facebook / Release-art image + story hook: Publish or log the public URL before result metrics can be collected.
-- `FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK` X / Release-art image + story hook: Publish or log the public URL before result metrics can be collected.
 - `FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK` Facebook / Release-art image + story hook: Publish or log the public URL before result metrics can be collected.
+- `FP-AUTO-267` Instagram / Release-art image + story hook: Publish or log the public URL before result metrics can be collected.
+- `FP-AUTO-268` Facebook / Release-art image + story hook: Publish or log the public URL before result metrics can be collected.
+- `FP-AUTO-272` Instagram / Release-art image + story hook: Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-264` TikTok / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.
 - `FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA` YouTube / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.
 - `FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA` YouTube / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.
-- `FP-PLAN-TWELVE-DOLLARS-TIKTOK` TikTok / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.
+- `FP-AUTO-269` TikTok / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.
+- `FP-AUTO-274` TikTok / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.
+- `FP-AUTO-279` TikTok / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.
+- `FP-AUTO-284` TikTok / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-261` YouTube / YouTube Community archive/playlist CTA: Publish or log the public URL before result metrics can be collected.
 - `FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY` YouTube / YouTube Community archive/playlist CTA: Publish or log the public URL before result metrics can be collected.
 - `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY` YouTube / YouTube Community archive/playlist CTA: Publish or log the public URL before result metrics can be collected.

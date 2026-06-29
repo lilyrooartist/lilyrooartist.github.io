@@ -1,33 +1,17 @@
 {
-  "generated_at": "2026-06-29T12:35:10.259086Z",
+  "generated_at": "2026-06-29T15:09:58.632677Z",
   "safe_mode": true,
   "source": {
     "promo_queue_plan": "data/promo_queue_plan.json",
     "approval_runway": "data/approval_runway.json"
   },
   "summary": {
-    "draft_count": 1,
+    "draft_count": 0,
     "selected_hard_cta_count": 0,
     "subscriber_swap_count": 0,
     "ready_after_approval_swap_count": 0,
     "recommended_swap_ids": [],
     "ready_after_approval_swap_ids": []
   },
-  "rows": [
-    {
-      "id": "FP-PLAN-TWELVE-DOLLARS-TIKTOK",
-      "release": "Twelve Dollars",
-      "platform": "TikTok",
-      "approved": "no",
-      "readiness_state": "",
-      "selected_strength": "soft_listen",
-      "recommended_strength": "youtube_link",
-      "selected_text": "Twelve Dollars is what happens when the joke walks on stage wearing impossible shoes. Full album playlist is live.",
-      "recommended_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-      "needs_subscriber_cta_swap": false,
-      "approval_preview_command": "",
-      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --refresh-admin",
-      "action": "Selected copy is song-forward and non-soliciting."
-    }
-  ]
+  "rows": []
 }

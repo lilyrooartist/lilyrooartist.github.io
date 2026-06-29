@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-23T08:58:44.640223Z",
+  "generated_at": "2026-06-29T15:09:58.604044Z",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -17,25 +17,39 @@
     "approval_blocker_count": 1,
     "auto_count": 1,
     "manual_count": 0,
-    "review_check_passed_count": 0,
-    "review_check_blocked_count": 1,
-    "checked_batch_ids": [],
-    "blocked_review_ids": [
+    "review_check_passed_count": 1,
+    "review_check_blocked_count": 0,
+    "checked_batch_ids": [
       "FP-AUTO-259"
     ],
+    "blocked_review_ids": [],
     "review_check_status_counts": {
-      "fail": 1,
-      "pass": 4
+      "pass": 5
     },
-    "checked_batch_preview_command": "",
-    "checked_batch_apply_command": "",
-    "checked_batch_explicit_preview_command": "",
-    "checked_batch_explicit_apply_command": "",
+    "checked_batch_preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+    "checked_batch_apply_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+    "checked_batch_explicit_preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --dry-run",
+    "checked_batch_explicit_apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --refresh-admin",
     "checked_batch_effect": {
-      "row_count": 0,
-      "change_count": 0,
-      "ids": [],
-      "effects": []
+      "row_count": 1,
+      "change_count": 1,
+      "ids": [
+        "FP-AUTO-259"
+      ],
+      "effects": [
+        {
+          "id": "FP-AUTO-259",
+          "platform": "TikTok",
+          "execution_mode": "auto",
+          "effect": {
+            "field": "approved",
+            "from": "no",
+            "to": "yes",
+            "changed": true,
+            "summary": "approved 'no' -> 'yes'"
+          }
+        }
+      ]
     },
     "preview_command_count": 1,
     "apply_command_count": 1,
@@ -63,24 +77,44 @@
       ]
     },
     "checked_batch_dry_run_preview": {
-      "status": "blocked",
+      "status": "ready_for_review",
       "dry_run": true,
       "would_write_files": false,
-      "command": "",
-      "apply_after_review_command": "",
-      "checked_batch_ids": [],
-      "requested_ids": [],
+      "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+      "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+      "checked_batch_ids": [
+        "FP-AUTO-259"
+      ],
+      "requested_ids": [
+        "FP-AUTO-259"
+      ],
       "unchecked_ids": [],
-      "row_count": 0,
-      "change_count": 0,
+      "row_count": 1,
+      "change_count": 1,
       "expected_effect": {
-        "row_count": 0,
-        "change_count": 0,
-        "ids": [],
-        "effects": []
+        "row_count": 1,
+        "change_count": 1,
+        "ids": [
+          "FP-AUTO-259"
+        ],
+        "effects": [
+          {
+            "id": "FP-AUTO-259",
+            "platform": "TikTok",
+            "execution_mode": "auto",
+            "effect": {
+              "field": "approved",
+              "from": "no",
+              "to": "yes",
+              "changed": true,
+              "summary": "approved 'no' -> 'yes'"
+            }
+          }
+        ]
       },
       "output_lines": [
-        "Checked batch guard: 0 checked id(s); 0 requested; 0 unchecked; 0 change(s).",
+        "FP-AUTO-259: approved 'no' -> 'yes'",
+        "Checked batch guard: 1 checked id(s); 1 requested; 0 unchecked; 1 change(s).",
         "Dry run only; did not update data/scheduled_posts.csv"
       ],
       "post_apply_verification": [
@@ -91,11 +125,10 @@
     }
   },
   "approval_docket": {
-    "status": "blocked",
-    "ready_count": 0,
-    "held_count": 1,
-    "ready_to_approve": [],
-    "held": [
+    "status": "ready_for_review",
+    "ready_count": 1,
+    "held_count": 0,
+    "ready_to_approve": [
       {
         "id": "FP-AUTO-259",
         "platform": "TikTok",
@@ -103,8 +136,8 @@
         "scheduled_at": "2026-06-05T20:40:00-04:00",
         "execution_mode": "auto",
         "post_type": "video",
-        "review_status": "held_by_failed_checks",
-        "checked_batch_member": false,
+        "review_status": "checked_batch_ready",
+        "checked_batch_member": true,
         "paste_text": "I learned it all in fifteen seconds and somehow still have homework. Streaming now.\n\nListen on Spotify: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
         "asset_url": "https://www.lilyroo.com/assets/ig/01_i_learned_it_all_60s.mp4",
         "destination_links": [
@@ -187,24 +220,7 @@
           "needs_manual_review_count": 0,
           "all_links_have_local_evidence": true
         },
-        "failed_review_checks": [
-          {
-            "name": "platform_readiness",
-            "status": "fail",
-            "detail": "Executor readiness snapshot marks platform blocked. Missing secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
-            "repair_report": "admin/reports/tiktok-setup-preflight.md",
-            "repair_runbook": "admin/reports/tiktok-repair-runbook.md",
-            "repair_command": "python3 scripts/tiktok_oauth_handoff.py",
-            "repair_preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
-            "repair_gate": "blocked_until_tiktok_upload_credentials",
-            "repair_blockers": [
-              "TIKTOK_CLIENT_KEY",
-              "TIKTOK_CLIENT_SECRET",
-              "TIKTOK_REFRESH_TOKEN"
-            ],
-            "repair_next_step": "Complete the TikTok upload-mode setup preflight before approving this row; direct public posting remains separately approval-gated."
-          }
-        ],
+        "failed_review_checks": [],
         "approval_effect": {
           "field": "approved",
           "from": "no",
@@ -217,27 +233,48 @@
         "manual_dispatch_required": false
       }
     ],
-    "checked_batch_preview_command": "",
-    "checked_batch_apply_command": "",
+    "held": [],
+    "checked_batch_preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+    "checked_batch_apply_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
     "checked_batch_dry_run_preview": {
-      "status": "blocked",
+      "status": "ready_for_review",
       "dry_run": true,
       "would_write_files": false,
-      "command": "",
-      "apply_after_review_command": "",
-      "checked_batch_ids": [],
-      "requested_ids": [],
+      "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+      "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+      "checked_batch_ids": [
+        "FP-AUTO-259"
+      ],
+      "requested_ids": [
+        "FP-AUTO-259"
+      ],
       "unchecked_ids": [],
-      "row_count": 0,
-      "change_count": 0,
+      "row_count": 1,
+      "change_count": 1,
       "expected_effect": {
-        "row_count": 0,
-        "change_count": 0,
-        "ids": [],
-        "effects": []
+        "row_count": 1,
+        "change_count": 1,
+        "ids": [
+          "FP-AUTO-259"
+        ],
+        "effects": [
+          {
+            "id": "FP-AUTO-259",
+            "platform": "TikTok",
+            "execution_mode": "auto",
+            "effect": {
+              "field": "approved",
+              "from": "no",
+              "to": "yes",
+              "changed": true,
+              "summary": "approved 'no' -> 'yes'"
+            }
+          }
+        ]
       },
       "output_lines": [
-        "Checked batch guard: 0 checked id(s); 0 requested; 0 unchecked; 0 change(s).",
+        "FP-AUTO-259: approved 'no' -> 'yes'",
+        "Checked batch guard: 1 checked id(s); 1 requested; 0 unchecked; 1 change(s).",
         "Dry run only; did not update data/scheduled_posts.csv"
       ],
       "post_apply_verification": [
@@ -247,32 +284,46 @@
       "guardrail": "This is a computed dry-run preview; approval still requires human review and the --checked-batch apply command."
     },
     "checked_batch_effect": {
-      "row_count": 0,
-      "change_count": 0,
-      "ids": [],
-      "effects": []
+      "row_count": 1,
+      "change_count": 1,
+      "ids": [
+        "FP-AUTO-259"
+      ],
+      "effects": [
+        {
+          "id": "FP-AUTO-259",
+          "platform": "TikTok",
+          "execution_mode": "auto",
+          "effect": {
+            "field": "approved",
+            "from": "no",
+            "to": "yes",
+            "changed": true,
+            "summary": "approved 'no' -> 'yes'"
+          }
+        }
+      ]
     },
     "guardrails": [
       "Review paste text, destination links, media, and platform readiness before applying the checked batch.",
-      "Use --checked-batch so held rows with failed checks stay excluded.",
-      "Manual-dispatch rows still need manual posting and public URL logging after approval."
+      "Use --checked-batch so held rows with failed checks stay excluded."
     ]
   },
   "approval_decision_manifest": {
-    "status": "blocked",
-    "ready_ids": [],
-    "held_ids": [
+    "status": "ready_for_review",
+    "ready_ids": [
       "FP-AUTO-259"
     ],
+    "held_ids": [],
     "decisions": [
       {
         "id": "FP-AUTO-259",
-        "decision": "held",
+        "decision": "ready_to_approve",
         "platform": "TikTok",
         "song": "I Learned It All in Fifteen Seconds",
         "execution_mode": "auto",
         "scheduled_at": "2026-06-05T20:40:00-04:00",
-        "checked_batch_member": false,
+        "checked_batch_member": true,
         "approval_effect": {
           "field": "approved",
           "from": "no",
@@ -284,41 +335,75 @@
           "copy_present",
           "destination_links_present",
           "asset_file_present",
-          "executor_blocker_confirmed"
-        ],
-        "failed_check_names": [
+          "executor_blocker_confirmed",
           "platform_readiness"
         ],
-        "decision_reason": "Held outside checked batch until failed/review checks clear.",
-        "post_approval_next_step": "Repair failed checks before including this row in an approval batch.",
+        "failed_check_names": [],
+        "decision_reason": "All automated review checks passed.",
+        "post_approval_next_step": "Apply through --checked-batch after human copy/media/link review.",
         "manual_dispatch_required": false
       }
     ],
     "expected_checked_batch_effect": {
-      "row_count": 0,
-      "change_count": 0,
-      "ids": [],
-      "effects": []
+      "row_count": 1,
+      "change_count": 1,
+      "ids": [
+        "FP-AUTO-259"
+      ],
+      "effects": [
+        {
+          "id": "FP-AUTO-259",
+          "platform": "TikTok",
+          "execution_mode": "auto",
+          "effect": {
+            "field": "approved",
+            "from": "no",
+            "to": "yes",
+            "changed": true,
+            "summary": "approved 'no' -> 'yes'"
+          }
+        }
+      ]
     },
     "checked_batch_dry_run_preview": {
-      "status": "blocked",
+      "status": "ready_for_review",
       "dry_run": true,
       "would_write_files": false,
-      "command": "",
-      "apply_after_review_command": "",
-      "checked_batch_ids": [],
-      "requested_ids": [],
+      "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+      "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+      "checked_batch_ids": [
+        "FP-AUTO-259"
+      ],
+      "requested_ids": [
+        "FP-AUTO-259"
+      ],
       "unchecked_ids": [],
-      "row_count": 0,
-      "change_count": 0,
+      "row_count": 1,
+      "change_count": 1,
       "expected_effect": {
-        "row_count": 0,
-        "change_count": 0,
-        "ids": [],
-        "effects": []
+        "row_count": 1,
+        "change_count": 1,
+        "ids": [
+          "FP-AUTO-259"
+        ],
+        "effects": [
+          {
+            "id": "FP-AUTO-259",
+            "platform": "TikTok",
+            "execution_mode": "auto",
+            "effect": {
+              "field": "approved",
+              "from": "no",
+              "to": "yes",
+              "changed": true,
+              "summary": "approved 'no' -> 'yes'"
+            }
+          }
+        ]
       },
       "output_lines": [
-        "Checked batch guard: 0 checked id(s); 0 requested; 0 unchecked; 0 change(s).",
+        "FP-AUTO-259: approved 'no' -> 'yes'",
+        "Checked batch guard: 1 checked id(s); 1 requested; 0 unchecked; 1 change(s).",
         "Dry run only; did not update data/scheduled_posts.csv"
       ],
       "post_apply_verification": [
@@ -327,37 +412,58 @@
       ],
       "guardrail": "This is a computed dry-run preview; approval still requires human review and the --checked-batch apply command."
     },
-    "review_command": "",
-    "apply_after_review_command": "",
+    "review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+    "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
     "guardrail": "Only ready_to_approve decisions may be applied through --checked-batch; held rows require repair first."
   },
   "approval_apply_manifest": {
-    "status": "blocked",
-    "ready_ids": [],
-    "held_ids": [
+    "status": "ready_for_human_review",
+    "ready_ids": [
       "FP-AUTO-259"
     ],
+    "held_ids": [],
     "apply_scope": "checked_batch",
-    "preview_command": "",
-    "apply_after_review_command": "",
-    "expected_change_count": 0,
+    "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+    "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+    "expected_change_count": 1,
     "expected_effect": {
-      "row_count": 0,
-      "change_count": 0,
-      "ids": [],
-      "effects": []
+      "row_count": 1,
+      "change_count": 1,
+      "ids": [
+        "FP-AUTO-259"
+      ],
+      "effects": [
+        {
+          "id": "FP-AUTO-259",
+          "platform": "TikTok",
+          "execution_mode": "auto",
+          "effect": {
+            "field": "approved",
+            "from": "no",
+            "to": "yes",
+            "changed": true,
+            "summary": "approved 'no' -> 'yes'"
+          }
+        }
+      ]
     },
-    "ready_rows": [],
-    "held_rows": [
+    "ready_rows": [
       {
         "id": "FP-AUTO-259",
         "platform": "TikTok",
         "song": "I Learned It All in Fifteen Seconds",
-        "failed_check_names": [
+        "execution_mode": "auto",
+        "manual_dispatch_required": false,
+        "post_approval_next_step": "Refresh Admin and let the executor retry after approval is visible.",
+        "required_review": [
+          "copy",
+          "destination_links",
+          "media_asset",
           "platform_readiness"
         ]
       }
     ],
+    "held_rows": [],
     "pre_apply_checklist": [
       "Review copy, links, and media for every ready row.",
       "Run the preview command and confirm it lists only ready_ids.",
@@ -367,53 +473,98 @@
     "post_apply_evidence": [
       "data/scheduled_posts.csv shows ready_ids changed from approved=no to approved=yes.",
       "data/scheduled_approval_packet.json reports fewer approval blockers after refresh.",
-      "data/social_scheduler_dry_run.json no longer blocks the approved Instagram row on not_approved.",
-      "Manual-dispatch ready rows remain in the manual posting/logging workflow until a real public URL exists."
+      "data/social_scheduler_dry_run.json no longer blocks the approved row on not_approved."
     ],
     "guardrails": [
       "This manifest does not approve, publish, post, or log anything.",
       "Do not use the full batch command while held_ids are present.",
-      "Do not approve held rows until failed review checks clear.",
-      "Manual dispatch remains separate from approval."
+      "Do not approve held rows until failed review checks clear."
     ]
   },
   "approval_review_runbook": {
-    "status": "blocked",
-    "ready_ids": [],
-    "blocked_ids": [
+    "status": "ready_for_review",
+    "ready_ids": [
       "FP-AUTO-259"
     ],
-    "ready_count": 0,
-    "blocked_count": 1,
+    "blocked_ids": [],
+    "ready_count": 1,
+    "blocked_count": 0,
     "manual_dispatch_ready_count": 0,
-    "review_checklist": [],
+    "review_checklist": [
+      {
+        "id": "FP-AUTO-259",
+        "platform": "TikTok",
+        "song": "I Learned It All in Fifteen Seconds",
+        "execution_mode": "auto",
+        "scheduled_at": "2026-06-05T20:40:00-04:00",
+        "checked_batch_member": true,
+        "copy_block": "I learned it all in fifteen seconds and somehow still have homework. Streaming now.\n\nListen on Spotify: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
+        "asset_url": "https://www.lilyroo.com/assets/ig/01_i_learned_it_all_60s.mp4",
+        "destination_links": [
+          "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+          "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+          "https://music.youtube.com/watch?v=vK0mDIW65o4"
+        ],
+        "human_review_required": true,
+        "checklist": [
+          {
+            "item": "copy",
+            "status": "ready_for_human_review",
+            "evidence": "83 primary-copy character(s)"
+          },
+          {
+            "item": "destination_links",
+            "status": "ready_for_human_review",
+            "evidence": "3/3 link(s) have local evidence"
+          },
+          {
+            "item": "media_asset",
+            "status": "ready_for_human_review",
+            "evidence": "assets/ig/01_i_learned_it_all_60s.mp4"
+          },
+          {
+            "item": "platform_readiness",
+            "status": "ready_for_human_review",
+            "evidence": "All automated review checks passed."
+          }
+        ],
+        "preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --dry-run",
+        "post_approval_next_step": "Approve with the checked batch; executor can retry once approval is visible."
+      }
+    ],
     "steps": [
       {
         "order": 1,
         "title": "Review ready checked-batch rows",
         "owner": "tod",
-        "status": "blocked",
+        "status": "ready_for_review",
         "command": "",
         "evidence": "Review copy_block, destination_links, asset_url, and checklist for each ready row.",
-        "applies_to_ids": []
+        "applies_to_ids": [
+          "FP-AUTO-259"
+        ]
       },
       {
         "order": 2,
         "title": "Preview the guarded checked batch",
         "owner": "tod",
-        "status": "blocked",
-        "command": "",
+        "status": "ready_for_review",
+        "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
         "evidence": "Dry run must report no file writes and only the checked IDs.",
-        "applies_to_ids": []
+        "applies_to_ids": [
+          "FP-AUTO-259"
+        ]
       },
       {
         "order": 3,
         "title": "Apply after human review",
         "owner": "tod",
-        "status": "blocked",
-        "command": "",
+        "status": "ready_after_review",
+        "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
         "evidence": "Apply only after human copy/media/link review passes.",
-        "applies_to_ids": []
+        "applies_to_ids": [
+          "FP-AUTO-259"
+        ]
       },
       {
         "order": 4,
@@ -422,16 +573,9 @@
         "status": "ready_after_apply",
         "command": "python3 scripts/refresh_promo_admin.py && python3 scripts/validate_content_system.py",
         "evidence": "Admin should show fewer approval blockers and fresh execution state.",
-        "applies_to_ids": []
-      },
-      {
-        "order": 5,
-        "title": "Post and log manual rows",
-        "owner": "tod",
-        "status": "not_applicable",
-        "command": "python3 scripts/log_manual_distribution.py --dry-run",
-        "evidence": "Manual YouTube Community rows need real public post URLs before logging.",
-        "applies_to_ids": []
+        "applies_to_ids": [
+          "FP-AUTO-259"
+        ]
       }
     ],
     "guardrail": "This runbook is review-only; it does not approve, publish, post, or log anything."
@@ -559,43 +703,15 @@
         },
         {
           "name": "platform_readiness",
-          "status": "fail",
-          "detail": "Executor readiness snapshot marks platform blocked. Missing secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
-          "repair_report": "admin/reports/tiktok-setup-preflight.md",
-          "repair_runbook": "admin/reports/tiktok-repair-runbook.md",
-          "repair_command": "python3 scripts/tiktok_oauth_handoff.py",
-          "repair_preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
-          "repair_gate": "blocked_until_tiktok_upload_credentials",
-          "repair_blockers": [
-            "TIKTOK_CLIENT_KEY",
-            "TIKTOK_CLIENT_SECRET",
-            "TIKTOK_REFRESH_TOKEN"
-          ],
-          "repair_next_step": "Complete the TikTok upload-mode setup preflight before approving this row; direct public posting remains separately approval-gated."
+          "status": "pass",
+          "detail": "Executor readiness snapshot marks platform ready."
         }
       ],
-      "review_check_passed": false,
-      "failed_review_checks": [
-        {
-          "name": "platform_readiness",
-          "status": "fail",
-          "detail": "Executor readiness snapshot marks platform blocked. Missing secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
-          "repair_report": "admin/reports/tiktok-setup-preflight.md",
-          "repair_runbook": "admin/reports/tiktok-repair-runbook.md",
-          "repair_command": "python3 scripts/tiktok_oauth_handoff.py",
-          "repair_preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
-          "repair_gate": "blocked_until_tiktok_upload_credentials",
-          "repair_blockers": [
-            "TIKTOK_CLIENT_KEY",
-            "TIKTOK_CLIENT_SECRET",
-            "TIKTOK_REFRESH_TOKEN"
-          ],
-          "repair_next_step": "Complete the TikTok upload-mode setup preflight before approving this row; direct public posting remains separately approval-gated."
-        }
-      ],
-      "approval_review_status": "held_by_failed_checks",
-      "checked_batch_member": false,
-      "approval_batch_reason": "Held outside checked batch until failed/review checks clear.",
+      "review_check_passed": true,
+      "failed_review_checks": [],
+      "approval_review_status": "checked_batch_ready",
+      "checked_batch_member": true,
+      "approval_batch_reason": "All automated review checks passed.",
       "approval_effect": {
         "field": "approved",
         "from": "no",

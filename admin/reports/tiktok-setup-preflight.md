@@ -1,6 +1,6 @@
 # TikTok Setup Preflight - Lily Roo
 
-Generated: 2026-06-24T06:12:54.442874Z
+Generated: 2026-06-29T15:09:59.263756Z
 
 ## Summary
 - Status: **blocked**
@@ -9,7 +9,7 @@ Generated: 2026-06-24T06:12:54.442874Z
 - Checks: **12**
 - Blocked checks: **1**
 - Ready to push worker secrets: **True**
-- Ready to upload inbox drafts: **False**
+- Ready to upload inbox drafts: **True**
 - Ready to post publicly: **False**
 - Local posting helper uses refresh token: **True**
 - First TikTok asset ready for upload mode: **True** (`FP-AUTO-264`)
@@ -21,7 +21,7 @@ Generated: 2026-06-24T06:12:54.442874Z
 - Local public posting approval confirmed: **False**
 - Public posting approved: **False**
 - Default privacy: **PUBLIC_TO_EVERYONE**
-- Worker posting mode: **direct**
+- Worker posting mode: **upload**
 - Brand content disclosure: **False**
 - Brand organic disclosure: **True**
 - AIGC label enabled: **True**
@@ -30,7 +30,7 @@ Generated: 2026-06-24T06:12:54.442874Z
 - Status: **blocked_until_user_input**
 - Answer: Yes, fix the TikTok connector after the current manual YouTube evidence loop; it unlocks the short-video growth format.
 - Needed inputs: **1**
-- Next safe action: `python3 scripts/set_tiktok_public_posting_approval.py --approved`
+- Next safe action: `python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run`
 - First growth row unblocked: `FP-AUTO-264`
 - Format unblocked: Short video clip + platform-native CTA
 - **Confirm whether Lily Roo TikTok has public Content Posting API approval and PUBLIC_TO_EVERYONE posting is allowed.** (`public_posting_approval`)
@@ -78,7 +78,7 @@ Generated: 2026-06-24T06:12:54.442874Z
 - Missing for token exchange: `none`
 - Missing in worker: `none`
 - Brand content disclosure: **False**
-- Worker posting mode: **direct**
+- Worker posting mode: **upload**
 - Brand organic disclosure: **True**
 - AIGC label enabled: **True**
 - OAuth preview: `python3 scripts/tiktok_oauth_handoff.py`

@@ -1,10 +1,10 @@
 {
   "ok": true,
-  "updated_at": "2026-06-23T08:58:36.326Z",
+  "updated_at": "2026-06-29T15:09:48.690Z",
   "platforms": {
     "youtube": {
       "ok": false,
-      "reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
+      "reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Bad Request\"}",
       "metrics": {},
       "status": 400
     },
@@ -22,7 +22,7 @@
       "provider_name": "Spotify",
       "provider_url": "https://spotify.com",
       "iframe_url": "https://open.spotify.com/embed/album/4Al5eYOqGFMKEES5fDWIfI?utm_source=oembed",
-      "thumbnail_url": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0287c54a775685e36e4f534ad4",
+      "thumbnail_url": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e0287c54a775685e36e4f534ad4",
       "thumbnail_width": 300,
       "thumbnail_height": 300,
       "analytics_status": "Spotify streams, saves, monthly listeners, and artist followers require Spotify for Artists export or a connected analytics source.",
@@ -34,22 +34,23 @@
     },
     "tiktok": {
       "ok": true,
-      "reason": "TikTok metrics need TikTok OAuth credentials.",
+      "reason": "TikTok Content Posting API returns creator and posting-permission info, not follower or profile-view analytics.",
       "metrics": {
         "followers": 0
       },
-      "missing_secrets": [
-        "TIKTOK_CLIENT_KEY",
-        "TIKTOK_CLIENT_SECRET",
-        "TIKTOK_REFRESH_TOKEN"
-      ],
       "source": "tiktok-public-profile-page",
+      "credential_ok": true,
+      "username": "lilyroo930",
+      "display_name": "lilyroo930",
+      "privacy_level_options": [
+        "PUBLIC_TO_EVERYONE",
+        "MUTUAL_FOLLOW_FRIENDS",
+        "SELF_ONLY"
+      ],
+      "public_posting_ready": false,
       "profile_url": "https://www.tiktok.com/@lilyroo930",
       "http_status": 200,
-      "display_name": "",
-      "public_capture_status": "ok",
-      "preserved_previous_public_metrics": true,
-      "latest_capture_status": "No public TikTok follower value found."
+      "public_capture_status": "ok"
     },
     "instagram": {
       "ok": true,
@@ -73,7 +74,7 @@
       },
       "page_name": "Lily Roo",
       "profile_url": "https://www.facebook.com/903693509504290",
-      "insights_period": "2026-06-16..2026-06-22",
+      "insights_period": "2026-06-22..2026-06-28",
       "insights_status": "(#100) The value must be a valid insights metric"
     },
     "x": {
@@ -88,7 +89,7 @@
       "source": "x-public-profile-page",
       "profile_url": "https://x.com/lilyrooartist",
       "http_status": 200,
-      "html_bytes": 74318,
+      "html_bytes": 85475,
       "public_capture_status": "ok"
     }
   },
@@ -116,10 +117,8 @@
         },
         "profile_url": "https://www.tiktok.com/@lilyroo930",
         "http_status": 200,
-        "display_name": "",
-        "public_capture_status": "ok",
-        "preserved_previous_public_metrics": true,
-        "latest_capture_status": "No public TikTok follower value found."
+        "display_name": "lilyroo930",
+        "public_capture_status": "ok"
       },
       "instagram": {
         "ok": true,
@@ -140,7 +139,7 @@
         },
         "profile_url": "https://x.com/lilyrooartist",
         "http_status": 200,
-        "html_bytes": 74318,
+        "html_bytes": 85475,
         "public_capture_status": "ok"
       }
     }

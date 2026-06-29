@@ -1,16 +1,16 @@
 # Manual Posting Clipboard - Lily Roo
 
-Generated: 2026-06-29T12:34:04.279052Z
+Generated: 2026-06-29T15:09:59.164076Z
 
 ## Summary
-- Status: **ready_to_post**
+- Status: **empty**
 - Posting surface: **YouTube Studio Community**
 - Public Community URL: https://www.youtube.com/@lilyroo.artist/community
-- Postable cards: **4**
-- Waiting public URLs: **4**
+- Postable cards: **0**
+- Waiting public URLs: **0**
 - URL worksheet: `data/manual_distribution_url_template.csv`
 - Session file: `data/manual-posting-cards/youtube-community-session.md`
-- Paste text files: `data/manual-posting-cards` (4 file(s))
+- Paste text files: `data/manual-posting-cards` (0 file(s))
 - Batch log preview: `python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv`
 - Batch log apply after posting: `python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --apply --refresh-admin`
 - Partial batch apply after first URL: `python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --allow-partial --apply --refresh-admin`
@@ -19,91 +19,56 @@ Generated: 2026-06-29T12:34:04.279052Z
 - Reconciliation apply if matches exist: `not available`
 - Result handoff after URL logging: `admin/reports/experiment-result-clipboard.md`
 - First measurement due: **24 hours after public URL logging**
-- Next action: Post each card in YouTube Community, copy the real public URL, then log it.
+- Next action: No approved manual posts are currently waiting.
 
 ## Tracking Lifecycle
 - Status: **active**
-- Posted: **0/4**
-- Public URLs logged: **0/4**
-- Results recorded: **0/4**
+- Posted: **0/0**
+- Public URLs logged: **0/0**
+- Results recorded: **0/0**
 - Ready for measurement: **0**
-- Primary gap: `manual_posting`
+- Primary gap: `complete`
 - Guardrail: Do not advance a lifecycle stage without the listed completion evidence.
-- Lifecycle rows:
-  - `FP-AUTO-270` `waiting_for_manual_post` posted `False` logged `False` measured `False` due `after URL logging`
-    - Next: Publish the Community card, copy the real public post URL, then log it.
-  - `FP-AUTO-275` `waiting_for_manual_post` posted `False` logged `False` measured `False` due `after URL logging`
-    - Next: Publish the Community card, copy the real public post URL, then log it.
-  - `FP-AUTO-280` `waiting_for_manual_post` posted `False` logged `False` measured `False` due `after URL logging`
-    - Next: Publish the Community card, copy the real public post URL, then log it.
-  - `FP-AUTO-285` `waiting_for_manual_post` posted `False` logged `False` measured `False` due `after URL logging`
-    - Next: Publish the Community card, copy the real public post URL, then log it.
 
 ## Post Now
-- First card: `FP-AUTO-270` (Brain Rot)
-- Surface: https://www.youtube.com/@lilyroo.artist/community
-- Copy source: `data/manual-posting-cards/fp-auto-270.txt`
-- Asset source: `assets/albums/twelve-dollars/art/01-brain-rot-youtube-thumbnail.jpg`
-- Preview URL log: `python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL'`
-- Apply URL log: `python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL' --apply --refresh-admin`
-- Result handoff: `admin/reports/experiment-result-clipboard.md`
-- First measurement due: **24 hours after URL logging**
-- Completion evidence:
-  - The YouTube Community post is published from the listed text and asset.
-  - A real public YouTube Community URL replaces PUBLIC_URL in the logging command.
-  - The post appears in Published_Log.csv with this manual distribution ID.
+- No manual post is waiting; API automation has replaced the manual posting lane.
 
 ## First Post Runbook
-- Status: **ready_to_post_and_log**
-- Post: `FP-AUTO-270` (Brain Rot)
-- Surface: https://www.youtube.com/@lilyroo.artist/community
-- Copy file: `data/manual-posting-cards/fp-auto-270.txt`
-- Asset: `assets/albums/twelve-dollars/art/01-brain-rot-youtube-thumbnail.jpg`
+- Status: **clear**
+- Post: `not available` (unknown release)
+- Surface: not set
+- Copy file: `not available`
+- Asset: `not available`
 - Public URL slot: `PUBLIC_URL`
-- URL worksheet: `data/manual_distribution_url_template.csv`
-- Worksheet update: Paste the real public URL into data/manual_distribution_url_template.csv public_url for FP-AUTO-270.
-- Preview URL log: `python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL'`
-- Apply URL log: `python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL' --apply --refresh-admin`
-- Partial batch apply: `python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --allow-partial --apply --refresh-admin`
-- Result handoff: `admin/reports/experiment-result-clipboard.md`
-- First measurement trigger: **after real public URL is logged**
+- URL worksheet: `not available`
+- Worksheet update: not available
+- Preview URL log: `not available`
+- Apply URL log: `not available`
+- Partial batch apply: `not available`
+- Result handoff: `not available`
+- First measurement trigger: **after URL logging**
 - First measurement due: **24 hours after URL logging**
-- Guardrail: Do not run an apply command with PUBLIC_URL, a blank URL, or a private/non-public post URL.
-- Checklist:
-  - Open the YouTube Community surface.
-  - Paste the copy exactly from copy_source.
-  - Attach the listed asset_source or asset_url.
-  - Publish the Community post manually.
-  - Copy the real public YouTube Community post URL.
-  - Run the preview command with the real URL.
-  - Run the apply command only after preview confirms the real URL.
-  - Confirm Published_Log.csv contains this manual distribution ID.
-  - Collect first visible metrics 24 hours after the public URL is logged.
-- Completion evidence:
-  - A real public YouTube Community post URL exists.
-  - The URL has replaced PUBLIC_URL in the preview/apply command or worksheet.
-  - Published_Log.csv contains this manual_distribution_id.
-  - The experiment result clipboard lists this post for its 24-hour measurement.
+- Guardrail: No placeholder URLs are accepted.
 
 ## First URL Acceleration
-- Status: **ready_after_first_public_url**
-- First post: `FP-AUTO-270` (Brain Rot)
-- Copy file: `data/manual-posting-cards/fp-auto-270.txt`
-- Asset: `assets/albums/twelve-dollars/art/01-brain-rot-youtube-thumbnail.jpg`
-- Preview first URL: `python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL'`
-- Apply first URL with partial batch: `python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --allow-partial --apply --refresh-admin`
-- Measurement report: `admin/reports/experiment-result-clipboard.md`
-- Measurement preview: `python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run`
+- Status: **clear**
+- First post: `not available` (unknown release)
+- Copy file: `not available`
+- Asset: `not available`
+- Preview first URL: `not available`
+- Apply first URL with partial batch: `not available`
+- Measurement report: `not available`
+- Measurement preview: `not available`
 - First measurement due: **24 hours after URL logging**
-- Why: Logging the first public URL immediately lets that post enter the 24-hour result-collection queue without waiting for the full batch.
-- Guardrail: Use only a real public YouTube Community post URL; never apply PUBLIC_URL or blank worksheet rows.
+- Why: not available
+- Guardrail: No placeholder URLs are accepted.
 
 ## Session Manifest
-- Status: **ready_to_post**
+- Status: **complete**
 - Session: **YouTube Community manual posting batch**
 - Surface: https://www.youtube.com/@lilyroo.artist/community
-- Postable rows: **4**
-- Waiting public URLs: **4**
+- Postable rows: **0**
+- Waiting public URLs: **0**
 - Logged rows: **0**
 - URL worksheet: `data/manual_distribution_url_template.csv`
 - Batch preview: `python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv`
@@ -125,149 +90,15 @@ Generated: 2026-06-29T12:34:04.279052Z
   - The URL worksheet has no remaining blank public_url cells for these IDs.
   - Published_Log.csv contains each session ID with a manual_distribution_id note.
   - The experiment result clipboard lists the logged posts for first 24-hour measurement collection.
-- Session rows:
-  - `1` `FP-AUTO-270` `waiting_for_post_and_public_url` first measurement `24h` copy `data/manual-posting-cards/fp-auto-270.txt` asset `assets/albums/twelve-dollars/art/01-brain-rot-youtube-thumbnail.jpg`
-  - `2` `FP-AUTO-275` `waiting_for_post_and_public_url` first measurement `24h` copy `data/manual-posting-cards/fp-auto-275.txt` asset `assets/albums/twelve-dollars/art/02-every-pearl-in-carmel-youtube-thumbnail.jpg`
-  - `3` `FP-AUTO-280` `waiting_for_post_and_public_url` first measurement `24h` copy `data/manual-posting-cards/fp-auto-280.txt` asset `assets/albums/twelve-dollars/art/03-the-other-ones-charging-youtube-thumbnail.jpg`
-  - `4` `FP-AUTO-285` `waiting_for_post_and_public_url` first measurement `24h` copy `data/manual-posting-cards/fp-auto-285.txt` asset `assets/albums/twelve-dollars/art/04-twelve-dollars-youtube-thumbnail.jpg`
+- Session rows: none; API automation has replaced the manual posting lane.
 
 ## Cards
-### 1. Brain Rot - YouTube Community
-- ID: `FP-AUTO-270`
-- Status: `ready_for_manual_post`
-- Open: https://www.youtube.com/@lilyroo.artist/community
-- Paste file: `data/manual-posting-cards/fp-auto-270.txt`
-- Posting bundle: copy `data/manual-posting-cards/fp-auto-270.txt`, asset `assets/albums/twelve-dollars/art/01-brain-rot-youtube-thumbnail.jpg`
-- Paste text:
-```text
-The phone is melting politely. Brain Rot is tonight's Twelve Dollars signal. Watch the remastered video. Full Twelve Dollars playlist is live.
-
-Watch Brain Rot: https://youtu.be/U7aczBSruAY | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
-```
-- Asset: https://www.lilyroo.com/assets/albums/twelve-dollars/art/01-brain-rot-youtube-thumbnail.jpg
-- Asset evidence: `local_asset_present` assets/albums/twelve-dollars/art/01-brain-rot-youtube-thumbnail.jpg
-- Destination links: https://youtu.be/U7aczBSruAY, https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
-- Destination evidence:
-  - `needs_manual_review` https://youtu.be/U7aczBSruAY: no local evidence
-  - `verified_local_evidence` https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n: Twelve Dollars YouTube playlist URL (data/distrokid_release_status.json); Twelve Dollars YouTube playlist URL (data/distrokid_release_status.json); Twelve Dollars verified items: 8 (data/youtube_twelve_dollars_playlist.json)
-- Public URL slot: `PUBLIC_URL`
-- Log preview after posting: `python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL'`
-- Log apply after posting: `python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL' --apply --refresh-admin`
-- Log notes: `manual_distribution_id=FP-AUTO-270; source=data/manual_distribution_packet.json`
-- Bundle preview command template: `python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL'`
-- Bundle apply command template: `python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL' --apply --refresh-admin`
-- Bundle result trigger: Log the public URL, then use admin/reports/experiment-result-clipboard.md for the first 24-hour measurement.
-- Result handoff: `blocked_until_public_url_logged` via `admin/reports/experiment-result-clipboard.md`
-- Result handoff reason: Experiment result collection starts after the real public URL is logged in Published_Log.csv.
-- First measurement due: **24 hours after URL logging**
-- After posting checklist:
-  - Copy the real public YouTube Community post URL.
-  - Run the log preview command: python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL'
-  - Run the log apply command after preview passes: python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL' --apply --refresh-admin
-  - Refresh Admin and confirm this card moves out of the manual posting queue.
-  - Open the experiment result clipboard 24 hours after URL logging for the first measurement.
-### 2. Every Pearl in Carmel - YouTube Community
-- ID: `FP-AUTO-275`
-- Status: `ready_for_manual_post`
-- Open: https://www.youtube.com/@lilyroo.artist/community
-- Paste file: `data/manual-posting-cards/fp-auto-275.txt`
-- Posting bundle: copy `data/manual-posting-cards/fp-auto-275.txt`, asset `assets/albums/twelve-dollars/art/02-every-pearl-in-carmel-youtube-thumbnail.jpg`
-- Paste text:
-```text
-Every Pearl in Carmel is the pretty souvenir that still knows what it cost. Watch the remastered video. Full Twelve Dollars playlist is live.
-
-Watch Every Pearl in Carmel: https://youtu.be/QodRYnvTVZc | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
-```
-- Asset: https://www.lilyroo.com/assets/albums/twelve-dollars/art/02-every-pearl-in-carmel-youtube-thumbnail.jpg
-- Asset evidence: `local_asset_present` assets/albums/twelve-dollars/art/02-every-pearl-in-carmel-youtube-thumbnail.jpg
-- Destination links: https://youtu.be/QodRYnvTVZc, https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
-- Destination evidence:
-  - `needs_manual_review` https://youtu.be/QodRYnvTVZc: no local evidence
-  - `verified_local_evidence` https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n: Twelve Dollars YouTube playlist URL (data/distrokid_release_status.json); Twelve Dollars YouTube playlist URL (data/distrokid_release_status.json); Twelve Dollars verified items: 8 (data/youtube_twelve_dollars_playlist.json)
-- Public URL slot: `PUBLIC_URL`
-- Log preview after posting: `python3 scripts/log_manual_distribution.py --id FP-AUTO-275 --url 'PUBLIC_URL'`
-- Log apply after posting: `python3 scripts/log_manual_distribution.py --id FP-AUTO-275 --url 'PUBLIC_URL' --apply --refresh-admin`
-- Log notes: `manual_distribution_id=FP-AUTO-275; source=data/manual_distribution_packet.json`
-- Bundle preview command template: `python3 scripts/log_manual_distribution.py --id FP-AUTO-275 --url 'PUBLIC_URL'`
-- Bundle apply command template: `python3 scripts/log_manual_distribution.py --id FP-AUTO-275 --url 'PUBLIC_URL' --apply --refresh-admin`
-- Bundle result trigger: Log the public URL, then use admin/reports/experiment-result-clipboard.md for the first 24-hour measurement.
-- Result handoff: `blocked_until_public_url_logged` via `admin/reports/experiment-result-clipboard.md`
-- Result handoff reason: Experiment result collection starts after the real public URL is logged in Published_Log.csv.
-- First measurement due: **24 hours after URL logging**
-- After posting checklist:
-  - Copy the real public YouTube Community post URL.
-  - Run the log preview command: python3 scripts/log_manual_distribution.py --id FP-AUTO-275 --url 'PUBLIC_URL'
-  - Run the log apply command after preview passes: python3 scripts/log_manual_distribution.py --id FP-AUTO-275 --url 'PUBLIC_URL' --apply --refresh-admin
-  - Refresh Admin and confirm this card moves out of the manual posting queue.
-  - Open the experiment result clipboard 24 hours after URL logging for the first measurement.
-### 3. The Other One's Charging - YouTube Community
-- ID: `FP-AUTO-280`
-- Status: `ready_for_manual_post`
-- Open: https://www.youtube.com/@lilyroo.artist/community
-- Paste file: `data/manual-posting-cards/fp-auto-280.txt`
-- Posting bundle: copy `data/manual-posting-cards/fp-auto-280.txt`, asset `assets/albums/twelve-dollars/art/03-the-other-ones-charging-youtube-thumbnail.jpg`
-- Paste text:
-```text
-The Other One's Charging is domestic chaos with a battery icon. Watch the remastered video. Full Twelve Dollars playlist is live.
-
-Watch The Other One's Charging: https://youtu.be/EprgLKHp-lE | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
-```
-- Asset: https://www.lilyroo.com/assets/albums/twelve-dollars/art/03-the-other-ones-charging-youtube-thumbnail.jpg
-- Asset evidence: `local_asset_present` assets/albums/twelve-dollars/art/03-the-other-ones-charging-youtube-thumbnail.jpg
-- Destination links: https://youtu.be/EprgLKHp-lE, https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
-- Destination evidence:
-  - `needs_manual_review` https://youtu.be/EprgLKHp-lE: no local evidence
-  - `verified_local_evidence` https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n: Twelve Dollars YouTube playlist URL (data/distrokid_release_status.json); Twelve Dollars YouTube playlist URL (data/distrokid_release_status.json); Twelve Dollars verified items: 8 (data/youtube_twelve_dollars_playlist.json)
-- Public URL slot: `PUBLIC_URL`
-- Log preview after posting: `python3 scripts/log_manual_distribution.py --id FP-AUTO-280 --url 'PUBLIC_URL'`
-- Log apply after posting: `python3 scripts/log_manual_distribution.py --id FP-AUTO-280 --url 'PUBLIC_URL' --apply --refresh-admin`
-- Log notes: `manual_distribution_id=FP-AUTO-280; source=data/manual_distribution_packet.json`
-- Bundle preview command template: `python3 scripts/log_manual_distribution.py --id FP-AUTO-280 --url 'PUBLIC_URL'`
-- Bundle apply command template: `python3 scripts/log_manual_distribution.py --id FP-AUTO-280 --url 'PUBLIC_URL' --apply --refresh-admin`
-- Bundle result trigger: Log the public URL, then use admin/reports/experiment-result-clipboard.md for the first 24-hour measurement.
-- Result handoff: `blocked_until_public_url_logged` via `admin/reports/experiment-result-clipboard.md`
-- Result handoff reason: Experiment result collection starts after the real public URL is logged in Published_Log.csv.
-- First measurement due: **24 hours after URL logging**
-- After posting checklist:
-  - Copy the real public YouTube Community post URL.
-  - Run the log preview command: python3 scripts/log_manual_distribution.py --id FP-AUTO-280 --url 'PUBLIC_URL'
-  - Run the log apply command after preview passes: python3 scripts/log_manual_distribution.py --id FP-AUTO-280 --url 'PUBLIC_URL' --apply --refresh-admin
-  - Refresh Admin and confirm this card moves out of the manual posting queue.
-  - Open the experiment result clipboard 24 hours after URL logging for the first measurement.
-### 4. Twelve Dollars - YouTube Community
-- ID: `FP-AUTO-285`
-- Status: `ready_for_manual_post`
-- Open: https://www.youtube.com/@lilyroo.artist/community
-- Paste file: `data/manual-posting-cards/fp-auto-285.txt`
-- Posting bundle: copy `data/manual-posting-cards/fp-auto-285.txt`, asset `assets/albums/twelve-dollars/art/04-twelve-dollars-youtube-thumbnail.jpg`
-- Paste text:
-```text
-Twelve Dollars is the stage light, the joke, and the receipt. Watch the remastered video. Full Twelve Dollars playlist is live.
-
-Watch Twelve Dollars: https://youtu.be/G2RlCwZKOsk | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
-```
-- Asset: https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars-youtube-thumbnail.jpg
-- Asset evidence: `local_asset_present` assets/albums/twelve-dollars/art/04-twelve-dollars-youtube-thumbnail.jpg
-- Destination links: https://youtu.be/G2RlCwZKOsk, https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
-- Destination evidence:
-  - `needs_manual_review` https://youtu.be/G2RlCwZKOsk: no local evidence
-  - `verified_local_evidence` https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n: Twelve Dollars YouTube playlist URL (data/distrokid_release_status.json); Twelve Dollars YouTube playlist URL (data/distrokid_release_status.json); Twelve Dollars verified items: 8 (data/youtube_twelve_dollars_playlist.json)
-- Public URL slot: `PUBLIC_URL`
-- Log preview after posting: `python3 scripts/log_manual_distribution.py --id FP-AUTO-285 --url 'PUBLIC_URL'`
-- Log apply after posting: `python3 scripts/log_manual_distribution.py --id FP-AUTO-285 --url 'PUBLIC_URL' --apply --refresh-admin`
-- Log notes: `manual_distribution_id=FP-AUTO-285; source=data/manual_distribution_packet.json`
-- Bundle preview command template: `python3 scripts/log_manual_distribution.py --id FP-AUTO-285 --url 'PUBLIC_URL'`
-- Bundle apply command template: `python3 scripts/log_manual_distribution.py --id FP-AUTO-285 --url 'PUBLIC_URL' --apply --refresh-admin`
-- Bundle result trigger: Log the public URL, then use admin/reports/experiment-result-clipboard.md for the first 24-hour measurement.
-- Result handoff: `blocked_until_public_url_logged` via `admin/reports/experiment-result-clipboard.md`
-- Result handoff reason: Experiment result collection starts after the real public URL is logged in Published_Log.csv.
-- First measurement due: **24 hours after URL logging**
-- After posting checklist:
-  - Copy the real public YouTube Community post URL.
-  - Run the log preview command: python3 scripts/log_manual_distribution.py --id FP-AUTO-285 --url 'PUBLIC_URL'
-  - Run the log apply command after preview passes: python3 scripts/log_manual_distribution.py --id FP-AUTO-285 --url 'PUBLIC_URL' --apply --refresh-admin
-  - Refresh Admin and confirm this card moves out of the manual posting queue.
-  - Open the experiment result clipboard 24 hours after URL logging for the first measurement.
+- No approved manual posts are currently waiting.
+- Posting bundle: not applicable while the manual lane is empty.
+- Paste text: not applicable while the manual lane is empty.
+- Log preview after posting: not applicable while the manual lane is empty.
+- Bundle result trigger: not applicable while the manual lane is empty.
+- After posting checklist: no manual posting checklist is active.
 
 ## Operator Steps
 - Open the YouTube Community surface.

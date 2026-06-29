@@ -342,6 +342,10 @@ def build_unlock_roadmap(rows: list[dict], projection: dict) -> list[dict]:
     tiktok_rows = [item for item in platform_rows if str(item.get("platform") or "").lower() == "tiktok"]
     backlog_summary = backlog.get("summary") or {}
     manual_phase = "Post manual YouTube Community rows" if int(manual_docket.get("postable_count") or 0) else "Review and post manual YouTube Community rows"
+    approval_unlocks = ["Instagram executor row can become publish-eligible after approval."]
+    if int(projection.get("manual_rows_unblocked") or 0):
+        approval_unlocks.append("Manual-dispatch rows can move into the manual distribution packet after approval.")
+
     roadmap = [
         {
             "id": "unlock-checked-scheduled-approval",
@@ -349,16 +353,20 @@ def build_unlock_roadmap(rows: list[dict], projection: dict) -> list[dict]:
             "status": approval_status,
             "owner": "tod",
             "blockers_resolved": 0 if approval_status == "completed" else int(projection.get("blockers_resolved") or 0),
-            "unlocks": [
-                "Instagram executor row can become publish-eligible after approval.",
-                "One scheduled YouTube Community row can move into manual distribution after approval.",
-            ],
+            "unlocks": approval_unlocks,
             "blocked_by": projection.get("blocked_ids_retained") or [],
             "preview_command": projection.get("preview_command") or "",
             "apply_command": projection.get("apply_command") or "",
             "source_path": str(SCHEDULED_APPROVAL.relative_to(ROOT)),
         },
-        {
+    ]
+    manual_units = (
+        int(approval_docket.get("ready_count") or 0)
+        + int(manual_docket.get("review_count") or 0)
+        + int(manual_docket.get("postable_count") or 0)
+    )
+    if manual_units:
+        roadmap.append({
             "id": "unlock-manual-distribution",
             "phase": manual_phase,
             "status": approval_docket.get("status") or manual_docket.get("status") or "unknown",
@@ -374,7 +382,8 @@ def build_unlock_roadmap(rows: list[dict], projection: dict) -> list[dict]:
             "source_path": str(MANUAL_DISTRIBUTION.relative_to(ROOT)),
             "command_source_path": str(APPROVAL_RUNWAY.relative_to(ROOT)),
             "guardrail": approval_docket.get("guardrail") or "Manual posting and public URL logging remain separate after approval.",
-        },
+        })
+    roadmap.extend([
         {
             "id": "unlock-tiktok-platform-repair",
             "phase": "Repair TikTok executor",
@@ -421,7 +430,7 @@ def build_unlock_roadmap(rows: list[dict], projection: dict) -> list[dict]:
             "apply_command": metric_docket.get("worksheet_import_command") or "",
             "source_path": str(MANUAL_METRICS.relative_to(ROOT)),
         },
-    ]
+    ])
     return roadmap
 
 

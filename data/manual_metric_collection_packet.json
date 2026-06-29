@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-23T08:58:45.366836Z",
+  "generated_at": "2026-06-29T15:09:59.354074Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -287,7 +287,7 @@
         "ready_to_import_count": 0,
         "source_hint": "TikTok Studio or Creator Center analytics",
         "collection_url": "https://www.tiktok.com/@lilyroo930",
-        "reason": "TikTok metrics need TikTok OAuth credentials.",
+        "reason": "TikTok Content Posting API returns creator and posting-permission info, not follower or profile-view analytics.",
         "priority_summary": [
           "Recent discovery and traffic"
         ],
@@ -466,7 +466,7 @@
       "entry_csv_path": "data/manual_metric_entry_template.csv",
       "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run",
       "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin",
-      "evidence_note_template": "Meta Business Suite > Insights 2026-06-23",
+      "evidence_note_template": "Meta Business Suite > Insights 2026-06-29",
       "collection_sequence": [
         "Open https://www.facebook.com/903693509504290.",
         "Collect the listed metric fields from the named analytics surface.",
@@ -516,7 +516,7 @@
       "entry_csv_path": "data/manual_metric_entry_template.csv",
       "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run",
       "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin",
-      "evidence_note_template": "Instagram Professional Dashboard > Insights 2026-06-23",
+      "evidence_note_template": "Instagram Professional Dashboard > Insights 2026-06-29",
       "collection_sequence": [
         "Open https://www.instagram.com/lilyroo.artist/.",
         "Collect the listed metric fields from the named analytics surface.",
@@ -585,7 +585,7 @@
       "entry_csv_path": "data/manual_metric_entry_template.csv",
       "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run",
       "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin",
-      "evidence_note_template": "Spotify for Artists > Music/Stats export 2026-06-23",
+      "evidence_note_template": "Spotify for Artists > Music/Stats export 2026-06-29",
       "collection_sequence": [
         "Open https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a.",
         "Collect the listed metric fields from the named analytics surface.",
@@ -635,7 +635,7 @@
       "entry_csv_path": "data/manual_metric_entry_template.csv",
       "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run",
       "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin",
-      "evidence_note_template": "TikTok Studio or Creator Center analytics 2026-06-23",
+      "evidence_note_template": "TikTok Studio or Creator Center analytics 2026-06-29",
       "collection_sequence": [
         "Open https://www.tiktok.com/@lilyroo930.",
         "Collect the listed metric fields from the named analytics surface.",
@@ -685,7 +685,7 @@
       "entry_csv_path": "data/manual_metric_entry_template.csv",
       "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run",
       "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --refresh-admin",
-      "evidence_note_template": "X Analytics or account profile metrics 2026-06-23",
+      "evidence_note_template": "X Analytics or account profile metrics 2026-06-29",
       "collection_sequence": [
         "Open https://x.com/lilyrooartist.",
         "Collect the listed metric fields from the named analytics surface.",
@@ -1278,7 +1278,7 @@
       "platform": "tiktok",
       "source_hint": "TikTok Studio or Creator Center analytics",
       "collection_url": "https://www.tiktok.com/@lilyroo930",
-      "reason": "TikTok metrics need TikTok OAuth credentials.",
+      "reason": "TikTok Content Posting API returns creator and posting-permission info, not follower or profile-view analytics.",
       "fields": [
         {
           "field": "profile_views_7d",
@@ -1531,7 +1531,7 @@
       "collection_url": "https://www.tiktok.com/@lilyroo930",
       "public_capture_status": "",
       "adapter_blocker": "",
-      "reason": "TikTok metrics need TikTok OAuth credentials.",
+      "reason": "TikTok Content Posting API returns creator and posting-permission info, not follower or profile-view analytics.",
       "update_assignment": "tiktok.profile_views_7d=VALUE",
       "import_effect": "update data/manual_social_stats.json tiktok.profile_views_7d from 'pending' to the filled new_value",
       "platform_update_command": "python3 scripts/update_manual_social_stats.py tiktok.profile_views_7d=VALUE --refresh-admin",

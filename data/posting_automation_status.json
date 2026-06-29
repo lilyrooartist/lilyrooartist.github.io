@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-24T06:12:54.512080Z",
+  "generated_at": "2026-06-29T15:09:59.905313Z",
   "safe_mode": true,
   "source": {
     "workflow": ".github/workflows/promo-admin-refresh.yml",
@@ -16,8 +16,8 @@
   "summary": {
     "status": "blocked",
     "ready_lane_count": 5,
-    "blocked_lane_count": 3,
-    "attention_lane_count": 0,
+    "blocked_lane_count": 2,
+    "attention_lane_count": 1,
     "lane_count": 8,
     "workflow_crons": [
       "17 */6 * * *"
@@ -25,14 +25,14 @@
     "scheduler_http_status": 200,
     "scheduler_auth_method": "bearer",
     "scheduler_refresh_step_ok": true,
-    "posted_count": 1,
-    "attention_count": 8,
-    "platform_fix_needed_count": 7,
+    "posted_count": 5,
+    "attention_count": 6,
+    "platform_fix_needed_count": 5,
     "story_post_count": 6,
-    "story_queued_future_count": 6,
-    "platform_repair_blocked_count": 4,
+    "story_queued_future_count": 3,
+    "platform_repair_blocked_count": 5,
     "blocker_input_status": "missing_local_input",
-    "blocker_input_missing_count": 3,
+    "blocker_input_missing_count": 1,
     "blocker_input_external_action_count": 1,
     "help_needed_count": 5,
     "next_action": "Resolve the platform repair checklist before expecting full auto-post coverage."
@@ -40,29 +40,29 @@
   "lanes": [
     {
       "label": "Scheduled refresh workflow",
-      "status": "ready",
-      "detail": "17 */6 * * *; latest run completed / success",
-      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28002303668",
-      "next_action": ""
+      "status": "needs_attention",
+      "detail": "17 */6 * * *; latest run completed / failure",
+      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28368479772",
+      "next_action": "Confirm the GitHub Actions workflow is enabled and has a successful run."
     },
     {
       "label": "Safe admin refresh",
       "status": "ready",
-      "detail": "41 refresh commands captured at 2026-06-23T08:58:46.140472Z",
+      "detail": "11 refresh commands captured at 2026-06-29T15:09:58.349519Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": ""
     },
     {
       "label": "Scheduler dry-run authentication",
       "status": "ready",
-      "detail": "HTTP 200 using bearer auth; due=6 would_post=0",
+      "detail": "HTTP 200 using bearer auth; due=26 would_post=0",
       "evidence": "data/social_scheduler_dry_run.json",
       "next_action": ""
     },
     {
       "label": "Execution capture",
       "status": "ready",
-      "detail": "posted=1 attention=8 platform_fix_needed=7",
+      "detail": "posted=5 attention=6 platform_fix_needed=5",
       "evidence": "data/social_execution_snapshot.json",
       "next_action": ""
     },
@@ -75,22 +75,22 @@
     },
     {
       "label": "TikTok API lane",
-      "status": "blocked",
-      "detail": "blocked; upload_ready=False; public_ready=False",
+      "status": "ready",
+      "detail": "blocked; upload_ready=True; public_ready=False",
       "evidence": "data/tiktok_setup_preflight.json",
-      "next_action": "Add TikTok OAuth credentials and rerun the upload-mode dry run."
+      "next_action": ""
     },
     {
       "label": "Blocker input readiness",
       "status": "blocked",
-      "detail": "1 ready; 3 missing local input; 1 external action needed",
+      "detail": "3 ready; 1 missing local input; 1 external action needed",
       "evidence": "data/social_blocker_input_status.json",
-      "next_action": "Add META_LONG_LIVED_TOKEN, FB_PAGE_ID to /Users/tod.famous/Documents/New project/secrets/social_api.env, then run python3 scripts/resolve_instagram_business_account.py."
+      "next_action": "Add META_LONG_LIVED_TOKEN, FB_PAGE_ID to /private/tmp/secrets/social_api.env, then run python3 scripts/resolve_instagram_business_account.py."
     },
     {
       "label": "Story throughput",
       "status": "ready",
-      "detail": "6 tracked; 6 queued; 0 past due without URL",
+      "detail": "6 tracked; 3 queued; 1 past due without URL",
       "evidence": "data/story_throughput_tracking.json",
       "next_action": "Export social executions after scheduled post times, then log public URLs and results."
     }

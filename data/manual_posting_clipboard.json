@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T12:34:04.279052Z",
+  "generated_at": "2026-06-29T15:09:59.164076Z",
   "safe_mode": true,
   "source": {
     "manual_distribution_packet": "data/manual_distribution_packet.json",
@@ -8,28 +8,18 @@
     "published_log_target": "admin/content/Published_Log.csv"
   },
   "summary": {
-    "status": "ready_to_post",
+    "status": "empty",
     "posting_surface": "YouTube Studio Community",
     "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
-    "postable_count": 4,
-    "waiting_public_url_count": 4,
-    "pending_log_ids": [
-      "FP-AUTO-270",
-      "FP-AUTO-275",
-      "FP-AUTO-280",
-      "FP-AUTO-285"
-    ],
-    "posting_bundle_count": 4,
+    "postable_count": 0,
+    "waiting_public_url_count": 0,
+    "pending_log_ids": [],
+    "posting_bundle_count": 0,
     "url_template_path": "data/manual_distribution_url_template.csv",
     "paste_text_dir": "data/manual-posting-cards",
     "session_file_path": "data/manual-posting-cards/youtube-community-session.md",
-    "paste_text_file_count": 4,
-    "paste_text_files": [
-      "data/manual-posting-cards/fp-auto-270.txt",
-      "data/manual-posting-cards/fp-auto-275.txt",
-      "data/manual-posting-cards/fp-auto-280.txt",
-      "data/manual-posting-cards/fp-auto-285.txt"
-    ],
+    "paste_text_file_count": 0,
+    "paste_text_files": [],
     "batch_log_preview_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv",
     "batch_log_apply_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --apply --refresh-admin",
     "batch_log_partial_apply_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --allow-partial --apply --refresh-admin",
@@ -39,211 +29,43 @@
     "public_url_reconciliation_apply_command": "",
     "result_handoff_report": "admin/reports/experiment-result-clipboard.md",
     "first_measurement_due_after_hours": 24,
-    "next_action": "Post each card in YouTube Community, copy the real public URL, then log it.",
-    "next_post_now": {
-      "id": "FP-AUTO-270",
-      "release": "Brain Rot",
-      "platform": "YouTube Community",
-      "surface_url": "https://www.youtube.com/@lilyroo.artist/community",
-      "copy_source": "data/manual-posting-cards/fp-auto-270.txt",
-      "asset_source": "assets/albums/twelve-dollars/art/01-brain-rot-youtube-thumbnail.jpg",
-      "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/01-brain-rot-youtube-thumbnail.jpg",
-      "paste_text": "The phone is melting politely. Brain Rot is tonight's Twelve Dollars signal. Watch the remastered video. Full Twelve Dollars playlist is live.\n\nWatch Brain Rot: https://youtu.be/U7aczBSruAY | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-      "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL'",
-      "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL' --apply --refresh-admin",
-      "result_handoff_report": "admin/reports/experiment-result-clipboard.md",
-      "completion_evidence": [
-        "The YouTube Community post is published from the listed text and asset.",
-        "A real public YouTube Community URL replaces PUBLIC_URL in the logging command.",
-        "The post appears in Published_Log.csv with this manual distribution ID."
-      ]
-    }
+    "next_action": "No approved manual posts are currently waiting."
   },
   "first_post_runbook": {
-    "status": "ready_to_post_and_log",
-    "post_id": "FP-AUTO-270",
-    "release": "Brain Rot",
-    "platform": "YouTube Community",
-    "posting_surface": "YouTube Studio Community",
-    "surface_url": "https://www.youtube.com/@lilyroo.artist/community",
-    "copy_source": "data/manual-posting-cards/fp-auto-270.txt",
-    "asset_source": "assets/albums/twelve-dollars/art/01-brain-rot-youtube-thumbnail.jpg",
-    "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/01-brain-rot-youtube-thumbnail.jpg",
-    "paste_text": "The phone is melting politely. Brain Rot is tonight's Twelve Dollars signal. Watch the remastered video. Full Twelve Dollars playlist is live.\n\nWatch Brain Rot: https://youtu.be/U7aczBSruAY | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-    "public_url_slot": "PUBLIC_URL",
-    "url_worksheet_path": "data/manual_distribution_url_template.csv",
-    "worksheet_update_instruction": "Paste the real public URL into data/manual_distribution_url_template.csv public_url for FP-AUTO-270.",
-    "log_preview_command_template": "python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL'",
-    "log_apply_command_template": "python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL' --apply --refresh-admin",
-    "partial_batch_apply_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --allow-partial --apply --refresh-admin",
-    "result_handoff_report": "admin/reports/experiment-result-clipboard.md",
-    "first_measurement_due_after_hours": 24,
-    "first_measurement_trigger": "after real public URL is logged",
-    "post_completion_checklist": [
-      "Open the YouTube Community surface.",
-      "Paste the copy exactly from copy_source.",
-      "Attach the listed asset_source or asset_url.",
-      "Publish the Community post manually.",
-      "Copy the real public YouTube Community post URL.",
-      "Run the preview command with the real URL.",
-      "Run the apply command only after preview confirms the real URL.",
-      "Confirm Published_Log.csv contains this manual distribution ID.",
-      "Collect first visible metrics 24 hours after the public URL is logged."
-    ],
-    "completion_evidence": [
-      "A real public YouTube Community post URL exists.",
-      "The URL has replaced PUBLIC_URL in the preview/apply command or worksheet.",
-      "Published_Log.csv contains this manual_distribution_id.",
-      "The experiment result clipboard lists this post for its 24-hour measurement."
-    ],
-    "guardrail": "Do not run an apply command with PUBLIC_URL, a blank URL, or a private/non-public post URL."
+    "status": "clear",
+    "post_id": "",
+    "next_action": "All manual post URLs are already logged.",
+    "guardrail": "No placeholder URLs are accepted."
   },
   "first_url_acceleration": {
-    "status": "ready_after_first_public_url",
-    "first_post_id": "FP-AUTO-270",
-    "first_release": "Brain Rot",
-    "surface_url": "https://www.youtube.com/@lilyroo.artist/community",
-    "copy_source": "data/manual-posting-cards/fp-auto-270.txt",
-    "asset_source": "assets/albums/twelve-dollars/art/01-brain-rot-youtube-thumbnail.jpg",
-    "single_preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL'",
-    "single_apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL' --apply --refresh-admin",
-    "partial_batch_apply_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --allow-partial --apply --refresh-admin",
-    "measurement_report": "admin/reports/experiment-result-clipboard.md",
-    "measurement_preview_command": "python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run",
-    "first_measurement_due_after_hours": 24,
-    "why": "Logging the first public URL immediately lets that post enter the 24-hour result-collection queue without waiting for the full batch.",
-    "next_action": "Post the first card, paste its real public URL into the worksheet, run the preview, then apply with --allow-partial.",
-    "guardrail": "Use only a real public YouTube Community post URL; never apply PUBLIC_URL or blank worksheet rows."
+    "status": "clear",
+    "first_post_id": "",
+    "next_action": "All manual post URLs are already logged.",
+    "guardrail": "No placeholder URLs are accepted."
   },
   "tracking_lifecycle": {
     "status": "active",
-    "total_count": 4,
+    "total_count": 0,
     "posted_count": 0,
     "public_url_logged_count": 0,
     "result_recorded_count": 0,
-    "waiting_manual_post_count": 4,
+    "waiting_manual_post_count": 0,
     "ready_for_measurement_count": 0,
-    "stage_counts": {
-      "waiting_for_manual_post": 4
-    },
-    "primary_gap": "manual_posting",
-    "rows": [
-      {
-        "id": "FP-AUTO-270",
-        "release": "Brain Rot",
-        "platform": "YouTube Community",
-        "stage": "waiting_for_manual_post",
-        "posted": false,
-        "public_url_logged": false,
-        "result_recorded": false,
-        "public_url": "",
-        "logged_at": "",
-        "logged_date": "",
-        "measurement_due_at": "",
-        "measurement_due": false,
-        "measurement_due_source": "after_url_logging",
-        "result_handoff_report": "admin/reports/experiment-result-clipboard.md",
-        "next_action": "Publish the Community card, copy the real public post URL, then log it.",
-        "completion_evidence": [
-          "A real public YouTube Community post URL exists.",
-          "Published_Log.csv contains this manual_distribution_id or content_id.",
-          "The first measurement has at least one numeric value plus a result_evidence note."
-        ]
-      },
-      {
-        "id": "FP-AUTO-275",
-        "release": "Every Pearl in Carmel",
-        "platform": "YouTube Community",
-        "stage": "waiting_for_manual_post",
-        "posted": false,
-        "public_url_logged": false,
-        "result_recorded": false,
-        "public_url": "",
-        "logged_at": "",
-        "logged_date": "",
-        "measurement_due_at": "",
-        "measurement_due": false,
-        "measurement_due_source": "after_url_logging",
-        "result_handoff_report": "admin/reports/experiment-result-clipboard.md",
-        "next_action": "Publish the Community card, copy the real public post URL, then log it.",
-        "completion_evidence": [
-          "A real public YouTube Community post URL exists.",
-          "Published_Log.csv contains this manual_distribution_id or content_id.",
-          "The first measurement has at least one numeric value plus a result_evidence note."
-        ]
-      },
-      {
-        "id": "FP-AUTO-280",
-        "release": "The Other One's Charging",
-        "platform": "YouTube Community",
-        "stage": "waiting_for_manual_post",
-        "posted": false,
-        "public_url_logged": false,
-        "result_recorded": false,
-        "public_url": "",
-        "logged_at": "",
-        "logged_date": "",
-        "measurement_due_at": "",
-        "measurement_due": false,
-        "measurement_due_source": "after_url_logging",
-        "result_handoff_report": "admin/reports/experiment-result-clipboard.md",
-        "next_action": "Publish the Community card, copy the real public post URL, then log it.",
-        "completion_evidence": [
-          "A real public YouTube Community post URL exists.",
-          "Published_Log.csv contains this manual_distribution_id or content_id.",
-          "The first measurement has at least one numeric value plus a result_evidence note."
-        ]
-      },
-      {
-        "id": "FP-AUTO-285",
-        "release": "Twelve Dollars",
-        "platform": "YouTube Community",
-        "stage": "waiting_for_manual_post",
-        "posted": false,
-        "public_url_logged": false,
-        "result_recorded": false,
-        "public_url": "",
-        "logged_at": "",
-        "logged_date": "",
-        "measurement_due_at": "",
-        "measurement_due": false,
-        "measurement_due_source": "after_url_logging",
-        "result_handoff_report": "admin/reports/experiment-result-clipboard.md",
-        "next_action": "Publish the Community card, copy the real public post URL, then log it.",
-        "completion_evidence": [
-          "A real public YouTube Community post URL exists.",
-          "Published_Log.csv contains this manual_distribution_id or content_id.",
-          "The first measurement has at least one numeric value plus a result_evidence note."
-        ]
-      }
-    ],
+    "stage_counts": {},
+    "primary_gap": "complete",
+    "rows": [],
     "guardrail": "Do not advance a lifecycle stage without the listed completion evidence."
   },
   "session_manifest": {
-    "status": "ready_to_post",
+    "status": "complete",
     "session_name": "YouTube Community manual posting batch",
     "surface_url": "https://www.youtube.com/@lilyroo.artist/community",
-    "postable_count": 4,
-    "waiting_public_url_count": 4,
+    "postable_count": 0,
+    "waiting_public_url_count": 0,
     "logged_count": 0,
-    "sequence_ids": [
-      "FP-AUTO-270",
-      "FP-AUTO-275",
-      "FP-AUTO-280",
-      "FP-AUTO-285"
-    ],
-    "copy_sources": [
-      "data/manual-posting-cards/fp-auto-270.txt",
-      "data/manual-posting-cards/fp-auto-275.txt",
-      "data/manual-posting-cards/fp-auto-280.txt",
-      "data/manual-posting-cards/fp-auto-285.txt"
-    ],
-    "asset_sources": [
-      "assets/albums/twelve-dollars/art/01-brain-rot-youtube-thumbnail.jpg",
-      "assets/albums/twelve-dollars/art/02-every-pearl-in-carmel-youtube-thumbnail.jpg",
-      "assets/albums/twelve-dollars/art/03-the-other-ones-charging-youtube-thumbnail.jpg",
-      "assets/albums/twelve-dollars/art/04-twelve-dollars-youtube-thumbnail.jpg"
-    ],
+    "sequence_ids": [],
+    "copy_sources": [],
+    "asset_sources": [],
     "url_template_path": "data/manual_distribution_url_template.csv",
     "batch_log_preview_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv",
     "batch_log_apply_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --apply --refresh-admin",
@@ -251,96 +73,7 @@
     "public_url_reconciliation_command": "python3 scripts/reconcile_youtube_community_urls.py",
     "result_handoff_report": "admin/reports/experiment-result-clipboard.md",
     "first_measurement_due_after_hours": 24,
-    "rows": [
-      {
-        "sequence": 1,
-        "id": "FP-AUTO-270",
-        "release": "Brain Rot",
-        "platform": "YouTube Community",
-        "status": "waiting_for_post_and_public_url",
-        "copy_source": "data/manual-posting-cards/fp-auto-270.txt",
-        "asset_source": "assets/albums/twelve-dollars/art/01-brain-rot-youtube-thumbnail.jpg",
-        "surface_url": "https://www.youtube.com/@lilyroo.artist/community",
-        "public_url": "",
-        "public_url_required": true,
-        "preview_command_template": "python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL'",
-        "apply_command_template": "python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL' --apply --refresh-admin",
-        "result_collection_trigger": "Log the public URL, then use admin/reports/experiment-result-clipboard.md for the first 24-hour measurement.",
-        "first_measurement_due_after_hours": 24,
-        "completion_evidence": [
-          "A real public YouTube Community post URL exists.",
-          "The URL is logged with scripts/log_manual_distribution.py.",
-          "admin/content/Published_Log.csv contains this manual_distribution_id.",
-          "The experiment result clipboard can request first measurement values at the 24-hour readout for this post."
-        ]
-      },
-      {
-        "sequence": 2,
-        "id": "FP-AUTO-275",
-        "release": "Every Pearl in Carmel",
-        "platform": "YouTube Community",
-        "status": "waiting_for_post_and_public_url",
-        "copy_source": "data/manual-posting-cards/fp-auto-275.txt",
-        "asset_source": "assets/albums/twelve-dollars/art/02-every-pearl-in-carmel-youtube-thumbnail.jpg",
-        "surface_url": "https://www.youtube.com/@lilyroo.artist/community",
-        "public_url": "",
-        "public_url_required": true,
-        "preview_command_template": "python3 scripts/log_manual_distribution.py --id FP-AUTO-275 --url 'PUBLIC_URL'",
-        "apply_command_template": "python3 scripts/log_manual_distribution.py --id FP-AUTO-275 --url 'PUBLIC_URL' --apply --refresh-admin",
-        "result_collection_trigger": "Log the public URL, then use admin/reports/experiment-result-clipboard.md for the first 24-hour measurement.",
-        "first_measurement_due_after_hours": 24,
-        "completion_evidence": [
-          "A real public YouTube Community post URL exists.",
-          "The URL is logged with scripts/log_manual_distribution.py.",
-          "admin/content/Published_Log.csv contains this manual_distribution_id.",
-          "The experiment result clipboard can request first measurement values at the 24-hour readout for this post."
-        ]
-      },
-      {
-        "sequence": 3,
-        "id": "FP-AUTO-280",
-        "release": "The Other One's Charging",
-        "platform": "YouTube Community",
-        "status": "waiting_for_post_and_public_url",
-        "copy_source": "data/manual-posting-cards/fp-auto-280.txt",
-        "asset_source": "assets/albums/twelve-dollars/art/03-the-other-ones-charging-youtube-thumbnail.jpg",
-        "surface_url": "https://www.youtube.com/@lilyroo.artist/community",
-        "public_url": "",
-        "public_url_required": true,
-        "preview_command_template": "python3 scripts/log_manual_distribution.py --id FP-AUTO-280 --url 'PUBLIC_URL'",
-        "apply_command_template": "python3 scripts/log_manual_distribution.py --id FP-AUTO-280 --url 'PUBLIC_URL' --apply --refresh-admin",
-        "result_collection_trigger": "Log the public URL, then use admin/reports/experiment-result-clipboard.md for the first 24-hour measurement.",
-        "first_measurement_due_after_hours": 24,
-        "completion_evidence": [
-          "A real public YouTube Community post URL exists.",
-          "The URL is logged with scripts/log_manual_distribution.py.",
-          "admin/content/Published_Log.csv contains this manual_distribution_id.",
-          "The experiment result clipboard can request first measurement values at the 24-hour readout for this post."
-        ]
-      },
-      {
-        "sequence": 4,
-        "id": "FP-AUTO-285",
-        "release": "Twelve Dollars",
-        "platform": "YouTube Community",
-        "status": "waiting_for_post_and_public_url",
-        "copy_source": "data/manual-posting-cards/fp-auto-285.txt",
-        "asset_source": "assets/albums/twelve-dollars/art/04-twelve-dollars-youtube-thumbnail.jpg",
-        "surface_url": "https://www.youtube.com/@lilyroo.artist/community",
-        "public_url": "",
-        "public_url_required": true,
-        "preview_command_template": "python3 scripts/log_manual_distribution.py --id FP-AUTO-285 --url 'PUBLIC_URL'",
-        "apply_command_template": "python3 scripts/log_manual_distribution.py --id FP-AUTO-285 --url 'PUBLIC_URL' --apply --refresh-admin",
-        "result_collection_trigger": "Log the public URL, then use admin/reports/experiment-result-clipboard.md for the first 24-hour measurement.",
-        "first_measurement_due_after_hours": 24,
-        "completion_evidence": [
-          "A real public YouTube Community post URL exists.",
-          "The URL is logged with scripts/log_manual_distribution.py.",
-          "admin/content/Published_Log.csv contains this manual_distribution_id.",
-          "The experiment result clipboard can request first measurement values at the 24-hour readout for this post."
-        ]
-      }
-    ],
+    "rows": [],
     "posting_sequence": [
       "Open the YouTube Community surface once.",
       "Post each session row in sequence using its copy_source and asset_source.",
@@ -356,408 +89,7 @@
     ],
     "guardrail": "Do not mark the session complete until every row has a real public URL logged."
   },
-  "post_cards": [
-    {
-      "id": "FP-AUTO-270",
-      "release": "Brain Rot",
-      "platform": "YouTube Community",
-      "status": "ready_for_manual_post",
-      "posting_surface": "YouTube Studio Community",
-      "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
-      "paste_text": "The phone is melting politely. Brain Rot is tonight's Twelve Dollars signal. Watch the remastered video. Full Twelve Dollars playlist is live.\n\nWatch Brain Rot: https://youtu.be/U7aczBSruAY | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-      "paste_text_path": "data/manual-posting-cards/fp-auto-270.txt",
-      "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/01-brain-rot-youtube-thumbnail.jpg",
-      "asset_status": "local_asset_present",
-      "asset_local_path": "assets/albums/twelve-dollars/art/01-brain-rot-youtube-thumbnail.jpg",
-      "destination_links": [
-        "https://youtu.be/U7aczBSruAY",
-        "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n"
-      ],
-      "destination_link_audit": [
-        {
-          "url": "https://youtu.be/U7aczBSruAY",
-          "canonical_url": "https://youtu.be/U7aczBSruAY",
-          "status": "needs_manual_review",
-          "evidence": [],
-          "evidence_count": 0,
-          "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
-        },
-        {
-          "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-          "canonical_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-          "status": "verified_local_evidence",
-          "evidence": [
-            {
-              "source": "data/distrokid_release_status.json",
-              "label": "Twelve Dollars YouTube playlist URL",
-              "status": "known_release_link"
-            },
-            {
-              "source": "data/distrokid_release_status.json",
-              "label": "Twelve Dollars YouTube playlist URL",
-              "status": "known_release_playlist"
-            },
-            {
-              "source": "data/youtube_twelve_dollars_playlist.json",
-              "label": "Twelve Dollars verified items: 8",
-              "status": "known_playlist_snapshot"
-            }
-          ],
-          "evidence_count": 3,
-          "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
-        }
-      ],
-      "selected_cta_strength": "",
-      "postable_now": true,
-      "logging_required": true,
-      "public_url": "",
-      "public_url_placeholder": "PUBLIC_URL",
-      "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL'",
-      "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL' --apply --refresh-admin",
-      "log_notes": "manual_distribution_id=FP-AUTO-270; source=data/manual_distribution_packet.json",
-      "result_handoff": {
-        "status": "blocked_until_public_url_logged",
-        "source_report": "admin/reports/experiment-result-clipboard.md",
-        "reason": "Experiment result collection starts after the real public URL is logged in Published_Log.csv.",
-        "first_measurement_due_after_hours": 24,
-        "first_measurement_window": "Collect first public performance values 24 hours after the public URL is logged."
-      },
-      "posting_bundle": {
-        "surface_url": "https://www.youtube.com/@lilyroo.artist/community",
-        "copy_source": "data/manual-posting-cards/fp-auto-270.txt",
-        "asset_source": "assets/albums/twelve-dollars/art/01-brain-rot-youtube-thumbnail.jpg",
-        "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/01-brain-rot-youtube-thumbnail.jpg",
-        "public_url_required": true,
-        "url_placeholder": "PUBLIC_URL",
-        "preview_command_template": "python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL'",
-        "apply_command_template": "python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL' --apply --refresh-admin",
-        "result_collection_trigger": "Log the public URL, then use admin/reports/experiment-result-clipboard.md for the first 24-hour measurement.",
-        "first_measurement_due_after_hours": 24,
-        "operator_sequence": [
-          "Open the YouTube Community surface.",
-          "Paste the copy from copy_source.",
-          "Attach the asset from asset_source.",
-          "Publish the Community post.",
-          "Copy the real public Community post URL.",
-          "Run the preview command with the real URL.",
-          "Run the apply command after the preview passes."
-        ]
-      },
-      "after_posting_checklist": [
-        "Copy the real public YouTube Community post URL.",
-        "Run the log preview command: python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL'",
-        "Run the log apply command after preview passes: python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL' --apply --refresh-admin",
-        "Refresh Admin and confirm this card moves out of the manual posting queue.",
-        "Open the experiment result clipboard 24 hours after URL logging for the first measurement."
-      ],
-      "completion_evidence": [
-        "A real public YouTube Community post URL exists.",
-        "The URL is logged with scripts/log_manual_distribution.py.",
-        "admin/content/Published_Log.csv contains this manual_distribution_id.",
-        "The experiment result clipboard can request first measurement values at the 24-hour readout for this post."
-      ]
-    },
-    {
-      "id": "FP-AUTO-275",
-      "release": "Every Pearl in Carmel",
-      "platform": "YouTube Community",
-      "status": "ready_for_manual_post",
-      "posting_surface": "YouTube Studio Community",
-      "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
-      "paste_text": "Every Pearl in Carmel is the pretty souvenir that still knows what it cost. Watch the remastered video. Full Twelve Dollars playlist is live.\n\nWatch Every Pearl in Carmel: https://youtu.be/QodRYnvTVZc | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-      "paste_text_path": "data/manual-posting-cards/fp-auto-275.txt",
-      "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/02-every-pearl-in-carmel-youtube-thumbnail.jpg",
-      "asset_status": "local_asset_present",
-      "asset_local_path": "assets/albums/twelve-dollars/art/02-every-pearl-in-carmel-youtube-thumbnail.jpg",
-      "destination_links": [
-        "https://youtu.be/QodRYnvTVZc",
-        "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n"
-      ],
-      "destination_link_audit": [
-        {
-          "url": "https://youtu.be/QodRYnvTVZc",
-          "canonical_url": "https://youtu.be/QodRYnvTVZc",
-          "status": "needs_manual_review",
-          "evidence": [],
-          "evidence_count": 0,
-          "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
-        },
-        {
-          "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-          "canonical_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-          "status": "verified_local_evidence",
-          "evidence": [
-            {
-              "source": "data/distrokid_release_status.json",
-              "label": "Twelve Dollars YouTube playlist URL",
-              "status": "known_release_link"
-            },
-            {
-              "source": "data/distrokid_release_status.json",
-              "label": "Twelve Dollars YouTube playlist URL",
-              "status": "known_release_playlist"
-            },
-            {
-              "source": "data/youtube_twelve_dollars_playlist.json",
-              "label": "Twelve Dollars verified items: 8",
-              "status": "known_playlist_snapshot"
-            }
-          ],
-          "evidence_count": 3,
-          "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
-        }
-      ],
-      "selected_cta_strength": "",
-      "postable_now": true,
-      "logging_required": true,
-      "public_url": "",
-      "public_url_placeholder": "PUBLIC_URL",
-      "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-275 --url 'PUBLIC_URL'",
-      "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-275 --url 'PUBLIC_URL' --apply --refresh-admin",
-      "log_notes": "manual_distribution_id=FP-AUTO-275; source=data/manual_distribution_packet.json",
-      "result_handoff": {
-        "status": "blocked_until_public_url_logged",
-        "source_report": "admin/reports/experiment-result-clipboard.md",
-        "reason": "Experiment result collection starts after the real public URL is logged in Published_Log.csv.",
-        "first_measurement_due_after_hours": 24,
-        "first_measurement_window": "Collect first public performance values 24 hours after the public URL is logged."
-      },
-      "posting_bundle": {
-        "surface_url": "https://www.youtube.com/@lilyroo.artist/community",
-        "copy_source": "data/manual-posting-cards/fp-auto-275.txt",
-        "asset_source": "assets/albums/twelve-dollars/art/02-every-pearl-in-carmel-youtube-thumbnail.jpg",
-        "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/02-every-pearl-in-carmel-youtube-thumbnail.jpg",
-        "public_url_required": true,
-        "url_placeholder": "PUBLIC_URL",
-        "preview_command_template": "python3 scripts/log_manual_distribution.py --id FP-AUTO-275 --url 'PUBLIC_URL'",
-        "apply_command_template": "python3 scripts/log_manual_distribution.py --id FP-AUTO-275 --url 'PUBLIC_URL' --apply --refresh-admin",
-        "result_collection_trigger": "Log the public URL, then use admin/reports/experiment-result-clipboard.md for the first 24-hour measurement.",
-        "first_measurement_due_after_hours": 24,
-        "operator_sequence": [
-          "Open the YouTube Community surface.",
-          "Paste the copy from copy_source.",
-          "Attach the asset from asset_source.",
-          "Publish the Community post.",
-          "Copy the real public Community post URL.",
-          "Run the preview command with the real URL.",
-          "Run the apply command after the preview passes."
-        ]
-      },
-      "after_posting_checklist": [
-        "Copy the real public YouTube Community post URL.",
-        "Run the log preview command: python3 scripts/log_manual_distribution.py --id FP-AUTO-275 --url 'PUBLIC_URL'",
-        "Run the log apply command after preview passes: python3 scripts/log_manual_distribution.py --id FP-AUTO-275 --url 'PUBLIC_URL' --apply --refresh-admin",
-        "Refresh Admin and confirm this card moves out of the manual posting queue.",
-        "Open the experiment result clipboard 24 hours after URL logging for the first measurement."
-      ],
-      "completion_evidence": [
-        "A real public YouTube Community post URL exists.",
-        "The URL is logged with scripts/log_manual_distribution.py.",
-        "admin/content/Published_Log.csv contains this manual_distribution_id.",
-        "The experiment result clipboard can request first measurement values at the 24-hour readout for this post."
-      ]
-    },
-    {
-      "id": "FP-AUTO-280",
-      "release": "The Other One's Charging",
-      "platform": "YouTube Community",
-      "status": "ready_for_manual_post",
-      "posting_surface": "YouTube Studio Community",
-      "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
-      "paste_text": "The Other One's Charging is domestic chaos with a battery icon. Watch the remastered video. Full Twelve Dollars playlist is live.\n\nWatch The Other One's Charging: https://youtu.be/EprgLKHp-lE | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-      "paste_text_path": "data/manual-posting-cards/fp-auto-280.txt",
-      "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/03-the-other-ones-charging-youtube-thumbnail.jpg",
-      "asset_status": "local_asset_present",
-      "asset_local_path": "assets/albums/twelve-dollars/art/03-the-other-ones-charging-youtube-thumbnail.jpg",
-      "destination_links": [
-        "https://youtu.be/EprgLKHp-lE",
-        "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n"
-      ],
-      "destination_link_audit": [
-        {
-          "url": "https://youtu.be/EprgLKHp-lE",
-          "canonical_url": "https://youtu.be/EprgLKHp-lE",
-          "status": "needs_manual_review",
-          "evidence": [],
-          "evidence_count": 0,
-          "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
-        },
-        {
-          "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-          "canonical_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-          "status": "verified_local_evidence",
-          "evidence": [
-            {
-              "source": "data/distrokid_release_status.json",
-              "label": "Twelve Dollars YouTube playlist URL",
-              "status": "known_release_link"
-            },
-            {
-              "source": "data/distrokid_release_status.json",
-              "label": "Twelve Dollars YouTube playlist URL",
-              "status": "known_release_playlist"
-            },
-            {
-              "source": "data/youtube_twelve_dollars_playlist.json",
-              "label": "Twelve Dollars verified items: 8",
-              "status": "known_playlist_snapshot"
-            }
-          ],
-          "evidence_count": 3,
-          "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
-        }
-      ],
-      "selected_cta_strength": "",
-      "postable_now": true,
-      "logging_required": true,
-      "public_url": "",
-      "public_url_placeholder": "PUBLIC_URL",
-      "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-280 --url 'PUBLIC_URL'",
-      "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-280 --url 'PUBLIC_URL' --apply --refresh-admin",
-      "log_notes": "manual_distribution_id=FP-AUTO-280; source=data/manual_distribution_packet.json",
-      "result_handoff": {
-        "status": "blocked_until_public_url_logged",
-        "source_report": "admin/reports/experiment-result-clipboard.md",
-        "reason": "Experiment result collection starts after the real public URL is logged in Published_Log.csv.",
-        "first_measurement_due_after_hours": 24,
-        "first_measurement_window": "Collect first public performance values 24 hours after the public URL is logged."
-      },
-      "posting_bundle": {
-        "surface_url": "https://www.youtube.com/@lilyroo.artist/community",
-        "copy_source": "data/manual-posting-cards/fp-auto-280.txt",
-        "asset_source": "assets/albums/twelve-dollars/art/03-the-other-ones-charging-youtube-thumbnail.jpg",
-        "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/03-the-other-ones-charging-youtube-thumbnail.jpg",
-        "public_url_required": true,
-        "url_placeholder": "PUBLIC_URL",
-        "preview_command_template": "python3 scripts/log_manual_distribution.py --id FP-AUTO-280 --url 'PUBLIC_URL'",
-        "apply_command_template": "python3 scripts/log_manual_distribution.py --id FP-AUTO-280 --url 'PUBLIC_URL' --apply --refresh-admin",
-        "result_collection_trigger": "Log the public URL, then use admin/reports/experiment-result-clipboard.md for the first 24-hour measurement.",
-        "first_measurement_due_after_hours": 24,
-        "operator_sequence": [
-          "Open the YouTube Community surface.",
-          "Paste the copy from copy_source.",
-          "Attach the asset from asset_source.",
-          "Publish the Community post.",
-          "Copy the real public Community post URL.",
-          "Run the preview command with the real URL.",
-          "Run the apply command after the preview passes."
-        ]
-      },
-      "after_posting_checklist": [
-        "Copy the real public YouTube Community post URL.",
-        "Run the log preview command: python3 scripts/log_manual_distribution.py --id FP-AUTO-280 --url 'PUBLIC_URL'",
-        "Run the log apply command after preview passes: python3 scripts/log_manual_distribution.py --id FP-AUTO-280 --url 'PUBLIC_URL' --apply --refresh-admin",
-        "Refresh Admin and confirm this card moves out of the manual posting queue.",
-        "Open the experiment result clipboard 24 hours after URL logging for the first measurement."
-      ],
-      "completion_evidence": [
-        "A real public YouTube Community post URL exists.",
-        "The URL is logged with scripts/log_manual_distribution.py.",
-        "admin/content/Published_Log.csv contains this manual_distribution_id.",
-        "The experiment result clipboard can request first measurement values at the 24-hour readout for this post."
-      ]
-    },
-    {
-      "id": "FP-AUTO-285",
-      "release": "Twelve Dollars",
-      "platform": "YouTube Community",
-      "status": "ready_for_manual_post",
-      "posting_surface": "YouTube Studio Community",
-      "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
-      "paste_text": "Twelve Dollars is the stage light, the joke, and the receipt. Watch the remastered video. Full Twelve Dollars playlist is live.\n\nWatch Twelve Dollars: https://youtu.be/G2RlCwZKOsk | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-      "paste_text_path": "data/manual-posting-cards/fp-auto-285.txt",
-      "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars-youtube-thumbnail.jpg",
-      "asset_status": "local_asset_present",
-      "asset_local_path": "assets/albums/twelve-dollars/art/04-twelve-dollars-youtube-thumbnail.jpg",
-      "destination_links": [
-        "https://youtu.be/G2RlCwZKOsk",
-        "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n"
-      ],
-      "destination_link_audit": [
-        {
-          "url": "https://youtu.be/G2RlCwZKOsk",
-          "canonical_url": "https://youtu.be/G2RlCwZKOsk",
-          "status": "needs_manual_review",
-          "evidence": [],
-          "evidence_count": 0,
-          "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
-        },
-        {
-          "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-          "canonical_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-          "status": "verified_local_evidence",
-          "evidence": [
-            {
-              "source": "data/distrokid_release_status.json",
-              "label": "Twelve Dollars YouTube playlist URL",
-              "status": "known_release_link"
-            },
-            {
-              "source": "data/distrokid_release_status.json",
-              "label": "Twelve Dollars YouTube playlist URL",
-              "status": "known_release_playlist"
-            },
-            {
-              "source": "data/youtube_twelve_dollars_playlist.json",
-              "label": "Twelve Dollars verified items: 8",
-              "status": "known_playlist_snapshot"
-            }
-          ],
-          "evidence_count": 3,
-          "guardrail": "Local snapshot/evidence audit only; no approval, posting, or live network check was performed."
-        }
-      ],
-      "selected_cta_strength": "",
-      "postable_now": true,
-      "logging_required": true,
-      "public_url": "",
-      "public_url_placeholder": "PUBLIC_URL",
-      "log_preview_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-285 --url 'PUBLIC_URL'",
-      "log_apply_command": "python3 scripts/log_manual_distribution.py --id FP-AUTO-285 --url 'PUBLIC_URL' --apply --refresh-admin",
-      "log_notes": "manual_distribution_id=FP-AUTO-285; source=data/manual_distribution_packet.json",
-      "result_handoff": {
-        "status": "blocked_until_public_url_logged",
-        "source_report": "admin/reports/experiment-result-clipboard.md",
-        "reason": "Experiment result collection starts after the real public URL is logged in Published_Log.csv.",
-        "first_measurement_due_after_hours": 24,
-        "first_measurement_window": "Collect first public performance values 24 hours after the public URL is logged."
-      },
-      "posting_bundle": {
-        "surface_url": "https://www.youtube.com/@lilyroo.artist/community",
-        "copy_source": "data/manual-posting-cards/fp-auto-285.txt",
-        "asset_source": "assets/albums/twelve-dollars/art/04-twelve-dollars-youtube-thumbnail.jpg",
-        "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars-youtube-thumbnail.jpg",
-        "public_url_required": true,
-        "url_placeholder": "PUBLIC_URL",
-        "preview_command_template": "python3 scripts/log_manual_distribution.py --id FP-AUTO-285 --url 'PUBLIC_URL'",
-        "apply_command_template": "python3 scripts/log_manual_distribution.py --id FP-AUTO-285 --url 'PUBLIC_URL' --apply --refresh-admin",
-        "result_collection_trigger": "Log the public URL, then use admin/reports/experiment-result-clipboard.md for the first 24-hour measurement.",
-        "first_measurement_due_after_hours": 24,
-        "operator_sequence": [
-          "Open the YouTube Community surface.",
-          "Paste the copy from copy_source.",
-          "Attach the asset from asset_source.",
-          "Publish the Community post.",
-          "Copy the real public Community post URL.",
-          "Run the preview command with the real URL.",
-          "Run the apply command after the preview passes."
-        ]
-      },
-      "after_posting_checklist": [
-        "Copy the real public YouTube Community post URL.",
-        "Run the log preview command: python3 scripts/log_manual_distribution.py --id FP-AUTO-285 --url 'PUBLIC_URL'",
-        "Run the log apply command after preview passes: python3 scripts/log_manual_distribution.py --id FP-AUTO-285 --url 'PUBLIC_URL' --apply --refresh-admin",
-        "Refresh Admin and confirm this card moves out of the manual posting queue.",
-        "Open the experiment result clipboard 24 hours after URL logging for the first measurement."
-      ],
-      "completion_evidence": [
-        "A real public YouTube Community post URL exists.",
-        "The URL is logged with scripts/log_manual_distribution.py.",
-        "admin/content/Published_Log.csv contains this manual_distribution_id.",
-        "The experiment result clipboard can request first measurement values at the 24-hour readout for this post."
-      ]
-    }
-  ],
+  "post_cards": [],
   "operator_steps": [
     "Open the YouTube Community surface.",
     "For each card, paste the text exactly as shown.",

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-23T08:58:45.435196Z",
+  "generated_at": "2026-06-29T15:09:59.418333Z",
   "safe_mode": true,
   "source": {
     "promotion_blocker_ledger": "data/promotion_blocker_ledger.json",
@@ -13,16 +13,17 @@
     "resolution_worksheet": "data/human_handoff_resolution_worksheet.csv"
   },
   "summary": {
-    "task_count": 8,
+    "task_count": 9,
     "owner_counts": {
       "external_platform": 1,
-      "tod": 7
+      "tod": 8
     },
     "urgency_counts": {
-      "high": 6,
+      "high": 7,
       "low": 2
     },
     "phase_counts": {
+      "Approval": 1,
       "Backlog recovery": 1,
       "Manual metrics": 2,
       "Platform setup": 5
@@ -42,79 +43,53 @@
       },
       "status_counts": {
         "blocked": 6,
-        "blocked_by_review_checks": 1,
-        "needs_values": 2
+        "needs_values": 2,
+        "ready_for_reviewed_approval": 1
       },
       "next_resolution_projection": {
         "kind": "checked_scheduled_approval_batch",
         "label": "Checked scheduled approval batch",
-        "checked_ids": [],
-        "blocked_ids_retained": [
+        "checked_ids": [
           "FP-AUTO-259"
         ],
-        "blockers_resolved": 0,
+        "blocked_ids_retained": [],
+        "blockers_resolved": 1,
         "approval_blockers_before": 1,
-        "approval_blockers_after": 1,
-        "auto_rows_unblocked": 0,
+        "approval_blockers_after": 0,
+        "auto_rows_unblocked": 1,
         "manual_rows_unblocked": 0,
-        "effect_count": 0,
-        "preview_command": "",
-        "apply_command": "",
+        "effect_count": 1,
+        "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+        "apply_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
         "guardrail": "Human review is still required; blocked review IDs stay excluded from the checked batch."
       },
       "blocker_unlock_roadmap": [
         {
           "id": "unlock-checked-scheduled-approval",
           "phase": "Approve checked scheduled rows",
-          "status": "blocked",
+          "status": "ready_for_review",
           "owner": "tod",
-          "blockers_resolved": 0,
+          "blockers_resolved": 1,
           "unlocks": [
-            "Instagram executor row can become publish-eligible after approval.",
-            "One scheduled YouTube Community row can move into manual distribution after approval."
+            "Instagram executor row can become publish-eligible after approval."
           ],
-          "blocked_by": [
-            "FP-AUTO-259"
-          ],
-          "preview_command": "",
-          "apply_command": "",
+          "blocked_by": [],
+          "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+          "apply_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
           "source_path": "data/scheduled_approval_packet.json"
-        },
-        {
-          "id": "unlock-manual-distribution",
-          "phase": "Review and post manual YouTube Community rows",
-          "status": "clear",
-          "owner": "tod",
-          "blockers_resolved": 0,
-          "unlocks": [
-            "Manual YouTube Community promotion can publish without waiting for broken auto executors.",
-            "Published_Log.csv can be updated after public URLs exist."
-          ],
-          "blocked_by": [
-            "FP-PLAN-TWELVE-DOLLARS-TIKTOK"
-          ],
-          "preview_command": "",
-          "apply_command": "",
-          "source_path": "data/manual_distribution_packet.json",
-          "command_source_path": "data/approval_runway.json",
-          "guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review."
         },
         {
           "id": "unlock-tiktok-platform-repair",
           "phase": "Repair TikTok executor",
-          "status": "blocked",
+          "status": "ready",
           "owner": "tod",
-          "blockers_resolved": 1,
+          "blockers_resolved": 0,
           "unlocks": [
             "Held TikTok approval rows can pass platform-readiness review.",
             "Approved TikTok backlog can become safe to reschedule into upload-draft creation."
           ],
-          "blocked_by": [
-            "TIKTOK_CLIENT_KEY",
-            "TIKTOK_CLIENT_SECRET",
-            "TIKTOK_REFRESH_TOKEN"
-          ],
-          "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+          "blocked_by": [],
+          "preview_command": "",
           "apply_command": "",
           "source_path": "data/platform_repair_status.json"
         },
@@ -123,15 +98,18 @@
           "phase": "Reschedule approved past-due backlog",
           "status": "blocked_until_clearance_steps_complete",
           "owner": "external_platform",
-          "blockers_resolved": 2,
+          "blockers_resolved": 23,
           "unlocks": [
             "Approved past-due queue rows get a fresh schedule after executor blockers clear."
           ],
           "blocked_by": [
-            "FP-AUTO-258",
-            "FP-AUTO-264"
+            "FP-AUTO-268",
+            "FP-AUTO-265",
+            "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
+            "FP-AUTO-272",
+            "FP-AUTO-273"
           ],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+08:00' --spacing-hours 24",
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24",
           "apply_command": "",
           "source_path": "data/backlog_reschedule_preview.json"
         },
@@ -168,150 +146,411 @@
   },
   "action_docket": {
     "source": "data/human_handoff_packet.json",
-    "roadmap_step_count": 5,
-    "task_count": 8,
-    "ready_step_count": 1,
+    "roadmap_step_count": 4,
+    "task_count": 9,
+    "ready_step_count": 2,
     "blocked_step_count": 2,
     "manual_post_count": 0,
     "manual_metric_field_count": 6,
     "first_ready_step": {
-      "id": "manual-metric-worksheet",
-      "label": "Fill and import manual metric worksheet",
-      "state": "needs_values",
+      "id": "review-checked-approval-batch",
+      "label": "Review checked approval batch",
+      "state": "ready_for_review",
       "owner": "tod",
       "task_ids": [
-        "manual-metrics-priority-2",
-        "manual-metrics-priority-3"
+        "approve-checked-scheduled-batch"
       ],
-      "blockers_resolved": 6,
-      "field_count": 6,
-      "batch_count": 2,
-      "metric_completion_manifest": {
-        "status": "needs_values",
-        "entry_csv_path": "data/manual_metric_entry_template.csv",
-        "detailed_csv_path": "data/manual_metric_collection_template.csv",
-        "waiting_field_count": 6,
-        "ready_field_count": 0,
-        "waiting_csv_rows": [
-          2,
-          3,
-          4,
-          5,
-          6,
-          7
+      "blockers_resolved": 1,
+      "decision_ready_ids": [
+        "FP-AUTO-259"
+      ],
+      "decision_held_ids": [],
+      "approval_decision_manifest": {
+        "status": "ready_for_review",
+        "ready_ids": [
+          "FP-AUTO-259"
         ],
-        "ready_csv_rows": [],
-        "waiting_assignments": [
-          "facebook.reach_7d=VALUE",
-          "instagram.profile_visits_7d=VALUE",
-          "spotify.release_streams=VALUE",
-          "spotify.saves=VALUE",
-          "tiktok.profile_views_7d=VALUE",
-          "x.impressions_7d=VALUE"
-        ],
-        "ready_assignments": [],
-        "access_level_counts": {
-          "private_analytics": 6
-        },
-        "priority_order": [
+        "held_ids": [],
+        "decisions": [
           {
-            "priority": 2,
-            "label": "Recent discovery and traffic",
-            "waiting_count": 4,
-            "ready_to_import_count": 0,
-            "csv_rows": [
-              2,
-              3,
-              6,
-              7
+            "id": "FP-AUTO-259",
+            "decision": "ready_to_approve",
+            "platform": "TikTok",
+            "song": "I Learned It All in Fifteen Seconds",
+            "execution_mode": "auto",
+            "scheduled_at": "2026-06-05T20:40:00-04:00",
+            "checked_batch_member": true,
+            "approval_effect": {
+              "field": "approved",
+              "from": "no",
+              "to": "yes",
+              "changed": true,
+              "summary": "approved 'no' -> 'yes'"
+            },
+            "passed_check_names": [
+              "copy_present",
+              "destination_links_present",
+              "asset_file_present",
+              "executor_blocker_confirmed",
+              "platform_readiness"
+            ],
+            "failed_check_names": [],
+            "decision_reason": "All automated review checks passed.",
+            "post_approval_next_step": "Apply through --checked-batch after human copy/media/link review.",
+            "manual_dispatch_required": false
+          }
+        ],
+        "expected_checked_batch_effect": {
+          "row_count": 1,
+          "change_count": 1,
+          "ids": [
+            "FP-AUTO-259"
+          ],
+          "effects": [
+            {
+              "id": "FP-AUTO-259",
+              "platform": "TikTok",
+              "execution_mode": "auto",
+              "effect": {
+                "field": "approved",
+                "from": "no",
+                "to": "yes",
+                "changed": true,
+                "summary": "approved 'no' -> 'yes'"
+              }
+            }
+          ]
+        },
+        "checked_batch_dry_run_preview": {
+          "status": "ready_for_review",
+          "dry_run": true,
+          "would_write_files": false,
+          "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+          "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+          "checked_batch_ids": [
+            "FP-AUTO-259"
+          ],
+          "requested_ids": [
+            "FP-AUTO-259"
+          ],
+          "unchecked_ids": [],
+          "row_count": 1,
+          "change_count": 1,
+          "expected_effect": {
+            "row_count": 1,
+            "change_count": 1,
+            "ids": [
+              "FP-AUTO-259"
+            ],
+            "effects": [
+              {
+                "id": "FP-AUTO-259",
+                "platform": "TikTok",
+                "execution_mode": "auto",
+                "effect": {
+                  "field": "approved",
+                  "from": "no",
+                  "to": "yes",
+                  "changed": true,
+                  "summary": "approved 'no' -> 'yes'"
+                }
+              }
             ]
           },
+          "output_lines": [
+            "FP-AUTO-259: approved 'no' -> 'yes'",
+            "Checked batch guard: 1 checked id(s); 1 requested; 0 unchecked; 1 change(s).",
+            "Dry run only; did not update data/scheduled_posts.csv"
+          ],
+          "post_apply_verification": [
+            "python3 scripts/refresh_promo_admin.py",
+            "python3 scripts/validate_content_system.py"
+          ],
+          "guardrail": "This is a computed dry-run preview; approval still requires human review and the --checked-batch apply command."
+        },
+        "review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+        "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+        "guardrail": "Only ready_to_approve decisions may be applied through --checked-batch; held rows require repair first."
+      },
+      "approval_apply_manifest": {
+        "status": "ready_for_human_review",
+        "ready_ids": [
+          "FP-AUTO-259"
+        ],
+        "held_ids": [],
+        "apply_scope": "checked_batch",
+        "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+        "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+        "expected_change_count": 1,
+        "expected_effect": {
+          "row_count": 1,
+          "change_count": 1,
+          "ids": [
+            "FP-AUTO-259"
+          ],
+          "effects": [
+            {
+              "id": "FP-AUTO-259",
+              "platform": "TikTok",
+              "execution_mode": "auto",
+              "effect": {
+                "field": "approved",
+                "from": "no",
+                "to": "yes",
+                "changed": true,
+                "summary": "approved 'no' -> 'yes'"
+              }
+            }
+          ]
+        },
+        "ready_rows": [
           {
-            "priority": 3,
-            "label": "Release depth metrics",
-            "waiting_count": 2,
-            "ready_to_import_count": 0,
-            "csv_rows": [
-              4,
-              5
+            "id": "FP-AUTO-259",
+            "platform": "TikTok",
+            "song": "I Learned It All in Fifteen Seconds",
+            "execution_mode": "auto",
+            "manual_dispatch_required": false,
+            "post_approval_next_step": "Refresh Admin and let the executor retry after approval is visible.",
+            "required_review": [
+              "copy",
+              "destination_links",
+              "media_asset",
+              "platform_readiness"
             ]
           }
         ],
-        "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv data/manual_metric_entry_template.csv --dry-run",
-        "apply_command": "",
-        "fallback_preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
-        "fallback_apply_command": "",
-        "apply_gate": "blocked_until_new_values_filled",
-        "operator_checklist": [
-          "Open the short entry CSV and fill only new_value cells for rows with sourced analytics values.",
-          "Add an evidence_note for each filled value when the source UI/export can be named briefly.",
-          "Run the short entry import preview before applying any metric update.",
-          "Apply only when the preview shows the intended nonnegative numeric values.",
-          "Refresh Admin and confirm pending_manual_metric_fields decreases or clears."
+        "held_rows": [],
+        "pre_apply_checklist": [
+          "Review copy, links, and media for every ready row.",
+          "Run the preview command and confirm it lists only ready_ids.",
+          "Confirm held_ids are excluded from the checked batch.",
+          "Apply only with --checked-batch after human review passes."
         ],
-        "completion_evidence": [
-          "data/manual_metric_collection_packet.json shows fewer waiting fields or ready rows imported.",
-          "data/manual_social_stats.json contains the imported platform metric values.",
-          "data/metrics_history.json preserves the imported metrics in the latest snapshot.",
-          "data/promo_engine_status.json and lilyroo.com/admin show updated pending manual metric counts."
+        "post_apply_evidence": [
+          "data/scheduled_posts.csv shows ready_ids changed from approved=no to approved=yes.",
+          "data/scheduled_approval_packet.json reports fewer approval blockers after refresh.",
+          "data/social_scheduler_dry_run.json no longer blocks the approved row on not_approved."
         ],
         "guardrails": [
-          "Do not guess private analytics values.",
-          "Leave unknown values blank; blank rows are ignored by the import.",
-          "Import only nonnegative numeric new_value cells from the named analytics source."
+          "This manifest does not approve, publish, post, or log anything.",
+          "Do not use the full batch command while held_ids are present.",
+          "Do not approve held rows until failed review checks clear."
         ]
       },
-      "completion_checklist": [
-        "Open the short entry CSV and fill only new_value cells for rows with sourced analytics values.",
-        "Add an evidence_note for each filled value when the source UI/export can be named briefly.",
-        "Run the short entry import preview before applying any metric update.",
-        "Apply only when the preview shows the intended nonnegative numeric values.",
-        "Refresh Admin and confirm pending_manual_metric_fields decreases or clears."
+      "approval_review_runbook": {
+        "status": "ready_for_review",
+        "ready_ids": [
+          "FP-AUTO-259"
+        ],
+        "blocked_ids": [],
+        "ready_count": 1,
+        "blocked_count": 0,
+        "manual_dispatch_ready_count": 0,
+        "review_checklist": [
+          {
+            "id": "FP-AUTO-259",
+            "platform": "TikTok",
+            "song": "I Learned It All in Fifteen Seconds",
+            "execution_mode": "auto",
+            "scheduled_at": "2026-06-05T20:40:00-04:00",
+            "checked_batch_member": true,
+            "copy_block": "I learned it all in fifteen seconds and somehow still have homework. Streaming now.\n\nListen on Spotify: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
+            "asset_url": "https://www.lilyroo.com/assets/ig/01_i_learned_it_all_60s.mp4",
+            "destination_links": [
+              "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+              "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+              "https://music.youtube.com/watch?v=vK0mDIW65o4"
+            ],
+            "human_review_required": true,
+            "checklist": [
+              {
+                "item": "copy",
+                "status": "ready_for_human_review",
+                "evidence": "83 primary-copy character(s)"
+              },
+              {
+                "item": "destination_links",
+                "status": "ready_for_human_review",
+                "evidence": "3/3 link(s) have local evidence"
+              },
+              {
+                "item": "media_asset",
+                "status": "ready_for_human_review",
+                "evidence": "assets/ig/01_i_learned_it_all_60s.mp4"
+              },
+              {
+                "item": "platform_readiness",
+                "status": "ready_for_human_review",
+                "evidence": "All automated review checks passed."
+              }
+            ],
+            "preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --dry-run",
+            "post_approval_next_step": "Approve with the checked batch; executor can retry once approval is visible."
+          }
+        ],
+        "steps": [
+          {
+            "order": 1,
+            "title": "Review ready checked-batch rows",
+            "owner": "tod",
+            "status": "ready_for_review",
+            "command": "",
+            "evidence": "Review copy_block, destination_links, asset_url, and checklist for each ready row.",
+            "applies_to_ids": [
+              "FP-AUTO-259"
+            ]
+          },
+          {
+            "order": 2,
+            "title": "Preview the guarded checked batch",
+            "owner": "tod",
+            "status": "ready_for_review",
+            "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+            "evidence": "Dry run must report no file writes and only the checked IDs.",
+            "applies_to_ids": [
+              "FP-AUTO-259"
+            ]
+          },
+          {
+            "order": 3,
+            "title": "Apply after human review",
+            "owner": "tod",
+            "status": "ready_after_review",
+            "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+            "evidence": "Apply only after human copy/media/link review passes.",
+            "applies_to_ids": [
+              "FP-AUTO-259"
+            ]
+          },
+          {
+            "order": 4,
+            "title": "Refresh and validate admin state",
+            "owner": "codex",
+            "status": "ready_after_apply",
+            "command": "python3 scripts/refresh_promo_admin.py && python3 scripts/validate_content_system.py",
+            "evidence": "Admin should show fewer approval blockers and fresh execution state.",
+            "applies_to_ids": [
+              "FP-AUTO-259"
+            ]
+          }
+        ],
+        "guardrail": "This runbook is review-only; it does not approve, publish, post, or log anything."
+      },
+      "pre_apply_checklist": [
+        "Review copy, links, and media for every ready row.",
+        "Run the preview command and confirm it lists only ready_ids.",
+        "Confirm held_ids are excluded from the checked batch.",
+        "Apply only with --checked-batch after human review passes."
       ],
-      "completion_guardrails": [
-        "Do not guess private analytics values.",
-        "Leave unknown values blank; blank rows are ignored by the import.",
-        "Import only nonnegative numeric new_value cells from the named analytics source."
+      "post_apply_evidence": [
+        "data/scheduled_posts.csv shows ready_ids changed from approved=no to approved=yes.",
+        "data/scheduled_approval_packet.json reports fewer approval blockers after refresh.",
+        "data/social_scheduler_dry_run.json no longer blocks the approved row on not_approved."
       ],
-      "batches": [
+      "apply_guardrails": [
+        "This manifest does not approve, publish, post, or log anything.",
+        "Do not use the full batch command while held_ids are present.",
+        "Do not approve held rows until failed review checks clear."
+      ],
+      "review_runbook_steps": [
         {
-          "priority": 2,
-          "label": "Recent discovery and traffic",
-          "field_count": 4,
-          "access_levels": [
-            "private_analytics"
-          ],
-          "csv_rows": [
-            2,
-            3,
-            6,
-            7
+          "order": 1,
+          "title": "Review ready checked-batch rows",
+          "owner": "tod",
+          "status": "ready_for_review",
+          "command": "",
+          "evidence": "Review copy_block, destination_links, asset_url, and checklist for each ready row.",
+          "applies_to_ids": [
+            "FP-AUTO-259"
           ]
         },
         {
-          "priority": 3,
-          "label": "Release depth metrics",
-          "field_count": 2,
-          "access_levels": [
-            "private_analytics"
-          ],
-          "csv_rows": [
-            4,
-            5
+          "order": 2,
+          "title": "Preview the guarded checked batch",
+          "owner": "tod",
+          "status": "ready_for_review",
+          "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+          "evidence": "Dry run must report no file writes and only the checked IDs.",
+          "applies_to_ids": [
+            "FP-AUTO-259"
+          ]
+        },
+        {
+          "order": 3,
+          "title": "Apply after human review",
+          "owner": "tod",
+          "status": "ready_after_review",
+          "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+          "evidence": "Apply only after human copy/media/link review passes.",
+          "applies_to_ids": [
+            "FP-AUTO-259"
+          ]
+        },
+        {
+          "order": 4,
+          "title": "Refresh and validate admin state",
+          "owner": "codex",
+          "status": "ready_after_apply",
+          "command": "python3 scripts/refresh_promo_admin.py && python3 scripts/validate_content_system.py",
+          "evidence": "Admin should show fewer approval blockers and fresh execution state.",
+          "applies_to_ids": [
+            "FP-AUTO-259"
           ]
         }
       ],
-      "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
-      "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
+      "review_checklist": [
+        {
+          "id": "FP-AUTO-259",
+          "platform": "TikTok",
+          "song": "I Learned It All in Fifteen Seconds",
+          "execution_mode": "auto",
+          "scheduled_at": "2026-06-05T20:40:00-04:00",
+          "checked_batch_member": true,
+          "copy_block": "I learned it all in fifteen seconds and somehow still have homework. Streaming now.\n\nListen on Spotify: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
+          "asset_url": "https://www.lilyroo.com/assets/ig/01_i_learned_it_all_60s.mp4",
+          "destination_links": [
+            "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+            "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+            "https://music.youtube.com/watch?v=vK0mDIW65o4"
+          ],
+          "human_review_required": true,
+          "checklist": [
+            {
+              "item": "copy",
+              "status": "ready_for_human_review",
+              "evidence": "83 primary-copy character(s)"
+            },
+            {
+              "item": "destination_links",
+              "status": "ready_for_human_review",
+              "evidence": "3/3 link(s) have local evidence"
+            },
+            {
+              "item": "media_asset",
+              "status": "ready_for_human_review",
+              "evidence": "assets/ig/01_i_learned_it_all_60s.mp4"
+            },
+            {
+              "item": "platform_readiness",
+              "status": "ready_for_human_review",
+              "evidence": "All automated review checks passed."
+            }
+          ],
+          "preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --dry-run",
+          "post_approval_next_step": "Approve with the checked batch; executor can retry once approval is visible."
+        }
+      ],
+      "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+      "apply_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
       "command_sequence": [
         {
           "step": "preview",
-          "command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
+          "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
           "required_before_apply": true
         },
         {
           "step": "apply_after_review",
-          "command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
+          "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
           "required_before_apply": false
         },
         {
@@ -320,9 +559,9 @@
           "required_before_apply": false
         }
       ],
-      "completion_evidence": "data/manual_metric_collection_packet.json should reduce pending_field_count, and data/metrics_history.json should preserve the imported metrics in the latest snapshot.",
-      "next_step_after_apply": "Rebuild the weekly report and confirm lilyroo.com/admin shows fewer pending manual metric fields.",
-      "guardrail": "Import only collected numeric values; leave unknown cells blank."
+      "completion_evidence": "data/scheduled_approval_packet.json should show fewer approval blockers, and data/social_scheduler_dry_run.json should no longer block the approved Instagram row on not_approved.",
+      "next_step_after_apply": "Run the safe admin refresh, then manually post/log any newly approved YouTube Community row before treating the published log as current.",
+      "guardrail": "Use --checked-batch so only rows that passed review checks are approved."
     },
     "blocked_steps": [
       {
@@ -331,19 +570,19 @@
         "state": "blocked",
         "owner": "tod",
         "task_ids": [
-          "platform-setup-FP-AUTO-258",
-          "platform-setup-FP-AUTO-263",
-          "platform-setup-FP-AUTO-264",
           "platform-setup-FP-AUTO-265",
-          "platform-setup-FP-PLAN-TWELVE-DOLLARS-INSTAGRAM"
+          "platform-setup-FP-AUTO-268",
+          "platform-setup-FP-AUTO-272",
+          "platform-setup-FP-AUTO-273",
+          "platform-setup-FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA"
         ],
         "blockers_resolved": 1,
-        "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-258",
+        "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-265",
         "apply_command": "",
         "command_sequence": [
           {
             "step": "preview",
-            "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-258",
+            "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-265",
             "required_before_apply": true
           },
           {
@@ -364,53 +603,84 @@
         "task_ids": [
           "backlog-reschedule"
         ],
-        "blockers_resolved": 2,
+        "blockers_resolved": 23,
         "backlog_clearance_manifest": {
           "status": "blocked_until_clearance_steps_complete",
-          "approved_backlog_count": 2,
-          "blocked_backlog_count": 2,
-          "clear_to_apply_count": 0,
-          "partial_clear_apply_available": false,
-          "partial_clear_apply_count": 0,
+          "approved_backlog_count": 23,
+          "blocked_backlog_count": 5,
+          "clear_to_apply_count": 18,
+          "partial_clear_apply_available": true,
+          "partial_clear_apply_count": 18,
           "blocked_ids": [
-            "FP-AUTO-258",
-            "FP-AUTO-264"
+            "FP-AUTO-268",
+            "FP-AUTO-265",
+            "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
+            "FP-AUTO-272",
+            "FP-AUTO-273"
           ],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+08:00' --spacing-hours 24",
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24",
           "safe_apply_command": "",
-          "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
-          "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+08:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
+          "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+          "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
           "apply_allowed_without_override": false,
           "apply_gate": "blocked_until_clearance_steps_complete",
           "clearance_steps": [
-            "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply.",
-            "Add local TikTok OAuth credentials, then push upload-mode worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
-            "Keep direct public posting blocked until TikTok public-posting approval is confirmed; upload mode can still create inbox drafts after credentials.",
-            "Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair."
+            "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
           ],
           "blocked_items": [
             {
-              "id": "FP-AUTO-258",
-              "platform": "Instagram",
-              "song": "I Learned It All in Fifteen Seconds",
+              "id": "FP-AUTO-268",
+              "platform": "Facebook",
+              "song": "Brain Rot",
               "blocker_kind": "max_attempts_exceeded",
-              "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
-              "proposed_scheduled_at": "2026-06-24T10:00:00+08:00",
+              "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
+              "proposed_scheduled_at": "2026-07-15T10:00:00-04:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]
             },
             {
-              "id": "FP-AUTO-264",
-              "platform": "TikTok",
+              "id": "FP-AUTO-265",
+              "platform": "Facebook",
               "song": "I Learned It All in Fifteen Seconds",
-              "blocker_kind": "tiktok_credentials_missing",
-              "blocker_reason": "tiktok_credentials_missing",
-              "proposed_scheduled_at": "2026-06-25T10:00:00+08:00",
+              "blocker_kind": "max_attempts_exceeded",
+              "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
+              "proposed_scheduled_at": "2026-07-17T10:00:00-04:00",
               "clearance_steps": [
-                "Add local TikTok OAuth credentials, then push upload-mode worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
-                "Keep direct public posting blocked until TikTok public-posting approval is confirmed; upload mode can still create inbox drafts after credentials.",
-                "Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair."
+                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+              ]
+            },
+            {
+              "id": "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
+              "platform": "YouTube",
+              "song": "Analog Myth",
+              "blocker_kind": "max_attempts_exceeded",
+              "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Bad Request\"}",
+              "proposed_scheduled_at": "2026-07-19T10:00:00-04:00",
+              "clearance_steps": [
+                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+              ]
+            },
+            {
+              "id": "FP-AUTO-272",
+              "platform": "Instagram",
+              "song": "Every Pearl in Carmel",
+              "blocker_kind": "instagram_business_account_unresolved",
+              "blocker_reason": "instagram_business_account_unresolved",
+              "proposed_scheduled_at": "2026-07-20T10:00:00-04:00",
+              "clearance_steps": [
+                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+              ]
+            },
+            {
+              "id": "FP-AUTO-273",
+              "platform": "Facebook",
+              "song": "Every Pearl in Carmel",
+              "blocker_kind": "max_attempts_exceeded",
+              "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
+              "proposed_scheduled_at": "2026-07-21T10:00:00-04:00",
+              "clearance_steps": [
+                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]
             }
           ],
@@ -447,12 +717,12 @@
           "Do not use the override command unless accepting the blocked executor risk deliberately.",
           "A reschedule does not publish, approve, or repair platform credentials by itself."
         ],
-        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+08:00' --spacing-hours 24",
+        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24",
         "apply_command": "",
         "command_sequence": [
           {
             "step": "preview",
-            "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+08:00' --spacing-hours 24",
+            "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24",
             "required_before_apply": true
           },
           {
@@ -470,23 +740,404 @@
       {
         "id": "review-checked-approval-batch",
         "label": "Review checked approval batch",
-        "state": "not_available",
+        "state": "ready_for_review",
         "owner": "tod",
-        "task_ids": [],
-        "blockers_resolved": 0,
-        "decision_ready_ids": [],
+        "task_ids": [
+          "approve-checked-scheduled-batch"
+        ],
+        "blockers_resolved": 1,
+        "decision_ready_ids": [
+          "FP-AUTO-259"
+        ],
         "decision_held_ids": [],
-        "approval_decision_manifest": {},
-        "approval_apply_manifest": {},
-        "approval_review_runbook": {},
-        "pre_apply_checklist": [],
-        "post_apply_evidence": [],
-        "apply_guardrails": [],
-        "review_runbook_steps": [],
-        "review_checklist": [],
-        "preview_command": "",
-        "apply_command": "",
+        "approval_decision_manifest": {
+          "status": "ready_for_review",
+          "ready_ids": [
+            "FP-AUTO-259"
+          ],
+          "held_ids": [],
+          "decisions": [
+            {
+              "id": "FP-AUTO-259",
+              "decision": "ready_to_approve",
+              "platform": "TikTok",
+              "song": "I Learned It All in Fifteen Seconds",
+              "execution_mode": "auto",
+              "scheduled_at": "2026-06-05T20:40:00-04:00",
+              "checked_batch_member": true,
+              "approval_effect": {
+                "field": "approved",
+                "from": "no",
+                "to": "yes",
+                "changed": true,
+                "summary": "approved 'no' -> 'yes'"
+              },
+              "passed_check_names": [
+                "copy_present",
+                "destination_links_present",
+                "asset_file_present",
+                "executor_blocker_confirmed",
+                "platform_readiness"
+              ],
+              "failed_check_names": [],
+              "decision_reason": "All automated review checks passed.",
+              "post_approval_next_step": "Apply through --checked-batch after human copy/media/link review.",
+              "manual_dispatch_required": false
+            }
+          ],
+          "expected_checked_batch_effect": {
+            "row_count": 1,
+            "change_count": 1,
+            "ids": [
+              "FP-AUTO-259"
+            ],
+            "effects": [
+              {
+                "id": "FP-AUTO-259",
+                "platform": "TikTok",
+                "execution_mode": "auto",
+                "effect": {
+                  "field": "approved",
+                  "from": "no",
+                  "to": "yes",
+                  "changed": true,
+                  "summary": "approved 'no' -> 'yes'"
+                }
+              }
+            ]
+          },
+          "checked_batch_dry_run_preview": {
+            "status": "ready_for_review",
+            "dry_run": true,
+            "would_write_files": false,
+            "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+            "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+            "checked_batch_ids": [
+              "FP-AUTO-259"
+            ],
+            "requested_ids": [
+              "FP-AUTO-259"
+            ],
+            "unchecked_ids": [],
+            "row_count": 1,
+            "change_count": 1,
+            "expected_effect": {
+              "row_count": 1,
+              "change_count": 1,
+              "ids": [
+                "FP-AUTO-259"
+              ],
+              "effects": [
+                {
+                  "id": "FP-AUTO-259",
+                  "platform": "TikTok",
+                  "execution_mode": "auto",
+                  "effect": {
+                    "field": "approved",
+                    "from": "no",
+                    "to": "yes",
+                    "changed": true,
+                    "summary": "approved 'no' -> 'yes'"
+                  }
+                }
+              ]
+            },
+            "output_lines": [
+              "FP-AUTO-259: approved 'no' -> 'yes'",
+              "Checked batch guard: 1 checked id(s); 1 requested; 0 unchecked; 1 change(s).",
+              "Dry run only; did not update data/scheduled_posts.csv"
+            ],
+            "post_apply_verification": [
+              "python3 scripts/refresh_promo_admin.py",
+              "python3 scripts/validate_content_system.py"
+            ],
+            "guardrail": "This is a computed dry-run preview; approval still requires human review and the --checked-batch apply command."
+          },
+          "review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+          "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+          "guardrail": "Only ready_to_approve decisions may be applied through --checked-batch; held rows require repair first."
+        },
+        "approval_apply_manifest": {
+          "status": "ready_for_human_review",
+          "ready_ids": [
+            "FP-AUTO-259"
+          ],
+          "held_ids": [],
+          "apply_scope": "checked_batch",
+          "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+          "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+          "expected_change_count": 1,
+          "expected_effect": {
+            "row_count": 1,
+            "change_count": 1,
+            "ids": [
+              "FP-AUTO-259"
+            ],
+            "effects": [
+              {
+                "id": "FP-AUTO-259",
+                "platform": "TikTok",
+                "execution_mode": "auto",
+                "effect": {
+                  "field": "approved",
+                  "from": "no",
+                  "to": "yes",
+                  "changed": true,
+                  "summary": "approved 'no' -> 'yes'"
+                }
+              }
+            ]
+          },
+          "ready_rows": [
+            {
+              "id": "FP-AUTO-259",
+              "platform": "TikTok",
+              "song": "I Learned It All in Fifteen Seconds",
+              "execution_mode": "auto",
+              "manual_dispatch_required": false,
+              "post_approval_next_step": "Refresh Admin and let the executor retry after approval is visible.",
+              "required_review": [
+                "copy",
+                "destination_links",
+                "media_asset",
+                "platform_readiness"
+              ]
+            }
+          ],
+          "held_rows": [],
+          "pre_apply_checklist": [
+            "Review copy, links, and media for every ready row.",
+            "Run the preview command and confirm it lists only ready_ids.",
+            "Confirm held_ids are excluded from the checked batch.",
+            "Apply only with --checked-batch after human review passes."
+          ],
+          "post_apply_evidence": [
+            "data/scheduled_posts.csv shows ready_ids changed from approved=no to approved=yes.",
+            "data/scheduled_approval_packet.json reports fewer approval blockers after refresh.",
+            "data/social_scheduler_dry_run.json no longer blocks the approved row on not_approved."
+          ],
+          "guardrails": [
+            "This manifest does not approve, publish, post, or log anything.",
+            "Do not use the full batch command while held_ids are present.",
+            "Do not approve held rows until failed review checks clear."
+          ]
+        },
+        "approval_review_runbook": {
+          "status": "ready_for_review",
+          "ready_ids": [
+            "FP-AUTO-259"
+          ],
+          "blocked_ids": [],
+          "ready_count": 1,
+          "blocked_count": 0,
+          "manual_dispatch_ready_count": 0,
+          "review_checklist": [
+            {
+              "id": "FP-AUTO-259",
+              "platform": "TikTok",
+              "song": "I Learned It All in Fifteen Seconds",
+              "execution_mode": "auto",
+              "scheduled_at": "2026-06-05T20:40:00-04:00",
+              "checked_batch_member": true,
+              "copy_block": "I learned it all in fifteen seconds and somehow still have homework. Streaming now.\n\nListen on Spotify: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
+              "asset_url": "https://www.lilyroo.com/assets/ig/01_i_learned_it_all_60s.mp4",
+              "destination_links": [
+                "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+                "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+                "https://music.youtube.com/watch?v=vK0mDIW65o4"
+              ],
+              "human_review_required": true,
+              "checklist": [
+                {
+                  "item": "copy",
+                  "status": "ready_for_human_review",
+                  "evidence": "83 primary-copy character(s)"
+                },
+                {
+                  "item": "destination_links",
+                  "status": "ready_for_human_review",
+                  "evidence": "3/3 link(s) have local evidence"
+                },
+                {
+                  "item": "media_asset",
+                  "status": "ready_for_human_review",
+                  "evidence": "assets/ig/01_i_learned_it_all_60s.mp4"
+                },
+                {
+                  "item": "platform_readiness",
+                  "status": "ready_for_human_review",
+                  "evidence": "All automated review checks passed."
+                }
+              ],
+              "preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --dry-run",
+              "post_approval_next_step": "Approve with the checked batch; executor can retry once approval is visible."
+            }
+          ],
+          "steps": [
+            {
+              "order": 1,
+              "title": "Review ready checked-batch rows",
+              "owner": "tod",
+              "status": "ready_for_review",
+              "command": "",
+              "evidence": "Review copy_block, destination_links, asset_url, and checklist for each ready row.",
+              "applies_to_ids": [
+                "FP-AUTO-259"
+              ]
+            },
+            {
+              "order": 2,
+              "title": "Preview the guarded checked batch",
+              "owner": "tod",
+              "status": "ready_for_review",
+              "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+              "evidence": "Dry run must report no file writes and only the checked IDs.",
+              "applies_to_ids": [
+                "FP-AUTO-259"
+              ]
+            },
+            {
+              "order": 3,
+              "title": "Apply after human review",
+              "owner": "tod",
+              "status": "ready_after_review",
+              "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+              "evidence": "Apply only after human copy/media/link review passes.",
+              "applies_to_ids": [
+                "FP-AUTO-259"
+              ]
+            },
+            {
+              "order": 4,
+              "title": "Refresh and validate admin state",
+              "owner": "codex",
+              "status": "ready_after_apply",
+              "command": "python3 scripts/refresh_promo_admin.py && python3 scripts/validate_content_system.py",
+              "evidence": "Admin should show fewer approval blockers and fresh execution state.",
+              "applies_to_ids": [
+                "FP-AUTO-259"
+              ]
+            }
+          ],
+          "guardrail": "This runbook is review-only; it does not approve, publish, post, or log anything."
+        },
+        "pre_apply_checklist": [
+          "Review copy, links, and media for every ready row.",
+          "Run the preview command and confirm it lists only ready_ids.",
+          "Confirm held_ids are excluded from the checked batch.",
+          "Apply only with --checked-batch after human review passes."
+        ],
+        "post_apply_evidence": [
+          "data/scheduled_posts.csv shows ready_ids changed from approved=no to approved=yes.",
+          "data/scheduled_approval_packet.json reports fewer approval blockers after refresh.",
+          "data/social_scheduler_dry_run.json no longer blocks the approved row on not_approved."
+        ],
+        "apply_guardrails": [
+          "This manifest does not approve, publish, post, or log anything.",
+          "Do not use the full batch command while held_ids are present.",
+          "Do not approve held rows until failed review checks clear."
+        ],
+        "review_runbook_steps": [
+          {
+            "order": 1,
+            "title": "Review ready checked-batch rows",
+            "owner": "tod",
+            "status": "ready_for_review",
+            "command": "",
+            "evidence": "Review copy_block, destination_links, asset_url, and checklist for each ready row.",
+            "applies_to_ids": [
+              "FP-AUTO-259"
+            ]
+          },
+          {
+            "order": 2,
+            "title": "Preview the guarded checked batch",
+            "owner": "tod",
+            "status": "ready_for_review",
+            "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+            "evidence": "Dry run must report no file writes and only the checked IDs.",
+            "applies_to_ids": [
+              "FP-AUTO-259"
+            ]
+          },
+          {
+            "order": 3,
+            "title": "Apply after human review",
+            "owner": "tod",
+            "status": "ready_after_review",
+            "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+            "evidence": "Apply only after human copy/media/link review passes.",
+            "applies_to_ids": [
+              "FP-AUTO-259"
+            ]
+          },
+          {
+            "order": 4,
+            "title": "Refresh and validate admin state",
+            "owner": "codex",
+            "status": "ready_after_apply",
+            "command": "python3 scripts/refresh_promo_admin.py && python3 scripts/validate_content_system.py",
+            "evidence": "Admin should show fewer approval blockers and fresh execution state.",
+            "applies_to_ids": [
+              "FP-AUTO-259"
+            ]
+          }
+        ],
+        "review_checklist": [
+          {
+            "id": "FP-AUTO-259",
+            "platform": "TikTok",
+            "song": "I Learned It All in Fifteen Seconds",
+            "execution_mode": "auto",
+            "scheduled_at": "2026-06-05T20:40:00-04:00",
+            "checked_batch_member": true,
+            "copy_block": "I learned it all in fifteen seconds and somehow still have homework. Streaming now.\n\nListen on Spotify: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
+            "asset_url": "https://www.lilyroo.com/assets/ig/01_i_learned_it_all_60s.mp4",
+            "destination_links": [
+              "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+              "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+              "https://music.youtube.com/watch?v=vK0mDIW65o4"
+            ],
+            "human_review_required": true,
+            "checklist": [
+              {
+                "item": "copy",
+                "status": "ready_for_human_review",
+                "evidence": "83 primary-copy character(s)"
+              },
+              {
+                "item": "destination_links",
+                "status": "ready_for_human_review",
+                "evidence": "3/3 link(s) have local evidence"
+              },
+              {
+                "item": "media_asset",
+                "status": "ready_for_human_review",
+                "evidence": "assets/ig/01_i_learned_it_all_60s.mp4"
+              },
+              {
+                "item": "platform_readiness",
+                "status": "ready_for_human_review",
+                "evidence": "All automated review checks passed."
+              }
+            ],
+            "preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --dry-run",
+            "post_approval_next_step": "Approve with the checked batch; executor can retry once approval is visible."
+          }
+        ],
+        "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+        "apply_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
         "command_sequence": [
+          {
+            "step": "preview",
+            "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+            "required_before_apply": true
+          },
+          {
+            "step": "apply_after_review",
+            "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+            "required_before_apply": false
+          },
           {
             "step": "verify",
             "command": "python3 scripts/refresh_promo_admin.py",
@@ -495,7 +1146,7 @@
         ],
         "completion_evidence": "data/scheduled_approval_packet.json should show fewer approval blockers, and data/social_scheduler_dry_run.json should no longer block the approved Instagram row on not_approved.",
         "next_step_after_apply": "Run the safe admin refresh, then manually post/log any newly approved YouTube Community row before treating the published log as current.",
-        "guardrail": "Human review is still required; blocked review IDs stay excluded from the checked batch."
+        "guardrail": "Use --checked-batch so only rows that passed review checks are approved."
       },
       {
         "id": "manual-posting-review",
@@ -505,9 +1156,7 @@
         "task_ids": [],
         "blockers_resolved": 0,
         "ready_ids": [],
-        "blocked_ids": [
-          "FP-PLAN-TWELVE-DOLLARS-TIKTOK"
-        ],
+        "blocked_ids": [],
         "postable_ids": [],
         "posting_packets": [],
         "preview_command": "",
@@ -529,19 +1178,19 @@
         "state": "blocked",
         "owner": "tod",
         "task_ids": [
-          "platform-setup-FP-AUTO-258",
-          "platform-setup-FP-AUTO-263",
-          "platform-setup-FP-AUTO-264",
           "platform-setup-FP-AUTO-265",
-          "platform-setup-FP-PLAN-TWELVE-DOLLARS-INSTAGRAM"
+          "platform-setup-FP-AUTO-268",
+          "platform-setup-FP-AUTO-272",
+          "platform-setup-FP-AUTO-273",
+          "platform-setup-FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA"
         ],
         "blockers_resolved": 1,
-        "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-258",
+        "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-265",
         "apply_command": "",
         "command_sequence": [
           {
             "step": "preview",
-            "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-258",
+            "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-265",
             "required_before_apply": true
           },
           {
@@ -712,53 +1361,84 @@
         "task_ids": [
           "backlog-reschedule"
         ],
-        "blockers_resolved": 2,
+        "blockers_resolved": 23,
         "backlog_clearance_manifest": {
           "status": "blocked_until_clearance_steps_complete",
-          "approved_backlog_count": 2,
-          "blocked_backlog_count": 2,
-          "clear_to_apply_count": 0,
-          "partial_clear_apply_available": false,
-          "partial_clear_apply_count": 0,
+          "approved_backlog_count": 23,
+          "blocked_backlog_count": 5,
+          "clear_to_apply_count": 18,
+          "partial_clear_apply_available": true,
+          "partial_clear_apply_count": 18,
           "blocked_ids": [
-            "FP-AUTO-258",
-            "FP-AUTO-264"
+            "FP-AUTO-268",
+            "FP-AUTO-265",
+            "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
+            "FP-AUTO-272",
+            "FP-AUTO-273"
           ],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+08:00' --spacing-hours 24",
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24",
           "safe_apply_command": "",
-          "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
-          "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+08:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
+          "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+          "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
           "apply_allowed_without_override": false,
           "apply_gate": "blocked_until_clearance_steps_complete",
           "clearance_steps": [
-            "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply.",
-            "Add local TikTok OAuth credentials, then push upload-mode worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
-            "Keep direct public posting blocked until TikTok public-posting approval is confirmed; upload mode can still create inbox drafts after credentials.",
-            "Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair."
+            "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
           ],
           "blocked_items": [
             {
-              "id": "FP-AUTO-258",
-              "platform": "Instagram",
-              "song": "I Learned It All in Fifteen Seconds",
+              "id": "FP-AUTO-268",
+              "platform": "Facebook",
+              "song": "Brain Rot",
               "blocker_kind": "max_attempts_exceeded",
-              "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
-              "proposed_scheduled_at": "2026-06-24T10:00:00+08:00",
+              "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
+              "proposed_scheduled_at": "2026-07-15T10:00:00-04:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]
             },
             {
-              "id": "FP-AUTO-264",
-              "platform": "TikTok",
+              "id": "FP-AUTO-265",
+              "platform": "Facebook",
               "song": "I Learned It All in Fifteen Seconds",
-              "blocker_kind": "tiktok_credentials_missing",
-              "blocker_reason": "tiktok_credentials_missing",
-              "proposed_scheduled_at": "2026-06-25T10:00:00+08:00",
+              "blocker_kind": "max_attempts_exceeded",
+              "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
+              "proposed_scheduled_at": "2026-07-17T10:00:00-04:00",
               "clearance_steps": [
-                "Add local TikTok OAuth credentials, then push upload-mode worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
-                "Keep direct public posting blocked until TikTok public-posting approval is confirmed; upload mode can still create inbox drafts after credentials.",
-                "Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair."
+                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+              ]
+            },
+            {
+              "id": "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
+              "platform": "YouTube",
+              "song": "Analog Myth",
+              "blocker_kind": "max_attempts_exceeded",
+              "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Bad Request\"}",
+              "proposed_scheduled_at": "2026-07-19T10:00:00-04:00",
+              "clearance_steps": [
+                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+              ]
+            },
+            {
+              "id": "FP-AUTO-272",
+              "platform": "Instagram",
+              "song": "Every Pearl in Carmel",
+              "blocker_kind": "instagram_business_account_unresolved",
+              "blocker_reason": "instagram_business_account_unresolved",
+              "proposed_scheduled_at": "2026-07-20T10:00:00-04:00",
+              "clearance_steps": [
+                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+              ]
+            },
+            {
+              "id": "FP-AUTO-273",
+              "platform": "Facebook",
+              "song": "Every Pearl in Carmel",
+              "blocker_kind": "max_attempts_exceeded",
+              "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
+              "proposed_scheduled_at": "2026-07-21T10:00:00-04:00",
+              "clearance_steps": [
+                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]
             }
           ],
@@ -795,12 +1475,12 @@
           "Do not use the override command unless accepting the blocked executor risk deliberately.",
           "A reschedule does not publish, approve, or repair platform credentials by itself."
         ],
-        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+08:00' --spacing-hours 24",
+        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24",
         "apply_command": "",
         "command_sequence": [
           {
             "step": "preview",
-            "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+08:00' --spacing-hours 24",
+            "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24",
             "required_before_apply": true
           },
           {
@@ -817,7 +1497,7 @@
   },
   "resolution_worksheet": {
     "path": "data/human_handoff_resolution_worksheet.csv",
-    "row_count": 8,
+    "row_count": 9,
     "fieldnames": [
       "task_id",
       "phase",
@@ -838,86 +1518,410 @@
   },
   "tasks": [
     {
-      "id": "platform-setup-FP-AUTO-258",
-      "title": "Repair Instagram executor",
-      "phase": "Platform setup",
+      "id": "approve-checked-scheduled-batch",
+      "title": "Review and approve checked scheduled batch",
+      "phase": "Approval",
       "owner": "tod",
       "urgency": "high",
-      "status": "failed",
-      "detail": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
-      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-258",
-      "apply_command": "",
-      "source_path": "data/platform_repair_status.json",
+      "status": "waiting_for_review",
+      "detail": "Review the checked rows, then apply the guarded batch command. Failed review rows stay excluded.",
+      "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+      "apply_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+      "source_path": "data/scheduled_approval_packet.json",
       "impact": {
-        "platform": "Instagram",
-        "missing_secrets": [],
-        "local_missing_secrets": [
-          "IG_BUSINESS_ACCOUNT_ID"
+        "checked_ids": [
+          "FP-AUTO-259"
         ],
-        "public_posting_approved": null,
-        "repair_checklist_blocked_count": 1
+        "blocked_ids_retained": [],
+        "blockers_resolved": 1,
+        "approval_blockers_before": 1,
+        "approval_blockers_after": 0,
+        "change_count": 1,
+        "auto_rows_unblocked": 1,
+        "manual_rows_unblocked": 0,
+        "approval_decision_manifest": {
+          "status": "ready_for_review",
+          "ready_ids": [
+            "FP-AUTO-259"
+          ],
+          "held_ids": [],
+          "decisions": [
+            {
+              "id": "FP-AUTO-259",
+              "decision": "ready_to_approve",
+              "platform": "TikTok",
+              "song": "I Learned It All in Fifteen Seconds",
+              "execution_mode": "auto",
+              "scheduled_at": "2026-06-05T20:40:00-04:00",
+              "checked_batch_member": true,
+              "approval_effect": {
+                "field": "approved",
+                "from": "no",
+                "to": "yes",
+                "changed": true,
+                "summary": "approved 'no' -> 'yes'"
+              },
+              "passed_check_names": [
+                "copy_present",
+                "destination_links_present",
+                "asset_file_present",
+                "executor_blocker_confirmed",
+                "platform_readiness"
+              ],
+              "failed_check_names": [],
+              "decision_reason": "All automated review checks passed.",
+              "post_approval_next_step": "Apply through --checked-batch after human copy/media/link review.",
+              "manual_dispatch_required": false
+            }
+          ],
+          "expected_checked_batch_effect": {
+            "row_count": 1,
+            "change_count": 1,
+            "ids": [
+              "FP-AUTO-259"
+            ],
+            "effects": [
+              {
+                "id": "FP-AUTO-259",
+                "platform": "TikTok",
+                "execution_mode": "auto",
+                "effect": {
+                  "field": "approved",
+                  "from": "no",
+                  "to": "yes",
+                  "changed": true,
+                  "summary": "approved 'no' -> 'yes'"
+                }
+              }
+            ]
+          },
+          "checked_batch_dry_run_preview": {
+            "status": "ready_for_review",
+            "dry_run": true,
+            "would_write_files": false,
+            "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+            "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+            "checked_batch_ids": [
+              "FP-AUTO-259"
+            ],
+            "requested_ids": [
+              "FP-AUTO-259"
+            ],
+            "unchecked_ids": [],
+            "row_count": 1,
+            "change_count": 1,
+            "expected_effect": {
+              "row_count": 1,
+              "change_count": 1,
+              "ids": [
+                "FP-AUTO-259"
+              ],
+              "effects": [
+                {
+                  "id": "FP-AUTO-259",
+                  "platform": "TikTok",
+                  "execution_mode": "auto",
+                  "effect": {
+                    "field": "approved",
+                    "from": "no",
+                    "to": "yes",
+                    "changed": true,
+                    "summary": "approved 'no' -> 'yes'"
+                  }
+                }
+              ]
+            },
+            "output_lines": [
+              "FP-AUTO-259: approved 'no' -> 'yes'",
+              "Checked batch guard: 1 checked id(s); 1 requested; 0 unchecked; 1 change(s).",
+              "Dry run only; did not update data/scheduled_posts.csv"
+            ],
+            "post_apply_verification": [
+              "python3 scripts/refresh_promo_admin.py",
+              "python3 scripts/validate_content_system.py"
+            ],
+            "guardrail": "This is a computed dry-run preview; approval still requires human review and the --checked-batch apply command."
+          },
+          "review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+          "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+          "guardrail": "Only ready_to_approve decisions may be applied through --checked-batch; held rows require repair first."
+        },
+        "approval_apply_manifest": {
+          "status": "ready_for_human_review",
+          "ready_ids": [
+            "FP-AUTO-259"
+          ],
+          "held_ids": [],
+          "apply_scope": "checked_batch",
+          "preview_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+          "apply_after_review_command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+          "expected_change_count": 1,
+          "expected_effect": {
+            "row_count": 1,
+            "change_count": 1,
+            "ids": [
+              "FP-AUTO-259"
+            ],
+            "effects": [
+              {
+                "id": "FP-AUTO-259",
+                "platform": "TikTok",
+                "execution_mode": "auto",
+                "effect": {
+                  "field": "approved",
+                  "from": "no",
+                  "to": "yes",
+                  "changed": true,
+                  "summary": "approved 'no' -> 'yes'"
+                }
+              }
+            ]
+          },
+          "ready_rows": [
+            {
+              "id": "FP-AUTO-259",
+              "platform": "TikTok",
+              "song": "I Learned It All in Fifteen Seconds",
+              "execution_mode": "auto",
+              "manual_dispatch_required": false,
+              "post_approval_next_step": "Refresh Admin and let the executor retry after approval is visible.",
+              "required_review": [
+                "copy",
+                "destination_links",
+                "media_asset",
+                "platform_readiness"
+              ]
+            }
+          ],
+          "held_rows": [],
+          "pre_apply_checklist": [
+            "Review copy, links, and media for every ready row.",
+            "Run the preview command and confirm it lists only ready_ids.",
+            "Confirm held_ids are excluded from the checked batch.",
+            "Apply only with --checked-batch after human review passes."
+          ],
+          "post_apply_evidence": [
+            "data/scheduled_posts.csv shows ready_ids changed from approved=no to approved=yes.",
+            "data/scheduled_approval_packet.json reports fewer approval blockers after refresh.",
+            "data/social_scheduler_dry_run.json no longer blocks the approved row on not_approved."
+          ],
+          "guardrails": [
+            "This manifest does not approve, publish, post, or log anything.",
+            "Do not use the full batch command while held_ids are present.",
+            "Do not approve held rows until failed review checks clear."
+          ]
+        },
+        "approval_review_runbook": {
+          "status": "ready_for_review",
+          "ready_ids": [
+            "FP-AUTO-259"
+          ],
+          "blocked_ids": [],
+          "ready_count": 1,
+          "blocked_count": 0,
+          "manual_dispatch_ready_count": 0,
+          "review_checklist": [
+            {
+              "id": "FP-AUTO-259",
+              "platform": "TikTok",
+              "song": "I Learned It All in Fifteen Seconds",
+              "execution_mode": "auto",
+              "scheduled_at": "2026-06-05T20:40:00-04:00",
+              "checked_batch_member": true,
+              "copy_block": "I learned it all in fifteen seconds and somehow still have homework. Streaming now.\n\nListen on Spotify: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
+              "asset_url": "https://www.lilyroo.com/assets/ig/01_i_learned_it_all_60s.mp4",
+              "destination_links": [
+                "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+                "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+                "https://music.youtube.com/watch?v=vK0mDIW65o4"
+              ],
+              "human_review_required": true,
+              "checklist": [
+                {
+                  "item": "copy",
+                  "status": "ready_for_human_review",
+                  "evidence": "83 primary-copy character(s)"
+                },
+                {
+                  "item": "destination_links",
+                  "status": "ready_for_human_review",
+                  "evidence": "3/3 link(s) have local evidence"
+                },
+                {
+                  "item": "media_asset",
+                  "status": "ready_for_human_review",
+                  "evidence": "assets/ig/01_i_learned_it_all_60s.mp4"
+                },
+                {
+                  "item": "platform_readiness",
+                  "status": "ready_for_human_review",
+                  "evidence": "All automated review checks passed."
+                }
+              ],
+              "preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --dry-run",
+              "post_approval_next_step": "Approve with the checked batch; executor can retry once approval is visible."
+            }
+          ],
+          "steps": [
+            {
+              "order": 1,
+              "title": "Review ready checked-batch rows",
+              "owner": "tod",
+              "status": "ready_for_review",
+              "command": "",
+              "evidence": "Review copy_block, destination_links, asset_url, and checklist for each ready row.",
+              "applies_to_ids": [
+                "FP-AUTO-259"
+              ]
+            },
+            {
+              "order": 2,
+              "title": "Preview the guarded checked batch",
+              "owner": "tod",
+              "status": "ready_for_review",
+              "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+              "evidence": "Dry run must report no file writes and only the checked IDs.",
+              "applies_to_ids": [
+                "FP-AUTO-259"
+              ]
+            },
+            {
+              "order": 3,
+              "title": "Apply after human review",
+              "owner": "tod",
+              "status": "ready_after_review",
+              "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+              "evidence": "Apply only after human copy/media/link review passes.",
+              "applies_to_ids": [
+                "FP-AUTO-259"
+              ]
+            },
+            {
+              "order": 4,
+              "title": "Refresh and validate admin state",
+              "owner": "codex",
+              "status": "ready_after_apply",
+              "command": "python3 scripts/refresh_promo_admin.py && python3 scripts/validate_content_system.py",
+              "evidence": "Admin should show fewer approval blockers and fresh execution state.",
+              "applies_to_ids": [
+                "FP-AUTO-259"
+              ]
+            }
+          ],
+          "guardrail": "This runbook is review-only; it does not approve, publish, post, or log anything."
+        },
+        "pre_apply_checklist": [
+          "Review copy, links, and media for every ready row.",
+          "Run the preview command and confirm it lists only ready_ids.",
+          "Confirm held_ids are excluded from the checked batch.",
+          "Apply only with --checked-batch after human review passes."
+        ],
+        "post_apply_evidence": [
+          "data/scheduled_posts.csv shows ready_ids changed from approved=no to approved=yes.",
+          "data/scheduled_approval_packet.json reports fewer approval blockers after refresh.",
+          "data/social_scheduler_dry_run.json no longer blocks the approved row on not_approved."
+        ],
+        "apply_guardrails": [
+          "This manifest does not approve, publish, post, or log anything.",
+          "Do not use the full batch command while held_ids are present.",
+          "Do not approve held rows until failed review checks clear."
+        ],
+        "review_runbook_steps": [
+          {
+            "order": 1,
+            "title": "Review ready checked-batch rows",
+            "owner": "tod",
+            "status": "ready_for_review",
+            "command": "",
+            "evidence": "Review copy_block, destination_links, asset_url, and checklist for each ready row.",
+            "applies_to_ids": [
+              "FP-AUTO-259"
+            ]
+          },
+          {
+            "order": 2,
+            "title": "Preview the guarded checked batch",
+            "owner": "tod",
+            "status": "ready_for_review",
+            "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --dry-run",
+            "evidence": "Dry run must report no file writes and only the checked IDs.",
+            "applies_to_ids": [
+              "FP-AUTO-259"
+            ]
+          },
+          {
+            "order": 3,
+            "title": "Apply after human review",
+            "owner": "tod",
+            "status": "ready_after_review",
+            "command": "python3 scripts/update_scheduled_post_approval.py --checked-batch --refresh-admin",
+            "evidence": "Apply only after human copy/media/link review passes.",
+            "applies_to_ids": [
+              "FP-AUTO-259"
+            ]
+          },
+          {
+            "order": 4,
+            "title": "Refresh and validate admin state",
+            "owner": "codex",
+            "status": "ready_after_apply",
+            "command": "python3 scripts/refresh_promo_admin.py && python3 scripts/validate_content_system.py",
+            "evidence": "Admin should show fewer approval blockers and fresh execution state.",
+            "applies_to_ids": [
+              "FP-AUTO-259"
+            ]
+          }
+        ],
+        "review_checklist": [
+          {
+            "id": "FP-AUTO-259",
+            "platform": "TikTok",
+            "song": "I Learned It All in Fifteen Seconds",
+            "execution_mode": "auto",
+            "scheduled_at": "2026-06-05T20:40:00-04:00",
+            "checked_batch_member": true,
+            "copy_block": "I learned it all in fifteen seconds and somehow still have homework. Streaming now.\n\nListen on Spotify: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
+            "asset_url": "https://www.lilyroo.com/assets/ig/01_i_learned_it_all_60s.mp4",
+            "destination_links": [
+              "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+              "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+              "https://music.youtube.com/watch?v=vK0mDIW65o4"
+            ],
+            "human_review_required": true,
+            "checklist": [
+              {
+                "item": "copy",
+                "status": "ready_for_human_review",
+                "evidence": "83 primary-copy character(s)"
+              },
+              {
+                "item": "destination_links",
+                "status": "ready_for_human_review",
+                "evidence": "3/3 link(s) have local evidence"
+              },
+              {
+                "item": "media_asset",
+                "status": "ready_for_human_review",
+                "evidence": "assets/ig/01_i_learned_it_all_60s.mp4"
+              },
+              {
+                "item": "platform_readiness",
+                "status": "ready_for_human_review",
+                "evidence": "All automated review checks passed."
+              }
+            ],
+            "preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --dry-run",
+            "post_approval_next_step": "Approve with the checked batch; executor can retry once approval is visible."
+          }
+        ],
+        "decision_ready_ids": [
+          "FP-AUTO-259"
+        ],
+        "decision_held_ids": [],
+        "decision_guardrail": "Only ready_to_approve decisions may be applied through --checked-batch; held rows require repair first."
       },
       "links": [],
-      "guardrail": "Push worker secrets only after local platform setup is complete."
-    },
-    {
-      "id": "platform-setup-FP-AUTO-263",
-      "title": "Repair Instagram executor",
-      "phase": "Platform setup",
-      "owner": "tod",
-      "urgency": "high",
-      "status": "failed",
-      "detail": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
-      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263",
-      "apply_command": "",
-      "source_path": "data/platform_repair_status.json",
-      "impact": {
-        "platform": "Instagram",
-        "missing_secrets": [],
-        "local_missing_secrets": [
-          "IG_BUSINESS_ACCOUNT_ID"
-        ],
-        "public_posting_approved": null,
-        "repair_checklist_blocked_count": 1
-      },
-      "links": [],
-      "guardrail": "Push worker secrets only after local platform setup is complete."
-    },
-    {
-      "id": "platform-setup-FP-AUTO-264",
-      "title": "Repair TikTok executor",
-      "phase": "Platform setup",
-      "owner": "tod",
-      "urgency": "high",
-      "status": "blocked",
-      "detail": "Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok direct public posting approval is false, but upload-draft mode can proceed after credentials. Local secret source is also missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Complete TikTok OAuth setup locally, then push upload-mode secrets and refresh Admin.",
-      "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
-      "apply_command": "",
-      "source_path": "data/platform_repair_status.json",
-      "impact": {
-        "platform": "TikTok",
-        "missing_secrets": [
-          "TIKTOK_CLIENT_KEY",
-          "TIKTOK_CLIENT_SECRET",
-          "TIKTOK_REFRESH_TOKEN"
-        ],
-        "local_missing_secrets": [
-          "TIKTOK_CLIENT_KEY",
-          "TIKTOK_CLIENT_SECRET",
-          "TIKTOK_REFRESH_TOKEN"
-        ],
-        "public_posting_approved": false,
-        "repair_checklist_blocked_count": 3,
-        "preflight_status": "blocked",
-        "preflight_blocked_count": 7,
-        "ready_to_push_worker_secrets": false,
-        "ready_to_upload_drafts": false,
-        "ready_to_post_publicly": false,
-        "preflight_report": "admin/reports/tiktok-setup-preflight.md",
-        "preflight_command": "python3 scripts/build_tiktok_setup_preflight.py"
-      },
-      "links": [],
-      "guardrail": "Run the TikTok preflight before pushing secrets; push upload-mode secrets only after local OAuth setup is complete. Keep direct public posting blocked until approval is confirmed."
+      "guardrail": "Use --checked-batch so only rows that passed review checks are approved."
     },
     {
       "id": "platform-setup-FP-AUTO-265",
@@ -927,7 +1931,7 @@
       "urgency": "high",
       "status": "failed",
       "detail": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
-      "preview_command": "python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run",
+      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-265",
       "apply_command": "",
       "source_path": "data/platform_repair_status.json",
       "impact": {
@@ -941,14 +1945,35 @@
       "guardrail": "Push worker secrets only after local platform setup is complete."
     },
     {
-      "id": "platform-setup-FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
-      "title": "Repair Instagram executor",
+      "id": "platform-setup-FP-AUTO-268",
+      "title": "Repair Facebook executor",
       "phase": "Platform setup",
       "owner": "tod",
       "urgency": "high",
       "status": "failed",
+      "detail": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
+      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-268",
+      "apply_command": "",
+      "source_path": "data/platform_repair_status.json",
+      "impact": {
+        "platform": "Facebook",
+        "missing_secrets": [],
+        "local_missing_secrets": [],
+        "public_posting_approved": null,
+        "repair_checklist_blocked_count": 0
+      },
+      "links": [],
+      "guardrail": "Push worker secrets only after local platform setup is complete."
+    },
+    {
+      "id": "platform-setup-FP-AUTO-272",
+      "title": "Repair Instagram executor",
+      "phase": "Platform setup",
+      "owner": "tod",
+      "urgency": "high",
+      "status": "blocked",
       "detail": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
-      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+      "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
       "apply_command": "",
       "source_path": "data/platform_repair_status.json",
       "impact": {
@@ -964,6 +1989,48 @@
       "guardrail": "Push worker secrets only after local platform setup is complete."
     },
     {
+      "id": "platform-setup-FP-AUTO-273",
+      "title": "Repair Facebook executor",
+      "phase": "Platform setup",
+      "owner": "tod",
+      "urgency": "high",
+      "status": "failed",
+      "detail": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
+      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-273",
+      "apply_command": "",
+      "source_path": "data/platform_repair_status.json",
+      "impact": {
+        "platform": "Facebook",
+        "missing_secrets": [],
+        "local_missing_secrets": [],
+        "public_posting_approved": null,
+        "repair_checklist_blocked_count": 0
+      },
+      "links": [],
+      "guardrail": "Push worker secrets only after local platform setup is complete."
+    },
+    {
+      "id": "platform-setup-FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
+      "title": "Repair YouTube executor",
+      "phase": "Platform setup",
+      "owner": "tod",
+      "urgency": "high",
+      "status": "failed",
+      "detail": "Review platform credentials/readiness, then rerun the social execution capture.",
+      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
+      "apply_command": "",
+      "source_path": "data/platform_repair_status.json",
+      "impact": {
+        "platform": "YouTube",
+        "missing_secrets": [],
+        "local_missing_secrets": [],
+        "public_posting_approved": null,
+        "repair_checklist_blocked_count": 0
+      },
+      "links": [],
+      "guardrail": "Push worker secrets only after local platform setup is complete."
+    },
+    {
       "id": "backlog-reschedule",
       "title": "Preview approved backlog reschedule",
       "phase": "Backlog recovery",
@@ -971,60 +2038,91 @@
       "urgency": "high",
       "status": "blocked",
       "detail": "Known executor/platform blockers must clear before normal apply.",
-      "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+08:00' --spacing-hours 24",
+      "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24",
       "apply_command": "",
       "source_path": "data/backlog_reschedule_preview.json",
       "impact": {
-        "approved_backlog_count": 2,
-        "blocked_backlog_count": 2,
-        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
-        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+08:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
+        "approved_backlog_count": 23,
+        "blocked_backlog_count": 5,
+        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
         "backlog_clearance_manifest": {
           "status": "blocked_until_clearance_steps_complete",
-          "approved_backlog_count": 2,
-          "blocked_backlog_count": 2,
-          "clear_to_apply_count": 0,
-          "partial_clear_apply_available": false,
-          "partial_clear_apply_count": 0,
+          "approved_backlog_count": 23,
+          "blocked_backlog_count": 5,
+          "clear_to_apply_count": 18,
+          "partial_clear_apply_available": true,
+          "partial_clear_apply_count": 18,
           "blocked_ids": [
-            "FP-AUTO-258",
-            "FP-AUTO-264"
+            "FP-AUTO-268",
+            "FP-AUTO-265",
+            "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
+            "FP-AUTO-272",
+            "FP-AUTO-273"
           ],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+08:00' --spacing-hours 24",
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24",
           "safe_apply_command": "",
-          "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
-          "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+08:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
+          "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+          "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
           "apply_allowed_without_override": false,
           "apply_gate": "blocked_until_clearance_steps_complete",
           "clearance_steps": [
-            "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply.",
-            "Add local TikTok OAuth credentials, then push upload-mode worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
-            "Keep direct public posting blocked until TikTok public-posting approval is confirmed; upload mode can still create inbox drafts after credentials.",
-            "Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair."
+            "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
           ],
           "blocked_items": [
             {
-              "id": "FP-AUTO-258",
-              "platform": "Instagram",
-              "song": "I Learned It All in Fifteen Seconds",
+              "id": "FP-AUTO-268",
+              "platform": "Facebook",
+              "song": "Brain Rot",
               "blocker_kind": "max_attempts_exceeded",
-              "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
-              "proposed_scheduled_at": "2026-06-24T10:00:00+08:00",
+              "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
+              "proposed_scheduled_at": "2026-07-15T10:00:00-04:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]
             },
             {
-              "id": "FP-AUTO-264",
-              "platform": "TikTok",
+              "id": "FP-AUTO-265",
+              "platform": "Facebook",
               "song": "I Learned It All in Fifteen Seconds",
-              "blocker_kind": "tiktok_credentials_missing",
-              "blocker_reason": "tiktok_credentials_missing",
-              "proposed_scheduled_at": "2026-06-25T10:00:00+08:00",
+              "blocker_kind": "max_attempts_exceeded",
+              "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
+              "proposed_scheduled_at": "2026-07-17T10:00:00-04:00",
               "clearance_steps": [
-                "Add local TikTok OAuth credentials, then push upload-mode worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
-                "Keep direct public posting blocked until TikTok public-posting approval is confirmed; upload mode can still create inbox drafts after credentials.",
-                "Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair."
+                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+              ]
+            },
+            {
+              "id": "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
+              "platform": "YouTube",
+              "song": "Analog Myth",
+              "blocker_kind": "max_attempts_exceeded",
+              "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Bad Request\"}",
+              "proposed_scheduled_at": "2026-07-19T10:00:00-04:00",
+              "clearance_steps": [
+                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+              ]
+            },
+            {
+              "id": "FP-AUTO-272",
+              "platform": "Instagram",
+              "song": "Every Pearl in Carmel",
+              "blocker_kind": "instagram_business_account_unresolved",
+              "blocker_reason": "instagram_business_account_unresolved",
+              "proposed_scheduled_at": "2026-07-20T10:00:00-04:00",
+              "clearance_steps": [
+                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+              ]
+            },
+            {
+              "id": "FP-AUTO-273",
+              "platform": "Facebook",
+              "song": "Every Pearl in Carmel",
+              "blocker_kind": "max_attempts_exceeded",
+              "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
+              "proposed_scheduled_at": "2026-07-21T10:00:00-04:00",
+              "clearance_steps": [
+                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]
             }
           ],

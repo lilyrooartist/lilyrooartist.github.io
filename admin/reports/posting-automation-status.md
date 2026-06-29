@@ -1,43 +1,43 @@
 # Posting Automation Status - Lily Roo
 
-Generated: 2026-06-24T06:12:54.512080Z
+Generated: 2026-06-29T15:09:59.905313Z
 
 ## Summary
 - Status: **blocked**
 - Lanes ready: **5 / 8**
-- Blocked lanes: **3**
-- Needs attention: **0**
+- Blocked lanes: **2**
+- Needs attention: **1**
 - Story posts tracked: **6**
 - Help-needed items: **5**
 - Next action: Resolve the platform repair checklist before expecting full auto-post coverage.
 
 ## Automation Lanes
-- **Scheduled refresh workflow** - `ready`
-  - Detail: 17 */6 * * *; latest run completed / success
-  - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28002303668
+- **Scheduled refresh workflow** - `needs_attention`
+  - Detail: 17 */6 * * *; latest run completed / failure
+  - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28368479772
+  - Next: Confirm the GitHub Actions workflow is enabled and has a successful run.
 - **Safe admin refresh** - `ready`
-  - Detail: 41 refresh commands captured at 2026-06-23T08:58:46.140472Z
+  - Detail: 11 refresh commands captured at 2026-06-29T15:09:58.349519Z
   - Evidence: data/promo_admin_refresh_run.json
 - **Scheduler dry-run authentication** - `ready`
-  - Detail: HTTP 200 using bearer auth; due=6 would_post=0
+  - Detail: HTTP 200 using bearer auth; due=26 would_post=0
   - Evidence: data/social_scheduler_dry_run.json
 - **Execution capture** - `ready`
-  - Detail: posted=1 attention=8 platform_fix_needed=7
+  - Detail: posted=5 attention=6 platform_fix_needed=5
   - Evidence: data/social_execution_snapshot.json
 - **Platform readiness** - `blocked`
   - Detail: ready=X, TikTok, Facebook, YouTube; blocked=Instagram
   - Evidence: data/executor_readiness_snapshot.json
   - Next: Resolve the platform repair checklist before expecting full auto-post coverage.
-- **TikTok API lane** - `blocked`
-  - Detail: blocked; upload_ready=False; public_ready=False
+- **TikTok API lane** - `ready`
+  - Detail: blocked; upload_ready=True; public_ready=False
   - Evidence: data/tiktok_setup_preflight.json
-  - Next: Add TikTok OAuth credentials and rerun the upload-mode dry run.
 - **Blocker input readiness** - `blocked`
-  - Detail: 1 ready; 3 missing local input; 1 external action needed
+  - Detail: 3 ready; 1 missing local input; 1 external action needed
   - Evidence: data/social_blocker_input_status.json
-  - Next: Add META_LONG_LIVED_TOKEN, FB_PAGE_ID to /Users/tod.famous/Documents/New project/secrets/social_api.env, then run python3 scripts/resolve_instagram_business_account.py.
+  - Next: Add META_LONG_LIVED_TOKEN, FB_PAGE_ID to /private/tmp/secrets/social_api.env, then run python3 scripts/resolve_instagram_business_account.py.
 - **Story throughput** - `ready`
-  - Detail: 6 tracked; 6 queued; 0 past due without URL
+  - Detail: 6 tracked; 3 queued; 1 past due without URL
   - Evidence: data/story_throughput_tracking.json
   - Next: Export social executions after scheduled post times, then log public URLs and results.
 
