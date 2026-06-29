@@ -1,33 +1,31 @@
 {
   "ok": true,
-  "updated_at": "2026-06-29T15:09:57.374729Z",
+  "updated_at": "2026-06-29T15:13:32.946407Z",
   "source": "lilyroo-social-scheduler-dry-run",
   "url": "https://www.lilyroo.com/api/social/scheduler/dry-run",
   "http_status": 200,
   "error": null,
   "auth_method": "bearer",
-  "requested_scheduled_time": "2026-06-29T15:09:56.666800Z",
+  "requested_scheduled_time": "2026-06-29T15:13:32.321072Z",
   "dry_run": true,
-  "checked_at": "2026-06-29T15:09:56.666Z",
+  "checked_at": "2026-06-29T15:13:32.321Z",
   "summary": {
-    "due_count": 26,
-    "result_count": 26,
+    "due_count": 24,
+    "result_count": 24,
     "would_post_count": 0,
-    "blocked_count": 19,
+    "blocked_count": 17,
     "status_counts": {
       "blocked": 3,
       "draft_uploaded": 3,
       "failed": 14,
-      "posted": 4,
-      "skipped": 2
+      "posted": 4
     },
     "platform_counts": {
       "Facebook": 6,
       "Instagram": 5,
       "TikTok": 1,
       "Unknown": 7,
-      "YouTube": 5,
-      "YouTube Community": 2
+      "YouTube": 5
     },
     "would_post": [],
     "blocked": [
@@ -38,7 +36,7 @@
         "reason": "not_approved",
         "post_type": "",
         "attempts": 0,
-        "updated_at": "2026-06-29T15:09:56.876Z",
+        "updated_at": "2026-06-29T15:13:32.538Z",
         "source": "dry-run",
         "error_summary": ""
       },
@@ -49,7 +47,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-06-29T15:09:56.879Z",
+        "updated_at": "2026-06-29T15:13:32.541Z",
         "source": "dry-run",
         "error_summary": "Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page"
       },
@@ -60,7 +58,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-06-29T15:09:56.884Z",
+        "updated_at": "2026-06-29T15:13:32.546Z",
         "source": "dry-run",
         "error_summary": "API request failed (400): {\"error\":{\"message\":\"Confirm your identity before you can publish as this Page. Open the Facebook app on your phone and follow the instructions.\",\"type\":\"OAuthException\",\"code\":368,\"error_data\":{\"sentry_block_data\""
       },
@@ -71,7 +69,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-06-29T15:09:56.886Z",
+        "updated_at": "2026-06-29T15:13:32.548Z",
         "source": "dry-run",
         "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}"
       },
@@ -82,7 +80,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-06-29T15:09:56.888Z",
+        "updated_at": "2026-06-29T15:13:32.550Z",
         "source": "dry-run",
         "error_summary": "Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page"
       },
@@ -93,7 +91,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-06-29T15:09:56.893Z",
+        "updated_at": "2026-06-29T15:13:32.556Z",
         "source": "dry-run",
         "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}"
       },
@@ -104,7 +102,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-06-29T15:09:56.895Z",
+        "updated_at": "2026-06-29T15:13:32.559Z",
         "source": "dry-run",
         "error_summary": "Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page"
       },
@@ -115,7 +113,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-06-29T15:09:56.898Z",
+        "updated_at": "2026-06-29T15:13:32.562Z",
         "source": "dry-run",
         "error_summary": "API request failed (400): {\"error\":{\"message\":\"Confirm your identity before you can publish as this Page. Open the Facebook app on your phone and follow the instructions.\",\"type\":\"OAuthException\",\"code\":368,\"error_data\":{\"sentry_block_data\""
       },
@@ -126,7 +124,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-06-29T15:09:56.900Z",
+        "updated_at": "2026-06-29T15:13:32.564Z",
         "source": "dry-run",
         "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}"
       },
@@ -137,7 +135,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-06-29T15:09:56.909Z",
+        "updated_at": "2026-06-29T15:13:32.571Z",
         "source": "dry-run",
         "error_summary": "API request failed (400): {\"error\":{\"message\":\"Invalid parameter\",\"type\":\"OAuthException\",\"code\":100,\"error_data\":{\"blame_field_specs\":[[\"link\"]]},\"error_subcode\":2061006,\"is_transient\":false,\"error_user_title\":\"URL Can't Be Used\",\"error_us"
       },
@@ -148,7 +146,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-06-29T15:09:56.911Z",
+        "updated_at": "2026-06-29T15:13:32.574Z",
         "source": "dry-run",
         "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Bad Request\"}"
       },
@@ -159,7 +157,7 @@
         "reason": "instagram_business_account_unresolved",
         "post_type": "",
         "attempts": 0,
-        "updated_at": "2026-06-29T15:09:57.161Z",
+        "updated_at": "2026-06-29T15:13:32.757Z",
         "source": "dry-run",
         "error_summary": ""
       },
@@ -170,20 +168,9 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-06-29T15:09:57.163Z",
+        "updated_at": "2026-06-29T15:13:32.760Z",
         "source": "dry-run",
         "error_summary": "API request failed (400): {\"error\":{\"message\":\"Confirm your identity before you can publish as this Page. Open the Facebook app on your phone and follow the instructions.\",\"type\":\"OAuthException\",\"code\":368,\"error_data\":{\"sentry_block_data\""
-      },
-      {
-        "post_id": "FP-AUTO-270",
-        "platform": "YouTube Community",
-        "status": "skipped",
-        "reason": "manual_only",
-        "post_type": "",
-        "attempts": 0,
-        "updated_at": "2026-06-29T15:09:57.167Z",
-        "source": "dry-run",
-        "error_summary": ""
       },
       {
         "post_id": "FP-AUTO-265",
@@ -192,7 +179,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-06-29T15:09:57.169Z",
+        "updated_at": "2026-06-29T15:13:32.765Z",
         "source": "dry-run",
         "error_summary": "API request failed (400): {\"error\":{\"message\":\"Confirm your identity before you can publish as this Page. Open the Facebook app on your phone and follow the instructions.\",\"type\":\"OAuthException\",\"code\":368,\"error_data\":{\"sentry_block_data\""
       },
@@ -203,7 +190,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-06-29T15:09:57.174Z",
+        "updated_at": "2026-06-29T15:13:32.770Z",
         "source": "dry-run",
         "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Bad Request\"}"
       },
@@ -214,7 +201,7 @@
         "reason": "instagram_business_account_unresolved",
         "post_type": "",
         "attempts": 0,
-        "updated_at": "2026-06-29T15:09:57.395Z",
+        "updated_at": "2026-06-29T15:13:32.997Z",
         "source": "dry-run",
         "error_summary": ""
       },
@@ -225,27 +212,16 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-06-29T15:09:57.397Z",
+        "updated_at": "2026-06-29T15:13:32.999Z",
         "source": "dry-run",
         "error_summary": "API request failed (400): {\"error\":{\"message\":\"Confirm your identity before you can publish as this Page. Open the Facebook app on your phone and follow the instructions.\",\"type\":\"OAuthException\",\"code\":368,\"error_data\":{\"sentry_block_data\""
-      },
-      {
-        "post_id": "FP-AUTO-275",
-        "platform": "YouTube Community",
-        "status": "skipped",
-        "reason": "manual_only",
-        "post_type": "",
-        "attempts": 0,
-        "updated_at": "2026-06-29T15:09:57.402Z",
-        "source": "dry-run",
-        "error_summary": ""
       }
     ]
   },
   "payload": {
     "ok": true,
-    "due_count": 26,
-    "result_count": 26
+    "due_count": 24,
+    "result_count": 24
   },
   "action_needed": ""
 }
