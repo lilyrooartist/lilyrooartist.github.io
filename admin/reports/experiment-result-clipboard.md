@@ -1,6 +1,6 @@
 # Experiment Result Clipboard - Lily Roo
 
-Generated: 2026-06-29T16:26:29.273913Z
+Generated: 2026-06-29T20:48:40.204591Z
 
 ## Summary
 - Status: **needs_values**
@@ -218,9 +218,9 @@ Generated: 2026-06-29T16:26:29.273913Z
 - **Collect metrics** `FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK` X / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 7 logged post(s), 9 missing URL(s) in this format.
   - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --source-row 23 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
   - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --source-row 23 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
-- **Log public URL** `FP-AUTO-268` Facebook / Release-art image + story hook: Scheduled row is not yet logged; confirm publication and log the real public URL before metrics. 7 logged post(s), 9 missing URL(s) in this format.
 - **Log public URL** `FP-PLAN-TWELVE-DOLLARS-FACEBOOK` Facebook / Release-art image + story hook: Scheduled row is not yet logged; confirm publication and log the real public URL before metrics. 7 logged post(s), 9 missing URL(s) in this format.
 - **Log public URL** `FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK` Facebook / Release-art image + story hook: Scheduled row is not yet logged; confirm publication and log the real public URL before metrics. 7 logged post(s), 9 missing URL(s) in this format.
+- **Log public URL** `FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA` YouTube / Short video clip + platform-native CTA: Scheduled row is not yet logged; confirm publication and log the real public URL before metrics. 0 logged post(s), 7 missing URL(s) in this format.
 - **Log public URL** `FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA` YouTube / Short video clip + platform-native CTA: Scheduled row is not yet logged; confirm publication and log the real public URL before metrics. 0 logged post(s), 7 missing URL(s) in this format.
 - **Log public URL** `FP-AUTO-261` YouTube / YouTube Community archive/playlist CTA: Scheduled row is not yet logged; confirm publication and log the real public URL before metrics. 0 logged post(s), 3 missing URL(s) in this format.
 

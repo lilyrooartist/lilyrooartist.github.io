@@ -1,25 +1,25 @@
 {
   "ok": true,
-  "updated_at": "2026-06-29T16:26:26.685388Z",
+  "updated_at": "2026-06-29T20:48:37.506864Z",
   "source": "lilyroo-social-scheduler-dry-run",
   "url": "https://www.lilyroo.com/api/social/scheduler/dry-run",
   "http_status": 200,
   "error": null,
   "auth_method": "bearer",
-  "requested_scheduled_time": "2026-06-29T16:26:25.958023Z",
+  "requested_scheduled_time": "2026-06-29T20:48:36.690286Z",
   "dry_run": true,
-  "checked_at": "2026-06-29T16:26:25.958Z",
+  "checked_at": "2026-06-29T20:48:36.690Z",
   "summary": {
     "due_count": 25,
     "result_count": 25,
-    "would_post_count": 2,
-    "blocked_count": 16,
+    "would_post_count": 5,
+    "blocked_count": 13,
     "status_counts": {
       "blocked": 3,
       "draft_uploaded": 3,
-      "failed": 13,
+      "failed": 10,
       "posted": 4,
-      "would_post": 2
+      "would_post": 5
     },
     "platform_counts": {
       "Facebook": 7,
@@ -30,22 +30,55 @@
     },
     "would_post": [
       {
-        "post_id": "FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA",
-        "platform": "Facebook",
+        "post_id": "FP-AUTO-261",
+        "platform": "YouTube",
         "status": "would_post",
         "reason": "",
-        "post_type": "text",
+        "post_type": "video",
         "attempts": 0,
         "updated_at": "",
         "source": "",
         "error_summary": ""
       },
       {
-        "post_id": "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA",
-        "platform": "Facebook",
+        "post_id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+        "platform": "YouTube",
         "status": "would_post",
         "reason": "",
-        "post_type": "text",
+        "post_type": "video",
+        "attempts": 0,
+        "updated_at": "",
+        "source": "",
+        "error_summary": ""
+      },
+      {
+        "post_id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+        "platform": "YouTube",
+        "status": "would_post",
+        "reason": "",
+        "post_type": "video",
+        "attempts": 0,
+        "updated_at": "",
+        "source": "",
+        "error_summary": ""
+      },
+      {
+        "post_id": "FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA",
+        "platform": "YouTube",
+        "status": "would_post",
+        "reason": "",
+        "post_type": "video",
+        "attempts": 0,
+        "updated_at": "",
+        "source": "",
+        "error_summary": ""
+      },
+      {
+        "post_id": "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
+        "platform": "YouTube",
+        "status": "would_post",
+        "reason": "",
+        "post_type": "video",
         "attempts": 0,
         "updated_at": "",
         "source": "",
@@ -60,7 +93,7 @@
         "reason": "not_approved",
         "post_type": "",
         "attempts": 0,
-        "updated_at": "2026-06-29T16:26:26.201Z",
+        "updated_at": "2026-06-29T20:48:37.029Z",
         "source": "dry-run",
         "error_summary": ""
       },
@@ -71,7 +104,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-06-29T16:26:26.204Z",
+        "updated_at": "2026-06-29T20:48:37.031Z",
         "source": "dry-run",
         "error_summary": "Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page"
       },
@@ -82,20 +115,9 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-06-29T16:26:26.209Z",
+        "updated_at": "2026-06-29T20:48:37.036Z",
         "source": "dry-run",
         "error_summary": "API request failed (400): {\"error\":{\"message\":\"Confirm your identity before you can publish as this Page. Open the Facebook app on your phone and follow the instructions.\",\"type\":\"OAuthException\",\"code\":368,\"error_data\":{\"sentry_block_data\""
-      },
-      {
-        "post_id": "FP-AUTO-261",
-        "platform": "YouTube",
-        "status": "failed",
-        "reason": "max_attempts_exceeded",
-        "post_type": "",
-        "attempts": 3,
-        "updated_at": "2026-06-29T16:26:26.211Z",
-        "source": "dry-run",
-        "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}"
       },
       {
         "post_id": "FP-AUTO-263",
@@ -104,20 +126,9 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-06-29T16:26:26.213Z",
+        "updated_at": "2026-06-29T20:48:37.041Z",
         "source": "dry-run",
         "error_summary": "Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page"
-      },
-      {
-        "post_id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
-        "platform": "YouTube",
-        "status": "failed",
-        "reason": "max_attempts_exceeded",
-        "post_type": "",
-        "attempts": 3,
-        "updated_at": "2026-06-29T16:26:26.218Z",
-        "source": "dry-run",
-        "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}"
       },
       {
         "post_id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
@@ -126,7 +137,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-06-29T16:26:26.220Z",
+        "updated_at": "2026-06-29T20:48:37.047Z",
         "source": "dry-run",
         "error_summary": "Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page"
       },
@@ -137,31 +148,20 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-06-29T16:26:26.223Z",
+        "updated_at": "2026-06-29T20:48:37.050Z",
         "source": "dry-run",
         "error_summary": "API request failed (400): {\"error\":{\"message\":\"Confirm your identity before you can publish as this Page. Open the Facebook app on your phone and follow the instructions.\",\"type\":\"OAuthException\",\"code\":368,\"error_data\":{\"sentry_block_data\""
       },
       {
-        "post_id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-        "platform": "YouTube",
+        "post_id": "FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA",
+        "platform": "Facebook",
         "status": "failed",
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-06-29T16:26:26.226Z",
+        "updated_at": "2026-06-29T20:48:37.060Z",
         "source": "dry-run",
-        "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}"
-      },
-      {
-        "post_id": "FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA",
-        "platform": "YouTube",
-        "status": "failed",
-        "reason": "max_attempts_exceeded",
-        "post_type": "",
-        "attempts": 3,
-        "updated_at": "2026-06-29T16:26:26.236Z",
-        "source": "dry-run",
-        "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Bad Request\"}"
+        "error_summary": "API request failed (400): {\"error\":{\"message\":\"Confirm your identity before you can publish as this Page. Open the Facebook app on your phone and follow the instructions.\",\"type\":\"OAuthException\",\"code\":368,\"error_data\":{\"sentry_block_data\""
       },
       {
         "post_id": "FP-AUTO-267",
@@ -170,7 +170,7 @@
         "reason": "instagram_business_account_unresolved",
         "post_type": "",
         "attempts": 0,
-        "updated_at": "2026-06-29T16:26:26.434Z",
+        "updated_at": "2026-06-29T20:48:37.351Z",
         "source": "dry-run",
         "error_summary": ""
       },
@@ -181,7 +181,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-06-29T16:26:26.436Z",
+        "updated_at": "2026-06-29T20:48:37.352Z",
         "source": "dry-run",
         "error_summary": "API request failed (400): {\"error\":{\"message\":\"Confirm your identity before you can publish as this Page. Open the Facebook app on your phone and follow the instructions.\",\"type\":\"OAuthException\",\"code\":368,\"error_data\":{\"sentry_block_data\""
       },
@@ -192,20 +192,9 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-06-29T16:26:26.440Z",
+        "updated_at": "2026-06-29T20:48:37.356Z",
         "source": "dry-run",
         "error_summary": "API request failed (400): {\"error\":{\"message\":\"Confirm your identity before you can publish as this Page. Open the Facebook app on your phone and follow the instructions.\",\"type\":\"OAuthException\",\"code\":368,\"error_data\":{\"sentry_block_data\""
-      },
-      {
-        "post_id": "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
-        "platform": "YouTube",
-        "status": "failed",
-        "reason": "max_attempts_exceeded",
-        "post_type": "",
-        "attempts": 3,
-        "updated_at": "2026-06-29T16:26:26.444Z",
-        "source": "dry-run",
-        "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Bad Request\"}"
       },
       {
         "post_id": "FP-AUTO-272",
@@ -214,7 +203,7 @@
         "reason": "instagram_business_account_unresolved",
         "post_type": "",
         "attempts": 0,
-        "updated_at": "2026-06-29T16:26:26.707Z",
+        "updated_at": "2026-06-29T20:48:37.601Z",
         "source": "dry-run",
         "error_summary": ""
       },
@@ -225,7 +214,18 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-06-29T16:26:26.709Z",
+        "updated_at": "2026-06-29T20:48:37.662Z",
+        "source": "dry-run",
+        "error_summary": "API request failed (400): {\"error\":{\"message\":\"Confirm your identity before you can publish as this Page. Open the Facebook app on your phone and follow the instructions.\",\"type\":\"OAuthException\",\"code\":368,\"error_data\":{\"sentry_block_data\""
+      },
+      {
+        "post_id": "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA",
+        "platform": "Facebook",
+        "status": "failed",
+        "reason": "max_attempts_exceeded",
+        "post_type": "",
+        "attempts": 3,
+        "updated_at": "2026-06-29T20:48:37.666Z",
         "source": "dry-run",
         "error_summary": "API request failed (400): {\"error\":{\"message\":\"Confirm your identity before you can publish as this Page. Open the Facebook app on your phone and follow the instructions.\",\"type\":\"OAuthException\",\"code\":368,\"error_data\":{\"sentry_block_data\""
       }

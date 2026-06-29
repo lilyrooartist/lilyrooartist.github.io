@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T16:26:29.392195Z",
+  "generated_at": "2026-06-29T20:48:40.337086Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -44,6 +44,15 @@
       "blocked_apply_reasons": []
     },
     {
+      "post_id": "FP-AUTO-268",
+      "platform": "Facebook",
+      "reason": "max_attempts_exceeded",
+      "status": "failed",
+      "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
+      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-268",
+      "blocked_apply_reasons": []
+    },
+    {
       "post_id": "FP-AUTO-273",
       "platform": "Facebook",
       "reason": "max_attempts_exceeded",
@@ -55,19 +64,10 @@
     {
       "post_id": "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA",
       "platform": "Facebook",
-      "reason": "",
-      "status": "failed",
-      "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
-      "preview_command": "python3 scripts/check_facebook_publishing.py --post-id 'FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA' --check-worker-dry-run",
-      "blocked_apply_reasons": []
-    },
-    {
-      "post_id": "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
-      "platform": "YouTube",
       "reason": "max_attempts_exceeded",
       "status": "failed",
-      "repair_action": "Review platform credentials/readiness, then rerun the social execution capture.",
-      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
+      "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
+      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA",
       "blocked_apply_reasons": []
     }
   ],

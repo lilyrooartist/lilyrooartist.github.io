@@ -1,6 +1,6 @@
 # Promo Operations Packet - Lily Roo
 
-Generated: 2026-06-29T16:26:27.900508Z
+Generated: 2026-06-29T20:48:38.758130Z
 
 ## Summary
 - Actions: **16**
@@ -33,7 +33,9 @@ Generated: 2026-06-29T16:26:27.900508Z
 - **[high] Fix Facebook executor**
   - Why: Platform executor needs repair before queued auto posts can publish.
   - Detail: Facebook blocked Page publishing until identity is confirmed in the Facebook app.
-  - Command: `python3 scripts/check_facebook_publishing.py --post-id 'FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA' --check-worker-dry-run`
+  - Command: `python3 scripts/check_social_executor_dry_run.py --post-id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA`
+  - Preview retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA`
+  - Apply retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA --apply`
 - **[high] Fix Facebook executor**
   - Why: Platform executor needs repair before queued auto posts can publish.
   - Detail: Facebook blocked Page publishing until identity is confirmed in the Facebook app.
@@ -47,18 +49,18 @@ Generated: 2026-06-29T16:26:27.900508Z
   - Local source: `secrets/social_api.env`
   - Command: `python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID`
   - Apply repair after preview: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
-- **[high] Fix YouTube executor**
-  - Why: Platform executor needs repair before queued auto posts can publish.
-  - Detail: API request failed (400): {"error":"invalid_grant","error_description":"Bad Request"}
-  - Command: `python3 scripts/check_social_executor_dry_run.py --post-id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA`
-  - Preview retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA`
-  - Apply retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --apply`
 - **[high] Fix Facebook executor**
   - Why: Platform executor needs repair before queued auto posts can publish.
   - Detail: Facebook blocked Page publishing until identity is confirmed in the Facebook app.
   - Command: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-265`
   - Preview retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-AUTO-265`
   - Apply retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-AUTO-265 --apply`
+- **[high] Fix Facebook executor**
+  - Why: Platform executor needs repair before queued auto posts can publish.
+  - Detail: Facebook blocked Page publishing until identity is confirmed in the Facebook app.
+  - Command: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-268`
+  - Preview retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-AUTO-268`
+  - Apply retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-AUTO-268 --apply`
 
 ### Collect experiment results
 - **[high] Collect experiment result metrics**
@@ -74,28 +76,28 @@ Generated: 2026-06-29T16:26:27.900508Z
 ### Verify music sites
 - **[medium] Re-check Twelve Dollars on Spotify**
   - Why: Public store links should be checked until DistroKid exposes them.
-  - Detail: Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T16:25:18.301594+00:00. Status: waiting_for_release_propagation.
-  - Latest snapshot checked: `2026-06-29T16:25:18.301594+00:00`
+  - Detail: Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T20:48:25.296478+00:00. Status: waiting_for_release_propagation.
+  - Latest snapshot checked: `2026-06-29T20:48:25.296478+00:00`
   - Command: `python3 scripts/search_spotify_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/spotify_release_snapshot.json'`
 - **[medium] Re-check Twelve Dollars on Apple Music**
   - Why: Public store links should be checked until DistroKid exposes them.
-  - Detail: Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T16:25:38.532787+00:00. Status: waiting_for_release_propagation.
-  - Latest snapshot checked: `2026-06-29T16:25:38.532787+00:00`
+  - Detail: Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T20:48:28.889138+00:00. Status: waiting_for_release_propagation.
+  - Latest snapshot checked: `2026-06-29T20:48:28.889138+00:00`
   - Command: `python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/apple_music_release_snapshot.json'`
 - **[medium] Re-check Twelve Dollars on HyperFollow**
   - Why: Public store links should be checked until DistroKid exposes them.
-  - Detail: Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T16:25:38.885895+00:00. Status: waiting_for_release_propagation.
-  - Latest snapshot checked: `2026-06-29T16:25:38.885895+00:00`
+  - Detail: Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T20:48:29.658683+00:00. Status: waiting_for_release_propagation.
+  - Latest snapshot checked: `2026-06-29T20:48:29.658683+00:00`
   - Command: `python3 scripts/capture_hyperfollow_store_links.py --url 'https://distrokid.com/hyperfollow/lilyroo/twelve-dollars' --out 'data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json'`
 - **[medium] Re-check Analog Myth on Spotify**
   - Why: Public store links should be checked as the July 1 release approaches.
-  - Detail: Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T16:25:38.939803+00:00. Status: waiting_for_release_propagation.
-  - Latest snapshot checked: `2026-06-29T16:25:38.939803+00:00`
+  - Detail: Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T20:48:29.737632+00:00. Status: waiting_for_release_propagation.
+  - Latest snapshot checked: `2026-06-29T20:48:29.737632+00:00`
   - Command: `python3 scripts/search_spotify_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/spotify_release_snapshot.json'`
 - **[medium] Re-check Analog Myth on Apple Music**
   - Why: Public store links should be checked as the July 1 release approaches.
-  - Detail: Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T16:25:59.158437+00:00. Status: waiting_for_release_propagation.
-  - Latest snapshot checked: `2026-06-29T16:25:59.158437+00:00`
+  - Detail: Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T20:48:31.159523+00:00. Status: waiting_for_release_propagation.
+  - Latest snapshot checked: `2026-06-29T20:48:31.159523+00:00`
   - Command: `python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/apple_music_release_snapshot.json'`
 
 ## Guardrails

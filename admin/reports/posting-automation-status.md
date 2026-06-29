@@ -1,6 +1,6 @@
 # Posting Automation Status - Lily Roo
 
-Generated: 2026-06-29T16:26:29.362959Z
+Generated: 2026-06-29T20:48:40.304388Z
 
 ## Summary
 - Status: **blocked**
@@ -14,19 +14,19 @@ Generated: 2026-06-29T16:26:29.362959Z
 ## Automation Lanes
 - **Scheduled refresh workflow** - `needs_attention`
   - Detail: 17 */6 * * *; latest run completed / failure
-  - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28386154050
+  - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28399884704
   - Next: Confirm the GitHub Actions workflow is enabled and has a successful run.
 - **Safe admin refresh** - `ready`
-  - Detail: 11 refresh commands captured at 2026-06-29T16:26:27.713213Z
+  - Detail: 11 refresh commands captured at 2026-06-29T20:48:38.586387Z
   - Evidence: data/promo_admin_refresh_run.json
 - **Scheduler dry-run authentication** - `ready`
-  - Detail: HTTP 200 using bearer auth; due=25 would_post=2
+  - Detail: HTTP 200 using bearer auth; due=25 would_post=5
   - Evidence: data/social_scheduler_dry_run.json
 - **Execution capture** - `ready`
   - Detail: posted=5 attention=6 platform_fix_needed=5
   - Evidence: data/social_execution_snapshot.json
 - **Platform readiness** - `blocked`
-  - Detail: ready=X, Facebook; blocked=Instagram, TikTok, YouTube
+  - Detail: ready=X, Facebook, YouTube; blocked=Instagram, TikTok
   - Evidence: data/executor_readiness_snapshot.json
   - Next: Resolve the platform repair checklist before expecting full auto-post coverage.
 - **TikTok API lane** - `blocked`

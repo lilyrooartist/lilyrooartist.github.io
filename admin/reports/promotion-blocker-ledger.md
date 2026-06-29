@@ -1,11 +1,11 @@
 # Promotion Blocker Ledger - Lily Roo
 
-Generated: 2026-06-29T16:26:28.836996Z
+Generated: 2026-06-29T20:48:39.744885Z
 
 ## Summary
 - Open blockers: **9**
-- User-owned: **4**
-- External platform-owned: **5**
+- User-owned: **3**
+- External platform-owned: **6**
 - Codex-actionable: **0**
 - High or critical: **7**
 
@@ -20,7 +20,7 @@ Generated: 2026-06-29T16:26:28.836996Z
 - **Reschedule approved past-due backlog** (`blocked_until_clearance_steps_complete`)
   - Owner: `external_platform`; projected blockers resolved: **24**
   - Unlocks: Approved past-due queue rows get a fresh schedule after executor blockers clear.
-  - Blocked by: FP-AUTO-265, FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA, FP-AUTO-272, FP-AUTO-273, FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA
+  - Blocked by: FP-AUTO-268, FP-AUTO-265, FP-AUTO-272, FP-AUTO-273, FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA
   - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24`
 - **Fill manual metric worksheet** (`needs_values`)
   - Owner: `tod`; projected blockers resolved: **6**
@@ -39,13 +39,6 @@ Generated: 2026-06-29T16:26:28.836996Z
   - Apply/log after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --refresh-admin`
   - Guardrail: Approval does not guarantee posting if the platform executor is still blocked.
   - Impact: resolves blocker: False
-- **[high] Repair YouTube executor** (`platform-FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA`)
-  - Owner: `tod`; status: `blocked`; category: `platform_repair`
-  - Evidence: API request failed (400): {"error":"invalid_grant","error_description":"Bad Request"}
-  - Next step: Review platform credentials/readiness, then rerun the social execution capture. Run `python3 scripts/check_social_executor_dry_run.py --post-id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA` before any retry reset; only reset if the worker reports executable.
-  - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA`
-  - Apply/log after review: `python3 scripts/reset_social_execution_state.py FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --apply`
-  - Guardrail: Run retry resets only after the external platform repair is verified.
 - **[high] Reschedule approved past-due backlog** (`backlog-reschedule`)
   - Owner: `external_platform`; status: `blocked`; category: `backlog_reschedule`
   - Evidence: 24 approved backlog row(s); 5 still have executor blockers.
@@ -60,6 +53,13 @@ Generated: 2026-06-29T16:26:28.836996Z
   - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-265`
   - Apply/log after review: `python3 scripts/reset_social_execution_state.py FP-AUTO-265 --apply`
   - Guardrail: Run retry resets only after the external platform repair is verified.
+- **[high] Repair Facebook executor** (`platform-FP-AUTO-268`)
+  - Owner: `external_platform`; status: `blocked`; category: `platform_repair`
+  - Evidence: Facebook blocked Page publishing until identity is confirmed in the Facebook app.
+  - Next step: Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check. Run `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-268` before any retry reset; only reset if the worker reports executable.
+  - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-268`
+  - Apply/log after review: `python3 scripts/reset_social_execution_state.py FP-AUTO-268 --apply`
+  - Guardrail: Run retry resets only after the external platform repair is verified.
 - **[high] Repair Facebook executor** (`platform-FP-AUTO-273`)
   - Owner: `external_platform`; status: `blocked`; category: `platform_repair`
   - Evidence: Facebook blocked Page publishing until identity is confirmed in the Facebook app.
@@ -70,8 +70,9 @@ Generated: 2026-06-29T16:26:28.836996Z
 - **[high] Repair Facebook executor** (`platform-FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA`)
   - Owner: `external_platform`; status: `blocked`; category: `platform_repair`
   - Evidence: Facebook blocked Page publishing until identity is confirmed in the Facebook app.
-  - Next step: Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.
-  - Preview/check: `python3 scripts/check_facebook_publishing.py --post-id 'FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA' --check-worker-dry-run`
+  - Next step: Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check. Run `python3 scripts/check_social_executor_dry_run.py --post-id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA` before any retry reset; only reset if the worker reports executable.
+  - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA`
+  - Apply/log after review: `python3 scripts/reset_social_execution_state.py FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA --apply`
   - Guardrail: Run retry resets only after the external platform repair is verified.
 - **[high] Repair Instagram executor** (`platform-FP-AUTO-272`)
   - Owner: `external_platform`; status: `blocked`; category: `platform_repair`

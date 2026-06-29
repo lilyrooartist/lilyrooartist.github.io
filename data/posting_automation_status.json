@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T16:26:29.362959Z",
+  "generated_at": "2026-06-29T20:48:40.304388Z",
   "safe_mode": true,
   "source": {
     "workflow": ".github/workflows/promo-admin-refresh.yml",
@@ -42,20 +42,20 @@
       "label": "Scheduled refresh workflow",
       "status": "needs_attention",
       "detail": "17 */6 * * *; latest run completed / failure",
-      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28386154050",
+      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28399884704",
       "next_action": "Confirm the GitHub Actions workflow is enabled and has a successful run."
     },
     {
       "label": "Safe admin refresh",
       "status": "ready",
-      "detail": "11 refresh commands captured at 2026-06-29T16:26:27.713213Z",
+      "detail": "11 refresh commands captured at 2026-06-29T20:48:38.586387Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": ""
     },
     {
       "label": "Scheduler dry-run authentication",
       "status": "ready",
-      "detail": "HTTP 200 using bearer auth; due=25 would_post=2",
+      "detail": "HTTP 200 using bearer auth; due=25 would_post=5",
       "evidence": "data/social_scheduler_dry_run.json",
       "next_action": ""
     },
@@ -69,7 +69,7 @@
     {
       "label": "Platform readiness",
       "status": "blocked",
-      "detail": "ready=X, Facebook; blocked=Instagram, TikTok, YouTube",
+      "detail": "ready=X, Facebook, YouTube; blocked=Instagram, TikTok",
       "evidence": "data/executor_readiness_snapshot.json",
       "next_action": "Resolve the platform repair checklist before expecting full auto-post coverage."
     },

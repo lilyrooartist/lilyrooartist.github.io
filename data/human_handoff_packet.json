@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T16:26:28.875638Z",
+  "generated_at": "2026-06-29T20:48:39.782270Z",
   "safe_mode": true,
   "source": {
     "promotion_blocker_ledger": "data/promotion_blocker_ledger.json",
@@ -31,8 +31,8 @@
       "open_blocker_count": 9,
       "urgent_count": 7,
       "owner_counts": {
-        "external_platform": 5,
-        "tod": 4
+        "external_platform": 6,
+        "tod": 3
       },
       "category_counts": {
         "approval": 1,
@@ -104,8 +104,8 @@
             "Approved past-due queue rows get a fresh schedule after executor blockers clear."
           ],
           "blocked_by": [
+            "FP-AUTO-268",
             "FP-AUTO-265",
-            "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
             "FP-AUTO-272",
             "FP-AUTO-273",
             "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA"
@@ -311,9 +311,9 @@
         "owner": "tod",
         "task_ids": [
           "platform-setup-FP-AUTO-265",
+          "platform-setup-FP-AUTO-268",
           "platform-setup-FP-AUTO-272",
           "platform-setup-FP-AUTO-273",
-          "platform-setup-FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
           "platform-setup-FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA"
         ],
         "blockers_resolved": 1,
@@ -352,8 +352,8 @@
           "partial_clear_apply_available": true,
           "partial_clear_apply_count": 19,
           "blocked_ids": [
+            "FP-AUTO-268",
             "FP-AUTO-265",
-            "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
             "FP-AUTO-272",
             "FP-AUTO-273",
             "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA"
@@ -369,23 +369,23 @@
           ],
           "blocked_items": [
             {
+              "id": "FP-AUTO-268",
+              "platform": "Facebook",
+              "song": "Brain Rot",
+              "blocker_kind": "max_attempts_exceeded",
+              "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
+              "proposed_scheduled_at": "2026-07-15T10:00:00-04:00",
+              "clearance_steps": [
+                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+              ]
+            },
+            {
               "id": "FP-AUTO-265",
               "platform": "Facebook",
               "song": "I Learned It All in Fifteen Seconds",
               "blocker_kind": "max_attempts_exceeded",
               "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
               "proposed_scheduled_at": "2026-07-17T10:00:00-04:00",
-              "clearance_steps": [
-                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
-              ]
-            },
-            {
-              "id": "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
-              "platform": "YouTube",
-              "song": "Analog Myth",
-              "blocker_kind": "max_attempts_exceeded",
-              "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Bad Request\"}",
-              "proposed_scheduled_at": "2026-07-19T10:00:00-04:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]
@@ -416,7 +416,7 @@
               "id": "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA",
               "platform": "Facebook",
               "song": "Analog Myth",
-              "blocker_kind": "failed",
+              "blocker_kind": "max_attempts_exceeded",
               "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
               "proposed_scheduled_at": "2026-07-23T10:00:00-04:00",
               "clearance_steps": [
@@ -538,9 +538,9 @@
         "owner": "tod",
         "task_ids": [
           "platform-setup-FP-AUTO-265",
+          "platform-setup-FP-AUTO-268",
           "platform-setup-FP-AUTO-272",
           "platform-setup-FP-AUTO-273",
-          "platform-setup-FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
           "platform-setup-FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA"
         ],
         "blockers_resolved": 1,
@@ -729,8 +729,8 @@
           "partial_clear_apply_available": true,
           "partial_clear_apply_count": 19,
           "blocked_ids": [
+            "FP-AUTO-268",
             "FP-AUTO-265",
-            "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
             "FP-AUTO-272",
             "FP-AUTO-273",
             "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA"
@@ -746,23 +746,23 @@
           ],
           "blocked_items": [
             {
+              "id": "FP-AUTO-268",
+              "platform": "Facebook",
+              "song": "Brain Rot",
+              "blocker_kind": "max_attempts_exceeded",
+              "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
+              "proposed_scheduled_at": "2026-07-15T10:00:00-04:00",
+              "clearance_steps": [
+                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+              ]
+            },
+            {
               "id": "FP-AUTO-265",
               "platform": "Facebook",
               "song": "I Learned It All in Fifteen Seconds",
               "blocker_kind": "max_attempts_exceeded",
               "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
               "proposed_scheduled_at": "2026-07-17T10:00:00-04:00",
-              "clearance_steps": [
-                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
-              ]
-            },
-            {
-              "id": "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
-              "platform": "YouTube",
-              "song": "Analog Myth",
-              "blocker_kind": "max_attempts_exceeded",
-              "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Bad Request\"}",
-              "proposed_scheduled_at": "2026-07-19T10:00:00-04:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]
@@ -793,7 +793,7 @@
               "id": "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA",
               "platform": "Facebook",
               "song": "Analog Myth",
-              "blocker_kind": "failed",
+              "blocker_kind": "max_attempts_exceeded",
               "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
               "proposed_scheduled_at": "2026-07-23T10:00:00-04:00",
               "clearance_steps": [
@@ -898,6 +898,27 @@
       "guardrail": "Push worker secrets only after local platform setup is complete."
     },
     {
+      "id": "platform-setup-FP-AUTO-268",
+      "title": "Repair Facebook executor",
+      "phase": "Platform setup",
+      "owner": "tod",
+      "urgency": "high",
+      "status": "failed",
+      "detail": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
+      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-268",
+      "apply_command": "",
+      "source_path": "data/platform_repair_status.json",
+      "impact": {
+        "platform": "Facebook",
+        "missing_secrets": [],
+        "local_missing_secrets": [],
+        "public_posting_approved": null,
+        "repair_checklist_blocked_count": 0
+      },
+      "links": [],
+      "guardrail": "Push worker secrets only after local platform setup is complete."
+    },
+    {
       "id": "platform-setup-FP-AUTO-272",
       "title": "Repair Instagram executor",
       "phase": "Platform setup",
@@ -942,27 +963,6 @@
       "guardrail": "Push worker secrets only after local platform setup is complete."
     },
     {
-      "id": "platform-setup-FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
-      "title": "Repair YouTube executor",
-      "phase": "Platform setup",
-      "owner": "tod",
-      "urgency": "high",
-      "status": "failed",
-      "detail": "Review platform credentials/readiness, then rerun the social execution capture.",
-      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
-      "apply_command": "",
-      "source_path": "data/platform_repair_status.json",
-      "impact": {
-        "platform": "YouTube",
-        "missing_secrets": [],
-        "local_missing_secrets": [],
-        "public_posting_approved": null,
-        "repair_checklist_blocked_count": 0
-      },
-      "links": [],
-      "guardrail": "Push worker secrets only after local platform setup is complete."
-    },
-    {
       "id": "platform-setup-FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA",
       "title": "Repair Facebook executor",
       "phase": "Platform setup",
@@ -970,7 +970,7 @@
       "urgency": "high",
       "status": "failed",
       "detail": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
-      "preview_command": "python3 scripts/check_facebook_publishing.py --post-id 'FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA' --check-worker-dry-run",
+      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA",
       "apply_command": "",
       "source_path": "data/platform_repair_status.json",
       "impact": {
@@ -1007,8 +1007,8 @@
           "partial_clear_apply_available": true,
           "partial_clear_apply_count": 19,
           "blocked_ids": [
+            "FP-AUTO-268",
             "FP-AUTO-265",
-            "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
             "FP-AUTO-272",
             "FP-AUTO-273",
             "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA"
@@ -1024,23 +1024,23 @@
           ],
           "blocked_items": [
             {
+              "id": "FP-AUTO-268",
+              "platform": "Facebook",
+              "song": "Brain Rot",
+              "blocker_kind": "max_attempts_exceeded",
+              "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
+              "proposed_scheduled_at": "2026-07-15T10:00:00-04:00",
+              "clearance_steps": [
+                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+              ]
+            },
+            {
               "id": "FP-AUTO-265",
               "platform": "Facebook",
               "song": "I Learned It All in Fifteen Seconds",
               "blocker_kind": "max_attempts_exceeded",
               "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
               "proposed_scheduled_at": "2026-07-17T10:00:00-04:00",
-              "clearance_steps": [
-                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
-              ]
-            },
-            {
-              "id": "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
-              "platform": "YouTube",
-              "song": "Analog Myth",
-              "blocker_kind": "max_attempts_exceeded",
-              "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Bad Request\"}",
-              "proposed_scheduled_at": "2026-07-19T10:00:00-04:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]
@@ -1071,7 +1071,7 @@
               "id": "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA",
               "platform": "Facebook",
               "song": "Analog Myth",
-              "blocker_kind": "failed",
+              "blocker_kind": "max_attempts_exceeded",
               "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
               "proposed_scheduled_at": "2026-07-23T10:00:00-04:00",
               "clearance_steps": [

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T12:26:27.868693-04:00",
+  "generated_at": "2026-06-29T16:48:38.724086-04:00",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -24,8 +24,8 @@
     "apply_blocked_reason": "Known executor/platform blockers must clear before normal apply.",
     "apply_allowed_without_override": false,
     "blocked_ids": [
+      "FP-AUTO-268",
       "FP-AUTO-265",
-      "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
       "FP-AUTO-272",
       "FP-AUTO-273",
       "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA"
@@ -50,9 +50,9 @@
       "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24",
       "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA --start-at '2026-07-13T10:00:00-04:00' --spacing-hours 24",
       "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-267 --start-at '2026-07-14T10:00:00-04:00' --spacing-hours 24",
-      "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-268 --start-at '2026-07-15T10:00:00-04:00' --spacing-hours 24",
       "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-269 --start-at '2026-07-16T10:00:00-04:00' --spacing-hours 24",
       "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA --start-at '2026-07-18T10:00:00-04:00' --spacing-hours 24",
+      "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --start-at '2026-07-19T10:00:00-04:00' --spacing-hours 24",
       "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-274 --start-at '2026-07-22T10:00:00-04:00' --spacing-hours 24"
     ],
     "partial_clear_apply_commands": [
@@ -71,9 +71,9 @@
       "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
       "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA --start-at '2026-07-13T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
       "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-267 --start-at '2026-07-14T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-      "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-268 --start-at '2026-07-15T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
       "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-269 --start-at '2026-07-16T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
       "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA --start-at '2026-07-18T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+      "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --start-at '2026-07-19T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
       "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-274 --start-at '2026-07-22T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin"
     ],
     "manual_handoff_count": 0,
@@ -87,8 +87,8 @@
     "partial_clear_apply_available": true,
     "partial_clear_apply_count": 19,
     "blocked_ids": [
+      "FP-AUTO-268",
       "FP-AUTO-265",
-      "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
       "FP-AUTO-272",
       "FP-AUTO-273",
       "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA"
@@ -104,23 +104,23 @@
     ],
     "blocked_items": [
       {
+        "id": "FP-AUTO-268",
+        "platform": "Facebook",
+        "song": "Brain Rot",
+        "blocker_kind": "max_attempts_exceeded",
+        "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
+        "proposed_scheduled_at": "2026-07-15T10:00:00-04:00",
+        "clearance_steps": [
+          "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+        ]
+      },
+      {
         "id": "FP-AUTO-265",
         "platform": "Facebook",
         "song": "I Learned It All in Fifteen Seconds",
         "blocker_kind": "max_attempts_exceeded",
         "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
         "proposed_scheduled_at": "2026-07-17T10:00:00-04:00",
-        "clearance_steps": [
-          "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
-        ]
-      },
-      {
-        "id": "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
-        "platform": "YouTube",
-        "song": "Analog Myth",
-        "blocker_kind": "max_attempts_exceeded",
-        "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Bad Request\"}",
-        "proposed_scheduled_at": "2026-07-19T10:00:00-04:00",
         "clearance_steps": [
           "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
         ]
@@ -151,7 +151,7 @@
         "id": "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA",
         "platform": "Facebook",
         "song": "Analog Myth",
-        "blocker_kind": "failed",
+        "blocker_kind": "max_attempts_exceeded",
         "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
         "proposed_scheduled_at": "2026-07-23T10:00:00-04:00",
         "clearance_steps": [
@@ -199,14 +199,14 @@
       "FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA",
       "FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA",
       "FP-AUTO-267",
-      "FP-AUTO-268",
       "FP-AUTO-269",
       "FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA",
+      "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
       "FP-AUTO-274"
     ],
     "blocked_ids_retained": [
+      "FP-AUTO-268",
       "FP-AUTO-265",
-      "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
       "FP-AUTO-272",
       "FP-AUTO-273",
       "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA"
@@ -227,9 +227,9 @@
       "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24",
       "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA --start-at '2026-07-13T10:00:00-04:00' --spacing-hours 24",
       "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-267 --start-at '2026-07-14T10:00:00-04:00' --spacing-hours 24",
-      "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-268 --start-at '2026-07-15T10:00:00-04:00' --spacing-hours 24",
       "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-269 --start-at '2026-07-16T10:00:00-04:00' --spacing-hours 24",
       "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA --start-at '2026-07-18T10:00:00-04:00' --spacing-hours 24",
+      "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --start-at '2026-07-19T10:00:00-04:00' --spacing-hours 24",
       "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-274 --start-at '2026-07-22T10:00:00-04:00' --spacing-hours 24"
     ],
     "apply_commands": [
@@ -248,9 +248,9 @@
       "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
       "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA --start-at '2026-07-13T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
       "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-267 --start-at '2026-07-14T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-      "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-268 --start-at '2026-07-15T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
       "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-269 --start-at '2026-07-16T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
       "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA --start-at '2026-07-18T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+      "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --start-at '2026-07-19T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
       "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-274 --start-at '2026-07-22T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin"
     ],
     "recommended_next_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24",
@@ -504,14 +504,16 @@
       "song": "Brain Rot",
       "current_scheduled_at": "2026-06-27T21:55:00-04:00",
       "proposed_scheduled_at": "2026-07-15T10:00:00-04:00",
-      "blocked": false,
-      "blocker_reason": "",
-      "blocker_status": "",
-      "blocker_source": "",
-      "blocker_kind": "",
-      "blocks_normal_apply": false,
-      "safe_apply_available": true,
-      "clearance_steps": []
+      "blocked": true,
+      "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
+      "blocker_status": "failed",
+      "blocker_source": "cron",
+      "blocker_kind": "max_attempts_exceeded",
+      "blocks_normal_apply": true,
+      "safe_apply_available": false,
+      "clearance_steps": [
+        "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+      ]
     },
     {
       "id": "FP-AUTO-269",
@@ -566,16 +568,14 @@
       "song": "Analog Myth",
       "current_scheduled_at": "2026-06-28T18:30:00+08:00",
       "proposed_scheduled_at": "2026-07-19T10:00:00-04:00",
-      "blocked": true,
-      "blocker_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Bad Request\"}",
-      "blocker_status": "failed",
-      "blocker_source": "cron",
-      "blocker_kind": "max_attempts_exceeded",
-      "blocks_normal_apply": true,
-      "safe_apply_available": false,
-      "clearance_steps": [
-        "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
-      ]
+      "blocked": false,
+      "blocker_reason": "",
+      "blocker_status": "",
+      "blocker_source": "",
+      "blocker_kind": "",
+      "blocks_normal_apply": false,
+      "safe_apply_available": true,
+      "clearance_steps": []
     },
     {
       "id": "FP-AUTO-272",
@@ -636,7 +636,7 @@
       "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
       "blocker_status": "failed",
       "blocker_source": "cron",
-      "blocker_kind": "failed",
+      "blocker_kind": "max_attempts_exceeded",
       "blocks_normal_apply": true,
       "safe_apply_available": false,
       "clearance_steps": [

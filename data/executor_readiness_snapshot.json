@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "updated_at": "2026-06-29T16:26:22.293194Z",
+  "updated_at": "2026-06-29T20:48:33.619597Z",
   "source": "lilyroo-social-executor-readiness",
   "url": "https://www.lilyroo.com/api/social/readiness",
   "http_status": 200,
@@ -10,19 +10,19 @@
   "summary": {
     "ready_platforms": [
       "X",
-      "Facebook"
+      "Facebook",
+      "YouTube"
     ],
     "blocked_platforms": [
       "Instagram",
-      "TikTok",
-      "YouTube"
+      "TikTok"
     ],
     "platforms": {
       "X": true,
       "Instagram": false,
       "TikTok": false,
       "Facebook": true,
-      "YouTube": false
+      "YouTube": true
     }
   },
   "payload": {
@@ -66,10 +66,10 @@
         "aigc_label_enabled": true
       },
       "youtube": {
-        "ready": false,
+        "ready": true,
         "missing_secrets": [],
-        "refresh_token_valid": false,
-        "token_resolution_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Bad Request\"}",
+        "refresh_token_valid": true,
+        "token_resolution_reason": "",
         "client_secret_present": true,
         "media_map_present": true,
         "privacy_status": "public"

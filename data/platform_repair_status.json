@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T16:26:28.737695Z",
+  "generated_at": "2026-06-29T20:48:39.638775Z",
   "safe_mode": true,
   "source": {
     "promo_operations_packet": "data/promo_operations_packet.json",
@@ -12,13 +12,12 @@
     "blocked_count": 5,
     "preview_command_count": 5,
     "apply_command_count": 0,
-    "retry_reset_count": 3,
+    "retry_reset_count": 4,
     "checklist_item_count": 11,
     "checklist_blocked_count": 1,
     "platforms": [
       "Facebook",
-      "Instagram",
-      "YouTube"
+      "Instagram"
     ]
   },
   "rows": [
@@ -29,7 +28,7 @@
       "status": "blocked",
       "reason": "instagram_business_account_unresolved",
       "attempts": 0,
-      "updated_at": "2026-06-29T16:15:56.280Z",
+      "updated_at": "2026-06-29T20:45:50.573Z",
       "error_summary": "",
       "repair_action": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
       "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
@@ -96,7 +95,7 @@
       "status": "failed",
       "reason": "max_attempts_exceeded",
       "attempts": 3,
-      "updated_at": "2026-06-29T16:15:53.786Z",
+      "updated_at": "2026-06-29T20:45:48.623Z",
       "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
       "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
       "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-265",
@@ -140,13 +139,63 @@
       "blocked": true
     },
     {
+      "post_id": "FP-AUTO-268",
+      "platform": "Facebook",
+      "priority": 2,
+      "status": "failed",
+      "reason": "max_attempts_exceeded",
+      "attempts": 3,
+      "updated_at": "2026-06-29T20:45:47.887Z",
+      "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
+      "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
+      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-268",
+      "apply_command": "",
+      "blocked_apply_command": "",
+      "blocked_apply_reasons": [],
+      "retry_reset_verification_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-268",
+      "retry_reset_preview_command": "python3 scripts/reset_social_execution_state.py FP-AUTO-268",
+      "retry_reset_apply_command": "python3 scripts/reset_social_execution_state.py FP-AUTO-268 --apply",
+      "retry_reset_note": "Run the dry-run verification command first. Apply the retry reset only when the worker reports the row is executable.",
+      "readiness": {
+        "ready": true
+      },
+      "missing_secrets": [],
+      "local_missing_secrets": [],
+      "local_secret_presence": {},
+      "local_secret_ready": null,
+      "local_secret_source": "",
+      "public_posting_approved": null,
+      "preflight_status": "",
+      "preflight_blocked_count": null,
+      "preflight_command": "",
+      "preflight_report": "",
+      "repair_checklist": [
+        {
+          "id": "remote_worker_secrets",
+          "label": "Worker secrets",
+          "status": "pass",
+          "detail": "Worker readiness snapshot reports required secrets present.",
+          "command": ""
+        },
+        {
+          "id": "refresh_verification",
+          "label": "Refresh verification",
+          "status": "review",
+          "detail": "After repair, refresh admin so readiness, scheduler, blocker, and backlog state update together.",
+          "command": "python3 scripts/refresh_promo_admin.py"
+        }
+      ],
+      "repair_checklist_blocked_count": 0,
+      "blocked": true
+    },
+    {
       "post_id": "FP-AUTO-273",
       "platform": "Facebook",
       "priority": 2,
       "status": "failed",
       "reason": "max_attempts_exceeded",
       "attempts": 3,
-      "updated_at": "2026-06-29T16:15:57.022Z",
+      "updated_at": "2026-06-29T20:45:51.138Z",
       "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
       "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
       "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-273",
@@ -194,77 +243,21 @@
       "platform": "Facebook",
       "priority": 2,
       "status": "failed",
-      "reason": "",
-      "attempts": 1,
-      "updated_at": "2026-06-29T16:16:01.177Z",
-      "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
-      "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
-      "preview_command": "python3 scripts/check_facebook_publishing.py --post-id 'FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA' --check-worker-dry-run",
-      "apply_command": "",
-      "blocked_apply_command": "",
-      "blocked_apply_reasons": [],
-      "retry_reset_verification_command": "",
-      "retry_reset_preview_command": "",
-      "retry_reset_apply_command": "",
-      "retry_reset_note": "",
-      "readiness": {
-        "ready": true
-      },
-      "missing_secrets": [],
-      "local_missing_secrets": [],
-      "local_secret_presence": {},
-      "local_secret_ready": null,
-      "local_secret_source": "",
-      "public_posting_approved": null,
-      "preflight_status": "",
-      "preflight_blocked_count": null,
-      "preflight_command": "",
-      "preflight_report": "",
-      "repair_checklist": [
-        {
-          "id": "remote_worker_secrets",
-          "label": "Worker secrets",
-          "status": "pass",
-          "detail": "Worker readiness snapshot reports required secrets present.",
-          "command": ""
-        },
-        {
-          "id": "refresh_verification",
-          "label": "Refresh verification",
-          "status": "review",
-          "detail": "After repair, refresh admin so readiness, scheduler, blocker, and backlog state update together.",
-          "command": "python3 scripts/refresh_promo_admin.py"
-        }
-      ],
-      "repair_checklist_blocked_count": 0,
-      "blocked": true
-    },
-    {
-      "post_id": "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
-      "platform": "YouTube",
-      "priority": 9,
-      "status": "failed",
       "reason": "max_attempts_exceeded",
       "attempts": 3,
-      "updated_at": "2026-06-29T16:15:54.542Z",
-      "error_summary": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Bad Request\"}",
-      "repair_action": "Review platform credentials/readiness, then rerun the social execution capture.",
-      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
+      "updated_at": "2026-06-29T20:45:51.897Z",
+      "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
+      "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
+      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA",
       "apply_command": "",
       "blocked_apply_command": "",
       "blocked_apply_reasons": [],
-      "retry_reset_verification_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
-      "retry_reset_preview_command": "python3 scripts/reset_social_execution_state.py FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
-      "retry_reset_apply_command": "python3 scripts/reset_social_execution_state.py FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --apply",
+      "retry_reset_verification_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA",
+      "retry_reset_preview_command": "python3 scripts/reset_social_execution_state.py FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA",
+      "retry_reset_apply_command": "python3 scripts/reset_social_execution_state.py FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA --apply",
       "retry_reset_note": "Run the dry-run verification command first. Apply the retry reset only when the worker reports the row is executable.",
       "readiness": {
-        "ready": false,
-        "missing_secrets": [],
-        "refresh_token_valid": false,
-        "token_resolution_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Bad Request\"}",
-        "client_secret_present": true,
-        "media_map_present": true,
-        "privacy_status": "public"
+        "ready": true
       },
       "missing_secrets": [],
       "local_missing_secrets": [],

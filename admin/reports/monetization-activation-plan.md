@@ -1,10 +1,10 @@
 # Monetization Activation Plan - Lily Roo
 
-Generated: 2026-06-29T16:26:28.639538Z
+Generated: 2026-06-29T20:48:39.526695Z
 
 ## Summary
-- Current subscribers: **6 / 1000**
-- Runway status: **behind_365_day_pace**
+- Current subscribers: **5 / 1000**
+- Runway status: **stalled**
 - Ready song-forward approvals: **0**
 - Solicitation rewrites available: **0**
 - Platform fixes: **5**
@@ -30,11 +30,11 @@ Generated: 2026-06-29T16:26:28.639538Z
 4. **Repair Facebook executor**
    - Phase: `Clear platform blockers`; status: `needs_platform_fix`
    - Detail: Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.
-   - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-268`
+   - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-273`
 5. **Repair Facebook executor**
    - Phase: `Clear platform blockers`; status: `needs_platform_fix`
    - Detail: Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.
-   - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-273`
+   - Preview/check: `python3 scripts/check_facebook_publishing.py --post-id 'FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA' --check-worker-dry-run`
 6. **Repair YouTube executor**
    - Phase: `Clear platform blockers`; status: `needs_platform_fix`
    - Detail: Review platform credentials/readiness, then rerun the social execution capture.

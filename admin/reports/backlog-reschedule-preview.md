@@ -1,6 +1,6 @@
 # Backlog Reschedule Preview - Lily Roo
 
-Generated: 2026-06-29T12:26:27.868693-04:00
+Generated: 2026-06-29T16:48:38.724086-04:00
 
 ## Summary
 - Approved backlog rows: **24**
@@ -61,6 +61,8 @@ Generated: 2026-06-29T12:26:27.868693-04:00
 - **Facebook - Brain Rot** (`FP-AUTO-268`)
   - Current: `2026-06-27T21:55:00-04:00`
   - Proposed: `2026-07-15T10:00:00-04:00`
+  - Blocker: Facebook blocked Page publishing until identity is confirmed in the Facebook app.
+  - Clearance: Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply.
 - **TikTok - Brain Rot** (`FP-AUTO-269`)
   - Current: `2026-06-27T22:15:00-04:00`
   - Proposed: `2026-07-16T10:00:00-04:00`
@@ -75,8 +77,6 @@ Generated: 2026-06-29T12:26:27.868693-04:00
 - **YouTube - Analog Myth** (`FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA`)
   - Current: `2026-06-28T18:30:00+08:00`
   - Proposed: `2026-07-19T10:00:00-04:00`
-  - Blocker: API request failed (400): {"error":"invalid_grant","error_description":"Bad Request"}
-  - Clearance: Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply.
 - **Instagram - Every Pearl in Carmel** (`FP-AUTO-272`)
   - Current: `2026-06-28T21:35:00-04:00`
   - Proposed: `2026-07-20T10:00:00-04:00`
@@ -98,7 +98,7 @@ Generated: 2026-06-29T12:26:27.868693-04:00
 
 ## Clearance Manifest
 - Status: **blocked_until_clearance_steps_complete**
-- Blocked IDs: `FP-AUTO-265, FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA, FP-AUTO-272, FP-AUTO-273, FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA`
+- Blocked IDs: `FP-AUTO-268, FP-AUTO-265, FP-AUTO-272, FP-AUTO-273, FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA`
 - Safe apply command: `blocked until clearance steps complete`
 - Partial clear apply available: **True**
 - Partial clear apply count: **19**
@@ -106,8 +106,8 @@ Generated: 2026-06-29T12:26:27.868693-04:00
 
 ## Partial Clear Apply
 - Status: **ready**
-- Clear IDs: `FP-AUTO-258, FP-AUTO-264, FP-PLAN-TWELVE-DOLLARS-FACEBOOK, FP-AUTO-261, FP-AUTO-263, FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK, FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY, FP-PLAN-TWELVE-DOLLARS-INSTAGRAM, FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK, FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY, FP-PLAN-TWELVE-DOLLARS-X, FP-STORY-TWELVE-DOLLARS-X-ARCHIVE-CTA, FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA, FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA, FP-AUTO-267, FP-AUTO-268, FP-AUTO-269, FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA, FP-AUTO-274`
-- Blocked IDs retained: `FP-AUTO-265, FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA, FP-AUTO-272, FP-AUTO-273, FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA`
+- Clear IDs: `FP-AUTO-258, FP-AUTO-264, FP-PLAN-TWELVE-DOLLARS-FACEBOOK, FP-AUTO-261, FP-AUTO-263, FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK, FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY, FP-PLAN-TWELVE-DOLLARS-INSTAGRAM, FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK, FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY, FP-PLAN-TWELVE-DOLLARS-X, FP-STORY-TWELVE-DOLLARS-X-ARCHIVE-CTA, FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA, FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA, FP-AUTO-267, FP-AUTO-269, FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA, FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA, FP-AUTO-274`
+- Blocked IDs retained: `FP-AUTO-268, FP-AUTO-265, FP-AUTO-272, FP-AUTO-273, FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA`
 - Recommended preview: `python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24`
 - Recommended apply: `python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin`
 - Preview clear row: `python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24`
@@ -125,9 +125,9 @@ Generated: 2026-06-29T12:26:27.868693-04:00
 - Preview clear row: `python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24`
 - Preview clear row: `python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA --start-at '2026-07-13T10:00:00-04:00' --spacing-hours 24`
 - Preview clear row: `python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-267 --start-at '2026-07-14T10:00:00-04:00' --spacing-hours 24`
-- Preview clear row: `python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-268 --start-at '2026-07-15T10:00:00-04:00' --spacing-hours 24`
 - Preview clear row: `python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-269 --start-at '2026-07-16T10:00:00-04:00' --spacing-hours 24`
 - Preview clear row: `python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA --start-at '2026-07-18T10:00:00-04:00' --spacing-hours 24`
+- Preview clear row: `python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --start-at '2026-07-19T10:00:00-04:00' --spacing-hours 24`
 - Preview clear row: `python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-274 --start-at '2026-07-22T10:00:00-04:00' --spacing-hours 24`
 
 ### Operator Checklist

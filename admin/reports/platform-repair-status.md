@@ -1,6 +1,6 @@
 # Platform Repair Status - Lily Roo
 
-Generated: 2026-06-29T16:26:28.737695Z
+Generated: 2026-06-29T20:48:39.638775Z
 
 ## Summary
 - Platform fixes: **5**
@@ -9,7 +9,7 @@ Generated: 2026-06-29T16:26:28.737695Z
 - Apply commands: **0**
 - Checklist items: **11**
 - Checklist blocked: **1**
-- Platforms: **Facebook, Instagram, YouTube**
+- Platforms: **Facebook, Instagram**
 
 ## Repair Checklist
 - **Instagram** (`FP-AUTO-272`)
@@ -36,6 +36,18 @@ Generated: 2026-06-29T16:26:28.737695Z
   - Preview retry reset after platform repair: `python3 scripts/reset_social_execution_state.py FP-AUTO-265`
   - Apply retry reset after platform repair: `python3 scripts/reset_social_execution_state.py FP-AUTO-265 --apply`
   - Retry reset note: Run the dry-run verification command first. Apply the retry reset only when the worker reports the row is executable.
+- **Facebook** (`FP-AUTO-268`)
+  - Status: `failed`; reason: `max_attempts_exceeded`
+  - Error: Facebook blocked Page publishing until identity is confirmed in the Facebook app.
+  - Repair: Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.
+  - Checklist:
+    - `pass` Worker secrets: Worker readiness snapshot reports required secrets present.
+    - `review` Refresh verification: After repair, refresh admin so readiness, scheduler, blocker, and backlog state update together. Command: `python3 scripts/refresh_promo_admin.py`
+  - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-268`
+  - Verify before retry reset: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-268`
+  - Preview retry reset after platform repair: `python3 scripts/reset_social_execution_state.py FP-AUTO-268`
+  - Apply retry reset after platform repair: `python3 scripts/reset_social_execution_state.py FP-AUTO-268 --apply`
+  - Retry reset note: Run the dry-run verification command first. Apply the retry reset only when the worker reports the row is executable.
 - **Facebook** (`FP-AUTO-273`)
   - Status: `failed`; reason: `max_attempts_exceeded`
   - Error: Facebook blocked Page publishing until identity is confirmed in the Facebook app.
@@ -49,24 +61,16 @@ Generated: 2026-06-29T16:26:28.737695Z
   - Apply retry reset after platform repair: `python3 scripts/reset_social_execution_state.py FP-AUTO-273 --apply`
   - Retry reset note: Run the dry-run verification command first. Apply the retry reset only when the worker reports the row is executable.
 - **Facebook** (`FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA`)
-  - Status: `failed`; reason: ``
+  - Status: `failed`; reason: `max_attempts_exceeded`
   - Error: Facebook blocked Page publishing until identity is confirmed in the Facebook app.
   - Repair: Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.
   - Checklist:
     - `pass` Worker secrets: Worker readiness snapshot reports required secrets present.
     - `review` Refresh verification: After repair, refresh admin so readiness, scheduler, blocker, and backlog state update together. Command: `python3 scripts/refresh_promo_admin.py`
-  - Preview/check: `python3 scripts/check_facebook_publishing.py --post-id 'FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA' --check-worker-dry-run`
-- **YouTube** (`FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA`)
-  - Status: `failed`; reason: `max_attempts_exceeded`
-  - Error: API request failed (400): {"error":"invalid_grant","error_description":"Bad Request"}
-  - Repair: Review platform credentials/readiness, then rerun the social execution capture.
-  - Checklist:
-    - `pass` Worker secrets: Worker readiness snapshot reports required secrets present.
-    - `review` Refresh verification: After repair, refresh admin so readiness, scheduler, blocker, and backlog state update together. Command: `python3 scripts/refresh_promo_admin.py`
-  - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA`
-  - Verify before retry reset: `python3 scripts/check_social_executor_dry_run.py --post-id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA`
-  - Preview retry reset after platform repair: `python3 scripts/reset_social_execution_state.py FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA`
-  - Apply retry reset after platform repair: `python3 scripts/reset_social_execution_state.py FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --apply`
+  - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA`
+  - Verify before retry reset: `python3 scripts/check_social_executor_dry_run.py --post-id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA`
+  - Preview retry reset after platform repair: `python3 scripts/reset_social_execution_state.py FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA`
+  - Apply retry reset after platform repair: `python3 scripts/reset_social_execution_state.py FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA --apply`
   - Retry reset note: Run the dry-run verification command first. Apply the retry reset only when the worker reports the row is executable.
 
 ## Guardrails
