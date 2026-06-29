@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T16:13:10.650247Z",
+  "generated_at": "2026-06-29T16:26:29.045161Z",
   "safe_mode": true,
   "source": {
     "resolution_worksheet": "data/human_handoff_resolution_worksheet.csv",
@@ -30,20 +30,6 @@
       "status": "failed",
       "input_needed": "local_secret_presence_and_public_posting_approval",
       "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-265",
-      "safety": "skipped",
-      "safety_reason": "not_marked_preview_safe",
-      "returncode": null,
-      "preview_status": "skipped",
-      "output_excerpt": "",
-      "completion_evidence": "data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_upload_drafts before TikTok upload-mode backlog work is allowed.",
-      "guardrail": "Push worker secrets only after local platform setup is complete."
-    },
-    {
-      "task_id": "platform-setup-FP-AUTO-268",
-      "phase": "Platform setup",
-      "status": "failed",
-      "input_needed": "local_secret_presence_and_public_posting_approval",
-      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-268",
       "safety": "skipped",
       "safety_reason": "not_marked_preview_safe",
       "returncode": null,
@@ -95,6 +81,20 @@
       "guardrail": "Push worker secrets only after local platform setup is complete."
     },
     {
+      "task_id": "platform-setup-FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA",
+      "phase": "Platform setup",
+      "status": "failed",
+      "input_needed": "local_secret_presence_and_public_posting_approval",
+      "command": "python3 scripts/check_facebook_publishing.py --post-id 'FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA' --check-worker-dry-run",
+      "safety": "skipped",
+      "safety_reason": "not_marked_preview_safe",
+      "returncode": null,
+      "preview_status": "skipped",
+      "output_excerpt": "",
+      "completion_evidence": "data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_upload_drafts before TikTok upload-mode backlog work is allowed.",
+      "guardrail": "Push worker secrets only after local platform setup is complete."
+    },
+    {
       "task_id": "backlog-reschedule",
       "phase": "Backlog recovery",
       "status": "blocked",
@@ -104,7 +104,7 @@
       "safety_reason": "reschedule_preview_command",
       "returncode": 0,
       "preview_status": "preview_ok_with_warning",
-      "output_excerpt": "Rows selected: 24\n- FP-AUTO-258 Instagram I Learned It All in Fifteen Seconds: 2026-06-23T10:00:00+08:00 -> 2026-06-30T10:00:00-04:00\n- FP-AUTO-264 TikTok I Learned It All in Fifteen Seconds: 2026-06-23T10:00:00+08:00 -> 2026-07-01T10:00:00-04:00\n- FP-PLAN-TWELVE-DOLLARS-FACEBOOK Facebook Twelve Dollars: 2026-06-23T11:20:00-04:00 -> 2026-07-02T10:00:00-04:00\n- FP-AUTO-261 YouTube I Learned It All in Fifteen Seconds: 2026-06-24T10:00:00+08:00 -> 2026-07-03T10:00:00-04:00\n- FP-AUTO-263 Instagram I Learned It All in Fifteen Seconds: 2026-06-24T10:00:00+08:00 -> 2026-07-04T10:00:00-04:00\n- FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK X Analog Myth: 2026-06-24T10:15:00-04:00 -> 2026-07-05T10:00:00-04:00\n- FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY YouTube Twelve Dollars: 2026-06-24T18:30:00-04:00 -> 2026-07-06T10:00:00-04:00\n- FP-PLAN-TWELVE-DOLLARS-INSTAGRAM Instagram Twelve Dollars: 2026-06-25T10:00:00+08:00 -> 2026-07-07T10:00:00-04:00\n- FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK Facebook Analog Myth: 2026-06-25T11:20:00-04:00 -> 2026-07-08T10:00:00-04:00\n- FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY YouTube Analog Myth: 2026-06-25T18:30:00-04:00 -> 2026-07-09T10:00:00-04:00\n- FP-PLAN-TWELVE-DOLLARS-X X Twelve Dollars: 2026-06-26T10:00:00+08:00 -> 2026-07-10T10:00:00-04:00\n- FP-STORY-TWELVE-DOLLARS-X-ARCHIVE-CTA X Twelve Dollars: 2026-06-26T10:15:00-04:00 -> 2026-07-11T10:00:00-04:00\n- FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA Facebook Twelve Dollars: 2026-06-27T11:20:00-04:00 -> 2026-07-12T10:00:00-04:00\n- FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA YouTube Twelve Dollars: 2026-06-27T18:30:00+08:00 -> 2026-07-13T10:00:00-04:00\n- FP-AUTO-267 Instagram Brain Rot: 2026-06-27T21:35:00-04:00 -> 2026-07-14T10:00:00-04:00\n- FP-AUTO-268 Facebook Brain Rot: 2026-06-27T21:55:00-04:00 -> 2026-07-15T10:00:00-04:00\n  WARNING: known blocker: Facebook blocked Page publishing until identity is confirmed in the Facebook app.\n- FP-AUTO-269 TikTok Brain Rot: 2026-06-27T22:",
+      "output_excerpt": "Rows selected: 24\n- FP-AUTO-258 Instagram I Learned It All in Fifteen Seconds: 2026-06-23T10:00:00+08:00 -> 2026-06-30T10:00:00-04:00\n- FP-AUTO-264 TikTok I Learned It All in Fifteen Seconds: 2026-06-23T10:00:00+08:00 -> 2026-07-01T10:00:00-04:00\n- FP-PLAN-TWELVE-DOLLARS-FACEBOOK Facebook Twelve Dollars: 2026-06-23T11:20:00-04:00 -> 2026-07-02T10:00:00-04:00\n- FP-AUTO-261 YouTube I Learned It All in Fifteen Seconds: 2026-06-24T10:00:00+08:00 -> 2026-07-03T10:00:00-04:00\n- FP-AUTO-263 Instagram I Learned It All in Fifteen Seconds: 2026-06-24T10:00:00+08:00 -> 2026-07-04T10:00:00-04:00\n- FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK X Analog Myth: 2026-06-24T10:15:00-04:00 -> 2026-07-05T10:00:00-04:00\n- FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY YouTube Twelve Dollars: 2026-06-24T18:30:00-04:00 -> 2026-07-06T10:00:00-04:00\n- FP-PLAN-TWELVE-DOLLARS-INSTAGRAM Instagram Twelve Dollars: 2026-06-25T10:00:00+08:00 -> 2026-07-07T10:00:00-04:00\n- FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK Facebook Analog Myth: 2026-06-25T11:20:00-04:00 -> 2026-07-08T10:00:00-04:00\n- FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY YouTube Analog Myth: 2026-06-25T18:30:00-04:00 -> 2026-07-09T10:00:00-04:00\n- FP-PLAN-TWELVE-DOLLARS-X X Twelve Dollars: 2026-06-26T10:00:00+08:00 -> 2026-07-10T10:00:00-04:00\n- FP-STORY-TWELVE-DOLLARS-X-ARCHIVE-CTA X Twelve Dollars: 2026-06-26T10:15:00-04:00 -> 2026-07-11T10:00:00-04:00\n- FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA Facebook Twelve Dollars: 2026-06-27T11:20:00-04:00 -> 2026-07-12T10:00:00-04:00\n- FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA YouTube Twelve Dollars: 2026-06-27T18:30:00+08:00 -> 2026-07-13T10:00:00-04:00\n- FP-AUTO-267 Instagram Brain Rot: 2026-06-27T21:35:00-04:00 -> 2026-07-14T10:00:00-04:00\n- FP-AUTO-268 Facebook Brain Rot: 2026-06-27T21:55:00-04:00 -> 2026-07-15T10:00:00-04:00\n- FP-AUTO-269 TikTok Brain Rot: 2026-06-27T22:15:00-04:00 -> 2026-07-16T10:00:00-04:00\n- FP-AUTO-265 Facebook I Learned It All in Fifteen Seconds: 2026-06",
       "completion_evidence": "data/backlog_reschedule_preview.json should show normal_apply_gate clear before any non-override apply command is exposed.",
       "guardrail": "Normal apply stays hidden until known executor/platform blockers clear."
     },

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T16:13:10.983724Z",
+  "generated_at": "2026-06-29T16:26:29.392195Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -44,21 +44,21 @@
       "blocked_apply_reasons": []
     },
     {
-      "post_id": "FP-AUTO-268",
-      "platform": "Facebook",
-      "reason": "max_attempts_exceeded",
-      "status": "failed",
-      "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
-      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-268",
-      "blocked_apply_reasons": []
-    },
-    {
       "post_id": "FP-AUTO-273",
       "platform": "Facebook",
       "reason": "max_attempts_exceeded",
       "status": "failed",
       "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
       "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-273",
+      "blocked_apply_reasons": []
+    },
+    {
+      "post_id": "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA",
+      "platform": "Facebook",
+      "reason": "",
+      "status": "failed",
+      "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
+      "preview_command": "python3 scripts/check_facebook_publishing.py --post-id 'FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA' --check-worker-dry-run",
       "blocked_apply_reasons": []
     },
     {

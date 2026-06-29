@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T16:13:09.572387Z",
+  "generated_at": "2026-06-29T16:26:27.900508Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -46,17 +46,17 @@
           "FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA",
           "FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA",
           "FP-AUTO-267",
+          "FP-AUTO-268",
           "FP-AUTO-269",
           "FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA",
-          "FP-AUTO-274",
-          "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA"
+          "FP-AUTO-274"
         ],
         "blocked_ids_retained": [
-          "FP-AUTO-268",
           "FP-AUTO-265",
           "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
           "FP-AUTO-272",
-          "FP-AUTO-273"
+          "FP-AUTO-273",
+          "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA"
         ],
         "preview_commands": [
           "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24",
@@ -74,10 +74,10 @@
           "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24",
           "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA --start-at '2026-07-13T10:00:00-04:00' --spacing-hours 24",
           "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-267 --start-at '2026-07-14T10:00:00-04:00' --spacing-hours 24",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-268 --start-at '2026-07-15T10:00:00-04:00' --spacing-hours 24",
           "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-269 --start-at '2026-07-16T10:00:00-04:00' --spacing-hours 24",
           "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA --start-at '2026-07-18T10:00:00-04:00' --spacing-hours 24",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-274 --start-at '2026-07-22T10:00:00-04:00' --spacing-hours 24",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-23T10:00:00-04:00' --spacing-hours 24"
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-274 --start-at '2026-07-22T10:00:00-04:00' --spacing-hours 24"
         ],
         "apply_commands": [
           "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
@@ -95,10 +95,10 @@
           "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
           "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA --start-at '2026-07-13T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
           "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-267 --start-at '2026-07-14T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-268 --start-at '2026-07-15T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
           "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-269 --start-at '2026-07-16T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
           "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA --start-at '2026-07-18T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-274 --start-at '2026-07-22T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-23T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin"
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-274 --start-at '2026-07-22T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin"
         ],
         "recommended_next_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24",
         "recommended_apply_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
@@ -128,11 +128,11 @@
         "partial_clear_apply_available": true,
         "partial_clear_apply_count": 19,
         "blocked_ids": [
-          "FP-AUTO-268",
           "FP-AUTO-265",
           "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
           "FP-AUTO-272",
-          "FP-AUTO-273"
+          "FP-AUTO-273",
+          "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA"
         ],
         "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24",
         "safe_apply_command": "",
@@ -144,17 +144,6 @@
           "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
         ],
         "blocked_items": [
-          {
-            "id": "FP-AUTO-268",
-            "platform": "Facebook",
-            "song": "Brain Rot",
-            "blocker_kind": "max_attempts_exceeded",
-            "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
-            "proposed_scheduled_at": "2026-07-15T10:00:00-04:00",
-            "clearance_steps": [
-              "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
-            ]
-          },
           {
             "id": "FP-AUTO-265",
             "platform": "Facebook",
@@ -195,6 +184,17 @@
             "blocker_kind": "max_attempts_exceeded",
             "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
             "proposed_scheduled_at": "2026-07-21T10:00:00-04:00",
+            "clearance_steps": [
+              "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+            ]
+          },
+          {
+            "id": "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA",
+            "platform": "Facebook",
+            "song": "Analog Myth",
+            "blocker_kind": "failed",
+            "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
+            "proposed_scheduled_at": "2026-07-23T10:00:00-04:00",
             "clearance_steps": [
               "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
             ]
@@ -310,17 +310,17 @@
             "FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA",
             "FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA",
             "FP-AUTO-267",
+            "FP-AUTO-268",
             "FP-AUTO-269",
             "FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA",
-            "FP-AUTO-274",
-            "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA"
+            "FP-AUTO-274"
           ],
           "blocked_ids_retained": [
-            "FP-AUTO-268",
             "FP-AUTO-265",
             "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
             "FP-AUTO-272",
-            "FP-AUTO-273"
+            "FP-AUTO-273",
+            "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA"
           ],
           "preview_commands": [
             "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24",
@@ -338,10 +338,10 @@
             "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24",
             "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA --start-at '2026-07-13T10:00:00-04:00' --spacing-hours 24",
             "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-267 --start-at '2026-07-14T10:00:00-04:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-268 --start-at '2026-07-15T10:00:00-04:00' --spacing-hours 24",
             "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-269 --start-at '2026-07-16T10:00:00-04:00' --spacing-hours 24",
             "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA --start-at '2026-07-18T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-274 --start-at '2026-07-22T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-23T10:00:00-04:00' --spacing-hours 24"
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-274 --start-at '2026-07-22T10:00:00-04:00' --spacing-hours 24"
           ],
           "apply_commands": [
             "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
@@ -359,10 +359,10 @@
             "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
             "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA --start-at '2026-07-13T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
             "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-267 --start-at '2026-07-14T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-268 --start-at '2026-07-15T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
             "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-269 --start-at '2026-07-16T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
             "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA --start-at '2026-07-18T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-274 --start-at '2026-07-22T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-23T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin"
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-274 --start-at '2026-07-22T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin"
           ],
           "recommended_next_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24",
           "recommended_apply_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
@@ -392,11 +392,11 @@
           "partial_clear_apply_available": true,
           "partial_clear_apply_count": 19,
           "blocked_ids": [
-            "FP-AUTO-268",
             "FP-AUTO-265",
             "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
             "FP-AUTO-272",
-            "FP-AUTO-273"
+            "FP-AUTO-273",
+            "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA"
           ],
           "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24",
           "safe_apply_command": "",
@@ -408,17 +408,6 @@
             "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
           ],
           "blocked_items": [
-            {
-              "id": "FP-AUTO-268",
-              "platform": "Facebook",
-              "song": "Brain Rot",
-              "blocker_kind": "max_attempts_exceeded",
-              "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
-              "proposed_scheduled_at": "2026-07-15T10:00:00-04:00",
-              "clearance_steps": [
-                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
-              ]
-            },
             {
               "id": "FP-AUTO-265",
               "platform": "Facebook",
@@ -459,6 +448,17 @@
               "blocker_kind": "max_attempts_exceeded",
               "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
               "proposed_scheduled_at": "2026-07-21T10:00:00-04:00",
+              "clearance_steps": [
+                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+              ]
+            },
+            {
+              "id": "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA",
+              "platform": "Facebook",
+              "song": "Analog Myth",
+              "blocker_kind": "failed",
+              "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
+              "proposed_scheduled_at": "2026-07-23T10:00:00-04:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]
@@ -551,17 +551,17 @@
             "FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA",
             "FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA",
             "FP-AUTO-267",
+            "FP-AUTO-268",
             "FP-AUTO-269",
             "FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA",
-            "FP-AUTO-274",
-            "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA"
+            "FP-AUTO-274"
           ],
           "blocked_ids_retained": [
-            "FP-AUTO-268",
             "FP-AUTO-265",
             "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
             "FP-AUTO-272",
-            "FP-AUTO-273"
+            "FP-AUTO-273",
+            "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA"
           ],
           "preview_commands": [
             "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24",
@@ -579,10 +579,10 @@
             "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24",
             "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA --start-at '2026-07-13T10:00:00-04:00' --spacing-hours 24",
             "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-267 --start-at '2026-07-14T10:00:00-04:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-268 --start-at '2026-07-15T10:00:00-04:00' --spacing-hours 24",
             "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-269 --start-at '2026-07-16T10:00:00-04:00' --spacing-hours 24",
             "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA --start-at '2026-07-18T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-274 --start-at '2026-07-22T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-23T10:00:00-04:00' --spacing-hours 24"
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-274 --start-at '2026-07-22T10:00:00-04:00' --spacing-hours 24"
           ],
           "apply_commands": [
             "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
@@ -600,10 +600,10 @@
             "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
             "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA --start-at '2026-07-13T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
             "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-267 --start-at '2026-07-14T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-268 --start-at '2026-07-15T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
             "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-269 --start-at '2026-07-16T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
             "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA --start-at '2026-07-18T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-274 --start-at '2026-07-22T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-23T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin"
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-274 --start-at '2026-07-22T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin"
           ],
           "recommended_next_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24",
           "recommended_apply_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
@@ -633,11 +633,11 @@
           "partial_clear_apply_available": true,
           "partial_clear_apply_count": 19,
           "blocked_ids": [
-            "FP-AUTO-268",
             "FP-AUTO-265",
             "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
             "FP-AUTO-272",
-            "FP-AUTO-273"
+            "FP-AUTO-273",
+            "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA"
           ],
           "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24",
           "safe_apply_command": "",
@@ -649,17 +649,6 @@
             "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
           ],
           "blocked_items": [
-            {
-              "id": "FP-AUTO-268",
-              "platform": "Facebook",
-              "song": "Brain Rot",
-              "blocker_kind": "max_attempts_exceeded",
-              "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
-              "proposed_scheduled_at": "2026-07-15T10:00:00-04:00",
-              "clearance_steps": [
-                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
-              ]
-            },
             {
               "id": "FP-AUTO-265",
               "platform": "Facebook",
@@ -700,6 +689,17 @@
               "blocker_kind": "max_attempts_exceeded",
               "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
               "proposed_scheduled_at": "2026-07-21T10:00:00-04:00",
+              "clearance_steps": [
+                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+              ]
+            },
+            {
+              "id": "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA",
+              "platform": "Facebook",
+              "song": "Analog Myth",
+              "blocker_kind": "failed",
+              "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
+              "proposed_scheduled_at": "2026-07-23T10:00:00-04:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]
@@ -760,6 +760,32 @@
       "label": "Fix Facebook executor",
       "kind": "platform_fix",
       "priority": 1,
+      "command": "python3 scripts/check_facebook_publishing.py --post-id 'FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA' --check-worker-dry-run",
+      "context": {
+        "post_id": "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA",
+        "platform": "Facebook",
+        "reason": "",
+        "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
+        "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
+        "repair_apply_command": "",
+        "readiness": {
+          "ready": true
+        }
+      },
+      "phase": "Repair executor",
+      "urgency": "high",
+      "urgency_reason": "Platform executor needs repair before queued auto posts can publish.",
+      "status": "needs_fix",
+      "sort_key": [
+        1,
+        1,
+        2
+      ]
+    },
+    {
+      "label": "Fix Facebook executor",
+      "kind": "platform_fix",
+      "priority": 1,
       "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-273",
       "context": {
         "post_id": "FP-AUTO-273",
@@ -783,7 +809,7 @@
       "sort_key": [
         1,
         1,
-        2
+        3
       ]
     },
     {
@@ -824,7 +850,7 @@
       "sort_key": [
         1,
         1,
-        3
+        4
       ]
     },
     {
@@ -860,7 +886,7 @@
       "sort_key": [
         1,
         1,
-        4
+        5
       ]
     },
     {
@@ -878,36 +904,6 @@
         "retry_reset_verification_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-265",
         "retry_reset_preview_command": "python3 scripts/reset_social_execution_state.py FP-AUTO-265",
         "retry_reset_apply_command": "python3 scripts/reset_social_execution_state.py FP-AUTO-265 --apply",
-        "retry_reset_note": "Run the dry-run verification command first. Apply the retry reset only when the worker reports the row is executable.",
-        "readiness": {
-          "ready": true
-        }
-      },
-      "phase": "Repair executor",
-      "urgency": "high",
-      "urgency_reason": "Platform executor needs repair before queued auto posts can publish.",
-      "status": "needs_fix",
-      "sort_key": [
-        1,
-        1,
-        5
-      ]
-    },
-    {
-      "label": "Fix Facebook executor",
-      "kind": "platform_fix",
-      "priority": 1,
-      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-268",
-      "context": {
-        "post_id": "FP-AUTO-268",
-        "platform": "Facebook",
-        "reason": "max_attempts_exceeded",
-        "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
-        "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
-        "repair_apply_command": "",
-        "retry_reset_verification_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-268",
-        "retry_reset_preview_command": "python3 scripts/reset_social_execution_state.py FP-AUTO-268",
-        "retry_reset_apply_command": "python3 scripts/reset_social_execution_state.py FP-AUTO-268 --apply",
         "retry_reset_note": "Run the dry-run verification command first. Apply the retry reset only when the worker reports the row is executable.",
         "readiness": {
           "ready": true
@@ -1001,25 +997,25 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "Spotify",
-        "checked_at": "2026-06-29T16:12:00.112383+00:00",
+        "checked_at": "2026-06-29T16:25:18.301594+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-06-30T16:12:00.112383+00:00",
+        "next_recheck_at": "2026-06-30T16:25:18.301594+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-29T16:12:00.112383Z",
+          "updated_at": "2026-06-29T16:25:18.301594Z",
           "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-          "checked_at": "2026-06-29T16:12:00.112383+00:00",
+          "checked_at": "2026-06-29T16:25:18.301594+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-06-30T16:12:00.112383+00:00",
+          "next_recheck_at": "2026-06-30T16:25:18.301594+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T16:12:00.112383+00:00. Status: waiting_for_release_propagation."
+        "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T16:25:18.301594+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -1039,25 +1035,25 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "Apple Music",
-        "checked_at": "2026-06-29T16:12:20.375652+00:00",
+        "checked_at": "2026-06-29T16:25:38.532787+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-06-30T16:12:20.375652+00:00",
+        "next_recheck_at": "2026-06-30T16:25:38.532787+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-29T16:12:20.375652Z",
+          "updated_at": "2026-06-29T16:25:38.532787Z",
           "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-          "checked_at": "2026-06-29T16:12:20.375652+00:00",
+          "checked_at": "2026-06-29T16:25:38.532787+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-06-30T16:12:20.375652+00:00",
+          "next_recheck_at": "2026-06-30T16:25:38.532787+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T16:12:20.375652+00:00. Status: waiting_for_release_propagation."
+        "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T16:25:38.532787+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -1077,25 +1073,25 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "HyperFollow",
-        "checked_at": "2026-06-29T16:12:20.837595+00:00",
+        "checked_at": "2026-06-29T16:25:38.885895+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-06-30T16:12:20.837595+00:00",
+        "next_recheck_at": "2026-06-30T16:25:38.885895+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-29T16:12:20.837595Z",
+          "updated_at": "2026-06-29T16:25:38.885895Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-          "checked_at": "2026-06-29T16:12:20.837595+00:00",
+          "checked_at": "2026-06-29T16:25:38.885895+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-06-30T16:12:20.837595+00:00",
+          "next_recheck_at": "2026-06-30T16:25:38.885895+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T16:12:20.837595+00:00. Status: waiting_for_release_propagation."
+        "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T16:25:38.885895+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -1115,25 +1111,25 @@
       "context": {
         "release": "Analog Myth",
         "service": "Spotify",
-        "checked_at": "2026-06-29T16:12:20.919888+00:00",
+        "checked_at": "2026-06-29T16:25:38.939803+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-06-30T16:12:20.919888+00:00",
+        "next_recheck_at": "2026-06-30T16:25:38.939803+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/spotify_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-29T16:12:20.919888Z",
+          "updated_at": "2026-06-29T16:25:38.939803Z",
           "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
-          "checked_at": "2026-06-29T16:12:20.919888+00:00",
+          "checked_at": "2026-06-29T16:25:38.939803+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-06-30T16:12:20.919888+00:00",
+          "next_recheck_at": "2026-06-30T16:25:38.939803+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T16:12:20.919888+00:00. Status: waiting_for_release_propagation."
+        "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T16:25:38.939803+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -1153,25 +1149,25 @@
       "context": {
         "release": "Analog Myth",
         "service": "Apple Music",
-        "checked_at": "2026-06-29T16:12:41.156005+00:00",
+        "checked_at": "2026-06-29T16:25:59.158437+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-06-30T16:12:41.156005+00:00",
+        "next_recheck_at": "2026-06-30T16:25:59.158437+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-29T16:12:41.156005Z",
+          "updated_at": "2026-06-29T16:25:59.158437Z",
           "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
-          "checked_at": "2026-06-29T16:12:41.156005+00:00",
+          "checked_at": "2026-06-29T16:25:59.158437+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-06-30T16:12:41.156005+00:00",
+          "next_recheck_at": "2026-06-30T16:25:59.158437+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T16:12:41.156005+00:00. Status: waiting_for_release_propagation."
+        "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T16:25:59.158437+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -1191,25 +1187,25 @@
       "context": {
         "release": "Analog Myth",
         "service": "YouTube Music",
-        "checked_at": "2026-06-29T16:12:41.224756+00:00",
+        "checked_at": "2026-06-29T16:25:59.209126+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-06-30T16:12:41.224756+00:00",
+        "next_recheck_at": "2026-06-30T16:25:59.209126+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-29T16:12:41.224756Z",
+          "updated_at": "2026-06-29T16:25:59.209126Z",
           "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-          "checked_at": "2026-06-29T16:12:41.224756+00:00",
+          "checked_at": "2026-06-29T16:25:59.209126+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-06-30T16:12:41.224756+00:00",
+          "next_recheck_at": "2026-06-30T16:25:59.209126+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Searches public web results for YouTube Music watch URLs, then validates the public title. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T16:12:41.224756+00:00. Status: waiting_for_release_propagation."
+        "note": "Searches public web results for YouTube Music watch URLs, then validates the public title. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T16:25:59.209126+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -1229,25 +1225,25 @@
       "context": {
         "release": "Analog Myth",
         "service": "HyperFollow",
-        "checked_at": "2026-06-29T16:13:03.671797+00:00",
+        "checked_at": "2026-06-29T16:26:21.665084+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-06-30T16:13:03.671797+00:00",
+        "next_recheck_at": "2026-06-30T16:26:21.665084+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-29T16:13:03.671797Z",
+          "updated_at": "2026-06-29T16:26:21.665084Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-          "checked_at": "2026-06-29T16:13:03.671797+00:00",
+          "checked_at": "2026-06-29T16:26:21.665084+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-06-30T16:13:03.671797+00:00",
+          "next_recheck_at": "2026-06-30T16:26:21.665084+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T16:13:03.671797+00:00. Status: waiting_for_release_propagation."
+        "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T16:26:21.665084+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",

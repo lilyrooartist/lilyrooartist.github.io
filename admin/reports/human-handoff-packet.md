@@ -1,6 +1,6 @@
 # Human Handoff Packet - Lily Roo
 
-Generated: 2026-06-29T16:13:10.490436Z
+Generated: 2026-06-29T16:26:28.875638Z
 
 ## Summary
 - Open handoff tasks: **8**
@@ -66,11 +66,6 @@ Generated: 2026-06-29T16:13:10.490436Z
   - Detail: Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.
   - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-265`
   - Guardrail: Push worker secrets only after local platform setup is complete.
-- **Repair Facebook executor** (`platform-setup-FP-AUTO-268`)
-  - Phase: `Platform setup`; owner: `tod`; status: `failed`; urgency: `high`
-  - Detail: Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.
-  - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-268`
-  - Guardrail: Push worker secrets only after local platform setup is complete.
 - **Repair Instagram executor** (`platform-setup-FP-AUTO-272`)
   - Phase: `Platform setup`; owner: `tod`; status: `blocked`; urgency: `high`
   - Detail: Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.
@@ -85,6 +80,11 @@ Generated: 2026-06-29T16:13:10.490436Z
   - Phase: `Platform setup`; owner: `tod`; status: `failed`; urgency: `high`
   - Detail: Review platform credentials/readiness, then rerun the social execution capture.
   - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA`
+  - Guardrail: Push worker secrets only after local platform setup is complete.
+- **Repair Facebook executor** (`platform-setup-FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA`)
+  - Phase: `Platform setup`; owner: `tod`; status: `failed`; urgency: `high`
+  - Detail: Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.
+  - Preview/check: `python3 scripts/check_facebook_publishing.py --post-id 'FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA' --check-worker-dry-run`
   - Guardrail: Push worker secrets only after local platform setup is complete.
 - **Preview approved backlog reschedule** (`backlog-reschedule`)
   - Phase: `Backlog recovery`; owner: `external_platform`; status: `blocked`; urgency: `high`

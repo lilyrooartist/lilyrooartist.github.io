@@ -1,7 +1,7 @@
 # Weekly Social Report — Lily Roo
 
 **Period:** 2026-06-23 to 2026-06-29
-**Last updated:** 2026-06-29 12:13 PM EDT
+**Last updated:** 2026-06-29 12:26 PM EDT
 
 ## KPI Goal
 - Primary growth target: **1,000 YouTube subscribers** (monetization milestone)
@@ -79,7 +79,7 @@
 - HyperFollow stores: **applemusic, itunes, spotify**
 - Amazon Music: **pending verified public URL; not exposed by current HyperFollow store list**
 - All-release store verification: **8 live, 7 checked pending, 0 pending, 7 snapshots**
-- Social executor history: **27 records, 5 posted, 5 platform fixes, 1 approval blockers**
+- Social executor history: **29 records, 5 posted, 5 platform fixes, 1 approval blockers**
 
 ### First Single Alignment
 - Status: **aligned**
@@ -124,7 +124,7 @@
 - Latest post: https://www.facebook.com/903693509504290_122118326547249470
 
 ## Metrics Snapshot
-- Live API captured: **2026-06-29T16:11:59.965Z**
+- Live API captured: **2026-06-29T16:25:18.152Z**
 - Snapshot file: `data/live_social_metrics.json`
 - YouTube public RSS captured: **2026-06-09T12:08:07.783949Z**
 - YouTube public snapshot file: `data/youtube_public_snapshot.json`
@@ -134,9 +134,9 @@
 - YouTube Music snapshot file: `data/youtube_music_release_snapshot.json`
 - HyperFollow stores captured: **2026-06-07T20:51:14.275569Z**
 - HyperFollow snapshot file: `data/hyperfollow_store_links_snapshot.json`
-- All-release store verification captured: **2026-06-29T16:13:10.752236+00:00**
+- All-release store verification captured: **2026-06-29T16:26:29.149953+00:00**
 - All-release store verification file: `data/store_verification_history.json`
-- Social executor history captured: **2026-06-29T16:13:07.432130Z**
+- Social executor history captured: **2026-06-29T16:26:25.840709Z**
 - Social executor history file: `data/social_execution_snapshot.json`
 - First single alignment audit captured: **2026-06-07T21:39:03.668040Z**
 - First single alignment audit file: `data/first_single_alignment_audit.json`
