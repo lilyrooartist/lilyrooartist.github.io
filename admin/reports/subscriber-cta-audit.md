@@ -1,20 +1,14 @@
-# Subscriber CTA Audit - Lily Roo
+# Solicitation Copy Audit - Lily Roo
 
-Generated: 2026-06-23T08:58:44.674968Z
+Generated: 2026-06-29T12:35:10.259086Z
 
 ## Summary
 - Draft posts: **1**
-- Selected hard CTAs: **1**
-- Stronger subscriber variants available: **0**
-- Ready-after-approval swaps: **0**
+- Selected solicitation-style CTAs: **0**
+- Non-soliciting swaps available: **0**
+- Ready-after-approval rewrites: **0**
 
 ## CTA Review Queue
-- **TikTok - Twelve Dollars** (`FP-PLAN-TWELVE-DOLLARS-TIKTOK`)
-  - Selected strength: `hard_goal`; recommended: `hard_goal`
-  - Action: Selected copy already has a hard subscriber CTA.
-  - Recommended copy: Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.
-  - Preview: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --dry-run`
-  - Approve after CTA review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --refresh-admin`
 
 ## Guardrails
 - This audit does not edit, approve, apply, publish, or post anything.

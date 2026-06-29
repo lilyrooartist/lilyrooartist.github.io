@@ -28,7 +28,7 @@ TIME_WINDOWS = {
     "YouTube": (18, 30),
 }
 
-HARD_CTA_TERMS = ("subscribe", "subscribers", "1,000", "1000")
+SOLICITATION_TERMS = ("subscribe", "subscribers", "1,000", "1000", "help us", "help lily roo")
 YOUTUBE_TERMS = ("youtube", "youtu.be", "youtube.com")
 
 ASSET_MAP = {
@@ -59,7 +59,7 @@ COPY_MAP = {
         "instagram": "Twelve Dollars is live on YouTube: stage lights, scattered bills, impossible shoes, and one very stubborn little signal.",
         "tiktok": "Twelve Dollars is what happens when the joke walks on stage wearing impossible shoes. Full album playlist is live.",
         "facebook": "Twelve Dollars is live in the Lily Roo archive. The remastered videos are up, the playlist is public, and the stage finally has the right kind of trouble on it.",
-        "youtube": "Twelve Dollars is live in the Lily Roo archive. Subscribe and help the signal climb toward 1,000.",
+        "youtube": "Twelve Dollars is live in the Lily Roo archive. The remastered playlist is up in full.",
         "community": "New album transmission: Twelve Dollars. Remastered videos, updated art, full playlist live now.",
     },
     "Analog Myth": {
@@ -68,7 +68,7 @@ COPY_MAP = {
         "instagram": "Analog Myth is a little archive of broken clocks, exposed throws, and songs that keep arriving late on purpose.",
         "tiktok": "Time broke. The songs kept moving. Analog Myth is live in the archive.",
         "facebook": "Analog Myth is live on YouTube now, with remastered videos and the album order finally lined up the way the transmission wants it.",
-        "youtube": "Analog Myth is live in the Lily Roo archive. Subscribe and help the signal climb toward 1,000.",
+        "youtube": "Analog Myth is live in the Lily Roo archive. The remastered playlist is up in full.",
         "community": "Analog Myth transmission is live: 13, Girls Camp, Analog Myth, Spilling the Tea, No Mortgage, Guards Down, Slow Walk, The Power of Light.",
     },
 }
@@ -224,19 +224,17 @@ def draft_variants(title, platform):
     hook = copy.get("hook", f"{title} is live in the archive.")
     return [
         base,
-        f"{hook} Full signal on YouTube.",
-        f"{title} is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
+        f"{hook} Full remastered playlist is live.",
+        f"{title} is part of the Lily Roo archive now. The remastered version is up.",
     ]
 
 
 def cta_strength(text: str) -> str:
     lower = str(text or "").lower()
-    has_hard = any(term in lower for term in HARD_CTA_TERMS)
+    has_solicitation = any(term in lower for term in SOLICITATION_TERMS)
     has_youtube = any(term in lower for term in YOUTUBE_TERMS)
-    if has_hard and has_youtube:
-        return "hard_subscribe"
-    if has_hard:
-        return "hard_goal"
+    if has_solicitation:
+        return "solicitation"
     if has_youtube:
         return "youtube_link"
     if "playlist" in lower or "stream" in lower or "listen" in lower:
@@ -246,11 +244,10 @@ def cta_strength(text: str) -> str:
 
 def score_strength(strength: str) -> int:
     return {
-        "hard_subscribe": 4,
-        "hard_goal": 3,
-        "youtube_link": 2,
-        "soft_listen": 1,
-        "missing": 0,
+        "youtube_link": 3,
+        "soft_listen": 2,
+        "missing": 1,
+        "solicitation": 0,
     }.get(strength, 0)
 
 
@@ -327,7 +324,7 @@ def winner_followup_posts(*, promo: dict, releases: dict, readiness: dict, sched
                 draft_id = winner_plan_id(title, platform, format_name)
                 base = winner_story_copy(title, platform)
                 hook = (COPY_MAP.get(title, {}) or {}).get("hook", f"{title} is live in the archive.")
-                selected_text = f"{title} is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers."
+                selected_text = f"{title} is part of the Lily Roo archive now. The remastered version is up."
                 drafts = [
                     selected_text,
                     base,
@@ -344,10 +341,10 @@ def winner_followup_posts(*, promo: dict, releases: dict, readiness: dict, sched
                     "text": selected_text,
                     "drafts": drafts,
                     "reply_text": cta_text(release),
-                    "selected_cta_strength": "hard_goal",
-                    "selected_copy_strategy": "growth_first_subscriber_cta",
+                    "selected_cta_strength": cta_strength(selected_text),
+                    "selected_copy_strategy": "song_first_archive_copy",
                     "winner_format": format_name,
-                    "winner_format_replication_note": "The row reuses release-art imagery from the measured winner while preserving the queue-wide subscriber-growth CTA gate.",
+                    "winner_format_replication_note": "The row reuses release-art imagery from the measured winner while keeping the copy song-first and non-soliciting.",
                     "winner_format_evidence_status": candidate.get("evidence_status") or "",
                     "winner_format_average_result": candidate.get("average_result_per_measured_post", 0),
                     "x_media_key": "",
@@ -387,11 +384,11 @@ def story_text_followup_posts(*, releases: dict, readiness: dict, scheduled_rows
                 continue
             draft_id = story_plan_id(title, platform)
             platform_copy = winner_story_copy(title, platform)
-            selected_text = f"{hook} Subscribe on YouTube and help Lily Roo push this signal toward 1,000."
+            selected_text = f"{hook} The archive version is live now."
             drafts = [
                 selected_text,
-                f"{platform_copy} Subscribe on YouTube and help the signal climb toward 1,000.",
-                f"{title} is part of the Lily Roo archive now. If this found you, send one more play/view into the signal.",
+                f"{platform_copy} Full remastered playlist is live.",
+                f"{title} is part of the Lily Roo archive now. The remastered version is up.",
             ]
             post = {
                 "id": draft_id,
@@ -404,8 +401,8 @@ def story_text_followup_posts(*, releases: dict, readiness: dict, scheduled_rows
                 "text": selected_text,
                 "drafts": drafts,
                 "reply_text": cta_text(release),
-                "selected_cta_strength": "hard_subscribe",
-                "selected_copy_strategy": "growth_first_subscriber_cta",
+                "selected_cta_strength": cta_strength(selected_text),
+                "selected_copy_strategy": "song_first_archive_copy",
                 "format_candidate_role": "throughput_buffer",
                 "x_media_key": "",
                 "media_key": "",
@@ -450,7 +447,7 @@ def plan_summary(posts):
         "review_posts": counts["review"],
         "auto_posts": execution["auto"],
         "manual_posts": execution["manual"],
-        "selected_hard_cta_posts": sum(1 for post in posts if post.get("selected_cta_strength") in {"hard_subscribe", "hard_goal"}),
+        "selected_solicitation_posts": sum(1 for post in posts if post.get("selected_cta_strength") == "solicitation"),
         "releases": releases,
         "platforms": platforms,
     }
@@ -601,7 +598,7 @@ def build_plan():
                 "drafts": drafts,
                 "reply_text": cta_text(release),
                 "selected_cta_strength": selected_strength,
-                "selected_copy_strategy": "growth_first_subscriber_cta",
+                "selected_copy_strategy": "song_first_archive_copy",
                 "x_media_key": "",
                 "media_key": media_key,
                 "approved": "no",

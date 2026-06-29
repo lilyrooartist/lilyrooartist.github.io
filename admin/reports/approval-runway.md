@@ -1,12 +1,12 @@
 # Approval Runway - Lily Roo
 
-Generated: 2026-06-23T08:58:44.603424Z
+Generated: 2026-06-29T12:34:04.182172Z
 
 ## Summary
-- Drafts needing review: **1**
+- Drafts needing review: **0**
 - Ready after approval: **0**
 - Manual-only drafts: **0**
-- Blocked drafts: **1**
+- Blocked drafts: **0**
 - Recommended approvals: **0**
 - Recommended manual approvals: **0**
 - Monetization runway: **behind_365_day_pace**, 0.5 subs/week observed, 19.06 subs/week needed for 365 days
@@ -14,16 +14,10 @@ Generated: 2026-06-23T08:58:44.603424Z
 ## Manual Approval Docket
 - Status: **clear**
 - Ready manual approvals: **0**
-- Blocked rows kept out: **1**
+- Blocked rows kept out: **0**
 - Guardrail: Manual-only approvals do not auto-post; posting and public URL logging remain separate after review.
 
 ## Recommended Sequence
-- **TikTok - Twelve Dollars** (`FP-PLAN-TWELVE-DOLLARS-TIKTOK`)
-  - Readiness: `blocked`; score: `18`
-  - Recommendation: Repair platform readiness before approval can create reliable distribution.
-  - Copy: Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.
-  - Preview: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --dry-run`
-  - Approve after review: `python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --refresh-admin`
 
 ## Guardrails
 - This runway does not approve, apply, publish, or post anything.

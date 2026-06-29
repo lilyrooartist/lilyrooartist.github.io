@@ -1,56 +1,36 @@
 {
-  "generated_at": "2026-06-23T08:58:44.603424Z",
+  "generated_at": "2026-06-29T12:34:04.182172Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
     "promo_queue_plan": "data/promo_queue_plan.json"
   },
   "summary": {
-    "review_count": 1,
+    "review_count": 0,
     "ready_after_approval": 0,
     "manual_only": 0,
-    "blocked": 1,
+    "blocked": 0,
     "recommended_approval_count": 0,
     "recommended_manual_approval_count": 0,
     "recommended_ids": [],
     "recommended_manual_ids": [],
-    "blocked_ids": [
-      "FP-PLAN-TWELVE-DOLLARS-TIKTOK"
-    ],
+    "blocked_ids": [],
     "runway_status": "behind_365_day_pace",
     "subscribers_per_week": 0.5,
     "required_subscribers_per_week_365": 19.06,
-    "all_review_preview_command": "python3 scripts/approve_promo_queue_plan.py --all --dry-run",
-    "all_review_approval_command": "python3 scripts/approve_promo_queue_plan.py --all --refresh-admin"
+    "all_review_preview_command": "",
+    "all_review_approval_command": ""
   },
   "manual_approval_docket": {
     "status": "clear",
     "ready_count": 0,
-    "blocked_count": 1,
+    "blocked_count": 0,
     "ready_ids": [],
-    "blocked_ids": [
-      "FP-PLAN-TWELVE-DOLLARS-TIKTOK"
-    ],
+    "blocked_ids": [],
     "preview_command": "",
     "apply_command": "",
     "guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review.",
     "ready_to_review": []
   },
-  "rows": [
-    {
-      "id": "FP-PLAN-TWELVE-DOLLARS-TIKTOK",
-      "release": "Twelve Dollars",
-      "platform": "TikTok",
-      "scheduled_at": "2026-06-24T20:40:00-04:00",
-      "execution_mode": "auto",
-      "post_type": "video",
-      "readiness_state": "blocked",
-      "readiness_message": "Executor credentials or platform setup are not ready.",
-      "text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
-      "subscriber_growth_score": 18,
-      "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --dry-run",
-      "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --refresh-admin",
-      "recommendation": "Repair platform readiness before approval can create reliable distribution."
-    }
-  ]
+  "rows": []
 }

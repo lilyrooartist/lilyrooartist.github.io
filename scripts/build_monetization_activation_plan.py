@@ -99,12 +99,12 @@ def build_actions(status: dict, runway: dict, cta_audit: dict, platform_repair: 
         cta = cta_by_id.get(post_id) or {}
         if not cta:
             continue
-        detail = cta.get("action") or "Review subscriber CTA before approval."
+        detail = cta.get("action") or "Review song-forward copy before approval."
         if cta.get("recommended_text"):
             detail = f"{detail} Recommended copy: {cta['recommended_text']}"
         actions.append(command_action(
-            f"Review subscriber CTA for {cta.get('platform') or 'platform'}",
-            "Tighten subscriber CTA",
+            f"Review song-forward copy for {cta.get('platform') or 'platform'}",
+            "Tighten release copy",
             "waiting_for_review",
             detail,
             cta.get("approval_preview_command") or "",
@@ -239,8 +239,8 @@ def build_markdown(payload: dict) -> str:
         "## Summary",
         f"- Current subscribers: **{summary['current_subscribers']} / {summary['target_subscribers']}**",
         f"- Runway status: **{summary['runway_status']}**",
-        f"- Ready subscriber CTA approvals: **{summary['ready_subscriber_approval_count']}**",
-        f"- Subscriber CTA swaps available: **{summary['subscriber_swap_count']}**",
+        f"- Ready song-forward approvals: **{summary['ready_subscriber_approval_count']}**",
+        f"- Solicitation rewrites available: **{summary['subscriber_swap_count']}**",
         f"- Platform fixes: **{summary['platform_fix_count']}**",
         f"- Activation actions: **{summary['action_count']}**",
         "",

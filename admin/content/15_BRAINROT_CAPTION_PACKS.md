@@ -33,7 +33,7 @@ Brain Rot is what that storm sounds like.
 Older song, still current: Brain Rot.
 If you’ve ever felt emotionally overclocked by the internet, this one’s for you.
 
-Watch on YouTube and subscribe — we’re building to 1,000.
+Watch on YouTube — the full archive is open.
 
 ---
 
@@ -42,5 +42,5 @@ Watch on YouTube and subscribe — we’re building to 1,000.
 
 ## CTA variants
 - “Full signal on YouTube + lilyroo.com”
-- “Subscribe on YouTube — help us hit 1,000”
+- “Full song is live in the Lily Roo archive”
 - “Archive + lore at lilyroo.com/admin”

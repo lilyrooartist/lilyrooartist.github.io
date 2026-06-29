@@ -39,4 +39,4 @@ The spaciousness in the track matters too. The song sounds like it found cheap l
 - No Mortgage is live now on YouTube + lilyroo.com
 - Watch No Mortgage, then follow the Analog Myth archive at lilyroo.com
 - Full transmission on YouTube, full archive at lilyroo.com
-- Subscribe on YouTube for the next Analog Myth release
+- Follow the next Analog Myth release in the archive

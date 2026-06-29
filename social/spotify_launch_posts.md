@@ -35,8 +35,8 @@ The phone taught me heartbreak at unsafe speed. A cake with one good hand. A sol
 - YouTube Music: https://music.youtube.com/watch?v=Hve5drBlN58
 - Stream the first Lily Roo single.
 - Share the remastered cover and send the signal outward.
-- Stream on Spotify and subscribe on YouTube: https://www.youtube.com/@lilyroo.artist
-- Help us build the Lily Roo signal toward 1,000 YouTube subscribers.
+- Stream on Spotify and find Lily Roo on YouTube: https://www.youtube.com/@lilyroo.artist
+- The tiny-room signal is live.
 
 ## Queue Notes
 

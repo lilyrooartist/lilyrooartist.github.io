@@ -1,6 +1,6 @@
 # Manual Posting Clipboard - Lily Roo
 
-Generated: 2026-06-28T00:52:27.180773Z
+Generated: 2026-06-29T12:34:04.279052Z
 
 ## Summary
 - Status: **ready_to_post**
@@ -140,7 +140,7 @@ Generated: 2026-06-28T00:52:27.180773Z
 - Posting bundle: copy `data/manual-posting-cards/fp-auto-270.txt`, asset `assets/albums/twelve-dollars/art/01-brain-rot-youtube-thumbnail.jpg`
 - Paste text:
 ```text
-The phone is melting politely. Brain Rot is tonight's Twelve Dollars signal. Watch the remastered video and help push Lily Roo toward 1,000 YouTube subscribers.
+The phone is melting politely. Brain Rot is tonight's Twelve Dollars signal. Watch the remastered video. Full Twelve Dollars playlist is live.
 
 Watch Brain Rot: https://youtu.be/U7aczBSruAY | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
 ```
@@ -174,7 +174,7 @@ Watch Brain Rot: https://youtu.be/U7aczBSruAY | Full Twelve Dollars playlist: ht
 - Posting bundle: copy `data/manual-posting-cards/fp-auto-275.txt`, asset `assets/albums/twelve-dollars/art/02-every-pearl-in-carmel-youtube-thumbnail.jpg`
 - Paste text:
 ```text
-Every Pearl in Carmel is the pretty souvenir that still knows what it cost. Watch the remastered video and help push Lily Roo toward 1,000 YouTube subscribers.
+Every Pearl in Carmel is the pretty souvenir that still knows what it cost. Watch the remastered video. Full Twelve Dollars playlist is live.
 
 Watch Every Pearl in Carmel: https://youtu.be/QodRYnvTVZc | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
 ```
@@ -208,7 +208,7 @@ Watch Every Pearl in Carmel: https://youtu.be/QodRYnvTVZc | Full Twelve Dollars 
 - Posting bundle: copy `data/manual-posting-cards/fp-auto-280.txt`, asset `assets/albums/twelve-dollars/art/03-the-other-ones-charging-youtube-thumbnail.jpg`
 - Paste text:
 ```text
-The Other One's Charging is domestic chaos with a battery icon. Watch the remastered video and help push Lily Roo toward 1,000 YouTube subscribers.
+The Other One's Charging is domestic chaos with a battery icon. Watch the remastered video. Full Twelve Dollars playlist is live.
 
 Watch The Other One's Charging: https://youtu.be/EprgLKHp-lE | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
 ```
@@ -242,7 +242,7 @@ Watch The Other One's Charging: https://youtu.be/EprgLKHp-lE | Full Twelve Dolla
 - Posting bundle: copy `data/manual-posting-cards/fp-auto-285.txt`, asset `assets/albums/twelve-dollars/art/04-twelve-dollars-youtube-thumbnail.jpg`
 - Paste text:
 ```text
-Twelve Dollars is the stage light, the joke, and the receipt. Watch the remastered video and help push Lily Roo toward 1,000 YouTube subscribers.
+Twelve Dollars is the stage light, the joke, and the receipt. Watch the remastered video. Full Twelve Dollars playlist is live.
 
 Watch Twelve Dollars: https://youtu.be/G2RlCwZKOsk | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
 ```

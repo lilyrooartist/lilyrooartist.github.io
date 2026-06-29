@@ -24,4 +24,4 @@ My Second Room Has No Light Switch lives in Lily Roo's transmission universe as 
 
 ## CTA variants
 - Full signal on YouTube + lilyroo.com
-- Subscribe on YouTube — building to 1,000
+- Watch the full song in the Lily Roo archive

@@ -406,7 +406,7 @@ def manual_completion_manifest(approval_docket: dict, distribution_docket: dict,
         "pending_log_ids": [row.get("id") for row in pending_rows if row.get("id")],
         "log_commands": log_commands,
         "operator_checklist": [
-            "Review the packaged copy, asset, destination link evidence, and subscriber CTA.",
+            "Review the packaged copy, asset, and destination link evidence.",
             "Run the approval preview command before applying any manual approval.",
             "Post approved rows manually in YouTube Studio Community.",
             "Copy the real individual public Community post URL after posting; it should look like https://www.youtube.com/post/...",
@@ -625,7 +625,7 @@ def build_markdown(payload: dict) -> str:
         "## Summary",
         f"- Manual-ready posts: **{summary['manual_ready_count']}**",
         f"- YouTube Community posts: **{summary['youtube_community_count']}**",
-        f"- Hard subscriber CTAs: **{summary['hard_cta_count']}**",
+        f"- Solicitation-style CTAs: **{summary['hard_cta_count']}**",
         f"- Approved manual posts: **{summary['approved_manual_count']}**",
         f"- Logged manual posts: **{summary['logged_manual_count']}**",
         f"- Unlogged manual posts: **{summary['unlogged_manual_count']}**",
@@ -800,7 +800,7 @@ def main() -> int:
     evidence = destination_evidence_index()
     rows = build_rows(plan, runway, published, evidence)
     url_rows = write_url_template(rows)
-    hard_cta = [row for row in rows if row.get("selected_cta_strength") in {"hard_subscribe", "hard_goal"}]
+    hard_cta = [row for row in rows if row.get("selected_cta_strength") == "solicitation"]
     logged_rows = [row for row in rows if row.get("logged")]
     unlogged_rows = [row for row in rows if not row.get("logged")]
     log_needed_rows = [row for row in rows if (row.get("log_effect") or {}).get("would_append")]

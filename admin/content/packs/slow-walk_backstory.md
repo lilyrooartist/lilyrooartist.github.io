@@ -39,4 +39,4 @@ The vocals matter here too. They are gentle and melodic, lifting the song forwar
 - Slow Walk is live now on YouTube + lilyroo.com
 - Watch Slow Walk, then follow the rest of Analog Myth at lilyroo.com
 - Full transmission on YouTube, full archive at lilyroo.com
-- Subscribe on YouTube for the next Analog Myth release
+- Follow the next Analog Myth release in the archive

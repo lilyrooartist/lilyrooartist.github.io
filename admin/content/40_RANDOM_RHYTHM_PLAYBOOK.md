@@ -22,7 +22,7 @@ Do not use the same tone more than 2 days in a row.
 
 ## CTA frequency
 - Soft CTA most days
-- Hard YouTube subscribe CTA every 3rd post
+- Hard YouTube archive line every 3rd post
 
 ## Anti-formula guardrails
 - Leave some posts without hashtags.

@@ -83,7 +83,7 @@ def build_rows(plan: dict) -> list[dict]:
             "approval_command": approval_command,
         }
         if row["readiness_state"] == "ready_after_approval":
-            row["recommendation"] = "Review copy, then approve to unlock an auto-publishable subscriber CTA."
+            row["recommendation"] = "Review copy, then approve to unlock an auto-publishable song-forward post."
         elif row["readiness_state"] == "manual_only":
             row["recommendation"] = "Review copy and use the manual posting workflow; approval will not auto-post this row."
         elif row["readiness_state"] == "blocked":

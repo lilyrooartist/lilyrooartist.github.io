@@ -32,4 +32,4 @@ Musically, the violin gives the song a darker, haunted-clock edge. It is not jus
 ## CTA variants
 - Analog Myth is live now on YouTube + lilyroo.com
 - Start with Analog Myth, then follow the album as it unfolds
-- Subscribe on YouTube for the next Analog Myth transmission
+- Follow the next Analog Myth transmission in the archive

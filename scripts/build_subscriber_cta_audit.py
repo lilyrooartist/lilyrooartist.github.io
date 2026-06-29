@@ -14,7 +14,7 @@ REPORT = ROOT / "admin" / "reports" / "subscriber-cta-audit.md"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
 
 
-HARD_CTA_TERMS = ("subscribe", "subscribers", "1,000", "1000")
+SOLICITATION_TERMS = ("subscribe", "subscribers", "1,000", "1000", "help us", "help lily roo")
 YOUTUBE_TERMS = ("youtube", "youtu.be", "youtube.com")
 
 
@@ -26,12 +26,10 @@ def read_json(path: Path, fallback):
 
 def cta_strength(text: str) -> str:
     lower = str(text or "").lower()
-    has_hard = any(term in lower for term in HARD_CTA_TERMS)
+    has_solicitation = any(term in lower for term in SOLICITATION_TERMS)
     has_youtube = any(term in lower for term in YOUTUBE_TERMS)
-    if has_hard and has_youtube:
-        return "hard_subscribe"
-    if has_hard:
-        return "hard_goal"
+    if has_solicitation:
+        return "solicitation"
     if has_youtube:
         return "youtube_link"
     if "playlist" in lower or "stream" in lower or "listen" in lower:
@@ -41,11 +39,10 @@ def cta_strength(text: str) -> str:
 
 def score_strength(strength: str) -> int:
     return {
-        "hard_subscribe": 4,
-        "hard_goal": 3,
-        "youtube_link": 2,
-        "soft_listen": 1,
-        "missing": 0,
+        "youtube_link": 3,
+        "soft_listen": 2,
+        "missing": 1,
+        "solicitation": 0,
     }.get(strength, 0)
 
 
@@ -79,15 +76,15 @@ def build_rows(plan: dict, runway: dict) -> list[dict]:
         selected_strength = cta_strength(selected)
         recommended_text, recommended_strength = best_variant(post)
         readiness = runway_by_id.get(post.get("id")) or {}
-        needs_swap = score_strength(recommended_strength) > score_strength(selected_strength)
+        needs_swap = selected_strength == "solicitation" and recommended_strength != "solicitation"
         if str(post.get("approved") or "").lower() == "yes":
-            action = "Already approved; keep CTA under metrics observation."
+            action = "Already approved; do not repost solicitation copy."
         elif needs_swap:
-            action = "Use the stronger subscriber CTA variant before approval."
-        elif selected_strength in {"hard_subscribe", "hard_goal"}:
-            action = "Selected copy already has a hard subscriber CTA."
+            action = "Use the non-soliciting variant before approval."
+        elif selected_strength == "solicitation":
+            action = "Selected copy is solicitation-style; rewrite before approval."
         else:
-            action = "Selected copy has a soft CTA; review whether the platform needs a harder subscribe ask."
+            action = "Selected copy is song-forward and non-soliciting."
         rows.append({
             "id": post.get("id") or "",
             "release": post.get("song") or "",
@@ -138,20 +135,20 @@ def replace_text_embed(html: str, block_id: str, content: str) -> str:
 def build_markdown(payload: dict) -> str:
     summary = payload["summary"]
     lines = [
-        "# Subscriber CTA Audit - Lily Roo",
+        "# Solicitation Copy Audit - Lily Roo",
         "",
         f"Generated: {payload['generated_at']}",
         "",
         "## Summary",
         f"- Draft posts: **{summary['draft_count']}**",
-        f"- Selected hard CTAs: **{summary['selected_hard_cta_count']}**",
-        f"- Stronger subscriber variants available: **{summary['subscriber_swap_count']}**",
-        f"- Ready-after-approval swaps: **{summary['ready_after_approval_swap_count']}**",
+        f"- Selected solicitation-style CTAs: **{summary['selected_hard_cta_count']}**",
+        f"- Non-soliciting swaps available: **{summary['subscriber_swap_count']}**",
+        f"- Ready-after-approval rewrites: **{summary['ready_after_approval_swap_count']}**",
         "",
         "## CTA Review Queue",
     ]
     for row in payload["rows"]:
-        if not row["needs_subscriber_cta_swap"] and row["selected_strength"] not in {"hard_subscribe", "hard_goal"}:
+        if not row["needs_subscriber_cta_swap"] and row["selected_strength"] != "solicitation":
             continue
         lines.append(f"- **{row['platform']} - {row['release']}** (`{row['id']}`)")
         lines.append(f"  - Selected strength: `{row['selected_strength']}`; recommended: `{row['recommended_strength']}`")
@@ -186,7 +183,7 @@ def main() -> int:
     rows = build_rows(plan, runway)
     selected_hard = [
         row for row in rows
-        if row["selected_strength"] in {"hard_subscribe", "hard_goal"}
+        if row["selected_strength"] == "solicitation"
     ]
     swaps = [row for row in rows if row["needs_subscriber_cta_swap"]]
     ready_swaps = [
@@ -214,7 +211,7 @@ def main() -> int:
     markdown = build_markdown(payload)
     REPORT.write_text(markdown, encoding="utf-8")
     sync_admin(payload, markdown)
-    print(json.dumps({"output": str(OUT.relative_to(ROOT)), "subscriber_swaps": len(swaps)}, indent=2))
+    print(json.dumps({"output": str(OUT.relative_to(ROOT)), "solicitation_swaps": len(swaps)}, indent=2))
     return 0
 
 

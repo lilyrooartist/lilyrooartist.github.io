@@ -7,7 +7,7 @@ Primary KPI: **reach 1,000 YouTube subscribers**.
 ## Funnel
 1. **Hook** (quips/anecdotes on X, IG, FB, TikTok)
 2. **Emotion** (micro-story from backstory canon)
-3. **Action** (watch full song + subscribe on YouTube)
+3. **Action** (watch the full song / enter the archive)
 4. **Archive** (log every post + URL + performance note)
 
 ## Current Release Links and Status
@@ -102,7 +102,7 @@ Then refresh the admin queue:
 ## Posting formula (quick)
 - Hook: 1 sentence from `20_QUIPS_BANK.csv`
 - Context: 1 sentence from `10_ANECDOTE_BANK.md`
-- CTA: "full signal on YouTube — help us hit 1,000 subs"
+- CTA: "full signal on YouTube — the archive is open"
 
 ## Randomized artist-style cadence (not robotic)
 - Use windows, not strict times:
@@ -121,7 +121,7 @@ Then refresh the admin queue:
 
 ## Conversion policy
 Every 2-3 posts, include one explicit subscribe ask:
-"If you're into this signal, subscribe on YouTube — we're building to 1,000."
+"If this signal found you, the full archive is open."
 
 ## New song introduction pattern
 For fresh song launches, use this three-post sequence by default:

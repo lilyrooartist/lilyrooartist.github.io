@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-23T08:58:44.674968Z",
+  "generated_at": "2026-06-29T12:35:10.259086Z",
   "safe_mode": true,
   "source": {
     "promo_queue_plan": "data/promo_queue_plan.json",
@@ -7,7 +7,7 @@
   },
   "summary": {
     "draft_count": 1,
-    "selected_hard_cta_count": 1,
+    "selected_hard_cta_count": 0,
     "subscriber_swap_count": 0,
     "ready_after_approval_swap_count": 0,
     "recommended_swap_ids": [],
@@ -19,15 +19,15 @@
       "release": "Twelve Dollars",
       "platform": "TikTok",
       "approved": "no",
-      "readiness_state": "blocked",
-      "selected_strength": "hard_goal",
-      "recommended_strength": "hard_goal",
-      "selected_text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
-      "recommended_text": "Twelve Dollars is part of the Lily Roo archive now. Help us build the signal to 1,000 subscribers.",
+      "readiness_state": "",
+      "selected_strength": "soft_listen",
+      "recommended_strength": "youtube_link",
+      "selected_text": "Twelve Dollars is what happens when the joke walks on stage wearing impossible shoes. Full album playlist is live.",
+      "recommended_text": "Full playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
       "needs_subscriber_cta_swap": false,
-      "approval_preview_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --dry-run",
+      "approval_preview_command": "",
       "approval_command": "python3 scripts/approve_promo_queue_plan.py --id FP-PLAN-TWELVE-DOLLARS-TIKTOK --refresh-admin",
-      "action": "Selected copy already has a hard subscriber CTA."
+      "action": "Selected copy is song-forward and non-soliciting."
     }
   ]
 }

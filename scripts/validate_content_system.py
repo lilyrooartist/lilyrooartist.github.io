@@ -233,12 +233,10 @@ def expected_refresh_coverage(source_commit, latest_head_sha):
 
 def cta_strength(text):
     lower = str(text or "").lower()
-    has_hard = any(term in lower for term in ("subscribe", "subscribers", "1,000", "1000"))
+    has_solicitation = any(term in lower for term in ("subscribe", "subscribers", "1,000", "1000", "help us", "help lily roo"))
     has_youtube = any(term in lower for term in ("youtube", "youtu.be", "youtube.com"))
-    if has_hard and has_youtube:
-        return "hard_subscribe"
-    if has_hard:
-        return "hard_goal"
+    if has_solicitation:
+        return "solicitation"
     if has_youtube:
         return "youtube_link"
     if "playlist" in lower or "stream" in lower or "listen" in lower:
@@ -1630,7 +1628,7 @@ def validate_generated_outputs(failures):
             and "subscriber_swap_count" in summary
             and all("selected_strength" in row and "recommended_strength" in row and "needs_subscriber_cta_swap" in row for row in rows)
         ):
-            ok(f"subscriber CTA audit checks {len(rows)} draft CTA(s)")
+            ok(f"solicitation copy audit checks {len(rows)} draft CTA(s)")
         else:
             fail("subscriber_cta_audit.json missing safe CTA summary or row classifications", failures)
     else:
@@ -1639,7 +1637,7 @@ def validate_generated_outputs(failures):
         manual_packet = json.loads(MANUAL_DISTRIBUTION_PACKET.read_text(encoding="utf-8"))
         summary = manual_packet.get("summary") or {}
         rows = manual_packet.get("rows") or []
-        hard_rows = [row for row in rows if row.get("selected_cta_strength") in {"hard_subscribe", "hard_goal"}]
+        hard_rows = [row for row in rows if row.get("selected_cta_strength") == "solicitation"]
         logged_rows = [row for row in rows if row.get("logged")]
         unlogged_rows = [row for row in rows if not row.get("logged")]
         review_rows = [row for row in unlogged_rows if (row.get("manual_posting_packet") or {}).get("approval_required")]
@@ -3478,14 +3476,13 @@ def validate_generated_outputs(failures):
             fail("promo_queue_plan.json summary draft_posts does not match posts", failures)
         hard_cta_posts = [
             post for post in posts
-            if post.get("selected_cta_strength") in {"hard_subscribe", "hard_goal"}
-            and cta_strength(post.get("text")) in {"hard_subscribe", "hard_goal"}
-            and post.get("selected_copy_strategy") == "growth_first_subscriber_cta"
+            if post.get("selected_cta_strength") == "solicitation"
+            or cta_strength(post.get("text")) == "solicitation"
         ]
-        if summary.get("selected_hard_cta_posts") == len(hard_cta_posts) == len(posts):
-            ok("promo queue plan selects subscriber-growth CTA copy by default")
+        if summary.get("selected_solicitation_posts") == len(hard_cta_posts) == 0:
+            ok("promo queue plan avoids solicitation-style CTA copy")
         else:
-            fail("promo_queue_plan.json selected copy is not subscriber-growth CTA first", failures)
+            fail("promo_queue_plan.json contains solicitation-style CTA copy", failures)
         apply_command = plan.get("apply_command") or ""
         if "apply_promo_queue_plan.py --apply --refresh-admin" in apply_command:
             ok("promo queue plan includes refresh-aware apply command")
@@ -4089,7 +4086,7 @@ def validate_generated_outputs(failures):
     if SUBSCRIBER_CTA_AUDIT_SCRIPT.exists():
         cta_text = SUBSCRIBER_CTA_AUDIT_SCRIPT.read_text(encoding="utf-8")
         if "subscriber_cta_audit.json" in cta_text and "subscriber-cta-audit.md" in cta_text and "needs_subscriber_cta_swap" in cta_text and "subprocess" not in cta_text:
-            ok("subscriber CTA audit builder is review-only")
+            ok("solicitation copy audit builder is review-only")
         else:
             fail("build_subscriber_cta_audit.py missing CTA audit outputs or executes commands", failures)
     else:
@@ -4284,8 +4281,8 @@ def validate_generated_outputs(failures):
         fail("scheduled-approval-packet.md missing", failures)
     if SUBSCRIBER_CTA_AUDIT_REPORT.exists():
         cta_report_text = SUBSCRIBER_CTA_AUDIT_REPORT.read_text(encoding="utf-8")
-        if "Subscriber CTA Audit" in cta_report_text and "CTA Review Queue" in cta_report_text and "Guardrails" in cta_report_text:
-            ok("subscriber CTA audit markdown report present")
+        if ("Solicitation Copy Audit" in cta_report_text or "Subscriber CTA Audit" in cta_report_text) and "CTA Review Queue" in cta_report_text and "Guardrails" in cta_report_text:
+            ok("solicitation copy audit markdown report present")
         else:
             fail("subscriber-cta-audit.md missing expected sections", failures)
     else:

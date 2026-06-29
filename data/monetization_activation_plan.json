@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-23T08:58:45.199387Z",
+  "generated_at": "2026-06-29T12:35:10.294313Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -19,30 +19,16 @@
     "auto_subscriber_approval_count": 0,
     "manual_subscriber_approval_count": 0,
     "manual_subscriber_approval_ids": [],
-    "manual_subscriber_blocked_ids": [
-      "FP-PLAN-TWELVE-DOLLARS-TIKTOK"
-    ],
+    "manual_subscriber_blocked_ids": [],
     "manual_subscriber_approval_preview_command": "",
     "manual_subscriber_approval_apply_command": "",
     "manual_subscriber_approval_guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review.",
     "subscriber_swap_count": 0,
     "ready_after_approval_swap_count": 0,
-    "platform_fix_count": 5,
-    "action_count": 8
+    "platform_fix_count": 4,
+    "action_count": 6
   },
   "actions": [
-    {
-      "label": "Apply approved plan rows after review",
-      "phase": "Move approved subscriber posts into queue",
-      "status": "blocked_until_approved",
-      "detail": "After copy review and approval, apply only approved rows to the live queue; this does not directly post externally.",
-      "command": "",
-      "after_review_command": "python3 scripts/apply_promo_queue_plan.py --apply --refresh-admin",
-      "context": {
-        "approved_plan_posts": 0,
-        "ready_to_apply_posts": 0
-      }
-    },
     {
       "label": "Preview approved backlog reschedule",
       "phase": "Recover stalled approved backlog",
@@ -52,9 +38,9 @@
       "after_review_command": "",
       "context": {
         "approved_backlog_posts": 2,
-        "raw_approved_backlog_posts": 2,
+        "raw_approved_backlog_posts": 25,
         "manual_handoff_backlog_posts": 0,
-        "approved_upcoming_posts": 16,
+        "approved_upcoming_posts": 13,
         "blocked_backlog_count": 2,
         "apply_allowed_without_override": false,
         "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-24T10:00:00+08:00' --spacing-hours 24 --apply --refresh-admin",
@@ -140,40 +126,14 @@
       }
     },
     {
-      "label": "Repair TikTok executor",
-      "phase": "Clear platform blockers",
-      "status": "needs_platform_fix",
-      "detail": "Missing worker secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. TikTok direct public posting approval is false, but upload-draft mode can proceed after credentials. Local secret source is also missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Complete TikTok OAuth setup locally, then push upload-mode secrets and refresh Admin.",
-      "command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
-      "after_review_command": "",
-      "context": {
-        "post_id": "FP-AUTO-264",
-        "platform": "TikTok",
-        "reason": "tiktok_credentials_missing",
-        "missing_secrets": [
-          "TIKTOK_CLIENT_KEY",
-          "TIKTOK_CLIENT_SECRET",
-          "TIKTOK_REFRESH_TOKEN"
-        ],
-        "local_missing_secrets": [
-          "TIKTOK_CLIENT_KEY",
-          "TIKTOK_CLIENT_SECRET",
-          "TIKTOK_REFRESH_TOKEN"
-        ],
-        "local_secret_source": "secrets/social_api.env",
-        "local_secret_ready": false,
-        "public_posting_approved": false
-      }
-    },
-    {
-      "label": "Current operations next action: Fix TikTok executor",
+      "label": "Current operations next action: Post YouTube Community manual cards",
       "phase": "Operations packet",
-      "status": "needs_fix",
-      "detail": "Platform executor needs repair before queued auto posts can publish.",
-      "command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+      "status": "ready",
+      "detail": "4 approved manual post(s) can publish now without waiting for broken auto executors.",
+      "command": "",
       "after_review_command": "",
       "context": {
-        "kind": "platform_fix",
+        "kind": "manual_distribution",
         "urgency": "high"
       }
     }

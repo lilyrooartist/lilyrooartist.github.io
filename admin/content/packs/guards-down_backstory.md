@@ -34,4 +34,4 @@ That is where the song lives. Not in being good, but in the moment when the prot
 ## CTA variants
 - Guards Down is live now on YouTube + lilyroo.com
 - Full transmission on YouTube, archive at lilyroo.com
-- Subscribe on YouTube for the next Analog Myth release
+- Follow the next Analog Myth release in the archive

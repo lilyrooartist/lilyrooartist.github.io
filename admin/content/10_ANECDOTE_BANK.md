@@ -43,5 +43,5 @@ Use these as seeds for captions, spoken intros, shorts hooks, pinned comments, a
 
 ## Conversion CTA variants (for any anecdote)
 - "If this line found you, full signal is on YouTube + lilyroo.com"
-- "For the full transmission, hit YouTube and subscribe — we're building to 1,000."
+- "For the full transmission, the Lily Roo archive is open on YouTube."
 - "Archive at lilyroo.com, full videos on YouTube."

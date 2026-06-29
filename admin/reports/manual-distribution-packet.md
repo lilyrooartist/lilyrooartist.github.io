@@ -1,11 +1,11 @@
 # Manual Distribution Packet - Lily Roo
 
-Generated: 2026-06-28T00:52:27.142201Z
+Generated: 2026-06-29T12:34:04.242539Z
 
 ## Summary
 - Manual-ready posts: **4**
 - YouTube Community posts: **4**
-- Hard subscriber CTAs: **0**
+- Solicitation-style CTAs: **0**
 - Approved manual posts: **4**
 - Logged manual posts: **0**
 - Unlogged manual posts: **4**
@@ -21,8 +21,7 @@ Generated: 2026-06-28T00:52:27.142201Z
 ### Approval Gate
 - Status: **clear**
 - Ready approvals: **0**
-- Blocked approvals: **1**
-- Blocked IDs: `FP-PLAN-TWELVE-DOLLARS-TIKTOK`
+- Blocked approvals: **0**
 - Guardrail: Manual-only approvals do not auto-post; posting and public URL logging remain separate after review.
 
 ### Completion Manifest
@@ -37,7 +36,7 @@ Generated: 2026-06-28T00:52:27.142201Z
 - Batch URL log apply after posting: `python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --apply --refresh-admin`
 - URL worksheet rows waiting: **4**
 - Operator checklist:
-  - Review the packaged copy, asset, destination link evidence, and subscriber CTA.
+  - Review the packaged copy, asset, and destination link evidence.
   - Run the approval preview command before applying any manual approval.
   - Post approved rows manually in YouTube Studio Community.
   - Copy the real individual public Community post URL after posting; it should look like https://www.youtube.com/post/...
@@ -60,28 +59,28 @@ Generated: 2026-06-28T00:52:27.142201Z
 
 ### Postable Now
 - **YouTube Community - Brain Rot** (`FP-AUTO-270`)
-  - Paste text: The phone is melting politely. Brain Rot is tonight's Twelve Dollars signal. Watch the remastered video and help push Lily Roo toward 1,000 YouTube subscribers.
+  - Paste text: The phone is melting politely. Brain Rot is tonight's Twelve Dollars signal. Watch the remastered video. Full Twelve Dollars playlist is live.
 
 Watch Brain Rot: https://youtu.be/U7aczBSruAY | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
   - Asset: https://www.lilyroo.com/assets/albums/twelve-dollars/art/01-brain-rot-youtube-thumbnail.jpg
   - Log preview after posting: `python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL'`
   - Log apply after posting: `python3 scripts/log_manual_distribution.py --id FP-AUTO-270 --url 'PUBLIC_URL' --apply --refresh-admin`
 - **YouTube Community - Every Pearl in Carmel** (`FP-AUTO-275`)
-  - Paste text: Every Pearl in Carmel is the pretty souvenir that still knows what it cost. Watch the remastered video and help push Lily Roo toward 1,000 YouTube subscribers.
+  - Paste text: Every Pearl in Carmel is the pretty souvenir that still knows what it cost. Watch the remastered video. Full Twelve Dollars playlist is live.
 
 Watch Every Pearl in Carmel: https://youtu.be/QodRYnvTVZc | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
   - Asset: https://www.lilyroo.com/assets/albums/twelve-dollars/art/02-every-pearl-in-carmel-youtube-thumbnail.jpg
   - Log preview after posting: `python3 scripts/log_manual_distribution.py --id FP-AUTO-275 --url 'PUBLIC_URL'`
   - Log apply after posting: `python3 scripts/log_manual_distribution.py --id FP-AUTO-275 --url 'PUBLIC_URL' --apply --refresh-admin`
 - **YouTube Community - The Other One's Charging** (`FP-AUTO-280`)
-  - Paste text: The Other One's Charging is domestic chaos with a battery icon. Watch the remastered video and help push Lily Roo toward 1,000 YouTube subscribers.
+  - Paste text: The Other One's Charging is domestic chaos with a battery icon. Watch the remastered video. Full Twelve Dollars playlist is live.
 
 Watch The Other One's Charging: https://youtu.be/EprgLKHp-lE | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
   - Asset: https://www.lilyroo.com/assets/albums/twelve-dollars/art/03-the-other-ones-charging-youtube-thumbnail.jpg
   - Log preview after posting: `python3 scripts/log_manual_distribution.py --id FP-AUTO-280 --url 'PUBLIC_URL'`
   - Log apply after posting: `python3 scripts/log_manual_distribution.py --id FP-AUTO-280 --url 'PUBLIC_URL' --apply --refresh-admin`
 - **YouTube Community - Twelve Dollars** (`FP-AUTO-285`)
-  - Paste text: Twelve Dollars is the stage light, the joke, and the receipt. Watch the remastered video and help push Lily Roo toward 1,000 YouTube subscribers.
+  - Paste text: Twelve Dollars is the stage light, the joke, and the receipt. Watch the remastered video. Full Twelve Dollars playlist is live.
 
 Watch Twelve Dollars: https://youtu.be/G2RlCwZKOsk | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
   - Asset: https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars-youtube-thumbnail.jpg
@@ -93,11 +92,11 @@ Watch Twelve Dollars: https://youtu.be/G2RlCwZKOsk | Full Twelve Dollars playlis
   - Scheduled target: `2026-06-27T22:35:00-04:00`
   - Distribution status: `ready_for_manual_post`
   - Readiness: ``; CTA: ``
-  - Copy: The phone is melting politely. Brain Rot is tonight's Twelve Dollars signal. Watch the remastered video and help push Lily Roo toward 1,000 YouTube subscribers.
+  - Copy: The phone is melting politely. Brain Rot is tonight's Twelve Dollars signal. Watch the remastered video. Full Twelve Dollars playlist is live.
   - Link/reply: Watch Brain Rot: https://youtu.be/U7aczBSruAY | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
   - Paste block:
-    The phone is melting politely. Brain Rot is tonight's Twelve Dollars signal. Watch the remastered video and help push Lily Roo toward 1,000 YouTube subscribers.
-
+    The phone is melting politely. Brain Rot is tonight's Twelve Dollars signal. Watch the remastered video. Full Twelve Dollars playlist is live.
+    
     Watch Brain Rot: https://youtu.be/U7aczBSruAY | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
   - Asset: https://www.lilyroo.com/assets/albums/twelve-dollars/art/01-brain-rot-youtube-thumbnail.jpg
   - Asset evidence: `local_asset_present` assets/albums/twelve-dollars/art/01-brain-rot-youtube-thumbnail.jpg
@@ -115,11 +114,11 @@ Watch Twelve Dollars: https://youtu.be/G2RlCwZKOsk | Full Twelve Dollars playlis
   - Scheduled target: `2026-06-28T22:35:00-04:00`
   - Distribution status: `ready_for_manual_post`
   - Readiness: ``; CTA: ``
-  - Copy: Every Pearl in Carmel is the pretty souvenir that still knows what it cost. Watch the remastered video and help push Lily Roo toward 1,000 YouTube subscribers.
+  - Copy: Every Pearl in Carmel is the pretty souvenir that still knows what it cost. Watch the remastered video. Full Twelve Dollars playlist is live.
   - Link/reply: Watch Every Pearl in Carmel: https://youtu.be/QodRYnvTVZc | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
   - Paste block:
-    Every Pearl in Carmel is the pretty souvenir that still knows what it cost. Watch the remastered video and help push Lily Roo toward 1,000 YouTube subscribers.
-
+    Every Pearl in Carmel is the pretty souvenir that still knows what it cost. Watch the remastered video. Full Twelve Dollars playlist is live.
+    
     Watch Every Pearl in Carmel: https://youtu.be/QodRYnvTVZc | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
   - Asset: https://www.lilyroo.com/assets/albums/twelve-dollars/art/02-every-pearl-in-carmel-youtube-thumbnail.jpg
   - Asset evidence: `local_asset_present` assets/albums/twelve-dollars/art/02-every-pearl-in-carmel-youtube-thumbnail.jpg
@@ -137,11 +136,11 @@ Watch Twelve Dollars: https://youtu.be/G2RlCwZKOsk | Full Twelve Dollars playlis
   - Scheduled target: `2026-06-29T22:35:00-04:00`
   - Distribution status: `ready_for_manual_post`
   - Readiness: ``; CTA: ``
-  - Copy: The Other One's Charging is domestic chaos with a battery icon. Watch the remastered video and help push Lily Roo toward 1,000 YouTube subscribers.
+  - Copy: The Other One's Charging is domestic chaos with a battery icon. Watch the remastered video. Full Twelve Dollars playlist is live.
   - Link/reply: Watch The Other One's Charging: https://youtu.be/EprgLKHp-lE | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
   - Paste block:
-    The Other One's Charging is domestic chaos with a battery icon. Watch the remastered video and help push Lily Roo toward 1,000 YouTube subscribers.
-
+    The Other One's Charging is domestic chaos with a battery icon. Watch the remastered video. Full Twelve Dollars playlist is live.
+    
     Watch The Other One's Charging: https://youtu.be/EprgLKHp-lE | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
   - Asset: https://www.lilyroo.com/assets/albums/twelve-dollars/art/03-the-other-ones-charging-youtube-thumbnail.jpg
   - Asset evidence: `local_asset_present` assets/albums/twelve-dollars/art/03-the-other-ones-charging-youtube-thumbnail.jpg
@@ -159,11 +158,11 @@ Watch Twelve Dollars: https://youtu.be/G2RlCwZKOsk | Full Twelve Dollars playlis
   - Scheduled target: `2026-06-30T22:35:00-04:00`
   - Distribution status: `ready_for_manual_post`
   - Readiness: ``; CTA: ``
-  - Copy: Twelve Dollars is the stage light, the joke, and the receipt. Watch the remastered video and help push Lily Roo toward 1,000 YouTube subscribers.
+  - Copy: Twelve Dollars is the stage light, the joke, and the receipt. Watch the remastered video. Full Twelve Dollars playlist is live.
   - Link/reply: Watch Twelve Dollars: https://youtu.be/G2RlCwZKOsk | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
   - Paste block:
-    Twelve Dollars is the stage light, the joke, and the receipt. Watch the remastered video and help push Lily Roo toward 1,000 YouTube subscribers.
-
+    Twelve Dollars is the stage light, the joke, and the receipt. Watch the remastered video. Full Twelve Dollars playlist is live.
+    
     Watch Twelve Dollars: https://youtu.be/G2RlCwZKOsk | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
   - Asset: https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars-youtube-thumbnail.jpg
   - Asset evidence: `local_asset_present` assets/albums/twelve-dollars/art/04-twelve-dollars-youtube-thumbnail.jpg

@@ -24,4 +24,4 @@ Just Don't Talk About It lives in Lily Roo's transmission universe as a scene-le
 
 ## CTA variants
 - Full signal on YouTube + lilyroo.com
-- Subscribe on YouTube — building to 1,000
+- Watch the full song in the Lily Roo archive

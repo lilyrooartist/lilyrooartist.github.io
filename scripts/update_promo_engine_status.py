@@ -1276,13 +1276,13 @@ def monetization_runway(metrics_history: dict, subscribers: int, remaining: int,
         action_needed = "Capture another dated YouTube metric snapshot to calculate subscriber pace."
     elif subscribers_per_week <= 0:
         status = "stalled"
-        action_needed = "Restart subscriber-growth distribution: approve draft posts, clear executor blockers, and keep weekly metrics current."
+        action_needed = "Restart song-forward distribution: approve draft posts, clear executor blockers, and keep weekly metrics current."
     elif subscribers_per_week < required["365_days"]:
         status = "behind_365_day_pace"
-        action_needed = "Increase weekly subscriber acquisition before the channel can reach 1,000 subscribers within a year."
+        action_needed = "Increase tasteful discovery without using subscriber-count solicitations."
     elif subscribers_per_week < required["180_days"]:
         status = "behind_180_day_pace"
-        action_needed = "Current growth can reach the target, but not within six months; add more approved subscriber CTAs."
+        action_needed = "Current growth can reach the target, but not within six months; approve more song-forward distribution."
     else:
         status = "on_pace"
         action_needed = "Maintain approved distribution and monitor subscriber pace every refresh."
@@ -1347,7 +1347,7 @@ def monetization_state(metrics: dict, history: dict, metrics_history: dict, prom
     reschedule_apply_command = reschedule_preview_command + " --apply --refresh-admin"
     next_pressure = []
     if approved_upcoming <= 0 and review_posts > 0:
-        next_pressure.append("No approved upcoming posts; review draft promo queue rows to restart subscriber-growth distribution.")
+        next_pressure.append("No approved upcoming posts; review draft promo queue rows to restart song-forward distribution.")
     if actionable_backlog_posts:
         next_pressure.append(f"{actionable_backlog_posts} approved unpublished auto posts are past their scheduled time; repair executor/platform blockers or reschedule them.")
     if approval_blockers:

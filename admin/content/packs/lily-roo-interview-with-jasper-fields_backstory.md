@@ -24,4 +24,4 @@ Lily Roo interview with Jasper Fields lives in Lily Roo's transmission universe 
 
 ## CTA variants
 - Full signal on YouTube + lilyroo.com
-- Subscribe on YouTube — building to 1,000
+- Watch the full song in the Lily Roo archive
