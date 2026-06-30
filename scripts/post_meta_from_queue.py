@@ -23,9 +23,22 @@ def graph_base(env: dict[str, str]) -> str:
     return f'https://graph.facebook.com/{version}'
 
 
+def append_cta(text: str, cta: str) -> str:
+    text = (text or '').strip()
+    cta = (cta or '').strip()
+    if not cta:
+        return text
+    if not text:
+        return cta
+    if cta in text:
+        return text
+    return f'{text}\n\n{cta}'
+
+
 def facebook_post(row: dict[str, str], text: str, env: dict[str, str], dry_run: bool) -> dict:
     media_url = public_media_url(row)
-    link = row.get('reply_text', '')
+    cta = row.get('reply_text', '')
+    force_link = (row.get('post_type') or '').strip().lower() == 'link'
     if dry_run:
         return {
             'ok': True,
@@ -33,24 +46,24 @@ def facebook_post(row: dict[str, str], text: str, env: dict[str, str], dry_run: 
             'dry_run': True,
             'mode': 'photo' if media_url else 'feed',
             'media_url': media_url,
-            'link': link,
-            'text': text,
+            'link': cta if force_link else '',
+            'text': append_cta(text, '' if force_link else cta),
         }
     token = env.get('META_LONG_LIVED_TOKEN', '')
     page_id = env.get('FB_PAGE_ID', '')
     if not token or not page_id:
         raise RuntimeError('Facebook posting needs META_LONG_LIVED_TOKEN and FB_PAGE_ID in secrets/social_api.env')
-    if media_url:
+    if media_url and not force_link:
         data = api_post(f'{graph_base(env)}/{page_id}/photos', {
             'url': media_url,
-            'caption': text,
+            'caption': append_cta(text, cta),
             'published': 'true',
             'access_token': token,
         })
     else:
-        payload = {'message': text, 'access_token': token}
-        if link:
-            payload['link'] = link
+        payload = {'message': append_cta(text, '' if force_link else cta), 'access_token': token}
+        if force_link and cta:
+            payload['link'] = cta
         data = api_post(f'{graph_base(env)}/{page_id}/feed', payload)
     post_id = data.get('post_id') or data.get('id') or ''
     post_url = f'https://www.facebook.com/{post_id}' if post_id else 'posted'
