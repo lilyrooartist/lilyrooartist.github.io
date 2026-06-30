@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T21:20:06.942415Z",
+  "generated_at": "2026-06-30T13:49:58.671174Z",
   "safe_mode": true,
   "source": {
     "workflow": ".github/workflows/promo-admin-refresh.yml",
@@ -42,20 +42,20 @@
       "label": "Scheduled refresh workflow",
       "status": "needs_attention",
       "detail": "17 */6 * * *; latest run completed / failure",
-      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28399884704",
+      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28436232857",
       "next_action": "Confirm the GitHub Actions workflow is enabled and has a successful run."
     },
     {
       "label": "Safe admin refresh",
       "status": "ready",
-      "detail": "11 refresh commands captured at 2026-06-29T21:20:05.249915Z",
+      "detail": "11 refresh commands captured at 2026-06-30T13:49:49.775278Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": ""
     },
     {
       "label": "Scheduler dry-run authentication",
       "status": "ready",
-      "detail": "HTTP 200 using bearer auth; due=25 would_post=0",
+      "detail": "HTTP 200 using bearer auth; due=29 would_post=0",
       "evidence": "data/social_scheduler_dry_run.json",
       "next_action": ""
     },
@@ -90,7 +90,7 @@
     {
       "label": "Story throughput",
       "status": "ready",
-      "detail": "6 tracked; 2 queued; 2 past due without URL",
+      "detail": "6 tracked; 2 queued; 0 past due without URL",
       "evidence": "data/story_throughput_tracking.json",
       "next_action": "Export social executions after scheduled post times, then log public URLs and results."
     }

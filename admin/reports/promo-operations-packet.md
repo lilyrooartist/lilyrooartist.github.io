@@ -1,6 +1,6 @@
 # Promo Operations Packet - Lily Roo
 
-Generated: 2026-06-29T21:20:05.443898Z
+Generated: 2026-06-30T13:49:50.867415Z
 
 ## Summary
 - Actions: **16**
@@ -27,21 +27,15 @@ Generated: 2026-06-29T21:20:05.443898Z
 - **[high] Preview clear approved backlog row**
   - Why: Approved posts are past due; preview a new schedule before any apply step.
   - Detail: Preview the first unblocked approved backlog row; blocked rows stay held behind their repair gates.
-  - Command: `python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24`
+  - Command: `python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24`
 
 ### Repair executor
-- **[high] Fix Facebook executor**
+- **[high] Fix TikTok executor**
   - Why: Platform executor needs repair before queued auto posts can publish.
-  - Detail: Facebook blocked Page publishing until identity is confirmed in the Facebook app.
-  - Command: `python3 scripts/check_social_executor_dry_run.py --post-id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA`
-  - Preview retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA`
-  - Apply retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA --apply`
-- **[high] Fix Facebook executor**
-  - Why: Platform executor needs repair before queued auto posts can publish.
-  - Detail: Facebook blocked Page publishing until identity is confirmed in the Facebook app.
-  - Command: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-273`
-  - Preview retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-AUTO-273`
-  - Apply retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-AUTO-273 --apply`
+  - Detail: TikTok direct public posting approval is false, but upload-draft mode can proceed after credentials. Complete TikTok OAuth setup, push upload-mode secrets, then refresh Admin.
+  - Public posting approved: `False`
+  - Command: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
+  - Apply repair after preview: `python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py`
 - **[high] Fix Instagram executor**
   - Why: Platform executor needs repair before queued auto posts can publish.
   - Detail: Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.
@@ -49,26 +43,37 @@ Generated: 2026-06-29T21:20:05.443898Z
   - Local source: `secrets/social_api.env`
   - Command: `python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID`
   - Apply repair after preview: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
-- **[high] Fix Facebook executor**
+- **[high] Fix Instagram executor**
   - Why: Platform executor needs repair before queued auto posts can publish.
-  - Detail: Facebook blocked Page publishing until identity is confirmed in the Facebook app.
-  - Command: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-265`
-  - Preview retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-AUTO-265`
-  - Apply retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-AUTO-265 --apply`
-- **[high] Fix Facebook executor**
+  - Detail: Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.
+  - Missing locally: `IG_BUSINESS_ACCOUNT_ID`
+  - Local source: `secrets/social_api.env`
+  - Command: `python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID`
+  - Apply repair after preview: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
+- **[high] Fix Instagram executor**
   - Why: Platform executor needs repair before queued auto posts can publish.
-  - Detail: Facebook blocked Page publishing until identity is confirmed in the Facebook app.
-  - Command: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-268`
-  - Preview retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-AUTO-268`
-  - Apply retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-AUTO-268 --apply`
+  - Detail: Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.
+  - Missing locally: `IG_BUSINESS_ACCOUNT_ID`
+  - Local source: `secrets/social_api.env`
+  - Command: `python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID`
+  - Apply repair after preview: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
+- **[high] Fix Instagram executor**
+  - Why: Platform executor needs repair before queued auto posts can publish.
+  - Detail: Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.
+  - Missing locally: `IG_BUSINESS_ACCOUNT_ID`
+  - Local source: `secrets/social_api.env`
+  - Command: `python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM`
+  - Apply repair after preview: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
+  - Preview retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-PLAN-TWELVE-DOLLARS-INSTAGRAM`
+  - Apply retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --apply`
 
 ### Collect experiment results
 - **[high] Collect experiment result metrics**
-  - Why: 8 logged experiment post(s) have 35 result field(s) waiting; these results rank repeatable formats.
+  - Why: 16 logged experiment post(s) have 83 result field(s) waiting; these results rank repeatable formats.
   - Detail: Fill measured result values with evidence notes, preview the import, then apply only after review.
   - Command: `python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run`
   - Packet: `admin/reports/experiment-result-clipboard.md`
-  - Metric cards: **8**; pending fields: **35**
+  - Metric cards: **16**; pending fields: **83**
   - Measurement priorities: **12**
   - Wide entry CSV: `data/experiment_result_entry_wide_template.csv`
   - Preview result import: `python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run`
@@ -76,28 +81,28 @@ Generated: 2026-06-29T21:20:05.443898Z
 ### Verify music sites
 - **[medium] Re-check Twelve Dollars on Spotify**
   - Why: Public store links should be checked until DistroKid exposes them.
-  - Detail: Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T21:19:56.260278+00:00. Status: waiting_for_release_propagation.
-  - Latest snapshot checked: `2026-06-29T21:19:56.260278+00:00`
+  - Detail: Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-07-01T13:49:29.893064+00:00. Status: waiting_for_release_propagation.
+  - Latest snapshot checked: `2026-06-30T13:49:29.893064+00:00`
   - Command: `python3 scripts/search_spotify_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/spotify_release_snapshot.json'`
 - **[medium] Re-check Twelve Dollars on Apple Music**
   - Why: Public store links should be checked until DistroKid exposes them.
-  - Detail: Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T21:19:57.523860+00:00. Status: waiting_for_release_propagation.
-  - Latest snapshot checked: `2026-06-29T21:19:57.523860+00:00`
+  - Detail: Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-07-01T13:49:31.471056+00:00. Status: waiting_for_release_propagation.
+  - Latest snapshot checked: `2026-06-30T13:49:31.471056+00:00`
   - Command: `python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/apple_music_release_snapshot.json'`
 - **[medium] Re-check Twelve Dollars on HyperFollow**
   - Why: Public store links should be checked until DistroKid exposes them.
-  - Detail: Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T21:19:57.955067+00:00. Status: waiting_for_release_propagation.
-  - Latest snapshot checked: `2026-06-29T21:19:57.955067+00:00`
+  - Detail: Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; next recommended re-check after 2026-07-01T13:49:33.686965+00:00. Status: waiting_for_release_propagation.
+  - Latest snapshot checked: `2026-06-30T13:49:33.686965+00:00`
   - Command: `python3 scripts/capture_hyperfollow_store_links.py --url 'https://distrokid.com/hyperfollow/lilyroo/twelve-dollars' --out 'data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json'`
 - **[medium] Re-check Analog Myth on Spotify**
   - Why: Public store links should be checked as the July 1 release approaches.
-  - Detail: Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T21:19:58.033825+00:00. Status: waiting_for_release_propagation.
-  - Latest snapshot checked: `2026-06-29T21:19:58.033825+00:00`
+  - Detail: Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-07-01T13:49:34.204220+00:00. Status: waiting_for_release_propagation.
+  - Latest snapshot checked: `2026-06-30T13:49:34.204220+00:00`
   - Command: `python3 scripts/search_spotify_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/spotify_release_snapshot.json'`
 - **[medium] Re-check Analog Myth on Apple Music**
   - Why: Public store links should be checked as the July 1 release approaches.
-  - Detail: Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T21:19:59.201982+00:00. Status: waiting_for_release_propagation.
-  - Latest snapshot checked: `2026-06-29T21:19:59.201982+00:00`
+  - Detail: Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-07-01T13:49:36.162270+00:00. Status: waiting_for_release_propagation.
+  - Latest snapshot checked: `2026-06-30T13:49:36.162270+00:00`
   - Command: `python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/apple_music_release_snapshot.json'`
 
 ## Guardrails

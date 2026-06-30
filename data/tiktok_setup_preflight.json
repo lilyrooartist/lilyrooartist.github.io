@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T21:20:06.296050Z",
+  "generated_at": "2026-06-30T13:49:53.421202Z",
   "safe_mode": true,
   "source": {
     "local_secret_source": "secrets/social_api.env",
@@ -134,7 +134,7 @@
     "oauth_preview_command": "python3 scripts/tiktok_oauth_handoff.py",
     "oauth_authorization_url_command": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload",
     "oauth_exchange_command": "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode upload",
-    "platform_repair_rows": 0
+    "platform_repair_rows": 1
   },
   "credential_handoff": {
     "status": "ready_to_push",

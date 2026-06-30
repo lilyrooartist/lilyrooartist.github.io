@@ -1,12 +1,12 @@
 # Story Throughput Tracking - Lily Roo
 
-Generated: 2026-06-29T21:20:06.881620Z
+Generated: 2026-06-30T13:49:58.282228Z
 
 ## Summary
 - Story posts scheduled: **6**
 - Queued future: **2**
-- Past due without public URL: **2**
-- Logged, waiting results: **2**
+- Past due without public URL: **0**
+- Logged, waiting results: **4**
 - Measured: **0**
 - Platforms: **Facebook, X**
 
@@ -22,18 +22,20 @@ Generated: 2026-06-29T21:20:06.881620Z
   - First measurement due: `2026-06-30T00:00:00+00:00`
   - Next: Collect first result metrics after the measurement window and import them with evidence notes.
 - **FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA** - Facebook / Twelve Dollars
-  - Status: `past_due_unlogged`; scheduled: `2026-06-27T11:20:00-04:00`
-  - First measurement due: `2026-06-28T15:20:00+00:00`
-  - Next: Run social execution capture/export to confirm whether the post published and log the public URL.
+  - Status: `logged_waiting_results`; scheduled: `2026-06-27T11:20:00-04:00`
+  - Public URL: https://www.facebook.com/903693509504290_122120594331249470
+  - First measurement due: `2026-07-01T00:00:00+00:00`
+  - Next: Collect first result metrics after the measurement window and import them with evidence notes.
 - **FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA** - X / Analog Myth
   - Status: `logged_waiting_results`; scheduled: `2026-06-28T10:15:00-04:00`
   - Public URL: https://x.com/i/web/status/2071236124497080380
   - First measurement due: `2026-06-30T00:00:00+00:00`
   - Next: Collect first result metrics after the measurement window and import them with evidence notes.
 - **FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA** - Facebook / Analog Myth
-  - Status: `past_due_unlogged`; scheduled: `2026-06-29T11:20:00-04:00`
-  - First measurement due: `2026-06-30T15:20:00+00:00`
-  - Next: Run social execution capture/export to confirm whether the post published and log the public URL.
+  - Status: `logged_waiting_results`; scheduled: `2026-06-29T11:20:00-04:00`
+  - Public URL: https://www.facebook.com/903693509504290_122120594589249470
+  - First measurement due: `2026-07-01T00:00:00+00:00`
+  - Next: Collect first result metrics after the measurement window and import them with evidence notes.
 - **FP-STORY-I-LEARNED-IT-ALL-IN-FIFTEEN-SECONDS-X-ARCHIVE-CTA** - X / I Learned It All in Fifteen Seconds
   - Status: `queued_future`; scheduled: `2026-06-30T10:15:00-04:00`
   - First measurement due: `2026-07-01T14:15:00+00:00`

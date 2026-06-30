@@ -2830,7 +2830,7 @@ def build_status():
         "kpi": {
             "primary": growth_goal["primary"],
             "growth_goal": growth_goal,
-            "secondary": "Reach 1,000 YouTube subscribers",
+            "secondary": "Grow song-forward audience signals",
             "monetization": monetization,
             "live_platform_count": metrics["live_platform_count"],
             "pending_manual_metric_fields": len(metrics["pending_manual_fields"]),

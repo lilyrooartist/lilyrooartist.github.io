@@ -1,11 +1,11 @@
 # Promo Unlock Sequence - Lily Roo
 
-Generated: 2026-06-29T21:20:06.655192Z
+Generated: 2026-06-30T13:49:56.720588Z
 
 ## Summary
 - Steps: **4**
 - Ready for human review: **0**
-- Blocked or warning: **3**
+- Blocked or warning: **4**
 - Projected resolution units across sequence: **29**
 - Current step: `unlock-manual-metrics` (`blocked_until_input`)
 - Open blockers still tracked: **9**
@@ -16,14 +16,15 @@ Generated: 2026-06-29T21:20:06.655192Z
    - Reason: Blocked by: FP-AUTO-259.
    - Unlocks: Instagram executor row can become publish-eligible after approval.
 2. **Repair TikTok executor** - `unlock-tiktok-platform-repair`
-   - State: `ready`; owner: `tod`
-   - Reason: ready
+   - State: `blocked`; owner: `tod`
+   - Reason: blocked
    - Unlocks: Held TikTok approval rows can pass platform-readiness review.; Approved TikTok backlog can become safe to reschedule into upload-draft creation.
+   - preview (preview-safe): `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
 3. **Reschedule approved past-due backlog** - `unlock-backlog-reschedule`
    - State: `preview_ready_with_blocker_warning`; owner: `external_platform`
    - Reason: Preview ran, but the output still names a known blocker.
    - Unlocks: Approved past-due queue rows get a fresh schedule after executor blockers clear.
-   - preview (preview-safe): `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24`
+   - preview (preview-safe): `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24`
    - Completion evidence: data/backlog_reschedule_preview.json should show normal_apply_gate clear before any non-override apply command is exposed.
    - Guardrail: Normal apply stays hidden until known executor/platform blockers clear.
 4. **Fill manual metric worksheet** - `unlock-manual-metrics`

@@ -1,10 +1,10 @@
 # Weekly Social Report — Lily Roo
 
-**Period:** 2026-06-23 to 2026-06-29
-**Last updated:** 2026-06-29 05:20 PM EDT
+**Period:** 2026-06-24 to 2026-06-30
+**Last updated:** 2026-06-30 09:49 AM EDT
 
 ## KPI Goal
-- Primary growth target: **1,000 YouTube subscribers** (monetization milestone)
+- Primary growth target: **song-forward discovery and repeat listening**
 
 ## Release Rollout
 
@@ -79,7 +79,7 @@
 - HyperFollow stores: **applemusic, itunes, spotify**
 - Amazon Music: **pending verified public URL; not exposed by current HyperFollow store list**
 - All-release store verification: **8 live, 7 checked pending, 0 pending, 7 snapshots**
-- Social executor history: **29 records, 5 posted, 5 platform fixes, 1 approval blockers**
+- Social executor history: **33 records, 5 posted, 5 platform fixes, 1 approval blockers**
 
 ### First Single Alignment
 - Status: **aligned**
@@ -116,15 +116,15 @@
 ### X (Twitter)
 - Followers: **0**
 - Impressions (7d): **pending**
-- Latest post: https://x.com/i/web/status/2068336870803587325
+- Latest post: https://x.com/i/web/status/2071764617978950017
 
 ### Facebook
 - Followers/Page likes: **0**
 - Reach (7d): **pending**
-- Latest post: https://www.facebook.com/903693509504290_122118326547249470
+- Latest post: https://www.facebook.com/903693509504290_122120594247249470
 
 ## Metrics Snapshot
-- Live API captured: **2026-06-29T21:19:56.115Z**
+- Live API captured: **2026-06-30T13:49:29.308Z**
 - Snapshot file: `data/live_social_metrics.json`
 - YouTube public RSS captured: **2026-06-09T12:08:07.783949Z**
 - YouTube public snapshot file: `data/youtube_public_snapshot.json`
@@ -134,9 +134,9 @@
 - YouTube Music snapshot file: `data/youtube_music_release_snapshot.json`
 - HyperFollow stores captured: **2026-06-07T20:51:14.275569Z**
 - HyperFollow snapshot file: `data/hyperfollow_store_links_snapshot.json`
-- All-release store verification captured: **2026-06-29T21:20:06.727633+00:00**
+- All-release store verification captured: **2026-06-30T13:49:57.179751+00:00**
 - All-release store verification file: `data/store_verification_history.json`
-- Social executor history captured: **2026-06-29T21:20:02.208977Z**
+- Social executor history captured: **2026-06-30T13:49:45.143434Z**
 - Social executor history file: `data/social_execution_snapshot.json`
 - First single alignment audit captured: **2026-06-07T21:39:03.668040Z**
 - First single alignment audit file: `data/first_single_alignment_audit.json`
@@ -152,7 +152,7 @@
 
 ## Next-week priorities
 1. Publish at least 5 short-form posts from queue
-2. Use hard YouTube subscribe CTA every 2–3 posts
+2. Keep CTAs focused on the song, video, playlist, or release story
 3. Fill manual_social_stats.json values for platform deltas, including Spotify release streams once Spotify for Artists exposes them
 
 ## Reporting cadence

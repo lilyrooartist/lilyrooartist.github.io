@@ -187,7 +187,7 @@ md = f'''# Weekly Social Report — Lily Roo
 **Last updated:** {today.strftime('%Y-%m-%d %I:%M %p %Z').strip()}
 
 ## KPI Goal
-- Primary growth target: **1,000 YouTube subscribers** (monetization milestone)
+- Primary growth target: **song-forward discovery and repeat listening**
 
 {release_rollout_section(distrokid_release_status)}
 ## Platform Snapshot
@@ -287,7 +287,7 @@ md = f'''# Weekly Social Report — Lily Roo
 
 ## Next-week priorities
 1. Publish at least 5 short-form posts from queue
-2. Use hard YouTube subscribe CTA every 2–3 posts
+2. Keep CTAs focused on the song, video, playlist, or release story
 3. Fill manual_social_stats.json values for platform deltas, including Spotify release streams once Spotify for Artists exposes them
 
 ## Reporting cadence

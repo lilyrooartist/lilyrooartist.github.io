@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T21:20:06.226915Z",
+  "generated_at": "2026-06-30T13:49:52.995079Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -34,17 +34,57 @@
       "phase": "Recover stalled approved backlog",
       "status": "preview_first",
       "detail": "Preview a new schedule for approved past-due posts. Normal apply is hidden until known executor/platform blockers clear.",
-      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24",
+      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24",
       "after_review_command": "",
       "context": {
-        "approved_backlog_posts": 23,
-        "raw_approved_backlog_posts": 24,
+        "approved_backlog_posts": 22,
+        "raw_approved_backlog_posts": 28,
         "manual_handoff_backlog_posts": 0,
-        "approved_upcoming_posts": 10,
+        "approved_upcoming_posts": 6,
         "blocked_backlog_count": 5,
         "apply_allowed_without_override": false,
-        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin"
+        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin"
+      }
+    },
+    {
+      "label": "Repair Instagram executor",
+      "phase": "Clear platform blockers",
+      "status": "needs_platform_fix",
+      "detail": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
+      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263",
+      "after_review_command": "",
+      "context": {
+        "post_id": "FP-AUTO-263",
+        "platform": "Instagram",
+        "reason": "max_attempts_exceeded",
+        "missing_secrets": [],
+        "local_missing_secrets": [
+          "IG_BUSINESS_ACCOUNT_ID"
+        ],
+        "local_secret_source": "secrets/social_api.env",
+        "local_secret_ready": false,
+        "public_posting_approved": null
+      }
+    },
+    {
+      "label": "Repair Instagram executor",
+      "phase": "Clear platform blockers",
+      "status": "needs_platform_fix",
+      "detail": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
+      "command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
+      "after_review_command": "",
+      "context": {
+        "post_id": "FP-AUTO-267",
+        "platform": "Instagram",
+        "reason": "instagram_business_account_unresolved",
+        "missing_secrets": [],
+        "local_missing_secrets": [
+          "IG_BUSINESS_ACCOUNT_ID"
+        ],
+        "local_secret_source": "secrets/social_api.env",
+        "local_secret_ready": false,
+        "public_posting_approved": null
       }
     },
     {
@@ -68,74 +108,42 @@
       }
     },
     {
-      "label": "Repair Facebook executor",
+      "label": "Repair Instagram executor",
       "phase": "Clear platform blockers",
       "status": "needs_platform_fix",
-      "detail": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
-      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-265",
+      "detail": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
+      "command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
       "after_review_command": "",
       "context": {
-        "post_id": "FP-AUTO-265",
-        "platform": "Facebook",
-        "reason": "max_attempts_exceeded",
+        "post_id": "FP-AUTO-277",
+        "platform": "Instagram",
+        "reason": "instagram_business_account_unresolved",
         "missing_secrets": [],
-        "local_missing_secrets": [],
-        "local_secret_source": "",
-        "local_secret_ready": null,
+        "local_missing_secrets": [
+          "IG_BUSINESS_ACCOUNT_ID"
+        ],
+        "local_secret_source": "secrets/social_api.env",
+        "local_secret_ready": false,
         "public_posting_approved": null
       }
     },
     {
-      "label": "Repair Facebook executor",
+      "label": "Repair Instagram executor",
       "phase": "Clear platform blockers",
       "status": "needs_platform_fix",
-      "detail": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
-      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-268",
+      "detail": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
+      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
       "after_review_command": "",
       "context": {
-        "post_id": "FP-AUTO-268",
-        "platform": "Facebook",
+        "post_id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+        "platform": "Instagram",
         "reason": "max_attempts_exceeded",
         "missing_secrets": [],
-        "local_missing_secrets": [],
-        "local_secret_source": "",
-        "local_secret_ready": null,
-        "public_posting_approved": null
-      }
-    },
-    {
-      "label": "Repair Facebook executor",
-      "phase": "Clear platform blockers",
-      "status": "needs_platform_fix",
-      "detail": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
-      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-273",
-      "after_review_command": "",
-      "context": {
-        "post_id": "FP-AUTO-273",
-        "platform": "Facebook",
-        "reason": "max_attempts_exceeded",
-        "missing_secrets": [],
-        "local_missing_secrets": [],
-        "local_secret_source": "",
-        "local_secret_ready": null,
-        "public_posting_approved": null
-      }
-    },
-    {
-      "label": "Repair Facebook executor",
-      "phase": "Clear platform blockers",
-      "status": "needs_platform_fix",
-      "detail": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
-      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA",
-      "after_review_command": "",
-      "context": {
-        "post_id": "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA",
-        "platform": "Facebook",
-        "reason": "max_attempts_exceeded",
-        "missing_secrets": [],
-        "local_missing_secrets": [],
-        "local_secret_source": "",
-        "local_secret_ready": null,
+        "local_missing_secrets": [
+          "IG_BUSINESS_ACCOUNT_ID"
+        ],
+        "local_secret_source": "secrets/social_api.env",
+        "local_secret_ready": false,
         "public_posting_approved": null
       }
     },
@@ -144,7 +152,7 @@
       "phase": "Operations packet",
       "status": "waiting_for_user",
       "detail": "Approved posts are past due; preview a new schedule before any apply step.",
-      "command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24",
+      "command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24",
       "after_review_command": "",
       "context": {
         "kind": "backlog_reschedule",

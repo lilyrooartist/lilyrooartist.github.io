@@ -1,8 +1,8 @@
 # Lily Roo Promo System (Backstory-driven)
 
 ## Goal
-Drive social views + profile visits into YouTube subscribers.
-Primary KPI: **reach 1,000 YouTube subscribers**.
+Drive social views + profile visits into song plays, playlist discovery, and return visits.
+Primary KPI: **song-forward audience growth without subscriber-count solicitation**.
 
 ## Funnel
 1. **Hook** (quips/anecdotes on X, IG, FB, TikTok)

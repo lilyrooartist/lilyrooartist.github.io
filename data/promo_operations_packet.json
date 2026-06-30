@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-29T21:20:05.443898Z",
+  "generated_at": "2026-06-30T13:49:50.867415Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -16,19 +16,19 @@
     "label": "Preview clear approved backlog row",
     "kind": "backlog_reschedule",
     "priority": 0,
-    "command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24",
+    "command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24",
     "context": {
-      "approved_backlog_posts": 23,
-      "approved_upcoming_posts": 10,
+      "approved_backlog_posts": 22,
+      "approved_upcoming_posts": 6,
       "blocked_backlog_count": 5,
-      "clear_to_apply_count": 18,
+      "clear_to_apply_count": 17,
       "apply_allowed_without_override": false,
       "apply_command": "",
-      "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-      "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
+      "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+      "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
       "partial_clear_apply_manifest": {
         "status": "ready",
-        "clear_to_apply_count": 18,
+        "clear_to_apply_count": 17,
         "blocked_backlog_count": 5,
         "clear_ids": [
           "FP-AUTO-258",
@@ -37,68 +37,65 @@
           "FP-AUTO-263",
           "FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK",
           "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
-          "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
           "FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK",
           "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
           "FP-PLAN-TWELVE-DOLLARS-X",
           "FP-STORY-TWELVE-DOLLARS-X-ARCHIVE-CTA",
           "FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA",
           "FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA",
-          "FP-AUTO-267",
           "FP-AUTO-269",
           "FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA",
           "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
-          "FP-AUTO-274"
-        ],
-        "blocked_ids_retained": [
-          "FP-AUTO-268",
-          "FP-AUTO-265",
-          "FP-AUTO-272",
-          "FP-AUTO-273",
+          "FP-AUTO-274",
           "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA"
         ],
+        "blocked_ids_retained": [
+          "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+          "FP-AUTO-267",
+          "FP-AUTO-272",
+          "FP-AUTO-277",
+          "FP-AUTO-279"
+        ],
         "preview_commands": [
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-264 --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-263 --start-at '2026-07-03T10:00:00-04:00' --spacing-hours 24",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-04T10:00:00-04:00' --spacing-hours 24",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --start-at '2026-07-05T10:00:00-04:00' --spacing-hours 24",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --start-at '2026-07-06T10:00:00-04:00' --spacing-hours 24",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-07T10:00:00-04:00' --spacing-hours 24",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --start-at '2026-07-08T10:00:00-04:00' --spacing-hours 24",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-X --start-at '2026-07-09T10:00:00-04:00' --spacing-hours 24",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-TWELVE-DOLLARS-X-ARCHIVE-CTA --start-at '2026-07-10T10:00:00-04:00' --spacing-hours 24",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-11T10:00:00-04:00' --spacing-hours 24",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-267 --start-at '2026-07-13T10:00:00-04:00' --spacing-hours 24",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-264 --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --start-at '2026-07-03T10:00:00-04:00' --spacing-hours 24",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-263 --start-at '2026-07-04T10:00:00-04:00' --spacing-hours 24",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-05T10:00:00-04:00' --spacing-hours 24",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --start-at '2026-07-06T10:00:00-04:00' --spacing-hours 24",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-08T10:00:00-04:00' --spacing-hours 24",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --start-at '2026-07-09T10:00:00-04:00' --spacing-hours 24",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-X --start-at '2026-07-10T10:00:00-04:00' --spacing-hours 24",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-TWELVE-DOLLARS-X-ARCHIVE-CTA --start-at '2026-07-11T10:00:00-04:00' --spacing-hours 24",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA --start-at '2026-07-13T10:00:00-04:00' --spacing-hours 24",
           "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-269 --start-at '2026-07-15T10:00:00-04:00' --spacing-hours 24",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA --start-at '2026-07-17T10:00:00-04:00' --spacing-hours 24",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --start-at '2026-07-18T10:00:00-04:00' --spacing-hours 24",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-274 --start-at '2026-07-21T10:00:00-04:00' --spacing-hours 24"
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA --start-at '2026-07-16T10:00:00-04:00' --spacing-hours 24",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --start-at '2026-07-17T10:00:00-04:00' --spacing-hours 24",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-274 --start-at '2026-07-19T10:00:00-04:00' --spacing-hours 24",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-20T10:00:00-04:00' --spacing-hours 24"
         ],
         "apply_commands": [
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-264 --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-263 --start-at '2026-07-03T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-04T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --start-at '2026-07-05T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --start-at '2026-07-06T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-07T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --start-at '2026-07-08T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-X --start-at '2026-07-09T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-TWELVE-DOLLARS-X-ARCHIVE-CTA --start-at '2026-07-10T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-11T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-267 --start-at '2026-07-13T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-264 --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --start-at '2026-07-03T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-263 --start-at '2026-07-04T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-05T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --start-at '2026-07-06T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-08T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --start-at '2026-07-09T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-X --start-at '2026-07-10T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-TWELVE-DOLLARS-X-ARCHIVE-CTA --start-at '2026-07-11T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA --start-at '2026-07-13T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
           "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-269 --start-at '2026-07-15T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA --start-at '2026-07-17T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --start-at '2026-07-18T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-274 --start-at '2026-07-21T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin"
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA --start-at '2026-07-16T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --start-at '2026-07-17T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-274 --start-at '2026-07-19T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-20T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin"
         ],
-        "recommended_next_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24",
-        "recommended_apply_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+        "recommended_next_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24",
+        "recommended_apply_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
         "operator_checklist": [
           "Preview each clear row before applying it.",
           "Apply only rows listed in clear_ids; do not use --allow-blocked for this partial-clear path.",
@@ -115,50 +112,52 @@
           "This path reschedules only unblocked approved rows; it does not approve, publish, or repair executors."
         ]
       },
-      "partial_clear_preview_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24",
-      "partial_clear_apply_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+      "partial_clear_preview_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24",
+      "partial_clear_apply_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
       "backlog_clearance_manifest": {
         "status": "blocked_until_clearance_steps_complete",
-        "approved_backlog_count": 23,
+        "approved_backlog_count": 22,
         "blocked_backlog_count": 5,
-        "clear_to_apply_count": 18,
+        "clear_to_apply_count": 17,
         "partial_clear_apply_available": true,
-        "partial_clear_apply_count": 18,
+        "partial_clear_apply_count": 17,
         "blocked_ids": [
-          "FP-AUTO-268",
-          "FP-AUTO-265",
+          "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+          "FP-AUTO-267",
           "FP-AUTO-272",
-          "FP-AUTO-273",
-          "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA"
+          "FP-AUTO-277",
+          "FP-AUTO-279"
         ],
-        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24",
+        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24",
         "safe_apply_command": "",
-        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
+        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
         "apply_allowed_without_override": false,
         "apply_gate": "blocked_until_clearance_steps_complete",
         "clearance_steps": [
-          "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+          "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply.",
+          "Keep direct public posting blocked until TikTok public-posting approval is confirmed; upload mode can still create inbox drafts after credentials.",
+          "Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair."
         ],
         "blocked_items": [
           {
-            "id": "FP-AUTO-268",
-            "platform": "Facebook",
-            "song": "Brain Rot",
+            "id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+            "platform": "Instagram",
+            "song": "Twelve Dollars",
             "blocker_kind": "max_attempts_exceeded",
-            "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
-            "proposed_scheduled_at": "2026-07-14T10:00:00-04:00",
+            "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
+            "proposed_scheduled_at": "2026-07-07T10:00:00-04:00",
             "clearance_steps": [
               "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
             ]
           },
           {
-            "id": "FP-AUTO-265",
-            "platform": "Facebook",
-            "song": "I Learned It All in Fifteen Seconds",
-            "blocker_kind": "max_attempts_exceeded",
-            "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
-            "proposed_scheduled_at": "2026-07-16T10:00:00-04:00",
+            "id": "FP-AUTO-267",
+            "platform": "Instagram",
+            "song": "Brain Rot",
+            "blocker_kind": "instagram_business_account_unresolved",
+            "blocker_reason": "instagram_business_account_unresolved",
+            "proposed_scheduled_at": "2026-07-14T10:00:00-04:00",
             "clearance_steps": [
               "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
             ]
@@ -169,31 +168,32 @@
             "song": "Every Pearl in Carmel",
             "blocker_kind": "instagram_business_account_unresolved",
             "blocker_reason": "instagram_business_account_unresolved",
-            "proposed_scheduled_at": "2026-07-19T10:00:00-04:00",
+            "proposed_scheduled_at": "2026-07-18T10:00:00-04:00",
             "clearance_steps": [
               "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
             ]
           },
           {
-            "id": "FP-AUTO-273",
-            "platform": "Facebook",
-            "song": "Every Pearl in Carmel",
-            "blocker_kind": "max_attempts_exceeded",
-            "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
-            "proposed_scheduled_at": "2026-07-20T10:00:00-04:00",
+            "id": "FP-AUTO-277",
+            "platform": "Instagram",
+            "song": "The Other One's Charging",
+            "blocker_kind": "instagram_business_account_unresolved",
+            "blocker_reason": "instagram_business_account_unresolved",
+            "proposed_scheduled_at": "2026-07-21T10:00:00-04:00",
             "clearance_steps": [
               "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
             ]
           },
           {
-            "id": "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA",
-            "platform": "Facebook",
-            "song": "Analog Myth",
-            "blocker_kind": "max_attempts_exceeded",
-            "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
+            "id": "FP-AUTO-279",
+            "platform": "TikTok",
+            "song": "The Other One's Charging",
+            "blocker_kind": "tiktok_public_posting_not_approved",
+            "blocker_reason": "tiktok_public_posting_not_approved",
             "proposed_scheduled_at": "2026-07-22T10:00:00-04:00",
             "clearance_steps": [
-              "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+              "Keep direct public posting blocked until TikTok public-posting approval is confirmed; upload mode can still create inbox drafts after credentials.",
+              "Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair."
             ]
           }
         ],
@@ -277,19 +277,19 @@
       "label": "Preview clear approved backlog row",
       "kind": "backlog_reschedule",
       "priority": 0,
-      "command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24",
+      "command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24",
       "context": {
-        "approved_backlog_posts": 23,
-        "approved_upcoming_posts": 10,
+        "approved_backlog_posts": 22,
+        "approved_upcoming_posts": 6,
         "blocked_backlog_count": 5,
-        "clear_to_apply_count": 18,
+        "clear_to_apply_count": 17,
         "apply_allowed_without_override": false,
         "apply_command": "",
-        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
+        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
         "partial_clear_apply_manifest": {
           "status": "ready",
-          "clear_to_apply_count": 18,
+          "clear_to_apply_count": 17,
           "blocked_backlog_count": 5,
           "clear_ids": [
             "FP-AUTO-258",
@@ -298,68 +298,65 @@
             "FP-AUTO-263",
             "FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK",
             "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
-            "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
             "FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK",
             "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
             "FP-PLAN-TWELVE-DOLLARS-X",
             "FP-STORY-TWELVE-DOLLARS-X-ARCHIVE-CTA",
             "FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA",
             "FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA",
-            "FP-AUTO-267",
             "FP-AUTO-269",
             "FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA",
             "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
-            "FP-AUTO-274"
-          ],
-          "blocked_ids_retained": [
-            "FP-AUTO-268",
-            "FP-AUTO-265",
-            "FP-AUTO-272",
-            "FP-AUTO-273",
+            "FP-AUTO-274",
             "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA"
           ],
+          "blocked_ids_retained": [
+            "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+            "FP-AUTO-267",
+            "FP-AUTO-272",
+            "FP-AUTO-277",
+            "FP-AUTO-279"
+          ],
           "preview_commands": [
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-264 --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-263 --start-at '2026-07-03T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-04T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --start-at '2026-07-05T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --start-at '2026-07-06T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-07T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --start-at '2026-07-08T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-X --start-at '2026-07-09T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-TWELVE-DOLLARS-X-ARCHIVE-CTA --start-at '2026-07-10T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-11T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-267 --start-at '2026-07-13T10:00:00-04:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-264 --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --start-at '2026-07-03T10:00:00-04:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-263 --start-at '2026-07-04T10:00:00-04:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-05T10:00:00-04:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --start-at '2026-07-06T10:00:00-04:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-08T10:00:00-04:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --start-at '2026-07-09T10:00:00-04:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-X --start-at '2026-07-10T10:00:00-04:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-TWELVE-DOLLARS-X-ARCHIVE-CTA --start-at '2026-07-11T10:00:00-04:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA --start-at '2026-07-13T10:00:00-04:00' --spacing-hours 24",
             "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-269 --start-at '2026-07-15T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA --start-at '2026-07-17T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --start-at '2026-07-18T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-274 --start-at '2026-07-21T10:00:00-04:00' --spacing-hours 24"
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA --start-at '2026-07-16T10:00:00-04:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --start-at '2026-07-17T10:00:00-04:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-274 --start-at '2026-07-19T10:00:00-04:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-20T10:00:00-04:00' --spacing-hours 24"
           ],
           "apply_commands": [
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-264 --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-263 --start-at '2026-07-03T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-04T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --start-at '2026-07-05T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --start-at '2026-07-06T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-07T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --start-at '2026-07-08T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-X --start-at '2026-07-09T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-TWELVE-DOLLARS-X-ARCHIVE-CTA --start-at '2026-07-10T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-11T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-267 --start-at '2026-07-13T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-264 --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --start-at '2026-07-03T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-263 --start-at '2026-07-04T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-05T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --start-at '2026-07-06T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-08T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --start-at '2026-07-09T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-X --start-at '2026-07-10T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-TWELVE-DOLLARS-X-ARCHIVE-CTA --start-at '2026-07-11T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA --start-at '2026-07-13T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
             "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-269 --start-at '2026-07-15T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA --start-at '2026-07-17T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --start-at '2026-07-18T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-274 --start-at '2026-07-21T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin"
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA --start-at '2026-07-16T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --start-at '2026-07-17T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-274 --start-at '2026-07-19T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-20T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin"
           ],
-          "recommended_next_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24",
-          "recommended_apply_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+          "recommended_next_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24",
+          "recommended_apply_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
           "operator_checklist": [
             "Preview each clear row before applying it.",
             "Apply only rows listed in clear_ids; do not use --allow-blocked for this partial-clear path.",
@@ -376,50 +373,52 @@
             "This path reschedules only unblocked approved rows; it does not approve, publish, or repair executors."
           ]
         },
-        "partial_clear_preview_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24",
-        "partial_clear_apply_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+        "partial_clear_preview_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24",
+        "partial_clear_apply_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
         "backlog_clearance_manifest": {
           "status": "blocked_until_clearance_steps_complete",
-          "approved_backlog_count": 23,
+          "approved_backlog_count": 22,
           "blocked_backlog_count": 5,
-          "clear_to_apply_count": 18,
+          "clear_to_apply_count": 17,
           "partial_clear_apply_available": true,
-          "partial_clear_apply_count": 18,
+          "partial_clear_apply_count": 17,
           "blocked_ids": [
-            "FP-AUTO-268",
-            "FP-AUTO-265",
+            "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+            "FP-AUTO-267",
             "FP-AUTO-272",
-            "FP-AUTO-273",
-            "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA"
+            "FP-AUTO-277",
+            "FP-AUTO-279"
           ],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24",
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24",
           "safe_apply_command": "",
-          "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-          "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
+          "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+          "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
           "apply_allowed_without_override": false,
           "apply_gate": "blocked_until_clearance_steps_complete",
           "clearance_steps": [
-            "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+            "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply.",
+            "Keep direct public posting blocked until TikTok public-posting approval is confirmed; upload mode can still create inbox drafts after credentials.",
+            "Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair."
           ],
           "blocked_items": [
             {
-              "id": "FP-AUTO-268",
-              "platform": "Facebook",
-              "song": "Brain Rot",
+              "id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+              "platform": "Instagram",
+              "song": "Twelve Dollars",
               "blocker_kind": "max_attempts_exceeded",
-              "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
-              "proposed_scheduled_at": "2026-07-14T10:00:00-04:00",
+              "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
+              "proposed_scheduled_at": "2026-07-07T10:00:00-04:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]
             },
             {
-              "id": "FP-AUTO-265",
-              "platform": "Facebook",
-              "song": "I Learned It All in Fifteen Seconds",
-              "blocker_kind": "max_attempts_exceeded",
-              "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
-              "proposed_scheduled_at": "2026-07-16T10:00:00-04:00",
+              "id": "FP-AUTO-267",
+              "platform": "Instagram",
+              "song": "Brain Rot",
+              "blocker_kind": "instagram_business_account_unresolved",
+              "blocker_reason": "instagram_business_account_unresolved",
+              "proposed_scheduled_at": "2026-07-14T10:00:00-04:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]
@@ -430,31 +429,32 @@
               "song": "Every Pearl in Carmel",
               "blocker_kind": "instagram_business_account_unresolved",
               "blocker_reason": "instagram_business_account_unresolved",
-              "proposed_scheduled_at": "2026-07-19T10:00:00-04:00",
+              "proposed_scheduled_at": "2026-07-18T10:00:00-04:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]
             },
             {
-              "id": "FP-AUTO-273",
-              "platform": "Facebook",
-              "song": "Every Pearl in Carmel",
-              "blocker_kind": "max_attempts_exceeded",
-              "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
-              "proposed_scheduled_at": "2026-07-20T10:00:00-04:00",
+              "id": "FP-AUTO-277",
+              "platform": "Instagram",
+              "song": "The Other One's Charging",
+              "blocker_kind": "instagram_business_account_unresolved",
+              "blocker_reason": "instagram_business_account_unresolved",
+              "proposed_scheduled_at": "2026-07-21T10:00:00-04:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]
             },
             {
-              "id": "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA",
-              "platform": "Facebook",
-              "song": "Analog Myth",
-              "blocker_kind": "max_attempts_exceeded",
-              "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
+              "id": "FP-AUTO-279",
+              "platform": "TikTok",
+              "song": "The Other One's Charging",
+              "blocker_kind": "tiktok_public_posting_not_approved",
+              "blocker_reason": "tiktok_public_posting_not_approved",
               "proposed_scheduled_at": "2026-07-22T10:00:00-04:00",
               "clearance_steps": [
-                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+                "Keep direct public posting blocked until TikTok public-posting approval is confirmed; upload mode can still create inbox drafts after credentials.",
+                "Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair."
               ]
             }
           ],
@@ -515,19 +515,19 @@
       "label": "Preview clear approved backlog row",
       "kind": "backlog_reschedule",
       "priority": 0,
-      "command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24",
+      "command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24",
       "context": {
-        "approved_backlog_posts": 23,
-        "approved_upcoming_posts": 10,
+        "approved_backlog_posts": 22,
+        "approved_upcoming_posts": 6,
         "blocked_backlog_count": 5,
-        "clear_to_apply_count": 18,
+        "clear_to_apply_count": 17,
         "apply_allowed_without_override": false,
         "apply_command": "",
-        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
+        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
         "partial_clear_apply_manifest": {
           "status": "ready",
-          "clear_to_apply_count": 18,
+          "clear_to_apply_count": 17,
           "blocked_backlog_count": 5,
           "clear_ids": [
             "FP-AUTO-258",
@@ -536,68 +536,65 @@
             "FP-AUTO-263",
             "FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK",
             "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
-            "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
             "FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK",
             "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
             "FP-PLAN-TWELVE-DOLLARS-X",
             "FP-STORY-TWELVE-DOLLARS-X-ARCHIVE-CTA",
             "FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA",
             "FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA",
-            "FP-AUTO-267",
             "FP-AUTO-269",
             "FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA",
             "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
-            "FP-AUTO-274"
-          ],
-          "blocked_ids_retained": [
-            "FP-AUTO-268",
-            "FP-AUTO-265",
-            "FP-AUTO-272",
-            "FP-AUTO-273",
+            "FP-AUTO-274",
             "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA"
           ],
+          "blocked_ids_retained": [
+            "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+            "FP-AUTO-267",
+            "FP-AUTO-272",
+            "FP-AUTO-277",
+            "FP-AUTO-279"
+          ],
           "preview_commands": [
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-264 --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-263 --start-at '2026-07-03T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-04T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --start-at '2026-07-05T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --start-at '2026-07-06T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-07T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --start-at '2026-07-08T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-X --start-at '2026-07-09T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-TWELVE-DOLLARS-X-ARCHIVE-CTA --start-at '2026-07-10T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-11T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-267 --start-at '2026-07-13T10:00:00-04:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-264 --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --start-at '2026-07-03T10:00:00-04:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-263 --start-at '2026-07-04T10:00:00-04:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-05T10:00:00-04:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --start-at '2026-07-06T10:00:00-04:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-08T10:00:00-04:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --start-at '2026-07-09T10:00:00-04:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-X --start-at '2026-07-10T10:00:00-04:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-TWELVE-DOLLARS-X-ARCHIVE-CTA --start-at '2026-07-11T10:00:00-04:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA --start-at '2026-07-13T10:00:00-04:00' --spacing-hours 24",
             "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-269 --start-at '2026-07-15T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA --start-at '2026-07-17T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --start-at '2026-07-18T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-274 --start-at '2026-07-21T10:00:00-04:00' --spacing-hours 24"
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA --start-at '2026-07-16T10:00:00-04:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --start-at '2026-07-17T10:00:00-04:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-274 --start-at '2026-07-19T10:00:00-04:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-20T10:00:00-04:00' --spacing-hours 24"
           ],
           "apply_commands": [
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-264 --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-263 --start-at '2026-07-03T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-04T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --start-at '2026-07-05T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --start-at '2026-07-06T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-07T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --start-at '2026-07-08T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-X --start-at '2026-07-09T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-TWELVE-DOLLARS-X-ARCHIVE-CTA --start-at '2026-07-10T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-11T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-267 --start-at '2026-07-13T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-264 --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --start-at '2026-07-03T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-263 --start-at '2026-07-04T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-05T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --start-at '2026-07-06T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-08T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --start-at '2026-07-09T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-X --start-at '2026-07-10T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-TWELVE-DOLLARS-X-ARCHIVE-CTA --start-at '2026-07-11T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA --start-at '2026-07-13T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
             "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-269 --start-at '2026-07-15T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA --start-at '2026-07-17T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --start-at '2026-07-18T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-274 --start-at '2026-07-21T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin"
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA --start-at '2026-07-16T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --start-at '2026-07-17T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-274 --start-at '2026-07-19T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-20T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin"
           ],
-          "recommended_next_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24",
-          "recommended_apply_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+          "recommended_next_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24",
+          "recommended_apply_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
           "operator_checklist": [
             "Preview each clear row before applying it.",
             "Apply only rows listed in clear_ids; do not use --allow-blocked for this partial-clear path.",
@@ -614,50 +611,52 @@
             "This path reschedules only unblocked approved rows; it does not approve, publish, or repair executors."
           ]
         },
-        "partial_clear_preview_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24",
-        "partial_clear_apply_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+        "partial_clear_preview_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24",
+        "partial_clear_apply_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
         "backlog_clearance_manifest": {
           "status": "blocked_until_clearance_steps_complete",
-          "approved_backlog_count": 23,
+          "approved_backlog_count": 22,
           "blocked_backlog_count": 5,
-          "clear_to_apply_count": 18,
+          "clear_to_apply_count": 17,
           "partial_clear_apply_available": true,
-          "partial_clear_apply_count": 18,
+          "partial_clear_apply_count": 17,
           "blocked_ids": [
-            "FP-AUTO-268",
-            "FP-AUTO-265",
+            "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+            "FP-AUTO-267",
             "FP-AUTO-272",
-            "FP-AUTO-273",
-            "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA"
+            "FP-AUTO-277",
+            "FP-AUTO-279"
           ],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24",
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24",
           "safe_apply_command": "",
-          "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-          "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-06-30T10:00:00-04:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
+          "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+          "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
           "apply_allowed_without_override": false,
           "apply_gate": "blocked_until_clearance_steps_complete",
           "clearance_steps": [
-            "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+            "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply.",
+            "Keep direct public posting blocked until TikTok public-posting approval is confirmed; upload mode can still create inbox drafts after credentials.",
+            "Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair."
           ],
           "blocked_items": [
             {
-              "id": "FP-AUTO-268",
-              "platform": "Facebook",
-              "song": "Brain Rot",
+              "id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+              "platform": "Instagram",
+              "song": "Twelve Dollars",
               "blocker_kind": "max_attempts_exceeded",
-              "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
-              "proposed_scheduled_at": "2026-07-14T10:00:00-04:00",
+              "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
+              "proposed_scheduled_at": "2026-07-07T10:00:00-04:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]
             },
             {
-              "id": "FP-AUTO-265",
-              "platform": "Facebook",
-              "song": "I Learned It All in Fifteen Seconds",
-              "blocker_kind": "max_attempts_exceeded",
-              "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
-              "proposed_scheduled_at": "2026-07-16T10:00:00-04:00",
+              "id": "FP-AUTO-267",
+              "platform": "Instagram",
+              "song": "Brain Rot",
+              "blocker_kind": "instagram_business_account_unresolved",
+              "blocker_reason": "instagram_business_account_unresolved",
+              "proposed_scheduled_at": "2026-07-14T10:00:00-04:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]
@@ -668,31 +667,32 @@
               "song": "Every Pearl in Carmel",
               "blocker_kind": "instagram_business_account_unresolved",
               "blocker_reason": "instagram_business_account_unresolved",
-              "proposed_scheduled_at": "2026-07-19T10:00:00-04:00",
+              "proposed_scheduled_at": "2026-07-18T10:00:00-04:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]
             },
             {
-              "id": "FP-AUTO-273",
-              "platform": "Facebook",
-              "song": "Every Pearl in Carmel",
-              "blocker_kind": "max_attempts_exceeded",
-              "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
-              "proposed_scheduled_at": "2026-07-20T10:00:00-04:00",
+              "id": "FP-AUTO-277",
+              "platform": "Instagram",
+              "song": "The Other One's Charging",
+              "blocker_kind": "instagram_business_account_unresolved",
+              "blocker_reason": "instagram_business_account_unresolved",
+              "proposed_scheduled_at": "2026-07-21T10:00:00-04:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]
             },
             {
-              "id": "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA",
-              "platform": "Facebook",
-              "song": "Analog Myth",
-              "blocker_kind": "max_attempts_exceeded",
-              "blocker_reason": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
+              "id": "FP-AUTO-279",
+              "platform": "TikTok",
+              "song": "The Other One's Charging",
+              "blocker_kind": "tiktok_public_posting_not_approved",
+              "blocker_reason": "tiktok_public_posting_not_approved",
               "proposed_scheduled_at": "2026-07-22T10:00:00-04:00",
               "clearance_steps": [
-                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+                "Keep direct public posting blocked until TikTok public-posting approval is confirmed; upload mode can still create inbox drafts after credentials.",
+                "Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair."
               ]
             }
           ],
@@ -748,24 +748,35 @@
       ]
     },
     {
-      "label": "Fix Facebook executor",
+      "label": "Fix TikTok executor",
       "kind": "platform_fix",
       "priority": 1,
-      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA",
+      "command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
       "context": {
-        "post_id": "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA",
-        "platform": "Facebook",
-        "reason": "max_attempts_exceeded",
-        "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
-        "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
-        "repair_apply_command": "",
-        "retry_reset_verification_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA",
-        "retry_reset_preview_command": "python3 scripts/reset_social_execution_state.py FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA",
-        "retry_reset_apply_command": "python3 scripts/reset_social_execution_state.py FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA --apply",
-        "retry_reset_note": "Run the dry-run verification command first. Apply the retry reset only when the worker reports the row is executable.",
+        "post_id": "FP-AUTO-279",
+        "platform": "TikTok",
+        "reason": "tiktok_public_posting_not_approved",
+        "error_summary": "",
+        "repair_action": "TikTok direct public posting approval is false, but upload-draft mode can proceed after credentials. Complete TikTok OAuth setup, push upload-mode secrets, then refresh Admin.",
+        "repair_apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
         "readiness": {
-          "ready": true
-        }
+          "ready": false,
+          "posting_mode": "direct",
+          "upload_ready": true,
+          "direct_public_ready": false,
+          "access_token_present": true,
+          "refresh_config_present": true,
+          "missing_secrets": [],
+          "public_posting_approved": false,
+          "default_privacy": "PUBLIC_TO_EVERYONE",
+          "brand_content_toggle": false,
+          "brand_organic_toggle": true,
+          "aigc_label_enabled": true
+        },
+        "public_posting_approved": false,
+        "refresh_config_present": true,
+        "access_token_present": true,
+        "default_privacy": "PUBLIC_TO_EVERYONE"
       },
       "phase": "Repair executor",
       "urgency": "high",
@@ -778,24 +789,35 @@
       ]
     },
     {
-      "label": "Fix Facebook executor",
+      "label": "Fix Instagram executor",
       "kind": "platform_fix",
       "priority": 1,
-      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-273",
+      "command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
       "context": {
-        "post_id": "FP-AUTO-273",
-        "platform": "Facebook",
-        "reason": "max_attempts_exceeded",
-        "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
-        "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
-        "repair_apply_command": "",
-        "retry_reset_verification_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-273",
-        "retry_reset_preview_command": "python3 scripts/reset_social_execution_state.py FP-AUTO-273",
-        "retry_reset_apply_command": "python3 scripts/reset_social_execution_state.py FP-AUTO-273 --apply",
-        "retry_reset_note": "Run the dry-run verification command first. Apply the retry reset only when the worker reports the row is executable.",
+        "post_id": "FP-AUTO-277",
+        "platform": "Instagram",
+        "reason": "instagram_business_account_unresolved",
+        "error_summary": "",
+        "repair_action": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
+        "repair_apply_command": "python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py",
         "readiness": {
-          "ready": true
-        }
+          "ready": false,
+          "api": "facebook-login",
+          "account_id_source": "FB_PAGE_ID",
+          "account_resolved": false,
+          "account_resolution_reason": "instagram_business_account_unresolved"
+        },
+        "account_resolved": false,
+        "account_resolution_reason": "instagram_business_account_unresolved",
+        "account_id_source": "FB_PAGE_ID",
+        "local_secret_source": "secrets/social_api.env",
+        "local_secret_presence": {
+          "IG_BUSINESS_ACCOUNT_ID": false
+        },
+        "local_missing_secrets": [
+          "IG_BUSINESS_ACCOUNT_ID"
+        ],
+        "local_secret_ready": false
       },
       "phase": "Repair executor",
       "urgency": "high",
@@ -849,24 +871,35 @@
       ]
     },
     {
-      "label": "Fix Facebook executor",
+      "label": "Fix Instagram executor",
       "kind": "platform_fix",
       "priority": 1,
-      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-265",
+      "command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
       "context": {
-        "post_id": "FP-AUTO-265",
-        "platform": "Facebook",
-        "reason": "max_attempts_exceeded",
-        "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
-        "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
-        "repair_apply_command": "",
-        "retry_reset_verification_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-265",
-        "retry_reset_preview_command": "python3 scripts/reset_social_execution_state.py FP-AUTO-265",
-        "retry_reset_apply_command": "python3 scripts/reset_social_execution_state.py FP-AUTO-265 --apply",
-        "retry_reset_note": "Run the dry-run verification command first. Apply the retry reset only when the worker reports the row is executable.",
+        "post_id": "FP-AUTO-267",
+        "platform": "Instagram",
+        "reason": "instagram_business_account_unresolved",
+        "error_summary": "",
+        "repair_action": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
+        "repair_apply_command": "python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py",
         "readiness": {
-          "ready": true
-        }
+          "ready": false,
+          "api": "facebook-login",
+          "account_id_source": "FB_PAGE_ID",
+          "account_resolved": false,
+          "account_resolution_reason": "instagram_business_account_unresolved"
+        },
+        "account_resolved": false,
+        "account_resolution_reason": "instagram_business_account_unresolved",
+        "account_id_source": "FB_PAGE_ID",
+        "local_secret_source": "secrets/social_api.env",
+        "local_secret_presence": {
+          "IG_BUSINESS_ACCOUNT_ID": false
+        },
+        "local_missing_secrets": [
+          "IG_BUSINESS_ACCOUNT_ID"
+        ],
+        "local_secret_ready": false
       },
       "phase": "Repair executor",
       "urgency": "high",
@@ -879,24 +912,39 @@
       ]
     },
     {
-      "label": "Fix Facebook executor",
+      "label": "Fix Instagram executor",
       "kind": "platform_fix",
       "priority": 1,
-      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-268",
+      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
       "context": {
-        "post_id": "FP-AUTO-268",
-        "platform": "Facebook",
+        "post_id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+        "platform": "Instagram",
         "reason": "max_attempts_exceeded",
-        "error_summary": "Facebook blocked Page publishing until identity is confirmed in the Facebook app.",
-        "repair_action": "Open the Facebook app as the Page admin and complete the identity confirmation prompt, then run a worker dry-run check.",
-        "repair_apply_command": "",
-        "retry_reset_verification_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-268",
-        "retry_reset_preview_command": "python3 scripts/reset_social_execution_state.py FP-AUTO-268",
-        "retry_reset_apply_command": "python3 scripts/reset_social_execution_state.py FP-AUTO-268 --apply",
+        "error_summary": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
+        "repair_action": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
+        "repair_apply_command": "python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py",
+        "retry_reset_verification_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+        "retry_reset_preview_command": "python3 scripts/reset_social_execution_state.py FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+        "retry_reset_apply_command": "python3 scripts/reset_social_execution_state.py FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --apply",
         "retry_reset_note": "Run the dry-run verification command first. Apply the retry reset only when the worker reports the row is executable.",
         "readiness": {
-          "ready": true
-        }
+          "ready": false,
+          "api": "facebook-login",
+          "account_id_source": "FB_PAGE_ID",
+          "account_resolved": false,
+          "account_resolution_reason": "instagram_business_account_unresolved"
+        },
+        "account_resolved": false,
+        "account_resolution_reason": "instagram_business_account_unresolved",
+        "account_id_source": "FB_PAGE_ID",
+        "local_secret_source": "secrets/social_api.env",
+        "local_secret_presence": {
+          "IG_BUSINESS_ACCOUNT_ID": false
+        },
+        "local_missing_secrets": [
+          "IG_BUSINESS_ACCOUNT_ID"
+        ],
+        "local_secret_ready": false
       },
       "phase": "Repair executor",
       "urgency": "high",
@@ -915,11 +963,11 @@
       "command": "python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run",
       "context": {
         "status": "needs_values",
-        "metric_card_count": 8,
-        "pending_result_field_count": 35,
+        "metric_card_count": 16,
+        "pending_result_field_count": 83,
         "ready_to_import_count": 0,
         "wide_ready_to_import_count": 0,
-        "missing_public_url_count": 18,
+        "missing_public_url_count": 10,
         "measurement_priority_count": 12,
         "entry_csv_path": "data/experiment_result_entry_template.csv",
         "wide_entry_csv_path": "data/experiment_result_entry_wide_template.csv",
@@ -935,42 +983,42 @@
             "post_id": "FP-AUTO-260",
             "platform": "Facebook",
             "experiment_format": "Release-art image + story hook",
-            "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 7 logged post(s), 9 missing URL(s) in this format."
+            "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 11 logged post(s), 5 missing URL(s) in this format."
           },
           {
             "action": "collect_metrics",
-            "post_id": "FP-AUTO-257",
-            "platform": "X",
+            "post_id": "FP-AUTO-265",
+            "platform": "Facebook",
             "experiment_format": "Release-art image + story hook",
-            "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 7 logged post(s), 9 missing URL(s) in this format."
+            "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 11 logged post(s), 5 missing URL(s) in this format."
           },
           {
             "action": "collect_metrics",
-            "post_id": "FP-AUTO-262",
-            "platform": "X",
+            "post_id": "FP-AUTO-268",
+            "platform": "Facebook",
             "experiment_format": "Release-art image + story hook",
-            "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 7 logged post(s), 9 missing URL(s) in this format."
+            "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 11 logged post(s), 5 missing URL(s) in this format."
           },
           {
             "action": "collect_metrics",
-            "post_id": "FP-AUTO-266",
-            "platform": "X",
+            "post_id": "FP-PLAN-TWELVE-DOLLARS-FACEBOOK",
+            "platform": "Facebook",
             "experiment_format": "Release-art image + story hook",
-            "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 7 logged post(s), 9 missing URL(s) in this format."
+            "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 11 logged post(s), 5 missing URL(s) in this format."
           },
           {
             "action": "collect_metrics",
-            "post_id": "FP-AUTO-271",
-            "platform": "X",
+            "post_id": "FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK",
+            "platform": "Facebook",
             "experiment_format": "Release-art image + story hook",
-            "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 7 logged post(s), 9 missing URL(s) in this format."
+            "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 11 logged post(s), 5 missing URL(s) in this format."
           }
         ],
         "note": "Fill measured result values with evidence notes, preview the import, then apply only after review."
       },
       "phase": "Collect experiment results",
       "urgency": "high",
-      "urgency_reason": "8 logged experiment post(s) have 35 result field(s) waiting; these results rank repeatable formats.",
+      "urgency_reason": "16 logged experiment post(s) have 83 result field(s) waiting; these results rank repeatable formats.",
       "status": "waiting_for_user",
       "sort_key": [
         1,
@@ -986,25 +1034,25 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "Spotify",
-        "checked_at": "2026-06-29T21:19:56.260278+00:00",
+        "checked_at": "2026-06-30T13:49:29.893064+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-06-30T21:19:56.260278+00:00",
+        "next_recheck_at": "2026-07-01T13:49:29.893064+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-29T21:19:56.260278Z",
+          "updated_at": "2026-06-30T13:49:29.893064Z",
           "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-          "checked_at": "2026-06-29T21:19:56.260278+00:00",
+          "checked_at": "2026-06-30T13:49:29.893064+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-06-30T21:19:56.260278+00:00",
+          "next_recheck_at": "2026-07-01T13:49:29.893064+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T21:19:56.260278+00:00. Status: waiting_for_release_propagation."
+        "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-07-01T13:49:29.893064+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -1024,25 +1072,25 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "Apple Music",
-        "checked_at": "2026-06-29T21:19:57.523860+00:00",
+        "checked_at": "2026-06-30T13:49:31.471056+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-06-30T21:19:57.523860+00:00",
+        "next_recheck_at": "2026-07-01T13:49:31.471056+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-29T21:19:57.523860Z",
+          "updated_at": "2026-06-30T13:49:31.471056Z",
           "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-          "checked_at": "2026-06-29T21:19:57.523860+00:00",
+          "checked_at": "2026-06-30T13:49:31.471056+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-06-30T21:19:57.523860+00:00",
+          "next_recheck_at": "2026-07-01T13:49:31.471056+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T21:19:57.523860+00:00. Status: waiting_for_release_propagation."
+        "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-07-01T13:49:31.471056+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -1062,25 +1110,25 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "HyperFollow",
-        "checked_at": "2026-06-29T21:19:57.955067+00:00",
+        "checked_at": "2026-06-30T13:49:33.686965+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-06-30T21:19:57.955067+00:00",
+        "next_recheck_at": "2026-07-01T13:49:33.686965+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-29T21:19:57.955067Z",
+          "updated_at": "2026-06-30T13:49:33.686965Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-          "checked_at": "2026-06-29T21:19:57.955067+00:00",
+          "checked_at": "2026-06-30T13:49:33.686965+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-06-30T21:19:57.955067+00:00",
+          "next_recheck_at": "2026-07-01T13:49:33.686965+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T21:19:57.955067+00:00. Status: waiting_for_release_propagation."
+        "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; next recommended re-check after 2026-07-01T13:49:33.686965+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -1100,25 +1148,25 @@
       "context": {
         "release": "Analog Myth",
         "service": "Spotify",
-        "checked_at": "2026-06-29T21:19:58.033825+00:00",
+        "checked_at": "2026-06-30T13:49:34.204220+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-06-30T21:19:58.033825+00:00",
+        "next_recheck_at": "2026-07-01T13:49:34.204220+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/spotify_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-29T21:19:58.033825Z",
+          "updated_at": "2026-06-30T13:49:34.204220Z",
           "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
-          "checked_at": "2026-06-29T21:19:58.033825+00:00",
+          "checked_at": "2026-06-30T13:49:34.204220+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-06-30T21:19:58.033825+00:00",
+          "next_recheck_at": "2026-07-01T13:49:34.204220+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T21:19:58.033825+00:00. Status: waiting_for_release_propagation."
+        "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-07-01T13:49:34.204220+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -1138,25 +1186,25 @@
       "context": {
         "release": "Analog Myth",
         "service": "Apple Music",
-        "checked_at": "2026-06-29T21:19:59.201982+00:00",
+        "checked_at": "2026-06-30T13:49:36.162270+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-06-30T21:19:59.201982+00:00",
+        "next_recheck_at": "2026-07-01T13:49:36.162270+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-29T21:19:59.201982Z",
+          "updated_at": "2026-06-30T13:49:36.162270Z",
           "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
-          "checked_at": "2026-06-29T21:19:59.201982+00:00",
+          "checked_at": "2026-06-30T13:49:36.162270+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-06-30T21:19:59.201982+00:00",
+          "next_recheck_at": "2026-07-01T13:49:36.162270+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T21:19:59.201982+00:00. Status: waiting_for_release_propagation."
+        "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-07-01T13:49:36.162270+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -1176,25 +1224,25 @@
       "context": {
         "release": "Analog Myth",
         "service": "YouTube Music",
-        "checked_at": "2026-06-29T21:19:59.277740+00:00",
+        "checked_at": "2026-06-30T13:49:36.610871+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-06-30T21:19:59.277740+00:00",
+        "next_recheck_at": "2026-07-01T13:49:36.610871+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-29T21:19:59.277740Z",
+          "updated_at": "2026-06-30T13:49:36.610871Z",
           "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-          "checked_at": "2026-06-29T21:19:59.277740+00:00",
+          "checked_at": "2026-06-30T13:49:36.610871+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-06-30T21:19:59.277740+00:00",
+          "next_recheck_at": "2026-07-01T13:49:36.610871+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Searches public web results for YouTube Music watch URLs, then validates the public title. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T21:19:59.277740+00:00. Status: waiting_for_release_propagation."
+        "note": "Searches public web results for YouTube Music watch URLs, then validates the public title. Latest snapshot found no public URL; next recommended re-check after 2026-07-01T13:49:36.610871+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -1214,25 +1262,25 @@
       "context": {
         "release": "Analog Myth",
         "service": "HyperFollow",
-        "checked_at": "2026-06-29T21:20:01.256332+00:00",
+        "checked_at": "2026-06-30T13:49:38.941480+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-06-30T21:20:01.256332+00:00",
+        "next_recheck_at": "2026-07-01T13:49:38.941480+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
           "ok": false,
-          "updated_at": "2026-06-29T21:20:01.256332Z",
+          "updated_at": "2026-06-30T13:49:38.941480Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-          "checked_at": "2026-06-29T21:20:01.256332+00:00",
+          "checked_at": "2026-06-30T13:49:38.941480+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-06-30T21:20:01.256332+00:00",
+          "next_recheck_at": "2026-07-01T13:49:38.941480+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; next recommended re-check after 2026-06-30T21:20:01.256332+00:00. Status: waiting_for_release_propagation."
+        "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; next recommended re-check after 2026-07-01T13:49:38.941480+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",

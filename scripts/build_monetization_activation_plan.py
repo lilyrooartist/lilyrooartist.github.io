@@ -237,7 +237,7 @@ def build_markdown(payload: dict) -> str:
         f"Generated: {payload['generated_at']}",
         "",
         "## Summary",
-        f"- Current subscribers: **{summary['current_subscribers']} / {summary['target_subscribers']}**",
+        f"- Current YouTube audience metric: **{summary['current_subscribers']} subscribers**",
         f"- Runway status: **{summary['runway_status']}**",
         f"- Ready song-forward approvals: **{summary['ready_subscriber_approval_count']}**",
         f"- Solicitation rewrites available: **{summary['subscriber_swap_count']}**",
