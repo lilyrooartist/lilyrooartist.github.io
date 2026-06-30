@@ -28,12 +28,14 @@ Post-store-link CTA:
 ## Platform Hooks
 
 - X: Analog Myth is the clock lying politely while the songs keep receipts.
-- Instagram: Analog Myth is an eight-song room of clocks, camp smoke, tea, tiny-house freedom, and light that keeps coming back.
-- TikTok: Time broke. The songs kept moving.
 - Facebook: Analog Myth goes live July 1, with the Echo Thread podcast episode ready for the track-by-track walk-through.
-- YouTube Community: New transmission: Analog Myth arrives July 1. The remastered playlist and podcast episode are live on lilyroo.com.
 
-## Launch-Day Posts
+## Automated Launch-Day Posts
+
+These rows are queued in `data/scheduled_posts.csv` and generated into `admin/future-posts.json`.
+
+- `FP-LAUNCH-ANALOG-MYTH-X` at 2026-07-01T00:45:00-04:00
+- `FP-LAUNCH-ANALOG-MYTH-FACEBOOK` at 2026-07-01T00:55:00-04:00
 
 ### X
 
@@ -44,25 +46,6 @@ Eight songs, one broken clock, and a podcast episode for the track-by-track walk
 Album: https://www.lilyroo.com/analog-myth.html
 Podcast: https://www.lilyroo.com/podcasts/analog-myth.html
 
-### Instagram
-
-Analog Myth is live July 1.
-
-Eight songs from the room where time keeps trying to explain itself and failing: 13, Girls Camp, Analog Myth, Spilling the Tea, No Mortgage, Guards Down, Slow Walk, and The Power of Light.
-
-The Echo Thread podcast episode is also live for the track-by-track conversation.
-
-Album page: lilyroo.com/analog-myth.html
-Podcast: lilyroo.com/podcasts/analog-myth.html
-
-### TikTok
-
-Analog Myth is live July 1.
-
-The clock cannot explain this.
-
-Album + podcast: lilyroo.com
-
 ### Facebook
 
 Analog Myth, the eight-song Lily Roo album, goes live July 1.
@@ -71,15 +54,6 @@ The launch page includes the album, the remastered playlist, cover art, and the 
 
 Album page: https://www.lilyroo.com/analog-myth.html
 Podcast: https://www.lilyroo.com/podcasts/analog-myth.html
-
-### YouTube Community
-
-Analog Myth arrives July 1.
-
-The full remastered playlist is ready, and the Echo Thread podcast episode is live for the track-by-track conversation.
-
-Playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0
-Album page: https://www.lilyroo.com/analog-myth.html
 
 ## Post-Store-Link Variants
 
@@ -91,23 +65,6 @@ Analog Myth is live on Spotify.
 
 Listen: TBD_VERIFIED_SPOTIFY_ALBUM_URL
 Podcast: https://www.lilyroo.com/podcasts/analog-myth.html
-
-### Instagram
-
-Analog Myth is live on Spotify.
-
-Listen there, then open the Echo Thread episode for the track-by-track story behind the album.
-
-Spotify: TBD_VERIFIED_SPOTIFY_ALBUM_URL
-Podcast: lilyroo.com/podcasts/analog-myth.html
-
-### TikTok
-
-Analog Myth is live on Spotify.
-
-Eight songs. One suspicious clock.
-
-TBD_VERIFIED_SPOTIFY_ALBUM_URL
 
 ## Hashtags
 
