@@ -133,6 +133,36 @@ def validate_manual_spotify_url(url: str) -> dict:
     }
 
 
+def spotify_album_id(url: str) -> str:
+    match = re.search(r"open\.spotify\.com/album/([A-Za-z0-9]+)", url)
+    return match.group(1) if match else ""
+
+
+def write_manual_spotify_snapshot(verification_root: Path, spotify_url: str, validation: dict) -> dict:
+    snapshot = {
+        "ok": True,
+        "updated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+        "source": "manual-spotify-url-plus-oembed",
+        "release_url": spotify_url,
+        "album_id": spotify_album_id(spotify_url),
+        "title": validation.get("title", EXPECTED_SPOTIFY_TITLE),
+        "query_artist": EXPECTED_ARTIST,
+        "query_title": EXPECTED_RELEASE_TITLE,
+        "manual_validation": validation,
+        "candidate_urls": [spotify_url],
+        "candidate_count": 1,
+        "action_needed": "",
+    }
+    targets = [
+        verification_root / "spotify_release_snapshot.json",
+        ROOT / "data/store-verification/analog-myth/spotify_release_snapshot.json",
+    ]
+    for target in targets:
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(json.dumps(snapshot, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    return {"written": [str(target.relative_to(ROOT)) for target in targets], "snapshot": snapshot}
+
+
 def validate_manual_apple_music_url(url: str) -> dict:
     metadata = fetch_html_metadata(url)
     page_title = metadata["title"]
@@ -474,9 +504,12 @@ def main() -> int:
     manual_youtube_music_validation = validate_manual_youtube_music_url(youtube_music_url) if manual_youtube_music_url else {}
 
     changed = apply_updates(spotify_url, apple_music_url, youtube_music_url)
+    manual_spotify_snapshot = {}
     if args.apply:
         for relative, content in changed.items():
             (ROOT / relative).write_text(content, encoding="utf-8")
+        if manual_spotify_url:
+            manual_spotify_snapshot = write_manual_spotify_snapshot(verification_root, spotify_url, manual_spotify_validation)
     print(json.dumps({
         "ok": True,
         "mode": "apply" if args.apply else "dry-run",
@@ -484,6 +517,7 @@ def main() -> int:
         "apple_music_url": apple_music_url,
         "youtube_music_url": youtube_music_url,
         "manual_spotify_validation": manual_spotify_validation,
+        "manual_spotify_snapshot": manual_spotify_snapshot,
         "manual_apple_music_validation": manual_apple_music_validation,
         "manual_youtube_music_validation": manual_youtube_music_validation,
         "changed_files": sorted(changed),

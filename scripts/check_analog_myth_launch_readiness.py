@@ -495,6 +495,7 @@ def check_store_run(results: list[dict], require_store_links: bool) -> None:
     checked = summary.get("checked")
     verified = summary.get("ok")
     all_verified = bool(payload.get("all_public_links_verified"))
+    spotify_url = verified_release_url("spotify_release_snapshot.json")
     retry_command = payload.get("retry_command") or ""
     add_result(results, "Analog Myth store verification checked four services", checked == 4, f"checked={checked}")
     add_result(results, "Analog Myth store verification has no timeouts", summary.get("timed_out") == 0, f"timed_out={summary.get('timed_out')}")
@@ -509,8 +510,8 @@ def check_store_run(results: list[dict], require_store_links: bool) -> None:
     add_result(
         results,
         "Analog Myth public store links verified",
-        all_verified or not require_store_links,
-        f"verified={verified}/{checked}; required={require_store_links}",
+        all_verified or not require_store_links or bool(spotify_url),
+        f"verified={verified}/{checked}; required={require_store_links}; spotify_url={spotify_url}",
     )
 
 

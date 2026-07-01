@@ -7,7 +7,7 @@ Podcast episode: https://www.lilyroo.com/podcasts/analog-myth.html
 Podcast RSS: https://www.lilyroo.com/podcasts/feed.xml  
 Playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0  
 Release hub: https://distrokid.com/hyperfollow/lilyroo/analog-myth  
-Primary streaming CTA: add the verified Spotify album URL with `python3 scripts/run_analog_myth_launch.py --apply --live`; publish Spotify-specific copy only after the post-deploy live check passes.
+Primary streaming CTA: https://open.spotify.com/album/6Ujyp8tXa5UxheJJC2B6kL
 
 ## Launch Gate
 
@@ -21,14 +21,14 @@ Pre-store-link CTA:
 
 Post-store-link CTA:
 
-- Listen on Spotify: `TBD_VERIFIED_SPOTIFY_ALBUM_URL`
+- Listen on Spotify: `https://open.spotify.com/album/6Ujyp8tXa5UxheJJC2B6kL`
 - Album page: https://www.lilyroo.com/analog-myth.html
 - Podcast episode: https://www.lilyroo.com/podcasts/analog-myth.html
 
 ## Platform Hooks
 
 - X: Analog Myth is the clock lying politely while the songs keep receipts.
-- Facebook: Analog Myth goes live July 1, with the Echo Thread podcast episode ready for the track-by-track walk-through.
+- Facebook: Analog Myth is live, with the Echo Thread podcast episode ready for the track-by-track walk-through.
 
 ## Automated Launch-Day Posts
 
@@ -48,7 +48,7 @@ Podcast: https://www.lilyroo.com/podcasts/analog-myth.html
 
 ### Facebook
 
-Analog Myth, the eight-song Lily Roo album, goes live July 1.
+Analog Myth, the eight-song Lily Roo album, is live.
 
 The launch page includes the album, the remastered playlist, cover art, and the new Echo Thread podcast episode: The Clock Cannot Explain This.
 
@@ -57,13 +57,13 @@ Podcast: https://www.lilyroo.com/podcasts/analog-myth.html
 
 ## Post-Store-Link Variants
 
-Use these only after the verified Spotify URL replaces `TBD_VERIFIED_SPOTIFY_ALBUM_URL`.
+Use these after the verified Spotify URL has been applied by the launch runner.
 
 ### X
 
 Analog Myth is live on Spotify.
 
-Listen: TBD_VERIFIED_SPOTIFY_ALBUM_URL
+Listen: https://open.spotify.com/album/6Ujyp8tXa5UxheJJC2B6kL
 Podcast: https://www.lilyroo.com/podcasts/analog-myth.html
 
 ## Hashtags
@@ -91,4 +91,4 @@ Podcast: https://www.lilyroo.com/podcasts/analog-myth.html
 5. After GitHub Pages deploys, run `python3 scripts/check_analog_myth_launch_readiness.py --require-store-links --live`.
 6. Confirm the post-deploy live check returns zero failures; that is the public launch-ready proof.
 7. Publish Spotify-specific captions only after the post-deploy live check passes.
-8. Replace `TBD_VERIFIED_SPOTIFY_ALBUM_URL` in any copied captions before using Spotify-specific variants.
+8. Confirm Spotify-specific variants contain `https://open.spotify.com/album/6Ujyp8tXa5UxheJJC2B6kL` before posting.
