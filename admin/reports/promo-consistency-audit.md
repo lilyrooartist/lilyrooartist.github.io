@@ -1,13 +1,13 @@
 # Promo Consistency Audit - Lily Roo
 
-Generated: 2026-07-01T05:32:21.479964Z
+Generated: 2026-07-01T06:31:44.290571Z
 
 ## Summary
-- Status: **pass**
-- Checks: **30 / 30** passed
-- Failed checks: **0**
+- Status: **fail**
+- Checks: **29 / 30** passed
+- Failed checks: **1**
 - High severity failures: **0**
-- Medium severity failures: **0**
+- Medium severity failures: **1**
 
 ## Checks
 - **ledger_open_count_matches_rows**: `pass`
@@ -40,8 +40,10 @@ Generated: 2026-07-01T05:32:21.479964Z
   - Manual metric priority batch count should match manual metric blockers.
 - **manual_metric_handoff_batch_count_matches_packet**: `pass`
   - Human handoff should include every manual metric priority batch.
-- **store_checks_match_checked_pending_services**: `pass`
+- **store_checks_match_checked_pending_services**: `fail`
   - Operations store checks should match checked-pending store services.
+  - Expected: `6`
+  - Actual: `7`
 - **handoff_blocker_summary_matches_ledger**: `pass`
   - Human handoff blocker summary should be copied from the blocker ledger.
 - **handoff_projection_matches_ledger_projection**: `pass`

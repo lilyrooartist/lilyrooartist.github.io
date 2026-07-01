@@ -1,6 +1,6 @@
 # Posting Automation Status - Lily Roo
 
-Generated: 2026-07-01T05:32:21.423916Z
+Generated: 2026-07-01T06:31:44.234121Z
 
 ## Summary
 - Status: **blocked**
@@ -17,7 +17,7 @@ Generated: 2026-07-01T05:32:21.423916Z
   - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28494471432
   - Next: Confirm the GitHub Actions workflow is enabled and has a successful run.
 - **Safe admin refresh** - `ready`
-  - Detail: 11 refresh commands captured at 2026-07-01T05:32:19.492494Z
+  - Detail: 11 refresh commands captured at 2026-07-01T06:31:42.534558Z
   - Evidence: data/promo_admin_refresh_run.json
 - **Scheduler dry-run authentication** - `ready`
   - Detail: HTTP 200 using bearer auth; due=30 would_post=0

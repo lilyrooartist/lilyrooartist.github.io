@@ -1,6 +1,6 @@
 # Monetization Activation Plan - Lily Roo
 
-Generated: 2026-07-01T05:32:20.646463Z
+Generated: 2026-07-01T06:31:43.468972Z
 
 ## Summary
 - Current YouTube audience metric: **5 subscribers**
@@ -35,12 +35,10 @@ Generated: 2026-07-01T05:32:20.646463Z
    - Missing locally: `IG_BUSINESS_ACCOUNT_ID`
    - Local source: `secrets/social_api.env`
    - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID`
-5. **Repair Instagram executor**
+5. **Repair TikTok executor**
    - Phase: `Clear platform blockers`; status: `needs_platform_fix`
-   - Detail: Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.
-   - Missing locally: `IG_BUSINESS_ACCOUNT_ID`
-   - Local source: `secrets/social_api.env`
-   - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM`
+   - Detail: TikTok direct public posting approval is false, but upload-draft mode can proceed after credentials. Complete TikTok OAuth setup, push upload-mode secrets, then refresh Admin.
+   - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
 6. **Repair TikTok executor**
    - Phase: `Clear platform blockers`; status: `needs_platform_fix`
    - Detail: TikTok direct public posting approval is false, but upload-draft mode can proceed after credentials. Complete TikTok OAuth setup, push upload-mode secrets, then refresh Admin.
