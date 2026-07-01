@@ -1,13 +1,13 @@
 # Promo Consistency Audit - Lily Roo
 
-Generated: 2026-07-01T21:51:44.134674Z
+Generated: 2026-07-01T21:59:15.088322Z
 
 ## Summary
 - Status: **fail**
 - Checks: **29 / 30** passed
 - Failed checks: **1**
-- High severity failures: **1**
-- Medium severity failures: **0**
+- High severity failures: **0**
+- Medium severity failures: **1**
 
 ## Checks
 - **ledger_open_count_matches_rows**: `pass`
@@ -26,10 +26,8 @@ Generated: 2026-07-01T21:51:44.134674Z
   - Executor platform-fix count should match the platform repair packet after excluding manual-only handoff rows.
 - **tiktok_preflight_status_matches_platform_repair**: `pass`
   - TikTok platform repair row should mirror the setup preflight status.
-- **tiktok_preflight_local_missing_matches_platform_repair**: `fail`
+- **tiktok_preflight_local_missing_matches_platform_repair**: `pass`
   - TikTok preflight local missing secrets should match the platform repair row.
-  - Expected: `[]`
-  - Actual: `['TIKTOK_CLIENT_KEY', 'TIKTOK_CLIENT_SECRET', 'TIKTOK_REFRESH_TOKEN']`
 - **tiktok_preflight_worker_missing_matches_platform_repair**: `pass`
   - TikTok preflight worker missing secrets should match the platform repair row.
 - **scheduler_blocked_ids_present_in_executor_attention**: `pass`
@@ -42,8 +40,10 @@ Generated: 2026-07-01T21:51:44.134674Z
   - Manual metric priority batch count should match manual metric blockers.
 - **manual_metric_handoff_batch_count_matches_packet**: `pass`
   - Human handoff should include every manual metric priority batch.
-- **store_checks_match_checked_pending_services**: `pass`
+- **store_checks_match_checked_pending_services**: `fail`
   - Operations store checks should match checked-pending store services.
+  - Expected: `6`
+  - Actual: `7`
 - **handoff_blocker_summary_matches_ledger**: `pass`
   - Human handoff blocker summary should be copied from the blocker ledger.
 - **handoff_projection_matches_ledger_projection**: `pass`

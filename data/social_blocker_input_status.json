@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-01T21:51:44.007286Z",
+  "generated_at": "2026-07-01T21:59:14.960332Z",
   "safe_mode": true,
   "redaction": "Only key presence is reported; secret values are never written to generated files.",
   "source": {
@@ -11,20 +11,20 @@
   "summary": {
     "status": "missing_local_input",
     "group_count": 5,
-    "ready_count": 0,
-    "missing_local_input_count": 4,
+    "ready_count": 3,
+    "missing_local_input_count": 1,
     "external_action_needed_count": 1,
     "github_actions_missing_secret_count": 0,
     "github_actions_secret_presence_status": "ready",
-    "local_secret_env_exists": false,
+    "local_secret_env_exists": true,
     "template_path": "data/social_blocker_secret_template.env",
-    "next_action": "Add one of LILYROO_EXECUTOR_BEARER_TOKEN, EXECUTOR_BEARER_TOKEN, LILYROO_ADMIN_PASSWORD, ADMIN_PASSWORD to /home/runner/work/lilyrooartist.github.io/secrets/social_api.env."
+    "next_action": "Add META_LONG_LIVED_TOKEN, FB_PAGE_ID to /private/tmp/secrets/social_api.env, then run python3 scripts/resolve_instagram_business_account.py."
   },
   "groups": [
     {
       "id": "scheduler_auth",
       "label": "Scheduler and executor auth",
-      "status": "missing_local_input",
+      "status": "ready",
       "required_all": [],
       "required_any": [
         "LILYROO_EXECUTOR_BEARER_TOKEN",
@@ -52,16 +52,16 @@
       "credential_resolution_status": {},
       "presence": {
         "ADMIN_PASSWORD": false,
-        "EXECUTOR_BEARER_TOKEN": false,
+        "EXECUTOR_BEARER_TOKEN": true,
         "LILYROO_ADMIN_PASSWORD": false,
         "LILYROO_EXECUTOR_BEARER_TOKEN": false
       },
       "missing_all": [],
-      "any_present": false,
+      "any_present": true,
       "external_only": false,
       "unblocks": "Scheduler dry-run, executor readiness capture, and execution history capture.",
       "verification_command": "python3 scripts/capture_scheduler_dry_run.py && python3 scripts/capture_social_executions.py",
-      "next_action": "Add one of LILYROO_EXECUTOR_BEARER_TOKEN, EXECUTOR_BEARER_TOKEN, LILYROO_ADMIN_PASSWORD, ADMIN_PASSWORD to /home/runner/work/lilyrooartist.github.io/secrets/social_api.env.",
+      "next_action": "Run the verification command and refresh admin evidence.",
       "credential_guide": {
         "priority": "cleared",
         "operator_summary": "Scheduler auth is already present locally and in GitHub Actions; keep it as the known-good auth lane.",
@@ -117,7 +117,7 @@
       "external_only": false,
       "unblocks": "Instagram executor rows after the Worker secret is pushed and readiness is recaptured.",
       "verification_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
-      "next_action": "Add META_LONG_LIVED_TOKEN, FB_PAGE_ID to /home/runner/work/lilyrooartist.github.io/secrets/social_api.env, then run python3 scripts/resolve_instagram_business_account.py.",
+      "next_action": "Add META_LONG_LIVED_TOKEN, FB_PAGE_ID to /private/tmp/secrets/social_api.env, then run python3 scripts/resolve_instagram_business_account.py.",
       "credential_guide": {
         "priority": "next",
         "operator_summary": "Fastest automation unlock: collect Meta token and Page ID, then let the resolver write IG_BUSINESS_ACCOUNT_ID.",
@@ -154,7 +154,7 @@
     {
       "id": "tiktok_oauth_base",
       "label": "TikTok OAuth app values",
-      "status": "missing_local_input",
+      "status": "ready",
       "required_all": [
         "TIKTOK_CLIENT_KEY",
         "TIKTOK_CLIENT_SECRET",
@@ -173,20 +173,16 @@
       "credential_resolution_apply": "",
       "credential_resolution_status": {},
       "presence": {
-        "TIKTOK_CLIENT_KEY": false,
-        "TIKTOK_CLIENT_SECRET": false,
-        "TIKTOK_REDIRECT_URI": false
+        "TIKTOK_CLIENT_KEY": true,
+        "TIKTOK_CLIENT_SECRET": true,
+        "TIKTOK_REDIRECT_URI": true
       },
-      "missing_all": [
-        "TIKTOK_CLIENT_KEY",
-        "TIKTOK_CLIENT_SECRET",
-        "TIKTOK_REDIRECT_URI"
-      ],
+      "missing_all": [],
       "any_present": true,
       "external_only": false,
       "unblocks": "TikTok OAuth authorization URL generation and authorization-code exchange.",
       "verification_command": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload",
-      "next_action": "Add TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REDIRECT_URI to /home/runner/work/lilyrooartist.github.io/secrets/social_api.env.",
+      "next_action": "Run the verification command and refresh admin evidence.",
       "credential_guide": {
         "priority": "second",
         "operator_summary": "Collect TikTok app OAuth values so the helper can generate the Lily Roo authorization URL.",
@@ -217,7 +213,7 @@
     {
       "id": "tiktok_upload_tokens",
       "label": "TikTok upload-mode worker secrets",
-      "status": "missing_local_input",
+      "status": "ready",
       "required_all": [
         "TIKTOK_CLIENT_KEY",
         "TIKTOK_CLIENT_SECRET",
@@ -236,20 +232,16 @@
       "credential_resolution_apply": "",
       "credential_resolution_status": {},
       "presence": {
-        "TIKTOK_CLIENT_KEY": false,
-        "TIKTOK_CLIENT_SECRET": false,
-        "TIKTOK_REFRESH_TOKEN": false
+        "TIKTOK_CLIENT_KEY": true,
+        "TIKTOK_CLIENT_SECRET": true,
+        "TIKTOK_REFRESH_TOKEN": true
       },
-      "missing_all": [
-        "TIKTOK_CLIENT_KEY",
-        "TIKTOK_CLIENT_SECRET",
-        "TIKTOK_REFRESH_TOKEN"
-      ],
+      "missing_all": [],
       "any_present": true,
       "external_only": false,
       "unblocks": "TikTok upload-draft automation for the first ready TikTok asset.",
       "verification_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
-      "next_action": "Add TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN to /home/runner/work/lilyrooartist.github.io/secrets/social_api.env.",
+      "next_action": "Run the verification command and refresh admin evidence.",
       "credential_guide": {
         "priority": "after_oauth",
         "operator_summary": "Authorize the generated TikTok URL as Lily Roo, exchange the returned code, then push upload-mode Worker secrets.",

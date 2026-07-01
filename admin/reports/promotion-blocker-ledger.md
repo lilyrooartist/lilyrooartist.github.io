@@ -1,12 +1,12 @@
 # Promotion Blocker Ledger - Lily Roo
 
-Generated: 2026-07-01T21:51:43.225326Z
+Generated: 2026-07-01T21:59:14.081322Z
 
 ## Summary
 - Open blockers: **9**
 - User-owned: **5**
-- External platform-owned: **4**
-- Codex-actionable: **0**
+- External platform-owned: **3**
+- Codex-actionable: **1**
 - High or critical: **7**
 
 ## Unlock Roadmap
@@ -18,11 +18,11 @@ Generated: 2026-07-01T21:51:43.225326Z
   - Owner: `tod`; projected blockers resolved: **2**
   - Unlocks: Held TikTok approval rows can pass platform-readiness review.; Approved TikTok backlog can become safe to reschedule into upload-draft creation.
   - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
-- **Reschedule approved past-due backlog** (`blocked_until_clearance_steps_complete`)
-  - Owner: `external_platform`; projected blockers resolved: **28**
+- **Reschedule approved past-due backlog** (`clear`)
+  - Owner: `tod`; projected blockers resolved: **8**
   - Unlocks: Approved past-due queue rows get a fresh schedule after executor blockers clear.
-  - Blocked by: FP-AUTO-272, FP-AUTO-277, FP-AUTO-279, FP-AUTO-282, FP-AUTO-284
-  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00+00:00' --spacing-hours 24`
+  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24`
+  - Apply after review: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin`
 - **Fill manual metric worksheet** (`needs_values`)
   - Owner: `tod`; projected blockers resolved: **6**
   - Unlocks: Admin health and weekly reporting can use fresh cross-platform metrics.; Manual metric blockers clear once worksheet values are imported.
@@ -31,6 +31,13 @@ Generated: 2026-07-01T21:51:43.225326Z
   - Apply after review: `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
 
 ## Ledger
+- **[high] Reschedule approved past-due backlog** (`backlog-reschedule`)
+  - Owner: `codex`; status: `ready_to_preview`; category: `backlog_reschedule`
+  - Evidence: 8 approved backlog row(s); 0 still have executor blockers.
+  - Next step: Preview the new schedule, then apply the safe reschedule command.
+  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24`
+  - Apply/log after review: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin`
+  - Guardrail: The apply command remains dry-run-first through the preview artifact.
 - **[high] Approve scheduled TikTok row** (`approval-FP-AUTO-259`)
   - Owner: `tod`; status: `blocked_by_review_checks`; category: `approval`
   - Evidence: FP-AUTO-259 is blocked by not_approved in executor state. Failed review checks: platform_readiness: Executor readiness snapshot marks platform blocked.
@@ -56,13 +63,6 @@ Generated: 2026-07-01T21:51:43.225326Z
   - Guardrail: Run retry resets only after the external platform repair is verified.
   - Blocked apply command: `python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py`
   - Impact: apply blocked by: public_posting_approval_not_confirmed_for_direct_posting
-- **[high] Reschedule approved past-due backlog** (`backlog-reschedule`)
-  - Owner: `external_platform`; status: `blocked`; category: `backlog_reschedule`
-  - Evidence: 28 approved backlog row(s); 5 still have executor blockers.
-  - Next step: Preview a new schedule. Safe apply becomes available after known executor blockers clear.
-  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00+00:00' --spacing-hours 24`
-  - Guardrail: Normal apply is hidden while rows have known executor blockers.
-  - Blocked apply command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin`
 - **[high] Repair Instagram executor** (`platform-FP-AUTO-272`)
   - Owner: `external_platform`; status: `blocked`; category: `platform_repair`
   - Evidence: instagram_business_account_unresolved Local secret source is missing: IG_BUSINESS_ACCOUNT_ID.

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-01T21:51:42.399103Z",
+  "generated_at": "2026-07-01T21:59:12.973687Z",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -197,8 +197,12 @@
             "repair_command": "python3 scripts/tiktok_oauth_handoff.py",
             "repair_preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
             "repair_gate": "blocked_until_tiktok_upload_credentials",
-            "repair_next_step": "Complete the TikTok upload-mode setup preflight before approving this row; direct public posting remains separately approval-gated.",
-            "repair_apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py"
+            "repair_blockers": [
+              "TIKTOK_CLIENT_KEY",
+              "TIKTOK_CLIENT_SECRET",
+              "TIKTOK_REFRESH_TOKEN"
+            ],
+            "repair_next_step": "Complete the TikTok upload-mode setup preflight before approving this row; direct public posting remains separately approval-gated."
           }
         ],
         "approval_effect": {
@@ -550,8 +554,12 @@
           "repair_command": "python3 scripts/tiktok_oauth_handoff.py",
           "repair_preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
           "repair_gate": "blocked_until_tiktok_upload_credentials",
-          "repair_next_step": "Complete the TikTok upload-mode setup preflight before approving this row; direct public posting remains separately approval-gated.",
-          "repair_apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py"
+          "repair_blockers": [
+            "TIKTOK_CLIENT_KEY",
+            "TIKTOK_CLIENT_SECRET",
+            "TIKTOK_REFRESH_TOKEN"
+          ],
+          "repair_next_step": "Complete the TikTok upload-mode setup preflight before approving this row; direct public posting remains separately approval-gated."
         }
       ],
       "review_check_passed": false,
@@ -565,8 +573,12 @@
           "repair_command": "python3 scripts/tiktok_oauth_handoff.py",
           "repair_preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
           "repair_gate": "blocked_until_tiktok_upload_credentials",
-          "repair_next_step": "Complete the TikTok upload-mode setup preflight before approving this row; direct public posting remains separately approval-gated.",
-          "repair_apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py"
+          "repair_blockers": [
+            "TIKTOK_CLIENT_KEY",
+            "TIKTOK_CLIENT_SECRET",
+            "TIKTOK_REFRESH_TOKEN"
+          ],
+          "repair_next_step": "Complete the TikTok upload-mode setup preflight before approving this row; direct public posting remains separately approval-gated."
         }
       ],
       "approval_review_status": "held_by_failed_checks",

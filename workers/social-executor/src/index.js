@@ -15,6 +15,12 @@ const SPOTIFY_OEMBED_URL = "https://open.spotify.com/oembed";
 const DEFAULT_QUEUE_URL = "https://www.lilyroo.com/admin/future-posts.json";
 const EXECUTION_STATE_PREFIX = "post:";
 const MAX_SCHEDULE_ATTEMPTS = 3;
+const LAUNCH_FOCUS_DAYS = {
+  "2026-07-01": {
+    release: "analog myth",
+    reason: "analog_myth_launch_day",
+  },
+};
 
 export default {
   async fetch(request, env, ctx) {
@@ -260,6 +266,22 @@ async function runScheduledPosts(env, options = {}) {
       continue;
     }
 
+    const launchFocus = launchFocusSkip(payload, now);
+    if (launchFocus) {
+      const state = {
+        post_id: payload.postId,
+        platform: payload.platform,
+        status: "skipped",
+        reason: launchFocus.reason,
+        attempts: Number(existing?.attempts || 0),
+        updated_at: new Date().toISOString(),
+        source: options.source || "cron",
+      };
+      if (!options.dryRun) await writeExecutionState(env, payload.postId, state);
+      results.push(state);
+      continue;
+    }
+
     if (Number(existing?.attempts || 0) >= MAX_SCHEDULE_ATTEMPTS) {
       const state = scheduleAttemptState(payload, existing, options);
       if (!options.dryRun) await writeExecutionState(env, payload.postId, state);
@@ -313,6 +335,28 @@ async function runScheduledPosts(env, options = {}) {
     result_count: results.length,
     results,
   };
+}
+
+function launchFocusSkip(payload, now) {
+  const focus = LAUNCH_FOCUS_DAYS[dateKeyInTimeZone(now, "America/New_York")];
+  if (!focus) return null;
+  const song = text(payload.song).toLowerCase();
+  const postId = text(payload.postId).toLowerCase();
+  if (song === focus.release || postId.includes(focus.release.replaceAll(" ", "-"))) return null;
+  return focus;
+}
+
+function dateKeyInTimeZone(date, timeZone) {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(date).reduce((acc, part) => {
+    acc[part.type] = part.value;
+    return acc;
+  }, {});
+  return `${parts.year}-${parts.month}-${parts.day}`;
 }
 
 async function queuePosts(env) {

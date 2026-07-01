@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-01T21:51:42.941502Z",
+  "generated_at": "2026-07-01T21:59:13.824210Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -33,18 +33,18 @@
       "label": "Preview approved backlog reschedule",
       "phase": "Recover stalled approved backlog",
       "status": "preview_first",
-      "detail": "Preview a new schedule for approved past-due posts. Normal apply is hidden until known executor/platform blockers clear.",
-      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00+00:00' --spacing-hours 24",
-      "after_review_command": "",
+      "detail": "Preview a new schedule for approved past-due posts. Safe apply is available after preview.",
+      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
+      "after_review_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
       "context": {
-        "approved_backlog_posts": 28,
+        "approved_backlog_posts": 8,
         "raw_approved_backlog_posts": 30,
         "manual_handoff_backlog_posts": 0,
         "approved_upcoming_posts": 0,
-        "blocked_backlog_count": 5,
-        "apply_allowed_without_override": false,
-        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin"
+        "blocked_backlog_count": 0,
+        "apply_allowed_without_override": true,
+        "blocked_apply_command": "",
+        "override_apply_command": ""
       }
     },
     {
@@ -148,8 +148,8 @@
       "phase": "Operations packet",
       "status": "waiting_for_user",
       "detail": "Approved posts are past due; preview a new schedule before any apply step.",
-      "command": "python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-07-02T10:00:00+00:00' --spacing-hours 24",
-      "after_review_command": "",
+      "command": "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
+      "after_review_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
       "context": {
         "kind": "backlog_reschedule",
         "urgency": "high"

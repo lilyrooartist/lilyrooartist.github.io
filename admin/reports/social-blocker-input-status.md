@@ -1,19 +1,19 @@
 # Social Blocker Input Status - Lily Roo
 
-Generated: 2026-07-01T21:51:44.007286Z
+Generated: 2026-07-01T21:59:14.960332Z
 
 ## Summary
 - Status: **missing_local_input**
-- Ready groups: **0 / 5**
-- Missing local input: **4**
+- Ready groups: **3 / 5**
+- Missing local input: **1**
 - External action needed: **1**
 - GitHub Actions missing secrets: **0**
-- Local secret env exists: **False**
+- Local secret env exists: **True**
 - Template: `data/social_blocker_secret_template.env`
-- Next action: Add one of LILYROO_EXECUTOR_BEARER_TOKEN, EXECUTOR_BEARER_TOKEN, LILYROO_ADMIN_PASSWORD, ADMIN_PASSWORD to /home/runner/work/lilyrooartist.github.io/secrets/social_api.env.
+- Next action: Add META_LONG_LIVED_TOKEN, FB_PAGE_ID to /private/tmp/secrets/social_api.env, then run python3 scripts/resolve_instagram_business_account.py.
 
 ## Groups
-- **Scheduler and executor auth** - `missing_local_input`
+- **Scheduler and executor auth** - `ready`
   - Required one of: LILYROO_EXECUTOR_BEARER_TOKEN, EXECUTOR_BEARER_TOKEN, LILYROO_ADMIN_PASSWORD, ADMIN_PASSWORD
   - GitHub Actions secrets: LILYROO_EXECUTOR_BEARER_TOKEN, LILYROO_ADMIN_PASSWORD
   - GitHub Actions status: ready
@@ -28,7 +28,7 @@ Generated: 2026-07-01T21:51:44.007286Z
     - `python3 scripts/capture_social_executions.py`
     - `python3 scripts/refresh_promo_admin.py`
   - Verify: `python3 scripts/capture_scheduler_dry_run.py && python3 scripts/capture_social_executions.py`
-  - Next: Add one of LILYROO_EXECUTOR_BEARER_TOKEN, EXECUTOR_BEARER_TOKEN, LILYROO_ADMIN_PASSWORD, ADMIN_PASSWORD to /home/runner/work/lilyrooartist.github.io/secrets/social_api.env.
+  - Next: Run the verification command and refresh admin evidence.
 - **Instagram business account** - `missing_local_input`
   - Required all: IG_BUSINESS_ACCOUNT_ID
   - Unblocks: Instagram executor rows after the Worker secret is pushed and readiness is recaptured.
@@ -50,8 +50,8 @@ Generated: 2026-07-01T21:51:44.007286Z
     - `python3 scripts/refresh_promo_admin.py`
   - If it fails: Connect the Lily Roo Instagram Business/Creator account to the Lily Roo Facebook Page, then rerun the resolver.
   - Verify: `python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM`
-  - Next: Add META_LONG_LIVED_TOKEN, FB_PAGE_ID to /home/runner/work/lilyrooartist.github.io/secrets/social_api.env, then run python3 scripts/resolve_instagram_business_account.py.
-- **TikTok OAuth app values** - `missing_local_input`
+  - Next: Add META_LONG_LIVED_TOKEN, FB_PAGE_ID to /private/tmp/secrets/social_api.env, then run python3 scripts/resolve_instagram_business_account.py.
+- **TikTok OAuth app values** - `ready`
   - Required all: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REDIRECT_URI
   - Unblocks: TikTok OAuth authorization URL generation and authorization-code exchange.
   - Credential priority: second
@@ -66,8 +66,8 @@ Generated: 2026-07-01T21:51:44.007286Z
     - `python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload`
   - If it fails: If TikTok rejects the redirect, update either the developer portal or TIKTOK_REDIRECT_URI so both strings match exactly.
   - Verify: `python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload`
-  - Next: Add TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REDIRECT_URI to /home/runner/work/lilyrooartist.github.io/secrets/social_api.env.
-- **TikTok upload-mode worker secrets** - `missing_local_input`
+  - Next: Run the verification command and refresh admin evidence.
+- **TikTok upload-mode worker secrets** - `ready`
   - Required all: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN
   - Unblocks: TikTok upload-draft automation for the first ready TikTok asset.
   - Credential priority: after_oauth
@@ -86,7 +86,7 @@ Generated: 2026-07-01T21:51:44.007286Z
     - `python3 scripts/refresh_promo_admin.py`
   - If it fails: Regenerate the authorization URL and exchange the code immediately; TikTok authorization codes are short-lived.
   - Verify: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
-  - Next: Add TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN to /home/runner/work/lilyrooartist.github.io/secrets/social_api.env.
+  - Next: Run the verification command and refresh admin evidence.
 - **Facebook Page identity checkpoint** - `external_action_needed`
   - Unblocks: The Facebook executor row blocked by Meta identity confirmation.
   - Credential priority: manual_checkpoint

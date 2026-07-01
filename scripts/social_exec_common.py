@@ -188,7 +188,7 @@ def append_published_log(platform: str, posted_url: str, song: str, text: str, n
     from datetime import datetime
     import csv as _csv
     with PUBLISHED_LOG.open('a', newline='', encoding='utf-8') as f:
-        writer = _csv.DictWriter(f, fieldnames=fieldnames)
+        writer = _csv.DictWriter(f, fieldnames=fieldnames, lineterminator='\n')
         if not file_exists:
             writer.writeheader()
         combined = ' '.join(x for x in [text, posted_url] if x)

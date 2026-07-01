@@ -1,6 +1,6 @@
 # Platform Repair Status - Lily Roo
 
-Generated: 2026-07-01T21:51:43.085129Z
+Generated: 2026-07-01T21:59:13.948870Z
 
 ## Summary
 - Platform fixes: **5**
@@ -51,7 +51,7 @@ Generated: 2026-07-01T21:51:43.085129Z
 - **TikTok** (`FP-AUTO-279`)
   - Status: `blocked`; reason: `tiktok_public_posting_not_approved`
   - Repair: TikTok direct public posting approval is false, but upload-draft mode can proceed after credentials. Complete TikTok OAuth setup, push upload-mode secrets, then refresh Admin.
-  - Setup preflight: `blocked`; blocked checks: `5`
+  - Setup preflight: `blocked`; blocked checks: `1`
   - Rebuild setup preflight: `python3 scripts/build_tiktok_setup_preflight.py`
   - Preflight report: `admin/reports/tiktok-setup-preflight.md`
   - Checklist:
@@ -64,7 +64,7 @@ Generated: 2026-07-01T21:51:43.085129Z
 - **TikTok** (`FP-AUTO-284`)
   - Status: `blocked`; reason: `tiktok_public_posting_not_approved`
   - Repair: TikTok direct public posting approval is false, but upload-draft mode can proceed after credentials. Complete TikTok OAuth setup, push upload-mode secrets, then refresh Admin.
-  - Setup preflight: `blocked`; blocked checks: `5`
+  - Setup preflight: `blocked`; blocked checks: `1`
   - Rebuild setup preflight: `python3 scripts/build_tiktok_setup_preflight.py`
   - Preflight report: `admin/reports/tiktok-setup-preflight.md`
   - Checklist:

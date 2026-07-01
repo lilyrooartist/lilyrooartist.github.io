@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-01T21:51:44.048631Z",
+  "generated_at": "2026-07-01T21:59:15.000498Z",
   "safe_mode": true,
   "source": {
     "workflow": ".github/workflows/promo-admin-refresh.yml",
@@ -32,7 +32,7 @@
     "story_queued_future_count": 0,
     "platform_repair_blocked_count": 5,
     "blocker_input_status": "missing_local_input",
-    "blocker_input_missing_count": 4,
+    "blocker_input_missing_count": 1,
     "blocker_input_external_action_count": 1,
     "help_needed_count": 5,
     "next_action": "Resolve the platform repair checklist before expecting full auto-post coverage."
@@ -41,14 +41,14 @@
     {
       "label": "Scheduled refresh workflow",
       "status": "ready",
-      "detail": "17 */6 * * *; latest run in_progress / pending",
+      "detail": "17 */6 * * *; latest run completed / success",
       "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28550104089",
       "next_action": ""
     },
     {
       "label": "Safe admin refresh",
       "status": "ready",
-      "detail": "11 refresh commands captured at 2026-07-01T21:51:42.111729Z",
+      "detail": "11 refresh commands captured at 2026-07-01T21:59:12.673154Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": ""
     },
@@ -83,14 +83,14 @@
     {
       "label": "Blocker input readiness",
       "status": "blocked",
-      "detail": "0 ready; 4 missing local input; 1 external action needed",
+      "detail": "3 ready; 1 missing local input; 1 external action needed",
       "evidence": "data/social_blocker_input_status.json",
-      "next_action": "Add one of LILYROO_EXECUTOR_BEARER_TOKEN, EXECUTOR_BEARER_TOKEN, LILYROO_ADMIN_PASSWORD, ADMIN_PASSWORD to /home/runner/work/lilyrooartist.github.io/secrets/social_api.env."
+      "next_action": "Add META_LONG_LIVED_TOKEN, FB_PAGE_ID to /private/tmp/secrets/social_api.env, then run python3 scripts/resolve_instagram_business_account.py."
     },
     {
       "label": "Story throughput",
       "status": "ready",
-      "detail": "6 tracked; 0 queued; 1 past due without URL",
+      "detail": "6 tracked; 0 queued; 0 past due without URL",
       "evidence": "data/story_throughput_tracking.json",
       "next_action": "Export social executions after scheduled post times, then log public URLs and results."
     }

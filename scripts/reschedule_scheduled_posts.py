@@ -47,9 +47,9 @@ def load_published_ids() -> set[str]:
         reader = csv.DictReader(handle)
         for row in reader:
             content_id = (row.get("content_id") or "").strip()
-            if content_id.startswith("FP-AUTO-"):
+            if content_id.startswith("FP-"):
                 ids.add(content_id)
-            for match in re.findall(r"\bqueue_id=(FP-AUTO-\d+)\b", row.get("notes") or ""):
+            for match in re.findall(r"\bqueue_id=(FP-[A-Z0-9-]+)\b", row.get("notes") or ""):
                 ids.add(match)
     return ids
 

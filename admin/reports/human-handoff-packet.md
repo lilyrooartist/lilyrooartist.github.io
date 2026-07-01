@@ -1,17 +1,17 @@
 # Human Handoff Packet - Lily Roo
 
-Generated: 2026-07-01T21:51:43.273781Z
+Generated: 2026-07-01T21:59:14.130594Z
 
 ## Summary
 - Open handoff tasks: **8**
-- Tod-owned tasks: **7**
-- External/platform-gated tasks: **1**
+- Tod-owned tasks: **8**
+- External/platform-gated tasks: **0**
 - High urgency tasks: **6**
 - Low urgency tasks: **2**
 
 ## Action Docket
-- Ready steps: **1**
-- Blocked steps: **2**
+- Ready steps: **2**
+- Blocked steps: **1**
 - Manual posts packaged: **0**
 - Manual metric fields: **6**
 - Resolution worksheet: `data/human_handoff_resolution_worksheet.csv` (8 row(s))
@@ -51,16 +51,24 @@ Generated: 2026-07-01T21:51:43.273781Z
   - Completion evidence: data/manual_metric_collection_packet.json should reduce pending_field_count, and data/metrics_history.json should preserve the imported metrics in the latest snapshot.
   - Next after apply: Rebuild the weekly report and confirm lilyroo.com/admin shows fewer pending manual metric fields.
   - Guardrail: Import only collected numeric values; leave unknown cells blank.
-- **Reschedule approved backlog after blockers clear** (`blocked`)
-  - Owner: `external_platform`; tasks: **1**; blockers resolved: **28**
-  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00+00:00' --spacing-hours 24`
-  - Sequence preview: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00+00:00' --spacing-hours 24`
+- **Reschedule approved backlog after blockers clear** (`ready`)
+  - Owner: `tod`; tasks: **1**; blockers resolved: **8**
+  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24`
+  - Apply after review: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin`
+  - Sequence preview: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24`
+  - Sequence apply_after_review: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin`
   - Sequence verify: `python3 scripts/refresh_promo_admin.py`
   - Completion evidence: data/backlog_reschedule_preview.json should show normal_apply_gate clear before any non-override apply command is exposed.
   - Next after apply: Refresh admin and confirm approved past-due posts have future scheduled_at values before relying on the scheduler.
   - Guardrail: Normal apply stays hidden until known executor/platform blockers clear.
 
 ## Tasks
+- **Preview approved backlog reschedule** (`backlog-reschedule`)
+  - Phase: `Backlog recovery`; owner: `tod`; status: `ready_to_preview`; urgency: `high`
+  - Detail: Preview a new schedule for approved past-due posts.
+  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24`
+  - Apply after review: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin`
+  - Guardrail: Normal apply stays hidden until known executor/platform blockers clear.
 - **Repair Instagram executor** (`platform-setup-FP-AUTO-272`)
   - Phase: `Platform setup`; owner: `tod`; status: `blocked`; urgency: `high`
   - Detail: Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.
@@ -86,11 +94,6 @@ Generated: 2026-07-01T21:51:43.273781Z
   - Detail: TikTok direct public posting approval is false, but upload-draft mode can proceed after credentials. Complete TikTok OAuth setup, push upload-mode secrets, then refresh Admin.
   - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
   - Guardrail: Run the TikTok preflight before pushing secrets; push upload-mode secrets only after local OAuth setup is complete. Keep direct public posting blocked until approval is confirmed.
-- **Preview approved backlog reschedule** (`backlog-reschedule`)
-  - Phase: `Backlog recovery`; owner: `external_platform`; status: `blocked`; urgency: `high`
-  - Detail: Known executor/platform blockers must clear before normal apply.
-  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00+00:00' --spacing-hours 24`
-  - Guardrail: Normal apply stays hidden until known executor/platform blockers clear.
 - **Fill priority 2 metrics: Recent discovery and traffic** (`manual-metrics-priority-2`)
   - Phase: `Manual metrics`; owner: `tod`; status: `needs_values`; urgency: `low`
   - Detail: Collect 4 field(s) across facebook, instagram, tiktok, x, fill the worksheet rows, preview import, then refresh Admin.

@@ -1,12 +1,12 @@
 # Experiment Result Collection - Lily Roo
 
-Generated: 2026-07-01T21:51:43.870671Z
+Generated: 2026-07-01T21:59:14.832494Z
 
 ## Summary
 - Experiment count: **3**
-- Published experiment posts: **16**
-- Missing published log posts: **10**
-- Pending result fields: **83**
+- Published experiment posts: **18**
+- Missing published log posts: **7**
+- Pending result fields: **95**
 - Ready to import: **0**
 - Entry CSV: `data/experiment_result_entry_template.csv`
 - Wide entry CSV: `data/experiment_result_entry_wide_template.csv`
@@ -24,12 +24,9 @@ Generated: 2026-07-01T21:51:43.870671Z
 - Fill only metrics visible in the platform analytics surface.
 
 ## Missing Published Log Rows
-- `FP-AUTO-258` (Release-art image + story hook): Publish or log the public URL before result metrics can be collected.
-- `FP-AUTO-263` (Release-art image + story hook): Publish or log the public URL before result metrics can be collected.
 - `FP-PLAN-TWELVE-DOLLARS-INSTAGRAM` (Release-art image + story hook): Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-267` (Release-art image + story hook): Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-272` (Release-art image + story hook): Publish or log the public URL before result metrics can be collected.
-- `FP-AUTO-264` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-269` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-274` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-279` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
@@ -61,4 +58,4 @@ Generated: 2026-07-01T21:51:43.870671Z
 - `FP-PLAN-TWELVE-DOLLARS-FACEBOOK` Facebook `subs_delta` from row 37: Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594247249470 and record subs_delta.
 - `FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK` X `views` from row 23: Open X analytics for https://x.com/i/web/status/2069786481556635841 and record views.
 - `FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK` X `likes` from row 23: Open X analytics for https://x.com/i/web/status/2069786481556635841 and record likes.
-- ...and 58 more rows in `data/experiment_result_entry_template.csv`.
+- ...and 70 more rows in `data/experiment_result_entry_template.csv`.
