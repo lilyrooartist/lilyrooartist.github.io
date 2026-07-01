@@ -1,14 +1,14 @@
 # TikTok Setup Preflight - Lily Roo
 
-Generated: 2026-07-01T06:31:43.527401Z
+Generated: 2026-07-01T21:51:43.040340Z
 
 ## Summary
 - Status: **blocked**
 - Posting mode: **api**
 - API strategy confirmed: **True**
 - Checks: **12**
-- Blocked checks: **1**
-- Ready to push worker secrets: **True**
+- Blocked checks: **5**
+- Ready to push worker secrets: **False**
 - Ready to upload inbox drafts: **False**
 - Ready to post publicly: **False**
 - Local posting helper uses refresh token: **True**
@@ -29,10 +29,20 @@ Generated: 2026-07-01T06:31:43.527401Z
 ## What We Need From Tod
 - Status: **blocked_until_user_input**
 - Answer: Yes, fix the TikTok connector after the current manual YouTube evidence loop; it unlocks the short-video growth format.
-- Needed inputs: **1**
-- Next safe action: `python3 scripts/set_tiktok_public_posting_approval.py --approved`
+- Needed inputs: **3**
+- Next safe action: `python3 scripts/tiktok_oauth_handoff.py`
 - First growth row unblocked: `FP-AUTO-264`
 - Format unblocked: Short video clip + platform-native CTA
+- **Add Lily Roo TikTok developer app values locally.** (`tiktok_developer_app_credentials`)
+  - Values needed: `TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REDIRECT_URI, TIKTOK_REFRESH_TOKEN`
+  - Safe storage: `secrets/social_api.env`
+  - Why: The connector cannot generate an OAuth URL, exchange a code, or refresh TikTok access without these app values.
+  - Next command: `python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload`
+- **Authorize the Lily Roo TikTok account after the OAuth URL is generated.** (`authorize_lily_roo_tiktok_account`)
+  - Values needed: `short-lived TikTok authorization code`
+  - Safe storage: `secrets/social_api.env`
+  - Why: The refresh token is created only after the Lily Roo account authorizes the app with the requested scopes.
+  - Next command: `python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode upload`
 - **Confirm whether Lily Roo TikTok has public Content Posting API approval and PUBLIC_TO_EVERYONE posting is allowed.** (`public_posting_approval`)
   - Values needed: `TIKTOK_PUBLIC_POSTING_APPROVED=true confirmation`
   - Safe storage: `Worker variable via guarded approval helper`
@@ -61,7 +71,7 @@ Generated: 2026-07-01T06:31:43.527401Z
   - `refresh_admin_evidence`: after credentials or Worker state changes -> `python3 scripts/refresh_promo_admin.py`
 
 ## Credential Handoff
-- Status: **ready_to_push**
+- Status: **needs_local_values**
 - Required names: `TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN`
 - Handoff template: `data/tiktok_secret_handoff_template.env`
 - OAuth helper: `scripts/tiktok_oauth_handoff.py`
@@ -70,12 +80,12 @@ Generated: 2026-07-01T06:31:43.527401Z
 - Scope strategy: Request only video.upload for the first inbox-draft connector path; add video.publish only after direct public posting approval exists.
 - Local secret env: `secrets/social_api.env`
 - Local secret env prepared: **True**
-- Runtime local env file exists: **True**
+- Runtime local env file exists: **False**
 - Local handoff marker: `data/tiktok_local_handoff_status.json`
 - Initialize local secret env: `not needed`
-- Missing locally: `none`
-- Missing for auth URL: `none`
-- Missing for token exchange: `none`
+- Missing locally: `TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN`
+- Missing for auth URL: `TIKTOK_CLIENT_KEY, TIKTOK_REDIRECT_URI`
+- Missing for token exchange: `TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REDIRECT_URI`
 - Missing in worker: `none`
 - Brand content disclosure: **False**
 - Worker posting mode: **direct**
@@ -85,7 +95,7 @@ Generated: 2026-07-01T06:31:43.527401Z
 - OAuth auth URL: `python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload`
 - OAuth code exchange: `python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode upload`
 - Dry-run first: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
-- Apply upload-mode secrets after review: `python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py`
+- Apply upload-mode secrets after review: `not available until local secrets exist`
 - Public posting approval preview: `python3 scripts/set_tiktok_public_posting_approval.py --approved`
 - Public posting approval apply: `not available until local approval is confirmed`
 - Public posting approval deploy: `not available until local approval is confirmed`
@@ -102,18 +112,18 @@ Generated: 2026-07-01T06:31:43.527401Z
 
 ## Checks
 - **local_secret_env_file**: `pass`
-  - Local secret env exists at secrets/social_api.env.
-- **oauth_authorization_url**: `pass`
-  - TikTok OAuth authorization URL can be generated locally.
+  - Local secret env handoff is initialized at secrets/social_api.env; this runtime cannot inspect the local file.
+- **oauth_authorization_url**: `blocked`
+  - secrets/social_api.env is missing auth URL values: TIKTOK_CLIENT_KEY, TIKTOK_REDIRECT_URI.
   - Command: `python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload`
-- **oauth_token_exchange**: `pass`
-  - TikTok OAuth authorization codes can be exchanged locally.
+- **oauth_token_exchange**: `blocked`
+  - secrets/social_api.env is missing token exchange values: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REDIRECT_URI.
   - Command: `python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode upload`
-- **local_refresh_credentials**: `pass`
-  - Local refresh credentials are present.
+- **local_refresh_credentials**: `blocked`
+  - secrets/social_api.env is missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.
   - Command: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
-- **local_posting_token_path**: `pass`
-  - Local TikTok posting helper can use an existing access token.
+- **local_posting_token_path**: `blocked`
+  - Local TikTok posting helper needs TIKTOK_ACCESS_TOKEN or refresh credentials.
   - Command: `python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --dry-run`
 - **worker_refresh_credentials**: `pass`
   - Worker readiness reports TikTok refresh credentials present.
@@ -140,7 +150,7 @@ Generated: 2026-07-01T06:31:43.527401Z
 - Exchange OAuth code after authorization: `python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode upload`
 - Preview local secrets: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
 - Preview inbox draft upload: `python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run`
-- Push after local credentials are present: `python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py`
+- Push after local credentials are present: `not available until local secrets exist`
 - Preview public posting approval flag: `python3 scripts/set_tiktok_public_posting_approval.py --approved`
 - Apply public posting approval flag: `not available until local approval is confirmed`
 - Deploy public posting approval flag: `not available until local approval is confirmed`

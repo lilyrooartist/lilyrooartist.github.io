@@ -1,11 +1,11 @@
 # Story Throughput Tracking - Lily Roo
 
-Generated: 2026-07-01T06:31:44.175768Z
+Generated: 2026-07-01T21:51:43.961528Z
 
 ## Summary
 - Story posts scheduled: **6**
-- Queued future: **1**
-- Past due without public URL: **0**
+- Queued future: **0**
+- Past due without public URL: **1**
 - Logged, waiting results: **5**
 - Measured: **0**
 - Platforms: **Facebook, X**
@@ -42,9 +42,9 @@ Generated: 2026-07-01T06:31:44.175768Z
   - First measurement due: `2026-07-02T00:00:00+00:00`
   - Next: Collect first result metrics after the measurement window and import them with evidence notes.
 - **FP-STORY-I-LEARNED-IT-ALL-IN-FIFTEEN-SECONDS-FACEBOOK-ARCHIVE-CTA** - Facebook / I Learned It All in Fifteen Seconds
-  - Status: `queued_future`; scheduled: `2026-07-01T11:20:00-04:00`
+  - Status: `past_due_unlogged`; scheduled: `2026-07-01T11:20:00-04:00`
   - First measurement due: `2026-07-02T15:20:00+00:00`
-  - Next: Wait for the scheduler to publish the row, then export social executions and log the public URL.
+  - Next: Run social execution capture/export to confirm whether the post published and log the public URL.
 
 ## Guardrails
 - This packet is read-only; it does not publish, approve, or log URLs.

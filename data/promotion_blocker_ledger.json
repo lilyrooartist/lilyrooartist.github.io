@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-01T06:31:43.645621Z",
+  "generated_at": "2026-07-01T21:51:43.225326Z",
   "safe_mode": true,
   "summary": {
     "open_blocker_count": 9,
@@ -73,7 +73,7 @@
         "phase": "Reschedule approved past-due backlog",
         "status": "blocked_until_clearance_steps_complete",
         "owner": "external_platform",
-        "blockers_resolved": 27,
+        "blockers_resolved": 28,
         "unlocks": [
           "Approved past-due queue rows get a fresh schedule after executor blockers clear."
         ],
@@ -84,7 +84,7 @@
           "FP-AUTO-282",
           "FP-AUTO-284"
         ],
-        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
+        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00+00:00' --spacing-hours 24",
         "apply_command": "",
         "source_path": "data/backlog_reschedule_preview.json"
       },
@@ -203,9 +203,9 @@
       "status": "blocked",
       "platform": "",
       "release": "",
-      "evidence": "27 approved backlog row(s); 5 still have executor blockers.",
+      "evidence": "28 approved backlog row(s); 5 still have executor blockers.",
       "next_step": "Preview a new schedule. Safe apply becomes available after known executor blockers clear.",
-      "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
+      "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00+00:00' --spacing-hours 24",
       "apply_command": "",
       "source_path": "data/backlog_reschedule_preview.json",
       "external_url": "",
@@ -213,15 +213,15 @@
       "impact": {
         "kind": "backlog_reschedule_gate",
         "apply_allowed_without_override": false,
-        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
+        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
         "backlog_clearance_manifest": {
           "status": "blocked_until_clearance_steps_complete",
-          "approved_backlog_count": 27,
+          "approved_backlog_count": 28,
           "blocked_backlog_count": 5,
-          "clear_to_apply_count": 22,
+          "clear_to_apply_count": 23,
           "partial_clear_apply_available": true,
-          "partial_clear_apply_count": 22,
+          "partial_clear_apply_count": 23,
           "blocked_ids": [
             "FP-AUTO-272",
             "FP-AUTO-277",
@@ -229,10 +229,10 @@
             "FP-AUTO-282",
             "FP-AUTO-284"
           ],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00+00:00' --spacing-hours 24",
           "safe_apply_command": "",
-          "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-          "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
+          "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+          "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00+00:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
           "apply_allowed_without_override": false,
           "apply_gate": "blocked_until_clearance_steps_complete",
           "clearance_steps": [
@@ -247,7 +247,7 @@
               "song": "Every Pearl in Carmel",
               "blocker_kind": "instagram_business_account_unresolved",
               "blocker_reason": "instagram_business_account_unresolved",
-              "proposed_scheduled_at": "2026-07-19T10:00:00-04:00",
+              "proposed_scheduled_at": "2026-07-19T10:00:00+00:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]
@@ -258,7 +258,7 @@
               "song": "The Other One's Charging",
               "blocker_kind": "instagram_business_account_unresolved",
               "blocker_reason": "instagram_business_account_unresolved",
-              "proposed_scheduled_at": "2026-07-22T10:00:00-04:00",
+              "proposed_scheduled_at": "2026-07-22T10:00:00+00:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]
@@ -269,7 +269,7 @@
               "song": "The Other One's Charging",
               "blocker_kind": "tiktok_public_posting_not_approved",
               "blocker_reason": "tiktok_public_posting_not_approved",
-              "proposed_scheduled_at": "2026-07-23T10:00:00-04:00",
+              "proposed_scheduled_at": "2026-07-23T10:00:00+00:00",
               "clearance_steps": [
                 "Keep direct public posting blocked until TikTok public-posting approval is confirmed; upload mode can still create inbox drafts after credentials.",
                 "Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair."
@@ -281,7 +281,7 @@
               "song": "Twelve Dollars",
               "blocker_kind": "instagram_business_account_unresolved",
               "blocker_reason": "instagram_business_account_unresolved",
-              "proposed_scheduled_at": "2026-07-25T10:00:00-04:00",
+              "proposed_scheduled_at": "2026-07-25T10:00:00+00:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]
@@ -292,7 +292,7 @@
               "song": "Twelve Dollars",
               "blocker_kind": "tiktok_public_posting_not_approved",
               "blocker_reason": "tiktok_public_posting_not_approved",
-              "proposed_scheduled_at": "2026-07-26T10:00:00-04:00",
+              "proposed_scheduled_at": "2026-07-26T10:00:00+00:00",
               "clearance_steps": [
                 "Keep direct public posting blocked until TikTok public-posting approval is confirmed; upload mode can still create inbox drafts after credentials.",
                 "Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair."

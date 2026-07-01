@@ -1,26 +1,25 @@
 # Posting Automation Status - Lily Roo
 
-Generated: 2026-07-01T06:31:44.234121Z
+Generated: 2026-07-01T21:51:44.048631Z
 
 ## Summary
 - Status: **blocked**
-- Lanes ready: **4 / 8**
+- Lanes ready: **5 / 8**
 - Blocked lanes: **3**
-- Needs attention: **1**
+- Needs attention: **0**
 - Story posts tracked: **6**
 - Help-needed items: **5**
 - Next action: Resolve the platform repair checklist before expecting full auto-post coverage.
 
 ## Automation Lanes
-- **Scheduled refresh workflow** - `needs_attention`
-  - Detail: 17 */6 * * *; latest run completed / failure
-  - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28494471432
-  - Next: Confirm the GitHub Actions workflow is enabled and has a successful run.
+- **Scheduled refresh workflow** - `ready`
+  - Detail: 17 */6 * * *; latest run in_progress / pending
+  - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28550104089
 - **Safe admin refresh** - `ready`
-  - Detail: 11 refresh commands captured at 2026-07-01T06:31:42.534558Z
+  - Detail: 11 refresh commands captured at 2026-07-01T21:51:42.111729Z
   - Evidence: data/promo_admin_refresh_run.json
 - **Scheduler dry-run authentication** - `ready`
-  - Detail: HTTP 200 using bearer auth; due=30 would_post=0
+  - Detail: HTTP 200 using bearer auth; due=31 would_post=0
   - Evidence: data/social_scheduler_dry_run.json
 - **Execution capture** - `ready`
   - Detail: posted=5 attention=6 platform_fix_needed=5
@@ -34,11 +33,11 @@ Generated: 2026-07-01T06:31:44.234121Z
   - Evidence: data/tiktok_setup_preflight.json
   - Next: Add TikTok OAuth credentials and rerun the upload-mode dry run.
 - **Blocker input readiness** - `blocked`
-  - Detail: 3 ready; 1 missing local input; 1 external action needed
+  - Detail: 0 ready; 4 missing local input; 1 external action needed
   - Evidence: data/social_blocker_input_status.json
-  - Next: Add META_LONG_LIVED_TOKEN, FB_PAGE_ID to /private/tmp/secrets/social_api.env, then run python3 scripts/resolve_instagram_business_account.py.
+  - Next: Add one of LILYROO_EXECUTOR_BEARER_TOKEN, EXECUTOR_BEARER_TOKEN, LILYROO_ADMIN_PASSWORD, ADMIN_PASSWORD to /home/runner/work/lilyrooartist.github.io/secrets/social_api.env.
 - **Story throughput** - `ready`
-  - Detail: 6 tracked; 1 queued; 0 past due without URL
+  - Detail: 6 tracked; 0 queued; 1 past due without URL
   - Evidence: data/story_throughput_tracking.json
   - Next: Export social executions after scheduled post times, then log public URLs and results.
 

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-01T06:31:44.175768Z",
+  "generated_at": "2026-07-01T21:51:43.961528Z",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -7,8 +7,8 @@
   },
   "summary": {
     "story_post_count": 6,
-    "queued_future_count": 1,
-    "past_due_unlogged_count": 0,
+    "queued_future_count": 0,
+    "past_due_unlogged_count": 1,
     "logged_waiting_results_count": 5,
     "measured_count": 0,
     "platforms": [
@@ -97,12 +97,12 @@
       "song": "I Learned It All in Fifteen Seconds",
       "scheduled_at": "2026-07-01T11:20:00-04:00",
       "post_type": "text",
-      "status": "queued_future",
+      "status": "past_due_unlogged",
       "public_url": "",
       "published_log_row": "",
       "measurement_due_at": "2026-07-02T15:20:00+00:00",
       "result_values": {},
-      "next_action": "Wait for the scheduler to publish the row, then export social executions and log the public URL.",
+      "next_action": "Run social execution capture/export to confirm whether the post published and log the public URL.",
       "copy": "I Learned It All in Fifteen Seconds is live in the Lily Roo archive. The archive version is live now."
     }
   ]

@@ -1,12 +1,12 @@
 # Promo Unlock Sequence - Lily Roo
 
-Generated: 2026-07-01T06:31:43.963302Z
+Generated: 2026-07-01T21:51:43.668827Z
 
 ## Summary
 - Steps: **4**
 - Ready for human review: **0**
 - Blocked or warning: **4**
-- Projected resolution units across sequence: **35**
+- Projected resolution units across sequence: **36**
 - Current step: `unlock-manual-metrics` (`blocked_until_input`)
 - Open blockers still tracked: **9**
 
@@ -24,7 +24,7 @@ Generated: 2026-07-01T06:31:43.963302Z
    - State: `preview_ready_with_blocker_warning`; owner: `external_platform`
    - Reason: Preview ran, but the output still names a known blocker.
    - Unlocks: Approved past-due queue rows get a fresh schedule after executor blockers clear.
-   - preview (preview-safe): `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24`
+   - preview (preview-safe): `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00+00:00' --spacing-hours 24`
    - Completion evidence: data/backlog_reschedule_preview.json should show normal_apply_gate clear before any non-override apply command is exposed.
    - Guardrail: Normal apply stays hidden until known executor/platform blockers clear.
 4. **Fill manual metric worksheet** - `unlock-manual-metrics`
