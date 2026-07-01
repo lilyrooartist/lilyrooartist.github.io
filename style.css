@@ -182,6 +182,18 @@ main {
   gap: 0.8rem;
 }
 
+.podcast-hero .hero-actions {
+  flex-wrap: nowrap;
+  gap: 0.45rem;
+}
+
+.podcast-hero .hero-actions .btn {
+  padding: 0.58rem 0.64rem;
+  font-size: 0.62rem;
+  letter-spacing: 0.055em;
+  white-space: nowrap;
+}
+
 .btn {
   display: inline-block;
   text-decoration: none;
@@ -1008,5 +1020,18 @@ main {
 
   .show-list li {
     flex-direction: column;
+  }
+}
+
+@media (max-width: 640px) {
+  .podcast-hero .hero-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+  }
+
+  .podcast-hero .hero-actions .btn {
+    width: 100%;
+    text-align: center;
   }
 }

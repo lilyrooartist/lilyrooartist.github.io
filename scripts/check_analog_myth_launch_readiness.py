@@ -56,14 +56,14 @@ LIVE_URLS = [
 ]
 LIVE_HTML_MARKERS = {
     "https://www.lilyroo.com/": (
-        ("Homepage launch stylesheet", "style.css?v=20260627-analog-myth-launch"),
+        ("Homepage launch stylesheet", "style.css?v=20260701-podcast-nav"),
         ("Homepage album CTA", "/analog-myth.html"),
         ("Homepage podcast CTA", "/podcasts/analog-myth.html"),
         ("Homepage podcast audio", "assets/podcasts/analog-myth/analog-myth-the-clock-cannot-explain-this.m4a"),
         ("Homepage podcast YouTube URL", PODCAST_YOUTUBE_URL),
     ),
     "https://www.lilyroo.com/analog-myth.html": (
-        ("Album page launch stylesheet", "style.css?v=20260627-analog-myth-launch"),
+        ("Album page launch stylesheet", "style.css?v=20260701-podcast-nav"),
         ("Album page release hub", "https://distrokid.com/hyperfollow/lilyroo/analog-myth"),
         ("Album page podcast CTA", "/podcasts/analog-myth.html"),
         ("Album page podcast audio", "assets/podcasts/analog-myth/analog-myth-the-clock-cannot-explain-this.m4a"),
