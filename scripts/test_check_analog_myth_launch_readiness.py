@@ -27,6 +27,14 @@ def write_snapshot(root: Path, name: str, url: str) -> None:
     (root / name).write_text(json.dumps({"ok": True, "release_url": url}), encoding="utf-8")
 
 
+def write_hyperfollow_snapshot(root: Path, url: str) -> None:
+    root.mkdir(parents=True, exist_ok=True)
+    (root / "hyperfollow_store_links_snapshot.json").write_text(
+        json.dumps({"ok": True, "links": [{"store": "spotify", "url": url}]}),
+        encoding="utf-8",
+    )
+
+
 def write_store_run(path: Path, retry_command: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(
@@ -151,6 +159,22 @@ class AnalogMythReadinessTest(unittest.TestCase):
             snapshot_root = tmp_root / "snapshots"
             write_social_pack(pack, SPOTIFY_URL)
             write_snapshot(snapshot_root, "spotify_release_snapshot.json", SPOTIFY_URL)
+            with (
+                mock.patch.object(readiness, "ROOT", tmp_root),
+                mock.patch.object(readiness, "SOCIAL_LAUNCH_PACK", pack),
+                mock.patch.object(readiness, "STORE_SNAPSHOT_ROOT", snapshot_root),
+            ):
+                results: list[dict] = []
+                readiness.check_social_launch_pack(results, require_store_links=True)
+        self.assertTrue(all(result["ok"] for result in results), results)
+
+    def test_social_launch_pack_accepts_hyperfollow_verified_spotify_url(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_root = Path(tmp)
+            pack = tmp_root / "social/analog_myth_launch_posts.md"
+            snapshot_root = tmp_root / "snapshots"
+            write_social_pack(pack, SPOTIFY_URL)
+            write_hyperfollow_snapshot(snapshot_root, SPOTIFY_URL)
             with (
                 mock.patch.object(readiness, "ROOT", tmp_root),
                 mock.patch.object(readiness, "SOCIAL_LAUNCH_PACK", pack),

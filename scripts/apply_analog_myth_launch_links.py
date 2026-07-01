@@ -23,6 +23,9 @@ EXPECTED_SPOTIFY_ARTIST = "Lily Roo"
 EXPECTED_RELEASE_TITLE = "Analog Myth"
 EXPECTED_ARTIST = "Lily Roo"
 SPOTIFY_OEMBED_URL = "https://open.spotify.com/oembed"
+KNOWN_ANALOG_MYTH_SPOTIFY_URLS = {
+    "https://open.spotify.com/album/6Ujyp8tXa5UxheJJC2B6kL",
+}
 EXPECTED_FILES = {
     "index.html",
     "analog-myth.html",
@@ -46,6 +49,16 @@ def snapshot_release_url(path: Path) -> str:
     payload = read_json(path)
     if payload.get("ok") and payload.get("release_url"):
         return str(payload["release_url"])
+    return ""
+
+
+def hyperfollow_release_url(verification_root: Path, store: str) -> str:
+    payload = read_json(verification_root / "hyperfollow_store_links_snapshot.json")
+    if not payload.get("ok"):
+        return ""
+    for link in payload.get("links") or []:
+        if link.get("store") == store and link.get("url"):
+            return str(link["url"])
     return ""
 
 
@@ -311,6 +324,12 @@ def update_album_page(text: str, spotify_url: str, apple_music_url: str, youtube
     block = f'        <div class="panel-actions launch-store-links">\n          {store_links.replace(chr(10), chr(10) + "          ")}\n        </div>\n'
     if "launch-store-links" not in text:
         text = text.replace(prelaunch_copy, f"{launch_copy}\n{block}", 1)
+    else:
+        anchor = f'          <a class="btn btn-ghost" href="{spotify_url}" target="_blank" rel="noopener">Listen on Spotify</a>'
+        if apple_music_url:
+            text = add_optional_button(anchor, f'          <a class="btn btn-ghost" href="{apple_music_url}" target="_blank" rel="noopener">Apple Music</a>', text)
+        if youtube_music_url:
+            text = add_optional_button(anchor, f'          <a class="btn btn-ghost" href="{youtube_music_url}" target="_blank" rel="noopener">YouTube Music</a>', text)
     return text
 
 
@@ -458,6 +477,11 @@ def apply_updates(spotify_url: str, apple_music_url: str, youtube_music_url: str
         path = ROOT / relative
         before = path.read_text(encoding="utf-8")
         after = updater(before, spotify_url, apple_music_url, youtube_music_url)
+        if spotify_url not in after:
+            for known_url in KNOWN_ANALOG_MYTH_SPOTIFY_URLS:
+                after = after.replace(known_url, spotify_url)
+            if before != after:
+                after = updater(after, spotify_url, apple_music_url, youtube_music_url)
         if before != after:
             changed[relative] = after
         elif spotify_url not in before:
@@ -485,7 +509,11 @@ def main() -> int:
     manual_spotify_url = bool(args.spotify_url)
     manual_apple_music_url = bool(args.apple_music_url)
     manual_youtube_music_url = bool(args.youtube_music_url)
-    spotify_url = args.spotify_url or snapshot_release_url(verification_root / "spotify_release_snapshot.json")
+    spotify_url = (
+        args.spotify_url
+        or snapshot_release_url(verification_root / "spotify_release_snapshot.json")
+        or hyperfollow_release_url(verification_root, "spotify")
+    )
     apple_music_url = args.apple_music_url or snapshot_release_url(verification_root / "apple_music_release_snapshot.json")
     youtube_music_url = args.youtube_music_url or snapshot_release_url(verification_root / "youtube_music_release_snapshot.json")
 

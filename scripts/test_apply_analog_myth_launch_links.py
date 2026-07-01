@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import copy
 import importlib.util
+import json
 import tempfile
 import unittest
 from pathlib import Path
@@ -68,7 +69,7 @@ class AnalogMythLaunchLinksTest(unittest.TestCase):
         self.assertIn(YOUTUBE_MUSIC_URL, changed["analog-myth.html"])
         combined = "\n".join(changed.values())
         self.assertIn("Analog Myth is live", changed["index.html"])
-        self.assertIn("the eight-song album that is live now", changed["podcasts/feed.xml"])
+        self.assertIn("full album play-through of Analog Myth", changed["podcasts/feed.xml"])
         self.assertIn(f"<lastBuildDate>{BUILD_DATE}</lastBuildDate>", changed["podcasts/feed.xml"])
         self.assertIn("<pubDate>Sat, 27 Jun 2026 14:35:00 GMT</pubDate>", changed["podcasts/feed.xml"])
         self.assertNotIn("arrives July 1", combined)
@@ -87,6 +88,8 @@ class AnalogMythLaunchLinksTest(unittest.TestCase):
                 content = source.read_text(encoding="utf-8")
                 if relative == "press.html":
                     content = content.replace(launch_links.RELEASE_HUB_URL, "https://example.invalid/missing-marker")
+                    for known_url in launch_links.KNOWN_ANALOG_MYTH_SPOTIFY_URLS:
+                        content = content.replace(known_url, "https://example.invalid/missing-marker")
                 target.write_text(content, encoding="utf-8")
 
             with mock.patch.object(launch_links, "ROOT", tmp_root):
@@ -96,6 +99,15 @@ class AnalogMythLaunchLinksTest(unittest.TestCase):
     def test_invalid_spotify_url_is_rejected(self) -> None:
         with self.assertRaises(ValueError):
             launch_links.validate_url("Spotify URL", "https://example.com/not-spotify", r"^https://open\.spotify\.com/album/[A-Za-z0-9]+")
+
+    def test_hyperfollow_release_url_reads_spotify_link(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "hyperfollow_store_links_snapshot.json").write_text(
+                json.dumps({"ok": True, "links": [{"store": "spotify", "url": SPOTIFY_URL}]}),
+                encoding="utf-8",
+            )
+            self.assertEqual(launch_links.hyperfollow_release_url(root, "spotify"), SPOTIFY_URL)
 
     def test_manual_spotify_url_title_validation_accepts_analog_myth(self) -> None:
         with mock.patch.object(launch_links.urllib.request, "urlopen", side_effect=[

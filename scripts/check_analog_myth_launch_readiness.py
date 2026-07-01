@@ -226,6 +226,12 @@ def verified_release_url(snapshot_name: str) -> str:
     payload = read_json(STORE_SNAPSHOT_ROOT / snapshot_name)
     if payload.get("ok") and payload.get("release_url"):
         return str(payload["release_url"])
+    if snapshot_name == "spotify_release_snapshot.json":
+        hyperfollow = read_json(STORE_SNAPSHOT_ROOT / "hyperfollow_store_links_snapshot.json")
+        if hyperfollow.get("ok"):
+            for link in hyperfollow.get("links") or []:
+                if link.get("store") == "spotify" and str(link.get("url", "")).startswith("https://open.spotify.com/album/"):
+                    return str(link["url"])
     return ""
 
 
