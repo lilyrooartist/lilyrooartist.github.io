@@ -1,6 +1,6 @@
 # Backlog Reschedule Preview - Lily Roo
 
-Generated: 2026-07-01T17:59:12.845956-04:00
+Generated: 2026-07-01T18:21:50.418938-04:00
 
 ## Summary
 - Approved backlog rows: **8**
@@ -13,23 +13,23 @@ Generated: 2026-07-01T17:59:12.845956-04:00
 - Normal apply gate: **clear**
 
 ## Proposed Reschedule
-- **Facebook - Twelve Dollars** (`FP-PLAN-TWELVE-DOLLARS-FACEBOOK`)
-  - Current: `2026-06-23T11:20:00-04:00`
+- **X - Analog Myth** (`FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK`)
+  - Current: `2026-06-24T10:15:00-04:00`
   - Proposed: `2026-07-02T10:00:00-04:00`
-- **YouTube - Twelve Dollars** (`FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY`)
-  - Current: `2026-06-24T18:30:00-04:00`
+- **Facebook - Analog Myth** (`FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK`)
+  - Current: `2026-06-25T11:20:00-04:00`
   - Proposed: `2026-07-03T10:00:00-04:00`
-- **X - Twelve Dollars** (`FP-PLAN-TWELVE-DOLLARS-X`)
-  - Current: `2026-06-26T10:00:00+08:00`
+- **YouTube - Analog Myth** (`FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY`)
+  - Current: `2026-06-25T18:30:00-04:00`
   - Proposed: `2026-07-04T10:00:00-04:00`
-- **X - Twelve Dollars** (`FP-STORY-TWELVE-DOLLARS-X-ARCHIVE-CTA`)
-  - Current: `2026-06-26T10:15:00-04:00`
+- **X - Analog Myth** (`FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA`)
+  - Current: `2026-06-28T10:15:00-04:00`
   - Proposed: `2026-07-05T10:00:00-04:00`
-- **Facebook - Twelve Dollars** (`FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA`)
-  - Current: `2026-06-27T11:20:00-04:00`
+- **YouTube - Analog Myth** (`FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA`)
+  - Current: `2026-06-28T18:30:00+08:00`
   - Proposed: `2026-07-06T10:00:00-04:00`
-- **YouTube - Twelve Dollars** (`FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA`)
-  - Current: `2026-06-27T18:30:00+08:00`
+- **Facebook - Analog Myth** (`FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA`)
+  - Current: `2026-06-29T11:20:00-04:00`
   - Proposed: `2026-07-07T10:00:00-04:00`
 - **X - Analog Myth** (`FP-LAUNCH-ANALOG-MYTH-X`)
   - Current: `2026-07-01T00:45:00-04:00`
@@ -48,16 +48,16 @@ Generated: 2026-07-01T17:59:12.845956-04:00
 
 ## Partial Clear Apply
 - Status: **ready**
-- Clear IDs: `FP-PLAN-TWELVE-DOLLARS-FACEBOOK, FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY, FP-PLAN-TWELVE-DOLLARS-X, FP-STORY-TWELVE-DOLLARS-X-ARCHIVE-CTA, FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA, FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA, FP-LAUNCH-ANALOG-MYTH-X, FP-LAUNCH-ANALOG-MYTH-FACEBOOK`
+- Clear IDs: `FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK, FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK, FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY, FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA, FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA, FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA, FP-LAUNCH-ANALOG-MYTH-X, FP-LAUNCH-ANALOG-MYTH-FACEBOOK`
 - Blocked IDs retained: `none`
-- Recommended preview: `python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24`
-- Recommended apply: `python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin`
-- Preview clear row: `python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24`
-- Preview clear row: `python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY --start-at '2026-07-03T10:00:00-04:00' --spacing-hours 24`
-- Preview clear row: `python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-X --start-at '2026-07-04T10:00:00-04:00' --spacing-hours 24`
-- Preview clear row: `python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-TWELVE-DOLLARS-X-ARCHIVE-CTA --start-at '2026-07-05T10:00:00-04:00' --spacing-hours 24`
-- Preview clear row: `python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-06T10:00:00-04:00' --spacing-hours 24`
-- Preview clear row: `python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA --start-at '2026-07-07T10:00:00-04:00' --spacing-hours 24`
+- Recommended preview: `python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24`
+- Recommended apply: `python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin`
+- Preview clear row: `python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24`
+- Preview clear row: `python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-03T10:00:00-04:00' --spacing-hours 24`
+- Preview clear row: `python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --start-at '2026-07-04T10:00:00-04:00' --spacing-hours 24`
+- Preview clear row: `python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA --start-at '2026-07-05T10:00:00-04:00' --spacing-hours 24`
+- Preview clear row: `python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --start-at '2026-07-06T10:00:00-04:00' --spacing-hours 24`
+- Preview clear row: `python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-07T10:00:00-04:00' --spacing-hours 24`
 - Preview clear row: `python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X --start-at '2026-07-08T10:00:00-04:00' --spacing-hours 24`
 - Preview clear row: `python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK --start-at '2026-07-09T10:00:00-04:00' --spacing-hours 24`
 
@@ -91,8 +91,8 @@ Generated: 2026-07-01T17:59:12.845956-04:00
 
 ## Commands
 - Preview: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24`
-- Partial clear preview: `python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24`
-- Partial clear apply: `python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin`
+- Partial clear preview: `python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24`
+- Partial clear apply: `python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin`
 - Safe apply: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin`
 - Blocked apply command: none
 - Deliberate override command: none

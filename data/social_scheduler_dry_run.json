@@ -1,139 +1,137 @@
 {
   "ok": true,
-  "updated_at": "2026-07-01T21:59:11.575667Z",
+  "updated_at": "2026-07-01T22:21:49.484992Z",
   "source": "lilyroo-social-scheduler-dry-run",
   "url": "https://www.lilyroo.com/api/social/scheduler/dry-run",
   "http_status": 200,
   "error": null,
   "auth_method": "bearer",
-  "requested_scheduled_time": "2026-07-01T21:59:10.345603Z",
+  "requested_scheduled_time": "2026-07-01T22:21:49.273724Z",
   "dry_run": true,
-  "checked_at": "2026-07-01T21:59:10.345Z",
+  "checked_at": "2026-07-01T22:21:49.273Z",
   "summary": {
-    "due_count": 31,
-    "result_count": 31,
+    "due_count": 13,
+    "result_count": 13,
     "would_post_count": 0,
     "blocked_count": 10,
     "status_counts": {
-      "blocked": 7,
       "draft_uploaded": 3,
-      "failed": 3,
-      "posted": 18
+      "skipped": 10
     },
     "platform_counts": {
       "Instagram": 7,
       "TikTok": 3,
-      "Unknown": 21
+      "Unknown": 3
     },
     "would_post": [],
     "blocked": [
       {
         "post_id": "FP-AUTO-259",
         "platform": "TikTok",
-        "status": "blocked",
-        "reason": "not_approved",
+        "status": "skipped",
+        "reason": "analog_myth_launch_day",
         "post_type": "",
         "attempts": 0,
-        "updated_at": "2026-07-01T21:59:10.623Z",
+        "updated_at": "2026-07-01T22:21:49.515Z",
         "source": "dry-run",
         "error_summary": ""
       },
       {
         "post_id": "FP-AUTO-258",
         "platform": "Instagram",
-        "status": "failed",
-        "reason": "max_attempts_exceeded",
+        "status": "skipped",
+        "reason": "analog_myth_launch_day",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-07-01T21:59:10.626Z",
+        "updated_at": "2026-07-01T22:21:49.518Z",
         "source": "dry-run",
-        "error_summary": "Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page"
+        "error_summary": ""
       },
       {
         "post_id": "FP-AUTO-263",
         "platform": "Instagram",
-        "status": "failed",
-        "reason": "max_attempts_exceeded",
+        "status": "skipped",
+        "reason": "analog_myth_launch_day",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-07-01T21:59:10.633Z",
+        "updated_at": "2026-07-01T22:21:49.523Z",
         "source": "dry-run",
-        "error_summary": "Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page"
+        "error_summary": ""
       },
       {
         "post_id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
         "platform": "Instagram",
-        "status": "failed",
-        "reason": "max_attempts_exceeded",
+        "status": "skipped",
+        "reason": "analog_myth_launch_day",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-07-01T21:59:10.642Z",
+        "updated_at": "2026-07-01T22:21:49.525Z",
         "source": "dry-run",
-        "error_summary": "Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page"
+        "error_summary": ""
       },
       {
         "post_id": "FP-AUTO-267",
         "platform": "Instagram",
-        "status": "blocked",
-        "reason": "instagram_business_account_unresolved",
+        "status": "skipped",
+        "reason": "analog_myth_launch_day",
         "post_type": "",
         "attempts": 0,
-        "updated_at": "2026-07-01T21:59:10.894Z",
+        "updated_at": "2026-07-01T22:21:49.528Z",
         "source": "dry-run",
         "error_summary": ""
       },
       {
         "post_id": "FP-AUTO-272",
         "platform": "Instagram",
-        "status": "blocked",
-        "reason": "instagram_business_account_unresolved",
+        "status": "skipped",
+        "reason": "analog_myth_launch_day",
         "post_type": "",
         "attempts": 0,
-        "updated_at": "2026-07-01T21:59:11.115Z",
+        "updated_at": "2026-07-01T22:21:49.534Z",
         "source": "dry-run",
         "error_summary": ""
       },
       {
         "post_id": "FP-AUTO-277",
         "platform": "Instagram",
-        "status": "blocked",
-        "reason": "instagram_business_account_unresolved",
+        "status": "skipped",
+        "reason": "analog_myth_launch_day",
         "post_type": "",
         "attempts": 0,
-        "updated_at": "2026-07-01T21:59:11.331Z",
+        "updated_at": "2026-07-01T22:21:49.538Z",
         "source": "dry-run",
         "error_summary": ""
       },
       {
         "post_id": "FP-AUTO-279",
         "platform": "TikTok",
-        "status": "blocked",
-        "reason": "tiktok_public_posting_not_approved",
+        "status": "skipped",
+        "reason": "analog_myth_launch_day",
         "post_type": "",
         "attempts": 0,
-        "updated_at": "2026-07-01T21:59:11.334Z",
+        "updated_at": "2026-07-01T22:21:49.541Z",
         "source": "dry-run",
         "error_summary": ""
       },
       {
         "post_id": "FP-AUTO-282",
         "platform": "Instagram",
-        "status": "blocked",
-        "reason": "instagram_business_account_unresolved",
+        "status": "skipped",
+        "reason": "analog_myth_launch_day",
         "post_type": "",
         "attempts": 0,
-        "updated_at": "2026-07-01T21:59:11.558Z",
+        "updated_at": "2026-07-01T22:21:49.543Z",
         "source": "dry-run",
         "error_summary": ""
       },
       {
         "post_id": "FP-AUTO-284",
         "platform": "TikTok",
-        "status": "blocked",
-        "reason": "tiktok_public_posting_not_approved",
+        "status": "skipped",
+        "reason": "analog_myth_launch_day",
         "post_type": "",
         "attempts": 0,
-        "updated_at": "2026-07-01T21:59:11.563Z",
+        "updated_at": "2026-07-01T22:21:49.545Z",
         "source": "dry-run",
         "error_summary": ""
       }
@@ -141,8 +139,8 @@
   },
   "payload": {
     "ok": true,
-    "due_count": 31,
-    "result_count": 31
+    "due_count": 13,
+    "result_count": 13
   },
   "action_needed": ""
 }

@@ -1,19 +1,18 @@
 # Promotion Blocker Ledger - Lily Roo
 
-Generated: 2026-07-01T21:59:14.081322Z
+Generated: 2026-07-01T22:21:51.360679Z
 
 ## Summary
-- Open blockers: **9**
-- User-owned: **5**
+- Open blockers: **8**
+- User-owned: **4**
 - External platform-owned: **3**
 - Codex-actionable: **1**
-- High or critical: **7**
+- High or critical: **6**
 
 ## Unlock Roadmap
 - **Approve checked scheduled rows** (`blocked`)
   - Owner: `tod`; projected blockers resolved: **0**
   - Unlocks: Instagram executor row can become publish-eligible after approval.
-  - Blocked by: FP-AUTO-259
 - **Repair TikTok executor** (`blocked`)
   - Owner: `tod`; projected blockers resolved: **2**
   - Unlocks: Held TikTok approval rows can pass platform-readiness review.; Approved TikTok backlog can become safe to reschedule into upload-draft creation.
@@ -38,18 +37,9 @@ Generated: 2026-07-01T21:59:14.081322Z
   - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24`
   - Apply/log after review: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin`
   - Guardrail: The apply command remains dry-run-first through the preview artifact.
-- **[high] Approve scheduled TikTok row** (`approval-FP-AUTO-259`)
-  - Owner: `tod`; status: `blocked_by_review_checks`; category: `approval`
-  - Evidence: FP-AUTO-259 is blocked by not_approved in executor state. Failed review checks: platform_readiness: Executor readiness snapshot marks platform blocked.
-  - Next step: Resolve failed review checks before approving this scheduled row.
-  - Open: https://www.lilyroo.com/assets/ig/01_i_learned_it_all_60s.mp4
-  - Preview/check: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --dry-run`
-  - Apply/log after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --refresh-admin`
-  - Guardrail: Approval does not guarantee posting if the platform executor is still blocked.
-  - Impact: resolves blocker: False
 - **[high] Repair TikTok executor** (`platform-FP-AUTO-279`)
   - Owner: `tod`; status: `blocked`; category: `platform_repair`
-  - Evidence: tiktok_public_posting_not_approved
+  - Evidence: analog_myth_launch_day
   - Next step: TikTok direct public posting approval is false, but upload-draft mode can proceed after credentials. Complete TikTok OAuth setup, push upload-mode secrets, then refresh Admin.
   - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
   - Guardrail: Run retry resets only after the external platform repair is verified.
@@ -57,7 +47,7 @@ Generated: 2026-07-01T21:59:14.081322Z
   - Impact: apply blocked by: public_posting_approval_not_confirmed_for_direct_posting
 - **[high] Repair TikTok executor** (`platform-FP-AUTO-284`)
   - Owner: `tod`; status: `blocked`; category: `platform_repair`
-  - Evidence: tiktok_public_posting_not_approved
+  - Evidence: analog_myth_launch_day
   - Next step: TikTok direct public posting approval is false, but upload-draft mode can proceed after credentials. Complete TikTok OAuth setup, push upload-mode secrets, then refresh Admin.
   - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
   - Guardrail: Run retry resets only after the external platform repair is verified.
@@ -65,7 +55,7 @@ Generated: 2026-07-01T21:59:14.081322Z
   - Impact: apply blocked by: public_posting_approval_not_confirmed_for_direct_posting
 - **[high] Repair Instagram executor** (`platform-FP-AUTO-272`)
   - Owner: `external_platform`; status: `blocked`; category: `platform_repair`
-  - Evidence: instagram_business_account_unresolved Local secret source is missing: IG_BUSINESS_ACCOUNT_ID.
+  - Evidence: analog_myth_launch_day Local secret source is missing: IG_BUSINESS_ACCOUNT_ID.
   - Next step: Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.
   - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID`
   - Guardrail: Run retry resets only after the external platform repair is verified.
@@ -73,7 +63,7 @@ Generated: 2026-07-01T21:59:14.081322Z
   - Impact: apply blocked by: local_secret_source_missing:IG_BUSINESS_ACCOUNT_ID
 - **[high] Repair Instagram executor** (`platform-FP-AUTO-277`)
   - Owner: `external_platform`; status: `blocked`; category: `platform_repair`
-  - Evidence: instagram_business_account_unresolved Local secret source is missing: IG_BUSINESS_ACCOUNT_ID.
+  - Evidence: analog_myth_launch_day Local secret source is missing: IG_BUSINESS_ACCOUNT_ID.
   - Next step: Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.
   - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID`
   - Guardrail: Run retry resets only after the external platform repair is verified.
@@ -81,7 +71,7 @@ Generated: 2026-07-01T21:59:14.081322Z
   - Impact: apply blocked by: local_secret_source_missing:IG_BUSINESS_ACCOUNT_ID
 - **[high] Repair Instagram executor** (`platform-FP-AUTO-282`)
   - Owner: `external_platform`; status: `blocked`; category: `platform_repair`
-  - Evidence: instagram_business_account_unresolved Local secret source is missing: IG_BUSINESS_ACCOUNT_ID.
+  - Evidence: analog_myth_launch_day Local secret source is missing: IG_BUSINESS_ACCOUNT_ID.
   - Next step: Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.
   - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID`
   - Guardrail: Run retry resets only after the external platform repair is verified.

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-01T21:59:15.045153Z",
+  "generated_at": "2026-07-01T22:21:52.036288Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -13,7 +13,7 @@
     "postable_now_count": 0,
     "public_url_log_needed_count": 0,
     "waiting_public_url_count": 0,
-    "pending_result_field_count": 83,
+    "pending_result_field_count": 95,
     "winner_ready_candidate_count": 1,
     "winner_count_target": 3,
     "blocked_platform_count": 5,
@@ -26,8 +26,8 @@
     {
       "post_id": "FP-AUTO-272",
       "platform": "Instagram",
-      "reason": "instagram_business_account_unresolved",
-      "status": "blocked",
+      "reason": "analog_myth_launch_day",
+      "status": "skipped",
       "repair_action": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
       "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
       "blocked_apply_reasons": [
@@ -37,8 +37,8 @@
     {
       "post_id": "FP-AUTO-277",
       "platform": "Instagram",
-      "reason": "instagram_business_account_unresolved",
-      "status": "blocked",
+      "reason": "analog_myth_launch_day",
+      "status": "skipped",
       "repair_action": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
       "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
       "blocked_apply_reasons": [
@@ -48,8 +48,8 @@
     {
       "post_id": "FP-AUTO-282",
       "platform": "Instagram",
-      "reason": "instagram_business_account_unresolved",
-      "status": "blocked",
+      "reason": "analog_myth_launch_day",
+      "status": "skipped",
       "repair_action": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
       "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
       "blocked_apply_reasons": [
@@ -59,8 +59,8 @@
     {
       "post_id": "FP-AUTO-279",
       "platform": "TikTok",
-      "reason": "tiktok_public_posting_not_approved",
-      "status": "blocked",
+      "reason": "analog_myth_launch_day",
+      "status": "skipped",
       "repair_action": "TikTok direct public posting approval is false, but upload-draft mode can proceed after credentials. Complete TikTok OAuth setup, push upload-mode secrets, then refresh Admin.",
       "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
       "blocked_apply_reasons": [
@@ -70,8 +70,8 @@
     {
       "post_id": "FP-AUTO-284",
       "platform": "TikTok",
-      "reason": "tiktok_public_posting_not_approved",
-      "status": "blocked",
+      "reason": "analog_myth_launch_day",
+      "status": "skipped",
       "repair_action": "TikTok direct public posting approval is false, but upload-draft mode can proceed after credentials. Complete TikTok OAuth setup, push upload-mode secrets, then refresh Admin.",
       "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
       "blocked_apply_reasons": [

@@ -1,6 +1,6 @@
 # Monetization Activation Plan - Lily Roo
 
-Generated: 2026-07-01T21:59:13.824210Z
+Generated: 2026-07-01T22:21:51.166311Z
 
 ## Summary
 - Current YouTube audience metric: **5 subscribers**
@@ -45,7 +45,7 @@ Generated: 2026-07-01T21:59:13.824210Z
 7. **Current operations next action: Preview clear approved backlog row**
    - Phase: `Operations packet`; status: `waiting_for_user`
    - Detail: Approved posts are past due; preview a new schedule before any apply step.
-   - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24`
+   - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24`
    - After review: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin`
 
 ## Guardrails

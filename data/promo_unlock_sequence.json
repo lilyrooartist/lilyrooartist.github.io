@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-01T21:59:14.589221Z",
+  "generated_at": "2026-07-01T22:21:51.710747Z",
   "safe_mode": true,
   "summary": {
     "step_count": 4,
@@ -8,7 +8,7 @@
     "total_projected_resolution_units": 16,
     "current_step_id": "unlock-manual-metrics",
     "current_gate_state": "blocked_until_input",
-    "open_blocker_count": 9
+    "open_blocker_count": 8
   },
   "operator_contract": {
     "review_only": true,
@@ -19,18 +19,18 @@
     "rule": "Run preview commands first; run apply commands only after the named human, platform, URL, secret, or metric input is complete."
   },
   "current_next_actions": [
-    "Next operational action: Preview clear approved backlog row — python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-07-02T10:00:00+00:00' --spacing-hours 24",
+    "Next operational action: Preview clear approved backlog row — python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
     "First handoff step: Fill and import manual metric worksheet — python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
-    "Current unlock gate: Fill manual metric worksheet (blocked_until_input); 0 ready, 4 blocked/warning; preview python3 scripts/update_manual_social_stats.py --from-csv --dry-run; see data/promo_unlock_sequence.json.",
-    "Review handoff preview health: 7 missing input, 1 warning; see data/human_handoff_resolution_preview.json.",
+    "Current unlock gate: Fill manual metric worksheet (blocked_until_input); 0 ready, 3 blocked/warning; preview python3 scripts/update_manual_social_stats.py --from-csv --dry-run; see data/promo_unlock_sequence.json.",
+    "Review handoff preview health: 3 preview-clean, 5 missing input; see data/human_handoff_resolution_preview.json.",
+    "Refresh automation coverage: latest scheduled run has not covered d6302b46; dispatch https://github.com/lilyrooartist/lilyrooartist.github.io/actions/workflows/promo-admin-refresh.yml or wait for the next scheduled run.",
     "Refresh manual metrics: 6 worksheet row(s) still need new_value entries (blocked_until_new_values_filled); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values.",
-    "Collect experiment results: 83 post-result field(s) need new_value plus evidence_note; use admin/reports/experiment-result-clipboard.md; first priority: measure FP-AUTO-260 on Facebook. Direct preview template: python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run. Direct apply template after review: python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin. Then preview import with python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run after filling data/experiment_result_entry_wide_template.csv.",
-    "Preview clear approved backlog row: python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-07-02T10:00:00+00:00' --spacing-hours 24",
+    "Collect experiment results: 95 post-result field(s) need new_value plus evidence_note; use admin/reports/experiment-result-clipboard.md; first priority: measure FP-AUTO-260 on Facebook. Direct preview template: python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run. Direct apply template after review: python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin. Then preview import with python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run after filling data/experiment_result_entry_wide_template.csv.",
     "Apply verified store URLs: 1 music site snapshot(s) found public URLs; copy them into data/distrokid_release_status.json and refresh Admin.",
-    "30 approved unpublished auto posts are past their scheduled time; repair executor/platform blockers or reschedule them.",
-    "6 executor records are blocked by approval.",
+    "Preview clear approved backlog row: python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
+    "5 executor records are blocked by approval.",
     "Restart song-forward distribution: approve draft posts, clear executor blockers, and keep weekly metrics current.",
-    "Review approval blockers for 6 queued executor records."
+    "Review approval blockers for 5 queued executor records."
   ],
   "steps": [
     {
@@ -39,11 +39,9 @@
       "phase": "Approve checked scheduled rows",
       "owner": "tod",
       "gate_state": "blocked",
-      "reason": "Blocked by: FP-AUTO-259.",
+      "reason": "blocked",
       "blockers_resolved": 0,
-      "blocked_by": [
-        "FP-AUTO-259"
-      ],
+      "blocked_by": [],
       "unlocks": [
         "Instagram executor row can become publish-eligible after approval."
       ],

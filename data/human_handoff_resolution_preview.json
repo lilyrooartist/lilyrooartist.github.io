@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-01T21:59:14.544146Z",
+  "generated_at": "2026-07-01T22:21:51.680522Z",
   "safe_mode": true,
   "source": {
     "resolution_worksheet": "data/human_handoff_resolution_worksheet.csv",
@@ -40,7 +40,7 @@
     {
       "task_id": "platform-setup-FP-AUTO-272",
       "phase": "Platform setup",
-      "status": "blocked",
+      "status": "skipped",
       "input_needed": "local_secret_presence_and_public_posting_approval",
       "command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
       "safety": "safe_preview",
@@ -54,7 +54,7 @@
     {
       "task_id": "platform-setup-FP-AUTO-277",
       "phase": "Platform setup",
-      "status": "blocked",
+      "status": "skipped",
       "input_needed": "local_secret_presence_and_public_posting_approval",
       "command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
       "safety": "safe_preview",
@@ -68,7 +68,7 @@
     {
       "task_id": "platform-setup-FP-AUTO-279",
       "phase": "Platform setup",
-      "status": "blocked",
+      "status": "skipped",
       "input_needed": "local_secret_presence_and_public_posting_approval",
       "command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
       "safety": "safe_preview",
@@ -82,7 +82,7 @@
     {
       "task_id": "platform-setup-FP-AUTO-282",
       "phase": "Platform setup",
-      "status": "blocked",
+      "status": "skipped",
       "input_needed": "local_secret_presence_and_public_posting_approval",
       "command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
       "safety": "safe_preview",
@@ -96,7 +96,7 @@
     {
       "task_id": "platform-setup-FP-AUTO-284",
       "phase": "Platform setup",
-      "status": "blocked",
+      "status": "skipped",
       "input_needed": "local_secret_presence_and_public_posting_approval",
       "command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
       "safety": "safe_preview",

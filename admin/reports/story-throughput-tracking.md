@@ -1,6 +1,6 @@
 # Story Throughput Tracking - Lily Roo
 
-Generated: 2026-07-01T21:59:14.914371Z
+Generated: 2026-07-01T22:21:51.944841Z
 
 ## Summary
 - Story posts scheduled: **6**
@@ -27,12 +27,12 @@ Generated: 2026-07-01T21:59:14.914371Z
   - First measurement due: `2026-07-01T00:00:00+00:00`
   - Next: Collect first result metrics after the measurement window and import them with evidence notes.
 - **FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA** - X / Analog Myth
-  - Status: `logged_waiting_results`; scheduled: `2026-07-01T21:05:00-04:00`
+  - Status: `logged_waiting_results`; scheduled: `2026-06-28T10:15:00-04:00`
   - Public URL: https://x.com/i/web/status/2071236124497080380
   - First measurement due: `2026-06-30T00:00:00+00:00`
   - Next: Collect first result metrics after the measurement window and import them with evidence notes.
 - **FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA** - Facebook / Analog Myth
-  - Status: `logged_waiting_results`; scheduled: `2026-07-01T21:20:00-04:00`
+  - Status: `logged_waiting_results`; scheduled: `2026-06-29T11:20:00-04:00`
   - Public URL: https://www.facebook.com/903693509504290_122120594589249470
   - First measurement due: `2026-07-01T00:00:00+00:00`
   - Next: Collect first result metrics after the measurement window and import them with evidence notes.

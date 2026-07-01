@@ -1,23 +1,21 @@
 {
-  "generated_at": "2026-07-01T21:59:14.081322Z",
+  "generated_at": "2026-07-01T22:21:51.360679Z",
   "safe_mode": true,
   "summary": {
-    "open_blocker_count": 9,
-    "urgent_count": 7,
+    "open_blocker_count": 8,
+    "urgent_count": 6,
     "owner_counts": {
       "codex": 1,
       "external_platform": 3,
-      "tod": 5
+      "tod": 4
     },
     "category_counts": {
-      "approval": 1,
       "backlog_reschedule": 1,
       "manual_metrics": 2,
       "platform_repair": 5
     },
     "status_counts": {
       "blocked": 5,
-      "blocked_by_review_checks": 1,
       "needs_values": 2,
       "ready_to_preview": 1
     },
@@ -25,12 +23,10 @@
       "kind": "checked_scheduled_approval_batch",
       "label": "Checked scheduled approval batch",
       "checked_ids": [],
-      "blocked_ids_retained": [
-        "FP-AUTO-259"
-      ],
+      "blocked_ids_retained": [],
       "blockers_resolved": 0,
-      "approval_blockers_before": 1,
-      "approval_blockers_after": 1,
+      "approval_blockers_before": 0,
+      "approval_blockers_after": 0,
       "auto_rows_unblocked": 0,
       "manual_rows_unblocked": 0,
       "effect_count": 0,
@@ -48,9 +44,7 @@
         "unlocks": [
           "Instagram executor row can become publish-eligible after approval."
         ],
-        "blocked_by": [
-          "FP-AUTO-259"
-        ],
+        "blocked_by": [],
         "preview_command": "",
         "apply_command": "",
         "source_path": "data/scheduled_approval_packet.json"
@@ -176,30 +170,6 @@
       }
     },
     {
-      "id": "approval-FP-AUTO-259",
-      "blocker_id": "approval-FP-AUTO-259",
-      "title": "Approve scheduled TikTok row",
-      "category": "approval",
-      "owner": "tod",
-      "urgency": "high",
-      "status": "blocked_by_review_checks",
-      "platform": "TikTok",
-      "release": "I Learned It All in Fifteen Seconds",
-      "evidence": "FP-AUTO-259 is blocked by not_approved in executor state. Failed review checks: platform_readiness: Executor readiness snapshot marks platform blocked.",
-      "next_step": "Resolve failed review checks before approving this scheduled row.",
-      "preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --dry-run",
-      "apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --refresh-admin",
-      "source_path": "data/scheduled_approval_packet.json",
-      "external_url": "https://www.lilyroo.com/assets/ig/01_i_learned_it_all_60s.mp4",
-      "guardrail": "Approval does not guarantee posting if the platform executor is still blocked.",
-      "impact": {
-        "kind": "approval_blocker_resolution",
-        "resolves_blocker": false,
-        "checked_batch_member": false,
-        "reason": "Review checks failed; this row remains excluded from the checked batch."
-      }
-    },
-    {
       "id": "platform-FP-AUTO-279",
       "blocker_id": "platform-FP-AUTO-279",
       "title": "Repair TikTok executor",
@@ -209,7 +179,7 @@
       "status": "blocked",
       "platform": "TikTok",
       "release": "",
-      "evidence": "tiktok_public_posting_not_approved",
+      "evidence": "analog_myth_launch_day",
       "next_step": "TikTok direct public posting approval is false, but upload-draft mode can proceed after credentials. Complete TikTok OAuth setup, push upload-mode secrets, then refresh Admin.",
       "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
       "apply_command": "",
@@ -234,7 +204,7 @@
       "status": "blocked",
       "platform": "TikTok",
       "release": "",
-      "evidence": "tiktok_public_posting_not_approved",
+      "evidence": "analog_myth_launch_day",
       "next_step": "TikTok direct public posting approval is false, but upload-draft mode can proceed after credentials. Complete TikTok OAuth setup, push upload-mode secrets, then refresh Admin.",
       "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
       "apply_command": "",
@@ -259,7 +229,7 @@
       "status": "blocked",
       "platform": "Instagram",
       "release": "",
-      "evidence": "instagram_business_account_unresolved Local secret source is missing: IG_BUSINESS_ACCOUNT_ID.",
+      "evidence": "analog_myth_launch_day Local secret source is missing: IG_BUSINESS_ACCOUNT_ID.",
       "next_step": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
       "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
       "apply_command": "",
@@ -284,7 +254,7 @@
       "status": "blocked",
       "platform": "Instagram",
       "release": "",
-      "evidence": "instagram_business_account_unresolved Local secret source is missing: IG_BUSINESS_ACCOUNT_ID.",
+      "evidence": "analog_myth_launch_day Local secret source is missing: IG_BUSINESS_ACCOUNT_ID.",
       "next_step": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
       "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
       "apply_command": "",
@@ -309,7 +279,7 @@
       "status": "blocked",
       "platform": "Instagram",
       "release": "",
-      "evidence": "instagram_business_account_unresolved Local secret source is missing: IG_BUSINESS_ACCOUNT_ID.",
+      "evidence": "analog_myth_launch_day Local secret source is missing: IG_BUSINESS_ACCOUNT_ID.",
       "next_step": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
       "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
       "apply_command": "",

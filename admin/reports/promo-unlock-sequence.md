@@ -1,6 +1,6 @@
 # Promo Unlock Sequence - Lily Roo
 
-Generated: 2026-07-01T21:59:14.589221Z
+Generated: 2026-07-01T22:21:51.710747Z
 
 ## Summary
 - Steps: **4**
@@ -8,12 +8,12 @@ Generated: 2026-07-01T21:59:14.589221Z
 - Blocked or warning: **3**
 - Projected resolution units across sequence: **16**
 - Current step: `unlock-manual-metrics` (`blocked_until_input`)
-- Open blockers still tracked: **9**
+- Open blockers still tracked: **8**
 
 ## Sequence
 1. **Approve checked scheduled rows** - `unlock-checked-scheduled-approval`
    - State: `blocked`; owner: `tod`
-   - Reason: Blocked by: FP-AUTO-259.
+   - Reason: blocked
    - Unlocks: Instagram executor row can become publish-eligible after approval.
 2. **Repair TikTok executor** - `unlock-tiktok-platform-repair`
    - State: `blocked`; owner: `tod`

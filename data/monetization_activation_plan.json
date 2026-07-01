@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-01T21:59:13.824210Z",
+  "generated_at": "2026-07-01T22:21:51.166311Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -38,9 +38,9 @@
       "after_review_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
       "context": {
         "approved_backlog_posts": 8,
-        "raw_approved_backlog_posts": 30,
+        "raw_approved_backlog_posts": 0,
         "manual_handoff_backlog_posts": 0,
-        "approved_upcoming_posts": 0,
+        "approved_upcoming_posts": 4,
         "blocked_backlog_count": 0,
         "apply_allowed_without_override": true,
         "blocked_apply_command": "",
@@ -148,7 +148,7 @@
       "phase": "Operations packet",
       "status": "waiting_for_user",
       "detail": "Approved posts are past due; preview a new schedule before any apply step.",
-      "command": "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-TWELVE-DOLLARS-FACEBOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
+      "command": "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
       "after_review_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
       "context": {
         "kind": "backlog_reschedule",

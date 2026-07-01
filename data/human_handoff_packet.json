@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-01T21:59:14.130594Z",
+  "generated_at": "2026-07-01T22:21:51.394655Z",
   "safe_mode": true,
   "source": {
     "promotion_blocker_ledger": "data/promotion_blocker_ledger.json",
@@ -27,22 +27,20 @@
       "Platform setup": 5
     },
     "blocker_summary": {
-      "open_blocker_count": 9,
-      "urgent_count": 7,
+      "open_blocker_count": 8,
+      "urgent_count": 6,
       "owner_counts": {
         "codex": 1,
         "external_platform": 3,
-        "tod": 5
+        "tod": 4
       },
       "category_counts": {
-        "approval": 1,
         "backlog_reschedule": 1,
         "manual_metrics": 2,
         "platform_repair": 5
       },
       "status_counts": {
         "blocked": 5,
-        "blocked_by_review_checks": 1,
         "needs_values": 2,
         "ready_to_preview": 1
       },
@@ -50,12 +48,10 @@
         "kind": "checked_scheduled_approval_batch",
         "label": "Checked scheduled approval batch",
         "checked_ids": [],
-        "blocked_ids_retained": [
-          "FP-AUTO-259"
-        ],
+        "blocked_ids_retained": [],
         "blockers_resolved": 0,
-        "approval_blockers_before": 1,
-        "approval_blockers_after": 1,
+        "approval_blockers_before": 0,
+        "approval_blockers_after": 0,
         "auto_rows_unblocked": 0,
         "manual_rows_unblocked": 0,
         "effect_count": 0,
@@ -73,9 +69,7 @@
           "unlocks": [
             "Instagram executor row can become publish-eligible after approval."
           ],
-          "blocked_by": [
-            "FP-AUTO-259"
-          ],
+          "blocked_by": [],
           "preview_command": "",
           "apply_command": "",
           "source_path": "data/scheduled_approval_packet.json"
@@ -145,7 +139,7 @@
     "roadmap_step_count": 4,
     "task_count": 8,
     "ready_step_count": 2,
-    "blocked_step_count": 1,
+    "blocked_step_count": 0,
     "manual_post_count": 0,
     "manual_metric_field_count": 6,
     "first_ready_step": {
@@ -298,39 +292,7 @@
       "next_step_after_apply": "Rebuild the weekly report and confirm lilyroo.com/admin shows fewer pending manual metric fields.",
       "guardrail": "Import only collected numeric values; leave unknown cells blank."
     },
-    "blocked_steps": [
-      {
-        "id": "platform-repair-gate",
-        "label": "Repair blocked platform executor setup",
-        "state": "blocked",
-        "owner": "tod",
-        "task_ids": [
-          "platform-setup-FP-AUTO-272",
-          "platform-setup-FP-AUTO-277",
-          "platform-setup-FP-AUTO-279",
-          "platform-setup-FP-AUTO-282",
-          "platform-setup-FP-AUTO-284"
-        ],
-        "blockers_resolved": 5,
-        "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
-        "apply_command": "",
-        "command_sequence": [
-          {
-            "step": "preview",
-            "command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
-            "required_before_apply": true
-          },
-          {
-            "step": "verify",
-            "command": "python3 scripts/refresh_promo_admin.py",
-            "required_before_apply": false
-          }
-        ],
-        "completion_evidence": "data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_upload_drafts before TikTok upload-mode backlog work is allowed.",
-        "next_step_after_apply": "Recapture admin state and only then revisit TikTok approval or backlog reschedule rows.",
-        "guardrail": "Run preflight and confirm local OAuth setup before pushing upload-mode secrets; direct public posting remains separately approval-gated."
-      }
-    ],
+    "blocked_steps": [],
     "checklist": [
       {
         "id": "review-checked-approval-batch",
@@ -389,7 +351,7 @@
       {
         "id": "platform-repair-gate",
         "label": "Repair blocked platform executor setup",
-        "state": "blocked",
+        "state": "clear",
         "owner": "tod",
         "task_ids": [
           "platform-setup-FP-AUTO-272",
@@ -398,7 +360,7 @@
           "platform-setup-FP-AUTO-282",
           "platform-setup-FP-AUTO-284"
         ],
-        "blockers_resolved": 5,
+        "blockers_resolved": 0,
         "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
         "apply_command": "",
         "command_sequence": [
@@ -753,7 +715,7 @@
       "phase": "Platform setup",
       "owner": "tod",
       "urgency": "high",
-      "status": "blocked",
+      "status": "skipped",
       "detail": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
       "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
       "apply_command": "",
@@ -776,7 +738,7 @@
       "phase": "Platform setup",
       "owner": "tod",
       "urgency": "high",
-      "status": "blocked",
+      "status": "skipped",
       "detail": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
       "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
       "apply_command": "",
@@ -799,7 +761,7 @@
       "phase": "Platform setup",
       "owner": "tod",
       "urgency": "high",
-      "status": "blocked",
+      "status": "skipped",
       "detail": "TikTok direct public posting approval is false, but upload-draft mode can proceed after credentials. Complete TikTok OAuth setup, push upload-mode secrets, then refresh Admin.",
       "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
       "apply_command": "",
@@ -827,7 +789,7 @@
       "phase": "Platform setup",
       "owner": "tod",
       "urgency": "high",
-      "status": "blocked",
+      "status": "skipped",
       "detail": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
       "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
       "apply_command": "",
@@ -850,7 +812,7 @@
       "phase": "Platform setup",
       "owner": "tod",
       "urgency": "high",
-      "status": "blocked",
+      "status": "skipped",
       "detail": "TikTok direct public posting approval is false, but upload-draft mode can proceed after credentials. Complete TikTok OAuth setup, push upload-mode secrets, then refresh Admin.",
       "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
       "apply_command": "",
