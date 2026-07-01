@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-30T13:49:53.773832Z",
+  "generated_at": "2026-07-01T05:32:20.772517Z",
   "safe_mode": true,
   "status": "ready_for_backlog_clearance",
   "source": {
@@ -110,13 +110,13 @@
     "ready_to_upload_drafts": false,
     "ready_for_direct_public_posting": false,
     "ready_to_clear_backlog_gate": true,
-    "repair_row_count": 1,
+    "repair_row_count": 2,
     "repair_post_id": "FP-AUTO-279",
     "blocked_apply_command": "",
     "apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
     "public_posting_apply_command": "",
     "public_posting_deploy_command": "",
-    "backlog_preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24",
+    "backlog_preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
     "backlog_apply_command": "",
     "backlog_normal_apply_gate": "blocked_until_clearance_steps_complete"
   },
@@ -219,7 +219,7 @@
       "status": "ready",
       "title": "Clear TikTok backlog gate",
       "detail": "Once worker readiness is clean, rerun the backlog reschedule preview and apply the approved row only if the gate reports safe apply available. Upload mode creates an inbox draft that still needs human publish and URL logging.",
-      "command": "python3 scripts/build_backlog_reschedule_preview.py && python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24",
+      "command": "python3 scripts/build_backlog_reschedule_preview.py && python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
       "blocked_by": []
     }
   ],

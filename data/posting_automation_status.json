@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-30T13:49:58.671174Z",
+  "generated_at": "2026-07-01T05:32:21.423916Z",
   "safe_mode": true,
   "source": {
     "workflow": ".github/workflows/promo-admin-refresh.yml",
@@ -29,7 +29,7 @@
     "attention_count": 6,
     "platform_fix_needed_count": 5,
     "story_post_count": 6,
-    "story_queued_future_count": 2,
+    "story_queued_future_count": 1,
     "platform_repair_blocked_count": 5,
     "blocker_input_status": "missing_local_input",
     "blocker_input_missing_count": 1,
@@ -42,20 +42,20 @@
       "label": "Scheduled refresh workflow",
       "status": "needs_attention",
       "detail": "17 */6 * * *; latest run completed / failure",
-      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28436232857",
+      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28494471432",
       "next_action": "Confirm the GitHub Actions workflow is enabled and has a successful run."
     },
     {
       "label": "Safe admin refresh",
       "status": "ready",
-      "detail": "11 refresh commands captured at 2026-06-30T13:49:49.775278Z",
+      "detail": "11 refresh commands captured at 2026-07-01T05:32:19.492494Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": ""
     },
     {
       "label": "Scheduler dry-run authentication",
       "status": "ready",
-      "detail": "HTTP 200 using bearer auth; due=29 would_post=0",
+      "detail": "HTTP 200 using bearer auth; due=30 would_post=0",
       "evidence": "data/social_scheduler_dry_run.json",
       "next_action": ""
     },
@@ -90,7 +90,7 @@
     {
       "label": "Story throughput",
       "status": "ready",
-      "detail": "6 tracked; 2 queued; 0 past due without URL",
+      "detail": "6 tracked; 1 queued; 0 past due without URL",
       "evidence": "data/story_throughput_tracking.json",
       "next_action": "Export social executions after scheduled post times, then log public URLs and results."
     }

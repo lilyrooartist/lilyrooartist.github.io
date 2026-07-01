@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-06-30T13:49:54.235949Z",
+  "generated_at": "2026-07-01T05:32:20.834069Z",
   "safe_mode": true,
   "summary": {
     "open_blocker_count": 9,
     "urgent_count": 7,
     "owner_counts": {
-      "external_platform": 5,
-      "tod": 4
+      "external_platform": 4,
+      "tod": 5
     },
     "category_counts": {
       "approval": 1,
@@ -58,7 +58,7 @@
         "phase": "Repair TikTok executor",
         "status": "blocked",
         "owner": "tod",
-        "blockers_resolved": 1,
+        "blockers_resolved": 2,
         "unlocks": [
           "Held TikTok approval rows can pass platform-readiness review.",
           "Approved TikTok backlog can become safe to reschedule into upload-draft creation."
@@ -73,18 +73,18 @@
         "phase": "Reschedule approved past-due backlog",
         "status": "blocked_until_clearance_steps_complete",
         "owner": "external_platform",
-        "blockers_resolved": 22,
+        "blockers_resolved": 27,
         "unlocks": [
           "Approved past-due queue rows get a fresh schedule after executor blockers clear."
         ],
         "blocked_by": [
-          "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
-          "FP-AUTO-267",
           "FP-AUTO-272",
           "FP-AUTO-277",
-          "FP-AUTO-279"
+          "FP-AUTO-279",
+          "FP-AUTO-282",
+          "FP-AUTO-284"
         ],
-        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24",
+        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
         "apply_command": "",
         "source_path": "data/backlog_reschedule_preview.json"
       },
@@ -169,6 +169,31 @@
       }
     },
     {
+      "id": "platform-FP-AUTO-284",
+      "blocker_id": "platform-FP-AUTO-284",
+      "title": "Repair TikTok executor",
+      "category": "platform_repair",
+      "owner": "tod",
+      "urgency": "high",
+      "status": "blocked",
+      "platform": "TikTok",
+      "release": "",
+      "evidence": "tiktok_public_posting_not_approved",
+      "next_step": "TikTok direct public posting approval is false, but upload-draft mode can proceed after credentials. Complete TikTok OAuth setup, push upload-mode secrets, then refresh Admin.",
+      "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+      "apply_command": "",
+      "source_path": "data/platform_repair_status.json",
+      "external_url": "",
+      "guardrail": "Run retry resets only after the external platform repair is verified.",
+      "impact": {
+        "kind": "platform_repair_gate",
+        "blocked_apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
+        "blocked_apply_reasons": [
+          "public_posting_approval_not_confirmed_for_direct_posting"
+        ]
+      }
+    },
+    {
       "id": "backlog-reschedule",
       "blocker_id": "backlog-reschedule",
       "title": "Reschedule approved past-due backlog",
@@ -178,9 +203,9 @@
       "status": "blocked",
       "platform": "",
       "release": "",
-      "evidence": "22 approved backlog row(s); 5 still have executor blockers.",
+      "evidence": "27 approved backlog row(s); 5 still have executor blockers.",
       "next_step": "Preview a new schedule. Safe apply becomes available after known executor blockers clear.",
-      "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24",
+      "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
       "apply_command": "",
       "source_path": "data/backlog_reschedule_preview.json",
       "external_url": "",
@@ -188,26 +213,26 @@
       "impact": {
         "kind": "backlog_reschedule_gate",
         "apply_allowed_without_override": false,
-        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
+        "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+        "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
         "backlog_clearance_manifest": {
           "status": "blocked_until_clearance_steps_complete",
-          "approved_backlog_count": 22,
+          "approved_backlog_count": 27,
           "blocked_backlog_count": 5,
-          "clear_to_apply_count": 17,
+          "clear_to_apply_count": 22,
           "partial_clear_apply_available": true,
-          "partial_clear_apply_count": 17,
+          "partial_clear_apply_count": 22,
           "blocked_ids": [
-            "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
-            "FP-AUTO-267",
             "FP-AUTO-272",
             "FP-AUTO-277",
-            "FP-AUTO-279"
+            "FP-AUTO-279",
+            "FP-AUTO-282",
+            "FP-AUTO-284"
           ],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24",
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
           "safe_apply_command": "",
-          "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-          "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
+          "blocked_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+          "override_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --allow-blocked --apply --refresh-admin",
           "apply_allowed_without_override": false,
           "apply_gate": "blocked_until_clearance_steps_complete",
           "clearance_steps": [
@@ -217,34 +242,12 @@
           ],
           "blocked_items": [
             {
-              "id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
-              "platform": "Instagram",
-              "song": "Twelve Dollars",
-              "blocker_kind": "max_attempts_exceeded",
-              "blocker_reason": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID.",
-              "proposed_scheduled_at": "2026-07-07T10:00:00-04:00",
-              "clearance_steps": [
-                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
-              ]
-            },
-            {
-              "id": "FP-AUTO-267",
-              "platform": "Instagram",
-              "song": "Brain Rot",
-              "blocker_kind": "instagram_business_account_unresolved",
-              "blocker_reason": "instagram_business_account_unresolved",
-              "proposed_scheduled_at": "2026-07-14T10:00:00-04:00",
-              "clearance_steps": [
-                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
-              ]
-            },
-            {
               "id": "FP-AUTO-272",
               "platform": "Instagram",
               "song": "Every Pearl in Carmel",
               "blocker_kind": "instagram_business_account_unresolved",
               "blocker_reason": "instagram_business_account_unresolved",
-              "proposed_scheduled_at": "2026-07-18T10:00:00-04:00",
+              "proposed_scheduled_at": "2026-07-19T10:00:00-04:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]
@@ -255,7 +258,7 @@
               "song": "The Other One's Charging",
               "blocker_kind": "instagram_business_account_unresolved",
               "blocker_reason": "instagram_business_account_unresolved",
-              "proposed_scheduled_at": "2026-07-21T10:00:00-04:00",
+              "proposed_scheduled_at": "2026-07-22T10:00:00-04:00",
               "clearance_steps": [
                 "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
               ]
@@ -266,7 +269,30 @@
               "song": "The Other One's Charging",
               "blocker_kind": "tiktok_public_posting_not_approved",
               "blocker_reason": "tiktok_public_posting_not_approved",
-              "proposed_scheduled_at": "2026-07-22T10:00:00-04:00",
+              "proposed_scheduled_at": "2026-07-23T10:00:00-04:00",
+              "clearance_steps": [
+                "Keep direct public posting blocked until TikTok public-posting approval is confirmed; upload mode can still create inbox drafts after credentials.",
+                "Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair."
+              ]
+            },
+            {
+              "id": "FP-AUTO-282",
+              "platform": "Instagram",
+              "song": "Twelve Dollars",
+              "blocker_kind": "instagram_business_account_unresolved",
+              "blocker_reason": "instagram_business_account_unresolved",
+              "proposed_scheduled_at": "2026-07-25T10:00:00-04:00",
+              "clearance_steps": [
+                "Clear the executor attention item in data/social_execution_snapshot.json before normal reschedule apply."
+              ]
+            },
+            {
+              "id": "FP-AUTO-284",
+              "platform": "TikTok",
+              "song": "Twelve Dollars",
+              "blocker_kind": "tiktok_public_posting_not_approved",
+              "blocker_reason": "tiktok_public_posting_not_approved",
+              "proposed_scheduled_at": "2026-07-26T10:00:00-04:00",
               "clearance_steps": [
                 "Keep direct public posting blocked until TikTok public-posting approval is confirmed; upload mode can still create inbox drafts after credentials.",
                 "Run `python3 scripts/build_tiktok_setup_preflight.py` and `python3 scripts/refresh_promo_admin.py` after repair."
@@ -293,31 +319,6 @@
             "A reschedule does not publish, approve, or repair platform credentials by itself."
           ]
         }
-      }
-    },
-    {
-      "id": "platform-FP-AUTO-267",
-      "blocker_id": "platform-FP-AUTO-267",
-      "title": "Repair Instagram executor",
-      "category": "platform_repair",
-      "owner": "external_platform",
-      "urgency": "high",
-      "status": "blocked",
-      "platform": "Instagram",
-      "release": "",
-      "evidence": "instagram_business_account_unresolved Local secret source is missing: IG_BUSINESS_ACCOUNT_ID.",
-      "next_step": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
-      "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
-      "apply_command": "",
-      "source_path": "data/platform_repair_status.json",
-      "external_url": "",
-      "guardrail": "Run retry resets only after the external platform repair is verified.",
-      "impact": {
-        "kind": "platform_repair_gate",
-        "blocked_apply_command": "python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py",
-        "blocked_apply_reasons": [
-          "local_secret_source_missing:IG_BUSINESS_ACCOUNT_ID"
-        ]
       }
     },
     {
@@ -371,8 +372,8 @@
       }
     },
     {
-      "id": "platform-FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
-      "blocker_id": "platform-FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+      "id": "platform-FP-AUTO-282",
+      "blocker_id": "platform-FP-AUTO-282",
       "title": "Repair Instagram executor",
       "category": "platform_repair",
       "owner": "external_platform",
@@ -380,10 +381,10 @@
       "status": "blocked",
       "platform": "Instagram",
       "release": "",
-      "evidence": "Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID.",
-      "next_step": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness. Run `python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM` before any retry reset; only reset if the worker reports executable.",
-      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
-      "apply_command": "python3 scripts/reset_social_execution_state.py FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --apply",
+      "evidence": "instagram_business_account_unresolved Local secret source is missing: IG_BUSINESS_ACCOUNT_ID.",
+      "next_step": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
+      "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
+      "apply_command": "",
       "source_path": "data/platform_repair_status.json",
       "external_url": "",
       "guardrail": "Run retry resets only after the external platform repair is verified.",

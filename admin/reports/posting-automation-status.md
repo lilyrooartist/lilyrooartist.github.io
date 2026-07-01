@@ -1,6 +1,6 @@
 # Posting Automation Status - Lily Roo
 
-Generated: 2026-06-30T13:49:58.671174Z
+Generated: 2026-07-01T05:32:21.423916Z
 
 ## Summary
 - Status: **blocked**
@@ -14,13 +14,13 @@ Generated: 2026-06-30T13:49:58.671174Z
 ## Automation Lanes
 - **Scheduled refresh workflow** - `needs_attention`
   - Detail: 17 */6 * * *; latest run completed / failure
-  - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28436232857
+  - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28494471432
   - Next: Confirm the GitHub Actions workflow is enabled and has a successful run.
 - **Safe admin refresh** - `ready`
-  - Detail: 11 refresh commands captured at 2026-06-30T13:49:49.775278Z
+  - Detail: 11 refresh commands captured at 2026-07-01T05:32:19.492494Z
   - Evidence: data/promo_admin_refresh_run.json
 - **Scheduler dry-run authentication** - `ready`
-  - Detail: HTTP 200 using bearer auth; due=29 would_post=0
+  - Detail: HTTP 200 using bearer auth; due=30 would_post=0
   - Evidence: data/social_scheduler_dry_run.json
 - **Execution capture** - `ready`
   - Detail: posted=5 attention=6 platform_fix_needed=5
@@ -38,7 +38,7 @@ Generated: 2026-06-30T13:49:58.671174Z
   - Evidence: data/social_blocker_input_status.json
   - Next: Add META_LONG_LIVED_TOKEN, FB_PAGE_ID to /private/tmp/secrets/social_api.env, then run python3 scripts/resolve_instagram_business_account.py.
 - **Story throughput** - `ready`
-  - Detail: 6 tracked; 2 queued; 0 past due without URL
+  - Detail: 6 tracked; 1 queued; 0 past due without URL
   - Evidence: data/story_throughput_tracking.json
   - Next: Export social executions after scheduled post times, then log public URLs and results.
 

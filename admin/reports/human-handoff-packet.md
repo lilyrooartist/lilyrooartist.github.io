@@ -1,6 +1,6 @@
 # Human Handoff Packet - Lily Roo
 
-Generated: 2026-06-30T13:49:54.852443Z
+Generated: 2026-07-01T05:32:20.865206Z
 
 ## Summary
 - Open handoff tasks: **8**
@@ -30,7 +30,7 @@ Generated: 2026-06-30T13:49:54.852443Z
   - Next after apply: Post each approved YouTube Community row manually, then log its public URL with scripts/log_manual_distribution.py.
   - Guardrail: Manual-only approvals do not auto-post; posting and public URL logging remain separate after review. Post manually first, then log only real public URLs.
 - **Repair blocked platform executor setup** (`blocked`)
-  - Owner: `tod`; tasks: **5**; blockers resolved: **4**
+  - Owner: `tod`; tasks: **5**; blockers resolved: **5**
   - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID`
   - Sequence preview: `python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID`
   - Sequence verify: `python3 scripts/refresh_promo_admin.py`
@@ -52,20 +52,15 @@ Generated: 2026-06-30T13:49:54.852443Z
   - Next after apply: Rebuild the weekly report and confirm lilyroo.com/admin shows fewer pending manual metric fields.
   - Guardrail: Import only collected numeric values; leave unknown cells blank.
 - **Reschedule approved backlog after blockers clear** (`blocked`)
-  - Owner: `external_platform`; tasks: **1**; blockers resolved: **22**
-  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24`
-  - Sequence preview: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24`
+  - Owner: `external_platform`; tasks: **1**; blockers resolved: **27**
+  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24`
+  - Sequence preview: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24`
   - Sequence verify: `python3 scripts/refresh_promo_admin.py`
   - Completion evidence: data/backlog_reschedule_preview.json should show normal_apply_gate clear before any non-override apply command is exposed.
   - Next after apply: Refresh admin and confirm approved past-due posts have future scheduled_at values before relying on the scheduler.
   - Guardrail: Normal apply stays hidden until known executor/platform blockers clear.
 
 ## Tasks
-- **Repair Instagram executor** (`platform-setup-FP-AUTO-267`)
-  - Phase: `Platform setup`; owner: `tod`; status: `blocked`; urgency: `high`
-  - Detail: Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.
-  - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID`
-  - Guardrail: Push worker secrets only after local platform setup is complete.
 - **Repair Instagram executor** (`platform-setup-FP-AUTO-272`)
   - Phase: `Platform setup`; owner: `tod`; status: `blocked`; urgency: `high`
   - Detail: Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.
@@ -81,15 +76,20 @@ Generated: 2026-06-30T13:49:54.852443Z
   - Detail: TikTok direct public posting approval is false, but upload-draft mode can proceed after credentials. Complete TikTok OAuth setup, push upload-mode secrets, then refresh Admin.
   - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
   - Guardrail: Run the TikTok preflight before pushing secrets; push upload-mode secrets only after local OAuth setup is complete. Keep direct public posting blocked until approval is confirmed.
-- **Repair Instagram executor** (`platform-setup-FP-PLAN-TWELVE-DOLLARS-INSTAGRAM`)
-  - Phase: `Platform setup`; owner: `tod`; status: `failed`; urgency: `high`
+- **Repair Instagram executor** (`platform-setup-FP-AUTO-282`)
+  - Phase: `Platform setup`; owner: `tod`; status: `blocked`; urgency: `high`
   - Detail: Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.
-  - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM`
+  - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID`
   - Guardrail: Push worker secrets only after local platform setup is complete.
+- **Repair TikTok executor** (`platform-setup-FP-AUTO-284`)
+  - Phase: `Platform setup`; owner: `tod`; status: `blocked`; urgency: `high`
+  - Detail: TikTok direct public posting approval is false, but upload-draft mode can proceed after credentials. Complete TikTok OAuth setup, push upload-mode secrets, then refresh Admin.
+  - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
+  - Guardrail: Run the TikTok preflight before pushing secrets; push upload-mode secrets only after local OAuth setup is complete. Keep direct public posting blocked until approval is confirmed.
 - **Preview approved backlog reschedule** (`backlog-reschedule`)
   - Phase: `Backlog recovery`; owner: `external_platform`; status: `blocked`; urgency: `high`
   - Detail: Known executor/platform blockers must clear before normal apply.
-  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24`
+  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24`
   - Guardrail: Normal apply stays hidden until known executor/platform blockers clear.
 - **Fill priority 2 metrics: Recent discovery and traffic** (`manual-metrics-priority-2`)
   - Phase: `Manual metrics`; owner: `tod`; status: `needs_values`; urgency: `low`

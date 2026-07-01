@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-30T13:49:58.840371Z",
+  "generated_at": "2026-07-01T05:32:21.452643Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -17,23 +17,12 @@
     "winner_ready_candidate_count": 1,
     "winner_count_target": 3,
     "blocked_platform_count": 5,
-    "approved_backlog_count": 22,
+    "approved_backlog_count": 27,
     "blocked_backlog_count": 5,
     "next_publish_action": "Collect experiment results when public URLs and measurement values are available."
   },
   "manual_review_rows": [],
   "blocked_platform_rows": [
-    {
-      "post_id": "FP-AUTO-267",
-      "platform": "Instagram",
-      "reason": "instagram_business_account_unresolved",
-      "status": "blocked",
-      "repair_action": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
-      "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
-      "blocked_apply_reasons": [
-        "local_secret_source_missing:IG_BUSINESS_ACCOUNT_ID"
-      ]
-    },
     {
       "post_id": "FP-AUTO-272",
       "platform": "Instagram",
@@ -57,18 +46,29 @@
       ]
     },
     {
-      "post_id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+      "post_id": "FP-AUTO-282",
       "platform": "Instagram",
-      "reason": "max_attempts_exceeded",
-      "status": "failed",
+      "reason": "instagram_business_account_unresolved",
+      "status": "blocked",
       "repair_action": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
-      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+      "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
       "blocked_apply_reasons": [
         "local_secret_source_missing:IG_BUSINESS_ACCOUNT_ID"
       ]
     },
     {
       "post_id": "FP-AUTO-279",
+      "platform": "TikTok",
+      "reason": "tiktok_public_posting_not_approved",
+      "status": "blocked",
+      "repair_action": "TikTok direct public posting approval is false, but upload-draft mode can proceed after credentials. Complete TikTok OAuth setup, push upload-mode secrets, then refresh Admin.",
+      "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+      "blocked_apply_reasons": [
+        "public_posting_approval_not_confirmed_for_direct_posting"
+      ]
+    },
+    {
+      "post_id": "FP-AUTO-284",
       "platform": "TikTok",
       "reason": "tiktok_public_posting_not_approved",
       "status": "blocked",

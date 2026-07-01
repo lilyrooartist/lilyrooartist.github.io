@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-30T13:49:59.041849Z",
+  "generated_at": "2026-07-01T05:32:21.479964Z",
   "safe_mode": true,
   "summary": {
     "check_count": 30,
@@ -103,6 +103,8 @@
         "FP-AUTO-272",
         "FP-AUTO-277",
         "FP-AUTO-279",
+        "FP-AUTO-282",
+        "FP-AUTO-284",
         "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM"
       ],
       "actual": [
@@ -113,6 +115,8 @@
         "FP-AUTO-272",
         "FP-AUTO-277",
         "FP-AUTO-279",
+        "FP-AUTO-282",
+        "FP-AUTO-284",
         "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM"
       ]
     },
@@ -213,21 +217,21 @@
         "backlog-reschedule",
         "manual-metrics-priority-2",
         "manual-metrics-priority-3",
-        "platform-setup-FP-AUTO-267",
         "platform-setup-FP-AUTO-272",
         "platform-setup-FP-AUTO-277",
         "platform-setup-FP-AUTO-279",
-        "platform-setup-FP-PLAN-TWELVE-DOLLARS-INSTAGRAM"
+        "platform-setup-FP-AUTO-282",
+        "platform-setup-FP-AUTO-284"
       ],
       "actual": [
         "backlog-reschedule",
         "manual-metrics-priority-2",
         "manual-metrics-priority-3",
-        "platform-setup-FP-AUTO-267",
         "platform-setup-FP-AUTO-272",
         "platform-setup-FP-AUTO-277",
         "platform-setup-FP-AUTO-279",
-        "platform-setup-FP-PLAN-TWELVE-DOLLARS-INSTAGRAM"
+        "platform-setup-FP-AUTO-282",
+        "platform-setup-FP-AUTO-284"
       ]
     },
     {
@@ -245,15 +249,13 @@
       "detail": "Promo status handoff preview KPI should mirror preview status counts.",
       "expected": {
         "input_missing": 5,
-        "preview_ok": 1,
-        "preview_ok_with_warning": 1,
-        "skipped": 1
+        "preview_ok": 2,
+        "preview_ok_with_warning": 1
       },
       "actual": {
         "input_missing": 5,
-        "preview_ok": 1,
-        "preview_ok_with_warning": 1,
-        "skipped": 1
+        "preview_ok": 2,
+        "preview_ok_with_warning": 1
       }
     },
     {
@@ -264,14 +266,14 @@
       "expected": {
         "worksheet_row_count": 8,
         "preview_count": 8,
-        "executed_preview_count": 7,
-        "skipped_preview_count": 1
+        "executed_preview_count": 8,
+        "skipped_preview_count": 0
       },
       "actual": {
         "worksheet_row_count": 8,
         "preview_count": 8,
-        "executed_preview_count": 7,
-        "skipped_preview_count": 1
+        "executed_preview_count": 8,
+        "skipped_preview_count": 0
       }
     },
     {
@@ -279,18 +281,18 @@
       "status": "pass",
       "severity": "ok",
       "detail": "Promo status next actions should expose the handoff preview health summary.",
-      "expected": "Review handoff preview health: 1 preview-clean, 5 missing input, 1 warning; see data/human_handoff_resolution_preview.json.",
+      "expected": "Review handoff preview health: 2 preview-clean, 5 missing input, 1 warning; see data/human_handoff_resolution_preview.json.",
       "actual": [
-        "Next operational action: Preview clear approved backlog row — python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24",
+        "Next operational action: Preview clear approved backlog row — python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
         "First handoff step: Fill and import manual metric worksheet — python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
         "Current unlock gate: Fill manual metric worksheet (blocked_until_input); 0 ready, 4 blocked/warning; preview python3 scripts/update_manual_social_stats.py --from-csv --dry-run; see data/promo_unlock_sequence.json.",
-        "Review handoff preview health: 1 preview-clean, 5 missing input, 1 warning; see data/human_handoff_resolution_preview.json.",
+        "Review handoff preview health: 2 preview-clean, 5 missing input, 1 warning; see data/human_handoff_resolution_preview.json.",
         "Repair promo admin refresh workflow: Open the latest promo admin refresh workflow run and fix the failure result.",
         "Refresh manual metrics: 6 worksheet row(s) still need new_value entries (blocked_until_new_values_filled); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values.",
         "Collect experiment results: 83 post-result field(s) need new_value plus evidence_note; use admin/reports/experiment-result-clipboard.md; first priority: measure FP-AUTO-260 on Facebook. Direct preview template: python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run. Direct apply template after review: python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin. Then preview import with python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run after filling data/experiment_result_entry_wide_template.csv.",
-        "Re-check checked-pending store links: 7 music site snapshot(s) still have no public URL; next recommended re-check after 2026-07-01T13:49:29.893064+00:00. Run python3 scripts/verify_pending_store_links.py --step-timeout-seconds 25 --out data/store_verification_run.json --snapshot-root data/store-verification --refresh-admin then.",
-        "Preview clear approved backlog row: python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24",
-        "28 approved unpublished auto posts are past their scheduled time; repair executor/platform blockers or reschedule them.",
+        "Re-check checked-pending store links: 7 music site snapshot(s) still have no public URL; next recommended re-check after 2026-07-02T05:32:10.245390+00:00. Run python3 scripts/verify_pending_store_links.py --step-timeout-seconds 25 --out data/store_verification_run.json --snapshot-root data/store-verification --refresh-admin then.",
+        "Preview clear approved backlog row: python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
+        "29 approved unpublished auto posts are past their scheduled time; repair executor/platform blockers or reschedule them.",
         "1 executor records are blocked by approval.",
         "5 executor records need platform repair before they can publish."
       ]
@@ -372,16 +374,16 @@
       "detail": "Promo status next actions should expose the current unlock sequence gate.",
       "expected": "Current unlock gate action includes data/promo_unlock_sequence.json",
       "actual": [
-        "Next operational action: Preview clear approved backlog row — python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24",
+        "Next operational action: Preview clear approved backlog row — python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
         "First handoff step: Fill and import manual metric worksheet — python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
         "Current unlock gate: Fill manual metric worksheet (blocked_until_input); 0 ready, 4 blocked/warning; preview python3 scripts/update_manual_social_stats.py --from-csv --dry-run; see data/promo_unlock_sequence.json.",
-        "Review handoff preview health: 1 preview-clean, 5 missing input, 1 warning; see data/human_handoff_resolution_preview.json.",
+        "Review handoff preview health: 2 preview-clean, 5 missing input, 1 warning; see data/human_handoff_resolution_preview.json.",
         "Repair promo admin refresh workflow: Open the latest promo admin refresh workflow run and fix the failure result.",
         "Refresh manual metrics: 6 worksheet row(s) still need new_value entries (blocked_until_new_values_filled); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values.",
         "Collect experiment results: 83 post-result field(s) need new_value plus evidence_note; use admin/reports/experiment-result-clipboard.md; first priority: measure FP-AUTO-260 on Facebook. Direct preview template: python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run. Direct apply template after review: python3 scripts/update_experiment_results.py --post-id FP-AUTO-260 --source-row 18 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin. Then preview import with python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run after filling data/experiment_result_entry_wide_template.csv.",
-        "Re-check checked-pending store links: 7 music site snapshot(s) still have no public URL; next recommended re-check after 2026-07-01T13:49:29.893064+00:00. Run python3 scripts/verify_pending_store_links.py --step-timeout-seconds 25 --out data/store_verification_run.json --snapshot-root data/store-verification --refresh-admin then.",
-        "Preview clear approved backlog row: python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24",
-        "28 approved unpublished auto posts are past their scheduled time; repair executor/platform blockers or reschedule them.",
+        "Re-check checked-pending store links: 7 music site snapshot(s) still have no public URL; next recommended re-check after 2026-07-02T05:32:10.245390+00:00. Run python3 scripts/verify_pending_store_links.py --step-timeout-seconds 25 --out data/store_verification_run.json --snapshot-root data/store-verification --refresh-admin then.",
+        "Preview clear approved backlog row: python3 scripts/reschedule_scheduled_posts.py --id FP-AUTO-258 --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
+        "29 approved unpublished auto posts are past their scheduled time; repair executor/platform blockers or reschedule them.",
         "1 executor records are blocked by approval.",
         "5 executor records need platform repair before they can publish."
       ]

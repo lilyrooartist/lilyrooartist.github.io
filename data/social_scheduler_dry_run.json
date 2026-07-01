@@ -1,29 +1,29 @@
 {
   "ok": true,
-  "updated_at": "2026-06-30T13:49:47.436428Z",
+  "updated_at": "2026-07-01T05:32:17.838928Z",
   "source": "lilyroo-social-scheduler-dry-run",
   "url": "https://www.lilyroo.com/api/social/scheduler/dry-run",
   "http_status": 200,
   "error": null,
   "auth_method": "bearer",
-  "requested_scheduled_time": "2026-06-30T13:49:45.587154Z",
+  "requested_scheduled_time": "2026-07-01T05:32:15.877734Z",
   "dry_run": true,
-  "checked_at": "2026-06-30T13:49:45.587Z",
+  "checked_at": "2026-07-01T05:32:15.877Z",
   "summary": {
-    "due_count": 29,
-    "result_count": 29,
+    "due_count": 30,
+    "result_count": 30,
     "would_post_count": 0,
-    "blocked_count": 8,
+    "blocked_count": 10,
     "status_counts": {
-      "blocked": 5,
+      "blocked": 7,
       "draft_uploaded": 3,
       "failed": 3,
-      "posted": 18
+      "posted": 17
     },
     "platform_counts": {
-      "Instagram": 6,
-      "TikTok": 2,
-      "Unknown": 21
+      "Instagram": 7,
+      "TikTok": 3,
+      "Unknown": 20
     },
     "would_post": [],
     "blocked": [
@@ -34,7 +34,7 @@
         "reason": "not_approved",
         "post_type": "",
         "attempts": 0,
-        "updated_at": "2026-06-30T13:49:45.886Z",
+        "updated_at": "2026-07-01T05:32:16.165Z",
         "source": "dry-run",
         "error_summary": ""
       },
@@ -45,7 +45,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-06-30T13:49:45.888Z",
+        "updated_at": "2026-07-01T05:32:16.167Z",
         "source": "dry-run",
         "error_summary": "Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page"
       },
@@ -56,7 +56,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-06-30T13:49:45.898Z",
+        "updated_at": "2026-07-01T05:32:16.172Z",
         "source": "dry-run",
         "error_summary": "Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page"
       },
@@ -67,7 +67,7 @@
         "reason": "max_attempts_exceeded",
         "post_type": "",
         "attempts": 3,
-        "updated_at": "2026-06-30T13:49:45.905Z",
+        "updated_at": "2026-07-01T05:32:16.176Z",
         "source": "dry-run",
         "error_summary": "Instagram posting could not resolve instagram_business_account from FB_PAGE_ID; set IG_BUSINESS_ACCOUNT_ID or reconnect the Instagram Business/Creator account to the Facebook Page"
       },
@@ -78,7 +78,7 @@
         "reason": "instagram_business_account_unresolved",
         "post_type": "",
         "attempts": 0,
-        "updated_at": "2026-06-30T13:49:46.736Z",
+        "updated_at": "2026-07-01T05:32:16.465Z",
         "source": "dry-run",
         "error_summary": ""
       },
@@ -89,7 +89,7 @@
         "reason": "instagram_business_account_unresolved",
         "post_type": "",
         "attempts": 0,
-        "updated_at": "2026-06-30T13:49:47.229Z",
+        "updated_at": "2026-07-01T05:32:16.758Z",
         "source": "dry-run",
         "error_summary": ""
       },
@@ -100,7 +100,7 @@
         "reason": "instagram_business_account_unresolved",
         "post_type": "",
         "attempts": 0,
-        "updated_at": "2026-06-30T13:49:47.496Z",
+        "updated_at": "2026-07-01T05:32:17.491Z",
         "source": "dry-run",
         "error_summary": ""
       },
@@ -111,7 +111,29 @@
         "reason": "tiktok_public_posting_not_approved",
         "post_type": "",
         "attempts": 0,
-        "updated_at": "2026-06-30T13:49:47.501Z",
+        "updated_at": "2026-07-01T05:32:17.493Z",
+        "source": "dry-run",
+        "error_summary": ""
+      },
+      {
+        "post_id": "FP-AUTO-282",
+        "platform": "Instagram",
+        "status": "blocked",
+        "reason": "instagram_business_account_unresolved",
+        "post_type": "",
+        "attempts": 0,
+        "updated_at": "2026-07-01T05:32:17.776Z",
+        "source": "dry-run",
+        "error_summary": ""
+      },
+      {
+        "post_id": "FP-AUTO-284",
+        "platform": "TikTok",
+        "status": "blocked",
+        "reason": "tiktok_public_posting_not_approved",
+        "post_type": "",
+        "attempts": 0,
+        "updated_at": "2026-07-01T05:32:17.780Z",
         "source": "dry-run",
         "error_summary": ""
       }
@@ -119,8 +141,8 @@
   },
   "payload": {
     "ok": true,
-    "due_count": 29,
-    "result_count": 29
+    "due_count": 30,
+    "result_count": 30
   },
   "action_needed": ""
 }

@@ -1,11 +1,11 @@
 # Promotion Blocker Ledger - Lily Roo
 
-Generated: 2026-06-30T13:49:54.235949Z
+Generated: 2026-07-01T05:32:20.834069Z
 
 ## Summary
 - Open blockers: **9**
-- User-owned: **4**
-- External platform-owned: **5**
+- User-owned: **5**
+- External platform-owned: **4**
 - Codex-actionable: **0**
 - High or critical: **7**
 
@@ -15,14 +15,14 @@ Generated: 2026-06-30T13:49:54.235949Z
   - Unlocks: Instagram executor row can become publish-eligible after approval.
   - Blocked by: FP-AUTO-259
 - **Repair TikTok executor** (`blocked`)
-  - Owner: `tod`; projected blockers resolved: **1**
+  - Owner: `tod`; projected blockers resolved: **2**
   - Unlocks: Held TikTok approval rows can pass platform-readiness review.; Approved TikTok backlog can become safe to reschedule into upload-draft creation.
   - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
 - **Reschedule approved past-due backlog** (`blocked_until_clearance_steps_complete`)
-  - Owner: `external_platform`; projected blockers resolved: **22**
+  - Owner: `external_platform`; projected blockers resolved: **27**
   - Unlocks: Approved past-due queue rows get a fresh schedule after executor blockers clear.
-  - Blocked by: FP-PLAN-TWELVE-DOLLARS-INSTAGRAM, FP-AUTO-267, FP-AUTO-272, FP-AUTO-277, FP-AUTO-279
-  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24`
+  - Blocked by: FP-AUTO-272, FP-AUTO-277, FP-AUTO-279, FP-AUTO-282, FP-AUTO-284
+  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24`
 - **Fill manual metric worksheet** (`needs_values`)
   - Owner: `tod`; projected blockers resolved: **6**
   - Unlocks: Admin health and weekly reporting can use fresh cross-platform metrics.; Manual metric blockers clear once worksheet values are imported.
@@ -48,21 +48,21 @@ Generated: 2026-06-30T13:49:54.235949Z
   - Guardrail: Run retry resets only after the external platform repair is verified.
   - Blocked apply command: `python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py`
   - Impact: apply blocked by: public_posting_approval_not_confirmed_for_direct_posting
+- **[high] Repair TikTok executor** (`platform-FP-AUTO-284`)
+  - Owner: `tod`; status: `blocked`; category: `platform_repair`
+  - Evidence: tiktok_public_posting_not_approved
+  - Next step: TikTok direct public posting approval is false, but upload-draft mode can proceed after credentials. Complete TikTok OAuth setup, push upload-mode secrets, then refresh Admin.
+  - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
+  - Guardrail: Run retry resets only after the external platform repair is verified.
+  - Blocked apply command: `python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py`
+  - Impact: apply blocked by: public_posting_approval_not_confirmed_for_direct_posting
 - **[high] Reschedule approved past-due backlog** (`backlog-reschedule`)
   - Owner: `external_platform`; status: `blocked`; category: `backlog_reschedule`
-  - Evidence: 22 approved backlog row(s); 5 still have executor blockers.
+  - Evidence: 27 approved backlog row(s); 5 still have executor blockers.
   - Next step: Preview a new schedule. Safe apply becomes available after known executor blockers clear.
-  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24`
+  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24`
   - Guardrail: Normal apply is hidden while rows have known executor blockers.
-  - Blocked apply command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-01T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin`
-- **[high] Repair Instagram executor** (`platform-FP-AUTO-267`)
-  - Owner: `external_platform`; status: `blocked`; category: `platform_repair`
-  - Evidence: instagram_business_account_unresolved Local secret source is missing: IG_BUSINESS_ACCOUNT_ID.
-  - Next step: Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.
-  - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID`
-  - Guardrail: Run retry resets only after the external platform repair is verified.
-  - Blocked apply command: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
-  - Impact: apply blocked by: local_secret_source_missing:IG_BUSINESS_ACCOUNT_ID
+  - Blocked apply command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin`
 - **[high] Repair Instagram executor** (`platform-FP-AUTO-272`)
   - Owner: `external_platform`; status: `blocked`; category: `platform_repair`
   - Evidence: instagram_business_account_unresolved Local secret source is missing: IG_BUSINESS_ACCOUNT_ID.
@@ -79,12 +79,11 @@ Generated: 2026-06-30T13:49:54.235949Z
   - Guardrail: Run retry resets only after the external platform repair is verified.
   - Blocked apply command: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
   - Impact: apply blocked by: local_secret_source_missing:IG_BUSINESS_ACCOUNT_ID
-- **[high] Repair Instagram executor** (`platform-FP-PLAN-TWELVE-DOLLARS-INSTAGRAM`)
+- **[high] Repair Instagram executor** (`platform-FP-AUTO-282`)
   - Owner: `external_platform`; status: `blocked`; category: `platform_repair`
-  - Evidence: Instagram posting could not resolve instagram_business_account; reconnect or set IG_BUSINESS_ACCOUNT_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID.
-  - Next step: Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness. Run `python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM` before any retry reset; only reset if the worker reports executable.
-  - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM`
-  - Apply/log after review: `python3 scripts/reset_social_execution_state.py FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --apply`
+  - Evidence: instagram_business_account_unresolved Local secret source is missing: IG_BUSINESS_ACCOUNT_ID.
+  - Next step: Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.
+  - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID`
   - Guardrail: Run retry resets only after the external platform repair is verified.
   - Blocked apply command: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
   - Impact: apply blocked by: local_secret_source_missing:IG_BUSINESS_ACCOUNT_ID
