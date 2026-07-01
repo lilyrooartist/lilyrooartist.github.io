@@ -348,11 +348,11 @@ def update_podcast_pages(text: str, spotify_url: str) -> str:
     text = replace_all(text, [
         (
             "Jasper Fields sits down with Lily Roo for a track-by-track talk-through of Analog Myth, the eight-song album arriving July 1, 2026.",
-            "Jasper Fields sits down with Lily Roo for a track-by-track talk-through of Analog Myth, the eight-song album that is live now.",
+            "Jasper Fields sits down with Lily Roo for a full album play-through of Analog Myth, with the songs in the room.",
         ),
         (
             "<em>Analog Myth</em>, the eight-song album arriving July 1, 2026.",
-            "<em>Analog Myth</em>, the eight-song album that is live now.",
+            "<em>Analog Myth</em>, with the songs in the room.",
         ),
         (
             "album arriving July 1, 2026.",
@@ -369,11 +369,11 @@ def update_feed(text: str, spotify_url: str, apple_music_url: str, youtube_music
     text = replace_all(text, [
         (
             "Jasper Fields sits down with Lily Roo for a track-by-track talk-through of Analog Myth, the eight-song album arriving July 1, 2026.",
-            "Jasper Fields sits down with Lily Roo for a track-by-track talk-through of Analog Myth, the eight-song album that is live now.",
+            "Jasper Fields sits down with Lily Roo for a full album play-through of Analog Myth, with the songs in the room.",
         ),
         (
             "Jasper Fields sits down with Lily Roo for a track-by-track talk-through of <em>Analog Myth</em>, the eight-song album arriving July 1, 2026.",
-            "Jasper Fields sits down with Lily Roo for a track-by-track talk-through of <em>Analog Myth</em>, the eight-song album that is live now.",
+            "Jasper Fields sits down with Lily Roo for a full album play-through of <em>Analog Myth</em>, with the songs in the room.",
         ),
     ])
     text = re.sub(

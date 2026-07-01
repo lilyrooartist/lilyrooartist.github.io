@@ -116,7 +116,7 @@ class AnalogMythReadinessTest(unittest.TestCase):
 
     def test_podcast_audio_duration_matches_feed_tolerance(self) -> None:
         actual_seconds = readiness.mp4_duration_seconds(readiness.PODCAST_AUDIO)
-        feed_seconds = readiness.itunes_duration_seconds("12:11")
+        feed_seconds = readiness.itunes_duration_seconds("33:28")
         self.assertIsNotNone(feed_seconds)
         self.assertGreater(actual_seconds, 0)
         self.assertLessEqual(abs(actual_seconds - feed_seconds), 2)

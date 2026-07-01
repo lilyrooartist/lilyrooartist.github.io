@@ -14,6 +14,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 PUBLIC_BASE_URL = "https://www.lilyroo.com"
 RELEASE_HUB_URL = "https://distrokid.com/hyperfollow/lilyroo/analog-myth"
+PODCAST_YOUTUBE_URL = "https://youtu.be/xX2-Xf161js"
 PODCAST_AUDIO = ROOT / "assets/podcasts/analog-myth/analog-myth-the-clock-cannot-explain-this.m4a"
 PODCAST_POSTER = ROOT / "assets/podcasts/analog-myth/analog-myth-podcast-poster.jpg"
 PODCAST_FEED_ART = ROOT / "assets/podcasts/analog-myth/analog-myth-podcast-directory-art-3000.jpg"
@@ -59,12 +60,14 @@ LIVE_HTML_MARKERS = {
         ("Homepage album CTA", "/analog-myth.html"),
         ("Homepage podcast CTA", "/podcasts/analog-myth.html"),
         ("Homepage podcast audio", "assets/podcasts/analog-myth/analog-myth-the-clock-cannot-explain-this.m4a"),
+        ("Homepage podcast YouTube URL", PODCAST_YOUTUBE_URL),
     ),
     "https://www.lilyroo.com/analog-myth.html": (
         ("Album page launch stylesheet", "style.css?v=20260627-analog-myth-launch"),
         ("Album page release hub", "https://distrokid.com/hyperfollow/lilyroo/analog-myth"),
         ("Album page podcast CTA", "/podcasts/analog-myth.html"),
         ("Album page podcast audio", "assets/podcasts/analog-myth/analog-myth-the-clock-cannot-explain-this.m4a"),
+        ("Album page podcast YouTube URL", PODCAST_YOUTUBE_URL),
     ),
     "https://www.lilyroo.com/analog-myth/": (
         ("Analog Myth pretty route canonical", "https://www.lilyroo.com/analog-myth.html"),
@@ -83,12 +86,14 @@ LIVE_HTML_MARKERS = {
         ("Podcast hub RSS link", "/podcasts/feed.xml"),
         ("Podcast hub episode link", "/podcasts/analog-myth.html"),
         ("Podcast hub directory art metadata", "analog-myth-podcast-directory-art-3000.jpg"),
+        ("Podcast hub YouTube URL", PODCAST_YOUTUBE_URL),
     ),
     "https://www.lilyroo.com/podcasts/analog-myth.html": (
         ("Podcast episode JSON-LD type", '"@type": "PodcastEpisode"'),
         ("Podcast episode media URL", "analog-myth-the-clock-cannot-explain-this.m4a"),
         ("Podcast episode RSS link", "/podcasts/feed.xml"),
         ("Podcast episode directory art metadata", "analog-myth-podcast-directory-art-3000.jpg"),
+        ("Podcast episode YouTube URL", PODCAST_YOUTUBE_URL),
     ),
 }
 LIVE_ASSETS = [
@@ -353,7 +358,7 @@ def check_json_ld(relative: str, parser: LinkCollector, results: list[dict]) -> 
         associated_media = episode_payload.get("associatedMedia") or {}
         part_of_series = episode_payload.get("partOfSeries") or {}
         series_image = part_of_series.get("image") or {}
-        add_result(results, "Podcast episode JSON-LD duration is set", episode_payload.get("duration") == "PT12M11S", str(episode_payload.get("duration", "")))
+        add_result(results, "Podcast episode JSON-LD duration is set", episode_payload.get("duration") == "PT33M28S", str(episode_payload.get("duration", "")))
         add_result(results, "Podcast episode JSON-LD media points to audio", associated_media.get("contentUrl") == "https://www.lilyroo.com/assets/podcasts/analog-myth/analog-myth-the-clock-cannot-explain-this.m4a", str(associated_media.get("contentUrl", "")))
         add_result(results, "Podcast episode JSON-LD series includes feed", part_of_series.get("webFeed") == "https://www.lilyroo.com/podcasts/feed.xml", str(part_of_series.get("webFeed", "")))
         add_result(results, "Podcast episode JSON-LD series uses directory art", series_image.get("url") == "https://www.lilyroo.com/assets/podcasts/analog-myth/analog-myth-podcast-directory-art-3000.jpg", str(series_image.get("url", "")))
@@ -410,9 +415,10 @@ def check_feed(results: list[dict]) -> None:
     episode_type = item.findtext(f"{ITUNES_NS}episodeType") if item is not None else ""
     item_explicit = item.findtext(f"{ITUNES_NS}explicit") if item is not None else ""
     summary = item.findtext(f"{ITUNES_NS}summary") if item is not None else ""
+    content_encoded = item.findtext("{http://purl.org/rss/1.0/modules/content/}encoded") if item is not None else ""
     item_image = item.find(f"{ITUNES_NS}image") if item is not None else None
     add_result(results, "Podcast feed item title is Analog Myth episode", item is not None and item.findtext("title") == "Analog Myth: The Clock Cannot Explain This", item.findtext("title") if item is not None else "")
-    add_result(results, "Podcast feed item duration is 12:11", duration == "12:11", duration or "")
+    add_result(results, "Podcast feed item duration is 33:28", duration == "33:28", duration or "")
     feed_duration_seconds = itunes_duration_seconds(duration)
     audio_duration_seconds = mp4_duration_seconds(PODCAST_AUDIO) if PODCAST_AUDIO.exists() else 0.0
     add_result(
@@ -424,6 +430,7 @@ def check_feed(results: list[dict]) -> None:
     add_result(results, "Podcast feed item episode type is full", episode_type == "full", episode_type or "")
     add_result(results, "Podcast feed item explicit flag is false", item_explicit == "false", item_explicit or "")
     add_result(results, "Podcast feed item summary mentions Analog Myth", "Analog Myth" in (summary or ""), summary or "")
+    add_result(results, "Podcast feed item content links YouTube podcast", PODCAST_YOUTUBE_URL in (content_encoded or ""), content_encoded or "")
     add_result(
         results,
         "Podcast feed item image points to feed art",
@@ -687,6 +694,13 @@ def check_live_feed_content(results: list[dict], timeout_seconds: int) -> None:
         "Live podcast feed item image points to directory art",
         item_image is not None and item_image.attrib.get("href", "").endswith("/assets/podcasts/analog-myth/analog-myth-podcast-directory-art-3000.jpg"),
         item_image.attrib.get("href", "") if item_image is not None else "",
+    )
+    content_encoded = item.findtext("{http://purl.org/rss/1.0/modules/content/}encoded") if item is not None else ""
+    add_result(
+        results,
+        "Live podcast feed item content links YouTube podcast",
+        PODCAST_YOUTUBE_URL in (content_encoded or ""),
+        content_encoded or "",
     )
 
 
