@@ -1,6 +1,6 @@
 # Human Handoff Resolution Preview - Lily Roo
 
-Generated: 2026-07-02T11:53:11.066803Z
+Generated: 2026-07-02T14:30:08.317377Z
 
 ## Summary
 - Worksheet rows: **6**
@@ -14,7 +14,7 @@ Generated: 2026-07-02T11:53:11.066803Z
 - **backlog-reschedule** (`preview_ok`)
   - Phase: `Backlog recovery`; input needed: `clearance_confirmation`
   - Safety: `safe_preview` (reschedule_preview_command)
-  - Command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-03T10:00:00-04:00' --spacing-hours 24`
+  - Command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24`
   - Output: Rows selected: 0 | Dry run only. Re-run with --apply to write the schedule.
   - Guardrail: Normal apply stays hidden until known executor/platform blockers clear.
 - **platform-setup-FP-AUTO-258** (`skipped`)

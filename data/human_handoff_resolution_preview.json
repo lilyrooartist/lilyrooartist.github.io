@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-02T11:53:11.066803Z",
+  "generated_at": "2026-07-02T14:30:08.317377Z",
   "safe_mode": true,
   "source": {
     "resolution_worksheet": "data/human_handoff_resolution_worksheet.csv",
@@ -29,7 +29,7 @@
       "phase": "Backlog recovery",
       "status": "ready_to_preview",
       "input_needed": "clearance_confirmation",
-      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-03T10:00:00-04:00' --spacing-hours 24",
+      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24",
       "safety": "safe_preview",
       "safety_reason": "reschedule_preview_command",
       "returncode": 0,
