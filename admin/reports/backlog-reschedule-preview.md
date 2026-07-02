@@ -1,11 +1,11 @@
 # Backlog Reschedule Preview - Lily Roo
 
-Generated: 2026-07-01T21:10:11.427386-04:00
+Generated: 2026-07-01T21:22:29.856581-04:00
 
 ## Summary
-- Approved backlog rows: **11**
+- Approved backlog rows: **12**
 - Rows with known blockers: **0**
-- Clear to apply without override: **11**
+- Clear to apply without override: **12**
 - Manual handoff rows excluded from auto-reschedule: **0**
 - Start at: **2026-07-02T10:00:00-04:00**
 - Spacing hours: **24**
@@ -46,18 +46,21 @@ Generated: 2026-07-01T21:10:11.427386-04:00
 - **X - Analog Myth** (`FP-LAUNCH-ANALOG-MYTH-X-NIGHT`)
   - Current: `2026-07-01T21:05:00-04:00`
   - Proposed: `2026-07-12T10:00:00-04:00`
+- **Facebook - Analog Myth** (`FP-LAUNCH-ANALOG-MYTH-FACEBOOK-NIGHT`)
+  - Current: `2026-07-01T21:20:00-04:00`
+  - Proposed: `2026-07-13T10:00:00-04:00`
 
 ## Clearance Manifest
 - Status: **clear**
 - Blocked IDs: `none`
 - Safe apply command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin`
 - Partial clear apply available: **True**
-- Partial clear apply count: **11**
+- Partial clear apply count: **12**
 - Apply gate: **clear**
 
 ## Partial Clear Apply
 - Status: **ready**
-- Clear IDs: `FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK, FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK, FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY, FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA, FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA, FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA, FP-LAUNCH-ANALOG-MYTH-X, FP-LAUNCH-ANALOG-MYTH-FACEBOOK, FP-LAUNCH-ANALOG-MYTH-X-EVENING, FP-LAUNCH-ANALOG-MYTH-FACEBOOK-EVENING, FP-LAUNCH-ANALOG-MYTH-X-NIGHT`
+- Clear IDs: `FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK, FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK, FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY, FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA, FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA, FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA, FP-LAUNCH-ANALOG-MYTH-X, FP-LAUNCH-ANALOG-MYTH-FACEBOOK, FP-LAUNCH-ANALOG-MYTH-X-EVENING, FP-LAUNCH-ANALOG-MYTH-FACEBOOK-EVENING, FP-LAUNCH-ANALOG-MYTH-X-NIGHT, FP-LAUNCH-ANALOG-MYTH-FACEBOOK-NIGHT`
 - Blocked IDs retained: `none`
 - Recommended preview: `python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24`
 - Recommended apply: `python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin`
@@ -72,6 +75,7 @@ Generated: 2026-07-01T21:10:11.427386-04:00
 - Preview clear row: `python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X-EVENING --start-at '2026-07-10T10:00:00-04:00' --spacing-hours 24`
 - Preview clear row: `python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK-EVENING --start-at '2026-07-11T10:00:00-04:00' --spacing-hours 24`
 - Preview clear row: `python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X-NIGHT --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24`
+- Preview clear row: `python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK-NIGHT --start-at '2026-07-13T10:00:00-04:00' --spacing-hours 24`
 
 ### Operator Checklist
 - Preview each clear row before applying it.

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-02T01:10:12.244109Z",
+  "generated_at": "2026-07-02T01:22:30.586720Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -37,10 +37,10 @@
       "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
       "after_review_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
       "context": {
-        "approved_backlog_posts": 11,
+        "approved_backlog_posts": 12,
         "raw_approved_backlog_posts": 1,
         "manual_handoff_backlog_posts": 0,
-        "approved_upcoming_posts": 1,
+        "approved_upcoming_posts": 0,
         "blocked_backlog_count": 0,
         "apply_allowed_without_override": true,
         "blocked_apply_command": "",
