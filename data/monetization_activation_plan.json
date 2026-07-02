@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-02T04:32:01.573797Z",
+  "generated_at": "2026-07-02T09:33:45.482952Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -25,8 +25,8 @@
     "manual_subscriber_approval_guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review.",
     "subscriber_swap_count": 0,
     "ready_after_approval_swap_count": 0,
-    "platform_fix_count": 5,
-    "action_count": 7
+    "platform_fix_count": 3,
+    "action_count": 5
   },
   "actions": [
     {
@@ -52,12 +52,12 @@
       "phase": "Clear platform blockers",
       "status": "needs_platform_fix",
       "detail": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
-      "command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
+      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-258",
       "after_review_command": "",
       "context": {
-        "post_id": "FP-AUTO-272",
+        "post_id": "FP-AUTO-258",
         "platform": "Instagram",
-        "reason": "analog_myth_launch_day",
+        "reason": "max_attempts_exceeded",
         "missing_secrets": [],
         "local_missing_secrets": [
           "IG_BUSINESS_ACCOUNT_ID"
@@ -72,12 +72,12 @@
       "phase": "Clear platform blockers",
       "status": "needs_platform_fix",
       "detail": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
-      "command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
+      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263",
       "after_review_command": "",
       "context": {
-        "post_id": "FP-AUTO-277",
+        "post_id": "FP-AUTO-263",
         "platform": "Instagram",
-        "reason": "analog_myth_launch_day",
+        "reason": "max_attempts_exceeded",
         "missing_secrets": [],
         "local_missing_secrets": [
           "IG_BUSINESS_ACCOUNT_ID"
@@ -92,12 +92,12 @@
       "phase": "Clear platform blockers",
       "status": "needs_platform_fix",
       "detail": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
-      "command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
+      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
       "after_review_command": "",
       "context": {
-        "post_id": "FP-AUTO-282",
+        "post_id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
         "platform": "Instagram",
-        "reason": "analog_myth_launch_day",
+        "reason": "max_attempts_exceeded",
         "missing_secrets": [],
         "local_missing_secrets": [
           "IG_BUSINESS_ACCOUNT_ID"
@@ -105,42 +105,6 @@
         "local_secret_source": "secrets/social_api.env",
         "local_secret_ready": false,
         "public_posting_approved": null
-      }
-    },
-    {
-      "label": "Repair TikTok executor",
-      "phase": "Clear platform blockers",
-      "status": "needs_platform_fix",
-      "detail": "TikTok direct public posting approval is false, but upload-draft mode can proceed after credentials. Complete TikTok OAuth setup, push upload-mode secrets, then refresh Admin.",
-      "command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
-      "after_review_command": "",
-      "context": {
-        "post_id": "FP-AUTO-279",
-        "platform": "TikTok",
-        "reason": "analog_myth_launch_day",
-        "missing_secrets": [],
-        "local_missing_secrets": [],
-        "local_secret_source": "",
-        "local_secret_ready": null,
-        "public_posting_approved": false
-      }
-    },
-    {
-      "label": "Repair TikTok executor",
-      "phase": "Clear platform blockers",
-      "status": "needs_platform_fix",
-      "detail": "TikTok direct public posting approval is false, but upload-draft mode can proceed after credentials. Complete TikTok OAuth setup, push upload-mode secrets, then refresh Admin.",
-      "command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
-      "after_review_command": "",
-      "context": {
-        "post_id": "FP-AUTO-284",
-        "platform": "TikTok",
-        "reason": "analog_myth_launch_day",
-        "missing_secrets": [],
-        "local_missing_secrets": [],
-        "local_secret_source": "",
-        "local_secret_ready": null,
-        "public_posting_approved": false
       }
     },
     {

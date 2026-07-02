@@ -1,14 +1,14 @@
 # Monetization Activation Plan - Lily Roo
 
-Generated: 2026-07-02T04:32:01.573797Z
+Generated: 2026-07-02T09:33:45.482952Z
 
 ## Summary
 - Current YouTube audience metric: **5 subscribers**
 - Runway status: **stalled**
 - Ready song-forward approvals: **0**
 - Solicitation rewrites available: **0**
-- Platform fixes: **5**
-- Activation actions: **7**
+- Platform fixes: **3**
+- Activation actions: **5**
 
 ## Activation Sequence
 1. **Preview approved backlog reschedule**
@@ -21,28 +21,20 @@ Generated: 2026-07-02T04:32:01.573797Z
    - Detail: Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.
    - Missing locally: `IG_BUSINESS_ACCOUNT_ID`
    - Local source: `secrets/social_api.env`
-   - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID`
+   - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-258`
 3. **Repair Instagram executor**
    - Phase: `Clear platform blockers`; status: `needs_platform_fix`
    - Detail: Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.
    - Missing locally: `IG_BUSINESS_ACCOUNT_ID`
    - Local source: `secrets/social_api.env`
-   - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID`
+   - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263`
 4. **Repair Instagram executor**
    - Phase: `Clear platform blockers`; status: `needs_platform_fix`
    - Detail: Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.
    - Missing locally: `IG_BUSINESS_ACCOUNT_ID`
    - Local source: `secrets/social_api.env`
-   - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID`
-5. **Repair TikTok executor**
-   - Phase: `Clear platform blockers`; status: `needs_platform_fix`
-   - Detail: TikTok direct public posting approval is false, but upload-draft mode can proceed after credentials. Complete TikTok OAuth setup, push upload-mode secrets, then refresh Admin.
-   - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
-6. **Repair TikTok executor**
-   - Phase: `Clear platform blockers`; status: `needs_platform_fix`
-   - Detail: TikTok direct public posting approval is false, but upload-draft mode can proceed after credentials. Complete TikTok OAuth setup, push upload-mode secrets, then refresh Admin.
-   - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
-7. **Current operations next action: Preview clear approved backlog row**
+   - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM`
+5. **Current operations next action: Preview clear approved backlog row**
    - Phase: `Operations packet`; status: `waiting_for_user`
    - Detail: Approved posts are past due; preview a new schedule before any apply step.
    - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24`
