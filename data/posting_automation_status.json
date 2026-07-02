@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-02T01:22:31.325025Z",
+  "generated_at": "2026-07-02T04:32:02.446867Z",
   "safe_mode": true,
   "source": {
     "workflow": ".github/workflows/promo-admin-refresh.yml",
@@ -26,13 +26,13 @@
     "scheduler_auth_method": "bearer",
     "scheduler_refresh_step_ok": true,
     "posted_count": 5,
-    "attention_count": 5,
-    "platform_fix_needed_count": 5,
+    "attention_count": 8,
+    "platform_fix_needed_count": 3,
     "story_post_count": 6,
     "story_queued_future_count": 0,
-    "platform_repair_blocked_count": 5,
+    "platform_repair_blocked_count": 3,
     "blocker_input_status": "missing_local_input",
-    "blocker_input_missing_count": 1,
+    "blocker_input_missing_count": 4,
     "blocker_input_external_action_count": 1,
     "help_needed_count": 5,
     "next_action": "Resolve the platform repair checklist before expecting full auto-post coverage."
@@ -41,28 +41,28 @@
     {
       "label": "Scheduled refresh workflow",
       "status": "ready",
-      "detail": "17 */6 * * *; latest run completed / success",
-      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28550104089",
+      "detail": "17 */6 * * *; latest run in_progress / pending",
+      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28565547674",
       "next_action": ""
     },
     {
       "label": "Safe admin refresh",
       "status": "ready",
-      "detail": "11 refresh commands captured at 2026-07-02T01:22:29.707917Z",
+      "detail": "11 refresh commands captured at 2026-07-02T04:32:00.683923Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": ""
     },
     {
       "label": "Scheduler dry-run authentication",
       "status": "ready",
-      "detail": "HTTP 200 using bearer auth; due=14 would_post=0",
+      "detail": "HTTP 200 using bearer auth; due=13 would_post=0",
       "evidence": "data/social_scheduler_dry_run.json",
       "next_action": ""
     },
     {
       "label": "Execution capture",
       "status": "ready",
-      "detail": "posted=5 attention=5 platform_fix_needed=5",
+      "detail": "posted=5 attention=8 platform_fix_needed=3",
       "evidence": "data/social_execution_snapshot.json",
       "next_action": ""
     },
@@ -83,9 +83,9 @@
     {
       "label": "Blocker input readiness",
       "status": "blocked",
-      "detail": "3 ready; 1 missing local input; 1 external action needed",
+      "detail": "0 ready; 4 missing local input; 1 external action needed",
       "evidence": "data/social_blocker_input_status.json",
-      "next_action": "Add META_LONG_LIVED_TOKEN, FB_PAGE_ID to /private/tmp/secrets/social_api.env, then run python3 scripts/resolve_instagram_business_account.py."
+      "next_action": "Add one of LILYROO_EXECUTOR_BEARER_TOKEN, EXECUTOR_BEARER_TOKEN, LILYROO_ADMIN_PASSWORD, ADMIN_PASSWORD to /home/runner/work/lilyrooartist.github.io/secrets/social_api.env."
     },
     {
       "label": "Story throughput",

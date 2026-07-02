@@ -1,12 +1,12 @@
 # Experiment Result Collection - Lily Roo
 
-Generated: 2026-07-02T01:22:31.216145Z
+Generated: 2026-07-02T04:32:02.276867Z
 
 ## Summary
 - Experiment count: **3**
-- Published experiment posts: **14**
-- Missing published log posts: **9**
-- Pending result fields: **84**
+- Published experiment posts: **15**
+- Missing published log posts: **8**
+- Pending result fields: **90**
 - Ready to import: **0**
 - Entry CSV: `data/experiment_result_entry_template.csv`
 - Wide entry CSV: `data/experiment_result_entry_wide_template.csv`
@@ -24,7 +24,6 @@ Generated: 2026-07-02T01:22:31.216145Z
 - Fill only metrics visible in the platform analytics surface.
 
 ## Missing Published Log Rows
-- `FP-PLAN-TWELVE-DOLLARS-INSTAGRAM` (Release-art image + story hook): Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-267` (Release-art image + story hook): Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-272` (Release-art image + story hook): Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-277` (Release-art image + story hook): Publish or log the public URL before result metrics can be collected.
@@ -60,4 +59,4 @@ Generated: 2026-07-02T01:22:31.216145Z
 - `FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK` Facebook `saves` from row 36: Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594301249470 and record saves.
 - `FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK` Facebook `subs_delta` from row 36: Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594301249470 and record subs_delta.
 - `FP-AUTO-266` X `views` from row 21: Open X analytics for https://x.com/i/web/status/2071039677357003221 and record views.
-- ...and 59 more rows in `data/experiment_result_entry_template.csv`.
+- ...and 65 more rows in `data/experiment_result_entry_template.csv`.

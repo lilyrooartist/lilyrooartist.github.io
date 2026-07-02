@@ -1,6 +1,6 @@
 # Posting Automation Status - Lily Roo
 
-Generated: 2026-07-02T01:22:31.325025Z
+Generated: 2026-07-02T04:32:02.446867Z
 
 ## Summary
 - Status: **blocked**
@@ -13,16 +13,16 @@ Generated: 2026-07-02T01:22:31.325025Z
 
 ## Automation Lanes
 - **Scheduled refresh workflow** - `ready`
-  - Detail: 17 */6 * * *; latest run completed / success
-  - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28550104089
+  - Detail: 17 */6 * * *; latest run in_progress / pending
+  - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28565547674
 - **Safe admin refresh** - `ready`
-  - Detail: 11 refresh commands captured at 2026-07-02T01:22:29.707917Z
+  - Detail: 11 refresh commands captured at 2026-07-02T04:32:00.683923Z
   - Evidence: data/promo_admin_refresh_run.json
 - **Scheduler dry-run authentication** - `ready`
-  - Detail: HTTP 200 using bearer auth; due=14 would_post=0
+  - Detail: HTTP 200 using bearer auth; due=13 would_post=0
   - Evidence: data/social_scheduler_dry_run.json
 - **Execution capture** - `ready`
-  - Detail: posted=5 attention=5 platform_fix_needed=5
+  - Detail: posted=5 attention=8 platform_fix_needed=3
   - Evidence: data/social_execution_snapshot.json
 - **Platform readiness** - `blocked`
   - Detail: ready=X, Facebook, YouTube; blocked=Instagram, TikTok
@@ -33,9 +33,9 @@ Generated: 2026-07-02T01:22:31.325025Z
   - Evidence: data/tiktok_setup_preflight.json
   - Next: Add TikTok OAuth credentials and rerun the upload-mode dry run.
 - **Blocker input readiness** - `blocked`
-  - Detail: 3 ready; 1 missing local input; 1 external action needed
+  - Detail: 0 ready; 4 missing local input; 1 external action needed
   - Evidence: data/social_blocker_input_status.json
-  - Next: Add META_LONG_LIVED_TOKEN, FB_PAGE_ID to /private/tmp/secrets/social_api.env, then run python3 scripts/resolve_instagram_business_account.py.
+  - Next: Add one of LILYROO_EXECUTOR_BEARER_TOKEN, EXECUTOR_BEARER_TOKEN, LILYROO_ADMIN_PASSWORD, ADMIN_PASSWORD to /home/runner/work/lilyrooartist.github.io/secrets/social_api.env.
 - **Story throughput** - `ready`
   - Detail: 6 tracked; 0 queued; 0 past due without URL
   - Evidence: data/story_throughput_tracking.json

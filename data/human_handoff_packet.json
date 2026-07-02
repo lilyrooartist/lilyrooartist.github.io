@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-02T01:22:30.786516Z",
+  "generated_at": "2026-07-02T04:32:01.890089Z",
   "safe_mode": true,
   "source": {
     "promotion_blocker_ledger": "data/promotion_blocker_ledger.json",
@@ -13,34 +13,36 @@
     "resolution_worksheet": "data/human_handoff_resolution_worksheet.csv"
   },
   "summary": {
-    "task_count": 8,
+    "task_count": 6,
     "owner_counts": {
-      "tod": 8
+      "tod": 6
     },
     "urgency_counts": {
-      "high": 6,
+      "high": 4,
       "low": 2
     },
     "phase_counts": {
       "Backlog recovery": 1,
       "Manual metrics": 2,
-      "Platform setup": 5
+      "Platform setup": 3
     },
     "blocker_summary": {
-      "open_blocker_count": 8,
-      "urgent_count": 6,
+      "open_blocker_count": 11,
+      "urgent_count": 9,
       "owner_counts": {
         "codex": 1,
         "external_platform": 3,
-        "tod": 4
+        "tod": 7
       },
       "category_counts": {
+        "approval": 5,
         "backlog_reschedule": 1,
         "manual_metrics": 2,
-        "platform_repair": 5
+        "platform_repair": 3
       },
       "status_counts": {
-        "blocked": 5,
+        "blocked": 3,
+        "blocked_by_review_checks": 5,
         "needs_values": 2,
         "ready_to_preview": 1
       },
@@ -48,10 +50,16 @@
         "kind": "checked_scheduled_approval_batch",
         "label": "Checked scheduled approval batch",
         "checked_ids": [],
-        "blocked_ids_retained": [],
+        "blocked_ids_retained": [
+          "FP-AUTO-272",
+          "FP-AUTO-277",
+          "FP-AUTO-279",
+          "FP-AUTO-282",
+          "FP-AUTO-284"
+        ],
         "blockers_resolved": 0,
-        "approval_blockers_before": 0,
-        "approval_blockers_after": 0,
+        "approval_blockers_before": 5,
+        "approval_blockers_after": 5,
         "auto_rows_unblocked": 0,
         "manual_rows_unblocked": 0,
         "effect_count": 0,
@@ -69,7 +77,13 @@
           "unlocks": [
             "Instagram executor row can become publish-eligible after approval."
           ],
-          "blocked_by": [],
+          "blocked_by": [
+            "FP-AUTO-272",
+            "FP-AUTO-277",
+            "FP-AUTO-279",
+            "FP-AUTO-282",
+            "FP-AUTO-284"
+          ],
           "preview_command": "",
           "apply_command": "",
           "source_path": "data/scheduled_approval_packet.json"
@@ -77,15 +91,15 @@
         {
           "id": "unlock-tiktok-platform-repair",
           "phase": "Repair TikTok executor",
-          "status": "blocked",
+          "status": "ready",
           "owner": "tod",
-          "blockers_resolved": 2,
+          "blockers_resolved": 0,
           "unlocks": [
             "Held TikTok approval rows can pass platform-readiness review.",
             "Approved TikTok backlog can become safe to reschedule into upload-draft creation."
           ],
           "blocked_by": [],
-          "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+          "preview_command": "",
           "apply_command": "",
           "source_path": "data/platform_repair_status.json"
         },
@@ -99,8 +113,8 @@
             "Approved past-due queue rows get a fresh schedule after executor blockers clear."
           ],
           "blocked_by": [],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
-          "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24",
+          "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
           "source_path": "data/backlog_reschedule_preview.json"
         },
         {
@@ -137,7 +151,7 @@
   "action_docket": {
     "source": "data/human_handoff_packet.json",
     "roadmap_step_count": 4,
-    "task_count": 8,
+    "task_count": 6,
     "ready_step_count": 2,
     "blocked_step_count": 0,
     "manual_post_count": 0,
@@ -354,19 +368,17 @@
         "state": "clear",
         "owner": "tod",
         "task_ids": [
-          "platform-setup-FP-AUTO-272",
-          "platform-setup-FP-AUTO-277",
-          "platform-setup-FP-AUTO-279",
-          "platform-setup-FP-AUTO-282",
-          "platform-setup-FP-AUTO-284"
+          "platform-setup-FP-AUTO-258",
+          "platform-setup-FP-AUTO-263",
+          "platform-setup-FP-PLAN-TWELVE-DOLLARS-INSTAGRAM"
         ],
         "blockers_resolved": 0,
-        "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
+        "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-258",
         "apply_command": "",
         "command_sequence": [
           {
             "step": "preview",
-            "command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
+            "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-258",
             "required_before_apply": true
           },
           {
@@ -546,8 +558,8 @@
           "partial_clear_apply_available": true,
           "partial_clear_apply_count": 12,
           "blocked_ids": [],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
-          "safe_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24",
+          "safe_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
           "blocked_apply_command": "",
           "override_apply_command": "",
           "apply_allowed_without_override": true,
@@ -587,17 +599,17 @@
           "Do not use the override command unless accepting the blocked executor risk deliberately.",
           "A reschedule does not publish, approve, or repair platform credentials by itself."
         ],
-        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
-        "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24",
+        "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
         "command_sequence": [
           {
             "step": "preview",
-            "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
+            "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24",
             "required_before_apply": true
           },
           {
             "step": "apply_after_review",
-            "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+            "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
             "required_before_apply": false
           },
           {
@@ -614,7 +626,7 @@
   },
   "resolution_worksheet": {
     "path": "data/human_handoff_resolution_worksheet.csv",
-    "row_count": 8,
+    "row_count": 6,
     "fieldnames": [
       "task_id",
       "phase",
@@ -642,8 +654,8 @@
       "urgency": "high",
       "status": "ready_to_preview",
       "detail": "Preview a new schedule for approved past-due posts.",
-      "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
-      "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+      "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24",
+      "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
       "source_path": "data/backlog_reschedule_preview.json",
       "impact": {
         "approved_backlog_count": 12,
@@ -658,8 +670,8 @@
           "partial_clear_apply_available": true,
           "partial_clear_apply_count": 12,
           "blocked_ids": [],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
-          "safe_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24",
+          "safe_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
           "blocked_apply_command": "",
           "override_apply_command": "",
           "apply_allowed_without_override": true,
@@ -710,14 +722,14 @@
       "guardrail": "Normal apply stays hidden until known executor/platform blockers clear."
     },
     {
-      "id": "platform-setup-FP-AUTO-272",
+      "id": "platform-setup-FP-AUTO-258",
       "title": "Repair Instagram executor",
       "phase": "Platform setup",
       "owner": "tod",
       "urgency": "high",
-      "status": "skipped",
+      "status": "failed",
       "detail": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
-      "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
+      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-258",
       "apply_command": "",
       "source_path": "data/platform_repair_status.json",
       "impact": {
@@ -733,14 +745,14 @@
       "guardrail": "Push worker secrets only after local platform setup is complete."
     },
     {
-      "id": "platform-setup-FP-AUTO-277",
+      "id": "platform-setup-FP-AUTO-263",
       "title": "Repair Instagram executor",
       "phase": "Platform setup",
       "owner": "tod",
       "urgency": "high",
-      "status": "skipped",
+      "status": "failed",
       "detail": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
-      "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
+      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263",
       "apply_command": "",
       "source_path": "data/platform_repair_status.json",
       "impact": {
@@ -756,42 +768,14 @@
       "guardrail": "Push worker secrets only after local platform setup is complete."
     },
     {
-      "id": "platform-setup-FP-AUTO-279",
-      "title": "Repair TikTok executor",
-      "phase": "Platform setup",
-      "owner": "tod",
-      "urgency": "high",
-      "status": "skipped",
-      "detail": "TikTok direct public posting approval is false, but upload-draft mode can proceed after credentials. Complete TikTok OAuth setup, push upload-mode secrets, then refresh Admin.",
-      "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
-      "apply_command": "",
-      "source_path": "data/platform_repair_status.json",
-      "impact": {
-        "platform": "TikTok",
-        "missing_secrets": [],
-        "local_missing_secrets": [],
-        "public_posting_approved": false,
-        "repair_checklist_blocked_count": 1,
-        "preflight_status": "blocked",
-        "preflight_blocked_count": 1,
-        "ready_to_push_worker_secrets": true,
-        "ready_to_upload_drafts": false,
-        "ready_to_post_publicly": false,
-        "preflight_report": "admin/reports/tiktok-setup-preflight.md",
-        "preflight_command": "python3 scripts/build_tiktok_setup_preflight.py"
-      },
-      "links": [],
-      "guardrail": "Run the TikTok preflight before pushing secrets; push upload-mode secrets only after local OAuth setup is complete. Keep direct public posting blocked until approval is confirmed."
-    },
-    {
-      "id": "platform-setup-FP-AUTO-282",
+      "id": "platform-setup-FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
       "title": "Repair Instagram executor",
       "phase": "Platform setup",
       "owner": "tod",
       "urgency": "high",
-      "status": "skipped",
+      "status": "failed",
       "detail": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
-      "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
+      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
       "apply_command": "",
       "source_path": "data/platform_repair_status.json",
       "impact": {
@@ -805,34 +789,6 @@
       },
       "links": [],
       "guardrail": "Push worker secrets only after local platform setup is complete."
-    },
-    {
-      "id": "platform-setup-FP-AUTO-284",
-      "title": "Repair TikTok executor",
-      "phase": "Platform setup",
-      "owner": "tod",
-      "urgency": "high",
-      "status": "skipped",
-      "detail": "TikTok direct public posting approval is false, but upload-draft mode can proceed after credentials. Complete TikTok OAuth setup, push upload-mode secrets, then refresh Admin.",
-      "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
-      "apply_command": "",
-      "source_path": "data/platform_repair_status.json",
-      "impact": {
-        "platform": "TikTok",
-        "missing_secrets": [],
-        "local_missing_secrets": [],
-        "public_posting_approved": false,
-        "repair_checklist_blocked_count": 1,
-        "preflight_status": "blocked",
-        "preflight_blocked_count": 1,
-        "ready_to_push_worker_secrets": true,
-        "ready_to_upload_drafts": false,
-        "ready_to_post_publicly": false,
-        "preflight_report": "admin/reports/tiktok-setup-preflight.md",
-        "preflight_command": "python3 scripts/build_tiktok_setup_preflight.py"
-      },
-      "links": [],
-      "guardrail": "Run the TikTok preflight before pushing secrets; push upload-mode secrets only after local OAuth setup is complete. Keep direct public posting blocked until approval is confirmed."
     },
     {
       "id": "manual-metrics-priority-2",

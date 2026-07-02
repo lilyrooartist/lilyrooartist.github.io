@@ -1,12 +1,12 @@
 # Human Handoff Packet - Lily Roo
 
-Generated: 2026-07-02T01:22:30.786516Z
+Generated: 2026-07-02T04:32:01.890089Z
 
 ## Summary
-- Open handoff tasks: **8**
-- Tod-owned tasks: **8**
+- Open handoff tasks: **6**
+- Tod-owned tasks: **6**
 - External/platform-gated tasks: **0**
-- High urgency tasks: **6**
+- High urgency tasks: **4**
 - Low urgency tasks: **2**
 
 ## Action Docket
@@ -14,7 +14,7 @@ Generated: 2026-07-02T01:22:30.786516Z
 - Blocked steps: **0**
 - Manual posts packaged: **0**
 - Manual metric fields: **6**
-- Resolution worksheet: `data/human_handoff_resolution_worksheet.csv` (8 row(s))
+- Resolution worksheet: `data/human_handoff_resolution_worksheet.csv` (6 row(s))
 
 - **Review checked approval batch** (`not_available`)
   - Owner: `tod`; tasks: **0**; blockers resolved: **0**
@@ -30,9 +30,9 @@ Generated: 2026-07-02T01:22:30.786516Z
   - Next after apply: Post each approved YouTube Community row manually, then log its public URL with scripts/log_manual_distribution.py.
   - Guardrail: Manual-only approvals do not auto-post; posting and public URL logging remain separate after review. Post manually first, then log only real public URLs.
 - **Repair blocked platform executor setup** (`clear`)
-  - Owner: `tod`; tasks: **5**; blockers resolved: **0**
-  - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID`
-  - Sequence preview: `python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID`
+  - Owner: `tod`; tasks: **3**; blockers resolved: **0**
+  - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-258`
+  - Sequence preview: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-258`
   - Sequence verify: `python3 scripts/refresh_promo_admin.py`
   - Completion evidence: data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_upload_drafts before TikTok upload-mode backlog work is allowed.
   - Next after apply: Recapture admin state and only then revisit TikTok approval or backlog reschedule rows.
@@ -53,10 +53,10 @@ Generated: 2026-07-02T01:22:30.786516Z
   - Guardrail: Import only collected numeric values; leave unknown cells blank.
 - **Reschedule approved backlog after blockers clear** (`ready`)
   - Owner: `tod`; tasks: **1**; blockers resolved: **12**
-  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24`
-  - Apply after review: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin`
-  - Sequence preview: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24`
-  - Sequence apply_after_review: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin`
+  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24`
+  - Apply after review: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin`
+  - Sequence preview: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24`
+  - Sequence apply_after_review: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin`
   - Sequence verify: `python3 scripts/refresh_promo_admin.py`
   - Completion evidence: data/backlog_reschedule_preview.json should show normal_apply_gate clear before any non-override apply command is exposed.
   - Next after apply: Refresh admin and confirm approved past-due posts have future scheduled_at values before relying on the scheduler.
@@ -66,34 +66,24 @@ Generated: 2026-07-02T01:22:30.786516Z
 - **Preview approved backlog reschedule** (`backlog-reschedule`)
   - Phase: `Backlog recovery`; owner: `tod`; status: `ready_to_preview`; urgency: `high`
   - Detail: Preview a new schedule for approved past-due posts.
-  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24`
-  - Apply after review: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin`
+  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24`
+  - Apply after review: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin`
   - Guardrail: Normal apply stays hidden until known executor/platform blockers clear.
-- **Repair Instagram executor** (`platform-setup-FP-AUTO-272`)
-  - Phase: `Platform setup`; owner: `tod`; status: `skipped`; urgency: `high`
+- **Repair Instagram executor** (`platform-setup-FP-AUTO-258`)
+  - Phase: `Platform setup`; owner: `tod`; status: `failed`; urgency: `high`
   - Detail: Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.
-  - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID`
+  - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-258`
   - Guardrail: Push worker secrets only after local platform setup is complete.
-- **Repair Instagram executor** (`platform-setup-FP-AUTO-277`)
-  - Phase: `Platform setup`; owner: `tod`; status: `skipped`; urgency: `high`
+- **Repair Instagram executor** (`platform-setup-FP-AUTO-263`)
+  - Phase: `Platform setup`; owner: `tod`; status: `failed`; urgency: `high`
   - Detail: Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.
-  - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID`
+  - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263`
   - Guardrail: Push worker secrets only after local platform setup is complete.
-- **Repair TikTok executor** (`platform-setup-FP-AUTO-279`)
-  - Phase: `Platform setup`; owner: `tod`; status: `skipped`; urgency: `high`
-  - Detail: TikTok direct public posting approval is false, but upload-draft mode can proceed after credentials. Complete TikTok OAuth setup, push upload-mode secrets, then refresh Admin.
-  - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
-  - Guardrail: Run the TikTok preflight before pushing secrets; push upload-mode secrets only after local OAuth setup is complete. Keep direct public posting blocked until approval is confirmed.
-- **Repair Instagram executor** (`platform-setup-FP-AUTO-282`)
-  - Phase: `Platform setup`; owner: `tod`; status: `skipped`; urgency: `high`
+- **Repair Instagram executor** (`platform-setup-FP-PLAN-TWELVE-DOLLARS-INSTAGRAM`)
+  - Phase: `Platform setup`; owner: `tod`; status: `failed`; urgency: `high`
   - Detail: Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.
-  - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID`
+  - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM`
   - Guardrail: Push worker secrets only after local platform setup is complete.
-- **Repair TikTok executor** (`platform-setup-FP-AUTO-284`)
-  - Phase: `Platform setup`; owner: `tod`; status: `skipped`; urgency: `high`
-  - Detail: TikTok direct public posting approval is false, but upload-draft mode can proceed after credentials. Complete TikTok OAuth setup, push upload-mode secrets, then refresh Admin.
-  - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
-  - Guardrail: Run the TikTok preflight before pushing secrets; push upload-mode secrets only after local OAuth setup is complete. Keep direct public posting blocked until approval is confirmed.
 - **Fill priority 2 metrics: Recent discovery and traffic** (`manual-metrics-priority-2`)
   - Phase: `Manual metrics`; owner: `tod`; status: `needs_values`; urgency: `low`
   - Detail: Collect 4 field(s) across facebook, instagram, tiktok, x, fill the worksheet rows, preview import, then refresh Admin.

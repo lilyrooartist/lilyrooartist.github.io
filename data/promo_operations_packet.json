@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-02T01:22:29.884686Z",
+  "generated_at": "2026-07-02T04:32:00.861596Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -16,14 +16,14 @@
     "label": "Preview clear approved backlog row",
     "kind": "backlog_reschedule",
     "priority": 0,
-    "command": "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
+    "command": "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24",
     "context": {
       "approved_backlog_posts": 12,
       "approved_upcoming_posts": 0,
       "blocked_backlog_count": 0,
       "clear_to_apply_count": 12,
       "apply_allowed_without_override": true,
-      "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+      "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
       "blocked_apply_command": "",
       "override_apply_command": "",
       "partial_clear_apply_manifest": {
@@ -46,35 +46,35 @@
         ],
         "blocked_ids_retained": [],
         "preview_commands": [
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-03T10:00:00-04:00' --spacing-hours 24",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --start-at '2026-07-04T10:00:00-04:00' --spacing-hours 24",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA --start-at '2026-07-05T10:00:00-04:00' --spacing-hours 24",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --start-at '2026-07-06T10:00:00-04:00' --spacing-hours 24",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-07T10:00:00-04:00' --spacing-hours 24",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X --start-at '2026-07-08T10:00:00-04:00' --spacing-hours 24",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK --start-at '2026-07-09T10:00:00-04:00' --spacing-hours 24",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X-EVENING --start-at '2026-07-10T10:00:00-04:00' --spacing-hours 24",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK-EVENING --start-at '2026-07-11T10:00:00-04:00' --spacing-hours 24",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X-NIGHT --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK-NIGHT --start-at '2026-07-13T10:00:00-04:00' --spacing-hours 24"
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --start-at '2026-07-05T10:00:00+00:00' --spacing-hours 24",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA --start-at '2026-07-06T10:00:00+00:00' --spacing-hours 24",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --start-at '2026-07-07T10:00:00+00:00' --spacing-hours 24",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-08T10:00:00+00:00' --spacing-hours 24",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X --start-at '2026-07-09T10:00:00+00:00' --spacing-hours 24",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK --start-at '2026-07-10T10:00:00+00:00' --spacing-hours 24",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X-EVENING --start-at '2026-07-11T10:00:00+00:00' --spacing-hours 24",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK-EVENING --start-at '2026-07-12T10:00:00+00:00' --spacing-hours 24",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X-NIGHT --start-at '2026-07-13T10:00:00+00:00' --spacing-hours 24",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK-NIGHT --start-at '2026-07-14T10:00:00+00:00' --spacing-hours 24"
         ],
         "apply_commands": [
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-03T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --start-at '2026-07-04T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA --start-at '2026-07-05T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --start-at '2026-07-06T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-07T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X --start-at '2026-07-08T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK --start-at '2026-07-09T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X-EVENING --start-at '2026-07-10T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK-EVENING --start-at '2026-07-11T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X-NIGHT --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-          "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK-NIGHT --start-at '2026-07-13T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin"
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --start-at '2026-07-05T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA --start-at '2026-07-06T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --start-at '2026-07-07T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-08T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X --start-at '2026-07-09T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK --start-at '2026-07-10T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X-EVENING --start-at '2026-07-11T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK-EVENING --start-at '2026-07-12T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X-NIGHT --start-at '2026-07-13T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+          "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK-NIGHT --start-at '2026-07-14T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin"
         ],
-        "recommended_next_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
-        "recommended_apply_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+        "recommended_next_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24",
+        "recommended_apply_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
         "operator_checklist": [
           "Preview each clear row before applying it.",
           "Apply only rows listed in clear_ids; do not use --allow-blocked for this partial-clear path.",
@@ -91,8 +91,8 @@
           "This path reschedules only unblocked approved rows; it does not approve, publish, or repair executors."
         ]
       },
-      "partial_clear_preview_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
-      "partial_clear_apply_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+      "partial_clear_preview_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24",
+      "partial_clear_apply_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
       "backlog_clearance_manifest": {
         "status": "clear",
         "approved_backlog_count": 12,
@@ -101,8 +101,8 @@
         "partial_clear_apply_available": true,
         "partial_clear_apply_count": 12,
         "blocked_ids": [],
-        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
-        "safe_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24",
+        "safe_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
         "blocked_apply_command": "",
         "override_apply_command": "",
         "apply_allowed_without_override": true,
@@ -161,9 +161,9 @@
     ]
   },
   "summary": {
-    "action_count": 16,
+    "action_count": 14,
     "user_review": 0,
-    "platform_fixes": 5,
+    "platform_fixes": 3,
     "scheduled_approval_batches": 0,
     "store_checks": 7,
     "manual_metric_updates": 2,
@@ -176,12 +176,12 @@
     "phases": {
       "Collect experiment results": 1,
       "Fill manual metrics": 2,
-      "Repair executor": 5,
+      "Repair executor": 3,
       "Reschedule approved backlog": 1,
       "Verify music sites": 7
     },
     "urgencies": {
-      "high": 7,
+      "high": 5,
       "low": 2,
       "medium": 7
     },
@@ -189,14 +189,14 @@
       "label": "Preview clear approved backlog row",
       "kind": "backlog_reschedule",
       "priority": 0,
-      "command": "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
+      "command": "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24",
       "context": {
         "approved_backlog_posts": 12,
         "approved_upcoming_posts": 0,
         "blocked_backlog_count": 0,
         "clear_to_apply_count": 12,
         "apply_allowed_without_override": true,
-        "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+        "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
         "blocked_apply_command": "",
         "override_apply_command": "",
         "partial_clear_apply_manifest": {
@@ -219,35 +219,35 @@
           ],
           "blocked_ids_retained": [],
           "preview_commands": [
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-03T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --start-at '2026-07-04T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA --start-at '2026-07-05T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --start-at '2026-07-06T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-07T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X --start-at '2026-07-08T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK --start-at '2026-07-09T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X-EVENING --start-at '2026-07-10T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK-EVENING --start-at '2026-07-11T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X-NIGHT --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK-NIGHT --start-at '2026-07-13T10:00:00-04:00' --spacing-hours 24"
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --start-at '2026-07-05T10:00:00+00:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA --start-at '2026-07-06T10:00:00+00:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --start-at '2026-07-07T10:00:00+00:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-08T10:00:00+00:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X --start-at '2026-07-09T10:00:00+00:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK --start-at '2026-07-10T10:00:00+00:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X-EVENING --start-at '2026-07-11T10:00:00+00:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK-EVENING --start-at '2026-07-12T10:00:00+00:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X-NIGHT --start-at '2026-07-13T10:00:00+00:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK-NIGHT --start-at '2026-07-14T10:00:00+00:00' --spacing-hours 24"
           ],
           "apply_commands": [
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-03T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --start-at '2026-07-04T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA --start-at '2026-07-05T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --start-at '2026-07-06T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-07T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X --start-at '2026-07-08T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK --start-at '2026-07-09T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X-EVENING --start-at '2026-07-10T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK-EVENING --start-at '2026-07-11T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X-NIGHT --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK-NIGHT --start-at '2026-07-13T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin"
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --start-at '2026-07-05T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA --start-at '2026-07-06T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --start-at '2026-07-07T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-08T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X --start-at '2026-07-09T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK --start-at '2026-07-10T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X-EVENING --start-at '2026-07-11T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK-EVENING --start-at '2026-07-12T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X-NIGHT --start-at '2026-07-13T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK-NIGHT --start-at '2026-07-14T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin"
           ],
-          "recommended_next_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
-          "recommended_apply_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+          "recommended_next_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24",
+          "recommended_apply_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
           "operator_checklist": [
             "Preview each clear row before applying it.",
             "Apply only rows listed in clear_ids; do not use --allow-blocked for this partial-clear path.",
@@ -264,8 +264,8 @@
             "This path reschedules only unblocked approved rows; it does not approve, publish, or repair executors."
           ]
         },
-        "partial_clear_preview_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
-        "partial_clear_apply_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+        "partial_clear_preview_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24",
+        "partial_clear_apply_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
         "backlog_clearance_manifest": {
           "status": "clear",
           "approved_backlog_count": 12,
@@ -274,8 +274,8 @@
           "partial_clear_apply_available": true,
           "partial_clear_apply_count": 12,
           "blocked_ids": [],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
-          "safe_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24",
+          "safe_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
           "blocked_apply_command": "",
           "override_apply_command": "",
           "apply_allowed_without_override": true,
@@ -339,14 +339,14 @@
       "label": "Preview clear approved backlog row",
       "kind": "backlog_reschedule",
       "priority": 0,
-      "command": "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
+      "command": "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24",
       "context": {
         "approved_backlog_posts": 12,
         "approved_upcoming_posts": 0,
         "blocked_backlog_count": 0,
         "clear_to_apply_count": 12,
         "apply_allowed_without_override": true,
-        "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+        "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
         "blocked_apply_command": "",
         "override_apply_command": "",
         "partial_clear_apply_manifest": {
@@ -369,35 +369,35 @@
           ],
           "blocked_ids_retained": [],
           "preview_commands": [
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-03T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --start-at '2026-07-04T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA --start-at '2026-07-05T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --start-at '2026-07-06T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-07T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X --start-at '2026-07-08T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK --start-at '2026-07-09T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X-EVENING --start-at '2026-07-10T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK-EVENING --start-at '2026-07-11T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X-NIGHT --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK-NIGHT --start-at '2026-07-13T10:00:00-04:00' --spacing-hours 24"
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --start-at '2026-07-05T10:00:00+00:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA --start-at '2026-07-06T10:00:00+00:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --start-at '2026-07-07T10:00:00+00:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-08T10:00:00+00:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X --start-at '2026-07-09T10:00:00+00:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK --start-at '2026-07-10T10:00:00+00:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X-EVENING --start-at '2026-07-11T10:00:00+00:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK-EVENING --start-at '2026-07-12T10:00:00+00:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X-NIGHT --start-at '2026-07-13T10:00:00+00:00' --spacing-hours 24",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK-NIGHT --start-at '2026-07-14T10:00:00+00:00' --spacing-hours 24"
           ],
           "apply_commands": [
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-03T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --start-at '2026-07-04T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA --start-at '2026-07-05T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --start-at '2026-07-06T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-07T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X --start-at '2026-07-08T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK --start-at '2026-07-09T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X-EVENING --start-at '2026-07-10T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK-EVENING --start-at '2026-07-11T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X-NIGHT --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK-NIGHT --start-at '2026-07-13T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin"
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --start-at '2026-07-05T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA --start-at '2026-07-06T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --start-at '2026-07-07T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-08T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X --start-at '2026-07-09T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK --start-at '2026-07-10T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X-EVENING --start-at '2026-07-11T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK-EVENING --start-at '2026-07-12T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X-NIGHT --start-at '2026-07-13T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+            "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK-NIGHT --start-at '2026-07-14T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin"
           ],
-          "recommended_next_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
-          "recommended_apply_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+          "recommended_next_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24",
+          "recommended_apply_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
           "operator_checklist": [
             "Preview each clear row before applying it.",
             "Apply only rows listed in clear_ids; do not use --allow-blocked for this partial-clear path.",
@@ -414,8 +414,8 @@
             "This path reschedules only unblocked approved rows; it does not approve, publish, or repair executors."
           ]
         },
-        "partial_clear_preview_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
-        "partial_clear_apply_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+        "partial_clear_preview_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24",
+        "partial_clear_apply_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
         "backlog_clearance_manifest": {
           "status": "clear",
           "approved_backlog_count": 12,
@@ -424,8 +424,8 @@
           "partial_clear_apply_available": true,
           "partial_clear_apply_count": 12,
           "blocked_ids": [],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
-          "safe_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24",
+          "safe_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
           "blocked_apply_command": "",
           "override_apply_command": "",
           "apply_allowed_without_override": true,
@@ -484,35 +484,39 @@
       ]
     },
     {
-      "label": "Fix TikTok executor",
+      "label": "Fix Instagram executor",
       "kind": "platform_fix",
       "priority": 1,
-      "command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
       "context": {
-        "post_id": "FP-AUTO-284",
-        "platform": "TikTok",
-        "reason": "analog_myth_launch_day",
-        "error_summary": "",
-        "repair_action": "TikTok direct public posting approval is false, but upload-draft mode can proceed after credentials. Complete TikTok OAuth setup, push upload-mode secrets, then refresh Admin.",
-        "repair_apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
+        "post_id": "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+        "platform": "Instagram",
+        "reason": "max_attempts_exceeded",
+        "error_summary": "Instagram retry cap reached; verify instagram_business_account repair before resetting execution state.",
+        "repair_action": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
+        "repair_apply_command": "python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py",
+        "retry_reset_verification_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+        "retry_reset_preview_command": "python3 scripts/reset_social_execution_state.py FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+        "retry_reset_apply_command": "python3 scripts/reset_social_execution_state.py FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --apply",
+        "retry_reset_note": "Run the dry-run verification command first. Apply the retry reset only when the worker reports the row is executable.",
         "readiness": {
           "ready": false,
-          "posting_mode": "direct",
-          "upload_ready": true,
-          "direct_public_ready": false,
-          "access_token_present": true,
-          "refresh_config_present": true,
-          "missing_secrets": [],
-          "public_posting_approved": false,
-          "default_privacy": "PUBLIC_TO_EVERYONE",
-          "brand_content_toggle": false,
-          "brand_organic_toggle": true,
-          "aigc_label_enabled": true
+          "api": "facebook-login",
+          "account_id_source": "FB_PAGE_ID",
+          "account_resolved": false,
+          "account_resolution_reason": "instagram_business_account_unresolved"
         },
-        "public_posting_approved": false,
-        "refresh_config_present": true,
-        "access_token_present": true,
-        "default_privacy": "PUBLIC_TO_EVERYONE"
+        "account_resolved": false,
+        "account_resolution_reason": "instagram_business_account_unresolved",
+        "account_id_source": "FB_PAGE_ID",
+        "local_secret_source": "secrets/social_api.env",
+        "local_secret_presence": {
+          "IG_BUSINESS_ACCOUNT_ID": false
+        },
+        "local_missing_secrets": [
+          "IG_BUSINESS_ACCOUNT_ID"
+        ],
+        "local_secret_ready": false
       },
       "phase": "Repair executor",
       "urgency": "high",
@@ -528,14 +532,18 @@
       "label": "Fix Instagram executor",
       "kind": "platform_fix",
       "priority": 1,
-      "command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
+      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263",
       "context": {
-        "post_id": "FP-AUTO-282",
+        "post_id": "FP-AUTO-263",
         "platform": "Instagram",
-        "reason": "analog_myth_launch_day",
-        "error_summary": "",
+        "reason": "max_attempts_exceeded",
+        "error_summary": "Instagram retry cap reached; verify instagram_business_account repair before resetting execution state.",
         "repair_action": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
         "repair_apply_command": "python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py",
+        "retry_reset_verification_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263",
+        "retry_reset_preview_command": "python3 scripts/reset_social_execution_state.py FP-AUTO-263",
+        "retry_reset_apply_command": "python3 scripts/reset_social_execution_state.py FP-AUTO-263 --apply",
+        "retry_reset_note": "Run the dry-run verification command first. Apply the retry reset only when the worker reports the row is executable.",
         "readiness": {
           "ready": false,
           "api": "facebook-login",
@@ -566,35 +574,39 @@
       ]
     },
     {
-      "label": "Fix TikTok executor",
+      "label": "Fix Instagram executor",
       "kind": "platform_fix",
       "priority": 1,
-      "command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-258",
       "context": {
-        "post_id": "FP-AUTO-279",
-        "platform": "TikTok",
-        "reason": "analog_myth_launch_day",
-        "error_summary": "",
-        "repair_action": "TikTok direct public posting approval is false, but upload-draft mode can proceed after credentials. Complete TikTok OAuth setup, push upload-mode secrets, then refresh Admin.",
-        "repair_apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
+        "post_id": "FP-AUTO-258",
+        "platform": "Instagram",
+        "reason": "max_attempts_exceeded",
+        "error_summary": "Instagram retry cap reached; verify instagram_business_account repair before resetting execution state.",
+        "repair_action": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
+        "repair_apply_command": "python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py",
+        "retry_reset_verification_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-258",
+        "retry_reset_preview_command": "python3 scripts/reset_social_execution_state.py FP-AUTO-258",
+        "retry_reset_apply_command": "python3 scripts/reset_social_execution_state.py FP-AUTO-258 --apply",
+        "retry_reset_note": "Run the dry-run verification command first. Apply the retry reset only when the worker reports the row is executable.",
         "readiness": {
           "ready": false,
-          "posting_mode": "direct",
-          "upload_ready": true,
-          "direct_public_ready": false,
-          "access_token_present": true,
-          "refresh_config_present": true,
-          "missing_secrets": [],
-          "public_posting_approved": false,
-          "default_privacy": "PUBLIC_TO_EVERYONE",
-          "brand_content_toggle": false,
-          "brand_organic_toggle": true,
-          "aigc_label_enabled": true
+          "api": "facebook-login",
+          "account_id_source": "FB_PAGE_ID",
+          "account_resolved": false,
+          "account_resolution_reason": "instagram_business_account_unresolved"
         },
-        "public_posting_approved": false,
-        "refresh_config_present": true,
-        "access_token_present": true,
-        "default_privacy": "PUBLIC_TO_EVERYONE"
+        "account_resolved": false,
+        "account_resolution_reason": "instagram_business_account_unresolved",
+        "account_id_source": "FB_PAGE_ID",
+        "local_secret_source": "secrets/social_api.env",
+        "local_secret_presence": {
+          "IG_BUSINESS_ACCOUNT_ID": false
+        },
+        "local_missing_secrets": [
+          "IG_BUSINESS_ACCOUNT_ID"
+        ],
+        "local_secret_ready": false
       },
       "phase": "Repair executor",
       "urgency": "high",
@@ -604,88 +616,6 @@
         1,
         1,
         4
-      ]
-    },
-    {
-      "label": "Fix Instagram executor",
-      "kind": "platform_fix",
-      "priority": 1,
-      "command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
-      "context": {
-        "post_id": "FP-AUTO-277",
-        "platform": "Instagram",
-        "reason": "analog_myth_launch_day",
-        "error_summary": "",
-        "repair_action": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
-        "repair_apply_command": "python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py",
-        "readiness": {
-          "ready": false,
-          "api": "facebook-login",
-          "account_id_source": "FB_PAGE_ID",
-          "account_resolved": false,
-          "account_resolution_reason": "instagram_business_account_unresolved"
-        },
-        "account_resolved": false,
-        "account_resolution_reason": "instagram_business_account_unresolved",
-        "account_id_source": "FB_PAGE_ID",
-        "local_secret_source": "secrets/social_api.env",
-        "local_secret_presence": {
-          "IG_BUSINESS_ACCOUNT_ID": false
-        },
-        "local_missing_secrets": [
-          "IG_BUSINESS_ACCOUNT_ID"
-        ],
-        "local_secret_ready": false
-      },
-      "phase": "Repair executor",
-      "urgency": "high",
-      "urgency_reason": "Platform executor needs repair before queued auto posts can publish.",
-      "status": "needs_fix",
-      "sort_key": [
-        1,
-        1,
-        5
-      ]
-    },
-    {
-      "label": "Fix Instagram executor",
-      "kind": "platform_fix",
-      "priority": 1,
-      "command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
-      "context": {
-        "post_id": "FP-AUTO-272",
-        "platform": "Instagram",
-        "reason": "analog_myth_launch_day",
-        "error_summary": "",
-        "repair_action": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
-        "repair_apply_command": "python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py",
-        "readiness": {
-          "ready": false,
-          "api": "facebook-login",
-          "account_id_source": "FB_PAGE_ID",
-          "account_resolved": false,
-          "account_resolution_reason": "instagram_business_account_unresolved"
-        },
-        "account_resolved": false,
-        "account_resolution_reason": "instagram_business_account_unresolved",
-        "account_id_source": "FB_PAGE_ID",
-        "local_secret_source": "secrets/social_api.env",
-        "local_secret_presence": {
-          "IG_BUSINESS_ACCOUNT_ID": false
-        },
-        "local_missing_secrets": [
-          "IG_BUSINESS_ACCOUNT_ID"
-        ],
-        "local_secret_ready": false
-      },
-      "phase": "Repair executor",
-      "urgency": "high",
-      "urgency_reason": "Platform executor needs repair before queued auto posts can publish.",
-      "status": "needs_fix",
-      "sort_key": [
-        1,
-        1,
-        6
       ]
     },
     {
@@ -766,25 +696,101 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "Spotify",
-        "checked_at": "2026-07-02T01:21:18.921926+00:00",
+        "checked_at": "2026-07-02T04:31:49.334170+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-07-03T01:21:18.921926+00:00",
+        "next_recheck_at": "2026-07-03T04:31:49.334170+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-07-02T01:21:18.921926Z",
+          "updated_at": "2026-07-02T04:31:49.334170Z",
           "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-          "checked_at": "2026-07-02T01:21:18.921926+00:00",
+          "checked_at": "2026-07-02T04:31:49.334170+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-07-03T01:21:18.921926+00:00",
+          "next_recheck_at": "2026-07-03T04:31:49.334170+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-07-03T01:21:18.921926+00:00. Status: waiting_for_release_propagation."
+        "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-07-03T04:31:49.334170+00:00. Status: waiting_for_release_propagation."
+      },
+      "phase": "Verify music sites",
+      "urgency": "medium",
+      "urgency_reason": "Public store links should be checked until DistroKid exposes them.",
+      "status": "ready",
+      "sort_key": [
+        2,
+        20,
+        5
+      ]
+    },
+    {
+      "label": "Re-check Twelve Dollars on Apple Music",
+      "kind": "store_verification",
+      "priority": 20,
+      "command": "python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/apple_music_release_snapshot.json'",
+      "context": {
+        "release": "Twelve Dollars",
+        "service": "Apple Music",
+        "checked_at": "2026-07-02T04:31:50.783736+00:00",
+        "checked_age_hours": 0.0,
+        "recheck_interval_hours": 24,
+        "next_recheck_at": "2026-07-03T04:31:50.783736+00:00",
+        "recheck_due": false,
+        "recheck_status": "waiting_for_release_propagation",
+        "latest_snapshot": {
+          "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
+          "ok": false,
+          "updated_at": "2026-07-02T04:31:50.783736Z",
+          "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
+          "checked_at": "2026-07-02T04:31:50.783736+00:00",
+          "checked_age_hours": 0.0,
+          "recheck_interval_hours": 24,
+          "next_recheck_at": "2026-07-03T04:31:50.783736+00:00",
+          "recheck_due": false,
+          "recheck_status": "waiting_for_release_propagation"
+        },
+        "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-07-03T04:31:50.783736+00:00. Status: waiting_for_release_propagation."
+      },
+      "phase": "Verify music sites",
+      "urgency": "medium",
+      "urgency_reason": "Public store links should be checked until DistroKid exposes them.",
+      "status": "ready",
+      "sort_key": [
+        2,
+        20,
+        6
+      ]
+    },
+    {
+      "label": "Re-check Twelve Dollars on HyperFollow",
+      "kind": "store_verification",
+      "priority": 20,
+      "command": "python3 scripts/capture_hyperfollow_store_links.py --url 'https://distrokid.com/hyperfollow/lilyroo/twelve-dollars' --out 'data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json'",
+      "context": {
+        "release": "Twelve Dollars",
+        "service": "HyperFollow",
+        "checked_at": "2026-07-02T04:31:50.967024+00:00",
+        "checked_age_hours": 0.0,
+        "recheck_interval_hours": 24,
+        "next_recheck_at": "2026-07-03T04:31:50.967024+00:00",
+        "recheck_due": false,
+        "recheck_status": "waiting_for_release_propagation",
+        "latest_snapshot": {
+          "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
+          "ok": false,
+          "updated_at": "2026-07-02T04:31:50.967024Z",
+          "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
+          "checked_at": "2026-07-02T04:31:50.967024+00:00",
+          "checked_age_hours": 0.0,
+          "recheck_interval_hours": 24,
+          "next_recheck_at": "2026-07-03T04:31:50.967024+00:00",
+          "recheck_due": false,
+          "recheck_status": "waiting_for_release_propagation"
+        },
+        "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; next recommended re-check after 2026-07-03T04:31:50.967024+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -797,36 +803,36 @@
       ]
     },
     {
-      "label": "Re-check Twelve Dollars on Apple Music",
+      "label": "Re-check Analog Myth on Spotify",
       "kind": "store_verification",
       "priority": 20,
-      "command": "python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/apple_music_release_snapshot.json'",
+      "command": "python3 scripts/search_spotify_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/spotify_release_snapshot.json'",
       "context": {
-        "release": "Twelve Dollars",
-        "service": "Apple Music",
-        "checked_at": "2026-07-02T01:21:39.214053+00:00",
+        "release": "Analog Myth",
+        "service": "Spotify",
+        "checked_at": "2026-07-02T04:31:51.026906+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-07-03T01:21:39.214053+00:00",
+        "next_recheck_at": "2026-07-03T04:31:51.026906+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
-          "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
+          "path": "data/store-verification/analog-myth/spotify_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-07-02T01:21:39.214053Z",
-          "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-          "checked_at": "2026-07-02T01:21:39.214053+00:00",
+          "updated_at": "2026-07-02T04:31:51.026906Z",
+          "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
+          "checked_at": "2026-07-02T04:31:51.026906+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-07-03T01:21:39.214053+00:00",
+          "next_recheck_at": "2026-07-03T04:31:51.026906+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-07-03T01:21:39.214053+00:00. Status: waiting_for_release_propagation."
+        "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-07-03T04:31:51.026906+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
-      "urgency_reason": "Public store links should be checked until DistroKid exposes them.",
+      "urgency_reason": "Public store links should be checked as the July 1 release approaches.",
       "status": "ready",
       "sort_key": [
         2,
@@ -835,36 +841,36 @@
       ]
     },
     {
-      "label": "Re-check Twelve Dollars on HyperFollow",
+      "label": "Re-check Analog Myth on Apple Music",
       "kind": "store_verification",
       "priority": 20,
-      "command": "python3 scripts/capture_hyperfollow_store_links.py --url 'https://distrokid.com/hyperfollow/lilyroo/twelve-dollars' --out 'data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json'",
+      "command": "python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/apple_music_release_snapshot.json'",
       "context": {
-        "release": "Twelve Dollars",
-        "service": "HyperFollow",
-        "checked_at": "2026-07-02T01:21:39.639827+00:00",
+        "release": "Analog Myth",
+        "service": "Apple Music",
+        "checked_at": "2026-07-02T04:31:51.400799+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-07-03T01:21:39.639827+00:00",
+        "next_recheck_at": "2026-07-03T04:31:51.400799+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
-          "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
-          "ok": false,
-          "updated_at": "2026-07-02T01:21:39.639827Z",
-          "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-          "checked_at": "2026-07-02T01:21:39.639827+00:00",
+          "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
+          "ok": true,
+          "updated_at": "2026-07-02T04:31:51.400799Z",
+          "summary": "https://music.apple.com/us/album/analog-myth/6777905789",
+          "checked_at": "2026-07-02T04:31:51.400799+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-07-03T01:21:39.639827+00:00",
+          "next_recheck_at": "2026-07-03T04:31:51.400799+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; next recommended re-check after 2026-07-03T01:21:39.639827+00:00. Status: waiting_for_release_propagation."
+        "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-07-03T04:31:51.400799+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
-      "urgency_reason": "Public store links should be checked until DistroKid exposes them.",
+      "urgency_reason": "Public store links should be checked as the July 1 release approaches.",
       "status": "ready",
       "sort_key": [
         2,
@@ -873,32 +879,32 @@
       ]
     },
     {
-      "label": "Re-check Analog Myth on Spotify",
+      "label": "Re-check Analog Myth on YouTube Music",
       "kind": "store_verification",
       "priority": 20,
-      "command": "python3 scripts/search_spotify_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/spotify_release_snapshot.json'",
+      "command": "python3 scripts/search_youtube_music_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/youtube_music_release_snapshot.json'",
       "context": {
         "release": "Analog Myth",
-        "service": "Spotify",
-        "checked_at": "2026-07-02T01:21:39.714307+00:00",
+        "service": "YouTube Music",
+        "checked_at": "2026-07-02T04:31:51.461218+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-07-03T01:21:39.714307+00:00",
+        "next_recheck_at": "2026-07-03T04:31:51.461218+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
-          "path": "data/store-verification/analog-myth/spotify_release_snapshot.json",
+          "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-07-02T01:21:39.714307Z",
-          "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
-          "checked_at": "2026-07-02T01:21:39.714307+00:00",
+          "updated_at": "2026-07-02T04:31:51.461218Z",
+          "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
+          "checked_at": "2026-07-02T04:31:51.461218+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-07-03T01:21:39.714307+00:00",
+          "next_recheck_at": "2026-07-03T04:31:51.461218+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-07-03T01:21:39.714307+00:00. Status: waiting_for_release_propagation."
+        "note": "Searches public web results for YouTube Music watch URLs, then validates the public title. Latest snapshot found no public URL; next recommended re-check after 2026-07-03T04:31:51.461218+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -911,32 +917,32 @@
       ]
     },
     {
-      "label": "Re-check Analog Myth on Apple Music",
+      "label": "Re-check Analog Myth on HyperFollow",
       "kind": "store_verification",
       "priority": 20,
-      "command": "python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/apple_music_release_snapshot.json'",
+      "command": "python3 scripts/capture_hyperfollow_store_links.py --url 'https://distrokid.com/hyperfollow/lilyroo/analog-myth' --out 'data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json'",
       "context": {
         "release": "Analog Myth",
-        "service": "Apple Music",
-        "checked_at": "2026-07-02T01:21:59.946232+00:00",
+        "service": "HyperFollow",
+        "checked_at": "2026-07-02T04:31:52.067671+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-07-03T01:21:59.946232+00:00",
+        "next_recheck_at": "2026-07-03T04:31:52.067671+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
-          "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
+          "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
           "ok": false,
-          "updated_at": "2026-07-02T01:21:59.946232Z",
-          "summary": "Apple Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
-          "checked_at": "2026-07-02T01:21:59.946232+00:00",
+          "updated_at": "2026-07-02T04:31:52.067671Z",
+          "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
+          "checked_at": "2026-07-02T04:31:52.067671+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-07-03T01:21:59.946232+00:00",
+          "next_recheck_at": "2026-07-03T04:31:52.067671+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-07-03T01:21:59.946232+00:00. Status: waiting_for_release_propagation."
+        "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; next recommended re-check after 2026-07-03T04:31:52.067671+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -946,82 +952,6 @@
         2,
         20,
         11
-      ]
-    },
-    {
-      "label": "Re-check Analog Myth on YouTube Music",
-      "kind": "store_verification",
-      "priority": 20,
-      "command": "python3 scripts/search_youtube_music_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/youtube_music_release_snapshot.json'",
-      "context": {
-        "release": "Analog Myth",
-        "service": "YouTube Music",
-        "checked_at": "2026-07-02T01:21:59.989305+00:00",
-        "checked_age_hours": 0.0,
-        "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-07-03T01:21:59.989305+00:00",
-        "recheck_due": false,
-        "recheck_status": "waiting_for_release_propagation",
-        "latest_snapshot": {
-          "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
-          "ok": false,
-          "updated_at": "2026-07-02T01:21:59.989305Z",
-          "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-          "checked_at": "2026-07-02T01:21:59.989305+00:00",
-          "checked_age_hours": 0.0,
-          "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-07-03T01:21:59.989305+00:00",
-          "recheck_due": false,
-          "recheck_status": "waiting_for_release_propagation"
-        },
-        "note": "Searches public web results for YouTube Music watch URLs, then validates the public title. Latest snapshot found no public URL; next recommended re-check after 2026-07-03T01:21:59.989305+00:00. Status: waiting_for_release_propagation."
-      },
-      "phase": "Verify music sites",
-      "urgency": "medium",
-      "urgency_reason": "Public store links should be checked as the July 1 release approaches.",
-      "status": "ready",
-      "sort_key": [
-        2,
-        20,
-        12
-      ]
-    },
-    {
-      "label": "Re-check Analog Myth on HyperFollow",
-      "kind": "store_verification",
-      "priority": 20,
-      "command": "python3 scripts/capture_hyperfollow_store_links.py --url 'https://distrokid.com/hyperfollow/lilyroo/analog-myth' --out 'data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json'",
-      "context": {
-        "release": "Analog Myth",
-        "service": "HyperFollow",
-        "checked_at": "2026-07-02T01:22:22.420770+00:00",
-        "checked_age_hours": 0.0,
-        "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-07-03T01:22:22.420770+00:00",
-        "recheck_due": false,
-        "recheck_status": "waiting_for_release_propagation",
-        "latest_snapshot": {
-          "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
-          "ok": true,
-          "updated_at": "2026-07-02T01:22:22.420770Z",
-          "summary": "spotify",
-          "checked_at": "2026-07-02T01:22:22.420770+00:00",
-          "checked_age_hours": 0.0,
-          "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-07-03T01:22:22.420770+00:00",
-          "recheck_due": false,
-          "recheck_status": "waiting_for_release_propagation"
-        },
-        "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; next recommended re-check after 2026-07-03T01:22:22.420770+00:00. Status: waiting_for_release_propagation."
-      },
-      "phase": "Verify music sites",
-      "urgency": "medium",
-      "urgency_reason": "Public store links should be checked as the July 1 release approaches.",
-      "status": "ready",
-      "sort_key": [
-        2,
-        20,
-        13
       ]
     },
     {
@@ -1168,7 +1098,7 @@
       "sort_key": [
         3,
         32,
-        14
+        12
       ]
     },
     {
@@ -1306,7 +1236,7 @@
       "sort_key": [
         3,
         33,
-        15
+        13
       ]
     }
   ]

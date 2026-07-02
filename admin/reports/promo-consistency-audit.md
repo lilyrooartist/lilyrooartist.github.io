@@ -1,12 +1,12 @@
 # Promo Consistency Audit - Lily Roo
 
-Generated: 2026-07-02T01:22:31.379817Z
+Generated: 2026-07-02T04:32:02.527636Z
 
 ## Summary
 - Status: **fail**
-- Checks: **29 / 30** passed
-- Failed checks: **1**
-- High severity failures: **0**
+- Checks: **27 / 30** passed
+- Failed checks: **3**
+- High severity failures: **2**
 - Medium severity failures: **1**
 
 ## Checks
@@ -24,10 +24,14 @@ Generated: 2026-07-02T01:22:31.379817Z
   - Platform repair packet should match platform repair blockers in the ledger.
 - **executor_platform_fix_count_matches_platform_packet**: `pass`
   - Executor platform-fix count should match the platform repair packet after excluding manual-only handoff rows.
-- **tiktok_preflight_status_matches_platform_repair**: `pass`
+- **tiktok_preflight_status_matches_platform_repair**: `fail`
   - TikTok platform repair row should mirror the setup preflight status.
-- **tiktok_preflight_local_missing_matches_platform_repair**: `pass`
+  - Expected: ``
+  - Actual: `blocked`
+- **tiktok_preflight_local_missing_matches_platform_repair**: `fail`
   - TikTok preflight local missing secrets should match the platform repair row.
+  - Expected: `[]`
+  - Actual: `['TIKTOK_CLIENT_KEY', 'TIKTOK_CLIENT_SECRET', 'TIKTOK_REFRESH_TOKEN']`
 - **tiktok_preflight_worker_missing_matches_platform_repair**: `pass`
   - TikTok preflight worker missing secrets should match the platform repair row.
 - **scheduler_blocked_ids_present_in_executor_attention**: `pass`

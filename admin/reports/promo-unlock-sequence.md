@@ -1,31 +1,30 @@
 # Promo Unlock Sequence - Lily Roo
 
-Generated: 2026-07-02T01:22:31.069140Z
+Generated: 2026-07-02T04:32:02.090502Z
 
 ## Summary
 - Steps: **4**
 - Ready for human review: **0**
-- Blocked or warning: **3**
-- Projected resolution units across sequence: **20**
+- Blocked or warning: **2**
+- Projected resolution units across sequence: **18**
 - Current step: `unlock-manual-metrics` (`blocked_until_input`)
-- Open blockers still tracked: **8**
+- Open blockers still tracked: **11**
 
 ## Sequence
 1. **Approve checked scheduled rows** - `unlock-checked-scheduled-approval`
    - State: `blocked`; owner: `tod`
-   - Reason: blocked
+   - Reason: Blocked by: FP-AUTO-272, FP-AUTO-277, FP-AUTO-279, FP-AUTO-282, FP-AUTO-284.
    - Unlocks: Instagram executor row can become publish-eligible after approval.
 2. **Repair TikTok executor** - `unlock-tiktok-platform-repair`
-   - State: `blocked`; owner: `tod`
-   - Reason: blocked
+   - State: `ready`; owner: `tod`
+   - Reason: ready
    - Unlocks: Held TikTok approval rows can pass platform-readiness review.; Approved TikTok backlog can become safe to reschedule into upload-draft creation.
-   - preview (preview-safe): `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
 3. **Reschedule approved past-due backlog** - `unlock-backlog-reschedule`
    - State: `clear`; owner: `tod`
    - Reason: No action is needed for this gate.
    - Unlocks: Approved past-due queue rows get a fresh schedule after executor blockers clear.
-   - preview (preview-safe): `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24`
-   - apply_after_review (after-review only): `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin`
+   - preview (preview-safe): `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24`
+   - apply_after_review (after-review only): `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-03T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin`
    - Completion evidence: data/backlog_reschedule_preview.json should show normal_apply_gate clear before any non-override apply command is exposed.
    - Guardrail: Normal apply stays hidden until known executor/platform blockers clear.
 4. **Fill manual metric worksheet** - `unlock-manual-metrics`

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-02T01:22:29.942450Z",
+  "generated_at": "2026-07-02T04:32:00.951845Z",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -14,14 +14,23 @@
     ]
   },
   "summary": {
-    "approval_blocker_count": 0,
-    "auto_count": 0,
+    "approval_blocker_count": 5,
+    "auto_count": 5,
     "manual_count": 0,
     "review_check_passed_count": 0,
-    "review_check_blocked_count": 0,
+    "review_check_blocked_count": 5,
     "checked_batch_ids": [],
-    "blocked_review_ids": [],
-    "review_check_status_counts": {},
+    "blocked_review_ids": [
+      "FP-AUTO-272",
+      "FP-AUTO-277",
+      "FP-AUTO-279",
+      "FP-AUTO-282",
+      "FP-AUTO-284"
+    ],
+    "review_check_status_counts": {
+      "fail": 5,
+      "pass": 20
+    },
     "checked_batch_preview_command": "",
     "checked_batch_apply_command": "",
     "checked_batch_explicit_preview_command": "",
@@ -32,15 +41,82 @@
       "ids": [],
       "effects": []
     },
-    "preview_command_count": 0,
-    "apply_command_count": 0,
-    "batch_preview_command": "",
-    "batch_apply_command": "",
+    "preview_command_count": 5,
+    "apply_command_count": 5,
+    "batch_preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-272 FP-AUTO-277 FP-AUTO-279 FP-AUTO-282 FP-AUTO-284 --dry-run",
+    "batch_apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-272 FP-AUTO-277 FP-AUTO-279 FP-AUTO-282 FP-AUTO-284 --refresh-admin",
     "batch_effect": {
-      "row_count": 0,
-      "change_count": 0,
-      "ids": [],
-      "effects": []
+      "row_count": 5,
+      "change_count": 5,
+      "ids": [
+        "FP-AUTO-272",
+        "FP-AUTO-277",
+        "FP-AUTO-279",
+        "FP-AUTO-282",
+        "FP-AUTO-284"
+      ],
+      "effects": [
+        {
+          "id": "FP-AUTO-272",
+          "platform": "Instagram",
+          "execution_mode": "auto",
+          "effect": {
+            "field": "approved",
+            "from": "no",
+            "to": "yes",
+            "changed": true,
+            "summary": "approved 'no' -> 'yes'"
+          }
+        },
+        {
+          "id": "FP-AUTO-277",
+          "platform": "Instagram",
+          "execution_mode": "auto",
+          "effect": {
+            "field": "approved",
+            "from": "no",
+            "to": "yes",
+            "changed": true,
+            "summary": "approved 'no' -> 'yes'"
+          }
+        },
+        {
+          "id": "FP-AUTO-279",
+          "platform": "TikTok",
+          "execution_mode": "auto",
+          "effect": {
+            "field": "approved",
+            "from": "no",
+            "to": "yes",
+            "changed": true,
+            "summary": "approved 'no' -> 'yes'"
+          }
+        },
+        {
+          "id": "FP-AUTO-282",
+          "platform": "Instagram",
+          "execution_mode": "auto",
+          "effect": {
+            "field": "approved",
+            "from": "no",
+            "to": "yes",
+            "changed": true,
+            "summary": "approved 'no' -> 'yes'"
+          }
+        },
+        {
+          "id": "FP-AUTO-284",
+          "platform": "TikTok",
+          "execution_mode": "auto",
+          "effect": {
+            "field": "approved",
+            "from": "no",
+            "to": "yes",
+            "changed": true,
+            "summary": "approved 'no' -> 'yes'"
+          }
+        }
+      ]
     },
     "checked_batch_dry_run_preview": {
       "status": "blocked",
@@ -73,9 +149,309 @@
   "approval_docket": {
     "status": "blocked",
     "ready_count": 0,
-    "held_count": 0,
+    "held_count": 5,
     "ready_to_approve": [],
-    "held": [],
+    "held": [
+      {
+        "id": "FP-AUTO-272",
+        "platform": "Instagram",
+        "song": "Every Pearl in Carmel",
+        "scheduled_at": "2026-06-28T21:35:00-04:00",
+        "execution_mode": "auto",
+        "post_type": "image",
+        "review_status": "held_by_failed_checks",
+        "checked_batch_member": false,
+        "paste_text": "Every Pearl in Carmel is the pretty souvenir that still knows what it cost. Watch the remastered video. Full Twelve Dollars playlist is live.\n\nWatch Every Pearl in Carmel: https://youtu.be/QodRYnvTVZc | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+        "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/02-every-pearl-in-carmel-youtube-thumbnail.jpg",
+        "destination_links": [
+          "https://youtu.be/QodRYnvTVZc",
+          "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n"
+        ],
+        "destination_link_audit": [
+          {
+            "url": "https://youtu.be/QodRYnvTVZc",
+            "canonical_url": "https://youtu.be/QodRYnvTVZc",
+            "status": "needs_manual_review",
+            "evidence": [],
+            "evidence_count": 0,
+            "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+          },
+          {
+            "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+            "canonical_url": "https://www.youtube.com/playlist",
+            "status": "needs_manual_review",
+            "evidence": [],
+            "evidence_count": 0,
+            "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+          }
+        ],
+        "destination_link_audit_summary": {
+          "link_count": 2,
+          "verified_local_evidence_count": 0,
+          "needs_manual_review_count": 2,
+          "all_links_have_local_evidence": false
+        },
+        "failed_review_checks": [
+          {
+            "name": "platform_readiness",
+            "status": "fail",
+            "detail": "Executor readiness snapshot marks platform blocked."
+          }
+        ],
+        "approval_effect": {
+          "field": "approved",
+          "from": "no",
+          "to": "yes",
+          "changed": true,
+          "summary": "approved 'no' -> 'yes'"
+        },
+        "preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-272 --dry-run",
+        "apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-272 --refresh-admin",
+        "manual_dispatch_required": false
+      },
+      {
+        "id": "FP-AUTO-277",
+        "platform": "Instagram",
+        "song": "The Other One's Charging",
+        "scheduled_at": "2026-06-29T21:35:00-04:00",
+        "execution_mode": "auto",
+        "post_type": "image",
+        "review_status": "held_by_failed_checks",
+        "checked_batch_member": false,
+        "paste_text": "The Other One's Charging is domestic chaos with a battery icon. Watch the remastered video. Full Twelve Dollars playlist is live.\n\nWatch The Other One's Charging: https://youtu.be/EprgLKHp-lE | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+        "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/03-the-other-ones-charging-youtube-thumbnail.jpg",
+        "destination_links": [
+          "https://youtu.be/EprgLKHp-lE",
+          "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n"
+        ],
+        "destination_link_audit": [
+          {
+            "url": "https://youtu.be/EprgLKHp-lE",
+            "canonical_url": "https://youtu.be/EprgLKHp-lE",
+            "status": "needs_manual_review",
+            "evidence": [],
+            "evidence_count": 0,
+            "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+          },
+          {
+            "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+            "canonical_url": "https://www.youtube.com/playlist",
+            "status": "needs_manual_review",
+            "evidence": [],
+            "evidence_count": 0,
+            "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+          }
+        ],
+        "destination_link_audit_summary": {
+          "link_count": 2,
+          "verified_local_evidence_count": 0,
+          "needs_manual_review_count": 2,
+          "all_links_have_local_evidence": false
+        },
+        "failed_review_checks": [
+          {
+            "name": "platform_readiness",
+            "status": "fail",
+            "detail": "Executor readiness snapshot marks platform blocked."
+          }
+        ],
+        "approval_effect": {
+          "field": "approved",
+          "from": "no",
+          "to": "yes",
+          "changed": true,
+          "summary": "approved 'no' -> 'yes'"
+        },
+        "preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-277 --dry-run",
+        "apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-277 --refresh-admin",
+        "manual_dispatch_required": false
+      },
+      {
+        "id": "FP-AUTO-279",
+        "platform": "TikTok",
+        "song": "The Other One's Charging",
+        "scheduled_at": "2026-06-29T22:15:00-04:00",
+        "execution_mode": "auto",
+        "post_type": "video",
+        "review_status": "held_by_failed_checks",
+        "checked_batch_member": false,
+        "paste_text": "The Other One's Charging is domestic chaos with a battery icon. Watch the remastered video. Full Twelve Dollars playlist is live.\n\nWatch The Other One's Charging: https://youtu.be/EprgLKHp-lE | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+        "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/video/03-the-other-ones-charging-youtube-remaster.mp4",
+        "destination_links": [
+          "https://youtu.be/EprgLKHp-lE",
+          "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n"
+        ],
+        "destination_link_audit": [
+          {
+            "url": "https://youtu.be/EprgLKHp-lE",
+            "canonical_url": "https://youtu.be/EprgLKHp-lE",
+            "status": "needs_manual_review",
+            "evidence": [],
+            "evidence_count": 0,
+            "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+          },
+          {
+            "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+            "canonical_url": "https://www.youtube.com/playlist",
+            "status": "needs_manual_review",
+            "evidence": [],
+            "evidence_count": 0,
+            "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+          }
+        ],
+        "destination_link_audit_summary": {
+          "link_count": 2,
+          "verified_local_evidence_count": 0,
+          "needs_manual_review_count": 2,
+          "all_links_have_local_evidence": false
+        },
+        "failed_review_checks": [
+          {
+            "name": "platform_readiness",
+            "status": "fail",
+            "detail": "Executor readiness snapshot marks platform blocked.",
+            "repair_report": "admin/reports/tiktok-setup-preflight.md",
+            "repair_runbook": "admin/reports/tiktok-repair-runbook.md",
+            "repair_command": "python3 scripts/tiktok_oauth_handoff.py",
+            "repair_preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+            "repair_gate": "blocked_until_tiktok_upload_credentials",
+            "repair_next_step": "Complete the TikTok upload-mode setup preflight before approving this row; direct public posting remains separately approval-gated.",
+            "repair_apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py"
+          }
+        ],
+        "approval_effect": {
+          "field": "approved",
+          "from": "no",
+          "to": "yes",
+          "changed": true,
+          "summary": "approved 'no' -> 'yes'"
+        },
+        "preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-279 --dry-run",
+        "apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-279 --refresh-admin",
+        "manual_dispatch_required": false
+      },
+      {
+        "id": "FP-AUTO-282",
+        "platform": "Instagram",
+        "song": "Twelve Dollars",
+        "scheduled_at": "2026-06-30T21:35:00-04:00",
+        "execution_mode": "auto",
+        "post_type": "image",
+        "review_status": "held_by_failed_checks",
+        "checked_batch_member": false,
+        "paste_text": "Twelve Dollars is the stage light, the joke, and the receipt. Watch the remastered video. Full Twelve Dollars playlist is live.\n\nWatch Twelve Dollars: https://youtu.be/G2RlCwZKOsk | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+        "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars-youtube-thumbnail.jpg",
+        "destination_links": [
+          "https://youtu.be/G2RlCwZKOsk",
+          "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n"
+        ],
+        "destination_link_audit": [
+          {
+            "url": "https://youtu.be/G2RlCwZKOsk",
+            "canonical_url": "https://youtu.be/G2RlCwZKOsk",
+            "status": "needs_manual_review",
+            "evidence": [],
+            "evidence_count": 0,
+            "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+          },
+          {
+            "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+            "canonical_url": "https://www.youtube.com/playlist",
+            "status": "needs_manual_review",
+            "evidence": [],
+            "evidence_count": 0,
+            "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+          }
+        ],
+        "destination_link_audit_summary": {
+          "link_count": 2,
+          "verified_local_evidence_count": 0,
+          "needs_manual_review_count": 2,
+          "all_links_have_local_evidence": false
+        },
+        "failed_review_checks": [
+          {
+            "name": "platform_readiness",
+            "status": "fail",
+            "detail": "Executor readiness snapshot marks platform blocked."
+          }
+        ],
+        "approval_effect": {
+          "field": "approved",
+          "from": "no",
+          "to": "yes",
+          "changed": true,
+          "summary": "approved 'no' -> 'yes'"
+        },
+        "preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-282 --dry-run",
+        "apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-282 --refresh-admin",
+        "manual_dispatch_required": false
+      },
+      {
+        "id": "FP-AUTO-284",
+        "platform": "TikTok",
+        "song": "Twelve Dollars",
+        "scheduled_at": "2026-06-30T22:15:00-04:00",
+        "execution_mode": "auto",
+        "post_type": "video",
+        "review_status": "held_by_failed_checks",
+        "checked_batch_member": false,
+        "paste_text": "Twelve Dollars is the stage light, the joke, and the receipt. Watch the remastered video. Full Twelve Dollars playlist is live.\n\nWatch Twelve Dollars: https://youtu.be/G2RlCwZKOsk | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+        "asset_url": "https://www.lilyroo.com/assets/media/twelve-dollars-youtube-remaster-public.mp4",
+        "destination_links": [
+          "https://youtu.be/G2RlCwZKOsk",
+          "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n"
+        ],
+        "destination_link_audit": [
+          {
+            "url": "https://youtu.be/G2RlCwZKOsk",
+            "canonical_url": "https://youtu.be/G2RlCwZKOsk",
+            "status": "needs_manual_review",
+            "evidence": [],
+            "evidence_count": 0,
+            "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+          },
+          {
+            "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+            "canonical_url": "https://www.youtube.com/playlist",
+            "status": "needs_manual_review",
+            "evidence": [],
+            "evidence_count": 0,
+            "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+          }
+        ],
+        "destination_link_audit_summary": {
+          "link_count": 2,
+          "verified_local_evidence_count": 0,
+          "needs_manual_review_count": 2,
+          "all_links_have_local_evidence": false
+        },
+        "failed_review_checks": [
+          {
+            "name": "platform_readiness",
+            "status": "fail",
+            "detail": "Executor readiness snapshot marks platform blocked.",
+            "repair_report": "admin/reports/tiktok-setup-preflight.md",
+            "repair_runbook": "admin/reports/tiktok-repair-runbook.md",
+            "repair_command": "python3 scripts/tiktok_oauth_handoff.py",
+            "repair_preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+            "repair_gate": "blocked_until_tiktok_upload_credentials",
+            "repair_next_step": "Complete the TikTok upload-mode setup preflight before approving this row; direct public posting remains separately approval-gated.",
+            "repair_apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py"
+          }
+        ],
+        "approval_effect": {
+          "field": "approved",
+          "from": "no",
+          "to": "yes",
+          "changed": true,
+          "summary": "approved 'no' -> 'yes'"
+        },
+        "preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-284 --dry-run",
+        "apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-284 --refresh-admin",
+        "manual_dispatch_required": false
+      }
+    ],
     "checked_batch_preview_command": "",
     "checked_batch_apply_command": "",
     "checked_batch_dry_run_preview": {
@@ -119,8 +495,155 @@
   "approval_decision_manifest": {
     "status": "blocked",
     "ready_ids": [],
-    "held_ids": [],
-    "decisions": [],
+    "held_ids": [
+      "FP-AUTO-272",
+      "FP-AUTO-277",
+      "FP-AUTO-279",
+      "FP-AUTO-282",
+      "FP-AUTO-284"
+    ],
+    "decisions": [
+      {
+        "id": "FP-AUTO-272",
+        "decision": "held",
+        "platform": "Instagram",
+        "song": "Every Pearl in Carmel",
+        "execution_mode": "auto",
+        "scheduled_at": "2026-06-28T21:35:00-04:00",
+        "checked_batch_member": false,
+        "approval_effect": {
+          "field": "approved",
+          "from": "no",
+          "to": "yes",
+          "changed": true,
+          "summary": "approved 'no' -> 'yes'"
+        },
+        "passed_check_names": [
+          "copy_present",
+          "destination_links_present",
+          "asset_file_present",
+          "executor_blocker_confirmed"
+        ],
+        "failed_check_names": [
+          "platform_readiness"
+        ],
+        "decision_reason": "Held outside checked batch until failed/review checks clear.",
+        "post_approval_next_step": "Repair failed checks before including this row in an approval batch.",
+        "manual_dispatch_required": false
+      },
+      {
+        "id": "FP-AUTO-277",
+        "decision": "held",
+        "platform": "Instagram",
+        "song": "The Other One's Charging",
+        "execution_mode": "auto",
+        "scheduled_at": "2026-06-29T21:35:00-04:00",
+        "checked_batch_member": false,
+        "approval_effect": {
+          "field": "approved",
+          "from": "no",
+          "to": "yes",
+          "changed": true,
+          "summary": "approved 'no' -> 'yes'"
+        },
+        "passed_check_names": [
+          "copy_present",
+          "destination_links_present",
+          "asset_file_present",
+          "executor_blocker_confirmed"
+        ],
+        "failed_check_names": [
+          "platform_readiness"
+        ],
+        "decision_reason": "Held outside checked batch until failed/review checks clear.",
+        "post_approval_next_step": "Repair failed checks before including this row in an approval batch.",
+        "manual_dispatch_required": false
+      },
+      {
+        "id": "FP-AUTO-279",
+        "decision": "held",
+        "platform": "TikTok",
+        "song": "The Other One's Charging",
+        "execution_mode": "auto",
+        "scheduled_at": "2026-06-29T22:15:00-04:00",
+        "checked_batch_member": false,
+        "approval_effect": {
+          "field": "approved",
+          "from": "no",
+          "to": "yes",
+          "changed": true,
+          "summary": "approved 'no' -> 'yes'"
+        },
+        "passed_check_names": [
+          "copy_present",
+          "destination_links_present",
+          "asset_file_present",
+          "executor_blocker_confirmed"
+        ],
+        "failed_check_names": [
+          "platform_readiness"
+        ],
+        "decision_reason": "Held outside checked batch until failed/review checks clear.",
+        "post_approval_next_step": "Repair failed checks before including this row in an approval batch.",
+        "manual_dispatch_required": false
+      },
+      {
+        "id": "FP-AUTO-282",
+        "decision": "held",
+        "platform": "Instagram",
+        "song": "Twelve Dollars",
+        "execution_mode": "auto",
+        "scheduled_at": "2026-06-30T21:35:00-04:00",
+        "checked_batch_member": false,
+        "approval_effect": {
+          "field": "approved",
+          "from": "no",
+          "to": "yes",
+          "changed": true,
+          "summary": "approved 'no' -> 'yes'"
+        },
+        "passed_check_names": [
+          "copy_present",
+          "destination_links_present",
+          "asset_file_present",
+          "executor_blocker_confirmed"
+        ],
+        "failed_check_names": [
+          "platform_readiness"
+        ],
+        "decision_reason": "Held outside checked batch until failed/review checks clear.",
+        "post_approval_next_step": "Repair failed checks before including this row in an approval batch.",
+        "manual_dispatch_required": false
+      },
+      {
+        "id": "FP-AUTO-284",
+        "decision": "held",
+        "platform": "TikTok",
+        "song": "Twelve Dollars",
+        "execution_mode": "auto",
+        "scheduled_at": "2026-06-30T22:15:00-04:00",
+        "checked_batch_member": false,
+        "approval_effect": {
+          "field": "approved",
+          "from": "no",
+          "to": "yes",
+          "changed": true,
+          "summary": "approved 'no' -> 'yes'"
+        },
+        "passed_check_names": [
+          "copy_present",
+          "destination_links_present",
+          "asset_file_present",
+          "executor_blocker_confirmed"
+        ],
+        "failed_check_names": [
+          "platform_readiness"
+        ],
+        "decision_reason": "Held outside checked batch until failed/review checks clear.",
+        "post_approval_next_step": "Repair failed checks before including this row in an approval batch.",
+        "manual_dispatch_required": false
+      }
+    ],
     "expected_checked_batch_effect": {
       "row_count": 0,
       "change_count": 0,
@@ -161,7 +684,13 @@
   "approval_apply_manifest": {
     "status": "blocked",
     "ready_ids": [],
-    "held_ids": [],
+    "held_ids": [
+      "FP-AUTO-272",
+      "FP-AUTO-277",
+      "FP-AUTO-279",
+      "FP-AUTO-282",
+      "FP-AUTO-284"
+    ],
     "apply_scope": "checked_batch",
     "preview_command": "",
     "apply_after_review_command": "",
@@ -173,7 +702,48 @@
       "effects": []
     },
     "ready_rows": [],
-    "held_rows": [],
+    "held_rows": [
+      {
+        "id": "FP-AUTO-272",
+        "platform": "Instagram",
+        "song": "Every Pearl in Carmel",
+        "failed_check_names": [
+          "platform_readiness"
+        ]
+      },
+      {
+        "id": "FP-AUTO-277",
+        "platform": "Instagram",
+        "song": "The Other One's Charging",
+        "failed_check_names": [
+          "platform_readiness"
+        ]
+      },
+      {
+        "id": "FP-AUTO-279",
+        "platform": "TikTok",
+        "song": "The Other One's Charging",
+        "failed_check_names": [
+          "platform_readiness"
+        ]
+      },
+      {
+        "id": "FP-AUTO-282",
+        "platform": "Instagram",
+        "song": "Twelve Dollars",
+        "failed_check_names": [
+          "platform_readiness"
+        ]
+      },
+      {
+        "id": "FP-AUTO-284",
+        "platform": "TikTok",
+        "song": "Twelve Dollars",
+        "failed_check_names": [
+          "platform_readiness"
+        ]
+      }
+    ],
     "pre_apply_checklist": [
       "Review copy, links, and media for every ready row.",
       "Run the preview command and confirm it lists only ready_ids.",
@@ -194,9 +764,15 @@
   "approval_review_runbook": {
     "status": "blocked",
     "ready_ids": [],
-    "blocked_ids": [],
+    "blocked_ids": [
+      "FP-AUTO-272",
+      "FP-AUTO-277",
+      "FP-AUTO-279",
+      "FP-AUTO-282",
+      "FP-AUTO-284"
+    ],
     "ready_count": 0,
-    "blocked_count": 0,
+    "blocked_count": 5,
     "manual_dispatch_ready_count": 0,
     "review_checklist": [],
     "steps": [
@@ -239,5 +815,519 @@
     ],
     "guardrail": "This runbook is review-only; it does not approve, publish, post, or log anything."
   },
-  "rows": []
+  "rows": [
+    {
+      "id": "FP-AUTO-272",
+      "platform": "Instagram",
+      "song": "Every Pearl in Carmel",
+      "scheduled_at": "2026-06-28T21:35:00-04:00",
+      "execution_mode": "auto",
+      "post_type": "image",
+      "approved": "no",
+      "status": "blocked",
+      "reason": "not_approved",
+      "attempts": 0,
+      "text": "Every Pearl in Carmel is the pretty souvenir that still knows what it cost. Watch the remastered video. Full Twelve Dollars playlist is live.",
+      "reply_text": "Watch Every Pearl in Carmel: https://youtu.be/QodRYnvTVZc | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+      "copy_block": "Every Pearl in Carmel is the pretty souvenir that still knows what it cost. Watch the remastered video. Full Twelve Dollars playlist is live.\n\nWatch Every Pearl in Carmel: https://youtu.be/QodRYnvTVZc | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+      "imagery_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/02-every-pearl-in-carmel-youtube-thumbnail.jpg",
+      "clip_url": "",
+      "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/02-every-pearl-in-carmel-youtube-thumbnail.jpg",
+      "destination_links": [
+        "https://youtu.be/QodRYnvTVZc",
+        "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n"
+      ],
+      "destination_link_audit": [
+        {
+          "url": "https://youtu.be/QodRYnvTVZc",
+          "canonical_url": "https://youtu.be/QodRYnvTVZc",
+          "status": "needs_manual_review",
+          "evidence": [],
+          "evidence_count": 0,
+          "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+          "canonical_url": "https://www.youtube.com/playlist",
+          "status": "needs_manual_review",
+          "evidence": [],
+          "evidence_count": 0,
+          "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+        }
+      ],
+      "destination_link_audit_summary": {
+        "link_count": 2,
+        "verified_local_evidence_count": 0,
+        "needs_manual_review_count": 2,
+        "all_links_have_local_evidence": false
+      },
+      "media_key": "twelve-dollars-every-pearl-in-carmel-cover",
+      "desired_privacy": "",
+      "review_checks": [
+        {
+          "name": "copy_present",
+          "status": "pass",
+          "detail": "141 characters of primary copy."
+        },
+        {
+          "name": "destination_links_present",
+          "status": "pass",
+          "detail": "2 link(s): https://youtu.be/QodRYnvTVZc, https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n"
+        },
+        {
+          "name": "asset_file_present",
+          "status": "pass",
+          "detail": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/02-every-pearl-in-carmel-youtube-thumbnail.jpg maps to assets/albums/twelve-dollars/art/02-every-pearl-in-carmel-youtube-thumbnail.jpg."
+        },
+        {
+          "name": "executor_blocker_confirmed",
+          "status": "pass",
+          "detail": "Current executor state is blocked / not_approved."
+        },
+        {
+          "name": "platform_readiness",
+          "status": "fail",
+          "detail": "Executor readiness snapshot marks platform blocked."
+        }
+      ],
+      "review_check_passed": false,
+      "failed_review_checks": [
+        {
+          "name": "platform_readiness",
+          "status": "fail",
+          "detail": "Executor readiness snapshot marks platform blocked."
+        }
+      ],
+      "approval_review_status": "held_by_failed_checks",
+      "checked_batch_member": false,
+      "approval_batch_reason": "Held outside checked batch until failed/review checks clear.",
+      "approval_effect": {
+        "field": "approved",
+        "from": "no",
+        "to": "yes",
+        "changed": true,
+        "summary": "approved 'no' -> 'yes'"
+      },
+      "approval_preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-272 --dry-run",
+      "approval_apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-272 --refresh-admin",
+      "recommendation": "Review copy, media, destination links, and platform readiness before approval.",
+      "manual_dispatch": false
+    },
+    {
+      "id": "FP-AUTO-277",
+      "platform": "Instagram",
+      "song": "The Other One's Charging",
+      "scheduled_at": "2026-06-29T21:35:00-04:00",
+      "execution_mode": "auto",
+      "post_type": "image",
+      "approved": "no",
+      "status": "blocked",
+      "reason": "not_approved",
+      "attempts": 0,
+      "text": "The Other One's Charging is domestic chaos with a battery icon. Watch the remastered video. Full Twelve Dollars playlist is live.",
+      "reply_text": "Watch The Other One's Charging: https://youtu.be/EprgLKHp-lE | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+      "copy_block": "The Other One's Charging is domestic chaos with a battery icon. Watch the remastered video. Full Twelve Dollars playlist is live.\n\nWatch The Other One's Charging: https://youtu.be/EprgLKHp-lE | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+      "imagery_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/03-the-other-ones-charging-youtube-thumbnail.jpg",
+      "clip_url": "",
+      "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/03-the-other-ones-charging-youtube-thumbnail.jpg",
+      "destination_links": [
+        "https://youtu.be/EprgLKHp-lE",
+        "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n"
+      ],
+      "destination_link_audit": [
+        {
+          "url": "https://youtu.be/EprgLKHp-lE",
+          "canonical_url": "https://youtu.be/EprgLKHp-lE",
+          "status": "needs_manual_review",
+          "evidence": [],
+          "evidence_count": 0,
+          "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+          "canonical_url": "https://www.youtube.com/playlist",
+          "status": "needs_manual_review",
+          "evidence": [],
+          "evidence_count": 0,
+          "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+        }
+      ],
+      "destination_link_audit_summary": {
+        "link_count": 2,
+        "verified_local_evidence_count": 0,
+        "needs_manual_review_count": 2,
+        "all_links_have_local_evidence": false
+      },
+      "media_key": "twelve-dollars-the-other-ones-charging-cover",
+      "desired_privacy": "",
+      "review_checks": [
+        {
+          "name": "copy_present",
+          "status": "pass",
+          "detail": "129 characters of primary copy."
+        },
+        {
+          "name": "destination_links_present",
+          "status": "pass",
+          "detail": "2 link(s): https://youtu.be/EprgLKHp-lE, https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n"
+        },
+        {
+          "name": "asset_file_present",
+          "status": "pass",
+          "detail": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/03-the-other-ones-charging-youtube-thumbnail.jpg maps to assets/albums/twelve-dollars/art/03-the-other-ones-charging-youtube-thumbnail.jpg."
+        },
+        {
+          "name": "executor_blocker_confirmed",
+          "status": "pass",
+          "detail": "Current executor state is blocked / not_approved."
+        },
+        {
+          "name": "platform_readiness",
+          "status": "fail",
+          "detail": "Executor readiness snapshot marks platform blocked."
+        }
+      ],
+      "review_check_passed": false,
+      "failed_review_checks": [
+        {
+          "name": "platform_readiness",
+          "status": "fail",
+          "detail": "Executor readiness snapshot marks platform blocked."
+        }
+      ],
+      "approval_review_status": "held_by_failed_checks",
+      "checked_batch_member": false,
+      "approval_batch_reason": "Held outside checked batch until failed/review checks clear.",
+      "approval_effect": {
+        "field": "approved",
+        "from": "no",
+        "to": "yes",
+        "changed": true,
+        "summary": "approved 'no' -> 'yes'"
+      },
+      "approval_preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-277 --dry-run",
+      "approval_apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-277 --refresh-admin",
+      "recommendation": "Review copy, media, destination links, and platform readiness before approval.",
+      "manual_dispatch": false
+    },
+    {
+      "id": "FP-AUTO-279",
+      "platform": "TikTok",
+      "song": "The Other One's Charging",
+      "scheduled_at": "2026-06-29T22:15:00-04:00",
+      "execution_mode": "auto",
+      "post_type": "video",
+      "approved": "no",
+      "status": "blocked",
+      "reason": "not_approved",
+      "attempts": 0,
+      "text": "The Other One's Charging is domestic chaos with a battery icon. Watch the remastered video. Full Twelve Dollars playlist is live.",
+      "reply_text": "Watch The Other One's Charging: https://youtu.be/EprgLKHp-lE | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+      "copy_block": "The Other One's Charging is domestic chaos with a battery icon. Watch the remastered video. Full Twelve Dollars playlist is live.\n\nWatch The Other One's Charging: https://youtu.be/EprgLKHp-lE | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+      "imagery_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/03-the-other-ones-charging-youtube-thumbnail.jpg",
+      "clip_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/video/03-the-other-ones-charging-youtube-remaster.mp4",
+      "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/video/03-the-other-ones-charging-youtube-remaster.mp4",
+      "destination_links": [
+        "https://youtu.be/EprgLKHp-lE",
+        "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n"
+      ],
+      "destination_link_audit": [
+        {
+          "url": "https://youtu.be/EprgLKHp-lE",
+          "canonical_url": "https://youtu.be/EprgLKHp-lE",
+          "status": "needs_manual_review",
+          "evidence": [],
+          "evidence_count": 0,
+          "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+          "canonical_url": "https://www.youtube.com/playlist",
+          "status": "needs_manual_review",
+          "evidence": [],
+          "evidence_count": 0,
+          "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+        }
+      ],
+      "destination_link_audit_summary": {
+        "link_count": 2,
+        "verified_local_evidence_count": 0,
+        "needs_manual_review_count": 2,
+        "all_links_have_local_evidence": false
+      },
+      "media_key": "twelve-dollars-the-other-ones-charging-video",
+      "desired_privacy": "PUBLIC_TO_EVERYONE",
+      "review_checks": [
+        {
+          "name": "copy_present",
+          "status": "pass",
+          "detail": "129 characters of primary copy."
+        },
+        {
+          "name": "destination_links_present",
+          "status": "pass",
+          "detail": "2 link(s): https://youtu.be/EprgLKHp-lE, https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n"
+        },
+        {
+          "name": "asset_file_present",
+          "status": "pass",
+          "detail": "https://www.lilyroo.com/assets/albums/twelve-dollars/video/03-the-other-ones-charging-youtube-remaster.mp4 maps to assets/albums/twelve-dollars/video/03-the-other-ones-charging-youtube-remaster.mp4."
+        },
+        {
+          "name": "executor_blocker_confirmed",
+          "status": "pass",
+          "detail": "Current executor state is blocked / not_approved."
+        },
+        {
+          "name": "platform_readiness",
+          "status": "fail",
+          "detail": "Executor readiness snapshot marks platform blocked.",
+          "repair_report": "admin/reports/tiktok-setup-preflight.md",
+          "repair_runbook": "admin/reports/tiktok-repair-runbook.md",
+          "repair_command": "python3 scripts/tiktok_oauth_handoff.py",
+          "repair_preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+          "repair_gate": "blocked_until_tiktok_upload_credentials",
+          "repair_next_step": "Complete the TikTok upload-mode setup preflight before approving this row; direct public posting remains separately approval-gated.",
+          "repair_apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py"
+        }
+      ],
+      "review_check_passed": false,
+      "failed_review_checks": [
+        {
+          "name": "platform_readiness",
+          "status": "fail",
+          "detail": "Executor readiness snapshot marks platform blocked.",
+          "repair_report": "admin/reports/tiktok-setup-preflight.md",
+          "repair_runbook": "admin/reports/tiktok-repair-runbook.md",
+          "repair_command": "python3 scripts/tiktok_oauth_handoff.py",
+          "repair_preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+          "repair_gate": "blocked_until_tiktok_upload_credentials",
+          "repair_next_step": "Complete the TikTok upload-mode setup preflight before approving this row; direct public posting remains separately approval-gated.",
+          "repair_apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py"
+        }
+      ],
+      "approval_review_status": "held_by_failed_checks",
+      "checked_batch_member": false,
+      "approval_batch_reason": "Held outside checked batch until failed/review checks clear.",
+      "approval_effect": {
+        "field": "approved",
+        "from": "no",
+        "to": "yes",
+        "changed": true,
+        "summary": "approved 'no' -> 'yes'"
+      },
+      "approval_preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-279 --dry-run",
+      "approval_apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-279 --refresh-admin",
+      "recommendation": "Review copy, media, destination links, and platform readiness before approval.",
+      "manual_dispatch": false
+    },
+    {
+      "id": "FP-AUTO-282",
+      "platform": "Instagram",
+      "song": "Twelve Dollars",
+      "scheduled_at": "2026-06-30T21:35:00-04:00",
+      "execution_mode": "auto",
+      "post_type": "image",
+      "approved": "no",
+      "status": "blocked",
+      "reason": "not_approved",
+      "attempts": 0,
+      "text": "Twelve Dollars is the stage light, the joke, and the receipt. Watch the remastered video. Full Twelve Dollars playlist is live.",
+      "reply_text": "Watch Twelve Dollars: https://youtu.be/G2RlCwZKOsk | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+      "copy_block": "Twelve Dollars is the stage light, the joke, and the receipt. Watch the remastered video. Full Twelve Dollars playlist is live.\n\nWatch Twelve Dollars: https://youtu.be/G2RlCwZKOsk | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+      "imagery_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars-youtube-thumbnail.jpg",
+      "clip_url": "",
+      "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars-youtube-thumbnail.jpg",
+      "destination_links": [
+        "https://youtu.be/G2RlCwZKOsk",
+        "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n"
+      ],
+      "destination_link_audit": [
+        {
+          "url": "https://youtu.be/G2RlCwZKOsk",
+          "canonical_url": "https://youtu.be/G2RlCwZKOsk",
+          "status": "needs_manual_review",
+          "evidence": [],
+          "evidence_count": 0,
+          "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+          "canonical_url": "https://www.youtube.com/playlist",
+          "status": "needs_manual_review",
+          "evidence": [],
+          "evidence_count": 0,
+          "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+        }
+      ],
+      "destination_link_audit_summary": {
+        "link_count": 2,
+        "verified_local_evidence_count": 0,
+        "needs_manual_review_count": 2,
+        "all_links_have_local_evidence": false
+      },
+      "media_key": "twelve-dollars-twelve-dollars-cover",
+      "desired_privacy": "",
+      "review_checks": [
+        {
+          "name": "copy_present",
+          "status": "pass",
+          "detail": "127 characters of primary copy."
+        },
+        {
+          "name": "destination_links_present",
+          "status": "pass",
+          "detail": "2 link(s): https://youtu.be/G2RlCwZKOsk, https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n"
+        },
+        {
+          "name": "asset_file_present",
+          "status": "pass",
+          "detail": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars-youtube-thumbnail.jpg maps to assets/albums/twelve-dollars/art/04-twelve-dollars-youtube-thumbnail.jpg."
+        },
+        {
+          "name": "executor_blocker_confirmed",
+          "status": "pass",
+          "detail": "Current executor state is blocked / not_approved."
+        },
+        {
+          "name": "platform_readiness",
+          "status": "fail",
+          "detail": "Executor readiness snapshot marks platform blocked."
+        }
+      ],
+      "review_check_passed": false,
+      "failed_review_checks": [
+        {
+          "name": "platform_readiness",
+          "status": "fail",
+          "detail": "Executor readiness snapshot marks platform blocked."
+        }
+      ],
+      "approval_review_status": "held_by_failed_checks",
+      "checked_batch_member": false,
+      "approval_batch_reason": "Held outside checked batch until failed/review checks clear.",
+      "approval_effect": {
+        "field": "approved",
+        "from": "no",
+        "to": "yes",
+        "changed": true,
+        "summary": "approved 'no' -> 'yes'"
+      },
+      "approval_preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-282 --dry-run",
+      "approval_apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-282 --refresh-admin",
+      "recommendation": "Review copy, media, destination links, and platform readiness before approval.",
+      "manual_dispatch": false
+    },
+    {
+      "id": "FP-AUTO-284",
+      "platform": "TikTok",
+      "song": "Twelve Dollars",
+      "scheduled_at": "2026-06-30T22:15:00-04:00",
+      "execution_mode": "auto",
+      "post_type": "video",
+      "approved": "no",
+      "status": "blocked",
+      "reason": "not_approved",
+      "attempts": 0,
+      "text": "Twelve Dollars is the stage light, the joke, and the receipt. Watch the remastered video. Full Twelve Dollars playlist is live.",
+      "reply_text": "Watch Twelve Dollars: https://youtu.be/G2RlCwZKOsk | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+      "copy_block": "Twelve Dollars is the stage light, the joke, and the receipt. Watch the remastered video. Full Twelve Dollars playlist is live.\n\nWatch Twelve Dollars: https://youtu.be/G2RlCwZKOsk | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+      "imagery_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars-youtube-thumbnail.jpg",
+      "clip_url": "https://www.lilyroo.com/assets/media/twelve-dollars-youtube-remaster-public.mp4",
+      "asset_url": "https://www.lilyroo.com/assets/media/twelve-dollars-youtube-remaster-public.mp4",
+      "destination_links": [
+        "https://youtu.be/G2RlCwZKOsk",
+        "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n"
+      ],
+      "destination_link_audit": [
+        {
+          "url": "https://youtu.be/G2RlCwZKOsk",
+          "canonical_url": "https://youtu.be/G2RlCwZKOsk",
+          "status": "needs_manual_review",
+          "evidence": [],
+          "evidence_count": 0,
+          "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+          "canonical_url": "https://www.youtube.com/playlist",
+          "status": "needs_manual_review",
+          "evidence": [],
+          "evidence_count": 0,
+          "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+        }
+      ],
+      "destination_link_audit_summary": {
+        "link_count": 2,
+        "verified_local_evidence_count": 0,
+        "needs_manual_review_count": 2,
+        "all_links_have_local_evidence": false
+      },
+      "media_key": "twelve-dollars-twelve-dollars-video",
+      "desired_privacy": "PUBLIC_TO_EVERYONE",
+      "review_checks": [
+        {
+          "name": "copy_present",
+          "status": "pass",
+          "detail": "127 characters of primary copy."
+        },
+        {
+          "name": "destination_links_present",
+          "status": "pass",
+          "detail": "2 link(s): https://youtu.be/G2RlCwZKOsk, https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n"
+        },
+        {
+          "name": "asset_file_present",
+          "status": "pass",
+          "detail": "https://www.lilyroo.com/assets/media/twelve-dollars-youtube-remaster-public.mp4 maps to assets/media/twelve-dollars-youtube-remaster-public.mp4."
+        },
+        {
+          "name": "executor_blocker_confirmed",
+          "status": "pass",
+          "detail": "Current executor state is blocked / not_approved."
+        },
+        {
+          "name": "platform_readiness",
+          "status": "fail",
+          "detail": "Executor readiness snapshot marks platform blocked.",
+          "repair_report": "admin/reports/tiktok-setup-preflight.md",
+          "repair_runbook": "admin/reports/tiktok-repair-runbook.md",
+          "repair_command": "python3 scripts/tiktok_oauth_handoff.py",
+          "repair_preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+          "repair_gate": "blocked_until_tiktok_upload_credentials",
+          "repair_next_step": "Complete the TikTok upload-mode setup preflight before approving this row; direct public posting remains separately approval-gated.",
+          "repair_apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py"
+        }
+      ],
+      "review_check_passed": false,
+      "failed_review_checks": [
+        {
+          "name": "platform_readiness",
+          "status": "fail",
+          "detail": "Executor readiness snapshot marks platform blocked.",
+          "repair_report": "admin/reports/tiktok-setup-preflight.md",
+          "repair_runbook": "admin/reports/tiktok-repair-runbook.md",
+          "repair_command": "python3 scripts/tiktok_oauth_handoff.py",
+          "repair_preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+          "repair_gate": "blocked_until_tiktok_upload_credentials",
+          "repair_next_step": "Complete the TikTok upload-mode setup preflight before approving this row; direct public posting remains separately approval-gated.",
+          "repair_apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py"
+        }
+      ],
+      "approval_review_status": "held_by_failed_checks",
+      "checked_batch_member": false,
+      "approval_batch_reason": "Held outside checked batch until failed/review checks clear.",
+      "approval_effect": {
+        "field": "approved",
+        "from": "no",
+        "to": "yes",
+        "changed": true,
+        "summary": "approved 'no' -> 'yes'"
+      },
+      "approval_preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-284 --dry-run",
+      "approval_apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-284 --refresh-admin",
+      "recommendation": "Review copy, media, destination links, and platform readiness before approval.",
+      "manual_dispatch": false
+    }
+  ]
 }
