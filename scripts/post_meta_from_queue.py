@@ -18,6 +18,13 @@ def api_post(url: str, data: dict[str, str]) -> dict:
         return json.loads(resp.read().decode('utf-8'))
 
 
+def api_get(url: str, params: dict[str, str]) -> dict:
+    endpoint = f"{url}?{urllib.parse.urlencode(params)}"
+    req = urllib.request.Request(endpoint, method='GET')
+    with urllib.request.urlopen(req) as resp:
+        return json.loads(resp.read().decode('utf-8'))
+
+
 def graph_base(env: dict[str, str]) -> str:
     version = (env.get('META_GRAPH_VERSION') or DEFAULT_GRAPH_VERSION).strip()
     return f'https://graph.facebook.com/{version}'
@@ -33,6 +40,32 @@ def append_cta(text: str, cta: str) -> str:
     if cta in text:
         return text
     return f'{text}\n\n{cta}'
+
+
+def facebook_fallback_post_url(post_id: str) -> str:
+    post_id = (post_id or '').strip()
+    if not post_id:
+        return ''
+    if '_' not in post_id:
+        return f'https://www.facebook.com/{post_id}'
+    page_id, story_id = post_id.split('_', 1)
+    if page_id.isdigit() and story_id.isdigit():
+        return f'https://www.facebook.com/permalink.php?story_fbid={story_id}&id={page_id}'
+    return f'https://www.facebook.com/{post_id}'
+
+
+def facebook_permalink_url(post_id: str, env: dict[str, str]) -> str:
+    post_id = (post_id or '').strip()
+    if not post_id:
+        return ''
+    try:
+        data = api_get(f'{graph_base(env)}/{post_id}', {
+            'fields': 'permalink_url',
+            'access_token': env.get('META_LONG_LIVED_TOKEN', ''),
+        })
+        return (data.get('permalink_url') or '').strip() or facebook_fallback_post_url(post_id)
+    except Exception:
+        return facebook_fallback_post_url(post_id)
 
 
 def facebook_post(row: dict[str, str], text: str, env: dict[str, str], dry_run: bool) -> dict:
@@ -66,7 +99,7 @@ def facebook_post(row: dict[str, str], text: str, env: dict[str, str], dry_run: 
             payload['link'] = cta
         data = api_post(f'{graph_base(env)}/{page_id}/feed', payload)
     post_id = data.get('post_id') or data.get('id') or ''
-    post_url = f'https://www.facebook.com/{post_id}' if post_id else 'posted'
+    post_url = facebook_permalink_url(post_id, env) or 'posted'
     append_published_log('Facebook', post_url, song_from_row(row), text, 'posted via Meta Graph API', content_id=row.get('id', ''))
     return {'ok': True, 'platform': 'Facebook', 'post_id': post_id, 'post_url': post_url, 'raw': data}
 

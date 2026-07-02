@@ -506,10 +506,22 @@ async function executionStates(env) {
   const executions = [];
   for (const key of list.keys || []) {
     const value = await store.get(key.name, "json");
-    if (value) executions.push(value);
+    if (value) executions.push(normalizeExecutionStateForOutput(value));
   }
   executions.sort((a, b) => text(b.updated_at).localeCompare(text(a.updated_at)));
   return { ok: true, executions };
+}
+
+function normalizeExecutionStateForOutput(item) {
+  if (!item || typeof item !== "object") return item;
+  if (!text(item.platform).toLowerCase().includes("facebook")) return item;
+  const postUrl = text(item.post_url);
+  const objectId = facebookObjectIdFromRawUrl(postUrl);
+  if (!objectId) return item;
+  return {
+    ...item,
+    post_url: facebookFallbackPostUrl(objectId),
+  };
 }
 
 async function executionState(env, postId) {
@@ -792,13 +804,42 @@ async function postFacebook(payload, env) {
   }
   const data = await formPost(endpoint, params);
   const postId = data.post_id || data.id || "";
+  const postUrl = await facebookPermalinkUrl(postId, env);
   return {
     ok: true,
     platform: "Facebook",
     post_id: postId,
-    post_url: postId ? `https://www.facebook.com/${postId}` : "posted",
+    post_url: postUrl || "posted",
     raw: data,
   };
+}
+
+async function facebookPermalinkUrl(postId, env) {
+  postId = text(postId);
+  if (!postId) return "";
+  try {
+    const data = await jsonGet(`${metaBase(env)}/${postId}`, {
+      fields: "permalink_url",
+      access_token: env.META_LONG_LIVED_TOKEN,
+    });
+    return text(data.permalink_url) || facebookFallbackPostUrl(postId);
+  } catch {
+    return facebookFallbackPostUrl(postId);
+  }
+}
+
+function facebookObjectIdFromRawUrl(value) {
+  const raw = text(value);
+  const match = raw.match(/(?:facebook\.com\/)?(\d+_\d+)\/?$/);
+  return match ? match[1] : "";
+}
+
+function facebookFallbackPostUrl(postId) {
+  postId = text(postId);
+  if (!postId) return "";
+  const match = postId.match(/^(\d+)_(\d+)$/);
+  if (!match) return `https://www.facebook.com/${postId}`;
+  return `https://www.facebook.com/permalink.php?story_fbid=${match[2]}&id=${match[1]}`;
 }
 
 async function postInstagram(payload, env) {
