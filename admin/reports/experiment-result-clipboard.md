@@ -1,14 +1,14 @@
 # Experiment Result Clipboard - Lily Roo
 
-Generated: 2026-07-01T22:21:51.911210Z
+Generated: 2026-07-02T01:10:12.967623Z
 
 ## Summary
 - Status: **needs_values**
-- Metric cards: **15**
+- Metric cards: **14**
 - Missing public URLs: **9**
 - Measurement priorities: **12**
 - Post-log handoff rows: **0**
-- Pending result fields: **90**
+- Pending result fields: **84**
 - Ready to import: **0**
 - Wide rows ready to import: **0**
 - Entry CSV: `data/experiment_result_entry_template.csv`
@@ -139,29 +139,6 @@ Generated: 2026-07-01T22:21:51.911210Z
   - `shares`: Open X analytics for https://x.com/i/web/status/2068336870803587325 and record shares.
   - `saves`: Open X analytics for https://x.com/i/web/status/2068336870803587325 and record saves.
   - `subs_delta`: Open X analytics for https://x.com/i/web/status/2068336870803587325 and record subs_delta.
-### YouTube - Twelve Dollars (`FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY`)
-- Format: YouTube Community archive/playlist CTA
-- URL: https://youtu.be/0GOYOFTMAKw
-- Published: 2026-06-29; Published_Log row: `29`
-- Pending fields: `views, likes, comments, shares, saves, subs_delta`
-- Wide-ready fields: `none`
-- Wide entry instruction: Fill one wide entry CSV row in data/experiment_result_entry_wide_template.csv for this post; keep unknown metrics blank and include one evidence_note.
-- Wide CSV target: post_id `FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY`, source_row `29`, fill `views, likes, comments, shares, saves, subs_delta`.
-- Evidence sources:
-  - Logged public post: https://youtu.be/0GOYOFTMAKw - Open the public post to confirm the URL and visible engagement before entering metrics.
-  - YouTube Studio analytics: https://studio.youtube.com/ - Open the matching Community post analytics and copy available public-performance values.
-- Collection checklist:
-  - Open the logged public post and confirm it matches this post_id.
-  - Open the platform analytics or insights source listed for this card.
-  - Copy only numeric values that are visible in the source.
-  - Enter values in the wide entry CSV row for this post_id and source_row.
-  - Add an evidence_note with source and collection date before import preview.
-  - `views`: Open YouTube Studio analytics for https://youtu.be/0GOYOFTMAKw and record views.
-  - `likes`: Open YouTube Studio analytics for https://youtu.be/0GOYOFTMAKw and record likes.
-  - `comments`: Open YouTube Studio analytics for https://youtu.be/0GOYOFTMAKw and record comments.
-  - `shares`: Open YouTube Studio analytics for https://youtu.be/0GOYOFTMAKw and record shares.
-  - `saves`: Open YouTube Studio analytics for https://youtu.be/0GOYOFTMAKw and record saves.
-  - `subs_delta`: Open YouTube Studio analytics for https://youtu.be/0GOYOFTMAKw and record subs_delta.
 ### YouTube - Analog Myth (`FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA`)
 - Format: Short video clip + platform-native CTA
 - URL: https://youtu.be/lbT4adNE-cE
@@ -427,7 +404,7 @@ Generated: 2026-07-01T22:21:51.911210Z
 - **Collect metrics** `FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA` YouTube / Short video clip + platform-native CTA: Already published and logged; measuring it reduces the Short video clip + platform-native CTA evidence gap. 2 logged post(s), 4 missing URL(s) in this format.
   - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --source-row 26 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
   - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --source-row 26 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
-- **Collect metrics** `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY` YouTube / YouTube Community archive/playlist CTA: Already published and logged; measuring it reduces the YouTube Community archive/playlist CTA evidence gap. 2 logged post(s), 0 missing URL(s) in this format.
+- **Collect metrics** `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY` YouTube / YouTube Community archive/playlist CTA: Already published and logged; measuring it reduces the YouTube Community archive/playlist CTA evidence gap. 1 logged post(s), 0 missing URL(s) in this format.
   - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --source-row 28 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
   - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --source-row 28 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
 

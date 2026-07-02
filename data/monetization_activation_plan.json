@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-01T22:21:51.166311Z",
+  "generated_at": "2026-07-02T01:10:12.244109Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -37,10 +37,10 @@
       "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
       "after_review_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
       "context": {
-        "approved_backlog_posts": 8,
-        "raw_approved_backlog_posts": 0,
+        "approved_backlog_posts": 11,
+        "raw_approved_backlog_posts": 1,
         "manual_handoff_backlog_posts": 0,
-        "approved_upcoming_posts": 4,
+        "approved_upcoming_posts": 1,
         "blocked_backlog_count": 0,
         "apply_allowed_without_override": true,
         "blocked_apply_command": "",
@@ -57,7 +57,7 @@
       "context": {
         "post_id": "FP-AUTO-272",
         "platform": "Instagram",
-        "reason": "instagram_business_account_unresolved",
+        "reason": "analog_myth_launch_day",
         "missing_secrets": [],
         "local_missing_secrets": [
           "IG_BUSINESS_ACCOUNT_ID"
@@ -77,7 +77,7 @@
       "context": {
         "post_id": "FP-AUTO-277",
         "platform": "Instagram",
-        "reason": "instagram_business_account_unresolved",
+        "reason": "analog_myth_launch_day",
         "missing_secrets": [],
         "local_missing_secrets": [
           "IG_BUSINESS_ACCOUNT_ID"
@@ -97,7 +97,7 @@
       "context": {
         "post_id": "FP-AUTO-282",
         "platform": "Instagram",
-        "reason": "instagram_business_account_unresolved",
+        "reason": "analog_myth_launch_day",
         "missing_secrets": [],
         "local_missing_secrets": [
           "IG_BUSINESS_ACCOUNT_ID"
@@ -117,7 +117,7 @@
       "context": {
         "post_id": "FP-AUTO-279",
         "platform": "TikTok",
-        "reason": "tiktok_public_posting_not_approved",
+        "reason": "analog_myth_launch_day",
         "missing_secrets": [],
         "local_missing_secrets": [],
         "local_secret_source": "",
@@ -135,7 +135,7 @@
       "context": {
         "post_id": "FP-AUTO-284",
         "platform": "TikTok",
-        "reason": "tiktok_public_posting_not_approved",
+        "reason": "analog_myth_launch_day",
         "missing_secrets": [],
         "local_missing_secrets": [],
         "local_secret_source": "",

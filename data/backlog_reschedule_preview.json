@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-01T18:21:50.418938-04:00",
+  "generated_at": "2026-07-01T21:10:11.427386-04:00",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -10,11 +10,11 @@
     "manual_posting_clipboard": "data/manual_posting_clipboard.json"
   },
   "summary": {
-    "approved_backlog_count": 8,
+    "approved_backlog_count": 11,
     "blocked_backlog_count": 0,
-    "clear_to_apply_count": 8,
+    "clear_to_apply_count": 11,
     "partial_clear_apply_available": true,
-    "partial_clear_apply_count": 8,
+    "partial_clear_apply_count": 11,
     "start_at": "2026-07-02T10:00:00-04:00",
     "spacing_hours": 24,
     "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
@@ -34,7 +34,10 @@
       "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --start-at '2026-07-06T10:00:00-04:00' --spacing-hours 24",
       "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-07T10:00:00-04:00' --spacing-hours 24",
       "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X --start-at '2026-07-08T10:00:00-04:00' --spacing-hours 24",
-      "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK --start-at '2026-07-09T10:00:00-04:00' --spacing-hours 24"
+      "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK --start-at '2026-07-09T10:00:00-04:00' --spacing-hours 24",
+      "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X-EVENING --start-at '2026-07-10T10:00:00-04:00' --spacing-hours 24",
+      "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK-EVENING --start-at '2026-07-11T10:00:00-04:00' --spacing-hours 24",
+      "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X-NIGHT --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24"
     ],
     "partial_clear_apply_commands": [
       "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
@@ -44,18 +47,21 @@
       "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --start-at '2026-07-06T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
       "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-07T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
       "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X --start-at '2026-07-08T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-      "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK --start-at '2026-07-09T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin"
+      "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK --start-at '2026-07-09T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+      "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X-EVENING --start-at '2026-07-10T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+      "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK-EVENING --start-at '2026-07-11T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+      "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X-NIGHT --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin"
     ],
     "manual_handoff_count": 0,
     "manual_handoff_ids": []
   },
   "backlog_clearance_manifest": {
     "status": "clear",
-    "approved_backlog_count": 8,
+    "approved_backlog_count": 11,
     "blocked_backlog_count": 0,
-    "clear_to_apply_count": 8,
+    "clear_to_apply_count": 11,
     "partial_clear_apply_available": true,
-    "partial_clear_apply_count": 8,
+    "partial_clear_apply_count": 11,
     "blocked_ids": [],
     "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
     "safe_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
@@ -87,7 +93,7 @@
   },
   "partial_clear_apply_manifest": {
     "status": "ready",
-    "clear_to_apply_count": 8,
+    "clear_to_apply_count": 11,
     "blocked_backlog_count": 0,
     "clear_ids": [
       "FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK",
@@ -97,7 +103,10 @@
       "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
       "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA",
       "FP-LAUNCH-ANALOG-MYTH-X",
-      "FP-LAUNCH-ANALOG-MYTH-FACEBOOK"
+      "FP-LAUNCH-ANALOG-MYTH-FACEBOOK",
+      "FP-LAUNCH-ANALOG-MYTH-X-EVENING",
+      "FP-LAUNCH-ANALOG-MYTH-FACEBOOK-EVENING",
+      "FP-LAUNCH-ANALOG-MYTH-X-NIGHT"
     ],
     "blocked_ids_retained": [],
     "preview_commands": [
@@ -108,7 +117,10 @@
       "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --start-at '2026-07-06T10:00:00-04:00' --spacing-hours 24",
       "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-07T10:00:00-04:00' --spacing-hours 24",
       "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X --start-at '2026-07-08T10:00:00-04:00' --spacing-hours 24",
-      "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK --start-at '2026-07-09T10:00:00-04:00' --spacing-hours 24"
+      "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK --start-at '2026-07-09T10:00:00-04:00' --spacing-hours 24",
+      "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X-EVENING --start-at '2026-07-10T10:00:00-04:00' --spacing-hours 24",
+      "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK-EVENING --start-at '2026-07-11T10:00:00-04:00' --spacing-hours 24",
+      "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X-NIGHT --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24"
     ],
     "apply_commands": [
       "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
@@ -118,7 +130,10 @@
       "python3 scripts/reschedule_scheduled_posts.py --id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --start-at '2026-07-06T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
       "python3 scripts/reschedule_scheduled_posts.py --id FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA --start-at '2026-07-07T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
       "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X --start-at '2026-07-08T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
-      "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK --start-at '2026-07-09T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin"
+      "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK --start-at '2026-07-09T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+      "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X-EVENING --start-at '2026-07-10T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+      "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-FACEBOOK-EVENING --start-at '2026-07-11T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+      "python3 scripts/reschedule_scheduled_posts.py --id FP-LAUNCH-ANALOG-MYTH-X-NIGHT --start-at '2026-07-12T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin"
     ],
     "recommended_next_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24",
     "recommended_apply_command": "python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
@@ -251,6 +266,51 @@
       "song": "Analog Myth",
       "current_scheduled_at": "2026-07-01T00:55:00-04:00",
       "proposed_scheduled_at": "2026-07-09T10:00:00-04:00",
+      "blocked": false,
+      "blocker_reason": "",
+      "blocker_status": "",
+      "blocker_source": "",
+      "blocker_kind": "",
+      "blocks_normal_apply": false,
+      "safe_apply_available": true,
+      "clearance_steps": []
+    },
+    {
+      "id": "FP-LAUNCH-ANALOG-MYTH-X-EVENING",
+      "platform": "X",
+      "song": "Analog Myth",
+      "current_scheduled_at": "2026-07-01T18:35:00-04:00",
+      "proposed_scheduled_at": "2026-07-10T10:00:00-04:00",
+      "blocked": false,
+      "blocker_reason": "",
+      "blocker_status": "",
+      "blocker_source": "",
+      "blocker_kind": "",
+      "blocks_normal_apply": false,
+      "safe_apply_available": true,
+      "clearance_steps": []
+    },
+    {
+      "id": "FP-LAUNCH-ANALOG-MYTH-FACEBOOK-EVENING",
+      "platform": "Facebook",
+      "song": "Analog Myth",
+      "current_scheduled_at": "2026-07-01T18:50:00-04:00",
+      "proposed_scheduled_at": "2026-07-11T10:00:00-04:00",
+      "blocked": false,
+      "blocker_reason": "",
+      "blocker_status": "",
+      "blocker_source": "",
+      "blocker_kind": "",
+      "blocks_normal_apply": false,
+      "safe_apply_available": true,
+      "clearance_steps": []
+    },
+    {
+      "id": "FP-LAUNCH-ANALOG-MYTH-X-NIGHT",
+      "platform": "X",
+      "song": "Analog Myth",
+      "current_scheduled_at": "2026-07-01T21:05:00-04:00",
+      "proposed_scheduled_at": "2026-07-12T10:00:00-04:00",
       "blocked": false,
       "blocker_reason": "",
       "blocker_status": "",

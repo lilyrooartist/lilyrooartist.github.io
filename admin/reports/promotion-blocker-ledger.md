@@ -1,6 +1,6 @@
 # Promotion Blocker Ledger - Lily Roo
 
-Generated: 2026-07-01T22:21:51.360679Z
+Generated: 2026-07-02T01:10:12.434805Z
 
 ## Summary
 - Open blockers: **8**
@@ -18,7 +18,7 @@ Generated: 2026-07-01T22:21:51.360679Z
   - Unlocks: Held TikTok approval rows can pass platform-readiness review.; Approved TikTok backlog can become safe to reschedule into upload-draft creation.
   - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
 - **Reschedule approved past-due backlog** (`clear`)
-  - Owner: `tod`; projected blockers resolved: **8**
+  - Owner: `tod`; projected blockers resolved: **11**
   - Unlocks: Approved past-due queue rows get a fresh schedule after executor blockers clear.
   - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24`
   - Apply after review: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin`
@@ -32,7 +32,7 @@ Generated: 2026-07-01T22:21:51.360679Z
 ## Ledger
 - **[high] Reschedule approved past-due backlog** (`backlog-reschedule`)
   - Owner: `codex`; status: `ready_to_preview`; category: `backlog_reschedule`
-  - Evidence: 8 approved backlog row(s); 0 still have executor blockers.
+  - Evidence: 11 approved backlog row(s); 0 still have executor blockers.
   - Next step: Preview the new schedule, then apply the safe reschedule command.
   - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24`
   - Apply/log after review: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-02T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin`
