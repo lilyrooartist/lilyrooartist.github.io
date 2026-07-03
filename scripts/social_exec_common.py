@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import csv
 import json
+import os
 from pathlib import Path
 from typing import Any
 
@@ -21,13 +22,18 @@ YOUTUBE_ENV = SECRETS_DIR / 'youtube-api.env'
 def load_env(path: Path) -> dict[str, str]:
     env: dict[str, str] = {}
     if not path.exists():
-        return env
-    for raw in path.read_text(encoding='utf-8').splitlines():
+        source_lines = []
+    else:
+        source_lines = path.read_text(encoding='utf-8').splitlines()
+    for raw in source_lines:
         line = raw.strip()
         if not line or line.startswith('#') or '=' not in line:
             continue
         key, value = line.split('=', 1)
         env[key.strip()] = value.strip().strip('"').strip("'")
+    for key, value in os.environ.items():
+        if value:
+            env[key] = value
     return env
 
 

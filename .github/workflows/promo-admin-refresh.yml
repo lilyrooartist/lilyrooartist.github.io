@@ -23,6 +23,12 @@ jobs:
       LILYROO_ADMIN_PASSWORD: ${{ secrets.LILYROO_ADMIN_PASSWORD }}
       LILYROO_EXECUTOR_BEARER_TOKEN: ${{ secrets.LILYROO_EXECUTOR_BEARER_TOKEN }}
       GITHUB_TOKEN: ${{ github.token }}
+      X_API_KEY: ${{ secrets.X_API_KEY }}
+      X_API_SECRET: ${{ secrets.X_API_SECRET }}
+      X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+      X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
+      META_LONG_LIVED_TOKEN: ${{ secrets.META_LONG_LIVED_TOKEN }}
+      FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -55,6 +61,8 @@ jobs:
             scripts/refresh_promo_admin.py \
             scripts/capture_social_executions.py \
             scripts/export_social_executions.py \
+            scripts/capture_x_post_results.py \
+            scripts/capture_facebook_post_results.py \
             scripts/reconcile_social_execution_snapshot.py \
             scripts/capture_github_workflow_status.py \
             scripts/update_promo_engine_status.py \

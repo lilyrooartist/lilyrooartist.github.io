@@ -15,8 +15,9 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
-from datetime import datetime, timezone
+from datetime import datetime, time as dt_time, timedelta, timezone
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 from social_exec_common import SOCIAL_ENV, load_env
 
@@ -27,6 +28,7 @@ OUT = ROOT / "data" / "x_post_results.json"
 REPORT = ROOT / "admin" / "reports" / "x-post-results.md"
 X_TWEETS_URL = "https://api.x.com/2/tweets"
 RESULT_FIELDS = ["views", "likes", "comments", "shares", "saves"]
+TZ = ZoneInfo("America/New_York")
 
 
 def relative(path: Path) -> str:
@@ -50,8 +52,26 @@ def tweet_id_from_url(value: str) -> str:
     return match.group(1) if match else ""
 
 
-def candidate_rows(post_ids: set[str]) -> list[dict]:
+def parse_published_at(value: str | None):
+    raw = str(value or "").strip()
+    if not raw:
+        return None
+    try:
+        if "T" in raw:
+            parsed = datetime.fromisoformat(raw.replace("Z", "+00:00"))
+            if parsed.tzinfo is None:
+                parsed = parsed.replace(tzinfo=TZ)
+            return parsed.astimezone(timezone.utc)
+        parsed_date = datetime.fromisoformat(raw).date()
+        return datetime.combine(parsed_date, dt_time(12, 0), TZ).astimezone(timezone.utc)
+    except ValueError:
+        return None
+
+
+def candidate_rows(post_ids: set[str], min_age_hours: float = 0) -> list[dict]:
     rows = []
+    now = datetime.now(timezone.utc)
+    min_age = timedelta(hours=max(0, min_age_hours))
     for row in read_published_rows():
         if (row.get("platform") or "").strip().lower() != "x":
             continue
@@ -63,11 +83,17 @@ def candidate_rows(post_ids: set[str]) -> list[dict]:
         tweet_id = tweet_id_from_url(row.get("post_id_or_url") or "")
         if not tweet_id:
             continue
+        published_at = parse_published_at(row.get("date"))
+        measurement_due_at = published_at + min_age if published_at else None
+        if min_age and (not measurement_due_at or measurement_due_at > now):
+            continue
         rows.append({
             "post_id": content_id,
             "source_row": row["_source_row"],
             "tweet_id": tweet_id,
             "url": row.get("post_id_or_url") or "",
+            "published_at": published_at.isoformat() if published_at else "",
+            "measurement_due_at": measurement_due_at.isoformat() if measurement_due_at else "",
             "existing_values": {field: (row.get(field) or "").strip() for field in RESULT_FIELDS},
         })
     return rows
@@ -279,14 +305,23 @@ def apply_results(payload: dict, refresh_admin: bool) -> None:
 def main() -> int:
     parser = argparse.ArgumentParser(description="Capture X metrics for Lily Roo published posts.")
     parser.add_argument("--post-id", action="append", default=[], help="Restrict to one content_id. Can be repeated.")
+    parser.add_argument("--min-age-hours", type=float, default=0, help="Only capture rows whose published date is at least this old.")
+    parser.add_argument("--allow-empty", action="store_true", help="Write an empty report instead of failing when no rows match.")
     parser.add_argument("--apply-results", action="store_true", help="Import captured metrics into Published_Log.csv.")
     parser.add_argument("--refresh-admin", action="store_true", help="Refresh admin after applying results.")
     args = parser.parse_args()
 
     if args.refresh_admin and not args.apply_results:
         raise SystemExit("--refresh-admin requires --apply-results")
-    rows = candidate_rows(set(args.post_id))
+    rows = candidate_rows(set(args.post_id), args.min_age_hours)
     if not rows:
+        if args.allow_empty:
+            payload = build_payload([], {})
+            payload["summary"]["status"] = "no_matching_x_rows"
+            OUT.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+            REPORT.write_text(build_markdown(payload), encoding="utf-8")
+            print(json.dumps({"output": relative(OUT), **payload["summary"]}, indent=2))
+            return 0
         raise SystemExit("No matching published X rows with tweet URLs found.")
     env = require_x_env()
     tweets = fetch_tweets([row["tweet_id"] for row in rows], env)

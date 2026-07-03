@@ -85,6 +85,26 @@ STEPS = [
         "preserve_on_failure": ["admin/content/Published_Log.csv"],
     },
     {
+        "name": "capture_x_post_results_24h",
+        "command": ["python3", "scripts/capture_x_post_results.py", "--min-age-hours", "24", "--allow-empty", "--apply-results"],
+        "required": False,
+        "preserve_on_failure": [
+            "admin/content/Published_Log.csv",
+            "data/x_post_results.json",
+            "admin/reports/x-post-results.md",
+        ],
+    },
+    {
+        "name": "capture_facebook_post_results_24h",
+        "command": ["python3", "scripts/capture_facebook_post_results.py", "--min-age-hours", "24", "--allow-empty", "--apply-results"],
+        "required": False,
+        "preserve_on_failure": [
+            "admin/content/Published_Log.csv",
+            "data/facebook_post_results.json",
+            "admin/reports/facebook-post-results.md",
+        ],
+    },
+    {
         "name": "capture_scheduler_dry_run",
         "command": ["python3", "scripts/capture_scheduler_dry_run.py"],
         "required": False,
@@ -324,7 +344,15 @@ def source_revision_state() -> dict:
 def assert_safe_steps(steps: list[dict]) -> None:
     for step in steps:
         command = command_text(step["command"])
-        blocked = sorted(part for part in DISALLOWED_COMMAND_PARTS if part in command)
+        tokens = [str(token) for token in step["command"]]
+        blocked = []
+        for part in DISALLOWED_COMMAND_PARTS:
+            if part.startswith("--"):
+                if part in tokens:
+                    blocked.append(part)
+            elif any(part in token for token in tokens):
+                blocked.append(part)
+        blocked = sorted(blocked)
         if blocked:
             raise ValueError(f"Unsafe refresh step {step['name']} contains: {', '.join(blocked)}")
 
