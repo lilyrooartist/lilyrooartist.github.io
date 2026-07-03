@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
@@ -39,17 +40,25 @@ def parse_secret_names(stdout: str) -> list[str]:
     return sorted(set(names))
 
 
+def display_path(path: Path) -> str:
+    try:
+        return str(path.relative_to(ROOT))
+    except ValueError:
+        return str(path)
+
+
 def build_packet(repo: str, timeout: int) -> dict:
     generated_at = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
     try:
         returncode, stdout, stderr = run_gh(repo, timeout)
     except (subprocess.SubprocessError, FileNotFoundError) as exc:
         returncode, stdout, stderr = 1, "", str(exc)
-    names = parse_secret_names(stdout) if returncode == 0 else []
+    env_present = sorted(name for name in AUTH_SECRET_OPTIONS if os.environ.get(name))
+    names = sorted(set((parse_secret_names(stdout) if returncode == 0 else []) + env_present))
     presence = {name: name in names for name in AUTH_SECRET_OPTIONS}
     present_auth = [name for name, is_present in presence.items() if is_present]
     missing_options = [name for name, is_present in presence.items() if not is_present]
-    ok = returncode == 0
+    ok = returncode == 0 or bool(env_present)
     ready = ok and bool(present_auth)
     return {
         "generated_at": generated_at,
@@ -58,6 +67,7 @@ def build_packet(repo: str, timeout: int) -> dict:
         "source": {
             "repo": repo,
             "command": f"gh secret list --repo {repo}",
+            "env_presence_fallback": bool(env_present) and returncode != 0,
         },
         "ok": ok,
         "returncode": returncode,
@@ -99,7 +109,7 @@ def main() -> int:
     packet = build_packet(args.repo, args.timeout_seconds)
     out.write_text(json.dumps(packet, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(json.dumps({
-        "output": str(out.relative_to(ROOT)),
+        "output": display_path(out),
         "status": packet["summary"]["status"],
         "present_required_count": packet["summary"]["present_required_count"],
         "missing_required_count": packet["summary"]["missing_required_count"],
