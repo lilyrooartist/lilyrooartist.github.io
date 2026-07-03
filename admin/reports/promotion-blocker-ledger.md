@@ -1,13 +1,13 @@
 # Promotion Blocker Ledger - Lily Roo
 
-Generated: 2026-07-03T05:24:19.578043Z
+Generated: 2026-07-03T05:37:20.521557Z
 
 ## Summary
-- Open blockers: **13**
+- Open blockers: **12**
 - User-owned: **9**
 - External platform-owned: **3**
-- Codex-actionable: **1**
-- High or critical: **11**
+- Codex-actionable: **0**
+- High or critical: **10**
 
 ## Unlock Roadmap
 - **Approve checked scheduled rows** (`blocked`)
@@ -18,10 +18,10 @@ Generated: 2026-07-03T05:24:19.578043Z
   - Owner: `tod`; projected blockers resolved: **0**
   - Unlocks: Held TikTok approval rows can pass platform-readiness review.; Approved TikTok backlog can become safe to reschedule into upload-draft creation.
 - **Reschedule approved past-due backlog** (`clear`)
-  - Owner: `tod`; projected blockers resolved: **12**
+  - Owner: `tod`; projected blockers resolved: **0**
   - Unlocks: Approved past-due queue rows get a fresh schedule after executor blockers clear.
-  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24`
-  - Apply after review: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin`
+  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00-04:00' --spacing-hours 24`
+  - Apply after review: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin`
 - **Fill manual metric worksheet** (`needs_values`)
   - Owner: `tod`; projected blockers resolved: **6**
   - Unlocks: Admin health and weekly reporting can use fresh cross-platform metrics.; Manual metric blockers clear once worksheet values are imported.
@@ -30,13 +30,6 @@ Generated: 2026-07-03T05:24:19.578043Z
   - Apply after review: `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
 
 ## Ledger
-- **[high] Reschedule approved past-due backlog** (`backlog-reschedule`)
-  - Owner: `codex`; status: `ready_to_preview`; category: `backlog_reschedule`
-  - Evidence: 12 approved backlog row(s); 0 still have executor blockers.
-  - Next step: Preview the new schedule, then apply the safe reschedule command.
-  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24`
-  - Apply/log after review: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin`
-  - Guardrail: The apply command remains dry-run-first through the preview artifact.
 - **[high] Approve scheduled Instagram row** (`approval-FP-AUTO-267`)
   - Owner: `tod`; status: `blocked_by_review_checks`; category: `approval`
   - Evidence: FP-AUTO-267 is blocked by not_approved in executor state. Failed review checks: platform_readiness: Executor readiness snapshot marks platform blocked.

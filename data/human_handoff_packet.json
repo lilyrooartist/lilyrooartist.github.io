@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-03T05:24:19.626370Z",
+  "generated_at": "2026-07-03T05:37:20.553267Z",
   "safe_mode": true,
   "source": {
     "promotion_blocker_ledger": "data/promotion_blocker_ledger.json",
@@ -13,38 +13,34 @@
     "resolution_worksheet": "data/human_handoff_resolution_worksheet.csv"
   },
   "summary": {
-    "task_count": 6,
+    "task_count": 5,
     "owner_counts": {
-      "tod": 6
+      "tod": 5
     },
     "urgency_counts": {
-      "high": 4,
+      "high": 3,
       "low": 2
     },
     "phase_counts": {
-      "Backlog recovery": 1,
       "Manual metrics": 2,
       "Platform setup": 3
     },
     "blocker_summary": {
-      "open_blocker_count": 13,
-      "urgent_count": 11,
+      "open_blocker_count": 12,
+      "urgent_count": 10,
       "owner_counts": {
-        "codex": 1,
         "external_platform": 3,
         "tod": 9
       },
       "category_counts": {
         "approval": 7,
-        "backlog_reschedule": 1,
         "manual_metrics": 2,
         "platform_repair": 3
       },
       "status_counts": {
         "blocked": 3,
         "blocked_by_review_checks": 7,
-        "needs_values": 2,
-        "ready_to_preview": 1
+        "needs_values": 2
       },
       "next_resolution_projection": {
         "kind": "checked_scheduled_approval_batch",
@@ -112,13 +108,13 @@
           "phase": "Reschedule approved past-due backlog",
           "status": "clear",
           "owner": "tod",
-          "blockers_resolved": 12,
+          "blockers_resolved": 0,
           "unlocks": [
             "Approved past-due queue rows get a fresh schedule after executor blockers clear."
           ],
           "blocked_by": [],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24",
-          "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00-04:00' --spacing-hours 24",
+          "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
           "source_path": "data/backlog_reschedule_preview.json"
         },
         {
@@ -155,8 +151,8 @@
   "action_docket": {
     "source": "data/human_handoff_packet.json",
     "roadmap_step_count": 4,
-    "task_count": 6,
-    "ready_step_count": 2,
+    "task_count": 5,
+    "ready_step_count": 1,
     "blocked_step_count": 0,
     "manual_post_count": 0,
     "manual_metric_field_count": 6,
@@ -548,74 +544,16 @@
       {
         "id": "backlog-reschedule-gate",
         "label": "Reschedule approved backlog after blockers clear",
-        "state": "ready",
+        "state": "clear",
         "owner": "tod",
-        "task_ids": [
-          "backlog-reschedule"
-        ],
-        "blockers_resolved": 12,
-        "backlog_clearance_manifest": {
-          "status": "clear",
-          "approved_backlog_count": 12,
-          "blocked_backlog_count": 0,
-          "clear_to_apply_count": 12,
-          "partial_clear_apply_available": true,
-          "partial_clear_apply_count": 12,
-          "blocked_ids": [],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24",
-          "safe_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-          "blocked_apply_command": "",
-          "override_apply_command": "",
-          "apply_allowed_without_override": true,
-          "apply_gate": "clear",
-          "clearance_steps": [],
-          "blocked_items": [],
-          "operator_checklist": [
-            "Run the preview command and confirm it proposes only approved unpublished backlog rows.",
-            "If partial_clear_apply_available is true, use the scoped partial-clear commands for unblocked rows while blocked rows are repaired.",
-            "Complete every listed platform/executor clearance step before normal apply.",
-            "Refresh Admin and confirm the normal apply gate is clear.",
-            "Apply only when safe_apply_command is populated without --allow-blocked.",
-            "After apply, refresh Admin and confirm the backlog rows have future scheduled_at values."
-          ],
-          "completion_evidence": [
-            "data/backlog_reschedule_preview.json shows normal_apply_gate clear.",
-            "data/platform_repair_status.json shows the affected platform repair gate clear.",
-            "data/social_execution_snapshot.json no longer reports the row as blocked by executor/platform repair.",
-            "data/promo_engine_status.json and lilyroo.com/admin expose a safe apply command or no approved past-due backlog."
-          ],
-          "guardrails": [
-            "Normal apply stays hidden while blocked_ids are present.",
-            "Do not use the override command unless accepting the blocked executor risk deliberately.",
-            "A reschedule does not publish, approve, or repair platform credentials by itself."
-          ]
-        },
-        "clearance_checklist": [
-          "Run the preview command and confirm it proposes only approved unpublished backlog rows.",
-          "If partial_clear_apply_available is true, use the scoped partial-clear commands for unblocked rows while blocked rows are repaired.",
-          "Complete every listed platform/executor clearance step before normal apply.",
-          "Refresh Admin and confirm the normal apply gate is clear.",
-          "Apply only when safe_apply_command is populated without --allow-blocked.",
-          "After apply, refresh Admin and confirm the backlog rows have future scheduled_at values."
-        ],
-        "clearance_guardrails": [
-          "Normal apply stays hidden while blocked_ids are present.",
-          "Do not use the override command unless accepting the blocked executor risk deliberately.",
-          "A reschedule does not publish, approve, or repair platform credentials by itself."
-        ],
-        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24",
-        "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+        "task_ids": [],
+        "blockers_resolved": 0,
+        "backlog_clearance_manifest": {},
+        "clearance_checklist": [],
+        "clearance_guardrails": [],
+        "preview_command": "",
+        "apply_command": "",
         "command_sequence": [
-          {
-            "step": "preview",
-            "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24",
-            "required_before_apply": true
-          },
-          {
-            "step": "apply_after_review",
-            "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-            "required_before_apply": false
-          },
           {
             "step": "verify",
             "command": "python3 scripts/refresh_promo_admin.py",
@@ -624,13 +562,13 @@
         ],
         "completion_evidence": "data/backlog_reschedule_preview.json should show normal_apply_gate clear before any non-override apply command is exposed.",
         "next_step_after_apply": "Refresh admin and confirm approved past-due posts have future scheduled_at values before relying on the scheduler.",
-        "guardrail": "Normal apply stays hidden until known executor/platform blockers clear."
+        "guardrail": "Do not apply blocked backlog reschedules without clearing platform readiness."
       }
     ]
   },
   "resolution_worksheet": {
     "path": "data/human_handoff_resolution_worksheet.csv",
-    "row_count": 6,
+    "row_count": 5,
     "fieldnames": [
       "task_id",
       "phase",
@@ -650,81 +588,6 @@
     "redaction": "Worksheet rows collect prompts, commands, and evidence targets only; private metric values, public URLs, approval decisions, and secret values stay out of generated reports."
   },
   "tasks": [
-    {
-      "id": "backlog-reschedule",
-      "title": "Preview approved backlog reschedule",
-      "phase": "Backlog recovery",
-      "owner": "tod",
-      "urgency": "high",
-      "status": "ready_to_preview",
-      "detail": "Preview a new schedule for approved past-due posts.",
-      "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24",
-      "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-      "source_path": "data/backlog_reschedule_preview.json",
-      "impact": {
-        "approved_backlog_count": 12,
-        "blocked_backlog_count": 0,
-        "blocked_apply_command": "",
-        "override_apply_command": "",
-        "backlog_clearance_manifest": {
-          "status": "clear",
-          "approved_backlog_count": 12,
-          "blocked_backlog_count": 0,
-          "clear_to_apply_count": 12,
-          "partial_clear_apply_available": true,
-          "partial_clear_apply_count": 12,
-          "blocked_ids": [],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24",
-          "safe_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
-          "blocked_apply_command": "",
-          "override_apply_command": "",
-          "apply_allowed_without_override": true,
-          "apply_gate": "clear",
-          "clearance_steps": [],
-          "blocked_items": [],
-          "operator_checklist": [
-            "Run the preview command and confirm it proposes only approved unpublished backlog rows.",
-            "If partial_clear_apply_available is true, use the scoped partial-clear commands for unblocked rows while blocked rows are repaired.",
-            "Complete every listed platform/executor clearance step before normal apply.",
-            "Refresh Admin and confirm the normal apply gate is clear.",
-            "Apply only when safe_apply_command is populated without --allow-blocked.",
-            "After apply, refresh Admin and confirm the backlog rows have future scheduled_at values."
-          ],
-          "completion_evidence": [
-            "data/backlog_reschedule_preview.json shows normal_apply_gate clear.",
-            "data/platform_repair_status.json shows the affected platform repair gate clear.",
-            "data/social_execution_snapshot.json no longer reports the row as blocked by executor/platform repair.",
-            "data/promo_engine_status.json and lilyroo.com/admin expose a safe apply command or no approved past-due backlog."
-          ],
-          "guardrails": [
-            "Normal apply stays hidden while blocked_ids are present.",
-            "Do not use the override command unless accepting the blocked executor risk deliberately.",
-            "A reschedule does not publish, approve, or repair platform credentials by itself."
-          ]
-        },
-        "clearance_checklist": [
-          "Run the preview command and confirm it proposes only approved unpublished backlog rows.",
-          "If partial_clear_apply_available is true, use the scoped partial-clear commands for unblocked rows while blocked rows are repaired.",
-          "Complete every listed platform/executor clearance step before normal apply.",
-          "Refresh Admin and confirm the normal apply gate is clear.",
-          "Apply only when safe_apply_command is populated without --allow-blocked.",
-          "After apply, refresh Admin and confirm the backlog rows have future scheduled_at values."
-        ],
-        "completion_evidence": [
-          "data/backlog_reschedule_preview.json shows normal_apply_gate clear.",
-          "data/platform_repair_status.json shows the affected platform repair gate clear.",
-          "data/social_execution_snapshot.json no longer reports the row as blocked by executor/platform repair.",
-          "data/promo_engine_status.json and lilyroo.com/admin expose a safe apply command or no approved past-due backlog."
-        ],
-        "clearance_guardrails": [
-          "Normal apply stays hidden while blocked_ids are present.",
-          "Do not use the override command unless accepting the blocked executor risk deliberately.",
-          "A reschedule does not publish, approve, or repair platform credentials by itself."
-        ]
-      },
-      "links": [],
-      "guardrail": "Normal apply stays hidden until known executor/platform blockers clear."
-    },
     {
       "id": "platform-setup-FP-AUTO-258",
       "title": "Repair Instagram executor",

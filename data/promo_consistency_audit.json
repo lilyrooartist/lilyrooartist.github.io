@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-07-03T05:24:20.320491Z",
+  "generated_at": "2026-07-03T05:37:21.043939Z",
   "safe_mode": true,
   "summary": {
     "check_count": 30,
-    "passed": 27,
-    "failed": 3,
-    "high_failed": 2,
+    "passed": 28,
+    "failed": 2,
+    "high_failed": 1,
     "medium_failed": 1,
     "status": "fail"
   },
@@ -15,24 +15,24 @@
       "status": "pass",
       "severity": "ok",
       "detail": "Blocker ledger summary should match row count.",
-      "expected": 13,
-      "actual": 13
+      "expected": 12,
+      "actual": 12
     },
     {
       "name": "ledger_category_total_matches_rows",
       "status": "pass",
       "severity": "ok",
       "detail": "Blocker category counts should account for every blocker row.",
-      "expected": 13,
-      "actual": 13
+      "expected": 12,
+      "actual": 12
     },
     {
       "name": "status_open_actions_match_operations",
       "status": "pass",
       "severity": "ok",
       "detail": "Promo status open action count should mirror the operations packet.",
-      "expected": 14,
-      "actual": 14
+      "expected": 20,
+      "actual": 20
     },
     {
       "name": "approval_counts_match",
@@ -76,15 +76,11 @@
     },
     {
       "name": "tiktok_preflight_local_missing_matches_platform_repair",
-      "status": "fail",
-      "severity": "high",
+      "status": "pass",
+      "severity": "ok",
       "detail": "TikTok preflight local missing secrets should match the platform repair row.",
       "expected": [],
-      "actual": [
-        "TIKTOK_CLIENT_KEY",
-        "TIKTOK_CLIENT_SECRET",
-        "TIKTOK_REFRESH_TOKEN"
-      ]
+      "actual": []
     },
     {
       "name": "tiktok_preflight_worker_missing_matches_platform_repair",
@@ -161,7 +157,7 @@
       "status": "fail",
       "severity": "medium",
       "detail": "Operations store checks should match checked-pending store services.",
-      "expected": 6,
+      "expected": 5,
       "actual": 7
     },
     {
@@ -169,8 +165,8 @@
       "status": "pass",
       "severity": "ok",
       "detail": "Human handoff blocker summary should be copied from the blocker ledger.",
-      "expected": 13,
-      "actual": 13
+      "expected": 12,
+      "actual": 12
     },
     {
       "name": "handoff_projection_matches_ledger_projection",
@@ -230,7 +226,6 @@
       "severity": "ok",
       "detail": "Human handoff preview should include one preview row for every handoff task.",
       "expected": [
-        "backlog-reschedule",
         "manual-metrics-priority-2",
         "manual-metrics-priority-3",
         "platform-setup-FP-AUTO-258",
@@ -238,7 +233,6 @@
         "platform-setup-FP-PLAN-TWELVE-DOLLARS-INSTAGRAM"
       ],
       "actual": [
-        "backlog-reschedule",
         "manual-metrics-priority-2",
         "manual-metrics-priority-3",
         "platform-setup-FP-AUTO-258",
@@ -251,8 +245,8 @@
       "status": "pass",
       "severity": "ok",
       "detail": "Human handoff preview worksheet row count should match the handoff packet worksheet summary.",
-      "expected": 6,
-      "actual": 6
+      "expected": 5,
+      "actual": 5
     },
     {
       "name": "handoff_preview_status_matches_status_kpi",
@@ -261,12 +255,10 @@
       "detail": "Promo status handoff preview KPI should mirror preview status counts.",
       "expected": {
         "input_missing": 2,
-        "preview_ok": 1,
         "skipped": 3
       },
       "actual": {
         "input_missing": 2,
-        "preview_ok": 1,
         "skipped": 3
       }
     },
@@ -276,15 +268,15 @@
       "severity": "ok",
       "detail": "Promo status handoff preview KPI should mirror preview summary counts.",
       "expected": {
-        "worksheet_row_count": 6,
-        "preview_count": 6,
-        "executed_preview_count": 3,
+        "worksheet_row_count": 5,
+        "preview_count": 5,
+        "executed_preview_count": 2,
         "skipped_preview_count": 3
       },
       "actual": {
-        "worksheet_row_count": 6,
-        "preview_count": 6,
-        "executed_preview_count": 3,
+        "worksheet_row_count": 5,
+        "preview_count": 5,
+        "executed_preview_count": 2,
         "skipped_preview_count": 3
       }
     },
@@ -293,16 +285,16 @@
       "status": "pass",
       "severity": "ok",
       "detail": "Promo status next actions should expose the handoff preview health summary.",
-      "expected": "Review handoff preview health: 1 preview-clean, 2 missing input; see data/human_handoff_resolution_preview.json.",
+      "expected": "Review handoff preview health: 2 missing input; see data/human_handoff_resolution_preview.json.",
       "actual": [
-        "Next operational action: Preview clear approved backlog row — python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24",
+        "Next operational action: Fix Instagram executor — python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
         "First handoff step: Fill and import manual metric worksheet — python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
         "Current unlock gate: Fill manual metric worksheet (blocked_until_input); 0 ready, 2 blocked/warning; preview python3 scripts/update_manual_social_stats.py --from-csv --dry-run; see data/promo_unlock_sequence.json.",
-        "Review handoff preview health: 1 preview-clean, 2 missing input; see data/human_handoff_resolution_preview.json.",
+        "Review handoff preview health: 2 missing input; see data/human_handoff_resolution_preview.json.",
+        "Refresh automation coverage: latest scheduled run has not covered a4194d6a; dispatch https://github.com/lilyrooartist/lilyrooartist.github.io/actions/workflows/promo-admin-refresh.yml or wait for the next scheduled run.",
         "Refresh manual metrics: 6 worksheet row(s) still need new_value entries (blocked_until_new_values_filled); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values.",
         "Collect experiment results: 90 post-result field(s) need new_value plus evidence_note; use admin/reports/experiment-result-clipboard.md; first priority: measure FP-AUTO-265 on Facebook. Direct preview template: python3 scripts/update_experiment_results.py --post-id FP-AUTO-265 --source-row 33 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run. Direct apply template after review: python3 scripts/update_experiment_results.py --post-id FP-AUTO-265 --source-row 33 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin. Then preview import with python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run after filling data/experiment_result_entry_wide_template.csv.",
-        "Preview clear approved backlog row: python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24",
-        "Apply verified store URLs: 1 music site snapshot(s) found public URLs; copy them into data/distrokid_release_status.json and refresh Admin.",
+        "Apply verified store URLs: 2 music site snapshot(s) found public URLs; copy them into data/distrokid_release_status.json and refresh Admin.",
         "10 executor records are blocked by approval.",
         "Restart song-forward distribution: approve draft posts, clear executor blockers, and keep weekly metrics current.",
         "Review approval blockers for 10 queued executor records.",
@@ -340,8 +332,8 @@
       "status": "pass",
       "severity": "ok",
       "detail": "Promo unlock sequence should mirror the blocker ledger open blocker count.",
-      "expected": 13,
-      "actual": 13
+      "expected": 12,
+      "actual": 12
     },
     {
       "name": "unlock_sequence_current_step_is_preview_ready",
@@ -368,7 +360,7 @@
         "blocked_or_warning_count": 2,
         "current_step_id": "unlock-manual-metrics",
         "current_gate_state": "blocked_until_input",
-        "open_blocker_count": 13
+        "open_blocker_count": 12
       },
       "actual": {
         "step_count": 4,
@@ -376,7 +368,7 @@
         "blocked_or_warning_count": 2,
         "current_step_id": "unlock-manual-metrics",
         "current_gate_state": "blocked_until_input",
-        "open_blocker_count": 13
+        "open_blocker_count": 12
       }
     },
     {
@@ -386,14 +378,14 @@
       "detail": "Promo status next actions should expose the current unlock sequence gate.",
       "expected": "Current unlock gate action includes data/promo_unlock_sequence.json",
       "actual": [
-        "Next operational action: Preview clear approved backlog row — python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24",
+        "Next operational action: Fix Instagram executor — python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
         "First handoff step: Fill and import manual metric worksheet — python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
         "Current unlock gate: Fill manual metric worksheet (blocked_until_input); 0 ready, 2 blocked/warning; preview python3 scripts/update_manual_social_stats.py --from-csv --dry-run; see data/promo_unlock_sequence.json.",
-        "Review handoff preview health: 1 preview-clean, 2 missing input; see data/human_handoff_resolution_preview.json.",
+        "Review handoff preview health: 2 missing input; see data/human_handoff_resolution_preview.json.",
+        "Refresh automation coverage: latest scheduled run has not covered a4194d6a; dispatch https://github.com/lilyrooartist/lilyrooartist.github.io/actions/workflows/promo-admin-refresh.yml or wait for the next scheduled run.",
         "Refresh manual metrics: 6 worksheet row(s) still need new_value entries (blocked_until_new_values_filled); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values.",
         "Collect experiment results: 90 post-result field(s) need new_value plus evidence_note; use admin/reports/experiment-result-clipboard.md; first priority: measure FP-AUTO-265 on Facebook. Direct preview template: python3 scripts/update_experiment_results.py --post-id FP-AUTO-265 --source-row 33 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run. Direct apply template after review: python3 scripts/update_experiment_results.py --post-id FP-AUTO-265 --source-row 33 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin. Then preview import with python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run after filling data/experiment_result_entry_wide_template.csv.",
-        "Preview clear approved backlog row: python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24",
-        "Apply verified store URLs: 1 music site snapshot(s) found public URLs; copy them into data/distrokid_release_status.json and refresh Admin.",
+        "Apply verified store URLs: 2 music site snapshot(s) found public URLs; copy them into data/distrokid_release_status.json and refresh Admin.",
         "10 executor records are blocked by approval.",
         "Restart song-forward distribution: approve draft posts, clear executor blockers, and keep weekly metrics current.",
         "Review approval blockers for 10 queued executor records.",

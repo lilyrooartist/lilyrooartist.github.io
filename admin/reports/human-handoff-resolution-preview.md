@@ -1,22 +1,16 @@
 # Human Handoff Resolution Preview - Lily Roo
 
-Generated: 2026-07-03T05:24:19.783779Z
+Generated: 2026-07-03T05:37:20.644939Z
 
 ## Summary
-- Worksheet rows: **6**
-- Executed previews: **3**
+- Worksheet rows: **5**
+- Executed previews: **2**
 - Skipped previews: **3**
-- Status counts: `{"input_missing": 2, "preview_ok": 1, "skipped": 3}`
+- Status counts: `{"input_missing": 2, "skipped": 3}`
 - Policy: Only python3 scripts/* commands with --dry-run, or reschedule previews without --apply, are executed.
 - Guardrail: This preview runner never executes apply, refresh-admin, PUBLIC_URL placeholder, non-python, or unsupported commands.
 
 ## Previews
-- **backlog-reschedule** (`preview_ok`)
-  - Phase: `Backlog recovery`; input needed: `clearance_confirmation`
-  - Safety: `safe_preview` (reschedule_preview_command)
-  - Command: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24`
-  - Output: Rows selected: 0 | Dry run only. Re-run with --apply to write the schedule.
-  - Guardrail: Normal apply stays hidden until known executor/platform blockers clear.
 - **platform-setup-FP-AUTO-258** (`skipped`)
   - Phase: `Platform setup`; input needed: `local_secret_presence_and_public_posting_approval`
   - Safety: `skipped` (not_marked_preview_safe)

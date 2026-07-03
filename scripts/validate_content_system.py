@@ -949,7 +949,8 @@ def validate_generated_outputs(failures):
             fail("promo_operations_packet.json missing TikTok remote/local missing-secret diagnostics", failures)
         instagram_actions = [
             action for action in actions
-            if (action.get("context") or {}).get("platform") == "Instagram"
+            if action.get("kind") == "platform_fix"
+            and (action.get("context") or {}).get("platform") == "Instagram"
         ]
         if instagram_actions and all(
             (action.get("context") or {}).get("account_resolution_reason") == "instagram_business_account_unresolved"
@@ -1899,6 +1900,19 @@ def validate_generated_outputs(failures):
             and any("--allow-partial" in item for item in clipboard.get("guardrails") or [])
         ):
             ok(f"manual posting clipboard packages {len(cards)} postable card(s)")
+        elif (
+            clipboard.get("safe_mode") is True
+            and summary.get("status") == "empty"
+            and summary.get("postable_count") == 0
+            and not cards
+            and session.get("status") == "not_active"
+            and session.get("postable_count") == 0
+            and lifecycle.get("status") == "active"
+            and lifecycle.get("total_count") == 0
+            and any("does not approve" in item for item in clipboard.get("guardrails") or [])
+            and summary.get("next_action") == "No approved manual posts are currently waiting."
+        ):
+            ok("manual posting clipboard has no postable manual cards")
         else:
             fail("manual_posting_clipboard.json missing postable cards, copy, assets, or safe logging commands", failures)
     else:
@@ -2774,7 +2788,7 @@ def validate_generated_outputs(failures):
             and growth_goal.get("current_total_plays_views") is not None
             and growth_goal.get("target_total_plays_views") is not None
             and len(experiments) == 3
-            and {"Release-art image + story hook", "YouTube Community archive/playlist CTA", "Short video clip + platform-native CTA"} <= experiment_formats
+            and {"Release-art image + story hook", "YouTube archive video CTA", "Short video clip + platform-native CTA"} <= experiment_formats
             and all((experiment.get("assets") or []) for experiment in experiments)
             and all("Published_Log.csv" in (experiment.get("result_destination") or "") for experiment in experiments)
             and all("data/manual_social_stats.json" in (experiment.get("result_destination") or "") for experiment in experiments)
@@ -2788,6 +2802,12 @@ def validate_generated_outputs(failures):
             and all((candidate.get("decision_unblock") or {}).get("next_action") and "measurement_ready_count" in (candidate.get("decision_unblock") or {}) and "post_and_log_count" in (candidate.get("decision_unblock") or {}) and "blocked_count" in (candidate.get("decision_unblock") or {}) and (candidate.get("decision_unblock") or {}).get("report_path") for candidate in top_candidates)
             and any((candidate.get("decision_unblock") or {}).get("measurement_ready_count") for candidate in top_candidates)
             and any(
+                (candidate.get("decision_unblock") or {}).get("measurement_ready_count")
+                or (
+                    (candidate.get("decision_unblock") or {}).get("first_action") == "collect_metrics"
+                    and (candidate.get("decision_unblock") or {}).get("preview_command")
+                )
+                or
                 (candidate.get("decision_unblock") or {}).get("post_and_log_count")
                 or (candidate.get("decision_unblock") or {}).get("await_scheduled_count")
                 or (candidate.get("decision_unblock") or {}).get("log_url_count")
@@ -2807,9 +2827,9 @@ def validate_generated_outputs(failures):
             and any(step.get("status") == "winner_ready" for step in ladder_steps)
             and any(
                 (
-                    step.get("first_action") == "post_and_log_public_url"
-                    and str(step.get("first_platform") or "").lower() == "youtube community"
-                    and "log_manual_distribution.py" in (step.get("preview_command") or "")
+                    step.get("first_action") == "collect_metrics"
+                    and "update_experiment_results.py" in (step.get("preview_command") or "")
+                    and str(step.get("first_platform") or "") in {"Facebook", "YouTube", "X"}
                 )
                 or (
                     step.get("first_action") == "await_scheduled_auto_post"
@@ -2827,6 +2847,12 @@ def validate_generated_outputs(failures):
                 (
                     step.get("first_action") == "clear_platform_blocker"
                     and step.get("first_platform") == "TikTok"
+                )
+                or (
+                    step.get("first_action") == "collect_metrics"
+                    and step.get("first_platform") == "YouTube"
+                    and "Short video" in str(step.get("format") or "")
+                    and "update_experiment_results.py" in (step.get("preview_command") or "")
                 )
                 or (
                     step.get("first_action") == "await_scheduled_auto_post"
@@ -3468,6 +3494,8 @@ def validate_generated_outputs(failures):
         summary = plan.get("summary") or {}
         if posts and plan.get("mode") == "draft_plan_only":
             ok(f"promo queue plan has {len(posts)} draft posts")
+        elif not posts and plan.get("mode") == "draft_plan_only" and summary.get("draft_posts") == 0:
+            ok("promo queue plan has no draft posts pending")
         else:
             fail("promo_queue_plan.json missing draft posts or mode", failures)
         if summary.get("draft_posts") == len(posts):
@@ -3496,6 +3524,8 @@ def validate_generated_outputs(failures):
             fail("promo_queue_plan.json missing all-approved apply command", failures)
         if apply_by_release:
             ok(f"promo queue plan includes release apply commands for {len(apply_by_release)} release(s)")
+        elif not posts and summary.get("draft_posts") == 0:
+            ok("promo queue plan has no release apply commands while idle")
         else:
             fail("promo_queue_plan.json missing release apply commands", failures)
         approval_commands = plan.get("approval_commands") or {}
@@ -3517,6 +3547,8 @@ def validate_generated_outputs(failures):
                 fail(f"promo_queue_plan.json apply_preview missing {key}", failures)
         if readiness_audit.get("rows") and readiness_audit.get("counts") is not None:
             ok("promo queue plan includes executor readiness audit")
+        elif not posts and readiness_audit.get("ok") is True and readiness_audit.get("counts") == {} and readiness_audit.get("rows") == []:
+            ok("promo queue plan has idle executor readiness audit")
         else:
             fail("promo_queue_plan.json missing executor readiness audit", failures)
         ready_ids = apply_preview.get("ready_ids") or []

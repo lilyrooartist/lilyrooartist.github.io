@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-07-03T05:24:19.829027Z",
+  "generated_at": "2026-07-03T05:37:20.675046Z",
   "safe_mode": true,
   "summary": {
     "step_count": 4,
     "ready_for_human_review_count": 0,
     "blocked_or_warning_count": 2,
-    "total_projected_resolution_units": 18,
+    "total_projected_resolution_units": 6,
     "current_step_id": "unlock-manual-metrics",
     "current_gate_state": "blocked_until_input",
-    "open_blocker_count": 13
+    "open_blocker_count": 12
   },
   "operator_contract": {
     "review_only": true,
@@ -19,14 +19,14 @@
     "rule": "Run preview commands first; run apply commands only after the named human, platform, URL, secret, or metric input is complete."
   },
   "current_next_actions": [
-    "Next operational action: Preview clear approved backlog row — python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24",
+    "Next operational action: Fix Instagram executor — python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
     "First handoff step: Fill and import manual metric worksheet — python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
     "Current unlock gate: Fill manual metric worksheet (blocked_until_input); 0 ready, 2 blocked/warning; preview python3 scripts/update_manual_social_stats.py --from-csv --dry-run; see data/promo_unlock_sequence.json.",
     "Review handoff preview health: 1 preview-clean, 2 missing input; see data/human_handoff_resolution_preview.json.",
+    "Refresh automation coverage: latest scheduled run has not covered a4194d6a; dispatch https://github.com/lilyrooartist/lilyrooartist.github.io/actions/workflows/promo-admin-refresh.yml or wait for the next scheduled run.",
     "Refresh manual metrics: 6 worksheet row(s) still need new_value entries (blocked_until_new_values_filled); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values.",
     "Collect experiment results: 90 post-result field(s) need new_value plus evidence_note; use admin/reports/experiment-result-clipboard.md; first priority: measure FP-AUTO-265 on Facebook. Direct preview template: python3 scripts/update_experiment_results.py --post-id FP-AUTO-265 --source-row 33 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run. Direct apply template after review: python3 scripts/update_experiment_results.py --post-id FP-AUTO-265 --source-row 33 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin. Then preview import with python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run after filling data/experiment_result_entry_wide_template.csv.",
-    "Preview clear approved backlog row: python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24",
-    "Apply verified store URLs: 1 music site snapshot(s) found public URLs; copy them into data/distrokid_release_status.json and refresh Admin.",
+    "Apply verified store URLs: 2 music site snapshot(s) found public URLs; copy them into data/distrokid_release_status.json and refresh Admin.",
     "10 executor records are blocked by approval.",
     "Restart song-forward distribution: approve draft posts, clear executor blockers, and keep weekly metrics current.",
     "Review approval blockers for 10 queued executor records.",
@@ -91,32 +91,28 @@
       "owner": "tod",
       "gate_state": "clear",
       "reason": "No action is needed for this gate.",
-      "blockers_resolved": 12,
+      "blockers_resolved": 0,
       "blocked_by": [],
       "unlocks": [
         "Approved past-due queue rows get a fresh schedule after executor blockers clear."
       ],
       "source_path": "data/backlog_reschedule_preview.json",
-      "preview_status": "preview_ok",
-      "preview_task_ids": [
-        "backlog-reschedule"
-      ],
-      "input_needed": "clearance_confirmation",
-      "completion_evidence": "data/backlog_reschedule_preview.json should show normal_apply_gate clear before any non-override apply command is exposed.",
-      "guardrail": "Normal apply stays hidden until known executor/platform blockers clear.",
+      "preview_status": "",
+      "preview_task_ids": [],
+      "input_needed": "",
+      "completion_evidence": "",
+      "guardrail": "",
       "commands": [
         {
           "step": "preview",
-          "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24",
+          "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00-04:00' --spacing-hours 24",
           "safe_to_run": true,
-          "status": "preview_ok",
-          "returncodes": [
-            0
-          ]
+          "status": "not_previewed",
+          "returncodes": []
         },
         {
           "step": "apply_after_review",
-          "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+          "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
           "safe_to_run": false,
           "requires": "Human review, required input, or external platform repair must be complete first."
         }

@@ -485,6 +485,37 @@ def scheduled_approval_batch_actions(packet):
     ]
 
 
+def scheduled_approval_review_actions(packet):
+    actions = []
+    for row in packet.get("rows") or []:
+        post_id = row.get("id") or ""
+        preview_command = row.get("approval_preview_command") or ""
+        approval_command = row.get("approval_apply_command") or ""
+        if not post_id or not preview_command:
+            continue
+        platform = row.get("platform") or "platform"
+        actions.append(command_row(
+            f"Review scheduled {platform} approval {post_id}",
+            preview_command,
+            "approval_review",
+            12,
+            {
+                "id": post_id,
+                "platform": platform,
+                "status": row.get("status") or "",
+                "reason": row.get("reason") or "",
+                "readiness_state": row.get("status") or "blocked",
+                "readiness_message": row.get("review_summary") or row.get("reason") or "Review approval checks before applying.",
+                "approval_command": approval_command,
+                "preview_command": preview_command,
+                "approval_checklist": row.get("approval_checklist") or [],
+                "review_check_failures": row.get("review_check_failures") or [],
+                "guardrail": "Preview each approval before applying; this packet does not approve posts.",
+            },
+        ))
+    return actions
+
+
 def backlog_reschedule_actions(status, backlog_preview):
     monetization = (status.get("kpi") or {}).get("monetization") or {}
     backlog_summary = (backlog_preview.get("summary") or {}) if backlog_preview else {}
@@ -876,6 +907,7 @@ def main() -> int:
     experiment_result_clipboard = read_json(EXPERIMENT_RESULT_CLIPBOARD, {})
     actions = (
         scheduled_approval_batch_actions(scheduled_approval)
+        + scheduled_approval_review_actions(scheduled_approval)
         + backlog_reschedule_actions(status, backlog_preview)
         + manual_distribution_actions(manual_distribution, manual_posting_clipboard)
         + experiment_result_actions(experiment_result_clipboard)

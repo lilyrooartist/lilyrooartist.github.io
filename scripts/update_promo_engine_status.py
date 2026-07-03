@@ -630,11 +630,11 @@ def experiment_format_key(row: dict) -> str:
             or "promo coverage" in imagery
         )
     ):
-        return "YouTube Community archive/playlist CTA"
+        return "YouTube archive video CTA"
     if has_clip:
         return "Short video clip + platform-native CTA"
     if platform == "YouTube Community":
-        return "YouTube Community archive/playlist CTA"
+        return "YouTube archive video CTA"
     if has_image:
         return "Release-art image + growth CTA" if hard_cta else "Release-art image + story hook"
     return "Text story hook + link CTA"

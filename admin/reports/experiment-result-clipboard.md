@@ -1,6 +1,6 @@
 # Experiment Result Clipboard - Lily Roo
 
-Generated: 2026-07-03T05:24:20.067960Z
+Generated: 2026-07-03T05:37:20.866028Z
 
 ## Summary
 - Status: **needs_values**
@@ -94,7 +94,7 @@ Generated: 2026-07-03T05:24:20.067960Z
   - `saves`: Open X analytics for https://x.com/i/web/status/2071402084403118566 and record saves.
   - `subs_delta`: Open X analytics for https://x.com/i/web/status/2071402084403118566 and record subs_delta.
 ### YouTube - Analog Myth (`FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY`)
-- Format: YouTube Community archive/playlist CTA
+- Format: YouTube archive video CTA
 - URL: https://youtu.be/404PvtuXnqY
 - Published: 2026-06-29; Published_Log row: `28`
 - Pending fields: `views, likes, comments, shares, saves, subs_delta`
@@ -427,7 +427,7 @@ Generated: 2026-07-03T05:24:20.067960Z
 - **Collect metrics** `FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA` YouTube / Short video clip + platform-native CTA: Already published and logged; measuring it reduces the Short video clip + platform-native CTA evidence gap. 2 logged post(s), 4 missing URL(s) in this format.
   - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --source-row 26 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
   - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --source-row 26 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
-- **Collect metrics** `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY` YouTube / YouTube Community archive/playlist CTA: Already published and logged; measuring it reduces the YouTube Community archive/playlist CTA evidence gap. 1 logged post(s), 0 missing URL(s) in this format.
+- **Collect metrics** `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY` YouTube / YouTube archive video CTA: Already published and logged; measuring it reduces the YouTube archive video CTA evidence gap. 1 logged post(s), 0 missing URL(s) in this format.
   - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --source-row 28 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
   - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --source-row 28 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
 

@@ -283,7 +283,7 @@ def winner_platforms(format_name: str, readiness: dict) -> list[str]:
     ready = ready_platforms(readiness)
     if format_name == "Release-art image + story hook":
         return [platform for platform in ("X", "Facebook", "Instagram") if platform in ready]
-    if format_name == "YouTube Community archive/playlist CTA":
+    if format_name == "YouTube archive video CTA":
         return ["YouTube"] if "YouTube" in ready or "YouTube Community" in ready else []
     return []
 

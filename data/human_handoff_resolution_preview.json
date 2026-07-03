@@ -1,22 +1,20 @@
 {
-  "generated_at": "2026-07-03T05:24:19.783779Z",
+  "generated_at": "2026-07-03T05:37:20.644939Z",
   "safe_mode": true,
   "source": {
     "resolution_worksheet": "data/human_handoff_resolution_worksheet.csv",
     "human_handoff_packet": "data/human_handoff_packet.json"
   },
   "summary": {
-    "worksheet_row_count": 6,
-    "preview_count": 6,
-    "executed_preview_count": 3,
+    "worksheet_row_count": 5,
+    "preview_count": 5,
+    "executed_preview_count": 2,
     "skipped_preview_count": 3,
     "status_counts": {
       "input_missing": 2,
-      "preview_ok": 1,
       "skipped": 3
     },
     "phase_counts": {
-      "Backlog recovery": 1,
       "Manual metrics": 2,
       "Platform setup": 3
     },
@@ -24,20 +22,6 @@
     "mutation_guardrail": "This preview runner never executes apply, refresh-admin, PUBLIC_URL placeholder, non-python, or unsupported commands."
   },
   "previews": [
-    {
-      "task_id": "backlog-reschedule",
-      "phase": "Backlog recovery",
-      "status": "ready_to_preview",
-      "input_needed": "clearance_confirmation",
-      "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24",
-      "safety": "safe_preview",
-      "safety_reason": "reschedule_preview_command",
-      "returncode": 0,
-      "preview_status": "preview_ok",
-      "output_excerpt": "Rows selected: 0\nDry run only. Re-run with --apply to write the schedule.",
-      "completion_evidence": "data/backlog_reschedule_preview.json should show normal_apply_gate clear before any non-override apply command is exposed.",
-      "guardrail": "Normal apply stays hidden until known executor/platform blockers clear."
-    },
     {
       "task_id": "platform-setup-FP-AUTO-258",
       "phase": "Platform setup",
@@ -111,7 +95,7 @@
   ],
   "handoff_resolution_summary": {
     "path": "data/human_handoff_resolution_worksheet.csv",
-    "row_count": 6,
+    "row_count": 5,
     "fieldnames": [
       "task_id",
       "phase",

@@ -1,20 +1,20 @@
 # Human Handoff Packet - Lily Roo
 
-Generated: 2026-07-03T05:24:19.626370Z
+Generated: 2026-07-03T05:37:20.553267Z
 
 ## Summary
-- Open handoff tasks: **6**
-- Tod-owned tasks: **6**
+- Open handoff tasks: **5**
+- Tod-owned tasks: **5**
 - External/platform-gated tasks: **0**
-- High urgency tasks: **4**
+- High urgency tasks: **3**
 - Low urgency tasks: **2**
 
 ## Action Docket
-- Ready steps: **2**
+- Ready steps: **1**
 - Blocked steps: **0**
 - Manual posts packaged: **0**
 - Manual metric fields: **6**
-- Resolution worksheet: `data/human_handoff_resolution_worksheet.csv` (6 row(s))
+- Resolution worksheet: `data/human_handoff_resolution_worksheet.csv` (5 row(s))
 
 - **Review checked approval batch** (`not_available`)
   - Owner: `tod`; tasks: **0**; blockers resolved: **0**
@@ -51,24 +51,14 @@ Generated: 2026-07-03T05:24:19.626370Z
   - Completion evidence: data/manual_metric_collection_packet.json should reduce pending_field_count, and data/metrics_history.json should preserve the imported metrics in the latest snapshot.
   - Next after apply: Rebuild the weekly report and confirm lilyroo.com/admin shows fewer pending manual metric fields.
   - Guardrail: Import only collected numeric values; leave unknown cells blank.
-- **Reschedule approved backlog after blockers clear** (`ready`)
-  - Owner: `tod`; tasks: **1**; blockers resolved: **12**
-  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24`
-  - Apply after review: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin`
-  - Sequence preview: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24`
-  - Sequence apply_after_review: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin`
+- **Reschedule approved backlog after blockers clear** (`clear`)
+  - Owner: `tod`; tasks: **0**; blockers resolved: **0**
   - Sequence verify: `python3 scripts/refresh_promo_admin.py`
   - Completion evidence: data/backlog_reschedule_preview.json should show normal_apply_gate clear before any non-override apply command is exposed.
   - Next after apply: Refresh admin and confirm approved past-due posts have future scheduled_at values before relying on the scheduler.
-  - Guardrail: Normal apply stays hidden until known executor/platform blockers clear.
+  - Guardrail: Do not apply blocked backlog reschedules without clearing platform readiness.
 
 ## Tasks
-- **Preview approved backlog reschedule** (`backlog-reschedule`)
-  - Phase: `Backlog recovery`; owner: `tod`; status: `ready_to_preview`; urgency: `high`
-  - Detail: Preview a new schedule for approved past-due posts.
-  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24`
-  - Apply after review: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin`
-  - Guardrail: Normal apply stays hidden until known executor/platform blockers clear.
 - **Repair Instagram executor** (`platform-setup-FP-AUTO-258`)
   - Phase: `Platform setup`; owner: `tod`; status: `failed`; urgency: `high`
   - Detail: Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.
