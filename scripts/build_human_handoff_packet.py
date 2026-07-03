@@ -405,8 +405,8 @@ def task_input_needed(task: dict) -> tuple[str, str]:
         return (
             "local_secret_presence_and_public_posting_approval",
             (
-                f"populate local env from data/tiktok_secret_handoff_template.env for names: {secret_names}; "
-                "public posting approval is only needed for direct public posting"
+                f"populate ../secrets/social_api.env with {secret_names}, or add META_LONG_LIVED_TOKEN and FB_PAGE_ID "
+                "then run python3 scripts/resolve_instagram_business_account.py --apply; public posting approval is only needed for direct public posting"
                 if secret_names
                 else "complete platform setup preflight; public posting approval is only needed for direct public posting"
             ),

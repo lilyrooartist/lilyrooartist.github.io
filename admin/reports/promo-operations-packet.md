@@ -1,6 +1,6 @@
 # Promo Operations Packet - Lily Roo
 
-Generated: 2026-07-03T06:08:12.261573Z
+Generated: 2026-07-03T06:12:20.042539Z
 
 ## Summary
 - Actions: **18**
@@ -103,8 +103,8 @@ Generated: 2026-07-03T06:08:12.261573Z
 ### Verify music sites
 - **[medium] Re-check Twelve Dollars on Spotify**
   - Why: Public store links should be checked until DistroKid exposes them.
-  - Detail: Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-07-04T06:07:01.039514+00:00. Status: waiting_for_release_propagation.
-  - Latest snapshot checked: `2026-07-03T06:07:01.039514+00:00`
+  - Detail: Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-07-04T06:11:09.130439+00:00. Status: waiting_for_release_propagation.
+  - Latest snapshot checked: `2026-07-03T06:11:09.130439+00:00`
   - Command: `python3 scripts/search_spotify_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/spotify_release_snapshot.json'`
 
 ## Guardrails
