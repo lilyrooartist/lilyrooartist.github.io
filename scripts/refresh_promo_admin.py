@@ -322,6 +322,21 @@ FINALIZE_STEPS = [
         "required": True,
     },
     {
+        "name": "build_monetization_activation_plan_final",
+        "command": ["python3", "scripts/build_monetization_activation_plan.py"],
+        "required": True,
+    },
+    {
+        "name": "update_promo_engine_status_after_activation_plan",
+        "command": ["python3", "scripts/update_promo_engine_status.py"],
+        "required": True,
+    },
+    {
+        "name": "build_promo_unlock_sequence_final",
+        "command": ["python3", "scripts/build_promo_unlock_sequence.py"],
+        "required": True,
+    },
+    {
         "name": "build_promo_consistency_audit",
         "command": ["python3", "scripts/build_promo_consistency_audit.py"],
         "required": True,

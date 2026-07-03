@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-03T08:59:46.817320Z",
+  "generated_at": "2026-07-03T09:11:32.992137Z",
   "safe_mode": true,
   "source": {
     "published_log": "admin/content/Published_Log.csv",
@@ -8,7 +8,7 @@
     "api": "youtube.videos.list(part=snippet,statistics)"
   },
   "summary": {
-    "status": "skipped_missing_secrets",
+    "status": "no_open_youtube_result_fields",
     "captured_post_count": 10,
     "fillable_post_count": 0,
     "fillable_result_field_count": 0,
@@ -29,14 +29,9 @@
       "likes",
       "comments"
     ],
-    "missing_secret_names": [
-      "GOOGLE_CLIENT_ID",
-      "YOUTUBE_REFRESH_TOKEN"
-    ],
     "apply_command": "python3 scripts/capture_youtube_post_results.py --apply-results --refresh-admin",
     "retry_command": "python3 scripts/capture_youtube_post_results.py --min-age-hours 24 --allow-empty --apply-results --refresh-admin",
-    "report_path": "admin/reports/youtube-post-results.md",
-    "next_action": "Add the missing YouTube OAuth credential names locally or in GitHub Actions, then rerun capture."
+    "report_path": "admin/reports/youtube-post-results.md"
   },
   "rows": [
     {
@@ -51,12 +46,16 @@
         "likes": "0",
         "comments": "0"
       },
-      "title": "",
-      "lookup_status": "skipped_missing_secrets",
-      "metrics": {},
+      "title": "What’s the rush to the same place? Full Slow Walk on the channel.",
+      "lookup_status": "ok",
+      "metrics": {
+        "views": 36,
+        "likes": 0,
+        "comments": 0
+      },
       "fillable_results": {},
       "filled_field_count": 0,
-      "evidence_note": "YouTube metric capture skipped 2026-07-03: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN",
+      "evidence_note": "YouTube Data API public statistics 2026-07-03; video_id=I5BBi4TDfAM",
       "direct_apply_command": ""
     },
     {
@@ -71,12 +70,16 @@
         "likes": "0",
         "comments": "0"
       },
-      "title": "",
-      "lookup_status": "skipped_missing_secrets",
-      "metrics": {},
+      "title": "The Power of Light - Lily Roo (Archived Original)",
+      "lookup_status": "ok",
+      "metrics": {
+        "views": 55,
+        "likes": 0,
+        "comments": 0
+      },
       "fillable_results": {},
       "filled_field_count": 0,
-      "evidence_note": "YouTube metric capture skipped 2026-07-03: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN",
+      "evidence_note": "YouTube Data API public statistics 2026-07-03; video_id=BkkBE2pXHSY",
       "direct_apply_command": ""
     },
     {
@@ -91,12 +94,16 @@
         "likes": "0",
         "comments": "0"
       },
-      "title": "",
-      "lookup_status": "skipped_missing_secrets",
-      "metrics": {},
+      "title": "No Mortgage - Lily Roo (Archived Original)",
+      "lookup_status": "ok",
+      "metrics": {
+        "views": 68,
+        "likes": 0,
+        "comments": 0
+      },
       "fillable_results": {},
       "filled_field_count": 0,
-      "evidence_note": "YouTube metric capture skipped 2026-07-03: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN",
+      "evidence_note": "YouTube Data API public statistics 2026-07-03; video_id=9rmy2JhBuF4",
       "direct_apply_command": ""
     },
     {
@@ -111,12 +118,16 @@
         "likes": "0",
         "comments": "0"
       },
-      "title": "",
-      "lookup_status": "skipped_missing_secrets",
-      "metrics": {},
+      "title": "13 - Lily Roo (Archived Original)",
+      "lookup_status": "ok",
+      "metrics": {
+        "views": 71,
+        "likes": 0,
+        "comments": 0
+      },
       "fillable_results": {},
       "filled_field_count": 0,
-      "evidence_note": "YouTube metric capture skipped 2026-07-03: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN",
+      "evidence_note": "YouTube Data API public statistics 2026-07-03; video_id=IahKaEXEA_0",
       "direct_apply_command": ""
     },
     {
@@ -131,12 +142,16 @@
         "likes": "0",
         "comments": "0"
       },
-      "title": "",
-      "lookup_status": "skipped_missing_secrets",
-      "metrics": {},
+      "title": "New transmission: I Learned It All in Fifteen Seconds is live. Remastered cover art, same suspicious",
+      "lookup_status": "ok",
+      "metrics": {
+        "views": 2,
+        "likes": 0,
+        "comments": 0
+      },
       "fillable_results": {},
       "filled_field_count": 0,
-      "evidence_note": "YouTube metric capture skipped 2026-07-03: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN",
+      "evidence_note": "YouTube Data API public statistics 2026-07-03; video_id=zY8LQmuf4e4",
       "direct_apply_command": ""
     },
     {
@@ -151,12 +166,16 @@
         "likes": "0",
         "comments": "0"
       },
-      "title": "",
-      "lookup_status": "skipped_missing_secrets",
-      "metrics": {},
+      "title": "Analog Myth, remastered for anyone who likes time travel with receipts. Full Lily Roo playlist is li",
+      "lookup_status": "ok",
+      "metrics": {
+        "views": 0,
+        "likes": 0,
+        "comments": 0
+      },
       "fillable_results": {},
       "filled_field_count": 0,
-      "evidence_note": "YouTube metric capture skipped 2026-07-03: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN",
+      "evidence_note": "YouTube Data API public statistics 2026-07-03; video_id=lbT4adNE-cE",
       "direct_apply_command": ""
     },
     {
@@ -171,12 +190,16 @@
         "likes": "0",
         "comments": "0"
       },
-      "title": "",
-      "lookup_status": "skipped_missing_secrets",
-      "metrics": {},
+      "title": "Twelve Dollars, remastered and refusing to leave the stage. Full Lily Roo playlist is live. #Shorts",
+      "lookup_status": "ok",
+      "metrics": {
+        "views": 0,
+        "likes": 0,
+        "comments": 0
+      },
       "fillable_results": {},
       "filled_field_count": 0,
-      "evidence_note": "YouTube metric capture skipped 2026-07-03: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN",
+      "evidence_note": "YouTube Data API public statistics 2026-07-03; video_id=0d0PXb_h4FY",
       "direct_apply_command": ""
     },
     {
@@ -191,12 +214,16 @@
         "likes": "0",
         "comments": "0"
       },
-      "title": "",
-      "lookup_status": "skipped_missing_secrets",
-      "metrics": {},
+      "title": "Analog Myth is part of the Lily Roo archive now. The remastered version is up.",
+      "lookup_status": "ok",
+      "metrics": {
+        "views": 0,
+        "likes": 0,
+        "comments": 0
+      },
       "fillable_results": {},
       "filled_field_count": 0,
-      "evidence_note": "YouTube metric capture skipped 2026-07-03: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN",
+      "evidence_note": "YouTube Data API public statistics 2026-07-03; video_id=404PvtuXnqY",
       "direct_apply_command": ""
     },
     {
@@ -211,12 +238,16 @@
         "likes": "0",
         "comments": "0"
       },
-      "title": "",
-      "lookup_status": "skipped_missing_secrets",
-      "metrics": {},
+      "title": "Twelve Dollars is part of the Lily Roo archive now. The remastered version is up.",
+      "lookup_status": "ok",
+      "metrics": {
+        "views": 0,
+        "likes": 0,
+        "comments": 0
+      },
       "fillable_results": {},
       "filled_field_count": 0,
-      "evidence_note": "YouTube metric capture skipped 2026-07-03: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN",
+      "evidence_note": "YouTube Data API public statistics 2026-07-03; video_id=0GOYOFTMAKw",
       "direct_apply_command": ""
     },
     {
@@ -231,19 +262,22 @@
         "likes": "0",
         "comments": "0"
       },
-      "title": "",
-      "lookup_status": "skipped_missing_secrets",
-      "metrics": {},
+      "title": "Echo Thread Podcast: Analog Myth Full Album Play-Through - Lily Roo",
+      "lookup_status": "ok",
+      "metrics": {
+        "views": 1,
+        "likes": 0,
+        "comments": 0
+      },
       "fillable_results": {},
       "filled_field_count": 0,
-      "evidence_note": "YouTube metric capture skipped 2026-07-03: missing credential name(s) GOOGLE_CLIENT_ID, YOUTUBE_REFRESH_TOKEN",
+      "evidence_note": "YouTube Data API public statistics 2026-07-03; video_id=xX2-Xf161js",
       "direct_apply_command": ""
     }
   ],
-  "redaction": "Secret names are listed for operator diagnostics; secret values are never written here.",
   "guardrails": [
-    "Metrics come from public YouTube video statistics for already-published Lily Roo videos when OAuth credentials are present.",
-    "This skipped report does not contain OAuth credentials.",
+    "Metrics come from public YouTube video statistics for already-published Lily Roo videos.",
+    "This report does not contain OAuth credentials.",
     "Only views, likes, and comments are imported; shares, saves, and subscriber deltas stay blank unless another evidence source supplies them.",
     "Applying results goes through scripts/update_experiment_results.py so Published_Log.csv row IDs are verified."
   ]
