@@ -1,6 +1,6 @@
 # Promotion Blocker Ledger - Lily Roo
 
-Generated: 2026-07-03T06:24:08.902973Z
+Generated: 2026-07-03T06:26:33.465467Z
 
 ## Summary
 - Open blockers: **13**
@@ -101,7 +101,7 @@ Generated: 2026-07-03T06:24:08.902973Z
   - Impact: resolves blocker: False
 - **[high] Repair TikTok executor** (`platform-FP-AUTO-264`)
   - Owner: `tod`; status: `blocked`; category: `platform_repair`
-  - Evidence: tiktok_setup_preflight_blocked Missing secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Local secret source is missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.
+  - Evidence: tiktok_setup_preflight_blocked Local secret source is missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.
   - Next step: Local upload-mode OAuth credentials missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Complete TikTok OAuth setup locally, then push upload-mode secrets and refresh Admin.
   - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
   - Guardrail: Run retry resets only after the external platform repair is verified.

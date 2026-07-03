@@ -1,14 +1,14 @@
 # Monetization Activation Plan - Lily Roo
 
-Generated: 2026-07-03T06:24:08.564811Z
+Generated: 2026-07-03T06:26:33.142259Z
 
 ## Summary
 - Current YouTube audience metric: **5 subscribers**
 - Runway status: **stalled**
 - Ready song-forward approvals: **0**
 - Solicitation rewrites available: **0**
-- Platform fixes: **3**
-- Activation actions: **4**
+- Platform fixes: **4**
+- Activation actions: **5**
 
 ## Activation Sequence
 1. **Repair Instagram executor**
@@ -29,7 +29,13 @@ Generated: 2026-07-03T06:24:08.564811Z
    - Missing locally: `IG_BUSINESS_ACCOUNT_ID`
    - Local source: `secrets/social_api.env`
    - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM`
-4. **Current operations next action: Fix Instagram executor**
+4. **Repair TikTok executor**
+   - Phase: `Clear platform blockers`; status: `needs_platform_fix`
+   - Detail: Local upload-mode OAuth credentials missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Complete TikTok OAuth setup locally, then push upload-mode secrets and refresh Admin.
+   - Missing locally: `TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN`
+   - Local source: `secrets/social_api.env`
+   - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
+5. **Current operations next action: Fix Instagram executor**
    - Phase: `Operations packet`; status: `needs_fix`
    - Detail: Platform executor needs repair before queued auto posts can publish.
    - Preview/check: `python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM`

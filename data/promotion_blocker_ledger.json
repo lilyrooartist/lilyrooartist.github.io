@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-03T06:24:08.902973Z",
+  "generated_at": "2026-07-03T06:26:33.465467Z",
   "safe_mode": true,
   "summary": {
     "open_blocker_count": 13,
@@ -322,7 +322,7 @@
       "status": "blocked",
       "platform": "TikTok",
       "release": "",
-      "evidence": "tiktok_setup_preflight_blocked Missing secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Local secret source is missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
+      "evidence": "tiktok_setup_preflight_blocked Local secret source is missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
       "next_step": "Local upload-mode OAuth credentials missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Complete TikTok OAuth setup locally, then push upload-mode secrets and refresh Admin.",
       "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
       "apply_command": "",
