@@ -1,22 +1,28 @@
 # Posting Automation Status - Lily Roo
 
-Generated: 2026-07-03T09:48:13.745691Z
+Generated: 2026-07-03T09:58:19.671529Z
 
 ## Summary
-- Status: **blocked**
-- Lanes ready: **6 / 8**
-- Blocked lanes: **2**
+- Status: **ready_active_campaign**
+- Active campaign ready: **True**
+- Lanes ready: **6 / 9**
+- Blocked lanes: **0**
+- Deferred optional lanes: **3**
 - Needs attention: **0**
 - Story posts tracked: **6**
-- Help-needed items: **5**
-- Next action: Resolve the platform repair checklist before expecting full auto-post coverage.
+- Help-needed items: **0**
+- Next action: Watch FP-BRAND-AM-01-13-X, FP-BRAND-AM-01-13-FACEBOOK after 2026-07-04T16:05:00Z, then export posted URLs.
 
 ## Automation Lanes
+- **Active Analog Myth brand campaign** - `ready`
+  - Detail: 64 approved auto posts; next=FP-BRAND-AM-01-13-X at 2026-07-04T10:15:00-04:00; preflight=ready
+  - Evidence: data/brand_growth_preflight.json
+  - Next: Watch FP-BRAND-AM-01-13-X, FP-BRAND-AM-01-13-FACEBOOK after 2026-07-04T16:05:00Z, then export posted URLs.
 - **Scheduled refresh workflow** - `ready`
   - Detail: 17 */6 * * *, 05 16 * * *; latest run completed / success
   - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28652317497
 - **Safe admin refresh** - `ready`
-  - Detail: 17 refresh commands captured at 2026-07-03T09:48:12.064132Z
+  - Detail: 17 refresh commands captured at 2026-07-03T09:58:17.989006Z
   - Evidence: data/promo_admin_refresh_run.json
 - **Scheduler dry-run authentication** - `ready`
   - Detail: HTTP 200 using bearer auth; due=0 would_post=0
@@ -24,43 +30,35 @@ Generated: 2026-07-03T09:48:13.745691Z
 - **Execution capture** - `ready`
   - Detail: posted=30 attention=0 platform_fix_needed=0
   - Evidence: data/social_execution_snapshot.json
-- **Platform readiness** - `blocked`
+- **Platform readiness** - `deferred`
   - Detail: ready=X, Facebook, YouTube; blocked=Instagram, TikTok
   - Evidence: data/executor_readiness_snapshot.json
-  - Next: Resolve the platform repair checklist before expecting full auto-post coverage.
-- **TikTok API lane** - `ready`
+  - Next: Optional expansion only; the active Analog Myth campaign uses ready X/Facebook lanes.
+- **TikTok API lane** - `deferred`
   - Detail: blocked; upload_ready=True; public_ready=False
   - Evidence: data/tiktok_setup_preflight.json
-- **Blocker input readiness** - `blocked`
+  - Next: Direct TikTok public posting is not in the active plan until platform approval is explicit.
+- **Blocker input readiness** - `deferred`
   - Detail: 3 ready; 3 missing local input; 1 external action needed
   - Evidence: data/social_blocker_input_status.json
-  - Next: Add X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET to /Users/tod.famous/Documents/New project/secrets/social_api.env.
+  - Next: Optional expansion inputs can wait; the active brand campaign is already preflight-ready.
 - **Story throughput** - `ready`
   - Detail: 6 tracked; 0 queued; 0 past due without URL
   - Evidence: data/story_throughput_tracking.json
   - Next: Export social executions after scheduled post times, then log public URLs and results.
 
 ## Help Needed
-- **Scheduler and executor auth**
-  - Need: Confirm LILYROO_EXECUTOR_BEARER_TOKEN or LILYROO_ADMIN_PASSWORD is available locally and as a GitHub Actions secret.
-  - Unblocks: Scheduler dry-run, executor readiness capture, and execution history capture.
-  - Verify: `python3 scripts/capture_scheduler_dry_run.py && python3 scripts/capture_social_executions.py`
+- No active campaign help needed.
+
+## Optional Expansion Inputs
 - **Instagram business account ID**
-  - Need: Provide IG_BUSINESS_ACCOUNT_ID for the Instagram account connected to the Lily Roo Facebook Page.
-  - Unblocks: Instagram executor rows after the secret is pushed and readiness is recaptured.
+  - Need: Provide Meta Page credentials so the resolver can write IG_BUSINESS_ACCOUNT_ID for the Instagram account connected to the Lily Roo Facebook Page.
+  - Unblocks: Optional automated Instagram expansion after the secret is pushed and readiness is recaptured.
   - Verify: `python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM`
-- **TikTok OAuth app values**
-  - Need: Provide TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, and TIKTOK_REDIRECT_URI, then authorize the generated TikTok OAuth URL so TIKTOK_REFRESH_TOKEN can be created.
-  - Unblocks: TikTok upload-draft automation for the first ready TikTok asset.
-  - Verify: `python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload`
 - **TikTok public-posting approval**
   - Need: Confirm whether TikTok has approved direct public posting for Lily Roo.
-  - Unblocks: Direct public TikTok posting; without approval, upload-draft mode remains the safest automated path.
+  - Unblocks: Optional direct public TikTok posting; inbox-draft upload is not part of the active no-manual-posting plan.
   - Verify: `python3 scripts/set_tiktok_public_posting_approval.py --approved`
-- **Facebook identity confirmation**
-  - Need: Confirm identity in Facebook/Meta for Page publishing if Meta still shows the Page publishing checkpoint.
-  - Unblocks: The blocked Facebook executor row that hit the identity confirmation checkpoint.
-  - Verify: `python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run`
 
 ## Guardrails
 - This packet is read-only; it does not publish posts, approve posts, or push secrets.

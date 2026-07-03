@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-03T09:48:13.745691Z",
+  "generated_at": "2026-07-03T09:58:19.671529Z",
   "safe_mode": true,
   "source": {
     "workflow": ".github/workflows/promo-admin-refresh.yml",
@@ -11,14 +11,24 @@
     "tiktok_preflight": "data/tiktok_setup_preflight.json",
     "story_tracking": "data/story_throughput_tracking.json",
     "platform_repair": "data/platform_repair_status.json",
-    "social_inputs": "data/social_blocker_input_status.json"
+    "social_inputs": "data/social_blocker_input_status.json",
+    "brand_growth_readout": "data/brand_growth_readout.json",
+    "brand_growth_preflight": "data/brand_growth_preflight.json"
   },
   "summary": {
-    "status": "blocked",
+    "status": "ready_active_campaign",
+    "active_campaign_ready": true,
+    "active_campaign_platforms": [
+      "Facebook",
+      "X"
+    ],
+    "active_campaign_next_proof_due_at": "2026-07-04T16:05:00Z",
+    "active_campaign_next_measurement_due_at": "2026-07-05T15:20:00Z",
     "ready_lane_count": 6,
-    "blocked_lane_count": 2,
+    "blocked_lane_count": 0,
+    "deferred_lane_count": 3,
     "attention_lane_count": 0,
-    "lane_count": 8,
+    "lane_count": 9,
     "workflow_crons": [
       "17 */6 * * *",
       "05 16 * * *"
@@ -35,10 +45,17 @@
     "blocker_input_status": "missing_local_input",
     "blocker_input_missing_count": 3,
     "blocker_input_external_action_count": 1,
-    "help_needed_count": 5,
-    "next_action": "Resolve the platform repair checklist before expecting full auto-post coverage."
+    "help_needed_count": 0,
+    "next_action": "Watch FP-BRAND-AM-01-13-X, FP-BRAND-AM-01-13-FACEBOOK after 2026-07-04T16:05:00Z, then export posted URLs."
   },
   "lanes": [
+    {
+      "label": "Active Analog Myth brand campaign",
+      "status": "ready",
+      "detail": "64 approved auto posts; next=FP-BRAND-AM-01-13-X at 2026-07-04T10:15:00-04:00; preflight=ready",
+      "evidence": "data/brand_growth_preflight.json",
+      "next_action": "Watch FP-BRAND-AM-01-13-X, FP-BRAND-AM-01-13-FACEBOOK after 2026-07-04T16:05:00Z, then export posted URLs."
+    },
     {
       "label": "Scheduled refresh workflow",
       "status": "ready",
@@ -49,7 +66,7 @@
     {
       "label": "Safe admin refresh",
       "status": "ready",
-      "detail": "17 refresh commands captured at 2026-07-03T09:48:12.064132Z",
+      "detail": "17 refresh commands captured at 2026-07-03T09:58:17.989006Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": ""
     },
@@ -69,24 +86,24 @@
     },
     {
       "label": "Platform readiness",
-      "status": "blocked",
+      "status": "deferred",
       "detail": "ready=X, Facebook, YouTube; blocked=Instagram, TikTok",
       "evidence": "data/executor_readiness_snapshot.json",
-      "next_action": "Resolve the platform repair checklist before expecting full auto-post coverage."
+      "next_action": "Optional expansion only; the active Analog Myth campaign uses ready X/Facebook lanes."
     },
     {
       "label": "TikTok API lane",
-      "status": "ready",
+      "status": "deferred",
       "detail": "blocked; upload_ready=True; public_ready=False",
       "evidence": "data/tiktok_setup_preflight.json",
-      "next_action": ""
+      "next_action": "Direct TikTok public posting is not in the active plan until platform approval is explicit."
     },
     {
       "label": "Blocker input readiness",
-      "status": "blocked",
+      "status": "deferred",
       "detail": "3 ready; 3 missing local input; 1 external action needed",
       "evidence": "data/social_blocker_input_status.json",
-      "next_action": "Add X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET to /Users/tod.famous/Documents/New project/secrets/social_api.env."
+      "next_action": "Optional expansion inputs can wait; the active brand campaign is already preflight-ready."
     },
     {
       "label": "Story throughput",
@@ -96,36 +113,19 @@
       "next_action": "Export social executions after scheduled post times, then log public URLs and results."
     }
   ],
-  "help_needed": [
-    {
-      "label": "Scheduler and executor auth",
-      "need": "Confirm LILYROO_EXECUTOR_BEARER_TOKEN or LILYROO_ADMIN_PASSWORD is available locally and as a GitHub Actions secret.",
-      "unblocks": "Scheduler dry-run, executor readiness capture, and execution history capture.",
-      "verification_command": "python3 scripts/capture_scheduler_dry_run.py && python3 scripts/capture_social_executions.py"
-    },
+  "help_needed": [],
+  "optional_inputs": [
     {
       "label": "Instagram business account ID",
-      "need": "Provide IG_BUSINESS_ACCOUNT_ID for the Instagram account connected to the Lily Roo Facebook Page.",
-      "unblocks": "Instagram executor rows after the secret is pushed and readiness is recaptured.",
+      "need": "Provide Meta Page credentials so the resolver can write IG_BUSINESS_ACCOUNT_ID for the Instagram account connected to the Lily Roo Facebook Page.",
+      "unblocks": "Optional automated Instagram expansion after the secret is pushed and readiness is recaptured.",
       "verification_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM"
-    },
-    {
-      "label": "TikTok OAuth app values",
-      "need": "Provide TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, and TIKTOK_REDIRECT_URI, then authorize the generated TikTok OAuth URL so TIKTOK_REFRESH_TOKEN can be created.",
-      "unblocks": "TikTok upload-draft automation for the first ready TikTok asset.",
-      "verification_command": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload"
     },
     {
       "label": "TikTok public-posting approval",
       "need": "Confirm whether TikTok has approved direct public posting for Lily Roo.",
-      "unblocks": "Direct public TikTok posting; without approval, upload-draft mode remains the safest automated path.",
+      "unblocks": "Optional direct public TikTok posting; inbox-draft upload is not part of the active no-manual-posting plan.",
       "verification_command": "python3 scripts/set_tiktok_public_posting_approval.py --approved"
-    },
-    {
-      "label": "Facebook identity confirmation",
-      "need": "Confirm identity in Facebook/Meta for Page publishing if Meta still shows the Page publishing checkpoint.",
-      "unblocks": "The blocked Facebook executor row that hit the identity confirmation checkpoint.",
-      "verification_command": "python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run"
     }
   ]
 }

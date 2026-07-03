@@ -18,6 +18,8 @@ TIKTOK_PREFLIGHT = ROOT / "data" / "tiktok_setup_preflight.json"
 STORY_TRACKING = ROOT / "data" / "story_throughput_tracking.json"
 PLATFORM_REPAIR = ROOT / "data" / "platform_repair_status.json"
 SOCIAL_INPUTS = ROOT / "data" / "social_blocker_input_status.json"
+BRAND_GROWTH_READOUT = ROOT / "data" / "brand_growth_readout.json"
+BRAND_GROWTH_PREFLIGHT = ROOT / "data" / "brand_growth_preflight.json"
 OUT = ROOT / "data" / "posting_automation_status.json"
 REPORT = ROOT / "admin" / "reports" / "posting-automation-status.md"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
@@ -66,6 +68,38 @@ def lane_status(label: str, status: str, detail: str, evidence: str = "", next_a
     }
 
 
+def campaign_packet(readout: dict, preflight: dict) -> dict:
+    readout_summary = readout.get("summary") or {}
+    preflight_summary = preflight.get("summary") or {}
+    expected_ids = preflight_summary.get("expected_post_ids") or readout_summary.get("next_proof_post_ids") or []
+    status = "ready" if (
+        preflight_summary.get("status") == "ready"
+        and int(preflight_summary.get("scheduler_blocked_count") or 0) == 0
+        and int(preflight_summary.get("link_blocking_failed_count") or 0) == 0
+        and int(readout_summary.get("approved_auto_rows") or 0) > 0
+        and int(readout_summary.get("attention_rows") or 0) == 0
+    ) else "needs_attention"
+    next_proof = preflight_summary.get("next_proof_due_at") or readout_summary.get("next_proof_due_at") or ""
+    next_action = (
+        f"Watch {', '.join(expected_ids)} after {next_proof}, then export posted URLs."
+        if status == "ready" and expected_ids and next_proof
+        else preflight_summary.get("error") or readout_summary.get("next_actions", ["Refresh brand growth readout and preflight."])[0]
+    )
+    return {
+        "status": status,
+        "platforms": sorted((readout_summary.get("platform_counts") or {}).keys()),
+        "detail": (
+            f"{int(readout_summary.get('approved_auto_rows') or 0)} approved auto posts; "
+            f"next={readout_summary.get('next_scheduled_post_id') or 'none'} at "
+            f"{readout_summary.get('next_scheduled_at') or 'n/a'}; "
+            f"preflight={preflight_summary.get('status') or 'unknown'}"
+        ),
+        "next_action": next_action,
+        "next_proof_due_at": next_proof,
+        "next_measurement_due_at": preflight_summary.get("next_measurement_due_at") or readout_summary.get("next_measurement_due_at") or "",
+    }
+
+
 def build_packet() -> dict:
     generated_at = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
     workflow = workflow_config()
@@ -78,6 +112,8 @@ def build_packet() -> dict:
     stories = read_json(STORY_TRACKING)
     repairs = read_json(PLATFORM_REPAIR)
     social_inputs = read_json(SOCIAL_INPUTS)
+    brand_readout = read_json(BRAND_GROWTH_READOUT)
+    brand_preflight = read_json(BRAND_GROWTH_PREFLIGHT)
     refresh_steps = step_map(refresh)
 
     workflow_latest = workflow_status.get("latest_run") or {}
@@ -94,8 +130,26 @@ def build_packet() -> dict:
     repair_summary = repairs.get("summary") or {}
     input_summary = social_inputs.get("summary") or {}
     refresh_summary = refresh.get("summary") or {}
+    campaign = campaign_packet(brand_readout, brand_preflight)
+    active_campaign_ready = campaign["status"] == "ready"
+    active_platforms = {str(platform).strip().lower() for platform in campaign.get("platforms") or []}
+    blocked_platforms = [str(platform) for platform in readiness_summary.get("blocked_platforms") or []]
+    blocked_platforms_in_active_campaign = [
+        platform for platform in blocked_platforms
+        if platform.strip().lower() in active_platforms
+    ]
+    optional_platform_status = "blocked" if blocked_platforms_in_active_campaign else "deferred"
+    input_status = input_summary.get("status")
+    blocker_input_lane_status = "ready" if input_status == "ready" else ("deferred" if active_campaign_ready else "blocked")
 
     lanes = [
+        lane_status(
+            "Active Analog Myth brand campaign",
+            "ready" if active_campaign_ready else "needs_attention",
+            campaign["detail"],
+            "data/brand_growth_preflight.json",
+            campaign["next_action"],
+        ),
         lane_status(
             "Scheduled refresh workflow",
             "ready" if workflow_ready and workflow_ok else "needs_attention",
@@ -126,24 +180,36 @@ def build_packet() -> dict:
         ),
         lane_status(
             "Platform readiness",
-            "blocked" if readiness_summary.get("blocked_platforms") else "ready",
+            optional_platform_status if blocked_platforms else "ready",
             f"ready={', '.join(readiness_summary.get('ready_platforms') or []) or 'none'}; blocked={', '.join(readiness_summary.get('blocked_platforms') or []) or 'none'}",
             "data/executor_readiness_snapshot.json",
-            "Resolve the platform repair checklist before expecting full auto-post coverage." if readiness_summary.get("blocked_platforms") else "",
+            (
+                "Repair the active campaign platform before the next scheduled slot."
+                if blocked_platforms_in_active_campaign
+                else "Optional expansion only; the active Analog Myth campaign uses ready X/Facebook lanes."
+            ) if blocked_platforms else "",
         ),
         lane_status(
             "TikTok API lane",
-            "blocked" if not tiktok_summary.get("ready_to_upload_drafts") else "ready",
+            "ready" if tiktok_summary.get("ready_to_post_publicly") else ("deferred" if tiktok_summary.get("ready_to_upload_drafts") else ("deferred" if active_campaign_ready else "blocked")),
             f"{tiktok_summary.get('status') or 'unknown'}; upload_ready={bool(tiktok_summary.get('ready_to_upload_drafts'))}; public_ready={bool(tiktok_summary.get('ready_to_post_publicly'))}",
             "data/tiktok_setup_preflight.json",
-            "Add TikTok OAuth credentials and rerun the upload-mode dry run." if not tiktok_summary.get("ready_to_upload_drafts") else "",
+            (
+                "Direct TikTok public posting is not in the active plan until platform approval is explicit."
+                if tiktok_summary.get("ready_to_upload_drafts")
+                else "Add TikTok OAuth credentials only if TikTok becomes an automated expansion lane."
+            ),
         ),
         lane_status(
             "Blocker input readiness",
-            "ready" if input_summary.get("status") == "ready" else "blocked",
+            blocker_input_lane_status,
             f"{input_summary.get('ready_count', 0)} ready; {input_summary.get('missing_local_input_count', 0)} missing local input; {input_summary.get('external_action_needed_count', 0)} external action needed",
             "data/social_blocker_input_status.json",
-            input_summary.get("next_action") or "Fill missing local inputs, then rerun the verification commands.",
+            (
+                "Optional expansion inputs can wait; the active brand campaign is already preflight-ready."
+                if blocker_input_lane_status == "deferred"
+                else input_summary.get("next_action") or "Fill missing local inputs, then rerun the verification commands."
+            ),
         ),
         lane_status(
             "Story throughput",
@@ -156,41 +222,34 @@ def build_packet() -> dict:
 
     blocked = [lane for lane in lanes if lane["status"] == "blocked"]
     attention = [lane for lane in lanes if lane["status"] == "needs_attention"]
+    deferred = [lane for lane in lanes if lane["status"] == "deferred"]
     ready = [lane for lane in lanes if lane["status"] == "ready"]
-    help_needed = [
-        {
+    help_needed = []
+    if not scheduler_ok:
+        help_needed.append({
             "label": "Scheduler and executor auth",
             "need": "Confirm LILYROO_EXECUTOR_BEARER_TOKEN or LILYROO_ADMIN_PASSWORD is available locally and as a GitHub Actions secret.",
             "unblocks": "Scheduler dry-run, executor readiness capture, and execution history capture.",
             "verification_command": "python3 scripts/capture_scheduler_dry_run.py && python3 scripts/capture_social_executions.py",
-        },
+        })
+    optional_inputs = [
         {
             "label": "Instagram business account ID",
-            "need": "Provide IG_BUSINESS_ACCOUNT_ID for the Instagram account connected to the Lily Roo Facebook Page.",
-            "unblocks": "Instagram executor rows after the secret is pushed and readiness is recaptured.",
+            "need": "Provide Meta Page credentials so the resolver can write IG_BUSINESS_ACCOUNT_ID for the Instagram account connected to the Lily Roo Facebook Page.",
+            "unblocks": "Optional automated Instagram expansion after the secret is pushed and readiness is recaptured.",
             "verification_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
-        },
-        {
-            "label": "TikTok OAuth app values",
-            "need": "Provide TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, and TIKTOK_REDIRECT_URI, then authorize the generated TikTok OAuth URL so TIKTOK_REFRESH_TOKEN can be created.",
-            "unblocks": "TikTok upload-draft automation for the first ready TikTok asset.",
-            "verification_command": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload",
         },
         {
             "label": "TikTok public-posting approval",
             "need": "Confirm whether TikTok has approved direct public posting for Lily Roo.",
-            "unblocks": "Direct public TikTok posting; without approval, upload-draft mode remains the safest automated path.",
+            "unblocks": "Optional direct public TikTok posting; inbox-draft upload is not part of the active no-manual-posting plan.",
             "verification_command": "python3 scripts/set_tiktok_public_posting_approval.py --approved",
-        },
-        {
-            "label": "Facebook identity confirmation",
-            "need": "Confirm identity in Facebook/Meta for Page publishing if Meta still shows the Page publishing checkpoint.",
-            "unblocks": "The blocked Facebook executor row that hit the identity confirmation checkpoint.",
-            "verification_command": "python3 scripts/check_facebook_publishing.py --post-id 'FP-AUTO-265' --check-worker-dry-run",
         },
     ]
     next_action = ""
-    if blocked:
+    if active_campaign_ready:
+        next_action = campaign["next_action"]
+    elif blocked:
         next_action = blocked[0]["next_action"] or blocked[0]["detail"]
     elif attention:
         next_action = attention[0]["next_action"] or attention[0]["detail"]
@@ -199,9 +258,14 @@ def build_packet() -> dict:
 
     capture_step = refresh_steps.get("capture_scheduler_dry_run") or {}
     summary = {
-        "status": "blocked" if blocked else "needs_attention" if attention else "ready",
+        "status": "ready_active_campaign" if active_campaign_ready and not blocked else "blocked" if blocked else "needs_attention" if attention else "ready",
+        "active_campaign_ready": active_campaign_ready,
+        "active_campaign_platforms": campaign.get("platforms") or [],
+        "active_campaign_next_proof_due_at": campaign.get("next_proof_due_at") or "",
+        "active_campaign_next_measurement_due_at": campaign.get("next_measurement_due_at") or "",
         "ready_lane_count": len(ready),
         "blocked_lane_count": len(blocked),
+        "deferred_lane_count": len(deferred),
         "attention_lane_count": len(attention),
         "lane_count": len(lanes),
         "workflow_crons": workflow["crons"],
@@ -234,10 +298,13 @@ def build_packet() -> dict:
             "story_tracking": str(STORY_TRACKING.relative_to(ROOT)),
             "platform_repair": str(PLATFORM_REPAIR.relative_to(ROOT)),
             "social_inputs": str(SOCIAL_INPUTS.relative_to(ROOT)),
+            "brand_growth_readout": str(BRAND_GROWTH_READOUT.relative_to(ROOT)),
+            "brand_growth_preflight": str(BRAND_GROWTH_PREFLIGHT.relative_to(ROOT)),
         },
         "summary": summary,
         "lanes": lanes,
         "help_needed": help_needed,
+        "optional_inputs": optional_inputs,
     }
 
 
@@ -250,8 +317,10 @@ def build_markdown(packet: dict) -> str:
         "",
         "## Summary",
         f"- Status: **{summary['status']}**",
+        f"- Active campaign ready: **{summary['active_campaign_ready']}**",
         f"- Lanes ready: **{summary['ready_lane_count']} / {summary['lane_count']}**",
         f"- Blocked lanes: **{summary['blocked_lane_count']}**",
+        f"- Deferred optional lanes: **{summary['deferred_lane_count']}**",
         f"- Needs attention: **{summary['attention_lane_count']}**",
         f"- Story posts tracked: **{summary['story_post_count']}**",
         f"- Help-needed items: **{summary['help_needed_count']}**",
@@ -269,6 +338,15 @@ def build_markdown(packet: dict) -> str:
     lines.append("")
     lines.append("## Help Needed")
     for item in packet.get("help_needed") or []:
+        lines.append(f"- **{item['label']}**")
+        lines.append(f"  - Need: {item['need']}")
+        lines.append(f"  - Unblocks: {item['unblocks']}")
+        lines.append(f"  - Verify: `{item['verification_command']}`")
+    if not packet.get("help_needed"):
+        lines.append("- No active campaign help needed.")
+    lines.append("")
+    lines.append("## Optional Expansion Inputs")
+    for item in packet.get("optional_inputs") or []:
         lines.append(f"- **{item['label']}**")
         lines.append(f"  - Need: {item['need']}")
         lines.append(f"  - Unblocks: {item['unblocks']}")
