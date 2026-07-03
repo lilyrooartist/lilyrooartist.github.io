@@ -1,19 +1,19 @@
 {
   "ok": true,
-  "updated_at": "2026-07-02T19:52:52.973Z",
+  "updated_at": "2026-07-03T04:10:10.137Z",
   "platforms": {
     "youtube": {
       "ok": true,
       "source": "youtube-data-api",
       "metrics": {
         "subscribers": 5,
-        "total_views": 449,
+        "total_views": 458,
         "video_count": 34
       },
       "channel_title": "Lily Roo",
       "period_28d": {
-        "startDate": "2026-06-04",
-        "endDate": "2026-07-01"
+        "startDate": "2026-06-05",
+        "endDate": "2026-07-02"
       },
       "analytics_status": "Request had insufficient authentication scopes."
     },
@@ -31,7 +31,7 @@
       "provider_name": "Spotify",
       "provider_url": "https://spotify.com",
       "iframe_url": "https://open.spotify.com/embed/album/4Al5eYOqGFMKEES5fDWIfI?utm_source=oembed",
-      "thumbnail_url": "https://image-cdn-ak.spotifycdn.com/image/ab67616d00001e0287c54a775685e36e4f534ad4",
+      "thumbnail_url": "https://image-cdn-fa.spotifycdn.com/image/ab67616d00001e0287c54a775685e36e4f534ad4",
       "thumbnail_width": 300,
       "thumbnail_height": 300,
       "analytics_status": "Spotify streams, saves, monthly listeners, and artist followers require Spotify for Artists export or a connected analytics source.",
@@ -63,9 +63,11 @@
       "status": null,
       "source": "instagram-public-profile-page",
       "profile_url": "https://www.instagram.com/lilyroo.artist/",
-      "http_status": 200,
-      "description": "0 Followers, 0 Following, 7 Posts - See Instagram photos and videos from Lily Roo (@lilyroo.artist)",
-      "public_capture_status": "ok"
+      "http_status": 429,
+      "description": "",
+      "public_capture_status": "ok",
+      "preserved_previous_public_metrics": true,
+      "latest_capture_status": "HTTP Error 429: Too Many Requests"
     },
     "facebook": {
       "ok": true,
@@ -76,7 +78,7 @@
       },
       "page_name": "Lily Roo",
       "profile_url": "https://www.facebook.com/903693509504290",
-      "insights_period": "2026-06-25..2026-07-01",
+      "insights_period": "2026-06-26..2026-07-02",
       "insights_status": "(#100) The value must be a valid insights metric"
     },
     "x": {
@@ -91,7 +93,7 @@
       "source": "x-public-profile-page",
       "profile_url": "https://x.com/lilyrooartist",
       "http_status": 200,
-      "html_bytes": 88891,
+      "html_bytes": 89201,
       "public_capture_status": "ok"
     }
   },
@@ -129,9 +131,11 @@
           "followers": 0
         },
         "profile_url": "https://www.instagram.com/lilyroo.artist/",
-        "http_status": 200,
-        "description": "0 Followers, 0 Following, 7 Posts - See Instagram photos and videos from Lily Roo (@lilyroo.artist)",
-        "public_capture_status": "ok"
+        "http_status": 429,
+        "description": "",
+        "public_capture_status": "ok",
+        "preserved_previous_public_metrics": true,
+        "latest_capture_status": "HTTP Error 429: Too Many Requests"
       },
       "x": {
         "ok": true,
@@ -141,7 +145,7 @@
         },
         "profile_url": "https://x.com/lilyrooartist",
         "http_status": 200,
-        "html_bytes": 88891,
+        "html_bytes": 89201,
         "public_capture_status": "ok"
       }
     }
