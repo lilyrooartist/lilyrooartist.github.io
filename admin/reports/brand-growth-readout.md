@@ -1,6 +1,6 @@
 # Brand Growth Readout - Lily Roo
 
-Generated: 2026-07-03T06:26:34.231160Z
+Generated: 2026-07-03T06:32:24.716504Z
 
 ## Summary
 - Campaign rows: **16**
@@ -9,19 +9,50 @@ Generated: 2026-07-03T06:26:34.231160Z
 - Posted or measured rows: **0**
 - Measured rows: **0**
 - Ready for metric capture: **0**
+- Post-slot watch windows: **8**
 - Status counts: **scheduled_future: 16**
 - Next scheduled: `FP-BRAND-AM-01-13-X` at `2026-07-04T10:15:00-04:00`
+- Next proof due: `2026-07-04T16:05:00Z`
+- First measurement due: `2026-07-05T15:20:00Z`
 - YouTube total views: **462**
 - Spotify monthly listeners: **2**
 
 ## Commands
 - Refresh state: `python3 scripts/refresh_promo_admin.py`
 - Export posted URLs: `python3 scripts/export_social_executions.py --refresh-admin`
+- Preview post-slot proof: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
+- Apply post-slot proof after scheduled executor runs: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin`
 - Capture X metrics: `waiting for logged X campaign posts`
 - Capture Facebook metrics: `waiting for logged Facebook campaign posts`
 
 ## Next Actions
-- Next campaign post is FP-BRAND-AM-01-13-X at 2026-07-04T10:15:00-04:00.
+- Next proof window is 2026-07-04 after 2026-07-04T16:05:00Z; watch FP-BRAND-AM-01-13-X, FP-BRAND-AM-01-13-FACEBOOK.
+
+## Post-Slot Watch
+- `2026-07-04` **scheduled_future** proof due `2026-07-04T16:05:00Z` for `FP-BRAND-AM-01-13-X, FP-BRAND-AM-01-13-FACEBOOK`
+  - Next: Wait for the scheduled executor; proof capture starts after the final slot.
+  - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
+- `2026-07-05` **scheduled_future** proof due `2026-07-05T16:05:00Z` for `FP-BRAND-AM-02-GIRLS-CAMP-X, FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK`
+  - Next: Wait for the scheduled executor; proof capture starts after the final slot.
+  - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
+- `2026-07-06` **scheduled_future** proof due `2026-07-06T16:05:00Z` for `FP-BRAND-AM-03-ANALOG-MYTH-X, FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK`
+  - Next: Wait for the scheduled executor; proof capture starts after the final slot.
+  - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
+- `2026-07-07` **scheduled_future** proof due `2026-07-07T16:05:00Z` for `FP-BRAND-AM-04-SPILLING-THE-TEA-X, FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK`
+  - Next: Wait for the scheduled executor; proof capture starts after the final slot.
+  - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
+- `2026-07-08` **scheduled_future** proof due `2026-07-08T16:05:00Z` for `FP-BRAND-AM-05-NO-MORTGAGE-X, FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK`
+  - Next: Wait for the scheduled executor; proof capture starts after the final slot.
+  - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
+- `2026-07-09` **scheduled_future** proof due `2026-07-09T16:05:00Z` for `FP-BRAND-AM-06-GUARDS-DOWN-X, FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK`
+  - Next: Wait for the scheduled executor; proof capture starts after the final slot.
+  - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
+- `2026-07-10` **scheduled_future** proof due `2026-07-10T16:05:00Z` for `FP-BRAND-AM-07-SLOW-WALK-X, FP-BRAND-AM-07-SLOW-WALK-FACEBOOK`
+  - Next: Wait for the scheduled executor; proof capture starts after the final slot.
+  - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
+- `2026-07-11` **scheduled_future** proof due `2026-07-11T16:05:00Z` for `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X, FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK`
+  - Next: Wait for the scheduled executor; proof capture starts after the final slot.
+  - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
 
 ## Rows
 - `FP-BRAND-AM-01-13-X` X 2026-07-04T10:15:00-04:00 - **scheduled_future**
@@ -61,4 +92,5 @@ Generated: 2026-07-03T06:26:34.231160Z
 - Readout only; it does not post or import metrics.
 - Published_Log.csv is the source of truth for public URLs.
 - Metric capture commands only target logged X/Facebook campaign post IDs.
+- Post-slot proof commands only capture executor state and export confirmed Worker URLs.
 - Unknown metrics remain blank until an API capture or visible analytics source proves them.

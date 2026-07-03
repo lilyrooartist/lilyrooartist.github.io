@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-03T06:26:34.231160Z",
+  "generated_at": "2026-07-03T06:32:24.716504Z",
   "safe_mode": true,
   "source": {
     "brand_growth_campaign": "data/brand_growth_campaign.json",
@@ -30,11 +30,255 @@
     "next_scheduled_at": "2026-07-04T10:15:00-04:00",
     "x_metric_capture_command": "",
     "facebook_metric_capture_command": "",
+    "post_slot_watch_window_count": 8,
+    "post_slot_watch_status_counts": {
+      "scheduled_future": 8
+    },
+    "next_proof_window_date": "2026-07-04",
+    "next_proof_window_status": "scheduled_future",
+    "next_proof_due_at": "2026-07-04T16:05:00Z",
+    "next_measurement_due_at": "2026-07-05T15:20:00Z",
+    "next_proof_post_ids": [
+      "FP-BRAND-AM-01-13-X",
+      "FP-BRAND-AM-01-13-FACEBOOK"
+    ],
+    "proof_preview_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run",
+    "proof_apply_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
     "export_social_executions_command": "python3 scripts/export_social_executions.py --refresh-admin",
     "refresh_command": "python3 scripts/refresh_promo_admin.py",
     "report_path": "admin/reports/brand-growth-readout.md",
     "live_youtube_total_views": 462,
     "live_spotify_monthly_listeners": 2
+  },
+  "post_slot_watch": {
+    "summary": {
+      "window_count": 8,
+      "status_counts": {
+        "scheduled_future": 8
+      },
+      "next_window_date": "2026-07-04",
+      "next_window_status": "scheduled_future",
+      "next_proof_due_at": "2026-07-04T16:05:00Z",
+      "next_measurement_due_at": "2026-07-05T15:20:00Z",
+      "next_post_ids": [
+        "FP-BRAND-AM-01-13-X",
+        "FP-BRAND-AM-01-13-FACEBOOK"
+      ],
+      "proof_delay_minutes": 45,
+      "first_measurement_delay_hours": 24,
+      "proof_preview_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run",
+      "proof_apply_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin"
+    },
+    "windows": [
+      {
+        "date": "2026-07-04",
+        "status": "scheduled_future",
+        "post_ids": [
+          "FP-BRAND-AM-01-13-X",
+          "FP-BRAND-AM-01-13-FACEBOOK"
+        ],
+        "platforms": [
+          "Facebook",
+          "X"
+        ],
+        "first_scheduled_at": "2026-07-04T14:15:00Z",
+        "last_scheduled_at": "2026-07-04T15:20:00Z",
+        "proof_due_at": "2026-07-04T16:05:00Z",
+        "measurement_due_at": "2026-07-05T15:20:00Z",
+        "status_counts": {
+          "scheduled_future": 2
+        },
+        "rows_needing_proof": [],
+        "rows_ready_for_metrics": [],
+        "capture_executions_command": "python3 scripts/capture_social_executions.py",
+        "proof_preview_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run",
+        "proof_apply_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
+        "metric_capture_command": "",
+        "next_action": "Wait for the scheduled executor; proof capture starts after the final slot."
+      },
+      {
+        "date": "2026-07-05",
+        "status": "scheduled_future",
+        "post_ids": [
+          "FP-BRAND-AM-02-GIRLS-CAMP-X",
+          "FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK"
+        ],
+        "platforms": [
+          "Facebook",
+          "X"
+        ],
+        "first_scheduled_at": "2026-07-05T14:15:00Z",
+        "last_scheduled_at": "2026-07-05T15:20:00Z",
+        "proof_due_at": "2026-07-05T16:05:00Z",
+        "measurement_due_at": "2026-07-06T15:20:00Z",
+        "status_counts": {
+          "scheduled_future": 2
+        },
+        "rows_needing_proof": [],
+        "rows_ready_for_metrics": [],
+        "capture_executions_command": "python3 scripts/capture_social_executions.py",
+        "proof_preview_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run",
+        "proof_apply_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
+        "metric_capture_command": "",
+        "next_action": "Wait for the scheduled executor; proof capture starts after the final slot."
+      },
+      {
+        "date": "2026-07-06",
+        "status": "scheduled_future",
+        "post_ids": [
+          "FP-BRAND-AM-03-ANALOG-MYTH-X",
+          "FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK"
+        ],
+        "platforms": [
+          "Facebook",
+          "X"
+        ],
+        "first_scheduled_at": "2026-07-06T14:15:00Z",
+        "last_scheduled_at": "2026-07-06T15:20:00Z",
+        "proof_due_at": "2026-07-06T16:05:00Z",
+        "measurement_due_at": "2026-07-07T15:20:00Z",
+        "status_counts": {
+          "scheduled_future": 2
+        },
+        "rows_needing_proof": [],
+        "rows_ready_for_metrics": [],
+        "capture_executions_command": "python3 scripts/capture_social_executions.py",
+        "proof_preview_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run",
+        "proof_apply_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
+        "metric_capture_command": "",
+        "next_action": "Wait for the scheduled executor; proof capture starts after the final slot."
+      },
+      {
+        "date": "2026-07-07",
+        "status": "scheduled_future",
+        "post_ids": [
+          "FP-BRAND-AM-04-SPILLING-THE-TEA-X",
+          "FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK"
+        ],
+        "platforms": [
+          "Facebook",
+          "X"
+        ],
+        "first_scheduled_at": "2026-07-07T14:15:00Z",
+        "last_scheduled_at": "2026-07-07T15:20:00Z",
+        "proof_due_at": "2026-07-07T16:05:00Z",
+        "measurement_due_at": "2026-07-08T15:20:00Z",
+        "status_counts": {
+          "scheduled_future": 2
+        },
+        "rows_needing_proof": [],
+        "rows_ready_for_metrics": [],
+        "capture_executions_command": "python3 scripts/capture_social_executions.py",
+        "proof_preview_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run",
+        "proof_apply_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
+        "metric_capture_command": "",
+        "next_action": "Wait for the scheduled executor; proof capture starts after the final slot."
+      },
+      {
+        "date": "2026-07-08",
+        "status": "scheduled_future",
+        "post_ids": [
+          "FP-BRAND-AM-05-NO-MORTGAGE-X",
+          "FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK"
+        ],
+        "platforms": [
+          "Facebook",
+          "X"
+        ],
+        "first_scheduled_at": "2026-07-08T14:15:00Z",
+        "last_scheduled_at": "2026-07-08T15:20:00Z",
+        "proof_due_at": "2026-07-08T16:05:00Z",
+        "measurement_due_at": "2026-07-09T15:20:00Z",
+        "status_counts": {
+          "scheduled_future": 2
+        },
+        "rows_needing_proof": [],
+        "rows_ready_for_metrics": [],
+        "capture_executions_command": "python3 scripts/capture_social_executions.py",
+        "proof_preview_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run",
+        "proof_apply_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
+        "metric_capture_command": "",
+        "next_action": "Wait for the scheduled executor; proof capture starts after the final slot."
+      },
+      {
+        "date": "2026-07-09",
+        "status": "scheduled_future",
+        "post_ids": [
+          "FP-BRAND-AM-06-GUARDS-DOWN-X",
+          "FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK"
+        ],
+        "platforms": [
+          "Facebook",
+          "X"
+        ],
+        "first_scheduled_at": "2026-07-09T14:15:00Z",
+        "last_scheduled_at": "2026-07-09T15:20:00Z",
+        "proof_due_at": "2026-07-09T16:05:00Z",
+        "measurement_due_at": "2026-07-10T15:20:00Z",
+        "status_counts": {
+          "scheduled_future": 2
+        },
+        "rows_needing_proof": [],
+        "rows_ready_for_metrics": [],
+        "capture_executions_command": "python3 scripts/capture_social_executions.py",
+        "proof_preview_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run",
+        "proof_apply_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
+        "metric_capture_command": "",
+        "next_action": "Wait for the scheduled executor; proof capture starts after the final slot."
+      },
+      {
+        "date": "2026-07-10",
+        "status": "scheduled_future",
+        "post_ids": [
+          "FP-BRAND-AM-07-SLOW-WALK-X",
+          "FP-BRAND-AM-07-SLOW-WALK-FACEBOOK"
+        ],
+        "platforms": [
+          "Facebook",
+          "X"
+        ],
+        "first_scheduled_at": "2026-07-10T14:15:00Z",
+        "last_scheduled_at": "2026-07-10T15:20:00Z",
+        "proof_due_at": "2026-07-10T16:05:00Z",
+        "measurement_due_at": "2026-07-11T15:20:00Z",
+        "status_counts": {
+          "scheduled_future": 2
+        },
+        "rows_needing_proof": [],
+        "rows_ready_for_metrics": [],
+        "capture_executions_command": "python3 scripts/capture_social_executions.py",
+        "proof_preview_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run",
+        "proof_apply_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
+        "metric_capture_command": "",
+        "next_action": "Wait for the scheduled executor; proof capture starts after the final slot."
+      },
+      {
+        "date": "2026-07-11",
+        "status": "scheduled_future",
+        "post_ids": [
+          "FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X",
+          "FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK"
+        ],
+        "platforms": [
+          "Facebook",
+          "X"
+        ],
+        "first_scheduled_at": "2026-07-11T14:15:00Z",
+        "last_scheduled_at": "2026-07-11T15:20:00Z",
+        "proof_due_at": "2026-07-11T16:05:00Z",
+        "measurement_due_at": "2026-07-12T15:20:00Z",
+        "status_counts": {
+          "scheduled_future": 2
+        },
+        "rows_needing_proof": [],
+        "rows_ready_for_metrics": [],
+        "capture_executions_command": "python3 scripts/capture_social_executions.py",
+        "proof_preview_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run",
+        "proof_apply_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
+        "metric_capture_command": "",
+        "next_action": "Wait for the scheduled executor; proof capture starts after the final slot."
+      }
+    ]
   },
   "rows": [
     {
@@ -343,12 +587,13 @@
     }
   ],
   "next_actions": [
-    "Next campaign post is FP-BRAND-AM-01-13-X at 2026-07-04T10:15:00-04:00."
+    "Next proof window is 2026-07-04 after 2026-07-04T16:05:00Z; watch FP-BRAND-AM-01-13-X, FP-BRAND-AM-01-13-FACEBOOK."
   ],
   "guardrails": [
     "Readout only; it does not post or import metrics.",
     "Published_Log.csv is the source of truth for public URLs.",
     "Metric capture commands only target logged X/Facebook campaign post IDs.",
+    "Post-slot proof commands only capture executor state and export confirmed Worker URLs.",
     "Unknown metrics remain blank until an API capture or visible analytics source proves them."
   ]
 }

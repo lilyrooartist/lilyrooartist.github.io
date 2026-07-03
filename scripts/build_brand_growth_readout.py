@@ -25,6 +25,8 @@ ADMIN_INDEX = ROOT / "admin" / "index.html"
 
 TZ = ZoneInfo("America/New_York")
 RESULT_FIELDS = ["views", "likes", "comments", "shares", "saves", "subs_delta"]
+POST_PROOF_DELAY_MINUTES = 45
+FIRST_MEASUREMENT_DELAY_HOURS = 24
 
 
 def read_json(path: Path, fallback):
@@ -70,6 +72,18 @@ def parse_date(value: str | None):
         return datetime.combine(datetime.fromisoformat(raw).date(), time(12, 0), TZ).astimezone(timezone.utc)
     except ValueError:
         return None
+
+
+def iso_z(value: datetime | None) -> str:
+    if not value:
+        return ""
+    return value.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
+
+
+def local_date(value: datetime | None) -> str:
+    if not value:
+        return "unscheduled"
+    return value.astimezone(TZ).date().isoformat()
 
 
 def queue_id(row: dict) -> str:
@@ -159,6 +173,105 @@ def capture_command(platform: str, post_ids: list[str]) -> str:
     return f"python3 scripts/{script} {ids}"
 
 
+def post_slot_watch(rows: list[dict], now: datetime) -> tuple[list[dict], dict]:
+    by_day: dict[str, list[dict]] = {}
+    for row in rows:
+        scheduled_at = parse_datetime(row.get("scheduled_at"))
+        by_day.setdefault(local_date(scheduled_at), []).append(row)
+
+    windows = []
+    for day, day_rows in sorted(by_day.items()):
+        parsed_times = [parse_datetime(row.get("scheduled_at")) for row in day_rows]
+        parsed_times = [item for item in parsed_times if item]
+        first_at = min(parsed_times) if parsed_times else None
+        last_at = max(parsed_times) if parsed_times else None
+        proof_due_at = last_at + timedelta(minutes=POST_PROOF_DELAY_MINUTES) if last_at else None
+        measurement_due_at = last_at + timedelta(hours=FIRST_MEASUREMENT_DELAY_HOURS) if last_at else None
+        status_counts = Counter(row.get("status") or "unknown" for row in day_rows)
+        rows_needing_proof = [
+            row["id"]
+            for row in day_rows
+            if row.get("status") in {"scheduled_due", "posted_needs_published_log_export", "execution_attention"}
+        ]
+        rows_waiting_publication = [
+            row["id"]
+            for row in day_rows
+            if row.get("status") in {"scheduled_future", "scheduled_due"}
+        ]
+        rows_ready_for_metrics = [
+            row["id"]
+            for row in day_rows
+            if row.get("status") == "ready_for_metric_capture"
+        ]
+        if status_counts.get("execution_attention"):
+            status = "attention"
+            next_action = "Inspect executor state, then refresh and export posted URLs after the issue is resolved."
+        elif rows_ready_for_metrics:
+            status = "measurement_due"
+            next_action = "Capture metrics for logged campaign posts and import reviewed result fields."
+        elif rows_needing_proof or (proof_due_at and now >= proof_due_at and rows_waiting_publication):
+            status = "proof_due"
+            next_action = "Capture executions and export posted Worker URLs into Published_Log.csv."
+        elif first_at and now >= first_at:
+            status = "publishing_window"
+            next_action = "Scheduled posting window is open; capture executor state shortly after the final slot."
+        elif status_counts.get("posted_waiting_measurement_window"):
+            status = "posted_waiting_measurement"
+            next_action = "Wait for the first measurement window before capturing result metrics."
+        elif status_counts.get("measured") == len(day_rows):
+            status = "measured"
+            next_action = "Compare the result totals against the rest of the campaign."
+        else:
+            status = "scheduled_future"
+            next_action = "Wait for the scheduled executor; proof capture starts after the final slot."
+        windows.append({
+            "date": day,
+            "status": status,
+            "post_ids": [row["id"] for row in day_rows],
+            "platforms": sorted({row.get("platform") for row in day_rows if row.get("platform")}),
+            "first_scheduled_at": iso_z(first_at),
+            "last_scheduled_at": iso_z(last_at),
+            "proof_due_at": iso_z(proof_due_at),
+            "measurement_due_at": iso_z(measurement_due_at),
+            "status_counts": dict(sorted(status_counts.items())),
+            "rows_needing_proof": rows_needing_proof,
+            "rows_ready_for_metrics": rows_ready_for_metrics,
+            "capture_executions_command": "python3 scripts/capture_social_executions.py",
+            "proof_preview_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run",
+            "proof_apply_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
+            "metric_capture_command": " && ".join(
+                command
+                for command in (
+                    capture_command("X", [row["id"] for row in day_rows if row.get("platform") == "X" and row.get("status") == "ready_for_metric_capture"]),
+                    capture_command("Facebook", [row["id"] for row in day_rows if row.get("platform") == "Facebook" and row.get("status") == "ready_for_metric_capture"]),
+                )
+                if command
+            ),
+            "next_action": next_action,
+        })
+
+    actionable = [
+        window for window in windows
+        if window["status"] in {"attention", "proof_due", "publishing_window", "measurement_due"}
+    ]
+    future = [window for window in windows if window["status"] == "scheduled_future"]
+    next_window = actionable[0] if actionable else (future[0] if future else (windows[-1] if windows else {}))
+    summary = {
+        "window_count": len(windows),
+        "status_counts": dict(sorted(Counter(window["status"] for window in windows).items())),
+        "next_window_date": next_window.get("date", ""),
+        "next_window_status": next_window.get("status", ""),
+        "next_proof_due_at": next_window.get("proof_due_at", ""),
+        "next_measurement_due_at": next_window.get("measurement_due_at", ""),
+        "next_post_ids": next_window.get("post_ids", []),
+        "proof_delay_minutes": POST_PROOF_DELAY_MINUTES,
+        "first_measurement_delay_hours": FIRST_MEASUREMENT_DELAY_HOURS,
+        "proof_preview_command": next_window.get("proof_preview_command", ""),
+        "proof_apply_command": next_window.get("proof_apply_command", ""),
+    }
+    return windows, summary
+
+
 def build_payload() -> dict:
     now = datetime.now(timezone.utc)
     campaign = read_json(CAMPAIGN, {})
@@ -244,6 +357,7 @@ def build_payload() -> dict:
         [row for row in rows if row["status"] == "scheduled_future"],
         key=lambda row: row.get("scheduled_at") or "",
     )
+    watch_windows, watch_summary = post_slot_watch(rows, now)
     live_platforms = (live_metrics.get("platforms") or {}) if isinstance(live_metrics, dict) else {}
     payload = {
         "generated_at": now.isoformat().replace("+00:00", "Z"),
@@ -272,22 +386,41 @@ def build_payload() -> dict:
             "next_scheduled_at": (next_scheduled[0]["scheduled_at"] if next_scheduled else ""),
             "x_metric_capture_command": capture_command("X", ready_x_ids),
             "facebook_metric_capture_command": capture_command("Facebook", ready_facebook_ids),
+            "post_slot_watch_window_count": watch_summary.get("window_count", 0),
+            "post_slot_watch_status_counts": watch_summary.get("status_counts", {}),
+            "next_proof_window_date": watch_summary.get("next_window_date", ""),
+            "next_proof_window_status": watch_summary.get("next_window_status", ""),
+            "next_proof_due_at": watch_summary.get("next_proof_due_at", ""),
+            "next_measurement_due_at": watch_summary.get("next_measurement_due_at", ""),
+            "next_proof_post_ids": watch_summary.get("next_post_ids", []),
+            "proof_preview_command": watch_summary.get("proof_preview_command", ""),
+            "proof_apply_command": watch_summary.get("proof_apply_command", ""),
             "export_social_executions_command": "python3 scripts/export_social_executions.py --refresh-admin",
             "refresh_command": "python3 scripts/refresh_promo_admin.py",
             "report_path": rel(REPORT),
             "live_youtube_total_views": ((live_platforms.get("youtube") or {}).get("metrics") or {}).get("total_views"),
             "live_spotify_monthly_listeners": ((live_platforms.get("spotify") or {}).get("metrics") or {}).get("monthly_listeners"),
         },
+        "post_slot_watch": {
+            "summary": watch_summary,
+            "windows": watch_windows,
+        },
         "rows": rows,
         "next_actions": [
             row["next_action"] for row in due_rows[:6] if row.get("next_action")
         ] or [
-            f"Next campaign post is {next_scheduled[0]['id']} at {next_scheduled[0]['scheduled_at']}." if next_scheduled else "No campaign rows remain.",
+            (
+                f"Next proof window is {watch_summary.get('next_window_date')} after {watch_summary.get('next_proof_due_at')}; "
+                f"watch {', '.join(watch_summary.get('next_post_ids') or [])}."
+            ) if watch_summary.get("next_window_date") else (
+                f"Next campaign post is {next_scheduled[0]['id']} at {next_scheduled[0]['scheduled_at']}." if next_scheduled else "No campaign rows remain."
+            ),
         ],
         "guardrails": [
             "Readout only; it does not post or import metrics.",
             "Published_Log.csv is the source of truth for public URLs.",
             "Metric capture commands only target logged X/Facebook campaign post IDs.",
+            "Post-slot proof commands only capture executor state and export confirmed Worker URLs.",
             "Unknown metrics remain blank until an API capture or visible analytics source proves them.",
         ],
     }
@@ -308,14 +441,19 @@ def build_markdown(payload: dict) -> str:
         f"- Posted or measured rows: **{summary['posted_or_measured_rows']}**",
         f"- Measured rows: **{summary['measured_rows']}**",
         f"- Ready for metric capture: **{summary['ready_for_metric_capture_rows']}**",
+        f"- Post-slot watch windows: **{summary.get('post_slot_watch_window_count', 0)}**",
         f"- Status counts: **{', '.join(f'{key}: {value}' for key, value in summary['status_counts'].items()) or 'none'}**",
         f"- Next scheduled: `{summary['next_scheduled_post_id'] or 'none'}` at `{summary['next_scheduled_at'] or 'n/a'}`",
+        f"- Next proof due: `{summary.get('next_proof_due_at') or 'n/a'}`",
+        f"- First measurement due: `{summary.get('next_measurement_due_at') or 'n/a'}`",
         f"- YouTube total views: **{summary.get('live_youtube_total_views', 'unknown')}**",
         f"- Spotify monthly listeners: **{summary.get('live_spotify_monthly_listeners', 'unknown')}**",
         "",
         "## Commands",
         f"- Refresh state: `{summary['refresh_command']}`",
         f"- Export posted URLs: `{summary['export_social_executions_command']}`",
+        f"- Preview post-slot proof: `{summary.get('proof_preview_command') or 'waiting for scheduled campaign posts'}`",
+        f"- Apply post-slot proof after scheduled executor runs: `{summary.get('proof_apply_command') or 'waiting for scheduled campaign posts'}`",
         f"- Capture X metrics: `{summary['x_metric_capture_command'] or 'waiting for logged X campaign posts'}`",
         f"- Capture Facebook metrics: `{summary['facebook_metric_capture_command'] or 'waiting for logged Facebook campaign posts'}`",
         "",
@@ -323,6 +461,18 @@ def build_markdown(payload: dict) -> str:
     ]
     for action in payload.get("next_actions") or []:
         lines.append(f"- {action}")
+    lines.extend(["", "## Post-Slot Watch"])
+    for window in (payload.get("post_slot_watch") or {}).get("windows") or []:
+        lines.append(
+            f"- `{window['date']}` **{window['status']}** proof due `{window.get('proof_due_at') or 'n/a'}` "
+            f"for `{', '.join(window.get('post_ids') or [])}`"
+        )
+        if window.get("next_action"):
+            lines.append(f"  - Next: {window['next_action']}")
+        if window.get("proof_preview_command"):
+            lines.append(f"  - Preview: `{window['proof_preview_command']}`")
+        if window.get("metric_capture_command"):
+            lines.append(f"  - Metrics: `{window['metric_capture_command']}`")
     lines.extend(["", "## Rows"])
     for row in payload["rows"]:
         lines.append(
