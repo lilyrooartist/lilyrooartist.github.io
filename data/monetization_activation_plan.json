@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-03T10:07:54.093455Z",
+  "generated_at": "2026-07-03T10:18:41.930525Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -30,14 +30,14 @@
   },
   "actions": [
     {
-      "label": "Current operations next action: Collect experiment result metrics",
+      "label": "Current operations next action: Watch active Analog Myth proof window",
       "phase": "Operations packet",
-      "status": "waiting_for_user",
-      "detail": "15 logged experiment post(s) have 81 result field(s) waiting; these results rank repeatable formats.",
-      "command": "python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run",
+      "status": "ready",
+      "detail": "The active Analog Myth proof window is coming up within 48 hours.",
+      "command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run",
       "after_review_command": "",
       "context": {
-        "kind": "experiment_results",
+        "kind": "brand_growth_proof",
         "urgency": "high"
       }
     }

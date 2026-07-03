@@ -43,6 +43,9 @@ BACKLOG_RESCHEDULE_PREVIEW = ROOT / "data" / "backlog_reschedule_preview.json"
 EXPERIMENT_RESULT_COLLECTION = ROOT / "data" / "experiment_result_collection_packet.json"
 EXPERIMENT_RESULT_CLIPBOARD = ROOT / "data" / "experiment_result_clipboard.json"
 EXPERIMENT_PUBLISH_RUNWAY = ROOT / "data" / "experiment_publish_runway.json"
+POSTING_AUTOMATION_STATUS = ROOT / "data" / "posting_automation_status.json"
+BRAND_GROWTH_READOUT = ROOT / "data" / "brand_growth_readout.json"
+BRAND_GROWTH_PREFLIGHT = ROOT / "data" / "brand_growth_preflight.json"
 PUBLISHED = ROOT / "admin" / "content" / "Published_Log.csv"
 FUTURE_POSTS = ROOT / "admin" / "future-posts.json"
 RESCHEDULE_SCRIPT = ROOT / "scripts" / "reschedule_scheduled_posts.py"
@@ -2576,6 +2579,57 @@ def experiment_publish_next_action(packet: dict) -> str:
     return ""
 
 
+def active_brand_campaign_state(posting_status: dict, readout: dict, preflight: dict) -> dict:
+    posting_summary = posting_status.get("summary") if isinstance(posting_status, dict) else {}
+    posting_summary = posting_summary or {}
+    readout_summary = readout.get("summary") if isinstance(readout, dict) else {}
+    readout_summary = readout_summary or {}
+    preflight_summary = preflight.get("summary") if isinstance(preflight, dict) else {}
+    preflight_summary = preflight_summary or {}
+    expected_ids = preflight_summary.get("expected_post_ids") or readout_summary.get("next_proof_post_ids") or []
+    next_proof = (
+        posting_summary.get("active_campaign_next_proof_due_at")
+        or preflight_summary.get("next_proof_due_at")
+        or readout_summary.get("next_proof_due_at")
+        or ""
+    )
+    status = posting_summary.get("status") or preflight_summary.get("status") or ""
+    ready = bool(posting_summary.get("active_campaign_ready")) or preflight_summary.get("status") == "ready"
+    next_action = posting_summary.get("next_action") or ""
+    if not next_action and expected_ids and next_proof:
+        next_action = f"Watch {', '.join(expected_ids)} after {next_proof}, then export posted URLs."
+    return {
+        "available": bool(posting_status or readout or preflight),
+        "ready": ready,
+        "status": status,
+        "source_path": str(POSTING_AUTOMATION_STATUS.relative_to(ROOT)),
+        "readout_path": str(BRAND_GROWTH_READOUT.relative_to(ROOT)),
+        "preflight_path": str(BRAND_GROWTH_PREFLIGHT.relative_to(ROOT)),
+        "platforms": posting_summary.get("active_campaign_platforms") or sorted((readout_summary.get("platform_counts") or {}).keys()),
+        "expected_post_ids": expected_ids,
+        "next_proof_due_at": next_proof,
+        "next_measurement_due_at": (
+            posting_summary.get("active_campaign_next_measurement_due_at")
+            or preflight_summary.get("next_measurement_due_at")
+            or readout_summary.get("next_measurement_due_at")
+            or ""
+        ),
+        "scheduler_http_status": preflight_summary.get("scheduler_http_status"),
+        "scheduler_would_post_count": preflight_summary.get("scheduler_would_post_count"),
+        "scheduler_blocked_count": preflight_summary.get("scheduler_blocked_count"),
+        "proof_preview_command": readout_summary.get("proof_preview_command") or "",
+        "proof_apply_command": readout_summary.get("proof_apply_command") or "",
+        "next_action": next_action,
+    }
+
+
+def active_brand_campaign_next_action(state: dict) -> str:
+    if not state.get("available") or not state.get("ready"):
+        return ""
+    command = state.get("proof_preview_command") or "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run"
+    return f"Active Analog Myth campaign proof: {state.get('next_action') or 'capture the next proof window'} Preview with {command}."
+
+
 def plan_rows_for_release(plan, release_title: str, track_lookup: set[str]):
     rows = []
     for post in plan.get("posts") or []:
@@ -2610,6 +2664,9 @@ def build_status():
     experiment_result_collection = read_json(EXPERIMENT_RESULT_COLLECTION, {})
     experiment_result_clipboard = read_json(EXPERIMENT_RESULT_CLIPBOARD, {})
     experiment_publish_runway = read_json(EXPERIMENT_PUBLISH_RUNWAY, {})
+    posting_automation_status = read_json(POSTING_AUTOMATION_STATUS, {})
+    brand_growth_readout = read_json(BRAND_GROWTH_READOUT, {})
+    brand_growth_preflight = read_json(BRAND_GROWTH_PREFLIGHT, {})
     manual_metric_packet = read_json(MANUAL_METRIC_PACKET, {})
     store_verification_run = read_json(STORE_VERIFICATION_RUN, {})
     future_posts = read_json(FUTURE_POSTS, {})
@@ -2729,6 +2786,7 @@ def build_status():
     operator_docket = operator_docket_state(human_handoff)
     handoff_preview = handoff_resolution_preview_state(handoff_resolution_preview)
     unlock_sequence = promo_unlock_sequence_state(promo_unlock_sequence)
+    active_brand_campaign = active_brand_campaign_state(posting_automation_status, brand_growth_readout, brand_growth_preflight)
     manual_distribution = manual_distribution_state(manual_distribution)
     manual_posting_clipboard = manual_posting_clipboard_state(manual_posting_clipboard)
     published_log_reconciliation = published_log_reconciliation_state(published_log_reconciliation)
@@ -2847,6 +2905,9 @@ def build_status():
             "experiment_result_collection": str(EXPERIMENT_RESULT_COLLECTION.relative_to(ROOT)),
             "experiment_result_clipboard": str(EXPERIMENT_RESULT_CLIPBOARD.relative_to(ROOT)),
             "experiment_publish_runway": str(EXPERIMENT_PUBLISH_RUNWAY.relative_to(ROOT)),
+            "posting_automation_status": str(POSTING_AUTOMATION_STATUS.relative_to(ROOT)),
+            "brand_growth_readout": str(BRAND_GROWTH_READOUT.relative_to(ROOT)),
+            "brand_growth_preflight": str(BRAND_GROWTH_PREFLIGHT.relative_to(ROOT)),
             "published_log": str(PUBLISHED.relative_to(ROOT)),
             "manual_metrics": str(MANUAL_METRICS.relative_to(ROOT)),
             "manual_metric_packet": str(MANUAL_METRIC_PACKET.relative_to(ROOT)),
@@ -2917,6 +2978,7 @@ def build_status():
                 "summary": experiment_publish_runway.get("summary") or {},
                 "steps": experiment_publish_runway.get("steps") or [],
             },
+            "active_brand_campaign": active_brand_campaign,
             "music_site_state_counts": dict(sorted(store_state_counts.items())),
             "music_site_verification_state_counts": {
                 "Live": store_history_summary.get("live", 0),

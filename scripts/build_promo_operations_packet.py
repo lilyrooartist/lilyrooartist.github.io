@@ -18,6 +18,9 @@ MANUAL_METRICS = ROOT / "data" / "manual_metric_collection_packet.json"
 MANUAL_DISTRIBUTION = ROOT / "data" / "manual_distribution_packet.json"
 MANUAL_POSTING_CLIPBOARD = ROOT / "data" / "manual_posting_clipboard.json"
 EXPERIMENT_RESULT_CLIPBOARD = ROOT / "data" / "experiment_result_clipboard.json"
+POSTING_AUTOMATION_STATUS = ROOT / "data" / "posting_automation_status.json"
+BRAND_GROWTH_READOUT = ROOT / "data" / "brand_growth_readout.json"
+BRAND_GROWTH_PREFLIGHT = ROOT / "data" / "brand_growth_preflight.json"
 TIKTOK_PREFLIGHT = ROOT / "data" / "tiktok_setup_preflight.json"
 OUT = ROOT / "data" / "promo_operations_packet.json"
 REPORT = ROOT / "admin" / "reports" / "promo-operations-packet.md"
@@ -80,6 +83,10 @@ def phase_for(action: dict) -> str:
         return "Repair executor"
     if kind == "manual_distribution":
         return "Publish manual posts"
+    if kind == "manual_lane_cleanup":
+        return "Remove manual-only lanes"
+    if kind == "brand_growth_proof":
+        return "Automated brand campaign"
     if kind == "experiment_results":
         return "Collect experiment results"
     if kind == "apply_approved":
@@ -112,6 +119,17 @@ def urgency_for(action: dict, now: datetime) -> tuple[str, str]:
     if kind == "manual_distribution":
         count = int(context.get("postable_count") or 0)
         return "high", f"{count} approved manual post(s) can publish now without waiting for broken auto executors."
+    if kind == "manual_lane_cleanup":
+        return "high", "Manual-only posting is outside the active plan; convert it to API-backed automation or remove it."
+    if kind == "brand_growth_proof":
+        due_at = parse_datetime(context.get("next_proof_due_at"))
+        if due_at:
+            hours = (due_at - now).total_seconds() / 3600
+            if hours <= 0:
+                return "high", "The active Analog Myth proof window is due; capture executor proof and export confirmed URLs."
+            if hours <= 48:
+                return "high", "The active Analog Myth proof window is coming up within 48 hours."
+        return "medium", "The active Analog Myth X/Facebook campaign is scheduled and ready."
     if kind == "experiment_results":
         pending = int(context.get("pending_result_field_count") or 0)
         cards = int(context.get("metric_card_count") or 0)
@@ -615,12 +633,11 @@ def manual_distribution_actions(distribution_packet, posting_clipboard):
     waiting_url_count = int(clipboard_summary.get("waiting_public_url_count") or distribution_summary.get("public_url_log_needed_count") or 0)
     if postable_count <= 0:
         return []
-    public_url = clipboard_summary.get("public_community_url") or distribution_summary.get("public_community_url") or ""
     return [
         command_row(
-            "Post YouTube Community manual cards",
-            "",
-            "manual_distribution",
+            "Remove or convert manual-only YouTube Community cards",
+            "python3 scripts/build_experiment_publish_runway.py",
+            "manual_lane_cleanup",
             0,
             {
                 "platform": "YouTube Community",
@@ -628,13 +645,6 @@ def manual_distribution_actions(distribution_packet, posting_clipboard):
                 "postable_count": postable_count,
                 "waiting_public_url_count": waiting_url_count,
                 "pending_log_ids": clipboard_summary.get("pending_log_ids") or [],
-                "public_community_url": public_url,
-                "posting_surface": clipboard_summary.get("posting_surface") or "YouTube Studio Community",
-                "report_path": "admin/reports/manual-posting-clipboard.md",
-                "url_template_path": clipboard_summary.get("url_template_path") or "data/manual_distribution_url_template.csv",
-                "batch_log_preview_command": clipboard_summary.get("batch_log_preview_command") or "",
-                "batch_log_apply_command": clipboard_summary.get("batch_log_apply_command") or "",
-                "batch_log_partial_apply_command": clipboard_summary.get("batch_log_partial_apply_command") or "",
                 "post_cards": [
                     {
                         "id": card.get("id") or "",
@@ -645,7 +655,56 @@ def manual_distribution_actions(distribution_packet, posting_clipboard):
                     }
                     for card in post_cards
                 ],
-                "note": "Post each approved card manually, copy the real public URL, then log it with the manual distribution logger.",
+                "note": "Manual posting is not part of the active plan; remove these rows or replace them with API-backed automation.",
+            },
+        )
+    ]
+
+
+def brand_growth_proof_actions(posting_status, readout, preflight):
+    posting_summary = posting_status.get("summary") or {}
+    readout_summary = readout.get("summary") or {}
+    preflight_summary = preflight.get("summary") or {}
+    expected_ids = preflight_summary.get("expected_post_ids") or readout_summary.get("next_proof_post_ids") or []
+    next_proof = (
+        posting_summary.get("active_campaign_next_proof_due_at")
+        or preflight_summary.get("next_proof_due_at")
+        or readout_summary.get("next_proof_due_at")
+        or ""
+    )
+    if not posting_summary.get("active_campaign_ready") and preflight_summary.get("status") != "ready":
+        return []
+    command = (
+        readout_summary.get("proof_preview_command")
+        or "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run"
+    )
+    return [
+        command_row(
+            "Watch active Analog Myth proof window",
+            command,
+            "brand_growth_proof",
+            0,
+            {
+                "status": posting_summary.get("status") or preflight_summary.get("status") or "",
+                "platforms": posting_summary.get("active_campaign_platforms") or sorted((readout_summary.get("platform_counts") or {}).keys()),
+                "expected_post_ids": expected_ids,
+                "next_proof_due_at": next_proof,
+                "next_measurement_due_at": (
+                    posting_summary.get("active_campaign_next_measurement_due_at")
+                    or preflight_summary.get("next_measurement_due_at")
+                    or readout_summary.get("next_measurement_due_at")
+                    or ""
+                ),
+                "scheduler_http_status": preflight_summary.get("scheduler_http_status"),
+                "scheduler_would_post_count": preflight_summary.get("scheduler_would_post_count"),
+                "scheduler_blocked_count": preflight_summary.get("scheduler_blocked_count"),
+                "proof_apply_command": readout_summary.get("proof_apply_command") or "",
+                "report_path": readout_summary.get("report_path") or "admin/reports/brand-growth-readout.md",
+                "note": (
+                    f"After {next_proof}, capture executor proof for {', '.join(expected_ids)} and export confirmed URLs."
+                    if expected_ids and next_proof
+                    else posting_summary.get("next_action") or "Capture the next active campaign proof window."
+                ),
             },
         )
     ]
@@ -965,8 +1024,12 @@ def main() -> int:
     manual_posting_clipboard = read_json(MANUAL_POSTING_CLIPBOARD, {})
     experiment_result_clipboard = read_json(EXPERIMENT_RESULT_CLIPBOARD, {})
     tiktok_preflight = read_json(TIKTOK_PREFLIGHT, {})
+    posting_status = read_json(POSTING_AUTOMATION_STATUS, {})
+    brand_growth_readout = read_json(BRAND_GROWTH_READOUT, {})
+    brand_growth_preflight = read_json(BRAND_GROWTH_PREFLIGHT, {})
     actions = (
-        scheduled_approval_batch_actions(scheduled_approval)
+        brand_growth_proof_actions(posting_status, brand_growth_readout, brand_growth_preflight)
+        + scheduled_approval_batch_actions(scheduled_approval)
         + scheduled_approval_review_actions(scheduled_approval)
         + backlog_reschedule_actions(status, backlog_preview)
         + manual_distribution_actions(manual_distribution, manual_posting_clipboard)
@@ -987,6 +1050,8 @@ def main() -> int:
         "store_checks": sum(1 for action in actions if action["kind"] == "store_verification"),
         "manual_metric_updates": sum(1 for action in actions if action["kind"] == "manual_metrics"),
         "manual_distribution_actions": sum(1 for action in actions if action["kind"] == "manual_distribution"),
+        "manual_lane_cleanup_actions": sum(1 for action in actions if action["kind"] == "manual_lane_cleanup"),
+        "brand_growth_proof_actions": sum(1 for action in actions if action["kind"] == "brand_growth_proof"),
         "experiment_result_actions": sum(1 for action in actions if action["kind"] == "experiment_results"),
         "backlog_reschedules": sum(1 for action in actions if action["kind"] == "backlog_reschedule"),
         "safe_apply_commands": sum(1 for action in actions if action["kind"] == "apply_approved"),
@@ -1010,6 +1075,9 @@ def main() -> int:
             "manual_distribution": str(MANUAL_DISTRIBUTION.relative_to(ROOT)),
             "manual_posting_clipboard": str(MANUAL_POSTING_CLIPBOARD.relative_to(ROOT)),
             "experiment_result_clipboard": str(EXPERIMENT_RESULT_CLIPBOARD.relative_to(ROOT)),
+            "posting_automation_status": str(POSTING_AUTOMATION_STATUS.relative_to(ROOT)),
+            "brand_growth_readout": str(BRAND_GROWTH_READOUT.relative_to(ROOT)),
+            "brand_growth_preflight": str(BRAND_GROWTH_PREFLIGHT.relative_to(ROOT)),
             "tiktok_setup_preflight": str(TIKTOK_PREFLIGHT.relative_to(ROOT)),
         },
         "next_action": next_action,

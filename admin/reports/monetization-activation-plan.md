@@ -1,6 +1,6 @@
 # Monetization Activation Plan - Lily Roo
 
-Generated: 2026-07-03T10:07:54.093455Z
+Generated: 2026-07-03T10:18:41.930525Z
 
 ## Summary
 - Current YouTube audience metric: **5 subscribers**
@@ -11,10 +11,10 @@ Generated: 2026-07-03T10:07:54.093455Z
 - Activation actions: **1**
 
 ## Activation Sequence
-1. **Current operations next action: Collect experiment result metrics**
-   - Phase: `Operations packet`; status: `waiting_for_user`
-   - Detail: 15 logged experiment post(s) have 81 result field(s) waiting; these results rank repeatable formats.
-   - Preview/check: `python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run`
+1. **Current operations next action: Watch active Analog Myth proof window**
+   - Phase: `Operations packet`; status: `ready`
+   - Detail: The active Analog Myth proof window is coming up within 48 hours.
+   - Preview/check: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
 
 ## Guardrails
 - This plan does not approve, apply, publish, or post anything.

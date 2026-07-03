@@ -51,8 +51,8 @@ def subscriber_score(post: dict, readiness: dict) -> int:
     }.get(state, 35)
     if "youtube" in platform:
         score += 18
-    if "subscribe" in text or "1,000" in text or "1000" in text:
-        score += 15
+    if "subscribe" in text or "subscribers" in text or "1,000" in text or "1000" in text:
+        score -= 25
     if "youtube" in text:
         score += 8
     if "tiktok" in platform and state == "blocked":
@@ -170,7 +170,7 @@ def build_markdown(payload: dict) -> str:
         f"- Blocked drafts: **{summary['blocked']}**",
         f"- Recommended approvals: **{summary['recommended_approval_count']}**",
         f"- Recommended manual approvals: **{summary.get('recommended_manual_approval_count', 0)}**",
-        f"- Monetization runway: **{summary['runway_status']}**, {summary['subscribers_per_week']} subs/week observed, {summary['required_subscribers_per_week_365']} subs/week needed for 365 days",
+        f"- Discovery runway: **{summary['runway_status']}**; prioritize release-forward posts and avoid subscriber-count solicitation.",
         "",
         "## Manual Approval Docket",
         f"- Status: **{docket.get('status', 'unknown')}**",
