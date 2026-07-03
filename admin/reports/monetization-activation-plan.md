@@ -1,6 +1,6 @@
 # Monetization Activation Plan - Lily Roo
 
-Generated: 2026-07-03T07:41:58.922983Z
+Generated: 2026-07-03T07:54:18.669720Z
 
 ## Summary
 - Current YouTube audience metric: **5 subscribers**
@@ -13,7 +13,7 @@ Generated: 2026-07-03T07:41:58.922983Z
 ## Activation Sequence
 1. **Current operations next action: Collect experiment result metrics**
    - Phase: `Operations packet`; status: `waiting_for_user`
-   - Detail: 15 logged experiment post(s) have 90 result field(s) waiting; these results rank repeatable formats.
+   - Detail: 15 logged experiment post(s) have 81 result field(s) waiting; these results rank repeatable formats.
    - Preview/check: `python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run`
 
 ## Guardrails

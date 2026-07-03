@@ -302,6 +302,16 @@ FINALIZE_STEPS = [
         "required": True,
     },
     {
+        "name": "build_promo_operations_packet_final",
+        "command": ["python3", "scripts/build_promo_operations_packet.py"],
+        "required": True,
+    },
+    {
+        "name": "update_promo_engine_status_final",
+        "command": ["python3", "scripts/update_promo_engine_status.py"],
+        "required": True,
+    },
+    {
         "name": "build_promo_consistency_audit",
         "command": ["python3", "scripts/build_promo_consistency_audit.py"],
         "required": True,

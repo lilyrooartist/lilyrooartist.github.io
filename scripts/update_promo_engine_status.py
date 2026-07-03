@@ -1453,6 +1453,7 @@ GENERATED_REFRESH_PATHS = {
     "admin/index.html",
     "data/approval_runway.json",
     "data/backlog_reschedule_preview.json",
+    "data/brand_growth_preflight.json",
     "data/executor_readiness_snapshot.json",
     "data/experiment_publish_runway.json",
     "data/experiment_result_clipboard.json",

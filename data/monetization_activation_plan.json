@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-03T07:41:58.922983Z",
+  "generated_at": "2026-07-03T07:54:18.669720Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -33,7 +33,7 @@
       "label": "Current operations next action: Collect experiment result metrics",
       "phase": "Operations packet",
       "status": "waiting_for_user",
-      "detail": "15 logged experiment post(s) have 90 result field(s) waiting; these results rank repeatable formats.",
+      "detail": "15 logged experiment post(s) have 81 result field(s) waiting; these results rank repeatable formats.",
       "command": "python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run",
       "after_review_command": "",
       "context": {

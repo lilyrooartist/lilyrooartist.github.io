@@ -22,7 +22,7 @@ Do not use the same tone more than 2 days in a row.
 
 ## CTA frequency
 - Soft CTA most days
-- Hard YouTube archive line every 3rd post
+- Direct archive/listen line every 3rd post
 
 ## Anti-formula guardrails
 - Leave some posts without hashtags.
@@ -33,5 +33,5 @@ Do not use the same tone more than 2 days in a row.
 ## Monthly narrative arc
 Week 1: Introduce mood/world
 Week 2: Deepen contradictions + anecdotes
-Week 3: Push strongest song clips + subscriber asks
+Week 3: Push strongest song clips + story/listen invitations
 Week 4: Reflective/behind-the-song + reset

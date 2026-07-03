@@ -1,6 +1,6 @@
 # Experiment Result Clipboard - Lily Roo
 
-Generated: 2026-07-03T07:41:59.569302Z
+Generated: 2026-07-03T07:54:19.402283Z
 
 ## Summary
 - Status: **needs_values**
@@ -8,7 +8,7 @@ Generated: 2026-07-03T07:41:59.569302Z
 - Missing public URLs: **8**
 - Measurement priorities: **12**
 - Post-log handoff rows: **0**
-- Pending result fields: **90**
+- Pending result fields: **81**
 - Ready to import: **0**
 - Wide rows ready to import: **0**
 - Entry CSV: `data/experiment_result_entry_template.csv`
@@ -97,10 +97,10 @@ Generated: 2026-07-03T07:41:59.569302Z
 - Format: YouTube archive video CTA
 - URL: https://youtu.be/404PvtuXnqY
 - Published: 2026-06-29; Published_Log row: `28`
-- Pending fields: `views, likes, comments, shares, saves, subs_delta`
+- Pending fields: `shares, saves, subs_delta`
 - Wide-ready fields: `none`
 - Wide entry instruction: Fill one wide entry CSV row in data/experiment_result_entry_wide_template.csv for this post; keep unknown metrics blank and include one evidence_note.
-- Wide CSV target: post_id `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY`, source_row `28`, fill `views, likes, comments, shares, saves, subs_delta`.
+- Wide CSV target: post_id `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY`, source_row `28`, fill `shares, saves, subs_delta`.
 - Evidence sources:
   - Logged public post: https://youtu.be/404PvtuXnqY - Open the public post to confirm the URL and visible engagement before entering metrics.
   - YouTube Studio analytics: https://studio.youtube.com/ - Open the matching Community post analytics and copy available public-performance values.
@@ -110,9 +110,6 @@ Generated: 2026-07-03T07:41:59.569302Z
   - Copy only numeric values that are visible in the source.
   - Enter values in the wide entry CSV row for this post_id and source_row.
   - Add an evidence_note with source and collection date before import preview.
-  - `views`: Open YouTube Studio analytics for https://youtu.be/404PvtuXnqY and record views.
-  - `likes`: Open YouTube Studio analytics for https://youtu.be/404PvtuXnqY and record likes.
-  - `comments`: Open YouTube Studio analytics for https://youtu.be/404PvtuXnqY and record comments.
   - `shares`: Open YouTube Studio analytics for https://youtu.be/404PvtuXnqY and record shares.
   - `saves`: Open YouTube Studio analytics for https://youtu.be/404PvtuXnqY and record saves.
   - `subs_delta`: Open YouTube Studio analytics for https://youtu.be/404PvtuXnqY and record subs_delta.
@@ -120,10 +117,10 @@ Generated: 2026-07-03T07:41:59.569302Z
 - Format: Short video clip + platform-native CTA
 - URL: https://youtu.be/lbT4adNE-cE
 - Published: 2026-06-29; Published_Log row: `26`
-- Pending fields: `views, likes, comments, shares, saves, subs_delta`
+- Pending fields: `shares, saves, subs_delta`
 - Wide-ready fields: `none`
 - Wide entry instruction: Fill one wide entry CSV row in data/experiment_result_entry_wide_template.csv for this post; keep unknown metrics blank and include one evidence_note.
-- Wide CSV target: post_id `FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA`, source_row `26`, fill `views, likes, comments, shares, saves, subs_delta`.
+- Wide CSV target: post_id `FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA`, source_row `26`, fill `shares, saves, subs_delta`.
 - Evidence sources:
   - Logged public post: https://youtu.be/lbT4adNE-cE - Open the public post to confirm the URL and visible engagement before entering metrics.
   - YouTube Studio analytics: https://studio.youtube.com/ - Open the matching Community post analytics and copy available public-performance values.
@@ -133,9 +130,6 @@ Generated: 2026-07-03T07:41:59.569302Z
   - Copy only numeric values that are visible in the source.
   - Enter values in the wide entry CSV row for this post_id and source_row.
   - Add an evidence_note with source and collection date before import preview.
-  - `views`: Open YouTube Studio analytics for https://youtu.be/lbT4adNE-cE and record views.
-  - `likes`: Open YouTube Studio analytics for https://youtu.be/lbT4adNE-cE and record likes.
-  - `comments`: Open YouTube Studio analytics for https://youtu.be/lbT4adNE-cE and record comments.
   - `shares`: Open YouTube Studio analytics for https://youtu.be/lbT4adNE-cE and record shares.
   - `saves`: Open YouTube Studio analytics for https://youtu.be/lbT4adNE-cE and record saves.
   - `subs_delta`: Open YouTube Studio analytics for https://youtu.be/lbT4adNE-cE and record subs_delta.
@@ -143,10 +137,10 @@ Generated: 2026-07-03T07:41:59.569302Z
 - Format: Short video clip + platform-native CTA
 - URL: https://youtu.be/0d0PXb_h4FY
 - Published: 2026-06-29; Published_Log row: `27`
-- Pending fields: `views, likes, comments, shares, saves, subs_delta`
+- Pending fields: `shares, saves, subs_delta`
 - Wide-ready fields: `none`
 - Wide entry instruction: Fill one wide entry CSV row in data/experiment_result_entry_wide_template.csv for this post; keep unknown metrics blank and include one evidence_note.
-- Wide CSV target: post_id `FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA`, source_row `27`, fill `views, likes, comments, shares, saves, subs_delta`.
+- Wide CSV target: post_id `FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA`, source_row `27`, fill `shares, saves, subs_delta`.
 - Evidence sources:
   - Logged public post: https://youtu.be/0d0PXb_h4FY - Open the public post to confirm the URL and visible engagement before entering metrics.
   - YouTube Studio analytics: https://studio.youtube.com/ - Open the matching Community post analytics and copy available public-performance values.
@@ -156,9 +150,6 @@ Generated: 2026-07-03T07:41:59.569302Z
   - Copy only numeric values that are visible in the source.
   - Enter values in the wide entry CSV row for this post_id and source_row.
   - Add an evidence_note with source and collection date before import preview.
-  - `views`: Open YouTube Studio analytics for https://youtu.be/0d0PXb_h4FY and record views.
-  - `likes`: Open YouTube Studio analytics for https://youtu.be/0d0PXb_h4FY and record likes.
-  - `comments`: Open YouTube Studio analytics for https://youtu.be/0d0PXb_h4FY and record comments.
   - `shares`: Open YouTube Studio analytics for https://youtu.be/0d0PXb_h4FY and record shares.
   - `saves`: Open YouTube Studio analytics for https://youtu.be/0d0PXb_h4FY and record saves.
   - `subs_delta`: Open YouTube Studio analytics for https://youtu.be/0d0PXb_h4FY and record subs_delta.
@@ -422,11 +413,11 @@ Generated: 2026-07-03T07:41:59.569302Z
   - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-276 --source-row 38 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
   - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-276 --source-row 38 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
 - **Collect metrics** `FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA` YouTube / Short video clip + platform-native CTA: Already published and logged; measuring it reduces the Short video clip + platform-native CTA evidence gap. 2 logged post(s), 4 missing URL(s) in this format.
-  - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --source-row 26 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
-  - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --source-row 26 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
+  - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --source-row 26 --shares VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
+  - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --source-row 26 --shares VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
 - **Collect metrics** `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY` YouTube / YouTube archive video CTA: Already published and logged; measuring it reduces the YouTube archive video CTA evidence gap. 1 logged post(s), 0 missing URL(s) in this format.
-  - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --source-row 28 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
-  - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --source-row 28 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
+  - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --source-row 28 --shares VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
+  - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --source-row 28 --shares VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
 - **Clear platform blocker** `FP-AUTO-267` Instagram / Release-art image + story hook: Platform work is blocked; clear the platform repair gate before URL logging can produce metrics. 12 logged post(s), 4 missing URL(s) in this format.
 
 ## Post-Log Measurement Handoff

@@ -17,7 +17,7 @@ These are priority songs where backstory + visual direction are tightened for co
 - One core emotional thesis per song
 - 2–3 anecdote anchors linked to lyric excerpts
 - 3 visual motifs repeated across platforms
-- One short CTA line for conversion to YouTube subscribe
+- One short story/listen/follow CTA that feels like an invitation, not a solicitation
 
 ## Example canonical motif map
 - **Analog Myth:** clocks / blinking 12:00 / emotional time
