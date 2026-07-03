@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-07-03T08:50:31.083180Z",
+  "generated_at": "2026-07-03T08:54:35.725899Z",
   "safe_mode": true,
   "source": {
     "future_posts": "admin/future-posts.json",
     "brand_growth_readout": "data/brand_growth_readout.json",
     "scheduler_endpoint": "https://www.lilyroo.com/api/social/scheduler/dry-run",
-    "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/07bb20303a3421986a1d1273f1ceff1290cc68a2/admin/future-posts.json"
+    "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/96341c8c9cca49d762b0337ee684000aeb9b5add/admin/future-posts.json"
   },
   "summary": {
-    "status": "needs_attention",
+    "status": "ready",
     "next_window_date": "2026-07-04",
     "scheduled_time": "2026-07-04T15:21:00Z",
     "expected_post_count": 2,
@@ -25,8 +25,10 @@
     "unexpected_due_ids": [],
     "blocked_ids": [],
     "link_check_count": 10,
-    "link_ok_count": 8,
-    "link_failed_count": 2,
+    "link_ok_count": 10,
+    "link_failed_count": 0,
+    "link_warning_count": 0,
+    "link_blocking_failed_count": 0,
     "next_proof_due_at": "2026-07-04T16:05:00Z",
     "next_measurement_due_at": "2026-07-05T15:20:00Z",
     "error": ""
@@ -103,11 +105,12 @@
     {
       "label": "FP-BRAND-AM-01-13-X Track",
       "url": "https://youtu.be/XL5VOVxwTw4",
-      "ok": false,
-      "status": 429,
-      "content_type": "",
+      "ok": true,
+      "status": 200,
+      "final_url": "https://www.youtube.com/watch?v=XL5VOVxwTw4&feature=youtu.be",
+      "content_type": "text/html; charset=utf-8",
       "content_length": "",
-      "error": "HTTP 429: Too Many Requests"
+      "error": ""
     },
     {
       "label": "FP-BRAND-AM-01-13-X Playlist",
@@ -152,11 +155,12 @@
     {
       "label": "FP-BRAND-AM-01-13-FACEBOOK Track",
       "url": "https://youtu.be/XL5VOVxwTw4",
-      "ok": false,
-      "status": 429,
-      "content_type": "",
+      "ok": true,
+      "status": 200,
+      "final_url": "https://www.youtube.com/watch?v=XL5VOVxwTw4&feature=youtu.be",
+      "content_type": "text/html; charset=utf-8",
       "content_length": "",
-      "error": "HTTP 429: Too Many Requests"
+      "error": ""
     },
     {
       "label": "FP-BRAND-AM-01-13-FACEBOOK Playlist",
@@ -190,6 +194,7 @@
   "guardrails": [
     "Preflight is read-only; it calls the scheduler dry-run endpoint and HEAD-checks public URLs.",
     "It does not publish, approve, mutate, or import metrics.",
-    "A ready preflight proves only that the next window is executable at the simulated due time."
+    "A ready preflight proves only that the next window is executable at the simulated due time.",
+    "YouTube 429 link checks are non-blocking warnings because GitHub-hosted probes can be rate-limited while the scheduler and Lily Roo-hosted links remain ready."
   ]
 }

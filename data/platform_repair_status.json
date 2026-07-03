@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-03T08:50:30.224231Z",
+  "generated_at": "2026-07-03T08:54:35.007921Z",
   "safe_mode": true,
   "source": {
     "promo_operations_packet": "data/promo_operations_packet.json",
@@ -8,108 +8,14 @@
     "tiktok_setup_preflight": "data/tiktok_setup_preflight.json"
   },
   "summary": {
-    "platform_fix_count": 1,
-    "blocked_count": 1,
-    "preview_command_count": 1,
+    "platform_fix_count": 0,
+    "blocked_count": 0,
+    "preview_command_count": 0,
     "apply_command_count": 0,
     "retry_reset_count": 0,
-    "checklist_item_count": 4,
-    "checklist_blocked_count": 2,
-    "platforms": [
-      "TikTok"
-    ]
+    "checklist_item_count": 0,
+    "checklist_blocked_count": 0,
+    "platforms": []
   },
-  "rows": [
-    {
-      "post_id": "FP-AUTO-264",
-      "platform": "TikTok",
-      "priority": 3,
-      "status": "needs_fix",
-      "reason": "tiktok_setup_preflight_blocked",
-      "attempts": null,
-      "updated_at": "",
-      "error_summary": "",
-      "repair_action": "Local upload-mode OAuth credentials missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Complete TikTok OAuth setup locally, then push upload-mode secrets and refresh Admin.",
-      "repair_lane": "upload",
-      "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
-      "apply_command": "",
-      "blocked_apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
-      "blocked_apply_reasons": [
-        "local_secret_source_missing:TIKTOK_CLIENT_KEY,TIKTOK_CLIENT_SECRET,TIKTOK_REFRESH_TOKEN"
-      ],
-      "retry_reset_verification_command": "",
-      "retry_reset_preview_command": "",
-      "retry_reset_apply_command": "",
-      "retry_reset_note": "",
-      "readiness": {
-        "ready": false,
-        "posting_mode": "direct",
-        "upload_ready": true,
-        "direct_public_ready": false,
-        "access_token_present": true,
-        "refresh_config_present": true,
-        "missing_secrets": [],
-        "public_posting_approved": false,
-        "default_privacy": "PUBLIC_TO_EVERYONE",
-        "brand_content_toggle": false,
-        "brand_organic_toggle": true,
-        "aigc_label_enabled": true
-      },
-      "missing_secrets": [],
-      "credential_missing_secrets": [
-        "TIKTOK_CLIENT_KEY",
-        "TIKTOK_CLIENT_SECRET",
-        "TIKTOK_REFRESH_TOKEN"
-      ],
-      "local_missing_secrets": [
-        "TIKTOK_CLIENT_KEY",
-        "TIKTOK_CLIENT_SECRET",
-        "TIKTOK_REFRESH_TOKEN"
-      ],
-      "local_secret_presence": {
-        "TIKTOK_CLIENT_KEY": false,
-        "TIKTOK_CLIENT_SECRET": false,
-        "TIKTOK_REFRESH_TOKEN": false
-      },
-      "local_secret_ready": false,
-      "local_secret_source": "secrets/social_api.env",
-      "public_posting_approved": false,
-      "preflight_status": "blocked",
-      "preflight_blocked_count": 5,
-      "preflight_command": "python3 scripts/build_tiktok_setup_preflight.py",
-      "preflight_report": "admin/reports/tiktok-setup-preflight.md",
-      "repair_checklist": [
-        {
-          "id": "remote_worker_secrets",
-          "label": "Worker secrets",
-          "status": "pass",
-          "detail": "Worker readiness snapshot reports required secrets present.",
-          "command": ""
-        },
-        {
-          "id": "local_secret_source",
-          "label": "Local secret source",
-          "status": "blocked",
-          "detail": "secrets/social_api.env is missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
-          "command": ""
-        },
-        {
-          "id": "public_posting_approval",
-          "label": "Direct public posting approval",
-          "status": "blocked",
-          "detail": "Direct public posting approval is false; TikTok upload-draft mode can still proceed after credentials.",
-          "command": ""
-        },
-        {
-          "id": "refresh_verification",
-          "label": "Refresh verification",
-          "status": "review",
-          "detail": "After repair, refresh admin so readiness, scheduler, blocker, and backlog state update together.",
-          "command": "python3 scripts/refresh_promo_admin.py"
-        }
-      ],
-      "repair_checklist_blocked_count": 2,
-      "blocked": true
-    }
-  ]
+  "rows": []
 }

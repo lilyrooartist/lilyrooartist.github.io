@@ -360,6 +360,7 @@ def validate_generated_outputs(failures):
         preflight = json.loads(BRAND_GROWTH_PREFLIGHT.read_text(encoding="utf-8"))
         summary = preflight.get("summary") or {}
         expected_count = int(summary.get("expected_post_count") or 0)
+        blocking_link_failures = int(summary.get("link_blocking_failed_count", summary.get("link_failed_count") or 0) or 0)
         if (
             preflight.get("safe_mode") is True
             and summary.get("status") == "ready"
@@ -368,7 +369,7 @@ def validate_generated_outputs(failures):
             and int(summary.get("scheduler_due_count") or 0) == expected_count
             and int(summary.get("scheduler_would_post_count") or 0) == expected_count
             and int(summary.get("scheduler_blocked_count") or 0) == 0
-            and int(summary.get("link_failed_count") or 0) == 0
+            and blocking_link_failures == 0
             and not summary.get("missing_due_ids")
             and not summary.get("unexpected_due_ids")
             and BRAND_GROWTH_PREFLIGHT_REPORT.exists()

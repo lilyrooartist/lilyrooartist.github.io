@@ -123,6 +123,18 @@ def check_url(url: str, label: str, timeout: int = 20) -> dict:
         except urllib.error.HTTPError as exc:
             if method == "HEAD" and exc.code in {403, 405, 501}:
                 continue
+            if exc.code == 429 and ("youtube.com" in url or "youtu.be" in url):
+                return {
+                    "label": label,
+                    "url": url,
+                    "ok": False,
+                    "status": exc.code,
+                    "content_type": "",
+                    "content_length": "",
+                    "error": f"HTTP {exc.code}: {exc.reason}",
+                    "readiness_warning": True,
+                    "warning_reason": "youtube_rate_limited",
+                }
             return {"label": label, "url": url, "ok": False, "status": exc.code, "content_type": "", "content_length": "", "error": f"HTTP {exc.code}: {exc.reason}"}
         except (urllib.error.URLError, TimeoutError) as exc:
             if method == "HEAD":
@@ -183,6 +195,8 @@ def build_payload() -> dict:
     unexpected_due = [post_id for post_id in would_post_ids if post_id not in expected]
     checks = link_checks(window["posts"])
     check_counts = Counter("ok" if item.get("ok") else "failed" for item in checks)
+    warning_count = sum(1 for item in checks if item.get("readiness_warning"))
+    blocking_failed_count = sum(1 for item in checks if not item.get("ok") and not item.get("readiness_warning"))
     ready = (
         bool(expected)
         and status == 200
@@ -190,7 +204,7 @@ def build_payload() -> dict:
         and scheduler_summary.get("blocked_count") == 0
         and not missing_due
         and not unexpected_due
-        and all(item.get("ok") for item in checks)
+        and blocking_failed_count == 0
     )
     payload = {
         "generated_at": iso_z(now),
@@ -218,6 +232,8 @@ def build_payload() -> dict:
             "link_check_count": len(checks),
             "link_ok_count": check_counts.get("ok", 0),
             "link_failed_count": check_counts.get("failed", 0),
+            "link_warning_count": warning_count,
+            "link_blocking_failed_count": blocking_failed_count,
             "next_proof_due_at": (readout.get("summary") or {}).get("next_proof_due_at", ""),
             "next_measurement_due_at": (readout.get("summary") or {}).get("next_measurement_due_at", ""),
             "error": error,
@@ -239,6 +255,7 @@ def build_payload() -> dict:
             "Preflight is read-only; it calls the scheduler dry-run endpoint and HEAD-checks public URLs.",
             "It does not publish, approve, mutate, or import metrics.",
             "A ready preflight proves only that the next window is executable at the simulated due time.",
+            "YouTube 429 link checks are non-blocking warnings because GitHub-hosted probes can be rate-limited while the scheduler and Lily Roo-hosted links remain ready.",
         ],
     }
     return payload
@@ -256,7 +273,7 @@ def build_markdown(payload: dict) -> str:
         f"- Next window: **{summary.get('next_window_date') or 'n/a'}** at `{summary.get('scheduled_time') or 'n/a'}`",
         f"- Expected posts: **{summary.get('expected_post_count', 0)}**",
         f"- Scheduler: HTTP **{summary.get('scheduler_http_status')}**, auth `{summary.get('scheduler_auth_method')}`, due **{summary.get('scheduler_due_count')}**, would post **{summary.get('scheduler_would_post_count')}**, blocked **{summary.get('scheduler_blocked_count')}**",
-        f"- Link checks: **{summary.get('link_ok_count')} ok**, **{summary.get('link_failed_count')} failed**",
+        f"- Link checks: **{summary.get('link_ok_count')} ok**, **{summary.get('link_failed_count')} failed**, **{summary.get('link_warning_count', 0)} warning**, **{summary.get('link_blocking_failed_count', summary.get('link_failed_count', 0))} blocking failed**",
         f"- Next proof due: `{summary.get('next_proof_due_at') or 'n/a'}`",
         f"- First measurement due: `{summary.get('next_measurement_due_at') or 'n/a'}`",
         "",
@@ -278,7 +295,7 @@ def build_markdown(payload: dict) -> str:
             lines.append(f"- `{post_id}`")
     lines.extend(["", "## Link Checks"])
     for item in payload.get("link_checks") or []:
-        marker = "ok" if item.get("ok") else "failed"
+        marker = "ok" if item.get("ok") else ("warning" if item.get("readiness_warning") else "failed")
         detail = item.get("content_type") or item.get("error") or ""
         lines.append(f"- **{marker}** `{item.get('label')}` {item.get('status')} {detail}")
     lines.extend(["", "## Guardrails"])

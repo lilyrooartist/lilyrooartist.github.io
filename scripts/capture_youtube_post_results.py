@@ -252,6 +252,12 @@ def build_missing_secret_payload(rows: list[dict], missing: list[str]) -> dict:
         },
         "rows": captured,
         "redaction": "Secret names are listed for operator diagnostics; secret values are never written here.",
+        "guardrails": [
+            "Metrics come from public YouTube video statistics for already-published Lily Roo videos when OAuth credentials are present.",
+            "This skipped report does not contain OAuth credentials.",
+            "Only views, likes, and comments are imported; shares, saves, and subscriber deltas stay blank unless another evidence source supplies them.",
+            "Applying results goes through scripts/update_experiment_results.py so Published_Log.csv row IDs are verified.",
+        ],
     }
 
 
