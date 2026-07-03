@@ -133,6 +133,8 @@ EXPERIMENT_RESULT_CLIPBOARD_REPORT = ROOT / "admin" / "reports" / "experiment-re
 BRAND_GROWTH_PREFLIGHT_REPORT = ROOT / "admin" / "reports" / "brand-growth-preflight.md"
 INDEX = CONTENT / "content_index.json"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
+LYRICS_DIR = ROOT / "lyrics"
+LYRICS_METADATA_SCRIPT = ROOT / "scripts" / "enhance_lyrics_metadata.py"
 
 
 def read_csv(path):
@@ -4549,6 +4551,80 @@ def validate_admin_execution_feedback(failures):
         ok("admin platform snapshot separates metrics-only platforms from executor blocks")
 
 
+def json_ld_payloads(text, path, failures):
+    payloads = []
+    for raw in re.findall(r'<script type="application/ld\+json">\s*(.*?)\s*</script>', text, re.S):
+        try:
+            payloads.append(json.loads(raw))
+        except json.JSONDecodeError as exc:
+            fail(f"{path} has invalid JSON-LD: {exc}", failures)
+    return payloads
+
+
+def validate_lyrics_discovery_metadata(failures):
+    if not LYRICS_DIR.exists():
+        fail("lyrics directory is missing", failures)
+        return
+    pages = sorted(LYRICS_DIR.glob("*.html"))
+    song_pages = [path for path in pages if path.name != "index.html"]
+    if not pages:
+        fail("lyrics directory has no HTML pages", failures)
+        return
+    script_text = LYRICS_METADATA_SCRIPT.read_text(encoding="utf-8") if LYRICS_METADATA_SCRIPT.exists() else ""
+    script_tokens = [
+        "lyrics-discovery-meta:start",
+        "MusicComposition",
+        "CollectionPage",
+        "og:image",
+        "TRACK_IMAGES",
+    ]
+    missing_tokens = [token for token in script_tokens if token not in script_text]
+    if missing_tokens:
+        fail("lyric metadata generator missing " + ", ".join(missing_tokens), failures)
+    else:
+        ok("lyric metadata generator carries discovery schema guards")
+    metadata_failures_before = len(failures)
+    for path in pages:
+        rel = path.relative_to(ROOT)
+        text = path.read_text(encoding="utf-8")
+        expected_canonical = "https://www.lilyroo.com/lyrics/"
+        if path.name != "index.html":
+            expected_canonical = f"https://www.lilyroo.com/lyrics/{path.name}"
+        required_tokens = [
+            "lyrics-discovery-meta:start",
+            "lyrics-discovery-meta:end",
+            f'<link rel="canonical" href="{expected_canonical}" />',
+            'property="og:image"',
+            'name="twitter:card" content="summary_large_image"',
+        ]
+        missing = [token for token in required_tokens if token not in text]
+        if missing:
+            fail(f"{rel} missing lyric discovery metadata: {', '.join(missing)}", failures)
+        payloads = json_ld_payloads(text, rel, failures)
+        if path.name == "index.html":
+            collection = next((payload for payload in payloads if payload.get("@type") == "CollectionPage"), None)
+            item_list = (collection or {}).get("mainEntity") or {}
+            item_count = item_list.get("numberOfItems")
+            item_elements = item_list.get("itemListElement") or []
+            if not collection:
+                fail(f"{rel} missing CollectionPage JSON-LD", failures)
+            elif item_count != len(song_pages) or len(item_elements) != len(song_pages):
+                fail(f"{rel} JSON-LD item count does not match {len(song_pages)} lyric song pages", failures)
+        else:
+            composition = next((payload for payload in payloads if payload.get("@type") == "MusicComposition"), None)
+            artist = (composition or {}).get("byArtist") or {}
+            if not composition:
+                fail(f"{rel} missing MusicComposition JSON-LD", failures)
+            elif artist.get("name") != "Lily Roo":
+                fail(f"{rel} MusicComposition JSON-LD missing Lily Roo artist", failures)
+            elif composition.get("mainEntityOfPage") != expected_canonical:
+                fail(f"{rel} MusicComposition JSON-LD canonical mismatch", failures)
+            elif not str(composition.get("image") or "").startswith("https://www.lilyroo.com/"):
+                fail(f"{rel} MusicComposition JSON-LD missing absolute image", failures)
+    if len(failures) == metadata_failures_before:
+        ok(f"lyric discovery metadata covers {len(song_pages)} song pages and the lyric index")
+
+
 def validate_twelve_dollars_remasters(failures):
     if not TWELVE_DOLLARS_REMASTER.exists() or not TWELVE_DOLLARS_PLAYLIST.exists():
         fail("Twelve Dollars remaster manifest or playlist snapshot missing", failures)
@@ -4599,6 +4675,7 @@ def main():
     validate_generated_outputs(failures)
     validate_report(failures)
     validate_admin_execution_feedback(failures)
+    validate_lyrics_discovery_metadata(failures)
     validate_twelve_dollars_remasters(failures)
     if failures:
         print(f"\n{len(failures)} validation issue(s)")
