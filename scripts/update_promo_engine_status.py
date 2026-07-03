@@ -1450,16 +1450,20 @@ def workflow_status_state(workflow_status: dict) -> dict:
 
 
 GENERATED_REFRESH_PATHS = {
+    "admin/future-posts.json",
     "admin/index.html",
     "data/approval_runway.json",
     "data/backlog_reschedule_preview.json",
     "data/brand_growth_preflight.json",
+    "data/brand_growth_readout.json",
     "data/executor_readiness_snapshot.json",
     "data/experiment_publish_runway.json",
     "data/experiment_result_clipboard.json",
     "data/experiment_result_collection_packet.json",
     "data/experiment_result_entry_template.csv",
     "data/experiment_result_entry_wide_template.csv",
+    "data/expired_scheduled_posts.csv",
+    "data/facebook_post_results.json",
     "data/human_handoff_packet.json",
     "data/human_handoff_resolution_preview.json",
     "data/human_handoff_resolution_worksheet.csv",
@@ -1490,12 +1494,15 @@ GENERATED_REFRESH_PATHS = {
     "data/social_execution_snapshot.json",
     "data/social_scheduler_dry_run.json",
     "data/social_blocker_input_status.json",
+    "data/stale_scheduled_post_expiration.json",
     "data/story_throughput_tracking.json",
     "data/store_verification_history.json",
     "data/store_verification_run.json",
     "data/subscriber_cta_audit.json",
     "data/tiktok_repair_runbook.json",
     "data/tiktok_setup_preflight.json",
+    "data/x_post_results.json",
+    "data/youtube_post_results.json",
 }
 
 GENERATED_REFRESH_PREFIXES = (
