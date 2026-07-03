@@ -1,6 +1,6 @@
 # Experiment Publish Runway - Lily Roo
 
-Generated: 2026-07-03T07:24:44.028820Z
+Generated: 2026-07-03T07:28:22.499272Z
 
 ## Summary
 - Manual rows ready for review: **0**
@@ -8,7 +8,7 @@ Generated: 2026-07-03T07:24:44.028820Z
 - Public URLs needed: **0**
 - Pending result fields: **90**
 - Winner-ready formats: **1 / 3**
-- Blocked platform rows: **0**
+- Blocked platform rows: **1**
 
 ## Next Publish Action
 - Collect experiment results when public URLs and measurement values are available.
@@ -32,4 +32,4 @@ Generated: 2026-07-03T07:24:44.028820Z
   - Guardrail: Fill only visible platform analytics values with evidence notes.
 
 ## Blocked Platform Rows
-- None.
+- `FP-AUTO-264` TikTok - tiktok_setup_preflight_blocked
