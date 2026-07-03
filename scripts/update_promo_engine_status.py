@@ -1639,41 +1639,63 @@ def social_execution_state(snapshot, scheduled_rows=None):
     summary = summary or {}
     scheduled = queue_index(scheduled_rows or [])
     attention = summary.get("latest_attention") or []
-    categorized_attention_raw = dedupe_execution_rows(
-        (summary.get("approval_needed") or [])
-        + (summary.get("platform_fix_needed") or [])
-        + (summary.get("manual_handoff_needed") or [])
-    )
-    source_rows_raw = categorized_attention_raw or attention
-    source_rows, superseded_rows = current_execution_rows(source_rows_raw, scheduled)
+    raw_approval, superseded_approval = current_execution_rows(summary.get("approval_needed") or [], scheduled)
+    raw_platform, superseded_platform = current_execution_rows(summary.get("platform_fix_needed") or [], scheduled)
+    raw_manual, superseded_manual = current_execution_rows(summary.get("manual_handoff_needed") or [], scheduled)
     current_attention, superseded_attention = current_execution_rows(attention, scheduled)
-    superseded_rows = dedupe_execution_rows(superseded_rows + superseded_attention)
+    categorized_rows_available = bool(raw_approval or raw_platform or raw_manual)
+    source_rows = dedupe_execution_rows(raw_approval + raw_platform + raw_manual) if categorized_rows_available else current_attention
+    superseded_rows = dedupe_execution_rows(
+        superseded_approval + superseded_platform + superseded_manual + superseded_attention
+    )
     approval_needed = []
     platform_fix_needed = []
     manual_handoff_needed = []
-    for item in source_rows:
+
+    def enrich_item(item: dict) -> dict:
         queue_row = scheduled.get(item.get("post_id"), {})
-        enriched = {
+        return {
             **item,
             "song": queue_row.get("song", ""),
             "approved": queue_row.get("approved", ""),
         }
-        if item.get("reason") == "not_approved" or queue_row.get("approved") == "no":
+
+    if categorized_rows_available:
+        for item in raw_approval:
+            enriched = enrich_item(item)
             enriched["repair_action"] = "Review this queued post, set approved=yes only if it should publish, then refresh the admin queue."
             enriched["repair_command"] = f"python3 scripts/update_scheduled_post_approval.py {shell_quote(item.get('post_id', ''))} --refresh-admin"
             approval_needed.append(enriched)
-        elif (
-            item.get("reason") == "manual_only"
-            or queue_row.get("execution_mode") == "manual"
-            or queue_row.get("post_type") == "community"
-        ):
-            enriched["repair_action"] = "Post this row through the manual posting clipboard, then log the public URL."
-            enriched["repair_command"] = "Open admin/reports/manual-posting-clipboard.md"
-            manual_handoff_needed.append(enriched)
-        else:
+        for item in raw_platform:
+            enriched = enrich_item(item)
             guidance = social_platform_repair_guidance(item)
             enriched.update(guidance)
             platform_fix_needed.append(enriched)
+        for item in raw_manual:
+            enriched = enrich_item(item)
+            enriched["repair_action"] = "Post this row through the manual posting clipboard, then log the public URL."
+            enriched["repair_command"] = "Open admin/reports/manual-posting-clipboard.md"
+            manual_handoff_needed.append(enriched)
+    else:
+        for item in source_rows:
+            queue_row = scheduled.get(item.get("post_id"), {})
+            enriched = enrich_item(item)
+            if item.get("reason") == "not_approved" or queue_row.get("approved") == "no":
+                enriched["repair_action"] = "Review this queued post, set approved=yes only if it should publish, then refresh the admin queue."
+                enriched["repair_command"] = f"python3 scripts/update_scheduled_post_approval.py {shell_quote(item.get('post_id', ''))} --refresh-admin"
+                approval_needed.append(enriched)
+            elif (
+                item.get("reason") == "manual_only"
+                or queue_row.get("execution_mode") == "manual"
+                or queue_row.get("post_type") == "community"
+            ):
+                enriched["repair_action"] = "Post this row through the manual posting clipboard, then log the public URL."
+                enriched["repair_command"] = "Open admin/reports/manual-posting-clipboard.md"
+                manual_handoff_needed.append(enriched)
+            else:
+                guidance = social_platform_repair_guidance(item)
+                enriched.update(guidance)
+                platform_fix_needed.append(enriched)
     return {
         "ok": bool(snapshot.get("ok")) if isinstance(snapshot, dict) else False,
         "updated_at": snapshot.get("updated_at", "") if isinstance(snapshot, dict) else "",
@@ -2397,24 +2419,28 @@ def store_verification_next_action(state: dict) -> str:
     found = int_metric(state.get("found_in_snapshot_count"))
     pending = int_metric(state.get("pending_count"))
     command = state.get("refresh_command") or "python3 scripts/verify_pending_store_links.py --refresh-admin"
-    if found:
-        return (
-            f"Apply verified store URLs: {found} music site snapshot(s) found public URLs; "
-            "copy them into data/distrokid_release_status.json and refresh Admin."
-        )
     if checked:
         timed_out = int_metric(state.get("last_run_timeout_count"))
         timeout_note = f" Last run had {timed_out} timeout(s)." if timed_out else ""
+        found_note = (
+            f" {found} verified snapshot(s) are ready to copy into data/distrokid_release_status.json."
+            if found else ""
+        )
         due_count = int_metric(state.get("recheck_due_count"))
         next_recheck = state.get("next_recheck_at") or ""
         if not due_count and next_recheck:
             return (
                 f"Re-check checked-pending store links: {checked} music site snapshot(s) still have no public URL; "
-                f"next recommended re-check after {next_recheck}. Run {command} then."
+                f"next recommended re-check after {next_recheck}. Run {command} then.{found_note}"
             )
         return (
             f"Re-check checked-pending store links: {checked} music site snapshot(s) still have no public URL; "
-            f"{due_count or checked} due for re-check now; run {command}.{timeout_note}"
+            f"{due_count or checked} due for re-check now; run {command}.{timeout_note}{found_note}"
+        )
+    if found:
+        return (
+            f"Apply verified store URLs: {found} music site snapshot(s) found public URLs; "
+            "copy them into data/distrokid_release_status.json and refresh Admin."
         )
     if pending:
         return (

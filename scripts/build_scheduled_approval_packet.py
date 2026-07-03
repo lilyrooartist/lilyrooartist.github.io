@@ -6,7 +6,7 @@ import json
 import re
 from datetime import datetime, timezone
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import parse_qs, urlencode, urlparse
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -20,6 +20,9 @@ ALIGNMENT_AUDIT = ROOT / "data" / "first_single_alignment_audit.json"
 APPLE_MUSIC_SNAPSHOT = ROOT / "data" / "apple_music_release_snapshot.json"
 YOUTUBE_TITLE_TRACK = ROOT / "data" / "youtube_title_track_snapshot.json"
 YOUTUBE_MUSIC_SNAPSHOT = ROOT / "data" / "youtube_music_release_snapshot.json"
+YOUTUBE_PUBLIC_SNAPSHOT = ROOT / "data" / "youtube_public_snapshot.json"
+TWELVE_DOLLARS_PLAYLIST = ROOT / "data" / "youtube_twelve_dollars_playlist.json"
+TWELVE_DOLLARS_REMASTER = ROOT / "data" / "youtube_twelve_dollars_remaster_manifest.json"
 OUT = ROOT / "data" / "scheduled_approval_packet.json"
 REPORT = ROOT / "admin" / "reports" / "scheduled-approval-packet.md"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
@@ -393,17 +396,20 @@ def approval_review_runbook(checked_rows: list[dict], blocked_rows: list[dict], 
             "evidence": "Admin should show fewer approval blockers and fresh execution state.",
             "applies_to_ids": ready_ids,
         },
-    ]
-    if manual_rows:
-        steps.append({
+        {
             "order": 5,
-            "title": "Post and log manual rows",
-            "owner": "tod",
-            "status": "required_after_apply",
-            "command": "python3 scripts/log_manual_distribution.py --dry-run",
-            "evidence": "Manual YouTube Community rows need real public URLs before logging.",
+            "title": "Confirm manual-distribution lane",
+            "owner": "codex",
+            "status": "clear" if not manual_rows else "required_after_apply",
+            "command": "python3 scripts/build_manual_distribution_packet.py",
+            "evidence": (
+                "No manual-distribution rows are active for this checked batch."
+                if not manual_rows
+                else "Manual-dispatch rows need a real public URL before logging."
+            ),
             "applies_to_ids": [row.get("id") for row in manual_rows if row.get("id")],
-        })
+        },
+    ]
     return {
         "status": "ready_for_review" if ready_ids else "blocked",
         "ready_ids": ready_ids,
@@ -436,6 +442,13 @@ def canonical_url(value: str) -> str:
     parsed = urlparse(value or "")
     if not parsed.scheme or not parsed.netloc:
         return value or ""
+    host = parsed.netloc.lower()
+    query = parse_qs(parsed.query)
+    if host in {"www.youtube.com", "youtube.com", "music.youtube.com"}:
+        if parsed.path == "/watch" and query.get("v"):
+            return parsed._replace(query=urlencode({"v": query["v"][0]}), fragment="").geturl().rstrip("/")
+        if parsed.path == "/playlist" and query.get("list"):
+            return parsed._replace(query=urlencode({"list": query["list"][0]}), fragment="").geturl().rstrip("/")
     return parsed._replace(query="", fragment="").geturl().rstrip("/")
 
 
@@ -454,6 +467,32 @@ def add_destination_evidence(
     evidence.setdefault(key, [])
     if item not in evidence[key]:
         evidence[key].append(item)
+
+
+def add_youtube_video_evidence(
+    evidence: dict[str, list[dict]],
+    video_id: str,
+    *,
+    source: str,
+    label: str,
+    status: str = "known_youtube_video",
+) -> None:
+    if not video_id:
+        return
+    add_destination_evidence(
+        evidence,
+        f"https://youtu.be/{video_id}",
+        source=source,
+        label=label,
+        status=status,
+    )
+    add_destination_evidence(
+        evidence,
+        f"https://www.youtube.com/watch?v={video_id}",
+        source=source,
+        label=label,
+        status=status,
+    )
 
 
 def destination_evidence_index() -> dict[str, list[dict]]:
@@ -490,17 +529,25 @@ def destination_evidence_index() -> dict[str, list[dict]]:
     )
 
     youtube = read_json(YOUTUBE_TITLE_TRACK, {})
+    youtube_source = str(YOUTUBE_TITLE_TRACK.relative_to(ROOT))
     add_destination_evidence(
         evidence,
         youtube.get("url") or "",
-        source=str(YOUTUBE_TITLE_TRACK.relative_to(ROOT)),
+        source=youtube_source,
+        label=f"YouTube title-track snapshot: {youtube.get('public_title') or 'title track'}",
+        status="known_release_snapshot",
+    )
+    add_youtube_video_evidence(
+        evidence,
+        youtube.get("video_id") or "",
+        source=youtube_source,
         label=f"YouTube title-track snapshot: {youtube.get('public_title') or 'title track'}",
         status="known_release_snapshot",
     )
     add_destination_evidence(
         evidence,
         youtube.get("author_url") or "",
-        source=str(YOUTUBE_TITLE_TRACK.relative_to(ROOT)),
+        source=youtube_source,
         label=f"YouTube artist channel snapshot: {youtube.get('author_name') or 'artist channel'}",
         status="known_artist_profile",
     )
@@ -521,6 +568,71 @@ def destination_evidence_index() -> dict[str, list[dict]]:
         label=youtube_music_label,
         status="known_release_snapshot",
     )
+
+    public = read_json(YOUTUBE_PUBLIC_SNAPSHOT, {})
+    public_source = str(YOUTUBE_PUBLIC_SNAPSHOT.relative_to(ROOT))
+    for item in public.get("videos") or []:
+        video_id = item.get("video_id") or item.get("id") or ""
+        label = f"YouTube public snapshot: {item.get('title') or video_id}"
+        add_destination_evidence(
+            evidence,
+            item.get("url") or item.get("watch_url") or item.get("video_url") or "",
+            source=public_source,
+            label=label,
+            status="known_public_video",
+        )
+        add_youtube_video_evidence(
+            evidence,
+            video_id,
+            source=public_source,
+            label=label,
+            status="known_public_video",
+        )
+
+    playlist = read_json(TWELVE_DOLLARS_PLAYLIST, {})
+    playlist_source = str(TWELVE_DOLLARS_PLAYLIST.relative_to(ROOT))
+    add_destination_evidence(
+        evidence,
+        playlist.get("playlist_url") or "",
+        source=playlist_source,
+        label=f"YouTube playlist snapshot: {playlist.get('playlist_title') or 'playlist'}",
+        status="known_public_playlist",
+    )
+    for item in playlist.get("tracks") or []:
+        label = f"YouTube playlist track {item.get('track')}: {item.get('title') or item.get('video_id')}"
+        add_destination_evidence(
+            evidence,
+            item.get("url") or "",
+            source=playlist_source,
+            label=label,
+            status="known_playlist_track",
+        )
+        add_youtube_video_evidence(
+            evidence,
+            item.get("video_id") or "",
+            source=playlist_source,
+            label=label,
+            status="known_playlist_track",
+        )
+
+    remaster = read_json(TWELVE_DOLLARS_REMASTER, {})
+    remaster_source = str(TWELVE_DOLLARS_REMASTER.relative_to(ROOT))
+    for item in remaster.get("tracks") or []:
+        label = f"Twelve Dollars remaster manifest: {item.get('title') or item.get('new_video_id')}"
+        add_destination_evidence(
+            evidence,
+            item.get("new_url") or "",
+            source=remaster_source,
+            label=label,
+            status="known_remastered_video",
+        )
+        add_youtube_video_evidence(
+            evidence,
+            item.get("new_video_id") or "",
+            source=remaster_source,
+            label=label,
+            status="known_remastered_video",
+        )
 
     return evidence
 

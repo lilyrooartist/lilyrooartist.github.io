@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-03T05:44:25.459300Z",
+  "generated_at": "2026-07-03T06:08:13.069010Z",
   "safe_mode": true,
   "source": {
     "local_secret_source": "secrets/social_api.env",
@@ -24,39 +24,40 @@
     "local_posting_helper_uses_refresh_token": true,
     "first_tiktok_asset": {
       "post_id": "FP-AUTO-264",
-      "status": "blocked",
-      "ready_for_upload_mode": false,
+      "status": "ready_for_upload_mode",
+      "ready_for_upload_mode": true,
       "platform": "TikTok",
       "song": "I Learned It All in Fifteen Seconds",
       "post_type": "video",
       "approved": false,
+      "queue_approval_status": "approval_pending",
+      "approval_required_before_scheduler_retry": true,
       "clip_url": "https://www.lilyroo.com/assets/media/01_i_learned_it_all_60s_tiktok.mp4?fresh=6cb3941d2",
       "media_ready": true,
       "text_ready": true,
       "media_key": "i-learned-60s",
       "dry_run_command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run",
-      "blockers": [
-        "row_not_approved"
-      ],
+      "blockers": [],
       "credential_blockers": [
         "TIKTOK_CLIENT_KEY",
         "TIKTOK_CLIENT_SECRET",
         "TIKTOK_REFRESH_TOKEN"
       ],
-      "next_after_credentials": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run"
+      "next_after_credentials": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run",
+      "approval_preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-264 --dry-run"
     },
     "local_post_preview_command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --dry-run",
     "local_upload_preview_command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run",
     "earliest_tiktok_api_path": "video.upload inbox draft; final public URL still requires human publish and URL logging.",
     "upload_mode_lane": {
-      "status": "asset_blocked",
+      "status": "ready_after_credentials",
       "posting_mode": "upload",
       "oauth_scopes": [
         "user.info.basic",
         "video.upload"
       ],
       "first_post_id": "FP-AUTO-264",
-      "first_asset_ready": false,
+      "first_asset_ready": true,
       "credential_names_needed": [
         "TIKTOK_CLIENT_KEY",
         "TIKTOK_CLIENT_SECRET",
@@ -216,14 +217,14 @@
       "python3 scripts/validate_content_system.py"
     ],
     "upload_mode_lane": {
-      "status": "asset_blocked",
+      "status": "ready_after_credentials",
       "posting_mode": "upload",
       "oauth_scopes": [
         "user.info.basic",
         "video.upload"
       ],
       "first_post_id": "FP-AUTO-264",
-      "first_asset_ready": false,
+      "first_asset_ready": true,
       "credential_names_needed": [
         "TIKTOK_CLIENT_KEY",
         "TIKTOK_CLIENT_SECRET",
@@ -306,14 +307,14 @@
       }
     ],
     "immediate_upload_path": {
-      "status": "asset_blocked",
+      "status": "ready_after_credentials",
       "posting_mode": "upload",
       "oauth_scopes": [
         "user.info.basic",
         "video.upload"
       ],
       "first_post_id": "FP-AUTO-264",
-      "first_asset_ready": false,
+      "first_asset_ready": true,
       "credential_names_needed": [
         "TIKTOK_CLIENT_KEY",
         "TIKTOK_CLIENT_SECRET",

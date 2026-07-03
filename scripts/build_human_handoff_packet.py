@@ -228,9 +228,18 @@ def platform_setup_tasks(packet: dict, tiktok_preflight: dict) -> list[dict]:
     preflight_summary = tiktok_preflight.get("summary") or {}
     for row in packet.get("rows") or []:
         is_tiktok = str(row.get("platform") or "").lower() == "tiktok"
+        missing_secrets = list(dict.fromkeys(
+            (row.get("missing_secrets") or []) + (row.get("local_missing_secrets") or [])
+        ))
+        preview_command = row.get("preview_command") or ""
+        if row.get("local_missing_secrets"):
+            preview_command = (
+                "python3 scripts/push_social_worker_secrets.py --dry-run "
+                + " ".join(row.get("local_missing_secrets") or [])
+            )
         impact = {
             "platform": row.get("platform") or "",
-            "missing_secrets": row.get("missing_secrets") or [],
+            "missing_secrets": missing_secrets,
             "local_missing_secrets": row.get("local_missing_secrets") or [],
             "public_posting_approved": row.get("public_posting_approved"),
             "repair_checklist_blocked_count": row.get("repair_checklist_blocked_count") or 0,
@@ -253,11 +262,42 @@ def platform_setup_tasks(packet: dict, tiktok_preflight: dict) -> list[dict]:
             "high",
             row.get("status") or "blocked",
             row.get("repair_action") or row.get("error_summary") or "Complete platform repair, then refresh Admin.",
-            row.get("preview_command") or "",
+            preview_command,
             row.get("apply_command") or "",
             str(PLATFORM_REPAIR.relative_to(ROOT)),
             impact,
             guardrail="Run the TikTok preflight before pushing secrets; push upload-mode secrets only after local OAuth setup is complete. Keep direct public posting blocked until approval is confirmed." if is_tiktok else "Push worker secrets only after local platform setup is complete.",
+        ))
+    if (
+        not any(str((task.get("impact") or {}).get("platform") or "").lower() == "tiktok" for task in tasks)
+        and (preflight_summary.get("status") or "") != "clear"
+    ):
+        first_asset = preflight_summary.get("first_tiktok_asset") or {}
+        tasks.append(command_task(
+            "platform-setup-tiktok-preflight",
+            "Review TikTok upload-mode preflight",
+            "Platform setup",
+            "tod",
+            "high",
+            preflight_summary.get("status") or "blocked",
+            "Review the TikTok upload-mode/direct-public split before treating TikTok as ready.",
+            preflight_summary.get("local_upload_preview_command") or preflight_summary.get("local_post_preview_command") or "",
+            "",
+            str(TIKTOK_PREFLIGHT.relative_to(ROOT)),
+            {
+                "platform": "TikTok",
+                "missing_secrets": first_asset.get("credential_blockers") or [],
+                "local_missing_secrets": preflight_summary.get("local_missing_secrets") or [],
+                "public_posting_approved": preflight_summary.get("public_posting_approved"),
+                "preflight_status": preflight_summary.get("status") or "",
+                "preflight_blocked_count": preflight_summary.get("blocked_count") or 0,
+                "ready_to_push_worker_secrets": preflight_summary.get("ready_to_push_worker_secrets"),
+                "ready_to_upload_drafts": preflight_summary.get("ready_to_upload_drafts"),
+                "ready_to_post_publicly": preflight_summary.get("ready_to_post_publicly"),
+                "preflight_report": str((ROOT / "admin" / "reports" / "tiktok-setup-preflight.md").relative_to(ROOT)),
+                "preflight_command": "python3 scripts/build_tiktok_setup_preflight.py",
+            },
+            guardrail="Keep TikTok upload-draft mode separate from direct public posting; do not require manual-only community posting.",
         ))
     return tasks
 
@@ -364,7 +404,12 @@ def task_input_needed(task: dict) -> tuple[str, str]:
             )
         return (
             "local_secret_presence_and_public_posting_approval",
-            f"populate local env from data/tiktok_secret_handoff_template.env for names: {secret_names}" if secret_names else "complete platform setup preflight",
+            (
+                f"populate local env from data/tiktok_secret_handoff_template.env for names: {secret_names}; "
+                "public posting approval is only needed for direct public posting"
+                if secret_names
+                else "complete platform setup preflight; public posting approval is only needed for direct public posting"
+            ),
         )
     if phase == "Backlog recovery":
         return (
@@ -422,7 +467,11 @@ def build_action_docket(tasks: list[dict], blocker_summary: dict, approval_runwa
     approval = first_task(tasks, "Approval")
     metric_field_count = sum(int((task.get("impact") or {}).get("field_count") or 0) for task in manual_metrics)
     manual_post_count = len(manual_distribution)
-    blocked_platform_count = len([task for task in platform_setup if task.get("status") == "blocked"])
+    blocked_platform_count = len([
+        task
+        for task in platform_setup
+        if task.get("status") in {"blocked", "failed"}
+    ])
     manual_preview_command = manual_approval_docket.get("preview_command") or (manual_distribution[0].get("preview_command") if manual_distribution else "")
     manual_apply_command = manual_approval_docket.get("apply_command") or (manual_distribution[0].get("apply_command") if manual_distribution else "")
     manual_label = "Review and post manual distribution rows"

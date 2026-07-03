@@ -182,6 +182,8 @@ def pending_store_actions(status):
         title = release.get("title") or "Untitled release"
         for item in release.get("store_verification_commands") or []:
             latest = item.get("latest_snapshot") or {}
+            if latest.get("ok"):
+                continue
             checked_at = latest.get("checked_at") or latest.get("updated_at") or latest.get("generated_at") or latest.get("captured_at") or ""
             label_prefix = "Re-check" if latest else "Verify"
             note = item.get("note") or ""

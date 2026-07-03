@@ -1,13 +1,13 @@
 # Promo Unlock Sequence - Lily Roo
 
-Generated: 2026-07-03T05:44:25.762017Z
+Generated: 2026-07-03T06:08:13.457843Z
 
 ## Summary
-- Steps: **4**
-- Ready for human review: **0**
+- Steps: **5**
+- Ready for human review: **1**
 - Blocked or warning: **2**
 - Projected resolution units across sequence: **6**
-- Current step: `unlock-manual-metrics` (`blocked_until_input`)
+- Current step: `unlock-tiktok-platform-repair` (`ready_for_human_review`)
 - Open blockers still tracked: **12**
 
 ## Sequence
@@ -15,17 +15,25 @@ Generated: 2026-07-03T05:44:25.762017Z
    - State: `blocked`; owner: `tod`
    - Reason: Blocked by: FP-AUTO-259, FP-AUTO-267, FP-AUTO-272, FP-AUTO-277, FP-AUTO-279, FP-AUTO-282, FP-AUTO-284.
    - Unlocks: Instagram executor row can become publish-eligible after approval.
-2. **Repair TikTok executor** - `unlock-tiktok-platform-repair`
-   - State: `ready`; owner: `tod`
-   - Reason: ready
+2. **Manual distribution lane clear** - `unlock-manual-distribution`
+   - State: `clear`; owner: `tod`
+   - Reason: No action is needed for this gate.
+   - Unlocks: No manual-only posting lane is active; growth work stays in automated or review-only surfaces.
+   - Guardrail: Manual-only approvals do not auto-post; posting and public URL logging remain separate after review.
+3. **Repair TikTok executor** - `unlock-tiktok-platform-repair`
+   - State: `ready_for_human_review`; owner: `tod`
+   - Reason: Preview ran cleanly; this gate is waiting for human review or external completion.
    - Unlocks: Held TikTok approval rows can pass platform-readiness review.; Approved TikTok backlog can become safe to reschedule into upload-draft creation.
-3. **Reschedule approved past-due backlog** - `unlock-backlog-reschedule`
+   - preview (preview-safe): `python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run`
+   - Completion evidence: data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_upload_drafts before TikTok upload-mode backlog work is allowed.
+   - Guardrail: Keep TikTok upload-draft mode separate from direct public posting; do not require manual-only community posting.
+4. **Reschedule approved past-due backlog** - `unlock-backlog-reschedule`
    - State: `clear`; owner: `tod`
    - Reason: No action is needed for this gate.
    - Unlocks: Approved past-due queue rows get a fresh schedule after executor blockers clear.
    - preview (preview-safe): `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00-04:00' --spacing-hours 24`
    - apply_after_review (after-review only): `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin`
-4. **Fill manual metric worksheet** - `unlock-manual-metrics`
+5. **Fill manual metric worksheet** - `unlock-manual-metrics`
    - State: `blocked_until_input`; owner: `tod`
    - Reason: private_metric_values
    - Unlocks: Admin health and weekly reporting can use fresh cross-platform metrics.; Manual metric blockers clear once worksheet values are imported.

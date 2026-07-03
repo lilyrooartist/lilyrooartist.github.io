@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-03T05:44:26.105056Z",
+  "generated_at": "2026-07-03T06:08:13.781551Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -58,6 +58,42 @@
     }
   ],
   "steps": [
+    {
+      "id": "review_manual_youtube_community",
+      "status": "clear",
+      "post_ids": [],
+      "preview_command": "",
+      "apply_after_review_command": "",
+      "guardrail": "Manual Community approval lane is inactive unless post_ids are present; no manual posting is requested from a clear step.",
+      "completion_evidence": "data/manual_distribution_packet.json should stay at zero manual review rows while this lane is clear."
+    },
+    {
+      "id": "queue_approved_manual_rows",
+      "status": "clear",
+      "post_ids": [],
+      "preview_command": "",
+      "apply_after_review_command": "",
+      "guardrail": "Queue nothing while the manual lane is clear; apply only after matching rows have approved=yes.",
+      "completion_evidence": "data/scheduled_posts.csv contains no active manual Community experiment rows while this lane is clear."
+    },
+    {
+      "id": "post_manual_youtube_community",
+      "status": "clear",
+      "post_ids": [],
+      "surface": "YouTube Studio Community",
+      "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
+      "guardrail": "No manual Community posting is requested when post_ids is empty.",
+      "completion_evidence": "A real public URL is required only if a reviewed manual row becomes active."
+    },
+    {
+      "id": "log_public_urls",
+      "status": "clear",
+      "post_ids": [],
+      "preview_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv",
+      "apply_after_review_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --apply --refresh-admin",
+      "guardrail": "Every CSV row must contain a real public_url before apply; clear lane means no URL logging is pending.",
+      "completion_evidence": "admin/content/Published_Log.csv remains the source of truth for real public URLs."
+    },
     {
       "id": "collect_results",
       "status": "waiting_for_measurement_window",

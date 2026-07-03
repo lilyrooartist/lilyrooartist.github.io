@@ -1,6 +1,6 @@
 # Promotion Blocker Ledger - Lily Roo
 
-Generated: 2026-07-03T05:44:25.592821Z
+Generated: 2026-07-03T06:08:13.185015Z
 
 ## Summary
 - Open blockers: **12**
@@ -14,6 +14,10 @@ Generated: 2026-07-03T05:44:25.592821Z
   - Owner: `tod`; projected blockers resolved: **0**
   - Unlocks: Instagram executor row can become publish-eligible after approval.
   - Blocked by: FP-AUTO-259, FP-AUTO-267, FP-AUTO-272, FP-AUTO-277, FP-AUTO-279, FP-AUTO-282, FP-AUTO-284
+- **Manual distribution lane clear** (`clear`)
+  - Owner: `tod`; projected blockers resolved: **0**
+  - Unlocks: No manual-only posting lane is active; growth work stays in automated or review-only surfaces.
+  - Guardrail: Manual-only approvals do not auto-post; posting and public URL logging remain separate after review.
 - **Repair TikTok executor** (`ready`)
   - Owner: `tod`; projected blockers resolved: **0**
   - Unlocks: Held TikTok approval rows can pass platform-readiness review.; Approved TikTok backlog can become safe to reschedule into upload-draft creation.

@@ -1,22 +1,22 @@
 {
-  "generated_at": "2026-07-03T05:44:25.730272Z",
+  "generated_at": "2026-07-03T06:08:13.429538Z",
   "safe_mode": true,
   "source": {
     "resolution_worksheet": "data/human_handoff_resolution_worksheet.csv",
     "human_handoff_packet": "data/human_handoff_packet.json"
   },
   "summary": {
-    "worksheet_row_count": 5,
-    "preview_count": 5,
-    "executed_preview_count": 2,
-    "skipped_preview_count": 3,
+    "worksheet_row_count": 6,
+    "preview_count": 6,
+    "executed_preview_count": 6,
+    "skipped_preview_count": 0,
     "status_counts": {
-      "input_missing": 2,
-      "skipped": 3
+      "input_missing": 5,
+      "preview_ok": 1
     },
     "phase_counts": {
       "Manual metrics": 2,
-      "Platform setup": 3
+      "Platform setup": 4
     },
     "safe_command_policy": "Only python3 scripts/* commands with --dry-run, or reschedule previews without --apply, are executed.",
     "mutation_guardrail": "This preview runner never executes apply, refresh-admin, PUBLIC_URL placeholder, non-python, or unsupported commands."
@@ -27,12 +27,12 @@
       "phase": "Platform setup",
       "status": "failed",
       "input_needed": "local_secret_presence_and_public_posting_approval",
-      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-258",
-      "safety": "skipped",
-      "safety_reason": "not_marked_preview_safe",
-      "returncode": null,
-      "preview_status": "skipped",
-      "output_excerpt": "",
+      "command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
+      "safety": "safe_preview",
+      "safety_reason": "dry_run_command",
+      "returncode": 1,
+      "preview_status": "input_missing",
+      "output_excerpt": "ERROR: IG_BUSINESS_ACCOUNT_ID is missing from secrets/social_api.env",
       "completion_evidence": "data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_upload_drafts before TikTok upload-mode backlog work is allowed.",
       "guardrail": "Push worker secrets only after local platform setup is complete."
     },
@@ -41,12 +41,12 @@
       "phase": "Platform setup",
       "status": "failed",
       "input_needed": "local_secret_presence_and_public_posting_approval",
-      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263",
-      "safety": "skipped",
-      "safety_reason": "not_marked_preview_safe",
-      "returncode": null,
-      "preview_status": "skipped",
-      "output_excerpt": "",
+      "command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
+      "safety": "safe_preview",
+      "safety_reason": "dry_run_command",
+      "returncode": 1,
+      "preview_status": "input_missing",
+      "output_excerpt": "ERROR: IG_BUSINESS_ACCOUNT_ID is missing from secrets/social_api.env",
       "completion_evidence": "data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_upload_drafts before TikTok upload-mode backlog work is allowed.",
       "guardrail": "Push worker secrets only after local platform setup is complete."
     },
@@ -55,14 +55,28 @@
       "phase": "Platform setup",
       "status": "failed",
       "input_needed": "local_secret_presence_and_public_posting_approval",
-      "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
-      "safety": "skipped",
-      "safety_reason": "not_marked_preview_safe",
-      "returncode": null,
-      "preview_status": "skipped",
-      "output_excerpt": "",
+      "command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
+      "safety": "safe_preview",
+      "safety_reason": "dry_run_command",
+      "returncode": 1,
+      "preview_status": "input_missing",
+      "output_excerpt": "ERROR: IG_BUSINESS_ACCOUNT_ID is missing from secrets/social_api.env",
       "completion_evidence": "data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_upload_drafts before TikTok upload-mode backlog work is allowed.",
       "guardrail": "Push worker secrets only after local platform setup is complete."
+    },
+    {
+      "task_id": "platform-setup-tiktok-preflight",
+      "phase": "Platform setup",
+      "status": "blocked",
+      "input_needed": "local_secret_presence_and_public_posting_approval",
+      "command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run",
+      "safety": "safe_preview",
+      "safety_reason": "dry_run_command",
+      "returncode": 0,
+      "preview_status": "preview_ok",
+      "output_excerpt": "{\"ok\": true, \"platform\": \"TikTok\", \"dry_run\": true, \"mode\": \"upload\", \"endpoint\": \"https://open.tiktokapis.com/v2/post/publish/inbox/video/init/\", \"required_scope\": \"video.upload\", \"media_key\": \"i-learned-60s\", \"media_ready\": true, \"public_video_url\": \"https://www.lilyroo.com/assets/media/01_i_learned_it_all_60s_tiktok.mp4?fresh=6cb3941d2\", \"media_path\": \"\", \"token_path_ready\": true, \"token_source\": \"access_token\", \"missing_refresh_credentials\": [], \"public_posting_approved\": false, \"default_privacy\": \"PUBLIC_TO_EVERYONE\", \"brand_content_toggle\": false, \"brand_organic_toggle\": true, \"aigc_label_enabled\": true, \"title\": \"Swipe away before the pain sets in. Cute system we built. Streaming now.\"}",
+      "completion_evidence": "data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_upload_drafts before TikTok upload-mode backlog work is allowed.",
+      "guardrail": "Keep TikTok upload-draft mode separate from direct public posting; do not require manual-only community posting."
     },
     {
       "task_id": "manual-metrics-priority-2",
@@ -95,7 +109,7 @@
   ],
   "handoff_resolution_summary": {
     "path": "data/human_handoff_resolution_worksheet.csv",
-    "row_count": 5,
+    "row_count": 6,
     "fieldnames": [
       "task_id",
       "phase",

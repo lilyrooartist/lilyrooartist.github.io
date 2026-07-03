@@ -1,6 +1,6 @@
 # Scheduled Approval Packet - Lily Roo
 
-Generated: 2026-07-03T05:44:24.670838Z
+Generated: 2026-07-03T06:08:12.323466Z
 
 ## Summary
 - Approval blockers: **7**
@@ -66,6 +66,8 @@ Generated: 2026-07-03T05:44:24.670838Z
   - Evidence: Apply only after human copy/media/link review passes.
 - 4. Refresh and validate admin state - `ready_after_apply`; command: `python3 scripts/refresh_promo_admin.py && python3 scripts/validate_content_system.py`
   - Evidence: Admin should show fewer approval blockers and fresh execution state.
+- 5. Confirm manual-distribution lane - `clear`; command: `python3 scripts/build_manual_distribution_packet.py`
+  - Evidence: No manual-distribution rows are active for this checked batch.
 
 ### Ready Row Checklist
 - None; all currently reviewed rows are held until failed checks clear.
@@ -143,8 +145,8 @@ Generated: 2026-07-03T05:44:24.670838Z
     - `pass` executor_blocker_confirmed: Current executor state is blocked / not_approved.
     - `fail` platform_readiness: Executor readiness snapshot marks platform blocked.
   - Destination link evidence:
-    - `needs_manual_review` https://youtu.be/U7aczBSruAY: no local evidence
-    - `needs_manual_review` https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n: no local evidence
+    - `verified_local_evidence` https://youtu.be/U7aczBSruAY: YouTube public snapshot: Brain Rot - Lily Roo (data/youtube_public_snapshot.json); YouTube playlist track 1: Brain Rot (data/youtube_twelve_dollars_playlist.json); Twelve Dollars remaster manifest: Brain Rot (data/youtube_twelve_dollars_remaster_manifest.json)
+    - `verified_local_evidence` https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n: YouTube playlist snapshot: Twelve Dollars (data/youtube_twelve_dollars_playlist.json)
   - Approval review status: `held_by_failed_checks`
   - Checked batch member: `False`
   - Failed checks holding this row:
@@ -166,8 +168,8 @@ Generated: 2026-07-03T05:44:24.670838Z
     - `pass` executor_blocker_confirmed: Current executor state is blocked / not_approved.
     - `fail` platform_readiness: Executor readiness snapshot marks platform blocked.
   - Destination link evidence:
-    - `needs_manual_review` https://youtu.be/QodRYnvTVZc: no local evidence
-    - `needs_manual_review` https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n: no local evidence
+    - `verified_local_evidence` https://youtu.be/QodRYnvTVZc: YouTube public snapshot: Every Pearl in Carmel - Lily Roo (data/youtube_public_snapshot.json); YouTube playlist track 2: Every Pearl in Carmel (data/youtube_twelve_dollars_playlist.json); Twelve Dollars remaster manifest: Every Pearl in Carmel (data/youtube_twelve_dollars_remaster_manifest.json)
+    - `verified_local_evidence` https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n: YouTube playlist snapshot: Twelve Dollars (data/youtube_twelve_dollars_playlist.json)
   - Approval review status: `held_by_failed_checks`
   - Checked batch member: `False`
   - Failed checks holding this row:
@@ -189,8 +191,8 @@ Generated: 2026-07-03T05:44:24.670838Z
     - `pass` executor_blocker_confirmed: Current executor state is blocked / not_approved.
     - `fail` platform_readiness: Executor readiness snapshot marks platform blocked.
   - Destination link evidence:
-    - `needs_manual_review` https://youtu.be/EprgLKHp-lE: no local evidence
-    - `needs_manual_review` https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n: no local evidence
+    - `verified_local_evidence` https://youtu.be/EprgLKHp-lE: YouTube public snapshot: The Other One's Charging - Lily Roo (data/youtube_public_snapshot.json); YouTube playlist track 3: The Other One's Charging (data/youtube_twelve_dollars_playlist.json); Twelve Dollars remaster manifest: The Other One's Charging (data/youtube_twelve_dollars_remaster_manifest.json)
+    - `verified_local_evidence` https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n: YouTube playlist snapshot: Twelve Dollars (data/youtube_twelve_dollars_playlist.json)
   - Approval review status: `held_by_failed_checks`
   - Checked batch member: `False`
   - Failed checks holding this row:
@@ -212,8 +214,8 @@ Generated: 2026-07-03T05:44:24.670838Z
     - `pass` executor_blocker_confirmed: Current executor state is blocked / not_approved.
     - `fail` platform_readiness: Executor readiness snapshot marks platform blocked.
   - Destination link evidence:
-    - `needs_manual_review` https://youtu.be/EprgLKHp-lE: no local evidence
-    - `needs_manual_review` https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n: no local evidence
+    - `verified_local_evidence` https://youtu.be/EprgLKHp-lE: YouTube public snapshot: The Other One's Charging - Lily Roo (data/youtube_public_snapshot.json); YouTube playlist track 3: The Other One's Charging (data/youtube_twelve_dollars_playlist.json); Twelve Dollars remaster manifest: The Other One's Charging (data/youtube_twelve_dollars_remaster_manifest.json)
+    - `verified_local_evidence` https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n: YouTube playlist snapshot: Twelve Dollars (data/youtube_twelve_dollars_playlist.json)
   - Approval review status: `held_by_failed_checks`
   - Checked batch member: `False`
   - Failed checks holding this row:
@@ -239,8 +241,8 @@ Generated: 2026-07-03T05:44:24.670838Z
     - `pass` executor_blocker_confirmed: Current executor state is blocked / not_approved.
     - `fail` platform_readiness: Executor readiness snapshot marks platform blocked.
   - Destination link evidence:
-    - `needs_manual_review` https://youtu.be/G2RlCwZKOsk: no local evidence
-    - `needs_manual_review` https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n: no local evidence
+    - `verified_local_evidence` https://youtu.be/G2RlCwZKOsk: YouTube public snapshot: Twelve Dollars - Lily Roo (data/youtube_public_snapshot.json); YouTube playlist track 4: Twelve Dollars (data/youtube_twelve_dollars_playlist.json); Twelve Dollars remaster manifest: Twelve Dollars (data/youtube_twelve_dollars_remaster_manifest.json)
+    - `verified_local_evidence` https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n: YouTube playlist snapshot: Twelve Dollars (data/youtube_twelve_dollars_playlist.json)
   - Approval review status: `held_by_failed_checks`
   - Checked batch member: `False`
   - Failed checks holding this row:
@@ -262,8 +264,8 @@ Generated: 2026-07-03T05:44:24.670838Z
     - `pass` executor_blocker_confirmed: Current executor state is blocked / not_approved.
     - `fail` platform_readiness: Executor readiness snapshot marks platform blocked.
   - Destination link evidence:
-    - `needs_manual_review` https://youtu.be/G2RlCwZKOsk: no local evidence
-    - `needs_manual_review` https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n: no local evidence
+    - `verified_local_evidence` https://youtu.be/G2RlCwZKOsk: YouTube public snapshot: Twelve Dollars - Lily Roo (data/youtube_public_snapshot.json); YouTube playlist track 4: Twelve Dollars (data/youtube_twelve_dollars_playlist.json); Twelve Dollars remaster manifest: Twelve Dollars (data/youtube_twelve_dollars_remaster_manifest.json)
+    - `verified_local_evidence` https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n: YouTube playlist snapshot: Twelve Dollars (data/youtube_twelve_dollars_playlist.json)
   - Approval review status: `held_by_failed_checks`
   - Checked batch member: `False`
   - Failed checks holding this row:

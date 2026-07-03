@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-03T05:44:25.592821Z",
+  "generated_at": "2026-07-03T06:08:13.185015Z",
   "safe_mode": true,
   "summary": {
     "open_blocker_count": 12,
@@ -63,6 +63,22 @@
         "preview_command": "",
         "apply_command": "",
         "source_path": "data/scheduled_approval_packet.json"
+      },
+      {
+        "id": "unlock-manual-distribution",
+        "phase": "Manual distribution lane clear",
+        "status": "clear",
+        "owner": "tod",
+        "blockers_resolved": 0,
+        "unlocks": [
+          "No manual-only posting lane is active; growth work stays in automated or review-only surfaces."
+        ],
+        "blocked_by": [],
+        "preview_command": "",
+        "apply_command": "",
+        "source_path": "data/manual_distribution_packet.json",
+        "command_source_path": "data/approval_runway.json",
+        "guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review."
       },
       {
         "id": "unlock-tiktok-platform-repair",

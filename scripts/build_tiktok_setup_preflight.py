@@ -120,26 +120,26 @@ def first_tiktok_asset_readiness() -> dict:
     approved = (row.get("approved") or "").strip().lower() == "yes"
     media_ready = is_http_url(clip_url) and is_video_url(clip_url)
     text_ready = bool(text)
-    ready = bool(platform.lower() == "tiktok" and post_type == "video" and approved and media_ready and text_ready)
+    asset_ready = bool(platform.lower() == "tiktok" and post_type == "video" and media_ready and text_ready)
     blockers = []
     if platform.lower() != "tiktok":
         blockers.append("platform_not_tiktok")
     if post_type != "video":
         blockers.append("post_type_not_video")
-    if not approved:
-        blockers.append("row_not_approved")
     if not media_ready:
         blockers.append("public_video_url_missing_or_unsupported")
     if not text_ready:
         blockers.append("text_missing")
     return {
         "post_id": FIRST_TIKTOK_POST_ID,
-        "status": "ready_for_upload_mode" if ready else "blocked",
-        "ready_for_upload_mode": ready,
+        "status": "ready_for_upload_mode" if asset_ready else "blocked",
+        "ready_for_upload_mode": asset_ready,
         "platform": platform,
         "song": row.get("song") or "",
         "post_type": post_type,
         "approved": approved,
+        "queue_approval_status": "approved" if approved else "approval_pending",
+        "approval_required_before_scheduler_retry": True,
         "clip_url": clip_url,
         "media_ready": media_ready,
         "text_ready": text_ready,
@@ -148,6 +148,7 @@ def first_tiktok_asset_readiness() -> dict:
         "blockers": blockers,
         "credential_blockers": REQUIRED_REFRESH_SECRETS,
         "next_after_credentials": f"python3 scripts/post_tiktok_from_queue.py --post-id {FIRST_TIKTOK_POST_ID} --mode upload --dry-run",
+        "approval_preview_command": f"python3 scripts/update_scheduled_post_approval.py {FIRST_TIKTOK_POST_ID} --dry-run",
     }
 
 

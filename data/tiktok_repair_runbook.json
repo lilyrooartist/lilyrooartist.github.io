@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-03T05:44:25.519703Z",
+  "generated_at": "2026-07-03T06:08:13.125520Z",
   "safe_mode": true,
   "status": "ready_for_backlog_clearance",
   "source": {
@@ -34,14 +34,14 @@
     "local_upload_preview_command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run",
     "earliest_tiktok_api_path": "video.upload inbox draft; final public URL still requires human publish and URL logging.",
     "upload_mode_lane": {
-      "status": "asset_blocked",
+      "status": "ready_after_credentials",
       "posting_mode": "upload",
       "oauth_scopes": [
         "user.info.basic",
         "video.upload"
       ],
       "first_post_id": "FP-AUTO-264",
-      "first_asset_ready": false,
+      "first_asset_ready": true,
       "credential_names_needed": [
         "TIKTOK_CLIENT_KEY",
         "TIKTOK_CLIENT_SECRET",

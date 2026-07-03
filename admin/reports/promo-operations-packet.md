@@ -1,25 +1,25 @@
 # Promo Operations Packet - Lily Roo
 
-Generated: 2026-07-03T05:44:24.608850Z
+Generated: 2026-07-03T06:08:12.261573Z
 
 ## Summary
-- Actions: **20**
+- Actions: **18**
 - User review: **7**
 - Platform fixes: **3**
 - Scheduled approval batches: **0**
 - Manual distribution actions: **0**
 - Experiment result actions: **1**
-- Store checks: **7**
+- Store checks: **5**
 - Manual metric updates: **2**
 - Safe apply commands ready: **0**
-- Urgency: **blocked: 7, high: 4, low: 2, medium: 7**
+- Urgency: **blocked: 7, high: 4, low: 2, medium: 5**
 
 ## Phase Counts
 - Collect experiment results: **1**
 - Fill manual metrics: **2**
 - Repair executor: **3**
 - Review blocked drafts: **7**
-- Verify music sites: **7**
+- Verify music sites: **5**
 
 ## Top Actions
 
@@ -103,8 +103,8 @@ Generated: 2026-07-03T05:44:24.608850Z
 ### Verify music sites
 - **[medium] Re-check Twelve Dollars on Spotify**
   - Why: Public store links should be checked until DistroKid exposes them.
-  - Detail: Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-07-04T05:43:13.679200+00:00. Status: waiting_for_release_propagation.
-  - Latest snapshot checked: `2026-07-03T05:43:13.679200+00:00`
+  - Detail: Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-07-04T06:07:01.039514+00:00. Status: waiting_for_release_propagation.
+  - Latest snapshot checked: `2026-07-03T06:07:01.039514+00:00`
   - Command: `python3 scripts/search_spotify_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/spotify_release_snapshot.json'`
 
 ## Guardrails

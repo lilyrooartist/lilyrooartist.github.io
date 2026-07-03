@@ -1,6 +1,6 @@
 # TikTok Repair Runbook - Lily Roo
 
-Generated: 2026-07-03T05:44:25.519703Z
+Generated: 2026-07-03T06:08:13.125520Z
 
 ## Summary
 - Status: **ready_for_backlog_clearance**
@@ -19,7 +19,7 @@ Generated: 2026-07-03T05:44:25.519703Z
 - Local post preview: `python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --dry-run`
 - Local draft upload preview: `python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run`
 - Earliest TikTok API path: video.upload inbox draft; final public URL still requires human publish and URL logging.
-- Upload-mode lane: **asset_blocked**
+- Upload-mode lane: **ready_after_credentials**
 - Direct public lane: **deferred_until_tiktok_approval**
 - Handoff template: `data/tiktok_secret_handoff_template.env`
 - Local secret env exists: **True**
@@ -33,7 +33,7 @@ Generated: 2026-07-03T05:44:25.519703Z
 
 ## Upload-Mode Repair Ladder
 - First row: `FP-AUTO-264`
-- First asset ready: **False**
+- First asset ready: **True**
 - Public posting approval required for upload mode: **False**
 - Human finish required: **True**
 - Handoff: TikTok API creates an inbox draft; Lily Roo reviews/publishes in TikTok, then the public URL is logged back into the promo engine.

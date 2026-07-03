@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-03T05:44:25.630832Z",
+  "generated_at": "2026-07-03T06:08:13.215981Z",
   "safe_mode": true,
   "source": {
     "promotion_blocker_ledger": "data/promotion_blocker_ledger.json",
@@ -13,17 +13,17 @@
     "resolution_worksheet": "data/human_handoff_resolution_worksheet.csv"
   },
   "summary": {
-    "task_count": 5,
+    "task_count": 6,
     "owner_counts": {
-      "tod": 5
+      "tod": 6
     },
     "urgency_counts": {
-      "high": 3,
+      "high": 4,
       "low": 2
     },
     "phase_counts": {
       "Manual metrics": 2,
-      "Platform setup": 3
+      "Platform setup": 4
     },
     "blocker_summary": {
       "open_blocker_count": 12,
@@ -89,6 +89,22 @@
           "source_path": "data/scheduled_approval_packet.json"
         },
         {
+          "id": "unlock-manual-distribution",
+          "phase": "Manual distribution lane clear",
+          "status": "clear",
+          "owner": "tod",
+          "blockers_resolved": 0,
+          "unlocks": [
+            "No manual-only posting lane is active; growth work stays in automated or review-only surfaces."
+          ],
+          "blocked_by": [],
+          "preview_command": "",
+          "apply_command": "",
+          "source_path": "data/manual_distribution_packet.json",
+          "command_source_path": "data/approval_runway.json",
+          "guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review."
+        },
+        {
           "id": "unlock-tiktok-platform-repair",
           "phase": "Repair TikTok executor",
           "status": "ready",
@@ -150,10 +166,10 @@
   },
   "action_docket": {
     "source": "data/human_handoff_packet.json",
-    "roadmap_step_count": 4,
-    "task_count": 5,
+    "roadmap_step_count": 5,
+    "task_count": 6,
     "ready_step_count": 1,
-    "blocked_step_count": 0,
+    "blocked_step_count": 1,
     "manual_post_count": 0,
     "manual_metric_field_count": 6,
     "first_ready_step": {
@@ -306,7 +322,38 @@
       "next_step_after_apply": "Rebuild the weekly report and confirm lilyroo.com/admin shows fewer pending manual metric fields.",
       "guardrail": "Import only collected numeric values; leave unknown cells blank."
     },
-    "blocked_steps": [],
+    "blocked_steps": [
+      {
+        "id": "platform-repair-gate",
+        "label": "Repair blocked platform executor setup",
+        "state": "blocked",
+        "owner": "tod",
+        "task_ids": [
+          "platform-setup-FP-AUTO-258",
+          "platform-setup-FP-AUTO-263",
+          "platform-setup-FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+          "platform-setup-tiktok-preflight"
+        ],
+        "blockers_resolved": 4,
+        "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
+        "apply_command": "",
+        "command_sequence": [
+          {
+            "step": "preview",
+            "command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
+            "required_before_apply": true
+          },
+          {
+            "step": "verify",
+            "command": "python3 scripts/refresh_promo_admin.py",
+            "required_before_apply": false
+          }
+        ],
+        "completion_evidence": "data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_upload_drafts before TikTok upload-mode backlog work is allowed.",
+        "next_step_after_apply": "Recapture admin state and only then revisit TikTok approval or backlog reschedule rows.",
+        "guardrail": "Run preflight and confirm local OAuth setup before pushing upload-mode secrets; direct public posting remains separately approval-gated."
+      }
+    ],
     "checklist": [
       {
         "id": "review-checked-approval-batch",
@@ -365,20 +412,21 @@
       {
         "id": "platform-repair-gate",
         "label": "Repair blocked platform executor setup",
-        "state": "clear",
+        "state": "blocked",
         "owner": "tod",
         "task_ids": [
           "platform-setup-FP-AUTO-258",
           "platform-setup-FP-AUTO-263",
-          "platform-setup-FP-PLAN-TWELVE-DOLLARS-INSTAGRAM"
+          "platform-setup-FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+          "platform-setup-tiktok-preflight"
         ],
-        "blockers_resolved": 0,
-        "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-258",
+        "blockers_resolved": 4,
+        "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
         "apply_command": "",
         "command_sequence": [
           {
             "step": "preview",
-            "command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-258",
+            "command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
             "required_before_apply": true
           },
           {
@@ -568,7 +616,7 @@
   },
   "resolution_worksheet": {
     "path": "data/human_handoff_resolution_worksheet.csv",
-    "row_count": 5,
+    "row_count": 6,
     "fieldnames": [
       "task_id",
       "phase",
@@ -596,12 +644,14 @@
       "urgency": "high",
       "status": "failed",
       "detail": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
-      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-258",
+      "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
       "apply_command": "",
       "source_path": "data/platform_repair_status.json",
       "impact": {
         "platform": "Instagram",
-        "missing_secrets": [],
+        "missing_secrets": [
+          "IG_BUSINESS_ACCOUNT_ID"
+        ],
         "local_missing_secrets": [
           "IG_BUSINESS_ACCOUNT_ID"
         ],
@@ -619,12 +669,14 @@
       "urgency": "high",
       "status": "failed",
       "detail": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
-      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-AUTO-263",
+      "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
       "apply_command": "",
       "source_path": "data/platform_repair_status.json",
       "impact": {
         "platform": "Instagram",
-        "missing_secrets": [],
+        "missing_secrets": [
+          "IG_BUSINESS_ACCOUNT_ID"
+        ],
         "local_missing_secrets": [
           "IG_BUSINESS_ACCOUNT_ID"
         ],
@@ -642,12 +694,14 @@
       "urgency": "high",
       "status": "failed",
       "detail": "Worker cannot resolve instagram_business_account from FB_PAGE_ID. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID. Set IG_BUSINESS_ACCOUNT_ID from Meta Business/Instagram Graph, push it to the Worker, then recapture readiness.",
-      "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+      "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID",
       "apply_command": "",
       "source_path": "data/platform_repair_status.json",
       "impact": {
         "platform": "Instagram",
-        "missing_secrets": [],
+        "missing_secrets": [
+          "IG_BUSINESS_ACCOUNT_ID"
+        ],
         "local_missing_secrets": [
           "IG_BUSINESS_ACCOUNT_ID"
         ],
@@ -656,6 +710,37 @@
       },
       "links": [],
       "guardrail": "Push worker secrets only after local platform setup is complete."
+    },
+    {
+      "id": "platform-setup-tiktok-preflight",
+      "title": "Review TikTok upload-mode preflight",
+      "phase": "Platform setup",
+      "owner": "tod",
+      "urgency": "high",
+      "status": "blocked",
+      "detail": "Review the TikTok upload-mode/direct-public split before treating TikTok as ready.",
+      "preview_command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run",
+      "apply_command": "",
+      "source_path": "data/tiktok_setup_preflight.json",
+      "impact": {
+        "platform": "TikTok",
+        "missing_secrets": [
+          "TIKTOK_CLIENT_KEY",
+          "TIKTOK_CLIENT_SECRET",
+          "TIKTOK_REFRESH_TOKEN"
+        ],
+        "local_missing_secrets": [],
+        "public_posting_approved": false,
+        "preflight_status": "blocked",
+        "preflight_blocked_count": 1,
+        "ready_to_push_worker_secrets": true,
+        "ready_to_upload_drafts": false,
+        "ready_to_post_publicly": false,
+        "preflight_report": "admin/reports/tiktok-setup-preflight.md",
+        "preflight_command": "python3 scripts/build_tiktok_setup_preflight.py"
+      },
+      "links": [],
+      "guardrail": "Keep TikTok upload-draft mode separate from direct public posting; do not require manual-only community posting."
     },
     {
       "id": "manual-metrics-priority-2",

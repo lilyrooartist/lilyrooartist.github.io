@@ -341,7 +341,7 @@ def build_unlock_roadmap(rows: list[dict], projection: dict) -> list[dict]:
     platform_rows = platform_repair.get("rows") or []
     tiktok_rows = [item for item in platform_rows if str(item.get("platform") or "").lower() == "tiktok"]
     backlog_summary = backlog.get("summary") or {}
-    manual_phase = "Post manual YouTube Community rows" if int(manual_docket.get("postable_count") or 0) else "Review and post manual YouTube Community rows"
+    manual_phase = "Post manual YouTube Community rows" if int(manual_docket.get("postable_count") or 0) else "Manual distribution lane clear"
     approval_unlocks = ["Instagram executor row can become publish-eligible after approval."]
     if int(projection.get("manual_rows_unblocked") or 0):
         approval_unlocks.append("Manual-dispatch rows can move into the manual distribution packet after approval.")
@@ -365,24 +365,29 @@ def build_unlock_roadmap(rows: list[dict], projection: dict) -> list[dict]:
         + int(manual_docket.get("review_count") or 0)
         + int(manual_docket.get("postable_count") or 0)
     )
-    if manual_units:
-        roadmap.append({
-            "id": "unlock-manual-distribution",
-            "phase": manual_phase,
-            "status": approval_docket.get("status") or manual_docket.get("status") or "unknown",
-            "owner": "tod",
-            "blockers_resolved": int(approval_docket.get("ready_count") or 0) or int(manual_docket.get("review_count") or 0) + int(manual_docket.get("postable_count") or 0),
-            "unlocks": [
+    roadmap.append({
+        "id": "unlock-manual-distribution",
+        "phase": manual_phase,
+        "status": approval_docket.get("status") or manual_docket.get("status") or "clear",
+        "owner": "tod",
+        "blockers_resolved": int(approval_docket.get("ready_count") or 0) or int(manual_docket.get("review_count") or 0) + int(manual_docket.get("postable_count") or 0),
+        "unlocks": (
+            [
                 "Manual YouTube Community promotion can publish without waiting for broken auto executors.",
                 "Published_Log.csv can be updated after public URLs exist.",
-            ],
-            "blocked_by": approval_docket.get("blocked_ids") or (["manual approval"] if manual_docket.get("review_count") else []),
-            "preview_command": approval_docket.get("preview_command") or "",
-            "apply_command": approval_docket.get("apply_command") or "",
-            "source_path": str(MANUAL_DISTRIBUTION.relative_to(ROOT)),
-            "command_source_path": str(APPROVAL_RUNWAY.relative_to(ROOT)),
-            "guardrail": approval_docket.get("guardrail") or "Manual posting and public URL logging remain separate after approval.",
-        })
+            ]
+            if manual_units
+            else [
+                "No manual-only posting lane is active; growth work stays in automated or review-only surfaces.",
+            ]
+        ),
+        "blocked_by": approval_docket.get("blocked_ids") or (["manual approval"] if manual_docket.get("review_count") else []),
+        "preview_command": approval_docket.get("preview_command") or "",
+        "apply_command": approval_docket.get("apply_command") or "",
+        "source_path": str(MANUAL_DISTRIBUTION.relative_to(ROOT)),
+        "command_source_path": str(APPROVAL_RUNWAY.relative_to(ROOT)),
+        "guardrail": approval_docket.get("guardrail") or "Manual posting and public URL logging remain separate after approval.",
+    })
     roadmap.extend([
         {
             "id": "unlock-tiktok-platform-repair",

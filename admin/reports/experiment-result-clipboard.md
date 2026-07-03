@@ -1,6 +1,6 @@
 # Experiment Result Clipboard - Lily Roo
 
-Generated: 2026-07-03T05:44:25.954230Z
+Generated: 2026-07-03T06:08:13.636118Z
 
 ## Summary
 - Status: **needs_values**
@@ -421,15 +421,13 @@ Generated: 2026-07-03T05:44:25.954230Z
 - **Collect metrics** `FP-AUTO-276` X / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 12 logged post(s), 4 missing URL(s) in this format.
   - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-276 --source-row 38 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
   - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-276 --source-row 38 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
-- **Collect metrics** `FP-AUTO-281` X / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 12 logged post(s), 4 missing URL(s) in this format.
-  - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-281 --source-row 42 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
-  - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-281 --source-row 42 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
 - **Collect metrics** `FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA` YouTube / Short video clip + platform-native CTA: Already published and logged; measuring it reduces the Short video clip + platform-native CTA evidence gap. 2 logged post(s), 4 missing URL(s) in this format.
   - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --source-row 26 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
   - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --source-row 26 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
 - **Collect metrics** `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY` YouTube / YouTube archive video CTA: Already published and logged; measuring it reduces the YouTube archive video CTA evidence gap. 1 logged post(s), 0 missing URL(s) in this format.
   - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --source-row 28 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
   - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --source-row 28 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
+- **Clear platform blocker** `FP-AUTO-267` Instagram / Release-art image + story hook: Platform work is blocked; clear the platform repair gate before URL logging can produce metrics. 12 logged post(s), 4 missing URL(s) in this format.
 
 ## Post-Log Measurement Handoff
 - Status: **clear**

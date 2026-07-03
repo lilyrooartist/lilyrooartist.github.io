@@ -87,46 +87,44 @@ def build_packet() -> dict:
         next_publish_action = "Log public URLs and collect experiment results."
     else:
         next_publish_action = "Collect experiment results when public URLs and measurement values are available."
-    steps = []
-    if review_ids or postable_ids or logging_ids:
-        steps.extend([
-            {
-                "id": "review_manual_youtube_community",
-                "status": "ready_for_review" if review_ids else "clear",
-                "post_ids": review_ids,
-                "preview_command": manual_docket.get("preview_command") or command_for_ids("scripts/approve_promo_queue_plan.py", review_ids, "--dry-run"),
-                "apply_after_review_command": manual_docket.get("apply_command") or command_for_ids("scripts/approve_promo_queue_plan.py", review_ids, "--refresh-admin"),
-                "guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate.",
-                "completion_evidence": "data/manual_distribution_packet.json should move rows from waiting_for_review toward postable manual distribution.",
-            },
-            {
-                "id": "queue_approved_manual_rows",
-                "status": "ready_after_approval" if review_ids else "waiting_for_approval",
-                "post_ids": review_ids,
-                "preview_command": command_for_ids("scripts/apply_promo_queue_plan.py", review_ids, ""),
-                "apply_after_review_command": command_for_ids("scripts/apply_promo_queue_plan.py", review_ids, "--apply --refresh-admin"),
-                "guardrail": "Apply only after the matching promo plan rows have approved=yes.",
-                "completion_evidence": "data/scheduled_posts.csv contains the approved manual YouTube Community row ids.",
-            },
-            {
-                "id": "post_manual_youtube_community",
-                "status": "postable_now" if postable_ids else "waiting_for_review_or_queue",
-                "post_ids": postable_ids or review_ids,
-                "surface": "YouTube Studio Community",
-                "public_community_url": (manual.get("summary") or {}).get("public_community_url") or "",
-                "guardrail": "Post manually using the reviewed copy and local asset evidence; do not log placeholder URLs.",
-                "completion_evidence": "A real public YouTube Community URL exists for each posted row.",
-            },
-            {
-                "id": "log_public_urls",
-                "status": "waiting_for_manual_post" if waiting_public_url_count else ("ready_after_manual_post" if logging_ids else "waiting_for_public_urls"),
-                "post_ids": logging_ids or review_ids,
-                "preview_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv",
-                "apply_after_review_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --apply --refresh-admin",
-                "guardrail": "Every CSV row must contain a real public_url before apply.",
-                "completion_evidence": "admin/content/Published_Log.csv contains real public URLs for the manual community rows.",
-            },
-        ])
+    steps = [
+        {
+            "id": "review_manual_youtube_community",
+            "status": "ready_for_review" if review_ids else "clear",
+            "post_ids": review_ids,
+            "preview_command": manual_docket.get("preview_command") or command_for_ids("scripts/approve_promo_queue_plan.py", review_ids, "--dry-run"),
+            "apply_after_review_command": manual_docket.get("apply_command") or command_for_ids("scripts/approve_promo_queue_plan.py", review_ids, "--refresh-admin"),
+            "guardrail": "Manual Community approval lane is inactive unless post_ids are present; no manual posting is requested from a clear step.",
+            "completion_evidence": "data/manual_distribution_packet.json should stay at zero manual review rows while this lane is clear.",
+        },
+        {
+            "id": "queue_approved_manual_rows",
+            "status": "ready_after_approval" if review_ids else "clear",
+            "post_ids": review_ids,
+            "preview_command": command_for_ids("scripts/apply_promo_queue_plan.py", review_ids, ""),
+            "apply_after_review_command": command_for_ids("scripts/apply_promo_queue_plan.py", review_ids, "--apply --refresh-admin"),
+            "guardrail": "Queue nothing while the manual lane is clear; apply only after matching rows have approved=yes.",
+            "completion_evidence": "data/scheduled_posts.csv contains no active manual Community experiment rows while this lane is clear.",
+        },
+        {
+            "id": "post_manual_youtube_community",
+            "status": "postable_now" if postable_ids else "clear",
+            "post_ids": postable_ids or review_ids,
+            "surface": "YouTube Studio Community",
+            "public_community_url": (manual.get("summary") or {}).get("public_community_url") or "",
+            "guardrail": "No manual Community posting is requested when post_ids is empty.",
+            "completion_evidence": "A real public URL is required only if a reviewed manual row becomes active.",
+        },
+        {
+            "id": "log_public_urls",
+            "status": "waiting_for_manual_post" if waiting_public_url_count else ("ready_after_manual_post" if logging_ids else "clear"),
+            "post_ids": logging_ids or review_ids,
+            "preview_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv",
+            "apply_after_review_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --apply --refresh-admin",
+            "guardrail": "Every CSV row must contain a real public_url before apply; clear lane means no URL logging is pending.",
+            "completion_evidence": "admin/content/Published_Log.csv remains the source of truth for real public URLs.",
+        },
+    ]
     steps.append(
         {
             "id": "collect_results",

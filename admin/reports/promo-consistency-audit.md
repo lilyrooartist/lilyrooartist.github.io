@@ -1,13 +1,13 @@
 # Promo Consistency Audit - Lily Roo
 
-Generated: 2026-07-03T05:44:26.132950Z
+Generated: 2026-07-03T06:08:13.806835Z
 
 ## Summary
-- Status: **fail**
-- Checks: **28 / 30** passed
-- Failed checks: **2**
-- High severity failures: **1**
-- Medium severity failures: **1**
+- Status: **pass**
+- Checks: **30 / 30** passed
+- Failed checks: **0**
+- High severity failures: **0**
+- Medium severity failures: **0**
 
 ## Checks
 - **ledger_open_count_matches_rows**: `pass`
@@ -24,10 +24,8 @@ Generated: 2026-07-03T05:44:26.132950Z
   - Platform repair packet should match platform repair blockers in the ledger.
 - **executor_platform_fix_count_matches_platform_packet**: `pass`
   - Executor platform-fix count should match the platform repair packet after excluding manual-only handoff rows.
-- **tiktok_preflight_status_matches_platform_repair**: `fail`
-  - TikTok platform repair row should mirror the setup preflight status.
-  - Expected: ``
-  - Actual: `blocked`
+- **tiktok_preflight_status_matches_platform_repair**: `pass`
+  - TikTok platform repair row should mirror setup preflight when a current TikTok repair row exists.
 - **tiktok_preflight_local_missing_matches_platform_repair**: `pass`
   - TikTok preflight local missing secrets should match the platform repair row.
 - **tiktok_preflight_worker_missing_matches_platform_repair**: `pass`
@@ -42,10 +40,8 @@ Generated: 2026-07-03T05:44:26.132950Z
   - Manual metric priority batch count should match manual metric blockers.
 - **manual_metric_handoff_batch_count_matches_packet**: `pass`
   - Human handoff should include every manual metric priority batch.
-- **store_checks_match_checked_pending_services**: `fail`
+- **store_checks_match_checked_pending_services**: `pass`
   - Operations store checks should match checked-pending store services.
-  - Expected: `5`
-  - Actual: `7`
 - **handoff_blocker_summary_matches_ledger**: `pass`
   - Human handoff blocker summary should be copied from the blocker ledger.
 - **handoff_projection_matches_ledger_projection**: `pass`

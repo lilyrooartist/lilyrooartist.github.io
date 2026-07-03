@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-03T05:44:24.670838Z",
+  "generated_at": "2026-07-03T06:08:12.323466Z",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -247,7 +247,7 @@
           },
           {
             "url": "https://music.youtube.com/watch?v=vK0mDIW65o4",
-            "canonical_url": "https://music.youtube.com/watch",
+            "canonical_url": "https://music.youtube.com/watch?v=vK0mDIW65o4",
             "status": "verified_local_evidence",
             "evidence": [
               {
@@ -315,25 +315,47 @@
           {
             "url": "https://youtu.be/U7aczBSruAY",
             "canonical_url": "https://youtu.be/U7aczBSruAY",
-            "status": "needs_manual_review",
-            "evidence": [],
-            "evidence_count": 0,
+            "status": "verified_local_evidence",
+            "evidence": [
+              {
+                "source": "data/youtube_public_snapshot.json",
+                "label": "YouTube public snapshot: Brain Rot - Lily Roo",
+                "status": "known_public_video"
+              },
+              {
+                "source": "data/youtube_twelve_dollars_playlist.json",
+                "label": "YouTube playlist track 1: Brain Rot",
+                "status": "known_playlist_track"
+              },
+              {
+                "source": "data/youtube_twelve_dollars_remaster_manifest.json",
+                "label": "Twelve Dollars remaster manifest: Brain Rot",
+                "status": "known_remastered_video"
+              }
+            ],
+            "evidence_count": 3,
             "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
           },
           {
             "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-            "canonical_url": "https://www.youtube.com/playlist",
-            "status": "needs_manual_review",
-            "evidence": [],
-            "evidence_count": 0,
+            "canonical_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+            "status": "verified_local_evidence",
+            "evidence": [
+              {
+                "source": "data/youtube_twelve_dollars_playlist.json",
+                "label": "YouTube playlist snapshot: Twelve Dollars",
+                "status": "known_public_playlist"
+              }
+            ],
+            "evidence_count": 1,
             "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
           }
         ],
         "destination_link_audit_summary": {
           "link_count": 2,
-          "verified_local_evidence_count": 0,
-          "needs_manual_review_count": 2,
-          "all_links_have_local_evidence": false
+          "verified_local_evidence_count": 2,
+          "needs_manual_review_count": 0,
+          "all_links_have_local_evidence": true
         },
         "failed_review_checks": [
           {
@@ -372,25 +394,47 @@
           {
             "url": "https://youtu.be/QodRYnvTVZc",
             "canonical_url": "https://youtu.be/QodRYnvTVZc",
-            "status": "needs_manual_review",
-            "evidence": [],
-            "evidence_count": 0,
+            "status": "verified_local_evidence",
+            "evidence": [
+              {
+                "source": "data/youtube_public_snapshot.json",
+                "label": "YouTube public snapshot: Every Pearl in Carmel - Lily Roo",
+                "status": "known_public_video"
+              },
+              {
+                "source": "data/youtube_twelve_dollars_playlist.json",
+                "label": "YouTube playlist track 2: Every Pearl in Carmel",
+                "status": "known_playlist_track"
+              },
+              {
+                "source": "data/youtube_twelve_dollars_remaster_manifest.json",
+                "label": "Twelve Dollars remaster manifest: Every Pearl in Carmel",
+                "status": "known_remastered_video"
+              }
+            ],
+            "evidence_count": 3,
             "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
           },
           {
             "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-            "canonical_url": "https://www.youtube.com/playlist",
-            "status": "needs_manual_review",
-            "evidence": [],
-            "evidence_count": 0,
+            "canonical_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+            "status": "verified_local_evidence",
+            "evidence": [
+              {
+                "source": "data/youtube_twelve_dollars_playlist.json",
+                "label": "YouTube playlist snapshot: Twelve Dollars",
+                "status": "known_public_playlist"
+              }
+            ],
+            "evidence_count": 1,
             "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
           }
         ],
         "destination_link_audit_summary": {
           "link_count": 2,
-          "verified_local_evidence_count": 0,
-          "needs_manual_review_count": 2,
-          "all_links_have_local_evidence": false
+          "verified_local_evidence_count": 2,
+          "needs_manual_review_count": 0,
+          "all_links_have_local_evidence": true
         },
         "failed_review_checks": [
           {
@@ -429,25 +473,47 @@
           {
             "url": "https://youtu.be/EprgLKHp-lE",
             "canonical_url": "https://youtu.be/EprgLKHp-lE",
-            "status": "needs_manual_review",
-            "evidence": [],
-            "evidence_count": 0,
+            "status": "verified_local_evidence",
+            "evidence": [
+              {
+                "source": "data/youtube_public_snapshot.json",
+                "label": "YouTube public snapshot: The Other One's Charging - Lily Roo",
+                "status": "known_public_video"
+              },
+              {
+                "source": "data/youtube_twelve_dollars_playlist.json",
+                "label": "YouTube playlist track 3: The Other One's Charging",
+                "status": "known_playlist_track"
+              },
+              {
+                "source": "data/youtube_twelve_dollars_remaster_manifest.json",
+                "label": "Twelve Dollars remaster manifest: The Other One's Charging",
+                "status": "known_remastered_video"
+              }
+            ],
+            "evidence_count": 3,
             "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
           },
           {
             "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-            "canonical_url": "https://www.youtube.com/playlist",
-            "status": "needs_manual_review",
-            "evidence": [],
-            "evidence_count": 0,
+            "canonical_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+            "status": "verified_local_evidence",
+            "evidence": [
+              {
+                "source": "data/youtube_twelve_dollars_playlist.json",
+                "label": "YouTube playlist snapshot: Twelve Dollars",
+                "status": "known_public_playlist"
+              }
+            ],
+            "evidence_count": 1,
             "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
           }
         ],
         "destination_link_audit_summary": {
           "link_count": 2,
-          "verified_local_evidence_count": 0,
-          "needs_manual_review_count": 2,
-          "all_links_have_local_evidence": false
+          "verified_local_evidence_count": 2,
+          "needs_manual_review_count": 0,
+          "all_links_have_local_evidence": true
         },
         "failed_review_checks": [
           {
@@ -486,25 +552,47 @@
           {
             "url": "https://youtu.be/EprgLKHp-lE",
             "canonical_url": "https://youtu.be/EprgLKHp-lE",
-            "status": "needs_manual_review",
-            "evidence": [],
-            "evidence_count": 0,
+            "status": "verified_local_evidence",
+            "evidence": [
+              {
+                "source": "data/youtube_public_snapshot.json",
+                "label": "YouTube public snapshot: The Other One's Charging - Lily Roo",
+                "status": "known_public_video"
+              },
+              {
+                "source": "data/youtube_twelve_dollars_playlist.json",
+                "label": "YouTube playlist track 3: The Other One's Charging",
+                "status": "known_playlist_track"
+              },
+              {
+                "source": "data/youtube_twelve_dollars_remaster_manifest.json",
+                "label": "Twelve Dollars remaster manifest: The Other One's Charging",
+                "status": "known_remastered_video"
+              }
+            ],
+            "evidence_count": 3,
             "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
           },
           {
             "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-            "canonical_url": "https://www.youtube.com/playlist",
-            "status": "needs_manual_review",
-            "evidence": [],
-            "evidence_count": 0,
+            "canonical_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+            "status": "verified_local_evidence",
+            "evidence": [
+              {
+                "source": "data/youtube_twelve_dollars_playlist.json",
+                "label": "YouTube playlist snapshot: Twelve Dollars",
+                "status": "known_public_playlist"
+              }
+            ],
+            "evidence_count": 1,
             "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
           }
         ],
         "destination_link_audit_summary": {
           "link_count": 2,
-          "verified_local_evidence_count": 0,
-          "needs_manual_review_count": 2,
-          "all_links_have_local_evidence": false
+          "verified_local_evidence_count": 2,
+          "needs_manual_review_count": 0,
+          "all_links_have_local_evidence": true
         },
         "failed_review_checks": [
           {
@@ -550,25 +638,47 @@
           {
             "url": "https://youtu.be/G2RlCwZKOsk",
             "canonical_url": "https://youtu.be/G2RlCwZKOsk",
-            "status": "needs_manual_review",
-            "evidence": [],
-            "evidence_count": 0,
+            "status": "verified_local_evidence",
+            "evidence": [
+              {
+                "source": "data/youtube_public_snapshot.json",
+                "label": "YouTube public snapshot: Twelve Dollars - Lily Roo",
+                "status": "known_public_video"
+              },
+              {
+                "source": "data/youtube_twelve_dollars_playlist.json",
+                "label": "YouTube playlist track 4: Twelve Dollars",
+                "status": "known_playlist_track"
+              },
+              {
+                "source": "data/youtube_twelve_dollars_remaster_manifest.json",
+                "label": "Twelve Dollars remaster manifest: Twelve Dollars",
+                "status": "known_remastered_video"
+              }
+            ],
+            "evidence_count": 3,
             "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
           },
           {
             "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-            "canonical_url": "https://www.youtube.com/playlist",
-            "status": "needs_manual_review",
-            "evidence": [],
-            "evidence_count": 0,
+            "canonical_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+            "status": "verified_local_evidence",
+            "evidence": [
+              {
+                "source": "data/youtube_twelve_dollars_playlist.json",
+                "label": "YouTube playlist snapshot: Twelve Dollars",
+                "status": "known_public_playlist"
+              }
+            ],
+            "evidence_count": 1,
             "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
           }
         ],
         "destination_link_audit_summary": {
           "link_count": 2,
-          "verified_local_evidence_count": 0,
-          "needs_manual_review_count": 2,
-          "all_links_have_local_evidence": false
+          "verified_local_evidence_count": 2,
+          "needs_manual_review_count": 0,
+          "all_links_have_local_evidence": true
         },
         "failed_review_checks": [
           {
@@ -607,25 +717,47 @@
           {
             "url": "https://youtu.be/G2RlCwZKOsk",
             "canonical_url": "https://youtu.be/G2RlCwZKOsk",
-            "status": "needs_manual_review",
-            "evidence": [],
-            "evidence_count": 0,
+            "status": "verified_local_evidence",
+            "evidence": [
+              {
+                "source": "data/youtube_public_snapshot.json",
+                "label": "YouTube public snapshot: Twelve Dollars - Lily Roo",
+                "status": "known_public_video"
+              },
+              {
+                "source": "data/youtube_twelve_dollars_playlist.json",
+                "label": "YouTube playlist track 4: Twelve Dollars",
+                "status": "known_playlist_track"
+              },
+              {
+                "source": "data/youtube_twelve_dollars_remaster_manifest.json",
+                "label": "Twelve Dollars remaster manifest: Twelve Dollars",
+                "status": "known_remastered_video"
+              }
+            ],
+            "evidence_count": 3,
             "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
           },
           {
             "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-            "canonical_url": "https://www.youtube.com/playlist",
-            "status": "needs_manual_review",
-            "evidence": [],
-            "evidence_count": 0,
+            "canonical_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+            "status": "verified_local_evidence",
+            "evidence": [
+              {
+                "source": "data/youtube_twelve_dollars_playlist.json",
+                "label": "YouTube playlist snapshot: Twelve Dollars",
+                "status": "known_public_playlist"
+              }
+            ],
+            "evidence_count": 1,
             "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
           }
         ],
         "destination_link_audit_summary": {
           "link_count": 2,
-          "verified_local_evidence_count": 0,
-          "needs_manual_review_count": 2,
-          "all_links_have_local_evidence": false
+          "verified_local_evidence_count": 2,
+          "needs_manual_review_count": 0,
+          "all_links_have_local_evidence": true
         },
         "failed_review_checks": [
           {
@@ -1090,6 +1222,15 @@
         "command": "python3 scripts/refresh_promo_admin.py && python3 scripts/validate_content_system.py",
         "evidence": "Admin should show fewer approval blockers and fresh execution state.",
         "applies_to_ids": []
+      },
+      {
+        "order": 5,
+        "title": "Confirm manual-distribution lane",
+        "owner": "codex",
+        "status": "clear",
+        "command": "python3 scripts/build_manual_distribution_packet.py",
+        "evidence": "No manual-distribution rows are active for this checked batch.",
+        "applies_to_ids": []
       }
     ],
     "guardrail": "This runbook is review-only; it does not approve, publish, post, or log anything."
@@ -1168,7 +1309,7 @@
         },
         {
           "url": "https://music.youtube.com/watch?v=vK0mDIW65o4",
-          "canonical_url": "https://music.youtube.com/watch",
+          "canonical_url": "https://music.youtube.com/watch?v=vK0mDIW65o4",
           "status": "verified_local_evidence",
           "evidence": [
             {
@@ -1283,25 +1424,47 @@
         {
           "url": "https://youtu.be/U7aczBSruAY",
           "canonical_url": "https://youtu.be/U7aczBSruAY",
-          "status": "needs_manual_review",
-          "evidence": [],
-          "evidence_count": 0,
+          "status": "verified_local_evidence",
+          "evidence": [
+            {
+              "source": "data/youtube_public_snapshot.json",
+              "label": "YouTube public snapshot: Brain Rot - Lily Roo",
+              "status": "known_public_video"
+            },
+            {
+              "source": "data/youtube_twelve_dollars_playlist.json",
+              "label": "YouTube playlist track 1: Brain Rot",
+              "status": "known_playlist_track"
+            },
+            {
+              "source": "data/youtube_twelve_dollars_remaster_manifest.json",
+              "label": "Twelve Dollars remaster manifest: Brain Rot",
+              "status": "known_remastered_video"
+            }
+          ],
+          "evidence_count": 3,
           "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
         },
         {
           "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-          "canonical_url": "https://www.youtube.com/playlist",
-          "status": "needs_manual_review",
-          "evidence": [],
-          "evidence_count": 0,
+          "canonical_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+          "status": "verified_local_evidence",
+          "evidence": [
+            {
+              "source": "data/youtube_twelve_dollars_playlist.json",
+              "label": "YouTube playlist snapshot: Twelve Dollars",
+              "status": "known_public_playlist"
+            }
+          ],
+          "evidence_count": 1,
           "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
         }
       ],
       "destination_link_audit_summary": {
         "link_count": 2,
-        "verified_local_evidence_count": 0,
-        "needs_manual_review_count": 2,
-        "all_links_have_local_evidence": false
+        "verified_local_evidence_count": 2,
+        "needs_manual_review_count": 0,
+        "all_links_have_local_evidence": true
       },
       "media_key": "twelve-dollars-brain-rot-cover",
       "desired_privacy": "",
@@ -1380,25 +1543,47 @@
         {
           "url": "https://youtu.be/QodRYnvTVZc",
           "canonical_url": "https://youtu.be/QodRYnvTVZc",
-          "status": "needs_manual_review",
-          "evidence": [],
-          "evidence_count": 0,
+          "status": "verified_local_evidence",
+          "evidence": [
+            {
+              "source": "data/youtube_public_snapshot.json",
+              "label": "YouTube public snapshot: Every Pearl in Carmel - Lily Roo",
+              "status": "known_public_video"
+            },
+            {
+              "source": "data/youtube_twelve_dollars_playlist.json",
+              "label": "YouTube playlist track 2: Every Pearl in Carmel",
+              "status": "known_playlist_track"
+            },
+            {
+              "source": "data/youtube_twelve_dollars_remaster_manifest.json",
+              "label": "Twelve Dollars remaster manifest: Every Pearl in Carmel",
+              "status": "known_remastered_video"
+            }
+          ],
+          "evidence_count": 3,
           "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
         },
         {
           "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-          "canonical_url": "https://www.youtube.com/playlist",
-          "status": "needs_manual_review",
-          "evidence": [],
-          "evidence_count": 0,
+          "canonical_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+          "status": "verified_local_evidence",
+          "evidence": [
+            {
+              "source": "data/youtube_twelve_dollars_playlist.json",
+              "label": "YouTube playlist snapshot: Twelve Dollars",
+              "status": "known_public_playlist"
+            }
+          ],
+          "evidence_count": 1,
           "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
         }
       ],
       "destination_link_audit_summary": {
         "link_count": 2,
-        "verified_local_evidence_count": 0,
-        "needs_manual_review_count": 2,
-        "all_links_have_local_evidence": false
+        "verified_local_evidence_count": 2,
+        "needs_manual_review_count": 0,
+        "all_links_have_local_evidence": true
       },
       "media_key": "twelve-dollars-every-pearl-in-carmel-cover",
       "desired_privacy": "",
@@ -1477,25 +1662,47 @@
         {
           "url": "https://youtu.be/EprgLKHp-lE",
           "canonical_url": "https://youtu.be/EprgLKHp-lE",
-          "status": "needs_manual_review",
-          "evidence": [],
-          "evidence_count": 0,
+          "status": "verified_local_evidence",
+          "evidence": [
+            {
+              "source": "data/youtube_public_snapshot.json",
+              "label": "YouTube public snapshot: The Other One's Charging - Lily Roo",
+              "status": "known_public_video"
+            },
+            {
+              "source": "data/youtube_twelve_dollars_playlist.json",
+              "label": "YouTube playlist track 3: The Other One's Charging",
+              "status": "known_playlist_track"
+            },
+            {
+              "source": "data/youtube_twelve_dollars_remaster_manifest.json",
+              "label": "Twelve Dollars remaster manifest: The Other One's Charging",
+              "status": "known_remastered_video"
+            }
+          ],
+          "evidence_count": 3,
           "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
         },
         {
           "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-          "canonical_url": "https://www.youtube.com/playlist",
-          "status": "needs_manual_review",
-          "evidence": [],
-          "evidence_count": 0,
+          "canonical_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+          "status": "verified_local_evidence",
+          "evidence": [
+            {
+              "source": "data/youtube_twelve_dollars_playlist.json",
+              "label": "YouTube playlist snapshot: Twelve Dollars",
+              "status": "known_public_playlist"
+            }
+          ],
+          "evidence_count": 1,
           "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
         }
       ],
       "destination_link_audit_summary": {
         "link_count": 2,
-        "verified_local_evidence_count": 0,
-        "needs_manual_review_count": 2,
-        "all_links_have_local_evidence": false
+        "verified_local_evidence_count": 2,
+        "needs_manual_review_count": 0,
+        "all_links_have_local_evidence": true
       },
       "media_key": "twelve-dollars-the-other-ones-charging-cover",
       "desired_privacy": "",
@@ -1574,25 +1781,47 @@
         {
           "url": "https://youtu.be/EprgLKHp-lE",
           "canonical_url": "https://youtu.be/EprgLKHp-lE",
-          "status": "needs_manual_review",
-          "evidence": [],
-          "evidence_count": 0,
+          "status": "verified_local_evidence",
+          "evidence": [
+            {
+              "source": "data/youtube_public_snapshot.json",
+              "label": "YouTube public snapshot: The Other One's Charging - Lily Roo",
+              "status": "known_public_video"
+            },
+            {
+              "source": "data/youtube_twelve_dollars_playlist.json",
+              "label": "YouTube playlist track 3: The Other One's Charging",
+              "status": "known_playlist_track"
+            },
+            {
+              "source": "data/youtube_twelve_dollars_remaster_manifest.json",
+              "label": "Twelve Dollars remaster manifest: The Other One's Charging",
+              "status": "known_remastered_video"
+            }
+          ],
+          "evidence_count": 3,
           "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
         },
         {
           "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-          "canonical_url": "https://www.youtube.com/playlist",
-          "status": "needs_manual_review",
-          "evidence": [],
-          "evidence_count": 0,
+          "canonical_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+          "status": "verified_local_evidence",
+          "evidence": [
+            {
+              "source": "data/youtube_twelve_dollars_playlist.json",
+              "label": "YouTube playlist snapshot: Twelve Dollars",
+              "status": "known_public_playlist"
+            }
+          ],
+          "evidence_count": 1,
           "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
         }
       ],
       "destination_link_audit_summary": {
         "link_count": 2,
-        "verified_local_evidence_count": 0,
-        "needs_manual_review_count": 2,
-        "all_links_have_local_evidence": false
+        "verified_local_evidence_count": 2,
+        "needs_manual_review_count": 0,
+        "all_links_have_local_evidence": true
       },
       "media_key": "twelve-dollars-the-other-ones-charging-video",
       "desired_privacy": "PUBLIC_TO_EVERYONE",
@@ -1685,25 +1914,47 @@
         {
           "url": "https://youtu.be/G2RlCwZKOsk",
           "canonical_url": "https://youtu.be/G2RlCwZKOsk",
-          "status": "needs_manual_review",
-          "evidence": [],
-          "evidence_count": 0,
+          "status": "verified_local_evidence",
+          "evidence": [
+            {
+              "source": "data/youtube_public_snapshot.json",
+              "label": "YouTube public snapshot: Twelve Dollars - Lily Roo",
+              "status": "known_public_video"
+            },
+            {
+              "source": "data/youtube_twelve_dollars_playlist.json",
+              "label": "YouTube playlist track 4: Twelve Dollars",
+              "status": "known_playlist_track"
+            },
+            {
+              "source": "data/youtube_twelve_dollars_remaster_manifest.json",
+              "label": "Twelve Dollars remaster manifest: Twelve Dollars",
+              "status": "known_remastered_video"
+            }
+          ],
+          "evidence_count": 3,
           "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
         },
         {
           "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-          "canonical_url": "https://www.youtube.com/playlist",
-          "status": "needs_manual_review",
-          "evidence": [],
-          "evidence_count": 0,
+          "canonical_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+          "status": "verified_local_evidence",
+          "evidence": [
+            {
+              "source": "data/youtube_twelve_dollars_playlist.json",
+              "label": "YouTube playlist snapshot: Twelve Dollars",
+              "status": "known_public_playlist"
+            }
+          ],
+          "evidence_count": 1,
           "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
         }
       ],
       "destination_link_audit_summary": {
         "link_count": 2,
-        "verified_local_evidence_count": 0,
-        "needs_manual_review_count": 2,
-        "all_links_have_local_evidence": false
+        "verified_local_evidence_count": 2,
+        "needs_manual_review_count": 0,
+        "all_links_have_local_evidence": true
       },
       "media_key": "twelve-dollars-twelve-dollars-cover",
       "desired_privacy": "",
@@ -1782,25 +2033,47 @@
         {
           "url": "https://youtu.be/G2RlCwZKOsk",
           "canonical_url": "https://youtu.be/G2RlCwZKOsk",
-          "status": "needs_manual_review",
-          "evidence": [],
-          "evidence_count": 0,
+          "status": "verified_local_evidence",
+          "evidence": [
+            {
+              "source": "data/youtube_public_snapshot.json",
+              "label": "YouTube public snapshot: Twelve Dollars - Lily Roo",
+              "status": "known_public_video"
+            },
+            {
+              "source": "data/youtube_twelve_dollars_playlist.json",
+              "label": "YouTube playlist track 4: Twelve Dollars",
+              "status": "known_playlist_track"
+            },
+            {
+              "source": "data/youtube_twelve_dollars_remaster_manifest.json",
+              "label": "Twelve Dollars remaster manifest: Twelve Dollars",
+              "status": "known_remastered_video"
+            }
+          ],
+          "evidence_count": 3,
           "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
         },
         {
           "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
-          "canonical_url": "https://www.youtube.com/playlist",
-          "status": "needs_manual_review",
-          "evidence": [],
-          "evidence_count": 0,
+          "canonical_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+          "status": "verified_local_evidence",
+          "evidence": [
+            {
+              "source": "data/youtube_twelve_dollars_playlist.json",
+              "label": "YouTube playlist snapshot: Twelve Dollars",
+              "status": "known_public_playlist"
+            }
+          ],
+          "evidence_count": 1,
           "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
         }
       ],
       "destination_link_audit_summary": {
         "link_count": 2,
-        "verified_local_evidence_count": 0,
-        "needs_manual_review_count": 2,
-        "all_links_have_local_evidence": false
+        "verified_local_evidence_count": 2,
+        "needs_manual_review_count": 0,
+        "all_links_have_local_evidence": true
       },
       "media_key": "twelve-dollars-twelve-dollars-video",
       "desired_privacy": "PUBLIC_TO_EVERYONE",

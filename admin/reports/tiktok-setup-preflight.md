@@ -1,6 +1,6 @@
 # TikTok Setup Preflight - Lily Roo
 
-Generated: 2026-07-03T05:44:25.459300Z
+Generated: 2026-07-03T06:08:13.069010Z
 
 ## Summary
 - Status: **blocked**
@@ -12,11 +12,11 @@ Generated: 2026-07-03T05:44:25.459300Z
 - Ready to upload inbox drafts: **False**
 - Ready to post publicly: **False**
 - Local posting helper uses refresh token: **True**
-- First TikTok asset ready for upload mode: **False** (`FP-AUTO-264`)
+- First TikTok asset ready for upload mode: **True** (`FP-AUTO-264`)
 - Local post preview: `python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --dry-run`
 - Local draft upload preview: `python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run`
 - Earliest TikTok API path: video.upload inbox draft; final public URL still requires human publish and URL logging.
-- Upload-mode lane: **asset_blocked**; public approval required: **False**
+- Upload-mode lane: **ready_after_credentials**; public approval required: **False**
 - Direct public lane: **deferred_until_tiktok_approval**; public approval required: **True**
 - Local public posting approval confirmed: **False**
 - Public posting approved: **False**
@@ -45,7 +45,7 @@ Generated: 2026-07-03T05:44:25.459300Z
   - Refresh admin and validation after the connector state changes.
 
 ## Upload-Mode Repair Ladder
-- Immediate lane status: **asset_blocked**
+- Immediate lane status: **ready_after_credentials**
 - First post ID: `FP-AUTO-264`
 - Scopes: `user.info.basic, video.upload`
 - Public posting approval required now: **False**

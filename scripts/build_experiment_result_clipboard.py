@@ -360,6 +360,31 @@ def measurement_priority_cards(metric_cards: list[dict], missing_cards: list[dic
             continue
         selected.append(item)
         selected_keys.add(key)
+    if not any(item.get("action") in {"await_scheduled_auto_post", "clear_platform_blocker"} for item in selected):
+        coverage_item = next(
+            (
+                item
+                for item in priority
+                if item.get("action") in {"await_scheduled_auto_post", "clear_platform_blocker"}
+            ),
+            None,
+        )
+        if coverage_item:
+            key = (
+                coverage_item.get("action"),
+                coverage_item.get("post_id"),
+                coverage_item.get("experiment_format") or "Unknown format",
+            )
+            if key not in selected_keys:
+                if len(selected) >= 12:
+                    removed = selected.pop()
+                    selected_keys.discard((
+                        removed.get("action"),
+                        removed.get("post_id"),
+                        removed.get("experiment_format") or "Unknown format",
+                    ))
+                selected.append(coverage_item)
+                selected_keys.add(key)
     selected.sort(key=lambda item: (item["priority"], item["experiment_format"], item["platform"], item["post_id"]))
     return selected
 

@@ -33,7 +33,11 @@ def previews_for_roadmap(roadmap: dict, previews: dict) -> list[dict]:
     if step_id == "unlock-manual-distribution":
         return [row for key, row in previews.items() if str(key).startswith("manual-distribution-")]
     if step_id == "unlock-tiktok-platform-repair":
-        return [previews.get("platform-setup-FP-AUTO-264") or {}]
+        return [
+            previews.get("platform-setup-tiktok-preflight")
+            or previews.get("platform-setup-FP-AUTO-264")
+            or {}
+        ]
     if step_id == "unlock-backlog-reschedule":
         return [previews.get("backlog-reschedule") or {}]
     if step_id == "unlock-manual-metrics":

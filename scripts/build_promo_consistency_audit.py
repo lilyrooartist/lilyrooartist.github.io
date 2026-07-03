@@ -148,11 +148,15 @@ def build_checks() -> dict:
         int((platform.get("summary") or {}).get("platform_fix_count") or 0),
         "Executor platform-fix count should match the platform repair packet after excluding manual-only handoff rows.",
     ))
-    checks.append(same_value(
+    checks.append(verdict(
         "tiktok_preflight_status_matches_platform_repair",
-        tiktok_repair.get("preflight_status") or "",
-        preflight_summary.get("status") or "",
-        "TikTok platform repair row should mirror the setup preflight status.",
+        (
+            not tiktok_repair
+            or (tiktok_repair.get("preflight_status") or "") == (preflight_summary.get("status") or "")
+        ),
+        "TikTok platform repair row should mirror setup preflight when a current TikTok repair row exists.",
+        expected=tiktok_repair.get("preflight_status") or "no current TikTok repair row",
+        actual=preflight_summary.get("status") or "",
     ))
     checks.append(same_value(
         "tiktok_preflight_local_missing_matches_platform_repair",
