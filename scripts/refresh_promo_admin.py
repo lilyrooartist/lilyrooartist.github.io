@@ -69,6 +69,12 @@ STEPS = [
         "required": True,
     },
     {
+        "name": "export_social_executions",
+        "command": ["python3", "scripts/export_social_executions.py"],
+        "required": False,
+        "preserve_on_failure": ["admin/content/Published_Log.csv"],
+    },
+    {
         "name": "capture_scheduler_dry_run",
         "command": ["python3", "scripts/capture_scheduler_dry_run.py"],
         "required": False,
