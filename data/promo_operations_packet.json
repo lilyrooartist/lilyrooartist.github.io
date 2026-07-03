@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-03T06:12:20.042539Z",
+  "generated_at": "2026-07-03T06:13:35.325887Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -58,11 +58,11 @@
     ]
   },
   "summary": {
-    "action_count": 18,
+    "action_count": 19,
     "user_review": 7,
     "platform_fixes": 3,
     "scheduled_approval_batches": 0,
-    "store_checks": 5,
+    "store_checks": 6,
     "manual_metric_updates": 2,
     "manual_distribution_actions": 0,
     "experiment_result_actions": 1,
@@ -75,13 +75,13 @@
       "Fill manual metrics": 2,
       "Repair executor": 3,
       "Review blocked drafts": 7,
-      "Verify music sites": 5
+      "Verify music sites": 6
     },
     "urgencies": {
       "blocked": 7,
       "high": 4,
       "low": 2,
-      "medium": 5
+      "medium": 6
     },
     "next_action": {
       "label": "Fix Instagram executor",
@@ -539,25 +539,25 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "Spotify",
-        "checked_at": "2026-07-03T06:11:09.130439+00:00",
+        "checked_at": "2026-07-03T06:13:25.397516+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-07-04T06:11:09.130439+00:00",
+        "next_recheck_at": "2026-07-04T06:13:25.397516+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-07-03T06:11:09.130439Z",
+          "updated_at": "2026-07-03T06:13:25.397516Z",
           "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-          "checked_at": "2026-07-03T06:11:09.130439+00:00",
+          "checked_at": "2026-07-03T06:13:25.397516+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-07-04T06:11:09.130439+00:00",
+          "next_recheck_at": "2026-07-04T06:13:25.397516+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-07-04T06:11:09.130439+00:00. Status: waiting_for_release_propagation."
+        "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-07-04T06:13:25.397516+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -577,25 +577,25 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "Apple Music",
-        "checked_at": "2026-07-03T06:11:29.407898+00:00",
+        "checked_at": "2026-07-03T06:13:27.308198+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-07-04T06:11:29.407898+00:00",
+        "next_recheck_at": "2026-07-04T06:13:27.308198+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-07-03T06:11:29.407898Z",
+          "updated_at": "2026-07-03T06:13:27.308198Z",
           "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-          "checked_at": "2026-07-03T06:11:29.407898+00:00",
+          "checked_at": "2026-07-03T06:13:27.308198+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-07-04T06:11:29.407898+00:00",
+          "next_recheck_at": "2026-07-04T06:13:27.308198+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-07-04T06:11:29.407898+00:00. Status: waiting_for_release_propagation."
+        "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-07-04T06:13:27.308198+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -615,25 +615,25 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "HyperFollow",
-        "checked_at": "2026-07-03T06:11:29.822482+00:00",
+        "checked_at": "2026-07-03T06:13:27.441001+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-07-04T06:11:29.822482+00:00",
+        "next_recheck_at": "2026-07-04T06:13:27.441001+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
           "ok": false,
-          "updated_at": "2026-07-03T06:11:29.822482Z",
+          "updated_at": "2026-07-03T06:13:27.441001Z",
           "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-          "checked_at": "2026-07-03T06:11:29.822482+00:00",
+          "checked_at": "2026-07-03T06:13:27.441001+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-07-04T06:11:29.822482+00:00",
+          "next_recheck_at": "2026-07-04T06:13:27.441001+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; next recommended re-check after 2026-07-04T06:11:29.822482+00:00. Status: waiting_for_release_propagation."
+        "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; next recommended re-check after 2026-07-04T06:13:27.441001+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -653,25 +653,25 @@
       "context": {
         "release": "Analog Myth",
         "service": "Spotify",
-        "checked_at": "2026-07-03T06:11:29.902281+00:00",
+        "checked_at": "2026-07-03T06:13:27.498485+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-07-04T06:11:29.902281+00:00",
+        "next_recheck_at": "2026-07-04T06:13:27.498485+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/spotify_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-07-03T06:11:29.902281Z",
+          "updated_at": "2026-07-03T06:13:27.498485Z",
           "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
-          "checked_at": "2026-07-03T06:11:29.902281+00:00",
+          "checked_at": "2026-07-03T06:13:27.498485+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-07-04T06:11:29.902281+00:00",
+          "next_recheck_at": "2026-07-04T06:13:27.498485+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-07-04T06:11:29.902281+00:00. Status: waiting_for_release_propagation."
+        "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-07-04T06:13:27.498485+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -691,25 +691,25 @@
       "context": {
         "release": "Analog Myth",
         "service": "YouTube Music",
-        "checked_at": "2026-07-03T06:11:50.183350+00:00",
+        "checked_at": "2026-07-03T06:13:27.919533+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-07-04T06:11:50.183350+00:00",
+        "next_recheck_at": "2026-07-04T06:13:27.919533+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
           "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-07-03T06:11:50.183350Z",
+          "updated_at": "2026-07-03T06:13:27.919533Z",
           "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-          "checked_at": "2026-07-03T06:11:50.183350+00:00",
+          "checked_at": "2026-07-03T06:13:27.919533+00:00",
           "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-07-04T06:11:50.183350+00:00",
+          "next_recheck_at": "2026-07-04T06:13:27.919533+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Searches public web results for YouTube Music watch URLs, then validates the public title. Latest snapshot found no public URL; next recommended re-check after 2026-07-04T06:11:50.183350+00:00. Status: waiting_for_release_propagation."
+        "note": "Searches public web results for YouTube Music watch URLs, then validates the public title. Latest snapshot found no public URL; next recommended re-check after 2026-07-04T06:13:27.919533+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -719,6 +719,44 @@
         2,
         20,
         15
+      ]
+    },
+    {
+      "label": "Re-check Analog Myth on HyperFollow",
+      "kind": "store_verification",
+      "priority": 20,
+      "command": "python3 scripts/capture_hyperfollow_store_links.py --url 'https://distrokid.com/hyperfollow/lilyroo/analog-myth' --out 'data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json'",
+      "context": {
+        "release": "Analog Myth",
+        "service": "HyperFollow",
+        "checked_at": "2026-07-03T06:13:28.485018+00:00",
+        "checked_age_hours": 0.0,
+        "recheck_interval_hours": 24,
+        "next_recheck_at": "2026-07-04T06:13:28.485018+00:00",
+        "recheck_due": false,
+        "recheck_status": "waiting_for_release_propagation",
+        "latest_snapshot": {
+          "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
+          "ok": false,
+          "updated_at": "2026-07-03T06:13:28.485018Z",
+          "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
+          "checked_at": "2026-07-03T06:13:28.485018+00:00",
+          "checked_age_hours": 0.0,
+          "recheck_interval_hours": 24,
+          "next_recheck_at": "2026-07-04T06:13:28.485018+00:00",
+          "recheck_due": false,
+          "recheck_status": "waiting_for_release_propagation"
+        },
+        "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; next recommended re-check after 2026-07-04T06:13:28.485018+00:00. Status: waiting_for_release_propagation."
+      },
+      "phase": "Verify music sites",
+      "urgency": "medium",
+      "urgency_reason": "Public store links should be checked as the July 1 release approaches.",
+      "status": "ready",
+      "sort_key": [
+        2,
+        20,
+        16
       ]
     },
     {
@@ -865,7 +903,7 @@
       "sort_key": [
         3,
         32,
-        16
+        17
       ]
     },
     {
@@ -1003,7 +1041,7 @@
       "sort_key": [
         3,
         33,
-        17
+        18
       ]
     }
   ]

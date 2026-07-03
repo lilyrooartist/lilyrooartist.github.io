@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-03T06:12:21.012921Z",
+  "generated_at": "2026-07-03T06:13:36.263892Z",
   "safe_mode": true,
   "source": {
     "promotion_blocker_ledger": "data/promotion_blocker_ledger.json",
@@ -129,8 +129,8 @@
             "Approved past-due queue rows get a fresh schedule after executor blockers clear."
           ],
           "blocked_by": [],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00-04:00' --spacing-hours 24",
-          "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24",
+          "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
           "source_path": "data/backlog_reschedule_preview.json"
         },
         {
@@ -729,11 +729,15 @@
           "TIKTOK_CLIENT_SECRET",
           "TIKTOK_REFRESH_TOKEN"
         ],
-        "local_missing_secrets": [],
+        "local_missing_secrets": [
+          "TIKTOK_CLIENT_KEY",
+          "TIKTOK_CLIENT_SECRET",
+          "TIKTOK_REFRESH_TOKEN"
+        ],
         "public_posting_approved": false,
         "preflight_status": "blocked",
-        "preflight_blocked_count": 1,
-        "ready_to_push_worker_secrets": true,
+        "preflight_blocked_count": 5,
+        "ready_to_push_worker_secrets": false,
         "ready_to_upload_drafts": false,
         "ready_to_post_publicly": false,
         "preflight_report": "admin/reports/tiktok-setup-preflight.md",
