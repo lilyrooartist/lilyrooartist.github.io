@@ -602,7 +602,7 @@ def validate_generated_outputs(failures):
             and required_source <= set(source)
             and isinstance(summary.get("ready_to_upload_drafts"), bool)
             and (summary.get("worker_posting_mode") or "") in {"upload", "direct"}
-            and credential_handoff.get("status") in {"ready_to_push", "needs_local_values"}
+            and credential_handoff.get("status") in {"ready_to_push", "needs_local_values", "worker_upload_ready"}
             and owner_handoff.get("status") in {"blocked_until_user_input", "ready_for_secret_push_preview"}
             and owner_handoff.get("needed_input_count") == len(owner_handoff.get("needed_inputs") or [])
             and owner_handoff.get("first_growth_row_unblocked") == "FP-AUTO-264"
@@ -668,7 +668,7 @@ def validate_generated_outputs(failures):
             and len(credential_handoff.get("completion_evidence") or []) >= 3
             and "Secret values" in (credential_handoff.get("redaction") or "")
             and "Secret values" in (preflight.get("redaction") or "")
-            and all(check.get("name") and check.get("status") in {"pass", "blocked", "review", "waiting"} and check.get("detail") for check in checks)
+            and all(check.get("name") and check.get("status") in {"pass", "blocked", "review", "waiting", "remote_only"} and check.get("detail") for check in checks)
         ):
             ok(f"tiktok_setup_preflight.json tracks {len(checks)} safe setup check(s)")
         else:

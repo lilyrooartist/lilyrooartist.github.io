@@ -1,6 +1,6 @@
 # Promo Unlock Sequence - Lily Roo
 
-Generated: 2026-07-03T09:35:47.808307Z
+Generated: 2026-07-03T09:42:04.969144Z
 
 ## Summary
 - Steps: **5**
@@ -31,8 +31,8 @@ Generated: 2026-07-03T09:35:47.808307Z
    - State: `clear`; owner: `tod`
    - Reason: No action is needed for this gate.
    - Unlocks: Approved past-due queue rows get a fresh schedule after executor blockers clear.
-   - preview (preview-safe): `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24`
-   - apply_after_review (after-review only): `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin`
+   - preview (preview-safe): `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00-04:00' --spacing-hours 24`
+   - apply_after_review (after-review only): `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin`
 5. **Fill manual metric worksheet** - `unlock-manual-metrics`
    - State: `blocked_until_input`; owner: `tod`
    - Reason: private_metric_values

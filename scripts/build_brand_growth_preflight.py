@@ -180,12 +180,24 @@ def build_payload() -> dict:
     scheduled_time = window.get("scheduled_time")
     q_url = queue_url()
 
+    scheduler_queue_source = "commit_queue_url" if q_url else "none"
+    scheduler_fallback_reason = ""
     if scheduled_time and q_url:
         status, scheduler_payload, error = fetch(
             "https://www.lilyroo.com/api/social/scheduler/dry-run",
             iso_z(scheduled_time),
             q_url,
         )
+        if status != 200 or not (isinstance(scheduler_payload, dict) and scheduler_payload.get("ok")):
+            first_status = status
+            first_error = error or (scheduler_payload.get("error") if isinstance(scheduler_payload, dict) else "")
+            status, scheduler_payload, error = fetch(
+                "https://www.lilyroo.com/api/social/scheduler/dry-run",
+                iso_z(scheduled_time),
+                "",
+            )
+            scheduler_queue_source = "live_queue_fallback"
+            scheduler_fallback_reason = f"Commit queue probe returned HTTP {first_status}: {first_error or 'scheduler probe failed'}"
     else:
         status, scheduler_payload, error = 0, {}, "no future campaign window"
     scheduler_summary = summarize(scheduler_payload if isinstance(scheduler_payload, dict) else {})
@@ -223,6 +235,8 @@ def build_payload() -> dict:
             "expected_post_ids": expected,
             "scheduler_http_status": status,
             "scheduler_auth_method": auth_method(),
+            "scheduler_queue_source": scheduler_queue_source,
+            "scheduler_fallback_reason": scheduler_fallback_reason,
             "scheduler_due_count": scheduler_summary.get("due_count", 0),
             "scheduler_would_post_count": scheduler_summary.get("would_post_count", 0),
             "scheduler_blocked_count": scheduler_summary.get("blocked_count", 0),
