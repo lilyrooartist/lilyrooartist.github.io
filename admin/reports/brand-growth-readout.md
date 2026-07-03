@@ -1,16 +1,16 @@
 # Brand Growth Readout - Lily Roo
 
-Generated: 2026-07-03T09:43:26.339622Z
+Generated: 2026-07-03T09:48:13.777743Z
 
 ## Summary
-- Campaign rows: **48**
-- Approved auto rows: **48**
-- Visible in future queue: **48**
+- Campaign rows: **64**
+- Approved auto rows: **64**
+- Visible in future queue: **64**
 - Posted or measured rows: **0**
 - Measured rows: **0**
 - Ready for metric capture: **0**
-- Post-slot watch windows: **24**
-- Status counts: **scheduled_future: 48**
+- Post-slot watch windows: **32**
+- Status counts: **scheduled_future: 64**
 - Next scheduled: `FP-BRAND-AM-01-13-X` at `2026-07-04T10:15:00-04:00`
 - Next proof due: `2026-07-04T16:05:00Z`
 - First measurement due: `2026-07-05T15:20:00Z`
@@ -99,6 +99,30 @@ Generated: 2026-07-03T09:43:26.339622Z
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
 - `2026-07-27` **scheduled_future** proof due `2026-07-27T16:05:00Z` for `FP-BRAND-AM-W3-08-THE-POWER-OF-LIGHT-X, FP-BRAND-AM-W3-08-THE-POWER-OF-LIGHT-FACEBOOK`
+  - Next: Wait for the scheduled executor; proof capture starts after the final slot.
+  - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
+- `2026-07-28` **scheduled_future** proof due `2026-07-28T16:05:00Z` for `FP-BRAND-AM-W4-01-13-X, FP-BRAND-AM-W4-01-13-FACEBOOK`
+  - Next: Wait for the scheduled executor; proof capture starts after the final slot.
+  - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
+- `2026-07-29` **scheduled_future** proof due `2026-07-29T16:05:00Z` for `FP-BRAND-AM-W4-02-GIRLS-CAMP-X, FP-BRAND-AM-W4-02-GIRLS-CAMP-FACEBOOK`
+  - Next: Wait for the scheduled executor; proof capture starts after the final slot.
+  - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
+- `2026-07-30` **scheduled_future** proof due `2026-07-30T16:05:00Z` for `FP-BRAND-AM-W4-03-ANALOG-MYTH-X, FP-BRAND-AM-W4-03-ANALOG-MYTH-FACEBOOK`
+  - Next: Wait for the scheduled executor; proof capture starts after the final slot.
+  - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
+- `2026-07-31` **scheduled_future** proof due `2026-07-31T16:05:00Z` for `FP-BRAND-AM-W4-04-SPILLING-THE-TEA-X, FP-BRAND-AM-W4-04-SPILLING-THE-TEA-FACEBOOK`
+  - Next: Wait for the scheduled executor; proof capture starts after the final slot.
+  - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
+- `2026-08-01` **scheduled_future** proof due `2026-08-01T16:05:00Z` for `FP-BRAND-AM-W4-05-NO-MORTGAGE-X, FP-BRAND-AM-W4-05-NO-MORTGAGE-FACEBOOK`
+  - Next: Wait for the scheduled executor; proof capture starts after the final slot.
+  - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
+- `2026-08-02` **scheduled_future** proof due `2026-08-02T16:05:00Z` for `FP-BRAND-AM-W4-06-GUARDS-DOWN-X, FP-BRAND-AM-W4-06-GUARDS-DOWN-FACEBOOK`
+  - Next: Wait for the scheduled executor; proof capture starts after the final slot.
+  - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
+- `2026-08-03` **scheduled_future** proof due `2026-08-03T16:05:00Z` for `FP-BRAND-AM-W4-07-SLOW-WALK-X, FP-BRAND-AM-W4-07-SLOW-WALK-FACEBOOK`
+  - Next: Wait for the scheduled executor; proof capture starts after the final slot.
+  - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
+- `2026-08-04` **scheduled_future** proof due `2026-08-04T16:05:00Z` for `FP-BRAND-AM-W4-08-THE-POWER-OF-LIGHT-X, FP-BRAND-AM-W4-08-THE-POWER-OF-LIGHT-FACEBOOK`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
 
@@ -198,6 +222,38 @@ Generated: 2026-07-03T09:43:26.339622Z
 - `FP-BRAND-AM-W3-08-THE-POWER-OF-LIGHT-X` X 2026-07-27T10:15:00-04:00 - **scheduled_future**
   - Next: Wait for the scheduled social executor, then refresh admin and export executions.
 - `FP-BRAND-AM-W3-08-THE-POWER-OF-LIGHT-FACEBOOK` Facebook 2026-07-27T11:20:00-04:00 - **scheduled_future**
+  - Next: Wait for the scheduled social executor, then refresh admin and export executions.
+- `FP-BRAND-AM-W4-01-13-X` X 2026-07-28T10:15:00-04:00 - **scheduled_future**
+  - Next: Wait for the scheduled social executor, then refresh admin and export executions.
+- `FP-BRAND-AM-W4-01-13-FACEBOOK` Facebook 2026-07-28T11:20:00-04:00 - **scheduled_future**
+  - Next: Wait for the scheduled social executor, then refresh admin and export executions.
+- `FP-BRAND-AM-W4-02-GIRLS-CAMP-X` X 2026-07-29T10:15:00-04:00 - **scheduled_future**
+  - Next: Wait for the scheduled social executor, then refresh admin and export executions.
+- `FP-BRAND-AM-W4-02-GIRLS-CAMP-FACEBOOK` Facebook 2026-07-29T11:20:00-04:00 - **scheduled_future**
+  - Next: Wait for the scheduled social executor, then refresh admin and export executions.
+- `FP-BRAND-AM-W4-03-ANALOG-MYTH-X` X 2026-07-30T10:15:00-04:00 - **scheduled_future**
+  - Next: Wait for the scheduled social executor, then refresh admin and export executions.
+- `FP-BRAND-AM-W4-03-ANALOG-MYTH-FACEBOOK` Facebook 2026-07-30T11:20:00-04:00 - **scheduled_future**
+  - Next: Wait for the scheduled social executor, then refresh admin and export executions.
+- `FP-BRAND-AM-W4-04-SPILLING-THE-TEA-X` X 2026-07-31T10:15:00-04:00 - **scheduled_future**
+  - Next: Wait for the scheduled social executor, then refresh admin and export executions.
+- `FP-BRAND-AM-W4-04-SPILLING-THE-TEA-FACEBOOK` Facebook 2026-07-31T11:20:00-04:00 - **scheduled_future**
+  - Next: Wait for the scheduled social executor, then refresh admin and export executions.
+- `FP-BRAND-AM-W4-05-NO-MORTGAGE-X` X 2026-08-01T10:15:00-04:00 - **scheduled_future**
+  - Next: Wait for the scheduled social executor, then refresh admin and export executions.
+- `FP-BRAND-AM-W4-05-NO-MORTGAGE-FACEBOOK` Facebook 2026-08-01T11:20:00-04:00 - **scheduled_future**
+  - Next: Wait for the scheduled social executor, then refresh admin and export executions.
+- `FP-BRAND-AM-W4-06-GUARDS-DOWN-X` X 2026-08-02T10:15:00-04:00 - **scheduled_future**
+  - Next: Wait for the scheduled social executor, then refresh admin and export executions.
+- `FP-BRAND-AM-W4-06-GUARDS-DOWN-FACEBOOK` Facebook 2026-08-02T11:20:00-04:00 - **scheduled_future**
+  - Next: Wait for the scheduled social executor, then refresh admin and export executions.
+- `FP-BRAND-AM-W4-07-SLOW-WALK-X` X 2026-08-03T10:15:00-04:00 - **scheduled_future**
+  - Next: Wait for the scheduled social executor, then refresh admin and export executions.
+- `FP-BRAND-AM-W4-07-SLOW-WALK-FACEBOOK` Facebook 2026-08-03T11:20:00-04:00 - **scheduled_future**
+  - Next: Wait for the scheduled social executor, then refresh admin and export executions.
+- `FP-BRAND-AM-W4-08-THE-POWER-OF-LIGHT-X` X 2026-08-04T10:15:00-04:00 - **scheduled_future**
+  - Next: Wait for the scheduled social executor, then refresh admin and export executions.
+- `FP-BRAND-AM-W4-08-THE-POWER-OF-LIGHT-FACEBOOK` Facebook 2026-08-04T11:20:00-04:00 - **scheduled_future**
   - Next: Wait for the scheduled social executor, then refresh admin and export executions.
 
 ## Guardrails

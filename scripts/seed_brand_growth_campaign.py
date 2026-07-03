@@ -80,6 +80,17 @@ ROOM_NOTES_HOOKS = {
     "The Power of Light": "leaves the room glowing after the last switch clicks.",
 }
 
+SIGNAL_TRACE_HOOKS = {
+    "13": "starts with the kind of number that turns into weather.",
+    "Girls Camp": "keeps the ghost story bright enough to see the fingerprints.",
+    "Analog Myth": "lets the tape hiss become part of the truth.",
+    "Spilling the Tea": "makes the side-eye cinematic without losing the grin.",
+    "No Mortgage": "sounds like a house key landing on the table.",
+    "Guards Down": "catches the exact second the brave face slips.",
+    "Slow Walk": "moves like it knows the shortcut is a trap.",
+    "The Power of Light": "turns the last switch into a little revelation.",
+}
+
 WAVES = {
     "track-moments": {
         "id_segment": "",
@@ -98,6 +109,12 @@ WAVES = {
         "label": "Room notes",
         "objective": "Grow Lily Roo brand with a third automated Analog Myth room-notes pass.",
         "hooks": ROOM_NOTES_HOOKS,
+    },
+    "signal-trace": {
+        "id_segment": "W4",
+        "label": "Signal trace",
+        "objective": "Grow Lily Roo brand with a fourth automated Analog Myth signal-trace pass.",
+        "hooks": SIGNAL_TRACE_HOOKS,
     },
 }
 
@@ -200,6 +217,13 @@ def post_text(track: dict, platform: str, wave: str) -> str:
             return f"Room note from Analog Myth: {title} {hook}"
         return (
             f"Analog Myth room note, track {track['track']}: {title} {hook}\n\n"
+            "Album page, Echo Thread play-through, and the full playlist are live."
+        )
+    if wave == "signal-trace":
+        if platform == "X":
+            return f"Analog Myth signal trace: {title} {hook}"
+        return (
+            f"Analog Myth signal trace, track {track['track']}: {title} {hook}\n\n"
             "Album page, Echo Thread play-through, and the full playlist are live."
         )
     if platform == "X":
