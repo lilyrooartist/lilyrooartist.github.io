@@ -1,6 +1,6 @@
 # TikTok Repair Runbook - Lily Roo
 
-Generated: 2026-07-03T10:29:19.498311Z
+Generated: 2026-07-03T10:34:28.203410Z
 
 ## Summary
 - Status: **ready_for_backlog_clearance**
@@ -71,13 +71,12 @@ Generated: 2026-07-03T10:29:19.498311Z
   - Command: `python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run`
 - **Apply push - Push upload-mode worker secrets after review**: `ready`
   - Run the apply command after local refresh credentials exist and the dry-run is reviewed. Public-posting approval is a separate direct-posting gate.
-  - Command: `python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py`
 - **Verify repair - Recapture executor readiness**: `waiting`
   - After applying secrets, recapture worker readiness and rebuild the admin packets so platform repair, blocker, handoff, and backlog state agree.
   - Command: `python3 scripts/capture_executor_readiness.py && python3 scripts/refresh_promo_admin.py`
 - **Clear gate - Clear TikTok backlog gate**: `ready`
   - Once worker readiness is clean, rerun the backlog reschedule preview and apply the approved row only if the gate reports safe apply available. Upload mode creates an inbox draft that still needs human publish and URL logging.
-  - Command: `python3 scripts/build_backlog_reschedule_preview.py && python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00-04:00' --spacing-hours 24`
+  - Command: `python3 scripts/build_backlog_reschedule_preview.py && python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24`
 
 ## Guardrails
 - This runbook does not push secrets, approve public posting, publish posts, or clear backlog rows.
