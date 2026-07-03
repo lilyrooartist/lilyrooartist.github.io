@@ -69,6 +69,17 @@ AFTERGLOW_HOOKS = {
     "The Power of Light": "ends like a switch, a dare, and a little weather system.",
 }
 
+ROOM_NOTES_HOOKS = {
+    "13": "still feels like the first page you probably should not have opened.",
+    "Girls Camp": "keeps the flashlight on under the bunk.",
+    "Analog Myth": "is the title track for anyone who likes their clocks a little unreliable.",
+    "Spilling the Tea": "keeps the story bright, crooked, and a little too well documented.",
+    "No Mortgage": "turns the escape fantasy into something you can hum.",
+    "Guards Down": "lets the soft part have the microphone.",
+    "Slow Walk": "is a reminder that pace can be its own kind of power.",
+    "The Power of Light": "leaves the room glowing after the last switch clicks.",
+}
+
 WAVES = {
     "track-moments": {
         "id_segment": "",
@@ -81,6 +92,12 @@ WAVES = {
         "label": "Afterglow",
         "objective": "Grow Lily Roo brand with a second automated Analog Myth afterglow pass.",
         "hooks": AFTERGLOW_HOOKS,
+    },
+    "room-notes": {
+        "id_segment": "W3",
+        "label": "Room notes",
+        "objective": "Grow Lily Roo brand with a third automated Analog Myth room-notes pass.",
+        "hooks": ROOM_NOTES_HOOKS,
     },
 }
 
@@ -177,6 +194,13 @@ def post_text(track: dict, platform: str, wave: str) -> str:
         return (
             f"Analog Myth afterglow, track {track['track']}: {title} {hook}\n\n"
             "The album page, Echo Thread play-through, and full playlist are live."
+        )
+    if wave == "room-notes":
+        if platform == "X":
+            return f"Room note from Analog Myth: {title} {hook}"
+        return (
+            f"Analog Myth room note, track {track['track']}: {title} {hook}\n\n"
+            "Album page, Echo Thread play-through, and the full playlist are live."
         )
     if platform == "X":
         return f"{title} {hook} Analog Myth is live."

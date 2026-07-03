@@ -1,13 +1,13 @@
 {
   "ok": true,
   "mode": "write",
-  "generated_at": "2026-07-03T09:11:26.886017Z",
+  "generated_at": "2026-07-03T09:17:29.115312Z",
   "source": "data/scheduled_posts.csv",
   "archive": "data/expired_scheduled_posts.csv",
   "older_than_hours": 24.0,
-  "cutoff": "2026-07-02T09:11:26.886017Z",
-  "input_count": 78,
-  "kept_count": 65,
+  "cutoff": "2026-07-02T09:17:29.115312Z",
+  "input_count": 94,
+  "kept_count": 81,
   "expired_count": 13,
   "expired_ids": [
     "FP-AUTO-259",
@@ -26,7 +26,7 @@
   ],
   "skipped_reasons": {
     "already_published": 33,
-    "approved": 32
+    "approved": 48
   },
   "source_pruned": false,
   "guardrail": "Only unapproved, unpublished, past-due rows outside the stale grace window are archived; source pruning requires --prune-source."
