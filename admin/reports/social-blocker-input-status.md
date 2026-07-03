@@ -1,6 +1,6 @@
 # Social Blocker Input Status - Lily Roo
 
-Generated: 2026-07-03T11:29:56.086587Z
+Generated: 2026-07-03T11:51:42.725929Z
 
 ## Summary
 - Status: **missing_local_input**
@@ -96,29 +96,28 @@ Generated: 2026-07-03T11:29:56.086587Z
   - Portal: https://developers.tiktok.com/
   - Docs: https://developers.tiktok.com/doc/login-kit-web
   - Values to collect: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REDIRECT_URI
-  - Permission/scope hint: user.info.basic, video.upload
+  - Permission/scope hint: user.info.basic, video.upload, video.publish
   - Safe handling: Use an HTTPS redirect URI registered exactly in TikTok; paste app secrets only into ../secrets/social_api.env.
   - After values are added:
-    - `python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload`
+    - `python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode direct`
   - If it fails: If TikTok rejects the redirect, update either the developer portal or TIKTOK_REDIRECT_URI so both strings match exactly.
-  - Verify: `python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload`
+  - Verify: `python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode direct`
   - Next: Run the verification command and refresh admin evidence.
-- **TikTok upload-mode worker secrets** - `ready`
+- **TikTok direct-public worker secrets** - `ready`
   - Required all: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN
-  - Unblocks: TikTok upload-draft automation for the first ready TikTok asset.
+  - Unblocks: TikTok direct public automation only after public posting approval is explicit.
   - Credential priority: after_oauth
-  - How to clear: Authorize the generated TikTok URL as Lily Roo, exchange the returned code, then push upload-mode Worker secrets.
+  - How to clear: After TikTok public posting approval is explicit, authorize the generated TikTok URL as Lily Roo, exchange the returned code, then push direct-public Worker secrets.
   - Where to get it: The OAuth callback URL after authorizing the generated TikTok authorization link.
   - Portal: https://developers.tiktok.com/
   - Docs: https://developers.tiktok.com/doc/content-posting-api-get-started
   - Values to collect: authorization code from the TikTok redirect URL
-  - Permission/scope hint: user.info.basic, video.upload
+  - Permission/scope hint: user.info.basic, video.upload, video.publish
   - Safe handling: The helper writes returned token values locally with --apply and never prints them.
   - After values are added:
-    - `python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode upload`
+    - `python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode direct`
     - `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
     - `python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
-    - `python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run`
     - `python3 scripts/refresh_promo_admin.py`
   - If it fails: Regenerate the authorization URL and exchange the code immediately; TikTok authorization codes are short-lived.
   - Verify: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`

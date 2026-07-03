@@ -1,13 +1,13 @@
 # Promo Unlock Sequence - Lily Roo
 
-Generated: 2026-07-03T11:29:59.229633Z
+Generated: 2026-07-03T11:51:45.892813Z
 
 ## Summary
 - Steps: **5**
-- Ready for human review: **1**
+- Ready for human review: **0**
 - Blocked or warning: **2**
 - Projected resolution units across sequence: **6**
-- Current step: `unlock-tiktok-platform-repair` (`ready_for_human_review`)
+- Current step: `unlock-manual-metrics` (`blocked_until_input`)
 - Open blockers still tracked: **2**
 
 ## Sequence
@@ -20,13 +20,13 @@ Generated: 2026-07-03T11:29:59.229633Z
    - Reason: No action is needed for this gate.
    - Unlocks: No manual-only posting lane is active; growth work stays in automated or review-only surfaces.
    - Guardrail: Manual-only approvals do not auto-post; posting and public URL logging remain separate after review.
-3. **Repair TikTok executor** - `unlock-tiktok-platform-repair`
-   - State: `ready_for_human_review`; owner: `tod`
-   - Reason: Preview ran cleanly; this gate is waiting for human review or external completion.
-   - Unlocks: Held TikTok approval rows can pass platform-readiness review.; Approved TikTok backlog can become safe to reschedule into upload-draft creation.
-   - preview (preview-safe): `python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run`
-   - Completion evidence: data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_upload_drafts before TikTok upload-mode backlog work is allowed.
-   - Guardrail: Keep TikTok upload-draft mode separate from direct public posting; do not require manual-only community posting.
+3. **Prepare TikTok direct-public API lane** - `unlock-tiktok-platform-repair`
+   - State: `deferred`; owner: `tod`
+   - Reason: Do not queue TikTok upload-draft rows as active promotion; only direct public API publishing can enter the active plan.
+   - Unlocks: TikTok can become an automated expansion lane only after direct public posting approval is explicit.; Upload-draft/manual-finish TikTok posting stays out of the active plan.
+   - preview (preview-safe): `python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode direct --dry-run`
+   - Completion evidence: data/tiktok_setup_preflight.json should report direct public posting approval before TikTok backlog work is allowed.
+   - Guardrail: Do not queue TikTok upload-draft rows as active promotion; only direct public API publishing can enter the active plan.
 4. **Reschedule approved past-due backlog** - `unlock-backlog-reschedule`
    - State: `clear`; owner: `tod`
    - Reason: No action is needed for this gate.

@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-07-03T11:29:59.229633Z",
+  "generated_at": "2026-07-03T11:51:45.892813Z",
   "safe_mode": true,
   "summary": {
     "step_count": 5,
-    "ready_for_human_review_count": 1,
+    "ready_for_human_review_count": 0,
     "blocked_or_warning_count": 2,
     "total_projected_resolution_units": 6,
-    "current_step_id": "unlock-tiktok-platform-repair",
-    "current_gate_state": "ready_for_human_review",
+    "current_step_id": "unlock-manual-metrics",
+    "current_gate_state": "blocked_until_input",
     "open_blocker_count": 2
   },
   "operator_contract": {
@@ -21,12 +21,12 @@
   "current_next_actions": [
     "Next operational action: Watch active Analog Myth proof window — python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run",
     "First handoff step: Fill and import manual metric worksheet — python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
-    "Current unlock gate: Repair TikTok executor (ready_for_human_review); 1 ready, 2 blocked/warning; preview python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run; see data/promo_unlock_sequence.json.",
+    "Current unlock gate: Fill manual metric worksheet (blocked_until_input); 0 ready, 2 blocked/warning; preview python3 scripts/update_manual_social_stats.py --from-csv --dry-run; see data/promo_unlock_sequence.json.",
     "Review handoff preview health: 1 preview-clean, 2 missing input; see data/human_handoff_resolution_preview.json.",
     "Refresh manual metrics: 6 worksheet row(s) still need new_value entries (blocked_until_new_values_filled); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values.",
     "Collect experiment results: 81 post-result field(s) need new_value plus evidence_note; use admin/reports/experiment-result-clipboard.md; first priority: measure FP-AUTO-265 on Facebook. Direct preview template: python3 scripts/update_experiment_results.py --post-id FP-AUTO-265 --source-row 33 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run. Direct apply template after review: python3 scripts/update_experiment_results.py --post-id FP-AUTO-265 --source-row 33 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin. Then preview import with python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run after filling data/experiment_result_entry_wide_template.csv.",
     "Restart song-forward distribution: approve draft posts, clear executor blockers, and keep weekly metrics current.",
-    "Re-check checked-pending store links: 4 music site snapshot(s) still have no public URL; next recommended re-check after 2026-07-04T11:29:03.366475+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 --out data/store_verification_run.json --snapshot-root data/store-verification then.",
+    "Re-check checked-pending store links: 4 music site snapshot(s) still have no public URL; next recommended re-check after 2026-07-04T11:50:50.407865+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 --out data/store_verification_run.json --snapshot-root data/store-verification then.",
     "Refresh manual metrics: fill data/manual_metric_collection_template.csv, preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run, then import with python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin.",
     "I Learned It All in Fifteen Seconds: Fill manual metric worksheet and import it before weekly reporting.",
     "Twelve Dollars: Re-check checked-pending store links for Spotify, Apple Music, HyperFollow; no public URLs were found in the latest snapshots.",
@@ -78,15 +78,15 @@
     {
       "order": 3,
       "id": "unlock-tiktok-platform-repair",
-      "phase": "Repair TikTok executor",
+      "phase": "Prepare TikTok direct-public API lane",
       "owner": "tod",
-      "gate_state": "ready_for_human_review",
-      "reason": "Preview ran cleanly; this gate is waiting for human review or external completion.",
+      "gate_state": "deferred",
+      "reason": "Do not queue TikTok upload-draft rows as active promotion; only direct public API publishing can enter the active plan.",
       "blockers_resolved": 0,
       "blocked_by": [],
       "unlocks": [
-        "Held TikTok approval rows can pass platform-readiness review.",
-        "Approved TikTok backlog can become safe to reschedule into upload-draft creation."
+        "TikTok can become an automated expansion lane only after direct public posting approval is explicit.",
+        "Upload-draft/manual-finish TikTok posting stays out of the active plan."
       ],
       "source_path": "data/platform_repair_status.json",
       "preview_status": "preview_ok",
@@ -94,12 +94,12 @@
         "platform-setup-tiktok-preflight"
       ],
       "input_needed": "local_secret_presence_and_public_posting_approval",
-      "completion_evidence": "data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_upload_drafts before TikTok upload-mode backlog work is allowed.",
-      "guardrail": "Keep TikTok upload-draft mode separate from direct public posting; do not require manual-only community posting.",
+      "completion_evidence": "data/tiktok_setup_preflight.json should report direct public posting approval before TikTok backlog work is allowed.",
+      "guardrail": "Do not queue TikTok upload-draft rows as active promotion; only direct public API publishing can enter the active plan.",
       "commands": [
         {
           "step": "preview",
-          "command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run",
+          "command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode direct --dry-run",
           "safe_to_run": true,
           "status": "preview_ok",
           "returncodes": [

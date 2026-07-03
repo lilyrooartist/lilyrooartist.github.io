@@ -1,6 +1,6 @@
 # Promotion Blocker Ledger - Lily Roo
 
-Generated: 2026-07-03T11:29:55.637741Z
+Generated: 2026-07-03T11:51:42.276608Z
 
 ## Summary
 - Open blockers: **2**
@@ -17,9 +17,10 @@ Generated: 2026-07-03T11:29:55.637741Z
   - Owner: `tod`; projected blockers resolved: **0**
   - Unlocks: No manual-only posting lane is active; growth work stays in automated or review-only surfaces.
   - Guardrail: Manual-only approvals do not auto-post; posting and public URL logging remain separate after review.
-- **Repair TikTok executor** (`ready`)
+- **Prepare TikTok direct-public API lane** (`deferred`)
   - Owner: `tod`; projected blockers resolved: **0**
-  - Unlocks: Held TikTok approval rows can pass platform-readiness review.; Approved TikTok backlog can become safe to reschedule into upload-draft creation.
+  - Unlocks: TikTok can become an automated expansion lane only after direct public posting approval is explicit.; Upload-draft/manual-finish TikTok posting stays out of the active plan.
+  - Guardrail: Do not queue TikTok upload-draft rows as active promotion; only direct public API publishing can enter the active plan.
 - **Reschedule approved past-due backlog** (`clear`)
   - Owner: `tod`; projected blockers resolved: **0**
   - Unlocks: Approved past-due queue rows get a fresh schedule after executor blockers clear.

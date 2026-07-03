@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-03T11:29:56.115220Z",
+  "generated_at": "2026-07-03T11:51:42.755154Z",
   "safe_mode": true,
   "source": {
     "workflow": ".github/workflows/promo-admin-refresh.yml",
@@ -66,7 +66,7 @@
     {
       "label": "Safe admin refresh",
       "status": "ready",
-      "detail": "17 refresh commands captured at 2026-07-03T11:29:54.368291Z",
+      "detail": "17 refresh commands captured at 2026-07-03T11:51:41.033536Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": ""
     },
@@ -94,9 +94,9 @@
     {
       "label": "TikTok API lane",
       "status": "deferred",
-      "detail": "blocked; upload_ready=True; public_ready=False",
+      "detail": "blocked; upload_ready=False; public_ready=False",
       "evidence": "data/tiktok_setup_preflight.json",
-      "next_action": "Direct TikTok public posting is not in the active plan until platform approval is explicit."
+      "next_action": "Direct TikTok public posting is not in the active plan until platform approval is explicit; upload-draft/manual-finish posting is excluded."
     },
     {
       "label": "Blocker input readiness",

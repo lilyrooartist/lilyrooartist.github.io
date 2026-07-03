@@ -980,6 +980,9 @@ async function postTikTok(payload, env) {
   }
 
   const postingMode = tiktokPostingMode(payload, env);
+  if (postingMode === "direct" && env.TIKTOK_PUBLIC_POSTING_APPROVED !== "true") {
+    throw new Error("tiktok_public_posting_not_approved");
+  }
   const sourceInfo = {
     source: "PULL_FROM_URL",
     video_url: url,
@@ -1534,7 +1537,7 @@ function tiktokMissingCredentials(env) {
 }
 
 function tiktokPostingMode(payload, env) {
-  const mode = text(payload.tiktokPostingMode || payload.tiktok_posting_mode || env.TIKTOK_POSTING_MODE || "upload").toLowerCase();
+  const mode = text(payload.tiktokPostingMode || payload.tiktok_posting_mode || env.TIKTOK_POSTING_MODE || "direct").toLowerCase();
   return mode === "upload" || mode === "draft" || mode === "inbox" ? "upload" : "direct";
 }
 

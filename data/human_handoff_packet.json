@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-03T11:29:55.668389Z",
+  "generated_at": "2026-07-03T11:51:42.306695Z",
   "safe_mode": true,
   "source": {
     "promotion_blocker_ledger": "data/promotion_blocker_ledger.json",
@@ -85,18 +85,19 @@
         },
         {
           "id": "unlock-tiktok-platform-repair",
-          "phase": "Repair TikTok executor",
-          "status": "ready",
+          "phase": "Prepare TikTok direct-public API lane",
+          "status": "deferred",
           "owner": "tod",
           "blockers_resolved": 0,
           "unlocks": [
-            "Held TikTok approval rows can pass platform-readiness review.",
-            "Approved TikTok backlog can become safe to reschedule into upload-draft creation."
+            "TikTok can become an automated expansion lane only after direct public posting approval is explicit.",
+            "Upload-draft/manual-finish TikTok posting stays out of the active plan."
           ],
           "blocked_by": [],
           "preview_command": "",
           "apply_command": "",
-          "source_path": "data/platform_repair_status.json"
+          "source_path": "data/platform_repair_status.json",
+          "guardrail": "Do not queue TikTok upload-draft rows as active promotion; only direct public API publishing can enter the active plan."
         },
         {
           "id": "unlock-backlog-reschedule",
@@ -311,12 +312,12 @@
           "platform-setup-tiktok-preflight"
         ],
         "blockers_resolved": 1,
-        "preview_command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run",
+        "preview_command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode direct --dry-run",
         "apply_command": "",
         "command_sequence": [
           {
             "step": "preview",
-            "command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run",
+            "command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode direct --dry-run",
             "required_before_apply": true
           },
           {
@@ -325,9 +326,9 @@
             "required_before_apply": false
           }
         ],
-        "completion_evidence": "data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_upload_drafts before TikTok upload-mode backlog work is allowed.",
-        "next_step_after_apply": "Recapture admin state and only then revisit TikTok approval or backlog reschedule rows.",
-        "guardrail": "Run preflight and confirm local OAuth setup before pushing upload-mode secrets; direct public posting remains separately approval-gated."
+        "completion_evidence": "data/tiktok_setup_preflight.json should report direct public posting approval before TikTok backlog work is allowed.",
+        "next_step_after_apply": "Recapture admin state and only then revisit TikTok approval or backlog reschedule rows that can publish automatically.",
+        "guardrail": "Run preflight and confirm local OAuth setup before pushing secrets; upload-draft/manual-finish TikTok posting remains excluded from the active plan."
       }
     ],
     "checklist": [
@@ -394,12 +395,12 @@
           "platform-setup-tiktok-preflight"
         ],
         "blockers_resolved": 1,
-        "preview_command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run",
+        "preview_command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode direct --dry-run",
         "apply_command": "",
         "command_sequence": [
           {
             "step": "preview",
-            "command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run",
+            "command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode direct --dry-run",
             "required_before_apply": true
           },
           {
@@ -408,9 +409,9 @@
             "required_before_apply": false
           }
         ],
-        "completion_evidence": "data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_upload_drafts before TikTok upload-mode backlog work is allowed.",
-        "next_step_after_apply": "Recapture admin state and only then revisit TikTok approval or backlog reschedule rows.",
-        "guardrail": "Run preflight and confirm local OAuth setup before pushing upload-mode secrets; direct public posting remains separately approval-gated."
+        "completion_evidence": "data/tiktok_setup_preflight.json should report direct public posting approval before TikTok backlog work is allowed.",
+        "next_step_after_apply": "Recapture admin state and only then revisit TikTok approval or backlog reschedule rows that can publish automatically.",
+        "guardrail": "Run preflight and confirm local OAuth setup before pushing secrets; upload-draft/manual-finish TikTok posting remains excluded from the active plan."
       },
       {
         "id": "manual-metric-worksheet",
@@ -617,7 +618,7 @@
       "urgency": "high",
       "status": "blocked",
       "detail": "Review the TikTok upload-mode/direct-public split before treating TikTok as ready.",
-      "preview_command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run",
+      "preview_command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode direct --dry-run",
       "apply_command": "",
       "source_path": "data/tiktok_setup_preflight.json",
       "impact": {
@@ -632,13 +633,13 @@
         "preflight_status": "blocked",
         "preflight_blocked_count": 1,
         "ready_to_push_worker_secrets": true,
-        "ready_to_upload_drafts": true,
+        "ready_to_upload_drafts": false,
         "ready_to_post_publicly": false,
         "preflight_report": "admin/reports/tiktok-setup-preflight.md",
         "preflight_command": "python3 scripts/build_tiktok_setup_preflight.py"
       },
       "links": [],
-      "guardrail": "Keep TikTok upload-draft mode separate from direct public posting; do not require manual-only community posting."
+      "guardrail": "Keep TikTok upload-draft/manual-finish posting out of the active plan; only direct public API publishing can become an automated TikTok lane."
     },
     {
       "id": "manual-metrics-priority-2",

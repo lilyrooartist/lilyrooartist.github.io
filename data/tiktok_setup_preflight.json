@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-03T11:29:55.500737Z",
+  "generated_at": "2026-07-03T11:51:42.154096Z",
   "safe_mode": true,
   "source": {
     "local_secret_source": "secrets/social_api.env",
@@ -19,7 +19,7 @@
     "check_count": 12,
     "blocked_count": 1,
     "ready_to_push_worker_secrets": true,
-    "ready_to_upload_drafts": true,
+    "ready_to_upload_drafts": false,
     "ready_to_post_publicly": false,
     "worker_upload_ready": true,
     "worker_direct_public_ready": false,
@@ -27,8 +27,10 @@
     "local_posting_helper_uses_refresh_token": true,
     "first_tiktok_asset": {
       "post_id": "FP-AUTO-264",
-      "status": "ready_for_upload_mode",
-      "ready_for_upload_mode": true,
+      "status": "manual_finish_excluded",
+      "asset_ready": true,
+      "ready_for_upload_mode": false,
+      "upload_mode_diagnostic_capable": true,
       "platform": "TikTok",
       "song": "I Learned It All in Fifteen Seconds",
       "post_type": "video",
@@ -39,21 +41,21 @@
       "media_ready": true,
       "text_ready": true,
       "media_key": "i-learned-60s",
-      "dry_run_command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run",
+      "dry_run_command": "",
       "blockers": [],
       "credential_blockers": [
         "TIKTOK_CLIENT_KEY",
         "TIKTOK_CLIENT_SECRET",
         "TIKTOK_REFRESH_TOKEN"
       ],
-      "next_after_credentials": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run",
+      "next_after_credentials": "python3 scripts/set_tiktok_public_posting_approval.py --approved",
       "approval_preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-264 --dry-run"
     },
-    "local_post_preview_command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --dry-run",
-    "local_upload_preview_command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run",
-    "earliest_tiktok_api_path": "video.upload inbox draft; final public URL still requires human publish and URL logging.",
+    "local_post_preview_command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode direct --dry-run",
+    "local_upload_preview_command": "",
+    "earliest_tiktok_api_path": "Direct public Content Posting API after explicit TikTok approval; video.upload inbox drafts are manual-finish and excluded from the active plan.",
     "upload_mode_lane": {
-      "status": "ready_after_credentials",
+      "status": "excluded_manual_finish",
       "posting_mode": "upload",
       "oauth_scopes": [
         "user.info.basic",
@@ -61,6 +63,8 @@
       ],
       "first_post_id": "FP-AUTO-264",
       "first_asset_ready": true,
+      "diagnostic_capable": true,
+      "active_plan_allowed": false,
       "credential_names_needed": [
         "TIKTOK_CLIENT_KEY",
         "TIKTOK_CLIENT_SECRET",
@@ -68,9 +72,9 @@
       ],
       "public_posting_approval_required": false,
       "human_finish_required": true,
-      "post_publish_handoff": "TikTok API creates an inbox draft; Lily Roo reviews/publishes in TikTok, then the public URL is logged back into the promo engine.",
-      "dry_run_command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run",
-      "completion_evidence": "data/tiktok_setup_preflight.json ready_to_upload_drafts=true and FP-AUTO-264 upload dry-run succeeds before backlog apply."
+      "post_publish_handoff": "Excluded from the active plan because TikTok inbox drafts still require human publish and URL logging.",
+      "dry_run_command": "",
+      "completion_evidence": "data/tiktok_setup_preflight.json ready_to_upload_drafts=false while manual-finish TikTok posting is excluded from the active plan."
     },
     "direct_public_lane": {
       "status": "deferred_until_tiktok_approval",
@@ -91,22 +95,17 @@
       {
         "step": "generate_oauth_url",
         "when": "after TIKTOK_CLIENT_KEY and TIKTOK_REDIRECT_URI are present locally",
-        "command": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload"
+        "command": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode direct"
       },
       {
         "step": "exchange_authorization_code",
         "when": "immediately after Lily Roo authorizes the TikTok OAuth URL",
-        "command": "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode upload"
+        "command": "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode direct"
       },
       {
         "step": "preview_worker_secret_push",
         "when": "after local refresh credentials exist",
         "command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN"
-      },
-      {
-        "step": "preview_first_upload_draft",
-        "when": "after the secret push dry-run is reviewed and credentials are available to the helper",
-        "command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run"
       },
       {
         "step": "refresh_admin_evidence",
@@ -141,8 +140,8 @@
     "public_posting_deploy_command": "",
     "refresh_command": "python3 scripts/refresh_promo_admin.py",
     "oauth_preview_command": "python3 scripts/tiktok_oauth_handoff.py",
-    "oauth_authorization_url_command": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload",
-    "oauth_exchange_command": "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode upload",
+    "oauth_authorization_url_command": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode direct",
+    "oauth_exchange_command": "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode direct",
     "platform_repair_rows": 0
   },
   "credential_handoff": {
@@ -200,17 +199,18 @@
     "oauth_handoff_script": "scripts/tiktok_oauth_handoff.py",
     "requested_oauth_scopes": [
       "user.info.basic",
-      "video.upload"
+      "video.upload",
+      "video.publish"
     ],
     "direct_post_oauth_scopes": [
       "user.info.basic",
       "video.upload",
       "video.publish"
     ],
-    "scope_strategy": "Request only video.upload for the first inbox-draft connector path; add video.publish only after direct public posting approval exists.",
+    "scope_strategy": "Keep video.upload out of the active plan because it requires manual finish; use video.publish only after direct public posting approval exists.",
     "oauth_preview_command": "python3 scripts/tiktok_oauth_handoff.py",
-    "oauth_authorization_url_command": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload",
-    "oauth_exchange_command": "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode upload",
+    "oauth_authorization_url_command": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode direct",
+    "oauth_exchange_command": "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode direct",
     "local_public_posting_approval_confirmed": false,
     "public_posting_approved": false,
     "default_privacy": "PUBLIC_TO_EVERYONE",
@@ -229,7 +229,7 @@
       "python3 scripts/validate_content_system.py"
     ],
     "upload_mode_lane": {
-      "status": "ready_after_credentials",
+      "status": "excluded_manual_finish",
       "posting_mode": "upload",
       "oauth_scopes": [
         "user.info.basic",
@@ -237,6 +237,8 @@
       ],
       "first_post_id": "FP-AUTO-264",
       "first_asset_ready": true,
+      "diagnostic_capable": true,
+      "active_plan_allowed": false,
       "credential_names_needed": [
         "TIKTOK_CLIENT_KEY",
         "TIKTOK_CLIENT_SECRET",
@@ -244,9 +246,9 @@
       ],
       "public_posting_approval_required": false,
       "human_finish_required": true,
-      "post_publish_handoff": "TikTok API creates an inbox draft; Lily Roo reviews/publishes in TikTok, then the public URL is logged back into the promo engine.",
-      "dry_run_command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run",
-      "completion_evidence": "data/tiktok_setup_preflight.json ready_to_upload_drafts=true and FP-AUTO-264 upload dry-run succeeds before backlog apply."
+      "post_publish_handoff": "Excluded from the active plan because TikTok inbox drafts still require human publish and URL logging.",
+      "dry_run_command": "",
+      "completion_evidence": "data/tiktok_setup_preflight.json ready_to_upload_drafts=false while manual-finish TikTok posting is excluded from the active plan."
     },
     "direct_public_lane": {
       "status": "deferred_until_tiktok_approval",
@@ -267,22 +269,17 @@
       {
         "step": "generate_oauth_url",
         "when": "after TIKTOK_CLIENT_KEY and TIKTOK_REDIRECT_URI are present locally",
-        "command": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload"
+        "command": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode direct"
       },
       {
         "step": "exchange_authorization_code",
         "when": "immediately after Lily Roo authorizes the TikTok OAuth URL",
-        "command": "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode upload"
+        "command": "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode direct"
       },
       {
         "step": "preview_worker_secret_push",
         "when": "after local refresh credentials exist",
         "command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN"
-      },
-      {
-        "step": "preview_first_upload_draft",
-        "when": "after the secret push dry-run is reviewed and credentials are available to the helper",
-        "command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run"
       },
       {
         "step": "refresh_admin_evidence",
@@ -293,16 +290,16 @@
     "completion_evidence": [
       "data/tiktok_setup_preflight.json reports ready_to_push_worker_secrets true.",
       "data/executor_readiness_snapshot.json reports TikTok refresh configuration present.",
-      "data/tiktok_setup_preflight.json reports first_tiktok_asset.ready_for_upload_mode true.",
-      "data/tiktok_setup_preflight.json reports ready_to_upload_drafts true for the upload-mode connector path.",
+      "data/tiktok_setup_preflight.json reports ready_to_upload_drafts false while upload-draft posting is excluded.",
+      "data/tiktok_setup_preflight.json reports direct public posting only after TikTok approval is explicit.",
       "data/platform_repair_status.json no longer lists TikTok as blocked by missing credentials."
     ],
     "redaction": "Secret values are never written here; only required names, missing names, and presence booleans are recorded."
   },
   "owner_handoff": {
     "status": "blocked_until_user_input",
-    "question_answer": "Yes, fix the TikTok connector after the current manual YouTube evidence loop; it unlocks the short-video growth format.",
-    "next_safe_action": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run",
+    "question_answer": "Keep the TikTok connector out of the active posting plan until direct public API publishing is approved; upload-draft mode is diagnostic only because it requires manual finish.",
+    "next_safe_action": "python3 scripts/set_tiktok_public_posting_approval.py --approved",
     "needed_input_count": 1,
     "needed_inputs": [
       {
@@ -319,7 +316,7 @@
       }
     ],
     "immediate_upload_path": {
-      "status": "ready_after_credentials",
+      "status": "excluded_manual_finish",
       "posting_mode": "upload",
       "oauth_scopes": [
         "user.info.basic",
@@ -327,6 +324,8 @@
       ],
       "first_post_id": "FP-AUTO-264",
       "first_asset_ready": true,
+      "diagnostic_capable": true,
+      "active_plan_allowed": false,
       "credential_names_needed": [
         "TIKTOK_CLIENT_KEY",
         "TIKTOK_CLIENT_SECRET",
@@ -334,9 +333,9 @@
       ],
       "public_posting_approval_required": false,
       "human_finish_required": true,
-      "post_publish_handoff": "TikTok API creates an inbox draft; Lily Roo reviews/publishes in TikTok, then the public URL is logged back into the promo engine.",
-      "dry_run_command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run",
-      "completion_evidence": "data/tiktok_setup_preflight.json ready_to_upload_drafts=true and FP-AUTO-264 upload dry-run succeeds before backlog apply."
+      "post_publish_handoff": "Excluded from the active plan because TikTok inbox drafts still require human publish and URL logging.",
+      "dry_run_command": "",
+      "completion_evidence": "data/tiktok_setup_preflight.json ready_to_upload_drafts=false while manual-finish TikTok posting is excluded from the active plan."
     },
     "deferred_direct_public_path": {
       "status": "deferred_until_tiktok_approval",
@@ -357,22 +356,17 @@
       {
         "step": "generate_oauth_url",
         "when": "after TIKTOK_CLIENT_KEY and TIKTOK_REDIRECT_URI are present locally",
-        "command": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload"
+        "command": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode direct"
       },
       {
         "step": "exchange_authorization_code",
         "when": "immediately after Lily Roo authorizes the TikTok OAuth URL",
-        "command": "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode upload"
+        "command": "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode direct"
       },
       {
         "step": "preview_worker_secret_push",
         "when": "after local refresh credentials exist",
         "command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN"
-      },
-      {
-        "step": "preview_first_upload_draft",
-        "when": "after the secret push dry-run is reviewed and credentials are available to the helper",
-        "command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run"
       },
       {
         "step": "refresh_admin_evidence",
@@ -382,30 +376,29 @@
     ],
     "codex_can_do_without_more_input": [
       "Keep TikTok blockers visible in admin/status output.",
-      "Run safe preflight and dry-run helpers.",
-      "Push upload-mode connector secrets after local TikTok values exist and the dry-run is reviewed.",
+      "Run safe preflight helpers.",
+      "Prepare direct public posting only after TikTok approval is explicit.",
       "Refresh admin and validation after the connector state changes."
     ],
     "unlock_sequence": [
       "Add TikTok app credentials and redirect URI locally.",
-      "Generate the OAuth URL and authorize the Lily Roo TikTok account.",
-      "Exchange the authorization code for a refresh token.",
+      "Generate the OAuth URL only when direct public posting is approved.",
+      "Exchange the authorization code for a refresh token after direct public approval exists.",
       "Dry-run the Worker secret push.",
-      "Push Worker secrets for upload-draft mode after review.",
-      "Refresh Admin, then retry or reschedule the TikTok row as an inbox draft upload.",
-      "Confirm and deploy public-posting approval only after direct public posting is actually approved."
+      "Push Worker secrets only for approved direct public posting.",
+      "Refresh Admin, then retry or reschedule TikTok only as an automated direct-public lane."
     ],
     "first_growth_row_unblocked": "FP-AUTO-264",
     "format_unblocked": "Short video clip + platform-native CTA",
-    "guardrail": "This handoff never includes secret values and does not approve or publish TikTok posts."
+    "guardrail": "This handoff never includes secret values, does not approve TikTok public posting, and does not publish or recommend manual-finish TikTok drafts."
   },
   "api_strategy": {
     "posting_mode": "api",
     "decision_source": "user_confirmed",
-    "decision_note": "TikTok posting should be connected through APIs, with video.upload inbox drafts as the earliest usable lane and video.publish direct public posting gated by approval.",
+    "decision_note": "TikTok posting should stay out of the active plan until direct public API publishing is approved; video.upload inbox drafts require manual finish and are diagnostic only.",
     "public_posting_approval_confirmed": false,
     "credential_values_present": false,
-    "earliest_usable_api_lane": "video.upload inbox draft",
+    "earliest_usable_api_lane": "video.publish direct public posting after approval",
     "required_before_posting": [
       "TIKTOK_CLIENT_KEY",
       "TIKTOK_CLIENT_SECRET",
@@ -430,13 +423,13 @@
       "name": "oauth_authorization_url",
       "status": "pass",
       "detail": "TikTok OAuth authorization URL can be generated locally.",
-      "command": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload"
+      "command": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode direct"
     },
     {
       "name": "oauth_token_exchange",
       "status": "pass",
       "detail": "TikTok OAuth authorization codes can be exchanged locally.",
-      "command": "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode upload"
+      "command": "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode direct"
     },
     {
       "name": "local_refresh_credentials",
@@ -448,7 +441,7 @@
       "name": "local_posting_token_path",
       "status": "pass",
       "detail": "Local TikTok posting helper can use an existing access token.",
-      "command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --dry-run"
+      "command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode direct --dry-run"
     },
     {
       "name": "worker_refresh_credentials",

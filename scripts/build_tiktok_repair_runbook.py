@@ -77,7 +77,7 @@ def build_payload() -> dict:
     local_missing = preflight_summary.get("local_missing_secrets") or []
     worker_missing = preflight_summary.get("worker_missing_secrets") or []
     public_posting = preflight_summary.get("public_posting_approved")
-    worker_posting_mode = preflight_summary.get("worker_posting_mode") or "upload"
+    worker_posting_mode = preflight_summary.get("worker_posting_mode") or "direct"
     local_public_posting = bool(preflight_summary.get("local_public_posting_approval_confirmed"))
     public_posting_apply = preflight_summary.get("public_posting_apply_command") or ""
     public_posting_deploy = preflight_summary.get("public_posting_deploy_command") or ""
@@ -88,12 +88,12 @@ def build_payload() -> dict:
     aigc_label = bool(preflight_summary.get("aigc_label_enabled"))
     push_preview = preflight_summary.get("push_preview_command") or "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN"
     push_apply = preflight_summary.get("push_apply_command") or ""
-    local_post_preview = preflight_summary.get("local_post_preview_command") or "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --dry-run"
-    local_upload_preview = preflight_summary.get("local_upload_preview_command") or "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run"
+    local_post_preview = preflight_summary.get("local_post_preview_command") or "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode direct --dry-run"
+    local_upload_preview = preflight_summary.get("local_upload_preview_command") or ""
     local_post_refresh_ready = bool(preflight_summary.get("local_posting_helper_uses_refresh_token"))
     oauth_preview = credential_handoff.get("oauth_preview_command") or "python3 scripts/tiktok_oauth_handoff.py"
-    oauth_url_command = credential_handoff.get("oauth_authorization_url_command") or "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload"
-    oauth_exchange_command = credential_handoff.get("oauth_exchange_command") or "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode upload"
+    oauth_url_command = credential_handoff.get("oauth_authorization_url_command") or "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode direct"
+    oauth_exchange_command = credential_handoff.get("oauth_exchange_command") or "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode direct"
     oauth_url_missing = credential_handoff.get("oauth_authorization_url_missing") or []
     oauth_exchange_missing = credential_handoff.get("oauth_token_exchange_missing") or []
     upload_mode_lane = credential_handoff.get("upload_mode_lane") or {}
@@ -138,7 +138,7 @@ def build_payload() -> dict:
             "Authorize account",
             "ready" if not oauth_url_missing else "blocked",
             "Generate TikTok authorization URL",
-            "Create the TikTok authorization URL for the upload-draft scope bundle, open it, and sign in as the Lily Roo TikTok account. The returned code is short-lived and should be exchanged immediately.",
+            "Create the TikTok authorization URL for the direct-public scope bundle only after approval is explicit, open it, and sign in as the Lily Roo TikTok account. The returned code is short-lived and should be exchanged immediately.",
             oauth_url_command,
             oauth_url_missing,
         ),
@@ -147,7 +147,7 @@ def build_payload() -> dict:
             "Authorize account",
             "ready" if not oauth_exchange_missing else "blocked",
             "Exchange authorization code",
-            "Exchange the returned TikTok authorization code for local access and refresh tokens using the same upload-mode scope path. The helper writes token values only with --apply and never prints them.",
+            "Exchange the returned TikTok authorization code for local access and refresh tokens using the same direct-public scope path. The helper writes token values only with --apply and never prints them.",
             oauth_exchange_command,
             oauth_exchange_missing,
         ),
@@ -179,20 +179,11 @@ def build_payload() -> dict:
             [] if local_ready and local_post_refresh_ready else local_missing,
         ),
         runbook_step(
-            "preview_local_tiktok_draft_upload",
-            "Preview draft upload",
-            "ready" if local_ready and local_post_refresh_ready else "blocked",
-            "Dry-run TikTok inbox draft upload",
-            "Confirm the safer video.upload path can prepare a TikTok inbox draft before public direct-posting approval is available.",
-            local_upload_preview,
-            [] if local_ready and local_post_refresh_ready else local_missing,
-        ),
-        runbook_step(
             "apply_worker_secret_push",
             "Apply push",
             "ready" if apply_ready else "blocked",
-            "Push upload-mode worker secrets after review",
-            "Run the apply command after local refresh credentials exist and the dry-run is reviewed. Public-posting approval is a separate direct-posting gate.",
+            "Push direct-public worker secrets after review",
+            "Run the apply command only after local refresh credentials exist and direct public-posting approval is explicit.",
             push_apply if apply_ready else "",
             [] if apply_ready else local_missing,
         ),
@@ -210,7 +201,7 @@ def build_payload() -> dict:
             "Clear gate",
             "ready" if verify_ready else "blocked",
             "Clear TikTok backlog gate",
-            "Once worker readiness is clean, rerun the backlog reschedule preview and apply the approved row only if the gate reports safe apply available. Upload mode creates an inbox draft that still needs human publish and URL logging.",
+            "Once direct public worker readiness is clean, rerun the backlog reschedule preview and apply TikTok rows only if they can publish without manual finish.",
             f"python3 scripts/build_backlog_reschedule_preview.py && {backlog_preview}" if verify_ready else "",
             [] if verify_ready else ["worker_refresh_credentials"],
         ),
@@ -249,7 +240,7 @@ def build_payload() -> dict:
             "oauth_exchange_command": oauth_exchange_command,
             "local_post_preview_command": local_post_preview,
             "local_upload_preview_command": local_upload_preview,
-            "earliest_tiktok_api_path": preflight_summary.get("earliest_tiktok_api_path") or "video.upload inbox draft; final public URL still requires human publish and URL logging.",
+            "earliest_tiktok_api_path": preflight_summary.get("earliest_tiktok_api_path") or "Direct public Content Posting API after explicit TikTok approval; video.upload inbox drafts are manual-finish and excluded from the active plan.",
             "upload_mode_lane": upload_mode_lane,
             "direct_public_lane": direct_public_lane,
             "after_input_command_sequence": after_input_command_sequence,
@@ -283,8 +274,8 @@ def build_payload() -> dict:
         "guardrails": [
             "This runbook does not push secrets, approve public posting, publish posts, or clear backlog rows.",
             "Use the dry-run secret push before any apply command.",
-            "Do not run a TikTok backlog apply until fresh admin evidence shows TikTok upload readiness is clean.",
-            "Public-posting approval is required only for direct public TikTok posting; upload mode still requires human review, publish, and URL logging.",
+            "Do not run a TikTok backlog apply until fresh admin evidence shows direct public TikTok posting is approved and clean.",
+            "TikTok upload mode is diagnostic only; inbox drafts still require manual finish and are excluded from the active plan.",
         ],
     }
 
@@ -311,7 +302,7 @@ def build_markdown(payload: dict) -> str:
         f"- AIGC label enabled: **{summary['aigc_label_enabled']}**",
         f"- Local posting helper uses refresh token: **{summary['local_posting_helper_uses_refresh_token']}**",
         f"- Local post preview: `{summary['local_post_preview_command']}`",
-        f"- Local draft upload preview: `{summary['local_upload_preview_command']}`",
+        f"- Local draft upload preview: `{summary['local_upload_preview_command'] or 'not in active plan'}`",
         f"- Earliest TikTok API path: {summary['earliest_tiktok_api_path']}",
         f"- Upload-mode lane: **{summary.get('upload_mode_lane', {}).get('status', 'unknown')}**",
         f"- Direct public lane: **{summary.get('direct_public_lane', {}).get('status', 'unknown')}**",
@@ -325,11 +316,12 @@ def build_markdown(payload: dict) -> str:
         f"- Public posting approval apply: `{summary.get('public_posting_apply_command') or 'not available until local approval is confirmed'}`",
         f"- Public posting approval deploy: `{summary.get('public_posting_deploy_command') or 'not available until local approval is confirmed'}`",
         "",
-        "## Upload-Mode Repair Ladder",
+        "## Manual-Finish Upload Lane",
         f"- First row: `{summary.get('upload_mode_lane', {}).get('first_post_id', summary.get('repair_post_id') or 'unknown')}`",
         f"- First asset ready: **{summary.get('upload_mode_lane', {}).get('first_asset_ready', False)}**",
         f"- Public posting approval required for upload mode: **{summary.get('upload_mode_lane', {}).get('public_posting_approval_required', False)}**",
         f"- Human finish required: **{summary.get('upload_mode_lane', {}).get('human_finish_required', True)}**",
+        f"- Active plan allowed: **{summary.get('upload_mode_lane', {}).get('active_plan_allowed', False)}**",
         f"- Handoff: {summary.get('upload_mode_lane', {}).get('post_publish_handoff', 'Upload mode creates an inbox draft that still needs human review, publish, and URL logging.')}",
         f"- Direct public guardrail: {summary.get('direct_public_lane', {}).get('guardrail', 'Direct public posting remains gated until approval is explicit.')}",
         "- After-input command sequence:",

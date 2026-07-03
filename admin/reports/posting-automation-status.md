@@ -1,6 +1,6 @@
 # Posting Automation Status - Lily Roo
 
-Generated: 2026-07-03T11:29:56.115220Z
+Generated: 2026-07-03T11:51:42.755154Z
 
 ## Summary
 - Status: **ready_active_campaign**
@@ -22,7 +22,7 @@ Generated: 2026-07-03T11:29:56.115220Z
   - Detail: 17 */6 * * *, 05 16 * * *; latest run completed / success
   - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28657287057
 - **Safe admin refresh** - `ready`
-  - Detail: 17 refresh commands captured at 2026-07-03T11:29:54.368291Z
+  - Detail: 17 refresh commands captured at 2026-07-03T11:51:41.033536Z
   - Evidence: data/promo_admin_refresh_run.json
 - **Scheduler dry-run authentication** - `ready`
   - Detail: HTTP 200 using bearer auth; due=0 would_post=0
@@ -35,9 +35,9 @@ Generated: 2026-07-03T11:29:56.115220Z
   - Evidence: data/executor_readiness_snapshot.json
   - Next: Optional expansion only; the active Analog Myth campaign uses ready X/Facebook lanes.
 - **TikTok API lane** - `deferred`
-  - Detail: blocked; upload_ready=True; public_ready=False
+  - Detail: blocked; upload_ready=False; public_ready=False
   - Evidence: data/tiktok_setup_preflight.json
-  - Next: Direct TikTok public posting is not in the active plan until platform approval is explicit.
+  - Next: Direct TikTok public posting is not in the active plan until platform approval is explicit; upload-draft/manual-finish posting is excluded.
 - **Blocker input readiness** - `deferred`
   - Detail: 3 ready; 3 missing local input; 1 external action needed
   - Evidence: data/social_blocker_input_status.json

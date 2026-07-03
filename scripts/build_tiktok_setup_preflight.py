@@ -44,8 +44,8 @@ def write_handoff_template() -> None:
     lines = [
         "# Lily Roo TikTok secret handoff template",
         "# Posting mode selected: API integration.",
-        "# OAuth scopes for the first connector pass should include user.info.basic and video.upload.",
-        "# Add video.publish only after direct public posting approval is confirmed.",
+        "# OAuth scopes should target direct public posting only after TikTok public posting approval is confirmed.",
+        "# Do not use video.upload inbox drafts as the active promotion lane; they require manual finish.",
         "# Fill values locally in secrets/social_api.env, not in this generated file.",
         "# Keep TIKTOK_PUBLIC_POSTING_APPROVED=false until public posting approval is confirmed.",
         "TIKTOK_CLIENT_KEY=",
@@ -56,7 +56,7 @@ def write_handoff_template() -> None:
         "TIKTOK_BRAND_CONTENT=false",
         "TIKTOK_BRAND_ORGANIC=true",
         "TIKTOK_IS_AIGC=true",
-        "TIKTOK_POSTING_MODE=upload",
+        "TIKTOK_POSTING_MODE=direct",
         "TIKTOK_PUBLIC_POSTING_APPROVED=false",
         "TIKTOK_DEFAULT_PRIVACY=PUBLIC_TO_EVERYONE",
         "",
@@ -132,8 +132,10 @@ def first_tiktok_asset_readiness() -> dict:
         blockers.append("text_missing")
     return {
         "post_id": FIRST_TIKTOK_POST_ID,
-        "status": "ready_for_upload_mode" if asset_ready else "blocked",
-        "ready_for_upload_mode": asset_ready,
+        "status": "manual_finish_excluded" if asset_ready else "blocked",
+        "asset_ready": asset_ready,
+        "ready_for_upload_mode": False,
+        "upload_mode_diagnostic_capable": asset_ready,
         "platform": platform,
         "song": row.get("song") or "",
         "post_type": post_type,
@@ -144,10 +146,10 @@ def first_tiktok_asset_readiness() -> dict:
         "media_ready": media_ready,
         "text_ready": text_ready,
         "media_key": row.get("media_key") or "",
-        "dry_run_command": f"python3 scripts/post_tiktok_from_queue.py --post-id {FIRST_TIKTOK_POST_ID} --mode upload --dry-run",
+        "dry_run_command": "",
         "blockers": blockers,
         "credential_blockers": REQUIRED_REFRESH_SECRETS,
-        "next_after_credentials": f"python3 scripts/post_tiktok_from_queue.py --post-id {FIRST_TIKTOK_POST_ID} --mode upload --dry-run",
+        "next_after_credentials": "python3 scripts/set_tiktok_public_posting_approval.py --approved",
         "approval_preview_command": f"python3 scripts/update_scheduled_post_approval.py {FIRST_TIKTOK_POST_ID} --dry-run",
     }
 
@@ -220,8 +222,6 @@ def owner_handoff(summary: dict, credential_handoff: dict) -> dict:
         next_safe_action = summary.get("oauth_preview_command") or "python3 scripts/tiktok_oauth_handoff.py"
     elif credential_handoff.get("worker_missing_secrets"):
         next_safe_action = credential_handoff.get("dry_run_first_command") or summary.get("push_preview_command") or "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN"
-    elif summary.get("ready_to_upload_drafts"):
-        next_safe_action = summary.get("local_upload_preview_command") or "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run"
     elif not public_posting_approved:
         next_safe_action = summary.get("public_posting_preview_command") or "python3 scripts/set_tiktok_public_posting_approval.py --approved"
     else:
@@ -232,7 +232,7 @@ def owner_handoff(summary: dict, credential_handoff: dict) -> dict:
     after_input_sequence = credential_handoff.get("after_input_command_sequence") or []
     return {
         "status": "blocked_until_user_input" if needed_inputs else "ready_for_secret_push_preview",
-        "question_answer": "Yes, fix the TikTok connector after the current manual YouTube evidence loop; it unlocks the short-video growth format.",
+        "question_answer": "Keep the TikTok connector out of the active posting plan until direct public API publishing is approved; upload-draft mode is diagnostic only because it requires manual finish.",
         "next_safe_action": next_safe_action,
         "needed_input_count": len(needed_inputs),
         "needed_inputs": needed_inputs,
@@ -241,22 +241,21 @@ def owner_handoff(summary: dict, credential_handoff: dict) -> dict:
         "after_input_command_sequence": after_input_sequence,
         "codex_can_do_without_more_input": [
             "Keep TikTok blockers visible in admin/status output.",
-            "Run safe preflight and dry-run helpers.",
-            "Push upload-mode connector secrets after local TikTok values exist and the dry-run is reviewed.",
+            "Run safe preflight helpers.",
+            "Prepare direct public posting only after TikTok approval is explicit.",
             "Refresh admin and validation after the connector state changes.",
         ],
         "unlock_sequence": [
             "Add TikTok app credentials and redirect URI locally.",
-            "Generate the OAuth URL and authorize the Lily Roo TikTok account.",
-            "Exchange the authorization code for a refresh token.",
+            "Generate the OAuth URL only when direct public posting is approved.",
+            "Exchange the authorization code for a refresh token after direct public approval exists.",
             "Dry-run the Worker secret push.",
-            "Push Worker secrets for upload-draft mode after review.",
-            "Refresh Admin, then retry or reschedule the TikTok row as an inbox draft upload.",
-            "Confirm and deploy public-posting approval only after direct public posting is actually approved.",
+            "Push Worker secrets only for approved direct public posting.",
+            "Refresh Admin, then retry or reschedule TikTok only as an automated direct-public lane.",
         ],
         "first_growth_row_unblocked": "FP-AUTO-264",
         "format_unblocked": "Short video clip + platform-native CTA",
-        "guardrail": "This handoff never includes secret values and does not approve or publish TikTok posts.",
+        "guardrail": "This handoff never includes secret values, does not approve TikTok public posting, and does not publish or recommend manual-finish TikTok drafts.",
     }
 
 
@@ -288,7 +287,7 @@ def build_payload() -> dict:
     brand_content = bool(tiktok_readiness.get("brand_content_toggle")) if "brand_content_toggle" in tiktok_readiness else flag_value(BRAND_CONTENT, False)
     brand_organic = bool(tiktok_readiness.get("brand_organic_toggle")) if "brand_organic_toggle" in tiktok_readiness else flag_value(BRAND_ORGANIC, True)
     aigc_label = bool(tiktok_readiness.get("aigc_label_enabled")) if "aigc_label_enabled" in tiktok_readiness else flag_value(AIGC_LABEL, True)
-    worker_posting_mode = tiktok_readiness.get("posting_mode") or wrangler_var(POSTING_MODE) or "upload"
+    worker_posting_mode = tiktok_readiness.get("posting_mode") or wrangler_var(POSTING_MODE) or "direct"
     refresh_config_present = bool(tiktok_readiness.get("refresh_config_present"))
     access_token_present = bool(tiktok_readiness.get("access_token_present"))
     local_access_token_present = bool(presence.get(OPTIONAL_ACCESS_TOKEN))
@@ -331,7 +330,7 @@ def build_payload() -> dict:
             else local_check_note
             if local_secrets_uninspectable
             else f"{SOCIAL_ENV.relative_to(ROOT.parent)} is missing auth URL values: {', '.join(oauth_url_missing)}.",
-            "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload",
+            "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode direct",
         ),
         check(
             "oauth_token_exchange",
@@ -341,7 +340,7 @@ def build_payload() -> dict:
             else local_check_note
             if local_secrets_uninspectable
             else f"{SOCIAL_ENV.relative_to(ROOT.parent)} is missing token exchange values: {', '.join(oauth_exchange_missing)}.",
-            "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode upload",
+            "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode direct",
         ),
         check(
             "local_refresh_credentials",
@@ -365,7 +364,7 @@ def build_payload() -> dict:
                 if local_secrets_uninspectable
                 else "Local TikTok posting helper needs TIKTOK_ACCESS_TOKEN or refresh credentials."
             ),
-            "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --dry-run",
+            "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode direct --dry-run",
         ),
         check(
             "worker_refresh_credentials",
@@ -418,7 +417,12 @@ def build_payload() -> dict:
     ]
     blocked = [item for item in preflight_checks if item["status"] == "blocked"]
     ready_to_push = not raw_local_missing and runtime_local_secret_env_exists
-    ready_to_upload_drafts = worker_upload_ready and not worker_missing and bool(first_tiktok_asset_readiness().get("ready_for_upload_mode"))
+    # video.upload creates an inbox draft that still requires a person to
+    # publish and log the URL. Keep that capability visible for diagnostics,
+    # but do not treat it as an active growth lane while manual-finish posting
+    # is intentionally out of scope.
+    upload_draft_capable = worker_upload_ready and not worker_missing and bool(first_tiktok_asset_readiness().get("upload_mode_diagnostic_capable"))
+    ready_to_upload_drafts = False
     ready_to_post = not blocked
     repair_rows = [
         row for row in platform_repair.get("rows") or []
@@ -428,23 +432,25 @@ def build_payload() -> dict:
     push_preview = "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN"
     push_apply = "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py"
     oauth_preview = "python3 scripts/tiktok_oauth_handoff.py"
-    oauth_url_command = "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload"
-    oauth_exchange_command = "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode upload"
+    oauth_url_command = "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode direct"
+    oauth_exchange_command = "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode direct"
     refresh_command = "python3 scripts/refresh_promo_admin.py"
-    local_post_preview = "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --dry-run"
-    local_upload_preview = "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run"
+    local_post_preview = "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode direct --dry-run"
+    local_upload_preview = ""
     upload_mode_lane = {
-        "status": "ready_after_credentials" if first_tiktok_asset.get("ready_for_upload_mode") else "asset_blocked",
+        "status": "excluded_manual_finish" if first_tiktok_asset.get("upload_mode_diagnostic_capable") else "asset_blocked",
         "posting_mode": "upload",
         "oauth_scopes": ["user.info.basic", "video.upload"],
         "first_post_id": first_tiktok_asset.get("post_id") or FIRST_TIKTOK_POST_ID,
-        "first_asset_ready": bool(first_tiktok_asset.get("ready_for_upload_mode")),
+        "first_asset_ready": bool(first_tiktok_asset.get("upload_mode_diagnostic_capable")),
+        "diagnostic_capable": upload_draft_capable,
+        "active_plan_allowed": False,
         "credential_names_needed": REQUIRED_REFRESH_SECRETS,
         "public_posting_approval_required": False,
         "human_finish_required": True,
-        "post_publish_handoff": "TikTok API creates an inbox draft; Lily Roo reviews/publishes in TikTok, then the public URL is logged back into the promo engine.",
+        "post_publish_handoff": "Excluded from the active plan because TikTok inbox drafts still require human publish and URL logging.",
         "dry_run_command": local_upload_preview,
-        "completion_evidence": "data/tiktok_setup_preflight.json ready_to_upload_drafts=true and FP-AUTO-264 upload dry-run succeeds before backlog apply.",
+        "completion_evidence": "data/tiktok_setup_preflight.json ready_to_upload_drafts=false while manual-finish TikTok posting is excluded from the active plan.",
     }
     direct_public_lane = {
         "status": "deferred_until_tiktok_approval",
@@ -474,18 +480,13 @@ def build_payload() -> dict:
             "command": push_preview,
         },
         {
-            "step": "preview_first_upload_draft",
-            "when": "after the secret push dry-run is reviewed and credentials are available to the helper",
-            "command": local_upload_preview,
-        },
-        {
             "step": "refresh_admin_evidence",
             "when": "after credentials or Worker state changes",
             "command": refresh_command,
         },
     ]
     credential_handoff = {
-        "status": "ready_to_push" if ready_to_push else "worker_upload_ready" if ready_to_upload_drafts else "needs_local_values",
+        "status": "ready_to_push" if ready_to_push else "needs_local_values",
         "required_secret_names": REQUIRED_REFRESH_SECRETS,
         "optional_secret_names": [OPTIONAL_ACCESS_TOKEN],
         "local_secret_source": str(SOCIAL_ENV.relative_to(ROOT.parent)),
@@ -510,9 +511,9 @@ def build_payload() -> dict:
         "worker_upload_ready": worker_upload_ready,
         "worker_direct_public_ready": worker_direct_public_ready,
         "oauth_handoff_script": str(OAUTH_HANDOFF_SCRIPT.relative_to(ROOT)),
-        "requested_oauth_scopes": ["user.info.basic", "video.upload"],
+        "requested_oauth_scopes": ["user.info.basic", "video.upload", "video.publish"],
         "direct_post_oauth_scopes": ["user.info.basic", "video.upload", "video.publish"],
-        "scope_strategy": "Request only video.upload for the first inbox-draft connector path; add video.publish only after direct public posting approval exists.",
+        "scope_strategy": "Keep video.upload out of the active plan because it requires manual finish; use video.publish only after direct public posting approval exists.",
         "oauth_preview_command": oauth_preview,
         "oauth_authorization_url_command": oauth_url_command,
         "oauth_exchange_command": oauth_exchange_command,
@@ -539,8 +540,8 @@ def build_payload() -> dict:
         "completion_evidence": [
             "data/tiktok_setup_preflight.json reports ready_to_push_worker_secrets true.",
             "data/executor_readiness_snapshot.json reports TikTok refresh configuration present.",
-            "data/tiktok_setup_preflight.json reports first_tiktok_asset.ready_for_upload_mode true.",
-            "data/tiktok_setup_preflight.json reports ready_to_upload_drafts true for the upload-mode connector path.",
+            "data/tiktok_setup_preflight.json reports ready_to_upload_drafts false while upload-draft posting is excluded.",
+            "data/tiktok_setup_preflight.json reports direct public posting only after TikTok approval is explicit.",
             "data/platform_repair_status.json no longer lists TikTok as blocked by missing credentials.",
         ],
         "redaction": "Secret values are never written here; only required names, missing names, and presence booleans are recorded.",
@@ -561,7 +562,7 @@ def build_payload() -> dict:
         "first_tiktok_asset": first_tiktok_asset,
         "local_post_preview_command": local_post_preview,
         "local_upload_preview_command": local_upload_preview,
-        "earliest_tiktok_api_path": "video.upload inbox draft; final public URL still requires human publish and URL logging.",
+        "earliest_tiktok_api_path": "Direct public Content Posting API after explicit TikTok approval; video.upload inbox drafts are manual-finish and excluded from the active plan.",
         "upload_mode_lane": upload_mode_lane,
         "direct_public_lane": direct_public_lane,
         "after_input_command_sequence": after_input_command_sequence,
@@ -633,12 +634,12 @@ def build_markdown(payload: dict) -> str:
         f"- Checks: **{summary['check_count']}**",
         f"- Blocked checks: **{summary['blocked_count']}**",
         f"- Ready to push worker secrets: **{summary['ready_to_push_worker_secrets']}**",
-        f"- Ready to upload inbox drafts: **{summary['ready_to_upload_drafts']}**",
+        f"- Ready to upload inbox drafts: **{summary['ready_to_upload_drafts']}** (excluded from active plan because drafts require manual finish)",
         f"- Ready to post publicly: **{summary['ready_to_post_publicly']}**",
         f"- Local posting helper uses refresh token: **{summary['local_posting_helper_uses_refresh_token']}**",
-        f"- First TikTok asset ready for upload mode: **{summary['first_tiktok_asset']['ready_for_upload_mode']}** (`{summary['first_tiktok_asset']['post_id']}`)",
+        f"- First TikTok asset media ready: **{summary['first_tiktok_asset'].get('asset_ready', False)}** (`{summary['first_tiktok_asset']['post_id']}`)",
         f"- Local post preview: `{summary['local_post_preview_command']}`",
-        f"- Local draft upload preview: `{summary['local_upload_preview_command']}`",
+        f"- Local draft upload preview: `{summary['local_upload_preview_command'] or 'not in active plan'}`",
         f"- Earliest TikTok API path: {summary['earliest_tiktok_api_path']}",
         f"- Upload-mode lane: **{summary['upload_mode_lane']['status']}**; public approval required: **{summary['upload_mode_lane']['public_posting_approval_required']}**",
         f"- Direct public lane: **{summary['direct_public_lane']['status']}**; public approval required: **{summary['direct_public_lane']['public_posting_approval_required']}**",
@@ -670,13 +671,14 @@ def build_markdown(payload: dict) -> str:
     lines.extend(f"  - {item}" for item in payload["owner_handoff"]["codex_can_do_without_more_input"])
     lines.extend([
         "",
-        "## Upload-Mode Repair Ladder",
+        "## Manual-Finish Upload Lane",
         f"- Immediate lane status: **{payload['owner_handoff']['immediate_upload_path']['status']}**",
         f"- First post ID: `{payload['owner_handoff']['immediate_upload_path']['first_post_id']}`",
         f"- Scopes: `{', '.join(payload['owner_handoff']['immediate_upload_path']['oauth_scopes'])}`",
         f"- Public posting approval required now: **{payload['owner_handoff']['immediate_upload_path']['public_posting_approval_required']}**",
         f"- Human finish required: **{payload['owner_handoff']['immediate_upload_path']['human_finish_required']}**",
         f"- Handoff: {payload['owner_handoff']['immediate_upload_path']['post_publish_handoff']}",
+        f"- Active plan allowed: **{payload['owner_handoff']['immediate_upload_path'].get('active_plan_allowed', False)}**",
         f"- Direct public lane: **{payload['owner_handoff']['deferred_direct_public_path']['status']}**",
         f"- Direct public guardrail: {payload['owner_handoff']['deferred_direct_public_path']['guardrail']}",
         "- After-input command sequence:",
@@ -712,7 +714,7 @@ def build_markdown(payload: dict) -> str:
         f"- OAuth auth URL: `{payload['credential_handoff']['oauth_authorization_url_command']}`",
         f"- OAuth code exchange: `{payload['credential_handoff']['oauth_exchange_command']}`",
         f"- Dry-run first: `{payload['credential_handoff']['dry_run_first_command']}`",
-        f"- Apply upload-mode secrets after review: `{payload['credential_handoff']['apply_command'] or 'not available until local secrets exist'}`",
+        f"- Push direct-public secrets after review: `{payload['credential_handoff']['apply_command'] or 'not available until local secrets exist and public posting approval is confirmed'}`",
         f"- Public posting approval preview: `{payload['credential_handoff']['public_posting_preview_command']}`",
         f"- Public posting approval apply: `{payload['credential_handoff']['public_posting_apply_command'] or 'not available until local approval is confirmed'}`",
         f"- Public posting approval deploy: `{payload['credential_handoff']['public_posting_deploy_command'] or 'not available until local approval is confirmed'}`",
@@ -739,7 +741,7 @@ def build_markdown(payload: dict) -> str:
         f"- Generate OAuth auth URL: `{summary['oauth_authorization_url_command']}`",
         f"- Exchange OAuth code after authorization: `{summary['oauth_exchange_command']}`",
         f"- Preview local secrets: `{summary['push_preview_command']}`",
-        f"- Preview inbox draft upload: `{summary['local_upload_preview_command']}`",
+        f"- Preview inbox draft upload: `{summary['local_upload_preview_command'] or 'not in active plan'}`",
         f"- Push after local credentials are present: `{summary['push_apply_command'] or 'not available until local secrets exist'}`",
         f"- Preview public posting approval flag: `{summary['public_posting_preview_command']}`",
         f"- Apply public posting approval flag: `{summary['public_posting_apply_command'] or 'not available until local approval is confirmed'}`",

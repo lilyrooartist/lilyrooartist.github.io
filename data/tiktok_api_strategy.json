@@ -1,10 +1,10 @@
 {
   "posting_mode": "api",
   "decision_source": "user_confirmed",
-  "decision_note": "TikTok posting should be connected through APIs, with video.upload inbox drafts as the earliest usable lane and video.publish direct public posting gated by approval.",
+  "decision_note": "TikTok posting should stay out of the active plan until direct public API publishing is approved; video.upload inbox drafts require manual finish and are diagnostic only.",
   "public_posting_approval_confirmed": false,
   "credential_values_present": false,
-  "earliest_usable_api_lane": "video.upload inbox draft",
+  "earliest_usable_api_lane": "video.publish direct public posting after approval",
   "required_before_posting": [
     "TIKTOK_CLIENT_KEY",
     "TIKTOK_CLIENT_SECRET",

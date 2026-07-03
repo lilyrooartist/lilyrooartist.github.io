@@ -804,7 +804,7 @@ def tiktok_preflight_actions(preflight):
         "post_id": first_asset.get("post_id") or "",
         "platform": "TikTok",
         "reason": "tiktok_setup_preflight_blocked",
-        "repair_lane": "upload",
+        "repair_lane": "direct_public",
         "missing_secrets": missing,
         "worker_missing_secrets": worker_missing,
         "local_missing_secrets": local_missing,
@@ -824,17 +824,17 @@ def tiktok_preflight_actions(preflight):
     }
     pieces = []
     if worker_missing:
-        pieces.append(f"Worker secrets missing for upload mode: {', '.join(worker_missing)}.")
+        pieces.append(f"Worker secrets missing for direct public TikTok posting: {', '.join(worker_missing)}.")
     if local_missing:
         if worker_upload_ready or ready_to_upload_drafts:
-            pieces.append("Local upload-mode OAuth credentials are not inspectable in this runner, but Worker upload readiness is already configured.")
+            pieces.append("Local TikTok OAuth credentials are not inspectable in this runner, but upload-draft readiness is diagnostic only and not part of the active plan.")
         else:
-            pieces.append(f"Local upload-mode OAuth credentials missing: {', '.join(local_missing)}.")
-    pieces.append("Complete TikTok OAuth setup locally, then push upload-mode secrets and refresh Admin.")
+            pieces.append(f"Local TikTok OAuth credentials missing for a future direct-public lane: {', '.join(local_missing)}.")
+    pieces.append("Keep TikTok out of the active plan until direct public Content Posting API approval is explicit; upload-draft/manual-finish posting is excluded.")
     diagnostics["repair_action"] = " ".join(pieces)
     return [
         command_row(
-            "Fix TikTok upload-mode credentials",
+            "Prepare TikTok direct-public credentials",
             "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
             "platform_fix",
             1,

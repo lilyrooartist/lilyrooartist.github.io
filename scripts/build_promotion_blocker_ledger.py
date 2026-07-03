@@ -391,18 +391,19 @@ def build_unlock_roadmap(rows: list[dict], projection: dict) -> list[dict]:
     roadmap.extend([
         {
             "id": "unlock-tiktok-platform-repair",
-            "phase": "Repair TikTok executor",
-            "status": "blocked" if tiktok_rows else "ready",
+            "phase": "Prepare TikTok direct-public API lane",
+            "status": "blocked" if tiktok_rows else "deferred",
             "owner": "tod",
             "blockers_resolved": len(tiktok_rows),
             "unlocks": [
-                "Held TikTok approval rows can pass platform-readiness review.",
-                "Approved TikTok backlog can become safe to reschedule into upload-draft creation.",
+                "TikTok can become an automated expansion lane only after direct public posting approval is explicit.",
+                "Upload-draft/manual-finish TikTok posting stays out of the active plan.",
             ],
             "blocked_by": unique_values((tiktok_rows[0].get("missing_secrets") or []) + (tiktok_rows[0].get("local_missing_secrets") or [])) if tiktok_rows else [],
             "preview_command": (tiktok_rows[0].get("preview_command") or "") if tiktok_rows else "",
             "apply_command": (tiktok_rows[0].get("apply_command") or "") if tiktok_rows else "",
             "source_path": str(PLATFORM_REPAIR.relative_to(ROOT)),
+            "guardrail": "Do not queue TikTok upload-draft rows as active promotion; only direct public API publishing can enter the active plan.",
         },
         {
             "id": "unlock-backlog-reschedule",

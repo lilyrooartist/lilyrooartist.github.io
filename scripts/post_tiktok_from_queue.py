@@ -139,8 +139,8 @@ def main() -> int:
     parser.add_argument(
         '--mode',
         choices=['direct', 'upload'],
-        default='upload',
-        help='direct publishes through video.publish; upload sends an inbox draft through video.upload for final review in TikTok.',
+        default='direct',
+        help='direct publishes through video.publish after approval; upload is diagnostic only and sends an inbox draft through video.upload.',
     )
     parser.add_argument('--dry-run', action='store_true')
     parser.add_argument('--store-refreshed-token', action='store_true', help='Write refreshed TikTok token values back to secrets/social_api.env.')
@@ -158,6 +158,7 @@ def main() -> int:
     title = (args.text or row.get('text') or '').strip()
     if not title:
         raise RuntimeError('TikTok post text/title is required')
+    public_posting_approved = str(env.get('TIKTOK_PUBLIC_POSTING_APPROVED') or '').strip().lower() == 'true'
     if args.dry_run:
         print(json.dumps({
             'ok': True,
@@ -173,7 +174,7 @@ def main() -> int:
             'token_path_ready': bool(env.get('TIKTOK_ACCESS_TOKEN')) or not missing_refresh_credentials(env),
             'token_source': 'access_token' if env.get('TIKTOK_ACCESS_TOKEN') else ('refresh_token' if not missing_refresh_credentials(env) else ''),
             'missing_refresh_credentials': missing_refresh_credentials(env),
-            'public_posting_approved': str(env.get('TIKTOK_PUBLIC_POSTING_APPROVED') or '').strip().lower() == 'true',
+            'public_posting_approved': public_posting_approved,
             'default_privacy': env.get('TIKTOK_DEFAULT_PRIVACY', 'PUBLIC_TO_EVERYONE'),
             'brand_content_toggle': boolish(env.get('TIKTOK_BRAND_CONTENT', ''), False),
             'brand_organic_toggle': boolish(env.get('TIKTOK_BRAND_ORGANIC', ''), True),
@@ -181,6 +182,9 @@ def main() -> int:
             'title': title,
         }, ensure_ascii=False))
         return 0
+
+    if args.mode == 'direct' and not public_posting_approved:
+        raise RuntimeError('TikTok direct public posting is not approved; set TIKTOK_PUBLIC_POSTING_APPROVED=true only after TikTok approval is explicit.')
 
     token, token_source = tiktok_access_token(env, args.timeout_seconds, args.store_refreshed_token)
     if not public_video_url and not media_path:

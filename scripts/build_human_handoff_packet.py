@@ -297,7 +297,7 @@ def platform_setup_tasks(packet: dict, tiktok_preflight: dict) -> list[dict]:
                 "preflight_report": str((ROOT / "admin" / "reports" / "tiktok-setup-preflight.md").relative_to(ROOT)),
                 "preflight_command": "python3 scripts/build_tiktok_setup_preflight.py",
             },
-            guardrail="Keep TikTok upload-draft mode separate from direct public posting; do not require manual-only community posting.",
+            guardrail="Keep TikTok upload-draft/manual-finish posting out of the active plan; only direct public API publishing can become an automated TikTok lane.",
         ))
     return tasks
 
@@ -550,9 +550,9 @@ def build_action_docket(tasks: list[dict], blocker_summary: dict, approval_runwa
             "preview_command": platform_preview_command,
             "apply_command": platform_apply_command,
             "command_sequence": command_sequence(platform_preview_command, platform_apply_command, "python3 scripts/refresh_promo_admin.py"),
-            "completion_evidence": "data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_upload_drafts before TikTok upload-mode backlog work is allowed.",
-            "next_step_after_apply": "Recapture admin state and only then revisit TikTok approval or backlog reschedule rows.",
-            "guardrail": "Run preflight and confirm local OAuth setup before pushing upload-mode secrets; direct public posting remains separately approval-gated.",
+            "completion_evidence": "data/tiktok_setup_preflight.json should report direct public posting approval before TikTok backlog work is allowed.",
+            "next_step_after_apply": "Recapture admin state and only then revisit TikTok approval or backlog reschedule rows that can publish automatically.",
+            "guardrail": "Run preflight and confirm local OAuth setup before pushing secrets; upload-draft/manual-finish TikTok posting remains excluded from the active plan.",
         },
         {
             "id": "manual-metric-worksheet",

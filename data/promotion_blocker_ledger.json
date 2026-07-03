@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-03T11:29:55.637741Z",
+  "generated_at": "2026-07-03T11:51:42.276608Z",
   "safe_mode": true,
   "summary": {
     "open_blocker_count": 2,
@@ -61,18 +61,19 @@
       },
       {
         "id": "unlock-tiktok-platform-repair",
-        "phase": "Repair TikTok executor",
-        "status": "ready",
+        "phase": "Prepare TikTok direct-public API lane",
+        "status": "deferred",
         "owner": "tod",
         "blockers_resolved": 0,
         "unlocks": [
-          "Held TikTok approval rows can pass platform-readiness review.",
-          "Approved TikTok backlog can become safe to reschedule into upload-draft creation."
+          "TikTok can become an automated expansion lane only after direct public posting approval is explicit.",
+          "Upload-draft/manual-finish TikTok posting stays out of the active plan."
         ],
         "blocked_by": [],
         "preview_command": "",
         "apply_command": "",
-        "source_path": "data/platform_repair_status.json"
+        "source_path": "data/platform_repair_status.json",
+        "guardrail": "Do not queue TikTok upload-draft rows as active promotion; only direct public API publishing can enter the active plan."
       },
       {
         "id": "unlock-backlog-reschedule",

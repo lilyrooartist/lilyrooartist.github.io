@@ -639,11 +639,12 @@ def validate_generated_outputs(failures):
             and source.get("local_posting_helper") == "scripts/post_tiktok_from_queue.py"
             and summary.get("local_posting_helper_uses_refresh_token") is True
             and (summary.get("first_tiktok_asset") or {}).get("post_id") == "FP-AUTO-264"
-            and (summary.get("first_tiktok_asset") or {}).get("ready_for_upload_mode") is True
+            and (summary.get("first_tiktok_asset") or {}).get("ready_for_upload_mode") is False
+            and (summary.get("first_tiktok_asset") or {}).get("upload_mode_diagnostic_capable") is True
             and (summary.get("first_tiktok_asset") or {}).get("media_ready") is True
-            and "post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run" in ((summary.get("first_tiktok_asset") or {}).get("dry_run_command") or "")
-            and "post_tiktok_from_queue.py --post-id FP-AUTO-264 --dry-run" in (summary.get("local_post_preview_command") or "")
-            and "post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run" in (summary.get("local_upload_preview_command") or "")
+            and ((summary.get("first_tiktok_asset") or {}).get("dry_run_command") or "") == ""
+            and "post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode direct --dry-run" in (summary.get("local_post_preview_command") or "")
+            and (summary.get("local_upload_preview_command") or "") == ""
             and "Posting mode selected: API integration." in template_text
             and "TIKTOK_CLIENT_KEY=" in template_text
             and "TIKTOK_CLIENT_SECRET=" in template_text
@@ -719,7 +720,7 @@ def validate_generated_outputs(failures):
             and "tiktok_oauth_handoff.py --print-auth-url" in (summary.get("oauth_authorization_url_command") or "")
             and "tiktok_oauth_handoff.py --exchange-code CODE --apply" in (summary.get("oauth_exchange_command") or "")
             and summary.get("local_posting_helper_uses_refresh_token") is True
-            and "post_tiktok_from_queue.py --post-id FP-AUTO-264 --dry-run" in (summary.get("local_post_preview_command") or "")
+            and "post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode direct --dry-run" in (summary.get("local_post_preview_command") or "")
             and "local_public_posting_approval_confirmed" in summary
             and isinstance(summary.get("ready_to_upload_drafts"), bool)
             and isinstance(summary.get("ready_for_direct_public_posting"), bool)
@@ -998,7 +999,10 @@ def validate_generated_outputs(failures):
             (action.get("context") or {}).get("missing_secrets")
             and (action.get("context") or {}).get("local_missing_secrets")
             and (action.get("context") or {}).get("local_secret_source")
-            and "upload" in ((action.get("context") or {}).get("repair_action") or "").lower()
+            and any(
+                term in ((action.get("context") or {}).get("repair_action") or "").lower()
+                for term in ("direct public", "manual-finish", "upload")
+            )
             for action in tiktok_actions
         ):
             ok("promo operations packet includes TikTok remote and local missing-secret diagnostics")
@@ -1421,7 +1425,7 @@ def validate_generated_outputs(failures):
             unlock_sequence.get("safe_mode") is True
             and unlock_summary.get("step_count") == len(unlock_steps) == len(ledger_roadmap)
             and unlock_summary.get("current_step_id") in {"unlock-checked-scheduled-approval", "unlock-manual-distribution", "unlock-tiktok-platform-repair", "unlock-manual-metrics"}
-            and unlock_summary.get("current_gate_state") in {"ready_for_human_review", "completed", "blocked", "blocked_until_input"}
+            and unlock_summary.get("current_gate_state") in {"ready_for_human_review", "completed", "blocked", "blocked_until_input", "deferred"}
             and unlock_summary.get("open_blocker_count") == ledger_open_count
             and [step.get("id") for step in unlock_steps] == [item.get("id") for item in ledger_roadmap]
             and any(step.get("gate_state") == "blocked_until_input" for step in unlock_steps)
@@ -1435,7 +1439,7 @@ def validate_generated_outputs(failures):
                     and step.get("completion_evidence")
                     and step.get("guardrail")
                 )
-                or step.get("gate_state") in {"blocked", "clear"}
+                or step.get("gate_state") in {"blocked", "clear", "deferred", "deferred_manual_finish_excluded"}
                 for step in unlock_steps
             )
             and all(command.get("safe_to_run") is True for step in unlock_steps for command in (step.get("commands") or []) if command.get("step") == "preview")
@@ -3992,12 +3996,13 @@ def validate_generated_outputs(failures):
             and "brand_organic_toggle" in tiktok_post_text
             and "aigc_label_enabled" in tiktok_post_text
             and "--mode" in tiktok_post_text
-            and "default='upload'" in tiktok_post_text
+            and "default='direct'" in tiktok_post_text
+            and "TikTok direct public posting is not approved" in tiktok_post_text
             and "UPLOAD_INIT_URL" in tiktok_post_text
             and "video.upload" in tiktok_post_text
             and "Secret" not in tiktok_post_text
         ):
-            ok("TikTok local posting helper supports refresh-token credentials and upload-mode default")
+            ok("TikTok local posting helper supports refresh-token credentials and direct-first posting mode")
         else:
             fail("post_tiktok_from_queue.py missing refresh-token TikTok posting support", failures)
     else:
@@ -4008,11 +4013,12 @@ def validate_generated_outputs(failures):
         and "TIKTOK_POSTING_MODE" in worker_text
         and "draft_uploaded" in worker_text
         and "tiktokPostingMode" in worker_text
-        and 'env.TIKTOK_POSTING_MODE || "upload"' in worker_text
+        and 'env.TIKTOK_POSTING_MODE || "direct"' in worker_text
+        and 'tiktok_public_posting_not_approved' in worker_text
         and "executionStatusFromResult" in worker_text
         and "tiktok_public_posting_not_approved" in worker_text
     ):
-        ok("social executor supports gated TikTok direct posting and inbox draft upload mode by default")
+        ok("social executor supports gated direct TikTok posting with explicit diagnostic inbox draft mode")
     else:
         fail("social executor missing TikTok draft-upload/direct-post mode split", failures)
     if (
@@ -4061,7 +4067,7 @@ def validate_generated_outputs(failures):
         fail("build_promo_consistency_audit.py missing", failures)
     if TIKTOK_SETUP_PREFLIGHT_SCRIPT.exists():
         preflight_text = TIKTOK_SETUP_PREFLIGHT_SCRIPT.read_text(encoding="utf-8")
-        if "tiktok_setup_preflight.json" in preflight_text and "tiktok-setup-preflight.md" in preflight_text and "tiktok_secret_handoff_template.env" in preflight_text and "local_secret_env_file" in preflight_text and "initialize_local_secret_env_command" in preflight_text and "local_posting_token_path" in preflight_text and "first_tiktok_asset_readiness" in preflight_text and "post_tiktok_from_queue.py --post-id FP-AUTO-264 --dry-run" in preflight_text and "credential_handoff" in preflight_text and "completion_evidence" in preflight_text and "TIKTOK_CLIENT_KEY" in preflight_text and "TIKTOK_PUBLIC_POSTING_APPROVED" in preflight_text and "Secret values" in preflight_text and "subprocess" not in preflight_text:
+        if "tiktok_setup_preflight.json" in preflight_text and "tiktok-setup-preflight.md" in preflight_text and "tiktok_secret_handoff_template.env" in preflight_text and "local_secret_env_file" in preflight_text and "initialize_local_secret_env_command" in preflight_text and "local_posting_token_path" in preflight_text and "first_tiktok_asset_readiness" in preflight_text and "post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode direct --dry-run" in preflight_text and "credential_handoff" in preflight_text and "completion_evidence" in preflight_text and "TIKTOK_CLIENT_KEY" in preflight_text and "TIKTOK_PUBLIC_POSTING_APPROVED" in preflight_text and "Secret values" in preflight_text and "subprocess" not in preflight_text:
             ok("TikTok setup preflight builder is review-only")
         else:
             fail("build_tiktok_setup_preflight.py missing preflight outputs or exposes execution/secrets", failures)
@@ -4582,7 +4588,7 @@ def validate_admin_execution_feedback(failures):
         "unlock impact shown": "Unlock impact:" in text and "Immediate unlock:" in text and "Largest unlock lane:" in text,
         "unlock sequence card shown": 'id="promo-unlock-sequence"' in text and "renderPromoUnlockSequence" in text,
         "unlock sequence links shown": "promo-unlock-sequence.md" in text and "promo_unlock_sequence.json" in text,
-        "current unlock gate shown": "Current unlock gate" in text and "ready_for_human_review" in text,
+            "current unlock gate shown": "Current unlock gate" in text and any(state in text for state in ("ready_for_human_review", "blocked_until_input")),
         "scheduled approval repair hints shown": "Open repair report" in text and "Open repair runbook" in text and "Repair blockers:" in text and "tiktok-setup-preflight.md" in text,
         "handoff action docket shown": "Action docket:" in text and "First ready step:" in text,
         "published log reconciliation shown": "Published log reconciliation" in text and "Worker export" in text and "Manual Logging" in text,

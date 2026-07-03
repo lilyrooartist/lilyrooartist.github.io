@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-03T11:29:56.086587Z",
+  "generated_at": "2026-07-03T11:51:42.725929Z",
   "safe_mode": true,
   "redaction": "Only key presence is reported; secret values are never written to generated files.",
   "source": {
@@ -337,7 +337,7 @@
       "any_present": true,
       "external_only": false,
       "unblocks": "TikTok OAuth authorization URL generation and authorization-code exchange.",
-      "verification_command": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload",
+      "verification_command": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode direct",
       "next_action": "Run the verification command and refresh admin evidence.",
       "credential_guide": {
         "priority": "second",
@@ -357,18 +357,19 @@
         ],
         "permissions_hint": [
           "user.info.basic",
-          "video.upload"
+          "video.upload",
+          "video.publish"
         ],
         "safe_handling": "Use an HTTPS redirect URI registered exactly in TikTok; paste app secrets only into ../secrets/social_api.env.",
         "after_values_commands": [
-          "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload"
+          "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode direct"
         ],
         "fallback_if_resolution_fails": "If TikTok rejects the redirect, update either the developer portal or TIKTOK_REDIRECT_URI so both strings match exactly."
       }
     },
     {
-      "id": "tiktok_upload_tokens",
-      "label": "TikTok upload-mode worker secrets",
+      "id": "tiktok_direct_public_tokens",
+      "label": "TikTok direct-public worker secrets",
       "status": "ready",
       "required_all": [
         "TIKTOK_CLIENT_KEY",
@@ -395,12 +396,12 @@
       "missing_all": [],
       "any_present": true,
       "external_only": false,
-      "unblocks": "TikTok upload-draft automation for the first ready TikTok asset.",
+      "unblocks": "TikTok direct public automation only after public posting approval is explicit.",
       "verification_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
       "next_action": "Run the verification command and refresh admin evidence.",
       "credential_guide": {
         "priority": "after_oauth",
-        "operator_summary": "Authorize the generated TikTok URL as Lily Roo, exchange the returned code, then push upload-mode Worker secrets.",
+        "operator_summary": "After TikTok public posting approval is explicit, authorize the generated TikTok URL as Lily Roo, exchange the returned code, then push direct-public Worker secrets.",
         "where_to_get": "The OAuth callback URL after authorizing the generated TikTok authorization link.",
         "portal_url": "https://developers.tiktok.com/",
         "docs_url": "https://developers.tiktok.com/doc/content-posting-api-get-started",
@@ -413,14 +414,14 @@
         ],
         "permissions_hint": [
           "user.info.basic",
-          "video.upload"
+          "video.upload",
+          "video.publish"
         ],
         "safe_handling": "The helper writes returned token values locally with --apply and never prints them.",
         "after_values_commands": [
-          "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode upload",
+          "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode direct",
           "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
           "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
-          "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run",
           "python3 scripts/refresh_promo_admin.py"
         ],
         "fallback_if_resolution_fails": "Regenerate the authorization URL and exchange the code immediately; TikTok authorization codes are short-lived."

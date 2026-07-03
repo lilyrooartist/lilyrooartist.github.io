@@ -67,15 +67,15 @@ GROUPS = [
         "required_all": ["TIKTOK_CLIENT_KEY", "TIKTOK_CLIENT_SECRET", "TIKTOK_REDIRECT_URI"],
         "github_actions_secrets": [],
         "unblocks": "TikTok OAuth authorization URL generation and authorization-code exchange.",
-        "verify": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload",
+        "verify": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode direct",
     },
     {
-        "id": "tiktok_upload_tokens",
-        "label": "TikTok upload-mode worker secrets",
+        "id": "tiktok_direct_public_tokens",
+        "label": "TikTok direct-public worker secrets",
         "required_any": [],
         "required_all": ["TIKTOK_CLIENT_KEY", "TIKTOK_CLIENT_SECRET", "TIKTOK_REFRESH_TOKEN"],
         "github_actions_secrets": [],
-        "unblocks": "TikTok upload-draft automation for the first ready TikTok asset.",
+        "unblocks": "TikTok direct public automation only after public posting approval is explicit.",
         "verify": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
     },
     {
@@ -208,16 +208,17 @@ CREDENTIAL_GUIDES = {
         "permissions_hint": [
             "user.info.basic",
             "video.upload",
+            "video.publish",
         ],
         "safe_handling": "Use an HTTPS redirect URI registered exactly in TikTok; paste app secrets only into ../secrets/social_api.env.",
         "after_values_commands": [
-            "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload",
+            "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode direct",
         ],
         "fallback_if_resolution_fails": "If TikTok rejects the redirect, update either the developer portal or TIKTOK_REDIRECT_URI so both strings match exactly.",
     },
-    "tiktok_upload_tokens": {
+    "tiktok_direct_public_tokens": {
         "priority": "after_oauth",
-        "operator_summary": "Authorize the generated TikTok URL as Lily Roo, exchange the returned code, then push upload-mode Worker secrets.",
+        "operator_summary": "After TikTok public posting approval is explicit, authorize the generated TikTok URL as Lily Roo, exchange the returned code, then push direct-public Worker secrets.",
         "where_to_get": "The OAuth callback URL after authorizing the generated TikTok authorization link.",
         "portal_url": "https://developers.tiktok.com/",
         "docs_url": "https://developers.tiktok.com/doc/content-posting-api-get-started",
@@ -231,13 +232,13 @@ CREDENTIAL_GUIDES = {
         "permissions_hint": [
             "user.info.basic",
             "video.upload",
+            "video.publish",
         ],
         "safe_handling": "The helper writes returned token values locally with --apply and never prints them.",
         "after_values_commands": [
-            "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode upload",
+            "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode direct",
             "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
             "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
-            "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run",
             "python3 scripts/refresh_promo_admin.py",
         ],
         "fallback_if_resolution_fails": "Regenerate the authorization URL and exchange the code immediately; TikTok authorization codes are short-lived.",

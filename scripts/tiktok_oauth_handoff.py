@@ -93,16 +93,16 @@ def main() -> int:
     parser.add_argument("--print-auth-url", action="store_true", help="Print the TikTok authorization URL.")
     parser.add_argument("--exchange-code", help="Exchange a TikTok authorization code for tokens.")
     parser.add_argument("--apply", action="store_true", help="Write returned tokens to secrets/social_api.env.")
-    parser.add_argument("--posting-mode", choices=["upload", "direct"], default="", help="Choose the minimum TikTok scope bundle for inbox draft upload or direct public posting.")
+    parser.add_argument("--posting-mode", choices=["upload", "direct"], default="", help="Choose the TikTok scope bundle; direct is the no-manual-posting default and upload is diagnostic only.")
     parser.add_argument("--scopes", default="", help="Comma-separated TikTok OAuth scopes. Overrides --posting-mode when supplied.")
     parser.add_argument("--state", help="OAuth anti-forgery state. Generated when omitted.")
     parser.add_argument("--timeout-seconds", type=int, default=30)
     args = parser.parse_args()
 
     env = load_env(SOCIAL_ENV)
-    posting_mode = args.posting_mode or str(env.get("TIKTOK_POSTING_MODE") or "upload").strip().lower()
+    posting_mode = args.posting_mode or str(env.get("TIKTOK_POSTING_MODE") or "direct").strip().lower()
     if posting_mode not in {"upload", "direct"}:
-        posting_mode = "upload"
+        posting_mode = "direct"
     requested_scopes = scope_string(posting_mode, args.scopes.strip())
     missing_base = [name for name in REQUIRED_BASE if not str(env.get(name) or "").strip()]
     state = args.state or secrets.token_urlsafe(24)
@@ -166,9 +166,9 @@ def main() -> int:
     if not args.print_auth_url and not args.exchange_code:
         payload["next_actions"] = [
             "Add TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, and TIKTOK_REDIRECT_URI to secrets/social_api.env.",
-            "Run python3 scripts/tiktok_oauth_handoff.py --posting-mode upload --print-auth-url for the first inbox-draft connector path.",
-            "Authorize video.upload with the Lily Roo TikTok account, then exchange the returned code with --exchange-code CODE --apply.",
-            "Use --posting-mode direct only after the app has video.publish approval and public posting is intentionally enabled.",
+            "Run python3 scripts/tiktok_oauth_handoff.py --posting-mode direct --print-auth-url only after the app has video.publish approval and public posting is intentionally enabled.",
+            "Authorize direct public posting with the Lily Roo TikTok account, then exchange the returned code with --exchange-code CODE --apply.",
+            "Do not use upload-mode inbox drafts as the active promotion lane; they require manual finish.",
         ]
 
     print(json.dumps(payload, indent=2))

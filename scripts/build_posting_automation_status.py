@@ -191,13 +191,13 @@ def build_packet() -> dict:
         ),
         lane_status(
             "TikTok API lane",
-            "ready" if tiktok_summary.get("ready_to_post_publicly") else ("deferred" if tiktok_summary.get("ready_to_upload_drafts") else ("deferred" if active_campaign_ready else "blocked")),
+            "ready" if tiktok_summary.get("ready_to_post_publicly") else ("deferred" if active_campaign_ready else "blocked"),
             f"{tiktok_summary.get('status') or 'unknown'}; upload_ready={bool(tiktok_summary.get('ready_to_upload_drafts'))}; public_ready={bool(tiktok_summary.get('ready_to_post_publicly'))}",
             "data/tiktok_setup_preflight.json",
             (
-                "Direct TikTok public posting is not in the active plan until platform approval is explicit."
-                if tiktok_summary.get("ready_to_upload_drafts")
-                else "Add TikTok OAuth credentials only if TikTok becomes an automated expansion lane."
+                "Direct TikTok public posting is not in the active plan until platform approval is explicit; upload-draft/manual-finish posting is excluded."
+                if not tiktok_summary.get("ready_to_post_publicly")
+                else ""
             ),
         ),
         lane_status(
