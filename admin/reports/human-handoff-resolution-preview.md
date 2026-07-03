@@ -1,40 +1,22 @@
 # Human Handoff Resolution Preview - Lily Roo
 
-Generated: 2026-07-03T06:33:29.173361Z
+Generated: 2026-07-03T06:48:08.461110Z
 
 ## Summary
-- Worksheet rows: **6**
-- Executed previews: **6**
+- Worksheet rows: **3**
+- Executed previews: **3**
 - Skipped previews: **0**
-- Status counts: `{"input_missing": 6}`
+- Status counts: `{"input_missing": 2, "preview_ok": 1}`
 - Policy: Only python3 scripts/* commands with --dry-run, or reschedule previews without --apply, are executed.
 - Guardrail: This preview runner never executes apply, refresh-admin, PUBLIC_URL placeholder, non-python, or unsupported commands.
 
 ## Previews
-- **platform-setup-FP-AUTO-258** (`input_missing`)
+- **platform-setup-tiktok-preflight** (`preview_ok`)
   - Phase: `Platform setup`; input needed: `local_secret_presence_and_public_posting_approval`
   - Safety: `safe_preview` (dry_run_command)
-  - Command: `python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID`
-  - Output: ERROR: IG_BUSINESS_ACCOUNT_ID is missing from secrets/social_api.env
-  - Guardrail: Push worker secrets only after local platform setup is complete.
-- **platform-setup-FP-AUTO-263** (`input_missing`)
-  - Phase: `Platform setup`; input needed: `local_secret_presence_and_public_posting_approval`
-  - Safety: `safe_preview` (dry_run_command)
-  - Command: `python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID`
-  - Output: ERROR: IG_BUSINESS_ACCOUNT_ID is missing from secrets/social_api.env
-  - Guardrail: Push worker secrets only after local platform setup is complete.
-- **platform-setup-FP-AUTO-264** (`input_missing`)
-  - Phase: `Platform setup`; input needed: `local_secret_presence_and_public_posting_approval`
-  - Safety: `safe_preview` (dry_run_command)
-  - Command: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
-  - Output: ERROR: TIKTOK_CLIENT_KEY is missing from secrets/social_api.env | ERROR: TIKTOK_CLIENT_SECRET is missing from secrets/social_api.env | ERROR: TIKTOK_REFRESH_TOKEN is missing from secrets/social_api.env
-  - Guardrail: Run the TikTok preflight before pushing secrets; push upload-mode secrets only after local OAuth setup is complete. Keep direct public posting blocked until approval is confirmed.
-- **platform-setup-FP-PLAN-TWELVE-DOLLARS-INSTAGRAM** (`input_missing`)
-  - Phase: `Platform setup`; input needed: `local_secret_presence_and_public_posting_approval`
-  - Safety: `safe_preview` (dry_run_command)
-  - Command: `python3 scripts/push_social_worker_secrets.py --dry-run IG_BUSINESS_ACCOUNT_ID`
-  - Output: ERROR: IG_BUSINESS_ACCOUNT_ID is missing from secrets/social_api.env
-  - Guardrail: Push worker secrets only after local platform setup is complete.
+  - Command: `python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run`
+  - Output: {"ok": true, "platform": "TikTok", "dry_run": true, "mode": "upload", "endpoint": "https://open.tiktokapis.com/v2/post/publish/inbox/video/init/", "required_scope": "video.upload", "media_key": "i-learned-60s", "media_ready": true, "public_video_url": "https://www.lilyroo.com/assets/media/01_i_learned_it_all_60s_tiktok.mp4?fresh=6cb3941d2", "media_path": "", "token_path_ready": true, "token_source": "access_token", "missing_refresh_credentials": [], "public_posting_approved": false, "default_privacy": "PUBLIC_TO_EVERYONE", "brand_content_toggle": false, "brand_organic_toggle": true, "aigc_label_enabled": true, "title": "Swipe away before the pain sets in. Cute system we built. Streaming now."}
+  - Guardrail: Keep TikTok upload-draft mode separate from direct public posting; do not require manual-only community posting.
 - **manual-metrics-priority-2** (`input_missing`)
   - Phase: `Manual metrics`; input needed: `private_metric_values`
   - Safety: `safe_preview` (dry_run_command)

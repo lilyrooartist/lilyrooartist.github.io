@@ -1,0 +1,33 @@
+{
+  "ok": true,
+  "mode": "write",
+  "generated_at": "2026-07-03T06:46:10.096694Z",
+  "source": "data/scheduled_posts.csv",
+  "archive": "data/expired_scheduled_posts.csv",
+  "older_than_hours": 24.0,
+  "cutoff": "2026-07-02T06:46:10.096694Z",
+  "input_count": 62,
+  "kept_count": 49,
+  "expired_count": 13,
+  "expired_ids": [
+    "FP-AUTO-259",
+    "FP-AUTO-258",
+    "FP-AUTO-264",
+    "FP-AUTO-263",
+    "FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
+    "FP-AUTO-267",
+    "FP-AUTO-269",
+    "FP-AUTO-272",
+    "FP-AUTO-274",
+    "FP-AUTO-277",
+    "FP-AUTO-279",
+    "FP-AUTO-282",
+    "FP-AUTO-284"
+  ],
+  "skipped_reasons": {
+    "already_published": 33,
+    "approved": 16
+  },
+  "source_pruned": false,
+  "guardrail": "Only unapproved, unpublished, past-due rows outside the stale grace window are archived; source pruning requires --prune-source."
+}

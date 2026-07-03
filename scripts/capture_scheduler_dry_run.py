@@ -59,8 +59,19 @@ def auth_method() -> str:
     return "none"
 
 
-def fetch(url: str, scheduled_time: str) -> tuple[int, dict, str]:
-    body = json.dumps({"scheduledTime": scheduled_time}).encode("utf-8")
+def default_queue_url() -> str:
+    repository = os.environ.get("GITHUB_REPOSITORY", "").strip()
+    sha = os.environ.get("GITHUB_SHA", "").strip()
+    if repository and sha:
+        return f"https://raw.githubusercontent.com/{repository}/{sha}/admin/future-posts.json"
+    return ""
+
+
+def fetch(url: str, scheduled_time: str, queue_url: str = "") -> tuple[int, dict, str]:
+    payload = {"scheduledTime": scheduled_time}
+    if queue_url:
+        payload["queueUrl"] = queue_url
+    body = json.dumps(payload).encode("utf-8")
     request = urllib.request.Request(url, data=body, headers=auth_headers(), method="POST")
     try:
         with urllib.request.urlopen(request, timeout=30) as response:
@@ -114,13 +125,14 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Capture a read-only social scheduler dry-run snapshot.")
     parser.add_argument("--url", default=DEFAULT_URL)
     parser.add_argument("--scheduled-time", default=datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"))
+    parser.add_argument("--queue-url", default=default_queue_url(), help="Optional queue JSON URL for authenticated dry-run verification.")
     parser.add_argument("--out", default=str(OUT.relative_to(ROOT)))
     args = parser.parse_args()
 
     out = Path(args.out)
     if not out.is_absolute():
         out = ROOT / out
-    status, payload, error = fetch(args.url, args.scheduled_time)
+    status, payload, error = fetch(args.url, args.scheduled_time, args.queue_url)
     ok = status == 200 and bool(payload.get("ok")) and payload.get("dry_run") is True
     summary = summarize(payload if isinstance(payload, dict) else {})
     snapshot = {
@@ -132,6 +144,7 @@ def main() -> int:
         "error": error or (payload.get("error") if isinstance(payload, dict) else ""),
         "auth_method": auth_method(),
         "requested_scheduled_time": args.scheduled_time,
+        "queue_url": args.queue_url,
         "dry_run": True,
         "checked_at": payload.get("checked_at", "") if isinstance(payload, dict) else "",
         "summary": summary,

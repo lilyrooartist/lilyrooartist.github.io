@@ -58,6 +58,16 @@ STEPS = [
         "preserve_on_failure": ["data/executor_readiness_snapshot.json"],
     },
     {
+        "name": "expire_stale_unapproved_posts",
+        "command": ["python3", "scripts/expire_stale_unapproved_posts.py", "--write"],
+        "required": True,
+    },
+    {
+        "name": "sync_future_posts",
+        "command": ["python3", "scripts/sync_future_posts.py"],
+        "required": True,
+    },
+    {
         "name": "capture_social_executions",
         "command": ["python3", "scripts/capture_social_executions.py"],
         "required": False,
@@ -79,11 +89,6 @@ STEPS = [
         "command": ["python3", "scripts/capture_scheduler_dry_run.py"],
         "required": False,
         "preserve_on_failure": ["data/social_scheduler_dry_run.json"],
-    },
-    {
-        "name": "sync_future_posts",
-        "command": ["python3", "scripts/sync_future_posts.py"],
-        "required": True,
     },
     {
         "name": "generate_promo_queue_plan",

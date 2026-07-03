@@ -11,6 +11,7 @@ if not SOURCE.exists():
     SOURCE = FALLBACK_SOURCE
 OUT = REPO_ROOT / 'admin' / 'future-posts.json'
 PUBLISHED_LOG = REPO_ROOT / 'admin' / 'content' / 'Published_Log.csv'
+EXPIRED_POSTS = REPO_ROOT / 'data' / 'expired_scheduled_posts.csv'
 ADMIN_INDEX = REPO_ROOT / 'admin' / 'index.html'
 
 def infer_post_type(row):
@@ -46,14 +47,27 @@ def load_published_ids(path: Path):
                 ids.add(match)
     return ids
 
-def load_posts(path: Path, published_ids=None):
-    items = []
-    published_ids = published_ids or set()
+def load_expired_ids(path: Path):
+    ids = set()
+    if not path.exists():
+        return ids
     with path.open(newline='', encoding='utf-8') as f:
         reader = csv.DictReader(f)
         for r in reader:
             post_id = (r.get('id') or '').strip()
-            if post_id in published_ids:
+            if post_id.startswith('FP-'):
+                ids.add(post_id)
+    return ids
+
+def load_posts(path: Path, published_ids=None, expired_ids=None):
+    items = []
+    published_ids = published_ids or set()
+    expired_ids = expired_ids or set()
+    with path.open(newline='', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        for r in reader:
+            post_id = (r.get('id') or '').strip()
+            if post_id in published_ids or post_id in expired_ids:
                 continue
             drafts_raw = (r.get('drafts') or '').strip()
             drafts = [d.strip() for d in drafts_raw.split('||') if d.strip()] if drafts_raw else []
@@ -81,12 +95,13 @@ def load_posts(path: Path, published_ids=None):
     return items
 
 published_ids = load_published_ids(PUBLISHED_LOG)
+expired_ids = load_expired_ids(EXPIRED_POSTS)
 
 try:
-    posts = load_posts(SOURCE, published_ids)
+    posts = load_posts(SOURCE, published_ids, expired_ids)
 except OSError:
     SOURCE = FALLBACK_SOURCE
-    posts = load_posts(SOURCE, published_ids)
+    posts = load_posts(SOURCE, published_ids, expired_ids)
 
 posts.sort(key=lambda p: p.get('scheduled_at', ''))
 payload = {
@@ -94,6 +109,7 @@ payload = {
     'source': str(SOURCE.relative_to(REPO_ROOT)) if SOURCE.is_relative_to(REPO_ROOT) else str(SOURCE),
     'published_log': str(PUBLISHED_LOG.relative_to(REPO_ROOT)),
     'excluded_published_ids': sorted(published_ids),
+    'excluded_expired_ids': sorted(expired_ids),
     'posts': posts,
 }
 

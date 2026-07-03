@@ -146,6 +146,27 @@ def ok(message):
     print(f"OK: {message}")
 
 
+def read_json_if_exists(path, fallback=None):
+    if not path.exists():
+        return {} if fallback is None else fallback
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def active_approval_blocker_count():
+    packet = read_json_if_exists(SCHEDULED_APPROVAL_PACKET)
+    return int(((packet.get("summary") or {}).get("approval_blocker_count")) or 0)
+
+
+def active_platform_repair_count():
+    packet = read_json_if_exists(PLATFORM_REPAIR_STATUS)
+    return int(((packet.get("summary") or {}).get("platform_fix_count")) or 0)
+
+
+def active_social_attention_count():
+    snapshot = read_json_if_exists(SOCIAL_EXECUTION_SNAPSHOT)
+    return int(((snapshot.get("summary") or {}).get("attention_count")) or 0)
+
+
 GENERATED_REFRESH_PATHS = {
     "admin/index.html",
     "data/approval_runway.json",
@@ -691,6 +712,10 @@ def validate_generated_outputs(failures):
             required_kinds.add("manual_distribution")
         if int(result_clipboard_summary_for_operations.get("metric_card_count") or 0):
             required_kinds.add("experiment_results")
+        if active_approval_blocker_count() == 0:
+            required_kinds.discard("approval_review")
+        if active_platform_repair_count() == 0 and active_social_attention_count() == 0:
+            required_kinds.discard("platform_fix")
         if required_kinds <= action_kinds and all("command" in action and "label" in action and "phase" in action and "urgency" in action for action in actions):
             ok("promo operations packet groups approval, store, metric, and platform work")
         else:
@@ -713,7 +738,10 @@ def validate_generated_outputs(failures):
             ):
                 ok("promo operations packet surfaces experiment result collection")
             else:
-                fail("promo_operations_packet.json missing experiment result collection action", failures)
+                if summary.get("experiment_result_actions") == 0 and result_clipboard_summary_for_operations.get("apply_gate"):
+                    ok("promo operations packet defers experiment result action while metric cards are gated")
+                else:
+                    fail("promo_operations_packet.json missing experiment result collection action", failures)
         elif not experiment_result_actions and summary.get("experiment_result_actions") == 0:
             ok("promo operations packet has no experiment result action without metric cards")
         else:
@@ -865,7 +893,9 @@ def validate_generated_outputs(failures):
             action for action in actions
             if action.get("kind") == "approval_review"
         ]
-        if approval_review_actions and all(
+        if not approval_review_actions and active_approval_blocker_count() == 0:
+            ok("promo operations packet has no approval preview rows after approval blockers clear")
+        elif approval_review_actions and all(
             "--dry-run" in (action.get("command") or "")
             and "--dry-run" not in ((action.get("context") or {}).get("approval_command") or "")
             and ((action.get("context") or {}).get("preview_command") == action.get("command"))
@@ -952,7 +982,9 @@ def validate_generated_outputs(failures):
             if action.get("kind") == "platform_fix"
             and (action.get("context") or {}).get("platform") == "Instagram"
         ]
-        if instagram_actions and all(
+        if not instagram_actions and active_platform_repair_count() == 0 and active_social_attention_count() == 0:
+            ok("promo operations packet has no Instagram diagnostics after active repair rows clear")
+        elif instagram_actions and all(
             (action.get("context") or {}).get("account_resolution_reason") == "instagram_business_account_unresolved"
             and "IG_BUSINESS_ACCOUNT_ID" in ((action.get("context") or {}).get("local_missing_secrets") or [])
             and (action.get("context") or {}).get("local_secret_source")
@@ -1189,7 +1221,10 @@ def validate_generated_outputs(failures):
                 or (
                     not scheduled_checked_change_count_for_handoff
                     and not manual_distribution_required
-                    and first_ready_step.get("id") == "manual-metric-worksheet"
+                    and (
+                        first_ready_step.get("id") == "manual-metric-worksheet"
+                        or active_platform_repair_count() == 0
+                    )
                 )
             )
             and (manual_posting_step or not manual_distribution_required)
@@ -1219,14 +1254,17 @@ def validate_generated_outputs(failures):
                 not backlog_count_for_handoff
                 or any(item.get("id") == "backlog-reschedule-gate" and item.get("backlog_clearance_manifest") and item.get("clearance_checklist") and item.get("clearance_guardrails") for item in docket_checklist)
             )
-            and any(
-                item.get("id") == "platform-repair-gate"
-                and item.get("state") == "blocked"
-                and (
-                    "push_social_worker_secrets.py --dry-run" in item.get("preview_command", "")
-                    or "check_social_executor_dry_run.py" in item.get("preview_command", "")
+            and (
+                active_platform_repair_count() == 0
+                or any(
+                    item.get("id") == "platform-repair-gate"
+                    and item.get("state") == "blocked"
+                    and (
+                        "push_social_worker_secrets.py --dry-run" in item.get("preview_command", "")
+                        or "check_social_executor_dry_run.py" in item.get("preview_command", "")
+                    )
+                    for item in docket_checklist
                 )
-                for item in docket_checklist
             )
             and all(
                 item.get("completion_evidence")
@@ -1242,8 +1280,14 @@ def validate_generated_outputs(failures):
                 not backlog_count_for_handoff
                 or any(task.get("phase") == "Backlog recovery" and (task.get("impact") or {}).get("backlog_clearance_manifest") and (task.get("impact") or {}).get("clearance_checklist") for task in tasks)
             )
-            and any(task.get("phase") == "Platform setup" and (task.get("impact") or {}).get("missing_secrets") for task in tasks)
-            and any(task.get("phase") == "Platform setup" and (task.get("impact") or {}).get("platform") == "TikTok" and (task.get("impact") or {}).get("preflight_status") and (task.get("impact") or {}).get("preflight_command") and (task.get("impact") or {}).get("preflight_report") for task in tasks)
+            and (
+                any(task.get("phase") == "Platform setup" and (task.get("impact") or {}).get("missing_secrets") for task in tasks)
+                or active_platform_repair_count() == 0
+            )
+            and (
+                any(task.get("phase") == "Platform setup" and (task.get("impact") or {}).get("platform") == "TikTok" and (task.get("impact") or {}).get("preflight_status") and (task.get("impact") or {}).get("preflight_command") and (task.get("impact") or {}).get("preflight_report") for task in tasks)
+                or active_platform_repair_count() == 0
+            )
         ):
             ok(f"human handoff packet packages {len(tasks)} human task(s)")
         else:
@@ -1285,14 +1329,20 @@ def validate_generated_outputs(failures):
                 )
                 for item in previews
             )
-            and any(item.get("preview_status") == "input_missing" and item.get("input_needed") == "local_secret_presence_and_public_posting_approval" for item in previews)
+            and (
+                any(item.get("preview_status") == "input_missing" and item.get("input_needed") == "local_secret_presence_and_public_posting_approval" for item in previews)
+                or active_platform_repair_count() == 0
+            )
             and any(item.get("preview_status") == "input_missing" and item.get("input_needed") == "private_metric_values" for item in previews)
             and (
                 any(item.get("preview_status") in {"preview_ok", "preview_ok_with_warning"} and item.get("phase") in {"Approval", "Manual distribution"} for item in previews)
                 or any(item.get("phase") == "Manual distribution" and item.get("preview_status") == "skipped" and item.get("input_needed") == "public_post_url" for item in previews)
                 or (
                     not manual_distribution_required
-                    and any(item.get("preview_status") == "input_missing" and item.get("phase") == "Platform setup" for item in previews)
+                    and (
+                        any(item.get("preview_status") == "input_missing" and item.get("phase") == "Platform setup" for item in previews)
+                        or active_platform_repair_count() == 0
+                    )
                     and any(item.get("preview_status") == "input_missing" and item.get("phase") == "Manual metrics" for item in previews)
                 )
             )
@@ -2574,7 +2624,9 @@ def validate_generated_outputs(failures):
                 for row in ledger_rows
                 if row.get("category") == "approval"
             }
-            if scheduled_rows and all(
+            if not scheduled_rows and active_approval_blocker_count() == 0:
+                ok("promotion blocker ledger has no scheduled approval rows after approval blockers clear")
+            elif scheduled_rows and all(
                 (
                     item.get("review_check_passed")
                     and (approval_rows.get(f"approval-{item.get('id')}") or {}).get("status") == "ready_for_reviewed_approval"
@@ -3193,7 +3245,9 @@ def validate_generated_outputs(failures):
         else:
             fail("promo_engine_status.json missing last refresh run summary", failures)
         repair_rows = (execution_summary.get("approval_needed") or []) + (execution_summary.get("platform_fix_needed") or []) + (execution_summary.get("manual_handoff_needed") or [])
-        if repair_rows and all(row.get("repair_action") and row.get("repair_command") for row in repair_rows):
+        if not repair_rows and active_social_attention_count() == 0:
+            ok("promo engine social execution rows have no active repair guidance after attention clears")
+        elif repair_rows and all(row.get("repair_action") and row.get("repair_command") for row in repair_rows):
             ok(f"promo engine social execution rows include {len(repair_rows)} repair commands")
         else:
             fail("promo_engine_status.json social execution rows missing repair guidance", failures)

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-03T06:33:29.610138Z",
+  "generated_at": "2026-07-03T06:48:08.515261Z",
   "safe_mode": true,
   "source": {
     "workflow": ".github/workflows/promo-admin-refresh.yml",
@@ -27,13 +27,13 @@
     "scheduler_auth_method": "bearer",
     "scheduler_refresh_step_ok": true,
     "posted_count": 30,
-    "attention_count": 10,
-    "platform_fix_needed_count": 3,
+    "attention_count": 0,
+    "platform_fix_needed_count": 0,
     "story_post_count": 6,
     "story_queued_future_count": 0,
-    "platform_repair_blocked_count": 4,
+    "platform_repair_blocked_count": 0,
     "blocker_input_status": "missing_local_input",
-    "blocker_input_missing_count": 4,
+    "blocker_input_missing_count": 1,
     "blocker_input_external_action_count": 1,
     "help_needed_count": 5,
     "next_action": "Resolve the platform repair checklist before expecting full auto-post coverage."
@@ -49,7 +49,7 @@
     {
       "label": "Safe admin refresh",
       "status": "ready",
-      "detail": "13 refresh commands captured at 2026-07-03T06:33:27.720846Z",
+      "detail": "45 refresh commands captured at 2026-07-03T06:33:29.813209Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": ""
     },
@@ -63,7 +63,7 @@
     {
       "label": "Execution capture",
       "status": "ready",
-      "detail": "posted=30 attention=10 platform_fix_needed=3",
+      "detail": "posted=30 attention=0 platform_fix_needed=0",
       "evidence": "data/social_execution_snapshot.json",
       "next_action": ""
     },
@@ -84,9 +84,9 @@
     {
       "label": "Blocker input readiness",
       "status": "blocked",
-      "detail": "0 ready; 4 missing local input; 1 external action needed",
+      "detail": "3 ready; 1 missing local input; 1 external action needed",
       "evidence": "data/social_blocker_input_status.json",
-      "next_action": "Add one of LILYROO_EXECUTOR_BEARER_TOKEN, EXECUTOR_BEARER_TOKEN, LILYROO_ADMIN_PASSWORD, ADMIN_PASSWORD to /home/runner/work/lilyrooartist.github.io/secrets/social_api.env."
+      "next_action": "Add META_LONG_LIVED_TOKEN, FB_PAGE_ID to /Users/tod.famous/Documents/New project/secrets/social_api.env, then run python3 scripts/resolve_instagram_business_account.py."
     },
     {
       "label": "Story throughput",

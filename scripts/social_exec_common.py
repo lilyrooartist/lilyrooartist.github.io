@@ -9,6 +9,7 @@ from typing import Any
 REPO_ROOT = Path(__file__).resolve().parents[1]
 WORKSPACE_ROOT = REPO_ROOT.parent
 QUEUE_PATH = REPO_ROOT / 'data' / 'scheduled_posts.csv'
+EXPIRED_POSTS = REPO_ROOT / 'data' / 'expired_scheduled_posts.csv'
 PUBLISHED_LOG = REPO_ROOT / 'admin' / 'content' / 'Published_Log.csv'
 SECRETS_DIR = WORKSPACE_ROOT / 'secrets'
 SOCIAL_MEDIA_MAP = SECRETS_DIR / 'social-media-map.json'
@@ -55,6 +56,17 @@ def load_queue_rows() -> list[dict[str, str]]:
         return list(csv.DictReader(f))
 
 
+def load_expired_post_ids() -> set[str]:
+    if not EXPIRED_POSTS.exists():
+        return set()
+    with EXPIRED_POSTS.open(newline='', encoding='utf-8') as f:
+        return {
+            str(row.get('id') or '').strip()
+            for row in csv.DictReader(f)
+            if str(row.get('id') or '').strip()
+        }
+
+
 def platform_slug(platform: str = '') -> str:
     value = str(platform or '').strip().lower()
     return {
@@ -70,10 +82,11 @@ def platform_slug(platform: str = '') -> str:
 
 def queue_index(rows: list[dict[str, str]] | None = None) -> dict[str, dict[str, str]]:
     source_rows = rows if rows is not None else load_queue_rows()
+    expired = load_expired_post_ids() if rows is None else set()
     return {
         str(row.get('id') or '').strip(): {key: (value or '').strip() for key, value in row.items()}
         for row in source_rows
-        if str(row.get('id') or '').strip()
+        if str(row.get('id') or '').strip() and str(row.get('id') or '').strip() not in expired
     }
 
 

@@ -111,6 +111,7 @@ async function handleRequest(request, env) {
       scheduledTime: payload.scheduledTime || Date.now(),
       source: "dry-run",
       dryRun: true,
+      queueUrl: payload.queueUrl || payload.queue_url || "",
     });
     return jsonResponse(result, 200, request, env);
   }
@@ -244,7 +245,7 @@ async function runScheduledPosts(env, options = {}) {
   }
 
   const now = new Date(options.scheduledTime || Date.now());
-  const queue = await queuePosts(env);
+  const queue = await queuePosts(env, options);
   const due = queue.filter((post) => {
     const scheduled = new Date(text(post.scheduled_at || post.scheduledAt));
     return Number.isFinite(scheduled.getTime()) && scheduled <= now;
@@ -359,8 +360,8 @@ function dateKeyInTimeZone(date, timeZone) {
   return `${parts.year}-${parts.month}-${parts.day}`;
 }
 
-async function queuePosts(env) {
-  const url = text(env.SOCIAL_QUEUE_URL) || DEFAULT_QUEUE_URL;
+async function queuePosts(env, options = {}) {
+  const url = text(options.queueUrl) || text(env.SOCIAL_QUEUE_URL) || DEFAULT_QUEUE_URL;
   const response = await fetch(`${url}${url.includes("?") ? "&" : "?"}v=${Date.now()}`, {
     headers: { Accept: "application/json" },
   });

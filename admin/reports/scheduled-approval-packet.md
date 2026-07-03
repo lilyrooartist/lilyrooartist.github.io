@@ -1,38 +1,38 @@
 # Scheduled Approval Packet - Lily Roo
 
-Generated: 2026-07-03T06:33:28.005942Z
+Generated: 2026-07-03T06:46:37.068246Z
 
 ## Summary
-- Approval blockers: **7**
-- Auto rows: **7**
+- Approval blockers: **0**
+- Auto rows: **0**
 - Manual rows: **0**
 - Review checks passed: **0**
-- Review checks blocked: **7**
+- Review checks blocked: **0**
 - Checked batch IDs: none
-- Blocked review IDs: `FP-AUTO-259, FP-AUTO-267, FP-AUTO-272, FP-AUTO-277, FP-AUTO-279, FP-AUTO-282, FP-AUTO-284`
+- Blocked review IDs: none
 - Checked-only preview: none
 - Checked-only approve after review: none
 - Checked-only explicit preview: none
 - Checked-only explicit approve after review: none
 - Checked-only effect: **0** row(s) would change approval state
-- Batch preview: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 FP-AUTO-267 FP-AUTO-272 FP-AUTO-277 FP-AUTO-279 FP-AUTO-282 FP-AUTO-284 --dry-run`
-- Batch approve after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 FP-AUTO-267 FP-AUTO-272 FP-AUTO-277 FP-AUTO-279 FP-AUTO-282 FP-AUTO-284 --refresh-admin`
-- Batch effect: **7** row(s) would change approval state
+- Batch preview: none
+- Batch approve after review: none
+- Batch effect: **0** row(s) would change approval state
 
 ## Approval Docket
 - Status: **blocked**
 - Ready to approve: **0**
-- Held: **7**
+- Held: **0**
 - Checked batch preview: `none`
 - Checked batch approve after review: `none`
 - Checked batch dry-run result: **0** change(s), **0** reviewed row(s), no files written
-- Decision manifest: **7** reviewed row(s); ready `none`; held `FP-AUTO-259, FP-AUTO-267, FP-AUTO-272, FP-AUTO-277, FP-AUTO-279, FP-AUTO-282, FP-AUTO-284`
+- Decision manifest: **0** reviewed row(s); ready `none`; held `none`
 
 ### Approval Apply Manifest
 - Status: **blocked**
 - Apply scope: **checked_batch**
 - Ready IDs: `none`
-- Held IDs: `FP-AUTO-259, FP-AUTO-267, FP-AUTO-272, FP-AUTO-277, FP-AUTO-279, FP-AUTO-282, FP-AUTO-284`
+- Held IDs: `none`
 - Expected changes: **0**
 - Preview: `none`
 - Apply after review: `none`
@@ -56,7 +56,7 @@ Generated: 2026-07-03T06:33:28.005942Z
 ### Approval Review Runbook
 - Status: **blocked**
 - Ready IDs: `none`
-- Blocked IDs: `FP-AUTO-259, FP-AUTO-267, FP-AUTO-272, FP-AUTO-277, FP-AUTO-279, FP-AUTO-282, FP-AUTO-284`
+- Blocked IDs: `none`
 - Manual dispatch ready after approval: **0**
 - 1. Review ready checked-batch rows - `blocked`
   - Evidence: Review copy_block, destination_links, asset_url, and checklist for each ready row.
@@ -76,208 +76,9 @@ Generated: 2026-07-03T06:33:28.005942Z
 - None
 
 ### Held
-- **TikTok - I Learned It All in Fifteen Seconds** (`FP-AUTO-259`)
-  - Held by `platform_readiness`: Executor readiness snapshot marks platform blocked.
-    - Repair next step: Complete the TikTok upload-mode setup preflight before approving this row; direct public posting remains separately approval-gated.
-    - Repair report: `admin/reports/tiktok-setup-preflight.md`
-    - Repair runbook: `admin/reports/tiktok-repair-runbook.md`
-    - Repair command: `python3 scripts/tiktok_oauth_handoff.py`
-- **Instagram - Brain Rot** (`FP-AUTO-267`)
-  - Held by `platform_readiness`: Executor readiness snapshot marks platform blocked.
-- **Instagram - Every Pearl in Carmel** (`FP-AUTO-272`)
-  - Held by `platform_readiness`: Executor readiness snapshot marks platform blocked.
-- **Instagram - The Other One's Charging** (`FP-AUTO-277`)
-  - Held by `platform_readiness`: Executor readiness snapshot marks platform blocked.
-- **TikTok - The Other One's Charging** (`FP-AUTO-279`)
-  - Held by `platform_readiness`: Executor readiness snapshot marks platform blocked.
-    - Repair next step: Complete the TikTok upload-mode setup preflight before approving this row; direct public posting remains separately approval-gated.
-    - Repair report: `admin/reports/tiktok-setup-preflight.md`
-    - Repair runbook: `admin/reports/tiktok-repair-runbook.md`
-    - Repair command: `python3 scripts/tiktok_oauth_handoff.py`
-- **Instagram - Twelve Dollars** (`FP-AUTO-282`)
-  - Held by `platform_readiness`: Executor readiness snapshot marks platform blocked.
-- **TikTok - Twelve Dollars** (`FP-AUTO-284`)
-  - Held by `platform_readiness`: Executor readiness snapshot marks platform blocked.
-    - Repair next step: Complete the TikTok upload-mode setup preflight before approving this row; direct public posting remains separately approval-gated.
-    - Repair report: `admin/reports/tiktok-setup-preflight.md`
-    - Repair runbook: `admin/reports/tiktok-repair-runbook.md`
-    - Repair command: `python3 scripts/tiktok_oauth_handoff.py`
+- None
 
 ## Review Queue
-- **TikTok - I Learned It All in Fifteen Seconds** (`FP-AUTO-259`)
-  - Scheduled: `2026-06-05T20:40:00-04:00`; mode: `auto`; type: `video`
-  - Reason: `not_approved`
-  - Copy: I learned it all in fifteen seconds and somehow still have homework. Streaming now.
-  - Link/reply: Listen on Spotify: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4
-  - Asset: https://www.lilyroo.com/assets/ig/01_i_learned_it_all_60s.mp4
-  - Review checks:
-    - `pass` copy_present: 83 characters of primary copy.
-    - `pass` destination_links_present: 3 link(s): https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi, https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249, https://music.youtube.com/watch?v=vK0mDIW65o4
-    - `pass` asset_file_present: https://www.lilyroo.com/assets/ig/01_i_learned_it_all_60s.mp4 maps to assets/ig/01_i_learned_it_all_60s.mp4.
-    - `pass` executor_blocker_confirmed: Current executor state is blocked / not_approved.
-    - `fail` platform_readiness: Executor readiness snapshot marks platform blocked.
-  - Destination link evidence:
-    - `verified_local_evidence` https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi: HyperFollow spotify link (data/hyperfollow_store_links_snapshot.json); spotify alignment check: ok (data/first_single_alignment_audit.json)
-    - `verified_local_evidence` https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249: HyperFollow applemusic link (data/hyperfollow_store_links_snapshot.json); HyperFollow itunes link (data/hyperfollow_store_links_snapshot.json); apple_music alignment check: ok (data/first_single_alignment_audit.json); Apple Music release snapshot: I Learned It All in Fifteen Seconds - Single (data/apple_music_release_snapshot.json)
-    - `verified_local_evidence` https://music.youtube.com/watch?v=vK0mDIW65o4: youtube_music alignment check: ok (data/first_single_alignment_audit.json); YouTube Music release snapshot: I Learned It All in Fifteen Seconds - Lily Roo (data/youtube_music_release_snapshot.json)
-  - Approval review status: `held_by_failed_checks`
-  - Checked batch member: `False`
-  - Failed checks holding this row:
-    - `platform_readiness`: Executor readiness snapshot marks platform blocked.
-      - Repair next step: Complete the TikTok upload-mode setup preflight before approving this row; direct public posting remains separately approval-gated.
-      - Repair report: `admin/reports/tiktok-setup-preflight.md`
-      - Repair runbook: `admin/reports/tiktok-repair-runbook.md`
-      - Repair command: `python3 scripts/tiktok_oauth_handoff.py`
-  - Batch reason: Held outside checked batch until failed/review checks clear.
-  - Approval effect: `approved 'no' -> 'yes'`
-  - Preview approval: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --dry-run`
-  - Approve after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --refresh-admin`
-- **Instagram - Brain Rot** (`FP-AUTO-267`)
-  - Scheduled: `2026-06-27T21:35:00-04:00`; mode: `auto`; type: `image`
-  - Reason: `not_approved`
-  - Copy: The phone is melting politely. Brain Rot is tonight's Twelve Dollars signal. Watch the remastered video. Full Twelve Dollars playlist is live.
-  - Link/reply: Watch Brain Rot: https://youtu.be/U7aczBSruAY | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
-  - Asset: https://www.lilyroo.com/assets/albums/twelve-dollars/art/01-brain-rot-youtube-thumbnail.jpg
-  - Review checks:
-    - `pass` copy_present: 142 characters of primary copy.
-    - `pass` destination_links_present: 2 link(s): https://youtu.be/U7aczBSruAY, https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
-    - `pass` asset_file_present: https://www.lilyroo.com/assets/albums/twelve-dollars/art/01-brain-rot-youtube-thumbnail.jpg maps to assets/albums/twelve-dollars/art/01-brain-rot-youtube-thumbnail.jpg.
-    - `pass` executor_blocker_confirmed: Current executor state is blocked / not_approved.
-    - `fail` platform_readiness: Executor readiness snapshot marks platform blocked.
-  - Destination link evidence:
-    - `verified_local_evidence` https://youtu.be/U7aczBSruAY: YouTube public snapshot: Brain Rot - Lily Roo (data/youtube_public_snapshot.json); YouTube playlist track 1: Brain Rot (data/youtube_twelve_dollars_playlist.json); Twelve Dollars remaster manifest: Brain Rot (data/youtube_twelve_dollars_remaster_manifest.json)
-    - `verified_local_evidence` https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n: YouTube playlist snapshot: Twelve Dollars (data/youtube_twelve_dollars_playlist.json)
-  - Approval review status: `held_by_failed_checks`
-  - Checked batch member: `False`
-  - Failed checks holding this row:
-    - `platform_readiness`: Executor readiness snapshot marks platform blocked.
-  - Batch reason: Held outside checked batch until failed/review checks clear.
-  - Approval effect: `approved 'no' -> 'yes'`
-  - Preview approval: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-267 --dry-run`
-  - Approve after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-267 --refresh-admin`
-- **Instagram - Every Pearl in Carmel** (`FP-AUTO-272`)
-  - Scheduled: `2026-06-28T21:35:00-04:00`; mode: `auto`; type: `image`
-  - Reason: `not_approved`
-  - Copy: Every Pearl in Carmel is the pretty souvenir that still knows what it cost. Watch the remastered video. Full Twelve Dollars playlist is live.
-  - Link/reply: Watch Every Pearl in Carmel: https://youtu.be/QodRYnvTVZc | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
-  - Asset: https://www.lilyroo.com/assets/albums/twelve-dollars/art/02-every-pearl-in-carmel-youtube-thumbnail.jpg
-  - Review checks:
-    - `pass` copy_present: 141 characters of primary copy.
-    - `pass` destination_links_present: 2 link(s): https://youtu.be/QodRYnvTVZc, https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
-    - `pass` asset_file_present: https://www.lilyroo.com/assets/albums/twelve-dollars/art/02-every-pearl-in-carmel-youtube-thumbnail.jpg maps to assets/albums/twelve-dollars/art/02-every-pearl-in-carmel-youtube-thumbnail.jpg.
-    - `pass` executor_blocker_confirmed: Current executor state is blocked / not_approved.
-    - `fail` platform_readiness: Executor readiness snapshot marks platform blocked.
-  - Destination link evidence:
-    - `verified_local_evidence` https://youtu.be/QodRYnvTVZc: YouTube public snapshot: Every Pearl in Carmel - Lily Roo (data/youtube_public_snapshot.json); YouTube playlist track 2: Every Pearl in Carmel (data/youtube_twelve_dollars_playlist.json); Twelve Dollars remaster manifest: Every Pearl in Carmel (data/youtube_twelve_dollars_remaster_manifest.json)
-    - `verified_local_evidence` https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n: YouTube playlist snapshot: Twelve Dollars (data/youtube_twelve_dollars_playlist.json)
-  - Approval review status: `held_by_failed_checks`
-  - Checked batch member: `False`
-  - Failed checks holding this row:
-    - `platform_readiness`: Executor readiness snapshot marks platform blocked.
-  - Batch reason: Held outside checked batch until failed/review checks clear.
-  - Approval effect: `approved 'no' -> 'yes'`
-  - Preview approval: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-272 --dry-run`
-  - Approve after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-272 --refresh-admin`
-- **Instagram - The Other One's Charging** (`FP-AUTO-277`)
-  - Scheduled: `2026-06-29T21:35:00-04:00`; mode: `auto`; type: `image`
-  - Reason: `not_approved`
-  - Copy: The Other One's Charging is domestic chaos with a battery icon. Watch the remastered video. Full Twelve Dollars playlist is live.
-  - Link/reply: Watch The Other One's Charging: https://youtu.be/EprgLKHp-lE | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
-  - Asset: https://www.lilyroo.com/assets/albums/twelve-dollars/art/03-the-other-ones-charging-youtube-thumbnail.jpg
-  - Review checks:
-    - `pass` copy_present: 129 characters of primary copy.
-    - `pass` destination_links_present: 2 link(s): https://youtu.be/EprgLKHp-lE, https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
-    - `pass` asset_file_present: https://www.lilyroo.com/assets/albums/twelve-dollars/art/03-the-other-ones-charging-youtube-thumbnail.jpg maps to assets/albums/twelve-dollars/art/03-the-other-ones-charging-youtube-thumbnail.jpg.
-    - `pass` executor_blocker_confirmed: Current executor state is blocked / not_approved.
-    - `fail` platform_readiness: Executor readiness snapshot marks platform blocked.
-  - Destination link evidence:
-    - `verified_local_evidence` https://youtu.be/EprgLKHp-lE: YouTube public snapshot: The Other One's Charging - Lily Roo (data/youtube_public_snapshot.json); YouTube playlist track 3: The Other One's Charging (data/youtube_twelve_dollars_playlist.json); Twelve Dollars remaster manifest: The Other One's Charging (data/youtube_twelve_dollars_remaster_manifest.json)
-    - `verified_local_evidence` https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n: YouTube playlist snapshot: Twelve Dollars (data/youtube_twelve_dollars_playlist.json)
-  - Approval review status: `held_by_failed_checks`
-  - Checked batch member: `False`
-  - Failed checks holding this row:
-    - `platform_readiness`: Executor readiness snapshot marks platform blocked.
-  - Batch reason: Held outside checked batch until failed/review checks clear.
-  - Approval effect: `approved 'no' -> 'yes'`
-  - Preview approval: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-277 --dry-run`
-  - Approve after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-277 --refresh-admin`
-- **TikTok - The Other One's Charging** (`FP-AUTO-279`)
-  - Scheduled: `2026-06-29T22:15:00-04:00`; mode: `auto`; type: `video`
-  - Reason: `not_approved`
-  - Copy: The Other One's Charging is domestic chaos with a battery icon. Watch the remastered video. Full Twelve Dollars playlist is live.
-  - Link/reply: Watch The Other One's Charging: https://youtu.be/EprgLKHp-lE | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
-  - Asset: https://www.lilyroo.com/assets/albums/twelve-dollars/video/03-the-other-ones-charging-youtube-remaster.mp4
-  - Review checks:
-    - `pass` copy_present: 129 characters of primary copy.
-    - `pass` destination_links_present: 2 link(s): https://youtu.be/EprgLKHp-lE, https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
-    - `pass` asset_file_present: https://www.lilyroo.com/assets/albums/twelve-dollars/video/03-the-other-ones-charging-youtube-remaster.mp4 maps to assets/albums/twelve-dollars/video/03-the-other-ones-charging-youtube-remaster.mp4.
-    - `pass` executor_blocker_confirmed: Current executor state is blocked / not_approved.
-    - `fail` platform_readiness: Executor readiness snapshot marks platform blocked.
-  - Destination link evidence:
-    - `verified_local_evidence` https://youtu.be/EprgLKHp-lE: YouTube public snapshot: The Other One's Charging - Lily Roo (data/youtube_public_snapshot.json); YouTube playlist track 3: The Other One's Charging (data/youtube_twelve_dollars_playlist.json); Twelve Dollars remaster manifest: The Other One's Charging (data/youtube_twelve_dollars_remaster_manifest.json)
-    - `verified_local_evidence` https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n: YouTube playlist snapshot: Twelve Dollars (data/youtube_twelve_dollars_playlist.json)
-  - Approval review status: `held_by_failed_checks`
-  - Checked batch member: `False`
-  - Failed checks holding this row:
-    - `platform_readiness`: Executor readiness snapshot marks platform blocked.
-      - Repair next step: Complete the TikTok upload-mode setup preflight before approving this row; direct public posting remains separately approval-gated.
-      - Repair report: `admin/reports/tiktok-setup-preflight.md`
-      - Repair runbook: `admin/reports/tiktok-repair-runbook.md`
-      - Repair command: `python3 scripts/tiktok_oauth_handoff.py`
-  - Batch reason: Held outside checked batch until failed/review checks clear.
-  - Approval effect: `approved 'no' -> 'yes'`
-  - Preview approval: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-279 --dry-run`
-  - Approve after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-279 --refresh-admin`
-- **Instagram - Twelve Dollars** (`FP-AUTO-282`)
-  - Scheduled: `2026-06-30T21:35:00-04:00`; mode: `auto`; type: `image`
-  - Reason: `not_approved`
-  - Copy: Twelve Dollars is the stage light, the joke, and the receipt. Watch the remastered video. Full Twelve Dollars playlist is live.
-  - Link/reply: Watch Twelve Dollars: https://youtu.be/G2RlCwZKOsk | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
-  - Asset: https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars-youtube-thumbnail.jpg
-  - Review checks:
-    - `pass` copy_present: 127 characters of primary copy.
-    - `pass` destination_links_present: 2 link(s): https://youtu.be/G2RlCwZKOsk, https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
-    - `pass` asset_file_present: https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars-youtube-thumbnail.jpg maps to assets/albums/twelve-dollars/art/04-twelve-dollars-youtube-thumbnail.jpg.
-    - `pass` executor_blocker_confirmed: Current executor state is blocked / not_approved.
-    - `fail` platform_readiness: Executor readiness snapshot marks platform blocked.
-  - Destination link evidence:
-    - `verified_local_evidence` https://youtu.be/G2RlCwZKOsk: YouTube public snapshot: Twelve Dollars - Lily Roo (data/youtube_public_snapshot.json); YouTube playlist track 4: Twelve Dollars (data/youtube_twelve_dollars_playlist.json); Twelve Dollars remaster manifest: Twelve Dollars (data/youtube_twelve_dollars_remaster_manifest.json)
-    - `verified_local_evidence` https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n: YouTube playlist snapshot: Twelve Dollars (data/youtube_twelve_dollars_playlist.json)
-  - Approval review status: `held_by_failed_checks`
-  - Checked batch member: `False`
-  - Failed checks holding this row:
-    - `platform_readiness`: Executor readiness snapshot marks platform blocked.
-  - Batch reason: Held outside checked batch until failed/review checks clear.
-  - Approval effect: `approved 'no' -> 'yes'`
-  - Preview approval: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-282 --dry-run`
-  - Approve after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-282 --refresh-admin`
-- **TikTok - Twelve Dollars** (`FP-AUTO-284`)
-  - Scheduled: `2026-06-30T22:15:00-04:00`; mode: `auto`; type: `video`
-  - Reason: `not_approved`
-  - Copy: Twelve Dollars is the stage light, the joke, and the receipt. Watch the remastered video. Full Twelve Dollars playlist is live.
-  - Link/reply: Watch Twelve Dollars: https://youtu.be/G2RlCwZKOsk | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
-  - Asset: https://www.lilyroo.com/assets/media/twelve-dollars-youtube-remaster-public.mp4
-  - Review checks:
-    - `pass` copy_present: 127 characters of primary copy.
-    - `pass` destination_links_present: 2 link(s): https://youtu.be/G2RlCwZKOsk, https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n
-    - `pass` asset_file_present: https://www.lilyroo.com/assets/media/twelve-dollars-youtube-remaster-public.mp4 maps to assets/media/twelve-dollars-youtube-remaster-public.mp4.
-    - `pass` executor_blocker_confirmed: Current executor state is blocked / not_approved.
-    - `fail` platform_readiness: Executor readiness snapshot marks platform blocked.
-  - Destination link evidence:
-    - `verified_local_evidence` https://youtu.be/G2RlCwZKOsk: YouTube public snapshot: Twelve Dollars - Lily Roo (data/youtube_public_snapshot.json); YouTube playlist track 4: Twelve Dollars (data/youtube_twelve_dollars_playlist.json); Twelve Dollars remaster manifest: Twelve Dollars (data/youtube_twelve_dollars_remaster_manifest.json)
-    - `verified_local_evidence` https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n: YouTube playlist snapshot: Twelve Dollars (data/youtube_twelve_dollars_playlist.json)
-  - Approval review status: `held_by_failed_checks`
-  - Checked batch member: `False`
-  - Failed checks holding this row:
-    - `platform_readiness`: Executor readiness snapshot marks platform blocked.
-      - Repair next step: Complete the TikTok upload-mode setup preflight before approving this row; direct public posting remains separately approval-gated.
-      - Repair report: `admin/reports/tiktok-setup-preflight.md`
-      - Repair runbook: `admin/reports/tiktok-repair-runbook.md`
-      - Repair command: `python3 scripts/tiktok_oauth_handoff.py`
-  - Batch reason: Held outside checked batch until failed/review checks clear.
-  - Approval effect: `approved 'no' -> 'yes'`
-  - Preview approval: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-284 --dry-run`
-  - Approve after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-284 --refresh-admin`
 
 ## Guardrails
 - This packet does not approve, publish, or post anything.

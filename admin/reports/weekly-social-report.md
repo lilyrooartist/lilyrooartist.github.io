@@ -1,7 +1,7 @@
 # Weekly Social Report — Lily Roo
 
 **Period:** 2026-06-27 to 2026-07-03
-**Last updated:** 2026-07-03 06:33 AM UTC
+**Last updated:** 2026-07-03 02:48 AM EDT
 
 ## KPI Goal
 - Primary growth target: **song-forward discovery and repeat listening**
@@ -79,7 +79,7 @@
 - HyperFollow stores: **applemusic, itunes, spotify**
 - Amazon Music: **pending verified public URL; not exposed by current HyperFollow store list**
 - All-release store verification: **8 live, 6 checked pending, 0 pending, 7 snapshots**
-- Social executor history: **45 records, 30 posted, 3 platform fixes, 7 approval blockers**
+- Social executor history: **45 records, 30 posted, 0 platform fixes, 0 approval blockers**
 
 ### First Single Alignment
 - Status: **aligned**
@@ -134,7 +134,7 @@
 - YouTube Music snapshot file: `data/youtube_music_release_snapshot.json`
 - HyperFollow stores captured: **2026-06-07T20:51:14.275569Z**
 - HyperFollow snapshot file: `data/hyperfollow_store_links_snapshot.json`
-- All-release store verification captured: **2026-07-03T06:33:29.335491+00:00**
+- All-release store verification captured: **2026-07-03T06:48:08.183167+00:00**
 - All-release store verification file: `data/store_verification_history.json`
 - Social executor history captured: **2026-07-03T06:33:26.165757Z**
 - Social executor history file: `data/social_execution_snapshot.json`
