@@ -1,23 +1,23 @@
 {
-  "generated_at": "2026-07-03T04:39:08.656920Z",
+  "generated_at": "2026-07-03T04:47:57.338378Z",
   "safe_mode": true,
   "summary": {
-    "open_blocker_count": 11,
-    "urgent_count": 9,
+    "open_blocker_count": 13,
+    "urgent_count": 11,
     "owner_counts": {
       "codex": 1,
       "external_platform": 3,
-      "tod": 7
+      "tod": 9
     },
     "category_counts": {
-      "approval": 5,
+      "approval": 7,
       "backlog_reschedule": 1,
       "manual_metrics": 2,
       "platform_repair": 3
     },
     "status_counts": {
       "blocked": 3,
-      "blocked_by_review_checks": 5,
+      "blocked_by_review_checks": 7,
       "needs_values": 2,
       "ready_to_preview": 1
     },
@@ -26,6 +26,8 @@
       "label": "Checked scheduled approval batch",
       "checked_ids": [],
       "blocked_ids_retained": [
+        "FP-AUTO-259",
+        "FP-AUTO-267",
         "FP-AUTO-272",
         "FP-AUTO-277",
         "FP-AUTO-279",
@@ -33,8 +35,8 @@
         "FP-AUTO-284"
       ],
       "blockers_resolved": 0,
-      "approval_blockers_before": 5,
-      "approval_blockers_after": 5,
+      "approval_blockers_before": 7,
+      "approval_blockers_after": 7,
       "auto_rows_unblocked": 0,
       "manual_rows_unblocked": 0,
       "effect_count": 0,
@@ -53,6 +55,8 @@
           "Instagram executor row can become publish-eligible after approval."
         ],
         "blocked_by": [
+          "FP-AUTO-259",
+          "FP-AUTO-267",
           "FP-AUTO-272",
           "FP-AUTO-277",
           "FP-AUTO-279",
@@ -184,6 +188,30 @@
       }
     },
     {
+      "id": "approval-FP-AUTO-267",
+      "blocker_id": "approval-FP-AUTO-267",
+      "title": "Approve scheduled Instagram row",
+      "category": "approval",
+      "owner": "tod",
+      "urgency": "high",
+      "status": "blocked_by_review_checks",
+      "platform": "Instagram",
+      "release": "Brain Rot",
+      "evidence": "FP-AUTO-267 is blocked by not_approved in executor state. Failed review checks: platform_readiness: Executor readiness snapshot marks platform blocked.",
+      "next_step": "Resolve failed review checks before approving this scheduled row.",
+      "preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-267 --dry-run",
+      "apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-267 --refresh-admin",
+      "source_path": "data/scheduled_approval_packet.json",
+      "external_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/01-brain-rot-youtube-thumbnail.jpg",
+      "guardrail": "Approval does not guarantee posting if the platform executor is still blocked.",
+      "impact": {
+        "kind": "approval_blocker_resolution",
+        "resolves_blocker": false,
+        "checked_batch_member": false,
+        "reason": "Review checks failed; this row remains excluded from the checked batch."
+      }
+    },
+    {
       "id": "approval-FP-AUTO-272",
       "blocker_id": "approval-FP-AUTO-272",
       "title": "Approve scheduled Instagram row",
@@ -247,6 +275,30 @@
       "apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-282 --refresh-admin",
       "source_path": "data/scheduled_approval_packet.json",
       "external_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars-youtube-thumbnail.jpg",
+      "guardrail": "Approval does not guarantee posting if the platform executor is still blocked.",
+      "impact": {
+        "kind": "approval_blocker_resolution",
+        "resolves_blocker": false,
+        "checked_batch_member": false,
+        "reason": "Review checks failed; this row remains excluded from the checked batch."
+      }
+    },
+    {
+      "id": "approval-FP-AUTO-259",
+      "blocker_id": "approval-FP-AUTO-259",
+      "title": "Approve scheduled TikTok row",
+      "category": "approval",
+      "owner": "tod",
+      "urgency": "high",
+      "status": "blocked_by_review_checks",
+      "platform": "TikTok",
+      "release": "I Learned It All in Fifteen Seconds",
+      "evidence": "FP-AUTO-259 is blocked by not_approved in executor state. Failed review checks: platform_readiness: Executor readiness snapshot marks platform blocked.",
+      "next_step": "Resolve failed review checks before approving this scheduled row.",
+      "preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --dry-run",
+      "apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --refresh-admin",
+      "source_path": "data/scheduled_approval_packet.json",
+      "external_url": "https://www.lilyroo.com/assets/ig/01_i_learned_it_all_60s.mp4",
       "guardrail": "Approval does not guarantee posting if the platform executor is still blocked.",
       "impact": {
         "kind": "approval_blocker_resolution",

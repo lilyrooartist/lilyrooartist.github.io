@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-03T04:39:08.694164Z",
+  "generated_at": "2026-07-03T04:47:57.372946Z",
   "safe_mode": true,
   "source": {
     "promotion_blocker_ledger": "data/promotion_blocker_ledger.json",
@@ -27,22 +27,22 @@
       "Platform setup": 3
     },
     "blocker_summary": {
-      "open_blocker_count": 11,
-      "urgent_count": 9,
+      "open_blocker_count": 13,
+      "urgent_count": 11,
       "owner_counts": {
         "codex": 1,
         "external_platform": 3,
-        "tod": 7
+        "tod": 9
       },
       "category_counts": {
-        "approval": 5,
+        "approval": 7,
         "backlog_reschedule": 1,
         "manual_metrics": 2,
         "platform_repair": 3
       },
       "status_counts": {
         "blocked": 3,
-        "blocked_by_review_checks": 5,
+        "blocked_by_review_checks": 7,
         "needs_values": 2,
         "ready_to_preview": 1
       },
@@ -51,6 +51,8 @@
         "label": "Checked scheduled approval batch",
         "checked_ids": [],
         "blocked_ids_retained": [
+          "FP-AUTO-259",
+          "FP-AUTO-267",
           "FP-AUTO-272",
           "FP-AUTO-277",
           "FP-AUTO-279",
@@ -58,8 +60,8 @@
           "FP-AUTO-284"
         ],
         "blockers_resolved": 0,
-        "approval_blockers_before": 5,
-        "approval_blockers_after": 5,
+        "approval_blockers_before": 7,
+        "approval_blockers_after": 7,
         "auto_rows_unblocked": 0,
         "manual_rows_unblocked": 0,
         "effect_count": 0,
@@ -78,6 +80,8 @@
             "Instagram executor row can become publish-eligible after approval."
           ],
           "blocked_by": [
+            "FP-AUTO-259",
+            "FP-AUTO-267",
             "FP-AUTO-272",
             "FP-AUTO-277",
             "FP-AUTO-279",

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-03T04:39:08.877061Z",
+  "generated_at": "2026-07-03T04:47:57.541328Z",
   "safe_mode": true,
   "summary": {
     "step_count": 4,
@@ -8,7 +8,7 @@
     "total_projected_resolution_units": 18,
     "current_step_id": "unlock-manual-metrics",
     "current_gate_state": "blocked_until_input",
-    "open_blocker_count": 11
+    "open_blocker_count": 13
   },
   "operator_contract": {
     "review_only": true,
@@ -23,14 +23,14 @@
     "First handoff step: Fill and import manual metric worksheet — python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
     "Current unlock gate: Fill manual metric worksheet (blocked_until_input); 0 ready, 2 blocked/warning; preview python3 scripts/update_manual_social_stats.py --from-csv --dry-run; see data/promo_unlock_sequence.json.",
     "Review handoff preview health: 1 preview-clean, 2 missing input; see data/human_handoff_resolution_preview.json.",
+    "Refresh automation coverage: latest scheduled run has not covered f20a1fdf; dispatch https://github.com/lilyrooartist/lilyrooartist.github.io/actions/workflows/promo-admin-refresh.yml or wait for the next scheduled run.",
     "Refresh manual metrics: 6 worksheet row(s) still need new_value entries (blocked_until_new_values_filled); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values.",
     "Collect experiment results: 90 post-result field(s) need new_value plus evidence_note; use admin/reports/experiment-result-clipboard.md; first priority: measure FP-AUTO-265 on Facebook. Direct preview template: python3 scripts/update_experiment_results.py --post-id FP-AUTO-265 --source-row 33 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run. Direct apply template after review: python3 scripts/update_experiment_results.py --post-id FP-AUTO-265 --source-row 33 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin. Then preview import with python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run after filling data/experiment_result_entry_wide_template.csv.",
-    "Preview clear approved backlog row: python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-04T10:00:00-04:00' --spacing-hours 24",
     "Apply verified store URLs: 2 music site snapshot(s) found public URLs; copy them into data/distrokid_release_status.json and refresh Admin.",
-    "8 executor records are blocked by approval.",
+    "Preview clear approved backlog row: python3 scripts/reschedule_scheduled_posts.py --id FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK --start-at '2026-07-04T10:00:00-04:00' --spacing-hours 24",
+    "10 executor records are blocked by approval.",
     "Restart song-forward distribution: approve draft posts, clear executor blockers, and keep weekly metrics current.",
-    "Review approval blockers for 8 queued executor records.",
-    "Refresh release status: python3 scripts/verify_pending_store_links.py --refresh-admin; update data/distrokid_release_status.json when a public URL is verified."
+    "Review approval blockers for 10 queued executor records."
   ],
   "steps": [
     {
@@ -39,9 +39,11 @@
       "phase": "Approve checked scheduled rows",
       "owner": "tod",
       "gate_state": "blocked",
-      "reason": "Blocked by: FP-AUTO-272, FP-AUTO-277, FP-AUTO-279, FP-AUTO-282, FP-AUTO-284.",
+      "reason": "Blocked by: FP-AUTO-259, FP-AUTO-267, FP-AUTO-272, FP-AUTO-277, FP-AUTO-279, FP-AUTO-282, FP-AUTO-284.",
       "blockers_resolved": 0,
       "blocked_by": [
+        "FP-AUTO-259",
+        "FP-AUTO-267",
         "FP-AUTO-272",
         "FP-AUTO-277",
         "FP-AUTO-279",

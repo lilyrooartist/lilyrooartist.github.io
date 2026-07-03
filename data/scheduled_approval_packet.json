@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-03T04:39:07.720391Z",
+  "generated_at": "2026-07-03T04:47:56.336549Z",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -14,13 +14,15 @@
     ]
   },
   "summary": {
-    "approval_blocker_count": 5,
-    "auto_count": 5,
+    "approval_blocker_count": 7,
+    "auto_count": 7,
     "manual_count": 0,
     "review_check_passed_count": 0,
-    "review_check_blocked_count": 5,
+    "review_check_blocked_count": 7,
     "checked_batch_ids": [],
     "blocked_review_ids": [
+      "FP-AUTO-259",
+      "FP-AUTO-267",
       "FP-AUTO-272",
       "FP-AUTO-277",
       "FP-AUTO-279",
@@ -28,8 +30,8 @@
       "FP-AUTO-284"
     ],
     "review_check_status_counts": {
-      "fail": 5,
-      "pass": 20
+      "fail": 7,
+      "pass": 28
     },
     "checked_batch_preview_command": "",
     "checked_batch_apply_command": "",
@@ -41,14 +43,16 @@
       "ids": [],
       "effects": []
     },
-    "preview_command_count": 5,
-    "apply_command_count": 5,
-    "batch_preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-272 FP-AUTO-277 FP-AUTO-279 FP-AUTO-282 FP-AUTO-284 --dry-run",
-    "batch_apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-272 FP-AUTO-277 FP-AUTO-279 FP-AUTO-282 FP-AUTO-284 --refresh-admin",
+    "preview_command_count": 7,
+    "apply_command_count": 7,
+    "batch_preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 FP-AUTO-267 FP-AUTO-272 FP-AUTO-277 FP-AUTO-279 FP-AUTO-282 FP-AUTO-284 --dry-run",
+    "batch_apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 FP-AUTO-267 FP-AUTO-272 FP-AUTO-277 FP-AUTO-279 FP-AUTO-282 FP-AUTO-284 --refresh-admin",
     "batch_effect": {
-      "row_count": 5,
-      "change_count": 5,
+      "row_count": 7,
+      "change_count": 7,
       "ids": [
+        "FP-AUTO-259",
+        "FP-AUTO-267",
         "FP-AUTO-272",
         "FP-AUTO-277",
         "FP-AUTO-279",
@@ -56,6 +60,30 @@
         "FP-AUTO-284"
       ],
       "effects": [
+        {
+          "id": "FP-AUTO-259",
+          "platform": "TikTok",
+          "execution_mode": "auto",
+          "effect": {
+            "field": "approved",
+            "from": "no",
+            "to": "yes",
+            "changed": true,
+            "summary": "approved 'no' -> 'yes'"
+          }
+        },
+        {
+          "id": "FP-AUTO-267",
+          "platform": "Instagram",
+          "execution_mode": "auto",
+          "effect": {
+            "field": "approved",
+            "from": "no",
+            "to": "yes",
+            "changed": true,
+            "summary": "approved 'no' -> 'yes'"
+          }
+        },
         {
           "id": "FP-AUTO-272",
           "platform": "Instagram",
@@ -149,9 +177,182 @@
   "approval_docket": {
     "status": "blocked",
     "ready_count": 0,
-    "held_count": 5,
+    "held_count": 7,
     "ready_to_approve": [],
     "held": [
+      {
+        "id": "FP-AUTO-259",
+        "platform": "TikTok",
+        "song": "I Learned It All in Fifteen Seconds",
+        "scheduled_at": "2026-06-05T20:40:00-04:00",
+        "execution_mode": "auto",
+        "post_type": "video",
+        "review_status": "held_by_failed_checks",
+        "checked_batch_member": false,
+        "paste_text": "I learned it all in fifteen seconds and somehow still have homework. Streaming now.\n\nListen on Spotify: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
+        "asset_url": "https://www.lilyroo.com/assets/ig/01_i_learned_it_all_60s.mp4",
+        "destination_links": [
+          "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+          "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+          "https://music.youtube.com/watch?v=vK0mDIW65o4"
+        ],
+        "destination_link_audit": [
+          {
+            "url": "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+            "canonical_url": "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+            "status": "verified_local_evidence",
+            "evidence": [
+              {
+                "source": "data/hyperfollow_store_links_snapshot.json",
+                "label": "HyperFollow spotify link",
+                "status": "known_store_link"
+              },
+              {
+                "source": "data/first_single_alignment_audit.json",
+                "label": "spotify alignment check: ok",
+                "status": "known_alignment_check"
+              }
+            ],
+            "evidence_count": 2,
+            "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+          },
+          {
+            "url": "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+            "canonical_url": "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+            "status": "verified_local_evidence",
+            "evidence": [
+              {
+                "source": "data/hyperfollow_store_links_snapshot.json",
+                "label": "HyperFollow applemusic link",
+                "status": "known_store_link"
+              },
+              {
+                "source": "data/hyperfollow_store_links_snapshot.json",
+                "label": "HyperFollow itunes link",
+                "status": "known_store_link"
+              },
+              {
+                "source": "data/first_single_alignment_audit.json",
+                "label": "apple_music alignment check: ok",
+                "status": "known_alignment_check"
+              },
+              {
+                "source": "data/apple_music_release_snapshot.json",
+                "label": "Apple Music release snapshot: I Learned It All in Fifteen Seconds - Single",
+                "status": "known_release_snapshot"
+              }
+            ],
+            "evidence_count": 4,
+            "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+          },
+          {
+            "url": "https://music.youtube.com/watch?v=vK0mDIW65o4",
+            "canonical_url": "https://music.youtube.com/watch",
+            "status": "verified_local_evidence",
+            "evidence": [
+              {
+                "source": "data/first_single_alignment_audit.json",
+                "label": "youtube_music alignment check: ok",
+                "status": "known_alignment_check"
+              },
+              {
+                "source": "data/youtube_music_release_snapshot.json",
+                "label": "YouTube Music release snapshot: I Learned It All in Fifteen Seconds - Lily Roo",
+                "status": "known_release_snapshot"
+              }
+            ],
+            "evidence_count": 2,
+            "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+          }
+        ],
+        "destination_link_audit_summary": {
+          "link_count": 3,
+          "verified_local_evidence_count": 3,
+          "needs_manual_review_count": 0,
+          "all_links_have_local_evidence": true
+        },
+        "failed_review_checks": [
+          {
+            "name": "platform_readiness",
+            "status": "fail",
+            "detail": "Executor readiness snapshot marks platform blocked.",
+            "repair_report": "admin/reports/tiktok-setup-preflight.md",
+            "repair_runbook": "admin/reports/tiktok-repair-runbook.md",
+            "repair_command": "python3 scripts/tiktok_oauth_handoff.py",
+            "repair_preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+            "repair_gate": "blocked_until_tiktok_upload_credentials",
+            "repair_next_step": "Complete the TikTok upload-mode setup preflight before approving this row; direct public posting remains separately approval-gated.",
+            "repair_apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py"
+          }
+        ],
+        "approval_effect": {
+          "field": "approved",
+          "from": "no",
+          "to": "yes",
+          "changed": true,
+          "summary": "approved 'no' -> 'yes'"
+        },
+        "preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --dry-run",
+        "apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --refresh-admin",
+        "manual_dispatch_required": false
+      },
+      {
+        "id": "FP-AUTO-267",
+        "platform": "Instagram",
+        "song": "Brain Rot",
+        "scheduled_at": "2026-06-27T21:35:00-04:00",
+        "execution_mode": "auto",
+        "post_type": "image",
+        "review_status": "held_by_failed_checks",
+        "checked_batch_member": false,
+        "paste_text": "The phone is melting politely. Brain Rot is tonight's Twelve Dollars signal. Watch the remastered video. Full Twelve Dollars playlist is live.\n\nWatch Brain Rot: https://youtu.be/U7aczBSruAY | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+        "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/01-brain-rot-youtube-thumbnail.jpg",
+        "destination_links": [
+          "https://youtu.be/U7aczBSruAY",
+          "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n"
+        ],
+        "destination_link_audit": [
+          {
+            "url": "https://youtu.be/U7aczBSruAY",
+            "canonical_url": "https://youtu.be/U7aczBSruAY",
+            "status": "needs_manual_review",
+            "evidence": [],
+            "evidence_count": 0,
+            "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+          },
+          {
+            "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+            "canonical_url": "https://www.youtube.com/playlist",
+            "status": "needs_manual_review",
+            "evidence": [],
+            "evidence_count": 0,
+            "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+          }
+        ],
+        "destination_link_audit_summary": {
+          "link_count": 2,
+          "verified_local_evidence_count": 0,
+          "needs_manual_review_count": 2,
+          "all_links_have_local_evidence": false
+        },
+        "failed_review_checks": [
+          {
+            "name": "platform_readiness",
+            "status": "fail",
+            "detail": "Executor readiness snapshot marks platform blocked."
+          }
+        ],
+        "approval_effect": {
+          "field": "approved",
+          "from": "no",
+          "to": "yes",
+          "changed": true,
+          "summary": "approved 'no' -> 'yes'"
+        },
+        "preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-267 --dry-run",
+        "apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-267 --refresh-admin",
+        "manual_dispatch_required": false
+      },
       {
         "id": "FP-AUTO-272",
         "platform": "Instagram",
@@ -496,6 +697,8 @@
     "status": "blocked",
     "ready_ids": [],
     "held_ids": [
+      "FP-AUTO-259",
+      "FP-AUTO-267",
       "FP-AUTO-272",
       "FP-AUTO-277",
       "FP-AUTO-279",
@@ -503,6 +706,62 @@
       "FP-AUTO-284"
     ],
     "decisions": [
+      {
+        "id": "FP-AUTO-259",
+        "decision": "held",
+        "platform": "TikTok",
+        "song": "I Learned It All in Fifteen Seconds",
+        "execution_mode": "auto",
+        "scheduled_at": "2026-06-05T20:40:00-04:00",
+        "checked_batch_member": false,
+        "approval_effect": {
+          "field": "approved",
+          "from": "no",
+          "to": "yes",
+          "changed": true,
+          "summary": "approved 'no' -> 'yes'"
+        },
+        "passed_check_names": [
+          "copy_present",
+          "destination_links_present",
+          "asset_file_present",
+          "executor_blocker_confirmed"
+        ],
+        "failed_check_names": [
+          "platform_readiness"
+        ],
+        "decision_reason": "Held outside checked batch until failed/review checks clear.",
+        "post_approval_next_step": "Repair failed checks before including this row in an approval batch.",
+        "manual_dispatch_required": false
+      },
+      {
+        "id": "FP-AUTO-267",
+        "decision": "held",
+        "platform": "Instagram",
+        "song": "Brain Rot",
+        "execution_mode": "auto",
+        "scheduled_at": "2026-06-27T21:35:00-04:00",
+        "checked_batch_member": false,
+        "approval_effect": {
+          "field": "approved",
+          "from": "no",
+          "to": "yes",
+          "changed": true,
+          "summary": "approved 'no' -> 'yes'"
+        },
+        "passed_check_names": [
+          "copy_present",
+          "destination_links_present",
+          "asset_file_present",
+          "executor_blocker_confirmed"
+        ],
+        "failed_check_names": [
+          "platform_readiness"
+        ],
+        "decision_reason": "Held outside checked batch until failed/review checks clear.",
+        "post_approval_next_step": "Repair failed checks before including this row in an approval batch.",
+        "manual_dispatch_required": false
+      },
       {
         "id": "FP-AUTO-272",
         "decision": "held",
@@ -685,6 +944,8 @@
     "status": "blocked",
     "ready_ids": [],
     "held_ids": [
+      "FP-AUTO-259",
+      "FP-AUTO-267",
       "FP-AUTO-272",
       "FP-AUTO-277",
       "FP-AUTO-279",
@@ -703,6 +964,22 @@
     },
     "ready_rows": [],
     "held_rows": [
+      {
+        "id": "FP-AUTO-259",
+        "platform": "TikTok",
+        "song": "I Learned It All in Fifteen Seconds",
+        "failed_check_names": [
+          "platform_readiness"
+        ]
+      },
+      {
+        "id": "FP-AUTO-267",
+        "platform": "Instagram",
+        "song": "Brain Rot",
+        "failed_check_names": [
+          "platform_readiness"
+        ]
+      },
       {
         "id": "FP-AUTO-272",
         "platform": "Instagram",
@@ -765,6 +1042,8 @@
     "status": "blocked",
     "ready_ids": [],
     "blocked_ids": [
+      "FP-AUTO-259",
+      "FP-AUTO-267",
       "FP-AUTO-272",
       "FP-AUTO-277",
       "FP-AUTO-279",
@@ -772,7 +1051,7 @@
       "FP-AUTO-284"
     ],
     "ready_count": 0,
-    "blocked_count": 5,
+    "blocked_count": 7,
     "manual_dispatch_ready_count": 0,
     "review_checklist": [],
     "steps": [
@@ -816,6 +1095,266 @@
     "guardrail": "This runbook is review-only; it does not approve, publish, post, or log anything."
   },
   "rows": [
+    {
+      "id": "FP-AUTO-259",
+      "platform": "TikTok",
+      "song": "I Learned It All in Fifteen Seconds",
+      "scheduled_at": "2026-06-05T20:40:00-04:00",
+      "execution_mode": "auto",
+      "post_type": "video",
+      "approved": "no",
+      "status": "blocked",
+      "reason": "not_approved",
+      "attempts": 0,
+      "text": "I learned it all in fifteen seconds and somehow still have homework. Streaming now.",
+      "reply_text": "Listen on Spotify: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
+      "copy_block": "I learned it all in fifteen seconds and somehow still have homework. Streaming now.\n\nListen on Spotify: https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi | Apple Music: https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249 | YouTube Music: https://music.youtube.com/watch?v=vK0mDIW65o4",
+      "imagery_url": "https://www.lilyroo.com/assets/albums/i-learned-it-all-in-fifteen-seconds/art/01-i-learned-it-all-in-fifteen-seconds.jpg",
+      "clip_url": "https://www.lilyroo.com/assets/ig/01_i_learned_it_all_60s.mp4",
+      "asset_url": "https://www.lilyroo.com/assets/ig/01_i_learned_it_all_60s.mp4",
+      "destination_links": [
+        "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+        "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+        "https://music.youtube.com/watch?v=vK0mDIW65o4"
+      ],
+      "destination_link_audit": [
+        {
+          "url": "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+          "canonical_url": "https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi",
+          "status": "verified_local_evidence",
+          "evidence": [
+            {
+              "source": "data/hyperfollow_store_links_snapshot.json",
+              "label": "HyperFollow spotify link",
+              "status": "known_store_link"
+            },
+            {
+              "source": "data/first_single_alignment_audit.json",
+              "label": "spotify alignment check: ok",
+              "status": "known_alignment_check"
+            }
+          ],
+          "evidence_count": 2,
+          "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+        },
+        {
+          "url": "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+          "canonical_url": "https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249",
+          "status": "verified_local_evidence",
+          "evidence": [
+            {
+              "source": "data/hyperfollow_store_links_snapshot.json",
+              "label": "HyperFollow applemusic link",
+              "status": "known_store_link"
+            },
+            {
+              "source": "data/hyperfollow_store_links_snapshot.json",
+              "label": "HyperFollow itunes link",
+              "status": "known_store_link"
+            },
+            {
+              "source": "data/first_single_alignment_audit.json",
+              "label": "apple_music alignment check: ok",
+              "status": "known_alignment_check"
+            },
+            {
+              "source": "data/apple_music_release_snapshot.json",
+              "label": "Apple Music release snapshot: I Learned It All in Fifteen Seconds - Single",
+              "status": "known_release_snapshot"
+            }
+          ],
+          "evidence_count": 4,
+          "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+        },
+        {
+          "url": "https://music.youtube.com/watch?v=vK0mDIW65o4",
+          "canonical_url": "https://music.youtube.com/watch",
+          "status": "verified_local_evidence",
+          "evidence": [
+            {
+              "source": "data/first_single_alignment_audit.json",
+              "label": "youtube_music alignment check: ok",
+              "status": "known_alignment_check"
+            },
+            {
+              "source": "data/youtube_music_release_snapshot.json",
+              "label": "YouTube Music release snapshot: I Learned It All in Fifteen Seconds - Lily Roo",
+              "status": "known_release_snapshot"
+            }
+          ],
+          "evidence_count": 2,
+          "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+        }
+      ],
+      "destination_link_audit_summary": {
+        "link_count": 3,
+        "verified_local_evidence_count": 3,
+        "needs_manual_review_count": 0,
+        "all_links_have_local_evidence": true
+      },
+      "media_key": "i-learned-60s",
+      "desired_privacy": "PUBLIC_TO_EVERYONE",
+      "review_checks": [
+        {
+          "name": "copy_present",
+          "status": "pass",
+          "detail": "83 characters of primary copy."
+        },
+        {
+          "name": "destination_links_present",
+          "status": "pass",
+          "detail": "3 link(s): https://open.spotify.com/album/5TBsbgE68DTPlAFsPsLEhi, https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds-single/6768918249, https://music.youtube.com/watch?v=vK0mDIW65o4"
+        },
+        {
+          "name": "asset_file_present",
+          "status": "pass",
+          "detail": "https://www.lilyroo.com/assets/ig/01_i_learned_it_all_60s.mp4 maps to assets/ig/01_i_learned_it_all_60s.mp4."
+        },
+        {
+          "name": "executor_blocker_confirmed",
+          "status": "pass",
+          "detail": "Current executor state is blocked / not_approved."
+        },
+        {
+          "name": "platform_readiness",
+          "status": "fail",
+          "detail": "Executor readiness snapshot marks platform blocked.",
+          "repair_report": "admin/reports/tiktok-setup-preflight.md",
+          "repair_runbook": "admin/reports/tiktok-repair-runbook.md",
+          "repair_command": "python3 scripts/tiktok_oauth_handoff.py",
+          "repair_preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+          "repair_gate": "blocked_until_tiktok_upload_credentials",
+          "repair_next_step": "Complete the TikTok upload-mode setup preflight before approving this row; direct public posting remains separately approval-gated.",
+          "repair_apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py"
+        }
+      ],
+      "review_check_passed": false,
+      "failed_review_checks": [
+        {
+          "name": "platform_readiness",
+          "status": "fail",
+          "detail": "Executor readiness snapshot marks platform blocked.",
+          "repair_report": "admin/reports/tiktok-setup-preflight.md",
+          "repair_runbook": "admin/reports/tiktok-repair-runbook.md",
+          "repair_command": "python3 scripts/tiktok_oauth_handoff.py",
+          "repair_preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+          "repair_gate": "blocked_until_tiktok_upload_credentials",
+          "repair_next_step": "Complete the TikTok upload-mode setup preflight before approving this row; direct public posting remains separately approval-gated.",
+          "repair_apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py"
+        }
+      ],
+      "approval_review_status": "held_by_failed_checks",
+      "checked_batch_member": false,
+      "approval_batch_reason": "Held outside checked batch until failed/review checks clear.",
+      "approval_effect": {
+        "field": "approved",
+        "from": "no",
+        "to": "yes",
+        "changed": true,
+        "summary": "approved 'no' -> 'yes'"
+      },
+      "approval_preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --dry-run",
+      "approval_apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --refresh-admin",
+      "recommendation": "Review copy, media, destination links, and platform readiness before approval.",
+      "manual_dispatch": false
+    },
+    {
+      "id": "FP-AUTO-267",
+      "platform": "Instagram",
+      "song": "Brain Rot",
+      "scheduled_at": "2026-06-27T21:35:00-04:00",
+      "execution_mode": "auto",
+      "post_type": "image",
+      "approved": "no",
+      "status": "blocked",
+      "reason": "not_approved",
+      "attempts": 0,
+      "text": "The phone is melting politely. Brain Rot is tonight's Twelve Dollars signal. Watch the remastered video. Full Twelve Dollars playlist is live.",
+      "reply_text": "Watch Brain Rot: https://youtu.be/U7aczBSruAY | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+      "copy_block": "The phone is melting politely. Brain Rot is tonight's Twelve Dollars signal. Watch the remastered video. Full Twelve Dollars playlist is live.\n\nWatch Brain Rot: https://youtu.be/U7aczBSruAY | Full Twelve Dollars playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+      "imagery_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/01-brain-rot-youtube-thumbnail.jpg",
+      "clip_url": "",
+      "asset_url": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/01-brain-rot-youtube-thumbnail.jpg",
+      "destination_links": [
+        "https://youtu.be/U7aczBSruAY",
+        "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n"
+      ],
+      "destination_link_audit": [
+        {
+          "url": "https://youtu.be/U7aczBSruAY",
+          "canonical_url": "https://youtu.be/U7aczBSruAY",
+          "status": "needs_manual_review",
+          "evidence": [],
+          "evidence_count": 0,
+          "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+        },
+        {
+          "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n",
+          "canonical_url": "https://www.youtube.com/playlist",
+          "status": "needs_manual_review",
+          "evidence": [],
+          "evidence_count": 0,
+          "guardrail": "Local snapshot/evidence audit only; no approval or live network check was performed."
+        }
+      ],
+      "destination_link_audit_summary": {
+        "link_count": 2,
+        "verified_local_evidence_count": 0,
+        "needs_manual_review_count": 2,
+        "all_links_have_local_evidence": false
+      },
+      "media_key": "twelve-dollars-brain-rot-cover",
+      "desired_privacy": "",
+      "review_checks": [
+        {
+          "name": "copy_present",
+          "status": "pass",
+          "detail": "142 characters of primary copy."
+        },
+        {
+          "name": "destination_links_present",
+          "status": "pass",
+          "detail": "2 link(s): https://youtu.be/U7aczBSruAY, https://www.youtube.com/playlist?list=PLit3sD3SUfXVOB41L0JEae6LNTZtrg58n"
+        },
+        {
+          "name": "asset_file_present",
+          "status": "pass",
+          "detail": "https://www.lilyroo.com/assets/albums/twelve-dollars/art/01-brain-rot-youtube-thumbnail.jpg maps to assets/albums/twelve-dollars/art/01-brain-rot-youtube-thumbnail.jpg."
+        },
+        {
+          "name": "executor_blocker_confirmed",
+          "status": "pass",
+          "detail": "Current executor state is blocked / not_approved."
+        },
+        {
+          "name": "platform_readiness",
+          "status": "fail",
+          "detail": "Executor readiness snapshot marks platform blocked."
+        }
+      ],
+      "review_check_passed": false,
+      "failed_review_checks": [
+        {
+          "name": "platform_readiness",
+          "status": "fail",
+          "detail": "Executor readiness snapshot marks platform blocked."
+        }
+      ],
+      "approval_review_status": "held_by_failed_checks",
+      "checked_batch_member": false,
+      "approval_batch_reason": "Held outside checked batch until failed/review checks clear.",
+      "approval_effect": {
+        "field": "approved",
+        "from": "no",
+        "to": "yes",
+        "changed": true,
+        "summary": "approved 'no' -> 'yes'"
+      },
+      "approval_preview_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-267 --dry-run",
+      "approval_apply_command": "python3 scripts/update_scheduled_post_approval.py FP-AUTO-267 --refresh-admin",
+      "recommendation": "Review copy, media, destination links, and platform readiness before approval.",
+      "manual_dispatch": false
+    },
     {
       "id": "FP-AUTO-272",
       "platform": "Instagram",

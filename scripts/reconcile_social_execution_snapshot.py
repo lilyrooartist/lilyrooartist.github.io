@@ -48,29 +48,41 @@ def reconcile(snapshot: dict) -> tuple[dict, dict]:
         current, stale = current_execution_rows(summary.get(category) or [], scheduled)
         current_by_category[category] = current
         superseded.extend(stale)
+    full_current, full_stale = current_execution_rows(summary.get("current_executions") or [], scheduled)
+    superseded.extend(full_stale)
     superseded = dedupe(superseded)
 
-    current_rows = dedupe(
+    category_rows = dedupe(
         current_by_category["latest_posted"]
         + current_by_category["approval_needed"]
         + current_by_category["platform_fix_needed"]
         + current_by_category["manual_handoff_needed"]
         + current_by_category["latest_attention"]
     )
+    current_rows = dedupe(full_current) if full_current else category_rows
     status_counts = Counter(row.get("status") or "unknown" for row in current_rows)
     platform_counts = Counter(row.get("platform") or "Unknown" for row in current_rows)
 
     summary.update(current_by_category)
-    summary["posted_count"] = len(current_by_category["latest_posted"])
-    summary["attention_count"] = len(dedupe(
-        current_by_category["approval_needed"]
-        + current_by_category["platform_fix_needed"]
-        + current_by_category["manual_handoff_needed"]
-        + current_by_category["latest_attention"]
-    ))
-    summary["approval_needed_count"] = len(current_by_category["approval_needed"])
-    summary["platform_fix_needed_count"] = len(current_by_category["platform_fix_needed"])
-    summary["manual_handoff_needed_count"] = len(current_by_category["manual_handoff_needed"])
+    summary["current_executions"] = current_rows
+    summary["posted"] = [row for row in current_rows if row.get("status") == "posted"]
+    summary["draft_uploaded"] = [row for row in current_rows if row.get("status") == "draft_uploaded"]
+    failed_rows = [
+        row for row in current_rows
+        if row.get("status") in {"failed", "blocked", "skipped"}
+    ]
+    summary["approval_needed"] = [row for row in failed_rows if row.get("reason") == "not_approved"]
+    summary["manual_handoff_needed"] = [row for row in failed_rows if row.get("reason") == "manual_only"]
+    summary["platform_fix_needed"] = [
+        row for row in failed_rows
+        if row.get("reason") not in {"not_approved", "manual_only"}
+    ]
+    summary["posted_count"] = len(summary["posted"])
+    summary["draft_uploaded_count"] = len(summary["draft_uploaded"])
+    summary["attention_count"] = len(failed_rows)
+    summary["approval_needed_count"] = len(summary["approval_needed"])
+    summary["platform_fix_needed_count"] = len(summary["platform_fix_needed"])
+    summary["manual_handoff_needed_count"] = len(summary["manual_handoff_needed"])
     summary["current_execution_count"] = len(current_rows)
     summary["superseded_execution_count"] = len(superseded)
     summary["superseded_executions"] = superseded[:10]

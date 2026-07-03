@@ -1,19 +1,19 @@
 # Promotion Blocker Ledger - Lily Roo
 
-Generated: 2026-07-03T04:39:08.656920Z
+Generated: 2026-07-03T04:47:57.338378Z
 
 ## Summary
-- Open blockers: **11**
-- User-owned: **7**
+- Open blockers: **13**
+- User-owned: **9**
 - External platform-owned: **3**
 - Codex-actionable: **1**
-- High or critical: **9**
+- High or critical: **11**
 
 ## Unlock Roadmap
 - **Approve checked scheduled rows** (`blocked`)
   - Owner: `tod`; projected blockers resolved: **0**
   - Unlocks: Instagram executor row can become publish-eligible after approval.
-  - Blocked by: FP-AUTO-272, FP-AUTO-277, FP-AUTO-279, FP-AUTO-282, FP-AUTO-284
+  - Blocked by: FP-AUTO-259, FP-AUTO-267, FP-AUTO-272, FP-AUTO-277, FP-AUTO-279, FP-AUTO-282, FP-AUTO-284
 - **Repair TikTok executor** (`ready`)
   - Owner: `tod`; projected blockers resolved: **0**
   - Unlocks: Held TikTok approval rows can pass platform-readiness review.; Approved TikTok backlog can become safe to reschedule into upload-draft creation.
@@ -37,6 +37,15 @@ Generated: 2026-07-03T04:39:08.656920Z
   - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00-04:00' --spacing-hours 24`
   - Apply/log after review: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin`
   - Guardrail: The apply command remains dry-run-first through the preview artifact.
+- **[high] Approve scheduled Instagram row** (`approval-FP-AUTO-267`)
+  - Owner: `tod`; status: `blocked_by_review_checks`; category: `approval`
+  - Evidence: FP-AUTO-267 is blocked by not_approved in executor state. Failed review checks: platform_readiness: Executor readiness snapshot marks platform blocked.
+  - Next step: Resolve failed review checks before approving this scheduled row.
+  - Open: https://www.lilyroo.com/assets/albums/twelve-dollars/art/01-brain-rot-youtube-thumbnail.jpg
+  - Preview/check: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-267 --dry-run`
+  - Apply/log after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-267 --refresh-admin`
+  - Guardrail: Approval does not guarantee posting if the platform executor is still blocked.
+  - Impact: resolves blocker: False
 - **[high] Approve scheduled Instagram row** (`approval-FP-AUTO-272`)
   - Owner: `tod`; status: `blocked_by_review_checks`; category: `approval`
   - Evidence: FP-AUTO-272 is blocked by not_approved in executor state. Failed review checks: platform_readiness: Executor readiness snapshot marks platform blocked.
@@ -62,6 +71,15 @@ Generated: 2026-07-03T04:39:08.656920Z
   - Open: https://www.lilyroo.com/assets/albums/twelve-dollars/art/04-twelve-dollars-youtube-thumbnail.jpg
   - Preview/check: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-282 --dry-run`
   - Apply/log after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-282 --refresh-admin`
+  - Guardrail: Approval does not guarantee posting if the platform executor is still blocked.
+  - Impact: resolves blocker: False
+- **[high] Approve scheduled TikTok row** (`approval-FP-AUTO-259`)
+  - Owner: `tod`; status: `blocked_by_review_checks`; category: `approval`
+  - Evidence: FP-AUTO-259 is blocked by not_approved in executor state. Failed review checks: platform_readiness: Executor readiness snapshot marks platform blocked.
+  - Next step: Resolve failed review checks before approving this scheduled row.
+  - Open: https://www.lilyroo.com/assets/ig/01_i_learned_it_all_60s.mp4
+  - Preview/check: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --dry-run`
+  - Apply/log after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-259 --refresh-admin`
   - Guardrail: Approval does not guarantee posting if the platform executor is still blocked.
   - Impact: resolves blocker: False
 - **[high] Approve scheduled TikTok row** (`approval-FP-AUTO-279`)
