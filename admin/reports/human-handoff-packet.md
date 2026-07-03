@@ -1,6 +1,6 @@
 # Human Handoff Packet - Lily Roo
 
-Generated: 2026-07-03T06:48:08.332141Z
+Generated: 2026-07-03T06:53:02.658158Z
 
 ## Summary
 - Open handoff tasks: **3**
@@ -11,7 +11,7 @@ Generated: 2026-07-03T06:48:08.332141Z
 
 ## Action Docket
 - Ready steps: **1**
-- Blocked steps: **1**
+- Blocked steps: **0**
 - Manual posts packaged: **0**
 - Manual metric fields: **6**
 - Resolution worksheet: `data/human_handoff_resolution_worksheet.csv` (3 row(s))
@@ -29,10 +29,10 @@ Generated: 2026-07-03T06:48:08.332141Z
   - Completion evidence: data/manual_distribution_packet.json should move approved rows from review_queue toward postable manual distribution, and data/published_log_reconciliation.json should remain gated until public URLs are logged.
   - Next after apply: Post each approved YouTube Community row manually, then log its public URL with scripts/log_manual_distribution.py.
   - Guardrail: Manual-only approvals do not auto-post; posting and public URL logging remain separate after review. Post manually first, then log only real public URLs.
-- **Repair blocked platform executor setup** (`blocked`)
-  - Owner: `tod`; tasks: **1**; blockers resolved: **1**
-  - Preview/check: `python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run`
-  - Sequence preview: `python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run`
+- **Repair blocked platform executor setup** (`clear`)
+  - Owner: `tod`; tasks: **1**; blockers resolved: **0**
+  - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
+  - Sequence preview: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
   - Sequence verify: `python3 scripts/refresh_promo_admin.py`
   - Completion evidence: data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_upload_drafts before TikTok upload-mode backlog work is allowed.
   - Next after apply: Recapture admin state and only then revisit TikTok approval or backlog reschedule rows.
@@ -59,11 +59,11 @@ Generated: 2026-07-03T06:48:08.332141Z
   - Guardrail: Do not apply blocked backlog reschedules without clearing platform readiness.
 
 ## Tasks
-- **Review TikTok upload-mode preflight** (`platform-setup-tiktok-preflight`)
-  - Phase: `Platform setup`; owner: `tod`; status: `blocked`; urgency: `high`
-  - Detail: Review the TikTok upload-mode/direct-public split before treating TikTok as ready.
-  - Preview/check: `python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run`
-  - Guardrail: Keep TikTok upload-draft mode separate from direct public posting; do not require manual-only community posting.
+- **Repair TikTok executor** (`platform-setup-FP-AUTO-264`)
+  - Phase: `Platform setup`; owner: `tod`; status: `needs_fix`; urgency: `high`
+  - Detail: Local upload-mode OAuth credentials missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Complete TikTok OAuth setup locally, then push upload-mode secrets and refresh Admin.
+  - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
+  - Guardrail: Run the TikTok preflight before pushing secrets; push upload-mode secrets only after local OAuth setup is complete. Keep direct public posting blocked until approval is confirmed.
 - **Fill priority 2 metrics: Recent discovery and traffic** (`manual-metrics-priority-2`)
   - Phase: `Manual metrics`; owner: `tod`; status: `needs_values`; urgency: `low`
   - Detail: Collect 4 field(s) across facebook, instagram, tiktok, x, fill the worksheet rows, preview import, then refresh Admin.

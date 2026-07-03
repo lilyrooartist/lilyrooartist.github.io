@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-03T06:48:08.272227Z",
+  "generated_at": "2026-07-03T06:53:02.455467Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -14,79 +14,56 @@
     "tiktok_setup_preflight": "data/tiktok_setup_preflight.json"
   },
   "next_action": {
-    "label": "Collect experiment result metrics",
-    "kind": "experiment_results",
-    "priority": 5,
-    "command": "python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run",
+    "label": "Fix TikTok upload-mode credentials",
+    "kind": "platform_fix",
+    "priority": 1,
+    "command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
     "context": {
-      "status": "needs_values",
-      "metric_card_count": 15,
-      "pending_result_field_count": 90,
-      "ready_to_import_count": 0,
-      "wide_ready_to_import_count": 0,
-      "missing_public_url_count": 8,
-      "measurement_priority_count": 12,
-      "entry_csv_path": "data/experiment_result_entry_template.csv",
-      "wide_entry_csv_path": "data/experiment_result_entry_wide_template.csv",
-      "report_path": "admin/reports/experiment-result-clipboard.md",
-      "result_import_preview_command": "python3 scripts/update_experiment_results.py --from-csv data/experiment_result_entry_template.csv --dry-run",
-      "wide_result_import_preview_command": "python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run",
-      "result_import_apply_command": "",
-      "wide_result_import_apply_command": "",
-      "apply_gate": "blocked_until_new_values_and_evidence_filled",
-      "priority_cards": [
-        {
-          "action": "collect_metrics",
-          "post_id": "FP-AUTO-265",
-          "platform": "Facebook",
-          "experiment_format": "Release-art image + story hook",
-          "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 12 logged post(s), 4 missing URL(s) in this format."
-        },
-        {
-          "action": "collect_metrics",
-          "post_id": "FP-AUTO-268",
-          "platform": "Facebook",
-          "experiment_format": "Release-art image + story hook",
-          "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 12 logged post(s), 4 missing URL(s) in this format."
-        },
-        {
-          "action": "collect_metrics",
-          "post_id": "FP-AUTO-273",
-          "platform": "Facebook",
-          "experiment_format": "Release-art image + story hook",
-          "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 12 logged post(s), 4 missing URL(s) in this format."
-        },
-        {
-          "action": "collect_metrics",
-          "post_id": "FP-AUTO-278",
-          "platform": "Facebook",
-          "experiment_format": "Release-art image + story hook",
-          "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 12 logged post(s), 4 missing URL(s) in this format."
-        },
-        {
-          "action": "collect_metrics",
-          "post_id": "FP-AUTO-283",
-          "platform": "Facebook",
-          "experiment_format": "Release-art image + story hook",
-          "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 12 logged post(s), 4 missing URL(s) in this format."
-        }
+      "post_id": "FP-AUTO-264",
+      "platform": "TikTok",
+      "reason": "tiktok_setup_preflight_blocked",
+      "repair_lane": "upload",
+      "missing_secrets": [
+        "TIKTOK_CLIENT_KEY",
+        "TIKTOK_CLIENT_SECRET",
+        "TIKTOK_REFRESH_TOKEN"
       ],
-      "note": "Fill measured result values with evidence notes, preview the import, then apply only after review."
+      "worker_missing_secrets": [],
+      "local_missing_secrets": [
+        "TIKTOK_CLIENT_KEY",
+        "TIKTOK_CLIENT_SECRET",
+        "TIKTOK_REFRESH_TOKEN"
+      ],
+      "local_secret_source": "secrets/social_api.env",
+      "local_secret_presence": {
+        "TIKTOK_CLIENT_KEY": false,
+        "TIKTOK_CLIENT_SECRET": false,
+        "TIKTOK_REFRESH_TOKEN": false
+      },
+      "local_secret_ready": false,
+      "public_posting_approved": false,
+      "worker_posting_mode": "direct",
+      "oauth_authorization_url_command": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload",
+      "oauth_exchange_command": "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode upload",
+      "repair_apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
+      "preflight_report": "admin/reports/tiktok-setup-preflight.md",
+      "repair_report": "admin/reports/tiktok-repair-runbook.md",
+      "repair_action": "Local upload-mode OAuth credentials missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Complete TikTok OAuth setup locally, then push upload-mode secrets and refresh Admin."
     },
-    "phase": "Collect experiment results",
+    "phase": "Repair executor",
     "urgency": "high",
-    "urgency_reason": "15 logged experiment post(s) have 90 result field(s) waiting; these results rank repeatable formats.",
-    "status": "waiting_for_user",
+    "urgency_reason": "Platform executor needs repair before queued auto posts can publish.",
+    "status": "needs_fix",
     "sort_key": [
       1,
-      5,
-      0
+      1,
+      1
     ]
   },
   "summary": {
-    "action_count": 9,
+    "action_count": 10,
     "user_review": 0,
-    "platform_fixes": 0,
+    "platform_fixes": 1,
     "scheduled_approval_batches": 0,
     "store_checks": 6,
     "manual_metric_updates": 2,
@@ -99,85 +76,110 @@
     "phases": {
       "Collect experiment results": 1,
       "Fill manual metrics": 2,
+      "Repair executor": 1,
       "Verify music sites": 6
     },
     "urgencies": {
-      "high": 1,
+      "high": 2,
       "low": 2,
       "medium": 6
     },
     "next_action": {
-      "label": "Collect experiment result metrics",
-      "kind": "experiment_results",
-      "priority": 5,
-      "command": "python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run",
+      "label": "Fix TikTok upload-mode credentials",
+      "kind": "platform_fix",
+      "priority": 1,
+      "command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
       "context": {
-        "status": "needs_values",
-        "metric_card_count": 15,
-        "pending_result_field_count": 90,
-        "ready_to_import_count": 0,
-        "wide_ready_to_import_count": 0,
-        "missing_public_url_count": 8,
-        "measurement_priority_count": 12,
-        "entry_csv_path": "data/experiment_result_entry_template.csv",
-        "wide_entry_csv_path": "data/experiment_result_entry_wide_template.csv",
-        "report_path": "admin/reports/experiment-result-clipboard.md",
-        "result_import_preview_command": "python3 scripts/update_experiment_results.py --from-csv data/experiment_result_entry_template.csv --dry-run",
-        "wide_result_import_preview_command": "python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run",
-        "result_import_apply_command": "",
-        "wide_result_import_apply_command": "",
-        "apply_gate": "blocked_until_new_values_and_evidence_filled",
-        "priority_cards": [
-          {
-            "action": "collect_metrics",
-            "post_id": "FP-AUTO-265",
-            "platform": "Facebook",
-            "experiment_format": "Release-art image + story hook",
-            "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 12 logged post(s), 4 missing URL(s) in this format."
-          },
-          {
-            "action": "collect_metrics",
-            "post_id": "FP-AUTO-268",
-            "platform": "Facebook",
-            "experiment_format": "Release-art image + story hook",
-            "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 12 logged post(s), 4 missing URL(s) in this format."
-          },
-          {
-            "action": "collect_metrics",
-            "post_id": "FP-AUTO-273",
-            "platform": "Facebook",
-            "experiment_format": "Release-art image + story hook",
-            "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 12 logged post(s), 4 missing URL(s) in this format."
-          },
-          {
-            "action": "collect_metrics",
-            "post_id": "FP-AUTO-278",
-            "platform": "Facebook",
-            "experiment_format": "Release-art image + story hook",
-            "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 12 logged post(s), 4 missing URL(s) in this format."
-          },
-          {
-            "action": "collect_metrics",
-            "post_id": "FP-AUTO-283",
-            "platform": "Facebook",
-            "experiment_format": "Release-art image + story hook",
-            "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 12 logged post(s), 4 missing URL(s) in this format."
-          }
+        "post_id": "FP-AUTO-264",
+        "platform": "TikTok",
+        "reason": "tiktok_setup_preflight_blocked",
+        "repair_lane": "upload",
+        "missing_secrets": [
+          "TIKTOK_CLIENT_KEY",
+          "TIKTOK_CLIENT_SECRET",
+          "TIKTOK_REFRESH_TOKEN"
         ],
-        "note": "Fill measured result values with evidence notes, preview the import, then apply only after review."
+        "worker_missing_secrets": [],
+        "local_missing_secrets": [
+          "TIKTOK_CLIENT_KEY",
+          "TIKTOK_CLIENT_SECRET",
+          "TIKTOK_REFRESH_TOKEN"
+        ],
+        "local_secret_source": "secrets/social_api.env",
+        "local_secret_presence": {
+          "TIKTOK_CLIENT_KEY": false,
+          "TIKTOK_CLIENT_SECRET": false,
+          "TIKTOK_REFRESH_TOKEN": false
+        },
+        "local_secret_ready": false,
+        "public_posting_approved": false,
+        "worker_posting_mode": "direct",
+        "oauth_authorization_url_command": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload",
+        "oauth_exchange_command": "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode upload",
+        "repair_apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
+        "preflight_report": "admin/reports/tiktok-setup-preflight.md",
+        "repair_report": "admin/reports/tiktok-repair-runbook.md",
+        "repair_action": "Local upload-mode OAuth credentials missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Complete TikTok OAuth setup locally, then push upload-mode secrets and refresh Admin."
       },
-      "phase": "Collect experiment results",
+      "phase": "Repair executor",
       "urgency": "high",
-      "urgency_reason": "15 logged experiment post(s) have 90 result field(s) waiting; these results rank repeatable formats.",
-      "status": "waiting_for_user",
+      "urgency_reason": "Platform executor needs repair before queued auto posts can publish.",
+      "status": "needs_fix",
       "sort_key": [
         1,
-        5,
-        0
+        1,
+        1
       ]
     }
   },
   "actions": [
+    {
+      "label": "Fix TikTok upload-mode credentials",
+      "kind": "platform_fix",
+      "priority": 1,
+      "command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+      "context": {
+        "post_id": "FP-AUTO-264",
+        "platform": "TikTok",
+        "reason": "tiktok_setup_preflight_blocked",
+        "repair_lane": "upload",
+        "missing_secrets": [
+          "TIKTOK_CLIENT_KEY",
+          "TIKTOK_CLIENT_SECRET",
+          "TIKTOK_REFRESH_TOKEN"
+        ],
+        "worker_missing_secrets": [],
+        "local_missing_secrets": [
+          "TIKTOK_CLIENT_KEY",
+          "TIKTOK_CLIENT_SECRET",
+          "TIKTOK_REFRESH_TOKEN"
+        ],
+        "local_secret_source": "secrets/social_api.env",
+        "local_secret_presence": {
+          "TIKTOK_CLIENT_KEY": false,
+          "TIKTOK_CLIENT_SECRET": false,
+          "TIKTOK_REFRESH_TOKEN": false
+        },
+        "local_secret_ready": false,
+        "public_posting_approved": false,
+        "worker_posting_mode": "direct",
+        "oauth_authorization_url_command": "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload",
+        "oauth_exchange_command": "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode upload",
+        "repair_apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
+        "preflight_report": "admin/reports/tiktok-setup-preflight.md",
+        "repair_report": "admin/reports/tiktok-repair-runbook.md",
+        "repair_action": "Local upload-mode OAuth credentials missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Complete TikTok OAuth setup locally, then push upload-mode secrets and refresh Admin."
+      },
+      "phase": "Repair executor",
+      "urgency": "high",
+      "urgency_reason": "Platform executor needs repair before queued auto posts can publish.",
+      "status": "needs_fix",
+      "sort_key": [
+        1,
+        1,
+        1
+      ]
+    },
     {
       "label": "Collect experiment result metrics",
       "kind": "experiment_results",
@@ -256,63 +258,25 @@
       "context": {
         "release": "Twelve Dollars",
         "service": "Spotify",
-        "checked_at": "2026-07-03T06:33:16.787702+00:00",
-        "checked_age_hours": 0.2,
+        "checked_at": "2026-07-03T06:52:48.435901+00:00",
+        "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-07-04T06:33:16.787702+00:00",
+        "next_recheck_at": "2026-07-04T06:52:48.435901+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
           "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-07-03T06:33:16.787702Z",
+          "updated_at": "2026-07-03T06:52:48.435901Z",
           "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-          "checked_at": "2026-07-03T06:33:16.787702+00:00",
-          "checked_age_hours": 0.2,
+          "checked_at": "2026-07-03T06:52:48.435901+00:00",
+          "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-07-04T06:33:16.787702+00:00",
+          "next_recheck_at": "2026-07-04T06:52:48.435901+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-07-04T06:33:16.787702+00:00. Status: waiting_for_release_propagation."
-      },
-      "phase": "Verify music sites",
-      "urgency": "medium",
-      "urgency_reason": "Public store links should be checked until DistroKid exposes them.",
-      "status": "ready",
-      "sort_key": [
-        2,
-        20,
-        1
-      ]
-    },
-    {
-      "label": "Re-check Twelve Dollars on Apple Music",
-      "kind": "store_verification",
-      "priority": 20,
-      "command": "python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/apple_music_release_snapshot.json'",
-      "context": {
-        "release": "Twelve Dollars",
-        "service": "Apple Music",
-        "checked_at": "2026-07-03T06:33:18.464834+00:00",
-        "checked_age_hours": 0.2,
-        "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-07-04T06:33:18.464834+00:00",
-        "recheck_due": false,
-        "recheck_status": "waiting_for_release_propagation",
-        "latest_snapshot": {
-          "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
-          "ok": false,
-          "updated_at": "2026-07-03T06:33:18.464834Z",
-          "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-          "checked_at": "2026-07-03T06:33:18.464834+00:00",
-          "checked_age_hours": 0.2,
-          "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-07-04T06:33:18.464834+00:00",
-          "recheck_due": false,
-          "recheck_status": "waiting_for_release_propagation"
-        },
-        "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-07-04T06:33:18.464834+00:00. Status: waiting_for_release_propagation."
+        "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-07-04T06:52:48.435901+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -325,32 +289,32 @@
       ]
     },
     {
-      "label": "Re-check Twelve Dollars on HyperFollow",
+      "label": "Re-check Twelve Dollars on Apple Music",
       "kind": "store_verification",
       "priority": 20,
-      "command": "python3 scripts/capture_hyperfollow_store_links.py --url 'https://distrokid.com/hyperfollow/lilyroo/twelve-dollars' --out 'data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json'",
+      "command": "python3 scripts/capture_apple_music_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/apple_music_release_snapshot.json'",
       "context": {
         "release": "Twelve Dollars",
-        "service": "HyperFollow",
-        "checked_at": "2026-07-03T06:33:18.608463+00:00",
-        "checked_age_hours": 0.2,
+        "service": "Apple Music",
+        "checked_at": "2026-07-03T06:52:51.003485+00:00",
+        "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-07-04T06:33:18.608463+00:00",
+        "next_recheck_at": "2026-07-04T06:52:51.003485+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
-          "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
+          "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-07-03T06:33:18.608463Z",
-          "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-          "checked_at": "2026-07-03T06:33:18.608463+00:00",
-          "checked_age_hours": 0.2,
+          "updated_at": "2026-07-03T06:52:51.003485Z",
+          "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
+          "checked_at": "2026-07-03T06:52:51.003485+00:00",
+          "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-07-04T06:33:18.608463+00:00",
+          "next_recheck_at": "2026-07-04T06:52:51.003485+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; next recommended re-check after 2026-07-04T06:33:18.608463+00:00. Status: waiting_for_release_propagation."
+        "note": "Uses the public iTunes Search API; if it finds the release, copy release_url into data/distrokid_release_status.json. Latest snapshot found no public URL; next recommended re-check after 2026-07-04T06:52:51.003485+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -363,36 +327,36 @@
       ]
     },
     {
-      "label": "Re-check Analog Myth on Spotify",
+      "label": "Re-check Twelve Dollars on HyperFollow",
       "kind": "store_verification",
       "priority": 20,
-      "command": "python3 scripts/search_spotify_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/spotify_release_snapshot.json'",
+      "command": "python3 scripts/capture_hyperfollow_store_links.py --url 'https://distrokid.com/hyperfollow/lilyroo/twelve-dollars' --out 'data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json'",
       "context": {
-        "release": "Analog Myth",
-        "service": "Spotify",
-        "checked_at": "2026-07-03T06:33:18.668072+00:00",
-        "checked_age_hours": 0.2,
+        "release": "Twelve Dollars",
+        "service": "HyperFollow",
+        "checked_at": "2026-07-03T06:52:51.207914+00:00",
+        "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-07-04T06:33:18.668072+00:00",
+        "next_recheck_at": "2026-07-04T06:52:51.207914+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
-          "path": "data/store-verification/analog-myth/spotify_release_snapshot.json",
+          "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
           "ok": false,
-          "updated_at": "2026-07-03T06:33:18.668072Z",
-          "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
-          "checked_at": "2026-07-03T06:33:18.668072+00:00",
-          "checked_age_hours": 0.2,
+          "updated_at": "2026-07-03T06:52:51.207914Z",
+          "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
+          "checked_at": "2026-07-03T06:52:51.207914+00:00",
+          "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-07-04T06:33:18.668072+00:00",
+          "next_recheck_at": "2026-07-04T06:52:51.207914+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-07-04T06:33:18.668072+00:00. Status: waiting_for_release_propagation."
+        "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; next recommended re-check after 2026-07-04T06:52:51.207914+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
-      "urgency_reason": "Public store links should be checked as the July 1 release approaches.",
+      "urgency_reason": "Public store links should be checked until DistroKid exposes them.",
       "status": "ready",
       "sort_key": [
         2,
@@ -401,32 +365,32 @@
       ]
     },
     {
-      "label": "Re-check Analog Myth on YouTube Music",
+      "label": "Re-check Analog Myth on Spotify",
       "kind": "store_verification",
       "priority": 20,
-      "command": "python3 scripts/search_youtube_music_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/youtube_music_release_snapshot.json'",
+      "command": "python3 scripts/search_spotify_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/spotify_release_snapshot.json'",
       "context": {
         "release": "Analog Myth",
-        "service": "YouTube Music",
-        "checked_at": "2026-07-03T06:33:19.162080+00:00",
-        "checked_age_hours": 0.2,
+        "service": "Spotify",
+        "checked_at": "2026-07-03T06:52:51.261497+00:00",
+        "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-07-04T06:33:19.162080+00:00",
+        "next_recheck_at": "2026-07-04T06:52:51.261497+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
-          "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
+          "path": "data/store-verification/analog-myth/spotify_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-07-03T06:33:19.162080Z",
-          "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-          "checked_at": "2026-07-03T06:33:19.162080+00:00",
-          "checked_age_hours": 0.2,
+          "updated_at": "2026-07-03T06:52:51.261497Z",
+          "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
+          "checked_at": "2026-07-03T06:52:51.261497+00:00",
+          "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-07-04T06:33:19.162080+00:00",
+          "next_recheck_at": "2026-07-04T06:52:51.261497+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Searches public web results for YouTube Music watch URLs, then validates the public title. Latest snapshot found no public URL; next recommended re-check after 2026-07-04T06:33:19.162080+00:00. Status: waiting_for_release_propagation."
+        "note": "Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-07-04T06:52:51.261497+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -439,32 +403,32 @@
       ]
     },
     {
-      "label": "Re-check Analog Myth on HyperFollow",
+      "label": "Re-check Analog Myth on YouTube Music",
       "kind": "store_verification",
       "priority": 20,
-      "command": "python3 scripts/capture_hyperfollow_store_links.py --url 'https://distrokid.com/hyperfollow/lilyroo/analog-myth' --out 'data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json'",
+      "command": "python3 scripts/search_youtube_music_release.py --artist 'Lily Roo' --title 'Analog Myth' --out 'data/store-verification/analog-myth/youtube_music_release_snapshot.json'",
       "context": {
         "release": "Analog Myth",
-        "service": "HyperFollow",
-        "checked_at": "2026-07-03T06:33:19.684418+00:00",
-        "checked_age_hours": 0.2,
+        "service": "YouTube Music",
+        "checked_at": "2026-07-03T06:52:52.266303+00:00",
+        "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-07-04T06:33:19.684418+00:00",
+        "next_recheck_at": "2026-07-04T06:52:52.266303+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation",
         "latest_snapshot": {
-          "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
+          "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
           "ok": false,
-          "updated_at": "2026-07-03T06:33:19.684418Z",
-          "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-          "checked_at": "2026-07-03T06:33:19.684418+00:00",
-          "checked_age_hours": 0.2,
+          "updated_at": "2026-07-03T06:52:52.266303Z",
+          "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
+          "checked_at": "2026-07-03T06:52:52.266303+00:00",
+          "checked_age_hours": 0.0,
           "recheck_interval_hours": 24,
-          "next_recheck_at": "2026-07-04T06:33:19.684418+00:00",
+          "next_recheck_at": "2026-07-04T06:52:52.266303+00:00",
           "recheck_due": false,
           "recheck_status": "waiting_for_release_propagation"
         },
-        "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; next recommended re-check after 2026-07-04T06:33:19.684418+00:00. Status: waiting_for_release_propagation."
+        "note": "Searches public web results for YouTube Music watch URLs, then validates the public title. Latest snapshot found no public URL; next recommended re-check after 2026-07-04T06:52:52.266303+00:00. Status: waiting_for_release_propagation."
       },
       "phase": "Verify music sites",
       "urgency": "medium",
@@ -474,6 +438,44 @@
         2,
         20,
         6
+      ]
+    },
+    {
+      "label": "Re-check Analog Myth on HyperFollow",
+      "kind": "store_verification",
+      "priority": 20,
+      "command": "python3 scripts/capture_hyperfollow_store_links.py --url 'https://distrokid.com/hyperfollow/lilyroo/analog-myth' --out 'data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json'",
+      "context": {
+        "release": "Analog Myth",
+        "service": "HyperFollow",
+        "checked_at": "2026-07-03T06:52:53.535877+00:00",
+        "checked_age_hours": 0.0,
+        "recheck_interval_hours": 24,
+        "next_recheck_at": "2026-07-04T06:52:53.535877+00:00",
+        "recheck_due": false,
+        "recheck_status": "waiting_for_release_propagation",
+        "latest_snapshot": {
+          "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
+          "ok": false,
+          "updated_at": "2026-07-03T06:52:53.535877Z",
+          "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
+          "checked_at": "2026-07-03T06:52:53.535877+00:00",
+          "checked_age_hours": 0.0,
+          "recheck_interval_hours": 24,
+          "next_recheck_at": "2026-07-04T06:52:53.535877+00:00",
+          "recheck_due": false,
+          "recheck_status": "waiting_for_release_propagation"
+        },
+        "note": "Captures the public HyperFollow store buttons; confirm the guessed URL if DistroKid used a different slug. Latest snapshot found no public URL; next recommended re-check after 2026-07-04T06:52:53.535877+00:00. Status: waiting_for_release_propagation."
+      },
+      "phase": "Verify music sites",
+      "urgency": "medium",
+      "urgency_reason": "Public store links should be checked as the July 1 release approaches.",
+      "status": "ready",
+      "sort_key": [
+        2,
+        20,
+        7
       ]
     },
     {
@@ -620,7 +622,7 @@
       "sort_key": [
         3,
         32,
-        7
+        8
       ]
     },
     {
@@ -758,7 +760,7 @@
       "sort_key": [
         3,
         33,
-        8
+        9
       ]
     }
   ]
