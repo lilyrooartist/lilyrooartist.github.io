@@ -41,7 +41,7 @@ Anchor lines:
 CTA:
 - Stream: `https://open.spotify.com/album/4Al5eYOqGFMKEES5fDWIfI`
 - Apple Music: `https://music.apple.com/us/album/i-learned-it-all-in-fifteen-seconds/6777735762`
-- Subscribe ask every 2-3 posts: "Help us hit 1,000 on YouTube."
+- Use archive/listen/watch invitations that point to the work, not audience-count goals.
 
 ## Reusable formulas
 

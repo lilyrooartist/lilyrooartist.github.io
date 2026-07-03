@@ -7,6 +7,7 @@ import re
 import shlex
 import sys
 import subprocess
+from collections import Counter
 from time import monotonic
 from pathlib import Path
 
@@ -41,7 +42,25 @@ def sanitize_output(value: str) -> str:
     return text
 
 
-def run(command: list[str], *, timeout_seconds: int) -> dict:
+def parse_stdout_json(stdout: str) -> dict:
+    try:
+        payload = json.loads(stdout or "{}")
+    except json.JSONDecodeError:
+        return {}
+    return payload if isinstance(payload, dict) else {}
+
+
+def outcome_for(result: dict, payload: dict) -> str:
+    if result.get("timed_out"):
+        return "timed_out"
+    if result.get("returncode") == 0:
+        return "live"
+    if result.get("returncode") == 1:
+        return "not_found"
+    return "failed"
+
+
+def run(command: list[str], *, timeout_seconds: int, metadata: dict | None = None) -> dict:
     started = monotonic()
     timed_out = False
     try:
@@ -54,7 +73,7 @@ def run(command: list[str], *, timeout_seconds: int) -> dict:
         returncode = 124
         stdout = exc.stdout or ""
         stderr = (exc.stderr or "") + f"\nTimed out after {timeout_seconds} seconds."
-    return {
+    result = {
         "command": " ".join(command),
         "timeout_seconds": timeout_seconds,
         "timed_out": timed_out,
@@ -63,6 +82,16 @@ def run(command: list[str], *, timeout_seconds: int) -> dict:
         "stdout": trim(stdout),
         "stderr": trim(stderr),
     }
+    if metadata:
+        payload = parse_stdout_json(stdout)
+        result.update(metadata)
+        result["ok"] = returncode == 0
+        result["status"] = outcome_for(result, payload)
+        result["found_url"] = payload.get("release_url") or payload.get("url") or ""
+        result["stores"] = payload.get("stores") or []
+        result["candidate_count"] = payload.get("candidate_count")
+        result["output"] = payload.get("output") or metadata.get("snapshot_path") or ""
+    return result
 
 
 def write_run_snapshot(results: list[dict], step_timeout_seconds: int, out: Path, retry_command: str) -> dict:
@@ -78,6 +107,8 @@ def write_run_snapshot(results: list[dict], step_timeout_seconds: int, out: Path
     timed_out_count = sum(1 for result in lookup_results if result.get("timed_out"))
     failed = [result for result in lookup_results if result["returncode"] != 0]
     admin_update_ok = all(result["returncode"] == 0 for result in admin_update_results) if admin_update_results else None
+    outcome_counts = Counter(result.get("status") or ("live" if result["returncode"] == 0 else "failed") for result in lookup_results)
+    service_counts = Counter(result.get("service") or "unknown" for result in lookup_results)
     snapshot = {
         "ok": admin_update_ok is not False,
         "updated_at": datetime_now(),
@@ -89,6 +120,8 @@ def write_run_snapshot(results: list[dict], step_timeout_seconds: int, out: Path
             "not_live_or_failed": len(lookup_results) - ok_count,
             "timed_out": timed_out_count,
             "failed": len(failed),
+            "lookup_outcome_counts": dict(sorted(outcome_counts.items())),
+            "lookup_service_counts": dict(sorted(service_counts.items())),
             "admin_update_count": len(admin_update_results),
             "admin_update_ok": admin_update_ok,
         },
@@ -133,20 +166,19 @@ def main() -> int:
     if not snapshot_root.is_absolute():
         snapshot_root = ROOT / snapshot_root
 
-    retry_parts = [
-        "python3",
-        "scripts/verify_pending_store_links.py",
+    retry_parts = ["python3", "scripts/verify_pending_store_links.py"]
+    if args.refresh_admin:
+        retry_parts.append("--refresh-admin")
+    retry_parts.extend([
         "--step-timeout-seconds",
         str(args.step_timeout_seconds),
         "--out",
         display_path(out),
         "--snapshot-root",
         display_path(snapshot_root),
-    ]
+    ])
     if args.release:
         retry_parts.extend(["--release", args.release])
-    if args.refresh_admin:
-        retry_parts.append("--refresh-admin")
     retry_command = shlex.join(retry_parts)
 
     status = json.loads(RELEASE_STATUS.read_text(encoding="utf-8"))
@@ -181,7 +213,11 @@ def main() -> int:
                 title,
                 "--out",
                 display_path(spotify_out),
-            ], timeout_seconds=args.step_timeout_seconds))
+            ], timeout_seconds=args.step_timeout_seconds, metadata={
+                "release": title,
+                "service": "spotify",
+                "snapshot_path": display_path(spotify_out),
+            }))
         if not release.get("apple_music_url"):
             results.append(run([
                 "python3",
@@ -192,7 +228,11 @@ def main() -> int:
                 title,
                 "--out",
                 display_path(apple_music_out),
-            ], timeout_seconds=args.step_timeout_seconds))
+            ], timeout_seconds=args.step_timeout_seconds, metadata={
+                "release": title,
+                "service": "apple_music",
+                "snapshot_path": display_path(apple_music_out),
+            }))
         if not release.get("youtube_music_url"):
             results.append(run([
                 "python3",
@@ -203,7 +243,11 @@ def main() -> int:
                 title,
                 "--out",
                 display_path(youtube_music_out),
-            ], timeout_seconds=args.step_timeout_seconds))
+            ], timeout_seconds=args.step_timeout_seconds, metadata={
+                "release": title,
+                "service": "youtube_music",
+                "snapshot_path": display_path(youtube_music_out),
+            }))
         if not release.get("hyperfollow_url"):
             results.append(run([
                 "python3",
@@ -212,7 +256,11 @@ def main() -> int:
                 hyperfollow_url(title),
                 "--out",
                 display_path(hyperfollow_out),
-            ], timeout_seconds=args.step_timeout_seconds))
+            ], timeout_seconds=args.step_timeout_seconds, metadata={
+                "release": title,
+                "service": "hyperfollow",
+                "snapshot_path": display_path(hyperfollow_out),
+            }))
 
     snapshot = write_run_snapshot(results, args.step_timeout_seconds, out, retry_command)
 

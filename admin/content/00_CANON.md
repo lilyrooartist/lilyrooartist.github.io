@@ -3,7 +3,7 @@
 ## Mission
 Build a living artist mythos that converts attention into:
 1) social views/follows, and
-2) YouTube subscribers (target: **1,000** for monetization).
+2) repeat listening, archive exploration, and durable audience connection.
 
 For operational voice rules, use `01_VOICE_SYSTEM.md`. This file is the durable mythos; the voice file is the day-to-day writing standard.
 
@@ -50,4 +50,4 @@ What began as fragments turned into a body of transmissions: stories from people
 ## What this canon is for
 - Keep captions, videos, and lore pages coherent.
 - Generate anecdotes/quips that sound like one artist, not random copy.
-- Convert curiosity into repeat viewing and YouTube subscription.
+- Convert curiosity into repeat viewing, repeat listening, and deeper archive exploration.
