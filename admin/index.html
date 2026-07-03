@@ -25909,6 +25909,7 @@ Generated: 2026-07-02T19:53:06.508867Z
     const nextContext=nextAction.context||{};
     const nextCheckedIds=Array.isArray(nextContext.checked_batch_ids)?nextContext.checked_batch_ids:[];
     const nextBlockedIds=Array.isArray(nextContext.blocked_review_ids)?nextContext.blocked_review_ids:[];
+    const commandSequence=Array.isArray(packet.command_sequence)?packet.command_sequence:(Array.isArray(summary.command_sequence)?summary.command_sequence:[]);
     const intro=`<div class="queue-item">
       <div class="queue-top">
         <div>
@@ -25924,6 +25925,16 @@ Generated: 2026-07-02T19:53:06.508867Z
         <span class="status-chip ${Number((summary.urgencies||{}).blocked||0)||Number((summary.urgencies||{}).high||0)?'warn':'neutral'}">${Number(summary.action_count||actions.length)}</span>
       </div>
     </div>`;
+    const sequenceRows=commandSequence.slice(0,5).map(item=>`<div class="queue-item">
+      <div class="queue-top">
+        <div>
+          <div class="queue-title">${escapeHtml(item.step||item.label||'Operation command')}</div>
+          ${item.when?`<div class="queue-meta">${escapeHtml(item.when)}</div>`:''}
+          ${item.command?`<div class="queue-meta">Command: ${escapeHtml(item.command)}</div>`:''}
+        </div>
+        <span class="status-chip neutral">Next</span>
+      </div>
+    </div>`).join('');
     const rows=actions.slice(0,6).map(action=>{
       const context=action.context||{};
       const missingSecrets=Array.isArray(context.missing_secrets)?context.missing_secrets.join(', '):'';
