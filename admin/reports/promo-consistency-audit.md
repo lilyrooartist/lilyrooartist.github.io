@@ -1,12 +1,12 @@
 # Promo Consistency Audit - Lily Roo
 
-Generated: 2026-07-03T06:13:37.100320Z
+Generated: 2026-07-03T06:22:57.442608Z
 
 ## Summary
-- Status: **fail**
-- Checks: **29 / 30** passed
-- Failed checks: **1**
-- High severity failures: **1**
+- Status: **pass**
+- Checks: **30 / 30** passed
+- Failed checks: **0**
+- High severity failures: **0**
 - Medium severity failures: **0**
 
 ## Checks
@@ -23,15 +23,13 @@ Generated: 2026-07-03T06:13:37.100320Z
 - **platform_repair_count_matches_ledger**: `pass`
   - Platform repair packet should match platform repair blockers in the ledger.
 - **executor_platform_fix_count_matches_platform_packet**: `pass`
-  - Executor platform-fix count should match the platform repair packet after excluding manual-only handoff rows.
+  - Executor platform-fix count plus preflight-only setup repairs should match the platform repair packet.
 - **tiktok_preflight_status_matches_platform_repair**: `pass`
   - TikTok platform repair row should mirror setup preflight when a current TikTok repair row exists.
-- **tiktok_preflight_local_missing_matches_platform_repair**: `fail`
-  - TikTok preflight local missing secrets should match the platform repair row.
-  - Expected: `[]`
-  - Actual: `['TIKTOK_CLIENT_KEY', 'TIKTOK_CLIENT_SECRET', 'TIKTOK_REFRESH_TOKEN']`
+- **tiktok_preflight_local_missing_matches_platform_repair**: `pass`
+  - TikTok preflight local missing secrets should match the platform repair row when one exists.
 - **tiktok_preflight_worker_missing_matches_platform_repair**: `pass`
-  - TikTok preflight worker missing secrets should match the platform repair row.
+  - TikTok preflight worker missing secrets should match the platform repair row when one exists.
 - **scheduler_blocked_ids_present_in_executor_attention**: `pass`
   - Scheduler dry-run blockers should be represented in current scheduler detail or executor attention; executor history may include stale rows that are now would-post.
 - **manual_distribution_count_matches_ledger**: `pass`

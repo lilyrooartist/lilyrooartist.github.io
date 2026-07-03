@@ -177,6 +177,11 @@ FINALIZE_STEPS = [
         "required": True,
     },
     {
+        "name": "build_promo_operations_packet_with_preflight",
+        "command": ["python3", "scripts/build_promo_operations_packet.py"],
+        "required": True,
+    },
+    {
         "name": "build_platform_repair_status_with_preflight",
         "command": ["python3", "scripts/build_platform_repair_status.py"],
         "required": True,

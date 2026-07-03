@@ -18,6 +18,7 @@ MANUAL_METRICS = ROOT / "data" / "manual_metric_collection_packet.json"
 MANUAL_DISTRIBUTION = ROOT / "data" / "manual_distribution_packet.json"
 MANUAL_POSTING_CLIPBOARD = ROOT / "data" / "manual_posting_clipboard.json"
 EXPERIMENT_RESULT_CLIPBOARD = ROOT / "data" / "experiment_result_clipboard.json"
+TIKTOK_PREFLIGHT = ROOT / "data" / "tiktok_setup_preflight.json"
 OUT = ROOT / "data" / "promo_operations_packet.json"
 REPORT = ROOT / "admin" / "reports" / "promo-operations-packet.md"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
@@ -727,6 +728,53 @@ def platform_fix_actions(status, executions, readiness):
     return actions
 
 
+def tiktok_preflight_actions(preflight):
+    summary = preflight.get("summary") or {}
+    credential_handoff = preflight.get("credential_handoff") or {}
+    first_asset = summary.get("first_tiktok_asset") or {}
+    worker_missing = list(summary.get("worker_missing_secrets") or credential_handoff.get("worker_missing_secrets") or [])
+    local_missing = list(summary.get("local_missing_secrets") or credential_handoff.get("local_missing_secrets") or [])
+    if not worker_missing and not local_missing:
+        return []
+
+    missing = sorted(set(worker_missing + local_missing))
+    diagnostics = {
+        "post_id": first_asset.get("post_id") or "",
+        "platform": "TikTok",
+        "reason": "tiktok_setup_preflight_blocked",
+        "repair_lane": "upload",
+        "missing_secrets": missing,
+        "worker_missing_secrets": worker_missing,
+        "local_missing_secrets": local_missing,
+        "local_secret_source": credential_handoff.get("local_secret_source") or "secrets/social_api.env",
+        "local_secret_presence": {name: name not in local_missing for name in missing},
+        "local_secret_ready": not local_missing,
+        "public_posting_approved": credential_handoff.get("public_posting_approved"),
+        "worker_posting_mode": credential_handoff.get("worker_posting_mode") or summary.get("worker_posting_mode"),
+        "oauth_authorization_url_command": credential_handoff.get("oauth_authorization_url_command") or summary.get("oauth_authorization_url_command") or "",
+        "oauth_exchange_command": credential_handoff.get("oauth_exchange_command") or summary.get("oauth_exchange_command") or "",
+        "repair_apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
+        "preflight_report": "admin/reports/tiktok-setup-preflight.md",
+        "repair_report": "admin/reports/tiktok-repair-runbook.md",
+    }
+    pieces = []
+    if worker_missing:
+        pieces.append(f"Worker secrets missing for upload mode: {', '.join(worker_missing)}.")
+    if local_missing:
+        pieces.append(f"Local upload-mode OAuth credentials missing: {', '.join(local_missing)}.")
+    pieces.append("Complete TikTok OAuth setup locally, then push upload-mode secrets and refresh Admin.")
+    diagnostics["repair_action"] = " ".join(pieces)
+    return [
+        command_row(
+            "Fix TikTok upload-mode credentials",
+            "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+            "platform_fix",
+            1,
+            diagnostics,
+        )
+    ]
+
+
 def build_markdown(packet):
     phases = packet["summary"].get("phases") or {}
     urgencies = packet["summary"].get("urgencies") or {}
@@ -907,6 +955,7 @@ def main() -> int:
     manual_distribution = read_json(MANUAL_DISTRIBUTION, {})
     manual_posting_clipboard = read_json(MANUAL_POSTING_CLIPBOARD, {})
     experiment_result_clipboard = read_json(EXPERIMENT_RESULT_CLIPBOARD, {})
+    tiktok_preflight = read_json(TIKTOK_PREFLIGHT, {})
     actions = (
         scheduled_approval_batch_actions(scheduled_approval)
         + scheduled_approval_review_actions(scheduled_approval)
@@ -914,6 +963,7 @@ def main() -> int:
         + manual_distribution_actions(manual_distribution, manual_posting_clipboard)
         + experiment_result_actions(experiment_result_clipboard)
         + platform_fix_actions(status, executions, readiness)
+        + tiktok_preflight_actions(tiktok_preflight)
         + apply_actions(plan)
         + approval_actions(plan, readiness)
         + pending_store_actions(status)
@@ -951,6 +1001,7 @@ def main() -> int:
             "manual_distribution": str(MANUAL_DISTRIBUTION.relative_to(ROOT)),
             "manual_posting_clipboard": str(MANUAL_POSTING_CLIPBOARD.relative_to(ROOT)),
             "experiment_result_clipboard": str(EXPERIMENT_RESULT_CLIPBOARD.relative_to(ROOT)),
+            "tiktok_setup_preflight": str(TIKTOK_PREFLIGHT.relative_to(ROOT)),
         },
         "next_action": next_action,
         "summary": summary,

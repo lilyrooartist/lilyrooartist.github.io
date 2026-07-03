@@ -95,7 +95,10 @@ def repair_priority(row: dict) -> int:
 
 
 def repair_checklist(context: dict, platform_readiness: dict, preview_command: str, apply_command: str) -> list[dict]:
-    missing = context.get("missing_secrets") or platform_readiness.get("missing_secrets") or []
+    if "worker_missing_secrets" in context:
+        missing = context.get("worker_missing_secrets") or []
+    else:
+        missing = context.get("missing_secrets") or platform_readiness.get("missing_secrets") or []
     local_missing = context.get("local_missing_secrets") or []
     local_source = context.get("local_secret_source") or ""
     public_posting = context.get("public_posting_approved", platform_readiness.get("public_posting_approved"))
@@ -261,7 +264,7 @@ def build_status() -> dict:
         blocked_apply_reasons = []
         if local_missing:
             blocked_apply_reasons.append(f"local_secret_source_missing:{','.join(local_missing)}")
-        if platform_slug(platform) == "tiktok" and public_posting_approved is not True:
+        if platform_slug(platform) == "tiktok" and public_posting_approved is not True and context.get("repair_lane") != "upload":
             direct_mode = str(preflight_summary.get("worker_posting_mode") or "").lower() == "direct"
             if direct_mode:
                 blocked_apply_reasons.append("public_posting_approval_not_confirmed_for_direct_posting")
@@ -277,6 +280,7 @@ def build_status() -> dict:
             "updated_at": execution.get("updated_at") or "",
             "error_summary": execution.get("error_summary") or context.get("error_summary") or "",
             "repair_action": context.get("repair_action") or "",
+            "repair_lane": context.get("repair_lane") or "",
             "preview_command": preview_command,
             "apply_command": apply_command,
             "blocked_apply_command": raw_apply_command if blocked_apply_reasons else "",

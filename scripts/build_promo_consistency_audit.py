@@ -142,11 +142,16 @@ def build_checks() -> dict:
         "Platform repair packet should match platform repair blockers in the ledger.",
     ))
     execution_platform_fix_count = len(execution_summary.get("platform_fix_needed") or [])
+    preflight_only_platform_fix_count = sum(
+        1
+        for row in platform.get("rows") or []
+        if row.get("reason") == "tiktok_setup_preflight_blocked"
+    )
     checks.append(same_value(
         "executor_platform_fix_count_matches_platform_packet",
-        execution_platform_fix_count,
+        execution_platform_fix_count + preflight_only_platform_fix_count,
         int((platform.get("summary") or {}).get("platform_fix_count") or 0),
-        "Executor platform-fix count should match the platform repair packet after excluding manual-only handoff rows.",
+        "Executor platform-fix count plus preflight-only setup repairs should match the platform repair packet.",
     ))
     checks.append(verdict(
         "tiktok_preflight_status_matches_platform_repair",
@@ -158,17 +163,27 @@ def build_checks() -> dict:
         expected=tiktok_repair.get("preflight_status") or "no current TikTok repair row",
         actual=preflight_summary.get("status") or "",
     ))
-    checks.append(same_value(
+    checks.append(verdict(
         "tiktok_preflight_local_missing_matches_platform_repair",
-        sorted(tiktok_repair.get("local_missing_secrets") or []),
-        sorted(preflight_summary.get("local_missing_secrets") or []),
-        "TikTok preflight local missing secrets should match the platform repair row.",
+        (
+            not tiktok_repair
+            or sorted(tiktok_repair.get("local_missing_secrets") or [])
+            == sorted(preflight_summary.get("local_missing_secrets") or [])
+        ),
+        "TikTok preflight local missing secrets should match the platform repair row when one exists.",
+        expected=sorted(tiktok_repair.get("local_missing_secrets") or []) if tiktok_repair else "no current TikTok repair row",
+        actual=sorted(preflight_summary.get("local_missing_secrets") or []),
     ))
-    checks.append(same_value(
+    checks.append(verdict(
         "tiktok_preflight_worker_missing_matches_platform_repair",
-        sorted(tiktok_repair.get("missing_secrets") or []),
-        sorted(preflight_summary.get("worker_missing_secrets") or []),
-        "TikTok preflight worker missing secrets should match the platform repair row.",
+        (
+            not tiktok_repair
+            or sorted(tiktok_repair.get("missing_secrets") or [])
+            == sorted(preflight_summary.get("worker_missing_secrets") or [])
+        ),
+        "TikTok preflight worker missing secrets should match the platform repair row when one exists.",
+        expected=sorted(tiktok_repair.get("missing_secrets") or []) if tiktok_repair else "no current TikTok repair row",
+        actual=sorted(preflight_summary.get("worker_missing_secrets") or []),
     ))
     scheduler_blocked_ids = {
         item.get("post_id")

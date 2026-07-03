@@ -1,6 +1,6 @@
 # Posting Automation Status - Lily Roo
 
-Generated: 2026-07-03T06:13:36.968187Z
+Generated: 2026-07-03T06:22:57.352689Z
 
 ## Summary
 - Status: **blocked**
@@ -13,10 +13,10 @@ Generated: 2026-07-03T06:13:36.968187Z
 
 ## Automation Lanes
 - **Scheduled refresh workflow** - `ready`
-  - Detail: 17 */6 * * *, 05 16 * * *; latest run in_progress / pending
+  - Detail: 17 */6 * * *, 05 16 * * *; latest run completed / success
   - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28642200357
 - **Safe admin refresh** - `ready`
-  - Detail: 13 refresh commands captured at 2026-07-03T06:13:35.139866Z
+  - Detail: 13 refresh commands captured at 2026-07-03T06:22:55.580687Z
   - Evidence: data/promo_admin_refresh_run.json
 - **Scheduler dry-run authentication** - `ready`
   - Detail: HTTP 200 using bearer auth; due=13 would_post=0
@@ -33,9 +33,9 @@ Generated: 2026-07-03T06:13:36.968187Z
   - Evidence: data/tiktok_setup_preflight.json
   - Next: Add TikTok OAuth credentials and rerun the upload-mode dry run.
 - **Blocker input readiness** - `blocked`
-  - Detail: 0 ready; 4 missing local input; 1 external action needed
+  - Detail: 3 ready; 1 missing local input; 1 external action needed
   - Evidence: data/social_blocker_input_status.json
-  - Next: Add one of LILYROO_EXECUTOR_BEARER_TOKEN, EXECUTOR_BEARER_TOKEN, LILYROO_ADMIN_PASSWORD, ADMIN_PASSWORD to /home/runner/work/lilyrooartist.github.io/secrets/social_api.env.
+  - Next: Add META_LONG_LIVED_TOKEN, FB_PAGE_ID to /Users/tod.famous/Documents/New project/secrets/social_api.env, then run python3 scripts/resolve_instagram_business_account.py.
 - **Story throughput** - `ready`
   - Detail: 6 tracked; 0 queued; 0 past due without URL
   - Evidence: data/story_throughput_tracking.json
