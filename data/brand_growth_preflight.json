@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-07-03T09:31:41.220265Z",
+  "generated_at": "2026-07-03T09:33:32.012857Z",
   "safe_mode": true,
   "source": {
     "future_posts": "admin/future-posts.json",
     "brand_growth_readout": "data/brand_growth_readout.json",
     "scheduler_endpoint": "https://www.lilyroo.com/api/social/scheduler/dry-run",
-    "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/b071f997b53a28801bc0d388353df61906a32b10/admin/future-posts.json"
+    "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/52e32d4acf9c7304aabedd339f2f109bc43aa2ee/admin/future-posts.json"
   },
   "summary": {
-    "status": "ready",
+    "status": "needs_attention",
     "next_window_date": "2026-07-04",
     "scheduled_time": "2026-07-04T15:21:00Z",
     "expected_post_count": 2,
@@ -16,12 +16,15 @@
       "FP-BRAND-AM-01-13-X",
       "FP-BRAND-AM-01-13-FACEBOOK"
     ],
-    "scheduler_http_status": 200,
+    "scheduler_http_status": 500,
     "scheduler_auth_method": "bearer",
-    "scheduler_due_count": 2,
-    "scheduler_would_post_count": 2,
+    "scheduler_due_count": 0,
+    "scheduler_would_post_count": 0,
     "scheduler_blocked_count": 0,
-    "missing_due_ids": [],
+    "missing_due_ids": [
+      "FP-BRAND-AM-01-13-X",
+      "FP-BRAND-AM-01-13-FACEBOOK"
+    ],
     "unexpected_due_ids": [],
     "blocked_ids": [],
     "link_check_count": 10,
@@ -31,44 +34,16 @@
     "link_blocking_failed_count": 0,
     "next_proof_due_at": "2026-07-04T16:05:00Z",
     "next_measurement_due_at": "2026-07-05T15:20:00Z",
-    "error": ""
+    "error": "HTTP 500: Internal Server Error"
   },
   "scheduler_summary": {
-    "due_count": 2,
-    "result_count": 2,
-    "would_post_count": 2,
+    "due_count": 0,
+    "result_count": 0,
+    "would_post_count": 0,
     "blocked_count": 0,
-    "status_counts": {
-      "would_post": 2
-    },
-    "platform_counts": {
-      "Facebook": 1,
-      "X": 1
-    },
-    "would_post": [
-      {
-        "post_id": "FP-BRAND-AM-01-13-X",
-        "platform": "X",
-        "status": "would_post",
-        "reason": "",
-        "post_type": "image",
-        "attempts": 0,
-        "updated_at": "",
-        "source": "",
-        "error_summary": ""
-      },
-      {
-        "post_id": "FP-BRAND-AM-01-13-FACEBOOK",
-        "platform": "Facebook",
-        "status": "would_post",
-        "reason": "",
-        "post_type": "image",
-        "attempts": 0,
-        "updated_at": "",
-        "source": "",
-        "error_summary": ""
-      }
-    ],
+    "status_counts": {},
+    "platform_counts": {},
+    "would_post": [],
     "blocked": []
   },
   "link_checks": [

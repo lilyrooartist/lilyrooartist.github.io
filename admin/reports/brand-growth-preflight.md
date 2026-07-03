@@ -1,12 +1,12 @@
 # Brand Growth Preflight - Lily Roo
 
-Generated: 2026-07-03T09:31:41.220265Z
+Generated: 2026-07-03T09:33:32.012857Z
 
 ## Summary
-- Status: **ready**
+- Status: **needs_attention**
 - Next window: **2026-07-04** at `2026-07-04T15:21:00Z`
 - Expected posts: **2**
-- Scheduler: HTTP **200**, auth `bearer`, due **2**, would post **2**, blocked **0**
+- Scheduler: HTTP **500**, auth `bearer`, due **0**, would post **0**, blocked **0**
 - Link checks: **10 ok**, **0 failed**, **0 warning**, **0 blocking failed**
 - Next proof due: `2026-07-04T16:05:00Z`
 - First measurement due: `2026-07-05T15:20:00Z`
@@ -14,6 +14,10 @@ Generated: 2026-07-03T09:31:41.220265Z
 ## Expected Posts
 - `FP-BRAND-AM-01-13-X` X at `2026-07-04T10:15:00-04:00`
 - `FP-BRAND-AM-01-13-FACEBOOK` Facebook at `2026-07-04T11:20:00-04:00`
+
+## Missing From Dry Run
+- `FP-BRAND-AM-01-13-X`
+- `FP-BRAND-AM-01-13-FACEBOOK`
 
 ## Link Checks
 - **ok** `FP-BRAND-AM-01-13-X imagery_url` 200 image/jpeg

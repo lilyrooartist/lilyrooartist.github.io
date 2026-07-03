@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-03T09:31:41.134492Z",
+  "generated_at": "2026-07-03T09:33:31.932968Z",
   "safe_mode": true,
   "source": {
     "workflow": ".github/workflows/promo-admin-refresh.yml",
@@ -25,7 +25,7 @@
     ],
     "scheduler_http_status": 200,
     "scheduler_auth_method": "bearer",
-    "scheduler_refresh_step_ok": true,
+    "scheduler_refresh_step_ok": false,
     "posted_count": 30,
     "attention_count": 0,
     "platform_fix_needed_count": 0,
@@ -33,7 +33,7 @@
     "story_queued_future_count": 0,
     "platform_repair_blocked_count": 0,
     "blocker_input_status": "missing_local_input",
-    "blocker_input_missing_count": 3,
+    "blocker_input_missing_count": 5,
     "blocker_input_external_action_count": 1,
     "help_needed_count": 5,
     "next_action": "Resolve the platform repair checklist before expecting full auto-post coverage."
@@ -42,14 +42,14 @@
     {
       "label": "Scheduled refresh workflow",
       "status": "ready",
-      "detail": "17 */6 * * *, 05 16 * * *; latest run completed / success",
-      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28651176556",
+      "detail": "17 */6 * * *, 05 16 * * *; latest run in_progress / pending",
+      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28651812609",
       "next_action": ""
     },
     {
       "label": "Safe admin refresh",
       "status": "ready",
-      "detail": "17 refresh commands captured at 2026-07-03T09:31:39.520887Z",
+      "detail": "17 refresh commands captured at 2026-07-03T09:33:29.552205Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": ""
     },
@@ -84,9 +84,9 @@
     {
       "label": "Blocker input readiness",
       "status": "blocked",
-      "detail": "3 ready; 3 missing local input; 1 external action needed",
+      "detail": "1 ready; 5 missing local input; 1 external action needed",
       "evidence": "data/social_blocker_input_status.json",
-      "next_action": "Add X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET to /Users/tod.famous/Documents/New project/secrets/social_api.env."
+      "next_action": "Add X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET to /home/runner/work/lilyrooartist.github.io/secrets/social_api.env."
     },
     {
       "label": "Story throughput",
