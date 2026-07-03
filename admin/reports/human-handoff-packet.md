@@ -1,6 +1,6 @@
 # Human Handoff Packet - Lily Roo
 
-Generated: 2026-07-03T06:53:02.658158Z
+Generated: 2026-07-03T06:58:21.941262Z
 
 ## Summary
 - Open handoff tasks: **3**
@@ -11,7 +11,7 @@ Generated: 2026-07-03T06:53:02.658158Z
 
 ## Action Docket
 - Ready steps: **1**
-- Blocked steps: **0**
+- Blocked steps: **1**
 - Manual posts packaged: **0**
 - Manual metric fields: **6**
 - Resolution worksheet: `data/human_handoff_resolution_worksheet.csv` (3 row(s))
@@ -29,8 +29,8 @@ Generated: 2026-07-03T06:53:02.658158Z
   - Completion evidence: data/manual_distribution_packet.json should move approved rows from review_queue toward postable manual distribution, and data/published_log_reconciliation.json should remain gated until public URLs are logged.
   - Next after apply: Post each approved YouTube Community row manually, then log its public URL with scripts/log_manual_distribution.py.
   - Guardrail: Manual-only approvals do not auto-post; posting and public URL logging remain separate after review. Post manually first, then log only real public URLs.
-- **Repair blocked platform executor setup** (`clear`)
-  - Owner: `tod`; tasks: **1**; blockers resolved: **0**
+- **Repair blocked platform executor setup** (`blocked`)
+  - Owner: `tod`; tasks: **1**; blockers resolved: **1**
   - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
   - Sequence preview: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
   - Sequence verify: `python3 scripts/refresh_promo_admin.py`

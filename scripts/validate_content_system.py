@@ -157,8 +157,15 @@ def active_approval_blocker_count():
     return int(((packet.get("summary") or {}).get("approval_blocker_count")) or 0)
 
 
-def active_platform_repair_count():
+def active_platform_repair_count(platform=None):
     packet = read_json_if_exists(PLATFORM_REPAIR_STATUS)
+    if platform:
+        target = str(platform).strip().lower()
+        return len([
+            row
+            for row in packet.get("rows") or []
+            if str(row.get("platform") or "").strip().lower() == target
+        ])
     return int(((packet.get("summary") or {}).get("platform_fix_count")) or 0)
 
 
@@ -982,7 +989,7 @@ def validate_generated_outputs(failures):
             if action.get("kind") == "platform_fix"
             and (action.get("context") or {}).get("platform") == "Instagram"
         ]
-        if not instagram_actions and active_platform_repair_count() == 0 and active_social_attention_count() == 0:
+        if not instagram_actions and active_platform_repair_count("Instagram") == 0 and active_social_attention_count() == 0:
             ok("promo operations packet has no Instagram diagnostics after active repair rows clear")
         elif instagram_actions and all(
             (action.get("context") or {}).get("account_resolution_reason") == "instagram_business_account_unresolved"

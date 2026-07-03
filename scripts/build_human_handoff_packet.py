@@ -470,7 +470,7 @@ def build_action_docket(tasks: list[dict], blocker_summary: dict, approval_runwa
     blocked_platform_count = len([
         task
         for task in platform_setup
-        if task.get("status") in {"blocked", "failed"}
+        if task.get("status") in {"blocked", "failed", "needs_fix"}
     ])
     manual_preview_command = manual_approval_docket.get("preview_command") or (manual_distribution[0].get("preview_command") if manual_distribution else "")
     manual_apply_command = manual_approval_docket.get("apply_command") or (manual_distribution[0].get("apply_command") if manual_distribution else "")

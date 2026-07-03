@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-03T06:53:02.658158Z",
+  "generated_at": "2026-07-03T06:58:21.941262Z",
   "safe_mode": true,
   "source": {
     "promotion_blocker_ledger": "data/promotion_blocker_ledger.json",
@@ -154,7 +154,7 @@
     "roadmap_step_count": 5,
     "task_count": 3,
     "ready_step_count": 1,
-    "blocked_step_count": 0,
+    "blocked_step_count": 1,
     "manual_post_count": 0,
     "manual_metric_field_count": 6,
     "first_ready_step": {
@@ -307,7 +307,35 @@
       "next_step_after_apply": "Rebuild the weekly report and confirm lilyroo.com/admin shows fewer pending manual metric fields.",
       "guardrail": "Import only collected numeric values; leave unknown cells blank."
     },
-    "blocked_steps": [],
+    "blocked_steps": [
+      {
+        "id": "platform-repair-gate",
+        "label": "Repair blocked platform executor setup",
+        "state": "blocked",
+        "owner": "tod",
+        "task_ids": [
+          "platform-setup-FP-AUTO-264"
+        ],
+        "blockers_resolved": 1,
+        "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+        "apply_command": "",
+        "command_sequence": [
+          {
+            "step": "preview",
+            "command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+            "required_before_apply": true
+          },
+          {
+            "step": "verify",
+            "command": "python3 scripts/refresh_promo_admin.py",
+            "required_before_apply": false
+          }
+        ],
+        "completion_evidence": "data/tiktok_setup_preflight.json should report ready_to_push_worker_secrets and ready_to_upload_drafts before TikTok upload-mode backlog work is allowed.",
+        "next_step_after_apply": "Recapture admin state and only then revisit TikTok approval or backlog reschedule rows.",
+        "guardrail": "Run preflight and confirm local OAuth setup before pushing upload-mode secrets; direct public posting remains separately approval-gated."
+      }
+    ],
     "checklist": [
       {
         "id": "review-checked-approval-batch",
@@ -366,12 +394,12 @@
       {
         "id": "platform-repair-gate",
         "label": "Repair blocked platform executor setup",
-        "state": "clear",
+        "state": "blocked",
         "owner": "tod",
         "task_ids": [
           "platform-setup-FP-AUTO-264"
         ],
-        "blockers_resolved": 0,
+        "blockers_resolved": 1,
         "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
         "apply_command": "",
         "command_sequence": [
