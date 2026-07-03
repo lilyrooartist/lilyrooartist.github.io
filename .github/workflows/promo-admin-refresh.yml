@@ -3,6 +3,9 @@ name: Promo admin refresh
 on:
   schedule:
     - cron: "17 */6 * * *"
+    # Analog Myth campaign posts publish at 10:15/11:20 AM America/New_York.
+    # Refresh shortly after both slots so posted URLs and readouts update faster.
+    - cron: "05 16 * * *"
   workflow_dispatch:
 
 permissions:
