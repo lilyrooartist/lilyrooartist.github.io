@@ -1,16 +1,16 @@
 # Social Blocker Input Status - Lily Roo
 
-Generated: 2026-07-03T08:08:17.984873Z
+Generated: 2026-07-03T08:15:50.312469Z
 
 ## Summary
 - Status: **missing_local_input**
-- Ready groups: **3 / 5**
-- Missing local input: **1**
+- Ready groups: **3 / 7**
+- Missing local input: **3**
 - External action needed: **1**
-- GitHub Actions missing secrets: **0**
+- GitHub Actions missing secrets: **6**
 - Local secret env exists: **True**
 - Template: `data/social_blocker_secret_template.env`
-- Next action: Add META_LONG_LIVED_TOKEN, FB_PAGE_ID to /Users/tod.famous/Documents/New project/secrets/social_api.env, then run python3 scripts/resolve_instagram_business_account.py.
+- Next action: Add X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET to /Users/tod.famous/Documents/New project/secrets/social_api.env.
 
 ## Groups
 - **Scheduler and executor auth** - `ready`
@@ -29,6 +29,42 @@ Generated: 2026-07-03T08:08:17.984873Z
     - `python3 scripts/refresh_promo_admin.py`
   - Verify: `python3 scripts/capture_scheduler_dry_run.py && python3 scripts/capture_social_executions.py`
   - Next: Run the verification command and refresh admin evidence.
+- **X metric capture** - `missing_local_input`
+  - Required all: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
+  - GitHub Actions secrets: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
+  - GitHub Actions status: missing
+  - Unblocks: Automated X post results for repeatable-format learning.
+  - Credential priority: measurement
+  - How to clear: Add X API credentials so published X posts can be measured automatically instead of staying as unfilled experiment rows.
+  - Where to get it: X Developer Portal for the Lily Roo app/project.
+  - Portal: https://developer.x.com/en/portal/dashboard
+  - Docs: https://docs.x.com/x-api
+  - Values to collect: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
+  - Permission/scope hint: tweet.read, users.read, offline.access where available
+  - Safe handling: Paste values only into ../secrets/social_api.env locally and GitHub Actions secrets; generated reports list names only.
+  - After values are added:
+    - `python3 scripts/capture_x_post_results.py --min-age-hours 24 --allow-empty --apply-results --refresh-admin`
+    - `python3 scripts/refresh_promo_admin.py`
+  - Verify: `python3 scripts/capture_x_post_results.py --min-age-hours 24 --allow-empty --skip-missing-secrets --apply-results`
+  - Next: Add X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET to /Users/tod.famous/Documents/New project/secrets/social_api.env.
+- **Facebook metric capture** - `missing_local_input`
+  - Required all: META_LONG_LIVED_TOKEN, FB_PAGE_ID
+  - GitHub Actions secrets: META_LONG_LIVED_TOKEN, FB_PAGE_ID
+  - GitHub Actions status: missing
+  - Unblocks: Automated Facebook post results for repeatable-format learning.
+  - Credential priority: measurement
+  - How to clear: Add Meta Page credentials so published Facebook posts can be measured automatically for format learning.
+  - Where to get it: Meta Developer Dashboard or Graph API Explorer while signed in as a Lily Roo Facebook Page admin.
+  - Portal: https://developers.facebook.com/tools/explorer/
+  - Docs: https://developers.facebook.com/docs/pages-api
+  - Values to collect: META_LONG_LIVED_TOKEN, FB_PAGE_ID
+  - Permission/scope hint: pages_read_engagement, pages_show_list
+  - Safe handling: Paste values only into ../secrets/social_api.env locally and GitHub Actions secrets; generated reports list names only.
+  - After values are added:
+    - `python3 scripts/capture_facebook_post_results.py --min-age-hours 24 --allow-empty --apply-results --refresh-admin`
+    - `python3 scripts/refresh_promo_admin.py`
+  - Verify: `python3 scripts/capture_facebook_post_results.py --min-age-hours 24 --allow-empty --skip-missing-secrets --apply-results`
+  - Next: Add META_LONG_LIVED_TOKEN, FB_PAGE_ID to /Users/tod.famous/Documents/New project/secrets/social_api.env.
 - **Instagram business account** - `missing_local_input`
   - Required all: IG_BUSINESS_ACCOUNT_ID
   - Unblocks: Instagram executor rows after the Worker secret is pushed and readiness is recaptured.

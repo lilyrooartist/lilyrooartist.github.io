@@ -16,6 +16,18 @@ AUTH_SECRET_OPTIONS = [
     "LILYROO_EXECUTOR_BEARER_TOKEN",
     "LILYROO_ADMIN_PASSWORD",
 ]
+OPTIONAL_SECRET_GROUPS = {
+    "x_metric_capture": {
+        "label": "X metric capture",
+        "required_all": ["X_API_KEY", "X_API_SECRET", "X_ACCESS_TOKEN", "X_ACCESS_TOKEN_SECRET"],
+        "unblocks": "Automated X post result capture for experiment and brand-growth learning.",
+    },
+    "facebook_metric_capture": {
+        "label": "Facebook metric capture",
+        "required_all": ["META_LONG_LIVED_TOKEN", "FB_PAGE_ID"],
+        "unblocks": "Automated Facebook post engagement capture for experiment and brand-growth learning.",
+    },
+}
 
 
 def run_gh(repo: str, timeout: int) -> tuple[int, str, str]:
@@ -53,11 +65,31 @@ def build_packet(repo: str, timeout: int) -> dict:
         returncode, stdout, stderr = run_gh(repo, timeout)
     except (subprocess.SubprocessError, FileNotFoundError) as exc:
         returncode, stdout, stderr = 1, "", str(exc)
-    env_present = sorted(name for name in AUTH_SECRET_OPTIONS if os.environ.get(name))
+    optional_secret_names = sorted({name for group in OPTIONAL_SECRET_GROUPS.values() for name in group["required_all"]})
+    env_present = sorted(name for name in [*AUTH_SECRET_OPTIONS, *optional_secret_names] if os.environ.get(name))
     names = sorted(set((parse_secret_names(stdout) if returncode == 0 else []) + env_present))
-    presence = {name: name in names for name in AUTH_SECRET_OPTIONS}
-    present_auth = [name for name, is_present in presence.items() if is_present]
-    missing_options = [name for name, is_present in presence.items() if not is_present]
+    all_secret_names = [*AUTH_SECRET_OPTIONS, *optional_secret_names]
+    presence = {name: name in names for name in all_secret_names}
+    auth_presence = {name: presence.get(name, False) for name in AUTH_SECRET_OPTIONS}
+    optional_groups = {}
+    for group_id, group in OPTIONAL_SECRET_GROUPS.items():
+        required = group["required_all"]
+        group_presence = {name: presence.get(name, False) for name in required}
+        missing = [name for name, is_present in group_presence.items() if not is_present]
+        optional_groups[group_id] = {
+            "label": group["label"],
+            "status": "ready" if not missing else "missing",
+            "required_all": required,
+            "present_count": len(required) - len(missing),
+            "missing_count": len(missing),
+            "missing": missing,
+            "presence": group_presence,
+            "unblocks": group["unblocks"],
+        }
+    present_auth = [name for name, is_present in auth_presence.items() if is_present]
+    missing_options = [name for name, is_present in auth_presence.items() if not is_present]
+    metric_ready = [group for group in optional_groups.values() if group["status"] == "ready"]
+    metric_missing = sorted({name for group in optional_groups.values() for name in group["missing"]})
     ok = returncode == 0 or bool(env_present)
     ready = ok and bool(present_auth)
     return {
@@ -82,8 +114,14 @@ def build_packet(repo: str, timeout: int) -> dict:
             "present_auth_secrets": present_auth,
             "missing_auth_options": missing_options,
             "missing_required_secrets": [] if present_auth else missing_options,
+            "optional_group_count": len(optional_groups),
+            "optional_ready_group_count": len(metric_ready),
+            "optional_missing_secret_count": len(metric_missing),
+            "optional_missing_secret_names": metric_missing,
             "next_action": (
-                "GitHub Actions has a scheduler auth secret."
+                "GitHub Actions has scheduler auth and optional metric-capture secrets."
+                if ready and not metric_missing
+                else f"Scheduler auth is ready; add optional metric-capture secrets: {', '.join(metric_missing)}."
                 if ready
                 else f"Add one GitHub Actions repo secret: {' or '.join(missing_options)}."
                 if ok
@@ -92,6 +130,7 @@ def build_packet(repo: str, timeout: int) -> dict:
         },
         "auth_secret_options": AUTH_SECRET_OPTIONS,
         "required_secrets": AUTH_SECRET_OPTIONS,
+        "optional_secret_groups": optional_groups,
         "presence": presence,
     }
 
@@ -113,6 +152,7 @@ def main() -> int:
         "status": packet["summary"]["status"],
         "present_required_count": packet["summary"]["present_required_count"],
         "missing_required_count": packet["summary"]["missing_required_count"],
+        "optional_missing_secret_count": packet["summary"]["optional_missing_secret_count"],
     }, indent=2))
     return 0 if packet.get("ok") else 1
 

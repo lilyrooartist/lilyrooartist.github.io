@@ -23,10 +23,31 @@ GROUPS = [
         "required_any": ["LILYROO_EXECUTOR_BEARER_TOKEN", "EXECUTOR_BEARER_TOKEN", "LILYROO_ADMIN_PASSWORD", "ADMIN_PASSWORD"],
         "required_all": [],
         "github_actions_secrets": ["LILYROO_EXECUTOR_BEARER_TOKEN", "LILYROO_ADMIN_PASSWORD"],
+        "github_actions_secret_mode": "any",
         "github_actions_push_preview": "python3 scripts/push_github_actions_secrets.py",
         "github_actions_push_apply": "python3 scripts/push_github_actions_secrets.py --apply",
         "unblocks": "Scheduler dry-run, executor readiness capture, and execution history capture.",
         "verify": "python3 scripts/capture_scheduler_dry_run.py && python3 scripts/capture_social_executions.py",
+    },
+    {
+        "id": "x_metric_capture",
+        "label": "X metric capture",
+        "required_any": [],
+        "required_all": ["X_API_KEY", "X_API_SECRET", "X_ACCESS_TOKEN", "X_ACCESS_TOKEN_SECRET"],
+        "github_actions_secrets": ["X_API_KEY", "X_API_SECRET", "X_ACCESS_TOKEN", "X_ACCESS_TOKEN_SECRET"],
+        "github_actions_secret_mode": "all",
+        "unblocks": "Automated X post results for repeatable-format learning.",
+        "verify": "python3 scripts/capture_x_post_results.py --min-age-hours 24 --allow-empty --skip-missing-secrets --apply-results",
+    },
+    {
+        "id": "facebook_metric_capture",
+        "label": "Facebook metric capture",
+        "required_any": [],
+        "required_all": ["META_LONG_LIVED_TOKEN", "FB_PAGE_ID"],
+        "github_actions_secrets": ["META_LONG_LIVED_TOKEN", "FB_PAGE_ID"],
+        "github_actions_secret_mode": "all",
+        "unblocks": "Automated Facebook post results for repeatable-format learning.",
+        "verify": "python3 scripts/capture_facebook_post_results.py --min-age-hours 24 --allow-empty --skip-missing-secrets --apply-results",
     },
     {
         "id": "instagram_business",
@@ -80,6 +101,59 @@ CREDENTIAL_GUIDES = {
         "after_values_commands": [
             "python3 scripts/capture_scheduler_dry_run.py",
             "python3 scripts/capture_social_executions.py",
+            "python3 scripts/refresh_promo_admin.py",
+        ],
+    },
+    "x_metric_capture": {
+        "priority": "measurement",
+        "operator_summary": "Add X API credentials so published X posts can be measured automatically instead of staying as unfilled experiment rows.",
+        "where_to_get": "X Developer Portal for the Lily Roo app/project.",
+        "portal_url": "https://developer.x.com/en/portal/dashboard",
+        "docs_url": "https://docs.x.com/x-api",
+        "values_to_collect": [
+            "X_API_KEY",
+            "X_API_SECRET",
+            "X_ACCESS_TOKEN",
+            "X_ACCESS_TOKEN_SECRET",
+        ],
+        "local_env_keys": [
+            "X_API_KEY",
+            "X_API_SECRET",
+            "X_ACCESS_TOKEN",
+            "X_ACCESS_TOKEN_SECRET",
+        ],
+        "permissions_hint": [
+            "tweet.read",
+            "users.read",
+            "offline.access where available",
+        ],
+        "safe_handling": "Paste values only into ../secrets/social_api.env locally and GitHub Actions secrets; generated reports list names only.",
+        "after_values_commands": [
+            "python3 scripts/capture_x_post_results.py --min-age-hours 24 --allow-empty --apply-results --refresh-admin",
+            "python3 scripts/refresh_promo_admin.py",
+        ],
+    },
+    "facebook_metric_capture": {
+        "priority": "measurement",
+        "operator_summary": "Add Meta Page credentials so published Facebook posts can be measured automatically for format learning.",
+        "where_to_get": "Meta Developer Dashboard or Graph API Explorer while signed in as a Lily Roo Facebook Page admin.",
+        "portal_url": "https://developers.facebook.com/tools/explorer/",
+        "docs_url": "https://developers.facebook.com/docs/pages-api",
+        "values_to_collect": [
+            "META_LONG_LIVED_TOKEN",
+            "FB_PAGE_ID",
+        ],
+        "local_env_keys": [
+            "META_LONG_LIVED_TOKEN",
+            "FB_PAGE_ID",
+        ],
+        "permissions_hint": [
+            "pages_read_engagement",
+            "pages_show_list",
+        ],
+        "safe_handling": "Paste values only into ../secrets/social_api.env locally and GitHub Actions secrets; generated reports list names only.",
+        "after_values_commands": [
+            "python3 scripts/capture_facebook_post_results.py --min-age-hours 24 --allow-empty --apply-results --refresh-admin",
             "python3 scripts/refresh_promo_admin.py",
         ],
     },
@@ -194,6 +268,12 @@ TEMPLATE_KEYS = [
     ("LILYROO_ADMIN_PASSWORD", ""),
     ("ADMIN_PASSWORD", ""),
     ("", ""),
+    ("# X metric capture.", ""),
+    ("X_API_KEY", ""),
+    ("X_API_SECRET", ""),
+    ("X_ACCESS_TOKEN", ""),
+    ("X_ACCESS_TOKEN_SECRET", ""),
+    ("", ""),
     ("# Instagram/Meta.", ""),
     ("IG_BUSINESS_ACCOUNT_ID", ""),
     ("FB_PAGE_ID", ""),
@@ -242,7 +322,7 @@ def read_json(path: Path) -> dict:
         return {}
 
 
-def github_secret_status(secret_names: list[str], github_presence: dict) -> dict:
+def github_secret_status(secret_names: list[str], github_presence: dict, mode: str = "all") -> dict:
     presence = github_presence.get("presence") or {}
     source_status = (github_presence.get("summary") or {}).get("status") or "unknown"
     if not secret_names:
@@ -251,13 +331,14 @@ def github_secret_status(secret_names: list[str], github_presence: dict) -> dict
         return {"status": "unknown", "presence": {name: False for name in secret_names}, "missing": secret_names}
     result = {name: bool(presence.get(name)) for name in secret_names}
     missing = [name for name, is_present in result.items() if not is_present]
-    if source_status == "ready":
+    if mode == "any" and any(result.values()):
         missing = []
     return {
         "status": "ready" if not missing else "missing",
         "presence": result,
         "missing": missing,
         "source_status": source_status,
+        "mode": mode,
     }
 
 
@@ -265,9 +346,10 @@ def build_group(group: dict, env: dict[str, str], github_presence: dict, instagr
     required_all = group.get("required_all") or []
     required_any = group.get("required_any") or []
     github_secrets = group.get("github_actions_secrets") or []
+    github_mode = group.get("github_actions_secret_mode") or "all"
     missing_all = [name for name in required_all if not present(env, name)]
     any_present = any(present(env, name) for name in required_any) if required_any else True
-    github_status = github_secret_status(github_secrets, github_presence)
+    github_status = github_secret_status(github_secrets, github_presence, github_mode)
     status = "external_action_needed" if group.get("external_only") else "ready"
     if missing_all or not any_present:
         status = "missing_local_input"

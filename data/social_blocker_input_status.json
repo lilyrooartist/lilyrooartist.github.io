@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-03T08:08:17.984873Z",
+  "generated_at": "2026-07-03T08:15:50.312469Z",
   "safe_mode": true,
   "redaction": "Only key presence is reported; secret values are never written to generated files.",
   "source": {
@@ -10,15 +10,15 @@
   },
   "summary": {
     "status": "missing_local_input",
-    "group_count": 5,
+    "group_count": 7,
     "ready_count": 3,
-    "missing_local_input_count": 1,
+    "missing_local_input_count": 3,
     "external_action_needed_count": 1,
-    "github_actions_missing_secret_count": 0,
+    "github_actions_missing_secret_count": 6,
     "github_actions_secret_presence_status": "ready",
     "local_secret_env_exists": true,
     "template_path": "data/social_blocker_secret_template.env",
-    "next_action": "Add META_LONG_LIVED_TOKEN, FB_PAGE_ID to /Users/tod.famous/Documents/New project/secrets/social_api.env, then run python3 scripts/resolve_instagram_business_account.py."
+    "next_action": "Add X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET to /Users/tod.famous/Documents/New project/secrets/social_api.env."
   },
   "groups": [
     {
@@ -43,7 +43,8 @@
           "LILYROO_ADMIN_PASSWORD": false
         },
         "missing": [],
-        "source_status": "ready"
+        "source_status": "ready",
+        "mode": "any"
       },
       "github_actions_push_preview": "python3 scripts/push_github_actions_secrets.py",
       "github_actions_push_apply": "python3 scripts/push_github_actions_secrets.py --apply",
@@ -74,6 +75,161 @@
         "after_values_commands": [
           "python3 scripts/capture_scheduler_dry_run.py",
           "python3 scripts/capture_social_executions.py",
+          "python3 scripts/refresh_promo_admin.py"
+        ]
+      }
+    },
+    {
+      "id": "x_metric_capture",
+      "label": "X metric capture",
+      "status": "missing_local_input",
+      "required_all": [
+        "X_API_KEY",
+        "X_API_SECRET",
+        "X_ACCESS_TOKEN",
+        "X_ACCESS_TOKEN_SECRET"
+      ],
+      "required_any": [],
+      "github_actions_secrets": [
+        "X_API_KEY",
+        "X_API_SECRET",
+        "X_ACCESS_TOKEN",
+        "X_ACCESS_TOKEN_SECRET"
+      ],
+      "github_actions_secret_status": {
+        "status": "missing",
+        "presence": {
+          "X_API_KEY": false,
+          "X_API_SECRET": false,
+          "X_ACCESS_TOKEN": false,
+          "X_ACCESS_TOKEN_SECRET": false
+        },
+        "missing": [
+          "X_API_KEY",
+          "X_API_SECRET",
+          "X_ACCESS_TOKEN",
+          "X_ACCESS_TOKEN_SECRET"
+        ],
+        "source_status": "ready",
+        "mode": "all"
+      },
+      "github_actions_push_preview": "",
+      "github_actions_push_apply": "",
+      "credential_resolution_preview": "",
+      "credential_resolution_apply": "",
+      "credential_resolution_status": {},
+      "presence": {
+        "X_ACCESS_TOKEN": false,
+        "X_ACCESS_TOKEN_SECRET": false,
+        "X_API_KEY": false,
+        "X_API_SECRET": false
+      },
+      "missing_all": [
+        "X_API_KEY",
+        "X_API_SECRET",
+        "X_ACCESS_TOKEN",
+        "X_ACCESS_TOKEN_SECRET"
+      ],
+      "any_present": true,
+      "external_only": false,
+      "unblocks": "Automated X post results for repeatable-format learning.",
+      "verification_command": "python3 scripts/capture_x_post_results.py --min-age-hours 24 --allow-empty --skip-missing-secrets --apply-results",
+      "next_action": "Add X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET to /Users/tod.famous/Documents/New project/secrets/social_api.env.",
+      "credential_guide": {
+        "priority": "measurement",
+        "operator_summary": "Add X API credentials so published X posts can be measured automatically instead of staying as unfilled experiment rows.",
+        "where_to_get": "X Developer Portal for the Lily Roo app/project.",
+        "portal_url": "https://developer.x.com/en/portal/dashboard",
+        "docs_url": "https://docs.x.com/x-api",
+        "values_to_collect": [
+          "X_API_KEY",
+          "X_API_SECRET",
+          "X_ACCESS_TOKEN",
+          "X_ACCESS_TOKEN_SECRET"
+        ],
+        "local_env_keys": [
+          "X_API_KEY",
+          "X_API_SECRET",
+          "X_ACCESS_TOKEN",
+          "X_ACCESS_TOKEN_SECRET"
+        ],
+        "permissions_hint": [
+          "tweet.read",
+          "users.read",
+          "offline.access where available"
+        ],
+        "safe_handling": "Paste values only into ../secrets/social_api.env locally and GitHub Actions secrets; generated reports list names only.",
+        "after_values_commands": [
+          "python3 scripts/capture_x_post_results.py --min-age-hours 24 --allow-empty --apply-results --refresh-admin",
+          "python3 scripts/refresh_promo_admin.py"
+        ]
+      }
+    },
+    {
+      "id": "facebook_metric_capture",
+      "label": "Facebook metric capture",
+      "status": "missing_local_input",
+      "required_all": [
+        "META_LONG_LIVED_TOKEN",
+        "FB_PAGE_ID"
+      ],
+      "required_any": [],
+      "github_actions_secrets": [
+        "META_LONG_LIVED_TOKEN",
+        "FB_PAGE_ID"
+      ],
+      "github_actions_secret_status": {
+        "status": "missing",
+        "presence": {
+          "META_LONG_LIVED_TOKEN": false,
+          "FB_PAGE_ID": false
+        },
+        "missing": [
+          "META_LONG_LIVED_TOKEN",
+          "FB_PAGE_ID"
+        ],
+        "source_status": "ready",
+        "mode": "all"
+      },
+      "github_actions_push_preview": "",
+      "github_actions_push_apply": "",
+      "credential_resolution_preview": "",
+      "credential_resolution_apply": "",
+      "credential_resolution_status": {},
+      "presence": {
+        "FB_PAGE_ID": false,
+        "META_LONG_LIVED_TOKEN": false
+      },
+      "missing_all": [
+        "META_LONG_LIVED_TOKEN",
+        "FB_PAGE_ID"
+      ],
+      "any_present": true,
+      "external_only": false,
+      "unblocks": "Automated Facebook post results for repeatable-format learning.",
+      "verification_command": "python3 scripts/capture_facebook_post_results.py --min-age-hours 24 --allow-empty --skip-missing-secrets --apply-results",
+      "next_action": "Add META_LONG_LIVED_TOKEN, FB_PAGE_ID to /Users/tod.famous/Documents/New project/secrets/social_api.env.",
+      "credential_guide": {
+        "priority": "measurement",
+        "operator_summary": "Add Meta Page credentials so published Facebook posts can be measured automatically for format learning.",
+        "where_to_get": "Meta Developer Dashboard or Graph API Explorer while signed in as a Lily Roo Facebook Page admin.",
+        "portal_url": "https://developers.facebook.com/tools/explorer/",
+        "docs_url": "https://developers.facebook.com/docs/pages-api",
+        "values_to_collect": [
+          "META_LONG_LIVED_TOKEN",
+          "FB_PAGE_ID"
+        ],
+        "local_env_keys": [
+          "META_LONG_LIVED_TOKEN",
+          "FB_PAGE_ID"
+        ],
+        "permissions_hint": [
+          "pages_read_engagement",
+          "pages_show_list"
+        ],
+        "safe_handling": "Paste values only into ../secrets/social_api.env locally and GitHub Actions secrets; generated reports list names only.",
+        "after_values_commands": [
+          "python3 scripts/capture_facebook_post_results.py --min-age-hours 24 --allow-empty --apply-results --refresh-admin",
           "python3 scripts/refresh_promo_admin.py"
         ]
       }
