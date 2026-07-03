@@ -27,6 +27,7 @@ TZ = ZoneInfo("America/New_York")
 RESULT_FIELDS = ["views", "likes", "comments", "shares", "saves", "subs_delta"]
 POST_PROOF_DELAY_MINUTES = 45
 FIRST_MEASUREMENT_DELAY_HOURS = 24
+CAMPAIGN_ID_PREFIX = "FP-BRAND-AM"
 
 
 def read_json(path: Path, fallback):
@@ -159,10 +160,13 @@ def scheduled_status(scheduled_at: datetime | None, now: datetime) -> str:
 
 
 def campaign_rows(campaign: dict, queue_rows: list[dict]) -> list[dict]:
-    rows = campaign.get("rows") or []
-    if rows:
-        return rows
-    return [row for row in queue_rows if str(row.get("id") or "").startswith("FP-BRAND-AM-")]
+    queue_campaign_rows = [
+        row for row in queue_rows
+        if str(row.get("id") or "").startswith(CAMPAIGN_ID_PREFIX)
+    ]
+    if queue_campaign_rows:
+        return queue_campaign_rows
+    return campaign.get("rows") or []
 
 
 def capture_command(platform: str, post_ids: list[str]) -> str:

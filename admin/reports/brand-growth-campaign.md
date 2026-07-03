@@ -1,6 +1,6 @@
 # Brand Growth Campaign - Lily Roo
 
-Generated: 2026-07-03T00:38:53.021599-04:00
+Generated: 2026-07-03T03:23:38.948091-04:00
 
 ## Objective
 Grow Lily Roo by keeping Analog Myth in motion with daily track-specific posts that feel like the album, not a solicitation.
@@ -13,7 +13,8 @@ Grow Lily Roo by keeping Analog Myth in motion with daily track-specific posts t
 - YouTube is used as the destination for existing public videos, not as a duplicate upload lane.
 
 ## Summary
-- Window: 2026-07-04 through 2026-07-11
+- Wave: Afterglow (`afterglow`)
+- Window: 2026-07-12 through 2026-07-19
 - Candidate rows: 16
 - Added rows: 0
 - Updated rows: 16
@@ -28,19 +29,19 @@ Grow Lily Roo by keeping Analog Myth in motion with daily track-specific posts t
 - YouTube Community: manual-only posting is out of scope
 
 ## Rows
-- 2026-07-04T10:15:00-04:00 | X | FP-BRAND-AM-01-13-X | updated
-- 2026-07-04T11:20:00-04:00 | Facebook | FP-BRAND-AM-01-13-FACEBOOK | updated
-- 2026-07-05T10:15:00-04:00 | X | FP-BRAND-AM-02-GIRLS-CAMP-X | updated
-- 2026-07-05T11:20:00-04:00 | Facebook | FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK | updated
-- 2026-07-06T10:15:00-04:00 | X | FP-BRAND-AM-03-ANALOG-MYTH-X | updated
-- 2026-07-06T11:20:00-04:00 | Facebook | FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK | updated
-- 2026-07-07T10:15:00-04:00 | X | FP-BRAND-AM-04-SPILLING-THE-TEA-X | updated
-- 2026-07-07T11:20:00-04:00 | Facebook | FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK | updated
-- 2026-07-08T10:15:00-04:00 | X | FP-BRAND-AM-05-NO-MORTGAGE-X | updated
-- 2026-07-08T11:20:00-04:00 | Facebook | FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK | updated
-- 2026-07-09T10:15:00-04:00 | X | FP-BRAND-AM-06-GUARDS-DOWN-X | updated
-- 2026-07-09T11:20:00-04:00 | Facebook | FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK | updated
-- 2026-07-10T10:15:00-04:00 | X | FP-BRAND-AM-07-SLOW-WALK-X | updated
-- 2026-07-10T11:20:00-04:00 | Facebook | FP-BRAND-AM-07-SLOW-WALK-FACEBOOK | updated
-- 2026-07-11T10:15:00-04:00 | X | FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X | updated
-- 2026-07-11T11:20:00-04:00 | Facebook | FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK | updated
+- 2026-07-12T10:15:00-04:00 | X | FP-BRAND-AM-W2-01-13-X | updated
+- 2026-07-12T11:20:00-04:00 | Facebook | FP-BRAND-AM-W2-01-13-FACEBOOK | updated
+- 2026-07-13T10:15:00-04:00 | X | FP-BRAND-AM-W2-02-GIRLS-CAMP-X | updated
+- 2026-07-13T11:20:00-04:00 | Facebook | FP-BRAND-AM-W2-02-GIRLS-CAMP-FACEBOOK | updated
+- 2026-07-14T10:15:00-04:00 | X | FP-BRAND-AM-W2-03-ANALOG-MYTH-X | updated
+- 2026-07-14T11:20:00-04:00 | Facebook | FP-BRAND-AM-W2-03-ANALOG-MYTH-FACEBOOK | updated
+- 2026-07-15T10:15:00-04:00 | X | FP-BRAND-AM-W2-04-SPILLING-THE-TEA-X | updated
+- 2026-07-15T11:20:00-04:00 | Facebook | FP-BRAND-AM-W2-04-SPILLING-THE-TEA-FACEBOOK | updated
+- 2026-07-16T10:15:00-04:00 | X | FP-BRAND-AM-W2-05-NO-MORTGAGE-X | updated
+- 2026-07-16T11:20:00-04:00 | Facebook | FP-BRAND-AM-W2-05-NO-MORTGAGE-FACEBOOK | updated
+- 2026-07-17T10:15:00-04:00 | X | FP-BRAND-AM-W2-06-GUARDS-DOWN-X | updated
+- 2026-07-17T11:20:00-04:00 | Facebook | FP-BRAND-AM-W2-06-GUARDS-DOWN-FACEBOOK | updated
+- 2026-07-18T10:15:00-04:00 | X | FP-BRAND-AM-W2-07-SLOW-WALK-X | updated
+- 2026-07-18T11:20:00-04:00 | Facebook | FP-BRAND-AM-W2-07-SLOW-WALK-FACEBOOK | updated
+- 2026-07-19T10:15:00-04:00 | X | FP-BRAND-AM-W2-08-THE-POWER-OF-LIGHT-X | updated
+- 2026-07-19T11:20:00-04:00 | Facebook | FP-BRAND-AM-W2-08-THE-POWER-OF-LIGHT-FACEBOOK | updated

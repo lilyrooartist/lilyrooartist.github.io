@@ -1,18 +1,16 @@
 {
-  "generated_at": "2026-07-03T07:11:27.228986Z",
+  "generated_at": "2026-07-03T07:23:54.813201Z",
   "safe_mode": true,
   "summary": {
-    "open_blocker_count": 3,
-    "urgent_count": 1,
+    "open_blocker_count": 2,
+    "urgent_count": 0,
     "owner_counts": {
-      "tod": 3
+      "tod": 2
     },
     "category_counts": {
-      "manual_metrics": 2,
-      "platform_repair": 1
+      "manual_metrics": 2
     },
     "status_counts": {
-      "blocked": 1,
       "needs_values": 2
     },
     "next_resolution_projection": {
@@ -64,19 +62,15 @@
       {
         "id": "unlock-tiktok-platform-repair",
         "phase": "Repair TikTok executor",
-        "status": "blocked",
+        "status": "ready",
         "owner": "tod",
-        "blockers_resolved": 1,
+        "blockers_resolved": 0,
         "unlocks": [
           "Held TikTok approval rows can pass platform-readiness review.",
           "Approved TikTok backlog can become safe to reschedule into upload-draft creation."
         ],
-        "blocked_by": [
-          "TIKTOK_CLIENT_KEY",
-          "TIKTOK_CLIENT_SECRET",
-          "TIKTOK_REFRESH_TOKEN"
-        ],
-        "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+        "blocked_by": [],
+        "preview_command": "",
         "apply_command": "",
         "source_path": "data/platform_repair_status.json"
       },
@@ -90,8 +84,8 @@
           "Approved past-due queue rows get a fresh schedule after executor blockers clear."
         ],
         "blocked_by": [],
-        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24",
-        "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+        "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00-04:00' --spacing-hours 24",
+        "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
         "source_path": "data/backlog_reschedule_preview.json"
       },
       {
@@ -125,31 +119,6 @@
     ]
   },
   "rows": [
-    {
-      "id": "platform-FP-AUTO-264",
-      "blocker_id": "platform-FP-AUTO-264",
-      "title": "Repair TikTok executor",
-      "category": "platform_repair",
-      "owner": "tod",
-      "urgency": "high",
-      "status": "blocked",
-      "platform": "TikTok",
-      "release": "",
-      "evidence": "tiktok_setup_preflight_blocked Local secret source is missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.",
-      "next_step": "Local upload-mode OAuth credentials missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Complete TikTok OAuth setup locally, then push upload-mode secrets and refresh Admin.",
-      "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
-      "apply_command": "",
-      "source_path": "data/platform_repair_status.json",
-      "external_url": "",
-      "guardrail": "Run retry resets only after the external platform repair is verified.",
-      "impact": {
-        "kind": "platform_repair_gate",
-        "blocked_apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
-        "blocked_apply_reasons": [
-          "local_secret_source_missing:TIKTOK_CLIENT_KEY,TIKTOK_CLIENT_SECRET,TIKTOK_REFRESH_TOKEN"
-        ]
-      }
-    },
     {
       "id": "metrics-priority-2",
       "blocker_id": "metrics-priority-2",

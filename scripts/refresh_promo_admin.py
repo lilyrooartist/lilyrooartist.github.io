@@ -212,6 +212,16 @@ FINALIZE_STEPS = [
         "required": True,
     },
     {
+        "name": "build_tiktok_setup_preflight_with_repair_status",
+        "command": ["python3", "scripts/build_tiktok_setup_preflight.py"],
+        "required": True,
+    },
+    {
+        "name": "build_promo_operations_packet_with_latest_preflight",
+        "command": ["python3", "scripts/build_promo_operations_packet.py"],
+        "required": True,
+    },
+    {
         "name": "build_tiktok_repair_runbook",
         "command": ["python3", "scripts/build_tiktok_repair_runbook.py"],
         "required": True,

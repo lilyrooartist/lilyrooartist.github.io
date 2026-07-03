@@ -20,6 +20,7 @@ REPORT_INDEX = ROOT / "admin" / "reports" / "index.html"
 TZ = ZoneInfo("America/New_York")
 MIN_START_DATE = date(2026, 7, 4)
 SUPPORTED_PLATFORMS = ("X", "Facebook")
+CAMPAIGN_ID_PREFIX = "FP-BRAND-AM"
 DISABLED_PLATFORMS = {
     "Instagram": "executor readiness is blocked",
     "TikTok": "executor readiness is blocked",
@@ -55,6 +56,32 @@ TRACK_HOOKS = {
     "Guards Down": "is the moment the armor starts making noise on the floor.",
     "Slow Walk": "refuses the sprint. The song takes its time and still gets there first.",
     "The Power of Light": "closes the room with a switch you can almost hear.",
+}
+
+AFTERGLOW_HOOKS = {
+    "13": "counts down and refuses to become clean math.",
+    "Girls Camp": "leaves the old cabin lights on just long enough for the story to change shape.",
+    "Analog Myth": "keeps the clocks unreliable and the tape warm.",
+    "Spilling the Tea": "turns the receipt drawer into a tiny movie set.",
+    "No Mortgage": "puts the escape plan on the table and lets it glow.",
+    "Guards Down": "is the sound of armor deciding it has had enough.",
+    "Slow Walk": "keeps its own pace and lets the room adjust.",
+    "The Power of Light": "ends like a switch, a dare, and a little weather system.",
+}
+
+WAVES = {
+    "track-moments": {
+        "id_segment": "",
+        "label": "Track moments",
+        "objective": "Grow Lily Roo brand with automated Analog Myth track moments.",
+        "hooks": TRACK_HOOKS,
+    },
+    "afterglow": {
+        "id_segment": "W2",
+        "label": "Afterglow",
+        "objective": "Grow Lily Roo brand with a second automated Analog Myth afterglow pass.",
+        "hooks": AFTERGLOW_HOOKS,
+    },
 }
 
 
@@ -131,9 +158,26 @@ def sentence_case(value: str) -> str:
     return value[0].upper() + value[1:]
 
 
-def post_text(track: dict, platform: str) -> str:
+def post_id_for(track: dict, platform: str, wave: str) -> str:
+    segment = WAVES[wave]["id_segment"]
+    parts = [CAMPAIGN_ID_PREFIX]
+    if segment:
+        parts.append(segment)
+    parts.extend([f"{int(track['track']):02d}", slug(track["title"]).upper(), platform.upper()])
+    return "-".join(parts)
+
+
+def post_text(track: dict, platform: str, wave: str) -> str:
     title = track["title"]
-    hook = TRACK_HOOKS.get(title, "is live in the Lily Roo archive.")
+    hooks = WAVES[wave]["hooks"]
+    hook = hooks.get(title, "is live in the Lily Roo archive.")
+    if wave == "afterglow":
+        if platform == "X":
+            return f"{title} {hook} Analog Myth keeps humming."
+        return (
+            f"Analog Myth afterglow, track {track['track']}: {title} {hook}\n\n"
+            "The album page, Echo Thread play-through, and full playlist are live."
+        )
     if platform == "X":
         return f"{title} {hook} Analog Myth is live."
     return (
@@ -142,17 +186,18 @@ def post_text(track: dict, platform: str) -> str:
     )
 
 
-def build_rows(start: date, approval: str, platforms: list[str]) -> list[dict[str, str]]:
+def build_rows(start: date, approval: str, platforms: list[str], wave: str) -> list[dict[str, str]]:
     playlist = read_json(PLAYLIST, {})
     playlist_url = playlist.get("playlist_url") or "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0"
     tracks = playlist.get("tracks") or []
     rows: list[dict[str, str]] = []
+    hooks = WAVES[wave]["hooks"]
 
     for index, track in enumerate(tracks):
         day = start + timedelta(days=index)
         for platform in platforms:
-            post_id = f"FP-BRAND-AM-{int(track['track']):02d}-{slug(track['title']).upper()}-{platform.upper()}"
-            text = post_text(track, platform)
+            post_id = post_id_for(track, platform, wave)
+            text = post_text(track, platform, wave)
             if platform == "X" and len(text) > 280:
                 raise SystemExit(f"{post_id} text is too long for X: {len(text)}")
             rows.append({
@@ -166,7 +211,7 @@ def build_rows(start: date, approval: str, platforms: list[str]) -> list[dict[st
                 "text": text,
                 "drafts": "||".join([
                     text,
-                    f"Today in the Analog Myth room: {track['title']} {TRACK_HOOKS.get(track['title'], 'is live in the archive.')}",
+                    f"Second pass through the Analog Myth room: {track['title']} {hooks.get(track['title'], 'is live in the archive.')}",
                 ]),
                 "reply_text": reply_text(track, playlist_url),
                 "x_media_key": "",
@@ -202,6 +247,7 @@ def write_report(payload: dict) -> None:
     lines.extend([
         "",
         "## Summary",
+        f"- Wave: {payload['wave_label']} (`{payload['wave']}`)",
         f"- Window: {payload['summary']['start_date']} through {payload['summary']['end_date']}",
         f"- Candidate rows: {payload['summary']['candidate_rows']}",
         f"- Added rows: {payload['summary']['added_rows']}",
@@ -215,7 +261,10 @@ def write_report(payload: dict) -> None:
     for platform, reason in payload["disabled_platforms"].items():
         lines.append(f"- {platform}: {reason}")
     lines.extend(["", "## Rows"])
+    candidate_ids = {row["id"] for row in payload.get("candidate_rows", [])}
     for row in payload["rows"]:
+        if row["id"] not in candidate_ids:
+            continue
         if row["id"] in payload["added_ids"]:
             status = "added"
         elif row["id"] in payload.get("updated_ids", []):
@@ -244,6 +293,7 @@ def sync_report_index() -> None:
 def main() -> int:
     parser = argparse.ArgumentParser(description="Seed the automated Analog Myth brand-growth campaign.")
     parser.add_argument("--start-date", help="First campaign date, YYYY-MM-DD. Defaults to the next day, no earlier than 2026-07-04.")
+    parser.add_argument("--wave", choices=sorted(WAVES), default="track-moments", help="Campaign wave to generate.")
     parser.add_argument("--unapproved", action="store_true", help="Insert rows with approved=no instead of approved=yes.")
     parser.add_argument("--apply", action="store_true", help="Append missing rows to data/scheduled_posts.csv. Default is dry-run.")
     parser.add_argument("--update-existing", action="store_true", help="When applying, refresh existing campaign rows with the generated copy and links.")
@@ -253,7 +303,7 @@ def main() -> int:
     approval = "no" if args.unapproved else "yes"
     ready = ready_platforms()
     campaign_platforms = [platform for platform in SUPPORTED_PLATFORMS if platform in ready]
-    candidate_rows = build_rows(start, approval, campaign_platforms)
+    candidate_rows = build_rows(start, approval, campaign_platforms, args.wave)
     existing_rows, fieldnames = read_queue()
     existing_ids = {row.get("id") for row in existing_rows}
     candidate_by_id = {row["id"]: row for row in candidate_rows}
@@ -267,9 +317,20 @@ def main() -> int:
             disabled_platforms[platform] = "executor readiness is blocked"
     campaign_days = len({row["scheduled_at"].split("T", 1)[0] for row in candidate_rows})
 
+    next_existing_rows = [candidate_by_id.get(row.get("id", ""), row) for row in existing_rows] if args.apply and args.update_existing else list(existing_rows)
+    next_queue_rows = next_existing_rows + (additions if args.apply else [])
+    active_brand_rows = [
+        row for row in next_queue_rows
+        if str(row.get("id") or "").startswith(CAMPAIGN_ID_PREFIX)
+    ]
+    if not active_brand_rows:
+        active_brand_rows = candidate_rows
+
     payload = {
         "generated_at": datetime.now(TZ).isoformat(),
-        "objective": "Grow Lily Roo brand with automated Analog Myth track moments.",
+        "objective": WAVES[args.wave]["objective"],
+        "wave": args.wave,
+        "wave_label": WAVES[args.wave]["label"],
         "source": {
             "scheduled_posts": str(QUEUE.relative_to(ROOT)),
             "playlist": str(PLAYLIST.relative_to(ROOT)),
@@ -300,7 +361,8 @@ def main() -> int:
         "updated_ids": updated_ids,
         "pending_ids": added_ids if not args.apply else [],
         "candidate_ids": [row["id"] for row in candidate_rows],
-        "rows": candidate_rows,
+        "candidate_rows": candidate_rows,
+        "rows": active_brand_rows,
     }
 
     OUT.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
