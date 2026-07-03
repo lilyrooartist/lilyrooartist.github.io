@@ -1,6 +1,6 @@
 # Human Handoff Packet - Lily Roo
 
-Generated: 2026-07-03T10:34:28.337644Z
+Generated: 2026-07-03T11:03:26.315261Z
 
 ## Summary
 - Open handoff tasks: **3**
@@ -21,14 +21,14 @@ Generated: 2026-07-03T10:34:28.337644Z
   - Review runbook: **0** step(s), **0** checklist row(s)
   - Sequence verify: `python3 scripts/refresh_promo_admin.py`
   - Completion evidence: data/scheduled_approval_packet.json should show fewer approval blockers, and data/social_scheduler_dry_run.json should no longer block the approved Instagram row on not_approved.
-  - Next after apply: Run the safe admin refresh, then manually post/log any newly approved YouTube Community row before treating the published log as current.
+  - Next after apply: Run the safe admin refresh, then remove or convert any newly approved manual-only YouTube Community row before treating the published log as current.
   - Guardrail: Human review is still required; blocked review IDs stay excluded from the checked batch.
 - **Review and post manual distribution rows** (`clear`)
   - Owner: `tod`; tasks: **0**; blockers resolved: **0**
   - Sequence verify: `python3 scripts/refresh_promo_admin.py`
   - Completion evidence: data/manual_distribution_packet.json should move approved rows from review_queue toward postable manual distribution, and data/published_log_reconciliation.json should remain gated until public URLs are logged.
-  - Next after apply: Post each approved YouTube Community row manually, then log its public URL with scripts/log_manual_distribution.py.
-  - Guardrail: Manual-only approvals do not auto-post; posting and public URL logging remain separate after review. Post manually first, then log only real public URLs.
+  - Next after apply: Remove or convert each approved manual-only YouTube Community row; only log URLs for historical rows that already have real public post URLs.
+  - Guardrail: Manual-only approvals do not auto-post; posting and public URL logging remain separate after review. Manual posting is not in the active plan; log only real historical public URLs.
 - **Repair blocked platform executor setup** (`blocked`)
   - Owner: `tod`; tasks: **1**; blockers resolved: **1**
   - Preview/check: `python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run`

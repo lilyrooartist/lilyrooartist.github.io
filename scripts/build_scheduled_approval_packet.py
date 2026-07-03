@@ -170,7 +170,7 @@ def approval_docket(checked_rows: list[dict], blocked_rows: list[dict], summary:
         "Use --checked-batch so held rows with failed checks stay excluded.",
     ]
     if any(row.get("manual_dispatch") for row in checked_rows + blocked_rows):
-        guardrails.append("Manual-dispatch rows still need manual posting and public URL logging after approval.")
+        guardrails.append("Manual-dispatch rows must be removed or converted to API-backed posts after approval; manual posting is not in the active plan.")
     return {
         "status": "ready_for_review" if checked_rows else "blocked",
         "ready_count": len(checked_rows),
@@ -194,7 +194,7 @@ def decision_manifest_row(row: dict, *, decision: str) -> dict:
         else "Repair failed checks before including this row in an approval batch."
     )
     if decision == "ready_to_approve" and row.get("manual_dispatch"):
-        next_step = "Apply through --checked-batch, then post manually and log the public URL."
+        next_step = "Apply through --checked-batch, then remove or convert the manual-only row to an API-backed post."
     return {
         "id": row.get("id") or "",
         "decision": decision,
@@ -348,7 +348,7 @@ def approval_review_checklist_row(row: dict) -> dict:
         "checklist": checks,
         "preview_command": row.get("approval_preview_command") or "",
         "post_approval_next_step": (
-            "Approve with the checked batch, then post manually and log the public URL."
+            "Approve with the checked batch, then remove or convert the manual-only row to an API-backed post."
             if row.get("manual_dispatch")
             else "Approve with the checked batch; executor can retry once approval is visible."
         ),

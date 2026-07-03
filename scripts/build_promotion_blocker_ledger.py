@@ -204,11 +204,11 @@ def add_manual_distribution(rows: list[dict]) -> None:
         approved = item.get("approved") == "yes"
         preview_command = item.get("log_preview_command") if approved else item.get("approval_preview_command")
         apply_command = item.get("log_apply_command") if approved else item.get("approval_command")
-        next_step = "Post manually, then log the public URL so admin status can stop treating the row as pending."
+        next_step = "Remove or convert the manual-only row so admin status can stop treating it as pending."
         if not approved:
-            next_step = "Review and approve the copy first, then post manually and log the public URL."
+            next_step = "Review the copy first, then remove or convert the manual-only row to an API-backed post."
         log_command = item.get("log_apply_command") or ""
-        guardrail = "Manual posting happens outside this repo; only log the URL after the post is live."
+        guardrail = "Manual posting is not in the active plan; only log historical URLs that are already live."
         if log_command and not approved:
             guardrail = f"{guardrail} URL logging command after posting: {log_command}"
         rows.append(row(

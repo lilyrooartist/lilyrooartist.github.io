@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-03T10:34:28.337644Z",
+  "generated_at": "2026-07-03T11:03:26.315261Z",
   "safe_mode": true,
   "source": {
     "promotion_blocker_ledger": "data/promotion_blocker_ledger.json",
@@ -108,8 +108,8 @@
             "Approved past-due queue rows get a fresh schedule after executor blockers clear."
           ],
           "blocked_by": [],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24",
-          "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00-04:00' --spacing-hours 24",
+          "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
           "source_path": "data/backlog_reschedule_preview.json"
         },
         {
@@ -358,7 +358,7 @@
           }
         ],
         "completion_evidence": "data/scheduled_approval_packet.json should show fewer approval blockers, and data/social_scheduler_dry_run.json should no longer block the approved Instagram row on not_approved.",
-        "next_step_after_apply": "Run the safe admin refresh, then manually post/log any newly approved YouTube Community row before treating the published log as current.",
+        "next_step_after_apply": "Run the safe admin refresh, then remove or convert any newly approved manual-only YouTube Community row before treating the published log as current.",
         "guardrail": "Human review is still required; blocked review IDs stay excluded from the checked batch."
       },
       {
@@ -382,8 +382,8 @@
           }
         ],
         "completion_evidence": "data/manual_distribution_packet.json should move approved rows from review_queue toward postable manual distribution, and data/published_log_reconciliation.json should remain gated until public URLs are logged.",
-        "next_step_after_apply": "Post each approved YouTube Community row manually, then log its public URL with scripts/log_manual_distribution.py.",
-        "guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review. Post manually first, then log only real public URLs."
+        "next_step_after_apply": "Remove or convert each approved manual-only YouTube Community row; only log URLs for historical rows that already have real public post URLs.",
+        "guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review. Manual posting is not in the active plan; log only real historical public URLs."
       },
       {
         "id": "platform-repair-gate",
@@ -631,7 +631,7 @@
         "public_posting_approved": false,
         "preflight_status": "blocked",
         "preflight_blocked_count": 1,
-        "ready_to_push_worker_secrets": false,
+        "ready_to_push_worker_secrets": true,
         "ready_to_upload_drafts": true,
         "ready_to_post_publicly": false,
         "preflight_report": "admin/reports/tiktok-setup-preflight.md",

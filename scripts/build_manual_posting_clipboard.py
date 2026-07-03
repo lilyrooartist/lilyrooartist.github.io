@@ -191,27 +191,21 @@ def post_card(row: dict) -> dict:
             "result_collection_trigger": "Log the public URL, then use admin/reports/experiment-result-clipboard.md for the first 24-hour measurement.",
             "first_measurement_due_after_hours": FIRST_MEASUREMENT_DUE_AFTER_HOURS,
             "operator_sequence": [
-                "Open the YouTube Community surface.",
-                "Paste the copy from copy_source.",
-                "Attach the asset from asset_source.",
-                "Publish the Community post.",
-                "Copy the real public Community post URL.",
-                "Run the preview command with the real URL.",
-                "Run the apply command after the preview passes.",
+                "Remove or convert this manual-only row to an API-backed post.",
+                "Do not publish it through YouTube Community manually.",
+                "Only use URL logging for historical rows that already have real public post URLs.",
             ],
         },
         "after_posting_checklist": [
-            "Copy the real public YouTube Community post URL.",
-            f"Run the log preview command: {log_preview_command}",
-            f"Run the log apply command after preview passes: {log_apply_command}",
-            "Refresh Admin and confirm this card moves out of the manual posting queue.",
+            "Remove or convert the manual-only row.",
+            "Do not run manual posting as an active promotion step.",
+            f"Historical URL preview only: {log_preview_command}",
+            f"Historical URL apply only after preview passes: {log_apply_command}",
             "Open the experiment result clipboard 24 hours after URL logging for the first measurement.",
         ],
         "completion_evidence": [
-            "A real public YouTube Community post URL exists.",
-            "The URL is logged with scripts/log_manual_distribution.py.",
-            "admin/content/Published_Log.csv contains this manual_distribution_id.",
-            "The experiment result clipboard can request first measurement values at the 24-hour readout for this post.",
+            "The row has been removed from the active manual-only plan or converted to an API-backed channel.",
+            "Historical URL logging is limited to rows that already have real public URLs.",
         ],
     }
 
@@ -281,19 +275,15 @@ def build_session_manifest(cards: list[dict], summary: dict) -> dict:
         "first_measurement_due_after_hours": FIRST_MEASUREMENT_DUE_AFTER_HOURS,
         "rows": rows,
         "posting_sequence": [
-            "Open the YouTube Community surface once.",
-            "Post each session row in sequence using its copy_source and asset_source.",
-            "After each publish, copy the real public URL into the URL worksheet.",
-            "Run the batch preview command; use partial apply if only some rows have public URLs.",
-            "After logging, collect the first 24-hour metrics from the result handoff report.",
+            "Remove or convert each manual-only row before promotion continues.",
+            "Do not publish YouTube Community posts manually.",
+            "Only log historical rows that already have real public URLs.",
         ],
         "completion_evidence": [
-            "Each session row has a real public YouTube Community URL.",
-            "The URL worksheet has no remaining blank public_url cells for these IDs.",
-            "Published_Log.csv contains each session ID with a manual_distribution_id note.",
-            "The experiment result clipboard lists the logged posts for first 24-hour measurement collection.",
+            "Each manual-only row is removed from the active plan or converted to an API-backed channel.",
+            "No blank public_url worksheet cells are treated as active promotion work.",
         ],
-        "guardrail": "Do not mark the session complete until every row has a real public URL logged.",
+        "guardrail": "Manual-only YouTube Community posting is not part of the active plan.",
     }
 
 
@@ -328,7 +318,7 @@ def first_url_acceleration(cards: list[dict], summary: dict) -> dict:
         "measurement_preview_command": "python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run",
         "first_measurement_due_after_hours": FIRST_MEASUREMENT_DUE_AFTER_HOURS,
         "why": "Logging the first public URL immediately lets that post enter the 24-hour result-collection queue without waiting for the full batch.",
-        "next_action": "Post the first card, paste its real public URL into the worksheet, run the preview, then apply with --allow-partial.",
+        "next_action": "Remove or convert the first manual-only card; manual posting is not in the active plan.",
         "guardrail": "Use only a real public YouTube Community post URL; never apply PUBLIC_URL or blank worksheet rows.",
     }
 
@@ -373,21 +363,13 @@ def first_post_runbook(cards: list[dict], summary: dict) -> dict:
         "first_measurement_due_after_hours": FIRST_MEASUREMENT_DUE_AFTER_HOURS,
         "first_measurement_trigger": "after real public URL is logged",
         "post_completion_checklist": [
-            "Open the YouTube Community surface.",
-            "Paste the copy exactly from copy_source.",
-            "Attach the listed asset_source or asset_url.",
-            "Publish the Community post manually.",
-            "Copy the real public YouTube Community post URL.",
-            "Run the preview command with the real URL.",
-            "Run the apply command only after preview confirms the real URL.",
-            "Confirm Published_Log.csv contains this manual distribution ID.",
-            "Collect first visible metrics 24 hours after the public URL is logged.",
+            "Remove or convert the manual-only card.",
+            "Do not publish the card through YouTube Community manually.",
+            "Use historical URL logging only for rows that already have a real public post URL.",
         ],
         "completion_evidence": [
-            "A real public YouTube Community post URL exists.",
-            "The URL has replaced PUBLIC_URL in the preview/apply command or worksheet.",
-            "Published_Log.csv contains this manual_distribution_id.",
-            "The experiment result clipboard lists this post for its 24-hour measurement.",
+            "The manual-only row is removed from the active plan or converted to an API-backed channel.",
+            "No manual posting action remains in the current promotion queue.",
         ],
         "guardrail": "Do not run an apply command with PUBLIC_URL, a blank URL, or a private/non-public post URL.",
     }
@@ -500,7 +482,8 @@ def build_payload() -> dict:
         for row in manual_rows
         if (row.get("manual_posting_packet") or {}).get("postable_now") and not row.get("logged")
     ]
-    cards = [post_card(row) for row in postable_rows]
+    suppressed_postable_count = len(postable_rows)
+    cards: list[dict] = []
     paste_text_files = [card.get("paste_text_path") for card in cards if card.get("paste_text_path")]
     url_template_path = completion.get("url_template_path") or ""
     partial_apply_command = (
@@ -513,6 +496,7 @@ def build_payload() -> dict:
         "posting_surface": (completion.get("posting_surface") or "YouTube Studio Community") if cards else "",
         "public_community_url": (completion.get("public_community_url") or distribution.get("public_community_url") or "") if cards else "",
         "postable_count": len(cards),
+        "suppressed_postable_count": suppressed_postable_count,
         "waiting_public_url_count": (completion.get("waiting_public_url_count") or len(cards)) if cards else 0,
         "pending_log_ids": (completion.get("pending_log_ids") or [card["id"] for card in cards]) if cards else [],
         "posting_bundle_count": sum(1 for card in cards if card.get("posting_bundle")),
@@ -531,8 +515,8 @@ def build_payload() -> dict:
         "result_handoff_report": "admin/reports/experiment-result-clipboard.md",
         "first_measurement_due_after_hours": FIRST_MEASUREMENT_DUE_AFTER_HOURS,
         "next_action": (
-            "Post each card in YouTube Community, copy the real public URL, then log it."
-            if cards
+            "Manual-only YouTube Community rows are suppressed; remove them or convert them to API-backed posts."
+            if suppressed_postable_count
             else "No approved manual posts are currently waiting."
         ),
     }
@@ -576,16 +560,9 @@ def build_payload() -> dict:
         "session_manifest": build_session_manifest(cards, summary),
         "post_cards": cards,
         "operator_steps": [
-            "Open the YouTube Community surface.",
-            "For each card, paste the text exactly as shown.",
-            "Attach the listed asset URL or download/open the local asset path if needed.",
-            "Publish manually in YouTube Studio Community.",
-            "Copy the real public post URL.",
-            "Use the first-post runbook to preview and apply the first real public URL.",
-            "Run the preview logging command with the real URL, then run the apply command.",
-            "After the first public URL exists, use the first-url acceleration command so that post can enter result collection immediately.",
-            "Or rerun the public URL reconciliation command after posting to auto-detect confident public URLs.",
-            "If only one public URL is ready, use the partial batch apply command so that post can start accumulating measurable evidence immediately.",
+            "Remove or convert manual-only rows to API-backed posts.",
+            "Do not publish YouTube Community posts manually.",
+            "Use URL logging only for historical rows that already have real public URLs.",
         ] if cards else [],
         "guardrails": [
             "This clipboard does not approve, schedule, publish, or log posts.",

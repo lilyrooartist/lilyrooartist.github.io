@@ -147,11 +147,11 @@ def manual_distribution_tasks(packet: dict) -> list[dict]:
         is_postable = bool(posting_packet.get("postable_now"))
         preview_command = row.get("approval_preview_command") or ""
         apply_command = row.get("approval_command") or ""
-        detail = "Review the packaged copy, approve if appropriate, post manually, then log the public URL."
+        detail = "Review the packaged copy, then remove or convert the manual-only row to an API-backed post."
         if is_postable:
             preview_command = row.get("log_preview_command") or ""
             apply_command = ""
-            detail = "Post manually in YouTube Studio Community, then log the real public URL before marking distribution complete."
+            detail = "Manual-only YouTube Community posting is out of scope; remove or convert this row before marking distribution complete."
         links = []
         if row.get("asset_download_url"):
             links.append({"label": "asset", "url": row.get("asset_download_url")})
@@ -519,7 +519,7 @@ def build_action_docket(tasks: list[dict], blocker_summary: dict, approval_runwa
             "apply_command": approval_apply_command,
             "command_sequence": command_sequence(approval_preview_command, approval_apply_command, "python3 scripts/refresh_promo_admin.py"),
             "completion_evidence": "data/scheduled_approval_packet.json should show fewer approval blockers, and data/social_scheduler_dry_run.json should no longer block the approved Instagram row on not_approved.",
-            "next_step_after_apply": "Run the safe admin refresh, then manually post/log any newly approved YouTube Community row before treating the published log as current.",
+            "next_step_after_apply": "Run the safe admin refresh, then remove or convert any newly approved manual-only YouTube Community row before treating the published log as current.",
             "guardrail": approval.get("guardrail") or projection.get("guardrail") or "",
         },
         {
@@ -537,8 +537,8 @@ def build_action_docket(tasks: list[dict], blocker_summary: dict, approval_runwa
             "apply_command": manual_apply_command,
             "command_sequence": command_sequence(manual_preview_command, manual_apply_command, "python3 scripts/refresh_promo_admin.py"),
             "completion_evidence": manual_completion_evidence,
-            "next_step_after_apply": "Post each approved YouTube Community row manually, then log its public URL with scripts/log_manual_distribution.py.",
-            "guardrail": f"{manual_guardrail} Post manually first, then log only real public URLs.",
+            "next_step_after_apply": "Remove or convert each approved manual-only YouTube Community row; only log URLs for historical rows that already have real public post URLs.",
+            "guardrail": f"{manual_guardrail} Manual posting is not in the active plan; log only real historical public URLs.",
         },
         {
             "id": "platform-repair-gate",

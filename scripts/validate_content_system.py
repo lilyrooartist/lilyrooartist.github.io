@@ -1929,8 +1929,8 @@ def validate_generated_outputs(failures):
                     and first_runbook.get("first_measurement_due_after_hours") == summary.get("first_measurement_due_after_hours")
                     and "real public URL" in (first_runbook.get("worksheet_update_instruction") or "")
                     and "PUBLIC_URL" in (first_runbook.get("guardrail") or "")
-                    and any("Publish the Community post manually" in item for item in first_runbook.get("post_completion_checklist") or [])
-                    and any("Published_Log.csv" in item for item in first_runbook.get("completion_evidence") or [])
+                    and any("manual-only card" in item or "manual-only row" in item for item in first_runbook.get("post_completion_checklist") or [])
+                    and any("manual-only row" in item for item in first_runbook.get("completion_evidence") or [])
                 )
             )
             and first_url.get("status") in {"ready_after_first_public_url", "clear"}
@@ -1945,9 +1945,9 @@ def validate_generated_outputs(failures):
                     and "real public YouTube Community post URL" in (first_url.get("guardrail") or "")
                 )
             )
-            and any("Open the YouTube Community surface once" in item for item in session.get("posting_sequence") or [])
-            and any("Published_Log.csv" in item for item in session.get("completion_evidence") or [])
-            and "real public URL" in (session.get("guardrail") or "")
+            and any("manual-only row" in item for item in session.get("posting_sequence") or [])
+            and any("manual-only row" in item for item in session.get("completion_evidence") or [])
+            and "Manual-only YouTube Community posting" in (session.get("guardrail") or "")
             and all(row.get("sequence") and row.get("id") and row.get("copy_source") and row.get("asset_source") and row.get("public_url_required") is True and row.get("first_measurement_due_after_hours") == 24 and "log_manual_distribution.py" in (row.get("preview_command_template") or "") and "--apply --refresh-admin" in (row.get("apply_command_template") or "") for row in session_rows)
             and lifecycle.get("status") in {"active", "complete"}
             and lifecycle.get("total_count") == len(manual_lifecycle_rows) == len(lifecycle_rows)
@@ -1986,7 +1986,7 @@ def validate_generated_outputs(failures):
                 and (card.get("posting_bundle") or {}).get("first_measurement_due_after_hours") == 24
                 and "log_manual_distribution.py" in ((card.get("posting_bundle") or {}).get("preview_command_template") or "")
                 and "--apply --refresh-admin" in ((card.get("posting_bundle") or {}).get("apply_command_template") or "")
-                and any("real public Community post URL" in item for item in (card.get("posting_bundle") or {}).get("operator_sequence") or [])
+                and any("manual-only row" in item for item in (card.get("posting_bundle") or {}).get("operator_sequence") or [])
                 and any("experiment result clipboard" in item for item in card.get("after_posting_checklist") or [])
                 and any("first measurement" in item for item in card.get("completion_evidence") or [])
                 for card in cards
@@ -4588,8 +4588,8 @@ def validate_admin_execution_feedback(failures):
         "published log reconciliation shown": "Published log reconciliation" in text and "Worker export" in text and "Manual Logging" in text,
         "manual approval docket shown": "Manual approval docket:" in text and "Preview manual approvals:" in text,
         "manual posting clipboard shown": 'id="manual-posting-clipboard"' in text and "renderManualPostingClipboard" in text and "manual_posting_clipboard.json" in text,
-        "manual posting cards actionable": "Manual posting clipboard is ready" in text and "Session manifest:" in text and "Session rows:" in text and "Session steps:" in text and "Open community surface" in text and "Paste files:" in text and "Paste file:" in text and "manual-posting-cards" in text and "Posting bundle:" in text and "Bundle steps:" in text and "Result trigger:" in text and "Preview URL log after posting" in text and "Partial batch apply after first URL" in text and "Reconcile public URLs after posting" in text and "Copy URL reconciliation" in text and "Open URL reconciliation report" in text and "Copy post text" in text and "data-copy-text" in text and "manual-url-input" in text and "data-copy-template" in text and "Copy preview with URL" in text and "manualCommunityUrlStatus" in text and "Need /post/ URL" in text and "youtube.com/post/..." in text and "Copy apply with URL" in text and "tracking_lifecycle" in text and "Post-to-result tracker" in text and "Primary gap:" in text,
-        "today manual posting action directs to clipboard": "nextAction.kind==='manual_distribution'" in text and "Post ${postableManualCount} YouTube Community card" in text and "Cards are approved and ready" in text and "Open manual posting clipboard" in text and "Open URL worksheet" in text,
+        "manual posting cards suppressed": "Manual-only clipboard is suppressed" in text and "Manual-only surface withheld from active promotion." in text and "manual-posting-cards" in text and "tracking_lifecycle" in text,
+        "today manual posting action directs to conversion": "nextAction.kind==='manual_distribution'" in text and "manual-only row" in text and "manual-only YouTube Community posting is out of scope" in text and "Open manual posting clipboard" in text and "Open URL worksheet" in text,
         "today first manual card is actionable": "firstManualPost=clipboardSummary.next_post_now" in text and "Copy first post text" in text and "Open first asset" in text and "Copy URL preview" in text and "Copy URL apply" in text,
         "manual URL copy template avoids double quoting": "template.includes(\"'PUBLIC_URL'\")" in text and "template.replaceAll(\"'PUBLIC_URL'\", shellQuote(url))" in text,
         "manual posting source embedded": "embedded-manual-posting-clipboard" in text and "embedded-manual-posting-clipboard-report" in text,

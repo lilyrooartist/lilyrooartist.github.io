@@ -1,6 +1,6 @@
 # Manual Distribution Packet - Lily Roo
 
-Generated: 2026-07-03T10:34:27.411703Z
+Generated: 2026-07-03T11:03:25.344237Z
 
 ## Summary
 - Manual-ready posts: **0**
@@ -38,17 +38,16 @@ Generated: 2026-07-03T10:34:27.411703Z
 - Operator checklist:
   - Review the packaged copy, asset, and destination link evidence.
   - Run the approval preview command before applying any manual approval.
-  - Post approved rows manually in YouTube Studio Community.
-  - Copy the real individual public Community post URL after posting; it should look like https://www.youtube.com/post/...
-  - Paste public URLs into data/manual_distribution_url_template.csv for batch logging.
-  - Run the log preview command with the real URL, then apply with --apply --refresh-admin.
+  - Remove or convert approved manual-only rows to API-backed posts before promotion continues.
+  - Do not post YouTube Community rows manually.
+  - Only keep URL logging for historical rows that already have real public post URLs.
 - Completion evidence:
   - data/manual_distribution_packet.json shows the row as logged or no longer pending.
   - data/published_log_reconciliation.json no longer reports the row as an unlogged manual post.
   - admin/content/Published_Log.csv contains the real public URL and manual_distribution_id note.
   - data/promo_engine_status.json and lilyroo.com/admin reflect the updated manual distribution counts.
 - Guardrails:
-  - Manual-only approvals do not auto-post.
+  - Manual-only approvals do not auto-post and are not part of the active plan.
   - Do not log a placeholder URL.
   - For YouTube Community rows, log an individual https://www.youtube.com/post/... URL, not the channel, playlist, video, or Community tab URL.
   - Do not apply the URL worksheet while any public_url cell is blank.

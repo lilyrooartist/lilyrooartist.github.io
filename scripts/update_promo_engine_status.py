@@ -262,10 +262,10 @@ def published_log_gated_manual(row: dict, social_executions: dict, manual_distri
     updated["public_community_url"] = manual_summary.get("public_community_url") or distribution_docket.get("public_community_url") or ""
     updated["evidence"] = (
         f"{row.get('evidence') or 'Published log is older than the freshness window.'} "
-        f"No unlogged Worker posts are available; {unlogged_manual} manual row(s) are gated by review/posting before URL logging."
+        f"No unlogged Worker posts are available; {unlogged_manual} manual-only row(s) need removal or API-backed conversion before URL logging."
     )
     updated["refresh_command"] = (
-        "Review and approve the manual YouTube Community rows, post them manually, then log real public URLs; "
+        "Remove or convert manual-only YouTube Community rows before promotion continues; "
         "Worker export has no unlogged posted records right now."
     )
     return updated
@@ -2300,15 +2300,15 @@ def manual_distribution_next_action(distribution: dict, reconciliation: dict, cl
     gate = reconciliation.get("next_gate") or distribution.get("status") or "manual_distribution"
     if review_count:
         return (
-            f"Resolve manual distribution gate: {review_count} YouTube Community row(s) need review "
-            f"({gate}); preview with {preview}."
+            f"Resolve manual distribution gate: {review_count} manual-only YouTube Community row(s) "
+            f"need removal or conversion ({gate}); preview with {preview}."
         )
     if postable_count:
         clipboard_path = (clipboard or {}).get("report_path") or (clipboard or {}).get("source_path") or ""
         suffix = f" Use {clipboard_path}." if clipboard_path else ""
         return (
-            f"Resolve manual distribution gate: {postable_count} approved YouTube Community row(s) need manual posting "
-            f"and public URL logging; open {distribution.get('public_community_url') or 'the YouTube Community page'}."
+            f"Resolve manual distribution gate: {postable_count} approved manual-only YouTube Community row(s) "
+            "need removal or conversion; manual posting is not in the active plan."
             + suffix
         )
     return (
