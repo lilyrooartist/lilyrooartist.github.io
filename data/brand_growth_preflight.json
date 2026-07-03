@@ -1,0 +1,197 @@
+{
+  "generated_at": "2026-07-03T07:41:59.739009Z",
+  "safe_mode": true,
+  "source": {
+    "future_posts": "admin/future-posts.json",
+    "brand_growth_readout": "data/brand_growth_readout.json",
+    "scheduler_endpoint": "https://www.lilyroo.com/api/social/scheduler/dry-run",
+    "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/c4c8266d8fbc7e0b95237f5083e109e2254e42a0/admin/future-posts.json"
+  },
+  "summary": {
+    "status": "ready",
+    "next_window_date": "2026-07-04",
+    "scheduled_time": "2026-07-04T15:21:00Z",
+    "expected_post_count": 2,
+    "expected_post_ids": [
+      "FP-BRAND-AM-01-13-X",
+      "FP-BRAND-AM-01-13-FACEBOOK"
+    ],
+    "scheduler_http_status": 200,
+    "scheduler_auth_method": "bearer",
+    "scheduler_due_count": 2,
+    "scheduler_would_post_count": 2,
+    "scheduler_blocked_count": 0,
+    "missing_due_ids": [],
+    "unexpected_due_ids": [],
+    "blocked_ids": [],
+    "link_check_count": 10,
+    "link_ok_count": 10,
+    "link_failed_count": 0,
+    "next_proof_due_at": "2026-07-04T16:05:00Z",
+    "next_measurement_due_at": "2026-07-05T15:20:00Z",
+    "error": ""
+  },
+  "scheduler_summary": {
+    "due_count": 2,
+    "result_count": 2,
+    "would_post_count": 2,
+    "blocked_count": 0,
+    "status_counts": {
+      "would_post": 2
+    },
+    "platform_counts": {
+      "Facebook": 1,
+      "X": 1
+    },
+    "would_post": [
+      {
+        "post_id": "FP-BRAND-AM-01-13-X",
+        "platform": "X",
+        "status": "would_post",
+        "reason": "",
+        "post_type": "image",
+        "attempts": 0,
+        "updated_at": "",
+        "source": "",
+        "error_summary": ""
+      },
+      {
+        "post_id": "FP-BRAND-AM-01-13-FACEBOOK",
+        "platform": "Facebook",
+        "status": "would_post",
+        "reason": "",
+        "post_type": "image",
+        "attempts": 0,
+        "updated_at": "",
+        "source": "",
+        "error_summary": ""
+      }
+    ],
+    "blocked": []
+  },
+  "link_checks": [
+    {
+      "label": "FP-BRAND-AM-01-13-X imagery_url",
+      "url": "https://www.lilyroo.com/assets/albums/analog-myth/art/01-13.jpg",
+      "ok": true,
+      "status": 200,
+      "final_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/01-13.jpg",
+      "content_type": "image/jpeg",
+      "content_length": "199999",
+      "error": ""
+    },
+    {
+      "label": "FP-BRAND-AM-01-13-X Analog Myth",
+      "url": "https://www.lilyroo.com/analog-myth.html",
+      "ok": true,
+      "status": 200,
+      "final_url": "https://www.lilyroo.com/analog-myth.html",
+      "content_type": "text/html; charset=utf-8",
+      "content_length": "",
+      "error": ""
+    },
+    {
+      "label": "FP-BRAND-AM-01-13-X Echo Thread",
+      "url": "https://www.lilyroo.com/podcasts/analog-myth.html",
+      "ok": true,
+      "status": 200,
+      "final_url": "https://www.lilyroo.com/podcasts/analog-myth.html",
+      "content_type": "text/html; charset=utf-8",
+      "content_length": "",
+      "error": ""
+    },
+    {
+      "label": "FP-BRAND-AM-01-13-X Track",
+      "url": "https://youtu.be/XL5VOVxwTw4",
+      "ok": true,
+      "status": 200,
+      "final_url": "https://www.youtube.com/watch?v=XL5VOVxwTw4&feature=youtu.be",
+      "content_type": "text/html; charset=utf-8",
+      "content_length": "",
+      "error": ""
+    },
+    {
+      "label": "FP-BRAND-AM-01-13-X Playlist",
+      "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+      "ok": true,
+      "status": 200,
+      "final_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+      "content_type": "text/html; charset=utf-8",
+      "content_length": "0",
+      "error": ""
+    },
+    {
+      "label": "FP-BRAND-AM-01-13-FACEBOOK imagery_url",
+      "url": "https://www.lilyroo.com/assets/albums/analog-myth/art/01-13.jpg",
+      "ok": true,
+      "status": 200,
+      "final_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/01-13.jpg",
+      "content_type": "image/jpeg",
+      "content_length": "199999",
+      "error": ""
+    },
+    {
+      "label": "FP-BRAND-AM-01-13-FACEBOOK Analog Myth",
+      "url": "https://www.lilyroo.com/analog-myth.html",
+      "ok": true,
+      "status": 200,
+      "final_url": "https://www.lilyroo.com/analog-myth.html",
+      "content_type": "text/html; charset=utf-8",
+      "content_length": "",
+      "error": ""
+    },
+    {
+      "label": "FP-BRAND-AM-01-13-FACEBOOK Echo Thread",
+      "url": "https://www.lilyroo.com/podcasts/analog-myth.html",
+      "ok": true,
+      "status": 200,
+      "final_url": "https://www.lilyroo.com/podcasts/analog-myth.html",
+      "content_type": "text/html; charset=utf-8",
+      "content_length": "",
+      "error": ""
+    },
+    {
+      "label": "FP-BRAND-AM-01-13-FACEBOOK Track",
+      "url": "https://youtu.be/XL5VOVxwTw4",
+      "ok": true,
+      "status": 200,
+      "final_url": "https://www.youtube.com/watch?v=XL5VOVxwTw4&feature=youtu.be",
+      "content_type": "text/html; charset=utf-8",
+      "content_length": "",
+      "error": ""
+    },
+    {
+      "label": "FP-BRAND-AM-01-13-FACEBOOK Playlist",
+      "url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+      "ok": true,
+      "status": 200,
+      "final_url": "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+      "content_type": "text/html; charset=utf-8",
+      "content_length": "0",
+      "error": ""
+    }
+  ],
+  "next_window_posts": [
+    {
+      "id": "FP-BRAND-AM-01-13-X",
+      "platform": "X",
+      "scheduled_at": "2026-07-04T10:15:00-04:00",
+      "execution_mode": "auto",
+      "post_type": "image",
+      "text": "13 opens like a calendar with a loose wire. Odd numbers, warm tape, big signal. Analog Myth is live."
+    },
+    {
+      "id": "FP-BRAND-AM-01-13-FACEBOOK",
+      "platform": "Facebook",
+      "scheduled_at": "2026-07-04T11:20:00-04:00",
+      "execution_mode": "auto",
+      "post_type": "image",
+      "text": "Analog Myth track 1: 13 opens like a calendar with a loose wire. Odd numbers, warm tape, big signal.\n\nThe album page, Echo Thread play-through, and YouTube playlist are up."
+    }
+  ],
+  "guardrails": [
+    "Preflight is read-only; it calls the scheduler dry-run endpoint and HEAD-checks public URLs.",
+    "It does not publish, approve, mutate, or import metrics.",
+    "A ready preflight proves only that the next window is executable at the simulated due time."
+  ]
+}

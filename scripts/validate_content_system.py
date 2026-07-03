@@ -60,6 +60,7 @@ PROMO_QUEUE_PLAN = ROOT / "data" / "promo_queue_plan.json"
 EXPERIMENT_RESULT_COLLECTION = ROOT / "data" / "experiment_result_collection_packet.json"
 EXPERIMENT_RESULT_CLIPBOARD = ROOT / "data" / "experiment_result_clipboard.json"
 EXPERIMENT_PUBLISH_RUNWAY = ROOT / "data" / "experiment_publish_runway.json"
+BRAND_GROWTH_PREFLIGHT = ROOT / "data" / "brand_growth_preflight.json"
 TWELVE_DOLLARS_REMASTER = ROOT / "data" / "youtube_twelve_dollars_remaster_manifest.json"
 TWELVE_DOLLARS_PLAYLIST = ROOT / "data" / "youtube_twelve_dollars_playlist.json"
 PROMO_QUEUE_APPLY = ROOT / "scripts" / "apply_promo_queue_plan.py"
@@ -86,6 +87,7 @@ EXPERIMENT_RESULT_COLLECTION_SCRIPT = ROOT / "scripts" / "build_experiment_resul
 EXPERIMENT_RESULT_CLIPBOARD_SCRIPT = ROOT / "scripts" / "build_experiment_result_clipboard.py"
 EXPERIMENT_PUBLISH_RUNWAY_SCRIPT = ROOT / "scripts" / "build_experiment_publish_runway.py"
 EXPERIMENT_RESULT_UPDATER = ROOT / "scripts" / "update_experiment_results.py"
+BRAND_GROWTH_PREFLIGHT_SCRIPT = ROOT / "scripts" / "build_brand_growth_preflight.py"
 TIKTOK_SETUP_PREFLIGHT_SCRIPT = ROOT / "scripts" / "build_tiktok_setup_preflight.py"
 TIKTOK_REPAIR_RUNBOOK_SCRIPT = ROOT / "scripts" / "build_tiktok_repair_runbook.py"
 TIKTOK_PUBLIC_POSTING_APPROVAL_SCRIPT = ROOT / "scripts" / "set_tiktok_public_posting_approval.py"
@@ -128,6 +130,7 @@ BACKLOG_RESCHEDULE_PREVIEW_REPORT = ROOT / "admin" / "reports" / "backlog-resche
 MANUAL_METRIC_REPORT = ROOT / "admin" / "reports" / "manual-metric-collection.md"
 EXPERIMENT_RESULT_REPORT = ROOT / "admin" / "reports" / "experiment-result-collection.md"
 EXPERIMENT_RESULT_CLIPBOARD_REPORT = ROOT / "admin" / "reports" / "experiment-result-clipboard.md"
+BRAND_GROWTH_PREFLIGHT_REPORT = ROOT / "admin" / "reports" / "brand-growth-preflight.md"
 INDEX = CONTENT / "content_index.json"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
 
@@ -178,6 +181,7 @@ GENERATED_REFRESH_PATHS = {
     "admin/index.html",
     "data/approval_runway.json",
     "data/backlog_reschedule_preview.json",
+    "data/brand_growth_preflight.json",
     "data/executor_readiness_snapshot.json",
     "data/experiment_result_collection_packet.json",
     "data/experiment_result_clipboard.json",
@@ -346,6 +350,28 @@ def validate_generated_outputs(failures):
             fail("future-posts.json has no posts", failures)
     else:
         fail("future-posts.json missing", failures)
+    if BRAND_GROWTH_PREFLIGHT.exists():
+        preflight = json.loads(BRAND_GROWTH_PREFLIGHT.read_text(encoding="utf-8"))
+        summary = preflight.get("summary") or {}
+        expected_count = int(summary.get("expected_post_count") or 0)
+        if (
+            preflight.get("safe_mode") is True
+            and summary.get("status") == "ready"
+            and expected_count > 0
+            and summary.get("scheduler_http_status") == 200
+            and int(summary.get("scheduler_due_count") or 0) == expected_count
+            and int(summary.get("scheduler_would_post_count") or 0) == expected_count
+            and int(summary.get("scheduler_blocked_count") or 0) == 0
+            and int(summary.get("link_failed_count") or 0) == 0
+            and not summary.get("missing_due_ids")
+            and not summary.get("unexpected_due_ids")
+            and BRAND_GROWTH_PREFLIGHT_REPORT.exists()
+        ):
+            ok("brand growth preflight proves next campaign window is ready")
+        else:
+            fail("brand_growth_preflight.json does not prove a ready next campaign window", failures)
+    else:
+        fail("brand_growth_preflight.json missing; run scripts/build_brand_growth_preflight.py", failures)
     if INDEX.exists():
         index = json.loads(INDEX.read_text(encoding="utf-8"))
         ok(f"content index generated with {index.get('counts', {}).get('songs', 0)} songs")
@@ -3767,6 +3793,21 @@ def validate_generated_outputs(failures):
             fail("capture_scheduler_dry_run.py missing dry-run endpoint support", failures)
     else:
         fail("capture_scheduler_dry_run.py missing", failures)
+    if BRAND_GROWTH_PREFLIGHT_SCRIPT.exists():
+        preflight_text = BRAND_GROWTH_PREFLIGHT_SCRIPT.read_text(encoding="utf-8")
+        if (
+            "safe_mode" in preflight_text
+            and "scheduler_endpoint" in preflight_text
+            and "capture_scheduler_dry_run" in preflight_text
+            and "brand_growth_preflight.json" in preflight_text
+            and "brand-growth-preflight.md" in preflight_text
+            and "It does not publish" in preflight_text
+        ):
+            ok("brand growth preflight builder is read-only and scheduler-backed")
+        else:
+            fail("build_brand_growth_preflight.py missing read-only scheduler preflight safeguards", failures)
+    else:
+        fail("build_brand_growth_preflight.py missing", failures)
     if PROMO_REFRESH_SCRIPT.exists():
         refresh_text = PROMO_REFRESH_SCRIPT.read_text(encoding="utf-8")
         required_bits = [
@@ -3792,6 +3833,7 @@ def validate_generated_outputs(failures):
             "build_experiment_result_collection.py",
             "build_experiment_result_clipboard.py",
             "build_experiment_publish_runway.py",
+            "build_brand_growth_preflight.py",
             "build_manual_metric_collection.py",
             "build_promotion_blocker_ledger.py",
             "build_promo_unlock_sequence.py",
