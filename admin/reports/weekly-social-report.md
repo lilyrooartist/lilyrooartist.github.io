@@ -1,7 +1,7 @@
 # Weekly Social Report — Lily Roo
 
 **Period:** 2026-06-27 to 2026-07-03
-**Last updated:** 2026-07-03 07:03 AM EDT
+**Last updated:** 2026-07-03 07:11 AM EDT
 
 ## KPI Goal
 - Primary growth target: **song-forward discovery and repeat listening**
@@ -52,7 +52,7 @@
 - Note: DistroKid/Mixea 24-bit/48k WAV masters are stored in audio-distrokid-remastered.
 - Note: All eight Analog Myth YouTube videos were remastered, uploaded, and the originals were archived as unlisted.
 - Note: Album order is 13, Girls Camp, Analog Myth, Spilling the Tea, No Mortgage, Guards Down, Slow Walk, The Power of Light.
-- Note: Store links applied from verified public snapshots on 2026-07-03T10:28:18.150930Z.
+- Note: Store links applied from verified public snapshots on 2026-07-03T11:10:52.058673Z.
 
 ### Open Store Checks
 - Verify Twelve Dollars public Spotify, Apple Music, YouTube Music release, and HyperFollow links when DistroKid exposes them.
@@ -128,7 +128,7 @@
 - Latest post: https://www.facebook.com/permalink.php?story_fbid=122120725569249470&id=903693509504290
 
 ## Metrics Snapshot
-- Live API captured: **2026-07-03T11:02:34.214Z**
+- Live API captured: **2026-07-03T11:11:01.070Z**
 - Snapshot file: `data/live_social_metrics.json`
 - YouTube public RSS captured: **2026-06-09T12:08:07.783949Z**
 - YouTube public snapshot file: `data/youtube_public_snapshot.json`
@@ -138,9 +138,9 @@
 - YouTube Music snapshot file: `data/youtube_music_release_snapshot.json`
 - HyperFollow stores captured: **2026-06-07T20:51:14.275569Z**
 - HyperFollow snapshot file: `data/hyperfollow_store_links_snapshot.json`
-- All-release store verification captured: **2026-07-03T11:03:29.879660+00:00**
+- All-release store verification captured: **2026-07-03T11:11:57.204904+00:00**
 - All-release store verification file: `data/store_verification_history.json`
-- Social executor history captured: **2026-07-03T11:03:22.768148Z**
+- Social executor history captured: **2026-07-03T11:11:49.656274Z**
 - Social executor history file: `data/social_execution_snapshot.json`
 - First single alignment audit captured: **2026-06-07T21:39:03.668040Z**
 - First single alignment audit file: `data/first_single_alignment_audit.json`

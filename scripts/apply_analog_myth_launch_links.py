@@ -70,6 +70,14 @@ def verified_hyperfollow_url(verification_root: Path) -> str:
     return RELEASE_HUB_URL
 
 
+def release_status_url(key: str) -> str:
+    payload = read_json(RELEASE_STATUS)
+    for release in payload.get("releases") or []:
+        if release.get("title") == EXPECTED_RELEASE_TITLE:
+            return str(release.get(key) or "")
+    return ""
+
+
 def validate_url(label: str, url: str, pattern: str) -> None:
     if url and not re.match(pattern, url):
         raise ValueError(f"{label} does not look like an expected URL: {url}")
@@ -159,11 +167,11 @@ def spotify_album_id(url: str) -> str:
     return match.group(1) if match else ""
 
 
-def write_manual_spotify_snapshot(verification_root: Path, spotify_url: str, validation: dict) -> dict:
+def write_manual_spotify_snapshot(verification_root: Path, spotify_url: str, validation: dict, *, source: str = "manual-spotify-url-plus-oembed") -> dict:
     snapshot = {
         "ok": True,
         "updated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
-        "source": "manual-spotify-url-plus-oembed",
+        "source": source,
         "release_url": spotify_url,
         "album_id": spotify_album_id(spotify_url),
         "title": validation.get("title", EXPECTED_SPOTIFY_TITLE),
@@ -564,14 +572,41 @@ def main() -> int:
     manual_spotify_url = bool(args.spotify_url)
     manual_apple_music_url = bool(args.apple_music_url)
     manual_youtube_music_url = bool(args.youtube_music_url)
+    snapshot_spotify_url = snapshot_release_url(verification_root / "spotify_release_snapshot.json")
+    hyperfollow_spotify_url = hyperfollow_release_url(verification_root, "spotify")
+    status_spotify_url = release_status_url("spotify_url")
+    snapshot_apple_music_url = snapshot_release_url(verification_root / "apple_music_release_snapshot.json")
+    status_apple_music_url = release_status_url("apple_music_url")
+    snapshot_youtube_music_url = snapshot_release_url(verification_root / "youtube_music_release_snapshot.json")
+    status_youtube_music_url = release_status_url("youtube_music_url")
     spotify_url = (
         args.spotify_url
-        or snapshot_release_url(verification_root / "spotify_release_snapshot.json")
-        or hyperfollow_release_url(verification_root, "spotify")
+        or snapshot_spotify_url
+        or hyperfollow_spotify_url
+        or status_spotify_url
     )
-    apple_music_url = args.apple_music_url or snapshot_release_url(verification_root / "apple_music_release_snapshot.json")
-    youtube_music_url = args.youtube_music_url or snapshot_release_url(verification_root / "youtube_music_release_snapshot.json")
+    apple_music_url = args.apple_music_url or snapshot_apple_music_url or status_apple_music_url
+    youtube_music_url = args.youtube_music_url or snapshot_youtube_music_url or status_youtube_music_url
     hyperfollow_url = verified_hyperfollow_url(verification_root)
+    spotify_url_source = (
+        "argument" if args.spotify_url else
+        "verification_snapshot" if snapshot_spotify_url else
+        "hyperfollow_snapshot" if hyperfollow_spotify_url else
+        "release_status" if status_spotify_url else
+        ""
+    )
+    apple_music_url_source = (
+        "argument" if args.apple_music_url else
+        "verification_snapshot" if snapshot_apple_music_url else
+        "release_status" if status_apple_music_url else
+        ""
+    )
+    youtube_music_url_source = (
+        "argument" if args.youtube_music_url else
+        "verification_snapshot" if snapshot_youtube_music_url else
+        "release_status" if status_youtube_music_url else
+        ""
+    )
 
     validate_url("Spotify URL", spotify_url, r"^https://open\.spotify\.com/album/[A-Za-z0-9]+")
     validate_url("Apple Music URL", apple_music_url, r"^https://music\.apple\.com/.+/album/.+")
@@ -584,7 +619,9 @@ def main() -> int:
         }, indent=2))
         return 1
     manual_spotify_validation = validate_manual_spotify_url(spotify_url) if manual_spotify_url else {}
+    release_status_spotify_validation = validate_manual_spotify_url(spotify_url) if spotify_url_source == "release_status" else {}
     manual_apple_music_validation = validate_manual_apple_music_url(apple_music_url) if manual_apple_music_url else {}
+    release_status_apple_music_validation = validate_manual_apple_music_url(apple_music_url) if apple_music_url_source == "release_status" and apple_music_url else {}
     manual_youtube_music_validation = validate_manual_youtube_music_url(youtube_music_url) if manual_youtube_music_url else {}
 
     changed = apply_updates(spotify_url, apple_music_url, youtube_music_url)
@@ -596,6 +633,13 @@ def main() -> int:
             changed[str(RELEASE_STATUS.relative_to(ROOT))] = RELEASE_STATUS.read_text(encoding="utf-8")
         if manual_spotify_url:
             manual_spotify_snapshot = write_manual_spotify_snapshot(verification_root, spotify_url, manual_spotify_validation)
+        elif spotify_url_source == "release_status":
+            manual_spotify_snapshot = write_manual_spotify_snapshot(
+                verification_root,
+                spotify_url,
+                release_status_spotify_validation,
+                source="release-status-spotify-url-plus-oembed",
+            )
     print(json.dumps({
         "ok": True,
         "mode": "apply" if args.apply else "dry-run",
@@ -603,9 +647,14 @@ def main() -> int:
         "apple_music_url": apple_music_url,
         "youtube_music_url": youtube_music_url,
         "hyperfollow_url": hyperfollow_url,
+        "spotify_url_source": spotify_url_source,
+        "apple_music_url_source": apple_music_url_source,
+        "youtube_music_url_source": youtube_music_url_source,
         "manual_spotify_validation": manual_spotify_validation,
         "manual_spotify_snapshot": manual_spotify_snapshot,
+        "release_status_spotify_validation": release_status_spotify_validation,
         "manual_apple_music_validation": manual_apple_music_validation,
+        "release_status_apple_music_validation": release_status_apple_music_validation,
         "manual_youtube_music_validation": manual_youtube_music_validation,
         "changed_files": sorted(changed),
     }, indent=2))

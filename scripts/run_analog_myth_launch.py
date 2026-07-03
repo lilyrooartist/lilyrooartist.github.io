@@ -42,8 +42,13 @@ def summarize_payload(payload: dict) -> dict:
         "spotify_url",
         "apple_music_url",
         "youtube_music_url",
+        "spotify_url_source",
+        "apple_music_url_source",
+        "youtube_music_url_source",
         "manual_spotify_validation",
+        "release_status_spotify_validation",
         "manual_apple_music_validation",
+        "release_status_apple_music_validation",
         "manual_youtube_music_validation",
     )
     summary = {key: payload[key] for key in keys if key in payload}
