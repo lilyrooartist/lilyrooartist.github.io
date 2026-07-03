@@ -1,20 +1,26 @@
 # Monetization Activation Plan - Lily Roo
 
-Generated: 2026-07-03T09:17:41.077067Z
+Generated: 2026-07-03T09:21:32.165175Z
 
 ## Summary
 - Current YouTube audience metric: **5 subscribers**
 - Runway status: **stalled**
 - Ready song-forward approvals: **0**
 - Solicitation rewrites available: **0**
-- Platform fixes: **0**
-- Activation actions: **1**
+- Platform fixes: **1**
+- Activation actions: **2**
 
 ## Activation Sequence
-1. **Current operations next action: Collect experiment result metrics**
-   - Phase: `Operations packet`; status: `waiting_for_user`
-   - Detail: 15 logged experiment post(s) have 81 result field(s) waiting; these results rank repeatable formats.
-   - Preview/check: `python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run`
+1. **Repair TikTok executor**
+   - Phase: `Clear platform blockers`; status: `needs_platform_fix`
+   - Detail: Local upload-mode OAuth credentials missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Complete TikTok OAuth setup locally, then push upload-mode secrets and refresh Admin.
+   - Missing locally: `TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN`
+   - Local source: `secrets/social_api.env`
+   - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
+2. **Current operations next action: Fix TikTok upload-mode credentials**
+   - Phase: `Operations packet`; status: `needs_fix`
+   - Detail: Platform executor needs repair before queued auto posts can publish.
+   - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
 
 ## Guardrails
 - This plan does not approve, apply, publish, or post anything.
