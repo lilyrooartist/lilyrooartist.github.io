@@ -1,12 +1,12 @@
 # Promo Consistency Audit - Lily Roo
 
-Generated: 2026-07-03T04:47:57.971232Z
+Generated: 2026-07-03T05:20:30.839267Z
 
 ## Summary
 - Status: **fail**
-- Checks: **28 / 30** passed
-- Failed checks: **2**
-- High severity failures: **1**
+- Checks: **27 / 30** passed
+- Failed checks: **3**
+- High severity failures: **2**
 - Medium severity failures: **1**
 
 ## Checks
@@ -28,8 +28,10 @@ Generated: 2026-07-03T04:47:57.971232Z
   - TikTok platform repair row should mirror the setup preflight status.
   - Expected: ``
   - Actual: `blocked`
-- **tiktok_preflight_local_missing_matches_platform_repair**: `pass`
+- **tiktok_preflight_local_missing_matches_platform_repair**: `fail`
   - TikTok preflight local missing secrets should match the platform repair row.
+  - Expected: `[]`
+  - Actual: `['TIKTOK_CLIENT_KEY', 'TIKTOK_CLIENT_SECRET', 'TIKTOK_REFRESH_TOKEN']`
 - **tiktok_preflight_worker_missing_matches_platform_repair**: `pass`
   - TikTok preflight worker missing secrets should match the platform repair row.
 - **scheduler_blocked_ids_present_in_executor_attention**: `pass`
@@ -44,7 +46,7 @@ Generated: 2026-07-03T04:47:57.971232Z
   - Human handoff should include every manual metric priority batch.
 - **store_checks_match_checked_pending_services**: `fail`
   - Operations store checks should match checked-pending store services.
-  - Expected: `5`
+  - Expected: `6`
   - Actual: `7`
 - **handoff_blocker_summary_matches_ledger**: `pass`
   - Human handoff blocker summary should be copied from the blocker ledger.
