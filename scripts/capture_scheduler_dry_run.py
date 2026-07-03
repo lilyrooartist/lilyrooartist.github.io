@@ -59,6 +59,13 @@ def auth_method() -> str:
     return "none"
 
 
+def display_path(path: Path) -> str:
+    try:
+        return str(path.relative_to(ROOT))
+    except ValueError:
+        return str(path)
+
+
 def default_queue_url() -> str:
     repository = os.environ.get("GITHUB_REPOSITORY", "").strip()
     sha = os.environ.get("GITHUB_SHA", "").strip()
@@ -163,7 +170,7 @@ def main() -> int:
         "due_count": summary["due_count"],
         "would_post_count": summary["would_post_count"],
         "blocked_count": summary["blocked_count"],
-        "output": str(out.relative_to(ROOT)),
+        "output": display_path(out),
     }, indent=2))
     return 0 if ok else 1
 
