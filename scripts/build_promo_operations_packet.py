@@ -734,7 +734,10 @@ def tiktok_preflight_actions(preflight):
     first_asset = summary.get("first_tiktok_asset") or {}
     worker_missing = list(summary.get("worker_missing_secrets") or credential_handoff.get("worker_missing_secrets") or [])
     local_missing = list(summary.get("local_missing_secrets") or credential_handoff.get("local_missing_secrets") or [])
-    if not worker_missing and not local_missing:
+    worker_upload_ready = bool(summary.get("worker_upload_ready") or credential_handoff.get("worker_upload_ready"))
+    ready_to_upload_drafts = bool(summary.get("ready_to_upload_drafts"))
+    local_runtime_inspection = summary.get("local_secret_runtime_inspection") or credential_handoff.get("local_secret_runtime_inspection") or ""
+    if not worker_missing and (not local_missing or worker_upload_ready or ready_to_upload_drafts):
         return []
 
     missing = sorted(set(worker_missing + local_missing))
@@ -746,6 +749,9 @@ def tiktok_preflight_actions(preflight):
         "missing_secrets": missing,
         "worker_missing_secrets": worker_missing,
         "local_missing_secrets": local_missing,
+        "local_secret_runtime_inspection": local_runtime_inspection,
+        "worker_upload_ready": worker_upload_ready,
+        "ready_to_upload_drafts": ready_to_upload_drafts,
         "local_secret_source": credential_handoff.get("local_secret_source") or "secrets/social_api.env",
         "local_secret_presence": {name: name not in local_missing for name in missing},
         "local_secret_ready": not local_missing,
@@ -761,7 +767,10 @@ def tiktok_preflight_actions(preflight):
     if worker_missing:
         pieces.append(f"Worker secrets missing for upload mode: {', '.join(worker_missing)}.")
     if local_missing:
-        pieces.append(f"Local upload-mode OAuth credentials missing: {', '.join(local_missing)}.")
+        if worker_upload_ready or ready_to_upload_drafts:
+            pieces.append("Local upload-mode OAuth credentials are not inspectable in this runner, but Worker upload readiness is already configured.")
+        else:
+            pieces.append(f"Local upload-mode OAuth credentials missing: {', '.join(local_missing)}.")
     pieces.append("Complete TikTok OAuth setup locally, then push upload-mode secrets and refresh Admin.")
     diagnostics["repair_action"] = " ".join(pieces)
     return [

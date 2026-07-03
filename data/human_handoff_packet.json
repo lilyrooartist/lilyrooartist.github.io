@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-03T09:21:29.879155Z",
+  "generated_at": "2026-07-03T09:31:40.682144Z",
   "safe_mode": true,
   "source": {
     "promotion_blocker_ledger": "data/promotion_blocker_ledger.json",
@@ -26,17 +26,15 @@
       "Platform setup": 1
     },
     "blocker_summary": {
-      "open_blocker_count": 3,
-      "urgent_count": 1,
+      "open_blocker_count": 2,
+      "urgent_count": 0,
       "owner_counts": {
-        "tod": 3
+        "tod": 2
       },
       "category_counts": {
-        "manual_metrics": 2,
-        "platform_repair": 1
+        "manual_metrics": 2
       },
       "status_counts": {
-        "blocked": 1,
         "needs_values": 2
       },
       "next_resolution_projection": {
@@ -88,19 +86,15 @@
         {
           "id": "unlock-tiktok-platform-repair",
           "phase": "Repair TikTok executor",
-          "status": "blocked",
+          "status": "ready",
           "owner": "tod",
-          "blockers_resolved": 1,
+          "blockers_resolved": 0,
           "unlocks": [
             "Held TikTok approval rows can pass platform-readiness review.",
             "Approved TikTok backlog can become safe to reschedule into upload-draft creation."
           ],
-          "blocked_by": [
-            "TIKTOK_CLIENT_KEY",
-            "TIKTOK_CLIENT_SECRET",
-            "TIKTOK_REFRESH_TOKEN"
-          ],
-          "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+          "blocked_by": [],
+          "preview_command": "",
           "apply_command": "",
           "source_path": "data/platform_repair_status.json"
         },
@@ -114,8 +108,8 @@
             "Approved past-due queue rows get a fresh schedule after executor blockers clear."
           ],
           "blocked_by": [],
-          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24",
-          "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+          "preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00-04:00' --spacing-hours 24",
+          "apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
           "source_path": "data/backlog_reschedule_preview.json"
         },
         {
@@ -314,15 +308,15 @@
         "state": "blocked",
         "owner": "tod",
         "task_ids": [
-          "platform-setup-FP-AUTO-264"
+          "platform-setup-tiktok-preflight"
         ],
         "blockers_resolved": 1,
-        "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+        "preview_command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run",
         "apply_command": "",
         "command_sequence": [
           {
             "step": "preview",
-            "command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+            "command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run",
             "required_before_apply": true
           },
           {
@@ -397,15 +391,15 @@
         "state": "blocked",
         "owner": "tod",
         "task_ids": [
-          "platform-setup-FP-AUTO-264"
+          "platform-setup-tiktok-preflight"
         ],
         "blockers_resolved": 1,
-        "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+        "preview_command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run",
         "apply_command": "",
         "command_sequence": [
           {
             "step": "preview",
-            "command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+            "command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run",
             "required_before_apply": true
           },
           {
@@ -616,16 +610,16 @@
   },
   "tasks": [
     {
-      "id": "platform-setup-FP-AUTO-264",
-      "title": "Repair TikTok executor",
+      "id": "platform-setup-tiktok-preflight",
+      "title": "Review TikTok upload-mode preflight",
       "phase": "Platform setup",
       "owner": "tod",
       "urgency": "high",
-      "status": "needs_fix",
-      "detail": "Local upload-mode OAuth credentials missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Complete TikTok OAuth setup locally, then push upload-mode secrets and refresh Admin.",
-      "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+      "status": "blocked",
+      "detail": "Review the TikTok upload-mode/direct-public split before treating TikTok as ready.",
+      "preview_command": "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run",
       "apply_command": "",
-      "source_path": "data/platform_repair_status.json",
+      "source_path": "data/tiktok_setup_preflight.json",
       "impact": {
         "platform": "TikTok",
         "missing_secrets": [
@@ -633,23 +627,18 @@
           "TIKTOK_CLIENT_SECRET",
           "TIKTOK_REFRESH_TOKEN"
         ],
-        "local_missing_secrets": [
-          "TIKTOK_CLIENT_KEY",
-          "TIKTOK_CLIENT_SECRET",
-          "TIKTOK_REFRESH_TOKEN"
-        ],
+        "local_missing_secrets": [],
         "public_posting_approved": false,
-        "repair_checklist_blocked_count": 2,
         "preflight_status": "blocked",
-        "preflight_blocked_count": 5,
-        "ready_to_push_worker_secrets": false,
-        "ready_to_upload_drafts": false,
+        "preflight_blocked_count": 1,
+        "ready_to_push_worker_secrets": true,
+        "ready_to_upload_drafts": true,
         "ready_to_post_publicly": false,
         "preflight_report": "admin/reports/tiktok-setup-preflight.md",
         "preflight_command": "python3 scripts/build_tiktok_setup_preflight.py"
       },
       "links": [],
-      "guardrail": "Run the TikTok preflight before pushing secrets; push upload-mode secrets only after local OAuth setup is complete. Keep direct public posting blocked until approval is confirmed."
+      "guardrail": "Keep TikTok upload-draft mode separate from direct public posting; do not require manual-only community posting."
     },
     {
       "id": "manual-metrics-priority-2",

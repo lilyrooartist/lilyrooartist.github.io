@@ -280,7 +280,6 @@ def build_payload() -> dict:
         )
     )
     local_public_approval = local_public_posting_approved(presence)
-    local_missing = [name for name in REQUIRED_REFRESH_SECRETS if not presence.get(name)]
     worker_missing = tiktok_readiness.get("missing_secrets") or []
     public_posting = tiktok_readiness.get("public_posting_approved")
     if public_posting is None:
@@ -293,9 +292,26 @@ def build_payload() -> dict:
     refresh_config_present = bool(tiktok_readiness.get("refresh_config_present"))
     access_token_present = bool(tiktok_readiness.get("access_token_present"))
     local_access_token_present = bool(presence.get(OPTIONAL_ACCESS_TOKEN))
-    local_refresh_config_present = not local_missing
-    oauth_url_missing = [name for name in ["TIKTOK_CLIENT_KEY", "TIKTOK_REDIRECT_URI"] if not presence.get(name)]
-    oauth_exchange_missing = [name for name in ["TIKTOK_CLIENT_KEY", "TIKTOK_CLIENT_SECRET", "TIKTOK_REDIRECT_URI"] if not presence.get(name)]
+    worker_upload_ready = bool(tiktok_readiness.get("upload_ready")) or (
+        not worker_missing and (access_token_present or refresh_config_present)
+    )
+    worker_direct_public_ready = bool(tiktok_readiness.get("direct_public_ready"))
+    raw_local_missing = [name for name in REQUIRED_REFRESH_SECRETS if not presence.get(name)]
+    raw_oauth_url_missing = [name for name in ["TIKTOK_CLIENT_KEY", "TIKTOK_REDIRECT_URI"] if not presence.get(name)]
+    raw_oauth_exchange_missing = [name for name in ["TIKTOK_CLIENT_KEY", "TIKTOK_CLIENT_SECRET", "TIKTOK_REDIRECT_URI"] if not presence.get(name)]
+    remote_refresh_without_local_env = local_secret_handoff_prepared and not runtime_local_secret_env_exists
+    worker_upload_configured = worker_upload_ready and not worker_missing
+    local_secrets_uninspectable = remote_refresh_without_local_env and worker_upload_configured
+    local_missing = [] if local_secrets_uninspectable else raw_local_missing
+    oauth_url_missing = [] if local_secrets_uninspectable else raw_oauth_url_missing
+    oauth_exchange_missing = [] if local_secrets_uninspectable else raw_oauth_exchange_missing
+    local_refresh_config_present = not raw_local_missing and runtime_local_secret_env_exists
+    local_check_status = "remote_only" if local_secrets_uninspectable else "blocked"
+    local_check_note = (
+        "This runner cannot inspect local TikTok handoff secrets, but Worker readiness reports the upload token path is configured."
+        if local_secrets_uninspectable
+        else ""
+    )
     preflight_checks = [
         check(
             "local_secret_env_file",
@@ -309,34 +325,44 @@ def build_payload() -> dict:
         ),
         check(
             "oauth_authorization_url",
-            "pass" if not oauth_url_missing else "blocked",
+            "pass" if not raw_oauth_url_missing else local_check_status,
             "TikTok OAuth authorization URL can be generated locally."
-            if not oauth_url_missing
+            if not raw_oauth_url_missing
+            else local_check_note
+            if local_secrets_uninspectable
             else f"{SOCIAL_ENV.relative_to(ROOT.parent)} is missing auth URL values: {', '.join(oauth_url_missing)}.",
             "python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode upload",
         ),
         check(
             "oauth_token_exchange",
-            "pass" if not oauth_exchange_missing else "blocked",
+            "pass" if not raw_oauth_exchange_missing else local_check_status,
             "TikTok OAuth authorization codes can be exchanged locally."
-            if not oauth_exchange_missing
+            if not raw_oauth_exchange_missing
+            else local_check_note
+            if local_secrets_uninspectable
             else f"{SOCIAL_ENV.relative_to(ROOT.parent)} is missing token exchange values: {', '.join(oauth_exchange_missing)}.",
             "python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode upload",
         ),
         check(
             "local_refresh_credentials",
-            "pass" if not local_missing else "blocked",
-            "Local refresh credentials are present." if not local_missing else f"{SOCIAL_ENV.relative_to(ROOT.parent)} is missing: {', '.join(local_missing)}.",
+            "pass" if not raw_local_missing else local_check_status,
+            "Local refresh credentials are present."
+            if not raw_local_missing
+            else local_check_note
+            if local_secrets_uninspectable
+            else f"{SOCIAL_ENV.relative_to(ROOT.parent)} is missing: {', '.join(local_missing)}.",
             "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
         ),
         check(
             "local_posting_token_path",
-            "pass" if local_access_token_present or local_refresh_config_present else "blocked",
+            "pass" if local_access_token_present or local_refresh_config_present else local_check_status,
             "Local TikTok posting helper can obtain an access token from refresh credentials."
             if local_refresh_config_present and not local_access_token_present
             else (
                 "Local TikTok posting helper can use an existing access token."
                 if local_access_token_present
+                else local_check_note
+                if local_secrets_uninspectable
                 else "Local TikTok posting helper needs TIKTOK_ACCESS_TOKEN or refresh credentials."
             ),
             "python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --dry-run",
@@ -391,8 +417,8 @@ def build_payload() -> dict:
         ),
     ]
     blocked = [item for item in preflight_checks if item["status"] == "blocked"]
-    ready_to_push = not local_missing
-    ready_to_upload_drafts = ready_to_push and not worker_missing and worker_posting_mode == "upload"
+    ready_to_push = not raw_local_missing and runtime_local_secret_env_exists
+    ready_to_upload_drafts = worker_upload_ready and not worker_missing and bool(first_tiktok_asset_readiness().get("ready_for_upload_mode"))
     ready_to_post = not blocked
     repair_rows = [
         row for row in platform_repair.get("rows") or []
@@ -459,7 +485,7 @@ def build_payload() -> dict:
         },
     ]
     credential_handoff = {
-        "status": "ready_to_push" if ready_to_push else "needs_local_values",
+        "status": "ready_to_push" if ready_to_push else "worker_upload_ready" if ready_to_upload_drafts else "needs_local_values",
         "required_secret_names": REQUIRED_REFRESH_SECRETS,
         "optional_secret_names": [OPTIONAL_ACCESS_TOKEN],
         "local_secret_source": str(SOCIAL_ENV.relative_to(ROOT.parent)),
@@ -474,9 +500,15 @@ def build_payload() -> dict:
         "handoff_template_path": str(HANDOFF_TEMPLATE.relative_to(ROOT)),
         "handoff_template_required_names": REQUIRED_REFRESH_SECRETS + ["TIKTOK_REDIRECT_URI", "TIKTOK_PUBLIC_POSTING_APPROVED", "TIKTOK_DEFAULT_PRIVACY"],
         "local_missing_secrets": local_missing,
+        "local_uninspectable_secrets": raw_local_missing if local_secrets_uninspectable else [],
+        "local_secret_runtime_inspection": "unavailable_but_worker_upload_ready" if local_secrets_uninspectable else "available" if runtime_local_secret_env_exists else "missing_runtime_file",
         "oauth_authorization_url_missing": oauth_url_missing,
+        "oauth_authorization_url_uninspectable": raw_oauth_url_missing if local_secrets_uninspectable else [],
         "oauth_token_exchange_missing": oauth_exchange_missing,
+        "oauth_token_exchange_uninspectable": raw_oauth_exchange_missing if local_secrets_uninspectable else [],
         "worker_missing_secrets": worker_missing,
+        "worker_upload_ready": worker_upload_ready,
+        "worker_direct_public_ready": worker_direct_public_ready,
         "oauth_handoff_script": str(OAUTH_HANDOFF_SCRIPT.relative_to(ROOT)),
         "requested_oauth_scopes": ["user.info.basic", "video.upload"],
         "direct_post_oauth_scopes": ["user.info.basic", "video.upload", "video.publish"],
@@ -522,6 +554,9 @@ def build_payload() -> dict:
         "ready_to_push_worker_secrets": ready_to_push,
         "ready_to_upload_drafts": ready_to_upload_drafts,
         "ready_to_post_publicly": ready_to_post,
+        "worker_upload_ready": worker_upload_ready,
+        "worker_direct_public_ready": worker_direct_public_ready,
+        "local_secret_runtime_inspection": "unavailable_but_worker_upload_ready" if local_secrets_uninspectable else "available" if runtime_local_secret_env_exists else "missing_runtime_file",
         "local_posting_helper_uses_refresh_token": True,
         "first_tiktok_asset": first_tiktok_asset,
         "local_post_preview_command": local_post_preview,
@@ -531,6 +566,7 @@ def build_payload() -> dict:
         "direct_public_lane": direct_public_lane,
         "after_input_command_sequence": after_input_command_sequence,
         "local_missing_secrets": local_missing,
+        "local_uninspectable_secrets": raw_local_missing if local_secrets_uninspectable else [],
         "local_secret_dir_exists": local_secret_dir_exists,
         "local_secret_env_exists": local_secret_handoff_prepared,
         "local_secret_env_runtime_exists": runtime_local_secret_env_exists,
@@ -538,7 +574,9 @@ def build_payload() -> dict:
         "local_secret_handoff_status_path": str(HANDOFF_STATUS.relative_to(ROOT)),
         "initialize_local_secret_env_command": INIT_LOCAL_SECRET_ENV if not local_secret_handoff_prepared else "",
         "oauth_authorization_url_missing": oauth_url_missing,
+        "oauth_authorization_url_uninspectable": raw_oauth_url_missing if local_secrets_uninspectable else [],
         "oauth_token_exchange_missing": oauth_exchange_missing,
+        "oauth_token_exchange_uninspectable": raw_oauth_exchange_missing if local_secrets_uninspectable else [],
         "worker_missing_secrets": worker_missing,
         "public_posting_approved": public_posting,
         "local_public_posting_approval_confirmed": local_public_approval,
