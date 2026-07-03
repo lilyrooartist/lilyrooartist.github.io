@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-03T06:22:56.572384Z",
+  "generated_at": "2026-07-03T06:24:08.564811Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -25,8 +25,8 @@
     "manual_subscriber_approval_guardrail": "Manual-only approvals do not auto-post; posting and public URL logging remain separate after review.",
     "subscriber_swap_count": 0,
     "ready_after_approval_swap_count": 0,
-    "platform_fix_count": 4,
-    "action_count": 5
+    "platform_fix_count": 3,
+    "action_count": 4
   },
   "actions": [
     {
@@ -87,32 +87,6 @@
         "local_secret_source": "secrets/social_api.env",
         "local_secret_ready": false,
         "public_posting_approved": null
-      }
-    },
-    {
-      "label": "Repair TikTok executor",
-      "phase": "Clear platform blockers",
-      "status": "needs_platform_fix",
-      "detail": "Local upload-mode OAuth credentials missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Complete TikTok OAuth setup locally, then push upload-mode secrets and refresh Admin.",
-      "command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
-      "after_review_command": "",
-      "context": {
-        "post_id": "",
-        "platform": "TikTok",
-        "reason": "tiktok_setup_preflight_blocked",
-        "missing_secrets": [
-          "TIKTOK_CLIENT_KEY",
-          "TIKTOK_CLIENT_SECRET",
-          "TIKTOK_REFRESH_TOKEN"
-        ],
-        "local_missing_secrets": [
-          "TIKTOK_CLIENT_KEY",
-          "TIKTOK_CLIENT_SECRET",
-          "TIKTOK_REFRESH_TOKEN"
-        ],
-        "local_secret_source": "secrets/social_api.env",
-        "local_secret_ready": false,
-        "public_posting_approved": false
       }
     },
     {

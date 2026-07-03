@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-03T06:22:57.414680Z",
+  "generated_at": "2026-07-03T06:24:09.756152Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -16,7 +16,7 @@
     "pending_result_field_count": 90,
     "winner_ready_candidate_count": 1,
     "winner_count_target": 3,
-    "blocked_platform_count": 3,
+    "blocked_platform_count": 4,
     "approved_backlog_count": 0,
     "blocked_backlog_count": 0,
     "next_publish_action": "Collect experiment results when public URLs and measurement values are available."
@@ -54,6 +54,17 @@
       "preview_command": "python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM",
       "blocked_apply_reasons": [
         "local_secret_source_missing:IG_BUSINESS_ACCOUNT_ID"
+      ]
+    },
+    {
+      "post_id": "FP-AUTO-264",
+      "platform": "TikTok",
+      "reason": "tiktok_setup_preflight_blocked",
+      "status": "needs_fix",
+      "repair_action": "Local upload-mode OAuth credentials missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Complete TikTok OAuth setup locally, then push upload-mode secrets and refresh Admin.",
+      "preview_command": "python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
+      "blocked_apply_reasons": [
+        "local_secret_source_missing:TIKTOK_CLIENT_KEY,TIKTOK_CLIENT_SECRET,TIKTOK_REFRESH_TOKEN"
       ]
     }
   ],

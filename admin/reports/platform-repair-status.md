@@ -1,15 +1,15 @@
 # Platform Repair Status - Lily Roo
 
-Generated: 2026-07-03T06:22:56.701898Z
+Generated: 2026-07-03T06:24:08.763140Z
 
 ## Summary
-- Platform fixes: **3**
-- Blocked rows: **3**
-- Preview commands: **3**
+- Platform fixes: **4**
+- Blocked rows: **4**
+- Preview commands: **4**
 - Apply commands: **0**
-- Checklist items: **9**
-- Checklist blocked: **3**
-- Platforms: **Instagram**
+- Checklist items: **13**
+- Checklist blocked: **5**
+- Platforms: **Instagram, TikTok**
 
 ## Repair Checklist
 - **Instagram** (`FP-AUTO-258`)
@@ -63,6 +63,23 @@ Generated: 2026-07-03T06:22:56.701898Z
   - Preview retry reset after platform repair: `python3 scripts/reset_social_execution_state.py FP-PLAN-TWELVE-DOLLARS-INSTAGRAM`
   - Apply retry reset after platform repair: `python3 scripts/reset_social_execution_state.py FP-PLAN-TWELVE-DOLLARS-INSTAGRAM --apply`
   - Retry reset note: Run the dry-run verification command first. Apply the retry reset only when the worker reports the row is executable.
+- **TikTok** (`FP-AUTO-264`)
+  - Status: `needs_fix`; reason: `tiktok_setup_preflight_blocked`
+  - Repair: Local upload-mode OAuth credentials missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Complete TikTok OAuth setup locally, then push upload-mode secrets and refresh Admin.
+  - Missing secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN
+  - Missing locally: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN
+  - Local source: `secrets/social_api.env`
+  - Setup preflight: `blocked`; blocked checks: `5`
+  - Rebuild setup preflight: `python3 scripts/build_tiktok_setup_preflight.py`
+  - Preflight report: `admin/reports/tiktok-setup-preflight.md`
+  - Checklist:
+    - `pass` Worker secrets: Worker readiness snapshot reports required secrets present.
+    - `blocked` Local secret source: secrets/social_api.env is missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.
+    - `blocked` Direct public posting approval: Direct public posting approval is false; TikTok upload-draft mode can still proceed after credentials.
+    - `review` Refresh verification: After repair, refresh admin so readiness, scheduler, blocker, and backlog state update together. Command: `python3 scripts/refresh_promo_admin.py`
+  - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
+  - Blocked apply command: `python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py`
+  - Apply blocked by: local_secret_source_missing:TIKTOK_CLIENT_KEY,TIKTOK_CLIENT_SECRET,TIKTOK_REFRESH_TOKEN
 
 ## Guardrails
 - This report does not push secrets, reconnect accounts, approve posts, or publish posts.

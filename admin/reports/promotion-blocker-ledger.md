@@ -1,13 +1,13 @@
 # Promotion Blocker Ledger - Lily Roo
 
-Generated: 2026-07-03T06:22:56.792196Z
+Generated: 2026-07-03T06:24:08.902973Z
 
 ## Summary
-- Open blockers: **12**
-- User-owned: **9**
+- Open blockers: **13**
+- User-owned: **10**
 - External platform-owned: **3**
 - Codex-actionable: **0**
-- High or critical: **10**
+- High or critical: **11**
 
 ## Unlock Roadmap
 - **Approve checked scheduled rows** (`blocked`)
@@ -18,14 +18,16 @@ Generated: 2026-07-03T06:22:56.792196Z
   - Owner: `tod`; projected blockers resolved: **0**
   - Unlocks: No manual-only posting lane is active; growth work stays in automated or review-only surfaces.
   - Guardrail: Manual-only approvals do not auto-post; posting and public URL logging remain separate after review.
-- **Repair TikTok executor** (`ready`)
-  - Owner: `tod`; projected blockers resolved: **0**
+- **Repair TikTok executor** (`blocked`)
+  - Owner: `tod`; projected blockers resolved: **1**
   - Unlocks: Held TikTok approval rows can pass platform-readiness review.; Approved TikTok backlog can become safe to reschedule into upload-draft creation.
+  - Blocked by: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN
+  - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
 - **Reschedule approved past-due backlog** (`clear`)
   - Owner: `tod`; projected blockers resolved: **0**
   - Unlocks: Approved past-due queue rows get a fresh schedule after executor blockers clear.
-  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00-04:00' --spacing-hours 24`
-  - Apply after review: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin`
+  - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24`
+  - Apply after review: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-04T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin`
 - **Fill manual metric worksheet** (`needs_values`)
   - Owner: `tod`; projected blockers resolved: **6**
   - Unlocks: Admin health and weekly reporting can use fresh cross-platform metrics.; Manual metric blockers clear once worksheet values are imported.
@@ -97,6 +99,14 @@ Generated: 2026-07-03T06:22:56.792196Z
   - Apply/log after review: `python3 scripts/update_scheduled_post_approval.py FP-AUTO-284 --refresh-admin`
   - Guardrail: Approval does not guarantee posting if the platform executor is still blocked.
   - Impact: resolves blocker: False
+- **[high] Repair TikTok executor** (`platform-FP-AUTO-264`)
+  - Owner: `tod`; status: `blocked`; category: `platform_repair`
+  - Evidence: tiktok_setup_preflight_blocked Missing secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Local secret source is missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN.
+  - Next step: Local upload-mode OAuth credentials missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Complete TikTok OAuth setup locally, then push upload-mode secrets and refresh Admin.
+  - Preview/check: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
+  - Guardrail: Run retry resets only after the external platform repair is verified.
+  - Blocked apply command: `python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py`
+  - Impact: apply blocked by: local_secret_source_missing:TIKTOK_CLIENT_KEY,TIKTOK_CLIENT_SECRET,TIKTOK_REFRESH_TOKEN
 - **[high] Repair Instagram executor** (`platform-FP-AUTO-258`)
   - Owner: `external_platform`; status: `blocked`; category: `platform_repair`
   - Evidence: Instagram retry cap reached; verify instagram_business_account repair before resetting execution state. Local secret source is missing: IG_BUSINESS_ACCOUNT_ID.

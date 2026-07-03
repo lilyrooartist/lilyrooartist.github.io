@@ -1,12 +1,12 @@
 # Promo Consistency Audit - Lily Roo
 
-Generated: 2026-07-03T06:22:57.442608Z
+Generated: 2026-07-03T06:24:09.799010Z
 
 ## Summary
-- Status: **pass**
-- Checks: **30 / 30** passed
-- Failed checks: **0**
-- High severity failures: **0**
+- Status: **fail**
+- Checks: **29 / 30** passed
+- Failed checks: **1**
+- High severity failures: **1**
 - Medium severity failures: **0**
 
 ## Checks
@@ -28,8 +28,10 @@ Generated: 2026-07-03T06:22:57.442608Z
   - TikTok platform repair row should mirror setup preflight when a current TikTok repair row exists.
 - **tiktok_preflight_local_missing_matches_platform_repair**: `pass`
   - TikTok preflight local missing secrets should match the platform repair row when one exists.
-- **tiktok_preflight_worker_missing_matches_platform_repair**: `pass`
+- **tiktok_preflight_worker_missing_matches_platform_repair**: `fail`
   - TikTok preflight worker missing secrets should match the platform repair row when one exists.
+  - Expected: `['TIKTOK_CLIENT_KEY', 'TIKTOK_CLIENT_SECRET', 'TIKTOK_REFRESH_TOKEN']`
+  - Actual: `[]`
 - **scheduler_blocked_ids_present_in_executor_attention**: `pass`
   - Scheduler dry-run blockers should be represented in current scheduler detail or executor attention; executor history may include stale rows that are now would-post.
 - **manual_distribution_count_matches_ledger**: `pass`

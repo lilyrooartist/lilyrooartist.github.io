@@ -1,25 +1,25 @@
 # Promo Operations Packet - Lily Roo
 
-Generated: 2026-07-03T06:22:56.669358Z
+Generated: 2026-07-03T06:24:08.711665Z
 
 ## Summary
-- Actions: **18**
+- Actions: **20**
 - User review: **7**
-- Platform fixes: **3**
+- Platform fixes: **4**
 - Scheduled approval batches: **0**
 - Manual distribution actions: **0**
 - Experiment result actions: **1**
-- Store checks: **5**
+- Store checks: **6**
 - Manual metric updates: **2**
 - Safe apply commands ready: **0**
-- Urgency: **blocked: 7, high: 4, low: 2, medium: 5**
+- Urgency: **blocked: 7, high: 5, low: 2, medium: 6**
 
 ## Phase Counts
 - Collect experiment results: **1**
 - Fill manual metrics: **2**
-- Repair executor: **3**
+- Repair executor: **4**
 - Review blocked drafts: **7**
-- Verify music sites: **5**
+- Verify music sites: **6**
 
 ## Top Actions
 
@@ -88,6 +88,15 @@ Generated: 2026-07-03T06:22:56.669358Z
   - Apply repair after preview: `python3 scripts/push_social_worker_secrets.py IG_BUSINESS_ACCOUNT_ID && LILYROO_ADMIN_PASSWORD=... python3 scripts/capture_executor_readiness.py`
   - Preview retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-AUTO-258`
   - Apply retry reset after repair: `python3 scripts/reset_social_execution_state.py FP-AUTO-258 --apply`
+- **[high] Fix TikTok upload-mode credentials**
+  - Why: Platform executor needs repair before queued auto posts can publish.
+  - Detail: Local upload-mode OAuth credentials missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Complete TikTok OAuth setup locally, then push upload-mode secrets and refresh Admin.
+  - Missing secrets: `TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN`
+  - Missing locally: `TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN`
+  - Local source: `secrets/social_api.env`
+  - Public posting approved: `False`
+  - Command: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
+  - Apply repair after preview: `python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py`
 
 ### Collect experiment results
 - **[high] Collect experiment result metrics**
@@ -99,13 +108,6 @@ Generated: 2026-07-03T06:22:56.669358Z
   - Measurement priorities: **12**
   - Wide entry CSV: `data/experiment_result_entry_wide_template.csv`
   - Preview result import: `python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run`
-
-### Verify music sites
-- **[medium] Re-check Twelve Dollars on Spotify**
-  - Why: Public store links should be checked until DistroKid exposes them.
-  - Detail: Searches public web results for Spotify album URLs, then validates exact-title candidates with Spotify oEmbed. Latest snapshot found no public URL; next recommended re-check after 2026-07-04T06:21:45.023971+00:00. Status: waiting_for_release_propagation.
-  - Latest snapshot checked: `2026-07-03T06:21:45.023971+00:00`
-  - Command: `python3 scripts/search_spotify_release.py --artist 'Lily Roo' --title 'Twelve Dollars' --out 'data/store-verification/twelve-dollars/spotify_release_snapshot.json'`
 
 ## Guardrails
 - This packet does not publish, approve, apply, or post anything.
