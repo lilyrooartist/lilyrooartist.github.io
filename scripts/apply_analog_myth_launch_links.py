@@ -15,6 +15,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+RELEASE_STATUS = ROOT / "data/distrokid_release_status.json"
 RELEASE_HUB_URL = "https://distrokid.com/hyperfollow/lilyroo/analog-myth"
 YOUTUBE_PLAYLIST_URL = "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0"
 ALBUM_PAGE_URL = "https://www.lilyroo.com/analog-myth.html"
@@ -60,6 +61,13 @@ def hyperfollow_release_url(verification_root: Path, store: str) -> str:
         if link.get("store") == store and link.get("url"):
             return str(link["url"])
     return ""
+
+
+def verified_hyperfollow_url(verification_root: Path) -> str:
+    payload = read_json(verification_root / "hyperfollow_store_links_snapshot.json")
+    if payload.get("ok") and payload.get("hyperfollow_url"):
+        return str(payload["hyperfollow_url"])
+    return RELEASE_HUB_URL
 
 
 def validate_url(label: str, url: str, pattern: str) -> None:
@@ -401,16 +409,25 @@ def update_feed(text: str, spotify_url: str, apple_music_url: str, youtube_music
         text,
         count=1,
     )
-    if "Spotify: <a" in text:
-        return text
     lines = [f'        <p>Spotify: <a href="{spotify_url}">{spotify_url}</a></p>']
     if apple_music_url:
         lines.append(f'        <p>Apple Music: <a href="{apple_music_url}">{apple_music_url}</a></p>')
     if youtube_music_url:
         lines.append(f'        <p>YouTube Music: <a href="{youtube_music_url}">{youtube_music_url}</a></p>')
+    store_link_block = "\n".join(lines)
+    text, count = re.subn(
+        r'        <p>Spotify: <a href="[^"]+">[^<]+</a></p>'
+        r'(?:\n        <p>Apple Music: <a href="[^"]+">[^<]+</a></p>)?'
+        r'(?:\n        <p>YouTube Music: <a href="[^"]+">[^<]+</a></p>)?',
+        store_link_block,
+        text,
+        count=1,
+    )
+    if count:
+        return text
     return text.replace(
         f'        <p>Album page: <a href="{ALBUM_PAGE_URL}">{ALBUM_PAGE_URL}</a></p>',
-        f'        <p>Album page: <a href="{ALBUM_PAGE_URL}">{ALBUM_PAGE_URL}</a></p>\n' + "\n".join(lines),
+        f'        <p>Album page: <a href="{ALBUM_PAGE_URL}">{ALBUM_PAGE_URL}</a></p>\n{store_link_block}',
     )
 
 
@@ -493,6 +510,44 @@ def apply_updates(spotify_url: str, apple_music_url: str, youtube_music_url: str
     return changed
 
 
+def update_release_status(spotify_url: str, apple_music_url: str, youtube_music_url: str, hyperfollow_url: str) -> bool:
+    payload = read_json(RELEASE_STATUS)
+    releases = payload.get("releases") or []
+    changed = False
+    now = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+    for release in releases:
+        if release.get("title") != EXPECTED_RELEASE_TITLE:
+            continue
+        updates = {
+            "primary_cta": "Spotify",
+            "store_status": "Spotify, Apple Music, HyperFollow, and the YouTube remaster album playlist are public; YouTube Music remains pending public verification.",
+            "spotify_url": spotify_url,
+            "apple_music_url": apple_music_url,
+            "hyperfollow_url": hyperfollow_url,
+        }
+        if youtube_music_url:
+            updates["youtube_music_url"] = youtube_music_url
+            updates["store_status"] = "Spotify, Apple Music, YouTube Music, HyperFollow, and the YouTube remaster album playlist are public."
+        notes = [
+            note for note in list(release.get("notes") or [])
+            if not str(note).startswith("Store links applied from verified public snapshots on ")
+        ]
+        evidence_note = f"Store links applied from verified public snapshots on {now}."
+        notes.append(evidence_note)
+        updates["notes"] = notes
+        for key, value in updates.items():
+            if release.get(key) != value:
+                release[key] = value
+                changed = True
+        break
+    else:
+        raise RuntimeError(f"{EXPECTED_RELEASE_TITLE} release row not found in {RELEASE_STATUS.relative_to(ROOT)}.")
+    if changed:
+        payload["updated_at"] = now
+        RELEASE_STATUS.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    return changed
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Apply verified Analog Myth launch store links to public site surfaces.")
     parser.add_argument("--spotify-url", default="", help="Verified Spotify album URL. Required unless the verification snapshot has one.")
@@ -516,6 +571,7 @@ def main() -> int:
     )
     apple_music_url = args.apple_music_url or snapshot_release_url(verification_root / "apple_music_release_snapshot.json")
     youtube_music_url = args.youtube_music_url or snapshot_release_url(verification_root / "youtube_music_release_snapshot.json")
+    hyperfollow_url = verified_hyperfollow_url(verification_root)
 
     validate_url("Spotify URL", spotify_url, r"^https://open\.spotify\.com/album/[A-Za-z0-9]+")
     validate_url("Apple Music URL", apple_music_url, r"^https://music\.apple\.com/.+/album/.+")
@@ -536,6 +592,8 @@ def main() -> int:
     if args.apply:
         for relative, content in changed.items():
             (ROOT / relative).write_text(content, encoding="utf-8")
+        if update_release_status(spotify_url, apple_music_url, youtube_music_url, hyperfollow_url):
+            changed[str(RELEASE_STATUS.relative_to(ROOT))] = RELEASE_STATUS.read_text(encoding="utf-8")
         if manual_spotify_url:
             manual_spotify_snapshot = write_manual_spotify_snapshot(verification_root, spotify_url, manual_spotify_validation)
     print(json.dumps({
@@ -544,6 +602,7 @@ def main() -> int:
         "spotify_url": spotify_url,
         "apple_music_url": apple_music_url,
         "youtube_music_url": youtube_music_url,
+        "hyperfollow_url": hyperfollow_url,
         "manual_spotify_validation": manual_spotify_validation,
         "manual_spotify_snapshot": manual_spotify_snapshot,
         "manual_apple_music_validation": manual_apple_music_validation,

@@ -1,7 +1,7 @@
 # Weekly Social Report — Lily Roo
 
 **Period:** 2026-06-27 to 2026-07-03
-**Last updated:** 2026-07-03 06:18 AM EDT
+**Last updated:** 2026-07-03 06:29 AM EDT
 
 ## KPI Goal
 - Primary growth target: **song-forward discovery and repeat listening**
@@ -42,13 +42,17 @@
 - Type: **album**
 - Tracks: **8**
 - DistroKid status: **submitted to DistroKid for July 1 release and remastered audio downloaded locally**
-- Store status: **YouTube remaster album playlist is public; Spotify, Apple Music, and other DistroKid store links are pending public verification.**
+- Store status: **Spotify, Apple Music, HyperFollow, and the YouTube remaster album playlist are public; YouTube Music remains pending public verification.**
 - Release date: **2026-07-01**
-- Primary CTA: **YouTube playlist until July 1 store links are verified**
+- Primary CTA: **Spotify**
+- Spotify: https://open.spotify.com/album/6Ujyp8tXa5UxheJJC2B6kL
+- Apple Music: https://music.apple.com/us/album/analog-myth/6777905789
+- HyperFollow: https://distrokid.com/hyperfollow/lilyroo/analog-myth
 - YouTube playlist: https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0
 - Note: DistroKid/Mixea 24-bit/48k WAV masters are stored in audio-distrokid-remastered.
 - Note: All eight Analog Myth YouTube videos were remastered, uploaded, and the originals were archived as unlisted.
 - Note: Album order is 13, Girls Camp, Analog Myth, Spilling the Tea, No Mortgage, Guards Down, Slow Walk, The Power of Light.
+- Note: Store links applied from verified public snapshots on 2026-07-03T10:28:18.150930Z.
 
 ### Open Store Checks
 - Verify Twelve Dollars public Spotify, Apple Music, YouTube Music release, and HyperFollow links when DistroKid exposes them.
@@ -78,7 +82,7 @@
 - HyperFollow: https://distrokid.com/hyperfollow/lilyroo/i-learned-it-all-in-fifteen-seconds
 - HyperFollow stores: **applemusic, itunes, spotify**
 - Amazon Music: **pending verified public URL; not exposed by current HyperFollow store list**
-- All-release store verification: **8 live, 5 checked pending, 0 pending, 7 snapshots**
+- All-release store verification: **11 live, 4 checked pending, 0 pending, 7 snapshots**
 - Social executor history: **45 records, 30 posted, 0 platform fixes, 0 approval blockers**
 
 ### First Single Alignment
@@ -124,7 +128,7 @@
 - Latest post: https://www.facebook.com/permalink.php?story_fbid=122120725569249470&id=903693509504290
 
 ## Metrics Snapshot
-- Live API captured: **2026-07-03T10:18:25.075Z**
+- Live API captured: **2026-07-03T10:28:27.526Z**
 - Snapshot file: `data/live_social_metrics.json`
 - YouTube public RSS captured: **2026-06-09T12:08:07.783949Z**
 - YouTube public snapshot file: `data/youtube_public_snapshot.json`
@@ -134,9 +138,9 @@
 - YouTube Music snapshot file: `data/youtube_music_release_snapshot.json`
 - HyperFollow stores captured: **2026-06-07T20:51:14.275569Z**
 - HyperFollow snapshot file: `data/hyperfollow_store_links_snapshot.json`
-- All-release store verification captured: **2026-07-03T10:18:41.969692+00:00**
+- All-release store verification captured: **2026-07-03T10:29:23.035968+00:00**
 - All-release store verification file: `data/store_verification_history.json`
-- Social executor history captured: **2026-07-03T10:18:35.120675Z**
+- Social executor history captured: **2026-07-03T10:29:15.963551Z**
 - Social executor history file: `data/social_execution_snapshot.json`
 - First single alignment audit captured: **2026-06-07T21:39:03.668040Z**
 - First single alignment audit file: `data/first_single_alignment_audit.json`

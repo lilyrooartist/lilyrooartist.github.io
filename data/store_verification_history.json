@@ -1,22 +1,22 @@
 {
-  "generated_at": "2026-07-03T10:18:42.154611+00:00",
+  "generated_at": "2026-07-03T10:29:23.213038+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "store_verification_root": "data/store-verification"
   },
   "summary": {
     "total_services": 15,
-    "live": 8,
+    "live": 11,
     "submitted": 0,
     "pending": 0,
-    "checked_pending": 5,
-    "found_in_snapshot": 2,
+    "checked_pending": 4,
+    "found_in_snapshot": 0,
     "snapshot_count": 7,
     "recheck_interval_hours": 24,
     "recheck_due": 0,
-    "waiting_for_next_recheck": 5,
+    "waiting_for_next_recheck": 4,
     "oldest_checked_pending_age_hours": 0.0,
-    "next_recheck_at": "2026-07-04T10:18:25.218482+00:00"
+    "next_recheck_at": "2026-07-04T10:28:27.640980+00:00"
   },
   "rows": [
     {
@@ -67,12 +67,12 @@
       "latest_snapshot": {
         "path": "data/store-verification/twelve-dollars/spotify_release_snapshot.json",
         "ok": false,
-        "updated_at": "2026-07-03T10:18:25.218482Z",
+        "updated_at": "2026-07-03T10:28:27.640980Z",
         "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-        "checked_at": "2026-07-03T10:18:25.218482+00:00",
+        "checked_at": "2026-07-03T10:28:27.640980+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-07-04T10:18:25.218482+00:00",
+        "next_recheck_at": "2026-07-04T10:28:27.640980+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation"
       },
@@ -86,12 +86,12 @@
       "latest_snapshot": {
         "path": "data/store-verification/twelve-dollars/apple_music_release_snapshot.json",
         "ok": false,
-        "updated_at": "2026-07-03T10:18:26.419207Z",
+        "updated_at": "2026-07-03T10:28:47.917397Z",
         "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
-        "checked_at": "2026-07-03T10:18:26.419207+00:00",
+        "checked_at": "2026-07-03T10:28:47.917397+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-07-04T10:18:26.419207+00:00",
+        "next_recheck_at": "2026-07-04T10:28:47.917397+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation"
       },
@@ -113,12 +113,12 @@
       "latest_snapshot": {
         "path": "data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json",
         "ok": false,
-        "updated_at": "2026-07-03T10:18:26.827741Z",
+        "updated_at": "2026-07-03T10:28:48.332284Z",
         "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
-        "checked_at": "2026-07-03T10:18:26.827741+00:00",
+        "checked_at": "2026-07-03T10:28:48.332284+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-07-04T10:18:26.827741+00:00",
+        "next_recheck_at": "2026-07-04T10:28:48.332284+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation"
       },
@@ -135,40 +135,40 @@
     {
       "release": "Analog Myth",
       "service": "Spotify",
-      "state": "Checked pending",
-      "url": "",
+      "state": "Live",
+      "url": "https://open.spotify.com/album/6Ujyp8tXa5UxheJJC2B6kL",
       "latest_snapshot": {
         "path": "data/store-verification/analog-myth/spotify_release_snapshot.json",
         "ok": false,
         "updated_at": "2026-07-03T10:18:26.872215Z",
         "summary": "Spotify album not found for Lily Roo - Analog Myth. Re-run after DistroKid exposes the public release.",
         "checked_at": "2026-07-03T10:18:26.872215+00:00",
-        "checked_age_hours": 0.0,
+        "checked_age_hours": 0.2,
         "recheck_interval_hours": 24,
         "next_recheck_at": "2026-07-04T10:18:26.872215+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation"
       },
-      "action": "Verify Spotify public URL for Analog Myth."
+      "action": ""
     },
     {
       "release": "Analog Myth",
       "service": "Apple Music",
-      "state": "Found in snapshot",
-      "url": "",
+      "state": "Live",
+      "url": "https://music.apple.com/us/album/analog-myth/6777905789",
       "latest_snapshot": {
         "path": "data/store-verification/analog-myth/apple_music_release_snapshot.json",
         "ok": true,
         "updated_at": "2026-07-03T10:18:27.985882Z",
         "summary": "https://music.apple.com/us/album/analog-myth/6777905789",
         "checked_at": "2026-07-03T10:18:27.985882+00:00",
-        "checked_age_hours": 0.0,
+        "checked_age_hours": 0.2,
         "recheck_interval_hours": 24,
         "next_recheck_at": "2026-07-04T10:18:27.985882+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation"
       },
-      "action": "Verify Apple Music public URL for Analog Myth."
+      "action": ""
     },
     {
       "release": "Analog Myth",
@@ -178,12 +178,12 @@
       "latest_snapshot": {
         "path": "data/store-verification/analog-myth/youtube_music_release_snapshot.json",
         "ok": false,
-        "updated_at": "2026-07-03T10:18:28.035140Z",
+        "updated_at": "2026-07-03T10:28:48.379469Z",
         "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
-        "checked_at": "2026-07-03T10:18:28.035140+00:00",
+        "checked_at": "2026-07-03T10:28:48.379469+00:00",
         "checked_age_hours": 0.0,
         "recheck_interval_hours": 24,
-        "next_recheck_at": "2026-07-04T10:18:28.035140+00:00",
+        "next_recheck_at": "2026-07-04T10:28:48.379469+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation"
       },
@@ -192,21 +192,21 @@
     {
       "release": "Analog Myth",
       "service": "HyperFollow",
-      "state": "Found in snapshot",
-      "url": "",
+      "state": "Live",
+      "url": "https://distrokid.com/hyperfollow/lilyroo/analog-myth",
       "latest_snapshot": {
         "path": "data/store-verification/analog-myth/hyperfollow_store_links_snapshot.json",
         "ok": true,
         "updated_at": "2026-07-03T10:18:29.747759Z",
         "summary": "applemusic, itunes, spotify",
         "checked_at": "2026-07-03T10:18:29.747759+00:00",
-        "checked_age_hours": 0.0,
+        "checked_age_hours": 0.2,
         "recheck_interval_hours": 24,
         "next_recheck_at": "2026-07-04T10:18:29.747759+00:00",
         "recheck_due": false,
         "recheck_status": "waiting_for_release_propagation"
       },
-      "action": "Verify HyperFollow public URL for Analog Myth."
+      "action": ""
     },
     {
       "release": "Analog Myth",

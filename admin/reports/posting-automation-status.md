@@ -1,6 +1,6 @@
 # Posting Automation Status - Lily Roo
 
-Generated: 2026-07-03T10:18:38.954604Z
+Generated: 2026-07-03T10:29:20.036102Z
 
 ## Summary
 - Status: **ready_active_campaign**
@@ -22,7 +22,7 @@ Generated: 2026-07-03T10:18:38.954604Z
   - Detail: 17 */6 * * *, 05 16 * * *; latest run completed / success
   - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28653606474
 - **Safe admin refresh** - `ready`
-  - Detail: 17 refresh commands captured at 2026-07-03T10:18:37.372475Z
+  - Detail: 17 refresh commands captured at 2026-07-03T10:29:18.315499Z
   - Evidence: data/promo_admin_refresh_run.json
 - **Scheduler dry-run authentication** - `ready`
   - Detail: HTTP 200 using bearer auth; due=0 would_post=0
