@@ -1,19 +1,19 @@
 # Social Blocker Input Status - Lily Roo
 
-Generated: 2026-07-03T06:53:03.131559Z
+Generated: 2026-07-03T07:11:27.776648Z
 
 ## Summary
 - Status: **missing_local_input**
-- Ready groups: **0 / 5**
-- Missing local input: **4**
+- Ready groups: **1 / 5**
+- Missing local input: **3**
 - External action needed: **1**
 - GitHub Actions missing secrets: **0**
 - Local secret env exists: **False**
 - Template: `data/social_blocker_secret_template.env`
-- Next action: Add one of LILYROO_EXECUTOR_BEARER_TOKEN, EXECUTOR_BEARER_TOKEN, LILYROO_ADMIN_PASSWORD, ADMIN_PASSWORD to /home/runner/work/lilyrooartist.github.io/secrets/social_api.env.
+- Next action: Add META_LONG_LIVED_TOKEN, FB_PAGE_ID to /home/runner/work/lilyrooartist.github.io/secrets/social_api.env, then run python3 scripts/resolve_instagram_business_account.py.
 
 ## Groups
-- **Scheduler and executor auth** - `missing_local_input`
+- **Scheduler and executor auth** - `ready`
   - Required one of: LILYROO_EXECUTOR_BEARER_TOKEN, EXECUTOR_BEARER_TOKEN, LILYROO_ADMIN_PASSWORD, ADMIN_PASSWORD
   - GitHub Actions secrets: LILYROO_EXECUTOR_BEARER_TOKEN, LILYROO_ADMIN_PASSWORD
   - GitHub Actions status: ready
@@ -28,7 +28,7 @@ Generated: 2026-07-03T06:53:03.131559Z
     - `python3 scripts/capture_social_executions.py`
     - `python3 scripts/refresh_promo_admin.py`
   - Verify: `python3 scripts/capture_scheduler_dry_run.py && python3 scripts/capture_social_executions.py`
-  - Next: Add one of LILYROO_EXECUTOR_BEARER_TOKEN, EXECUTOR_BEARER_TOKEN, LILYROO_ADMIN_PASSWORD, ADMIN_PASSWORD to /home/runner/work/lilyrooartist.github.io/secrets/social_api.env.
+  - Next: Run the verification command and refresh admin evidence.
 - **Instagram business account** - `missing_local_input`
   - Required all: IG_BUSINESS_ACCOUNT_ID
   - Unblocks: Instagram executor rows after the Worker secret is pushed and readiness is recaptured.

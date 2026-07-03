@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-03T06:53:03.131559Z",
+  "generated_at": "2026-07-03T07:11:27.776648Z",
   "safe_mode": true,
   "redaction": "Only key presence is reported; secret values are never written to generated files.",
   "source": {
@@ -11,20 +11,20 @@
   "summary": {
     "status": "missing_local_input",
     "group_count": 5,
-    "ready_count": 0,
-    "missing_local_input_count": 4,
+    "ready_count": 1,
+    "missing_local_input_count": 3,
     "external_action_needed_count": 1,
     "github_actions_missing_secret_count": 0,
     "github_actions_secret_presence_status": "ready",
     "local_secret_env_exists": false,
     "template_path": "data/social_blocker_secret_template.env",
-    "next_action": "Add one of LILYROO_EXECUTOR_BEARER_TOKEN, EXECUTOR_BEARER_TOKEN, LILYROO_ADMIN_PASSWORD, ADMIN_PASSWORD to /home/runner/work/lilyrooartist.github.io/secrets/social_api.env."
+    "next_action": "Add META_LONG_LIVED_TOKEN, FB_PAGE_ID to /home/runner/work/lilyrooartist.github.io/secrets/social_api.env, then run python3 scripts/resolve_instagram_business_account.py."
   },
   "groups": [
     {
       "id": "scheduler_auth",
       "label": "Scheduler and executor auth",
-      "status": "missing_local_input",
+      "status": "ready",
       "required_all": [],
       "required_any": [
         "LILYROO_EXECUTOR_BEARER_TOKEN",
@@ -54,14 +54,14 @@
         "ADMIN_PASSWORD": false,
         "EXECUTOR_BEARER_TOKEN": false,
         "LILYROO_ADMIN_PASSWORD": false,
-        "LILYROO_EXECUTOR_BEARER_TOKEN": false
+        "LILYROO_EXECUTOR_BEARER_TOKEN": true
       },
       "missing_all": [],
-      "any_present": false,
+      "any_present": true,
       "external_only": false,
       "unblocks": "Scheduler dry-run, executor readiness capture, and execution history capture.",
       "verification_command": "python3 scripts/capture_scheduler_dry_run.py && python3 scripts/capture_social_executions.py",
-      "next_action": "Add one of LILYROO_EXECUTOR_BEARER_TOKEN, EXECUTOR_BEARER_TOKEN, LILYROO_ADMIN_PASSWORD, ADMIN_PASSWORD to /home/runner/work/lilyrooartist.github.io/secrets/social_api.env.",
+      "next_action": "Run the verification command and refresh admin evidence.",
       "credential_guide": {
         "priority": "cleared",
         "operator_summary": "Scheduler auth is already present locally and in GitHub Actions; keep it as the known-good auth lane.",
