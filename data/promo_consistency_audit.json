@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-03T08:48:49.907828Z",
+  "generated_at": "2026-07-03T08:50:34.264549Z",
   "safe_mode": true,
   "summary": {
     "check_count": 30,
@@ -15,24 +15,24 @@
       "status": "pass",
       "severity": "ok",
       "detail": "Blocker ledger summary should match row count.",
-      "expected": 2,
-      "actual": 2
+      "expected": 3,
+      "actual": 3
     },
     {
       "name": "ledger_category_total_matches_rows",
       "status": "pass",
       "severity": "ok",
       "detail": "Blocker category counts should account for every blocker row.",
-      "expected": 2,
-      "actual": 2
+      "expected": 3,
+      "actual": 3
     },
     {
       "name": "status_open_actions_match_operations",
       "status": "pass",
       "severity": "ok",
       "detail": "Promo status open action count should mirror the operations packet.",
-      "expected": 8,
-      "actual": 8
+      "expected": 10,
+      "actual": 10
     },
     {
       "name": "approval_counts_match",
@@ -55,23 +55,23 @@
       "status": "pass",
       "severity": "ok",
       "detail": "Platform repair packet should match platform repair blockers in the ledger.",
-      "expected": 0,
-      "actual": 0
+      "expected": 1,
+      "actual": 1
     },
     {
       "name": "executor_platform_fix_count_matches_platform_packet",
       "status": "pass",
       "severity": "ok",
       "detail": "Executor platform-fix count plus preflight-only setup repairs should match the platform repair packet.",
-      "expected": 0,
-      "actual": 0
+      "expected": 1,
+      "actual": 1
     },
     {
       "name": "tiktok_preflight_status_matches_platform_repair",
       "status": "pass",
       "severity": "ok",
       "detail": "TikTok platform repair row should mirror setup preflight when a current TikTok repair row exists.",
-      "expected": "no current TikTok repair row",
+      "expected": "blocked",
       "actual": "blocked"
     },
     {
@@ -79,15 +79,23 @@
       "status": "pass",
       "severity": "ok",
       "detail": "TikTok preflight local missing secrets should match the platform repair row when one exists.",
-      "expected": "no current TikTok repair row",
-      "actual": []
+      "expected": [
+        "TIKTOK_CLIENT_KEY",
+        "TIKTOK_CLIENT_SECRET",
+        "TIKTOK_REFRESH_TOKEN"
+      ],
+      "actual": [
+        "TIKTOK_CLIENT_KEY",
+        "TIKTOK_CLIENT_SECRET",
+        "TIKTOK_REFRESH_TOKEN"
+      ]
     },
     {
       "name": "tiktok_preflight_worker_missing_matches_platform_repair",
       "status": "pass",
       "severity": "ok",
       "detail": "TikTok preflight worker missing secrets should match the platform repair row when one exists.",
-      "expected": "no current TikTok repair row",
+      "expected": [],
       "actual": []
     },
     {
@@ -135,16 +143,16 @@
       "status": "pass",
       "severity": "ok",
       "detail": "Operations store checks should match checked-pending store services.",
-      "expected": 5,
-      "actual": 5
+      "expected": 6,
+      "actual": 6
     },
     {
       "name": "handoff_blocker_summary_matches_ledger",
       "status": "pass",
       "severity": "ok",
       "detail": "Human handoff blocker summary should be copied from the blocker ledger.",
-      "expected": 2,
-      "actual": 2
+      "expected": 3,
+      "actual": 3
     },
     {
       "name": "handoff_projection_matches_ledger_projection",
@@ -190,12 +198,12 @@
       "expected": [
         "manual-metrics-priority-2",
         "manual-metrics-priority-3",
-        "platform-setup-tiktok-preflight"
+        "platform-setup-FP-AUTO-264"
       ],
       "actual": [
         "manual-metrics-priority-2",
         "manual-metrics-priority-3",
-        "platform-setup-tiktok-preflight"
+        "platform-setup-FP-AUTO-264"
       ]
     },
     {
@@ -212,12 +220,10 @@
       "severity": "ok",
       "detail": "Promo status handoff preview KPI should mirror preview status counts.",
       "expected": {
-        "input_missing": 2,
-        "preview_ok": 1
+        "input_missing": 3
       },
       "actual": {
-        "input_missing": 2,
-        "preview_ok": 1
+        "input_missing": 3
       }
     },
     {
@@ -243,20 +249,20 @@
       "status": "pass",
       "severity": "ok",
       "detail": "Promo status next actions should expose the handoff preview health summary.",
-      "expected": "Review handoff preview health: 1 preview-clean, 2 missing input; see data/human_handoff_resolution_preview.json.",
+      "expected": "Review handoff preview health: 3 missing input; see data/human_handoff_resolution_preview.json.",
       "actual": [
-        "Next operational action: Collect experiment result metrics — python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run",
+        "Next operational action: Fix TikTok upload-mode credentials — python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
         "First handoff step: Fill and import manual metric worksheet — python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
-        "Current unlock gate: Repair TikTok executor (ready_for_human_review); 1 ready, 2 blocked/warning; preview python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run; see data/promo_unlock_sequence.json.",
-        "Review handoff preview health: 1 preview-clean, 2 missing input; see data/human_handoff_resolution_preview.json.",
-        "Refresh automation coverage: latest scheduled run has not covered 2f2e5d8f; dispatch https://github.com/lilyrooartist/lilyrooartist.github.io/actions/workflows/promo-admin-refresh.yml or wait for the next scheduled run.",
+        "Current unlock gate: Repair TikTok executor (blocked_until_input); 0 ready, 3 blocked/warning; preview python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN; see data/promo_unlock_sequence.json.",
+        "Review handoff preview health: 3 missing input; see data/human_handoff_resolution_preview.json.",
         "Refresh manual metrics: 6 worksheet row(s) still need new_value entries (blocked_until_new_values_filled); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values.",
         "Collect experiment results: 81 post-result field(s) need new_value plus evidence_note; use admin/reports/experiment-result-clipboard.md; first priority: measure FP-AUTO-265 on Facebook. Direct preview template: python3 scripts/update_experiment_results.py --post-id FP-AUTO-265 --source-row 33 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run. Direct apply template after review: python3 scripts/update_experiment_results.py --post-id FP-AUTO-265 --source-row 33 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin. Then preview import with python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run after filling data/experiment_result_entry_wide_template.csv.",
-        "Re-check checked-pending store links: 5 music site snapshot(s) still have no public URL; next recommended re-check after 2026-07-04T08:47:33.579685+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 --out data/store_verification_run.json --snapshot-root data/store-verification then. 2 verified snapshot(s) are ready to copy into data/distrokid_release_status.json.",
         "Restart song-forward distribution: approve draft posts, clear executor blockers, and keep weekly metrics current.",
+        "Re-check checked-pending store links: 6 music site snapshot(s) still have no public URL; next recommended re-check after 2026-07-04T08:50:18.153020+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 --out data/store_verification_run.json --snapshot-root data/store-verification then. 1 verified snapshot(s) are ready to copy into data/distrokid_release_status.json.",
         "Refresh release status: python3 scripts/verify_pending_store_links.py --refresh-admin; update data/distrokid_release_status.json when a public URL is verified.",
-        "Refresh manual metrics: fill data/manual_metric_collection_template.csv, preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run, then import with python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin.",
-        "I Learned It All in Fifteen Seconds: Fill manual metric worksheet and import it before weekly reporting."
+        "I Learned It All in Fifteen Seconds: Fill manual metric worksheet and import it before weekly reporting.",
+        "Twelve Dollars: Re-check checked-pending store links for Spotify, Apple Music, HyperFollow; no public URLs were found in the latest snapshots.",
+        "Twelve Dollars: Fill manual metric worksheet and import it before weekly reporting."
       ]
     },
     {
@@ -292,8 +298,8 @@
       "status": "pass",
       "severity": "ok",
       "detail": "Promo unlock sequence should mirror the blocker ledger open blocker count.",
-      "expected": 2,
-      "actual": 2
+      "expected": 3,
+      "actual": 3
     },
     {
       "name": "unlock_sequence_current_step_is_preview_ready",
@@ -302,11 +308,11 @@
       "detail": "Promo unlock sequence should lead with the first currently actionable gate, skipping any completed evidence-only gate.",
       "expected": {
         "current_step_id": "unlock-tiktok-platform-repair",
-        "current_gate_state": "ready_for_human_review"
+        "current_gate_state": "blocked_until_input"
       },
       "actual": {
         "current_step_id": "unlock-tiktok-platform-repair",
-        "current_gate_state": "ready_for_human_review"
+        "current_gate_state": "blocked_until_input"
       }
     },
     {
@@ -316,19 +322,19 @@
       "detail": "Promo status should mirror the unlock sequence summary.",
       "expected": {
         "step_count": 5,
-        "ready_for_human_review_count": 1,
-        "blocked_or_warning_count": 2,
+        "ready_for_human_review_count": 0,
+        "blocked_or_warning_count": 3,
         "current_step_id": "unlock-tiktok-platform-repair",
-        "current_gate_state": "ready_for_human_review",
-        "open_blocker_count": 2
+        "current_gate_state": "blocked_until_input",
+        "open_blocker_count": 3
       },
       "actual": {
         "step_count": 5,
-        "ready_for_human_review_count": 1,
-        "blocked_or_warning_count": 2,
+        "ready_for_human_review_count": 0,
+        "blocked_or_warning_count": 3,
         "current_step_id": "unlock-tiktok-platform-repair",
-        "current_gate_state": "ready_for_human_review",
-        "open_blocker_count": 2
+        "current_gate_state": "blocked_until_input",
+        "open_blocker_count": 3
       }
     },
     {
@@ -338,18 +344,18 @@
       "detail": "Promo status next actions should expose the current unlock sequence gate.",
       "expected": "Current unlock gate action includes data/promo_unlock_sequence.json",
       "actual": [
-        "Next operational action: Collect experiment result metrics — python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run",
+        "Next operational action: Fix TikTok upload-mode credentials — python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN",
         "First handoff step: Fill and import manual metric worksheet — python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
-        "Current unlock gate: Repair TikTok executor (ready_for_human_review); 1 ready, 2 blocked/warning; preview python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode upload --dry-run; see data/promo_unlock_sequence.json.",
-        "Review handoff preview health: 1 preview-clean, 2 missing input; see data/human_handoff_resolution_preview.json.",
-        "Refresh automation coverage: latest scheduled run has not covered 2f2e5d8f; dispatch https://github.com/lilyrooartist/lilyrooartist.github.io/actions/workflows/promo-admin-refresh.yml or wait for the next scheduled run.",
+        "Current unlock gate: Repair TikTok executor (blocked_until_input); 0 ready, 3 blocked/warning; preview python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN; see data/promo_unlock_sequence.json.",
+        "Review handoff preview health: 3 missing input; see data/human_handoff_resolution_preview.json.",
         "Refresh manual metrics: 6 worksheet row(s) still need new_value entries (blocked_until_new_values_filled); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values.",
         "Collect experiment results: 81 post-result field(s) need new_value plus evidence_note; use admin/reports/experiment-result-clipboard.md; first priority: measure FP-AUTO-265 on Facebook. Direct preview template: python3 scripts/update_experiment_results.py --post-id FP-AUTO-265 --source-row 33 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run. Direct apply template after review: python3 scripts/update_experiment_results.py --post-id FP-AUTO-265 --source-row 33 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin. Then preview import with python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run after filling data/experiment_result_entry_wide_template.csv.",
-        "Re-check checked-pending store links: 5 music site snapshot(s) still have no public URL; next recommended re-check after 2026-07-04T08:47:33.579685+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 --out data/store_verification_run.json --snapshot-root data/store-verification then. 2 verified snapshot(s) are ready to copy into data/distrokid_release_status.json.",
         "Restart song-forward distribution: approve draft posts, clear executor blockers, and keep weekly metrics current.",
+        "Re-check checked-pending store links: 6 music site snapshot(s) still have no public URL; next recommended re-check after 2026-07-04T08:50:18.153020+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 --out data/store_verification_run.json --snapshot-root data/store-verification then. 1 verified snapshot(s) are ready to copy into data/distrokid_release_status.json.",
         "Refresh release status: python3 scripts/verify_pending_store_links.py --refresh-admin; update data/distrokid_release_status.json when a public URL is verified.",
-        "Refresh manual metrics: fill data/manual_metric_collection_template.csv, preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run, then import with python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin.",
-        "I Learned It All in Fifteen Seconds: Fill manual metric worksheet and import it before weekly reporting."
+        "I Learned It All in Fifteen Seconds: Fill manual metric worksheet and import it before weekly reporting.",
+        "Twelve Dollars: Re-check checked-pending store links for Spotify, Apple Music, HyperFollow; no public URLs were found in the latest snapshots.",
+        "Twelve Dollars: Fill manual metric worksheet and import it before weekly reporting."
       ]
     },
     {
