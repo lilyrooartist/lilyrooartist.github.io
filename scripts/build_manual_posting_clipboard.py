@@ -298,6 +298,13 @@ def build_session_manifest(cards: list[dict], summary: dict) -> dict:
 
 
 def first_url_acceleration(cards: list[dict], summary: dict) -> dict:
+    if not cards:
+        return {
+            "status": "not_active",
+            "first_post_id": "",
+            "next_action": "No manual posting lane is active.",
+            "guardrail": "Manual-only posting is not part of the active distribution plan.",
+        }
     waiting = [card for card in cards if not (card.get("public_url") or "").strip()]
     if not waiting:
         return {
@@ -327,6 +334,13 @@ def first_url_acceleration(cards: list[dict], summary: dict) -> dict:
 
 
 def first_post_runbook(cards: list[dict], summary: dict) -> dict:
+    if not cards:
+        return {
+            "status": "not_active",
+            "post_id": "",
+            "next_action": "No manual posting lane is active.",
+            "guardrail": "Manual-only posting is not part of the active distribution plan.",
+        }
     waiting = [card for card in cards if not (card.get("public_url") or "").strip()]
     if not waiting:
         return {
@@ -491,29 +505,29 @@ def build_payload() -> dict:
     url_template_path = completion.get("url_template_path") or ""
     partial_apply_command = (
         f"python3 scripts/log_manual_distribution.py --from-csv {url_template_path} --allow-partial --apply --refresh-admin"
-        if url_template_path
+        if url_template_path and cards
         else ""
     )
     summary = {
         "status": "ready_to_post" if cards else "empty",
-        "posting_surface": completion.get("posting_surface") or "YouTube Studio Community",
-        "public_community_url": completion.get("public_community_url") or distribution.get("public_community_url") or "",
+        "posting_surface": (completion.get("posting_surface") or "YouTube Studio Community") if cards else "",
+        "public_community_url": (completion.get("public_community_url") or distribution.get("public_community_url") or "") if cards else "",
         "postable_count": len(cards),
-        "waiting_public_url_count": completion.get("waiting_public_url_count") or len(cards),
-        "pending_log_ids": completion.get("pending_log_ids") or [card["id"] for card in cards],
+        "waiting_public_url_count": (completion.get("waiting_public_url_count") or len(cards)) if cards else 0,
+        "pending_log_ids": (completion.get("pending_log_ids") or [card["id"] for card in cards]) if cards else [],
         "posting_bundle_count": sum(1 for card in cards if card.get("posting_bundle")),
-        "url_template_path": completion.get("url_template_path") or "",
-        "paste_text_dir": str(PASTE_CARD_DIR.relative_to(ROOT)),
-        "session_file_path": str(SESSION_FILE.relative_to(ROOT)),
+        "url_template_path": (completion.get("url_template_path") or "") if cards else "",
+        "paste_text_dir": str(PASTE_CARD_DIR.relative_to(ROOT)) if cards else "",
+        "session_file_path": str(SESSION_FILE.relative_to(ROOT)) if cards else "",
         "paste_text_file_count": len(paste_text_files),
         "paste_text_files": paste_text_files,
-        "batch_log_preview_command": completion.get("batch_log_preview_command") or "",
-        "batch_log_apply_command": completion.get("batch_log_apply_command") or "",
+        "batch_log_preview_command": (completion.get("batch_log_preview_command") or "") if cards else "",
+        "batch_log_apply_command": (completion.get("batch_log_apply_command") or "") if cards else "",
         "batch_log_partial_apply_command": partial_apply_command,
         "public_url_reconciliation_status": reconciliation_summary.get("status") or "not_run",
         "public_url_reconciliation_match_count": reconciliation_summary.get("match_count") or 0,
-        "public_url_reconciliation_command": "python3 scripts/reconcile_youtube_community_urls.py",
-        "public_url_reconciliation_apply_command": reconciliation_summary.get("apply_command") or "",
+        "public_url_reconciliation_command": "python3 scripts/reconcile_youtube_community_urls.py" if cards else "",
+        "public_url_reconciliation_apply_command": (reconciliation_summary.get("apply_command") or "") if cards else "",
         "result_handoff_report": "admin/reports/experiment-result-clipboard.md",
         "first_measurement_due_after_hours": FIRST_MEASUREMENT_DUE_AFTER_HOURS,
         "next_action": (
@@ -551,7 +565,7 @@ def build_payload() -> dict:
         "safe_mode": True,
         "source": {
             "manual_distribution_packet": str(MANUAL_DISTRIBUTION.relative_to(ROOT)),
-            "manual_distribution_url_template": completion.get("url_template_path") or "",
+            "manual_distribution_url_template": (completion.get("url_template_path") or "") if cards else "",
             "youtube_community_url_reconciliation": str(YOUTUBE_RECONCILIATION.relative_to(ROOT)) if YOUTUBE_RECONCILIATION.exists() else "",
             "published_log_target": "admin/content/Published_Log.csv",
         },
@@ -702,6 +716,34 @@ def build_markdown(payload: dict) -> str:
     runbook = payload.get("first_post_runbook") or {}
     acceleration = payload.get("first_url_acceleration") or {}
     lifecycle = payload.get("tracking_lifecycle") or {}
+    if summary.get("status") == "empty" and not payload.get("post_cards"):
+        lines = [
+            "# Manual Posting Clipboard - Lily Roo",
+            "",
+            f"Generated: {payload['generated_at']}",
+            "",
+            "## Summary",
+            "- Status: **empty**",
+            "- Postable cards: **0**",
+            "- Waiting public URLs: **0**",
+            "- Next action: No approved manual posts are currently waiting.",
+            "",
+            "## Inactive Lane",
+            "- Manual-only YouTube Community posting is not part of the active distribution plan.",
+            "- No public Community URL, URL worksheet, paste files, batch logging commands, or operator posting steps are emitted while this lane is empty.",
+            "- API-backed posting and proof capture remain the active promotion path.",
+            "",
+            "## Tracking Lifecycle",
+            f"- Status: **{lifecycle.get('status', 'unknown')}**",
+            f"- Posted: **{lifecycle.get('posted_count', 0)}/{lifecycle.get('total_count', 0)}**",
+            f"- Public URLs logged: **{lifecycle.get('public_url_logged_count', 0)}/{lifecycle.get('total_count', 0)}**",
+            f"- Results recorded: **{lifecycle.get('result_recorded_count', 0)}/{lifecycle.get('total_count', 0)}**",
+            "",
+            "## Guardrails",
+        ]
+        lines.extend(f"- {item}" for item in payload["guardrails"])
+        lines.append("")
+        return "\n".join(lines)
     lines = [
         "# Manual Posting Clipboard - Lily Roo",
         "",

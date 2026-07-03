@@ -4487,7 +4487,7 @@ def validate_generated_outputs(failures):
         fail("manual-distribution-packet.md missing", failures)
     if MANUAL_POSTING_CLIPBOARD_REPORT.exists():
         clipboard_report = MANUAL_POSTING_CLIPBOARD_REPORT.read_text(encoding="utf-8")
-        clipboard_report_required = [
+        clipboard_active_report_required = [
             "Manual Posting Clipboard",
             "First URL Acceleration",
             "Session Manifest",
@@ -4504,7 +4504,15 @@ def validate_generated_outputs(failures):
             "Operator Steps",
             "Guardrails",
         ]
-        if all(item in clipboard_report for item in clipboard_report_required):
+        clipboard_inactive_report_required = [
+            "Manual Posting Clipboard",
+            "Inactive Lane",
+            "Manual-only YouTube Community posting is not part of the active distribution plan.",
+            "No public Community URL, URL worksheet, paste files, batch logging commands, or operator posting steps are emitted while this lane is empty.",
+            "API-backed posting and proof capture remain the active promotion path.",
+            "Guardrails",
+        ]
+        if all(item in clipboard_report for item in clipboard_active_report_required) or all(item in clipboard_report for item in clipboard_inactive_report_required):
             ok("manual posting clipboard markdown report present")
         else:
             fail("manual-posting-clipboard.md missing expected sections", failures)
