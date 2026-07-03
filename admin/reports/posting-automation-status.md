@@ -1,6 +1,6 @@
 # Posting Automation Status - Lily Roo
 
-Generated: 2026-07-03T08:55:59.759462Z
+Generated: 2026-07-03T08:59:49.541463Z
 
 ## Summary
 - Status: **blocked**
@@ -14,9 +14,9 @@ Generated: 2026-07-03T08:55:59.759462Z
 ## Automation Lanes
 - **Scheduled refresh workflow** - `ready`
   - Detail: 17 */6 * * *, 05 16 * * *; latest run in_progress / pending
-  - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28649807552
+  - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28650006044
 - **Safe admin refresh** - `ready`
-  - Detail: 17 refresh commands captured at 2026-07-03T08:55:57.901506Z
+  - Detail: 17 refresh commands captured at 2026-07-03T08:59:47.761452Z
   - Evidence: data/promo_admin_refresh_run.json
 - **Scheduler dry-run authentication** - `ready`
   - Detail: HTTP 200 using bearer auth; due=0 would_post=0
