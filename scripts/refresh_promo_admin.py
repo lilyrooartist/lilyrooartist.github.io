@@ -75,6 +75,11 @@ STEPS = [
         "preserve_on_failure": ["data/social_scheduler_dry_run.json"],
     },
     {
+        "name": "sync_future_posts",
+        "command": ["python3", "scripts/sync_future_posts.py"],
+        "required": True,
+    },
+    {
         "name": "generate_promo_queue_plan",
         "command": ["python3", "scripts/generate_promo_queue_plan.py"],
         "required": True,
