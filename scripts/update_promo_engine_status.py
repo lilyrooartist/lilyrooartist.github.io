@@ -53,7 +53,6 @@ OUT = ROOT / "data" / "promo_engine_status.json"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
 
 PROMO_PLATFORMS = ["X", "Instagram", "TikTok", "Facebook", "YouTube"]
-YOUTUBE_MONETIZATION_SUBSCRIBER_TARGET = 1000
 GROWTH_GOAL_START_DATE = "2026-06-22"
 GROWTH_GOAL_DAYS = 30
 GROWTH_GOAL_LIFT = 0.25
@@ -1234,7 +1233,7 @@ def date_value(value: str | None):
         return None
 
 
-def monetization_runway(metrics_history: dict, subscribers: int, remaining: int, target: int) -> dict:
+def audience_signal_runway(metrics_history: dict, audience_count: int) -> dict:
     snapshots = []
     for snapshot in (metrics_history.get("snapshots") or []):
         youtube = snapshot.get("youtube") or {}
@@ -1243,64 +1242,39 @@ def monetization_runway(metrics_history: dict, subscribers: int, remaining: int,
             continue
         snapshots.append({
             "date": snapshot_date,
-            "subscribers": int_metric(youtube.get("subscribers")),
+            "audience_count": int_metric(youtube.get("subscribers")),
         })
     if not snapshots:
         return {
             "status": "insufficient_history",
             "snapshot_count": 0,
             "window_days": 0,
-            "subscriber_delta": 0,
-            "subscribers_per_week": 0,
-            "estimated_weeks_to_target": None,
-            "required_subscribers_per_week": {
-                "90_days": round(remaining / (90 / 7), 2) if remaining else 0,
-                "180_days": round(remaining / (180 / 7), 2) if remaining else 0,
-                "365_days": round(remaining / (365 / 7), 2) if remaining else 0,
-            },
-            "action_needed": "Capture at least two dated YouTube metric snapshots to calculate monetization pace.",
+            "audience_signal_delta": 0,
+            "audience_signal_per_week": 0,
+            "action_needed": "Capture at least two dated audience-signal snapshots to compare release-forward momentum.",
         }
     first = snapshots[0]
     latest = snapshots[-1]
     window_days = max((latest["date"] - first["date"]).days, 0)
-    subscriber_delta = subscribers - first["subscribers"]
-    subscribers_per_week = round((subscriber_delta / window_days) * 7, 2) if window_days else 0
-    estimated_weeks = round(remaining / subscribers_per_week, 1) if remaining and subscribers_per_week > 0 else None
-    required = {
-        "90_days": round(remaining / (90 / 7), 2) if remaining else 0,
-        "180_days": round(remaining / (180 / 7), 2) if remaining else 0,
-        "365_days": round(remaining / (365 / 7), 2) if remaining else 0,
-    }
-    if remaining <= 0:
-        status = "target_reached"
-        action_needed = "Monetization subscriber target reached; verify partner-program eligibility requirements."
-    elif len(snapshots) < 2 or window_days == 0:
+    audience_delta = audience_count - first["audience_count"]
+    audience_per_week = round((audience_delta / window_days) * 7, 2) if window_days else 0
+    if len(snapshots) < 2 or window_days == 0:
         status = "insufficient_history"
-        action_needed = "Capture another dated YouTube metric snapshot to calculate subscriber pace."
-    elif subscribers_per_week <= 0:
+        action_needed = "Capture another dated audience-signal snapshot before judging momentum."
+    elif audience_per_week <= 0:
         status = "stalled"
         action_needed = "Restart song-forward distribution: approve draft posts, clear executor blockers, and keep weekly metrics current."
-    elif subscribers_per_week < required["365_days"]:
-        status = "behind_365_day_pace"
-        action_needed = "Increase tasteful discovery without using subscriber-count solicitations."
-    elif subscribers_per_week < required["180_days"]:
-        status = "behind_180_day_pace"
-        action_needed = "Current growth can reach the target, but not within six months; approve more song-forward distribution."
     else:
-        status = "on_pace"
-        action_needed = "Maintain approved distribution and monitor subscriber pace every refresh."
+        status = "moving"
+        action_needed = "Maintain release-forward distribution and compare measured post formats after each proof window."
     return {
         "status": status,
         "snapshot_count": len(snapshots),
         "first_date": first["date"].isoformat(),
         "latest_date": latest["date"].isoformat(),
         "window_days": window_days,
-        "first_subscribers": first["subscribers"],
-        "latest_subscribers": subscribers,
-        "subscriber_delta": subscriber_delta,
-        "subscribers_per_week": subscribers_per_week,
-        "estimated_weeks_to_target": estimated_weeks,
-        "required_subscribers_per_week": required,
+        "audience_signal_delta": audience_delta,
+        "audience_signal_per_week": audience_per_week,
         "action_needed": action_needed,
     }
 
@@ -1328,11 +1302,8 @@ def approved_queue_counts(future_posts: dict, now: datetime) -> dict:
 
 
 def monetization_state(metrics: dict, history: dict, metrics_history: dict, promo_plan: dict, future_posts: dict, execution_state: dict, now: datetime) -> dict:
-    subscribers = latest_youtube_subscribers(metrics, history)
-    target = YOUTUBE_MONETIZATION_SUBSCRIBER_TARGET
-    remaining = max(target - subscribers, 0)
-    progress = round((subscribers / target) * 100, 2) if target else 0
-    runway = monetization_runway(metrics_history, subscribers, remaining, target)
+    audience_count = latest_youtube_subscribers(metrics, history)
+    runway = audience_signal_runway(metrics_history, audience_count)
     plan_summary = promo_plan.get("summary") or {}
     apply_preview = promo_plan.get("apply_preview") or {}
     queue_counts = approved_queue_counts(future_posts, now)
@@ -1357,14 +1328,19 @@ def monetization_state(metrics: dict, history: dict, metrics_history: dict, prom
         next_pressure.append(f"{approval_blockers} executor records are blocked by approval.")
     if platform_fix_blockers:
         next_pressure.append(f"{platform_fix_blockers} executor records need platform repair before they can publish.")
-    if runway.get("status") in {"stalled", "behind_365_day_pace", "behind_180_day_pace"}:
+    if runway.get("status") in {"stalled", "insufficient_history"}:
         next_pressure.append(runway["action_needed"])
     return {
-        "target": target,
-        "current_subscribers": subscribers,
-        "remaining_subscribers": remaining,
-        "progress_percent": progress,
-        "source": "youtube live metrics, with metrics history fallback",
+        "goal": "release_forward_brand_growth",
+        "public_target_hidden": True,
+        "audience_signal": {
+            "tracked": True,
+            "count_visible": False,
+            "source": "YouTube public audience metric, with metrics history fallback",
+            "window_days": runway.get("window_days", 0),
+            "delta": runway.get("audience_signal_delta", 0),
+            "per_week": runway.get("audience_signal_per_week", 0),
+        },
         "runway": runway,
         "approved_upcoming_posts": approved_upcoming,
         "approved_backlog_posts": queue_counts["approved_backlog_posts"],

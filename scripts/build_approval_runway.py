@@ -170,7 +170,7 @@ def build_markdown(payload: dict) -> str:
         f"- Blocked drafts: **{summary['blocked']}**",
         f"- Recommended approvals: **{summary['recommended_approval_count']}**",
         f"- Recommended manual approvals: **{summary.get('recommended_manual_approval_count', 0)}**",
-        f"- Discovery runway: **{summary['runway_status']}**; prioritize release-forward posts and avoid subscriber-count solicitation.",
+        f"- Discovery runway: **{summary['runway_status']}**; prioritize release-forward posts and avoid solicitation-style copy.",
         "",
         "## Manual Approval Docket",
         f"- Status: **{docket.get('status', 'unknown')}**",
@@ -237,8 +237,6 @@ def main() -> int:
         "recommended_manual_ids": [row["id"] for row in manual_rows],
         "blocked_ids": [row["id"] for row in blocked_rows],
         "runway_status": runway.get("status") or "",
-        "subscribers_per_week": runway.get("subscribers_per_week"),
-        "required_subscribers_per_week_365": (runway.get("required_subscribers_per_week") or {}).get("365_days"),
         "all_review_preview_command": preview_command(((plan.get("approval_commands") or {}).get("all_review") or "")),
         "all_review_approval_command": (plan.get("approval_commands") or {}).get("all_review") or "",
     }

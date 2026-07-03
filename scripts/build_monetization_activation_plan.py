@@ -42,15 +42,15 @@ def manual_approval_action(runway: dict) -> dict | None:
     release_names = sorted({row.get("release") for row in rows if row.get("release")})
     release_text = ", ".join(release_names) if release_names else "the manual YouTube Community docket"
     detail = (
-        f"Review and approve {len(ready_ids)} manual subscriber-growth YouTube Community row(s) "
+        f"Review and approve {len(ready_ids)} manual-only release row(s) "
         f"for {release_text}. Approval only moves them into the manual distribution docket; "
         "it does not publish externally."
     )
     if blocked_ids:
         detail = f"{detail} Blocked rows stay excluded: {', '.join(blocked_ids)}."
     return command_action(
-        "Approve manual YouTube Community subscriber rows",
-        "Approve manual subscriber rows",
+        "Review manual-only release rows",
+        "Review manual-only release rows",
         docket.get("status") or "ready_for_manual_review",
         detail,
         docket.get("preview_command") or "",
@@ -66,7 +66,7 @@ def manual_approval_action(runway: dict) -> dict | None:
                     "id": row.get("id") or "",
                     "release": row.get("release") or "",
                     "platform": row.get("platform") or "",
-                    "subscriber_growth_score": row.get("subscriber_growth_score"),
+                    "release_growth_score": row.get("release_growth_score", row.get("subscriber_growth_score")),
                     "readiness_state": row.get("readiness_state") or "",
                 }
                 for row in rows
@@ -123,7 +123,7 @@ def build_actions(status: dict, runway: dict, cta_audit: dict, platform_repair: 
     if monetization.get("draft_review_posts"):
         actions.append(command_action(
             "Apply approved plan rows after review",
-            "Move approved subscriber posts into queue",
+            "Move approved release posts into queue",
             "blocked_until_approved",
             "After copy review and approval, apply only approved rows to the live queue; this does not directly post externally.",
             "",
@@ -232,15 +232,15 @@ def replace_text_embed(html: str, block_id: str, content: str) -> str:
 def build_markdown(payload: dict) -> str:
     summary = payload["summary"]
     lines = [
-        "# Monetization Activation Plan - Lily Roo",
+        "# Brand Activation Plan - Lily Roo",
         "",
         f"Generated: {payload['generated_at']}",
         "",
         "## Summary",
-        f"- Current YouTube audience metric: **{summary['current_subscribers']} subscribers**",
+        f"- Brand growth goal: **{summary['brand_growth_goal']}**",
         f"- Runway status: **{summary['runway_status']}**",
-        f"- Ready song-forward approvals: **{summary['ready_subscriber_approval_count']}**",
-        f"- Solicitation rewrites available: **{summary['subscriber_swap_count']}**",
+        f"- Ready release-forward approvals: **{summary['ready_release_approval_count']}**",
+        f"- Solicitation rewrites available: **{summary['solicitation_swap_count']}**",
         f"- Platform fixes: **{summary['platform_fix_count']}**",
         f"- Activation actions: **{summary['action_count']}**",
         "",
@@ -306,21 +306,18 @@ def main() -> int:
     manual_ready_ids = manual_docket.get("ready_ids") or []
     manual_blocked_ids = manual_docket.get("blocked_ids") or []
     summary = {
-        "target_subscribers": monetization.get("target"),
-        "current_subscribers": monetization.get("current_subscribers"),
-        "remaining_subscribers": monetization.get("remaining_subscribers"),
+        "brand_growth_goal": monetization.get("goal") or "release_forward_brand_growth",
+        "public_target_hidden": monetization.get("public_target_hidden") is True,
         "runway_status": runway_state.get("status") or "",
-        "subscribers_per_week": runway_state.get("subscribers_per_week"),
-        "required_subscribers_per_week_365": (runway_state.get("required_subscribers_per_week") or {}).get("365_days"),
-        "ready_subscriber_approval_count": len((runway_summary.get("recommended_ids") or [])) + len(manual_ready_ids),
-        "auto_subscriber_approval_count": len(runway_summary.get("recommended_ids") or []),
-        "manual_subscriber_approval_count": len(manual_ready_ids),
-        "manual_subscriber_approval_ids": manual_ready_ids,
-        "manual_subscriber_blocked_ids": manual_blocked_ids,
-        "manual_subscriber_approval_preview_command": manual_docket.get("preview_command") or "",
-        "manual_subscriber_approval_apply_command": manual_docket.get("apply_command") or "",
-        "manual_subscriber_approval_guardrail": manual_docket.get("guardrail") or "",
-        "subscriber_swap_count": (cta_audit.get("summary") or {}).get("subscriber_swap_count", 0),
+        "ready_release_approval_count": len((runway_summary.get("recommended_ids") or [])) + len(manual_ready_ids),
+        "auto_release_approval_count": len(runway_summary.get("recommended_ids") or []),
+        "manual_release_approval_count": len(manual_ready_ids),
+        "manual_release_approval_ids": manual_ready_ids,
+        "manual_release_blocked_ids": manual_blocked_ids,
+        "manual_release_approval_preview_command": manual_docket.get("preview_command") or "",
+        "manual_release_approval_apply_command": manual_docket.get("apply_command") or "",
+        "manual_release_approval_guardrail": manual_docket.get("guardrail") or "",
+        "solicitation_swap_count": (cta_audit.get("summary") or {}).get("subscriber_swap_count", 0),
         "ready_after_approval_swap_count": (cta_audit.get("summary") or {}).get("ready_after_approval_swap_count", 0),
         "platform_fix_count": (platform_repair.get("summary") or {}).get("platform_fix_count", 0),
         "action_count": len(actions),

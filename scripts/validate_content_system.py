@@ -2042,7 +2042,7 @@ def validate_generated_outputs(failures):
         manual_ready_ids = manual_docket.get("ready_ids") or []
         auto_ready_ids = runway_summary.get("recommended_ids") or []
         manual_action = next(
-            (action for action in actions if action.get("phase") == "Approve manual subscriber rows"),
+            (action for action in actions if action.get("phase") == "Review manual-only release rows"),
             None,
         )
         backlog_preview_for_activation = json.loads(BACKLOG_RESCHEDULE_PREVIEW.read_text(encoding="utf-8")) if BACKLOG_RESCHEDULE_PREVIEW.exists() else {}
@@ -2055,14 +2055,15 @@ def validate_generated_outputs(failures):
         if (
             activation.get("safe_mode") is True
             and summary.get("action_count") == len(actions)
-            and "ready_subscriber_approval_count" in summary
-            and "subscriber_swap_count" in summary
-            and summary.get("ready_subscriber_approval_count") == len(auto_ready_ids) + len(manual_ready_ids)
-            and summary.get("manual_subscriber_approval_count") == len(manual_ready_ids)
-            and summary.get("manual_subscriber_approval_ids") == manual_ready_ids
-            and summary.get("manual_subscriber_blocked_ids") == (manual_docket.get("blocked_ids") or [])
-            and summary.get("manual_subscriber_approval_preview_command") == (manual_docket.get("preview_command") or "")
-            and summary.get("manual_subscriber_approval_apply_command") == (manual_docket.get("apply_command") or "")
+            and "ready_release_approval_count" in summary
+            and "solicitation_swap_count" in summary
+            and summary.get("public_target_hidden") is True
+            and summary.get("ready_release_approval_count") == len(auto_ready_ids) + len(manual_ready_ids)
+            and summary.get("manual_release_approval_count") == len(manual_ready_ids)
+            and summary.get("manual_release_approval_ids") == manual_ready_ids
+            and summary.get("manual_release_blocked_ids") == (manual_docket.get("blocked_ids") or [])
+            and summary.get("manual_release_approval_preview_command") == (manual_docket.get("preview_command") or "")
+            and summary.get("manual_release_approval_apply_command") == (manual_docket.get("apply_command") or "")
             and (
                 (not manual_ready_ids and manual_action is None)
                 or (
@@ -3049,36 +3050,29 @@ def validate_generated_outputs(failures):
         else:
             fail("promo_engine_status.json missing experiment publish runway status", failures)
         monetization = kpi.get("monetization") or {}
-        latest = history.get("latest") or {}
-        latest_youtube = latest.get("youtube") or {}
-        current_subscribers = int(latest_youtube.get("subscribers") or 0)
-        live_metrics_snapshot = json.loads(LIVE_METRICS.read_text(encoding="utf-8")) if LIVE_METRICS.exists() else {}
-        live_youtube = ((live_metrics_snapshot.get("platforms") or {}).get("youtube") or {}).get("metrics") or {}
-        if live_youtube.get("subscribers") not in (None, ""):
-            current_subscribers = int(live_youtube.get("subscribers"))
-        target = int(monetization.get("target") or 0)
         if (
-            target == 1000
-            and int(monetization.get("current_subscribers") or 0) == current_subscribers
-            and int(monetization.get("remaining_subscribers") or 0) == max(1000 - current_subscribers, 0)
-            and "progress_percent" in monetization
+            monetization.get("goal") == "release_forward_brand_growth"
+            and monetization.get("public_target_hidden") is True
+            and "target" not in monetization
+            and "current_subscribers" not in monetization
+            and "remaining_subscribers" not in monetization
+            and (monetization.get("audience_signal") or {}).get("tracked") is True
+            and (monetization.get("audience_signal") or {}).get("count_visible") is False
         ):
-            ok("promo engine tracks YouTube monetization subscriber gap")
+            ok("promo engine keeps audience target hidden")
         else:
-            fail("promo_engine_status.json missing valid monetization subscriber gap", failures)
+            fail("promo_engine_status.json exposes or misses hidden audience target state", failures)
         runway = monetization.get("runway") or {}
-        required_weekly = runway.get("required_subscribers_per_week") or {}
         if (
             runway.get("status")
-            and int(runway.get("latest_subscribers") or 0) == current_subscribers
             and int(runway.get("snapshot_count") or 0) == int(history.get("snapshot_count") or 0)
-            and "subscribers_per_week" in runway
-            and float(required_weekly.get("365_days") or 0) >= 0
+            and "audience_signal_delta" in runway
+            and "audience_signal_per_week" in runway
             and runway.get("action_needed")
         ):
-            ok("promo engine tracks monetization runway pace")
+            ok("promo engine tracks release-forward audience signal")
         else:
-            fail("promo_engine_status.json missing monetization runway pace", failures)
+            fail("promo_engine_status.json missing release-forward audience signal runway", failures)
         plan_snapshot = json.loads(PROMO_QUEUE_PLAN.read_text(encoding="utf-8")) if PROMO_QUEUE_PLAN.exists() else {}
         plan_summary = plan_snapshot.get("summary") or {}
         future_snapshot = json.loads(FUTURE.read_text(encoding="utf-8")) if FUTURE.exists() else {}
@@ -4536,7 +4530,7 @@ def validate_generated_outputs(failures):
         fail("experiment-result-clipboard.md missing", failures)
     if MONETIZATION_ACTIVATION_REPORT.exists():
         activation_report_text = MONETIZATION_ACTIVATION_REPORT.read_text(encoding="utf-8")
-        if "Monetization Activation Plan" in activation_report_text and "Activation Sequence" in activation_report_text and "Guardrails" in activation_report_text:
+        if "Brand Activation Plan" in activation_report_text and "Activation Sequence" in activation_report_text and "Guardrails" in activation_report_text:
             ok("monetization activation markdown report present")
         else:
             fail("monetization-activation-plan.md missing expected sections", failures)
