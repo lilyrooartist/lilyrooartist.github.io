@@ -86,7 +86,7 @@ STEPS = [
     },
     {
         "name": "capture_x_post_results_24h",
-        "command": ["python3", "scripts/capture_x_post_results.py", "--min-age-hours", "24", "--allow-empty", "--apply-results"],
+        "command": ["python3", "scripts/capture_x_post_results.py", "--min-age-hours", "24", "--allow-empty", "--skip-missing-secrets", "--apply-results"],
         "required": False,
         "preserve_on_failure": [
             "admin/content/Published_Log.csv",
@@ -96,7 +96,7 @@ STEPS = [
     },
     {
         "name": "capture_facebook_post_results_24h",
-        "command": ["python3", "scripts/capture_facebook_post_results.py", "--min-age-hours", "24", "--allow-empty", "--apply-results"],
+        "command": ["python3", "scripts/capture_facebook_post_results.py", "--min-age-hours", "24", "--allow-empty", "--skip-missing-secrets", "--apply-results"],
         "required": False,
         "preserve_on_failure": [
             "admin/content/Published_Log.csv",

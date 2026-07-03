@@ -28,6 +28,7 @@ OUT = ROOT / "data" / "x_post_results.json"
 REPORT = ROOT / "admin" / "reports" / "x-post-results.md"
 X_TWEETS_URL = "https://api.x.com/2/tweets"
 RESULT_FIELDS = ["views", "likes", "comments", "shares", "saves"]
+X_ENV_NAMES = ["X_API_KEY", "X_API_SECRET", "X_ACCESS_TOKEN", "X_ACCESS_TOKEN_SECRET"]
 TZ = ZoneInfo("America/New_York")
 
 
@@ -101,14 +102,14 @@ def candidate_rows(post_ids: set[str], min_age_hours: float = 0) -> list[dict]:
 
 def require_x_env() -> dict[str, str]:
     env = load_env(SOCIAL_ENV)
-    missing = [
-        name
-        for name in ["X_API_KEY", "X_API_SECRET", "X_ACCESS_TOKEN", "X_ACCESS_TOKEN_SECRET"]
-        if not (env.get(name) or "").strip()
-    ]
+    missing = missing_x_env(env)
     if missing:
         raise SystemExit(f"{SOCIAL_ENV.relative_to(ROOT.parent)} missing: {', '.join(missing)}")
     return env
+
+
+def missing_x_env(env: dict[str, str]) -> list[str]:
+    return [name for name in X_ENV_NAMES if not (env.get(name) or "").strip()]
 
 
 def oauth_encode(value: str) -> str:
@@ -240,6 +241,50 @@ def build_payload(rows: list[dict], tweets: dict[str, dict]) -> dict:
     }
 
 
+def build_missing_secret_payload(rows: list[dict], missing: list[str]) -> dict:
+    evidence_note = (
+        f"X metric capture skipped {datetime.now(timezone.utc).date().isoformat()}: "
+        f"missing credential name(s) {', '.join(missing)}"
+    )
+    captured = [
+        {
+            **row,
+            "created_at": "",
+            "lookup_status": "skipped_missing_secrets",
+            "metrics": {},
+            "fillable_results": {},
+            "filled_field_count": 0,
+            "evidence_note": evidence_note,
+            "direct_apply_command": "",
+        }
+        for row in rows
+    ]
+    return {
+        "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+        "safe_mode": True,
+        "source": {
+            "published_log": relative(PUBLISHED_LOG),
+            "local_secret_source": str(SOCIAL_ENV.relative_to(ROOT.parent)),
+            "x_endpoint": X_TWEETS_URL,
+        },
+        "summary": {
+            "status": "skipped_missing_secrets",
+            "captured_post_count": len(captured),
+            "fillable_post_count": 0,
+            "fillable_result_field_count": 0,
+            "post_ids": [item["post_id"] for item in captured],
+            "result_fields": RESULT_FIELDS,
+            "missing_secret_names": missing,
+            "apply_command": "python3 scripts/capture_x_post_results.py --apply-results --refresh-admin",
+            "retry_command": "python3 scripts/capture_x_post_results.py --min-age-hours 24 --allow-empty --apply-results --refresh-admin",
+            "report_path": relative(REPORT),
+            "next_action": "Add the missing X credential names locally or in GitHub Actions, then rerun capture.",
+        },
+        "rows": captured,
+        "redaction": "Secret names are listed for operator diagnostics; secret values are never written here.",
+    }
+
+
 def build_markdown(payload: dict) -> str:
     summary = payload["summary"]
     lines = [
@@ -253,9 +298,16 @@ def build_markdown(payload: dict) -> str:
         f"- Fillable posts: **{summary['fillable_post_count']}**",
         f"- Fillable result fields: **{summary['fillable_result_field_count']}**",
         f"- Apply command: `{summary['apply_command']}`",
+    ]
+    if summary.get("missing_secret_names"):
+        lines.extend([
+            f"- Missing credential names: `{', '.join(summary['missing_secret_names'])}`",
+            f"- Next action: {summary.get('next_action', '')}",
+        ])
+    lines.extend([
         "",
         "## Rows",
-    ]
+    ])
     for item in payload["rows"]:
         metrics = item.get("metrics") or {}
         lines.extend([
@@ -273,6 +325,7 @@ def build_markdown(payload: dict) -> str:
         "## Guardrails",
         "- Metrics come from the X API for already-published Lily Roo posts.",
         "- This report does not contain OAuth credentials.",
+        "- Missing credential names may be listed so the scheduled refresh can skip cleanly without writing secret values.",
         "- Applying results goes through scripts/update_experiment_results.py so Published_Log.csv row IDs are verified.",
         "",
     ])
@@ -307,6 +360,7 @@ def main() -> int:
     parser.add_argument("--post-id", action="append", default=[], help="Restrict to one content_id. Can be repeated.")
     parser.add_argument("--min-age-hours", type=float, default=0, help="Only capture rows whose published date is at least this old.")
     parser.add_argument("--allow-empty", action="store_true", help="Write an empty report instead of failing when no rows match.")
+    parser.add_argument("--skip-missing-secrets", action="store_true", help="Write a skipped report and exit 0 when X credentials are absent.")
     parser.add_argument("--apply-results", action="store_true", help="Import captured metrics into Published_Log.csv.")
     parser.add_argument("--refresh-admin", action="store_true", help="Refresh admin after applying results.")
     args = parser.parse_args()
@@ -323,7 +377,16 @@ def main() -> int:
             print(json.dumps({"output": relative(OUT), **payload["summary"]}, indent=2))
             return 0
         raise SystemExit("No matching published X rows with tweet URLs found.")
-    env = require_x_env()
+    env = load_env(SOCIAL_ENV)
+    missing = missing_x_env(env)
+    if missing:
+        if args.skip_missing_secrets:
+            payload = build_missing_secret_payload(rows, missing)
+            OUT.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+            REPORT.write_text(build_markdown(payload), encoding="utf-8")
+            print(json.dumps({"output": relative(OUT), **payload["summary"]}, indent=2))
+            return 0
+        raise SystemExit(f"{SOCIAL_ENV.relative_to(ROOT.parent)} missing: {', '.join(missing)}")
     tweets = fetch_tweets([row["tweet_id"] for row in rows], env)
     payload = build_payload(rows, tweets)
     OUT.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")

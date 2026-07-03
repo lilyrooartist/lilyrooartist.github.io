@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T08:28:20.047937Z",
+  "generated_at": "2026-07-03T08:08:15.141667Z",
   "safe_mode": true,
   "source": {
     "published_log": "admin/content/Published_Log.csv",
@@ -7,21 +7,37 @@
     "graph_version": "v20.0"
   },
   "summary": {
-    "status": "no_open_facebook_result_fields",
-    "captured_post_count": 2,
+    "status": "skipped_missing_secrets",
+    "captured_post_count": 12,
     "fillable_post_count": 0,
     "fillable_result_field_count": 0,
     "post_ids": [
       "FP-AUTO-210",
-      "FP-AUTO-260"
+      "FP-AUTO-260",
+      "FP-AUTO-278",
+      "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA",
+      "FP-AUTO-273",
+      "FP-AUTO-265",
+      "FP-AUTO-268",
+      "FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA",
+      "FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK",
+      "FP-PLAN-TWELVE-DOLLARS-FACEBOOK",
+      "FP-AUTO-283",
+      "FP-STORY-I-LEARNED-IT-ALL-IN-FIFTEEN-SECONDS-FACEBOOK-ARCHIVE-CTA"
     ],
     "result_fields": [
       "likes",
       "comments",
       "shares"
     ],
+    "missing_secret_names": [
+      "META_LONG_LIVED_TOKEN",
+      "FB_PAGE_ID"
+    ],
     "apply_command": "python3 scripts/capture_facebook_post_results.py --apply-results --refresh-admin",
-    "report_path": "admin/reports/facebook-post-results.md"
+    "retry_command": "python3 scripts/capture_facebook_post_results.py --min-age-hours 24 --allow-empty --apply-results --refresh-admin",
+    "report_path": "admin/reports/facebook-post-results.md",
+    "next_action": "Add the missing Meta credential names locally or in GitHub Actions, then rerun capture."
   },
   "rows": [
     {
@@ -29,23 +45,21 @@
       "source_row": 7,
       "facebook_object_id": "903693509504290_122113878687249470",
       "url": "https://www.facebook.com/903693509504290_122113878687249470",
+      "published_at": "2026-04-25T16:00:00+00:00",
+      "measurement_due_at": "2026-04-26T16:00:00+00:00",
       "existing_values": {
         "likes": "0",
         "comments": "0",
         "shares": "0"
       },
-      "created_time": "2026-04-26T01:38:27+0000",
-      "permalink_url": "https://www.facebook.com/122119767927249470/posts/122113878687249470",
-      "lookup_status": "ok",
-      "metrics": {
-        "likes": 0,
-        "comments": 0,
-        "shares": 0
-      },
-      "post_clicks_not_imported_as_views": 0,
+      "created_time": "",
+      "permalink_url": "",
+      "lookup_status": "skipped_missing_secrets",
+      "metrics": {},
+      "post_clicks_not_imported_as_views": null,
       "fillable_results": {},
       "filled_field_count": 0,
-      "evidence_note": "Facebook Graph post metrics 2026-06-22",
+      "evidence_note": "Facebook metric capture skipped 2026-07-03: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID",
       "direct_apply_command": ""
     },
     {
@@ -53,26 +67,244 @@
       "source_row": 18,
       "facebook_object_id": "903693509504290_122118326547249470",
       "url": "https://www.facebook.com/903693509504290_122118326547249470",
+      "published_at": "2026-06-07T16:00:00+00:00",
+      "measurement_due_at": "2026-06-08T16:00:00+00:00",
       "existing_values": {
         "likes": "0",
         "comments": "0",
         "shares": "0"
       },
-      "created_time": "2026-06-07T12:35:58+0000",
-      "permalink_url": "https://www.facebook.com/122119767927249470/posts/122118326547249470",
-      "lookup_status": "ok",
-      "metrics": {
-        "likes": 0,
-        "comments": 0,
-        "shares": 0
-      },
-      "post_clicks_not_imported_as_views": 0,
+      "created_time": "",
+      "permalink_url": "",
+      "lookup_status": "skipped_missing_secrets",
+      "metrics": {},
+      "post_clicks_not_imported_as_views": null,
       "fillable_results": {},
       "filled_field_count": 0,
-      "evidence_note": "Facebook Graph post metrics 2026-06-22",
+      "evidence_note": "Facebook metric capture skipped 2026-07-03: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID",
+      "direct_apply_command": ""
+    },
+    {
+      "post_id": "FP-AUTO-278",
+      "source_row": 30,
+      "facebook_object_id": "903693509504290_122120594715249470",
+      "url": "https://www.facebook.com/903693509504290_122120594715249470",
+      "published_at": "2026-06-30T16:00:00+00:00",
+      "measurement_due_at": "2026-07-01T16:00:00+00:00",
+      "existing_values": {
+        "likes": "",
+        "comments": "",
+        "shares": ""
+      },
+      "created_time": "",
+      "permalink_url": "",
+      "lookup_status": "skipped_missing_secrets",
+      "metrics": {},
+      "post_clicks_not_imported_as_views": null,
+      "fillable_results": {},
+      "filled_field_count": 0,
+      "evidence_note": "Facebook metric capture skipped 2026-07-03: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID",
+      "direct_apply_command": ""
+    },
+    {
+      "post_id": "FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA",
+      "source_row": 31,
+      "facebook_object_id": "903693509504290_122120594589249470",
+      "url": "https://www.facebook.com/903693509504290_122120594589249470",
+      "published_at": "2026-06-30T16:00:00+00:00",
+      "measurement_due_at": "2026-07-01T16:00:00+00:00",
+      "existing_values": {
+        "likes": "",
+        "comments": "",
+        "shares": ""
+      },
+      "created_time": "",
+      "permalink_url": "",
+      "lookup_status": "skipped_missing_secrets",
+      "metrics": {},
+      "post_clicks_not_imported_as_views": null,
+      "fillable_results": {},
+      "filled_field_count": 0,
+      "evidence_note": "Facebook metric capture skipped 2026-07-03: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID",
+      "direct_apply_command": ""
+    },
+    {
+      "post_id": "FP-AUTO-273",
+      "source_row": 32,
+      "facebook_object_id": "903693509504290_122120594571249470",
+      "url": "https://www.facebook.com/903693509504290_122120594571249470",
+      "published_at": "2026-06-30T16:00:00+00:00",
+      "measurement_due_at": "2026-07-01T16:00:00+00:00",
+      "existing_values": {
+        "likes": "",
+        "comments": "",
+        "shares": ""
+      },
+      "created_time": "",
+      "permalink_url": "",
+      "lookup_status": "skipped_missing_secrets",
+      "metrics": {},
+      "post_clicks_not_imported_as_views": null,
+      "fillable_results": {},
+      "filled_field_count": 0,
+      "evidence_note": "Facebook metric capture skipped 2026-07-03: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID",
+      "direct_apply_command": ""
+    },
+    {
+      "post_id": "FP-AUTO-265",
+      "source_row": 33,
+      "facebook_object_id": "903693509504290_122120594493249470",
+      "url": "https://www.facebook.com/903693509504290_122120594493249470",
+      "published_at": "2026-06-30T16:00:00+00:00",
+      "measurement_due_at": "2026-07-01T16:00:00+00:00",
+      "existing_values": {
+        "likes": "",
+        "comments": "",
+        "shares": ""
+      },
+      "created_time": "",
+      "permalink_url": "",
+      "lookup_status": "skipped_missing_secrets",
+      "metrics": {},
+      "post_clicks_not_imported_as_views": null,
+      "fillable_results": {},
+      "filled_field_count": 0,
+      "evidence_note": "Facebook metric capture skipped 2026-07-03: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID",
+      "direct_apply_command": ""
+    },
+    {
+      "post_id": "FP-AUTO-268",
+      "source_row": 34,
+      "facebook_object_id": "903693509504290_122120594409249470",
+      "url": "https://www.facebook.com/903693509504290_122120594409249470",
+      "published_at": "2026-06-30T16:00:00+00:00",
+      "measurement_due_at": "2026-07-01T16:00:00+00:00",
+      "existing_values": {
+        "likes": "",
+        "comments": "",
+        "shares": ""
+      },
+      "created_time": "",
+      "permalink_url": "",
+      "lookup_status": "skipped_missing_secrets",
+      "metrics": {},
+      "post_clicks_not_imported_as_views": null,
+      "fillable_results": {},
+      "filled_field_count": 0,
+      "evidence_note": "Facebook metric capture skipped 2026-07-03: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID",
+      "direct_apply_command": ""
+    },
+    {
+      "post_id": "FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA",
+      "source_row": 35,
+      "facebook_object_id": "903693509504290_122120594331249470",
+      "url": "https://www.facebook.com/903693509504290_122120594331249470",
+      "published_at": "2026-06-30T16:00:00+00:00",
+      "measurement_due_at": "2026-07-01T16:00:00+00:00",
+      "existing_values": {
+        "likes": "",
+        "comments": "",
+        "shares": ""
+      },
+      "created_time": "",
+      "permalink_url": "",
+      "lookup_status": "skipped_missing_secrets",
+      "metrics": {},
+      "post_clicks_not_imported_as_views": null,
+      "fillable_results": {},
+      "filled_field_count": 0,
+      "evidence_note": "Facebook metric capture skipped 2026-07-03: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID",
+      "direct_apply_command": ""
+    },
+    {
+      "post_id": "FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK",
+      "source_row": 36,
+      "facebook_object_id": "903693509504290_122120594301249470",
+      "url": "https://www.facebook.com/903693509504290_122120594301249470",
+      "published_at": "2026-06-30T16:00:00+00:00",
+      "measurement_due_at": "2026-07-01T16:00:00+00:00",
+      "existing_values": {
+        "likes": "",
+        "comments": "",
+        "shares": ""
+      },
+      "created_time": "",
+      "permalink_url": "",
+      "lookup_status": "skipped_missing_secrets",
+      "metrics": {},
+      "post_clicks_not_imported_as_views": null,
+      "fillable_results": {},
+      "filled_field_count": 0,
+      "evidence_note": "Facebook metric capture skipped 2026-07-03: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID",
+      "direct_apply_command": ""
+    },
+    {
+      "post_id": "FP-PLAN-TWELVE-DOLLARS-FACEBOOK",
+      "source_row": 37,
+      "facebook_object_id": "903693509504290_122120594247249470",
+      "url": "https://www.facebook.com/903693509504290_122120594247249470",
+      "published_at": "2026-06-30T16:00:00+00:00",
+      "measurement_due_at": "2026-07-01T16:00:00+00:00",
+      "existing_values": {
+        "likes": "",
+        "comments": "",
+        "shares": ""
+      },
+      "created_time": "",
+      "permalink_url": "",
+      "lookup_status": "skipped_missing_secrets",
+      "metrics": {},
+      "post_clicks_not_imported_as_views": null,
+      "fillable_results": {},
+      "filled_field_count": 0,
+      "evidence_note": "Facebook metric capture skipped 2026-07-03: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID",
+      "direct_apply_command": ""
+    },
+    {
+      "post_id": "FP-AUTO-283",
+      "source_row": 41,
+      "facebook_object_id": "903693509504290_122120643825249470",
+      "url": "https://www.facebook.com/903693509504290_122120643825249470",
+      "published_at": "2026-07-01T16:00:00+00:00",
+      "measurement_due_at": "2026-07-02T16:00:00+00:00",
+      "existing_values": {
+        "likes": "",
+        "comments": "",
+        "shares": ""
+      },
+      "created_time": "",
+      "permalink_url": "",
+      "lookup_status": "skipped_missing_secrets",
+      "metrics": {},
+      "post_clicks_not_imported_as_views": null,
+      "fillable_results": {},
+      "filled_field_count": 0,
+      "evidence_note": "Facebook metric capture skipped 2026-07-03: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID",
+      "direct_apply_command": ""
+    },
+    {
+      "post_id": "FP-STORY-I-LEARNED-IT-ALL-IN-FIFTEEN-SECONDS-FACEBOOK-ARCHIVE-CTA",
+      "source_row": 45,
+      "facebook_object_id": "903693509504290_122120699235249470",
+      "url": "https://www.facebook.com/903693509504290_122120699235249470",
+      "published_at": "2026-07-01T16:00:00+00:00",
+      "measurement_due_at": "2026-07-02T16:00:00+00:00",
+      "existing_values": {
+        "likes": "",
+        "comments": "",
+        "shares": ""
+      },
+      "created_time": "",
+      "permalink_url": "",
+      "lookup_status": "skipped_missing_secrets",
+      "metrics": {},
+      "post_clicks_not_imported_as_views": null,
+      "fillable_results": {},
+      "filled_field_count": 0,
+      "evidence_note": "Facebook metric capture skipped 2026-07-03: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID",
       "direct_apply_command": ""
     }
   ],
-  "redaction": "Secret values are never written here; Meta credentials stay in the local secret source.",
-  "views_guardrail": "Post clicks are captured for context but are not imported as views."
+  "redaction": "Secret names are listed for operator diagnostics; secret values are never written here.",
+  "views_guardrail": "Post clicks are not captured while credentials are missing and are never imported as views."
 }

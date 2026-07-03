@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-22T08:21:34.100125Z",
+  "generated_at": "2026-07-03T08:08:15.089501Z",
   "safe_mode": true,
   "source": {
     "published_log": "admin/content/Published_Log.csv",
@@ -7,8 +7,8 @@
     "x_endpoint": "https://api.x.com/2/tweets"
   },
   "summary": {
-    "status": "no_open_x_result_fields",
-    "captured_post_count": 5,
+    "status": "skipped_missing_secrets",
+    "captured_post_count": 17,
     "fillable_post_count": 0,
     "fillable_result_field_count": 0,
     "post_ids": [
@@ -16,7 +16,19 @@
       "FP-AUTO-208",
       "FP-AUTO-213",
       "FP-AUTO-257",
-      "FP-AUTO-262"
+      "FP-AUTO-262",
+      "FP-AUTO-271",
+      "FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA",
+      "FP-AUTO-266",
+      "FP-STORY-TWELVE-DOLLARS-X-ARCHIVE-CTA",
+      "FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK",
+      "FP-PLAN-TWELVE-DOLLARS-X",
+      "FP-AUTO-276",
+      "FP-LAUNCH-ANALOG-MYTH-X",
+      "FP-AUTO-281",
+      "FP-STORY-I-LEARNED-IT-ALL-IN-FIFTEEN-SECONDS-X-ARCHIVE-CTA",
+      "FP-LAUNCH-ANALOG-MYTH-X-EVENING",
+      "FP-LAUNCH-ANALOG-MYTH-X-NIGHT"
     ],
     "result_fields": [
       "views",
@@ -25,8 +37,16 @@
       "shares",
       "saves"
     ],
+    "missing_secret_names": [
+      "X_API_KEY",
+      "X_API_SECRET",
+      "X_ACCESS_TOKEN",
+      "X_ACCESS_TOKEN_SECRET"
+    ],
     "apply_command": "python3 scripts/capture_x_post_results.py --apply-results --refresh-admin",
-    "report_path": "admin/reports/x-post-results.md"
+    "retry_command": "python3 scripts/capture_x_post_results.py --min-age-hours 24 --allow-empty --apply-results --refresh-admin",
+    "report_path": "admin/reports/x-post-results.md",
+    "next_action": "Add the missing X credential names locally or in GitHub Actions, then rerun capture."
   },
   "rows": [
     {
@@ -34,6 +54,8 @@
       "source_row": 5,
       "tweet_id": "2027750321322148009",
       "url": "https://x.com/lilyrooartist/status/2027750321322148009",
+      "published_at": "2026-02-28T17:00:00+00:00",
+      "measurement_due_at": "2026-03-01T17:00:00+00:00",
       "existing_values": {
         "views": "",
         "likes": "",
@@ -42,11 +64,11 @@
         "saves": ""
       },
       "created_at": "",
-      "lookup_status": "missing_from_x_api_response",
+      "lookup_status": "skipped_missing_secrets",
       "metrics": {},
       "fillable_results": {},
       "filled_field_count": 0,
-      "evidence_note": "X API tweet metrics 2026-06-22",
+      "evidence_note": "X metric capture skipped 2026-07-03: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET",
       "direct_apply_command": ""
     },
     {
@@ -54,6 +76,8 @@
       "source_row": 10,
       "tweet_id": "2047879043295420822",
       "url": "https://x.com/i/web/status/2047879043295420822",
+      "published_at": "2026-04-25T16:00:00+00:00",
+      "measurement_due_at": "2026-04-26T16:00:00+00:00",
       "existing_values": {
         "views": "2",
         "likes": "0",
@@ -61,18 +85,12 @@
         "shares": "0",
         "saves": "0"
       },
-      "created_at": "2026-04-25T03:23:06.000Z",
-      "lookup_status": "ok",
-      "metrics": {
-        "views": 2,
-        "likes": 0,
-        "comments": 0,
-        "shares": 0,
-        "saves": 0
-      },
+      "created_at": "",
+      "lookup_status": "skipped_missing_secrets",
+      "metrics": {},
       "fillable_results": {},
       "filled_field_count": 0,
-      "evidence_note": "X API tweet metrics 2026-06-22",
+      "evidence_note": "X metric capture skipped 2026-07-03: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET",
       "direct_apply_command": ""
     },
     {
@@ -80,6 +98,8 @@
       "source_row": 11,
       "tweet_id": "2048245628736622826",
       "url": "https://x.com/i/web/status/2048245628736622826",
+      "published_at": "2026-04-25T16:00:00+00:00",
+      "measurement_due_at": "2026-04-26T16:00:00+00:00",
       "existing_values": {
         "views": "2",
         "likes": "0",
@@ -87,18 +107,12 @@
         "shares": "0",
         "saves": "0"
       },
-      "created_at": "2026-04-26T03:39:47.000Z",
-      "lookup_status": "ok",
-      "metrics": {
-        "views": 2,
-        "likes": 0,
-        "comments": 1,
-        "shares": 0,
-        "saves": 0
-      },
+      "created_at": "",
+      "lookup_status": "skipped_missing_secrets",
+      "metrics": {},
       "fillable_results": {},
       "filled_field_count": 0,
-      "evidence_note": "X API tweet metrics 2026-06-22",
+      "evidence_note": "X metric capture skipped 2026-07-03: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET",
       "direct_apply_command": ""
     },
     {
@@ -106,6 +120,8 @@
       "source_row": 16,
       "tweet_id": "2062920257577029712",
       "url": "https://x.com/i/web/status/2062920257577029712",
+      "published_at": "2026-06-05T16:00:00+00:00",
+      "measurement_due_at": "2026-06-06T16:00:00+00:00",
       "existing_values": {
         "views": "4",
         "likes": "0",
@@ -113,18 +129,12 @@
         "shares": "0",
         "saves": "0"
       },
-      "created_at": "2026-06-05T15:31:31.000Z",
-      "lookup_status": "ok",
-      "metrics": {
-        "views": 4,
-        "likes": 0,
-        "comments": 1,
-        "shares": 0,
-        "saves": 0
-      },
+      "created_at": "",
+      "lookup_status": "skipped_missing_secrets",
+      "metrics": {},
       "fillable_results": {},
       "filled_field_count": 0,
-      "evidence_note": "X API tweet metrics 2026-06-22",
+      "evidence_note": "X metric capture skipped 2026-07-03: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET",
       "direct_apply_command": ""
     },
     {
@@ -132,6 +142,8 @@
       "source_row": 17,
       "tweet_id": "2063600780834136468",
       "url": "https://x.com/i/web/status/2063600780834136468",
+      "published_at": "2026-06-07T16:00:00+00:00",
+      "measurement_due_at": "2026-06-08T16:00:00+00:00",
       "existing_values": {
         "views": "5",
         "likes": "0",
@@ -139,20 +151,278 @@
         "shares": "0",
         "saves": "0"
       },
-      "created_at": "2026-06-07T12:35:40.000Z",
-      "lookup_status": "ok",
-      "metrics": {
-        "views": 5,
-        "likes": 0,
-        "comments": 0,
-        "shares": 0,
-        "saves": 0
-      },
+      "created_at": "",
+      "lookup_status": "skipped_missing_secrets",
+      "metrics": {},
       "fillable_results": {},
       "filled_field_count": 0,
-      "evidence_note": "X API tweet metrics 2026-06-22",
+      "evidence_note": "X metric capture skipped 2026-07-03: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET",
+      "direct_apply_command": ""
+    },
+    {
+      "post_id": "FP-AUTO-271",
+      "source_row": 19,
+      "tweet_id": "2071402084403118566",
+      "url": "https://x.com/i/web/status/2071402084403118566",
+      "published_at": "2026-06-29T16:00:00+00:00",
+      "measurement_due_at": "2026-06-30T16:00:00+00:00",
+      "existing_values": {
+        "views": "",
+        "likes": "",
+        "comments": "",
+        "shares": "",
+        "saves": ""
+      },
+      "created_at": "",
+      "lookup_status": "skipped_missing_secrets",
+      "metrics": {},
+      "fillable_results": {},
+      "filled_field_count": 0,
+      "evidence_note": "X metric capture skipped 2026-07-03: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET",
+      "direct_apply_command": ""
+    },
+    {
+      "post_id": "FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA",
+      "source_row": 20,
+      "tweet_id": "2071236124497080380",
+      "url": "https://x.com/i/web/status/2071236124497080380",
+      "published_at": "2026-06-29T16:00:00+00:00",
+      "measurement_due_at": "2026-06-30T16:00:00+00:00",
+      "existing_values": {
+        "views": "",
+        "likes": "",
+        "comments": "",
+        "shares": "",
+        "saves": ""
+      },
+      "created_at": "",
+      "lookup_status": "skipped_missing_secrets",
+      "metrics": {},
+      "fillable_results": {},
+      "filled_field_count": 0,
+      "evidence_note": "X metric capture skipped 2026-07-03: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET",
+      "direct_apply_command": ""
+    },
+    {
+      "post_id": "FP-AUTO-266",
+      "source_row": 21,
+      "tweet_id": "2071039677357003221",
+      "url": "https://x.com/i/web/status/2071039677357003221",
+      "published_at": "2026-06-29T16:00:00+00:00",
+      "measurement_due_at": "2026-06-30T16:00:00+00:00",
+      "existing_values": {
+        "views": "",
+        "likes": "",
+        "comments": "",
+        "shares": "",
+        "saves": ""
+      },
+      "created_at": "",
+      "lookup_status": "skipped_missing_secrets",
+      "metrics": {},
+      "fillable_results": {},
+      "filled_field_count": 0,
+      "evidence_note": "X metric capture skipped 2026-07-03: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET",
+      "direct_apply_command": ""
+    },
+    {
+      "post_id": "FP-STORY-TWELVE-DOLLARS-X-ARCHIVE-CTA",
+      "source_row": 22,
+      "tweet_id": "2070511391048405318",
+      "url": "https://x.com/i/web/status/2070511391048405318",
+      "published_at": "2026-06-29T16:00:00+00:00",
+      "measurement_due_at": "2026-06-30T16:00:00+00:00",
+      "existing_values": {
+        "views": "",
+        "likes": "",
+        "comments": "",
+        "shares": "",
+        "saves": ""
+      },
+      "created_at": "",
+      "lookup_status": "skipped_missing_secrets",
+      "metrics": {},
+      "fillable_results": {},
+      "filled_field_count": 0,
+      "evidence_note": "X metric capture skipped 2026-07-03: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET",
+      "direct_apply_command": ""
+    },
+    {
+      "post_id": "FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK",
+      "source_row": 23,
+      "tweet_id": "2069786481556635841",
+      "url": "https://x.com/i/web/status/2069786481556635841",
+      "published_at": "2026-06-29T16:00:00+00:00",
+      "measurement_due_at": "2026-06-30T16:00:00+00:00",
+      "existing_values": {
+        "views": "",
+        "likes": "",
+        "comments": "",
+        "shares": "",
+        "saves": ""
+      },
+      "created_at": "",
+      "lookup_status": "skipped_missing_secrets",
+      "metrics": {},
+      "fillable_results": {},
+      "filled_field_count": 0,
+      "evidence_note": "X metric capture skipped 2026-07-03: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET",
+      "direct_apply_command": ""
+    },
+    {
+      "post_id": "FP-PLAN-TWELVE-DOLLARS-X",
+      "source_row": 24,
+      "tweet_id": "2068336870803587325",
+      "url": "https://x.com/i/web/status/2068336870803587325",
+      "published_at": "2026-06-29T16:00:00+00:00",
+      "measurement_due_at": "2026-06-30T16:00:00+00:00",
+      "existing_values": {
+        "views": "",
+        "likes": "",
+        "comments": "",
+        "shares": "",
+        "saves": ""
+      },
+      "created_at": "",
+      "lookup_status": "skipped_missing_secrets",
+      "metrics": {},
+      "fillable_results": {},
+      "filled_field_count": 0,
+      "evidence_note": "X metric capture skipped 2026-07-03: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET",
+      "direct_apply_command": ""
+    },
+    {
+      "post_id": "FP-AUTO-276",
+      "source_row": 38,
+      "tweet_id": "2071764617978950017",
+      "url": "https://x.com/i/web/status/2071764617978950017",
+      "published_at": "2026-06-30T16:00:00+00:00",
+      "measurement_due_at": "2026-07-01T16:00:00+00:00",
+      "existing_values": {
+        "views": "",
+        "likes": "",
+        "comments": "",
+        "shares": "",
+        "saves": ""
+      },
+      "created_at": "",
+      "lookup_status": "skipped_missing_secrets",
+      "metrics": {},
+      "fillable_results": {},
+      "filled_field_count": 0,
+      "evidence_note": "X metric capture skipped 2026-07-03: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET",
+      "direct_apply_command": ""
+    },
+    {
+      "post_id": "FP-LAUNCH-ANALOG-MYTH-X",
+      "source_row": 40,
+      "tweet_id": "2072179856264278171",
+      "url": "https://x.com/i/web/status/2072179856264278171",
+      "published_at": "2026-07-01T16:00:00+00:00",
+      "measurement_due_at": "2026-07-02T16:00:00+00:00",
+      "existing_values": {
+        "views": "",
+        "likes": "",
+        "comments": "",
+        "shares": "",
+        "saves": ""
+      },
+      "created_at": "",
+      "lookup_status": "skipped_missing_secrets",
+      "metrics": {},
+      "fillable_results": {},
+      "filled_field_count": 0,
+      "evidence_note": "X metric capture skipped 2026-07-03: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET",
+      "direct_apply_command": ""
+    },
+    {
+      "post_id": "FP-AUTO-281",
+      "source_row": 42,
+      "tweet_id": "2072127000391905619",
+      "url": "https://x.com/i/web/status/2072127000391905619",
+      "published_at": "2026-07-01T16:00:00+00:00",
+      "measurement_due_at": "2026-07-02T16:00:00+00:00",
+      "existing_values": {
+        "views": "",
+        "likes": "",
+        "comments": "",
+        "shares": "",
+        "saves": ""
+      },
+      "created_at": "",
+      "lookup_status": "skipped_missing_secrets",
+      "metrics": {},
+      "fillable_results": {},
+      "filled_field_count": 0,
+      "evidence_note": "X metric capture skipped 2026-07-03: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET",
+      "direct_apply_command": ""
+    },
+    {
+      "post_id": "FP-STORY-I-LEARNED-IT-ALL-IN-FIFTEEN-SECONDS-X-ARCHIVE-CTA",
+      "source_row": 43,
+      "tweet_id": "2071960909967442193",
+      "url": "https://x.com/i/web/status/2071960909967442193",
+      "published_at": "2026-07-01T16:00:00+00:00",
+      "measurement_due_at": "2026-07-02T16:00:00+00:00",
+      "existing_values": {
+        "views": "",
+        "likes": "",
+        "comments": "",
+        "shares": "",
+        "saves": ""
+      },
+      "created_at": "",
+      "lookup_status": "skipped_missing_secrets",
+      "metrics": {},
+      "fillable_results": {},
+      "filled_field_count": 0,
+      "evidence_note": "X metric capture skipped 2026-07-03: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET",
+      "direct_apply_command": ""
+    },
+    {
+      "post_id": "FP-LAUNCH-ANALOG-MYTH-X-EVENING",
+      "source_row": 47,
+      "tweet_id": "2072445477686026289",
+      "url": "https://x.com/i/web/status/2072445477686026289",
+      "published_at": "2026-07-01T16:00:00+00:00",
+      "measurement_due_at": "2026-07-02T16:00:00+00:00",
+      "existing_values": {
+        "views": "",
+        "likes": "",
+        "comments": "",
+        "shares": "",
+        "saves": ""
+      },
+      "created_at": "",
+      "lookup_status": "skipped_missing_secrets",
+      "metrics": {},
+      "fillable_results": {},
+      "filled_field_count": 0,
+      "evidence_note": "X metric capture skipped 2026-07-03: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET",
+      "direct_apply_command": ""
+    },
+    {
+      "post_id": "FP-LAUNCH-ANALOG-MYTH-X-NIGHT",
+      "source_row": 48,
+      "tweet_id": "2072487612313419803",
+      "url": "https://x.com/i/web/status/2072487612313419803",
+      "published_at": "2026-07-01T16:00:00+00:00",
+      "measurement_due_at": "2026-07-02T16:00:00+00:00",
+      "existing_values": {
+        "views": "",
+        "likes": "",
+        "comments": "",
+        "shares": "",
+        "saves": ""
+      },
+      "created_at": "",
+      "lookup_status": "skipped_missing_secrets",
+      "metrics": {},
+      "fillable_results": {},
+      "filled_field_count": 0,
+      "evidence_note": "X metric capture skipped 2026-07-03: missing credential name(s) X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET",
       "direct_apply_command": ""
     }
   ],
-  "redaction": "Secret values are never written here; X OAuth credentials stay in the local secret source."
+  "redaction": "Secret names are listed for operator diagnostics; secret values are never written here."
 }

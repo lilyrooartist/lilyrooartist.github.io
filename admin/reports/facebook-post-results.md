@@ -1,32 +1,105 @@
 # Facebook Post Results - Lily Roo
 
-Generated: 2026-06-22T08:28:20.047937Z
+Generated: 2026-07-03T08:08:15.141667Z
 
 ## Summary
-- Status: **no_open_facebook_result_fields**
-- Captured posts: **2**
+- Status: **skipped_missing_secrets**
+- Captured posts: **12**
 - Fillable posts: **0**
 - Fillable result fields: **0**
 - Apply command: `python3 scripts/capture_facebook_post_results.py --apply-results --refresh-admin`
+- Missing credential names: `META_LONG_LIVED_TOKEN, FB_PAGE_ID`
+- Next action: Add the missing Meta credential names locally or in GitHub Actions, then rerun capture.
 
 ## Rows
 - **FP-AUTO-210** row `7`
   - URL: https://www.facebook.com/903693509504290_122113878687249470
-  - Lookup: `ok`
+  - Lookup: `skipped_missing_secrets`
   - Likes: `0`; comments: `0`; shares: `0`
-  - Post clicks captured but not imported as views: `0`
+  - Post clicks captured but not imported as views: `None`
   - Fillable fields: `none`
-  - Evidence: Facebook Graph post metrics 2026-06-22
+  - Evidence: Facebook metric capture skipped 2026-07-03: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
 - **FP-AUTO-260** row `18`
   - URL: https://www.facebook.com/903693509504290_122118326547249470
-  - Lookup: `ok`
+  - Lookup: `skipped_missing_secrets`
   - Likes: `0`; comments: `0`; shares: `0`
-  - Post clicks captured but not imported as views: `0`
+  - Post clicks captured but not imported as views: `None`
   - Fillable fields: `none`
-  - Evidence: Facebook Graph post metrics 2026-06-22
+  - Evidence: Facebook metric capture skipped 2026-07-03: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
+- **FP-AUTO-278** row `30`
+  - URL: https://www.facebook.com/903693509504290_122120594715249470
+  - Lookup: `skipped_missing_secrets`
+  - Likes: `0`; comments: `0`; shares: `0`
+  - Post clicks captured but not imported as views: `None`
+  - Fillable fields: `none`
+  - Evidence: Facebook metric capture skipped 2026-07-03: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
+- **FP-STORY-ANALOG-MYTH-FACEBOOK-ARCHIVE-CTA** row `31`
+  - URL: https://www.facebook.com/903693509504290_122120594589249470
+  - Lookup: `skipped_missing_secrets`
+  - Likes: `0`; comments: `0`; shares: `0`
+  - Post clicks captured but not imported as views: `None`
+  - Fillable fields: `none`
+  - Evidence: Facebook metric capture skipped 2026-07-03: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
+- **FP-AUTO-273** row `32`
+  - URL: https://www.facebook.com/903693509504290_122120594571249470
+  - Lookup: `skipped_missing_secrets`
+  - Likes: `0`; comments: `0`; shares: `0`
+  - Post clicks captured but not imported as views: `None`
+  - Fillable fields: `none`
+  - Evidence: Facebook metric capture skipped 2026-07-03: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
+- **FP-AUTO-265** row `33`
+  - URL: https://www.facebook.com/903693509504290_122120594493249470
+  - Lookup: `skipped_missing_secrets`
+  - Likes: `0`; comments: `0`; shares: `0`
+  - Post clicks captured but not imported as views: `None`
+  - Fillable fields: `none`
+  - Evidence: Facebook metric capture skipped 2026-07-03: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
+- **FP-AUTO-268** row `34`
+  - URL: https://www.facebook.com/903693509504290_122120594409249470
+  - Lookup: `skipped_missing_secrets`
+  - Likes: `0`; comments: `0`; shares: `0`
+  - Post clicks captured but not imported as views: `None`
+  - Fillable fields: `none`
+  - Evidence: Facebook metric capture skipped 2026-07-03: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
+- **FP-STORY-TWELVE-DOLLARS-FACEBOOK-ARCHIVE-CTA** row `35`
+  - URL: https://www.facebook.com/903693509504290_122120594331249470
+  - Lookup: `skipped_missing_secrets`
+  - Likes: `0`; comments: `0`; shares: `0`
+  - Post clicks captured but not imported as views: `None`
+  - Fillable fields: `none`
+  - Evidence: Facebook metric capture skipped 2026-07-03: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
+- **FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK** row `36`
+  - URL: https://www.facebook.com/903693509504290_122120594301249470
+  - Lookup: `skipped_missing_secrets`
+  - Likes: `0`; comments: `0`; shares: `0`
+  - Post clicks captured but not imported as views: `None`
+  - Fillable fields: `none`
+  - Evidence: Facebook metric capture skipped 2026-07-03: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
+- **FP-PLAN-TWELVE-DOLLARS-FACEBOOK** row `37`
+  - URL: https://www.facebook.com/903693509504290_122120594247249470
+  - Lookup: `skipped_missing_secrets`
+  - Likes: `0`; comments: `0`; shares: `0`
+  - Post clicks captured but not imported as views: `None`
+  - Fillable fields: `none`
+  - Evidence: Facebook metric capture skipped 2026-07-03: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
+- **FP-AUTO-283** row `41`
+  - URL: https://www.facebook.com/903693509504290_122120643825249470
+  - Lookup: `skipped_missing_secrets`
+  - Likes: `0`; comments: `0`; shares: `0`
+  - Post clicks captured but not imported as views: `None`
+  - Fillable fields: `none`
+  - Evidence: Facebook metric capture skipped 2026-07-03: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
+- **FP-STORY-I-LEARNED-IT-ALL-IN-FIFTEEN-SECONDS-FACEBOOK-ARCHIVE-CTA** row `45`
+  - URL: https://www.facebook.com/903693509504290_122120699235249470
+  - Lookup: `skipped_missing_secrets`
+  - Likes: `0`; comments: `0`; shares: `0`
+  - Post clicks captured but not imported as views: `None`
+  - Fillable fields: `none`
+  - Evidence: Facebook metric capture skipped 2026-07-03: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
 
 ## Guardrails
 - Metrics come from the Facebook Graph API for already-published Lily Roo posts.
 - This report does not contain Meta credentials.
+- Missing credential names may be listed so the scheduled refresh can skip cleanly without writing secret values.
 - Post clicks are not treated as views.
 - Applying results goes through scripts/update_experiment_results.py so Published_Log.csv row IDs are verified.
