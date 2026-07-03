@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-07-03T06:24:09.799010Z",
+  "generated_at": "2026-07-03T06:25:33.344806Z",
   "safe_mode": true,
   "summary": {
     "check_count": 30,
-    "passed": 29,
-    "failed": 1,
-    "high_failed": 1,
+    "passed": 30,
+    "failed": 0,
+    "high_failed": 0,
     "medium_failed": 0,
-    "status": "fail"
+    "status": "pass"
   },
   "checks": [
     {
@@ -92,14 +92,10 @@
     },
     {
       "name": "tiktok_preflight_worker_missing_matches_platform_repair",
-      "status": "fail",
-      "severity": "high",
+      "status": "pass",
+      "severity": "ok",
       "detail": "TikTok preflight worker missing secrets should match the platform repair row when one exists.",
-      "expected": [
-        "TIKTOK_CLIENT_KEY",
-        "TIKTOK_CLIENT_SECRET",
-        "TIKTOK_REFRESH_TOKEN"
-      ],
+      "expected": [],
       "actual": []
     },
     {

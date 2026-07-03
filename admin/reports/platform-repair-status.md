@@ -1,6 +1,6 @@
 # Platform Repair Status - Lily Roo
 
-Generated: 2026-07-03T06:24:08.763140Z
+Generated: 2026-07-03T06:25:33.316512Z
 
 ## Summary
 - Platform fixes: **4**
@@ -66,7 +66,6 @@ Generated: 2026-07-03T06:24:08.763140Z
 - **TikTok** (`FP-AUTO-264`)
   - Status: `needs_fix`; reason: `tiktok_setup_preflight_blocked`
   - Repair: Local upload-mode OAuth credentials missing: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN. Complete TikTok OAuth setup locally, then push upload-mode secrets and refresh Admin.
-  - Missing secrets: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN
   - Missing locally: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN
   - Local source: `secrets/social_api.env`
   - Setup preflight: `blocked`; blocked checks: `5`

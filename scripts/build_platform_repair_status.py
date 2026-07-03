@@ -270,6 +270,10 @@ def build_status() -> dict:
                 blocked_apply_reasons.append("public_posting_approval_not_confirmed_for_direct_posting")
         apply_command = "" if blocked_apply_reasons else raw_apply_command
         checklist = repair_checklist(context, platform_readiness, preview_command, apply_command)
+        if "worker_missing_secrets" in context:
+            row_missing_secrets = context.get("worker_missing_secrets") or []
+        else:
+            row_missing_secrets = context.get("missing_secrets") or platform_readiness.get("missing_secrets") or []
         rows.append({
             "post_id": post_id,
             "platform": platform,
@@ -290,7 +294,8 @@ def build_status() -> dict:
             "retry_reset_apply_command": context.get("retry_reset_apply_command") or "",
             "retry_reset_note": context.get("retry_reset_note") or "",
             "readiness": platform_readiness,
-            "missing_secrets": context.get("missing_secrets") or platform_readiness.get("missing_secrets") or [],
+            "missing_secrets": row_missing_secrets,
+            "credential_missing_secrets": context.get("missing_secrets") or row_missing_secrets,
             "local_missing_secrets": local_missing,
             "local_secret_presence": context.get("local_secret_presence") or {},
             "local_secret_ready": context.get("local_secret_ready"),

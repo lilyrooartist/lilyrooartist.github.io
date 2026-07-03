@@ -441,6 +441,7 @@ def main() -> int:
     out.write_text(json.dumps(snapshot, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     if snapshot["ok"] and not args.dry_run:
         subprocess.run(["python3", "scripts/update_promo_engine_status.py"], cwd=ROOT, check=True)
+        subprocess.run(["python3", "scripts/build_promo_consistency_audit.py"], cwd=ROOT, check=True)
 
     try:
         output_path = str(out.relative_to(ROOT))
