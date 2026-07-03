@@ -2559,12 +2559,13 @@ def experiment_publish_next_action(packet: dict) -> str:
     summary = summary or {}
     review_ready = int_metric(summary.get("review_ready_manual_count"))
     postable = int_metric(summary.get("postable_now_count"))
-    if review_ready:
-        step = next((item for item in packet.get("steps") or [] if item.get("id") == "review_manual_youtube_community"), {})
-        command = step.get("preview_command") or "python3 scripts/approve_promo_queue_plan.py --dry-run"
-        return f"Publish runway: {review_ready} manual YouTube Community experiment row(s) need review; preview with {command}."
-    if postable:
-        return f"Publish runway: {postable} approved manual row(s) are ready to post and log from data/experiment_publish_runway.json."
+    url_needed = int_metric(summary.get("public_url_log_needed_count")) + int_metric(summary.get("waiting_public_url_count"))
+    manual_total = review_ready + postable + url_needed
+    if manual_total:
+        return (
+            f"Publish runway: {manual_total} manual-only YouTube Community row(s) need removal or conversion; "
+            "manual posting is not in the active plan."
+        )
     return ""
 
 

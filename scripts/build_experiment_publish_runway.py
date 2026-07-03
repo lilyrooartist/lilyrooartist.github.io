@@ -23,12 +23,6 @@ def read_json(path: Path, fallback):
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def command_for_ids(script: str, ids: list[str], suffix: str) -> str:
-    if not ids:
-        return ""
-    return f"python3 {script} " + " ".join(f"--id {post_id}" for post_id in ids) + f" {suffix}"
-
-
 def manual_rows(manual_packet: dict) -> tuple[list[dict], list[dict], list[dict]]:
     rows = manual_packet.get("rows") or []
     review_ready = [
@@ -75,54 +69,23 @@ def build_packet() -> dict:
     logging_ids = [row.get("id") for row in needs_logging if row.get("id")]
     public_url_log_needed = int((manual.get("summary") or {}).get("public_url_log_needed_count") or 0)
     waiting_public_url_count = int((manual.get("summary") or {}).get("waiting_public_url_count") or public_url_log_needed)
-    manual_docket = approval.get("manual_approval_docket") or {}
     blocked_platform = blocked_platform_rows(platform)
     approved_backlog = (backlog.get("summary") or {}).get("approved_backlog_count") or 0
     blocked_backlog = (backlog.get("summary") or {}).get("blocked_backlog_count") or 0
-    if review_ids:
-        next_publish_action = "Review and approve manual YouTube Community experiment rows."
-    elif postable_ids:
-        next_publish_action = "Post manual YouTube Community cards, copy real public URLs, then log them."
-    elif logging_ids and waiting_public_url_count == 0:
-        next_publish_action = "Log public URLs and collect experiment results."
+    manual_lane_ids = sorted({post_id for post_id in review_ids + postable_ids + logging_ids if post_id})
+    if manual_lane_ids:
+        next_publish_action = "Remove or convert manual-only YouTube Community rows before publishing; manual posting is not in the active plan."
     else:
         next_publish_action = "Collect experiment results when public URLs and measurement values are available."
     steps = [
         {
-            "id": "review_manual_youtube_community",
-            "status": "ready_for_review" if review_ids else "clear",
-            "post_ids": review_ids,
-            "preview_command": manual_docket.get("preview_command") or command_for_ids("scripts/approve_promo_queue_plan.py", review_ids, "--dry-run"),
-            "apply_after_review_command": manual_docket.get("apply_command") or command_for_ids("scripts/approve_promo_queue_plan.py", review_ids, "--refresh-admin"),
-            "guardrail": "Manual Community approval lane is inactive unless post_ids are present; no manual posting is requested from a clear step.",
-            "completion_evidence": "data/manual_distribution_packet.json should stay at zero manual review rows while this lane is clear.",
-        },
-        {
-            "id": "queue_approved_manual_rows",
-            "status": "ready_after_approval" if review_ids else "clear",
-            "post_ids": review_ids,
-            "preview_command": command_for_ids("scripts/apply_promo_queue_plan.py", review_ids, ""),
-            "apply_after_review_command": command_for_ids("scripts/apply_promo_queue_plan.py", review_ids, "--apply --refresh-admin"),
-            "guardrail": "Queue nothing while the manual lane is clear; apply only after matching rows have approved=yes.",
-            "completion_evidence": "data/scheduled_posts.csv contains no active manual Community experiment rows while this lane is clear.",
-        },
-        {
-            "id": "post_manual_youtube_community",
-            "status": "postable_now" if postable_ids else "clear",
-            "post_ids": postable_ids or review_ids,
-            "surface": "YouTube Studio Community",
+            "id": "manual_distribution_lane_removed",
+            "status": "remove_or_convert_rows" if manual_lane_ids else "clear",
+            "post_ids": manual_lane_ids,
+            "surface": "YouTube Community",
             "public_community_url": (manual.get("summary") or {}).get("public_community_url") or "",
-            "guardrail": "No manual Community posting is requested when post_ids is empty.",
-            "completion_evidence": "A real public URL is required only if a reviewed manual row becomes active.",
-        },
-        {
-            "id": "log_public_urls",
-            "status": "waiting_for_manual_post" if waiting_public_url_count else ("ready_after_manual_post" if logging_ids else "clear"),
-            "post_ids": logging_ids or review_ids,
-            "preview_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv",
-            "apply_after_review_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --apply --refresh-admin",
-            "guardrail": "Every CSV row must contain a real public_url before apply; clear lane means no URL logging is pending.",
-            "completion_evidence": "admin/content/Published_Log.csv remains the source of truth for real public URLs.",
+            "guardrail": "Manual YouTube Community posting is not part of the active plan; no review, queue, posting, or URL-logging commands are emitted for this lane.",
+            "completion_evidence": "data/experiment_publish_runway.json contains no manual YouTube Community command steps; any future manual-only rows must be removed or converted to automated API-backed channels.",
         },
     ]
     steps.append(
@@ -178,7 +141,7 @@ def build_packet() -> dict:
         "steps": steps,
         "guardrails": [
             "Review-only packet; it does not approve, schedule, post, or log URLs.",
-            "Manual YouTube Community rows must be reviewed before approval.",
+            "Manual-only YouTube Community posting stays removed from the active plan unless a future automated API path replaces it.",
             "TikTok upload-draft mode stays blocked until OAuth credentials are present; direct public posting also requires public-posting approval.",
             "Do not declare winning formats until the winner-readiness gate is satisfied.",
         ],

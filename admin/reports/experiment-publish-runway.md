@@ -1,6 +1,6 @@
 # Experiment Publish Runway - Lily Roo
 
-Generated: 2026-07-03T08:35:51.537372Z
+Generated: 2026-07-03T08:48:49.584325Z
 
 ## Summary
 - Manual rows ready for review: **0**
@@ -17,16 +17,8 @@ Generated: 2026-07-03T08:35:51.537372Z
 - None.
 
 ## Runway Steps
-- **review_manual_youtube_community** - `clear`
-  - Guardrail: Manual Community approval lane is inactive unless post_ids are present; no manual posting is requested from a clear step.
-- **queue_approved_manual_rows** - `clear`
-  - Guardrail: Queue nothing while the manual lane is clear; apply only after matching rows have approved=yes.
-- **post_manual_youtube_community** - `clear`
-  - Guardrail: No manual Community posting is requested when post_ids is empty.
-- **log_public_urls** - `clear`
-  - Preview: `python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv`
-  - Apply after review: `python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --apply --refresh-admin`
-  - Guardrail: Every CSV row must contain a real public_url before apply; clear lane means no URL logging is pending.
+- **manual_distribution_lane_removed** - `clear`
+  - Guardrail: Manual YouTube Community posting is not part of the active plan; no review, queue, posting, or URL-logging commands are emitted for this lane.
 - **collect_results** - `waiting_for_measurement_window`
   - Preview: `python3 scripts/update_experiment_results.py --from-csv data/experiment_result_entry_template.csv --dry-run`
   - Guardrail: Fill only visible platform analytics values with evidence notes.

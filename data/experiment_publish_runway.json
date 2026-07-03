@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-03T08:35:51.537372Z",
+  "generated_at": "2026-07-03T08:48:49.584325Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -25,40 +25,13 @@
   "blocked_platform_rows": [],
   "steps": [
     {
-      "id": "review_manual_youtube_community",
+      "id": "manual_distribution_lane_removed",
       "status": "clear",
       "post_ids": [],
-      "preview_command": "",
-      "apply_after_review_command": "",
-      "guardrail": "Manual Community approval lane is inactive unless post_ids are present; no manual posting is requested from a clear step.",
-      "completion_evidence": "data/manual_distribution_packet.json should stay at zero manual review rows while this lane is clear."
-    },
-    {
-      "id": "queue_approved_manual_rows",
-      "status": "clear",
-      "post_ids": [],
-      "preview_command": "",
-      "apply_after_review_command": "",
-      "guardrail": "Queue nothing while the manual lane is clear; apply only after matching rows have approved=yes.",
-      "completion_evidence": "data/scheduled_posts.csv contains no active manual Community experiment rows while this lane is clear."
-    },
-    {
-      "id": "post_manual_youtube_community",
-      "status": "clear",
-      "post_ids": [],
-      "surface": "YouTube Studio Community",
+      "surface": "YouTube Community",
       "public_community_url": "https://www.youtube.com/@lilyroo.artist/community",
-      "guardrail": "No manual Community posting is requested when post_ids is empty.",
-      "completion_evidence": "A real public URL is required only if a reviewed manual row becomes active."
-    },
-    {
-      "id": "log_public_urls",
-      "status": "clear",
-      "post_ids": [],
-      "preview_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv",
-      "apply_after_review_command": "python3 scripts/log_manual_distribution.py --from-csv data/manual_distribution_url_template.csv --apply --refresh-admin",
-      "guardrail": "Every CSV row must contain a real public_url before apply; clear lane means no URL logging is pending.",
-      "completion_evidence": "admin/content/Published_Log.csv remains the source of truth for real public URLs."
+      "guardrail": "Manual YouTube Community posting is not part of the active plan; no review, queue, posting, or URL-logging commands are emitted for this lane.",
+      "completion_evidence": "data/experiment_publish_runway.json contains no manual YouTube Community command steps; any future manual-only rows must be removed or converted to automated API-backed channels."
     },
     {
       "id": "collect_results",
@@ -72,7 +45,7 @@
   ],
   "guardrails": [
     "Review-only packet; it does not approve, schedule, post, or log URLs.",
-    "Manual YouTube Community rows must be reviewed before approval.",
+    "Manual-only YouTube Community posting stays removed from the active plan unless a future automated API path replaces it.",
     "TikTok upload-draft mode stays blocked until OAuth credentials are present; direct public posting also requires public-posting approval.",
     "Do not declare winning formats until the winner-readiness gate is satisfied."
   ]

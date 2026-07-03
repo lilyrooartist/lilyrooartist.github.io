@@ -2367,37 +2367,40 @@ def validate_generated_outputs(failures):
         manual_rows_for_runway = runway.get("manual_review_rows") or []
         blocked_rows = runway.get("blocked_platform_rows") or []
         step_ids = {step.get("id") for step in steps}
-        post_manual_step = next((step for step in steps if step.get("id") == "post_manual_youtube_community"), {})
-        log_urls_step = next((step for step in steps if step.get("id") == "log_public_urls"), {})
+        manual_removed_step = next((step for step in steps if step.get("id") == "manual_distribution_lane_removed"), {})
         required_steps = {
+            "manual_distribution_lane_removed",
+            "collect_results",
+        }
+        stale_manual_step_ids = {
             "review_manual_youtube_community",
             "queue_approved_manual_rows",
             "post_manual_youtube_community",
             "log_public_urls",
-            "collect_results",
         }
+        manual_count_total = (
+            int(summary.get("review_ready_manual_count") or 0)
+            + int(summary.get("postable_now_count") or 0)
+            + int(summary.get("public_url_log_needed_count") or 0)
+            + int(summary.get("waiting_public_url_count") or 0)
+        )
         if (
             runway.get("safe_mode") is True
             and required_steps <= step_ids
+            and not (stale_manual_step_ids & step_ids)
             and int(summary.get("review_ready_manual_count") or 0) == len(manual_rows_for_runway)
             and int(summary.get("blocked_platform_count") or 0) == len(blocked_rows)
             and int(summary.get("winner_count_target") or 0) == 3
             and summary.get("next_publish_action")
             and isinstance(summary.get("waiting_public_url_count"), int)
-            and (
-                not (int(summary.get("postable_now_count") or 0) and int(summary.get("waiting_public_url_count") or 0))
-                or (
-                    "Post manual YouTube Community cards" in (summary.get("next_publish_action") or "")
-                    and post_manual_step.get("status") == "postable_now"
-                    and log_urls_step.get("status") == "waiting_for_manual_post"
-                )
-            )
+            and manual_removed_step.get("status") == ("remove_or_convert_rows" if manual_count_total else "clear")
+            and not manual_removed_step.get("preview_command")
+            and not manual_removed_step.get("apply_after_review_command")
+            and "Manual YouTube Community posting is not part of the active plan" in (manual_removed_step.get("guardrail") or "")
             and all(step.get("guardrail") and step.get("completion_evidence") for step in steps)
-            and any(step.get("id") == "review_manual_youtube_community" and (step.get("status") == "clear" or ("approve_promo_queue_plan.py" in (step.get("preview_command") or "") and "--dry-run" in (step.get("preview_command") or ""))) for step in steps)
-            and any(step.get("id") == "queue_approved_manual_rows" and (step.get("status") in {"waiting_for_approval", "clear"} or ("apply_promo_queue_plan.py" in (step.get("preview_command") or "") and "--apply" not in (step.get("preview_command") or ""))) for step in steps)
-            and any(step.get("id") == "log_public_urls" and "log_manual_distribution.py" in (step.get("preview_command") or "") for step in steps)
             and any(step.get("id") == "collect_results" and "update_experiment_results.py" in (step.get("preview_command") or "") for step in steps)
             and any("does not approve, schedule, post, or log" in item for item in runway.get("guardrails") or [])
+            and any("Manual-only YouTube Community posting stays removed" in item for item in runway.get("guardrails") or [])
         ):
             ok(f"experiment publish runway tracks {len(manual_rows_for_runway)} review-ready row(s)")
         else:
@@ -3552,15 +3555,21 @@ def validate_generated_outputs(failures):
         experiment_publish = kpi.get("experiment_publish_runway") or {}
         publish_summary = experiment_publish.get("summary") or {}
         publish_action = next((action for action in next_actions if action.startswith("Publish runway:")), "")
-        if (
+        publish_manual_total = (
             int(publish_summary.get("review_ready_manual_count") or 0)
+            + int(publish_summary.get("postable_now_count") or 0)
+            + int(publish_summary.get("public_url_log_needed_count") or 0)
+            + int(publish_summary.get("waiting_public_url_count") or 0)
+        )
+        if (
+            publish_manual_total
             and publish_action
-            and "approve_promo_queue_plan.py" in publish_action
-            and "--dry-run" in publish_action
+            and "removal or conversion" in publish_action
+            and "manual posting is not in the active plan" in publish_action
         ):
-            ok("promo engine publish runway next action includes approval dry run")
-        elif int(publish_summary.get("review_ready_manual_count") or 0):
-            fail("promo_engine_status.json missing publish runway approval action", failures)
+            ok("promo engine publish runway next action removes manual-only rows")
+        elif publish_manual_total:
+            fail("promo_engine_status.json missing manual-lane removal action", failures)
         metric_packet = json.loads(MANUAL_METRIC_PACKET.read_text(encoding="utf-8")) if MANUAL_METRIC_PACKET.exists() else {}
         import_manifest = metric_packet.get("worksheet_import_manifest") or {}
         metric_action = next((action for action in next_actions if "Refresh manual metrics:" in action), "")
@@ -4151,9 +4160,8 @@ def validate_generated_outputs(failures):
             and "experiment-publish-runway.md" in runway_text
             and "approval_runway.json" in runway_text
             and "manual_distribution_packet.json" in runway_text
-            and "approve_promo_queue_plan.py" in runway_text
-            and "apply_promo_queue_plan.py" in runway_text
-            and "log_manual_distribution.py" in runway_text
+            and "manual_distribution_lane_removed" in runway_text
+            and "Manual YouTube Community posting is not part of the active plan" in runway_text
             and "update_experiment_results.py" in runway_text
             and "Review-only packet" in runway_text
             and "sync_admin" in runway_text
@@ -4579,6 +4587,7 @@ def validate_admin_execution_feedback(failures):
         "experiment result clipboard shown": "renderExperimentResultClipboard" in text and "experiment_result_clipboard.json" in text and "Experiment result clipboard" in text,
         "experiment result cards actionable": "Open result clipboard report" in text and "Entry CSV:" in text and "Wide entry CSV:" in text and "result_import_preview_command" in text and "Copy metric preview" in text and "data-result-command" in text and "result-evidence-input" in text and "Measure first" in text and "Post now" in text and "Blocked" in text and "measurement_priority_cards" in text and "First measurement runbook" in text and "Copy first preview" in text and "Post-log measurement handoff" in text and "Post-log measurement" in text and "Open manual paste file" in text and "log_manual_distribution.py" in text,
         "experiment result source embedded": "embedded-experiment-result-clipboard" in text and "embedded-experiment-result-clipboard-report" in text,
+        "experiment publish runway removes manual lane": "manual_distribution_lane_removed" in text and "Manual lane:" in text,
         "format candidate evidence gaps shown": "Top format candidates" in text and "published unmeasured" in text and "format_winner_readiness" in text and "next_format_evidence_runbook" in text and "Next format evidence:" in text and "Format guardrail:" in text and "Metric confidence" in text and "Next evidence action:" in text and "measure-ready" in text and "post+log" in text,
         "repeatable format ladder shown": "Repeatable format ladder" in text and "repeatable_format_ladder" in text and "winner-ready" in text and "Ladder guardrail:" in text and "scheduled, postable, or blocked rows are not format evidence" in text,
     }
