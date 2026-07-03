@@ -1,0 +1,284 @@
+{
+  "generated_at": "2026-07-03T08:35:45.693196Z",
+  "safe_mode": true,
+  "source": {
+    "published_log": "admin/content/Published_Log.csv",
+    "local_secret_source": "secrets/youtube-api.env",
+    "youtube_endpoint": "https://www.googleapis.com/youtube/v3/videos",
+    "api": "youtube.videos.list(part=snippet,statistics)"
+  },
+  "summary": {
+    "status": "no_open_youtube_result_fields",
+    "captured_post_count": 10,
+    "fillable_post_count": 0,
+    "fillable_result_field_count": 0,
+    "post_ids": [
+      "FP-AUTO-212",
+      "LR-SONG-023",
+      "LR-SONG-024",
+      "FP-AUTO-229",
+      "FP-AUTO-261",
+      "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
+      "FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA",
+      "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+      "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+      "FP-PODCAST-ANALOG-MYTH-YOUTUBE"
+    ],
+    "result_fields": [
+      "views",
+      "likes",
+      "comments"
+    ],
+    "apply_command": "python3 scripts/capture_youtube_post_results.py --apply-results --refresh-admin",
+    "retry_command": "python3 scripts/capture_youtube_post_results.py --min-age-hours 24 --allow-empty --apply-results --refresh-admin",
+    "report_path": "admin/reports/youtube-post-results.md"
+  },
+  "rows": [
+    {
+      "post_id": "FP-AUTO-212",
+      "source_row": 12,
+      "video_id": "I5BBi4TDfAM",
+      "url": "https://youtu.be/I5BBi4TDfAM",
+      "published_at": "2026-04-25T16:00:00+00:00",
+      "measurement_due_at": "2026-04-26T16:00:00+00:00",
+      "existing_values": {
+        "views": "36",
+        "likes": "0",
+        "comments": "0"
+      },
+      "title": "What’s the rush to the same place? Full Slow Walk on the channel.",
+      "lookup_status": "ok",
+      "metrics": {
+        "views": 36,
+        "likes": 0,
+        "comments": 0
+      },
+      "fillable_results": {},
+      "filled_field_count": 0,
+      "evidence_note": "YouTube Data API public statistics 2026-07-03; video_id=I5BBi4TDfAM",
+      "direct_apply_command": ""
+    },
+    {
+      "post_id": "LR-SONG-023",
+      "source_row": 13,
+      "video_id": "BkkBE2pXHSY",
+      "url": "https://youtu.be/BkkBE2pXHSY",
+      "published_at": "2026-04-26T16:00:00+00:00",
+      "measurement_due_at": "2026-04-27T16:00:00+00:00",
+      "existing_values": {
+        "views": "55",
+        "likes": "0",
+        "comments": "0"
+      },
+      "title": "The Power of Light - Lily Roo (Archived Original)",
+      "lookup_status": "ok",
+      "metrics": {
+        "views": 55,
+        "likes": 0,
+        "comments": 0
+      },
+      "fillable_results": {},
+      "filled_field_count": 0,
+      "evidence_note": "YouTube Data API public statistics 2026-07-03; video_id=BkkBE2pXHSY",
+      "direct_apply_command": ""
+    },
+    {
+      "post_id": "LR-SONG-024",
+      "source_row": 14,
+      "video_id": "9rmy2JhBuF4",
+      "url": "https://youtu.be/9rmy2JhBuF4",
+      "published_at": "2026-05-02T16:00:00+00:00",
+      "measurement_due_at": "2026-05-03T16:00:00+00:00",
+      "existing_values": {
+        "views": "68",
+        "likes": "0",
+        "comments": "0"
+      },
+      "title": "No Mortgage - Lily Roo (Archived Original)",
+      "lookup_status": "ok",
+      "metrics": {
+        "views": 68,
+        "likes": 0,
+        "comments": 0
+      },
+      "fillable_results": {},
+      "filled_field_count": 0,
+      "evidence_note": "YouTube Data API public statistics 2026-07-03; video_id=9rmy2JhBuF4",
+      "direct_apply_command": ""
+    },
+    {
+      "post_id": "FP-AUTO-229",
+      "source_row": 15,
+      "video_id": "IahKaEXEA_0",
+      "url": "https://youtu.be/IahKaEXEA_0",
+      "published_at": "2026-05-09T16:00:00+00:00",
+      "measurement_due_at": "2026-05-10T16:00:00+00:00",
+      "existing_values": {
+        "views": "71",
+        "likes": "0",
+        "comments": "0"
+      },
+      "title": "13 - Lily Roo (Archived Original)",
+      "lookup_status": "ok",
+      "metrics": {
+        "views": 71,
+        "likes": 0,
+        "comments": 0
+      },
+      "fillable_results": {},
+      "filled_field_count": 0,
+      "evidence_note": "YouTube Data API public statistics 2026-07-03; video_id=IahKaEXEA_0",
+      "direct_apply_command": ""
+    },
+    {
+      "post_id": "FP-AUTO-261",
+      "source_row": 25,
+      "video_id": "zY8LQmuf4e4",
+      "url": "https://youtu.be/zY8LQmuf4e4",
+      "published_at": "2026-06-29T16:00:00+00:00",
+      "measurement_due_at": "2026-06-30T16:00:00+00:00",
+      "existing_values": {
+        "views": "2",
+        "likes": "0",
+        "comments": "0"
+      },
+      "title": "New transmission: I Learned It All in Fifteen Seconds is live. Remastered cover art, same suspicious",
+      "lookup_status": "ok",
+      "metrics": {
+        "views": 2,
+        "likes": 0,
+        "comments": 0
+      },
+      "fillable_results": {},
+      "filled_field_count": 0,
+      "evidence_note": "YouTube Data API public statistics 2026-07-03; video_id=zY8LQmuf4e4",
+      "direct_apply_command": ""
+    },
+    {
+      "post_id": "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
+      "source_row": 26,
+      "video_id": "lbT4adNE-cE",
+      "url": "https://youtu.be/lbT4adNE-cE",
+      "published_at": "2026-06-29T16:00:00+00:00",
+      "measurement_due_at": "2026-06-30T16:00:00+00:00",
+      "existing_values": {
+        "views": "0",
+        "likes": "0",
+        "comments": "0"
+      },
+      "title": "Analog Myth, remastered for anyone who likes time travel with receipts. Full Lily Roo playlist is li",
+      "lookup_status": "ok",
+      "metrics": {
+        "views": 0,
+        "likes": 0,
+        "comments": 0
+      },
+      "fillable_results": {},
+      "filled_field_count": 0,
+      "evidence_note": "YouTube Data API public statistics 2026-07-03; video_id=lbT4adNE-cE",
+      "direct_apply_command": ""
+    },
+    {
+      "post_id": "FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA",
+      "source_row": 27,
+      "video_id": "0d0PXb_h4FY",
+      "url": "https://youtu.be/0d0PXb_h4FY",
+      "published_at": "2026-06-29T16:00:00+00:00",
+      "measurement_due_at": "2026-06-30T16:00:00+00:00",
+      "existing_values": {
+        "views": "0",
+        "likes": "0",
+        "comments": "0"
+      },
+      "title": "Twelve Dollars, remastered and refusing to leave the stage. Full Lily Roo playlist is live. #Shorts",
+      "lookup_status": "ok",
+      "metrics": {
+        "views": 0,
+        "likes": 0,
+        "comments": 0
+      },
+      "fillable_results": {},
+      "filled_field_count": 0,
+      "evidence_note": "YouTube Data API public statistics 2026-07-03; video_id=0d0PXb_h4FY",
+      "direct_apply_command": ""
+    },
+    {
+      "post_id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
+      "source_row": 28,
+      "video_id": "404PvtuXnqY",
+      "url": "https://youtu.be/404PvtuXnqY",
+      "published_at": "2026-06-29T16:00:00+00:00",
+      "measurement_due_at": "2026-06-30T16:00:00+00:00",
+      "existing_values": {
+        "views": "0",
+        "likes": "0",
+        "comments": "0"
+      },
+      "title": "Analog Myth is part of the Lily Roo archive now. The remastered version is up.",
+      "lookup_status": "ok",
+      "metrics": {
+        "views": 0,
+        "likes": 0,
+        "comments": 0
+      },
+      "fillable_results": {},
+      "filled_field_count": 0,
+      "evidence_note": "YouTube Data API public statistics 2026-07-03; video_id=404PvtuXnqY",
+      "direct_apply_command": ""
+    },
+    {
+      "post_id": "FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY",
+      "source_row": 29,
+      "video_id": "0GOYOFTMAKw",
+      "url": "https://youtu.be/0GOYOFTMAKw",
+      "published_at": "2026-06-29T16:00:00+00:00",
+      "measurement_due_at": "2026-06-30T16:00:00+00:00",
+      "existing_values": {
+        "views": "0",
+        "likes": "0",
+        "comments": "0"
+      },
+      "title": "Twelve Dollars is part of the Lily Roo archive now. The remastered version is up.",
+      "lookup_status": "ok",
+      "metrics": {
+        "views": 0,
+        "likes": 0,
+        "comments": 0
+      },
+      "fillable_results": {},
+      "filled_field_count": 0,
+      "evidence_note": "YouTube Data API public statistics 2026-07-03; video_id=0GOYOFTMAKw",
+      "direct_apply_command": ""
+    },
+    {
+      "post_id": "FP-PODCAST-ANALOG-MYTH-YOUTUBE",
+      "source_row": 44,
+      "video_id": "xX2-Xf161js",
+      "url": "https://youtu.be/xX2-Xf161js",
+      "published_at": "2026-07-01T16:00:00+00:00",
+      "measurement_due_at": "2026-07-02T16:00:00+00:00",
+      "existing_values": {
+        "views": "1",
+        "likes": "0",
+        "comments": "0"
+      },
+      "title": "Echo Thread Podcast: Analog Myth Full Album Play-Through - Lily Roo",
+      "lookup_status": "ok",
+      "metrics": {
+        "views": 1,
+        "likes": 0,
+        "comments": 0
+      },
+      "fillable_results": {},
+      "filled_field_count": 0,
+      "evidence_note": "YouTube Data API public statistics 2026-07-03; video_id=xX2-Xf161js",
+      "direct_apply_command": ""
+    }
+  ],
+  "guardrails": [
+    "Metrics come from public YouTube video statistics for already-published Lily Roo videos.",
+    "This report does not contain OAuth credentials.",
+    "Only views, likes, and comments are imported; shares, saves, and subscriber deltas stay blank unless another evidence source supplies them.",
+    "Applying results goes through scripts/update_experiment_results.py so Published_Log.csv row IDs are verified."
+  ]
+}

@@ -4,18 +4,18 @@
   "finalized": true,
   "dry_run": false,
   "source_revision": {
-    "commit": "ecc44358649526d828bfbeadc71f4caefb4036cd",
-    "short_commit": "ecc44358",
+    "commit": "a46fbde8466726f45913416d93f39d931cfeb750",
+    "short_commit": "a46fbde8",
     "branch": "main",
-    "committed_at": "2026-07-03T04:16:48-04:00",
-    "source_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/commit/ecc44358649526d828bfbeadc71f4caefb4036cd"
+    "committed_at": "2026-07-03T04:26:05-04:00",
+    "source_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/commit/a46fbde8466726f45913416d93f39d931cfeb750"
   },
-  "started_at": "2026-07-03T08:24:07.376204Z",
-  "finished_at": "2026-07-03T08:25:26.614300Z",
-  "duration_seconds": 79.24,
+  "started_at": "2026-07-03T08:34:32.591996Z",
+  "finished_at": "2026-07-03T08:35:51.741252Z",
+  "duration_seconds": 79.15,
   "summary": {
-    "command_count": 53,
-    "passed": 53,
+    "command_count": 54,
+    "passed": 54,
     "failed": 0,
     "required_failed": 0,
     "optional_failed": 0,
@@ -31,8 +31,8 @@
       "timed_out": false,
       "returncode": 0,
       "ok": true,
-      "duration_seconds": 2.98,
-      "stdout_tail": "{\n  \"ok\": true,\n  \"capture_status\": 200,\n  \"updated_at\": \"2026-07-03T08:24:10.382Z\",\n  \"platforms\": [\n    \"facebook\",\n    \"instagram\",\n    \"spotify\",\n    \"tiktok\",\n    \"x\",\n    \"youtube\"\n  ],\n  \"output\": \"data/live_social_metrics.json\"\n}",
+      "duration_seconds": 2.58,
+      "stdout_tail": "{\n  \"ok\": true,\n  \"capture_status\": 200,\n  \"updated_at\": \"2026-07-03T08:34:35.196Z\",\n  \"platforms\": [\n    \"facebook\",\n    \"instagram\",\n    \"spotify\",\n    \"tiktok\",\n    \"x\",\n    \"youtube\"\n  ],\n  \"output\": \"data/live_social_metrics.json\"\n}",
       "stderr_tail": ""
     },
     {
@@ -43,7 +43,7 @@
       "timed_out": false,
       "returncode": 0,
       "ok": true,
-      "duration_seconds": 0.04,
+      "duration_seconds": 0.05,
       "stdout_tail": "No live-covered pending metrics available; manual stats unchanged.",
       "stderr_tail": ""
     },
@@ -55,8 +55,8 @@
       "timed_out": false,
       "returncode": 0,
       "ok": true,
-      "duration_seconds": 63.7,
-      "stdout_tail": "{\n  \"checked\": 7,\n  \"ok\": 2,\n  \"not_live_or_failed\": 5,\n  \"timed_out\": 0,\n  \"step_timeout_seconds\": 25,\n  \"output\": \"data/store_verification_run.json\",\n  \"results\": [\n    {\n      \"command\": \"python3 scripts/search_spotify_release.py --artist Lily Roo --title Twelve Dollars --out data/store-verification/twelve-dollars/spotify_release_snapshot.json\",\n      \"timeout_seconds\": 25,\n      \"timed_out\": false,\n      \"duration_seconds\": 20.05,\n      \"returncode\": 1,\n      \"stdout\": \"{\\n  \\\"ok\\\": false,\\n  \\\"title\\\": \\\"\\\",\\n  \\\"album_id\\\": \\\"\\\",\\n  \\\"release_url\\\": \\\"\\\",\\n  \\\"candidate_count\\\": 0,\\n  \\\"output\\\": \\\"data/store-verification/twelve-dollars/spotify_release_snapshot.json\\\"\\n}\",\n      \"stderr\": \"\",\n      \"release\": \"Twelve Dollars\",\n      \"service\": \"spotify\",\n      \"snapshot_path\": \"data/store-verification/twelve-dollars/spotify_release_snapshot.json\",\n      \"ok\": false,\n      \"status\": \"not_found\",\n      \"found_url\": \"\",\n      \"stores\": [],\n      \"candidate_count\": 0,\n      \"output\": \"data/store-verification/twelve-dollars/spotify_release_snapshot.json\"\n    },\n    {\n      \"command\": \"python3 scripts/capture_apple_music_release.py --artist Lily Roo --title Twelve Dollars --out data/store-verification/twelve-dollars/apple_music_release_snapshot.json\",\n      \"timeout_seconds\": 25,\n      \"timed_out\": false,\n      \"duration_seconds\": 0.26,\n      \"returncode\": 1,\n      \"stdout\": \"{\\n  \\\"ok\\\": false,\\n  \\\"collection_name\\\": \\\"\\\",\\n  \\\"collection_id\\\": null,\\n  \\\"release_url\\\": \\\"\\\",\\n  \\\"output\\\": \\\"data/store-verification/twelve-dollars/apple_music_release_snapshot.json\\\"\\n}\",\n      \"stderr\": \"\",\n      \"release\": \"Twelve Dollars\",\n      \"service\": \"apple_music\",\n      \"snapshot_path\": \"data/store-verification/twelve-dollars/apple_music_release_snapshot.json\",\n      \"ok\": false,\n      \"status\": \"not_found\",\n      \"found_url\": \"\",\n      \"stores\": [],\n      \"candidate_count\": null,\n      \"output\": \"data/store-verification/twelve-dollars/apple_music_release_snapshot.json\"\n    },\n    {\n      \"command\": \"python3 scripts/capture_hyperfollow_store_links.py --url https://distrokid.com/hyperfollow/lilyroo/twelve-dollars --out data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json\",\n      \"timeout_seconds\": 25,\n      \"timed_out\": false,\n      \"duration_seconds\": 0.44,\n      \"returncode\": 1,\n      \"stdout\": \"{\\n  \\\"ok\\\": false,\\n  \\\"stores\\\": [],\\n  \\\"amazon_music_available\\\": false,\\n  \\\"output\\\": \\\"data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json\\\"\\n}\",\n      \"stderr\": \"\",\n      \"release\": \"Twelve Dollars\",\n      \"service\": \"hyperfollow\",\n      \"snapshot_path\": \"data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json\",\n      \"ok\": false,\n      \"status\": \"not_found\",\n      \"found_url\": \"\",\n      \"stores\": [],\n      \"candidate_count\": null,\n      \"output\": \"data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json\"\n    },\n    {\n      \"command\": \"python3 scripts/search_spotify_release.py --artist Lily Roo --title Analog Myth --out data/store-verification/analog-myth/spotify_release_snapshot.json\",\n      \"timeout_seconds\": 25,\n      \"timed_out\": false,\n      \"duration_seconds\": 20.09,\n      \"returncode\": 1,\n      \"stdout\": \"{\\n  \\\"ok\\\": false,\\n  \\\"title\\\": \\\"\\\",\\n  \\\"album_id\\\": \\\"\\\",\\n  \\\"release_url\\\": \\\"\\\",\\n  \\\"candidate_count\\\": 0,\\n  \\\"output\\\": \\\"data/store-verification/analog-myth/spotify_release_snapshot.json\\\"\\n}\",\n      \"stderr\": \"\",\n      \"release\": \"Analog Myth\",\n      \"service\": \"spotify\",\n      \"snapshot_path\": \"data/store-verification/analog-myth/spotify_release_snapshot.json\",\n      \"ok\": false,\n      \"status\": \"not_found\",\n      \"found_url\": \"\",\n      \"stores\": [],\n      \"candidate_count\": 0,\n      \"output\": \"data/store-verification/analog-myth/spotify_release_snapshot.json\"\n    },\n    {\n      \"command\": \"python3 scripts/capture_apple_music_release.py --artist Lily Roo --title Analog Myth --out data/store-verification/analog-myth/apple_m\n...[truncated]",
+      "duration_seconds": 63.81,
+      "stdout_tail": "{\n  \"checked\": 7,\n  \"ok\": 2,\n  \"not_live_or_failed\": 5,\n  \"timed_out\": 0,\n  \"step_timeout_seconds\": 25,\n  \"output\": \"data/store_verification_run.json\",\n  \"results\": [\n    {\n      \"command\": \"python3 scripts/search_spotify_release.py --artist Lily Roo --title Twelve Dollars --out data/store-verification/twelve-dollars/spotify_release_snapshot.json\",\n      \"timeout_seconds\": 25,\n      \"timed_out\": false,\n      \"duration_seconds\": 20.07,\n      \"returncode\": 1,\n      \"stdout\": \"{\\n  \\\"ok\\\": false,\\n  \\\"title\\\": \\\"\\\",\\n  \\\"album_id\\\": \\\"\\\",\\n  \\\"release_url\\\": \\\"\\\",\\n  \\\"candidate_count\\\": 0,\\n  \\\"output\\\": \\\"data/store-verification/twelve-dollars/spotify_release_snapshot.json\\\"\\n}\",\n      \"stderr\": \"\",\n      \"release\": \"Twelve Dollars\",\n      \"service\": \"spotify\",\n      \"snapshot_path\": \"data/store-verification/twelve-dollars/spotify_release_snapshot.json\",\n      \"ok\": false,\n      \"status\": \"not_found\",\n      \"found_url\": \"\",\n      \"stores\": [],\n      \"candidate_count\": 0,\n      \"output\": \"data/store-verification/twelve-dollars/spotify_release_snapshot.json\"\n    },\n    {\n      \"command\": \"python3 scripts/capture_apple_music_release.py --artist Lily Roo --title Twelve Dollars --out data/store-verification/twelve-dollars/apple_music_release_snapshot.json\",\n      \"timeout_seconds\": 25,\n      \"timed_out\": false,\n      \"duration_seconds\": 0.28,\n      \"returncode\": 1,\n      \"stdout\": \"{\\n  \\\"ok\\\": false,\\n  \\\"collection_name\\\": \\\"\\\",\\n  \\\"collection_id\\\": null,\\n  \\\"release_url\\\": \\\"\\\",\\n  \\\"output\\\": \\\"data/store-verification/twelve-dollars/apple_music_release_snapshot.json\\\"\\n}\",\n      \"stderr\": \"\",\n      \"release\": \"Twelve Dollars\",\n      \"service\": \"apple_music\",\n      \"snapshot_path\": \"data/store-verification/twelve-dollars/apple_music_release_snapshot.json\",\n      \"ok\": false,\n      \"status\": \"not_found\",\n      \"found_url\": \"\",\n      \"stores\": [],\n      \"candidate_count\": null,\n      \"output\": \"data/store-verification/twelve-dollars/apple_music_release_snapshot.json\"\n    },\n    {\n      \"command\": \"python3 scripts/capture_hyperfollow_store_links.py --url https://distrokid.com/hyperfollow/lilyroo/twelve-dollars --out data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json\",\n      \"timeout_seconds\": 25,\n      \"timed_out\": false,\n      \"duration_seconds\": 0.46,\n      \"returncode\": 1,\n      \"stdout\": \"{\\n  \\\"ok\\\": false,\\n  \\\"stores\\\": [],\\n  \\\"amazon_music_available\\\": false,\\n  \\\"output\\\": \\\"data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json\\\"\\n}\",\n      \"stderr\": \"\",\n      \"release\": \"Twelve Dollars\",\n      \"service\": \"hyperfollow\",\n      \"snapshot_path\": \"data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json\",\n      \"ok\": false,\n      \"status\": \"not_found\",\n      \"found_url\": \"\",\n      \"stores\": [],\n      \"candidate_count\": null,\n      \"output\": \"data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json\"\n    },\n    {\n      \"command\": \"python3 scripts/search_spotify_release.py --artist Lily Roo --title Analog Myth --out data/store-verification/analog-myth/spotify_release_snapshot.json\",\n      \"timeout_seconds\": 25,\n      \"timed_out\": false,\n      \"duration_seconds\": 20.09,\n      \"returncode\": 1,\n      \"stdout\": \"{\\n  \\\"ok\\\": false,\\n  \\\"title\\\": \\\"\\\",\\n  \\\"album_id\\\": \\\"\\\",\\n  \\\"release_url\\\": \\\"\\\",\\n  \\\"candidate_count\\\": 0,\\n  \\\"output\\\": \\\"data/store-verification/analog-myth/spotify_release_snapshot.json\\\"\\n}\",\n      \"stderr\": \"\",\n      \"release\": \"Analog Myth\",\n      \"service\": \"spotify\",\n      \"snapshot_path\": \"data/store-verification/analog-myth/spotify_release_snapshot.json\",\n      \"ok\": false,\n      \"status\": \"not_found\",\n      \"found_url\": \"\",\n      \"stores\": [],\n      \"candidate_count\": 0,\n      \"output\": \"data/store-verification/analog-myth/spotify_release_snapshot.json\"\n    },\n    {\n      \"command\": \"python3 scripts/capture_apple_music_release.py --artist Lily Roo --title Analog Myth --out data/store-verification/analog-myth/apple_m\n...[truncated]",
       "stderr_tail": ""
     },
     {
@@ -67,7 +67,7 @@
       "timed_out": false,
       "returncode": 0,
       "ok": true,
-      "duration_seconds": 0.64,
+      "duration_seconds": 0.53,
       "stdout_tail": "{\n  \"ok\": true,\n  \"http_status\": 200,\n  \"ready_platforms\": [\n    \"X\",\n    \"Facebook\",\n    \"YouTube\"\n  ],\n  \"blocked_platforms\": [\n    \"Instagram\",\n    \"TikTok\"\n  ],\n  \"output\": \"data/executor_readiness_snapshot.json\"\n}",
       "stderr_tail": ""
     },
@@ -79,7 +79,7 @@
       "timed_out": false,
       "returncode": 0,
       "ok": true,
-      "duration_seconds": 0.07,
+      "duration_seconds": 0.05,
       "stdout_tail": "{\n  \"ok\": true,\n  \"mode\": \"write\",\n  \"expired_count\": 13,\n  \"expired_ids\": [\n    \"FP-AUTO-259\",\n    \"FP-AUTO-258\",\n    \"FP-AUTO-264\",\n    \"FP-AUTO-263\",\n    \"FP-PLAN-TWELVE-DOLLARS-INSTAGRAM\",\n    \"FP-AUTO-267\",\n    \"FP-AUTO-269\",\n    \"FP-AUTO-272\",\n    \"FP-AUTO-274\",\n    \"FP-AUTO-277\",\n    \"FP-AUTO-279\",\n    \"FP-AUTO-282\",\n    \"FP-AUTO-284\"\n  ],\n  \"output\": \"data/stale_scheduled_post_expiration.json\"\n}",
       "stderr_tail": ""
     },
@@ -91,7 +91,7 @@
       "timed_out": false,
       "returncode": 0,
       "ok": true,
-      "duration_seconds": 0.04,
+      "duration_seconds": 0.03,
       "stdout_tail": "Wrote <repo>/admin/future-posts.json with 32 posts",
       "stderr_tail": ""
     },
@@ -103,7 +103,7 @@
       "timed_out": false,
       "returncode": 0,
       "ok": true,
-      "duration_seconds": 5.01,
+      "duration_seconds": 4.91,
       "stdout_tail": "{\n  \"ok\": true,\n  \"http_status\": 200,\n  \"execution_count\": 45,\n  \"posted_count\": 30,\n  \"attention_count\": 0,\n  \"output\": \"data/social_execution_snapshot.json\"\n}",
       "stderr_tail": ""
     },
@@ -115,7 +115,7 @@
       "timed_out": false,
       "returncode": 0,
       "ok": true,
-      "duration_seconds": 0.05,
+      "duration_seconds": 0.03,
       "stdout_tail": "{\n  \"superseded_execution_count\": 0,\n  \"manual_handoff_needed_count\": 0,\n  \"platform_fix_needed_count\": 0,\n  \"superseded_post_ids\": [],\n  \"apply\": false,\n  \"write_snapshot\": true,\n  \"output\": \"data/social_execution_snapshot.json\"\n}",
       "stderr_tail": ""
     },
@@ -127,7 +127,7 @@
       "timed_out": false,
       "returncode": 0,
       "ok": true,
-      "duration_seconds": 0.36,
+      "duration_seconds": 0.37,
       "stdout_tail": "{\n  \"ok\": true,\n  \"added\": 0,\n  \"dry_run\": false\n}",
       "stderr_tail": ""
     },
@@ -139,7 +139,7 @@
       "timed_out": false,
       "returncode": 0,
       "ok": true,
-      "duration_seconds": 0.08,
+      "duration_seconds": 0.07,
       "stdout_tail": "{\n  \"output\": \"data/x_post_results.json\",\n  \"status\": \"skipped_missing_secrets\",\n  \"captured_post_count\": 17,\n  \"fillable_post_count\": 0,\n  \"fillable_result_field_count\": 0,\n  \"post_ids\": [\n    \"LR-ANEC-001\",\n    \"FP-AUTO-208\",\n    \"FP-AUTO-213\",\n    \"FP-AUTO-257\",\n    \"FP-AUTO-262\",\n    \"FP-AUTO-271\",\n    \"FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA\",\n    \"FP-AUTO-266\",\n    \"FP-STORY-TWELVE-DOLLARS-X-ARCHIVE-CTA\",\n    \"FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK\",\n    \"FP-PLAN-TWELVE-DOLLARS-X\",\n    \"FP-AUTO-276\",\n    \"FP-LAUNCH-ANALOG-MYTH-X\",\n    \"FP-AUTO-281\",\n    \"FP-STORY-I-LEARNED-IT-ALL-IN-FIFTEEN-SECONDS-X-ARCHIVE-CTA\",\n    \"FP-LAUNCH-ANALOG-MYTH-X-EVENING\",\n    \"FP-LAUNCH-ANALOG-MYTH-X-NIGHT\"\n  ],\n  \"result_fields\": [\n    \"views\",\n    \"likes\",\n    \"comments\",\n    \"shares\",\n    \"saves\"\n  ],\n  \"missing_secret_names\": [\n    \"X_API_KEY\",\n    \"X_API_SECRET\",\n    \"X_ACCESS_TOKEN\",\n    \"X_ACCESS_TOKEN_SECRET\"\n  ],\n  \"apply_command\": \"python3 scripts/capture_x_post_results.py --apply-results --refresh-admin\",\n  \"retry_command\": \"python3 scripts/capture_x_post_results.py --min-age-hours 24 --allow-empty --apply-results --refresh-admin\",\n  \"report_path\": \"admin/reports/x-post-results.md\",\n  \"next_action\": \"Add the missing X credential names locally or in GitHub Actions, then rerun capture.\"\n}",
       "stderr_tail": ""
     },
@@ -156,6 +156,18 @@
       "stderr_tail": ""
     },
     {
+      "name": "capture_youtube_post_results_24h",
+      "command": "python3 scripts/capture_youtube_post_results.py --min-age-hours 24 --allow-empty --skip-missing-secrets --apply-results",
+      "required": false,
+      "timeout_seconds": 45,
+      "timed_out": false,
+      "returncode": 0,
+      "ok": true,
+      "duration_seconds": 0.58,
+      "stdout_tail": "{\n  \"output\": \"data/youtube_post_results.json\",\n  \"status\": \"no_open_youtube_result_fields\",\n  \"captured_post_count\": 10,\n  \"fillable_post_count\": 0,\n  \"fillable_result_field_count\": 0,\n  \"post_ids\": [\n    \"FP-AUTO-212\",\n    \"LR-SONG-023\",\n    \"LR-SONG-024\",\n    \"FP-AUTO-229\",\n    \"FP-AUTO-261\",\n    \"FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA\",\n    \"FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA\",\n    \"FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY\",\n    \"FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY\",\n    \"FP-PODCAST-ANALOG-MYTH-YOUTUBE\"\n  ],\n  \"result_fields\": [\n    \"views\",\n    \"likes\",\n    \"comments\"\n  ],\n  \"apply_command\": \"python3 scripts/capture_youtube_post_results.py --apply-results --refresh-admin\",\n  \"retry_command\": \"python3 scripts/capture_youtube_post_results.py --min-age-hours 24 --allow-empty --apply-results --refresh-admin\",\n  \"report_path\": \"admin/reports/youtube-post-results.md\"\n}",
+      "stderr_tail": ""
+    },
+    {
       "name": "capture_scheduler_dry_run",
       "command": "python3 scripts/capture_scheduler_dry_run.py",
       "required": false,
@@ -163,7 +175,7 @@
       "timed_out": false,
       "returncode": 0,
       "ok": true,
-      "duration_seconds": 0.2,
+      "duration_seconds": 0.23,
       "stdout_tail": "{\n  \"ok\": true,\n  \"http_status\": 200,\n  \"due_count\": 0,\n  \"would_post_count\": 0,\n  \"blocked_count\": 0,\n  \"output\": \"data/social_scheduler_dry_run.json\"\n}",
       "stderr_tail": ""
     },
@@ -188,7 +200,7 @@
       "returncode": 0,
       "ok": true,
       "duration_seconds": 0.04,
-      "stdout_tail": "{\n  \"updated\": \"data/metrics_history.json\",\n  \"snapshots\": 19,\n  \"latest\": {\n    \"date\": \"2026-07-03\",\n    \"captured_at\": \"2026-07-03T08:25:20.708166Z\",\n    \"live_metrics_updated_at\": \"2026-07-03T08:24:10.382Z\",\n    \"youtube\": {\n      \"subscribers\": 5,\n      \"total_views\": 462,\n      \"video_count\": 34\n    },\n    \"facebook\": {\n      \"followers\": 0,\n      \"page_likes\": 0,\n      \"reach_7d\": null\n    },\n    \"spotify\": {\n      \"artist_followers\": 1,\n      \"monthly_listeners\": 2,\n      \"release_streams\": null,\n      \"saves\": null\n    },\n    \"instagram\": {\n      \"followers\": 0,\n      \"profile_visits_7d\": null\n    },\n    \"tiktok\": {\n      \"followers\": 0,\n      \"profile_views_7d\": null\n    },\n    \"x\": {\n      \"followers\": 0,\n      \"impressions_7d\": null\n    },\n    \"publishing\": {\n      \"published_30d\": 34,\n      \"published_total\": 48\n    },\n    \"queue\": {\n      \"approved_upcoming\": 32,\n      \"approved_total\": 44,\n      \"scheduled_total\": 78\n    },\n    \"delta_from_previous\": {\n      \"youtube.subscribers\": 0,\n      \"youtube.total_views\": 13,\n      \"youtube.video_count\": 0,\n      \"facebook.followers\": 0,\n      \"facebook.page_likes\": 0,\n      \"instagram.followers\": 0,\n      \"tiktok.followers\": 0,\n      \"x.followers\": 0,\n      \"publishing.published_30d\": 0,\n      \"publishing.published_total\": 0,\n      \"queue.approved_upcoming\": 32,\n      \"queue.approved_total\": 32,\n      \"queue.scheduled_total\": 32\n    }\n  }\n}",
+      "stdout_tail": "{\n  \"updated\": \"data/metrics_history.json\",\n  \"snapshots\": 19,\n  \"latest\": {\n    \"date\": \"2026-07-03\",\n    \"captured_at\": \"2026-07-03T08:35:46.005577Z\",\n    \"live_metrics_updated_at\": \"2026-07-03T08:34:35.196Z\",\n    \"youtube\": {\n      \"subscribers\": 5,\n      \"total_views\": 462,\n      \"video_count\": 34\n    },\n    \"facebook\": {\n      \"followers\": 0,\n      \"page_likes\": 0,\n      \"reach_7d\": null\n    },\n    \"spotify\": {\n      \"artist_followers\": 1,\n      \"monthly_listeners\": 2,\n      \"release_streams\": null,\n      \"saves\": null\n    },\n    \"instagram\": {\n      \"followers\": 0,\n      \"profile_visits_7d\": null\n    },\n    \"tiktok\": {\n      \"followers\": 0,\n      \"profile_views_7d\": null\n    },\n    \"x\": {\n      \"followers\": 0,\n      \"impressions_7d\": null\n    },\n    \"publishing\": {\n      \"published_30d\": 34,\n      \"published_total\": 48\n    },\n    \"queue\": {\n      \"approved_upcoming\": 32,\n      \"approved_total\": 44,\n      \"scheduled_total\": 78\n    },\n    \"delta_from_previous\": {\n      \"youtube.subscribers\": 0,\n      \"youtube.total_views\": 13,\n      \"youtube.video_count\": 0,\n      \"facebook.followers\": 0,\n      \"facebook.page_likes\": 0,\n      \"instagram.followers\": 0,\n      \"tiktok.followers\": 0,\n      \"x.followers\": 0,\n      \"publishing.published_30d\": 0,\n      \"publishing.published_total\": 0,\n      \"queue.approved_upcoming\": 32,\n      \"queue.approved_total\": 32,\n      \"queue.scheduled_total\": 32\n    }\n  }\n}",
       "stderr_tail": ""
     },
     {
@@ -199,7 +211,7 @@
       "timed_out": false,
       "returncode": 0,
       "ok": true,
-      "duration_seconds": 0.56,
+      "duration_seconds": 0.52,
       "stdout_tail": "{\n  \"ok\": true,\n  \"http_status\": 200,\n  \"latest_status\": \"completed\",\n  \"latest_conclusion\": \"success\",\n  \"output\": \"data/promo_refresh_workflow_status.json\"\n}",
       "stderr_tail": ""
     },
@@ -211,7 +223,7 @@
       "timed_out": false,
       "returncode": 0,
       "ok": true,
-      "duration_seconds": 0.32,
+      "duration_seconds": 0.33,
       "stdout_tail": "{\n  \"output\": \"data/github_actions_secret_presence.json\",\n  \"status\": \"ready\",\n  \"present_required_count\": 1,\n  \"missing_required_count\": 0,\n  \"optional_missing_secret_count\": 6\n}",
       "stderr_tail": ""
     },
@@ -595,7 +607,7 @@
       "timed_out": false,
       "returncode": 0,
       "ok": true,
-      "duration_seconds": 3.05,
+      "duration_seconds": 2.92,
       "stdout_tail": "{\n  \"output\": \"data/brand_growth_preflight.json\",\n  \"status\": \"ready\",\n  \"next_window_date\": \"2026-07-04\",\n  \"scheduled_time\": \"2026-07-04T15:21:00Z\",\n  \"expected_post_count\": 2,\n  \"expected_post_ids\": [\n    \"FP-BRAND-AM-01-13-X\",\n    \"FP-BRAND-AM-01-13-FACEBOOK\"\n  ],\n  \"scheduler_http_status\": 200,\n  \"scheduler_auth_method\": \"bearer\",\n  \"scheduler_due_count\": 2,\n  \"scheduler_would_post_count\": 2,\n  \"scheduler_blocked_count\": 0,\n  \"missing_due_ids\": [],\n  \"unexpected_due_ids\": [],\n  \"blocked_ids\": [],\n  \"link_check_count\": 10,\n  \"link_ok_count\": 10,\n  \"link_failed_count\": 0,\n  \"next_proof_due_at\": \"2026-07-04T16:05:00Z\",\n  \"next_measurement_due_at\": \"2026-07-05T15:20:00Z\",\n  \"error\": \"\"\n}",
       "stderr_tail": ""
     },
@@ -669,8 +681,8 @@
       "timed_out": false,
       "returncode": 0,
       "ok": true,
-      "duration_seconds": 2.98,
-      "stdout_tail": "{\n  \"ok\": true,\n  \"capture_status\": 200,\n  \"updated_at\": \"2026-07-03T08:24:10.382Z\",\n  \"platforms\": [\n    \"facebook\",\n    \"instagram\",\n    \"spotify\",\n    \"tiktok\",\n    \"x\",\n    \"youtube\"\n  ],\n  \"output\": \"data/live_social_metrics.json\"\n}",
+      "duration_seconds": 2.58,
+      "stdout_tail": "{\n  \"ok\": true,\n  \"capture_status\": 200,\n  \"updated_at\": \"2026-07-03T08:34:35.196Z\",\n  \"platforms\": [\n    \"facebook\",\n    \"instagram\",\n    \"spotify\",\n    \"tiktok\",\n    \"x\",\n    \"youtube\"\n  ],\n  \"output\": \"data/live_social_metrics.json\"\n}",
       "stderr_tail": ""
     },
     {
@@ -681,7 +693,7 @@
       "timed_out": false,
       "returncode": 0,
       "ok": true,
-      "duration_seconds": 0.04,
+      "duration_seconds": 0.05,
       "stdout_tail": "No live-covered pending metrics available; manual stats unchanged.",
       "stderr_tail": ""
     },
@@ -693,8 +705,8 @@
       "timed_out": false,
       "returncode": 0,
       "ok": true,
-      "duration_seconds": 63.7,
-      "stdout_tail": "{\n  \"checked\": 7,\n  \"ok\": 2,\n  \"not_live_or_failed\": 5,\n  \"timed_out\": 0,\n  \"step_timeout_seconds\": 25,\n  \"output\": \"data/store_verification_run.json\",\n  \"results\": [\n    {\n      \"command\": \"python3 scripts/search_spotify_release.py --artist Lily Roo --title Twelve Dollars --out data/store-verification/twelve-dollars/spotify_release_snapshot.json\",\n      \"timeout_seconds\": 25,\n      \"timed_out\": false,\n      \"duration_seconds\": 20.05,\n      \"returncode\": 1,\n      \"stdout\": \"{\\n  \\\"ok\\\": false,\\n  \\\"title\\\": \\\"\\\",\\n  \\\"album_id\\\": \\\"\\\",\\n  \\\"release_url\\\": \\\"\\\",\\n  \\\"candidate_count\\\": 0,\\n  \\\"output\\\": \\\"data/store-verification/twelve-dollars/spotify_release_snapshot.json\\\"\\n}\",\n      \"stderr\": \"\",\n      \"release\": \"Twelve Dollars\",\n      \"service\": \"spotify\",\n      \"snapshot_path\": \"data/store-verification/twelve-dollars/spotify_release_snapshot.json\",\n      \"ok\": false,\n      \"status\": \"not_found\",\n      \"found_url\": \"\",\n      \"stores\": [],\n      \"candidate_count\": 0,\n      \"output\": \"data/store-verification/twelve-dollars/spotify_release_snapshot.json\"\n    },\n    {\n      \"command\": \"python3 scripts/capture_apple_music_release.py --artist Lily Roo --title Twelve Dollars --out data/store-verification/twelve-dollars/apple_music_release_snapshot.json\",\n      \"timeout_seconds\": 25,\n      \"timed_out\": false,\n      \"duration_seconds\": 0.26,\n      \"returncode\": 1,\n      \"stdout\": \"{\\n  \\\"ok\\\": false,\\n  \\\"collection_name\\\": \\\"\\\",\\n  \\\"collection_id\\\": null,\\n  \\\"release_url\\\": \\\"\\\",\\n  \\\"output\\\": \\\"data/store-verification/twelve-dollars/apple_music_release_snapshot.json\\\"\\n}\",\n      \"stderr\": \"\",\n      \"release\": \"Twelve Dollars\",\n      \"service\": \"apple_music\",\n      \"snapshot_path\": \"data/store-verification/twelve-dollars/apple_music_release_snapshot.json\",\n      \"ok\": false,\n      \"status\": \"not_found\",\n      \"found_url\": \"\",\n      \"stores\": [],\n      \"candidate_count\": null,\n      \"output\": \"data/store-verification/twelve-dollars/apple_music_release_snapshot.json\"\n    },\n    {\n      \"command\": \"python3 scripts/capture_hyperfollow_store_links.py --url https://distrokid.com/hyperfollow/lilyroo/twelve-dollars --out data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json\",\n      \"timeout_seconds\": 25,\n      \"timed_out\": false,\n      \"duration_seconds\": 0.44,\n      \"returncode\": 1,\n      \"stdout\": \"{\\n  \\\"ok\\\": false,\\n  \\\"stores\\\": [],\\n  \\\"amazon_music_available\\\": false,\\n  \\\"output\\\": \\\"data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json\\\"\\n}\",\n      \"stderr\": \"\",\n      \"release\": \"Twelve Dollars\",\n      \"service\": \"hyperfollow\",\n      \"snapshot_path\": \"data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json\",\n      \"ok\": false,\n      \"status\": \"not_found\",\n      \"found_url\": \"\",\n      \"stores\": [],\n      \"candidate_count\": null,\n      \"output\": \"data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json\"\n    },\n    {\n      \"command\": \"python3 scripts/search_spotify_release.py --artist Lily Roo --title Analog Myth --out data/store-verification/analog-myth/spotify_release_snapshot.json\",\n      \"timeout_seconds\": 25,\n      \"timed_out\": false,\n      \"duration_seconds\": 20.09,\n      \"returncode\": 1,\n      \"stdout\": \"{\\n  \\\"ok\\\": false,\\n  \\\"title\\\": \\\"\\\",\\n  \\\"album_id\\\": \\\"\\\",\\n  \\\"release_url\\\": \\\"\\\",\\n  \\\"candidate_count\\\": 0,\\n  \\\"output\\\": \\\"data/store-verification/analog-myth/spotify_release_snapshot.json\\\"\\n}\",\n      \"stderr\": \"\",\n      \"release\": \"Analog Myth\",\n      \"service\": \"spotify\",\n      \"snapshot_path\": \"data/store-verification/analog-myth/spotify_release_snapshot.json\",\n      \"ok\": false,\n      \"status\": \"not_found\",\n      \"found_url\": \"\",\n      \"stores\": [],\n      \"candidate_count\": 0,\n      \"output\": \"data/store-verification/analog-myth/spotify_release_snapshot.json\"\n    },\n    {\n      \"command\": \"python3 scripts/capture_apple_music_release.py --artist Lily Roo --title Analog Myth --out data/store-verification/analog-myth/apple_m\n...[truncated]",
+      "duration_seconds": 63.81,
+      "stdout_tail": "{\n  \"checked\": 7,\n  \"ok\": 2,\n  \"not_live_or_failed\": 5,\n  \"timed_out\": 0,\n  \"step_timeout_seconds\": 25,\n  \"output\": \"data/store_verification_run.json\",\n  \"results\": [\n    {\n      \"command\": \"python3 scripts/search_spotify_release.py --artist Lily Roo --title Twelve Dollars --out data/store-verification/twelve-dollars/spotify_release_snapshot.json\",\n      \"timeout_seconds\": 25,\n      \"timed_out\": false,\n      \"duration_seconds\": 20.07,\n      \"returncode\": 1,\n      \"stdout\": \"{\\n  \\\"ok\\\": false,\\n  \\\"title\\\": \\\"\\\",\\n  \\\"album_id\\\": \\\"\\\",\\n  \\\"release_url\\\": \\\"\\\",\\n  \\\"candidate_count\\\": 0,\\n  \\\"output\\\": \\\"data/store-verification/twelve-dollars/spotify_release_snapshot.json\\\"\\n}\",\n      \"stderr\": \"\",\n      \"release\": \"Twelve Dollars\",\n      \"service\": \"spotify\",\n      \"snapshot_path\": \"data/store-verification/twelve-dollars/spotify_release_snapshot.json\",\n      \"ok\": false,\n      \"status\": \"not_found\",\n      \"found_url\": \"\",\n      \"stores\": [],\n      \"candidate_count\": 0,\n      \"output\": \"data/store-verification/twelve-dollars/spotify_release_snapshot.json\"\n    },\n    {\n      \"command\": \"python3 scripts/capture_apple_music_release.py --artist Lily Roo --title Twelve Dollars --out data/store-verification/twelve-dollars/apple_music_release_snapshot.json\",\n      \"timeout_seconds\": 25,\n      \"timed_out\": false,\n      \"duration_seconds\": 0.28,\n      \"returncode\": 1,\n      \"stdout\": \"{\\n  \\\"ok\\\": false,\\n  \\\"collection_name\\\": \\\"\\\",\\n  \\\"collection_id\\\": null,\\n  \\\"release_url\\\": \\\"\\\",\\n  \\\"output\\\": \\\"data/store-verification/twelve-dollars/apple_music_release_snapshot.json\\\"\\n}\",\n      \"stderr\": \"\",\n      \"release\": \"Twelve Dollars\",\n      \"service\": \"apple_music\",\n      \"snapshot_path\": \"data/store-verification/twelve-dollars/apple_music_release_snapshot.json\",\n      \"ok\": false,\n      \"status\": \"not_found\",\n      \"found_url\": \"\",\n      \"stores\": [],\n      \"candidate_count\": null,\n      \"output\": \"data/store-verification/twelve-dollars/apple_music_release_snapshot.json\"\n    },\n    {\n      \"command\": \"python3 scripts/capture_hyperfollow_store_links.py --url https://distrokid.com/hyperfollow/lilyroo/twelve-dollars --out data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json\",\n      \"timeout_seconds\": 25,\n      \"timed_out\": false,\n      \"duration_seconds\": 0.46,\n      \"returncode\": 1,\n      \"stdout\": \"{\\n  \\\"ok\\\": false,\\n  \\\"stores\\\": [],\\n  \\\"amazon_music_available\\\": false,\\n  \\\"output\\\": \\\"data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json\\\"\\n}\",\n      \"stderr\": \"\",\n      \"release\": \"Twelve Dollars\",\n      \"service\": \"hyperfollow\",\n      \"snapshot_path\": \"data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json\",\n      \"ok\": false,\n      \"status\": \"not_found\",\n      \"found_url\": \"\",\n      \"stores\": [],\n      \"candidate_count\": null,\n      \"output\": \"data/store-verification/twelve-dollars/hyperfollow_store_links_snapshot.json\"\n    },\n    {\n      \"command\": \"python3 scripts/search_spotify_release.py --artist Lily Roo --title Analog Myth --out data/store-verification/analog-myth/spotify_release_snapshot.json\",\n      \"timeout_seconds\": 25,\n      \"timed_out\": false,\n      \"duration_seconds\": 20.09,\n      \"returncode\": 1,\n      \"stdout\": \"{\\n  \\\"ok\\\": false,\\n  \\\"title\\\": \\\"\\\",\\n  \\\"album_id\\\": \\\"\\\",\\n  \\\"release_url\\\": \\\"\\\",\\n  \\\"candidate_count\\\": 0,\\n  \\\"output\\\": \\\"data/store-verification/analog-myth/spotify_release_snapshot.json\\\"\\n}\",\n      \"stderr\": \"\",\n      \"release\": \"Analog Myth\",\n      \"service\": \"spotify\",\n      \"snapshot_path\": \"data/store-verification/analog-myth/spotify_release_snapshot.json\",\n      \"ok\": false,\n      \"status\": \"not_found\",\n      \"found_url\": \"\",\n      \"stores\": [],\n      \"candidate_count\": 0,\n      \"output\": \"data/store-verification/analog-myth/spotify_release_snapshot.json\"\n    },\n    {\n      \"command\": \"python3 scripts/capture_apple_music_release.py --artist Lily Roo --title Analog Myth --out data/store-verification/analog-myth/apple_m\n...[truncated]",
       "stderr_tail": ""
     },
     {
@@ -705,7 +717,7 @@
       "timed_out": false,
       "returncode": 0,
       "ok": true,
-      "duration_seconds": 0.64,
+      "duration_seconds": 0.53,
       "stdout_tail": "{\n  \"ok\": true,\n  \"http_status\": 200,\n  \"ready_platforms\": [\n    \"X\",\n    \"Facebook\",\n    \"YouTube\"\n  ],\n  \"blocked_platforms\": [\n    \"Instagram\",\n    \"TikTok\"\n  ],\n  \"output\": \"data/executor_readiness_snapshot.json\"\n}",
       "stderr_tail": ""
     },
@@ -717,7 +729,7 @@
       "timed_out": false,
       "returncode": 0,
       "ok": true,
-      "duration_seconds": 0.07,
+      "duration_seconds": 0.05,
       "stdout_tail": "{\n  \"ok\": true,\n  \"mode\": \"write\",\n  \"expired_count\": 13,\n  \"expired_ids\": [\n    \"FP-AUTO-259\",\n    \"FP-AUTO-258\",\n    \"FP-AUTO-264\",\n    \"FP-AUTO-263\",\n    \"FP-PLAN-TWELVE-DOLLARS-INSTAGRAM\",\n    \"FP-AUTO-267\",\n    \"FP-AUTO-269\",\n    \"FP-AUTO-272\",\n    \"FP-AUTO-274\",\n    \"FP-AUTO-277\",\n    \"FP-AUTO-279\",\n    \"FP-AUTO-282\",\n    \"FP-AUTO-284\"\n  ],\n  \"output\": \"data/stale_scheduled_post_expiration.json\"\n}",
       "stderr_tail": ""
     },
@@ -729,7 +741,7 @@
       "timed_out": false,
       "returncode": 0,
       "ok": true,
-      "duration_seconds": 0.04,
+      "duration_seconds": 0.03,
       "stdout_tail": "Wrote <repo>/admin/future-posts.json with 32 posts",
       "stderr_tail": ""
     },
@@ -741,7 +753,7 @@
       "timed_out": false,
       "returncode": 0,
       "ok": true,
-      "duration_seconds": 5.01,
+      "duration_seconds": 4.91,
       "stdout_tail": "{\n  \"ok\": true,\n  \"http_status\": 200,\n  \"execution_count\": 45,\n  \"posted_count\": 30,\n  \"attention_count\": 0,\n  \"output\": \"data/social_execution_snapshot.json\"\n}",
       "stderr_tail": ""
     },
@@ -753,7 +765,7 @@
       "timed_out": false,
       "returncode": 0,
       "ok": true,
-      "duration_seconds": 0.05,
+      "duration_seconds": 0.03,
       "stdout_tail": "{\n  \"superseded_execution_count\": 0,\n  \"manual_handoff_needed_count\": 0,\n  \"platform_fix_needed_count\": 0,\n  \"superseded_post_ids\": [],\n  \"apply\": false,\n  \"write_snapshot\": true,\n  \"output\": \"data/social_execution_snapshot.json\"\n}",
       "stderr_tail": ""
     },
@@ -765,7 +777,7 @@
       "timed_out": false,
       "returncode": 0,
       "ok": true,
-      "duration_seconds": 0.36,
+      "duration_seconds": 0.37,
       "stdout_tail": "{\n  \"ok\": true,\n  \"added\": 0,\n  \"dry_run\": false\n}",
       "stderr_tail": ""
     },
@@ -777,7 +789,7 @@
       "timed_out": false,
       "returncode": 0,
       "ok": true,
-      "duration_seconds": 0.08,
+      "duration_seconds": 0.07,
       "stdout_tail": "{\n  \"output\": \"data/x_post_results.json\",\n  \"status\": \"skipped_missing_secrets\",\n  \"captured_post_count\": 17,\n  \"fillable_post_count\": 0,\n  \"fillable_result_field_count\": 0,\n  \"post_ids\": [\n    \"LR-ANEC-001\",\n    \"FP-AUTO-208\",\n    \"FP-AUTO-213\",\n    \"FP-AUTO-257\",\n    \"FP-AUTO-262\",\n    \"FP-AUTO-271\",\n    \"FP-STORY-ANALOG-MYTH-X-ARCHIVE-CTA\",\n    \"FP-AUTO-266\",\n    \"FP-STORY-TWELVE-DOLLARS-X-ARCHIVE-CTA\",\n    \"FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK\",\n    \"FP-PLAN-TWELVE-DOLLARS-X\",\n    \"FP-AUTO-276\",\n    \"FP-LAUNCH-ANALOG-MYTH-X\",\n    \"FP-AUTO-281\",\n    \"FP-STORY-I-LEARNED-IT-ALL-IN-FIFTEEN-SECONDS-X-ARCHIVE-CTA\",\n    \"FP-LAUNCH-ANALOG-MYTH-X-EVENING\",\n    \"FP-LAUNCH-ANALOG-MYTH-X-NIGHT\"\n  ],\n  \"result_fields\": [\n    \"views\",\n    \"likes\",\n    \"comments\",\n    \"shares\",\n    \"saves\"\n  ],\n  \"missing_secret_names\": [\n    \"X_API_KEY\",\n    \"X_API_SECRET\",\n    \"X_ACCESS_TOKEN\",\n    \"X_ACCESS_TOKEN_SECRET\"\n  ],\n  \"apply_command\": \"python3 scripts/capture_x_post_results.py --apply-results --refresh-admin\",\n  \"retry_command\": \"python3 scripts/capture_x_post_results.py --min-age-hours 24 --allow-empty --apply-results --refresh-admin\",\n  \"report_path\": \"admin/reports/x-post-results.md\",\n  \"next_action\": \"Add the missing X credential names locally or in GitHub Actions, then rerun capture.\"\n}",
       "stderr_tail": ""
     },
@@ -794,6 +806,18 @@
       "stderr_tail": ""
     },
     {
+      "name": "capture_youtube_post_results_24h",
+      "command": "python3 scripts/capture_youtube_post_results.py --min-age-hours 24 --allow-empty --skip-missing-secrets --apply-results",
+      "required": false,
+      "timeout_seconds": 45,
+      "timed_out": false,
+      "returncode": 0,
+      "ok": true,
+      "duration_seconds": 0.58,
+      "stdout_tail": "{\n  \"output\": \"data/youtube_post_results.json\",\n  \"status\": \"no_open_youtube_result_fields\",\n  \"captured_post_count\": 10,\n  \"fillable_post_count\": 0,\n  \"fillable_result_field_count\": 0,\n  \"post_ids\": [\n    \"FP-AUTO-212\",\n    \"LR-SONG-023\",\n    \"LR-SONG-024\",\n    \"FP-AUTO-229\",\n    \"FP-AUTO-261\",\n    \"FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA\",\n    \"FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA\",\n    \"FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY\",\n    \"FP-PLAN-TWELVE-DOLLARS-YOUTUBE-COMMUNITY\",\n    \"FP-PODCAST-ANALOG-MYTH-YOUTUBE\"\n  ],\n  \"result_fields\": [\n    \"views\",\n    \"likes\",\n    \"comments\"\n  ],\n  \"apply_command\": \"python3 scripts/capture_youtube_post_results.py --apply-results --refresh-admin\",\n  \"retry_command\": \"python3 scripts/capture_youtube_post_results.py --min-age-hours 24 --allow-empty --apply-results --refresh-admin\",\n  \"report_path\": \"admin/reports/youtube-post-results.md\"\n}",
+      "stderr_tail": ""
+    },
+    {
       "name": "capture_scheduler_dry_run",
       "command": "python3 scripts/capture_scheduler_dry_run.py",
       "required": false,
@@ -801,7 +825,7 @@
       "timed_out": false,
       "returncode": 0,
       "ok": true,
-      "duration_seconds": 0.2,
+      "duration_seconds": 0.23,
       "stdout_tail": "{\n  \"ok\": true,\n  \"http_status\": 200,\n  \"due_count\": 0,\n  \"would_post_count\": 0,\n  \"blocked_count\": 0,\n  \"output\": \"data/social_scheduler_dry_run.json\"\n}",
       "stderr_tail": ""
     },
@@ -826,7 +850,7 @@
       "returncode": 0,
       "ok": true,
       "duration_seconds": 0.04,
-      "stdout_tail": "{\n  \"updated\": \"data/metrics_history.json\",\n  \"snapshots\": 19,\n  \"latest\": {\n    \"date\": \"2026-07-03\",\n    \"captured_at\": \"2026-07-03T08:25:20.708166Z\",\n    \"live_metrics_updated_at\": \"2026-07-03T08:24:10.382Z\",\n    \"youtube\": {\n      \"subscribers\": 5,\n      \"total_views\": 462,\n      \"video_count\": 34\n    },\n    \"facebook\": {\n      \"followers\": 0,\n      \"page_likes\": 0,\n      \"reach_7d\": null\n    },\n    \"spotify\": {\n      \"artist_followers\": 1,\n      \"monthly_listeners\": 2,\n      \"release_streams\": null,\n      \"saves\": null\n    },\n    \"instagram\": {\n      \"followers\": 0,\n      \"profile_visits_7d\": null\n    },\n    \"tiktok\": {\n      \"followers\": 0,\n      \"profile_views_7d\": null\n    },\n    \"x\": {\n      \"followers\": 0,\n      \"impressions_7d\": null\n    },\n    \"publishing\": {\n      \"published_30d\": 34,\n      \"published_total\": 48\n    },\n    \"queue\": {\n      \"approved_upcoming\": 32,\n      \"approved_total\": 44,\n      \"scheduled_total\": 78\n    },\n    \"delta_from_previous\": {\n      \"youtube.subscribers\": 0,\n      \"youtube.total_views\": 13,\n      \"youtube.video_count\": 0,\n      \"facebook.followers\": 0,\n      \"facebook.page_likes\": 0,\n      \"instagram.followers\": 0,\n      \"tiktok.followers\": 0,\n      \"x.followers\": 0,\n      \"publishing.published_30d\": 0,\n      \"publishing.published_total\": 0,\n      \"queue.approved_upcoming\": 32,\n      \"queue.approved_total\": 32,\n      \"queue.scheduled_total\": 32\n    }\n  }\n}",
+      "stdout_tail": "{\n  \"updated\": \"data/metrics_history.json\",\n  \"snapshots\": 19,\n  \"latest\": {\n    \"date\": \"2026-07-03\",\n    \"captured_at\": \"2026-07-03T08:35:46.005577Z\",\n    \"live_metrics_updated_at\": \"2026-07-03T08:34:35.196Z\",\n    \"youtube\": {\n      \"subscribers\": 5,\n      \"total_views\": 462,\n      \"video_count\": 34\n    },\n    \"facebook\": {\n      \"followers\": 0,\n      \"page_likes\": 0,\n      \"reach_7d\": null\n    },\n    \"spotify\": {\n      \"artist_followers\": 1,\n      \"monthly_listeners\": 2,\n      \"release_streams\": null,\n      \"saves\": null\n    },\n    \"instagram\": {\n      \"followers\": 0,\n      \"profile_visits_7d\": null\n    },\n    \"tiktok\": {\n      \"followers\": 0,\n      \"profile_views_7d\": null\n    },\n    \"x\": {\n      \"followers\": 0,\n      \"impressions_7d\": null\n    },\n    \"publishing\": {\n      \"published_30d\": 34,\n      \"published_total\": 48\n    },\n    \"queue\": {\n      \"approved_upcoming\": 32,\n      \"approved_total\": 44,\n      \"scheduled_total\": 78\n    },\n    \"delta_from_previous\": {\n      \"youtube.subscribers\": 0,\n      \"youtube.total_views\": 13,\n      \"youtube.video_count\": 0,\n      \"facebook.followers\": 0,\n      \"facebook.page_likes\": 0,\n      \"instagram.followers\": 0,\n      \"tiktok.followers\": 0,\n      \"x.followers\": 0,\n      \"publishing.published_30d\": 0,\n      \"publishing.published_total\": 0,\n      \"queue.approved_upcoming\": 32,\n      \"queue.approved_total\": 32,\n      \"queue.scheduled_total\": 32\n    }\n  }\n}",
       "stderr_tail": ""
     },
     {
@@ -837,7 +861,7 @@
       "timed_out": false,
       "returncode": 0,
       "ok": true,
-      "duration_seconds": 0.56,
+      "duration_seconds": 0.52,
       "stdout_tail": "{\n  \"ok\": true,\n  \"http_status\": 200,\n  \"latest_status\": \"completed\",\n  \"latest_conclusion\": \"success\",\n  \"output\": \"data/promo_refresh_workflow_status.json\"\n}",
       "stderr_tail": ""
     },
@@ -849,7 +873,7 @@
       "timed_out": false,
       "returncode": 0,
       "ok": true,
-      "duration_seconds": 0.32,
+      "duration_seconds": 0.33,
       "stdout_tail": "{\n  \"output\": \"data/github_actions_secret_presence.json\",\n  \"status\": \"ready\",\n  \"present_required_count\": 1,\n  \"missing_required_count\": 0,\n  \"optional_missing_secret_count\": 6\n}",
       "stderr_tail": ""
     },
@@ -1233,7 +1257,7 @@
       "timed_out": false,
       "returncode": 0,
       "ok": true,
-      "duration_seconds": 3.05,
+      "duration_seconds": 2.92,
       "stdout_tail": "{\n  \"output\": \"data/brand_growth_preflight.json\",\n  \"status\": \"ready\",\n  \"next_window_date\": \"2026-07-04\",\n  \"scheduled_time\": \"2026-07-04T15:21:00Z\",\n  \"expected_post_count\": 2,\n  \"expected_post_ids\": [\n    \"FP-BRAND-AM-01-13-X\",\n    \"FP-BRAND-AM-01-13-FACEBOOK\"\n  ],\n  \"scheduler_http_status\": 200,\n  \"scheduler_auth_method\": \"bearer\",\n  \"scheduler_due_count\": 2,\n  \"scheduler_would_post_count\": 2,\n  \"scheduler_blocked_count\": 0,\n  \"missing_due_ids\": [],\n  \"unexpected_due_ids\": [],\n  \"blocked_ids\": [],\n  \"link_check_count\": 10,\n  \"link_ok_count\": 10,\n  \"link_failed_count\": 0,\n  \"next_proof_due_at\": \"2026-07-04T16:05:00Z\",\n  \"next_measurement_due_at\": \"2026-07-05T15:20:00Z\",\n  \"error\": \"\"\n}",
       "stderr_tail": ""
     },

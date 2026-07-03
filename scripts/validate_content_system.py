@@ -61,6 +61,7 @@ EXPERIMENT_RESULT_COLLECTION = ROOT / "data" / "experiment_result_collection_pac
 EXPERIMENT_RESULT_CLIPBOARD = ROOT / "data" / "experiment_result_clipboard.json"
 EXPERIMENT_PUBLISH_RUNWAY = ROOT / "data" / "experiment_publish_runway.json"
 BRAND_GROWTH_PREFLIGHT = ROOT / "data" / "brand_growth_preflight.json"
+YOUTUBE_POST_RESULTS = ROOT / "data" / "youtube_post_results.json"
 TWELVE_DOLLARS_REMASTER = ROOT / "data" / "youtube_twelve_dollars_remaster_manifest.json"
 TWELVE_DOLLARS_PLAYLIST = ROOT / "data" / "youtube_twelve_dollars_playlist.json"
 PROMO_QUEUE_APPLY = ROOT / "scripts" / "apply_promo_queue_plan.py"
@@ -78,6 +79,7 @@ EXECUTOR_READINESS_CAPTURE = ROOT / "scripts" / "capture_executor_readiness.py"
 SOCIAL_EXECUTION_CAPTURE = ROOT / "scripts" / "capture_social_executions.py"
 SOCIAL_EXECUTION_EXPORT = ROOT / "scripts" / "export_social_executions.py"
 SOCIAL_SCHEDULER_CAPTURE = ROOT / "scripts" / "capture_scheduler_dry_run.py"
+YOUTUBE_POST_RESULTS_CAPTURE = ROOT / "scripts" / "capture_youtube_post_results.py"
 SOCIAL_EXECUTION_RESET = ROOT / "scripts" / "reset_social_execution_state.py"
 PROMO_REFRESH_SCRIPT = ROOT / "scripts" / "refresh_promo_admin.py"
 PROMO_REFRESH_WORKFLOW_CAPTURE = ROOT / "scripts" / "capture_github_workflow_status.py"
@@ -128,6 +130,7 @@ YOUTUBE_COMMUNITY_URL_RECONCILIATION_REPORT = ROOT / "admin" / "reports" / "yout
 MONETIZATION_ACTIVATION_REPORT = ROOT / "admin" / "reports" / "monetization-activation-plan.md"
 BACKLOG_RESCHEDULE_PREVIEW_REPORT = ROOT / "admin" / "reports" / "backlog-reschedule-preview.md"
 MANUAL_METRIC_REPORT = ROOT / "admin" / "reports" / "manual-metric-collection.md"
+YOUTUBE_POST_RESULTS_REPORT = ROOT / "admin" / "reports" / "youtube-post-results.md"
 EXPERIMENT_RESULT_REPORT = ROOT / "admin" / "reports" / "experiment-result-collection.md"
 EXPERIMENT_RESULT_CLIPBOARD_REPORT = ROOT / "admin" / "reports" / "experiment-result-clipboard.md"
 BRAND_GROWTH_PREFLIGHT_REPORT = ROOT / "admin" / "reports" / "brand-growth-preflight.md"
@@ -226,6 +229,7 @@ GENERATED_REFRESH_PATHS = {
     "data/subscriber_cta_audit.json",
     "data/tiktok_repair_runbook.json",
     "data/tiktok_setup_preflight.json",
+    "data/youtube_post_results.json",
 }
 
 GENERATED_REFRESH_PREFIXES = (
@@ -2687,6 +2691,22 @@ def validate_generated_outputs(failures):
             fail("manual-metric-collection.md missing expected sections", failures)
     else:
         fail("manual-metric-collection.md missing; run scripts/build_manual_metric_collection.py", failures)
+    if YOUTUBE_POST_RESULTS.exists() and YOUTUBE_POST_RESULTS_REPORT.exists():
+        youtube_results = json.loads(YOUTUBE_POST_RESULTS.read_text(encoding="utf-8"))
+        youtube_report = YOUTUBE_POST_RESULTS_REPORT.read_text(encoding="utf-8")
+        youtube_summary = youtube_results.get("summary") or {}
+        if (
+            youtube_results.get("safe_mode") is True
+            and youtube_summary.get("result_fields") == ["views", "likes", "comments"]
+            and "youtube.videos.list" in ((youtube_results.get("source") or {}).get("api") or "")
+            and "YouTube Post Results" in youtube_report
+            and "public YouTube video statistics" in youtube_report
+        ):
+            ok("YouTube post results report captures public video stats safely")
+        else:
+            fail("youtube_post_results.json or youtube-post-results.md missing safe public-stat coverage", failures)
+    else:
+        fail("YouTube post results output missing; run scripts/capture_youtube_post_results.py --allow-empty --skip-missing-secrets", failures)
     if SPOTIFY_SNAPSHOT.exists():
         snapshot = json.loads(SPOTIFY_SNAPSHOT.read_text(encoding="utf-8"))
         if snapshot.get("ok") and snapshot.get("title") and snapshot.get("thumbnail_url"):
@@ -3795,6 +3815,23 @@ def validate_generated_outputs(failures):
             fail("capture_scheduler_dry_run.py missing dry-run endpoint support", failures)
     else:
         fail("capture_scheduler_dry_run.py missing", failures)
+    if YOUTUBE_POST_RESULTS_CAPTURE.exists():
+        youtube_capture_text = YOUTUBE_POST_RESULTS_CAPTURE.read_text(encoding="utf-8")
+        if (
+            "youtube_post_results.json" in youtube_capture_text
+            and "youtube-post-results.md" in youtube_capture_text
+            and "youtube.videos.list(part=snippet,statistics)" in youtube_capture_text
+            and 'RESULT_FIELDS = ["views", "likes", "comments"]' in youtube_capture_text
+            and "--skip-missing-secrets" in youtube_capture_text
+            and "--apply-results" in youtube_capture_text
+            and "already-published Lily Roo videos" in youtube_capture_text
+            and "append_published_log" not in youtube_capture_text
+        ):
+            ok("YouTube post results capture imports public video metrics safely")
+        else:
+            fail("capture_youtube_post_results.py missing public-stat capture guards or imports posting behavior", failures)
+    else:
+        fail("capture_youtube_post_results.py missing", failures)
     if BRAND_GROWTH_PREFLIGHT_SCRIPT.exists():
         preflight_text = BRAND_GROWTH_PREFLIGHT_SCRIPT.read_text(encoding="utf-8")
         if (
@@ -3820,6 +3857,7 @@ def validate_generated_outputs(failures):
             "verify_pending_store_links.py",
             "capture_executor_readiness.py",
             "capture_social_executions.py",
+            "capture_youtube_post_results.py",
             "capture_scheduler_dry_run.py",
             "capture_github_workflow_status.py",
             "build_promo_operations_packet.py",

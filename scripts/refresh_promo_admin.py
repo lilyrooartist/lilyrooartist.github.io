@@ -105,6 +105,16 @@ STEPS = [
         ],
     },
     {
+        "name": "capture_youtube_post_results_24h",
+        "command": ["python3", "scripts/capture_youtube_post_results.py", "--min-age-hours", "24", "--allow-empty", "--skip-missing-secrets", "--apply-results"],
+        "required": False,
+        "preserve_on_failure": [
+            "admin/content/Published_Log.csv",
+            "data/youtube_post_results.json",
+            "admin/reports/youtube-post-results.md",
+        ],
+    },
+    {
         "name": "capture_scheduler_dry_run",
         "command": ["python3", "scripts/capture_scheduler_dry_run.py"],
         "required": False,
