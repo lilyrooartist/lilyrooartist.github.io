@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-07-04T04:03:23.144448Z",
+  "generated_at": "2026-07-04T09:01:46.195984Z",
   "safe_mode": true,
   "source": {
     "future_posts": "admin/future-posts.json",
     "brand_growth_readout": "data/brand_growth_readout.json",
     "scheduler_endpoint": "https://www.lilyroo.com/api/social/scheduler/dry-run",
-    "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/7c8178d33d10a4aebeb9c304d093f6d68e334a77/admin/future-posts.json"
+    "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/0de1e1b601f7151b3943a8a4dedf05f4c4348145/admin/future-posts.json"
   },
   "summary": {
     "status": "ready",
@@ -27,9 +27,9 @@
     "unexpected_due_ids": [],
     "blocked_ids": [],
     "link_check_count": 10,
-    "link_ok_count": 10,
-    "link_failed_count": 0,
-    "link_warning_count": 0,
+    "link_ok_count": 8,
+    "link_failed_count": 2,
+    "link_warning_count": 2,
     "link_blocking_failed_count": 0,
     "next_proof_due_at": "2026-07-04T16:05:00Z",
     "next_measurement_due_at": "2026-07-05T15:20:00Z",
@@ -107,12 +107,13 @@
     {
       "label": "FP-BRAND-AM-01-13-X Track",
       "url": "https://youtu.be/XL5VOVxwTw4",
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.youtube.com/watch?v=XL5VOVxwTw4&feature=youtu.be",
-      "content_type": "text/html; charset=utf-8",
+      "ok": false,
+      "status": 429,
+      "content_type": "",
       "content_length": "",
-      "error": ""
+      "error": "HTTP 429: Too Many Requests",
+      "readiness_warning": true,
+      "warning_reason": "youtube_rate_limited"
     },
     {
       "label": "FP-BRAND-AM-01-13-X Playlist",
@@ -157,12 +158,13 @@
     {
       "label": "FP-BRAND-AM-01-13-FACEBOOK Track",
       "url": "https://youtu.be/XL5VOVxwTw4",
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.youtube.com/watch?v=XL5VOVxwTw4&feature=youtu.be",
-      "content_type": "text/html; charset=utf-8",
+      "ok": false,
+      "status": 429,
+      "content_type": "",
       "content_length": "",
-      "error": ""
+      "error": "HTTP 429: Too Many Requests",
+      "readiness_warning": true,
+      "warning_reason": "youtube_rate_limited"
     },
     {
       "label": "FP-BRAND-AM-01-13-FACEBOOK Playlist",
