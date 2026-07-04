@@ -1,14 +1,14 @@
 # Experiment Result Clipboard - Lily Roo
 
-Generated: 2026-07-04T09:01:45.945053Z
+Generated: 2026-07-04T13:59:49.056272Z
 
 ## Summary
 - Status: **needs_values**
-- Metric cards: **15**
+- Metric cards: **14**
 - Missing public URLs: **8**
 - Measurement priorities: **12**
 - Post-log handoff rows: **0**
-- Pending result fields: **81**
+- Pending result fields: **78**
 - Ready to import: **0**
 - Wide rows ready to import: **0**
 - Entry CSV: `data/experiment_result_entry_template.csv`
@@ -133,26 +133,6 @@ Generated: 2026-07-04T09:01:45.945053Z
   - `shares`: Open YouTube Studio analytics for https://youtu.be/lbT4adNE-cE and record shares.
   - `saves`: Open YouTube Studio analytics for https://youtu.be/lbT4adNE-cE and record saves.
   - `subs_delta`: Open YouTube Studio analytics for https://youtu.be/lbT4adNE-cE and record subs_delta.
-### YouTube - Twelve Dollars (`FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA`)
-- Format: Short video clip + platform-native CTA
-- URL: https://youtu.be/0d0PXb_h4FY
-- Published: 2026-06-29; Published_Log row: `27`
-- Pending fields: `shares, saves, subs_delta`
-- Wide-ready fields: `none`
-- Wide entry instruction: Fill one wide entry CSV row in data/experiment_result_entry_wide_template.csv for this post; keep unknown metrics blank and include one evidence_note.
-- Wide CSV target: post_id `FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA`, source_row `27`, fill `shares, saves, subs_delta`.
-- Evidence sources:
-  - Logged public post: https://youtu.be/0d0PXb_h4FY - Open the public post to confirm the URL and visible engagement before entering metrics.
-  - YouTube Studio analytics: https://studio.youtube.com/ - Open the matching Community post analytics and copy available public-performance values.
-- Collection checklist:
-  - Open the logged public post and confirm it matches this post_id.
-  - Open the platform analytics or insights source listed for this card.
-  - Copy only numeric values that are visible in the source.
-  - Enter values in the wide entry CSV row for this post_id and source_row.
-  - Add an evidence_note with source and collection date before import preview.
-  - `shares`: Open YouTube Studio analytics for https://youtu.be/0d0PXb_h4FY and record shares.
-  - `saves`: Open YouTube Studio analytics for https://youtu.be/0d0PXb_h4FY and record saves.
-  - `subs_delta`: Open YouTube Studio analytics for https://youtu.be/0d0PXb_h4FY and record subs_delta.
 ### X - Analog Myth (`FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK`)
 - Format: Release-art image + story hook
 - URL: https://x.com/i/web/status/2069786481556635841
@@ -412,7 +392,7 @@ Generated: 2026-07-04T09:01:45.945053Z
 - **Collect metrics** `FP-AUTO-276` X / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 12 logged post(s), 4 missing URL(s) in this format.
   - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-276 --source-row 38 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
   - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-276 --source-row 38 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
-- **Collect metrics** `FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA` YouTube / Short video clip + platform-native CTA: Already published and logged; measuring it reduces the Short video clip + platform-native CTA evidence gap. 2 logged post(s), 4 missing URL(s) in this format.
+- **Collect metrics** `FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA` YouTube / Short video clip + platform-native CTA: Already published and logged; measuring it reduces the Short video clip + platform-native CTA evidence gap. 1 logged post(s), 4 missing URL(s) in this format.
   - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --source-row 26 --shares VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
   - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --source-row 26 --shares VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
 - **Collect metrics** `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY` YouTube / YouTube archive video CTA: Already published and logged; measuring it reduces the YouTube archive video CTA evidence gap. 1 logged post(s), 0 missing URL(s) in this format.

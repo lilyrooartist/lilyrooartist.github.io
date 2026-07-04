@@ -1,12 +1,12 @@
 # Experiment Result Collection - Lily Roo
 
-Generated: 2026-07-04T09:01:45.899530Z
+Generated: 2026-07-04T13:59:49.007929Z
 
 ## Summary
 - Experiment count: **3**
-- Published experiment posts: **15**
+- Published experiment posts: **14**
 - Missing published log posts: **8**
-- Pending result fields: **81**
+- Pending result fields: **78**
 - Ready to import: **0**
 - Entry CSV: `data/experiment_result_entry_template.csv`
 - Wide entry CSV: `data/experiment_result_entry_wide_template.csv`
@@ -59,4 +59,4 @@ Generated: 2026-07-04T09:01:45.899530Z
 - `FP-AUTO-268` Facebook `saves` from row 34: Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594409249470 and record saves.
 - `FP-AUTO-268` Facebook `subs_delta` from row 34: Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594409249470 and record subs_delta.
 - `FP-AUTO-265` Facebook `views` from row 33: Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594493249470 and record views.
-- ...and 56 more rows in `data/experiment_result_entry_template.csv`.
+- ...and 53 more rows in `data/experiment_result_entry_template.csv`.

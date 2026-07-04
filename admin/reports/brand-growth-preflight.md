@@ -1,13 +1,13 @@
 # Brand Growth Preflight - Lily Roo
 
-Generated: 2026-07-04T09:01:46.195984Z
+Generated: 2026-07-04T13:59:49.319961Z
 
 ## Summary
 - Status: **ready**
 - Next window: **2026-07-04** at `2026-07-04T15:21:00Z`
 - Expected posts: **2**
 - Scheduler: HTTP **200**, auth `bearer`, due **2**, would post **2**, blocked **0**
-- Link checks: **8 ok**, **2 failed**, **2 warning**, **0 blocking failed**
+- Link checks: **10 ok**, **0 failed**, **0 warning**, **0 blocking failed**
 - Next proof due: `2026-07-04T16:05:00Z`
 - First measurement due: `2026-07-05T15:20:00Z`
 
@@ -19,12 +19,12 @@ Generated: 2026-07-04T09:01:46.195984Z
 - **ok** `FP-BRAND-AM-01-13-X imagery_url` 200 image/jpeg
 - **ok** `FP-BRAND-AM-01-13-X Analog Myth` 200 text/html; charset=utf-8
 - **ok** `FP-BRAND-AM-01-13-X Echo Thread` 200 text/html; charset=utf-8
-- **warning** `FP-BRAND-AM-01-13-X Track` 429 HTTP 429: Too Many Requests
+- **ok** `FP-BRAND-AM-01-13-X Track` 200 text/html; charset=utf-8
 - **ok** `FP-BRAND-AM-01-13-X Playlist` 200 text/html; charset=utf-8
 - **ok** `FP-BRAND-AM-01-13-FACEBOOK imagery_url` 200 image/jpeg
 - **ok** `FP-BRAND-AM-01-13-FACEBOOK Analog Myth` 200 text/html; charset=utf-8
 - **ok** `FP-BRAND-AM-01-13-FACEBOOK Echo Thread` 200 text/html; charset=utf-8
-- **warning** `FP-BRAND-AM-01-13-FACEBOOK Track` 429 HTTP 429: Too Many Requests
+- **ok** `FP-BRAND-AM-01-13-FACEBOOK Track` 200 text/html; charset=utf-8
 - **ok** `FP-BRAND-AM-01-13-FACEBOOK Playlist` 200 text/html; charset=utf-8
 
 ## Guardrails

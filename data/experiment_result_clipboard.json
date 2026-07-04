@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-04T09:01:45.945053Z",
+  "generated_at": "2026-07-04T13:59:49.056272Z",
   "safe_mode": true,
   "source": {
     "experiment_result_collection_packet": "data/experiment_result_collection_packet.json",
@@ -10,11 +10,11 @@
   },
   "summary": {
     "status": "needs_values",
-    "metric_card_count": 15,
+    "metric_card_count": 14,
     "missing_public_url_count": 8,
     "measurement_priority_count": 12,
     "post_log_measurement_handoff_count": 0,
-    "pending_result_field_count": 81,
+    "pending_result_field_count": 78,
     "ready_to_import_count": 0,
     "wide_ready_to_import_count": 0,
     "entry_csv_path": "data/experiment_result_entry_template.csv",
@@ -366,81 +366,6 @@
           "new_value": "",
           "evidence_note": "",
           "collection_hint": "Open YouTube Studio analytics for https://youtu.be/lbT4adNE-cE and record subs_delta."
-        }
-      ]
-    },
-    {
-      "post_id": "FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA",
-      "experiment_format": "Short video clip + platform-native CTA",
-      "platform": "YouTube",
-      "song": "Twelve Dollars",
-      "post_url": "https://youtu.be/0d0PXb_h4FY",
-      "published_date": "2026-06-29",
-      "source_row": "27",
-      "pending_field_count": 3,
-      "ready_field_count": 0,
-      "wide_ready_field_count": 0,
-      "pending_fields": [
-        "shares",
-        "saves",
-        "subs_delta"
-      ],
-      "ready_fields": [],
-      "wide_ready_fields": [],
-      "wide_entry_row": {
-        "experiment_format": "Short video clip + platform-native CTA",
-        "post_id": "FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA",
-        "platform": "YouTube",
-        "song": "Twelve Dollars",
-        "post_url": "https://youtu.be/0d0PXb_h4FY",
-        "published_date": "2026-06-29",
-        "source_row": "27",
-        "views": "",
-        "likes": "",
-        "comments": "",
-        "shares": "",
-        "saves": "",
-        "subs_delta": "",
-        "evidence_note": ""
-      },
-      "wide_entry_instruction": "Fill one wide entry CSV row in data/experiment_result_entry_wide_template.csv for this post; keep unknown metrics blank and include one evidence_note.",
-      "evidence_sources": [
-        {
-          "label": "Logged public post",
-          "url": "https://youtu.be/0d0PXb_h4FY",
-          "instruction": "Open the public post to confirm the URL and visible engagement before entering metrics."
-        },
-        {
-          "label": "YouTube Studio analytics",
-          "url": "https://studio.youtube.com/",
-          "instruction": "Open the matching Community post analytics and copy available public-performance values."
-        }
-      ],
-      "collection_checklist": [
-        "Open the logged public post and confirm it matches this post_id.",
-        "Open the platform analytics or insights source listed for this card.",
-        "Copy only numeric values that are visible in the source.",
-        "Enter values in the wide entry CSV row for this post_id and source_row.",
-        "Add an evidence_note with source and collection date before import preview."
-      ],
-      "fields": [
-        {
-          "field": "shares",
-          "new_value": "",
-          "evidence_note": "",
-          "collection_hint": "Open YouTube Studio analytics for https://youtu.be/0d0PXb_h4FY and record shares."
-        },
-        {
-          "field": "saves",
-          "new_value": "",
-          "evidence_note": "",
-          "collection_hint": "Open YouTube Studio analytics for https://youtu.be/0d0PXb_h4FY and record saves."
-        },
-        {
-          "field": "subs_delta",
-          "new_value": "",
-          "evidence_note": "",
-          "collection_hint": "Open YouTube Studio analytics for https://youtu.be/0d0PXb_h4FY and record subs_delta."
         }
       ]
     },
@@ -1677,7 +1602,7 @@
       ],
       "direct_preview_command_template": "python3 scripts/update_experiment_results.py --post-id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --source-row 26 --shares VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run",
       "direct_apply_command_template": "python3 scripts/update_experiment_results.py --post-id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --source-row 26 --shares VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin",
-      "reason": "Already published and logged; measuring it reduces the Short video clip + platform-native CTA evidence gap. 2 logged post(s), 4 missing URL(s) in this format."
+      "reason": "Already published and logged; measuring it reduces the Short video clip + platform-native CTA evidence gap. 1 logged post(s), 4 missing URL(s) in this format."
     },
     {
       "action": "collect_metrics",
