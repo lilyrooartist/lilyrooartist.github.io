@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "updated_at": "2026-07-04T13:59:45.089379Z",
+  "updated_at": "2026-07-04T17:07:17.436338Z",
   "source": "lilyroo-social-executor-executions",
   "url": "https://www.lilyroo.com/api/social/executions",
   "http_status": 200,
@@ -8,11 +8,37 @@
   "password_supplied": false,
   "auth_method": "bearer",
   "summary": {
-    "execution_count": 45,
-    "current_execution_count": 30,
+    "execution_count": 47,
+    "current_execution_count": 32,
     "superseded_execution_count": 0,
     "superseded_executions": [],
     "current_executions": [
+      {
+        "post_id": "FP-BRAND-AM-01-13-FACEBOOK",
+        "platform": "Facebook",
+        "status": "posted",
+        "reason": "",
+        "attempts": 1,
+        "updated_at": "2026-07-04T15:30:41.086Z",
+        "source": "cron",
+        "post_url": "https://www.facebook.com/122119767927249470/posts/122120959905249470",
+        "external_id": "903693509504290_122120959905249470",
+        "next_action": "",
+        "error_summary": ""
+      },
+      {
+        "post_id": "FP-BRAND-AM-01-13-X",
+        "platform": "X",
+        "status": "posted",
+        "reason": "",
+        "attempts": 1,
+        "updated_at": "2026-07-04T14:15:36.859Z",
+        "source": "cron",
+        "post_url": "https://x.com/i/web/status/2073410401006751908",
+        "external_id": "2073410401006751908",
+        "next_action": "",
+        "error_summary": ""
+      },
       {
         "post_id": "FP-LAUNCH-ANALOG-MYTH-FACEBOOK-NIGHT",
         "platform": "Facebook",
@@ -406,6 +432,32 @@
     ],
     "posted": [
       {
+        "post_id": "FP-BRAND-AM-01-13-FACEBOOK",
+        "platform": "Facebook",
+        "status": "posted",
+        "reason": "",
+        "attempts": 1,
+        "updated_at": "2026-07-04T15:30:41.086Z",
+        "source": "cron",
+        "post_url": "https://www.facebook.com/122119767927249470/posts/122120959905249470",
+        "external_id": "903693509504290_122120959905249470",
+        "next_action": "",
+        "error_summary": ""
+      },
+      {
+        "post_id": "FP-BRAND-AM-01-13-X",
+        "platform": "X",
+        "status": "posted",
+        "reason": "",
+        "attempts": 1,
+        "updated_at": "2026-07-04T14:15:36.859Z",
+        "source": "cron",
+        "post_url": "https://x.com/i/web/status/2073410401006751908",
+        "external_id": "2073410401006751908",
+        "next_action": "",
+        "error_summary": ""
+      },
+      {
         "post_id": "FP-LAUNCH-ANALOG-MYTH-FACEBOOK-NIGHT",
         "platform": "Facebook",
         "status": "posted",
@@ -797,21 +849,47 @@
       }
     ],
     "draft_uploaded": [],
-    "posted_count": 30,
+    "posted_count": 32,
     "draft_uploaded_count": 0,
     "attention_count": 0,
     "approval_needed_count": 0,
     "platform_fix_needed_count": 0,
     "manual_handoff_needed_count": 0,
     "status_counts": {
-      "posted": 30
+      "posted": 32
     },
     "platform_counts": {
-      "Facebook": 13,
-      "X": 12,
+      "Facebook": 14,
+      "X": 13,
       "YouTube": 5
     },
     "latest_posted": [
+      {
+        "post_id": "FP-BRAND-AM-01-13-FACEBOOK",
+        "platform": "Facebook",
+        "status": "posted",
+        "reason": "",
+        "attempts": 1,
+        "updated_at": "2026-07-04T15:30:41.086Z",
+        "source": "cron",
+        "post_url": "https://www.facebook.com/122119767927249470/posts/122120959905249470",
+        "external_id": "903693509504290_122120959905249470",
+        "next_action": "",
+        "error_summary": ""
+      },
+      {
+        "post_id": "FP-BRAND-AM-01-13-X",
+        "platform": "X",
+        "status": "posted",
+        "reason": "",
+        "attempts": 1,
+        "updated_at": "2026-07-04T14:15:36.859Z",
+        "source": "cron",
+        "post_url": "https://x.com/i/web/status/2073410401006751908",
+        "external_id": "2073410401006751908",
+        "next_action": "",
+        "error_summary": ""
+      },
       {
         "post_id": "FP-LAUNCH-ANALOG-MYTH-FACEBOOK-NIGHT",
         "platform": "Facebook",
@@ -850,32 +928,6 @@
         "external_id": "903693509504290_122120718795249470",
         "next_action": "",
         "error_summary": ""
-      },
-      {
-        "post_id": "FP-LAUNCH-ANALOG-MYTH-X-EVENING",
-        "platform": "X",
-        "status": "posted",
-        "reason": "",
-        "attempts": 1,
-        "updated_at": "2026-07-01T22:21:21.257Z",
-        "source": "manual",
-        "post_url": "https://x.com/i/web/status/2072445477686026289",
-        "external_id": "2072445477686026289",
-        "next_action": "",
-        "error_summary": ""
-      },
-      {
-        "post_id": "FP-STORY-I-LEARNED-IT-ALL-IN-FIFTEEN-SECONDS-FACEBOOK-ARCHIVE-CTA",
-        "platform": "Facebook",
-        "status": "posted",
-        "reason": "",
-        "attempts": 1,
-        "updated_at": "2026-07-01T15:30:57.581Z",
-        "source": "cron",
-        "post_url": "https://www.facebook.com/permalink.php?story_fbid=122120699235249470&id=903693509504290",
-        "external_id": "903693509504290_122120699235249470",
-        "next_action": "",
-        "error_summary": ""
       }
     ],
     "latest_draft_uploaded": [],
@@ -886,10 +938,10 @@
   },
   "payload": {
     "ok": true,
-    "execution_count": 45
+    "execution_count": 47
   },
   "action_needed": "",
-  "reconciled_at": "2026-07-04T13:59:45.133748Z",
+  "reconciled_at": "2026-07-04T17:07:17.479946Z",
   "reconciliation": {
     "source": "current scheduled_posts.csv",
     "superseded_execution_count": 0,

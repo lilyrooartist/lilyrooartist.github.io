@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-04T13:59:49.236867Z",
+  "generated_at": "2026-07-04T17:07:21.212786Z",
   "safe_mode": true,
   "source": {
     "brand_growth_campaign": "data/brand_growth_campaign.json",
@@ -18,24 +18,26 @@
       "X": 32
     },
     "status_counts": {
-      "scheduled_future": 64
+      "posted_waiting_measurement_window": 2,
+      "scheduled_future": 62
     },
     "approved_auto_rows": 64,
     "future_queue_visible_rows": 64,
-    "posted_or_measured_rows": 0,
+    "posted_or_measured_rows": 2,
     "measured_rows": 0,
     "ready_for_metric_capture_rows": 0,
     "attention_rows": 0,
-    "next_scheduled_post_id": "FP-BRAND-AM-01-13-X",
-    "next_scheduled_at": "2026-07-04T10:15:00-04:00",
+    "next_scheduled_post_id": "FP-BRAND-AM-02-GIRLS-CAMP-X",
+    "next_scheduled_at": "2026-07-05T10:15:00-04:00",
     "x_metric_capture_command": "",
     "facebook_metric_capture_command": "",
     "post_slot_watch_window_count": 32,
     "post_slot_watch_status_counts": {
-      "scheduled_future": 32
+      "publishing_window": 1,
+      "scheduled_future": 31
     },
     "next_proof_window_date": "2026-07-04",
-    "next_proof_window_status": "scheduled_future",
+    "next_proof_window_status": "publishing_window",
     "next_proof_due_at": "2026-07-04T16:05:00Z",
     "next_measurement_due_at": "2026-07-05T15:20:00Z",
     "next_proof_post_ids": [
@@ -54,10 +56,11 @@
     "summary": {
       "window_count": 32,
       "status_counts": {
-        "scheduled_future": 32
+        "publishing_window": 1,
+        "scheduled_future": 31
       },
       "next_window_date": "2026-07-04",
-      "next_window_status": "scheduled_future",
+      "next_window_status": "publishing_window",
       "next_proof_due_at": "2026-07-04T16:05:00Z",
       "next_measurement_due_at": "2026-07-05T15:20:00Z",
       "next_post_ids": [
@@ -72,7 +75,7 @@
     "windows": [
       {
         "date": "2026-07-04",
-        "status": "scheduled_future",
+        "status": "publishing_window",
         "post_ids": [
           "FP-BRAND-AM-01-13-X",
           "FP-BRAND-AM-01-13-FACEBOOK"
@@ -86,7 +89,7 @@
         "proof_due_at": "2026-07-04T16:05:00Z",
         "measurement_due_at": "2026-07-05T15:20:00Z",
         "status_counts": {
-          "scheduled_future": 2
+          "posted_waiting_measurement_window": 2
         },
         "rows_needing_proof": [],
         "rows_ready_for_metrics": [],
@@ -94,7 +97,7 @@
         "proof_preview_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run",
         "proof_apply_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
         "metric_capture_command": "",
-        "next_action": "Wait for the scheduled executor; proof capture starts after the final slot."
+        "next_action": "Scheduled posting window is open; capture executor state shortly after the final slot."
       },
       {
         "date": "2026-07-05",
@@ -913,15 +916,15 @@
       "execution_mode": "auto",
       "post_type": "image",
       "text": "13 opens like a calendar with a loose wire. Odd numbers, warm tape, big signal. Analog Myth is live.",
-      "post_url": "",
-      "published_log_row": "",
-      "execution_status": "",
+      "post_url": "https://x.com/i/web/status/2073410401006751908",
+      "published_log_row": 51,
+      "execution_status": "posted",
       "execution_reason": "",
-      "measurement_due_at": "",
+      "measurement_due_at": "2026-07-05T14:15:36.859000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
-      "status": "scheduled_future",
-      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
+      "status": "posted_waiting_measurement_window",
+      "next_action": "Wait until 2026-07-05T14:15:36.859000+00:00 before capturing metrics.",
       "visible_in_future_queue": true
     },
     {
@@ -932,15 +935,15 @@
       "execution_mode": "auto",
       "post_type": "image",
       "text": "Analog Myth track 1: 13 opens like a calendar with a loose wire. Odd numbers, warm tape, big signal.\n\nThe album page, Echo Thread play-through, and YouTube playlist are up.",
-      "post_url": "",
-      "published_log_row": "",
-      "execution_status": "",
+      "post_url": "https://www.facebook.com/122119767927249470/posts/122120959905249470",
+      "published_log_row": 50,
+      "execution_status": "posted",
       "execution_reason": "",
-      "measurement_due_at": "",
+      "measurement_due_at": "2026-07-05T15:30:41.086000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
-      "status": "scheduled_future",
-      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
+      "status": "posted_waiting_measurement_window",
+      "next_action": "Wait until 2026-07-05T15:30:41.086000+00:00 before capturing metrics.",
       "visible_in_future_queue": true
     },
     {

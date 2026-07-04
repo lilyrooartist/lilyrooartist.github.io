@@ -1,17 +1,17 @@
 # Brand Growth Readout - Lily Roo
 
-Generated: 2026-07-04T13:59:49.236867Z
+Generated: 2026-07-04T17:07:21.212786Z
 
 ## Summary
 - Campaign rows: **64**
 - Approved auto rows: **64**
 - Visible in future queue: **64**
-- Posted or measured rows: **0**
+- Posted or measured rows: **2**
 - Measured rows: **0**
 - Ready for metric capture: **0**
 - Post-slot watch windows: **32**
-- Status counts: **scheduled_future: 64**
-- Next scheduled: `FP-BRAND-AM-01-13-X` at `2026-07-04T10:15:00-04:00`
+- Status counts: **posted_waiting_measurement_window: 2, scheduled_future: 62**
+- Next scheduled: `FP-BRAND-AM-02-GIRLS-CAMP-X` at `2026-07-05T10:15:00-04:00`
 - Next proof due: `2026-07-04T16:05:00Z`
 - First measurement due: `2026-07-05T15:20:00Z`
 - YouTube total views: **474**
@@ -29,8 +29,8 @@ Generated: 2026-07-04T13:59:49.236867Z
 - Next proof window is 2026-07-04 after 2026-07-04T16:05:00Z; watch FP-BRAND-AM-01-13-X, FP-BRAND-AM-01-13-FACEBOOK.
 
 ## Post-Slot Watch
-- `2026-07-04` **scheduled_future** proof due `2026-07-04T16:05:00Z` for `FP-BRAND-AM-01-13-X, FP-BRAND-AM-01-13-FACEBOOK`
-  - Next: Wait for the scheduled executor; proof capture starts after the final slot.
+- `2026-07-04` **publishing_window** proof due `2026-07-04T16:05:00Z` for `FP-BRAND-AM-01-13-X, FP-BRAND-AM-01-13-FACEBOOK`
+  - Next: Scheduled posting window is open; capture executor state shortly after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
 - `2026-07-05` **scheduled_future** proof due `2026-07-05T16:05:00Z` for `FP-BRAND-AM-02-GIRLS-CAMP-X, FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
@@ -127,10 +127,12 @@ Generated: 2026-07-04T13:59:49.236867Z
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
 
 ## Rows
-- `FP-BRAND-AM-01-13-X` X 2026-07-04T10:15:00-04:00 - **scheduled_future**
-  - Next: Wait for the scheduled social executor, then refresh admin and export executions.
-- `FP-BRAND-AM-01-13-FACEBOOK` Facebook 2026-07-04T11:20:00-04:00 - **scheduled_future**
-  - Next: Wait for the scheduled social executor, then refresh admin and export executions.
+- `FP-BRAND-AM-01-13-X` X 2026-07-04T10:15:00-04:00 - **posted_waiting_measurement_window**
+  - URL: https://x.com/i/web/status/2073410401006751908
+  - Next: Wait until 2026-07-05T14:15:36.859000+00:00 before capturing metrics.
+- `FP-BRAND-AM-01-13-FACEBOOK` Facebook 2026-07-04T11:20:00-04:00 - **posted_waiting_measurement_window**
+  - URL: https://www.facebook.com/122119767927249470/posts/122120959905249470
+  - Next: Wait until 2026-07-05T15:30:41.086000+00:00 before capturing metrics.
 - `FP-BRAND-AM-02-GIRLS-CAMP-X` X 2026-07-05T10:15:00-04:00 - **scheduled_future**
   - Next: Wait for the scheduled social executor, then refresh admin and export executions.
 - `FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK` Facebook 2026-07-05T11:20:00-04:00 - **scheduled_future**

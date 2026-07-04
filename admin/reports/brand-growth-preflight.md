@@ -1,31 +1,31 @@
 # Brand Growth Preflight - Lily Roo
 
-Generated: 2026-07-04T13:59:49.319961Z
+Generated: 2026-07-04T17:07:21.293505Z
 
 ## Summary
 - Status: **ready**
-- Next window: **2026-07-04** at `2026-07-04T15:21:00Z`
+- Next window: **2026-07-05** at `2026-07-05T15:21:00Z`
 - Expected posts: **2**
-- Scheduler: HTTP **200**, auth `bearer`, due **2**, would post **2**, blocked **0**
+- Scheduler: HTTP **200**, auth `bearer`, due **4**, would post **2**, blocked **0**
 - Link checks: **10 ok**, **0 failed**, **0 warning**, **0 blocking failed**
 - Next proof due: `2026-07-04T16:05:00Z`
 - First measurement due: `2026-07-05T15:20:00Z`
 
 ## Expected Posts
-- `FP-BRAND-AM-01-13-X` X at `2026-07-04T10:15:00-04:00`
-- `FP-BRAND-AM-01-13-FACEBOOK` Facebook at `2026-07-04T11:20:00-04:00`
+- `FP-BRAND-AM-02-GIRLS-CAMP-X` X at `2026-07-05T10:15:00-04:00`
+- `FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK` Facebook at `2026-07-05T11:20:00-04:00`
 
 ## Link Checks
-- **ok** `FP-BRAND-AM-01-13-X imagery_url` 200 image/jpeg
-- **ok** `FP-BRAND-AM-01-13-X Analog Myth` 200 text/html; charset=utf-8
-- **ok** `FP-BRAND-AM-01-13-X Echo Thread` 200 text/html; charset=utf-8
-- **ok** `FP-BRAND-AM-01-13-X Track` 200 text/html; charset=utf-8
-- **ok** `FP-BRAND-AM-01-13-X Playlist` 200 text/html; charset=utf-8
-- **ok** `FP-BRAND-AM-01-13-FACEBOOK imagery_url` 200 image/jpeg
-- **ok** `FP-BRAND-AM-01-13-FACEBOOK Analog Myth` 200 text/html; charset=utf-8
-- **ok** `FP-BRAND-AM-01-13-FACEBOOK Echo Thread` 200 text/html; charset=utf-8
-- **ok** `FP-BRAND-AM-01-13-FACEBOOK Track` 200 text/html; charset=utf-8
-- **ok** `FP-BRAND-AM-01-13-FACEBOOK Playlist` 200 text/html; charset=utf-8
+- **ok** `FP-BRAND-AM-02-GIRLS-CAMP-X imagery_url` 200 image/jpeg
+- **ok** `FP-BRAND-AM-02-GIRLS-CAMP-X Analog Myth` 200 text/html; charset=utf-8
+- **ok** `FP-BRAND-AM-02-GIRLS-CAMP-X Echo Thread` 200 text/html; charset=utf-8
+- **ok** `FP-BRAND-AM-02-GIRLS-CAMP-X Track` 200 text/html; charset=utf-8
+- **ok** `FP-BRAND-AM-02-GIRLS-CAMP-X Playlist` 200 text/html; charset=utf-8
+- **ok** `FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK imagery_url` 200 image/jpeg
+- **ok** `FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK Analog Myth` 200 text/html; charset=utf-8
+- **ok** `FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK Echo Thread` 200 text/html; charset=utf-8
+- **ok** `FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK Track` 200 text/html; charset=utf-8
+- **ok** `FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK Playlist` 200 text/html; charset=utf-8
 
 ## Guardrails
 - Preflight is read-only; it calls the scheduler dry-run endpoint and HEAD-checks public URLs.
