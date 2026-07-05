@@ -885,9 +885,11 @@ button.btn {
   gap: 0.45rem;
 }
 
-.track-door-actions a {
+.track-door-actions a,
+.track-door-actions button {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   min-height: 2rem;
   padding: 0.45rem 0.58rem;
   border: 1px solid rgba(246, 244, 240, 0.18);
@@ -898,11 +900,14 @@ button.btn {
   font-family: "Space Mono", monospace;
   font-size: 0.62rem;
   letter-spacing: 0.07em;
+  cursor: pointer;
   transition: border-color 160ms ease, background-color 160ms ease, transform 160ms ease;
 }
 
 .track-door-actions a:hover,
-.track-door-actions a:focus-visible {
+.track-door-actions a:focus-visible,
+.track-door-actions button:hover,
+.track-door-actions button:focus-visible {
   border-color: var(--gold);
   background: rgba(203, 168, 111, 0.08);
   transform: translateY(-1px);
@@ -1198,7 +1203,8 @@ button.btn {
     justify-content: flex-start;
   }
 
-  .track-door-actions a {
+  .track-door-actions a,
+  .track-door-actions button {
     min-width: 5.25rem;
     justify-content: center;
   }
