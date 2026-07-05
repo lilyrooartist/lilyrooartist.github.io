@@ -1,6 +1,6 @@
 # Brand Growth Preflight - Lily Roo
 
-Generated: 2026-07-05T21:22:29.983256Z
+Generated: 2026-07-05T21:27:28.786526Z
 
 ## Summary
 - Status: **ready**
@@ -17,15 +17,15 @@ Generated: 2026-07-05T21:22:29.983256Z
 
 ## Link Checks
 - **ok** `FP-BRAND-AM-03-ANALOG-MYTH-X imagery_url` 200 image/jpeg
-- **ok** `FP-BRAND-AM-03-ANALOG-MYTH-X Analog Myth` 200 text/html; charset=utf-8
+- **ok** `FP-BRAND-AM-03-ANALOG-MYTH-X Listen` 200 text/html;charset=UTF-8
+- **ok** `FP-BRAND-AM-03-ANALOG-MYTH-X Album page` 200 text/html; charset=utf-8
 - **ok** `FP-BRAND-AM-03-ANALOG-MYTH-X Echo Thread` 200 text/html; charset=utf-8
-- **ok** `FP-BRAND-AM-03-ANALOG-MYTH-X Track` 200 text/html; charset=utf-8
-- **ok** `FP-BRAND-AM-03-ANALOG-MYTH-X Playlist` 200 text/html; charset=utf-8
+- **ok** `FP-BRAND-AM-03-ANALOG-MYTH-X Track video` 200 text/html; charset=utf-8
 - **ok** `FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK imagery_url` 200 image/jpeg
-- **ok** `FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK Analog Myth` 200 text/html; charset=utf-8
+- **ok** `FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK Listen` 200 text/html;charset=UTF-8
+- **ok** `FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK Album page` 200 text/html; charset=utf-8
 - **ok** `FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK Echo Thread` 200 text/html; charset=utf-8
-- **ok** `FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK Track` 200 text/html; charset=utf-8
-- **ok** `FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK Playlist` 200 text/html; charset=utf-8
+- **ok** `FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK Track video` 200 text/html; charset=utf-8
 
 ## Guardrails
 - Preflight is read-only; it calls the scheduler dry-run endpoint and HEAD-checks public URLs.

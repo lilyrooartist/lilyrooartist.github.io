@@ -200,10 +200,10 @@ def scheduled_at(day: date, platform: str) -> str:
 def reply_text(track: dict, playlist_url: str) -> str:
     track_url = track.get("url") or playlist_url
     return "\n".join([
-        "Analog Myth: https://www.lilyroo.com/analog-myth.html",
+        "Listen: https://distrokid.com/hyperfollow/lilyroo/analog-myth",
+        "Album page: https://www.lilyroo.com/analog-myth.html",
         "Echo Thread: https://www.lilyroo.com/podcasts/analog-myth.html",
-        f"Track: {track_url}",
-        f"Playlist: {playlist_url}",
+        f"Track video: {track_url}",
     ])
 
 

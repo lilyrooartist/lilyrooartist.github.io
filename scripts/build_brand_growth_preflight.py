@@ -156,7 +156,7 @@ def link_checks(posts: list[dict]) -> list[dict]:
             if ": " not in line:
                 continue
             label, url = line.split(": ", 1)
-            if label not in {"Analog Myth", "Echo Thread", "Track", "Playlist"}:
+            if label not in {"Listen", "Album page", "Echo Thread", "Track video", "Analog Myth", "Track", "Playlist"}:
                 continue
             key = (post_id, label)
             if key in seen:
