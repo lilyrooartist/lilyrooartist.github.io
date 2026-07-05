@@ -1,14 +1,14 @@
 # Experiment Result Clipboard - Lily Roo
 
-Generated: 2026-07-04T19:38:36.856725Z
+Generated: 2026-07-05T04:30:49.919599Z
 
 ## Summary
 - Status: **needs_values**
-- Metric cards: **14**
-- Missing public URLs: **8**
+- Metric cards: **15**
+- Missing public URLs: **6**
 - Measurement priorities: **12**
 - Post-log handoff rows: **0**
-- Pending result fields: **78**
+- Pending result fields: **84**
 - Ready to import: **0**
 - Wide rows ready to import: **0**
 - Entry CSV: `data/experiment_result_entry_template.csv`
@@ -19,19 +19,19 @@ Generated: 2026-07-04T19:38:36.856725Z
 
 ## First Measurement Runbook
 - Status: **ready_to_collect_metrics**
-- Post: `FP-AUTO-265` Facebook / Release-art image + story hook
-- URL: https://www.facebook.com/903693509504290_122120594493249470
-- Published_Log row: `33`
+- Post: `FP-AUTO-273` Facebook / Release-art image + story hook
+- URL: https://www.facebook.com/903693509504290_122120594571249470
+- Published_Log row: `32`
 - Pending fields: `views, likes, comments, shares, saves, subs_delta`
 - Wide entry CSV: `data/experiment_result_entry_wide_template.csv`
 - Evidence note template: `Facebook analytics YYYY-MM-DD`
-- Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-265 --source-row 33 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
-- Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-265 --source-row 33 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
+- Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-273 --source-row 32 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
+- Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-273 --source-row 32 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
 - Wide import preview: `python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run`
-- Why: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 12 logged post(s), 4 missing URL(s) in this format.
+- Why: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 13 logged post(s), 3 missing URL(s) in this format.
 - Guardrail: Do not guess metrics; leave unknown values blank and never apply without an evidence_note.
 - Evidence sources:
-  - Logged public post: https://www.facebook.com/903693509504290_122120594493249470 - Open the public post to confirm the URL and visible engagement before entering metrics.
+  - Logged public post: https://www.facebook.com/903693509504290_122120594571249470 - Open the public post to confirm the URL and visible engagement before entering metrics.
   - Meta Business Suite: https://business.facebook.com/latest/insights - Open post insights for the Lily Roo page post and copy the available result values.
 - Checklist:
   - Open the logged public post and confirm it matches this post_id.
@@ -47,29 +47,6 @@ Generated: 2026-07-04T19:38:36.856725Z
   - The growth dashboard refreshes with a lower pending_result_field_count.
 
 ## Metric Cards
-### X - Brain Rot (`FP-AUTO-266`)
-- Format: Release-art image + story hook
-- URL: https://x.com/i/web/status/2071039677357003221
-- Published: 2026-06-29; Published_Log row: `21`
-- Pending fields: `views, likes, comments, shares, saves, subs_delta`
-- Wide-ready fields: `none`
-- Wide entry instruction: Fill one wide entry CSV row in data/experiment_result_entry_wide_template.csv for this post; keep unknown metrics blank and include one evidence_note.
-- Wide CSV target: post_id `FP-AUTO-266`, source_row `21`, fill `views, likes, comments, shares, saves, subs_delta`.
-- Evidence sources:
-  - Logged public post: https://x.com/i/web/status/2071039677357003221 - Open the public post to confirm the URL and visible engagement before entering metrics.
-  - X Analytics: https://analytics.x.com/ - Use the logged post URL or post ID to find the post and copy visible analytics values.
-- Collection checklist:
-  - Open the logged public post and confirm it matches this post_id.
-  - Open the platform analytics or insights source listed for this card.
-  - Copy only numeric values that are visible in the source.
-  - Enter values in the wide entry CSV row for this post_id and source_row.
-  - Add an evidence_note with source and collection date before import preview.
-  - `views`: Open X analytics for https://x.com/i/web/status/2071039677357003221 and record views.
-  - `likes`: Open X analytics for https://x.com/i/web/status/2071039677357003221 and record likes.
-  - `comments`: Open X analytics for https://x.com/i/web/status/2071039677357003221 and record comments.
-  - `shares`: Open X analytics for https://x.com/i/web/status/2071039677357003221 and record shares.
-  - `saves`: Open X analytics for https://x.com/i/web/status/2071039677357003221 and record saves.
-  - `subs_delta`: Open X analytics for https://x.com/i/web/status/2071039677357003221 and record subs_delta.
 ### X - Every Pearl in Carmel (`FP-AUTO-271`)
 - Format: Release-art image + story hook
 - URL: https://x.com/i/web/status/2071402084403118566
@@ -156,52 +133,6 @@ Generated: 2026-07-04T19:38:36.856725Z
   - `shares`: Open X analytics for https://x.com/i/web/status/2069786481556635841 and record shares.
   - `saves`: Open X analytics for https://x.com/i/web/status/2069786481556635841 and record saves.
   - `subs_delta`: Open X analytics for https://x.com/i/web/status/2069786481556635841 and record subs_delta.
-### Facebook - I Learned It All in Fifteen Seconds (`FP-AUTO-265`)
-- Format: Release-art image + story hook
-- URL: https://www.facebook.com/903693509504290_122120594493249470
-- Published: 2026-06-30; Published_Log row: `33`
-- Pending fields: `views, likes, comments, shares, saves, subs_delta`
-- Wide-ready fields: `none`
-- Wide entry instruction: Fill one wide entry CSV row in data/experiment_result_entry_wide_template.csv for this post; keep unknown metrics blank and include one evidence_note.
-- Wide CSV target: post_id `FP-AUTO-265`, source_row `33`, fill `views, likes, comments, shares, saves, subs_delta`.
-- Evidence sources:
-  - Logged public post: https://www.facebook.com/903693509504290_122120594493249470 - Open the public post to confirm the URL and visible engagement before entering metrics.
-  - Meta Business Suite: https://business.facebook.com/latest/insights - Open post insights for the Lily Roo page post and copy the available result values.
-- Collection checklist:
-  - Open the logged public post and confirm it matches this post_id.
-  - Open the platform analytics or insights source listed for this card.
-  - Copy only numeric values that are visible in the source.
-  - Enter values in the wide entry CSV row for this post_id and source_row.
-  - Add an evidence_note with source and collection date before import preview.
-  - `views`: Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594493249470 and record views.
-  - `likes`: Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594493249470 and record likes.
-  - `comments`: Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594493249470 and record comments.
-  - `shares`: Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594493249470 and record shares.
-  - `saves`: Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594493249470 and record saves.
-  - `subs_delta`: Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594493249470 and record subs_delta.
-### Facebook - Brain Rot (`FP-AUTO-268`)
-- Format: Release-art image + story hook
-- URL: https://www.facebook.com/903693509504290_122120594409249470
-- Published: 2026-06-30; Published_Log row: `34`
-- Pending fields: `views, likes, comments, shares, saves, subs_delta`
-- Wide-ready fields: `none`
-- Wide entry instruction: Fill one wide entry CSV row in data/experiment_result_entry_wide_template.csv for this post; keep unknown metrics blank and include one evidence_note.
-- Wide CSV target: post_id `FP-AUTO-268`, source_row `34`, fill `views, likes, comments, shares, saves, subs_delta`.
-- Evidence sources:
-  - Logged public post: https://www.facebook.com/903693509504290_122120594409249470 - Open the public post to confirm the URL and visible engagement before entering metrics.
-  - Meta Business Suite: https://business.facebook.com/latest/insights - Open post insights for the Lily Roo page post and copy the available result values.
-- Collection checklist:
-  - Open the logged public post and confirm it matches this post_id.
-  - Open the platform analytics or insights source listed for this card.
-  - Copy only numeric values that are visible in the source.
-  - Enter values in the wide entry CSV row for this post_id and source_row.
-  - Add an evidence_note with source and collection date before import preview.
-  - `views`: Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594409249470 and record views.
-  - `likes`: Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594409249470 and record likes.
-  - `comments`: Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594409249470 and record comments.
-  - `shares`: Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594409249470 and record shares.
-  - `saves`: Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594409249470 and record saves.
-  - `subs_delta`: Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594409249470 and record subs_delta.
 ### Facebook - Every Pearl in Carmel (`FP-AUTO-273`)
 - Format: Release-art image + story hook
 - URL: https://www.facebook.com/903693509504290_122120594571249470
@@ -340,6 +271,52 @@ Generated: 2026-07-04T19:38:36.856725Z
   - `shares`: Open Meta Business Suite for https://www.facebook.com/903693509504290_122120643825249470 and record shares.
   - `saves`: Open Meta Business Suite for https://www.facebook.com/903693509504290_122120643825249470 and record saves.
   - `subs_delta`: Open Meta Business Suite for https://www.facebook.com/903693509504290_122120643825249470 and record subs_delta.
+### Facebook - Analog Myth (`FP-LAUNCH-ANALOG-MYTH-FACEBOOK`)
+- Format: Release-art image + story hook
+- URL: https://www.facebook.com/permalink.php?story_fbid=122120653563249470&id=903693509504290
+- Published: 2026-07-01; Published_Log row: `39`
+- Pending fields: `views, likes, comments, shares, saves, subs_delta`
+- Wide-ready fields: `none`
+- Wide entry instruction: Fill one wide entry CSV row in data/experiment_result_entry_wide_template.csv for this post; keep unknown metrics blank and include one evidence_note.
+- Wide CSV target: post_id `FP-LAUNCH-ANALOG-MYTH-FACEBOOK`, source_row `39`, fill `views, likes, comments, shares, saves, subs_delta`.
+- Evidence sources:
+  - Logged public post: https://www.facebook.com/permalink.php?story_fbid=122120653563249470&id=903693509504290 - Open the public post to confirm the URL and visible engagement before entering metrics.
+  - Meta Business Suite: https://business.facebook.com/latest/insights - Open post insights for the Lily Roo page post and copy the available result values.
+- Collection checklist:
+  - Open the logged public post and confirm it matches this post_id.
+  - Open the platform analytics or insights source listed for this card.
+  - Copy only numeric values that are visible in the source.
+  - Enter values in the wide entry CSV row for this post_id and source_row.
+  - Add an evidence_note with source and collection date before import preview.
+  - `views`: Open Meta Business Suite for https://www.facebook.com/permalink.php?story_fbid=122120653563249470&id=903693509504290 and record views.
+  - `likes`: Open Meta Business Suite for https://www.facebook.com/permalink.php?story_fbid=122120653563249470&id=903693509504290 and record likes.
+  - `comments`: Open Meta Business Suite for https://www.facebook.com/permalink.php?story_fbid=122120653563249470&id=903693509504290 and record comments.
+  - `shares`: Open Meta Business Suite for https://www.facebook.com/permalink.php?story_fbid=122120653563249470&id=903693509504290 and record shares.
+  - `saves`: Open Meta Business Suite for https://www.facebook.com/permalink.php?story_fbid=122120653563249470&id=903693509504290 and record saves.
+  - `subs_delta`: Open Meta Business Suite for https://www.facebook.com/permalink.php?story_fbid=122120653563249470&id=903693509504290 and record subs_delta.
+### Facebook - Analog Myth (`FP-LAUNCH-ANALOG-MYTH-FACEBOOK-EVENING`)
+- Format: Release-art image + story hook
+- URL: https://www.facebook.com/permalink.php?story_fbid=122120718795249470&id=903693509504290
+- Published: 2026-07-01; Published_Log row: `46`
+- Pending fields: `views, likes, comments, shares, saves, subs_delta`
+- Wide-ready fields: `none`
+- Wide entry instruction: Fill one wide entry CSV row in data/experiment_result_entry_wide_template.csv for this post; keep unknown metrics blank and include one evidence_note.
+- Wide CSV target: post_id `FP-LAUNCH-ANALOG-MYTH-FACEBOOK-EVENING`, source_row `46`, fill `views, likes, comments, shares, saves, subs_delta`.
+- Evidence sources:
+  - Logged public post: https://www.facebook.com/permalink.php?story_fbid=122120718795249470&id=903693509504290 - Open the public post to confirm the URL and visible engagement before entering metrics.
+  - Meta Business Suite: https://business.facebook.com/latest/insights - Open post insights for the Lily Roo page post and copy the available result values.
+- Collection checklist:
+  - Open the logged public post and confirm it matches this post_id.
+  - Open the platform analytics or insights source listed for this card.
+  - Copy only numeric values that are visible in the source.
+  - Enter values in the wide entry CSV row for this post_id and source_row.
+  - Add an evidence_note with source and collection date before import preview.
+  - `views`: Open Meta Business Suite for https://www.facebook.com/permalink.php?story_fbid=122120718795249470&id=903693509504290 and record views.
+  - `likes`: Open Meta Business Suite for https://www.facebook.com/permalink.php?story_fbid=122120718795249470&id=903693509504290 and record likes.
+  - `comments`: Open Meta Business Suite for https://www.facebook.com/permalink.php?story_fbid=122120718795249470&id=903693509504290 and record comments.
+  - `shares`: Open Meta Business Suite for https://www.facebook.com/permalink.php?story_fbid=122120718795249470&id=903693509504290 and record shares.
+  - `saves`: Open Meta Business Suite for https://www.facebook.com/permalink.php?story_fbid=122120718795249470&id=903693509504290 and record saves.
+  - `subs_delta`: Open Meta Business Suite for https://www.facebook.com/permalink.php?story_fbid=122120718795249470&id=903693509504290 and record subs_delta.
 ### X - Analog Myth (`FP-LAUNCH-ANALOG-MYTH-X`)
 - Format: Release-art image + story hook
 - URL: https://x.com/i/web/status/2072179856264278171
@@ -363,42 +340,88 @@ Generated: 2026-07-04T19:38:36.856725Z
   - `shares`: Open X analytics for https://x.com/i/web/status/2072179856264278171 and record shares.
   - `saves`: Open X analytics for https://x.com/i/web/status/2072179856264278171 and record saves.
   - `subs_delta`: Open X analytics for https://x.com/i/web/status/2072179856264278171 and record subs_delta.
+### X - Analog Myth (`FP-LAUNCH-ANALOG-MYTH-X-EVENING`)
+- Format: Release-art image + story hook
+- URL: https://x.com/i/web/status/2072445477686026289
+- Published: 2026-07-01; Published_Log row: `47`
+- Pending fields: `views, likes, comments, shares, saves, subs_delta`
+- Wide-ready fields: `none`
+- Wide entry instruction: Fill one wide entry CSV row in data/experiment_result_entry_wide_template.csv for this post; keep unknown metrics blank and include one evidence_note.
+- Wide CSV target: post_id `FP-LAUNCH-ANALOG-MYTH-X-EVENING`, source_row `47`, fill `views, likes, comments, shares, saves, subs_delta`.
+- Evidence sources:
+  - Logged public post: https://x.com/i/web/status/2072445477686026289 - Open the public post to confirm the URL and visible engagement before entering metrics.
+  - X Analytics: https://analytics.x.com/ - Use the logged post URL or post ID to find the post and copy visible analytics values.
+- Collection checklist:
+  - Open the logged public post and confirm it matches this post_id.
+  - Open the platform analytics or insights source listed for this card.
+  - Copy only numeric values that are visible in the source.
+  - Enter values in the wide entry CSV row for this post_id and source_row.
+  - Add an evidence_note with source and collection date before import preview.
+  - `views`: Open X analytics for https://x.com/i/web/status/2072445477686026289 and record views.
+  - `likes`: Open X analytics for https://x.com/i/web/status/2072445477686026289 and record likes.
+  - `comments`: Open X analytics for https://x.com/i/web/status/2072445477686026289 and record comments.
+  - `shares`: Open X analytics for https://x.com/i/web/status/2072445477686026289 and record shares.
+  - `saves`: Open X analytics for https://x.com/i/web/status/2072445477686026289 and record saves.
+  - `subs_delta`: Open X analytics for https://x.com/i/web/status/2072445477686026289 and record subs_delta.
+### X - Analog Myth (`FP-LAUNCH-ANALOG-MYTH-X-NIGHT`)
+- Format: Release-art image + story hook
+- URL: https://x.com/i/web/status/2072487612313419803
+- Published: 2026-07-01; Published_Log row: `48`
+- Pending fields: `views, likes, comments, shares, saves, subs_delta`
+- Wide-ready fields: `none`
+- Wide entry instruction: Fill one wide entry CSV row in data/experiment_result_entry_wide_template.csv for this post; keep unknown metrics blank and include one evidence_note.
+- Wide CSV target: post_id `FP-LAUNCH-ANALOG-MYTH-X-NIGHT`, source_row `48`, fill `views, likes, comments, shares, saves, subs_delta`.
+- Evidence sources:
+  - Logged public post: https://x.com/i/web/status/2072487612313419803 - Open the public post to confirm the URL and visible engagement before entering metrics.
+  - X Analytics: https://analytics.x.com/ - Use the logged post URL or post ID to find the post and copy visible analytics values.
+- Collection checklist:
+  - Open the logged public post and confirm it matches this post_id.
+  - Open the platform analytics or insights source listed for this card.
+  - Copy only numeric values that are visible in the source.
+  - Enter values in the wide entry CSV row for this post_id and source_row.
+  - Add an evidence_note with source and collection date before import preview.
+  - `views`: Open X analytics for https://x.com/i/web/status/2072487612313419803 and record views.
+  - `likes`: Open X analytics for https://x.com/i/web/status/2072487612313419803 and record likes.
+  - `comments`: Open X analytics for https://x.com/i/web/status/2072487612313419803 and record comments.
+  - `shares`: Open X analytics for https://x.com/i/web/status/2072487612313419803 and record shares.
+  - `saves`: Open X analytics for https://x.com/i/web/status/2072487612313419803 and record saves.
+  - `subs_delta`: Open X analytics for https://x.com/i/web/status/2072487612313419803 and record subs_delta.
 
 ## Measurement Priorities
-- **Collect metrics** `FP-AUTO-265` Facebook / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 12 logged post(s), 4 missing URL(s) in this format.
-  - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-265 --source-row 33 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
-  - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-265 --source-row 33 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
-- **Collect metrics** `FP-AUTO-268` Facebook / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 12 logged post(s), 4 missing URL(s) in this format.
-  - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-268 --source-row 34 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
-  - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-268 --source-row 34 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
-- **Collect metrics** `FP-AUTO-273` Facebook / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 12 logged post(s), 4 missing URL(s) in this format.
+- **Collect metrics** `FP-AUTO-273` Facebook / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 13 logged post(s), 3 missing URL(s) in this format.
   - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-273 --source-row 32 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
   - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-273 --source-row 32 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
-- **Collect metrics** `FP-AUTO-278` Facebook / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 12 logged post(s), 4 missing URL(s) in this format.
+- **Collect metrics** `FP-AUTO-278` Facebook / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 13 logged post(s), 3 missing URL(s) in this format.
   - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-278 --source-row 30 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
   - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-278 --source-row 30 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
-- **Collect metrics** `FP-AUTO-283` Facebook / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 12 logged post(s), 4 missing URL(s) in this format.
+- **Collect metrics** `FP-AUTO-283` Facebook / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 13 logged post(s), 3 missing URL(s) in this format.
   - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-283 --source-row 41 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
   - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-283 --source-row 41 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
-- **Collect metrics** `FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK` Facebook / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 12 logged post(s), 4 missing URL(s) in this format.
+- **Collect metrics** `FP-LAUNCH-ANALOG-MYTH-FACEBOOK` Facebook / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 13 logged post(s), 3 missing URL(s) in this format.
+  - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-LAUNCH-ANALOG-MYTH-FACEBOOK --source-row 39 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
+  - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-LAUNCH-ANALOG-MYTH-FACEBOOK --source-row 39 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
+- **Collect metrics** `FP-LAUNCH-ANALOG-MYTH-FACEBOOK-EVENING` Facebook / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 13 logged post(s), 3 missing URL(s) in this format.
+  - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-LAUNCH-ANALOG-MYTH-FACEBOOK-EVENING --source-row 46 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
+  - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-LAUNCH-ANALOG-MYTH-FACEBOOK-EVENING --source-row 46 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
+- **Collect metrics** `FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK` Facebook / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 13 logged post(s), 3 missing URL(s) in this format.
   - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK --source-row 36 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
   - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK --source-row 36 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
-- **Collect metrics** `FP-AUTO-266` X / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 12 logged post(s), 4 missing URL(s) in this format.
-  - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-266 --source-row 21 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
-  - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-266 --source-row 21 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
-- **Collect metrics** `FP-AUTO-271` X / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 12 logged post(s), 4 missing URL(s) in this format.
+- **Collect metrics** `FP-AUTO-271` X / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 13 logged post(s), 3 missing URL(s) in this format.
   - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-271 --source-row 19 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
   - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-271 --source-row 19 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
-- **Collect metrics** `FP-AUTO-276` X / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 12 logged post(s), 4 missing URL(s) in this format.
+- **Collect metrics** `FP-AUTO-276` X / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 13 logged post(s), 3 missing URL(s) in this format.
   - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-276 --source-row 38 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
   - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-276 --source-row 38 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
-- **Collect metrics** `FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA` YouTube / Short video clip + platform-native CTA: Already published and logged; measuring it reduces the Short video clip + platform-native CTA evidence gap. 1 logged post(s), 4 missing URL(s) in this format.
+- **Collect metrics** `FP-AUTO-281` X / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 13 logged post(s), 3 missing URL(s) in this format.
+  - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-281 --source-row 42 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
+  - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-281 --source-row 42 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
+- **Collect metrics** `FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA` YouTube / Short video clip + platform-native CTA: Already published and logged; measuring it reduces the Short video clip + platform-native CTA evidence gap. 1 logged post(s), 3 missing URL(s) in this format.
   - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --source-row 26 --shares VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
   - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --source-row 26 --shares VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
 - **Collect metrics** `FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY` YouTube / YouTube archive video CTA: Already published and logged; measuring it reduces the YouTube archive video CTA evidence gap. 1 logged post(s), 0 missing URL(s) in this format.
   - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --source-row 28 --shares VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
   - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY --source-row 28 --shares VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
-- **Clear platform blocker** `FP-AUTO-267` Instagram / Release-art image + story hook: Platform work is blocked; clear the platform repair gate before URL logging can produce metrics. 12 logged post(s), 4 missing URL(s) in this format.
+- **Clear platform blocker** `FP-AUTO-272` Instagram / Release-art image + story hook: Platform work is blocked; clear the platform repair gate before URL logging can produce metrics. 13 logged post(s), 3 missing URL(s) in this format.
 
 ## Post-Log Measurement Handoff
 - Status: **clear**
@@ -423,11 +446,9 @@ Generated: 2026-07-04T19:38:36.856725Z
   - The wide import preview reports only the intended metric updates.
 
 ## Missing Public URLs
-- `FP-AUTO-267` Instagram / Release-art image + story hook: Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-272` Instagram / Release-art image + story hook: Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-277` Instagram / Release-art image + story hook: Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-282` Instagram / Release-art image + story hook: Publish or log the public URL before result metrics can be collected.
-- `FP-AUTO-269` TikTok / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-274` TikTok / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-279` TikTok / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-284` TikTok / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.
