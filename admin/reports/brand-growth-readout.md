@@ -1,6 +1,6 @@
 # Brand Growth Readout - Lily Roo
 
-Generated: 2026-07-05T19:42:57.151602Z
+Generated: 2026-07-05T20:33:02.079635Z
 
 ## Summary
 - Campaign rows: **64**
@@ -14,7 +14,7 @@ Generated: 2026-07-05T19:42:57.151602Z
 - Next scheduled: `FP-BRAND-AM-03-ANALOG-MYTH-X` at `2026-07-06T10:15:00-04:00`
 - Next proof due: `2026-07-04T16:05:00Z`
 - First measurement due: `2026-07-05T15:20:00Z`
-- YouTube total views: **486**
+- YouTube total views: **487**
 - Spotify monthly listeners: **1**
 
 ## Commands

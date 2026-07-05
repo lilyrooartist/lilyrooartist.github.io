@@ -1,10 +1,10 @@
 # Facebook Post Results - Lily Roo
 
-Generated: 2026-07-05T19:42:53.689564Z
+Generated: 2026-07-05T20:32:58.512603Z
 
 ## Summary
 - Status: **skipped_missing_secrets**
-- Captured posts: **12**
+- Captured posts: **16**
 - Fillable posts: **0**
 - Fillable result fields: **0**
 - Apply command: `python3 scripts/capture_facebook_post_results.py --apply-results --refresh-admin`
@@ -82,6 +82,13 @@ Generated: 2026-07-05T19:42:53.689564Z
   - Post clicks captured but not imported as views: `None`
   - Fillable fields: `none`
   - Evidence: Facebook metric capture skipped 2026-07-05: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
+- **FP-LAUNCH-ANALOG-MYTH-FACEBOOK** row `39`
+  - URL: https://www.facebook.com/permalink.php?story_fbid=122120653563249470&id=903693509504290
+  - Lookup: `skipped_missing_secrets`
+  - Likes: `0`; comments: `0`; shares: `0`
+  - Post clicks captured but not imported as views: `None`
+  - Fillable fields: `none`
+  - Evidence: Facebook metric capture skipped 2026-07-05: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
 - **FP-AUTO-283** row `41`
   - URL: https://www.facebook.com/903693509504290_122120643825249470
   - Lookup: `skipped_missing_secrets`
@@ -91,6 +98,27 @@ Generated: 2026-07-05T19:42:53.689564Z
   - Evidence: Facebook metric capture skipped 2026-07-05: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
 - **FP-STORY-I-LEARNED-IT-ALL-IN-FIFTEEN-SECONDS-FACEBOOK-ARCHIVE-CTA** row `45`
   - URL: https://www.facebook.com/903693509504290_122120699235249470
+  - Lookup: `skipped_missing_secrets`
+  - Likes: `0`; comments: `0`; shares: `0`
+  - Post clicks captured but not imported as views: `None`
+  - Fillable fields: `none`
+  - Evidence: Facebook metric capture skipped 2026-07-05: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
+- **FP-LAUNCH-ANALOG-MYTH-FACEBOOK-EVENING** row `46`
+  - URL: https://www.facebook.com/permalink.php?story_fbid=122120718795249470&id=903693509504290
+  - Lookup: `skipped_missing_secrets`
+  - Likes: `0`; comments: `0`; shares: `0`
+  - Post clicks captured but not imported as views: `None`
+  - Fillable fields: `none`
+  - Evidence: Facebook metric capture skipped 2026-07-05: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
+- **FP-LAUNCH-ANALOG-MYTH-FACEBOOK-NIGHT** row `49`
+  - URL: https://www.facebook.com/permalink.php?story_fbid=122120725569249470&id=903693509504290
+  - Lookup: `skipped_missing_secrets`
+  - Likes: `0`; comments: `0`; shares: `0`
+  - Post clicks captured but not imported as views: `None`
+  - Fillable fields: `none`
+  - Evidence: Facebook metric capture skipped 2026-07-05: missing credential name(s) META_LONG_LIVED_TOKEN, FB_PAGE_ID
+- **FP-BRAND-AM-01-13-FACEBOOK** row `50`
+  - URL: https://www.facebook.com/122119767927249470/posts/122120959905249470
   - Lookup: `skipped_missing_secrets`
   - Likes: `0`; comments: `0`; shares: `0`
   - Post clicks captured but not imported as views: `None`

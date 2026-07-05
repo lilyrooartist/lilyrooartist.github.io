@@ -50,6 +50,16 @@ def facebook_object_id(value: str) -> str:
     match = re.search(r"facebook\.com/(\d+)_(\d+)", raw)
     if match:
         return f"{match.group(1)}_{match.group(2)}"
+    match = re.search(r"facebook\.com/(\d+)/posts/(\d+)", raw)
+    if match:
+        return f"{match.group(1)}_{match.group(2)}"
+    parsed = urllib.parse.urlparse(raw)
+    if "facebook.com" in parsed.netloc:
+        query = urllib.parse.parse_qs(parsed.query)
+        story_id = (query.get("story_fbid") or [""])[0]
+        page_id = (query.get("id") or [""])[0]
+        if re.fullmatch(r"\d+", story_id) and re.fullmatch(r"\d+", page_id):
+            return f"{page_id}_{story_id}"
     return ""
 
 
