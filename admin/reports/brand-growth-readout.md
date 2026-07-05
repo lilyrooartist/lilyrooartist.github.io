@@ -1,11 +1,11 @@
 # Brand Growth Readout - Lily Roo
 
-Generated: 2026-07-05T17:12:43.087743Z
+Generated: 2026-07-05T19:42:57.151602Z
 
 ## Summary
 - Campaign rows: **64**
 - Approved auto rows: **64**
-- Visible in future queue: **62**
+- Visible in future queue: **60**
 - Posted or measured rows: **4**
 - Measured rows: **0**
 - Ready for metric capture: **2**
