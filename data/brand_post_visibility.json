@@ -1,0 +1,194 @@
+{
+  "generated_at": "2026-07-05T22:21:45.363301Z",
+  "safe_mode": true,
+  "source": {
+    "published_log": "admin/content/Published_Log.csv",
+    "social_execution_snapshot": "data/social_execution_snapshot.json",
+    "row_filter": "FP-BRAND-AM X/Facebook published rows",
+    "limit": 8
+  },
+  "summary": {
+    "status": "attention",
+    "checked_post_count": 4,
+    "public_visibility_ok_count": 2,
+    "attention_count": 2,
+    "x_copy_confirmed_count": 2,
+    "facebook_page_loaded_count": 0,
+    "report_path": "admin/reports/brand-post-visibility.md",
+    "refresh_command": "python3 scripts/capture_brand_post_visibility.py"
+  },
+  "rows": [
+    {
+      "post_id": "FP-BRAND-AM-01-13-FACEBOOK",
+      "platform": "Facebook",
+      "published_date": "2026-07-04",
+      "source_row": 50,
+      "logged_url": "https://www.facebook.com/122119767927249470/posts/122120959905249470",
+      "checked_url": "https://www.facebook.com/122119767927249470/posts/122120959905249470",
+      "final_url": "https://www.facebook.com/122119767927249470/posts/122120959905249470",
+      "http_status": 200,
+      "content_type": "text/html; charset=\"utf-8\"",
+      "visibility_status": "unavailable_marker_found",
+      "public_visibility_ok": false,
+      "copy_matched": false,
+      "note": "Facebook returned an unavailable-content marker for this post.",
+      "attempts": [
+        {
+          "url": "https://www.facebook.com/122119767927249470/posts/122120959905249470",
+          "ok": true,
+          "http_status": 200,
+          "final_url": "https://www.facebook.com/122119767927249470/posts/122120959905249470",
+          "content_type": "text/html; charset=\"utf-8\"",
+          "error": "",
+          "unavailable_marker_found": true,
+          "copy_matched": true
+        },
+        {
+          "url": "https://www.facebook.com/permalink.php?story_fbid=122120959905249470&id=122119767927249470",
+          "ok": true,
+          "http_status": 200,
+          "final_url": "https://www.facebook.com/permalink.php?story_fbid=122120959905249470&id=122119767927249470",
+          "content_type": "text/html; charset=\"utf-8\"",
+          "error": "",
+          "unavailable_marker_found": true,
+          "copy_matched": true
+        },
+        {
+          "url": "https://www.facebook.com/122119767927249470_122120959905249470",
+          "ok": true,
+          "http_status": 200,
+          "final_url": "https://www.facebook.com/permalink.php?story_fbid=pfbid0ZtH56G3cbt6yxp13KkHQ3856afTUw1QVUygRNEVEYgGh2mXogVU9xtfbxv37jtNEl&id=61587484110002",
+          "content_type": "text/html; charset=\"utf-8\"",
+          "error": "",
+          "unavailable_marker_found": true,
+          "copy_matched": true
+        },
+        {
+          "url": "https://www.facebook.com/permalink.php?story_fbid=122120959905249470&id=903693509504290",
+          "ok": true,
+          "http_status": 200,
+          "final_url": "https://www.facebook.com/permalink.php?story_fbid=122120959905249470&id=903693509504290",
+          "content_type": "text/html; charset=\"utf-8\"",
+          "error": "",
+          "unavailable_marker_found": true,
+          "copy_matched": true
+        },
+        {
+          "url": "https://www.facebook.com/903693509504290_122120959905249470",
+          "ok": true,
+          "http_status": 200,
+          "final_url": "https://www.facebook.com/permalink.php?story_fbid=pfbid0ZtH56G3cbt6yxp13KkHQ3856afTUw1QVUygRNEVEYgGh2mXogVU9xtfbxv37jtNEl&id=61587484110002",
+          "content_type": "text/html; charset=\"utf-8\"",
+          "error": "",
+          "unavailable_marker_found": true,
+          "copy_matched": true
+        }
+      ]
+    },
+    {
+      "post_id": "FP-BRAND-AM-01-13-X",
+      "platform": "X",
+      "published_date": "2026-07-04",
+      "source_row": 51,
+      "logged_url": "https://x.com/i/web/status/2073410401006751908",
+      "checked_url": "https://publish.twitter.com/oembed?url=https%3A%2F%2Ftwitter.com%2Flilyrooartist%2Fstatus%2F2073410401006751908",
+      "final_url": "https://x.com/lilyrooartist/status/2073410401006751908",
+      "http_status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "visibility_status": "visible_copy_confirmed",
+      "public_visibility_ok": true,
+      "copy_matched": true,
+      "note": "X public oEmbed returned Lily Roo post copy.",
+      "attempts": []
+    },
+    {
+      "post_id": "FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK",
+      "platform": "Facebook",
+      "published_date": "2026-07-05",
+      "source_row": 52,
+      "logged_url": "https://www.facebook.com/122119767927249470/posts/122121048123249470",
+      "checked_url": "https://www.facebook.com/122119767927249470/posts/122121048123249470",
+      "final_url": "https://www.facebook.com/122119767927249470/posts/122121048123249470",
+      "http_status": 200,
+      "content_type": "text/html; charset=\"utf-8\"",
+      "visibility_status": "unavailable_marker_found",
+      "public_visibility_ok": false,
+      "copy_matched": false,
+      "note": "Facebook returned an unavailable-content marker for this post.",
+      "attempts": [
+        {
+          "url": "https://www.facebook.com/122119767927249470/posts/122121048123249470",
+          "ok": true,
+          "http_status": 200,
+          "final_url": "https://www.facebook.com/122119767927249470/posts/122121048123249470",
+          "content_type": "text/html; charset=\"utf-8\"",
+          "error": "",
+          "unavailable_marker_found": true,
+          "copy_matched": false
+        },
+        {
+          "url": "https://www.facebook.com/permalink.php?story_fbid=122121048123249470&id=122119767927249470",
+          "ok": true,
+          "http_status": 200,
+          "final_url": "https://www.facebook.com/permalink.php?story_fbid=122121048123249470&id=122119767927249470",
+          "content_type": "text/html; charset=\"utf-8\"",
+          "error": "",
+          "unavailable_marker_found": true,
+          "copy_matched": false
+        },
+        {
+          "url": "https://www.facebook.com/122119767927249470_122121048123249470",
+          "ok": true,
+          "http_status": 200,
+          "final_url": "https://www.facebook.com/permalink.php?story_fbid=pfbid02hX88trbZhtsaYvSVDoFhwKpwMceMpD8oBLvYA68YyVks7kRLRi3ZEex6nruWmMFhl&id=61587484110002",
+          "content_type": "text/html; charset=\"utf-8\"",
+          "error": "",
+          "unavailable_marker_found": true,
+          "copy_matched": false
+        },
+        {
+          "url": "https://www.facebook.com/permalink.php?story_fbid=122121048123249470&id=903693509504290",
+          "ok": true,
+          "http_status": 200,
+          "final_url": "https://www.facebook.com/permalink.php?story_fbid=122121048123249470&id=903693509504290",
+          "content_type": "text/html; charset=\"utf-8\"",
+          "error": "",
+          "unavailable_marker_found": true,
+          "copy_matched": false
+        },
+        {
+          "url": "https://www.facebook.com/903693509504290_122121048123249470",
+          "ok": true,
+          "http_status": 200,
+          "final_url": "https://www.facebook.com/permalink.php?story_fbid=pfbid02hX88trbZhtsaYvSVDoFhwKpwMceMpD8oBLvYA68YyVks7kRLRi3ZEex6nruWmMFhl&id=61587484110002",
+          "content_type": "text/html; charset=\"utf-8\"",
+          "error": "",
+          "unavailable_marker_found": true,
+          "copy_matched": false
+        }
+      ]
+    },
+    {
+      "post_id": "FP-BRAND-AM-02-GIRLS-CAMP-X",
+      "platform": "X",
+      "published_date": "2026-07-05",
+      "source_row": 53,
+      "logged_url": "https://x.com/i/web/status/2073772787177861205",
+      "checked_url": "https://publish.twitter.com/oembed?url=https%3A%2F%2Ftwitter.com%2Flilyrooartist%2Fstatus%2F2073772787177861205",
+      "final_url": "https://x.com/lilyrooartist/status/2073772787177861205",
+      "http_status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "visibility_status": "visible_copy_confirmed",
+      "public_visibility_ok": true,
+      "copy_matched": true,
+      "note": "X public oEmbed returned Lily Roo post copy.",
+      "attempts": []
+    }
+  ],
+  "guardrails": [
+    "Read-only public URL probe; it does not publish, edit, or collect private analytics.",
+    "X visibility is confirmed through public oEmbed post copy.",
+    "Facebook visibility is limited to public page load checks because unauthenticated Facebook pages do not reliably expose post copy.",
+    "A Facebook page load without an unavailable-content marker is treated as a visibility pass; metric capture still requires Meta API credentials."
+  ]
+}

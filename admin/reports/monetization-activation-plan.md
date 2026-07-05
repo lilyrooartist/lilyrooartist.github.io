@@ -1,6 +1,6 @@
 # Brand Activation Plan - Lily Roo
 
-Generated: 2026-07-05T22:03:02.599297Z
+Generated: 2026-07-05T22:21:52.205589Z
 
 ## Summary
 - Brand growth goal: **release_forward_brand_growth**
@@ -11,10 +11,10 @@ Generated: 2026-07-05T22:03:02.599297Z
 - Activation actions: **1**
 
 ## Activation Sequence
-1. **Current operations next action: Connect automated brand metrics capture**
-   - Phase: `Operations packet`; status: `waiting_for_credentials`
-   - Detail: 2 fresh Analog Myth post(s) are ready to measure once X/Meta metric credentials are connected.
-   - Preview/check: `python3 scripts/push_github_actions_secrets.py --name FB_PAGE_ID --name META_LONG_LIVED_TOKEN --name X_ACCESS_TOKEN --name X_ACCESS_TOKEN_SECRET --name X_API_KEY --name X_API_SECRET`
+1. **Current operations next action: Review Facebook brand-post visibility**
+   - Phase: `Operations packet`; status: `needs_review`
+   - Detail: 2 recent Analog Myth Facebook post URL(s) need public visibility review.
+   - Preview/check: `python3 scripts/capture_brand_post_visibility.py`
 
 ## Guardrails
 - This plan does not approve, apply, publish, or post anything.

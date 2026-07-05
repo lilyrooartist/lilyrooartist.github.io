@@ -23,6 +23,7 @@ BRAND_GROWTH_READOUT = ROOT / "data" / "brand_growth_readout.json"
 BRAND_GROWTH_PREFLIGHT = ROOT / "data" / "brand_growth_preflight.json"
 X_POST_RESULTS = ROOT / "data" / "x_post_results.json"
 FACEBOOK_POST_RESULTS = ROOT / "data" / "facebook_post_results.json"
+BRAND_POST_VISIBILITY = ROOT / "data" / "brand_post_visibility.json"
 TIKTOK_PREFLIGHT = ROOT / "data" / "tiktok_setup_preflight.json"
 OUT = ROOT / "data" / "promo_operations_packet.json"
 REPORT = ROOT / "admin" / "reports" / "promo-operations-packet.md"
@@ -91,6 +92,8 @@ def phase_for(action: dict) -> str:
         return "Automated brand campaign"
     if kind == "brand_growth_metrics":
         return "Measure active brand campaign"
+    if kind == "brand_growth_visibility":
+        return "Protect active brand reach"
     if kind == "experiment_results":
         return "Collect experiment results"
     if kind == "apply_approved":
@@ -140,6 +143,9 @@ def urgency_for(action: dict, now: datetime) -> tuple[str, str]:
         if missing:
             return "high", f"{count} fresh Analog Myth post(s) are ready to measure once X/Meta metric credentials are connected."
         return "high", f"{count} fresh Analog Myth post(s) are ready for automated metric capture."
+    if kind == "brand_growth_visibility":
+        count = int(context.get("attention_count") or 0)
+        return "high", f"{count} recent Analog Myth Facebook post URL(s) need public visibility review."
     if kind == "experiment_results":
         pending = int(context.get("pending_result_field_count") or 0)
         cards = int(context.get("metric_card_count") or 0)
@@ -188,6 +194,8 @@ def enrich_actions(actions: list[dict], now: datetime) -> list[dict]:
             item["status"] = "waiting_for_user"
         elif action.get("kind") == "platform_fix":
             item["status"] = "needs_fix"
+        elif action.get("kind") == "brand_growth_visibility":
+            item["status"] = "needs_review"
         else:
             item["status"] = "ready"
         item["sort_key"] = [
@@ -797,6 +805,44 @@ def brand_growth_metric_actions(readout, x_results, facebook_results):
     ]
 
 
+def brand_growth_visibility_actions(visibility):
+    summary = visibility.get("summary") or {}
+    attention_rows = [
+        row for row in visibility.get("rows") or []
+        if not row.get("public_visibility_ok")
+    ]
+    if not attention_rows:
+        return []
+    facebook_attention = [row for row in attention_rows if row.get("platform") == "Facebook"]
+    label = "Review Facebook brand-post visibility" if facebook_attention else "Review brand-post visibility"
+    note = (
+        "Recent Analog Myth Facebook post URLs load with an unavailable-content marker for public probes. "
+        "Confirm Page/post visibility in Meta and keep the X posts active while the Facebook reach lane is checked."
+        if facebook_attention
+        else "Recent Analog Myth post URLs need public visibility review."
+    )
+    return [
+        command_row(
+            label,
+            "python3 scripts/capture_brand_post_visibility.py",
+            "brand_growth_visibility",
+            2,
+            {
+                "status": summary.get("status") or "attention",
+                "checked_post_count": summary.get("checked_post_count") or len(visibility.get("rows") or []),
+                "public_visibility_ok_count": summary.get("public_visibility_ok_count") or 0,
+                "attention_count": len(attention_rows),
+                "attention_post_ids": [row.get("post_id") for row in attention_rows if row.get("post_id")],
+                "facebook_attention_count": len(facebook_attention),
+                "report_path": summary.get("report_path") or "admin/reports/brand-post-visibility.md",
+                "refresh_command": summary.get("refresh_command") or "python3 scripts/capture_brand_post_visibility.py",
+                "rows": attention_rows[:6],
+                "note": note,
+            },
+        )
+    ]
+
+
 def experiment_result_actions(result_clipboard):
     summary = result_clipboard.get("summary") or {}
     metric_card_count = int(summary.get("metric_card_count") or 0)
@@ -1116,8 +1162,10 @@ def main() -> int:
     brand_growth_preflight = read_json(BRAND_GROWTH_PREFLIGHT, {})
     x_post_results = read_json(X_POST_RESULTS, {})
     facebook_post_results = read_json(FACEBOOK_POST_RESULTS, {})
+    brand_post_visibility = read_json(BRAND_POST_VISIBILITY, {})
     actions = (
         brand_growth_proof_actions(posting_status, brand_growth_readout, brand_growth_preflight)
+        + brand_growth_visibility_actions(brand_post_visibility)
         + brand_growth_metric_actions(brand_growth_readout, x_post_results, facebook_post_results)
         + scheduled_approval_batch_actions(scheduled_approval)
         + scheduled_approval_review_actions(scheduled_approval)
@@ -1143,6 +1191,7 @@ def main() -> int:
         "manual_lane_cleanup_actions": sum(1 for action in actions if action["kind"] == "manual_lane_cleanup"),
         "brand_growth_proof_actions": sum(1 for action in actions if action["kind"] == "brand_growth_proof"),
         "brand_growth_metric_actions": sum(1 for action in actions if action["kind"] == "brand_growth_metrics"),
+        "brand_growth_visibility_actions": sum(1 for action in actions if action["kind"] == "brand_growth_visibility"),
         "experiment_result_actions": sum(1 for action in actions if action["kind"] == "experiment_results"),
         "backlog_reschedules": sum(1 for action in actions if action["kind"] == "backlog_reschedule"),
         "safe_apply_commands": sum(1 for action in actions if action["kind"] == "apply_approved"),
@@ -1171,6 +1220,7 @@ def main() -> int:
             "brand_growth_preflight": str(BRAND_GROWTH_PREFLIGHT.relative_to(ROOT)),
             "x_post_results": str(X_POST_RESULTS.relative_to(ROOT)),
             "facebook_post_results": str(FACEBOOK_POST_RESULTS.relative_to(ROOT)),
+            "brand_post_visibility": str(BRAND_POST_VISIBILITY.relative_to(ROOT)),
             "tiktok_setup_preflight": str(TIKTOK_PREFLIGHT.relative_to(ROOT)),
         },
         "next_action": next_action,

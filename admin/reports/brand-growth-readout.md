@@ -1,6 +1,6 @@
 # Brand Growth Readout - Lily Roo
 
-Generated: 2026-07-05T22:02:59.896831Z
+Generated: 2026-07-05T22:21:49.146656Z
 
 ## Summary
 - Campaign rows: **64**
@@ -9,6 +9,7 @@ Generated: 2026-07-05T22:02:59.896831Z
 - Posted or measured rows: **4**
 - Measured rows: **0**
 - Ready for metric capture: **2**
+- Public visibility: **attention** (2 / 4 checked OK; 2 attention)
 - Post-slot watch windows: **32**
 - Status counts: **posted_waiting_measurement_window: 2, ready_for_metric_capture: 2, scheduled_future: 60**
 - Next scheduled: `FP-BRAND-AM-03-ANALOG-MYTH-X` at `2026-07-06T10:15:00-04:00`
@@ -24,6 +25,7 @@ Generated: 2026-07-05T22:02:59.896831Z
 - Apply post-slot proof after scheduled executor runs: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin`
 - Capture X metrics: `python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X`
 - Capture Facebook metrics: `python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK`
+- Re-check public visibility: `admin/reports/brand-post-visibility.md`
 
 ## Next Actions
 - python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X
@@ -131,15 +133,19 @@ Generated: 2026-07-05T22:02:59.896831Z
 ## Rows
 - `FP-BRAND-AM-01-13-X` X 2026-07-04T10:15:00-04:00 - **ready_for_metric_capture**
   - URL: https://x.com/i/web/status/2073410401006751908
+  - Public visibility: `visible_copy_confirmed` OK
   - Next: python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X
 - `FP-BRAND-AM-01-13-FACEBOOK` Facebook 2026-07-04T11:20:00-04:00 - **ready_for_metric_capture**
   - URL: https://www.facebook.com/122119767927249470/posts/122120959905249470
+  - Public visibility: `unavailable_marker_found` attention
   - Next: python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK
 - `FP-BRAND-AM-02-GIRLS-CAMP-X` X 2026-07-05T10:15:00-04:00 - **posted_waiting_measurement_window**
   - URL: https://x.com/i/web/status/2073772787177861205
+  - Public visibility: `visible_copy_confirmed` OK
   - Next: Wait until 2026-07-06T14:15:36.373000+00:00 before capturing metrics.
 - `FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK` Facebook 2026-07-05T11:20:00-04:00 - **posted_waiting_measurement_window**
   - URL: https://www.facebook.com/122119767927249470/posts/122121048123249470
+  - Public visibility: `unavailable_marker_found` attention
   - Next: Wait until 2026-07-06T15:30:46.255000+00:00 before capturing metrics.
 - `FP-BRAND-AM-03-ANALOG-MYTH-X` X 2026-07-06T10:15:00-04:00 - **scheduled_future**
   - Next: Wait for the scheduled social executor, then refresh admin and export executions.
@@ -268,3 +274,4 @@ Generated: 2026-07-05T22:02:59.896831Z
 - Metric capture commands only target logged X/Facebook campaign post IDs.
 - Post-slot proof commands only capture executor state and export confirmed Worker URLs.
 - Unknown metrics remain blank until an API capture or visible analytics source proves them.
+- Public post visibility checks are read-only and do not replace X/Meta metric capture.

@@ -18,6 +18,7 @@ EXECUTIONS = ROOT / "data" / "social_execution_snapshot.json"
 X_RESULTS = ROOT / "data" / "x_post_results.json"
 FACEBOOK_RESULTS = ROOT / "data" / "facebook_post_results.json"
 LIVE_METRICS = ROOT / "data" / "live_social_metrics.json"
+BRAND_POST_VISIBILITY = ROOT / "data" / "brand_post_visibility.json"
 OUT = ROOT / "data" / "brand_growth_readout.json"
 REPORT = ROOT / "admin" / "reports" / "brand-growth-readout.md"
 REPORT_INDEX = ROOT / "admin" / "reports" / "index.html"
@@ -133,6 +134,14 @@ def execution_lookup(snapshot: dict) -> dict[str, dict]:
 
 
 def result_lookup(payload: dict) -> dict[str, dict]:
+    return {
+        str(row.get("post_id") or "").strip(): row
+        for row in payload.get("rows") or []
+        if str(row.get("post_id") or "").strip()
+    }
+
+
+def visibility_lookup(payload: dict) -> dict[str, dict]:
     return {
         str(row.get("post_id") or "").strip(): row
         for row in payload.get("rows") or []
@@ -285,6 +294,8 @@ def build_payload() -> dict:
     executions = execution_lookup(read_json(EXECUTIONS, {}))
     x_results = result_lookup(read_json(X_RESULTS, {}))
     facebook_results = result_lookup(read_json(FACEBOOK_RESULTS, {}))
+    visibility_payload = read_json(BRAND_POST_VISIBILITY, {})
+    visibility = visibility_lookup(visibility_payload)
     live_metrics = read_json(LIVE_METRICS, {})
     queue_by_id = by_id(queue_rows)
     future_by_id = by_id(future_posts)
@@ -309,6 +320,7 @@ def build_payload() -> dict:
             if measurement_due_at:
                 measurement_due_at += timedelta(hours=24)
         result_row = x_results.get(post_id) if platform == "X" else facebook_results.get(post_id)
+        visibility_row = visibility.get(post_id) or {}
         imported_fields = measured_fields(published_row)
         api_fields = captured_fields(result_row)
 
@@ -347,6 +359,9 @@ def build_payload() -> dict:
             "measurement_due_at": measurement_due_at.isoformat() if measurement_due_at else "",
             "imported_result_fields": imported_fields,
             "captured_api_fields": api_fields,
+            "public_visibility_status": visibility_row.get("visibility_status") or "",
+            "public_visibility_ok": visibility_row.get("public_visibility_ok"),
+            "public_visibility_note": visibility_row.get("note") or "",
             "status": status,
             "next_action": next_action,
             "visible_in_future_queue": bool(future_row),
@@ -375,6 +390,7 @@ def build_payload() -> dict:
             "x_post_results": rel(X_RESULTS),
             "facebook_post_results": rel(FACEBOOK_RESULTS),
             "live_social_metrics": rel(LIVE_METRICS),
+            "brand_post_visibility": rel(BRAND_POST_VISIBILITY),
         },
         "summary": {
             "campaign_row_count": len(rows),
@@ -385,6 +401,11 @@ def build_payload() -> dict:
             "posted_or_measured_rows": sum(1 for row in rows if row["status"] in {"posted_waiting_measurement_window", "ready_for_metric_capture", "measured"}),
             "measured_rows": status_counts.get("measured", 0),
             "ready_for_metric_capture_rows": status_counts.get("ready_for_metric_capture", 0),
+            "public_visibility_status": (visibility_payload.get("summary") or {}).get("status") or "unknown",
+            "public_visibility_checked_post_count": (visibility_payload.get("summary") or {}).get("checked_post_count", 0),
+            "public_visibility_ok_count": (visibility_payload.get("summary") or {}).get("public_visibility_ok_count", 0),
+            "public_visibility_attention_count": (visibility_payload.get("summary") or {}).get("attention_count", 0),
+            "public_visibility_report_path": (visibility_payload.get("summary") or {}).get("report_path") or rel(REPORT),
             "attention_rows": len(due_rows),
             "next_scheduled_post_id": (next_scheduled[0]["id"] if next_scheduled else ""),
             "next_scheduled_at": (next_scheduled[0]["scheduled_at"] if next_scheduled else ""),
@@ -426,6 +447,7 @@ def build_payload() -> dict:
             "Metric capture commands only target logged X/Facebook campaign post IDs.",
             "Post-slot proof commands only capture executor state and export confirmed Worker URLs.",
             "Unknown metrics remain blank until an API capture or visible analytics source proves them.",
+            "Public post visibility checks are read-only and do not replace X/Meta metric capture.",
         ],
     }
     return payload
@@ -445,6 +467,9 @@ def build_markdown(payload: dict) -> str:
         f"- Posted or measured rows: **{summary['posted_or_measured_rows']}**",
         f"- Measured rows: **{summary['measured_rows']}**",
         f"- Ready for metric capture: **{summary['ready_for_metric_capture_rows']}**",
+        f"- Public visibility: **{summary.get('public_visibility_status', 'unknown')}** "
+        f"({summary.get('public_visibility_ok_count', 0)} / {summary.get('public_visibility_checked_post_count', 0)} checked OK; "
+        f"{summary.get('public_visibility_attention_count', 0)} attention)",
         f"- Post-slot watch windows: **{summary.get('post_slot_watch_window_count', 0)}**",
         f"- Status counts: **{', '.join(f'{key}: {value}' for key, value in summary['status_counts'].items()) or 'none'}**",
         f"- Next scheduled: `{summary['next_scheduled_post_id'] or 'none'}` at `{summary['next_scheduled_at'] or 'n/a'}`",
@@ -460,6 +485,7 @@ def build_markdown(payload: dict) -> str:
         f"- Apply post-slot proof after scheduled executor runs: `{summary.get('proof_apply_command') or 'waiting for scheduled campaign posts'}`",
         f"- Capture X metrics: `{summary['x_metric_capture_command'] or 'waiting for logged X campaign posts'}`",
         f"- Capture Facebook metrics: `{summary['facebook_metric_capture_command'] or 'waiting for logged Facebook campaign posts'}`",
+        f"- Re-check public visibility: `{summary.get('public_visibility_report_path') or 'admin/reports/brand-post-visibility.md'}`",
         "",
         "## Next Actions",
     ]
@@ -484,6 +510,11 @@ def build_markdown(payload: dict) -> str:
         )
         if row.get("post_url"):
             lines.append(f"  - URL: {row['post_url']}")
+        if row.get("public_visibility_status"):
+            lines.append(
+                f"  - Public visibility: `{row['public_visibility_status']}`"
+                f"{' OK' if row.get('public_visibility_ok') else ' attention'}"
+            )
         if row.get("next_action"):
             lines.append(f"  - Next: {row['next_action']}")
         if row.get("imported_result_fields"):

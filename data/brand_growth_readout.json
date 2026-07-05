@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-05T22:02:59.896831Z",
+  "generated_at": "2026-07-05T22:21:49.146656Z",
   "safe_mode": true,
   "source": {
     "brand_growth_campaign": "data/brand_growth_campaign.json",
@@ -9,7 +9,8 @@
     "social_execution_snapshot": "data/social_execution_snapshot.json",
     "x_post_results": "data/x_post_results.json",
     "facebook_post_results": "data/facebook_post_results.json",
-    "live_social_metrics": "data/live_social_metrics.json"
+    "live_social_metrics": "data/live_social_metrics.json",
+    "brand_post_visibility": "data/brand_post_visibility.json"
   },
   "summary": {
     "campaign_row_count": 64,
@@ -27,6 +28,11 @@
     "posted_or_measured_rows": 4,
     "measured_rows": 0,
     "ready_for_metric_capture_rows": 2,
+    "public_visibility_status": "attention",
+    "public_visibility_checked_post_count": 4,
+    "public_visibility_ok_count": 2,
+    "public_visibility_attention_count": 2,
+    "public_visibility_report_path": "admin/reports/brand-post-visibility.md",
     "attention_rows": 2,
     "next_scheduled_post_id": "FP-BRAND-AM-03-ANALOG-MYTH-X",
     "next_scheduled_at": "2026-07-06T10:15:00-04:00",
@@ -929,6 +935,9 @@
       "measurement_due_at": "2026-07-05T14:15:36.859000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "visible_copy_confirmed",
+      "public_visibility_ok": true,
+      "public_visibility_note": "X public oEmbed returned Lily Roo post copy.",
       "status": "ready_for_metric_capture",
       "next_action": "python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X",
       "visible_in_future_queue": false
@@ -948,6 +957,9 @@
       "measurement_due_at": "2026-07-05T15:30:41.086000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "unavailable_marker_found",
+      "public_visibility_ok": false,
+      "public_visibility_note": "Facebook returned an unavailable-content marker for this post.",
       "status": "ready_for_metric_capture",
       "next_action": "python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK",
       "visible_in_future_queue": false
@@ -967,6 +979,9 @@
       "measurement_due_at": "2026-07-06T14:15:36.373000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "visible_copy_confirmed",
+      "public_visibility_ok": true,
+      "public_visibility_note": "X public oEmbed returned Lily Roo post copy.",
       "status": "posted_waiting_measurement_window",
       "next_action": "Wait until 2026-07-06T14:15:36.373000+00:00 before capturing metrics.",
       "visible_in_future_queue": false
@@ -986,6 +1001,9 @@
       "measurement_due_at": "2026-07-06T15:30:46.255000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "unavailable_marker_found",
+      "public_visibility_ok": false,
+      "public_visibility_note": "Facebook returned an unavailable-content marker for this post.",
       "status": "posted_waiting_measurement_window",
       "next_action": "Wait until 2026-07-06T15:30:46.255000+00:00 before capturing metrics.",
       "visible_in_future_queue": false
@@ -1005,6 +1023,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1024,6 +1045,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1043,6 +1067,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1062,6 +1089,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1081,6 +1111,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1100,6 +1133,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1119,6 +1155,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1138,6 +1177,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1157,6 +1199,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1176,6 +1221,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1195,6 +1243,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1214,6 +1265,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1233,6 +1287,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1252,6 +1309,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1271,6 +1331,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1290,6 +1353,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1309,6 +1375,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1328,6 +1397,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1347,6 +1419,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1366,6 +1441,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1385,6 +1463,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1404,6 +1485,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1423,6 +1507,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1442,6 +1529,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1461,6 +1551,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1480,6 +1573,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1499,6 +1595,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1518,6 +1617,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1537,6 +1639,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1556,6 +1661,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1575,6 +1683,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1594,6 +1705,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1613,6 +1727,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1632,6 +1749,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1651,6 +1771,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1670,6 +1793,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1689,6 +1815,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1708,6 +1837,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1727,6 +1859,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1746,6 +1881,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1765,6 +1903,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1784,6 +1925,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1803,6 +1947,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1822,6 +1969,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1841,6 +1991,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1860,6 +2013,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1879,6 +2035,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1898,6 +2057,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1917,6 +2079,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1936,6 +2101,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1955,6 +2123,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1974,6 +2145,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -1993,6 +2167,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -2012,6 +2189,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -2031,6 +2211,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -2050,6 +2233,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -2069,6 +2255,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -2088,6 +2277,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -2107,6 +2299,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -2126,6 +2321,9 @@
       "measurement_due_at": "",
       "imported_result_fields": [],
       "captured_api_fields": [],
+      "public_visibility_status": "",
+      "public_visibility_ok": null,
+      "public_visibility_note": "",
       "status": "scheduled_future",
       "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
       "visible_in_future_queue": true
@@ -2140,6 +2338,7 @@
     "Published_Log.csv is the source of truth for public URLs.",
     "Metric capture commands only target logged X/Facebook campaign post IDs.",
     "Post-slot proof commands only capture executor state and export confirmed Worker URLs.",
-    "Unknown metrics remain blank until an API capture or visible analytics source proves them."
+    "Unknown metrics remain blank until an API capture or visible analytics source proves them.",
+    "Public post visibility checks are read-only and do not replace X/Meta metric capture."
   ]
 }

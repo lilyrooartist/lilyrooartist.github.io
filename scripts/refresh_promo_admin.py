@@ -85,6 +85,15 @@ STEPS = [
         "preserve_on_failure": ["admin/content/Published_Log.csv"],
     },
     {
+        "name": "capture_brand_post_visibility",
+        "command": ["python3", "scripts/capture_brand_post_visibility.py"],
+        "required": False,
+        "preserve_on_failure": [
+            "data/brand_post_visibility.json",
+            "admin/reports/brand-post-visibility.md",
+        ],
+    },
+    {
         "name": "capture_x_post_results_24h",
         "command": ["python3", "scripts/capture_x_post_results.py", "--min-age-hours", "24", "--allow-empty", "--skip-missing-secrets", "--apply-results"],
         "required": False,
