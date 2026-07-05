@@ -8,12 +8,13 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32.png" />
   <style>
     body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:#0c0d12;color:#eef0f7}
-    .layout{display:grid;grid-template-columns:220px 1fr;min-height:100vh}
-    .nav{border-right:1px solid #2a2f44;background:#0f1320;padding:16px;position:sticky;top:0;height:100vh}
-    .brand{font-weight:800;margin-bottom:14px}
-    .tab{display:block;width:100%;text-align:left;background:#151b2d;color:#d9def1;border:1px solid #2d3655;border-radius:10px;padding:10px 12px;margin:8px 0;cursor:pointer}
+    .layout{min-height:100vh}
+    .nav{border-bottom:1px solid #2a2f44;background:#0f1320;padding:12px 22px;position:sticky;top:0;z-index:20;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+    .brand{font-weight:850;margin:0 auto 0 0}
+    .tab{display:inline-flex;align-items:center;justify-content:center;width:auto;text-align:left;background:#151b2d;color:#d9def1;border:1px solid #2d3655;border-radius:8px;padding:8px 11px;margin:0;cursor:pointer;font-weight:750}
     .tab.active{background:#29406f;color:#fff;border-color:#4f79c6}
-    .content{padding:22px;max-width:1300px;width:100%;box-sizing:border-box}
+    .nav>p.muted{display:none}
+    .content{padding:18px 22px 30px;max-width:1420px;width:100%;box-sizing:border-box;margin:0 auto}
     .panel{display:none}.panel.active{display:block}
     .main-grid{display:grid;grid-template-columns:minmax(0,1fr) 390px;gap:16px;align-items:start}
     .card{background:#141722;border:1px solid #2a2f44;border-radius:14px;padding:14px;margin:10px 0}
@@ -94,6 +95,7 @@
     .song-tools{background:#141722;border:1px solid #2a2f44;border-radius:14px;padding:14px;margin:10px 0 14px}
     .song-count{font-size:12px;color:#9ba3bf;margin-top:9px}
     .reports-shell{display:grid;gap:14px}
+    #panel-dashboard .report-hero{display:none}
     .report-hero{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;background:linear-gradient(135deg,#141722 0%,#151c2f 52%,#18202b 100%);border:1px solid #2a2f44;border-radius:16px;padding:18px}
     .report-hero h1{margin:0 0 6px;font-size:30px;line-height:1.05}
     .report-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
@@ -106,23 +108,24 @@
     .status-chip.working{background:#14203a;color:#dce8ff;border-color:#416095}
 	    .report-alert{border:1px solid #6c4b16;background:#2a2115;color:#ffd88a;border-radius:12px;padding:11px 12px;font-size:13px}
 	    .report-alert[hidden]{display:none}
-	    .simple-dashboard{display:grid;gap:14px}
-	    .simple-section{background:#141722;border:1px solid #2a2f44;border-radius:14px;padding:15px;min-width:0}
+	    .simple-dashboard{display:grid;gap:16px}
+	    .simple-section{background:#141722;border:1px solid #2a2f44;border-radius:10px;padding:15px;min-width:0}
+	    .simple-status-band{background:linear-gradient(135deg,#151b2d 0%,#121827 58%,#101523 100%);border-color:#3a4b75;padding:18px}
 	    .simple-section-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;margin-bottom:12px}
-	    .simple-section-head h2{margin:0;font-size:20px}
-	    .simple-section-head p{margin:5px 0 0;color:#cdd5ec;line-height:1.45;font-size:13px}
-	    .simple-status-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
-	    .simple-status-card{border:1px solid #26314e;border-radius:12px;background:#101523;padding:12px;min-height:112px;box-sizing:border-box}
+	    .simple-section-head h2{margin:0;font-size:22px}
+	    .simple-section-head p{margin:6px 0 0;color:#d7def2;line-height:1.45;font-size:14px;max-width:850px}
+	    .simple-status-strip{display:grid;grid-template-columns:repeat(4,minmax(170px,1fr));gap:10px}
+	    .simple-status-card{border:1px solid #26314e;border-radius:8px;background:#101523;padding:12px;min-height:112px;box-sizing:border-box}
 	    .simple-status-card .metric-label{font-size:11px}
 	    .simple-status-card strong{display:block;color:#fff;font-size:22px;line-height:1.1;margin-top:9px;word-break:break-word}
 	    .simple-status-card p{margin:8px 0 0;color:#9ba3bf;font-size:12px;line-height:1.4}
-	    .simple-columns{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr);gap:14px;align-items:start}
+	    .simple-columns{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(360px,.78fr);gap:14px;align-items:start}
 	    .simple-list{display:grid;gap:10px}
-	    .simple-item{border:1px solid #26314e;border-radius:12px;background:#101523;padding:12px}
+	    .simple-item{border:1px solid #26314e;border-radius:8px;background:#101523;padding:12px}
 	    .simple-item-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;margin-bottom:6px}
-	    .simple-item-title{font-weight:850;color:#f4f7ff;line-height:1.25}
+	    .simple-item-title{font-weight:850;color:#f4f7ff;line-height:1.25;font-size:15px}
 	    .simple-item-meta{font-size:12px;color:#9ba3bf;line-height:1.4}
-	    .simple-item-copy{font-size:13px;line-height:1.45;color:#cdd5ec;margin-top:6px}
+	    .simple-item-copy{font-size:14px;line-height:1.45;color:#d7def2;margin-top:6px}
 	    .simple-item-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}
 	    .simple-item-actions a{font-size:11px;text-decoration:none;border:1px solid #334062;border-radius:999px;padding:4px 8px;background:#111827;color:#cfe3ff;font-weight:800}
 	    .simple-item-actions a:hover{border-color:#4f79c6;background:#14203a}
@@ -219,10 +222,13 @@
     .auth-card input{box-sizing:border-box;width:100%;background:#0f1320;color:#eef0f7;border:1px solid #334062;border-radius:8px;padding:10px;margin:10px 0}
     .auth-error{min-height:18px;color:#ff9fa8;font-size:12px;margin:4px 0 10px}
 	    @media(max-width:1180px){.report-grid,.today-grid,.simple-columns{grid-template-columns:1fr}}
-    @media(max-width:1080px){.main-grid,.library-grid{grid-template-columns:1fr}.metric-grid,.library-stats,.simple-status-strip{grid-template-columns:repeat(2,minmax(0,1fr))}.layout{grid-template-columns:1fr}.nav,.library-sidebar{position:static;height:auto;border-right:0;border-bottom:1px solid #2a2f44}.report-hero,.library-hero,.simple-section-head{flex-direction:column}.report-actions,.library-actions{justify-content:flex-start}}
+    @media(max-width:1080px){.main-grid,.library-grid{grid-template-columns:1fr}.metric-grid,.library-stats,.simple-status-strip{grid-template-columns:repeat(2,minmax(0,1fr))}.nav,.library-sidebar{position:static;height:auto;border-right:0;border-bottom:1px solid #2a2f44}.report-hero,.library-hero,.simple-section-head{flex-direction:column}.report-actions,.library-actions{justify-content:flex-start}}
     @media(max-width:620px){
       .content{padding:14px}
-      .song-grid,.story-grid,.metric-grid,.library-stats,.source-grid,.simple-status-strip{grid-template-columns:1fr}
+      .song-grid,.story-grid,.metric-grid,.library-stats,.source-grid{grid-template-columns:1fr}
+      .nav{padding:10px 14px}
+      .brand{flex-basis:100%;margin-bottom:2px}
+      .tab{flex:1 1 auto;padding:8px 9px}
       .report-hero h1,.library-hero h1{font-size:25px}
       .metric-value{font-size:24px}
       .section-head{display:block}
@@ -406,7 +412,7 @@
 	        <div class="report-alert" id="reports-alert" hidden></div>
 
 	        <section class="simple-dashboard" aria-label="Simple promotion dashboard">
-	          <section class="simple-section" aria-labelledby="simple-status-heading">
+	          <section class="simple-section simple-status-band" aria-labelledby="simple-status-heading">
 	            <div class="simple-section-head">
 	              <div>
 	                <h2 id="simple-status-heading">Status</h2>
@@ -451,7 +457,7 @@
 	        </section>
 
 	        <details class="diagnostic-details legacy-overview-details">
-	          <summary>Detailed status cards</summary>
+	          <summary>Detailed status cards and metrics</summary>
 	          <div class="diagnostic-inner">
 
 	        <section class="today-grid" aria-label="Today summary">
@@ -524,7 +530,7 @@
 	        </details>
 
 	        <details class="diagnostic-details">
-	          <summary>Detailed reports and health checks</summary>
+	          <summary>Advanced reports, source files, and health checks</summary>
 	          <div class="diagnostic-inner">
 	          <div class="report-grid">
 	            <div class="report-stack">
@@ -26542,6 +26548,17 @@ Generated: 2026-07-05T20:33:02.132811Z
     return slug.toLowerCase().split('-').filter(Boolean).map(part=>part.charAt(0).toUpperCase()+part.slice(1)).join(' ');
   }
 
+  function simpleWhen(prefix, value){
+    const formatted=formatQueueDate(value);
+    return formatted==='--' ? prefix : `${prefix} ${formatted}`;
+  }
+
+  function publicResultCopy(row){
+    const copy=simpleShortText(row.text||row.hook||row.notes||row.content_id||row.id||'');
+    if(row.post_url||row.post_id_or_url) return copy || 'The public post URL is saved in the published log.';
+    return copy || 'This activity is recorded in the admin sources.';
+  }
+
   function simpleStatusCard(label, value, note, className='neutral'){
     return `<article class="simple-status-card">
       <div class="metric-label">${escapeHtml(label)}</div>
@@ -26631,32 +26648,32 @@ Generated: 2026-07-05T20:33:02.132811Z
     const nextDate=preflightSummary.next_window_date||readoutSummary.next_scheduled_at||futurePosts[0]?.scheduled_at||'';
     const nextDateLabel=nextDate?formatDateOnly(nextDate):'None queued';
     const metricState=readyMetricRows.length
-      ? `${readyMetricRows.length} due`
+      ? `${readyMetricRows.length} ready`
       : waitingMetricRows.length
-        ? `${waitingMetricRows.length} pending`
+        ? `${waitingMetricRows.length} waiting`
         : uniqueMissingSecrets.length
-          ? 'Credentials needed'
+          ? 'Connection needed'
           : 'Clear';
 
     const topClass=preflightReady && !Number(readoutSummary.attention_rows||0) ? (readyMetricRows.length||uniqueMissingSecrets.length?'warn':'ok') : 'warn';
     if(updatedChip){
       updatedChip.className=`status-chip ${topClass}`;
-      updatedChip.textContent=preflightReady?'Campaign active':'Check campaign';
+      updatedChip.textContent=preflightReady?'Active':'Needs check';
     }
     if(statusCopy){
       const metricPhrase=readyMetricRows.length
-        ? `${readyMetricRows.length} recent post${readyMetricRows.length===1?' is':'s are'} ready for metrics.`
+        ? `${readyMetricRows.length} recent post${readyMetricRows.length===1?' is':'s are'} ready for result capture.`
         : uniqueMissingSecrets.length
-          ? 'Metric capture needs API credentials, but the public post URLs are logged.'
-          : 'No immediate measurement follow-up is visible.';
-      statusCopy.textContent=`Analog Myth promotion is active. Recent X/Facebook posts are public and logged; the next auto window is ${nextDateLabel}. ${metricPhrase}`;
+          ? 'Public post URLs are logged; result counts need the X/Facebook metric connection.'
+          : 'No immediate result follow-up is visible.';
+      statusCopy.textContent=`Analog Myth is the active promotion focus. Recent X/Facebook posts are public and logged. The next automated window is ${nextDateLabel}. ${metricPhrase}`;
     }
 
     statusStrip.innerHTML=[
-      simpleStatusCard('Campaign', preflightReady?'Queued':'Check needed', `${futureCount} future Analog Myth posts are visible in the queue.`, preflightReady?'ok':'warn'),
-      simpleStatusCard('Recent posts', `${postedCount} logged`, 'Public result URLs are recorded from the executor and published log.', postedCount?'ok':'neutral'),
-      simpleStatusCard('Measurement', metricState, uniqueMissingSecrets.length?'X/Facebook API metric credentials are needed before importing results.':'Metric follow-up is tracked by post window.', readyMetricRows.length||uniqueMissingSecrets.length?'warn':'ok'),
-      simpleStatusCard('Next window', nextDateLabel, `${Number(preflightSummary.expected_post_count||nextWindowPosts.length||0)} automated post${Number(preflightSummary.expected_post_count||nextWindowPosts.length||0)===1?'':'s'} scheduled for the next window.`, preflightReady?'ok':'neutral')
+      simpleStatusCard('Focus', preflightReady?'Analog Myth':'Needs check', `${futureCount} approved Analog Myth posts are still in the queue.`, preflightReady?'ok':'warn'),
+      simpleStatusCard('Posted', `${postedCount} logged`, 'Public post links are saved in the activity log.', postedCount?'ok':'neutral'),
+      simpleStatusCard('Results', metricState, uniqueMissingSecrets.length?'Result counts need the X/Facebook metric connection.':'Result follow-up is tracked by post window.', readyMetricRows.length||uniqueMissingSecrets.length?'warn':'ok'),
+      simpleStatusCard('Next', nextDateLabel, `${Number(preflightSummary.expected_post_count||nextWindowPosts.length||0)} automated post${Number(preflightSummary.expected_post_count||nextWindowPosts.length||0)===1?'':'s'} scheduled in the next window.`, preflightReady?'ok':'neutral')
     ].join('');
 
     const recentItems=postedRows
@@ -26665,9 +26682,9 @@ Generated: 2026-07-05T20:33:02.132811Z
       .slice(0,6)
       .map(row=>{
         const status=simpleActivityStatus(row);
-        const title=`${simpleText(row.platform,'Platform')}: ${titleFromCampaignId(row.id)}`;
-        const meta=`${formatQueueDate(row.scheduled_at)} - ${simpleText(row.id,'campaign post')}`;
-        return simpleActivityItem(title,meta,simpleShortText(row.text||row.hook||row.id),status,row.post_url);
+        const title=`Published to ${simpleText(row.platform,'Platform')}: ${titleFromCampaignId(row.id)}`;
+        const meta=simpleWhen('Posted', row.scheduled_at);
+        return simpleActivityItem(title,meta,publicResultCopy(row),status,row.post_url);
       });
 
     if(!recentItems.length){
@@ -26678,9 +26695,9 @@ Generated: 2026-07-05T20:33:02.132811Z
       fallbackRows.forEach(row=>{
         const status=simpleActivityStatus(row);
         recentItems.push(simpleActivityItem(
-          `${simpleText(row.platform,'Platform')}: ${simpleText(row.content_id,'published post')}`,
-          `${formatDateOnly(row.date)} - published log`,
-          simpleShortText(row.hook||row.notes||row.content_id),
+          `Published to ${simpleText(row.platform,'Platform')}: ${simpleText(row.song_era||titleFromCampaignId(row.content_id),'published post')}`,
+          `${formatDateOnly(row.date)} - saved in published log`,
+          publicResultCopy(row),
           status,
           row.post_id_or_url
         ));
@@ -26689,10 +26706,10 @@ Generated: 2026-07-05T20:33:02.132811Z
 
     if(uniqueMissingSecrets.length){
       recentItems.push(simpleActivityItem(
-        'Metric capture checked',
-        'X/Facebook result import',
-        `Post URLs are logged, but metric import skipped because ${uniqueMissingSecrets.join(', ')} are not available to this runtime.`,
-        {label:'Waiting',className:'warn',note:'This affects result numbers only, not whether the posts are public.'},
+        'Result capture checked',
+        'Measurement follow-up',
+        `Post links are saved. Automatic result counts are waiting for the X/Facebook metric connection.`,
+        {label:'Waiting',className:'warn',note:'This affects result numbers only; it does not change whether the posts are public.'},
         ''
       ));
     }
@@ -26701,20 +26718,20 @@ Generated: 2026-07-05T20:33:02.132811Z
     const upcomingItems=[];
     if(uniqueMissingSecrets.length){
       upcomingItems.push(simpleUpcomingItem(
-        'Add measurement API credentials',
-        'Needed for X/Facebook result import',
-        `Add ${uniqueMissingSecrets.join(', ')} to GitHub Actions secrets and the local social API env, then rerun the admin refresh. This imports result counts; the posts are already public and logged.`,
-        {label:'Needed',className:'warn'},
+        'Connect X/Facebook result metrics',
+        'Needed for automatic result counts',
+        'The posts are already public and logged. Connecting the metric lane lets the admin import views, likes, comments, and shares automatically.',
+        {label:'Results setup',className:'warn'},
         '/admin/reports/social-blocker-input-status.md'
       ));
     }
 
     if(readyMetricRows.length){
       upcomingItems.push(simpleUpcomingItem(
-        'Capture results for the July 4 posts',
+        'Import results for recent posts',
         `${readyMetricRows.length} post${readyMetricRows.length===1?'':'s'} ready for measurement`,
-        'The public URLs are already saved. The next result step is importing X/Facebook metrics when credentials are available.',
-        {label:'Due now',className:'warn'},
+        'The public URLs are already saved. The next result step is pulling X/Facebook performance numbers.',
+        {label:'Ready',className:'warn'},
         '/admin/reports/brand-growth-readout.md'
       ));
     }else if(waitingMetricRows.length){
@@ -26722,7 +26739,7 @@ Generated: 2026-07-05T20:33:02.132811Z
       upcomingItems.push(simpleUpcomingItem(
         'Next measurement window',
         formatQueueDate(first.measurement_due_at),
-        `${waitingMetricRows.length} recent post${waitingMetricRows.length===1?' is':'s are'} posted and waiting for the first metric window.`,
+        `${waitingMetricRows.length} recent post${waitingMetricRows.length===1?' is':'s are'} public and waiting for the first result window.`,
         {label:'Scheduled',className:'neutral'},
         '/admin/reports/brand-growth-readout.md'
       ));
@@ -26732,9 +26749,9 @@ Generated: 2026-07-05T20:33:02.132811Z
     nextPosts.slice(0,4).forEach(post=>{
       upcomingItems.push(simpleUpcomingItem(
         `${simpleText(post.platform,'Platform')}: ${titleFromCampaignId(post.id)}`,
-        formatQueueDate(post.scheduled_at),
+        simpleWhen('Scheduled', post.scheduled_at),
         simpleShortText(post.text||post.hook||`${simpleText(post.post_type,'Post')} is approved for automated publishing.`),
-        {label:simpleText(post.execution_mode,'auto'),className:'ok'},
+        {label:'Auto scheduled',className:'ok'},
         ''
       ));
     });
@@ -26742,8 +26759,8 @@ Generated: 2026-07-05T20:33:02.132811Z
     futurePosts.slice(nextPosts.length, nextPosts.length+4).forEach(post=>{
       upcomingItems.push(simpleUpcomingItem(
         `${simpleText(post.platform,'Platform')}: ${titleFromCampaignId(post.id)}`,
-        formatQueueDate(post.scheduled_at),
-        `${simpleText(post.post_type,'Post')} queued for automated Analog Myth promotion.`,
+        simpleWhen('Scheduled', post.scheduled_at),
+        `${simpleText(post.post_type,'Post')} is queued for automated Analog Myth promotion.`,
         {label:'Queued',className:'neutral'},
         ''
       ));
