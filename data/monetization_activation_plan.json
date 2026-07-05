@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-05T21:42:26.740866Z",
+  "generated_at": "2026-07-05T21:47:23.664541Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -27,14 +27,14 @@
   },
   "actions": [
     {
-      "label": "Current operations next action: Collect experiment result metrics",
+      "label": "Current operations next action: Connect automated brand metrics capture",
       "phase": "Operations packet",
-      "status": "waiting_for_user",
-      "detail": "15 logged experiment post(s) have 84 result field(s) waiting; these results rank repeatable formats.",
-      "command": "python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run",
+      "status": "waiting_for_credentials",
+      "detail": "2 fresh Analog Myth post(s) are ready to measure once X/Meta metric credentials are connected.",
+      "command": "python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X && python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK",
       "after_review_command": "",
       "context": {
-        "kind": "experiment_results",
+        "kind": "brand_growth_metrics",
         "urgency": "high"
       }
     }

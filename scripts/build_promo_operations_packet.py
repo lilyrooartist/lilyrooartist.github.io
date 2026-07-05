@@ -21,6 +21,8 @@ EXPERIMENT_RESULT_CLIPBOARD = ROOT / "data" / "experiment_result_clipboard.json"
 POSTING_AUTOMATION_STATUS = ROOT / "data" / "posting_automation_status.json"
 BRAND_GROWTH_READOUT = ROOT / "data" / "brand_growth_readout.json"
 BRAND_GROWTH_PREFLIGHT = ROOT / "data" / "brand_growth_preflight.json"
+X_POST_RESULTS = ROOT / "data" / "x_post_results.json"
+FACEBOOK_POST_RESULTS = ROOT / "data" / "facebook_post_results.json"
 TIKTOK_PREFLIGHT = ROOT / "data" / "tiktok_setup_preflight.json"
 OUT = ROOT / "data" / "promo_operations_packet.json"
 REPORT = ROOT / "admin" / "reports" / "promo-operations-packet.md"
@@ -87,6 +89,8 @@ def phase_for(action: dict) -> str:
         return "Remove manual-only lanes"
     if kind == "brand_growth_proof":
         return "Automated brand campaign"
+    if kind == "brand_growth_metrics":
+        return "Measure active brand campaign"
     if kind == "experiment_results":
         return "Collect experiment results"
     if kind == "apply_approved":
@@ -130,6 +134,12 @@ def urgency_for(action: dict, now: datetime) -> tuple[str, str]:
             if hours <= 48:
                 return "high", "The active Analog Myth proof window is coming up within 48 hours."
         return "medium", "The active Analog Myth X/Facebook campaign is scheduled and ready."
+    if kind == "brand_growth_metrics":
+        missing = context.get("missing_secret_names") or []
+        count = len(context.get("ready_post_ids") or [])
+        if missing:
+            return "high", f"{count} fresh Analog Myth post(s) are ready to measure once X/Meta metric credentials are connected."
+        return "high", f"{count} fresh Analog Myth post(s) are ready for automated metric capture."
     if kind == "experiment_results":
         pending = int(context.get("pending_result_field_count") or 0)
         cards = int(context.get("metric_card_count") or 0)
@@ -172,6 +182,8 @@ def enrich_actions(actions: list[dict], now: datetime) -> list[dict]:
         item["urgency_reason"] = reason
         if urgency == "blocked":
             item["status"] = "blocked"
+        elif action.get("kind") == "brand_growth_metrics" and (action.get("context") or {}).get("missing_secret_names"):
+            item["status"] = "waiting_for_credentials"
         elif action.get("kind") in {"approval_review", "manual_metrics", "experiment_results", "backlog_reschedule", "scheduled_approval_batch"}:
             item["status"] = "waiting_for_user"
         elif action.get("kind") == "platform_fix":
@@ -713,6 +725,69 @@ def brand_growth_proof_actions(posting_status, readout, preflight):
     ]
 
 
+def brand_growth_metric_actions(readout, x_results, facebook_results):
+    summary = readout.get("summary") or {}
+    rows = readout.get("rows") or []
+    ready_rows = [row for row in rows if row.get("status") == "ready_for_metric_capture"]
+    if not ready_rows:
+        return []
+
+    ready_x = [row.get("id") for row in ready_rows if row.get("platform") == "X" and row.get("id")]
+    ready_facebook = [row.get("id") for row in ready_rows if row.get("platform") == "Facebook" and row.get("id")]
+    commands = [
+        summary.get("x_metric_capture_command") or "",
+        summary.get("facebook_metric_capture_command") or "",
+    ]
+    command = " && ".join(command for command in commands if command)
+    missing = sorted(set(
+        (x_results.get("summary") or {}).get("missing_secret_names") or []
+    ) | set(
+        (facebook_results.get("summary") or {}).get("missing_secret_names") or []
+    ))
+
+    if missing:
+        label = "Connect automated brand metrics capture"
+        note = (
+            "Fresh Analog Myth posts are ready for measurement, but X/Meta result capture is waiting on API credentials. "
+            "Add the missing names to ../secrets/social_api.env and GitHub Actions secrets, then rerun the capture commands."
+        )
+    else:
+        label = "Capture active brand campaign metrics"
+        note = "Fresh Analog Myth posts are ready for automated X/Facebook result capture."
+
+    return [
+        command_row(
+            label,
+            command,
+            "brand_growth_metrics",
+            3,
+            {
+                "status": "missing_metric_credentials" if missing else "ready",
+                "ready_post_count": len(ready_rows),
+                "ready_post_ids": [row.get("id") for row in ready_rows if row.get("id")],
+                "ready_x_post_ids": ready_x,
+                "ready_facebook_post_ids": ready_facebook,
+                "missing_secret_names": missing,
+                "x_metric_capture_command": summary.get("x_metric_capture_command") or "",
+                "facebook_metric_capture_command": summary.get("facebook_metric_capture_command") or "",
+                "local_secret_source": "secrets/social_api.env",
+                "secret_template": "data/social_blocker_secret_template.env",
+                "github_actions_secret_presence": "data/github_actions_secret_presence.json",
+                "report_path": summary.get("report_path") or "admin/reports/brand-growth-readout.md",
+                "post_urls": [
+                    {
+                        "post_id": row.get("id") or "",
+                        "platform": row.get("platform") or "",
+                        "url": row.get("post_url") or "",
+                    }
+                    for row in ready_rows
+                ],
+                "note": note,
+            },
+        )
+    ]
+
+
 def experiment_result_actions(result_clipboard):
     summary = result_clipboard.get("summary") or {}
     metric_card_count = int(summary.get("metric_card_count") or 0)
@@ -1030,8 +1105,11 @@ def main() -> int:
     posting_status = read_json(POSTING_AUTOMATION_STATUS, {})
     brand_growth_readout = read_json(BRAND_GROWTH_READOUT, {})
     brand_growth_preflight = read_json(BRAND_GROWTH_PREFLIGHT, {})
+    x_post_results = read_json(X_POST_RESULTS, {})
+    facebook_post_results = read_json(FACEBOOK_POST_RESULTS, {})
     actions = (
         brand_growth_proof_actions(posting_status, brand_growth_readout, brand_growth_preflight)
+        + brand_growth_metric_actions(brand_growth_readout, x_post_results, facebook_post_results)
         + scheduled_approval_batch_actions(scheduled_approval)
         + scheduled_approval_review_actions(scheduled_approval)
         + backlog_reschedule_actions(status, backlog_preview)
@@ -1055,6 +1133,7 @@ def main() -> int:
         "manual_distribution_actions": sum(1 for action in actions if action["kind"] == "manual_distribution"),
         "manual_lane_cleanup_actions": sum(1 for action in actions if action["kind"] == "manual_lane_cleanup"),
         "brand_growth_proof_actions": sum(1 for action in actions if action["kind"] == "brand_growth_proof"),
+        "brand_growth_metric_actions": sum(1 for action in actions if action["kind"] == "brand_growth_metrics"),
         "experiment_result_actions": sum(1 for action in actions if action["kind"] == "experiment_results"),
         "backlog_reschedules": sum(1 for action in actions if action["kind"] == "backlog_reschedule"),
         "safe_apply_commands": sum(1 for action in actions if action["kind"] == "apply_approved"),
@@ -1081,6 +1160,8 @@ def main() -> int:
             "posting_automation_status": str(POSTING_AUTOMATION_STATUS.relative_to(ROOT)),
             "brand_growth_readout": str(BRAND_GROWTH_READOUT.relative_to(ROOT)),
             "brand_growth_preflight": str(BRAND_GROWTH_PREFLIGHT.relative_to(ROOT)),
+            "x_post_results": str(X_POST_RESULTS.relative_to(ROOT)),
+            "facebook_post_results": str(FACEBOOK_POST_RESULTS.relative_to(ROOT)),
             "tiktok_setup_preflight": str(TIKTOK_PREFLIGHT.relative_to(ROOT)),
         },
         "next_action": next_action,

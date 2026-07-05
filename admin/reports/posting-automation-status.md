@@ -1,6 +1,6 @@
 # Posting Automation Status - Lily Roo
 
-Generated: 2026-07-05T21:42:23.867081Z
+Generated: 2026-07-05T21:47:20.079259Z
 
 ## Summary
 - Status: **blocked**
@@ -19,10 +19,10 @@ Generated: 2026-07-05T21:42:23.867081Z
   - Evidence: data/brand_growth_preflight.json
   - Next: Refresh brand growth readout and preflight.
 - **Scheduled refresh workflow** - `ready`
-  - Detail: 17 */6 * * *, 05 16 * * *; latest run in_progress / pending
+  - Detail: 17 */6 * * *, 05 16 * * *; latest run completed / success
   - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28755833934
 - **Safe admin refresh** - `ready`
-  - Detail: 17 refresh commands captured at 2026-07-05T21:42:21.714363Z
+  - Detail: 17 refresh commands captured at 2026-07-05T21:47:18.361794Z
   - Evidence: data/promo_admin_refresh_run.json
 - **Scheduler dry-run authentication** - `ready`
   - Detail: HTTP 200 using bearer auth; due=0 would_post=0
@@ -39,9 +39,9 @@ Generated: 2026-07-05T21:42:23.867081Z
   - Evidence: data/tiktok_setup_preflight.json
   - Next: Direct TikTok public posting is not in the active plan until platform approval is explicit; upload-draft/manual-finish posting is excluded.
 - **Blocker input readiness** - `blocked`
-  - Detail: 1 ready; 5 missing local input; 1 external action needed
+  - Detail: 3 ready; 3 missing local input; 1 external action needed
   - Evidence: data/social_blocker_input_status.json
-  - Next: Add X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET to /home/runner/work/lilyrooartist.github.io/secrets/social_api.env.
+  - Next: Add X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET to /Users/tod.famous/Documents/New project/secrets/social_api.env.
 - **Story throughput** - `ready`
   - Detail: 6 tracked; 0 queued; 0 past due without URL
   - Evidence: data/story_throughput_tracking.json
