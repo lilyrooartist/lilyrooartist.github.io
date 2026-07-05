@@ -103,7 +103,11 @@ def next_window(posts: list[dict], now: datetime) -> dict:
 def check_url(url: str, label: str, timeout: int = 20) -> dict:
     if not url:
         return {"label": label, "url": "", "ok": False, "status": 0, "content_type": "", "content_length": "", "error": "missing_url"}
-    headers = {"User-Agent": "LilyRooBrandGrowthPreflight/1.0"}
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/126 Safari/537.36",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.9",
+    }
     for method in ("HEAD", "GET"):
         request = urllib.request.Request(url, headers=headers, method=method)
         if method == "GET":
@@ -123,6 +127,18 @@ def check_url(url: str, label: str, timeout: int = 20) -> dict:
         except urllib.error.HTTPError as exc:
             if method == "HEAD" and exc.code in {403, 405, 501}:
                 continue
+            if exc.code in {403, 429} and "distrokid.com/hyperfollow/" in url:
+                return {
+                    "label": label,
+                    "url": url,
+                    "ok": False,
+                    "status": exc.code,
+                    "content_type": "",
+                    "content_length": "",
+                    "error": f"HTTP {exc.code}: {exc.reason}",
+                    "readiness_warning": True,
+                    "warning_reason": "distrokid_bot_blocked",
+                }
             if exc.code == 429 and ("youtube.com" in url or "youtu.be" in url):
                 return {
                     "label": label,
@@ -269,6 +285,7 @@ def build_payload() -> dict:
             "Preflight is read-only; it calls the scheduler dry-run endpoint and HEAD-checks public URLs.",
             "It does not publish, approve, mutate, or import metrics.",
             "A ready preflight proves only that the next window is executable at the simulated due time.",
+            "DistroKid HyperFollow 403/429 checks are non-blocking warnings because GitHub-hosted probes can be bot-filtered while the browser-visible public link remains the intended listening hub.",
             "YouTube 429 link checks are non-blocking warnings because GitHub-hosted probes can be rate-limited while the scheduler and Lily Roo-hosted links remain ready.",
         ],
     }
