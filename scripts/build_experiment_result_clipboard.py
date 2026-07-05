@@ -435,9 +435,42 @@ def post_log_measurement_handoff(manual_posting: dict, summary: dict, missing_ca
             "log_preview_command": row.get("preview_command_template") or "",
             "log_apply_command": row.get("apply_command_template") or "",
         })
+    if handoff_rows:
+        handoff_sequence = [
+            "Confirm each active handoff row has a real public URL before collecting metrics.",
+            "Refresh Admin so Published_Log.csv rows become experiment result cards.",
+            f"Collect first visible metrics from YouTube Studio Community analytics {default_due_after_hours} hours after URL logging.",
+            "Fill one wide entry CSV row per logged Community post.",
+            "Run the wide result import preview before applying metrics.",
+        ]
+        completion_evidence = [
+            "Published_Log.csv contains the logged public post URL.",
+            "data/experiment_result_clipboard.json shows the post as a metric card instead of a missing-public-url card.",
+            "data/experiment_result_entry_wide_template.csv has first-measurement values plus evidence_note for the post.",
+            "The wide import preview reports only the intended metric updates.",
+        ]
+        guardrail = "This handoff is a template; do not import metrics until a real public URL and source_row exist."
+        next_action = "Use active handoff rows only to log real public URLs and collect metrics after automation provides a post."
+    else:
+        handoff_sequence = [
+            "No non-automated post cards are active; do not create a manual post.",
+            "Use automated social execution rows and existing Published_Log.csv URLs for metric collection.",
+            f"Collect first visible metrics {default_due_after_hours} hours after an automated post URL is logged.",
+            "Fill one wide entry CSV row per logged public post.",
+            "Run the wide result import preview before applying metrics.",
+        ]
+        completion_evidence = [
+            "Published_Log.csv contains a real public URL from an automated post.",
+            "data/experiment_result_clipboard.json shows the automated post as a metric card instead of a missing-public-url card.",
+            "data/experiment_result_entry_wide_template.csv has first-measurement values plus evidence_note for the post.",
+            "The wide import preview reports only the intended metric updates.",
+        ]
+        guardrail = "Do not create manual posts from this handoff; it is only actionable after a real public URL is logged by automation or already exists in Published_Log.csv."
+        next_action = "Manual posting lane is inactive; collect metrics only from logged automated posts."
     return {
         "status": "waiting_for_public_urls" if handoff_rows else "clear",
         "source_session": session.get("session_name") or "",
+        "next_action": next_action,
         "manual_posting_report": "admin/reports/manual-posting-clipboard.md",
         "entry_csv_path": summary.get("entry_csv_path") or "",
         "wide_entry_csv_path": summary.get("wide_entry_csv_path") or "",
@@ -448,20 +481,9 @@ def post_log_measurement_handoff(manual_posting: dict, summary: dict, missing_ca
         "wide_import_preview_command": summary.get("wide_result_import_preview_command") or "",
         "wide_import_apply_command": summary.get("wide_result_import_apply_command") or "",
         "rows": handoff_rows,
-        "handoff_sequence": [
-            "Post each manual-session card and log the real public URL.",
-            "Refresh Admin so Published_Log.csv rows become experiment result cards.",
-            f"Collect first visible metrics from YouTube Studio Community analytics {default_due_after_hours} hours after URL logging.",
-            "Fill one wide entry CSV row per logged Community post.",
-            "Run the wide result import preview before applying metrics.",
-        ],
-        "completion_evidence": [
-            "Published_Log.csv contains the manual-session post URL.",
-            "data/experiment_result_clipboard.json shows the post as a metric card instead of a missing-public-url card.",
-            "data/experiment_result_entry_wide_template.csv has first-measurement values plus evidence_note for the post.",
-            "The wide import preview reports only the intended metric updates.",
-        ],
-        "guardrail": "This handoff is a template; do not import metrics until a real public URL and source_row exist.",
+        "handoff_sequence": handoff_sequence,
+        "completion_evidence": completion_evidence,
+        "guardrail": guardrail,
     }
 
 
@@ -687,7 +709,11 @@ def build_markdown(payload: dict) -> str:
     lines.extend(["", "## Post-Log Measurement Handoff"])
     lines.append(f"- Status: **{handoff.get('status', 'unknown')}**")
     lines.append(f"- Source session: {handoff.get('source_session') or 'not available'}")
-    lines.append(f"- Manual posting report: `{handoff.get('manual_posting_report') or 'not available'}`")
+    if handoff.get("rows"):
+        lines.append(f"- Manual posting report: `{handoff.get('manual_posting_report') or 'not available'}`")
+    else:
+        lines.append("- Manual posting lane: inactive")
+    lines.append(f"- Next action: {handoff.get('next_action') or 'Wait for logged public URLs.'}")
     lines.append(f"- Wide entry CSV after URL logging: `{handoff.get('wide_entry_csv_path') or 'not available'}`")
     lines.append(f"- Wide import preview after logging: `{handoff.get('wide_import_preview_command') or 'not available'}`")
     lines.append(f"- First measurement due: **{handoff.get('first_measurement_due_after_hours') or DEFAULT_FIRST_MEASUREMENT_DUE_AFTER_HOURS} hours after URL logging**")

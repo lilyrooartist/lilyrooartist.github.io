@@ -1,6 +1,6 @@
 # Experiment Result Clipboard - Lily Roo
 
-Generated: 2026-07-05T21:01:55.422888Z
+Generated: 2026-07-05T21:09:31.480042Z
 
 ## Summary
 - Status: **needs_values**
@@ -426,22 +426,23 @@ Generated: 2026-07-05T21:01:55.422888Z
 ## Post-Log Measurement Handoff
 - Status: **clear**
 - Source session: No manual posting session
-- Manual posting report: `admin/reports/manual-posting-clipboard.md`
+- Manual posting lane: inactive
+- Next action: Manual posting lane is inactive; collect metrics only from logged automated posts.
 - Wide entry CSV after URL logging: `data/experiment_result_entry_wide_template.csv`
 - Wide import preview after logging: `python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run`
 - First measurement due: **24 hours after URL logging**
-- Guardrail: This handoff is a template; do not import metrics until a real public URL and source_row exist.
+- Guardrail: Do not create manual posts from this handoff; it is only actionable after a real public URL is logged by automation or already exists in Published_Log.csv.
 - Handoff sequence:
-  - Post each manual-session card and log the real public URL.
-  - Refresh Admin so Published_Log.csv rows become experiment result cards.
-  - Collect first visible metrics from YouTube Studio Community analytics 24 hours after URL logging.
-  - Fill one wide entry CSV row per logged Community post.
+  - No non-automated post cards are active; do not create a manual post.
+  - Use automated social execution rows and existing Published_Log.csv URLs for metric collection.
+  - Collect first visible metrics 24 hours after an automated post URL is logged.
+  - Fill one wide entry CSV row per logged public post.
   - Run the wide result import preview before applying metrics.
 - Handoff rows:
   - None.
 - Completion evidence:
-  - Published_Log.csv contains the manual-session post URL.
-  - data/experiment_result_clipboard.json shows the post as a metric card instead of a missing-public-url card.
+  - Published_Log.csv contains a real public URL from an automated post.
+  - data/experiment_result_clipboard.json shows the automated post as a metric card instead of a missing-public-url card.
   - data/experiment_result_entry_wide_template.csv has first-measurement values plus evidence_note for the post.
   - The wide import preview reports only the intended metric updates.
 

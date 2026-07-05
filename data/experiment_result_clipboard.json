@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-05T21:01:55.422888Z",
+  "generated_at": "2026-07-05T21:09:31.480042Z",
   "safe_mode": true,
   "source": {
     "experiment_result_collection_packet": "data/experiment_result_collection_packet.json",
@@ -1781,6 +1781,7 @@
   "post_log_measurement_handoff": {
     "status": "clear",
     "source_session": "No manual posting session",
+    "next_action": "Manual posting lane is inactive; collect metrics only from logged automated posts.",
     "manual_posting_report": "admin/reports/manual-posting-clipboard.md",
     "entry_csv_path": "data/experiment_result_entry_template.csv",
     "wide_entry_csv_path": "data/experiment_result_entry_wide_template.csv",
@@ -1792,19 +1793,19 @@
     "wide_import_apply_command": "",
     "rows": [],
     "handoff_sequence": [
-      "Post each manual-session card and log the real public URL.",
-      "Refresh Admin so Published_Log.csv rows become experiment result cards.",
-      "Collect first visible metrics from YouTube Studio Community analytics 24 hours after URL logging.",
-      "Fill one wide entry CSV row per logged Community post.",
+      "No non-automated post cards are active; do not create a manual post.",
+      "Use automated social execution rows and existing Published_Log.csv URLs for metric collection.",
+      "Collect first visible metrics 24 hours after an automated post URL is logged.",
+      "Fill one wide entry CSV row per logged public post.",
       "Run the wide result import preview before applying metrics."
     ],
     "completion_evidence": [
-      "Published_Log.csv contains the manual-session post URL.",
-      "data/experiment_result_clipboard.json shows the post as a metric card instead of a missing-public-url card.",
+      "Published_Log.csv contains a real public URL from an automated post.",
+      "data/experiment_result_clipboard.json shows the automated post as a metric card instead of a missing-public-url card.",
       "data/experiment_result_entry_wide_template.csv has first-measurement values plus evidence_note for the post.",
       "The wide import preview reports only the intended metric updates."
     ],
-    "guardrail": "This handoff is a template; do not import metrics until a real public URL and source_row exist."
+    "guardrail": "Do not create manual posts from this handoff; it is only actionable after a real public URL is logged by automation or already exists in Published_Log.csv."
   },
   "operator_steps": [
     "Open each post URL or platform analytics surface.",
