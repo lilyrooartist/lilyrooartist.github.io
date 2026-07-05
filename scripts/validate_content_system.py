@@ -257,10 +257,18 @@ def git_output(args):
 
 
 def changed_paths_since(commit):
-    if not commit:
-        return []
-    output = git_output(["diff", "--name-only", f"{commit}..HEAD"])
-    return [line.strip() for line in output.splitlines() if line.strip()]
+    outputs = []
+    if commit:
+        outputs.append(git_output(["diff", "--name-only", f"{commit}..HEAD"]))
+    outputs.append(git_output(["diff", "--name-only"]))
+    outputs.append(git_output(["diff", "--cached", "--name-only"]))
+    paths = {
+        line.strip()
+        for output in outputs
+        for line in output.splitlines()
+        if line.strip()
+    }
+    return sorted(paths)
 
 
 def expected_refresh_coverage(source_commit, latest_head_sha):

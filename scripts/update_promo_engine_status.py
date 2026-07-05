@@ -1496,10 +1496,18 @@ def generated_refresh_path(path: str) -> bool:
 
 
 def changed_paths_since(commit: str) -> list[str]:
-    if not commit:
-        return []
-    output = git_output(["diff", "--name-only", f"{commit}..HEAD"])
-    return [line.strip() for line in output.splitlines() if line.strip()]
+    outputs = []
+    if commit:
+        outputs.append(git_output(["diff", "--name-only", f"{commit}..HEAD"]))
+    outputs.append(git_output(["diff", "--name-only"]))
+    outputs.append(git_output(["diff", "--cached", "--name-only"]))
+    paths = {
+        line.strip()
+        for output in outputs
+        for line in output.splitlines()
+        if line.strip()
+    }
+    return sorted(paths)
 
 
 def refresh_coverage_state(source_commit: str, latest_head_sha: str) -> dict:

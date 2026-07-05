@@ -824,6 +824,90 @@ button.btn {
   line-height: 1.5;
 }
 
+.track-door-list {
+  list-style: none;
+  display: grid;
+  gap: 0.65rem;
+  margin: 0.5rem 0 0;
+  padding: 0;
+}
+
+.track-door-list li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.8rem;
+  align-items: center;
+  min-width: 0;
+  padding: 0.72rem 0;
+  border-top: 1px solid var(--line);
+}
+
+.track-door-list li:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.track-door-main {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  column-gap: 0.55rem;
+  row-gap: 0.25rem;
+  min-width: 0;
+}
+
+.track-door-main span,
+.track-door-main strong {
+  font-family: "Space Mono", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.track-door-main span {
+  color: var(--gold);
+}
+
+.track-door-main strong {
+  color: var(--text);
+}
+
+.track-door-main em {
+  grid-column: 2;
+  color: var(--muted);
+  font-size: 0.96rem;
+  font-style: normal;
+  line-height: 1.25;
+}
+
+.track-door-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.45rem;
+}
+
+.track-door-actions a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  padding: 0.45rem 0.58rem;
+  border: 1px solid rgba(246, 244, 240, 0.18);
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.03);
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: "Space Mono", monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.07em;
+  transition: border-color 160ms ease, background-color 160ms ease, transform 160ms ease;
+}
+
+.track-door-actions a:hover,
+.track-door-actions a:focus-visible {
+  border-color: var(--gold);
+  background: rgba(203, 168, 111, 0.08);
+  transform: translateY(-1px);
+}
+
 .show-list {
   list-style: none;
   margin: 0;
@@ -1103,6 +1187,20 @@ button.btn {
 
   .track-list {
     columns: 1;
+  }
+
+  .track-door-list li {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .track-door-actions {
+    justify-content: flex-start;
+  }
+
+  .track-door-actions a {
+    min-width: 5.25rem;
+    justify-content: center;
   }
 
   .archive-page .album-head {
