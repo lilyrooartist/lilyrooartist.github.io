@@ -359,6 +359,11 @@ def validate_queue(failures):
         post_type = row.get("post_type", "").strip().lower()
         if post_type not in {"text", "image", "video", "community", "link"}:
             fail(f"queue row {row.get('id')} has unsupported post_type {post_type or '[missing]'}", failures)
+        if row.get("platform", "").strip().lower().startswith("x"):
+            if len(row.get("text", "")) > 280:
+                fail(f"queue row {row.get('id')} X text exceeds 280 characters", failures)
+            if len(row.get("reply_text", "")) > 280:
+                fail(f"queue row {row.get('id')} X reply_text exceeds 280 characters", failures)
 
 
 def validate_generated_outputs(failures):

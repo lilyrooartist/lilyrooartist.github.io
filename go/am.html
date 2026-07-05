@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Analog Myth</title>
+  <meta name="robots" content="noindex">
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: #161514;
+      color: #f5efe4;
+      font: 16px/1.5 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main {
+      width: min(90vw, 34rem);
+    }
+    a {
+      color: #d6b36a;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p>Opening Analog Myth...</p>
+    <p><a id="fallback-link" href="/analog-myth.html">Continue to Analog Myth</a></p>
+  </main>
+  <script>
+    const TRACKS = {
+      "01": { slug: "13", video: "https://youtu.be/XL5VOVxwTw4" },
+      "02": { slug: "girls-camp", video: "https://youtu.be/TxBhM3_nAU8" },
+      "03": { slug: "analog-myth", video: "https://youtu.be/_rtioKYbCFM" },
+      "04": { slug: "spilling-the-tea", video: "https://youtu.be/AfnuwBYViKw" },
+      "05": { slug: "no-mortgage", video: "https://youtu.be/-r7khqOLpjQ" },
+      "06": { slug: "guards-down", video: "https://youtu.be/yn_315-h5vM" },
+      "07": { slug: "slow-walk", video: "https://youtu.be/nPuGjQf7lKY" },
+      "08": { slug: "the-power-of-light", video: "https://youtu.be/ctZ2TRBWC-c" }
+    };
+    const DESTINATIONS = {
+      album: "/analog-myth.html",
+      echo: "/podcasts/analog-myth.html",
+      listen: "https://distrokid.com/hyperfollow/lilyroo/analog-myth",
+      playlist: "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0"
+    };
+
+    function postParts(postId) {
+      const normalized = String(postId || "").toLowerCase();
+      const match = normalized.match(/^fp-brand-am(?:-w(\d+))?-(\d{2})-.+-(x|facebook)$/);
+      if (!match) {
+        return { postId: normalized || "unknown", wave: "unknown", track: "", platform: "social" };
+      }
+      return {
+        postId: normalized,
+        wave: match[1] ? `w${match[1]}` : "track-moments",
+        track: match[2],
+        platform: match[3]
+      };
+    }
+
+    function destinationUrl(destination, track) {
+      if (destination === "video" && TRACKS[track]) {
+        return TRACKS[track].video;
+      }
+      return DESTINATIONS[destination] || DESTINATIONS.album;
+    }
+
+    function appendAttribution(rawTarget, parts) {
+      const target = new URL(rawTarget, window.location.origin);
+      const track = TRACKS[parts.track] || {};
+      target.searchParams.set("utm_source", parts.platform);
+      target.searchParams.set("utm_medium", "social");
+      target.searchParams.set("utm_campaign", "analog_myth_brand_growth");
+      target.searchParams.set("utm_content", parts.postId);
+      target.searchParams.set("utm_wave", parts.wave);
+      if (parts.track) {
+        target.searchParams.set("utm_term", `track_${parts.track}_${track.slug || "analog-myth"}`);
+      }
+      return target.toString();
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const parts = postParts(params.get("p"));
+    const target = appendAttribution(destinationUrl(params.get("to") || "album", parts.track), parts);
+    const link = document.getElementById("fallback-link");
+    link.href = target;
+    window.location.replace(target);
+  </script>
+</body>
+</html>

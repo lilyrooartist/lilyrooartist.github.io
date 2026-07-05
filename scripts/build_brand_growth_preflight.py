@@ -6,6 +6,7 @@ import os
 import subprocess
 import sys
 import urllib.error
+import urllib.parse
 import urllib.request
 from collections import Counter
 from datetime import datetime, timedelta, timezone
@@ -76,6 +77,37 @@ def queue_url() -> str:
     return f"https://raw.githubusercontent.com/{repository}/{sha}/admin/future-posts.json" if sha else ""
 
 
+def local_first_party_static(url: str) -> Path | None:
+    parsed = urllib.parse.urlparse(url)
+    if parsed.scheme not in {"http", "https"}:
+        return None
+    if parsed.netloc not in {"www.lilyroo.com", "lilyroo.com"}:
+        return None
+    path = urllib.parse.unquote(parsed.path or "/").lstrip("/")
+    if not path or path.endswith("/"):
+        path = f"{path}index.html"
+    candidate = (ROOT / path).resolve()
+    root = ROOT.resolve()
+    if candidate == root or root not in candidate.parents:
+        return None
+    return candidate
+
+
+def local_content_type(path: Path) -> str:
+    suffix = path.suffix.lower()
+    return {
+        ".html": "text/html",
+        ".htm": "text/html",
+        ".json": "application/json",
+        ".jpg": "image/jpeg",
+        ".jpeg": "image/jpeg",
+        ".png": "image/png",
+        ".gif": "image/gif",
+        ".webp": "image/webp",
+        ".mp4": "video/mp4",
+    }.get(suffix, "application/octet-stream")
+
+
 def next_window(posts: list[dict], now: datetime) -> dict:
     campaign = [post for post in posts if str(post.get("id") or "").startswith(CAMPAIGN_ID_PREFIX)]
     by_day: dict[str, list[dict]] = {}
@@ -103,6 +135,19 @@ def next_window(posts: list[dict], now: datetime) -> dict:
 def check_url(url: str, label: str, timeout: int = 20) -> dict:
     if not url:
         return {"label": label, "url": "", "ok": False, "status": 0, "content_type": "", "content_length": "", "error": "missing_url"}
+    local_path = local_first_party_static(url)
+    if local_path and local_path.exists() and local_path.is_file():
+        return {
+            "label": label,
+            "url": url,
+            "ok": True,
+            "status": 200,
+            "final_url": url,
+            "content_type": local_content_type(local_path),
+            "content_length": str(local_path.stat().st_size),
+            "error": "",
+            "source": "local_static_file",
+        }
     headers = {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/126 Safari/537.36",
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",

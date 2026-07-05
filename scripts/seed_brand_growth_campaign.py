@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import urllib.parse
 from datetime import date, datetime, time, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -21,6 +22,7 @@ TZ = ZoneInfo("America/New_York")
 MIN_START_DATE = date(2026, 7, 4)
 SUPPORTED_PLATFORMS = ("X", "Facebook")
 CAMPAIGN_ID_PREFIX = "FP-BRAND-AM"
+TRACKING_BASE = "https://www.lilyroo.com/go/am.html"
 DISABLED_PLATFORMS = {
     "Instagram": "executor readiness is blocked",
     "TikTok": "executor readiness is blocked",
@@ -197,13 +199,24 @@ def scheduled_at(day: date, platform: str) -> str:
     return datetime.combine(day, slot, tzinfo=TZ).isoformat()
 
 
-def reply_text(track: dict, playlist_url: str) -> str:
-    track_url = track.get("url") or playlist_url
+def tracked_url(destination: str, post_id: str) -> str:
+    query = urllib.parse.urlencode({
+        "p": post_id.lower(),
+        "to": destination,
+    })
+    return f"{TRACKING_BASE}?{query}"
+
+
+def reply_text(track: dict, playlist_url: str, *, platform: str, wave: str, post_id: str) -> str:
+    _ = playlist_url
+    album = f"Analog Myth: {tracked_url('album', post_id)}"
+    track_video = f"Track video: {tracked_url('video', post_id)}"
+    if platform == "X":
+        return "\n".join([album, track_video])
     return "\n".join([
-        "Listen: https://distrokid.com/hyperfollow/lilyroo/analog-myth",
-        "Album page: https://www.lilyroo.com/analog-myth.html",
-        "Echo Thread: https://www.lilyroo.com/podcasts/analog-myth.html",
-        f"Track video: {track_url}",
+        album,
+        f"Echo Thread: {tracked_url('echo', post_id)}",
+        track_video,
     ])
 
 
@@ -288,7 +301,7 @@ def build_rows(start: date, approval: str, platforms: list[str], wave: str) -> l
                     )
                     + f": {track['title']} {hooks.get(track['title'], 'is live in the archive.')}",
                 ]),
-                "reply_text": reply_text(track, playlist_url),
+                "reply_text": reply_text(track, playlist_url, platform=platform, wave=wave, post_id=post_id),
                 "x_media_key": "",
                 "media_key": f"analog-myth-{int(track['track']):02d}-{slug(track['title'])}-cover",
                 "approved": approval,
@@ -418,6 +431,7 @@ def main() -> int:
             "No audience-target or help-us solicitation copy.",
             "Only executor-ready X and Facebook rows are inserted.",
             "YouTube is used as the destination for existing public videos, not as a duplicate upload lane.",
+            "CTA links use short first-party Analog Myth campaign URLs with platform, wave, track, and queue-id attribution on redirect.",
         ],
         "disabled_platforms": disabled_platforms,
         "summary": {

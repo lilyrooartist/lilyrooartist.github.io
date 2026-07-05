@@ -1,13 +1,13 @@
 # Brand Growth Preflight - Lily Roo
 
-Generated: 2026-07-05T22:21:49.199974Z
+Generated: 2026-07-05T23:40:46.620212Z
 
 ## Summary
 - Status: **ready**
 - Next window: **2026-07-06** at `2026-07-06T15:21:00Z`
 - Expected posts: **2**
 - Scheduler: HTTP **200**, auth `bearer`, due **2**, would post **2**, blocked **0**
-- Link checks: **10 ok**, **0 failed**, **0 warning**, **0 blocking failed**
+- Link checks: **7 ok**, **0 failed**, **0 warning**, **0 blocking failed**
 - Next proof due: `2026-07-04T16:05:00Z`
 - First measurement due: `2026-07-05T15:20:00Z`
 
@@ -17,15 +17,12 @@ Generated: 2026-07-05T22:21:49.199974Z
 
 ## Link Checks
 - **ok** `FP-BRAND-AM-03-ANALOG-MYTH-X imagery_url` 200 image/jpeg
-- **ok** `FP-BRAND-AM-03-ANALOG-MYTH-X Listen` 200 text/html;charset=UTF-8
-- **ok** `FP-BRAND-AM-03-ANALOG-MYTH-X Album page` 200 text/html; charset=utf-8
-- **ok** `FP-BRAND-AM-03-ANALOG-MYTH-X Echo Thread` 200 text/html; charset=utf-8
-- **ok** `FP-BRAND-AM-03-ANALOG-MYTH-X Track video` 200 text/html; charset=utf-8
+- **ok** `FP-BRAND-AM-03-ANALOG-MYTH-X Analog Myth` 200 text/html
+- **ok** `FP-BRAND-AM-03-ANALOG-MYTH-X Track video` 200 text/html
 - **ok** `FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK imagery_url` 200 image/jpeg
-- **ok** `FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK Listen` 200 text/html;charset=UTF-8
-- **ok** `FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK Album page` 200 text/html; charset=utf-8
-- **ok** `FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK Echo Thread` 200 text/html; charset=utf-8
-- **ok** `FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK Track video` 200 text/html; charset=utf-8
+- **ok** `FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK Analog Myth` 200 text/html
+- **ok** `FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK Echo Thread` 200 text/html
+- **ok** `FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK Track video` 200 text/html
 
 ## Guardrails
 - Preflight is read-only; it calls the scheduler dry-run endpoint and HEAD-checks public URLs.
