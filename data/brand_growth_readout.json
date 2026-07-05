@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-05T14:10:19.698146Z",
+  "generated_at": "2026-07-05T17:12:43.087743Z",
   "safe_mode": true,
   "source": {
     "brand_growth_campaign": "data/brand_growth_campaign.json",
@@ -19,25 +19,27 @@
     },
     "status_counts": {
       "posted_waiting_measurement_window": 2,
-      "scheduled_future": 62
+      "ready_for_metric_capture": 2,
+      "scheduled_future": 60
     },
     "approved_auto_rows": 64,
     "future_queue_visible_rows": 62,
-    "posted_or_measured_rows": 2,
+    "posted_or_measured_rows": 4,
     "measured_rows": 0,
-    "ready_for_metric_capture_rows": 0,
-    "attention_rows": 0,
-    "next_scheduled_post_id": "FP-BRAND-AM-02-GIRLS-CAMP-X",
-    "next_scheduled_at": "2026-07-05T10:15:00-04:00",
-    "x_metric_capture_command": "",
-    "facebook_metric_capture_command": "",
+    "ready_for_metric_capture_rows": 2,
+    "attention_rows": 2,
+    "next_scheduled_post_id": "FP-BRAND-AM-03-ANALOG-MYTH-X",
+    "next_scheduled_at": "2026-07-06T10:15:00-04:00",
+    "x_metric_capture_command": "python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X",
+    "facebook_metric_capture_command": "python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK",
     "post_slot_watch_window_count": 32,
     "post_slot_watch_status_counts": {
+      "measurement_due": 1,
       "publishing_window": 1,
-      "scheduled_future": 31
+      "scheduled_future": 30
     },
     "next_proof_window_date": "2026-07-04",
-    "next_proof_window_status": "publishing_window",
+    "next_proof_window_status": "measurement_due",
     "next_proof_due_at": "2026-07-04T16:05:00Z",
     "next_measurement_due_at": "2026-07-05T15:20:00Z",
     "next_proof_post_ids": [
@@ -50,17 +52,18 @@
     "refresh_command": "python3 scripts/refresh_promo_admin.py",
     "report_path": "admin/reports/brand-growth-readout.md",
     "live_youtube_total_views": 486,
-    "live_spotify_monthly_listeners": 2
+    "live_spotify_monthly_listeners": 1
   },
   "post_slot_watch": {
     "summary": {
       "window_count": 32,
       "status_counts": {
+        "measurement_due": 1,
         "publishing_window": 1,
-        "scheduled_future": 31
+        "scheduled_future": 30
       },
       "next_window_date": "2026-07-04",
-      "next_window_status": "publishing_window",
+      "next_window_status": "measurement_due",
       "next_proof_due_at": "2026-07-04T16:05:00Z",
       "next_measurement_due_at": "2026-07-05T15:20:00Z",
       "next_post_ids": [
@@ -75,7 +78,7 @@
     "windows": [
       {
         "date": "2026-07-04",
-        "status": "publishing_window",
+        "status": "measurement_due",
         "post_ids": [
           "FP-BRAND-AM-01-13-X",
           "FP-BRAND-AM-01-13-FACEBOOK"
@@ -89,19 +92,22 @@
         "proof_due_at": "2026-07-04T16:05:00Z",
         "measurement_due_at": "2026-07-05T15:20:00Z",
         "status_counts": {
-          "posted_waiting_measurement_window": 2
+          "ready_for_metric_capture": 2
         },
         "rows_needing_proof": [],
-        "rows_ready_for_metrics": [],
+        "rows_ready_for_metrics": [
+          "FP-BRAND-AM-01-13-X",
+          "FP-BRAND-AM-01-13-FACEBOOK"
+        ],
         "capture_executions_command": "python3 scripts/capture_social_executions.py",
         "proof_preview_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run",
         "proof_apply_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
-        "metric_capture_command": "",
-        "next_action": "Scheduled posting window is open; capture executor state shortly after the final slot."
+        "metric_capture_command": "python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X && python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK",
+        "next_action": "Capture metrics for logged campaign posts and import reviewed result fields."
       },
       {
         "date": "2026-07-05",
-        "status": "scheduled_future",
+        "status": "publishing_window",
         "post_ids": [
           "FP-BRAND-AM-02-GIRLS-CAMP-X",
           "FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK"
@@ -115,7 +121,7 @@
         "proof_due_at": "2026-07-05T16:05:00Z",
         "measurement_due_at": "2026-07-06T15:20:00Z",
         "status_counts": {
-          "scheduled_future": 2
+          "posted_waiting_measurement_window": 2
         },
         "rows_needing_proof": [],
         "rows_ready_for_metrics": [],
@@ -123,7 +129,7 @@
         "proof_preview_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run",
         "proof_apply_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
         "metric_capture_command": "",
-        "next_action": "Wait for the scheduled executor; proof capture starts after the final slot."
+        "next_action": "Scheduled posting window is open; capture executor state shortly after the final slot."
       },
       {
         "date": "2026-07-06",
@@ -923,8 +929,8 @@
       "measurement_due_at": "2026-07-05T14:15:36.859000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
-      "status": "posted_waiting_measurement_window",
-      "next_action": "Wait until 2026-07-05T14:15:36.859000+00:00 before capturing metrics.",
+      "status": "ready_for_metric_capture",
+      "next_action": "python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X",
       "visible_in_future_queue": false
     },
     {
@@ -942,8 +948,8 @@
       "measurement_due_at": "2026-07-05T15:30:41.086000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
-      "status": "posted_waiting_measurement_window",
-      "next_action": "Wait until 2026-07-05T15:30:41.086000+00:00 before capturing metrics.",
+      "status": "ready_for_metric_capture",
+      "next_action": "python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK",
       "visible_in_future_queue": false
     },
     {
@@ -954,15 +960,15 @@
       "execution_mode": "auto",
       "post_type": "image",
       "text": "Girls Camp sounds like a sleepaway myth told under fluorescent lights. Analog Myth is live.",
-      "post_url": "",
-      "published_log_row": "",
-      "execution_status": "",
+      "post_url": "https://x.com/i/web/status/2073772787177861205",
+      "published_log_row": 53,
+      "execution_status": "posted",
       "execution_reason": "",
-      "measurement_due_at": "",
+      "measurement_due_at": "2026-07-06T14:15:36.373000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
-      "status": "scheduled_future",
-      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
+      "status": "posted_waiting_measurement_window",
+      "next_action": "Wait until 2026-07-06T14:15:36.373000+00:00 before capturing metrics.",
       "visible_in_future_queue": true
     },
     {
@@ -973,15 +979,15 @@
       "execution_mode": "auto",
       "post_type": "image",
       "text": "Analog Myth track 2: Girls Camp sounds like a sleepaway myth told under fluorescent lights.\n\nThe album page, Echo Thread play-through, and YouTube playlist are up.",
-      "post_url": "",
-      "published_log_row": "",
-      "execution_status": "",
+      "post_url": "https://www.facebook.com/122119767927249470/posts/122121048123249470",
+      "published_log_row": 52,
+      "execution_status": "posted",
       "execution_reason": "",
-      "measurement_due_at": "",
+      "measurement_due_at": "2026-07-06T15:30:46.255000+00:00",
       "imported_result_fields": [],
       "captured_api_fields": [],
-      "status": "scheduled_future",
-      "next_action": "Wait for the scheduled social executor, then refresh admin and export executions.",
+      "status": "posted_waiting_measurement_window",
+      "next_action": "Wait until 2026-07-06T15:30:46.255000+00:00 before capturing metrics.",
       "visible_in_future_queue": true
     },
     {
@@ -2126,7 +2132,8 @@
     }
   ],
   "next_actions": [
-    "Next proof window is 2026-07-04 after 2026-07-04T16:05:00Z; watch FP-BRAND-AM-01-13-X, FP-BRAND-AM-01-13-FACEBOOK."
+    "python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X",
+    "python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK"
   ],
   "guardrails": [
     "Readout only; it does not post or import metrics.",
