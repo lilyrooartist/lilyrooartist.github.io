@@ -1,28 +1,28 @@
 # Posting Automation Status - Lily Roo
 
-Generated: 2026-07-05T22:21:49.112073Z
+Generated: 2026-07-05T23:11:02.625088Z
 
 ## Summary
-- Status: **blocked**
-- Active campaign ready: **False**
-- Lanes ready: **5 / 9**
-- Blocked lanes: **2**
-- Deferred optional lanes: **1**
-- Needs attention: **1**
+- Status: **ready_active_campaign**
+- Active campaign ready: **True**
+- Lanes ready: **6 / 9**
+- Blocked lanes: **0**
+- Deferred optional lanes: **3**
+- Needs attention: **0**
 - Story posts tracked: **6**
 - Help-needed items: **0**
-- Next action: Direct TikTok public posting is not in the active plan until platform approval is explicit; upload-draft/manual-finish posting is excluded.
+- Next action: Watch FP-BRAND-AM-03-ANALOG-MYTH-X, FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK after 2026-07-06T15:21:00Z, then export posted URLs.
 
 ## Automation Lanes
-- **Active Analog Myth brand campaign** - `needs_attention`
+- **Active Analog Myth brand campaign** - `ready`
   - Detail: 64 approved auto posts; next=FP-BRAND-AM-03-ANALOG-MYTH-X at 2026-07-06T10:15:00-04:00; preflight=ready
   - Evidence: data/brand_growth_preflight.json
-  - Next: Refresh brand growth readout and preflight.
+  - Next: Watch FP-BRAND-AM-03-ANALOG-MYTH-X, FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK after 2026-07-06T15:21:00Z, then export posted URLs.
 - **Scheduled refresh workflow** - `ready`
   - Detail: 17 */6 * * *, 05 16 * * *; latest run completed / success
   - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28755991334
 - **Safe admin refresh** - `ready`
-  - Detail: 18 refresh commands captured at 2026-07-05T22:21:47.390734Z
+  - Detail: 58 refresh commands captured at 2026-07-05T22:21:52.401833Z
   - Evidence: data/promo_admin_refresh_run.json
 - **Scheduler dry-run authentication** - `ready`
   - Detail: HTTP 200 using bearer auth; due=0 would_post=0
@@ -34,14 +34,14 @@ Generated: 2026-07-05T22:21:49.112073Z
   - Detail: ready=X, Facebook, YouTube; blocked=Instagram, TikTok
   - Evidence: data/executor_readiness_snapshot.json
   - Next: Optional expansion only; the active Analog Myth campaign uses ready X/Facebook lanes.
-- **TikTok API lane** - `blocked`
+- **TikTok API lane** - `deferred`
   - Detail: blocked; upload_ready=False; public_ready=False
   - Evidence: data/tiktok_setup_preflight.json
   - Next: Direct TikTok public posting is not in the active plan until platform approval is explicit; upload-draft/manual-finish posting is excluded.
-- **Blocker input readiness** - `blocked`
+- **Blocker input readiness** - `deferred`
   - Detail: 3 ready; 3 missing local input; 1 external action needed
   - Evidence: data/social_blocker_input_status.json
-  - Next: Add X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET to secrets/social_api.env.
+  - Next: Optional expansion inputs can wait; the active brand campaign is already preflight-ready.
 - **Story throughput** - `ready`
   - Detail: 6 tracked; 0 queued; 0 past due without URL
   - Evidence: data/story_throughput_tracking.json

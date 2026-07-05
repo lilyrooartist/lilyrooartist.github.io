@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-05T22:21:49.112073Z",
+  "generated_at": "2026-07-05T23:11:02.625088Z",
   "safe_mode": true,
   "source": {
     "workflow": ".github/workflows/promo-admin-refresh.yml",
@@ -16,18 +16,18 @@
     "brand_growth_preflight": "data/brand_growth_preflight.json"
   },
   "summary": {
-    "status": "blocked",
-    "active_campaign_ready": false,
+    "status": "ready_active_campaign",
+    "active_campaign_ready": true,
     "active_campaign_platforms": [
       "Facebook",
       "X"
     ],
-    "active_campaign_next_proof_due_at": "2026-07-04T16:05:00Z",
+    "active_campaign_next_proof_due_at": "2026-07-06T15:21:00Z",
     "active_campaign_next_measurement_due_at": "2026-07-05T15:20:00Z",
-    "ready_lane_count": 5,
-    "blocked_lane_count": 2,
-    "deferred_lane_count": 1,
-    "attention_lane_count": 1,
+    "ready_lane_count": 6,
+    "blocked_lane_count": 0,
+    "deferred_lane_count": 3,
+    "attention_lane_count": 0,
     "lane_count": 9,
     "workflow_crons": [
       "17 */6 * * *",
@@ -46,15 +46,15 @@
     "blocker_input_missing_count": 3,
     "blocker_input_external_action_count": 1,
     "help_needed_count": 0,
-    "next_action": "Direct TikTok public posting is not in the active plan until platform approval is explicit; upload-draft/manual-finish posting is excluded."
+    "next_action": "Watch FP-BRAND-AM-03-ANALOG-MYTH-X, FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK after 2026-07-06T15:21:00Z, then export posted URLs."
   },
   "lanes": [
     {
       "label": "Active Analog Myth brand campaign",
-      "status": "needs_attention",
+      "status": "ready",
       "detail": "64 approved auto posts; next=FP-BRAND-AM-03-ANALOG-MYTH-X at 2026-07-06T10:15:00-04:00; preflight=ready",
       "evidence": "data/brand_growth_preflight.json",
-      "next_action": "Refresh brand growth readout and preflight."
+      "next_action": "Watch FP-BRAND-AM-03-ANALOG-MYTH-X, FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK after 2026-07-06T15:21:00Z, then export posted URLs."
     },
     {
       "label": "Scheduled refresh workflow",
@@ -66,7 +66,7 @@
     {
       "label": "Safe admin refresh",
       "status": "ready",
-      "detail": "18 refresh commands captured at 2026-07-05T22:21:47.390734Z",
+      "detail": "58 refresh commands captured at 2026-07-05T22:21:52.401833Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": ""
     },
@@ -93,17 +93,17 @@
     },
     {
       "label": "TikTok API lane",
-      "status": "blocked",
+      "status": "deferred",
       "detail": "blocked; upload_ready=False; public_ready=False",
       "evidence": "data/tiktok_setup_preflight.json",
       "next_action": "Direct TikTok public posting is not in the active plan until platform approval is explicit; upload-draft/manual-finish posting is excluded."
     },
     {
       "label": "Blocker input readiness",
-      "status": "blocked",
+      "status": "deferred",
       "detail": "3 ready; 3 missing local input; 1 external action needed",
       "evidence": "data/social_blocker_input_status.json",
-      "next_action": "Add X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET to secrets/social_api.env."
+      "next_action": "Optional expansion inputs can wait; the active brand campaign is already preflight-ready."
     },
     {
       "label": "Story throughput",

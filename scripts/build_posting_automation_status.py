@@ -77,9 +77,12 @@ def campaign_packet(readout: dict, preflight: dict) -> dict:
         and int(preflight_summary.get("scheduler_blocked_count") or 0) == 0
         and int(preflight_summary.get("link_blocking_failed_count") or 0) == 0
         and int(readout_summary.get("approved_auto_rows") or 0) > 0
-        and int(readout_summary.get("attention_rows") or 0) == 0
     ) else "needs_attention"
-    next_proof = preflight_summary.get("next_proof_due_at") or readout_summary.get("next_proof_due_at") or ""
+    next_proof = (
+        preflight_summary.get("scheduled_time")
+        if status == "ready"
+        else preflight_summary.get("next_proof_due_at") or readout_summary.get("next_proof_due_at") or ""
+    )
     next_action = (
         f"Watch {', '.join(expected_ids)} after {next_proof}, then export posted URLs."
         if status == "ready" and expected_ids and next_proof
