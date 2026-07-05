@@ -58,6 +58,28 @@ TRACK_HOOKS = {
     "The Power of Light": "closes the room with a switch you can almost hear.",
 }
 
+TRACK_X_TEXT = {
+    "13": "13 opens Analog Myth like a calendar with a loose wire: odd numbers, warm tape, big signal.",
+    "Girls Camp": "Girls Camp keeps the cabin lights buzzing and the sleepaway myth slightly haunted.",
+    "Analog Myth": "Title track signal: broken clocks, warm tape, exact little lies. Analog Myth is live.",
+    "Spilling the Tea": "Spilling the Tea turns gossip into cinema and keeps the receipt drawer open.",
+    "No Mortgage": "No Mortgage makes domestic anxiety feel bright, strange, and ready to bolt.",
+    "Guards Down": "Guards Down catches the armor right as it starts making noise on the floor.",
+    "Slow Walk": "Slow Walk refuses the sprint and lets the whole room adjust to its pace.",
+    "The Power of Light": "The Power of Light closes Analog Myth with a switch you can almost hear.",
+}
+
+TRACK_FACEBOOK_NOTES = {
+    "13": "Start at the first page: odd numbers, warm tape, and a room that already feels a little haunted.",
+    "Girls Camp": "It has that fluorescent sleepaway feeling: funny until the shadows start answering back.",
+    "Analog Myth": "This is the album's thesis statement: reality as a warm machine that keeps choosing the wrong time.",
+    "Spilling the Tea": "Side-eye, receipts, and a grin that knows exactly where the story is hiding.",
+    "No Mortgage": "A bright little dare about escape plans, domestic panic, and the fantasy of putting the keys down.",
+    "Guards Down": "The brave face slips here, and the soft part gets the microphone for a minute.",
+    "Slow Walk": "A song for keeping your own pace while the rest of the room mistakes speed for power.",
+    "The Power of Light": "The closer turns the last switch into a small revelation.",
+}
+
 AFTERGLOW_HOOKS = {
     "13": "counts down and refuses to become clean math.",
     "Girls Camp": "leaves the old cabin lights on just long enough for the story to change shape.",
@@ -227,10 +249,10 @@ def post_text(track: dict, platform: str, wave: str) -> str:
             "Album page, Echo Thread play-through, and the full playlist are live."
         )
     if platform == "X":
-        return f"{title} {hook} Analog Myth is live."
+        return TRACK_X_TEXT.get(title, f"{title} {hook} Analog Myth is live.")
     return (
         f"Analog Myth track {track['track']}: {title} {hook}\n\n"
-        "The album page, Echo Thread play-through, and YouTube playlist are up."
+        f"{TRACK_FACEBOOK_NOTES.get(title, 'The album page, Echo Thread play-through, and YouTube playlist are live.')}"
     )
 
 
@@ -259,7 +281,12 @@ def build_rows(start: date, approval: str, platforms: list[str], wave: str) -> l
                 "text": text,
                 "drafts": "||".join([
                     text,
-                    f"Second pass through the Analog Myth room: {track['title']} {hooks.get(track['title'], 'is live in the archive.')}",
+                    (
+                        "Today in the Analog Myth room"
+                        if wave == "track-moments"
+                        else "Second pass through the Analog Myth room"
+                    )
+                    + f": {track['title']} {hooks.get(track['title'], 'is live in the archive.')}",
                 ]),
                 "reply_text": reply_text(track, playlist_url),
                 "x_media_key": "",
