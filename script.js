@@ -17,3 +17,38 @@ if (revealItems.length > 0) {
 
   revealItems.forEach((item) => observer.observe(item));
 }
+
+const shareButtons = document.querySelectorAll(".share-button");
+
+shareButtons.forEach((button) => {
+  const originalLabel = button.textContent;
+
+  button.addEventListener("click", async () => {
+    const shareUrl = button.dataset.shareUrl || window.location.href;
+    const shareTitle = button.dataset.shareTitle || document.title;
+    const shareText = button.dataset.shareText || "";
+
+    try {
+      if (navigator.share) {
+        await navigator.share({
+          title: shareTitle,
+          text: shareText,
+          url: shareUrl,
+        });
+        return;
+      }
+
+      await navigator.clipboard.writeText(shareUrl);
+      button.textContent = "Link Copied";
+      window.setTimeout(() => {
+        button.textContent = originalLabel;
+      }, 1800);
+    } catch (error) {
+      if (error && error.name === "AbortError") return;
+      button.textContent = "Copy Failed";
+      window.setTimeout(() => {
+        button.textContent = originalLabel;
+      }, 1800);
+    }
+  });
+});

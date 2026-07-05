@@ -206,6 +206,10 @@ main {
   transition: transform 160ms ease, border-color 160ms ease, background-color 160ms ease;
 }
 
+button.btn {
+  cursor: pointer;
+}
+
 .btn:hover,
 .btn:focus-visible {
   transform: translateY(-1px);
@@ -267,6 +271,84 @@ main {
   background:
     linear-gradient(145deg, rgba(203, 168, 111, 0.12), rgba(139, 28, 43, 0.1)),
     rgba(7, 7, 9, 0.68);
+}
+
+.starter-path {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(1rem, 2.4vw, 2rem);
+  align-items: stretch;
+  margin: 1.7rem 0;
+  padding: clamp(1.1rem, 2vw, 1.7rem);
+  border-block: 1px solid rgba(203, 168, 111, 0.34);
+  background:
+    linear-gradient(115deg, rgba(139, 28, 43, 0.18), rgba(203, 168, 111, 0.08)),
+    rgba(7, 7, 9, 0.52);
+}
+
+.starter-copy h2 {
+  margin: 0.35rem 0 0.65rem;
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 0.06em;
+  font-size: clamp(2.15rem, 5vw, 4.2rem);
+  line-height: 0.92;
+}
+
+.starter-copy p:last-child {
+  max-width: 560px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 1.08rem;
+  line-height: 1.42;
+}
+
+.starter-links {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.starter-link {
+  min-width: 0;
+  padding: 0.9rem;
+  border: 1px solid rgba(246, 244, 240, 0.18);
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.03);
+  text-decoration: none;
+  transition: border-color 160ms ease, background-color 160ms ease, transform 160ms ease;
+}
+
+.starter-link:hover,
+.starter-link:focus-visible {
+  border-color: var(--gold);
+  background: rgba(203, 168, 111, 0.08);
+  transform: translateY(-1px);
+}
+
+.starter-number {
+  display: block;
+  margin-bottom: 1.4rem;
+  color: var(--gold);
+  font-family: "Space Mono", monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+}
+
+.starter-link strong {
+  display: block;
+  margin-bottom: 0.45rem;
+  font-family: "Space Mono", monospace;
+  font-size: 0.77rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.starter-link em {
+  display: block;
+  color: var(--muted);
+  font-size: 0.97rem;
+  font-style: normal;
+  line-height: 1.28;
 }
 
 .sponsor-banner {
@@ -985,8 +1067,17 @@ main {
   .panel-podcast,
   .podcast-hero,
   .panel-support,
+  .starter-path,
   .sponsor-banner {
     grid-template-columns: 1fr;
+  }
+
+  .starter-links {
+    grid-template-columns: 1fr;
+  }
+
+  .starter-number {
+    margin-bottom: 0.8rem;
   }
 
   .sponsor-banner-actions {
