@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-05T23:09:59.946563Z",
+  "generated_at": "2026-07-05T23:26:38.682764Z",
   "safe_mode": true,
   "source": {
     "published_log": "admin/content/Published_Log.csv",
@@ -8,12 +8,12 @@
     "limit": 8
   },
   "summary": {
-    "status": "attention",
+    "status": "verified",
     "checked_post_count": 4,
-    "public_visibility_ok_count": 2,
-    "attention_count": 2,
+    "public_visibility_ok_count": 4,
+    "attention_count": 0,
     "x_copy_confirmed_count": 2,
-    "facebook_page_loaded_count": 0,
+    "facebook_page_loaded_count": 2,
     "report_path": "admin/reports/brand-post-visibility.md",
     "refresh_command": "python3 scripts/capture_brand_post_visibility.py"
   },
@@ -23,64 +23,24 @@
       "platform": "Facebook",
       "published_date": "2026-07-04",
       "source_row": 50,
-      "logged_url": "https://www.facebook.com/122119767927249470/posts/122120959905249470",
-      "checked_url": "https://www.facebook.com/122119767927249470/posts/122120959905249470",
-      "final_url": "https://www.facebook.com/122119767927249470/posts/122120959905249470",
+      "logged_url": "https://www.facebook.com/lilyrooartist/posts/122120959905249470",
+      "checked_url": "https://www.facebook.com/lilyrooartist/posts/122120959905249470",
+      "final_url": "https://www.facebook.com/lilyrooartist/posts/122120959905249470",
       "http_status": 200,
       "content_type": "text/html; charset=\"utf-8\"",
-      "visibility_status": "unavailable_marker_found",
-      "public_visibility_ok": false,
-      "copy_matched": false,
-      "note": "Facebook returned an unavailable-content marker for this post.",
+      "visibility_status": "page_loaded_no_unavailable_marker",
+      "public_visibility_ok": true,
+      "copy_matched": true,
+      "note": "Facebook public page loaded without the common unavailable-content marker.",
       "attempts": [
         {
-          "url": "https://www.facebook.com/122119767927249470/posts/122120959905249470",
+          "url": "https://www.facebook.com/lilyrooartist/posts/122120959905249470",
           "ok": true,
           "http_status": 200,
-          "final_url": "https://www.facebook.com/122119767927249470/posts/122120959905249470",
+          "final_url": "https://www.facebook.com/lilyrooartist/posts/122120959905249470",
           "content_type": "text/html; charset=\"utf-8\"",
           "error": "",
-          "unavailable_marker_found": true,
-          "copy_matched": true
-        },
-        {
-          "url": "https://www.facebook.com/permalink.php?story_fbid=122120959905249470&id=122119767927249470",
-          "ok": true,
-          "http_status": 200,
-          "final_url": "https://www.facebook.com/permalink.php?story_fbid=122120959905249470&id=122119767927249470",
-          "content_type": "text/html; charset=\"utf-8\"",
-          "error": "",
-          "unavailable_marker_found": true,
-          "copy_matched": true
-        },
-        {
-          "url": "https://www.facebook.com/122119767927249470_122120959905249470",
-          "ok": true,
-          "http_status": 200,
-          "final_url": "https://www.facebook.com/permalink.php?story_fbid=pfbid0ZtH56G3cbt6yxp13KkHQ3856afTUw1QVUygRNEVEYgGh2mXogVU9xtfbxv37jtNEl&id=61587484110002",
-          "content_type": "text/html; charset=\"utf-8\"",
-          "error": "",
-          "unavailable_marker_found": true,
-          "copy_matched": true
-        },
-        {
-          "url": "https://www.facebook.com/permalink.php?story_fbid=122120959905249470&id=903693509504290",
-          "ok": true,
-          "http_status": 200,
-          "final_url": "https://www.facebook.com/permalink.php?story_fbid=122120959905249470&id=903693509504290",
-          "content_type": "text/html; charset=\"utf-8\"",
-          "error": "",
-          "unavailable_marker_found": true,
-          "copy_matched": true
-        },
-        {
-          "url": "https://www.facebook.com/903693509504290_122120959905249470",
-          "ok": true,
-          "http_status": 200,
-          "final_url": "https://www.facebook.com/permalink.php?story_fbid=pfbid0ZtH56G3cbt6yxp13KkHQ3856afTUw1QVUygRNEVEYgGh2mXogVU9xtfbxv37jtNEl&id=61587484110002",
-          "content_type": "text/html; charset=\"utf-8\"",
-          "error": "",
-          "unavailable_marker_found": true,
+          "unavailable_marker_found": false,
           "copy_matched": true
         }
       ]
@@ -106,64 +66,24 @@
       "platform": "Facebook",
       "published_date": "2026-07-05",
       "source_row": 52,
-      "logged_url": "https://www.facebook.com/122119767927249470/posts/122121048123249470",
-      "checked_url": "https://www.facebook.com/122119767927249470/posts/122121048123249470",
-      "final_url": "https://www.facebook.com/122119767927249470/posts/122121048123249470",
+      "logged_url": "https://www.facebook.com/lilyrooartist/posts/122121048123249470",
+      "checked_url": "https://www.facebook.com/lilyrooartist/posts/122121048123249470",
+      "final_url": "https://www.facebook.com/lilyrooartist/posts/122121048123249470",
       "http_status": 200,
       "content_type": "text/html; charset=\"utf-8\"",
-      "visibility_status": "unavailable_marker_found",
-      "public_visibility_ok": false,
+      "visibility_status": "page_loaded_no_unavailable_marker",
+      "public_visibility_ok": true,
       "copy_matched": false,
-      "note": "Facebook returned an unavailable-content marker for this post.",
+      "note": "Facebook public page loaded without the common unavailable-content marker.",
       "attempts": [
         {
-          "url": "https://www.facebook.com/122119767927249470/posts/122121048123249470",
+          "url": "https://www.facebook.com/lilyrooartist/posts/122121048123249470",
           "ok": true,
           "http_status": 200,
-          "final_url": "https://www.facebook.com/122119767927249470/posts/122121048123249470",
+          "final_url": "https://www.facebook.com/lilyrooartist/posts/122121048123249470",
           "content_type": "text/html; charset=\"utf-8\"",
           "error": "",
-          "unavailable_marker_found": true,
-          "copy_matched": false
-        },
-        {
-          "url": "https://www.facebook.com/permalink.php?story_fbid=122121048123249470&id=122119767927249470",
-          "ok": true,
-          "http_status": 200,
-          "final_url": "https://www.facebook.com/permalink.php?story_fbid=122121048123249470&id=122119767927249470",
-          "content_type": "text/html; charset=\"utf-8\"",
-          "error": "",
-          "unavailable_marker_found": true,
-          "copy_matched": false
-        },
-        {
-          "url": "https://www.facebook.com/122119767927249470_122121048123249470",
-          "ok": true,
-          "http_status": 200,
-          "final_url": "https://www.facebook.com/permalink.php?story_fbid=pfbid02hX88trbZhtsaYvSVDoFhwKpwMceMpD8oBLvYA68YyVks7kRLRi3ZEex6nruWmMFhl&id=61587484110002",
-          "content_type": "text/html; charset=\"utf-8\"",
-          "error": "",
-          "unavailable_marker_found": true,
-          "copy_matched": false
-        },
-        {
-          "url": "https://www.facebook.com/permalink.php?story_fbid=122121048123249470&id=903693509504290",
-          "ok": true,
-          "http_status": 200,
-          "final_url": "https://www.facebook.com/permalink.php?story_fbid=122121048123249470&id=903693509504290",
-          "content_type": "text/html; charset=\"utf-8\"",
-          "error": "",
-          "unavailable_marker_found": true,
-          "copy_matched": false
-        },
-        {
-          "url": "https://www.facebook.com/903693509504290_122121048123249470",
-          "ok": true,
-          "http_status": 200,
-          "final_url": "https://www.facebook.com/permalink.php?story_fbid=pfbid02hX88trbZhtsaYvSVDoFhwKpwMceMpD8oBLvYA68YyVks7kRLRi3ZEex6nruWmMFhl&id=61587484110002",
-          "content_type": "text/html; charset=\"utf-8\"",
-          "error": "",
-          "unavailable_marker_found": true,
+          "unavailable_marker_found": false,
           "copy_matched": false
         }
       ]

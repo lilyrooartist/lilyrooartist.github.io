@@ -24,6 +24,8 @@ GRAPH_VERSION = "v20.0"
 GRAPH_BASE = f"https://graph.facebook.com/{GRAPH_VERSION}"
 RESULT_FIELDS = ["likes", "comments", "shares"]
 META_ENV_NAMES = ["META_LONG_LIVED_TOKEN", "FB_PAGE_ID"]
+DEFAULT_FB_PAGE_ID = "903693509504290"
+FACEBOOK_PAGE_SLUG = "lilyrooartist"
 TZ = ZoneInfo("America/New_York")
 
 
@@ -53,6 +55,9 @@ def facebook_object_id(value: str) -> str:
     match = re.search(r"facebook\.com/(\d+)/posts/(\d+)", raw)
     if match:
         return f"{match.group(1)}_{match.group(2)}"
+    match = re.search(rf"facebook\.com/{re.escape(FACEBOOK_PAGE_SLUG)}/posts/(\d+)", raw)
+    if match:
+        return f"{DEFAULT_FB_PAGE_ID}_{match.group(1)}"
     parsed = urllib.parse.urlparse(raw)
     if "facebook.com" in parsed.netloc:
         query = urllib.parse.parse_qs(parsed.query)

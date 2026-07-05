@@ -1,9 +1,9 @@
 # Promo Operations Packet - Lily Roo
 
-Generated: 2026-07-05T22:21:52.068030Z
+Generated: 2026-07-05T23:29:13.849510Z
 
 ## Summary
-- Actions: **9**
+- Actions: **8**
 - User review: **0**
 - Platform fixes: **0**
 - Scheduled approval batches: **0**
@@ -12,23 +12,15 @@ Generated: 2026-07-05T22:21:52.068030Z
 - Store checks: **4**
 - Manual metric updates: **2**
 - Safe apply commands ready: **0**
-- Urgency: **high: 3, low: 2, medium: 4**
+- Urgency: **high: 2, low: 2, medium: 4**
 
 ## Phase Counts
 - Collect experiment results: **1**
 - Fill manual metrics: **2**
 - Measure active brand campaign: **1**
-- Protect active brand reach: **1**
 - Verify music sites: **4**
 
 ## Top Actions
-
-### Protect active brand reach
-- **[high] Review Facebook brand-post visibility**
-  - Why: 2 recent Analog Myth Facebook post URL(s) need public visibility review.
-  - Detail: Recent Analog Myth Facebook post URLs load with an unavailable-content marker for public probes. Confirm Page/post visibility in Meta and keep the X posts active while the Facebook reach lane is checked.
-  - Command: `python3 scripts/capture_brand_post_visibility.py`
-  - Packet: `admin/reports/brand-post-visibility.md`
 
 ### Measure active brand campaign
 - **[high] Connect automated brand metrics capture**

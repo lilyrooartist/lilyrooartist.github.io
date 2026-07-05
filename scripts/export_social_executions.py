@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import subprocess
 import urllib.error
 import urllib.request
@@ -11,6 +12,7 @@ from pathlib import Path
 from social_exec_common import PUBLISHED_LOG, SOCIAL_ENV, append_published_log, get_row, load_env, song_from_row
 
 DEFAULT_URL = "https://www.lilyroo.com/api/social/executions"
+FACEBOOK_PAGE_SLUG = "lilyrooartist"
 ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -58,6 +60,26 @@ def logged_content_ids() -> set[str]:
     return ids
 
 
+def canonical_post_url(platform: str, post_url: str, item: dict) -> str:
+    if str(platform or "").strip().lower() != "facebook":
+        return post_url or "posted"
+    values = [
+        str(item.get("external_id") or ""),
+        str(post_url or ""),
+    ]
+    for value in values:
+        match = re.search(r"(\d+)_(\d+)", value)
+        if match:
+            return f"https://www.facebook.com/{FACEBOOK_PAGE_SLUG}/posts/{match.group(2)}"
+        match = re.search(r"facebook\.com/\d+/posts/(\d+)", value)
+        if match:
+            return f"https://www.facebook.com/{FACEBOOK_PAGE_SLUG}/posts/{match.group(1)}"
+        match = re.search(r"[?&]story_fbid=(\d+)", value)
+        if match:
+            return f"https://www.facebook.com/{FACEBOOK_PAGE_SLUG}/posts/{match.group(1)}"
+    return post_url or "posted"
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Export posted Worker execution records into Published_Log.csv.")
     parser.add_argument("--url", default=DEFAULT_URL)
@@ -76,7 +98,7 @@ def main() -> int:
             continue
         row = get_row(post_id)
         platform = item.get("platform") or row.get("platform") or "Social"
-        post_url = item.get("post_url") or "posted"
+        post_url = canonical_post_url(platform, item.get("post_url") or "posted", item)
         text = row.get("text") or ""
         notes = f"queue_id={post_id}; exported from Worker execution state"
         if args.dry_run:

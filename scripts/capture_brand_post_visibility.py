@@ -20,6 +20,7 @@ OUT = ROOT / "data" / "brand_post_visibility.json"
 REPORT = ROOT / "admin" / "reports" / "brand-post-visibility.md"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
 CAMPAIGN_PREFIX = "FP-BRAND-AM"
+FACEBOOK_PAGE_SLUG = "lilyrooartist"
 USER_AGENT = "Mozilla/5.0 Codex brand visibility probe"
 UNAVAILABLE_MARKERS = [
     "this content isn't available",
@@ -121,6 +122,8 @@ def facebook_candidates(row: dict, execution: dict | None) -> list[str]:
     candidates = [raw_url] if raw_url else []
     for value in values:
         for page, story in facebook_ids_from_value(value):
+            if story:
+                candidates.append(f"https://www.facebook.com/{FACEBOOK_PAGE_SLUG}/posts/{story}")
             candidates.extend([
                 f"https://www.facebook.com/permalink.php?story_fbid={story}&id={page}",
                 f"https://www.facebook.com/{page}_{story}",

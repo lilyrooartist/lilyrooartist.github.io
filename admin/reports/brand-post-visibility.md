@@ -1,31 +1,31 @@
 # Brand Post Visibility - Lily Roo
 
-Generated: 2026-07-05T23:09:59.946563Z
+Generated: 2026-07-05T23:26:38.682764Z
 
 ## Summary
-- Status: **attention**
+- Status: **verified**
 - Checked posts: **4**
-- Public visibility OK: **2**
-- Attention: **2**
+- Public visibility OK: **4**
+- Attention: **0**
 - X copy confirmed: **2**
-- Facebook pages loaded: **0**
+- Facebook pages loaded: **2**
 
 ## Rows
-- **FP-BRAND-AM-01-13-FACEBOOK** Facebook - `unavailable_marker_found`
-  - Logged URL: https://www.facebook.com/122119767927249470/posts/122120959905249470
-  - Checked URL: https://www.facebook.com/122119767927249470/posts/122120959905249470
-  - HTTP: `200`; copy matched: `False`
-  - Note: Facebook returned an unavailable-content marker for this post.
+- **FP-BRAND-AM-01-13-FACEBOOK** Facebook - `page_loaded_no_unavailable_marker`
+  - Logged URL: https://www.facebook.com/lilyrooartist/posts/122120959905249470
+  - Checked URL: https://www.facebook.com/lilyrooartist/posts/122120959905249470
+  - HTTP: `200`; copy matched: `True`
+  - Note: Facebook public page loaded without the common unavailable-content marker.
 - **FP-BRAND-AM-01-13-X** X - `visible_copy_confirmed`
   - Logged URL: https://x.com/i/web/status/2073410401006751908
   - Checked URL: https://publish.twitter.com/oembed?url=https%3A%2F%2Ftwitter.com%2Flilyrooartist%2Fstatus%2F2073410401006751908
   - HTTP: `200`; copy matched: `True`
   - Note: X public oEmbed returned Lily Roo post copy.
-- **FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK** Facebook - `unavailable_marker_found`
-  - Logged URL: https://www.facebook.com/122119767927249470/posts/122121048123249470
-  - Checked URL: https://www.facebook.com/122119767927249470/posts/122121048123249470
+- **FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK** Facebook - `page_loaded_no_unavailable_marker`
+  - Logged URL: https://www.facebook.com/lilyrooartist/posts/122121048123249470
+  - Checked URL: https://www.facebook.com/lilyrooartist/posts/122121048123249470
   - HTTP: `200`; copy matched: `False`
-  - Note: Facebook returned an unavailable-content marker for this post.
+  - Note: Facebook public page loaded without the common unavailable-content marker.
 - **FP-BRAND-AM-02-GIRLS-CAMP-X** X - `visible_copy_confirmed`
   - Logged URL: https://x.com/i/web/status/2073772787177861205
   - Checked URL: https://publish.twitter.com/oembed?url=https%3A%2F%2Ftwitter.com%2Flilyrooartist%2Fstatus%2F2073772787177861205
