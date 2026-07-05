@@ -747,18 +747,24 @@ def brand_growth_metric_actions(readout, x_results, facebook_results):
 
     if missing:
         label = "Connect automated brand metrics capture"
+        push_preview_command = "python3 scripts/push_github_actions_secrets.py" + "".join(
+            f" --name {name}" for name in missing
+        )
+        push_apply_command = f"{push_preview_command} --apply"
         note = (
             "Fresh Analog Myth posts are ready for measurement, but X/Meta result capture is waiting on API credentials. "
-            "Add the missing names to ../secrets/social_api.env and GitHub Actions secrets, then rerun the capture commands."
+            "Add the missing names to ../secrets/social_api.env, use the scoped GitHub Actions secret push, then rerun the capture commands."
         )
     else:
         label = "Capture active brand campaign metrics"
+        push_preview_command = ""
+        push_apply_command = ""
         note = "Fresh Analog Myth posts are ready for automated X/Facebook result capture."
 
     return [
         command_row(
             label,
-            command,
+            push_preview_command if missing else command,
             "brand_growth_metrics",
             3,
             {
@@ -770,6 +776,9 @@ def brand_growth_metric_actions(readout, x_results, facebook_results):
                 "missing_secret_names": missing,
                 "x_metric_capture_command": summary.get("x_metric_capture_command") or "",
                 "facebook_metric_capture_command": summary.get("facebook_metric_capture_command") or "",
+                "metric_capture_command": command,
+                "github_actions_push_preview": push_preview_command,
+                "github_actions_push_apply": push_apply_command,
                 "local_secret_source": "secrets/social_api.env",
                 "secret_template": "data/social_blocker_secret_template.env",
                 "github_actions_secret_presence": "data/github_actions_secret_presence.json",

@@ -1,6 +1,6 @@
 # Brand Activation Plan - Lily Roo
 
-Generated: 2026-07-05T21:48:37.287941Z
+Generated: 2026-07-05T22:03:02.599297Z
 
 ## Summary
 - Brand growth goal: **release_forward_brand_growth**
@@ -14,7 +14,7 @@ Generated: 2026-07-05T21:48:37.287941Z
 1. **Current operations next action: Connect automated brand metrics capture**
    - Phase: `Operations packet`; status: `waiting_for_credentials`
    - Detail: 2 fresh Analog Myth post(s) are ready to measure once X/Meta metric credentials are connected.
-   - Preview/check: `python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X && python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK`
+   - Preview/check: `python3 scripts/push_github_actions_secrets.py --name FB_PAGE_ID --name META_LONG_LIVED_TOKEN --name X_ACCESS_TOKEN --name X_ACCESS_TOKEN_SECRET --name X_API_KEY --name X_API_SECRET`
 
 ## Guardrails
 - This plan does not approve, apply, publish, or post anything.

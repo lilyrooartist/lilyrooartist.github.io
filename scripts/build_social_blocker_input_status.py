@@ -36,6 +36,8 @@ GROUPS = [
         "required_all": ["X_API_KEY", "X_API_SECRET", "X_ACCESS_TOKEN", "X_ACCESS_TOKEN_SECRET"],
         "github_actions_secrets": ["X_API_KEY", "X_API_SECRET", "X_ACCESS_TOKEN", "X_ACCESS_TOKEN_SECRET"],
         "github_actions_secret_mode": "all",
+        "github_actions_push_preview": "python3 scripts/push_github_actions_secrets.py --name X_API_KEY --name X_API_SECRET --name X_ACCESS_TOKEN --name X_ACCESS_TOKEN_SECRET",
+        "github_actions_push_apply": "python3 scripts/push_github_actions_secrets.py --name X_API_KEY --name X_API_SECRET --name X_ACCESS_TOKEN --name X_ACCESS_TOKEN_SECRET --apply",
         "unblocks": "Automated X post results for repeatable-format learning.",
         "verify": "python3 scripts/capture_x_post_results.py --min-age-hours 24 --allow-empty --skip-missing-secrets --apply-results",
     },
@@ -46,6 +48,8 @@ GROUPS = [
         "required_all": ["META_LONG_LIVED_TOKEN", "FB_PAGE_ID"],
         "github_actions_secrets": ["META_LONG_LIVED_TOKEN", "FB_PAGE_ID"],
         "github_actions_secret_mode": "all",
+        "github_actions_push_preview": "python3 scripts/push_github_actions_secrets.py --name META_LONG_LIVED_TOKEN --name FB_PAGE_ID",
+        "github_actions_push_apply": "python3 scripts/push_github_actions_secrets.py --name META_LONG_LIVED_TOKEN --name FB_PAGE_ID --apply",
         "unblocks": "Automated Facebook post results for repeatable-format learning.",
         "verify": "python3 scripts/capture_facebook_post_results.py --min-age-hours 24 --allow-empty --skip-missing-secrets --apply-results",
     },
@@ -310,6 +314,13 @@ def write_template() -> None:
     TEMPLATE.write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
 
 
+def social_env_label() -> str:
+    try:
+        return str(SOCIAL_ENV.relative_to(REPO_ROOT.parent))
+    except ValueError:
+        return str(SOCIAL_ENV)
+
+
 def present(env: dict[str, str], name: str) -> bool:
     return bool(str(env.get(name) or "").strip())
 
@@ -359,14 +370,14 @@ def build_group(group: dict, env: dict[str, str], github_presence: dict, instagr
     elif status == "ready":
         next_action = "Run the verification command and refresh admin evidence."
     elif missing_all:
-        next_action = f"Add {', '.join(missing_all)} to {SOCIAL_ENV}."
+        next_action = f"Add {', '.join(missing_all)} to {social_env_label()}."
     else:
-        next_action = f"Add one of {', '.join(required_any)} to {SOCIAL_ENV}."
+        next_action = f"Add one of {', '.join(required_any)} to {social_env_label()}."
     resolution_summary = instagram_resolution.get("summary") or {}
     if group["id"] == "instagram_business" and resolution_summary.get("status") == "missing_local_input":
         missing_resolution = resolution_summary.get("missing_local_input") or []
         if missing_resolution:
-            next_action = f"Add {', '.join(missing_resolution)} to {SOCIAL_ENV}, then run {group.get('credential_resolution_preview')}."
+            next_action = f"Add {', '.join(missing_resolution)} to {social_env_label()}, then run {group.get('credential_resolution_preview')}."
     guide = CREDENTIAL_GUIDES.get(group["id"], {})
     return {
         "id": group["id"],
@@ -415,7 +426,7 @@ def build_packet() -> dict:
         "safe_mode": True,
         "redaction": "Only key presence is reported; secret values are never written to generated files.",
         "source": {
-            "local_secret_source": str(SOCIAL_ENV.relative_to(REPO_ROOT.parent)),
+            "local_secret_source": social_env_label(),
             "template": str(TEMPLATE.relative_to(REPO_ROOT)),
             "github_actions_secret_presence": str(GITHUB_SECRET_PRESENCE.relative_to(REPO_ROOT)),
             "instagram_business_account_resolution": str(INSTAGRAM_RESOLUTION.relative_to(REPO_ROOT)),

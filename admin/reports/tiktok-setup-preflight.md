@@ -1,6 +1,6 @@
 # TikTok Setup Preflight - Lily Roo
 
-Generated: 2026-07-05T21:48:33.970123Z
+Generated: 2026-07-05T22:02:59.225814Z
 
 ## Summary
 - Status: **blocked**
@@ -8,7 +8,7 @@ Generated: 2026-07-05T21:48:33.970123Z
 - API strategy confirmed: **True**
 - Checks: **12**
 - Blocked checks: **1**
-- Ready to push worker secrets: **False**
+- Ready to push worker secrets: **True**
 - Ready to upload inbox drafts: **False** (excluded from active plan because drafts require manual finish)
 - Ready to post publicly: **False**
 - Local posting helper uses refresh token: **True**
@@ -61,7 +61,7 @@ Generated: 2026-07-05T21:48:33.970123Z
   - `refresh_admin_evidence`: after credentials or Worker state changes -> `python3 scripts/refresh_promo_admin.py`
 
 ## Credential Handoff
-- Status: **needs_local_values**
+- Status: **ready_to_push**
 - Required names: `TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN`
 - Handoff template: `data/tiktok_secret_handoff_template.env`
 - OAuth helper: `scripts/tiktok_oauth_handoff.py`
@@ -70,7 +70,7 @@ Generated: 2026-07-05T21:48:33.970123Z
 - Scope strategy: Keep video.upload out of the active plan because it requires manual finish; use video.publish only after direct public posting approval exists.
 - Local secret env: `secrets/social_api.env`
 - Local secret env prepared: **True**
-- Runtime local env file exists: **False**
+- Runtime local env file exists: **True**
 - Local handoff marker: `data/tiktok_local_handoff_status.json`
 - Initialize local secret env: `not needed`
 - Missing locally: `none`
@@ -85,7 +85,7 @@ Generated: 2026-07-05T21:48:33.970123Z
 - OAuth auth URL: `python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode direct`
 - OAuth code exchange: `python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode direct`
 - Dry-run first: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
-- Push direct-public secrets after review: `not available until local secrets exist and public posting approval is confirmed`
+- Push direct-public secrets after review: `python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py`
 - Public posting approval preview: `python3 scripts/set_tiktok_public_posting_approval.py --approved`
 - Public posting approval apply: `not available until local approval is confirmed`
 - Public posting approval deploy: `not available until local approval is confirmed`
@@ -102,18 +102,18 @@ Generated: 2026-07-05T21:48:33.970123Z
 
 ## Checks
 - **local_secret_env_file**: `pass`
-  - Local secret env handoff is initialized at secrets/social_api.env; this runtime cannot inspect the local file.
-- **oauth_authorization_url**: `remote_only`
-  - This runner cannot inspect local TikTok handoff secrets, but Worker readiness reports the upload token path is configured.
+  - Local secret env exists at secrets/social_api.env.
+- **oauth_authorization_url**: `pass`
+  - TikTok OAuth authorization URL can be generated locally.
   - Command: `python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode direct`
-- **oauth_token_exchange**: `remote_only`
-  - This runner cannot inspect local TikTok handoff secrets, but Worker readiness reports the upload token path is configured.
+- **oauth_token_exchange**: `pass`
+  - TikTok OAuth authorization codes can be exchanged locally.
   - Command: `python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode direct`
-- **local_refresh_credentials**: `remote_only`
-  - This runner cannot inspect local TikTok handoff secrets, but Worker readiness reports the upload token path is configured.
+- **local_refresh_credentials**: `pass`
+  - Local refresh credentials are present.
   - Command: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
-- **local_posting_token_path**: `remote_only`
-  - This runner cannot inspect local TikTok handoff secrets, but Worker readiness reports the upload token path is configured.
+- **local_posting_token_path**: `pass`
+  - Local TikTok posting helper can use an existing access token.
   - Command: `python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode direct --dry-run`
 - **worker_refresh_credentials**: `pass`
   - Worker readiness reports TikTok refresh credentials present.
@@ -140,7 +140,7 @@ Generated: 2026-07-05T21:48:33.970123Z
 - Exchange OAuth code after authorization: `python3 scripts/tiktok_oauth_handoff.py --exchange-code CODE --apply --posting-mode direct`
 - Preview local secrets: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
 - Preview inbox draft upload: `not in active plan`
-- Push after local credentials are present: `not available until local secrets exist`
+- Push after local credentials are present: `python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py`
 - Preview public posting approval flag: `python3 scripts/set_tiktok_public_posting_approval.py --approved`
 - Apply public posting approval flag: `not available until local approval is confirmed`
 - Deploy public posting approval flag: `not available until local approval is confirmed`

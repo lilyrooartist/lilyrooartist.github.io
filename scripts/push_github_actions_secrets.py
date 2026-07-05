@@ -23,6 +23,40 @@ AUTH_SECRET_SPECS = [
         "purpose": "Admin-password fallback for scheduler/executor captures.",
     },
 ]
+METRIC_SECRET_SPECS = [
+    {
+        "github_name": "X_API_KEY",
+        "local_names": ["X_API_KEY"],
+        "purpose": "X API key for automated post result capture.",
+    },
+    {
+        "github_name": "X_API_SECRET",
+        "local_names": ["X_API_SECRET"],
+        "purpose": "X API secret for automated post result capture.",
+    },
+    {
+        "github_name": "X_ACCESS_TOKEN",
+        "local_names": ["X_ACCESS_TOKEN"],
+        "purpose": "X access token for automated post result capture.",
+    },
+    {
+        "github_name": "X_ACCESS_TOKEN_SECRET",
+        "local_names": ["X_ACCESS_TOKEN_SECRET"],
+        "purpose": "X access token secret for automated post result capture.",
+    },
+    {
+        "github_name": "META_LONG_LIVED_TOKEN",
+        "local_names": ["META_LONG_LIVED_TOKEN"],
+        "purpose": "Meta long-lived token for automated Facebook post result capture.",
+    },
+    {
+        "github_name": "FB_PAGE_ID",
+        "local_names": ["FB_PAGE_ID"],
+        "purpose": "Facebook Page ID for automated Facebook post result capture.",
+    },
+]
+SECRET_SPECS = AUTH_SECRET_SPECS + METRIC_SECRET_SPECS
+DEFAULT_SECRET_NAMES = [spec["github_name"] for spec in AUTH_SECRET_SPECS]
 
 
 def local_value(env: dict[str, str], names: list[str]) -> tuple[str, str]:
@@ -31,6 +65,15 @@ def local_value(env: dict[str, str], names: list[str]) -> tuple[str, str]:
         if value:
             return name, value
     return "", ""
+
+
+def default_secret_names(env: dict[str, str]) -> list[str]:
+    ready_auth_names = [
+        spec["github_name"]
+        for spec in AUTH_SECRET_SPECS
+        if local_value(env, spec["local_names"])[1]
+    ]
+    return ready_auth_names or DEFAULT_SECRET_NAMES
 
 
 def run_gh_secret_set(repo: str, name: str, value: str, timeout: int) -> tuple[int, str, str]:
@@ -46,9 +89,9 @@ def run_gh_secret_set(repo: str, name: str, value: str, timeout: int) -> tuple[i
 
 
 def build_plan(env: dict[str, str], names: list[str] | None = None) -> list[dict]:
-    selected = set(names or [spec["github_name"] for spec in AUTH_SECRET_SPECS])
+    selected = set(names or default_secret_names(env))
     rows = []
-    for spec in AUTH_SECRET_SPECS:
+    for spec in SECRET_SPECS:
         if spec["github_name"] not in selected:
             continue
         source_name, value = local_value(env, spec["local_names"])
@@ -76,10 +119,10 @@ def public_row(row: dict) -> dict:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Push local scheduler auth values to GitHub Actions secrets.")
+    parser = argparse.ArgumentParser(description="Push selected local Lily Roo values to GitHub Actions secrets.")
     parser.add_argument("--repo", default=DEFAULT_REPO)
     parser.add_argument("--apply", action="store_true", help="Actually write GitHub Actions secrets. Default is dry-run.")
-    parser.add_argument("--name", action="append", choices=[spec["github_name"] for spec in AUTH_SECRET_SPECS], help="Limit to one GitHub secret name. Can be repeated.")
+    parser.add_argument("--name", action="append", choices=[spec["github_name"] for spec in SECRET_SPECS], help="Limit to one GitHub secret name. Can be repeated.")
     parser.add_argument("--timeout-seconds", type=int, default=20)
     args = parser.parse_args()
 
@@ -112,7 +155,8 @@ def main() -> int:
             "applied_count": len(applied),
             "error_count": len(errors),
             "status": "applied" if args.apply and applied and not errors else "missing_local_input" if missing else "ready_to_apply" if not args.apply else "failed",
-            "apply_command": "python3 scripts/push_github_actions_secrets.py --apply",
+            "preview_command": "python3 scripts/push_github_actions_secrets.py" + "".join(f" --name {name}" for name in (args.name or [])),
+            "apply_command": "python3 scripts/push_github_actions_secrets.py" + "".join(f" --name {name}" for name in (args.name or [])) + " --apply",
             "presence_capture_command": "python3 scripts/capture_github_actions_secret_presence.py",
         },
         "rows": [public_row(row) for row in plan],
