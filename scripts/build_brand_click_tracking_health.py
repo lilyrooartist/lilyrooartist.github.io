@@ -75,6 +75,14 @@ def tracking_urls(reply_text: str) -> list[str]:
     return re.findall(r"https://www\.lilyroo\.com/go/am\.html\?[^\s]+", reply_text or "")
 
 
+def visible_surface_text(row: dict) -> str:
+    pieces = [
+        str(row.get("text") or "").strip(),
+        str(row.get("reply_text") or "").strip(),
+    ]
+    return "\n\n".join(piece for piece in pieces if piece)
+
+
 def validate_url(url: str, post_id: str) -> tuple[dict, list[str]]:
     issues: list[str] = []
     parsed = urlparse(url)
@@ -210,6 +218,9 @@ def build_payload() -> dict:
     track_counts = Counter()
     x_main_album_link_count = 0
     expected_x_main_album_link_count = 0
+    visible_album_link_count = 0
+    visible_full_destination_count = 0
+    expected_visible_surface_count = 0
 
     for row in read_csv(QUEUE):
         post_id = str(row.get("id") or "").strip()
@@ -223,10 +234,12 @@ def build_payload() -> dict:
         parts = post_parts(post_id)
         urls = tracking_urls(row.get("reply_text") or "")
         main_text_urls = tracking_urls(row.get("text") or "")
+        surface_urls = tracking_urls(visible_surface_text(row))
         row_issues: list[str] = []
         url_results = []
         main_text_url_results = []
         destinations = set()
+        surface_destinations = set()
         for url in urls:
             result, issues = validate_url(url, post_id)
             url_results.append(result)
@@ -235,11 +248,25 @@ def build_payload() -> dict:
                 destinations.add(result["destination"])
                 destination_counts[result["destination"]] += 1
 
+        for url in surface_urls:
+            result, issues = validate_url(url, post_id)
+            row_issues.extend(issues)
+            if result["destination"]:
+                surface_destinations.add(result["destination"])
+
         missing_destinations = sorted(EXPECTED_DESTINATIONS - destinations)
+        missing_surface_destinations = sorted(EXPECTED_DESTINATIONS - surface_destinations)
         for destination in missing_destinations:
             row_issues.append(f"missing_{destination}_tracking_link")
+        for destination in missing_surface_destinations:
+            row_issues.append(f"missing_visible_{destination}_tracking_link")
         if len(urls) != len(EXPECTED_DESTINATIONS):
             row_issues.append("unexpected_tracking_link_count")
+        expected_visible_surface_count += 1
+        if "album" in surface_destinations:
+            visible_album_link_count += 1
+        if not missing_surface_destinations:
+            visible_full_destination_count += 1
         if not row.get("reply_text"):
             row_issues.append("missing_reply_text")
 
@@ -278,6 +305,9 @@ def build_payload() -> dict:
             "tracking_urls": url_results,
             "main_text_album_link_ok": main_album_link_ok,
             "main_text_tracking_urls": main_text_url_results,
+            "visible_surface_album_link_ok": "album" in surface_destinations,
+            "visible_surface_destinations": sorted(surface_destinations),
+            "visible_surface_tracking_url_count": len(surface_urls),
         })
 
     redirect = redirect_health()
@@ -287,7 +317,18 @@ def build_payload() -> dict:
     broken_rows = len(rows) - ready_rows
     total_urls = sum(row["tracking_url_count"] for row in rows)
     expected_urls = len(rows) * len(EXPECTED_DESTINATIONS)
-    status = "ready" if rows and not broken_rows and total_urls == expected_urls and redirect["status"] == "ready" else "attention"
+    status = (
+        "ready"
+        if (
+            rows
+            and not broken_rows
+            and total_urls == expected_urls
+            and visible_album_link_count == expected_visible_surface_count
+            and visible_full_destination_count == expected_visible_surface_count
+            and redirect["status"] == "ready"
+        )
+        else "attention"
+    )
 
     return {
         "generated_at": now.isoformat().replace("+00:00", "Z"),
@@ -306,6 +347,10 @@ def build_payload() -> dict:
             "expected_tracking_url_count": expected_urls,
             "x_main_album_link_count": x_main_album_link_count,
             "expected_x_main_album_link_count": expected_x_main_album_link_count,
+            "visible_surface_album_link_count": visible_album_link_count,
+            "expected_visible_surface_album_link_count": expected_visible_surface_count,
+            "visible_surface_full_destination_count": visible_full_destination_count,
+            "expected_visible_surface_full_destination_count": expected_visible_surface_count,
             "destination_counts": dict(sorted(destination_counts.items())),
             "platform_counts": dict(sorted(platform_counts.items())),
             "wave_counts": dict(sorted(wave_counts.items())),
@@ -327,6 +372,7 @@ def build_payload() -> dict:
             "Click capture stores campaign metadata only and does not store IP addresses.",
             "Every future Analog Myth auto post should carry album, Echo Thread, and video destinations.",
             "Every future X Analog Myth auto post should carry the album destination in the main post text.",
+            "Every future Analog Myth auto post should expose an album link on the visible published surface.",
             "The live click endpoint health probe uses dry_run=1 so it cannot create fake campaign clicks.",
         ],
     }
@@ -344,6 +390,8 @@ def build_markdown(payload: dict) -> str:
         f"- Future campaign rows ready: **{summary['ready_future_campaign_rows']} / {summary['future_campaign_rows']}**",
         f"- Tracking URLs checked: **{summary['tracking_url_count']} / {summary['expected_tracking_url_count']}**",
         f"- X main-post album links: **{summary['x_main_album_link_count']} / {summary['expected_x_main_album_link_count']}**",
+        f"- Visible album click paths: **{summary['visible_surface_album_link_count']} / {summary['expected_visible_surface_album_link_count']}**",
+        f"- Visible full destination sets: **{summary['visible_surface_full_destination_count']} / {summary['expected_visible_surface_full_destination_count']}**",
         f"- Redirect page: **{summary['redirect_status']}**",
         f"- Live click endpoint dry run: **{summary['click_endpoint_status']}**",
         f"- Destinations: **{', '.join(f'{key}: {value}' for key, value in summary['destination_counts'].items()) or 'none'}**",
@@ -374,6 +422,10 @@ def build_markdown(payload: dict) -> str:
             lines.append(f"  - Issues: `{', '.join(row['issues'])}`")
         else:
             lines.append(f"  - Destinations: `{', '.join(row['destinations'])}`")
+        lines.append(
+            f"  - Visible surface: **{'ready' if row.get('visible_surface_album_link_ok') else 'attention'}** "
+            f"(`{', '.join(row.get('visible_surface_destinations') or []) or 'none'}`)"
+        )
         if row.get("platform") == "X":
             lines.append(f"  - Main-post album link: **{'ready' if row.get('main_text_album_link_ok') else 'attention'}**")
     lines.extend(["", "## Guardrails"])

@@ -456,6 +456,10 @@ def validate_generated_outputs(failures):
         expected_url_count = int(summary.get("expected_tracking_url_count") or 0)
         x_main_links = int(summary.get("x_main_album_link_count") or 0)
         expected_x_main_links = int(summary.get("expected_x_main_album_link_count") or 0)
+        visible_album_links = int(summary.get("visible_surface_album_link_count") or 0)
+        expected_visible_album_links = int(summary.get("expected_visible_surface_album_link_count") or 0)
+        visible_full_destinations = int(summary.get("visible_surface_full_destination_count") or 0)
+        expected_visible_full_destinations = int(summary.get("expected_visible_surface_full_destination_count") or 0)
         redirect = tracking.get("redirect") or {}
         click_endpoint = tracking.get("click_endpoint") or {}
         if (
@@ -466,6 +470,10 @@ def validate_generated_outputs(failures):
             and url_count == expected_url_count == future_rows * 3
             and expected_x_main_links > 0
             and x_main_links == expected_x_main_links
+            and expected_visible_album_links == future_rows
+            and visible_album_links == expected_visible_album_links
+            and expected_visible_full_destinations == future_rows
+            and visible_full_destinations == expected_visible_full_destinations
             and not int(summary.get("broken_future_campaign_rows") or 0)
             and not summary.get("issue_counts")
             and summary.get("redirect_status") == "ready"
@@ -478,7 +486,7 @@ def validate_generated_outputs(failures):
             and click_endpoint.get("dry_run") is True
             and BRAND_CLICK_TRACKING_HEALTH_REPORT.exists()
         ):
-            ok("brand click tracking health verifies all future campaign links and live dry-run capture")
+            ok("brand click tracking health verifies future campaign links, visible album paths, and live dry-run capture")
         else:
             fail("brand_click_tracking_health.json does not prove all future campaign links and dry-run click capture are ready", failures)
     else:
@@ -4108,6 +4116,7 @@ def validate_generated_outputs(failures):
             and "brand-click-tracking-health.md" in tracking_text
             and "reply_text" in tracking_text
             and "main_text_album_link_ok" in tracking_text
+            and "visible_surface_album_link_ok" in tracking_text
             and "go/am.html" in tracking_text
             and "EXPECTED_DESTINATIONS" in tracking_text
             and "This check is read-only and does not post" in tracking_text
@@ -4697,6 +4706,7 @@ def validate_generated_outputs(failures):
         if (
             "Brand Click Tracking Health" in click_tracking_report_text
             and "Live Endpoint Dry Run" in click_tracking_report_text
+            and "Visible album click paths" in click_tracking_report_text
             and "Redirect Checks" in click_tracking_report_text
             and "Future Rows" in click_tracking_report_text
             and "Guardrails" in click_tracking_report_text
