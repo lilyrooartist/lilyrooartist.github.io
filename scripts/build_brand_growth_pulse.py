@@ -60,6 +60,28 @@ def hours_until(value: str | None, now: datetime) -> float | None:
     return round((parsed - now).total_seconds() / 3600, 2)
 
 
+def hours_since(value: str | None, now: datetime) -> float | None:
+    parsed = parse_datetime(value)
+    if not parsed:
+        return None
+    return round((now - parsed).total_seconds() / 3600, 2)
+
+
+def max_timestamp(rows: list[dict], key: str):
+    parsed = [parse_datetime(row.get(key)) for row in rows if row.get(key)]
+    parsed = [value for value in parsed if value]
+    return max(parsed) if parsed else None
+
+
+def first_future_timestamp(rows: list[dict], key: str, now: datetime) -> str:
+    parsed = sorted(
+        value
+        for value in (parse_datetime(row.get(key)) for row in rows if row.get(key))
+        if value and value > now
+    )
+    return iso_z(parsed[0]) if parsed else ""
+
+
 def missing_metric_names(x_results: dict, facebook_results: dict) -> list[str]:
     names = []
     for payload in (x_results, facebook_results):
@@ -129,6 +151,7 @@ def learning_row(row: dict, learning_use: str) -> dict:
 def build_learning_plan(
     readout: dict,
     readout_summary: dict,
+    clicks: dict,
     click_summary: dict,
     missing_metrics: list[str],
     now: datetime,
@@ -149,8 +172,30 @@ def build_learning_plan(
     click_count = int(click_summary.get("click_count") or 0)
     ready_count = len(ready_rows)
     waiting_count = len(waiting_rows)
+    click_snapshot_updated_at = clicks.get("updated_at") or clicks.get("generated_at") or ""
+    click_snapshot_at = parse_datetime(click_snapshot_updated_at)
+    latest_ready_due = max_timestamp(ready_rows, "measurement_due_at")
+    click_snapshot_ok = clicks.get("ok") is True and not clicks.get("error")
+    click_snapshot_covers_ready = bool(
+        ready_count
+        and click_snapshot_ok
+        and click_snapshot_at
+        and latest_ready_due
+        and click_snapshot_at >= latest_ready_due
+    )
+    next_waiting_due = first_future_timestamp(waiting_rows, "measurement_due_at", now)
 
-    if ready_count and missing_metrics:
+    if ready_count and missing_metrics and click_snapshot_covers_ready and click_count:
+        status = "learn_from_clicks"
+        headline = "Click response is ready to review"
+        label = "Review clicks"
+        note = "Fresh first-party click evidence is saved; use it to shape the next copy, while private X/Facebook result counts can join after analytics credentials are connected."
+    elif ready_count and missing_metrics and click_snapshot_covers_ready:
+        status = "first_party_click_checked"
+        headline = "First-party clicks checked"
+        label = "Checked"
+        note = f"Fresh click evidence covers {ready_count} public posts. No first-party clicks are recorded yet, so keep the next automatic posts moving and check again after the next result window."
+    elif ready_count and missing_metrics:
         status = "first_party_click_check_ready"
         headline = "First-party click check is ready"
         label = "Check clicks"
@@ -176,7 +221,14 @@ def build_learning_plan(
         label = "Watching"
         note = "The next learning signal starts when the upcoming queued posts publish and their public URLs are captured."
 
-    next_due = iso_z(now) if ready_count and missing_metrics else ""
+    next_due = iso_z(now) if ready_count and missing_metrics and not click_snapshot_covers_ready else ""
+    if not next_due and ready_count and click_snapshot_covers_ready:
+        next_due = (
+            next_waiting_due
+            or readout_summary.get("next_proof_due_at")
+            or readout_summary.get("next_scheduled_at")
+            or ""
+        )
     if not next_due and not ready_count:
         for row in waiting_rows:
             if row.get("measurement_due_at"):
@@ -208,6 +260,9 @@ def build_learning_plan(
         "waiting_measurement_count": waiting_count,
         "scheduled_future_count": int(readout_summary.get("future_queue_visible_rows") or len(future_rows)),
         "next_learning_due_at": next_due,
+        "click_snapshot_updated_at": iso_z(click_snapshot_at) if click_snapshot_at else "",
+        "click_snapshot_age_hours": hours_since(click_snapshot_updated_at, now),
+        "click_snapshot_covers_ready_measurements": click_snapshot_covers_ready,
         "next_metric_post_ids": readout_summary.get("next_metric_post_ids") or [row.get("id") for row in ready_rows[:2]],
         "next_proof_post_ids": readout_summary.get("next_proof_post_ids") or [row.get("id") for row in future_rows[:2]],
         "click_refresh_command": readout_summary.get("campaign_click_refresh_command") or "python3 scripts/capture_brand_campaign_clicks.py",
@@ -234,6 +289,7 @@ def pick_primary_action(
     posting_summary: dict,
     click_summary: dict,
     missing_metrics: list[str],
+    learning_plan: dict,
     now: datetime,
 ) -> dict:
     active_campaign_ready = (
@@ -280,13 +336,21 @@ def pick_primary_action(
             ) or "python3 scripts/build_brand_growth_readout.py",
             "due_at": "",
         }
-    if ready_metrics and missing_metrics:
+    if ready_metrics and missing_metrics and learning_plan.get("status") == "first_party_click_check_ready":
         return {
             "state": "first_party_click_check_ready",
             "label": "Refresh first-party click learning",
             "why": f"{ready_metrics} recent {'post is' if ready_metrics == 1 else 'posts are'} public and ready for a click-response check; X/Meta result metrics can join after credentials are connected.",
             "command": "python3 scripts/capture_brand_campaign_clicks.py && python3 scripts/build_brand_growth_pulse.py",
             "due_at": iso_z(now),
+        }
+    if ready_metrics and missing_metrics and learning_plan.get("status") == "learn_from_clicks":
+        return {
+            "state": "learn_from_clicks",
+            "label": "Review first-party click response",
+            "why": "Fresh click evidence is available for recent public posts, so the next content pass can favor the strongest tracks and destinations.",
+            "command": "python3 scripts/capture_brand_campaign_clicks.py && python3 scripts/build_brand_growth_pulse.py",
+            "due_at": learning_plan.get("next_learning_due_at") or "",
         }
     if active_campaign_ready and proof_hours is not None and proof_hours > 0:
         return {
@@ -328,15 +392,16 @@ def build_payload() -> dict:
     click_summary = clicks.get("summary") or {}
     missing_metrics = missing_metric_names(x_results, facebook_results)
     optional_inputs = []
+    learning_plan = build_learning_plan(readout, readout_summary, clicks, click_summary, missing_metrics, now)
     primary_action = pick_primary_action(
         readout_summary,
         preflight_summary,
         posting_summary,
         click_summary,
         missing_metrics,
+        learning_plan,
         now,
     )
-    learning_plan = build_learning_plan(readout, readout_summary, click_summary, missing_metrics, now)
 
     next_post_at = readout_summary.get("next_scheduled_at") or preflight_summary.get("scheduled_time") or ""
     primary_action_due_counts_as_proof = primary_action.get("state") in {"campaign_running", "proof_due"}
@@ -415,6 +480,9 @@ def build_payload() -> dict:
             "click_post_count": int(click_summary.get("post_count") or 0),
             "clicks_by_platform": listify_counts(click_summary.get("by_platform")),
             "clicks_by_destination": listify_counts(click_summary.get("by_destination")),
+            "click_snapshot_updated_at": learning_plan.get("click_snapshot_updated_at") or "",
+            "click_snapshot_age_hours": learning_plan.get("click_snapshot_age_hours"),
+            "click_snapshot_covers_ready_measurements": learning_plan.get("click_snapshot_covers_ready_measurements"),
             "next_post_at": next_post_at,
             "proof_due_at": proof_due_at,
             "hours_until_next_post": hours_until(next_post_at, now),
@@ -463,6 +531,8 @@ def build_markdown(payload: dict) -> str:
         f"- Posted or measured rows: **{summary['posted_or_measured_rows']}**",
         f"- Ready for result capture: **{summary['ready_for_metric_capture_rows']}**",
         f"- First-party clicks: **{summary['click_count']}** across **{summary['click_post_count']}** post(s)",
+        f"- Click snapshot: `{summary['click_snapshot_updated_at'] or 'n/a'}`"
+        f"{' (covers current due posts)' if summary.get('click_snapshot_covers_ready_measurements') else ''}",
         f"- Next post at: `{summary['next_post_at'] or 'n/a'}`",
         f"- Proof due at: `{summary['proof_due_at'] or 'n/a'}`",
         f"- Hours until next post: `{summary['hours_until_next_post']}`",

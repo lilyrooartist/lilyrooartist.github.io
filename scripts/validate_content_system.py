@@ -493,6 +493,12 @@ def validate_generated_outputs(failures):
                     learning_plan.get("status") == "first_party_click_check_ready"
                     and learning_plan.get("next_learning_due_at")
                 )
+                or (
+                    learning_plan.get("status") in {"first_party_click_checked", "learn_from_clicks"}
+                    and learning_plan.get("click_snapshot_updated_at")
+                    and learning_plan.get("click_snapshot_covers_ready_measurements") is True
+                    and learning_plan.get("next_learning_due_at")
+                )
             )
             and BRAND_GROWTH_PULSE_REPORT.exists()
             and "Post-Window Learning" in BRAND_GROWTH_PULSE_REPORT.read_text(encoding="utf-8")
