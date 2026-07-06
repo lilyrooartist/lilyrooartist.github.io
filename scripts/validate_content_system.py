@@ -61,6 +61,7 @@ EXPERIMENT_RESULT_COLLECTION = ROOT / "data" / "experiment_result_collection_pac
 EXPERIMENT_RESULT_CLIPBOARD = ROOT / "data" / "experiment_result_clipboard.json"
 EXPERIMENT_PUBLISH_RUNWAY = ROOT / "data" / "experiment_publish_runway.json"
 BRAND_GROWTH_PREFLIGHT = ROOT / "data" / "brand_growth_preflight.json"
+BRAND_GROWTH_READOUT = ROOT / "data" / "brand_growth_readout.json"
 BRAND_CLICK_TRACKING_HEALTH = ROOT / "data" / "brand_click_tracking_health.json"
 POSTING_AUTOMATION_STATUS = ROOT / "data" / "posting_automation_status.json"
 YOUTUBE_POST_RESULTS = ROOT / "data" / "youtube_post_results.json"
@@ -405,6 +406,24 @@ def validate_generated_outputs(failures):
             fail("brand_growth_preflight.json does not prove a ready next campaign window", failures)
     else:
         fail("brand_growth_preflight.json missing; run scripts/build_brand_growth_preflight.py", failures)
+    if BRAND_GROWTH_READOUT.exists() and BRAND_GROWTH_PREFLIGHT.exists() and POSTING_AUTOMATION_STATUS.exists():
+        preflight = json.loads(BRAND_GROWTH_PREFLIGHT.read_text(encoding="utf-8"))
+        readout = json.loads(BRAND_GROWTH_READOUT.read_text(encoding="utf-8"))
+        posting_status = json.loads(POSTING_AUTOMATION_STATUS.read_text(encoding="utf-8"))
+        preflight_summary = preflight.get("summary") or {}
+        readout_summary = readout.get("summary") or {}
+        posting_summary = posting_status.get("summary") or {}
+        authoritative_proof = preflight_summary.get("next_proof_due_at") or preflight_summary.get("scheduled_time") or ""
+        if (
+            authoritative_proof
+            and readout_summary.get("next_proof_due_at") == authoritative_proof
+            and posting_summary.get("active_campaign_next_proof_due_at") == authoritative_proof
+        ):
+            ok("brand growth proof timing is consistent across preflight, readout, and posting automation")
+        else:
+            fail("brand growth proof timing is inconsistent across preflight, readout, and posting automation", failures)
+    elif not BRAND_GROWTH_READOUT.exists():
+        fail("brand_growth_readout.json missing; run scripts/build_brand_growth_readout.py", failures)
     if BRAND_CLICK_TRACKING_HEALTH.exists():
         tracking = json.loads(BRAND_CLICK_TRACKING_HEALTH.read_text(encoding="utf-8"))
         summary = tracking.get("summary") or {}

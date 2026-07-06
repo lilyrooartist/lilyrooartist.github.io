@@ -28,7 +28,8 @@ ADMIN_INDEX = ROOT / "admin" / "index.html"
 
 TZ = ZoneInfo("America/New_York")
 RESULT_FIELDS = ["views", "likes", "comments", "shares", "saves", "subs_delta"]
-POST_PROOF_DELAY_MINUTES = 45
+# Match the scheduler preflight probe, which checks the final paired post slot one minute later.
+POST_PROOF_DELAY_MINUTES = 1
 FIRST_MEASUREMENT_DELAY_HOURS = 24
 CAMPAIGN_ID_PREFIX = "FP-BRAND-AM"
 

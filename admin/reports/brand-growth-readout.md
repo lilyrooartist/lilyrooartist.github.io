@@ -1,6 +1,6 @@
 # Brand Growth Readout - Lily Roo
 
-Generated: 2026-07-06T17:08:39.273744Z
+Generated: 2026-07-06T17:15:37.420674Z
 
 ## Summary
 - Campaign rows: **64**
@@ -16,7 +16,7 @@ Generated: 2026-07-06T17:08:39.273744Z
 - Status counts: **posted_waiting_measurement_window: 2, ready_for_metric_capture: 4, scheduled_future: 58**
 - Next scheduled: `FP-BRAND-AM-04-SPILLING-THE-TEA-X` at `2026-07-07T10:15:00-04:00`
 - Next action window: `2026-07-04` **measurement_due** due `2026-07-05T15:20:00Z`
-- Next scheduled post proof: `2026-07-07` due `2026-07-07T16:05:00Z`
+- Next scheduled post proof: `2026-07-07` due `2026-07-07T15:21:00Z`
 - Next metric window: `2026-07-04` due `2026-07-05T15:20:00Z`
 - YouTube total views: **487**
 - Spotify monthly listeners: **1**
@@ -45,102 +45,102 @@ Generated: 2026-07-06T17:08:39.273744Z
 - Metric capture is waiting for Meta API credential names: META_LONG_LIVED_TOKEN, FB_PAGE_ID. After credentials are present, run: python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK
 
 ## Post-Slot Watch
-- `2026-07-04` **measurement_due** proof due `2026-07-04T16:05:00Z` for `FP-BRAND-AM-01-13-X, FP-BRAND-AM-01-13-FACEBOOK`
+- `2026-07-04` **measurement_due** proof due `2026-07-04T15:21:00Z` for `FP-BRAND-AM-01-13-X, FP-BRAND-AM-01-13-FACEBOOK`
   - Next: Capture metrics for logged campaign posts and import reviewed result fields.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
   - Metrics: `python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X && python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK`
-- `2026-07-05` **measurement_due** proof due `2026-07-05T16:05:00Z` for `FP-BRAND-AM-02-GIRLS-CAMP-X, FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK`
+- `2026-07-05` **measurement_due** proof due `2026-07-05T15:21:00Z` for `FP-BRAND-AM-02-GIRLS-CAMP-X, FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK`
   - Next: Capture metrics for logged campaign posts and import reviewed result fields.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
   - Metrics: `python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-02-GIRLS-CAMP-X && python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK`
-- `2026-07-06` **posted_waiting_measurement** proof due `2026-07-06T16:05:00Z` for `FP-BRAND-AM-03-ANALOG-MYTH-X, FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK`
+- `2026-07-06` **posted_waiting_measurement** proof due `2026-07-06T15:21:00Z` for `FP-BRAND-AM-03-ANALOG-MYTH-X, FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK`
   - Next: Wait for the first measurement window before capturing result metrics.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-- `2026-07-07` **scheduled_future** proof due `2026-07-07T16:05:00Z` for `FP-BRAND-AM-04-SPILLING-THE-TEA-X, FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK`
+- `2026-07-07` **scheduled_future** proof due `2026-07-07T15:21:00Z` for `FP-BRAND-AM-04-SPILLING-THE-TEA-X, FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-- `2026-07-08` **scheduled_future** proof due `2026-07-08T16:05:00Z` for `FP-BRAND-AM-05-NO-MORTGAGE-X, FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK`
+- `2026-07-08` **scheduled_future** proof due `2026-07-08T15:21:00Z` for `FP-BRAND-AM-05-NO-MORTGAGE-X, FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-- `2026-07-09` **scheduled_future** proof due `2026-07-09T16:05:00Z` for `FP-BRAND-AM-06-GUARDS-DOWN-X, FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK`
+- `2026-07-09` **scheduled_future** proof due `2026-07-09T15:21:00Z` for `FP-BRAND-AM-06-GUARDS-DOWN-X, FP-BRAND-AM-06-GUARDS-DOWN-FACEBOOK`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-- `2026-07-10` **scheduled_future** proof due `2026-07-10T16:05:00Z` for `FP-BRAND-AM-07-SLOW-WALK-X, FP-BRAND-AM-07-SLOW-WALK-FACEBOOK`
+- `2026-07-10` **scheduled_future** proof due `2026-07-10T15:21:00Z` for `FP-BRAND-AM-07-SLOW-WALK-X, FP-BRAND-AM-07-SLOW-WALK-FACEBOOK`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-- `2026-07-11` **scheduled_future** proof due `2026-07-11T16:05:00Z` for `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X, FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK`
+- `2026-07-11` **scheduled_future** proof due `2026-07-11T15:21:00Z` for `FP-BRAND-AM-08-THE-POWER-OF-LIGHT-X, FP-BRAND-AM-08-THE-POWER-OF-LIGHT-FACEBOOK`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-- `2026-07-12` **scheduled_future** proof due `2026-07-12T16:05:00Z` for `FP-BRAND-AM-W2-01-13-X, FP-BRAND-AM-W2-01-13-FACEBOOK`
+- `2026-07-12` **scheduled_future** proof due `2026-07-12T15:21:00Z` for `FP-BRAND-AM-W2-01-13-X, FP-BRAND-AM-W2-01-13-FACEBOOK`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-- `2026-07-13` **scheduled_future** proof due `2026-07-13T16:05:00Z` for `FP-BRAND-AM-W2-02-GIRLS-CAMP-X, FP-BRAND-AM-W2-02-GIRLS-CAMP-FACEBOOK`
+- `2026-07-13` **scheduled_future** proof due `2026-07-13T15:21:00Z` for `FP-BRAND-AM-W2-02-GIRLS-CAMP-X, FP-BRAND-AM-W2-02-GIRLS-CAMP-FACEBOOK`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-- `2026-07-14` **scheduled_future** proof due `2026-07-14T16:05:00Z` for `FP-BRAND-AM-W2-03-ANALOG-MYTH-X, FP-BRAND-AM-W2-03-ANALOG-MYTH-FACEBOOK`
+- `2026-07-14` **scheduled_future** proof due `2026-07-14T15:21:00Z` for `FP-BRAND-AM-W2-03-ANALOG-MYTH-X, FP-BRAND-AM-W2-03-ANALOG-MYTH-FACEBOOK`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-- `2026-07-15` **scheduled_future** proof due `2026-07-15T16:05:00Z` for `FP-BRAND-AM-W2-04-SPILLING-THE-TEA-X, FP-BRAND-AM-W2-04-SPILLING-THE-TEA-FACEBOOK`
+- `2026-07-15` **scheduled_future** proof due `2026-07-15T15:21:00Z` for `FP-BRAND-AM-W2-04-SPILLING-THE-TEA-X, FP-BRAND-AM-W2-04-SPILLING-THE-TEA-FACEBOOK`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-- `2026-07-16` **scheduled_future** proof due `2026-07-16T16:05:00Z` for `FP-BRAND-AM-W2-05-NO-MORTGAGE-X, FP-BRAND-AM-W2-05-NO-MORTGAGE-FACEBOOK`
+- `2026-07-16` **scheduled_future** proof due `2026-07-16T15:21:00Z` for `FP-BRAND-AM-W2-05-NO-MORTGAGE-X, FP-BRAND-AM-W2-05-NO-MORTGAGE-FACEBOOK`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-- `2026-07-17` **scheduled_future** proof due `2026-07-17T16:05:00Z` for `FP-BRAND-AM-W2-06-GUARDS-DOWN-X, FP-BRAND-AM-W2-06-GUARDS-DOWN-FACEBOOK`
+- `2026-07-17` **scheduled_future** proof due `2026-07-17T15:21:00Z` for `FP-BRAND-AM-W2-06-GUARDS-DOWN-X, FP-BRAND-AM-W2-06-GUARDS-DOWN-FACEBOOK`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-- `2026-07-18` **scheduled_future** proof due `2026-07-18T16:05:00Z` for `FP-BRAND-AM-W2-07-SLOW-WALK-X, FP-BRAND-AM-W2-07-SLOW-WALK-FACEBOOK`
+- `2026-07-18` **scheduled_future** proof due `2026-07-18T15:21:00Z` for `FP-BRAND-AM-W2-07-SLOW-WALK-X, FP-BRAND-AM-W2-07-SLOW-WALK-FACEBOOK`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-- `2026-07-19` **scheduled_future** proof due `2026-07-19T16:05:00Z` for `FP-BRAND-AM-W2-08-THE-POWER-OF-LIGHT-X, FP-BRAND-AM-W2-08-THE-POWER-OF-LIGHT-FACEBOOK`
+- `2026-07-19` **scheduled_future** proof due `2026-07-19T15:21:00Z` for `FP-BRAND-AM-W2-08-THE-POWER-OF-LIGHT-X, FP-BRAND-AM-W2-08-THE-POWER-OF-LIGHT-FACEBOOK`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-- `2026-07-20` **scheduled_future** proof due `2026-07-20T16:05:00Z` for `FP-BRAND-AM-W3-01-13-X, FP-BRAND-AM-W3-01-13-FACEBOOK`
+- `2026-07-20` **scheduled_future** proof due `2026-07-20T15:21:00Z` for `FP-BRAND-AM-W3-01-13-X, FP-BRAND-AM-W3-01-13-FACEBOOK`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-- `2026-07-21` **scheduled_future** proof due `2026-07-21T16:05:00Z` for `FP-BRAND-AM-W3-02-GIRLS-CAMP-X, FP-BRAND-AM-W3-02-GIRLS-CAMP-FACEBOOK`
+- `2026-07-21` **scheduled_future** proof due `2026-07-21T15:21:00Z` for `FP-BRAND-AM-W3-02-GIRLS-CAMP-X, FP-BRAND-AM-W3-02-GIRLS-CAMP-FACEBOOK`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-- `2026-07-22` **scheduled_future** proof due `2026-07-22T16:05:00Z` for `FP-BRAND-AM-W3-03-ANALOG-MYTH-X, FP-BRAND-AM-W3-03-ANALOG-MYTH-FACEBOOK`
+- `2026-07-22` **scheduled_future** proof due `2026-07-22T15:21:00Z` for `FP-BRAND-AM-W3-03-ANALOG-MYTH-X, FP-BRAND-AM-W3-03-ANALOG-MYTH-FACEBOOK`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-- `2026-07-23` **scheduled_future** proof due `2026-07-23T16:05:00Z` for `FP-BRAND-AM-W3-04-SPILLING-THE-TEA-X, FP-BRAND-AM-W3-04-SPILLING-THE-TEA-FACEBOOK`
+- `2026-07-23` **scheduled_future** proof due `2026-07-23T15:21:00Z` for `FP-BRAND-AM-W3-04-SPILLING-THE-TEA-X, FP-BRAND-AM-W3-04-SPILLING-THE-TEA-FACEBOOK`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-- `2026-07-24` **scheduled_future** proof due `2026-07-24T16:05:00Z` for `FP-BRAND-AM-W3-05-NO-MORTGAGE-X, FP-BRAND-AM-W3-05-NO-MORTGAGE-FACEBOOK`
+- `2026-07-24` **scheduled_future** proof due `2026-07-24T15:21:00Z` for `FP-BRAND-AM-W3-05-NO-MORTGAGE-X, FP-BRAND-AM-W3-05-NO-MORTGAGE-FACEBOOK`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-- `2026-07-25` **scheduled_future** proof due `2026-07-25T16:05:00Z` for `FP-BRAND-AM-W3-06-GUARDS-DOWN-X, FP-BRAND-AM-W3-06-GUARDS-DOWN-FACEBOOK`
+- `2026-07-25` **scheduled_future** proof due `2026-07-25T15:21:00Z` for `FP-BRAND-AM-W3-06-GUARDS-DOWN-X, FP-BRAND-AM-W3-06-GUARDS-DOWN-FACEBOOK`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-- `2026-07-26` **scheduled_future** proof due `2026-07-26T16:05:00Z` for `FP-BRAND-AM-W3-07-SLOW-WALK-X, FP-BRAND-AM-W3-07-SLOW-WALK-FACEBOOK`
+- `2026-07-26` **scheduled_future** proof due `2026-07-26T15:21:00Z` for `FP-BRAND-AM-W3-07-SLOW-WALK-X, FP-BRAND-AM-W3-07-SLOW-WALK-FACEBOOK`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-- `2026-07-27` **scheduled_future** proof due `2026-07-27T16:05:00Z` for `FP-BRAND-AM-W3-08-THE-POWER-OF-LIGHT-X, FP-BRAND-AM-W3-08-THE-POWER-OF-LIGHT-FACEBOOK`
+- `2026-07-27` **scheduled_future** proof due `2026-07-27T15:21:00Z` for `FP-BRAND-AM-W3-08-THE-POWER-OF-LIGHT-X, FP-BRAND-AM-W3-08-THE-POWER-OF-LIGHT-FACEBOOK`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-- `2026-07-28` **scheduled_future** proof due `2026-07-28T16:05:00Z` for `FP-BRAND-AM-W4-01-13-X, FP-BRAND-AM-W4-01-13-FACEBOOK`
+- `2026-07-28` **scheduled_future** proof due `2026-07-28T15:21:00Z` for `FP-BRAND-AM-W4-01-13-X, FP-BRAND-AM-W4-01-13-FACEBOOK`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-- `2026-07-29` **scheduled_future** proof due `2026-07-29T16:05:00Z` for `FP-BRAND-AM-W4-02-GIRLS-CAMP-X, FP-BRAND-AM-W4-02-GIRLS-CAMP-FACEBOOK`
+- `2026-07-29` **scheduled_future** proof due `2026-07-29T15:21:00Z` for `FP-BRAND-AM-W4-02-GIRLS-CAMP-X, FP-BRAND-AM-W4-02-GIRLS-CAMP-FACEBOOK`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-- `2026-07-30` **scheduled_future** proof due `2026-07-30T16:05:00Z` for `FP-BRAND-AM-W4-03-ANALOG-MYTH-X, FP-BRAND-AM-W4-03-ANALOG-MYTH-FACEBOOK`
+- `2026-07-30` **scheduled_future** proof due `2026-07-30T15:21:00Z` for `FP-BRAND-AM-W4-03-ANALOG-MYTH-X, FP-BRAND-AM-W4-03-ANALOG-MYTH-FACEBOOK`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-- `2026-07-31` **scheduled_future** proof due `2026-07-31T16:05:00Z` for `FP-BRAND-AM-W4-04-SPILLING-THE-TEA-X, FP-BRAND-AM-W4-04-SPILLING-THE-TEA-FACEBOOK`
+- `2026-07-31` **scheduled_future** proof due `2026-07-31T15:21:00Z` for `FP-BRAND-AM-W4-04-SPILLING-THE-TEA-X, FP-BRAND-AM-W4-04-SPILLING-THE-TEA-FACEBOOK`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-- `2026-08-01` **scheduled_future** proof due `2026-08-01T16:05:00Z` for `FP-BRAND-AM-W4-05-NO-MORTGAGE-X, FP-BRAND-AM-W4-05-NO-MORTGAGE-FACEBOOK`
+- `2026-08-01` **scheduled_future** proof due `2026-08-01T15:21:00Z` for `FP-BRAND-AM-W4-05-NO-MORTGAGE-X, FP-BRAND-AM-W4-05-NO-MORTGAGE-FACEBOOK`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-- `2026-08-02` **scheduled_future** proof due `2026-08-02T16:05:00Z` for `FP-BRAND-AM-W4-06-GUARDS-DOWN-X, FP-BRAND-AM-W4-06-GUARDS-DOWN-FACEBOOK`
+- `2026-08-02` **scheduled_future** proof due `2026-08-02T15:21:00Z` for `FP-BRAND-AM-W4-06-GUARDS-DOWN-X, FP-BRAND-AM-W4-06-GUARDS-DOWN-FACEBOOK`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-- `2026-08-03` **scheduled_future** proof due `2026-08-03T16:05:00Z` for `FP-BRAND-AM-W4-07-SLOW-WALK-X, FP-BRAND-AM-W4-07-SLOW-WALK-FACEBOOK`
+- `2026-08-03` **scheduled_future** proof due `2026-08-03T15:21:00Z` for `FP-BRAND-AM-W4-07-SLOW-WALK-X, FP-BRAND-AM-W4-07-SLOW-WALK-FACEBOOK`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-- `2026-08-04` **scheduled_future** proof due `2026-08-04T16:05:00Z` for `FP-BRAND-AM-W4-08-THE-POWER-OF-LIGHT-X, FP-BRAND-AM-W4-08-THE-POWER-OF-LIGHT-FACEBOOK`
+- `2026-08-04` **scheduled_future** proof due `2026-08-04T15:21:00Z` for `FP-BRAND-AM-W4-08-THE-POWER-OF-LIGHT-X, FP-BRAND-AM-W4-08-THE-POWER-OF-LIGHT-FACEBOOK`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
 
