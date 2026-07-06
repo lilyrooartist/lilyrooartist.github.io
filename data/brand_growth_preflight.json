@@ -1,19 +1,18 @@
 {
-  "generated_at": "2026-07-06T11:04:31.864947Z",
+  "generated_at": "2026-07-06T14:17:08.224774Z",
   "safe_mode": true,
   "source": {
     "future_posts": "admin/future-posts.json",
     "brand_growth_readout": "data/brand_growth_readout.json",
     "scheduler_endpoint": "https://www.lilyroo.com/api/social/scheduler/dry-run",
-    "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/9f71447969f10cdecf6926a3946b094983846375/admin/future-posts.json"
+    "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/cb024d9e86a3a78bc2713a75471bc1bb7fdedcd5/admin/future-posts.json"
   },
   "summary": {
     "status": "ready",
     "next_window_date": "2026-07-06",
     "scheduled_time": "2026-07-06T15:21:00Z",
-    "expected_post_count": 2,
+    "expected_post_count": 1,
     "expected_post_ids": [
-      "FP-BRAND-AM-03-ANALOG-MYTH-X",
       "FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK"
     ],
     "scheduler_http_status": 200,
@@ -21,46 +20,36 @@
     "scheduler_queue_source": "commit_queue_url",
     "scheduler_fallback_reason": "",
     "scheduler_due_count": 2,
-    "scheduler_would_post_count": 2,
+    "scheduler_would_post_count": 1,
     "scheduler_blocked_count": 0,
     "missing_due_ids": [],
     "unexpected_due_ids": [],
     "blocked_ids": [],
-    "link_check_count": 5,
-    "link_ok_count": 5,
+    "link_check_count": 4,
+    "link_ok_count": 4,
     "link_failed_count": 0,
     "link_warning_count": 0,
     "link_blocking_failed_count": 0,
     "next_proof_due_at": "2026-07-06T15:21:00Z",
     "next_measurement_due_at": "2026-07-07T15:20:00Z",
-    "readout_next_proof_due_at": "2026-07-04T16:05:00Z",
+    "readout_next_proof_due_at": "2026-07-07T16:05:00Z",
     "readout_next_measurement_due_at": "2026-07-05T15:20:00Z",
     "error": ""
   },
   "scheduler_summary": {
     "due_count": 2,
     "result_count": 2,
-    "would_post_count": 2,
+    "would_post_count": 1,
     "blocked_count": 0,
     "status_counts": {
-      "would_post": 2
+      "posted": 1,
+      "would_post": 1
     },
     "platform_counts": {
       "Facebook": 1,
-      "X": 1
+      "Unknown": 1
     },
     "would_post": [
-      {
-        "post_id": "FP-BRAND-AM-03-ANALOG-MYTH-X",
-        "platform": "X",
-        "status": "would_post",
-        "reason": "",
-        "post_type": "image",
-        "attempts": 0,
-        "updated_at": "",
-        "source": "",
-        "error_summary": ""
-      },
       {
         "post_id": "FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK",
         "platform": "Facebook",
@@ -76,17 +65,6 @@
     "blocked": []
   },
   "link_checks": [
-    {
-      "label": "FP-BRAND-AM-03-ANALOG-MYTH-X imagery_url",
-      "url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
-      "ok": true,
-      "status": 200,
-      "final_url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
-      "content_type": "image/jpeg",
-      "content_length": "75466",
-      "error": "",
-      "source": "local_static_file"
-    },
     {
       "label": "FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK imagery_url",
       "url": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
@@ -133,14 +111,6 @@
     }
   ],
   "next_window_posts": [
-    {
-      "id": "FP-BRAND-AM-03-ANALOG-MYTH-X",
-      "platform": "X",
-      "scheduled_at": "2026-07-06T10:15:00-04:00",
-      "execution_mode": "auto",
-      "post_type": "image",
-      "text": "Title track signal: broken clocks, warm tape, exact little lies. Analog Myth is live."
-    },
     {
       "id": "FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK",
       "platform": "Facebook",

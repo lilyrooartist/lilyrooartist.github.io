@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "updated_at": "2026-07-06T11:04:26.231359Z",
+  "updated_at": "2026-07-06T14:17:01.219634Z",
   "source": "lilyroo-social-executor-executions",
   "url": "https://www.lilyroo.com/api/social/executions",
   "http_status": 200,
@@ -8,11 +8,24 @@
   "password_supplied": false,
   "auth_method": "bearer",
   "summary": {
-    "execution_count": 49,
-    "current_execution_count": 34,
+    "execution_count": 50,
+    "current_execution_count": 35,
     "superseded_execution_count": 0,
     "superseded_executions": [],
     "current_executions": [
+      {
+        "post_id": "FP-BRAND-AM-03-ANALOG-MYTH-X",
+        "platform": "X",
+        "status": "posted",
+        "reason": "",
+        "attempts": 1,
+        "updated_at": "2026-07-06T14:15:30.540Z",
+        "source": "cron",
+        "post_url": "https://x.com/i/web/status/2074135149185266159",
+        "external_id": "2074135149185266159",
+        "next_action": "",
+        "error_summary": ""
+      },
       {
         "post_id": "FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK",
         "platform": "Facebook",
@@ -458,6 +471,19 @@
     ],
     "posted": [
       {
+        "post_id": "FP-BRAND-AM-03-ANALOG-MYTH-X",
+        "platform": "X",
+        "status": "posted",
+        "reason": "",
+        "attempts": 1,
+        "updated_at": "2026-07-06T14:15:30.540Z",
+        "source": "cron",
+        "post_url": "https://x.com/i/web/status/2074135149185266159",
+        "external_id": "2074135149185266159",
+        "next_action": "",
+        "error_summary": ""
+      },
+      {
         "post_id": "FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK",
         "platform": "Facebook",
         "status": "posted",
@@ -901,21 +927,34 @@
       }
     ],
     "draft_uploaded": [],
-    "posted_count": 34,
+    "posted_count": 35,
     "draft_uploaded_count": 0,
     "attention_count": 0,
     "approval_needed_count": 0,
     "platform_fix_needed_count": 0,
     "manual_handoff_needed_count": 0,
     "status_counts": {
-      "posted": 34
+      "posted": 35
     },
     "platform_counts": {
       "Facebook": 15,
-      "X": 14,
+      "X": 15,
       "YouTube": 5
     },
     "latest_posted": [
+      {
+        "post_id": "FP-BRAND-AM-03-ANALOG-MYTH-X",
+        "platform": "X",
+        "status": "posted",
+        "reason": "",
+        "attempts": 1,
+        "updated_at": "2026-07-06T14:15:30.540Z",
+        "source": "cron",
+        "post_url": "https://x.com/i/web/status/2074135149185266159",
+        "external_id": "2074135149185266159",
+        "next_action": "",
+        "error_summary": ""
+      },
       {
         "post_id": "FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK",
         "platform": "Facebook",
@@ -967,19 +1006,6 @@
         "external_id": "2073410401006751908",
         "next_action": "",
         "error_summary": ""
-      },
-      {
-        "post_id": "FP-LAUNCH-ANALOG-MYTH-FACEBOOK-NIGHT",
-        "platform": "Facebook",
-        "status": "posted",
-        "reason": "",
-        "attempts": 1,
-        "updated_at": "2026-07-02T01:21:03.807Z",
-        "source": "manual",
-        "post_url": "https://www.facebook.com/permalink.php?story_fbid=122120725569249470&id=903693509504290",
-        "external_id": "903693509504290_122120725569249470",
-        "next_action": "",
-        "error_summary": ""
       }
     ],
     "latest_draft_uploaded": [],
@@ -990,10 +1016,10 @@
   },
   "payload": {
     "ok": true,
-    "execution_count": 49
+    "execution_count": 50
   },
   "action_needed": "",
-  "reconciled_at": "2026-07-06T11:04:26.274582Z",
+  "reconciled_at": "2026-07-06T14:17:01.282627Z",
   "reconciliation": {
     "source": "current scheduled_posts.csv",
     "superseded_execution_count": 0,

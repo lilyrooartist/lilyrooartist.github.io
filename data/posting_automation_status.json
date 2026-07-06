@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-06T13:11:26.756655Z",
+  "generated_at": "2026-07-06T14:17:08.133598Z",
   "safe_mode": true,
   "source": {
     "workflow": ".github/workflows/promo-admin-refresh.yml",
@@ -35,15 +35,15 @@
     ],
     "scheduler_http_status": 200,
     "scheduler_auth_method": "bearer",
-    "scheduler_refresh_step_ok": false,
-    "posted_count": 34,
+    "scheduler_refresh_step_ok": true,
+    "posted_count": 35,
     "attention_count": 0,
     "platform_fix_needed_count": 0,
     "story_post_count": 6,
     "story_queued_future_count": 0,
     "platform_repair_blocked_count": 0,
     "blocker_input_status": "missing_local_input",
-    "blocker_input_missing_count": 5,
+    "blocker_input_missing_count": 3,
     "blocker_input_external_action_count": 1,
     "help_needed_count": 0,
     "next_action": "Watch FP-BRAND-AM-03-ANALOG-MYTH-X, FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK after 2026-07-06T15:21:00Z, then export posted URLs."
@@ -66,21 +66,21 @@
     {
       "label": "Safe admin refresh",
       "status": "ready",
-      "detail": "60 refresh commands captured at 2026-07-06T11:04:32.913012Z",
+      "detail": "19 refresh commands captured at 2026-07-06T14:17:06.298865Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": ""
     },
     {
       "label": "Scheduler dry-run authentication",
       "status": "ready",
-      "detail": "HTTP 200 using bearer auth; due=0 would_post=0",
+      "detail": "HTTP 200 using bearer auth; due=1 would_post=0",
       "evidence": "data/social_scheduler_dry_run.json",
       "next_action": ""
     },
     {
       "label": "Execution capture",
       "status": "ready",
-      "detail": "posted=34 attention=0 platform_fix_needed=0",
+      "detail": "posted=35 attention=0 platform_fix_needed=0",
       "evidence": "data/social_execution_snapshot.json",
       "next_action": ""
     },
@@ -101,7 +101,7 @@
     {
       "label": "Blocker input readiness",
       "status": "deferred",
-      "detail": "1 ready; 5 missing local input; 1 external action needed",
+      "detail": "3 ready; 3 missing local input; 1 external action needed",
       "evidence": "data/social_blocker_input_status.json",
       "next_action": "Optional expansion inputs can wait; the active brand campaign is already preflight-ready."
     },

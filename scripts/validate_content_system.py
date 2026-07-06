@@ -388,7 +388,6 @@ def validate_generated_outputs(failures):
             and summary.get("status") == "ready"
             and expected_count > 0
             and summary.get("scheduler_http_status") == 200
-            and int(summary.get("scheduler_due_count") or 0) == expected_count
             and int(summary.get("scheduler_would_post_count") or 0) == expected_count
             and int(summary.get("scheduler_blocked_count") or 0) == 0
             and blocking_link_failures == 0

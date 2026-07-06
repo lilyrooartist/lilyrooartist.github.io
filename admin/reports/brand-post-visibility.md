@@ -1,13 +1,13 @@
 # Brand Post Visibility - Lily Roo
 
-Generated: 2026-07-06T11:04:27.966372Z
+Generated: 2026-07-06T14:17:04.046101Z
 
 ## Summary
 - Status: **verified**
-- Checked posts: **4**
-- Public visibility OK: **4**
+- Checked posts: **5**
+- Public visibility OK: **5**
 - Attention: **0**
-- X copy confirmed: **2**
+- X copy confirmed: **3**
 - Facebook pages loaded: **2**
 
 ## Rows
@@ -29,6 +29,11 @@ Generated: 2026-07-06T11:04:27.966372Z
 - **FP-BRAND-AM-02-GIRLS-CAMP-X** X - `visible_copy_confirmed`
   - Logged URL: https://x.com/i/web/status/2073772787177861205
   - Checked URL: https://publish.twitter.com/oembed?url=https%3A%2F%2Ftwitter.com%2Flilyrooartist%2Fstatus%2F2073772787177861205
+  - HTTP: `200`; copy matched: `True`
+  - Note: X public oEmbed returned Lily Roo post copy.
+- **FP-BRAND-AM-03-ANALOG-MYTH-X** X - `visible_copy_confirmed`
+  - Logged URL: https://x.com/i/web/status/2074135149185266159
+  - Checked URL: https://publish.twitter.com/oembed?url=https%3A%2F%2Ftwitter.com%2Flilyrooartist%2Fstatus%2F2074135149185266159
   - HTTP: `200`; copy matched: `True`
   - Note: X public oEmbed returned Lily Roo post copy.
 
