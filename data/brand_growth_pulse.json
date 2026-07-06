@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-06T18:13:03.032150Z",
+  "generated_at": "2026-07-06T18:30:40.610283Z",
   "safe_mode": true,
   "status": "campaign_running",
   "source": {
@@ -30,8 +30,8 @@
     "clicks_by_destination": {},
     "next_post_at": "2026-07-07T10:15:00-04:00",
     "proof_due_at": "2026-07-07T15:21:00Z",
-    "hours_until_next_post": 20.03,
-    "hours_until_proof_due": 21.13,
+    "hours_until_next_post": 19.74,
+    "hours_until_proof_due": 20.84,
     "missing_metric_credentials": [
       "FB_PAGE_ID",
       "META_LONG_LIVED_TOKEN",
@@ -40,9 +40,133 @@
       "X_API_KEY",
       "X_API_SECRET"
     ],
+    "learning_status": "learning_waiting_for_connected_metrics",
+    "learning_headline": "Post-window learning loop is queued",
+    "next_learning_question": "Which Analog Myth posts are turning attention into album, Echo Thread, or video clicks?",
+    "measurement_due_rows": 4,
+    "waiting_measurement_rows": 2,
+    "next_learning_due_at": "",
     "manual_posting_required": false,
     "report_path": "admin/reports/brand-growth-pulse.md",
     "refresh_command": "python3 scripts/build_brand_growth_pulse.py"
+  },
+  "learning_plan": {
+    "status": "learning_waiting_for_connected_metrics",
+    "label": "Learning queued",
+    "headline": "Post-window learning loop is queued",
+    "next_learning_question": "Which Analog Myth posts are turning attention into album, Echo Thread, or video clicks?",
+    "measurement_due_count": 4,
+    "waiting_measurement_count": 2,
+    "scheduled_future_count": 58,
+    "next_learning_due_at": "",
+    "next_metric_post_ids": [
+      "FP-BRAND-AM-01-13-X",
+      "FP-BRAND-AM-01-13-FACEBOOK"
+    ],
+    "next_proof_post_ids": [
+      "FP-BRAND-AM-04-SPILLING-THE-TEA-X",
+      "FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK"
+    ],
+    "click_refresh_command": "python3 scripts/capture_brand_campaign_clicks.py",
+    "pulse_refresh_command": "python3 scripts/build_brand_growth_pulse.py",
+    "proof_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
+    "metric_capture_commands": [
+      "python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X --post-id FP-BRAND-AM-02-GIRLS-CAMP-X",
+      "python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --post-id FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK"
+    ],
+    "automation_note": "No manual posting is required; this loop uses automatic posts, public URL proof, first-party click checks, and optional connected X/Facebook metrics.",
+    "credential_note": "X/Facebook result counts need connected analytics credentials, but the campaign can keep posting and learning from first-party clicks without them.",
+    "rows": [
+      {
+        "post_id": "FP-BRAND-AM-01-13-X",
+        "platform": "X",
+        "title": "13",
+        "status": "ready_for_metric_capture",
+        "scheduled_at": "2026-07-04T10:15:00-04:00",
+        "measurement_due_at": "2026-07-05T14:15:36.859000+00:00",
+        "post_url": "https://x.com/i/web/status/2073410401006751908",
+        "public_visibility_ok": true,
+        "learning_use": "Ready for post-window comparison"
+      },
+      {
+        "post_id": "FP-BRAND-AM-01-13-FACEBOOK",
+        "platform": "Facebook",
+        "title": "13",
+        "status": "ready_for_metric_capture",
+        "scheduled_at": "2026-07-04T11:20:00-04:00",
+        "measurement_due_at": "2026-07-05T15:30:41.086000+00:00",
+        "post_url": "https://www.facebook.com/lilyrooartist/posts/122120959905249470",
+        "public_visibility_ok": true,
+        "learning_use": "Ready for post-window comparison"
+      },
+      {
+        "post_id": "FP-BRAND-AM-02-GIRLS-CAMP-X",
+        "platform": "X",
+        "title": "Girls Camp",
+        "status": "ready_for_metric_capture",
+        "scheduled_at": "2026-07-05T10:15:00-04:00",
+        "measurement_due_at": "2026-07-06T14:15:36.373000+00:00",
+        "post_url": "https://x.com/i/web/status/2073772787177861205",
+        "public_visibility_ok": true,
+        "learning_use": "Ready for post-window comparison"
+      },
+      {
+        "post_id": "FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK",
+        "platform": "Facebook",
+        "title": "Girls Camp",
+        "status": "ready_for_metric_capture",
+        "scheduled_at": "2026-07-05T11:20:00-04:00",
+        "measurement_due_at": "2026-07-06T15:30:46.255000+00:00",
+        "post_url": "https://www.facebook.com/lilyrooartist/posts/122121048123249470",
+        "public_visibility_ok": true,
+        "learning_use": "Ready for post-window comparison"
+      },
+      {
+        "post_id": "FP-BRAND-AM-03-ANALOG-MYTH-X",
+        "platform": "X",
+        "title": "Analog Myth",
+        "status": "posted_waiting_measurement_window",
+        "scheduled_at": "2026-07-06T10:15:00-04:00",
+        "measurement_due_at": "2026-07-07T14:15:30.540000+00:00",
+        "post_url": "https://x.com/i/web/status/2074135149185266159",
+        "public_visibility_ok": true,
+        "learning_use": "Waiting for first useful result check"
+      },
+      {
+        "post_id": "FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK",
+        "platform": "Facebook",
+        "title": "Analog Myth",
+        "status": "posted_waiting_measurement_window",
+        "scheduled_at": "2026-07-06T11:20:00-04:00",
+        "measurement_due_at": "2026-07-07T15:30:39.575000+00:00",
+        "post_url": "https://www.facebook.com/lilyrooartist/posts/122121136809249470",
+        "public_visibility_ok": true,
+        "learning_use": "Waiting for first useful result check"
+      },
+      {
+        "post_id": "FP-BRAND-AM-04-SPILLING-THE-TEA-X",
+        "platform": "X",
+        "title": "Spilling The Tea",
+        "status": "scheduled_future",
+        "scheduled_at": "2026-07-07T10:15:00-04:00",
+        "measurement_due_at": "",
+        "post_url": "",
+        "public_visibility_ok": null,
+        "learning_use": "Next queued learning input"
+      },
+      {
+        "post_id": "FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK",
+        "platform": "Facebook",
+        "title": "Spilling The Tea",
+        "status": "scheduled_future",
+        "scheduled_at": "2026-07-07T11:20:00-04:00",
+        "measurement_due_at": "",
+        "post_url": "",
+        "public_visibility_ok": null,
+        "learning_use": "Next queued learning input"
+      }
+    ],
+    "hours_until_next_learning_due": null
   },
   "recommendations": [
     {
@@ -51,14 +175,14 @@
       "command": "python3 scripts/refresh_promo_admin.py"
     },
     {
+      "label": "Post-window learning loop is queued",
+      "detail": "Which Analog Myth posts are turning attention into album, Echo Thread, or video clicks? No manual posting is required; this loop uses automatic posts, public URL proof, first-party click checks, and optional connected X/Facebook metrics.",
+      "command": "python3 scripts/capture_brand_campaign_clicks.py && python3 scripts/build_brand_growth_pulse.py"
+    },
+    {
       "label": "Preserve the no-manual-posting lane",
       "detail": "Keep Analog Myth promotion on API-backed X/Facebook rows until another platform has a real automated path.",
       "command": "python3 scripts/build_posting_automation_status.py"
-    },
-    {
-      "label": "Use click data before changing creative direction",
-      "detail": "First-party link telemetry is ready and privacy-safe; wait for real clicks before ranking tracks by response.",
-      "command": "python3 scripts/capture_brand_campaign_clicks.py"
     },
     {
       "label": "Optional: connect X/Meta result capture",

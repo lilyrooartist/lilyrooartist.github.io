@@ -64,6 +64,7 @@ YOUTUBE_EXPERIMENT_PUBLIC_METRICS = ROOT / "data" / "youtube_experiment_public_m
 YOUTUBE_EXPERIMENT_PUBLIC_METRICS_CSV = ROOT / "data" / "youtube_experiment_public_metrics.csv"
 BRAND_GROWTH_PREFLIGHT = ROOT / "data" / "brand_growth_preflight.json"
 BRAND_GROWTH_READOUT = ROOT / "data" / "brand_growth_readout.json"
+BRAND_GROWTH_PULSE = ROOT / "data" / "brand_growth_pulse.json"
 BRAND_CLICK_TRACKING_HEALTH = ROOT / "data" / "brand_click_tracking_health.json"
 POSTING_AUTOMATION_STATUS = ROOT / "data" / "posting_automation_status.json"
 YOUTUBE_POST_RESULTS = ROOT / "data" / "youtube_post_results.json"
@@ -97,6 +98,7 @@ YOUTUBE_EXPERIMENT_PUBLIC_METRICS_SCRIPT = ROOT / "scripts" / "prefill_youtube_e
 EXPERIMENT_PUBLISH_RUNWAY_SCRIPT = ROOT / "scripts" / "build_experiment_publish_runway.py"
 EXPERIMENT_RESULT_UPDATER = ROOT / "scripts" / "update_experiment_results.py"
 BRAND_GROWTH_PREFLIGHT_SCRIPT = ROOT / "scripts" / "build_brand_growth_preflight.py"
+BRAND_GROWTH_PULSE_SCRIPT = ROOT / "scripts" / "build_brand_growth_pulse.py"
 BRAND_CLICK_TRACKING_HEALTH_SCRIPT = ROOT / "scripts" / "build_brand_click_tracking_health.py"
 TIKTOK_SETUP_PREFLIGHT_SCRIPT = ROOT / "scripts" / "build_tiktok_setup_preflight.py"
 TIKTOK_REPAIR_RUNBOOK_SCRIPT = ROOT / "scripts" / "build_tiktok_repair_runbook.py"
@@ -143,6 +145,7 @@ EXPERIMENT_RESULT_REPORT = ROOT / "admin" / "reports" / "experiment-result-colle
 EXPERIMENT_RESULT_CLIPBOARD_REPORT = ROOT / "admin" / "reports" / "experiment-result-clipboard.md"
 YOUTUBE_EXPERIMENT_PUBLIC_METRICS_REPORT = ROOT / "admin" / "reports" / "youtube-experiment-public-metrics.md"
 BRAND_GROWTH_PREFLIGHT_REPORT = ROOT / "admin" / "reports" / "brand-growth-preflight.md"
+BRAND_GROWTH_PULSE_REPORT = ROOT / "admin" / "reports" / "brand-growth-pulse.md"
 BRAND_CLICK_TRACKING_HEALTH_REPORT = ROOT / "admin" / "reports" / "brand-click-tracking-health.md"
 INDEX = CONTENT / "content_index.json"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
@@ -454,6 +457,32 @@ def validate_generated_outputs(failures):
             fail("brand_click_tracking_health.json does not prove all future campaign links are trackable", failures)
     else:
         fail("brand_click_tracking_health.json missing; run scripts/build_brand_click_tracking_health.py", failures)
+    if BRAND_GROWTH_PULSE.exists():
+        pulse = json.loads(BRAND_GROWTH_PULSE.read_text(encoding="utf-8"))
+        summary = pulse.get("summary") or {}
+        learning_plan = pulse.get("learning_plan") or {}
+        learning_rows = learning_plan.get("rows") or []
+        admin_text = ADMIN_INDEX.read_text(encoding="utf-8") if ADMIN_INDEX.exists() else ""
+        if (
+            pulse.get("safe_mode") is True
+            and summary.get("manual_posting_required") is False
+            and summary.get("learning_status") == learning_plan.get("status")
+            and learning_plan.get("headline")
+            and learning_plan.get("next_learning_question")
+            and isinstance(learning_rows, list)
+            and learning_rows
+            and "capture_brand_campaign_clicks.py" in str(learning_plan.get("click_refresh_command") or "")
+            and "No manual posting is required" in str(learning_plan.get("automation_note") or "")
+            and BRAND_GROWTH_PULSE_REPORT.exists()
+            and "Post-Window Learning" in BRAND_GROWTH_PULSE_REPORT.read_text(encoding="utf-8")
+            and "learningPlan" in admin_text
+            and "Learning loop" in admin_text
+        ):
+            ok("brand growth pulse exposes the automated post-window learning loop")
+        else:
+            fail("brand_growth_pulse.json does not expose the automated post-window learning loop", failures)
+    else:
+        fail("brand_growth_pulse.json missing; run scripts/build_brand_growth_pulse.py", failures)
     if POSTING_AUTOMATION_STATUS.exists():
         posting_status = json.loads(POSTING_AUTOMATION_STATUS.read_text(encoding="utf-8"))
         summary = posting_status.get("summary") or {}
@@ -4013,6 +4042,21 @@ def validate_generated_outputs(failures):
             fail("build_brand_growth_preflight.py missing read-only scheduler preflight safeguards", failures)
     else:
         fail("build_brand_growth_preflight.py missing", failures)
+    if BRAND_GROWTH_PULSE_SCRIPT.exists():
+        pulse_text = BRAND_GROWTH_PULSE_SCRIPT.read_text(encoding="utf-8")
+        if (
+            "build_learning_plan" in pulse_text
+            and "learning_plan" in pulse_text
+            and "Post-Window Learning" in pulse_text
+            and "capture_brand_campaign_clicks.py" in pulse_text
+            and "No manual posting is required" in pulse_text
+            and "manual_posting_required" in pulse_text
+        ):
+            ok("brand growth pulse builder packages the post-window learning loop")
+        else:
+            fail("build_brand_growth_pulse.py missing post-window learning loop safeguards", failures)
+    else:
+        fail("build_brand_growth_pulse.py missing", failures)
     if BRAND_CLICK_TRACKING_HEALTH_SCRIPT.exists():
         tracking_text = BRAND_CLICK_TRACKING_HEALTH_SCRIPT.read_text(encoding="utf-8")
         if (

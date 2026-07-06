@@ -84,6 +84,149 @@ def listify_counts(items) -> dict:
     return result
 
 
+def title_from_campaign_id(value: str | None) -> str:
+    raw = str(value or "").strip()
+    if not raw:
+        return "Analog Myth post"
+    slug = raw
+    for prefix in ("FP-BRAND-AM-", "FP-LAUNCH-ANALOG-MYTH-", "PODCAST-ANALOG-MYTH-"):
+        if slug.upper().startswith(prefix):
+            slug = slug[len(prefix):]
+            break
+    for suffix in ("-FACEBOOK", "-X"):
+        if slug.upper().endswith(suffix):
+            slug = slug[: -len(suffix)]
+            break
+    parts = [
+        part
+        for part in slug.lower().split("-")
+        if part and not (part.startswith("w") and part[1:].isdigit())
+    ]
+    if parts and parts[0].isdigit() and len(parts) > 1:
+        parts = parts[1:]
+    title = " ".join(part.capitalize() for part in parts)
+    return title or "Analog Myth post"
+
+
+def row_timestamp(row: dict, key: str) -> datetime:
+    return parse_datetime(row.get(key)) or datetime.max.replace(tzinfo=timezone.utc)
+
+
+def learning_row(row: dict, learning_use: str) -> dict:
+    return {
+        "post_id": row.get("id") or row.get("content_id") or "",
+        "platform": row.get("platform") or "",
+        "title": title_from_campaign_id(row.get("id") or row.get("content_id")),
+        "status": row.get("status") or "",
+        "scheduled_at": row.get("scheduled_at") or "",
+        "measurement_due_at": row.get("measurement_due_at") or "",
+        "post_url": row.get("post_url") or row.get("post_id_or_url") or "",
+        "public_visibility_ok": row.get("public_visibility_ok"),
+        "learning_use": learning_use,
+    }
+
+
+def build_learning_plan(
+    readout: dict,
+    readout_summary: dict,
+    click_summary: dict,
+    missing_metrics: list[str],
+    now: datetime,
+) -> dict:
+    rows = [row for row in (readout.get("rows") or []) if isinstance(row, dict)]
+    ready_rows = sorted(
+        [row for row in rows if row.get("status") == "ready_for_metric_capture"],
+        key=lambda row: row_timestamp(row, "measurement_due_at"),
+    )
+    waiting_rows = sorted(
+        [row for row in rows if row.get("status") == "posted_waiting_measurement_window"],
+        key=lambda row: row_timestamp(row, "measurement_due_at"),
+    )
+    future_rows = sorted(
+        [row for row in rows if row.get("status") == "scheduled_future"],
+        key=lambda row: row_timestamp(row, "scheduled_at"),
+    )
+    click_count = int(click_summary.get("click_count") or 0)
+    ready_count = len(ready_rows)
+    waiting_count = len(waiting_rows)
+
+    if ready_count and missing_metrics:
+        status = "learning_waiting_for_connected_metrics"
+        headline = "Post-window learning loop is queued"
+        label = "Learning queued"
+        note = "Public proof and first-party click tracking are ready; private X/Facebook result counts can join after analytics credentials are connected."
+    elif ready_count:
+        status = "ready_to_compare_posts"
+        headline = "Post-window learning is ready"
+        label = "Ready"
+        note = "Public URLs are saved and the connected metrics commands can compare the newest posts."
+    elif click_count:
+        status = "learn_from_clicks"
+        headline = "Click response is ready to review"
+        label = "Review clicks"
+        note = "First-party clicks are available, so the next creative pass can favor the destinations and tracks with response."
+    elif waiting_count:
+        status = "waiting_for_measurement_window"
+        headline = "Newest posts are waiting for first result checks"
+        label = "Waiting"
+        note = "Recent posts are public. The first useful result window opens after the platform has had time to accumulate response."
+    else:
+        status = "watch_next_post_window"
+        headline = "Watch the next automatic post window"
+        label = "Watching"
+        note = "The next learning signal starts when the upcoming queued posts publish and their public URLs are captured."
+
+    next_due = ""
+    if not ready_count:
+        for row in waiting_rows:
+            if row.get("measurement_due_at"):
+                next_due = row.get("measurement_due_at")
+                break
+    if not next_due and not ready_count:
+        next_due = readout_summary.get("next_measurement_due_at") or ""
+
+    selected = []
+    seen = set()
+    for row, use in (
+        *[(row, "Ready for post-window comparison") for row in ready_rows[:4]],
+        *[(row, "Waiting for first useful result check") for row in waiting_rows[:2]],
+        *[(row, "Next queued learning input") for row in future_rows[:2]],
+    ):
+        key = row.get("id") or row.get("content_id")
+        if not key or key in seen:
+            continue
+        seen.add(key)
+        selected.append(learning_row(row, use))
+
+    return {
+        "status": status,
+        "label": label,
+        "headline": headline,
+        "next_learning_question": "Which Analog Myth posts are turning attention into album, Echo Thread, or video clicks?",
+        "measurement_due_count": ready_count,
+        "waiting_measurement_count": waiting_count,
+        "scheduled_future_count": int(readout_summary.get("future_queue_visible_rows") or len(future_rows)),
+        "next_learning_due_at": next_due,
+        "next_metric_post_ids": readout_summary.get("next_metric_post_ids") or [row.get("id") for row in ready_rows[:2]],
+        "next_proof_post_ids": readout_summary.get("next_proof_post_ids") or [row.get("id") for row in future_rows[:2]],
+        "click_refresh_command": readout_summary.get("campaign_click_refresh_command") or "python3 scripts/capture_brand_campaign_clicks.py",
+        "pulse_refresh_command": "python3 scripts/build_brand_growth_pulse.py",
+        "proof_command": readout_summary.get("proof_apply_command") or "",
+        "metric_capture_commands": [
+            command
+            for command in (
+                readout_summary.get("x_metric_capture_command"),
+                readout_summary.get("facebook_metric_capture_command"),
+            )
+            if command
+        ],
+        "automation_note": "No manual posting is required; this loop uses automatic posts, public URL proof, first-party click checks, and optional connected X/Facebook metrics.",
+        "credential_note": "X/Facebook result counts need connected analytics credentials, but the campaign can keep posting and learning from first-party clicks without them." if missing_metrics else "",
+        "rows": selected,
+        "hours_until_next_learning_due": hours_until(next_due, now),
+    }
+
+
 def pick_primary_action(
     readout_summary: dict,
     preflight_summary: dict,
@@ -192,6 +335,7 @@ def build_payload() -> dict:
         missing_metrics,
         now,
     )
+    learning_plan = build_learning_plan(readout, readout_summary, click_summary, missing_metrics, now)
 
     next_post_at = readout_summary.get("next_scheduled_at") or preflight_summary.get("scheduled_time") or ""
     proof_due_at = primary_action.get("due_at") or readout_summary.get("next_proof_due_at") or posting_summary.get("active_campaign_next_proof_due_at") or ""
@@ -221,14 +365,14 @@ def build_payload() -> dict:
             "command": primary_action["command"],
         },
         {
+            "label": learning_plan["headline"],
+            "detail": f"{learning_plan['next_learning_question']} {learning_plan['automation_note']}",
+            "command": f"{learning_plan['click_refresh_command']} && {learning_plan['pulse_refresh_command']}",
+        },
+        {
             "label": "Preserve the no-manual-posting lane",
             "detail": "Keep Analog Myth promotion on API-backed X/Facebook rows until another platform has a real automated path.",
             "command": "python3 scripts/build_posting_automation_status.py",
-        },
-        {
-            "label": "Use click data before changing creative direction",
-            "detail": "First-party link telemetry is ready and privacy-safe; wait for real clicks before ranking tracks by response.",
-            "command": "python3 scripts/capture_brand_campaign_clicks.py",
         },
     ]
     if missing_metrics:
@@ -267,10 +411,17 @@ def build_payload() -> dict:
             "hours_until_next_post": hours_until(next_post_at, now),
             "hours_until_proof_due": hours_until(proof_due_at, now),
             "missing_metric_credentials": missing_metrics,
+            "learning_status": learning_plan["status"],
+            "learning_headline": learning_plan["headline"],
+            "next_learning_question": learning_plan["next_learning_question"],
+            "measurement_due_rows": learning_plan["measurement_due_count"],
+            "waiting_measurement_rows": learning_plan["waiting_measurement_count"],
+            "next_learning_due_at": learning_plan["next_learning_due_at"],
             "manual_posting_required": False,
             "report_path": rel(REPORT),
             "refresh_command": "python3 scripts/build_brand_growth_pulse.py",
         },
+        "learning_plan": learning_plan,
         "recommendations": recommendations,
         "blockers": blockers,
         "optional_inputs": optional_inputs,
@@ -286,6 +437,7 @@ def build_payload() -> dict:
 def build_markdown(payload: dict) -> str:
     summary = payload["summary"]
     primary = summary["primary_action"]
+    learning = payload.get("learning_plan") or {}
     lines = [
         "# Brand Growth Pulse - Lily Roo",
         "",
@@ -307,8 +459,32 @@ def build_markdown(payload: dict) -> str:
         f"- Hours until next post: `{summary['hours_until_next_post']}`",
         f"- Hours until proof due: `{summary['hours_until_proof_due']}`",
         "",
-        "## Recommendations",
+        "## Post-Window Learning",
+        f"- Status: **{learning.get('status', 'unknown')}**",
+        f"- Headline: **{learning.get('headline', 'Post-window learning')}**",
+        f"- Question: {learning.get('next_learning_question', 'n/a')}",
+        f"- Measurement due rows: **{learning.get('measurement_due_count', 0)}**",
+        f"- Waiting measurement rows: **{learning.get('waiting_measurement_count', 0)}**",
+        f"- Future scheduled rows: **{learning.get('scheduled_future_count', 0)}**",
+        f"- Next learning due at: `{learning.get('next_learning_due_at') or 'n/a'}`",
+        f"- Click refresh: `{learning.get('click_refresh_command') or 'n/a'}`",
+        f"- Pulse refresh: `{learning.get('pulse_refresh_command') or 'n/a'}`",
+        f"- Automation note: {learning.get('automation_note', 'n/a')}",
     ]
+    if learning.get("credential_note"):
+        lines.append(f"- Credential note: {learning['credential_note']}")
+    learning_rows = learning.get("rows") or []
+    if learning_rows:
+        lines.append("- Rows:")
+        for row in learning_rows:
+            lines.append(
+                f"  - `{row.get('post_id')}` ({row.get('platform') or 'platform'}): "
+                f"{row.get('title') or 'Analog Myth post'} - {row.get('learning_use') or row.get('status') or 'tracked'}"
+            )
+    lines.extend([
+        "",
+        "## Recommendations",
+    ])
     for item in payload.get("recommendations") or []:
         lines.append(f"- **{item['label']}**: {item['detail']}")
         if item.get("command"):
