@@ -464,6 +464,7 @@ def validate_generated_outputs(failures):
         click_endpoint = tracking.get("click_endpoint") or {}
         site_home = tracking.get("site_home") or {}
         site_podcast = tracking.get("site_podcast") or {}
+        site_music = tracking.get("site_music") or {}
         if (
             tracking.get("safe_mode") is True
             and summary.get("status") == "ready"
@@ -494,11 +495,15 @@ def validate_generated_outputs(failures):
             and summary.get("site_podcast_url_count") == summary.get("expected_site_podcast_url_count")
             and summary.get("site_podcast_endpoint_status") == "ready"
             and site_podcast.get("status") == "ready"
+            and summary.get("site_music_status") == "ready"
+            and summary.get("site_music_url_count") == summary.get("expected_site_music_url_count")
+            and summary.get("site_music_endpoint_status") == "ready"
+            and site_music.get("status") == "ready"
             and BRAND_CLICK_TRACKING_HEALTH_REPORT.exists()
         ):
-            ok("brand click tracking health verifies future campaign links, homepage/podcast CTAs, visible album paths, and live dry-run capture")
+            ok("brand click tracking health verifies future campaign links, homepage/podcast/music CTAs, visible album paths, and live dry-run capture")
         else:
-            fail("brand_click_tracking_health.json does not prove all future campaign links, homepage/podcast CTAs, and dry-run click capture are ready", failures)
+            fail("brand_click_tracking_health.json does not prove all future campaign links, homepage/podcast/music CTAs, and dry-run click capture are ready", failures)
     else:
         fail("brand_click_tracking_health.json missing; run scripts/build_brand_click_tracking_health.py", failures)
     if BRAND_GROWTH_PULSE.exists():
@@ -4371,15 +4376,20 @@ def validate_generated_outputs(failures):
         and "site-home-(hero|starter|launch|podcast)" in worker_text
         and "SITE_PODCAST_CLICK_PATTERN" in worker_text
         and "site-podcast-(hero|player|share)" in worker_text
+        and "SITE_MUSIC_CLICK_PATTERN" in worker_text
+        and "site-music-(album-page|listen-links|spotify|apple|playlist|podcast-episode)" in worker_text
         and "isTrackableClickPostId(postId)" in worker_text
         and 'wave: "site-share"' in worker_text
         and 'wave: "site-home"' in worker_text
         and 'wave: "site-podcast"' in worker_text
+        and 'wave: "site-music"' in worker_text
+        and '"spotify"' in worker_text
+        and '"apple"' in worker_text
         and 'platform: "site"' in worker_text
     ):
-        ok("social executor accepts first-party site-share, homepage CTA, and podcast CTA click tracking")
+        ok("social executor accepts first-party site-share, homepage CTA, podcast CTA, and music catalog CTA click tracking")
     else:
-        fail("social executor missing first-party site-share, homepage CTA, or podcast CTA click tracking", failures)
+        fail("social executor missing first-party site-share, homepage CTA, podcast CTA, or music catalog CTA click tracking", failures)
     if SOCIAL_EXECUTION_RESET.exists():
         reset_text = SOCIAL_EXECUTION_RESET.read_text(encoding="utf-8")
         if (
@@ -5075,6 +5085,7 @@ def validate_analog_myth_launch_share(failures):
     analog_text = (ROOT / "analog-myth.html").read_text(encoding="utf-8")
     home_text = (ROOT / "index.html").read_text(encoding="utf-8")
     podcast_text = (ROOT / "podcasts" / "analog-myth.html").read_text(encoding="utf-8")
+    music_text = (ROOT / "music.html").read_text(encoding="utf-8")
     style_text = (ROOT / "style.css").read_text(encoding="utf-8")
     script_text = (ROOT / "script.js").read_text(encoding="utf-8")
     redirect_text = (ROOT / "go" / "am.html").read_text(encoding="utf-8")
@@ -5098,6 +5109,8 @@ def validate_analog_myth_launch_share(failures):
         'const TITLE_TRACK_VIDEO = "https://youtu.be/_rtioKYbCFM";',
         "TRACKS[track]?.video || TITLE_TRACK_VIDEO",
         'episode: "https://youtu.be/xX2-Xf161js"',
+        'spotify: "https://open.spotify.com/album/6Ujyp8tXa5UxheJJC2B6kL"',
+        'apple: "https://music.apple.com/us/album/analog-myth/6777905789"',
         'rss: "/podcasts/feed.xml"',
         'download: "/assets/podcasts/analog-myth/analog-myth-the-clock-cannot-explain-this.m4a"',
         "function safeAnchor",
@@ -5108,13 +5121,17 @@ def validate_analog_myth_launch_share(failures):
         "SITE_SHARE_EXPECTED",
         "SITE_HOME_EXPECTED",
         "SITE_PODCAST_EXPECTED",
+        "SITE_MUSIC_EXPECTED",
         "site_share_health",
         "Homepage CTA Tracking",
         "Podcast Page CTA Tracking",
+        "Music Catalog CTA Tracking",
         "site_home_endpoint_status",
         "site_podcast_endpoint_status",
+        "site_music_endpoint_status",
         "site-home-hero-album",
         "site-podcast-hero-album",
+        "site-music-album-page",
         'click_endpoint_dry_run("site-share-album", "album")',
         "Album Page Share Tracking",
         "site_share_endpoint_status",
@@ -5142,6 +5159,14 @@ def validate_analog_myth_launch_share(failures):
         'data-share-url="https://www.lilyroo.com/go/am.html?p=site-podcast-share-playlist&amp;to=playlist"',
         "script.js?v=20260706-podcast-tracking",
     ]
+    required_music = [
+        'href="/go/am.html?p=site-music-album-page&amp;to=album"',
+        'href="/go/am.html?p=site-music-listen-links&amp;to=listen"',
+        'href="/go/am.html?p=site-music-spotify&amp;to=spotify"',
+        'href="/go/am.html?p=site-music-apple&amp;to=apple"',
+        'href="/go/am.html?p=site-music-playlist&amp;to=playlist"',
+        'href="/go/am.html?p=site-music-podcast-episode&amp;to=episode"',
+    ]
     required_css = [
         ".launch-share-strip",
         ".launch-share-actions",
@@ -5159,9 +5184,10 @@ def validate_analog_myth_launch_share(failures):
     missing_health = [token for token in required_health if token not in click_health_text]
     missing_home = [token for token in required_home if token not in home_text]
     missing_podcast = [token for token in required_podcast if token not in podcast_text]
+    missing_music = [token for token in required_music if token not in music_text]
     missing_css = [token for token in required_css if token not in style_text]
     missing_script = [token for token in required_script if token not in script_text]
-    if missing_html or missing_redirect or missing_health or missing_home or missing_podcast or missing_css or missing_script:
+    if missing_html or missing_redirect or missing_health or missing_home or missing_podcast or missing_music or missing_css or missing_script:
         if missing_html:
             fail("Analog Myth launch share strip missing " + ", ".join(missing_html), failures)
         if missing_redirect:
@@ -5172,12 +5198,14 @@ def validate_analog_myth_launch_share(failures):
             fail("Homepage Analog Myth CTA tracking missing " + ", ".join(missing_home), failures)
         if missing_podcast:
             fail("Podcast Analog Myth CTA tracking missing " + ", ".join(missing_podcast), failures)
+        if missing_music:
+            fail("Music catalog Analog Myth CTA tracking missing " + ", ".join(missing_music), failures)
         if missing_css:
             fail("Analog Myth launch share CSS missing " + ", ".join(missing_css), failures)
         if missing_script:
             fail("Analog Myth share script missing " + ", ".join(missing_script), failures)
     else:
-        ok("Analog Myth page includes album, podcast, video, podcast CTA, and track share handoffs")
+        ok("Analog Myth page includes album, podcast, video, podcast CTA, music catalog CTA, and track share handoffs")
 
 
 def validate_lyrics_discovery_metadata(failures):

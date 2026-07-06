@@ -137,6 +137,8 @@
       echo: "/podcasts/analog-myth.html",
       episode: "https://youtu.be/xX2-Xf161js",
       listen: "https://distrokid.com/hyperfollow/lilyroo/analog-myth",
+      spotify: "https://open.spotify.com/album/6Ujyp8tXa5UxheJJC2B6kL",
+      apple: "https://music.apple.com/us/album/analog-myth/6777905789",
       playlist: "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
       rss: "/podcasts/feed.xml",
       download: "/assets/podcasts/analog-myth/analog-myth-the-clock-cannot-explain-this.m4a"
@@ -146,6 +148,8 @@
       echo: "the Echo Thread play-through",
       episode: "the YouTube episode",
       listen: "the listening links",
+      spotify: "Spotify",
+      apple: "Apple Music",
       playlist: "the album playlist",
       rss: "the RSS feed",
       download: "the episode audio",
@@ -157,6 +161,10 @@
       const sitePodcast = normalized.match(/^site-podcast-(hero|player|share)-(album|echo|episode|listen|playlist|rss|download)$/);
       if (sitePodcast) {
         return { postId: normalized, wave: "site-podcast", track: "", platform: "site" };
+      }
+      const siteMusic = normalized.match(/^site-music-(album-page|listen-links|spotify|apple|playlist|podcast-episode)$/);
+      if (siteMusic) {
+        return { postId: normalized, wave: "site-music", track: "", platform: "site" };
       }
       const siteHome = normalized.match(/^site-home-(hero|starter|launch|podcast)-(album|echo|listen|playlist|video)$/);
       if (siteHome) {

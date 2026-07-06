@@ -1,6 +1,6 @@
 # Brand Click Tracking Health - Lily Roo
 
-Generated: 2026-07-06T22:37:36.263643Z
+Generated: 2026-07-06T22:53:09.860358Z
 
 ## Summary
 - Status: **ready**
@@ -17,6 +17,8 @@ Generated: 2026-07-06T22:37:36.263643Z
 - Homepage endpoint dry run: **ready**
 - Podcast CTA tracking: **ready** (10 / 10)
 - Podcast endpoint dry run: **ready**
+- Music catalog CTA tracking: **ready** (6 / 6)
+- Music catalog endpoint dry run: **ready**
 - Destinations: **album: 58, echo: 58, video: 58**
 - Issues: **none**
 
@@ -36,6 +38,8 @@ Generated: 2026-07-06T22:37:36.263643Z
 - adds_utm_campaign: **ok**
 - supports_album: **ok**
 - supports_echo: **ok**
+- supports_spotify: **ok**
+- supports_apple: **ok**
 - supports_episode: **ok**
 - supports_rss: **ok**
 - supports_download: **ok**
@@ -100,6 +104,19 @@ Generated: 2026-07-06T22:37:36.263643Z
 - `site-podcast-share-echo` -> `echo`: **ready**
 - `site-podcast-share-album` -> `album`: **ready**
 - `site-podcast-share-playlist` -> `playlist`: **ready**
+
+## Music Catalog CTA Tracking
+- Status: **ready**
+- CTA URLs ready: **6 / 6**
+- Music catalog endpoint dry run: **ready**
+- Music catalog probe id: `site-music-album-page`
+- Music catalog issues: **none**
+- `site-music-album-page` -> `album`: **ready**
+- `site-music-listen-links` -> `listen`: **ready**
+- `site-music-spotify` -> `spotify`: **ready**
+- `site-music-apple` -> `apple`: **ready**
+- `site-music-playlist` -> `playlist`: **ready**
+- `site-music-podcast-episode` -> `episode`: **ready**
 
 ## Future Rows
 - `FP-BRAND-AM-04-SPILLING-THE-TEA-X` X 2026-07-07T10:15:00-04:00 - **ready** (3 links)
@@ -316,4 +333,5 @@ Generated: 2026-07-06T22:37:36.263643Z
 - Album-page share buttons should use first-party site-share tracking links.
 - Homepage Analog Myth CTAs should use first-party site-home tracking links.
 - Podcast-page Analog Myth CTAs should use first-party site-podcast tracking links.
+- Music catalog Analog Myth CTAs should use first-party site-music tracking links.
 - The live click endpoint health probe uses dry_run=1 so it cannot create fake campaign clicks.

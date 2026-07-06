@@ -24165,14 +24165,15 @@ Generated: 2026-07-06T21:43:53.199014Z
 
 
 <script type="application/json" id="embedded-brand-click-tracking-health">{
-  "generated_at": "2026-07-06T22:37:36.263643Z",
+  "generated_at": "2026-07-06T22:53:09.860358Z",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
     "future_posts": "admin/future-posts.json",
     "redirect_page": "go/am.html",
     "home_page": "index.html",
-    "podcast_page": "podcasts/analog-myth.html"
+    "podcast_page": "podcasts/analog-myth.html",
+    "music_page": "music.html"
   },
   "summary": {
     "status": "ready",
@@ -24229,6 +24230,10 @@ Generated: 2026-07-06T21:43:53.199014Z
     "site_podcast_url_count": 10,
     "expected_site_podcast_url_count": 10,
     "site_podcast_endpoint_status": "ready",
+    "site_music_status": "ready",
+    "site_music_url_count": 6,
+    "expected_site_music_url_count": 6,
+    "site_music_endpoint_status": "ready",
     "report_path": "admin/reports/brand-click-tracking-health.md",
     "refresh_command": "python3 scripts/build_brand_click_tracking_health.py"
   },
@@ -24244,6 +24249,8 @@ Generated: 2026-07-06T21:43:53.199014Z
       "adds_utm_campaign": true,
       "supports_album": true,
       "supports_echo": true,
+      "supports_spotify": true,
+      "supports_apple": true,
       "supports_episode": true,
       "supports_rss": true,
       "supports_download": true,
@@ -24269,7 +24276,7 @@ Generated: 2026-07-06T21:43:53.199014Z
     "wave": "track-moments",
     "track": "04",
     "destination": "album",
-    "recorded_at": "2026-07-06T22:37:36.542Z"
+    "recorded_at": "2026-07-06T22:53:10.119Z"
   },
   "site_share": {
     "status": "ready",
@@ -24292,7 +24299,7 @@ Generated: 2026-07-06T21:43:53.199014Z
       "wave": "site-share",
       "track": "",
       "destination": "album",
-      "recorded_at": "2026-07-06T22:37:36.633Z"
+      "recorded_at": "2026-07-06T22:53:10.216Z"
     },
     "rows": [
       {
@@ -24405,7 +24412,7 @@ Generated: 2026-07-06T21:43:53.199014Z
       "wave": "site-home",
       "track": "",
       "destination": "album",
-      "recorded_at": "2026-07-06T22:37:36.719Z"
+      "recorded_at": "2026-07-06T22:53:10.313Z"
     },
     "rows": [
       {
@@ -24518,7 +24525,7 @@ Generated: 2026-07-06T21:43:53.199014Z
       "wave": "site-podcast",
       "track": "",
       "destination": "album",
-      "recorded_at": "2026-07-06T22:37:36.807Z"
+      "recorded_at": "2026-07-06T22:53:10.404Z"
     },
     "rows": [
       {
@@ -24597,6 +24604,79 @@ Generated: 2026-07-06T21:43:53.199014Z
         "id": "site-podcast-share-playlist",
         "url": "https://www.lilyroo.com/go/am.html?p=site-podcast-share-playlist&to=playlist",
         "destination": "playlist",
+        "anchor": "",
+        "ok": true,
+        "issues": []
+      }
+    ]
+  },
+  "site_music": {
+    "status": "ready",
+    "expected_url_count": 6,
+    "url_count": 6,
+    "ready_url_count": 6,
+    "missing_ids": [],
+    "issue_counts": {},
+    "click_endpoint": {
+      "status": "ready",
+      "safe_mode": true,
+      "dry_run": true,
+      "expected_post_id": "site-music-album-page",
+      "url": "https://www.lilyroo.com/api/social/click?dry_run=1&p=site-music-album-page&to=album",
+      "http_status": 200,
+      "ok": true,
+      "reported_post_id": "site-music-album-page",
+      "platform": "site",
+      "wave": "site-music",
+      "track": "",
+      "destination": "album",
+      "recorded_at": "2026-07-06T22:53:10.510Z"
+    },
+    "rows": [
+      {
+        "id": "site-music-album-page",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-music-album-page&to=album",
+        "destination": "album",
+        "anchor": "",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-music-listen-links",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-music-listen-links&to=listen",
+        "destination": "listen",
+        "anchor": "",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-music-spotify",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-music-spotify&to=spotify",
+        "destination": "spotify",
+        "anchor": "",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-music-apple",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-music-apple&to=apple",
+        "destination": "apple",
+        "anchor": "",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-music-playlist",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-music-playlist&to=playlist",
+        "destination": "playlist",
+        "anchor": "",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-music-podcast-episode",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-music-podcast-episode&to=episode",
+        "destination": "episode",
         "anchor": "",
         "ok": true,
         "issues": []
@@ -27834,6 +27914,7 @@ Generated: 2026-07-06T21:43:53.199014Z
     "Album-page share buttons should use first-party site-share tracking links.",
     "Homepage Analog Myth CTAs should use first-party site-home tracking links.",
     "Podcast-page Analog Myth CTAs should use first-party site-podcast tracking links.",
+    "Music catalog Analog Myth CTAs should use first-party site-music tracking links.",
     "The live click endpoint health probe uses dry_run=1 so it cannot create fake campaign clicks."
   ]
 }</script>
@@ -27841,7 +27922,7 @@ Generated: 2026-07-06T21:43:53.199014Z
 
 <script type="text/plain" id="embedded-brand-click-tracking-health-report"># Brand Click Tracking Health - Lily Roo
 
-Generated: 2026-07-06T22:37:36.263643Z
+Generated: 2026-07-06T22:53:09.860358Z
 
 ## Summary
 - Status: **ready**
@@ -27858,6 +27939,8 @@ Generated: 2026-07-06T22:37:36.263643Z
 - Homepage endpoint dry run: **ready**
 - Podcast CTA tracking: **ready** (10 / 10)
 - Podcast endpoint dry run: **ready**
+- Music catalog CTA tracking: **ready** (6 / 6)
+- Music catalog endpoint dry run: **ready**
 - Destinations: **album: 58, echo: 58, video: 58**
 - Issues: **none**
 
@@ -27877,6 +27960,8 @@ Generated: 2026-07-06T22:37:36.263643Z
 - adds_utm_campaign: **ok**
 - supports_album: **ok**
 - supports_echo: **ok**
+- supports_spotify: **ok**
+- supports_apple: **ok**
 - supports_episode: **ok**
 - supports_rss: **ok**
 - supports_download: **ok**
@@ -27941,6 +28026,19 @@ Generated: 2026-07-06T22:37:36.263643Z
 - `site-podcast-share-echo` -> `echo`: **ready**
 - `site-podcast-share-album` -> `album`: **ready**
 - `site-podcast-share-playlist` -> `playlist`: **ready**
+
+## Music Catalog CTA Tracking
+- Status: **ready**
+- CTA URLs ready: **6 / 6**
+- Music catalog endpoint dry run: **ready**
+- Music catalog probe id: `site-music-album-page`
+- Music catalog issues: **none**
+- `site-music-album-page` -> `album`: **ready**
+- `site-music-listen-links` -> `listen`: **ready**
+- `site-music-spotify` -> `spotify`: **ready**
+- `site-music-apple` -> `apple`: **ready**
+- `site-music-playlist` -> `playlist`: **ready**
+- `site-music-podcast-episode` -> `episode`: **ready**
 
 ## Future Rows
 - `FP-BRAND-AM-04-SPILLING-THE-TEA-X` X 2026-07-07T10:15:00-04:00 - **ready** (3 links)
@@ -28157,6 +28255,7 @@ Generated: 2026-07-06T22:37:36.263643Z
 - Album-page share buttons should use first-party site-share tracking links.
 - Homepage Analog Myth CTAs should use first-party site-home tracking links.
 - Podcast-page Analog Myth CTAs should use first-party site-podcast tracking links.
+- Music catalog Analog Myth CTAs should use first-party site-music tracking links.
 - The live click endpoint health probe uses dry_run=1 so it cannot create fake campaign clicks.</script>
 
 <script>

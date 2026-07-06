@@ -19,6 +19,7 @@ const BRAND_CLICK_POST_PATTERN = /^fp-brand-am(?:-w\d+)?-\d{2}-.+-(x|facebook)$/
 const SITE_SHARE_CLICK_PATTERN = /^site-share-(album|echo|video|track-\d{2}-[a-z0-9-]+)$/;
 const SITE_HOME_CLICK_PATTERN = /^site-home-(hero|starter|launch|podcast)-(album|echo|listen|playlist|video)$/;
 const SITE_PODCAST_CLICK_PATTERN = /^site-podcast-(hero|player|share)-(album|echo|episode|listen|playlist|rss|download)$/;
+const SITE_MUSIC_CLICK_PATTERN = /^site-music-(album-page|listen-links|spotify|apple|playlist|podcast-episode)$/;
 const CLICK_TTL_SECONDS = 60 * 60 * 24 * 180;
 const MAX_SCHEDULE_ATTEMPTS = 3;
 const LAUNCH_FOCUS_DAYS = {
@@ -670,6 +671,15 @@ function campaignPostParts(postId) {
       platform: "site",
     };
   }
+  const siteMusic = normalized.match(/^site-music-(album-page|listen-links|spotify|apple|playlist|podcast-episode)$/);
+  if (siteMusic) {
+    return {
+      wave: "site-music",
+      track: "",
+      trackSlug: siteMusic[1],
+      platform: "site",
+    };
+  }
   const siteHome = normalized.match(/^site-home-(hero|starter|launch|podcast)-(album|echo|listen|playlist|video)$/);
   if (siteHome) {
     return {
@@ -702,12 +712,12 @@ function campaignPostParts(postId) {
 
 function isTrackableClickPostId(postId) {
   const normalized = text(postId).toLowerCase();
-  return BRAND_CLICK_POST_PATTERN.test(normalized) || SITE_SHARE_CLICK_PATTERN.test(normalized) || SITE_HOME_CLICK_PATTERN.test(normalized) || SITE_PODCAST_CLICK_PATTERN.test(normalized);
+  return BRAND_CLICK_POST_PATTERN.test(normalized) || SITE_SHARE_CLICK_PATTERN.test(normalized) || SITE_HOME_CLICK_PATTERN.test(normalized) || SITE_PODCAST_CLICK_PATTERN.test(normalized) || SITE_MUSIC_CLICK_PATTERN.test(normalized);
 }
 
 function normalizeClickDestination(value) {
   const clean = text(value).toLowerCase();
-  return ["album", "echo", "video", "listen", "playlist", "episode", "rss", "download"].includes(clean) ? clean : "album";
+  return ["album", "echo", "video", "listen", "spotify", "apple", "playlist", "episode", "rss", "download"].includes(clean) ? clean : "album";
 }
 
 function safeUrlText(value) {
