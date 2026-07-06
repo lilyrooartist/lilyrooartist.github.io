@@ -3,47 +3,146 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Analog Myth</title>
+  <title>Analog Myth - Lily Roo</title>
+  <meta name="description" content="Open Lily Roo's Analog Myth album page, Echo Thread play-through, or track video from the current campaign link.">
   <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://www.lilyroo.com/analog-myth.html">
+  <meta property="og:type" content="music.album">
+  <meta property="og:site_name" content="Lily Roo">
+  <meta property="og:title" content="Analog Myth - Lily Roo">
+  <meta property="og:description" content="Eight tracks, one broken clock, and the Echo Thread play-through with the songs in the room.">
+  <meta property="og:url" content="https://www.lilyroo.com/analog-myth.html">
+  <meta property="og:image" content="https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg">
+  <meta property="og:image:alt" content="Analog Myth cover art by Lily Roo">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Analog Myth - Lily Roo">
+  <meta name="twitter:description" content="Eight tracks, one broken clock, and the Echo Thread play-through with the songs in the room.">
+  <meta name="twitter:image" content="https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg">
   <style>
     body {
       margin: 0;
       min-height: 100vh;
       display: grid;
       place-items: center;
-      background: #161514;
+      background:
+        linear-gradient(90deg, rgba(28, 10, 11, .88), rgba(9, 11, 13, .96)),
+        #161514;
       color: #f5efe4;
       font: 16px/1.5 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
     main {
-      width: min(90vw, 34rem);
+      width: min(92vw, 46rem);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 11rem;
+      gap: 1.25rem;
+      align-items: center;
+      border: 1px solid rgba(214, 179, 106, .32);
+      padding: clamp(1.15rem, 4vw, 2rem);
+      box-sizing: border-box;
+      background: rgba(10, 10, 10, .78);
+      box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, .38);
+    }
+    h1 {
+      margin: 0 0 .5rem;
+      font-size: clamp(2.1rem, 7vw, 4rem);
+      line-height: .92;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+    p {
+      margin: 0 0 .85rem;
+      color: #d8cec0;
+    }
+    .eyebrow {
+      color: #d6b36a;
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .art {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border: 1px solid rgba(214, 179, 106, .36);
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .55rem;
+      margin-top: 1rem;
     }
     a {
       color: #d6b36a;
+    }
+    .button {
+      display: inline-flex;
+      min-height: 2.65rem;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(214, 179, 106, .46);
+      padding: .55rem .85rem;
+      color: #f5efe4;
+      text-decoration: none;
+      font-size: .8rem;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .primary {
+      background: #d6b36a;
+      color: #1a1511;
+      border-color: #d6b36a;
+    }
+    @media (max-width: 640px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+      .art {
+        max-width: 12rem;
+      }
     }
   </style>
 </head>
 <body>
   <main>
-    <p>Opening Analog Myth...</p>
-    <p><a id="fallback-link" href="/analog-myth.html">Continue to Analog Myth</a></p>
+    <section aria-live="polite">
+      <p class="eyebrow">Lily Roo / Analog Myth</p>
+      <h1 id="headline">Opening Analog Myth</h1>
+      <p id="message">Taking you to the album room. If the door sticks, choose a link below.</p>
+      <div class="actions" aria-label="Analog Myth links">
+        <a class="button primary" id="fallback-link" href="/analog-myth.html">Continue</a>
+        <a class="button" id="album-link" href="/analog-myth.html">Album</a>
+        <a class="button" id="echo-link" href="/podcasts/analog-myth.html">Echo Thread</a>
+        <a class="button" id="listen-link" href="https://distrokid.com/hyperfollow/lilyroo/analog-myth">Listen</a>
+        <a class="button" id="playlist-link" href="https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0">Playlist</a>
+      </div>
+    </section>
+    <img class="art" src="/assets/albums/analog-myth/art/03-analog-myth.jpg" alt="Analog Myth cover art by Lily Roo">
   </main>
   <script>
     const TRACKS = {
-      "01": { slug: "13", video: "https://youtu.be/XL5VOVxwTw4" },
-      "02": { slug: "girls-camp", video: "https://youtu.be/TxBhM3_nAU8" },
-      "03": { slug: "analog-myth", video: "https://youtu.be/_rtioKYbCFM" },
-      "04": { slug: "spilling-the-tea", video: "https://youtu.be/AfnuwBYViKw" },
-      "05": { slug: "no-mortgage", video: "https://youtu.be/-r7khqOLpjQ" },
-      "06": { slug: "guards-down", video: "https://youtu.be/yn_315-h5vM" },
-      "07": { slug: "slow-walk", video: "https://youtu.be/nPuGjQf7lKY" },
-      "08": { slug: "the-power-of-light", video: "https://youtu.be/ctZ2TRBWC-c" }
+      "01": { slug: "13", title: "13", video: "https://youtu.be/XL5VOVxwTw4" },
+      "02": { slug: "girls-camp", title: "Girls Camp", video: "https://youtu.be/TxBhM3_nAU8" },
+      "03": { slug: "analog-myth", title: "Analog Myth", video: "https://youtu.be/_rtioKYbCFM" },
+      "04": { slug: "spilling-the-tea", title: "Spilling the Tea", video: "https://youtu.be/AfnuwBYViKw" },
+      "05": { slug: "no-mortgage", title: "No Mortgage", video: "https://youtu.be/-r7khqOLpjQ" },
+      "06": { slug: "guards-down", title: "Guards Down", video: "https://youtu.be/yn_315-h5vM" },
+      "07": { slug: "slow-walk", title: "Slow Walk", video: "https://youtu.be/nPuGjQf7lKY" },
+      "08": { slug: "the-power-of-light", title: "The Power of Light", video: "https://youtu.be/ctZ2TRBWC-c" }
     };
     const DESTINATIONS = {
       album: "/analog-myth.html",
       echo: "/podcasts/analog-myth.html",
       listen: "https://distrokid.com/hyperfollow/lilyroo/analog-myth",
       playlist: "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0"
+    };
+    const DESTINATION_LABELS = {
+      album: "the album page",
+      echo: "the Echo Thread play-through",
+      listen: "the listening links",
+      playlist: "the album playlist",
+      video: "the track video"
     };
 
     function postParts(postId) {
@@ -115,11 +214,30 @@
     const params = new URLSearchParams(window.location.search);
     const parts = postParts(params.get("p"));
     const destination = params.get("to") || "album";
+    const isDryRun = ["1", "true", "yes"].includes(String(params.get("dry_run") || "").toLowerCase());
     const target = appendAttribution(destinationUrl(destination, parts.track), parts);
-    const link = document.getElementById("fallback-link");
-    link.href = target;
-    recordClick(target, parts, destination);
-    window.setTimeout(() => window.location.replace(target), 90);
+    const track = TRACKS[parts.track] || {};
+    const headline = document.getElementById("headline");
+    const message = document.getElementById("message");
+    const fallback = document.getElementById("fallback-link");
+    const album = document.getElementById("album-link");
+    const echo = document.getElementById("echo-link");
+    const listen = document.getElementById("listen-link");
+    const playlist = document.getElementById("playlist-link");
+    headline.textContent = track.title ? `Opening ${track.title}` : "Opening Analog Myth";
+    message.textContent = isDryRun
+      ? `Previewing the route to ${DESTINATION_LABELS[destination] || "Analog Myth"}.`
+      : `Taking you to ${DESTINATION_LABELS[destination] || "Analog Myth"}. If the door sticks, choose a link below.`;
+    fallback.textContent = `Open ${DESTINATION_LABELS[destination] || "Analog Myth"}`;
+    fallback.href = target;
+    album.href = appendAttribution(DESTINATIONS.album, parts);
+    echo.href = appendAttribution(DESTINATIONS.echo, parts);
+    listen.href = appendAttribution(DESTINATIONS.listen, parts);
+    playlist.href = appendAttribution(DESTINATIONS.playlist, parts);
+    if (!isDryRun) {
+      recordClick(target, parts, destination);
+      window.setTimeout(() => window.location.replace(target), 90);
+    }
   </script>
 </body>
 </html>
