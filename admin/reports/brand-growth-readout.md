@@ -1,19 +1,19 @@
 # Brand Growth Readout - Lily Roo
 
-Generated: 2026-07-06T14:17:08.168354Z
+Generated: 2026-07-06T15:33:45.319155Z
 
 ## Summary
 - Campaign rows: **64**
 - Approved auto rows: **64**
-- Visible in future queue: **59**
-- Posted or measured rows: **5**
+- Visible in future queue: **58**
+- Posted or measured rows: **6**
 - Measured rows: **0**
-- Ready for metric capture: **3**
-- Public visibility: **verified** (5 / 5 checked OK; 0 attention)
+- Ready for metric capture: **4**
+- Public visibility: **verified** (6 / 6 checked OK; 0 attention)
 - Campaign clicks: **0** across **0** post(s); last click `none yet`
 - Post-slot watch windows: **32**
-- Status counts: **posted_waiting_measurement_window: 2, ready_for_metric_capture: 3, scheduled_future: 59**
-- Next scheduled: `FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK` at `2026-07-06T11:20:00-04:00`
+- Status counts: **posted_waiting_measurement_window: 2, ready_for_metric_capture: 4, scheduled_future: 58**
+- Next scheduled: `FP-BRAND-AM-04-SPILLING-THE-TEA-X` at `2026-07-07T10:15:00-04:00`
 - Next action window: `2026-07-04` **measurement_due** due `2026-07-05T15:20:00Z`
 - Next scheduled post proof: `2026-07-07` due `2026-07-07T16:05:00Z`
 - Next metric window: `2026-07-04` due `2026-07-05T15:20:00Z`
@@ -26,7 +26,7 @@ Generated: 2026-07-06T14:17:08.168354Z
 - Preview post-slot proof: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
 - Apply post-slot proof after scheduled executor runs: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin`
 - Capture X metrics: `python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X --post-id FP-BRAND-AM-02-GIRLS-CAMP-X`
-- Capture Facebook metrics: `python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK`
+- Capture Facebook metrics: `python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --post-id FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK`
 - Re-check public visibility: `admin/reports/brand-post-visibility.md`
 - Capture campaign clicks: `python3 scripts/capture_brand_campaign_clicks.py`
 
@@ -40,6 +40,7 @@ Generated: 2026-07-06T14:17:08.168354Z
 - Metric capture is waiting for X API credential names: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET. After credentials are present, run: python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X
 - Metric capture is waiting for Meta API credential names: META_LONG_LIVED_TOKEN, FB_PAGE_ID. After credentials are present, run: python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK
 - Metric capture is waiting for X API credential names: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET. After credentials are present, run: python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-02-GIRLS-CAMP-X
+- Metric capture is waiting for Meta API credential names: META_LONG_LIVED_TOKEN, FB_PAGE_ID. After credentials are present, run: python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK
 
 ## Post-Slot Watch
 - `2026-07-04` **measurement_due** proof due `2026-07-04T16:05:00Z` for `FP-BRAND-AM-01-13-X, FP-BRAND-AM-01-13-FACEBOOK`
@@ -49,7 +50,7 @@ Generated: 2026-07-06T14:17:08.168354Z
 - `2026-07-05` **measurement_due** proof due `2026-07-05T16:05:00Z` for `FP-BRAND-AM-02-GIRLS-CAMP-X, FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK`
   - Next: Capture metrics for logged campaign posts and import reviewed result fields.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
-  - Metrics: `python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-02-GIRLS-CAMP-X`
+  - Metrics: `python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-02-GIRLS-CAMP-X && python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK`
 - `2026-07-06` **posted_waiting_measurement** proof due `2026-07-06T16:05:00Z` for `FP-BRAND-AM-03-ANALOG-MYTH-X, FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK`
   - Next: Wait for the first measurement window before capturing result metrics.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
@@ -154,16 +155,18 @@ Generated: 2026-07-06T14:17:08.168354Z
   - URL: https://x.com/i/web/status/2073772787177861205
   - Public visibility: `visible_copy_confirmed` OK
   - Next: Metric capture is waiting for X API credential names: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET. After credentials are present, run: python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-02-GIRLS-CAMP-X
-- `FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK` Facebook 2026-07-05T11:20:00-04:00 - **posted_waiting_measurement_window**
+- `FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK` Facebook 2026-07-05T11:20:00-04:00 - **ready_for_metric_capture**
   - URL: https://www.facebook.com/lilyrooartist/posts/122121048123249470
   - Public visibility: `page_loaded_no_unavailable_marker` OK
-  - Next: Wait until 2026-07-06T15:30:46.255000+00:00 before capturing metrics.
+  - Next: Metric capture is waiting for Meta API credential names: META_LONG_LIVED_TOKEN, FB_PAGE_ID. After credentials are present, run: python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK
 - `FP-BRAND-AM-03-ANALOG-MYTH-X` X 2026-07-06T10:15:00-04:00 - **posted_waiting_measurement_window**
   - URL: https://x.com/i/web/status/2074135149185266159
   - Public visibility: `visible_copy_confirmed` OK
   - Next: Wait until 2026-07-07T14:15:30.540000+00:00 before capturing metrics.
-- `FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK` Facebook 2026-07-06T11:20:00-04:00 - **scheduled_future**
-  - Next: Wait for the scheduled social executor, then refresh admin and export executions.
+- `FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK` Facebook 2026-07-06T11:20:00-04:00 - **posted_waiting_measurement_window**
+  - URL: https://www.facebook.com/lilyrooartist/posts/122121136809249470
+  - Public visibility: `page_loaded_no_unavailable_marker` OK
+  - Next: Wait until 2026-07-07T15:30:39.575000+00:00 before capturing metrics.
 - `FP-BRAND-AM-04-SPILLING-THE-TEA-X` X 2026-07-07T10:15:00-04:00 - **scheduled_future**
   - Next: Wait for the scheduled social executor, then refresh admin and export executions.
 - `FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK` Facebook 2026-07-07T11:20:00-04:00 - **scheduled_future**

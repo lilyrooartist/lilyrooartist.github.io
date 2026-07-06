@@ -1,24 +1,26 @@
 # Brand Growth Preflight - Lily Roo
 
-Generated: 2026-07-06T14:23:48.213426Z
+Generated: 2026-07-06T15:33:45.374591Z
 
 ## Summary
 - Status: **ready**
-- Next window: **2026-07-06** at `2026-07-06T15:21:00Z`
-- Expected posts: **1**
-- Scheduler: HTTP **200**, auth `bearer`, due **1**, would post **1**, blocked **0**
-- Link checks: **4 ok**, **0 failed**, **0 warning**, **0 blocking failed**
-- Current window proof due: `2026-07-06T15:21:00Z`
-- Current window measurement due: `2026-07-07T15:20:00Z`
+- Next window: **2026-07-07** at `2026-07-07T15:21:00Z`
+- Expected posts: **2**
+- Scheduler: HTTP **200**, auth `bearer`, due **3**, would post **2**, blocked **0**
+- Link checks: **5 ok**, **0 failed**, **0 warning**, **0 blocking failed**
+- Current window proof due: `2026-07-07T15:21:00Z`
+- Current window measurement due: `2026-07-08T15:20:00Z`
 
 ## Expected Posts
-- `FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK` Facebook at `2026-07-06T11:20:00-04:00`
+- `FP-BRAND-AM-04-SPILLING-THE-TEA-X` X at `2026-07-07T10:15:00-04:00`
+- `FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK` Facebook at `2026-07-07T11:20:00-04:00`
 
 ## Link Checks
-- **ok** `FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK imagery_url` 200 image/jpeg
-- **ok** `FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK Analog Myth` 200 text/html
-- **ok** `FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK Echo Thread` 200 text/html
-- **ok** `FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK Track video` 200 text/html
+- **ok** `FP-BRAND-AM-04-SPILLING-THE-TEA-X imagery_url` 200 image/jpeg
+- **ok** `FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK imagery_url` 200 image/jpeg
+- **ok** `FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK Analog Myth` 200 text/html
+- **ok** `FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK Echo Thread` 200 text/html
+- **ok** `FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK Track video` 200 text/html
 
 ## Guardrails
 - Preflight is read-only; it calls the scheduler dry-run endpoint and HEAD-checks public URLs.

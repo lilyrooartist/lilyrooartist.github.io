@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-06T14:17:04.046101Z",
+  "generated_at": "2026-07-06T15:33:40.989850Z",
   "safe_mode": true,
   "source": {
     "published_log": "admin/content/Published_Log.csv",
@@ -9,11 +9,11 @@
   },
   "summary": {
     "status": "verified",
-    "checked_post_count": 5,
-    "public_visibility_ok_count": 5,
+    "checked_post_count": 6,
+    "public_visibility_ok_count": 6,
     "attention_count": 0,
     "x_copy_confirmed_count": 3,
-    "facebook_page_loaded_count": 2,
+    "facebook_page_loaded_count": 3,
     "report_path": "admin/reports/brand-post-visibility.md",
     "refresh_command": "python3 scripts/capture_brand_post_visibility.py"
   },
@@ -119,6 +119,33 @@
       "copy_matched": true,
       "note": "X public oEmbed returned Lily Roo post copy.",
       "attempts": []
+    },
+    {
+      "post_id": "FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK",
+      "platform": "Facebook",
+      "published_date": "2026-07-06",
+      "source_row": 55,
+      "logged_url": "https://www.facebook.com/lilyrooartist/posts/122121136809249470",
+      "checked_url": "https://www.facebook.com/lilyrooartist/posts/122121136809249470",
+      "final_url": "https://www.facebook.com/lilyrooartist/posts/122121136809249470",
+      "http_status": 200,
+      "content_type": "text/html; charset=\"utf-8\"",
+      "visibility_status": "page_loaded_no_unavailable_marker",
+      "public_visibility_ok": true,
+      "copy_matched": true,
+      "note": "Facebook public page loaded without the common unavailable-content marker.",
+      "attempts": [
+        {
+          "url": "https://www.facebook.com/lilyrooartist/posts/122121136809249470",
+          "ok": true,
+          "http_status": 200,
+          "final_url": "https://www.facebook.com/lilyrooartist/posts/122121136809249470",
+          "content_type": "text/html; charset=\"utf-8\"",
+          "error": "",
+          "unavailable_marker_found": false,
+          "copy_matched": true
+        }
+      ]
     }
   ],
   "guardrails": [

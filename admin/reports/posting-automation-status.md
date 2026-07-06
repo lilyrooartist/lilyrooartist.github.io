@@ -1,6 +1,6 @@
 # Posting Automation Status - Lily Roo
 
-Generated: 2026-07-06T14:17:08.133598Z
+Generated: 2026-07-06T15:33:45.283881Z
 
 ## Summary
 - Status: **ready_active_campaign**
@@ -11,24 +11,24 @@ Generated: 2026-07-06T14:17:08.133598Z
 - Needs attention: **0**
 - Story posts tracked: **6**
 - Help-needed items: **0**
-- Next action: Watch FP-BRAND-AM-03-ANALOG-MYTH-X, FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK after 2026-07-06T15:21:00Z, then export posted URLs.
+- Next action: Watch FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK after 2026-07-06T15:21:00Z, then export posted URLs.
 
 ## Automation Lanes
 - **Active Analog Myth brand campaign** - `ready`
-  - Detail: 64 approved auto posts; next=FP-BRAND-AM-03-ANALOG-MYTH-X at 2026-07-06T10:15:00-04:00; preflight=ready
+  - Detail: 64 approved auto posts; next=FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK at 2026-07-06T11:20:00-04:00; preflight=ready
   - Evidence: data/brand_growth_preflight.json
-  - Next: Watch FP-BRAND-AM-03-ANALOG-MYTH-X, FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK after 2026-07-06T15:21:00Z, then export posted URLs.
+  - Next: Watch FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK after 2026-07-06T15:21:00Z, then export posted URLs.
 - **Scheduled refresh workflow** - `ready`
   - Detail: 17 */6 * * *, 05 16 * * *; latest run completed / success
   - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28786899465
 - **Safe admin refresh** - `ready`
-  - Detail: 19 refresh commands captured at 2026-07-06T14:17:06.298865Z
+  - Detail: 19 refresh commands captured at 2026-07-06T15:33:43.467577Z
   - Evidence: data/promo_admin_refresh_run.json
 - **Scheduler dry-run authentication** - `ready`
   - Detail: HTTP 200 using bearer auth; due=1 would_post=0
   - Evidence: data/social_scheduler_dry_run.json
 - **Execution capture** - `ready`
-  - Detail: posted=35 attention=0 platform_fix_needed=0
+  - Detail: posted=36 attention=0 platform_fix_needed=0
   - Evidence: data/social_execution_snapshot.json
 - **Platform readiness** - `deferred`
   - Detail: ready=X, Facebook, YouTube; blocked=Instagram, TikTok
