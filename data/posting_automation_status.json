@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-06T16:54:20.073622Z",
+  "generated_at": "2026-07-06T16:56:38.804963Z",
   "safe_mode": true,
   "source": {
     "workflow": ".github/workflows/promo-admin-refresh.yml",
@@ -43,7 +43,7 @@
     "story_queued_future_count": 0,
     "platform_repair_blocked_count": 0,
     "blocker_input_status": "missing_local_input",
-    "blocker_input_missing_count": 3,
+    "blocker_input_missing_count": 5,
     "blocker_input_external_action_count": 1,
     "help_needed_count": 0,
     "next_action": "Watch FP-BRAND-AM-04-SPILLING-THE-TEA-X, FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK after 2026-07-07T15:21:00Z, then export posted URLs."
@@ -59,14 +59,14 @@
     {
       "label": "Scheduled refresh workflow",
       "status": "ready",
-      "detail": "17 */6 * * *, 05 16 * * *; latest run completed / success",
-      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28804750619",
+      "detail": "17 */6 * * *, 05 16 * * *; latest run in_progress / pending",
+      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28808558623",
       "next_action": ""
     },
     {
       "label": "Safe admin refresh",
       "status": "ready",
-      "detail": "19 refresh commands captured at 2026-07-06T16:54:18.265124Z",
+      "detail": "19 refresh commands captured at 2026-07-06T16:56:36.833468Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": ""
     },
@@ -101,7 +101,7 @@
     {
       "label": "Blocker input readiness",
       "status": "deferred",
-      "detail": "3 ready; 3 missing local input; 1 external action needed",
+      "detail": "1 ready; 5 missing local input; 1 external action needed",
       "evidence": "data/social_blocker_input_status.json",
       "next_action": "Optional expansion inputs can wait; the active brand campaign is already preflight-ready."
     },
