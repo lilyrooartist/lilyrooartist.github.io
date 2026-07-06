@@ -397,6 +397,7 @@ def validate_generated_outputs(failures):
         summary = preflight.get("summary") or {}
         expected_count = int(summary.get("expected_post_count") or 0)
         blocking_link_failures = int(summary.get("link_blocking_failed_count", summary.get("link_failed_count") or 0) or 0)
+        expected_tracking_links = expected_count * 3
         if (
             preflight.get("safe_mode") is True
             and summary.get("status") == "ready"
@@ -404,6 +405,9 @@ def validate_generated_outputs(failures):
             and summary.get("scheduler_http_status") == 200
             and int(summary.get("scheduler_would_post_count") or 0) == expected_count
             and int(summary.get("scheduler_blocked_count") or 0) == 0
+            and int(summary.get("tracking_link_check_count") or 0) == expected_tracking_links
+            and int(summary.get("tracking_link_ok_count") or 0) == expected_tracking_links
+            and int(summary.get("expected_tracking_link_check_count") or 0) == expected_tracking_links
             and blocking_link_failures == 0
             and not summary.get("missing_due_ids")
             and not summary.get("unexpected_due_ids")

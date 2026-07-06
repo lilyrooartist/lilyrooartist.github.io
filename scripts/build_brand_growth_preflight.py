@@ -28,6 +28,18 @@ REPORT = ROOT / "admin" / "reports" / "brand-growth-preflight.md"
 REPORT_INDEX = ROOT / "admin" / "reports" / "index.html"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
 CAMPAIGN_ID_PREFIX = "FP-BRAND-AM"
+REPLY_LINK_LABELS = {
+    "Listen",
+    "Album",
+    "Album page",
+    "Echo",
+    "Echo Thread",
+    "Track",
+    "Track video",
+    "Video",
+    "Analog Myth",
+    "Playlist",
+}
 
 
 def read_json(path: Path, fallback):
@@ -216,24 +228,25 @@ def check_url(url: str, label: str, timeout: int = 20) -> dict:
 
 def link_checks(posts: list[dict]) -> list[dict]:
     checks = []
-    seen: set[tuple[str, str]] = set()
+    seen: set[tuple[str, str, str]] = set()
     for post in posts:
         post_id = str(post.get("id") or "")
         if post.get("imagery_url"):
-            key = (post_id, "imagery_url")
+            key = (post_id, "imagery_url", str(post.get("imagery_url") or ""))
             seen.add(key)
             checks.append(check_url(str(post.get("imagery_url") or ""), f"{post_id} imagery_url"))
         for line in str(post.get("reply_text") or "").splitlines():
             if ": " not in line:
                 continue
             label, url = line.split(": ", 1)
-            if label not in {"Listen", "Album page", "Echo Thread", "Track video", "Analog Myth", "Track", "Playlist"}:
+            url = url.strip()
+            if label not in REPLY_LINK_LABELS and "/go/am.html" not in url:
                 continue
-            key = (post_id, label)
+            key = (post_id, label, url)
             if key in seen:
                 continue
             seen.add(key)
-            checks.append(check_url(url.strip(), f"{post_id} {label}"))
+            checks.append(check_url(url, f"{post_id} {label}"))
     return checks
 
 
@@ -278,7 +291,10 @@ def build_payload() -> dict:
     missing_due = [post_id for post_id in expected if post_id not in would_post_ids]
     unexpected_due = [post_id for post_id in would_post_ids if post_id not in expected]
     checks = link_checks(window["posts"])
+    tracking_checks = [item for item in checks if "/go/am.html" in str(item.get("url") or "")]
+    expected_tracking_checks = len(expected) * 3
     check_counts = Counter("ok" if item.get("ok") else "failed" for item in checks)
+    tracking_ok_count = sum(1 for item in tracking_checks if item.get("ok"))
     warning_count = sum(1 for item in checks if item.get("readiness_warning"))
     blocking_failed_count = sum(1 for item in checks if not item.get("ok") and not item.get("readiness_warning"))
     ready = (
@@ -288,6 +304,7 @@ def build_payload() -> dict:
         and scheduler_summary.get("blocked_count") == 0
         and not missing_due
         and not unexpected_due
+        and tracking_ok_count == expected_tracking_checks
         and blocking_failed_count == 0
     )
     payload = {
@@ -318,6 +335,9 @@ def build_payload() -> dict:
             "link_check_count": len(checks),
             "link_ok_count": check_counts.get("ok", 0),
             "link_failed_count": check_counts.get("failed", 0),
+            "tracking_link_check_count": len(tracking_checks),
+            "tracking_link_ok_count": tracking_ok_count,
+            "expected_tracking_link_check_count": expected_tracking_checks,
             "link_warning_count": warning_count,
             "link_blocking_failed_count": blocking_failed_count,
             "next_proof_due_at": iso_z(scheduled_time),
@@ -363,6 +383,7 @@ def build_markdown(payload: dict) -> str:
         f"- Expected posts: **{summary.get('expected_post_count', 0)}**",
         f"- Scheduler: HTTP **{summary.get('scheduler_http_status')}**, auth `{summary.get('scheduler_auth_method')}`, due **{summary.get('scheduler_due_count')}**, would post **{summary.get('scheduler_would_post_count')}**, blocked **{summary.get('scheduler_blocked_count')}**",
         f"- Link checks: **{summary.get('link_ok_count')} ok**, **{summary.get('link_failed_count')} failed**, **{summary.get('link_warning_count', 0)} warning**, **{summary.get('link_blocking_failed_count', summary.get('link_failed_count', 0))} blocking failed**",
+        f"- Tracking redirects: **{summary.get('tracking_link_ok_count', 0)} / {summary.get('expected_tracking_link_check_count', 0)} checked ok**",
         f"- Current window proof due: `{summary.get('next_proof_due_at') or 'n/a'}`",
         f"- Current window measurement due: `{summary.get('next_measurement_due_at') or 'n/a'}`",
         "",

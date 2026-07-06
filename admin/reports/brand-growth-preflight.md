@@ -1,13 +1,14 @@
 # Brand Growth Preflight - Lily Roo
 
-Generated: 2026-07-06T18:13:02.838796Z
+Generated: 2026-07-06T18:39:15.774508Z
 
 ## Summary
 - Status: **ready**
 - Next window: **2026-07-07** at `2026-07-07T15:21:00Z`
 - Expected posts: **2**
 - Scheduler: HTTP **200**, auth `bearer`, due **2**, would post **2**, blocked **0**
-- Link checks: **5 ok**, **0 failed**, **0 warning**, **0 blocking failed**
+- Link checks: **8 ok**, **0 failed**, **0 warning**, **0 blocking failed**
+- Tracking redirects: **6 / 6 checked ok**
 - Current window proof due: `2026-07-07T15:21:00Z`
 - Current window measurement due: `2026-07-08T15:20:00Z`
 
@@ -17,6 +18,9 @@ Generated: 2026-07-06T18:13:02.838796Z
 
 ## Link Checks
 - **ok** `FP-BRAND-AM-04-SPILLING-THE-TEA-X imagery_url` 200 image/jpeg
+- **ok** `FP-BRAND-AM-04-SPILLING-THE-TEA-X Album` 200 text/html
+- **ok** `FP-BRAND-AM-04-SPILLING-THE-TEA-X Echo` 200 text/html
+- **ok** `FP-BRAND-AM-04-SPILLING-THE-TEA-X Video` 200 text/html
 - **ok** `FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK imagery_url` 200 image/jpeg
 - **ok** `FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK Analog Myth` 200 text/html
 - **ok** `FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK Echo Thread` 200 text/html
