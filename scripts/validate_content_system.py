@@ -3986,6 +3986,7 @@ def validate_generated_outputs(failures):
             "contents: write",
             "GITHUB_TOKEN: ${{ github.token }}",
             "scripts/capture_github_workflow_status.py",
+            "scripts/build_brand_click_tracking_health.py",
             "git add admin data",
         ]
         forbidden_bits = [
