@@ -97,10 +97,10 @@ def pick_primary_action(
         and int(preflight_summary.get("scheduler_blocked_count") or 0) == 0
     )
     proof_due_at = (
-        posting_summary.get("active_campaign_next_proof_due_at")
+        readout_summary.get("next_proof_due_at")
+        or posting_summary.get("active_campaign_next_proof_due_at")
         or preflight_summary.get("next_proof_due_at")
         or preflight_summary.get("scheduled_time")
-        or readout_summary.get("next_proof_due_at")
     )
     proof_hours = hours_until(proof_due_at, now)
     ready_metrics = int(readout_summary.get("ready_for_metric_capture_rows") or 0)
@@ -194,7 +194,7 @@ def build_payload() -> dict:
     )
 
     next_post_at = readout_summary.get("next_scheduled_at") or preflight_summary.get("scheduled_time") or ""
-    proof_due_at = primary_action.get("due_at") or posting_summary.get("active_campaign_next_proof_due_at") or readout_summary.get("next_proof_due_at") or ""
+    proof_due_at = primary_action.get("due_at") or readout_summary.get("next_proof_due_at") or posting_summary.get("active_campaign_next_proof_due_at") or ""
     status = primary_action["state"]
     blockers = []
     if missing_metrics:

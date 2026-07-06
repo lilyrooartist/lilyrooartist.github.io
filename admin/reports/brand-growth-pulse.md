@@ -1,6 +1,6 @@
 # Brand Growth Pulse - Lily Roo
 
-Generated: 2026-07-06T11:04:32.432543Z
+Generated: 2026-07-06T13:37:30.372446Z
 
 ## Current Pulse
 - Status: **campaign_running**
@@ -14,9 +14,9 @@ Generated: 2026-07-06T11:04:32.432543Z
 - Ready for result capture: **2**
 - First-party clicks: **0** across **0** post(s)
 - Next post at: `2026-07-06T10:15:00-04:00`
-- Proof due at: `2026-07-06T15:21:00Z`
-- Hours until next post: `3.17`
-- Hours until proof due: `4.27`
+- Proof due at: `2026-07-06T16:05:00Z`
+- Hours until next post: `0.62`
+- Hours until proof due: `2.46`
 
 ## Recommendations
 - **Let the next automated posts run**: The active X/Facebook Analog Myth campaign is queued and ready; proof capture starts after the next window.
