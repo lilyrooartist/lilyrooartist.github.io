@@ -1,6 +1,6 @@
 # Brand Growth Preflight - Lily Roo
 
-Generated: 2026-07-06T17:18:56.203052Z
+Generated: 2026-07-06T17:32:12.735703Z
 
 ## Summary
 - Status: **ready**

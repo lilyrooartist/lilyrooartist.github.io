@@ -60,6 +60,8 @@ PROMO_QUEUE_PLAN = ROOT / "data" / "promo_queue_plan.json"
 EXPERIMENT_RESULT_COLLECTION = ROOT / "data" / "experiment_result_collection_packet.json"
 EXPERIMENT_RESULT_CLIPBOARD = ROOT / "data" / "experiment_result_clipboard.json"
 EXPERIMENT_PUBLISH_RUNWAY = ROOT / "data" / "experiment_publish_runway.json"
+YOUTUBE_EXPERIMENT_PUBLIC_METRICS = ROOT / "data" / "youtube_experiment_public_metrics.json"
+YOUTUBE_EXPERIMENT_PUBLIC_METRICS_CSV = ROOT / "data" / "youtube_experiment_public_metrics.csv"
 BRAND_GROWTH_PREFLIGHT = ROOT / "data" / "brand_growth_preflight.json"
 BRAND_GROWTH_READOUT = ROOT / "data" / "brand_growth_readout.json"
 BRAND_CLICK_TRACKING_HEALTH = ROOT / "data" / "brand_click_tracking_health.json"
@@ -90,6 +92,7 @@ PROMO_REFRESH_WORKFLOW = ROOT / ".github" / "workflows" / "promo-admin-refresh.y
 PROMO_CONSISTENCY_SCRIPT = ROOT / "scripts" / "build_promo_consistency_audit.py"
 EXPERIMENT_RESULT_COLLECTION_SCRIPT = ROOT / "scripts" / "build_experiment_result_collection.py"
 EXPERIMENT_RESULT_CLIPBOARD_SCRIPT = ROOT / "scripts" / "build_experiment_result_clipboard.py"
+YOUTUBE_EXPERIMENT_PUBLIC_METRICS_SCRIPT = ROOT / "scripts" / "prefill_youtube_experiment_results.py"
 EXPERIMENT_PUBLISH_RUNWAY_SCRIPT = ROOT / "scripts" / "build_experiment_publish_runway.py"
 EXPERIMENT_RESULT_UPDATER = ROOT / "scripts" / "update_experiment_results.py"
 BRAND_GROWTH_PREFLIGHT_SCRIPT = ROOT / "scripts" / "build_brand_growth_preflight.py"
@@ -137,6 +140,7 @@ MANUAL_METRIC_REPORT = ROOT / "admin" / "reports" / "manual-metric-collection.md
 YOUTUBE_POST_RESULTS_REPORT = ROOT / "admin" / "reports" / "youtube-post-results.md"
 EXPERIMENT_RESULT_REPORT = ROOT / "admin" / "reports" / "experiment-result-collection.md"
 EXPERIMENT_RESULT_CLIPBOARD_REPORT = ROOT / "admin" / "reports" / "experiment-result-clipboard.md"
+YOUTUBE_EXPERIMENT_PUBLIC_METRICS_REPORT = ROOT / "admin" / "reports" / "youtube-experiment-public-metrics.md"
 BRAND_GROWTH_PREFLIGHT_REPORT = ROOT / "admin" / "reports" / "brand-growth-preflight.md"
 BRAND_CLICK_TRACKING_HEALTH_REPORT = ROOT / "admin" / "reports" / "brand-click-tracking-health.md"
 INDEX = CONTENT / "content_index.json"
@@ -2324,6 +2328,7 @@ def validate_generated_outputs(failures):
         packet_wide_ready_rows = packet.get("wide_ready_rows") or []
         missing_posts = packet.get("missing_published_log_posts") or []
         allowed_fields = {"views", "likes", "comments", "shares", "saves", "subs_delta"}
+        youtube_public_fields = ["views", "likes", "comments"]
         entry_csv_path = summary.get("entry_csv_path") or ""
         wide_entry_csv_path = summary.get("wide_entry_csv_path") or ""
         csv_path = ROOT / entry_csv_path if entry_csv_path else None
@@ -2340,6 +2345,7 @@ def validate_generated_outputs(failures):
             and entry_csv_path == "data/experiment_result_entry_template.csv"
             and wide_entry_csv_path == "data/experiment_result_entry_wide_template.csv"
             and summary.get("report_path") == "admin/reports/experiment-result-collection.md"
+            and (summary.get("platform_result_field_policy") or {}).get("youtube") == youtube_public_fields
             and summary.get("apply_gate") in {"blocked_until_new_values_and_evidence_filled", "ready_rows_available"}
             and "update_experiment_results.py --from-csv data/experiment_result_entry_template.csv --dry-run" in (summary.get("result_import_preview_command") or "")
             and "update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run" in (summary.get("wide_result_import_preview_command") or "")
@@ -2360,10 +2366,15 @@ def validate_generated_outputs(failures):
                 for row in packet_wide_ready_rows
             )
             and all(row.get("field") in allowed_fields for row in pending_rows)
+            and all(
+                str(row.get("platform") or "").lower() != "youtube" or row.get("field") in youtube_public_fields
+                for row in pending_rows
+            )
             and all(row.get("experiment_format") and row.get("post_id") and row.get("platform") for row in pending_rows)
             and all(row.get("collection_hint") and row.get("source_row") for row in pending_rows)
             and all(item.get("next_action") for item in missing_posts)
             and any("no result metrics are written automatically" in item for item in packet.get("guardrails") or [])
+            and any("YouTube public-video evidence" in item for item in packet.get("guardrails") or [])
         ):
             ok(f"experiment result collection packet tracks {len(pending_rows)} pending field(s)")
         else:
@@ -2806,6 +2817,29 @@ def validate_generated_outputs(failures):
             fail("youtube_post_results.json or youtube-post-results.md missing safe public-stat coverage", failures)
     else:
         fail("YouTube post results output missing; run scripts/capture_youtube_post_results.py --allow-empty --skip-missing-secrets", failures)
+    if YOUTUBE_EXPERIMENT_PUBLIC_METRICS.exists() and YOUTUBE_EXPERIMENT_PUBLIC_METRICS_CSV.exists() and YOUTUBE_EXPERIMENT_PUBLIC_METRICS_REPORT.exists():
+        youtube_experiment = json.loads(YOUTUBE_EXPERIMENT_PUBLIC_METRICS.read_text(encoding="utf-8"))
+        youtube_summary = youtube_experiment.get("summary") or {}
+        youtube_csv_rows = read_csv(YOUTUBE_EXPERIMENT_PUBLIC_METRICS_CSV)
+        youtube_report = YOUTUBE_EXPERIMENT_PUBLIC_METRICS_REPORT.read_text(encoding="utf-8")
+        status = youtube_summary.get("status")
+        if (
+            youtube_experiment.get("safe_mode") is True
+            and status in {"ready_to_import", "blocked", "no_public_metrics"}
+            and "youtube.videos.list" in ((youtube_experiment.get("source") or {}).get("api") or "")
+            and youtube_summary.get("output_csv") == "data/youtube_experiment_public_metrics.csv"
+            and "update_experiment_results.py --from-wide-csv data/youtube_experiment_public_metrics.csv --dry-run" in (youtube_summary.get("preview_command") or "")
+            and int(youtube_summary.get("importable_post_count") or 0) == len(youtube_csv_rows)
+            and all(row.get("platform") == "YouTube" for row in youtube_csv_rows)
+            and all(str(row.get("evidence_note") or "").startswith("YouTube Data API public statistics") for row in youtube_csv_rows)
+            and "YouTube Experiment Public Metrics" in youtube_report
+            and "public YouTube video statistics" in youtube_report
+        ):
+            ok("YouTube experiment public metrics prefill is review-only and update-gated")
+        else:
+            fail("youtube_experiment_public_metrics outputs missing safe review-only prefill coverage", failures)
+    else:
+        fail("YouTube experiment public metrics outputs missing; run scripts/prefill_youtube_experiment_results.py", failures)
     if SPOTIFY_SNAPSHOT.exists():
         snapshot = json.loads(SPOTIFY_SNAPSHOT.read_text(encoding="utf-8"))
         if snapshot.get("ok") and snapshot.get("title") and snapshot.get("thumbnail_url"):
@@ -3930,6 +3964,24 @@ def validate_generated_outputs(failures):
             fail("capture_youtube_post_results.py missing public-stat capture guards or imports posting behavior", failures)
     else:
         fail("capture_youtube_post_results.py missing", failures)
+    if YOUTUBE_EXPERIMENT_PUBLIC_METRICS_SCRIPT.exists():
+        youtube_experiment_text = YOUTUBE_EXPERIMENT_PUBLIC_METRICS_SCRIPT.read_text(encoding="utf-8")
+        if (
+            "youtube_experiment_public_metrics.json" in youtube_experiment_text
+            and "youtube_experiment_public_metrics.csv" in youtube_experiment_text
+            and "youtube-experiment-public-metrics.md" in youtube_experiment_text
+            and "youtube.videos.list(part=snippet,statistics)" in youtube_experiment_text
+            and "This prefill reads public YouTube video statistics only" in youtube_experiment_text
+            and "It writes a review CSV; it does not update Published_Log.csv" in youtube_experiment_text
+            and "update_experiment_results.py --from-wide-csv" in youtube_experiment_text
+            and "Secret values are never written" in youtube_experiment_text
+            and "subprocess" not in youtube_experiment_text
+        ):
+            ok("YouTube experiment public metrics prefill is review-only")
+        else:
+            fail("prefill_youtube_experiment_results.py missing review-only public-stat safeguards", failures)
+    else:
+        fail("prefill_youtube_experiment_results.py missing", failures)
     if BRAND_GROWTH_PREFLIGHT_SCRIPT.exists():
         preflight_text = BRAND_GROWTH_PREFLIGHT_SCRIPT.read_text(encoding="utf-8")
         if (
@@ -3986,6 +4038,7 @@ def validate_generated_outputs(failures):
             "build_platform_repair_status.py",
             "build_tiktok_setup_preflight.py",
             "build_experiment_result_collection.py",
+            "prefill_youtube_experiment_results.py",
             "build_experiment_result_clipboard.py",
             "build_experiment_publish_runway.py",
             "build_brand_growth_preflight.py",

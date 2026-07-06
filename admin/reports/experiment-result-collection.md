@@ -1,12 +1,12 @@
 # Experiment Result Collection - Lily Roo
 
-Generated: 2026-07-06T17:18:55.825227Z
+Generated: 2026-07-06T17:32:12.218597Z
 
 ## Summary
 - Experiment count: **3**
 - Published experiment posts: **16**
 - Missing published log posts: **4**
-- Pending result fields: **90**
+- Pending result fields: **84**
 - Ready to import: **0**
 - Entry CSV: `data/experiment_result_entry_template.csv`
 - Wide entry CSV: `data/experiment_result_entry_wide_template.csv`
@@ -21,6 +21,7 @@ Generated: 2026-07-06T17:18:55.825227Z
 ## Guardrails
 - This packet is review-only; it does not write result metrics into Published_Log.csv.
 - Do not log a placeholder URL or guessed metric value.
+- YouTube public-video evidence is limited to public views, likes, and comments.
 - Fill only metrics visible in the platform analytics surface.
 
 ## Missing Published Log Rows
@@ -55,4 +56,4 @@ Generated: 2026-07-06T17:18:55.825227Z
 - `FP-AUTO-278` Facebook `saves` from row 30: Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594715249470 and record saves.
 - `FP-AUTO-278` Facebook `subs_delta` from row 30: Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594715249470 and record subs_delta.
 - `FP-AUTO-281` X `views` from row 42: Open X analytics for https://x.com/i/web/status/2072127000391905619 and record views.
-- ...and 65 more rows in `data/experiment_result_entry_template.csv`.
+- ...and 59 more rows in `data/experiment_result_entry_template.csv`.

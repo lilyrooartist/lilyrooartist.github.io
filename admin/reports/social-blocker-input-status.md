@@ -1,14 +1,14 @@
 # Social Blocker Input Status - Lily Roo
 
-Generated: 2026-07-06T17:18:55.966591Z
+Generated: 2026-07-06T17:32:12.580356Z
 
 ## Summary
 - Status: **missing_local_input**
-- Ready groups: **1 / 7**
-- Missing local input: **5**
+- Ready groups: **3 / 7**
+- Missing local input: **3**
 - External action needed: **1**
 - GitHub Actions missing secrets: **6**
-- Local secret env exists: **False**
+- Local secret env exists: **True**
 - Template: `data/social_blocker_secret_template.env`
 - Next action: Add X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET to secrets/social_api.env.
 
@@ -91,7 +91,7 @@ Generated: 2026-07-06T17:18:55.966591Z
   - If it fails: Connect the Lily Roo Instagram Business/Creator account to the Lily Roo Facebook Page, then rerun the resolver.
   - Verify: `python3 scripts/check_social_executor_dry_run.py --post-id FP-PLAN-TWELVE-DOLLARS-INSTAGRAM`
   - Next: Add META_LONG_LIVED_TOKEN, FB_PAGE_ID to secrets/social_api.env, then run python3 scripts/resolve_instagram_business_account.py.
-- **TikTok OAuth app values** - `missing_local_input`
+- **TikTok OAuth app values** - `ready`
   - Required all: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REDIRECT_URI
   - Unblocks: TikTok OAuth authorization URL generation and authorization-code exchange.
   - Credential priority: second
@@ -106,8 +106,8 @@ Generated: 2026-07-06T17:18:55.966591Z
     - `python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode direct`
   - If it fails: If TikTok rejects the redirect, update either the developer portal or TIKTOK_REDIRECT_URI so both strings match exactly.
   - Verify: `python3 scripts/tiktok_oauth_handoff.py --print-auth-url --posting-mode direct`
-  - Next: Add TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REDIRECT_URI to secrets/social_api.env.
-- **TikTok direct-public worker secrets** - `missing_local_input`
+  - Next: Run the verification command and refresh admin evidence.
+- **TikTok direct-public worker secrets** - `ready`
   - Required all: TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN
   - Unblocks: TikTok direct public automation only after public posting approval is explicit.
   - Credential priority: after_oauth
@@ -125,7 +125,7 @@ Generated: 2026-07-06T17:18:55.966591Z
     - `python3 scripts/refresh_promo_admin.py`
   - If it fails: Regenerate the authorization URL and exchange the code immediately; TikTok authorization codes are short-lived.
   - Verify: `python3 scripts/push_social_worker_secrets.py --dry-run TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN`
-  - Next: Add TIKTOK_CLIENT_KEY, TIKTOK_CLIENT_SECRET, TIKTOK_REFRESH_TOKEN to secrets/social_api.env.
+  - Next: Run the verification command and refresh admin evidence.
 - **Facebook Page identity checkpoint** - `external_action_needed`
   - Unblocks: The Facebook executor row blocked by Meta identity confirmation.
   - Credential priority: manual_checkpoint

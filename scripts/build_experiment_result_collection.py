@@ -17,6 +17,9 @@ OUT_MD = ROOT / "admin" / "reports" / "experiment-result-collection.md"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
 
 RESULT_FIELDS = ["views", "likes", "comments", "shares", "saves", "subs_delta"]
+PUBLIC_RESULT_FIELDS_BY_PLATFORM = {
+    "youtube": ["views", "likes", "comments"],
+}
 
 
 def read_json(path: Path, fallback):
@@ -165,6 +168,11 @@ def collection_hint(platform: str, field: str, url: str) -> str:
     return f"Open the platform analytics for {url or 'the post'} and record {field}."
 
 
+def result_fields_for_platform(platform: str) -> list[str]:
+    key = str(platform or "").strip().lower()
+    return PUBLIC_RESULT_FIELDS_BY_PLATFORM.get(key, RESULT_FIELDS)
+
+
 def build_rows(status: dict, published_rows: list[dict], existing: dict[tuple[str, str, str], dict]) -> tuple[list[dict], list[dict], list[str]]:
     growth = ((status.get("kpi") or {}).get("growth_goal") or {})
     experiments = growth.get("active_format_experiments") or []
@@ -190,7 +198,7 @@ def build_rows(status: dict, published_rows: list[dict], existing: dict[tuple[st
             published_post_ids.append(post_id)
             post_url = published_row.get("post_id_or_url") or ""
             platform = published_row.get("platform") or asset.get("platform") or ""
-            for field in RESULT_FIELDS:
+            for field in result_fields_for_platform(platform):
                 current = str(published_row.get(field) or "").strip()
                 if current:
                     continue
@@ -239,6 +247,7 @@ def build_markdown(packet: dict) -> str:
         "## Guardrails",
         "- This packet is review-only; it does not write result metrics into Published_Log.csv.",
         "- Do not log a placeholder URL or guessed metric value.",
+        "- YouTube public-video evidence is limited to public views, likes, and comments.",
         "- Fill only metrics visible in the platform analytics surface.",
         "",
         "## Missing Published Log Rows",
@@ -333,6 +342,7 @@ def main() -> int:
             "entry_csv_path": str(OUT_CSV.relative_to(ROOT)),
             "wide_entry_csv_path": str(OUT_WIDE_CSV.relative_to(ROOT)),
             "report_path": str(OUT_MD.relative_to(ROOT)),
+            "platform_result_field_policy": PUBLIC_RESULT_FIELDS_BY_PLATFORM,
             "result_import_preview_command": preview_command,
             "wide_result_import_preview_command": wide_preview_command,
             "result_import_apply_command": (
@@ -352,6 +362,7 @@ def main() -> int:
         "guardrails": [
             "Review-only packet; no result metrics are written automatically.",
             "Do not log placeholder URLs or guessed metrics.",
+            "YouTube public-video evidence is limited to views, likes, and comments.",
             "Fill only values visible in each platform analytics surface.",
         ],
     }

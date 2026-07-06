@@ -295,6 +295,16 @@ FINALIZE_STEPS = [
         "required": True,
     },
     {
+        "name": "prefill_youtube_experiment_results",
+        "command": ["python3", "scripts/prefill_youtube_experiment_results.py"],
+        "required": False,
+        "preserve_on_failure": [
+            "data/youtube_experiment_public_metrics.json",
+            "data/youtube_experiment_public_metrics.csv",
+            "admin/reports/youtube-experiment-public-metrics.md",
+        ],
+    },
+    {
         "name": "build_experiment_result_clipboard",
         "command": ["python3", "scripts/build_experiment_result_clipboard.py"],
         "required": True,

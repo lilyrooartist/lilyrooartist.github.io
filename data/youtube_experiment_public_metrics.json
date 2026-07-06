@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-03T08:30:34Z",
+  "generated_at": "2026-07-06T17:32:12Z",
   "safe_mode": true,
   "source": {
     "template": "data/experiment_result_entry_wide_template.csv",
@@ -7,69 +7,20 @@
     "api": "youtube.videos.list(part=snippet,statistics)"
   },
   "summary": {
-    "status": "ready_to_import",
-    "template_row_count": 15,
-    "youtube_template_row_count": 3,
-    "video_id_count": 3,
-    "api_item_count": 3,
-    "importable_post_count": 3,
-    "importable_field_count": 9,
+    "status": "no_public_metrics",
+    "template_row_count": 14,
+    "youtube_template_row_count": 0,
+    "video_id_count": 0,
+    "api_item_count": 0,
+    "importable_post_count": 0,
+    "importable_field_count": 0,
     "missing_video_ids": [],
     "error": "",
     "output_csv": "data/youtube_experiment_public_metrics.csv",
     "preview_command": "python3 scripts/update_experiment_results.py --from-wide-csv data/youtube_experiment_public_metrics.csv --dry-run",
-    "apply_command": "python3 scripts/update_experiment_results.py --from-wide-csv data/youtube_experiment_public_metrics.csv --apply --refresh-admin"
+    "apply_command": ""
   },
-  "measurements": [
-    {
-      "post_id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-      "video_id": "404PvtuXnqY",
-      "post_url": "https://youtu.be/404PvtuXnqY",
-      "importable_fields": [
-        "views",
-        "likes",
-        "comments"
-      ],
-      "statistics": {
-        "views": "0",
-        "likes": "0",
-        "comments": "0"
-      },
-      "title": "Analog Myth is part of the Lily Roo archive now. The remastered version is up."
-    },
-    {
-      "post_id": "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
-      "video_id": "lbT4adNE-cE",
-      "post_url": "https://youtu.be/lbT4adNE-cE",
-      "importable_fields": [
-        "views",
-        "likes",
-        "comments"
-      ],
-      "statistics": {
-        "views": "0",
-        "likes": "0",
-        "comments": "0"
-      },
-      "title": "Analog Myth, remastered for anyone who likes time travel with receipts. Full Lily Roo playlist is li"
-    },
-    {
-      "post_id": "FP-SHORT-TWELVE-DOLLARS-YOUTUBE-SHORTS-CTA",
-      "video_id": "0d0PXb_h4FY",
-      "post_url": "https://youtu.be/0d0PXb_h4FY",
-      "importable_fields": [
-        "views",
-        "likes",
-        "comments"
-      ],
-      "statistics": {
-        "views": "0",
-        "likes": "0",
-        "comments": "0"
-      },
-      "title": "Twelve Dollars, remastered and refusing to leave the stage. Full Lily Roo playlist is live. #Shorts"
-    }
-  ],
+  "measurements": [],
   "guardrails": [
     "This prefill reads public YouTube video statistics only.",
     "It writes a review CSV; it does not update Published_Log.csv or refresh admin state.",

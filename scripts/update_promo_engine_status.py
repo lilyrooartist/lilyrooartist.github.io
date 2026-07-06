@@ -595,6 +595,13 @@ def row_metric_total(row: dict) -> int:
     return total
 
 
+def row_has_result_metrics(row: dict) -> bool:
+    return any(
+        numeric_metric(row.get(key)) is not None
+        for key in ("views", "likes", "comments", "shares", "saves", "subs_delta")
+    )
+
+
 def format_key(row: dict) -> str:
     platform = str(row.get("platform") or "Unknown platform").strip() or "Unknown platform"
     post_type = str(row.get("post_type") or "").strip()
@@ -698,7 +705,7 @@ def top_format_candidates(published_rows: list[dict], scheduled_rows: list[dict]
         if source == "published":
             candidate["published_count"] += 1
             metric_total = row_metric_total(row)
-            if metric_total:
+            if row_has_result_metrics(row):
                 candidate["measured_result_total"] += metric_total
                 candidate["measured_post_count"] += 1
             else:

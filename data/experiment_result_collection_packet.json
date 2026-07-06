@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-06T17:18:55.825227Z",
+  "generated_at": "2026-07-06T17:32:12.218597Z",
   "safe_mode": true,
   "source": {
     "promo_engine_status": "data/promo_engine_status.json",
@@ -9,12 +9,19 @@
     "experiment_count": 3,
     "published_experiment_post_count": 16,
     "missing_published_log_count": 4,
-    "pending_result_field_count": 90,
+    "pending_result_field_count": 84,
     "ready_to_import_count": 0,
     "wide_ready_to_import_count": 0,
     "entry_csv_path": "data/experiment_result_entry_template.csv",
     "wide_entry_csv_path": "data/experiment_result_entry_wide_template.csv",
     "report_path": "admin/reports/experiment-result-collection.md",
+    "platform_result_field_policy": {
+      "youtube": [
+        "views",
+        "likes",
+        "comments"
+      ]
+    },
     "result_import_preview_command": "python3 scripts/update_experiment_results.py --from-csv data/experiment_result_entry_template.csv --dry-run",
     "wide_result_import_preview_command": "python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run",
     "result_import_apply_command": "",
@@ -1197,125 +1204,9 @@
       "evidence_note": "",
       "collection_hint": "Open Meta Business Suite for https://www.facebook.com/lilyrooartist/posts/122120959905249470 and record subs_delta.",
       "source_row": "50"
-    },
-    {
-      "experiment_format": "Short video clip + platform-native CTA",
-      "post_id": "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
-      "platform": "YouTube",
-      "song": "Analog Myth",
-      "post_url": "https://youtu.be/lbT4adNE-cE",
-      "published_date": "2026-06-29",
-      "field": "shares",
-      "current_value": "",
-      "new_value": "",
-      "evidence_note": "",
-      "collection_hint": "Open YouTube Studio analytics for https://youtu.be/lbT4adNE-cE and record shares.",
-      "source_row": "26"
-    },
-    {
-      "experiment_format": "Short video clip + platform-native CTA",
-      "post_id": "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
-      "platform": "YouTube",
-      "song": "Analog Myth",
-      "post_url": "https://youtu.be/lbT4adNE-cE",
-      "published_date": "2026-06-29",
-      "field": "saves",
-      "current_value": "",
-      "new_value": "",
-      "evidence_note": "",
-      "collection_hint": "Open YouTube Studio analytics for https://youtu.be/lbT4adNE-cE and record saves.",
-      "source_row": "26"
-    },
-    {
-      "experiment_format": "Short video clip + platform-native CTA",
-      "post_id": "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
-      "platform": "YouTube",
-      "song": "Analog Myth",
-      "post_url": "https://youtu.be/lbT4adNE-cE",
-      "published_date": "2026-06-29",
-      "field": "subs_delta",
-      "current_value": "",
-      "new_value": "",
-      "evidence_note": "",
-      "collection_hint": "Open YouTube Studio analytics for https://youtu.be/lbT4adNE-cE and record subs_delta.",
-      "source_row": "26"
-    },
-    {
-      "experiment_format": "YouTube archive video CTA",
-      "post_id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-      "platform": "YouTube",
-      "song": "Analog Myth",
-      "post_url": "https://youtu.be/404PvtuXnqY",
-      "published_date": "2026-06-29",
-      "field": "shares",
-      "current_value": "",
-      "new_value": "",
-      "evidence_note": "",
-      "collection_hint": "Open YouTube Studio analytics for https://youtu.be/404PvtuXnqY and record shares.",
-      "source_row": "28"
-    },
-    {
-      "experiment_format": "YouTube archive video CTA",
-      "post_id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-      "platform": "YouTube",
-      "song": "Analog Myth",
-      "post_url": "https://youtu.be/404PvtuXnqY",
-      "published_date": "2026-06-29",
-      "field": "saves",
-      "current_value": "",
-      "new_value": "",
-      "evidence_note": "",
-      "collection_hint": "Open YouTube Studio analytics for https://youtu.be/404PvtuXnqY and record saves.",
-      "source_row": "28"
-    },
-    {
-      "experiment_format": "YouTube archive video CTA",
-      "post_id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-      "platform": "YouTube",
-      "song": "Analog Myth",
-      "post_url": "https://youtu.be/404PvtuXnqY",
-      "published_date": "2026-06-29",
-      "field": "subs_delta",
-      "current_value": "",
-      "new_value": "",
-      "evidence_note": "",
-      "collection_hint": "Open YouTube Studio analytics for https://youtu.be/404PvtuXnqY and record subs_delta.",
-      "source_row": "28"
     }
   ],
   "wide_entry_rows": [
-    {
-      "experiment_format": "YouTube archive video CTA",
-      "post_id": "FP-PLAN-ANALOG-MYTH-YOUTUBE-COMMUNITY",
-      "platform": "YouTube",
-      "song": "Analog Myth",
-      "post_url": "https://youtu.be/404PvtuXnqY",
-      "published_date": "2026-06-29",
-      "source_row": "28",
-      "evidence_note": "",
-      "views": "",
-      "likes": "",
-      "comments": "",
-      "shares": "",
-      "saves": "",
-      "subs_delta": ""
-    },
-    {
-      "experiment_format": "Short video clip + platform-native CTA",
-      "post_id": "FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA",
-      "platform": "YouTube",
-      "song": "Analog Myth",
-      "post_url": "https://youtu.be/lbT4adNE-cE",
-      "published_date": "2026-06-29",
-      "source_row": "26",
-      "evidence_note": "",
-      "views": "",
-      "likes": "",
-      "comments": "",
-      "shares": "",
-      "saves": "",
-      "subs_delta": ""
-    },
     {
       "experiment_format": "Release-art image + story hook",
       "post_id": "FP-WIN-ANALOG-MYTH-X-RELEASE-ART-IMAGE-STORY-HOOK",
@@ -1579,6 +1470,7 @@
   "guardrails": [
     "Review-only packet; no result metrics are written automatically.",
     "Do not log placeholder URLs or guessed metrics.",
+    "YouTube public-video evidence is limited to views, likes, and comments.",
     "Fill only values visible in each platform analytics surface."
   ]
 }
