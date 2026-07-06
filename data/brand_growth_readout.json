@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-06T19:43:39.160459Z",
+  "generated_at": "2026-07-06T19:50:37.757576Z",
   "safe_mode": true,
   "source": {
     "brand_growth_campaign": "data/brand_growth_campaign.json",
@@ -63,6 +63,14 @@
     "facebook_metric_missing_secret_names": [
       "META_LONG_LIVED_TOKEN",
       "FB_PAGE_ID"
+    ],
+    "native_metric_missing_secret_names": [
+      "FB_PAGE_ID",
+      "META_LONG_LIVED_TOKEN",
+      "X_ACCESS_TOKEN",
+      "X_ACCESS_TOKEN_SECRET",
+      "X_API_KEY",
+      "X_API_SECRET"
     ],
     "post_slot_watch_window_count": 32,
     "post_slot_watch_status_counts": {
@@ -168,7 +176,7 @@
         "proof_preview_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run",
         "proof_apply_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
         "metric_capture_command": "python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X && python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK",
-        "next_action": "Capture metrics for logged campaign posts and import reviewed result fields."
+        "next_action": "Refresh first-party campaign clicks for these logged posts; native X/Facebook counts can join after analytics credentials are connected."
       },
       {
         "date": "2026-07-05",
@@ -197,7 +205,7 @@
         "proof_preview_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run",
         "proof_apply_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
         "metric_capture_command": "python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-02-GIRLS-CAMP-X && python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK",
-        "next_action": "Capture metrics for logged campaign posts and import reviewed result fields."
+        "next_action": "Refresh first-party campaign clicks for these logged posts; native X/Facebook counts can join after analytics credentials are connected."
       },
       {
         "date": "2026-07-06",
@@ -1001,7 +1009,7 @@
       "public_visibility_ok": true,
       "public_visibility_note": "X public oEmbed returned Lily Roo post copy.",
       "status": "ready_for_metric_capture",
-      "next_action": "Metric capture is waiting for X API credential names: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET. After credentials are present, run: python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X",
+      "next_action": "Use first-party click tracking for this post now; native X result counts can join after analytics credentials are connected (X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET).",
       "visible_in_future_queue": false
     },
     {
@@ -1023,7 +1031,7 @@
       "public_visibility_ok": true,
       "public_visibility_note": "Facebook public page loaded without the common unavailable-content marker.",
       "status": "ready_for_metric_capture",
-      "next_action": "Metric capture is waiting for Meta API credential names: META_LONG_LIVED_TOKEN, FB_PAGE_ID. After credentials are present, run: python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK",
+      "next_action": "Use first-party click tracking for this post now; native Meta result counts can join after analytics credentials are connected (META_LONG_LIVED_TOKEN, FB_PAGE_ID).",
       "visible_in_future_queue": false
     },
     {
@@ -1045,7 +1053,7 @@
       "public_visibility_ok": true,
       "public_visibility_note": "X public oEmbed returned Lily Roo post copy.",
       "status": "ready_for_metric_capture",
-      "next_action": "Metric capture is waiting for X API credential names: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET. After credentials are present, run: python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-02-GIRLS-CAMP-X",
+      "next_action": "Use first-party click tracking for this post now; native X result counts can join after analytics credentials are connected (X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET).",
       "visible_in_future_queue": false
     },
     {
@@ -1067,7 +1075,7 @@
       "public_visibility_ok": true,
       "public_visibility_note": "Facebook public page loaded without the common unavailable-content marker.",
       "status": "ready_for_metric_capture",
-      "next_action": "Metric capture is waiting for Meta API credential names: META_LONG_LIVED_TOKEN, FB_PAGE_ID. After credentials are present, run: python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK",
+      "next_action": "Use first-party click tracking for this post now; native Meta result counts can join after analytics credentials are connected (META_LONG_LIVED_TOKEN, FB_PAGE_ID).",
       "visible_in_future_queue": false
     },
     {
@@ -2391,11 +2399,44 @@
       "visible_in_future_queue": true
     }
   ],
+  "learning": {
+    "status": "clicks_checked_no_response_yet",
+    "headline": "First-party clicks checked; no response yet",
+    "next_action": "Keep the automatic Analog Myth posts moving and re-check first-party clicks after the next proof window.",
+    "command": "python3 scripts/capture_brand_campaign_clicks.py && python3 scripts/build_brand_growth_readout.py",
+    "due_at": "2026-07-07T15:21:00Z",
+    "click_status": "ready",
+    "click_count": 0,
+    "click_post_count": 0,
+    "ready_for_learning_count": 4,
+    "native_metric_missing_secret_names": [
+      "FB_PAGE_ID",
+      "META_LONG_LIVED_TOKEN",
+      "X_ACCESS_TOKEN",
+      "X_ACCESS_TOKEN_SECRET",
+      "X_API_KEY",
+      "X_API_SECRET"
+    ],
+    "native_metric_note": "Native X/Facebook counts are optional enrichment until analytics credentials are connected; campaign posting and first-party click learning continue without manual posting.",
+    "ready_post_ids": [
+      "FP-BRAND-AM-01-13-X",
+      "FP-BRAND-AM-01-13-FACEBOOK",
+      "FP-BRAND-AM-02-GIRLS-CAMP-X",
+      "FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK"
+    ],
+    "waiting_post_ids": [
+      "FP-BRAND-AM-03-ANALOG-MYTH-X",
+      "FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK"
+    ],
+    "next_proof_post_ids": [
+      "FP-BRAND-AM-04-SPILLING-THE-TEA-X",
+      "FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK"
+    ]
+  },
   "next_actions": [
-    "Metric capture is waiting for X API credential names: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET. After credentials are present, run: python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X",
-    "Metric capture is waiting for Meta API credential names: META_LONG_LIVED_TOKEN, FB_PAGE_ID. After credentials are present, run: python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK",
-    "Metric capture is waiting for X API credential names: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET. After credentials are present, run: python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-02-GIRLS-CAMP-X",
-    "Metric capture is waiting for Meta API credential names: META_LONG_LIVED_TOKEN, FB_PAGE_ID. After credentials are present, run: python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK"
+    "Keep the automatic Analog Myth posts moving and re-check first-party clicks after the next proof window.",
+    "After `2026-07-07T15:21:00Z`, capture executor proof for FP-BRAND-AM-04-SPILLING-THE-TEA-X, FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK.",
+    "Optional: connect X/Meta analytics credentials when native engagement counts are needed; this does not block automatic posting."
   ],
   "guardrails": [
     "Readout only; it does not post or import metrics.",

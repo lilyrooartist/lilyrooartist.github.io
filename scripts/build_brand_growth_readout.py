@@ -201,13 +201,13 @@ def metric_capture_next_action(platform: str, post_ids: list[str], x_results: di
     if missing:
         label = "X" if platform == "X" else "Meta"
         return (
-            f"Metric capture is waiting for {label} API credential names: {', '.join(missing)}. "
-            f"After credentials are present, run: {command}"
+            f"Use first-party click tracking for this post now; native {label} result counts can join "
+            f"after analytics credentials are connected ({', '.join(missing)})."
         )
     return command
 
 
-def post_slot_watch(rows: list[dict], now: datetime) -> tuple[list[dict], dict]:
+def post_slot_watch(rows: list[dict], now: datetime, native_metric_blocked: bool = False) -> tuple[list[dict], dict]:
     by_day: dict[str, list[dict]] = {}
     for row in rows:
         scheduled_at = parse_datetime(row.get("scheduled_at"))
@@ -242,7 +242,13 @@ def post_slot_watch(rows: list[dict], now: datetime) -> tuple[list[dict], dict]:
             next_action = "Inspect executor state, then refresh and export posted URLs after the issue is resolved."
         elif rows_ready_for_metrics:
             status = "measurement_due"
-            next_action = "Capture metrics for logged campaign posts and import reviewed result fields."
+            if native_metric_blocked:
+                next_action = (
+                    "Refresh first-party campaign clicks for these logged posts; native X/Facebook "
+                    "counts can join after analytics credentials are connected."
+                )
+            else:
+                next_action = "Capture metrics for logged campaign posts and import reviewed result fields."
         elif rows_needing_proof or (proof_due_at and now >= proof_due_at and rows_waiting_publication):
             status = "proof_due"
             next_action = "Capture executions and export posted Worker URLs into Published_Log.csv."
@@ -418,12 +424,79 @@ def build_payload() -> dict:
     ready_x_ids = [row["id"] for row in rows if row["platform"] == "X" and row["status"] == "ready_for_metric_capture"]
     ready_facebook_ids = [row["id"] for row in rows if row["platform"] == "Facebook" and row["status"] == "ready_for_metric_capture"]
     due_rows = [row for row in rows if row["status"] in {"scheduled_due", "execution_attention", "posted_needs_published_log_export", "ready_for_metric_capture"}]
+    native_metric_missing_names = sorted(set(
+        missing_metric_secret_names("X", x_results_payload, facebook_results_payload)
+        + missing_metric_secret_names("Facebook", x_results_payload, facebook_results_payload)
+    ))
     next_scheduled = sorted(
         [row for row in rows if row["status"] == "scheduled_future"],
         key=lambda row: row.get("scheduled_at") or "",
     )
-    watch_windows, watch_summary = post_slot_watch(rows, now)
+    watch_windows, watch_summary = post_slot_watch(rows, now, native_metric_blocked=bool(native_metric_missing_names))
     live_platforms = (live_metrics.get("platforms") or {}) if isinstance(live_metrics, dict) else {}
+    click_summary = click_payload.get("summary") or {}
+    campaign_click_count = int(click_summary.get("click_count") or 0)
+    campaign_click_post_count = int(click_summary.get("post_count") or 0)
+    ready_metric_count = int(status_counts.get("ready_for_metric_capture", 0))
+    click_status = "ready" if click_payload.get("ok") else "not_captured"
+    if campaign_click_count:
+        learning_status = "click_response_ready"
+        learning_headline = "First-party click response is ready to review"
+        learning_next_action = "Review the tracks, platforms, and destinations with click response before changing the next copy wave."
+        learning_command = "python3 scripts/capture_brand_campaign_clicks.py && python3 scripts/build_brand_growth_readout.py"
+        next_click_due_at = watch_summary.get("next_metric_due_at") or watch_summary.get("next_post_proof_due_at") or ""
+    elif ready_metric_count and click_status == "ready":
+        learning_status = "clicks_checked_no_response_yet"
+        learning_headline = "First-party clicks checked; no response yet"
+        learning_next_action = "Keep the automatic Analog Myth posts moving and re-check first-party clicks after the next proof window."
+        learning_command = "python3 scripts/capture_brand_campaign_clicks.py && python3 scripts/build_brand_growth_readout.py"
+        next_click_due_at = watch_summary.get("next_post_proof_due_at") or watch_summary.get("next_metric_due_at") or ""
+    elif ready_metric_count:
+        learning_status = "click_check_ready"
+        learning_headline = "First-party click check is ready"
+        learning_next_action = "Refresh first-party campaign clicks for the logged posts."
+        learning_command = "python3 scripts/capture_brand_campaign_clicks.py && python3 scripts/build_brand_growth_readout.py"
+        next_click_due_at = now.isoformat().replace("+00:00", "Z")
+    else:
+        learning_status = "waiting_for_next_posts"
+        learning_headline = "Waiting for the next automatic posts"
+        learning_next_action = "Let the next X/Facebook posts publish, then export public URLs and refresh first-party clicks."
+        learning_command = "python3 scripts/refresh_promo_admin.py"
+        next_click_due_at = watch_summary.get("next_post_proof_due_at") or (next_scheduled[0]["scheduled_at"] if next_scheduled else "")
+
+    learning = {
+        "status": learning_status,
+        "headline": learning_headline,
+        "next_action": learning_next_action,
+        "command": learning_command,
+        "due_at": next_click_due_at,
+        "click_status": click_status,
+        "click_count": campaign_click_count,
+        "click_post_count": campaign_click_post_count,
+        "ready_for_learning_count": ready_metric_count,
+        "native_metric_missing_secret_names": native_metric_missing_names,
+        "native_metric_note": (
+            "Native X/Facebook counts are optional enrichment until analytics credentials are connected; "
+            "campaign posting and first-party click learning continue without manual posting."
+            if native_metric_missing_names else
+            "Native X/Facebook result capture is available."
+        ),
+        "ready_post_ids": [row["id"] for row in rows if row["status"] == "ready_for_metric_capture"][:6],
+        "waiting_post_ids": [row["id"] for row in rows if row["status"] == "posted_waiting_measurement_window"][:4],
+        "next_proof_post_ids": watch_summary.get("next_post_proof_post_ids", []),
+    }
+    primary_next_actions = [learning_next_action]
+    proof_due = watch_summary.get("next_post_proof_due_at")
+    if proof_due:
+        primary_next_actions.append(
+            f"After `{proof_due}`, capture executor proof for "
+            f"{', '.join(watch_summary.get('next_post_proof_post_ids') or [])}."
+        )
+    if native_metric_missing_names:
+        primary_next_actions.append(
+            "Optional: connect X/Meta analytics credentials when native engagement counts are needed; "
+            "this does not block automatic posting."
+        )
     payload = {
         "generated_at": now.isoformat().replace("+00:00", "Z"),
         "safe_mode": True,
@@ -475,6 +548,7 @@ def build_payload() -> dict:
             "facebook_metric_capture_status": (facebook_results_payload.get("summary") or {}).get("status", "unknown"),
             "x_metric_missing_secret_names": missing_metric_secret_names("X", x_results_payload, facebook_results_payload),
             "facebook_metric_missing_secret_names": missing_metric_secret_names("Facebook", x_results_payload, facebook_results_payload),
+            "native_metric_missing_secret_names": native_metric_missing_names,
             "post_slot_watch_window_count": watch_summary.get("window_count", 0),
             "post_slot_watch_status_counts": watch_summary.get("status_counts", {}),
             "next_action_window_date": watch_summary.get("next_action_window_date", ""),
@@ -502,9 +576,8 @@ def build_payload() -> dict:
             "windows": watch_windows,
         },
         "rows": rows,
-        "next_actions": [
-            row["next_action"] for row in due_rows[:6] if row.get("next_action")
-        ] or [
+        "learning": learning,
+        "next_actions": primary_next_actions or [
             (
                 f"Next proof window is {watch_summary.get('next_window_date')} after {watch_summary.get('next_proof_due_at')}; "
                 f"watch {', '.join(watch_summary.get('next_post_ids') or [])}."
@@ -528,6 +601,7 @@ def build_payload() -> dict:
 
 def build_markdown(payload: dict) -> str:
     summary = payload["summary"]
+    learning = payload.get("learning") or {}
     lines = [
         "# Brand Growth Readout - Lily Roo",
         "",
@@ -563,21 +637,39 @@ def build_markdown(payload: dict) -> str:
         f"- YouTube total views: **{summary.get('live_youtube_total_views', 'unknown')}**",
         f"- Spotify monthly listeners: **{summary.get('live_spotify_monthly_listeners', 'unknown')}**",
         "",
+        "## Learning Now",
+        f"- Status: **{learning.get('status') or 'unknown'}**",
+        f"- Headline: **{learning.get('headline') or 'n/a'}**",
+        f"- First-party clicks: **{learning.get('click_count', 0)}** across **{learning.get('click_post_count', 0)}** post(s)",
+        f"- Public posts ready for learning: **{learning.get('ready_for_learning_count', 0)}**",
+        f"- Next learning action: {learning.get('next_action') or 'Keep the automatic campaign running.'}",
+        f"- Command: `{learning.get('command') or summary.get('campaign_click_refresh_command') or 'python3 scripts/capture_brand_campaign_clicks.py'}`",
+        f"- Due: `{learning.get('due_at') or 'n/a'}`",
+        f"- Native metric note: {learning.get('native_metric_note') or 'Native metrics are available when connected.'}",
+    ]
+    if learning.get("ready_post_ids"):
+        lines.append(f"- Ready posts: `{', '.join(learning['ready_post_ids'])}`")
+    if learning.get("waiting_post_ids"):
+        lines.append(f"- Waiting posts: `{', '.join(learning['waiting_post_ids'])}`")
+    if learning.get("next_proof_post_ids"):
+        lines.append(f"- Next proof posts: `{', '.join(learning['next_proof_post_ids'])}`")
+    lines.extend([
+        "",
         "## Commands",
         f"- Refresh state: `{summary['refresh_command']}`",
         f"- Export posted URLs: `{summary['export_social_executions_command']}`",
         f"- Preview post-slot proof: `{summary.get('proof_preview_command') or 'waiting for scheduled campaign posts'}`",
         f"- Apply post-slot proof after scheduled executor runs: `{summary.get('proof_apply_command') or 'waiting for scheduled campaign posts'}`",
+        f"- Capture campaign clicks: `{summary.get('campaign_click_refresh_command') or 'python3 scripts/capture_brand_campaign_clicks.py'}`",
+        f"- Verify click tracking links: `{summary.get('campaign_click_tracking_report_path') or 'admin/reports/brand-click-tracking-health.md'}`",
         f"- Capture X metrics: `{summary['x_metric_capture_command'] or 'waiting for logged X campaign posts'}`",
         f"- Capture Facebook metrics: `{summary['facebook_metric_capture_command'] or 'waiting for logged Facebook campaign posts'}`",
         f"- Re-check public visibility: `{summary.get('public_visibility_report_path') or 'admin/reports/brand-post-visibility.md'}`",
-        f"- Capture campaign clicks: `{summary.get('campaign_click_refresh_command') or 'python3 scripts/capture_brand_campaign_clicks.py'}`",
-        f"- Verify click tracking links: `{summary.get('campaign_click_tracking_report_path') or 'admin/reports/brand-click-tracking-health.md'}`",
         "",
-        "## Metric Capture Status",
+        "## Optional Native Metric Capture",
         f"- X metrics: **{summary.get('x_metric_capture_status') or 'unknown'}**",
         f"- Facebook metrics: **{summary.get('facebook_metric_capture_status') or 'unknown'}**",
-    ]
+    ])
     if summary.get("x_metric_missing_secret_names"):
         lines.append(f"- X metric credentials needed: `{', '.join(summary['x_metric_missing_secret_names'])}`")
     if summary.get("facebook_metric_missing_secret_names"):
