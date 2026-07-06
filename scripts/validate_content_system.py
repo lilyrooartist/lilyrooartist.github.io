@@ -4952,6 +4952,26 @@ def validate_admin_execution_feedback(failures):
         ok("admin platform snapshot separates metrics-only platforms from executor blocks")
 
 
+def validate_simple_admin_dashboard(failures):
+    text = ADMIN_INDEX.read_text(encoding="utf-8") if ADMIN_INDEX.exists() else ""
+    checks = {
+        "top status strip": 'id="simple-status-strip"' in text and ".simple-status-strip" in text,
+        "recent activity column": 'id="simple-recent-activity"' in text and "Recent Activity & Results" in text,
+        "upcoming activity column": 'id="simple-upcoming-activity"' in text and "Upcoming Activities" in text,
+        "two-column layout": ".simple-columns{display:grid;grid-template-columns" in text,
+        "clear result wording": "Newest first. Each item says what ran" in text,
+        "manual posting absent from status": "No manual posting" in text,
+        "debug details hidden by default": "#panel-dashboard .diagnostic-details{display:none}" in text,
+        "debug details opt-in": "show-debug-dashboard" in text and "debug')==='1'" in text,
+        "default loader skips diagnostics": "if(!showDebugDashboard) return;" in text,
+    }
+    missing = [label for label, present in checks.items() if not present]
+    if missing:
+        fail("simple admin dashboard missing " + ", ".join(missing), failures)
+    else:
+        ok("admin dashboard defaults to top status plus recent/upcoming activity columns")
+
+
 def json_ld_payloads(text, path, failures):
     payloads = []
     for raw in re.findall(r'<script type="application/ld\+json">\s*(.*?)\s*</script>', text, re.S):
@@ -5135,6 +5155,7 @@ def main():
     validate_generated_outputs(failures)
     validate_report(failures)
     validate_admin_execution_feedback(failures)
+    validate_simple_admin_dashboard(failures)
     validate_public_growth_metadata(failures)
     validate_lyrics_discovery_metadata(failures)
     validate_twelve_dollars_remasters(failures)

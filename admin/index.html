@@ -108,32 +108,34 @@
     .status-chip.working{background:#14203a;color:#dce8ff;border-color:#416095}
 	    .report-alert{border:1px solid #6c4b16;background:#2a2115;color:#ffd88a;border-radius:12px;padding:11px 12px;font-size:13px}
 	    .report-alert[hidden]{display:none}
-    .simple-dashboard{display:grid;gap:22px;margin-bottom:18px}
+    .simple-dashboard{display:grid;gap:16px;margin-bottom:18px}
     .simple-intro{display:flex;justify-content:space-between;gap:16px;align-items:flex-end}
     .simple-intro h1{margin:0;font-size:30px;line-height:1.05}
     .simple-intro p{margin:6px 0 0;color:#b8c1dc;line-height:1.45;font-size:14px;max-width:760px;overflow-wrap:anywhere}
     .simple-eyebrow{margin:0 0 6px;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#8f98b8;font-weight:850}
     .simple-intro-actions,.simple-section-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
     .simple-section{background:transparent;border:0;border-radius:0;padding:0;min-width:0;width:100%;max-width:100%;box-sizing:border-box}
-    .simple-status-band{background:#111827;border:1px solid #2f3a58;border-radius:10px;padding:20px;border-top:4px solid #5b8dff;overflow-wrap:anywhere}
+    .simple-status-band{background:#111827;border:1px solid #2f3a58;border-radius:10px;padding:16px;border-top:4px solid #5b8dff;overflow-wrap:anywhere}
     .simple-status-side{display:grid;gap:9px;justify-items:end;flex:0 0 auto}
 	    .simple-section-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;margin-bottom:12px}
 	    .simple-section-head>div{min-width:0}
 	    .simple-section-head h1{margin:0;font-size:28px;line-height:1.1}
+    #simple-status-heading{font-size:28px;line-height:1.05}
+    #simple-status-copy{font-size:13px;line-height:1.4;max-width:900px}
 	    .simple-section-head h2{margin:0;font-size:22px;line-height:1.15}
 	    .simple-section-head p{margin:6px 0 0;color:#b8c1dc;line-height:1.45;font-size:14px;max-width:900px;overflow-wrap:anywhere}
     .simple-columns .simple-section-head{border-bottom:1px solid #252d43;padding-bottom:10px}
-    .simple-status-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
-    .simple-status-card{border:1px solid #26314e;border-left-width:4px;border-radius:8px;background:#101523;padding:14px;min-height:104px;box-sizing:border-box;width:100%;max-width:100%}
+    .simple-status-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}
+    .simple-status-card{border:1px solid #26314e;border-left-width:4px;border-radius:8px;background:#101523;padding:11px;min-height:82px;box-sizing:border-box;width:100%;max-width:100%}
 	    .simple-status-card.status-ok{border-color:#1f684d;background:#0f201b}
 	    .simple-status-card.status-warn{border-color:#6c4b16;background:#211a10}
 	    .simple-status-card.status-bad{border-color:#74303d;background:#251319}
 	    .simple-status-card .metric-label{font-size:11px}
-    .simple-status-card strong{display:block;color:#fff;font-size:20px;line-height:1.1;margin-top:8px;word-break:break-word;overflow-wrap:anywhere}
-    .simple-status-card p{margin:8px 0 0;color:#b6bed6;font-size:12px;line-height:1.4;overflow-wrap:anywhere}
-    .simple-columns{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(340px,.85fr);gap:22px;align-items:start}
+    .simple-status-card strong{display:block;color:#fff;font-size:18px;line-height:1.1;margin-top:6px;word-break:break-word;overflow-wrap:anywhere}
+    .simple-status-card p{margin:6px 0 0;color:#b6bed6;font-size:12px;line-height:1.35;overflow-wrap:anywhere}
+    .simple-columns{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(340px,.85fr);gap:16px;align-items:start}
 	    .simple-list{display:grid;gap:10px}
-	    .simple-item{border:1px solid #26314e;border-left-width:4px;border-radius:8px;background:#101523;padding:15px;min-width:0;max-width:100%;box-sizing:border-box}
+	    .simple-item{border:1px solid #26314e;border-left-width:4px;border-radius:8px;background:#101523;padding:12px;min-width:0;max-width:100%;box-sizing:border-box}
 	    .simple-item.status-ok{border-color:#1f684d;background:#0f1818}
 	    .simple-item.status-warn{border-color:#6c4b16;background:#18150f}
 	    .simple-item.status-bad{border-color:#74303d;background:#1c1116}
@@ -156,7 +158,9 @@
 	    .today-manual-step{flex:1 1 100%;margin-top:2px}
 	    .plain-list{margin:10px 0 0;padding-left:18px;color:#cdd5ec;font-size:13px;line-height:1.45}
 	    .plain-list li{margin:5px 0}
-	    .diagnostic-details{border:1px solid #2a2f44;border-radius:10px;background:#101523;margin-top:6px}
+    .diagnostic-details{border:1px solid #2a2f44;border-radius:10px;background:#101523;margin-top:6px}
+    #panel-dashboard .diagnostic-details{display:none}
+    body.show-debug-dashboard #panel-dashboard .diagnostic-details{display:block}
 	    .diagnostic-details summary{cursor:pointer;padding:12px 14px;font-weight:850;color:#b8c1dc}
 	    .diagnostic-details[open] summary{border-bottom:1px solid #2a2f44}
 	    .diagnostic-inner{padding:14px;display:grid;gap:14px}
@@ -437,9 +441,9 @@
 	          <section class="simple-section simple-status-band" aria-labelledby="simple-status-heading">
 	            <div class="simple-section-head">
 	              <div>
-                  <div class="simple-eyebrow">Admin overview</div>
+                  <div class="simple-eyebrow">Lily Roo admin</div>
                   <h1 id="simple-status-heading">Status</h1>
-                  <p id="simple-status-copy">Loading what is running, what just happened, and what happens next.</p>
+                  <p id="simple-status-copy">Loading the active campaign, recent results, and next scheduled work.</p>
 	              </div>
 	              <div class="simple-status-side">
 	                <span class="status-chip neutral" id="simple-updated-chip">Checking</span>
@@ -463,7 +467,7 @@
 	              <div class="simple-section-head">
 	                <div>
                   <h2 id="simple-recent-heading">Recent Activity & Results</h2>
-                  <p id="simple-recent-copy">What actually happened, whether the public links are saved, and what result check is due.</p>
+                  <p id="simple-recent-copy">Newest first. Each item says what ran, where it ran, and whether the result is saved or ready to measure.</p>
 	                </div>
 	              </div>
 	              <div class="simple-list" id="simple-recent-activity">
@@ -475,7 +479,7 @@
 	              <div class="simple-section-head">
 	                <div>
                   <h2 id="simple-upcoming-heading">Upcoming Activities</h2>
-                  <p id="simple-upcoming-copy">Automatic posts and follow-up checks already scheduled.</p>
+                  <p id="simple-upcoming-copy">Automatic posts, proof capture, and measurement checks that are already on the calendar.</p>
 	                </div>
 	              </div>
 	              <div class="simple-list" id="simple-upcoming-activity">
@@ -31241,14 +31245,14 @@ Generated: 2026-07-06T20:54:09.837571Z
 	    const proofDueAt=automationSummary.active_campaign_next_proof_due_at||readoutSummary.next_proof_due_at||pulseSummary.proof_due_at||primaryAction.due_at||'';
 
 	    const topClass=campaignReady && !visibilityAttentionCount ? 'ok' : 'warn';
-	    const overallLabel=campaignReady ? 'On schedule' : 'Needs check';
+	    const overallLabel=campaignReady ? 'Running' : 'Needs check';
 	    if(updatedChip){
 	      updatedChip.className=`status-chip ${topClass}`;
 	      updatedChip.textContent=lastUpdated?`Updated ${formatQueueDate(lastUpdated)}`:(campaignReady?'Active':'Needs check');
 	    }
 		    if(statusCopy){
 			      const campaignPhrase=campaignReady ? 'Analog Myth promotion is running automatically.' : 'Analog Myth promotion needs a readiness refresh.';
-			      const nextPhrase=nextPosts.length ? `Next: ${simpleCampaignName(nextPostTitle)} posts to ${simplePlatformNames(nextPosts)} at ${formatQueueDate(nextPosts[0].scheduled_at)}.` : (nextDate ? `Next: ${formatQueueDate(nextDate)}.` : 'No future post queued.');
+			      const nextPhrase=nextPosts.length ? `Next automatic post: ${simpleCampaignName(nextPostTitle)} to ${simplePlatformNames(nextPosts)} at ${formatQueueDate(nextPosts[0].scheduled_at)}.` : (nextDate ? `Next scheduled work: ${formatQueueDate(nextDate)}.` : 'No future post is queued.');
 		      const metricPhrase=readyMetricRows.length && uniqueMissingSecrets.length
 		        ? `${simpleCount(readyMetricRows.length,'post')} public and waiting for result counts.`
 		        : readyMetricRows.length
@@ -31265,14 +31269,16 @@ Generated: 2026-07-06T20:54:09.837571Z
 			    }
 
 		    const manualPostingRequired=Boolean(pulseSummary.manual_posting_required || readoutSummary.manual_posting_required || preflightSummary.manual_posting_required);
-		    const postingModeValue=manualPostingRequired ? 'Needs cleanup' : 'Automatic';
+		    const postingModeValue=manualPostingRequired ? 'Needs cleanup' : 'No manual posting';
 		    const postingModeNote=manualPostingRequired
 		      ? 'A manual-only lane is present and should be removed or converted.'
-		      : 'No manual posting lane is active.';
+		      : 'The active campaign posts through automation.';
+		    const resultClass=visibilityAttentionCount ? 'warn' : readyMetricRows.length && !uniqueMissingSecrets.length ? 'warn' : 'ok';
 		    statusStrip.innerHTML=[
-			      simpleStatusCard('Campaign', overallLabel, campaignReady?'Automatic Analog Myth posts are active.':'Refresh readiness before the next window.', topClass),
-			      simpleStatusCard('Next post', nextDateLabel, nextPosts.length?`${simpleCampaignName(nextPostTitle)} to ${simplePlatformNames(nextPosts)}.`:`${nextWindowCount||2} automatic posts in the next window.`, campaignReady?'ok':'warn'),
-			      simpleStatusCard('Recent results', `${postedCount} logged`, visibilityAttentionCount?'A recent public link needs another check.':'Recent public links open correctly.', visibilityAttentionCount?'warn':postedCount?'ok':'neutral'),
+			      simpleStatusCard('Campaign', overallLabel, campaignReady?`${simpleCount(futureCount,'future post')} queued automatically.`:'Refresh readiness before the next window.', topClass),
+			      simpleStatusCard('Next automatic post', nextDateLabel, nextPosts.length?`${simpleCampaignName(nextPostTitle)} to ${simplePlatformNames(nextPosts)}.`:`${nextWindowCount||2} automatic posts in the next window.`, campaignReady?'ok':'warn'),
+			      simpleStatusCard('Recent activity', `${postedCount} logged`, visibilityAttentionCount?'A recent public link needs another check.':'Recent public links open correctly.', visibilityAttentionCount?'warn':postedCount?'ok':'neutral'),
+			      simpleStatusCard('Result checks', resultLabel, resultNote, resultClass),
 			      simpleStatusCard('Posting mode', postingModeValue, postingModeNote, manualPostingRequired?'warn':'ok')
 			    ].join('');
 
@@ -31559,6 +31565,10 @@ Generated: 2026-07-06T20:54:09.837571Z
       brandPostVisibility
     });
 
+    const showDebugDashboard=new URLSearchParams(window.location.search).get('debug')==='1';
+    document.body.classList.toggle('show-debug-dashboard', showDebugDashboard);
+    if(!showDebugDashboard) return;
+
     try{
 	    renderReportFreshness(report);
 	    renderExecutorStatus(readiness);
@@ -31594,7 +31604,7 @@ Generated: 2026-07-06T20:54:09.837571Z
     renderNextPosts(queuePayload,executions);
     renderPriorities(report);
     }catch(err){
-      showReportsAlert(`Status loaded. Details for troubleshooting could not load: ${err.message}`);
+      showReportsAlert(`Status loaded. Debug details could not load: ${err.message}`);
     }
   }
   loadReportsDashboard().catch(err=>{
