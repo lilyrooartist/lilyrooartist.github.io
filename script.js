@@ -40,7 +40,7 @@ shareButtons.forEach((button) => {
 
       const clipboardText = [shareText, shareUrl].filter(Boolean).join("\n");
       await navigator.clipboard.writeText(clipboardText);
-      button.textContent = shareText ? "Copy Ready" : "Link Copied";
+      button.textContent = "Copied";
       window.setTimeout(() => {
         button.textContent = originalLabel;
       }, 1800);

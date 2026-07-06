@@ -4956,11 +4956,14 @@ def validate_simple_admin_dashboard(failures):
     text = ADMIN_INDEX.read_text(encoding="utf-8") if ADMIN_INDEX.exists() else ""
     checks = {
         "top status strip": 'id="simple-status-strip"' in text and ".simple-status-strip" in text,
+        "status heading is explicit": "Lily Roo Status" in text,
         "recent activity column": 'id="simple-recent-activity"' in text and "Recent Activity & Results" in text,
         "upcoming activity column": 'id="simple-upcoming-activity"' in text and "Upcoming Activities" in text,
         "two-column layout": ".simple-columns{display:grid;grid-template-columns" in text,
-        "clear result wording": "Newest first. Each item says what ran" in text,
-        "manual posting absent from status": "No manual posting" in text,
+        "five status cards across top": ".simple-status-strip{display:grid;grid-template-columns:repeat(5,minmax(0,1fr))" in text,
+        "clear result wording": "A plain-English record of what just happened" in text,
+        "upcoming wording is scheduled": "Automatic posts and follow-up checks" in text,
+        "manual posting absent from status": "No manual posting in active campaign" in text,
         "debug details hidden by default": "#panel-dashboard .diagnostic-details{display:none}" in text,
         "debug details opt-in": "show-debug-dashboard" in text and "debug')==='1'" in text,
         "default loader skips diagnostics": "if(!showDebugDashboard) return;" in text,
@@ -5039,6 +5042,49 @@ def validate_public_growth_metadata(failures):
                 fail("press.html JSON-LD does not connect the press kit to Analog Myth and the podcast episode", failures)
     if len(failures) == before:
         ok("public Lily Roo growth pages carry social preview and discovery metadata")
+
+
+def validate_analog_myth_launch_share(failures):
+    analog_text = (ROOT / "analog-myth.html").read_text(encoding="utf-8")
+    style_text = (ROOT / "style.css").read_text(encoding="utf-8")
+    script_text = (ROOT / "script.js").read_text(encoding="utf-8")
+    required_html = [
+        'class="launch-share-strip"',
+        "Pass the Room",
+        "Share Album",
+        "Share Podcast",
+        "Share Video",
+        "Track Shares",
+        'data-share-url="https://www.lilyroo.com/analog-myth.html"',
+        'data-share-url="https://www.lilyroo.com/podcasts/analog-myth.html"',
+        'data-share-url="https://youtu.be/_rtioKYbCFM"',
+        "style.css?v=20260706-launch-share",
+        "script.js?v=20260706-launch-share",
+    ]
+    required_css = [
+        ".launch-share-strip",
+        ".launch-share-actions",
+        "grid-template-columns: repeat(4, minmax(0, 1fr))",
+        "@media (max-width: 900px)",
+        "@media (max-width: 640px)",
+    ]
+    required_script = [
+        "navigator.share",
+        "navigator.clipboard.writeText",
+        'button.textContent = "Copied"',
+    ]
+    missing_html = [token for token in required_html if token not in analog_text]
+    missing_css = [token for token in required_css if token not in style_text]
+    missing_script = [token for token in required_script if token not in script_text]
+    if missing_html or missing_css or missing_script:
+        if missing_html:
+            fail("Analog Myth launch share strip missing " + ", ".join(missing_html), failures)
+        if missing_css:
+            fail("Analog Myth launch share CSS missing " + ", ".join(missing_css), failures)
+        if missing_script:
+            fail("Analog Myth share script missing " + ", ".join(missing_script), failures)
+    else:
+        ok("Analog Myth page includes album, podcast, video, and track share handoffs")
 
 
 def validate_lyrics_discovery_metadata(failures):
@@ -5157,6 +5203,7 @@ def main():
     validate_admin_execution_feedback(failures)
     validate_simple_admin_dashboard(failures)
     validate_public_growth_metadata(failures)
+    validate_analog_myth_launch_share(failures)
     validate_lyrics_discovery_metadata(failures)
     validate_twelve_dollars_remasters(failures)
     if failures:

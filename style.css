@@ -815,6 +815,40 @@ button.btn {
   background: rgba(7, 7, 9, 0.72);
 }
 
+.launch-share-strip {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(360px, 1.05fr);
+  align-items: center;
+  gap: clamp(0.9rem, 2vw, 1.35rem);
+  margin: 1.3rem 0 1.7rem;
+  padding: clamp(0.95rem, 1.8vw, 1.25rem);
+  border: 1px solid rgba(203, 168, 111, 0.38);
+  background:
+    linear-gradient(115deg, rgba(203, 168, 111, 0.11), rgba(139, 28, 43, 0.1)),
+    rgba(7, 7, 9, 0.64);
+}
+
+.launch-share-strip h2 {
+  margin: 0.35rem 0 0;
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 0.06em;
+  font-size: clamp(1.8rem, 3.4vw, 3rem);
+  line-height: 0.95;
+}
+
+.launch-share-actions {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.55rem;
+}
+
+.launch-share-actions .btn {
+  width: 100%;
+  min-height: 2.8rem;
+  text-align: center;
+  cursor: pointer;
+}
+
 .track-list {
   columns: 2;
   margin: 0.5rem 0 0;
@@ -1156,9 +1190,14 @@ button.btn {
   .panel-podcast,
   .podcast-hero,
   .panel-support,
+  .launch-share-strip,
   .starter-path,
   .sponsor-banner {
     grid-template-columns: 1fr;
+  }
+
+  .launch-share-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .starter-links {
@@ -1228,5 +1267,9 @@ button.btn {
   .podcast-hero .hero-actions .btn {
     width: 100%;
     text-align: center;
+  }
+
+  .launch-share-actions {
+    grid-template-columns: 1fr;
   }
 }
