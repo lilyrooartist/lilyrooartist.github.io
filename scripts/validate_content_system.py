@@ -89,6 +89,7 @@ SOCIAL_EXECUTION_RESET = ROOT / "scripts" / "reset_social_execution_state.py"
 PROMO_REFRESH_SCRIPT = ROOT / "scripts" / "refresh_promo_admin.py"
 PROMO_REFRESH_WORKFLOW_CAPTURE = ROOT / "scripts" / "capture_github_workflow_status.py"
 PROMO_REFRESH_WORKFLOW = ROOT / ".github" / "workflows" / "promo-admin-refresh.yml"
+PROMO_REFRESH_SETTLE_WORKFLOW = ROOT / ".github" / "workflows" / "promo-admin-refresh-status-settle.yml"
 PROMO_CONSISTENCY_SCRIPT = ROOT / "scripts" / "build_promo_consistency_audit.py"
 EXPERIMENT_RESULT_COLLECTION_SCRIPT = ROOT / "scripts" / "build_experiment_result_collection.py"
 EXPERIMENT_RESULT_CLIPBOARD_SCRIPT = ROOT / "scripts" / "build_experiment_result_clipboard.py"
@@ -4118,6 +4119,32 @@ def validate_generated_outputs(failures):
             fail("promo admin scheduled refresh workflow missing safe refresh coverage or includes posting commands", failures)
     else:
         fail("promo admin scheduled refresh workflow missing", failures)
+    if PROMO_REFRESH_SETTLE_WORKFLOW.exists():
+        settle_text = PROMO_REFRESH_SETTLE_WORKFLOW.read_text(encoding="utf-8")
+        required_bits = [
+            "workflow_run:",
+            "workflows: [\"Promo admin refresh\"]",
+            "types: [completed]",
+            "github.event.workflow_run.conclusion == 'success'",
+            "python3 scripts/refresh_promo_admin.py",
+            "python3 scripts/validate_content_system.py",
+            "contents: write",
+            "git add admin data",
+            "git pull --ff-only origin main",
+        ]
+        forbidden_bits = [
+            "apply_promo_queue_plan.py --apply",
+            "post_youtube_from_queue.py",
+            "post_youtube_captions.py",
+            "post_x_from_queue.py",
+            "post_tiktok_from_queue.py",
+        ]
+        if all(bit in settle_text for bit in required_bits) and not any(bit in settle_text for bit in forbidden_bits):
+            ok("promo admin refresh status settle workflow is safe")
+        else:
+            fail("promo admin refresh status settle workflow missing safe settle coverage or includes posting commands", failures)
+    else:
+        fail("promo admin refresh status settle workflow missing", failures)
     secret_push = ROOT / "scripts" / "push_social_worker_secrets.py"
     if secret_push.exists():
         secret_text = secret_push.read_text(encoding="utf-8")

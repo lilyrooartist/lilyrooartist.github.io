@@ -1,0 +1,60 @@
+name: Promo admin refresh status settle
+
+on:
+  workflow_run:
+    workflows: ["Promo admin refresh"]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: promo-admin-refresh-status-settle
+  cancel-in-progress: false
+
+jobs:
+  settle:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      LILYROO_ADMIN_PASSWORD: ${{ secrets.LILYROO_ADMIN_PASSWORD }}
+      LILYROO_EXECUTOR_BEARER_TOKEN: ${{ secrets.LILYROO_EXECUTOR_BEARER_TOKEN }}
+      GITHUB_TOKEN: ${{ github.token }}
+      X_API_KEY: ${{ secrets.X_API_KEY }}
+      X_API_SECRET: ${{ secrets.X_API_SECRET }}
+      X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+      X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
+      META_LONG_LIVED_TOKEN: ${{ secrets.META_LONG_LIVED_TOKEN }}
+      FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Settle promo admin refresh status
+        run: |
+          git pull --ff-only origin main
+          python3 scripts/refresh_promo_admin.py
+          python3 scripts/validate_content_system.py
+
+      - name: Commit settled admin data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet; then
+            echo "No settled promo admin status changes to commit."
+          else
+            git add admin data
+            git commit -m "Settle promo admin refresh status"
+            git pull --rebase origin main
+            git push
+          fi
