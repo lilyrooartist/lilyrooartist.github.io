@@ -1,6 +1,6 @@
 # Posting Automation Status - Lily Roo
 
-Generated: 2026-07-06T15:33:45.283881Z
+Generated: 2026-07-06T15:44:09.587672Z
 
 ## Summary
 - Status: **ready_active_campaign**
@@ -11,21 +11,21 @@ Generated: 2026-07-06T15:33:45.283881Z
 - Needs attention: **0**
 - Story posts tracked: **6**
 - Help-needed items: **0**
-- Next action: Watch FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK after 2026-07-06T15:21:00Z, then export posted URLs.
+- Next action: Watch FP-BRAND-AM-04-SPILLING-THE-TEA-X, FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK after 2026-07-07T15:21:00Z, then export posted URLs.
 
 ## Automation Lanes
 - **Active Analog Myth brand campaign** - `ready`
-  - Detail: 64 approved auto posts; next=FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK at 2026-07-06T11:20:00-04:00; preflight=ready
+  - Detail: 64 approved auto posts; next=FP-BRAND-AM-04-SPILLING-THE-TEA-X at 2026-07-07T10:15:00-04:00; preflight=ready
   - Evidence: data/brand_growth_preflight.json
-  - Next: Watch FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK after 2026-07-06T15:21:00Z, then export posted URLs.
+  - Next: Watch FP-BRAND-AM-04-SPILLING-THE-TEA-X, FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK after 2026-07-07T15:21:00Z, then export posted URLs.
 - **Scheduled refresh workflow** - `ready`
-  - Detail: 17 */6 * * *, 05 16 * * *; latest run completed / success
-  - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28786899465
+  - Detail: 17 */6 * * *, 05 16 * * *; latest run in_progress / pending
+  - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28804022261
 - **Safe admin refresh** - `ready`
-  - Detail: 19 refresh commands captured at 2026-07-06T15:33:43.467577Z
+  - Detail: 19 refresh commands captured at 2026-07-06T15:44:07.685961Z
   - Evidence: data/promo_admin_refresh_run.json
 - **Scheduler dry-run authentication** - `ready`
-  - Detail: HTTP 200 using bearer auth; due=1 would_post=0
+  - Detail: HTTP 200 using bearer auth; due=0 would_post=0
   - Evidence: data/social_scheduler_dry_run.json
 - **Execution capture** - `ready`
   - Detail: posted=36 attention=0 platform_fix_needed=0
@@ -39,7 +39,7 @@ Generated: 2026-07-06T15:33:45.283881Z
   - Evidence: data/tiktok_setup_preflight.json
   - Next: Direct TikTok public posting is not in the active plan until platform approval is explicit; upload-draft/manual-finish posting is excluded.
 - **Blocker input readiness** - `deferred`
-  - Detail: 3 ready; 3 missing local input; 1 external action needed
+  - Detail: 1 ready; 5 missing local input; 1 external action needed
   - Evidence: data/social_blocker_input_status.json
   - Next: Optional expansion inputs can wait; the active brand campaign is already preflight-ready.
 - **Story throughput** - `ready`

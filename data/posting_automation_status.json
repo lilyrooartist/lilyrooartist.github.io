@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-06T15:33:45.283881Z",
+  "generated_at": "2026-07-06T15:44:09.587672Z",
   "safe_mode": true,
   "source": {
     "workflow": ".github/workflows/promo-admin-refresh.yml",
@@ -22,8 +22,8 @@
       "Facebook",
       "X"
     ],
-    "active_campaign_next_proof_due_at": "2026-07-06T15:21:00Z",
-    "active_campaign_next_measurement_due_at": "2026-07-07T15:20:00Z",
+    "active_campaign_next_proof_due_at": "2026-07-07T15:21:00Z",
+    "active_campaign_next_measurement_due_at": "2026-07-08T15:20:00Z",
     "ready_lane_count": 6,
     "blocked_lane_count": 0,
     "deferred_lane_count": 3,
@@ -43,37 +43,37 @@
     "story_queued_future_count": 0,
     "platform_repair_blocked_count": 0,
     "blocker_input_status": "missing_local_input",
-    "blocker_input_missing_count": 3,
+    "blocker_input_missing_count": 5,
     "blocker_input_external_action_count": 1,
     "help_needed_count": 0,
-    "next_action": "Watch FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK after 2026-07-06T15:21:00Z, then export posted URLs."
+    "next_action": "Watch FP-BRAND-AM-04-SPILLING-THE-TEA-X, FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK after 2026-07-07T15:21:00Z, then export posted URLs."
   },
   "lanes": [
     {
       "label": "Active Analog Myth brand campaign",
       "status": "ready",
-      "detail": "64 approved auto posts; next=FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK at 2026-07-06T11:20:00-04:00; preflight=ready",
+      "detail": "64 approved auto posts; next=FP-BRAND-AM-04-SPILLING-THE-TEA-X at 2026-07-07T10:15:00-04:00; preflight=ready",
       "evidence": "data/brand_growth_preflight.json",
-      "next_action": "Watch FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK after 2026-07-06T15:21:00Z, then export posted URLs."
+      "next_action": "Watch FP-BRAND-AM-04-SPILLING-THE-TEA-X, FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK after 2026-07-07T15:21:00Z, then export posted URLs."
     },
     {
       "label": "Scheduled refresh workflow",
       "status": "ready",
-      "detail": "17 */6 * * *, 05 16 * * *; latest run completed / success",
-      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28786899465",
+      "detail": "17 */6 * * *, 05 16 * * *; latest run in_progress / pending",
+      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28804022261",
       "next_action": ""
     },
     {
       "label": "Safe admin refresh",
       "status": "ready",
-      "detail": "19 refresh commands captured at 2026-07-06T15:33:43.467577Z",
+      "detail": "19 refresh commands captured at 2026-07-06T15:44:07.685961Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": ""
     },
     {
       "label": "Scheduler dry-run authentication",
       "status": "ready",
-      "detail": "HTTP 200 using bearer auth; due=1 would_post=0",
+      "detail": "HTTP 200 using bearer auth; due=0 would_post=0",
       "evidence": "data/social_scheduler_dry_run.json",
       "next_action": ""
     },
@@ -101,7 +101,7 @@
     {
       "label": "Blocker input readiness",
       "status": "deferred",
-      "detail": "3 ready; 3 missing local input; 1 external action needed",
+      "detail": "1 ready; 5 missing local input; 1 external action needed",
       "evidence": "data/social_blocker_input_status.json",
       "next_action": "Optional expansion inputs can wait; the active brand campaign is already preflight-ready."
     },
