@@ -132,6 +132,16 @@ def next_window(posts: list[dict], now: datetime) -> dict:
     return {"date": "", "posts": [], "scheduled_time": None}
 
 
+def measurement_due_time(posts: list[dict], fallback: datetime | None) -> datetime | None:
+    parsed = [parse_datetime(post.get("scheduled_at")) for post in posts]
+    parsed = [item for item in parsed if item]
+    if parsed:
+        return max(parsed) + timedelta(hours=24)
+    if fallback:
+        return fallback + timedelta(hours=24)
+    return None
+
+
 def check_url(url: str, label: str, timeout: int = 20) -> dict:
     if not url:
         return {"label": label, "url": "", "ok": False, "status": 0, "content_type": "", "content_length": "", "error": "missing_url"}
@@ -239,6 +249,7 @@ def build_payload() -> dict:
     window = next_window(posts, now)
     expected = expected_ids(window["posts"])
     scheduled_time = window.get("scheduled_time")
+    current_measurement_due = measurement_due_time(window["posts"], scheduled_time)
     q_url = queue_url()
 
     scheduler_queue_source = "commit_queue_url" if q_url else "none"
@@ -309,8 +320,10 @@ def build_payload() -> dict:
             "link_failed_count": check_counts.get("failed", 0),
             "link_warning_count": warning_count,
             "link_blocking_failed_count": blocking_failed_count,
-            "next_proof_due_at": (readout.get("summary") or {}).get("next_proof_due_at", ""),
-            "next_measurement_due_at": (readout.get("summary") or {}).get("next_measurement_due_at", ""),
+            "next_proof_due_at": iso_z(scheduled_time),
+            "next_measurement_due_at": iso_z(current_measurement_due),
+            "readout_next_proof_due_at": (readout.get("summary") or {}).get("next_proof_due_at", ""),
+            "readout_next_measurement_due_at": (readout.get("summary") or {}).get("next_measurement_due_at", ""),
             "error": error,
         },
         "scheduler_summary": scheduler_summary,
@@ -350,8 +363,8 @@ def build_markdown(payload: dict) -> str:
         f"- Expected posts: **{summary.get('expected_post_count', 0)}**",
         f"- Scheduler: HTTP **{summary.get('scheduler_http_status')}**, auth `{summary.get('scheduler_auth_method')}`, due **{summary.get('scheduler_due_count')}**, would post **{summary.get('scheduler_would_post_count')}**, blocked **{summary.get('scheduler_blocked_count')}**",
         f"- Link checks: **{summary.get('link_ok_count')} ok**, **{summary.get('link_failed_count')} failed**, **{summary.get('link_warning_count', 0)} warning**, **{summary.get('link_blocking_failed_count', summary.get('link_failed_count', 0))} blocking failed**",
-        f"- Next proof due: `{summary.get('next_proof_due_at') or 'n/a'}`",
-        f"- First measurement due: `{summary.get('next_measurement_due_at') or 'n/a'}`",
+        f"- Current window proof due: `{summary.get('next_proof_due_at') or 'n/a'}`",
+        f"- Current window measurement due: `{summary.get('next_measurement_due_at') or 'n/a'}`",
         "",
         "## Expected Posts",
     ]

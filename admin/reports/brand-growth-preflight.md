@@ -1,6 +1,6 @@
 # Brand Growth Preflight - Lily Roo
 
-Generated: 2026-07-06T01:06:52.505818Z
+Generated: 2026-07-06T01:16:29.328996Z
 
 ## Summary
 - Status: **ready**
@@ -8,8 +8,8 @@ Generated: 2026-07-06T01:06:52.505818Z
 - Expected posts: **2**
 - Scheduler: HTTP **200**, auth `bearer`, due **2**, would post **2**, blocked **0**
 - Link checks: **5 ok**, **0 failed**, **0 warning**, **0 blocking failed**
-- Next proof due: `2026-07-04T16:05:00Z`
-- First measurement due: `2026-07-05T15:20:00Z`
+- Current window proof due: `2026-07-06T15:21:00Z`
+- Current window measurement due: `2026-07-07T15:20:00Z`
 
 ## Expected Posts
 - `FP-BRAND-AM-03-ANALOG-MYTH-X` X at `2026-07-06T10:15:00-04:00`

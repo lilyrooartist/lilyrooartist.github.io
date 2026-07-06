@@ -1,6 +1,6 @@
 # Posting Automation Status - Lily Roo
 
-Generated: 2026-07-06T01:06:52.890785Z
+Generated: 2026-07-06T01:16:29.243534Z
 
 ## Summary
 - Status: **ready_active_campaign**
@@ -22,7 +22,7 @@ Generated: 2026-07-06T01:06:52.890785Z
   - Detail: 17 */6 * * *, 05 16 * * *; latest run completed / success
   - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28760718049
 - **Safe admin refresh** - `ready`
-  - Detail: 60 refresh commands captured at 2026-07-06T00:44:34.016721Z
+  - Detail: 19 refresh commands captured at 2026-07-06T01:16:27.221328Z
   - Evidence: data/promo_admin_refresh_run.json
 - **Scheduler dry-run authentication** - `ready`
   - Detail: HTTP 200 using bearer auth; due=0 would_post=0
@@ -39,7 +39,7 @@ Generated: 2026-07-06T01:06:52.890785Z
   - Evidence: data/tiktok_setup_preflight.json
   - Next: Direct TikTok public posting is not in the active plan until platform approval is explicit; upload-draft/manual-finish posting is excluded.
 - **Blocker input readiness** - `deferred`
-  - Detail: 1 ready; 5 missing local input; 1 external action needed
+  - Detail: 3 ready; 3 missing local input; 1 external action needed
   - Evidence: data/social_blocker_input_status.json
   - Next: Optional expansion inputs can wait; the active brand campaign is already preflight-ready.
 - **Story throughput** - `ready`

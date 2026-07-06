@@ -1,12 +1,12 @@
 # Brand Growth Pulse - Lily Roo
 
-Generated: 2026-07-06T01:06:52.923391Z
+Generated: 2026-07-06T01:16:29.575183Z
 
 ## Current Pulse
-- Status: **measurement_waiting_for_credentials**
-- Primary action: **Keep posting; connect result metrics when approved**
-- Why: 2 recent posts are ready to measure, but X/Meta result metrics are not connected.
-- Command: `python3 scripts/capture_brand_campaign_clicks.py && python3 scripts/build_brand_growth_pulse.py`
+- Status: **campaign_running**
+- Primary action: **Let the next automated posts run**
+- Why: The active X/Facebook Analog Myth campaign is queued and ready; proof capture starts after the next window.
+- Command: `python3 scripts/refresh_promo_admin.py`
 - Active campaign ready: **True**
 - Posting preflight ready: **True**
 - Future queued posts: **60**
@@ -15,12 +15,12 @@ Generated: 2026-07-06T01:06:52.923391Z
 - First-party clicks: **0** across **0** post(s)
 - Next post at: `2026-07-06T10:15:00-04:00`
 - Proof due at: `2026-07-06T15:21:00Z`
-- Hours until next post: `13.14`
-- Hours until proof due: `14.24`
+- Hours until next post: `12.98`
+- Hours until proof due: `14.08`
 
 ## Recommendations
-- **Keep posting; connect result metrics when approved**: 2 recent posts are ready to measure, but X/Meta result metrics are not connected.
-  - Command: `python3 scripts/capture_brand_campaign_clicks.py && python3 scripts/build_brand_growth_pulse.py`
+- **Let the next automated posts run**: The active X/Facebook Analog Myth campaign is queued and ready; proof capture starts after the next window.
+  - Command: `python3 scripts/refresh_promo_admin.py`
 - **Preserve the no-manual-posting lane**: Keep Analog Myth promotion on API-backed X/Facebook rows until another platform has a real automated path.
   - Command: `python3 scripts/build_posting_automation_status.py`
 - **Use click data before changing creative direction**: First-party link telemetry is ready and privacy-safe; wait for real clicks before ranking tracks by response.
@@ -29,9 +29,7 @@ Generated: 2026-07-06T01:06:52.923391Z
   - Command: `python3 scripts/push_github_actions_secrets.py --name FB_PAGE_ID --name META_LONG_LIVED_TOKEN --name X_ACCESS_TOKEN --name X_ACCESS_TOKEN_SECRET --name X_API_KEY --name X_API_SECRET`
 
 ## Blockers
-- **X/Meta result metrics**: Automatic result counts need approved credential setup before importing views, likes, comments, shares, or saves.
-  - Missing names: `FB_PAGE_ID, META_LONG_LIVED_TOKEN, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET, X_API_KEY, X_API_SECRET`
-  - Help needed: Confirm before pushing or entering social API secrets anywhere outside the local machine.
+- No active posting blockers.
 
 ## Guardrails
 - No manual posting is introduced by this pulse.

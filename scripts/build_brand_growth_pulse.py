@@ -92,8 +92,14 @@ def pick_primary_action(
     missing_metrics: list[str],
     now: datetime,
 ) -> dict:
+    active_campaign_ready = (
+        preflight_summary.get("status") == "ready"
+        and int(preflight_summary.get("scheduler_blocked_count") or 0) == 0
+    )
     proof_due_at = (
         posting_summary.get("active_campaign_next_proof_due_at")
+        or preflight_summary.get("next_proof_due_at")
+        or preflight_summary.get("scheduled_time")
         or readout_summary.get("next_proof_due_at")
     )
     proof_hours = hours_until(proof_due_at, now)
@@ -114,6 +120,14 @@ def pick_primary_action(
             "label": "Capture the posts that should have run",
             "why": "The next proof window is due. Export confirmed public URLs into the activity log.",
             "command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
+            "due_at": proof_due_at,
+        }
+    if active_campaign_ready and proof_hours is not None and proof_hours > 0:
+        return {
+            "state": "campaign_running",
+            "label": "Let the next automated posts run",
+            "why": "The active X/Facebook Analog Myth campaign is queued and ready; proof capture starts after the next window.",
+            "command": "python3 scripts/refresh_promo_admin.py",
             "due_at": proof_due_at,
         }
     if ready_metrics and not missing_metrics:
@@ -169,6 +183,7 @@ def build_payload() -> dict:
     posting_summary = posting.get("summary") or {}
     click_summary = clicks.get("summary") or {}
     missing_metrics = missing_metric_names(x_results, facebook_results)
+    optional_inputs = []
     primary_action = pick_primary_action(
         readout_summary,
         preflight_summary,
@@ -183,10 +198,10 @@ def build_payload() -> dict:
     status = primary_action["state"]
     blockers = []
     if missing_metrics:
-        blockers.append({
+        optional_inputs.append({
             "kind": "credential",
             "label": "X/Meta result metrics",
-            "detail": "Automatic result counts need approved credential setup before importing views, likes, comments, shares, or saves.",
+            "detail": "Automatic result counts can import views, likes, comments, shares, or saves after credential setup. Posting does not depend on this.",
             "missing_names": missing_metrics,
             "help_needed": "Confirm before pushing or entering social API secrets anywhere outside the local machine.",
         })
@@ -258,6 +273,7 @@ def build_payload() -> dict:
         },
         "recommendations": recommendations,
         "blockers": blockers,
+        "optional_inputs": optional_inputs,
         "guardrails": [
             "No manual posting is introduced by this pulse.",
             "Do not solicit subscribers or use audience-target copy in public Lily Roo posts.",

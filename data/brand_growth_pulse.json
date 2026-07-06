@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-06T01:06:52.923391Z",
+  "generated_at": "2026-07-06T01:16:29.575183Z",
   "safe_mode": true,
-  "status": "measurement_waiting_for_credentials",
+  "status": "campaign_running",
   "source": {
     "brand_growth_readout": "data/brand_growth_readout.json",
     "brand_growth_preflight": "data/brand_growth_preflight.json",
@@ -11,12 +11,12 @@
     "facebook_post_results": "data/facebook_post_results.json"
   },
   "summary": {
-    "status": "measurement_waiting_for_credentials",
+    "status": "campaign_running",
     "primary_action": {
-      "state": "measurement_waiting_for_credentials",
-      "label": "Keep posting; connect result metrics when approved",
-      "why": "2 recent posts are ready to measure, but X/Meta result metrics are not connected.",
-      "command": "python3 scripts/capture_brand_campaign_clicks.py && python3 scripts/build_brand_growth_pulse.py",
+      "state": "campaign_running",
+      "label": "Let the next automated posts run",
+      "why": "The active X/Facebook Analog Myth campaign is queued and ready; proof capture starts after the next window.",
+      "command": "python3 scripts/refresh_promo_admin.py",
       "due_at": "2026-07-06T15:21:00Z"
     },
     "active_campaign_ready": true,
@@ -30,8 +30,8 @@
     "clicks_by_destination": {},
     "next_post_at": "2026-07-06T10:15:00-04:00",
     "proof_due_at": "2026-07-06T15:21:00Z",
-    "hours_until_next_post": 13.14,
-    "hours_until_proof_due": 14.24,
+    "hours_until_next_post": 12.98,
+    "hours_until_proof_due": 14.08,
     "missing_metric_credentials": [
       "FB_PAGE_ID",
       "META_LONG_LIVED_TOKEN",
@@ -46,9 +46,9 @@
   },
   "recommendations": [
     {
-      "label": "Keep posting; connect result metrics when approved",
-      "detail": "2 recent posts are ready to measure, but X/Meta result metrics are not connected.",
-      "command": "python3 scripts/capture_brand_campaign_clicks.py && python3 scripts/build_brand_growth_pulse.py"
+      "label": "Let the next automated posts run",
+      "detail": "The active X/Facebook Analog Myth campaign is queued and ready; proof capture starts after the next window.",
+      "command": "python3 scripts/refresh_promo_admin.py"
     },
     {
       "label": "Preserve the no-manual-posting lane",
@@ -66,11 +66,12 @@
       "command": "python3 scripts/push_github_actions_secrets.py --name FB_PAGE_ID --name META_LONG_LIVED_TOKEN --name X_ACCESS_TOKEN --name X_ACCESS_TOKEN_SECRET --name X_API_KEY --name X_API_SECRET"
     }
   ],
-  "blockers": [
+  "blockers": [],
+  "optional_inputs": [
     {
       "kind": "credential",
       "label": "X/Meta result metrics",
-      "detail": "Automatic result counts need approved credential setup before importing views, likes, comments, shares, or saves.",
+      "detail": "Automatic result counts can import views, likes, comments, shares, or saves after credential setup. Posting does not depend on this.",
       "missing_names": [
         "FB_PAGE_ID",
         "META_LONG_LIVED_TOKEN",
