@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-06T23:08:44.806415Z",
+  "generated_at": "2026-07-06T23:30:47.031226Z",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -8,6 +8,7 @@
     "home_page": "index.html",
     "podcast_page": "podcasts/analog-myth.html",
     "music_page": "music.html",
+    "album_page": "analog-myth.html",
     "lyrics_dir": "lyrics"
   },
   "summary": {
@@ -69,6 +70,10 @@
     "site_music_url_count": 6,
     "expected_site_music_url_count": 6,
     "site_music_endpoint_status": "ready",
+    "site_album_status": "ready",
+    "site_album_url_count": 10,
+    "expected_site_album_url_count": 10,
+    "site_album_endpoint_status": "ready",
     "site_lyrics_status": "ready",
     "site_lyrics_url_count": 75,
     "expected_site_lyrics_url_count": 75,
@@ -107,7 +112,7 @@
     "safe_mode": true,
     "dry_run": true,
     "expected_post_id": "fp-brand-am-04-spilling-the-tea-x",
-    "url": "https://www.lilyroo.com/api/social/click?dry_run=1&p=fp-brand-am-04-spilling-the-tea-x&to=album",
+    "url": "https://www.lilyroo.com/api/social/click?dry_run=1&post_id=fp-brand-am-04-spilling-the-tea-x&to=album",
     "http_status": 200,
     "ok": true,
     "reported_post_id": "fp-brand-am-04-spilling-the-tea-x",
@@ -115,7 +120,7 @@
     "wave": "track-moments",
     "track": "04",
     "destination": "album",
-    "recorded_at": "2026-07-06T23:08:45.021Z"
+    "recorded_at": "2026-07-06T23:30:47.208Z"
   },
   "site_share": {
     "status": "ready",
@@ -130,7 +135,7 @@
       "safe_mode": true,
       "dry_run": true,
       "expected_post_id": "site-share-album",
-      "url": "https://www.lilyroo.com/api/social/click?dry_run=1&p=site-share-album&to=album",
+      "url": "https://www.lilyroo.com/api/social/click?dry_run=1&post_id=site-share-album&to=album",
       "http_status": 200,
       "ok": true,
       "reported_post_id": "site-share-album",
@@ -138,7 +143,7 @@
       "wave": "site-share",
       "track": "",
       "destination": "album",
-      "recorded_at": "2026-07-06T23:08:45.119Z"
+      "recorded_at": "2026-07-06T23:30:47.308Z"
     },
     "rows": [
       {
@@ -243,7 +248,7 @@
       "safe_mode": true,
       "dry_run": true,
       "expected_post_id": "site-home-hero-album",
-      "url": "https://www.lilyroo.com/api/social/click?dry_run=1&p=site-home-hero-album&to=album",
+      "url": "https://www.lilyroo.com/api/social/click?dry_run=1&post_id=site-home-hero-album&to=album",
       "http_status": 200,
       "ok": true,
       "reported_post_id": "site-home-hero-album",
@@ -251,7 +256,7 @@
       "wave": "site-home",
       "track": "",
       "destination": "album",
-      "recorded_at": "2026-07-06T23:08:45.216Z"
+      "recorded_at": "2026-07-06T23:30:47.425Z"
     },
     "rows": [
       {
@@ -356,7 +361,7 @@
       "safe_mode": true,
       "dry_run": true,
       "expected_post_id": "site-podcast-hero-album",
-      "url": "https://www.lilyroo.com/api/social/click?dry_run=1&p=site-podcast-hero-album&to=album",
+      "url": "https://www.lilyroo.com/api/social/click?dry_run=1&post_id=site-podcast-hero-album&to=album",
       "http_status": 200,
       "ok": true,
       "reported_post_id": "site-podcast-hero-album",
@@ -364,7 +369,7 @@
       "wave": "site-podcast",
       "track": "",
       "destination": "album",
-      "recorded_at": "2026-07-06T23:08:45.309Z"
+      "recorded_at": "2026-07-06T23:30:47.532Z"
     },
     "rows": [
       {
@@ -461,7 +466,7 @@
       "safe_mode": true,
       "dry_run": true,
       "expected_post_id": "site-music-album-page",
-      "url": "https://www.lilyroo.com/api/social/click?dry_run=1&p=site-music-album-page&to=album",
+      "url": "https://www.lilyroo.com/api/social/click?dry_run=1&post_id=site-music-album-page&to=album",
       "http_status": 200,
       "ok": true,
       "reported_post_id": "site-music-album-page",
@@ -469,7 +474,7 @@
       "wave": "site-music",
       "track": "",
       "destination": "album",
-      "recorded_at": "2026-07-06T23:08:45.401Z"
+      "recorded_at": "2026-07-06T23:30:47.624Z"
     },
     "rows": [
       {
@@ -522,6 +527,111 @@
       }
     ]
   },
+  "site_album": {
+    "status": "ready",
+    "expected_url_count": 10,
+    "url_count": 10,
+    "ready_url_count": 10,
+    "missing_ids": [],
+    "issue_counts": {},
+    "click_endpoint": {
+      "status": "ready",
+      "safe_mode": true,
+      "dry_run": true,
+      "expected_post_id": "site-album-hero-listen",
+      "url": "https://www.lilyroo.com/api/social/click?dry_run=1&post_id=site-album-hero-listen&to=listen",
+      "http_status": 200,
+      "ok": true,
+      "reported_post_id": "site-album-hero-listen",
+      "platform": "site",
+      "wave": "site-album",
+      "track": "",
+      "destination": "listen",
+      "recorded_at": "2026-07-06T23:30:47.736Z"
+    },
+    "rows": [
+      {
+        "id": "site-album-hero-listen",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-album-hero-listen&to=listen",
+        "destination": "listen",
+        "anchor": "",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-album-hero-spotify",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-album-hero-spotify&to=spotify",
+        "destination": "spotify",
+        "anchor": "",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-album-hero-playlist",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-album-hero-playlist&to=playlist",
+        "destination": "playlist",
+        "anchor": "",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-album-hero-echo",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-album-hero-echo&to=echo",
+        "destination": "echo",
+        "anchor": "",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-album-title-listen",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-album-title-listen&to=listen",
+        "destination": "listen",
+        "anchor": "",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-album-title-apple",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-album-title-apple&to=apple",
+        "destination": "apple",
+        "anchor": "",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-album-title-spotify",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-album-title-spotify&to=spotify",
+        "destination": "spotify",
+        "anchor": "",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-album-podcast-echo",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-album-podcast-echo&to=echo",
+        "destination": "echo",
+        "anchor": "",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-album-podcast-episode",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-album-podcast-episode&to=episode",
+        "destination": "episode",
+        "anchor": "",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-album-podcast-rss",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-album-podcast-rss&to=rss",
+        "destination": "rss",
+        "anchor": "",
+        "ok": true,
+        "issues": []
+      }
+    ]
+  },
   "site_lyrics": {
     "status": "ready",
     "expected_url_count": 75,
@@ -534,7 +644,7 @@
       "safe_mode": true,
       "dry_run": true,
       "expected_post_id": "site-lyrics-index-album",
-      "url": "https://www.lilyroo.com/api/social/click?dry_run=1&p=site-lyrics-index-album&to=album",
+      "url": "https://www.lilyroo.com/api/social/click?dry_run=1&post_id=site-lyrics-index-album&to=album",
       "http_status": 200,
       "ok": true,
       "reported_post_id": "site-lyrics-index-album",
@@ -542,7 +652,7 @@
       "wave": "site-lyrics",
       "track": "",
       "destination": "album",
-      "recorded_at": "2026-07-06T23:08:45.513Z"
+      "recorded_at": "2026-07-06T23:30:47.852Z"
     },
     "rows": [
       {
@@ -4379,6 +4489,7 @@
     "Homepage Analog Myth CTAs should use first-party site-home tracking links.",
     "Podcast-page Analog Myth CTAs should use first-party site-podcast tracking links.",
     "Music catalog Analog Myth CTAs should use first-party site-music tracking links.",
+    "Analog Myth album-page CTAs should use first-party site-album tracking links.",
     "Lyric pages should use first-party site-lyrics tracking links for album, listening-link, and Echo Thread handoffs.",
     "The live click endpoint health probe uses dry_run=1 so it cannot create fake campaign clicks."
   ]

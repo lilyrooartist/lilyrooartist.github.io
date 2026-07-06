@@ -76,6 +76,18 @@ SITE_MUSIC_EXPECTED = {
     "site-music-playlist": {"destination": "playlist"},
     "site-music-podcast-episode": {"destination": "episode"},
 }
+SITE_ALBUM_EXPECTED = {
+    "site-album-hero-listen": {"destination": "listen"},
+    "site-album-hero-spotify": {"destination": "spotify"},
+    "site-album-hero-playlist": {"destination": "playlist"},
+    "site-album-hero-echo": {"destination": "echo"},
+    "site-album-title-listen": {"destination": "listen"},
+    "site-album-title-apple": {"destination": "apple"},
+    "site-album-title-spotify": {"destination": "spotify"},
+    "site-album-podcast-echo": {"destination": "echo"},
+    "site-album-podcast-episode": {"destination": "episode"},
+    "site-album-podcast-rss": {"destination": "rss"},
+}
 SITE_LYRICS_DESTINATIONS = ("album", "listen", "echo")
 CLICK_DRY_RUN_BASE = "https://www.lilyroo.com/api/social/click"
 CLICK_DRY_RUN_USER_AGENT = "LilyRooClickDryRun/1.0"
@@ -112,6 +124,9 @@ def post_parts(post_id: str) -> dict:
     site_music = re.match(r"^site-music-(album-page|listen-links|spotify|apple|playlist|podcast-episode)$", normalized)
     if site_music:
         return {"post_id": normalized, "wave": "site-music", "track": "", "platform": "site"}
+    site_album = re.match(r"^site-album-(hero|title|podcast)-(listen|spotify|playlist|echo|apple|episode|rss)$", normalized)
+    if site_album:
+        return {"post_id": normalized, "wave": "site-album", "track": "", "platform": "site"}
     site_lyrics = re.match(r"^site-lyrics-([a-z0-9-]+)-(album|listen|echo)$", normalized)
     if site_lyrics:
         return {"post_id": normalized, "wave": "site-lyrics", "track": "", "platform": "site"}
@@ -185,6 +200,17 @@ def site_music_urls() -> list[str]:
     hrefs = [
         url.replace("&amp;", "&")
         for url in re.findall(r'href="(/go/am\.html\?[^"]+)"', text)
+    ]
+    return [f"https://www.lilyroo.com{url}" for url in hrefs]
+
+
+def site_album_urls() -> list[str]:
+    if not ANALOG_MYTH_PAGE.exists():
+        return []
+    text = ANALOG_MYTH_PAGE.read_text(encoding="utf-8")
+    hrefs = [
+        url.replace("&amp;", "&")
+        for url in re.findall(r'href="(/go/am\.html\?p=site-album-[^"]+)"', text)
     ]
     return [f"https://www.lilyroo.com{url}" for url in hrefs]
 
@@ -297,7 +323,7 @@ def click_endpoint_dry_run(post_id: str | None, destination: str = "album") -> d
     if not expected_post:
         return {**result, "error": "missing_campaign_id"}
 
-    url = f"{CLICK_DRY_RUN_BASE}?dry_run=1&p={quote(expected_post)}&to={quote(destination)}"
+    url = f"{CLICK_DRY_RUN_BASE}?dry_run=1&post_id={quote(expected_post)}&to={quote(destination)}"
     result["url"] = url
     request = urllib.request.Request(
         url,
@@ -606,6 +632,13 @@ def build_payload() -> dict:
         "site-music-album-page",
         "album",
     )
+    site_album = expected_site_url_health(
+        "site_album",
+        site_album_urls(),
+        SITE_ALBUM_EXPECTED,
+        "site-album-hero-listen",
+        "listen",
+    )
     site_lyrics = expected_site_url_health(
         "site_lyrics",
         site_lyrics_urls(),
@@ -630,6 +663,7 @@ def build_payload() -> dict:
             and site_home["status"] == "ready"
             and site_podcast["status"] == "ready"
             and site_music["status"] == "ready"
+            and site_album["status"] == "ready"
             and site_lyrics["status"] == "ready"
         )
         else "attention"
@@ -645,6 +679,7 @@ def build_payload() -> dict:
             "home_page": rel(HOME_PAGE),
             "podcast_page": rel(PODCAST_PAGE),
             "music_page": rel(MUSIC_PAGE),
+            "album_page": rel(ANALOG_MYTH_PAGE),
             "lyrics_dir": rel(LYRICS_DIR),
         },
         "summary": {
@@ -685,6 +720,10 @@ def build_payload() -> dict:
             "site_music_url_count": site_music["url_count"],
             "expected_site_music_url_count": site_music["expected_url_count"],
             "site_music_endpoint_status": site_music["click_endpoint"].get("status"),
+            "site_album_status": site_album["status"],
+            "site_album_url_count": site_album["url_count"],
+            "expected_site_album_url_count": site_album["expected_url_count"],
+            "site_album_endpoint_status": site_album["click_endpoint"].get("status"),
             "site_lyrics_status": site_lyrics["status"],
             "site_lyrics_url_count": site_lyrics["url_count"],
             "expected_site_lyrics_url_count": site_lyrics["expected_url_count"],
@@ -698,6 +737,7 @@ def build_payload() -> dict:
         "site_home": site_home,
         "site_podcast": site_podcast,
         "site_music": site_music,
+        "site_album": site_album,
         "site_lyrics": site_lyrics,
         "rows": rows,
         "guardrails": [
@@ -711,6 +751,7 @@ def build_payload() -> dict:
             "Homepage Analog Myth CTAs should use first-party site-home tracking links.",
             "Podcast-page Analog Myth CTAs should use first-party site-podcast tracking links.",
             "Music catalog Analog Myth CTAs should use first-party site-music tracking links.",
+            "Analog Myth album-page CTAs should use first-party site-album tracking links.",
             "Lyric pages should use first-party site-lyrics tracking links for album, listening-link, and Echo Thread handoffs.",
             "The live click endpoint health probe uses dry_run=1 so it cannot create fake campaign clicks.",
         ],
@@ -741,6 +782,8 @@ def build_markdown(payload: dict) -> str:
         f"- Podcast endpoint dry run: **{summary['site_podcast_endpoint_status']}**",
         f"- Music catalog CTA tracking: **{summary['site_music_status']}** ({summary['site_music_url_count']} / {summary['expected_site_music_url_count']})",
         f"- Music catalog endpoint dry run: **{summary['site_music_endpoint_status']}**",
+        f"- Album page CTA tracking: **{summary['site_album_status']}** ({summary['site_album_url_count']} / {summary['expected_site_album_url_count']})",
+        f"- Album page endpoint dry run: **{summary['site_album_endpoint_status']}**",
         f"- Lyric page CTA tracking: **{summary['site_lyrics_status']}** ({summary['site_lyrics_url_count']} / {summary['expected_site_lyrics_url_count']})",
         f"- Lyric page endpoint dry run: **{summary['site_lyrics_endpoint_status']}**",
         f"- Destinations: **{', '.join(f'{key}: {value}' for key, value in summary['destination_counts'].items()) or 'none'}**",
@@ -819,6 +862,21 @@ def build_markdown(payload: dict) -> str:
         f"- Music catalog issues: **{', '.join(f'{key}: {value}' for key, value in (site_music.get('issue_counts') or {}).items()) or 'none'}**",
     ])
     for row in site_music.get("rows") or []:
+        lines.append(
+            f"- `{row.get('id') or 'unknown'}` -> `{row.get('destination') or 'unknown'}`: **{'ready' if row.get('ok') else 'attention'}**"
+        )
+    site_album = payload.get("site_album") or {}
+    site_album_endpoint = site_album.get("click_endpoint") or {}
+    lines.extend([
+        "",
+        "## Album Page CTA Tracking",
+        f"- Status: **{site_album.get('status') or 'unknown'}**",
+        f"- CTA URLs ready: **{site_album.get('ready_url_count', 0)} / {site_album.get('expected_url_count', 0)}**",
+        f"- Album page endpoint dry run: **{site_album_endpoint.get('status') or 'unknown'}**",
+        f"- Album page probe id: `{site_album_endpoint.get('expected_post_id') or 'n/a'}`",
+        f"- Album page issues: **{', '.join(f'{key}: {value}' for key, value in (site_album.get('issue_counts') or {}).items()) or 'none'}**",
+    ])
+    for row in site_album.get("rows") or []:
         lines.append(
             f"- `{row.get('id') or 'unknown'}` -> `{row.get('destination') or 'unknown'}`: **{'ready' if row.get('ok') else 'attention'}**"
         )

@@ -465,6 +465,7 @@ def validate_generated_outputs(failures):
         site_home = tracking.get("site_home") or {}
         site_podcast = tracking.get("site_podcast") or {}
         site_music = tracking.get("site_music") or {}
+        site_album = tracking.get("site_album") or {}
         site_lyrics = tracking.get("site_lyrics") or {}
         if (
             tracking.get("safe_mode") is True
@@ -500,15 +501,19 @@ def validate_generated_outputs(failures):
             and summary.get("site_music_url_count") == summary.get("expected_site_music_url_count")
             and summary.get("site_music_endpoint_status") == "ready"
             and site_music.get("status") == "ready"
+            and summary.get("site_album_status") == "ready"
+            and summary.get("site_album_url_count") == summary.get("expected_site_album_url_count")
+            and summary.get("site_album_endpoint_status") == "ready"
+            and site_album.get("status") == "ready"
             and summary.get("site_lyrics_status") == "ready"
             and summary.get("site_lyrics_url_count") == summary.get("expected_site_lyrics_url_count")
             and summary.get("site_lyrics_endpoint_status") == "ready"
             and site_lyrics.get("status") == "ready"
             and BRAND_CLICK_TRACKING_HEALTH_REPORT.exists()
         ):
-            ok("brand click tracking health verifies future campaign links, homepage/podcast/music/lyric CTAs, visible album paths, and live dry-run capture")
+            ok("brand click tracking health verifies future campaign links, homepage/podcast/music/album/lyric CTAs, visible album paths, and live dry-run capture")
         else:
-            fail("brand_click_tracking_health.json does not prove all future campaign links, homepage/podcast/music/lyric CTAs, and dry-run click capture are ready", failures)
+            fail("brand_click_tracking_health.json does not prove all future campaign links, homepage/podcast/music/album/lyric CTAs, and dry-run click capture are ready", failures)
     else:
         fail("brand_click_tracking_health.json missing; run scripts/build_brand_click_tracking_health.py", failures)
     if BRAND_GROWTH_PULSE.exists():
@@ -4390,14 +4395,15 @@ def validate_generated_outputs(failures):
         and 'wave: "site-home"' in worker_text
         and 'wave: "site-podcast"' in worker_text
         and 'wave: "site-music"' in worker_text
+        and 'wave: "site-album"' in worker_text
         and 'wave: "site-lyrics"' in worker_text
         and '"spotify"' in worker_text
         and '"apple"' in worker_text
         and 'platform: "site"' in worker_text
     ):
-        ok("social executor accepts first-party site-share, homepage CTA, podcast CTA, music catalog CTA, and lyric CTA click tracking")
+        ok("social executor accepts first-party site-share, homepage CTA, podcast CTA, music catalog CTA, album-page CTA, and lyric CTA click tracking")
     else:
-        fail("social executor missing first-party site-share, homepage CTA, podcast CTA, music catalog CTA, or lyric CTA click tracking", failures)
+        fail("social executor missing first-party site-share, homepage CTA, podcast CTA, music catalog CTA, album-page CTA, or lyric CTA click tracking", failures)
     if SOCIAL_EXECUTION_RESET.exists():
         reset_text = SOCIAL_EXECUTION_RESET.read_text(encoding="utf-8")
         if (
@@ -5001,12 +5007,12 @@ def validate_simple_admin_dashboard(failures):
     checks = {
         "top status strip": 'id="simple-status-strip"' in text and ".simple-status-strip" in text,
         "status heading is explicit": 'id="simple-status-heading">Status<' in text,
-        "recent activity column": 'id="simple-recent-activity"' in text and "Recent Activities And Results" in text,
-        "upcoming activity column": 'id="simple-upcoming-activity"' in text and "Upcoming Activities" in text,
+        "recent activity column": 'id="simple-recent-activity"' in text and "Recent Activity &amp; Results" in text,
+        "upcoming activity column": 'id="simple-upcoming-activity"' in text and "Upcoming Activity" in text,
         "two-column layout": ".simple-columns{display:grid;grid-template-columns" in text,
         "four status cards across top": ".simple-status-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))" in text,
-        "clear result wording": "What actually happened: posts, public links, result checks, and saved proof." in text,
-        "upcoming wording is scheduled": "What will happen next: automatic posts, proof capture, and result checks." in text,
+        "clear result wording": "A plain-English record of what posted, what was verified, and what is ready to measure." in text,
+        "upcoming wording is scheduled": "Automatic posts and follow-up checks already queued." in text,
         "manual posting appears only as cleanup": ("Remove manual-only posting from the active plan" in text or "Remove manual-only work from the active plan" in text) and "No manual posting in active campaign" not in text,
         "debug details hidden by default": "#panel-dashboard .diagnostic-details{display:none}" in text,
         "debug details opt-in": "show-debug-dashboard" in text and "debug')==='1'" in text,
@@ -5121,6 +5127,7 @@ def validate_analog_myth_launch_share(failures):
         'apple: "https://music.apple.com/us/album/analog-myth/6777905789"',
         'rss: "/podcasts/feed.xml"',
         'download: "/assets/podcasts/analog-myth/analog-myth-the-clock-cannot-explain-this.m4a"',
+        "site-album-(hero|title|podcast)",
         "function safeAnchor",
         "target.hash = anchor",
         'params.get("anchor")',
@@ -5130,16 +5137,20 @@ def validate_analog_myth_launch_share(failures):
         "SITE_HOME_EXPECTED",
         "SITE_PODCAST_EXPECTED",
         "SITE_MUSIC_EXPECTED",
+        "SITE_ALBUM_EXPECTED",
         "site_share_health",
         "Homepage CTA Tracking",
         "Podcast Page CTA Tracking",
         "Music Catalog CTA Tracking",
+        "Album Page CTA Tracking",
         "site_home_endpoint_status",
         "site_podcast_endpoint_status",
         "site_music_endpoint_status",
+        "site_album_endpoint_status",
         "site-home-hero-album",
         "site-podcast-hero-album",
         "site-music-album-page",
+        "site-album-hero-listen",
         'click_endpoint_dry_run("site-share-album", "album")',
         "Album Page Share Tracking",
         "site_share_endpoint_status",
@@ -5175,6 +5186,18 @@ def validate_analog_myth_launch_share(failures):
         'href="/go/am.html?p=site-music-playlist&amp;to=playlist"',
         'href="/go/am.html?p=site-music-podcast-episode&amp;to=episode"',
     ]
+    required_album = [
+        'href="/go/am.html?p=site-album-hero-listen&amp;to=listen"',
+        'href="/go/am.html?p=site-album-hero-spotify&amp;to=spotify"',
+        'href="/go/am.html?p=site-album-hero-playlist&amp;to=playlist"',
+        'href="/go/am.html?p=site-album-hero-echo&amp;to=echo"',
+        'href="/go/am.html?p=site-album-title-listen&amp;to=listen"',
+        'href="/go/am.html?p=site-album-title-apple&amp;to=apple"',
+        'href="/go/am.html?p=site-album-title-spotify&amp;to=spotify"',
+        'href="/go/am.html?p=site-album-podcast-echo&amp;to=echo"',
+        'href="/go/am.html?p=site-album-podcast-episode&amp;to=episode"',
+        'href="/go/am.html?p=site-album-podcast-rss&amp;to=rss"',
+    ]
     required_css = [
         ".launch-share-strip",
         ".launch-share-actions",
@@ -5193,9 +5216,10 @@ def validate_analog_myth_launch_share(failures):
     missing_home = [token for token in required_home if token not in home_text]
     missing_podcast = [token for token in required_podcast if token not in podcast_text]
     missing_music = [token for token in required_music if token not in music_text]
+    missing_album = [token for token in required_album if token not in analog_text]
     missing_css = [token for token in required_css if token not in style_text]
     missing_script = [token for token in required_script if token not in script_text]
-    if missing_html or missing_redirect or missing_health or missing_home or missing_podcast or missing_music or missing_css or missing_script:
+    if missing_html or missing_redirect or missing_health or missing_home or missing_podcast or missing_music or missing_album or missing_css or missing_script:
         if missing_html:
             fail("Analog Myth launch share strip missing " + ", ".join(missing_html), failures)
         if missing_redirect:
@@ -5208,12 +5232,14 @@ def validate_analog_myth_launch_share(failures):
             fail("Podcast Analog Myth CTA tracking missing " + ", ".join(missing_podcast), failures)
         if missing_music:
             fail("Music catalog Analog Myth CTA tracking missing " + ", ".join(missing_music), failures)
+        if missing_album:
+            fail("Analog Myth album page CTA tracking missing " + ", ".join(missing_album), failures)
         if missing_css:
             fail("Analog Myth launch share CSS missing " + ", ".join(missing_css), failures)
         if missing_script:
             fail("Analog Myth share script missing " + ", ".join(missing_script), failures)
     else:
-        ok("Analog Myth page includes album, podcast, video, podcast CTA, music catalog CTA, and track share handoffs")
+        ok("Analog Myth page includes album, podcast, video, podcast CTA, music catalog CTA, album-page CTA, and track share handoffs")
 
 
 def validate_lyrics_discovery_metadata(failures):

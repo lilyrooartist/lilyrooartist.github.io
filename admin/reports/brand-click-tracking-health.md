@@ -1,6 +1,6 @@
 # Brand Click Tracking Health - Lily Roo
 
-Generated: 2026-07-06T23:08:44.806415Z
+Generated: 2026-07-06T23:30:47.031226Z
 
 ## Summary
 - Status: **ready**
@@ -19,6 +19,8 @@ Generated: 2026-07-06T23:08:44.806415Z
 - Podcast endpoint dry run: **ready**
 - Music catalog CTA tracking: **ready** (6 / 6)
 - Music catalog endpoint dry run: **ready**
+- Album page CTA tracking: **ready** (10 / 10)
+- Album page endpoint dry run: **ready**
 - Lyric page CTA tracking: **ready** (75 / 75)
 - Lyric page endpoint dry run: **ready**
 - Destinations: **album: 58, echo: 58, video: 58**
@@ -119,6 +121,23 @@ Generated: 2026-07-06T23:08:44.806415Z
 - `site-music-apple` -> `apple`: **ready**
 - `site-music-playlist` -> `playlist`: **ready**
 - `site-music-podcast-episode` -> `episode`: **ready**
+
+## Album Page CTA Tracking
+- Status: **ready**
+- CTA URLs ready: **10 / 10**
+- Album page endpoint dry run: **ready**
+- Album page probe id: `site-album-hero-listen`
+- Album page issues: **none**
+- `site-album-hero-listen` -> `listen`: **ready**
+- `site-album-hero-spotify` -> `spotify`: **ready**
+- `site-album-hero-playlist` -> `playlist`: **ready**
+- `site-album-hero-echo` -> `echo`: **ready**
+- `site-album-title-listen` -> `listen`: **ready**
+- `site-album-title-apple` -> `apple`: **ready**
+- `site-album-title-spotify` -> `spotify`: **ready**
+- `site-album-podcast-echo` -> `echo`: **ready**
+- `site-album-podcast-episode` -> `episode`: **ready**
+- `site-album-podcast-rss` -> `rss`: **ready**
 
 ## Lyric Page CTA Tracking
 - Status: **ready**
@@ -362,5 +381,6 @@ Generated: 2026-07-06T23:08:44.806415Z
 - Homepage Analog Myth CTAs should use first-party site-home tracking links.
 - Podcast-page Analog Myth CTAs should use first-party site-podcast tracking links.
 - Music catalog Analog Myth CTAs should use first-party site-music tracking links.
+- Analog Myth album-page CTAs should use first-party site-album tracking links.
 - Lyric pages should use first-party site-lyrics tracking links for album, listening-link, and Echo Thread handoffs.
 - The live click endpoint health probe uses dry_run=1 so it cannot create fake campaign clicks.
