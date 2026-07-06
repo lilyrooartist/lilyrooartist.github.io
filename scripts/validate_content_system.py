@@ -4959,6 +4959,65 @@ def json_ld_payloads(text, path, failures):
     return payloads
 
 
+def validate_public_growth_metadata(failures):
+    pages = {
+        "music.html": {
+            "canonical": "https://www.lilyroo.com/music.html",
+            "type": "CollectionPage",
+            "required": [
+                'property="og:title" content="Lily Roo Archive"',
+                'name="twitter:card" content="summary_large_image"',
+                'property="og:image" content="https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg"',
+            ],
+        },
+        "press.html": {
+            "canonical": "https://www.lilyroo.com/press.html",
+            "type": "Person",
+            "required": [
+                'property="og:title" content="Lily Roo Press Kit"',
+                'name="twitter:card" content="summary_large_image"',
+                'property="og:image" content="https://www.lilyroo.com/assets/avatar.png"',
+            ],
+        },
+    }
+    before = len(failures)
+    for rel, expected in pages.items():
+        path = ROOT / rel
+        if not path.exists():
+            fail(f"{rel} missing public growth metadata page", failures)
+            continue
+        text = path.read_text(encoding="utf-8")
+        required_tokens = [
+            f'<link rel="canonical" href="{expected["canonical"]}" />',
+            *expected["required"],
+        ]
+        missing = [token for token in required_tokens if token not in text]
+        if missing:
+            fail(f"{rel} missing public growth metadata: {', '.join(missing)}", failures)
+        payloads = json_ld_payloads(text, rel, failures)
+        payload = next((item for item in payloads if item.get("@type") == expected["type"]), None)
+        if not payload:
+            fail(f"{rel} missing {expected['type']} JSON-LD", failures)
+            continue
+        if payload.get("url") != expected["canonical"]:
+            fail(f"{rel} JSON-LD url does not match canonical", failures)
+        if rel == "music.html":
+            item_list = payload.get("mainEntity") or {}
+            items = item_list.get("itemListElement") or []
+            if item_list.get("@type") != "ItemList" or item_list.get("numberOfItems") != 4 or len(items) != 4:
+                fail("music.html archive JSON-LD does not describe the four discovery entries", failures)
+            item_names = {((item.get("item") or {}).get("name") or "") for item in items}
+            expected_names = {"Analog Myth", "12 Dollars", "I Learned It All in Fifteen Seconds", "Analog Myth: The Clock Cannot Explain This"}
+            if item_names != expected_names:
+                fail("music.html archive JSON-LD item names do not match the visible archive entries", failures)
+        if rel == "press.html":
+            subject_names = {((item or {}).get("name") or "") for item in payload.get("subjectOf") or []}
+            if "Analog Myth" not in subject_names or "Analog Myth: The Clock Cannot Explain This" not in subject_names:
+                fail("press.html JSON-LD does not connect the press kit to Analog Myth and the podcast episode", failures)
+    if len(failures) == before:
+        ok("public Lily Roo growth pages carry social preview and discovery metadata")
+
+
 def validate_lyrics_discovery_metadata(failures):
     if not LYRICS_DIR.exists():
         fail("lyrics directory is missing", failures)
@@ -5073,6 +5132,7 @@ def main():
     validate_generated_outputs(failures)
     validate_report(failures)
     validate_admin_execution_feedback(failures)
+    validate_public_growth_metadata(failures)
     validate_lyrics_discovery_metadata(failures)
     validate_twelve_dollars_remasters(failures)
     if failures:
