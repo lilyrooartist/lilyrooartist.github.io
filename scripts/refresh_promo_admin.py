@@ -315,6 +315,11 @@ FINALIZE_STEPS = [
         "required": True,
     },
     {
+        "name": "build_brand_click_tracking_health",
+        "command": ["python3", "scripts/build_brand_click_tracking_health.py"],
+        "required": True,
+    },
+    {
         "name": "build_brand_growth_readout",
         "command": ["python3", "scripts/build_brand_growth_readout.py"],
         "required": True,

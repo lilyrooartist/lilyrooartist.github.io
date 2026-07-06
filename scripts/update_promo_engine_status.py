@@ -1434,6 +1434,7 @@ GENERATED_REFRESH_PATHS = {
     "data/approval_runway.json",
     "data/backlog_reschedule_preview.json",
     "data/brand_campaign_clicks.json",
+    "data/brand_click_tracking_health.json",
     "data/brand_growth_preflight.json",
     "data/brand_growth_pulse.json",
     "data/brand_growth_readout.json",

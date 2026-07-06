@@ -1,6 +1,6 @@
 # Brand Growth Readout - Lily Roo
 
-Generated: 2026-07-06T16:17:37.832383Z
+Generated: 2026-07-06T16:48:19.162216Z
 
 ## Summary
 - Campaign rows: **64**
@@ -11,6 +11,7 @@ Generated: 2026-07-06T16:17:37.832383Z
 - Ready for metric capture: **4**
 - Public visibility: **verified** (6 / 6 checked OK; 0 attention)
 - Campaign clicks: **0** across **0** post(s); last click `none yet`
+- Click tracking links: **ready** (58 / 58 future rows; 174 / 174 URLs)
 - Post-slot watch windows: **32**
 - Status counts: **posted_waiting_measurement_window: 2, ready_for_metric_capture: 4, scheduled_future: 58**
 - Next scheduled: `FP-BRAND-AM-04-SPILLING-THE-TEA-X` at `2026-07-07T10:15:00-04:00`
@@ -29,6 +30,7 @@ Generated: 2026-07-06T16:17:37.832383Z
 - Capture Facebook metrics: `python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --post-id FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK`
 - Re-check public visibility: `admin/reports/brand-post-visibility.md`
 - Capture campaign clicks: `python3 scripts/capture_brand_campaign_clicks.py`
+- Verify click tracking links: `admin/reports/brand-click-tracking-health.md`
 
 ## Metric Capture Status
 - X metrics: **skipped_missing_secrets**
@@ -292,3 +294,4 @@ Generated: 2026-07-06T16:17:37.832383Z
 - Unknown metrics remain blank until an API capture or visible analytics source proves them.
 - Public post visibility checks are read-only and do not replace X/Meta metric capture.
 - Campaign click totals come from first-party redirect telemetry and do not store IP addresses.
+- Click tracking health proves future auto posts carry trackable first-party links before they publish.

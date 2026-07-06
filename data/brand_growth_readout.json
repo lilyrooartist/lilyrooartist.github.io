@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-06T16:17:37.832383Z",
+  "generated_at": "2026-07-06T16:48:19.162216Z",
   "safe_mode": true,
   "source": {
     "brand_growth_campaign": "data/brand_growth_campaign.json",
@@ -11,7 +11,8 @@
     "facebook_post_results": "data/facebook_post_results.json",
     "live_social_metrics": "data/live_social_metrics.json",
     "brand_post_visibility": "data/brand_post_visibility.json",
-    "brand_campaign_clicks": "data/brand_campaign_clicks.json"
+    "brand_campaign_clicks": "data/brand_campaign_clicks.json",
+    "brand_click_tracking_health": "data/brand_click_tracking_health.json"
   },
   "summary": {
     "campaign_row_count": 64,
@@ -40,6 +41,12 @@
     "campaign_click_last_at": "",
     "campaign_click_report_path": "admin/reports/brand-campaign-clicks.md",
     "campaign_click_refresh_command": "python3 scripts/capture_brand_campaign_clicks.py",
+    "campaign_click_tracking_status": "ready",
+    "campaign_click_tracking_ready_rows": 58,
+    "campaign_click_tracking_future_rows": 58,
+    "campaign_click_tracking_url_count": 174,
+    "campaign_click_tracking_expected_url_count": 174,
+    "campaign_click_tracking_report_path": "admin/reports/brand-click-tracking-health.md",
     "attention_rows": 4,
     "next_scheduled_post_id": "FP-BRAND-AM-04-SPILLING-THE-TEA-X",
     "next_scheduled_at": "2026-07-07T10:15:00-04:00",
@@ -2397,6 +2404,7 @@
     "Post-slot proof commands only capture executor state and export confirmed Worker URLs.",
     "Unknown metrics remain blank until an API capture or visible analytics source proves them.",
     "Public post visibility checks are read-only and do not replace X/Meta metric capture.",
-    "Campaign click totals come from first-party redirect telemetry and do not store IP addresses."
+    "Campaign click totals come from first-party redirect telemetry and do not store IP addresses.",
+    "Click tracking health proves future auto posts carry trackable first-party links before they publish."
   ]
 }

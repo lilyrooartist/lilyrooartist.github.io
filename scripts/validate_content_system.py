@@ -61,6 +61,7 @@ EXPERIMENT_RESULT_COLLECTION = ROOT / "data" / "experiment_result_collection_pac
 EXPERIMENT_RESULT_CLIPBOARD = ROOT / "data" / "experiment_result_clipboard.json"
 EXPERIMENT_PUBLISH_RUNWAY = ROOT / "data" / "experiment_publish_runway.json"
 BRAND_GROWTH_PREFLIGHT = ROOT / "data" / "brand_growth_preflight.json"
+BRAND_CLICK_TRACKING_HEALTH = ROOT / "data" / "brand_click_tracking_health.json"
 YOUTUBE_POST_RESULTS = ROOT / "data" / "youtube_post_results.json"
 TWELVE_DOLLARS_REMASTER = ROOT / "data" / "youtube_twelve_dollars_remaster_manifest.json"
 TWELVE_DOLLARS_PLAYLIST = ROOT / "data" / "youtube_twelve_dollars_playlist.json"
@@ -90,6 +91,7 @@ EXPERIMENT_RESULT_CLIPBOARD_SCRIPT = ROOT / "scripts" / "build_experiment_result
 EXPERIMENT_PUBLISH_RUNWAY_SCRIPT = ROOT / "scripts" / "build_experiment_publish_runway.py"
 EXPERIMENT_RESULT_UPDATER = ROOT / "scripts" / "update_experiment_results.py"
 BRAND_GROWTH_PREFLIGHT_SCRIPT = ROOT / "scripts" / "build_brand_growth_preflight.py"
+BRAND_CLICK_TRACKING_HEALTH_SCRIPT = ROOT / "scripts" / "build_brand_click_tracking_health.py"
 TIKTOK_SETUP_PREFLIGHT_SCRIPT = ROOT / "scripts" / "build_tiktok_setup_preflight.py"
 TIKTOK_REPAIR_RUNBOOK_SCRIPT = ROOT / "scripts" / "build_tiktok_repair_runbook.py"
 TIKTOK_PUBLIC_POSTING_APPROVAL_SCRIPT = ROOT / "scripts" / "set_tiktok_public_posting_approval.py"
@@ -134,6 +136,7 @@ YOUTUBE_POST_RESULTS_REPORT = ROOT / "admin" / "reports" / "youtube-post-results
 EXPERIMENT_RESULT_REPORT = ROOT / "admin" / "reports" / "experiment-result-collection.md"
 EXPERIMENT_RESULT_CLIPBOARD_REPORT = ROOT / "admin" / "reports" / "experiment-result-clipboard.md"
 BRAND_GROWTH_PREFLIGHT_REPORT = ROOT / "admin" / "reports" / "brand-growth-preflight.md"
+BRAND_CLICK_TRACKING_HEALTH_REPORT = ROOT / "admin" / "reports" / "brand-click-tracking-health.md"
 INDEX = CONTENT / "content_index.json"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
 LYRICS_DIR = ROOT / "lyrics"
@@ -188,6 +191,7 @@ GENERATED_REFRESH_PATHS = {
     "data/approval_runway.json",
     "data/backlog_reschedule_preview.json",
     "data/brand_campaign_clicks.json",
+    "data/brand_click_tracking_health.json",
     "data/brand_growth_preflight.json",
     "data/brand_growth_pulse.json",
     "data/brand_growth_readout.json",
@@ -400,6 +404,31 @@ def validate_generated_outputs(failures):
             fail("brand_growth_preflight.json does not prove a ready next campaign window", failures)
     else:
         fail("brand_growth_preflight.json missing; run scripts/build_brand_growth_preflight.py", failures)
+    if BRAND_CLICK_TRACKING_HEALTH.exists():
+        tracking = json.loads(BRAND_CLICK_TRACKING_HEALTH.read_text(encoding="utf-8"))
+        summary = tracking.get("summary") or {}
+        future_rows = int(summary.get("future_campaign_rows") or 0)
+        ready_rows = int(summary.get("ready_future_campaign_rows") or 0)
+        url_count = int(summary.get("tracking_url_count") or 0)
+        expected_url_count = int(summary.get("expected_tracking_url_count") or 0)
+        redirect = tracking.get("redirect") or {}
+        if (
+            tracking.get("safe_mode") is True
+            and summary.get("status") == "ready"
+            and future_rows > 0
+            and ready_rows == future_rows
+            and url_count == expected_url_count == future_rows * 3
+            and not int(summary.get("broken_future_campaign_rows") or 0)
+            and not summary.get("issue_counts")
+            and summary.get("redirect_status") == "ready"
+            and redirect.get("status") == "ready"
+            and BRAND_CLICK_TRACKING_HEALTH_REPORT.exists()
+        ):
+            ok("brand click tracking health verifies all future campaign links")
+        else:
+            fail("brand_click_tracking_health.json does not prove all future campaign links are trackable", failures)
+    else:
+        fail("brand_click_tracking_health.json missing; run scripts/build_brand_click_tracking_health.py", failures)
     if INDEX.exists():
         index = json.loads(INDEX.read_text(encoding="utf-8"))
         ok(f"content index generated with {index.get('counts', {}).get('songs', 0)} songs")
@@ -3876,6 +3905,23 @@ def validate_generated_outputs(failures):
             fail("build_brand_growth_preflight.py missing read-only scheduler preflight safeguards", failures)
     else:
         fail("build_brand_growth_preflight.py missing", failures)
+    if BRAND_CLICK_TRACKING_HEALTH_SCRIPT.exists():
+        tracking_text = BRAND_CLICK_TRACKING_HEALTH_SCRIPT.read_text(encoding="utf-8")
+        if (
+            "brand_click_tracking_health.json" in tracking_text
+            and "brand-click-tracking-health.md" in tracking_text
+            and "reply_text" in tracking_text
+            and "go/am.html" in tracking_text
+            and "EXPECTED_DESTINATIONS" in tracking_text
+            and "This check is read-only and does not post" in tracking_text
+            and "--apply" not in tracking_text
+            and "post_" not in tracking_text.replace("post_id", "").replace("post_parts", "")
+        ):
+            ok("brand click tracking health builder is read-only and link-scoped")
+        else:
+            fail("build_brand_click_tracking_health.py missing read-only tracking safeguards", failures)
+    else:
+        fail("build_brand_click_tracking_health.py missing", failures)
     if PROMO_REFRESH_SCRIPT.exists():
         refresh_text = PROMO_REFRESH_SCRIPT.read_text(encoding="utf-8")
         required_bits = [
@@ -3903,6 +3949,7 @@ def validate_generated_outputs(failures):
             "build_experiment_result_clipboard.py",
             "build_experiment_publish_runway.py",
             "build_brand_growth_preflight.py",
+            "build_brand_click_tracking_health.py",
             "build_manual_metric_collection.py",
             "build_promotion_blocker_ledger.py",
             "build_promo_unlock_sequence.py",
@@ -4396,6 +4443,21 @@ def validate_generated_outputs(failures):
             fail("promo-consistency-audit.md missing expected sections", failures)
     else:
         fail("promo-consistency-audit.md missing", failures)
+    if BRAND_CLICK_TRACKING_HEALTH_REPORT.exists():
+        click_tracking_report_text = BRAND_CLICK_TRACKING_HEALTH_REPORT.read_text(encoding="utf-8")
+        report_index_text = (ROOT / "admin" / "reports" / "index.html").read_text(encoding="utf-8") if (ROOT / "admin" / "reports" / "index.html").exists() else ""
+        if (
+            "Brand Click Tracking Health" in click_tracking_report_text
+            and "Redirect Checks" in click_tracking_report_text
+            and "Future Rows" in click_tracking_report_text
+            and "Guardrails" in click_tracking_report_text
+            and "brand-click-tracking-health.md" in report_index_text
+        ):
+            ok("brand click tracking markdown report present")
+        else:
+            fail("brand-click-tracking-health.md missing expected sections or index link", failures)
+    else:
+        fail("brand-click-tracking-health.md missing", failures)
     if TIKTOK_SETUP_PREFLIGHT_REPORT.exists():
         preflight_report_text = TIKTOK_SETUP_PREFLIGHT_REPORT.read_text(encoding="utf-8")
         if "TikTok Setup Preflight" in preflight_report_text and "Credential Handoff" in preflight_report_text and "Checks" in preflight_report_text and "Guardrails" in preflight_report_text:
