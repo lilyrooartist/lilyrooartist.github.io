@@ -1,21 +1,12 @@
 {
   "ok": true,
-  "updated_at": "2026-07-06T20:43:00.433Z",
+  "updated_at": "2026-07-06T20:53:53.729Z",
   "platforms": {
     "youtube": {
-      "ok": true,
-      "source": "youtube-data-api",
-      "metrics": {
-        "subscribers": 5,
-        "total_views": 487,
-        "video_count": 34
-      },
-      "channel_title": "Lily Roo",
-      "period_28d": {
-        "startDate": "2026-06-08",
-        "endDate": "2026-07-05"
-      },
-      "analytics_status": "Request had insufficient authentication scopes."
+      "ok": false,
+      "reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
+      "metrics": {},
+      "status": 400
     },
     "spotify": {
       "ok": true,
@@ -91,7 +82,7 @@
       "source": "x-public-profile-page",
       "profile_url": "https://x.com/lilyrooartist",
       "http_status": 200,
-      "html_bytes": 90874,
+      "html_bytes": 90875,
       "public_capture_status": "ok"
     }
   },
@@ -141,7 +132,7 @@
         },
         "profile_url": "https://x.com/lilyrooartist",
         "http_status": 200,
-        "html_bytes": 90874,
+        "html_bytes": 90875,
         "public_capture_status": "ok"
       }
     }

@@ -124,6 +124,12 @@ def redirect_health() -> dict:
         "supports_album": "album:" in text,
         "supports_echo": "echo:" in text,
         "supports_video": 'destination === "video"' in text,
+        "has_noindex_guard": 'name="robots" content="noindex"' in text,
+        "canonical_points_to_album": 'rel="canonical" href="https://www.lilyroo.com/analog-myth.html"' in text,
+        "has_open_graph_title": 'property="og:title" content="Analog Myth - Lily Roo"' in text,
+        "has_open_graph_image": 'property="og:image" content="https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg"' in text,
+        "has_twitter_card": 'name="twitter:card" content="summary_large_image"' in text,
+        "has_twitter_image": 'name="twitter:image" content="https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg"' in text,
     }
     return {
         "path": rel(REDIRECT),

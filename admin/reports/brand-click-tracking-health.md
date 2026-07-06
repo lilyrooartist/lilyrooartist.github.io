@@ -1,6 +1,6 @@
 # Brand Click Tracking Health - Lily Roo
 
-Generated: 2026-07-06T20:43:20.624766Z
+Generated: 2026-07-06T20:54:09.837571Z
 
 ## Summary
 - Status: **ready**
@@ -31,6 +31,12 @@ Generated: 2026-07-06T20:43:20.624766Z
 - supports_album: **ok**
 - supports_echo: **ok**
 - supports_video: **ok**
+- has_noindex_guard: **ok**
+- canonical_points_to_album: **ok**
+- has_open_graph_title: **ok**
+- has_open_graph_image: **ok**
+- has_twitter_card: **ok**
+- has_twitter_image: **ok**
 
 ## Future Rows
 - `FP-BRAND-AM-04-SPILLING-THE-TEA-X` X 2026-07-07T10:15:00-04:00 - **ready** (3 links)

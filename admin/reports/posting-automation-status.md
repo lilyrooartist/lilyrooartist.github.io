@@ -1,6 +1,6 @@
 # Posting Automation Status - Lily Roo
 
-Generated: 2026-07-06T20:43:20.578359Z
+Generated: 2026-07-06T20:54:09.791087Z
 
 ## Summary
 - Status: **ready_active_campaign**
@@ -23,7 +23,7 @@ Generated: 2026-07-06T20:43:20.578359Z
   - Detail: 17 */6 * * *, 25 15 * * *, 05 16 * * *; latest run completed / success; proof refresh next fixed refresh 4 minute(s) after proof due
   - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28820298675
 - **Safe admin refresh** - `ready`
-  - Detail: 19 refresh commands captured at 2026-07-06T20:43:18.499288Z
+  - Detail: 19 refresh commands captured at 2026-07-06T20:54:07.833206Z
   - Evidence: data/promo_admin_refresh_run.json
 - **Scheduler dry-run authentication** - `ready`
   - Detail: HTTP 200 using bearer auth; due=0 would_post=0
@@ -32,7 +32,7 @@ Generated: 2026-07-06T20:43:20.578359Z
   - Detail: posted=36 attention=0 platform_fix_needed=0
   - Evidence: data/social_execution_snapshot.json
 - **Platform readiness** - `deferred`
-  - Detail: ready=X, Facebook, YouTube; blocked=Instagram, TikTok
+  - Detail: ready=X, Facebook; blocked=Instagram, TikTok, YouTube
   - Evidence: data/executor_readiness_snapshot.json
   - Next: Optional expansion only; the active Analog Myth campaign uses ready X/Facebook lanes.
 - **TikTok API lane** - `deferred`

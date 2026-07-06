@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "updated_at": "2026-07-06T20:43:04.082082Z",
+  "updated_at": "2026-07-06T20:53:57.155728Z",
   "source": "lilyroo-social-executor-readiness",
   "url": "https://www.lilyroo.com/api/social/readiness",
   "http_status": 200,
@@ -10,19 +10,19 @@
   "summary": {
     "ready_platforms": [
       "X",
-      "Facebook",
-      "YouTube"
+      "Facebook"
     ],
     "blocked_platforms": [
       "Instagram",
-      "TikTok"
+      "TikTok",
+      "YouTube"
     ],
     "platforms": {
       "X": true,
       "Instagram": false,
       "TikTok": false,
       "Facebook": true,
-      "YouTube": true
+      "YouTube": false
     }
   },
   "payload": {
@@ -66,10 +66,10 @@
         "aigc_label_enabled": true
       },
       "youtube": {
-        "ready": true,
+        "ready": false,
         "missing_secrets": [],
-        "refresh_token_valid": true,
-        "token_resolution_reason": "",
+        "refresh_token_valid": false,
+        "token_resolution_reason": "API request failed (400): {\"error\":\"invalid_grant\",\"error_description\":\"Token has been expired or revoked.\"}",
         "client_secret_present": true,
         "media_map_present": true,
         "privacy_status": "public"

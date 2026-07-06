@@ -4052,6 +4052,7 @@ def validate_generated_outputs(failures):
             and "youtube.videos.list(part=snippet,statistics)" in youtube_capture_text
             and 'RESULT_FIELDS = ["views", "likes", "comments"]' in youtube_capture_text
             and "--skip-missing-secrets" in youtube_capture_text
+            and "skipped_invalid_youtube_oauth" in youtube_capture_text
             and "--apply-results" in youtube_capture_text
             and "already-published Lily Roo videos" in youtube_capture_text
             and "append_published_log" not in youtube_capture_text
@@ -4118,6 +4119,8 @@ def validate_generated_outputs(failures):
             and "main_text_album_link_ok" in tracking_text
             and "visible_surface_album_link_ok" in tracking_text
             and "go/am.html" in tracking_text
+            and "has_open_graph_image" in tracking_text
+            and "has_twitter_card" in tracking_text
             and "EXPECTED_DESTINATIONS" in tracking_text
             and "This check is read-only and does not post" in tracking_text
             and "dry_run=1" in tracking_text

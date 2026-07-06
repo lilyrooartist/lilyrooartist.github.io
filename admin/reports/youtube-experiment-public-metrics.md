@@ -1,14 +1,15 @@
 # YouTube Experiment Public Metrics - Lily Roo
 
-Generated: 2026-07-06T20:43:20Z
+Generated: 2026-07-06T20:54:09Z
 
 ## Summary
-- Status: **no_public_metrics**
+- Status: **blocked**
 - YouTube template rows: **0**
 - Importable posts: **0**
 - Importable fields: **0**
 - Output CSV: `data/youtube_experiment_public_metrics.csv`
 - Preview: `python3 scripts/update_experiment_results.py --from-wide-csv data/youtube_experiment_public_metrics.csv --dry-run`
+- Error: `YouTube OAuth token request failed (400): {"error": "invalid_grant", "error_description": "Token has been expired or revoked."}`
 
 ## Measurements
 - No importable YouTube public metrics were found.

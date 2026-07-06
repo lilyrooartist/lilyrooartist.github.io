@@ -261,6 +261,54 @@ def build_missing_secret_payload(rows: list[dict], missing: list[str]) -> dict:
     }
 
 
+def build_invalid_oauth_payload(rows: list[dict], error_summary: str) -> dict:
+    captured_at = datetime.now(timezone.utc).date().isoformat()
+    captured = [
+        {
+            **row,
+            "title": "",
+            "lookup_status": "skipped_invalid_youtube_oauth",
+            "metrics": {},
+            "fillable_results": {},
+            "filled_field_count": 0,
+            "evidence_note": f"YouTube metric capture skipped {captured_at}: OAuth refresh token is expired or revoked.",
+            "direct_apply_command": "",
+        }
+        for row in rows
+    ]
+    return {
+        "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+        "safe_mode": True,
+        "source": {
+            "published_log": relative(PUBLISHED_LOG),
+            "local_secret_source": str(YOUTUBE_ENV.relative_to(ROOT.parent)),
+            "youtube_endpoint": f"{API_ROOT}/videos",
+            "api": "youtube.videos.list(part=snippet,statistics)",
+        },
+        "summary": {
+            "status": "skipped_invalid_youtube_oauth",
+            "captured_post_count": len(captured),
+            "fillable_post_count": 0,
+            "fillable_result_field_count": 0,
+            "post_ids": [item["post_id"] for item in captured],
+            "result_fields": RESULT_FIELDS,
+            "oauth_error": error_summary,
+            "apply_command": "python3 scripts/capture_youtube_post_results.py --apply-results --refresh-admin",
+            "retry_command": "python3 scripts/capture_youtube_post_results.py --min-age-hours 24 --allow-empty --apply-results --refresh-admin",
+            "report_path": relative(REPORT),
+            "next_action": "Reconnect the YouTube OAuth helper when native YouTube metrics are needed; this does not block automatic posting.",
+        },
+        "rows": captured,
+        "redaction": "OAuth error class is recorded for operator diagnostics; token values are never written here.",
+        "guardrails": [
+            "Metrics come from public YouTube video statistics for already-published Lily Roo videos when OAuth credentials are valid.",
+            "This skipped report does not contain OAuth credentials.",
+            "Only views, likes, and comments are imported; shares, saves, and subscriber deltas stay blank unless another evidence source supplies them.",
+            "Applying results goes through scripts/update_experiment_results.py so Published_Log.csv row IDs are verified.",
+        ],
+    }
+
+
 def build_markdown(payload: dict) -> str:
     summary = payload["summary"]
     lines = [
@@ -356,7 +404,17 @@ def main() -> int:
             print(json.dumps({"output": relative(OUT), **payload["summary"]}, indent=2))
             return 0
         raise SystemExit(f"{YOUTUBE_ENV.relative_to(ROOT.parent)} missing: {', '.join(missing)}")
-    token = refresh_access_token(env)
+    try:
+        token = refresh_access_token(env)
+    except RuntimeError as error:
+        message = str(error)
+        if args.skip_missing_secrets and ("invalid_grant" in message or "expired or revoked" in message):
+            payload = build_invalid_oauth_payload(rows, "invalid_grant")
+            OUT.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+            REPORT.write_text(build_markdown(payload), encoding="utf-8")
+            print(json.dumps({"output": relative(OUT), **payload["summary"]}, indent=2))
+            return 0
+        raise
     videos = fetch_videos([row["video_id"] for row in rows], token)
     payload = build_payload(rows, videos)
     OUT.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
