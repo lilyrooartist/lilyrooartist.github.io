@@ -1,12 +1,12 @@
 # Experiment Result Collection - Lily Roo
 
-Generated: 2026-07-06T01:16:29.117972Z
+Generated: 2026-07-06T04:40:25.019113Z
 
 ## Summary
 - Experiment count: **3**
-- Published experiment posts: **15**
-- Missing published log posts: **6**
-- Pending result fields: **84**
+- Published experiment posts: **16**
+- Missing published log posts: **4**
+- Pending result fields: **90**
 - Ready to import: **0**
 - Entry CSV: `data/experiment_result_entry_template.csv`
 - Wide entry CSV: `data/experiment_result_entry_wide_template.csv`
@@ -24,10 +24,8 @@ Generated: 2026-07-06T01:16:29.117972Z
 - Fill only metrics visible in the platform analytics surface.
 
 ## Missing Published Log Rows
-- `FP-AUTO-272` (Release-art image + story hook): Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-277` (Release-art image + story hook): Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-282` (Release-art image + story hook): Publish or log the public URL before result metrics can be collected.
-- `FP-AUTO-274` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-279` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-284` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
 
@@ -44,12 +42,6 @@ Generated: 2026-07-06T01:16:29.117972Z
 - `FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK` Facebook `shares` from row 36: Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594301249470 and record shares.
 - `FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK` Facebook `saves` from row 36: Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594301249470 and record saves.
 - `FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK` Facebook `subs_delta` from row 36: Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594301249470 and record subs_delta.
-- `FP-AUTO-273` Facebook `views` from row 32: Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594571249470 and record views.
-- `FP-AUTO-273` Facebook `likes` from row 32: Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594571249470 and record likes.
-- `FP-AUTO-273` Facebook `comments` from row 32: Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594571249470 and record comments.
-- `FP-AUTO-273` Facebook `shares` from row 32: Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594571249470 and record shares.
-- `FP-AUTO-273` Facebook `saves` from row 32: Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594571249470 and record saves.
-- `FP-AUTO-273` Facebook `subs_delta` from row 32: Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594571249470 and record subs_delta.
 - `FP-AUTO-276` X `views` from row 38: Open X analytics for https://x.com/i/web/status/2071764617978950017 and record views.
 - `FP-AUTO-276` X `likes` from row 38: Open X analytics for https://x.com/i/web/status/2071764617978950017 and record likes.
 - `FP-AUTO-276` X `comments` from row 38: Open X analytics for https://x.com/i/web/status/2071764617978950017 and record comments.
@@ -57,4 +49,10 @@ Generated: 2026-07-06T01:16:29.117972Z
 - `FP-AUTO-276` X `saves` from row 38: Open X analytics for https://x.com/i/web/status/2071764617978950017 and record saves.
 - `FP-AUTO-276` X `subs_delta` from row 38: Open X analytics for https://x.com/i/web/status/2071764617978950017 and record subs_delta.
 - `FP-AUTO-278` Facebook `views` from row 30: Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594715249470 and record views.
-- ...and 59 more rows in `data/experiment_result_entry_template.csv`.
+- `FP-AUTO-278` Facebook `likes` from row 30: Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594715249470 and record likes.
+- `FP-AUTO-278` Facebook `comments` from row 30: Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594715249470 and record comments.
+- `FP-AUTO-278` Facebook `shares` from row 30: Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594715249470 and record shares.
+- `FP-AUTO-278` Facebook `saves` from row 30: Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594715249470 and record saves.
+- `FP-AUTO-278` Facebook `subs_delta` from row 30: Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594715249470 and record subs_delta.
+- `FP-AUTO-281` X `views` from row 42: Open X analytics for https://x.com/i/web/status/2072127000391905619 and record views.
+- ...and 65 more rows in `data/experiment_result_entry_template.csv`.

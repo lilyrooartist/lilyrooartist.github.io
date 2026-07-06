@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-06T01:16:29.151500Z",
+  "generated_at": "2026-07-06T04:40:25.067302Z",
   "safe_mode": true,
   "source": {
     "experiment_result_collection_packet": "data/experiment_result_collection_packet.json",
@@ -10,11 +10,11 @@
   },
   "summary": {
     "status": "needs_values",
-    "metric_card_count": 15,
-    "missing_public_url_count": 6,
+    "metric_card_count": 16,
+    "missing_public_url_count": 4,
     "measurement_priority_count": 12,
     "post_log_measurement_handoff_count": 0,
-    "pending_result_field_count": 84,
+    "pending_result_field_count": 90,
     "ready_to_import_count": 0,
     "wide_ready_to_import_count": 0,
     "entry_csv_path": "data/experiment_result_entry_template.csv",
@@ -270,102 +270,6 @@
           "new_value": "",
           "evidence_note": "",
           "collection_hint": "Open X analytics for https://x.com/i/web/status/2069786481556635841 and record subs_delta."
-        }
-      ]
-    },
-    {
-      "post_id": "FP-AUTO-273",
-      "experiment_format": "Release-art image + story hook",
-      "platform": "Facebook",
-      "song": "Every Pearl in Carmel",
-      "post_url": "https://www.facebook.com/903693509504290_122120594571249470",
-      "published_date": "2026-06-30",
-      "source_row": "32",
-      "pending_field_count": 6,
-      "ready_field_count": 0,
-      "wide_ready_field_count": 0,
-      "pending_fields": [
-        "views",
-        "likes",
-        "comments",
-        "shares",
-        "saves",
-        "subs_delta"
-      ],
-      "ready_fields": [],
-      "wide_ready_fields": [],
-      "wide_entry_row": {
-        "experiment_format": "Release-art image + story hook",
-        "post_id": "FP-AUTO-273",
-        "platform": "Facebook",
-        "song": "Every Pearl in Carmel",
-        "post_url": "https://www.facebook.com/903693509504290_122120594571249470",
-        "published_date": "2026-06-30",
-        "source_row": "32",
-        "views": "",
-        "likes": "",
-        "comments": "",
-        "shares": "",
-        "saves": "",
-        "subs_delta": "",
-        "evidence_note": ""
-      },
-      "wide_entry_instruction": "Fill one wide entry CSV row in data/experiment_result_entry_wide_template.csv for this post; keep unknown metrics blank and include one evidence_note.",
-      "evidence_sources": [
-        {
-          "label": "Logged public post",
-          "url": "https://www.facebook.com/903693509504290_122120594571249470",
-          "instruction": "Open the public post to confirm the URL and visible engagement before entering metrics."
-        },
-        {
-          "label": "Meta Business Suite",
-          "url": "https://business.facebook.com/latest/insights",
-          "instruction": "Open post insights for the Lily Roo page post and copy the available result values."
-        }
-      ],
-      "collection_checklist": [
-        "Open the logged public post and confirm it matches this post_id.",
-        "Open the platform analytics or insights source listed for this card.",
-        "Copy only numeric values that are visible in the source.",
-        "Enter values in the wide entry CSV row for this post_id and source_row.",
-        "Add an evidence_note with source and collection date before import preview."
-      ],
-      "fields": [
-        {
-          "field": "views",
-          "new_value": "",
-          "evidence_note": "",
-          "collection_hint": "Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594571249470 and record views."
-        },
-        {
-          "field": "likes",
-          "new_value": "",
-          "evidence_note": "",
-          "collection_hint": "Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594571249470 and record likes."
-        },
-        {
-          "field": "comments",
-          "new_value": "",
-          "evidence_note": "",
-          "collection_hint": "Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594571249470 and record comments."
-        },
-        {
-          "field": "shares",
-          "new_value": "",
-          "evidence_note": "",
-          "collection_hint": "Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594571249470 and record shares."
-        },
-        {
-          "field": "saves",
-          "new_value": "",
-          "evidence_note": "",
-          "collection_hint": "Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594571249470 and record saves."
-        },
-        {
-          "field": "subs_delta",
-          "new_value": "",
-          "evidence_note": "",
-          "collection_hint": "Open Meta Business Suite for https://www.facebook.com/903693509504290_122120594571249470 and record subs_delta."
         }
       ]
     },
@@ -1424,17 +1328,201 @@
           "collection_hint": "Open X analytics for https://x.com/i/web/status/2072487612313419803 and record subs_delta."
         }
       ]
+    },
+    {
+      "post_id": "FP-BRAND-AM-01-13-FACEBOOK",
+      "experiment_format": "Release-art image + story hook",
+      "platform": "Facebook",
+      "song": "Analog Myth",
+      "post_url": "https://www.facebook.com/lilyrooartist/posts/122120959905249470",
+      "published_date": "2026-07-04",
+      "source_row": "50",
+      "pending_field_count": 6,
+      "ready_field_count": 0,
+      "wide_ready_field_count": 0,
+      "pending_fields": [
+        "views",
+        "likes",
+        "comments",
+        "shares",
+        "saves",
+        "subs_delta"
+      ],
+      "ready_fields": [],
+      "wide_ready_fields": [],
+      "wide_entry_row": {
+        "experiment_format": "Release-art image + story hook",
+        "post_id": "FP-BRAND-AM-01-13-FACEBOOK",
+        "platform": "Facebook",
+        "song": "Analog Myth",
+        "post_url": "https://www.facebook.com/lilyrooartist/posts/122120959905249470",
+        "published_date": "2026-07-04",
+        "source_row": "50",
+        "views": "",
+        "likes": "",
+        "comments": "",
+        "shares": "",
+        "saves": "",
+        "subs_delta": "",
+        "evidence_note": ""
+      },
+      "wide_entry_instruction": "Fill one wide entry CSV row in data/experiment_result_entry_wide_template.csv for this post; keep unknown metrics blank and include one evidence_note.",
+      "evidence_sources": [
+        {
+          "label": "Logged public post",
+          "url": "https://www.facebook.com/lilyrooartist/posts/122120959905249470",
+          "instruction": "Open the public post to confirm the URL and visible engagement before entering metrics."
+        },
+        {
+          "label": "Meta Business Suite",
+          "url": "https://business.facebook.com/latest/insights",
+          "instruction": "Open post insights for the Lily Roo page post and copy the available result values."
+        }
+      ],
+      "collection_checklist": [
+        "Open the logged public post and confirm it matches this post_id.",
+        "Open the platform analytics or insights source listed for this card.",
+        "Copy only numeric values that are visible in the source.",
+        "Enter values in the wide entry CSV row for this post_id and source_row.",
+        "Add an evidence_note with source and collection date before import preview."
+      ],
+      "fields": [
+        {
+          "field": "views",
+          "new_value": "",
+          "evidence_note": "",
+          "collection_hint": "Open Meta Business Suite for https://www.facebook.com/lilyrooartist/posts/122120959905249470 and record views."
+        },
+        {
+          "field": "likes",
+          "new_value": "",
+          "evidence_note": "",
+          "collection_hint": "Open Meta Business Suite for https://www.facebook.com/lilyrooartist/posts/122120959905249470 and record likes."
+        },
+        {
+          "field": "comments",
+          "new_value": "",
+          "evidence_note": "",
+          "collection_hint": "Open Meta Business Suite for https://www.facebook.com/lilyrooartist/posts/122120959905249470 and record comments."
+        },
+        {
+          "field": "shares",
+          "new_value": "",
+          "evidence_note": "",
+          "collection_hint": "Open Meta Business Suite for https://www.facebook.com/lilyrooartist/posts/122120959905249470 and record shares."
+        },
+        {
+          "field": "saves",
+          "new_value": "",
+          "evidence_note": "",
+          "collection_hint": "Open Meta Business Suite for https://www.facebook.com/lilyrooartist/posts/122120959905249470 and record saves."
+        },
+        {
+          "field": "subs_delta",
+          "new_value": "",
+          "evidence_note": "",
+          "collection_hint": "Open Meta Business Suite for https://www.facebook.com/lilyrooartist/posts/122120959905249470 and record subs_delta."
+        }
+      ]
+    },
+    {
+      "post_id": "FP-BRAND-AM-01-13-X",
+      "experiment_format": "Release-art image + story hook",
+      "platform": "X",
+      "song": "Analog Myth",
+      "post_url": "https://x.com/i/web/status/2073410401006751908",
+      "published_date": "2026-07-04",
+      "source_row": "51",
+      "pending_field_count": 6,
+      "ready_field_count": 0,
+      "wide_ready_field_count": 0,
+      "pending_fields": [
+        "views",
+        "likes",
+        "comments",
+        "shares",
+        "saves",
+        "subs_delta"
+      ],
+      "ready_fields": [],
+      "wide_ready_fields": [],
+      "wide_entry_row": {
+        "experiment_format": "Release-art image + story hook",
+        "post_id": "FP-BRAND-AM-01-13-X",
+        "platform": "X",
+        "song": "Analog Myth",
+        "post_url": "https://x.com/i/web/status/2073410401006751908",
+        "published_date": "2026-07-04",
+        "source_row": "51",
+        "views": "",
+        "likes": "",
+        "comments": "",
+        "shares": "",
+        "saves": "",
+        "subs_delta": "",
+        "evidence_note": ""
+      },
+      "wide_entry_instruction": "Fill one wide entry CSV row in data/experiment_result_entry_wide_template.csv for this post; keep unknown metrics blank and include one evidence_note.",
+      "evidence_sources": [
+        {
+          "label": "Logged public post",
+          "url": "https://x.com/i/web/status/2073410401006751908",
+          "instruction": "Open the public post to confirm the URL and visible engagement before entering metrics."
+        },
+        {
+          "label": "X Analytics",
+          "url": "https://analytics.x.com/",
+          "instruction": "Use the logged post URL or post ID to find the post and copy visible analytics values."
+        }
+      ],
+      "collection_checklist": [
+        "Open the logged public post and confirm it matches this post_id.",
+        "Open the platform analytics or insights source listed for this card.",
+        "Copy only numeric values that are visible in the source.",
+        "Enter values in the wide entry CSV row for this post_id and source_row.",
+        "Add an evidence_note with source and collection date before import preview."
+      ],
+      "fields": [
+        {
+          "field": "views",
+          "new_value": "",
+          "evidence_note": "",
+          "collection_hint": "Open X analytics for https://x.com/i/web/status/2073410401006751908 and record views."
+        },
+        {
+          "field": "likes",
+          "new_value": "",
+          "evidence_note": "",
+          "collection_hint": "Open X analytics for https://x.com/i/web/status/2073410401006751908 and record likes."
+        },
+        {
+          "field": "comments",
+          "new_value": "",
+          "evidence_note": "",
+          "collection_hint": "Open X analytics for https://x.com/i/web/status/2073410401006751908 and record comments."
+        },
+        {
+          "field": "shares",
+          "new_value": "",
+          "evidence_note": "",
+          "collection_hint": "Open X analytics for https://x.com/i/web/status/2073410401006751908 and record shares."
+        },
+        {
+          "field": "saves",
+          "new_value": "",
+          "evidence_note": "",
+          "collection_hint": "Open X analytics for https://x.com/i/web/status/2073410401006751908 and record saves."
+        },
+        {
+          "field": "subs_delta",
+          "new_value": "",
+          "evidence_note": "",
+          "collection_hint": "Open X analytics for https://x.com/i/web/status/2073410401006751908 and record subs_delta."
+        }
+      ]
     }
   ],
   "missing_public_url_cards": [
-    {
-      "post_id": "FP-AUTO-272",
-      "experiment_format": "Release-art image + story hook",
-      "platform": "Instagram",
-      "song": "Every Pearl in Carmel",
-      "status": "not_in_published_log",
-      "next_action": "Publish or log the public URL before result metrics can be collected."
-    },
     {
       "post_id": "FP-AUTO-277",
       "experiment_format": "Release-art image + story hook",
@@ -1448,14 +1536,6 @@
       "experiment_format": "Release-art image + story hook",
       "platform": "Instagram",
       "song": "Twelve Dollars",
-      "status": "not_in_published_log",
-      "next_action": "Publish or log the public URL before result metrics can be collected."
-    },
-    {
-      "post_id": "FP-AUTO-274",
-      "experiment_format": "Short video clip + platform-native CTA",
-      "platform": "TikTok",
-      "song": "Every Pearl in Carmel",
       "status": "not_in_published_log",
       "next_action": "Publish or log the public URL before result metrics can be collected."
     },
@@ -1480,27 +1560,6 @@
     {
       "action": "collect_metrics",
       "priority": 1,
-      "post_id": "FP-AUTO-273",
-      "platform": "Facebook",
-      "song": "Every Pearl in Carmel",
-      "experiment_format": "Release-art image + story hook",
-      "post_url": "https://www.facebook.com/903693509504290_122120594571249470",
-      "source_row": "32",
-      "pending_fields": [
-        "views",
-        "likes",
-        "comments",
-        "shares",
-        "saves",
-        "subs_delta"
-      ],
-      "direct_preview_command_template": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-273 --source-row 32 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run",
-      "direct_apply_command_template": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-273 --source-row 32 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin",
-      "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 13 logged post(s), 3 missing URL(s) in this format."
-    },
-    {
-      "action": "collect_metrics",
-      "priority": 1,
       "post_id": "FP-AUTO-278",
       "platform": "Facebook",
       "song": "The Other One's Charging",
@@ -1517,7 +1576,7 @@
       ],
       "direct_preview_command_template": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-278 --source-row 30 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run",
       "direct_apply_command_template": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-278 --source-row 30 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin",
-      "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 13 logged post(s), 3 missing URL(s) in this format."
+      "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 14 logged post(s), 2 missing URL(s) in this format."
     },
     {
       "action": "collect_metrics",
@@ -1538,7 +1597,28 @@
       ],
       "direct_preview_command_template": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-283 --source-row 41 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run",
       "direct_apply_command_template": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-283 --source-row 41 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin",
-      "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 13 logged post(s), 3 missing URL(s) in this format."
+      "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 14 logged post(s), 2 missing URL(s) in this format."
+    },
+    {
+      "action": "collect_metrics",
+      "priority": 1,
+      "post_id": "FP-BRAND-AM-01-13-FACEBOOK",
+      "platform": "Facebook",
+      "song": "Analog Myth",
+      "experiment_format": "Release-art image + story hook",
+      "post_url": "https://www.facebook.com/lilyrooartist/posts/122120959905249470",
+      "source_row": "50",
+      "pending_fields": [
+        "views",
+        "likes",
+        "comments",
+        "shares",
+        "saves",
+        "subs_delta"
+      ],
+      "direct_preview_command_template": "python3 scripts/update_experiment_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --source-row 50 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run",
+      "direct_apply_command_template": "python3 scripts/update_experiment_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --source-row 50 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin",
+      "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 14 logged post(s), 2 missing URL(s) in this format."
     },
     {
       "action": "collect_metrics",
@@ -1559,7 +1639,7 @@
       ],
       "direct_preview_command_template": "python3 scripts/update_experiment_results.py --post-id FP-LAUNCH-ANALOG-MYTH-FACEBOOK --source-row 39 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run",
       "direct_apply_command_template": "python3 scripts/update_experiment_results.py --post-id FP-LAUNCH-ANALOG-MYTH-FACEBOOK --source-row 39 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin",
-      "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 13 logged post(s), 3 missing URL(s) in this format."
+      "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 14 logged post(s), 2 missing URL(s) in this format."
     },
     {
       "action": "collect_metrics",
@@ -1580,7 +1660,7 @@
       ],
       "direct_preview_command_template": "python3 scripts/update_experiment_results.py --post-id FP-LAUNCH-ANALOG-MYTH-FACEBOOK-EVENING --source-row 46 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run",
       "direct_apply_command_template": "python3 scripts/update_experiment_results.py --post-id FP-LAUNCH-ANALOG-MYTH-FACEBOOK-EVENING --source-row 46 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin",
-      "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 13 logged post(s), 3 missing URL(s) in this format."
+      "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 14 logged post(s), 2 missing URL(s) in this format."
     },
     {
       "action": "collect_metrics",
@@ -1601,7 +1681,7 @@
       ],
       "direct_preview_command_template": "python3 scripts/update_experiment_results.py --post-id FP-LAUNCH-ANALOG-MYTH-FACEBOOK-NIGHT --source-row 49 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run",
       "direct_apply_command_template": "python3 scripts/update_experiment_results.py --post-id FP-LAUNCH-ANALOG-MYTH-FACEBOOK-NIGHT --source-row 49 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin",
-      "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 13 logged post(s), 3 missing URL(s) in this format."
+      "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 14 logged post(s), 2 missing URL(s) in this format."
     },
     {
       "action": "collect_metrics",
@@ -1622,7 +1702,7 @@
       ],
       "direct_preview_command_template": "python3 scripts/update_experiment_results.py --post-id FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK --source-row 36 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run",
       "direct_apply_command_template": "python3 scripts/update_experiment_results.py --post-id FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK --source-row 36 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin",
-      "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 13 logged post(s), 3 missing URL(s) in this format."
+      "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 14 logged post(s), 2 missing URL(s) in this format."
     },
     {
       "action": "collect_metrics",
@@ -1643,7 +1723,7 @@
       ],
       "direct_preview_command_template": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-276 --source-row 38 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run",
       "direct_apply_command_template": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-276 --source-row 38 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin",
-      "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 13 logged post(s), 3 missing URL(s) in this format."
+      "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 14 logged post(s), 2 missing URL(s) in this format."
     },
     {
       "action": "collect_metrics",
@@ -1664,7 +1744,7 @@
       ],
       "direct_preview_command_template": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-281 --source-row 42 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run",
       "direct_apply_command_template": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-281 --source-row 42 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin",
-      "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 13 logged post(s), 3 missing URL(s) in this format."
+      "reason": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 14 logged post(s), 2 missing URL(s) in this format."
     },
     {
       "action": "collect_metrics",
@@ -1682,7 +1762,7 @@
       ],
       "direct_preview_command_template": "python3 scripts/update_experiment_results.py --post-id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --source-row 26 --shares VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run",
       "direct_apply_command_template": "python3 scripts/update_experiment_results.py --post-id FP-SHORT-ANALOG-MYTH-YOUTUBE-SHORTS-CTA --source-row 26 --shares VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin",
-      "reason": "Already published and logged; measuring it reduces the Short video clip + platform-native CTA evidence gap. 1 logged post(s), 3 missing URL(s) in this format."
+      "reason": "Already published and logged; measuring it reduces the Short video clip + platform-native CTA evidence gap. 1 logged post(s), 2 missing URL(s) in this format."
     },
     {
       "action": "collect_metrics",
@@ -1705,9 +1785,9 @@
     {
       "action": "clear_platform_blocker",
       "priority": 4,
-      "post_id": "FP-AUTO-272",
+      "post_id": "FP-AUTO-277",
       "platform": "Instagram",
-      "song": "Every Pearl in Carmel",
+      "song": "The Other One's Charging",
       "experiment_format": "Release-art image + story hook",
       "post_url": "",
       "source_row": "",
@@ -1719,20 +1799,20 @@
       "paste_text_path": "",
       "log_preview_command": "",
       "log_apply_command": "",
-      "scheduled_at": "2026-06-28T21:35:00-04:00",
-      "scheduled_at_utc": "2026-06-29T01:35:00+00:00",
+      "scheduled_at": "2026-06-29T21:35:00-04:00",
+      "scheduled_at_utc": "2026-06-30T01:35:00+00:00",
       "scheduler_status": "",
-      "reason": "Platform work is blocked; clear the platform repair gate before URL logging can produce metrics. 13 logged post(s), 3 missing URL(s) in this format."
+      "reason": "Platform work is blocked; clear the platform repair gate before URL logging can produce metrics. 14 logged post(s), 2 missing URL(s) in this format."
     }
   ],
   "first_measurement_runbook": {
     "status": "ready_to_collect_metrics",
-    "post_id": "FP-AUTO-273",
+    "post_id": "FP-AUTO-278",
     "platform": "Facebook",
-    "song": "Every Pearl in Carmel",
+    "song": "The Other One's Charging",
     "experiment_format": "Release-art image + story hook",
-    "post_url": "https://www.facebook.com/903693509504290_122120594571249470",
-    "source_row": "32",
+    "post_url": "https://www.facebook.com/903693509504290_122120594715249470",
+    "source_row": "30",
     "pending_fields": [
       "views",
       "likes",
@@ -1743,8 +1823,8 @@
     ],
     "wide_entry_csv_path": "data/experiment_result_entry_wide_template.csv",
     "entry_csv_path": "data/experiment_result_entry_template.csv",
-    "direct_preview_command_template": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-273 --source-row 32 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run",
-    "direct_apply_command_template": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-273 --source-row 32 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin",
+    "direct_preview_command_template": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-278 --source-row 30 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run",
+    "direct_apply_command_template": "python3 scripts/update_experiment_results.py --post-id FP-AUTO-278 --source-row 30 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin",
     "wide_import_preview_command": "python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run",
     "wide_import_apply_command": "",
     "evidence_note_template": "Facebook analytics YYYY-MM-DD",
@@ -1752,7 +1832,7 @@
     "evidence_sources": [
       {
         "label": "Logged public post",
-        "url": "https://www.facebook.com/903693509504290_122120594571249470",
+        "url": "https://www.facebook.com/903693509504290_122120594715249470",
         "instruction": "Open the public post to confirm the URL and visible engagement before entering metrics."
       },
       {
@@ -1775,7 +1855,7 @@
       "Published_Log.csv contains the imported result values and result_evidence notes after apply.",
       "The growth dashboard refreshes with a lower pending_result_field_count."
     ],
-    "why": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 13 logged post(s), 3 missing URL(s) in this format.",
+    "why": "Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 14 logged post(s), 2 missing URL(s) in this format.",
     "guardrail": "Do not guess metrics; leave unknown values blank and never apply without an evidence_note."
   },
   "post_log_measurement_handoff": {
