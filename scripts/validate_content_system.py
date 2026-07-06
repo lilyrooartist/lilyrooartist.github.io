@@ -457,6 +457,7 @@ def validate_generated_outputs(failures):
         x_main_links = int(summary.get("x_main_album_link_count") or 0)
         expected_x_main_links = int(summary.get("expected_x_main_album_link_count") or 0)
         redirect = tracking.get("redirect") or {}
+        click_endpoint = tracking.get("click_endpoint") or {}
         if (
             tracking.get("safe_mode") is True
             and summary.get("status") == "ready"
@@ -469,11 +470,17 @@ def validate_generated_outputs(failures):
             and not summary.get("issue_counts")
             and summary.get("redirect_status") == "ready"
             and redirect.get("status") == "ready"
+            and summary.get("click_endpoint_status") == "ready"
+            and summary.get("click_endpoint_dry_run") is True
+            and click_endpoint.get("safe_mode") is True
+            and click_endpoint.get("status") == "ready"
+            and click_endpoint.get("http_status") == 200
+            and click_endpoint.get("dry_run") is True
             and BRAND_CLICK_TRACKING_HEALTH_REPORT.exists()
         ):
-            ok("brand click tracking health verifies all future campaign links")
+            ok("brand click tracking health verifies all future campaign links and live dry-run capture")
         else:
-            fail("brand_click_tracking_health.json does not prove all future campaign links are trackable", failures)
+            fail("brand_click_tracking_health.json does not prove all future campaign links and dry-run click capture are ready", failures)
     else:
         fail("brand_click_tracking_health.json missing; run scripts/build_brand_click_tracking_health.py", failures)
     if BRAND_GROWTH_PULSE.exists():
@@ -4104,6 +4111,8 @@ def validate_generated_outputs(failures):
             and "go/am.html" in tracking_text
             and "EXPECTED_DESTINATIONS" in tracking_text
             and "This check is read-only and does not post" in tracking_text
+            and "dry_run=1" in tracking_text
+            and "LilyRooClickDryRun" in tracking_text
             and "--apply" not in tracking_text
             and "post_" not in tracking_text.replace("post_id", "").replace("post_parts", "")
         ):
@@ -4687,6 +4696,7 @@ def validate_generated_outputs(failures):
         report_index_text = (ROOT / "admin" / "reports" / "index.html").read_text(encoding="utf-8") if (ROOT / "admin" / "reports" / "index.html").exists() else ""
         if (
             "Brand Click Tracking Health" in click_tracking_report_text
+            and "Live Endpoint Dry Run" in click_tracking_report_text
             and "Redirect Checks" in click_tracking_report_text
             and "Future Rows" in click_tracking_report_text
             and "Guardrails" in click_tracking_report_text

@@ -4,10 +4,12 @@ from __future__ import annotations
 import csv
 import json
 import re
+import urllib.error
+import urllib.request
 from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
-from urllib.parse import parse_qs, urlparse
+from urllib.parse import parse_qs, quote, urlparse
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -23,6 +25,8 @@ CAMPAIGN_PREFIX = "FP-BRAND-AM"
 TRACKING_HOST = "www.lilyroo.com"
 TRACKING_PATH = "/go/am.html"
 EXPECTED_DESTINATIONS = {"album", "echo", "video"}
+CLICK_DRY_RUN_BASE = "https://www.lilyroo.com/api/social/click"
+CLICK_DRY_RUN_USER_AGENT = "LilyRooClickDryRun/1.0"
 
 
 def read_csv(path: Path) -> list[dict]:
@@ -120,6 +124,81 @@ def redirect_health() -> dict:
     }
 
 
+def click_endpoint_dry_run(post_id: str | None) -> dict:
+    expected_post = str(post_id or "").strip().lower()
+    result = {
+        "status": "attention",
+        "safe_mode": True,
+        "dry_run": False,
+        "expected_post_id": expected_post,
+        "url": "",
+    }
+    if not expected_post:
+        return {**result, "error": "missing_campaign_id"}
+
+    url = f"{CLICK_DRY_RUN_BASE}?dry_run=1&p={quote(expected_post)}&to=album"
+    result["url"] = url
+    request = urllib.request.Request(
+        url,
+        headers={
+            "Accept": "application/json",
+            "Origin": "https://www.lilyroo.com",
+            "User-Agent": CLICK_DRY_RUN_USER_AGENT,
+        },
+        method="GET",
+    )
+
+    try:
+        with urllib.request.urlopen(request, timeout=20) as response:
+            body = response.read().decode("utf-8")
+            http_status = response.status
+    except urllib.error.HTTPError as error:
+        body = error.read().decode("utf-8", errors="replace")
+        return {
+            **result,
+            "http_status": error.code,
+            "error": f"http_error:{error.code}",
+            "body_preview": body[:500],
+        }
+    except Exception as error:
+        return {**result, "error": f"{type(error).__name__}: {error}"}
+
+    try:
+        payload = json.loads(body)
+    except json.JSONDecodeError as error:
+        return {
+            **result,
+            "http_status": http_status,
+            "error": f"json_error:{error}",
+            "body_preview": body[:500],
+        }
+
+    event = payload.get("event") or {}
+    reported_post = str(event.get("post_id") or "").strip().lower()
+    dry_run = payload.get("dry_run") is True
+    ok = (
+        http_status == 200
+        and payload.get("ok") is True
+        and dry_run
+        and reported_post == expected_post
+        and event.get("type") == "brand_campaign_click"
+        and event.get("destination") == "album"
+    )
+    return {
+        **result,
+        "status": "ready" if ok else "attention",
+        "http_status": http_status,
+        "ok": payload.get("ok") is True,
+        "dry_run": dry_run,
+        "reported_post_id": reported_post,
+        "platform": event.get("platform") or "",
+        "wave": event.get("wave") or "",
+        "track": event.get("track") or "",
+        "destination": event.get("destination") or "",
+        "recorded_at": event.get("recorded_at") or "",
+    }
+
+
 def build_payload() -> dict:
     now = datetime.now(timezone.utc)
     visible_ids = future_ids()
@@ -202,6 +281,8 @@ def build_payload() -> dict:
         })
 
     redirect = redirect_health()
+    sample_id = next((row["id"] for row in rows if str(row.get("platform") or "").lower() == "x"), rows[0]["id"] if rows else "")
+    click_endpoint = click_endpoint_dry_run(sample_id)
     ready_rows = sum(1 for row in rows if row["ok"])
     broken_rows = len(rows) - ready_rows
     total_urls = sum(row["tracking_url_count"] for row in rows)
@@ -231,10 +312,14 @@ def build_payload() -> dict:
             "track_counts": dict(sorted(track_counts.items())),
             "issue_counts": dict(sorted(issue_counts.items())),
             "redirect_status": redirect["status"],
+            "click_endpoint_status": click_endpoint["status"],
+            "click_endpoint_http_status": click_endpoint.get("http_status"),
+            "click_endpoint_dry_run": click_endpoint.get("dry_run") is True,
             "report_path": rel(REPORT),
             "refresh_command": "python3 scripts/build_brand_click_tracking_health.py",
         },
         "redirect": redirect,
+        "click_endpoint": click_endpoint,
         "rows": rows,
         "guardrails": [
             "This check is read-only and does not post.",
@@ -242,6 +327,7 @@ def build_payload() -> dict:
             "Click capture stores campaign metadata only and does not store IP addresses.",
             "Every future Analog Myth auto post should carry album, Echo Thread, and video destinations.",
             "Every future X Analog Myth auto post should carry the album destination in the main post text.",
+            "The live click endpoint health probe uses dry_run=1 so it cannot create fake campaign clicks.",
         ],
     }
 
@@ -259,11 +345,22 @@ def build_markdown(payload: dict) -> str:
         f"- Tracking URLs checked: **{summary['tracking_url_count']} / {summary['expected_tracking_url_count']}**",
         f"- X main-post album links: **{summary['x_main_album_link_count']} / {summary['expected_x_main_album_link_count']}**",
         f"- Redirect page: **{summary['redirect_status']}**",
+        f"- Live click endpoint dry run: **{summary['click_endpoint_status']}**",
         f"- Destinations: **{', '.join(f'{key}: {value}' for key, value in summary['destination_counts'].items()) or 'none'}**",
         f"- Issues: **{', '.join(f'{key}: {value}' for key, value in summary['issue_counts'].items()) or 'none'}**",
         "",
-        "## Redirect Checks",
+        "## Live Endpoint Dry Run",
     ]
+    endpoint = payload.get("click_endpoint") or {}
+    lines.extend([
+        f"- Status: **{endpoint.get('status') or 'unknown'}**",
+        f"- HTTP status: **{endpoint.get('http_status') or 'n/a'}**",
+        f"- Dry run: **{'yes' if endpoint.get('dry_run') is True else 'no'}**",
+        f"- Probe campaign id: `{endpoint.get('expected_post_id') or 'n/a'}`",
+        f"- Event: **{endpoint.get('platform') or 'unknown'} / {endpoint.get('destination') or 'unknown'} / track {endpoint.get('track') or 'unknown'}**",
+        "",
+        "## Redirect Checks",
+    ])
     for key, value in (payload.get("redirect") or {}).get("checks", {}).items():
         lines.append(f"- {key}: **{'ok' if value else 'attention'}**")
     lines.extend(["", "## Future Rows"])

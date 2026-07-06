@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-07-06T20:28:33.648279Z",
+  "generated_at": "2026-07-06T20:37:13.902891Z",
   "safe_mode": true,
   "source": {
     "future_posts": "admin/future-posts.json",
     "brand_growth_readout": "data/brand_growth_readout.json",
     "scheduler_endpoint": "https://www.lilyroo.com/api/social/scheduler/dry-run",
-    "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/32fd7e199f96608b14f8d6c25cafd88a4a3beb05/admin/future-posts.json"
+    "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/184caa27306f49b0755a91f91faf284e4782f1a4/admin/future-posts.json"
   },
   "summary": {
     "status": "ready",
@@ -18,8 +18,8 @@
     ],
     "scheduler_http_status": 200,
     "scheduler_auth_method": "bearer",
-    "scheduler_queue_source": "live_queue_fallback",
-    "scheduler_fallback_reason": "Commit queue probe returned HTTP 500: HTTP 500: Internal Server Error",
+    "scheduler_queue_source": "commit_queue_url",
+    "scheduler_fallback_reason": "",
     "scheduler_due_count": 2,
     "scheduler_would_post_count": 2,
     "scheduler_blocked_count": 0,

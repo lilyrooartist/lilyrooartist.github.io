@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-06T20:28:33.559571Z",
+  "generated_at": "2026-07-06T20:37:13.713224Z",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -42,6 +42,9 @@
     },
     "issue_counts": {},
     "redirect_status": "ready",
+    "click_endpoint_status": "ready",
+    "click_endpoint_http_status": 200,
+    "click_endpoint_dry_run": true,
     "report_path": "admin/reports/brand-click-tracking-health.md",
     "refresh_command": "python3 scripts/build_brand_click_tracking_health.py"
   },
@@ -59,6 +62,21 @@
       "supports_echo": true,
       "supports_video": true
     }
+  },
+  "click_endpoint": {
+    "status": "ready",
+    "safe_mode": true,
+    "dry_run": true,
+    "expected_post_id": "fp-brand-am-04-spilling-the-tea-x",
+    "url": "https://www.lilyroo.com/api/social/click?dry_run=1&p=fp-brand-am-04-spilling-the-tea-x&to=album",
+    "http_status": 200,
+    "ok": true,
+    "reported_post_id": "fp-brand-am-04-spilling-the-tea-x",
+    "platform": "x",
+    "wave": "track-moments",
+    "track": "04",
+    "destination": "album",
+    "recorded_at": "2026-07-06T20:37:13.842Z"
   },
   "rows": [
     {
@@ -2880,6 +2898,7 @@
     "Tracking links use first-party Lily Roo redirect URLs.",
     "Click capture stores campaign metadata only and does not store IP addresses.",
     "Every future Analog Myth auto post should carry album, Echo Thread, and video destinations.",
-    "Every future X Analog Myth auto post should carry the album destination in the main post text."
+    "Every future X Analog Myth auto post should carry the album destination in the main post text.",
+    "The live click endpoint health probe uses dry_run=1 so it cannot create fake campaign clicks."
   ]
 }

@@ -1,6 +1,6 @@
 # Brand Click Tracking Health - Lily Roo
 
-Generated: 2026-07-06T20:28:33.559571Z
+Generated: 2026-07-06T20:37:13.713224Z
 
 ## Summary
 - Status: **ready**
@@ -8,8 +8,16 @@ Generated: 2026-07-06T20:28:33.559571Z
 - Tracking URLs checked: **174 / 174**
 - X main-post album links: **29 / 29**
 - Redirect page: **ready**
+- Live click endpoint dry run: **ready**
 - Destinations: **album: 58, echo: 58, video: 58**
 - Issues: **none**
+
+## Live Endpoint Dry Run
+- Status: **ready**
+- HTTP status: **200**
+- Dry run: **yes**
+- Probe campaign id: `fp-brand-am-04-spilling-the-tea-x`
+- Event: **x / album / track 04**
 
 ## Redirect Checks
 - exists: **ok**
@@ -175,3 +183,4 @@ Generated: 2026-07-06T20:28:33.559571Z
 - Click capture stores campaign metadata only and does not store IP addresses.
 - Every future Analog Myth auto post should carry album, Echo Thread, and video destinations.
 - Every future X Analog Myth auto post should carry the album destination in the main post text.
+- The live click endpoint health probe uses dry_run=1 so it cannot create fake campaign clicks.
