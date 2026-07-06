@@ -4354,6 +4354,16 @@ def validate_generated_outputs(failures):
         ok("social executor validates Instagram account resolution before retry-ready dry runs")
     else:
         fail("social executor missing Instagram account-resolution dry-run guard", failures)
+    if (
+        "SITE_SHARE_CLICK_PATTERN" in worker_text
+        and "site-share-(album|echo|video|track-" in worker_text
+        and "isTrackableClickPostId(postId)" in worker_text
+        and 'wave: "site-share"' in worker_text
+        and 'platform: "site"' in worker_text
+    ):
+        ok("social executor accepts first-party site-share click tracking")
+    else:
+        fail("social executor missing first-party site-share click tracking", failures)
     if SOCIAL_EXECUTION_RESET.exists():
         reset_text = SOCIAL_EXECUTION_RESET.read_text(encoding="utf-8")
         if (
@@ -4956,14 +4966,14 @@ def validate_simple_admin_dashboard(failures):
     text = ADMIN_INDEX.read_text(encoding="utf-8") if ADMIN_INDEX.exists() else ""
     checks = {
         "top status strip": 'id="simple-status-strip"' in text and ".simple-status-strip" in text,
-        "status heading is explicit": "Lily Roo Status" in text,
-        "recent activity column": 'id="simple-recent-activity"' in text and "Recent Activity & Results" in text,
+        "status heading is explicit": 'id="simple-status-heading">Status<' in text,
+        "recent activity column": 'id="simple-recent-activity"' in text and "Recent Activity and Results" in text,
         "upcoming activity column": 'id="simple-upcoming-activity"' in text and "Upcoming Activities" in text,
         "two-column layout": ".simple-columns{display:grid;grid-template-columns" in text,
-        "five status cards across top": ".simple-status-strip{display:grid;grid-template-columns:repeat(5,minmax(0,1fr))" in text,
-        "clear result wording": "A plain-English record of what just happened" in text,
-        "upcoming wording is scheduled": "Automatic posts and follow-up checks" in text,
-        "manual posting absent from status": "No manual posting in active campaign" in text,
+        "four status cards across top": ".simple-status-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))" in text,
+        "clear result wording": "What went out, where it went, and whether the public link or result is saved." in text,
+        "upcoming wording is scheduled": "The next automatic posts and follow-up checks already on the calendar." in text,
+        "manual posting appears only as cleanup": "Remove manual-only posting from the active plan" in text and "No manual posting in active campaign" not in text,
         "debug details hidden by default": "#panel-dashboard .diagnostic-details{display:none}" in text,
         "debug details opt-in": "show-debug-dashboard" in text and "debug')==='1'" in text,
         "default loader skips diagnostics": "if(!showDebugDashboard) return;" in text,
@@ -5048,6 +5058,8 @@ def validate_analog_myth_launch_share(failures):
     analog_text = (ROOT / "analog-myth.html").read_text(encoding="utf-8")
     style_text = (ROOT / "style.css").read_text(encoding="utf-8")
     script_text = (ROOT / "script.js").read_text(encoding="utf-8")
+    redirect_text = (ROOT / "go" / "am.html").read_text(encoding="utf-8")
+    click_health_text = (ROOT / "scripts" / "build_brand_click_tracking_health.py").read_text(encoding="utf-8")
     required_html = [
         'class="launch-share-strip"',
         "Pass the Room",
@@ -5055,11 +5067,27 @@ def validate_analog_myth_launch_share(failures):
         "Share Podcast",
         "Share Video",
         "Track Shares",
-        'data-share-url="https://www.lilyroo.com/analog-myth.html"',
-        'data-share-url="https://www.lilyroo.com/podcasts/analog-myth.html"',
-        'data-share-url="https://youtu.be/_rtioKYbCFM"',
+        'data-share-url="https://www.lilyroo.com/go/am.html?p=site-share-album&amp;to=album"',
+        'data-share-url="https://www.lilyroo.com/go/am.html?p=site-share-echo&amp;to=echo"',
+        'data-share-url="https://www.lilyroo.com/go/am.html?p=site-share-video&amp;to=video"',
+        "site-share-track-01-13",
+        "site-share-track-08-the-power-of-light",
         "style.css?v=20260706-launch-share",
         "script.js?v=20260706-launch-share",
+    ]
+    required_redirect = [
+        'const TITLE_TRACK_VIDEO = "https://youtu.be/_rtioKYbCFM";',
+        "TRACKS[track]?.video || TITLE_TRACK_VIDEO",
+        "function safeAnchor",
+        "target.hash = anchor",
+        'params.get("anchor")',
+    ]
+    required_health = [
+        "SITE_SHARE_EXPECTED",
+        "site_share_health",
+        'click_endpoint_dry_run("site-share-album", "album")',
+        "Album Page Share Tracking",
+        "site_share_endpoint_status",
     ]
     required_css = [
         ".launch-share-strip",
@@ -5074,11 +5102,17 @@ def validate_analog_myth_launch_share(failures):
         'button.textContent = "Copied"',
     ]
     missing_html = [token for token in required_html if token not in analog_text]
+    missing_redirect = [token for token in required_redirect if token not in redirect_text]
+    missing_health = [token for token in required_health if token not in click_health_text]
     missing_css = [token for token in required_css if token not in style_text]
     missing_script = [token for token in required_script if token not in script_text]
-    if missing_html or missing_css or missing_script:
+    if missing_html or missing_redirect or missing_health or missing_css or missing_script:
         if missing_html:
             fail("Analog Myth launch share strip missing " + ", ".join(missing_html), failures)
+        if missing_redirect:
+            fail("Analog Myth share redirect missing " + ", ".join(missing_redirect), failures)
+        if missing_health:
+            fail("Analog Myth share tracking health missing " + ", ".join(missing_health), failures)
         if missing_css:
             fail("Analog Myth launch share CSS missing " + ", ".join(missing_css), failures)
         if missing_script:

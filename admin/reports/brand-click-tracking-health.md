@@ -1,6 +1,6 @@
 # Brand Click Tracking Health - Lily Roo
 
-Generated: 2026-07-06T21:13:45.187710Z
+Generated: 2026-07-06T21:35:47.683941Z
 
 ## Summary
 - Status: **ready**
@@ -11,6 +11,8 @@ Generated: 2026-07-06T21:13:45.187710Z
 - Visible full destination sets: **58 / 58**
 - Redirect page: **ready**
 - Live click endpoint dry run: **ready**
+- Album-page share tracking: **ready** (11 / 11)
+- Site-share endpoint dry run: **ready**
 - Destinations: **album: 58, echo: 58, video: 58**
 - Issues: **none**
 
@@ -37,6 +39,25 @@ Generated: 2026-07-06T21:13:45.187710Z
 - has_open_graph_image: **ok**
 - has_twitter_card: **ok**
 - has_twitter_image: **ok**
+
+## Album Page Share Tracking
+- Status: **ready**
+- Share URLs ready: **11 / 11**
+- Title-track video fallback: **ok**
+- Site-share endpoint dry run: **ready**
+- Site-share probe id: `site-share-album`
+- Site-share issues: **none**
+- `site-share-album` -> `album`: **ready**
+- `site-share-echo` -> `echo`: **ready**
+- `site-share-video` -> `video`: **ready**
+- `site-share-track-01-13` -> `album`#track-13: **ready**
+- `site-share-track-02-girls-camp` -> `album`#track-girls-camp: **ready**
+- `site-share-track-03-analog-myth` -> `album`#track-analog-myth: **ready**
+- `site-share-track-04-spilling-the-tea` -> `album`#track-spilling-the-tea: **ready**
+- `site-share-track-05-no-mortgage` -> `album`#track-no-mortgage: **ready**
+- `site-share-track-06-guards-down` -> `album`#track-guards-down: **ready**
+- `site-share-track-07-slow-walk` -> `album`#track-slow-walk: **ready**
+- `site-share-track-08-the-power-of-light` -> `album`#track-the-power-of-light: **ready**
 
 ## Future Rows
 - `FP-BRAND-AM-04-SPILLING-THE-TEA-X` X 2026-07-07T10:15:00-04:00 - **ready** (3 links)
@@ -250,4 +271,5 @@ Generated: 2026-07-06T21:13:45.187710Z
 - Every future Analog Myth auto post should carry album, Echo Thread, and video destinations.
 - Every future X Analog Myth auto post should carry the album destination in the main post text.
 - Every future Analog Myth auto post should expose an album link on the visible published surface.
+- Album-page share buttons should use first-party site-share tracking links.
 - The live click endpoint health probe uses dry_run=1 so it cannot create fake campaign clicks.

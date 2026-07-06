@@ -15,6 +15,8 @@ const SPOTIFY_OEMBED_URL = "https://open.spotify.com/oembed";
 const DEFAULT_QUEUE_URL = "https://www.lilyroo.com/admin/future-posts.json";
 const EXECUTION_STATE_PREFIX = "post:";
 const CLICK_STATE_PREFIX = "click:";
+const BRAND_CLICK_POST_PATTERN = /^fp-brand-am(?:-w\d+)?-\d{2}-.+-(x|facebook)$/;
+const SITE_SHARE_CLICK_PATTERN = /^site-share-(album|echo|video|track-\d{2}-[a-z0-9-]+)$/;
 const CLICK_TTL_SECONDS = 60 * 60 * 24 * 180;
 const MAX_SCHEDULE_ATTEMPTS = 3;
 const LAUNCH_FOCUS_DAYS = {
@@ -537,7 +539,7 @@ async function recordCampaignClick(request, env) {
   const url = new URL(request.url);
   const body = await requestPayload(request);
   const postId = text(body.post_id || body.postId || body.p || url.searchParams.get("post_id") || url.searchParams.get("p")).toLowerCase();
-  if (!/^fp-brand-am(?:-w\d+)?-\d{2}-.+-(x|facebook)$/.test(postId)) {
+  if (!isTrackableClickPostId(postId)) {
     return { status: 400, payload: { ok: false, error: "invalid_campaign_post" } };
   }
   const parts = campaignPostParts(postId);
@@ -656,7 +658,17 @@ function sortedCounts(map) {
 }
 
 function campaignPostParts(postId) {
-  const match = text(postId).toLowerCase().match(/^fp-brand-am(?:-w(\d+))?-(\d{2})-(.+)-(x|facebook)$/);
+  const normalized = text(postId).toLowerCase();
+  const siteShare = normalized.match(/^site-share-(album|echo|video|track-(\d{2})-([a-z0-9-]+))$/);
+  if (siteShare) {
+    return {
+      wave: "site-share",
+      track: siteShare[3] || "",
+      trackSlug: siteShare[4] || siteShare[1],
+      platform: "site",
+    };
+  }
+  const match = normalized.match(/^fp-brand-am(?:-w(\d+))?-(\d{2})-(.+)-(x|facebook)$/);
   if (!match) {
     return { wave: "unknown", track: "", trackSlug: "", platform: "social" };
   }
@@ -666,6 +678,11 @@ function campaignPostParts(postId) {
     trackSlug: match[3],
     platform: match[4],
   };
+}
+
+function isTrackableClickPostId(postId) {
+  const normalized = text(postId).toLowerCase();
+  return BRAND_CLICK_POST_PATTERN.test(normalized) || SITE_SHARE_CLICK_PATTERN.test(normalized);
 }
 
 function normalizeClickDestination(value) {

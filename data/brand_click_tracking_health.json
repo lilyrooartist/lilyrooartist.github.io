@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-06T21:13:45.187710Z",
+  "generated_at": "2026-07-06T21:35:47.683941Z",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -49,6 +49,10 @@
     "click_endpoint_status": "ready",
     "click_endpoint_http_status": 200,
     "click_endpoint_dry_run": true,
+    "site_share_status": "ready",
+    "site_share_url_count": 11,
+    "expected_site_share_url_count": 11,
+    "site_share_endpoint_status": "ready",
     "report_path": "admin/reports/brand-click-tracking-health.md",
     "refresh_command": "python3 scripts/build_brand_click_tracking_health.py"
   },
@@ -86,7 +90,121 @@
     "wave": "track-moments",
     "track": "04",
     "destination": "album",
-    "recorded_at": "2026-07-06T21:13:45.345Z"
+    "recorded_at": "2026-07-06T21:35:47.848Z"
+  },
+  "site_share": {
+    "status": "ready",
+    "expected_url_count": 11,
+    "url_count": 11,
+    "ready_url_count": 11,
+    "missing_ids": [],
+    "issue_counts": {},
+    "title_video_fallback": true,
+    "click_endpoint": {
+      "status": "ready",
+      "safe_mode": true,
+      "dry_run": true,
+      "expected_post_id": "site-share-album",
+      "url": "https://www.lilyroo.com/api/social/click?dry_run=1&p=site-share-album&to=album",
+      "http_status": 200,
+      "ok": true,
+      "reported_post_id": "site-share-album",
+      "platform": "site",
+      "wave": "site-share",
+      "track": "",
+      "destination": "album",
+      "recorded_at": "2026-07-06T21:35:47.949Z"
+    },
+    "rows": [
+      {
+        "id": "site-share-album",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-share-album&to=album",
+        "destination": "album",
+        "anchor": "",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-share-echo",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-share-echo&to=echo",
+        "destination": "echo",
+        "anchor": "",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-share-video",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-share-video&to=video",
+        "destination": "video",
+        "anchor": "",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-share-track-01-13",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-share-track-01-13&to=album&anchor=track-13",
+        "destination": "album",
+        "anchor": "track-13",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-share-track-02-girls-camp",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-share-track-02-girls-camp&to=album&anchor=track-girls-camp",
+        "destination": "album",
+        "anchor": "track-girls-camp",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-share-track-03-analog-myth",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-share-track-03-analog-myth&to=album&anchor=track-analog-myth",
+        "destination": "album",
+        "anchor": "track-analog-myth",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-share-track-04-spilling-the-tea",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-share-track-04-spilling-the-tea&to=album&anchor=track-spilling-the-tea",
+        "destination": "album",
+        "anchor": "track-spilling-the-tea",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-share-track-05-no-mortgage",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-share-track-05-no-mortgage&to=album&anchor=track-no-mortgage",
+        "destination": "album",
+        "anchor": "track-no-mortgage",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-share-track-06-guards-down",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-share-track-06-guards-down&to=album&anchor=track-guards-down",
+        "destination": "album",
+        "anchor": "track-guards-down",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-share-track-07-slow-walk",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-share-track-07-slow-walk&to=album&anchor=track-slow-walk",
+        "destination": "album",
+        "anchor": "track-slow-walk",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-share-track-08-the-power-of-light",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-share-track-08-the-power-of-light&to=album&anchor=track-the-power-of-light",
+        "destination": "album",
+        "anchor": "track-the-power-of-light",
+        "ok": true,
+        "issues": []
+      }
+    ]
   },
   "rows": [
     {
@@ -3316,6 +3434,7 @@
     "Every future Analog Myth auto post should carry album, Echo Thread, and video destinations.",
     "Every future X Analog Myth auto post should carry the album destination in the main post text.",
     "Every future Analog Myth auto post should expose an album link on the visible published surface.",
+    "Album-page share buttons should use first-party site-share tracking links.",
     "The live click endpoint health probe uses dry_run=1 so it cannot create fake campaign clicks."
   ]
 }

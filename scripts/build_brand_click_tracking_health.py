@@ -16,6 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 QUEUE = ROOT / "data" / "scheduled_posts.csv"
 FUTURE = ROOT / "admin" / "future-posts.json"
 REDIRECT = ROOT / "go" / "am.html"
+ANALOG_MYTH_PAGE = ROOT / "analog-myth.html"
 OUT = ROOT / "data" / "brand_click_tracking_health.json"
 REPORT = ROOT / "admin" / "reports" / "brand-click-tracking-health.md"
 REPORT_INDEX = ROOT / "admin" / "reports" / "index.html"
@@ -25,6 +26,19 @@ CAMPAIGN_PREFIX = "FP-BRAND-AM"
 TRACKING_HOST = "www.lilyroo.com"
 TRACKING_PATH = "/go/am.html"
 EXPECTED_DESTINATIONS = {"album", "echo", "video"}
+SITE_SHARE_EXPECTED = {
+    "site-share-album": {"destination": "album"},
+    "site-share-echo": {"destination": "echo"},
+    "site-share-video": {"destination": "video"},
+    "site-share-track-01-13": {"destination": "album", "anchor": "track-13"},
+    "site-share-track-02-girls-camp": {"destination": "album", "anchor": "track-girls-camp"},
+    "site-share-track-03-analog-myth": {"destination": "album", "anchor": "track-analog-myth"},
+    "site-share-track-04-spilling-the-tea": {"destination": "album", "anchor": "track-spilling-the-tea"},
+    "site-share-track-05-no-mortgage": {"destination": "album", "anchor": "track-no-mortgage"},
+    "site-share-track-06-guards-down": {"destination": "album", "anchor": "track-guards-down"},
+    "site-share-track-07-slow-walk": {"destination": "album", "anchor": "track-slow-walk"},
+    "site-share-track-08-the-power-of-light": {"destination": "album", "anchor": "track-the-power-of-light"},
+}
 CLICK_DRY_RUN_BASE = "https://www.lilyroo.com/api/social/click"
 CLICK_DRY_RUN_USER_AGENT = "LilyRooClickDryRun/1.0"
 
@@ -73,6 +87,16 @@ def future_ids() -> set[str]:
 
 def tracking_urls(reply_text: str) -> list[str]:
     return re.findall(r"https://www\.lilyroo\.com/go/am\.html\?[^\s]+", reply_text or "")
+
+
+def site_share_urls() -> list[str]:
+    if not ANALOG_MYTH_PAGE.exists():
+        return []
+    text = ANALOG_MYTH_PAGE.read_text(encoding="utf-8")
+    return [
+        url.replace("&amp;", "&")
+        for url in re.findall(r'data-share-url="(https://www\.lilyroo\.com/go/am\.html\?[^"]+)"', text)
+    ]
 
 
 def visible_surface_text(row: dict) -> str:
@@ -138,7 +162,7 @@ def redirect_health() -> dict:
     }
 
 
-def click_endpoint_dry_run(post_id: str | None) -> dict:
+def click_endpoint_dry_run(post_id: str | None, destination: str = "album") -> dict:
     expected_post = str(post_id or "").strip().lower()
     result = {
         "status": "attention",
@@ -150,7 +174,7 @@ def click_endpoint_dry_run(post_id: str | None) -> dict:
     if not expected_post:
         return {**result, "error": "missing_campaign_id"}
 
-    url = f"{CLICK_DRY_RUN_BASE}?dry_run=1&p={quote(expected_post)}&to=album"
+    url = f"{CLICK_DRY_RUN_BASE}?dry_run=1&p={quote(expected_post)}&to={quote(destination)}"
     result["url"] = url
     request = urllib.request.Request(
         url,
@@ -196,7 +220,7 @@ def click_endpoint_dry_run(post_id: str | None) -> dict:
         and dry_run
         and reported_post == expected_post
         and event.get("type") == "brand_campaign_click"
-        and event.get("destination") == "album"
+        and event.get("destination") == destination
     )
     return {
         **result,
@@ -210,6 +234,69 @@ def click_endpoint_dry_run(post_id: str | None) -> dict:
         "track": event.get("track") or "",
         "destination": event.get("destination") or "",
         "recorded_at": event.get("recorded_at") or "",
+    }
+
+
+def site_share_health() -> dict:
+    urls = site_share_urls()
+    rows = []
+    issue_counts = Counter()
+    seen_ids = set()
+    for url in urls:
+        parsed = urlparse(url)
+        query = parse_qs(parsed.query)
+        post_id = (query.get("p") or [""])[0]
+        destination = (query.get("to") or [""])[0]
+        anchor = (query.get("anchor") or [""])[0]
+        expected = SITE_SHARE_EXPECTED.get(post_id)
+        issues = []
+        if parsed.scheme != "https":
+            issues.append("share_url_not_https")
+        if parsed.netloc != TRACKING_HOST:
+            issues.append("share_url_wrong_host")
+        if parsed.path != TRACKING_PATH:
+            issues.append("share_url_wrong_path")
+        if not expected:
+            issues.append("unknown_site_share_id")
+        else:
+            seen_ids.add(post_id)
+            if destination != expected["destination"]:
+                issues.append("site_share_destination_mismatch")
+            expected_anchor = expected.get("anchor") or ""
+            if anchor != expected_anchor:
+                issues.append("site_share_anchor_mismatch")
+        for issue in sorted(set(issues)):
+            issue_counts[issue] += 1
+        rows.append({
+            "id": post_id,
+            "url": url,
+            "destination": destination,
+            "anchor": anchor,
+            "ok": not issues,
+            "issues": sorted(set(issues)),
+        })
+    missing_ids = sorted(set(SITE_SHARE_EXPECTED) - seen_ids)
+    for _ in missing_ids:
+        issue_counts["missing_site_share_url"] += 1
+    title_video_fallback = False
+    redirect_text = REDIRECT.read_text(encoding="utf-8") if REDIRECT.exists() else ""
+    if 'const TITLE_TRACK_VIDEO = "https://youtu.be/_rtioKYbCFM";' in redirect_text and "TRACKS[track]?.video || TITLE_TRACK_VIDEO" in redirect_text:
+        title_video_fallback = True
+    else:
+        issue_counts["missing_site_share_video_fallback"] += 1
+    endpoint = click_endpoint_dry_run("site-share-album", "album")
+    if endpoint.get("status") != "ready":
+        issue_counts["site_share_endpoint_not_ready"] += 1
+    return {
+        "status": "ready" if not issue_counts and len(rows) == len(SITE_SHARE_EXPECTED) else "attention",
+        "expected_url_count": len(SITE_SHARE_EXPECTED),
+        "url_count": len(rows),
+        "ready_url_count": sum(1 for row in rows if row["ok"]),
+        "missing_ids": missing_ids,
+        "issue_counts": dict(sorted(issue_counts.items())),
+        "title_video_fallback": title_video_fallback,
+        "click_endpoint": endpoint,
+        "rows": rows,
     }
 
 
@@ -319,6 +406,7 @@ def build_payload() -> dict:
     redirect = redirect_health()
     sample_id = next((row["id"] for row in rows if str(row.get("platform") or "").lower() == "x"), rows[0]["id"] if rows else "")
     click_endpoint = click_endpoint_dry_run(sample_id)
+    site_share = site_share_health()
     ready_rows = sum(1 for row in rows if row["ok"])
     broken_rows = len(rows) - ready_rows
     total_urls = sum(row["tracking_url_count"] for row in rows)
@@ -332,6 +420,7 @@ def build_payload() -> dict:
             and visible_album_link_count == expected_visible_surface_count
             and visible_full_destination_count == expected_visible_surface_count
             and redirect["status"] == "ready"
+            and site_share["status"] == "ready"
         )
         else "attention"
     )
@@ -366,11 +455,16 @@ def build_payload() -> dict:
             "click_endpoint_status": click_endpoint["status"],
             "click_endpoint_http_status": click_endpoint.get("http_status"),
             "click_endpoint_dry_run": click_endpoint.get("dry_run") is True,
+            "site_share_status": site_share["status"],
+            "site_share_url_count": site_share["url_count"],
+            "expected_site_share_url_count": site_share["expected_url_count"],
+            "site_share_endpoint_status": site_share["click_endpoint"].get("status"),
             "report_path": rel(REPORT),
             "refresh_command": "python3 scripts/build_brand_click_tracking_health.py",
         },
         "redirect": redirect,
         "click_endpoint": click_endpoint,
+        "site_share": site_share,
         "rows": rows,
         "guardrails": [
             "This check is read-only and does not post.",
@@ -379,6 +473,7 @@ def build_payload() -> dict:
             "Every future Analog Myth auto post should carry album, Echo Thread, and video destinations.",
             "Every future X Analog Myth auto post should carry the album destination in the main post text.",
             "Every future Analog Myth auto post should expose an album link on the visible published surface.",
+            "Album-page share buttons should use first-party site-share tracking links.",
             "The live click endpoint health probe uses dry_run=1 so it cannot create fake campaign clicks.",
         ],
     }
@@ -400,6 +495,8 @@ def build_markdown(payload: dict) -> str:
         f"- Visible full destination sets: **{summary['visible_surface_full_destination_count']} / {summary['expected_visible_surface_full_destination_count']}**",
         f"- Redirect page: **{summary['redirect_status']}**",
         f"- Live click endpoint dry run: **{summary['click_endpoint_status']}**",
+        f"- Album-page share tracking: **{summary['site_share_status']}** ({summary['site_share_url_count']} / {summary['expected_site_share_url_count']})",
+        f"- Site-share endpoint dry run: **{summary['site_share_endpoint_status']}**",
         f"- Destinations: **{', '.join(f'{key}: {value}' for key, value in summary['destination_counts'].items()) or 'none'}**",
         f"- Issues: **{', '.join(f'{key}: {value}' for key, value in summary['issue_counts'].items()) or 'none'}**",
         "",
@@ -417,6 +514,23 @@ def build_markdown(payload: dict) -> str:
     ])
     for key, value in (payload.get("redirect") or {}).get("checks", {}).items():
         lines.append(f"- {key}: **{'ok' if value else 'attention'}**")
+    site_share = payload.get("site_share") or {}
+    site_share_endpoint = site_share.get("click_endpoint") or {}
+    lines.extend([
+        "",
+        "## Album Page Share Tracking",
+        f"- Status: **{site_share.get('status') or 'unknown'}**",
+        f"- Share URLs ready: **{site_share.get('ready_url_count', 0)} / {site_share.get('expected_url_count', 0)}**",
+        f"- Title-track video fallback: **{'ok' if site_share.get('title_video_fallback') else 'attention'}**",
+        f"- Site-share endpoint dry run: **{site_share_endpoint.get('status') or 'unknown'}**",
+        f"- Site-share probe id: `{site_share_endpoint.get('expected_post_id') or 'n/a'}`",
+        f"- Site-share issues: **{', '.join(f'{key}: {value}' for key, value in (site_share.get('issue_counts') or {}).items()) or 'none'}**",
+    ])
+    for row in site_share.get("rows") or []:
+        lines.append(
+            f"- `{row.get('id') or 'unknown'}` -> `{row.get('destination') or 'unknown'}`"
+            f"{'#' + row.get('anchor') if row.get('anchor') else ''}: **{'ready' if row.get('ok') else 'attention'}**"
+        )
     lines.extend(["", "## Future Rows"])
     for row in payload["rows"]:
         lines.append(

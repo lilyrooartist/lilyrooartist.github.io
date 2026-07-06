@@ -131,6 +131,7 @@
       "07": { slug: "slow-walk", title: "Slow Walk", video: "https://youtu.be/nPuGjQf7lKY" },
       "08": { slug: "the-power-of-light", title: "The Power of Light", video: "https://youtu.be/ctZ2TRBWC-c" }
     };
+    const TITLE_TRACK_VIDEO = "https://youtu.be/_rtioKYbCFM";
     const DESTINATIONS = {
       album: "/analog-myth.html",
       echo: "/podcasts/analog-myth.html",
@@ -160,13 +161,18 @@
     }
 
     function destinationUrl(destination, track) {
-      if (destination === "video" && TRACKS[track]) {
-        return TRACKS[track].video;
+      if (destination === "video") {
+        return TRACKS[track]?.video || TITLE_TRACK_VIDEO;
       }
       return DESTINATIONS[destination] || DESTINATIONS.album;
     }
 
-    function appendAttribution(rawTarget, parts) {
+    function safeAnchor(value) {
+      const anchor = String(value || "").trim();
+      return /^[a-z0-9][a-z0-9-]*$/i.test(anchor) ? anchor : "";
+    }
+
+    function appendAttribution(rawTarget, parts, anchor = "") {
       const target = new URL(rawTarget, window.location.origin);
       const track = TRACKS[parts.track] || {};
       target.searchParams.set("utm_source", parts.platform);
@@ -176,6 +182,9 @@
       target.searchParams.set("utm_wave", parts.wave);
       if (parts.track) {
         target.searchParams.set("utm_term", `track_${parts.track}_${track.slug || "analog-myth"}`);
+      }
+      if (anchor && target.origin === window.location.origin && target.pathname === "/analog-myth.html") {
+        target.hash = anchor;
       }
       return target.toString();
     }
@@ -214,8 +223,9 @@
     const params = new URLSearchParams(window.location.search);
     const parts = postParts(params.get("p"));
     const destination = params.get("to") || "album";
+    const anchor = safeAnchor(params.get("anchor"));
     const isDryRun = ["1", "true", "yes"].includes(String(params.get("dry_run") || "").toLowerCase());
-    const target = appendAttribution(destinationUrl(destination, parts.track), parts);
+    const target = appendAttribution(destinationUrl(destination, parts.track), parts, anchor);
     const track = TRACKS[parts.track] || {};
     const headline = document.getElementById("headline");
     const message = document.getElementById("message");
@@ -230,7 +240,7 @@
       : `Taking you to ${DESTINATION_LABELS[destination] || "Analog Myth"}. If the door sticks, choose a link below.`;
     fallback.textContent = `Open ${DESTINATION_LABELS[destination] || "Analog Myth"}`;
     fallback.href = target;
-    album.href = appendAttribution(DESTINATIONS.album, parts);
+    album.href = appendAttribution(DESTINATIONS.album, parts, anchor);
     echo.href = appendAttribution(DESTINATIONS.echo, parts);
     listen.href = appendAttribution(DESTINATIONS.listen, parts);
     playlist.href = appendAttribution(DESTINATIONS.playlist, parts);
