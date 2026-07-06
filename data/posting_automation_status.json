@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-06T20:17:05.374854Z",
+  "generated_at": "2026-07-06T20:28:33.531207Z",
   "safe_mode": true,
   "source": {
     "workflow": ".github/workflows/promo-admin-refresh.yml",
@@ -40,7 +40,7 @@
     "active_campaign_proof_refresh_cron": "25 15 * * *",
     "scheduler_http_status": 200,
     "scheduler_auth_method": "bearer",
-    "scheduler_refresh_step_ok": true,
+    "scheduler_refresh_step_ok": false,
     "posted_count": 36,
     "attention_count": 0,
     "platform_fix_needed_count": 0,
@@ -48,7 +48,7 @@
     "story_queued_future_count": 0,
     "platform_repair_blocked_count": 0,
     "blocker_input_status": "missing_local_input",
-    "blocker_input_missing_count": 5,
+    "blocker_input_missing_count": 3,
     "blocker_input_external_action_count": 1,
     "help_needed_count": 0,
     "next_action": "Watch FP-BRAND-AM-04-SPILLING-THE-TEA-X, FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK after 2026-07-07T15:21:00Z, then export posted URLs."
@@ -79,7 +79,7 @@
     {
       "label": "Safe admin refresh",
       "status": "ready",
-      "detail": "19 refresh commands captured at 2026-07-06T20:17:01.397586Z",
+      "detail": "19 refresh commands captured at 2026-07-06T20:28:31.476639Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": ""
     },
@@ -114,7 +114,7 @@
     {
       "label": "Blocker input readiness",
       "status": "deferred",
-      "detail": "1 ready; 5 missing local input; 1 external action needed",
+      "detail": "3 ready; 3 missing local input; 1 external action needed",
       "evidence": "data/social_blocker_input_status.json",
       "next_action": "Optional expansion inputs can wait; the active brand campaign is already preflight-ready."
     },

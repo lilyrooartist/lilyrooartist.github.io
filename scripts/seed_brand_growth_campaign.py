@@ -224,6 +224,10 @@ def reply_text(track: dict, playlist_url: str, *, platform: str, wave: str, post
     ])
 
 
+def primary_album_cta(post_id: str) -> str:
+    return f"Album room: {tracked_url('album', post_id)}"
+
+
 def sentence_case(value: str) -> str:
     value = str(value or "").strip()
     if not value:
@@ -240,37 +244,61 @@ def post_id_for(track: dict, platform: str, wave: str) -> str:
     return "-".join(parts)
 
 
-def post_text(track: dict, platform: str, wave: str) -> str:
+def add_primary_link(text: str, platform: str, post_id: str) -> str:
+    if platform != "X":
+        return text
+    cta = primary_album_cta(post_id)
+    if cta in text:
+        return text
+    return f"{text}\n\n{cta}"
+
+
+def post_text(track: dict, platform: str, wave: str, post_id: str) -> str:
     title = track["title"]
     hooks = WAVES[wave]["hooks"]
     hook = hooks.get(title, "is live in the Lily Roo archive.")
     if wave == "afterglow":
         if platform == "X":
-            return f"{title} {hook} Analog Myth keeps humming."
+            return add_primary_link(f"{title} {hook} Analog Myth keeps humming.", platform, post_id)
         return (
             f"Analog Myth afterglow, track {track['track']}: {title} {hook}\n\n"
             "The album page, Echo Thread play-through, and full playlist are live."
         )
     if wave == "room-notes":
         if platform == "X":
-            return f"Room note from Analog Myth: {title} {hook}"
+            return add_primary_link(f"Room note from Analog Myth: {title} {hook}", platform, post_id)
         return (
             f"Analog Myth room note, track {track['track']}: {title} {hook}\n\n"
             "Album page, Echo Thread play-through, and the full playlist are live."
         )
     if wave == "signal-trace":
         if platform == "X":
-            return f"Analog Myth signal trace: {title} {hook}"
+            return add_primary_link(f"Analog Myth signal trace: {title} {hook}", platform, post_id)
         return (
             f"Analog Myth signal trace, track {track['track']}: {title} {hook}\n\n"
             "Album page, Echo Thread play-through, and the full playlist are live."
         )
     if platform == "X":
-        return TRACK_X_TEXT.get(title, f"{title} {hook} Analog Myth is live.")
+        return add_primary_link(TRACK_X_TEXT.get(title, f"{title} {hook} Analog Myth is live."), platform, post_id)
     return (
         f"Analog Myth track {track['track']}: {title} {hook}\n\n"
         f"{TRACK_FACEBOOK_NOTES.get(title, 'The album page, Echo Thread play-through, and YouTube playlist are live.')}"
     )
+
+
+def parse_scheduled_at(value: str) -> datetime | None:
+    try:
+        parsed = datetime.fromisoformat(str(value or ""))
+    except ValueError:
+        return None
+    if parsed.tzinfo is None:
+        parsed = parsed.replace(tzinfo=TZ)
+    return parsed.astimezone(TZ)
+
+
+def is_future_row(row: dict[str, str], reference: datetime) -> bool:
+    scheduled = parse_scheduled_at(row.get("scheduled_at") or "")
+    return bool(scheduled and scheduled >= reference)
 
 
 def build_rows(start: date, approval: str, platforms: list[str], wave: str) -> list[dict[str, str]]:
@@ -284,9 +312,17 @@ def build_rows(start: date, approval: str, platforms: list[str], wave: str) -> l
         day = start + timedelta(days=index)
         for platform in platforms:
             post_id = post_id_for(track, platform, wave)
-            text = post_text(track, platform, wave)
+            text = post_text(track, platform, wave, post_id)
+            alternate_text = (
+                "Today in the Analog Myth room"
+                if wave == "track-moments"
+                else "Second pass through the Analog Myth room"
+            ) + f": {track['title']} {hooks.get(track['title'], 'is live in the archive.')}"
+            alternate_text = add_primary_link(alternate_text, platform, post_id)
             if platform == "X" and len(text) > 280:
                 raise SystemExit(f"{post_id} text is too long for X: {len(text)}")
+            if platform == "X" and len(alternate_text) > 280:
+                raise SystemExit(f"{post_id} alternate text is too long for X: {len(alternate_text)}")
             rows.append({
                 "id": post_id,
                 "scheduled_at": scheduled_at(day, platform),
@@ -298,12 +334,7 @@ def build_rows(start: date, approval: str, platforms: list[str], wave: str) -> l
                 "text": text,
                 "drafts": "||".join([
                     text,
-                    (
-                        "Today in the Analog Myth room"
-                        if wave == "track-moments"
-                        else "Second pass through the Analog Myth room"
-                    )
-                    + f": {track['title']} {hooks.get(track['title'], 'is live in the archive.')}",
+                    alternate_text,
                 ]),
                 "reply_text": reply_text(track, playlist_url, platform=platform, wave=wave, post_id=post_id),
                 "x_media_key": "",
@@ -389,8 +420,10 @@ def main() -> int:
     parser.add_argument("--unapproved", action="store_true", help="Insert rows with approved=no instead of approved=yes.")
     parser.add_argument("--apply", action="store_true", help="Append missing rows to data/scheduled_posts.csv. Default is dry-run.")
     parser.add_argument("--update-existing", action="store_true", help="When applying, refresh existing campaign rows with the generated copy and links.")
+    parser.add_argument("--update-future-existing", action="store_true", help="When applying, refresh only existing campaign rows whose scheduled time has not passed.")
     args = parser.parse_args()
 
+    reference_now = datetime.now(TZ)
     start = campaign_start(args)
     approval = "no" if args.unapproved else "yes"
     ready = ready_platforms()
@@ -400,16 +433,30 @@ def main() -> int:
     existing_ids = {row.get("id") for row in existing_rows}
     candidate_by_id = {row["id"]: row for row in candidate_rows}
     additions = [row for row in candidate_rows if row["id"] not in existing_ids]
-    updates = [row for row in candidate_rows if row["id"] in existing_ids]
     added_ids = [row["id"] for row in additions]
-    updated_ids = [row["id"] for row in updates] if args.apply and args.update_existing else []
+
+    def should_update_existing(row: dict[str, str]) -> bool:
+        row_id = row.get("id") or ""
+        if row_id not in candidate_by_id:
+            return False
+        if args.update_existing:
+            return True
+        if args.update_future_existing:
+            return is_future_row(row, reference_now)
+        return False
+
+    updates = [row for row in existing_rows if should_update_existing(row)]
+    updated_ids = [row["id"] for row in updates] if args.apply else []
     disabled_platforms = dict(DISABLED_PLATFORMS)
     for platform in SUPPORTED_PLATFORMS:
         if platform not in campaign_platforms:
             disabled_platforms[platform] = "executor readiness is blocked"
     campaign_days = len({row["scheduled_at"].split("T", 1)[0] for row in candidate_rows})
 
-    next_existing_rows = [candidate_by_id.get(row.get("id", ""), row) for row in existing_rows] if args.apply and args.update_existing else list(existing_rows)
+    next_existing_rows = [
+        candidate_by_id.get(row.get("id", ""), row) if should_update_existing(row) else row
+        for row in existing_rows
+    ] if args.apply and (args.update_existing or args.update_future_existing) else list(existing_rows)
     next_queue_rows = next_existing_rows + (additions if args.apply else [])
     active_brand_rows = [
         row for row in next_queue_rows
@@ -465,7 +512,7 @@ def main() -> int:
     print(f"Candidate rows: {len(candidate_rows)}")
     print(f"Rows already present: {len(candidate_rows) - len(additions)}")
     print(f"Rows to append: {len(additions)}")
-    if args.update_existing:
+    if args.update_existing or args.update_future_existing:
         print(f"Rows to update: {len(updates)}")
     for row in additions:
         print(f"- {row['id']} {row['scheduled_at']} {row['platform']}")
@@ -474,11 +521,14 @@ def main() -> int:
         print("Dry run only. Re-run with --apply to append rows.")
         return 0
 
-    if args.update_existing:
-        existing_rows = [candidate_by_id.get(row.get("id", ""), row) for row in existing_rows]
+    if args.update_existing or args.update_future_existing:
+        existing_rows = [
+            candidate_by_id.get(row.get("id", ""), row) if should_update_existing(row) else row
+            for row in existing_rows
+        ]
     write_queue(existing_rows + additions, fieldnames)
     print(f"Appended {len(additions)} row(s) to {QUEUE}")
-    if args.update_existing:
+    if args.update_existing or args.update_future_existing:
         print(f"Updated {len(updates)} existing row(s) in {QUEUE}")
     return 0
 

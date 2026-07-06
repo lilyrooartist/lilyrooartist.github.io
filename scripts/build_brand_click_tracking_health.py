@@ -129,6 +129,8 @@ def build_payload() -> dict:
     platform_counts = Counter()
     wave_counts = Counter()
     track_counts = Counter()
+    x_main_album_link_count = 0
+    expected_x_main_album_link_count = 0
 
     for row in read_csv(QUEUE):
         post_id = str(row.get("id") or "").strip()
@@ -141,8 +143,10 @@ def build_payload() -> dict:
 
         parts = post_parts(post_id)
         urls = tracking_urls(row.get("reply_text") or "")
+        main_text_urls = tracking_urls(row.get("text") or "")
         row_issues: list[str] = []
         url_results = []
+        main_text_url_results = []
         destinations = set()
         for url in urls:
             result, issues = validate_url(url, post_id)
@@ -159,6 +163,20 @@ def build_payload() -> dict:
             row_issues.append("unexpected_tracking_link_count")
         if not row.get("reply_text"):
             row_issues.append("missing_reply_text")
+
+        main_album_link_ok = True
+        if parts["platform"] == "x":
+            expected_x_main_album_link_count += 1
+            main_album_link_ok = False
+            for url in main_text_urls:
+                result, issues = validate_url(url, post_id)
+                main_text_url_results.append(result)
+                if not issues and result["destination"] == "album":
+                    main_album_link_ok = True
+            if main_album_link_ok:
+                x_main_album_link_count += 1
+            else:
+                row_issues.append("missing_x_main_album_link")
 
         for issue in sorted(set(row_issues)):
             issue_counts[issue] += 1
@@ -179,6 +197,8 @@ def build_payload() -> dict:
             "ok": not row_issues,
             "issues": sorted(set(row_issues)),
             "tracking_urls": url_results,
+            "main_text_album_link_ok": main_album_link_ok,
+            "main_text_tracking_urls": main_text_url_results,
         })
 
     redirect = redirect_health()
@@ -203,6 +223,8 @@ def build_payload() -> dict:
             "broken_future_campaign_rows": broken_rows,
             "tracking_url_count": total_urls,
             "expected_tracking_url_count": expected_urls,
+            "x_main_album_link_count": x_main_album_link_count,
+            "expected_x_main_album_link_count": expected_x_main_album_link_count,
             "destination_counts": dict(sorted(destination_counts.items())),
             "platform_counts": dict(sorted(platform_counts.items())),
             "wave_counts": dict(sorted(wave_counts.items())),
@@ -219,6 +241,7 @@ def build_payload() -> dict:
             "Tracking links use first-party Lily Roo redirect URLs.",
             "Click capture stores campaign metadata only and does not store IP addresses.",
             "Every future Analog Myth auto post should carry album, Echo Thread, and video destinations.",
+            "Every future X Analog Myth auto post should carry the album destination in the main post text.",
         ],
     }
 
@@ -234,6 +257,7 @@ def build_markdown(payload: dict) -> str:
         f"- Status: **{summary['status']}**",
         f"- Future campaign rows ready: **{summary['ready_future_campaign_rows']} / {summary['future_campaign_rows']}**",
         f"- Tracking URLs checked: **{summary['tracking_url_count']} / {summary['expected_tracking_url_count']}**",
+        f"- X main-post album links: **{summary['x_main_album_link_count']} / {summary['expected_x_main_album_link_count']}**",
         f"- Redirect page: **{summary['redirect_status']}**",
         f"- Destinations: **{', '.join(f'{key}: {value}' for key, value in summary['destination_counts'].items()) or 'none'}**",
         f"- Issues: **{', '.join(f'{key}: {value}' for key, value in summary['issue_counts'].items()) or 'none'}**",
@@ -253,6 +277,8 @@ def build_markdown(payload: dict) -> str:
             lines.append(f"  - Issues: `{', '.join(row['issues'])}`")
         else:
             lines.append(f"  - Destinations: `{', '.join(row['destinations'])}`")
+        if row.get("platform") == "X":
+            lines.append(f"  - Main-post album link: **{'ready' if row.get('main_text_album_link_ok') else 'attention'}**")
     lines.extend(["", "## Guardrails"])
     for item in payload.get("guardrails") or []:
         lines.append(f"- {item}")

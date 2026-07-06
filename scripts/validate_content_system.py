@@ -454,6 +454,8 @@ def validate_generated_outputs(failures):
         ready_rows = int(summary.get("ready_future_campaign_rows") or 0)
         url_count = int(summary.get("tracking_url_count") or 0)
         expected_url_count = int(summary.get("expected_tracking_url_count") or 0)
+        x_main_links = int(summary.get("x_main_album_link_count") or 0)
+        expected_x_main_links = int(summary.get("expected_x_main_album_link_count") or 0)
         redirect = tracking.get("redirect") or {}
         if (
             tracking.get("safe_mode") is True
@@ -461,6 +463,8 @@ def validate_generated_outputs(failures):
             and future_rows > 0
             and ready_rows == future_rows
             and url_count == expected_url_count == future_rows * 3
+            and expected_x_main_links > 0
+            and x_main_links == expected_x_main_links
             and not int(summary.get("broken_future_campaign_rows") or 0)
             and not summary.get("issue_counts")
             and summary.get("redirect_status") == "ready"
@@ -4096,6 +4100,7 @@ def validate_generated_outputs(failures):
             "brand_click_tracking_health.json" in tracking_text
             and "brand-click-tracking-health.md" in tracking_text
             and "reply_text" in tracking_text
+            and "main_text_album_link_ok" in tracking_text
             and "go/am.html" in tracking_text
             and "EXPECTED_DESTINATIONS" in tracking_text
             and "This check is read-only and does not post" in tracking_text
