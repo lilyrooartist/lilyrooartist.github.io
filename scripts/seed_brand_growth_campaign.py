@@ -64,10 +64,10 @@ TRACK_X_TEXT = {
     "13": "13 opens Analog Myth like a calendar with a loose wire: odd numbers, warm tape, big signal.",
     "Girls Camp": "Girls Camp keeps the cabin lights buzzing and the sleepaway myth slightly haunted.",
     "Analog Myth": "Title track signal: broken clocks, warm tape, exact little lies. Analog Myth is live.",
-    "Spilling the Tea": "Spilling the Tea turns gossip into cinema and keeps the receipt drawer open.",
-    "No Mortgage": "No Mortgage makes domestic anxiety feel bright, strange, and ready to bolt.",
-    "Guards Down": "Guards Down catches the armor right as it starts making noise on the floor.",
-    "Slow Walk": "Slow Walk refuses the sprint and lets the whole room adjust to its pace.",
+    "Spilling the Tea": "Analog Myth track 4: Spilling the Tea turns gossip into cinema and keeps the receipt drawer open.",
+    "No Mortgage": "Analog Myth track 5: No Mortgage makes domestic anxiety feel bright, strange, and ready to bolt.",
+    "Guards Down": "Analog Myth track 6: Guards Down catches the armor right as it starts making noise on the floor.",
+    "Slow Walk": "Analog Myth track 7: Slow Walk refuses the sprint and lets the whole room adjust to its pace.",
     "The Power of Light": "The Power of Light closes Analog Myth with a switch you can almost hear.",
 }
 
