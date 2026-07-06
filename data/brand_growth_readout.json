@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-05T23:40:46.810567Z",
+  "generated_at": "2026-07-05T23:54:19.031735Z",
   "safe_mode": true,
   "source": {
     "brand_growth_campaign": "data/brand_growth_campaign.json",
@@ -10,7 +10,8 @@
     "x_post_results": "data/x_post_results.json",
     "facebook_post_results": "data/facebook_post_results.json",
     "live_social_metrics": "data/live_social_metrics.json",
-    "brand_post_visibility": "data/brand_post_visibility.json"
+    "brand_post_visibility": "data/brand_post_visibility.json",
+    "brand_campaign_clicks": "data/brand_campaign_clicks.json"
   },
   "summary": {
     "campaign_row_count": 64,
@@ -33,6 +34,12 @@
     "public_visibility_ok_count": 4,
     "public_visibility_attention_count": 0,
     "public_visibility_report_path": "admin/reports/brand-post-visibility.md",
+    "campaign_click_status": "ready",
+    "campaign_click_count": 0,
+    "campaign_click_post_count": 0,
+    "campaign_click_last_at": "",
+    "campaign_click_report_path": "admin/reports/brand-campaign-clicks.md",
+    "campaign_click_refresh_command": "python3 scripts/capture_brand_campaign_clicks.py",
     "attention_rows": 2,
     "next_scheduled_post_id": "FP-BRAND-AM-03-ANALOG-MYTH-X",
     "next_scheduled_at": "2026-07-06T10:15:00-04:00",
@@ -2339,6 +2346,7 @@
     "Metric capture commands only target logged X/Facebook campaign post IDs.",
     "Post-slot proof commands only capture executor state and export confirmed Worker URLs.",
     "Unknown metrics remain blank until an API capture or visible analytics source proves them.",
-    "Public post visibility checks are read-only and do not replace X/Meta metric capture."
+    "Public post visibility checks are read-only and do not replace X/Meta metric capture.",
+    "Campaign click totals come from first-party redirect telemetry and do not store IP addresses."
   ]
 }

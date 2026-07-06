@@ -81,12 +81,45 @@
       return target.toString();
     }
 
+    function recordClick(target, parts, destination) {
+      const payload = JSON.stringify({
+        post_id: parts.postId,
+        platform: parts.platform,
+        wave: parts.wave,
+        track: parts.track,
+        destination,
+        target_url: target,
+        page_url: window.location.href,
+        dry_run: params.get("dry_run") || ""
+      });
+      try {
+        if (navigator.sendBeacon) {
+          const blob = new Blob([payload], { type: "application/json" });
+          if (navigator.sendBeacon("/api/social/click", blob)) return;
+        }
+      } catch (error) {
+        // Redirect should not depend on telemetry.
+      }
+      try {
+        fetch("/api/social/click", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: payload,
+          keepalive: true
+        }).catch(() => {});
+      } catch (error) {
+        // Redirect should not depend on telemetry.
+      }
+    }
+
     const params = new URLSearchParams(window.location.search);
     const parts = postParts(params.get("p"));
-    const target = appendAttribution(destinationUrl(params.get("to") || "album", parts.track), parts);
+    const destination = params.get("to") || "album";
+    const target = appendAttribution(destinationUrl(destination, parts.track), parts);
     const link = document.getElementById("fallback-link");
     link.href = target;
-    window.location.replace(target);
+    recordClick(target, parts, destination);
+    window.setTimeout(() => window.location.replace(target), 90);
   </script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 # Brand Growth Readout - Lily Roo
 
-Generated: 2026-07-05T23:40:46.810567Z
+Generated: 2026-07-05T23:54:19.031735Z
 
 ## Summary
 - Campaign rows: **64**
@@ -10,6 +10,7 @@ Generated: 2026-07-05T23:40:46.810567Z
 - Measured rows: **0**
 - Ready for metric capture: **2**
 - Public visibility: **verified** (4 / 4 checked OK; 0 attention)
+- Campaign clicks: **0** across **0** post(s); last click `none yet`
 - Post-slot watch windows: **32**
 - Status counts: **posted_waiting_measurement_window: 2, ready_for_metric_capture: 2, scheduled_future: 60**
 - Next scheduled: `FP-BRAND-AM-03-ANALOG-MYTH-X` at `2026-07-06T10:15:00-04:00`
@@ -26,6 +27,7 @@ Generated: 2026-07-05T23:40:46.810567Z
 - Capture X metrics: `python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X`
 - Capture Facebook metrics: `python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK`
 - Re-check public visibility: `admin/reports/brand-post-visibility.md`
+- Capture campaign clicks: `python3 scripts/capture_brand_campaign_clicks.py`
 
 ## Next Actions
 - python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X
@@ -275,3 +277,4 @@ Generated: 2026-07-05T23:40:46.810567Z
 - Post-slot proof commands only capture executor state and export confirmed Worker URLs.
 - Unknown metrics remain blank until an API capture or visible analytics source proves them.
 - Public post visibility checks are read-only and do not replace X/Meta metric capture.
+- Campaign click totals come from first-party redirect telemetry and do not store IP addresses.

@@ -19,6 +19,7 @@ X_RESULTS = ROOT / "data" / "x_post_results.json"
 FACEBOOK_RESULTS = ROOT / "data" / "facebook_post_results.json"
 LIVE_METRICS = ROOT / "data" / "live_social_metrics.json"
 BRAND_POST_VISIBILITY = ROOT / "data" / "brand_post_visibility.json"
+BRAND_CAMPAIGN_CLICKS = ROOT / "data" / "brand_campaign_clicks.json"
 OUT = ROOT / "data" / "brand_growth_readout.json"
 REPORT = ROOT / "admin" / "reports" / "brand-growth-readout.md"
 REPORT_INDEX = ROOT / "admin" / "reports" / "index.html"
@@ -297,6 +298,7 @@ def build_payload() -> dict:
     visibility_payload = read_json(BRAND_POST_VISIBILITY, {})
     visibility = visibility_lookup(visibility_payload)
     live_metrics = read_json(LIVE_METRICS, {})
+    click_payload = read_json(BRAND_CAMPAIGN_CLICKS, {})
     queue_by_id = by_id(queue_rows)
     future_by_id = by_id(future_posts)
     source_rows = campaign_rows(campaign, queue_rows)
@@ -391,6 +393,7 @@ def build_payload() -> dict:
             "facebook_post_results": rel(FACEBOOK_RESULTS),
             "live_social_metrics": rel(LIVE_METRICS),
             "brand_post_visibility": rel(BRAND_POST_VISIBILITY),
+            "brand_campaign_clicks": rel(BRAND_CAMPAIGN_CLICKS),
         },
         "summary": {
             "campaign_row_count": len(rows),
@@ -406,6 +409,12 @@ def build_payload() -> dict:
             "public_visibility_ok_count": (visibility_payload.get("summary") or {}).get("public_visibility_ok_count", 0),
             "public_visibility_attention_count": (visibility_payload.get("summary") or {}).get("attention_count", 0),
             "public_visibility_report_path": (visibility_payload.get("summary") or {}).get("report_path") or rel(REPORT),
+            "campaign_click_status": "ready" if click_payload.get("ok") else "not_captured",
+            "campaign_click_count": (click_payload.get("summary") or {}).get("click_count", 0),
+            "campaign_click_post_count": (click_payload.get("summary") or {}).get("post_count", 0),
+            "campaign_click_last_at": (click_payload.get("summary") or {}).get("last_click_at", ""),
+            "campaign_click_report_path": click_payload.get("report_path") or rel(BRAND_CAMPAIGN_CLICKS),
+            "campaign_click_refresh_command": click_payload.get("refresh_command") or "python3 scripts/capture_brand_campaign_clicks.py",
             "attention_rows": len(due_rows),
             "next_scheduled_post_id": (next_scheduled[0]["id"] if next_scheduled else ""),
             "next_scheduled_at": (next_scheduled[0]["scheduled_at"] if next_scheduled else ""),
@@ -448,6 +457,7 @@ def build_payload() -> dict:
             "Post-slot proof commands only capture executor state and export confirmed Worker URLs.",
             "Unknown metrics remain blank until an API capture or visible analytics source proves them.",
             "Public post visibility checks are read-only and do not replace X/Meta metric capture.",
+            "Campaign click totals come from first-party redirect telemetry and do not store IP addresses.",
         ],
     }
     return payload
@@ -470,6 +480,9 @@ def build_markdown(payload: dict) -> str:
         f"- Public visibility: **{summary.get('public_visibility_status', 'unknown')}** "
         f"({summary.get('public_visibility_ok_count', 0)} / {summary.get('public_visibility_checked_post_count', 0)} checked OK; "
         f"{summary.get('public_visibility_attention_count', 0)} attention)",
+        f"- Campaign clicks: **{summary.get('campaign_click_count', 0)}** "
+        f"across **{summary.get('campaign_click_post_count', 0)}** post(s); "
+        f"last click `{summary.get('campaign_click_last_at') or 'none yet'}`",
         f"- Post-slot watch windows: **{summary.get('post_slot_watch_window_count', 0)}**",
         f"- Status counts: **{', '.join(f'{key}: {value}' for key, value in summary['status_counts'].items()) or 'none'}**",
         f"- Next scheduled: `{summary['next_scheduled_post_id'] or 'none'}` at `{summary['next_scheduled_at'] or 'n/a'}`",
@@ -486,6 +499,7 @@ def build_markdown(payload: dict) -> str:
         f"- Capture X metrics: `{summary['x_metric_capture_command'] or 'waiting for logged X campaign posts'}`",
         f"- Capture Facebook metrics: `{summary['facebook_metric_capture_command'] or 'waiting for logged Facebook campaign posts'}`",
         f"- Re-check public visibility: `{summary.get('public_visibility_report_path') or 'admin/reports/brand-post-visibility.md'}`",
+        f"- Capture campaign clicks: `{summary.get('campaign_click_refresh_command') or 'python3 scripts/capture_brand_campaign_clicks.py'}`",
         "",
         "## Next Actions",
     ]

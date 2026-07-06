@@ -151,6 +151,15 @@ STEPS = [
         "required": False,
         "preserve_on_failure": ["data/github_actions_secret_presence.json"],
     },
+    {
+        "name": "capture_brand_campaign_clicks",
+        "command": ["python3", "scripts/capture_brand_campaign_clicks.py"],
+        "required": False,
+        "preserve_on_failure": [
+            "data/brand_campaign_clicks.json",
+            "admin/reports/brand-campaign-clicks.md",
+        ],
+    },
 ]
 
 FINALIZE_STEPS = [

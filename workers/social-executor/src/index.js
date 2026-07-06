@@ -14,6 +14,8 @@ const YOUTUBE_UPLOAD_INIT_URL = "https://www.googleapis.com/upload/youtube/v3/vi
 const SPOTIFY_OEMBED_URL = "https://open.spotify.com/oembed";
 const DEFAULT_QUEUE_URL = "https://www.lilyroo.com/admin/future-posts.json";
 const EXECUTION_STATE_PREFIX = "post:";
+const CLICK_STATE_PREFIX = "click:";
+const CLICK_TTL_SECONDS = 60 * 60 * 24 * 180;
 const MAX_SCHEDULE_ATTEMPTS = 3;
 const LAUNCH_FOCUS_DAYS = {
   "2026-07-01": {
@@ -58,6 +60,20 @@ async function handleRequest(request, env) {
       execute_auth_required: true,
       supported_platforms: ["X", "Instagram", "Facebook", "TikTok", "YouTube Shorts"],
     }, 200, request, env);
+  }
+
+  if (url.pathname === "/api/social/click" && ["GET", "POST"].includes(request.method)) {
+    const result = await recordCampaignClick(request, env);
+    return jsonResponse(result.payload, result.status, request, env);
+  }
+
+  if (url.pathname === "/api/social/clicks" && request.method === "GET") {
+    const authError = await authorizationError(request, env);
+    if (authError) {
+      return jsonResponse({ ok: false, error: authError.message }, authError.status, request, env);
+    }
+
+    return jsonResponse(await campaignClickSummary(env), 200, request, env);
   }
 
   if (url.pathname === "/api/social/readiness" && request.method === "GET") {
@@ -511,6 +527,175 @@ async function executionStates(env) {
   }
   executions.sort((a, b) => text(b.updated_at).localeCompare(text(a.updated_at)));
   return { ok: true, executions };
+}
+
+async function recordCampaignClick(request, env) {
+  const store = executionStore(env);
+  if (!store) {
+    return { status: 503, payload: { ok: false, error: "SOCIAL_EXECUTOR_STATE KV binding is not configured" } };
+  }
+  const url = new URL(request.url);
+  const body = await requestPayload(request);
+  const postId = text(body.post_id || body.postId || body.p || url.searchParams.get("post_id") || url.searchParams.get("p")).toLowerCase();
+  if (!/^fp-brand-am(?:-w\d+)?-\d{2}-.+-(x|facebook)$/.test(postId)) {
+    return { status: 400, payload: { ok: false, error: "invalid_campaign_post" } };
+  }
+  const parts = campaignPostParts(postId);
+  const destination = normalizeClickDestination(body.destination || body.to || url.searchParams.get("to"));
+  const recordedAt = new Date().toISOString();
+  const dryRun = truthy(body.dry_run || body.dryRun || url.searchParams.get("dry_run"));
+  const event = {
+    type: "brand_campaign_click",
+    post_id: postId,
+    platform: parts.platform,
+    wave: parts.wave,
+    track: parts.track,
+    track_slug: parts.trackSlug,
+    destination,
+    target_url: safeUrlText(body.target_url || body.targetUrl || url.searchParams.get("target_url")),
+    page_url: safeUrlText(body.page_url || body.pageUrl || request.headers.get("Referer") || ""),
+    referer_host: refererHost(request.headers.get("Referer") || ""),
+    user_agent_family: userAgentFamily(request.headers.get("User-Agent") || ""),
+    recorded_at: recordedAt,
+  };
+  if (dryRun) {
+    return {
+      status: 200,
+      payload: {
+        ok: true,
+        dry_run: true,
+        event,
+      },
+    };
+  }
+  const key = `${CLICK_STATE_PREFIX}${recordedAt}:${crypto.randomUUID()}`;
+  await store.put(key, JSON.stringify(event), { expirationTtl: CLICK_TTL_SECONDS });
+  return {
+    status: 200,
+    payload: {
+      ok: true,
+      post_id: event.post_id,
+      destination: event.destination,
+      recorded_at: event.recorded_at,
+    },
+  };
+}
+
+async function requestPayload(request) {
+  if (request.method !== "POST") return {};
+  const raw = await request.text().catch(() => "");
+  if (!raw) return {};
+  const contentType = text(request.headers.get("Content-Type")).toLowerCase();
+  if (contentType.includes("json")) return parseJson(raw);
+  if (contentType.includes("x-www-form-urlencoded")) return Object.fromEntries(new URLSearchParams(raw));
+  const parsed = parseJson(raw);
+  if (Object.keys(parsed).length) return parsed;
+  return Object.fromEntries(new URLSearchParams(raw));
+}
+
+async function campaignClickSummary(env) {
+  const store = executionStore(env);
+  if (!store) {
+    return { ok: false, error: "SOCIAL_EXECUTOR_STATE KV binding is not configured", clicks: [] };
+  }
+  const clicks = [];
+  let cursor;
+  do {
+    const batch = await store.list({ prefix: CLICK_STATE_PREFIX, limit: 1000, cursor });
+    cursor = batch.cursor;
+    for (const key of batch.keys || []) {
+      const value = await store.get(key.name, "json");
+      if (value) clicks.push(value);
+    }
+    if (clicks.length >= 5000) break;
+  } while (cursor);
+  clicks.sort((a, b) => text(b.recorded_at).localeCompare(text(a.recorded_at)));
+  return {
+    ok: true,
+    generated_at: new Date().toISOString(),
+    retention_days: Math.round(CLICK_TTL_SECONDS / 86400),
+    summary: summarizeCampaignClicks(clicks),
+    clicks: clicks.slice(0, 500),
+  };
+}
+
+function summarizeCampaignClicks(clicks) {
+  const byPost = {};
+  const byPlatform = {};
+  const byDestination = {};
+  const byWave = {};
+  const byTrack = {};
+  for (const click of clicks) {
+    increment(byPost, click.post_id || "unknown");
+    increment(byPlatform, click.platform || "unknown");
+    increment(byDestination, click.destination || "unknown");
+    increment(byWave, click.wave || "unknown");
+    increment(byTrack, click.track_slug || click.track || "unknown");
+  }
+  return {
+    click_count: clicks.length,
+    post_count: Object.keys(byPost).length,
+    first_click_at: clicks.length ? clicks[clicks.length - 1].recorded_at || "" : "",
+    last_click_at: clicks.length ? clicks[0].recorded_at || "" : "",
+    by_post_id: sortedCounts(byPost),
+    by_platform: sortedCounts(byPlatform),
+    by_destination: sortedCounts(byDestination),
+    by_wave: sortedCounts(byWave),
+    by_track: sortedCounts(byTrack),
+  };
+}
+
+function increment(map, key) {
+  map[key] = (map[key] || 0) + 1;
+}
+
+function sortedCounts(map) {
+  return Object.entries(map)
+    .map(([key, count]) => ({ key, count }))
+    .sort((a, b) => b.count - a.count || a.key.localeCompare(b.key));
+}
+
+function campaignPostParts(postId) {
+  const match = text(postId).toLowerCase().match(/^fp-brand-am(?:-w(\d+))?-(\d{2})-(.+)-(x|facebook)$/);
+  if (!match) {
+    return { wave: "unknown", track: "", trackSlug: "", platform: "social" };
+  }
+  return {
+    wave: match[1] ? `w${match[1]}` : "track-moments",
+    track: match[2],
+    trackSlug: match[3],
+    platform: match[4],
+  };
+}
+
+function normalizeClickDestination(value) {
+  const clean = text(value).toLowerCase();
+  return ["album", "echo", "video", "listen", "playlist"].includes(clean) ? clean : "album";
+}
+
+function safeUrlText(value) {
+  const clean = text(value);
+  if (!clean || clean.length > 600) return "";
+  if (!isHttpUrl(clean) && !clean.startsWith("/")) return "";
+  return clean;
+}
+
+function refererHost(value) {
+  try {
+    return new URL(value).host;
+  } catch {
+    return "";
+  }
+}
+
+function userAgentFamily(value) {
+  const ua = text(value).toLowerCase();
+  if (!ua) return "";
+  if (ua.includes("facebookexternalhit") || ua.includes("facebot")) return "facebook";
+  if (ua.includes("twitterbot")) return "x";
+  if (ua.includes("bot") || ua.includes("crawler") || ua.includes("spider")) return "bot";
+  if (ua.includes("iphone") || ua.includes("android") || ua.includes("mobile")) return "mobile";
+  return "desktop";
 }
 
 function normalizeExecutionStateForOutput(item) {
