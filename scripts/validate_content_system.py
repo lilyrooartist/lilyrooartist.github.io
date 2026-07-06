@@ -480,11 +480,20 @@ def validate_generated_outputs(failures):
             and summary.get("manual_posting_required") is False
             and summary.get("learning_status") == learning_plan.get("status")
             and learning_plan.get("headline")
+            and learning_plan.get("note")
             and learning_plan.get("next_learning_question")
             and isinstance(learning_rows, list)
             and learning_rows
             and "capture_brand_campaign_clicks.py" in str(learning_plan.get("click_refresh_command") or "")
             and "No manual posting is required" in str(learning_plan.get("automation_note") or "")
+            and (
+                not summary.get("missing_metric_credentials")
+                or int(summary.get("measurement_due_rows") or 0) == 0
+                or (
+                    learning_plan.get("status") == "first_party_click_check_ready"
+                    and learning_plan.get("next_learning_due_at")
+                )
+            )
             and BRAND_GROWTH_PULSE_REPORT.exists()
             and "Post-Window Learning" in BRAND_GROWTH_PULSE_REPORT.read_text(encoding="utf-8")
             and "learningPlan" in admin_text

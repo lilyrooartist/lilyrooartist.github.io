@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-06T18:48:52.318491Z",
+  "generated_at": "2026-07-06T18:57:46.675825Z",
   "safe_mode": true,
-  "status": "campaign_running",
+  "status": "first_party_click_check_ready",
   "source": {
     "brand_growth_readout": "data/brand_growth_readout.json",
     "brand_growth_preflight": "data/brand_growth_preflight.json",
@@ -11,13 +11,13 @@
     "facebook_post_results": "data/facebook_post_results.json"
   },
   "summary": {
-    "status": "campaign_running",
+    "status": "first_party_click_check_ready",
     "primary_action": {
-      "state": "campaign_running",
-      "label": "Let the next automated posts run",
-      "why": "The active X/Facebook Analog Myth campaign is queued and ready; proof capture starts after the next window.",
-      "command": "python3 scripts/refresh_promo_admin.py",
-      "due_at": "2026-07-07T15:21:00Z"
+      "state": "first_party_click_check_ready",
+      "label": "Refresh first-party click learning",
+      "why": "4 recent posts are public and ready for a click-response check; X/Meta result metrics can join after credentials are connected.",
+      "command": "python3 scripts/capture_brand_campaign_clicks.py && python3 scripts/build_brand_growth_pulse.py",
+      "due_at": "2026-07-06T18:57:46.675825Z"
     },
     "active_campaign_ready": true,
     "posting_preflight_ready": true,
@@ -30,8 +30,8 @@
     "clicks_by_destination": {},
     "next_post_at": "2026-07-07T10:15:00-04:00",
     "proof_due_at": "2026-07-07T15:21:00Z",
-    "hours_until_next_post": 19.44,
-    "hours_until_proof_due": 20.54,
+    "hours_until_next_post": 19.29,
+    "hours_until_proof_due": 20.39,
     "missing_metric_credentials": [
       "FB_PAGE_ID",
       "META_LONG_LIVED_TOKEN",
@@ -40,25 +40,26 @@
       "X_API_KEY",
       "X_API_SECRET"
     ],
-    "learning_status": "learning_waiting_for_connected_metrics",
-    "learning_headline": "Post-window learning loop is queued",
+    "learning_status": "first_party_click_check_ready",
+    "learning_headline": "First-party click check is ready",
     "next_learning_question": "Which Analog Myth posts are turning attention into album, Echo Thread, or video clicks?",
     "measurement_due_rows": 4,
     "waiting_measurement_rows": 2,
-    "next_learning_due_at": "",
+    "next_learning_due_at": "2026-07-06T18:57:46.675825Z",
     "manual_posting_required": false,
     "report_path": "admin/reports/brand-growth-pulse.md",
     "refresh_command": "python3 scripts/build_brand_growth_pulse.py"
   },
   "learning_plan": {
-    "status": "learning_waiting_for_connected_metrics",
-    "label": "Learning queued",
-    "headline": "Post-window learning loop is queued",
+    "status": "first_party_click_check_ready",
+    "label": "Check clicks",
+    "headline": "First-party click check is ready",
+    "note": "Public proof is saved; refresh first-party click evidence now, then add private X/Facebook result counts after analytics credentials are connected.",
     "next_learning_question": "Which Analog Myth posts are turning attention into album, Echo Thread, or video clicks?",
     "measurement_due_count": 4,
     "waiting_measurement_count": 2,
     "scheduled_future_count": 58,
-    "next_learning_due_at": "",
+    "next_learning_due_at": "2026-07-06T18:57:46.675825Z",
     "next_metric_post_ids": [
       "FP-BRAND-AM-01-13-X",
       "FP-BRAND-AM-01-13-FACEBOOK"
@@ -75,7 +76,7 @@
       "python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK --post-id FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK"
     ],
     "automation_note": "No manual posting is required; this loop uses automatic posts, public URL proof, first-party click checks, and optional connected X/Facebook metrics.",
-    "credential_note": "X/Facebook result counts need connected analytics credentials, but the campaign can keep posting and learning from first-party clicks without them.",
+    "credential_note": "X/Facebook result counts need connected analytics credentials, but the campaign can keep posting and checking first-party click response without them.",
     "rows": [
       {
         "post_id": "FP-BRAND-AM-01-13-X",
@@ -166,16 +167,16 @@
         "learning_use": "Next queued learning input"
       }
     ],
-    "hours_until_next_learning_due": null
+    "hours_until_next_learning_due": 0.0
   },
   "recommendations": [
     {
-      "label": "Let the next automated posts run",
-      "detail": "The active X/Facebook Analog Myth campaign is queued and ready; proof capture starts after the next window.",
-      "command": "python3 scripts/refresh_promo_admin.py"
+      "label": "Refresh first-party click learning",
+      "detail": "4 recent posts are public and ready for a click-response check; X/Meta result metrics can join after credentials are connected.",
+      "command": "python3 scripts/capture_brand_campaign_clicks.py && python3 scripts/build_brand_growth_pulse.py"
     },
     {
-      "label": "Post-window learning loop is queued",
+      "label": "First-party click check is ready",
       "detail": "Which Analog Myth posts are turning attention into album, Echo Thread, or video clicks? No manual posting is required; this loop uses automatic posts, public URL proof, first-party click checks, and optional connected X/Facebook metrics.",
       "command": "python3 scripts/capture_brand_campaign_clicks.py && python3 scripts/build_brand_growth_pulse.py"
     },

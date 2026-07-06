@@ -151,10 +151,10 @@ def build_learning_plan(
     waiting_count = len(waiting_rows)
 
     if ready_count and missing_metrics:
-        status = "learning_waiting_for_connected_metrics"
-        headline = "Post-window learning loop is queued"
-        label = "Learning queued"
-        note = "Public proof and first-party click tracking are ready; private X/Facebook result counts can join after analytics credentials are connected."
+        status = "first_party_click_check_ready"
+        headline = "First-party click check is ready"
+        label = "Check clicks"
+        note = "Public proof is saved; refresh first-party click evidence now, then add private X/Facebook result counts after analytics credentials are connected."
     elif ready_count:
         status = "ready_to_compare_posts"
         headline = "Post-window learning is ready"
@@ -176,8 +176,8 @@ def build_learning_plan(
         label = "Watching"
         note = "The next learning signal starts when the upcoming queued posts publish and their public URLs are captured."
 
-    next_due = ""
-    if not ready_count:
+    next_due = iso_z(now) if ready_count and missing_metrics else ""
+    if not next_due and not ready_count:
         for row in waiting_rows:
             if row.get("measurement_due_at"):
                 next_due = row.get("measurement_due_at")
@@ -202,6 +202,7 @@ def build_learning_plan(
         "status": status,
         "label": label,
         "headline": headline,
+        "note": note,
         "next_learning_question": "Which Analog Myth posts are turning attention into album, Echo Thread, or video clicks?",
         "measurement_due_count": ready_count,
         "waiting_measurement_count": waiting_count,
@@ -221,7 +222,7 @@ def build_learning_plan(
             if command
         ],
         "automation_note": "No manual posting is required; this loop uses automatic posts, public URL proof, first-party click checks, and optional connected X/Facebook metrics.",
-        "credential_note": "X/Facebook result counts need connected analytics credentials, but the campaign can keep posting and learning from first-party clicks without them." if missing_metrics else "",
+        "credential_note": "X/Facebook result counts need connected analytics credentials, but the campaign can keep posting and checking first-party click response without them." if missing_metrics else "",
         "rows": selected,
         "hours_until_next_learning_due": hours_until(next_due, now),
     }
@@ -265,14 +266,6 @@ def pick_primary_action(
             "command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
             "due_at": proof_due_at,
         }
-    if active_campaign_ready and proof_hours is not None and proof_hours > 0:
-        return {
-            "state": "campaign_running",
-            "label": "Let the next automated posts run",
-            "why": "The active X/Facebook Analog Myth campaign is queued and ready; proof capture starts after the next window.",
-            "command": "python3 scripts/refresh_promo_admin.py",
-            "due_at": proof_due_at,
-        }
     if ready_metrics and not missing_metrics:
         return {
             "state": "measure_posts",
@@ -289,11 +282,19 @@ def pick_primary_action(
         }
     if ready_metrics and missing_metrics:
         return {
-            "state": "measurement_waiting_for_credentials",
-            "label": "Keep posting; connect result metrics when approved",
-            "why": f"{ready_metrics} recent {'post is' if ready_metrics == 1 else 'posts are'} ready to measure, but X/Meta result metrics are not connected.",
+            "state": "first_party_click_check_ready",
+            "label": "Refresh first-party click learning",
+            "why": f"{ready_metrics} recent {'post is' if ready_metrics == 1 else 'posts are'} public and ready for a click-response check; X/Meta result metrics can join after credentials are connected.",
             "command": "python3 scripts/capture_brand_campaign_clicks.py && python3 scripts/build_brand_growth_pulse.py",
-            "due_at": proof_due_at or "",
+            "due_at": iso_z(now),
+        }
+    if active_campaign_ready and proof_hours is not None and proof_hours > 0:
+        return {
+            "state": "campaign_running",
+            "label": "Let the next automated posts run",
+            "why": "The active X/Facebook Analog Myth campaign is queued and ready; proof capture starts after the next window.",
+            "command": "python3 scripts/refresh_promo_admin.py",
+            "due_at": proof_due_at,
         }
     if click_count:
         return {
@@ -338,7 +339,15 @@ def build_payload() -> dict:
     learning_plan = build_learning_plan(readout, readout_summary, click_summary, missing_metrics, now)
 
     next_post_at = readout_summary.get("next_scheduled_at") or preflight_summary.get("scheduled_time") or ""
-    proof_due_at = primary_action.get("due_at") or readout_summary.get("next_proof_due_at") or posting_summary.get("active_campaign_next_proof_due_at") or ""
+    primary_action_due_counts_as_proof = primary_action.get("state") in {"campaign_running", "proof_due"}
+    proof_due_at = (
+        (primary_action.get("due_at") if primary_action_due_counts_as_proof else "")
+        or readout_summary.get("next_proof_due_at")
+        or posting_summary.get("active_campaign_next_proof_due_at")
+        or preflight_summary.get("next_proof_due_at")
+        or preflight_summary.get("scheduled_time")
+        or ""
+    )
     status = primary_action["state"]
     blockers = []
     if missing_metrics:
@@ -462,6 +471,7 @@ def build_markdown(payload: dict) -> str:
         "## Post-Window Learning",
         f"- Status: **{learning.get('status', 'unknown')}**",
         f"- Headline: **{learning.get('headline', 'Post-window learning')}**",
+        f"- Note: {learning.get('note', 'n/a')}",
         f"- Question: {learning.get('next_learning_question', 'n/a')}",
         f"- Measurement due rows: **{learning.get('measurement_due_count', 0)}**",
         f"- Waiting measurement rows: **{learning.get('waiting_measurement_count', 0)}**",

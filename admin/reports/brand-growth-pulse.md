@@ -1,12 +1,12 @@
 # Brand Growth Pulse - Lily Roo
 
-Generated: 2026-07-06T18:48:52.318491Z
+Generated: 2026-07-06T18:57:46.675825Z
 
 ## Current Pulse
-- Status: **campaign_running**
-- Primary action: **Let the next automated posts run**
-- Why: The active X/Facebook Analog Myth campaign is queued and ready; proof capture starts after the next window.
-- Command: `python3 scripts/refresh_promo_admin.py`
+- Status: **first_party_click_check_ready**
+- Primary action: **Refresh first-party click learning**
+- Why: 4 recent posts are public and ready for a click-response check; X/Meta result metrics can join after credentials are connected.
+- Command: `python3 scripts/capture_brand_campaign_clicks.py && python3 scripts/build_brand_growth_pulse.py`
 - Active campaign ready: **True**
 - Posting preflight ready: **True**
 - Future queued posts: **58**
@@ -15,21 +15,22 @@ Generated: 2026-07-06T18:48:52.318491Z
 - First-party clicks: **0** across **0** post(s)
 - Next post at: `2026-07-07T10:15:00-04:00`
 - Proof due at: `2026-07-07T15:21:00Z`
-- Hours until next post: `19.44`
-- Hours until proof due: `20.54`
+- Hours until next post: `19.29`
+- Hours until proof due: `20.39`
 
 ## Post-Window Learning
-- Status: **learning_waiting_for_connected_metrics**
-- Headline: **Post-window learning loop is queued**
+- Status: **first_party_click_check_ready**
+- Headline: **First-party click check is ready**
+- Note: Public proof is saved; refresh first-party click evidence now, then add private X/Facebook result counts after analytics credentials are connected.
 - Question: Which Analog Myth posts are turning attention into album, Echo Thread, or video clicks?
 - Measurement due rows: **4**
 - Waiting measurement rows: **2**
 - Future scheduled rows: **58**
-- Next learning due at: `n/a`
+- Next learning due at: `2026-07-06T18:57:46.675825Z`
 - Click refresh: `python3 scripts/capture_brand_campaign_clicks.py`
 - Pulse refresh: `python3 scripts/build_brand_growth_pulse.py`
 - Automation note: No manual posting is required; this loop uses automatic posts, public URL proof, first-party click checks, and optional connected X/Facebook metrics.
-- Credential note: X/Facebook result counts need connected analytics credentials, but the campaign can keep posting and learning from first-party clicks without them.
+- Credential note: X/Facebook result counts need connected analytics credentials, but the campaign can keep posting and checking first-party click response without them.
 - Rows:
   - `FP-BRAND-AM-01-13-X` (X): 13 - Ready for post-window comparison
   - `FP-BRAND-AM-01-13-FACEBOOK` (Facebook): 13 - Ready for post-window comparison
@@ -41,9 +42,9 @@ Generated: 2026-07-06T18:48:52.318491Z
   - `FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK` (Facebook): Spilling The Tea - Next queued learning input
 
 ## Recommendations
-- **Let the next automated posts run**: The active X/Facebook Analog Myth campaign is queued and ready; proof capture starts after the next window.
-  - Command: `python3 scripts/refresh_promo_admin.py`
-- **Post-window learning loop is queued**: Which Analog Myth posts are turning attention into album, Echo Thread, or video clicks? No manual posting is required; this loop uses automatic posts, public URL proof, first-party click checks, and optional connected X/Facebook metrics.
+- **Refresh first-party click learning**: 4 recent posts are public and ready for a click-response check; X/Meta result metrics can join after credentials are connected.
+  - Command: `python3 scripts/capture_brand_campaign_clicks.py && python3 scripts/build_brand_growth_pulse.py`
+- **First-party click check is ready**: Which Analog Myth posts are turning attention into album, Echo Thread, or video clicks? No manual posting is required; this loop uses automatic posts, public URL proof, first-party click checks, and optional connected X/Facebook metrics.
   - Command: `python3 scripts/capture_brand_campaign_clicks.py && python3 scripts/build_brand_growth_pulse.py`
 - **Preserve the no-manual-posting lane**: Keep Analog Myth promotion on API-backed X/Facebook rows until another platform has a real automated path.
   - Command: `python3 scripts/build_posting_automation_status.py`
