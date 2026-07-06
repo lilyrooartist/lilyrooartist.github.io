@@ -232,6 +232,8 @@ GENERATED_REFRESH_PATHS = {
     "data/monetization_activation_plan.json",
     "data/platform_repair_status.json",
     "data/posting_automation_status.json",
+    "data/youtube_experiment_public_metrics.csv",
+    "data/youtube_experiment_public_metrics.json",
     "data/promo_admin_refresh_run.json",
     "data/promo_consistency_audit.json",
     "data/promo_engine_status.json",
