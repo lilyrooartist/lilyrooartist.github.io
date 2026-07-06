@@ -1,6 +1,6 @@
 # Posting Automation Status - Lily Roo
 
-Generated: 2026-07-06T19:15:07.198884Z
+Generated: 2026-07-06T19:15:44.312052Z
 
 ## Summary
 - Status: **ready_active_campaign**
@@ -20,10 +20,10 @@ Generated: 2026-07-06T19:15:07.198884Z
   - Evidence: data/brand_growth_preflight.json
   - Next: Watch FP-BRAND-AM-04-SPILLING-THE-TEA-X, FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK after 2026-07-07T15:21:00Z, then export posted URLs.
 - **Scheduled refresh workflow** - `ready`
-  - Detail: 17 */6 * * *, 25 15 * * *, 05 16 * * *; latest run in_progress / pending; proof refresh next fixed refresh 4 minute(s) after proof due
+  - Detail: 17 */6 * * *, 25 15 * * *, 05 16 * * *; latest run completed / success; proof refresh next fixed refresh 4 minute(s) after proof due
   - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28816847865
 - **Safe admin refresh** - `ready`
-  - Detail: 19 refresh commands captured at 2026-07-06T19:15:04.982480Z
+  - Detail: 19 refresh commands captured at 2026-07-06T19:15:40.541212Z
   - Evidence: data/promo_admin_refresh_run.json
 - **Scheduler dry-run authentication** - `ready`
   - Detail: HTTP 200 using bearer auth; due=0 would_post=0
