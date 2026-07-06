@@ -1,6 +1,6 @@
 # TikTok Repair Runbook - Lily Roo
 
-Generated: 2026-07-06T17:08:38.607024Z
+Generated: 2026-07-06T17:18:55.238328Z
 
 ## Summary
 - Status: **ready_for_backlog_clearance**
@@ -68,13 +68,12 @@ Generated: 2026-07-06T17:08:38.607024Z
   - Command: `python3 scripts/post_tiktok_from_queue.py --post-id FP-AUTO-264 --mode direct --dry-run`
 - **Apply push - Push direct-public worker secrets after review**: `ready`
   - Run the apply command only after local refresh credentials exist and direct public-posting approval is explicit.
-  - Command: `python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py`
 - **Verify repair - Recapture executor readiness**: `waiting`
   - After applying secrets, recapture worker readiness and rebuild the admin packets so platform repair, blocker, handoff, and backlog state agree.
   - Command: `python3 scripts/capture_executor_readiness.py && python3 scripts/refresh_promo_admin.py`
 - **Clear gate - Clear TikTok backlog gate**: `ready`
   - Once direct public worker readiness is clean, rerun the backlog reschedule preview and apply TikTok rows only if they can publish without manual finish.
-  - Command: `python3 scripts/build_backlog_reschedule_preview.py && python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-07T10:00:00-04:00' --spacing-hours 24`
+  - Command: `python3 scripts/build_backlog_reschedule_preview.py && python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-07T10:00:00+00:00' --spacing-hours 24`
 
 ## Guardrails
 - This runbook does not push secrets, approve public posting, publish posts, or clear backlog rows.
