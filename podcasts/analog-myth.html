@@ -88,11 +88,11 @@
         </p>
         <div class="hero-actions">
           <a class="btn btn-solid" href="#listen">Listen Now</a>
-          <a class="btn btn-ghost" href="/analog-myth.html">Album Page</a>
-          <a class="btn btn-ghost" href="https://youtu.be/xX2-Xf161js" target="_blank" rel="noopener">Watch on YouTube</a>
-          <a class="btn btn-ghost" href="https://distrokid.com/hyperfollow/lilyroo/analog-myth" target="_blank" rel="noopener">All Listening Links</a>
-          <a class="btn btn-ghost" href="https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0" target="_blank" rel="noopener">Album Playlist</a>
-          <a class="btn btn-ghost" href="/podcasts/feed.xml">RSS Feed</a>
+          <a class="btn btn-ghost" href="/go/am.html?p=site-podcast-hero-album&amp;to=album">Album Page</a>
+          <a class="btn btn-ghost" href="/go/am.html?p=site-podcast-hero-episode&amp;to=episode" target="_blank" rel="noopener">Watch on YouTube</a>
+          <a class="btn btn-ghost" href="/go/am.html?p=site-podcast-hero-listen&amp;to=listen" target="_blank" rel="noopener">All Listening Links</a>
+          <a class="btn btn-ghost" href="/go/am.html?p=site-podcast-hero-playlist&amp;to=playlist" target="_blank" rel="noopener">Album Playlist</a>
+          <a class="btn btn-ghost" href="/go/am.html?p=site-podcast-hero-rss&amp;to=rss">RSS Feed</a>
         </div>
       </div>
       <div class="podcast-player-card" id="listen">
@@ -100,8 +100,20 @@
         <audio controls preload="metadata" src="../assets/podcasts/analog-myth/analog-myth-the-clock-cannot-explain-this.m4a">
           <a href="../assets/podcasts/analog-myth/analog-myth-the-clock-cannot-explain-this.m4a">Download the episode audio</a>
         </audio>
-        <a class="btn btn-ghost" href="../assets/podcasts/analog-myth/analog-myth-the-clock-cannot-explain-this.m4a" download>Download Audio</a>
-        <a class="btn btn-ghost" href="https://youtu.be/xX2-Xf161js" target="_blank" rel="noopener">Watch on YouTube</a>
+        <a class="btn btn-ghost" href="/go/am.html?p=site-podcast-player-download&amp;to=download" download>Download Audio</a>
+        <a class="btn btn-ghost" href="/go/am.html?p=site-podcast-player-episode&amp;to=episode" target="_blank" rel="noopener">Watch on YouTube</a>
+      </div>
+    </section>
+
+    <section class="launch-share-strip" aria-labelledby="podcast-share-heading">
+      <div>
+        <p class="section-label">Pass the Episode</p>
+        <h2 id="podcast-share-heading">Echo Thread works best when it finds the right room.</h2>
+      </div>
+      <div class="launch-share-actions">
+        <button class="btn btn-solid share-button" type="button" data-share-url="https://www.lilyroo.com/go/am.html?p=site-podcast-share-echo&amp;to=echo" data-share-title="Echo Thread: Analog Myth" data-share-text="Echo Thread plays Analog Myth all the way through with Lily Roo in the room.">Share Episode</button>
+        <button class="btn btn-ghost share-button" type="button" data-share-url="https://www.lilyroo.com/go/am.html?p=site-podcast-share-album&amp;to=album" data-share-title="Analog Myth by Lily Roo" data-share-text="Analog Myth is live: eight Lily Roo songs, one broken clock, and the Echo Thread play-through in the room.">Share Album</button>
+        <button class="btn btn-ghost share-button" type="button" data-share-url="https://www.lilyroo.com/go/am.html?p=site-podcast-share-playlist&amp;to=playlist" data-share-title="Analog Myth playlist by Lily Roo" data-share-text="Watch the Analog Myth remastered album playlist from Lily Roo.">Share Playlist</button>
       </div>
     </section>
 
@@ -138,5 +150,6 @@
       <a href="/terms.html">Terms</a>
     </nav>
   </footer>
+  <script src="../script.js?v=20260706-podcast-tracking"></script>
 </body>
 </html>

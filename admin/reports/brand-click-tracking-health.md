@@ -1,6 +1,6 @@
 # Brand Click Tracking Health - Lily Roo
 
-Generated: 2026-07-06T22:19:20.469361Z
+Generated: 2026-07-06T22:37:36.263643Z
 
 ## Summary
 - Status: **ready**
@@ -15,6 +15,8 @@ Generated: 2026-07-06T22:19:20.469361Z
 - Site-share endpoint dry run: **ready**
 - Homepage CTA tracking: **ready** (11 / 11)
 - Homepage endpoint dry run: **ready**
+- Podcast CTA tracking: **ready** (10 / 10)
+- Podcast endpoint dry run: **ready**
 - Destinations: **album: 58, echo: 58, video: 58**
 - Issues: **none**
 
@@ -34,6 +36,9 @@ Generated: 2026-07-06T22:19:20.469361Z
 - adds_utm_campaign: **ok**
 - supports_album: **ok**
 - supports_echo: **ok**
+- supports_episode: **ok**
+- supports_rss: **ok**
+- supports_download: **ok**
 - supports_video: **ok**
 - has_noindex_guard: **ok**
 - canonical_points_to_album: **ok**
@@ -78,6 +83,23 @@ Generated: 2026-07-06T22:19:20.469361Z
 - `site-home-launch-playlist` -> `playlist`: **ready**
 - `site-home-launch-echo` -> `echo`: **ready**
 - `site-home-podcast-echo` -> `echo`: **ready**
+
+## Podcast Page CTA Tracking
+- Status: **ready**
+- CTA URLs ready: **10 / 10**
+- Podcast endpoint dry run: **ready**
+- Podcast probe id: `site-podcast-hero-album`
+- Podcast issues: **none**
+- `site-podcast-hero-album` -> `album`: **ready**
+- `site-podcast-hero-episode` -> `episode`: **ready**
+- `site-podcast-hero-listen` -> `listen`: **ready**
+- `site-podcast-hero-playlist` -> `playlist`: **ready**
+- `site-podcast-hero-rss` -> `rss`: **ready**
+- `site-podcast-player-download` -> `download`: **ready**
+- `site-podcast-player-episode` -> `episode`: **ready**
+- `site-podcast-share-echo` -> `echo`: **ready**
+- `site-podcast-share-album` -> `album`: **ready**
+- `site-podcast-share-playlist` -> `playlist`: **ready**
 
 ## Future Rows
 - `FP-BRAND-AM-04-SPILLING-THE-TEA-X` X 2026-07-07T10:15:00-04:00 - **ready** (3 links)
@@ -293,4 +315,5 @@ Generated: 2026-07-06T22:19:20.469361Z
 - Every future Analog Myth auto post should expose an album link on the visible published surface.
 - Album-page share buttons should use first-party site-share tracking links.
 - Homepage Analog Myth CTAs should use first-party site-home tracking links.
+- Podcast-page Analog Myth CTAs should use first-party site-podcast tracking links.
 - The live click endpoint health probe uses dry_run=1 so it cannot create fake campaign clicks.

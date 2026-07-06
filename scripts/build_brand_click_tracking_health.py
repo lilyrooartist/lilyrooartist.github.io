@@ -17,6 +17,7 @@ QUEUE = ROOT / "data" / "scheduled_posts.csv"
 FUTURE = ROOT / "admin" / "future-posts.json"
 REDIRECT = ROOT / "go" / "am.html"
 HOME_PAGE = ROOT / "index.html"
+PODCAST_PAGE = ROOT / "podcasts" / "analog-myth.html"
 ANALOG_MYTH_PAGE = ROOT / "analog-myth.html"
 OUT = ROOT / "data" / "brand_click_tracking_health.json"
 REPORT = ROOT / "admin" / "reports" / "brand-click-tracking-health.md"
@@ -53,6 +54,18 @@ SITE_HOME_EXPECTED = {
     "site-home-launch-echo": {"destination": "echo"},
     "site-home-podcast-echo": {"destination": "echo"},
 }
+SITE_PODCAST_EXPECTED = {
+    "site-podcast-hero-album": {"destination": "album"},
+    "site-podcast-hero-episode": {"destination": "episode"},
+    "site-podcast-hero-listen": {"destination": "listen"},
+    "site-podcast-hero-playlist": {"destination": "playlist"},
+    "site-podcast-hero-rss": {"destination": "rss"},
+    "site-podcast-player-download": {"destination": "download"},
+    "site-podcast-player-episode": {"destination": "episode"},
+    "site-podcast-share-echo": {"destination": "echo"},
+    "site-podcast-share-album": {"destination": "album"},
+    "site-podcast-share-playlist": {"destination": "playlist"},
+}
 CLICK_DRY_RUN_BASE = "https://www.lilyroo.com/api/social/click"
 CLICK_DRY_RUN_USER_AGENT = "LilyRooClickDryRun/1.0"
 
@@ -82,6 +95,9 @@ def post_parts(post_id: str) -> dict:
     site_home = re.match(r"^site-home-(hero|starter|launch|podcast)-(album|echo|listen|playlist|video)$", normalized)
     if site_home:
         return {"post_id": normalized, "wave": "site-home", "track": "", "platform": "site"}
+    site_podcast = re.match(r"^site-podcast-(hero|player|share)-(album|echo|episode|listen|playlist|rss|download)$", normalized)
+    if site_podcast:
+        return {"post_id": normalized, "wave": "site-podcast", "track": "", "platform": "site"}
     site_share = re.match(r"^site-share-(album|echo|video|track-(\d{2})-[a-z0-9-]+)$", normalized)
     if site_share:
         return {"post_id": normalized, "wave": "site-share", "track": site_share.group(2) or "", "platform": "site"}
@@ -128,6 +144,21 @@ def site_home_urls() -> list[str]:
         for url in re.findall(r'href="(/go/am\.html\?[^"]+)"', text)
     ]
     return [f"https://www.lilyroo.com{url}" for url in urls]
+
+
+def site_podcast_urls() -> list[str]:
+    if not PODCAST_PAGE.exists():
+        return []
+    text = PODCAST_PAGE.read_text(encoding="utf-8")
+    hrefs = [
+        url.replace("&amp;", "&")
+        for url in re.findall(r'href="(/go/am\.html\?[^"]+)"', text)
+    ]
+    share_urls = [
+        url.replace("&amp;", "&")
+        for url in re.findall(r'data-share-url="(https://www\.lilyroo\.com/go/am\.html\?[^"]+)"', text)
+    ]
+    return [f"https://www.lilyroo.com{url}" for url in hrefs] + share_urls
 
 
 def visible_surface_text(row: dict) -> str:
@@ -178,6 +209,9 @@ def redirect_health() -> dict:
         "adds_utm_campaign": "analog_myth_brand_growth" in text,
         "supports_album": "album:" in text,
         "supports_echo": "echo:" in text,
+        "supports_episode": "episode:" in text and "https://youtu.be/xX2-Xf161js" in text,
+        "supports_rss": "rss:" in text,
+        "supports_download": "download:" in text,
         "supports_video": 'destination === "video"' in text,
         "has_noindex_guard": 'name="robots" content="noindex"' in text,
         "canonical_points_to_album": 'rel="canonical" href="https://www.lilyroo.com/analog-myth.html"' in text,
@@ -500,6 +534,13 @@ def build_payload() -> dict:
         "site-home-hero-album",
         "album",
     )
+    site_podcast = expected_site_url_health(
+        "site_podcast",
+        site_podcast_urls(),
+        SITE_PODCAST_EXPECTED,
+        "site-podcast-hero-album",
+        "album",
+    )
     ready_rows = sum(1 for row in rows if row["ok"])
     broken_rows = len(rows) - ready_rows
     total_urls = sum(row["tracking_url_count"] for row in rows)
@@ -515,6 +556,7 @@ def build_payload() -> dict:
             and redirect["status"] == "ready"
             and site_share["status"] == "ready"
             and site_home["status"] == "ready"
+            and site_podcast["status"] == "ready"
         )
         else "attention"
     )
@@ -527,6 +569,7 @@ def build_payload() -> dict:
             "future_posts": rel(FUTURE),
             "redirect_page": rel(REDIRECT),
             "home_page": rel(HOME_PAGE),
+            "podcast_page": rel(PODCAST_PAGE),
         },
         "summary": {
             "status": status,
@@ -558,6 +601,10 @@ def build_payload() -> dict:
             "site_home_url_count": site_home["url_count"],
             "expected_site_home_url_count": site_home["expected_url_count"],
             "site_home_endpoint_status": site_home["click_endpoint"].get("status"),
+            "site_podcast_status": site_podcast["status"],
+            "site_podcast_url_count": site_podcast["url_count"],
+            "expected_site_podcast_url_count": site_podcast["expected_url_count"],
+            "site_podcast_endpoint_status": site_podcast["click_endpoint"].get("status"),
             "report_path": rel(REPORT),
             "refresh_command": "python3 scripts/build_brand_click_tracking_health.py",
         },
@@ -565,6 +612,7 @@ def build_payload() -> dict:
         "click_endpoint": click_endpoint,
         "site_share": site_share,
         "site_home": site_home,
+        "site_podcast": site_podcast,
         "rows": rows,
         "guardrails": [
             "This check is read-only and does not post.",
@@ -575,6 +623,7 @@ def build_payload() -> dict:
             "Every future Analog Myth auto post should expose an album link on the visible published surface.",
             "Album-page share buttons should use first-party site-share tracking links.",
             "Homepage Analog Myth CTAs should use first-party site-home tracking links.",
+            "Podcast-page Analog Myth CTAs should use first-party site-podcast tracking links.",
             "The live click endpoint health probe uses dry_run=1 so it cannot create fake campaign clicks.",
         ],
     }
@@ -600,6 +649,8 @@ def build_markdown(payload: dict) -> str:
         f"- Site-share endpoint dry run: **{summary['site_share_endpoint_status']}**",
         f"- Homepage CTA tracking: **{summary['site_home_status']}** ({summary['site_home_url_count']} / {summary['expected_site_home_url_count']})",
         f"- Homepage endpoint dry run: **{summary['site_home_endpoint_status']}**",
+        f"- Podcast CTA tracking: **{summary['site_podcast_status']}** ({summary['site_podcast_url_count']} / {summary['expected_site_podcast_url_count']})",
+        f"- Podcast endpoint dry run: **{summary['site_podcast_endpoint_status']}**",
         f"- Destinations: **{', '.join(f'{key}: {value}' for key, value in summary['destination_counts'].items()) or 'none'}**",
         f"- Issues: **{', '.join(f'{key}: {value}' for key, value in summary['issue_counts'].items()) or 'none'}**",
         "",
@@ -646,6 +697,21 @@ def build_markdown(payload: dict) -> str:
         f"- Homepage issues: **{', '.join(f'{key}: {value}' for key, value in (site_home.get('issue_counts') or {}).items()) or 'none'}**",
     ])
     for row in site_home.get("rows") or []:
+        lines.append(
+            f"- `{row.get('id') or 'unknown'}` -> `{row.get('destination') or 'unknown'}`: **{'ready' if row.get('ok') else 'attention'}**"
+        )
+    site_podcast = payload.get("site_podcast") or {}
+    site_podcast_endpoint = site_podcast.get("click_endpoint") or {}
+    lines.extend([
+        "",
+        "## Podcast Page CTA Tracking",
+        f"- Status: **{site_podcast.get('status') or 'unknown'}**",
+        f"- CTA URLs ready: **{site_podcast.get('ready_url_count', 0)} / {site_podcast.get('expected_url_count', 0)}**",
+        f"- Podcast endpoint dry run: **{site_podcast_endpoint.get('status') or 'unknown'}**",
+        f"- Podcast probe id: `{site_podcast_endpoint.get('expected_post_id') or 'n/a'}`",
+        f"- Podcast issues: **{', '.join(f'{key}: {value}' for key, value in (site_podcast.get('issue_counts') or {}).items()) or 'none'}**",
+    ])
+    for row in site_podcast.get("rows") or []:
         lines.append(
             f"- `{row.get('id') or 'unknown'}` -> `{row.get('destination') or 'unknown'}`: **{'ready' if row.get('ok') else 'attention'}**"
         )

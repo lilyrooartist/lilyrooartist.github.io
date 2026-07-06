@@ -135,19 +135,29 @@
     const DESTINATIONS = {
       album: "/analog-myth.html",
       echo: "/podcasts/analog-myth.html",
+      episode: "https://youtu.be/xX2-Xf161js",
       listen: "https://distrokid.com/hyperfollow/lilyroo/analog-myth",
-      playlist: "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0"
+      playlist: "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+      rss: "/podcasts/feed.xml",
+      download: "/assets/podcasts/analog-myth/analog-myth-the-clock-cannot-explain-this.m4a"
     };
     const DESTINATION_LABELS = {
       album: "the album page",
       echo: "the Echo Thread play-through",
+      episode: "the YouTube episode",
       listen: "the listening links",
       playlist: "the album playlist",
+      rss: "the RSS feed",
+      download: "the episode audio",
       video: "the track video"
     };
 
     function postParts(postId) {
       const normalized = String(postId || "").toLowerCase();
+      const sitePodcast = normalized.match(/^site-podcast-(hero|player|share)-(album|echo|episode|listen|playlist|rss|download)$/);
+      if (sitePodcast) {
+        return { postId: normalized, wave: "site-podcast", track: "", platform: "site" };
+      }
       const siteHome = normalized.match(/^site-home-(hero|starter|launch|podcast)-(album|echo|listen|playlist|video)$/);
       if (siteHome) {
         return { postId: normalized, wave: "site-home", track: "", platform: "site" };
