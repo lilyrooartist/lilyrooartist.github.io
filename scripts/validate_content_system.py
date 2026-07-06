@@ -88,6 +88,7 @@ SOCIAL_SCHEDULER_CAPTURE = ROOT / "scripts" / "capture_scheduler_dry_run.py"
 YOUTUBE_POST_RESULTS_CAPTURE = ROOT / "scripts" / "capture_youtube_post_results.py"
 SOCIAL_EXECUTION_RESET = ROOT / "scripts" / "reset_social_execution_state.py"
 PROMO_REFRESH_SCRIPT = ROOT / "scripts" / "refresh_promo_admin.py"
+PROMO_ENGINE_STATUS_SCRIPT = ROOT / "scripts" / "update_promo_engine_status.py"
 PROMO_REFRESH_WORKFLOW_CAPTURE = ROOT / "scripts" / "capture_github_workflow_status.py"
 PROMO_REFRESH_WORKFLOW = ROOT / ".github" / "workflows" / "promo-admin-refresh.yml"
 PROMO_REFRESH_SETTLE_WORKFLOW = ROOT / ".github" / "workflows" / "promo-admin-refresh-status-settle.yml"
@@ -4166,6 +4167,19 @@ def validate_generated_outputs(failures):
             fail("capture_github_workflow_status.py missing GitHub workflow run capture support", failures)
     else:
         fail("capture_github_workflow_status.py missing", failures)
+    if PROMO_ENGINE_STATUS_SCRIPT.exists():
+        status_script_text = PROMO_ENGINE_STATUS_SCRIPT.read_text(encoding="utf-8")
+        if (
+            "GENERATED_REFRESH_PATHS" in status_script_text
+            and "data/youtube_experiment_public_metrics.json" in status_script_text
+            and "data/youtube_experiment_public_metrics.csv" in status_script_text
+            and "latest_run_covers_source_commit" in status_script_text
+        ):
+            ok("promo engine status treats YouTube public metrics as generated refresh output")
+        else:
+            fail("update_promo_engine_status.py missing generated refresh coverage for YouTube public metrics", failures)
+    else:
+        fail("update_promo_engine_status.py missing", failures)
     if PROMO_REFRESH_WORKFLOW.exists():
         workflow_text = PROMO_REFRESH_WORKFLOW.read_text(encoding="utf-8")
         required_bits = [
