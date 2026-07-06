@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import subprocess
 import sys
 import urllib.error
@@ -28,6 +29,22 @@ REPORT = ROOT / "admin" / "reports" / "brand-growth-preflight.md"
 REPORT_INDEX = ROOT / "admin" / "reports" / "index.html"
 ADMIN_INDEX = ROOT / "admin" / "index.html"
 CAMPAIGN_ID_PREFIX = "FP-BRAND-AM"
+TRACK_VIDEO_URLS = {
+    "01": "https://youtu.be/XL5VOVxwTw4",
+    "02": "https://youtu.be/TxBhM3_nAU8",
+    "03": "https://youtu.be/_rtioKYbCFM",
+    "04": "https://youtu.be/AfnuwBYViKw",
+    "05": "https://youtu.be/-r7khqOLpjQ",
+    "06": "https://youtu.be/yn_315-h5vM",
+    "07": "https://youtu.be/nPuGjQf7lKY",
+    "08": "https://youtu.be/ctZ2TRBWC-c",
+}
+DESTINATION_TARGETS = {
+    "album": "https://www.lilyroo.com/analog-myth.html",
+    "echo": "https://www.lilyroo.com/podcasts/analog-myth.html",
+    "listen": "https://distrokid.com/hyperfollow/lilyroo/analog-myth",
+    "playlist": "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+}
 REPLY_LINK_LABELS = {
     "Listen",
     "Album",
@@ -226,6 +243,47 @@ def check_url(url: str, label: str, timeout: int = 20) -> dict:
     return {"label": label, "url": url, "ok": False, "status": 0, "content_type": "", "content_length": "", "error": "unreachable"}
 
 
+def tracking_target(url: str) -> dict | None:
+    parsed = urllib.parse.urlparse(url)
+    if parsed.path != "/go/am.html":
+        return None
+    query = urllib.parse.parse_qs(parsed.query)
+    destination = (query.get("to") or ["album"])[0]
+    post_id = (query.get("p") or [""])[0]
+    match = re.match(r"^fp-brand-am(?:-w\d+)?-(\d{2})-.+-(?:x|facebook)$", post_id)
+    track = match.group(1) if match else ""
+    target_url = TRACK_VIDEO_URLS.get(track, "") if destination == "video" else DESTINATION_TARGETS.get(destination, "")
+    return {
+        "post_id": post_id,
+        "destination": destination,
+        "track": track,
+        "target_url": target_url,
+    }
+
+
+def target_link_checks(link_checks: list[dict]) -> list[dict]:
+    checks = []
+    for item in link_checks:
+        target = tracking_target(str(item.get("url") or ""))
+        if not target:
+            continue
+        label = f"{item.get('label')} target {target.get('destination')}"
+        target_url = target.get("target_url") or ""
+        result = (
+            check_url(target_url, label)
+            if target_url
+            else {"label": label, "url": "", "ok": False, "status": 0, "content_type": "", "content_length": "", "error": "missing target URL"}
+        )
+        result.update({
+            "source_tracking_url": item.get("url") or "",
+            "destination": target.get("destination") or "",
+            "track": target.get("track") or "",
+            "post_id": target.get("post_id") or "",
+        })
+        checks.append(result)
+    return checks
+
+
 def link_checks(posts: list[dict]) -> list[dict]:
     checks = []
     seen: set[tuple[str, str, str]] = set()
@@ -292,11 +350,15 @@ def build_payload() -> dict:
     unexpected_due = [post_id for post_id in would_post_ids if post_id not in expected]
     checks = link_checks(window["posts"])
     tracking_checks = [item for item in checks if "/go/am.html" in str(item.get("url") or "")]
+    target_checks = target_link_checks(tracking_checks)
     expected_tracking_checks = len(expected) * 3
     check_counts = Counter("ok" if item.get("ok") else "failed" for item in checks)
     tracking_ok_count = sum(1 for item in tracking_checks if item.get("ok"))
+    target_check_counts = Counter("ok" if item.get("ok") else "failed" for item in target_checks)
     warning_count = sum(1 for item in checks if item.get("readiness_warning"))
     blocking_failed_count = sum(1 for item in checks if not item.get("ok") and not item.get("readiness_warning"))
+    target_warning_count = sum(1 for item in target_checks if item.get("readiness_warning"))
+    target_blocking_failed_count = sum(1 for item in target_checks if not item.get("ok") and not item.get("readiness_warning"))
     ready = (
         bool(expected)
         and status == 200
@@ -305,6 +367,8 @@ def build_payload() -> dict:
         and not missing_due
         and not unexpected_due
         and tracking_ok_count == expected_tracking_checks
+        and len(target_checks) == expected_tracking_checks
+        and target_blocking_failed_count == 0
         and blocking_failed_count == 0
     )
     payload = {
@@ -338,6 +402,12 @@ def build_payload() -> dict:
             "tracking_link_check_count": len(tracking_checks),
             "tracking_link_ok_count": tracking_ok_count,
             "expected_tracking_link_check_count": expected_tracking_checks,
+            "target_link_check_count": len(target_checks),
+            "target_link_ok_count": target_check_counts.get("ok", 0),
+            "target_link_failed_count": target_check_counts.get("failed", 0),
+            "target_link_warning_count": target_warning_count,
+            "target_link_blocking_failed_count": target_blocking_failed_count,
+            "expected_target_link_check_count": expected_tracking_checks,
             "link_warning_count": warning_count,
             "link_blocking_failed_count": blocking_failed_count,
             "next_proof_due_at": iso_z(scheduled_time),
@@ -348,6 +418,7 @@ def build_payload() -> dict:
         },
         "scheduler_summary": scheduler_summary,
         "link_checks": checks,
+        "target_checks": target_checks,
         "next_window_posts": [
             {
                 "id": post.get("id") or "",
@@ -384,6 +455,7 @@ def build_markdown(payload: dict) -> str:
         f"- Scheduler: HTTP **{summary.get('scheduler_http_status')}**, auth `{summary.get('scheduler_auth_method')}`, due **{summary.get('scheduler_due_count')}**, would post **{summary.get('scheduler_would_post_count')}**, blocked **{summary.get('scheduler_blocked_count')}**",
         f"- Link checks: **{summary.get('link_ok_count')} ok**, **{summary.get('link_failed_count')} failed**, **{summary.get('link_warning_count', 0)} warning**, **{summary.get('link_blocking_failed_count', summary.get('link_failed_count', 0))} blocking failed**",
         f"- Tracking redirects: **{summary.get('tracking_link_ok_count', 0)} / {summary.get('expected_tracking_link_check_count', 0)} checked ok**",
+        f"- Redirect targets: **{summary.get('target_link_check_count', 0)} / {summary.get('expected_target_link_check_count', 0)} checked**, **{summary.get('target_link_ok_count', 0)} ok**, **{summary.get('target_link_warning_count', 0)} warning**, **{summary.get('target_link_blocking_failed_count', 0)} blocking failed**",
         f"- Current window proof due: `{summary.get('next_proof_due_at') or 'n/a'}`",
         f"- Current window measurement due: `{summary.get('next_measurement_due_at') or 'n/a'}`",
         "",
@@ -405,6 +477,11 @@ def build_markdown(payload: dict) -> str:
             lines.append(f"- `{post_id}`")
     lines.extend(["", "## Link Checks"])
     for item in payload.get("link_checks") or []:
+        marker = "ok" if item.get("ok") else ("warning" if item.get("readiness_warning") else "failed")
+        detail = item.get("content_type") or item.get("error") or ""
+        lines.append(f"- **{marker}** `{item.get('label')}` {item.get('status')} {detail}")
+    lines.extend(["", "## Redirect Target Checks"])
+    for item in payload.get("target_checks") or []:
         marker = "ok" if item.get("ok") else ("warning" if item.get("readiness_warning") else "failed")
         detail = item.get("content_type") or item.get("error") or ""
         lines.append(f"- **{marker}** `{item.get('label')}` {item.get('status')} {detail}")

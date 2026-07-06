@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-07-06T18:39:15.774508Z",
+  "generated_at": "2026-07-06T18:48:50.965289Z",
   "safe_mode": true,
   "source": {
     "future_posts": "admin/future-posts.json",
     "brand_growth_readout": "data/brand_growth_readout.json",
     "scheduler_endpoint": "https://www.lilyroo.com/api/social/scheduler/dry-run",
-    "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/2f15d41e8d1546a6f4ea52cf7cb3c36c1834f071/admin/future-posts.json"
+    "queue_url": "https://raw.githubusercontent.com/lilyrooartist/lilyrooartist.github.io/92d10694674aaf8d393acf271276eb1b6245866c/admin/future-posts.json"
   },
   "summary": {
     "status": "ready",
@@ -32,6 +32,12 @@
     "tracking_link_check_count": 6,
     "tracking_link_ok_count": 6,
     "expected_tracking_link_check_count": 6,
+    "target_link_check_count": 6,
+    "target_link_ok_count": 6,
+    "target_link_failed_count": 0,
+    "target_link_warning_count": 0,
+    "target_link_blocking_failed_count": 0,
+    "expected_target_link_check_count": 6,
     "link_warning_count": 0,
     "link_blocking_failed_count": 0,
     "next_proof_due_at": "2026-07-07T15:21:00Z",
@@ -166,6 +172,96 @@
       "content_length": "4392",
       "error": "",
       "source": "local_static_file"
+    }
+  ],
+  "target_checks": [
+    {
+      "label": "FP-BRAND-AM-04-SPILLING-THE-TEA-X Album target album",
+      "url": "https://www.lilyroo.com/analog-myth.html",
+      "ok": true,
+      "status": 200,
+      "final_url": "https://www.lilyroo.com/analog-myth.html",
+      "content_type": "text/html",
+      "content_length": "15194",
+      "error": "",
+      "source": "local_static_file",
+      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-04-spilling-the-tea-x&to=album",
+      "destination": "album",
+      "track": "04",
+      "post_id": "fp-brand-am-04-spilling-the-tea-x"
+    },
+    {
+      "label": "FP-BRAND-AM-04-SPILLING-THE-TEA-X Echo target echo",
+      "url": "https://www.lilyroo.com/podcasts/analog-myth.html",
+      "ok": true,
+      "status": 200,
+      "final_url": "https://www.lilyroo.com/podcasts/analog-myth.html",
+      "content_type": "text/html",
+      "content_length": "6981",
+      "error": "",
+      "source": "local_static_file",
+      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-04-spilling-the-tea-x&to=echo",
+      "destination": "echo",
+      "track": "04",
+      "post_id": "fp-brand-am-04-spilling-the-tea-x"
+    },
+    {
+      "label": "FP-BRAND-AM-04-SPILLING-THE-TEA-X Video target video",
+      "url": "https://youtu.be/AfnuwBYViKw",
+      "ok": true,
+      "status": 200,
+      "final_url": "https://www.youtube.com/watch?v=AfnuwBYViKw&feature=youtu.be",
+      "content_type": "text/html; charset=utf-8",
+      "content_length": "",
+      "error": "",
+      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-04-spilling-the-tea-x&to=video",
+      "destination": "video",
+      "track": "04",
+      "post_id": "fp-brand-am-04-spilling-the-tea-x"
+    },
+    {
+      "label": "FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK Analog Myth target album",
+      "url": "https://www.lilyroo.com/analog-myth.html",
+      "ok": true,
+      "status": 200,
+      "final_url": "https://www.lilyroo.com/analog-myth.html",
+      "content_type": "text/html",
+      "content_length": "15194",
+      "error": "",
+      "source": "local_static_file",
+      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-04-spilling-the-tea-facebook&to=album",
+      "destination": "album",
+      "track": "04",
+      "post_id": "fp-brand-am-04-spilling-the-tea-facebook"
+    },
+    {
+      "label": "FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK Echo Thread target echo",
+      "url": "https://www.lilyroo.com/podcasts/analog-myth.html",
+      "ok": true,
+      "status": 200,
+      "final_url": "https://www.lilyroo.com/podcasts/analog-myth.html",
+      "content_type": "text/html",
+      "content_length": "6981",
+      "error": "",
+      "source": "local_static_file",
+      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-04-spilling-the-tea-facebook&to=echo",
+      "destination": "echo",
+      "track": "04",
+      "post_id": "fp-brand-am-04-spilling-the-tea-facebook"
+    },
+    {
+      "label": "FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK Track video target video",
+      "url": "https://youtu.be/AfnuwBYViKw",
+      "ok": true,
+      "status": 200,
+      "final_url": "https://www.youtube.com/watch?v=AfnuwBYViKw&feature=youtu.be",
+      "content_type": "text/html; charset=utf-8",
+      "content_length": "",
+      "error": "",
+      "source_tracking_url": "https://www.lilyroo.com/go/am.html?p=fp-brand-am-04-spilling-the-tea-facebook&to=video",
+      "destination": "video",
+      "track": "04",
+      "post_id": "fp-brand-am-04-spilling-the-tea-facebook"
     }
   ],
   "next_window_posts": [

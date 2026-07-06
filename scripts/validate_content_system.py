@@ -398,6 +398,10 @@ def validate_generated_outputs(failures):
         expected_count = int(summary.get("expected_post_count") or 0)
         blocking_link_failures = int(summary.get("link_blocking_failed_count", summary.get("link_failed_count") or 0) or 0)
         expected_tracking_links = expected_count * 3
+        target_links_checked = int(summary.get("target_link_check_count") or 0)
+        target_links_ok = int(summary.get("target_link_ok_count") or 0)
+        target_link_warnings = int(summary.get("target_link_warning_count") or 0)
+        target_link_blocking_failures = int(summary.get("target_link_blocking_failed_count") or 0)
         if (
             preflight.get("safe_mode") is True
             and summary.get("status") == "ready"
@@ -408,6 +412,10 @@ def validate_generated_outputs(failures):
             and int(summary.get("tracking_link_check_count") or 0) == expected_tracking_links
             and int(summary.get("tracking_link_ok_count") or 0) == expected_tracking_links
             and int(summary.get("expected_tracking_link_check_count") or 0) == expected_tracking_links
+            and target_links_checked == expected_tracking_links
+            and int(summary.get("expected_target_link_check_count") or 0) == expected_tracking_links
+            and (target_links_ok + target_link_warnings) == expected_tracking_links
+            and target_link_blocking_failures == 0
             and blocking_link_failures == 0
             and not summary.get("missing_due_ids")
             and not summary.get("unexpected_due_ids")

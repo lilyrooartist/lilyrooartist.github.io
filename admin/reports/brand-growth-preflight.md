@@ -1,6 +1,6 @@
 # Brand Growth Preflight - Lily Roo
 
-Generated: 2026-07-06T18:39:15.774508Z
+Generated: 2026-07-06T18:48:50.965289Z
 
 ## Summary
 - Status: **ready**
@@ -9,6 +9,7 @@ Generated: 2026-07-06T18:39:15.774508Z
 - Scheduler: HTTP **200**, auth `bearer`, due **2**, would post **2**, blocked **0**
 - Link checks: **8 ok**, **0 failed**, **0 warning**, **0 blocking failed**
 - Tracking redirects: **6 / 6 checked ok**
+- Redirect targets: **6 / 6 checked**, **6 ok**, **0 warning**, **0 blocking failed**
 - Current window proof due: `2026-07-07T15:21:00Z`
 - Current window measurement due: `2026-07-08T15:20:00Z`
 
@@ -25,6 +26,14 @@ Generated: 2026-07-06T18:39:15.774508Z
 - **ok** `FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK Analog Myth` 200 text/html
 - **ok** `FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK Echo Thread` 200 text/html
 - **ok** `FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK Track video` 200 text/html
+
+## Redirect Target Checks
+- **ok** `FP-BRAND-AM-04-SPILLING-THE-TEA-X Album target album` 200 text/html
+- **ok** `FP-BRAND-AM-04-SPILLING-THE-TEA-X Echo target echo` 200 text/html
+- **ok** `FP-BRAND-AM-04-SPILLING-THE-TEA-X Video target video` 200 text/html; charset=utf-8
+- **ok** `FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK Analog Myth target album` 200 text/html
+- **ok** `FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK Echo Thread target echo` 200 text/html
+- **ok** `FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK Track video target video` 200 text/html; charset=utf-8
 
 ## Guardrails
 - Preflight is read-only; it calls the scheduler dry-run endpoint and HEAD-checks public URLs.
