@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import subprocess
 import urllib.error
 import urllib.request
 from collections import Counter
@@ -71,7 +72,29 @@ def default_queue_url() -> str:
     sha = os.environ.get("GITHUB_SHA", "").strip()
     if repository and sha:
         return f"https://raw.githubusercontent.com/{repository}/{sha}/admin/future-posts.json"
+    repository = github_repository_from_origin()
+    sha = git_output(["rev-parse", "HEAD"])
+    if repository and sha:
+        return f"https://raw.githubusercontent.com/{repository}/{sha}/admin/future-posts.json"
     return ""
+
+
+def git_output(args: list[str]) -> str:
+    try:
+        return subprocess.check_output(["git", *args], cwd=ROOT, text=True, stderr=subprocess.DEVNULL).strip()
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        return ""
+
+
+def github_repository_from_origin() -> str:
+    remote = git_output(["config", "--get", "remote.origin.url"])
+    if remote.startswith("https://github.com/"):
+        repo = remote.removeprefix("https://github.com/")
+    elif remote.startswith("git@github.com:"):
+        repo = remote.removeprefix("git@github.com:")
+    else:
+        return ""
+    return repo.removesuffix(".git").strip("/")
 
 
 def fetch(url: str, scheduled_time: str, queue_url: str = "") -> tuple[int, dict, str]:
