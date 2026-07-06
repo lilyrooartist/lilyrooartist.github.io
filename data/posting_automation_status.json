@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-06T16:58:37.975846Z",
+  "generated_at": "2026-07-06T17:04:25.377455Z",
   "safe_mode": true,
   "source": {
     "workflow": ".github/workflows/promo-admin-refresh.yml",
@@ -31,8 +31,13 @@
     "lane_count": 9,
     "workflow_crons": [
       "17 */6 * * *",
+      "25 15 * * *",
       "05 16 * * *"
     ],
+    "active_campaign_proof_refresh_status": "ready",
+    "active_campaign_next_proof_refresh_at": "2026-07-07T15:25:00Z",
+    "active_campaign_proof_refresh_lag_minutes": 4,
+    "active_campaign_proof_refresh_cron": "25 15 * * *",
     "scheduler_http_status": 200,
     "scheduler_auth_method": "bearer",
     "scheduler_refresh_step_ok": true,
@@ -48,6 +53,14 @@
     "help_needed_count": 0,
     "next_action": "Watch FP-BRAND-AM-04-SPILLING-THE-TEA-X, FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK after 2026-07-07T15:21:00Z, then export posted URLs."
   },
+  "proof_refresh": {
+    "status": "ready",
+    "proof_due_at": "2026-07-07T15:21:00Z",
+    "next_refresh_at": "2026-07-07T15:25:00Z",
+    "lag_minutes": 4,
+    "cron": "25 15 * * *",
+    "detail": "next fixed refresh 4 minute(s) after proof due"
+  },
   "lanes": [
     {
       "label": "Active Analog Myth brand campaign",
@@ -59,14 +72,14 @@
     {
       "label": "Scheduled refresh workflow",
       "status": "ready",
-      "detail": "17 */6 * * *, 05 16 * * *; latest run completed / success",
+      "detail": "17 */6 * * *, 25 15 * * *, 05 16 * * *; latest run completed / success; proof refresh next fixed refresh 4 minute(s) after proof due",
       "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28808558623",
       "next_action": ""
     },
     {
       "label": "Safe admin refresh",
       "status": "ready",
-      "detail": "19 refresh commands captured at 2026-07-06T16:58:36.091996Z",
+      "detail": "19 refresh commands captured at 2026-07-06T17:04:23.536636Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": ""
     },

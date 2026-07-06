@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import json
 import re
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 
@@ -46,6 +46,79 @@ def workflow_config() -> dict:
         "refresh_command_present": "python3 scripts/refresh_promo_admin.py" in text,
         "validate_command_present": "python3 scripts/validate_content_system.py" in text,
         "commits_refreshed_data": "git commit -m \"Refresh promo admin snapshots\"" in text,
+    }
+
+
+def parse_iso(value: str | None):
+    raw = str(value or "").strip()
+    if not raw:
+        return None
+    if raw.endswith("Z"):
+        raw = raw[:-1] + "+00:00"
+    try:
+        parsed = datetime.fromisoformat(raw)
+    except ValueError:
+        return None
+    if parsed.tzinfo is None:
+        parsed = parsed.replace(tzinfo=timezone.utc)
+    return parsed.astimezone(timezone.utc)
+
+
+def fixed_daily_cron(cron: str):
+    match = re.fullmatch(r"\s*(\d{1,2})\s+(\d{1,2})\s+\*\s+\*\s+\*\s*", cron or "")
+    if not match:
+        return None
+    minute = int(match.group(1))
+    hour = int(match.group(2))
+    if minute > 59 or hour > 23:
+        return None
+    return hour, minute
+
+
+def proof_refresh_alignment(crons: list[str], proof_due_at: str) -> dict:
+    due = parse_iso(proof_due_at)
+    if not due:
+        return {
+            "status": "unknown",
+            "proof_due_at": proof_due_at or "",
+            "next_refresh_at": "",
+            "lag_minutes": None,
+            "cron": "",
+            "detail": "No proof due time is available yet.",
+        }
+    candidates = []
+    for cron in crons:
+        fixed = fixed_daily_cron(cron)
+        if not fixed:
+            continue
+        hour, minute = fixed
+        candidate = due.replace(hour=hour, minute=minute, second=0, microsecond=0)
+        if candidate < due:
+            candidate += timedelta(days=1)
+        candidates.append((candidate, cron))
+    if not candidates:
+        return {
+            "status": "unknown",
+            "proof_due_at": due.isoformat().replace("+00:00", "Z"),
+            "next_refresh_at": "",
+            "lag_minutes": None,
+            "cron": "",
+            "detail": "No fixed daily proof-refresh cron was found.",
+        }
+    refresh_at, cron = min(candidates, key=lambda item: item[0])
+    lag_minutes = int(round((refresh_at - due).total_seconds() / 60))
+    status = "ready" if 0 <= lag_minutes <= 15 else "slow"
+    return {
+        "status": status,
+        "proof_due_at": due.isoformat().replace("+00:00", "Z"),
+        "next_refresh_at": refresh_at.isoformat().replace("+00:00", "Z"),
+        "lag_minutes": lag_minutes,
+        "cron": cron,
+        "detail": (
+            f"next fixed refresh {lag_minutes} minute(s) after proof due"
+            if status == "ready"
+            else f"next fixed refresh is {lag_minutes} minute(s) after proof due"
+        ),
     }
 
 
@@ -134,7 +207,9 @@ def build_packet() -> dict:
     input_summary = social_inputs.get("summary") or {}
     refresh_summary = refresh.get("summary") or {}
     campaign = campaign_packet(brand_readout, brand_preflight)
+    proof_refresh = proof_refresh_alignment(workflow["crons"], campaign.get("next_proof_due_at") or "")
     active_campaign_ready = campaign["status"] == "ready"
+    proof_refresh_ready = (not active_campaign_ready) or proof_refresh.get("status") == "ready"
     active_platforms = {str(platform).strip().lower() for platform in campaign.get("platforms") or []}
     blocked_platforms = [str(platform) for platform in readiness_summary.get("blocked_platforms") or []]
     blocked_platforms_in_active_campaign = [
@@ -155,10 +230,14 @@ def build_packet() -> dict:
         ),
         lane_status(
             "Scheduled refresh workflow",
-            "ready" if workflow_ready and workflow_ok else "needs_attention",
-            f"{', '.join(workflow['crons']) or 'no cron'}; latest run {workflow_latest.get('status') or 'unknown'} / {workflow_latest.get('conclusion') or 'pending'}",
+            "ready" if workflow_ready and workflow_ok and proof_refresh_ready else "needs_attention",
+            f"{', '.join(workflow['crons']) or 'no cron'}; latest run {workflow_latest.get('status') or 'unknown'} / {workflow_latest.get('conclusion') or 'pending'}; proof refresh {proof_refresh.get('detail')}",
             workflow_latest.get("html_url") or workflow_status.get("actions_url") or "",
-            "" if workflow_ready and workflow_ok else "Confirm the GitHub Actions workflow is enabled and has a successful run.",
+            (
+                ""
+                if workflow_ready and workflow_ok and proof_refresh_ready
+                else "Add or repair a fixed daily refresh cron within 15 minutes after the active campaign proof window."
+            ),
         ),
         lane_status(
             "Safe admin refresh",
@@ -272,6 +351,10 @@ def build_packet() -> dict:
         "attention_lane_count": len(attention),
         "lane_count": len(lanes),
         "workflow_crons": workflow["crons"],
+        "active_campaign_proof_refresh_status": proof_refresh.get("status"),
+        "active_campaign_next_proof_refresh_at": proof_refresh.get("next_refresh_at"),
+        "active_campaign_proof_refresh_lag_minutes": proof_refresh.get("lag_minutes"),
+        "active_campaign_proof_refresh_cron": proof_refresh.get("cron"),
         "scheduler_http_status": scheduler.get("http_status"),
         "scheduler_auth_method": scheduler.get("auth_method"),
         "scheduler_refresh_step_ok": bool(capture_step.get("ok")),
@@ -305,6 +388,7 @@ def build_packet() -> dict:
             "brand_growth_preflight": str(BRAND_GROWTH_PREFLIGHT.relative_to(ROOT)),
         },
         "summary": summary,
+        "proof_refresh": proof_refresh,
         "lanes": lanes,
         "help_needed": help_needed,
         "optional_inputs": optional_inputs,
@@ -327,6 +411,7 @@ def build_markdown(packet: dict) -> str:
         f"- Needs attention: **{summary['attention_lane_count']}**",
         f"- Story posts tracked: **{summary['story_post_count']}**",
         f"- Help-needed items: **{summary['help_needed_count']}**",
+        f"- Proof refresh: **{summary.get('active_campaign_proof_refresh_status') or 'unknown'}** at `{summary.get('active_campaign_next_proof_refresh_at') or 'n/a'}` ({summary.get('active_campaign_proof_refresh_lag_minutes')} min)",
         f"- Next action: {summary['next_action']}",
         "",
         "## Automation Lanes",

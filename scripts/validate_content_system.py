@@ -62,6 +62,7 @@ EXPERIMENT_RESULT_CLIPBOARD = ROOT / "data" / "experiment_result_clipboard.json"
 EXPERIMENT_PUBLISH_RUNWAY = ROOT / "data" / "experiment_publish_runway.json"
 BRAND_GROWTH_PREFLIGHT = ROOT / "data" / "brand_growth_preflight.json"
 BRAND_CLICK_TRACKING_HEALTH = ROOT / "data" / "brand_click_tracking_health.json"
+POSTING_AUTOMATION_STATUS = ROOT / "data" / "posting_automation_status.json"
 YOUTUBE_POST_RESULTS = ROOT / "data" / "youtube_post_results.json"
 TWELVE_DOLLARS_REMASTER = ROOT / "data" / "youtube_twelve_dollars_remaster_manifest.json"
 TWELVE_DOLLARS_PLAYLIST = ROOT / "data" / "youtube_twelve_dollars_playlist.json"
@@ -429,6 +430,26 @@ def validate_generated_outputs(failures):
             fail("brand_click_tracking_health.json does not prove all future campaign links are trackable", failures)
     else:
         fail("brand_click_tracking_health.json missing; run scripts/build_brand_click_tracking_health.py", failures)
+    if POSTING_AUTOMATION_STATUS.exists():
+        posting_status = json.loads(POSTING_AUTOMATION_STATUS.read_text(encoding="utf-8"))
+        summary = posting_status.get("summary") or {}
+        lag = summary.get("active_campaign_proof_refresh_lag_minutes")
+        crons = summary.get("workflow_crons") or []
+        if (
+            posting_status.get("safe_mode") is True
+            and summary.get("status") == "ready_active_campaign"
+            and summary.get("active_campaign_ready") is True
+            and "25 15 * * *" in crons
+            and summary.get("active_campaign_proof_refresh_status") == "ready"
+            and isinstance(lag, int)
+            and 0 <= lag <= 15
+            and summary.get("active_campaign_next_proof_refresh_at")
+        ):
+            ok("posting automation status proves close post-slot proof refresh")
+        else:
+            fail("posting_automation_status.json does not prove a close post-slot proof refresh", failures)
+    else:
+        fail("posting_automation_status.json missing; run scripts/build_posting_automation_status.py", failures)
     if INDEX.exists():
         index = json.loads(INDEX.read_text(encoding="utf-8"))
         ok(f"content index generated with {index.get('counts', {}).get('songs', 0)} songs")
@@ -3983,6 +4004,7 @@ def validate_generated_outputs(failures):
             "workflow_dispatch:",
             "python3 scripts/refresh_promo_admin.py",
             "python3 scripts/validate_content_system.py",
+            "25 15 * * *",
             "contents: write",
             "GITHUB_TOKEN: ${{ github.token }}",
             "scripts/capture_github_workflow_status.py",
