@@ -226,12 +226,12 @@ def post_slot_watch(rows: list[dict], now: datetime) -> tuple[list[dict], dict]:
         elif rows_needing_proof or (proof_due_at and now >= proof_due_at and rows_waiting_publication):
             status = "proof_due"
             next_action = "Capture executions and export posted Worker URLs into Published_Log.csv."
-        elif first_at and now >= first_at:
-            status = "publishing_window"
-            next_action = "Scheduled posting window is open; capture executor state shortly after the final slot."
         elif status_counts.get("posted_waiting_measurement_window"):
             status = "posted_waiting_measurement"
             next_action = "Wait for the first measurement window before capturing result metrics."
+        elif first_at and now >= first_at:
+            status = "publishing_window"
+            next_action = "Scheduled posting window is open; capture executor state shortly after the final slot."
         elif status_counts.get("measured") == len(day_rows):
             status = "measured"
             next_action = "Compare the result totals against the rest of the campaign."
@@ -270,6 +270,16 @@ def post_slot_watch(rows: list[dict], now: datetime) -> tuple[list[dict], dict]:
     ]
     future = [window for window in windows if window["status"] == "scheduled_future"]
     next_window = actionable[0] if actionable else (future[0] if future else (windows[-1] if windows else {}))
+    proof_windows = [
+        window for window in windows
+        if window["status"] in {"attention", "proof_due", "publishing_window", "scheduled_future"}
+    ]
+    metric_windows = [
+        window for window in windows
+        if window["status"] in {"measurement_due", "posted_waiting_measurement"}
+    ]
+    next_proof_window = proof_windows[0] if proof_windows else {}
+    next_metric_window = metric_windows[0] if metric_windows else {}
     summary = {
         "window_count": len(windows),
         "status_counts": dict(sorted(Counter(window["status"] for window in windows).items())),
@@ -278,6 +288,17 @@ def post_slot_watch(rows: list[dict], now: datetime) -> tuple[list[dict], dict]:
         "next_proof_due_at": next_window.get("proof_due_at", ""),
         "next_measurement_due_at": next_window.get("measurement_due_at", ""),
         "next_post_ids": next_window.get("post_ids", []),
+        "next_action_window_date": next_window.get("date", ""),
+        "next_action_window_status": next_window.get("status", ""),
+        "next_action_post_ids": next_window.get("post_ids", []),
+        "next_post_proof_window_date": next_proof_window.get("date", ""),
+        "next_post_proof_window_status": next_proof_window.get("status", ""),
+        "next_post_proof_due_at": next_proof_window.get("proof_due_at", ""),
+        "next_post_proof_post_ids": next_proof_window.get("post_ids", []),
+        "next_metric_window_date": next_metric_window.get("date", ""),
+        "next_metric_window_status": next_metric_window.get("status", ""),
+        "next_metric_due_at": next_metric_window.get("measurement_due_at", ""),
+        "next_metric_post_ids": next_metric_window.get("post_ids", []),
         "proof_delay_minutes": POST_PROOF_DELAY_MINUTES,
         "first_measurement_delay_hours": FIRST_MEASUREMENT_DELAY_HOURS,
         "proof_preview_command": next_window.get("proof_preview_command", ""),
@@ -422,11 +443,18 @@ def build_payload() -> dict:
             "facebook_metric_capture_command": capture_command("Facebook", ready_facebook_ids),
             "post_slot_watch_window_count": watch_summary.get("window_count", 0),
             "post_slot_watch_status_counts": watch_summary.get("status_counts", {}),
-            "next_proof_window_date": watch_summary.get("next_window_date", ""),
-            "next_proof_window_status": watch_summary.get("next_window_status", ""),
-            "next_proof_due_at": watch_summary.get("next_proof_due_at", ""),
-            "next_measurement_due_at": watch_summary.get("next_measurement_due_at", ""),
-            "next_proof_post_ids": watch_summary.get("next_post_ids", []),
+            "next_action_window_date": watch_summary.get("next_action_window_date", ""),
+            "next_action_window_status": watch_summary.get("next_action_window_status", ""),
+            "next_action_due_at": watch_summary.get("next_measurement_due_at", "") if watch_summary.get("next_action_window_status") == "measurement_due" else watch_summary.get("next_proof_due_at", ""),
+            "next_action_post_ids": watch_summary.get("next_action_post_ids", []),
+            "next_proof_window_date": watch_summary.get("next_post_proof_window_date", ""),
+            "next_proof_window_status": watch_summary.get("next_post_proof_window_status", ""),
+            "next_proof_due_at": watch_summary.get("next_post_proof_due_at", ""),
+            "next_measurement_window_date": watch_summary.get("next_metric_window_date", ""),
+            "next_measurement_window_status": watch_summary.get("next_metric_window_status", ""),
+            "next_measurement_due_at": watch_summary.get("next_metric_due_at", ""),
+            "next_proof_post_ids": watch_summary.get("next_post_proof_post_ids", []),
+            "next_metric_post_ids": watch_summary.get("next_metric_post_ids", []),
             "proof_preview_command": watch_summary.get("proof_preview_command", ""),
             "proof_apply_command": watch_summary.get("proof_apply_command", ""),
             "export_social_executions_command": "python3 scripts/export_social_executions.py --refresh-admin",
@@ -486,8 +514,12 @@ def build_markdown(payload: dict) -> str:
         f"- Post-slot watch windows: **{summary.get('post_slot_watch_window_count', 0)}**",
         f"- Status counts: **{', '.join(f'{key}: {value}' for key, value in summary['status_counts'].items()) or 'none'}**",
         f"- Next scheduled: `{summary['next_scheduled_post_id'] or 'none'}` at `{summary['next_scheduled_at'] or 'n/a'}`",
-        f"- Next proof due: `{summary.get('next_proof_due_at') or 'n/a'}`",
-        f"- First measurement due: `{summary.get('next_measurement_due_at') or 'n/a'}`",
+        f"- Next action window: `{summary.get('next_action_window_date') or 'n/a'}` "
+        f"**{summary.get('next_action_window_status') or 'n/a'}** due `{summary.get('next_action_due_at') or 'n/a'}`",
+        f"- Next scheduled post proof: `{summary.get('next_proof_window_date') or 'n/a'}` "
+        f"due `{summary.get('next_proof_due_at') or 'n/a'}`",
+        f"- Next metric window: `{summary.get('next_measurement_window_date') or 'n/a'}` "
+        f"due `{summary.get('next_measurement_due_at') or 'n/a'}`",
         f"- YouTube total views: **{summary.get('live_youtube_total_views', 'unknown')}**",
         f"- Spotify monthly listeners: **{summary.get('live_spotify_monthly_listeners', 'unknown')}**",
         "",

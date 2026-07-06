@@ -1,6 +1,6 @@
 # Brand Growth Readout - Lily Roo
 
-Generated: 2026-07-06T11:04:31.785990Z
+Generated: 2026-07-06T13:22:32.586140Z
 
 ## Summary
 - Campaign rows: **64**
@@ -14,8 +14,9 @@ Generated: 2026-07-06T11:04:31.785990Z
 - Post-slot watch windows: **32**
 - Status counts: **posted_waiting_measurement_window: 2, ready_for_metric_capture: 2, scheduled_future: 60**
 - Next scheduled: `FP-BRAND-AM-03-ANALOG-MYTH-X` at `2026-07-06T10:15:00-04:00`
-- Next proof due: `2026-07-04T16:05:00Z`
-- First measurement due: `2026-07-05T15:20:00Z`
+- Next action window: `2026-07-04` **measurement_due** due `2026-07-05T15:20:00Z`
+- Next scheduled post proof: `2026-07-06` due `2026-07-06T16:05:00Z`
+- Next metric window: `2026-07-04` due `2026-07-05T15:20:00Z`
 - YouTube total views: **487**
 - Spotify monthly listeners: **1**
 
@@ -38,8 +39,8 @@ Generated: 2026-07-06T11:04:31.785990Z
   - Next: Capture metrics for logged campaign posts and import reviewed result fields.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
   - Metrics: `python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X && python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK`
-- `2026-07-05` **publishing_window** proof due `2026-07-05T16:05:00Z` for `FP-BRAND-AM-02-GIRLS-CAMP-X, FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK`
-  - Next: Scheduled posting window is open; capture executor state shortly after the final slot.
+- `2026-07-05` **posted_waiting_measurement** proof due `2026-07-05T16:05:00Z` for `FP-BRAND-AM-02-GIRLS-CAMP-X, FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK`
+  - Next: Wait for the first measurement window before capturing result metrics.
   - Preview: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
 - `2026-07-06` **scheduled_future** proof due `2026-07-06T16:05:00Z` for `FP-BRAND-AM-03-ANALOG-MYTH-X, FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK`
   - Next: Wait for the scheduled executor; proof capture starts after the final slot.

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-06T11:04:31.785990Z",
+  "generated_at": "2026-07-06T13:22:32.586140Z",
   "safe_mode": true,
   "source": {
     "brand_growth_campaign": "data/brand_growth_campaign.json",
@@ -48,14 +48,27 @@
     "post_slot_watch_window_count": 32,
     "post_slot_watch_status_counts": {
       "measurement_due": 1,
-      "publishing_window": 1,
+      "posted_waiting_measurement": 1,
       "scheduled_future": 30
     },
-    "next_proof_window_date": "2026-07-04",
-    "next_proof_window_status": "measurement_due",
-    "next_proof_due_at": "2026-07-04T16:05:00Z",
+    "next_action_window_date": "2026-07-04",
+    "next_action_window_status": "measurement_due",
+    "next_action_due_at": "2026-07-05T15:20:00Z",
+    "next_action_post_ids": [
+      "FP-BRAND-AM-01-13-X",
+      "FP-BRAND-AM-01-13-FACEBOOK"
+    ],
+    "next_proof_window_date": "2026-07-06",
+    "next_proof_window_status": "scheduled_future",
+    "next_proof_due_at": "2026-07-06T16:05:00Z",
+    "next_measurement_window_date": "2026-07-04",
+    "next_measurement_window_status": "measurement_due",
     "next_measurement_due_at": "2026-07-05T15:20:00Z",
     "next_proof_post_ids": [
+      "FP-BRAND-AM-03-ANALOG-MYTH-X",
+      "FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK"
+    ],
+    "next_metric_post_ids": [
       "FP-BRAND-AM-01-13-X",
       "FP-BRAND-AM-01-13-FACEBOOK"
     ],
@@ -72,7 +85,7 @@
       "window_count": 32,
       "status_counts": {
         "measurement_due": 1,
-        "publishing_window": 1,
+        "posted_waiting_measurement": 1,
         "scheduled_future": 30
       },
       "next_window_date": "2026-07-04",
@@ -80,6 +93,26 @@
       "next_proof_due_at": "2026-07-04T16:05:00Z",
       "next_measurement_due_at": "2026-07-05T15:20:00Z",
       "next_post_ids": [
+        "FP-BRAND-AM-01-13-X",
+        "FP-BRAND-AM-01-13-FACEBOOK"
+      ],
+      "next_action_window_date": "2026-07-04",
+      "next_action_window_status": "measurement_due",
+      "next_action_post_ids": [
+        "FP-BRAND-AM-01-13-X",
+        "FP-BRAND-AM-01-13-FACEBOOK"
+      ],
+      "next_post_proof_window_date": "2026-07-06",
+      "next_post_proof_window_status": "scheduled_future",
+      "next_post_proof_due_at": "2026-07-06T16:05:00Z",
+      "next_post_proof_post_ids": [
+        "FP-BRAND-AM-03-ANALOG-MYTH-X",
+        "FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK"
+      ],
+      "next_metric_window_date": "2026-07-04",
+      "next_metric_window_status": "measurement_due",
+      "next_metric_due_at": "2026-07-05T15:20:00Z",
+      "next_metric_post_ids": [
         "FP-BRAND-AM-01-13-X",
         "FP-BRAND-AM-01-13-FACEBOOK"
       ],
@@ -120,7 +153,7 @@
       },
       {
         "date": "2026-07-05",
-        "status": "publishing_window",
+        "status": "posted_waiting_measurement",
         "post_ids": [
           "FP-BRAND-AM-02-GIRLS-CAMP-X",
           "FP-BRAND-AM-02-GIRLS-CAMP-FACEBOOK"
@@ -142,7 +175,7 @@
         "proof_preview_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run",
         "proof_apply_command": "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --refresh-admin",
         "metric_capture_command": "",
-        "next_action": "Scheduled posting window is open; capture executor state shortly after the final slot."
+        "next_action": "Wait for the first measurement window before capturing result metrics."
       },
       {
         "date": "2026-07-06",
