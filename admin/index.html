@@ -7,7 +7,7 @@
   <meta name="robots" content="noindex,nofollow" />
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32.png" />
   <style>
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:#0c0d12;color:#eef0f7}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:#0c0d12;color:#eef0f7;overflow-x:hidden}
     .layout{min-height:100vh}
     .nav{border-bottom:1px solid #2a2f44;background:#0f1320;padding:12px 22px;position:sticky;top:0;z-index:20;display:flex;gap:8px;align-items:center;flex-wrap:nowrap;overflow-x:auto}
     .brand{font-weight:850;margin:0 auto 0 0;white-space:nowrap;flex:0 0 auto}
@@ -108,26 +108,27 @@
     .status-chip.working{background:#14203a;color:#dce8ff;border-color:#416095}
 	    .report-alert{border:1px solid #6c4b16;background:#2a2115;color:#ffd88a;border-radius:12px;padding:11px 12px;font-size:13px}
 	    .report-alert[hidden]{display:none}
-    .simple-dashboard{display:grid;gap:14px;margin-bottom:16px}
+    .simple-dashboard{display:grid;gap:16px;margin-bottom:16px}
     .simple-intro{display:flex;justify-content:space-between;gap:16px;align-items:flex-end}
-    .simple-intro h1{margin:0;font-size:28px;line-height:1.05}
-    .simple-intro p{margin:6px 0 0;color:#b8c1dc;line-height:1.45;font-size:14px;max-width:780px}
-    .simple-section{background:#141722;border:1px solid #2a2f44;border-radius:8px;padding:18px;min-width:0}
-    .simple-status-band{background:#111827;border-color:#3a4b75;padding:18px;border-top:4px solid #5b8dff}
+    .simple-intro h1{margin:0;font-size:26px;line-height:1.05}
+    .simple-intro p{margin:5px 0 0;color:#b8c1dc;line-height:1.4;font-size:13px;max-width:720px}
+    .simple-section{background:#141722;border:1px solid #2a2f44;border-radius:8px;padding:16px;min-width:0;width:100%;max-width:100%;box-sizing:border-box}
+    .simple-status-band{background:#111827;border-color:#3a4b75;padding:16px;border-top:4px solid #5b8dff}
 	    .simple-section-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;margin-bottom:12px}
-	    .simple-section-head h2{margin:0;font-size:24px;line-height:1.15}
-	    .simple-section-head p{margin:6px 0 0;color:#d7def2;line-height:1.45;font-size:14px;max-width:980px}
+	    .simple-section-head>div{min-width:0}
+	    .simple-section-head h2{margin:0;font-size:22px;line-height:1.15}
+	    .simple-section-head p{margin:6px 0 0;color:#d7def2;line-height:1.45;font-size:14px;max-width:900px;overflow-wrap:anywhere}
     .simple-status-strip{display:grid;grid-template-columns:repeat(5,minmax(145px,1fr));gap:10px}
-    .simple-status-card{border:1px solid #26314e;border-radius:8px;background:#101523;padding:13px;min-height:96px;box-sizing:border-box}
+    .simple-status-card{border:1px solid #26314e;border-radius:8px;background:#101523;padding:12px;min-height:88px;box-sizing:border-box;width:100%;max-width:100%}
 	    .simple-status-card.status-ok{border-color:#1f684d;background:#0f201b}
 	    .simple-status-card.status-warn{border-color:#6c4b16;background:#211a10}
 	    .simple-status-card.status-bad{border-color:#74303d;background:#251319}
 	    .simple-status-card .metric-label{font-size:11px}
-    .simple-status-card strong{display:block;color:#fff;font-size:24px;line-height:1.1;margin-top:9px;word-break:break-word}
+    .simple-status-card strong{display:block;color:#fff;font-size:22px;line-height:1.1;margin-top:8px;word-break:break-word}
 	    .simple-status-card p{margin:8px 0 0;color:#9ba3bf;font-size:12px;line-height:1.4}
-    .simple-columns{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(360px,.95fr);gap:16px;align-items:start}
+    .simple-columns{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(360px,.85fr);gap:16px;align-items:start}
 	    .simple-list{display:grid;gap:10px}
-	    .simple-item{border:1px solid #26314e;border-left-width:4px;border-radius:8px;background:#101523;padding:12px}
+	    .simple-item{border:1px solid #26314e;border-left-width:4px;border-radius:8px;background:#101523;padding:12px;min-width:0;max-width:100%;box-sizing:border-box}
 	    .simple-item.status-ok{border-color:#1f684d;background:#0f1818}
 	    .simple-item.status-warn{border-color:#6c4b16;background:#18150f}
 	    .simple-item.status-bad{border-color:#74303d;background:#1c1116}
@@ -135,7 +136,7 @@
 	    .simple-item-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;margin-bottom:6px}
     .simple-item-title{font-weight:850;color:#f4f7ff;line-height:1.25;font-size:16px}
 	    .simple-item-meta{font-size:12px;color:#9ba3bf;line-height:1.4}
-	    .simple-item-copy{font-size:14px;line-height:1.45;color:#d7def2;margin-top:6px}
+	    .simple-item-copy{font-size:14px;line-height:1.45;color:#d7def2;margin-top:6px;overflow-wrap:anywhere}
 	    .simple-item-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}
 	    .simple-item-actions a{font-size:11px;text-decoration:none;border:1px solid #334062;border-radius:999px;padding:4px 8px;background:#111827;color:#cfe3ff;font-weight:800}
 	    .simple-item-actions a:hover{border-color:#4f79c6;background:#14203a}
@@ -150,8 +151,8 @@
 	    .today-manual-step{flex:1 1 100%;margin-top:2px}
 	    .plain-list{margin:10px 0 0;padding-left:18px;color:#cdd5ec;font-size:13px;line-height:1.45}
 	    .plain-list li{margin:5px 0}
-	    .diagnostic-details{border:1px solid #2a2f44;border-radius:10px;background:#101523;margin-top:10px}
-	    .diagnostic-details summary{cursor:pointer;padding:13px 15px;font-weight:850;color:#f4f7ff}
+	    .diagnostic-details{border:1px solid #2a2f44;border-radius:10px;background:#101523;margin-top:6px}
+	    .diagnostic-details summary{cursor:pointer;padding:12px 14px;font-weight:850;color:#d7def2}
 	    .diagnostic-details[open] summary{border-bottom:1px solid #2a2f44}
 	    .diagnostic-inner{padding:14px;display:grid;gap:14px}
 	    .metric-grid{display:grid;grid-template-columns:repeat(5,minmax(145px,1fr));gap:12px}
@@ -236,7 +237,7 @@
     @media(max-width:620px){
       .content{padding:14px}
       .song-grid,.story-grid,.metric-grid,.library-stats,.source-grid{grid-template-columns:1fr}
-      .simple-status-strip{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .simple-status-strip{grid-template-columns:1fr}
       .nav{padding:10px 14px}
       .brand{font-size:14px}
       .tab{padding:8px 9px}
@@ -424,17 +425,11 @@
 	        <div class="report-alert" id="reports-alert" hidden></div>
 
           <section class="simple-dashboard" aria-label="Lily Roo promotion overview">
-	          <div class="simple-intro">
-	            <div>
-	              <h1>Lily Roo Status</h1>
-	              <p>Simple view of the Analog Myth launch promotion: current health, recent outcomes, and what happens next.</p>
-	            </div>
-	          </div>
 	          <section class="simple-section simple-status-band" aria-labelledby="simple-status-heading">
 	            <div class="simple-section-head">
 	              <div>
 	                <h2 id="simple-status-heading">Status</h2>
-	                <p id="simple-status-copy">Loading the active Lily Roo campaign...</p>
+	                <p id="simple-status-copy">Loading the active promotion...</p>
 	              </div>
 	              <span class="status-chip neutral" id="simple-updated-chip">Checking</span>
 	            </div>
@@ -452,7 +447,7 @@
 	              <div class="simple-section-head">
 	                <div>
 	                  <h2 id="simple-recent-heading">Recent Activity and Results</h2>
-	                  <p id="simple-recent-copy">What already happened, whether it worked, and where the public evidence lives.</p>
+	                  <p id="simple-recent-copy">What happened and where the evidence lives.</p>
 	                </div>
 	              </div>
 	              <div class="simple-list" id="simple-recent-activity">
@@ -464,7 +459,7 @@
 	              <div class="simple-section-head">
 	                <div>
 	                  <h2 id="simple-upcoming-heading">Upcoming Activities</h2>
-	                  <p id="simple-upcoming-copy">Scheduled automated posts and follow-up checks. Manual-only items are not part of this plan.</p>
+	                  <p id="simple-upcoming-copy">Scheduled automated posts and follow-up checks. No manual-only tasks.</p>
 	                </div>
 	              </div>
 	              <div class="simple-list" id="simple-upcoming-activity">
@@ -475,7 +470,7 @@
 	        </section>
 
 	        <details class="diagnostic-details legacy-overview-details">
-	          <summary>Detailed system reports</summary>
+	          <summary>Show detailed system reports</summary>
 	          <div class="diagnostic-inner">
 
 	        <section class="today-grid" aria-label="Today summary">
@@ -548,7 +543,7 @@
 	        </details>
 
 	        <details class="diagnostic-details">
-	          <summary>Source reports and files</summary>
+	          <summary>Show source reports and files</summary>
 	          <div class="diagnostic-inner">
 	          <div class="report-grid">
 	            <div class="report-stack">
@@ -27390,11 +27385,11 @@ Generated: 2026-07-06T13:37:30.372446Z
     return formatted==='--' ? prefix : `${prefix} ${formatted}`;
   }
 
-	  function publicResultCopy(row){
-	    const copy=simpleShortText(row.text||row.hook||row.notes||row.content_id||row.id||'');
-	    if(row.post_url||row.post_id_or_url) return copy ? `Posted copy: ${copy}` : 'The public post URL is saved in the activity log.';
-	    return copy ? `Recorded note: ${copy}` : 'This activity is recorded in the admin sources.';
-	  }
+		  function publicResultCopy(row){
+		    const copy=simpleShortText(row.text||row.hook||row.notes||row.content_id||row.id||'');
+		    if(row.post_url||row.post_id_or_url) return copy ? `What went out: ${copy}` : 'The public post URL is saved in the activity log.';
+		    return copy ? `Recorded note: ${copy}` : 'This activity is recorded in the admin sources.';
+		  }
 
   function simpleStatusCard(label, value, note, className='neutral'){
     return `<article class="simple-status-card status-${escapeHtml(className)}">
@@ -27514,21 +27509,22 @@ Generated: 2026-07-06T13:37:30.372446Z
     const nextWindowCount=Number(preflightSummary.expected_post_count||nextWindowPosts.length||0);
     const clickTrackingReady=readoutSummary.campaign_click_status==='ready'||pulseSummary.click_count!==undefined;
     const clickCount=Number(pulseSummary.click_count||readoutSummary.campaign_click_count||0);
-	    const resultLabel=readyMetricRows.length
-	      ? `${readyMetricRows.length} ready`
-	      : waitingMetricRows.length
-	        ? `${waitingMetricRows.length} waiting`
-	        : uniqueMissingSecrets.length
-	          ? 'API needed'
-	          : 'Clear';
+		    const resultLabel=readyMetricRows.length
+		      ? `${readyMetricRows.length} ready`
+		      : waitingMetricRows.length
+		        ? `${waitingMetricRows.length} waiting`
+		        : uniqueMissingSecrets.length
+		          ? 'Needs access'
+		          : 'Clear';
 	    const resultNote=readyMetricRows.length
 	      ? 'Public posts are ready for views and engagement.'
 	      : waitingMetricRows.length
 	        ? 'Recent posts are waiting for their first result check.'
 	      : uniqueMissingSecrets.length
-	          ? 'Automatic result counts need X/Facebook metrics access.'
-	          : 'No result follow-up is due right now.';
-	    const lastUpdated=brandGrowthPulse?.generated_at || brandPostVisibility?.generated_at || brandGrowthReadout?.generated_at || brandGrowthPreflight?.generated_at || '';
+		          ? 'Views and engagement need connected X/Facebook metrics access.'
+		          : 'No result follow-up is due right now.';
+		    const lastUpdated=brandGrowthPulse?.generated_at || brandPostVisibility?.generated_at || brandGrowthReadout?.generated_at || brandGrowthPreflight?.generated_at || '';
+	    const proofDueAt=automationSummary.active_campaign_next_proof_due_at||readoutSummary.next_proof_due_at||pulseSummary.proof_due_at||primaryAction.due_at||'';
 
 	    const topClass=campaignReady && !visibilityAttentionCount ? 'ok' : 'warn';
 	    const overallLabel=campaignReady ? 'Running' : 'Check';
@@ -27537,43 +27533,39 @@ Generated: 2026-07-06T13:37:30.372446Z
 	      updatedChip.textContent=lastUpdated?`Updated ${formatQueueDate(lastUpdated)}`:(campaignReady?'Active':'Needs check');
 	    }
 	    if(statusCopy){
-	      const campaignPhrase=campaignReady
-	        ? 'Analog Myth promotion is running automatically on X and Facebook.'
-	        : 'The next Analog Myth publishing window needs a readiness refresh.';
-	      const nextPhrase=nextDate
-	        ? `Next scheduled post starts ${formatQueueDate(nextDate)}.`
-	        : 'No future post window is queued in this snapshot.';
+		      const campaignPhrase=campaignReady ? 'Running automatically.' : 'Needs a readiness refresh.';
+		      const nextPhrase=nextDate ? `Next: ${formatQueueDate(nextDate)}.` : 'No future post queued.';
 	      const metricPhrase=readyMetricRows.length
-	        ? `${readyMetricRows.length} recent post${readyMetricRows.length===1?' is':'s are'} ready for views and engagement.`
+	        ? `${readyMetricRows.length} ready to measure.`
 	        : waitingMetricRows.length
-	          ? `${waitingMetricRows.length} recent post${waitingMetricRows.length===1?' is':'s are'} waiting for the first result check.`
+	          ? `${waitingMetricRows.length} waiting for first result check.`
 	        : uniqueMissingSecrets.length
-	          ? 'Posting is active; automatic result counts need X/Facebook metrics access.'
-	          : 'No result follow-up is due right now.';
-	      const visibilityPhrase=visibilityAttentionCount
-	        ? `${visibilityAttentionCount} Facebook link${visibilityAttentionCount===1?' needs':'s need'} a second public check.`
-	        : 'Recent public links are reachable.';
-	      statusCopy.textContent=`${campaignPhrase} ${nextPhrase} ${postedCount} recent campaign post${postedCount===1?' is':'s are'} logged. ${visibilityPhrase} ${metricPhrase}`.replace(/\s+/g,' ').trim();
-	    }
+		          ? 'Result counts need X/Facebook metrics access.'
+		          : 'No result follow-up due.';
+		      const visibilityPhrase=visibilityAttentionCount
+		        ? `${visibilityAttentionCount} Facebook link${visibilityAttentionCount===1?' needs':'s need'} recheck.`
+		        : 'Links reachable.';
+		      statusCopy.textContent=`${campaignPhrase} ${nextPhrase} ${postedCount} logged. ${visibilityPhrase} ${metricPhrase}`.replace(/\s+/g,' ').trim();
+		    }
 
-	    statusStrip.innerHTML=[
-	      simpleStatusCard('Overall', overallLabel, campaignReady?'Approved posts are publishing automatically.':'Refresh readiness before trusting the next window.', topClass),
-	      simpleStatusCard('Next Automatic Post', nextDateLabel, `${nextWindowCount||2} post${(nextWindowCount||2)===1?'':'s'} in the next window.`, campaignReady?'ok':'warn'),
-	      simpleStatusCard('Recent Results', `${postedCount} post${postedCount===1?'':'s'}`, clickTrackingReady?`${clickCount} tracked click${clickCount===1?'':'s'} recorded so far.`:'Public links are saved in the activity log.', postedCount?'ok':'neutral'),
-	      simpleStatusCard('Public Links', visibilityAttentionCount?`${visibilityAttentionCount} review`:'Checked', visibilityAttentionCount?'Recheck flagged Facebook links.':'Recent public links are reachable.', visibilityAttentionCount?'warn':'ok'),
-	      simpleStatusCard('Result Counts', resultLabel, resultNote, readyMetricRows.length||uniqueMissingSecrets.length?'warn':'ok')
-	    ].join('');
+		    statusStrip.innerHTML=[
+		      simpleStatusCard('Campaign', overallLabel, campaignReady?'Approved posts publish automatically.':'Refresh readiness before the next window.', topClass),
+		      simpleStatusCard('Next Post', nextDateLabel, `${nextWindowCount||2} automatic post${(nextWindowCount||2)===1?'':'s'} in the next window.`, campaignReady?'ok':'warn'),
+		      simpleStatusCard('Recent Activity', `${postedCount} logged`, clickTrackingReady?`${clickCount} tracked click${clickCount===1?'':'s'} recorded so far.`:'Public URLs are saved in the activity log.', postedCount?'ok':'neutral'),
+		      simpleStatusCard('Links', visibilityAttentionCount?`${visibilityAttentionCount} review`:'Reachable', visibilityAttentionCount?'Recheck flagged Facebook links.':'Recent public links open correctly.', visibilityAttentionCount?'warn':'ok'),
+		      simpleStatusCard('Results', resultLabel, resultNote, readyMetricRows.length||uniqueMissingSecrets.length?'warn':'ok')
+		    ].join('');
 
 	    const recentItems=postedRows
 	      .slice()
 	      .sort((a,b)=>new Date(b.scheduled_at)-new Date(a.scheduled_at))
-	      .slice(0,6)
+		      .slice(0,5)
 	      .map(row=>{
 	        const status=simpleActivityStatus(row);
 	        const title=`Posted to ${simpleText(row.platform,'Platform')}: ${titleFromPost(row)}`;
-	        const meta=`${simpleWhen('Ran', row.scheduled_at)} - ${row.post_url?'public link saved':'public link not saved yet'}`;
-	        return simpleActivityItem(title,meta,publicResultCopy(row),status,row.post_url);
-	      });
+		        const meta=`${simpleWhen('Ran', row.scheduled_at)} - ${row.post_url?'public URL saved':'public URL not saved yet'}`;
+		        return simpleActivityItem(title,meta,publicResultCopy(row),status,row.post_url);
+		      });
 
     const seenRecentIds=new Set(postedRows.map(row=>String(row.id||row.content_id||'')));
     const fallbackRows=publishedRows
@@ -27581,7 +27573,7 @@ Generated: 2026-07-06T13:37:30.372446Z
       .sort((a,b)=>(parseDateOnly(b.date)?.getTime()||0)-(parseDateOnly(a.date)?.getTime()||0))
       .filter(row=>!seenRecentIds.has(String(row.content_id||row.id||'')))
       .filter(row=>/Analog Myth/i.test(`${row.song_era||''} ${row.content_id||''} ${row.hook||''}`))
-      .slice(0,Math.max(0,8-recentItems.length));
+	      .slice(0,Math.max(0,6-recentItems.length));
     if(!recentItems.length || fallbackRows.length){
 	      fallbackRows.forEach(row=>{
 	        const status=simpleActivityStatus(row);
@@ -27606,39 +27598,27 @@ Generated: 2026-07-06T13:37:30.372446Z
     }
     recentRoot.innerHTML=recentItems.length?recentItems.join(''):'<div class="muted">No recent activity is logged yet.</div>';
 
-	    const upcomingItems=[];
-	    const nextPosts=nextWindowPosts.length?nextWindowPosts:futurePosts.slice(0,2);
-	    nextPosts.slice(0,2).forEach(post=>{
-	      upcomingItems.push(simpleUpcomingItem(
-	        `Automatic ${simpleText(post.platform,'Platform')} post: ${titleFromPost(post)}`,
-	        simpleWhen('Scheduled', post.scheduled_at),
-	        `${simpleShortText(post.text||post.hook||`${simpleText(post.post_type,'Post')} is approved and queued.`)} Approved for automatic publishing.`,
-	        {label:'Auto queued',className:'ok'},
-	        ''
+		    const upcomingItems=[];
+		    const nextPosts=nextWindowPosts.length?nextWindowPosts:futurePosts.slice(0,2);
+		    nextPosts.slice(0,2).forEach(post=>{
+		      upcomingItems.push(simpleUpcomingItem(
+		        `Automatic ${simpleText(post.platform,'Platform')} post: ${titleFromPost(post)}`,
+		        simpleWhen('Scheduled', post.scheduled_at),
+		        `${simpleShortText(post.text||post.hook||`${simpleText(post.post_type,'Post')} is approved and queued.`)} This is approved for automatic publishing.`,
+		        {label:'Auto queued',className:'ok'},
+		        ''
+		      ));
+		    });
+
+		    if(proofDueAt){
+		      upcomingItems.push(simpleUpcomingItem(
+		        'Record public links after posting',
+		        formatQueueDate(proofDueAt),
+		        'After the next scheduled posts publish, capture their public URLs and update the recent activity record.',
+		        {label:'Follow-up',className:'neutral'},
+	        '/admin/reports/posting-automation-status.md'
 	      ));
-	    });
-
-    const remainingFutureCount=Math.max(0,futurePosts.length-nextPosts.slice(0,2).length);
-    if(remainingFutureCount){
-      const nextAfterWindow=futurePosts.slice(2,3)[0];
-      upcomingItems.push(simpleUpcomingItem(
-        'Queue continues after the next window',
-        nextAfterWindow ? simpleWhen('Next queued', nextAfterWindow.scheduled_at) : `${remainingFutureCount} later post${remainingFutureCount===1?'':'s'} queued`,
-        `${remainingFutureCount} more approved Analog Myth post${remainingFutureCount===1?' is':'s are'} already queued for automatic publishing.`,
-        {label:'Queued',className:'neutral'},
-        ''
-      ));
-    }
-
-	    if(automationSummary.active_campaign_next_proof_due_at){
-	      upcomingItems.push(simpleUpcomingItem(
-	        'Save public links after posting',
-	        formatQueueDate(automationSummary.active_campaign_next_proof_due_at),
-	        'After the next scheduled posts publish, capture their public URLs and update the recent activity record.',
-	        {label:'Follow-up',className:'neutral'},
-        '/admin/reports/posting-automation-status.md'
-      ));
-    }
+	    }
 
 	    if(visibilityAttentionCount){
 	      upcomingItems.push(simpleUpcomingItem(
@@ -27650,39 +27630,41 @@ Generated: 2026-07-06T13:37:30.372446Z
 	      ));
     }
 
-	    if(readyMetricRows.length){
-	      upcomingItems.push(simpleUpcomingItem(
-	        'Collect result counts',
-	        `${readyMetricRows.length} post${readyMetricRows.length===1?'':'s'} ready`,
-	        'The public links are saved. Pull visible views and engagement next so the campaign can learn what is working.',
-	        {label:'Measure',className:'warn'},
-        '/admin/reports/brand-growth-readout.md'
-      ));
+		    if(readyMetricRows.length){
+		      upcomingItems.push(simpleUpcomingItem(
+		        'Measure recent posts',
+		        `${readyMetricRows.length} post${readyMetricRows.length===1?'':'s'} ready`,
+		        'The public links are saved. Pull visible views and engagement so the campaign can learn what is working.',
+		        {label:'Measure',className:'warn'},
+	        '/admin/reports/brand-growth-readout.md'
+	      ));
     }else if(waitingMetricRows.length){
       const first=waitingMetricRows.slice().sort((a,b)=>new Date(a.measurement_due_at)-new Date(b.measurement_due_at))[0];
       upcomingItems.push(simpleUpcomingItem(
-        'First result check',
-        formatQueueDate(first.measurement_due_at),
-        `${waitingMetricRows.length} recent post${waitingMetricRows.length===1?' is':'s are'} public and waiting until result counts are meaningful.`,
-        {label:'Scheduled',className:'neutral'},
-        '/admin/reports/brand-growth-readout.md'
-      ));
-    }
-
-	    if(uniqueMissingSecrets.length){
-	      upcomingItems.push(simpleUpcomingItem(
-	        'Connect automatic result counts',
-	        'Needed for X/Facebook metrics',
-	        'Posting is active and logged. This only improves automatic views, likes, comments, and shares reporting.',
-	        {label:'Setup',className:'warn'},
-	        '/admin/reports/social-blocker-input-status.md'
+		        'First result check',
+		        formatQueueDate(first.measurement_due_at),
+		        `${waitingMetricRows.length} recent post${waitingMetricRows.length===1?' is':'s are'} public and waiting until result counts are meaningful.`,
+		        {label:'Scheduled',className:'neutral'},
+	        '/admin/reports/brand-growth-readout.md'
 	      ));
 	    }
 
-	    if(primaryAction.label){
-	      const rawState=String(primaryAction.state||pulseSummary.status||'');
-	      const stateLabel=simpleActionStateLabel(rawState);
-	      const actionClass=rawState.includes('waiting')||rawState.includes('due')?'warn':campaignReady?'neutral':'warn';
+	    const remainingFutureCount=Math.max(0,futurePosts.length-nextPosts.slice(0,2).length);
+	    if(remainingFutureCount){
+	      const nextAfterWindow=futurePosts.slice(2,3)[0];
+	      upcomingItems.push(simpleUpcomingItem(
+	        'Later automatic posts are already queued',
+	        nextAfterWindow ? simpleWhen('Next later post', nextAfterWindow.scheduled_at) : `${remainingFutureCount} later post${remainingFutureCount===1?'':'s'} queued`,
+	        `${remainingFutureCount} more approved Analog Myth post${remainingFutureCount===1?' is':'s are'} waiting after the next window.`,
+	        {label:'Queued',className:'neutral'},
+	        ''
+	      ));
+	    }
+
+		    if(!upcomingItems.length && primaryAction.label){
+		      const rawState=String(primaryAction.state||pulseSummary.status||'');
+		      const stateLabel=simpleActionStateLabel(rawState);
+		      const actionClass=rawState.includes('waiting')||rawState.includes('due')?'warn':campaignReady?'neutral':'warn';
 	      upcomingItems.push(simpleUpcomingItem(
 	        primaryAction.label,
 	        primaryAction.due_at ? simpleWhen('Due', primaryAction.due_at) : 'Campaign note',
@@ -27702,8 +27684,8 @@ Generated: 2026-07-06T13:37:30.372446Z
       ));
     }
 
-	    upcomingRoot.innerHTML=upcomingItems.length?upcomingItems.slice(0,7).join(''):'<div class="muted">No upcoming activity is queued.</div>';
-	  }
+		    upcomingRoot.innerHTML=upcomingItems.length?upcomingItems.slice(0,5).join(''):'<div class="muted">No upcoming activity is queued.</div>';
+		  }
 
   function renderNextPosts(queuePayload, executions){
     const root=document.getElementById('next-posts-report');
