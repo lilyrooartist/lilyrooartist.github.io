@@ -209,13 +209,17 @@ def tracked_url(destination: str, post_id: str) -> str:
 
 def reply_text(track: dict, playlist_url: str, *, platform: str, wave: str, post_id: str) -> str:
     _ = playlist_url
-    album = f"Analog Myth: {tracked_url('album', post_id)}"
-    track_video = f"Track video: {tracked_url('video', post_id)}"
     if platform == "X":
-        return "\n".join([album, track_video])
+        album = f"Album: {tracked_url('album', post_id)}"
+        echo_thread = f"Echo: {tracked_url('echo', post_id)}"
+        track_video = f"Video: {tracked_url('video', post_id)}"
+    else:
+        album = f"Analog Myth: {tracked_url('album', post_id)}"
+        echo_thread = f"Echo Thread: {tracked_url('echo', post_id)}"
+        track_video = f"Track video: {tracked_url('video', post_id)}"
     return "\n".join([
         album,
-        f"Echo Thread: {tracked_url('echo', post_id)}",
+        echo_thread,
         track_video,
     ])
 
