@@ -108,31 +108,32 @@
     .status-chip.working{background:#14203a;color:#dce8ff;border-color:#416095}
 	    .report-alert{border:1px solid #6c4b16;background:#2a2115;color:#ffd88a;border-radius:12px;padding:11px 12px;font-size:13px}
 	    .report-alert[hidden]{display:none}
-    .simple-dashboard{display:grid;gap:20px;margin-bottom:18px}
+    .simple-dashboard{display:grid;gap:22px;margin-bottom:18px}
     .simple-intro{display:flex;justify-content:space-between;gap:16px;align-items:flex-end}
     .simple-intro h1{margin:0;font-size:30px;line-height:1.05}
     .simple-intro p{margin:6px 0 0;color:#b8c1dc;line-height:1.45;font-size:14px;max-width:760px;overflow-wrap:anywhere}
     .simple-eyebrow{margin:0 0 6px;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#8f98b8;font-weight:850}
     .simple-intro-actions,.simple-section-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
     .simple-section{background:transparent;border:0;border-radius:0;padding:0;min-width:0;width:100%;max-width:100%;box-sizing:border-box}
-    .simple-status-band{background:#111827;border:1px solid #2f3a58;border-radius:8px;padding:18px;border-top:4px solid #5b8dff;overflow-wrap:anywhere}
+    .simple-status-band{background:#111827;border:1px solid #2f3a58;border-radius:10px;padding:20px;border-top:4px solid #5b8dff;overflow-wrap:anywhere}
     .simple-status-side{display:grid;gap:9px;justify-items:end;flex:0 0 auto}
 	    .simple-section-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;margin-bottom:12px}
 	    .simple-section-head>div{min-width:0}
-	    .simple-section-head h1,.simple-section-head h2{margin:0;font-size:22px;line-height:1.15}
-	    .simple-section-head p{margin:6px 0 0;color:#b8c1dc;line-height:1.45;font-size:13px;max-width:900px;overflow-wrap:anywhere}
+	    .simple-section-head h1{margin:0;font-size:28px;line-height:1.1}
+	    .simple-section-head h2{margin:0;font-size:22px;line-height:1.15}
+	    .simple-section-head p{margin:6px 0 0;color:#b8c1dc;line-height:1.45;font-size:14px;max-width:900px;overflow-wrap:anywhere}
     .simple-columns .simple-section-head{border-bottom:1px solid #252d43;padding-bottom:10px}
-    .simple-status-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
-    .simple-status-card{border:1px solid #26314e;border-left-width:4px;border-radius:8px;background:#101523;padding:13px;min-height:96px;box-sizing:border-box;width:100%;max-width:100%}
+    .simple-status-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+    .simple-status-card{border:1px solid #26314e;border-left-width:4px;border-radius:8px;background:#101523;padding:14px;min-height:104px;box-sizing:border-box;width:100%;max-width:100%}
 	    .simple-status-card.status-ok{border-color:#1f684d;background:#0f201b}
 	    .simple-status-card.status-warn{border-color:#6c4b16;background:#211a10}
 	    .simple-status-card.status-bad{border-color:#74303d;background:#251319}
 	    .simple-status-card .metric-label{font-size:11px}
     .simple-status-card strong{display:block;color:#fff;font-size:20px;line-height:1.1;margin-top:8px;word-break:break-word;overflow-wrap:anywhere}
     .simple-status-card p{margin:8px 0 0;color:#b6bed6;font-size:12px;line-height:1.4;overflow-wrap:anywhere}
-    .simple-columns{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(340px,.88fr);gap:20px;align-items:start}
+    .simple-columns{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(340px,.85fr);gap:22px;align-items:start}
 	    .simple-list{display:grid;gap:10px}
-	    .simple-item{border:1px solid #26314e;border-left-width:4px;border-radius:8px;background:#101523;padding:14px;min-width:0;max-width:100%;box-sizing:border-box}
+	    .simple-item{border:1px solid #26314e;border-left-width:4px;border-radius:8px;background:#101523;padding:15px;min-width:0;max-width:100%;box-sizing:border-box}
 	    .simple-item.status-ok{border-color:#1f684d;background:#0f1818}
 	    .simple-item.status-warn{border-color:#6c4b16;background:#18150f}
 	    .simple-item.status-bad{border-color:#74303d;background:#1c1116}
@@ -436,15 +437,15 @@
 	          <section class="simple-section simple-status-band" aria-labelledby="simple-status-heading">
 	            <div class="simple-section-head">
 	              <div>
-                  <div class="simple-eyebrow">Lily Roo promotion</div>
+                  <div class="simple-eyebrow">Admin overview</div>
                   <h1 id="simple-status-heading">Status</h1>
-                  <p id="simple-status-copy">Loading the active campaign, latest results, and next automatic posts.</p>
+                  <p id="simple-status-copy">Loading what is running, what just happened, and what happens next.</p>
 	              </div>
 	              <div class="simple-status-side">
 	                <span class="status-chip neutral" id="simple-updated-chip">Checking</span>
 	                <div class="simple-section-actions">
-	                  <a class="btn secondary" href="content/Published_Log.csv" target="_blank" rel="noopener">Activity log</a>
-	                  <a class="btn ghost" href="future-posts.json" target="_blank" rel="noopener">Queue</a>
+	                  <a class="btn secondary" href="content/Published_Log.csv" target="_blank" rel="noopener">Full log</a>
+	                  <a class="btn ghost" href="future-posts.json" target="_blank" rel="noopener">Full queue</a>
 	                </div>
 	              </div>
 	            </div>
@@ -461,8 +462,8 @@
 	            <section class="simple-section" aria-labelledby="simple-recent-heading">
 	              <div class="simple-section-head">
 	                <div>
-                  <h2 id="simple-recent-heading">Recent Activity</h2>
-                  <p id="simple-recent-copy">What already happened, in plain English, with result status.</p>
+                  <h2 id="simple-recent-heading">Recent Activity & Results</h2>
+                  <p id="simple-recent-copy">What actually happened, whether the public links are saved, and what result check is due.</p>
 	                </div>
 	              </div>
 	              <div class="simple-list" id="simple-recent-activity">
@@ -474,7 +475,7 @@
 	              <div class="simple-section-head">
 	                <div>
                   <h2 id="simple-upcoming-heading">Upcoming Activities</h2>
-                  <p id="simple-upcoming-copy">Automatic posts and follow-up checks that are already queued.</p>
+                  <p id="simple-upcoming-copy">Automatic posts and follow-up checks already scheduled.</p>
 	                </div>
 	              </div>
 	              <div class="simple-list" id="simple-upcoming-activity">
@@ -485,7 +486,7 @@
 	        </section>
 
 	        <details class="diagnostic-details legacy-overview-details">
-	          <summary>More reports</summary>
+	          <summary>Detailed reports</summary>
 	          <div class="diagnostic-inner">
 
 	        <section class="today-grid" aria-label="Today summary">
@@ -558,7 +559,7 @@
 	        </details>
 
 	        <details class="diagnostic-details">
-	          <summary>Source files and diagnostics</summary>
+	          <summary>Source files & diagnostics</summary>
 	          <div class="diagnostic-inner">
 	          <div class="report-grid">
 	            <div class="report-stack">
@@ -30305,13 +30306,13 @@ Generated: 2026-07-06T20:01:03.929158Z
 			          ? 'Counts pending'
 			          : 'Clear';
 			    const resultNote=readyMetricRows.length && uniqueMissingSecrets.length
-			      ? 'Public proof is saved; engagement counts need X/Facebook analytics access.'
+			      ? 'Public proof is saved; engagement counts are waiting on connected analytics.'
 			      : readyMetricRows.length
 			      ? 'Public posts are ready for views and engagement counts.'
 			      : waitingMetricRows.length
 			        ? 'Recent posts are waiting for their first result check.'
-			      : uniqueMissingSecrets.length
-				          ? 'Public proof is saved; engagement counts need connected X/Facebook analytics.'
+		          : uniqueMissingSecrets.length
+				          ? 'Public proof is saved; engagement counts are waiting on connected analytics.'
 				          : 'No result follow-up is due right now.';
 	    const learningStatus=String(learningPlan.status||pulseSummary.learning_status||'');
 	    const learningClass=learningStatus.includes('ready') && !uniqueMissingSecrets.length
@@ -30342,13 +30343,13 @@ Generated: 2026-07-06T20:01:03.929158Z
 			      const campaignPhrase=campaignReady ? 'Analog Myth promotion is running automatically.' : 'Analog Myth promotion needs a readiness refresh.';
 			      const nextPhrase=nextPosts.length ? `Next: ${simpleCampaignName(nextPostTitle)} posts to ${simplePlatformNames(nextPosts)} at ${formatQueueDate(nextPosts[0].scheduled_at)}.` : (nextDate ? `Next: ${formatQueueDate(nextDate)}.` : 'No future post queued.');
 		      const metricPhrase=readyMetricRows.length && uniqueMissingSecrets.length
-		        ? `${simpleCount(readyMetricRows.length,'post')} waiting for result counts.`
+		        ? `${simpleCount(readyMetricRows.length,'post')} public and waiting for result counts.`
 		        : readyMetricRows.length
 		        ? `${simpleCount(readyMetricRows.length,'post')} ready for result counts.`
 		        : waitingMetricRows.length
 		          ? `${simpleCount(waitingMetricRows.length,'post')} waiting for first result check.`
 		        : uniqueMissingSecrets.length
-			          ? 'Result counts are waiting on X/Facebook analytics access.'
+			          ? 'Result counts are waiting on connected analytics.'
 			          : 'No result follow-up due.';
 			      const visibilityPhrase=visibilityAttentionCount
 			        ? `${simpleCount(visibilityAttentionCount,'public link')} ${visibilityAttentionCount===1?'needs':'need'} recheck.`
@@ -30356,11 +30357,16 @@ Generated: 2026-07-06T20:01:03.929158Z
 			      statusCopy.textContent=`${campaignPhrase} ${nextPhrase} ${simpleCount(postedCount,'campaign post')} logged. ${visibilityPhrase} ${metricPhrase}`.replace(/\s+/g,' ').trim();
 			    }
 
+		    const manualPostingRequired=Boolean(pulseSummary.manual_posting_required || readoutSummary.manual_posting_required || preflightSummary.manual_posting_required);
+		    const postingModeValue=manualPostingRequired ? 'Needs cleanup' : 'Automatic';
+		    const postingModeNote=manualPostingRequired
+		      ? 'A manual-only lane is present and should be removed or converted.'
+		      : 'No manual posting lane is active.';
 		    statusStrip.innerHTML=[
 			      simpleStatusCard('Campaign', overallLabel, campaignReady?'Automatic Analog Myth posts are active.':'Refresh readiness before the next window.', topClass),
 			      simpleStatusCard('Next post', nextDateLabel, nextPosts.length?`${simpleCampaignName(nextPostTitle)} to ${simplePlatformNames(nextPosts)}.`:`${nextWindowCount||2} automatic posts in the next window.`, campaignReady?'ok':'warn'),
 			      simpleStatusCard('Recent results', `${postedCount} logged`, visibilityAttentionCount?'A recent public link needs another check.':'Recent public links open correctly.', visibilityAttentionCount?'warn':postedCount?'ok':'neutral'),
-			      simpleStatusCard('Learning', learningValue, learningNote, learningClass)
+			      simpleStatusCard('Posting mode', postingModeValue, postingModeNote, manualPostingRequired?'warn':'ok')
 			    ].join('');
 
 	    const recentItems=simpleActivityGroups(postedRows, true)
@@ -30379,7 +30385,7 @@ Generated: 2026-07-06T20:01:03.929158Z
 	        if(attentionRows.length){
 	          status={label:'Check link',className:'warn',note:'The activity is logged, but one public-link check needs another pass.'};
 	        }else if(readyRows.length){
-	          status={label:'Results due',className:uniqueMissingSecrets.length?'neutral':'warn',note:uniqueMissingSecrets.length?'The posts are public; result counts need connected X/Facebook analytics.':'The posts are public and ready for engagement counts.'};
+	          status={label:'Results due',className:uniqueMissingSecrets.length?'neutral':'warn',note:uniqueMissingSecrets.length?'The posts are public; result counts are waiting on connected analytics.':'The posts are public and ready for engagement counts.'};
 	          resultCopy=' Result counts are the next thing to add.';
 	        }else if(measuredRows.length===rows.length){
 	          status={label:'Measured',className:'ok',note:'Posted, logged, and measured.'};
@@ -30487,10 +30493,10 @@ Generated: 2026-07-06T20:01:03.929158Z
 				      ));
 				    }else if(readyMetricRows.length){
 				      upcomingItems.push(simpleUpcomingItem(
-				        uniqueMissingSecrets.length?'Add result counts for recent posts':'Measure recent posts',
+				        uniqueMissingSecrets.length?'Connect result counts for recent posts':'Measure recent posts',
 			        uniqueMissingSecrets.length ? `${simpleCount(readyMetricRows.length,'post')} public` : `${simpleCount(readyMetricRows.length,'post')} ready`,
 			        uniqueMissingSecrets.length
-			          ? 'The posts are public and logged. Views and engagement counts need connected X/Facebook analytics before they can be compared.'
+			          ? 'The posts are public and logged. Views and engagement counts can be compared once analytics are connected.'
 			          : 'The public links are saved. Add visible views and engagement so the campaign can learn what is working.',
 			        {label:uniqueMissingSecrets.length?'Metrics access':'Measure',className:uniqueMissingSecrets.length?'neutral':'warn'},
 		        '/admin/reports/brand-growth-readout.md'
