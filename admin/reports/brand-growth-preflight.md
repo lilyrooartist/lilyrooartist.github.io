@@ -1,12 +1,12 @@
 # Brand Growth Preflight - Lily Roo
 
-Generated: 2026-07-06T14:17:08.224774Z
+Generated: 2026-07-06T14:23:48.213426Z
 
 ## Summary
 - Status: **ready**
 - Next window: **2026-07-06** at `2026-07-06T15:21:00Z`
 - Expected posts: **1**
-- Scheduler: HTTP **200**, auth `bearer`, due **2**, would post **1**, blocked **0**
+- Scheduler: HTTP **200**, auth `bearer`, due **1**, would post **1**, blocked **0**
 - Link checks: **4 ok**, **0 failed**, **0 warning**, **0 blocking failed**
 - Current window proof due: `2026-07-06T15:21:00Z`
 - Current window measurement due: `2026-07-07T15:20:00Z`
