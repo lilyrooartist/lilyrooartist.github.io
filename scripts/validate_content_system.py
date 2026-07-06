@@ -624,7 +624,15 @@ def validate_generated_outputs(failures):
         fail("promo_admin_refresh_run.json missing; run scripts/refresh_promo_admin.py", failures)
     if PROMO_REFRESH_WORKFLOW_STATUS.exists():
         workflow_status = json.loads(PROMO_REFRESH_WORKFLOW_STATUS.read_text(encoding="utf-8"))
-        if workflow_status.get("source") == "github-actions-workflow-runs" and workflow_status.get("workflow") == "promo-admin-refresh.yml" and "latest_run" in workflow_status and "recent_runs" in workflow_status:
+        if (
+            workflow_status.get("source") == "github-actions-workflow-runs"
+            and workflow_status.get("workflow") == "promo-admin-refresh.yml"
+            and "latest_run" in workflow_status
+            and "latest_completed_run" in workflow_status
+            and "current_run" in workflow_status
+            and "current_run_id" in workflow_status
+            and "recent_runs" in workflow_status
+        ):
             ok("promo refresh workflow status snapshot present")
         else:
             fail("promo_refresh_workflow_status.json missing workflow run status fields", failures)
@@ -3278,6 +3286,9 @@ def validate_generated_outputs(failures):
             and "latest_run_status" in automation
             and "latest_run_conclusion" in automation
             and "latest_run_head_sha" in automation
+            and "latest_completed_run_status" in automation
+            and "latest_completed_run_conclusion" in automation
+            and "current_run_status" in automation
             and "workflow_status_action_needed" in automation
             and "current_run_capture_in_progress" in automation
             and "current_run_capture_note" in automation
@@ -4067,7 +4078,14 @@ def validate_generated_outputs(failures):
         fail("refresh_promo_admin.py missing", failures)
     if PROMO_REFRESH_WORKFLOW_CAPTURE.exists():
         workflow_capture_text = PROMO_REFRESH_WORKFLOW_CAPTURE.read_text(encoding="utf-8")
-        if "promo_refresh_workflow_status.json" in workflow_capture_text and "api.github.com" in workflow_capture_text and "workflow_runs" in workflow_capture_text:
+        if (
+            "promo_refresh_workflow_status.json" in workflow_capture_text
+            and "api.github.com" in workflow_capture_text
+            and "workflow_runs" in workflow_capture_text
+            and "GITHUB_RUN_ID" in workflow_capture_text
+            and "latest_completed_run" in workflow_capture_text
+            and "current_run" in workflow_capture_text
+        ):
             ok("promo refresh workflow status capture script present")
         else:
             fail("capture_github_workflow_status.py missing GitHub workflow run capture support", failures)

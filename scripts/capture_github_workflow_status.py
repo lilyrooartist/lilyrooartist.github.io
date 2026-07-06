@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "data" / "promo_refresh_workflow_status.json"
 REPO = "lilyrooartist/lilyrooartist.github.io"
 WORKFLOW = "promo-admin-refresh.yml"
-API_URL = f"https://api.github.com/repos/{REPO}/actions/workflows/{WORKFLOW}/runs?per_page=5"
+API_URL = f"https://api.github.com/repos/{REPO}/actions/workflows/{WORKFLOW}/runs?per_page=10"
 ACTIONS_URL = f"https://github.com/{REPO}/actions/workflows/{WORKFLOW}"
 
 
@@ -52,6 +52,20 @@ def action_needed(latest: dict | None, error: str = "") -> str:
     return "Open the latest promo admin refresh workflow run and review its status."
 
 
+def current_run_id() -> int | None:
+    raw = os.environ.get("GITHUB_RUN_ID", "").strip()
+    if not raw:
+        return None
+    try:
+        return int(raw)
+    except ValueError:
+        return None
+
+
+def latest_completed_run(runs: list[dict]) -> dict:
+    return next((run for run in runs if run.get("status") == "completed"), {})
+
+
 def fetch_runs() -> tuple[int, dict, str]:
     headers = {
         "Accept": "application/vnd.github+json",
@@ -75,16 +89,20 @@ def fetch_runs() -> tuple[int, dict, str]:
 
 def build_snapshot() -> dict:
     status, payload, error = fetch_runs()
-    runs = [sanitize_run(run) for run in payload.get("workflow_runs", [])[:5]]
+    runs = [sanitize_run(run) for run in payload.get("workflow_runs", [])[:10]]
     latest = runs[0] if runs else None
+    run_id = current_run_id()
+    current = next((run for run in runs if run.get("id") == run_id), {}) if run_id else {}
+    completed = latest_completed_run(runs)
     latest_ok = bool(latest) and (
         latest.get("status") in {"queued", "in_progress"}
         or latest.get("conclusion") == "success"
     )
+    completed_ok = not completed or completed.get("conclusion") == "success"
     api_ok = status == 200 and not error
     needed = action_needed(latest, error if not api_ok else "")
     return {
-        "ok": bool(api_ok and latest_ok),
+        "ok": bool(api_ok and latest_ok and completed_ok),
         "updated_at": utc_now(),
         "source": "github-actions-workflow-runs",
         "repo": REPO,
@@ -93,7 +111,10 @@ def build_snapshot() -> dict:
         "actions_url": ACTIONS_URL,
         "http_status": status,
         "error": error,
+        "current_run_id": run_id or "",
+        "current_run": current,
         "latest_run": latest or {},
+        "latest_completed_run": completed,
         "recent_runs": runs,
         "action_needed": needed,
     }
@@ -108,6 +129,8 @@ def main() -> int:
         "http_status": snapshot["http_status"],
         "latest_status": (snapshot["latest_run"] or {}).get("status", ""),
         "latest_conclusion": (snapshot["latest_run"] or {}).get("conclusion", ""),
+        "latest_completed_conclusion": (snapshot["latest_completed_run"] or {}).get("conclusion", ""),
+        "current_run_status": (snapshot["current_run"] or {}).get("status", ""),
         "output": str(OUT.relative_to(ROOT)),
     }, indent=2))
     return 0 if snapshot["ok"] else 1

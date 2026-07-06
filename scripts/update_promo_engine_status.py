@@ -1427,6 +1427,8 @@ def workflow_status_state(workflow_status: dict) -> dict:
             "workflow_status_action_needed": "Run python3 scripts/capture_github_workflow_status.py.",
         }
     latest = workflow_status.get("latest_run") or {}
+    latest_completed = workflow_status.get("latest_completed_run") or {}
+    current = workflow_status.get("current_run") or {}
     return {
         "workflow_status_available": True,
         "workflow_status_ok": bool(workflow_status.get("ok")),
@@ -1435,6 +1437,15 @@ def workflow_status_state(workflow_status: dict) -> dict:
         "latest_run_head_sha": latest.get("head_sha", ""),
         "latest_run_updated_at": latest.get("updated_at", ""),
         "latest_run_url": latest.get("html_url", ""),
+        "latest_completed_run_status": latest_completed.get("status", ""),
+        "latest_completed_run_conclusion": latest_completed.get("conclusion", ""),
+        "latest_completed_run_head_sha": latest_completed.get("head_sha", ""),
+        "latest_completed_run_updated_at": latest_completed.get("updated_at", ""),
+        "latest_completed_run_url": latest_completed.get("html_url", ""),
+        "current_run_status": current.get("status", ""),
+        "current_run_conclusion": current.get("conclusion", ""),
+        "current_run_head_sha": current.get("head_sha", ""),
+        "current_run_url": current.get("html_url", ""),
         "workflow_status_action_needed": workflow_status.get("action_needed", ""),
     }
 

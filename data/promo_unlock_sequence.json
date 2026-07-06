@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-06T17:45:09.010015Z",
+  "generated_at": "2026-07-06T17:52:28.936510Z",
   "safe_mode": true,
   "summary": {
     "step_count": 5,
@@ -23,14 +23,14 @@
     "First handoff step: Fill and import manual metric worksheet — python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
     "Current unlock gate: Fill manual metric worksheet (blocked_until_input); 0 ready, 2 blocked/warning; preview python3 scripts/update_manual_social_stats.py --from-csv --dry-run; see data/promo_unlock_sequence.json.",
     "Review handoff preview health: 1 preview-clean, 2 missing input; see data/human_handoff_resolution_preview.json.",
+    "Refresh automation coverage: latest scheduled run has not covered 37624d7f; dispatch https://github.com/lilyrooartist/lilyrooartist.github.io/actions/workflows/promo-admin-refresh.yml or wait for the next scheduled run.",
     "Refresh manual metrics: 6 worksheet row(s) still need new_value entries (blocked_until_new_values_filled); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values.",
     "Collect experiment results: 84 post-result field(s) need new_value plus evidence_note; use admin/reports/experiment-result-clipboard.md; first priority: measure FP-AUTO-278 on Facebook. Direct preview template: python3 scripts/update_experiment_results.py --post-id FP-AUTO-278 --source-row 30 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run. Direct apply template after review: python3 scripts/update_experiment_results.py --post-id FP-AUTO-278 --source-row 30 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin. Then preview import with python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run after filling data/experiment_result_entry_wide_template.csv.",
+    "Re-check checked-pending store links: 4 music site snapshot(s) still have no public URL; next recommended re-check after 2026-07-07T17:51:32.016769+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 --out data/store_verification_run.json --snapshot-root data/store-verification then.",
     "Restart song-forward distribution: approve draft posts, clear executor blockers, and keep weekly metrics current.",
-    "Re-check checked-pending store links: 4 music site snapshot(s) still have no public URL; next recommended re-check after 2026-07-07T17:44:52.201606+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 --out data/store_verification_run.json --snapshot-root data/store-verification then.",
+    "Refresh manual metrics: fill data/manual_metric_collection_template.csv, preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run, then import with python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin.",
     "I Learned It All in Fifteen Seconds: Fill manual metric worksheet and import it before weekly reporting.",
-    "Twelve Dollars: Re-check checked-pending store links for Spotify, Apple Music, HyperFollow; no public URLs were found in the latest snapshots.",
-    "Twelve Dollars: Fill manual metric worksheet and import it before weekly reporting.",
-    "Analog Myth: Fill manual metric worksheet and import it before weekly reporting."
+    "Twelve Dollars: Re-check checked-pending store links for Spotify, Apple Music, HyperFollow; no public URLs were found in the latest snapshots."
   ],
   "steps": [
     {
@@ -130,14 +130,14 @@
       "commands": [
         {
           "step": "preview",
-          "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-07T10:00:00+00:00' --spacing-hours 24",
+          "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-07T10:00:00-04:00' --spacing-hours 24",
           "safe_to_run": true,
           "status": "not_previewed",
           "returncodes": []
         },
         {
           "step": "apply_after_review",
-          "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-07T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+          "command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-07T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
           "safe_to_run": false,
           "requires": "Human review, required input, or external platform repair must be complete first."
         }
