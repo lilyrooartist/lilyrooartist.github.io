@@ -465,6 +465,7 @@ def validate_generated_outputs(failures):
         site_home = tracking.get("site_home") or {}
         site_podcast = tracking.get("site_podcast") or {}
         site_music = tracking.get("site_music") or {}
+        site_lyrics = tracking.get("site_lyrics") or {}
         if (
             tracking.get("safe_mode") is True
             and summary.get("status") == "ready"
@@ -499,11 +500,15 @@ def validate_generated_outputs(failures):
             and summary.get("site_music_url_count") == summary.get("expected_site_music_url_count")
             and summary.get("site_music_endpoint_status") == "ready"
             and site_music.get("status") == "ready"
+            and summary.get("site_lyrics_status") == "ready"
+            and summary.get("site_lyrics_url_count") == summary.get("expected_site_lyrics_url_count")
+            and summary.get("site_lyrics_endpoint_status") == "ready"
+            and site_lyrics.get("status") == "ready"
             and BRAND_CLICK_TRACKING_HEALTH_REPORT.exists()
         ):
-            ok("brand click tracking health verifies future campaign links, homepage/podcast/music CTAs, visible album paths, and live dry-run capture")
+            ok("brand click tracking health verifies future campaign links, homepage/podcast/music/lyric CTAs, visible album paths, and live dry-run capture")
         else:
-            fail("brand_click_tracking_health.json does not prove all future campaign links, homepage/podcast/music CTAs, and dry-run click capture are ready", failures)
+            fail("brand_click_tracking_health.json does not prove all future campaign links, homepage/podcast/music/lyric CTAs, and dry-run click capture are ready", failures)
     else:
         fail("brand_click_tracking_health.json missing; run scripts/build_brand_click_tracking_health.py", failures)
     if BRAND_GROWTH_PULSE.exists():
@@ -4378,18 +4383,21 @@ def validate_generated_outputs(failures):
         and "site-podcast-(hero|player|share)" in worker_text
         and "SITE_MUSIC_CLICK_PATTERN" in worker_text
         and "site-music-(album-page|listen-links|spotify|apple|playlist|podcast-episode)" in worker_text
+        and "SITE_LYRICS_CLICK_PATTERN" in worker_text
+        and "site-lyrics-" in worker_text
         and "isTrackableClickPostId(postId)" in worker_text
         and 'wave: "site-share"' in worker_text
         and 'wave: "site-home"' in worker_text
         and 'wave: "site-podcast"' in worker_text
         and 'wave: "site-music"' in worker_text
+        and 'wave: "site-lyrics"' in worker_text
         and '"spotify"' in worker_text
         and '"apple"' in worker_text
         and 'platform: "site"' in worker_text
     ):
-        ok("social executor accepts first-party site-share, homepage CTA, podcast CTA, and music catalog CTA click tracking")
+        ok("social executor accepts first-party site-share, homepage CTA, podcast CTA, music catalog CTA, and lyric CTA click tracking")
     else:
-        fail("social executor missing first-party site-share, homepage CTA, podcast CTA, or music catalog CTA click tracking", failures)
+        fail("social executor missing first-party site-share, homepage CTA, podcast CTA, music catalog CTA, or lyric CTA click tracking", failures)
     if SOCIAL_EXECUTION_RESET.exists():
         reset_text = SOCIAL_EXECUTION_RESET.read_text(encoding="utf-8")
         if (
@@ -5243,6 +5251,10 @@ def validate_lyrics_discovery_metadata(failures):
             f'<link rel="canonical" href="{expected_canonical}" />',
             'property="og:image"',
             'name="twitter:card" content="summary_large_image"',
+            "lyrics-growth-cta",
+            f"p=site-lyrics-{path.stem}-album&amp;to=album",
+            f"p=site-lyrics-{path.stem}-listen&amp;to=listen",
+            f"p=site-lyrics-{path.stem}-echo&amp;to=echo",
         ]
         missing = [token for token in required_tokens if token not in text]
         if missing:

@@ -1,6 +1,6 @@
 # Brand Click Tracking Health - Lily Roo
 
-Generated: 2026-07-06T22:53:09.860358Z
+Generated: 2026-07-06T23:08:44.806415Z
 
 ## Summary
 - Status: **ready**
@@ -19,6 +19,8 @@ Generated: 2026-07-06T22:53:09.860358Z
 - Podcast endpoint dry run: **ready**
 - Music catalog CTA tracking: **ready** (6 / 6)
 - Music catalog endpoint dry run: **ready**
+- Lyric page CTA tracking: **ready** (75 / 75)
+- Lyric page endpoint dry run: **ready**
 - Destinations: **album: 58, echo: 58, video: 58**
 - Issues: **none**
 
@@ -117,6 +119,32 @@ Generated: 2026-07-06T22:53:09.860358Z
 - `site-music-apple` -> `apple`: **ready**
 - `site-music-playlist` -> `playlist`: **ready**
 - `site-music-podcast-episode` -> `episode`: **ready**
+
+## Lyric Page CTA Tracking
+- Status: **ready**
+- CTA URLs ready: **75 / 75**
+- Lyric endpoint dry run: **ready**
+- Lyric probe id: `site-lyrics-index-album`
+- Lyric issues: **none**
+- `site-lyrics-13-album` -> `album`: **ready**
+- `site-lyrics-13-listen` -> `listen`: **ready**
+- `site-lyrics-13-echo` -> `echo`: **ready**
+- `site-lyrics-analog-myth-album` -> `album`: **ready**
+- `site-lyrics-analog-myth-listen` -> `listen`: **ready**
+- `site-lyrics-analog-myth-echo` -> `echo`: **ready**
+- `site-lyrics-brain-rot-album` -> `album`: **ready**
+- `site-lyrics-brain-rot-listen` -> `listen`: **ready**
+- `site-lyrics-brain-rot-echo` -> `echo`: **ready**
+- `site-lyrics-dinner-table-tilt-album` -> `album`: **ready**
+- `site-lyrics-dinner-table-tilt-listen` -> `listen`: **ready**
+- `site-lyrics-dinner-table-tilt-echo` -> `echo`: **ready**
+- `site-lyrics-every-pearl-in-carmel-album` -> `album`: **ready**
+- `site-lyrics-every-pearl-in-carmel-listen` -> `listen`: **ready**
+- `site-lyrics-every-pearl-in-carmel-echo` -> `echo`: **ready**
+- `site-lyrics-girls-camp-album` -> `album`: **ready**
+- `site-lyrics-girls-camp-listen` -> `listen`: **ready**
+- `site-lyrics-girls-camp-echo` -> `echo`: **ready**
+- ...and **57** more lyric CTA links.
 
 ## Future Rows
 - `FP-BRAND-AM-04-SPILLING-THE-TEA-X` X 2026-07-07T10:15:00-04:00 - **ready** (3 links)
@@ -334,4 +362,5 @@ Generated: 2026-07-06T22:53:09.860358Z
 - Homepage Analog Myth CTAs should use first-party site-home tracking links.
 - Podcast-page Analog Myth CTAs should use first-party site-podcast tracking links.
 - Music catalog Analog Myth CTAs should use first-party site-music tracking links.
+- Lyric pages should use first-party site-lyrics tracking links for album, listening-link, and Echo Thread handoffs.
 - The live click endpoint health probe uses dry_run=1 so it cannot create fake campaign clicks.

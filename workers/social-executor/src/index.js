@@ -20,6 +20,7 @@ const SITE_SHARE_CLICK_PATTERN = /^site-share-(album|echo|video|track-\d{2}-[a-z
 const SITE_HOME_CLICK_PATTERN = /^site-home-(hero|starter|launch|podcast)-(album|echo|listen|playlist|video)$/;
 const SITE_PODCAST_CLICK_PATTERN = /^site-podcast-(hero|player|share)-(album|echo|episode|listen|playlist|rss|download)$/;
 const SITE_MUSIC_CLICK_PATTERN = /^site-music-(album-page|listen-links|spotify|apple|playlist|podcast-episode)$/;
+const SITE_LYRICS_CLICK_PATTERN = /^site-lyrics-([a-z0-9-]+)-(album|listen|echo)$/;
 const CLICK_TTL_SECONDS = 60 * 60 * 24 * 180;
 const MAX_SCHEDULE_ATTEMPTS = 3;
 const LAUNCH_FOCUS_DAYS = {
@@ -680,6 +681,15 @@ function campaignPostParts(postId) {
       platform: "site",
     };
   }
+  const siteLyrics = normalized.match(/^site-lyrics-([a-z0-9-]+)-(album|listen|echo)$/);
+  if (siteLyrics) {
+    return {
+      wave: "site-lyrics",
+      track: "",
+      trackSlug: siteLyrics[1],
+      platform: "site",
+    };
+  }
   const siteHome = normalized.match(/^site-home-(hero|starter|launch|podcast)-(album|echo|listen|playlist|video)$/);
   if (siteHome) {
     return {
@@ -712,7 +722,7 @@ function campaignPostParts(postId) {
 
 function isTrackableClickPostId(postId) {
   const normalized = text(postId).toLowerCase();
-  return BRAND_CLICK_POST_PATTERN.test(normalized) || SITE_SHARE_CLICK_PATTERN.test(normalized) || SITE_HOME_CLICK_PATTERN.test(normalized) || SITE_PODCAST_CLICK_PATTERN.test(normalized) || SITE_MUSIC_CLICK_PATTERN.test(normalized);
+  return BRAND_CLICK_POST_PATTERN.test(normalized) || SITE_SHARE_CLICK_PATTERN.test(normalized) || SITE_HOME_CLICK_PATTERN.test(normalized) || SITE_PODCAST_CLICK_PATTERN.test(normalized) || SITE_MUSIC_CLICK_PATTERN.test(normalized) || SITE_LYRICS_CLICK_PATTERN.test(normalized);
 }
 
 function normalizeClickDestination(value) {

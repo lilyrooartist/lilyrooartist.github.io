@@ -166,6 +166,10 @@
       if (siteMusic) {
         return { postId: normalized, wave: "site-music", track: "", platform: "site" };
       }
+      const siteLyrics = normalized.match(/^site-lyrics-([a-z0-9-]+)-(album|listen|echo)$/);
+      if (siteLyrics) {
+        return { postId: normalized, wave: "site-lyrics", track: "", platform: "site" };
+      }
       const siteHome = normalized.match(/^site-home-(hero|starter|launch|podcast)-(album|echo|listen|playlist|video)$/);
       if (siteHome) {
         return { postId: normalized, wave: "site-home", track: "", platform: "site" };
