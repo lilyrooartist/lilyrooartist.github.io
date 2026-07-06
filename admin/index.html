@@ -14,7 +14,7 @@
     .tab{display:inline-flex;align-items:center;justify-content:center;width:auto;text-align:left;background:#151b2d;color:#d9def1;border:1px solid #2d3655;border-radius:8px;padding:8px 11px;margin:0;cursor:pointer;font-weight:750;white-space:nowrap;flex:0 0 auto}
     .tab.active{background:#29406f;color:#fff;border-color:#4f79c6}
     .nav>p.muted{display:none}
-    .content{padding:18px 22px 30px;max-width:1320px;width:100%;box-sizing:border-box;margin:0 auto}
+    .content{padding:18px 22px 30px;max-width:1320px;width:100%;box-sizing:border-box;margin:0 auto;min-width:0}
     .panel{display:none}.panel.active{display:block}
     .main-grid{display:grid;grid-template-columns:minmax(0,1fr) 390px;gap:16px;align-items:start}
     .card{background:#141722;border:1px solid #2a2f44;border-radius:14px;padding:14px;margin:10px 0}
@@ -108,12 +108,14 @@
     .status-chip.working{background:#14203a;color:#dce8ff;border-color:#416095}
 	    .report-alert{border:1px solid #6c4b16;background:#2a2115;color:#ffd88a;border-radius:12px;padding:11px 12px;font-size:13px}
 	    .report-alert[hidden]{display:none}
-    .simple-dashboard{display:grid;gap:20px;margin-bottom:18px}
+    .simple-dashboard{display:grid;gap:18px;margin-bottom:18px}
     .simple-intro{display:flex;justify-content:space-between;gap:16px;align-items:flex-end}
-    .simple-intro h1{margin:0;font-size:26px;line-height:1.05}
-    .simple-intro p{margin:5px 0 0;color:#b8c1dc;line-height:1.4;font-size:13px;max-width:720px}
+    .simple-intro h1{margin:0;font-size:30px;line-height:1.05}
+    .simple-intro p{margin:6px 0 0;color:#b8c1dc;line-height:1.45;font-size:14px;max-width:760px;overflow-wrap:anywhere}
+    .simple-eyebrow{margin:0 0 6px;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#8f98b8;font-weight:850}
+    .simple-intro-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
     .simple-section{background:transparent;border:0;border-radius:0;padding:0;min-width:0;width:100%;max-width:100%;box-sizing:border-box}
-    .simple-status-band{background:#111827;border:1px solid #2f3a58;border-radius:8px;padding:18px;border-left:5px solid #5b8dff}
+    .simple-status-band{background:#111827;border:1px solid #2f3a58;border-radius:8px;padding:16px;border-left:5px solid #5b8dff;overflow-wrap:anywhere}
 	    .simple-section-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;margin-bottom:12px}
 	    .simple-section-head>div{min-width:0}
 	    .simple-section-head h2{margin:0;font-size:20px;line-height:1.15}
@@ -125,9 +127,9 @@
 	    .simple-status-card.status-warn{border-color:#6c4b16;background:#211a10}
 	    .simple-status-card.status-bad{border-color:#74303d;background:#251319}
 	    .simple-status-card .metric-label{font-size:11px}
-    .simple-status-card strong{display:block;color:#fff;font-size:21px;line-height:1.1;margin-top:8px;word-break:break-word}
-    .simple-status-card p{margin:8px 0 0;color:#b6bed6;font-size:12px;line-height:1.4}
-    .simple-columns{display:grid;grid-template-columns:minmax(0,1fr) minmax(360px,.78fr);gap:22px;align-items:start}
+    .simple-status-card strong{display:block;color:#fff;font-size:20px;line-height:1.1;margin-top:8px;word-break:break-word;overflow-wrap:anywhere}
+    .simple-status-card p{margin:8px 0 0;color:#b6bed6;font-size:12px;line-height:1.4;overflow-wrap:anywhere}
+    .simple-columns{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(360px,.9fr);gap:24px;align-items:start}
 	    .simple-list{display:grid;gap:10px}
 	    .simple-item{border:1px solid #26314e;border-left-width:4px;border-radius:8px;background:#101523;padding:13px;min-width:0;max-width:100%;box-sizing:border-box}
 	    .simple-item.status-ok{border-color:#1f684d;background:#0f1818}
@@ -136,7 +138,7 @@
 	    .simple-item.status-neutral{border-left-color:#465579}
 	    .simple-item-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;margin-bottom:6px}
     .simple-item-title{font-weight:850;color:#f4f7ff;line-height:1.25;font-size:15px}
-	    .simple-item-meta{font-size:12px;color:#9ba3bf;line-height:1.4}
+	    .simple-item-meta{font-size:12px;color:#9ba3bf;line-height:1.4;overflow-wrap:anywhere}
 	    .simple-item-copy{font-size:14px;line-height:1.45;color:#d7def2;margin-top:6px;overflow-wrap:anywhere}
 	    .simple-item-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}
 	    .simple-item-actions a{font-size:11px;text-decoration:none;border:1px solid #334062;border-radius:999px;padding:4px 8px;background:#111827;color:#cfe3ff;font-weight:800}
@@ -242,6 +244,10 @@
       .nav{padding:10px 14px}
       .brand{font-size:14px}
       .tab{padding:8px 9px}
+      .simple-intro-actions{width:100%;justify-content:flex-start}
+      .simple-intro-actions .btn{flex:1 1 140px}
+      .simple-item-head{display:grid;gap:8px}
+      .simple-item-head .status-chip{justify-self:start}
       .report-hero h1,.library-hero h1,.simple-intro h1{font-size:25px}
       .metric-value{font-size:24px}
       .section-head{display:block}
@@ -272,8 +278,8 @@
   <aside class="nav">
     <div class="brand">Lily Roo Admin</div>
     <button class="tab active" data-tab="dashboard">Status</button>
-    <button class="tab" data-tab="backstory">Story Library</button>
-    <button class="tab" data-tab="songs">Song Library</button>
+    <button class="tab" data-tab="backstory">Stories</button>
+    <button class="tab" data-tab="songs">Songs</button>
     <button class="tab" data-tab="promo">Files</button>
     <button class="tab" id="lock-admin" type="button">Lock admin</button>
     <p class="muted" style="margin-top:14px;font-size:12px">Password remembered on this computer</p>
@@ -426,11 +432,23 @@
 	        <div class="report-alert" id="reports-alert" hidden></div>
 
           <section class="simple-dashboard" aria-label="Lily Roo promotion overview">
+            <header class="simple-intro">
+              <div>
+                <div class="simple-eyebrow">Lily Roo promotion dashboard</div>
+                <h1>Status</h1>
+                <p>At a glance: what is live, what happened recently, and what will happen next. Detailed reports are folded away below.</p>
+              </div>
+              <div class="simple-intro-actions">
+                <a class="btn secondary" href="content/Published_Log.csv" target="_blank" rel="noopener">Published log</a>
+                <a class="btn ghost" href="future-posts.json" target="_blank" rel="noopener">Upcoming queue</a>
+              </div>
+            </header>
+
 	          <section class="simple-section simple-status-band" aria-labelledby="simple-status-heading">
 	            <div class="simple-section-head">
 	              <div>
                   <h2 id="simple-status-heading">Current Status</h2>
-                  <p id="simple-status-copy">Loading the campaign, recent public posts, and next automatic work...</p>
+                  <p id="simple-status-copy">Loading automatic publishing, recent public posts, and result checks...</p>
 	              </div>
 	              <span class="status-chip neutral" id="simple-updated-chip">Checking</span>
 	            </div>
@@ -448,7 +466,7 @@
 	              <div class="simple-section-head">
 	                <div>
                   <h2 id="simple-recent-heading">Recent Activity and Results</h2>
-                  <p id="simple-recent-copy">What actually happened, written as a running record.</p>
+                  <p id="simple-recent-copy">What happened already, including public links and result status.</p>
 	                </div>
 	              </div>
 	              <div class="simple-list" id="simple-recent-activity">
@@ -460,7 +478,7 @@
 	              <div class="simple-section-head">
 	                <div>
                   <h2 id="simple-upcoming-heading">Upcoming Activities</h2>
-                  <p id="simple-upcoming-copy">What is already approved to happen next.</p>
+                  <p id="simple-upcoming-copy">Approved automatic work that is already queued or scheduled for follow-up.</p>
 	                </div>
 	              </div>
 	              <div class="simple-list" id="simple-upcoming-activity">
@@ -471,7 +489,7 @@
 	        </section>
 
 	        <details class="diagnostic-details legacy-overview-details">
-	          <summary>Advanced reports and source files</summary>
+	          <summary>Campaign details</summary>
 	          <div class="diagnostic-inner">
 
 	        <section class="today-grid" aria-label="Today summary">
@@ -544,7 +562,7 @@
 	        </details>
 
 	        <details class="diagnostic-details">
-	          <summary>Show source reports and files</summary>
+	          <summary>Diagnostics and source files</summary>
 	          <div class="diagnostic-inner">
 	          <div class="report-grid">
 	            <div class="report-stack">
@@ -29991,12 +30009,12 @@ Generated: 2026-07-06T18:13:02.714661Z
 			      statusCopy.textContent=`${campaignPhrase} ${nextPhrase} ${simpleCount(postedCount,'campaign post')} logged. ${visibilityPhrase} ${metricPhrase}`.replace(/\s+/g,' ').trim();
 			    }
 
-			    statusStrip.innerHTML=[
-			      simpleStatusCard('Campaign', overallLabel, campaignReady?'Automatic publishing is active for Analog Myth.':'Refresh readiness before the next window.', topClass),
-			      simpleStatusCard('Next Up', nextDateLabel, nextPosts.length?`${nextPostTitle} to ${simplePlatformNames(nextPosts)}.`:`${nextWindowCount||2} automatic posts in the next window.`, campaignReady?'ok':'warn'),
-			      simpleStatusCard('Recent Activity', `${postedCount} logged`, visibilityAttentionCount?'A recent public link needs another check.':'Recent public links open correctly.', visibilityAttentionCount?'warn':postedCount?'ok':'neutral'),
-			      simpleStatusCard('Results', resultLabel, resultNote, readyMetricRows.length&&uniqueMissingSecrets.length?'neutral':readyMetricRows.length?'warn':uniqueMissingSecrets.length?'neutral':'ok')
-			    ].join('');
+		    statusStrip.innerHTML=[
+		      simpleStatusCard('Publishing', overallLabel, campaignReady?'Analog Myth posts are publishing automatically.':'Refresh readiness before the next window.', topClass),
+		      simpleStatusCard('Next automatic post', nextDateLabel, nextPosts.length?`${nextPostTitle} to ${simplePlatformNames(nextPosts)}.`:`${nextWindowCount||2} automatic posts in the next window.`, campaignReady?'ok':'warn'),
+		      simpleStatusCard('Activity record', `${postedCount} logged`, visibilityAttentionCount?'A recent public link needs another check.':'Recent public links open correctly.', visibilityAttentionCount?'warn':postedCount?'ok':'neutral'),
+		      simpleStatusCard('Result counts', resultLabel, resultNote, readyMetricRows.length&&uniqueMissingSecrets.length?'neutral':readyMetricRows.length?'warn':uniqueMissingSecrets.length?'neutral':'ok')
+		    ].join('');
 
 	    const recentItems=simpleActivityGroups(postedRows, true)
 	      .slice(0,4)
