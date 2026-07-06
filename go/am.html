@@ -148,6 +148,14 @@
 
     function postParts(postId) {
       const normalized = String(postId || "").toLowerCase();
+      const siteHome = normalized.match(/^site-home-(hero|starter|launch|podcast)-(album|echo|listen|playlist|video)$/);
+      if (siteHome) {
+        return { postId: normalized, wave: "site-home", track: "", platform: "site" };
+      }
+      const siteShare = normalized.match(/^site-share-(album|echo|video|track-(\d{2})-[a-z0-9-]+)$/);
+      if (siteShare) {
+        return { postId: normalized, wave: "site-share", track: siteShare[2] || "", platform: "site" };
+      }
       const match = normalized.match(/^fp-brand-am(?:-w(\d+))?-(\d{2})-.+-(x|facebook)$/);
       if (!match) {
         return { postId: normalized || "unknown", wave: "unknown", track: "", platform: "social" };

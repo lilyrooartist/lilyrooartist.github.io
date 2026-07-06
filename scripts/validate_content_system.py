@@ -462,6 +462,7 @@ def validate_generated_outputs(failures):
         expected_visible_full_destinations = int(summary.get("expected_visible_surface_full_destination_count") or 0)
         redirect = tracking.get("redirect") or {}
         click_endpoint = tracking.get("click_endpoint") or {}
+        site_home = tracking.get("site_home") or {}
         if (
             tracking.get("safe_mode") is True
             and summary.get("status") == "ready"
@@ -484,11 +485,15 @@ def validate_generated_outputs(failures):
             and click_endpoint.get("status") == "ready"
             and click_endpoint.get("http_status") == 200
             and click_endpoint.get("dry_run") is True
+            and summary.get("site_home_status") == "ready"
+            and summary.get("site_home_url_count") == summary.get("expected_site_home_url_count")
+            and summary.get("site_home_endpoint_status") == "ready"
+            and site_home.get("status") == "ready"
             and BRAND_CLICK_TRACKING_HEALTH_REPORT.exists()
         ):
-            ok("brand click tracking health verifies future campaign links, visible album paths, and live dry-run capture")
+            ok("brand click tracking health verifies future campaign links, homepage CTAs, visible album paths, and live dry-run capture")
         else:
-            fail("brand_click_tracking_health.json does not prove all future campaign links and dry-run click capture are ready", failures)
+            fail("brand_click_tracking_health.json does not prove all future campaign links, homepage CTAs, and dry-run click capture are ready", failures)
     else:
         fail("brand_click_tracking_health.json missing; run scripts/build_brand_click_tracking_health.py", failures)
     if BRAND_GROWTH_PULSE.exists():
@@ -4357,13 +4362,16 @@ def validate_generated_outputs(failures):
     if (
         "SITE_SHARE_CLICK_PATTERN" in worker_text
         and "site-share-(album|echo|video|track-" in worker_text
+        and "SITE_HOME_CLICK_PATTERN" in worker_text
+        and "site-home-(hero|starter|launch|podcast)" in worker_text
         and "isTrackableClickPostId(postId)" in worker_text
         and 'wave: "site-share"' in worker_text
+        and 'wave: "site-home"' in worker_text
         and 'platform: "site"' in worker_text
     ):
-        ok("social executor accepts first-party site-share click tracking")
+        ok("social executor accepts first-party site-share and homepage CTA click tracking")
     else:
-        fail("social executor missing first-party site-share click tracking", failures)
+        fail("social executor missing first-party site-share or homepage CTA click tracking", failures)
     if SOCIAL_EXECUTION_RESET.exists():
         reset_text = SOCIAL_EXECUTION_RESET.read_text(encoding="utf-8")
         if (
@@ -4966,13 +4974,13 @@ def validate_simple_admin_dashboard(failures):
     text = ADMIN_INDEX.read_text(encoding="utf-8") if ADMIN_INDEX.exists() else ""
     checks = {
         "top status strip": 'id="simple-status-strip"' in text and ".simple-status-strip" in text,
-        "status heading is explicit": 'id="simple-status-heading">Status<' in text,
-        "recent activity column": 'id="simple-recent-activity"' in text and "Recent Activity and Results" in text,
+        "status heading is explicit": 'id="simple-status-heading">Current Status<' in text,
+        "recent activity column": 'id="simple-recent-activity"' in text and "Recent Activities and Results" in text,
         "upcoming activity column": 'id="simple-upcoming-activity"' in text and "Upcoming Activities" in text,
         "two-column layout": ".simple-columns{display:grid;grid-template-columns" in text,
         "four status cards across top": ".simple-status-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))" in text,
-        "clear result wording": "What went out, where it went, and whether the public link or result is saved." in text,
-        "upcoming wording is scheduled": "The next automatic posts and follow-up checks already on the calendar." in text,
+        "clear result wording": "A plain-English record of what happened and what proof or result was saved." in text,
+        "upcoming wording is scheduled": "What is scheduled next, including automatic publishing and result checks." in text,
         "manual posting appears only as cleanup": "Remove manual-only posting from the active plan" in text and "No manual posting in active campaign" not in text,
         "debug details hidden by default": "#panel-dashboard .diagnostic-details{display:none}" in text,
         "debug details opt-in": "show-debug-dashboard" in text and "debug')==='1'" in text,
@@ -5056,6 +5064,7 @@ def validate_public_growth_metadata(failures):
 
 def validate_analog_myth_launch_share(failures):
     analog_text = (ROOT / "analog-myth.html").read_text(encoding="utf-8")
+    home_text = (ROOT / "index.html").read_text(encoding="utf-8")
     style_text = (ROOT / "style.css").read_text(encoding="utf-8")
     script_text = (ROOT / "script.js").read_text(encoding="utf-8")
     redirect_text = (ROOT / "go" / "am.html").read_text(encoding="utf-8")
@@ -5084,10 +5093,24 @@ def validate_analog_myth_launch_share(failures):
     ]
     required_health = [
         "SITE_SHARE_EXPECTED",
+        "SITE_HOME_EXPECTED",
         "site_share_health",
+        "Homepage CTA Tracking",
+        "site_home_endpoint_status",
+        "site-home-hero-album",
         'click_endpoint_dry_run("site-share-album", "album")',
         "Album Page Share Tracking",
         "site_share_endpoint_status",
+    ]
+    required_home = [
+        'href="/go/am.html?p=site-home-hero-album&amp;to=album"',
+        'href="/go/am.html?p=site-home-hero-echo&amp;to=echo"',
+        'href="/go/am.html?p=site-home-hero-playlist&amp;to=playlist"',
+        'href="/go/am.html?p=site-home-starter-album&amp;to=album"',
+        'href="/go/am.html?p=site-home-starter-playlist&amp;to=playlist"',
+        'href="/go/am.html?p=site-home-starter-echo&amp;to=echo"',
+        'href="/go/am.html?p=site-home-launch-listen&amp;to=listen"',
+        'href="/go/am.html?p=site-home-podcast-echo&amp;to=echo"',
     ]
     required_css = [
         ".launch-share-strip",
@@ -5104,15 +5127,18 @@ def validate_analog_myth_launch_share(failures):
     missing_html = [token for token in required_html if token not in analog_text]
     missing_redirect = [token for token in required_redirect if token not in redirect_text]
     missing_health = [token for token in required_health if token not in click_health_text]
+    missing_home = [token for token in required_home if token not in home_text]
     missing_css = [token for token in required_css if token not in style_text]
     missing_script = [token for token in required_script if token not in script_text]
-    if missing_html or missing_redirect or missing_health or missing_css or missing_script:
+    if missing_html or missing_redirect or missing_health or missing_home or missing_css or missing_script:
         if missing_html:
             fail("Analog Myth launch share strip missing " + ", ".join(missing_html), failures)
         if missing_redirect:
             fail("Analog Myth share redirect missing " + ", ".join(missing_redirect), failures)
         if missing_health:
             fail("Analog Myth share tracking health missing " + ", ".join(missing_health), failures)
+        if missing_home:
+            fail("Homepage Analog Myth CTA tracking missing " + ", ".join(missing_home), failures)
         if missing_css:
             fail("Analog Myth launch share CSS missing " + ", ".join(missing_css), failures)
         if missing_script:

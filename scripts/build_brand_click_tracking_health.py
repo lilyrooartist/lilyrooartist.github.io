@@ -16,6 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 QUEUE = ROOT / "data" / "scheduled_posts.csv"
 FUTURE = ROOT / "admin" / "future-posts.json"
 REDIRECT = ROOT / "go" / "am.html"
+HOME_PAGE = ROOT / "index.html"
 ANALOG_MYTH_PAGE = ROOT / "analog-myth.html"
 OUT = ROOT / "data" / "brand_click_tracking_health.json"
 REPORT = ROOT / "admin" / "reports" / "brand-click-tracking-health.md"
@@ -38,6 +39,19 @@ SITE_SHARE_EXPECTED = {
     "site-share-track-06-guards-down": {"destination": "album", "anchor": "track-guards-down"},
     "site-share-track-07-slow-walk": {"destination": "album", "anchor": "track-slow-walk"},
     "site-share-track-08-the-power-of-light": {"destination": "album", "anchor": "track-the-power-of-light"},
+}
+SITE_HOME_EXPECTED = {
+    "site-home-hero-album": {"destination": "album"},
+    "site-home-hero-echo": {"destination": "echo"},
+    "site-home-hero-playlist": {"destination": "playlist"},
+    "site-home-starter-album": {"destination": "album"},
+    "site-home-starter-playlist": {"destination": "playlist"},
+    "site-home-starter-echo": {"destination": "echo"},
+    "site-home-launch-album": {"destination": "album"},
+    "site-home-launch-listen": {"destination": "listen"},
+    "site-home-launch-playlist": {"destination": "playlist"},
+    "site-home-launch-echo": {"destination": "echo"},
+    "site-home-podcast-echo": {"destination": "echo"},
 }
 CLICK_DRY_RUN_BASE = "https://www.lilyroo.com/api/social/click"
 CLICK_DRY_RUN_USER_AGENT = "LilyRooClickDryRun/1.0"
@@ -65,6 +79,12 @@ def rel(path: Path) -> str:
 
 def post_parts(post_id: str) -> dict:
     normalized = str(post_id or "").strip().lower()
+    site_home = re.match(r"^site-home-(hero|starter|launch|podcast)-(album|echo|listen|playlist|video)$", normalized)
+    if site_home:
+        return {"post_id": normalized, "wave": "site-home", "track": "", "platform": "site"}
+    site_share = re.match(r"^site-share-(album|echo|video|track-(\d{2})-[a-z0-9-]+)$", normalized)
+    if site_share:
+        return {"post_id": normalized, "wave": "site-share", "track": site_share.group(2) or "", "platform": "site"}
     match = re.match(r"^fp-brand-am(?:-w(\d+))?-(\d{2})-.+-(x|facebook)$", normalized)
     if not match:
         return {"post_id": normalized, "wave": "unknown", "track": "", "platform": ""}
@@ -97,6 +117,17 @@ def site_share_urls() -> list[str]:
         url.replace("&amp;", "&")
         for url in re.findall(r'data-share-url="(https://www\.lilyroo\.com/go/am\.html\?[^"]+)"', text)
     ]
+
+
+def site_home_urls() -> list[str]:
+    if not HOME_PAGE.exists():
+        return []
+    text = HOME_PAGE.read_text(encoding="utf-8")
+    urls = [
+        url.replace("&amp;", "&")
+        for url in re.findall(r'href="(/go/am\.html\?[^"]+)"', text)
+    ]
+    return [f"https://www.lilyroo.com{url}" for url in urls]
 
 
 def visible_surface_text(row: dict) -> str:
@@ -300,6 +331,61 @@ def site_share_health() -> dict:
     }
 
 
+def expected_site_url_health(label: str, urls: list[str], expected_map: dict[str, dict], endpoint_probe_id: str, endpoint_destination: str) -> dict:
+    rows = []
+    issue_counts = Counter()
+    seen_ids = set()
+    for url in urls:
+        parsed = urlparse(url)
+        query = parse_qs(parsed.query)
+        post_id = (query.get("p") or [""])[0]
+        destination = (query.get("to") or [""])[0]
+        anchor = (query.get("anchor") or [""])[0]
+        expected = expected_map.get(post_id)
+        issues = []
+        if parsed.scheme != "https":
+            issues.append(f"{label}_url_not_https")
+        if parsed.netloc != TRACKING_HOST:
+            issues.append(f"{label}_url_wrong_host")
+        if parsed.path != TRACKING_PATH:
+            issues.append(f"{label}_url_wrong_path")
+        if not expected:
+            issues.append(f"unknown_{label}_id")
+        else:
+            seen_ids.add(post_id)
+            if destination != expected["destination"]:
+                issues.append(f"{label}_destination_mismatch")
+            expected_anchor = expected.get("anchor") or ""
+            if anchor != expected_anchor:
+                issues.append(f"{label}_anchor_mismatch")
+        for issue in sorted(set(issues)):
+            issue_counts[issue] += 1
+        rows.append({
+            "id": post_id,
+            "url": url,
+            "destination": destination,
+            "anchor": anchor,
+            "ok": not issues,
+            "issues": sorted(set(issues)),
+        })
+    missing_ids = sorted(set(expected_map) - seen_ids)
+    for _ in missing_ids:
+        issue_counts[f"missing_{label}_url"] += 1
+    endpoint = click_endpoint_dry_run(endpoint_probe_id, endpoint_destination)
+    if endpoint.get("status") != "ready":
+        issue_counts[f"{label}_endpoint_not_ready"] += 1
+    return {
+        "status": "ready" if not issue_counts and len(rows) == len(expected_map) else "attention",
+        "expected_url_count": len(expected_map),
+        "url_count": len(rows),
+        "ready_url_count": sum(1 for row in rows if row["ok"]),
+        "missing_ids": missing_ids,
+        "issue_counts": dict(sorted(issue_counts.items())),
+        "click_endpoint": endpoint,
+        "rows": rows,
+    }
+
+
 def build_payload() -> dict:
     now = datetime.now(timezone.utc)
     visible_ids = future_ids()
@@ -407,6 +493,13 @@ def build_payload() -> dict:
     sample_id = next((row["id"] for row in rows if str(row.get("platform") or "").lower() == "x"), rows[0]["id"] if rows else "")
     click_endpoint = click_endpoint_dry_run(sample_id)
     site_share = site_share_health()
+    site_home = expected_site_url_health(
+        "site_home",
+        site_home_urls(),
+        SITE_HOME_EXPECTED,
+        "site-home-hero-album",
+        "album",
+    )
     ready_rows = sum(1 for row in rows if row["ok"])
     broken_rows = len(rows) - ready_rows
     total_urls = sum(row["tracking_url_count"] for row in rows)
@@ -421,6 +514,7 @@ def build_payload() -> dict:
             and visible_full_destination_count == expected_visible_surface_count
             and redirect["status"] == "ready"
             and site_share["status"] == "ready"
+            and site_home["status"] == "ready"
         )
         else "attention"
     )
@@ -432,6 +526,7 @@ def build_payload() -> dict:
             "scheduled_posts": rel(QUEUE),
             "future_posts": rel(FUTURE),
             "redirect_page": rel(REDIRECT),
+            "home_page": rel(HOME_PAGE),
         },
         "summary": {
             "status": status,
@@ -459,12 +554,17 @@ def build_payload() -> dict:
             "site_share_url_count": site_share["url_count"],
             "expected_site_share_url_count": site_share["expected_url_count"],
             "site_share_endpoint_status": site_share["click_endpoint"].get("status"),
+            "site_home_status": site_home["status"],
+            "site_home_url_count": site_home["url_count"],
+            "expected_site_home_url_count": site_home["expected_url_count"],
+            "site_home_endpoint_status": site_home["click_endpoint"].get("status"),
             "report_path": rel(REPORT),
             "refresh_command": "python3 scripts/build_brand_click_tracking_health.py",
         },
         "redirect": redirect,
         "click_endpoint": click_endpoint,
         "site_share": site_share,
+        "site_home": site_home,
         "rows": rows,
         "guardrails": [
             "This check is read-only and does not post.",
@@ -474,6 +574,7 @@ def build_payload() -> dict:
             "Every future X Analog Myth auto post should carry the album destination in the main post text.",
             "Every future Analog Myth auto post should expose an album link on the visible published surface.",
             "Album-page share buttons should use first-party site-share tracking links.",
+            "Homepage Analog Myth CTAs should use first-party site-home tracking links.",
             "The live click endpoint health probe uses dry_run=1 so it cannot create fake campaign clicks.",
         ],
     }
@@ -497,6 +598,8 @@ def build_markdown(payload: dict) -> str:
         f"- Live click endpoint dry run: **{summary['click_endpoint_status']}**",
         f"- Album-page share tracking: **{summary['site_share_status']}** ({summary['site_share_url_count']} / {summary['expected_site_share_url_count']})",
         f"- Site-share endpoint dry run: **{summary['site_share_endpoint_status']}**",
+        f"- Homepage CTA tracking: **{summary['site_home_status']}** ({summary['site_home_url_count']} / {summary['expected_site_home_url_count']})",
+        f"- Homepage endpoint dry run: **{summary['site_home_endpoint_status']}**",
         f"- Destinations: **{', '.join(f'{key}: {value}' for key, value in summary['destination_counts'].items()) or 'none'}**",
         f"- Issues: **{', '.join(f'{key}: {value}' for key, value in summary['issue_counts'].items()) or 'none'}**",
         "",
@@ -530,6 +633,21 @@ def build_markdown(payload: dict) -> str:
         lines.append(
             f"- `{row.get('id') or 'unknown'}` -> `{row.get('destination') or 'unknown'}`"
             f"{'#' + row.get('anchor') if row.get('anchor') else ''}: **{'ready' if row.get('ok') else 'attention'}**"
+        )
+    site_home = payload.get("site_home") or {}
+    site_home_endpoint = site_home.get("click_endpoint") or {}
+    lines.extend([
+        "",
+        "## Homepage CTA Tracking",
+        f"- Status: **{site_home.get('status') or 'unknown'}**",
+        f"- CTA URLs ready: **{site_home.get('ready_url_count', 0)} / {site_home.get('expected_url_count', 0)}**",
+        f"- Homepage endpoint dry run: **{site_home_endpoint.get('status') or 'unknown'}**",
+        f"- Homepage probe id: `{site_home_endpoint.get('expected_post_id') or 'n/a'}`",
+        f"- Homepage issues: **{', '.join(f'{key}: {value}' for key, value in (site_home.get('issue_counts') or {}).items()) or 'none'}**",
+    ])
+    for row in site_home.get("rows") or []:
+        lines.append(
+            f"- `{row.get('id') or 'unknown'}` -> `{row.get('destination') or 'unknown'}`: **{'ready' if row.get('ok') else 'attention'}**"
         )
     lines.extend(["", "## Future Rows"])
     for row in payload["rows"]:

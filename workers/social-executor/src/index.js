@@ -17,6 +17,7 @@ const EXECUTION_STATE_PREFIX = "post:";
 const CLICK_STATE_PREFIX = "click:";
 const BRAND_CLICK_POST_PATTERN = /^fp-brand-am(?:-w\d+)?-\d{2}-.+-(x|facebook)$/;
 const SITE_SHARE_CLICK_PATTERN = /^site-share-(album|echo|video|track-\d{2}-[a-z0-9-]+)$/;
+const SITE_HOME_CLICK_PATTERN = /^site-home-(hero|starter|launch|podcast)-(album|echo|listen|playlist|video)$/;
 const CLICK_TTL_SECONDS = 60 * 60 * 24 * 180;
 const MAX_SCHEDULE_ATTEMPTS = 3;
 const LAUNCH_FOCUS_DAYS = {
@@ -659,6 +660,15 @@ function sortedCounts(map) {
 
 function campaignPostParts(postId) {
   const normalized = text(postId).toLowerCase();
+  const siteHome = normalized.match(/^site-home-(hero|starter|launch|podcast)-(album|echo|listen|playlist|video)$/);
+  if (siteHome) {
+    return {
+      wave: "site-home",
+      track: "",
+      trackSlug: siteHome[2],
+      platform: "site",
+    };
+  }
   const siteShare = normalized.match(/^site-share-(album|echo|video|track-(\d{2})-([a-z0-9-]+))$/);
   if (siteShare) {
     return {
@@ -682,7 +692,7 @@ function campaignPostParts(postId) {
 
 function isTrackableClickPostId(postId) {
   const normalized = text(postId).toLowerCase();
-  return BRAND_CLICK_POST_PATTERN.test(normalized) || SITE_SHARE_CLICK_PATTERN.test(normalized);
+  return BRAND_CLICK_POST_PATTERN.test(normalized) || SITE_SHARE_CLICK_PATTERN.test(normalized) || SITE_HOME_CLICK_PATTERN.test(normalized);
 }
 
 function normalizeClickDestination(value) {

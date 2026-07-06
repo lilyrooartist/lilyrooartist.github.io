@@ -1,6 +1,6 @@
 # Brand Click Tracking Health - Lily Roo
 
-Generated: 2026-07-06T21:35:47.683941Z
+Generated: 2026-07-06T22:19:20.469361Z
 
 ## Summary
 - Status: **ready**
@@ -13,6 +13,8 @@ Generated: 2026-07-06T21:35:47.683941Z
 - Live click endpoint dry run: **ready**
 - Album-page share tracking: **ready** (11 / 11)
 - Site-share endpoint dry run: **ready**
+- Homepage CTA tracking: **ready** (11 / 11)
+- Homepage endpoint dry run: **ready**
 - Destinations: **album: 58, echo: 58, video: 58**
 - Issues: **none**
 
@@ -58,6 +60,24 @@ Generated: 2026-07-06T21:35:47.683941Z
 - `site-share-track-06-guards-down` -> `album`#track-guards-down: **ready**
 - `site-share-track-07-slow-walk` -> `album`#track-slow-walk: **ready**
 - `site-share-track-08-the-power-of-light` -> `album`#track-the-power-of-light: **ready**
+
+## Homepage CTA Tracking
+- Status: **ready**
+- CTA URLs ready: **11 / 11**
+- Homepage endpoint dry run: **ready**
+- Homepage probe id: `site-home-hero-album`
+- Homepage issues: **none**
+- `site-home-hero-album` -> `album`: **ready**
+- `site-home-hero-echo` -> `echo`: **ready**
+- `site-home-hero-playlist` -> `playlist`: **ready**
+- `site-home-starter-album` -> `album`: **ready**
+- `site-home-starter-playlist` -> `playlist`: **ready**
+- `site-home-starter-echo` -> `echo`: **ready**
+- `site-home-launch-album` -> `album`: **ready**
+- `site-home-launch-listen` -> `listen`: **ready**
+- `site-home-launch-playlist` -> `playlist`: **ready**
+- `site-home-launch-echo` -> `echo`: **ready**
+- `site-home-podcast-echo` -> `echo`: **ready**
 
 ## Future Rows
 - `FP-BRAND-AM-04-SPILLING-THE-TEA-X` X 2026-07-07T10:15:00-04:00 - **ready** (3 links)
@@ -272,4 +292,5 @@ Generated: 2026-07-06T21:35:47.683941Z
 - Every future X Analog Myth auto post should carry the album destination in the main post text.
 - Every future Analog Myth auto post should expose an album link on the visible published surface.
 - Album-page share buttons should use first-party site-share tracking links.
+- Homepage Analog Myth CTAs should use first-party site-home tracking links.
 - The live click endpoint health probe uses dry_run=1 so it cannot create fake campaign clicks.

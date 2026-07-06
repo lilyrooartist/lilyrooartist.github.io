@@ -1,10 +1,11 @@
 {
-  "generated_at": "2026-07-06T21:35:47.683941Z",
+  "generated_at": "2026-07-06T22:19:20.469361Z",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
     "future_posts": "admin/future-posts.json",
-    "redirect_page": "go/am.html"
+    "redirect_page": "go/am.html",
+    "home_page": "index.html"
   },
   "summary": {
     "status": "ready",
@@ -53,6 +54,10 @@
     "site_share_url_count": 11,
     "expected_site_share_url_count": 11,
     "site_share_endpoint_status": "ready",
+    "site_home_status": "ready",
+    "site_home_url_count": 11,
+    "expected_site_home_url_count": 11,
+    "site_home_endpoint_status": "ready",
     "report_path": "admin/reports/brand-click-tracking-health.md",
     "refresh_command": "python3 scripts/build_brand_click_tracking_health.py"
   },
@@ -90,7 +95,7 @@
     "wave": "track-moments",
     "track": "04",
     "destination": "album",
-    "recorded_at": "2026-07-06T21:35:47.848Z"
+    "recorded_at": "2026-07-06T22:19:20.714Z"
   },
   "site_share": {
     "status": "ready",
@@ -113,7 +118,7 @@
       "wave": "site-share",
       "track": "",
       "destination": "album",
-      "recorded_at": "2026-07-06T21:35:47.949Z"
+      "recorded_at": "2026-07-06T22:19:20.830Z"
     },
     "rows": [
       {
@@ -201,6 +206,119 @@
         "url": "https://www.lilyroo.com/go/am.html?p=site-share-track-08-the-power-of-light&to=album&anchor=track-the-power-of-light",
         "destination": "album",
         "anchor": "track-the-power-of-light",
+        "ok": true,
+        "issues": []
+      }
+    ]
+  },
+  "site_home": {
+    "status": "ready",
+    "expected_url_count": 11,
+    "url_count": 11,
+    "ready_url_count": 11,
+    "missing_ids": [],
+    "issue_counts": {},
+    "click_endpoint": {
+      "status": "ready",
+      "safe_mode": true,
+      "dry_run": true,
+      "expected_post_id": "site-home-hero-album",
+      "url": "https://www.lilyroo.com/api/social/click?dry_run=1&p=site-home-hero-album&to=album",
+      "http_status": 200,
+      "ok": true,
+      "reported_post_id": "site-home-hero-album",
+      "platform": "site",
+      "wave": "site-home",
+      "track": "",
+      "destination": "album",
+      "recorded_at": "2026-07-06T22:19:20.931Z"
+    },
+    "rows": [
+      {
+        "id": "site-home-hero-album",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-home-hero-album&to=album",
+        "destination": "album",
+        "anchor": "",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-home-hero-echo",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-home-hero-echo&to=echo",
+        "destination": "echo",
+        "anchor": "",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-home-hero-playlist",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-home-hero-playlist&to=playlist",
+        "destination": "playlist",
+        "anchor": "",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-home-starter-album",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-home-starter-album&to=album",
+        "destination": "album",
+        "anchor": "",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-home-starter-playlist",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-home-starter-playlist&to=playlist",
+        "destination": "playlist",
+        "anchor": "",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-home-starter-echo",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-home-starter-echo&to=echo",
+        "destination": "echo",
+        "anchor": "",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-home-launch-album",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-home-launch-album&to=album",
+        "destination": "album",
+        "anchor": "",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-home-launch-listen",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-home-launch-listen&to=listen",
+        "destination": "listen",
+        "anchor": "",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-home-launch-playlist",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-home-launch-playlist&to=playlist",
+        "destination": "playlist",
+        "anchor": "",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-home-launch-echo",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-home-launch-echo&to=echo",
+        "destination": "echo",
+        "anchor": "",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-home-podcast-echo",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-home-podcast-echo&to=echo",
+        "destination": "echo",
+        "anchor": "",
         "ok": true,
         "issues": []
       }
@@ -3435,6 +3553,7 @@
     "Every future X Analog Myth auto post should carry the album destination in the main post text.",
     "Every future Analog Myth auto post should expose an album link on the visible published surface.",
     "Album-page share buttons should use first-party site-share tracking links.",
+    "Homepage Analog Myth CTAs should use first-party site-home tracking links.",
     "The live click endpoint health probe uses dry_run=1 so it cannot create fake campaign clicks."
   ]
 }
