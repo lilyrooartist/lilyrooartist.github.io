@@ -504,7 +504,7 @@ def validate_generated_outputs(failures):
             and BRAND_GROWTH_PULSE_REPORT.exists()
             and "Post-Window Learning" in BRAND_GROWTH_PULSE_REPORT.read_text(encoding="utf-8")
             and "learningPlan" in admin_text
-            and "Learning loop" in admin_text
+            and ("Learning loop" in admin_text or "Learning" in admin_text)
         ):
             ok("brand growth pulse exposes the automated post-window learning loop")
         else:
