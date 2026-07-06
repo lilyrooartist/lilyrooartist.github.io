@@ -133,7 +133,7 @@
 	    .simple-status-card .metric-label{font-size:11px}
     .simple-status-card strong{display:block;color:#fff;font-size:18px;line-height:1.1;margin-top:6px;word-break:break-word;overflow-wrap:anywhere}
     .simple-status-card p{margin:6px 0 0;color:#b6bed6;font-size:12px;line-height:1.35;overflow-wrap:anywhere}
-    .simple-columns{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(360px,.92fr);gap:18px;align-items:start}
+    .simple-columns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-items:start}
     .simple-columns .simple-section{background:#111827;border:1px solid #26314e;border-radius:12px;padding:16px}
 	    .simple-list{display:grid;gap:10px}
 	    .simple-item{border:1px solid #26314e;border-left-width:4px;border-radius:8px;background:#101523;padding:14px;min-width:0;max-width:100%;box-sizing:border-box}
@@ -443,7 +443,7 @@
 	            <div class="simple-section-head">
 	              <div>
                   <h1 id="simple-status-heading">Status</h1>
-                  <p id="simple-status-copy">Checking whether promotion is running, what happened recently, and what happens next.</p>
+                  <p id="simple-status-copy">A plain-English view of what is running, what happened recently, and what is scheduled next.</p>
 	              </div>
 	              <div class="simple-status-side">
 	                <span class="status-chip neutral" id="simple-updated-chip">Checking</span>
@@ -31113,6 +31113,23 @@ Generated: 2026-07-06T21:35:47.683941Z
     return `${text.slice(0,limit-1).trim()}...`;
   }
 
+  function simpleCopyWithoutUrls(value, limit=170){
+    const text=String(value ?? '')
+      .replace(/https?:\/\/\S+/gi,'')
+      .replace(/\s+/g,' ')
+      .trim();
+    return simpleShortText(text, limit);
+  }
+
+  function simpleDestinationSummary(post){
+    const text=`${post?.text||''} ${post?.reply_text||''}`;
+    const destinations=[];
+    if(/to=album|album page|album room|analog myth:/i.test(text)) destinations.push('the album page');
+    if(/to=echo|echo thread/i.test(text)) destinations.push('Echo Thread');
+    if(/to=video|track video|playlist/i.test(text)) destinations.push('the video/playlist');
+    return destinations.length ? `Links point to ${simpleJoin(destinations)}.` : 'Destination links are attached.';
+  }
+
   function titleFromCampaignId(id){
     const raw=String(id||'').trim();
     if(/PODCAST-ANALOG-MYTH/i.test(raw)) return 'Echo Thread podcast';
@@ -31398,21 +31415,19 @@ Generated: 2026-07-06T21:35:47.683941Z
 	      updatedChip.textContent=lastUpdated?`Updated ${formatQueueDate(lastUpdated)}`:(campaignReady?'Active':'Needs check');
 	    }
 		    if(statusCopy){
-		      const campaignPhrase=campaignReady ? 'Analog Myth promotion is running automatically.' : 'Analog Myth promotion needs a readiness check.';
-			      const nextPhrase=nextPosts.length ? `Next: ${simpleCampaignName(nextPostTitle)} on ${simplePlatformNames(nextPosts)} at ${formatQueueDate(nextPosts[0].scheduled_at)}.` : (nextDate ? `Next scheduled work: ${formatQueueDate(nextDate)}.` : 'No future post is queued.');
-		      const metricPhrase=readyMetricRows.length && uniqueMissingSecrets.length
-		        ? `${simpleCount(readyMetricRows.length,'post')} public; result counts wait for connected analytics.`
-		        : readyMetricRows.length
-		        ? `${simpleCount(readyMetricRows.length,'post')} ready for result counts.`
-		        : waitingMetricRows.length
-		          ? `${simpleCount(waitingMetricRows.length,'post')} waiting for first result check.`
-		        : uniqueMissingSecrets.length
-			          ? 'Result counts wait for connected analytics.'
-			          : 'No result follow-up due.';
-			      const visibilityPhrase=visibilityAttentionCount
-			        ? `${simpleCount(visibilityAttentionCount,'public link')} ${visibilityAttentionCount===1?'needs':'need'} recheck.`
-			        : 'Recent public links are reachable.';
-			      statusCopy.textContent=`${campaignPhrase} ${nextPhrase} ${simpleCount(postedCount,'campaign post')} logged. ${visibilityPhrase} ${metricPhrase}`.replace(/\s+/g,' ').trim();
+		      const campaignPhrase=campaignReady ? 'Analog Myth promotion is on and automatic.' : 'Analog Myth promotion needs a readiness check.';
+			      const nextPhrase=nextPosts.length ? `Next up: ${simpleCampaignName(nextPostTitle)} on ${simplePlatformNames(nextPosts)}.` : 'No next post is queued.';
+			      const resultPhrase=readyMetricRows.length
+			        ? `${simpleCount(readyMetricRows.length,'recent post')} can be reviewed for results.`
+			        : waitingMetricRows.length
+			          ? `${simpleCount(waitingMetricRows.length,'recent post')} ${waitingMetricRows.length===1?'is':'are'} waiting for the first result check.`
+			          : 'No result check is due right now.';
+			      const attentionPhrase=manualPostingRequired
+			        ? 'A manual-only item needs to be removed or automated.'
+			        : visibilityAttentionCount
+			          ? `${simpleCount(visibilityAttentionCount,'public link')} ${visibilityAttentionCount===1?'needs':'need'} a recheck.`
+			          : 'No manual posting is required.';
+			      statusCopy.textContent=`${campaignPhrase} ${simpleCount(futureCount,'future post')} queued. ${nextPhrase} ${simpleCount(postedCount,'campaign post')} already logged. ${resultPhrase} ${attentionPhrase}`.replace(/\s+/g,' ').trim();
 			    }
 
 		    const attentionLabel=manualPostingRequired
@@ -31441,10 +31456,10 @@ Generated: 2026-07-06T21:35:47.683941Z
 		        ? 'neutral'
 		        : 'ok';
 		    statusStrip.innerHTML=[
-			      simpleStatusCard('Campaign', overallLabel, campaignReady?`${simpleCount(futureCount,'future post')} queued automatically.`:'Refresh readiness before the next window.', topClass),
-			      simpleStatusCard('Next Activity', nextDateLabel, nextPosts.length?`${simpleCampaignName(nextPostTitle)} on ${simplePlatformNames(nextPosts)}.`:`${nextWindowCount||2} automatic posts in the next window.`, campaignReady?'ok':'warn'),
-			      simpleStatusCard('Recent Results', `${postedCount} logged`, visibilityAttentionCount?'A recent public link needs another check.':'Recent public links open correctly.', visibilityAttentionCount?'warn':postedCount?'ok':'neutral'),
-			      simpleStatusCard('Attention', attentionLabel, attentionNote, attentionClass)
+			      simpleStatusCard('Publishing', campaignReady?'Automatic':'Needs check', campaignReady?`${simpleCount(futureCount,'future post')} approved and queued.`:'Refresh readiness before the next window.', topClass),
+			      simpleStatusCard('Next Post', nextDateLabel, nextPosts.length?`${simpleCampaignName(nextPostTitle)} on ${simplePlatformNames(nextPosts)}.`:`${nextWindowCount||2} automatic posts in the next window.`, campaignReady?'ok':'warn'),
+			      simpleStatusCard('Recent Activity', `${postedCount} logged`, visibilityAttentionCount?'A recent public link needs another check.':'Public links are saved for recent posts.', visibilityAttentionCount?'warn':postedCount?'ok':'neutral'),
+			      simpleStatusCard('Results', attentionLabel, attentionNote, attentionClass)
 			    ].join('');
 
 	    const recentItems=simpleActivityGroups(postedRows, true)
@@ -31461,16 +31476,16 @@ Generated: 2026-07-06T21:35:47.683941Z
 	        let status;
 	        let resultCopy='';
 	        if(attentionRows.length){
-	          status={label:'Check link',className:'warn',note:'The activity is logged, but one public-link check needs another pass.'};
+	          status={label:'Needs recheck',className:'warn',note:'The post is logged, but one public link should be checked again.'};
 	        }else if(readyRows.length){
-	          status={label:'Results due',className:uniqueMissingSecrets.length?'neutral':'warn',note:uniqueMissingSecrets.length?'The posts are public; result counts are waiting on connected analytics.':'The posts are public and ready for engagement counts.'};
-	          resultCopy=' Result counts are the next thing to add.';
+	          status={label:uniqueMissingSecrets.length?'Public':'Count results',className:uniqueMissingSecrets.length?'neutral':'warn',note:uniqueMissingSecrets.length?'The posts are public. Views and engagement counts can be added when analytics are connected.':'The posts are public and ready for views and engagement counts.'};
+	          resultCopy=' Result review is next.';
 	        }else if(measuredRows.length===rows.length){
 	          status={label:'Measured',className:'ok',note:'Posted, logged, and measured.'};
 	          resultCopy=' Results have been added.';
 	        }else if(waitingRows.length){
 	          const firstDue=waitingRows.slice().sort((a,b)=>new Date(a.measurement_due_at)-new Date(b.measurement_due_at))[0];
-	          status={label:'Logged',className:'ok',note:`First useful result check opens ${formatQueueDate(firstDue.measurement_due_at)}.`};
+	          status={label:'Posted',className:'ok',note:`First result check starts ${formatQueueDate(firstDue.measurement_due_at)}.`};
 	        }else{
 	          status=simpleActivityStatus(rows[0]);
 	        }
@@ -31482,7 +31497,7 @@ Generated: 2026-07-06T21:35:47.683941Z
 	        const campaignName=simpleCampaignName(group.title);
 	        return simpleActivityItem(
 	          simpleActivityHeading(group.title, rows),
-	          `${simpleWhen('Ran', group.date)} - ${platforms} - ${savedLinks ? 'public URL saved' : 'waiting for public URL'}`,
+	          `${simpleWhen('Posted', group.date)} - ${platforms}`,
 	          `${campaignName} is live on ${platforms}. ${linkCopy}${resultCopy}`,
 	          status,
 	          firstLink
@@ -31524,10 +31539,12 @@ Generated: 2026-07-06T21:35:47.683941Z
 			    if(nextPosts.length){
 			      const first=nextPosts[0];
 			      const platforms=simplePlatformNames(nextPosts);
+			      const leadCopy=simpleCopyWithoutUrls(first.text||first.hook||'');
+			      const destinationCopy=simpleDestinationSummary(first);
 			      upcomingItems.push(simpleUpcomingItem(
-			        simpleUpcomingHeading(titleFromPost(first)),
-			        `${simpleWhen('Scheduled', first.scheduled_at)} - ${platforms} - automatic`,
-			        `${simpleShortText(first.text||first.hook||'Approved Analog Myth campaign copy is queued.')} The system will publish this automatically on ${platforms}.`,
+			        `${simpleCampaignName(titleFromPost(first))} automatic posts`,
+			        `${simpleWhen('Starts', first.scheduled_at)} - ${platforms}`,
+			        `${simpleCount(nextPosts.length,'approved post')} will publish automatically. ${leadCopy?`Lead copy: ${leadCopy}. `:''}${destinationCopy}`,
 		        {label:'Auto queued',className:'ok'},
 		        ''
 		      ));
@@ -31535,9 +31552,9 @@ Generated: 2026-07-06T21:35:47.683941Z
 
 			    if(proofDueAt){
 			      upcomingItems.push(simpleUpcomingItem(
-			        'Record public links after the post runs',
+			        'Save public links after posting',
 			        formatQueueDate(proofDueAt),
-			        'After the scheduled posts publish, refresh the activity record so the public URLs appear on the left.',
+			        'After the scheduled posts publish, refresh the activity record so the real public URLs appear in Recent Activity.',
 			        {label:'Follow-up',className:'neutral'},
 		        '/admin/reports/posting-automation-status.md'
 		      ));
@@ -31559,8 +31576,8 @@ Generated: 2026-07-06T21:35:47.683941Z
 				        : `${simpleCount(Number(learningPlan.measurement_due_count||readyMetricRows.length||0),'post')} ready, ${simpleCount(Number(learningPlan.waiting_measurement_count||waitingMetricRows.length||0),'post')} waiting`;
 				      const learningCopy=[
 				        learningPlan.next_learning_question || 'Compare the newest Analog Myth posts against first-party click response and connected platform result counts.',
-				        learningPlan.automation_note || 'No manual posting is required for this learning loop.',
-				        learningPlan.credential_note || ''
+				        uniqueMissingSecrets.length ? 'First-party link clicks are still tracked; views and engagement counts can be added after analytics are connected.' : '',
+				        learningPlan.automation_note || 'No manual posting is required for this learning loop.'
 				      ].filter(Boolean).join(' ');
 				      upcomingItems.push(simpleUpcomingItem(
 				        learningPlan.headline,
