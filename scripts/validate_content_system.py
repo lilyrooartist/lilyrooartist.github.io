@@ -912,6 +912,9 @@ def validate_generated_outputs(failures):
             required_kinds.add("manual_distribution")
         if int(result_clipboard_summary_for_operations.get("metric_card_count") or 0):
             required_kinds.add("experiment_results")
+        posting_status_for_operations = json.loads(POSTING_AUTOMATION_STATUS.read_text(encoding="utf-8")) if POSTING_AUTOMATION_STATUS.exists() else {}
+        if (posting_status_for_operations.get("summary") or {}).get("active_campaign_ready"):
+            required_kinds.add("brand_growth_proof")
         if active_approval_blocker_count() == 0:
             required_kinds.discard("approval_review")
         if active_platform_repair_count() == 0 and active_social_attention_count() == 0:

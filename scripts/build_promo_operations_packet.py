@@ -686,7 +686,7 @@ def brand_growth_proof_actions(posting_status, readout, preflight):
     readout_summary = readout.get("summary") or {}
     preflight_summary = preflight.get("summary") or {}
     window_status = readout_summary.get("next_proof_window_status") or ""
-    if window_status and window_status not in {"attention", "proof_due", "publishing_window"}:
+    if window_status and window_status not in {"attention", "proof_due", "publishing_window", "scheduled_future"}:
         return []
     expected_ids = preflight_summary.get("expected_post_ids") or readout_summary.get("next_proof_post_ids") or []
     next_proof = (

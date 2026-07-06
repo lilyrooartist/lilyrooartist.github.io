@@ -1,9 +1,9 @@
 # Promo Operations Packet - Lily Roo
 
-Generated: 2026-07-06T18:13:03.114617Z
+Generated: 2026-07-06T19:10:51.921671Z
 
 ## Summary
-- Actions: **8**
+- Actions: **9**
 - User review: **0**
 - Platform fixes: **0**
 - Scheduled approval batches: **0**
@@ -12,15 +12,23 @@ Generated: 2026-07-06T18:13:03.114617Z
 - Store checks: **4**
 - Manual metric updates: **2**
 - Safe apply commands ready: **0**
-- Urgency: **high: 2, low: 2, medium: 4**
+- Urgency: **high: 3, low: 2, medium: 4**
 
 ## Phase Counts
+- Automated brand campaign: **1**
 - Collect experiment results: **1**
 - Fill manual metrics: **2**
 - Measure active brand campaign: **1**
 - Verify music sites: **4**
 
 ## Top Actions
+
+### Automated brand campaign
+- **[high] Watch active Analog Myth proof window**
+  - Why: The active Analog Myth proof window is coming up within 48 hours.
+  - Detail: After 2026-07-07T15:21:00Z, capture executor proof for FP-BRAND-AM-04-SPILLING-THE-TEA-X, FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK and export confirmed URLs.
+  - Command: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
+  - Packet: `admin/reports/brand-growth-readout.md`
 
 ### Measure active brand campaign
 - **[high] Connect automated brand metrics capture**
