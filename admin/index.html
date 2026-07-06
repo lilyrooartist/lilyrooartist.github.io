@@ -27602,14 +27602,18 @@ Generated: 2026-07-06T15:55:29.819579Z
 	    const nextPostPlatforms=simplePlatformList(nextPosts);
 	    const clickTrackingReady=readoutSummary.campaign_click_status==='ready'||pulseSummary.click_count!==undefined;
 	    const clickCount=Number(pulseSummary.click_count||readoutSummary.campaign_click_count||0);
-			    const resultLabel=readyMetricRows.length
+			    const resultLabel=readyMetricRows.length && uniqueMissingSecrets.length
+			      ? `${readyMetricRows.length} pending`
+			      : readyMetricRows.length
 			      ? `${readyMetricRows.length} ready`
 			      : waitingMetricRows.length
 			        ? `${waitingMetricRows.length} waiting`
 			        : uniqueMissingSecrets.length
 			          ? 'Counts pending'
 			          : 'Clear';
-		    const resultNote=readyMetricRows.length
+		    const resultNote=readyMetricRows.length && uniqueMissingSecrets.length
+		      ? 'Public proof is saved; engagement counts need X/Facebook analytics access.'
+		      : readyMetricRows.length
 		      ? 'Public posts are ready for views and engagement counts.'
 		      : waitingMetricRows.length
 		        ? 'Recent posts are waiting for their first result check.'
@@ -27628,7 +27632,9 @@ Generated: 2026-07-06T15:55:29.819579Z
 		    if(statusCopy){
 			      const campaignPhrase=campaignReady ? 'Analog Myth promotion is running automatically.' : 'Analog Myth promotion needs a readiness refresh.';
 			      const nextPhrase=nextPosts.length ? `Next: ${nextPostTitle} on ${nextPostPlatforms}.` : (nextDate ? `Next: ${formatQueueDate(nextDate)}.` : 'No future post queued.');
-		      const metricPhrase=readyMetricRows.length
+		      const metricPhrase=readyMetricRows.length && uniqueMissingSecrets.length
+		        ? `${simpleCount(readyMetricRows.length,'post')} waiting on X/Facebook analytics access for result counts.`
+		        : readyMetricRows.length
 		        ? `${simpleCount(readyMetricRows.length,'post')} ready for result counts.`
 		        : waitingMetricRows.length
 		          ? `${simpleCount(waitingMetricRows.length,'post')} waiting for first result check.`
@@ -27646,7 +27652,7 @@ Generated: 2026-07-06T15:55:29.819579Z
 			      simpleStatusCard('Next Window', nextDateLabel, nextPosts.length?`${nextPostTitle} is queued for ${nextPostPlatforms}.`:`${nextWindowCount||2} automatic posts in the next window.`, campaignReady?'ok':'warn'),
 			      simpleStatusCard('Recent Posts', `${postedCount} logged`, clickTrackingReady?`${simpleCount(clickCount,'tracked click')} recorded so far.`:'Public URLs are saved in the activity log.', postedCount?'ok':'neutral'),
 			      simpleStatusCard('Public Links', visibilityAttentionCount?`${visibilityAttentionCount} to recheck`:'Verified', visibilityAttentionCount?'Recheck flagged public links.':'Recent public post links open correctly.', visibilityAttentionCount?'warn':'ok'),
-			      simpleStatusCard('Result Counts', resultLabel, resultNote, readyMetricRows.length?'warn':uniqueMissingSecrets.length?'neutral':'ok')
+			      simpleStatusCard('Result Counts', resultLabel, resultNote, readyMetricRows.length&&uniqueMissingSecrets.length?'neutral':readyMetricRows.length?'warn':uniqueMissingSecrets.length?'neutral':'ok')
 			    ].join('');
 
 	    const recentItems=postedRows
@@ -27725,7 +27731,7 @@ Generated: 2026-07-06T15:55:29.819579Z
 			    if(readyMetricRows.length){
 			      upcomingItems.push(simpleUpcomingItem(
 			        uniqueMissingSecrets.length?'Connect result counts for recent posts':'Measure recent posts',
-			        simpleCount(readyMetricRows.length,'post')+' ready',
+			        uniqueMissingSecrets.length ? `${simpleCount(readyMetricRows.length,'post')} public` : `${simpleCount(readyMetricRows.length,'post')} ready`,
 			        uniqueMissingSecrets.length
 			          ? 'The posts are public and logged. Engagement counts are waiting on connected X/Facebook analytics; posting itself is healthy.'
 			          : 'The public links are saved. Add visible views and engagement so the campaign can learn what is working.',
