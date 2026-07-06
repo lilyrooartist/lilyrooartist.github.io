@@ -2377,7 +2377,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
 }</script>
 
 <script type="application/json" id="embedded-promo-engine-status">{
-  "generated_at": "2026-07-06T00:44:34.074191+00:00",
+  "generated_at": "2026-07-06T00:45:50.607683+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -3077,7 +3077,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
         "pending_manual_metric_fields": 6,
         "pending_public_metric_fields": 0,
         "pending_private_metric_fields": 6,
-        "stale_source_count": 0,
+        "stale_source_count": 1,
         "gated_manual_source_count": 0,
         "live_platform_count": 6,
         "manual_metric_collection_report": "admin/reports/manual-metric-collection.md",
@@ -3129,8 +3129,8 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
       "ready_to_apply_posts": 0,
       "approval_blockers": 0,
       "platform_fix_blockers": 0,
-      "backlog_reschedule_preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-07T10:00:00+00:00' --spacing-hours 24",
-      "backlog_reschedule_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-07T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
+      "backlog_reschedule_preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-06T10:00:00-04:00' --spacing-hours 24",
+      "backlog_reschedule_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-06T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
       "next_pressure": [
         "Restart song-forward distribution: approve draft posts, clear executor blockers, and keep weekly metrics current."
       ]
@@ -5744,11 +5744,11 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
     },
     "social_scheduler_dry_run": {
       "ok": true,
-      "updated_at": "2026-07-06T00:44:29.667541Z",
+      "updated_at": "2026-07-06T00:45:50.496249Z",
       "http_status": 200,
       "auth_method": "bearer",
-      "requested_scheduled_time": "2026-07-06T00:44:29.398310Z",
-      "checked_at": "2026-07-06T00:44:29.398Z",
+      "requested_scheduled_time": "2026-07-06T00:45:50.178122Z",
+      "checked_at": "2026-07-06T00:45:50.178Z",
       "dry_run": true,
       "due_count": 0,
       "result_count": 0,
@@ -5791,25 +5791,66 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
       "commits_snapshots": true,
       "safe_refresh_command": "python3 scripts/refresh_promo_admin.py",
       "source_revision": {
-        "commit": "356674d256a60632ff78d1344e8ec3e6d41b3b2c",
-        "short_commit": "356674d2",
+        "commit": "21552c15c987d9afd7d8ee57cac1f48227d6afad",
+        "short_commit": "21552c15",
         "branch": "main",
-        "committed_at": "2026-07-05T20:43:43-04:00",
-        "source_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/commit/356674d256a60632ff78d1344e8ec3e6d41b3b2c"
+        "committed_at": "2026-07-06T00:44:35Z",
+        "source_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/commit/21552c15c987d9afd7d8ee57cac1f48227d6afad"
       },
       "latest_run_covers_source_commit": true,
-      "latest_run_coverage_basis": "exact_source_commit",
-      "changed_paths_since_latest_run": [],
+      "latest_run_coverage_basis": "generated_snapshot_changed_after_latest_run",
+      "changed_paths_since_latest_run": [
+        "admin/future-posts.json",
+        "admin/index.html",
+        "admin/reports/approval-runway.md",
+        "admin/reports/backlog-reschedule-preview.md",
+        "admin/reports/brand-campaign-clicks.md",
+        "admin/reports/brand-growth-preflight.md",
+        "admin/reports/brand-growth-pulse.md",
+        "admin/reports/brand-growth-readout.md",
+        "admin/reports/brand-post-visibility.md",
+        "admin/reports/experiment-publish-runway.md",
+        "admin/reports/experiment-result-clipboard.md",
+        "admin/reports/experiment-result-collection.md",
+        "admin/reports/facebook-post-results.md",
+        "admin/reports/human-handoff-packet.md",
+        "admin/reports/human-handoff-resolution-preview.md",
+        "admin/reports/manual-distribution-packet.md",
+        "admin/reports/manual-metric-collection.md",
+        "admin/reports/manual-posting-clipboard.md",
+        "admin/reports/monetization-activation-plan.md",
+        "admin/reports/platform-repair-status.md",
+        "admin/reports/posting-automation-status.md",
+        "admin/reports/promo-consistency-audit.md",
+        "admin/reports/promo-operations-packet.md",
+        "admin/reports/promo-unlock-sequence.md",
+        "admin/reports/promotion-blocker-ledger.md",
+        "admin/reports/published-log-reconciliation.md",
+        "admin/reports/scheduled-approval-packet.md",
+        "admin/reports/social-blocker-input-status.md",
+        "admin/reports/story-throughput-tracking.md",
+        "admin/reports/subscriber-cta-audit.md",
+        "admin/reports/tiktok-repair-runbook.md",
+        "admin/reports/tiktok-setup-preflight.md",
+        "admin/reports/weekly-social-report.md",
+        "admin/reports/x-post-results.md",
+        "admin/reports/youtube-community-url-reconciliation.md",
+        "admin/reports/youtube-post-results.md",
+        "data/approval_runway.json",
+        "data/backlog_reschedule_preview.json",
+        "data/brand_campaign_clicks.json",
+        "data/brand_growth_preflight.json"
+      ],
       "uncovered_paths_since_latest_run": [],
-      "current_run_capture_in_progress": true,
-      "current_run_capture_note": "The workflow status snapshot was captured while the exact source refresh run was still active; use GitHub Actions as the completion authority after the run exits.",
+      "current_run_capture_in_progress": false,
+      "current_run_capture_note": "",
       "action_needed": "",
       "workflow_status_available": true,
       "workflow_status_ok": true,
-      "latest_run_status": "in_progress",
-      "latest_run_conclusion": "",
+      "latest_run_status": "completed",
+      "latest_run_conclusion": "success",
       "latest_run_head_sha": "356674d256a60632ff78d1344e8ec3e6d41b3b2c",
-      "latest_run_updated_at": "2026-07-06T00:44:04Z",
+      "latest_run_updated_at": "2026-07-06T00:44:42Z",
       "latest_run_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28760718049",
       "workflow_status_action_needed": ""
     },
@@ -7038,7 +7079,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
         ]
       }
     },
-    "stale_source_count": 0,
+    "stale_source_count": 1,
     "missing_source_count": 0
   },
   "health": {
@@ -7046,9 +7087,9 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
     "healthy_releases": 0,
     "tracked_releases": 3,
     "open_action_count": 8,
-    "status_queue_count": 12,
-    "fresh_sources": 14,
-    "stale_sources": 0,
+    "status_queue_count": 13,
+    "fresh_sources": 13,
+    "stale_sources": 1,
     "missing_sources": 0,
     "operational_next_action": {
       "label": "Connect automated brand metrics capture",
@@ -8263,12 +8304,12 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
   },
   "freshness": {
     "summary": {
-      "fresh": 14,
-      "stale": 0,
+      "fresh": 13,
+      "stale": 1,
       "missing": 0,
       "checked_no_change": 0,
       "gated_manual_pending": 0,
-      "checked_at": "2026-07-06T00:44:34.074191+00:00"
+      "checked_at": "2026-07-06T00:45:50.607683+00:00"
     },
     "sources": [
       {
@@ -8286,7 +8327,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 72,
-        "timestamp": "2026-07-06T00:44:20.718174+00:00",
+        "timestamp": "2026-07-06T00:45:05.335262+00:00",
         "refresh_command": "python3 scripts/sync_future_posts.py"
       },
       {
@@ -8302,9 +8343,9 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
         "name": "published_log",
         "path": "admin/content/Published_Log.csv",
         "status": "fresh",
-        "age_hours": 0.0,
+        "age_hours": 1.3,
         "max_age_hours": 168,
-        "timestamp": "2026-07-06T00:44:13.218508+00:00",
+        "timestamp": "2026-07-05T23:26:19.610539+00:00",
         "refresh_command": "Preview Worker export with python3 scripts/export_social_executions.py --dry-run; after review run python3 scripts/export_social_executions.py --refresh-admin. For manual posts, log the public URL with scripts/log_manual_distribution.py.",
         "row_count": 52,
         "worker_export_preview_command": "python3 scripts/export_social_executions.py --dry-run",
@@ -8319,10 +8360,10 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
       {
         "name": "manual_metrics",
         "path": "data/manual_social_stats.json",
-        "status": "fresh",
-        "age_hours": 0.0,
+        "status": "stale",
+        "age_hours": 377.9,
         "max_age_hours": 72,
-        "timestamp": "2026-07-06T00:44:13.619432+00:00",
+        "timestamp": "2026-06-20T06:52:36.456413+00:00",
         "refresh_command": "Update data/manual_social_stats.json with latest manual metrics."
       },
       {
@@ -8358,7 +8399,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-07-06T00:44:34.074191+00:00",
+        "timestamp": "2026-07-06T00:45:50.607683+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin"
       },
       {
@@ -8376,7 +8417,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-07-06T00:44:29.667541+00:00",
+        "timestamp": "2026-07-06T00:45:50.496249+00:00",
         "refresh_command": "python3 scripts/capture_scheduler_dry_run.py && python3 scripts/update_promo_engine_status.py"
       },
       {
@@ -8394,7 +8435,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-07-06T00:44:34.018539+00:00",
+        "timestamp": "2026-07-06T00:45:05.358273+00:00",
         "refresh_command": "python3 scripts/refresh_promo_admin.py"
       },
       {
@@ -8403,11 +8444,13 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-07-06T00:44:30.282975+00:00",
+        "timestamp": "2026-07-06T00:45:50.114600+00:00",
         "refresh_command": "python3 scripts/capture_github_workflow_status.py && python3 scripts/update_promo_engine_status.py"
       }
     ],
-    "actions": []
+    "actions": [
+      "Refresh manual metrics: fill data/manual_metric_collection_template.csv, preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run, then import with python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin."
+    ]
   },
   "releases": [
     {
@@ -8728,10 +8771,10 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
     "Collect experiment results: 84 post-result field(s) need new_value plus evidence_note; use admin/reports/experiment-result-clipboard.md; first priority: measure FP-AUTO-273 on Facebook. Direct preview template: python3 scripts/update_experiment_results.py --post-id FP-AUTO-273 --source-row 32 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run. Direct apply template after review: python3 scripts/update_experiment_results.py --post-id FP-AUTO-273 --source-row 32 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin. Then preview import with python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run after filling data/experiment_result_entry_wide_template.csv.",
     "Restart song-forward distribution: approve draft posts, clear executor blockers, and keep weekly metrics current.",
     "Re-check checked-pending store links: 4 music site snapshot(s) still have no public URL; next recommended re-check after 2026-07-07T00:44:16.613540+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 --out data/store_verification_run.json --snapshot-root data/store-verification then.",
+    "Refresh manual metrics: fill data/manual_metric_collection_template.csv, preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run, then import with python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin.",
     "I Learned It All in Fifteen Seconds: Fill manual metric worksheet and import it before weekly reporting.",
     "Twelve Dollars: Re-check checked-pending store links for Spotify, Apple Music, HyperFollow; no public URLs were found in the latest snapshots.",
-    "Twelve Dollars: Fill manual metric worksheet and import it before weekly reporting.",
-    "Analog Myth: Fill manual metric worksheet and import it before weekly reporting."
+    "Twelve Dollars: Fill manual metric worksheet and import it before weekly reporting."
   ]
 }</script>
 
@@ -19950,7 +19993,7 @@ Generated: 2026-07-06T00:44:32.927478Z
 
 
 <script type="application/json" id="embedded-posting-automation-status">{
-  "generated_at": "2026-07-06T00:44:33.018426Z",
+  "generated_at": "2026-07-06T00:45:50.528978Z",
   "safe_mode": true,
   "source": {
     "workflow": ".github/workflows/promo-admin-refresh.yml",
@@ -20010,14 +20053,14 @@ Generated: 2026-07-06T00:44:32.927478Z
     {
       "label": "Scheduled refresh workflow",
       "status": "ready",
-      "detail": "17 */6 * * *, 05 16 * * *; latest run in_progress / pending",
+      "detail": "17 */6 * * *, 05 16 * * *; latest run completed / success",
       "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28760718049",
       "next_action": ""
     },
     {
       "label": "Safe admin refresh",
       "status": "ready",
-      "detail": "19 refresh commands captured at 2026-07-06T00:44:30.949830Z",
+      "detail": "60 refresh commands captured at 2026-07-06T00:44:34.016721Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": ""
     },
@@ -20084,7 +20127,7 @@ Generated: 2026-07-06T00:44:32.927478Z
 
 <script type="text/plain" id="embedded-posting-automation-status-report"># Posting Automation Status - Lily Roo
 
-Generated: 2026-07-06T00:44:33.018426Z
+Generated: 2026-07-06T00:45:50.528978Z
 
 ## Summary
 - Status: **ready_active_campaign**
@@ -20103,10 +20146,10 @@ Generated: 2026-07-06T00:44:33.018426Z
   - Evidence: data/brand_growth_preflight.json
   - Next: Watch FP-BRAND-AM-03-ANALOG-MYTH-X, FP-BRAND-AM-03-ANALOG-MYTH-FACEBOOK after 2026-07-06T15:21:00Z, then export posted URLs.
 - **Scheduled refresh workflow** - `ready`
-  - Detail: 17 */6 * * *, 05 16 * * *; latest run in_progress / pending
+  - Detail: 17 */6 * * *, 05 16 * * *; latest run completed / success
   - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28760718049
 - **Safe admin refresh** - `ready`
-  - Detail: 19 refresh commands captured at 2026-07-06T00:44:30.949830Z
+  - Detail: 60 refresh commands captured at 2026-07-06T00:44:34.016721Z
   - Evidence: data/promo_admin_refresh_run.json
 - **Scheduler dry-run authentication** - `ready`
   - Detail: HTTP 200 using bearer auth; due=0 would_post=0
@@ -23789,7 +23832,7 @@ Generated: 2026-07-06T00:44:29.067847Z
 
 
 <script type="application/json" id="embedded-brand-growth-pulse">{
-  "generated_at": "2026-07-06T00:44:33.513222Z",
+  "generated_at": "2026-07-06T00:45:50.562280Z",
   "safe_mode": true,
   "status": "measurement_waiting_for_credentials",
   "source": {
@@ -23820,8 +23863,8 @@ Generated: 2026-07-06T00:44:29.067847Z
     "clicks_by_destination": {},
     "next_post_at": "2026-07-06T10:15:00-04:00",
     "proof_due_at": "2026-07-06T15:21:00Z",
-    "hours_until_next_post": 13.51,
-    "hours_until_proof_due": 14.61,
+    "hours_until_next_post": 13.49,
+    "hours_until_proof_due": 14.59,
     "missing_metric_credentials": [
       "FB_PAGE_ID",
       "META_LONG_LIVED_TOKEN",
@@ -23883,7 +23926,7 @@ Generated: 2026-07-06T00:44:29.067847Z
 
 <script type="text/plain" id="embedded-brand-growth-pulse-report"># Brand Growth Pulse - Lily Roo
 
-Generated: 2026-07-06T00:44:33.513222Z
+Generated: 2026-07-06T00:45:50.562280Z
 
 ## Current Pulse
 - Status: **measurement_waiting_for_credentials**
@@ -23898,8 +23941,8 @@ Generated: 2026-07-06T00:44:33.513222Z
 - First-party clicks: **0** across **0** post(s)
 - Next post at: `2026-07-06T10:15:00-04:00`
 - Proof due at: `2026-07-06T15:21:00Z`
-- Hours until next post: `13.51`
-- Hours until proof due: `14.61`
+- Hours until next post: `13.49`
+- Hours until proof due: `14.59`
 
 ## Recommendations
 - **Keep posting; connect result metrics when approved**: 2 recent posts are ready to measure, but X/Meta result metrics are not connected.
