@@ -108,14 +108,14 @@
     .status-chip.working{background:#14203a;color:#dce8ff;border-color:#416095}
 	    .report-alert{border:1px solid #6c4b16;background:#2a2115;color:#ffd88a;border-radius:12px;padding:11px 12px;font-size:13px}
 	    .report-alert[hidden]{display:none}
-    .simple-dashboard{display:grid;gap:18px;margin-bottom:0}
+    .simple-dashboard{display:grid;gap:16px;margin-bottom:0}
     .simple-intro{display:flex;justify-content:space-between;gap:16px;align-items:flex-end}
     .simple-intro h1{margin:0;font-size:30px;line-height:1.05}
     .simple-intro p{margin:6px 0 0;color:#b8c1dc;line-height:1.45;font-size:14px;max-width:760px;overflow-wrap:anywhere}
     .simple-eyebrow{margin:0 0 6px;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#8f98b8;font-weight:850}
     .simple-intro-actions,.simple-section-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
     .simple-section{background:transparent;border:0;border-radius:0;padding:0;min-width:0;width:100%;max-width:100%;box-sizing:border-box}
-    .simple-status-band{background:linear-gradient(180deg,#141a2a 0%,#101725 100%);border:1px solid #334062;border-radius:12px;padding:18px;overflow-wrap:anywhere}
+    .simple-status-band{background:linear-gradient(180deg,#141a2a 0%,#101725 100%);border:1px solid #334062;border-radius:12px;padding:18px;overflow-wrap:anywhere;box-shadow:0 14px 42px rgba(0,0,0,.22)}
     .simple-status-side{display:grid;gap:9px;justify-items:end;flex:0 0 auto}
 	    .simple-section-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;margin-bottom:12px}
 	    .simple-section-head>div{min-width:0}
@@ -133,7 +133,7 @@
 	    .simple-status-card .metric-label{font-size:11px}
     .simple-status-card strong{display:block;color:#fff;font-size:18px;line-height:1.1;margin-top:6px;word-break:break-word;overflow-wrap:anywhere}
     .simple-status-card p{margin:6px 0 0;color:#b6bed6;font-size:12px;line-height:1.35;overflow-wrap:anywhere}
-    .simple-columns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-items:start}
+    .simple-columns{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(340px,.88fr);gap:18px;align-items:start}
     .simple-columns .simple-section{background:#111827;border:1px solid #26314e;border-radius:12px;padding:16px}
 	    .simple-list{display:grid;gap:10px}
 	    .simple-item{border:1px solid #26314e;border-left-width:4px;border-radius:8px;background:#101523;padding:14px;min-width:0;max-width:100%;box-sizing:border-box}
@@ -285,9 +285,9 @@
   <aside class="nav">
     <div class="brand">Lily Roo Admin</div>
     <button class="tab active" data-tab="dashboard">Status</button>
-    <button class="tab" data-tab="backstory">Stories</button>
-    <button class="tab" data-tab="songs">Songs</button>
-    <button class="tab" data-tab="promo">Files</button>
+    <button class="tab" data-tab="backstory">Story Library</button>
+    <button class="tab" data-tab="songs">Song Library</button>
+    <button class="tab" data-tab="promo">Source Files</button>
     <button class="tab" id="lock-admin" type="button">Lock admin</button>
     <p class="muted" style="margin-top:14px;font-size:12px">Password remembered on this computer</p>
   </aside>
@@ -443,13 +443,13 @@
 	            <div class="simple-section-head">
 	              <div>
                   <h1 id="simple-status-heading">Status</h1>
-                  <p id="simple-status-copy">A plain-English view of what is running, what happened recently, and what is scheduled next.</p>
+                  <p id="simple-status-copy">Loading the current promotion state...</p>
 	              </div>
 	              <div class="simple-status-side">
 	                <span class="status-chip neutral" id="simple-updated-chip">Checking</span>
 	                <div class="simple-section-actions">
-	                  <a class="btn secondary" href="content/Published_Log.csv" target="_blank" rel="noopener">Activity log</a>
-	                  <a class="btn ghost" href="future-posts.json" target="_blank" rel="noopener">Queue</a>
+	                  <a class="btn secondary" href="content/Published_Log.csv" target="_blank" rel="noopener">Open activity log</a>
+	                  <a class="btn ghost" href="future-posts.json" target="_blank" rel="noopener">Open queue</a>
 	                </div>
 	              </div>
 	            </div>
@@ -31298,7 +31298,7 @@ Generated: 2026-07-06T21:35:47.683941Z
         <span class="status-chip ${escapeHtml(status.className||'neutral')}">${escapeHtml(status.label||'Queued')}</span>
       </div>
       <div class="simple-item-copy">${escapeHtml(copy)}</div>
-	      ${href?`<div class="simple-item-actions"><a href="${escapeHtml(href)}" target="_blank" rel="noopener">Open report</a></div>`:''}
+	      ${href?`<div class="simple-item-actions"><a href="${escapeHtml(href)}" target="_blank" rel="noopener">Open details</a></div>`:''}
 	    </article>`;
 	  }
 
@@ -31409,16 +31409,15 @@ Generated: 2026-07-06T21:35:47.683941Z
 
 	    const manualPostingRequired=Boolean(pulseSummary.manual_posting_required || readoutSummary.manual_posting_required || preflightSummary.manual_posting_required);
 	    const topClass=campaignReady && !visibilityAttentionCount && !manualPostingRequired ? 'ok' : 'warn';
-	    const overallLabel=campaignReady ? 'Running automatically' : 'Needs check';
 	    if(updatedChip){
 	      updatedChip.className=`status-chip ${topClass}`;
 	      updatedChip.textContent=lastUpdated?`Updated ${formatQueueDate(lastUpdated)}`:(campaignReady?'Active':'Needs check');
 	    }
 		    if(statusCopy){
-		      const campaignPhrase=campaignReady ? 'Analog Myth promotion is on and automatic.' : 'Analog Myth promotion needs a readiness check.';
+		      const campaignPhrase=campaignReady ? 'Analog Myth promotion is running automatically.' : 'Analog Myth promotion needs a readiness check.';
 			      const nextPhrase=nextPosts.length ? `Next up: ${simpleCampaignName(nextPostTitle)} on ${simplePlatformNames(nextPosts)}.` : 'No next post is queued.';
 			      const resultPhrase=readyMetricRows.length
-			        ? `${simpleCount(readyMetricRows.length,'recent post')} can be reviewed for results.`
+			        ? `${simpleCount(readyMetricRows.length,'recent post')} can be checked for results.`
 			        : waitingMetricRows.length
 			          ? `${simpleCount(waitingMetricRows.length,'recent post')} ${waitingMetricRows.length===1?'is':'are'} waiting for the first result check.`
 			          : 'No result check is due right now.';
@@ -31456,10 +31455,10 @@ Generated: 2026-07-06T21:35:47.683941Z
 		        ? 'neutral'
 		        : 'ok';
 		    statusStrip.innerHTML=[
-			      simpleStatusCard('Publishing', campaignReady?'Automatic':'Needs check', campaignReady?`${simpleCount(futureCount,'future post')} approved and queued.`:'Refresh readiness before the next window.', topClass),
-			      simpleStatusCard('Next Post', nextDateLabel, nextPosts.length?`${simpleCampaignName(nextPostTitle)} on ${simplePlatformNames(nextPosts)}.`:`${nextWindowCount||2} automatic posts in the next window.`, campaignReady?'ok':'warn'),
-			      simpleStatusCard('Recent Activity', `${postedCount} logged`, visibilityAttentionCount?'A recent public link needs another check.':'Public links are saved for recent posts.', visibilityAttentionCount?'warn':postedCount?'ok':'neutral'),
-			      simpleStatusCard('Results', attentionLabel, attentionNote, attentionClass)
+			      simpleStatusCard('Publishing', campaignReady?'Automatic':'Needs check', campaignReady?`${simpleCount(futureCount,'future post')} approved and queued. No manual posting is required.`:'Refresh readiness before the next window.', topClass),
+			      simpleStatusCard('Next automatic post', nextDateLabel, nextPosts.length?`${simpleCampaignName(nextPostTitle)} on ${simplePlatformNames(nextPosts)}.`:`${nextWindowCount||2} automatic posts in the next window.`, campaignReady?'ok':'warn'),
+			      simpleStatusCard('Recent record', `${postedCount} logged`, visibilityAttentionCount?'One or more public links need another check.':'Recent public links are saved.', visibilityAttentionCount?'warn':postedCount?'ok':'neutral'),
+			      simpleStatusCard('Results follow-up', attentionLabel, attentionNote, attentionClass)
 			    ].join('');
 
 	    const recentItems=simpleActivityGroups(postedRows, true)
@@ -31554,7 +31553,7 @@ Generated: 2026-07-06T21:35:47.683941Z
 			      upcomingItems.push(simpleUpcomingItem(
 			        'Save public links after posting',
 			        formatQueueDate(proofDueAt),
-			        'After the scheduled posts publish, refresh the activity record so the real public URLs appear in Recent Activity.',
+			        'After the scheduled posts publish, refresh the activity record so the real public URLs appear under Recent Activity.',
 			        {label:'Follow-up',className:'neutral'},
 		        '/admin/reports/posting-automation-status.md'
 		      ));
@@ -31633,10 +31632,10 @@ Generated: 2026-07-06T21:35:47.683941Z
 	    }
 
     if(!upcomingItems.length && automationSummary.active_campaign_next_proof_due_at){
-      upcomingItems.push(simpleUpcomingItem(
-        'Next proof check',
-        formatQueueDate(automationSummary.active_campaign_next_proof_due_at),
-        'Capture executor proof after the scheduled publishing window.',
+	      upcomingItems.push(simpleUpcomingItem(
+	        'Next proof check',
+	        formatQueueDate(automationSummary.active_campaign_next_proof_due_at),
+	        'Save the public post links after the scheduled publishing window.',
         {label:'Tracked',className:'neutral'},
         '/admin/reports/posting-automation-status.md'
       ));
