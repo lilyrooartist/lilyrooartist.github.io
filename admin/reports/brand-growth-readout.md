@@ -1,6 +1,6 @@
 # Brand Growth Readout - Lily Roo
 
-Generated: 2026-07-06T13:22:32.586140Z
+Generated: 2026-07-06T13:33:23.689579Z
 
 ## Summary
 - Campaign rows: **64**
@@ -30,9 +30,15 @@ Generated: 2026-07-06T13:22:32.586140Z
 - Re-check public visibility: `admin/reports/brand-post-visibility.md`
 - Capture campaign clicks: `python3 scripts/capture_brand_campaign_clicks.py`
 
+## Metric Capture Status
+- X metrics: **skipped_missing_secrets**
+- Facebook metrics: **skipped_missing_secrets**
+- X metric credentials needed: `X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET`
+- Facebook metric credentials needed: `META_LONG_LIVED_TOKEN, FB_PAGE_ID`
+
 ## Next Actions
-- python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X
-- python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK
+- Metric capture is waiting for X API credential names: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET. After credentials are present, run: python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X
+- Metric capture is waiting for Meta API credential names: META_LONG_LIVED_TOKEN, FB_PAGE_ID. After credentials are present, run: python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK
 
 ## Post-Slot Watch
 - `2026-07-04` **measurement_due** proof due `2026-07-04T16:05:00Z` for `FP-BRAND-AM-01-13-X, FP-BRAND-AM-01-13-FACEBOOK`
@@ -137,11 +143,11 @@ Generated: 2026-07-06T13:22:32.586140Z
 - `FP-BRAND-AM-01-13-X` X 2026-07-04T10:15:00-04:00 - **ready_for_metric_capture**
   - URL: https://x.com/i/web/status/2073410401006751908
   - Public visibility: `visible_copy_confirmed` OK
-  - Next: python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X
+  - Next: Metric capture is waiting for X API credential names: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET. After credentials are present, run: python3 scripts/capture_x_post_results.py --post-id FP-BRAND-AM-01-13-X
 - `FP-BRAND-AM-01-13-FACEBOOK` Facebook 2026-07-04T11:20:00-04:00 - **ready_for_metric_capture**
   - URL: https://www.facebook.com/lilyrooartist/posts/122120959905249470
   - Public visibility: `page_loaded_no_unavailable_marker` OK
-  - Next: python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK
+  - Next: Metric capture is waiting for Meta API credential names: META_LONG_LIVED_TOKEN, FB_PAGE_ID. After credentials are present, run: python3 scripts/capture_facebook_post_results.py --post-id FP-BRAND-AM-01-13-FACEBOOK
 - `FP-BRAND-AM-02-GIRLS-CAMP-X` X 2026-07-05T10:15:00-04:00 - **posted_waiting_measurement_window**
   - URL: https://x.com/i/web/status/2073772787177861205
   - Public visibility: `visible_copy_confirmed` OK

@@ -187,6 +187,24 @@ def capture_command(platform: str, post_ids: list[str]) -> str:
     return f"python3 scripts/{script} {ids}"
 
 
+def missing_metric_secret_names(platform: str, x_results: dict, facebook_results: dict) -> list[str]:
+    payload = x_results if platform == "X" else facebook_results
+    summary = payload.get("summary") or {}
+    return list(summary.get("missing_secret_names") or [])
+
+
+def metric_capture_next_action(platform: str, post_ids: list[str], x_results: dict, facebook_results: dict) -> str:
+    command = capture_command(platform, post_ids)
+    missing = missing_metric_secret_names(platform, x_results, facebook_results)
+    if missing:
+        label = "X" if platform == "X" else "Meta"
+        return (
+            f"Metric capture is waiting for {label} API credential names: {', '.join(missing)}. "
+            f"After credentials are present, run: {command}"
+        )
+    return command
+
+
 def post_slot_watch(rows: list[dict], now: datetime) -> tuple[list[dict], dict]:
     by_day: dict[str, list[dict]] = {}
     for row in rows:
@@ -314,8 +332,10 @@ def build_payload() -> dict:
     future_posts = read_json(FUTURE, {}).get("posts") or []
     published = published_lookup()
     executions = execution_lookup(read_json(EXECUTIONS, {}))
-    x_results = result_lookup(read_json(X_RESULTS, {}))
-    facebook_results = result_lookup(read_json(FACEBOOK_RESULTS, {}))
+    x_results_payload = read_json(X_RESULTS, {})
+    facebook_results_payload = read_json(FACEBOOK_RESULTS, {})
+    x_results = result_lookup(x_results_payload)
+    facebook_results = result_lookup(facebook_results_payload)
     visibility_payload = read_json(BRAND_POST_VISIBILITY, {})
     visibility = visibility_lookup(visibility_payload)
     live_metrics = read_json(LIVE_METRICS, {})
@@ -352,7 +372,7 @@ def build_payload() -> dict:
             next_action = "Review result totals and compare against the rest of the campaign."
         elif published_row and measurement_due_at and measurement_due_at <= now:
             status = "ready_for_metric_capture"
-            next_action = capture_command(platform, [post_id])
+            next_action = metric_capture_next_action(platform, [post_id], x_results_payload, facebook_results_payload)
         elif published_row:
             status = "posted_waiting_measurement_window"
             next_action = f"Wait until {measurement_due_at.isoformat() if measurement_due_at else 'the first measurement window'} before capturing metrics."
@@ -441,6 +461,10 @@ def build_payload() -> dict:
             "next_scheduled_at": (next_scheduled[0]["scheduled_at"] if next_scheduled else ""),
             "x_metric_capture_command": capture_command("X", ready_x_ids),
             "facebook_metric_capture_command": capture_command("Facebook", ready_facebook_ids),
+            "x_metric_capture_status": (x_results_payload.get("summary") or {}).get("status", "unknown"),
+            "facebook_metric_capture_status": (facebook_results_payload.get("summary") or {}).get("status", "unknown"),
+            "x_metric_missing_secret_names": missing_metric_secret_names("X", x_results_payload, facebook_results_payload),
+            "facebook_metric_missing_secret_names": missing_metric_secret_names("Facebook", x_results_payload, facebook_results_payload),
             "post_slot_watch_window_count": watch_summary.get("window_count", 0),
             "post_slot_watch_status_counts": watch_summary.get("status_counts", {}),
             "next_action_window_date": watch_summary.get("next_action_window_date", ""),
@@ -533,8 +557,18 @@ def build_markdown(payload: dict) -> str:
         f"- Re-check public visibility: `{summary.get('public_visibility_report_path') or 'admin/reports/brand-post-visibility.md'}`",
         f"- Capture campaign clicks: `{summary.get('campaign_click_refresh_command') or 'python3 scripts/capture_brand_campaign_clicks.py'}`",
         "",
-        "## Next Actions",
+        "## Metric Capture Status",
+        f"- X metrics: **{summary.get('x_metric_capture_status') or 'unknown'}**",
+        f"- Facebook metrics: **{summary.get('facebook_metric_capture_status') or 'unknown'}**",
     ]
+    if summary.get("x_metric_missing_secret_names"):
+        lines.append(f"- X metric credentials needed: `{', '.join(summary['x_metric_missing_secret_names'])}`")
+    if summary.get("facebook_metric_missing_secret_names"):
+        lines.append(f"- Facebook metric credentials needed: `{', '.join(summary['facebook_metric_missing_secret_names'])}`")
+    lines.extend([
+        "",
+        "## Next Actions",
+    ])
     for action in payload.get("next_actions") or []:
         lines.append(f"- {action}")
     lines.extend(["", "## Post-Slot Watch"])
