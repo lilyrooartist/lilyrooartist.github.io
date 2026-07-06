@@ -3055,7 +3055,11 @@ def validate_generated_outputs(failures):
             )
             and winner_readiness.get("winner_count_target") == 3
             and winner_readiness.get("minimum_measured_posts_per_format") == 2
-            and winner_readiness.get("status") in {"needs_more_result_evidence", "ready_to_name_winners"}
+            and winner_readiness.get("status") in {"needs_more_result_evidence", "winners_named"}
+            and (
+                winner_readiness.get("status") != "winners_named"
+                or winner_readiness.get("named_winner_formats") == winner_readiness.get("ready_candidates")
+            )
             and isinstance(winner_readiness.get("blockers") or [], list)
             and format_ladder.get("winner_count_target") == winner_readiness.get("winner_count_target")
             and format_ladder.get("ready_count") == winner_readiness.get("ready_candidate_count")
@@ -3102,10 +3106,10 @@ def validate_generated_outputs(failures):
                 for step in ladder_steps
             )
             and "scheduled, postable, or blocked rows are not format evidence" in (format_ladder.get("guardrail") or "")
-            and next_format_runbook.get("status") in {"needs_more_result_evidence", "ready_to_name_winners", "clear"}
+            and next_format_runbook.get("status") in {"needs_more_result_evidence", "winners_named", "clear"}
             and next_format_runbook.get("winner_count_target") == winner_readiness.get("winner_count_target")
             and (
-                winner_readiness.get("status") == "ready_to_name_winners"
+                winner_readiness.get("status") == "winners_named"
                 or (
                     next_format_runbook.get("next_format") in top_candidate_formats
                     and next_format_runbook.get("first_action") in {"collect_metrics", "post_and_log_public_url", "await_scheduled_auto_post", "log_public_url", "clear_platform_blocker"}

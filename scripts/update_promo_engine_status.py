@@ -781,19 +781,21 @@ def format_winner_readiness(candidates: list[dict], result_collection: dict) -> 
         blockers.append(f"{pending_fields} post-result field(s) still need collected values.")
     if missing_count:
         blockers.append(f"{missing_count} experiment post(s) still need public URLs in Published_Log.csv.")
+    winners_named = len(ready_candidates) >= FORMAT_WINNER_COUNT
     return {
-        "status": "ready_to_name_winners" if len(ready_candidates) >= FORMAT_WINNER_COUNT else "needs_more_result_evidence",
+        "status": "winners_named" if winners_named else "needs_more_result_evidence",
         "winner_count_target": FORMAT_WINNER_COUNT,
         "minimum_measured_posts_per_format": MIN_MEASURED_POSTS_PER_WINNING_FORMAT,
         "ready_candidate_count": len(ready_candidates),
         "ready_candidates": [candidate.get("format") for candidate in ready_candidates[:FORMAT_WINNER_COUNT]],
+        "named_winner_formats": [candidate.get("format") for candidate in ready_candidates[:FORMAT_WINNER_COUNT]] if winners_named else [],
         "pending_result_field_count": pending_fields,
         "ready_to_import_count": ready_imports,
         "missing_published_log_count": missing_count,
         "blockers": blockers,
         "next_action": (
-            "Name the top 3 repeatable formats from measured results."
-            if len(ready_candidates) >= FORMAT_WINNER_COUNT
+            "Scale the named repeatable formats in the automated campaign and monitor each post window."
+            if winners_named
             else "Collect/import post results and log missing public URLs before declaring the top 3 formats."
         ),
     }
@@ -859,13 +861,14 @@ def enrich_format_decision_paths(candidates: list[dict], result_clipboard: dict)
 
 
 def next_format_evidence_runbook(candidates: list[dict], readiness: dict) -> dict:
-    if readiness.get("status") == "ready_to_name_winners":
+    if readiness.get("status") in {"ready_to_name_winners", "winners_named"}:
         return {
-            "status": "ready_to_name_winners",
-            "next_action": "Name the top 3 repeatable formats from measured results.",
+            "status": "winners_named",
+            "next_action": "Keep the named winner formats running in the automated campaign; verify the next post window and collect 24-hour metrics.",
             "ready_candidate_count": readiness.get("ready_candidate_count") or 0,
             "winner_count_target": readiness.get("winner_count_target") or FORMAT_WINNER_COUNT,
             "ready_candidates": readiness.get("ready_candidates") or [],
+            "named_winner_formats": readiness.get("named_winner_formats") or readiness.get("ready_candidates") or [],
             "guardrail": "Use measured result evidence only; do not rank formats from scheduled volume alone.",
         }
     actionable = [
@@ -975,16 +978,17 @@ def repeatable_format_ladder(candidates: list[dict], readiness: dict) -> dict:
         })
     ready_count = int_metric(readiness.get("ready_candidate_count"))
     target = int_metric(readiness.get("winner_count_target")) or FORMAT_WINNER_COUNT
+    winners_named = ready_count >= target
     return {
-        "status": "ready_to_name_winners" if ready_count >= target else "needs_more_winners",
+        "status": "winners_named" if winners_named else "needs_more_winners",
         "ready_count": ready_count,
         "winner_count_target": target,
         "needed_winner_count": max(target - ready_count, 0),
         "minimum_measured_posts_per_format": readiness.get("minimum_measured_posts_per_format") or MIN_MEASURED_POSTS_PER_WINNING_FORMAT,
         "steps": steps,
         "next_action": (
-            "Name the top 3 repeatable formats from measured results."
-            if ready_count >= target
+            "Keep the named repeatable winners in rotation and collect fresh post-window evidence."
+            if winners_named
             else "Advance the first non-winner ladder step until two more formats have measured evidence."
         ),
         "guardrail": "Only winner-ready formats count toward the top 3; scheduled, postable, or blocked rows are not format evidence until public URLs and measured results exist.",
