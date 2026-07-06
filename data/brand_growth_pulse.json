@@ -1,0 +1,91 @@
+{
+  "generated_at": "2026-07-06T00:25:05.973467Z",
+  "safe_mode": true,
+  "status": "measurement_waiting_for_credentials",
+  "source": {
+    "brand_growth_readout": "data/brand_growth_readout.json",
+    "brand_growth_preflight": "data/brand_growth_preflight.json",
+    "posting_automation_status": "data/posting_automation_status.json",
+    "brand_campaign_clicks": "data/brand_campaign_clicks.json",
+    "x_post_results": "data/x_post_results.json",
+    "facebook_post_results": "data/facebook_post_results.json"
+  },
+  "summary": {
+    "status": "measurement_waiting_for_credentials",
+    "primary_action": {
+      "state": "measurement_waiting_for_credentials",
+      "label": "Keep posting; connect result metrics when approved",
+      "why": "2 recent posts are ready to measure, but X/Meta result metrics are not connected.",
+      "command": "python3 scripts/capture_brand_campaign_clicks.py && python3 scripts/build_brand_growth_pulse.py",
+      "due_at": "2026-07-06T15:21:00Z"
+    },
+    "active_campaign_ready": true,
+    "posting_preflight_ready": true,
+    "queued_future_posts": 60,
+    "posted_or_measured_rows": 4,
+    "ready_for_metric_capture_rows": 2,
+    "click_count": 0,
+    "click_post_count": 0,
+    "clicks_by_platform": {},
+    "clicks_by_destination": {},
+    "next_post_at": "2026-07-06T10:15:00-04:00",
+    "proof_due_at": "2026-07-06T15:21:00Z",
+    "hours_until_next_post": 13.83,
+    "hours_until_proof_due": 14.93,
+    "missing_metric_credentials": [
+      "FB_PAGE_ID",
+      "META_LONG_LIVED_TOKEN",
+      "X_ACCESS_TOKEN",
+      "X_ACCESS_TOKEN_SECRET",
+      "X_API_KEY",
+      "X_API_SECRET"
+    ],
+    "manual_posting_required": false,
+    "report_path": "admin/reports/brand-growth-pulse.md",
+    "refresh_command": "python3 scripts/build_brand_growth_pulse.py"
+  },
+  "recommendations": [
+    {
+      "label": "Keep posting; connect result metrics when approved",
+      "detail": "2 recent posts are ready to measure, but X/Meta result metrics are not connected.",
+      "command": "python3 scripts/capture_brand_campaign_clicks.py && python3 scripts/build_brand_growth_pulse.py"
+    },
+    {
+      "label": "Preserve the no-manual-posting lane",
+      "detail": "Keep Analog Myth promotion on API-backed X/Facebook rows until another platform has a real automated path.",
+      "command": "python3 scripts/build_posting_automation_status.py"
+    },
+    {
+      "label": "Use click data before changing creative direction",
+      "detail": "First-party link telemetry is ready and privacy-safe; wait for real clicks before ranking tracks by response.",
+      "command": "python3 scripts/capture_brand_campaign_clicks.py"
+    },
+    {
+      "label": "Optional: connect X/Meta result capture",
+      "detail": "This is the only current measurement setup needing help; do it only after explicit approval for secret handling.",
+      "command": "python3 scripts/push_github_actions_secrets.py --name FB_PAGE_ID --name META_LONG_LIVED_TOKEN --name X_ACCESS_TOKEN --name X_ACCESS_TOKEN_SECRET --name X_API_KEY --name X_API_SECRET"
+    }
+  ],
+  "blockers": [
+    {
+      "kind": "credential",
+      "label": "X/Meta result metrics",
+      "detail": "Automatic result counts need approved credential setup before importing views, likes, comments, shares, or saves.",
+      "missing_names": [
+        "FB_PAGE_ID",
+        "META_LONG_LIVED_TOKEN",
+        "X_ACCESS_TOKEN",
+        "X_ACCESS_TOKEN_SECRET",
+        "X_API_KEY",
+        "X_API_SECRET"
+      ],
+      "help_needed": "Confirm before pushing or entering social API secrets anywhere outside the local machine."
+    }
+  ],
+  "guardrails": [
+    "No manual posting is introduced by this pulse.",
+    "Do not solicit subscribers or use audience-target copy in public Lily Roo posts.",
+    "Do not transmit social API secrets without explicit approval for the destination.",
+    "Click telemetry is first-party, aggregate, and does not store IP addresses."
+  ]
+}

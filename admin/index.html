@@ -108,13 +108,13 @@
     .status-chip.working{background:#14203a;color:#dce8ff;border-color:#416095}
 	    .report-alert{border:1px solid #6c4b16;background:#2a2115;color:#ffd88a;border-radius:12px;padding:11px 12px;font-size:13px}
 	    .report-alert[hidden]{display:none}
-    .simple-dashboard{display:grid;gap:16px}
+    .simple-dashboard{display:grid;gap:16px;margin-bottom:16px}
     .simple-section{background:#141722;border:1px solid #2a2f44;border-radius:8px;padding:18px;min-width:0}
     .simple-status-band{background:#111827;border-color:#3a4b75;padding:20px;border-top:4px solid #5b8dff}
 	    .simple-section-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;margin-bottom:12px}
 	    .simple-section-head h2{margin:0;font-size:24px;line-height:1.15}
 	    .simple-section-head p{margin:6px 0 0;color:#d7def2;line-height:1.45;font-size:14px;max-width:980px}
-    .simple-status-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:10px}
+    .simple-status-strip{display:grid;grid-template-columns:repeat(5,minmax(135px,1fr));gap:10px}
     .simple-status-card{border:1px solid #26314e;border-radius:8px;background:#101523;padding:13px;min-height:104px;box-sizing:border-box}
 	    .simple-status-card.status-ok{border-color:#1f684d;background:#0f201b}
 	    .simple-status-card.status-warn{border-color:#6c4b16;background:#211a10}
@@ -146,7 +146,7 @@
 	    .today-manual-step{flex:1 1 100%;margin-top:2px}
 	    .plain-list{margin:10px 0 0;padding-left:18px;color:#cdd5ec;font-size:13px;line-height:1.45}
 	    .plain-list li{margin:5px 0}
-	    .diagnostic-details{border:1px solid #2a2f44;border-radius:14px;background:#101523}
+	    .diagnostic-details{border:1px solid #2a2f44;border-radius:14px;background:#101523;margin-top:14px}
 	    .diagnostic-details summary{cursor:pointer;padding:13px 15px;font-weight:850;color:#f4f7ff}
 	    .diagnostic-details[open] summary{border-bottom:1px solid #2a2f44}
 	    .diagnostic-inner{padding:14px;display:grid;gap:14px}
@@ -264,9 +264,9 @@
   <aside class="nav">
     <div class="brand">Lily Roo Admin</div>
     <button class="tab active" data-tab="dashboard">Status</button>
-    <button class="tab" data-tab="backstory">Backstory</button>
-    <button class="tab" data-tab="songs">Songs</button>
-    <button class="tab" data-tab="promo">Promo</button>
+    <button class="tab" data-tab="backstory">Story Library</button>
+    <button class="tab" data-tab="songs">Song Library</button>
+    <button class="tab" data-tab="promo">System Files</button>
     <button class="tab" id="lock-admin" type="button">Lock admin</button>
     <p class="muted" style="margin-top:14px;font-size:12px">Password remembered on this computer</p>
   </aside>
@@ -421,7 +421,7 @@
 	          <section class="simple-section simple-status-band" aria-labelledby="simple-status-heading">
 	            <div class="simple-section-head">
 	              <div>
-	                <h2 id="simple-status-heading">Status</h2>
+	                <h2 id="simple-status-heading">Current Status</h2>
 	                <p id="simple-status-copy">Loading the active Lily Roo campaign...</p>
 	              </div>
 	              <span class="status-chip neutral" id="simple-updated-chip">Checking</span>
@@ -440,7 +440,7 @@
 	              <div class="simple-section-head">
 	                <div>
 	                  <h2 id="simple-recent-heading">Recent Activity and Results</h2>
-	                  <p id="simple-recent-copy">What actually happened: posts, saved links, visibility checks, and result tracking.</p>
+	                  <p id="simple-recent-copy">A plain-English record of posts, saved public links, visibility checks, and result updates.</p>
 	                </div>
 	              </div>
 	              <div class="simple-list" id="simple-recent-activity">
@@ -452,7 +452,7 @@
 	              <div class="simple-section-head">
 	                <div>
 	                  <h2 id="simple-upcoming-heading">Upcoming Activities</h2>
-	                  <p id="simple-upcoming-copy">What is scheduled next, plus the follow-up checks that keep the launch measurable.</p>
+	                  <p id="simple-upcoming-copy">The next scheduled posts and the checks that should happen after they run.</p>
 	                </div>
 	              </div>
 	              <div class="simple-list" id="simple-upcoming-activity">
@@ -463,7 +463,7 @@
 	        </section>
 
 	        <details class="diagnostic-details legacy-overview-details">
-	          <summary>More detail behind this summary</summary>
+	          <summary>Diagnostics behind this summary</summary>
 	          <div class="diagnostic-inner">
 
 	        <section class="today-grid" aria-label="Today summary">
@@ -765,6 +765,7 @@
               <div class="source-grid">
                 <a class="source-link" href="reports/" target="_blank" rel="noopener">Reports index</a>
                 <a class="source-link" href="reports/weekly-social-report.md" target="_blank" rel="noopener">Weekly report</a>
+                <a class="source-link" href="reports/brand-growth-pulse.md" target="_blank" rel="noopener">Brand growth pulse</a>
                 <a class="source-link" href="reports/promo-unlock-sequence.md" target="_blank" rel="noopener">Unlock sequence</a>
                 <a class="source-link" href="reports/promo-consistency-audit.md" target="_blank" rel="noopener">Consistency audit</a>
                 <a class="source-link" href="reports/published-log-reconciliation.md" target="_blank" rel="noopener">Published log reconciliation</a>
@@ -782,6 +783,7 @@
                 <a class="source-link" href="../data/promotion_blocker_ledger.json" target="_blank" rel="noopener">Blocker JSON</a>
                 <a class="source-link" href="../data/distrokid_release_status.json" target="_blank" rel="noopener">Release status</a>
                 <a class="source-link" href="../data/promo_engine_status.json" target="_blank" rel="noopener">Promo health</a>
+                <a class="source-link" href="../data/brand_growth_pulse.json" target="_blank" rel="noopener">Brand growth pulse JSON</a>
                 <a class="source-link" href="../data/promo_unlock_sequence.json" target="_blank" rel="noopener">Unlock sequence JSON</a>
                 <a class="source-link" href="../data/promo_consistency_audit.json" target="_blank" rel="noopener">Consistency JSON</a>
                 <a class="source-link" href="../data/published_log_reconciliation.json" target="_blank" rel="noopener">Log reconciliation JSON</a>
@@ -2375,7 +2377,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
 }</script>
 
 <script type="application/json" id="embedded-promo-engine-status">{
-  "generated_at": "2026-07-05T23:54:19.536961+00:00",
+  "generated_at": "2026-07-06T00:20:31.877003+00:00",
   "source": {
     "release_status": "data/distrokid_release_status.json",
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -2425,7 +2427,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
       "delta_plays_views": 236,
       "lift_percent": 94.02,
       "percent_to_target": 155.1,
-      "days_remaining": 17,
+      "days_remaining": 16,
       "status": "target_reached",
       "action_needed": "Keep publishing and identify the winning repeatable formats from measured post results.",
       "top_repeatable_format_candidates": [
@@ -5444,7 +5446,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
       "recheck_interval_hours": 24,
       "recheck_due": 0,
       "waiting_for_next_recheck": 4,
-      "oldest_checked_pending_age_hours": 1.6,
+      "oldest_checked_pending_age_hours": 2.0,
       "next_recheck_at": "2026-07-06T22:20:49.759268+00:00"
     },
     "store_verification": {
@@ -5469,7 +5471,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
             "updated_at": "2026-07-05T22:20:49.759268Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
             "checked_at": "2026-07-05T22:20:49.759268+00:00",
-            "checked_age_hours": 1.6,
+            "checked_age_hours": 2.0,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-07-06T22:20:49.759268+00:00",
             "recheck_due": false,
@@ -5488,7 +5490,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
             "updated_at": "2026-07-05T22:21:10.065976Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
             "checked_at": "2026-07-05T22:21:10.065976+00:00",
-            "checked_age_hours": 1.6,
+            "checked_age_hours": 2.0,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-07-06T22:21:10.065976+00:00",
             "recheck_due": false,
@@ -5507,7 +5509,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
             "updated_at": "2026-07-05T22:21:10.457996Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
             "checked_at": "2026-07-05T22:21:10.457996+00:00",
-            "checked_age_hours": 1.6,
+            "checked_age_hours": 2.0,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-07-06T22:21:10.457996+00:00",
             "recheck_due": false,
@@ -5526,7 +5528,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
             "updated_at": "2026-07-05T22:21:10.536104Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
             "checked_at": "2026-07-05T22:21:10.536104+00:00",
-            "checked_age_hours": 1.6,
+            "checked_age_hours": 2.0,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-07-06T22:21:10.536104+00:00",
             "recheck_due": false,
@@ -5548,7 +5550,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
             "updated_at": "2026-07-05T22:20:49.759268Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
             "checked_at": "2026-07-05T22:20:49.759268+00:00",
-            "checked_age_hours": 1.6,
+            "checked_age_hours": 2.0,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-07-06T22:20:49.759268+00:00",
             "recheck_due": false,
@@ -5566,7 +5568,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
             "updated_at": "2026-07-05T22:21:10.065976Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
             "checked_at": "2026-07-05T22:21:10.065976+00:00",
-            "checked_age_hours": 1.6,
+            "checked_age_hours": 2.0,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-07-06T22:21:10.065976+00:00",
             "recheck_due": false,
@@ -5584,7 +5586,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
             "updated_at": "2026-07-05T22:21:10.457996Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
             "checked_at": "2026-07-05T22:21:10.457996+00:00",
-            "checked_age_hours": 1.6,
+            "checked_age_hours": 2.0,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-07-06T22:21:10.457996+00:00",
             "recheck_due": false,
@@ -5602,7 +5604,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
             "updated_at": "2026-07-05T22:21:10.536104Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
             "checked_at": "2026-07-05T22:21:10.536104+00:00",
-            "checked_age_hours": 1.6,
+            "checked_age_hours": 2.0,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-07-06T22:21:10.536104+00:00",
             "recheck_due": false,
@@ -5615,7 +5617,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
       "recheck_interval_hours": 24,
       "recheck_due_count": 0,
       "waiting_for_next_recheck_count": 4,
-      "oldest_checked_pending_age_hours": 1.6,
+      "oldest_checked_pending_age_hours": 2.0,
       "next_recheck_at": "2026-07-06T22:20:49.759268+00:00",
       "recheck_due_rows": [],
       "waiting_recheck_rows": [
@@ -5630,7 +5632,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
             "updated_at": "2026-07-05T22:20:49.759268Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
             "checked_at": "2026-07-05T22:20:49.759268+00:00",
-            "checked_age_hours": 1.6,
+            "checked_age_hours": 2.0,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-07-06T22:20:49.759268+00:00",
             "recheck_due": false,
@@ -5649,7 +5651,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
             "updated_at": "2026-07-05T22:21:10.065976Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
             "checked_at": "2026-07-05T22:21:10.065976+00:00",
-            "checked_age_hours": 1.6,
+            "checked_age_hours": 2.0,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-07-06T22:21:10.065976+00:00",
             "recheck_due": false,
@@ -5668,7 +5670,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
             "updated_at": "2026-07-05T22:21:10.457996Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
             "checked_at": "2026-07-05T22:21:10.457996+00:00",
-            "checked_age_hours": 1.6,
+            "checked_age_hours": 2.0,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-07-06T22:21:10.457996+00:00",
             "recheck_due": false,
@@ -5687,7 +5689,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
             "updated_at": "2026-07-05T22:21:10.536104Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
             "checked_at": "2026-07-05T22:21:10.536104+00:00",
-            "checked_age_hours": 1.6,
+            "checked_age_hours": 2.0,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-07-06T22:21:10.536104+00:00",
             "recheck_due": false,
@@ -5789,11 +5791,11 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
       "commits_snapshots": true,
       "safe_refresh_command": "python3 scripts/refresh_promo_admin.py",
       "source_revision": {
-        "commit": "7dde471519821ab8ed9e251bd432ed3a99a3caa8",
-        "short_commit": "7dde4715",
+        "commit": "c0109cecaa3d056f64b6007790476df4d281b92e",
+        "short_commit": "c0109cec",
         "branch": "main",
-        "committed_at": "2026-07-05T19:43:43-04:00",
-        "source_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/commit/7dde471519821ab8ed9e251bd432ed3a99a3caa8"
+        "committed_at": "2026-07-05T20:07:29-04:00",
+        "source_url": "https://github.com/lilyrooartist/lilyrooartist.github.io/commit/c0109cecaa3d056f64b6007790476df4d281b92e"
       },
       "latest_run_covers_source_commit": false,
       "latest_run_coverage_basis": "source_changed_after_latest_run",
@@ -5803,6 +5805,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
         "admin/index.html",
         "admin/reports/approval-runway.md",
         "admin/reports/backlog-reschedule-preview.md",
+        "admin/reports/brand-campaign-clicks.md",
         "admin/reports/brand-growth-campaign.md",
         "admin/reports/brand-growth-preflight.md",
         "admin/reports/brand-growth-readout.md",
@@ -5836,12 +5839,12 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
         "admin/reports/youtube-community-url-reconciliation.md",
         "admin/reports/youtube-post-results.md",
         "analog-myth.html",
-        "data/approval_runway.json",
-        "data/backlog_reschedule_preview.json"
+        "data/approval_runway.json"
       ],
       "uncovered_paths_since_latest_run": [
         "admin/content/Published_Log.csv",
         "analog-myth.html",
+        "data/brand_campaign_clicks.json",
         "data/brand_growth_campaign.json",
         "data/brand_post_visibility.json",
         "data/scheduled_posts.csv",
@@ -5853,13 +5856,12 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
         "scripts/build_posting_automation_status.py",
         "scripts/build_promo_operations_packet.py",
         "scripts/build_social_blocker_input_status.py",
+        "scripts/capture_brand_campaign_clicks.py",
         "scripts/capture_brand_post_visibility.py",
         "scripts/capture_facebook_post_results.py",
         "scripts/export_social_executions.py",
         "scripts/push_github_actions_secrets.py",
-        "scripts/refresh_promo_admin.py",
-        "scripts/seed_brand_growth_campaign.py",
-        "scripts/update_promo_engine_status.py"
+        "scripts/refresh_promo_admin.py"
       ],
       "current_run_capture_in_progress": false,
       "current_run_capture_note": "",
@@ -8076,7 +8078,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
             "updated_at": "2026-07-05T22:20:49.759268Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
             "checked_at": "2026-07-05T22:20:49.759268+00:00",
-            "checked_age_hours": 1.6,
+            "checked_age_hours": 2.0,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-07-06T22:20:49.759268+00:00",
             "recheck_due": false,
@@ -8095,7 +8097,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
             "updated_at": "2026-07-05T22:21:10.065976Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
             "checked_at": "2026-07-05T22:21:10.065976+00:00",
-            "checked_age_hours": 1.6,
+            "checked_age_hours": 2.0,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-07-06T22:21:10.065976+00:00",
             "recheck_due": false,
@@ -8114,7 +8116,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
             "updated_at": "2026-07-05T22:21:10.457996Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
             "checked_at": "2026-07-05T22:21:10.457996+00:00",
-            "checked_age_hours": 1.6,
+            "checked_age_hours": 2.0,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-07-06T22:21:10.457996+00:00",
             "recheck_due": false,
@@ -8133,7 +8135,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
             "updated_at": "2026-07-05T22:21:10.536104Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
             "checked_at": "2026-07-05T22:21:10.536104+00:00",
-            "checked_age_hours": 1.6,
+            "checked_age_hours": 2.0,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-07-06T22:21:10.536104+00:00",
             "recheck_due": false,
@@ -8155,7 +8157,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
             "updated_at": "2026-07-05T22:20:49.759268Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
             "checked_at": "2026-07-05T22:20:49.759268+00:00",
-            "checked_age_hours": 1.6,
+            "checked_age_hours": 2.0,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-07-06T22:20:49.759268+00:00",
             "recheck_due": false,
@@ -8173,7 +8175,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
             "updated_at": "2026-07-05T22:21:10.065976Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
             "checked_at": "2026-07-05T22:21:10.065976+00:00",
-            "checked_age_hours": 1.6,
+            "checked_age_hours": 2.0,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-07-06T22:21:10.065976+00:00",
             "recheck_due": false,
@@ -8191,7 +8193,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
             "updated_at": "2026-07-05T22:21:10.457996Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
             "checked_at": "2026-07-05T22:21:10.457996+00:00",
-            "checked_age_hours": 1.6,
+            "checked_age_hours": 2.0,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-07-06T22:21:10.457996+00:00",
             "recheck_due": false,
@@ -8209,7 +8211,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
             "updated_at": "2026-07-05T22:21:10.536104Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
             "checked_at": "2026-07-05T22:21:10.536104+00:00",
-            "checked_age_hours": 1.6,
+            "checked_age_hours": 2.0,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-07-06T22:21:10.536104+00:00",
             "recheck_due": false,
@@ -8222,7 +8224,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
       "recheck_interval_hours": 24,
       "recheck_due_count": 0,
       "waiting_for_next_recheck_count": 4,
-      "oldest_checked_pending_age_hours": 1.6,
+      "oldest_checked_pending_age_hours": 2.0,
       "next_recheck_at": "2026-07-06T22:20:49.759268+00:00",
       "recheck_due_rows": [],
       "waiting_recheck_rows": [
@@ -8237,7 +8239,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
             "updated_at": "2026-07-05T22:20:49.759268Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
             "checked_at": "2026-07-05T22:20:49.759268+00:00",
-            "checked_age_hours": 1.6,
+            "checked_age_hours": 2.0,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-07-06T22:20:49.759268+00:00",
             "recheck_due": false,
@@ -8256,7 +8258,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
             "updated_at": "2026-07-05T22:21:10.065976Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
             "checked_at": "2026-07-05T22:21:10.065976+00:00",
-            "checked_age_hours": 1.6,
+            "checked_age_hours": 2.0,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-07-06T22:21:10.065976+00:00",
             "recheck_due": false,
@@ -8275,7 +8277,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
             "updated_at": "2026-07-05T22:21:10.457996Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
             "checked_at": "2026-07-05T22:21:10.457996+00:00",
-            "checked_age_hours": 1.6,
+            "checked_age_hours": 2.0,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-07-06T22:21:10.457996+00:00",
             "recheck_due": false,
@@ -8294,7 +8296,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
             "updated_at": "2026-07-05T22:21:10.536104Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
             "checked_at": "2026-07-05T22:21:10.536104+00:00",
-            "checked_age_hours": 1.6,
+            "checked_age_hours": 2.0,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-07-06T22:21:10.536104+00:00",
             "recheck_due": false,
@@ -8328,14 +8330,14 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
       "missing": 0,
       "checked_no_change": 0,
       "gated_manual_pending": 0,
-      "checked_at": "2026-07-05T23:54:19.536961+00:00"
+      "checked_at": "2026-07-06T00:20:31.877003+00:00"
     },
     "sources": [
       {
         "name": "release_status",
         "path": "data/distrokid_release_status.json",
         "status": "fresh",
-        "age_hours": 60.7,
+        "age_hours": 61.2,
         "max_age_hours": 72,
         "timestamp": "2026-07-03T11:10:52.058673+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin; update data/distrokid_release_status.json when a public URL is verified."
@@ -8344,7 +8346,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
         "name": "scheduled_posts",
         "path": "admin/future-posts.json",
         "status": "fresh",
-        "age_hours": 0.2,
+        "age_hours": 0.7,
         "max_age_hours": 72,
         "timestamp": "2026-07-05T23:40:46.572234+00:00",
         "refresh_command": "python3 scripts/sync_future_posts.py"
@@ -8353,7 +8355,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
         "name": "promo_queue_plan",
         "path": "data/promo_queue_plan.json",
         "status": "fresh",
-        "age_hours": 1.5,
+        "age_hours": 2.0,
         "max_age_hours": 24,
         "timestamp": "2026-07-05T22:21:46.440934+00:00",
         "refresh_command": "python3 scripts/update_promo_engine_status.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
@@ -8362,7 +8364,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
         "name": "published_log",
         "path": "admin/content/Published_Log.csv",
         "status": "fresh",
-        "age_hours": 0.5,
+        "age_hours": 0.9,
         "max_age_hours": 168,
         "timestamp": "2026-07-05T23:26:19.610539+00:00",
         "refresh_command": "Preview Worker export with python3 scripts/export_social_executions.py --dry-run; after review run python3 scripts/export_social_executions.py --refresh-admin. For manual posts, log the public URL with scripts/log_manual_distribution.py.",
@@ -8380,7 +8382,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
         "name": "manual_metrics",
         "path": "data/manual_social_stats.json",
         "status": "stale",
-        "age_hours": 377.0,
+        "age_hours": 377.5,
         "max_age_hours": 72,
         "timestamp": "2026-06-20T06:52:36.456413+00:00",
         "refresh_command": "Update data/manual_social_stats.json with latest manual metrics."
@@ -8389,7 +8391,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
         "name": "live_metrics",
         "path": "data/live_social_metrics.json",
         "status": "fresh",
-        "age_hours": 1.6,
+        "age_hours": 2.0,
         "max_age_hours": 24,
         "timestamp": "2026-07-05T22:20:49.646000+00:00",
         "refresh_command": "python3 scripts/capture_live_metrics.py"
@@ -8398,7 +8400,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
         "name": "metrics_history",
         "path": "data/metrics_history.json",
         "status": "fresh",
-        "age_hours": 1.5,
+        "age_hours": 2.0,
         "max_age_hours": 24,
         "timestamp": "2026-07-05T22:21:46.481666+00:00",
         "refresh_command": "python3 scripts/update_metrics_history.py --refresh-admin"
@@ -8407,7 +8409,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
         "name": "executor_readiness",
         "path": "data/executor_readiness_snapshot.json",
         "status": "fresh",
-        "age_hours": 1.5,
+        "age_hours": 2.0,
         "max_age_hours": 24,
         "timestamp": "2026-07-05T22:21:33.108351+00:00",
         "refresh_command": "python3 scripts/capture_executor_readiness.py && python3 scripts/generate_promo_queue_plan.py && python3 scripts/update_promo_engine_status.py"
@@ -8418,14 +8420,14 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
         "status": "fresh",
         "age_hours": 0.0,
         "max_age_hours": 24,
-        "timestamp": "2026-07-05T23:54:19.536961+00:00",
+        "timestamp": "2026-07-06T00:20:31.877003+00:00",
         "refresh_command": "python3 scripts/verify_pending_store_links.py --refresh-admin"
       },
       {
         "name": "social_executions",
         "path": "data/social_execution_snapshot.json",
         "status": "fresh",
-        "age_hours": 1.5,
+        "age_hours": 2.0,
         "max_age_hours": 24,
         "timestamp": "2026-07-05T22:21:38.887791+00:00",
         "refresh_command": "python3 scripts/capture_social_executions.py && python3 scripts/update_promo_engine_status.py"
@@ -8434,7 +8436,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
         "name": "social_scheduler_dry_run",
         "path": "data/social_scheduler_dry_run.json",
         "status": "fresh",
-        "age_hours": 1.5,
+        "age_hours": 2.0,
         "max_age_hours": 24,
         "timestamp": "2026-07-05T22:21:46.378553+00:00",
         "refresh_command": "python3 scripts/capture_scheduler_dry_run.py && python3 scripts/update_promo_engine_status.py"
@@ -8443,7 +8445,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
         "name": "social_blocker_input_status",
         "path": "data/social_blocker_input_status.json",
         "status": "fresh",
-        "age_hours": 1.5,
+        "age_hours": 2.0,
         "max_age_hours": 24,
         "timestamp": "2026-07-05T22:21:49.079366+00:00",
         "refresh_command": "python3 scripts/build_social_blocker_input_status.py && python3 scripts/update_promo_engine_status.py"
@@ -8452,7 +8454,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
         "name": "promo_refresh_run",
         "path": "data/promo_admin_refresh_run.json",
         "status": "fresh",
-        "age_hours": 1.5,
+        "age_hours": 2.0,
         "max_age_hours": 24,
         "timestamp": "2026-07-05T22:21:52.402722+00:00",
         "refresh_command": "python3 scripts/refresh_promo_admin.py"
@@ -8461,7 +8463,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
         "name": "promo_refresh_workflow_status",
         "path": "data/promo_refresh_workflow_status.json",
         "status": "fresh",
-        "age_hours": 1.5,
+        "age_hours": 2.0,
         "max_age_hours": 24,
         "timestamp": "2026-07-05T22:21:46.973827+00:00",
         "refresh_command": "python3 scripts/capture_github_workflow_status.py && python3 scripts/update_promo_engine_status.py"
@@ -8609,7 +8611,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
             "updated_at": "2026-07-05T22:20:49.759268Z",
             "summary": "Spotify album not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
             "checked_at": "2026-07-05T22:20:49.759268+00:00",
-            "checked_age_hours": 1.6,
+            "checked_age_hours": 2.0,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-07-06T22:20:49.759268+00:00",
             "recheck_due": false,
@@ -8626,7 +8628,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
             "updated_at": "2026-07-05T22:21:10.065976Z",
             "summary": "Apple Music release not found for Lily Roo - Twelve Dollars. Re-run after DistroKid exposes the public release.",
             "checked_at": "2026-07-05T22:21:10.065976+00:00",
-            "checked_age_hours": 1.6,
+            "checked_age_hours": 2.0,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-07-06T22:21:10.065976+00:00",
             "recheck_due": false,
@@ -8643,7 +8645,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
             "updated_at": "2026-07-05T22:21:10.457996Z",
             "summary": "HyperFollow public store buttons are not available yet or the guessed URL is not public.",
             "checked_at": "2026-07-05T22:21:10.457996+00:00",
-            "checked_age_hours": 1.6,
+            "checked_age_hours": 2.0,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-07-06T22:21:10.457996+00:00",
             "recheck_due": false,
@@ -8740,7 +8742,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
             "updated_at": "2026-07-05T22:21:10.536104Z",
             "summary": "YouTube Music release not found for Lily Roo - Analog Myth. Re-run after DistroKid/YouTube Music exposes the public release.",
             "checked_at": "2026-07-05T22:21:10.536104+00:00",
-            "checked_age_hours": 1.6,
+            "checked_age_hours": 2.0,
             "recheck_interval_hours": 24,
             "next_recheck_at": "2026-07-06T22:21:10.536104+00:00",
             "recheck_due": false,
@@ -8786,7 +8788,7 @@ The album page, Echo Thread play-through, and Y",youtube_link,yes,no,,,,,,,queue
     "First handoff step: Fill and import manual metric worksheet — python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
     "Current unlock gate: Fill manual metric worksheet (blocked_until_input); 0 ready, 2 blocked/warning; preview python3 scripts/update_manual_social_stats.py --from-csv --dry-run; see data/promo_unlock_sequence.json.",
     "Review handoff preview health: 1 preview-clean, 2 missing input; see data/human_handoff_resolution_preview.json.",
-    "Refresh automation coverage: latest scheduled run has not covered 7dde4715; dispatch https://github.com/lilyrooartist/lilyrooartist.github.io/actions/workflows/promo-admin-refresh.yml or wait for the next scheduled run.",
+    "Refresh automation coverage: latest scheduled run has not covered c0109cec; dispatch https://github.com/lilyrooartist/lilyrooartist.github.io/actions/workflows/promo-admin-refresh.yml or wait for the next scheduled run.",
     "Refresh manual metrics: 6 worksheet row(s) still need new_value entries (blocked_until_new_values_filled); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values.",
     "Collect experiment results: 84 post-result field(s) need new_value plus evidence_note; use admin/reports/experiment-result-clipboard.md; first priority: measure FP-AUTO-273 on Facebook. Direct preview template: python3 scripts/update_experiment_results.py --post-id FP-AUTO-273 --source-row 32 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run. Direct apply template after review: python3 scripts/update_experiment_results.py --post-id FP-AUTO-273 --source-row 32 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin. Then preview import with python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run after filling data/experiment_result_entry_wide_template.csv.",
     "Re-check checked-pending store links: 4 music site snapshot(s) still have no public URL; next recommended re-check after 2026-07-06T22:20:49.759268+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 --out data/store_verification_run.json --snapshot-root data/store-verification then.",
@@ -23820,6 +23822,141 @@ Generated: 2026-07-05T23:26:38.682764Z
 - Facebook visibility is limited to public page load checks because unauthenticated Facebook pages do not reliably expose post copy.
 - A Facebook page load without an unavailable-content marker is treated as a visibility pass; metric capture still requires Meta API credentials.</script>
 
+
+<script type="application/json" id="embedded-brand-growth-pulse">{
+  "generated_at": "2026-07-06T00:25:05.973467Z",
+  "safe_mode": true,
+  "status": "measurement_waiting_for_credentials",
+  "source": {
+    "brand_growth_readout": "data/brand_growth_readout.json",
+    "brand_growth_preflight": "data/brand_growth_preflight.json",
+    "posting_automation_status": "data/posting_automation_status.json",
+    "brand_campaign_clicks": "data/brand_campaign_clicks.json",
+    "x_post_results": "data/x_post_results.json",
+    "facebook_post_results": "data/facebook_post_results.json"
+  },
+  "summary": {
+    "status": "measurement_waiting_for_credentials",
+    "primary_action": {
+      "state": "measurement_waiting_for_credentials",
+      "label": "Keep posting; connect result metrics when approved",
+      "why": "2 recent posts are ready to measure, but X/Meta result metrics are not connected.",
+      "command": "python3 scripts/capture_brand_campaign_clicks.py && python3 scripts/build_brand_growth_pulse.py",
+      "due_at": "2026-07-06T15:21:00Z"
+    },
+    "active_campaign_ready": true,
+    "posting_preflight_ready": true,
+    "queued_future_posts": 60,
+    "posted_or_measured_rows": 4,
+    "ready_for_metric_capture_rows": 2,
+    "click_count": 0,
+    "click_post_count": 0,
+    "clicks_by_platform": {},
+    "clicks_by_destination": {},
+    "next_post_at": "2026-07-06T10:15:00-04:00",
+    "proof_due_at": "2026-07-06T15:21:00Z",
+    "hours_until_next_post": 13.83,
+    "hours_until_proof_due": 14.93,
+    "missing_metric_credentials": [
+      "FB_PAGE_ID",
+      "META_LONG_LIVED_TOKEN",
+      "X_ACCESS_TOKEN",
+      "X_ACCESS_TOKEN_SECRET",
+      "X_API_KEY",
+      "X_API_SECRET"
+    ],
+    "manual_posting_required": false,
+    "report_path": "admin/reports/brand-growth-pulse.md",
+    "refresh_command": "python3 scripts/build_brand_growth_pulse.py"
+  },
+  "recommendations": [
+    {
+      "label": "Keep posting; connect result metrics when approved",
+      "detail": "2 recent posts are ready to measure, but X/Meta result metrics are not connected.",
+      "command": "python3 scripts/capture_brand_campaign_clicks.py && python3 scripts/build_brand_growth_pulse.py"
+    },
+    {
+      "label": "Preserve the no-manual-posting lane",
+      "detail": "Keep Analog Myth promotion on API-backed X/Facebook rows until another platform has a real automated path.",
+      "command": "python3 scripts/build_posting_automation_status.py"
+    },
+    {
+      "label": "Use click data before changing creative direction",
+      "detail": "First-party link telemetry is ready and privacy-safe; wait for real clicks before ranking tracks by response.",
+      "command": "python3 scripts/capture_brand_campaign_clicks.py"
+    },
+    {
+      "label": "Optional: connect X/Meta result capture",
+      "detail": "This is the only current measurement setup needing help; do it only after explicit approval for secret handling.",
+      "command": "python3 scripts/push_github_actions_secrets.py --name FB_PAGE_ID --name META_LONG_LIVED_TOKEN --name X_ACCESS_TOKEN --name X_ACCESS_TOKEN_SECRET --name X_API_KEY --name X_API_SECRET"
+    }
+  ],
+  "blockers": [
+    {
+      "kind": "credential",
+      "label": "X/Meta result metrics",
+      "detail": "Automatic result counts need approved credential setup before importing views, likes, comments, shares, or saves.",
+      "missing_names": [
+        "FB_PAGE_ID",
+        "META_LONG_LIVED_TOKEN",
+        "X_ACCESS_TOKEN",
+        "X_ACCESS_TOKEN_SECRET",
+        "X_API_KEY",
+        "X_API_SECRET"
+      ],
+      "help_needed": "Confirm before pushing or entering social API secrets anywhere outside the local machine."
+    }
+  ],
+  "guardrails": [
+    "No manual posting is introduced by this pulse.",
+    "Do not solicit subscribers or use audience-target copy in public Lily Roo posts.",
+    "Do not transmit social API secrets without explicit approval for the destination.",
+    "Click telemetry is first-party, aggregate, and does not store IP addresses."
+  ]
+}</script>
+
+
+<script type="text/plain" id="embedded-brand-growth-pulse-report"># Brand Growth Pulse - Lily Roo
+
+Generated: 2026-07-06T00:25:05.973467Z
+
+## Current Pulse
+- Status: **measurement_waiting_for_credentials**
+- Primary action: **Keep posting; connect result metrics when approved**
+- Why: 2 recent posts are ready to measure, but X/Meta result metrics are not connected.
+- Command: `python3 scripts/capture_brand_campaign_clicks.py && python3 scripts/build_brand_growth_pulse.py`
+- Active campaign ready: **True**
+- Posting preflight ready: **True**
+- Future queued posts: **60**
+- Posted or measured rows: **4**
+- Ready for result capture: **2**
+- First-party clicks: **0** across **0** post(s)
+- Next post at: `2026-07-06T10:15:00-04:00`
+- Proof due at: `2026-07-06T15:21:00Z`
+- Hours until next post: `13.83`
+- Hours until proof due: `14.93`
+
+## Recommendations
+- **Keep posting; connect result metrics when approved**: 2 recent posts are ready to measure, but X/Meta result metrics are not connected.
+  - Command: `python3 scripts/capture_brand_campaign_clicks.py && python3 scripts/build_brand_growth_pulse.py`
+- **Preserve the no-manual-posting lane**: Keep Analog Myth promotion on API-backed X/Facebook rows until another platform has a real automated path.
+  - Command: `python3 scripts/build_posting_automation_status.py`
+- **Use click data before changing creative direction**: First-party link telemetry is ready and privacy-safe; wait for real clicks before ranking tracks by response.
+  - Command: `python3 scripts/capture_brand_campaign_clicks.py`
+- **Optional: connect X/Meta result capture**: This is the only current measurement setup needing help; do it only after explicit approval for secret handling.
+  - Command: `python3 scripts/push_github_actions_secrets.py --name FB_PAGE_ID --name META_LONG_LIVED_TOKEN --name X_ACCESS_TOKEN --name X_ACCESS_TOKEN_SECRET --name X_API_KEY --name X_API_SECRET`
+
+## Blockers
+- **X/Meta result metrics**: Automatic result counts need approved credential setup before importing views, likes, comments, shares, or saves.
+  - Missing names: `FB_PAGE_ID, META_LONG_LIVED_TOKEN, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET, X_API_KEY, X_API_SECRET`
+  - Help needed: Confirm before pushing or entering social API secrets anywhere outside the local machine.
+
+## Guardrails
+- No manual posting is introduced by this pulse.
+- Do not solicit subscribers or use audience-target copy in public Lily Roo posts.
+- Do not transmit social API secrets without explicit approval for the destination.
+- Click telemetry is first-party, aggregate, and does not store IP addresses.</script>
+
 <script>
   const ADMIN_AUTH_KEY='lilyroo_admin_password_v1';
   const ADMIN_PASSWORD_DIGEST='24b26ab1e602268c369f95fc3612fd80417c9d0fcb90b965ce8f4b227943c8df';
@@ -23964,6 +24101,7 @@ Generated: 2026-07-05T23:26:38.682764Z
     'reports/backlog-reschedule-preview.md':'embedded-backlog-reschedule-preview-report',
     'reports/platform-repair-status.md':'embedded-platform-repair-report',
     'reports/brand-growth-readout.md':'embedded-brand-growth-readout-report',
+    'reports/brand-growth-pulse.md':'embedded-brand-growth-pulse-report',
     'reports/brand-growth-preflight.md':'embedded-brand-growth-preflight-report',
     'reports/brand-post-visibility.md':'embedded-brand-post-visibility-report',
     'reports/youtube-experiment-public-metrics.md':'embedded-youtube-experiment-public-metrics-report',
@@ -23995,6 +24133,7 @@ Generated: 2026-07-05T23:26:38.682764Z
     'data/backlog_reschedule_preview.json':'embedded-backlog-reschedule-preview',
     'data/platform_repair_status.json':'embedded-platform-repair-status',
     'data/brand_growth_readout.json':'embedded-brand-growth-readout',
+    'data/brand_growth_pulse.json':'embedded-brand-growth-pulse',
     'data/brand_growth_preflight.json':'embedded-brand-growth-preflight',
     'data/brand_post_visibility.json':'embedded-brand-post-visibility'
   };
@@ -27138,10 +27277,22 @@ Generated: 2026-07-05T23:26:38.682764Z
     </article>`;
   }
 
+  function simpleActionStateLabel(value){
+    const raw=String(value||'');
+    if(raw==='measurement_waiting_for_credentials') return 'Waiting for metrics';
+    if(raw==='proof_due') return 'Proof due';
+    if(raw==='measure_posts') return 'Measure posts';
+    if(raw==='learn_from_clicks') return 'Review clicks';
+    if(raw==='campaign_running') return 'Running';
+    if(raw==='posting_needs_check') return 'Needs check';
+    return raw.replaceAll('_',' ') || 'Next';
+  }
+
   function renderSimpleDashboard({
     publishedRows,
     queuePosts,
     brandGrowthReadout,
+    brandGrowthPulse,
     brandGrowthPreflight,
     postingAutomationStatus,
     executions,
@@ -27157,8 +27308,10 @@ Generated: 2026-07-05T23:26:38.682764Z
     if(!statusStrip||!recentRoot||!upcomingRoot) return;
 
     const readoutSummary=brandGrowthReadout?.summary||{};
+    const pulseSummary=brandGrowthPulse?.summary||{};
     const preflightSummary=brandGrowthPreflight?.summary||{};
     const automationSummary=postingAutomationStatus?.summary||{};
+    const primaryAction=pulseSummary.primary_action||{};
     const brandRows=Array.isArray(brandGrowthReadout?.rows)?brandGrowthReadout.rows:[];
     const executionSummary=executions?.summary||{};
     const visibilitySummary=brandPostVisibility?.summary||{};
@@ -27173,17 +27326,19 @@ Generated: 2026-07-05T23:26:38.682764Z
       ...(xResults?.summary?.missing_secret_names||[]),
       ...(facebookResults?.summary?.missing_secret_names||[])
     ];
-    const uniqueMissingSecrets=[...new Set(missingMetricSecrets)];
+    const uniqueMissingSecrets=(pulseSummary.missing_metric_credentials&&pulseSummary.missing_metric_credentials.length)
+      ? pulseSummary.missing_metric_credentials
+      : [...new Set(missingMetricSecrets)];
     const preflightReady=preflightSummary.status==='ready';
-    const campaignReady=Boolean(automationSummary.active_campaign_ready)||preflightReady;
-    const futureCount=Number(readoutSummary.future_queue_visible_rows||futurePosts.length||0);
-    const postedCount=Number(readoutSummary.posted_or_measured_rows||postedRows.length||executionSummary.posted_count||0);
-    const nextDate=readoutSummary.next_scheduled_at||futurePosts[0]?.scheduled_at||nextWindowPosts[0]?.scheduled_at||preflightSummary.scheduled_time||preflightSummary.next_window_date||'';
+    const campaignReady=Boolean(pulseSummary.active_campaign_ready)||Boolean(automationSummary.active_campaign_ready)||preflightReady;
+    const futureCount=Number(pulseSummary.queued_future_posts||readoutSummary.future_queue_visible_rows||futurePosts.length||0);
+    const postedCount=Number(pulseSummary.posted_or_measured_rows||readoutSummary.posted_or_measured_rows||postedRows.length||executionSummary.posted_count||0);
+    const nextDate=pulseSummary.next_post_at||readoutSummary.next_scheduled_at||futurePosts[0]?.scheduled_at||nextWindowPosts[0]?.scheduled_at||preflightSummary.scheduled_time||preflightSummary.next_window_date||'';
     const nextDateLabel=nextDate?formatQueueDate(nextDate):'None queued';
     const visibilityAttentionCount=Number(visibilitySummary.attention_count||visibilityAttentionRows.length||0);
     const nextWindowCount=Number(preflightSummary.expected_post_count||nextWindowPosts.length||0);
-    const clickTrackingReady=readoutSummary.campaign_click_status==='ready';
-    const clickCount=Number(readoutSummary.campaign_click_count||0);
+    const clickTrackingReady=readoutSummary.campaign_click_status==='ready'||pulseSummary.click_count!==undefined;
+    const clickCount=Number(pulseSummary.click_count||readoutSummary.campaign_click_count||0);
     const resultLabel=readyMetricRows.length
       ? `${readyMetricRows.length} to collect`
       : waitingMetricRows.length
@@ -27198,7 +27353,7 @@ Generated: 2026-07-05T23:26:38.682764Z
         : uniqueMissingSecrets.length
           ? 'Connect the result-count APIs before automatic counts can update.'
           : 'No result follow-up is due right now.';
-    const lastUpdated=brandPostVisibility?.generated_at || brandGrowthReadout?.generated_at || brandGrowthPreflight?.generated_at || '';
+    const lastUpdated=brandGrowthPulse?.generated_at || brandPostVisibility?.generated_at || brandGrowthReadout?.generated_at || brandGrowthPreflight?.generated_at || '';
 
     const topClass=campaignReady && !visibilityAttentionCount ? (readyMetricRows.length||uniqueMissingSecrets.length?'warn':'ok') : 'warn';
     const overallLabel=campaignReady && !visibilityAttentionCount ? 'On track' : 'Review';
@@ -27208,10 +27363,10 @@ Generated: 2026-07-05T23:26:38.682764Z
     }
     if(statusCopy){
       const campaignPhrase=campaignReady
-        ? 'Analog Myth promotion is running on the automated X and Facebook lanes.'
-        : 'The next Analog Myth publishing window needs a fresh readiness check.';
+        ? 'Analog Myth promotion is running automatically on X and Facebook.'
+        : 'The next Analog Myth publishing window needs a readiness check.';
       const nextPhrase=nextDate
-        ? `Next scheduled post window starts ${formatQueueDate(nextDate)}.`
+        ? `Next post starts ${formatQueueDate(nextDate)}.`
         : 'No future post window is queued in this snapshot.';
       const metricPhrase=readyMetricRows.length
         ? `${readyMetricRows.length} recent post${readyMetricRows.length===1?' is':'s are'} ready for result counts.`
@@ -27222,16 +27377,19 @@ Generated: 2026-07-05T23:26:38.682764Z
           : 'No result follow-up is due right now.';
       const visibilityPhrase=visibilityAttentionCount
         ? `${visibilityAttentionCount} Facebook link${visibilityAttentionCount===1?' needs':'s need'} a second public-visibility check.`
-        : 'Recent public-link checks look clear.';
-      statusCopy.textContent=`${campaignPhrase} ${nextPhrase} ${postedCount} recent post${postedCount===1?' is':'s are'} logged. ${visibilityPhrase} ${metricPhrase}`;
+        : 'Recent public links are reachable.';
+      const pulsePhrase=primaryAction.label&&primaryAction.why
+        ? `Current read: ${primaryAction.label}. ${primaryAction.why}`
+        : '';
+      statusCopy.textContent=`${campaignPhrase} ${nextPhrase} ${postedCount} recent post${postedCount===1?' is':'s are'} logged. ${visibilityPhrase} ${metricPhrase} ${pulsePhrase}`.replace(/\s+/g,' ').trim();
     }
 
     statusStrip.innerHTML=[
-      simpleStatusCard('Overall', overallLabel, campaignReady?'The active campaign is using automated posting lanes.':'Refresh readiness before trusting the next posting window.', topClass),
-      simpleStatusCard('Posting', campaignReady?'Ready':'Check', `${futureCount} approved Analog Myth post${futureCount===1?'':'s'} queued. Next: ${nextDateLabel}${nextWindowCount?` (${nextWindowCount} in the next window).`:'.'}`, campaignReady?'ok':'warn'),
-      simpleStatusCard('Recent posts', `${postedCount} logged`, clickTrackingReady?`Public links are saved; ${clickCount} first-party click${clickCount===1?'':'s'} recorded.`:'Public links are saved in the published log.', postedCount?'ok':'neutral'),
-      simpleStatusCard('Public links', visibilityAttentionCount?`${visibilityAttentionCount} review`:'Visible', visibilityAttentionCount?'Recheck Facebook visibility before counting reach.':'Recent link checks are clear.', visibilityAttentionCount?'warn':'ok'),
-      simpleStatusCard('Results', resultLabel, resultNote, readyMetricRows.length||uniqueMissingSecrets.length?'warn':'ok')
+      simpleStatusCard('Campaign', overallLabel, campaignReady?'Automated X/Facebook campaign is active.':'Refresh readiness before trusting the next window.', topClass),
+      simpleStatusCard('Next Post', nextDateLabel, `${nextWindowCount||2} post${(nextWindowCount||2)===1?'':'s'} in the next window.`, campaignReady?'ok':'warn'),
+      simpleStatusCard('Recent Results', `${postedCount} logged`, clickTrackingReady?`${clickCount} first-party click${clickCount===1?'':'s'} recorded so far.`:'Public links are saved in the published log.', postedCount?'ok':'neutral'),
+      simpleStatusCard('Links', visibilityAttentionCount?`${visibilityAttentionCount} review`:'Visible', visibilityAttentionCount?'Recheck flagged Facebook links.':'Recent public links are reachable.', visibilityAttentionCount?'warn':'ok'),
+      simpleStatusCard('Measurement', resultLabel, resultNote, readyMetricRows.length||uniqueMissingSecrets.length?'warn':'ok')
     ].join('');
 
     const recentItems=postedRows
@@ -27284,6 +27442,18 @@ Generated: 2026-07-05T23:26:38.682764Z
     recentRoot.innerHTML=recentItems.length?recentItems.join(''):'<div class="muted">No recent activity is logged yet.</div>';
 
     const upcomingItems=[];
+    if(primaryAction.label){
+      const rawState=String(primaryAction.state||pulseSummary.status||'');
+      const stateLabel=simpleActionStateLabel(rawState);
+      const actionClass=rawState.includes('waiting')||rawState.includes('due')?'warn':campaignReady?'ok':'neutral';
+      upcomingItems.push(simpleUpcomingItem(
+        primaryAction.label,
+        primaryAction.due_at ? simpleWhen('Due', primaryAction.due_at) : 'Current next action',
+        primaryAction.why || 'This is the next useful campaign step from the brand growth pulse.',
+        {label:stateLabel,className:actionClass},
+        brandGrowthPulse?.summary?.report_path ? '/admin/reports/brand-growth-pulse.md' : ''
+      ));
+    }
     const nextPosts=nextWindowPosts.length?nextWindowPosts:futurePosts.slice(0,2);
     nextPosts.slice(0,2).forEach(post=>{
       upcomingItems.push(simpleUpcomingItem(
@@ -27409,7 +27579,7 @@ Generated: 2026-07-05T23:26:38.682764Z
 
   async function loadReportsDashboard(){
     if(!document.getElementById('reports-period')) return;
-    const [md,publishedCsv,queuePayload,releaseStatus,promoHealth,promoConsistency,tiktokPreflight,tiktokRunbook,promoPlan,promoOps,publishedLogReconciliation,humanHandoff,promotionBlockers,manualMetricPacket,approvalRunway,scheduledApproval,subscriberCtaAudit,manualDistribution,manualPostingClipboard,experimentResultClipboard,storyThroughputTracking,postingAutomationStatus,socialBlockerInputStatus,activationPlan,backlogPreview,platformRepair,brandGrowthReadout,brandGrowthPreflight,xResults,facebookResults,brandPostVisibility,readinessSnapshot,metrics,executions]=await Promise.all([
+    const [md,publishedCsv,queuePayload,releaseStatus,promoHealth,promoConsistency,tiktokPreflight,tiktokRunbook,promoPlan,promoOps,publishedLogReconciliation,humanHandoff,promotionBlockers,manualMetricPacket,approvalRunway,scheduledApproval,subscriberCtaAudit,manualDistribution,manualPostingClipboard,experimentResultClipboard,storyThroughputTracking,postingAutomationStatus,socialBlockerInputStatus,activationPlan,backlogPreview,platformRepair,brandGrowthReadout,brandGrowthPulse,brandGrowthPreflight,xResults,facebookResults,brandPostVisibility,readinessSnapshot,metrics,executions]=await Promise.all([
       fetchTextOrEmpty(localPath('/admin/reports/weekly-social-report.md')),
       fetchTextOrEmpty(localPath('/admin/content/Published_Log.csv')),
       fetchJsonOr(localPath('/admin/future-posts.json'),{}),
@@ -27437,6 +27607,7 @@ Generated: 2026-07-05T23:26:38.682764Z
       fetchJsonOr(localPath('/data/backlog_reschedule_preview.json'),{}),
       fetchJsonOr(localPath('/data/platform_repair_status.json'),{}),
       fetchJsonOr(localPath('/data/brand_growth_readout.json'),{}),
+      fetchJsonOr(localPath('/data/brand_growth_pulse.json'),{}),
       fetchJsonOr(localPath('/data/brand_growth_preflight.json'),{}),
       fetchJsonOr(localPath('/data/x_post_results.json'),{}),
       fetchJsonOr(localPath('/data/facebook_post_results.json'),{}),
@@ -27457,6 +27628,7 @@ Generated: 2026-07-05T23:26:38.682764Z
       publishedRows,
       queuePosts,
       brandGrowthReadout,
+      brandGrowthPulse,
       brandGrowthPreflight,
       postingAutomationStatus,
       executions,

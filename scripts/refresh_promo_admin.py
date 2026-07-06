@@ -325,6 +325,11 @@ FINALIZE_STEPS = [
         "required": True,
     },
     {
+        "name": "build_brand_growth_pulse",
+        "command": ["python3", "scripts/build_brand_growth_pulse.py"],
+        "required": True,
+    },
+    {
         "name": "build_experiment_publish_runway",
         "command": ["python3", "scripts/build_experiment_publish_runway.py"],
         "required": True,
