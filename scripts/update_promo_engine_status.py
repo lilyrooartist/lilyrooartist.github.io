@@ -2617,6 +2617,23 @@ def active_brand_campaign_next_action(state: dict) -> str:
     return f"Active Analog Myth campaign proof: {state.get('next_action') or 'capture the next proof window'} Preview with {command}."
 
 
+def active_brand_campaign_operational_action(state: dict) -> dict:
+    if not state.get("available") or not state.get("ready"):
+        return {}
+    command = state.get("proof_preview_command") or "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run"
+    return {
+        "label": "Watch active Analog Myth proof window",
+        "command": command,
+        "kind": "brand_growth_proof",
+        "context": {
+            "expected_post_ids": state.get("expected_post_ids") or [],
+            "next_proof_due_at": state.get("next_proof_due_at") or "",
+            "proof_apply_command": state.get("proof_apply_command") or "",
+            "next_action": state.get("next_action") or "",
+        },
+    }
+
+
 def plan_rows_for_release(plan, release_title: str, track_lookup: set[str]):
     rows = []
     for post in plan.get("posts") or []:
@@ -2774,6 +2791,9 @@ def build_status():
     handoff_preview = handoff_resolution_preview_state(handoff_resolution_preview)
     unlock_sequence = promo_unlock_sequence_state(promo_unlock_sequence)
     active_brand_campaign = active_brand_campaign_state(posting_automation_status, brand_growth_readout, brand_growth_preflight)
+    active_brand_operational_action = active_brand_campaign_operational_action(active_brand_campaign)
+    if active_brand_operational_action:
+        operational_next_action = active_brand_operational_action
     manual_distribution = manual_distribution_state(manual_distribution)
     manual_posting_clipboard = manual_posting_clipboard_state(manual_posting_clipboard)
     published_log_reconciliation = published_log_reconciliation_state(published_log_reconciliation)
