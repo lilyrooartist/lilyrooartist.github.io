@@ -1,12 +1,12 @@
 # Experiment Publish Runway - Lily Roo
 
-Generated: 2026-07-07T01:39:00.463424Z
+Generated: 2026-07-07T01:39:41.615008Z
 
 ## Summary
 - Manual rows ready for review: **0**
 - Postable now: **0**
 - Public URLs needed: **0**
-- Pending result fields: **84**
+- Pending result fields: **90**
 - Winner-ready formats: **3 / 3**
 - Blocked platform rows: **0**
 
