@@ -138,15 +138,18 @@ def summarize(payload: dict) -> dict:
     status_counts = Counter(str(item.get("status") or "unknown") for item in results if isinstance(item, dict))
     platform_counts = Counter(str(item.get("platform") or "Unknown") for item in results if isinstance(item, dict))
     would_post = [item for item in results if isinstance(item, dict) and item.get("status") == "would_post"]
+    posted = [item for item in results if isinstance(item, dict) and item.get("status") == "posted"]
     blocked = [item for item in results if isinstance(item, dict) and item.get("status") in {"blocked", "failed", "skipped"}]
     return {
         "due_count": int(payload.get("due_count") or 0) if isinstance(payload, dict) else 0,
         "result_count": len(results),
         "would_post_count": len(would_post),
+        "posted_count": len(posted),
         "blocked_count": len(blocked),
         "status_counts": dict(sorted(status_counts.items())),
         "platform_counts": dict(sorted(platform_counts.items())),
         "would_post": [safe_result(item) for item in would_post],
+        "posted": [safe_result(item) for item in posted],
         "blocked": [safe_result(item) for item in blocked],
     }
 

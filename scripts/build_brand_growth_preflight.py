@@ -349,8 +349,11 @@ def build_payload() -> dict:
     current_scheduler_summary = current_scheduler.get("summary") if isinstance(current_scheduler, dict) else {}
     current_scheduler_summary = current_scheduler_summary if isinstance(current_scheduler_summary, dict) else {}
     would_post_ids = [row.get("post_id") for row in scheduler_summary.get("would_post") or [] if row.get("post_id")]
+    posted_ids = [row.get("post_id") for row in scheduler_summary.get("posted") or [] if row.get("post_id")]
+    satisfied_ids = sorted(set(would_post_ids + posted_ids))
+    expected_satisfied_ids = [post_id for post_id in expected if post_id in satisfied_ids]
     blocked_ids = [row.get("post_id") for row in scheduler_summary.get("blocked") or [] if row.get("post_id")]
-    missing_due = [post_id for post_id in expected if post_id not in would_post_ids]
+    missing_due = [post_id for post_id in expected if post_id not in satisfied_ids]
     unexpected_due = [post_id for post_id in would_post_ids if post_id not in expected]
     checks = link_checks(window["posts"])
     tracking_checks = [item for item in checks if "/go/am.html" in str(item.get("url") or "")]
@@ -366,7 +369,7 @@ def build_payload() -> dict:
     ready = (
         bool(expected)
         and status == 200
-        and scheduler_summary.get("would_post_count") == len(expected)
+        and len(expected_satisfied_ids) == len(expected)
         and scheduler_summary.get("blocked_count") == 0
         and not missing_due
         and not unexpected_due
@@ -397,14 +400,19 @@ def build_payload() -> dict:
             "scheduler_simulated_at": iso_z(scheduled_time),
             "scheduler_simulated_due_count": scheduler_summary.get("due_count", 0),
             "scheduler_simulated_would_post_count": scheduler_summary.get("would_post_count", 0),
+            "scheduler_simulated_posted_count": scheduler_summary.get("posted_count", 0),
+            "scheduler_simulated_satisfied_count": len(expected_satisfied_ids),
             "scheduler_simulated_blocked_count": scheduler_summary.get("blocked_count", 0),
             "scheduler_due_count": scheduler_summary.get("due_count", 0),
             "scheduler_would_post_count": scheduler_summary.get("would_post_count", 0),
+            "scheduler_posted_count": scheduler_summary.get("posted_count", 0),
+            "scheduler_satisfied_count": len(expected_satisfied_ids),
             "scheduler_blocked_count": scheduler_summary.get("blocked_count", 0),
             "current_scheduler_checked_at": current_scheduler.get("updated_at", "") if isinstance(current_scheduler, dict) else "",
             "current_scheduler_requested_scheduled_time": current_scheduler.get("requested_scheduled_time", "") if isinstance(current_scheduler, dict) else "",
             "current_scheduler_due_count": current_scheduler_summary.get("due_count", 0),
             "current_scheduler_would_post_count": current_scheduler_summary.get("would_post_count", 0),
+            "current_scheduler_posted_count": current_scheduler_summary.get("posted_count", 0),
             "current_scheduler_blocked_count": current_scheduler_summary.get("blocked_count", 0),
             "missing_due_ids": missing_due,
             "unexpected_due_ids": unexpected_due,
@@ -447,6 +455,7 @@ def build_payload() -> dict:
             "Preflight is read-only; it calls the scheduler dry-run endpoint and HEAD-checks public URLs.",
             "It does not publish, approve, mutate, or import metrics.",
             "A ready preflight proves only that the next window is executable at the simulated due time.",
+            "Rows already posted by the scheduler count as satisfied for the window; rows not yet sent must still be dry-run eligible.",
             "The current scheduler dry-run is reported separately so the admin does not imply future posts are due before their scheduled window.",
             "DistroKid HyperFollow 403/429 checks are non-blocking warnings because GitHub-hosted probes can be bot-filtered while the browser-visible public link remains the intended listening hub.",
             "YouTube 429 link checks are non-blocking warnings because GitHub-hosted probes can be rate-limited while the scheduler and Lily Roo-hosted links remain ready.",
@@ -466,8 +475,8 @@ def build_markdown(payload: dict) -> str:
         f"- Status: **{summary['status']}**",
         f"- Next window: **{summary.get('next_window_date') or 'n/a'}** at `{summary.get('scheduled_time') or 'n/a'}`",
         f"- Expected posts: **{summary.get('expected_post_count', 0)}**",
-        f"- Scheduler simulation: HTTP **{summary.get('scheduler_http_status')}**, auth `{summary.get('scheduler_auth_method')}`, simulated at `{summary.get('scheduler_simulated_at') or 'n/a'}`, due **{summary.get('scheduler_simulated_due_count')}**, would post **{summary.get('scheduler_simulated_would_post_count')}**, blocked **{summary.get('scheduler_simulated_blocked_count')}**",
-        f"- Current scheduler snapshot: checked `{summary.get('current_scheduler_checked_at') or 'n/a'}`, requested `{summary.get('current_scheduler_requested_scheduled_time') or 'n/a'}`, due **{summary.get('current_scheduler_due_count')}**, would post **{summary.get('current_scheduler_would_post_count')}**, blocked **{summary.get('current_scheduler_blocked_count')}**",
+        f"- Scheduler simulation: HTTP **{summary.get('scheduler_http_status')}**, auth `{summary.get('scheduler_auth_method')}`, simulated at `{summary.get('scheduler_simulated_at') or 'n/a'}`, due **{summary.get('scheduler_simulated_due_count')}**, satisfied **{summary.get('scheduler_simulated_satisfied_count', 0)}**, would post **{summary.get('scheduler_simulated_would_post_count')}**, posted **{summary.get('scheduler_simulated_posted_count', 0)}**, blocked **{summary.get('scheduler_simulated_blocked_count')}**",
+        f"- Current scheduler snapshot: checked `{summary.get('current_scheduler_checked_at') or 'n/a'}`, requested `{summary.get('current_scheduler_requested_scheduled_time') or 'n/a'}`, due **{summary.get('current_scheduler_due_count')}**, would post **{summary.get('current_scheduler_would_post_count')}**, posted **{summary.get('current_scheduler_posted_count', 0)}**, blocked **{summary.get('current_scheduler_blocked_count')}**",
         f"- Link checks: **{summary.get('link_ok_count')} ok**, **{summary.get('link_failed_count')} failed**, **{summary.get('link_warning_count', 0)} warning**, **{summary.get('link_blocking_failed_count', summary.get('link_failed_count', 0))} blocking failed**",
         f"- Tracking redirects: **{summary.get('tracking_link_ok_count', 0)} / {summary.get('expected_tracking_link_check_count', 0)} checked ok**",
         f"- Redirect targets: **{summary.get('target_link_check_count', 0)} / {summary.get('expected_target_link_check_count', 0)} checked**, **{summary.get('target_link_ok_count', 0)} ok**, **{summary.get('target_link_warning_count', 0)} warning**, **{summary.get('target_link_blocking_failed_count', 0)} blocking failed**",
