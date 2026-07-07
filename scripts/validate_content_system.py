@@ -467,6 +467,7 @@ def validate_generated_outputs(failures):
         site_music = tracking.get("site_music") or {}
         site_album = tracking.get("site_album") or {}
         site_lyrics = tracking.get("site_lyrics") or {}
+        preview_cards = tracking.get("preview_cards") or {}
         if (
             tracking.get("safe_mode") is True
             and summary.get("status") == "ready"
@@ -509,11 +510,18 @@ def validate_generated_outputs(failures):
             and summary.get("site_lyrics_url_count") == summary.get("expected_site_lyrics_url_count")
             and summary.get("site_lyrics_endpoint_status") == "ready"
             and site_lyrics.get("status") == "ready"
+            and summary.get("preview_card_status") == "ready"
+            and summary.get("preview_card_ready_count") == summary.get("expected_preview_card_count") == 6
+            and not summary.get("preview_card_issue_counts")
+            and preview_cards.get("status") == "ready"
+            and preview_cards.get("ready_page_count") == preview_cards.get("expected_page_count") == 6
+            and not preview_cards.get("issue_counts")
+            and all(row.get("status") == "ready" and row.get("og_image_alt") and row.get("image_exists") is True for row in preview_cards.get("rows") or [])
             and BRAND_CLICK_TRACKING_HEALTH_REPORT.exists()
         ):
-            ok("brand click tracking health verifies future campaign links, homepage/podcast/music/album/lyric CTAs, visible album paths, and live dry-run capture")
+            ok("brand click tracking health verifies future campaign links, preview cards, homepage/podcast/music/album/lyric CTAs, visible album paths, and live dry-run capture")
         else:
-            fail("brand_click_tracking_health.json does not prove all future campaign links, homepage/podcast/music/album/lyric CTAs, and dry-run click capture are ready", failures)
+            fail("brand_click_tracking_health.json does not prove all future campaign links, preview cards, homepage/podcast/music/album/lyric CTAs, and dry-run click capture are ready", failures)
     else:
         fail("brand_click_tracking_health.json missing; run scripts/build_brand_click_tracking_health.py", failures)
     if BRAND_GROWTH_PULSE.exists():
@@ -5153,6 +5161,10 @@ def validate_analog_myth_launch_share(failures):
         "site_podcast_endpoint_status",
         "site_music_endpoint_status",
         "site_album_endpoint_status",
+        "PREVIEW_PAGES",
+        "preview_card_health",
+        "Preview Card Health",
+        "preview_card_status",
         "site-home-hero-album",
         "site-home-follow-youtube",
         "site-podcast-hero-album",

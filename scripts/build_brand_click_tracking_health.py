@@ -8,6 +8,7 @@ import urllib.error
 import urllib.request
 from collections import Counter
 from datetime import datetime, timezone
+from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import parse_qs, quote, urlparse
 
@@ -105,6 +106,38 @@ SITE_ALBUM_EXPECTED = {
 SITE_LYRICS_DESTINATIONS = ("album", "listen", "echo")
 CLICK_DRY_RUN_BASE = "https://www.lilyroo.com/api/social/click"
 CLICK_DRY_RUN_USER_AGENT = "LilyRooClickDryRun/1.0"
+PREVIEW_PAGES = {
+    "campaign_redirect": {
+        "path": REDIRECT,
+        "canonical": "https://www.lilyroo.com/analog-myth.html",
+        "expected_title": "Analog Myth - Lily Roo",
+    },
+    "home": {
+        "path": HOME_PAGE,
+        "canonical": "https://www.lilyroo.com/",
+        "expected_title": "Analog Myth - Lily Roo",
+    },
+    "album": {
+        "path": ANALOG_MYTH_PAGE,
+        "canonical": "https://www.lilyroo.com/analog-myth.html",
+        "expected_title": "Analog Myth - Lily Roo",
+    },
+    "podcast": {
+        "path": PODCAST_PAGE,
+        "canonical": "https://www.lilyroo.com/podcasts/analog-myth.html",
+        "expected_title": "Analog Myth: The Clock Cannot Explain This",
+    },
+    "music_catalog": {
+        "path": MUSIC_PAGE,
+        "canonical": "https://www.lilyroo.com/music.html",
+        "expected_title": "Lily Roo Archive",
+    },
+    "lyrics_index": {
+        "path": LYRICS_DIR / "index.html",
+        "canonical": "https://www.lilyroo.com/lyrics/",
+        "expected_title": "Lily Roo Lyrics",
+    },
+}
 
 
 def read_csv(path: Path) -> list[dict]:
@@ -125,6 +158,153 @@ def rel(path: Path) -> str:
         return str(path.relative_to(ROOT))
     except ValueError:
         return str(path)
+
+
+class HeadMetadataParser(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__()
+        self.in_head = False
+        self.meta: dict[str, str] = {}
+        self.links: dict[str, str] = {}
+        self.title = ""
+        self._capture_title = False
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        if tag.lower() == "head":
+            self.in_head = True
+            return
+        if not self.in_head:
+            return
+        attr = {key.lower(): value or "" for key, value in attrs}
+        lower_tag = tag.lower()
+        if lower_tag == "meta":
+            key = attr.get("property") or attr.get("name")
+            content = attr.get("content") or ""
+            if key and content and key not in self.meta:
+                self.meta[key] = content
+        elif lower_tag == "link":
+            rel_value = attr.get("rel", "").lower()
+            href = attr.get("href") or ""
+            if rel_value and href and rel_value not in self.links:
+                self.links[rel_value] = href
+        elif lower_tag == "title":
+            self._capture_title = True
+
+    def handle_endtag(self, tag: str) -> None:
+        lower_tag = tag.lower()
+        if lower_tag == "head":
+            self.in_head = False
+        elif lower_tag == "title":
+            self._capture_title = False
+
+    def handle_data(self, data: str) -> None:
+        if self._capture_title:
+            self.title += data
+
+
+def local_asset_from_url(url: str) -> Path | None:
+    parsed = urlparse(url)
+    if parsed.scheme != "https" or parsed.netloc != TRACKING_HOST:
+        return None
+    return ROOT / parsed.path.lstrip("/")
+
+
+def preview_card_health() -> dict:
+    rows = []
+    issue_counts = Counter()
+    required_meta = [
+        "og:title",
+        "og:description",
+        "og:url",
+        "og:image",
+        "og:image:alt",
+        "twitter:card",
+        "twitter:title",
+        "twitter:description",
+        "twitter:image",
+    ]
+    for page_id, expected in PREVIEW_PAGES.items():
+        path = expected["path"]
+        issues: list[str] = []
+        if not path.exists():
+            issues.append("preview_page_missing")
+            rows.append({
+                "id": page_id,
+                "path": rel(path),
+                "status": "attention",
+                "canonical": "",
+                "og_title": "",
+                "og_description": "",
+                "og_image": "",
+                "issues": issues,
+            })
+            issue_counts.update(issues)
+            continue
+        parser = HeadMetadataParser()
+        text = path.read_text(encoding="utf-8")
+        parser.feed(text)
+        canonical = parser.links.get("canonical") or ""
+        meta = parser.meta
+        missing_meta = [key for key in required_meta if not meta.get(key)]
+        issues.extend(f"missing_{key.replace(':', '_')}" for key in missing_meta)
+        title = meta.get("og:title") or ""
+        description = meta.get("og:description") or ""
+        image = meta.get("og:image") or ""
+        twitter_card = meta.get("twitter:card") or ""
+        image_path = local_asset_from_url(image)
+        image_exists = bool(image_path and image_path.exists() and image_path.stat().st_size > 0)
+        if canonical != expected["canonical"]:
+            issues.append("canonical_mismatch")
+        if meta.get("og:url") != expected["canonical"]:
+            issues.append("og_url_mismatch")
+        if title != expected["expected_title"]:
+            issues.append("og_title_mismatch")
+        if meta.get("twitter:title") != title:
+            issues.append("twitter_title_mismatch")
+        if meta.get("twitter:description") != description:
+            issues.append("twitter_description_mismatch")
+        if meta.get("twitter:image") != image:
+            issues.append("twitter_image_mismatch")
+        if twitter_card != "summary_large_image":
+            issues.append("twitter_card_not_large_image")
+        if len(title) < 6 or len(title) > 80:
+            issues.append("preview_title_length")
+        if len(description) < 40 or len(description) > 220:
+            issues.append("preview_description_length")
+        if not image.startswith(f"https://{TRACKING_HOST}/"):
+            issues.append("preview_image_not_first_party")
+        if not image_exists:
+            issues.append("preview_image_missing")
+        for issue in sorted(set(issues)):
+            issue_counts[issue] += 1
+        rows.append({
+            "id": page_id,
+            "path": rel(path),
+            "status": "ready" if not issues else "attention",
+            "canonical": canonical,
+            "expected_canonical": expected["canonical"],
+            "html_title": parser.title.strip(),
+            "og_title": title,
+            "og_description": description,
+            "og_url": meta.get("og:url") or "",
+            "og_image": image,
+            "og_image_alt": meta.get("og:image:alt") or "",
+            "twitter_card": twitter_card,
+            "twitter_title": meta.get("twitter:title") or "",
+            "twitter_description": meta.get("twitter:description") or "",
+            "twitter_image": meta.get("twitter:image") or "",
+            "image_exists": image_exists,
+            "issues": sorted(set(issues)),
+        })
+    ready_count = sum(1 for row in rows if row["status"] == "ready")
+    return {
+        "status": "ready" if rows and ready_count == len(rows) and not issue_counts else "attention",
+        "expected_page_count": len(PREVIEW_PAGES),
+        "page_count": len(rows),
+        "ready_page_count": ready_count,
+        "issue_counts": dict(sorted(issue_counts.items())),
+        "rows": rows,
+    }
 
 
 def post_parts(post_id: str) -> dict:
@@ -664,6 +844,7 @@ def build_payload() -> dict:
         "site-lyrics-index-album",
         "album",
     )
+    preview_cards = preview_card_health()
     ready_rows = sum(1 for row in rows if row["ok"])
     broken_rows = len(rows) - ready_rows
     total_urls = sum(row["tracking_url_count"] for row in rows)
@@ -683,6 +864,7 @@ def build_payload() -> dict:
             and site_music["status"] == "ready"
             and site_album["status"] == "ready"
             and site_lyrics["status"] == "ready"
+            and preview_cards["status"] == "ready"
         )
         else "attention"
     )
@@ -746,6 +928,10 @@ def build_payload() -> dict:
             "site_lyrics_url_count": site_lyrics["url_count"],
             "expected_site_lyrics_url_count": site_lyrics["expected_url_count"],
             "site_lyrics_endpoint_status": site_lyrics["click_endpoint"].get("status"),
+            "preview_card_status": preview_cards["status"],
+            "preview_card_ready_count": preview_cards["ready_page_count"],
+            "expected_preview_card_count": preview_cards["expected_page_count"],
+            "preview_card_issue_counts": preview_cards["issue_counts"],
             "report_path": rel(REPORT),
             "refresh_command": "python3 scripts/build_brand_click_tracking_health.py",
         },
@@ -757,6 +943,7 @@ def build_payload() -> dict:
         "site_music": site_music,
         "site_album": site_album,
         "site_lyrics": site_lyrics,
+        "preview_cards": preview_cards,
         "rows": rows,
         "guardrails": [
             "This check is read-only and does not post.",
@@ -771,6 +958,7 @@ def build_payload() -> dict:
             "Music catalog Analog Myth CTAs should use first-party site-music tracking links.",
             "Analog Myth album-page CTAs should use first-party site-album tracking links.",
             "Lyric pages should use first-party site-lyrics tracking links for album, listening-link, and Echo Thread handoffs.",
+            "Campaign destination pages should carry complete first-party preview-card metadata before automatic posts drive traffic to them.",
             "The live click endpoint health probe uses dry_run=1 so it cannot create fake campaign clicks.",
         ],
     }
@@ -804,6 +992,7 @@ def build_markdown(payload: dict) -> str:
         f"- Album page endpoint dry run: **{summary['site_album_endpoint_status']}**",
         f"- Lyric page CTA tracking: **{summary['site_lyrics_status']}** ({summary['site_lyrics_url_count']} / {summary['expected_site_lyrics_url_count']})",
         f"- Lyric page endpoint dry run: **{summary['site_lyrics_endpoint_status']}**",
+        f"- Preview cards: **{summary['preview_card_status']}** ({summary['preview_card_ready_count']} / {summary['expected_preview_card_count']})",
         f"- Destinations: **{', '.join(f'{key}: {value}' for key, value in summary['destination_counts'].items()) or 'none'}**",
         f"- Issues: **{', '.join(f'{key}: {value}' for key, value in summary['issue_counts'].items()) or 'none'}**",
         "",
@@ -916,6 +1105,21 @@ def build_markdown(payload: dict) -> str:
         )
     if len(lyric_rows) > 18:
         lines.append(f"- ...and **{len(lyric_rows) - 18}** more lyric CTA links.")
+    preview_cards = payload.get("preview_cards") or {}
+    lines.extend([
+        "",
+        "## Preview Card Health",
+        f"- Status: **{preview_cards.get('status') or 'unknown'}**",
+        f"- Pages ready: **{preview_cards.get('ready_page_count', 0)} / {preview_cards.get('expected_page_count', 0)}**",
+        f"- Issues: **{', '.join(f'{key}: {value}' for key, value in (preview_cards.get('issue_counts') or {}).items()) or 'none'}**",
+    ])
+    for row in preview_cards.get("rows") or []:
+        lines.append(
+            f"- `{row.get('id') or 'unknown'}` `{row.get('path') or 'unknown'}`: "
+            f"**{row.get('status') or 'unknown'}** - {row.get('og_title') or 'missing title'}"
+        )
+        if row.get("issues"):
+            lines.append(f"  - Issues: `{', '.join(row['issues'])}`")
     lines.extend(["", "## Future Rows"])
     for row in payload["rows"]:
         lines.append(

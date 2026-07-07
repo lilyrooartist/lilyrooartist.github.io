@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-07T00:54:35.488359Z",
+  "generated_at": "2026-07-07T00:59:20.583040Z",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -78,6 +78,10 @@
     "site_lyrics_url_count": 75,
     "expected_site_lyrics_url_count": 75,
     "site_lyrics_endpoint_status": "ready",
+    "preview_card_status": "ready",
+    "preview_card_ready_count": 6,
+    "expected_preview_card_count": 6,
+    "preview_card_issue_counts": {},
     "report_path": "admin/reports/brand-click-tracking-health.md",
     "refresh_command": "python3 scripts/build_brand_click_tracking_health.py"
   },
@@ -120,7 +124,7 @@
     "wave": "track-moments",
     "track": "04",
     "destination": "album",
-    "recorded_at": "2026-07-07T00:54:35.530Z"
+    "recorded_at": "2026-07-07T00:59:20.761Z"
   },
   "site_share": {
     "status": "ready",
@@ -143,7 +147,7 @@
       "wave": "site-share",
       "track": "",
       "destination": "album",
-      "recorded_at": "2026-07-07T00:54:35.583Z"
+      "recorded_at": "2026-07-07T00:59:20.850Z"
     },
     "rows": [
       {
@@ -256,7 +260,7 @@
       "wave": "site-home",
       "track": "",
       "destination": "album",
-      "recorded_at": "2026-07-07T00:54:35.627Z"
+      "recorded_at": "2026-07-07T00:59:20.963Z"
     },
     "rows": [
       {
@@ -481,7 +485,7 @@
       "wave": "site-podcast",
       "track": "",
       "destination": "album",
-      "recorded_at": "2026-07-07T00:54:35.692Z"
+      "recorded_at": "2026-07-07T00:59:21.062Z"
     },
     "rows": [
       {
@@ -586,7 +590,7 @@
       "wave": "site-music",
       "track": "",
       "destination": "album",
-      "recorded_at": "2026-07-07T00:54:35.768Z"
+      "recorded_at": "2026-07-07T00:59:21.166Z"
     },
     "rows": [
       {
@@ -659,7 +663,7 @@
       "wave": "site-album",
       "track": "",
       "destination": "listen",
-      "recorded_at": "2026-07-07T00:54:35.821Z"
+      "recorded_at": "2026-07-07T00:59:21.282Z"
     },
     "rows": [
       {
@@ -764,7 +768,7 @@
       "wave": "site-lyrics",
       "track": "",
       "destination": "album",
-      "recorded_at": "2026-07-07T00:54:35.874Z"
+      "recorded_at": "2026-07-07T00:59:21.396Z"
     },
     "rows": [
       {
@@ -1365,6 +1369,129 @@
         "destination": "echo",
         "anchor": "",
         "ok": true,
+        "issues": []
+      }
+    ]
+  },
+  "preview_cards": {
+    "status": "ready",
+    "expected_page_count": 6,
+    "page_count": 6,
+    "ready_page_count": 6,
+    "issue_counts": {},
+    "rows": [
+      {
+        "id": "campaign_redirect",
+        "path": "go/am.html",
+        "status": "ready",
+        "canonical": "https://www.lilyroo.com/analog-myth.html",
+        "expected_canonical": "https://www.lilyroo.com/analog-myth.html",
+        "html_title": "Analog Myth - Lily Roo",
+        "og_title": "Analog Myth - Lily Roo",
+        "og_description": "Eight tracks, one broken clock, and the Echo Thread play-through with the songs in the room.",
+        "og_url": "https://www.lilyroo.com/analog-myth.html",
+        "og_image": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
+        "og_image_alt": "Analog Myth cover art by Lily Roo",
+        "twitter_card": "summary_large_image",
+        "twitter_title": "Analog Myth - Lily Roo",
+        "twitter_description": "Eight tracks, one broken clock, and the Echo Thread play-through with the songs in the room.",
+        "twitter_image": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
+        "image_exists": true,
+        "issues": []
+      },
+      {
+        "id": "home",
+        "path": "index.html",
+        "status": "ready",
+        "canonical": "https://www.lilyroo.com/",
+        "expected_canonical": "https://www.lilyroo.com/",
+        "html_title": "Analog Myth | Lily Roo",
+        "og_title": "Analog Myth - Lily Roo",
+        "og_description": "Analog Myth is live now. Open the verified listening links, hear the podcast, and watch the remastered album playlist.",
+        "og_url": "https://www.lilyroo.com/",
+        "og_image": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
+        "og_image_alt": "Analog Myth cover art by Lily Roo",
+        "twitter_card": "summary_large_image",
+        "twitter_title": "Analog Myth - Lily Roo",
+        "twitter_description": "Analog Myth is live now. Open the verified listening links, hear the podcast, and watch the remastered album playlist.",
+        "twitter_image": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
+        "image_exists": true,
+        "issues": []
+      },
+      {
+        "id": "album",
+        "path": "analog-myth.html",
+        "status": "ready",
+        "canonical": "https://www.lilyroo.com/analog-myth.html",
+        "expected_canonical": "https://www.lilyroo.com/analog-myth.html",
+        "html_title": "Analog Myth Album | Lily Roo",
+        "og_title": "Analog Myth - Lily Roo",
+        "og_description": "Eight tracks about broken clocks, old rooms, and the light you bring back anyway.",
+        "og_url": "https://www.lilyroo.com/analog-myth.html",
+        "og_image": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
+        "og_image_alt": "Analog Myth cover art by Lily Roo",
+        "twitter_card": "summary_large_image",
+        "twitter_title": "Analog Myth - Lily Roo",
+        "twitter_description": "Eight tracks about broken clocks, old rooms, and the light you bring back anyway.",
+        "twitter_image": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
+        "image_exists": true,
+        "issues": []
+      },
+      {
+        "id": "podcast",
+        "path": "podcasts/analog-myth.html",
+        "status": "ready",
+        "canonical": "https://www.lilyroo.com/podcasts/analog-myth.html",
+        "expected_canonical": "https://www.lilyroo.com/podcasts/analog-myth.html",
+        "html_title": "Analog Myth: The Clock Cannot Explain This | Lily Roo",
+        "og_title": "Analog Myth: The Clock Cannot Explain This",
+        "og_description": "A Jasper Fields and Lily Roo track-by-track podcast episode for Analog Myth.",
+        "og_url": "https://www.lilyroo.com/podcasts/analog-myth.html",
+        "og_image": "https://www.lilyroo.com/assets/podcasts/analog-myth/analog-myth-podcast-poster.jpg",
+        "og_image_alt": "Analog Myth Echo Thread podcast poster for Lily Roo",
+        "twitter_card": "summary_large_image",
+        "twitter_title": "Analog Myth: The Clock Cannot Explain This",
+        "twitter_description": "A Jasper Fields and Lily Roo track-by-track podcast episode for Analog Myth.",
+        "twitter_image": "https://www.lilyroo.com/assets/podcasts/analog-myth/analog-myth-podcast-poster.jpg",
+        "image_exists": true,
+        "issues": []
+      },
+      {
+        "id": "music_catalog",
+        "path": "music.html",
+        "status": "ready",
+        "canonical": "https://www.lilyroo.com/music.html",
+        "expected_canonical": "https://www.lilyroo.com/music.html",
+        "html_title": "Archive — Lily Roo",
+        "og_title": "Lily Roo Archive",
+        "og_description": "Songs, albums, lyrics, videos, and Echo Thread podcast transmissions from Lily Roo.",
+        "og_url": "https://www.lilyroo.com/music.html",
+        "og_image": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
+        "og_image_alt": "Analog Myth cover art by Lily Roo",
+        "twitter_card": "summary_large_image",
+        "twitter_title": "Lily Roo Archive",
+        "twitter_description": "Songs, albums, lyrics, videos, and Echo Thread podcast transmissions from Lily Roo.",
+        "twitter_image": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
+        "image_exists": true,
+        "issues": []
+      },
+      {
+        "id": "lyrics_index",
+        "path": "lyrics/index.html",
+        "status": "ready",
+        "canonical": "https://www.lilyroo.com/lyrics/",
+        "expected_canonical": "https://www.lilyroo.com/lyrics/",
+        "html_title": "Lily Roo Lyrics - Lily Roo",
+        "og_title": "Lily Roo Lyrics",
+        "og_description": "Lily Roo lyric archive for Analog Myth, Twelve Dollars, and I Learned It All in Fifteen Seconds.",
+        "og_url": "https://www.lilyroo.com/lyrics/",
+        "og_image": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
+        "og_image_alt": "Analog Myth cover art by Lily Roo",
+        "twitter_card": "summary_large_image",
+        "twitter_title": "Lily Roo Lyrics",
+        "twitter_description": "Lily Roo lyric archive for Analog Myth, Twelve Dollars, and I Learned It All in Fifteen Seconds.",
+        "twitter_image": "https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg",
+        "image_exists": true,
         "issues": []
       }
     ]
@@ -4603,6 +4730,7 @@
     "Music catalog Analog Myth CTAs should use first-party site-music tracking links.",
     "Analog Myth album-page CTAs should use first-party site-album tracking links.",
     "Lyric pages should use first-party site-lyrics tracking links for album, listening-link, and Echo Thread handoffs.",
+    "Campaign destination pages should carry complete first-party preview-card metadata before automatic posts drive traffic to them.",
     "The live click endpoint health probe uses dry_run=1 so it cannot create fake campaign clicks."
   ]
 }

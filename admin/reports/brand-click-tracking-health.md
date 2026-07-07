@@ -1,6 +1,6 @@
 # Brand Click Tracking Health - Lily Roo
 
-Generated: 2026-07-07T00:54:35.488359Z
+Generated: 2026-07-07T00:59:20.583040Z
 
 ## Summary
 - Status: **ready**
@@ -23,6 +23,7 @@ Generated: 2026-07-07T00:54:35.488359Z
 - Album page endpoint dry run: **ready**
 - Lyric page CTA tracking: **ready** (75 / 75)
 - Lyric page endpoint dry run: **ready**
+- Preview cards: **ready** (6 / 6)
 - Destinations: **album: 58, echo: 58, video: 58**
 - Issues: **none**
 
@@ -178,6 +179,17 @@ Generated: 2026-07-07T00:54:35.488359Z
 - `site-lyrics-girls-camp-listen` -> `listen`: **ready**
 - `site-lyrics-girls-camp-echo` -> `echo`: **ready**
 - ...and **57** more lyric CTA links.
+
+## Preview Card Health
+- Status: **ready**
+- Pages ready: **6 / 6**
+- Issues: **none**
+- `campaign_redirect` `go/am.html`: **ready** - Analog Myth - Lily Roo
+- `home` `index.html`: **ready** - Analog Myth - Lily Roo
+- `album` `analog-myth.html`: **ready** - Analog Myth - Lily Roo
+- `podcast` `podcasts/analog-myth.html`: **ready** - Analog Myth: The Clock Cannot Explain This
+- `music_catalog` `music.html`: **ready** - Lily Roo Archive
+- `lyrics_index` `lyrics/index.html`: **ready** - Lily Roo Lyrics
 
 ## Future Rows
 - `FP-BRAND-AM-04-SPILLING-THE-TEA-X` X 2026-07-07T10:15:00-04:00 - **ready** (3 links)
@@ -397,4 +409,5 @@ Generated: 2026-07-07T00:54:35.488359Z
 - Music catalog Analog Myth CTAs should use first-party site-music tracking links.
 - Analog Myth album-page CTAs should use first-party site-album tracking links.
 - Lyric pages should use first-party site-lyrics tracking links for album, listening-link, and Echo Thread handoffs.
+- Campaign destination pages should carry complete first-party preview-card metadata before automatic posts drive traffic to them.
 - The live click endpoint health probe uses dry_run=1 so it cannot create fake campaign clicks.
