@@ -235,10 +235,10 @@ def build_checks() -> dict:
         severity="medium",
     ))
     checks.append(same_value(
-        "manual_metric_batch_count_matches_ledger",
+        "manual_metric_optional_input_count_matches_packet",
         int((manual_metrics.get("summary") or {}).get("priority_batch_count") or 0),
-        category_count(ledger, "manual_metrics"),
-        "Manual metric priority batch count should match manual metric blockers.",
+        len(ledger.get("optional_measurement_inputs") or []),
+        "Manual metric priority batches should remain available as optional measurement inputs, not blockers.",
         severity="medium",
     ))
     checks.append(same_value(

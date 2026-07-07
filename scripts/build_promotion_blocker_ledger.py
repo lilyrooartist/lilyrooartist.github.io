@@ -230,13 +230,14 @@ def add_manual_distribution(rows: list[dict]) -> None:
         ))
 
 
-def add_manual_metrics(rows: list[dict]) -> None:
+def optional_manual_metrics() -> list[dict]:
     packet = read_json(MANUAL_METRICS, {})
     summary = packet.get("summary") or {}
+    optional_rows: list[dict] = []
     for item in packet.get("priority_batches") or []:
         fields = [f"{field.get('platform')}.{field.get('field')}" for field in item.get("fields") or [] if field.get("platform") and field.get("field")]
         priority = int(item.get("priority") or 4)
-        rows.append(row(
+        optional_rows.append(row(
             blocker_id=f"metrics-priority-{priority}",
             title=f"Fill priority {priority} metrics: {item.get('label') or 'manual metrics'}",
             category="manual_metrics",
@@ -262,6 +263,7 @@ def add_manual_metrics(rows: list[dict]) -> None:
                 "csv_rows": item.get("csv_rows") or [],
             },
         ))
+    return optional_rows
 
 
 def add_backlog(rows: list[dict]) -> None:
@@ -329,15 +331,16 @@ def build_unlock_roadmap(rows: list[dict], projection: dict) -> list[dict]:
     checked_effect = scheduled_summary.get("checked_batch_effect") or {}
     checked_change_count = int(checked_effect.get("change_count") or 0)
     checked_ids = projection.get("checked_ids") or scheduled_summary.get("checked_batch_ids") or []
-    approval_status = "ready_for_review" if checked_ids else "blocked"
+    approval_blockers = int(scheduled_summary.get("approval_blocker_count") or 0)
+    approval_status = "ready_for_review" if checked_ids else ("blocked" if approval_blockers else "clear")
     if checked_ids and checked_change_count == 0:
         approval_status = "completed"
     platform_repair = read_json(PLATFORM_REPAIR, {})
     backlog = read_json(BACKLOG_RESCHEDULE, {})
     metrics = read_json(MANUAL_METRICS, {})
-    metric_docket = metrics.get("metric_collection_docket") or {}
     metric_summary = metrics.get("summary") or {}
     metric_batches = metrics.get("priority_batches") or []
+    metric_pending = int(metric_summary.get("pending_field_count") or 0)
     platform_rows = platform_repair.get("rows") or []
     tiktok_rows = [item for item in platform_rows if str(item.get("platform") or "").lower() == "tiktok"]
     backlog_summary = backlog.get("summary") or {}
@@ -421,20 +424,22 @@ def build_unlock_roadmap(rows: list[dict], projection: dict) -> list[dict]:
         },
         {
             "id": "unlock-manual-metrics",
-            "phase": "Fill manual metric worksheet",
-            "status": metric_docket.get("status") or "unknown",
+            "phase": "Optional: fill private metric worksheet",
+            "status": "optional_input" if metric_pending else "clear",
             "owner": "tod",
-            "blockers_resolved": int(metric_summary.get("pending_field_count") or 0),
+            "blockers_resolved": 0,
+            "measurement_field_count": metric_pending,
             "unlocks": [
-                "Admin health and weekly reporting can use fresh cross-platform metrics.",
-                "Manual metric blockers clear once worksheet values are imported.",
+                "Admin health and weekly reporting get sharper private-analytics context.",
+                "Automated Analog Myth posting, proof export, and click learning continue without these values.",
             ],
             "blocked_by": [f"P{batch.get('priority')} {batch.get('label')}:{batch.get('waiting_count')}" for batch in metric_batches if batch.get("waiting_count")],
             "batch_count": int(metric_summary.get("priority_batch_count") or len(metric_batches)),
-            "field_count": int(metric_summary.get("pending_field_count") or 0),
-            "preview_command": metric_docket.get("worksheet_import_preview_command") or "",
-            "apply_command": metric_docket.get("worksheet_import_command") or "",
+            "field_count": metric_pending,
+            "preview_command": "",
+            "apply_command": "",
             "source_path": str(MANUAL_METRICS.relative_to(ROOT)),
+            "guardrail": "Private analytics are optional measurement inputs, not blockers for automated promotion.",
         },
     ])
     return roadmap
@@ -459,6 +464,8 @@ def build_markdown(payload: dict) -> str:
     for item in summary.get("blocker_unlock_roadmap") or []:
         lines.append(f"- **{item['phase']}** (`{item['status']}`)")
         lines.append(f"  - Owner: `{item['owner']}`; projected blockers resolved: **{item.get('blockers_resolved', 0)}**")
+        if item.get("measurement_field_count"):
+            lines.append(f"  - Optional measurement fields: **{item['measurement_field_count']}**")
         if item.get("unlocks"):
             lines.append(f"  - Unlocks: {'; '.join(item['unlocks'])}")
         if item.get("blocked_by"):
@@ -510,11 +517,24 @@ def build_markdown(payload: dict) -> str:
                 lines.append(f"  - Blocked apply command: `{impact.get('blocked_apply_command')}`")
             if impact_bits:
                 lines.append(f"  - Impact: {'; '.join(impact_bits)}")
+    optional_inputs = payload.get("optional_measurement_inputs") or []
+    if optional_inputs:
+        lines.extend([
+            "",
+            "## Optional Measurement Inputs",
+        ])
+        for item in optional_inputs:
+            lines.append(f"- **{item['title']}** (`{item['status']}`)")
+            lines.append(f"  - Fields: {item.get('impact', {}).get('field_count', 0)}; source: `{item.get('source_path')}`")
+            if item.get("preview_command"):
+                lines.append(f"  - Preview/check after filling values: `{item['preview_command']}`")
+            lines.append("  - Guardrail: Private analytics improve reporting but do not block automated promotion.")
     lines.extend([
         "",
         "## Guardrails",
         "- This ledger does not approve posts, post externally, push secrets, or invent metric values.",
-        "- Treat external platform repairs and manual values as blockers until fresh admin evidence proves they cleared.",
+        "- Treat external platform repairs as blockers until fresh admin evidence proves they cleared.",
+        "- Treat private manual metric values as optional measurement inputs; do not guess or import them without source evidence.",
         "",
     ])
     return "\n".join(lines)
@@ -565,7 +585,7 @@ def build_ledger() -> dict:
     add_platform_repairs(rows)
     add_scheduled_approvals(rows)
     add_manual_distribution(rows)
-    add_manual_metrics(rows)
+    optional_inputs = optional_manual_metrics()
     rows.sort(key=lambda item: (
         URGENCY_ORDER.get(item.get("urgency"), 9),
         OWNER_ORDER.get(item.get("owner"), 9),
@@ -593,12 +613,14 @@ def build_ledger() -> dict:
             str(APPROVAL_RUNWAY.relative_to(ROOT)),
             str(MANUAL_METRICS.relative_to(ROOT)),
         ],
+        "optional_measurement_input_count": len(optional_inputs),
     }
     return {
         "generated_at": now,
         "safe_mode": True,
         "summary": summary,
         "rows": rows,
+        "optional_measurement_inputs": optional_inputs,
     }
 
 

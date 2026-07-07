@@ -1,6 +1,6 @@
 # Promo Consistency Audit - Lily Roo
 
-Generated: 2026-07-07T02:26:29.889757Z
+Generated: 2026-07-07T03:32:29.753462Z
 
 ## Summary
 - Status: **pass**
@@ -36,8 +36,8 @@ Generated: 2026-07-07T02:26:29.889757Z
   - Manual distribution packet should match manual distribution blockers in the ledger.
 - **manual_distribution_handoff_count_matches_packet**: `pass`
   - Human handoff should include every unlogged manual distribution row.
-- **manual_metric_batch_count_matches_ledger**: `pass`
-  - Manual metric priority batch count should match manual metric blockers.
+- **manual_metric_optional_input_count_matches_packet**: `pass`
+  - Manual metric priority batches should remain available as optional measurement inputs, not blockers.
 - **manual_metric_handoff_batch_count_matches_packet**: `pass`
   - Human handoff should include every manual metric priority batch.
 - **store_checks_match_checked_pending_services**: `pass`

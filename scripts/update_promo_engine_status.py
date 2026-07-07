@@ -346,9 +346,10 @@ def freshness_action_message(row: dict) -> str:
         )
     if row.get("name") == "manual_metrics":
         return (
-            "Refresh manual metrics: fill data/manual_metric_collection_template.csv, "
+            "Optional metric input: fill data/manual_metric_collection_template.csv when private analytics are available, "
             "preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run, "
-            "then import with python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin."
+            "then import with python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin. "
+            "Automated promotion continues without this."
         )
     return f"Refresh {name}: {row['refresh_command']}"
 
@@ -2107,7 +2108,7 @@ def operator_docket_state(handoff: dict) -> dict:
         (
             item
             for item in checklist
-            if item.get("state") in {"ready", "ready_for_review", "needs_review", "needs_values"}
+            if item.get("state") in {"ready", "ready_for_review", "needs_review"}
         ),
         {},
     )
@@ -2232,7 +2233,7 @@ def promo_unlock_sequence_next_action(state: dict) -> str:
         + f"{current.get('phase') or state.get('current_step_id')} "
         + f"({state.get('current_gate_state')}); "
         + f"{int_metric(state.get('ready_for_human_review_count'))} ready, "
-        + f"{int_metric(state.get('blocked_or_warning_count'))} blocked/warning"
+        + f"{int_metric(state.get('blocked_or_warning_count'))} waiting/warning"
         + (f"; preview {command}" if command else "")
         + f"; see {state.get('source_path')}."
     )
@@ -2487,9 +2488,8 @@ def refresh_automation_next_action(automation: dict) -> str:
         and not automation.get("latest_run_covers_source_commit")
         and automation.get("latest_run_coverage_basis") != "generated_snapshot_changed_after_latest_run"
     ):
-        source = (automation.get("source_revision") or {}).get("short_commit") or "current source"
         return (
-            f"Refresh automation coverage: latest scheduled run has not covered {source}; "
+            "Refresh automation coverage: latest scheduled run has not covered the current source snapshot; "
             f"dispatch {automation.get('actions_url') or 'the promo admin refresh workflow'} or wait for the next scheduled run."
         )
     return ""
@@ -2500,21 +2500,22 @@ def manual_metric_next_action(packet: dict) -> str:
     manifest = manifest or {}
     preview = manifest.get("preview_command") or "python3 scripts/update_manual_social_stats.py --from-csv --dry-run"
     apply_gate = manifest.get("apply_gate") or "unknown"
+    gate_label = "waiting for values" if str(apply_gate).startswith("blocked_until") else apply_gate
     ready = int_metric(manifest.get("ready_row_count"))
     waiting = int_metric(manifest.get("waiting_row_count"))
     if manifest:
         if ready:
             apply_command = manifest.get("apply_command") or "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin"
             return (
-                f"Refresh manual metrics: {ready} worksheet row(s) ready and {waiting} waiting; "
+                f"Optional metric input: {ready} worksheet row(s) ready and {waiting} waiting; "
                 f"preview with {preview}, then import with {apply_command}."
             )
         return (
-            f"Refresh manual metrics: {waiting} worksheet row(s) still need new_value entries "
-            f"({apply_gate}); preview with {preview} after filling values."
+            f"Optional metric input: {waiting} worksheet row(s) still need new_value entries "
+            f"({gate_label}); preview with {preview} after filling values. Automated promotion is not blocked."
         )
     return (
-        "Refresh manual metrics: fill data/manual_metric_collection_template.csv, "
+        "Optional metric input: fill data/manual_metric_collection_template.csv, "
         f"preview with {preview}, then import with python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin."
     )
 
@@ -2800,6 +2801,7 @@ def build_status():
         verification_commands = store_verification_commands(release, store_services, now)
 
         actions = []
+        optional_actions = []
         if link_count < 3:
             actions.append(store_link_action(pending_store_labels, verification_commands))
         if not queued and planned:
@@ -2813,7 +2815,7 @@ def build_status():
         if unplanned_missing_platforms:
             actions.append("Add promo coverage for " + ", ".join(unplanned_missing_platforms) + ".")
         if metrics["pending_manual_fields"]:
-            actions.append("Fill manual metric worksheet and import it before weekly reporting.")
+            optional_actions.append("Optional private metrics can sharpen weekly reporting; automated promotion is not blocked.")
 
         status = "healthy"
         if actions:
@@ -2852,6 +2854,7 @@ def build_status():
             "planned_missing_platforms": planned_missing_platforms,
             "unplanned_missing_platforms": unplanned_missing_platforms,
             "actions": actions[:4],
+            "optional_actions": optional_actions[:4],
         }
         releases.append(release_result)
         all_actions.extend(f"{title}: {action}" for action in actions)
@@ -2930,8 +2933,8 @@ def build_status():
         all_actions.insert(0, f"Preview clear approved backlog row: {partial_clear_preview}")
     elif monetization.get("actionable_backlog_posts") and monetization.get("backlog_reschedule_preview_command"):
         all_actions.insert(0, f"Preview approved backlog reschedule: {monetization['backlog_reschedule_preview_command']}")
-    if metrics["pending_manual_fields"] and not any("--from-csv --dry-run" in action for action in all_actions[:8]):
-        all_actions.insert(0, manual_metric_action)
+    if metrics["pending_manual_fields"] and not any("--from-csv --dry-run" in action for action in all_actions):
+        all_actions.append(manual_metric_action)
     if public_metric_capture_action and public_metric_capture_action not in all_actions:
         all_actions.insert(0, public_metric_capture_action)
     if manual_distribution_action and manual_distribution_action not in all_actions:

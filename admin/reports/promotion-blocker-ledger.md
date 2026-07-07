@@ -1,16 +1,16 @@
 # Promotion Blocker Ledger - Lily Roo
 
-Generated: 2026-07-07T02:26:26.076994Z
+Generated: 2026-07-07T03:28:03.846513Z
 
 ## Summary
-- Open blockers: **2**
-- User-owned: **2**
+- Open blockers: **0**
+- User-owned: **0**
 - External platform-owned: **0**
 - Codex-actionable: **0**
 - High or critical: **0**
 
 ## Unlock Roadmap
-- **Approve checked scheduled rows** (`blocked`)
+- **Approve checked scheduled rows** (`clear`)
   - Owner: `tod`; projected blockers resolved: **0**
   - Unlocks: Instagram executor row can become publish-eligible after approval.
 - **Manual distribution lane clear** (`clear`)
@@ -26,31 +26,26 @@ Generated: 2026-07-07T02:26:26.076994Z
   - Unlocks: Approved past-due queue rows get a fresh schedule after executor blockers clear.
   - Preview/check: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-08T10:00:00+00:00' --spacing-hours 24`
   - Apply after review: `python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-08T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin`
-- **Fill manual metric worksheet** (`needs_values`)
-  - Owner: `tod`; projected blockers resolved: **6**
-  - Unlocks: Admin health and weekly reporting can use fresh cross-platform metrics.; Manual metric blockers clear once worksheet values are imported.
+- **Optional: fill private metric worksheet** (`optional_input`)
+  - Owner: `tod`; projected blockers resolved: **0**
+  - Optional measurement fields: **6**
+  - Unlocks: Admin health and weekly reporting get sharper private-analytics context.; Automated Analog Myth posting, proof export, and click learning continue without these values.
   - Blocked by: P2 Recent discovery and traffic:4, P3 Release depth metrics:2
-  - Preview/check: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
-  - Apply after review: `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
+  - Guardrail: Private analytics are optional measurement inputs, not blockers for automated promotion.
 
 ## Ledger
-- **[low] Fill priority 2 metrics: Recent discovery and traffic** (`metrics-priority-2`)
-  - Owner: `tod`; status: `needs_values`; category: `manual_metrics`
-  - Evidence: 4 pending field(s): facebook.reach_7d, instagram.profile_visits_7d, tiktok.profile_views_7d, x.impressions_7d.
-  - Next step: Collect this priority batch, fill the CSV worksheet rows, preview import, then refresh admin.
-  - Preview/check: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
-  - Apply/log after review: `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
-  - Guardrail: Do not guess analytics values; import only values copied from the platform source.
-  - Impact: priority 2; fields: 4; access: private_analytics; csv rows: 2, 3, 6, 7
-- **[low] Fill priority 3 metrics: Release depth metrics** (`metrics-priority-3`)
-  - Owner: `tod`; status: `needs_values`; category: `manual_metrics`
-  - Evidence: 2 pending field(s): spotify.release_streams, spotify.saves.
-  - Next step: Collect this priority batch, fill the CSV worksheet rows, preview import, then refresh admin.
-  - Preview/check: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
-  - Apply/log after review: `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
-  - Guardrail: Do not guess analytics values; import only values copied from the platform source.
-  - Impact: priority 3; fields: 2; access: private_analytics; csv rows: 4, 5
+
+## Optional Measurement Inputs
+- **Fill priority 2 metrics: Recent discovery and traffic** (`needs_values`)
+  - Fields: 4; source: `data/manual_metric_collection_packet.json`
+  - Preview/check after filling values: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
+  - Guardrail: Private analytics improve reporting but do not block automated promotion.
+- **Fill priority 3 metrics: Release depth metrics** (`needs_values`)
+  - Fields: 2; source: `data/manual_metric_collection_packet.json`
+  - Preview/check after filling values: `python3 scripts/update_manual_social_stats.py --from-csv --dry-run`
+  - Guardrail: Private analytics improve reporting but do not block automated promotion.
 
 ## Guardrails
 - This ledger does not approve posts, post externally, push secrets, or invent metric values.
-- Treat external platform repairs and manual values as blockers until fresh admin evidence proves they cleared.
+- Treat external platform repairs as blockers until fresh admin evidence proves they cleared.
+- Treat private manual metric values as optional measurement inputs; do not guess or import them without source evidence.

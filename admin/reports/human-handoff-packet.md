@@ -1,6 +1,6 @@
 # Human Handoff Packet - Lily Roo
 
-Generated: 2026-07-07T02:26:26.127546Z
+Generated: 2026-07-07T03:28:13.859571Z
 
 ## Summary
 - Open handoff tasks: **3**
@@ -10,7 +10,7 @@ Generated: 2026-07-07T02:26:26.127546Z
 - Low urgency tasks: **2**
 
 ## Action Docket
-- Ready steps: **1**
+- Ready steps: **0**
 - Blocked steps: **1**
 - Manual posts packaged: **0**
 - Manual metric fields: **6**
@@ -37,7 +37,7 @@ Generated: 2026-07-07T02:26:26.127546Z
   - Completion evidence: data/tiktok_setup_preflight.json should report direct public posting approval before TikTok backlog work is allowed.
   - Next after apply: Recapture admin state and only then revisit TikTok approval or backlog reschedule rows that can publish automatically.
   - Guardrail: Run preflight and confirm local OAuth setup before pushing secrets; upload-draft/manual-finish TikTok posting remains excluded from the active plan.
-- **Fill and import manual metric worksheet** (`needs_values`)
+- **Optional private metric worksheet** (`optional_values`)
   - Owner: `tod`; tasks: **2**; blockers resolved: **6**
   - Fields: **6**
   - Batches: **2**
@@ -49,8 +49,8 @@ Generated: 2026-07-07T02:26:26.127546Z
   - Sequence apply_after_review: `python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin`
   - Sequence verify: `python3 scripts/refresh_promo_admin.py`
   - Completion evidence: data/manual_metric_collection_packet.json should reduce pending_field_count, and data/metrics_history.json should preserve the imported metrics in the latest snapshot.
-  - Next after apply: Rebuild the weekly report and confirm lilyroo.com/admin shows fewer pending manual metric fields.
-  - Guardrail: Import only collected numeric values; leave unknown cells blank.
+  - Next after apply: Rebuild the weekly report and confirm lilyroo.com/admin shows the optional metric count decreased.
+  - Guardrail: Optional reporting input only; automated promotion is not blocked. Import only collected numeric values and leave unknown cells blank.
 - **Reschedule approved backlog after blockers clear** (`clear`)
   - Owner: `tod`; tasks: **0**; blockers resolved: **0**
   - Sequence verify: `python3 scripts/refresh_promo_admin.py`

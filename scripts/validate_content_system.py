@@ -1465,7 +1465,7 @@ def validate_generated_outputs(failures):
             )
             and docket.get("task_count") == len(tasks)
             and docket.get("roadmap_step_count") == len((summary.get("blocker_summary") or {}).get("blocker_unlock_roadmap") or [])
-            and docket.get("ready_step_count") == len([item for item in docket_checklist if item.get("state") in {"ready", "ready_for_review", "ready_for_manual_post", "needs_review", "needs_values"}])
+            and docket.get("ready_step_count") == len([item for item in docket_checklist if item.get("state") in {"ready", "ready_for_review", "ready_for_manual_post", "needs_review"}])
             and docket.get("blocked_step_count") == len([item for item in docket_checklist if item.get("state") == "blocked"])
             and (
                 (
@@ -1490,7 +1490,7 @@ def validate_generated_outputs(failures):
                     not scheduled_checked_change_count_for_handoff
                     and not manual_distribution_required
                     and (
-                        first_ready_step.get("id") == "manual-metric-worksheet"
+                        first_ready_step.get("id") in {"", "platform-repair-gate"}
                         or active_platform_repair_count() == 0
                     )
                 )
@@ -1517,7 +1517,7 @@ def validate_generated_outputs(failures):
                 or manual_posting_step.get("apply_command") == (manual_approval_docket.get("apply_command") or "")
             )
             and (not manual_distribution_required or manual_approval_docket.get("guardrail") in manual_posting_step.get("guardrail", ""))
-            and any(item.get("id") == "manual-metric-worksheet" and item.get("field_count") == metric_task_field_count and "--from-csv --dry-run" in item.get("preview_command", "") and item.get("metric_completion_manifest") and item.get("completion_checklist") and item.get("completion_guardrails") for item in docket_checklist)
+            and any(item.get("id") == "manual-metric-worksheet" and item.get("state") in {"optional_values", "clear"} and item.get("field_count") == metric_task_field_count and "--from-csv --dry-run" in item.get("preview_command", "") and item.get("metric_completion_manifest") and item.get("completion_checklist") and item.get("completion_guardrails") for item in docket_checklist)
             and (
                 not backlog_count_for_handoff
                 or any(item.get("id") == "backlog-reschedule-gate" and item.get("backlog_clearance_manifest") and item.get("clearance_checklist") and item.get("clearance_guardrails") for item in docket_checklist)
@@ -1642,11 +1642,11 @@ def validate_generated_outputs(failures):
         if (
             unlock_sequence.get("safe_mode") is True
             and unlock_summary.get("step_count") == len(unlock_steps) == len(ledger_roadmap)
-            and unlock_summary.get("current_step_id") in {"unlock-checked-scheduled-approval", "unlock-manual-distribution", "unlock-tiktok-platform-repair", "unlock-manual-metrics"}
-            and unlock_summary.get("current_gate_state") in {"ready_for_human_review", "completed", "blocked", "blocked_until_input", "deferred"}
+            and unlock_summary.get("current_step_id") in {"unlock-checked-scheduled-approval", "unlock-manual-distribution", "unlock-tiktok-platform-repair", "unlock-backlog-reschedule", "unlock-manual-metrics"}
+            and unlock_summary.get("current_gate_state") in {"ready_for_human_review", "completed", "blocked", "blocked_until_input", "deferred", "clear", "optional_input"}
             and unlock_summary.get("open_blocker_count") == ledger_open_count
             and [step.get("id") for step in unlock_steps] == [item.get("id") for item in ledger_roadmap]
-            and any(step.get("gate_state") == "blocked_until_input" for step in unlock_steps)
+            and (ledger_open_count == 0 or any(step.get("gate_state") == "blocked_until_input" for step in unlock_steps))
             and (
                 any(step.get("gate_state") == "preview_ready_with_blocker_warning" for step in unlock_steps)
                 or any(step.get("id") == "unlock-backlog-reschedule" and step.get("gate_state") == "clear" for step in unlock_steps)
@@ -1657,7 +1657,7 @@ def validate_generated_outputs(failures):
                     and step.get("completion_evidence")
                     and step.get("guardrail")
                 )
-                or step.get("gate_state") in {"blocked", "clear", "deferred", "deferred_manual_finish_excluded"}
+                or step.get("gate_state") in {"blocked", "clear", "deferred", "deferred_manual_finish_excluded", "optional_input"}
                 for step in unlock_steps
             )
             and all(command.get("safe_to_run") is True for step in unlock_steps for command in (step.get("commands") or []) if command.get("step") == "preview")
@@ -2863,8 +2863,8 @@ def validate_generated_outputs(failures):
             ledger.get("safe_mode") is True
             and summary.get("open_blocker_count") == len(ledger_rows)
             and summary.get("urgent_count") == len([row for row in ledger_rows if row.get("urgency") in {"critical", "high"}])
-            and owner_counts
-            and category_counts
+            and (owner_counts or not ledger_rows)
+            and (category_counts or not ledger_rows)
             and projection.get("kind") == "checked_scheduled_approval_batch"
             and isinstance(projection.get("blockers_resolved"), int)
             and isinstance(projection.get("approval_blockers_after"), int)
@@ -2889,7 +2889,7 @@ def validate_generated_outputs(failures):
             and manual_roadmap.get("apply_command") == (manual_approval_docket.get("apply_command") or "")
             and manual_roadmap.get("blocked_by") == (manual_approval_docket.get("blocked_ids") or [])
             and manual_roadmap.get("guardrail") == (manual_approval_docket.get("guardrail") or "Manual posting and public URL logging remain separate after approval.")
-            and any(item.get("id") == "unlock-manual-metrics" and "update_manual_social_stats.py --from-csv --dry-run" in (item.get("preview_command") or "") for item in roadmap)
+            and any(item.get("id") == "unlock-manual-metrics" and item.get("status") in {"optional_input", "clear"} and item.get("measurement_field_count", 0) >= 0 for item in roadmap)
             and all(
                 row.get("id")
                 and row.get("blocker_id") == row.get("id")
@@ -3663,7 +3663,7 @@ def validate_generated_outputs(failures):
             and automation.get("latest_run_coverage_basis") != "generated_snapshot_changed_after_latest_run"
         ):
             coverage_action = next((action for action in next_actions if action.startswith("Refresh automation coverage:")), "")
-            if coverage_action and (automation.get("source_revision") or {}).get("short_commit") in coverage_action and (automation.get("actions_url") or "") in coverage_action:
+            if coverage_action and "current source snapshot" in coverage_action and (automation.get("actions_url") or "") in coverage_action:
                 ok("promo engine next actions include refresh automation coverage gap")
             else:
                 fail("promo_engine_status.json missing refresh automation coverage action", failures)
@@ -3887,7 +3887,7 @@ def validate_generated_outputs(failures):
             fail("promo_engine_status.json missing manual-lane removal action", failures)
         metric_packet = json.loads(MANUAL_METRIC_PACKET.read_text(encoding="utf-8")) if MANUAL_METRIC_PACKET.exists() else {}
         import_manifest = metric_packet.get("worksheet_import_manifest") or {}
-        metric_action = next((action for action in next_actions if "Refresh manual metrics:" in action), "")
+        metric_action = next((action for action in next_actions if "Refresh manual metrics:" in action or "Optional metric input:" in action), "")
         if (
             pending_count
             and kpi.get("manual_metric_import_manifest") == import_manifest
@@ -3896,7 +3896,14 @@ def validate_generated_outputs(failures):
             and import_manifest.get("preview_command") in metric_action
             and (
                 (import_manifest.get("ready_row_count") and "worksheet row(s) ready" in metric_action)
-                or (not import_manifest.get("ready_row_count") and "new_value" in metric_action and import_manifest.get("apply_gate") in metric_action)
+                or (
+                    not import_manifest.get("ready_row_count")
+                    and "new_value" in metric_action
+                    and (
+                        import_manifest.get("apply_gate") in metric_action
+                        or "waiting for values" in metric_action
+                    )
+                )
             )
         ):
             ok("promo engine status mirrors manual metric import manifest")
@@ -4503,7 +4510,7 @@ def validate_generated_outputs(failures):
         fail("check_social_executor_dry_run.py missing", failures)
     if PROMO_CONSISTENCY_SCRIPT.exists():
         consistency_text = PROMO_CONSISTENCY_SCRIPT.read_text(encoding="utf-8")
-        if "promo_consistency_audit.json" in consistency_text and "promo-consistency-audit.md" in consistency_text and "promotion_blocker_ledger.json" in consistency_text and "human_handoff_packet.json" in consistency_text and "human_handoff_resolution_preview.json" in consistency_text and "promo_unlock_sequence.json" in consistency_text and "handoff_preview_status_matches_status_kpi" in consistency_text and "unlock_sequence_order_matches_roadmap" in consistency_text and "unlock_sequence_matches_status_kpi" in consistency_text and "manual_metric_batch_count_matches_ledger" in consistency_text and "priority_batch_count" in consistency_text and "social_execution_snapshot.json" in consistency_text and "social_scheduler_dry_run.json" in consistency_text and "tiktok_setup_preflight.json" in consistency_text and "subprocess" not in consistency_text:
+        if "promo_consistency_audit.json" in consistency_text and "promo-consistency-audit.md" in consistency_text and "promotion_blocker_ledger.json" in consistency_text and "human_handoff_packet.json" in consistency_text and "human_handoff_resolution_preview.json" in consistency_text and "promo_unlock_sequence.json" in consistency_text and "handoff_preview_status_matches_status_kpi" in consistency_text and "unlock_sequence_order_matches_roadmap" in consistency_text and "unlock_sequence_matches_status_kpi" in consistency_text and "manual_metric_optional_input_count_matches_packet" in consistency_text and "priority_batch_count" in consistency_text and "social_execution_snapshot.json" in consistency_text and "social_scheduler_dry_run.json" in consistency_text and "tiktok_setup_preflight.json" in consistency_text and "subprocess" not in consistency_text:
             ok("promo consistency audit builder is review-only")
         else:
             fail("build_promo_consistency_audit.py missing audit outputs or executes commands", failures)

@@ -556,8 +556,8 @@ def build_action_docket(tasks: list[dict], blocker_summary: dict, approval_runwa
         },
         {
             "id": "manual-metric-worksheet",
-            "label": "Fill and import manual metric worksheet",
-            "state": "needs_values" if metric_field_count else "clear",
+            "label": "Optional private metric worksheet",
+            "state": "optional_values" if metric_field_count else "clear",
             "owner": "tod",
             "task_ids": [task["id"] for task in manual_metrics],
             "blockers_resolved": metric_field_count,
@@ -580,8 +580,8 @@ def build_action_docket(tasks: list[dict], blocker_summary: dict, approval_runwa
             "apply_command": metric_apply_command,
             "command_sequence": command_sequence(metric_preview_command, metric_apply_command, "python3 scripts/refresh_promo_admin.py"),
             "completion_evidence": "data/manual_metric_collection_packet.json should reduce pending_field_count, and data/metrics_history.json should preserve the imported metrics in the latest snapshot.",
-            "next_step_after_apply": "Rebuild the weekly report and confirm lilyroo.com/admin shows fewer pending manual metric fields.",
-            "guardrail": "Import only collected numeric values; leave unknown cells blank.",
+            "next_step_after_apply": "Rebuild the weekly report and confirm lilyroo.com/admin shows the optional metric count decreased.",
+            "guardrail": "Optional reporting input only; automated promotion is not blocked. Import only collected numeric values and leave unknown cells blank.",
         },
         {
             "id": "backlog-reschedule-gate",
@@ -601,7 +601,7 @@ def build_action_docket(tasks: list[dict], blocker_summary: dict, approval_runwa
             "guardrail": backlog.get("guardrail") or "Do not apply blocked backlog reschedules without clearing platform readiness.",
         },
     ]
-    ready = [item for item in checklist if item["state"] in {"ready", "ready_for_review", "ready_for_manual_post", "needs_review", "needs_values"}]
+    ready = [item for item in checklist if item["state"] in {"ready", "ready_for_review", "ready_for_manual_post", "needs_review"}]
     blocked = [item for item in checklist if item["state"] == "blocked"]
     return {
         "source": "data/human_handoff_packet.json",

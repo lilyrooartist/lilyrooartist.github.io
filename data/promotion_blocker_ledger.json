@@ -1,18 +1,12 @@
 {
-  "generated_at": "2026-07-07T02:26:26.076994Z",
+  "generated_at": "2026-07-07T03:28:03.846513Z",
   "safe_mode": true,
   "summary": {
-    "open_blocker_count": 2,
+    "open_blocker_count": 0,
     "urgent_count": 0,
-    "owner_counts": {
-      "tod": 2
-    },
-    "category_counts": {
-      "manual_metrics": 2
-    },
-    "status_counts": {
-      "needs_values": 2
-    },
+    "owner_counts": {},
+    "category_counts": {},
+    "status_counts": {},
     "next_resolution_projection": {
       "kind": "checked_scheduled_approval_batch",
       "label": "Checked scheduled approval batch",
@@ -32,7 +26,7 @@
       {
         "id": "unlock-checked-scheduled-approval",
         "phase": "Approve checked scheduled rows",
-        "status": "blocked",
+        "status": "clear",
         "owner": "tod",
         "blockers_resolved": 0,
         "unlocks": [
@@ -91,13 +85,14 @@
       },
       {
         "id": "unlock-manual-metrics",
-        "phase": "Fill manual metric worksheet",
-        "status": "needs_values",
+        "phase": "Optional: fill private metric worksheet",
+        "status": "optional_input",
         "owner": "tod",
-        "blockers_resolved": 6,
+        "blockers_resolved": 0,
+        "measurement_field_count": 6,
         "unlocks": [
-          "Admin health and weekly reporting can use fresh cross-platform metrics.",
-          "Manual metric blockers clear once worksheet values are imported."
+          "Admin health and weekly reporting get sharper private-analytics context.",
+          "Automated Analog Myth posting, proof export, and click learning continue without these values."
         ],
         "blocked_by": [
           "P2 Recent discovery and traffic:4",
@@ -105,9 +100,10 @@
         ],
         "batch_count": 2,
         "field_count": 6,
-        "preview_command": "python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
-        "apply_command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
-        "source_path": "data/manual_metric_collection_packet.json"
+        "preview_command": "",
+        "apply_command": "",
+        "source_path": "data/manual_metric_collection_packet.json",
+        "guardrail": "Private analytics are optional measurement inputs, not blockers for automated promotion."
       }
     ],
     "sources": [
@@ -117,9 +113,11 @@
       "data/manual_distribution_packet.json",
       "data/approval_runway.json",
       "data/manual_metric_collection_packet.json"
-    ]
+    ],
+    "optional_measurement_input_count": 2
   },
-  "rows": [
+  "rows": [],
+  "optional_measurement_inputs": [
     {
       "id": "metrics-priority-2",
       "blocker_id": "metrics-priority-2",

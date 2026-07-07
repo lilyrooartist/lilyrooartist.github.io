@@ -78,6 +78,8 @@ def gate_state(roadmap: dict, preview_rows: list[dict]) -> str:
     roadmap_status = roadmap.get("status") or ""
     if roadmap_status in {"deferred", "deferred_manual_finish_excluded"}:
         return roadmap_status
+    if roadmap_status == "optional_input":
+        return "optional_input"
     if roadmap_status in {"completed", "clear"}:
         if roadmap_status == "clear" and has_skipped_input(preview_rows):
             return "blocked_until_input"
@@ -98,6 +100,8 @@ def gate_reason(roadmap: dict, preview_rows: list[dict]) -> str:
     roadmap_status = roadmap.get("status") or ""
     if roadmap_status in {"deferred", "deferred_manual_finish_excluded"}:
         return roadmap.get("guardrail") or "Deferred until the lane can run without manual-finish posting."
+    if roadmap_status == "optional_input":
+        return roadmap.get("guardrail") or "Optional input; automated promotion is not blocked."
     if roadmap_status == "completed":
         return "This gate is already applied; it is kept here as evidence, not as a pending task."
     if roadmap_status == "clear" and has_skipped_input(preview_rows):

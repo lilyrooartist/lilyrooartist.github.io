@@ -1,14 +1,14 @@
 {
-  "generated_at": "2026-07-07T02:26:29.625696Z",
+  "generated_at": "2026-07-07T03:28:41.187493Z",
   "safe_mode": true,
   "summary": {
     "step_count": 5,
     "ready_for_human_review_count": 0,
-    "blocked_or_warning_count": 2,
-    "total_projected_resolution_units": 6,
-    "current_step_id": "unlock-manual-metrics",
-    "current_gate_state": "blocked_until_input",
-    "open_blocker_count": 2
+    "blocked_or_warning_count": 0,
+    "total_projected_resolution_units": 0,
+    "current_step_id": "unlock-checked-scheduled-approval",
+    "current_gate_state": "clear",
+    "open_blocker_count": 0
   },
   "operator_contract": {
     "review_only": true,
@@ -20,16 +20,14 @@
   },
   "current_next_actions": [
     "Next operational action: Verify automatic Analog Myth proof export — python3 scripts/refresh_promo_admin.py",
-    "First handoff step: Fill and import manual metric worksheet — python3 scripts/update_manual_social_stats.py --from-csv --dry-run",
-    "Current unlock gate: Fill manual metric worksheet (blocked_until_input); 0 ready, 2 blocked/warning; preview python3 scripts/update_manual_social_stats.py --from-csv --dry-run; see data/promo_unlock_sequence.json.",
+    "Current unlock gate: Optional: fill private metric worksheet (blocked_until_input); 0 ready, 1 blocked/warning; preview python3 scripts/update_manual_social_stats.py --from-csv --dry-run; see data/promo_unlock_sequence.json.",
     "Review handoff preview health: 1 preview-clean, 2 missing input; see data/human_handoff_resolution_preview.json.",
-    "Refresh manual metrics: 6 worksheet row(s) still need new_value entries (blocked_until_new_values_filled); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values.",
+    "Refresh automation coverage: latest scheduled run has not covered ef458150; dispatch https://github.com/lilyrooartist/lilyrooartist.github.io/actions/workflows/promo-admin-refresh.yml or wait for the next scheduled run.",
+    "Optional metric input: 6 worksheet row(s) still need new_value entries (blocked_until_new_values_filled); preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run after filling values. Automated promotion is not blocked.",
     "Collect experiment results: 90 post-result field(s) need new_value plus evidence_note; use admin/reports/experiment-result-clipboard.md; first priority: measure FP-AUTO-283 on Facebook. Direct preview template: python3 scripts/update_experiment_results.py --post-id FP-AUTO-283 --source-row 41 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run. Direct apply template after review: python3 scripts/update_experiment_results.py --post-id FP-AUTO-283 --source-row 41 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin. Then preview import with python3 scripts/update_experiment_results.py --from-wide-csv data/experiment_result_entry_wide_template.csv --dry-run after filling data/experiment_result_entry_wide_template.csv.",
-    "I Learned It All in Fifteen Seconds: Fill manual metric worksheet and import it before weekly reporting.",
+    "Optional metric input: fill data/manual_metric_collection_template.csv when private analytics are available, preview with python3 scripts/update_manual_social_stats.py --from-csv --dry-run, then import with python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin. Automated promotion continues without this.",
     "Re-check checked-pending store links: 4 music site snapshot(s) still have no public URL; next recommended re-check after 2026-07-08T02:26:14.296062+00:00. Run python3 scripts/verify_pending_store_links.py --refresh-admin --step-timeout-seconds 25 --out data/store_verification_run.json --snapshot-root data/store-verification then.",
-    "Twelve Dollars: Re-check checked-pending store links for Spotify, Apple Music, HyperFollow; no public URLs were found in the latest snapshots.",
-    "Twelve Dollars: Fill manual metric worksheet and import it before weekly reporting.",
-    "Analog Myth: Fill manual metric worksheet and import it before weekly reporting."
+    "Twelve Dollars: Re-check checked-pending store links for Spotify, Apple Music, HyperFollow; no public URLs were found in the latest snapshots."
   ],
   "steps": [
     {
@@ -37,8 +35,8 @@
       "id": "unlock-checked-scheduled-approval",
       "phase": "Approve checked scheduled rows",
       "owner": "tod",
-      "gate_state": "blocked",
-      "reason": "blocked",
+      "gate_state": "clear",
+      "reason": "No action is needed for this gate.",
       "blockers_resolved": 0,
       "blocked_by": [],
       "unlocks": [
@@ -146,18 +144,18 @@
     {
       "order": 5,
       "id": "unlock-manual-metrics",
-      "phase": "Fill manual metric worksheet",
+      "phase": "Optional: fill private metric worksheet",
       "owner": "tod",
-      "gate_state": "blocked_until_input",
-      "reason": "private_metric_values",
-      "blockers_resolved": 6,
+      "gate_state": "optional_input",
+      "reason": "Private analytics are optional measurement inputs, not blockers for automated promotion.",
+      "blockers_resolved": 0,
       "blocked_by": [
         "P2 Recent discovery and traffic:4",
         "P3 Release depth metrics:2"
       ],
       "unlocks": [
-        "Admin health and weekly reporting can use fresh cross-platform metrics.",
-        "Manual metric blockers clear once worksheet values are imported."
+        "Admin health and weekly reporting get sharper private-analytics context.",
+        "Automated Analog Myth posting, proof export, and click learning continue without these values."
       ],
       "source_path": "data/manual_metric_collection_packet.json",
       "preview_status": "input_missing",
@@ -167,7 +165,7 @@
       ],
       "input_needed": "private_metric_values",
       "completion_evidence": "data/manual_metric_collection_packet.json should reduce pending_field_count, and data/metrics_history.json should preserve the imported metrics in the latest snapshot.",
-      "guardrail": "Only import nonnegative numeric values copied from the named source; leave unknown values blank instead of guessing.",
+      "guardrail": "Private analytics are optional measurement inputs, not blockers for automated promotion.",
       "commands": [
         {
           "step": "preview",
@@ -178,12 +176,6 @@
             1,
             1
           ]
-        },
-        {
-          "step": "apply_after_review",
-          "command": "python3 scripts/update_manual_social_stats.py --from-csv --refresh-admin",
-          "safe_to_run": false,
-          "requires": "Human review, required input, or external platform repair must be complete first."
         }
       ],
       "next_after_apply": ""
