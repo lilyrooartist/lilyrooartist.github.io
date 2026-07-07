@@ -3082,6 +3082,9 @@ def validate_generated_outputs(failures):
         active_campaign = kpi.get("active_brand_campaign") or {}
         readout_for_campaign = json.loads(BRAND_GROWTH_READOUT.read_text(encoding="utf-8")) if BRAND_GROWTH_READOUT.exists() else {}
         readout_campaign_summary = readout_for_campaign.get("summary") or {}
+        pulse_for_campaign = json.loads(BRAND_GROWTH_PULSE.read_text(encoding="utf-8")) if BRAND_GROWTH_PULSE.exists() else {}
+        pulse_campaign_summary = pulse_for_campaign.get("summary") or {}
+        pulse_learning_plan = pulse_for_campaign.get("learning_plan") or {}
         if active_campaign.get("ready"):
             if (
                 active_campaign.get("next_scheduled_post_id")
@@ -3092,6 +3095,17 @@ def validate_generated_outputs(failures):
                 ok("promo engine active campaign mirrors next scheduled post")
             else:
                 fail("promo_engine_status.json active campaign does not mirror the next scheduled post", failures)
+            expected_learning_status = pulse_learning_plan.get("status") or pulse_campaign_summary.get("learning_status") or ""
+            expected_measurement_due = pulse_learning_plan.get("measurement_due_count", pulse_campaign_summary.get("measurement_due_rows", 0))
+            if (
+                expected_learning_status
+                and active_campaign.get("learning_status") == expected_learning_status
+                and int(active_campaign.get("measurement_due_rows") or 0) == int(expected_measurement_due or 0)
+                and str(active_campaign.get("next_learning_due_at") or "") == str(pulse_learning_plan.get("next_learning_due_at") or pulse_campaign_summary.get("next_learning_due_at") or "")
+            ):
+                ok("promo engine active campaign mirrors brand growth learning state")
+            else:
+                fail("promo_engine_status.json active campaign does not mirror brand growth learning state", failures)
         pending_count = kpi.get("pending_manual_metric_fields", 0)
         pending_details = kpi.get("pending_manual_metric_details") or []
         pending_public_count = kpi.get("pending_public_profile_metric_fields", 0)

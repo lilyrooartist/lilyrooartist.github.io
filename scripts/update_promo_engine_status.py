@@ -46,6 +46,7 @@ EXPERIMENT_PUBLISH_RUNWAY = ROOT / "data" / "experiment_publish_runway.json"
 POSTING_AUTOMATION_STATUS = ROOT / "data" / "posting_automation_status.json"
 BRAND_GROWTH_READOUT = ROOT / "data" / "brand_growth_readout.json"
 BRAND_GROWTH_PREFLIGHT = ROOT / "data" / "brand_growth_preflight.json"
+BRAND_GROWTH_PULSE = ROOT / "data" / "brand_growth_pulse.json"
 PUBLISHED = ROOT / "admin" / "content" / "Published_Log.csv"
 FUTURE_POSTS = ROOT / "admin" / "future-posts.json"
 RESCHEDULE_SCRIPT = ROOT / "scripts" / "reschedule_scheduled_posts.py"
@@ -83,6 +84,7 @@ SOURCE_MAX_AGE_HOURS = {
     "social_blocker_input_status": 24,
     "promo_refresh_run": 24,
     "promo_refresh_workflow_status": 24,
+    "brand_growth_pulse": 24,
 }
 
 RELEASE_TRACKS = {
@@ -287,10 +289,11 @@ def refresh_command(name: str) -> str:
         "social_blocker_input_status": "python3 scripts/build_social_blocker_input_status.py && python3 scripts/update_promo_engine_status.py",
         "promo_refresh_run": "python3 scripts/refresh_promo_admin.py",
         "promo_refresh_workflow_status": "python3 scripts/capture_github_workflow_status.py && python3 scripts/update_promo_engine_status.py",
+        "brand_growth_pulse": "python3 scripts/build_brand_growth_pulse.py && python3 scripts/update_promo_engine_status.py",
     }.get(name, "")
 
 
-def source_freshness(release_status, manual, live, metrics_history, executor_readiness, store_history, social_executions, social_scheduler_dry_run, social_blocker_input_status, promo_refresh_run, promo_refresh_workflow_status, promo_plan, future_posts, manual_distribution, now: datetime):
+def source_freshness(release_status, manual, live, metrics_history, executor_readiness, store_history, social_executions, social_scheduler_dry_run, social_blocker_input_status, promo_refresh_run, promo_refresh_workflow_status, promo_plan, future_posts, manual_distribution, brand_growth_pulse, now: datetime):
     rows = [
         release_status_checked_no_change(freshness_row("release_status", RELEASE_STATUS, release_status, now), store_history, now),
         freshness_row("scheduled_posts", FUTURE_POSTS, future_posts, now),
@@ -306,6 +309,7 @@ def source_freshness(release_status, manual, live, metrics_history, executor_rea
         freshness_row("social_blocker_input_status", SOCIAL_BLOCKER_INPUT_STATUS, social_blocker_input_status, now),
         freshness_row("promo_refresh_run", PROMO_REFRESH_RUN, promo_refresh_run, now),
         freshness_row("promo_refresh_workflow_status", PROMO_REFRESH_WORKFLOW_STATUS, promo_refresh_workflow_status, now),
+        freshness_row("brand_growth_pulse", BRAND_GROWTH_PULSE, brand_growth_pulse, now),
     ]
     stale = [row for row in rows if row["status"] == "stale"]
     missing = [row for row in rows if row["status"] == "missing"]
@@ -2591,13 +2595,17 @@ def experiment_publish_next_action(packet: dict) -> str:
     return ""
 
 
-def active_brand_campaign_state(posting_status: dict, readout: dict, preflight: dict) -> dict:
+def active_brand_campaign_state(posting_status: dict, readout: dict, preflight: dict, pulse: dict) -> dict:
     posting_summary = posting_status.get("summary") if isinstance(posting_status, dict) else {}
     posting_summary = posting_summary or {}
     readout_summary = readout.get("summary") if isinstance(readout, dict) else {}
     readout_summary = readout_summary or {}
     preflight_summary = preflight.get("summary") if isinstance(preflight, dict) else {}
     preflight_summary = preflight_summary or {}
+    pulse_summary = pulse.get("summary") if isinstance(pulse, dict) else {}
+    pulse_summary = pulse_summary or {}
+    learning_plan = pulse.get("learning_plan") if isinstance(pulse, dict) else {}
+    learning_plan = learning_plan or {}
     expected_ids = preflight_summary.get("expected_post_ids") or readout_summary.get("next_proof_post_ids") or []
     next_proof = (
         posting_summary.get("active_campaign_next_proof_due_at")
@@ -2617,6 +2625,7 @@ def active_brand_campaign_state(posting_status: dict, readout: dict, preflight: 
         "source_path": str(POSTING_AUTOMATION_STATUS.relative_to(ROOT)),
         "readout_path": str(BRAND_GROWTH_READOUT.relative_to(ROOT)),
         "preflight_path": str(BRAND_GROWTH_PREFLIGHT.relative_to(ROOT)),
+        "pulse_path": str(BRAND_GROWTH_PULSE.relative_to(ROOT)),
         "platforms": posting_summary.get("active_campaign_platforms") or sorted((readout_summary.get("platform_counts") or {}).keys()),
         "expected_post_ids": expected_ids,
         "next_scheduled_post_id": readout_summary.get("next_scheduled_post_id") or (expected_ids[0] if expected_ids else ""),
@@ -2640,6 +2649,18 @@ def active_brand_campaign_state(posting_status: dict, readout: dict, preflight: 
         "proof_export_step_command": posting_summary.get("active_campaign_proof_export_step_command") or "",
         "proof_export_added_last_run": posting_summary.get("active_campaign_proof_export_added_last_run"),
         "proof_export_dry_run_last_run": posting_summary.get("active_campaign_proof_export_dry_run_last_run"),
+        "learning_status": learning_plan.get("status") or pulse_summary.get("learning_status") or "",
+        "learning_label": learning_plan.get("label") or "",
+        "learning_headline": learning_plan.get("headline") or pulse_summary.get("learning_headline") or "",
+        "next_learning_question": learning_plan.get("next_learning_question") or pulse_summary.get("next_learning_question") or "",
+        "measurement_due_rows": learning_plan.get("measurement_due_count", pulse_summary.get("measurement_due_rows", 0)),
+        "waiting_measurement_rows": learning_plan.get("waiting_measurement_count", pulse_summary.get("waiting_measurement_rows", 0)),
+        "next_learning_due_at": learning_plan.get("next_learning_due_at") or pulse_summary.get("next_learning_due_at") or "",
+        "click_count": pulse_summary.get("click_count", 0),
+        "click_post_count": pulse_summary.get("click_post_count", 0),
+        "click_snapshot_updated_at": pulse_summary.get("click_snapshot_updated_at") or "",
+        "click_snapshot_covers_ready_measurements": pulse_summary.get("click_snapshot_covers_ready_measurements"),
+        "manual_posting_required": bool(pulse_summary.get("manual_posting_required")),
         "next_action": next_action,
     }
 
@@ -2681,6 +2702,12 @@ def active_brand_campaign_operational_action(state: dict) -> dict:
             "proof_export_added_last_run": state.get("proof_export_added_last_run"),
             "proof_export_dry_run_last_run": state.get("proof_export_dry_run_last_run"),
             "proof_apply_command": state.get("proof_apply_command") or "",
+            "learning_status": state.get("learning_status") or "",
+            "learning_headline": state.get("learning_headline") or "",
+            "measurement_due_rows": state.get("measurement_due_rows") or 0,
+            "waiting_measurement_rows": state.get("waiting_measurement_rows") or 0,
+            "next_learning_due_at": state.get("next_learning_due_at") or "",
+            "click_count": state.get("click_count") or 0,
             "next_action": state.get("next_action") or "",
         },
     }
@@ -2723,6 +2750,7 @@ def build_status():
     posting_automation_status = read_json(POSTING_AUTOMATION_STATUS, {})
     brand_growth_readout = read_json(BRAND_GROWTH_READOUT, {})
     brand_growth_preflight = read_json(BRAND_GROWTH_PREFLIGHT, {})
+    brand_growth_pulse = read_json(BRAND_GROWTH_PULSE, {})
     manual_metric_packet = read_json(MANUAL_METRIC_PACKET, {})
     store_verification_run = read_json(STORE_VERIFICATION_RUN, {})
     future_posts = read_json(FUTURE_POSTS, {})
@@ -2736,7 +2764,7 @@ def build_status():
     execution_state = social_execution_state(social_executions, scheduled_rows)
     scheduler_state = social_scheduler_dry_run_state(social_scheduler_dry_run)
     monetization = monetization_state(live, history, metrics_history, promo_plan, future_posts, execution_state, now)
-    freshness = source_freshness(release_status, manual, live, metrics_history, executor_readiness, store_history, social_executions, social_scheduler_dry_run, social_blocker_input_status, promo_refresh_run, promo_refresh_workflow_status, promo_plan, future_posts, manual_distribution, now)
+    freshness = source_freshness(release_status, manual, live, metrics_history, executor_readiness, store_history, social_executions, social_scheduler_dry_run, social_blocker_input_status, promo_refresh_run, promo_refresh_workflow_status, promo_plan, future_posts, manual_distribution, brand_growth_pulse, now)
     metric_confidence = metric_confidence_state(metrics, freshness)
     growth_goal = growth_goal_state(metrics_history, published_rows, scheduled_rows, promo_plan, now, experiment_result_collection, experiment_result_clipboard, metric_confidence)
 
@@ -2842,7 +2870,7 @@ def build_status():
     operator_docket = operator_docket_state(human_handoff)
     handoff_preview = handoff_resolution_preview_state(handoff_resolution_preview)
     unlock_sequence = promo_unlock_sequence_state(promo_unlock_sequence)
-    active_brand_campaign = active_brand_campaign_state(posting_automation_status, brand_growth_readout, brand_growth_preflight)
+    active_brand_campaign = active_brand_campaign_state(posting_automation_status, brand_growth_readout, brand_growth_preflight, brand_growth_pulse)
     active_brand_operational_action = active_brand_campaign_operational_action(active_brand_campaign)
     if active_brand_operational_action:
         operational_next_action = active_brand_operational_action
@@ -2967,6 +2995,7 @@ def build_status():
             "posting_automation_status": str(POSTING_AUTOMATION_STATUS.relative_to(ROOT)),
             "brand_growth_readout": str(BRAND_GROWTH_READOUT.relative_to(ROOT)),
             "brand_growth_preflight": str(BRAND_GROWTH_PREFLIGHT.relative_to(ROOT)),
+            "brand_growth_pulse": str(BRAND_GROWTH_PULSE.relative_to(ROOT)),
             "published_log": str(PUBLISHED.relative_to(ROOT)),
             "manual_metrics": str(MANUAL_METRICS.relative_to(ROOT)),
             "manual_metric_packet": str(MANUAL_METRIC_PACKET.relative_to(ROOT)),
