@@ -1,6 +1,6 @@
 # Brand Click Tracking Health - Lily Roo
 
-Generated: 2026-07-07T01:48:33.098079Z
+Generated: 2026-07-07T02:06:01.183947Z
 
 ## Summary
 - Status: **ready**
@@ -55,6 +55,8 @@ Generated: 2026-07-07T01:48:33.098079Z
 - has_open_graph_image: **ok**
 - has_twitter_card: **ok**
 - has_twitter_image: **ok**
+- has_dynamic_track_art: **ok**
+- maps_all_track_art: **ok**
 
 ## Album Page Share Tracking
 - Status: **ready**

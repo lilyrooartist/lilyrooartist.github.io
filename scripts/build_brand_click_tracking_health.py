@@ -501,6 +501,24 @@ def redirect_health() -> dict:
         "has_open_graph_image": 'property="og:image" content="https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg"' in text,
         "has_twitter_card": 'name="twitter:card" content="summary_large_image"' in text,
         "has_twitter_image": 'name="twitter:image" content="https://www.lilyroo.com/assets/albums/analog-myth/art/03-analog-myth.jpg"' in text,
+        "has_dynamic_track_art": (
+            'id="track-art"' in text
+            and "artImage.src = track.art || DEFAULT_ALBUM_ART" in text
+            and "artImage.alt = track.title" in text
+        ),
+        "maps_all_track_art": all(
+            token in text
+            for token in [
+                'art: "/assets/albums/analog-myth/art/01-13.jpg"',
+                'art: "/assets/albums/analog-myth/art/02-girls-camp.jpg"',
+                "art: DEFAULT_ALBUM_ART",
+                'art: "/assets/albums/analog-myth/art/04-spilling-the-tea.jpg"',
+                'art: "/assets/albums/analog-myth/art/05-no-mortgage.jpg"',
+                'art: "/assets/albums/analog-myth/art/06-guards-down.jpg"',
+                'art: "/assets/albums/analog-myth/art/07-slow-walk.jpg"',
+                'art: "/assets/albums/analog-myth/art/08-the-power-of-light.png"',
+            ]
+        ),
     }
     return {
         "path": rel(REDIRECT),

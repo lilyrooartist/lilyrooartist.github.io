@@ -118,18 +118,20 @@
         <a class="button" id="playlist-link" href="https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0">Playlist</a>
       </div>
     </section>
-    <img class="art" src="/assets/albums/analog-myth/art/03-analog-myth.jpg" alt="Analog Myth cover art by Lily Roo">
+    <img class="art" id="track-art" src="/assets/albums/analog-myth/art/03-analog-myth.jpg" alt="Analog Myth cover art by Lily Roo">
   </main>
   <script>
+    const DEFAULT_ALBUM_ART = "/assets/albums/analog-myth/art/03-analog-myth.jpg";
+    const DEFAULT_ALBUM_ALT = "Analog Myth cover art by Lily Roo";
     const TRACKS = {
-      "01": { slug: "13", title: "13", video: "https://youtu.be/XL5VOVxwTw4" },
-      "02": { slug: "girls-camp", title: "Girls Camp", video: "https://youtu.be/TxBhM3_nAU8" },
-      "03": { slug: "analog-myth", title: "Analog Myth", video: "https://youtu.be/_rtioKYbCFM" },
-      "04": { slug: "spilling-the-tea", title: "Spilling the Tea", video: "https://youtu.be/AfnuwBYViKw" },
-      "05": { slug: "no-mortgage", title: "No Mortgage", video: "https://youtu.be/-r7khqOLpjQ" },
-      "06": { slug: "guards-down", title: "Guards Down", video: "https://youtu.be/yn_315-h5vM" },
-      "07": { slug: "slow-walk", title: "Slow Walk", video: "https://youtu.be/nPuGjQf7lKY" },
-      "08": { slug: "the-power-of-light", title: "The Power of Light", video: "https://youtu.be/ctZ2TRBWC-c" }
+      "01": { slug: "13", title: "13", art: "/assets/albums/analog-myth/art/01-13.jpg", video: "https://youtu.be/XL5VOVxwTw4" },
+      "02": { slug: "girls-camp", title: "Girls Camp", art: "/assets/albums/analog-myth/art/02-girls-camp.jpg", video: "https://youtu.be/TxBhM3_nAU8" },
+      "03": { slug: "analog-myth", title: "Analog Myth", art: DEFAULT_ALBUM_ART, video: "https://youtu.be/_rtioKYbCFM" },
+      "04": { slug: "spilling-the-tea", title: "Spilling the Tea", art: "/assets/albums/analog-myth/art/04-spilling-the-tea.jpg", video: "https://youtu.be/AfnuwBYViKw" },
+      "05": { slug: "no-mortgage", title: "No Mortgage", art: "/assets/albums/analog-myth/art/05-no-mortgage.jpg", video: "https://youtu.be/-r7khqOLpjQ" },
+      "06": { slug: "guards-down", title: "Guards Down", art: "/assets/albums/analog-myth/art/06-guards-down.jpg", video: "https://youtu.be/yn_315-h5vM" },
+      "07": { slug: "slow-walk", title: "Slow Walk", art: "/assets/albums/analog-myth/art/07-slow-walk.jpg", video: "https://youtu.be/nPuGjQf7lKY" },
+      "08": { slug: "the-power-of-light", title: "The Power of Light", art: "/assets/albums/analog-myth/art/08-the-power-of-light.png", video: "https://youtu.be/ctZ2TRBWC-c" }
     };
     const TITLE_TRACK_VIDEO = "https://youtu.be/_rtioKYbCFM";
     const DESTINATIONS = {
@@ -282,6 +284,7 @@
     const echo = document.getElementById("echo-link");
     const listen = document.getElementById("listen-link");
     const playlist = document.getElementById("playlist-link");
+    const artImage = document.getElementById("track-art");
     headline.textContent = track.title ? `Opening ${track.title}` : "Opening Analog Myth";
     message.textContent = isDryRun
       ? `Previewing the route to ${DESTINATION_LABELS[destination] || "Analog Myth"}.`
@@ -292,6 +295,8 @@
     echo.href = appendAttribution(DESTINATIONS.echo, parts);
     listen.href = appendAttribution(DESTINATIONS.listen, parts);
     playlist.href = appendAttribution(DESTINATIONS.playlist, parts);
+    artImage.src = track.art || DEFAULT_ALBUM_ART;
+    artImage.alt = track.title ? `${track.title} cover art from Analog Myth by Lily Roo` : DEFAULT_ALBUM_ALT;
     if (!isDryRun) {
       recordClick(target, parts, destination);
       window.setTimeout(() => window.location.replace(target), 90);
