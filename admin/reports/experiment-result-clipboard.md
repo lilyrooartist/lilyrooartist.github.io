@@ -1,11 +1,11 @@
 # Experiment Result Clipboard - Lily Roo
 
-Generated: 2026-07-07T02:10:08.016570Z
+Generated: 2026-07-07T02:25:44.757514Z
 
 ## Summary
 - Status: **needs_values**
 - Metric cards: **15**
-- Missing public URLs: **3**
+- Missing public URLs: **2**
 - Measurement priorities: **12**
 - Post-log handoff rows: **0**
 - Pending result fields: **90**
@@ -427,7 +427,7 @@ Generated: 2026-07-07T02:10:08.016570Z
 - **Collect metrics** `FP-BRAND-AM-03-ANALOG-MYTH-X` X / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 15 logged post(s), 1 missing URL(s) in this format.
   - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-BRAND-AM-03-ANALOG-MYTH-X --source-row 54 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
   - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-BRAND-AM-03-ANALOG-MYTH-X --source-row 54 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
-- **Clear platform blocker** `FP-AUTO-279` TikTok / Short video clip + platform-native CTA: Platform work is blocked; clear the platform repair gate before URL logging can produce metrics. 0 logged post(s), 2 missing URL(s) in this format.
+- **Clear platform blocker** `FP-AUTO-284` TikTok / Short video clip + platform-native CTA: Platform work is blocked; clear the platform repair gate before URL logging can produce metrics. 0 logged post(s), 1 missing URL(s) in this format.
 
 ## Post-Log Measurement Handoff
 - Status: **clear**
@@ -454,7 +454,6 @@ Generated: 2026-07-07T02:10:08.016570Z
 
 ## Missing Public URLs
 - `FP-AUTO-282` Instagram / Release-art image + story hook: Publish or log the public URL before result metrics can be collected.
-- `FP-AUTO-279` TikTok / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-284` TikTok / Short video clip + platform-native CTA: Publish or log the public URL before result metrics can be collected.
 
 ## Guardrails

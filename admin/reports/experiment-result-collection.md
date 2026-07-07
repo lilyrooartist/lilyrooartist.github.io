@@ -1,11 +1,11 @@
 # Experiment Result Collection - Lily Roo
 
-Generated: 2026-07-07T02:10:07.907481Z
+Generated: 2026-07-07T02:25:44.643161Z
 
 ## Summary
 - Experiment count: **3**
 - Published experiment posts: **17**
-- Missing published log posts: **3**
+- Missing published log posts: **2**
 - Pending result fields: **90**
 - Ready to import: **0**
 - Entry CSV: `data/experiment_result_entry_template.csv`
@@ -26,7 +26,6 @@ Generated: 2026-07-07T02:10:07.907481Z
 
 ## Missing Published Log Rows
 - `FP-AUTO-282` (Release-art image + story hook): Publish or log the public URL before result metrics can be collected.
-- `FP-AUTO-279` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
 - `FP-AUTO-284` (Short video clip + platform-native CTA): Publish or log the public URL before result metrics can be collected.
 
 ## Pending Result Fields
