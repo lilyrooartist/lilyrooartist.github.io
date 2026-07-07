@@ -1,6 +1,6 @@
 # Brand Activation Plan - Lily Roo
 
-Generated: 2026-07-07T15:16:16.908221Z
+Generated: 2026-07-07T17:31:47.302997Z
 
 ## Summary
 - Brand growth goal: **release_forward_brand_growth**
@@ -13,7 +13,7 @@ Generated: 2026-07-07T15:16:16.908221Z
 ## Activation Sequence
 1. **Current operations next action: Watch active Analog Myth proof window**
    - Phase: `Operations packet`; status: `ready`
-   - Detail: The active Analog Myth proof window is coming up within 48 hours.
+   - Detail: The active Analog Myth proof window is due; capture executor proof and export confirmed URLs.
    - Preview/check: `python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run`
 
 ## Guardrails

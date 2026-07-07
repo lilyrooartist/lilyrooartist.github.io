@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-07T15:16:15.070581Z",
+  "generated_at": "2026-07-07T17:31:45.595391Z",
   "safe_mode": true,
   "source": {
     "workflow": ".github/workflows/promo-admin-refresh.yml",
@@ -16,18 +16,18 @@
     "brand_growth_preflight": "data/brand_growth_preflight.json"
   },
   "summary": {
-    "status": "ready_active_campaign",
-    "active_campaign_ready": true,
+    "status": "blocked",
+    "active_campaign_ready": false,
     "active_campaign_platforms": [
       "Facebook",
       "X"
     ],
     "active_campaign_next_proof_due_at": "2026-07-07T15:21:00Z",
     "active_campaign_next_measurement_due_at": "2026-07-08T15:20:00Z",
-    "ready_lane_count": 7,
-    "blocked_lane_count": 0,
-    "deferred_lane_count": 3,
-    "attention_lane_count": 0,
+    "ready_lane_count": 5,
+    "blocked_lane_count": 2,
+    "deferred_lane_count": 1,
+    "attention_lane_count": 2,
     "lane_count": 10,
     "workflow_crons": [
       "17 */6 * * *",
@@ -38,7 +38,7 @@
     "active_campaign_next_proof_refresh_at": "2026-07-07T15:25:00Z",
     "active_campaign_proof_refresh_lag_minutes": 4,
     "active_campaign_proof_refresh_cron": "25 15 * * *",
-    "active_campaign_proof_export_status": "ready",
+    "active_campaign_proof_export_status": "needs_attention",
     "active_campaign_proof_export_mode": "scheduled_refresh",
     "active_campaign_proof_export_command": "python3 scripts/refresh_promo_admin.py",
     "active_campaign_proof_export_step_command": "python3 scripts/export_social_executions.py",
@@ -47,7 +47,7 @@
     "scheduler_http_status": 200,
     "scheduler_auth_method": "bearer",
     "scheduler_refresh_step_ok": true,
-    "posted_count": 37,
+    "posted_count": 38,
     "attention_count": 0,
     "platform_fix_needed_count": 0,
     "story_post_count": 6,
@@ -57,7 +57,7 @@
     "blocker_input_missing_count": 5,
     "blocker_input_external_action_count": 1,
     "help_needed_count": 0,
-    "next_action": "Automatic proof/export is scheduled at 2026-07-07T15:25:00Z; verify the active posts in Published_Log after that run."
+    "next_action": "Direct TikTok public posting is not in the active plan until platform approval is explicit; upload-draft/manual-finish posting is excluded."
   },
   "proof_refresh": {
     "status": "ready",
@@ -70,43 +70,43 @@
   "lanes": [
     {
       "label": "Active Analog Myth brand campaign",
-      "status": "ready",
-      "detail": "64 approved auto posts; next=FP-BRAND-AM-04-SPILLING-THE-TEA-X at 2026-07-07T10:15:00-04:00; preflight=ready",
+      "status": "needs_attention",
+      "detail": "64 approved auto posts; next=FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK at 2026-07-07T11:20:00-04:00; preflight=needs_attention",
       "evidence": "data/brand_growth_preflight.json",
-      "next_action": "Automatic proof/export is scheduled at 2026-07-07T15:25:00Z; verify the active posts in Published_Log after that run."
+      "next_action": "Refresh brand growth readout and preflight."
     },
     {
       "label": "Scheduled refresh workflow",
       "status": "ready",
       "detail": "17 */6 * * *, 25 15 * * *, 05 16 * * *; latest run in_progress / pending; proof refresh next fixed refresh 4 minute(s) after proof due",
-      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28877307822",
+      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28885923320",
       "next_action": ""
     },
     {
       "label": "Published URL export",
-      "status": "ready",
+      "status": "needs_attention",
       "detail": "safe refresh runs python3 scripts/export_social_executions.py; latest export added=1 dry_run=False; next proof refresh=2026-07-07T15:25:00Z",
       "evidence": "data/promo_admin_refresh_run.json",
-      "next_action": ""
+      "next_action": "Ensure refresh_promo_admin.py runs export_social_executions.py without --dry-run during the scheduled proof refresh."
     },
     {
       "label": "Safe admin refresh",
       "status": "ready",
-      "detail": "19 refresh commands captured at 2026-07-07T15:16:12.940465Z",
+      "detail": "19 refresh commands captured at 2026-07-07T17:31:43.606340Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": ""
     },
     {
       "label": "Scheduler dry-run authentication",
       "status": "ready",
-      "detail": "HTTP 200 using bearer auth; due=1 would_post=0",
+      "detail": "HTTP 200 using bearer auth; due=2 would_post=0",
       "evidence": "data/social_scheduler_dry_run.json",
       "next_action": ""
     },
     {
       "label": "Execution capture",
       "status": "ready",
-      "detail": "posted=37 attention=0 platform_fix_needed=0",
+      "detail": "posted=38 attention=0 platform_fix_needed=0",
       "evidence": "data/social_execution_snapshot.json",
       "next_action": ""
     },
@@ -119,17 +119,17 @@
     },
     {
       "label": "TikTok API lane",
-      "status": "deferred",
+      "status": "blocked",
       "detail": "blocked; upload_ready=False; public_ready=False",
       "evidence": "data/tiktok_setup_preflight.json",
       "next_action": "Direct TikTok public posting is not in the active plan until platform approval is explicit; upload-draft/manual-finish posting is excluded."
     },
     {
       "label": "Blocker input readiness",
-      "status": "deferred",
+      "status": "blocked",
       "detail": "1 ready; 5 missing local input; 1 external action needed",
       "evidence": "data/social_blocker_input_status.json",
-      "next_action": "Optional expansion inputs can wait; the active brand campaign is already preflight-ready."
+      "next_action": "Add X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET to secrets/social_api.env."
     },
     {
       "label": "Story throughput",

@@ -1,14 +1,14 @@
 # Brand Click Tracking Health - Lily Roo
 
-Generated: 2026-07-07T15:16:15.149842Z
+Generated: 2026-07-07T17:31:45.674676Z
 
 ## Summary
 - Status: **ready**
-- Future campaign rows ready: **58 / 58**
-- Tracking URLs checked: **174 / 174**
-- X main-post album links: **29 / 29**
-- Visible album click paths: **58 / 58**
-- Visible full destination sets: **58 / 58**
+- Future campaign rows ready: **57 / 57**
+- Tracking URLs checked: **171 / 171**
+- X main-post album links: **28 / 28**
+- Visible album click paths: **57 / 57**
+- Visible full destination sets: **57 / 57**
 - Redirect page: **ready**
 - Live click endpoint dry run: **ready**
 - Album-page share tracking: **ready** (11 / 11)
@@ -24,15 +24,15 @@ Generated: 2026-07-07T15:16:15.149842Z
 - Lyric page CTA tracking: **ready** (75 / 75)
 - Lyric page endpoint dry run: **ready**
 - Preview cards: **ready** (6 / 6)
-- Destinations: **album: 58, echo: 58, video: 58**
+- Destinations: **album: 57, echo: 57, video: 57**
 - Issues: **none**
 
 ## Live Endpoint Dry Run
 - Status: **ready**
 - HTTP status: **200**
 - Dry run: **yes**
-- Probe campaign id: `fp-brand-am-04-spilling-the-tea-x`
-- Event: **x / album / track 04**
+- Probe campaign id: `fp-brand-am-05-no-mortgage-x`
+- Event: **x / album / track 05**
 
 ## Redirect Checks
 - exists: **ok**
@@ -194,10 +194,6 @@ Generated: 2026-07-07T15:16:15.149842Z
 - `lyrics_index` `lyrics/index.html`: **ready** - Lily Roo Lyrics
 
 ## Future Rows
-- `FP-BRAND-AM-04-SPILLING-THE-TEA-X` X 2026-07-07T10:15:00-04:00 - **ready** (3 links)
-  - Destinations: `album, echo, video`
-  - Visible surface: **ready** (`album, echo, video`)
-  - Main-post album link: **ready**
 - `FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK` Facebook 2026-07-07T11:20:00-04:00 - **ready** (3 links)
   - Destinations: `album, echo, video`
   - Visible surface: **ready** (`album, echo, video`)

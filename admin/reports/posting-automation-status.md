@@ -1,52 +1,53 @@
 # Posting Automation Status - Lily Roo
 
-Generated: 2026-07-07T15:16:15.070581Z
+Generated: 2026-07-07T17:31:45.595391Z
 
 ## Summary
-- Status: **ready_active_campaign**
-- Active campaign ready: **True**
-- Lanes ready: **7 / 10**
-- Blocked lanes: **0**
-- Deferred optional lanes: **3**
-- Needs attention: **0**
+- Status: **blocked**
+- Active campaign ready: **False**
+- Lanes ready: **5 / 10**
+- Blocked lanes: **2**
+- Deferred optional lanes: **1**
+- Needs attention: **2**
 - Story posts tracked: **6**
 - Help-needed items: **0**
 - Proof refresh: **ready** at `2026-07-07T15:25:00Z` (4 min)
-- Proof export: **ready** via `python3 scripts/export_social_executions.py`
-- Next action: Automatic proof/export is scheduled at 2026-07-07T15:25:00Z; verify the active posts in Published_Log after that run.
+- Proof export: **needs_attention** via `python3 scripts/export_social_executions.py`
+- Next action: Direct TikTok public posting is not in the active plan until platform approval is explicit; upload-draft/manual-finish posting is excluded.
 
 ## Automation Lanes
-- **Active Analog Myth brand campaign** - `ready`
-  - Detail: 64 approved auto posts; next=FP-BRAND-AM-04-SPILLING-THE-TEA-X at 2026-07-07T10:15:00-04:00; preflight=ready
+- **Active Analog Myth brand campaign** - `needs_attention`
+  - Detail: 64 approved auto posts; next=FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK at 2026-07-07T11:20:00-04:00; preflight=needs_attention
   - Evidence: data/brand_growth_preflight.json
-  - Next: Automatic proof/export is scheduled at 2026-07-07T15:25:00Z; verify the active posts in Published_Log after that run.
+  - Next: Refresh brand growth readout and preflight.
 - **Scheduled refresh workflow** - `ready`
   - Detail: 17 */6 * * *, 25 15 * * *, 05 16 * * *; latest run in_progress / pending; proof refresh next fixed refresh 4 minute(s) after proof due
-  - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28877307822
-- **Published URL export** - `ready`
+  - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28885923320
+- **Published URL export** - `needs_attention`
   - Detail: safe refresh runs python3 scripts/export_social_executions.py; latest export added=1 dry_run=False; next proof refresh=2026-07-07T15:25:00Z
   - Evidence: data/promo_admin_refresh_run.json
+  - Next: Ensure refresh_promo_admin.py runs export_social_executions.py without --dry-run during the scheduled proof refresh.
 - **Safe admin refresh** - `ready`
-  - Detail: 19 refresh commands captured at 2026-07-07T15:16:12.940465Z
+  - Detail: 19 refresh commands captured at 2026-07-07T17:31:43.606340Z
   - Evidence: data/promo_admin_refresh_run.json
 - **Scheduler dry-run authentication** - `ready`
-  - Detail: HTTP 200 using bearer auth; due=1 would_post=0
+  - Detail: HTTP 200 using bearer auth; due=2 would_post=0
   - Evidence: data/social_scheduler_dry_run.json
 - **Execution capture** - `ready`
-  - Detail: posted=37 attention=0 platform_fix_needed=0
+  - Detail: posted=38 attention=0 platform_fix_needed=0
   - Evidence: data/social_execution_snapshot.json
 - **Platform readiness** - `deferred`
   - Detail: ready=X, Facebook; blocked=Instagram, TikTok, YouTube
   - Evidence: data/executor_readiness_snapshot.json
   - Next: Optional expansion only; the active Analog Myth campaign uses ready X/Facebook lanes.
-- **TikTok API lane** - `deferred`
+- **TikTok API lane** - `blocked`
   - Detail: blocked; upload_ready=False; public_ready=False
   - Evidence: data/tiktok_setup_preflight.json
   - Next: Direct TikTok public posting is not in the active plan until platform approval is explicit; upload-draft/manual-finish posting is excluded.
-- **Blocker input readiness** - `deferred`
+- **Blocker input readiness** - `blocked`
   - Detail: 1 ready; 5 missing local input; 1 external action needed
   - Evidence: data/social_blocker_input_status.json
-  - Next: Optional expansion inputs can wait; the active brand campaign is already preflight-ready.
+  - Next: Add X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET to secrets/social_api.env.
 - **Story throughput** - `ready`
   - Detail: 6 tracked; 0 queued; 0 past due without URL
   - Evidence: data/story_throughput_tracking.json

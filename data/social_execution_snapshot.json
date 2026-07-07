@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "updated_at": "2026-07-07T15:16:07.539720Z",
+  "updated_at": "2026-07-07T17:31:38.853956Z",
   "source": "lilyroo-social-executor-executions",
   "url": "https://www.lilyroo.com/api/social/executions",
   "http_status": 200,
@@ -8,11 +8,24 @@
   "password_supplied": false,
   "auth_method": "bearer",
   "summary": {
-    "execution_count": 52,
-    "current_execution_count": 37,
+    "execution_count": 53,
+    "current_execution_count": 38,
     "superseded_execution_count": 0,
     "superseded_executions": [],
     "current_executions": [
+      {
+        "post_id": "FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK",
+        "platform": "Facebook",
+        "status": "posted",
+        "reason": "",
+        "attempts": 1,
+        "updated_at": "2026-07-07T15:30:35.825Z",
+        "source": "cron",
+        "post_url": "https://www.facebook.com/122119767927249470/posts/122121211923249470",
+        "external_id": "903693509504290_122121211923249470",
+        "next_action": "",
+        "error_summary": ""
+      },
       {
         "post_id": "FP-BRAND-AM-04-SPILLING-THE-TEA-X",
         "platform": "X",
@@ -497,6 +510,19 @@
     ],
     "posted": [
       {
+        "post_id": "FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK",
+        "platform": "Facebook",
+        "status": "posted",
+        "reason": "",
+        "attempts": 1,
+        "updated_at": "2026-07-07T15:30:35.825Z",
+        "source": "cron",
+        "post_url": "https://www.facebook.com/122119767927249470/posts/122121211923249470",
+        "external_id": "903693509504290_122121211923249470",
+        "next_action": "",
+        "error_summary": ""
+      },
+      {
         "post_id": "FP-BRAND-AM-04-SPILLING-THE-TEA-X",
         "platform": "X",
         "status": "posted",
@@ -979,21 +1005,34 @@
       }
     ],
     "draft_uploaded": [],
-    "posted_count": 37,
+    "posted_count": 38,
     "draft_uploaded_count": 0,
     "attention_count": 0,
     "approval_needed_count": 0,
     "platform_fix_needed_count": 0,
     "manual_handoff_needed_count": 0,
     "status_counts": {
-      "posted": 37
+      "posted": 38
     },
     "platform_counts": {
-      "Facebook": 16,
+      "Facebook": 17,
       "X": 16,
       "YouTube": 5
     },
     "latest_posted": [
+      {
+        "post_id": "FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK",
+        "platform": "Facebook",
+        "status": "posted",
+        "reason": "",
+        "attempts": 1,
+        "updated_at": "2026-07-07T15:30:35.825Z",
+        "source": "cron",
+        "post_url": "https://www.facebook.com/122119767927249470/posts/122121211923249470",
+        "external_id": "903693509504290_122121211923249470",
+        "next_action": "",
+        "error_summary": ""
+      },
       {
         "post_id": "FP-BRAND-AM-04-SPILLING-THE-TEA-X",
         "platform": "X",
@@ -1045,19 +1084,6 @@
         "external_id": "903693509504290_122121048123249470",
         "next_action": "",
         "error_summary": ""
-      },
-      {
-        "post_id": "FP-BRAND-AM-02-GIRLS-CAMP-X",
-        "platform": "X",
-        "status": "posted",
-        "reason": "",
-        "attempts": 1,
-        "updated_at": "2026-07-05T14:15:36.373Z",
-        "source": "cron",
-        "post_url": "https://x.com/i/web/status/2073772787177861205",
-        "external_id": "2073772787177861205",
-        "next_action": "",
-        "error_summary": ""
       }
     ],
     "latest_draft_uploaded": [],
@@ -1068,10 +1094,10 @@
   },
   "payload": {
     "ok": true,
-    "execution_count": 52
+    "execution_count": 53
   },
   "action_needed": "",
-  "reconciled_at": "2026-07-07T15:16:07.584217Z",
+  "reconciled_at": "2026-07-07T17:31:38.897644Z",
   "reconciliation": {
     "source": "current scheduled_posts.csv",
     "superseded_execution_count": 0,

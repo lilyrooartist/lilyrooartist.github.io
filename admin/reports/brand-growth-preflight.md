@@ -1,43 +1,40 @@
 # Brand Growth Preflight - Lily Roo
 
-Generated: 2026-07-07T15:16:15.717707Z
+Generated: 2026-07-07T17:31:46.243312Z
 
 ## Summary
-- Status: **needs_attention**
-- Next window: **2026-07-07** at `2026-07-07T15:21:00Z`
+- Status: **ready**
+- Next window: **2026-07-08** at `2026-07-08T15:21:00Z`
 - Expected posts: **2**
-- Scheduler simulation: HTTP **200**, auth `bearer`, simulated at `2026-07-07T15:21:00Z`, due **2**, would post **1**, blocked **0**
-- Current scheduler snapshot: checked `2026-07-07T15:16:11.482900Z`, requested `2026-07-07T15:16:11.196761Z`, due **1**, would post **0**, blocked **0**
+- Scheduler simulation: HTTP **200**, auth `bearer`, simulated at `2026-07-08T15:21:00Z`, due **4**, would post **2**, blocked **0**
+- Current scheduler snapshot: checked `2026-07-07T17:31:42.412441Z`, requested `2026-07-07T17:31:42.193624Z`, due **2**, would post **0**, blocked **0**
 - Link checks: **8 ok**, **0 failed**, **0 warning**, **0 blocking failed**
 - Tracking redirects: **6 / 6 checked ok**
 - Redirect targets: **6 / 6 checked**, **6 ok**, **0 warning**, **0 blocking failed**
-- Current window proof due: `2026-07-07T15:21:00Z`
-- Current window measurement due: `2026-07-08T15:20:00Z`
+- Current window proof due: `2026-07-08T15:21:00Z`
+- Current window measurement due: `2026-07-09T15:20:00Z`
 
 ## Expected Posts
-- `FP-BRAND-AM-04-SPILLING-THE-TEA-X` X at `2026-07-07T10:15:00-04:00`
-- `FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK` Facebook at `2026-07-07T11:20:00-04:00`
-
-## Missing From Dry Run
-- `FP-BRAND-AM-04-SPILLING-THE-TEA-X`
+- `FP-BRAND-AM-05-NO-MORTGAGE-X` X at `2026-07-08T10:15:00-04:00`
+- `FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK` Facebook at `2026-07-08T11:20:00-04:00`
 
 ## Link Checks
-- **ok** `FP-BRAND-AM-04-SPILLING-THE-TEA-X imagery_url` 200 image/jpeg
-- **ok** `FP-BRAND-AM-04-SPILLING-THE-TEA-X Album` 200 text/html
-- **ok** `FP-BRAND-AM-04-SPILLING-THE-TEA-X Echo` 200 text/html
-- **ok** `FP-BRAND-AM-04-SPILLING-THE-TEA-X Video` 200 text/html
-- **ok** `FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK imagery_url` 200 image/jpeg
-- **ok** `FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK Analog Myth` 200 text/html
-- **ok** `FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK Echo Thread` 200 text/html
-- **ok** `FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK Track video` 200 text/html
+- **ok** `FP-BRAND-AM-05-NO-MORTGAGE-X imagery_url` 200 image/jpeg
+- **ok** `FP-BRAND-AM-05-NO-MORTGAGE-X Album` 200 text/html
+- **ok** `FP-BRAND-AM-05-NO-MORTGAGE-X Echo` 200 text/html
+- **ok** `FP-BRAND-AM-05-NO-MORTGAGE-X Video` 200 text/html
+- **ok** `FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK imagery_url` 200 image/jpeg
+- **ok** `FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK Analog Myth` 200 text/html
+- **ok** `FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK Echo Thread` 200 text/html
+- **ok** `FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK Track video` 200 text/html
 
 ## Redirect Target Checks
-- **ok** `FP-BRAND-AM-04-SPILLING-THE-TEA-X Album target album` 200 text/html
-- **ok** `FP-BRAND-AM-04-SPILLING-THE-TEA-X Echo target echo` 200 text/html
-- **ok** `FP-BRAND-AM-04-SPILLING-THE-TEA-X Video target video` 200 text/html; charset=utf-8
-- **ok** `FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK Analog Myth target album` 200 text/html
-- **ok** `FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK Echo Thread target echo` 200 text/html
-- **ok** `FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK Track video target video` 200 text/html; charset=utf-8
+- **ok** `FP-BRAND-AM-05-NO-MORTGAGE-X Album target album` 200 text/html
+- **ok** `FP-BRAND-AM-05-NO-MORTGAGE-X Echo target echo` 200 text/html
+- **ok** `FP-BRAND-AM-05-NO-MORTGAGE-X Video target video` 200 text/html; charset=utf-8
+- **ok** `FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK Analog Myth target album` 200 text/html
+- **ok** `FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK Echo Thread target echo` 200 text/html
+- **ok** `FP-BRAND-AM-05-NO-MORTGAGE-FACEBOOK Track video target video` 200 text/html; charset=utf-8
 
 ## Guardrails
 - Preflight is read-only; it calls the scheduler dry-run endpoint and HEAD-checks public URLs.
