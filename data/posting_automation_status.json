@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-07T17:31:45.595391Z",
+  "generated_at": "2026-07-07T17:32:33.057098Z",
   "safe_mode": true,
   "source": {
     "workflow": ".github/workflows/promo-admin-refresh.yml",
@@ -16,18 +16,18 @@
     "brand_growth_preflight": "data/brand_growth_preflight.json"
   },
   "summary": {
-    "status": "blocked",
-    "active_campaign_ready": false,
+    "status": "ready_active_campaign",
+    "active_campaign_ready": true,
     "active_campaign_platforms": [
       "Facebook",
       "X"
     ],
-    "active_campaign_next_proof_due_at": "2026-07-07T15:21:00Z",
-    "active_campaign_next_measurement_due_at": "2026-07-08T15:20:00Z",
-    "ready_lane_count": 5,
-    "blocked_lane_count": 2,
-    "deferred_lane_count": 1,
-    "attention_lane_count": 2,
+    "active_campaign_next_proof_due_at": "2026-07-08T15:21:00Z",
+    "active_campaign_next_measurement_due_at": "2026-07-09T15:20:00Z",
+    "ready_lane_count": 7,
+    "blocked_lane_count": 0,
+    "deferred_lane_count": 3,
+    "attention_lane_count": 0,
     "lane_count": 10,
     "workflow_crons": [
       "17 */6 * * *",
@@ -35,14 +35,14 @@
       "05 16 * * *"
     ],
     "active_campaign_proof_refresh_status": "ready",
-    "active_campaign_next_proof_refresh_at": "2026-07-07T15:25:00Z",
+    "active_campaign_next_proof_refresh_at": "2026-07-08T15:25:00Z",
     "active_campaign_proof_refresh_lag_minutes": 4,
     "active_campaign_proof_refresh_cron": "25 15 * * *",
-    "active_campaign_proof_export_status": "needs_attention",
+    "active_campaign_proof_export_status": "ready",
     "active_campaign_proof_export_mode": "scheduled_refresh",
     "active_campaign_proof_export_command": "python3 scripts/refresh_promo_admin.py",
     "active_campaign_proof_export_step_command": "python3 scripts/export_social_executions.py",
-    "active_campaign_proof_export_added_last_run": 1,
+    "active_campaign_proof_export_added_last_run": 0,
     "active_campaign_proof_export_dry_run_last_run": false,
     "scheduler_http_status": 200,
     "scheduler_auth_method": "bearer",
@@ -57,12 +57,12 @@
     "blocker_input_missing_count": 5,
     "blocker_input_external_action_count": 1,
     "help_needed_count": 0,
-    "next_action": "Direct TikTok public posting is not in the active plan until platform approval is explicit; upload-draft/manual-finish posting is excluded."
+    "next_action": "Automatic proof/export is scheduled at 2026-07-08T15:25:00Z; verify the active posts in Published_Log after that run."
   },
   "proof_refresh": {
     "status": "ready",
-    "proof_due_at": "2026-07-07T15:21:00Z",
-    "next_refresh_at": "2026-07-07T15:25:00Z",
+    "proof_due_at": "2026-07-08T15:21:00Z",
+    "next_refresh_at": "2026-07-08T15:25:00Z",
     "lag_minutes": 4,
     "cron": "25 15 * * *",
     "detail": "next fixed refresh 4 minute(s) after proof due"
@@ -70,36 +70,36 @@
   "lanes": [
     {
       "label": "Active Analog Myth brand campaign",
-      "status": "needs_attention",
-      "detail": "64 approved auto posts; next=FP-BRAND-AM-04-SPILLING-THE-TEA-FACEBOOK at 2026-07-07T11:20:00-04:00; preflight=needs_attention",
+      "status": "ready",
+      "detail": "64 approved auto posts; next=FP-BRAND-AM-05-NO-MORTGAGE-X at 2026-07-08T10:15:00-04:00; preflight=ready",
       "evidence": "data/brand_growth_preflight.json",
-      "next_action": "Refresh brand growth readout and preflight."
+      "next_action": "Automatic proof/export is scheduled at 2026-07-08T15:25:00Z; verify the active posts in Published_Log after that run."
     },
     {
       "label": "Scheduled refresh workflow",
       "status": "ready",
-      "detail": "17 */6 * * *, 25 15 * * *, 05 16 * * *; latest run in_progress / pending; proof refresh next fixed refresh 4 minute(s) after proof due",
+      "detail": "17 */6 * * *, 25 15 * * *, 05 16 * * *; latest run completed / success; proof refresh next fixed refresh 4 minute(s) after proof due",
       "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28885923320",
       "next_action": ""
     },
     {
       "label": "Published URL export",
-      "status": "needs_attention",
-      "detail": "safe refresh runs python3 scripts/export_social_executions.py; latest export added=1 dry_run=False; next proof refresh=2026-07-07T15:25:00Z",
+      "status": "ready",
+      "detail": "safe refresh runs python3 scripts/export_social_executions.py; latest export added=0 dry_run=False; next proof refresh=2026-07-08T15:25:00Z",
       "evidence": "data/promo_admin_refresh_run.json",
-      "next_action": "Ensure refresh_promo_admin.py runs export_social_executions.py without --dry-run during the scheduled proof refresh."
+      "next_action": ""
     },
     {
       "label": "Safe admin refresh",
       "status": "ready",
-      "detail": "19 refresh commands captured at 2026-07-07T17:31:43.606340Z",
+      "detail": "19 refresh commands captured at 2026-07-07T17:32:29.079568Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": ""
     },
     {
       "label": "Scheduler dry-run authentication",
       "status": "ready",
-      "detail": "HTTP 200 using bearer auth; due=2 would_post=0",
+      "detail": "HTTP 200 using bearer auth; due=1 would_post=0",
       "evidence": "data/social_scheduler_dry_run.json",
       "next_action": ""
     },
@@ -119,17 +119,17 @@
     },
     {
       "label": "TikTok API lane",
-      "status": "blocked",
+      "status": "deferred",
       "detail": "blocked; upload_ready=False; public_ready=False",
       "evidence": "data/tiktok_setup_preflight.json",
       "next_action": "Direct TikTok public posting is not in the active plan until platform approval is explicit; upload-draft/manual-finish posting is excluded."
     },
     {
       "label": "Blocker input readiness",
-      "status": "blocked",
+      "status": "deferred",
       "detail": "1 ready; 5 missing local input; 1 external action needed",
       "evidence": "data/social_blocker_input_status.json",
-      "next_action": "Add X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET to secrets/social_api.env."
+      "next_action": "Optional expansion inputs can wait; the active brand campaign is already preflight-ready."
     },
     {
       "label": "Story throughput",
