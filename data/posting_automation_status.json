@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-07T02:25:44.896282Z",
+  "generated_at": "2026-07-07T02:26:27.906112Z",
   "safe_mode": true,
   "source": {
     "workflow": ".github/workflows/promo-admin-refresh.yml",
@@ -46,7 +46,7 @@
     "active_campaign_proof_export_dry_run_last_run": false,
     "scheduler_http_status": 200,
     "scheduler_auth_method": "bearer",
-    "scheduler_refresh_step_ok": false,
+    "scheduler_refresh_step_ok": true,
     "posted_count": 36,
     "attention_count": 0,
     "platform_fix_needed_count": 0,
@@ -78,7 +78,7 @@
     {
       "label": "Scheduled refresh workflow",
       "status": "ready",
-      "detail": "17 */6 * * *, 25 15 * * *, 05 16 * * *; latest run in_progress / pending; proof refresh next fixed refresh 4 minute(s) after proof due",
+      "detail": "17 */6 * * *, 25 15 * * *, 05 16 * * *; latest run completed / success; proof refresh next fixed refresh 4 minute(s) after proof due",
       "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28837088299",
       "next_action": ""
     },
@@ -92,7 +92,7 @@
     {
       "label": "Safe admin refresh",
       "status": "ready",
-      "detail": "19 refresh commands captured at 2026-07-07T02:25:42.719768Z",
+      "detail": "19 refresh commands captured at 2026-07-07T02:26:24.014083Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": ""
     },
