@@ -165,8 +165,21 @@ def main() -> int:
     out = Path(args.out)
     if not out.is_absolute():
         out = ROOT / out
-    status, payload, error = fetch(args.url, args.scheduled_time, args.queue_url)
+    requested_queue_url = args.queue_url
+    queue_url = requested_queue_url
+    queue_source = "commit_queue_url" if requested_queue_url else "live_queue"
+    fallback_reason = ""
+    status, payload, error = fetch(args.url, args.scheduled_time, requested_queue_url)
     ok = status == 200 and bool(payload.get("ok")) and payload.get("dry_run") is True
+    if not ok and requested_queue_url:
+        first_status = status
+        first_error = error or (payload.get("error") if isinstance(payload, dict) else "")
+        status, payload, error = fetch(args.url, args.scheduled_time, "")
+        ok = status == 200 and bool(payload.get("ok")) and payload.get("dry_run") is True
+        if ok:
+            queue_url = ""
+            queue_source = "live_queue_fallback"
+            fallback_reason = f"Commit queue probe returned HTTP {first_status}: {first_error or 'scheduler probe failed'}"
     summary = summarize(payload if isinstance(payload, dict) else {})
     snapshot = {
         "ok": ok,
@@ -177,7 +190,10 @@ def main() -> int:
         "error": error or (payload.get("error") if isinstance(payload, dict) else ""),
         "auth_method": auth_method(),
         "requested_scheduled_time": args.scheduled_time,
-        "queue_url": args.queue_url,
+        "queue_url": queue_url,
+        "requested_queue_url": requested_queue_url,
+        "queue_source": queue_source,
+        "fallback_reason": fallback_reason,
         "dry_run": True,
         "checked_at": payload.get("checked_at", "") if isinstance(payload, dict) else "",
         "summary": summary,
@@ -193,8 +209,10 @@ def main() -> int:
     print(json.dumps({
         "ok": ok,
         "http_status": status,
+        "queue_source": queue_source,
         "due_count": summary["due_count"],
         "would_post_count": summary["would_post_count"],
+        "posted_count": summary["posted_count"],
         "blocked_count": summary["blocked_count"],
         "output": display_path(out),
     }, indent=2))
