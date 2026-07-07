@@ -1,6 +1,6 @@
 # Brand Click Tracking Health - Lily Roo
 
-Generated: 2026-07-06T23:30:47.031226Z
+Generated: 2026-07-06T23:39:33.216532Z
 
 ## Summary
 - Status: **ready**
@@ -13,7 +13,7 @@ Generated: 2026-07-06T23:30:47.031226Z
 - Live click endpoint dry run: **ready**
 - Album-page share tracking: **ready** (11 / 11)
 - Site-share endpoint dry run: **ready**
-- Homepage CTA tracking: **ready** (11 / 11)
+- Homepage CTA tracking: **ready** (25 / 25)
 - Homepage endpoint dry run: **ready**
 - Podcast CTA tracking: **ready** (10 / 10)
 - Podcast endpoint dry run: **ready**
@@ -76,21 +76,35 @@ Generated: 2026-07-06T23:30:47.031226Z
 
 ## Homepage CTA Tracking
 - Status: **ready**
-- CTA URLs ready: **11 / 11**
+- CTA URLs ready: **25 / 25**
 - Homepage endpoint dry run: **ready**
 - Homepage probe id: `site-home-hero-album`
 - Homepage issues: **none**
 - `site-home-hero-album` -> `album`: **ready**
 - `site-home-hero-echo` -> `echo`: **ready**
 - `site-home-hero-playlist` -> `playlist`: **ready**
+- `site-home-hero-youtube` -> `youtube`: **ready**
 - `site-home-starter-album` -> `album`: **ready**
 - `site-home-starter-playlist` -> `playlist`: **ready**
 - `site-home-starter-echo` -> `echo`: **ready**
+- `site-home-launch-cover-listen` -> `listen`: **ready**
 - `site-home-launch-album` -> `album`: **ready**
 - `site-home-launch-listen` -> `listen`: **ready**
+- `site-home-launch-apple` -> `apple`: **ready**
 - `site-home-launch-playlist` -> `playlist`: **ready**
 - `site-home-launch-echo` -> `echo`: **ready**
+- `site-home-video-playlist` -> `playlist`: **ready**
 - `site-home-podcast-echo` -> `echo`: **ready**
+- `site-home-podcast-episode` -> `episode`: **ready**
+- `site-home-podcast-download` -> `download`: **ready**
+- `site-home-follow-youtube` -> `youtube`: **ready**
+- `site-home-follow-instagram` -> `instagram`: **ready**
+- `site-home-follow-facebook` -> `facebook`: **ready**
+- `site-home-follow-tiktok` -> `tiktok`: **ready**
+- `site-home-follow-x` -> `x`: **ready**
+- `site-home-follow-spotify` -> `spotify-artist`: **ready**
+- `site-home-follow-apple` -> `apple-artist`: **ready**
+- `site-home-share-album` -> `album`: **ready**
 
 ## Podcast Page CTA Tracking
 - Status: **ready**

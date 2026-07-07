@@ -17,7 +17,7 @@ const EXECUTION_STATE_PREFIX = "post:";
 const CLICK_STATE_PREFIX = "click:";
 const BRAND_CLICK_POST_PATTERN = /^fp-brand-am(?:-w\d+)?-\d{2}-.+-(x|facebook)$/;
 const SITE_SHARE_CLICK_PATTERN = /^site-share-(album|echo|video|track-\d{2}-[a-z0-9-]+)$/;
-const SITE_HOME_CLICK_PATTERN = /^site-home-(hero|starter|launch|podcast)-(album|echo|listen|playlist|video)$/;
+const SITE_HOME_CLICK_PATTERN = /^site-home-(hero|starter|launch|video|podcast|share|follow)-([a-z0-9-]+)$/;
 const SITE_PODCAST_CLICK_PATTERN = /^site-podcast-(hero|player|share)-(album|echo|episode|listen|playlist|rss|download)$/;
 const SITE_MUSIC_CLICK_PATTERN = /^site-music-(album-page|listen-links|spotify|apple|playlist|podcast-episode)$/;
 const SITE_ALBUM_CLICK_PATTERN = /^site-album-(hero|title|podcast)-(listen|spotify|playlist|echo|apple|episode|rss)$/;
@@ -700,12 +700,12 @@ function campaignPostParts(postId) {
       platform: "site",
     };
   }
-  const siteHome = normalized.match(/^site-home-(hero|starter|launch|podcast)-(album|echo|listen|playlist|video)$/);
+  const siteHome = normalized.match(/^site-home-(hero|starter|launch|video|podcast|share|follow)-([a-z0-9-]+)$/);
   if (siteHome) {
     return {
       wave: "site-home",
       track: "",
-      trackSlug: siteHome[2],
+      trackSlug: `${siteHome[1]}-${siteHome[2]}`,
       platform: "site",
     };
   }
@@ -737,7 +737,7 @@ function isTrackableClickPostId(postId) {
 
 function normalizeClickDestination(value) {
   const clean = text(value).toLowerCase();
-  return ["album", "echo", "video", "listen", "spotify", "apple", "playlist", "episode", "rss", "download"].includes(clean) ? clean : "album";
+  return ["album", "echo", "video", "listen", "spotify", "apple", "playlist", "episode", "rss", "download", "youtube", "instagram", "facebook", "tiktok", "x", "spotify-artist", "apple-artist"].includes(clean) ? clean : "album";
 }
 
 function safeUrlText(value) {

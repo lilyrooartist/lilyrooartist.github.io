@@ -4383,7 +4383,9 @@ def validate_generated_outputs(failures):
         "SITE_SHARE_CLICK_PATTERN" in worker_text
         and "site-share-(album|echo|video|track-" in worker_text
         and "SITE_HOME_CLICK_PATTERN" in worker_text
-        and "site-home-(hero|starter|launch|podcast)" in worker_text
+        and "site-home-(hero|starter|launch|video|podcast|share|follow)" in worker_text
+        and "spotify-artist" in worker_text
+        and "apple-artist" in worker_text
         and "SITE_PODCAST_CLICK_PATTERN" in worker_text
         and "site-podcast-(hero|player|share)" in worker_text
         and "SITE_MUSIC_CLICK_PATTERN" in worker_text
@@ -5010,9 +5012,9 @@ def validate_simple_admin_dashboard(failures):
         "recent activity column": 'id="simple-recent-activity"' in text and "Recent Activity &amp; Results" in text,
         "upcoming activity column": 'id="simple-upcoming-activity"' in text and "Upcoming Activity" in text,
         "two-column layout": ".simple-columns{display:grid;grid-template-columns" in text,
-        "four status cards across top": ".simple-status-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))" in text,
-        "clear result wording": "A plain-English record of what posted, what was verified, and what is ready to measure." in text,
-        "upcoming wording is scheduled": "Automatic posts and follow-up checks already queued." in text,
+        "four status cards across top": ".simple-status-strip{display:grid;grid-template-columns:repeat(4,minmax(180px,1fr))" in text,
+        "clear result wording": "What went out, what proof exists, and what the early results say." in text,
+        "upcoming wording is scheduled": "Automatic posts and follow-up checks already on the calendar." in text,
         "manual posting appears only as cleanup": ("Remove manual-only posting from the active plan" in text or "Remove manual-only work from the active plan" in text) and "No manual posting in active campaign" not in text,
         "debug details hidden by default": "#panel-dashboard .diagnostic-details{display:none}" in text,
         "debug details opt-in": "show-debug-dashboard" in text and "debug')==='1'" in text,
@@ -5125,8 +5127,12 @@ def validate_analog_myth_launch_share(failures):
         'episode: "https://youtu.be/xX2-Xf161js"',
         'spotify: "https://open.spotify.com/album/6Ujyp8tXa5UxheJJC2B6kL"',
         'apple: "https://music.apple.com/us/album/analog-myth/6777905789"',
+        'youtube: "https://www.youtube.com/@lilyroo.artist"',
+        '"spotify-artist": "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a"',
+        '"apple-artist": "https://music.apple.com/us/artist/lily-roo/1896604299"',
         'rss: "/podcasts/feed.xml"',
         'download: "/assets/podcasts/analog-myth/analog-myth-the-clock-cannot-explain-this.m4a"',
+        "site-home-(hero|starter|launch|video|podcast|share|follow)",
         "site-album-(hero|title|podcast)",
         "function safeAnchor",
         "target.hash = anchor",
@@ -5148,6 +5154,7 @@ def validate_analog_myth_launch_share(failures):
         "site_music_endpoint_status",
         "site_album_endpoint_status",
         "site-home-hero-album",
+        "site-home-follow-youtube",
         "site-podcast-hero-album",
         "site-music-album-page",
         "site-album-hero-listen",
@@ -5159,11 +5166,25 @@ def validate_analog_myth_launch_share(failures):
         'href="/go/am.html?p=site-home-hero-album&amp;to=album"',
         'href="/go/am.html?p=site-home-hero-echo&amp;to=echo"',
         'href="/go/am.html?p=site-home-hero-playlist&amp;to=playlist"',
+        'href="/go/am.html?p=site-home-hero-youtube&amp;to=youtube"',
+        'data-share-url="https://www.lilyroo.com/go/am.html?p=site-home-share-album&amp;to=album"',
         'href="/go/am.html?p=site-home-starter-album&amp;to=album"',
         'href="/go/am.html?p=site-home-starter-playlist&amp;to=playlist"',
         'href="/go/am.html?p=site-home-starter-echo&amp;to=echo"',
+        'href="/go/am.html?p=site-home-launch-cover-listen&amp;to=listen"',
         'href="/go/am.html?p=site-home-launch-listen&amp;to=listen"',
+        'href="/go/am.html?p=site-home-launch-apple&amp;to=apple"',
+        'href="/go/am.html?p=site-home-video-playlist&amp;to=playlist"',
         'href="/go/am.html?p=site-home-podcast-echo&amp;to=echo"',
+        'href="/go/am.html?p=site-home-podcast-episode&amp;to=episode"',
+        'href="/go/am.html?p=site-home-podcast-download&amp;to=download"',
+        'href="/go/am.html?p=site-home-follow-youtube&amp;to=youtube"',
+        'href="/go/am.html?p=site-home-follow-instagram&amp;to=instagram"',
+        'href="/go/am.html?p=site-home-follow-facebook&amp;to=facebook"',
+        'href="/go/am.html?p=site-home-follow-tiktok&amp;to=tiktok"',
+        'href="/go/am.html?p=site-home-follow-x&amp;to=x"',
+        'href="/go/am.html?p=site-home-follow-spotify&amp;to=spotify-artist"',
+        'href="/go/am.html?p=site-home-follow-apple&amp;to=apple-artist"',
     ]
     required_podcast = [
         'href="/go/am.html?p=site-podcast-hero-album&amp;to=album"',

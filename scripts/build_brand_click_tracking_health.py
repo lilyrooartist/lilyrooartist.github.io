@@ -47,14 +47,28 @@ SITE_HOME_EXPECTED = {
     "site-home-hero-album": {"destination": "album"},
     "site-home-hero-echo": {"destination": "echo"},
     "site-home-hero-playlist": {"destination": "playlist"},
+    "site-home-hero-youtube": {"destination": "youtube"},
+    "site-home-share-album": {"destination": "album"},
     "site-home-starter-album": {"destination": "album"},
     "site-home-starter-playlist": {"destination": "playlist"},
     "site-home-starter-echo": {"destination": "echo"},
     "site-home-launch-album": {"destination": "album"},
+    "site-home-launch-cover-listen": {"destination": "listen"},
     "site-home-launch-listen": {"destination": "listen"},
+    "site-home-launch-apple": {"destination": "apple"},
     "site-home-launch-playlist": {"destination": "playlist"},
     "site-home-launch-echo": {"destination": "echo"},
+    "site-home-video-playlist": {"destination": "playlist"},
     "site-home-podcast-echo": {"destination": "echo"},
+    "site-home-podcast-episode": {"destination": "episode"},
+    "site-home-podcast-download": {"destination": "download"},
+    "site-home-follow-youtube": {"destination": "youtube"},
+    "site-home-follow-instagram": {"destination": "instagram"},
+    "site-home-follow-facebook": {"destination": "facebook"},
+    "site-home-follow-tiktok": {"destination": "tiktok"},
+    "site-home-follow-x": {"destination": "x"},
+    "site-home-follow-spotify": {"destination": "spotify-artist"},
+    "site-home-follow-apple": {"destination": "apple-artist"},
 }
 SITE_PODCAST_EXPECTED = {
     "site-podcast-hero-album": {"destination": "album"},
@@ -115,7 +129,7 @@ def rel(path: Path) -> str:
 
 def post_parts(post_id: str) -> dict:
     normalized = str(post_id or "").strip().lower()
-    site_home = re.match(r"^site-home-(hero|starter|launch|podcast)-(album|echo|listen|playlist|video)$", normalized)
+    site_home = re.match(r"^site-home-(hero|starter|launch|video|podcast|share|follow)-([a-z0-9-]+)$", normalized)
     if site_home:
         return {"post_id": normalized, "wave": "site-home", "track": "", "platform": "site"}
     site_podcast = re.match(r"^site-podcast-(hero|player|share)-(album|echo|episode|listen|playlist|rss|download)$", normalized)
@@ -171,11 +185,15 @@ def site_home_urls() -> list[str]:
     if not HOME_PAGE.exists():
         return []
     text = HOME_PAGE.read_text(encoding="utf-8")
-    urls = [
+    hrefs = [
         url.replace("&amp;", "&")
         for url in re.findall(r'href="(/go/am\.html\?[^"]+)"', text)
     ]
-    return [f"https://www.lilyroo.com{url}" for url in urls]
+    share_urls = [
+        url.replace("&amp;", "&")
+        for url in re.findall(r'data-share-url="(https://www\.lilyroo\.com/go/am\.html\?[^"]+)"', text)
+    ]
+    return [f"https://www.lilyroo.com{url}" for url in hrefs] + share_urls
 
 
 def site_podcast_urls() -> list[str]:

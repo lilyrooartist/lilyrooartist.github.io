@@ -140,6 +140,13 @@
       spotify: "https://open.spotify.com/album/6Ujyp8tXa5UxheJJC2B6kL",
       apple: "https://music.apple.com/us/album/analog-myth/6777905789",
       playlist: "https://www.youtube.com/playlist?list=PLit3sD3SUfXUJlhtullPqTPWQdTcS1fy0",
+      youtube: "https://www.youtube.com/@lilyroo.artist",
+      instagram: "https://www.instagram.com/lilyroo.artist/",
+      facebook: "https://www.facebook.com/903693509504290",
+      tiktok: "https://www.tiktok.com/@lilyroo930",
+      x: "https://twitter.com/lilyrooartist",
+      "spotify-artist": "https://open.spotify.com/artist/4yzWmf64UKLwbAVwnDi49a",
+      "apple-artist": "https://music.apple.com/us/artist/lily-roo/1896604299",
       rss: "/podcasts/feed.xml",
       download: "/assets/podcasts/analog-myth/analog-myth-the-clock-cannot-explain-this.m4a"
     };
@@ -151,6 +158,13 @@
       spotify: "Spotify",
       apple: "Apple Music",
       playlist: "the album playlist",
+      youtube: "the YouTube channel",
+      instagram: "Instagram",
+      facebook: "Facebook",
+      tiktok: "TikTok",
+      x: "X",
+      "spotify-artist": "the Spotify artist page",
+      "apple-artist": "the Apple Music artist page",
       rss: "the RSS feed",
       download: "the episode audio",
       video: "the track video"
@@ -174,7 +188,7 @@
       if (siteLyrics) {
         return { postId: normalized, wave: "site-lyrics", track: "", platform: "site" };
       }
-      const siteHome = normalized.match(/^site-home-(hero|starter|launch|podcast)-(album|echo|listen|playlist|video)$/);
+      const siteHome = normalized.match(/^site-home-(hero|starter|launch|video|podcast|share|follow)-([a-z0-9-]+)$/);
       if (siteHome) {
         return { postId: normalized, wave: "site-home", track: "", platform: "site" };
       }

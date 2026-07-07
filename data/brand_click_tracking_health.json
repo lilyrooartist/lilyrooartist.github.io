@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-06T23:30:47.031226Z",
+  "generated_at": "2026-07-06T23:39:33.216532Z",
   "safe_mode": true,
   "source": {
     "scheduled_posts": "data/scheduled_posts.csv",
@@ -59,8 +59,8 @@
     "expected_site_share_url_count": 11,
     "site_share_endpoint_status": "ready",
     "site_home_status": "ready",
-    "site_home_url_count": 11,
-    "expected_site_home_url_count": 11,
+    "site_home_url_count": 25,
+    "expected_site_home_url_count": 25,
     "site_home_endpoint_status": "ready",
     "site_podcast_status": "ready",
     "site_podcast_url_count": 10,
@@ -120,7 +120,7 @@
     "wave": "track-moments",
     "track": "04",
     "destination": "album",
-    "recorded_at": "2026-07-06T23:30:47.208Z"
+    "recorded_at": "2026-07-06T23:39:33.384Z"
   },
   "site_share": {
     "status": "ready",
@@ -143,7 +143,7 @@
       "wave": "site-share",
       "track": "",
       "destination": "album",
-      "recorded_at": "2026-07-06T23:30:47.308Z"
+      "recorded_at": "2026-07-06T23:39:33.487Z"
     },
     "rows": [
       {
@@ -238,9 +238,9 @@
   },
   "site_home": {
     "status": "ready",
-    "expected_url_count": 11,
-    "url_count": 11,
-    "ready_url_count": 11,
+    "expected_url_count": 25,
+    "url_count": 25,
+    "ready_url_count": 25,
     "missing_ids": [],
     "issue_counts": {},
     "click_endpoint": {
@@ -256,7 +256,7 @@
       "wave": "site-home",
       "track": "",
       "destination": "album",
-      "recorded_at": "2026-07-06T23:30:47.425Z"
+      "recorded_at": "2026-07-06T23:39:33.597Z"
     },
     "rows": [
       {
@@ -279,6 +279,14 @@
         "id": "site-home-hero-playlist",
         "url": "https://www.lilyroo.com/go/am.html?p=site-home-hero-playlist&to=playlist",
         "destination": "playlist",
+        "anchor": "",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-home-hero-youtube",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-home-hero-youtube&to=youtube",
+        "destination": "youtube",
         "anchor": "",
         "ok": true,
         "issues": []
@@ -308,6 +316,14 @@
         "issues": []
       },
       {
+        "id": "site-home-launch-cover-listen",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-home-launch-cover-listen&to=listen",
+        "destination": "listen",
+        "anchor": "",
+        "ok": true,
+        "issues": []
+      },
+      {
         "id": "site-home-launch-album",
         "url": "https://www.lilyroo.com/go/am.html?p=site-home-launch-album&to=album",
         "destination": "album",
@@ -319,6 +335,14 @@
         "id": "site-home-launch-listen",
         "url": "https://www.lilyroo.com/go/am.html?p=site-home-launch-listen&to=listen",
         "destination": "listen",
+        "anchor": "",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-home-launch-apple",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-home-launch-apple&to=apple",
+        "destination": "apple",
         "anchor": "",
         "ok": true,
         "issues": []
@@ -340,9 +364,97 @@
         "issues": []
       },
       {
+        "id": "site-home-video-playlist",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-home-video-playlist&to=playlist",
+        "destination": "playlist",
+        "anchor": "",
+        "ok": true,
+        "issues": []
+      },
+      {
         "id": "site-home-podcast-echo",
         "url": "https://www.lilyroo.com/go/am.html?p=site-home-podcast-echo&to=echo",
         "destination": "echo",
+        "anchor": "",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-home-podcast-episode",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-home-podcast-episode&to=episode",
+        "destination": "episode",
+        "anchor": "",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-home-podcast-download",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-home-podcast-download&to=download",
+        "destination": "download",
+        "anchor": "",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-home-follow-youtube",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-home-follow-youtube&to=youtube",
+        "destination": "youtube",
+        "anchor": "",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-home-follow-instagram",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-home-follow-instagram&to=instagram",
+        "destination": "instagram",
+        "anchor": "",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-home-follow-facebook",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-home-follow-facebook&to=facebook",
+        "destination": "facebook",
+        "anchor": "",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-home-follow-tiktok",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-home-follow-tiktok&to=tiktok",
+        "destination": "tiktok",
+        "anchor": "",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-home-follow-x",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-home-follow-x&to=x",
+        "destination": "x",
+        "anchor": "",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-home-follow-spotify",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-home-follow-spotify&to=spotify-artist",
+        "destination": "spotify-artist",
+        "anchor": "",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-home-follow-apple",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-home-follow-apple&to=apple-artist",
+        "destination": "apple-artist",
+        "anchor": "",
+        "ok": true,
+        "issues": []
+      },
+      {
+        "id": "site-home-share-album",
+        "url": "https://www.lilyroo.com/go/am.html?p=site-home-share-album&to=album",
+        "destination": "album",
         "anchor": "",
         "ok": true,
         "issues": []
@@ -369,7 +481,7 @@
       "wave": "site-podcast",
       "track": "",
       "destination": "album",
-      "recorded_at": "2026-07-06T23:30:47.532Z"
+      "recorded_at": "2026-07-06T23:39:33.687Z"
     },
     "rows": [
       {
@@ -474,7 +586,7 @@
       "wave": "site-music",
       "track": "",
       "destination": "album",
-      "recorded_at": "2026-07-06T23:30:47.624Z"
+      "recorded_at": "2026-07-06T23:39:33.816Z"
     },
     "rows": [
       {
@@ -547,7 +659,7 @@
       "wave": "site-album",
       "track": "",
       "destination": "listen",
-      "recorded_at": "2026-07-06T23:30:47.736Z"
+      "recorded_at": "2026-07-06T23:39:33.945Z"
     },
     "rows": [
       {
@@ -652,7 +764,7 @@
       "wave": "site-lyrics",
       "track": "",
       "destination": "album",
-      "recorded_at": "2026-07-06T23:30:47.852Z"
+      "recorded_at": "2026-07-06T23:39:34.062Z"
     },
     "rows": [
       {
