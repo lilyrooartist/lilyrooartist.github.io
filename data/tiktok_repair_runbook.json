@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-07T01:19:24.188348Z",
+  "generated_at": "2026-07-07T01:21:24.488757Z",
   "safe_mode": true,
   "status": "ready_for_backlog_clearance",
   "source": {
@@ -110,11 +110,11 @@
     "repair_row_count": 0,
     "repair_post_id": "",
     "blocked_apply_command": "",
-    "apply_command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
+    "apply_command": "",
     "public_posting_apply_command": "",
     "public_posting_deploy_command": "",
-    "backlog_preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-07T10:00:00-04:00' --spacing-hours 24",
-    "backlog_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-07T10:00:00-04:00' --spacing-hours 24 --apply --refresh-admin",
+    "backlog_preview_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-08T10:00:00+00:00' --spacing-hours 24",
+    "backlog_apply_command": "python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-08T10:00:00+00:00' --spacing-hours 24 --apply --refresh-admin",
     "backlog_normal_apply_gate": "clear"
   },
   "steps": [
@@ -189,7 +189,7 @@
       "status": "ready",
       "title": "Push direct-public worker secrets after review",
       "detail": "Run the apply command only after local refresh credentials exist and direct public-posting approval is explicit.",
-      "command": "python3 scripts/push_social_worker_secrets.py TIKTOK_CLIENT_KEY TIKTOK_CLIENT_SECRET TIKTOK_REFRESH_TOKEN && python3 scripts/refresh_promo_admin.py",
+      "command": "",
       "blocked_by": []
     },
     {
@@ -207,7 +207,7 @@
       "status": "ready",
       "title": "Clear TikTok backlog gate",
       "detail": "Once direct public worker readiness is clean, rerun the backlog reschedule preview and apply TikTok rows only if they can publish without manual finish.",
-      "command": "python3 scripts/build_backlog_reschedule_preview.py && python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-07T10:00:00-04:00' --spacing-hours 24",
+      "command": "python3 scripts/build_backlog_reschedule_preview.py && python3 scripts/reschedule_scheduled_posts.py --approved-backlog --exclude-manual-handoff --start-at '2026-07-08T10:00:00+00:00' --spacing-hours 24",
       "blocked_by": []
     }
   ],

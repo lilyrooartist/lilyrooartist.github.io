@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-07T01:19:25.071286Z",
+  "generated_at": "2026-07-07T01:21:25.318917Z",
   "safe_mode": true,
   "source": {
     "workflow": ".github/workflows/promo-admin-refresh.yml",
@@ -54,7 +54,7 @@
     "story_queued_future_count": 0,
     "platform_repair_blocked_count": 0,
     "blocker_input_status": "missing_local_input",
-    "blocker_input_missing_count": 3,
+    "blocker_input_missing_count": 5,
     "blocker_input_external_action_count": 1,
     "help_needed_count": 0,
     "next_action": "Automatic proof/export is scheduled at 2026-07-07T15:25:00Z; verify the active posts in Published_Log after that run."
@@ -78,8 +78,8 @@
     {
       "label": "Scheduled refresh workflow",
       "status": "ready",
-      "detail": "17 */6 * * *, 25 15 * * *, 05 16 * * *; latest run completed / success; proof refresh next fixed refresh 4 minute(s) after proof due",
-      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28834020775",
+      "detail": "17 */6 * * *, 25 15 * * *, 05 16 * * *; latest run in_progress / pending; proof refresh next fixed refresh 4 minute(s) after proof due",
+      "evidence": "https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28834738003",
       "next_action": ""
     },
     {
@@ -92,7 +92,7 @@
     {
       "label": "Safe admin refresh",
       "status": "ready",
-      "detail": "19 refresh commands captured at 2026-07-07T01:19:23.063226Z",
+      "detail": "19 refresh commands captured at 2026-07-07T01:21:23.237994Z",
       "evidence": "data/promo_admin_refresh_run.json",
       "next_action": ""
     },
@@ -127,7 +127,7 @@
     {
       "label": "Blocker input readiness",
       "status": "deferred",
-      "detail": "3 ready; 3 missing local input; 1 external action needed",
+      "detail": "1 ready; 5 missing local input; 1 external action needed",
       "evidence": "data/social_blocker_input_status.json",
       "next_action": "Optional expansion inputs can wait; the active brand campaign is already preflight-ready."
     },
