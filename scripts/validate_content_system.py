@@ -3079,6 +3079,19 @@ def validate_generated_outputs(failures):
                 ):
                     fail("promo engine published_log freshness source missing export/manual logging diagnostics", failures)
         kpi = status.get("kpi") or {}
+        active_campaign = kpi.get("active_brand_campaign") or {}
+        readout_for_campaign = json.loads(BRAND_GROWTH_READOUT.read_text(encoding="utf-8")) if BRAND_GROWTH_READOUT.exists() else {}
+        readout_campaign_summary = readout_for_campaign.get("summary") or {}
+        if active_campaign.get("ready"):
+            if (
+                active_campaign.get("next_scheduled_post_id")
+                and active_campaign.get("next_scheduled_at")
+                and active_campaign.get("next_scheduled_post_id") == readout_campaign_summary.get("next_scheduled_post_id")
+                and active_campaign.get("next_scheduled_at") == readout_campaign_summary.get("next_scheduled_at")
+            ):
+                ok("promo engine active campaign mirrors next scheduled post")
+            else:
+                fail("promo_engine_status.json active campaign does not mirror the next scheduled post", failures)
         pending_count = kpi.get("pending_manual_metric_fields", 0)
         pending_details = kpi.get("pending_manual_metric_details") or []
         pending_public_count = kpi.get("pending_public_profile_metric_fields", 0)

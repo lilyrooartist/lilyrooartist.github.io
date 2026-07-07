@@ -2619,6 +2619,8 @@ def active_brand_campaign_state(posting_status: dict, readout: dict, preflight: 
         "preflight_path": str(BRAND_GROWTH_PREFLIGHT.relative_to(ROOT)),
         "platforms": posting_summary.get("active_campaign_platforms") or sorted((readout_summary.get("platform_counts") or {}).keys()),
         "expected_post_ids": expected_ids,
+        "next_scheduled_post_id": readout_summary.get("next_scheduled_post_id") or (expected_ids[0] if expected_ids else ""),
+        "next_scheduled_at": readout_summary.get("next_scheduled_at") or "",
         "next_proof_due_at": next_proof,
         "next_measurement_due_at": (
             posting_summary.get("active_campaign_next_measurement_due_at")
@@ -2670,6 +2672,8 @@ def active_brand_campaign_operational_action(state: dict) -> dict:
         "kind": "brand_growth_proof",
         "context": {
             "expected_post_ids": state.get("expected_post_ids") or [],
+            "next_scheduled_post_id": state.get("next_scheduled_post_id") or "",
+            "next_scheduled_at": state.get("next_scheduled_at") or "",
             "next_proof_due_at": state.get("next_proof_due_at") or "",
             "proof_refresh_at": state.get("proof_refresh_at") or "",
             "proof_export_mode": state.get("proof_export_mode") or "",
