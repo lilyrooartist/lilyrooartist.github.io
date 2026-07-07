@@ -1,6 +1,6 @@
 # Posting Automation Status - Lily Roo
 
-Generated: 2026-07-07T01:22:03.633862Z
+Generated: 2026-07-07T01:29:19.714395Z
 
 ## Summary
 - Status: **ready_active_campaign**
@@ -21,13 +21,13 @@ Generated: 2026-07-07T01:22:03.633862Z
   - Evidence: data/brand_growth_preflight.json
   - Next: Automatic proof/export is scheduled at 2026-07-07T15:25:00Z; verify the active posts in Published_Log after that run.
 - **Scheduled refresh workflow** - `ready`
-  - Detail: 17 */6 * * *, 25 15 * * *, 05 16 * * *; latest run completed / success; proof refresh next fixed refresh 4 minute(s) after proof due
-  - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28834738003
+  - Detail: 17 */6 * * *, 25 15 * * *, 05 16 * * *; latest run in_progress / pending; proof refresh next fixed refresh 4 minute(s) after proof due
+  - Evidence: https://github.com/lilyrooartist/lilyrooartist.github.io/actions/runs/28835038210
 - **Published URL export** - `ready`
   - Detail: safe refresh runs python3 scripts/export_social_executions.py; latest export added=0 dry_run=False; next proof refresh=2026-07-07T15:25:00Z
   - Evidence: data/promo_admin_refresh_run.json
 - **Safe admin refresh** - `ready`
-  - Detail: 19 refresh commands captured at 2026-07-07T01:21:59.604658Z
+  - Detail: 19 refresh commands captured at 2026-07-07T01:29:17.779887Z
   - Evidence: data/promo_admin_refresh_run.json
 - **Scheduler dry-run authentication** - `ready`
   - Detail: HTTP 200 using bearer auth; due=0 would_post=0
