@@ -1941,15 +1941,27 @@ def validate_generated_outputs(failures):
         cta_audit = json.loads(SUBSCRIBER_CTA_AUDIT.read_text(encoding="utf-8"))
         summary = cta_audit.get("summary") or {}
         rows = cta_audit.get("rows") or []
+        active_future_rows = cta_audit.get("active_future_rows") or []
         if (
             cta_audit.get("safe_mode") is True
             and summary.get("draft_count") == len(rows)
             and "subscriber_swap_count" in summary
             and all("selected_strength" in row and "recommended_strength" in row and "needs_subscriber_cta_swap" in row for row in rows)
+            and summary.get("active_future_count") == len(active_future_rows)
+            and all("selected_strength" in row and "release_forward" in row and "auto_ready" in row and "issues" in row for row in active_future_rows)
         ):
-            ok(f"solicitation copy audit checks {len(rows)} draft CTA(s)")
+            ok(f"solicitation copy audit checks {len(rows)} draft CTA(s) and {len(active_future_rows)} active future post(s)")
         else:
             fail("subscriber_cta_audit.json missing safe CTA summary or row classifications", failures)
+        if (
+            summary.get("active_future_ready") is True
+            and int(summary.get("active_future_solicitation_count") or 0) == 0
+            and int(summary.get("active_future_non_auto_count") or 0) == 0
+            and int(summary.get("active_future_non_release_forward_count") or 0) == 0
+        ):
+            ok("solicitation copy audit proves active future queue is automatic, release-forward, and non-soliciting")
+        else:
+            fail("subscriber_cta_audit.json active future queue has solicitation, manual, or release-focus issues", failures)
     else:
         fail("subscriber_cta_audit.json missing; run scripts/build_subscriber_cta_audit.py", failures)
     if MANUAL_DISTRIBUTION_PACKET.exists():
@@ -4707,7 +4719,7 @@ def validate_generated_outputs(failures):
         fail("build_scheduled_approval_packet.py missing", failures)
     if SUBSCRIBER_CTA_AUDIT_SCRIPT.exists():
         cta_text = SUBSCRIBER_CTA_AUDIT_SCRIPT.read_text(encoding="utf-8")
-        if "subscriber_cta_audit.json" in cta_text and "subscriber-cta-audit.md" in cta_text and "needs_subscriber_cta_swap" in cta_text and "subprocess" not in cta_text:
+        if "subscriber_cta_audit.json" in cta_text and "subscriber-cta-audit.md" in cta_text and "needs_subscriber_cta_swap" in cta_text and "active_future_rows" in cta_text and "active_future_ready" in cta_text and "subprocess" not in cta_text:
             ok("solicitation copy audit builder is review-only")
         else:
             fail("build_subscriber_cta_audit.py missing CTA audit outputs or executes commands", failures)
