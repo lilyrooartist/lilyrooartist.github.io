@@ -579,10 +579,17 @@ def validate_generated_outputs(failures):
             and isinstance(lag, int)
             and 0 <= lag <= 15
             and summary.get("active_campaign_next_proof_refresh_at")
+            and summary.get("active_campaign_proof_export_status") == "ready"
+            and summary.get("active_campaign_proof_export_mode") == "scheduled_refresh"
+            and summary.get("active_campaign_proof_export_command") == "python3 scripts/refresh_promo_admin.py"
+            and "export_social_executions.py" in (summary.get("active_campaign_proof_export_step_command") or "")
+            and "--dry-run" not in (summary.get("active_campaign_proof_export_step_command") or "")
+            and summary.get("active_campaign_proof_export_dry_run_last_run") is False
+            and "Automatic proof/export is scheduled" in (summary.get("next_action") or "")
         ):
-            ok("posting automation status proves close post-slot proof refresh")
+            ok("posting automation status proves close post-slot proof refresh and automatic URL export")
         else:
-            fail("posting_automation_status.json does not prove a close post-slot proof refresh", failures)
+            fail("posting_automation_status.json does not prove a close post-slot proof refresh and automatic URL export", failures)
     else:
         fail("posting_automation_status.json missing; run scripts/build_posting_automation_status.py", failures)
     if INDEX.exists():
@@ -3589,6 +3596,22 @@ def validate_generated_outputs(failures):
             ok("promo engine status mirrors operational next action")
         else:
             fail("promo_engine_status.json missing top-priority operational next action", failures)
+        if operational_next.get("kind") == "brand_growth_proof":
+            context = operational_next.get("context") or {}
+            if (
+                operational_next.get("label") == "Verify automatic Analog Myth proof export"
+                and operational_next.get("command") == "python3 scripts/refresh_promo_admin.py"
+                and context.get("proof_export_mode") == "scheduled_refresh"
+                and "export_social_executions.py" in (context.get("proof_export_step_command") or "")
+                and "--dry-run" not in (context.get("proof_export_step_command") or "")
+                and context.get("proof_export_dry_run_last_run") is False
+                and next_actions
+                and "Verify automatic Analog Myth proof export" in next_actions[0]
+                and "--dry-run" not in next_actions[0]
+            ):
+                ok("promo engine top action uses scheduled automatic proof export")
+            else:
+                fail("promo_engine_status.json top brand-growth action does not use scheduled automatic proof export", failures)
         if automation.get("workflow_status_available") and automation.get("workflow_status_ok") is False:
             repair_action = next((action for action in next_actions if action.startswith("Repair promo admin refresh workflow:")), "")
             if repair_action and automation.get("workflow_status_action_needed", "") in repair_action:

@@ -131,6 +131,17 @@ def step_map(refresh: dict) -> dict:
     return steps
 
 
+def step_stdout_json(step: dict) -> dict:
+    raw = str(step.get("stdout_tail") or "").strip()
+    if not raw:
+        return {}
+    try:
+        parsed = json.loads(raw)
+    except json.JSONDecodeError:
+        return {}
+    return parsed if isinstance(parsed, dict) else {}
+
+
 def lane_status(label: str, status: str, detail: str, evidence: str = "", next_action: str = "") -> dict:
     return {
         "label": label,
@@ -210,6 +221,24 @@ def build_packet() -> dict:
     proof_refresh = proof_refresh_alignment(workflow["crons"], campaign.get("next_proof_due_at") or "")
     active_campaign_ready = campaign["status"] == "ready"
     proof_refresh_ready = (not active_campaign_ready) or proof_refresh.get("status") == "ready"
+    export_step = refresh_steps.get("export_social_executions") or {}
+    export_payload = step_stdout_json(export_step)
+    export_step_command = str(export_step.get("command") or "")
+    proof_export_ready = bool(
+        active_campaign_ready
+        and proof_refresh_ready
+        and export_step.get("ok") is True
+        and "export_social_executions.py" in export_step_command
+        and "--dry-run" not in export_step_command
+        and export_payload.get("dry_run") is False
+        and export_payload.get("ok") is True
+    )
+    proof_export_next_action = (
+        f"Automatic proof/export is scheduled at {proof_refresh.get('next_refresh_at')}; "
+        f"verify {', '.join(campaign.get('expected_post_ids') or []) or 'the active posts'} in Published_Log after that run."
+        if proof_export_ready
+        else campaign["next_action"]
+    )
     active_platforms = {str(platform).strip().lower() for platform in campaign.get("platforms") or []}
     blocked_platforms = [str(platform) for platform in readiness_summary.get("blocked_platforms") or []]
     blocked_platforms_in_active_campaign = [
@@ -226,7 +255,7 @@ def build_packet() -> dict:
             "ready" if active_campaign_ready else "needs_attention",
             campaign["detail"],
             "data/brand_growth_preflight.json",
-            campaign["next_action"],
+            proof_export_next_action,
         ),
         lane_status(
             "Scheduled refresh workflow",
@@ -238,6 +267,13 @@ def build_packet() -> dict:
                 if workflow_ready and workflow_ok and proof_refresh_ready
                 else "Add or repair a fixed daily refresh cron within 15 minutes after the active campaign proof window."
             ),
+        ),
+        lane_status(
+            "Published URL export",
+            "ready" if proof_export_ready else "needs_attention",
+            f"safe refresh runs {export_step_command or 'missing export step'}; latest export added={export_payload.get('added', 'unknown')} dry_run={export_payload.get('dry_run', 'unknown')}; next proof refresh={proof_refresh.get('next_refresh_at') or 'n/a'}",
+            "data/promo_admin_refresh_run.json",
+            "" if proof_export_ready else "Ensure refresh_promo_admin.py runs export_social_executions.py without --dry-run during the scheduled proof refresh.",
         ),
         lane_status(
             "Safe admin refresh",
@@ -330,7 +366,7 @@ def build_packet() -> dict:
     ]
     next_action = ""
     if active_campaign_ready:
-        next_action = campaign["next_action"]
+        next_action = proof_export_next_action
     elif blocked:
         next_action = blocked[0]["next_action"] or blocked[0]["detail"]
     elif attention:
@@ -355,6 +391,12 @@ def build_packet() -> dict:
         "active_campaign_next_proof_refresh_at": proof_refresh.get("next_refresh_at"),
         "active_campaign_proof_refresh_lag_minutes": proof_refresh.get("lag_minutes"),
         "active_campaign_proof_refresh_cron": proof_refresh.get("cron"),
+        "active_campaign_proof_export_status": "ready" if proof_export_ready else "needs_attention",
+        "active_campaign_proof_export_mode": "scheduled_refresh",
+        "active_campaign_proof_export_command": "python3 scripts/refresh_promo_admin.py",
+        "active_campaign_proof_export_step_command": export_step_command,
+        "active_campaign_proof_export_added_last_run": export_payload.get("added"),
+        "active_campaign_proof_export_dry_run_last_run": export_payload.get("dry_run"),
         "scheduler_http_status": scheduler.get("http_status"),
         "scheduler_auth_method": scheduler.get("auth_method"),
         "scheduler_refresh_step_ok": bool(capture_step.get("ok")),
@@ -412,6 +454,7 @@ def build_markdown(packet: dict) -> str:
         f"- Story posts tracked: **{summary['story_post_count']}**",
         f"- Help-needed items: **{summary['help_needed_count']}**",
         f"- Proof refresh: **{summary.get('active_campaign_proof_refresh_status') or 'unknown'}** at `{summary.get('active_campaign_next_proof_refresh_at') or 'n/a'}` ({summary.get('active_campaign_proof_refresh_lag_minutes')} min)",
+        f"- Proof export: **{summary.get('active_campaign_proof_export_status') or 'unknown'}** via `{summary.get('active_campaign_proof_export_step_command') or 'n/a'}`",
         f"- Next action: {summary['next_action']}",
         "",
         "## Automation Lanes",

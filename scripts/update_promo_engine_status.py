@@ -2631,6 +2631,13 @@ def active_brand_campaign_state(posting_status: dict, readout: dict, preflight: 
         "scheduler_blocked_count": preflight_summary.get("scheduler_blocked_count"),
         "proof_preview_command": readout_summary.get("proof_preview_command") or "",
         "proof_apply_command": readout_summary.get("proof_apply_command") or "",
+        "proof_refresh_at": posting_summary.get("active_campaign_next_proof_refresh_at") or "",
+        "proof_export_status": posting_summary.get("active_campaign_proof_export_status") or "",
+        "proof_export_mode": posting_summary.get("active_campaign_proof_export_mode") or "",
+        "proof_export_command": posting_summary.get("active_campaign_proof_export_command") or "",
+        "proof_export_step_command": posting_summary.get("active_campaign_proof_export_step_command") or "",
+        "proof_export_added_last_run": posting_summary.get("active_campaign_proof_export_added_last_run"),
+        "proof_export_dry_run_last_run": posting_summary.get("active_campaign_proof_export_dry_run_last_run"),
         "next_action": next_action,
     }
 
@@ -2638,6 +2645,12 @@ def active_brand_campaign_state(posting_status: dict, readout: dict, preflight: 
 def active_brand_campaign_next_action(state: dict) -> str:
     if not state.get("available") or not state.get("ready"):
         return ""
+    if state.get("proof_export_status") == "ready" and state.get("proof_refresh_at"):
+        posts = ", ".join(state.get("expected_post_ids") or []) or "the active posts"
+        return (
+            f"Active Analog Myth campaign proof: automatic proof/export is scheduled at {state.get('proof_refresh_at')}; "
+            f"verify {posts} in Published_Log after that run."
+        )
     command = state.get("proof_preview_command") or "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run"
     return f"Active Analog Myth campaign proof: {state.get('next_action') or 'capture the next proof window'} Preview with {command}."
 
@@ -2645,14 +2658,24 @@ def active_brand_campaign_next_action(state: dict) -> str:
 def active_brand_campaign_operational_action(state: dict) -> dict:
     if not state.get("available") or not state.get("ready"):
         return {}
-    command = state.get("proof_preview_command") or "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run"
+    automatic_export_ready = state.get("proof_export_status") == "ready" and state.get("proof_refresh_at")
+    command = (
+        state.get("proof_export_command")
+        if automatic_export_ready
+        else state.get("proof_preview_command") or "python3 scripts/capture_social_executions.py && python3 scripts/export_social_executions.py --dry-run"
+    )
     return {
-        "label": "Watch active Analog Myth proof window",
+        "label": "Verify automatic Analog Myth proof export" if automatic_export_ready else "Watch active Analog Myth proof window",
         "command": command,
         "kind": "brand_growth_proof",
         "context": {
             "expected_post_ids": state.get("expected_post_ids") or [],
             "next_proof_due_at": state.get("next_proof_due_at") or "",
+            "proof_refresh_at": state.get("proof_refresh_at") or "",
+            "proof_export_mode": state.get("proof_export_mode") or "",
+            "proof_export_step_command": state.get("proof_export_step_command") or "",
+            "proof_export_added_last_run": state.get("proof_export_added_last_run"),
+            "proof_export_dry_run_last_run": state.get("proof_export_dry_run_last_run"),
             "proof_apply_command": state.get("proof_apply_command") or "",
             "next_action": state.get("next_action") or "",
         },
