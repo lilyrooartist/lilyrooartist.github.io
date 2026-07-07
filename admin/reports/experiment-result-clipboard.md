@@ -1,6 +1,6 @@
 # Experiment Result Clipboard - Lily Roo
 
-Generated: 2026-07-07T01:03:14.454496Z
+Generated: 2026-07-07T01:19:24.967600Z
 
 ## Summary
 - Status: **needs_values**
@@ -70,29 +70,6 @@ Generated: 2026-07-07T01:03:14.454496Z
   - `shares`: Open X analytics for https://x.com/i/web/status/2069786481556635841 and record shares.
   - `saves`: Open X analytics for https://x.com/i/web/status/2069786481556635841 and record saves.
   - `subs_delta`: Open X analytics for https://x.com/i/web/status/2069786481556635841 and record subs_delta.
-### X - The Other One's Charging (`FP-AUTO-276`)
-- Format: Release-art image + story hook
-- URL: https://x.com/i/web/status/2071764617978950017
-- Published: 2026-06-30; Published_Log row: `38`
-- Pending fields: `views, likes, comments, shares, saves, subs_delta`
-- Wide-ready fields: `none`
-- Wide entry instruction: Fill one wide entry CSV row in data/experiment_result_entry_wide_template.csv for this post; keep unknown metrics blank and include one evidence_note.
-- Wide CSV target: post_id `FP-AUTO-276`, source_row `38`, fill `views, likes, comments, shares, saves, subs_delta`.
-- Evidence sources:
-  - Logged public post: https://x.com/i/web/status/2071764617978950017 - Open the public post to confirm the URL and visible engagement before entering metrics.
-  - X Analytics: https://analytics.x.com/ - Use the logged post URL or post ID to find the post and copy visible analytics values.
-- Collection checklist:
-  - Open the logged public post and confirm it matches this post_id.
-  - Open the platform analytics or insights source listed for this card.
-  - Copy only numeric values that are visible in the source.
-  - Enter values in the wide entry CSV row for this post_id and source_row.
-  - Add an evidence_note with source and collection date before import preview.
-  - `views`: Open X analytics for https://x.com/i/web/status/2071764617978950017 and record views.
-  - `likes`: Open X analytics for https://x.com/i/web/status/2071764617978950017 and record likes.
-  - `comments`: Open X analytics for https://x.com/i/web/status/2071764617978950017 and record comments.
-  - `shares`: Open X analytics for https://x.com/i/web/status/2071764617978950017 and record shares.
-  - `saves`: Open X analytics for https://x.com/i/web/status/2071764617978950017 and record saves.
-  - `subs_delta`: Open X analytics for https://x.com/i/web/status/2071764617978950017 and record subs_delta.
 ### Facebook - The Other One's Charging (`FP-AUTO-278`)
 - Format: Release-art image + story hook
 - URL: https://www.facebook.com/903693509504290_122120594715249470
@@ -369,6 +346,29 @@ Generated: 2026-07-07T01:03:14.454496Z
   - `shares`: Open X analytics for https://x.com/i/web/status/2073410401006751908 and record shares.
   - `saves`: Open X analytics for https://x.com/i/web/status/2073410401006751908 and record saves.
   - `subs_delta`: Open X analytics for https://x.com/i/web/status/2073410401006751908 and record subs_delta.
+### X - Analog Myth (`FP-BRAND-AM-02-GIRLS-CAMP-X`)
+- Format: Release-art image + story hook
+- URL: https://x.com/i/web/status/2073772787177861205
+- Published: 2026-07-05; Published_Log row: `53`
+- Pending fields: `views, likes, comments, shares, saves, subs_delta`
+- Wide-ready fields: `none`
+- Wide entry instruction: Fill one wide entry CSV row in data/experiment_result_entry_wide_template.csv for this post; keep unknown metrics blank and include one evidence_note.
+- Wide CSV target: post_id `FP-BRAND-AM-02-GIRLS-CAMP-X`, source_row `53`, fill `views, likes, comments, shares, saves, subs_delta`.
+- Evidence sources:
+  - Logged public post: https://x.com/i/web/status/2073772787177861205 - Open the public post to confirm the URL and visible engagement before entering metrics.
+  - X Analytics: https://analytics.x.com/ - Use the logged post URL or post ID to find the post and copy visible analytics values.
+- Collection checklist:
+  - Open the logged public post and confirm it matches this post_id.
+  - Open the platform analytics or insights source listed for this card.
+  - Copy only numeric values that are visible in the source.
+  - Enter values in the wide entry CSV row for this post_id and source_row.
+  - Add an evidence_note with source and collection date before import preview.
+  - `views`: Open X analytics for https://x.com/i/web/status/2073772787177861205 and record views.
+  - `likes`: Open X analytics for https://x.com/i/web/status/2073772787177861205 and record likes.
+  - `comments`: Open X analytics for https://x.com/i/web/status/2073772787177861205 and record comments.
+  - `shares`: Open X analytics for https://x.com/i/web/status/2073772787177861205 and record shares.
+  - `saves`: Open X analytics for https://x.com/i/web/status/2073772787177861205 and record saves.
+  - `subs_delta`: Open X analytics for https://x.com/i/web/status/2073772787177861205 and record subs_delta.
 
 ## Measurement Priorities
 - **Collect metrics** `FP-AUTO-278` Facebook / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 14 logged post(s), 2 missing URL(s) in this format.
@@ -392,15 +392,15 @@ Generated: 2026-07-07T01:03:14.454496Z
 - **Collect metrics** `FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK` Facebook / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 14 logged post(s), 2 missing URL(s) in this format.
   - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK --source-row 36 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
   - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-WIN-ANALOG-MYTH-FACEBOOK-RELEASE-ART-IMAGE-STORY-HOOK --source-row 36 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
-- **Collect metrics** `FP-AUTO-276` X / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 14 logged post(s), 2 missing URL(s) in this format.
-  - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-276 --source-row 38 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
-  - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-276 --source-row 38 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
 - **Collect metrics** `FP-AUTO-281` X / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 14 logged post(s), 2 missing URL(s) in this format.
   - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-281 --source-row 42 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
   - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-AUTO-281 --source-row 42 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
 - **Collect metrics** `FP-BRAND-AM-01-13-X` X / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 14 logged post(s), 2 missing URL(s) in this format.
   - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-BRAND-AM-01-13-X --source-row 51 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
   - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-BRAND-AM-01-13-X --source-row 51 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
+- **Collect metrics** `FP-BRAND-AM-02-GIRLS-CAMP-X` X / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 14 logged post(s), 2 missing URL(s) in this format.
+  - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-BRAND-AM-02-GIRLS-CAMP-X --source-row 53 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
+  - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-BRAND-AM-02-GIRLS-CAMP-X --source-row 53 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
 - **Collect metrics** `FP-LAUNCH-ANALOG-MYTH-X` X / Release-art image + story hook: Already published and logged; measuring it reduces the Release-art image + story hook evidence gap. 14 logged post(s), 2 missing URL(s) in this format.
   - Direct preview template: `python3 scripts/update_experiment_results.py --post-id FP-LAUNCH-ANALOG-MYTH-X --source-row 40 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --dry-run`
   - Direct apply template: `python3 scripts/update_experiment_results.py --post-id FP-LAUNCH-ANALOG-MYTH-X --source-row 40 --views VALUE --evidence-note 'SOURCE analytics YYYY-MM-DD' --apply --refresh-admin`
